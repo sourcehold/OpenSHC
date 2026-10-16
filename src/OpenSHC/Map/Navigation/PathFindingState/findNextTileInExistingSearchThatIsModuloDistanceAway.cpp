@@ -26,17 +26,17 @@ namespace Map {
             _pLastTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
             while (true) {
                 int iVar1 = *_pLastTile;
-                if (0 < DAT_TileMapState::instance.CertainPathLayer[iVar1]
+                int _dist = DAT_TileMapState::instance.CertainPathLayer[iVar1];
+                if (0 < _dist
                     && (_dx = (iVar1
                                   - DAT_ViewportRenderState::instance
-                                        .translationMatrix[DAT_ViewportRenderState::instance
-                                                .tileTranslationMatrix_YComponent[iVar1]]
-                                        .addXgetTile)
+                                      .translationMatrix[DAT_ViewportRenderState::instance
+                                              .tileTranslationMatrix_YComponent[iVar1]]
+                                      .addXgetTile)
                             - x,
                         _dy = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
                         (abs(_dy) + abs(_dx)) % modulo == 0)
-                    && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex,
-                        DAT_TileMapState::instance.CertainPathLayer[iVar1] < 4000))
+                    && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex, _dist < 4000))
                     break;
                 DAT_TribesState::instance.ALG_ResultTileIndex = DAT_TribesState::instance.ALG_ResultTileIndex + 1;
                 _pLastTile = _pLastTile + 1;
