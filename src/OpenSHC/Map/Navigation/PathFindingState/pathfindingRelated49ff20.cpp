@@ -75,9 +75,9 @@ namespace Map {
                         if (param_5 == 0) {
                             uVar6 = 0;
                         }
-                        if (((DAT_TileMapState::instance.EntityLayer[dVar4] == 0)
-                                || (DAT_EntityState::instance.entityArray[DAT_TileMapState::instance.EntityLayer[dVar4]]
-                                        .entityType
+                        int _entity = DAT_TileMapState::instance.EntityLayer[dVar4];
+                        if (((_entity == 0)
+                                || (DAT_EntityState::instance.entityArray[_entity].entityType
                                     != OpenSHC::Map::Entities::ET_FIRE))
                             && DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
                                    int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
