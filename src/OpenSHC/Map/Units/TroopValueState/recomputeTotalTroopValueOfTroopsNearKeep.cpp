@@ -36,8 +36,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[6] = 0;
             DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[7] = 0;
             DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[8] = 0;
-            DAT_TroopValueState::instance.attackInfo
-                .padding_0x25b50[0] /* 0x25B50: start of padding_0x25b50 in the header */ = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[9] = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 ptrUnit = &DAT_UnitsState::instance.units[1];
                 do {
