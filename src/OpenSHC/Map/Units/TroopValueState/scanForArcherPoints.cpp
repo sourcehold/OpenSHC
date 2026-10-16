@@ -18,7 +18,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F340
         void TroopValueState::scanForArcherPoints()
         {
-            int iVar1;
             BOOLEnum BVar2;
             int iVar3;
             int (*paiVar4)[8];
@@ -46,19 +45,17 @@ namespace Map {
                     local_8 = 0;
                     paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + y;
                     do {
-                        if (((*(byte*)((*paiVar4)[0] + 0x1ea7b68 + iVar5) & 0xf) == 4)
-                            && (!(DAT_TileMapState::instance.RandomLayer[(*paiVar4)[0] + iVar5] & 3))) {
+                        if ((*(byte*)((*paiVar4)[0] + 0x1ea7b68 + iVar5) & 0xf) == 4
+                            && !(DAT_TileMapState::instance.RandomLayer[(*paiVar4)[0] + iVar5] & 3)) {
                             x = iVar5 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                            BVar2 = MACRO_CALL_MEMBER(
-                                Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
+                            BVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                                 DAT_PathFindingState::ptr)(local_c, x, y, 0x10);
                             if (!BVar2) {
                                 DAT_TileMapState::instance.AIInfoLayer[iVar5]
                                     = DAT_TileMapState::instance.AIInfoLayer[iVar5] | 0x10;
                                 iVar3 = MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot, this)(
-                                    iVar5);
-                                iVar1 = DAT_TroopValueState::instance.attackInfo.archerPointsNext;
+                                    Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot, this)(iVar5);
+                                int iVar1 = DAT_TroopValueState::instance.attackInfo.archerPointsNext;
                                 if (!iVar3) {
                                     DAT_TroopValueState::instance.attackInfo
                                         .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo.archerPointsNext * 2
