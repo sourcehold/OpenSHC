@@ -14,16 +14,12 @@ namespace Map {
         BOOLEnum TroopValueState::isLessThanPercentageOfTribesInAttackDying(int attackID, int leDyingPerc)
         {
             int _status;
-            Tribe* _pTribe;
-            int _tribeID;
             int _dying = 0;
             int _living = 0;
-            _tribeID = 1;
-            _pTribe = &DAT_TribesState::instance.tribes[1];
-            do {
-                if (_pTribe->tribeState && _pTribe->tribeState != 3
-                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_pTribe->owner] == -1
-                    && _pTribe->attackWave == attackID) {
+            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
+                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner] == -1
+                    && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackID) {
                     _status = MACRO_CALL_MEMBER(
                         Map::Units::TribesState_Func::getTribeAliveStatus, DAT_TribesState::ptr)(_tribeID);
                     if (_status < 50) {
@@ -32,13 +28,12 @@ namespace Map {
                         _dying = _dying + 1;
                     }
                 }
-                _pTribe = _pTribe + 1;
-                _tribeID = _tribeID + 1;
-            } while ((int)_pTribe < 0x17623a0);
-            if (_dying + _living == 0) {
-                return (uint)(leDyingPerc < 100);
             }
-            return (uint)(leDyingPerc <= (_dying * 100) / (_dying + _living));
+            if (_dying + _living == 0) {
+                int _dyingPercentage = 100;
+                return (uint)(_dyingPercentage >= leDyingPerc);
+            }
+            return (uint)((_dying * 100) / (_dying + _living) >= leDyingPerc);
         }
 
     }
