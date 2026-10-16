@@ -143,8 +143,7 @@ namespace Map {
                                     /*
                                       test if height difference is within margin
                                      */
-                                    if ((int)_tHeight <= (int)(_cHeight + 16)
-                                        && (int)(_cHeight - 4294967280) <= (int)_tHeight)
+                                    if ((int)_tHeight <= (int)(_cHeight + 16) && (int)_tHeight >= (int)(_cHeight - 16))
                                         goto LAB_00498308;
                                     _cType = DAT_BuildingsState::instance
                                                  .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate]]

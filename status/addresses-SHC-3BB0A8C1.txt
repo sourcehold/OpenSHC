@@ -24369,7 +24369,7 @@ SHC_3BB0A8C1_0x00497740 | 50.5% | statement order
 
 SHC_3BB0A8C1_0x00497B80 | 52.6% | statement order
 
-SHC_3BB0A8C1_0x00498020 | 60.1% | statement order
+SHC_3BB0A8C1_0x00498020 | 61.3% | fix height window bug
 
 SHC_3BB0A8C1_0x00498170 | 0.0% | Pending
 
