@@ -10,23 +10,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B240
         int TroopValueState::getSiegeIndexForTile(int tile)
         {
-            AttackInfoSubArrayElement3* piVar1;
-            int _index2;
-            _index2 = 0;
+            int _firstFree = 0;
             DAT_TroopValueState::instance.attackInfo.tentPointsNext = 0;
-            int _index = 1;
-            piVar1 = &DAT_TroopValueState::instance.attackInfo.tentPointsValues[1];
-            do {
-                if (piVar1->tile == tile) {
-                    return _index;
+            for (int i = 1; i < 2001; i = i + 1) {
+                if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[i].tile == tile) {
+                    return i;
                 }
-                if ((!piVar1->tile) && (!_index2)) {
-                    _index2 = _index;
-                    DAT_TroopValueState::instance.attackInfo.tentPointsNext = _index;
+                if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[i].tile == 0 && !_firstFree) {
+                    _firstFree = i;
+                    DAT_TroopValueState::instance.attackInfo.tentPointsNext = _firstFree;
                 }
-                piVar1 = piVar1 + 1;
-                _index = _index + 1;
-            } while ((int)piVar1 < 0x17a52ac);
+            }
             return 0;
         }
 
