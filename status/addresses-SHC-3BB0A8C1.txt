@@ -24391,7 +24391,7 @@ SHC_3BB0A8C1_0x00499970 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004999C0 | 51.0% | counted for loop
 
-SHC_3BB0A8C1_0x00499DC0 | 46.1% | statement order
+SHC_3BB0A8C1_0x00499DC0 | 67.1% | signed modulo and signed byte
 
 SHC_3BB0A8C1_0x00499FA0 | 35.3% | orig branch order + stmt order
 
