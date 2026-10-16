@@ -9,6 +9,7 @@
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
@@ -24,12 +25,15 @@ namespace Map {
         void TroopValueState::trySendMacemenTribeToAttack()
         {
             int _unitID;
-            int _playerID = this->attackInfo.playerID_0x2c850;
-            if (0 < this->attackInfo.macemenTribeCount && 3 < (int)this->attackInfo.attackInfoTickWrapCount
+            int _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
+            if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
+                && 3 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                int _macemen = this->attackInfo.macemenTribeArray[this->attackInfo.macemenTribeCount + -1];
+                int _macemen = DAT_TroopValueState::instance.attackInfo
+                                   .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1];
                 bool bVar1 = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
-                this->attackInfo.macemenTribeCount = this->attackInfo.macemenTribeCount + -1;
+                DAT_TroopValueState::instance.attackInfo.macemenTribeCount
+                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 if ((bVar1) || (0xe < DAT_GameCore::instance.missionNumber1to20)) {
                     _unitID = MACRO_CALL_MEMBER(
