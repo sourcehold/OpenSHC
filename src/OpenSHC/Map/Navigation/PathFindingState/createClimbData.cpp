@@ -47,19 +47,13 @@ namespace Map {
                     = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
                 this->climbData[_climbID].bottomTilePosition
                     = DAT_BuildingsState::instance.buildings[buildingID].currentTilePositionAdjusted;
-                if (size != 6) {
-                    if (size != 5) {
-                        if (size == 4)
-                            goto LAB_004a95d6;
-                        if (size != 3) {
-                            return _climbID;
-                        }
-                    }
+                if (size == 6 || size == 4) {
                     this->climbData[_climbID].ladderDirection = direction;
                     return _climbID;
                 }
-            LAB_004a95d6:
-                this->climbData[_climbID].ladderDirection = direction;
+                if (size == 5 || size == 3) {
+                    this->climbData[_climbID].ladderDirection = direction;
+                }
                 return _climbID;
             }
             if (unitID == 0) {
