@@ -99,10 +99,9 @@ namespace Map {
         int zoneSize; // 0x00025AF8 length: 4
         int someDistanceLimit; // 0x00025AFC length: 4
         int pendingAttackWaveCount; // 0x00025B00 length: 4
-        int playerTotalTroopValueArray[9]; // 0x00025B04 length: 36
-        int field98978_0x25b28; // 0x00025B28 length: 4
-        int playerTotalTroopValueOfTroopsNearKeep[9]; // 0x00025B2C length: 36
-        undefined1 padding_0x25b50[20480]; // 0x00025B50 length: 20480
+        int playerTotalTroopValueArray[10]; // 0x00025B04 length: 40
+        int playerTotalTroopValueOfTroopsNearKeep[10]; // 0x00025B2C length: 40
+        undefined1 padding_0x25b54[20476]; // 0x00025B54 length: 20476
         int someIntArray2[50]; // 0x0002AB50 length: 200
         undefined1 padding_0x2ac18[1596]; // 0x0002AC18 length: 1596
         AttackInfoPitchRelated spottedEnemyTiles[100]; // 0x0002B254 length: 800
