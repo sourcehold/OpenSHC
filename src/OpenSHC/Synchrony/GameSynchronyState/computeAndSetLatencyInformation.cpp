@@ -14,53 +14,52 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004882A0
     void GameSynchronyState::computeAndSetLatencyInformation()
     {
-        uint uVar1;
-        int* piVar3;
-        int _counter;
-        int _sum_2;
-        int _countdown;
-        uint _offset;
         if (this->DPLAY_ReceiveData.packet.commandProtocol == 0x7e) {
             this->syncPacketType = 0x7f;
             this->syncRelatedCounter = this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol;
             this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle,
                 this->DPLAYX_ReceivedPlayerID, DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC | DPSEND_GUARANTEED,
                 &this->syncPacketType, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
-            if (!this->DPLAYX_SendAndReceiveREsult) {}
-            if (this->DPLAYX_SendAndReceiveREsult == -0x7ffffff6) {}
+            if (!this->DPLAYX_SendAndReceiveREsult) {
+                return;
+            }
+            if (this->DPLAYX_SendAndReceiveREsult == -0x7ffffff6) {
+                return;
+            }
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
+            return;
         }
-        uVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
-            this->DPLAYX_ReceivedPlayerID);
+        uint uVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
+            this)(this->DPLAYX_ReceivedPlayerID);
         /*
           playerID is never 0 in this logic, but it could be 0 with a mod
          */
-        DWORD _now_1 = timeGetTime();
-        this->connectionLagInfoArray[uVar1].time = _now_1;
+        this->connectionLagInfoArray[uVar1].time = timeGetTime();
         if (this->connectionLagInfoArray[uVar1].counter
-            != (int)(char)this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol) {}
+            != (int)(char)this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol) {
+            return;
+        }
         this->connectionLagInfoArray[uVar1].subtractedMapTicks
             = (int)(DAT_GameCore::instance.mapTimeInTicks - this->connectionLagInfoArray[uVar1].mapTimeInTicks) / 2;
-        DWORD _now_2 = timeGetTime();
-        this->connectionLagInfoArray[uVar1].subtractedTime = _now_2 - this->connectionLagInfoArray[uVar1].now >> 1;
+        this->connectionLagInfoArray[uVar1].subtractedTime
+            = timeGetTime() - this->connectionLagInfoArray[uVar1].now >> 1;
         BOOLEnum BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-        if (!BVar2) {}
+        if (!BVar2) {
+            return;
+        }
         this->connectionLagInfoArray[uVar1].checkFor0 = 1;
-        _sum_2 = 0;
+        int _sum_2 = 0;
+        int _sum = 0;
         /*
           stupid way of writing that if counter == -1, then this is the first time we   write data... why not set
           counter to 0? Maybe it rotates at some point back   to 0
          */
         if (this->counter == -1) {
-            _counter = 0;
-            if (0 < this->limit) {
-                piVar3 = this->historicalLagInfoPerPlayer[uVar1][0] + 1;
-                do {
-                    (*(int (*)[2])(piVar3 + -1))[0] = this->connectionLagInfoArray[uVar1].subtractedMapTicks;
-                    *piVar3 = this->connectionLagInfoArray[uVar1].subtractedTime;
-                    _counter = _counter + 1;
-                    piVar3 = piVar3 + 2;
-                } while (_counter < this->limit);
+            for (int _index = 0; _index < (int)this->limit; _index = _index + 1) {
+                this->historicalLagInfoPerPlayer[uVar1][_index][0]
+                    = this->connectionLagInfoArray[uVar1].subtractedMapTicks;
+                this->historicalLagInfoPerPlayer[uVar1][_index][1]
+                    = this->connectionLagInfoArray[uVar1].subtractedTime;
             }
         } else {
             this->historicalLagInfoPerPlayer[uVar1][this->counter][1]
@@ -68,16 +67,16 @@ namespace Synchrony {
             this->historicalLagInfoPerPlayer[uVar1][this->counter][0]
                 = this->connectionLagInfoArray[uVar1].subtractedMapTicks;
             this->counter = this->counter + 1;
-            if (this->counter < this->limit)
+            if ((int)this->counter < (int)this->limit)
                 goto LAB_00488429;
         }
         this->counter = 0;
     LAB_00488429:
-        int _sum = 0;
-        if (this->limit) {
-            if (0 < this->limit) {
-                piVar3 = this->historicalLagInfoPerPlayer[uVar1][2] + 1;
-                _countdown = this->limit;
+        int _limit = this->limit;
+        if (_limit) {
+            if (0 < _limit) {
+                int _countdown = this->limit;
+                int* piVar3 = this->historicalLagInfoPerPlayer[uVar1][2] + 1;
                 do {
                     _sum_2 = _sum_2 + piVar3[-5];
                     _sum = _sum + *piVar3;
@@ -85,9 +84,9 @@ namespace Synchrony {
                     _countdown = _countdown + -1;
                 } while (_countdown);
             }
-            int _div = _sum_2 / this->limit;
-            this->connectionLagInfoArray[uVar1].average2 = _sum / this->limit;
-            this->connectionLagInfoArray[uVar1].average1 = _div;
+            int _div = _sum / _limit;
+            this->connectionLagInfoArray[uVar1].average2 = _div;
+            this->connectionLagInfoArray[uVar1].average1 = _sum_2 / _limit;
         }
     }
 

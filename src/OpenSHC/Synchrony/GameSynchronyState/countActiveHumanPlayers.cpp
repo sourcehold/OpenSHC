@@ -7,8 +7,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047E830
     int GameSynchronyState::countActiveHumanPlayers()
     {
-        uint uVar1;
-        uVar1 = (uint)(this->currentPlayerFullIDArray[1] != -1);
+        uint uVar1 = 0;
+        if (this->currentPlayerFullIDArray[1] != -1) {
+            uVar1 = 1;
+        }
         if (this->currentPlayerFullIDArray[2] != -1) {
             uVar1 = uVar1 + 1;
         }

@@ -7,6 +7,7 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
@@ -28,8 +29,8 @@ namespace Synchrony {
         char* pcVar8;
         int iVar9;
         int _gameVersion;
-        int local_8c[9];
         char local_68[100];
+        int local_8c[9];
         uint local_4;
         BOOLEnum BVar4 = this->flag_0x7aad8;
         local_4 = MSVC_SecurityCookie::instance ^ (uint)local_8c;
@@ -37,9 +38,8 @@ namespace Synchrony {
         _gameVersion = 0x7fffffff;
         this->flag_0x7aad8 = TRUE;
         iVar9 = 1;
-        piVar6 = this->DAT_MultiplayerGameVersions;
+        piVar6 = this->DAT_MultiplayerGameVersions + 1;
         do {
-            piVar6 = piVar6 + 1;
             if (piVar6[-0x1e8fa] != -1) {
                 if (!piVar6[9]) {
                     this->flag_0x7aad8 = TRUE;
@@ -50,28 +50,29 @@ namespace Synchrony {
                 } else if (iVar7 != *piVar6) {
                     this->flag_0x7aad8 = FALSE;
                 }
-                if (*piVar6 < _gameVersion) {
+                if (_gameVersion > *piVar6) {
                     _gameVersion = *piVar6;
                 }
             }
             iVar9 = iVar9 + 1;
+            piVar6 = piVar6 + 1;
         } while (iVar9 < 9);
         if (!this->flag_0x7aad8) {
-            if ((BVar4) && (_gameVersion < this->DAT_MultiplayerGameVersions[this->currentPlayerSlotID])) {
+            if ((BVar4) && (this->DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.currentPlayerSlotID] > _gameVersion)) {
                 /*
                   added by script: "Someone has an old version, please get him or her to   upgrade"
                  */
                 pcVar5 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MP_VERSION_CONTROL, 2);
-                pcVar8 = this->receivedChatMessage;
+                pcVar8 = DAT_GameSynchronyState::instance.receivedChatMessage;
                 do {
                     cVar1 = *pcVar5;
                     *pcVar8 = cVar1;
                     pcVar5 = pcVar5 + 1;
                     pcVar8 = pcVar8 + 1;
                 } while (cVar1 != '\0');
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList, this)(
-                    this->DAT_GameCommandParam0, 0);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
+                    DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 0);
                 piVar6 = this->DAT_ChatMessageReceiverArray;
                 iVar7 = 0;
                 do {
@@ -80,7 +81,7 @@ namespace Synchrony {
                     int iVar3 = this->currentPlayerFullIDArray[iVar9];
                     local_8c[iVar7] = iVar2;
                     if ((iVar3 != -1)
-                        && (piVar6[-0x239f5] < this->DAT_MultiplayerGameVersions[this->currentPlayerSlotID])) {
+                        && (this->DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.currentPlayerSlotID] > piVar6[-0x239f5])) {
                         *piVar6 = 1;
                     }
                     iVar7 = iVar7 + 1;
@@ -102,7 +103,8 @@ namespace Synchrony {
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MP_VERSION_CONTROL, 1);
                 MACRO_CALL_MEMBER(
                     Text::UserTextHandler_Func::setTextEntryAndUpdateCursor, DAT_UserTextHandlerState::ptr)(4, pcVar5);
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_TAUNT_OR_CHAT);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    Commands::GCT_TAUNT_OR_CHAT);
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
                     DAT_UserTextHandlerState::ptr)(4, local_68);
                 this->DAT_ChatMessageReceiverArray[0] = local_8c[0];
@@ -115,9 +117,9 @@ namespace Synchrony {
                 this->DAT_ChatMessageReceiverArray[7] = local_8c[7];
                 this->DAT_ChatMessageReceiverArray[8] = local_8c[8];
             }
-            if (this->DAT_PlayerSlotArraySomeValue[this->currentPlayerSlotID] != 0) {
-                this->DAT_PlayerSlotArraySomeValue[this->currentPlayerSlotID] = 0;
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
+            if (DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[DAT_GameSynchronyState::instance.currentPlayerSlotID] != 0) {
+                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 0;
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS);
             }
         };
