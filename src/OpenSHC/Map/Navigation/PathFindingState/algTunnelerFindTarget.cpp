@@ -51,8 +51,8 @@ namespace Map {
                 this->searchQueue.xQueue[0] = (short)originX;
                 this->searchQueue.tilesQueue[0]
                     = DAT_ViewportRenderState::instance.translationMatrix[originY].addXgetTile + originX;
-                DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+                DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < iVar4 && (iVar4 < 0x13a10))) {
@@ -87,8 +87,8 @@ namespace Map {
                         if ((int)this->searchQueue.currentDistance > distance) {
                             return;
                         }
-                        paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + iVar7;
                         psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
+                        paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + iVar7;
                         do {
                             iVar7 = (*paiVar8)[0] + iVar4;
                             uVar5 = DAT_TileMapState::instance.LogicLayer[iVar7];
