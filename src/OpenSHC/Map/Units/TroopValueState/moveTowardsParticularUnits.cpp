@@ -21,7 +21,7 @@ namespace Map {
         void TroopValueState::moveTowardsParticularUnits(int param_1)
         {
             int iVar2;
-            short sVar1 = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            int sVar1 = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
             iVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findDistanceOrThreatLevelToUnitUnk,
                 DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
                 (int)(DAT_UnitsState::instance.units[sVar1].x), (int)(DAT_UnitsState::instance.units[sVar1].y), 0x50);
