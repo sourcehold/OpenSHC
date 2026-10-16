@@ -25,8 +25,8 @@ namespace Map {
             int iVar1;
             int iVar2;
             iVar2 = this->attackInfo.playerID_0x2c850;
-            if ((((0 < this->attackInfo.knightTribeCount) && (9 < (int)this->attackInfo.field_0x2c854))
-                    && ((99 < (int)this->attackInfo.field_0x2c854
+            if ((((0 < this->attackInfo.knightTribeCount) && (9 < (int)this->attackInfo.attackInfoTickWrapCount))
+                    && ((99 < (int)this->attackInfo.attackInfoTickWrapCount
                         || (0 < DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
                                 .previousSiegeWeaponsCount))))
                 && (!((byte)SEC_RNG::instance.currentNumber2 & 7))) {
