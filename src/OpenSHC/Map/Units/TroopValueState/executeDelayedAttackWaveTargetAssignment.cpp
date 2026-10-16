@@ -34,7 +34,7 @@ namespace Map {
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 iVar4 = 2;
             }
-            this->attackInfo.field128057_0x469d8 = this->attackInfo.field128057_0x469d8 + 1;
+            this->attackInfo.delayedWaveAssignmentCount = this->attackInfo.delayedWaveAssignmentCount + 1;
             BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
                 DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, iVar4, param_1);
             if (!BVar3) {
@@ -46,8 +46,8 @@ namespace Map {
             if (399 < this->attackInfo.attackWaveTicker[param_1]) {
                 this->attackInfo.attackWaveTicker[param_1] = 0;
                 this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
-                sVar2 = this->attackInfo.attackWaveAssignmentAttempts[param_1];
-                this->attackInfo.attackWaveAssignmentAttempts[param_1] = sVar2 + 1;
+                sVar2 = this->attackInfo.attackWaveSignpostShorts[param_1];
+                this->attackInfo.attackWaveSignpostShorts[param_1] = sVar2 + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks, this)(
                     (int)sVar2, param_1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
@@ -58,7 +58,7 @@ namespace Map {
                     param_1, 1000, 10000, Map::Units::STBT_0x418);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x418, Map::Units::STBT_1, 0x14, 0x46);
-                if ((this->attackInfo.people3) && (9 < this->attackInfo.field86974_0x20f74)) {
+                if ((this->attackInfo.people3) && (9 < this->attackInfo.attackTribeCount)) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn,
                         this)(param_1, 1, this->attackInfo.people3, Map::Units::STBT_0x3fb);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
@@ -67,7 +67,7 @@ namespace Map {
                 if (this->attackInfo.lord2) {
                     MACRO_CALL_MEMBER(
                         Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
-                        (int)((int)(this->attackInfo.field_0x20f3c)),
+                        (int)((int)(this->attackInfo.maxLordAttackTribes)),
                         1000, Map::Units::STBT_0x3fd);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::assignBehaviorTypeToNearbyTribes,
                         this)(Map::Units::STBT_0x3fd, 1, 0, 5);
