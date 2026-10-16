@@ -6,10 +6,10 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -56,7 +56,7 @@ namespace Map {
             BOOLEnum BVar4 = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(tribeID);
             param_3 = param_3 * 2;
-            if (param_3 < 0x1f5) {
+            if (param_3 <= 500) {
                 if (param_3 < 0x32) {
                     param_3 = 0x32;
                 }
@@ -164,7 +164,8 @@ namespace Map {
                                             && (BVar6
                                                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                         calculateCanReachUsingCachedAreaLogic,
-                                                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[sVar2].tile, tile2),
+                                                    DAT_PathFindingState::ptr)(
+                                                    DAT_UnitsState::instance.units[sVar2].tile, tile2),
                                                 BVar6 != FALSE))))
                                     && (uVar7 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
                                             - (uint)DAT_TileMapState::instance.HeightLayer[tile2],
