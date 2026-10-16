@@ -77,8 +77,8 @@ namespace Map {
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
                 if ((int)this->searchQueue.currentDistance > param_1)
                     break;
-                piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[iVar8] + 1;
                 DAT_TileMapState::instance.ChangedLayer[uVar3] = 2;
+                piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[iVar8] + 1;
                 psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                 do {
                     iVar8 = (*(int (*)[8])(piVar7 + -1))[0] + uVar3;
