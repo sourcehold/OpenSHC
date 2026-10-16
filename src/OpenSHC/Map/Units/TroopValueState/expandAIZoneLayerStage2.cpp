@@ -15,7 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AE00
         void TroopValueState::expandAIZoneLayerStage2()
         {
-            int iVar1;
             int (*paiVar2)[8];
             int iVar3;
             int iVar4;
@@ -23,22 +22,20 @@ namespace Map {
             do {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\x02') {
                     iVar3 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar4];
-                    iVar1 = 0;
+                    int iVar1 = 0;
                     paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + iVar3;
                     do {
                         if (!(*(byte*)(iVar4 + 0x1ea7b68 + (*paiVar2)[0]) & 0xf)) {
-                            MACRO_CALL_MEMBER(
-                                Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
+                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(0xf,
                                 (uint)((
                                     int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
                                              .int_.xOffset
                                     + (iVar4
                                         - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile))),
-                                (uint)((int)(*(int*)((int)DAT_TerrainDefinedData::instance
-                                                         .clockwiseCardinalTranslationMatrix
-                                                 + iVar1 * 0x10 + 4)
-                                    + iVar3)),
+                                (uint)(*(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                           + iVar1 * 0x10 + 4)
+                                    + iVar3),
                                 4);
                             break;
                         }
