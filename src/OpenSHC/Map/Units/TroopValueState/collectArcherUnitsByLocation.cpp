@@ -42,26 +42,26 @@ namespace Map {
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     _index = this->attackInfo.unitIDIndex_0x2c520;
-                    if (((_pUnit->logicalState != Map::Units::ULS_INVISIBLE)
-                            && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep,
-                                    this)((int)_pUnit->owner),
-                                BVar1))
-                        && ((_pUnit->unitType == Map::Units::UT_E_ARCHER
-                            || (_pUnit->unitType == Map::Units::UT_E_XBOW)))) {
+                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
+                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
+                                (int)_pUnit->owner),
+                            BVar1)
+                        && (_pUnit->unitType == Map::Units::UT_E_ARCHER
+                            || (_pUnit->unitType == Map::Units::UT_E_XBOW))) {
                         if (!(DAT_TileMapState::instance.LogicLayer[_pUnit->tile] & 0x10000100U)) {
                             /*
                               not on the keep or gatehouse, or towers?
                              */
                             if (this->attackInfo.unitIDIndex_0x2bd4c < 1000) {
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe,
-                                    DAT_TribesState::ptr)(_unitID, (int)((int)(_pUnit->tribeID)));
+                                    DAT_TribesState::ptr)(_unitID, (int)(_pUnit->tribeID));
                                 this->attackInfo.unitIDArray_0x2b57c[this->attackInfo.unitIDIndex_0x2bd4c]
                                     = (short)_unitID;
                                 this->attackInfo.unitIDIndex_0x2bd4c = this->attackInfo.unitIDIndex_0x2bd4c + 1;
                             }
-                        } else if ((_index < 200)
-                            && ((!_pUnit->tribeID
-                                || (DAT_TribesState::instance.tribes[_pUnit->tribeID].isRallyingUnk == 0)))) {
+                        } else if (_index < 200
+                            && (!_pUnit->tribeID
+                                || (DAT_TribesState::instance.tribes[_pUnit->tribeID].isRallyingUnk == 0))) {
                             /*
                               not rallying or part of tribe
                              */
