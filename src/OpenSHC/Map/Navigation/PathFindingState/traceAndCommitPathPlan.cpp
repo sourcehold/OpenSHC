@@ -25,6 +25,7 @@ namespace Map {
         {
             uint uVar3;
             int iVar4;
+            int _buildingAtTile;
             uint uVar5;
             if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0'
                 && x2 <= 399 && y2 <= 399
@@ -39,6 +40,8 @@ namespace Map {
                     if (tile == iVar2 + x)
                         break;
                     uint _theDirection = 8;
+                    uint _startGate = DAT_TileMapState::instance.LogicLayer[tile] & 0x40000000;
+                    uint _startDoor = DAT_TileMapState::instance.LogicLayer[tile] & 0x100;
                     for (uint _direction = 0; (int)_direction < 8; _direction = _direction + 1) {
                         if (param_5 == 1) {
                             if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction]
@@ -65,9 +68,11 @@ namespace Map {
                                         && (iVar4
                                             = DAT_TileMapState::instance.directionTranslationMatrix[y2][_direction]
                                                 + tile,
-                                            DAT_TileMapState::instance.BuildingLayer[tile] == 0
-                                                && (DAT_TileMapState::instance.BuildingLayer[iVar4] == 0))) {
-                                        if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x100U) == 0) {
+                                            _buildingAtTile = (short)DAT_TileMapState::instance.BuildingLayer[tile],
+                                            _buildingAtTile == 0
+                                                && ((short)DAT_TileMapState::instance.BuildingLayer[iVar4]
+                                                    == _buildingAtTile))) {
+                                        if (_startDoor == 0) {
                                             uVar3 = DAT_TileMapState::instance.LogicLayer[iVar4] & 0x100;
                                             goto joined_r0x004a99a9;
                                         }
@@ -83,7 +88,7 @@ namespace Map {
                                 != 0)
                                 goto LAB_004a99b6;
                             iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[y2][_direction] + tile;
-                            if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x40000000U) == 0) {
+                            if (_startGate == 0) {
                                 uVar3 = DAT_TileMapState::instance.LogicLayer[iVar4] & 0x40000000;
                             joined_r0x004a99a9:
                                 if (uVar3 != 0)
@@ -129,21 +134,21 @@ namespace Map {
                                 == 0))) {
                         this->field49_0x94 = this->field49_0x94 + 1;
                     }
-                    iVar4 = _theDirection + 4;
-                    if (7 < iVar4) {
-                        iVar4 = _theDirection - 4;
+                    _theDirection = _theDirection + 4;
+                    if (7 < (int)_theDirection) {
+                        _theDirection = _theDirection - 8;
                     }
                     /*
                       commit path plan
                      */
                     if ((this->searchQueue.pathPlanIndex & 1) == 0) {
-                        this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2] = (byte)iVar4;
+                        this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2] = (byte)_theDirection;
                     } else {
                         this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2]
                             = this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2] & 0xf;
                         this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2]
                             = this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2]
-                            + (byte)iVar4 * '\x10';
+                            + (byte)_theDirection * '\x10';
                     }
                     tile = x2;
                     this->searchQueue.pathPlanIndex = this->searchQueue.pathPlanIndex + 1;
