@@ -72,13 +72,12 @@ namespace Map {
                     }
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    if ((((int)(short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
-                        && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
+                    int _unitAtTile = (short)DAT_TileMapState::instance.UnitLayer[_tile];
+                    if (((_unitAtTile == 0) || (considerUnits == 0)) && _unitAtTile != unitID
                         && _area == (short)DAT_TileMapState::instance.PathConnectionLayer[_tile]
                         && (_tHeight = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(_tile),
-                            _heightDiff = _unitHeight - _tHeight,
-                            _absHeight = (int)_heightDiff >> 0x1f,
+                            _heightDiff = _unitHeight - _tHeight, _absHeight = (int)_heightDiff >> 0x1f,
                             (int)((_heightDiff ^ _absHeight) - _absHeight) < 16)) {
                         this->ALG_ResultX = (int)_x;
                         this->ALG_ResultY = (int)_y;
