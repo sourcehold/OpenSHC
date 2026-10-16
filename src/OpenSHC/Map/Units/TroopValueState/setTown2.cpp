@@ -10,23 +10,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519F50
         void TroopValueState::setTown2(int param_1, int playerID)
         {
-            int* piVar3;
-            int _index;
-            int* _ptrTown2;
-            int iVar1 = playerID * 0x177bc;
-            int iVar2 = 0;
-            _index = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8);
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -4) = 0;
-            if (0 < _index) {
-                piVar3 = (int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + 0xc);
-                do {
-                    if ((*piVar3 == 0) || (param_1)) {
-                        _ptrTown2 = (int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -4);
-                        *_ptrTown2 = *_ptrTown2 + 1;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 = 0;
+            int i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2; i = i + 1) {
+                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[i].unitID == 0 || param_1) {
+                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 + 1;
                     }
-                    iVar2 = iVar2 + 1;
-                    piVar3 = piVar3 + 4;
-                } while (iVar2 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8));
+                }
             }
         }
 
