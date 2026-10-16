@@ -23,8 +23,8 @@ namespace Map {
                 10, '\0', (void*)((int)(this->attackInfo.someSinglePlayerScore + param_1)));
             this->attackInfo.aiTickPhase = 0;
             this->attackInfo.counter = 0x10;
-            this->attackInfo.field_0x20e00 = 0xffffffff;
-            this->attackInfo.field128057_0x469d8 = 0;
+            this->attackInfo.archerPointCountPrev = 0xffffffff;
+            this->attackInfo.delayedWaveAssignmentCount = 0;
             this->attackInfo.buildingDamageEventCount = 0;
             this->attackInfo.enemyUnitsInsideCastleCount = 0;
             this->attackInfo.playerInfo[0].field22_0x3ea4 = 0;
@@ -48,11 +48,11 @@ namespace Map {
             iVar2 = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
             if ((param_2 <= iVar2) && (param_2)) {
-                (&this->attackInfo.unknownSignpostRelatedArray)[param_1] = param_2 + -1;
-                this->attackInfo.field128056_0x469d4 = param_2 + -1;
+                this->attackInfo.unknownSignpostRelatedArray[param_1] = param_2 + -1;
+                this->attackInfo.field121589_0x469d4 = param_2 + -1;
             }
-            (&this->attackInfo.unknownSignpostRelatedArray)[param_1] = iVar1;
-            this->attackInfo.field128056_0x469d4 = iVar1;
+            this->attackInfo.unknownSignpostRelatedArray[param_1] = iVar1;
+            this->attackInfo.field121589_0x469d4 = iVar1;
         }
 
     }
