@@ -39,13 +39,12 @@ namespace Map {
                     if (tile == iVar2 + x)
                         break;
                     uint _theDirection = 8;
-                    uint _direction = 0;
-                    do {
+                    for (uint _direction = 0; (int)_direction < 8; _direction = _direction + 1) {
                         if (param_5 == 1) {
                             if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction]
                                     & DAT_TileMapState::instance.PathLinkageLayer[tile])
                                 == 0)
-                                goto LAB_004a99f7;
+                                continue;
                         LAB_004a99b6:
                             uint uVar3 = DAT_TileMapState::instance.directionTranslationMatrix[y2][_direction] + tile;
                             if (DAT_TileMapState::instance.WalkLayer[uVar3] == sVar1
@@ -75,7 +74,7 @@ namespace Map {
                                         if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x100U) == 0)
                                             goto LAB_004a99b6;
                                     }
-                                    goto LAB_004a99f7;
+                                    continue;
                                 }
                                 goto LAB_004a99b6;
                             }
@@ -97,9 +96,7 @@ namespace Map {
                                     goto LAB_004a99b6;
                             }
                         }
-                    LAB_004a99f7:
-                        _direction = _direction + 1;
-                    } while ((int)_direction < 8);
+                    }
                     if (_theDirection == 8) {
                         /*
                           I guess this increment means "total recomputes of the path linkage layer"
