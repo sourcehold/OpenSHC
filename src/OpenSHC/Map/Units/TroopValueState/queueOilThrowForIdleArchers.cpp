@@ -9,6 +9,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -42,8 +43,8 @@ namespace Map {
                             iVar2 = 5;
                         }
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
-                            DAT_PathFindingState::ptr)(
-                            this->attackInfo.pitchRelatedPlayerID, 0, 0, (int)(*(int*)(psVar3 + 0x1f)), iVar2);
+                            DAT_PathFindingState::ptr)(DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, 0,
+                            0, (int)(*(int*)(psVar3 + 0x1f)), iVar2);
                         iVar2 = DAT_PathFindingState::instance.field34_0x64;
                         if (9 < DAT_PathFindingState::instance.ALGO_TotalTroopValue
                             && 1 < DAT_PathFindingState::instance.ALGO_TotalTroopCount
