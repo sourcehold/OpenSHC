@@ -24,7 +24,7 @@ namespace Map {
                     _index2 = _index;
                     DAT_TroopValueState::instance.attackInfo.tentPointsNext = _index;
                 }
-                piVar1 = piVar1 + 8;
+                piVar1 = piVar1 + 1;
                 _index = _index + 1;
             } while ((int)piVar1 < 0x17a52ac);
             return 0;
