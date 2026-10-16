@@ -78,7 +78,7 @@ namespace Map {
                                 DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar6]);
                             uVar4 = uVar4 + iVar2;
                         }
-                        if ((int)local_18 <= (int)(uVar4 + 0x10) && (int)(uVar4 - 0x10) <= (int)local_18
+                        if ((int)local_18 <= (int)(uVar4 + 0x10) && (int)local_18 >= (int)(uVar4 - 0x10)
                             && (MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                                     DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
