@@ -79,10 +79,9 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
                             int iVar6 = (int)DAT_TileMapState::instance.OrganismLayer[iVar5];
                             if ((iVar6 == 0) || (1999 < iVar6)) {
-                                if (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
-                                    switch (DAT_BuildingsState::instance
-                                            .buildings[DAT_TileMapState::instance.BuildingLayer[iVar5]]
-                                            .buildingType) {
+                                int _building = DAT_TileMapState::instance.BuildingLayer[iVar5];
+                                if (_building != 0) {
+                                    switch (DAT_BuildingsState::instance.buildings[_building].buildingType) {
                                     case OpenSHC::Map::Buildings::BT_WOODCUTTERSHUT:
                                     case OpenSHC::Map::Buildings::BT_QUARRY:
                                     case OpenSHC::Map::Buildings::BT_WHEATFARM:
