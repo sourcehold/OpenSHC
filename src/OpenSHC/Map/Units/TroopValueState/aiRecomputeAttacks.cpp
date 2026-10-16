@@ -36,10 +36,10 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
             iVar3 = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[(&this->attackInfo.unknownSignpostRelatedArray)[param_2]]
+                        .signpostEntryData[this->attackInfo.unknownSignpostRelatedArray[param_2]]
                         .tile;
             if (iVar3 < 1) {
-                (&this->attackInfo.unknownSignpostRelatedArray)[param_2] = 0;
+                this->attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar3 = iVar2;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
