@@ -20,26 +20,22 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D510
         void TroopValueState::moveTowardsParticularUnits(int param_1)
         {
-            short sVar1;
             int iVar2;
-            sVar1 = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
-            iVar2
-                = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findDistanceOrThreatLevelToUnitUnk,
-                    DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
-                    (int)((int)(DAT_UnitsState::instance.units[sVar1].x)),
-                    (int)((int)(DAT_UnitsState::instance.units[sVar1].y)), 0x50);
+            short sVar1 = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            iVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findDistanceOrThreatLevelToUnitUnk,
+                DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
+                (int)(DAT_UnitsState::instance.units[sVar1].x), (int)(DAT_UnitsState::instance.units[sVar1].y), 0x50);
             if ((!iVar2)
                 && (iVar2
                     = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findDistanceOrThreatLevelToUnitUnk,
                         DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
-                        (int)((int)(DAT_UnitsState::instance.units[sVar1].x)),
-                        (int)((int)(DAT_UnitsState::instance.units[sVar1].y)), 200),
+                        (int)(DAT_UnitsState::instance.units[sVar1].x), (int)(DAT_UnitsState::instance.units[sVar1].y),
+                        200),
                     iVar2 == 0)) {}
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
                 param_1, Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk, 0, 0, 0);
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                param_1, (uint)((int)((int)DAT_UnitsState::instance.units[iVar2].x)),
-                (uint)((int)((int)DAT_UnitsState::instance.units[iVar2].y)), 0, 0,
+            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(param_1,
+                (uint)(DAT_UnitsState::instance.units[iVar2].x), (uint)(DAT_UnitsState::instance.units[iVar2].y), 0, 0,
                 Map::Units::Instructions::UMSE_0);
         }
 
