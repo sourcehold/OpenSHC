@@ -25,9 +25,9 @@ namespace Map {
                 do {
                     uint y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    uint x = _tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                     uint _attackedDistance
                         = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile];
-                    uint x = _tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                     if (DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration && _attackedDistance != 0
                         && _attackedDistance - 4294967224 < 4
                         && DAT_TileMapState::instance.CertainPathLayer[_tile] < 0x4c
