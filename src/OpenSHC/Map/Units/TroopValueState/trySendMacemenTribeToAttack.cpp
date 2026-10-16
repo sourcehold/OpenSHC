@@ -28,7 +28,7 @@ namespace Map {
             int _playerID;
             int _macemen;
             _playerID = this->attackInfo.playerID_0x2c850;
-            if (((0 < this->attackInfo.macemenTribeCount) && (3 < (int)this->attackInfo.field_0x2c854))
+            if (((0 < this->attackInfo.macemenTribeCount) && (3 < (int)this->attackInfo.attackInfoTickWrapCount))
                 && (!((byte)SEC_RNG::instance.currentNumber2 & 7))) {
                 _macemen = this->attackInfo.macemenTribeArray[this->attackInfo.macemenTribeCount + -1];
                 bVar1 = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
