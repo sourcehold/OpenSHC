@@ -52,6 +52,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
+            this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
             ushort uVar1
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
             ushort uVar2
@@ -59,7 +60,6 @@ namespace Map {
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
                           + param_2];
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[param_1].y;
-            this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
             int _startTile = DAT_UnitsState::instance.units[param_1].tile;
             this->searchQueue.tilesQueue[0] = _startTile;
             DAT_TileMapState::instance.CertainPathLayer[_startTile] = 1;
@@ -82,15 +82,15 @@ namespace Map {
                                 || (DAT_TileMapState::instance.LogicLayer[iVar13] & 0x10000100U) != 0) {
                                 iVar7 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                             .int_.xOffset;
+                                DAT_TileMapState::instance.WalkLayer[iVar13] = (short)this->searchGeneration;
                                 DAT_TileMapState::instance.CertainPathLayer[iVar13]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar13] = (short)this->searchGeneration;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex] = (short)iVar7 + sVar3;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                     = (short)DAT_TerrainDefinedData::instance
                                           .clockwiseCardinalTranslationMatrix[_direction]
                                           .int_.yOffset
                                     + sVar4;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex] = (short)iVar7 + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar13;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a10 <= (int)this->searchQueue.writeIndex) {
