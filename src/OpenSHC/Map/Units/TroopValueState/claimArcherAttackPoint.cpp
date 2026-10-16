@@ -7,6 +7,7 @@
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -30,14 +31,14 @@ namespace Map {
                     sVar1 = DAT_TribesState::instance.tribes[param_1].archerRelated;
                     int iVar2 = DAT_TribesState::instance.tribes[param_1].uid;
                     DAT_TribesState::instance.tribes[param_1].archerRelated2 = sVar1;
-                    this->attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].buildingID = 0;
-                    this->attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].unitID = 0;
-                    uint y1 = this->attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].unitID;
-                    this->attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].unitID = iVar2;
-                    uint x1 = this->attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].buildingID;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].buildingID = 0;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].unitID = 0;
+                    uint y1 = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].unitID;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].unitID = iVar2;
+                    uint x1 = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].buildingID;
                     DAT_TribesState::instance.tribes[param_1].archerRelated = (short)iVar3;
-                    this->attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].buildingID = param_1;
-                    this->attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3eb].tile = 3;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].buildingID = param_1;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3eb].tile = 3;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                         param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
                     return iVar3;
