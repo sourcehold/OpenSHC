@@ -19,27 +19,19 @@ namespace Map {
         undefined4 TroopValueState::findTribeWithMoatAttackBehavior()
         {
             BOOLEnum BVar1;
-            int* piVar2;
-            int iVar3;
-            iVar3 = 1;
-            piVar2 = &DAT_TribesState::instance.tribes[1].owner;
-            do {
-                if (*(short*)(piVar2 + 5) != 0) {
-                    BVar1 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(*piVar2);
-                    if ((BVar1) && (*(SomeTribeBehaviorTypeShort*)(piVar2 + 9) == Map::Units::STBT_0x3f7)) {
+            for (int iVar3 = 1; iVar3 < 1250; iVar3 = iVar3 + 1) {
+                if (DAT_TribesState::instance.tribes[iVar3].tribeState != 0) {
+                    BVar1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[iVar3].owner);
+                    if (BVar1 && DAT_TribesState::instance.tribes[iVar3].tribeBehaviorType == Map::Units::STBT_0x3f7) {
                         this->x = (int)DAT_TribesState::instance.tribes[iVar3].targetX;
                         this->y = (int)DAT_TribesState::instance.tribes[iVar3].targetY;
                         this->attackInfo.field127625_0x42744 = iVar3;
                         return (undefined4)(1);
                     }
                 }
-                piVar2 = piVar2 + 0xcd;
-                iVar3 = iVar3 + 1;
-                if (0x176238b < (int)piVar2) {
-                    return (undefined4)(0);
-                }
-            } while (true);
+            }
+            return (undefined4)(0);
         }
 
     }
