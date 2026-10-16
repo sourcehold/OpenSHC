@@ -44,7 +44,7 @@ namespace Map {
                         if (3999 < iVar2) {}
                     }
                     iVar3 = iVar3 + 1;
-                    psVar2 = psVar2 + 0x248;
+                    psVar2 = psVar2 + 1;
                 } while (iVar3 < (int)uVar1);
             }
         }
