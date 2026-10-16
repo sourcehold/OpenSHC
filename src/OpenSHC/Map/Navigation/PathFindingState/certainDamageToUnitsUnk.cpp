@@ -92,7 +92,7 @@ namespace Map {
                             && DAT_UnitsState::instance.units[iVar9].unitType != OpenSHC::Map::Units::UT_LORD) {
                             DAT_UnitsState::instance.units[iVar9].health
                                 = DAT_UnitsState::instance.units[iVar9].health - param_4;
-                            if ((DAT_UnitsState::instance.units[iVar9].health < 1)
+                            if ((DAT_UnitsState::instance.units[iVar9].health <= 0)
                                 && (DAT_UnitsState::instance.units[iVar9].dying == 0)) {
                                 DAT_UnitsState::instance.units[iVar9].health = 0;
                                 DAT_UnitsState::instance.units[iVar9].dying = 1;
@@ -109,8 +109,7 @@ namespace Map {
                                         = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
                                         DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[iVar9].x,
-                                        (short)DAT_UnitsState::instance.units[iVar9].y,
-                                        OpenSHC::DE::SHCDE::FX_SPLAT);
+                                        (short)DAT_UnitsState::instance.units[iVar9].y, OpenSHC::DE::SHCDE::FX_SPLAT);
                                 }
                                 DAT_UnitsState::instance.units[iVar9].tunnelerFinishedDigging = 1;
                             }
@@ -125,18 +124,16 @@ namespace Map {
                         }
                         uVar4 = DAT_UnitsState::instance.units[iVar9].nextUnitOnTheSameTile;
                     }
-                    uVar7 = (uint)SEC_RNG::instance.currentNumber2;
+                    int _random = (int)SEC_RNG::instance.currentNumber2;
                     MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                    if ((uVar7 & 1) == 0) {
+                    if ((_random & 1) == 0) {
                         iVar11 = (int)SEC_RNG::instance.currentNumber2;
                         MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                         iVar9 = sVar3 * 8;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
-                            (undefined4)((int)(param_3)), 0, (int)(((uVar7 >> 4) % 0x32 + 0x32) * local_4 + sVar2 * 8),
-                            iVar9 + (iVar11 / 0x32) * -0x32 + -0x19 + iVar11,
-                            (int)((uint)DAT_TileMapState::instance.HeightLayer[uVar1] + (uVar7 / 1000) * -1000 + 500
-                                + uVar7),
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
+                            DAT_EntityState::ptr)(0, (undefined4)((int)(param_3)), 0,
+                            (int)(((_random >> 4) % 0x32 + 0x32) * local_4 + sVar2 * 8), iVar9 + iVar11 % 0x32 + -0x19,
+                            (int)(DAT_TileMapState::instance.HeightLayer[uVar1] + _random % 1000 + 500),
                             (int)(sVar2 * 8 + 4), iVar9 + 4, (int)(DAT_TileMapState::instance.HeightLayer[uVar1]),
                             local_8, 0);
                     }
@@ -145,8 +142,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
+                                = (ushort)this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
@@ -165,8 +162,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
+                                = (ushort)this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
                                       .short_.xOffset
@@ -185,8 +182,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
+                                = (ushort)this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
                                       .short_.xOffset
@@ -205,8 +202,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
+                                = (ushort)this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
                                       .short_.xOffset
