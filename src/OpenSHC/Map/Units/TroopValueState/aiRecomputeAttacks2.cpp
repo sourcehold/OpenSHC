@@ -30,8 +30,8 @@ namespace Map {
             int iVar4;
             int playerID;
             playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
-            BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
-                DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, playerID, param_2);
+            BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone, DAT_GameState::ptr)(
+                DAT_GameSynchronyState::instance.currentPlayerSlotID, playerID, param_2);
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
             piVar1 = (int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10);
             *piVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
@@ -43,24 +43,24 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
             DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = 0;
-            iVar4 = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo
-                                               .unknownSignpostRelatedArray[param_2]]
-                        .tile;
+            iVar4
+                = DAT_GameState::instance.mapAndTime
+                      .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
+                      .tile;
             if (iVar4 < 1) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar4 = iVar2;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
-                DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)((int)((uint)(BVar3))),
-                (int)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4])));
+                DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)(BVar3),
+                (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4]));
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(90, 0, 0, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_2);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeTargetedBuildingTilesArray, this)(
                 DAT_TroopValueState::instance.attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeAttackInfo, this)(
-                DAT_TroopValueState::instance.attackInfo.attacker, (int)((int)(*piVar1)));
+                DAT_TroopValueState::instance.attackInfo.attacker, (int)(*piVar1));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID,
                 DAT_TroopValueState::instance.attackInfo.attacker);
