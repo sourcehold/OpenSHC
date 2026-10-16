@@ -18,7 +18,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.nof_fpoints = 0;
             DAT_TroopValueState::instance.attackInfo.aiTickPhase = 0;
             DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount = 0;
-            DAT_TroopValueState::instance.attackInfo.field128056_0x469d4 = 0;
+            DAT_TroopValueState::instance.attackInfo.field121589_0x469d4 = 0;
             DAT_TroopValueState::instance.attackInfo.tilemapOffset = 0;
             DAT_TroopValueState::instance.attackInfo.inv_count = 1;
             DAT_TroopValueState::instance.attackInfo.aiTroops = -1;
