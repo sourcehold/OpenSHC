@@ -25301,7 +25301,7 @@ SHC_3BB0A8C1_0x004A7090 | 99.6% | named matrix end field
 
 SHC_3BB0A8C1_0x004A75B0 | 47.0% | compare operand order
 
-SHC_3BB0A8C1_0x004A79A0 | 63.8% | statement order
+SHC_3BB0A8C1_0x004A79A0 | 64.1% | compare order from asm
 
 SHC_3BB0A8C1_0x004A7F50 | 57.6% | bound literal from asm
 

@@ -162,7 +162,7 @@ namespace Map {
                         _destIndex = _destIndex + 1;
                         *_pDest1 = 1;
                         _pDest1 = _pDest1 + 3;
-                        if (unitCount <= _destIndex) {
+                        if (_destIndex >= unitCount) {
                             return;
                         }
                     }
@@ -202,7 +202,7 @@ namespace Map {
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         *_pDest2 = 1;
                         _pDest2 = _pDest2 + 3;
-                        if (unitCount <= _destIndex) {
+                        if (_destIndex >= unitCount) {
                             return;
                         }
                     }
@@ -228,7 +228,7 @@ namespace Map {
                         _destIndex = _destIndex + 1;
                         *_pDest3 = 0;
                         _pDest3 = _pDest3 + 3;
-                        if (unitCount <= _destIndex) {
+                        if (_destIndex >= unitCount) {
                             return;
                         }
                     }
