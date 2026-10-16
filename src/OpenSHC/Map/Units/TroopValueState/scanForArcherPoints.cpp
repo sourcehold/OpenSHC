@@ -45,7 +45,7 @@ namespace Map {
                     local_8 = 0;
                     paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + y;
                     do {
-                        if ((*(byte*)((*paiVar4)[0] + 0x1ea7b68 + iVar5) & 0xf) == 4
+                        if ((DAT_TileMapState::instance.AIInfoLayer[(*paiVar4)[0] + iVar5] & 0xf) == 4
                             && !(DAT_TileMapState::instance.RandomLayer[(*paiVar4)[0] + iVar5] & 3)) {
                             x = iVar5 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                             BVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
