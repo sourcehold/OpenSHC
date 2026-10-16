@@ -15,14 +15,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519E40
         undefined4 TroopValueState::findNearestAvailableScalePoint(int unitID)
         {
-            int iVar1;
             int fromXPosition;
             int* piVar2;
             int fromYPosition;
             int local_14;
             int local_10;
             int local_8;
-            iVar1 = DAT_UnitsState::instance.units[unitID].owner * 0x177bc;
+            int iVar1 = DAT_UnitsState::instance.units[unitID].owner * 0x177bc;
             local_10 = 1000;
             local_8 = -1;
             local_14 = 0;
@@ -34,10 +33,9 @@ namespace Map {
                             = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[*piVar2];
                         fromXPosition
                             = *piVar2 - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
-                        MACRO_CALL_MEMBER(
-                            Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)((int)(DAT_UnitsState::instance.units[unitID].y)), fromXPosition, fromYPosition);
+                            (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_10) {
                             local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             DAT_TroopValueState::instance.tile = piVar2[-1];
