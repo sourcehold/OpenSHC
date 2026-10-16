@@ -131,7 +131,7 @@ namespace Map {
                             }
                         }
                     }
-                    _pTribe = _pTribe + 0x19a;
+                    _pTribe = _pTribe + 1;
                 } while ((int)_pTribe < 0x17623a2);
                 if (DAT_TroopValueState::instance.attackInfo.knights) {
                     if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) {
