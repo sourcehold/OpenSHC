@@ -25,7 +25,7 @@ namespace Map {
                     int iVar1 = 0;
                     paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + iVar3;
                     do {
-                        if (!(*(byte*)(iVar4 + 0x1ea7b68 + (*paiVar2)[0]) & 0xf)) {
+                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + (*paiVar2)[0]] & 0xf)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(0xf,
                                 (uint)((
