@@ -87,8 +87,8 @@ namespace Map {
                     }
                 }
                 _ptrY = _ptrY + 4;
-                uVar5 = uVar5 + 4;
                 tile = tile + -1;
+                uVar5 = uVar5 + 4;
             } while (tile != 0);
             return;
         }
