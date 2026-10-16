@@ -65,8 +65,8 @@ namespace Map {
                         | 1;
                     return;
                 }
-                iVar3 = (short)DAT_BuildingsState::instance.buildings[buildingID].x + -1 + uVar2;
                 iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y + (int)uVar2 / 2;
+                iVar3 = (short)DAT_BuildingsState::instance.buildings[buildingID].x + -1 + uVar2;
             }
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + iVar3;
             DAT_TileMapState::instance.PathLinkageLayer[iVar3] = DAT_TileMapState::instance.PathLinkageLayer[iVar3] | 4;

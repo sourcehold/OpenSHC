@@ -24395,7 +24395,7 @@ SHC_3BB0A8C1_0x00499DC0 | 46.1% | statement order
 
 SHC_3BB0A8C1_0x00499FA0 | 35.3% | orig branch order + stmt order
 
-SHC_3BB0A8C1_0x0049A1C0 | 52.8% | shifted row index variable
+SHC_3BB0A8C1_0x0049A1C0 | 54.0% | statement order
 
 SHC_3BB0A8C1_0x0049A2E0 | 96.3% | index locals + statement order
 
