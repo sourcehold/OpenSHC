@@ -11,11 +11,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDB20
     int AICState::chooseRandomBuildingIDFromPlayersArrayOfBuildings(int playerID)
     {
+        int rng = SEC_RNG::instance.currentNumber2 & 7;
         int chosenBuildingID = 0;
         int chosenPriority = 46;
+        short* buildings = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings;
         for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
-            int rng = SEC_RNG::instance.currentNumber2 & 7;
-            int buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[i];
+            int buildingID = *buildings++;
             if (buildingID == 0)
                 continue;
 
@@ -34,8 +35,8 @@ namespace AI {
                         continue;
                 }
 
-                chosenBuildingID = buildingID;
                 chosenPriority = j;
+                chosenBuildingID = buildingID;
             }
         }
         return chosenBuildingID;
