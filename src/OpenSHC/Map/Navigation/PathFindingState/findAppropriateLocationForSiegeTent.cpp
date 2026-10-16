@@ -89,11 +89,11 @@ namespace Map {
             /*
               Convert 2D coordinates to 1D tile index
              */
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.yQueue[0] = (short)y;
             /*
               Add starting position to queue
              */
-            this->searchQueue.yQueue[0] = (short)y;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             /*
               Mark starting tile with distance 1
              */
@@ -108,10 +108,7 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
                     _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (_tile < 0) {
-                        break;
-                    }
-                    if (0x13a10 <= _tile) {
+                    if (_tile < 0 || 0x13a10 <= _tile) {
                         break;
                     }
                     /*
