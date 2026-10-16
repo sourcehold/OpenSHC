@@ -10,23 +10,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AF20
         int TroopValueState::findOrReserveArcherPointSlot(int param_1)
         {
-            int* piVar2;
-            int iVar3;
-            iVar3 = 0;
+            int _firstFree = 0;
             DAT_TroopValueState::instance.attackInfo.archerPointsNext = 0;
-            int iVar1 = 1;
-            piVar2 = (int*)&DAT_TroopValueState::instance.attackInfo.archerPointArray[1].tile;
-            do {
-                if (*piVar2 == param_1) {
-                    return iVar1;
+            for (int i = 1; i < 201; i = i + 1) {
+                if (DAT_TroopValueState::instance.attackInfo.archerPointArray[i].tile == param_1) {
+                    return i;
                 }
-                if ((*piVar2 == 0) && (!iVar3)) {
-                    iVar3 = iVar1;
-                    DAT_TroopValueState::instance.attackInfo.archerPointsNext = iVar1;
+                if (DAT_TroopValueState::instance.attackInfo.archerPointArray[i].tile == 0 && !_firstFree) {
+                    _firstFree = i;
+                    DAT_TroopValueState::instance.attackInfo.archerPointsNext = _firstFree;
                 }
-                piVar2 = piVar2 + 8;
-                iVar1 = iVar1 + 1;
-            } while ((int)piVar2 < 0x17802ac);
+            }
             return 0;
         }
 
