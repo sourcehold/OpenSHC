@@ -225,12 +225,11 @@ namespace AI {
                 int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
                 if (targetUnitID == 0)
                     continue;
+                int targetArea = (short)DAT_TileMapState::instance
+                                     .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile];
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                        DAT_PathFindingState::ptr)(playerID, unitArea,
-                        (short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
-                        0)
+                        DAT_PathFindingState::ptr)(playerID, unitArea, targetArea, 0)
                     == 0)
                     continue;
                 DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
