@@ -24,7 +24,7 @@ namespace Map {
             short sVar1;
             int iVar2;
             int iVar3;
-            PlayerID playerID;
+            int playerID;
             int iVar4;
             sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             /*
