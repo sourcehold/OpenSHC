@@ -21,16 +21,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D020
         void TroopValueState::trySendKnightTribeToAttack()
         {
-            int tribeID;
             int iVar1;
-            int iVar2;
-            iVar2 = this->attackInfo.playerID_0x2c850;
-            if ((((0 < this->attackInfo.knightTribeCount) && (9 < (int)this->attackInfo.attackInfoTickWrapCount))
-                    && ((99 < (int)this->attackInfo.attackInfoTickWrapCount
-                        || (0 < DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
-                                .previousSiegeWeaponsCount))))
-                && (!((byte)SEC_RNG::instance.currentNumber2 & 7))) {
-                tribeID = this->attackInfo.macemenTribeArray[this->attackInfo.knightTribeCount + 99];
+            int iVar2 = this->attackInfo.playerID_0x2c850;
+            if (0 < this->attackInfo.knightTribeCount && 9 < (int)this->attackInfo.attackInfoTickWrapCount
+                && (99 < (int)this->attackInfo.attackInfoTickWrapCount
+                    || (0 < DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
+                            .previousSiegeWeaponsCount))
+                && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
+                int tribeID = this->attackInfo.macemenTribeArray[this->attackInfo.knightTribeCount + 99];
                 iVar1 = DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
                             .previousSiegeWeaponsCount;
                 this->attackInfo.knightTribeCount = this->attackInfo.knightTribeCount + -1;
@@ -39,13 +37,12 @@ namespace Map {
                     iVar2 = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(iVar2);
                 } else {
-                    iVar2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::findActiveSiegeEngineForTribe,
-                        DAT_UnitsState::ptr)(iVar2);
+                    iVar2 = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::findActiveSiegeEngineForTribe, DAT_UnitsState::ptr)(iVar2);
                 }
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                    DAT_TribesState::ptr)(tribeID, (uint)((int)((int)DAT_UnitsState::instance.units[iVar2].x)),
-                    (uint)((int)((int)DAT_UnitsState::instance.units[iVar2].y)), 0, 0,
-                    Map::Units::Instructions::UMSE_0);
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
+                    (uint)(DAT_UnitsState::instance.units[iVar2].x), (uint)(DAT_UnitsState::instance.units[iVar2].y), 0,
+                    0, Map::Units::Instructions::UMSE_0);
             }
         }
 
