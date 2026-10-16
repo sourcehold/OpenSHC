@@ -18,12 +18,11 @@ namespace Map {
         int TroopValueState::calculateArch2ClosestToTribeTargetUnit(int tribeID)
         {
             int fromXPosition;
-            int iVar1;
             AttackInfoSubArrayElement1* piVar2;
             int fromYPosition;
             int local_c;
             int local_8;
-            iVar1 = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int iVar1 = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             local_c = 1000;
             local_8 = -1;
             tribeID = 0;
@@ -36,10 +35,9 @@ namespace Map {
                             = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[piVar2->tile2];
                         fromXPosition = piVar2->tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
-                        MACRO_CALL_MEMBER(
-                            Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[iVar1].x,
-                            (int)((int)(DAT_UnitsState::instance.units[iVar1].y)), fromXPosition, fromYPosition);
+                            (int)(DAT_UnitsState::instance.units[iVar1].y), fromXPosition, fromYPosition);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_c) {
                             DAT_TroopValueState::instance.tile = piVar2->tile;
                             local_c = DAT_DirectionAlgorithmState::instance.distanceHigh;
