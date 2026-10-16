@@ -22,7 +22,7 @@ namespace Map {
         void TroopValueState::sendAttackingPatrolTribeToComputedDestination(int tribeID)
         {
             dword _tile;
-            short sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
             _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
