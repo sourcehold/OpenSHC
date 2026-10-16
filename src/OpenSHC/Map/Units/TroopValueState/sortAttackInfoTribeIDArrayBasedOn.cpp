@@ -38,29 +38,29 @@ namespace Map {
             int _next;
             int _swapped;
             if (someTribeTypeIdentifier == 1010) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field251_0x21c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field14_0x21c;
             } else if (someTribeTypeIdentifier == 1011) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x44c;
             } else if (someTribeTypeIdentifier == 1012) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field255_0x35c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field18_0x35c;
             } else if (someTribeTypeIdentifier == 1018) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x4ec;
             } else if (someTribeTypeIdentifier == 1040) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field256_0x3ac;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field19_0x3ac;
             } else if (someTribeTypeIdentifier == 1045) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field257_0x3fc;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field20_0x3fc;
             } else if (someTribeTypeIdentifier == 7) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x12c;
             } else if (someTribeTypeIdentifier == 5) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x17c;
             } else if (someTribeTypeIdentifier == 1014) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field252_0x26c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field15_0x26c;
             } else if (someTribeTypeIdentifier == 1047) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x99c;
             } else if (someTribeTypeIdentifier == 1043) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field253_0x2bc;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field16_0x2bc;
             } else if (someTribeTypeIdentifier == 1044) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field254_0x30c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field17_0x30c;
             } else if (someTribeTypeIdentifier == 1013) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x53c;
             } else if (someTribeTypeIdentifier == 1019) {
@@ -72,9 +72,9 @@ namespace Map {
             } else if (someTribeTypeIdentifier == 1046) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x67c;
             } else if (someTribeTypeIdentifier == 1020) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field1059_0x7bc;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field32_0x7bc;
             } else if (someTribeTypeIdentifier == 1049) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field1060_0x80c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field33_0x80c;
             } else if (someTribeTypeIdentifier == 1050) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x71c;
             } else if (someTribeTypeIdentifier == 1051) {
@@ -88,7 +88,7 @@ namespace Map {
             } else if (someTribeTypeIdentifier == 1016) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x6cc;
             } else if (someTribeTypeIdentifier == 1017) {
-                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field1058_0x76c;
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field31_0x76c;
             } else if (someTribeTypeIdentifier == 1015) {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x49c;
             } else if (someTribeTypeIdentifier == 1041) {
