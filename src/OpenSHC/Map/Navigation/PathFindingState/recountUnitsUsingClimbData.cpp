@@ -46,8 +46,8 @@ namespace Map {
                             _climb->numberOfUnitsUsing = _climb->numberOfUnitsUsing + 1;
                         }
                     }
-                    _counter = _counter + 1;
                     _ptrUnitID = _ptrUnitID + 1;
+                    _counter = _counter + 1;
                 } while (_counter < 50);
             }
             return;
