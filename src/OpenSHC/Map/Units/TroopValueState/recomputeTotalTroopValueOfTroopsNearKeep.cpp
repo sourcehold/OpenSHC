@@ -7,6 +7,7 @@
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -26,16 +27,17 @@ namespace Map {
             Unit* ptrUnit;
             short _playerID;
             iVar3 = 1;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[0] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[1] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[2] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[3] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[4] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[5] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[6] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[7] = 0;
-            this->attackInfo.playerTotalTroopValueOfTroopsNearKeep[8] = 0;
-            this->attackInfo.padding_0x25b50[0] /* 0x25B50: start of padding_0x25b50 in the header */ = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[0] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[1] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[2] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[3] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[4] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[5] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[6] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[7] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[8] = 0;
+            DAT_TroopValueState::instance.attackInfo
+                .padding_0x25b50[0] /* 0x25B50: start of padding_0x25b50 in the header */ = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 ptrUnit = &DAT_UnitsState::instance.units[1];
                 do {
@@ -53,7 +55,8 @@ namespace Map {
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < 40) {
                             _troopValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                                 this)((Map::Units::UnitType)(short)ptrUnit->unitType);
-                            piVar1 = this->attackInfo.playerTotalTroopValueOfTroopsNearKeep + _playerID;
+                            piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep
+                                + _playerID;
                             *piVar1 = *piVar1 + _troopValue;
                         }
                     }
