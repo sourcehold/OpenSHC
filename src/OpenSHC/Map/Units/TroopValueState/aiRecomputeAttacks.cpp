@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnknownStopwatch.hpp"
 
 namespace OpenSHC {
@@ -24,9 +25,9 @@ namespace Map {
             int iVar2;
             int iVar3;
             int playerID;
-            playerID = (int)(char)this->attackInfo.attackWavePlayerIDArray[param_2];
+            playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
-            piVar1 = (int*)((int)this->attackInfo.hackValuesArray + playerID * 0x177bc + -0x10);
+            piVar1 = (int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10);
             *piVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 0x13a10, '\0', (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
@@ -35,11 +36,12 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
-            iVar3 = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[this->attackInfo.unknownSignpostRelatedArray[param_2]]
-                        .tile;
+            iVar3
+                = DAT_GameState::instance.mapAndTime
+                      .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
+                      .tile;
             if (iVar3 < 1) {
-                this->attackInfo.unknownSignpostRelatedArray[param_2] = 0;
+                DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar3 = iVar2;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
@@ -49,11 +51,12 @@ namespace Map {
                 DAT_PathFindingState::ptr)(60, 0, 0, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_2);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeTargetedBuildingTilesArray, this)(
-                this->attackInfo.attacker);
+                DAT_TroopValueState::instance.attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeAttackInfo, this)(
-                this->attackInfo.attacker, (int)(*piVar1));
+                DAT_TroopValueState::instance.attackInfo.attacker, (int)(*piVar1));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
-                DAT_GameSynchronyState::instance.currentPlayerSlotID, this->attackInfo.attacker);
+                DAT_GameSynchronyState::instance.currentPlayerSlotID,
+                DAT_TroopValueState::instance.attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setScale3, this)(1, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setTown2, this)(1, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailablePeopleValueSlots, this)(1);
@@ -63,14 +66,15 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setMoat3, this)(1, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableHighValueSlots, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableArcherValueSlots, this)(1);
-            if (this->attackInfo.attackVectorRecomputeThrottle < 1) {
+            if (DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle < 1) {
                 MACRO_CALL_MEMBER(Game::GameStateStructures_Func::calculateAttackVectorsToCampFireOfPlayer,
                     DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
-                this->attackInfo.attackVectorRecomputeThrottle = 1;
+                DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 1;
             }
-            this->attackInfo.attackVectorRecomputeThrottle = this->attackInfo.attackVectorRecomputeThrottle + 1;
-            if (1 < this->attackInfo.attackVectorRecomputeThrottle) {
-                this->attackInfo.attackVectorRecomputeThrottle = 0;
+            DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle
+                = DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle + 1;
+            if (1 < DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle) {
+                DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
             }
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::stop, DAT_UnknownStopwatch::ptr)();
         }
