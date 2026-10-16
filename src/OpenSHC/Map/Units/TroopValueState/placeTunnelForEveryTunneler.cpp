@@ -58,7 +58,7 @@ namespace Map {
                         && psVar3->unitType == Map::Units::UT_TUNNELER) {
                         _nTunnelers = _nTunnelers + 1;
                     }
-                    psVar3 = psVar3 + 0x248;
+                    psVar3 = psVar3 + 1;
                     iVar3 = iVar3 + -1;
                     _nTunnels = _nTunnelers;
                 } while (iVar3);
@@ -74,7 +74,7 @@ namespace Map {
                     iVar4 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + 1;
                     DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = iVar4;
                 }
-                piVar3 = piVar3 + 0xcd;
+                piVar3 = piVar3 + 1;
                 iVar3 = iVar3 + 1;
             } while ((int)piVar3 < 0x176238c);
             if (iVar4) {
@@ -110,7 +110,7 @@ namespace Map {
                         while (psVar4->logicalState != Map::Units::ULS_NORMAL || psVar4->owner != local_c
                             || psVar4->dying || psVar4->unitType != Map::Units::UT_TUNNELER || psVar4->tribeID) {
                             unitID = unitID + 1;
-                            psVar4 = psVar4 + 0x248;
+                            psVar4 = psVar4 + 1;
                             if ((int)uVar2 <= (int)unitID) {}
                         }
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
