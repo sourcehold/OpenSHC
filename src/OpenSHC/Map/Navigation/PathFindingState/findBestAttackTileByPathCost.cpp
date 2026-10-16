@@ -89,8 +89,8 @@ namespace Map {
                                 && (iVar1 = this->searchQueue.currentDistance
                                         + (uint)DAT_TileMapState::instance.SEC_TileMap1104[dVar4] * 3,
                                     iVar1 < local_4)) {
-                                local_8 = dVar4;
                                 local_4 = iVar1;
+                                local_8 = dVar4;
                             }
                         }
                         DAT_TileMapState::instance.CertainPathLayer[dVar4]
