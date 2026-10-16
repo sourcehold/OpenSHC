@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -22,16 +23,16 @@ namespace Map {
             int iVar2;
             short _playerID;
             UnitTypeShort _troopType;
-            this->attackInfo.playerTotalTroopValueArray[0] = 0;
-            this->attackInfo.playerTotalTroopValueArray[1] = 0;
-            this->attackInfo.playerTotalTroopValueArray[2] = 0;
-            this->attackInfo.playerTotalTroopValueArray[3] = 0;
-            this->attackInfo.playerTotalTroopValueArray[4] = 0;
-            this->attackInfo.playerTotalTroopValueArray[5] = 0;
-            this->attackInfo.playerTotalTroopValueArray[6] = 0;
-            this->attackInfo.playerTotalTroopValueArray[7] = 0;
-            this->attackInfo.playerTotalTroopValueArray[8] = 0;
-            this->attackInfo.field98978_0x25b28 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[0] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[1] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[2] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[3] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[4] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[5] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[6] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[7] = 0;
+            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[8] = 0;
+            DAT_TroopValueState::instance.attackInfo.field98978_0x25b28 = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 pUVar2 = &DAT_UnitsState::instance.units[1];
                 iVar2 = DAT_UnitsState::instance.maxUnitCount - 1;
@@ -44,7 +45,7 @@ namespace Map {
                         _playerID = pUVar2->owner;
                         _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                             this)((Map::Units::UnitType)(short)_troopType);
-                        piVar1 = this->attackInfo.playerTotalTroopValueArray + _playerID;
+                        piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray + _playerID;
                         *piVar1 = *piVar1 + _troopTypeValue;
                     }
                     pUVar2 = pUVar2 + 0x248;
