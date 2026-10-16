@@ -26,8 +26,7 @@ namespace Map {
             byte _playerID;
             _playerID = this->attackInfo.attackWavePlayerIDArray[attackID];
             BVar2 = MACRO_CALL_MEMBER(
-                Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(
-                attackID, (int)((int)(50)));
+                Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
             if (BVar2) {
                 if (this->attackInfo.attackAlarmPlayed)
                     goto LAB_00520489;
@@ -39,24 +38,23 @@ namespace Map {
                 this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(1, attackID);
                 if (this->attackInfo.tentPoints < 1) {
-                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers,
-                        this)(attackID, 0);
+                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers, this)(
+                        attackID, 0);
                 } else {
-                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers,
-                        this)(attackID, 1);
-                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelForEveryTunneler, this)(
-                        attackID);
+                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers, this)(
+                        attackID, 1);
+                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelForEveryTunneler, this)(attackID);
                 }
                 tribeSizeSumLimit = *(int*)((int)this->attackInfo.townValuesArray + (char)_playerID * 0x177bc + -4);
                 if (tribeSizeSumLimit) {
-                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn,
-                        this)(attackID, 2, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
+                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
+                        attackID, 2, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                         Map::Units::STBT_0x3f5, Map::Units::STBT_1, 0, 0x14);
                 }
                 if (this->attackInfo.people3) {
-                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn,
-                        this)(attackID, 2, this->attackInfo.people3, Map::Units::STBT_0x3fb);
+                    MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
+                        attackID, 2, this->attackInfo.people3, Map::Units::STBT_0x3fb);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                         Map::Units::STBT_0x3fb, Map::Units::STBT_1, 5, 0x1e);
                 }
