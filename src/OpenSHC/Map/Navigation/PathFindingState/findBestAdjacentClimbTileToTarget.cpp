@@ -62,8 +62,8 @@ namespace Map {
                         DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar5]);
                     local_18 = local_18 + iVar2;
                 }
-                paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + param_5;
                 piVar7 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
+                paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + param_5;
                 do {
                     iVar6 = (*paiVar3)[0] + iVar5;
                     iVar2 = MACRO_CALL_MEMBER(
