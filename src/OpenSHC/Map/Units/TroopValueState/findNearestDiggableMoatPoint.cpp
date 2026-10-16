@@ -21,9 +21,9 @@ namespace Map {
             tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
             if (tile < 0x80000000) {
-                iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(
-                    tile, 2, (uint)((int)((int)DAT_UnitsState::instance.units[param_1].x)),
-                    (uint)((int)((int)DAT_UnitsState::instance.units[param_1].y)));
+                iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
+                    (uint)(DAT_UnitsState::instance.units[param_1].x),
+                    (uint)(DAT_UnitsState::instance.units[param_1].y));
                 if (0 < iVar1) {
                     this->x = DAT_TileMapState::instance.ALG_MoatXResult;
                     this->y = DAT_TileMapState::instance.ALG_MoatYResult;
