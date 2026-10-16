@@ -68,12 +68,10 @@ namespace Map {
                     160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             maxDestinations = maxDestinations * 2;
-            if (maxDestinations <= 500) {
-                if (maxDestinations < 0x32) {
-                    maxDestinations = 0x32;
-                }
-            } else {
+            if (500 < maxDestinations) {
                 maxDestinations = 500;
+            } else if (maxDestinations < 0x32) {
+                maxDestinations = 0x32;
             }
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
