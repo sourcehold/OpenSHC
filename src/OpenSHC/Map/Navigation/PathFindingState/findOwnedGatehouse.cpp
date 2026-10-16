@@ -24,7 +24,7 @@ namespace Map {
         {
             int (*paiVar3)[8];
             short _building;
-            int _link;
+            byte _link;
             dword _tile;
             if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (dword)(0);
