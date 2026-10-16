@@ -44,12 +44,11 @@ namespace Map {
                         } else if (permitClimb == 2) {
                             continue;
                         }
-                        if (((playerID == 0
-                                 || (DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
-                                     == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
-                                || (DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID]
-                                        .field239_0x2c6
-                                    != 0))) {
+                        if (playerID == 0
+                            || DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
+                                == DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                            || DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID].field239_0x2c6
+                                != 0) {
                             aiStack_640[local_96c * 2 + 1] = 0;
                             aiStack_640[local_96c * 2] = iVar7;
                             local_96c = local_96c + 1;
