@@ -26,7 +26,7 @@ namespace Map {
             int _tribeUID;
             int _buildingID;
             short _unitID;
-            PlayerID _playerID;
+            int _playerID;
             short _siegeIndex;
             int _x;
             int _y;
