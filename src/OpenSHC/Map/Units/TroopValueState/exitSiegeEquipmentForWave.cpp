@@ -49,7 +49,7 @@ namespace Map {
                         }
                     } while (_tribeUnitIndex < _tribe->size);
                 }
-                _tribe = _tribe + 0x19a;
+                _tribe = _tribe + 1;
                 _tribeID = _tribeID + 1;
             } while ((int)_tribe < 0x17623a2);
         }
