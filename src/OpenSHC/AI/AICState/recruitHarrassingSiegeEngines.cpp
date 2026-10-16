@@ -70,10 +70,13 @@ namespace AI {
         }
 
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[165];
-        if (tribeID == 0
-            || DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
-            || DAT_TribesState::instance.tribes[tribeID].size < 2) {
+        int hasEngineers = 0;
+        if (tribeID != 0
+            && DAT_TribesState::instance.tribes[tribeID].uid
+                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
+            && DAT_TribesState::instance.tribes[tribeID].size >= 2)
+            hasEngineers = 1;
+        if (!hasEngineers) {
             // Not enough engineers yet: recruit one at the engineers guild
             if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0
                 || DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD]
