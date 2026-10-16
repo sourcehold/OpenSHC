@@ -24393,7 +24393,7 @@ SHC_3BB0A8C1_0x004999C0 | 51.0% | counted for loop
 
 SHC_3BB0A8C1_0x00499DC0 | 67.1% | signed modulo and signed byte
 
-SHC_3BB0A8C1_0x00499FA0 | 35.3% | orig branch order + stmt order
+SHC_3BB0A8C1_0x00499FA0 | 37.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049A1C0 | 62.2% | tile locals per row
 
