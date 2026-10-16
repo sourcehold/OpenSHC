@@ -10,6 +10,7 @@
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -33,13 +34,13 @@ namespace Map {
                 /*
                   fixme
                  */
-                this->attackInfo.tentPointsValues[_siegeIndex].tribeID = 0;
-                this->attackInfo.tentPointsValues[_siegeIndex].tribeUID = 0;
-                this->attackInfo.tentPointsValues[_attackLocationIndex].tribeUID = _tribeUID;
-                int _y = this->attackInfo.tentPointsValues[_attackLocationIndex].y;
-                int _x = this->attackInfo.tentPointsValues[_attackLocationIndex].x;
-                this->attackInfo.tentPointsValues[_attackLocationIndex].tribeID = tribeID;
-                this->attackInfo.tentPointsValues[_attackLocationIndex].three = 3;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_siegeIndex].tribeID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_siegeIndex].tribeUID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].tribeUID = _tribeUID;
+                int _y = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].y;
+                int _x = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].x;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].tribeID = tribeID;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].three = 3;
                 int _playerID = DAT_TribesState::instance.tribes[tribeID].owner;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)_attackLocationIndex;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
