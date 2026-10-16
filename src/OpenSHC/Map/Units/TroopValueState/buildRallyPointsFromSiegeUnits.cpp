@@ -49,7 +49,7 @@ namespace Map {
                         }
                     }
                 }
-                psVar3 = psVar3 + 0x19a;
+                psVar3 = psVar3 + 1;
             } while ((int)psVar3 < 0x17623a2);
             if (DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex < 0) {
                 DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;
