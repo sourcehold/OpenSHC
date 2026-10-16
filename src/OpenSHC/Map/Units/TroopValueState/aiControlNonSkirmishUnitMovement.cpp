@@ -29,9 +29,9 @@ namespace Map {
             int _pitchTile;
             byte _nTribes;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::decrementTileMap1104, this)();
-            if (((DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR)
-                    && (DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER))
-                && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT)) {
+            if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .keep.id
                     < 1) {
@@ -48,13 +48,11 @@ namespace Map {
                               .aiControlStatusRelated;
                 if (iVar2 != -1000) {
                     if (!iVar2) {
-                        iVar2 = 0;
-                        do {
+                        for (int iVar2 = 0; iVar2 < 0x32; iVar2 = iVar2 + 1) {
                             if ((DAT_TroopValueState::instance.attackInfo.nof_tribes[iVar2] != 0)
                                 && (DAT_TroopValueState::instance.attackInfo.value3Array01[iVar2] != 6))
                                 goto LAB_0052103d;
-                            iVar2 = iVar2 + 1;
-                        } while (iVar2 < 0x32);
+                        }
                         *piVar1 = 600;
                     } else if (iVar2 < 1) {
                         if (iVar2 < 0) {
@@ -73,11 +71,11 @@ namespace Map {
                 for (_index = 1; _index < 50; _index++) {
                     DAT_TroopValueState::instance.attackInfo.attacker
                         = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[_index];
-                    if ((DAT_TroopValueState::instance.attackInfo.attacker != 1)
-                        && ((0 < DAT_TroopValueState::instance.attackInfo.attacker
+                    if (DAT_TroopValueState::instance.attackInfo.attacker != 1
+                        && (0 < DAT_TroopValueState::instance.attackInfo.attacker
                             || (_hasTribe = MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::searchTribeWithProperties, this)(_index),
-                                _hasTribe)))) {
+                                _hasTribe))) {
                         _nTribes = DAT_TroopValueState::instance.attackInfo.nof_tribes[_index];
                         DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]
                             .attackedPlayerID = 1;
@@ -87,8 +85,8 @@ namespace Map {
                             iVar2 = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
                             DAT_TroopValueState::instance.attackInfo.index = _index;
                             DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] = iVar2;
-                            if (((DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated) && (10 < iVar2))
-                                && (DAT_TroopValueState::instance.attackInfo.value3Array01[_index] != 6)) {
+                            if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated && 10 < iVar2
+                                && DAT_TroopValueState::instance.attackInfo.value3Array01[_index] != 6) {
                                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[_index] = 0;
                                 DAT_TroopValueState::instance.attackInfo.value3Array01[_index] = 6;
                                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition,
@@ -97,25 +95,22 @@ namespace Map {
                             iVar2 = DAT_TroopValueState::instance.attackInfo.value3Array01[_index];
                             if (!iVar2) {
                                 MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::initializeOrAdvanceAttackWave, this)(
-                                    _index);
+                                    Map::Units::TroopValueState_Func::initializeOrAdvanceAttackWave, this)(_index);
                             } else if (iVar2 == 1) {
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::advanceAttackWaveStaging, this)(_index);
+                                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::advanceAttackWaveStaging, this)(
+                                    _index);
                             } else if (iVar2 == 2) {
-                                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateInProgressAttackWave,
-                                    this)(_index);
+                                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateInProgressAttackWave, this)(
+                                    _index);
                             } else if (iVar2 == 3) {
                                 MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::executeAttackWaveTargetAssignment, this)(
-                                    _index);
+                                    Map::Units::TroopValueState_Func::executeAttackWaveTargetAssignment, this)(_index);
                             } else if (iVar2 == 4) {
                                 MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::executeDelayedAttackWaveTargetAssignment,
-                                    this)(_index);
+                                    Map::Units::TroopValueState_Func::executeDelayedAttackWaveTargetAssignment, this)(
+                                    _index);
                             } else if ((iVar2 != 5) && (iVar2 == 6)) {
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::TroopValueState_Func::updateActiveAttackWaveState, this)(
+                                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateActiveAttackWaveState, this)(
                                     _index);
                             }
                         }
