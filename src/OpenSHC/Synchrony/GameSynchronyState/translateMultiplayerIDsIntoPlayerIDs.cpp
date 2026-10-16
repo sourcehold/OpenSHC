@@ -15,39 +15,42 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EAF0
     uint GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs(int multiplayerID)
     {
-        if ((this->currentGameMode != Game::GM_SOLITARY)
-            && (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+        uint _playerID = 0;
+        if ((this->currentGameMode == Game::GM_SOLITARY)
+            || (this->currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
             /*
-              if in multiplayer
+              Used in singleplayer
              */
-            uint _playerID = (uint)(this->currentPlayerFullIDArray[1] == multiplayerID);
-            if (this->currentPlayerFullIDArray[2] == multiplayerID) {
-                _playerID = 2;
-            }
-            if (this->currentPlayerFullIDArray[3] == multiplayerID) {
-                _playerID = 3;
-            }
-            if (this->currentPlayerFullIDArray[4] == multiplayerID) {
-                _playerID = 4;
-            }
-            if (this->currentPlayerFullIDArray[5] == multiplayerID) {
-                _playerID = 5;
-            }
-            if (this->currentPlayerFullIDArray[6] == multiplayerID) {
-                _playerID = 6;
-            }
-            if (this->currentPlayerFullIDArray[7] == multiplayerID) {
-                _playerID = 7;
-            }
-            if (this->currentPlayerFullIDArray[8] == multiplayerID) {
-                _playerID = 8;
-            }
-            return _playerID;
+            return (uint)(this->currentPlayerSlotID);
         }
         /*
-          Used in singleplayer
+          if in multiplayer
          */
-        return (uint)(this->currentPlayerSlotID);
+        if (this->currentPlayerFullIDArray[1] == multiplayerID) {
+            _playerID = 1;
+        }
+        if (this->currentPlayerFullIDArray[2] == multiplayerID) {
+            _playerID = 2;
+        }
+        if (this->currentPlayerFullIDArray[3] == multiplayerID) {
+            _playerID = 3;
+        }
+        if (this->currentPlayerFullIDArray[4] == multiplayerID) {
+            _playerID = 4;
+        }
+        if (this->currentPlayerFullIDArray[5] == multiplayerID) {
+            _playerID = 5;
+        }
+        if (this->currentPlayerFullIDArray[6] == multiplayerID) {
+            _playerID = 6;
+        }
+        if (this->currentPlayerFullIDArray[7] == multiplayerID) {
+            _playerID = 7;
+        }
+        if (this->currentPlayerFullIDArray[8] == multiplayerID) {
+            _playerID = 8;
+        }
+        return _playerID;
     }
 
 }

@@ -28,7 +28,7 @@ namespace Synchrony {
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].playerUnk = this->DPLAYX_PlayerHandle;
         byte _commandType = (byte)commandType;
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType = _commandType;
-        if (this->mapTimeInTicksSinglePlayer < (int)DAT_GameCore::instance.mapTimeInTicks) {
+        if ((int)DAT_GameCore::instance.mapTimeInTicks > (int)this->mapTimeInTicksSinglePlayer) {
             this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time
                 = this->commandDelay + DAT_GameCore::instance.mapTimeInTicks;
         } else {
@@ -46,7 +46,16 @@ namespace Synchrony {
                 .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
         this->DAT_CommandParameterOffset = 0;
         dword _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
-        if ((int)_time <= 0) {
+        if (0 < (int)_time) {
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::transmitCommand, this)(_commandType,
+                (undefined4)((int)(_time)),
+                (char*)((int)(&this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].parameters)),
+                (size_t)((int)(this->DAT_CommandSize)), this->DAT_PlayerIDReceiver);
+            this->DAT_GameCommandArrayIndex = this->DAT_GameCommandArrayIndex + 1;
+            if (200 <= (int)this->DAT_GameCommandArrayIndex) {
+                this->DAT_GameCommandArrayIndex = 0;
+            }
+        } else {
             /*
               time == 0 means it is an immediate (out of game time) command, commands that   don't change game state
               (gold, buildings, units, etc.), but rather operate on   a meta level
@@ -69,15 +78,6 @@ namespace Synchrony {
             }
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearGameCommandEntry, this)(
                 this->DAT_CurrentGameCommandID);
-        } else {
-            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::transmitCommand, this)(_commandType,
-                (undefined4)((int)(_time)),
-                (char*)((int)(&this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].parameters)),
-                (size_t)((int)(this->DAT_CommandSize)), this->DAT_PlayerIDReceiver);
-            this->DAT_GameCommandArrayIndex = this->DAT_GameCommandArrayIndex + 1;
-            if (199 < this->DAT_GameCommandArrayIndex) {
-                this->DAT_GameCommandArrayIndex = 0;
-            }
         }
     }
 

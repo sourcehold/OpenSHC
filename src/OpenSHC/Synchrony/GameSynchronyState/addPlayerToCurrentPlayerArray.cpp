@@ -3,6 +3,8 @@
 
 #include "OpenSHC/Game/GameMode.hpp"
 
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+
 namespace OpenSHC {
 namespace Synchrony {
 
@@ -25,7 +27,7 @@ namespace Synchrony {
             _slot_2 = _slot_2 + 1;
             _pFullIdArrayPlus1 = _pFullIdArrayPlus1 + 1;
         } while (_slot_2 < 9);
-        if (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER) {
             _slot = 1;
             _pFullIdArrayPlus1_2 = _fullIDArray;
             do {
@@ -37,13 +39,14 @@ namespace Synchrony {
             } while (_slot < 9);
         }
         _slot = 1;
-        while (*_fullIDArray != -1 && *_fullIDArray != playerFullID) {
+        _pFullIdArrayPlus1 = _fullIDArray;
+        do {
+            if ((*_pFullIdArrayPlus1 == -1) || (*_pFullIdArrayPlus1 == playerFullID))
+                goto LAB_0047ebf4;
             _slot = _slot + 1;
-            _fullIDArray = _fullIDArray + 1;
-            if (8 < _slot) {
-                return 0;
-            }
-        }
+            _pFullIdArrayPlus1 = _pFullIdArrayPlus1 + 1;
+        } while (_slot < 9);
+        return 0;
     LAB_0047ebf4:
         this->currentPlayerFullIDArray[_slot] = playerFullID;
         return _slot;

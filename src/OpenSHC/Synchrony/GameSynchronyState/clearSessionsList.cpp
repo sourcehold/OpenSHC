@@ -14,18 +14,17 @@ namespace Synchrony {
         void* pvVar1;
         int iVar2;
         iVar2 = 0;
-        if (DAT_GameSynchronyState::instance.DPLAY_SessionsCount < 1) {
-            DAT_GameSynchronyState::instance.DPLAY_SessionsCount = 0;
+        if (0 < this->DPLAY_SessionsCount) {
+            do {
+                MACRO_CALL(OS_Func::_free_base)(DAT_GameSynchronyState::instance.DPLAY_SessionNames[iVar2]);
+                pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[iVar2]);
+                GlobalUnlock(pvVar1);
+                pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[iVar2]);
+                GlobalFree(pvVar1);
+                iVar2 = iVar2 + 1;
+            } while (iVar2 < this->DPLAY_SessionsCount);
         }
-        do {
-            MACRO_CALL(OS_Func::_free_base)(DAT_GameSynchronyState::instance.DPLAY_SessionNames[iVar2]);
-            pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[iVar2]);
-            GlobalUnlock(pvVar1);
-            pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[iVar2]);
-            GlobalFree(pvVar1);
-            iVar2 = iVar2 + 1;
-        } while (iVar2 < DAT_GameSynchronyState::instance.DPLAY_SessionsCount);
-        DAT_GameSynchronyState::instance.DPLAY_SessionsCount = 0;
+        this->DPLAY_SessionsCount = 0;
     }
 
 }

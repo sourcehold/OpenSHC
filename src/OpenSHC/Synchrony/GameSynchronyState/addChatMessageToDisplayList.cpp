@@ -13,10 +13,8 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047F6A0
     void GameSynchronyState::addChatMessageToDisplayList(int subjectPlayerID, int objectPlayerID)
     {
-        char (*src)[250];
-        char (*destination)[250];
         this->DAT_ChatMessageArrayIndex = this->DAT_ChatMessageArrayIndex + 1;
-        if (20 < this->DAT_ChatMessageArrayIndex) {
+        if (20 <= (int)this->DAT_ChatMessageArrayIndex) {
             this->DAT_ChatMessageArrayIndex = 0;
         }
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].subjectPlayer = subjectPlayerID;
@@ -31,18 +29,18 @@ namespace Synchrony {
             (void*)((int)(this->receivedChatMessage)),
             (void*)((int)(this->DAT_ChatMessageArray + this->DAT_ChatMessageArrayIndex)));
         if (!subjectPlayerID) {
-            destination = this->DAT_ChatMessageSubjectPlayerNameArray + this->DAT_ChatMessageArrayIndex;
             /*
               "Host"   added by script: "Host"
              */
-            src = (char (*)[250])MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)76, 7);
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
+                (void*)((int)(MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)76, 7))),
+                (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray + this->DAT_ChatMessageArrayIndex)));
         } else {
-            destination = this->DAT_ChatMessageSubjectPlayerNameArray + this->DAT_ChatMessageArrayIndex;
-            src = this->DAT_PlayerNames + subjectPlayerID;
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
+                (void*)((int)(this->DAT_PlayerNames + subjectPlayerID)),
+                (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray + this->DAT_ChatMessageArrayIndex)));
         }
-        MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-            250, (void*)((int)(src)), (void*)((int)(destination)));
         if (objectPlayerID) {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
                 (void*)((int)(this->DAT_PlayerNames + objectPlayerID)),

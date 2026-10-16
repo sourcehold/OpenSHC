@@ -11,21 +11,15 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EDE0
     undefined4 GameSynchronyState::checkAllPlayersReadyAndCleanupSlots()
     {
-        int* piVar1;
-        int iVar2;
-        if (!this->isHost) {
-            if (!this->lobbyStateReceived) {
-                return (undefined4)(0);
-            }
-        } else {
-            iVar2 = 1;
-            piVar1 = this->unknownPlayerInfo_01;
+        if (this->isHost) {
+            int iVar2 = 1;
+            int* piVar1 = this->unknownPlayerInfo_01 + 1;
             do {
-                piVar1 = piVar1 + 1;
                 if ((piVar1[-0x419c2] != -1) && (*piVar1 == 0)) {
                     return (undefined4)(0);
                 }
                 iVar2 = iVar2 + 1;
+                piVar1 = piVar1 + 1;
             } while (iVar2 < 9);
             if (this->somePlayerRelatedArray[1] == 0) {
                 this->currentPlayerFullIDArray[1] = -1;
@@ -50,10 +44,13 @@ namespace Synchrony {
             }
             if (this->somePlayerRelatedArray[8] == 0) {
                 this->currentPlayerFullIDArray[8] = -1;
-                return (undefined4)(1);
             }
+            return (undefined4)(1);
         }
-        return (undefined4)(1);
+        if (this->lobbyStateReceived) {
+            return (undefined4)(1);
+        }
+        return (undefined4)(0);
     }
 
 }

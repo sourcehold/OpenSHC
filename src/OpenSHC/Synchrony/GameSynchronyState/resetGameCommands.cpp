@@ -16,15 +16,9 @@ namespace Synchrony {
         this->DAT_GameCommandArrayIndex = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             0x3e1c0, '\0', (void*)((int)(this->DAT_GameCommandArray)));
-        this->DAT_LagIndicatorPerPlayer[0] = 1000;
-        this->DAT_LagIndicatorPerPlayer[1] = 1000;
-        this->DAT_LagIndicatorPerPlayer[2] = 1000;
-        this->DAT_LagIndicatorPerPlayer[3] = 1000;
-        this->DAT_LagIndicatorPerPlayer[4] = 1000;
-        this->DAT_LagIndicatorPerPlayer[5] = 1000;
-        this->DAT_LagIndicatorPerPlayer[6] = 1000;
-        this->DAT_LagIndicatorPerPlayer[7] = 1000;
-        this->DAT_LagIndicatorPerPlayer[8] = 1000;
+        for (int _player = 0; _player < 9; _player = _player + 1) {
+            this->DAT_LagIndicatorPerPlayer[_player] = 1000;
+        }
     }
 
 }
