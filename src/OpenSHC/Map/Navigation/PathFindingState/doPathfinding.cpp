@@ -62,7 +62,11 @@ namespace Map {
             int iVar4 = (DAT_DirectionAlgorithmState::instance.distanceHigh + 4)
                 * (DAT_DirectionAlgorithmState::instance.distanceHigh + 4) * 10;
             this->searchQueue.pathPlanIndex = 0;
-            if (this->notAllAssassinsUnk == 0) {
+            if (this->notAllAssassinsUnk != 0) {
+                BVar3 = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius, this)(
+                    this->unitX, (uint)(this->unitY), this->destinationX, this->destinationY, 100000, FALSE);
+            } else {
                 if (this->allAssassinsUnk == 0) {
                     BVar3 = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk, this)(
@@ -72,31 +76,27 @@ namespace Map {
                         OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius, this)(
                         this->unitX, (uint)(this->unitY), this->destinationX, this->destinationY, iVar4, FALSE);
                 }
-                if (BVar3 != FALSE)
-                    goto LAB_004a9cdd;
-                if (this->allAssassinsUnk == 0) {
-                    if (this->climbIsIllegal == 0)
-                        goto LAB_004a9cce;
-                    BVar3 = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::findPathUsingClimbingWithHeightMargin16, this)(
-                        this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY),
-                        100000, FALSE);
-                } else {
-                    BVar3 = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded, this)(
-                        this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY),
-                        100000, 0);
+                if (BVar3 == FALSE) {
+                    if (this->allAssassinsUnk != 0) {
+                        BVar3 = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded, this)(
+                            this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY),
+                            100000, 0);
+                    } else if (this->climbIsIllegal != 0) {
+                        BVar3 = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::findPathUsingClimbingWithHeightMargin16,
+                            this)(this->unitX, (uint)(this->unitY), (uint)(this->destinationX),
+                            (uint)(this->destinationY), 100000, FALSE);
+                    } else {
+                        BVar3 = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius, this)(
+                            this->unitX, (uint)(this->unitY), this->destinationX, this->destinationY, 100000, FALSE);
+                    }
                 }
-            } else {
-            LAB_004a9cce:
-                BVar3 = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius, this)(
-                    this->unitX, (uint)(this->unitY), this->destinationX, this->destinationY, 100000, FALSE);
             }
             if (BVar3 == FALSE) {
                 return (dword)(0);
             }
-        LAB_004a9cdd:
             if (this->allAssassinsUnk == 0) {
                 if (this->climbIsIllegal == 0) {
                     iVar4 = 1;
