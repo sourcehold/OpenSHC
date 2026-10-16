@@ -10,7 +10,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB330
-    uint AICState::aiShouldBuildQuarry(PlayerID playerID)
+    uint AICState::aiShouldBuildQuarry(int playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
