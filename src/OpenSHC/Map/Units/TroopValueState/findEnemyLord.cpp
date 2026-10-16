@@ -10,9 +10,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A220
         int TroopValueState::findEnemyLord(int param_1)
         {
-            int iVar1;
             int* piVar2;
-            iVar1 = 0;
+            int iVar1 = 0;
             if (this->attackInfo.lord3 < 1) {
                 return 0;
             }
