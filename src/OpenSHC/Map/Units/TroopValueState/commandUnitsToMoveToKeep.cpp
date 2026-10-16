@@ -16,6 +16,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -45,8 +46,10 @@ namespace Map {
             int _theTribe;
             BuildingTypeShort _buildingType;
             uint _max;
-            _playerID = this->attackInfo.pitchRelatedPlayerID;
-            _keep = DAT_GameState::instance.playerDataArray[this->attackInfo.pitchRelatedPlayerID].keep.id;
+            _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
+            _keep
+                = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID]
+                      .keep.id;
             if (0 < (int)_keep) {
                 _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
                 if (_buildingType == Map::Buildings::BT_MANORHOUSE) {
@@ -67,7 +70,7 @@ namespace Map {
                     y1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].y + 5;
                 }
                 _swordsTribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
-                    this->attackInfo.pitchRelatedPlayerID, 0);
+                    DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, 0);
                 DAT_TribesState::instance.tribes[_swordsTribe].tribeType = AI::Tribes::AITT_SWORDSMEN;
                 _archersTribe
                     = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(_playerID, 0);
