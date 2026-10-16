@@ -73,7 +73,7 @@ namespace Map {
             local_24 = 1;
             while (true) {
                 while (true) {
-                    if ((_inBounds) && ((int)local_24 <= 1)) {
+                    if (_inBounds && (int)local_24 <= 1) {
                         return (uint)(this->searchQueue.pathPlanIndex);
                     }
                     iVar4 = 2;
