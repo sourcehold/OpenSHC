@@ -24,7 +24,7 @@ namespace Game {
         int keepTile = this->playerDataArray[playerID].campground.tileEntry;
         int signpostTile = this->mapAndTime
                                .signpostEntryData[(
-                                   &DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray)[signpostSlot]]
+                                   &DAT_TroopValueState::instance.attackInfo.field121392_0x4690c)[signpostSlot]]
                                .tile;
         if (DAT_TileMapState::instance.PathConnectionLayer[keepTile] == 0) {
             return FALSE;

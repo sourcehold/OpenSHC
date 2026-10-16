@@ -15,7 +15,7 @@ namespace Game {
     {
         this->mapAndTime.field193_0x198 = 0;
         this->mapAndTime.deerCount = 0;
-        this->mapAndTime.field3166_0x277c = 0;
+        this->mapAndTime.wildlifeCount = 0;
         this->mapAndTime.field3168_0x2790 = 0;
         this->mapAndTime.field3170_0x27a4 = 0;
         this->mapAndTime.field3172_0x27ac = 0;

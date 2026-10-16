@@ -65,7 +65,7 @@ namespace Game {
                 DAT_GameState::instance.mapAndTime.populationIndex = 0;
                 memset(DAT_GameState::instance.mapAndTime.lionLocationsXY, 0,
                     sizeof(DAT_GameState::instance.mapAndTime.lionLocationsXY));
-                DAT_GameState::instance.mapAndTime.field2269_0xdee = 0;
+                DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor = 0;
                 DAT_GameState::instance.mapAndTime.unitLadyRelated = 0;
                 DAT_GameState::instance.mapAndTime.unitJesterRelated = 0;
             }
@@ -77,24 +77,20 @@ namespace Game {
                             unitID);
                     }
                 }
-                /*
-                  clears the 32 fields from field3092_0x2654 up to and including field3123_0x26d0 as one array,
-                  exactly as the original binary does
-                 */
                 for (int index = 0; index < 32; index++) {
-                    (&DAT_GameState::instance.mapAndTime.field3092_0x2654)[index] = 0;
+                    DAT_GameState::instance.mapAndTime.scenarioEventTimers[index] = 0;
                 }
             }
             if ((int)receivedMapVersion < 0x87) {
                 /*
-                  field2_0x8 to field11_0x2c, field12_0x30 to field21_0x54, field22_0x58 and field23_0x80 to
+                  field2_0x8 to field11_0x2c, field12_0x30 to field21_0x54, playerKeepTile and field23_0x80 to
                   field32_0xa4 are four arrays of ten entries that are reset together, exactly as the original
                   binary does
                  */
                 for (int index = 0; index < 10; index++) {
                     (&DAT_GameState::instance.mapAndTime.field2_0x8)[index] = 0;
                     (&DAT_GameState::instance.mapAndTime.field12_0x30)[index] = 0;
-                    DAT_GameState::instance.mapAndTime.field22_0x58[0][index] = -1;
+                    DAT_GameState::instance.mapAndTime.playerKeepTile[index] = -1;
                     (&DAT_GameState::instance.mapAndTime.field23_0x80)[index] = -1;
                 }
             }
@@ -135,7 +131,7 @@ namespace Game {
             }
             if ((int)receivedMapVersion < 141) {
                 /*
-                  the four arrays of ten entries starting at field2_0x8, field12_0x30, field22_0x58 and field23_0x80
+                  the four arrays of ten entries starting at field2_0x8, field12_0x30, playerKeepTile and field23_0x80
                   are copied from the ones starting at field3124_0x26d4, field3134_0x26fc, field3144_0x2724 and
                   field3154_0x274c, exactly as the original binary does
                  */
@@ -144,7 +140,7 @@ namespace Game {
                         = (&DAT_GameState::instance.mapAndTime.field3124_0x26d4)[index];
                     (&DAT_GameState::instance.mapAndTime.field12_0x30)[index]
                         = (&DAT_GameState::instance.mapAndTime.field3134_0x26fc)[index];
-                    DAT_GameState::instance.mapAndTime.field22_0x58[0][index]
+                    DAT_GameState::instance.mapAndTime.playerKeepTile[index]
                         = (&DAT_GameState::instance.mapAndTime.field3144_0x2724)[index];
                     (&DAT_GameState::instance.mapAndTime.field23_0x80)[index]
                         = (&DAT_GameState::instance.mapAndTime.field3154_0x274c)[index];
