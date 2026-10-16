@@ -10,6 +10,7 @@
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -25,45 +26,48 @@ namespace Map {
             BOOLEnum BVar1;
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
-                this->attackInfo.pitchRelatedPlayerID = 1;
-                this->attackInfo.playerID_0x2c850 = 2;
+                DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID = 1;
+                DAT_TroopValueState::instance.attackInfo.playerID_0x2c850 = 2;
             } else {
-                this->attackInfo.pitchRelatedPlayerID
+                DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID
                     = MACRO_CALL(Map::Units_Func::FindFirstOpponentWithKeep)();
-                this->attackInfo.playerID_0x2c850 = 1;
+                DAT_TroopValueState::instance.attackInfo.playerID_0x2c850 = 1;
             }
-            if (!this->attackInfo.aiTickPhase) {
-                this->attackInfo.unitsSentToKeepFlag = this->attackInfo.aiTickPhase;
-                this->attackInfo.attackInfoTickWrapCount = this->attackInfo.aiTickPhase;
+            if (!DAT_TroopValueState::instance.attackInfo.aiTickPhase) {
+                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag
+                    = DAT_TroopValueState::instance.attackInfo.aiTickPhase;
+                DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                    = DAT_TroopValueState::instance.attackInfo.aiTickPhase;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::collectArcherUnitsByLocation, this)();
                 MACRO_CALL_MEMBER(
                     Map::Units::TroopValueState_Func::assignMacemenAndKnightsNotFromPlayer1ToTribes, this)();
-            } else if (this->attackInfo.aiTickPhase == 1) {
+            } else if (DAT_TroopValueState::instance.attackInfo.aiTickPhase == 1) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateArcherBrazierProximityFlags, this)();
-            } else if ((this->attackInfo.aiTickPhase != 0x32) && (this->attackInfo.aiTickPhase != 100)) {
-                if (this->attackInfo.aiTickPhase == 0x46) {
+            } else if ((DAT_TroopValueState::instance.attackInfo.aiTickPhase != 0x32)
+                && (DAT_TroopValueState::instance.attackInfo.aiTickPhase != 100)) {
+                if (DAT_TroopValueState::instance.attackInfo.aiTickPhase == 0x46) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::trySendMacemenTribeToAttack, this)();
-                } else if (this->attackInfo.aiTickPhase == 0x3c) {
+                } else if (DAT_TroopValueState::instance.attackInfo.aiTickPhase == 0x3c) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::trySendKnightTribeToAttack, this)();
                 }
             }
-            if (!(this->attackInfo.aiTickPhase & 0xfU)) {
+            if (!(DAT_TroopValueState::instance.attackInfo.aiTickPhase & 0xfU)) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::queueOilThrowForIdleArchers, this)();
             }
-            if (((byte)this->attackInfo.aiTickPhase & 0xf) == 8) {
-                MACRO_CALL_MEMBER(
-                    Map::Units::TroopValueState_Func::redeployArchersToDefensivePositions, this)();
+            if (((byte)DAT_TroopValueState::instance.attackInfo.aiTickPhase & 0xf) == 8) {
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::redeployArchersToDefensivePositions, this)();
             }
-            this->attackInfo.aiTickPhase = this->attackInfo.aiTickPhase + 1;
-            if (100 < this->attackInfo.aiTickPhase) {
-                this->attackInfo.attackInfoTickWrapCount = this->attackInfo.attackInfoTickWrapCount + 1;
-                this->attackInfo.aiTickPhase = 2;
+            DAT_TroopValueState::instance.attackInfo.aiTickPhase
+                = DAT_TroopValueState::instance.attackInfo.aiTickPhase + 1;
+            if (100 < DAT_TroopValueState::instance.attackInfo.aiTickPhase) {
+                DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                    = DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount + 1;
+                DAT_TroopValueState::instance.attackInfo.aiTickPhase = 2;
             }
-            BVar1
-                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::unitsCanMoveFromKeepOfPlayerToAnotherArea,
-                    DAT_GameState::ptr)(1);
-            if ((BVar1) && (!this->attackInfo.unitsSentToKeepFlag)) {
-                this->attackInfo.unitsSentToKeepFlag = 1;
+            BVar1 = MACRO_CALL_MEMBER(
+                Game::GameStateStructures_Func::unitsCanMoveFromKeepOfPlayerToAnotherArea, DAT_GameState::ptr)(1);
+            if ((BVar1) && (!DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag)) {
+                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::commandUnitsToMoveToKeep, this)();
             }
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::processSpottedEnemyTiles, this)();
