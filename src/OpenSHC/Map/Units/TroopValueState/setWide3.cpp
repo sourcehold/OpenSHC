@@ -22,7 +22,7 @@ namespace Map {
             if (0 < iVar2) {
                 piVar4 = (int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + iVar3 + 0xc);
                 do {
-                    if ((piVar4[-1] < 5999) && ((*piVar4 == 0 || (param_1)))) {
+                    if (piVar4[-1] < 5999 && (*piVar4 == 0 || (param_1))) {
                         piVar1 = (int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + iVar3 + -4);
                         *piVar1 = *piVar1 + 1;
                     }
