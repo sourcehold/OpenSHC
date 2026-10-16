@@ -25,7 +25,7 @@ namespace Synchrony {
         GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address)
     {
         uint _playerID;
-        if (this->DAT_GameCommandArrayIndex < 200) {
+        if ((int)this->DAT_GameCommandArrayIndex < 200) {
             if ((undefined1)commandCategory
                 == (Commands::GCT_SEND_RESYNC_TILEMAPDATA2 | Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS)) {
                 DAT_GameSynchronyState::instance.unknownIncrementBy40_01

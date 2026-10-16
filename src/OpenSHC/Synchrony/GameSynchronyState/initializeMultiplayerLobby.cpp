@@ -17,7 +17,7 @@ namespace Synchrony {
         int _wsaReturnCode2;
         hostent* _hostent;
         int _hostAddressIndex;
-        _union_1226* p_Var1;
+        IN_ADDR* p_Var1;
         WSADATA _wsaData;
         char _hostNameBuffer[80];
         uint local_4;
@@ -57,12 +57,12 @@ namespace Synchrony {
             if (((_wsaReturnCode2 != -1) && (_hostent = gethostbyname(_hostNameBuffer), _hostent != (hostent*)0x0))
                 && (*_hostent->h_addr_list != (char*)0x0)) {
                 _hostAddressIndex = 0;
-                p_Var1 = &this->lanIP.S_un;
+                p_Var1 = &this->lanIP;
                 do {
                     if (7 < _hostAddressIndex)
                         break;
-                    p_Var1[-2].S_addr = 1;
-                    *p_Var1 = **(_union_1226**)(_hostAddressIndex + (int)_hostent->h_addr_list);
+                    p_Var1[-2].S_un.S_addr = 1;
+                    *p_Var1 = **(IN_ADDR**)(_hostAddressIndex + (int)_hostent->h_addr_list);
                     _hostAddressIndex = _hostAddressIndex + 4;
                     p_Var1 = p_Var1 + 1;
                 } while (*(int*)(_hostAddressIndex + (int)_hostent->h_addr_list) != 0);

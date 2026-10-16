@@ -6,8 +6,12 @@
 #include "OpenSHC/DirectPlay/EnumSessionsFlagsEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 #include "OpenSHC/Globals/TIME_EnumerateSessionsMoment.hpp"
+
+#include "OpenSHC/Globals/GUID_NULL_CONSTANT.hpp"
+#include "OpenSHC/Globals/GUID_UNKNOWN.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -22,28 +26,16 @@ namespace Synchrony {
         DPSESSIONDESC2 _dpSessionDesc2;
         uint local_4 = MSVC_SecurityCookie::instance ^ (uint)&_pGUID;
         DWORD _now = timeGetTime();
-        _pGUID.Data2 = 0;
-        _pGUID.Data3 = 0;
-        _pGUID.Data1 = 0;
-        _pGUID.Data4[0] = '\0';
-        _pGUID.Data4[1] = '\0';
-        _pGUID.Data4[2] = '\0';
-        _pGUID.Data4[3] = '\0';
-        _pGUID.Data4[4] = '\0';
-        _pGUID.Data4[5] = '\0';
-        _pGUID.Data4[6] = '\0';
-        _pGUID.Data4[7] = '\0';
+        _pGUID = GUID_NULL_CONSTANT::instance;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::fetchSessionGUID, this)(&_pGUID);
         if (this->unkEnumerationRelatedBool == false
-            && (respectTimeout != TRUE || (2999 < (int)(_now - TIME_EnumerateSessionsMoment::instance)))) {
+            && (respectTimeout != TRUE || (int)(_now - TIME_EnumerateSessionsMoment::instance) >= 3000)) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearSessionsList, this)();
             MACRO_CALL(OS_Func::_memset)(&_dpSessionDesc2, 0, 0x50);
-            static const GUID _sessionAppGuid
-                = { 0x1d5e2f48, 0xe8c0, 0x49e5, { 0xae, 0xd8, 0xb1, 0x24, 0xda, 0x9e, 0x30, 0x59 } };
-            _dpSessionDesc2.guidApplication = _sessionAppGuid;
-            this->unkEnumerationRelatedBool = true;
             _dpSessionDesc2.dwSize = 0x50;
-            if (this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
+            _dpSessionDesc2.guidApplication = GUID_UNKNOWN::instance;
+            this->unkEnumerationRelatedBool = true;
+            if (DAT_GameSynchronyState::instance.DPLAYX_4A != (IDirectPlay4A*)0x0) {
                 /*
                   pointer to a pointer to a function
                  */

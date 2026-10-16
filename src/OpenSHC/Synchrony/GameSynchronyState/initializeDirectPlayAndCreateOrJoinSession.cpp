@@ -11,6 +11,8 @@
 #include "OpenSHC/Globals/GUID_IID_IDirectPlay4.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
+#include "OpenSHC/Globals/GUID_UNKNOWN.hpp"
+
 namespace OpenSHC {
 namespace Synchrony {
 
@@ -71,18 +73,11 @@ namespace Synchrony {
                 goto LAB_release;
             if (this->isHost) {
                 MACRO_CALL(OS_Func::_memset)(&_session, 0, (size_t)((int)(80)));
-                _session.guidApplication.Data1 = 0x1d5e2f48;
-                memcpy(_session.guidApplication.Data4 + 4, "ڞ0Y", 4);
+                _session.guidApplication = GUID_UNKNOWN::instance;
                 _session.dwSize = 80;
                 _session.dwFlags = DPSESSION_OPTIMIZELATENCY
                     | DPSESSION_DIRECTPLAYPROTOCOL | DPSESSION_KEEPALIVE
                     | DPSESSION_MIGRATEHOST;
-                _session.guidApplication.Data2 = 0xe8c0;
-                _session.guidApplication.Data3 = 0x49e5;
-                _session.guidApplication.Data4[0] = 0xae;
-                _session.guidApplication.Data4[1] = 0xd8;
-                _session.guidApplication.Data4[2] = 0xb1;
-                _session.guidApplication.Data4[3] = 0x24;
                 _session.dwMaxPlayers = 8;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setDPlaySessionNameValue, this)();
                 _session.lpszSessionName = this->DPLAYX_SessionName;
@@ -104,15 +99,8 @@ namespace Synchrony {
         } else {
             _dplay4 = this->DPLAYX_4A;
             MACRO_CALL(OS_Func::_memset)(&_session, 0, (size_t)((int)(80)));
-            _session.guidApplication.Data1 = 0x1d5e2f48;
-            _session.guidApplication.Data2 = 0xe8c0;
-            _session.guidApplication.Data3 = 0x49e5;
-            memcpy(_session.guidApplication.Data4 + 4, "ڞ0Y", 4);
+            _session.guidApplication = GUID_UNKNOWN::instance;
             _session.guidInstance.Data1 = DPLAY_CurrentSessionGUID::instance.Data1;
-            _session.guidApplication.Data4[0] = 0xae;
-            _session.guidApplication.Data4[1] = 0xd8;
-            _session.guidApplication.Data4[2] = 0xb1;
-            _session.guidApplication.Data4[3] = 0x24;
             _session.guidInstance.Data4[0] = DPLAY_CurrentSessionGUID::instance.Data4[0];
             _session.guidInstance.Data4[1] = DPLAY_CurrentSessionGUID::instance.Data4[1];
             _session.guidInstance.Data4[2] = DPLAY_CurrentSessionGUID::instance.Data4[2];

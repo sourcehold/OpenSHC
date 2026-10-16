@@ -41,9 +41,9 @@ namespace Synchrony {
         short sVar2;
         PlayerData* psVar3;
         int* piVar3;
-        PlayerData* piVar4;
+        int* piVar4;
         int iVar4;
-        PlayerData* piVar5;
+        int* piVar5;
         int _deadPlayerID;
         int iVar5;
         int* piVar6;
@@ -101,7 +101,7 @@ namespace Synchrony {
                 local_44[0xd] = 0;
                 local_44[0x10] = 0;
                 local_44[0xf] = 0;
-                piVar5 = &DAT_GameState::instance.playerDataArray[2];
+                piVar5 = &DAT_GameState::instance.playerDataArray[2].lordKilledByPlayerID;
                 local_68 = this->currentAIArray + 1;
                 do {
                     if ((piVar3[-0x1b] != -1) || (*piVar3 != 0)) {
@@ -114,7 +114,7 @@ namespace Synchrony {
                     if ((piVar3[-0x1a] != -1) || (piVar3[1] != 0)) {
                         iVar7 = piVar3[-0x1e824c];
                         (&iStack_48)[iVar7 * 2] = (&iStack_48)[iVar7 * 2] + 1;
-                        if (piVar5->lordKilledByPlayerID) {
+                        if (*piVar5 != 0) {
                             local_44[iVar7 * 2] = local_44[iVar7 * 2] + 1;
                         }
                     }
@@ -185,7 +185,7 @@ namespace Synchrony {
                 local_44[7] = 0;
                 if (iVar5 < iVar10 + -1) {
                     if (!DAT_GameCore::instance.mapU4Int0) {}
-                    piVar4 = &DAT_GameState::instance.playerDataArray[2];
+                    piVar4 = &DAT_GameState::instance.playerDataArray[2].lordKilledByPlayerID;
                     bVar1 = false;
                     piVar3 = local_68;
                     do {
@@ -193,7 +193,7 @@ namespace Synchrony {
                             iVar7 = piVar3[-0x1e824d];
                             bVar1 = true;
                         }
-                        if (((piVar3[-0x1a] != -1) || (piVar3[1] != 0)) && (!piVar4->lordKilledByPlayerID)) {
+                        if (((piVar3[-0x1a] != -1) || (piVar3[1] != 0)) && (*piVar4 == 0)) {
                             iVar7 = piVar3[-0x1e824c];
                             bVar1 = true;
                         }

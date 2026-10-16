@@ -51,7 +51,7 @@ namespace Synchrony {
                 /*
                   Receive(lpidFrom, lpidTo, dwFlags, lpData, lpdwDataSize)   DPRECEIVE_ALL = 1
                  */
-                this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->Receive((LPDPID)0x191de04, (LPDPID)0x191de08, DPRECEIVE_ALL, (void*)0x191e440, (DWORD*)0x194af84);
+                this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->Receive((LPDPID)&this->DPLAYX_ReceivedPlayerID, (LPDPID)&this->DPLAY_ToID, DPRECEIVE_ALL, &this->DPLAY_ReceiveData, (DWORD*)&this->DPLAY_ReceiveDataSize);
                 if ((this->DPLAYX_SendAndReceiveREsult == -0x7ffffff6)
                     || (this->DPLAYX_SendAndReceiveREsult == -0x7788ff42))
                     goto LAB_00490905;

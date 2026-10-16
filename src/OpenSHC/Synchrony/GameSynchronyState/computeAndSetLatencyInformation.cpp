@@ -25,7 +25,7 @@ namespace Synchrony {
             this->syncRelatedCounter = this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol;
             this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle,
                 this->DPLAYX_ReceivedPlayerID, DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC | DPSEND_GUARANTEED,
-                (void*)0x1998398, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
+                &this->syncPacketType, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
             if (!this->DPLAYX_SendAndReceiveREsult) {}
             if (this->DPLAYX_SendAndReceiveREsult == -0x7ffffff6) {}
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();

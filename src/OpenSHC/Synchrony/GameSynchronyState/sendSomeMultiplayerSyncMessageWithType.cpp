@@ -24,7 +24,7 @@ namespace Synchrony {
             this->syncPacket2Type = (undefined1)syncPacketType2;
             this->syncParamTimeDiff = (undefined1)this->clTimeDiff;
             this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, 0,
-                DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC, (void*)0x194af7c, 5, 65533, 0, (void*)0x0, (DWORD_PTR*)0x0);
+                DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC, &this->syncPacket2Type, 5, 65533, 0, (void*)0x0, (DWORD_PTR*)0x0);
             if ((this->DPLAYX_SendAndReceiveREsult) && (this->DPLAYX_SendAndReceiveREsult != -0x7ffffff6)) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
             }
@@ -44,31 +44,31 @@ namespace Synchrony {
                         _maxLatency = this->connectionLagInfoArray[1].average1;
                     }
                     if ((this->currentPlayerFullIDArray[2] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[2].average1)) {
+                        && (this->connectionLagInfoArray[2].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[2].average1;
                     }
                     if ((this->currentPlayerFullIDArray[3] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[3].average1)) {
+                        && (this->connectionLagInfoArray[3].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[3].average1;
                     }
                     if ((this->currentPlayerFullIDArray[4] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[4].average1)) {
+                        && (this->connectionLagInfoArray[4].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[4].average1;
                     }
                     if ((this->currentPlayerFullIDArray[5] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[5].average1)) {
+                        && (this->connectionLagInfoArray[5].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[5].average1;
                     }
                     if ((this->currentPlayerFullIDArray[6] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[6].average1)) {
+                        && (this->connectionLagInfoArray[6].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[6].average1;
                     }
                     if ((this->currentPlayerFullIDArray[7] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[7].average1)) {
+                        && (this->connectionLagInfoArray[7].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[7].average1;
                     }
                     if ((this->currentPlayerFullIDArray[8] != -1)
-                        && (_maxLatency < this->connectionLagInfoArray[8].average1)) {
+                        && (this->connectionLagInfoArray[8].average1 > _maxLatency)) {
                         _maxLatency = this->connectionLagInfoArray[8].average1;
                     }
                     if (_maxLatency < 2) {
@@ -81,7 +81,7 @@ namespace Synchrony {
                             _countdown = 50;
                         }
                     }
-                    if (this->commandDelay < _countdown) {
+                    if ((int)this->commandDelay < _countdown) {
                         this->commandDelay = _countdown;
                     }
                 }
