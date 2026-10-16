@@ -22,8 +22,8 @@ namespace AI {
             return;
         }
 
-        int allowIronMines = 1;
         int allowArmourers = 1;
+        int allowIronMines = 1;
         int allowFletchers = 1;
         int allowPitchRigs = 1;
         int allowWoodcutters = 1;
