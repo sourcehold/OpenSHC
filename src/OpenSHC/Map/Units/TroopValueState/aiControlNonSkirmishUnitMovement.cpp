@@ -123,7 +123,7 @@ namespace Map {
                         DAT_TroopValueState::instance.attackInfo.unknownByteArray02[_index] = 0;
                     }
                 }
-                DAT_TroopValueState::instance.attackInfo.field86986_0x20f98 = 0;
+                DAT_TroopValueState::instance.attackInfo.attackWaveSweepActive = 0;
             }
         }
 
