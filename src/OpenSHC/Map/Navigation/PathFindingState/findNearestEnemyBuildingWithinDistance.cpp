@@ -48,8 +48,8 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while ((iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < iVar3 && (iVar3 < 0x13a10))) {
@@ -68,11 +68,11 @@ namespace Map {
                             DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
                                 + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
