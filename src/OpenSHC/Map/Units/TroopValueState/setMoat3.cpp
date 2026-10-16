@@ -10,27 +10,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A720
         void TroopValueState::setMoat3(int checkAgainstNonZero, int playerID)
         {
-            int* piVar1;
-            int _offset;
-            AttackInfoSubArrayElement2* piVar4;
-            int _index;
-            int _moat2;
-            _offset = playerID * 0x177bc;
-            _index = 0;
-            _moat2 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -8);
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -4) = 0;
-            if (0 < _moat2) {
-                piVar4 = (AttackInfoSubArrayElement2*)((int)&DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                    + _offset + 0xc);
-                do {
-                    if (piVar4->size < 5999 && (!piVar4->unitID || (checkAgainstNonZero))) {
-                        piVar1 = (int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -4);
-                        *piVar1 = *piVar1 + 1;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat3 = 0;
+            int i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2; i = i + 1) {
+                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray[i].buildingID < 5999
+                        && (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray[i].unitID == 0 || checkAgainstNonZero)) {
+                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat3 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat3 + 1;
                     }
-                    _index = _index + 1;
-                    piVar4 = piVar4 + 1;
-                } while (
-                    _index < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -8));
+                }
             }
         }
 
