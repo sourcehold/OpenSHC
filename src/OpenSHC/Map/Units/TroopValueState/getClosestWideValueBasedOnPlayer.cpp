@@ -54,7 +54,7 @@ namespace Map {
                         }
                     }
                     local_1c = local_1c + 1;
-                    _ptr = _ptr + 4;
+                    _ptr = _ptr + 1;
                 } while (local_1c < *(int*)((int)this->attackInfo.wideValuesArray + iVar2 + -8));
                 if (-1 < local_10) {
                     iVar2 = local_10 * 0x10 + iVar2;
