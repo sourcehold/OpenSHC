@@ -41,7 +41,7 @@ namespace Map {
                         }
                     }
                 }
-                piVar3 = piVar3 + 2;
+                piVar3 = piVar3 + 1;
             } while ((int)piVar3 < 0x178e8cc);
         }
 
