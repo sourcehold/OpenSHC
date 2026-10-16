@@ -42,16 +42,16 @@ namespace Map {
                 this->attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar3 = iVar2;
             }
-            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
-                DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 1,
-                (int)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar3])));
+            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
+                DAT_GameSynchronyState::instance.currentPlayerSlotID, 1,
+                (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar3]));
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(60, 0, 0, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_2);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeTargetedBuildingTilesArray, this)(
                 this->attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeAttackInfo, this)(
-                this->attackInfo.attacker, (int)((int)(*piVar1)));
+                this->attackInfo.attacker, (int)(*piVar1));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID, this->attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setScale3, this)(1, playerID);
