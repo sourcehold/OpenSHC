@@ -189,7 +189,7 @@ namespace Map {
                       Move to next access point
                      */
                     _accessibleIndex = _accessibleIndex + 1;
-                    if (_accessibleTilesCount <= _accessibleIndex) {
+                    if (_accessibleIndex >= _accessibleTilesCount) {
                         _accessibleIndex = 0;
                     }
                     _limit = _limit + -1;
