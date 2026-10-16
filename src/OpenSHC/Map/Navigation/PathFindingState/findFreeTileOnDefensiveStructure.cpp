@@ -58,13 +58,14 @@ namespace Map {
                         int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar5 = (int)sVar2;
-                        if ((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) {
+                        int _unitAtTile = (short)DAT_TileMapState::instance.UnitLayer[_tile];
+                        if (_unitAtTile == 0) {
                             this->ALG_ResultX = (int)sVar1;
                             this->ALG_ResultY = iVar5;
                             this->ALG_ResultTile = _tile;
                             return;
                         }
-                        if ((short)DAT_TileMapState::instance.UnitLayer[_tile] == unitID) {
+                        if (_unitAtTile == unitID) {
                             this->ALG_ResultX = (int)sVar1;
                             this->ALG_ResultY = iVar5;
                             this->ALG_ResultTile = _tile;
