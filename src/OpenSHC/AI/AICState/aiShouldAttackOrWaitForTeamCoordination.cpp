@@ -65,9 +65,8 @@ namespace AI {
                 unreadyTeamMembers++;
         }
 
-        if (readyTeamMembers >= DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel)
-            return TRUE;
-        if (unreadyTeamMembers == 0)
+        if (readyTeamMembers >= DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel
+            || unreadyTeamMembers == 0)
             return TRUE;
 
         DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience++;
