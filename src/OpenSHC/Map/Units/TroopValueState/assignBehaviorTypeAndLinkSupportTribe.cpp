@@ -15,8 +15,6 @@ namespace Map {
         void TroopValueState::assignBehaviorTypeAndLinkSupportTribe(
             int param_1, int param_2, SomeTribeBehaviorType param_3, undefined4 param_4, undefined4 param_5)
         {
-            int iVar1;
-            int iVar2;
             short* psVar3;
             int iVar4;
             if (param_2 < 1) {
@@ -32,9 +30,9 @@ namespace Map {
             iVar4 = 0;
             if (this->attackInfo.tribeIDArraySize < 1) {}
         LAB_00518a50:
-            iVar1 = this->attackInfo.tribeIDArray[iVar4];
+            int iVar1 = this->attackInfo.tribeIDArray[iVar4];
             if (10 < this->attackInfo.tribeRelatedArrayValue0UpTo12[iVar4]) {}
-            iVar2 = (int)DAT_TribesState::instance.tribes[iVar1].supportTribeID;
+            int iVar2 = (int)DAT_TribesState::instance.tribes[iVar1].supportTribeID;
             if ((iVar2)
                 && (DAT_TribesState::instance.tribes[iVar1].uid2 == DAT_TribesState::instance.tribes[iVar2].uid)) {}
             DAT_TribesState::instance.tribes[iVar1].tribeBehaviorType = (undefined2)param_3;
@@ -45,10 +43,9 @@ namespace Map {
             iVar2 = 1;
             psVar3 = &DAT_TribesState::instance.tribes[1].tribeState;
             do {
-                if (((((*psVar3 != 0) && (*psVar3 != 3))
-                         && (*(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner))
-                        && (psVar3[0xf0] == 0))
-                    && ((psVar3[1] == ((AITribeType)0x16) || (psVar3[1] == ((AITribeType)0x17)))))
+                if (*psVar3 != 0 && *psVar3 != 3
+                    && *(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner && psVar3[0xf0] == 0
+                    && (psVar3[1] == ((AITribeType)0x16) || (psVar3[1] == ((AITribeType)0x17))))
                     goto LAB_00518b70;
                 psVar3 = psVar3 + 0x19a;
                 iVar2 = iVar2 + 1;
@@ -58,11 +55,9 @@ namespace Map {
             do {
                 if (this->attackInfo.value3Array01[param_1] == 4)
                     break;
-                if ((((*psVar3 != 0) && (*psVar3 != 3))
-                        && ((*(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner
-                            && (psVar3[0xf0] == 0))))
-                    && ((psVar3[1] == AI::Tribes::AITT_ARCHERS
-                        || (psVar3[1] == AI::Tribes::AITT_CROSSBOWMEN))))
+                if (*psVar3 != 0 && *psVar3 != 3
+                    && *(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner && psVar3[0xf0] == 0
+                    && (psVar3[1] == AI::Tribes::AITT_ARCHERS || (psVar3[1] == AI::Tribes::AITT_CROSSBOWMEN)))
                     goto LAB_00518b70;
                 psVar3 = psVar3 + 0x19a;
                 iVar2 = iVar2 + 1;
