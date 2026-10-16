@@ -26,7 +26,7 @@ namespace Map {
             piVar1 = &DAT_TribesState::instance.tribes[1];
             while (piVar1->tribeState != 2 || !piVar1->owner
                 || piVar1->owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                piVar1 = piVar1 + 0xcd;
+                piVar1 = piVar1 + 1;
                 _tribeID = _tribeID + 1;
                 if (0x176238b < (int)piVar1) {
                 LAB_005182f7:
