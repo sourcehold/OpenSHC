@@ -10,13 +10,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519F50
         void TroopValueState::setTown2(int param_1, int playerID)
         {
-            int iVar1;
-            int iVar2;
             int* piVar3;
             int _index;
             int* _ptrTown2;
-            iVar1 = playerID * 0x177bc;
-            iVar2 = 0;
+            int iVar1 = playerID * 0x177bc;
+            int iVar2 = 0;
             _index = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8);
             *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -4) = 0;
             if (0 < _index) {
