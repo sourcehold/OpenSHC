@@ -16,39 +16,36 @@ namespace Map {
         undefined4 TroopValueState::calculateTile2PeoplValueClosestToUnit(int unitID)
         {
             int fromXPosition;
-            int* piVar1;
             int fromYPosition;
-            int _index;
             int _minDistance;
-            int _minIndex;
+            int _bestIndex;
+            int i;
             _minDistance = 1000;
-            _minIndex = -1;
-            _index = 0;
+            _bestIndex = -1;
+            i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.people2) {
-                piVar1 = &DAT_TroopValueState::instance.attackInfo.peopleValuesArray[0].tile2;
                 do {
-                    if (piVar1[2] == 0) {
-                        fromYPosition
-                            = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[*piVar1];
-                        fromXPosition
-                            = *piVar1 - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
+                    if (DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].unitID == 0) {
+                        fromYPosition = (int)DAT_ViewportRenderState::instance
+                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile2];
+                        fromXPosition = DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile2
+                            - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
                             (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < _minDistance) {
-                            DAT_TroopValueState::instance.tile = ((AttackInfoSubArrayElement1*)(piVar1 + -1))->tile;
                             _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                            _minIndex = _index;
-                            DAT_TroopValueState::instance.x = fromXPosition;
-                            DAT_TroopValueState::instance.y = fromYPosition;
+                            this->y = fromYPosition;
+                            this->x = fromXPosition;
+                            this->tile = DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile;
+                            _bestIndex = i;
                         }
                     }
-                    _index = _index + 1;
-                    piVar1 = piVar1 + 4;
-                } while (_index < DAT_TroopValueState::instance.attackInfo.people2);
-                if (-1 < _minIndex) {
-                    DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_minIndex].unitID = unitID;
-                    return (undefined4)(DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_minIndex].tile2);
+                    i = i + 1;
+                } while (i < DAT_TroopValueState::instance.attackInfo.people2);
+                if (-1 < _bestIndex) {
+                    DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].unitID = unitID;
+                    return (undefined4)(DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].tile2);
                 }
             }
             return (undefined4)(0);
