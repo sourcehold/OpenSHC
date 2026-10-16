@@ -51,8 +51,8 @@ namespace Map {
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 int _currentTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if ((_currentTile < 0) || (0x13a10 <= _currentTile)) {
