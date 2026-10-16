@@ -10,26 +10,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519DE0
         void TroopValueState::setScale3(int one, int playerID)
         {
-            int* piVar2;
-            int _counter;
-            int* _ptrScale3;
-            int _scale2;
-            int iVar1 = playerID * 0x177bc;
-            _counter = 0;
-            _scale2 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar1 + -8);
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar1 + -4) = 0;
-            if (0 < _scale2) {
-                piVar2 = (int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar1 + 0xc);
-                do {
-                    if (piVar2[-1] < 5999 && (*piVar2 == 0 || (one))) {
-                        _ptrScale3
-                            = (int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar1 + -4);
-                        *_ptrScale3 = *_ptrScale3 + 1;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale3 = 0;
+            int i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2; i = i + 1) {
+                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray[i].buildingID < 5999
+                        && (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray[i].unitID == 0 || one)) {
+                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale3 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale3 + 1;
                     }
-                    _counter = _counter + 1;
-                    piVar2 = piVar2 + 4;
-                } while (
-                    _counter < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar1 + -8));
+                }
             }
         }
 
