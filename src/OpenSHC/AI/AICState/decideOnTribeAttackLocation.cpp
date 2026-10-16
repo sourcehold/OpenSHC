@@ -44,8 +44,9 @@ namespace AI {
             int y = 0;
             int unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe, DAT_TribesState::ptr)(tribeID, 0);
+            // the callee returns a bool in al; the generated header declares BOOLEnum
             if (unitID != 0
-                && MACRO_CALL_MEMBER(
+                && (byte)MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingToAttackCastleIncludingMoat,
                     DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner, targetPlayer,
                     DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y, &moatWasHit, &x,
@@ -108,31 +109,33 @@ namespace AI {
         int buildingID = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::selectARandomBuildingOwnedByPlayer,
             DAT_GameState::ptr)(targetPlayer);
         int destinationTile;
-        if (buildingID == 0) {
+        if (buildingID != 0) {
+            if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathfindingForAttacksUnk,
+                    DAT_PathFindingState::ptr)(tribeID, buildingID, 1,
+                    (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
+                            .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
+                            .tile],
+                    targetPlayer);
+                destinationTile = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1;
+                if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0)
+                    destinationTile = DAT_ViewportRenderState::instance
+                                          .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer]
+                                                  .campground.yEntry]
+                                          .addXgetTile
+                        + DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
+            } else {
+                destinationTile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
+            }
+        } else {
             destinationTile
                 = DAT_ViewportRenderState::instance
                       .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer].campground.yEntry]
                       .addXgetTile
                 + DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
-        } else if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
-            destinationTile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
-                + DAT_ViewportRenderState::instance
-                      .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
-                      .addXgetTile;
-        } else {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathfindingForAttacksUnk,
-                DAT_PathFindingState::ptr)(tribeID, buildingID, 1,
-                (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
-                        .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
-                        .tile],
-                targetPlayer);
-            destinationTile = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1;
-            if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0)
-                destinationTile
-                    = DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer].campground.yEntry]
-                          .addXgetTile
-                    + DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
         }
 
         if (destinationTile == 0)
