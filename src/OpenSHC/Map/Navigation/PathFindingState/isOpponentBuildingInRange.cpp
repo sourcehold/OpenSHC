@@ -118,11 +118,12 @@ namespace Map {
                         break;
                 }
             }
-            if (keepRange != -1
-                && (iVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
-                        this)(playerID, (uint)(x), (uint)(y), keepRange),
-                    iVar1 != 0)) {
-                return (undefined4)(1);
+            if (keepRange != -1) {
+                iVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
+                    this)(playerID, (uint)(x), (uint)(y), keepRange);
+                if (iVar1 != 0) {
+                    return (undefined4)(1);
+                }
             }
             return (undefined4)(0);
         }
