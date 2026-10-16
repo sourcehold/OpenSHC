@@ -18,8 +18,8 @@ namespace Map {
                 piVar1 = &DAT_TroopValueState::instance.attackInfo.high2ValuesArray[0].unitID;
                 iVar2 = DAT_TroopValueState::instance.attackInfo.high2;
                 do {
-                    if ((DAT_BuildingsState::instance.buildings[piVar1[-1]].unknownCounterTo10000_0x2b4 < 9999)
-                        && ((*piVar1 == 0 || (param_1)))) {
+                    if (DAT_BuildingsState::instance.buildings[piVar1[-1]].unknownCounterTo10000_0x2b4 < 9999
+                        && (*piVar1 == 0 || (param_1))) {
                         DAT_TroopValueState::instance.attackInfo.high3
                             = DAT_TroopValueState::instance.attackInfo.high3 + 1;
                     }
