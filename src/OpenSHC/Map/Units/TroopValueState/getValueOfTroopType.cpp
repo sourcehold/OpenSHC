@@ -38,7 +38,7 @@ namespace Map {
             case Map::Units::UT_S_FBALLISTA:
                 return DAT_RenderingDefinedData::instance.S_FBALLISTA;
             }
-            if ((0x15 < (int)unitType) && ((int)unitType < 0x1f)) {
+            if (0x15 < (int)unitType && (int)unitType < 0x1f) {
                 return DAT_RenderingDefinedData::instance.NoRushTicks[unitType + Map::Units::UT_TUNNELER];
             }
             return 0;
