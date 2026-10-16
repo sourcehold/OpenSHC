@@ -3,6 +3,7 @@
 
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 
 namespace OpenSHC {
@@ -15,62 +16,58 @@ namespace Map {
         void TroopValueState::assignBehaviorTypeAndLinkSupportTribe(
             int param_1, int param_2, SomeTribeBehaviorType param_3, undefined4 param_4, undefined4 param_5)
         {
-            short* psVar3;
-            int iVar4;
-            if (param_2 < 1) {
+            if (param_2 <= 0) {
                 param_2 = 2;
             }
-            psVar3 = &DAT_TribesState::instance.tribes[1].tribeID;
-            do {
-                if (*(int*)(psVar3 + -0xfa) == param_2) {
-                    *psVar3 = 0;
+            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[_tribeID].owner == param_2) {
+                    DAT_TribesState::instance.tribes[_tribeID].tribeID = 0;
                 }
-                psVar3 = psVar3 + 0x19a;
-            } while ((int)psVar3 < 0x1762580);
-            iVar4 = 0;
-            if (this->attackInfo.tribeIDArraySize < 1) {}
-        LAB_00518a50:
-            int iVar1 = this->attackInfo.tribeIDArray[iVar4];
-            if (10 < this->attackInfo.tribeRelatedArrayValue0UpTo12[iVar4]) {}
-            int iVar2 = (int)DAT_TribesState::instance.tribes[iVar1].supportTribeID;
-            if ((iVar2)
-                && (DAT_TribesState::instance.tribes[iVar1].uid2 == DAT_TribesState::instance.tribes[iVar2].uid)) {}
-            DAT_TribesState::instance.tribes[iVar1].tribeBehaviorType = (undefined2)param_3;
-            DAT_TribesState::instance.tribes[iVar1].someUpdateUpperLimit
-                = ((short)iVar4 + 1) * (short)param_5 + (short)param_4;
-            DAT_TribesState::instance.tribes[iVar1].attackInfo_someCounter1 = (short)this->attackInfo.someCounter1;
-            DAT_TribesState::instance.tribes[iVar1].unknownAttackRelatedUpdateCounter = 0;
-            iVar2 = 1;
-            psVar3 = &DAT_TribesState::instance.tribes[1].tribeState;
-            do {
-                if (*psVar3 != 0 && *psVar3 != 3
-                    && *(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner && psVar3[0xf0] == 0
-                    && (psVar3[1] == ((AITribeType)0x16) || (psVar3[1] == ((AITribeType)0x17))))
-                    goto LAB_00518b70;
-                psVar3 = psVar3 + 0x19a;
-                iVar2 = iVar2 + 1;
-            } while ((int)psVar3 < 0x17623a0);
-            iVar2 = 1;
-            psVar3 = &DAT_TribesState::instance.tribes[1].tribeState;
-            do {
-                if (this->attackInfo.value3Array01[param_1] == 4)
-                    break;
-                if (*psVar3 != 0 && *psVar3 != 3
-                    && *(int*)(psVar3 + -10) == DAT_TribesState::instance.tribes[iVar1].owner && psVar3[0xf0] == 0
-                    && (psVar3[1] == AI::Tribes::AITT_ARCHERS || (psVar3[1] == AI::Tribes::AITT_CROSSBOWMEN)))
-                    goto LAB_00518b70;
-                psVar3 = psVar3 + 0x19a;
-                iVar2 = iVar2 + 1;
-            } while ((int)psVar3 < 0x17623a0);
-            goto LAB_00518b92;
-        LAB_00518b70:
-            DAT_TribesState::instance.tribes[iVar1].supportTribeID = (short)iVar2;
-            DAT_TribesState::instance.tribes[iVar1].uid2 = DAT_TribesState::instance.tribes[iVar2].uid;
-            DAT_TribesState::instance.tribes[iVar2].tribeID = (short)iVar1;
-        LAB_00518b92:
-            iVar4 = iVar4 + 1;
-            if (this->attackInfo.tribeIDArraySize <= iVar4) {}
-            goto LAB_00518a50;
+            }
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize; i = i + 1) {
+                int _tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[i];
+                if (11 <= DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i]) {
+                    continue;
+                }
+                int _supportTribeID = (int)DAT_TribesState::instance.tribes[_tribeID].supportTribeID;
+                if (_supportTribeID && DAT_TribesState::instance.tribes[_tribeID].uid2 == DAT_TribesState::instance.tribes[_supportTribeID].uid) {
+                    continue;
+                }
+                DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType = (undefined2)param_3;
+                DAT_TribesState::instance.tribes[_tribeID].someUpdateUpperLimit = ((short)i + 1) * (short)param_5 + (short)param_4;
+                DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1 = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
+                DAT_TribesState::instance.tribes[_tribeID].unknownAttackRelatedUpdateCounter = 0;
+                _supportTribeID = 0;
+                for (int _candidate = 1; _candidate < 1250; _candidate = _candidate + 1) {
+                    if (DAT_TribesState::instance.tribes[_candidate].tribeState != 0 && DAT_TribesState::instance.tribes[_candidate].tribeState != 3
+                        && DAT_TribesState::instance.tribes[_candidate].owner == DAT_TribesState::instance.tribes[_tribeID].owner && DAT_TribesState::instance.tribes[_candidate].tribeID == 0
+                        && (DAT_TribesState::instance.tribes[_candidate].tribeType == ((AITribeType)0x16)
+                            || (DAT_TribesState::instance.tribes[_candidate].tribeType == ((AITribeType)0x17)))) {
+                        _supportTribeID = _candidate;
+                        break;
+                    }
+                }
+                if (!_supportTribeID) {
+                    for (int _candidate = 1; _candidate < 1250; _candidate = _candidate + 1) {
+                        if (DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] == 4) {
+                            break;
+                        }
+                        if (DAT_TribesState::instance.tribes[_candidate].tribeState != 0 && DAT_TribesState::instance.tribes[_candidate].tribeState != 3
+                            && DAT_TribesState::instance.tribes[_candidate].owner == DAT_TribesState::instance.tribes[_tribeID].owner
+                            && DAT_TribesState::instance.tribes[_candidate].tribeID == 0
+                            && (DAT_TribesState::instance.tribes[_candidate].tribeType == AI::Tribes::AITT_ARCHERS
+                                || (DAT_TribesState::instance.tribes[_candidate].tribeType == AI::Tribes::AITT_CROSSBOWMEN))) {
+                            _supportTribeID = _candidate;
+                            break;
+                        }
+                    }
+                }
+                if (_supportTribeID) {
+                    DAT_TribesState::instance.tribes[_tribeID].supportTribeID = (short)_supportTribeID;
+                    DAT_TribesState::instance.tribes[_tribeID].uid2 = DAT_TribesState::instance.tribes[_supportTribeID].uid;
+                    DAT_TribesState::instance.tribes[_supportTribeID].tribeID = (short)_tribeID;
+                }
+            }
         }
 
     }
