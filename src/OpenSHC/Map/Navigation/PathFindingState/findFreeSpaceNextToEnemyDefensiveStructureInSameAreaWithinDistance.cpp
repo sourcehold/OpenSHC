@@ -7,11 +7,11 @@
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -68,7 +68,7 @@ namespace Map {
                     160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             maxDestinations = maxDestinations * 2;
-            if (maxDestinations < 500) {
+            if (maxDestinations <= 500) {
                 if (maxDestinations < 0x32) {
                     maxDestinations = 0x32;
                 }
