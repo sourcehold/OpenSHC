@@ -45,7 +45,16 @@ namespace AI {
                 continue;
 
             int tile;
-            if (this->aics[aicIndex].OuterPatrolGroupsMove != 0) {
+            if (this->aics[aicIndex].OuterPatrolGroupsMove == 0) {
+                int buildingID
+                    = MACRO_CALL_MEMBER(AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
+                if (buildingID == 0)
+                    continue;
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
+            } else {
                 int buildingID = MACRO_CALL_MEMBER(AICState_Func::getTargetableBuildingForPlayerID, this)(playerID, i);
                 if (buildingID != 0) {
                     tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
@@ -62,15 +71,6 @@ namespace AI {
                               .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
                               .addXgetTile;
                 }
-            } else {
-                int buildingID
-                    = MACRO_CALL_MEMBER(AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
-                if (buildingID == 0)
-                    continue;
-                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
-                    + DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
-                          .addXgetTile;
             }
             if (tile == 0)
                 continue;
