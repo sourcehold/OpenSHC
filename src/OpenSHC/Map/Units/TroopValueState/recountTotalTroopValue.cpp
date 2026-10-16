@@ -48,7 +48,7 @@ namespace Map {
                         piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray + _playerID;
                         *piVar1 = *piVar1 + _troopTypeValue;
                     }
-                    pUVar2 = pUVar2 + 0x248;
+                    pUVar2 = pUVar2 + 1;
                     iVar2 = iVar2 + -1;
                 } while (iVar2);
             }
