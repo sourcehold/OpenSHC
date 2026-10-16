@@ -111,7 +111,7 @@ namespace Map {
                     /*
                       Get Y coordinate of current tile being processed
                      */
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     /*
                       Get distance from start for current tile
                      */
