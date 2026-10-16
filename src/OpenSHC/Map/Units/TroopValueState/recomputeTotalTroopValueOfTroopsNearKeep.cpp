@@ -25,7 +25,7 @@ namespace Map {
             int _troopValue;
             int iVar3;
             Unit* ptrUnit;
-            short _playerID;
+            int _playerID;
             iVar3 = 1;
             DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[0] = 0;
             DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[1] = 0;
@@ -52,7 +52,7 @@ namespace Map {
                             DAT_GameState::instance.playerDataArray[_playerID].campground.xEntry,
                             DAT_GameState::instance.playerDataArray[_playerID].campground.yEntry, (int)(ptrUnit->x),
                             (int)(ptrUnit->y));
-                        if (DAT_DirectionAlgorithmState::instance.distanceHigh < 40) {
+                        if (DAT_DirectionAlgorithmState::instance.distanceHigh <= 40) {
                             _troopValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                                 this)((Map::Units::UnitType)(short)ptrUnit->unitType);
                             piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep
