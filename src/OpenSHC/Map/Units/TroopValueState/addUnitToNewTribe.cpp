@@ -26,9 +26,8 @@ namespace Map {
             undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID)
         {
             int _tribe;
-            int _playerID;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
-                _playerID = (int)(char)this->attackInfo.attackWavePlayerIDArray[attackWave];
+                int _playerID = (int)(char)this->attackInfo.attackWavePlayerIDArray[attackWave];
                 if (!_playerID) {
                     _playerID = 2;
                 }
@@ -36,18 +35,17 @@ namespace Map {
                     && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                     _playerID = 2;
                 }
-                _tribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
-                    _playerID, 0);
+                _tribe
+                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(_playerID, 0);
                 DAT_TribesState::instance.tribes[_tribe].tribeBehaviorType = Map::Units::STBT_6;
             } else {
-                _tribe = MACRO_CALL_MEMBER(
-                    Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+                _tribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
+                    playerID);
             }
             DAT_TribesState::instance.tribes[_tribe].tribeType = (undefined2)tribeType;
             DAT_TribesState::instance.tribes[_tribe].attackWave = (short)attackWave;
             DAT_TribesState::instance.tribes[_tribe].attackInfo_someCounter1 = 0;
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                unitID, _tribe);
+            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, _tribe);
         }
 
     }
