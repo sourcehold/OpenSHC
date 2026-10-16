@@ -38,10 +38,10 @@ namespace Map {
             int _inBounds;
             uint _init_10;
             int _walkLayer;
+            _inBounds = 0;
             if (399 < (uint)this->unitX || 399 < (uint)this->unitY
-                || (_inBounds = false,
-                    DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->unitY * 400 + this->unitX]
-                        == '\0')) {
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->unitY * 400 + this->unitX]
+                    == '\0') {
                 return 0;
             }
             _tile = DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile + this->unitX;

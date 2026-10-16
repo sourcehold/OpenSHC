@@ -24381,7 +24381,7 @@ SHC_3BB0A8C1_0x00498A40 | 82.2% | fix off-by-one maxTries
 
 SHC_3BB0A8C1_0x00498B70 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00498FD0 | 19.9% | tail-merged if chain
+SHC_3BB0A8C1_0x00498FD0 | 19.9% | flag init out of condition
 
 SHC_3BB0A8C1_0x004990F0 | 0.0% | Pending
 
