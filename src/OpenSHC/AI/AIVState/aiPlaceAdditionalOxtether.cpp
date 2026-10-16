@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004EFC30
-    void AIVState::aiPlaceAdditionalOxtether(PlayerID playerID)
+    void AIVState::aiPlaceAdditionalOxtether(int playerID)
     {
         if (!MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
                 DAT_GameState::ptr)(Commands::M_MAPPER_OXENBASE, playerID, FALSE)

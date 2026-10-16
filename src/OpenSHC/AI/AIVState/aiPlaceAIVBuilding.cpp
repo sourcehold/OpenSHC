@@ -16,7 +16,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004ED410
-    BOOLEnum AIVState::aiPlaceAIVBuilding(PlayerID playerID, int step, int isPausing)
+    BOOLEnum AIVState::aiPlaceAIVBuilding(int playerID, int step, int isPausing)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
         int x;
@@ -272,7 +272,6 @@ namespace AI {
                     DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][2].y
                         + y,
                     mapper, buildingSize);
-
             } else if (mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD) {
                 // the guild field
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
@@ -296,7 +295,7 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[placedID].field242_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[placedID].field240_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
             }
             if (!DAT_TileMapState::instance.buildingPlacementFail) {

@@ -13,7 +13,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004ED300
-    void AIVState::aiPlaceBrazier(PlayerID playerID)
+    void AIVState::aiPlaceBrazier(int playerID)
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[AIVUT_BRAZIER] <= 0) {
             return;

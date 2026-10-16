@@ -13,7 +13,7 @@ namespace AI {
 
     // breadth first search from the campground for an oasis grid cell and places the farm there
     // FUNCTION: STRONGHOLDCRUSADER 0x004EDDF0
-    int AIVState::findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum farmType)
+    int AIVState::findSuitableFarmLocationAndPlaceFarm(int playerID, MappersEnum farmType)
     {
         if (DAT_BuildingsState::instance.unknownCountdown01 < 20
             || DAT_GameState::instance.playerDataArray[playerID].countFarms
