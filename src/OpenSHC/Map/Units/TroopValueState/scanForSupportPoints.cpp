@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -25,7 +26,7 @@ namespace Map {
             int tile;
             int local_8;
             tile = 0;
-            this->attackInfo.supportPoints = 0;
+            DAT_TroopValueState::instance.attackInfo.supportPoints = 0;
             do {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x01') {
                     y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
@@ -42,19 +43,22 @@ namespace Map {
                                     = DAT_TileMapState::instance.AIInfoLayer[tile] | 0x40;
                                 iVar3 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getSupportPointIndex, this)(
                                     tile);
-                                int iVar1 = this->attackInfo.supportPointsNext;
+                                int iVar1 = DAT_TroopValueState::instance.attackInfo.supportPointsNext;
                                 if (!iVar3) {
-                                    this->attackInfo.supportPointsArray[this->attackInfo.supportPointsNext].x = x;
-                                    this->attackInfo.supportPointsArray[iVar1].y = y;
-                                    this->attackInfo.supportPointsArray[iVar1].tile = tile;
-                                    this->attackInfo.supportPointsArray[iVar1].someCounter
-                                        = this->attackInfo.someCounter1;
+                                    DAT_TroopValueState::instance.attackInfo
+                                        .supportPointsArray[DAT_TroopValueState::instance.attackInfo.supportPointsNext]
+                                        .x = x;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].y = y;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].tile = tile;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].someCounter
+                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 } else {
-                                    this->attackInfo.supportPointsArray[iVar3].someCounter
-                                        = this->attackInfo.someCounter1;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar3].someCounter
+                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 }
-                                this->attackInfo.supportPoints = this->attackInfo.supportPoints + 1;
-                                if (199 < this->attackInfo.supportPoints) {}
+                                DAT_TroopValueState::instance.attackInfo.supportPoints
+                                    = DAT_TroopValueState::instance.attackInfo.supportPoints + 1;
+                                if (199 < DAT_TroopValueState::instance.attackInfo.supportPoints) {}
                                 break;
                             }
                         }
