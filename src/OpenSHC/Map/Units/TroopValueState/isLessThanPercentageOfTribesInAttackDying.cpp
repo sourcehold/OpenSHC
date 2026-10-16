@@ -32,7 +32,7 @@ namespace Map {
                         _dying = _dying + 1;
                     }
                 }
-                _pTribe = _pTribe + 0x19a;
+                _pTribe = _pTribe + 1;
                 _tribeID = _tribeID + 1;
             } while ((int)_pTribe < 0x17623a0);
             if (_dying + _living == 0) {
