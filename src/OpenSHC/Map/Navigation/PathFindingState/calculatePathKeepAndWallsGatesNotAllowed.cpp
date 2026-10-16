@@ -62,7 +62,7 @@ namespace Map {
                         if (_tile == uVar4) {
                             return (undefined4)(1);
                         }
-                        if ((this->searchQueue.readIndex >= maxTries) || (80400 <= _tile))
+                        if ((this->searchQueue.readIndex > maxTries) || (80400 <= _tile))
                             break;
                         int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
