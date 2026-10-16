@@ -25,18 +25,18 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4680
     void AICState::selectAttackTarget(int playerID)
     {
-        int selectedPlayerID = 0;
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL) {
             return;
         }
+        int selectedPlayerID = 0;
 
         int aicIndex = aiType - 1;
         int fromX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
-        int fromY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
         int lowestDistance = 10000;
         int highestGold = 0;
         int lowestPoints = 1000000;
+        int fromY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::computeNervousness, this)(playerID);
 
@@ -56,12 +56,13 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].requestStateUnk == 1) {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
                     DAT_GameState::instance.playerDataArray[playerID].requestedAttackTargetUnk)
-                != 0) {
+                == 0) {
+                DAT_GameState::instance.playerDataArray[playerID].requestStateUnk = 0;
+            } else {
                 DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID
                     = DAT_GameState::instance.playerDataArray[playerID].requestedAttackTargetUnk;
                 return;
             }
-            DAT_GameState::instance.playerDataArray[playerID].requestStateUnk = 0;
         }
 
         for (int i = 1; i < 9; i++) {
