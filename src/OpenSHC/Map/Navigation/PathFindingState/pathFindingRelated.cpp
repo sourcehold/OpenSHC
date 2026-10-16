@@ -51,8 +51,8 @@ namespace Map {
                 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
             int bVar1
                 = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_4][this->searchQueue.tilesQueue[0]];
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar5 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar5 <= 0x13a0f) {
                     short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
@@ -104,16 +104,16 @@ namespace Map {
                                 local_18 = iVar8;
                                 local_14 = dVar6;
                             }
-                            DAT_TileMapState::instance.CertainPathLayer[dVar6]
-                                = (short)this->searchQueue.currentDistance + 1;
                             short sVar4 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
                                               .short_.xOffset;
+                            DAT_TileMapState::instance.CertainPathLayer[dVar6]
+                                = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[dVar6] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar4 + sVar2;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
                                       .short_.yOffset
                                 + sVar3;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar4 + sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = dVar6;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
