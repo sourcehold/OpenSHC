@@ -23,6 +23,7 @@ namespace Map {
             int iVar1;
             dword _result;
             int _tile;
+            int _startWalk = (short)DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
             _pTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
             iVar1 = DAT_TribesState::instance.ALG_ResultTileIndex;
             while (true) {
@@ -31,7 +32,7 @@ namespace Map {
                   manhatten distance
                  */
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0
-                    && 0 < DAT_TileMapState::instance.CertainPathLayer[_tile]
+                    && 0 < (short)DAT_TileMapState::instance.CertainPathLayer[_tile]
                     && (_xDistance = (_tile
                                          - DAT_ViewportRenderState::instance
                                              .translationMatrix[DAT_ViewportRenderState::instance
@@ -41,13 +42,11 @@ namespace Map {
                         _yDistance
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
                         (abs(_yDistance) + abs(_xDistance)) % modulo == 0)
-                    && DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
+                    && (short)DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
                     break;
                 iVar1 = iVar1 + 1;
                 _pTile = _pTile + 1;
-                if ((4000 < iVar1)
-                    || (DAT_TileMapState::instance.WalkLayer[_tile]
-                        != DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]])) {
+                if (4000 < iVar1 || (short)DAT_TileMapState::instance.WalkLayer[_tile] != _startWalk) {
                     return (dword)(0);
                 }
             }
