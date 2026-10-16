@@ -24359,7 +24359,7 @@ SHC_3BB0A8C1_0x00497080 | 78.1% | hoist signed start-tile read
 
 SHC_3BB0A8C1_0x00497180 | 78.3% | hoist signed start-tile reads
 
-SHC_3BB0A8C1_0x00497280 | 52.2% | 16-bit height arithmetic
+SHC_3BB0A8C1_0x00497280 | 55.8% | param_5 block out of line
 
 SHC_3BB0A8C1_0x004974D0 | 32.1% | statement order
 
