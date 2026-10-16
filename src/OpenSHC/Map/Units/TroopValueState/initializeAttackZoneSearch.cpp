@@ -16,7 +16,7 @@ namespace Map {
             int _tile;
             this->attackInfo.biggestZone = 0;
             _tile = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[(&this->attackInfo.unknownSignpostRelatedArray)[param_1]]
+                        .signpostEntryData[this->attackInfo.unknownSignpostRelatedArray[param_1]]
                         .tile;
             this->attackInfo.startCon = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
             this->attackInfo.startZone = (int)(char)DAT_TileMapState::instance.AIZoneLayer[_tile];
