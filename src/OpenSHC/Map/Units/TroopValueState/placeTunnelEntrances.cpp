@@ -10,6 +10,7 @@
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -33,14 +34,14 @@ namespace Map {
                 sVar1 = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
                 int iVar2 = DAT_TribesState::instance.tribes[tribeID].uid;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = sVar1;
-                this->attackInfo.tentPointsValues[sVar1].tribeID = 0;
-                this->attackInfo.tentPointsValues[sVar1].tribeUID = 0;
-                int iVar3 = this->attackInfo.tentPointsValues[iVar4].y;
-                this->attackInfo.tentPointsValues[iVar4].tribeUID = iVar2;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[sVar1].tribeID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[sVar1].tribeUID = 0;
+                int iVar3 = DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].y;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].tribeUID = iVar2;
                 int playerID = DAT_TribesState::instance.tribes[tribeID].owner;
-                this->attackInfo.tentPointsValues[iVar4].tribeID = tribeID;
-                this->attackInfo.tentPointsValues[iVar4].three = 3;
-                iVar2 = this->attackInfo.tentPointsValues[iVar4].x;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].tribeID = tribeID;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].three = 3;
+                iVar2 = DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].x;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)iVar4;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     playerID, iVar2 + -1, iVar3 + -1, (MappersEnum)((int)(66)), 3, 0xf);
