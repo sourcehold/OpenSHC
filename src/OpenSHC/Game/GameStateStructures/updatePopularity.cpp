@@ -230,26 +230,22 @@ namespace Game {
                 if (this->playerDataArray[playerID].someCount60 != 0) {
                     this->playerDataArray[playerID].someCount60 = this->playerDataArray[playerID].someCount60 + 1;
                 }
+                int siegePenalty;
                 if (this->playerDataArray[playerID].someCount60 <= 0) {
-                    this->playerDataArray[playerID].popularity = popularityAfterFear - 150;
-                    this->playerDataArray[playerID].someCount54 = -150;
+                    siegePenalty = -150;
                 } else if (this->playerDataArray[playerID].someCount60 <= 5) {
-                    this->playerDataArray[playerID].popularity = popularityAfterFear - 125;
-                    this->playerDataArray[playerID].someCount54 = -125;
+                    siegePenalty = -125;
                 } else if (this->playerDataArray[playerID].someCount60 <= 10) {
-                    this->playerDataArray[playerID].popularity = popularityAfterFear - 100;
-                    this->playerDataArray[playerID].someCount54 = -100;
+                    siegePenalty = -100;
                 } else if (this->playerDataArray[playerID].someCount60 <= 15) {
-                    this->playerDataArray[playerID].popularity = popularityAfterFear - 75;
-                    this->playerDataArray[playerID].someCount54 = -75;
+                    siegePenalty = -75;
                 } else if (this->playerDataArray[playerID].someCount60 <= 20) {
-                    this->playerDataArray[playerID].popularity = popularityAfterFear - 50;
-                    this->playerDataArray[playerID].someCount54 = -50;
+                    siegePenalty = -50;
                 } else {
-                    int lateSiegePenalty = this->playerDataArray[playerID].someCount60 <= 25 ? -25 : 0;
-                    this->playerDataArray[playerID].popularity = popularityAfterFear + lateSiegePenalty;
-                    this->playerDataArray[playerID].someCount54 = (short)lateSiegePenalty;
+                    siegePenalty = this->playerDataArray[playerID].someCount60 <= 25 ? -25 : 0;
                 }
+                this->playerDataArray[playerID].popularity = popularityAfterFear + siegePenalty;
+                this->playerDataArray[playerID].someCount54 = (short)siegePenalty;
             } else {
                 this->playerDataArray[playerID].someCount54 = 0;
                 this->playerDataArray[playerID].someCount60 = 0;
