@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -23,16 +24,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D730
         void TroopValueState::updateActiveAttackWaveState(int attackWave)
         {
-            int playerID = (int)(char)this->attackInfo.attackWavePlayerIDArray[attackWave];
+            int playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 playerID = 2;
             }
-            int iVar2 = this->attackInfo.attackWaveTicker[attackWave];
+            int iVar2 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
             int iVar1 = iVar2 + 1;
-            this->attackInfo.attackWaveTicker[attackWave] = iVar1;
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = iVar1;
             if (iVar2 < 1) {
-                this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
+                DAT_TroopValueState::instance.attackInfo.someCounter1
+                    = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
                     attackWave, playerID);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::exitSiegeEquipmentForWave, this)(attackWave);
@@ -45,8 +47,8 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                         attackWave, (SomeTribeBehaviorType)((int)(1024)));
                 }
-                if (1000 < this->attackInfo.attackWaveTicker[attackWave]) {
-                    this->attackInfo.attackWaveTicker[attackWave] = 0;
+                if (1000 < DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave]) {
+                    DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = 0;
                 }
             }
         }
