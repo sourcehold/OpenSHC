@@ -15,7 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A330
         undefined4 TroopValueState::findEnemyTowersOrGates(int unitID)
         {
-            undefined4 uVar1;
             int iVar2;
             AttackInfoSubArrayElement1* _p2;
             undefined4* puVar3;
@@ -36,10 +35,9 @@ namespace Map {
                     if ((_p1->buildingID < 5999) && (!_p1->unitID)) {
                         iVar5 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_p1->tile2];
                         iVar2 = _p1->tile2 - DAT_ViewportRenderState::instance.translationMatrix[iVar5].addXgetTile;
-                        MACRO_CALL_MEMBER(
-                            Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)((int)(DAT_UnitsState::instance.units[unitID].y)), iVar2, iVar5);
+                            (int)(DAT_UnitsState::instance.units[unitID].y), iVar2, iVar5);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_10) {
                             local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             DAT_TroopValueState::instance.tile = _p1->tile;
@@ -53,7 +51,7 @@ namespace Map {
                 } while (
                     local_14 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -8));
                 if (-1 < local_8) {
-                    uVar1 = *(undefined4*)(iVar4 + 0x179f10c + local_8 * 0x10);
+                    undefined4 uVar1 = *(undefined4*)(iVar4 + 0x179f10c + local_8 * 0x10);
                     *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + local_8 * 0x10
                         + 0xc) = unitID;
                     return (undefined4)(uVar1);
@@ -77,10 +75,9 @@ namespace Map {
                     if ((_p2->buildingID < 5999) && (!_p2->unitID)) {
                         iVar5 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_p2->tile2];
                         iVar2 = _p2->tile2 - DAT_ViewportRenderState::instance.translationMatrix[iVar5].addXgetTile;
-                        MACRO_CALL_MEMBER(
-                            Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)((int)(DAT_UnitsState::instance.units[unitID].y)), iVar2, iVar5);
+                            (int)(DAT_UnitsState::instance.units[unitID].y), iVar2, iVar5);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_10) {
                             local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             DAT_TroopValueState::instance.tile = _p2->tile;
