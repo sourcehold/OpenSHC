@@ -51,8 +51,14 @@ namespace Map {
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 _buildingAtStart = DAT_TileMapState::instance.BuildingLayer[this->searchQueue.tilesQueue[0]];
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                    while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
-                        -1 < _tile && (_tile < 0x13a10))) {
+                    while (true) {
+                        _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        if (_tile < 0) {
+                            break;
+                        }
+                        if (0x13a10 <= _tile) {
+                            break;
+                        }
                         _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar2 = (int)_y;
