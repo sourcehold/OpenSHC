@@ -70,7 +70,7 @@ namespace Map {
                         }
                     }
                     _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 0x248;
+                    _pUnit = _pUnit + 1;
                 } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
                 if (_minUnitID) {
                     DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroX
