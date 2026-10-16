@@ -59,7 +59,7 @@ namespace Map {
                     }
                 LAB_0051cd29:
                     _unitID0 = _unitID0 + 1;
-                    _pUnit2 = _pUnit2 + 0x248;
+                    _pUnit2 = _pUnit2 + 1;
                 } while ((int)_unitID0 < DAT_UnitsState::instance.maxUnitCount);
                 if (0x28 < _macemenCount) {
                     _macemenLimit = 10;
