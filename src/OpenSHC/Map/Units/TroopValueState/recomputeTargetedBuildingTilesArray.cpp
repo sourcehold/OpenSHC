@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -21,24 +22,25 @@ namespace Map {
             Unit* psVar2;
             int iVar2;
             int iVar3;
-            this->attackInfo.targetedBuildingTilesArraySize = 0;
+            DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(this->attackInfo.targetedBuildingTilesArray)));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray)));
             uint uVar1 = DAT_UnitsState::instance.maxUnitCount;
             iVar3 = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 psVar2 = &DAT_UnitsState::instance.units[1];
-                iVar2 = this->attackInfo.targetedBuildingTilesArraySize;
+                iVar2 = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
                 do {
                     if (psVar2->logicalState == Map::Units::ULS_NORMAL && psVar2->isSelectable_OR_matchTime
                         && psVar2->owner == playerID && psVar2->targetedBuildingTile
                         && psVar2->unitType != Map::Units::UT_A_SLAVE) {
-                        this->attackInfo.targetedBuildingTilesArray[iVar2] = psVar2->targetedBuildingTile;
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[iVar2]
+                            = psVar2->targetedBuildingTile;
                         /*
                           Units.targetBuildingTile
                          */
-                        iVar2 = this->attackInfo.targetedBuildingTilesArraySize + 1;
-                        this->attackInfo.targetedBuildingTilesArraySize = iVar2;
+                        iVar2 = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = iVar2;
                         if (3999 < iVar2) {}
                     }
                     iVar3 = iVar3 + 1;
