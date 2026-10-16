@@ -104,7 +104,7 @@ namespace Map {
                                 _unitID, _theTribe);
                         }
                         _unitID = _unitID + 1;
-                        _pUnit = _pUnit + 0x248;
+                        _pUnit = _pUnit + 1;
                     } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
                 }
                 if (DAT_TribesState::instance.tribes[_swordsTribe].size < 1) {
