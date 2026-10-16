@@ -36,15 +36,14 @@ namespace Map {
                 pUVar2 = &DAT_UnitsState::instance.units[1];
                 iVar2 = DAT_UnitsState::instance.maxUnitCount - 1;
                 do {
-                    if ((((pUVar2->logicalState != Map::Units::ULS_INVISIBLE) && (!pUVar2->dying))
-                            && (pUVar2->isSelectable_OR_matchTime))
-                        && (((_troopType = pUVar2->unitType,
-                                 _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
-                            && (_troopType != Map::Units::UT_E_LADDER)))) {
+                    if (pUVar2->logicalState != Map::Units::ULS_INVISIBLE && !pUVar2->dying
+                        && pUVar2->isSelectable_OR_matchTime
+                        && (_troopType = pUVar2->unitType,
+                            _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
+                        && _troopType != Map::Units::UT_E_LADDER) {
                         _playerID = pUVar2->owner;
-                        _troopTypeValue
-                            = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType, this)(
-                                (Map::Units::UnitType)(short)_troopType);
+                        _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
+                            this)((Map::Units::UnitType)(short)_troopType);
                         piVar1 = this->attackInfo.playerTotalTroopValueArray + _playerID;
                         *piVar1 = *piVar1 + _troopTypeValue;
                     }
