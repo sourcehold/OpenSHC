@@ -75,9 +75,9 @@ namespace Map {
                     if ((int)this->searchQueue.currentDistance > limit) {
                         return FALSE;
                     }
-                    if ((DAT_TileMapState::instance.BuildingLayer[iVar3] != 0)
-                        && (DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[iVar3]]
-                                .buildingType
+                    int _building = DAT_TileMapState::instance.BuildingLayer[iVar3];
+                    if ((_building != 0)
+                        && (DAT_BuildingsState::instance.buildings[_building].buildingType
                             == OpenSHC::Map::Buildings::BT_SIGNPOST)) {
                         return TRUE;
                     }
