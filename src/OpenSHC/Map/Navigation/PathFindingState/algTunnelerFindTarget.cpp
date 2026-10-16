@@ -71,7 +71,7 @@ namespace Map {
                                 return;
                             }
                         }
-                        int sVar3 = DAT_TileMapState::instance.BuildingLayer[iVar4];
+                        int sVar3 = (ushort)DAT_TileMapState::instance.BuildingLayer[iVar4];
                         if (sVar3 != 0
                             && (targetPlayerID == 0
                                 || (targetPlayerID == DAT_BuildingsState::instance.buildings[sVar3].owner))
