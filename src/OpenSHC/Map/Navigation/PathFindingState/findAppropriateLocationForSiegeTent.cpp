@@ -106,8 +106,14 @@ namespace Map {
               === MAIN BFS LOOP ===   Continue while there are tiles in the queue to process
              */
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
-                    -1 < _tile && (_tile < 0x13a10))) {
+                while (true) {
+                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (_tile < 0) {
+                        break;
+                    }
+                    if (0x13a10 <= _tile) {
+                        break;
+                    }
                     /*
                       Get Y coordinate of current tile being processed
                      */
