@@ -1,6 +1,7 @@
 #include "../../../Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
@@ -12,25 +13,25 @@ namespace Map {
         {
             int iVar2;
             for (iVar2 = 0; iVar2 < 200; iVar2 += 5) {
-                char cVar1 = *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef88 + iVar2);
+                char cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2];
                 if (cVar1 != '\0') {
-                    *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef88 + iVar2) = cVar1 + -1;
+                    DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2] = cVar1 + -1;
                 }
-                cVar1 = *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef89 + iVar2);
+                cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 1];
                 if (cVar1 != '\0') {
-                    *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef89 + iVar2) = cVar1 + -1;
+                    DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 1] = cVar1 + -1;
                 }
-                cVar1 = *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8a + iVar2);
+                cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 2];
                 if (cVar1 != '\0') {
-                    *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8a + iVar2) = cVar1 + -1;
+                    DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 2] = cVar1 + -1;
                 }
-                cVar1 = *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8b + iVar2);
+                cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 3];
                 if (cVar1 != '\0') {
-                    *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8b + iVar2) = cVar1 + -1;
+                    DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 3] = cVar1 + -1;
                 }
-                cVar1 = *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8c + iVar2);
+                cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 4];
                 if (cVar1 != '\0') {
-                    *(char*)(DAT_TroopValueState::instance.attackInfo.tilemapOffset + 0x1ecef8c + iVar2) = cVar1 + -1;
+                    DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 4] = cVar1 + -1;
                 }
             }
             if (DAT_TroopValueState::instance.attackInfo.tilemapOffset < 80200) {
