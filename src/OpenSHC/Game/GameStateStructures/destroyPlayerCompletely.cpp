@@ -13,6 +13,12 @@
 namespace OpenSHC {
 namespace Game {
 
+    /*
+      WARNING: Enum "MappersEnum": Some values do not have unique names
+     */
+    /*
+      decompilerscript: committed: 2025-01-30 21:57:43.216000
+     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00457B40
     void GameStateStructures::destroyPlayerCompletely(int playerID)
     {
@@ -23,6 +29,5 @@ namespace Game {
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesPart2, DAT_EntityState::ptr)(
             playerID);
     }
-
 }
 }

@@ -1,21 +1,22 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
     using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+    /*
+      decompilerscript: committed: 2025-01-30 21:57:43.216000
+     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00458740
     BOOLEnum GameStateStructures::isResourceTypeTradeable(ResourceType resourceType)
     {
         if (resourceType == OpenSHC::Game::Resources::RT_PITCH) {
             resourceType = OpenSHC::Game::Resources::RT_PARTIALPITCH;
         }
-        return this->mapAndTime.isResourceTradeable[resourceType] != 0;
+        return (uint)(this->mapAndTime.isResourceTradeable[resourceType] != 0);
     }
 
 }
