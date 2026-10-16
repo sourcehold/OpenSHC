@@ -47,7 +47,7 @@ namespace Map {
                         }
                     }
                     local_14 = local_14 + 1;
-                    _p1 = _p1 + 4;
+                    _p1 = _p1 + 1;
                 } while (
                     local_14 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -8));
                 if (-1 < local_8) {
@@ -87,7 +87,7 @@ namespace Map {
                         }
                     }
                     local_14 = local_14 + 1;
-                    _p2 = _p2 + 4;
+                    _p2 = _p2 + 1;
                 } while (
                     local_14 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -8));
             }
