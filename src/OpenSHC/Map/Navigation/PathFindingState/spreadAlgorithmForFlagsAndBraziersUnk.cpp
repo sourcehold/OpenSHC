@@ -48,7 +48,6 @@ namespace Map {
             int iVar4;
             int iVar5;
             int (*paiVar7)[8];
-            int iVar8;
             int local_8;
             int local_4;
             uVar3 = y;
@@ -86,10 +85,9 @@ namespace Map {
                     if ((int)this->searchQueue.currentDistance > param_4) {
                         return (undefined4)(0);
                     }
-                    iVar8 = 0;
                     iVar5 = (int)DAT_TileMapState::instance.EntityLayer[tile];
                     if (DAT_TileMapState::instance.EntityLayer[tile] != 0) {
-                        while (iVar8 = iVar8 + 1, iVar8 < 10) {
+                        for (int _step = 1; _step < 10; _step = _step + 1) {
                             if (DAT_EntityState::instance.entityArray[iVar5].owner == playerID) {
                                 switch (DAT_EntityState::instance.entityArray[iVar5].entityType) {
                                 case OpenSHC::Map::Entities::ET_BRAZIER:
