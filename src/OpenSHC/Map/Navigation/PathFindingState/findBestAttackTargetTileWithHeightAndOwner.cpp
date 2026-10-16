@@ -122,7 +122,16 @@ namespace Map {
                                     } else {
                                         iVar9 = this->searchQueue.currentDistance * iVar9;
                                     }
-                                    goto LAB_004a62e3;
+                                    if (iVar9 < local_20
+                                        && (iVar7
+                                            = MACRO_CALL(OpenSHC::Map::Navigation_Func::CalcApproxEuclideanDistance)(
+                                                param_2, (int)(sVar1), (int)(param_3), iVar6),
+                                            iVar7 <= param_1)) {
+                                        local_20 = iVar9;
+                                        local_14 = (int)sVar1;
+                                        local_10 = iVar6;
+                                        local_c = uVar4;
+                                    }
                                 }
                             } else if ((DAT_TileMapState::instance.WallOwnerLayer[uVar4] & 7) + 1 == param_7
                                 && param_9 == 0) {
@@ -135,7 +144,6 @@ namespace Map {
                                 } else {
                                     iVar9 = this->searchQueue.currentDistance * 100 + iVar9;
                                 }
-                            LAB_004a62e3:
                                 if (iVar9 < local_20
                                     && (iVar7 = MACRO_CALL(OpenSHC::Map::Navigation_Func::CalcApproxEuclideanDistance)(
                                             param_2, (int)(sVar1), (int)(param_3), iVar6),
