@@ -34893,7 +34893,7 @@ SHC_3BB0A8C1_0x004CCAF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CCBE0 | 99.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CCD20 | 66.0% | frame and regalloc differ
+SHC_3BB0A8C1_0x004CCD20 | 80.1% | Register allocation differs
 
 SHC_3BB0A8C1_0x004CCEDC | 0.0% | Pending
 
