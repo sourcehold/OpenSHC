@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -23,8 +24,8 @@ namespace Map {
             _minDistance = 1000;
             _minIndex = -1;
             _index = 0;
-            if (0 < this->attackInfo.people2) {
-                piVar1 = &this->attackInfo.peopleValuesArray[0].tile2;
+            if (0 < DAT_TroopValueState::instance.attackInfo.people2) {
+                piVar1 = &DAT_TroopValueState::instance.attackInfo.peopleValuesArray[0].tile2;
                 do {
                     if (piVar1[2] == 0) {
                         fromYPosition
@@ -35,19 +36,19 @@ namespace Map {
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
                             (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh < _minDistance) {
-                            this->tile = ((AttackInfoSubArrayElement1*)(piVar1 + -1))->tile;
+                            DAT_TroopValueState::instance.tile = ((AttackInfoSubArrayElement1*)(piVar1 + -1))->tile;
                             _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             _minIndex = _index;
-                            this->x = fromXPosition;
-                            this->y = fromYPosition;
+                            DAT_TroopValueState::instance.x = fromXPosition;
+                            DAT_TroopValueState::instance.y = fromYPosition;
                         }
                     }
                     _index = _index + 1;
                     piVar1 = piVar1 + 4;
-                } while (_index < this->attackInfo.people2);
+                } while (_index < DAT_TroopValueState::instance.attackInfo.people2);
                 if (-1 < _minIndex) {
-                    this->attackInfo.peopleValuesArray[_minIndex].unitID = unitID;
-                    return (undefined4)(this->attackInfo.peopleValuesArray[_minIndex].tile2);
+                    DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_minIndex].unitID = unitID;
+                    return (undefined4)(DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_minIndex].tile2);
                 }
             }
             return (undefined4)(0);
