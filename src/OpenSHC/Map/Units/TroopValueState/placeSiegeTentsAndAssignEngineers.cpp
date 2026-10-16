@@ -109,7 +109,7 @@ namespace Map {
                     iVar5 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + 1;
                     DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = iVar5;
                 }
-                piVar6 = piVar6 + 0xcd;
+                piVar6 = piVar6 + 1;
                 _tribeID = _tribeID + 1;
             } while ((int)piVar6 < 0x176238c);
             if (iVar5) {
@@ -151,7 +151,7 @@ namespace Map {
                                     goto LAB_0051b9cb;
                             }
                             _unitID = _unitID + 1;
-                            _ptrPlayerID = _ptrPlayerID + 0x248;
+                            _ptrPlayerID = _ptrPlayerID + 1;
                             if (DAT_UnitsState::instance.maxUnitCount <= _unitID) {}
                         } while (true);
                     }
