@@ -45,8 +45,8 @@ namespace Map {
                             continue;
                         }
                         if (((playerID == 0
-                                    || (DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
-                                        == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
+                                 || (DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
+                                     == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
                                 || (DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID]
                                         .field239_0x2c6
                                     != 0))) {
@@ -227,18 +227,34 @@ namespace Map {
                         iVar6 = iVar6 + 1;
                     } while (iVar6 < local_96c);
                 }
-                if (local_968 < iVar5) {
-                    do {
-                        dVar2 = adStack_960[local_968];
-                        local_968 = local_968 + 1;
-                        iVar6 = 0;
-                        if (0 < local_96c) {
-                            do {
-                                if (aiStack_640[iVar6 * 2 + 1] != 1) {
-                                    iVar1 = aiStack_640[iVar6 * 2];
-                                    dVar3 = this->climbData[iVar1].area;
-                                    if (dVar3 == dVar2) {
-                                        dVar3 = this->climbData[iVar1].wallGroupAreaID;
+                while (local_968 < iVar5) {
+                    dVar2 = adStack_960[local_968];
+                    local_968 = local_968 + 1;
+                    iVar6 = 0;
+                    if (0 < local_96c) {
+                        do {
+                            if (aiStack_640[iVar6 * 2 + 1] != 1) {
+                                iVar1 = aiStack_640[iVar6 * 2];
+                                dVar3 = this->climbData[iVar1].area;
+                                if (dVar3 == dVar2) {
+                                    dVar3 = this->climbData[iVar1].wallGroupAreaID;
+                                    if (dVar3 == fromArea) {
+                                        return (int)(dVar2);
+                                    }
+                                    dVar4 = this->climbData[iVar1].buildingArea;
+                                    if (dVar4 == fromArea) {
+                                        return (int)(dVar2);
+                                    }
+                                    adStack_960[iVar5] = dVar3;
+                                    iVar5 = iVar5 + 1;
+                                    aiStack_640[iVar6 * 2 + 1] = 1;
+                                    if (0 < (int)dVar4) {
+                                        adStack_960[iVar5] = dVar4;
+                                        iVar5 = iVar5 + 1;
+                                    }
+                                } else {
+                                    dVar4 = this->climbData[iVar1].wallGroupAreaID;
+                                    if (dVar4 == dVar2) {
                                         if (dVar3 == fromArea) {
                                             return (int)(dVar2);
                                         }
@@ -247,48 +263,30 @@ namespace Map {
                                             return (int)(dVar2);
                                         }
                                         adStack_960[iVar5] = dVar3;
-                                        iVar5 = iVar5 + 1;
                                         aiStack_640[iVar6 * 2 + 1] = 1;
+                                        iVar5 = iVar5 + 1;
                                         if (0 < (int)dVar4) {
                                             adStack_960[iVar5] = dVar4;
                                             iVar5 = iVar5 + 1;
                                         }
-                                    } else {
-                                        dVar4 = this->climbData[iVar1].wallGroupAreaID;
-                                        if (dVar4 == dVar2) {
-                                            if (dVar3 == fromArea) {
-                                                return (int)(dVar2);
-                                            }
-                                            dVar4 = this->climbData[iVar1].buildingArea;
-                                            if (dVar4 == fromArea) {
-                                                return (int)(dVar2);
-                                            }
-                                            adStack_960[iVar5] = dVar3;
-                                            aiStack_640[iVar6 * 2 + 1] = 1;
-                                            iVar5 = iVar5 + 1;
-                                            if (0 < (int)dVar4) {
-                                                adStack_960[iVar5] = dVar4;
-                                                iVar5 = iVar5 + 1;
-                                            }
-                                        } else if (this->climbData[iVar1].buildingArea == dVar2) {
-                                            if (dVar3 == fromArea) {
-                                                return (int)(dVar2);
-                                            }
-                                            if (dVar4 == fromArea) {
-                                                return (int)(dVar2);
-                                            }
-                                            adStack_960[iVar5] = dVar3;
-                                            iVar5 = iVar5 + 1;
-                                            aiStack_640[iVar6 * 2 + 1] = 1;
-                                            adStack_960[iVar5] = dVar4;
-                                            iVar5 = iVar5 + 1;
+                                    } else if (this->climbData[iVar1].buildingArea == dVar2) {
+                                        if (dVar3 == fromArea) {
+                                            return (int)(dVar2);
                                         }
+                                        if (dVar4 == fromArea) {
+                                            return (int)(dVar2);
+                                        }
+                                        adStack_960[iVar5] = dVar3;
+                                        iVar5 = iVar5 + 1;
+                                        aiStack_640[iVar6 * 2 + 1] = 1;
+                                        adStack_960[iVar5] = dVar4;
+                                        iVar5 = iVar5 + 1;
                                     }
                                 }
-                                iVar6 = iVar6 + 1;
-                            } while (iVar6 < local_96c);
-                        }
-                    } while (local_968 < iVar5);
+                            }
+                            iVar6 = iVar6 + 1;
+                        } while (iVar6 < local_96c);
+                    }
                 }
                 DAT_PathFindingState::instance.field50_0x98 = 0;
                 fromArea = 0;
