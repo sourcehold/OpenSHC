@@ -47,7 +47,7 @@ namespace Map {
                         }
                     }
                     tribeID = tribeID + 1;
-                    piVar2 = piVar2 + 4;
+                    piVar2 = piVar2 + 1;
                 } while (tribeID < DAT_TroopValueState::instance.attackInfo.arch2);
                 if (-1 < local_8) {
                     DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[local_8].unitID = iVar1;
