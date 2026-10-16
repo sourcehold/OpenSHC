@@ -156,12 +156,12 @@ namespace Map {
                 if (0 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset + -8)) {
                     puVar4 = (AttackInfoSubElement*)((int)&DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset + 8);
                     do {
-                        puVar4->field4_0x10[2]
-                            = -(uint)(5 < *(byte*)(puVar4->field4_0x10[0] + 0x1ee2998
+                        puVar4->hackValuesArray[2]
+                            = -(uint)(5 < *(byte*)(puVar4->hackValuesArray[0] + 0x1ee2998
                                           + *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset + -0x10) * 80400))
                             & 9999;
                         _counter = _counter + 1;
-                        puVar4 = (AttackInfoSubElement*)(puVar4->field4_0x10 + 6);
+                        puVar4 = (AttackInfoSubElement*)(puVar4->hackValuesArray + 6);
                     } while (_counter < *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset + -8));
                 }
                 iVar4 = 0;
