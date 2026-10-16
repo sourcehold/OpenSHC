@@ -44,11 +44,11 @@ namespace Map {
             iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
             DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = 0;
             iVar4 = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[(
-                            &DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray)[param_2]]
+                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo
+                                               .unknownSignpostRelatedArray[param_2]]
                         .tile;
             if (iVar4 < 1) {
-                (&DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray)[param_2] = 0;
+                DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar4 = iVar2;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
