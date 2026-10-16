@@ -1,6 +1,8 @@
 #include "../../../Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
+
 namespace OpenSHC {
 namespace Map {
     namespace Units {
@@ -8,123 +10,150 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519310
         void TroopValueState::computeAttackWaveTroopComposition()
         {
-            this->attackInfo.maxMoatAttackTribes = 6;
-            if (this->attackInfo.attackTribeCount < 6) {
-                this->attackInfo.maxWallScaleTribes = this->attackInfo.spearmenAndMacemen;
-                this->attackInfo.maxTownAttackTribes = 1;
-                this->attackInfo.maxMoatAttackTribes = 1;
-                this->attackInfo.maxPeopleAttackTribes = 1;
-                this->attackInfo.maxGateAttackTribes = 1;
-                this->attackInfo.maxLadderTribes = 0;
-                this->attackInfo.maxTunnelerTribes = 0;
+            DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 6;
+            if (DAT_TroopValueState::instance.attackInfo.attackTribeCount < 6) {
+                DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
+                    = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen;
+                DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes = 1;
+                DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 1;
+                DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 1;
+                DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 1;
+                DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 0;
+                DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes = 0;
                 goto LAB_00519672;
             }
-            if (9 < this->attackInfo.attackTribeCount) {
-                if (this->attackInfo.attackTribeCount < 0x14) {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
-                        this->attackInfo.maxWallScaleTribes = 0;
-                    } else if (this->attackInfo.spearmenAndMacemen < 2) {
-                        this->attackInfo.maxWallScaleTribes = 1;
-                    } else if (this->attackInfo.spearmenAndMacemen < 4) {
-                        this->attackInfo.maxWallScaleTribes = this->attackInfo.spearmenAndMacemen + -1;
+            if (9 < DAT_TroopValueState::instance.attackInfo.attackTribeCount) {
+                if (DAT_TroopValueState::instance.attackInfo.attackTribeCount < 0x14) {
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 2) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 1;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 4) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
+                            = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + -1;
                     } else {
-                        this->attackInfo.maxWallScaleTribes = 3;
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 3;
                     }
-                    this->attackInfo.maxLadderTribes = 4;
-                    this->attackInfo.maxTownAttackTribes = (1 < this->attackInfo.pikemenSwordsmenAndMore) + 2;
-                    this->attackInfo.maxMoatAttackTribes = (6 < this->attackInfo.spearmenAndMacemen) + 3;
-                    this->attackInfo.maxPeopleAttackTribes = (4 < this->attackInfo.pikemenSwordsmenAndMore) + 2;
-                    this->attackInfo.maxGateAttackTribes = (0 < this->attackInfo.pikemenSwordsmenAndMore) + 1;
-                    if (this->attackInfo.laddermen < 5) {
-                        this->attackInfo.maxLadderTribes = this->attackInfo.laddermen;
+                    DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 4;
+                    DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                        = (1 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 2;
+                    DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
+                        = (6 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) + 3;
+                    DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes
+                        = (4 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 2;
+                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
+                        = (0 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 1;
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 5) {
+                        DAT_TroopValueState::instance.attackInfo.maxLadderTribes
+                            = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
-                    this->attackInfo.maxTunnelerTribes = 1;
-                } else if (this->attackInfo.attackTribeCount < 0x1e) {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
-                        this->attackInfo.maxWallScaleTribes = 0;
-                    } else if (this->attackInfo.spearmenAndMacemen < 2) {
-                        this->attackInfo.maxWallScaleTribes = 1;
-                    } else if (this->attackInfo.spearmenAndMacemen < 4) {
-                        this->attackInfo.maxWallScaleTribes = this->attackInfo.spearmenAndMacemen + -1;
+                    DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes = 1;
+                } else if (DAT_TroopValueState::instance.attackInfo.attackTribeCount < 0x1e) {
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 2) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 1;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 4) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
+                            = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + -1;
                     } else {
-                        this->attackInfo.maxWallScaleTribes = 3;
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 3;
                     }
-                    this->attackInfo.maxTownAttackTribes = (uint)(4 < this->attackInfo.pikemenSwordsmenAndMore) * 2 + 2;
-                    if (this->attackInfo.spearmenAndMacemen < 0xb) {
-                        this->attackInfo.maxMoatAttackTribes = (uint)(5 < this->attackInfo.spearmenAndMacemen) * 2 + 2;
+                    DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                        = (uint)(4 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) * 2 + 2;
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 0xb) {
+                        DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
+                            = (uint)(5 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) * 2 + 2;
                     }
-                    if (this->attackInfo.pikemenSwordsmenAndMore < 9) {
-                        this->attackInfo.maxPeopleAttackTribes = (uint)(4 < this->attackInfo.pikemenSwordsmenAndMore) * 2 + 2;
+                    if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 9) {
+                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes
+                            = (uint)(4 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) * 2 + 2;
                     } else {
-                        this->attackInfo.maxPeopleAttackTribes = 5;
+                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 5;
                     }
-                    this->attackInfo.maxGateAttackTribes = 2;
-                    this->attackInfo.maxLadderTribes = 5;
-                    if (this->attackInfo.laddermen < 6) {
-                        this->attackInfo.maxLadderTribes = this->attackInfo.laddermen;
+                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 2;
+                    DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 5;
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 6) {
+                        DAT_TroopValueState::instance.attackInfo.maxLadderTribes
+                            = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
-                    this->attackInfo.maxTunnelerTribes = (4 < this->attackInfo.pikemenSwordsmenAndMore) + 1;
+                    DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes
+                        = (4 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 1;
                 } else {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
-                        this->attackInfo.maxWallScaleTribes = 0;
-                    } else if (this->attackInfo.spearmenAndMacemen < 2) {
-                        this->attackInfo.maxWallScaleTribes = 1;
-                    } else if (this->attackInfo.spearmenAndMacemen < 5) {
-                        this->attackInfo.maxWallScaleTribes = this->attackInfo.spearmenAndMacemen + -1;
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 2) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 1;
+                    } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 5) {
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
+                            = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + -1;
                     } else {
-                        this->attackInfo.maxWallScaleTribes = 4;
+                        DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 4;
                     }
-                    this->attackInfo.maxTownAttackTribes = ((this->attackInfo.pikemenSwordsmenAndMore < 6) - 1 & 3) + 2;
-                    if (this->attackInfo.spearmenAndMacemen < 0xd) {
-                        this->attackInfo.maxMoatAttackTribes = (uint)(6 < this->attackInfo.spearmenAndMacemen) * 2 + 3;
+                    DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                        = ((DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 6) - 1 & 3) + 2;
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 0xd) {
+                        DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
+                            = (uint)(6 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) * 2 + 3;
                     } else {
-                        this->attackInfo.maxMoatAttackTribes = 8;
+                        DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 8;
                     }
-                    if (this->attackInfo.pikemenSwordsmenAndMore < 0xb) {
-                        this->attackInfo.maxPeopleAttackTribes = (uint)(8 < this->attackInfo.pikemenSwordsmenAndMore) * 2 + 3;
+                    if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 0xb) {
+                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes
+                            = (uint)(8 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) * 2 + 3;
                     } else {
-                        this->attackInfo.maxPeopleAttackTribes = 6;
+                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 6;
                     }
-                    this->attackInfo.maxLadderTribes = 6;
-                    this->attackInfo.maxGateAttackTribes = (0 < this->attackInfo.pikemenSwordsmenAndMore) + 2;
-                    if (this->attackInfo.laddermen < 7) {
-                        this->attackInfo.maxLadderTribes = this->attackInfo.laddermen;
+                    DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 6;
+                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
+                        = (0 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 2;
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 7) {
+                        DAT_TroopValueState::instance.attackInfo.maxLadderTribes
+                            = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
-                    this->attackInfo.maxTunnelerTribes = 2;
+                    DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes = 2;
                 }
                 goto LAB_00519672;
             }
-            if (this->attackInfo.spearmenAndMacemen < 1) {
-                this->attackInfo.maxWallScaleTribes = 0;
-            } else if (this->attackInfo.spearmenAndMacemen < 2) {
-                this->attackInfo.maxWallScaleTribes = 1;
-            } else if (this->attackInfo.spearmenAndMacemen < 3) {
-                this->attackInfo.maxWallScaleTribes = this->attackInfo.spearmenAndMacemen + -1;
+            if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
+                DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
+            } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 2) {
+                DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 1;
+            } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 3) {
+                DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
+                    = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + -1;
             } else {
-                this->attackInfo.maxWallScaleTribes = 2;
+                DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 2;
             }
-            this->attackInfo.maxTownAttackTribes = (this->attackInfo.pikemenSwordsmenAndMore) + 1;
-            this->attackInfo.maxMoatAttackTribes = (4 < this->attackInfo.spearmenAndMacemen) + 2;
-            if (!this->attackInfo.pikemenSwordsmenAndMore) {
-                this->attackInfo.maxPeopleAttackTribes = 0;
+            DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                = (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 1;
+            DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
+                = (4 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) + 2;
+            if (!DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) {
+                DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 0;
             LAB_005193ed:
-                this->attackInfo.maxGateAttackTribes = 0;
+                DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
             } else {
-                this->attackInfo.maxPeopleAttackTribes = 1;
-                this->attackInfo.maxGateAttackTribes = 1;
-                if (this->attackInfo.pikemenSwordsmenAndMore < 1)
+                DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 1;
+                DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 1;
+                if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 1)
                     goto LAB_005193ed;
             }
-            this->attackInfo.maxLadderTribes = 2;
-            if (this->attackInfo.laddermen < 3) {
-                this->attackInfo.maxLadderTribes = this->attackInfo.laddermen;
+            DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 2;
+            if (DAT_TroopValueState::instance.attackInfo.laddermen < 3) {
+                DAT_TroopValueState::instance.attackInfo.maxLadderTribes
+                    = DAT_TroopValueState::instance.attackInfo.laddermen;
             }
-            this->attackInfo.maxTunnelerTribes = (this->attackInfo.pikemenSwordsmenAndMore);
+            DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes
+                = (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore);
         LAB_00519672:
-            this->attackInfo.maxEngineerTribes = this->attackInfo.engineers;
-            this->attackInfo.maxLordAttackTribes = 3;
-            if ((int)this->attackInfo.maxTownAttackTribes < this->attackInfo.assassinTribeCount) {
-                this->attackInfo.maxTownAttackTribes = this->attackInfo.assassinTribeCount;
+            DAT_TroopValueState::instance.attackInfo.maxEngineerTribes
+                = DAT_TroopValueState::instance.attackInfo.engineers;
+            DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes = 3;
+            if ((int)DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                < DAT_TroopValueState::instance.attackInfo.assassinTribeCount) {
+                DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
+                    = DAT_TroopValueState::instance.attackInfo.assassinTribeCount;
             }
         }
 
