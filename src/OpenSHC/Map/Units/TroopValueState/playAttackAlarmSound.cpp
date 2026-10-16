@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -15,9 +16,9 @@ namespace Map {
         void TroopValueState::playAttackAlarmSound()
         {
             char* filename;
-            MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playBattleGloryMusicIfConditionsMet,
-                DAT_SoundSystemState::ptr)();
-            switch (this->attackInfo.attacker) {
+            MACRO_CALL_MEMBER(
+                Audio::MSS::SoundSystem_Func::playBattleGloryMusicIfConditionsMet, DAT_SoundSystemState::ptr)();
+            switch (DAT_TroopValueState::instance.attackInfo.attacker) {
             case 2:
             case 3:
             case 4:
@@ -31,7 +32,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(filename);
         switchD_0051b6d7_caseD_4:
-            this->attackInfo.attackAlarmPlayed = 1;
+            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 1;
         }
 
     }
