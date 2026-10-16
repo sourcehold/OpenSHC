@@ -45,9 +45,9 @@ namespace AI {
 
         for (int siegeIndex = 0; siegeIndex < 4; siegeIndex++) {
             int siegeUnitType = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
-            int i = 0;
             int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                                     [DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot];
+            int i = 0;
             if (locationCount > 3)
                 locationCount = 3;
             else if (locationCount <= 0)
