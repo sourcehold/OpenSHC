@@ -61,7 +61,7 @@ namespace Map {
                         }
                     }
                     iVar3 = iVar3 + 1;
-                    ptrUnit = ptrUnit + 0x248;
+                    ptrUnit = ptrUnit + 1;
                 } while (iVar3 < DAT_UnitsState::instance.maxUnitCount);
             }
         }
