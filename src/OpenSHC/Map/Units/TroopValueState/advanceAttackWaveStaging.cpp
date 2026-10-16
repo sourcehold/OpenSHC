@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -16,17 +17,18 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D690
         void TroopValueState::advanceAttackWaveStaging(int param_1)
         {
-            this->attackInfo.attackAlarmPlayed = 0;
-            this->attackInfo.value3Array01[param_1] = 2;
-            this->attackInfo.attackWaveTicker[param_1] = 0;
-            MACRO_CALL_MEMBER(
-                Game::GameStateStructures_Func::nof_fpoints_locationFinder, DAT_GameState::ptr)();
-            this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
+            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 0;
+            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 2;
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
+            MACRO_CALL_MEMBER(Game::GameStateStructures_Func::nof_fpoints_locationFinder, DAT_GameState::ptr)();
+            DAT_TroopValueState::instance.attackInfo.someCounter1
+                = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                 param_1, 2, 100000, (SomeTribeBehaviorType)((int)(1019)));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                 (Map::Units::SomeTribeBehaviorType)1022, Map::Units::STBT_5, 0, 0x32);
-            if (DAT_AttackInfoDefinedData::instance.AICasDisThreshold[this->attackInfo.attacker] <= this->attackInfo.casDis) {
+            if (DAT_AttackInfoDefinedData::instance.AICasDisThreshold[DAT_TroopValueState::instance.attackInfo.attacker]
+                <= DAT_TroopValueState::instance.attackInfo.casDis) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                     param_1, 1000, 10000, Map::Units::STBT_5);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
