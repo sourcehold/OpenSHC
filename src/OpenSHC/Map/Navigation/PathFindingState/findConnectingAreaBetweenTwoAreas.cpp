@@ -58,7 +58,6 @@ namespace Map {
                     dVar7 = this->climbData[iVar1].area;
                     if (dVar7 == param_3) {
                         dVar7 = this->climbData[iVar1].wallGroupAreaID;
-                    LAB_004a59a4:
                         if (dVar7 == param_2) {
                             return (dword)(param_3);
                         }
@@ -73,23 +72,34 @@ namespace Map {
                             adStack_960[iVar6] = dVar8;
                             iVar6 = iVar6 + 1;
                         }
-                    } else {
-                        dVar8 = this->climbData[iVar1].wallGroupAreaID;
-                        if (dVar8 == param_3)
-                            goto LAB_004a59a4;
-                        if (this->climbData[iVar1].buildingArea == param_3) {
-                            if (dVar7 == param_2) {
-                                return (dword)(param_3);
-                            }
-                            if (dVar8 == param_2) {
-                                return (dword)(param_3);
-                            }
-                            adStack_960[iVar6] = dVar7;
-                            iVar6 = iVar6 + 1;
-                            aiStack_640[iVar4 * 2 + 1] = 1;
+                    } else if (this->climbData[iVar1].wallGroupAreaID == param_3) {
+                        if (dVar7 == param_2) {
+                            return (dword)(param_3);
+                        }
+                        dVar8 = this->climbData[iVar1].buildingArea;
+                        if (dVar8 == param_2) {
+                            return (dword)(param_3);
+                        }
+                        adStack_960[iVar6] = dVar7;
+                        iVar6 = iVar6 + 1;
+                        aiStack_640[iVar4 * 2 + 1] = 1;
+                        if (0 < (int)dVar8) {
                             adStack_960[iVar6] = dVar8;
                             iVar6 = iVar6 + 1;
                         }
+                    } else if (this->climbData[iVar1].buildingArea == param_3) {
+                        dVar8 = this->climbData[iVar1].wallGroupAreaID;
+                        if (dVar7 == param_2) {
+                            return (dword)(param_3);
+                        }
+                        if (dVar8 == param_2) {
+                            return (dword)(param_3);
+                        }
+                        adStack_960[iVar6] = dVar7;
+                        iVar6 = iVar6 + 1;
+                        aiStack_640[iVar4 * 2 + 1] = 1;
+                        adStack_960[iVar6] = dVar8;
+                        iVar6 = iVar6 + 1;
                     }
                     iVar4 = iVar4 + 1;
                 } while (iVar4 < local_96c);
@@ -97,49 +107,60 @@ namespace Map {
                     do {
                         dVar7 = adStack_960[local_968];
                         local_968 = local_968 + 1;
-                        iVar4 = 0;
-                        do {
-                            if (aiStack_640[iVar4 * 2 + 1] != 1) {
-                                iVar1 = aiStack_640[iVar4 * 2];
-                                dVar8 = this->climbData[iVar1].area;
-                                if (dVar8 == dVar7) {
-                                    dVar8 = this->climbData[iVar1].wallGroupAreaID;
-                                LAB_004a5a70:
-                                    if (dVar8 == param_2) {
-                                        return (dword)(dVar7);
-                                    }
-                                    dword dVar2 = this->climbData[iVar1].buildingArea;
-                                    if (dVar2 == param_2) {
-                                        return (dword)(dVar7);
-                                    }
-                                    adStack_960[iVar6] = dVar8;
-                                    iVar6 = iVar6 + 1;
-                                    aiStack_640[iVar4 * 2 + 1] = 1;
-                                    if ((int)dVar2 <= 0)
-                                        goto LAB_004a5ad0;
-                                    adStack_960[iVar6] = dVar2;
-                                } else {
-                                    dVar2 = this->climbData[iVar1].wallGroupAreaID;
-                                    if (dVar2 == dVar7)
-                                        goto LAB_004a5a70;
-                                    if (this->climbData[iVar1].buildingArea != dVar7)
-                                        goto LAB_004a5ad0;
-                                    if (dVar8 == param_2) {
-                                        return (dword)(dVar7);
-                                    }
-                                    if (dVar2 == param_2) {
-                                        return (dword)(dVar7);
-                                    }
-                                    adStack_960[iVar6] = dVar8;
-                                    iVar6 = iVar6 + 1;
-                                    aiStack_640[iVar4 * 2 + 1] = 1;
-                                    adStack_960[iVar6] = dVar2;
+                        for (iVar4 = 0; iVar4 < local_96c; iVar4 = iVar4 + 1) {
+                            if (aiStack_640[iVar4 * 2 + 1] == 1) {
+                                continue;
+                            }
+                            iVar1 = aiStack_640[iVar4 * 2];
+                            dVar8 = this->climbData[iVar1].area;
+                            if (dVar8 == dVar7) {
+                                dVar8 = this->climbData[iVar1].wallGroupAreaID;
+                                if (dVar8 == param_2) {
+                                    return (dword)(dVar7);
                                 }
+                                dVar2 = this->climbData[iVar1].buildingArea;
+                                if (dVar2 == param_2) {
+                                    return (dword)(dVar7);
+                                }
+                                adStack_960[iVar6] = dVar8;
+                                iVar6 = iVar6 + 1;
+                                aiStack_640[iVar4 * 2 + 1] = 1;
+                                if ((int)dVar2 <= 0) {
+                                    continue;
+                                }
+                                adStack_960[iVar6] = dVar2;
+                                iVar6 = iVar6 + 1;
+                            } else if (this->climbData[iVar1].wallGroupAreaID == dVar7) {
+                                if (dVar8 == param_2) {
+                                    return (dword)(dVar7);
+                                }
+                                dVar2 = this->climbData[iVar1].buildingArea;
+                                if (dVar2 == param_2) {
+                                    return (dword)(dVar7);
+                                }
+                                adStack_960[iVar6] = dVar8;
+                                iVar6 = iVar6 + 1;
+                                aiStack_640[iVar4 * 2 + 1] = 1;
+                                if ((int)dVar2 <= 0) {
+                                    continue;
+                                }
+                                adStack_960[iVar6] = dVar2;
+                                iVar6 = iVar6 + 1;
+                            } else if (this->climbData[iVar1].buildingArea == dVar7) {
+                                dVar2 = this->climbData[iVar1].wallGroupAreaID;
+                                if (dVar8 == param_2) {
+                                    return (dword)(dVar7);
+                                }
+                                if (dVar2 == param_2) {
+                                    return (dword)(dVar7);
+                                }
+                                adStack_960[iVar6] = dVar8;
+                                iVar6 = iVar6 + 1;
+                                aiStack_640[iVar4 * 2 + 1] = 1;
+                                adStack_960[iVar6] = dVar2;
                                 iVar6 = iVar6 + 1;
                             }
-                        LAB_004a5ad0:
-                            iVar4 = iVar4 + 1;
-                        } while (iVar4 < local_96c);
+                        }
                     } while (local_968 < iVar6);
                 }
             }
