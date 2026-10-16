@@ -21,12 +21,13 @@ namespace Map {
             int _index;
             int _distance;
             int _tile;
+            int _startWalk = (short)DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
             _tilesPointer = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
             _index = DAT_TribesState::instance.ALG_ResultTileIndex;
             do {
                 _tile = *_tilesPointer;
-                _distance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0 && 0 < _distance) {
+                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0
+                    && (_distance = (short)DAT_TileMapState::instance.CertainPathLayer[_tile], 0 < _distance)) {
                     if (extraDistance + 0xc < _distance) {
                         return (dword)(0);
                     }
@@ -52,8 +53,7 @@ namespace Map {
                 if (4000 < _index) {
                     return (dword)(0);
                 }
-            } while (DAT_TileMapState::instance.WalkLayer[_tile]
-                == DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]);
+            } while ((short)DAT_TileMapState::instance.WalkLayer[_tile] == _startWalk);
             return (dword)(0);
         }
 

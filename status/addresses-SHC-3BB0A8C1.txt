@@ -24355,7 +24355,7 @@ SHC_3BB0A8C1_0x00496EC0 | 66.0% | hoist signed start-tile reads
 
 SHC_3BB0A8C1_0x00496F90 | 51.6% | abs() instead of shift idiom
 
-SHC_3BB0A8C1_0x00497080 | 41.4% | abs() instead of shift idiom
+SHC_3BB0A8C1_0x00497080 | 78.1% | hoist signed start-tile read
 
 SHC_3BB0A8C1_0x00497180 | 78.3% | hoist signed start-tile reads
 
