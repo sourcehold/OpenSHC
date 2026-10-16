@@ -8,6 +8,7 @@
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
@@ -22,16 +23,21 @@ namespace Map {
         void TroopValueState::trySendKnightTribeToAttack()
         {
             int iVar1;
-            int iVar2 = this->attackInfo.playerID_0x2c850;
-            if (0 < this->attackInfo.knightTribeCount && 9 < (int)this->attackInfo.attackInfoTickWrapCount
-                && (99 < (int)this->attackInfo.attackInfoTickWrapCount
-                    || (0 < DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
+            int iVar2 = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
+            if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount
+                && 9 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                && (99 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                    || (0 < DAT_GameState::instance
+                            .playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
                             .previousSiegeWeaponsCount))
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                int tribeID = this->attackInfo.macemenTribeArray[this->attackInfo.knightTribeCount + 99];
-                iVar1 = DAT_GameState::instance.playerDataArray[this->attackInfo.playerID_0x2c850]
-                            .previousSiegeWeaponsCount;
-                this->attackInfo.knightTribeCount = this->attackInfo.knightTribeCount + -1;
+                int tribeID = DAT_TroopValueState::instance.attackInfo
+                                  .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount + 99];
+                iVar1
+                    = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
+                          .previousSiegeWeaponsCount;
+                DAT_TroopValueState::instance.attackInfo.knightTribeCount
+                    = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 if (!iVar1) {
                     iVar2 = MACRO_CALL_MEMBER(
