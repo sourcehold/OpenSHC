@@ -14,7 +14,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004ED240
-    void AIVState::aiPlaceFlag(PlayerID playerID)
+    void AIVState::aiPlaceFlag(int playerID)
     {
         Map::Entities::EntityType const flagType
             = (Map::Entities::EntityType)DAT_AICState::instance
