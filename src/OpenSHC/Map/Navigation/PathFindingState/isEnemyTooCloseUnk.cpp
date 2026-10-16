@@ -30,6 +30,7 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
+            int _requiredDistanceSquared = requiredDistance * requiredDistance;
             int* _pEnemyUid = DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[playerID];
             _enemies = DAT_GameState::instance.playerDataArray[playerID].enemies;
             _enemyLoopCounter = 0;
@@ -38,13 +39,11 @@ namespace Map {
                 do {
                     _enemyID = *_enemyIdPtr;
                     if (DAT_UnitsState::instance.units[_enemyID].dying == 0
-                        && DAT_UnitsState::instance.units[_enemyID].uid
-                            == DAT_GameState::instance.mapAndTime
-                                .playerEnemenyUnitUIDShortList[playerID][_enemyLoopCounter]
+                        && DAT_UnitsState::instance.units[_enemyID].uid == _pEnemyUid[_enemyLoopCounter]
                         && (_xEnemyDistance = x - (int)DAT_UnitsState::instance.units[_enemyID].x,
                             _yEnemyDistance = y - (int)DAT_UnitsState::instance.units[_enemyID].y,
                             _yEnemyDistance * _yEnemyDistance + _xEnemyDistance * _xEnemyDistance
-                                    < requiredDistance * requiredDistance
+                                    < _requiredDistanceSquared
                                 && ((DAT_UnitsState::instance.units[_enemyID].unknownTestAgainst0_2 == 0
                                     && (DAT_UnitsState::instance.units[_enemyID].moveRelatedFlag != 1))))
                         && DAT_UnitsState::instance.units[_enemyID].isStalked == 0
