@@ -6,6 +6,7 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 
 namespace OpenSHC {
@@ -25,13 +26,13 @@ namespace Synchrony {
         iVar2 = 0;
         if (0 < this->scrollBarItemCount) {
             do {
-                MACRO_CALL(OS_Func::_free_base)((void*)(this->providerNames[iVar2]));
-                pvVar1 = GlobalHandle(this->guids[iVar2]);
+                MACRO_CALL(OS_Func::_free_base)((void*)(DAT_GameSynchronyState::instance.providerNames[iVar2]));
+                pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.guids[iVar2]);
                 GlobalUnlock(pvVar1);
-                pvVar1 = GlobalHandle(this->guids[iVar2]);
+                pvVar1 = GlobalHandle(DAT_GameSynchronyState::instance.guids[iVar2]);
                 GlobalFree(pvVar1);
-                this->providerNames[iVar2] = (WCHAR*)0x0;
-                this->guids[iVar2] = (GUID*)0x0;
+                DAT_GameSynchronyState::instance.providerNames[iVar2] = (WCHAR*)0x0;
+                DAT_GameSynchronyState::instance.guids[iVar2] = (GUID*)0x0;
                 iVar2 = iVar2 + 1;
             } while (iVar2 < this->scrollBarItemCount);
         }
@@ -39,7 +40,7 @@ namespace Synchrony {
         this->scrollBarItemCount = 0;
         if (0 < this->modemScrollbarCount) {
             do {
-                MACRO_CALL(OS_Func::_free_base)(this->stringPointerArray[iVar2]);
+                MACRO_CALL(OS_Func::_free_base)(DAT_GameSynchronyState::instance.stringPointerArray[iVar2]);
                 iVar2 = iVar2 + 1;
             } while (iVar2 < this->modemScrollbarCount);
         }

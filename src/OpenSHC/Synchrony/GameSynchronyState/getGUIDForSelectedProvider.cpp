@@ -3,6 +3,8 @@
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/GUID_DPSPGUID_TCPIP.hpp"
+
 namespace OpenSHC {
 namespace Synchrony {
 
@@ -17,16 +19,11 @@ namespace Synchrony {
               fixme: include check for steam provider
              */
             /* DirectPlay TCP/IP service provider {36E95EE0-8577-11CF-960C-0080C7534E82} */
-            *(undefined4*)param_1 = 0x36e95ee0;
-            *(undefined4*)((char*)param_1 + 4) = 0x11cf8577;
-            *(undefined4*)((char*)param_1 + 8) = 0x80000c96;
-            *(undefined4*)((char*)param_1 + 0xc) = 0x824e53c7;
+            *param_1 = GUID_DPSPGUID_TCPIP::instance;
+            return;
         }
         pGVar1 = this->guids[this->selectedProviderIndex + this->scrollBarItemOffset];
-        *(undefined4*)param_1 = *(undefined4*)pGVar1;
-        *(undefined4*)((char*)param_1 + 0x4) = *(undefined4*)((char*)pGVar1 + 0x4);
-        *(undefined4*)((char*)param_1 + 0x8) = *(undefined4*)((char*)pGVar1 + 0x8);
-        *(undefined4*)((char*)param_1 + 0xc) = *(undefined4*)((char*)pGVar1 + 0xc);
+        *param_1 = *pGVar1;
     }
 
 }
