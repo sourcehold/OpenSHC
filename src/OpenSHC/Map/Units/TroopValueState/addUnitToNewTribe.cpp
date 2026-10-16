@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -27,7 +28,7 @@ namespace Map {
         {
             int _tribe;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
-                int _playerID = (int)(char)this->attackInfo.attackWavePlayerIDArray[attackWave];
+                int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
                 if (!_playerID) {
                     _playerID = 2;
                 }
