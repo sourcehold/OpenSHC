@@ -53,9 +53,9 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
             this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
-            ushort uVar1
+            int uVar1
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
-            ushort uVar2
+            int uVar2
                 = DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
                           + param_2];
@@ -67,7 +67,7 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
                     uint uVar5 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (0x13a10 <= uVar5)
+                    if (0x13a0f < uVar5)
                         break;
                     int sVar3 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
