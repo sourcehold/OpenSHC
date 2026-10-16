@@ -215,7 +215,8 @@ namespace Map {
             byte pathLinkageRelated2; // 0x000002A2 length: 1
             byte gateState; // 0x000002A3 length: 1
             undefined1 unknownFlag4; // 0x000002A4 length: 1
-            undefined1 padding_0x2a5[2]; // 0x000002A5 length: 2
+            char maxOccupants; // 0x000002A5 length: 1
+            char childSpawnCountdown; // 0x000002A6 length: 1
             char randomOutpostField; // 0x000002A7 length: 1
             int uidWhenPlaced; // 0x000002A8 length: 4
             int attackWave; // 0x000002AC length: 4
@@ -241,14 +242,8 @@ namespace Map {
             short field247_0x2da; // 0x000002DA length: 2
             short unknownTickRelatedValue; // 0x000002DC length: 2
             ushort ifFireThenResponsiblePlayer; // 0x000002DE length: 2
-            short insideUnitID1; // 0x000002E0 length: 2
-            short insideUnitID2; // 0x000002E2 length: 2
-            short insideUnitID3; // 0x000002E4 length: 2
-            short insideUnitID4; // 0x000002E6 length: 2
-            int insideUnitUID1; // 0x000002E8 length: 4
-            int insideUnitUID2; // 0x000002EC length: 4
-            int insideUnitUID3; // 0x000002F0 length: 4
-            int insideUnitUID4; // 0x000002F4 length: 4
+            short insideUnitID[4]; // 0x000002E0 length: 8
+            int insideUnitUID[4]; // 0x000002E8 length: 16
             short hasUnitsOntop; // 0x000002F8 length: 2
             short tileScanCountdown; // 0x000002FA length: 2
             undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
@@ -256,12 +251,12 @@ namespace Map {
             short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2
             int tribeUID; // 0x00000304 length: 4
-            short field266_0x308; // 0x00000308 length: 2
+            short field260_0x308; // 0x00000308 length: 2
             short outpostRelatedUnk05; // 0x0000030A length: 2
             short spawnUnitTypeIndex; // 0x0000030C length: 2
             short outpostRelatedUnk2; // 0x0000030E length: 2
             short outpostRelatedUnk3; // 0x00000310 length: 2
-            short field271_0x312; // 0x00000312 length: 2
+            short field265_0x312; // 0x00000312 length: 2
             byte surroundingsRevealed; // 0x00000314 length: 1
             undefined1 padding_0x315[1]; // 0x00000315 length: 1
             short outpostRelatedUnk06; // 0x00000316 length: 2
