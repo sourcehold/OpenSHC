@@ -3,6 +3,7 @@
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -17,40 +18,37 @@ namespace Map {
         int TroopValueState::calculateHigh2ClostestToTribeTargetUnit(int tribeID)
         {
             int fromXPosition;
-            int* piVar2;
             int fromYPosition;
-            int local_c;
-            int local_8;
-            int iVar1 = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            local_c = 1000;
-            local_8 = -1;
-            tribeID = 0;
-            if (0 < this->attackInfo.high2) {
-                piVar2 = &this->attackInfo.high2ValuesArray[0].tile2;
-                do {
-                    if ((DAT_BuildingsState::instance.buildings[piVar2[1]].unknownCounterTo10000_0x2b4 < 9999)
-                        && (piVar2[2] == 0)) {
-                        fromYPosition
-                            = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[*piVar2];
-                        fromXPosition
-                            = *piVar2 - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
+            int _minDistance;
+            int _bestIndex;
+            int i;
+            int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            _minDistance = 1000;
+            _bestIndex = -1;
+            i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.high2) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.high2; i = i + 1) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].buildingID].unknownCounterTo10000_0x2b4 < 9999
+                        && DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].unitID == 0) {
+                        fromYPosition = (int)DAT_ViewportRenderState::instance
+                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile2];
+                        fromXPosition = DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile2
+                            - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                            DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[iVar1].x,
-                            (int)(DAT_UnitsState::instance.units[iVar1].y), fromXPosition, fromYPosition);
-                        if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_c) {
-                            this->tile = ((AttackInfoSubArrayElement1*)(piVar2 + -1))->tile;
-                            local_c = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                            local_8 = tribeID;
-                            this->x = fromXPosition;
+                            DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
+                            (int)(DAT_UnitsState::instance.units[_unitID].y), fromXPosition, fromYPosition);
+                        if (DAT_DirectionAlgorithmState::instance.distanceHigh < _minDistance) {
+                            _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             this->y = fromYPosition;
+                            this->x = fromXPosition;
+                            this->tile = DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile;
+                            _bestIndex = i;
                         }
                     }
-                    tribeID = tribeID + 1;
-                    piVar2 = piVar2 + 4;
-                } while (tribeID < this->attackInfo.high2);
-                if (-1 < local_8) {
-                    this->attackInfo.high2ValuesArray[local_8].unitID = iVar1;
-                    return this->attackInfo.high2ValuesArray[local_8].tile2;
+                }
+                if (-1 < _bestIndex) {
+                    DAT_TroopValueState::instance.attackInfo.high2ValuesArray[_bestIndex].unitID = _unitID;
+                    return DAT_TroopValueState::instance.attackInfo.high2ValuesArray[_bestIndex].tile2;
                 }
             }
             return 0;
