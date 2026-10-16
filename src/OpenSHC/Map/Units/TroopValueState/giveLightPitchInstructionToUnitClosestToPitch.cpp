@@ -56,7 +56,7 @@ namespace Map {
                         int _unitY = _ditchY - _pUnit->y;
                         int _unitX = _ditchX - _pUnit->x;
                         int _distancePyth = _unitX * _unitX + _unitY * _unitY;
-                        if (_distancePyth < 2500
+                        if (_distancePyth <= 2500
                             && (_shot = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::arrowShootingRelated,
                                     DAT_EntityState::ptr)((int)_pUnit->microXPosition, (int)(_pUnit->microYPosition),
                                     (int)(_pUnit->buildingHeight + 30 + _pUnit->terrainOrClimbHeight), _ditchX * 8 + 4,
