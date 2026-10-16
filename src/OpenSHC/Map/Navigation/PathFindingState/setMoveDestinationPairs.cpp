@@ -31,7 +31,7 @@ namespace Map {
                     uint _x = _tileCandidate - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                     uint _cost
                         = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[playerID][_tileCandidate];
-                    if (_cost != 0 && maxCost <= (int)_cost && (int)_cost <= maxCost + 10
+                    if (_cost != 0 && (int)_cost >= maxCost && (int)_cost <= maxCost + 10
                         && DAT_TileMapState::instance.CertainPathLayer[_tileCandidate] != 100) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
