@@ -150,13 +150,14 @@ namespace Map {
                               === AI Zone DISTANCE CHECK ===   If specified (i.e. not 0), then the strategic distance of
                               the current tile   must be exactly that value
                              */
-                            if (requiredDistanceFromAIZone != 0
-                                && (bVar2 = true,
-                                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                            if (requiredDistanceFromAIZone != 0) {
+                                bVar2 = true;
+                                if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
                                         int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
                                         + playerID * 0x177bc + -0x10)][_offsetTile]
-                                        != requiredDistanceFromAIZone)) {
-                                bVar2 = 0;
+                                    != requiredDistanceFromAIZone) {
+                                    bVar2 = 0;
+                                }
                             }
                             /*
                               === SIEGE TENT PLACEMENT VALIDATION ===   Only check for valid placement if distance > 4
