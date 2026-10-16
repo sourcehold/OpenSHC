@@ -20,6 +20,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE200
     void AICState::computeEnemyKeepApproachTile(int playerID)
     {
+        int keepX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
         int keepY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
         this->aiBorderTilesIndex = 0;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -29,8 +30,7 @@ namespace AI {
         for (int i = 0; i < (int)this->aiBorderTilesIndex; i++) {
             int tile = this->aiBorderTiles[i].tile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[playerID].campground.xEntry,
-                keepY,
+                DAT_DirectionAlgorithmState::ptr)(keepX, keepY,
                 tile
                     - DAT_ViewportRenderState::instance
                         .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
@@ -43,9 +43,10 @@ namespace AI {
         int shortestDistanceTile = 0;
         int shortestDistance = 100000;
         for (int i = 0; i < (int)this->aiBorderTilesIndex; i++) {
-            if (this->aiBorderTiles[i].distance < shortestDistance) {
+            int distance = this->aiBorderTiles[i].distance;
+            if (distance < shortestDistance) {
                 shortestDistanceTile = this->aiBorderTiles[i].tile;
-                shortestDistance = this->aiBorderTiles[i].distance;
+                shortestDistance = distance;
             }
         }
 
@@ -53,7 +54,7 @@ namespace AI {
         if (shortestDistanceTile <= 0)
             return;
 
-        short y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[shortestDistanceTile];
+        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[shortestDistanceTile];
         DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY = y;
         DAT_GameState::instance.playerDataArray[playerID].shortestDistanceTile = shortestDistanceTile;
         int x = shortestDistanceTile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
@@ -62,18 +63,13 @@ namespace AI {
         DAT_GameState::instance.mapAndTime.signpostEntryData[playerID - 1].y
             = DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY;
 
-        if ((short)DAT_TileMapState::instance.OrganismLayer
-                [DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                        .addXgetTile
-                    + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]
-            != 0)
-            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
-                (short)DAT_TileMapState::instance.OrganismLayer
-                    [DAT_ViewportRenderState::instance
-                            .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                            .addXgetTile
-                        + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]);
+        int treeID = (short)DAT_TileMapState::instance.OrganismLayer
+                         [DAT_ViewportRenderState::instance
+                                 .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
+                                 .addXgetTile
+                             + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX];
+        if (treeID != 0)
+            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(treeID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
             DAT_PathFindingState::ptr)(DAT_GameState::instance.mapAndTime.signpostEntryData[playerID - 1].x,
             DAT_GameState::instance.mapAndTime.signpostEntryData[playerID - 1].y, -1, -1, 2000, FALSE);
