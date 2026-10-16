@@ -67,7 +67,7 @@ namespace Map {
                     }
                     short sVar3 = DAT_TileMapState::instance.BuildingLayer[iVar5];
                     if (sVar3 != 0) {
-                        BuildingTypeShort BVar4 = DAT_BuildingsState::instance.buildings[sVar3].buildingType;
+                        int BVar4 = (short)DAT_BuildingsState::instance.buildings[sVar3].buildingType;
                         if (BVar4 != OpenSHC::Map::Buildings::BT_QUARRY
                             && BVar4 != OpenSHC::Map::Buildings::BT_KILLINGPIT
                             && DAT_GameState::instance.mapAndTime
