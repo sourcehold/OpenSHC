@@ -88,7 +88,7 @@ namespace Map {
                                         iVar8 < local_18))
                                     goto LAB_0049fdee;
                             } else {
-                                if ((uVar9 == 0) || (local_1c <= uVar9))
+                                if ((uVar9 == 0) || ((int)local_1c <= (int)uVar9))
                                     goto LAB_0049fdba;
                                 iVar8 = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
