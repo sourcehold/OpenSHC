@@ -124,13 +124,12 @@ namespace Map {
                     y2 = y2
                         + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_theDirection]
                               .int_.yOffset;
+                    int _building = DAT_TileMapState::instance.BuildingLayer[x2];
                     if ((DAT_TileMapState::instance.LogicLayer[x2] & 0x10000100U) != 0
                         && (DAT_TileMapState::instance.LogicLayer[x2] & 2U) == 0
-                        && (DAT_TileMapState::instance.BuildingLayer[x2] == 0
-                            || (DAT_BuildingDefinedData::instance
-                                    .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                            .buildings[DAT_TileMapState::instance.BuildingLayer[x2]]
-                                            .buildingType]
+                        && (_building == 0
+                            || (DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray
+                                    [(short)DAT_BuildingsState::instance.buildings[_building].buildingType]
                                 == 0))) {
                         this->field49_0x94 = this->field49_0x94 + 1;
                     }

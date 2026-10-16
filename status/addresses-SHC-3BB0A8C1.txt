@@ -25465,7 +25465,7 @@ SHC_3BB0A8C1_0x004A96B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A9760 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004A97D0 | 31.2% | start-tile masks hoisted
+SHC_3BB0A8C1_0x004A97D0 | 31.8% | building id in an int local
 
 SHC_3BB0A8C1_0x004A98C0 | 0.0% | Pending
 
