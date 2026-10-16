@@ -35,9 +35,11 @@ namespace Map {
             }
             DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps
                 = DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps - 1;
-            if (0 < DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps
-                || (DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps = 200,
-                    this->toggleUpdateSeparateAreaTileMap == 0)) {
+            if (0 < DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps) {
+                return FALSE;
+            }
+            DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps = 200;
+            if (this->toggleUpdateSeparateAreaTileMap == 0) {
                 return FALSE;
             }
             this->field41_0x74 = this->field41_0x74 + 1;
