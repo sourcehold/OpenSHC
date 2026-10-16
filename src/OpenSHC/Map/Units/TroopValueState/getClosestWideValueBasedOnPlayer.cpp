@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -15,51 +16,46 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A5B0
         undefined4 TroopValueState::getClosestWideValueBasedOnPlayer(int playerID)
         {
-            AttackInfoSubArrayElement1* _ptr;
             int fromXPosition;
-            int iVar2;
             int fromYPosition;
-            int local_1c;
-            int local_18;
-            int local_10;
-            int _playerID_2;
-            iVar2 = DAT_UnitsState::instance.units[playerID].owner * 0x177bc;
-            _playerID_2 = *(int*)((int)this->attackInfo.hackValuesArray + iVar2 + -0x10);
-            int destinationXPosition = DAT_GameState::instance.playerDataArray[_playerID_2].campground.xEntry;
-            int destinationYPosition = DAT_GameState::instance.playerDataArray[_playerID_2].campground.yEntry;
-            local_18 = 1000;
-            local_10 = -1;
-            local_1c = 0;
-            if (0 < *(int*)((int)this->attackInfo.wideValuesArray + iVar2 + -8)) {
-                _ptr = (AttackInfoSubArrayElement1*)((int)&this->attackInfo.wideValuesArray + iVar2 + 4);
-                do {
-                    if ((_ptr->buildingID < 5999) && (!_ptr->unitID)) {
-                        fromYPosition
-                            = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_ptr->tile2];
-                        fromXPosition = _ptr->tile2
+            int _minDistance;
+            int _bestIndex;
+            int i;
+            int iVar1;
+            int _owner = DAT_UnitsState::instance.units[playerID].owner;
+            _minDistance = 1000;
+            _bestIndex = -1;
+            int _attackedPlayerID = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].currentPlayerID_OR_attackedPlayerID_OR_one;
+            int destinationXPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.xEntry;
+            int destinationYPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.yEntry;
+            i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2; i = i + 1) {
+                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].buildingID < 5999 && !DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].unitID) {
+                        fromYPosition = (int)DAT_ViewportRenderState::instance
+                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].tile2];
+                        fromXPosition = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[playerID].x,
                             (int)(DAT_UnitsState::instance.units[playerID].y), fromXPosition, fromYPosition);
-                        int iVar1 = DAT_DirectionAlgorithmState::instance.distanceHigh;
+                        iVar1 = DAT_DirectionAlgorithmState::instance.distanceHigh;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(
                             destinationXPosition, destinationYPosition, fromXPosition, fromYPosition);
-                        if (iVar1 + DAT_DirectionAlgorithmState::instance.distanceHigh < local_18) {
-                            this->tile = _ptr->tile;
-                            local_10 = local_1c;
-                            local_18 = iVar1 + DAT_DirectionAlgorithmState::instance.distanceHigh;
-                            this->x = fromXPosition;
+                        iVar1 = iVar1 + DAT_DirectionAlgorithmState::instance.distanceHigh;
+                        if (iVar1 < _minDistance) {
                             this->y = fromYPosition;
+                            this->x = fromXPosition;
+                            this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].tile;
+                            _minDistance = iVar1;
+                            _bestIndex = i;
                         }
                     }
-                    local_1c = local_1c + 1;
-                    _ptr = _ptr + 1;
-                } while (local_1c < *(int*)((int)this->attackInfo.wideValuesArray + iVar2 + -8));
-                if (-1 < local_10) {
-                    iVar2 = local_10 * 0x10 + iVar2;
-                    *(int*)((int)this->attackInfo.wideValuesArray + iVar2 + 0xc) = playerID;
-                    return *(undefined4*)((int)this->attackInfo.wideValuesArray + iVar2 + 4);
+                }
+                if (-1 < _bestIndex) {
+                    DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[_bestIndex].unitID = playerID;
+                    return DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[_bestIndex].tile2;
                 }
             }
             return (undefined4)(0);
