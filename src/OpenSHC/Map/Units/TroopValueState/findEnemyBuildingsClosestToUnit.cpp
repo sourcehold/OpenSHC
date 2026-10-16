@@ -17,45 +17,39 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            AttackInfoSubArrayElement2* piVar2;
-            int local_14;
-            int local_10;
-            int local_8;
+            int _minDistance;
+            int _bestIndex;
+            int i;
             int _owner = (int)DAT_UnitsState::instance.units[unitID].owner;
-            int iVar1 = _owner * 0x177bc;
-            local_10 = 1000;
-            local_8 = -1;
-            local_14 = 0;
-            if (0 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8)) {
-                piVar2 = (AttackInfoSubArrayElement2*)((int)&DAT_TroopValueState::instance.attackInfo.townValuesArray
-                    + iVar1 + 4);
+            _minDistance = 1000;
+            _bestIndex = -1;
+            i = 0;
+            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].town2) {
                 do {
-                    if (!piVar2->unitID) {
-                        fromYPosition
-                            = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[piVar2->tile2];
-                        fromXPosition = piVar2->tile2
+                    if (!DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].unitID) {
+                        fromYPosition = (int)DAT_ViewportRenderState::instance
+                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].tile2];
+                        fromXPosition = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
                             (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
-                        DAT_DirectionAlgorithmState::instance.distanceHigh
-                            = DAT_DirectionAlgorithmState::instance.distanceHigh + (100 - piVar2->size) * 2;
-                        if (DAT_DirectionAlgorithmState::instance.distanceHigh < local_10) {
-                            DAT_TroopValueState::instance.tile = piVar2->tile;
-                            local_8 = local_14;
-                            local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                            DAT_TroopValueState::instance.x = fromXPosition;
-                            DAT_TroopValueState::instance.y = fromYPosition;
+                        int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
+                            + (100 - DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].size) * 2;
+                        DAT_DirectionAlgorithmState::instance.distanceHigh = _distance;
+                        if (_distance < _minDistance) {
+                            _minDistance = _distance;
+                            this->y = fromYPosition;
+                            this->x = fromXPosition;
+                            this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].tile;
+                            _bestIndex = i;
                         }
                     }
-                    local_14 = local_14 + 1;
-                    piVar2 = piVar2 + 1;
-                } while (
-                    local_14 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8));
-                if (-1 < local_8) {
-                    iVar1 = iVar1 + local_8 * 0x10;
-                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + 0xc) = unitID;
-                    return *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + 4);
+                    i = i + 1;
+                } while (i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].town2);
+                if (-1 < _bestIndex) {
+                    DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[_bestIndex].unitID = unitID;
+                    return DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[_bestIndex].tile2;
                 }
             }
             return (undefined4)(0);
