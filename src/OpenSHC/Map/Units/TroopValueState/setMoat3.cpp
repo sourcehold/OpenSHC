@@ -28,7 +28,7 @@ namespace Map {
                         *piVar1 = *piVar1 + 1;
                     }
                     _index = _index + 1;
-                    piVar4 = piVar4 + 4;
+                    piVar4 = piVar4 + 1;
                 } while (
                     _index < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -8));
             }
