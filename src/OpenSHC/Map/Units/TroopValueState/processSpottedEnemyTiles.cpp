@@ -15,34 +15,30 @@ namespace Map {
         void TroopValueState::processSpottedEnemyTiles()
         {
             BOOLEnum BVar1;
-            AttackInfoPitchRelated* piVar3;
-            piVar3 = &DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[0];
-            do {
-                int iVar2 = piVar3->tile;
+            for (int i = 0; i < 101; i = i + 1) {
+                int iVar2 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile;
                 if (0 < iVar2) {
-                    if (80400 < iVar2) {
-                        piVar3->tile = 0;
+                    if (80400 <= iVar2) {
+                        DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;
                     }
-                    if (piVar3->value == 100) {
+                    if (DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value == 100) {
                         BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue,
-                            this)(iVar2, DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID,
-                            DAT_TroopValueState::instance.attackInfo.playerID_0x2c850);
+                            this)(iVar2, DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, DAT_TroopValueState::instance.attackInfo.playerID_0x2c850);
                         if (BVar1) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::giveLightPitchInstructionToUnitClosestToPitch, this)(
                                 iVar2);
                         }
-                        piVar3->value = 99;
+                        DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = 99;
                     } else {
-                        iVar2 = piVar3->value + -1;
-                        piVar3->value = iVar2;
-                        if (iVar2 < 1) {
-                            piVar3->tile = 0;
+                        iVar2 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value + -1;
+                        DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = iVar2;
+                        if (iVar2 <= 0) {
+                            DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;
                         }
                     }
                 }
-                piVar3 = piVar3 + 1;
-            } while ((int)piVar3 < 0x178e8cc);
+            }
         }
 
     }
