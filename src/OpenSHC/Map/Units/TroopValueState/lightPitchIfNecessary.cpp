@@ -21,33 +21,27 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051C1A0
         void TroopValueState::lightPitchIfNecessary(int unitID, int unitID2)
         {
-            int _playerID;
             int _targetID;
             BOOLEnum _yes;
-            int _pitchDitchUID;
-            int _tile;
-            int _unit2Tile;
-            short _y;
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
-                _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
+                int _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
                 if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1)
                     && (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
-                    _unit2Tile = DAT_UnitsState::instance.units[unitID2].tile;
-                    if (((DAT_TileMapState::instance.LogicLayer[_unit2Tile] & 8))
-                        && ((_targetID = MACRO_CALL_MEMBER(
-                                 Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(_unit2Tile),
+                    int _unit2Tile = DAT_UnitsState::instance.units[unitID2].tile;
+                    if ((DAT_TileMapState::instance.LogicLayer[_unit2Tile] & 8)
+                        && (_targetID = MACRO_CALL_MEMBER(
+                                Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(_unit2Tile),
                             _targetID != 0
                                 && (_yes = MACRO_CALL_MEMBER(
                                         Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue, this)(
-                                        _unit2Tile, _playerID,
-                                        (int)((int)(DAT_UnitsState::instance.units[unitID2].owner))),
-                                    _yes)))) {
-                        _y = DAT_TileMapState::instance.pitchDitches[_targetID].y;
+                                        _unit2Tile, _playerID, (int)(DAT_UnitsState::instance.units[unitID2].owner)),
+                                    _yes))) {
+                        short _y = DAT_TileMapState::instance.pitchDitches[_targetID].y;
                         DAT_UnitsState::instance.units[unitID].shootTargetMicroX
                             = DAT_TileMapState::instance.pitchDitches[_targetID].x * 8 + 4;
-                        _tile = DAT_TileMapState::instance.pitchDitches[_targetID].tile;
+                        int _tile = DAT_TileMapState::instance.pitchDitches[_targetID].tile;
                         DAT_UnitsState::instance.units[unitID].shootTargetMicroY = _y * 8 + 4;
-                        _pitchDitchUID = DAT_TileMapState::instance.pitchDitches[_targetID].uid;
+                        int _pitchDitchUID = DAT_TileMapState::instance.pitchDitches[_targetID].uid;
                         DAT_UnitsState::instance.units[unitID].shootTargetZ
                             = (ushort)DAT_TileMapState::instance.HeightLayer[_tile];
                         DAT_UnitsState::instance.units[unitID].shootTargetedUnit = -1;
