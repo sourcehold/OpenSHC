@@ -40,11 +40,9 @@ namespace Map {
         undefined4 PathFindingState::certainDamageToUnitsUnk(
             int param_1, int param_2, int param_3, int param_4, undefined4 param_5)
         {
-            short sVar5;
             short sVar6;
             int iVar9;
             int iVar11;
-            eSFX sfxOffsetInArray;
             EntityType local_8;
             int local_4;
             this->searchGeneration = this->searchGeneration + 1;
@@ -99,21 +97,21 @@ namespace Map {
                                 DAT_UnitsState::instance.units[iVar9].health = 0;
                                 DAT_UnitsState::instance.units[iVar9].dying = 1;
                                 DAT_UnitsState::instance.units[iVar9].animationCycleNumber = 0;
-                                if ((char)param_5 == '\0') {
-                                    sVar6 = DAT_UnitsState::instance.units[iVar9].y;
-                                    sVar5 = DAT_UnitsState::instance.units[iVar9].x;
-                                    sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_SPLAT;
-                                    DAT_UnitsState::instance.units[iVar9].state.generic
-                                        = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
-                                } else {
-                                    sVar6 = DAT_UnitsState::instance.units[iVar9].y;
-                                    sVar5 = DAT_UnitsState::instance.units[iVar9].x;
-                                    sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_DEATH_ARROW;
+                                if ((char)param_5 != '\0') {
                                     DAT_UnitsState::instance.units[iVar9].state.generic
                                         = OpenSHC::Map::Units::States::US_DEATH_01;
+                                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
+                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[iVar9].x,
+                                        (short)DAT_UnitsState::instance.units[iVar9].y,
+                                        OpenSHC::DE::SHCDE::FX_DEATH_ARROW);
+                                } else {
+                                    DAT_UnitsState::instance.units[iVar9].state.generic
+                                        = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
+                                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
+                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[iVar9].x,
+                                        (short)DAT_UnitsState::instance.units[iVar9].y,
+                                        OpenSHC::DE::SHCDE::FX_SPLAT);
                                 }
-                                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
-                                    DAT_SFXState::ptr)((int)sVar5, (int)(sVar6), sfxOffsetInArray);
                                 DAT_UnitsState::instance.units[iVar9].tunnelerFinishedDigging = 1;
                             }
                             iVar11 = DAT_UnitsState::instance.units[iVar9].maxHealth;
@@ -122,9 +120,8 @@ namespace Map {
                             } else {
                                 sVar6 = (short)((DAT_UnitsState::instance.units[iVar9].health * 100) / iVar11);
                             }
-                            DAT_UnitsState::instance.units[iVar9].healthbar
-                                = sVar6 / 10;
                             DAT_UnitsState::instance.units[iVar9].healthPercentage = sVar6;
+                            DAT_UnitsState::instance.units[iVar9].healthbar = sVar6 / 10;
                         }
                         uVar4 = DAT_UnitsState::instance.units[iVar9].nextUnitOnTheSameTile;
                     }
