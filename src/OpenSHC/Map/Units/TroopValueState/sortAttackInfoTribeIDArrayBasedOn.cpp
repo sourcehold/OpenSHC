@@ -118,7 +118,7 @@ namespace Map {
                     _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + 1;
                     DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = _index;
                 }
-                psVar1 = psVar1 + 0x19a;
+                psVar1 = psVar1 + 1;
                 _tribeID = _tribeID + 1;
             } while ((int)psVar1 < 0x17623a0);
             if ((0 < shrinkSize) && (0 < tribeSizeSumLimit)) {
