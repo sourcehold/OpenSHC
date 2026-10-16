@@ -189,10 +189,7 @@
     __asm add WRITEIDX, 1                                                             \
     __asm push_done_##ID##_##N:
 
-#define MACRO_LINKAGE_EXPAND_AREA_NEIGHBOURS(ID, WRITEIDX)                            \
-    __asm mov edx, _tile                                                              \
-    __asm mov edi, _areaLayer                                                         \
-    __asm mov ebx, _cLink                                                             \
+#define MACRO_LINKAGE_AREA_PUSHES(ID, WRITEIDX)                                    \
     MACRO_LINKAGE_PUSH_AREA(ID, w, WRITEIDX, -2, 0x40, MACRO_ASM_DEC, MACRO_ASM_SAME) \
     MACRO_LINKAGE_PUSH_AREA(ID, e, WRITEIDX, +2, 0x04, MACRO_ASM_INC, MACRO_ASM_SAME) \
     __asm mov edx, _tile                                                              \
@@ -213,4 +210,34 @@
     MACRO_LINKAGE_PUSH_AREA(ID, s, WRITEIDX, 0, 0x10, MACRO_ASM_SAME, MACRO_ASM_INC)  \
     MACRO_LINKAGE_PUSH_AREA(ID, se, WRITEIDX, +2, 0x08, MACRO_ASM_INC, MACRO_ASM_INC)
 
+// The flood-fill's inner loop as the original writes it (0x00499711): the loop test, the
+// zone-size counter bump and the three per-entry loads are handwritten too, and what they leave
+// in edx (the tile), bl (the linkage byte) and edi (the area layer) is what the pushes consume -
+// which is why those no longer reload them. Needs "int* _zoneSizes" and "uchar* _linkage"
+// beside the locals the pushes use, "int _tile" and "int _cY" declared outside the loop, and
+// the area id as a short, since the original keeps it in a 16-bit register.
+#define MACRO_LINKAGE_AREA_LOOP(ID, READIDX, WRITEIDX)                             \
+    __asm mov edi, _areaLayer                                                      \
+    __asm area_loop_##ID:                                                          \
+    __asm mov ecx, READIDX                                                         \
+    __asm cmp ecx, WRITEIDX                                                        \
+    __asm je area_loop_done_##ID                                                   \
+    __asm mov esi, _zoneSizes                                                      \
+    __asm mov eax, 0                                                               \
+    __asm mov edx, 1                                                               \
+    __asm mov ax, word ptr _areaID                                                 \
+    __asm add dword ptr [esi + eax*4], edx                                         \
+    __asm mov esi, _tilesQueue                                                     \
+    __asm mov edx, dword ptr [esi + ecx*4]                                         \
+    __asm mov _tile, edx                                                           \
+    __asm mov esi, _yQueue                                                         \
+    __asm mov eax, 0                                                               \
+    __asm mov ax, word ptr [esi + ecx*2]                                           \
+    __asm mov _cY, eax                                                             \
+    __asm mov ebx, _linkage                                                        \
+    __asm mov bl, byte ptr [ebx + edx]                                             \
+    MACRO_LINKAGE_AREA_PUSHES(ID, WRITEIDX)                                        \
+    __asm add READIDX, 1                                                           \
+    __asm jmp area_loop_##ID                                                       \
+    __asm area_loop_done_##ID:
 // clang-format on

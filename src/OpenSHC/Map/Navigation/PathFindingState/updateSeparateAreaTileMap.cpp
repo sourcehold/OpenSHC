@@ -59,7 +59,11 @@ namespace Map {
             int* _tilesQueue = this->searchQueue.tilesQueue;
             short* _yQueue = this->searchQueue.yQueue;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
-            int _areaID = 1;
+            uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
+            int* _zoneSizes = this->zoneSizesArray;
+            int _tile;
+            int _cY;
+            short _areaID = 1;
             int _row = 0;
             int* _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
             for (int _first = 0; _first < 80400; _first = _first + 1) {
@@ -75,14 +79,8 @@ namespace Map {
                 this->searchQueue.yQueue[0] = _row;
                 DAT_TileMapState::instance.PathConnectionLayer[_first] = _areaID;
                 forceUpdate = 1;
-                for (int _readIndex = 0; _readIndex != forceUpdate; _readIndex = _readIndex + 1) {
-                    this->zoneSizesArray[(ushort)_areaID] = this->zoneSizesArray[(ushort)_areaID] + 1;
-                    int _tile = this->searchQueue.tilesQueue[_readIndex];
-                    int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
-                    int _cLink = DAT_TileMapState::instance.PathLinkageLayer[_tile];
-
-                    MACRO_LINKAGE_EXPAND_AREA_NEIGHBOURS(1, forceUpdate)
-                }
+                int _readIndex = 0;
+                MACRO_LINKAGE_AREA_LOOP(1, _readIndex, forceUpdate)
                 _areaID = _areaID + 1;
                 if (999 < _areaID) {
                     break;
@@ -91,7 +89,9 @@ namespace Map {
             this->totalZones = (int)_areaID;
             int* _zoneSize = this->zoneSizesArray + 2;
             for (int _group = 333; _group != 0; _group = _group - 1) {
-                this->sum = _zoneSize[1] + this->sum + _zoneSize[-1] + *_zoneSize;
+                this->sum = this->sum + _zoneSize[-1];
+                this->sum = this->sum + *_zoneSize;
+                this->sum = this->sum + _zoneSize[1];
                 _zoneSize = _zoneSize + 3;
             }
             MACRO_CALL_MEMBER(
