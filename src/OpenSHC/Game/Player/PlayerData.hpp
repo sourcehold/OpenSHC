@@ -250,7 +250,7 @@ namespace Game {
             int field714_0x22cc; // 0x000022CC length: 4
             int countInns; // 0x000022D0 length: 4
             int lastlastEncounteredEnemyPlayerID; // 0x000022D4 length: 4
-            undefined1 padding_0x22d8[4]; // 0x000022D8 length: 4
+            char lostUnitToEnemyPlayerFlags[4]; // 0x000022D8 length: 4
             int sumOfTotalEnemyUnitsCount; // 0x000022DC length: 4
             XYPairShort barracksAssemblyPoints[7]; // 0x000022E0 length: 28
             int aivID; // 0x000022FC length: 4
@@ -307,7 +307,7 @@ namespace Game {
             int aivPositiveFearFactorDelay; // 0x00002B4C length: 4
             int defWallPatrolRallyTimeWaitCounter; // 0x00002B50 length: 4
             int defWallPatrolRallyTimeHits; // 0x00002B54 length: 4
-            int field852_0x2b58; // 0x00002B58 length: 4
+            int field849_0x2b58; // 0x00002B58 length: 4
             int engineerCountRelated; // 0x00002B5C length: 4
             BOOLEnum isEngineerRequired; // 0x00002B60 length: 4
             int closestEnemyDistanceToTheLord; // 0x00002B64 length: 4
@@ -341,7 +341,7 @@ namespace Game {
             int attackedPlayerID_2Unk; // 0x00002BD4 length: 4
             int attackedPlayerID; // 0x00002BD8 length: 4
             int attackedByPlayerArrayUnk; // 0x00002BDC length: 4
-            int field889_0x2be0; // 0x00002BE0 length: 4
+            int field886_0x2be0; // 0x00002BE0 length: 4
             undefined1 padding_0x2be4[4]; // 0x00002BE4 length: 4
             int unusedEnemyAttackTracker[9][8]; // 0x00002BE8 length: 288
             undefined1 padding_0x2d08[20]; // 0x00002D08 length: 20
@@ -436,12 +436,7 @@ namespace Game {
             int someCount46; // 0x0000399C length: 4
             short keepEnclosementRelatedCountdown; // 0x000039A0 length: 2
             short defensesDamagedByPlayer; // 0x000039A2 length: 2
-            XYPairShort engineersAssemblyPoints[2]; // 0x000039A4 length: 8
-            short tunnelersGuildAssemblyPointX; // 0x000039AC length: 2
-            short tunnelersGuildAssemblyPointY; // 0x000039AE length: 2
-            short cathedralAssemblyPointX; // 0x000039B0 length: 2
-            short cathedralAssemblyPointY; // 0x000039B2 length: 2
-            undefined1 padding_0x39b4[4]; // 0x000039B4 length: 4
+            XYPairShort specialBuildingAssemblyPoints[5]; // 0x000039A4 length: 20
             undefined2 someCount28; // 0x000039B8 length: 2
             undefined2 someCount30; // 0x000039BA length: 2
             short unknownCounter01; // 0x000039BC length: 2
