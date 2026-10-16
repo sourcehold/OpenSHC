@@ -56,7 +56,7 @@ namespace Map {
             int uVar1
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
             int uVar2
-                = DAT_TileMapState::instance
+                = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
                           + param_2];
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[param_1].y;
