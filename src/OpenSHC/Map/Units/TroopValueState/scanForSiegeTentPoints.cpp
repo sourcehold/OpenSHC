@@ -37,7 +37,7 @@ namespace Map {
                     uint uVar5 = (uint)DAT_TileMapState::instance.HeightLayer[_candidateTile];
                     local_1c = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                     for (local_10 = 0; local_10 < 8; local_10++) {
-                        uint uVar1 = (uint) * (byte*)((*local_1c)[0] + 0x1d32c38 + _candidateTile);
+                        uint uVar1 = (uint)DAT_TileMapState::instance.HeightLayer[(*local_1c)[0] + _candidateTile];
                         iVar8 = (*local_1c)[0] + _candidateTile;
                         if (uVar5 + 6 < uVar1 || (int)uVar1 < (int)(uVar5 - 6)
                             || DAT_TileMapState::instance.UnitLayer[iVar8] != 0
@@ -48,9 +48,7 @@ namespace Map {
                         uVar1 = uVar5 + 8;
                         local_14 = 0;
                         do {
-                            uint uVar4 = (uint)
-                                * (byte*)(DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14]
-                                    + 0x1d32c38 + iVar8);
+                            uint uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8];
                             int iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
@@ -58,9 +56,7 @@ namespace Map {
                                     != DAT_TroopValueState::instance.attackInfo.startCon
                                 || (DAT_TileMapState::instance.LogicLayer[iVar2] & 0xa0002400U))
                                 break;
-                            uVar4 = (uint)
-                                * (byte*)(DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1]
-                                    + 0x1d32c38 + iVar8);
+                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
@@ -72,9 +68,7 @@ namespace Map {
                                 iVar7 = iVar7 + 1;
                                 break;
                             }
-                            uVar4 = (uint)
-                                * (byte*)(DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2]
-                                    + 0x1d32c38 + iVar8);
+                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
@@ -85,9 +79,7 @@ namespace Map {
                                 iVar7 = iVar7 + 2;
                                 break;
                             }
-                            uVar4 = (uint)
-                                * (byte*)(DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3]
-                                    + 0x1d32c38 + iVar8);
+                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
