@@ -1,9 +1,9 @@
 #include "../../../Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/AI/Tribes/AITribeTypeInt.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
-#include "OpenSHC/AI/Tribes/AITribeTypeInt.hpp"
 #include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -18,10 +18,9 @@ namespace Map {
         void TroopValueState::sortAttackInfoTribeIDArrayBasedOn(
             int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier)
         {
-            int iVar1;
             Tribe* psVar1;
             int* piVar2;
-            const AI::Tribes::AITribeTypeInt* _tribeTypePriority;
+            AI::Tribes::AITribeTypeInt const* _tribeTypePriority;
             int iVar3;
             int _currentTribeType;
             int _nextValue;
@@ -109,11 +108,11 @@ namespace Map {
             this->attackInfo.tribeIDArraySize = 0;
             psVar1 = &DAT_TribesState::instance.tribes[1];
             do {
-                if (((((psVar1->tribeState) && (psVar1->tribeState != 3))
-                         && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[psVar1->owner] == -1))
-                        && ((psVar1->attackWave == attackWave
-                            && (psVar1->attackInfo_someCounter1 != this->attackInfo.someCounter1))))
-                    && ((psVar1->tribeBehaviorType != 1040 && (psVar1->tribeBehaviorType != 1045)))) {
+                if (psVar1->tribeState && psVar1->tribeState != 3
+                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[psVar1->owner] == -1
+                    && psVar1->attackWave == attackWave
+                    && psVar1->attackInfo_someCounter1 != this->attackInfo.someCounter1
+                    && psVar1->tribeBehaviorType != 1040 && psVar1->tribeBehaviorType != 1045) {
                     this->attackInfo.tribeIDArray[_index] = _tribeID;
                     _index = this->attackInfo.tribeIDArraySize + 1;
                     this->attackInfo.tribeIDArraySize = _index;
@@ -243,7 +242,7 @@ namespace Map {
                 iVar3 = 0;
                 if (0 < _index) {
                     do {
-                        iVar1 = this->attackInfo.tribeIDArray[iVar3];
+                        int iVar1 = this->attackInfo.tribeIDArray[iVar3];
                         if (tribeSizeSumLimit < _tribeSizeSum) {
                             this->attackInfo.tribeRelatedArrayValue0UpTo12[iVar3] = 0xc;
                             _index = this->attackInfo.tribeIDArraySize;
