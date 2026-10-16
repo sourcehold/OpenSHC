@@ -29,13 +29,13 @@ namespace Map {
         BOOLEnum PathFindingState::doMoveFromTileToTile(
             int unitID, int tile, int y, int direction, int param_5, int ignoreAssassinClimbing)
         {
-            int bVar2;
+            byte bVar2;
             uint uVar3;
             int _targetTile;
             uint uVar4;
-            int _terrainHeight2;
-            int _height;
-            int _terrainHeight;
+            ushort _terrainHeight2;
+            ushort _height;
+            ushort _terrainHeight;
             if (param_5 != 0) {
                 if (param_5 == 1) {
                     if ((DAT_TileMapState::instance
@@ -76,7 +76,7 @@ namespace Map {
                                 DAT_UnitsState::instance.units[unitID].state.generic
                                     = OpenSHC::Map::Units::States::US_ASSASSIN_THROWING_HOOK;
                                 DAT_UnitsState::instance.units[unitID].assassinHeightDifference
-                                    = (ushort)_terrainHeight - (ushort)_height;
+                                    = _terrainHeight - _height;
                                 DAT_UnitsState::instance.units[unitID].assassinClimbingUpUnk_OR_previousFacingDirection
                                     = 1;
                                 DAT_UnitsState::instance.units[unitID].ownerOfAssassinScaledObject = (bVar2 & 7) + 1;
@@ -85,7 +85,7 @@ namespace Map {
                                 DAT_UnitsState::instance.units[unitID].state.generic
                                     = OpenSHC::Map::Units::States::US_ASSASSIN_START_CLIMBING_DOWN;
                                 DAT_UnitsState::instance.units[unitID].assassinHeightDifference
-                                    = (ushort)_height - (ushort)_terrainHeight2;
+                                    = _height - _terrainHeight2;
                                 DAT_UnitsState::instance.units[unitID].assassinClimbingUpUnk_OR_previousFacingDirection
                                     = 0;
                             }
