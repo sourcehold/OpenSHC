@@ -17,39 +17,39 @@ namespace AI {
     using OpenSHC::Map::Units::UnitTypeShort;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC390
-    AIVUnitType AICState::getUnitTypeIndexForUnitID(int unitID, int param_2)
+    AIVUnitType AICState::getUnitTypeIndexForUnitID(int unitID, int allowSlaveSlotForRanged)
     {
-        UnitTypeShort _unitType = DAT_UnitsState::instance.units[unitID].unitType;
-        int _playerID = DAT_UnitsState::instance.units[unitID].owner;
-        UnitTypeInt _unitType2;
-        if (_unitType == OpenSHC::Map::Units::UT_PEASANT) {
-            _unitType2 = DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto;
+        UnitTypeShort unitType = DAT_UnitsState::instance.units[unitID].unitType;
+        int owner = DAT_UnitsState::instance.units[unitID].owner;
+        UnitTypeInt effectiveUnitType;
+        if (unitType == OpenSHC::Map::Units::UT_PEASANT) {
+            effectiveUnitType = DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto;
         } else {
-            _unitType2 = _unitType;
+            effectiveUnitType = unitType;
         }
 
         // 6 is the Caliph's AIC index: he fields slaves rather than the ranged units listed below
-        if (DAT_GameState::instance.playerDataArray[_playerID].aiType - 1 != 6 && param_2 != 0
-            && DAT_GameState::instance.playerDataArray[_playerID].aivUnitLocationSlotLocationCount[0xd] > 0) {
-            if (_unitType2 == OpenSHC::Map::Units::UT_E_ARCHER) {
+        if (DAT_GameState::instance.playerDataArray[owner].aiType - 1 != 6 && allowSlaveSlotForRanged != 0
+            && DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[0xd] > 0) {
+            if (effectiveUnitType == OpenSHC::Map::Units::UT_E_ARCHER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
-            if (_unitType2 == OpenSHC::Map::Units::UT_E_XBOW) {
+            if (effectiveUnitType == OpenSHC::Map::Units::UT_E_XBOW) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
-            if (_unitType2 == OpenSHC::Map::Units::UT_A_ARCHER) {
+            if (effectiveUnitType == OpenSHC::Map::Units::UT_A_ARCHER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
-            if (_unitType2 == OpenSHC::Map::Units::UT_A_SLINGER) {
+            if (effectiveUnitType == OpenSHC::Map::Units::UT_A_SLINGER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
-            if (_unitType2 == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+            if (effectiveUnitType == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
         }
 
         for (int someUnitTypeIndex = 0; someUnitTypeIndex < 0x14; someUnitTypeIndex++) {
-            if (DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray[someUnitTypeIndex] == _unitType2) {
+            if (DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray[someUnitTypeIndex] == effectiveUnitType) {
                 return (AIVUnitType)someUnitTypeIndex;
             }
         }

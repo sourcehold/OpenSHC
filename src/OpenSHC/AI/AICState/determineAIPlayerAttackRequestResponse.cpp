@@ -8,7 +8,8 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D38C0
-    BOOLEnum AICState::determineAIPlayerAttackRequestResponse(int playerID, undefined4 param_2, int requestedByPlayerID)
+    BOOLEnum AICState::determineAIPlayerAttackRequestResponse(
+        int playerID, undefined4 targetPlayerID, int requestedByPlayerID)
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return FALSE;
