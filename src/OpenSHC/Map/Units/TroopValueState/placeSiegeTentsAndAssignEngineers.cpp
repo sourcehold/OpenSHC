@@ -60,7 +60,7 @@ namespace Map {
             do {
                 byte bVar1 = (*local_c)[0];
                 MappersEnum MVar3 = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field5_0xc8 + iVar6);
-                iVar4 = *(int*)((int)DAT_AttackInfoDefinedData::instance.field1461_0x9ec + iVar6);
+                iVar4 = *(int*)((int)DAT_AttackInfoDefinedData::instance.field39_0x9ec + iVar6);
                 iVar7 = 0;
                 if (0 < (char)bVar1) {
                     do {
@@ -76,7 +76,7 @@ namespace Map {
                         iVar7 = iVar7 + 1;
                     } while (iVar7 < (char)bVar1);
                 }
-                iVar7 = DAT_AttackInfoDefinedData::instance.field1474_0xa0c;
+                iVar7 = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
                 iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
                 local_c = (byte(*)[10])(*local_c + 1);
                 iVar6 = iVar6 + 4;
