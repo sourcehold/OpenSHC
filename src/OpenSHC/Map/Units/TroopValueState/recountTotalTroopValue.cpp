@@ -31,7 +31,7 @@ namespace Map {
             this->attackInfo.playerTotalTroopValueArray[6] = 0;
             this->attackInfo.playerTotalTroopValueArray[7] = 0;
             this->attackInfo.playerTotalTroopValueArray[8] = 0;
-            this->attackInfo.field105442_0x25b28 = 0;
+            this->attackInfo.field98978_0x25b28 = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 pUVar2 = &DAT_UnitsState::instance.units[1];
                 iVar2 = DAT_UnitsState::instance.maxUnitCount - 1;
