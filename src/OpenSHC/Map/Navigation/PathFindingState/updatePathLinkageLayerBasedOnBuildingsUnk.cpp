@@ -50,12 +50,13 @@ namespace Map {
             }
             local_24 = _height + 0x10;
             local_28 = _height - 0x10;
-            if ((_building != 0)
-                && (_buildingType = DAT_BuildingsState::instance.buildings[_building].buildingType,
-                    _result
-                    = (BOOLEnum)(DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray[(short)_buildingType] != 0),
-                    DAT_BuildingDefinedData::instance.BuildingIsKeepArray[(short)_buildingType] != 0)) {
-                _result = TRUE;
+            if (_building != 0) {
+                _buildingType = DAT_BuildingsState::instance.buildings[_building].buildingType;
+                _result
+                    = (BOOLEnum)(DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray[(short)_buildingType] != 0);
+                if (DAT_BuildingDefinedData::instance.BuildingIsKeepArray[(short)_buildingType] != 0) {
+                    _result = TRUE;
+                }
             }
             int bVar2 = 0;
             int bVar4 = 0;
