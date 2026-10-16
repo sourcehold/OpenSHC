@@ -23,7 +23,7 @@ namespace Map {
                 piVar4 = (AttackInfoSubArrayElement2*)((int)&DAT_TroopValueState::instance.attackInfo.moatValuesArray
                     + _offset + 0xc);
                 do {
-                    if ((piVar4->size < 5999) && ((!piVar4->unitID || (checkAgainstNonZero)))) {
+                    if (piVar4->size < 5999 && (!piVar4->unitID || (checkAgainstNonZero))) {
                         piVar1 = (int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -4);
                         *piVar1 = *piVar1 + 1;
                     }
