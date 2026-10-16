@@ -24713,7 +24713,7 @@ SHC_3BB0A8C1_0x0049F040 | 85.6% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049F2D0 | 85.0% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x0049F540 | 85.6% | reuse computed start tile
+SHC_3BB0A8C1_0x0049F540 | 86.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049F7D0 | 31.1% | widen local to int
 
