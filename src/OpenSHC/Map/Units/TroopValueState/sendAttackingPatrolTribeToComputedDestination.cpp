@@ -21,38 +21,36 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D0D0
         void TroopValueState::sendAttackingPatrolTribeToComputedDestination(int tribeID)
         {
-            short sVar1;
             dword _tile;
-            sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            MACRO_CALL_MEMBER(
-                Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
+            short sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
+                1);
             _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                 DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),
-                (int)((int)(DAT_UnitsState::instance.units[sVar1].owner)), (uint)((int)(12)), 1);
+                (uint)(DAT_UnitsState::instance.units[sVar1].y), (int)(DAT_UnitsState::instance.units[sVar1].owner),
+                (uint)(12), 1);
             if ((int)_tile < 1) {
                 _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                     DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                    (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),
-                    (int)((int)(DAT_UnitsState::instance.units[sVar1].owner)), (uint)((int)(30)), 1);
+                    (uint)(DAT_UnitsState::instance.units[sVar1].y), (int)(DAT_UnitsState::instance.units[sVar1].owner),
+                    (uint)(30), 1);
                 if ((int)_tile < 1) {
                     _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                         DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                        (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),
-                        (int)((int)(DAT_UnitsState::instance.units[sVar1].owner)), (uint)((int)(50)), 1);
+                        (uint)(DAT_UnitsState::instance.units[sVar1].y),
+                        (int)(DAT_UnitsState::instance.units[sVar1].owner), (uint)(50), 1);
                 }
             }
-            MACRO_CALL_MEMBER(
-                Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
+                0);
             if (0 < (int)_tile) {
-                MACRO_CALL_MEMBER(
-                    Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
-                    (uint)((int)(_tile
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
+                    (uint)(_tile
                         - DAT_ViewportRenderState::instance
                             .translationMatrix[DAT_ViewportRenderState::instance
                                     .tileTranslationMatrix_YComponent[_tile]]
-                            .addXgetTile)),
-                    (uint)((int)((int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile])), 0, 0,
+                            .addXgetTile),
+                    (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile]), 0, 0,
                     Map::Units::Instructions::UMSE_0);
             }
         }
