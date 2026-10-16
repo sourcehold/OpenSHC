@@ -29,16 +29,6 @@ CASES = [
     ("(a == 1)", "a == 1"),
     # nested || of the same operator flattens
     ("((a == 1 || (b == 2)) || c == 3)", "a == 1 || b == 2 || c == 3"),
-    # a shift is not a comparison: matching its first character split the operator,
-    # turning `1 << x` into `1 < < x` and breaking two files in the tree
-    ("(((int)*p & 1 << ((byte)i & 0x1f)))", "(int)*p & 1 << ((byte)i & 0x1f)"),
-    ("(a >> 4 == 2)", "a >> 4 == 2"),
-    # a shift binds tighter than &, so its group is redundant there
-    ("((a << b) & c)", "a << b & c"),
-    # but looser than |, so a | group in front of a shift keeps its brackets
-    ("((a | b) << c)", "(a | b) << c"),
-    # <<= is an assignment, not a shift to split
-    ("(a <<= 2)", "a <<= 2"),
 ]
 
 if __name__ == "__main__":

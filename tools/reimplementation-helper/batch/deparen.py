@@ -31,9 +31,8 @@ import common
 
 # loosest first; a lower rank binds less tightly
 LEVELS = [[","], ["="], ["||"], ["&&"], ["|"], ["^"], ["&"], ["==", "!="],
-          ["<=", ">=", "<", ">"], ["<<", ">>"]]
+          ["<=", ">=", "<", ">"]]
 COMPARISON = 7          # index in LEVELS of ==/!=; anything at or past this is a comparison
-SHIFT = 9               # index in LEVELS of <</>>, which bind tighter than any comparison
 
 
 def match_paren(s, i):
@@ -56,12 +55,6 @@ def scan_top(s):
         if s[i] in "([":
             j = match_paren(s, i)
             i = (j + 1) if j != -1 else i + 1
-            continue
-        # A shift has to be matched before the `<` and `>` below, which would otherwise
-        # match its first character and split the operator: `1 << x` came back as `1 < < x`.
-        if (s.startswith("<<", i) or s.startswith(">>", i)) and s[i + 2:i + 3] != "=":
-            yield i, SHIFT, s[i:i + 2]
-            i += 2
             continue
         for level, tokens in enumerate(LEVELS):
             hit = None

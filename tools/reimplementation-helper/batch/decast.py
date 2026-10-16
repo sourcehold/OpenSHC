@@ -9,16 +9,14 @@ Measured as code-generation neutral over the UnitsState namespace (19 casts, no 
 any function), so it is a readability pass -- but re-measure after running it.
 
 usage:
-  decast.py [path-filter] [--apply]
+  decast.py [path-filter]
 """
 
 import sys
 
 import common
 
-args = [a for a in sys.argv[1:] if a != "--apply"]
-apply_changes = "--apply" in sys.argv[1:]
-path_filter = args[0] if args else ""
+path_filter = sys.argv[1] if len(sys.argv) > 1 else ""
 
 # (outer, inner) pairs where dropping the inner cast cannot change the conversion
 PAIRS = [("int", "int"), ("uint", "uint"), ("short", "short"), ("ushort", "ushort"),
@@ -91,10 +89,8 @@ for f in common.list_files():
         if n > 200:
             sys.exit("%s: not converging" % f)
     if n:
-        if apply_changes:
-            common.write_text(f, text)
-            common.format_file(f)
+        common.write_text(f, text)
+        common.format_file(f)
         print("%-52s %d" % (f.rsplit("/", 1)[-1][:-4], n))
         total += n
-print("%d doubled cast(s) collapsed%s"
-      % (total, "" if apply_changes else " (dry run, pass --apply)"))
+print("%d doubled cast(s) collapsed" % total)

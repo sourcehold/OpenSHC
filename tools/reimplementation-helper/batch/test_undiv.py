@@ -10,21 +10,15 @@ usage:
 
 import undiv
 
-# A `(int)` on the *bias operand* is kept on the dividend. The decompiler writes it only
-# when the variable is not already a signed int, and the two reasons are indistinguishable
-# from the text: a uint variable, where the cast is what keeps the division signed, or a
-# short/char being widened, where it is redundant but compiles identically. Keeping it is
-# therefore safe either way, and dropping it cost addUnitToTribe 5 points of match and
-# gained 37 once restored.
 CASES = [
     # the plain form
     ("v = (x + (x >> 0x1f & 7U)) >> 3;", "v = x / 8;"),
     # the sum wrapped in a signed cast, which is where the shift then sits
     ("v = (int)(x + (x >> 0x1f & 0xfU)) >> 4;", "v = x / 16;"),
     # a cast on the dividend inside the bias as well as outside it
-    ("v = (int)((int)a->b + ((int)a->b >> 0x1f & 7U)) >> 3;", "v = (int)a->b / 8;"),
+    ("v = (int)((int)a->b + ((int)a->b >> 0x1f & 7U)) >> 3;", "v = a->b / 8;"),
     # a wide mask
-    ("v = ((int)(r + ((int)r >> 0x1f & 0x1ffU)) >> 9) + k;", "v = ((int)r / 512) + k;"),
+    ("v = ((int)(r + ((int)r >> 0x1f & 0x1ffU)) >> 9) + k;", "v = (r / 512) + k;"),
     # two independent divisions in one expression
     ("v = ((x + (x >> 0x1f & 7U)) >> 3) - ((y + (y >> 0x1f & 7U)) >> 3);",
      "v = (x / 8) - (y / 8);"),

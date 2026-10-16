@@ -13,7 +13,7 @@ Declaration position does not change code generation, so this is a readability p
 it before measuring, not instead of.
 
 usage:
-  declare_at_use.py [path-filter] [--apply]
+  declare_at_use.py [path-filter]
 """
 
 import re
@@ -21,86 +21,23 @@ import sys
 
 import common
 
-args = [a for a in sys.argv[1:] if a != "--apply"]
-apply_changes = "--apply" in sys.argv[1:]
-path_filter = args[0] if args else ""
+path_filter = sys.argv[1] if len(sys.argv) > 1 else ""
 
 DECL = re.compile(r"^(?P<type>(?:unsigned\s+|const\s+)*[A-Za-z_][\w:]*)\s+"
                   r"(?P<ptr>\**)\s*(?P<name>[A-Za-z_]\w*)\s*"
                   r"(?P<arr>\[[^\]]*\])?\s*;$")
 
 
-def is_case_label(line):
-    """True for a `case ...:` or `default:` label.
-
-    Deliberately not a regex: an earlier version of this check compiled a literal
-    backspace where a word boundary was meant, so it matched nothing and the guard
-    below passed every switch it was written to reject.
-    """
-    s = line.strip()
-    return s.startswith("case ") or s.startswith("default:") or s.startswith("default :")
-
-
 def depths(lines):
-    """Lowest brace depth each line's own code sits at.
-
-    A line is recorded at the minimum depth it reaches rather than the depth it opens at,
-    so a use on a closing-brace line is seen at the *outer* depth. `} while (cond);` is
-    the case that matters: recorded at the inner depth it slipped past the scope check
-    below, and a declaration moved into the do-block left the while condition referring
-    to an out-of-scope variable, which does not compile.
-    """
     out, d = [], 0
     for line in lines:
-        code = re.sub(r"//.*", "", line)
-        low = d
-        for ch in code:
-            if ch == "{":
-                d += 1
-            elif ch == "}":
-                d -= 1
-                low = min(low, d)
-        out.append(low)
-    return out
-
-
-def depths_after(lines):
-    """Brace depth *after* each line, which is what says where a block ends.
-
-    depths() reports the lowest depth a line reaches so that a use on a closing line is
-    seen outside the block. That is the wrong measure for block extent: it makes an inner
-    `}` look like the end of the enclosing block, which stopped the case-label scan below
-    before it reached the label it was looking for.
-    """
-    out, d = [], 0
-    for line in lines:
+        out.append(d)
         code = re.sub(r"//.*", "", line)
         d += code.count("{") - code.count("}")
-        out.append(d)
     return out
 
 
-def paren_depth_before(lines):
-    """Round-bracket depth at the start of each line.
-
-    A declaration can only replace an assignment that is a statement in its own right.
-    Ghidra also emits assignments inside comma expressions in a condition, and a
-    continuation line of one starts with `var =` just like a statement does:
-
-        if ((-1 < x) && (i = p->idx, local_8 = n * 4, i < p->len)) {
-
-    predictUnitInterceptPosition got `int local_8 = ...` spliced in there, which is not
-    valid C++. A nonzero depth here says the line sits inside such an expression.
-    """
-    out, d = [], 0
-    for line in lines:
-        out.append(d)
-        code = re.sub(r"//.*", "", line)
-        d += code.count("(") - code.count(")")
-    return out
-
-
-def move(path, write=True):
+def move(path):
     text = common.read_text(path).replace("\r\n", "\n")
     brace = re.compile(r"\n[ \t]*\{[ \t]*\n").search(text, text.index("// FUNCTION:"))
     if not brace:
@@ -134,25 +71,9 @@ def move(path, write=True):
         first = uses[0]
         if not re.match(r"^\s*%s\s*=[^=]" % re.escape(var), lines[first]):
             continue                              # first touch is not a plain assignment
-        stmt = re.sub(r"//.*", "", lines[first]).rstrip()
-        if paren_depth_before(lines)[first] or not stmt.endswith(";"):
-            continue                              # an assignment inside an expression
         d = depths(lines)
         if any(d[n] < d[first] for n in range(first, uses[-1] + 1)):
             continue                              # the scope would not cover every use
-        # A `case` label reached after the declaration jumps over its initialisation,
-        # which MSVC rejects with C2360. Brace depth cannot see this on its own, since
-        # every arm of a switch shares one depth. The scan also has to run to the end of
-        # the block enclosing the first use rather than to the last use, because the
-        # variable stays in scope that far: in calculateHoveredTile the offending label
-        # sits three lines *after* the last use of imageX.
-        after = depths_after(lines)
-        end = first + 1
-        while end < len(lines) and after[end] >= d[first]:
-            end += 1
-        if any(d[n] == d[first] and is_case_label(lines[n])
-               for n in range(first + 1, end)):
-            continue
         lines[first] = re.sub(r"^(\s*)%s\s*=" % re.escape(var),
                               lambda m: "%s%s %s%s =" % (m.group(1), vtype, ptr, var),
                               lines[first], count=1)
@@ -161,28 +82,20 @@ def move(path, write=True):
     if not drop:
         return None
     kept = [d[0] for d in decls if d[4] not in drop]
-    if write:
-        common.write_text(path, head + "\n".join(l for n, l in enumerate(lines) if n not in drop))
+    common.write_text(path, head + "\n".join(l for n, l in enumerate(lines) if n not in drop))
     return len(decls), len(drop), kept
 
 
-def main():
-    touched = 0
-    for f in common.list_files():
-        if path_filter not in f:
-            continue
-        result = move(f, write=apply_changes)
-        if not result:
-            continue
-        count, moved, kept = result
-        if apply_changes:
-            common.format_file(f)
-        touched += 1
-        print("%-52s %2d declarations, %2d moved, left: %s"
-              % (f.rsplit("/", 1)[-1][:-4], count, moved, " ".join(kept) or "-"))
-    print("%d file(s) changed%s"
-          % (touched, "" if apply_changes else " (dry run, pass --apply)"))
-
-
-if __name__ == "__main__":
-    main()
+touched = 0
+for f in common.list_files():
+    if path_filter not in f:
+        continue
+    result = move(f)
+    if not result:
+        continue
+    count, moved, kept = result
+    common.format_file(f)
+    touched += 1
+    print("%-52s %2d declarations, %2d moved, left: %s"
+          % (f.rsplit("/", 1)[-1][:-4], count, moved, " ".join(kept) or "-"))
+print("%d file(s) changed" % touched)
