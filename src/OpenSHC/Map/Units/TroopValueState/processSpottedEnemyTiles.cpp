@@ -3,6 +3,8 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
+
 namespace OpenSHC {
 namespace Map {
     namespace Units {
@@ -14,7 +16,7 @@ namespace Map {
         {
             BOOLEnum BVar1;
             AttackInfoPitchRelated* piVar3;
-            piVar3 = &this->attackInfo.spottedEnemyTiles[0];
+            piVar3 = &DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[0];
             do {
                 int iVar2 = piVar3->tile;
                 if (0 < iVar2) {
@@ -23,7 +25,8 @@ namespace Map {
                     }
                     if (piVar3->value == 100) {
                         BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue,
-                            this)(iVar2, this->attackInfo.pitchRelatedPlayerID, this->attackInfo.playerID_0x2c850);
+                            this)(iVar2, DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID,
+                            DAT_TroopValueState::instance.attackInfo.playerID_0x2c850);
                         if (BVar1) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::giveLightPitchInstructionToUnitClosestToPitch, this)(
