@@ -46,7 +46,7 @@ namespace Map {
                         }
                     }
                     local_14 = local_14 + 1;
-                    piVar2 = piVar2 + 4;
+                    piVar2 = piVar2 + 1;
                 } while (local_14 < *(int*)((int)this->attackInfo.hackValuesArray + _offset + -8));
                 if (-1 < local_8) {
                     iVar1 = _offset + local_8 * 0x10;
