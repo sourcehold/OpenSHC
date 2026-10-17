@@ -134,11 +134,10 @@ namespace Map {
                       units of building's actual terrain   height
                      */
                     if (abs(_heightDiff) < 32
-                        && ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate]
-                                == (int)(short)_unitArea
+                        && ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate] == _unitArea
                             || (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                 calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                    this)((int)_unitOwner, (dword)((int)((short)_unitArea)),
+                                    this)((int)_unitOwner, (dword)(_unitArea),
                                     (dword)((int)((
                                         int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate])),
                                     0),
