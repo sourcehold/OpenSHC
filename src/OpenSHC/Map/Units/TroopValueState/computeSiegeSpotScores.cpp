@@ -25,8 +25,8 @@ namespace Map {
             int _counterTillHack2;
             uint _pathFindingCost;
             int _offset;
-            bool bVar6;
-            bool bVar7;
+            int bVar6;
+            int bVar7;
             uint _tile3;
             int _attackedPlayerID;
             int _hack2;
