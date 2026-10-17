@@ -378,3 +378,14 @@ When a relevant skill exists, prefer it over this document, as it contains more 
 ## Agent Maintenance
 
 If you discover undocumented conventions, missing workflows, or repeated guidance, suggest updates to this guide or the relevant skill.
+
+- **`reccmp_report.py --run` does not build.** It only re-runs reccmp over the DLL that is already
+  on disk, so a source edit measured with `--run` alone scores the *previous* build. Run
+  `build_quiet.py` (check for `BUILD_OK`) first, every time. A suspiciously bit-identical diff -
+  same percentages and the same `(file.cpp:NN)` line numbers as before the edit - is the symptom.
+
+- **Switch-arm source order decides the arm layout, including for a jump-table switch.**
+  `playAttackAlarmSound` went 75% -> 100% purely by moving `case 5:` ahead of `case 2/3/4:`, which
+  is the order reccmp's printed jump table implies (the arm reached by the lowest `start + N`
+  offset comes first in the source). Sort the distinct jump-table offsets, map each back to its
+  arm, and lay the arms out in that order.
