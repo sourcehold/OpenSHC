@@ -570,3 +570,55 @@ Naturally, the stack reserved for the function indicated by `sub esp, <number>` 
 At best, not only the stack fits, but variables are also at the correct positions and sizes within.
 
 If the stack usage shows a proper order in the function (i.e. the initial array occupies the first part in the allocated function stack, which means it requires the highest `[esp + <number>]` to reach), it might be sometimes good to fit one "side" of the stack first and then experiment with the rest of the function that has a non-fitting stack usage.
+
+### A constant that reaches a field through a register was a local in the source
+
+Where several arms of a chain each store the *same* literal both into a field and into an
+arithmetic expression, the original loads the literal into a register first:
+
+```asm
+mov eax, -0x96              ; the constant, in a register
+add ebp, eax                ; popularity = popularityAfterFear + penalty
+mov dword ptr [ebx], ebp
+mov word ptr [esi + 0x32ff8], ax   ; someCount54 = penalty, from the SAME register
+```
+
+Writing the constants out per arm (`popularity = snapshot - 150; someCount54 = -150;`) gives
+`mov word ptr [...], -0x96` with an *immediate* instead, because the two uses then share nothing.
+The source assigned one local in each arm and used it after the chain; MSVC then duplicated the
+two statements into every arm, which is why the stores look per-arm in the asm:
+
+```cpp
+int siegePenalty;
+if (c <= 0) { siegePenalty = -150; } else if (c <= 5) { siegePenalty = -125; } /* ... */
+this->...popularity = popularityAfterFear + siegePenalty;
+this->...someCount54 = (short)siegePenalty;
+```
+
+This single change took `updatePopularity` from 68.3% to 93.2%; it also fixed the register
+allocation of the whole surrounding function, which had looked like an unrelated allocator gap.
+The tell is an *immediate* on our side where the original uses a byte/word register (`ax`, `cx`)
+that was just loaded with the same constant.
+
+### The struct/loop base anchor moves when a field loses its stores
+
+MSVC picks one address as the base for a run of accesses into the same object
+(`lea esi, [ecx + 0x367e4]`, then `[esi - 0x10]`, `[esi + 0xe0]`, ...). Which field lands at
+offset 0 is not the most-used one and is not controllable from the source, but it *does* change
+when the source changes: introducing a local for a field that was previously stored in several
+arms moved the anchor by 0xe0 in `processFoodConsumption` and by 0x10 in
+`processPeasantSpawnAndDespawnCycle`, and every displacement in the function then differs.
+
+Both of those locals are provably present in the original (a value survives a call in a
+callee-saved register), yet the anchor shift cost more than the local gained:
+81.7% -> 61.7% and 85.3% -> 69.0%. So when a `FRAME`-free function regresses by a large,
+suspiciously uniform amount after a one-line change, compare the `lea`/`add` that sets up the
+base before looking anywhere else, and keep the form with the matching anchor.
+
+### A function that looks huge may be a tail call
+
+`nof_fpoints_locationFinder` had been reimplemented with a 40-line `do/while` body; the original
+is eleven instructions ending in `mov ecx, <global>; jmp 0x4a6940`, a tail call to
+`PathFindingState::searchCertainPathLayer`, whose body Ghidra had folded into the caller's
+decompilation. Check the original's last instruction for a `jmp` to another function's entry
+before reproducing a long body: 35.6% -> normalized 100% here.

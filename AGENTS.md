@@ -160,6 +160,19 @@ restyling anything large:
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
+`quick_diff.py` is a triage tool and it misranks two things. It prints the **wrong immediates for the
+original side** (`0x51eb851f` where the binary holds `0x66666667` or `0x10624dd3`), so never read a constant
+out of its output - use `orig_asm.py` or Ghidra. And its difflib ratio can invert the reccmp ranking even well
+above the 0.6 the README warns about, because a changed base anchor makes every displacement differ textually
+while the opcodes still line up: on `updateCrowding` it preferred a variant that measured 25.5% over one that
+measured 33.3%. Rank with it, then settle small functions with `try_styles.py`, which narrows the build list to
+one file and therefore costs about a minute per variant.
+
+reccmp symbolizes an immediate that happens to coincide with a data address, and it does so per binary. The
+thirty `push 0xffffff` of `renderDebugDataCurrentPlayerData` come out as
+`push I<BuildingsState>::instance+424671` on the original side and as the plain immediate on ours, which caps
+that function at ~96% with no source change possible. Check for that before chasing a stable few percent.
+
 `diff_triage.py` gives one line per function in the build list and says whether more source work can pay at all: it
 flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
 cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
