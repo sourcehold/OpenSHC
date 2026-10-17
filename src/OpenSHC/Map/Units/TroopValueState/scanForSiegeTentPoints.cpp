@@ -34,54 +34,65 @@ namespace Map {
                     _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_candidateTile];
                     uint uVar5 = (uint)DAT_TileMapState::instance.HeightLayer[_candidateTile];
                     for (local_10 = 0; local_10 < 8; local_10++) {
-                        uint uVar1 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile];
+                        uint uVar1
+                            = (uint)DAT_TileMapState::instance
+                                  .HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10]
+                                      + _candidateTile];
                         iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile;
                         if (uVar5 + 6 < uVar1 || (int)uVar1 < (int)(uVar5 - 6)
                             || DAT_TileMapState::instance.UnitLayer[iVar8] != 0
-                            || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8]
-                                != DAT_TroopValueState::instance.attackInfo.startCon
+                            || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8] != this->attackInfo.startCon
                             || (DAT_TileMapState::instance.LogicLayer[iVar8] & 0xa0002400U))
                             break;
                         uVar1 = uVar5 + 8;
                         local_14 = 0;
                         do {
-                            uint uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8];
+                            uint uVar4
+                                = (uint)DAT_TileMapState::instance
+                                      .HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14]
+                                          + iVar8];
                             int iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != DAT_TroopValueState::instance.attackInfo.startCon
+                                    != this->attackInfo.startCon
                                 || (DAT_TileMapState::instance.LogicLayer[iVar2] & 0xa0002400U))
                                 break;
-                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8];
+                            uVar4
+                                = (uint)DAT_TileMapState::instance.HeightLayer
+                                      [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != DAT_TroopValueState::instance.attackInfo.startCon
+                                    != this->attackInfo.startCon
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2],
                                     (uVar4 & 0x2000) != 0 || ((uVar4 & 0x20000000)))
                                 || (int)uVar4 < 0 || (uVar4 & 0x400)) {
                                 iVar7 = iVar7 + 1;
                                 break;
                             }
-                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8];
+                            uVar4
+                                = (uint)DAT_TileMapState::instance.HeightLayer
+                                      [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != DAT_TroopValueState::instance.attackInfo.startCon
+                                    != this->attackInfo.startCon
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2], (uVar4 & 0x2000) != 0)
                                 || (uVar4 & 0x20000000) || (int)uVar4 < 0 || (uVar4 & 0x400)) {
                                 iVar7 = iVar7 + 2;
                                 break;
                             }
-                            uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8];
+                            uVar4
+                                = (uint)DAT_TileMapState::instance.HeightLayer
+                                      [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != DAT_TroopValueState::instance.attackInfo.startCon
+                                    != this->attackInfo.startCon
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2], (uVar4 & 0x2000) != 0)
                                 || (uVar4 & 0x20000000) || (int)uVar4 < 0 || (uVar4 & 0x400)) {
                                 iVar7 = iVar7 + 3;
@@ -102,12 +113,16 @@ namespace Map {
                                 Map::Units::TroopValueState_Func::getSiegeIndexForTile, this)(_candidateTile);
                             _index = DAT_TroopValueState::instance.attackInfo.tentPointsNext;
                             if (_sIndex) {
-                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_sIndex].someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_sIndex].someCounter
+                                    = DAT_TroopValueState::instance.attackInfo.someCounter1;
                             } else {
-                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[DAT_TroopValueState::instance.attackInfo.tentPointsNext].x = _x;
+                                DAT_TroopValueState::instance.attackInfo
+                                    .tentPointsValues[DAT_TroopValueState::instance.attackInfo.tentPointsNext]
+                                    .x = _x;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].y = _y;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].tile = _candidateTile;
-                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].someCounter
+                                    = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].zero = 0;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].three = 0;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].tribeUID = 0;
