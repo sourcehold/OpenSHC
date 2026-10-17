@@ -56,11 +56,12 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.createTribeAmount = 0;
             iVar6 = 0;
             do {
-                byte bVar1 = DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][_slot];
+                int _count = (int)(char)DAT_TroopValueState::instance.attackInfo
+                                 .someSinglePlayerScore[param_1][_slot];
                 MappersEnum MVar3 = DAT_AttackInfoDefinedData::instance.field5_0xc8[_slot];
                 iVar4 = DAT_AttackInfoDefinedData::instance.field39_0x9ec[_slot];
                 iVar7 = 0;
-                if (0 < (char)bVar1) {
+                if (0 < _count) {
                     do {
                         DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[iVar5].engineerBuildingType = MVar3;
                         DAT_TroopValueState::instance.attackInfo
@@ -72,11 +73,11 @@ namespace Map {
                         if (250 < iVar5)
                             break;
                         iVar7 = iVar7 + 1;
-                    } while (iVar7 < (char)bVar1);
+                    } while (iVar7 < _count);
                 }
                 _slot = _slot + 1;
                 iVar6 = iVar6 + 4;
-            } while (iVar6 < 16);
+            } while (iVar6 <= 16);
             iVar7 = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
             iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
             iVar9 = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
