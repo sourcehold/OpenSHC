@@ -161,7 +161,7 @@ namespace Map {
                 switch (_tribeBehaviorType) {
                 case 0x3ff:
                     if (DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit <= sVar3) {
-                        iVar12 = this->attackInfo.unknownSignpostRelatedArray[_attackWave_2];
+                        iVar12 = DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[_attackWave_2];
                         uVar10 = DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar12][0].y;
                         uVar13 = DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar12][0].x;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
