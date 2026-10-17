@@ -25,11 +25,11 @@ namespace AI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D30E0
-    undefined4 AICState::sendUnitsToAttackBreachedCastle(int attackingPlayerIndex)
+    BOOLEnum AICState::sendUnitsToAttackBreachedCastle(int attackingPlayerIndex)
     {
         int vector = 0;
         if (DAT_GameState::instance.playerDataArray[attackingPlayerIndex].aiType == OpenSHC::AI::AIT_NULL) {
-            return 1;
+            return TRUE;
         }
 
         BOOLEnum sentUnitsToAttackLord = FALSE;
@@ -96,14 +96,14 @@ namespace AI {
                             OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                             tribeID, lordX, lordY, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0)
                         == 0) {
-                        return 0;
+                        return FALSE;
                     }
                     sentUnitsToAttackLord = TRUE;
                 }
             }
         }
 
-        return 1;
+        return TRUE;
     }
 
 }

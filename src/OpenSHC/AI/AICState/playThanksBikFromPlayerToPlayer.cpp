@@ -1,12 +1,13 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_VideoBikQueue.hpp"
-#include "OpenSHC/Globals/DWORD_00eb0b18.hpp"
+#include "OpenSHC/Globals/TIME_LastThanksBikPlaybackTime.hpp"
 
 namespace OpenSHC {
 namespace AI {
@@ -31,11 +32,11 @@ namespace AI {
         }
 
         DWORD now = timeGetTime();
-        if (DWORD_00eb0b18::instance != 0 && now - DWORD_00eb0b18::instance < 1200000) {
+        if (TIME_LastThanksBikPlaybackTime::instance != 0 && now - TIME_LastThanksBikPlaybackTime::instance < 1200000) {
             return;
         }
 
-        DWORD_00eb0b18::instance = now;
+        TIME_LastThanksBikPlaybackTime::instance = now;
         MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
             playerID, aicIndex, 15);
     }
