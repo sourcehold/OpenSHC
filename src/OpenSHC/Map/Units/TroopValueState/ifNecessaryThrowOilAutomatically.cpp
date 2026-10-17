@@ -64,7 +64,7 @@ namespace Map {
                     if (DAT_PathFindingState::instance.ALGO_TotalTroopCount < 1) {
                         return (undefined4)(0);
                     }
-                } else if ((DAT_PathFindingState::instance.ALGO_TotalTroopCount < 4)
+                } else if ((DAT_PathFindingState::instance.ALGO_TotalTroopCount <= 3)
                     && (DAT_PathFindingState::instance.ALGO_TotalTroopValue < 0x14)) {
                     return (undefined4)(0);
                 }
