@@ -130,13 +130,14 @@ namespace Map {
                     _unitCount = DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerCount;
                     _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                         DAT_TribesState::instance.tribes[_tribeID].owner, 0);
+                    iVar8 = DAT_UnitsState::instance.maxUnitCount;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeType = 11;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeBehaviorType = 1040;
                     DAT_TribesState::instance.tribes[_tribeID2].attackWave
                         = DAT_TribesState::instance.tribes[_tribeID].attackWave;
                     DAT_TribesState::instance.tribes[_tribeID2].attackInfo_someCounter1
                         = DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1;
-                    if (_unitID < DAT_UnitsState::instance.maxUnitCount) {
+                    if (_unitID < iVar8) {
                         _ptrPlayerID = &DAT_UnitsState::instance.units[_unitID];
                         do {
                             if (_ptrPlayerID->logicalState == Map::Units::ULS_NORMAL && _ptrPlayerID->owner == local_10
