@@ -32,17 +32,7 @@ namespace Map {
             int iVar2 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
             int iVar1 = iVar2 + 1;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = iVar1;
-            if (iVar2 <= 0) {
-                DAT_TroopValueState::instance.attackInfo.someCounter1
-                    = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
-                    attackWave, playerID);
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::exitSiegeEquipmentForWave, this)(attackWave);
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    attackWave, 1000, 10000, (SomeTribeBehaviorType)((int)(1023)));
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
-                    (Map::Units::SomeTribeBehaviorType)1023, Map::Units::STBT_1, 0, 10);
-            } else {
+            if (0 < iVar2) {
                 if (100 < iVar1) {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                         attackWave, (SomeTribeBehaviorType)((int)(1024)));
@@ -50,7 +40,17 @@ namespace Map {
                 if (1000 < DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave]) {
                     DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = 0;
                 }
+                return;
             }
+            DAT_TroopValueState::instance.attackInfo.someCounter1
+                = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
+                attackWave, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::exitSiegeEquipmentForWave, this)(attackWave);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
+                attackWave, 1000, 10000, (SomeTribeBehaviorType)((int)(1023)));
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
+                (Map::Units::SomeTribeBehaviorType)1023, Map::Units::STBT_1, 0, 10);
         }
 
     }
