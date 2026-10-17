@@ -5,9 +5,9 @@
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -65,7 +65,7 @@ namespace Map {
             }
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _tileY;
-            this->searchQueue.xQueue[0] = (short)tile - (short)_axgt;
+            this->searchQueue.xQueue[0] = tile - _axgt;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
