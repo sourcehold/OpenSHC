@@ -93,7 +93,7 @@ namespace Map {
                         Map::Units::STBT_0x3fb, Map::Units::STBT_1, 0, 10);
                 }
                 tribeSizeSumLimit
-                    = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar4 * 0x177bc + -4);
+                    = DAT_TroopValueState::instance.attackInfo.playerInfo[iVar4 - 1].town3;
                 if (tribeSizeSumLimit) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         param_1, 1, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
