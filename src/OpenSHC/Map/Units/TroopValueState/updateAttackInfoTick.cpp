@@ -54,7 +54,7 @@ namespace Map {
             if (!(DAT_TroopValueState::instance.attackInfo.aiTickPhase & 0xfU)) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::queueOilThrowForIdleArchers, this)();
             }
-            if (((byte)DAT_TroopValueState::instance.attackInfo.aiTickPhase & 0xf) == 8) {
+            if ((DAT_TroopValueState::instance.attackInfo.aiTickPhase & 0xf) == 8) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::redeployArchersToDefensivePositions, this)();
             }
             DAT_TroopValueState::instance.attackInfo.aiTickPhase
