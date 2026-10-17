@@ -24,11 +24,16 @@ namespace Map {
                     iVar1 = 0;
                     int _x = iVar4 - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile;
                     do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]] & 0xf)) {
+                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4
+                                  + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]]
+                                & 0xf)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(6,
-                                (uint)((int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.xOffset + _x)),
-                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.yOffset
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
+                                           .int_.xOffset
+                                    + _x),
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
+                                           .int_.yOffset
                                     + iVar3),
                                 2);
                             break;
@@ -48,11 +53,16 @@ namespace Map {
                     iVar1 = 0;
                     int _x = iVar4 - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile;
                     do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]] & 0xf)) {
+                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4
+                                  + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]]
+                                & 0xf)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(10,
-                                (uint)((int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.xOffset + _x)),
-                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.yOffset
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
+                                           .int_.xOffset
+                                    + _x),
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
+                                           .int_.yOffset
                                     + iVar3),
                                 2);
                             break;
