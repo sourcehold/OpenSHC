@@ -30,6 +30,7 @@ The Game itself
 ------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
 - :doc:`Enemy awareness <wiki/game-mechanics/enemy-awareness>`
+- :doc:`Siege engines and attack orders <wiki/game-mechanics/siege-attack-orders>`
 - Graphics and Sound Systems
 - Modding Support
 - Multiplayer Architecture
