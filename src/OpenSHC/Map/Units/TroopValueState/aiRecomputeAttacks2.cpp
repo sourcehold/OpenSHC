@@ -49,7 +49,7 @@ namespace Map {
                 iVar4 = iVar2;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
-                DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)(BVar3),
+                DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)(BVar3 != 0),
                 (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4]));
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(90, 0, 0, playerID);
