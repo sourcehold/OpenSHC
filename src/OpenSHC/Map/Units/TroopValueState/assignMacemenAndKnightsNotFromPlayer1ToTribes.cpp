@@ -151,7 +151,9 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                                     _unitID2, _tribeID2);
                                 _knightCount = _knightCount + -1;
-                                if (_knightCount < 1) {}
+                                if (_knightCount < 1) {
+                                    break;
+                                }
                                 _limitCounter2 = _limitCounter2 + 1;
                             }
                             psVar2 = psVar2 + 0x248;
