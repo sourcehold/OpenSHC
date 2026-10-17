@@ -829,3 +829,37 @@ still measured -6.3.
    arm order, a dropped `return`, a restructured loop - the kind of thing found
    by reading Ghidra's control flow, not by reading a diff.
 3. Spend diff-reading time on the 70-99% band. That is where every win came from.
+
+## The induction-pointer anchor is not source-controllable - stop trying
+
+Four functions differ almost entirely in *which struct field* MSVC anchors the
+loop's induction pointer on, which shifts every field offset and the loop bound
+in the diff and costs roughly 20 points each:
+
+| function | % | original anchor | ours |
+|---|---|---|---|
+| `exitSiegeEquipmentForWave` | 77.7 | `TribesState+886` | `+1520` |
+| `recountAttackTroopValue` | 75.9 | `TribesState+886` | `+864` |
+| `commandUnitsToMoveToKeep` | 77.6 | `UnitsState+2866` | `+2874` |
+| `sortAttackInfoTribeIDArrayBasedOn` | 83.1 | `TribesState+1025064` | anchor-0x18 |
+
+The decisive evidence is `recountAttackTroopValue`: both sides access exactly
+the same three fields (884, 864, 912), so MSVC had a free choice of base and
+simply picked differently. The anchor is chosen downstream of register pressure
+and instruction order, not from anything spellable in the source.
+
+Tried and failed:
+- hoisting the read of the field the original anchors on, so it is the first
+  access (`exitSiegeEquipmentForWave`, exactly neutral - MSVC sinks the load back
+  into the branch)
+- walking an explicit `int*`/`short*` at the original's offset (`pruneStale*`,
+  -19 points; also -12 on a second shape)
+- writing the loop bound symbolically instead of as a literal
+  (`sortAttackInfo`, -2.5 raw, twice)
+
+Treat these four as regalloc-bound. Their remaining ~20 points each are not
+reachable from C++.
+
+Also neutral, do not retry: moving `placeTunnelForEveryTunneler`'s zero
+initialisations after the `if (!local_c)` test to stop MSVC reusing a zeroed
+register as the comparison operand. MSVC reorders them back.
