@@ -235,8 +235,8 @@ namespace Map {
                         DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_counter2]
                             = _lookupValue3;
                         _counter2 = _counter2 + 1;
-                        _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
-                    } while (_counter2 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize);
+                        _index = _index;
+                    } while (_counter2 < _index);
                 }
                 _tribeSizeSum = 0;
                 iVar3 = 0;
@@ -245,14 +245,14 @@ namespace Map {
                         int iVar1 = DAT_TroopValueState::instance.attackInfo.tribeIDArray[iVar3];
                         if (tribeSizeSumLimit < _tribeSizeSum) {
                             DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[iVar3] = 0xc;
-                            _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
+                            _index = _index;
                         }
                         iVar3 = iVar3 + 1;
                         _tribeSizeSum = _tribeSizeSum + DAT_TribesState::instance.tribes[iVar1].size;
                     } while (iVar3 < _index);
                 }
                 if (shrinkSize < _index) {
-                    DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = shrinkSize;
+                    _index = shrinkSize;
                 }
             }
         }

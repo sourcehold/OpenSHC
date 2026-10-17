@@ -60,7 +60,7 @@ namespace Map {
             if (DAT_TileMapState::instance.buildingPlacementFail) {
                 return FALSE;
             }
-            DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
+            DAT_BuildingsState::instance.buildings[_buildingID].attackWave
                 = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
             DAT_BuildingsState::instance.buildings[_buildingID].unknownSiegeTentRelated01 = 2;
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(

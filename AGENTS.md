@@ -751,3 +751,24 @@ Fourth instance of the data-flow rule. Worth grepping for: two expressions on
 the same parameter with different constants, where one of them is already a
 named local - the later ones are probably offsets from that local, not from the
 parameter.
+
+#### Sweep result, round two (same substitution, five more functions)
+
+| function | before | after | kept |
+|---|---|---|---|
+| `updateTribeBehaviorBasedOnBehaviorType` | 55.0 | **71.3** | yes |
+| `sortAttackInfoTribeIDArrayBasedOn` | 74.5 | **83.1** | yes |
+| `placeSiegeTentOrTunnelAtSuitableLocation...` | 83.2 | **84.2** | yes |
+| `placeTunnelForEveryTunneler` | 70.2 | 56.0 | no |
+| `placeSiegeTentsAndAssignEngineers` | 32.6 | 28.1 | no |
+| `ifNecessaryThrowOilAutomatically` | 36.5 | 35.9 | no |
+
+Running tally for "read the cached local, not the global": **5 wins (two of them
+to 100%), 8 losses.** It is the single highest-yield substitution found so far
+and it is still only slightly better than a coin flip per site, so it must be
+swept and measured, never reasoned about. Batch every candidate into one build -
+scores are per-function - then revert the losers.
+
+The scan that finds the candidates:
+
+    local = <DAT_...global expr>;   ...and that same expr appears again later

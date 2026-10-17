@@ -267,7 +267,7 @@ namespace Map {
                                 DAT_TribesState::ptr)(tribeID),
                             iVar12 != 0)) {
                         iVar12 = DAT_GameState::instance
-                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                     .playerDataArray[_playerID_7]
                                      .keep.id;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
