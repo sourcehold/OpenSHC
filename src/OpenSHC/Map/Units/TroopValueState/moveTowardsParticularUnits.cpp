@@ -31,7 +31,9 @@ namespace Map {
                         DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
                         (int)(DAT_UnitsState::instance.units[sVar1].x), (int)(DAT_UnitsState::instance.units[sVar1].y),
                         200),
-                    iVar2 == 0)) {}
+                    iVar2 == 0)) {
+                return;
+            }
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
                 param_1, Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk, 0, 0, 0);
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(param_1,
