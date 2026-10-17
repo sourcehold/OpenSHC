@@ -559,3 +559,44 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   second `fillMemory_ByteValue` in `pruneStaleArcherPoints` passes the zero already in `eax`
   (`push eax`, one byte) where we emit `push 0` (two). Passing `(char)BVar1` instead of `'\0'` -
   provably the same value inside that branch - changes nothing, because MSVC const-folds it back.
+
+### Ghidra's decompilation is the *starting point*, not the target
+
+`giveLightPitchInstructionToUnitClosestToPitch` (0x51BF70) carries a
+`decompilerscript: committed` banner - its Ghidra listing is the same text the
+.cpp was seeded from. Three of its differences from our current file were tested
+and all three lose:
+
+| Ghidra's form | ours | delta |
+|---|---|---|
+| success block nested inside the `maxUnitCount` guard | early `if (!_minUnitID) return 0;` | -6.6 |
+| `getPlayerNot1AndHasKeep(&DAT_TroopValueState, ...)` | `this` | -4.6 |
+| both together | | -5.0 |
+
+On a function already improved past its seed, Ghidra re-confirms the seed, not
+the original. Check for the `decompilerscript: committed` banner first: when it
+is there and our % is already well above where the seed would land, Ghidra has
+no new information and the time is better spent on a function whose listing is
+fresh.
+
+### A local that only mirrors a global is really the *enregistered global*
+
+The three slot scans (`findOrReserveArcherPointSlot`, `getSupportPointIndex`,
+`getSiegeIndexForTile`) each had a `_firstFree` local written beside the
+`...Next` global and never read for anything but its own zero-test. All three
+sat at 76.6% on a single-instruction diff:
+
+    - mov dword ptr [...Next], esi     <- original
+    + mov dword ptr [...Next], eax     <- ours
+
+`mov [abs32], eax` is the 5-byte `A3` form, `esi` needs 6 - and that one byte
+shifted every jump displacement in the function, which is where the 23 points
+went. MSVC had coalesced our `_firstFree = i; Next = _firstFree;` onto `eax`.
+
+Deleting the local and testing/assigning the global directly took all three to
+**100%** at once: with no call or aliasing store in the loop MSVC enregisters
+the global in `esi` and writes through, which is exactly the original's shape.
+
+Generalisation: when a local exists only to shadow a global, the original
+probably had no local at all. Grep for a local assigned next to a global of the
+same meaning and whose only other use is a predicate on itself.

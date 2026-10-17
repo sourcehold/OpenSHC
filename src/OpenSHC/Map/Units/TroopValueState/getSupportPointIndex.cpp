@@ -16,9 +16,9 @@ namespace Map {
                 if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[i].tile == tile) {
                     return i;
                 }
-                if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[i].tile == 0 && !_firstFree) {
-                    _firstFree = i;
-                    DAT_TroopValueState::instance.attackInfo.supportPointsNext = _firstFree;
+                if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[i].tile == 0
+                    && !DAT_TroopValueState::instance.attackInfo.supportPointsNext) {
+                    DAT_TroopValueState::instance.attackInfo.supportPointsNext = i;
                 }
             }
             return 0;
