@@ -24,8 +24,8 @@ namespace Map {
         {
             int iVar2 = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount
-                && 9 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
-                && (99 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                && 10 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                && (100 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                     || (0 < DAT_GameState::instance
                             .playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
                             .previousSiegeWeaponsCount))
