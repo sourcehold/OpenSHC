@@ -99,10 +99,9 @@ namespace Map {
         int zoneSize; // 0x00025AF8 length: 4
         int someDistanceLimit; // 0x00025AFC length: 4
         int pendingAttackWaveCount; // 0x00025B00 length: 4
-        int playerTotalTroopValueArray[9]; // 0x00025B04 length: 36
-        int field98978_0x25b28; // 0x00025B28 length: 4
-        int playerTotalTroopValueOfTroopsNearKeep[9]; // 0x00025B2C length: 36
-        undefined1 padding_0x25b50[20480]; // 0x00025B50 length: 20480
+        int playerTotalTroopValueArray[10]; // 0x00025B04 length: 40
+        int playerTotalTroopValueOfTroopsNearKeep[10]; // 0x00025B2C length: 40
+        undefined1 padding_0x25b54[20476]; // 0x00025B54 length: 20476
         int someIntArray2[50]; // 0x0002AB50 length: 200
         undefined1 padding_0x2ac18[1596]; // 0x0002AC18 length: 1596
         AttackInfoPitchRelated spottedEnemyTiles[100]; // 0x0002B254 length: 800
@@ -190,9 +189,8 @@ namespace Map {
         int field127657_0x466b4[50]; // 0x000466B4 length: 200
         int tribeRelatedArrayValue0UpTo12[50]; // 0x0004677C length: 200
         undefined1 padding_0x46844[200]; // 0x00046844 length: 200
-        int field121392_0x4690c; // 0x0004690C length: 4
-        undefined1 padding_0x46910[196]; // 0x00046910 length: 196
-        int field121589_0x469d4; // 0x000469D4 length: 4
+        int unknownSignpostRelatedArray[50]; // 0x0004690C length: 200
+        int field121388_0x469d4; // 0x000469D4 length: 4
         int delayedWaveAssignmentCount; // 0x000469D8 length: 4
         int enemyUnitsInsideCastleCount; // 0x000469DC length: 4
         int buildingDamageEventCount; // 0x000469E0 length: 4

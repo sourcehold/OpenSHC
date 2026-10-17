@@ -166,20 +166,18 @@ namespace Game {
             int lastMonthsBribeTax; // 0x00002140 length: 4
             int taxBribeMonthlyAccumulator; // 0x00002144 length: 4
             int totalEnemyUnitsCount; // 0x00002148 length: 4
-            byte partialWoodCounter; // 0x0000214C length: 1
-            undefined1 padding_0x214d[3]; // 0x0000214D length: 3
-            byte partialStoneCounter; // 0x00002150 length: 1
-            undefined1 padding_0x2151[3]; // 0x00002151 length: 3
+            int partialWoodCounter; // 0x0000214C length: 4
+            int partialStoneCounter; // 0x00002150 length: 4
             int lastMonthsIncomeTax; // 0x00002154 length: 4
             int taxIncomeMonthlyAccumulator; // 0x00002158 length: 4
             int popularityChangeBasedOnTax; // 0x0000215C length: 4
             uint popularityChangeBasedOnFood; // 0x00002160 length: 4
             int popularityChangeBasedOnCrowding; // 0x00002164 length: 4
-            int field642_0x2168; // 0x00002168 length: 4
+            int field636_0x2168; // 0x00002168 length: 4
             uint someCount40; // 0x0000216C length: 4
             int someCount43; // 0x00002170 length: 4
-            int field645_0x2174; // 0x00002174 length: 4
-            int field646_0x2178; // 0x00002178 length: 4
+            int field639_0x2174; // 0x00002174 length: 4
+            int field640_0x2178; // 0x00002178 length: 4
             int nonInteractiveCitizenCountUnk; // 0x0000217C length: 4
             int currentPopulation; // 0x00002180 length: 4
             int populationRelatedCrowdingCountUnk; // 0x00002184 length: 4
@@ -228,7 +226,7 @@ namespace Game {
             int ownsCathedralUnk; // 0x00002290 length: 4
             int popularityReligionBasedDiv25; // 0x00002294 length: 4
             int priestCountUnk; // 0x00002298 length: 4
-            int field695_0x229c; // 0x0000229C length: 4
+            int field689_0x229c; // 0x0000229C length: 4
             int weightedLosses; // 0x000022A0 length: 4
             uint beerPercentage; // 0x000022A4 length: 4
             short pitchDitchTileCount; // 0x000022A8 length: 2
@@ -247,7 +245,7 @@ namespace Game {
             short someCount59; // 0x000022C2 length: 2
             int someCount60; // 0x000022C4 length: 4
             int someUnitID01; // 0x000022C8 length: 4
-            int field714_0x22cc; // 0x000022CC length: 4
+            int field708_0x22cc; // 0x000022CC length: 4
             int countInns; // 0x000022D0 length: 4
             int lastlastEncounteredEnemyPlayerID; // 0x000022D4 length: 4
             char lostUnitToEnemyPlayerFlags[4]; // 0x000022D8 length: 4
@@ -307,7 +305,7 @@ namespace Game {
             int aivPositiveFearFactorDelay; // 0x00002B4C length: 4
             int defWallPatrolRallyTimeWaitCounter; // 0x00002B50 length: 4
             int defWallPatrolRallyTimeHits; // 0x00002B54 length: 4
-            int field849_0x2b58; // 0x00002B58 length: 4
+            int field843_0x2b58; // 0x00002B58 length: 4
             int engineerCountRelated; // 0x00002B5C length: 4
             BOOLEnum isEngineerRequired; // 0x00002B60 length: 4
             int closestEnemyDistanceToTheLord; // 0x00002B64 length: 4
@@ -340,11 +338,7 @@ namespace Game {
             int totalMaxDefaultTroops; // 0x00002BD0 length: 4
             int attackedPlayerID_2Unk; // 0x00002BD4 length: 4
             int attackedPlayerID; // 0x00002BD8 length: 4
-            int attackedByPlayerArrayUnk; // 0x00002BDC length: 4
-            int field886_0x2be0; // 0x00002BE0 length: 4
-            undefined1 padding_0x2be4[4]; // 0x00002BE4 length: 4
-            int unusedEnemyAttackTracker[9][8]; // 0x00002BE8 length: 288
-            undefined1 padding_0x2d08[20]; // 0x00002D08 length: 20
+            int attackedByPlayerArrayUnk[10][8]; // 0x00002BDC length: 320
             int aivUnitLocationSlots[22][10]; // 0x00002D1C length: 880
             int aivUnitLocationSlotLocationCount[22]; // 0x0000308C length: 88
             int totalTroopsType0; // 0x000030E4 length: 4
