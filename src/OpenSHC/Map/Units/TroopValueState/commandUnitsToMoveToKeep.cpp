@@ -47,9 +47,7 @@ namespace Map {
             BuildingTypeShort _buildingType;
             uint _max;
             _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            _keep
-                = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID]
-                      .keep.id;
+            _keep = DAT_GameState::instance.playerDataArray[_playerID].keep.id;
             if (0 < (int)_keep) {
                 _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
                 if (_buildingType == Map::Buildings::BT_MANORHOUSE) {
