@@ -101,21 +101,17 @@ namespace Map {
                             int _sIndex = MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::getSiegeIndexForTile, this)(_candidateTile);
                             _index = DAT_TroopValueState::instance.attackInfo.tentPointsNext;
-                            if (!_sIndex) {
-                                DAT_TroopValueState::instance.attackInfo
-                                    .tentPointsValues[DAT_TroopValueState::instance.attackInfo.tentPointsNext]
-                                    .x = _x;
+                            if (_sIndex) {
+                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_sIndex].someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                            } else {
+                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[DAT_TroopValueState::instance.attackInfo.tentPointsNext].x = _x;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].y = _y;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].tile = _candidateTile;
-                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].someCounter
-                                    = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].zero = 0;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].three = 0;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].tribeUID = 0;
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_index].tribeID = 0;
-                            } else {
-                                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_sIndex].someCounter
-                                    = DAT_TroopValueState::instance.attackInfo.someCounter1;
                             }
                             DAT_TroopValueState::instance.attackInfo.tentPoints
                                 = DAT_TroopValueState::instance.attackInfo.tentPoints + 1;
