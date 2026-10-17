@@ -239,9 +239,9 @@ namespace Map {
                 if (1 < iVar5) {
                     if (iVar5 <= 2) {
                         iVar5 = 1;
-                    } else if (iVar5 < 7) {
+                    } else if (iVar5 <= 6) {
                         iVar5 = 2;
-                    } else if (iVar5 < 0xd) {
+                    } else if (iVar5 <= 0xc) {
                         iVar5 = 3;
                     } else {
                         iVar5 = 4;
