@@ -796,3 +796,36 @@ every jump-table entry and every arm, so the per-arm layout that previous
 sessions tuned (see the corrected arm order above) is worth far more than the
 dispatch's two-instruction shape. Treat the dispatch `jge`/`jg`+`je` difference
 as a 2-instruction cost and leave the arms where they are.
+
+## Prioritise by starting percentage: local fixes only pay above ~70%
+
+Tally of every change measured in this session, by the function's starting score:
+
+**Starting >= 70% - 13 wins, 0 regressions kept:**
+slot scans +23.4 (x3, to 100%), `renderAttackInfoDebugOverlay` +13.4,
+`trySendKnightTribeToAttack` +37.9 (to 100%), `placeTunnelEntrances` +11.4
+(to 100%), `applyTribeBehaviorTypes` +4.3 (to 100%), `sortAttackInfo` +8.6,
+`pruneStale*` +6.4 (x3), `aiRecomputeAttacks2` +1.6,
+`placeSiegeTentOrTunnel...` +1.0.
+
+**Starting < 70% - one win (+16.3), everything else lost:**
+`ifNecessaryThrowOilAutomatically` (36.5): cached local -0.6, `< 1`->`<= 0` -6.2,
+and -6.3 for that same edit *in isolation at the exact site the diff flagged*.
+`placeSiegeTentsAndAssignEngineers` (32.6): cached local -4.5, `<= 0` -4.1.
+`computeAttackWaveTroopComposition` (66.8): `setne` -53.1, CONST -0.9.
+`recomputeAttackInfo` (30.5): int-cast bound +0.1.
+
+**Why:** reccmp aligns instruction streams. Below roughly 50-70% the two streams
+are already badly out of phase, so a *correct* one-instruction fix re-phases the
+alignment somewhere else and the score drops. The `<= 0` edit above is almost
+certainly right - the original really does emit `test edi,edi / jg` - and it
+still measured -6.3.
+
+**Consequences:**
+1. On a sub-70% function the score cannot validate a local fix. Do not grind
+   single-site edits there and do not trust a regression as evidence the edit was
+   wrong.
+2. Sub-70% functions need a change large enough to re-phase the whole function -
+   arm order, a dropped `return`, a restructured loop - the kind of thing found
+   by reading Ghidra's control flow, not by reading a diff.
+3. Spend diff-reading time on the 70-99% band. That is where every win came from.
