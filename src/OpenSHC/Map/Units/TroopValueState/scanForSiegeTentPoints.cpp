@@ -102,7 +102,7 @@ namespace Map {
                             iVar7 = iVar7 + 4;
                         } while (local_14 < 8);
                     }
-                    if (64 < iVar7) {
+                    if (63 < iVar7) {
                         _x = _candidateTile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                         BOOLEnum BVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                             DAT_PathFindingState::ptr)(6, _x, _y, 0x80);
