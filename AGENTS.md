@@ -249,6 +249,25 @@ Diff patterns that were reliable (more in the cheat sheet):
   independent stores into one object says nothing about the order the fields were assigned in the original source
   (see the cheat sheet's *Statement Order*). Reordering the body to follow the asm makes the match worse.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
+- An `if (cond) {}` with an empty body is a `goto` the import dropped, and it is almost always a *loop or
+  function exit*. Thirteen sat in `Map::Units::TroopValueState`, six of them leaving a `do { } while (true);`
+  that never terminates. Read the original's jump target with `orig_asm.py NAME` - a jump past the loop's
+  back edge is `break`, a jump into the epilogue is `return` - and fix the exit *before* restyling anything
+  else: `placeTunnelForEveryTunneler` went 32% -> 52% from three `return`s alone, while the same function
+  rewritten structurally first went *down*. Where the correct exit costs match because the original shares
+  one epilogue and we need two, keep the fix and say so in the commit remark.
+- A literal game address (`while ((int)p < 0x17802b4)`, `*(byte*)(tile + 0x1ee2998)`) is the original's global,
+  which `resolve_address.py` turns into `DAT_X::instance.field[i]`. It is only correct while that struct's
+  reimplementation is off, because an enabled resolver puts the data in our own object, so these are latent
+  bugs and worth replacing. Replacing an *array base* is free or better; replacing a *loop bound* is not -
+  a typed pointer bound (`p < &tribes[1251]`) re-anchors the walk and cost 5-11 points in three functions,
+  where converting the whole loop to an index over `tribes[t]` gained instead.
+- `expr * 0x177bc` into one of `AttackInfo`'s own `*ValuesArray` members is `playerInfo[player - 1]`:
+  the per-player `AttackInfoSubElement` array is one-based, and `AttackInfo`'s named copies of those fields
+  are the unused slot 0 at the same relative offsets (delta 0x301C0). Writing
+  `playerInfo[playerID - 1].wide2` for `*(int*)((int)wideValuesArray + playerID * 0x177bc + -8)` took seven
+  of that namespace's "find the nearest X" functions from 45-78% to exactly 100%, and the negative deltas
+  (-0x10, -0xc, -8, -4) are the four scalars declared before each array.
 - `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
   it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants
   being unreadable - `(-(uint)(d != 1) & 0xffffffce) + 200` is `d == 1 ? 200 : 150`.
