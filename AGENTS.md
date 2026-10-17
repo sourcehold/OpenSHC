@@ -398,3 +398,18 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   single copy on our side. `computeSiegeSpotScores` gained 5 points from it (47.4% -> 52.2%);
   rewriting the same block's `!x` tests as signed `(int)x < 1` at the same time *cost* 3, so land
   the restructure on its own and measure before touching the comparisons.
+
+- **`b = a + 1; <call>; a = b;` is one variable, not two.** When a counter is live across a call,
+  Ghidra sometimes names the pre-call and post-call halves separately, leaving a copy-back that
+  reads as a no-op (`a = b;` on a path where `b` never changed). reccmp shows the original doing
+  `add reg, 1` / `mov [esp+N], reg` once and reloading after the call, against our two counters
+  shuffling between a register and two slots. Merging them into one variable took
+  `assignMacemenAndKnightsNotFromPlayer1ToTribes` from 41.8% to 52.5%. Check that the two really
+  are equal at the top of each iteration before merging - initialised together, and every
+  assignment to one followed by the copy-back.
+
+- **A store Ghidra invented from a shared constant.** `computeAttackWaveTroopComposition` opened
+  with `maxMoatAttackTribes = 6;` although every arm of the chain below assigns that field; the
+  original only materialises 6 for the first `cmp`. If reccmp shows a `mov dword ptr [global], reg`
+  on our side alone right before a compare against the same constant, and the field is written on
+  every path, the assignment is not in the original.

@@ -35,7 +35,6 @@ namespace Map {
             int _limitCounter;
             short* _pUnit1;
             int playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            int _count = 0;
             uint _unitID0 = 1;
             int _macemenCount = 0;
             _knightCount = 0;
@@ -51,11 +50,10 @@ namespace Map {
                         } else {
                             if (_pUnit2->unitType != Map::Units::UT_E_KNIGHT)
                                 goto LAB_0051cd29;
-                            _knightCount = _count + 1;
+                            _knightCount = _knightCount + 1;
                         }
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
                             _unitID0, (int)(_pUnit2->tribeID));
-                        _count = _knightCount;
                     }
                 LAB_0051cd29:
                     _unitID0 = _unitID0 + 1;
@@ -71,8 +69,8 @@ namespace Map {
             }
             _macemenLimit = 5;
         LAB_0051cd5e:
-            if (_count < 18) {
-                _knightLimit = (uint)(12 < _count) * 2 + 2;
+            if (_knightCount < 18) {
+                _knightLimit = (uint)(12 < _knightCount) * 2 + 2;
             } else {
                 _knightLimit = 6;
             }
@@ -80,17 +78,16 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 0;
             } else if (_macemenLimit < _macemenCount) {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = _macemenCount / _macemenLimit + 1;
-                _count = _knightCount;
                 if (100 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount) {
                     DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 100;
                 }
             } else {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 1;
             }
-            if (_count <= 0) {
+            if (_knightCount <= 0) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = 0;
-            } else if (_knightLimit < _count) {
-                DAT_TroopValueState::instance.attackInfo.knightTribeCount = _count / _knightLimit + 1;
+            } else if (_knightLimit < _knightCount) {
+                DAT_TroopValueState::instance.attackInfo.knightTribeCount = _knightCount / _knightLimit + 1;
                 if (100 < DAT_TroopValueState::instance.attackInfo.knightTribeCount) {
                     DAT_TroopValueState::instance.attackInfo.knightTribeCount = 100;
                 }
