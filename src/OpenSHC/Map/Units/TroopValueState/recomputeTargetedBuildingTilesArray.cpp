@@ -41,7 +41,7 @@ namespace Map {
                          */
                         iVar2 = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
                         DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = iVar2;
-                        if (3999 < iVar2) {
+                        if (4000 <= iVar2) {
                             break;
                         }
                     }
