@@ -42,11 +42,16 @@ namespace Map {
             if (0x6e < DAT_UnitsState::instance.units[param_1].terrainOrClimbHeight) {
                 iVar8 = 5;
             }
-            if (iVar10 < 1 || 0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance
-                || (iVar9 = (int)DAT_UnitsState::instance.units[param_1].owner,
-                    DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar9] != -1
-                        && (DAT_TribesState::instance.tribes[iVar10].unitStance
-                            == Map::Units::Behavior::USE_STAND_GROUND))) {
+            if (iVar10 < 1) {
+                return (undefined4)(0);
+            }
+            if (0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance) {
+                return (undefined4)(0);
+            }
+            iVar9 = (int)DAT_UnitsState::instance.units[param_1].owner;
+            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar9] != -1
+                && DAT_TribesState::instance.tribes[iVar10].unitStance
+                    == Map::Units::Behavior::USE_STAND_GROUND) {
                 return (undefined4)(0);
             }
             psVar1 = &DAT_UnitsState::instance.units[param_1].updateTickTracker;
