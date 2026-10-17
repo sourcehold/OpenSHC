@@ -23,7 +23,12 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize) {
                 do {
                     int _tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index];
-                    if (DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_index] < 11) {
+                    if (11 <= DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_index]) {
+                        if (tribeBehaviorType2 != (SomeTribeBehaviorType)0) {
+                            DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType
+                                = (SomeTribeBehaviorTypeShort)tribeBehaviorType2;
+                        }
+                    } else {
                         DAT_TribesState::instance.tribes[_tribeID].someUpdateUpperLimit
                             = ((short)_index + 1) * (short)off2 + (short)off1;
                         short sVar1 = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
@@ -33,9 +38,6 @@ namespace Map {
                             = (SomeTribeBehaviorTypeShort)tribeBehaviorType;
                         DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1 = sVar1;
                         DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = iVar2;
-                    } else if (tribeBehaviorType2 != (SomeTribeBehaviorType)0) {
-                        DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType
-                            = (SomeTribeBehaviorTypeShort)tribeBehaviorType2;
                     }
                     _size = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     _index = _index + 1;
