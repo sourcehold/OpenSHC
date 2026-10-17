@@ -439,9 +439,7 @@ namespace Map {
                                     }
                                 }
                             }
-                            piVar14 = (int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _offset
-                                + -0x10);
-                            *piVar14 = *piVar14 + 1;
+                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].stone1 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].stone1 + 1;
                             iVar13 = 0;
                             do {
                                 iVar11 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
@@ -492,14 +490,10 @@ namespace Map {
                                 }
                                 iVar13 = iVar13 + 2;
                             } while (iVar13 < 8);
-                            piVar14 = (int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset
-                                + -0xc);
-                            *piVar14 = *piVar14 + 1;
+                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1 + 1;
                             if (!(_logic & 0x400000)) {
                                 iVar13 = (int)(char)DAT_TileMapState::instance.AIZoneLayer[_tile];
-                                piVar14 = (int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray
-                                    + _offset + -0xc);
-                                *piVar14 = *piVar14 + 1;
+                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale1 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale1 + 1;
                                 if ((iVar13) && (iVar13 < DAT_TroopValueState::instance.attackInfo.scaleZone)) {
                                     DAT_TroopValueState::instance.attackInfo.scaleZone = iVar13;
                                 }
@@ -757,9 +751,7 @@ namespace Map {
                                     = DAT_TileMapState::instance
                                           .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
                                     + _tile;
-                                piVar14 = (int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset
-                                    + -8);
-                                *piVar14 = *piVar14 + 1;
+                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 + 1;
                             LAB_0051e94c:
                                 if (DAT_TileMapState::instance.AIZoneLayer[_tile] != 0) {
                                     iVar13 = DAT_ViewportRenderState::instance.translationMatrix[_someY].addXgetTile;
