@@ -253,6 +253,20 @@ SEC_RNG::ptr->currentNumber1 % 4
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
   and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
 
+- **Ghidra's `_nextIndex`/`_index2` temporaries with a `LAB: index = _nextIndex;` tail are an in-place `i++`.** Every
+  branch of the body assigning a "next" copy that one shared label writes back is how the decompiler renders a loop
+  that updates its own index. Deleting the temporaries and incrementing in place removed two stack slots and brought
+  `handleCommandLineArguments` to the original's `sub esp, 0x40c` (14.6% -> 31.3%).
+- A local written just before a call and read back just after it (`local_408 = _candidateIndex; ... call ...;
+  _candidateIndex = local_408;`) is usually not a variable at all but the spill slot of the one it copies. Deleting it
+  and using the original variable throughout was worth 5% on the same function.
+- A flag the decompiler types as `bool` is often an `int`. `bool` gives `mov bl, 1` / `xor bl, bl` / `test bl, bl`
+  where the original uses a full register (`getCommandIDFromCommandSelectionStuff` 43.8% -> 50.3%). Measure it, the
+  reverse happens too (`checkSkirmishGameDefeat` came out 0.3% worse as `int`).
+- An element the original addresses with one `lea` and then several displacements off that register wants a pointer
+  local, not repeated `array[index]`: `GameCommand* _pCommand = &this->DAT_GameCommandArray[id];` replacing two
+  indexed accesses took `scheduleReceivedCommand` 90.5% -> 96.9%.
+
 ### Conditionals
 
 - Ghidra's decompiler sometimes uses a number off by one for the condition compared to the assembly. Use the assembly as reference in this case.
@@ -305,6 +319,21 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
+
+- Write a comparison with its operands in the order the assembly shows. `if (a > b)` gives `cmp eax, ecx` where
+  `if (b < a)` gives `cmp ecx, eax`; flipping seven `iVar6 < lag[n].average1` to `lag[n].average1 > iVar6` took
+  `broadcastDesyncResyncCommands` 90.7% -> 95.8%, and four of them took `determineGameTicksToPerform` 46.2% -> 64.7%.
+  Use the literal the assembly shows as well: `<= 0x2710` rather than `< 0x2711`, `0 <= x` rather than `-1 < x`.
+- **A call reached from several branches with its arguments in variables was written once per branch.** When the
+  original pushes literals in each arm (`push 0xfffd` / `push 0x601`) where we build `_dwFlags`/`_dwPriority` and
+  share one call site, duplicate the whole call into every arm with the constants spelled out: `transmitCommand`
+  72.1% -> 98.5%. This is the opposite of *Several exits that end in the same statement* under **Loops**: MSVC
+  copies a shared tail of plain stores into each predecessor by itself, but a call whose constant arguments differ
+  per arm was written out per arm. Measure both.
+- `(-(uint)(c) & MASK) + BASE` has three candidate forms and they do not rank the same way twice: leaving the mask,
+  an `if` that overwrites a default, and a ternary. `broadcastDesyncResyncCommands` wanted the ternary
+  (92.3% mask / 92.1% `if` / 93.8% ternary), `renderDebugDataSplitInfo` wanted the `if`
+  (31.5% / 51.8% / 31.0%). Try all three.
 
 ### Loops
 
@@ -399,6 +428,21 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
 
+- **Ghidra's `while (cond) { i++; if (N <= i) goto LAB; }` is a `for` loop whose body holds the whole block that
+  follows it, ending in `break`.** The decompiler lifts the one interesting iteration out of the loop and leaves a
+  goto into the code after it. Putting that code back inside the `if` in the body, replacing the `goto` with `break`
+  and keeping whatever genuinely follows the loop after it was the highest-yield rewrite found in
+  `GameSynchronyState`: `checkLagAndSyncStatus` 36.8% -> 100%, `advanceSyncStatusAndKickLaggers` 59.4% -> 100%,
+  `checkGameLagStatusAndKickAccordingly` 34.1% -> 100%. Read the function from the raw disassembly and write it out
+  fresh rather than patching the decompiler's control flow.
+- A pointer walked over a member array is compared **signed** in the original (`jl`), so write
+  `(int)p < (int)(array + 9)`; a plain pointer `<` emits `jb` and costs the last two percent
+  (`checkGameLagStatusAndKickAccordingly` 98.0% -> 100%).
+- An early exit out of a loop nest that the decompiler renders as `goto` to a shared tail is often a `return`
+  duplicated into every site. Inlining the three statements plus `return` at all 13 `goto` sites took
+  `sendPendingResyncCommandsInBudget` 57.5% -> 63.2%, and it fixed a real bug: the shared tail fell through and
+  carried on looping where the original returns.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
@@ -445,6 +489,11 @@ generated header rather than working around the difference.
 A volatile register (usually ECX or EDX) that stays live across a call in the original, without being reloaded, means
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
+
+`/GL` on both sides does not always recover it. When the callee is exported from the DLL the linker cannot give it a
+custom calling convention, so the caller still spills `this`: `processSyncPacket` and
+`translateMultiplayerIDsIntoPlayerIDs` are both in `compiler-flags-gl.txt` and both produce IL objects, yet the caller
+keeps `mov esi, ecx` and the entire remaining diff is that one register rename.
 
 ### Parameters
 
@@ -536,6 +585,14 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
+
+- A run of adjacent single-byte zero stores in our output against dword and word stores in the original is an inlined
+  `memset`. Thirty `this->connectTarget[n] = '\0';` became seven `mov dword ptr ..., eax` plus one `mov word` when
+  written `memset(this->connectTarget, 0, 30);`, which also freed the register MSVC had been holding the zero in
+  (`handleCommandLineArguments` 35.7% -> 39.0%).
+- MSVC folds a two-character `strcpy(p, "\\")` to `mov word ptr [p], 0x5c`. Where the original loads the literal
+  instead (`mov dx, word ptr [str]; mov word ptr [edi], dx`) the source passed the string through a `char*`
+  variable (`readGameSpyConfig` 53.3% -> 58.5%).
 
 ### Copy Elision and Return Value Optimization
 
