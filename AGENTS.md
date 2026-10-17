@@ -474,3 +474,31 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   from 81.8% to an exact match. Scan each sub-100 source for the same `(short)expr` appearing twice
   - the declared-`short`-local form of this is the same bug with a different spelling. It does not
   always pay (hoisting `(short)_unitID` in `recomputeAttackInfo` cost 2 points), so measure.
+
+- **Per-block work on a long function: map its counters, not its instructions.** For a function too
+  long for reccmp to align (`recomputeAttackInfo`, 981 instructions, ten near-identical per-feature
+  blocks), the way in is to find a value each block touches exactly once - here the `gate1`,
+  `town1`, `high1`, `arch1`, ... counters - resolve each to its `instance+N` offset from the
+  prologue's zero stores, then grep `orig_asm.py NAME --both` for those offsets *in address order*.
+  That prints the original's block layout directly:
+
+      people lord gate town high2 arch2 wide hack scale moat
+
+  Ours had the owned-building arm as high2/arch2, town, gate - exactly reversed. `swap_arms.py`
+  reorders an `if`/`else` or `if`/`else if` chain in place (it negates the condition, so behaviour
+  is unchanged); three calls on the nested chains were worth 2 points.
+
+  **The layout order is not the whole source order, though.** Matching it completely measured
+  *worse*: moving `moat` last cost 1.3 and swapping the two outer arms another 2.1, because MSVC
+  outlines some of these blocks rather than emitting them where the source puts them. Reorder one
+  chain at a time and keep only the chains that measure better.
+
+- **When the two streams are the same length, stop looking for missing code.** `recomputeAttackInfo`
+  is 941 instructions against the original's 981, with the same 41 calls in the same order and the
+  same addressing idioms - so its 30% is an *alignment* score, not a structural gap: the prologue
+  allocates the player offset to a different register and needs one stack slot more, the streams
+  desynchronise there, and everything after counts as a mismatch. Things that look like the cause
+  and are not (all measured, all reverted): un-caching the second neighbour-gather so the layer
+  pointers reload, inlining three single-use height locals, moving the hoisted `ptr_SpecialAreasArray`
+  / `ptr_PathConnectionLayer` loads down to their first use, and hoisting a repeated `(short)_unitID`.
+  Count both streams before spending a day here.
