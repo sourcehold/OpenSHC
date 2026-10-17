@@ -237,7 +237,7 @@ namespace Map {
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
                 iVar5 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar4 + -4);
                 if (1 < iVar5) {
-                    if (iVar5 < 3) {
+                    if (iVar5 <= 2) {
                         iVar5 = 1;
                     } else if (iVar5 < 7) {
                         iVar5 = 2;

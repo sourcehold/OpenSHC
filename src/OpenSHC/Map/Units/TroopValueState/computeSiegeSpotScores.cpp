@@ -78,7 +78,7 @@ namespace Map {
                             goto LAB_0051aae8;
                         }
                         iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance;
-                        if (0x31 < iVar2) {
+                        if (0x32 <= iVar2) {
                             *puVar3 = 9999;
                             goto LAB_0051aae8;
                         }

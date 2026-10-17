@@ -432,3 +432,11 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   pointer derived inside, and a hoisted end-pointer local all compile to the *same* down-counter -
   measured, not assumed, on three functions in one build. When several spellings of a loop give a
   bit-identical diff, the remaining difference is the optimiser's and there is nothing left to try.
+
+- **Near-miss constants are comparison encodings, and they are worth sweeping for.** Ghidra prints
+  `x < K+1` where the original compiled `x <= K`, and `K-1 < x` where it compiled `K <= x`; the
+  reccmp diff shows it as the original's `cmp reg, K` against our `cmp reg, K+-1` on the next line.
+  Scan every sub-100 diff for adjacent `-cmp`/`+cmp` pairs whose constants differ by a small
+  amount, then rewrite each condition in the original's form. Seven of them in one build lifted six
+  functions and cost nothing anywhere. The same scan with the delta restricted to a struct size
+  (820 for Tribe, 1168 for Unit) finds loop bounds that are off by one whole element.

@@ -83,7 +83,7 @@ namespace Map {
             iVar6 = 0;
             if (0 < iVar9) {
                 do {
-                    if (0xf9 < iVar5)
+                    if (0xfa <= iVar5)
                         break;
                     DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[iVar5].engineerBuildingType
                         = (Commands::MappersEnum)(iVar4);

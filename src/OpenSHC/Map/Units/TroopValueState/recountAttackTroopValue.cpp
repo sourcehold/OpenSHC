@@ -87,7 +87,7 @@ namespace Map {
                                             = DAT_TroopValueState::instance.attackInfo.catapults + 1;
                                     }
                                 } else if (_tribeType != AI::Tribes::AITT_TUNNELERS
-                                    && ((short)_tribeType < 0xd || (0x18 < (short)_tribeType))) {
+                                    && ((short)_tribeType < 0xd || (0x19 <= (short)_tribeType))) {
                                     DAT_TroopValueState::instance.attackInfo.aiTroops
                                         = DAT_TroopValueState::instance.attackInfo.aiTroops + _size;
                                     DAT_TroopValueState::instance.attackInfo.attackTribeCount

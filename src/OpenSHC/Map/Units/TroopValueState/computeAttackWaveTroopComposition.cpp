@@ -123,13 +123,13 @@ namespace Map {
                     }
                     DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
                         = ((DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 6) - 1 & 3) + 2;
-                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 0xd) {
+                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen <= 0xc) {
                         DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
                             = (uint)(6 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) * 2 + 3;
                     } else {
                         DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 8;
                     }
-                    if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 0xb) {
+                    if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore <= 0xa) {
                         DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes
                             = (uint)(8 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) * 2 + 3;
                     } else {

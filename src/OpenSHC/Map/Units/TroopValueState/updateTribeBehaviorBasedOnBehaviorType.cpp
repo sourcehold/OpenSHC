@@ -132,7 +132,7 @@ namespace Map {
                     }
                     break;
                 case 1:
-                    if (0x1d < sVar3) {
+                    if (0x1e <= sVar3) {
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         iVar12 = MACRO_CALL_MEMBER(
                             Map::Units::TribesState_Func::isTribeUnitBlockedByOtherUnit, DAT_TribesState::ptr)(tribeID);
