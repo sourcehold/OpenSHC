@@ -38,12 +38,12 @@ namespace Map {
                 int tribeID = DAT_TroopValueState::instance.attackInfo
                                   .knightTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount];
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                if (!iVar1) {
-                    iVar2 = MACRO_CALL_MEMBER(
-                        Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(iVar2);
-                } else {
+                if (iVar1) {
                     iVar2 = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::findActiveSiegeEngineForTribe, DAT_UnitsState::ptr)(iVar2);
+                } else {
+                    iVar2 = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(iVar2);
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
                     (uint)(DAT_UnitsState::instance.units[iVar2].x), (uint)(DAT_UnitsState::instance.units[iVar2].y), 0,
