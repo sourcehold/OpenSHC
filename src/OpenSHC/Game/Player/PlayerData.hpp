@@ -166,10 +166,8 @@ namespace Game {
             int lastMonthsBribeTax; // 0x00002140 length: 4
             int taxBribeMonthlyAccumulator; // 0x00002144 length: 4
             int totalEnemyUnitsCount; // 0x00002148 length: 4
-            byte partialWoodCounter; // 0x0000214C length: 1
-            undefined1 padding_0x214d[3]; // 0x0000214D length: 3
-            byte partialStoneCounter; // 0x00002150 length: 1
-            undefined1 padding_0x2151[3]; // 0x00002151 length: 3
+            int partialWoodCounter; // 0x0000214C length: 4
+            int partialStoneCounter; // 0x00002150 length: 4
             int lastMonthsIncomeTax; // 0x00002154 length: 4
             int taxIncomeMonthlyAccumulator; // 0x00002158 length: 4
             int popularityChangeBasedOnTax; // 0x0000215C length: 4
@@ -342,9 +340,8 @@ namespace Game {
             int attackedPlayerID; // 0x00002BD8 length: 4
             int attackedByPlayerArrayUnk; // 0x00002BDC length: 4
             int field886_0x2be0; // 0x00002BE0 length: 4
-            undefined1 padding_0x2be4[4]; // 0x00002BE4 length: 4
-            int unusedEnemyAttackTracker[9][8]; // 0x00002BE8 length: 288
-            undefined1 padding_0x2d08[20]; // 0x00002D08 length: 20
+            int unusedEnemyAttackTracker[9][8]; // 0x00002BE4 length: 288
+            undefined1 padding_0x2d04[24]; // 0x00002D04 length: 24
             int aivUnitLocationSlots[22][10]; // 0x00002D1C length: 880
             int aivUnitLocationSlotLocationCount[22]; // 0x0000308C length: 88
             int totalTroopsType0; // 0x000030E4 length: 4
