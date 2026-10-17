@@ -394,11 +394,12 @@ namespace Map {
                         if (sVar3 <= 0) {
                             iVar12 = MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::findTribeWithMoatAttackBehavior, this)();
-                            if (iVar12) {
-                                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::assignTribeToSupportPoint, this)(
-                                    DAT_TroopValueState::instance.x, (uint)(DAT_TroopValueState::instance.y), tribeID);
+                            if (!iVar12) {
+                                goto LAB_0051e032;
                             }
-                            goto LAB_0051e032;
+                            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::assignTribeToSupportPoint, this)(
+                                DAT_TroopValueState::instance.x, (uint)(DAT_TroopValueState::instance.y), tribeID);
+                            return;
                         }
                     }
                     return;
