@@ -74,9 +74,7 @@ namespace Map {
                                 iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance;
                                 if (iVar2 < 0x32) {
                                     if ((int)_pathFindingCost < iVar2 + 0xf) {
-                                        piVar5 = (int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                            + _offset + -4);
-                                        *piVar5 = *piVar5 + 1;
+                                        DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 + 1;
                                         *puVar3 = _pathFindingCost;
                                     } else {
                                         *puVar3 = 9999;
