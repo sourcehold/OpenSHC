@@ -20,18 +20,19 @@ namespace Map {
             int iVar1;
             tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
-            if (tile < 0x80000000) {
-                iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
-                    (uint)(DAT_UnitsState::instance.units[param_1].x),
-                    (uint)(DAT_UnitsState::instance.units[param_1].y));
-                if (0 < iVar1) {
-                    this->x = DAT_TileMapState::instance.ALG_MoatXResult;
-                    this->y = DAT_TileMapState::instance.ALG_MoatYResult;
-                    this->tile = DAT_TileMapState::instance.someMoatTile;
-                    return iVar1;
-                }
+            if (0x7fffffff < tile) {
+                return 0;
             }
-            return 0;
+            iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
+                (uint)(DAT_UnitsState::instance.units[param_1].x),
+                (uint)(DAT_UnitsState::instance.units[param_1].y));
+            if (iVar1 < 1) {
+                return 0;
+            }
+            this->x = DAT_TileMapState::instance.ALG_MoatXResult;
+            this->y = DAT_TileMapState::instance.ALG_MoatYResult;
+            this->tile = DAT_TileMapState::instance.someMoatTile;
+            return iVar1;
         }
 
     }
