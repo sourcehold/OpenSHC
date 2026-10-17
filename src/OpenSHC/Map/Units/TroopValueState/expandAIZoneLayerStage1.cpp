@@ -49,8 +49,8 @@ namespace Map {
             }
             for (iVar4 = 0; iVar4 < 80400; iVar4 = iVar4 + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\x01') {
-                    iVar3 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar4];
                     iVar1 = 0;
+                    iVar3 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar4];
                     int _x = iVar4 - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile;
                     do {
                         if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4
