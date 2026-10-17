@@ -72,16 +72,6 @@ namespace Map {
             _playerID_7 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             uVar7 = DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount;
             if (_tribeBehaviorType < 1010) {
-                if (_tribeBehaviorType == 1010) {
-                    sVar4 = DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit;
-                    DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
-                    if (sVar4 && sVar4 <= sVar3) {
-                        DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                        DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe,
-                            DAT_TribesState::ptr)(tribeID, Map::Units::STBT_0x3f2);
-                    }
-                }
                 switch (_tribeBehaviorType) {
                 case 1:
                     if (0x1d < sVar3) {
@@ -156,6 +146,15 @@ namespace Map {
                         < 0x19) {
                         DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                     }
+                }
+            } else if (_tribeBehaviorType == 1010) {
+                sVar4 = DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit;
+                DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
+                if (sVar4 && sVar4 <= sVar3) {
+                    DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                    DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
+                        tribeID, Map::Units::STBT_0x3f2);
                 }
             } else {
                 switch (_tribeBehaviorType) {
