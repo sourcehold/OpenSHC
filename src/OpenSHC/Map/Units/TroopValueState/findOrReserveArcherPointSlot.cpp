@@ -12,7 +12,7 @@ namespace Map {
         {
             int _firstFree = 0;
             DAT_TroopValueState::instance.attackInfo.archerPointsNext = 0;
-            for (int i = 1; i < 201; i = i + 1) {
+            for (int i = 1; i < 200; i = i + 1) {
                 if (DAT_TroopValueState::instance.attackInfo.archerPointArray[i].tile == param_1) {
                     return i;
                 }
