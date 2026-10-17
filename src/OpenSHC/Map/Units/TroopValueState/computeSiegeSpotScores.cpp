@@ -82,7 +82,7 @@ namespace Map {
                             *puVar3 = 9999;
                             goto LAB_0051aae8;
                         }
-                        if (iVar2 + 0xf <= (int)_pathFindingCost) {
+                        if ((int)_pathFindingCost >= iVar2 + 0xf) {
                             *puVar3 = 9999;
                             goto LAB_0051aae8;
                         }

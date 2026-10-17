@@ -40,8 +40,8 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                     param_1, Map::Units::STBT_3);
             }
-            if ((char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] + -5
-                <= (int)(char)DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1]) {
+            if ((int)(char)DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1]
+                >= (char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] + -5) {
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
                 if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
                     >= DAT_AttackInfoDefinedData::instance

@@ -47,7 +47,7 @@ namespace Map {
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
                 }
                 DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 2;
-                if (DAT_TroopValueState::instance.attackInfo.laddermen < 3) {
+                if (DAT_TroopValueState::instance.attackInfo.laddermen <= 2) {
                     DAT_TroopValueState::instance.attackInfo.maxLadderTribes
                         = DAT_TroopValueState::instance.attackInfo.laddermen;
                 }
@@ -74,7 +74,7 @@ namespace Map {
                         = (4 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 2;
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
                         = (0 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 1;
-                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 5) {
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen <= 4) {
                         DAT_TroopValueState::instance.attackInfo.maxLadderTribes
                             = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
@@ -104,7 +104,7 @@ namespace Map {
                     }
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 2;
                     DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 5;
-                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 6) {
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen <= 5) {
                         DAT_TroopValueState::instance.attackInfo.maxLadderTribes
                             = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
@@ -138,7 +138,7 @@ namespace Map {
                     DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 6;
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
                         = (0 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 2;
-                    if (DAT_TroopValueState::instance.attackInfo.laddermen < 7) {
+                    if (DAT_TroopValueState::instance.attackInfo.laddermen <= 6) {
                         DAT_TroopValueState::instance.attackInfo.maxLadderTribes
                             = DAT_TroopValueState::instance.attackInfo.laddermen;
                     }
