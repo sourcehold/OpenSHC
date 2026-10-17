@@ -48,7 +48,26 @@ namespace Map {
                             BVar1)
                         && (_pUnit->unitType == Map::Units::UT_E_ARCHER
                             || (_pUnit->unitType == Map::Units::UT_E_XBOW))) {
-                        if (!(DAT_TileMapState::instance.LogicLayer[_pUnit->tile] & 0x10000100U)) {
+                        if ((DAT_TileMapState::instance.LogicLayer[_pUnit->tile] & 0x10000100U)) {
+                            int _tribeID = (int)_pUnit->tribeID;
+                            _index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520;
+                            if (_index < 200
+                                && (!_tribeID
+                                    || (DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk == 0))) {
+                                /*
+                                  not rallying or part of tribe
+                                 */
+                                DAT_TroopValueState::instance.attackInfo.tileArray_0x2bd50[_index] = _pUnit->tile;
+                                DAT_TroopValueState::instance.attackInfo
+                                    .uidArray_0x2c200[DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520]
+                                    = _pUnit->uid;
+                                DAT_TroopValueState::instance.attackInfo
+                                    .unitIDArray_0x2c070[DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520]
+                                    = (short)_unitID;
+                                DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520
+                                    = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520 + 1;
+                            }
+                        } else {
                             /*
                               not on the keep or gatehouse, or towers?
                              */
@@ -61,22 +80,6 @@ namespace Map {
                                 DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c
                                     = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c + 1;
                             }
-                        } else if (_index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520,
-                            _index < 200
-                                && (!_pUnit->tribeID
-                                    || (DAT_TribesState::instance.tribes[_pUnit->tribeID].isRallyingUnk == 0))) {
-                            /*
-                              not rallying or part of tribe
-                             */
-                            DAT_TroopValueState::instance.attackInfo.tileArray_0x2bd50[_index] = _pUnit->tile;
-                            DAT_TroopValueState::instance.attackInfo
-                                .uidArray_0x2c200[DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520]
-                                = _pUnit->uid;
-                            DAT_TroopValueState::instance.attackInfo
-                                .unitIDArray_0x2c070[DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520]
-                                = (short)_unitID;
-                            DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520
-                                = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520 + 1;
                         }
                     }
                     _unitID = _unitID + 1;
