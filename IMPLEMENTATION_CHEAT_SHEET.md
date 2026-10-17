@@ -490,10 +490,11 @@ A volatile register (usually ECX or EDX) that stays live across a call in the or
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
 
-`/GL` on both sides does not always recover it. When the callee is exported from the DLL the linker cannot give it a
-custom calling convention, so the caller still spills `this`: `processSyncPacket` and
-`translateMultiplayerIDsIntoPlayerIDs` are both in `compiler-flags-gl.txt` and both produce IL objects, yet the caller
-keeps `mov esi, ecx` and the entire remaining diff is that one register rename.
+`/GL` on both sides does not always recover it, and the reason is not yet known. `processSyncPacket` and its callee
+`translateMultiplayerIDsIntoPlayerIDs` are both listed in `compiler-flags-gl.txt` and both produce IL objects
+(`0000 ffff`), yet the caller still emits `mov esi, ecx` and spills `this`, where the original keeps it in `ecx`
+across the call. The entire remaining 26% diff on `processSyncPacket` is that one register rename. If you hit this,
+do not assume the `/GL` entry is missing - check the object first.
 
 ### Parameters
 
