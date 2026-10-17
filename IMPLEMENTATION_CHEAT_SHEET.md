@@ -490,22 +490,25 @@ A volatile register (usually ECX or EDX) that stays live across a call in the or
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
 
-`/GL` on both sides does not always recover it, and the reason is still unknown. `processSyncPacket` and its callee
-`translateMultiplayerIDsIntoPlayerIDs` are both listed in `compiler-flags-gl.txt` and both produce IL objects
-(`0000 ffff`), yet the caller still emits `mov esi, ecx` and spills `this`, where the original keeps it in `ecx`
-across the call. The entire remaining 26% diff on `processSyncPacket` is that one register rename.
+`/GL` on both sides is not sufficient on its own. The callee also has to be **enabled in its `.func.hpp`**, i.e.
+`MACRO_FUNCTION_RESOLVER(..., true, Address::...)`, because with `false` the `MACRO_CALL_MEMBER` dispatches to the
+original binary and the compiler has nothing to analyse - it cannot know the callee leaves `ecx` alone, so the caller
+spills `this`. Enabling the callee is only legitimate once that callee is itself at 100%.
 
-Four explanations were tested on that pair and all are wrong, so do not spend time on them again:
+`processSyncPacket` sat at 26.2% for exactly this reason, with the whole diff being `mov esi, ecx` and the register
+rename it causes. Flipping `translateMultiplayerIDsIntoPlayerIDs` (already 100%) to `true` took it to 79.2%
+immediately, and the rest was an `abs()`. Enabling all 23 finished functions of `GameSynchronyState` moved the
+namespace average 84.6% -> 85.7% with no function getting worse.
 
-- *The callee is exported from the DLL.* `OpenSHC.dll` exports exactly one symbol, `luaopen_OpenSHC`.
-- *Its address is taken by `MACRO_FUNCTION_RESOLVER`.* True, but it is equally true of the known-good cases above.
-- *Every caller has to be in the LTCG set.* Adding the six other callers of
-  `translateMultiplayerIDsIntoPlayerIDs` to `compiler-flags-gl.txt` left the match at exactly 26.2%.
-- *Caller and callee have to share a translation unit.* `#include`-ing the callee's `.cpp` into the caller and
-  dropping it from the source list still emits `mov esi, ecx`, and still emits a real `call` rather than inlining.
+So the measurement setup is two switches, not one: `Enable-Reimplemented-Data.ps1` /
+`enable_reimplemented_data.py` for the struct resolvers **and** `Enable-Reimplemented-Functions.ps1` for the
+function resolvers. Neither belongs in a commit. Measuring with only the data half makes every cross-function call
+look worse than it is.
 
-What is left untested is whether the original callee had internal linkage, which a member function declared in the
-class header and reached through a resolver cannot have.
+Explanations that were tested on this pair and are **not** the cause, so do not spend time on them: the callee being
+exported from the DLL (`OpenSHC.dll` exports one symbol, `luaopen_OpenSHC`); its address being taken by
+`MACRO_FUNCTION_RESOLVER`; the other callers not being in the LTCG set; and caller and callee not sharing a
+translation unit.
 
 ### Parameters
 
