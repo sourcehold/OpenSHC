@@ -772,3 +772,27 @@ scores are per-function - then revert the losers.
 The scan that finds the candidates:
 
     local = <DAT_...global expr>;   ...and that same expr appears again later
+
+### `x + -1` and `x - 1` are the same instruction - do not chase it
+
+`updateTribeBehaviorBasedOnBehaviorType`'s diff shows the original using
+`sub eax,1` where ours emits `add eax,-1`, which looks like the Ghidra `+ -1`
+idiom leaking into codegen. It is not. Rewriting every `+ -1` as `- 1` across
+all twelve sub-100 files that contain it changed **nothing**: all twelve scored
+bit-identically. MSVC canonicalises the two forms.
+
+Keep `+ -1` - it is what the already-100% files in this directory use.
+
+### Do not reorder the three top-level arms of `updateTribeBehaviorBasedOnBehaviorType`
+
+Its dispatch is `cmp eax,0x3f2` followed in the original by `jg <high> / je <eq>`
+where ours emits a single `jge`, which reads as though the original ordered the
+arms high-switch / `== 1010` / low-switch while ours has low / `== 1010` / high.
+Rewriting the chain into that order (same bodies, conditions negated) collapsed
+it **71.3% -> 21.3%**.
+
+The two switches are ~76 and ~308 lines; moving either past the other relocates
+every jump-table entry and every arm, so the per-arm layout that previous
+sessions tuned (see the corrected arm order above) is worth far more than the
+dispatch's two-instruction shape. Treat the dispatch `jge`/`jg`+`je` difference
+as a 2-instruction cost and leave the arms where they are.
