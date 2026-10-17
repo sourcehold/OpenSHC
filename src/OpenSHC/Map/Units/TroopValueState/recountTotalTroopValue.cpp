@@ -42,7 +42,7 @@ namespace Map {
                             _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
                         && _troopType != Map::Units::UT_E_LADDER) {
                         _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
-                            this)((Map::Units::UnitType)(short)_troopType);
+                            DAT_TroopValueState::ptr)((Map::Units::UnitType)(short)_troopType);
                         _playerID = pUVar2->owner;
                         DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
                             = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
