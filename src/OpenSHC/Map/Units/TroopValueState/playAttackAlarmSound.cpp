@@ -15,23 +15,26 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B6C0
         void TroopValueState::playAttackAlarmSound()
         {
-            char* filename;
             MACRO_CALL_MEMBER(
                 Audio::MSS::SoundSystem_Func::playBattleGloryMusicIfConditionsMet, DAT_SoundSystemState::ptr)();
             switch (DAT_TroopValueState::instance.attackInfo.attacker) {
             case 2:
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
+                    "battlehorn.wav");
+                break;
             case 3:
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
+                    "battlehorn.wav");
+                break;
             case 4:
-                filename = "battlehorn.wav";
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
+                    "battlehorn.wav");
                 break;
             case 5:
-                filename = "drumhorn.wav";
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
+                    "drumhorn.wav");
                 break;
-            default:
-                goto switchD_0051b6d7_caseD_4;
             }
-            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(filename);
-        switchD_0051b6d7_caseD_4:
             DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 1;
         }
 
