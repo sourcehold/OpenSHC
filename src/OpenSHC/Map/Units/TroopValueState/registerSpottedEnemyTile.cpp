@@ -21,22 +21,20 @@ namespace Map {
         void TroopValueState::registerSpottedEnemyTile(int param_1)
         {
             int iVar2;
-            if (((((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                      && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .keep.id
-                          < 1))
-                     && (iVar2 = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < iVar2))
-                    && ((DAT_GameSynchronyState::instance
-                                .currentPlayerFullIDArray[DAT_UnitsState::instance.units[iVar2].owner]
-                            != -1
-                        && (DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime != 0))))
-                && ((DAT_TileMapState::instance.EntityLayer[param_1] == 0
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
+                    < 1
+                && (iVar2 = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < iVar2)
+                && DAT_GameSynchronyState::instance
+                        .currentPlayerFullIDArray[DAT_UnitsState::instance.units[iVar2].owner]
+                    != -1
+                && DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime != 0
+                && (DAT_TileMapState::instance.EntityLayer[param_1] == 0
                     || (DAT_EntityState::instance.entityArray[DAT_TileMapState::instance.EntityLayer[param_1]]
                             .entityType
-                        != Map::Entities::ET_FIRE)))) {
+                        != Map::Entities::ET_FIRE))) {
                 iVar2 = -1;
-                int iVar3 = 0;
-                do {
+                for (int iVar3 = 0; iVar3 < 100; iVar3 = iVar3 + 1) {
                     int iVar1 = this->attackInfo.spottedEnemyTiles[iVar3].tile;
                     if (iVar1 == param_1) {
                         iVar2 = -1;
@@ -45,8 +43,7 @@ namespace Map {
                     if ((!iVar1) && (iVar2 == -1)) {
                         iVar2 = iVar3;
                     }
-                    iVar3 = iVar3 + 1;
-                } while (iVar3 < 100);
+                }
                 if (-1 < iVar2) {
                     this->attackInfo.spottedEnemyTiles[iVar2].tile = param_1;
                     this->attackInfo.spottedEnemyTiles[iVar2].value = 100;
