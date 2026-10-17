@@ -24,18 +24,15 @@ namespace Map {
         {
             AITribeTypeShort AVar1;
             int _unitID;
-            Tribe* _tribe;
             int _tribeUnitIndex;
-            int _tribeID = 1;
-            _tribe = &DAT_TribesState::instance.tribes[1];
-            do {
-                if (_tribe->tribeState && _tribe->attackWave == wave
-                    && (AVar1 = _tribe->tribeType,
+            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState && DAT_TribesState::instance.tribes[_tribeID].attackWave == wave
+                    && (AVar1 = DAT_TribesState::instance.tribes[_tribeID].tribeType,
                         AVar1 == ((AITribeType)0x13)
                             || ((((AVar1 == ((AITribeType)0x14) || (AVar1 == ((AITribeType)0x15)))
                                      || (AVar1 == ((AITribeType)0x16)))
                                 || ((AVar1 == ((AITribeType)0x17) || (AVar1 == ((AITribeType)0x18)))))))
-                    && (_tribeUnitIndex = 0, 0 < _tribe->size)) {
+                    && (_tribeUnitIndex = 0, 0 < DAT_TribesState::instance.tribes[_tribeID].size)) {
                     do {
                         _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                             DAT_TribesState::ptr)(_tribeID, _tribeUnitIndex);
@@ -47,11 +44,9 @@ namespace Map {
                                 DAT_UnitsState::instance.units[_unitID].uid, 0);
                             DAT_UnitsState::instance.units[_unitID].state.generic = Map::Units::States::US_DISAPPEAR;
                         }
-                    } while (_tribeUnitIndex < _tribe->size);
+                    } while (_tribeUnitIndex < DAT_TribesState::instance.tribes[_tribeID].size);
                 }
-                _tribe = _tribe + 1;
-                _tribeID = _tribeID + 1;
-            } while ((int)_tribe < 0x17623a2);
+            }
         }
 
     }
