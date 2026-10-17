@@ -317,10 +317,8 @@ namespace Map {
                                             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2].tile2
                                                 = DAT_TileMapState::instance.directionTranslationMatrix[_someY][iVar13]
                                                 + _tile;
-                                            piVar14
-                                                = (int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                                                    + _offset + -8);
-                                            *piVar14 = *piVar14 + 1;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2
+                                                = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 + 1;
                                             if (DAT_TileMapState::instance.AIZoneLayer[_tile] != 0) {
                                                 iVar13 = DAT_ViewportRenderState::instance.translationMatrix[_someY]
                                                              .addXgetTile;
@@ -419,14 +417,10 @@ namespace Map {
                                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
                                                                                  [_direction]
                                                 + _tile;
-                                            piVar14
-                                                = (int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                                                    + _offset + -8);
-                                            *piVar14 = *piVar14 + 1;
-                                            piVar14
-                                                = (int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                                                    + _offset + -0xc);
-                                            *piVar14 = *piVar14 + 1;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2
+                                                = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2 + 1;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide1
+                                                = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide1 + 1;
                                             DAT_TileMapState::instance.DAT_SomeX = _tile
                                                 - DAT_ViewportRenderState::instance.translationMatrix[iVar13]
                                                       .addXgetTile;
@@ -527,10 +521,8 @@ namespace Map {
                                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
                                                                                  [iVar13]
                                                 + _tile;
-                                            piVar14
-                                                = (int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray
-                                                    + _offset + -8);
-                                            *piVar14 = *piVar14 + 1;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2
+                                                = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2 + 1;
                                             goto LAB_0051e94c;
                                         }
                                     }
@@ -542,8 +534,125 @@ namespace Map {
                         int BVar2
                             = (int)(short)DAT_BuildingsState::instance.buildings[(short)_buildingID].buildingType;
                         uVar12 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_tile];
-                        if (!DAT_BuildingDefinedData::instance.IsGateOrTowerArray[BVar2]) {
-                            if (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[BVar2] == 0) {
+                        if (DAT_BuildingDefinedData::instance.IsGateOrTowerArray[BVar2]) {
+                            if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile] != '\0') {
+                                piVar14 = (int*)((undefined*)((
+                                    int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset + -0xc)));
+                                *piVar14 = (int)((undefined*)(*piVar14 + 1));
+                                puVar5 = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
+                                puVar4 = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
+                                DAT_TileMapState::instance.DAT_SomeY
+                                    = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                                DAT_TileMapState::instance.DAT_SomeX = _tile
+                                    - DAT_ViewportRenderState::instance
+                                          .translationMatrix[DAT_TileMapState::instance.DAT_SomeY]
+                                          .addXgetTile;
+                                piVar14 = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
+                                    + DAT_TileMapState::instance.DAT_SomeY * 0x20);
+                                uVar3 = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
+                                    + _tile * 2 + -2);
+                                DAT_TileMapState::instance.DAT_SomeTile = _tile;
+                                *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
+                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer) + _tile * 2
+                                        + 2);
+                                *(undefined2*)(puVar5 + 0xc) = uVar3;
+                                uVar3 = *(undefined2*)(puVar4 + piVar14[4] * 2 + _tile * 2);
+                                *(undefined2*)puVar5 = *(undefined2*)(puVar4 + *piVar14 * 2 + _tile * 2);
+                                *(undefined2*)(puVar5 + 8) = uVar3;
+                                iVar13 = 0;
+                            LAB_0051e890:
+                                if (DAT_TileMapState::instance.specialAreasArray[iVar13]
+                                    != DAT_TroopValueState::instance.attackInfo.startCon)
+                                    break;
+                                if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
+                                        < 1000
+                                    && (_teamsDifferent = MACRO_CALL_MEMBER(
+                                            Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles, this)(_tile),
+                                        !_teamsDifferent)) {
+                                    iVar11 = DAT_TileMapState::instance
+                                                 .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
+                                        + _tile;
+                                    if ((DAT_TileMapState::instance.LogicLayer[iVar11] & 0x10000100U)
+                                        || (uVar7 = MACRO_CALL_MEMBER(Map::TileMapState_Func::getTotalHeightAtTile,
+                                                DAT_TileMapState::ptr)(iVar11),
+                                            (int)(uVar7 + 0x10) < (int)uVar12 || ((int)uVar12 < (int)(uVar7 - 0x10))))
+                                        break;
+                                    DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile = _tile;
+                                    _someY = DAT_TileMapState::instance.DAT_SomeY;
+                                    DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile2
+                                        = DAT_TileMapState::instance
+                                              .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
+                                        + _tile;
+                                    DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 + 1;
+                                LAB_0051e94c:
+                                    if (DAT_TileMapState::instance.AIZoneLayer[_tile] != 0) {
+                                        iVar13 = DAT_ViewportRenderState::instance.translationMatrix[_someY].addXgetTile;
+                                        _someLimit = DAT_TroopValueState::instance.attackInfo.someDistanceLimit;
+                                    LAB_0051f316:
+                                        DAT_TileMapState::instance.DAT_SomeX = _tile - iVar13;
+                                        MACRO_CALL_MEMBER(
+                                            Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
+                                            DAT_PathFindingState::ptr)(
+                                            _someLimit, (uint)(DAT_TileMapState::instance.DAT_SomeX), (uint)(_someY), 1);
+                                    }
+                                }
+                            }
+                        } else {
+                            if (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[BVar2] != 0) {
+                                if (!(DAT_TileMapState::instance.LogicLayer[_tile] & 0xf000000U)) {
+                                    DAT_TileMapState::instance.DAT_SomeY
+                                        = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                                    piVar14 = (int*)((
+                                        undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
+                                        + _offset + -0xc)));
+                                    *piVar14 = (int)((undefined*)(*piVar14 + 1));
+                                    puVar5 = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
+                                    puVar4 = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
+                                    piVar14
+                                        = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
+                                            + DAT_TileMapState::instance.DAT_SomeY * 0x20);
+                                    uVar3 = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
+                                        + _tile * 2 + -2);
+                                    DAT_TileMapState::instance.DAT_SomeTile = _tile;
+                                    *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
+                                        = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
+                                            + _tile * 2 + 2);
+                                    *(undefined2*)(puVar5 + 0xc) = uVar3;
+                                    uVar3 = *(undefined2*)(puVar4 + piVar14[4] * 2 + _tile * 2);
+                                    *(undefined2*)puVar5 = *(undefined2*)(puVar4 + *piVar14 * 2 + _tile * 2);
+                                    *(undefined2*)(puVar5 + 8) = uVar3;
+                                    iVar13 = 0;
+                                    do {
+                                        if (DAT_TileMapState::instance.specialAreasArray[iVar13]
+                                            == DAT_TroopValueState::instance.attackInfo.startCon) {
+                                            if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2
+                                                || (_teamsDifferent = MACRO_CALL_MEMBER(
+                                                        Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
+                                                        this)(_tile),
+                                                    _teamsDifferent))
+                                                break;
+                                            _heightTown = MACRO_CALL_MEMBER(
+                                                Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(
+                                                DAT_TileMapState::instance
+                                                    .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
+                                                                               [iVar13]
+                                                + _tile);
+                                            iVar11 = DAT_TileMapState::instance.DAT_SomeY;
+                                            if ((int)uVar12 <= (int)(_heightTown + 0x10)
+                                                && (int)(_heightTown - 0x10) <= (int)uVar12) {
+                                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile = _tile;
+                                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile2
+                                                    = DAT_TileMapState::instance.directionTranslationMatrix[iVar11][iVar13]
+                                                    + _tile;
+                                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2
+                                                    = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2 + 1;
+                                                break;
+                                            }
+                                        }
+                                        iVar13 = iVar13 + 2;
+                                    } while (iVar13 < 8);
+                                }
+                            } else {
                                 if ((_logic & 0x10000000)) {
                                     _area = DAT_TileMapState::instance.PathConnectionLayer[_tile];
                                     if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile] != '\0') {
@@ -589,34 +698,7 @@ namespace Map {
                                                 _teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Buildings::BuildingsState_Func::hasHumanPlayerUnitsOnBuilding,
                                                     DAT_BuildingsState::ptr)(_buildingID_3);
-                                                if (!_teamsDifferent) {
-                                                    DAT_TroopValueState::instance.attackInfo.arch1
-                                                        = DAT_TroopValueState::instance.attackInfo.arch1 + 1;
-                                                    if (DAT_TroopValueState::instance.attackInfo.arch2 < 1000
-                                                        && (iVar13 = MACRO_CALL_MEMBER(
-                                                                Map::Navigation::PathFindingState_Func::
-                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                                                DAT_PathFindingState::ptr)(playerID,
-                                                                (dword)((int)(DAT_TroopValueState::instance.attackInfo
-                                                                        .startCon)),
-                                                                (dword)((int)((short)_area)), 0),
-                                                            iVar13 != 0)) {
-                                                        DAT_TroopValueState::instance.attackInfo
-                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
-                                                                    .arch2]
-                                                            .buildingID = _buildingID_3;
-                                                        DAT_TroopValueState::instance.attackInfo
-                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
-                                                                    .arch2]
-                                                            .tile2 = _tile;
-                                                        DAT_TroopValueState::instance.attackInfo
-                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
-                                                                    .arch2]
-                                                            .tile = _tile;
-                                                        DAT_TroopValueState::instance.attackInfo.arch2
-                                                            = DAT_TroopValueState::instance.attackInfo.arch2 + 1;
-                                                    }
-                                                } else {
+                                                if (_teamsDifferent) {
                                                     DAT_TroopValueState::instance.attackInfo.high1
                                                         = DAT_TroopValueState::instance.attackInfo.high1 + 1;
                                                     if (DAT_TroopValueState::instance.attackInfo.high2 < 1000
@@ -643,125 +725,37 @@ namespace Map {
                                                         DAT_TroopValueState::instance.attackInfo.high2
                                                             = DAT_TroopValueState::instance.attackInfo.high2 + 1;
                                                     }
+                                                } else {
+                                                    DAT_TroopValueState::instance.attackInfo.arch1
+                                                        = DAT_TroopValueState::instance.attackInfo.arch1 + 1;
+                                                    if (DAT_TroopValueState::instance.attackInfo.arch2 < 1000
+                                                        && (iVar13 = MACRO_CALL_MEMBER(
+                                                                Map::Navigation::PathFindingState_Func::
+                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                                                DAT_PathFindingState::ptr)(playerID,
+                                                                (dword)((int)(DAT_TroopValueState::instance.attackInfo
+                                                                        .startCon)),
+                                                                (dword)((int)((short)_area)), 0),
+                                                            iVar13 != 0)) {
+                                                        DAT_TroopValueState::instance.attackInfo
+                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
+                                                                    .arch2]
+                                                            .buildingID = _buildingID_3;
+                                                        DAT_TroopValueState::instance.attackInfo
+                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
+                                                                    .arch2]
+                                                            .tile2 = _tile;
+                                                        DAT_TroopValueState::instance.attackInfo
+                                                            .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo
+                                                                    .arch2]
+                                                            .tile = _tile;
+                                                        DAT_TroopValueState::instance.attackInfo.arch2
+                                                            = DAT_TroopValueState::instance.attackInfo.arch2 + 1;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                            } else if (!(DAT_TileMapState::instance.LogicLayer[_tile] & 0xf000000U)) {
-                                DAT_TileMapState::instance.DAT_SomeY
-                                    = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                                piVar14 = (int*)((
-                                    undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                    + _offset + -0xc)));
-                                *piVar14 = (int)((undefined*)(*piVar14 + 1));
-                                puVar5 = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
-                                puVar4 = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
-                                piVar14
-                                    = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                        + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                                uVar3 = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                    + _tile * 2 + -2);
-                                DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                                *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + 2);
-                                *(undefined2*)(puVar5 + 0xc) = uVar3;
-                                uVar3 = *(undefined2*)(puVar4 + piVar14[4] * 2 + _tile * 2);
-                                *(undefined2*)puVar5 = *(undefined2*)(puVar4 + *piVar14 * 2 + _tile * 2);
-                                *(undefined2*)(puVar5 + 8) = uVar3;
-                                iVar13 = 0;
-                                do {
-                                    if (DAT_TileMapState::instance.specialAreasArray[iVar13]
-                                        == DAT_TroopValueState::instance.attackInfo.startCon) {
-                                        if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2
-                                            || (_teamsDifferent = MACRO_CALL_MEMBER(
-                                                    Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
-                                                    this)(_tile),
-                                                _teamsDifferent))
-                                            break;
-                                        _heightTown = MACRO_CALL_MEMBER(
-                                            Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(
-                                            DAT_TileMapState::instance
-                                                .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
-                                                                           [iVar13]
-                                            + _tile);
-                                        iVar11 = DAT_TileMapState::instance.DAT_SomeY;
-                                        if ((int)uVar12 <= (int)(_heightTown + 0x10)
-                                            && (int)(_heightTown - 0x10) <= (int)uVar12) {
-                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile = _tile;
-                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile2
-                                                = DAT_TileMapState::instance.directionTranslationMatrix[iVar11][iVar13]
-                                                + _tile;
-                                            piVar14
-                                                = (int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                                    + _offset + -8);
-                                            *piVar14 = *piVar14 + 1;
-                                            break;
-                                        }
-                                    }
-                                    iVar13 = iVar13 + 2;
-                                } while (iVar13 < 8);
-                            }
-                        } else if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile] != '\0') {
-                            piVar14 = (int*)((undefined*)((
-                                int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset + -0xc)));
-                            *piVar14 = (int)((undefined*)(*piVar14 + 1));
-                            puVar5 = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
-                            puVar4 = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
-                            DAT_TileMapState::instance.DAT_SomeY
-                                = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                            DAT_TileMapState::instance.DAT_SomeX = _tile
-                                - DAT_ViewportRenderState::instance
-                                      .translationMatrix[DAT_TileMapState::instance.DAT_SomeY]
-                                      .addXgetTile;
-                            piVar14 = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                            uVar3 = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                + _tile * 2 + -2);
-                            DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                            *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer) + _tile * 2
-                                    + 2);
-                            *(undefined2*)(puVar5 + 0xc) = uVar3;
-                            uVar3 = *(undefined2*)(puVar4 + piVar14[4] * 2 + _tile * 2);
-                            *(undefined2*)puVar5 = *(undefined2*)(puVar4 + *piVar14 * 2 + _tile * 2);
-                            *(undefined2*)(puVar5 + 8) = uVar3;
-                            iVar13 = 0;
-                        LAB_0051e890:
-                            if (DAT_TileMapState::instance.specialAreasArray[iVar13]
-                                != DAT_TroopValueState::instance.attackInfo.startCon)
-                                break;
-                            if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
-                                    < 1000
-                                && (_teamsDifferent = MACRO_CALL_MEMBER(
-                                        Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles, this)(_tile),
-                                    !_teamsDifferent)) {
-                                iVar11 = DAT_TileMapState::instance
-                                             .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
-                                    + _tile;
-                                if ((DAT_TileMapState::instance.LogicLayer[iVar11] & 0x10000100U)
-                                    || (uVar7 = MACRO_CALL_MEMBER(Map::TileMapState_Func::getTotalHeightAtTile,
-                                            DAT_TileMapState::ptr)(iVar11),
-                                        (int)(uVar7 + 0x10) < (int)uVar12 || ((int)uVar12 < (int)(uVar7 - 0x10))))
-                                    break;
-                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile = _tile;
-                                _someY = DAT_TileMapState::instance.DAT_SomeY;
-                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile2
-                                    = DAT_TileMapState::instance
-                                          .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
-                                    + _tile;
-                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 + 1;
-                            LAB_0051e94c:
-                                if (DAT_TileMapState::instance.AIZoneLayer[_tile] != 0) {
-                                    iVar13 = DAT_ViewportRenderState::instance.translationMatrix[_someY].addXgetTile;
-                                    _someLimit = DAT_TroopValueState::instance.attackInfo.someDistanceLimit;
-                                LAB_0051f316:
-                                    DAT_TileMapState::instance.DAT_SomeX = _tile - iVar13;
-                                    MACRO_CALL_MEMBER(
-                                        Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
-                                        DAT_PathFindingState::ptr)(
-                                        _someLimit, (uint)(DAT_TileMapState::instance.DAT_SomeX), (uint)(_someY), 1);
                                 }
                             }
                         }
