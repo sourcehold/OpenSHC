@@ -22,7 +22,7 @@ namespace Map {
         void TroopValueState::buildRallyPointsFromSiegeUnits(int tribeID)
         {
             short* psVar1;
-            short sVar2;
+            int sVar2;
             BOOLEnum BVar3;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
@@ -31,7 +31,7 @@ namespace Map {
                         Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
                     if (BVar3) {
                         if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16)) || (DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x17)))
-                            && (sVar2 = DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
+                            && (sVar2 = (int)DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
                                 0 < DAT_UnitsState::instance.units[sVar2].stoneAmmunition)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
                                 DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[sVar2].x),
