@@ -30,14 +30,13 @@ namespace Map {
             ushort uVar3;
             ushort uVar4;
             ushort uVar5;
-            int iVar6;
+            int _buildingSize;
             int iVar7;
             int iVar8;
             int iVar9;
             int iVar10;
             int local_c;
             int local_8;
-            iVar6 = param_1;
             iVar10 = (int)DAT_UnitsState::instance.units[param_1].tribeID;
             iVar8 = 4;
             if (0x6e < DAT_UnitsState::instance.units[param_1].terrainOrClimbHeight) {
@@ -72,7 +71,7 @@ namespace Map {
                     if (sVar2) {
                         switch (DAT_BuildingsState::instance.buildings[sVar2].buildingType) {
                         case Map::Buildings::BT_CAMPFIRE:
-                            param_1 = 4;
+                            _buildingSize = 4;
                             break;
                         default:
                             goto switchD_0051c693_caseD_34;
@@ -81,10 +80,10 @@ namespace Map {
                         case Map::Buildings::BT_PARADEGROUND3:
                         case Map::Buildings::BT_PARADEGROUND4:
                         case Map::Buildings::BT_PARADEGROUND5:
-                            param_1 = 5;
+                            _buildingSize = 5;
                             break;
                         case Map::Buildings::BT_CAMPGROUND:
-                            param_1 = 7;
+                            _buildingSize = 7;
                         }
                         uVar3 = DAT_BuildingsState::instance.buildings[sVar2].x;
                         uVar4 = DAT_BuildingsState::instance.buildings[sVar2].y;
@@ -93,7 +92,7 @@ namespace Map {
                         local_c = 0;
                         do {
                             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeIndexMappingData,
-                                DAT_TileMapState::ptr)(iVar10, param_1);
+                                DAT_TileMapState::ptr)(iVar10, _buildingSize);
                             uVar5 = DAT_TileMapState::instance.UnitLayer
                                         [DAT_ViewportRenderState::instance
                                                 .translationMatrix[DAT_TileMapState::instance.buildingY + (short)uVar4]
@@ -102,7 +101,7 @@ namespace Map {
                             while (iVar9 = (int)(short)uVar5, iVar9) {
                                 if (DAT_UnitsState::instance.units[iVar9].isSelectable_OR_matchTime != 0) {
                                     if (DAT_GameState::instance.mapAndTime
-                                            .playerTeams[DAT_UnitsState::instance.units[iVar6].owner]
+                                            .playerTeams[DAT_UnitsState::instance.units[param_1].owner]
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_UnitsState::instance.units[iVar9].owner]) {
                                         iVar7 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
@@ -123,10 +122,10 @@ namespace Map {
                         }
                     }
                 switchD_0051c693_caseD_34:
-                    DAT_UnitsState::instance.units[iVar6].targetingType = Map::Units::UIT_THROW_OIL;
-                    DAT_UnitsState::instance.units[iVar6].attackAtTileX = DAT_UnitsState::instance.units[iVar8].x;
-                    DAT_UnitsState::instance.units[iVar6].attackAtTileY = DAT_UnitsState::instance.units[iVar8].y;
-                    DAT_UnitsState::instance.units[iVar6].animationFrame = 4;
+                    DAT_UnitsState::instance.units[param_1].targetingType = Map::Units::UIT_THROW_OIL;
+                    DAT_UnitsState::instance.units[param_1].attackAtTileX = DAT_UnitsState::instance.units[iVar8].x;
+                    DAT_UnitsState::instance.units[param_1].attackAtTileY = DAT_UnitsState::instance.units[iVar8].y;
+                    DAT_UnitsState::instance.units[param_1].animationFrame = 4;
                     return (undefined4)(1);
                 }
             }
