@@ -75,12 +75,13 @@ namespace Map {
                 if (_tribeBehaviorType == 1010) {
                     sVar4 = DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit;
                     DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
-                    if (!sVar4) {}
-                    if (sVar3 < sVar4) {}
-                    DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                    DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
-                        tribeID, Map::Units::STBT_0x3f2);
+                    if (sVar4 && sVar4 <= sVar3) {
+                        DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                        DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
+                        MACRO_CALL_MEMBER(
+                            Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
+                            tribeID, Map::Units::STBT_0x3f2);
+                    }
                 }
                 switch (_tribeBehaviorType) {
                 case 1:
@@ -408,10 +409,11 @@ namespace Map {
                             } else if (BVar6 == Map::Buildings::BT_KEEPFOUR) {
                                 uVar10 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].x + 4;
                                 uVar13 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].y + 4;
-                            } else {
-                                if (BVar6 != Map::Buildings::BT_KEEPFIVE) {}
+                            } else if (BVar6 == Map::Buildings::BT_KEEPFIVE) {
                                 uVar10 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].x + 5;
                                 uVar13 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].y + 5;
+                            } else {
+                                break;
                             }
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,
                                 DAT_TribesState::ptr)(tribeID, uVar10, uVar13, 0, 0, Map::Units::Instructions::UMSE_0);
