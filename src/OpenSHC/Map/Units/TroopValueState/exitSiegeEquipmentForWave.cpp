@@ -25,7 +25,7 @@ namespace Map {
             AITribeTypeShort AVar1;
             int _unitID;
             int _tribeUnitIndex;
-            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState && DAT_TribesState::instance.tribes[_tribeID].attackWave == wave
                     && (AVar1 = DAT_TribesState::instance.tribes[_tribeID].tribeType,
                         AVar1 == ((AITribeType)0x13)

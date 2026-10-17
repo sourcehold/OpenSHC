@@ -16,7 +16,7 @@ namespace Map {
             int _status;
             int _dying = 0;
             int _living = 0;
-            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
                     && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner] == -1
                     && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackID) {
