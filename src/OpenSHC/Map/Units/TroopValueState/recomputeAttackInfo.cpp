@@ -53,7 +53,7 @@ namespace Map {
             short* psVar8;
             dword _toArea;
             int (*paiVar9)[8];
-            short sVar10;
+            int sVar10;
             int iVar11;
             uint uVar12;
             int _tile;
@@ -688,13 +688,13 @@ namespace Map {
                                             psVar8 = DAT_TileMapState::instance.specialAreasArray;
                                             do {
                                                 if (*psVar8 != 0) {
-                                                    sVar10 = *psVar8;
+                                                    sVar10 = (int)*psVar8;
                                                 }
                                                 psVar8 = psVar8 + 2;
-                                            } while ((int)psVar8 < 0x1fe5b24);
+                                            } while (psVar8 < &DAT_TileMapState::instance.specialAreasArray[8]);
                                             if (0 < sVar10) {
                                                 DAT_BuildingsState::instance.buildings[_buildingID_3]
-                                                    .unknownCounterTo10000_0x2b4 = sVar10;
+                                                    .unknownCounterTo10000_0x2b4 = (short)sVar10;
                                                 _teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Buildings::BuildingsState_Func::hasHumanPlayerUnitsOnBuilding,
                                                     DAT_BuildingsState::ptr)(_buildingID_3);
