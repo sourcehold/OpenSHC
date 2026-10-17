@@ -84,7 +84,7 @@ namespace Map {
                         return (undefined4)(0);
                     }
                     int uVar4 = (short)DAT_TileMapState::instance.UnitLayer[uVar1];
-                    while (iVar9 = (int)(short)uVar4, iVar9 != 0) {
+                    while (iVar9 = uVar4, iVar9 != 0) {
                         if (param_3 != 0
                             && DAT_GameState::instance.mapAndTime
                                     .playerTeams[DAT_UnitsState::instance.units[iVar9].owner]
