@@ -31,13 +31,9 @@ namespace Map {
                             .playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
                             .previousSiegeWeaponsCount))
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                int tribeID = DAT_TroopValueState::instance.attackInfo
-                                  .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount + 99];
-                iVar1
-                    = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
-                          .previousSiegeWeaponsCount;
-                DAT_TroopValueState::instance.attackInfo.knightTribeCount
-                    = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;
+                iVar1 = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850].previousSiegeWeaponsCount;
+                DAT_TroopValueState::instance.attackInfo.knightTribeCount = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;
+                int tribeID = DAT_TroopValueState::instance.attackInfo.knightTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount];
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 if (!iVar1) {
                     iVar2 = MACRO_CALL_MEMBER(
