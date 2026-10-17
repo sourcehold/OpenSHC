@@ -17,7 +17,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F9C0
         void TroopValueState::recountTotalTroopValue()
         {
-            int* piVar1;
             int _troopTypeValue;
             Unit* pUVar2;
             int iVar2;
@@ -45,8 +44,9 @@ namespace Map {
                         _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                             this)((Map::Units::UnitType)(short)_troopType);
                         _playerID = pUVar2->owner;
-                        piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray + _playerID;
-                        *piVar1 = *piVar1 + _troopTypeValue;
+                        DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
+                            = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
+                            + _troopTypeValue;
                     }
                     pUVar2 = pUVar2 + 1;
                     iVar2 = iVar2 + -1;
