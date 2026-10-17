@@ -647,3 +647,34 @@ Same family as [the spare local being the enregistered global]: whenever a
 global and a local hold the same value, the *data flow between them* is what
 pins the register allocation. Spell the dependency out - `global = local;` -
 rather than writing the literal twice.
+
+### Read the local, not the global, once you have cached it
+
+`placeTunnelEntrances` did
+
+    iVar2 = DAT_TileMapState::instance.placedBuildingID;
+    if (0 < (int)DAT_TileMapState::instance.placedBuildingID) {
+        ...buildings[DAT_TileMapState::instance.placedBuildingID].attackWave = ...;
+
+The original tests the cached value and indexes with a *copy* of it, giving
+`mov eax,[global] / test eax,eax / mov ecx,eax / imul ecx,0x32c`; our re-reads
+made MSVC pick the opposite registers, which also flipped two `push` operands.
+Replacing both re-reads with `iVar2` took it 88.6% -> **100%**.
+
+This and the two entries above are one rule in three costumes: **the original's
+register allocation is a shadow of the source's data flow, so write the data
+flow the registers imply.**
+
+- global written beside a local that mirrors it -> drop the local, use the global
+  (the three slot scans, 76.6% -> 100%)
+- global initialised to a literal a local also holds -> `global = local;`
+  (`applyTribeBehaviorTypes`, 95.7% -> 100%)
+- global cached in a local and then re-read -> read the local
+  (`placeTunnelEntrances`, 88.6% -> 100%)
+
+Each is worth a mechanical grep across the namespace. Three of the four known
+100% jumps this session came from this family.
+
+Scheduler-bound, do not retry: `initializeAttackZoneSearch` (77.8%) and
+`findEnemyLord` (78.0%) differ only in load placement inside one basic block and
+in which register holds the count vs the walk pointer.

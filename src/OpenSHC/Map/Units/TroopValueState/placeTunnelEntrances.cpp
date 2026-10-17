@@ -46,8 +46,8 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     playerID, iVar2 + -1, iVar3 + -1, (MappersEnum)((int)(66)), 3, 0xf);
                 iVar2 = DAT_TileMapState::instance.placedBuildingID;
-                if (0 < (int)DAT_TileMapState::instance.placedBuildingID) {
-                    DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
+                if (0 < iVar2) {
+                    DAT_BuildingsState::instance.buildings[iVar2].attackWave
                         = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
                         tribeID, ((UnitInstructionType)0x15), iVar2, DAT_BuildingsState::instance.buildings[iVar2].uid,
