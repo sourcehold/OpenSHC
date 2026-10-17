@@ -78,7 +78,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[1]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -90,7 +90,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[2]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -102,7 +102,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[3]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -114,7 +114,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[4]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -126,7 +126,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[5]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -138,7 +138,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[6]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = uVar1 + DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile;
+                iVar9 = uVar1 + DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
                     = (short)this->searchGeneration;
@@ -150,7 +150,7 @@ namespace Map {
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[7]].y;
                 this->searchQueue.yQueue[uVar6] = uVar2;
                 this->searchQueue.xQueue[uVar6] = uVar1;
-                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile + uVar1;
+                iVar9 = DAT_ViewportRenderState::instance.translationMatrix[uVar2].addXgetTile + uVar1;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
                 DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
@@ -177,7 +177,7 @@ namespace Map {
                             iVar8 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                         .int_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = (short)iVar8 + sVar3;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = iVar8 + sVar3;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = (short)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .int_.yOffset
@@ -228,7 +228,7 @@ namespace Map {
                                 DAT_TileMapState::instance.DamageLayer[iVar9] = 0;
                                 DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
                                 DAT_TileMapState::instance.field204_0x554a30 = 1;
-                                *local_18 = (short)iVar8 + sVar3;
+                                *local_18 = iVar8 + sVar3;
                                 *local_14 = (short)DAT_TerrainDefinedData::instance
                                                 .clockwiseCardinalTranslationMatrix[_direction]
                                                 .int_.yOffset
@@ -254,7 +254,7 @@ namespace Map {
                                 DAT_TileMapState::instance.HeightLayer[iVar9] = 8;
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
                                     = DAT_TileMapState::instance.LogicLayer[iVar9] & 0xbfffbfff;
-                                *local_18 = (short)iVar8 + sVar3;
+                                *local_18 = iVar8 + sVar3;
                                 *local_10 = iVar9;
                                 *local_14 = (short)DAT_TerrainDefinedData::instance
                                                 .clockwiseCardinalTranslationMatrix[_direction]
