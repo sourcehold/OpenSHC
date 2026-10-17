@@ -76,7 +76,7 @@ namespace Map {
             this->searchQueue.xQueue[0] = (short)param_2;
             int iVar6 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
             this->searchQueue.tilesQueue[0] = iVar6;
-            DAT_TileMapState::instance.CertainPathLayer[iVar6] = 1;
+            DAT_TileMapState::instance.CertainPathLayer[iVar6] = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             uint uVar10 = (uint)DAT_TileMapState::instance.HeightLayer[iVar6];
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -88,7 +88,7 @@ namespace Map {
                     int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     iVar6 = (int)sVar2;
                     uint uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
-                    uint uVar11 = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_7][uVar4];
+                    uint uVar11 = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_7][uVar4];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                     if ((int)this->searchQueue.currentDistance <= param_1) {
                         if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
