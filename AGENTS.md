@@ -548,3 +548,14 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   to match cost *24 points*, because it forces a spill across the call where MSVC otherwise keeps
   the unit pointer and re-reads. Same for hoisting the layer pointers in `recomputeAttackInfo`.
   Reorder *blocks*, not instructions.
+
+- **/GL does not rescue an allocator-bound function.** Adding the `pruneStale*` trio and the three
+  find-slot scans to `cmake/compiler-flags-gl.txt` changed their codegen not at all - all six
+  measured identical to the byte. Whatever decides the down-counter and the `mov [abs], esi` vs
+  `eax` choice is not reachable through that flag either, so do not reach for per-file flags as a
+  way out of register allocation.
+
+- **A `(char)BVar1` that MSVC can fold is not a way to reuse a known-zero register.** The original's
+  second `fillMemory_ByteValue` in `pruneStaleArcherPoints` passes the zero already in `eax`
+  (`push eax`, one byte) where we emit `push 0` (two). Passing `(char)BVar1` instead of `'\0'` -
+  provably the same value inside that branch - changes nothing, because MSVC const-folds it back.
