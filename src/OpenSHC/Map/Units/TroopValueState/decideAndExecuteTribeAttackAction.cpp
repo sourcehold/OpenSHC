@@ -41,10 +41,12 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
                     Map::Units::UIT_ATTACK_BUILDING, _buildingID,
                     DAT_BuildingsState::instance.buildings[_buildingID].uid, 0);
+                return;
             }
             if (_unitID && ((byte)SEC_RNG::instance.currentNumber2 & 1)) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
                     tribeID, Map::Units::UIT_UNIT_ATTACK_UNIT, _unitID, DAT_UnitsState::instance.units[_unitID].uid, 0);
+                return;
             }
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
                 tribeID, Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk, 0, 0, 0);
