@@ -37,7 +37,7 @@ namespace Map {
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
                       .tile;
-            if (iVar3 < 1) {
+            if (iVar3 <= 0) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar3 = iVar2;
             }
@@ -65,7 +65,7 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setMoat3, this)(1, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableHighValueSlots, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableArcherValueSlots, this)(1);
-            if (DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle < 1) {
+            if (DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle <= 0) {
                 MACRO_CALL_MEMBER(Game::GameStateStructures_Func::calculateAttackVectorsToCampFireOfPlayer,
                     DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
                 DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 1;
