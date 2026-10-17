@@ -15,12 +15,10 @@ namespace Map {
         int TroopValueState::getValueOfTroopType(UnitType unitType)
         {
             switch (unitType) {
-            case Map::Units::UT_TUNNELER:
-                return DAT_RenderingDefinedData::instance.TUNNELER;
             case Map::Units::UT_E_MONK:
                 return DAT_RenderingDefinedData::instance.MONK;
-            case Map::Units::UT_S_CATAPULT:
-                return DAT_RenderingDefinedData::instance.CATAPULT;
+            case Map::Units::UT_TUNNELER:
+                return DAT_RenderingDefinedData::instance.TUNNELER;
             case Map::Units::UT_A_ARCHER:
                 return DAT_RenderingDefinedData::instance.A_ARCHER;
             case Map::Units::UT_A_SLAVE:
@@ -37,9 +35,13 @@ namespace Map {
                 return DAT_RenderingDefinedData::instance.FIRETHROWER;
             case Map::Units::UT_S_FBALLISTA:
                 return DAT_RenderingDefinedData::instance.S_FBALLISTA;
+            case Map::Units::UT_S_CATAPULT:
+                return DAT_RenderingDefinedData::instance.CATAPULT;
             }
-            if (0x15 < (int)unitType && (int)unitType < 0x1f) {
-                return DAT_RenderingDefinedData::instance.NoRushTicks[unitType + Map::Units::UT_TUNNELER];
+            if (0x16 <= (int)unitType) {
+                if ((int)unitType <= 0x1e) {
+                    return DAT_RenderingDefinedData::instance.NoRushTicks[unitType + Map::Units::UT_TUNNELER];
+                }
             }
             return 0;
         }
