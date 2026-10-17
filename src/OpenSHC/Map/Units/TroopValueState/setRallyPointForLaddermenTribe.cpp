@@ -39,6 +39,7 @@ namespace Map {
                         short sVar1 = (short)DAT_PathFindingState::instance.ALG_ResultY;
                         DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][0] = (short)DAT_PathFindingState::instance.ALG_ResultX;
                         DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][1] = sVar1;
+                        return;
                     }
                 }
                 _pTribe = _pTribe + 1;
