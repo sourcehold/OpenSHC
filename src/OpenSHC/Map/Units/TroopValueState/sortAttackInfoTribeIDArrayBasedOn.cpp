@@ -126,7 +126,7 @@ namespace Map {
                      */
                     _index2 = 0;
                     _swapped = 0;
-                    if (_index + -1 < 1)
+                    if (_index + -1 <= 0)
                         break;
                     do {
                         _current = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2];
