@@ -20,7 +20,7 @@ namespace Map {
                 return FALSE;
             }
             int _owner = 0;
-            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState == 2 && DAT_TribesState::instance.tribes[_tribeID].owner
                     && DAT_TribesState::instance.tribes[_tribeID].owner != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     _owner = DAT_TribesState::instance.tribes[_tribeID].owner;
