@@ -389,3 +389,12 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   is the order reccmp's printed jump table implies (the arm reached by the lowest `start + N`
   offset comes first in the source). Sort the distinct jump-table offsets, map each back to its
   arm, and lay the arms out in that order.
+
+- **Four identical stores beat one shared store.** Where Ghidra nests a chain of tests as
+  `if (a) { x = K; } else { if (b) { x = K; } else { ... } }`, the original often writes each
+  failure as its own guard - `if (a) { x = K; goto LAB_tail; }` - repeated per test, with the
+  success path falling into a label just before the loop's increments. reccmp shows this as the
+  original carrying several copies of the same `mov dword ptr [reg], K` plus a `jmp`, against a
+  single copy on our side. `computeSiegeSpotScores` gained 5 points from it (47.4% -> 52.2%);
+  rewriting the same block's `!x` tests as signed `(int)x < 1` at the same time *cost* 3, so land
+  the restructure on its own and measure before touching the comparisons.

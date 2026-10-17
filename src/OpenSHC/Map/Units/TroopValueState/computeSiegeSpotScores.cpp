@@ -69,29 +69,27 @@ namespace Map {
                             Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadderInRightDirection,
                             DAT_UnitsState::ptr)(
                             _tile3, (int)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile3]));
-                        if (!iVar2) {
-                            if (!_pathFindingCost) {
-                                *puVar3 = 9999;
-                            } else {
-                                iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
-                                            .someMinimumDistance;
-                                if (iVar2 < 0x32) {
-                                    if ((int)_pathFindingCost < iVar2 + 0xf) {
-                                        DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3
-                                            = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
-                                                  .hack3
-                                            + 1;
-                                        *puVar3 = _pathFindingCost;
-                                    } else {
-                                        *puVar3 = 9999;
-                                    }
-                                } else {
-                                    *puVar3 = 9999;
-                                }
-                            }
-                        } else {
+                        if (iVar2) {
                             *puVar3 = 9999;
+                            goto LAB_0051aae8;
                         }
+                        if (!_pathFindingCost) {
+                            *puVar3 = 9999;
+                            goto LAB_0051aae8;
+                        }
+                        iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance;
+                        if (0x31 < iVar2) {
+                            *puVar3 = 9999;
+                            goto LAB_0051aae8;
+                        }
+                        if (iVar2 + 0xf <= (int)_pathFindingCost) {
+                            *puVar3 = 9999;
+                            goto LAB_0051aae8;
+                        }
+                        DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3
+                            = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 + 1;
+                        *puVar3 = _pathFindingCost;
+                        LAB_0051aae8:
                         _counter2 = _counter2 + 1;
                         puVar3 = puVar3 + 4;
                     } while (_counter2
