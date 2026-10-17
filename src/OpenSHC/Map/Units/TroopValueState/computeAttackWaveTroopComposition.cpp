@@ -20,9 +20,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 1;
                 DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 0;
                 DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes = 0;
-                goto LAB_00519672;
-            }
-            if (9 < DAT_TroopValueState::instance.attackInfo.attackTribeCount) {
+            } else if (9 < DAT_TroopValueState::instance.attackInfo.attackTribeCount) {
                 if (DAT_TroopValueState::instance.attackInfo.attackTribeCount < 0x14) {
                     if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
                         DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
@@ -113,8 +111,7 @@ namespace Map {
                     }
                     DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes = 2;
                 }
-                goto LAB_00519672;
-            }
+            } else {
             if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 1) {
                 DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes = 0;
             } else if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen < 2) {
@@ -131,13 +128,13 @@ namespace Map {
                 = (4 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) + 2;
             if (!DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) {
                 DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 0;
-            LAB_005193ed:
                 DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
             } else {
                 DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 1;
                 DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 1;
-                if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 1)
-                    goto LAB_005193ed;
+                if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 1) {
+                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
+                }
             }
             DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 2;
             if (DAT_TroopValueState::instance.attackInfo.laddermen < 3) {
@@ -146,7 +143,7 @@ namespace Map {
             }
             DAT_TroopValueState::instance.attackInfo.maxTunnelerTribes
                 = (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore);
-        LAB_00519672:
+            }
             DAT_TroopValueState::instance.attackInfo.maxEngineerTribes
                 = DAT_TroopValueState::instance.attackInfo.engineers;
             DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes = 3;
