@@ -23,7 +23,7 @@ namespace Map {
         int TroopValueState::placeSiegeTentAtAttackAngle(int tribeID, MappersEnum commandBuildingType)
         {
             int _attackLocationIndex;
-            short _unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             _attackLocationIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
                 DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
                 (uint)(DAT_UnitsState::instance.units[_unitID].y), tribeID);
