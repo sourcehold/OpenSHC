@@ -3,10 +3,10 @@
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
-#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -19,19 +19,19 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            int _minDistance;
-            int _bestIndex;
-            int i;
             int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            _minDistance = 1000;
-            _bestIndex = -1;
-            i = 0;
+            int _minDistance = 1000;
+            int _bestIndex = -1;
+            int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.high2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.high2; i = i + 1) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].buildingID].unknownCounterTo10000_0x2b4 < 9999
+                    if (DAT_BuildingsState::instance
+                                .buildings[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].buildingID]
+                                .unknownCounterTo10000_0x2b4
+                            < 9999
                         && DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].unitID == 0) {
-                        fromYPosition = (int)DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile2];
+                        fromYPosition = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                                            [DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile2];
                         fromXPosition = DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
