@@ -22,12 +22,15 @@ namespace Map {
         void TroopValueState::setRallyPointForLaddermenTribe(int param_1)
         {
             BOOLEnum BVar2;
+            Tribe* _pTribe;
             int iVar3 = 0;
-            for (int iVar5 = 1; iVar5 < 1250; iVar5 = iVar5 + 1) {
-                if (DAT_TribesState::instance.tribes[iVar5].tribeState != 0) {
+            int iVar5 = 1;
+            _pTribe = &DAT_TribesState::instance.tribes[1];
+            do {
+                if (_pTribe->tribeState != 0) {
                     BVar2 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
-                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[iVar5].owner);
-                    if (BVar2 && DAT_TribesState::instance.tribes[iVar5].tribeType == AI::Tribes::AITT_LADDERMEN
+                        DAT_GameState::ptr)(_pTribe->owner);
+                    if (BVar2 && _pTribe->tribeType == AI::Tribes::AITT_LADDERMEN
                         && (iVar3 = iVar3 + 1, iVar3 == DAT_TribesState::instance.tribes[param_1].someCounter1 + 1)) {
                         int _unitID = DAT_TribesState::instance.tribes[iVar5].selectionTargetUnitID;
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
@@ -38,7 +41,9 @@ namespace Map {
                         DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][1] = sVar1;
                     }
                 }
-            }
+                _pTribe = _pTribe + 1;
+                iVar5 = iVar5 + 1;
+            } while (_pTribe < &DAT_TribesState::instance.tribes[1250]);
         }
 
     }
