@@ -190,12 +190,23 @@ of namespace average this way, and a snapshot taken on one side of that change c
 with anything measured on the other. `tools/reimplementation-control/enable_reimplemented_data.py`
 turns them back on; `git checkout -- src/OpenSHC/Globals/` turns them off again.
 
+**The function resolvers are a second, separate switch, and they matter just as much.** Every
+`MACRO_FUNCTION_RESOLVER(..., false, Address::...)` in a `*.func.hpp` routes `MACRO_CALL`/`MACRO_CALL_MEMBER` to the
+*original binary*, so with it off the compiler never sees our callee. It cannot then know the callee leaves `ecx`
+alone, and the caller spills `this` into a callee-saved register, which renames every register downstream of the
+call. `processSyncPacket` read 26.2% for that reason alone; enabling its (already 100%) callee took it to 79.2%,
+and enabling all 23 finished functions of `GameSynchronyState` moved the namespace average 84.6% -> 85.7% with
+nothing getting worse. It is also the missing precondition for `cmake/compiler-flags-gl.txt`: `/GL` on both sides
+does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
+flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
 
-0. Switch the global data reimplementations on (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`)
-   before measuring anything, and never commit those files. With the resolvers inactive, reccmp collapses every
+0. Switch **both** sets of reimplementations on before measuring anything, and never commit those files: the
+   global data (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`) and the finished functions
+   (the `MACRO_FUNCTION_RESOLVER` flag in the `*.func.hpp` files). With the resolvers inactive, reccmp collapses every
    absolute address to one token, so a `this->` that should be the global instance, and a wrong field offset, both
    look like a match.
 1. Save a baseline: `reccmp_report.py --run save base.json`.
