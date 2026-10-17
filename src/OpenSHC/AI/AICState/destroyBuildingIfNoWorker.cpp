@@ -1,6 +1,7 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/AI/AIVState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_AIVState.hpp"

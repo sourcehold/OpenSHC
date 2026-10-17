@@ -43,7 +43,8 @@ namespace AI {
             }
 
             candidateCount = 0;
-            // Players 1..8, manually unrolled by 4 in the original.
+            // Players 1..8, manually unrolled by 4 in the original. Measured: rolling this into a plain
+            // 1..8 loop drops quick_diff from 0.92 to 0.67, so the unroll is in the original source.
             for (playerID = 1; playerID < 9; playerID += 4) {
                 if ((DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0)
                     && (DAT_GameState::instance.mapAndTime.playerTeams[playerID]

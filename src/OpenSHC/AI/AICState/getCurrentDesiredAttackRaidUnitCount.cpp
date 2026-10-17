@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 

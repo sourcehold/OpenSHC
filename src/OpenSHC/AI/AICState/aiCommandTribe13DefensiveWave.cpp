@@ -1,5 +1,6 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"

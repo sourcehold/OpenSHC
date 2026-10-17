@@ -25,7 +25,7 @@ namespace AI {
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[baseOffset + offset]) {
-                if (checkOnly != FALSE) {
+                if (checkOnly) {
                     return 1;
                 }
                 int newTribeID = MACRO_CALL_MEMBER(

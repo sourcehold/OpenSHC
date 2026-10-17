@@ -1,5 +1,6 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 
@@ -11,7 +12,7 @@ namespace AI {
     {
         for (int i = 0; i < 20; i++) {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                676, '\0', &this->aics[i]);
+                sizeof(this->aics[i]), '\0', &this->aics[i]);
         }
     }
 }

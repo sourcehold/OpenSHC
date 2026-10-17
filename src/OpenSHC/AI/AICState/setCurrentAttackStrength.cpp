@@ -1,5 +1,6 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"

@@ -1,5 +1,6 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"

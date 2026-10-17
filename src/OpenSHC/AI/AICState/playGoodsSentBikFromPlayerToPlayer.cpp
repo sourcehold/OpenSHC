@@ -1,6 +1,7 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -13,7 +14,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D0BB0
     void AICState::playGoodsSentBikFromPlayerToPlayer(int playerID, int targetPlayerID)
     {
-        if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID) == 0) {
+        if (!MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID)) {
             return;
         }
         if (targetPlayerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {

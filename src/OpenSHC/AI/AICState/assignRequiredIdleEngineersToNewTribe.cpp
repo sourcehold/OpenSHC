@@ -1,5 +1,6 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -15,14 +16,14 @@ namespace AI {
     {
         int tribeID
             = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (count <= 0)
                 break;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].dying != 0)
+            if (DAT_UnitsState::instance.units[unitID].dying)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_E_ENGINEER)
                 continue;

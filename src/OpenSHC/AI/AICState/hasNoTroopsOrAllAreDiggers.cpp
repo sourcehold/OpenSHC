@@ -1,4 +1,4 @@
-#include "OpenSHC/AI/AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
