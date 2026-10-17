@@ -262,6 +262,19 @@ Diff patterns that were reliable (more in the cheat sheet):
   bugs and worth replacing. Replacing an *array base* is free or better; replacing a *loop bound* is not -
   a typed pointer bound (`p < &tribes[1251]`) re-anchors the walk and cost 5-11 points in three functions,
   where converting the whole loop to an index over `tribes[t]` gained instead.
+- A `je` in the original against a `jne` of ours after the same compare means the two arms of an
+  `if/else` are the other way round: the arm the original falls into is the one it keeps inline, and the
+  one it jumps to is the one we should put in the `else`. `scan_arms.py` lists them. Swapping took
+  `getPlayerNot1AndHasKeep` 50% -> 100%, `addUnitToNewTribe` 84% -> 100% and
+  `aiControlNonSkirmishUnitMovement` 78% -> 98.6% (two swaps plus a tail call), and it is the same lever as
+  inverting an `if/else if` chain so its first test matches the original's - `computeAttackWaveTroopComposition`
+  gained 11 points from testing `< 10` and taking the lower arm there instead of `9 <` and taking the upper.
+  Read the original rather than trusting the hint: the scan pairs branches loosely and one of its five
+  suggestions measured worse.
+- `pop`s followed by `jmp <callee>` in the original is a tail call, so nothing runs after it. Where the
+  decompiler shows that callee in the middle of a function, the original returned there:
+  `aiControlNonSkirmishUnitMovement` called `updateAttackInfoTick` and then carried on, where the original
+  stops, and fixing it was worth 3.6 points before the arm swaps.
 - `expr * 0x177bc` into one of `AttackInfo`'s own `*ValuesArray` members is `playerInfo[player - 1]`:
   the per-player `AttackInfoSubElement` array is one-based, and `AttackInfo`'s named copies of those fields
   are the unused slot 0 at the same relative offsets (delta 0x301C0). Writing
