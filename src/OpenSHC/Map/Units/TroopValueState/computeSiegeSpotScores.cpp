@@ -203,21 +203,21 @@ namespace Map {
                                                .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
                                                        .playerInfo[attackingPlayerID - 1]
                                                        .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
-                        if (!_pathFindingCost) {
+                        if ((int)_pathFindingCost <= 0) {
                         LAB_00519ca1:
                             *puVar3 = 9999;
-                        } else if (_pathFindingCost < 0xb) {
+                        } else if ((int)_pathFindingCost <= 10) {
                             *puVar3 = _pathFindingCost;
-                        } else if (_pathFindingCost < 0x10) {
+                        } else if ((int)_pathFindingCost <= 0xf) {
                             *puVar3 = _pathFindingCost * 2;
-                        } else if (_pathFindingCost < 0x15) {
+                        } else if ((int)_pathFindingCost <= 0x14) {
                             *puVar3 = _pathFindingCost * 3;
-                        } else if (_pathFindingCost < 0x1a) {
+                        } else if ((int)_pathFindingCost <= 0x19) {
                             *puVar3 = _pathFindingCost * 4;
-                        } else if (_pathFindingCost < 0x33) {
+                        } else if ((int)_pathFindingCost <= 0x32) {
                             *puVar3 = _pathFindingCost * 5;
                         } else {
-                            if (0x46 < _pathFindingCost)
+                            if (0x46 < (int)_pathFindingCost)
                                 goto LAB_00519ca1;
                             *puVar3 = _pathFindingCost * 6;
                         }
