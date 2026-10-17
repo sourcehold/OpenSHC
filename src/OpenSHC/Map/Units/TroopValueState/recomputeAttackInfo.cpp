@@ -539,11 +539,11 @@ namespace Map {
                             }
                         }
                     } else {
-                        BuildingTypeShort BVar2
-                            = DAT_BuildingsState::instance.buildings[(short)_buildingID].buildingType;
+                        int BVar2
+                            = (int)(short)DAT_BuildingsState::instance.buildings[(short)_buildingID].buildingType;
                         uVar12 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_tile];
-                        if (!DAT_BuildingDefinedData::instance.IsGateOrTowerArray[(short)BVar2]) {
-                            if (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[(short)BVar2] == 0) {
+                        if (!DAT_BuildingDefinedData::instance.IsGateOrTowerArray[BVar2]) {
+                            if (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[BVar2] == 0) {
                                 if ((_logic & 0x10000000)) {
                                     _area = DAT_TileMapState::instance.PathConnectionLayer[_tile];
                                     if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile] != '\0') {

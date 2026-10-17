@@ -26,7 +26,6 @@ namespace Map {
         {
             BOOLEnum BVar2;
             Tribe* _pTribe;
-            short* _pMem;
             int _size;
             AITribeTypeShort _tribeType;
             int iVar1 = 0x10;
@@ -62,10 +61,9 @@ namespace Map {
                             }
                         } else {
                             _tribeType = _pTribe->tribeType;
-                            _pMem = DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts
-                                + (short)_tribeType * 2 + 0x33;
                             _size = _pTribe->size;
-                            *(int*)_pMem = *(int*)_pMem + _size;
+                            ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)[(short)_tribeType]
+                                = ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)[(short)_tribeType] + _size;
                             if (_tribeType == AI::Tribes::AITT_ENGINEERS) {
                                 DAT_TroopValueState::instance.attackInfo.engineers
                                     = DAT_TroopValueState::instance.attackInfo.engineers + 1;
