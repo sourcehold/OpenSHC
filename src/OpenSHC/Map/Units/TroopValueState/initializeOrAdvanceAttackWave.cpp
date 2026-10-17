@@ -19,7 +19,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FF90
         void TroopValueState::initializeOrAdvanceAttackWave(int param_1)
         {
-            int* piVar1;
             if (this->attackInfo.attackWaveTicker[param_1] == 0) {
                 this->attackInfo.attackWaveTicker[param_1] = 1;
                 DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount
@@ -43,8 +42,7 @@ namespace Map {
             }
             if ((char)this->attackInfo.nof_tribes[param_1] + -5
                 <= (int)(char)this->attackInfo.unknownByteArray02[param_1]) {
-                piVar1 = this->attackInfo.attackWaveTicker + param_1;
-                *piVar1 = *piVar1 + 1;
+                this->attackInfo.attackWaveTicker[param_1] = this->attackInfo.attackWaveTicker[param_1] + 1;
                 if (DAT_AttackInfoDefinedData::instance
                         .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]
                     <= this->attackInfo.attackWaveTicker[param_1]) {
