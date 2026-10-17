@@ -123,8 +123,8 @@ namespace Map {
                 case 5:
                     if (DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit <= sVar3) {
                         sVar3 = DAT_TribesState::instance.tribes[tribeID].someIndex;
-                        uVar10 = (&DAT_GameState::instance.mapAndTime.somePairArray)[sVar3].y;
-                        uVar13 = (&DAT_GameState::instance.mapAndTime.somePairArray)[sVar3].x;
+                        uVar10 = DAT_GameState::instance.mapAndTime.somePairArray[sVar3].y;
+                        uVar13 = DAT_GameState::instance.mapAndTime.somePairArray[sVar3].x;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                             tribeID, uVar13, uVar10, 0, 0, Map::Units::Instructions::UMSE_0);
