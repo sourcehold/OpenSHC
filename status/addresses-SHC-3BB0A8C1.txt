@@ -45867,7 +45867,7 @@ SHC_3BB0A8C1_0x0051B120 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051B190 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0051B240 | 72.3% | Was a literal game address
+SHC_3BB0A8C1_0x0051B240 | 76.6% | Fixed my off-by-one bound
 
 SHC_3BB0A8C1_0x0051B290 | 70.7% | Style pass, asm differs
 

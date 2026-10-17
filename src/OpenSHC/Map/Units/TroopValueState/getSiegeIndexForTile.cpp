@@ -12,7 +12,7 @@ namespace Map {
         {
             int _firstFree = 0;
             DAT_TroopValueState::instance.attackInfo.tentPointsNext = 0;
-            for (int i = 1; i < 2001; i = i + 1) {
+            for (int i = 1; i < 2000; i = i + 1) {
                 if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[i].tile == tile) {
                     return i;
                 }
