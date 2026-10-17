@@ -42,10 +42,11 @@ namespace Map {
             if (!BVar3) {
                 DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
+                return;
             }
             piVar1 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + param_1;
             *piVar1 = *piVar1 + 1;
-            if (399 < DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]) {
+            if (400 <= DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]) {
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
