@@ -80,25 +80,25 @@ namespace Map {
             int _startCon;
             _offset = playerID * 96188;
             _isSolitary = DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset + -0xc) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _offset + -0xc) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset + -8) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _offset + -8) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _offset + -0x10) = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale1 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].stone1 = 0;
             DAT_TroopValueState::instance.attackInfo.high1 = 0;
             DAT_TroopValueState::instance.attackInfo.arch1 = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset + -0xc) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset + -0xc) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _offset + -0xc) = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gate1 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide1 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town1 = 0;
             DAT_TroopValueState::instance.attackInfo.people1 = 0;
             DAT_TroopValueState::instance.attackInfo.lord1 = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset + -8) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset + -8) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _offset + -8) = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2 = 0;
             DAT_TroopValueState::instance.attackInfo.people2 = 0;
             DAT_TroopValueState::instance.attackInfo.lord3 = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -0xc) = 0;
-            *(undefined4*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset + -8) = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat1 = 0;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 = 0;
             DAT_TroopValueState::instance.attackInfo.high2 = 0;
             DAT_TroopValueState::instance.attackInfo.arch2 = 0;
             DAT_TroopValueState::instance.attackInfo.scaleZone = 1000;
@@ -111,21 +111,21 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.someDistanceLimit = 4;
             }
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset))));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hackValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(16000, '\0',
-                (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _offset))));
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _offset))));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.peopleValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.lordValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset))));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _offset))));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wideValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _offset))));
+                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.high2ValuesArray)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -297,8 +297,7 @@ namespace Map {
                                         (dword)((int)(DAT_TroopValueState::instance.attackInfo.startCon)),
                                         (dword)((int)(DAT_TileMapState::instance.specialAreasArray[iVar13])), 0);
                                     if (iVar11) {
-                                        if (999 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                                                + _offset + -8)
+                                        if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2
                                             || (_teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
                                                     this)(_tile),
@@ -406,8 +405,7 @@ namespace Map {
                                                 0),
                                             iVar13 != 0)
                                         && !(DAT_TileMapState::instance.AIInfoLayer[_tile] & 0x20)) {
-                                        if (999 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                                                + _offset + -8)
+                                        if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2
                                             || (_teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
                                                     this)(_tile),
@@ -468,8 +466,7 @@ namespace Map {
                                     (dword)((int)(DAT_TroopValueState::instance.attackInfo.startCon)),
                                     (dword)((int)(DAT_TileMapState::instance.specialAreasArray[iVar13])), 0);
                                 if (iVar11) {
-                                    if (999 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                            + _offset + -8)
+                                    if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2
                                         || (_teamsDifferent = MACRO_CALL_MEMBER(
                                                 Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles, this)(
                                                 _tile),
@@ -485,23 +482,19 @@ namespace Map {
                                             iVar11 = DAT_TileMapState::instance.DAT_SomeY,
                                             (int)uVar12 <= (int)(uVar7 + 0x10)
                                                 && ((int)(uVar7 - 0x10) <= (int)uVar12))) {
-                                        *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                    + _offset + -8)
+                                        *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2
                                                 * 0x10
                                             + 0x1793524 + _offset) = _tile;
-                                        *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                    + _offset + -8)
+                                        *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2
                                                 * 0x10
                                             + 0x1793528 + _offset)
                                             = DAT_TileMapState::instance.directionTranslationMatrix[iVar11][iVar13]
                                             + _tile;
-                                        iVar13 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                            + _offset + -8);
+                                        iVar13 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2;
                                         DAT_TileMapState::instance
                                             .AIZoneLayer[*(int*)(iVar13 * 0x10 + 0x1793528 + _offset)] = 10;
                                         bVar1 = DAT_TileMapState::instance.AIZoneLayer[_tile];
-                                        *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _offset
-                                            + -8) = iVar13 + 1;
+                                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2 = iVar13 + 1;
                                         if (bVar1) {
                                             DAT_TileMapState::instance.DAT_SomeX = _tile
                                                 - DAT_ViewportRenderState::instance
@@ -538,8 +531,7 @@ namespace Map {
                                         (dword)((int)(DAT_TroopValueState::instance.attackInfo.startCon)),
                                         (dword)((int)(DAT_TileMapState::instance.specialAreasArray[iVar13])), 0);
                                     if (iVar11) {
-                                        if (999 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray
-                                                + _offset + -8)
+                                        if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2
                                             || (_teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
                                                     this)(_tile),
@@ -716,8 +708,7 @@ namespace Map {
                                 do {
                                     if (DAT_TileMapState::instance.specialAreasArray[iVar13]
                                         == DAT_TroopValueState::instance.attackInfo.startCon) {
-                                        if (999 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                                + _offset + -8)
+                                        if (999 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2
                                             || (_teamsDifferent = MACRO_CALL_MEMBER(
                                                     Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles,
                                                     this)(_tile),
@@ -783,7 +774,7 @@ namespace Map {
                             if (DAT_TileMapState::instance.specialAreasArray[iVar13]
                                 != DAT_TroopValueState::instance.attackInfo.startCon)
                                 break;
-                            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset + -8)
+                            if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
                                     < 1000
                                 && (_teamsDifferent = MACRO_CALL_MEMBER(
                                         Map::Units::TroopValueState_Func::getTileInTargetedBuildingTiles, this)(_tile),
@@ -796,13 +787,11 @@ namespace Map {
                                             DAT_TileMapState::ptr)(iVar11),
                                         (int)(uVar7 + 0x10) < (int)uVar12 || ((int)uVar12 < (int)(uVar7 - 0x10))))
                                     break;
-                                *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset
-                                            + -8)
+                                *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
                                         * 0x10
                                     + 0x179f108 + _offset) = _tile;
                                 _someY = DAT_TileMapState::instance.DAT_SomeY;
-                                *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _offset
-                                            + -8)
+                                *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
                                         * 0x10
                                     + 0x179f10c + _offset)
                                     = DAT_TileMapState::instance
