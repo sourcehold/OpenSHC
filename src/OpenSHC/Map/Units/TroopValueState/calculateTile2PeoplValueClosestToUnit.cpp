@@ -17,17 +17,14 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            int _minDistance;
-            int _bestIndex;
-            int i;
-            _minDistance = 1000;
-            _bestIndex = -1;
-            i = 0;
+            int _minDistance = 1000;
+            int _bestIndex = -1;
+            int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.people2) {
                 do {
                     if (DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].unitID == 0) {
-                        fromYPosition = (int)DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile2];
+                        fromYPosition = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                                            [DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile2];
                         fromXPosition = DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
