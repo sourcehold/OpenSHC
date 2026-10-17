@@ -600,3 +600,25 @@ the global in `esi` and writes through, which is exactly the original's shape.
 Generalisation: when a local exists only to shadow a global, the original
 probably had no local at all. Grep for a local assigned next to a global of the
 same meaning and whose only other use is a predicate on itself.
+
+### Cast the loop bound to `int` to stop MSVC strength-reducing a pointer walk
+
+The `pruneStale*` trio all walked `point < &array[200]`, which MSVC turned into
+a down-counter (`mov edi, 0xc7` / `sub edi,1` / `jne`) and an extra live
+register; the original keeps the pointer compare (`cmp esi, <end>` / `jl`).
+Writing the bound as
+
+    } while ((int)point < (int)&...array[200]);
+
+defeats the strength reduction and took all three from 70.7% to **77.1%**.
+
+This is the first thing to try on any counted pointer loop whose diff shows a
+`sub <reg>,1 / jne` where the original has `cmp <ptr>, <abs>`.
+
+Not reachable (both tried and lost ~19 points each on this trio):
+- walking an `int*` at the `tribeID` field offset, as Ghidra prints it, to kill
+  the per-iteration `lea ecx,[esi-0x10]`. The lea is cheaper than whatever MSVC
+  does to the field accesses afterwards.
+- Ghidra's arm order here is the *inverted* one. The original lays the
+  `!= someCounter1` (fill) arm first, which is what our file already had;
+  taking Ghidra's `==`-first order costs the arm layout.

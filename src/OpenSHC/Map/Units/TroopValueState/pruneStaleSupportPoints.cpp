@@ -38,7 +38,8 @@ namespace Map {
                     }
                 }
                 point = point + 1;
-            } while (point < &DAT_TroopValueState::instance.attackInfo.supportPointsArray[200]);
+            } while ((int)point
+                < (int)&DAT_TroopValueState::instance.attackInfo.supportPointsArray[200]);
         }
 
     }
