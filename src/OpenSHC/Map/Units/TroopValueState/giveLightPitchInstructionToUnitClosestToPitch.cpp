@@ -72,29 +72,29 @@ namespace Map {
                     _unitID = _unitID + 1;
                     _pUnit = _pUnit + 1;
                 } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
-                if (_minUnitID) {
-                    DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroX
-                        = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
-                    DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroY
-                        = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
-                    _height = DAT_TileMapState::instance
-                                  .HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
-                    DAT_UnitsState::instance.units[_minUnitID].targetID_OR_targetBuildingID = (short)_ditchID;
-                    _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
-                    DAT_UnitsState::instance.units[_minUnitID].shootTargetZ = (ushort)_height;
-                    DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
-                    DAT_UnitsState::instance.units[_minUnitID]
-                        .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
-                        = _ditchUID;
-                    DAT_UnitsState::instance.units[_minUnitID].field253_0x3c5 = 0x22;
-                    DAT_UnitsState::instance.units[_minUnitID].targetingType = Map::Units::UIT_LIGHT_PITCH;
-                    DAT_UnitsState::instance.units[_minUnitID].field283_0x3f8 = 0;
-                    MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
-                        DAT_UnitsState::ptr)(_minUnitID);
-                    DAT_UnitsState::instance.units[_minUnitID].state.generic = Map::Units::States::US_FIRE_WEAPONUnk;
-                    DAT_UnitsState::instance.units[_minUnitID].field298_0x40e = true;
-                    return (undefined4)(1);
-                }
+            }
+            if (_minUnitID) {
+                DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroX
+                    = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
+                DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroY
+                    = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
+                _height = DAT_TileMapState::instance
+                              .HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
+                DAT_UnitsState::instance.units[_minUnitID].targetID_OR_targetBuildingID = (short)_ditchID;
+                _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
+                DAT_UnitsState::instance.units[_minUnitID].shootTargetZ = (ushort)_height;
+                DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
+                DAT_UnitsState::instance.units[_minUnitID]
+                    .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
+                    = _ditchUID;
+                DAT_UnitsState::instance.units[_minUnitID].field253_0x3c5 = 0x22;
+                DAT_UnitsState::instance.units[_minUnitID].targetingType = Map::Units::UIT_LIGHT_PITCH;
+                DAT_UnitsState::instance.units[_minUnitID].field283_0x3f8 = 0;
+                MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
+                    DAT_UnitsState::ptr)(_minUnitID);
+                DAT_UnitsState::instance.units[_minUnitID].state.generic = Map::Units::States::US_FIRE_WEAPONUnk;
+                DAT_UnitsState::instance.units[_minUnitID].field298_0x40e = true;
+                return (undefined4)(1);
             }
             return (undefined4)(0);
         }
