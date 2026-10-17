@@ -73,7 +73,7 @@ namespace Map {
                             *puVar3 = 9999;
                             goto LAB_0051aae8;
                         }
-                        if (!_pathFindingCost) {
+                        if ((int)_pathFindingCost <= 0) {
                             *puVar3 = 9999;
                             goto LAB_0051aae8;
                         }
@@ -120,7 +120,7 @@ namespace Map {
                                                .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
                                                        .playerInfo[attackingPlayerID - 1]
                                                        .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
-                        if (!_pathFindingCost) {
+                        if ((int)_pathFindingCost <= 0) {
                             *puVar3 = 100;
                         } else {
                             *puVar3 = _pathFindingCost;
