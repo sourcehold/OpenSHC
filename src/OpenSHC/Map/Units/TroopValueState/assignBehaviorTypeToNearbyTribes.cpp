@@ -41,7 +41,7 @@ namespace Map {
                         DAT_TribesState::instance.tribes[iVar1].someUpdateUpperLimit
                             = ((short)iVar3 + 1) * param_4 + param_3;
                         DAT_TribesState::instance.tribes[iVar1].tribeBehaviorType = (undefined2)param_1;
-                        if (4 < DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated) {
+                        if (5 <= DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated) {
                             break;
                         }
                     }
