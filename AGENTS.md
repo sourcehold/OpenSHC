@@ -466,3 +466,11 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   Beware that the sense also encodes signedness and the exact constant: `!x` gives `jne`, `(int)x
   <= 0` gives `jg`, and `(int)x < 1` gives `jge` - three spellings of the same test with three
   different branches. Pick the one the original used.
+
+- **A `(short)` cast written twice in one condition costs a conversion.** `registerSpottedEnemyTile`
+  cast `EntityLayer[tile]` from short once for the zero test and again as the array index; the
+  compiler emitted `movzx` + `test ax, ax` + a second `movsx`, where the original does a single
+  `movsx` into a register it then reuses. Reading it once into an `int` local took that function
+  from 81.8% to an exact match. Scan each sub-100 source for the same `(short)expr` appearing twice
+  - the declared-`short`-local form of this is the same bug with a different spelling. It does not
+  always pay (hoisting `(short)_unitID` in `recomputeAttackInfo` cost 2 points), so measure.
