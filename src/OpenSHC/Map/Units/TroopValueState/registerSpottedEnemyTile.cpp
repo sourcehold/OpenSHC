@@ -23,22 +23,21 @@ namespace Map {
             int iVar2;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
-                    < 1
+                    <= 0
                 && (iVar2 = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < iVar2)
                 && DAT_GameSynchronyState::instance
                         .currentPlayerFullIDArray[DAT_UnitsState::instance.units[iVar2].owner]
                     != -1
                 && DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime != 0
-                && (DAT_TileMapState::instance.EntityLayer[param_1] == 0
-                    || (DAT_EntityState::instance.entityArray[DAT_TileMapState::instance.EntityLayer[param_1]]
+                && ((short)DAT_TileMapState::instance.EntityLayer[param_1] == 0
+                    || (DAT_EntityState::instance.entityArray[(short)DAT_TileMapState::instance.EntityLayer[param_1]]
                             .entityType
                         != Map::Entities::ET_FIRE))) {
                 iVar2 = -1;
                 for (int iVar3 = 0; iVar3 < 100; iVar3 = iVar3 + 1) {
                     int iVar1 = this->attackInfo.spottedEnemyTiles[iVar3].tile;
                     if (iVar1 == param_1) {
-                        iVar2 = -1;
-                        break;
+                        return;
                     }
                     if ((!iVar1) && (iVar2 == -1)) {
                         iVar2 = iVar3;
