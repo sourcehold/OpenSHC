@@ -490,11 +490,22 @@ A volatile register (usually ECX or EDX) that stays live across a call in the or
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
 
-`/GL` on both sides does not always recover it, and the reason is not yet known. `processSyncPacket` and its callee
+`/GL` on both sides does not always recover it, and the reason is still unknown. `processSyncPacket` and its callee
 `translateMultiplayerIDsIntoPlayerIDs` are both listed in `compiler-flags-gl.txt` and both produce IL objects
 (`0000 ffff`), yet the caller still emits `mov esi, ecx` and spills `this`, where the original keeps it in `ecx`
-across the call. The entire remaining 26% diff on `processSyncPacket` is that one register rename. If you hit this,
-do not assume the `/GL` entry is missing - check the object first.
+across the call. The entire remaining 26% diff on `processSyncPacket` is that one register rename.
+
+Four explanations were tested on that pair and all are wrong, so do not spend time on them again:
+
+- *The callee is exported from the DLL.* `OpenSHC.dll` exports exactly one symbol, `luaopen_OpenSHC`.
+- *Its address is taken by `MACRO_FUNCTION_RESOLVER`.* True, but it is equally true of the known-good cases above.
+- *Every caller has to be in the LTCG set.* Adding the six other callers of
+  `translateMultiplayerIDsIntoPlayerIDs` to `compiler-flags-gl.txt` left the match at exactly 26.2%.
+- *Caller and callee have to share a translation unit.* `#include`-ing the callee's `.cpp` into the caller and
+  dropping it from the source list still emits `mov esi, ecx`, and still emits a real `call` rather than inlining.
+
+What is left untested is whether the original callee had internal linkage, which a member function declared in the
+class header and reached through a resolver cannot have.
 
 ### Parameters
 
