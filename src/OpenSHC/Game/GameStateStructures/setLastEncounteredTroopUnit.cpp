@@ -2,8 +2,8 @@
 
 #include "OpenSHC/Game/GameMode.hpp"
 
-#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -24,7 +24,7 @@ namespace Game {
     void GameStateStructures::setLastEncounteredTroopUnit(int playerID, int unitID)
     {
         int enemyUnitID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyUnitIDUnk;
-        if ((uint)(playerID - 1) >= 8) {
+        if ((uint)(playerID - 1) > 7) {
             return;
         }
         if (enemyUnitID <= 0) {
