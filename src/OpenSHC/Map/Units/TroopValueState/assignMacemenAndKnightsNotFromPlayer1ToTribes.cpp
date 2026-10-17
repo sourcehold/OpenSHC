@@ -42,7 +42,7 @@ namespace Map {
                 _pUnit2 = &DAT_UnitsState::instance.units[1];
                 do {
                     if ((_pUnit2->logicalState != Map::Units::ULS_INVISIBLE)
-                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
+                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, DAT_TroopValueState::ptr)(
                                 (int)_pUnit2->owner),
                             BVar1)) {
                         if (_pUnit2->unitType == Map::Units::UT_E_MACE) {
@@ -69,7 +69,7 @@ namespace Map {
             }
             _macemenLimit = 5;
         LAB_0051cd5e:
-            if (_knightCount < 18) {
+            if (_knightCount < 19) {
                 _knightLimit = (uint)(12 < _knightCount) * 2 + 2;
             } else {
                 _knightLimit = 6;
