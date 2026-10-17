@@ -48,10 +48,10 @@ namespace Map {
             int iVar2 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
             if ((param_2 <= iVar2) && (param_2)) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = param_2 + -1;
-                DAT_TroopValueState::instance.attackInfo.field121589_0x469d4 = param_2 + -1;
+                DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = param_2 + -1;
             }
             DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = iVar1;
-            DAT_TroopValueState::instance.attackInfo.field121589_0x469d4 = iVar1;
+            DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = iVar1;
         }
 
     }
