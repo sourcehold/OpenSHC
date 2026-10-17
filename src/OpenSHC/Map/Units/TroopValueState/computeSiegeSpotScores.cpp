@@ -21,6 +21,7 @@ namespace Map {
             uint* puVar3;
             AttackInfoSubElement* puVar4;
             int iVar4;
+            int _counter2;
             int* piVar5;
             int _counter;
             int _counterTillHack2;
@@ -33,7 +34,6 @@ namespace Map {
             int _hack2;
             uint _tile2;
             uint _tile;
-            iVar4 = attackedPlayerID;
             if (DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.id != 0) {
                 _offset = attackingPlayerID * 96188;
                 _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
@@ -56,10 +56,7 @@ namespace Map {
                     } while (_counterTillHack2 < _hack2);
                 }
                 DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 = 0;
-                /*
-                  warning:
-                 */
-                attackedPlayerID = 0;
+                _counter2 = 0;
                 if (0 < _hack2) {
                     puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                          .hackValuesArray
@@ -67,7 +64,7 @@ namespace Map {
                     do {
                         _tile3 = puVar3[-2];
                         _pathFindingCost
-                            = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[iVar4][_tile3];
+                            = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile3];
                         iVar2 = MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadderInRightDirection,
                             DAT_UnitsState::ptr)(
@@ -95,9 +92,9 @@ namespace Map {
                         } else {
                             *puVar3 = 9999;
                         }
-                        attackedPlayerID = attackedPlayerID + 1;
+                        _counter2 = _counter2 + 1;
                         puVar3 = puVar3 + 4;
-                    } while (attackedPlayerID
+                    } while (_counter2
                         < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2);
                 }
                 iVar4 = 0;
