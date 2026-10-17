@@ -43,10 +43,8 @@ namespace Map {
             int _buildingID = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_targetTile];
             x = (_targetTile - DAT_ViewportRenderState::instance.translationMatrix[_buildingID].addXgetTile) - 1;
             y = _buildingID - 1;
-            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0'
-                && !(*(uint*)((int)DAT_TileMapState::ptr
-                         + (DAT_ViewportRenderState::instance.translationMatrix[_buildingID + -1].addXgetTile + x) * 4
-                         + 0x165160)
+            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0'
+                && !(DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_buildingID + -1].addXgetTile + x]
                     & 0x4a5014b1)) {
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     DAT_TribesState::instance.tribes[tribeID].owner, (int)(x), (int)(y), commandBuildingType, 3, 0xf);
