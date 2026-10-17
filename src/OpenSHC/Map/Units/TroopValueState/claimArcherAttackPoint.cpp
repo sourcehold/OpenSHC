@@ -20,15 +20,15 @@ namespace Map {
         int TroopValueState::claimArcherAttackPoint(int param_1)
         {
             int iVar3;
-            short sVar1 = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            int _unitID = (int)DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
             iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(
                 param_1);
             if (!iVar3) {
                 iVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
-                    DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[sVar1].x),
-                    (uint)(DAT_UnitsState::instance.units[sVar1].y), param_1);
+                    DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
+                    (uint)(DAT_UnitsState::instance.units[_unitID].y), param_1);
                 if (iVar3) {
-                    sVar1 = DAT_TribesState::instance.tribes[param_1].archerRelated;
+                    short sVar1 = DAT_TribesState::instance.tribes[param_1].archerRelated;
                     int iVar2 = DAT_TribesState::instance.tribes[param_1].uid;
                     DAT_TribesState::instance.tribes[param_1].archerRelated2 = sVar1;
                     DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].buildingID = 0;
