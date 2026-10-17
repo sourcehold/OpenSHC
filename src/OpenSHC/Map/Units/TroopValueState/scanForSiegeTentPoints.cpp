@@ -41,7 +41,7 @@ namespace Map {
                         iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile;
                         if (uVar5 + 6 < uVar1 || (int)uVar1 < (int)(uVar5 - 6)
                             || DAT_TileMapState::instance.UnitLayer[iVar8] != 0
-                            || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8] != this->attackInfo.startCon
+                            || this->attackInfo.startCon != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8]
                             || (DAT_TileMapState::instance.LogicLayer[iVar8] & 0xa0002400U))
                             break;
                         uVar1 = uVar5 + 8;
@@ -54,8 +54,8 @@ namespace Map {
                             int iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
-                                || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != this->attackInfo.startCon
+                                || this->attackInfo.startCon
+                                    != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
                                 || (DAT_TileMapState::instance.LogicLayer[iVar2] & 0xa0002400U))
                                 break;
                             uVar4
@@ -64,8 +64,8 @@ namespace Map {
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
-                                || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != this->attackInfo.startCon
+                                || this->attackInfo.startCon
+                                    != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2],
                                     (uVar4 & 0x2000) != 0 || ((uVar4 & 0x20000000)))
                                 || (int)uVar4 < 0 || (uVar4 & 0x400)) {
@@ -78,8 +78,8 @@ namespace Map {
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
-                                || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != this->attackInfo.startCon
+                                || this->attackInfo.startCon
+                                    != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2], (uVar4 & 0x2000) != 0)
                                 || (uVar4 & 0x20000000) || (int)uVar4 < 0 || (uVar4 & 0x400)) {
                                 iVar7 = iVar7 + 2;
@@ -91,8 +91,8 @@ namespace Map {
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8;
                             if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
-                                || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
-                                    != this->attackInfo.startCon
+                                || this->attackInfo.startCon
+                                    != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
                                 || (uVar4 = DAT_TileMapState::instance.LogicLayer[iVar2], (uVar4 & 0x2000) != 0)
                                 || (uVar4 & 0x20000000) || (int)uVar4 < 0 || (uVar4 & 0x400)) {
                                 iVar7 = iVar7 + 3;

@@ -440,3 +440,12 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   amount, then rewrite each condition in the original's form. Seven of them in one build lifted six
   functions and cost nothing anywhere. The same scan with the delta restricted to a struct size
   (820 for Tribe, 1168 for Unit) finds loop bounds that are off by one whole element.
+
+- **Comparison operand *order* is visible too, and sweepable the same way.** MSVC emits
+  `cmp <left>, <right>` in source order, so `bound <= index` and `index >= bound` - identical in
+  meaning - produce opposite operand orders. Scan the diffs for an adjacent `-cmp A, B` / `+cmp B, A`
+  pair and rewrite the condition with the original's left-hand side first: the index before its
+  bound, the tick before its delay, the cached field before the layer read. Worth 2 points on
+  `placeTunnelForEveryTunneler`, 2 on `scanForSiegeTentPoints`, 1.4 on `initializeOrAdvanceAttackWave`.
+  It is not universal - 25 flips in `updateTribeBehaviorBasedOnBehaviorType` changed nothing at all,
+  because the compiler had already canonicalised those - so measure per function.

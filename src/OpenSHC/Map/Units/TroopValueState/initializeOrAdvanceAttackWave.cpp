@@ -43,9 +43,9 @@ namespace Map {
             if ((char)this->attackInfo.nof_tribes[param_1] + -5
                 <= (int)(char)this->attackInfo.unknownByteArray02[param_1]) {
                 this->attackInfo.attackWaveTicker[param_1] = this->attackInfo.attackWaveTicker[param_1] + 1;
-                if (DAT_AttackInfoDefinedData::instance
-                        .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]
-                    <= this->attackInfo.attackWaveTicker[param_1]) {
+                if (this->attackInfo.attackWaveTicker[param_1]
+                    >= DAT_AttackInfoDefinedData::instance
+                           .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
                     if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
                         this->attackInfo.attackWaveTicker[param_1] = 10000;
