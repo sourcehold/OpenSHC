@@ -36,15 +36,15 @@ namespace Map {
                     = (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) + 1;
                 DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
                     = (4 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) + 2;
-                if (!DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) {
-                    DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 0;
-                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
-                } else {
+                if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) {
                     DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 1;
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 1;
                     if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore <= 0) {
                         DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
                     }
+                } else {
+                    DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 0;
+                    DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes = 0;
                 }
                 DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 2;
                 if (DAT_TroopValueState::instance.attackInfo.laddermen < 3) {
@@ -123,17 +123,17 @@ namespace Map {
                     }
                     DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes
                         = ((DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore < 6) - 1 & 3) + 2;
-                    if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen <= 0xc) {
+                    if (0xc < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) {
+                        DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 8;
+                    } else {
                         DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
                             = (uint)(6 < DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) * 2 + 3;
-                    } else {
-                        DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 8;
                     }
-                    if (DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore <= 0xa) {
+                    if (0xa < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) {
+                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 6;
+                    } else {
                         DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes
                             = (uint)(8 < DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore) * 2 + 3;
-                    } else {
-                        DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes = 6;
                     }
                     DAT_TroopValueState::instance.attackInfo.maxLadderTribes = 6;
                     DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes

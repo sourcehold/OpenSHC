@@ -216,10 +216,10 @@ namespace Map {
                             *puVar3 = _pathFindingCost * 4;
                         } else if ((int)_pathFindingCost <= 0x32) {
                             *puVar3 = _pathFindingCost * 5;
-                        } else {
-                            if (0x46 < (int)_pathFindingCost)
-                                goto LAB_00519ca1;
+                        } else if ((int)_pathFindingCost <= 0x46) {
                             *puVar3 = _pathFindingCost * 6;
+                        } else {
+                            *puVar3 = 9999;
                         }
                         iVar4 = iVar4 + 1;
                         puVar3 = puVar3 + 4;
