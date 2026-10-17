@@ -24,16 +24,14 @@ namespace Map {
             short* psVar1;
             short sVar2;
             BOOLEnum BVar3;
-            Tribe* psVar3;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
-            psVar3 = &DAT_TribesState::instance.tribes[1];
-            do {
-                if (psVar3->tribeState) {
+            for (int _tribeID = 1; _tribeID < 1251; _tribeID = _tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
                     BVar3 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(psVar3->owner);
+                        Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
                     if (BVar3) {
-                        if (((psVar3->tribeType == ((AITribeType)0x16)) || (psVar3->tribeType == ((AITribeType)0x17)))
-                            && (sVar2 = psVar3->selectionTargetUnitID,
+                        if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16)) || (DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x17)))
+                            && (sVar2 = DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
                                 0 < DAT_UnitsState::instance.units[sVar2].stoneAmmunition)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
                                 DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[sVar2].x),
@@ -49,8 +47,7 @@ namespace Map {
                         }
                     }
                 }
-                psVar3 = psVar3 + 1;
-            } while ((int)psVar3 < 0x17623a2);
+            }
             if (DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex < 0) {
                 DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;
             }
