@@ -302,8 +302,10 @@ namespace Map {
                             if (BVar6 == Map::Buildings::BT_MANORHOUSE) {
                                 uVar10 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].x + 3;
                                 uVar13 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].y + 8;
-                            } else if ((BVar6 == Map::Buildings::BT_STONEKEEP)
-                                || (BVar6 == Map::Buildings::BT_STRONGHOLD)) {
+                            } else if (BVar6 == Map::Buildings::BT_STONEKEEP) {
+                                uVar10 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].x + 3;
+                                uVar13 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].y + 3;
+                            } else if (BVar6 == Map::Buildings::BT_STRONGHOLD) {
                                 uVar10 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].x + 3;
                                 uVar13 = (int)(short)DAT_BuildingsState::instance.buildings[iVar12].y + 3;
                             } else if (BVar6 == Map::Buildings::BT_KEEPFOUR) {
