@@ -97254,6 +97254,8 @@ enum {
     SHC_3BB0A8C1_0x00EB0AB0 = 0x00EB0AB0,
     // type: /int[9]
     SHC_3BB0A8C1_0x00EB0AF0 = 0x00EB0AF0,
+    // label: TIME_LastThanksBikPlaybackTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
     // type: /undefined4
