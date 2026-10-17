@@ -23,15 +23,14 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize) {
                 do {
                     int iVar1 = DAT_TroopValueState::instance.attackInfo.tribeIDArray[iVar3];
+                    int _area = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
+                            .units[DAT_TribesState::instance.tribes[iVar1].selectionTargetUnitID]
+                            .tile];
                     if (DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[iVar3] < 0xb
                         && (iVar2 = MACRO_CALL_MEMBER(
                                 Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                                 DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[iVar1].owner,
-                                (dword)((int)((
-                                    int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
-                                        .units[DAT_TribesState::instance.tribes[iVar1].selectionTargetUnitID]
-                                        .tile])),
-                                (dword)((int)(DAT_TroopValueState::instance.attackInfo.someArea)), 1),
+                                (dword)(_area), (dword)((int)(DAT_TroopValueState::instance.attackInfo.someArea)), 1),
                             iVar2 != 0)) {
                         DAT_TribesState::instance.tribes[iVar1].attackInfo_someCounter1
                             = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
