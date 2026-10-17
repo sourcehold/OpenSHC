@@ -10,7 +10,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519310
         void TroopValueState::computeAttackWaveTroopComposition()
         {
-            DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes = 6;
             if (DAT_TroopValueState::instance.attackInfo.attackTribeCount < 6) {
                 DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes
                     = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen;
