@@ -413,3 +413,14 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   original only materialises 6 for the first `cmp`. If reccmp shows a `mov dword ptr [global], reg`
   on our side alone right before a compare against the same constant, and the field is written on
   every path, the assignment is not in the original.
+
+- **`test r8, r8` + `jbe` is `0 < (byte)x`, not `x != '\0'`.** `jbe` after a compare against zero
+  means the source tested an *unsigned* value with `<` or `<=`; a `!= 0` test gives `je`/`jne`
+  instead. Writing the guard as `if (0 < (byte)cVar1)` is what reproduces it. Five of those plus a
+  restored `else` took `decrementTileMap1104` from 79.4% to an exact match.
+
+- **An unconditional store after a conditional one means a dropped `else`.** Ghidra emitted
+  `if (off < 80200) { off += 200; } off = 0;` - which makes the increment dead, and our compiler
+  duly dropped it, so reccmp showed the original carrying a `cmp`/`jge` we had nothing for. The
+  second store belongs in an `else`. Any tail where the decompiler assigns a field it has just
+  conditionally updated is worth this check.

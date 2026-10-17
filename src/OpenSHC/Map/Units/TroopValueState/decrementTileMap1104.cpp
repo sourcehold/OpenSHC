@@ -14,31 +14,32 @@ namespace Map {
             int iVar2;
             for (iVar2 = 0; iVar2 < 200; iVar2 += 5) {
                 char cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2];
-                if (cVar1 != '\0') {
+                if (0 < (byte)cVar1) {
                     DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2] = cVar1 + -1;
                 }
                 cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 1];
-                if (cVar1 != '\0') {
+                if (0 < (byte)cVar1) {
                     DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 1] = cVar1 + -1;
                 }
                 cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 2];
-                if (cVar1 != '\0') {
+                if (0 < (byte)cVar1) {
                     DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 2] = cVar1 + -1;
                 }
                 cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 3];
-                if (cVar1 != '\0') {
+                if (0 < (byte)cVar1) {
                     DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 3] = cVar1 + -1;
                 }
                 cVar1 = DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 4];
-                if (cVar1 != '\0') {
+                if (0 < (byte)cVar1) {
                     DAT_TileMapState::instance.SEC_TileMap1104[DAT_TroopValueState::instance.attackInfo.tilemapOffset + iVar2 + 4] = cVar1 + -1;
                 }
             }
             if (DAT_TroopValueState::instance.attackInfo.tilemapOffset < 80200) {
                 DAT_TroopValueState::instance.attackInfo.tilemapOffset
                     = DAT_TroopValueState::instance.attackInfo.tilemapOffset + 200;
+            } else {
+                DAT_TroopValueState::instance.attackInfo.tilemapOffset = 0;
             }
-            DAT_TroopValueState::instance.attackInfo.tilemapOffset = 0;
         }
 
     }
