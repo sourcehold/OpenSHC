@@ -27,7 +27,7 @@ namespace Map {
             int _buildingID;
             int _unitID;
             dword dVar1;
-            short _targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int _targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             _buildingID
                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findNearestEnemyBuildingWithinDistance,
                     DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner,
