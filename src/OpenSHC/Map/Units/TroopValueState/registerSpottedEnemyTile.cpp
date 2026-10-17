@@ -22,6 +22,7 @@ namespace Map {
         void TroopValueState::registerSpottedEnemyTile(int param_1)
         {
             int iVar2;
+            int _entityID;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
                     <= 0
@@ -30,9 +31,8 @@ namespace Map {
                         .currentPlayerFullIDArray[DAT_UnitsState::instance.units[iVar2].owner]
                     != -1
                 && DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime != 0
-                && ((short)DAT_TileMapState::instance.EntityLayer[param_1] == 0
-                    || (DAT_EntityState::instance.entityArray[(short)DAT_TileMapState::instance.EntityLayer[param_1]]
-                            .entityType
+                && (_entityID = (int)(short)DAT_TileMapState::instance.EntityLayer[param_1], !_entityID
+                    || (DAT_EntityState::instance.entityArray[_entityID].entityType
                         != Map::Entities::ET_FIRE))) {
                 iVar2 = -1;
                 for (int iVar3 = 0; iVar3 < 100; iVar3 = iVar3 + 1) {
