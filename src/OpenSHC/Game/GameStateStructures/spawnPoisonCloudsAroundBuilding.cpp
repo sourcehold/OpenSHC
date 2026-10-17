@@ -47,8 +47,8 @@ namespace Game {
             for (int cloudIndex = SEC_RNG::instance.currentNumber2 % 5 - 2; cloudIndex < 8; cloudIndex++) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0, 0,
-                    xPosition * 8, yPosition * 8, DAT_TileMapState::instance.EntityLayerLT25[tile + 0x13a10], 0, 0, 0,
-                    OpenSHC::Map::Entities::ET_COW_POISON_CLOUD, 0);
+                    xPosition * 8, yPosition * 8, (byte)DAT_TileMapState::instance.EntityLayerLT25[tile + 0x13a10], 0,
+                    0, 0, OpenSHC::Map::Entities::ET_COW_POISON_CLOUD, 0);
             }
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 xPosition, yPosition, OpenSHC::DE::SHCDE::FX_FLIES);
