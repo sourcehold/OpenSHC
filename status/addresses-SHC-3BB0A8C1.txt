@@ -45771,7 +45771,7 @@ SHC_3BB0A8C1_0x00519790 | 32.3% | Fixed endless loop, -2% match
 
 SHC_3BB0A8C1_0x00519850 | 77.8% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x005198C0 | 49.4% | Style pass, asm differs
+SHC_3BB0A8C1_0x005198C0 | 95.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00519960 | 100.0% | Reimplemented
 
