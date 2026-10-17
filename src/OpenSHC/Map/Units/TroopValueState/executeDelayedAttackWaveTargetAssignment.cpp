@@ -26,7 +26,7 @@ namespace Map {
         void TroopValueState::executeDelayedAttackWaveTargetAssignment(int param_1)
         {
             int* piVar1;
-            short sVar2;
+            int sVar2;
             int tribeSizeSumLimit;
             BOOLEnum BVar3;
             int iVar4;
@@ -51,7 +51,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
                 sVar2 = DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1];
-                DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1] = sVar2 + 1;
+                DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1] = (short)(sVar2 + 1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks, this)((int)sVar2, param_1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                     param_1, 1000, 10000, Map::Units::STBT_0x41b);
