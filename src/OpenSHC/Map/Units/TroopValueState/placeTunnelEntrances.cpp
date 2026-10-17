@@ -23,15 +23,15 @@ namespace Map {
         int TroopValueState::placeTunnelEntrances(int tribeID)
         {
             int iVar4;
-            short sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             /*
               finds a route from target to siege engine location?
              */
             iVar4 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
-                DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[sVar1].x),
-                (uint)(DAT_UnitsState::instance.units[sVar1].y), tribeID);
+                DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
+                (uint)(DAT_UnitsState::instance.units[_unitID].y), tribeID);
             if (iVar4) {
-                sVar1 = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
+                short sVar1 = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
                 int iVar2 = DAT_TribesState::instance.tribes[tribeID].uid;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = sVar1;
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[sVar1].tribeID = 0;
@@ -46,7 +46,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     playerID, iVar2 + -1, iVar3 + -1, (MappersEnum)((int)(66)), 3, 0xf);
                 iVar2 = DAT_TileMapState::instance.placedBuildingID;
-                if (0 < DAT_TileMapState::instance.placedBuildingID) {
+                if (0 < (int)DAT_TileMapState::instance.placedBuildingID) {
                     DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
                         = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
