@@ -46371,7 +46371,7 @@ SHC_3BB0A8C1_0x005200A0 | 85.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005202B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00520450 | 63.7% | Restored alarm-flag early exit
+SHC_3BB0A8C1_0x00520450 | 78.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005205A0 | 85.5% | Style pass, asm differs
 
