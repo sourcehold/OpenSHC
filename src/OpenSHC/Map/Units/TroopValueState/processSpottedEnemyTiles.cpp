@@ -15,7 +15,7 @@ namespace Map {
         void TroopValueState::processSpottedEnemyTiles()
         {
             BOOLEnum BVar1;
-            for (int i = 0; i < 101; i = i + 1) {
+            for (int i = 0; i < 100; i = i + 1) {
                 int iVar2 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile;
                 if (0 < iVar2) {
                     if (80400 <= iVar2) {
