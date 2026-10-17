@@ -43,11 +43,11 @@ namespace Map {
             if (0x6e < DAT_UnitsState::instance.units[param_1].terrainOrClimbHeight) {
                 iVar8 = 5;
             }
-            if (((iVar10 < 1) || (0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance))
-                || ((iVar9 = (int)DAT_UnitsState::instance.units[param_1].owner,
+            if (iVar10 < 1 || 0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance
+                || (iVar9 = (int)DAT_UnitsState::instance.units[param_1].owner,
                     DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar9] != -1
                         && (DAT_TribesState::instance.tribes[iVar10].unitStance
-                            == Map::Units::Behavior::USE_STAND_GROUND)))) {
+                            == Map::Units::Behavior::USE_STAND_GROUND))) {
                 return (undefined4)(0);
             }
             psVar1 = &DAT_UnitsState::instance.units[param_1].updateTickTracker;
@@ -58,8 +58,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
                     DAT_PathFindingState::ptr)(iVar9, 0, 0, iVar7, iVar8);
                 iVar8 = DAT_PathFindingState::instance.field34_0x64;
-                if (DAT_TribesState::instance.tribes[iVar10].unitStance
-                    == Map::Units::Behavior::USE_AGGRESSIVE) {
+                if (DAT_TribesState::instance.tribes[iVar10].unitStance == Map::Units::Behavior::USE_AGGRESSIVE) {
                     if (DAT_PathFindingState::instance.ALGO_TotalTroopCount < 1) {
                         return (undefined4)(0);
                     }
@@ -106,14 +105,12 @@ namespace Map {
                                             .playerTeams[DAT_UnitsState::instance.units[iVar6].owner]
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_UnitsState::instance.units[iVar9].owner]) {
-                                        iVar7 = MACRO_CALL_MEMBER(
-                                            Map::Units::TroopValueState_Func::getValueOfTroopType, this)(
-                                            (Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
+                                        iVar7 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                            this)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
                                         local_8 = local_8 + iVar7;
                                     } else {
-                                        iVar7 = MACRO_CALL_MEMBER(
-                                            Map::Units::TroopValueState_Func::getValueOfTroopType, this)(
-                                            (Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
+                                        iVar7 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                            this)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
                                         local_c = local_c + iVar7;
                                     }
                                 }
