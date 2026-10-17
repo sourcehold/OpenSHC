@@ -33,7 +33,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
                 int _macemen = DAT_TroopValueState::instance.attackInfo.macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                if ((bVar1) || (0xe < DAT_GameCore::instance.missionNumber1to20)) {
+                if ((bVar1) || (0xf <= DAT_GameCore::instance.missionNumber1to20)) {
                     _unitID = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(_playerID);
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
