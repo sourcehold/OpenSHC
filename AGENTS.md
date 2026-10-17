@@ -715,3 +715,21 @@ hit is only real if the two tests it pairs are the *same* test.
 
 Also measured and reverted (the cached-local substitution, wrong direction here):
 `scanForArcherPoints` 82.7 -> 77.7, `scanForSiegeTentPoints` 41.7 -> 34.5.
+
+### A boolean argument that the original *branches* on wants two call sites
+
+`aiRecomputeAttacks2` passed `(int)(BVar3 != 0)` to `computeAIZoneLayer`, which
+MSVC renders branchlessly as `xor eax,eax / setne al`. The original branches:
+`je / push 1 / jmp`. Writing the call twice under an `if (BVar3) ... else ...`
+with literal `1` and `0` gives the branch and took it 87.6% -> **89.2%**.
+
+`BVar3 ? 1 : 0` is *not* a substitute - it compiles bit-identically to
+`(BVar3 != 0)` (measured, 87.6%). MSVC only branches when the two argument
+values reach the call from genuinely different paths, so the call has to be
+duplicated.
+
+Note this cuts the opposite way from `computeAttackWaveTroopComposition`, where
+reading `setne` in the original's listing and converting two assignments to
+`(x != 0)` form collapsed it from 66.8% to **13.7%** - that `setne` belonged to a
+different statement that the aligner had drifted onto. Confirm which statement a
+`setne` belongs to before acting on it.

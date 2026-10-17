@@ -48,9 +48,17 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 iVar4 = iVar2;
             }
-            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
-                DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)(BVar3 != 0),
-                (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4]));
+            if (BVar3) {
+                MACRO_CALL_MEMBER(
+                    Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID, 1,
+                    (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4]));
+            } else {
+                MACRO_CALL_MEMBER(
+                    Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID, 0,
+                    (int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar4]));
+            }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(90, 0, 0, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_2);
