@@ -42,6 +42,12 @@ out_dir = common.TMP / "variants" / name
 out_dir.mkdir(parents=True, exist_ok=True)
 (out_dir / "base.cpp").write_text(text, encoding="utf-8", newline="")
 
+depth, level = [], 0
+for line in lines:
+    opens, closes = line.count("{"), line.count("}")
+    depth.append(level - closes if closes else level)
+    level += opens - closes
+
 made = 0
 for i, line in enumerate(lines):
     m = ASSIGN.match(line) or DECL.match(line)
@@ -61,12 +67,14 @@ for i, line in enumerate(lines):
     # a second assignment to the same variable in between means the read is not the one in use
     if any(re.match(r"\s+%s = " % re.escape(var), lines[k]) for k in range(i + 1, target)):
         continue
-    # the first use reading the variable back (`x = x + 1`) means this statement initialises it:
-    # moving it next to that use would reset it on every pass
-    if re.match(r"\s+%s = .*%s" % (re.escape(var), re.escape(var)), lines[target]):
+    # the first mention assigning the variable means this statement is dead once moved there
+    if re.match(r"\s+%s = " % re.escape(var), lines[target]):
         continue
-    # and never move a statement across the head of a loop, which would change how often it runs
-    if any(re.match(r"\s*(?:do \{|while \(|for \()", lines[k]) for k in range(i + 1, target + 1)):
+    # never move a statement across a loop head (it would run a different number of times)
+    if any(re.match(r"\s*(?:\} )?(?:do \{|while \(|for \()", lines[k]) for k in range(i + 1, target + 1)):
+        continue
+    # and never move it out of its enclosing block: only deeper or level, never shallower
+    if depth[target] < depth[i]:
         continue
     moved = list(lines)
     stmt = moved.pop(i)
