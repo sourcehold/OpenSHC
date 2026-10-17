@@ -78,7 +78,7 @@ namespace Map {
                         iVar13 = DAT_TileMapState::instance.directionTranslationMatrix[sVar4][_direction] + uVar5;
                         if (DAT_TileMapState::instance.WalkLayer[iVar13] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar13] & 0x400000U) == 0) {
-                            if ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == (int)(short)uVar1
+                            if ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == uVar1
                                 || (DAT_TileMapState::instance.LogicLayer[iVar13] & 0x10000100U) != 0) {
                                 iVar7 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                             .int_.xOffset;
@@ -101,8 +101,7 @@ namespace Map {
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
                                     DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner,
                                     (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
-                                    (dword)((int)((short)uVar2)),
-                                    (int)(DAT_UnitsState::instance.units[param_1].unitCanClimb));
+                                    (dword)(uVar2), (int)(DAT_UnitsState::instance.units[param_1].unitCanClimb));
                                 if (iVar7 != 0) {
                                     iVar10 = abs(
                                         (DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
