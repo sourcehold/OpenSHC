@@ -21,10 +21,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005202B0
         void TroopValueState::aiRecomputeAttacks(undefined4 param_1, int param_2)
         {
-            int iVar2;
             int iVar3;
-            int playerID;
-            playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
+            int playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
                 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
@@ -34,7 +32,7 @@ namespace Map {
                 0x13a10, '\0', (void*)((int)(DAT_TileMapState::instance.AIInfoLayer)));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
-            iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
+            int iVar2 = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
             iVar3
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
@@ -52,7 +50,9 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeTargetedBuildingTilesArray, this)(
                 DAT_TroopValueState::instance.attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeAttackInfo, this)(
-                DAT_TroopValueState::instance.attackInfo.attacker, (int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one));
+                DAT_TroopValueState::instance.attackInfo.attacker,
+                (int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1]
+                        .currentPlayerID_OR_attackedPlayerID_OR_one));
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID,
                 DAT_TroopValueState::instance.attackInfo.attacker);
