@@ -442,11 +442,11 @@ namespace Map {
                     }
                     if (DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit <= sVar3) {
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                        sVar3 = DAT_TribesState::instance.tribes[iVar12].selectionTargetUnitID;
+                        int _unitID = (int)DAT_TribesState::instance.tribes[iVar12].selectionTargetUnitID;
                         dVar11 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingRelated,
-                            DAT_PathFindingState::ptr)(2, (uint)(DAT_UnitsState::instance.units[sVar3].x),
-                            (uint)(DAT_UnitsState::instance.units[sVar3].y),
-                            (int)(DAT_UnitsState::instance.units[sVar3].siegeTargetPlayerID));
+                            DAT_PathFindingState::ptr)(2, (uint)(DAT_UnitsState::instance.units[_unitID].x),
+                            (uint)(DAT_UnitsState::instance.units[_unitID].y),
+                            (int)(DAT_UnitsState::instance.units[_unitID].siegeTargetPlayerID));
                         if (0 < (int)dVar11) {
                             uVar13 = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[dVar11];
                             uVar10 = dVar11 - DAT_ViewportRenderState::instance.translationMatrix[uVar13].addXgetTile;
@@ -454,8 +454,8 @@ namespace Map {
                                 DAT_TribesState::ptr)(tribeID, uVar10, uVar13, 0, 0, Map::Units::Instructions::UMSE_0);
                             MACRO_CALL_MEMBER(
                                 Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
-                                DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[sVar3].x,
-                                (int)(DAT_UnitsState::instance.units[sVar3].y), (int)(uVar10), (int)(uVar13));
+                                DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
+                                (int)(DAT_UnitsState::instance.units[_unitID].y), (int)(uVar10), (int)(uVar13));
                             DAT_TribesState::instance.tribes[tribeID].orientation
                                 = (short)DAT_DirectionAlgorithmState::instance.orientation;
                         }

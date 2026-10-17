@@ -187,8 +187,9 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                 Map::Units::STBT_0x41b, Map::Units::STBT_1, 0x14, 0x14);
             if ((0 < DAT_TroopValueState::instance.attackInfo.archerPoints)
-                && (local_8 + 1 < DAT_TroopValueState::instance.attackInfo.value10
-                        - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
+                && (DAT_TroopValueState::instance.attackInfo.value10
+                            - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget
+                        > local_8 + 1)) {
                 DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount
                     = DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
