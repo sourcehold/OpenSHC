@@ -8,6 +8,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -35,7 +36,7 @@ namespace Map {
                         != Map::Entities::ET_FIRE))) {
                 iVar2 = -1;
                 for (int iVar3 = 0; iVar3 < 100; iVar3 = iVar3 + 1) {
-                    int iVar1 = this->attackInfo.spottedEnemyTiles[iVar3].tile;
+                    int iVar1 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[iVar3].tile;
                     if (iVar1 == param_1) {
                         return;
                     }
@@ -44,8 +45,8 @@ namespace Map {
                     }
                 }
                 if (-1 < iVar2) {
-                    this->attackInfo.spottedEnemyTiles[iVar2].tile = param_1;
-                    this->attackInfo.spottedEnemyTiles[iVar2].value = 100;
+                    DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[iVar2].tile = param_1;
+                    DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[iVar2].value = 100;
                 }
             }
         }
