@@ -60,7 +60,7 @@ namespace Map {
             _attackWave_2 = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
             pbVar1 = DAT_TroopValueState::instance.attackInfo.nof_tribes + _attackWave_2;
             *pbVar1 = *pbVar1 + 1;
-            if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk < 1) {
+            if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk <= 0) {
                 pbVar1 = DAT_TroopValueState::instance.attackInfo.unknownByteArray02 + _attackWave_2;
                 *pbVar1 = *pbVar1 + 1;
             }
