@@ -29,11 +29,11 @@ namespace Map {
                     }
                 }
             }
-            if (_dying + _living == 0) {
-                int _dyingPercentage = 100;
-                return (uint)(_dyingPercentage >= leDyingPerc);
+            int _dyingPercentage = 100;
+            if (_dying + _living != 0) {
+                _dyingPercentage = (_dying * 100) / (_dying + _living);
             }
-            return (uint)((_dying * 100) / (_dying + _living) >= leDyingPerc);
+            return (uint)(_dyingPercentage >= leDyingPerc);
         }
 
     }
