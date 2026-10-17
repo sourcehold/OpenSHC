@@ -62,7 +62,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x418, Map::Units::STBT_1, 0x14, 0x46);
                 if ((DAT_TroopValueState::instance.attackInfo.people3)
-                    && (9 < DAT_TroopValueState::instance.attackInfo.attackTribeCount)) {
+                    && (0xa <= DAT_TroopValueState::instance.attackInfo.attackTribeCount)) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         param_1, 1, DAT_TroopValueState::instance.attackInfo.people3, Map::Units::STBT_0x3fb);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
