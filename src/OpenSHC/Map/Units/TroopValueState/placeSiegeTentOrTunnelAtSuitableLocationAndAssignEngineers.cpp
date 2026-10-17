@@ -43,8 +43,13 @@ namespace Map {
             int _buildingID = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_targetTile];
             x = (_targetTile - DAT_ViewportRenderState::instance.translationMatrix[_buildingID].addXgetTile) - 1;
             y = _buildingID - 1;
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0'
-                || (DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_buildingID + -1].addXgetTile + x]
+            if (399 < x || 399 < y
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+                DAT_TileMapState::instance.buildingPlacementFail = TRUE;
+                return FALSE;
+            }
+            if ((DAT_TileMapState::instance
+                        .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
                     & 0x4a5014b1)) {
                 DAT_TileMapState::instance.buildingPlacementFail = TRUE;
                 return FALSE;
