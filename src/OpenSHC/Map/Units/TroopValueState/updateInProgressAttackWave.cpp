@@ -23,8 +23,8 @@ namespace Map {
             int* piVar1;
             int tribeSizeSumLimit;
             BOOLEnum BVar2;
-            bool bVar3;
-            byte _playerID;
+            int bVar3;
+            int _playerID;
             _playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
             BVar2 = MACRO_CALL_MEMBER(
                 Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
