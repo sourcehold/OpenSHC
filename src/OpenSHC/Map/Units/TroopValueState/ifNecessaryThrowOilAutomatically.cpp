@@ -12,6 +12,7 @@
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -108,11 +109,11 @@ namespace Map {
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_UnitsState::instance.units[iVar9].owner]) {
                                         iVar7 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                            this)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
+                                            DAT_TroopValueState::ptr)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
                                         local_8 = local_8 + iVar7;
                                     } else {
                                         iVar7 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                            this)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
+                                            DAT_TroopValueState::ptr)((Map::Units::UnitType)DAT_UnitsState::instance.units[iVar9].unitType);
                                         local_c = local_c + iVar7;
                                     }
                                 }
