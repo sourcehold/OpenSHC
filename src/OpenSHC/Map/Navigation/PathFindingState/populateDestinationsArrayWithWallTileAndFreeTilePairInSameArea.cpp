@@ -56,12 +56,10 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
             maxDestinations = maxDestinations * 2;
-            if (maxDestinations < 500) {
-                if (maxDestinations < 50) {
-                    maxDestinations = 50;
-                }
-            } else {
+            if (500 < maxDestinations) {
                 maxDestinations = 500;
+            } else if (maxDestinations < 50) {
+                maxDestinations = 50;
             }
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _tileY;
