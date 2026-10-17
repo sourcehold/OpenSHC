@@ -695,3 +695,23 @@ build (scores are per-function, so one build evaluates them all):
 One big win, four clear losses. The rule says *the register allocation implies a
 data flow*, not *caching is always right* - sometimes the original really does
 re-read. Sweep the candidates, keep the winners, and do it in a single build.
+
+### sweep_all.py CONST and SIGNED hits drift out of alignment - verify before trusting
+
+A full sweep after this session's structural wins produced four plausible-looking
+constant mismatches. All four were artefacts of the aligner pairing the original's
+*next* comparison against ours, and all four lost points when "fixed":
+
+| reported | reality |
+|---|---|
+| `computeAttackWaveTroopComposition` orig 0x4 vs ours 0x2 | ours cmp 2 paired with orig's cmp 4 from the *following* `5 <= x` test; `4 < x` -> 66.8 to 65.9 |
+| `executeAttackWaveTargetAssignment` orig 0x3 vs ours 0x6 | same drift one test over; `< 3`/`< 7`/`< 13` -> 88.5 to 88.3 |
+| `setRallyPointForLaddermenTribe` SIGNED jl/jb | int-casting the bound is exactly neutral here |
+| `assignMacemen...` orig 0x12 vs ours 0x13 | `cmp 0x12/jle` and `cmp 0x13/jl` are the same test; MSVC canonicalises `<= 18` back to `< 19`, exactly neutral |
+
+Before acting on a CONST hit, read both sides' surrounding comparisons and check
+the hit is not just our test aligned against the original's neighbour. A CONST
+hit is only real if the two tests it pairs are the *same* test.
+
+Also measured and reverted (the cached-local substitution, wrong direction here):
+`scanForArcherPoints` 82.7 -> 77.7, `scanForSiegeTentPoints` 41.7 -> 34.5.
