@@ -66,7 +66,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
-            DAT_TileMapState::instance.CertainPathLayer[param_1] = 1;
+            DAT_TileMapState::instance.CertainPathLayer[param_1] = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             local_8 = OpenSHC::Map::Entities::ET_ARROW_AND_DEFAULT;
             if ((char)param_5 == '\0') {
