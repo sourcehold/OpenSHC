@@ -243,7 +243,8 @@ Diff patterns that were reliable (more in the cheat sheet):
 - A tail call to the same callee from our code but a jump back to a shared block in the original means separate
   `if` branches with identical bodies, not a combined condition.
 - Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
-  not a source difference.
+  not a source difference. Investigate by adding the caller and callee to the txt and enabling their reimplementation in the .func.hpp files.
+  Only makes sense if the callee is 100% matching (e.g. ECX not touched).
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
   independent stores into one object says nothing about the order the fields were assigned in the original source
