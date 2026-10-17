@@ -27,11 +27,11 @@ namespace Map {
                 && 10 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && (100 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                     || (0 < DAT_GameState::instance
-                            .playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
+                            .playerDataArray[iVar2]
                             .previousSiegeWeaponsCount))
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
                 int iVar1
-                    = DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.playerID_0x2c850]
+                    = DAT_GameState::instance.playerDataArray[iVar2]
                           .previousSiegeWeaponsCount;
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount
                     = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;

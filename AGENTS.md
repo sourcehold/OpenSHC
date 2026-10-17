@@ -678,3 +678,20 @@ Each is worth a mechanical grep across the namespace. Three of the four known
 Scheduler-bound, do not retry: `initializeAttackZoneSearch` (77.8%) and
 `findEnemyLord` (78.0%) differ only in load placement inside one basic block and
 in which register holds the count vs the walk pointer.
+
+#### ...but the direction is per site, so measure
+
+Replacing the re-read with the cached local was swept over six functions in one
+build (scores are per-function, so one build evaluates them all):
+
+| function | before | after |
+|---|---|---|
+| `trySendKnightTribeToAttack` | 62.1 | **100.0** |
+| `collectArcherUnitsByLocation` | 75.9 | 63.7 |
+| `commandUnitsToMoveToKeep` | 77.6 | 73.7 |
+| `executeAttackWaveTargetAssignment` | 88.5 | 82.4 |
+| `recountAttackTroopValue` | 75.9 | 65.9 |
+
+One big win, four clear losses. The rule says *the register allocation implies a
+data flow*, not *caching is always right* - sometimes the original really does
+re-read. Sweep the candidates, keep the winners, and do it in a single build.
