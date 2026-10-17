@@ -43,24 +43,24 @@ namespace Map {
             int _buildingID = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_targetTile];
             x = (_targetTile - DAT_ViewportRenderState::instance.translationMatrix[_buildingID].addXgetTile) - 1;
             y = _buildingID - 1;
-            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0'
-                && !(DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_buildingID + -1].addXgetTile + x]
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0'
+                || (DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_buildingID + -1].addXgetTile + x]
                     & 0x4a5014b1)) {
-                MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
-                    DAT_TribesState::instance.tribes[tribeID].owner, (int)(x), (int)(y), commandBuildingType, 3, 0xf);
-                _buildingID = DAT_TileMapState::instance.placedBuildingID;
-                if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                    DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
-                        = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
-                    DAT_BuildingsState::instance.buildings[_buildingID].unknownSiegeTentRelated01 = 2;
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
-                        tribeID, instruction, _buildingID, DAT_BuildingsState::instance.buildings[_buildingID].uid, 0);
-                    return TRUE;
-                }
-            } else {
                 DAT_TileMapState::instance.buildingPlacementFail = TRUE;
+                return FALSE;
             }
-            return FALSE;
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
+                DAT_TribesState::instance.tribes[tribeID].owner, (int)(x), (int)(y), commandBuildingType, 3, 0xf);
+            _buildingID = DAT_TileMapState::instance.placedBuildingID;
+            if (DAT_TileMapState::instance.buildingPlacementFail) {
+                return FALSE;
+            }
+            DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
+                = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
+            DAT_BuildingsState::instance.buildings[_buildingID].unknownSiegeTentRelated01 = 2;
+            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
+                tribeID, instruction, _buildingID, DAT_BuildingsState::instance.buildings[_buildingID].uid, 0);
+            return TRUE;
         }
 
     }
