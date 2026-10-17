@@ -11,9 +11,16 @@ For every single-line assignment whose variable is next mentioned further down, 
 variant with that statement moved to just before the use. Candidates whose right-hand side contains
 a call are skipped: moving one of those changes evaluation order, not just allocation.
 
-**Moving a read later crosses whatever sits between.** That is safe only if nothing in between
-writes the field, so read `git diff` on the winner before keeping it - a call that happens to update
-the same struct makes the variant wrong however well it scores.
+It refuses to move a statement across a loop head, out of its enclosing block, past a `goto` or a
+label, next to a use that assigns the variable, or into a block some later use sits outside of.
+Each of those produced a *winning* variant that was wrong before the guard existed: a counter reset
+inside its own loop, a pointer increment lifted out of its walk, a unit scan restarted per queue
+entry, and a `switch` arm left reading an uninitialised local while the other arms read it too. One
+of them won by 0.09 points, so the score is no protection.
+
+**What remains unguarded is aliasing**: moving a read later still crosses whatever sits between, and
+that is only safe if nothing in between writes the field. Read `git diff` on the winner and check
+the callees it now crosses before keeping it.
 
 usage: move_read.py FILE.cpp [--run] [--max N]
 """
@@ -75,6 +82,15 @@ for i, line in enumerate(lines):
         continue
     # and never move it out of its enclosing block: only deeper or level, never shallower
     if depth[target] < depth[i]:
+        continue
+    # a goto or a label in between means the statement may be re-entered or skipped
+    if any(re.search(r"goto|^\s*\w*LAB_\w+:", lines[k]) for k in range(i + 1, target + 1)):
+        continue
+    # every later use has to live inside the block we are moving into, or the other uses would
+    # read the variable before this statement runs - moving `sVar3` into one switch arm left the
+    # other arms reading it uninitialised
+    block_end = next((k for k in range(target + 1, len(lines)) if depth[k] < depth[target]), len(lines))
+    if any(word.search(lines[k]) for k in range(block_end, len(lines))):
         continue
     moved = list(lines)
     stmt = moved.pop(i)
