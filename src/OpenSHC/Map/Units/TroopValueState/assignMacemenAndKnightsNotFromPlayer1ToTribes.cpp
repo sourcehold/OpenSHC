@@ -87,7 +87,7 @@ namespace Map {
             } else {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 1;
             }
-            if (_count < 1) {
+            if (_count <= 0) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = 0;
             } else if (_knightLimit < _count) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = _count / _knightLimit + 1;
