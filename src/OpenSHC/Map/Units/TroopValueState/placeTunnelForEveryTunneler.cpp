@@ -105,18 +105,24 @@ namespace Map {
                         uint uVar2 = DAT_UnitsState::instance.maxUnitCount;
                         DAT_TribesState::instance.tribes[_tribe].attackInfo_someCounter1
                             = DAT_TribesState::instance.tribes[iVar3].attackInfo_someCounter1;
-                        if ((int)uVar2 <= (int)unitID) {}
+                        if ((int)uVar2 <= (int)unitID) {
+                            return;
+                        }
                         psVar4 = &DAT_UnitsState::instance.units[unitID];
                         while (psVar4->logicalState != Map::Units::ULS_NORMAL || psVar4->owner != local_c
                             || psVar4->dying || psVar4->unitType != Map::Units::UT_TUNNELER || psVar4->tribeID) {
                             unitID = unitID + 1;
                             psVar4 = psVar4 + 1;
-                            if ((int)uVar2 <= (int)unitID) {}
+                            if ((int)uVar2 <= (int)unitID) {
+                                return;
+                            }
                         }
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                             unitID, _tribe);
                         unitID = unitID + 1;
-                        if (DAT_UnitsState::instance.maxUnitCount <= (int)unitID) {}
+                        if (DAT_UnitsState::instance.maxUnitCount <= (int)unitID) {
+                            return;
+                        }
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelEntrances, this)(_tribe);
                         attackWave = attackWave + 1;
                     } while (attackWave < _nTunnels);
