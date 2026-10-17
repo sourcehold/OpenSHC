@@ -31,18 +31,13 @@ namespace Map {
                 /*
                   manhatten distance
                  */
-                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0
-                    && 0 < (short)DAT_TileMapState::instance.CertainPathLayer[_tile]
-                    && (_xDistance = (_tile
-                                         - DAT_ViewportRenderState::instance
-                                             .translationMatrix[DAT_ViewportRenderState::instance
-                                                     .tileTranslationMatrix_YComponent[_tile]]
-                                             .addXgetTile)
-                            - x,
-                        _yDistance
-                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
-                        (abs(_yDistance) + abs(_xDistance)) % modulo == 0)
-                    && (short)DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
+                int _tileY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                int _distance = (short)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0 && 0 < _distance
+                    && (_xDistance
+                        = (_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile) - x,
+                        _yDistance = _tileY - y, (abs(_yDistance) + abs(_xDistance)) % modulo == 0)
+                    && _distance < 4000)
                     break;
                 iVar1 = iVar1 + 1;
                 _pTile = _pTile + 1;
