@@ -20,7 +20,7 @@ namespace Map {
             int iVar1;
             tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
-            if (0x7fffffff < tile) {
+            if ((int)tile <= -1) {
                 return 0;
             }
             iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,

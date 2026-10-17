@@ -449,3 +449,20 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   `placeTunnelForEveryTunneler`, 2 on `scanForSiegeTentPoints`, 1.4 on `initializeOrAdvanceAttackWave`.
   It is not universal - 25 flips in `updateTribeBehaviorBasedOnBehaviorType` changed nothing at all,
   because the compiler had already canonicalised those - so measure per function.
+
+- **An inverted `jcc` means the two arms are the wrong way round - scan for it first.** For every
+  sub-100 function, pair each `-jcc` in the diff with a `+jcc` within three lines and flag the ones
+  whose conditions are exact inverses (`je`/`jne`, `jl`/`jge`, `jg`/`jle`, `ja`/`jbe`). Each hit is
+  an `if`/`else` whose arms the original lays out in the other order, or a guard written with the
+  opposite sense; rewriting it in the original's sense is usually a few lines and has been the
+  single most productive sweep here:
+
+      isLessThanPercentageOfTribesInAttackDying  89.6 -> 100.0   (zero case first, with an else)
+      collectArcherUnitsByLocation              61.5 ->  75.9   (mask test positive, arms swapped)
+      updateInProgressAttackWave                78.4 ->  84.1   (tent-points arms swapped)
+      computeAttackWaveTroopComposition         55.3 ->  60.7   (four wall-scale chains swapped)
+      findNearestDiggableMoatPoint              89.2 ->  94.6   ('(int)tile <= -1', giving jg)
+
+  Beware that the sense also encodes signedness and the exact constant: `!x` gives `jne`, `(int)x
+  <= 0` gives `jg`, and `(int)x < 1` gives `jge` - three spellings of the same test with three
+  different branches. Pick the one the original used.
