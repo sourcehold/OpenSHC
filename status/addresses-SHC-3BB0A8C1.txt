@@ -24353,7 +24353,7 @@ SHC_3BB0A8C1_0x00496EA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00496EC0 | 66.0% | hoist signed start-tile reads
 
-SHC_3BB0A8C1_0x00496F90 | 56.5% | distance local hoisted
+SHC_3BB0A8C1_0x00496F90 | 56.5% | row local for the y read, tie
 
 SHC_3BB0A8C1_0x00497080 | 78.1% | hoist signed start-tile read
 
