@@ -27,17 +27,17 @@ namespace Map {
                     break;
                 }
             }
-            if (_owner) {
-                DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1] = (byte)_owner;
-                DAT_TroopValueState::instance.attackInfo.attacker = (int)(char)(byte)_owner;
-                DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
-                DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
-                DAT_TroopValueState::instance.attackInfo.value10 = 10;
-                return TRUE;
+            if (!_owner) {
+                DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] = 0;
+                DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1] = 0;
+                return FALSE;
             }
-            DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] = 0;
-            DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1] = 0;
-            return FALSE;
+            DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1] = (byte)_owner;
+            DAT_TroopValueState::instance.attackInfo.attacker = (int)(char)(byte)_owner;
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
+            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
+            DAT_TroopValueState::instance.attackInfo.value10 = 10;
+            return TRUE;
         }
 
     }
