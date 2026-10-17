@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 
@@ -26,7 +27,7 @@ namespace Map {
                     if (BVar1 && DAT_TribesState::instance.tribes[iVar3].tribeBehaviorType == Map::Units::STBT_0x3f7) {
                         this->x = (int)DAT_TribesState::instance.tribes[iVar3].targetX;
                         this->y = (int)DAT_TribesState::instance.tribes[iVar3].targetY;
-                        this->attackInfo.field127625_0x42744 = iVar3;
+                        DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = iVar3;
                         return (undefined4)(1);
                     }
                 }
