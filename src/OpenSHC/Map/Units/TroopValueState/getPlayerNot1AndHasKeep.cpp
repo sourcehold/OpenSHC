@@ -22,18 +22,13 @@ namespace Map {
         {
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
-                if (playerID != 1) {
-                    return FALSE;
-                }
-            } else {
                 if (playerID == 1) {
-                    return FALSE;
+                    return TRUE;
                 }
-                if (DAT_GameState::instance.playerDataArray[playerID].keep.id < 1) {
-                    return FALSE;
-                }
+            } else if (playerID != 1 && 0 < DAT_GameState::instance.playerDataArray[playerID].keep.id) {
+                return TRUE;
             }
-            return TRUE;
+            return FALSE;
         }
 
     }
