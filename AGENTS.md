@@ -502,3 +502,20 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   pointers reload, inlining three single-use height locals, moving the hoisted `ptr_SpecialAreasArray`
   / `ptr_PathConnectionLayer` loads down to their first use, and hoisting a repeated `(short)_unitID`.
   Count both streams before spending a day here.
+
+- **Retry a failed change once the function has moved.** Replacing `this->attackInfo.` with
+  `DAT_TroopValueState::instance.attackInfo.` in `initializeOrAdvanceAttackWave` measured *worse*
+  early on (54.8% -> 38.2%) and took it from 58.8% to 88.1% later, after the pointer temp and the
+  loop bound were fixed. Through `this` every field is a this-relative literal offset that can never
+  match the original's absolute addressing, so the change was always right; it just could not show
+  while a larger misalignment sat in front of it. When a change you believe in measures worse, note
+  it and try it again after the next structural win - and when it still loses, trust the number
+  (the same substitution in `scanForSiegeTentPoints` has now lost twice, five points each time).
+
+- **Symbolic loop bounds are not automatically better than Ghidra's literal.** Rewriting
+  `(int)p < 0x176238c` as `(int)p < (int)&tribes[1250].owner` reproduces the original's symbolic
+  operand but costs a `lea` to re-anchor the walking pointer, and measured worse on
+  `placeSiegeTentsAndAssignEngineers`, `recountAttackTroopValue` and
+  `sortAttackInfoTribeIDArrayBasedOn` (that last one by 14 points). Check the trip count either
+  way - `&tribes[1250]` and the literal are usually count-equivalent, so the literal is not a bug -
+  and keep whichever measures better.
