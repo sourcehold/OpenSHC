@@ -26,7 +26,7 @@ namespace Map {
             iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
                 (uint)(DAT_UnitsState::instance.units[param_1].x),
                 (uint)(DAT_UnitsState::instance.units[param_1].y));
-            if (iVar1 < 1) {
+            if (iVar1 <= 0) {
                 return 0;
             }
             this->x = DAT_TileMapState::instance.ALG_MoatXResult;
