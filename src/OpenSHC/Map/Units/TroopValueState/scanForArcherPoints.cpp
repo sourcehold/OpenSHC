@@ -20,13 +20,9 @@ namespace Map {
         {
             BOOLEnum BVar2;
             int iVar3;
-            int (*paiVar4)[8];
             uint y;
             uint x;
-            int iVar5;
             int local_c;
-            int local_8;
-            iVar5 = 0;
             DAT_TroopValueState::instance.attackInfo.archerPoints = 0;
             if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 0) {
                 local_c = 8;
@@ -37,56 +33,42 @@ namespace Map {
             } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 8) {
                 local_c = 7;
             } else {
-                local_c = (uint)(0x13 < (int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev) * 2 + 8;
+                local_c = (uint)(0x14 <= (int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev) * 2 + 8;
             }
-            do {
-                if (DAT_TileMapState::instance.AIInfoLayer[iVar5] == '\x02') {
+            for (int iVar5 = 0; iVar5 < 80400; iVar5 = iVar5 + 1) {
+                if (DAT_TileMapState::instance.AIInfoLayer[iVar5] == '') {
                     y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar5];
-                    local_8 = 0;
-                    paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + y;
-                    do {
-                        if ((DAT_TileMapState::instance.AIInfoLayer[(*paiVar4)[0] + iVar5] & 0xf) == 4
-                            && !(DAT_TileMapState::instance.RandomLayer[(*paiVar4)[0] + iVar5] & 3)) {
+                    for (int _direction = 0; _direction < 4; _direction = _direction + 1) {
+                        if ((DAT_TileMapState::instance.AIInfoLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + iVar5] & 0xf) == 4
+                            && !(DAT_TileMapState::instance.RandomLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + iVar5] & 3)) {
                             x = iVar5 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                             BVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                                 DAT_PathFindingState::ptr)(local_c, x, y, 0x10);
                             if (!BVar2) {
-                                DAT_TileMapState::instance.AIInfoLayer[iVar5]
-                                    = DAT_TileMapState::instance.AIInfoLayer[iVar5] | 0x10;
+                                DAT_TileMapState::instance.AIInfoLayer[iVar5] = DAT_TileMapState::instance.AIInfoLayer[iVar5] | 0x10;
                                 iVar3 = MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot, this)(iVar5);
                                 int iVar1 = DAT_TroopValueState::instance.attackInfo.archerPointsNext;
-                                if (!iVar3) {
-                                    DAT_TroopValueState::instance.attackInfo
-                                        .arch2ValuesArray[DAT_TroopValueState::instance.attackInfo.archerPointsNext * 2
-                                            + 0x3e9]
-                                        .buildingID = x;
-                                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar1 * 2 + 0x3e9].unitID
-                                        = y;
-                                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar1 * 2 + 0x3ea].tile
-                                        = iVar5;
-                                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar1 * 2 + 0x3ea].tile2
-                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                if (iVar3) {
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[iVar3].lastSeenCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 } else {
-                                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].tile2
-                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[DAT_TroopValueState::instance.attackInfo.archerPointsNext].field0_0x0 = x;
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[iVar1].field1_0x4 = y;
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[iVar1].tile = iVar5;
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[iVar1].lastSeenCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 }
-                                DAT_TroopValueState::instance.attackInfo.archerPoints
-                                    = DAT_TroopValueState::instance.attackInfo.archerPoints + 1;
-                                if (199 < DAT_TroopValueState::instance.attackInfo.archerPoints) {}
+                                DAT_TroopValueState::instance.attackInfo.archerPoints = DAT_TroopValueState::instance.attackInfo.archerPoints + 1;
+                                if (200 <= DAT_TroopValueState::instance.attackInfo.archerPoints) {
+                                    DAT_TroopValueState::instance.attackInfo.archerPointCountPrev = DAT_TroopValueState::instance.attackInfo.archerPoints;
+                                    return;
+                                }
                                 break;
                             }
                         }
-                        local_8 = local_8 + 1;
-                        paiVar4 = (int (*)[8])(*paiVar4 + 2);
-                    } while (local_8 < 4);
+                    }
                 }
-                iVar5 = iVar5 + 1;
-                if (0x13a0f < iVar5) {
-                    DAT_TroopValueState::instance.attackInfo.archerPointCountPrev
-                        = DAT_TroopValueState::instance.attackInfo.archerPoints;
-                }
-            } while (true);
+            }
+            DAT_TroopValueState::instance.attackInfo.archerPointCountPrev = DAT_TroopValueState::instance.attackInfo.archerPoints;
         }
 
     }
