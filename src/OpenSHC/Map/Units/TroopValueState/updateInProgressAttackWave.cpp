@@ -28,13 +28,9 @@ namespace Map {
             _playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
             BVar2 = MACRO_CALL_MEMBER(
                 Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
-            if (BVar2) {
-                if (DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed)
-                    goto LAB_00520489;
+            if (BVar2 && !DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
             }
-            if (!DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {}
-        LAB_00520489:
             if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID] == 0) {
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
