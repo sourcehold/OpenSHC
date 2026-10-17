@@ -38,7 +38,6 @@ namespace Map {
             int _inBounds;
             uint _init_10;
             int _walkLayer;
-            _inBounds = 0;
             if (399 < (uint)this->unitX || 399 < (uint)this->unitY
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->unitY * 400 + this->unitX]
                     == '\0') {
@@ -71,6 +70,7 @@ namespace Map {
             this->searchQueue.pathPlanIndex = 0;
             iVar6 = 10;
             local_24 = 1;
+            _inBounds = 0;
             while (true) {
                 while (true) {
                     if (_inBounds && (int)local_24 <= 1) {
