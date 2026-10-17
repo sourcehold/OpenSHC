@@ -828,7 +828,9 @@ namespace Map {
                 }
             LAB_0051f320__next_tile:
                 _tile = _tile + 1;
-                if (0x13a0f < _tile) {}
+                if (0x13a0f < _tile) {
+                    return;
+                }
             } while (true);
             iVar13 = iVar13 + 2;
             if (7 < iVar13)
