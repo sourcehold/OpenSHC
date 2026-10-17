@@ -16,73 +16,51 @@ namespace Map {
         void TroopValueState::expandAIZoneLayerStage1()
         {
             int iVar1;
-            int (*paiVar2)[8];
             int iVar3;
             int iVar4;
-            iVar4 = 0;
-            do {
+            for (iVar4 = 0; iVar4 < 80400; iVar4 = iVar4 + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\x01') {
                     iVar3 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar4];
                     iVar1 = 0;
-                    paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + iVar3;
+                    int _x = iVar4 - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile;
                     do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + (*paiVar2)[0]] & 0xf)) {
+                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]] & 0xf)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(6,
-                                (uint)((
-                                    int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
-                                             .int_.xOffset
-                                    + (iVar4
-                                        - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile))),
-                                (uint)(*(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                           + iVar1 * 0x10 + 4)
+                                (uint)((int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.xOffset + _x)),
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.yOffset
                                     + iVar3),
                                 2);
                             break;
                         }
                         iVar1 = iVar1 + 1;
-                        paiVar2 = (int (*)[8])(*paiVar2 + 2);
                     } while (iVar1 < 4);
                 }
-                iVar4 = iVar4 + 1;
-            } while (iVar4 < 0x13a10);
-            iVar4 = 0;
-            do {
+            }
+            for (iVar4 = 0; iVar4 < 80400; iVar4 = iVar4 + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\x02') {
                     DAT_TileMapState::instance.AIInfoLayer[iVar4] = '\x01';
                 }
-                iVar4 = iVar4 + 1;
-            } while (iVar4 < 0x13a10);
-            iVar4 = 0;
-            do {
+            }
+            for (iVar4 = 0; iVar4 < 80400; iVar4 = iVar4 + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\x01') {
                     iVar3 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar4];
                     iVar1 = 0;
-                    paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + iVar3;
+                    int _x = iVar4 - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile;
                     do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + (*paiVar2)[0]] & 0xf)) {
+                        if (!(DAT_TileMapState::instance.AIInfoLayer[iVar4 + DAT_TileMapState::instance.directionTranslationMatrix[iVar3][iVar1 * 2]] & 0xf)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
                                 DAT_PathFindingState::ptr)(10,
-                                (uint)((
-                                    int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2]
-                                             .int_.xOffset
-                                    + (iVar4
-                                        - DAT_ViewportRenderState::instance.translationMatrix[iVar3].addXgetTile))),
-                                (uint)(*(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                           + iVar1 * 0x10 + 4)
+                                (uint)((int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.xOffset + _x)),
+                                (uint)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar1 * 2].int_.yOffset
                                     + iVar3),
                                 2);
                             break;
                         }
                         iVar1 = iVar1 + 1;
-                        paiVar2 = (int (*)[8])(*paiVar2 + 2);
                     } while (iVar1 < 4);
                 }
-                iVar4 = iVar4 + 1;
-                if (0x13a0f < iVar4) {
-                    return;
-                }
-            } while (true);
+            }
         }
 
     }
