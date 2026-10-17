@@ -32,7 +32,7 @@ namespace Map {
             int iVar2 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
             int iVar1 = iVar2 + 1;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = iVar1;
-            if (iVar2 < 1) {
+            if (iVar2 <= 0) {
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
