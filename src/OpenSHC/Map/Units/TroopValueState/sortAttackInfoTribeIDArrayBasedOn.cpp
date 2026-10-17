@@ -98,12 +98,10 @@ namespace Map {
             } else {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x17c;
             }
-            piVar2 = DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12;
-            do {
-                piVar2[-100] = 0;
-                *piVar2 = 0xc;
-                piVar2 = piVar2 + 1;
-            } while ((int)piVar2 < 0x17a9b98);
+            for (int i = 0; i < 50; i = i + 1) {
+                DAT_TroopValueState::instance.attackInfo.tribeIDArray[i] = 0;
+                DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i] = 0xc;
+            }
             _index = 0;
             _tribeID = 1;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
