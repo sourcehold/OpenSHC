@@ -63,12 +63,10 @@ namespace Map {
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             unitCount = unitCount * 2;
-            if (unitCount < 500) {
-                if (unitCount < 50) {
-                    unitCount = 50;
-                }
-            } else {
+            if (500 < unitCount) {
                 unitCount = 500;
+            } else if (unitCount < 50) {
+                unitCount = 50;
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
