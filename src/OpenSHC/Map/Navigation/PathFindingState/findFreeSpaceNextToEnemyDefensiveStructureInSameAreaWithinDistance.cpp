@@ -79,7 +79,7 @@ namespace Map {
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _origY;
             DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
-            this->searchQueue.xQueue[0] = (short)tile - (short)_origAXGT;
+            this->searchQueue.xQueue[0] = tile - _origAXGT;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile <= 0x13a0f) {
