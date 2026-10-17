@@ -313,16 +313,8 @@ namespace Map {
                                                 _someY = DAT_TileMapState::instance.DAT_SomeY,
                                                 bVar1 <= (int)(uVar12 + 0x10)
                                                     && ((int)(uVar12 - 0x10) <= bVar1))) {
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17a2fa4 + _offset) = _tile;
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17a2fa8 + _offset)
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2].tile = _tile;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moatValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2].tile2
                                                 = DAT_TileMapState::instance.directionTranslationMatrix[_someY][iVar13]
                                                 + _tile;
                                             piVar14
@@ -420,17 +412,9 @@ namespace Map {
                                                     DAT_TileMapState::ptr)(iVar13),
                                                 (int)uVar12 <= (int)(uVar7 + 0x10)
                                                     && ((int)(uVar7 - 0x10) <= (int)uVar12))) {
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17a6e40 + _offset) = _tile;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wideValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2].tile = _tile;
                                             iVar13 = DAT_TileMapState::instance.DAT_SomeY;
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17a6e44 + _offset)
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wideValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide2].tile2
                                                 = DAT_TileMapState::instance
                                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
                                                                                  [_direction]
@@ -482,17 +466,13 @@ namespace Map {
                                             iVar11 = DAT_TileMapState::instance.DAT_SomeY,
                                             (int)uVar12 <= (int)(uVar7 + 0x10)
                                                 && ((int)(uVar7 - 0x10) <= (int)uVar12))) {
-                                        *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2
-                                                * 0x10
-                                            + 0x1793524 + _offset) = _tile;
-                                        *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2
-                                                * 0x10
-                                            + 0x1793528 + _offset)
+                                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hackValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2].tile = _tile;
+                                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hackValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2].tile2
                                             = DAT_TileMapState::instance.directionTranslationMatrix[iVar11][iVar13]
                                             + _tile;
                                         iVar13 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2;
                                         DAT_TileMapState::instance
-                                            .AIZoneLayer[*(int*)(iVar13 * 0x10 + 0x1793528 + _offset)] = 10;
+                                            .AIZoneLayer[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hackValuesArray[iVar13].tile2] = 10;
                                         bVar1 = DAT_TileMapState::instance.AIZoneLayer[_tile];
                                         DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack2 = iVar13 + 1;
                                         if (bVar1) {
@@ -546,17 +526,9 @@ namespace Map {
                                                     DAT_TileMapState::ptr)(iVar11),
                                                 (int)uVar12 <= (int)(uVar7 + 0x10)
                                                     && ((int)(uVar7 - 0x10) <= (int)uVar12))) {
-                                            *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo
-                                                                .scaleValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17973d0 + _offset) = _tile;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2].tile = _tile;
                                             _someY = DAT_TileMapState::instance.DAT_SomeY;
-                                            *(int*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo
-                                                                .scaleValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x17973d4 + _offset)
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale2].tile2
                                                 = DAT_TileMapState::instance
                                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY]
                                                                                  [iVar13]
@@ -723,16 +695,8 @@ namespace Map {
                                         iVar11 = DAT_TileMapState::instance.DAT_SomeY;
                                         if ((int)uVar12 <= (int)(_heightTown + 0x10)
                                             && (int)(_heightTown - 0x10) <= (int)uVar12) {
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x179b26c + _offset) = _tile;
-                                            *(int*)(*(int*)((int)
-                                                                DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                                        + _offset + -8)
-                                                    * 0x10
-                                                + 0x179b270 + _offset)
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile = _tile;
+                                            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2].tile2
                                                 = DAT_TileMapState::instance.directionTranslationMatrix[iVar11][iVar13]
                                                 + _tile;
                                             piVar14
@@ -787,13 +751,9 @@ namespace Map {
                                             DAT_TileMapState::ptr)(iVar11),
                                         (int)(uVar7 + 0x10) < (int)uVar12 || ((int)uVar12 < (int)(uVar7 - 0x10))))
                                     break;
-                                *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
-                                        * 0x10
-                                    + 0x179f108 + _offset) = _tile;
+                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile = _tile;
                                 _someY = DAT_TileMapState::instance.DAT_SomeY;
-                                *(int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2
-                                        * 0x10
-                                    + 0x179f10c + _offset)
+                                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gateValuesArray[DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].some1000ArrayIndex_2].tile2
                                     = DAT_TileMapState::instance
                                           .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][iVar13]
                                     + _tile;
