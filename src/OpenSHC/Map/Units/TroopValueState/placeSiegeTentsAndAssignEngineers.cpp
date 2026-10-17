@@ -40,7 +40,6 @@ namespace Map {
             Unit* _ptrPlayerID;
             int _unitID;
             int local_10;
-            byte(*local_c)[10];
             int _tribeID;
             int _unitCount;
             uint _maxUnits;
@@ -53,14 +52,14 @@ namespace Map {
                 local_10 = 2;
             }
             int iVar5 = 0;
-            local_c = DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore + param_1;
+            int _slot = 0;
             iVar8 = 0;
             DAT_TroopValueState::instance.attackInfo.createTribeAmount = 0;
             iVar6 = 0;
             do {
-                byte bVar1 = (*local_c)[0];
-                MappersEnum MVar3 = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field5_0xc8 + iVar6);
-                iVar4 = *(int*)((int)DAT_AttackInfoDefinedData::instance.field39_0x9ec + iVar6);
+                byte bVar1 = DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][_slot];
+                MappersEnum MVar3 = DAT_AttackInfoDefinedData::instance.field5_0xc8[_slot];
+                iVar4 = DAT_AttackInfoDefinedData::instance.field39_0x9ec[_slot];
                 iVar7 = 0;
                 if (0 < (char)bVar1) {
                     do {
@@ -78,7 +77,7 @@ namespace Map {
                 }
                 iVar7 = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
                 iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
-                local_c = (byte(*)[10])(*local_c + 1);
+                _slot = _slot + 1;
                 iVar6 = iVar6 + 4;
             } while (iVar6 < 16);
             iVar9 = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
