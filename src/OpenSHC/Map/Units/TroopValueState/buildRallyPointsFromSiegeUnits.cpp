@@ -51,8 +51,8 @@ namespace Map {
             if (DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex < 0) {
                 DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;
             }
-            if (DAT_TribesState::instance.tribes[tribeID].rallyPointCount
-                <= DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex) {
+            if (DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex
+                >= DAT_TribesState::instance.tribes[tribeID].rallyPointCount) {
                 DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;
             }
         }
