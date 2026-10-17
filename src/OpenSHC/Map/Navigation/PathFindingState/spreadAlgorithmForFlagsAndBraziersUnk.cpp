@@ -135,7 +135,7 @@ namespace Map {
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
-                                + (short)local_4;
+                                + local_4;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
