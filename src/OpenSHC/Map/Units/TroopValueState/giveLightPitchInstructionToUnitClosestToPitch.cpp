@@ -34,7 +34,7 @@ namespace Map {
             int _minDistance;
             int _minUnitID;
             int _ditchUID;
-            byte _height;
+            int _height;
             int _ditchID
                 = MACRO_CALL_MEMBER(Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(tile);
             _minUnitID = 0;
