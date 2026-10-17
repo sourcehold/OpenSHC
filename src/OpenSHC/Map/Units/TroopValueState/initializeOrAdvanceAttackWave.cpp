@@ -7,6 +7,7 @@
 
 #include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_WildlifeState.hpp"
 
 namespace OpenSHC {
@@ -21,10 +22,11 @@ namespace Map {
             int* piVar1;
             if (this->attackInfo.attackWaveTicker[param_1] == 0) {
                 this->attackInfo.attackWaveTicker[param_1] = 1;
-                this->attackInfo.pendingAttackWaveCount = this->attackInfo.pendingAttackWaveCount + 1;
-                this->attackInfo.someCounter1 = 1;
-                this->attackInfo.attackAlarmPlayed = 0;
-                this->attackInfo.attackWaveRetargetCount = 0;
+                DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount
+                    = DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount + 1;
+                DAT_TroopValueState::instance.attackInfo.someCounter1 = 1;
+                DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 0;
+                DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount = 0;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_1);
@@ -33,9 +35,9 @@ namespace Map {
                     param_1, 2, 100000, Map::Units::STBT_0x3fb);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3fe, Map::Units::STBT_1, 0, 0x32);
-                this->attackInfo.casDis = MACRO_CALL_MEMBER(
-                    Map::WildlifeState_Func::getDistanceToNearestUnknownNonZero01FromSignpost,
-                    DAT_WildlifeState::ptr)();
+                DAT_TroopValueState::instance.attackInfo.casDis
+                    = MACRO_CALL_MEMBER(Map::WildlifeState_Func::getDistanceToNearestUnknownNonZero01FromSignpost,
+                        DAT_WildlifeState::ptr)();
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                     param_1, Map::Units::STBT_3);
             }
@@ -43,13 +45,14 @@ namespace Map {
                 <= (int)(char)this->attackInfo.unknownByteArray02[param_1]) {
                 piVar1 = this->attackInfo.attackWaveTicker + param_1;
                 *piVar1 = *piVar1 + 1;
-                if (DAT_AttackInfoDefinedData::instance.AIAttackWaveAdvanceDelay[this->attackInfo.attacker]
+                if (DAT_AttackInfoDefinedData::instance
+                        .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]
                     <= this->attackInfo.attackWaveTicker[param_1]) {
-                    if (this->attackInfo.attacker == 8) {
+                    if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
                         this->attackInfo.attackWaveTicker[param_1] = 10000;
                         this->attackInfo.value3Array01[param_1] = 3;
-                        this->attackInfo.value10 = 0;
+                        DAT_TroopValueState::instance.attackInfo.value10 = 0;
                     }
                     this->attackInfo.value3Array01[param_1] = 1;
                     this->attackInfo.attackWaveTicker[param_1] = 0;
