@@ -23,22 +23,19 @@ namespace Map {
             int iVar8;
             uint _x;
             uint _y;
-            int (*local_1c)[8];
             int _candidateTile;
             int local_14;
             int local_10;
             int _index;
             DAT_TroopValueState::instance.attackInfo.tentPoints = 0;
-            _candidateTile = 0;
-            do {
+            for (_candidateTile = 0; _candidateTile < 80400; _candidateTile = _candidateTile + 1) {
                 if ((DAT_TileMapState::instance.AIInfoLayer[_candidateTile] == '\b')
                     && (iVar7 = 0, DAT_TileMapState::instance.UnitLayer[_candidateTile] == 0)) {
                     _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_candidateTile];
                     uint uVar5 = (uint)DAT_TileMapState::instance.HeightLayer[_candidateTile];
-                    local_1c = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                     for (local_10 = 0; local_10 < 8; local_10++) {
-                        uint uVar1 = (uint)DAT_TileMapState::instance.HeightLayer[(*local_1c)[0] + _candidateTile];
-                        iVar8 = (*local_1c)[0] + _candidateTile;
+                        uint uVar1 = (uint)DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile];
+                        iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile;
                         if (uVar5 + 6 < uVar1 || (int)uVar1 < (int)(uVar5 - 6)
                             || DAT_TileMapState::instance.UnitLayer[iVar8] != 0
                             || (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8]
@@ -93,7 +90,6 @@ namespace Map {
                             local_14 = local_14 + 4;
                             iVar7 = iVar7 + 4;
                         } while (local_14 < 8);
-                        local_1c = (int (*)[8])(*local_1c + 1);
                     }
                     if (64 < iVar7) {
                         _x = _candidateTile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
@@ -123,13 +119,13 @@ namespace Map {
                             }
                             DAT_TroopValueState::instance.attackInfo.tentPoints
                                 = DAT_TroopValueState::instance.attackInfo.tentPoints + 1;
-                            if (1999 < DAT_TroopValueState::instance.attackInfo.tentPoints) {}
+                            if (2000 <= DAT_TroopValueState::instance.attackInfo.tentPoints) {
+                                return;
+                            }
                         }
                     }
                 }
-                _candidateTile = _candidateTile + 1;
-                if (0x13a0f < _candidateTile) {}
-            } while (true);
+            }
         }
 
     }
