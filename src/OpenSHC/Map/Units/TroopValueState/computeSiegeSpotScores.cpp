@@ -3,8 +3,8 @@
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 
-#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -38,16 +38,18 @@ namespace Map {
                 _offset = attackingPlayerID * 96188;
                 _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
                 _counterTillHack2 = 0;
-                DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance
-                    = 10000;
+                DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance = 10000;
                 if (0 < _hack2) {
-                    _pTileArray = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hackValuesArray);
+                    _pTileArray = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                            .hackValuesArray);
                     do {
-                        _pathFindingCost = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][*_pTileArray];
+                        _pathFindingCost = (uint)DAT_TileMapState::instance
+                                               .SEC_PathfindingCostTileMap1105[attackedPlayerID][*_pTileArray];
                         if ((int)_pathFindingCost
-                            < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance) {
-                            DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance
-                                = _pathFindingCost;
+                            < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                .someMinimumDistance) {
+                            DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                .someMinimumDistance = _pathFindingCost;
                         }
                         _counterTillHack2 = _counterTillHack2 + 1;
                         _pTileArray = _pTileArray + 4;
@@ -59,10 +61,13 @@ namespace Map {
                  */
                 attackedPlayerID = 0;
                 if (0 < _hack2) {
-                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hackValuesArray + 8);
+                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                         .hackValuesArray
+                        + 8);
                     do {
                         _tile3 = puVar3[-2];
-                        _pathFindingCost = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[iVar4][_tile3];
+                        _pathFindingCost
+                            = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[iVar4][_tile3];
                         iVar2 = MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadderInRightDirection,
                             DAT_UnitsState::ptr)(
@@ -71,10 +76,14 @@ namespace Map {
                             if (!_pathFindingCost) {
                                 *puVar3 = 9999;
                             } else {
-                                iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance;
+                                iVar2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                            .someMinimumDistance;
                                 if (iVar2 < 0x32) {
                                     if ((int)_pathFindingCost < iVar2 + 0xf) {
-                                        DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 + 1;
+                                        DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3
+                                            = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                                  .hack3
+                                            + 1;
                                         *puVar3 = _pathFindingCost;
                                     } else {
                                         *puVar3 = 9999;
@@ -93,22 +102,29 @@ namespace Map {
                 }
                 iVar4 = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2) {
-                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scaleValuesArray + 8);
+                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                         .scaleValuesArray
+                        + 8);
                     do {
-                        *puVar3
-                            = -(uint)(5 < DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]])
+                        *puVar3 = -(uint)(5 < DAT_TileMapState::instance
+                                              .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                      .playerInfo[attackingPlayerID - 1]
+                                                      .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]])
                             & 9999;
                         iVar4 = iVar4 + 1;
                         puVar3 = puVar3 + 4;
-                    } while (
-                        iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2);
+                    } while (iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2);
                 }
                 iVar4 = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].town2) {
-                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].townValuesArray + 8);
+                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                         .townValuesArray
+                        + 8);
                     do {
-                        _pathFindingCost = (uint)
-                            DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
+                        _pathFindingCost = (uint)DAT_TileMapState::instance
+                                               .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                       .playerInfo[attackingPlayerID - 1]
+                                                       .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
                         if (!_pathFindingCost) {
                             *puVar3 = 100;
                         } else {
@@ -116,21 +132,22 @@ namespace Map {
                         }
                         iVar4 = iVar4 + 1;
                         puVar3 = puVar3 + 4;
-                    } while (
-                        iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].town2);
+                    } while (iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].town2);
                 }
                 iVar4 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].some1000ArrayIndex_2;
                 iVar2 = 0;
-                DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4
-                    = 10000;
+                DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4 = 10000;
                 if (0 < iVar4) {
-                    int iVar1
-                        = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one;
-                    piVar5 = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].gateValuesArray);
+                    int iVar1 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                    .currentPlayerID_OR_attackedPlayerID_OR_one;
+                    piVar5 = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                            .gateValuesArray);
                     do {
-                        _pathFindingCost = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[iVar1][*piVar5];
+                        _pathFindingCost
+                            = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[iVar1][*piVar5];
                         if ((int)_pathFindingCost
-                            < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4) {
+                            < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                .field22_0x3ea4) {
                             DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4
                                 = _pathFindingCost;
                         }
@@ -140,10 +157,14 @@ namespace Map {
                 }
                 iVar2 = 0;
                 if (0 < iVar4) {
-                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].gateValuesArray + 8);
+                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                         .gateValuesArray
+                        + 8);
                     do {
-                        _pathFindingCost = (uint)
-                            DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
+                        _pathFindingCost = (uint)DAT_TileMapState::instance
+                                               .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                       .playerInfo[attackingPlayerID - 1]
+                                                       .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
                         if (DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4
                             < 0xb) {
                             bVar7 = (_pathFindingCost < 10);
@@ -157,8 +178,8 @@ namespace Map {
                         iVar2 = iVar2 + 1;
                         *puVar3 = (bVar6 || bVar7 != (int)(_pathFindingCost + iVar4) < 0) - 1 & 9999;
                         puVar3 = puVar3 + 4;
-                    } while (
-                        iVar2 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].some1000ArrayIndex_2);
+                    } while (iVar2 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                 .some1000ArrayIndex_2);
                 }
                 _counter = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2) {
@@ -166,19 +187,27 @@ namespace Map {
                         + _offset + 8);
                     do {
                         ((int*)puVar4->hackValuesArray)[2]
-                            = -(uint)(5 < DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one][((int*)puVar4->hackValuesArray)[0]])
+                            = -(uint)(5 < DAT_TileMapState::instance
+                                          .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                  .playerInfo[attackingPlayerID - 1]
+                                                  .currentPlayerID_OR_attackedPlayerID_OR_one]
+                                                                         [((int*)puVar4->hackValuesArray)[0]])
                             & 9999;
                         _counter = _counter + 1;
                         puVar4 = (AttackInfoSubElement*)(((int*)puVar4->hackValuesArray) + 6);
-                    } while (_counter
-                        < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2);
+                    } while (
+                        _counter < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2);
                 }
                 iVar4 = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].moat2) {
-                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].moatValuesArray + 8);
+                    puVar3 = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                         .moatValuesArray
+                        + 8);
                     do {
-                        _pathFindingCost = (uint)
-                            DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
+                        _pathFindingCost = (uint)DAT_TileMapState::instance
+                                               .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                       .playerInfo[attackingPlayerID - 1]
+                                                       .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]];
                         if (!_pathFindingCost) {
                         LAB_00519ca1:
                             *puVar3 = 9999;
@@ -199,8 +228,7 @@ namespace Map {
                         }
                         iVar4 = iVar4 + 1;
                         puVar3 = puVar3 + 4;
-                    } while (
-                        iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].moat2);
+                    } while (iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].moat2);
                 }
             }
         }
