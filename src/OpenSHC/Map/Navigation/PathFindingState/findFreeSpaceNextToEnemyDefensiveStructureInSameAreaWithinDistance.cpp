@@ -78,7 +78,7 @@ namespace Map {
             this->searchQueue.readIndex = 0;
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _origY;
-            DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
+            DAT_TileMapState::instance.CertainPathLayer[tile] = (short)this->searchQueue.currentDistance;
             this->searchQueue.xQueue[0] = tile - _origAXGT;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
