@@ -64,10 +64,11 @@ namespace Map {
                 } else if (_buildingType == Map::Buildings::BT_KEEPFOUR) {
                     x1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].x + 4;
                     y1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].y + 4;
-                } else {
-                    if (_buildingType != Map::Buildings::BT_KEEPFIVE) {}
+                } else if (_buildingType == Map::Buildings::BT_KEEPFIVE) {
                     x1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].x + 5;
                     y1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].y + 5;
+                } else {
+                    return;
                 }
                 _swordsTribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                     DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, 0);
