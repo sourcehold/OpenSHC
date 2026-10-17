@@ -43,8 +43,7 @@ namespace Map {
                         attackID, 1);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelForEveryTunneler, this)(attackID);
                 }
-                tribeSizeSumLimit = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
-                    + (char)_playerID * 0x177bc + -4);
+                tribeSizeSumLimit = DAT_TroopValueState::instance.attackInfo.playerInfo[(char)_playerID - 1].town3;
                 if (tribeSizeSumLimit) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         attackID, 2, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
