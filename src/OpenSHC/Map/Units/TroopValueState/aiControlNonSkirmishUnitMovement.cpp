@@ -32,10 +32,9 @@ namespace Map {
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
-                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                        .keep.id
-                    < 1) {
+                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id <= 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateAttackInfoTick, this)();
+                    return;
                 }
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(0);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
@@ -54,15 +53,13 @@ namespace Map {
                                 goto LAB_0052103d;
                         }
                         *piVar1 = 600;
-                    } else if (iVar2 < 1) {
-                        if (iVar2 < 0) {
-                            *piVar1 = iVar2 + 1;
-                        }
-                    } else {
+                    } else if (0 < iVar2) {
                         *piVar1 = iVar2 + -1;
                         if (iVar2 + -1 == 0) {
                             *piVar1 = -1000;
                         }
+                    } else if (iVar2 < 0) {
+                        *piVar1 = iVar2 + 1;
                     }
                 }
             LAB_0052103d:
@@ -79,9 +76,7 @@ namespace Map {
                         _nTribes = DAT_TroopValueState::instance.attackInfo.nof_tribes[_index];
                         DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]
                             .attackedPlayerID = 1;
-                        if (!_nTribes) {
-                            DAT_TroopValueState::instance.attackInfo.value3Array01[_index] = 0;
-                        } else {
+                        if (_nTribes) {
                             iVar2 = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
                             DAT_TroopValueState::instance.attackInfo.index = _index;
                             DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] = iVar2;
@@ -113,6 +108,8 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateActiveAttackWaveState, this)(
                                     _index);
                             }
+                        } else {
+                            DAT_TroopValueState::instance.attackInfo.value3Array01[_index] = 0;
                         }
                         DAT_TroopValueState::instance.attackInfo.nof_tribes[_index] = 0;
                         DAT_TroopValueState::instance.attackInfo.unknownByteArray02[_index] = 0;
