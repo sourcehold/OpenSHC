@@ -27,7 +27,7 @@ namespace Map {
             BOOLEnum _hasTribe;
             int _index;
             int _pitchTile;
-            byte _nTribes;
+            int _nTribes;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::decrementTileMap1104, this)();
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER
