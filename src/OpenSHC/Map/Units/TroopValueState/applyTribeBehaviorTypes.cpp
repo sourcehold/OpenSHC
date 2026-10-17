@@ -18,8 +18,8 @@ namespace Map {
         {
             int _size;
             int iVar2 = 0;
+            DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = iVar2;
             int _index = 0;
-            DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize) {
                 do {
                     int _tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index];

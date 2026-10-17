@@ -691,7 +691,7 @@ namespace Map {
                                                     sVar10 = (int)*psVar8;
                                                 }
                                                 psVar8 = psVar8 + 2;
-                                            } while (psVar8 < &DAT_TileMapState::instance.specialAreasArray[8]);
+                                            } while ((int)psVar8 < (int)&DAT_TileMapState::instance.specialAreasArray[8]);
                                             if (0 < sVar10) {
                                                 DAT_BuildingsState::instance.buildings[_buildingID_3]
                                                     .unknownCounterTo10000_0x2b4 = (short)sVar10;

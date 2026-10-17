@@ -622,3 +622,28 @@ Not reachable (both tried and lost ~19 points each on this trio):
 - Ghidra's arm order here is the *inverted* one. The original lays the
   `!= someCounter1` (fill) arm first, which is what our file already had;
   taking Ghidra's `==`-first order costs the arm layout.
+
+### Initialise a global *from* the local, not from a bare literal
+
+`applyTribeBehaviorTypes` opened with
+
+    int iVar2 = 0;
+    int _index = 0;
+    DAT_...unknownTribeCounterRelated = 0;
+
+MSVC saw three independent zeros, coalesced two of the locals into one register
+and stored the literal: `xor edx,edx` then `mov [global], edx`. The original
+keeps two zeroed registers and stores `esi`. Rewriting the middle store as
+
+    int iVar2 = 0;
+    DAT_...unknownTribeCounterRelated = iVar2;
+    int _index = 0;
+
+took it 95.7% -> **100%**: reading `iVar2` forces MSVC to give it its own
+register and store through it, and it fixes the `xor`/store order at the same
+time.
+
+Same family as [the spare local being the enregistered global]: whenever a
+global and a local hold the same value, the *data flow between them* is what
+pins the register allocation. Spell the dependency out - `global = local;` -
+rather than writing the literal twice.
