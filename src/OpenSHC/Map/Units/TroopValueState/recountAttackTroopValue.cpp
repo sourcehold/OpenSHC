@@ -149,8 +149,8 @@ namespace Map {
                     || (DAT_TroopValueState::instance.attackInfo.attackTribeCount <= 0)) {
                     DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 1;
                 }
-                if ((DAT_TroopValueState::instance.attackInfo.aiTroops * 3
-                        < DAT_TroopValueState::instance.attackInfo.size)
+                if ((DAT_TroopValueState::instance.attackInfo.size
+                        > DAT_TroopValueState::instance.attackInfo.aiTroops * 3)
                     && (DAT_TroopValueState::instance.attackInfo.aiTroops < _limit)) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountTotalTroopValue, this)();
                     if (DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[5]

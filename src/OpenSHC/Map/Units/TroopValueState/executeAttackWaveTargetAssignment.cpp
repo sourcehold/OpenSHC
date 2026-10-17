@@ -72,7 +72,7 @@ namespace Map {
                     = DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes + 1;
             }
             if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
-                if (9 < DAT_TroopValueState::instance.attackInfo.someCounter1) {
+                if (10 <= DAT_TroopValueState::instance.attackInfo.someCounter1) {
                     DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                     DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 6;
                     MACRO_CALL_MEMBER(
