@@ -42,7 +42,6 @@ namespace Map {
             int local_10;
             int _tribeID;
             int _unitCount;
-            uint _maxUnits;
             local_10 = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
             if (!local_10) {
                 local_10 = 2;
@@ -75,11 +74,11 @@ namespace Map {
                         iVar7 = iVar7 + 1;
                     } while (iVar7 < (char)bVar1);
                 }
-                iVar7 = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
-                iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
                 _slot = _slot + 1;
                 iVar6 = iVar6 + 4;
             } while (iVar6 < 16);
+            iVar7 = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
+            iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
             iVar9 = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
             iVar6 = 0;
             if (0 < iVar9) {
@@ -130,14 +129,13 @@ namespace Map {
                     _unitCount = DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerCount;
                     _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                         DAT_TribesState::instance.tribes[_tribeID].owner, 0);
-                    _maxUnits = DAT_UnitsState::instance.maxUnitCount;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeType = 11;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeBehaviorType = 1040;
                     DAT_TribesState::instance.tribes[_tribeID2].attackWave
                         = DAT_TribesState::instance.tribes[_tribeID].attackWave;
                     DAT_TribesState::instance.tribes[_tribeID2].attackInfo_someCounter1
                         = DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1;
-                    if (_unitID < (int)_maxUnits) {
+                    if (_unitID < DAT_UnitsState::instance.maxUnitCount) {
                         _ptrPlayerID = &DAT_UnitsState::instance.units[_unitID];
                         do {
                             if (_ptrPlayerID->logicalState == Map::Units::ULS_NORMAL && _ptrPlayerID->owner == local_10
