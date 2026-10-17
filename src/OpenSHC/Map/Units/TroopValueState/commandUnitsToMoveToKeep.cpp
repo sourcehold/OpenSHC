@@ -73,9 +73,9 @@ namespace Map {
                 DAT_TribesState::instance.tribes[_swordsTribe].tribeType = AI::Tribes::AITT_SWORDSMEN;
                 _archersTribe
                     = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(_playerID, 0);
-                _max = DAT_UnitsState::instance.maxUnitCount;
                 uint _unitID = 1;
                 DAT_TribesState::instance.tribes[_archersTribe].tribeType = AI::Tribes::AITT_ARCHERS;
+                _max = DAT_UnitsState::instance.maxUnitCount;
                 if (1 < (int)_max) {
                     _pUnit = &DAT_UnitsState::instance.units[1];
                     do {
