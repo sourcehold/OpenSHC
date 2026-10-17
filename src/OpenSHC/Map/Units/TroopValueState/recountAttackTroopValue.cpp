@@ -62,9 +62,9 @@ namespace Map {
                             }
                         } else {
                             _tribeType = _pTribe->tribeType;
-                            _size = _pTribe->size;
                             _pMem = DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts
                                 + (short)_tribeType * 2 + 0x33;
+                            _size = _pTribe->size;
                             *(int*)_pMem = *(int*)_pMem + (int)_size;
                             if (_tribeType == AI::Tribes::AITT_ENGINEERS) {
                                 DAT_TroopValueState::instance.attackInfo.engineers
