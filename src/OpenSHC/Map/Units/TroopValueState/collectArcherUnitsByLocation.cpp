@@ -42,7 +42,6 @@ namespace Map {
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
-                    _index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520;
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                         && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
                                 (int)_pUnit->owner),
@@ -62,9 +61,10 @@ namespace Map {
                                 DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c
                                     = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c + 1;
                             }
-                        } else if (_index < 200
-                            && (!_pUnit->tribeID
-                                || (DAT_TribesState::instance.tribes[_pUnit->tribeID].isRallyingUnk == 0))) {
+                        } else if (_index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520,
+                            _index < 200
+                                && (!_pUnit->tribeID
+                                    || (DAT_TribesState::instance.tribes[_pUnit->tribeID].isRallyingUnk == 0))) {
                             /*
                               not rallying or part of tribe
                              */
