@@ -19,8 +19,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FF90
         void TroopValueState::initializeOrAdvanceAttackWave(int param_1)
         {
-            if (this->attackInfo.attackWaveTicker[param_1] == 0) {
-                this->attackInfo.attackWaveTicker[param_1] = 1;
+            if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] == 0) {
+                DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 1;
                 DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount
                     = DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount + 1;
                 DAT_TroopValueState::instance.attackInfo.someCounter1 = 1;
@@ -40,20 +40,20 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                     param_1, Map::Units::STBT_3);
             }
-            if ((char)this->attackInfo.nof_tribes[param_1] + -5
-                <= (int)(char)this->attackInfo.unknownByteArray02[param_1]) {
-                this->attackInfo.attackWaveTicker[param_1] = this->attackInfo.attackWaveTicker[param_1] + 1;
-                if (this->attackInfo.attackWaveTicker[param_1]
+            if ((char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] + -5
+                <= (int)(char)DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1]) {
+                DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
+                if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
                     >= DAT_AttackInfoDefinedData::instance
                            .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
                     if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
-                        this->attackInfo.attackWaveTicker[param_1] = 10000;
-                        this->attackInfo.value3Array01[param_1] = 3;
+                        DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
+                        DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
                         DAT_TroopValueState::instance.attackInfo.value10 = 0;
                     }
-                    this->attackInfo.value3Array01[param_1] = 1;
-                    this->attackInfo.attackWaveTicker[param_1] = 0;
+                    DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 1;
+                    DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                 }
             }
         }
