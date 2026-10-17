@@ -90,7 +90,7 @@ namespace Map {
                                           .clockwiseCardinalTranslationMatrix[_direction]
                                           .int_.yOffset
                                     + sVar4;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex] = (short)iVar7 + sVar3;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex] = iVar7 + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar13;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a10 <= (int)this->searchQueue.writeIndex) {
