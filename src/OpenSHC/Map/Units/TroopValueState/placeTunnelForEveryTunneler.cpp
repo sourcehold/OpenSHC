@@ -86,10 +86,10 @@ namespace Map {
                         while (sVar1) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(
                                 iVar3);
-                            iVar4 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                             sVar1 = DAT_TribesState::instance.tribes[iVar3].size;
                         }
                         iVar5 = iVar5 + 1;
+                        iVar4 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     } while (iVar5 < iVar4);
                 }
                 unitID = 0;
