@@ -262,6 +262,20 @@ Diff patterns that were reliable (more in the cheat sheet):
   bugs and worth replacing. Replacing an *array base* is free or better; replacing a *loop bound* is not -
   a typed pointer bound (`p < &tribes[1251]`) re-anchors the walk and cost 5-11 points in three functions,
   where converting the whole loop to an index over `tribes[t]` gained instead.
+- **Where a field read sits relative to a call or a test is worth more than almost anything else.**
+  The decompiler hoists reads to the top of a block; the original reads them where they are used, and
+  `quick_styles.py` settles it in seconds per variant. Moving one read down past a call took
+  `recountTotalTroopValue` 27.7% -> 49.5% and `collectArcherUnitsByLocation` 49.4% -> 61.5%; moving one
+  down past two threshold tests took `queueOilThrowForIdleArchers` 70.7% -> 100%. The same lever runs the
+  other way for an argument subexpression inside a short-circuit chain, which the original computed
+  *before* the test: hoisting the `PathConnectionLayer` lookup out of the `&&` took
+  `assignBehaviorTypeToNearbyTribes` 46.6% -> 68.0%. Read which side of the branch the original's address
+  arithmetic falls on and follow it.
+- `if (x < N) { if (x == N) { ... } ... }` is a three-way test the decompiler flattened wrongly: the inner
+  arm is unreachable, so whatever it does never happens. The original tests `> N`, then `== N`, then falls
+  through to the rest. Rebuild it as `if (x < N) { rest } else if (x == N) { arm } else { high }` - the
+  fall-through arm has to stay first or MSVC lays the blocks out the other way and the match collapses
+  (20 points on `updateTribeBehaviorBasedOnBehaviorType`, which is also where the unreachable arm was).
 - A `je` in the original against a `jne` of ours after the same compare means the two arms of an
   `if/else` are the other way round: the arm the original falls into is the one it keeps inline, and the
   one it jumps to is the one we should put in the `else`. `scan_arms.py` lists them. Swapping took
