@@ -519,3 +519,32 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   `sortAttackInfoTribeIDArrayBasedOn` (that last one by 14 points). Check the trip count either
   way - `&tribes[1250]` and the literal are usually count-equivalent, so the literal is not a bug -
   and keep whichever measures better.
+
+- **Verify a jump table's index -> case mapping against the *data* table.** For a sparse switch MSVC
+  emits a byte table (value - min -> jump index) alongside the jump table, and reccmp prints both.
+  The indices run strictly ascending over the case values that are present, and `default` gets the
+  *last* index - not a slot in the middle. I assumed the default sat at index 12 in
+  `updateTribeBehaviorBasedOnBehaviorType`, which shifted every case from 0x400 on by one and made
+  the derived arm order wrong from position 6 onwards; it still gained 9 points, which is how it
+  went unnoticed. Correcting it gained another 7 and made our layout match the original's exactly.
+  `arm_layout.py` prints both layouts, so check them rather than trusting the derivation.
+
+- **`arm_sizes.py` turns a big switch into a short worklist.** Differencing consecutive jump-table
+  offsets gives each arm's byte size on both sides, so an 800-instruction function at 55% becomes
+  "these four arms are the wrong length". It is also how you catch a reorder that dropped a
+  terminator: Ghidra's last arm carries no `break`, so moving it anywhere else makes it fall
+  through - `arm_sizes.py` showed that arm 13 bytes *short*, and the listing showed the original
+  ending it with `ret`.
+
+- **A jcc pair differing only in the equality is an off-by-one in the condition.** `sweep_all.py`
+  flags `-jg`/`+jge`, `-jl`/`+jle` and the unsigned equivalents over the same compare. Sometimes it
+  is only an encoding (`cmp x, 0xa` / `jl` against `cmp x, 9` / `jle` mean the same thing - write
+  the original's form), and sometimes the operands really do differ, so read the compare before
+  acting. Check that the `cmp` itself is identical on both sides: if the original compares a
+  register where we compare an immediate, the pairing is noise.
+
+- **Instruction order inside a basic block is the scheduler's, not the source's.** The original
+  reads `owner` before its `getValueOfTroopType` call in `recountTotalTroopValue`; moving our read
+  to match cost *24 points*, because it forces a spill across the call where MSVC otherwise keeps
+  the unit pointer and re-reads. Same for hoisting the layer pointers in `recomputeAttackInfo`.
+  Reorder *blocks*, not instructions.
