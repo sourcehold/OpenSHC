@@ -733,3 +733,21 @@ reading `setne` in the original's listing and converting two assignments to
 `(x != 0)` form collapsed it from 66.8% to **13.7%** - that `setne` belonged to a
 different statement that the aligner had drifted onto. Confirm which statement a
 `setne` belongs to before acting on it.
+
+### Rebase parameter arithmetic onto the derived local that already holds it
+
+`renderAttackInfoDebugOverlay` computed `xParam = x + 2` once and then wrote
+`x + 0x16` (4 sites) and `x + 0x20` (2 sites) for later columns. The original
+emits `lea eax,[esi + 0x14]` from the register already holding `xParam`, while
+ours re-read the parameter off the frame and added the absolute offset - which
+also cost an extra dword of frame (`sub esp,0x3f0` vs `0x3ec`).
+
+`x + 0x16` is `xParam + 0x14`, same value. Rewriting all six sites relative to
+`xParam` took it 82.4% -> **95.8%**, and the rest of the gap is only reccmp
+mis-symbolising the literal `0xffffff` (white) as `BuildingsState+424671` plus
+the security-cookie names.
+
+Fourth instance of the data-flow rule. Worth grepping for: two expressions on
+the same parameter with different constants, where one of them is already a
+named local - the later ones are probably offsets from that local, not from the
+parameter.
