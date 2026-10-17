@@ -20,9 +20,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BE60
         void TroopValueState::registerSpottedEnemyTile(int param_1)
         {
-            int iVar1;
             int iVar2;
-            int iVar3;
             if (((((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
                       && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .keep.id
@@ -37,9 +35,9 @@ namespace Map {
                             .entityType
                         != Map::Entities::ET_FIRE)))) {
                 iVar2 = -1;
-                iVar3 = 0;
+                int iVar3 = 0;
                 do {
-                    iVar1 = this->attackInfo.spottedEnemyTiles[iVar3].tile;
+                    int iVar1 = this->attackInfo.spottedEnemyTiles[iVar3].tile;
                     if (iVar1 == param_1) {
                         iVar2 = -1;
                         break;
