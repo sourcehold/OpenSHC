@@ -248,7 +248,7 @@ namespace Map {
                         sVar3 = DAT_TribesState::instance.tribes[tribeID].countdown2;
                         DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
                         DAT_TribesState::instance.tribes[tribeID].unitStance = (ushort)(2 < (int)uVar7);
-                        if (sVar3 < 1) {
+                        if (sVar3 <= 0) {
                         LAB_0051e032:
                             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::claimArcherAttackPoint, this)(tribeID);
                         }
@@ -312,7 +312,7 @@ namespace Map {
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setRallyPointForLaddermenTribe, this)(
                             tribeID);
-                        if (DAT_TribesState::instance.tribes[tribeID].countdown2 < 1) {
+                        if (DAT_TribesState::instance.tribes[tribeID].countdown2 <= 0) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
                                 (uint)(DAT_TribesState::instance.tribes[tribeID].rallyPointArray[0][0]),
@@ -355,7 +355,7 @@ namespace Map {
                         sVar3 = DAT_TribesState::instance.tribes[tribeID].countdown2;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
-                        if (sVar3 < 1) {
+                        if (sVar3 <= 0) {
                             iVar12 = MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::findTribeWithMoatAttackBehavior, this)();
                             if (iVar12) {
