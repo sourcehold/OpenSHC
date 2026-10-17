@@ -190,7 +190,7 @@ namespace Map {
         int tribeRelatedArrayValue0UpTo12[50]; // 0x0004677C length: 200
         undefined1 padding_0x46844[200]; // 0x00046844 length: 200
         int unknownSignpostRelatedArray[50]; // 0x0004690C length: 200
-        int field121589_0x469d4; // 0x000469D4 length: 4
+        int field121388_0x469d4; // 0x000469D4 length: 4
         int delayedWaveAssignmentCount; // 0x000469D8 length: 4
         int enemyUnitsInsideCastleCount; // 0x000469DC length: 4
         int buildingDamageEventCount; // 0x000469E0 length: 4
