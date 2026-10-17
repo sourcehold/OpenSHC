@@ -43,36 +43,19 @@ namespace AI {
             }
 
             candidateCount = 0;
-            // Players 1..8, manually unrolled by 4 in the original. Measured: rolling this into a plain
-            // 1..8 loop drops quick_diff from 0.92 to 0.67, so the unroll is in the original source.
+            // Players 1..8. The original unrolls this 4 at a time, so the outer loop has to step by 4;
+            // the compiler unrolls the inner 4 itself, producing the same instructions as writing the
+            // four copies out. A plain 1..8 loop does not work: MSVC then unrolls all 8 and the match
+            // drops from 0.92 to 0.67 (writing 8 copies out by hand compiles to exactly the same thing).
             for (playerID = 1; playerID < 9; playerID += 4) {
-                if ((DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0)
-                    && (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                        != DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
-                    candidates[candidateCount] = playerID;
-                    candidateCount++;
-                }
-                if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 1] != 0)
-                    && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 1]
-                        != DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
-                    candidates[candidateCount] = playerID + 1;
-                    candidateCount++;
-                }
-                if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 2] != 0)
-                    && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 2]
-                        != DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
-                    candidates[candidateCount] = playerID + 2;
-                    candidateCount++;
-                }
-                if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 3] != 0)
-                    && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 3]
-                        != DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
-                    candidates[candidateCount] = playerID + 3;
-                    candidateCount++;
+                for (int offset = 0; offset < 4; offset++) {
+                    if (DAT_GameSynchronyState::instance.currentAIArray[playerID + offset] != 0
+                        && DAT_GameState::instance.mapAndTime.playerTeams[playerID + offset]
+                            != DAT_GameState::instance.mapAndTime
+                                   .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                        candidates[candidateCount] = playerID + offset;
+                        candidateCount++;
+                    }
                 }
             }
 
