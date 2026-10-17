@@ -25,17 +25,20 @@ namespace Map {
             BOOLEnum BVar2;
             int bVar3;
             int _playerID;
-            _playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
+            _playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
             BVar2 = MACRO_CALL_MEMBER(
                 Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
             if (BVar2 && !DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
             }
+            if (!DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
+                return;
+            }
             if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID] == 0) {
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(1, attackID);
-                if (DAT_TroopValueState::instance.attackInfo.tentPoints < 1) {
+                if (DAT_TroopValueState::instance.attackInfo.tentPoints <= 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers, this)(
                         attackID, 0);
                 } else {
@@ -43,7 +46,7 @@ namespace Map {
                         attackID, 1);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelForEveryTunneler, this)(attackID);
                 }
-                tribeSizeSumLimit = DAT_TroopValueState::instance.attackInfo.playerInfo[(char)_playerID - 1].town3;
+                tribeSizeSumLimit = DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1].town3;
                 if (tribeSizeSumLimit) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         attackID, 2, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
