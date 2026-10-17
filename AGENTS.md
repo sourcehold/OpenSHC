@@ -424,3 +424,11 @@ If you discover undocumented conventions, missing workflows, or repeated guidanc
   duly dropped it, so reccmp showed the original carrying a `cmp`/`jge` we had nothing for. The
   second store belongs in an `else`. Any tail where the decompiler assigns a field it has just
   conditionally updated is worth this check.
+
+- **Loop shape is not reachable from the source.** `pruneStaleArcherPoints` and its two twins walk
+  a 199-element array; the original exits on `cmp esi, <end address>` / `jl`, we emit a down-counter
+  (`mov edi, 0xc7` / `sub edi, 1` / `jne`), and that single transform is the whole 29% they are
+  missing. A `do/while` on the pointer, a `for`, a `while`, `!=` instead of `<`, an index with the
+  pointer derived inside, and a hoisted end-pointer local all compile to the *same* down-counter -
+  measured, not assumed, on three functions in one build. When several spellings of a loop give a
+  bit-identical diff, the remaining difference is the optimiser's and there is nothing left to try.
