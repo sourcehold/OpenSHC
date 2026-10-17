@@ -29,11 +29,9 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
                 && 3 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                int _macemen = DAT_TroopValueState::instance.attackInfo
-                                   .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1];
                 bool bVar1 = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
-                DAT_TroopValueState::instance.attackInfo.macemenTribeCount
-                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
+                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
+                int _macemen = DAT_TroopValueState::instance.attackInfo.macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 if ((bVar1) || (0xe < DAT_GameCore::instance.missionNumber1to20)) {
                     _unitID = MACRO_CALL_MEMBER(
