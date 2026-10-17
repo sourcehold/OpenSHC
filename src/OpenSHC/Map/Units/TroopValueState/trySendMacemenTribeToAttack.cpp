@@ -27,7 +27,7 @@ namespace Map {
             int _unitID;
             int _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
-                && 3 < (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
+                && 4 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
                 bool bVar1 = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
