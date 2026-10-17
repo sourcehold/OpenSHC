@@ -137,9 +137,7 @@ namespace Map {
                 _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                 if (_unitID || (_logic & 0x50000700)) {
                     _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
-                    if (!_buildingID) {
-                        _defaultHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
-                    } else {
+                    if (_buildingID) {
                         _buildingID_2 = (int)(short)_buildingID;
                         _buildingType = DAT_BuildingsState::instance.buildings[_buildingID_2].buildingType;
                         if (_buildingType == Map::Buildings::BT_GATEHOUSELARGE) {
@@ -160,6 +158,8 @@ namespace Map {
                                     DAT_BuildingsState::ptr)(_buildingID_2);
                             _defaultHeight = _buildingHeight_else + (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                         }
+                    } else {
+                        _defaultHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                     }
                     if (_unitID) {
                         _teamsDifferent = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getTeamsDifferent,
