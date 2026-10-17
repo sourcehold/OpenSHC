@@ -39,7 +39,7 @@ namespace Map {
                                   .HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10]
                                       + _candidateTile];
                         iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_10] + _candidateTile;
-                        if (uVar5 + 6 < uVar1 || (int)uVar1 < (int)(uVar5 - 6)
+                        if ((int)uVar1 > (int)(uVar5 + 6) || (int)uVar1 < (int)(uVar5 - 6)
                             || DAT_TileMapState::instance.UnitLayer[iVar8] != 0
                             || this->attackInfo.startCon != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar8]
                             || (DAT_TileMapState::instance.LogicLayer[iVar8] & 0xa0002400U))
@@ -52,7 +52,7 @@ namespace Map {
                                       .HeightLayer[DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14]
                                           + iVar8];
                             int iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14] + iVar8;
-                            if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
+                            if ((int)uVar4 > (int)uVar1 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || this->attackInfo.startCon
                                     != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
@@ -62,7 +62,7 @@ namespace Map {
                                 = (uint)DAT_TileMapState::instance.HeightLayer
                                       [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 1] + iVar8;
-                            if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
+                            if ((int)uVar4 > (int)uVar1 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || this->attackInfo.startCon
                                     != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
@@ -76,7 +76,7 @@ namespace Map {
                                 = (uint)DAT_TileMapState::instance.HeightLayer
                                       [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 2] + iVar8;
-                            if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
+                            if ((int)uVar4 > (int)uVar1 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || this->attackInfo.startCon
                                     != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
@@ -89,7 +89,7 @@ namespace Map {
                                 = (uint)DAT_TileMapState::instance.HeightLayer
                                       [DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8];
                             iVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_y][local_14 + 3] + iVar8;
-                            if (uVar1 < uVar4 || (int)uVar4 < (int)(uVar5 - 8)
+                            if ((int)uVar4 > (int)uVar1 || (int)uVar4 < (int)(uVar5 - 8)
                                 || DAT_TileMapState::instance.UnitLayer[iVar2] != 0
                                 || this->attackInfo.startCon
                                     != (short)DAT_TileMapState::instance.PathConnectionLayer[iVar2]
