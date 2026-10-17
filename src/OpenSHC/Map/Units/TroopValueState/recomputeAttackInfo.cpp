@@ -36,7 +36,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051E300
         void TroopValueState::recomputeAttackInfo(int playerID, int attackedPlayerID)
         {
-            byte bVar1;
+            int bVar1;
             undefined2 uVar3;
             undefined* puVar4;
             undefined* puVar5;
@@ -62,7 +62,7 @@ namespace Map {
             char* _pTranslated;
             int* piVar14;
             int _direction;
-            bool _isSolitary;
+            int _isSolitary;
             uint _defaultHeight;
             int _directionMin1;
             BuildingTypeShort _buildingType;
@@ -312,8 +312,8 @@ namespace Map {
                                             && (uVar12 = MACRO_CALL_MEMBER(Map::TileMapState_Func::getTotalHeightAtTile,
                                                     DAT_TileMapState::ptr)(iVar11),
                                                 _someY = DAT_TileMapState::instance.DAT_SomeY,
-                                                (int)(uint)bVar1 <= (int)(uVar12 + 0x10)
-                                                    && ((int)(uVar12 - 0x10) <= (int)(uint)bVar1))) {
+                                                bVar1 <= (int)(uVar12 + 0x10)
+                                                    && ((int)(uVar12 - 0x10) <= bVar1))) {
                                             *(int*)(*(int*)((int)
                                                                 DAT_TroopValueState::instance.attackInfo.moatValuesArray
                                                         + _offset + -8)
