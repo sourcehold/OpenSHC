@@ -67,7 +67,8 @@ namespace Map {
                 /*
                      Mark the keep tile as AI Zone with value 1 (the starting point)
                  */
-                DAT_TileMapState::instance.AIZoneLayer[this->searchQueue.tilesQueue[0]] = 1;
+                DAT_TileMapState::instance.AIZoneLayer[this->searchQueue.tilesQueue[0]]
+                    = (byte)this->searchQueue.currentDistance;
                 /*
                      Repurpose variable as iteration counter
                  */
@@ -110,7 +111,8 @@ namespace Map {
                               tile
                              */
                             if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
-                                && (_areaID = (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile], _areaID != 0)
+                                && (_areaID = (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile],
+                                    _areaID != 0)
                                 && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
                                         & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                                         != 0
