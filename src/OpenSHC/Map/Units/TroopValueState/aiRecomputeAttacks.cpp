@@ -1,9 +1,9 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Util/Timing/Stopwatch.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -21,7 +21,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005202B0
         void TroopValueState::aiRecomputeAttacks(undefined4 param_1, int param_2)
         {
-            int _signpostTile;
             int const playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
@@ -35,7 +34,7 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             int const _defaultSignpostTile = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
-            _signpostTile
+            int _signpostTile
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
                       .tile;

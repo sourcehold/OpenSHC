@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
@@ -31,17 +31,9 @@ namespace Map {
         void TroopValueState::placeSiegeTentsAndAssignEngineers(int param_1, int param_2)
         {
             int _engineerCount;
-            int _tribeID2;
-            int _index;
             int _subCount;
-            int _totalEngineers;
-            int _extraCount;
-            Unit* _ptrPlayerID;
-            int _unitID;
-            int _playerID;
             int _tribeID;
-            int _unitCount;
-            _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
+            int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
             if (!_playerID) {
                 _playerID = 2;
             }
@@ -51,9 +43,9 @@ namespace Map {
             }
             int _queueSize = 0;
             byte(*_pScoreRow)[10] = DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore + param_1;
-            _totalEngineers = 0;
+            int _totalEngineers = 0;
             DAT_TroopValueState::instance.attackInfo.createTribeAmount = 0;
-            _index = 0;
+            int _index = 0;
             do {
                 int const _count = (int)(char)(*_pScoreRow)[0];
                 MappersEnum _buildingType
@@ -81,7 +73,7 @@ namespace Map {
             } while (_index <= 16);
             _subCount = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
             _engineerCount = DAT_AttackInfoDefinedData::instance.field9_0xe8;
-            _extraCount = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
+            int _extraCount = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
             _index = 0;
             if (0 < _extraCount) {
                 do {
@@ -124,11 +116,11 @@ namespace Map {
                         _tribeSize = DAT_TribesState::instance.tribes[_tribeID].size;
                     }
                 }
-                _unitID = 0;
+                int _unitID = 0;
                 param_1 = 0;
                 while (param_1 < DAT_TroopValueState::instance.attackInfo.createTribeAmount) {
-                    _unitCount = DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerCount;
-                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                    int _unitCount = DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerCount;
+                    int _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                         DAT_TribesState::instance.tribes[_tribeID].owner, 0);
                     _totalEngineers = DAT_UnitsState::instance.maxUnitCount;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeType = 11;
@@ -140,7 +132,7 @@ namespace Map {
                     if (_totalEngineers <= _unitID) {
                         return;
                     }
-                    _ptrPlayerID = &DAT_UnitsState::instance.units[_unitID];
+                    Unit* _ptrPlayerID = &DAT_UnitsState::instance.units[_unitID];
                     do {
                         if (_ptrPlayerID->logicalState == Map::Units::ULS_NORMAL && _ptrPlayerID->owner == _playerID
                             && !_ptrPlayerID->dying && _ptrPlayerID->unitType == Map::Units::UT_E_ENGINEER

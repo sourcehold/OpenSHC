@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "../TroopValueState.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -28,17 +28,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005205A0
         void TroopValueState::executeAttackWaveTargetAssignment(int param_1)
         {
-            int _limit;
-            BOOLEnum _canReachSignpostZone;
-            int _currentPlayerSlotID;
-            int _playerInfoOffset;
-            int _playerID;
             int _tribeSizeSumLimit;
-            int _siegeArcherBudget;
-            int _siegeHackBudget;
-            _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
-            _siegeArcherBudget = 0;
-            _siegeHackBudget = 0;
+            int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
+            int _siegeArcherBudget = 0;
+            int _siegeHackBudget = 0;
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 _playerID = 2;
@@ -51,10 +44,10 @@ namespace Map {
                     .AIAttackWaveTargetDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
                 return;
             }
-            _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+            int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.value10 = DAT_TroopValueState::instance.attackInfo.value10 + 1;
-            _canReachSignpostZone = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
+            BOOLEnum _canReachSignpostZone = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
                 DAT_GameState::ptr)(_currentPlayerSlotID, _playerID, param_1);
             if ((_canReachSignpostZone) && (DAT_TroopValueState::instance.attackInfo.attacker != 8)) {
                 DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 4;
@@ -65,7 +58,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.someCounter1
                 = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(0, param_1);
-            _playerInfoOffset = _playerID * 0x177bc;
+            int _playerInfoOffset = _playerID * 0x177bc;
             if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset + -0x18)
                 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset + -0x1c)) {
                 DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
@@ -135,7 +128,8 @@ namespace Map {
                     = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4)
                     * 2;
             }
-            _limit = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4);
+            int _limit
+                = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4);
             if ((_limit)
                 && (2 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {

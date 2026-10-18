@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
@@ -26,20 +26,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051C570
         undefined4 TroopValueState::ifNecessaryThrowOilAutomatically(int param_1)
         {
-            short* _pUpdateTickTracker;
-            short _buildingID;
-            ushort _buildingX;
-            ushort _buildingY;
-            ushort _tileUnitID;
-            int _buildingSize;
-            int _tileOrTroopValue;
-            int _searchRadiusOrTargetUnitID;
             int _playerIDOrUnitID;
-            int _tribeIDOrTileIndex;
-            int _enemyTroopValue;
-            int _friendlyTroopValue;
-            _tribeIDOrTileIndex = (int)DAT_UnitsState::instance.units[param_1].tribeID;
-            _searchRadiusOrTargetUnitID = 4;
+            int _tribeIDOrTileIndex = (int)DAT_UnitsState::instance.units[param_1].tribeID;
+            int _searchRadiusOrTargetUnitID = 4;
             if (0x6e < DAT_UnitsState::instance.units[param_1].terrainOrClimbHeight) {
                 _searchRadiusOrTargetUnitID = 5;
             }
@@ -54,10 +43,10 @@ namespace Map {
                 return 0;
             }
             // The pointer stays: assigning through units[param_1].updateTickTracker cost 0.1%.
-            _pUpdateTickTracker = &DAT_UnitsState::instance.units[param_1].updateTickTracker;
+            short* _pUpdateTickTracker = &DAT_UnitsState::instance.units[param_1].updateTickTracker;
             *_pUpdateTickTracker = *_pUpdateTickTracker + 1;
             if (7 < DAT_UnitsState::instance.units[param_1].updateTickTracker) {
-                _tileOrTroopValue = DAT_UnitsState::instance.units[param_1].tile;
+                int _tileOrTroopValue = DAT_UnitsState::instance.units[param_1].tile;
                 DAT_UnitsState::instance.units[param_1].updateTickTracker = 0;
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
                     DAT_PathFindingState::ptr)(_playerIDOrUnitID, 0, 0, _tileOrTroopValue, _searchRadiusOrTargetUnitID);
@@ -72,11 +61,11 @@ namespace Map {
                     return 0;
                 }
                 if (DAT_PathFindingState::instance.field34_0x64) {
-                    _buildingID
+                    short _buildingID
                         = DAT_TileMapState::instance.BuildingLayer
                               [DAT_UnitsState::instance.units[DAT_PathFindingState::instance.field34_0x64].tile];
                     if (_buildingID) {
-                        _buildingSize = 0;
+                        int _buildingSize = 0;
                         switch (DAT_BuildingsState::instance.buildings[_buildingID].buildingType) {
                         case Map::Buildings::BT_CAMPGROUND:
                             _buildingSize = 7;
@@ -95,20 +84,21 @@ namespace Map {
                             break;
                         }
                         if (_buildingSize) {
-                            _buildingX = DAT_BuildingsState::instance.buildings[_buildingID].x;
-                            _buildingY = DAT_BuildingsState::instance.buildings[_buildingID].y;
+                            ushort _buildingX = DAT_BuildingsState::instance.buildings[_buildingID].x;
+                            ushort _buildingY = DAT_BuildingsState::instance.buildings[_buildingID].y;
                             _tribeIDOrTileIndex = 0;
-                            _friendlyTroopValue = 0;
-                            _enemyTroopValue = 0;
+                            int _friendlyTroopValue = 0;
+                            int _enemyTroopValue = 0;
                             do {
                                 MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                                     DAT_TileMapState::ptr)(_tribeIDOrTileIndex, _buildingSize);
-                                _tileUnitID = DAT_TileMapState::instance
-                                                  .UnitLayer[DAT_ViewportRenderState::instance
-                                                                 .translationMatrix[DAT_TileMapState::instance.buildingY
-                                                                     + (short)_buildingY]
-                                                                 .addXgetTile
-                                                      + DAT_TileMapState::instance.buildingX + (int)(short)_buildingX];
+                                ushort _tileUnitID
+                                    = DAT_TileMapState::instance
+                                          .UnitLayer[DAT_ViewportRenderState::instance
+                                                         .translationMatrix[DAT_TileMapState::instance.buildingY
+                                                             + (short)_buildingY]
+                                                         .addXgetTile
+                                              + DAT_TileMapState::instance.buildingX + (int)(short)_buildingX];
                                 while (_playerIDOrUnitID = (int)(short)_tileUnitID, _playerIDOrUnitID) {
                                     if (DAT_UnitsState::instance.units[_playerIDOrUnitID].isSelectable_OR_matchTime
                                         != 0) {

@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -15,8 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519E40
         undefined4 TroopValueState::findNearestAvailableScalePoint(int unitID)
         {
-            int fromXPosition;
-            int fromYPosition;
             int const _playerID = DAT_UnitsState::instance.units[unitID].owner;
             int _minDistance = 1000;
             int _bestIndex = -1;
@@ -29,14 +27,15 @@ namespace Map {
                             < 5999
                         && DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1].scaleValuesArray[i].unitID
                             == 0) {
-                        fromYPosition = (int)DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
-                                                    .playerInfo[_playerID - 1]
-                                                    .scaleValuesArray[i]
-                                                    .tile2];
-                        fromXPosition = DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1]
-                                            .scaleValuesArray[i]
-                                            .tile2
+                        int fromYPosition
+                            = (int)DAT_ViewportRenderState::instance
+                                  .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
+                                          .playerInfo[_playerID - 1]
+                                          .scaleValuesArray[i]
+                                          .tile2];
+                        int fromXPosition = DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1]
+                                                .scaleValuesArray[i]
+                                                .tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,

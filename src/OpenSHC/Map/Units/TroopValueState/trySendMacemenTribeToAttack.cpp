@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
@@ -27,7 +27,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051CF90
         void TroopValueState::trySendMacemenTribeToAttack()
         {
-            int _unitID;
             int const _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
                 && 4 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
@@ -39,7 +38,7 @@ namespace Map {
                                    .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 if ((isNotCampaignMission) || (0xf <= DAT_GameCore::instance.missionNumber1to20)) {
-                    _unitID = MACRO_CALL_MEMBER(
+                    int _unitID = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(_playerID);
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                         _macemen, (uint)(DAT_UnitsState::instance.units[_unitID].x),

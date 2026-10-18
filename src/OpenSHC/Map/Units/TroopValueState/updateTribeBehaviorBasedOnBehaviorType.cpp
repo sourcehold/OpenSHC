@@ -1,9 +1,9 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"

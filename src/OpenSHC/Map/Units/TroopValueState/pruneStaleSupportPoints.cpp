@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -18,7 +18,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B110
         void TroopValueState::pruneStaleSupportPoints()
         {
-            BOOLEnum tribeMatchesUID;
             AttackInfoSubArrayElement3* point = &DAT_TroopValueState::instance.attackInfo.supportPointsArray[1];
             do {
                 if (point->someCounter != DAT_TroopValueState::instance.attackInfo.someCounter1) {
@@ -26,8 +25,9 @@ namespace Map {
                         sizeof(*point), '\0', (void*)((int)(point)));
                 } else {
                     if (point->tribeID != 0) {
-                        tribeMatchesUID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeCorrespondsWithUID,
-                            DAT_TribesState::ptr)(point->tribeID, point->tribeUID);
+                        BOOLEnum tribeMatchesUID
+                            = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeCorrespondsWithUID,
+                                DAT_TribesState::ptr)(point->tribeID, point->tribeUID);
                         if (!tribeMatchesUID) {
                             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                                 sizeof(*point), '\0', (void*)((int)(point)));

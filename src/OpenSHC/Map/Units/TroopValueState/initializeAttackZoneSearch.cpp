@@ -1,5 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -14,9 +15,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519850
         void TroopValueState::initializeAttackZoneSearch(int param_1)
         {
-            int _tile;
             DAT_TroopValueState::instance.attackInfo.biggestZone = 0;
-            _tile
+            int _tile
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1]]
                       .tile;

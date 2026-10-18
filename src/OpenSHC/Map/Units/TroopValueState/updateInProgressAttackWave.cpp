@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "../TroopValueState.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -20,12 +20,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00520450
         void TroopValueState::updateInProgressAttackWave(int attackID)
         {
-            int* _pAttackWaveTicker;
-            int tribeSizeSumLimit;
-            BOOLEnum isAttackMostlyAlive;
-            BOOLEnum isMission39;
-            int _playerID;
-            isAttackMostlyAlive = MACRO_CALL_MEMBER(
+            BOOLEnum isAttackMostlyAlive = MACRO_CALL_MEMBER(
                 Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
             if (isAttackMostlyAlive && !DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
@@ -45,8 +40,8 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers, this)(
                         attackID, 0);
                 }
-                _playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
-                tribeSizeSumLimit = DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1].town3;
+                int _playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackID];
+                int tribeSizeSumLimit = DAT_TroopValueState::instance.attackInfo.playerInfo[_playerID - 1].town3;
                 if (tribeSizeSumLimit) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         attackID, 2, tribeSizeSumLimit, Map::Units::STBT_0x3f5);
@@ -62,12 +57,12 @@ namespace Map {
             }
             // The pointer stays: indexing attackWaveTicker[attackID] directly here took the match from
             // 84.1% to 61.4%, so the original really held the element's address.
-            _pAttackWaveTicker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + attackID;
+            int* _pAttackWaveTicker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + attackID;
             *_pAttackWaveTicker = *_pAttackWaveTicker + 1;
             if (DAT_AttackInfoDefinedData::instance
                     .AttackWaveDurationPerAttacker[DAT_TroopValueState::instance.attackInfo.attacker]
                 <= DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID]) {
-                isMission39 = DAT_GameCore::instance.missionNumber1to20 == 39;
+                BOOLEnum isMission39 = DAT_GameCore::instance.missionNumber1to20 == 39;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID] = 10000;
                 DAT_TroopValueState::instance.attackInfo.value3Array01[attackID] = 3;
                 DAT_TroopValueState::instance.attackInfo.value10 = 0;

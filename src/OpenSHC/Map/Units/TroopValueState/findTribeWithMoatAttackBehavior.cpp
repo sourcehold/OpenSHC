@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -19,10 +19,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A920
         undefined4 TroopValueState::findTribeWithMoatAttackBehavior()
         {
-            BOOLEnum fullIDIsMinus1;
             for (int tribeID = 1; tribeID < 1250; tribeID = tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[tribeID].tribeState != 0) {
-                    fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                    BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
                         DAT_GameState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner);
                     if (fullIDIsMinus1
                         && DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType == Map::Units::STBT_0x3f7) {

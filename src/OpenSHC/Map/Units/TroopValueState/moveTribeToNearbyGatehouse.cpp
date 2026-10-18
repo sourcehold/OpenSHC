@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -21,9 +21,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D450
         undefined4 TroopValueState::moveTribeToNearbyGatehouse(int param_1)
         {
-            int _gatehouseID;
             int const _unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
-            _gatehouseID = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getGatehouseNearSomethingUnk,
+            int _gatehouseID = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getGatehouseNearSomethingUnk,
                 DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[param_1].owner,
                 (int)(DAT_UnitsState::instance.units[_unitID].x), (int)(DAT_UnitsState::instance.units[_unitID].y),
                 (int)(80));

@@ -1,5 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
@@ -11,10 +12,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AB10
         void TroopValueState::countAvailableArcherValueSlots(int param_1)
         {
-            int _remaining;
             DAT_TroopValueState::instance.attackInfo.arch3 = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.arch2) {
-                for (_remaining = 0; _remaining < DAT_TroopValueState::instance.attackInfo.arch2; ++_remaining) {
+                for (int _remaining = 0; _remaining < DAT_TroopValueState::instance.attackInfo.arch2; ++_remaining) {
                     if (DAT_BuildingsState::instance
                                 .buildings[DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_remaining]
                                         .buildingID]

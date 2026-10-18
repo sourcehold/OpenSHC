@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"

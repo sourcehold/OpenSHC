@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -23,7 +23,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FE80
         void TroopValueState::updateAttackInfoTick()
         {
-            BOOLEnum canMoveFromKeep;
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID = 1;
@@ -64,7 +63,7 @@ namespace Map {
                     = DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount + 1;
                 DAT_TroopValueState::instance.attackInfo.aiTickPhase = 2;
             }
-            canMoveFromKeep = MACRO_CALL_MEMBER(
+            BOOLEnum canMoveFromKeep = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::unitsCanMoveFromKeepOfPlayerToAnotherArea, DAT_GameState::ptr)(1);
             if ((canMoveFromKeep) && (!DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag)) {
                 DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = 1;

@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -29,19 +29,13 @@ namespace Map {
         {
             BOOLEnum isAIPlayerWithKeep;
             int _shot;
-            Unit* _pUnit;
-            int _unitID;
-            int _minDistance;
-            int _minUnitID;
-            int _ditchUID;
-            int _height;
             int _ditchID
                 = MACRO_CALL_MEMBER(Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(tile);
-            _minUnitID = 0;
-            _minDistance = 100000000;
-            _unitID = 1;
+            int _minUnitID = 0;
+            int _minDistance = 100000000;
+            int _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                         && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
@@ -80,9 +74,10 @@ namespace Map {
                 = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroY
                 = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
-            _height = DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
+            int _height
+                = DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
             DAT_UnitsState::instance.units[_minUnitID].targetID_OR_targetBuildingID = (short)_ditchID;
-            _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
+            int _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetZ = (ushort)_height;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
             DAT_UnitsState::instance.units[_minUnitID]

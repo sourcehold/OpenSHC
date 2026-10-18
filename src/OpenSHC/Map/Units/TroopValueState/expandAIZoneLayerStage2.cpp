@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -15,8 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AE00
         void TroopValueState::expandAIZoneLayerStage2()
         {
-            int tile;
-            for (tile = 0; tile < 80400; tile = tile + 1) {
+            for (int tile = 0; tile < 80400; tile = tile + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x02') {
                     int const y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                     int direction = 0;

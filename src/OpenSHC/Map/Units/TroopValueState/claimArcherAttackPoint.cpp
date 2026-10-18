@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -19,9 +19,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AFF0
         int TroopValueState::claimArcherAttackPoint(int param_1)
         {
-            int _pointIndex;
             int const _unitID = (int)DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
-            _pointIndex = MACRO_CALL_MEMBER(
+            int _pointIndex = MACRO_CALL_MEMBER(
                 Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(param_1);
             if (!_pointIndex) {
                 _pointIndex

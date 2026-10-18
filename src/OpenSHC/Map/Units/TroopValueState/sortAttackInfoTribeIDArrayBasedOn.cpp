@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeTypeInt.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 

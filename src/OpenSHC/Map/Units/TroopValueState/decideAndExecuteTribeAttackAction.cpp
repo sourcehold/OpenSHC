@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -24,16 +24,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D2B0
         void TroopValueState::decideAndExecuteTribeAttackAction(int tribeID)
         {
-            int _buildingID;
-            int _unitID;
-            dword _targetTile;
             int const _targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            _buildingID
+            int _buildingID
                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findNearestEnemyBuildingWithinDistance,
                     DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner,
                     (int)(DAT_UnitsState::instance.units[_targetUnitID].x),
                     (int)(DAT_UnitsState::instance.units[_targetUnitID].y), 0xf);
-            _unitID = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findNearestEnemyUnitWithinDistance,
+            int _unitID = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findNearestEnemyUnitWithinDistance,
                 DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner,
                 (int)(DAT_UnitsState::instance.units[_targetUnitID].x),
                 (int)(DAT_UnitsState::instance.units[_targetUnitID].y), 10);
@@ -52,7 +49,7 @@ namespace Map {
                 tribeID, Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk, 0, 0, 0);
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
-            _targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
+            dword _targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                 DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_targetUnitID].x,
                 (uint)(DAT_UnitsState::instance.units[_targetUnitID].y),
                 (int)(DAT_UnitsState::instance.units[_targetUnitID].owner), 6);

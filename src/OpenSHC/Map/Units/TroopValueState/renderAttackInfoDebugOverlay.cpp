@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"

@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -18,8 +18,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B190
         int TroopValueState::assignTribeToSupportPoint(uint x, uint y, int tribeID)
         {
-            int _index;
-            _index = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSupportPointIndex,
+            int _index = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSupportPointIndex,
                 DAT_PathFindingState::ptr)(200, x, y, tribeID);
             if (_index) {
                 short const _oldIndex = DAT_TribesState::instance.tribes[tribeID].supportPointIndex;

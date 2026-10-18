@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -18,8 +18,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F340
         void TroopValueState::scanForArcherPoints()
         {
-            BOOLEnum hasArcherZoneFlag;
-            int _existingPointIndex;
             int _searchRadius;
             DAT_TroopValueState::instance.attackInfo.archerPoints = 0;
             if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 0) {
@@ -46,13 +44,13 @@ namespace Map {
                                      [DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + tile]
                                 & 3)) {
                             uint const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                            hasArcherZoneFlag
+                            BOOLEnum hasArcherZoneFlag
                                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                                     DAT_PathFindingState::ptr)(_searchRadius, x, y, 0x10);
                             if (!hasArcherZoneFlag) {
                                 DAT_TileMapState::instance.AIInfoLayer[tile]
                                     = DAT_TileMapState::instance.AIInfoLayer[tile] | 0x10;
-                                _existingPointIndex = MACRO_CALL_MEMBER(
+                                int _existingPointIndex = MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot, this)(tile);
                                 int const _nextPointIndex = DAT_TroopValueState::instance.attackInfo.archerPointsNext;
                                 if (_existingPointIndex) {

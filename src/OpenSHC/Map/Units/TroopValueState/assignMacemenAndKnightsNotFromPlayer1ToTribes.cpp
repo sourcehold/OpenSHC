@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -24,20 +24,14 @@ namespace Map {
         void TroopValueState::assignMacemenAndKnightsNotFromPlayer1ToTribes()
         {
             BOOLEnum isAIPlayerWithKeep;
-            int _tribeID1;
-            int _tribeID2;
-            Unit* _pUnit2;
-            int _knightCount;
             int _macemenLimit;
-            int _tribeIndex;
             int _knightLimit;
-            int _limitCounter;
             int const playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
             uint _unitID0 = 1;
             int _macemenCount = 0;
-            _knightCount = 0;
+            int _knightCount = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit2 = &DAT_UnitsState::instance.units[1];
+                Unit* _pUnit2 = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit2->logicalState != Map::Units::ULS_INVISIBLE
                         && (isAIPlayerWithKeep
@@ -90,15 +84,15 @@ namespace Map {
             } else {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = 1;
             }
-            _tribeIndex = 0;
+            int _tribeIndex = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount) {
                 uint _unitID1 = 0;
                 do {
-                    _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                    int _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                         playerID, 0);
                     DAT_TroopValueState::instance.attackInfo.macemenTribeArray[_tribeIndex] = _tribeID1;
                     DAT_TribesState::instance.tribes[_tribeID1].tribeType = AI::Tribes::AITT_MACEMEN;
-                    _limitCounter = 0;
+                    int _limitCounter = 0;
                     if (_macemenLimit) {
                         do {
                             _unitID1 = _unitID1 + 1;
@@ -126,7 +120,7 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount) {
                 uint _unitID2 = 0;
                 do {
-                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                    int _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                         playerID, 0);
                     int _limitCounter2 = 0;
                     DAT_TroopValueState::instance.attackInfo.knightTribeArray[_tribeIndex] = _tribeID2;

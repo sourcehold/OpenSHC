@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -25,9 +25,6 @@ namespace Map {
         void TroopValueState::collectArcherUnitsByLocation()
         {
             BOOLEnum isAIPlayerWithKeep;
-            Unit* _pUnit;
-            uint _unitID;
-            int _index;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2b57c), '\0',
                 (void*)((int)(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2b57c)));
@@ -40,11 +37,11 @@ namespace Map {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TroopValueState::instance.attackInfo.uidArray_0x2c200), '\0',
                 (void*)((int)(DAT_TroopValueState::instance.attackInfo.uidArray_0x2c200)));
-            _unitID = 1;
+            uint _unitID = 1;
             DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c = 0;
             DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520 = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                         && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
@@ -54,7 +51,7 @@ namespace Map {
                             || (_pUnit->unitType == Map::Units::UT_E_XBOW))) {
                         if ((DAT_TileMapState::instance.LogicLayer[_pUnit->tile] & 0x10000100U)) {
                             int const _tribeID = (int)_pUnit->tribeID;
-                            _index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520;
+                            int _index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520;
                             if (_index < 200
                                 && (!_tribeID || (DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk == 0))) {
                                 /*

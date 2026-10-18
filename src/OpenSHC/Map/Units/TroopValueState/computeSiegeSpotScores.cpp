@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -19,31 +19,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519990
         void TroopValueState::computeSiegeSpotScores(int attackedPlayerID, int attackingPlayerID)
         {
-            int* _pTileArray;
             int _index;
             uint* _pScore;
-            AttackInfoSubElement* _pWideEntry;
-            int _entryCountOrBias;
-            int _counter2;
-            int* _pGateTile;
-            int _counter;
-            int _counterTillHack2;
             uint _pathFindingCost;
-            int _offset;
             BOOLEnum isAtThreshold;
             BOOLEnum isBelowThreshold;
-            uint _tile3;
             int _attackedPlayerID;
-            int _hack2;
             uint _tile2;
             uint _tile;
             if (DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.id != 0) {
-                _offset = attackingPlayerID * 96188;
-                _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
-                _counterTillHack2 = 0;
+                int _offset = attackingPlayerID * 96188;
+                int _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
+                int _counterTillHack2 = 0;
                 DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance = 10000;
                 if (0 < _hack2) {
-                    _pTileArray = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                    int* _pTileArray = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                             .hackValuesArray);
                     do {
                         _pathFindingCost = (uint)DAT_TileMapState::instance
@@ -59,13 +49,13 @@ namespace Map {
                     } while (_counterTillHack2 < _hack2);
                 }
                 DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 = 0;
-                _counter2 = 0;
+                int _counter2 = 0;
                 if (0 < _hack2) {
                     _pScore = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                           .hackValuesArray
                         + 8);
                     do {
-                        _tile3 = _pScore[-2];
+                        uint _tile3 = _pScore[-2];
                         _pathFindingCost
                             = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile3];
                         _index = MACRO_CALL_MEMBER(
@@ -95,7 +85,7 @@ namespace Map {
                     } while (
                         _counter2 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2);
                 }
-                _entryCountOrBias = 0;
+                int _entryCountOrBias = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2) {
                     _pScore = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                           .scaleValuesArray
@@ -139,7 +129,7 @@ namespace Map {
                 if (0 < _entryCountOrBias) {
                     int _attackedPlayer = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                               .currentPlayerID_OR_attackedPlayerID_OR_one;
-                    _pGateTile = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                    int* _pGateTile = (int*)(DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                             .gateValuesArray);
                     do {
                         _pathFindingCost = (uint)DAT_TileMapState::instance
@@ -183,10 +173,11 @@ namespace Map {
                     } while (_index < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                  .some1000ArrayIndex_2);
                 }
-                _counter = 0;
+                int _counter = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2) {
-                    _pWideEntry = (AttackInfoSubElement*)((int)&DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                        + _offset + 8);
+                    AttackInfoSubElement* _pWideEntry
+                        = (AttackInfoSubElement*)((int)&DAT_TroopValueState::instance.attackInfo.wideValuesArray
+                            + _offset + 8);
                     do {
                         ((int*)_pWideEntry->hackValuesArray)[2]
                             = (5 < DAT_TileMapState::instance

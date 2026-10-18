@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "../TroopValueState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
@@ -35,21 +35,13 @@ namespace Map {
         void TroopValueState::commandUnitsToMoveToKeep()
         {
             UnitTypeShort unitType;
-            int _swordsTribe;
-            int _archersTribe;
             BOOLEnum isAIPlayerWithKeep;
             uint y1;
-            Unit* _pUnit;
             uint x1;
-            int _playerID;
-            uint _keep;
-            int _theTribe;
-            BuildingTypeShort _buildingType;
-            uint _max;
-            _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            _keep = DAT_GameState::instance.playerDataArray[_playerID].keep.id;
+            int _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
+            uint _keep = DAT_GameState::instance.playerDataArray[_playerID].keep.id;
             if (0 < (int)_keep) {
-                _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
+                BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
                 if (_buildingType == Map::Buildings::BT_MANORHOUSE) {
                     x1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].x + 3;
                     y1 = (int)(short)DAT_BuildingsState::instance.buildings[_keep].y + 8;
@@ -68,16 +60,16 @@ namespace Map {
                 } else {
                     return;
                 }
-                _swordsTribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                int _swordsTribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                     DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, 0);
                 DAT_TribesState::instance.tribes[_swordsTribe].tribeType = AI::Tribes::AITT_SWORDSMEN;
-                _archersTribe
+                int _archersTribe
                     = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(_playerID, 0);
                 uint _unitID = 1;
                 DAT_TribesState::instance.tribes[_archersTribe].tribeType = AI::Tribes::AITT_ARCHERS;
-                _max = DAT_UnitsState::instance.maxUnitCount;
+                uint _max = DAT_UnitsState::instance.maxUnitCount;
                 if (1 < (int)_max) {
-                    _pUnit = &DAT_UnitsState::instance.units[1];
+                    Unit* _pUnit = &DAT_UnitsState::instance.units[1];
                     do {
                         if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                             && (isAIPlayerWithKeep
@@ -97,7 +89,7 @@ namespace Map {
                                 DAT_DirectionAlgorithmState::instance.distanceHigh < 30)) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
                                 _unitID, (int)(_pUnit->tribeID));
-                            _theTribe = _archersTribe;
+                            int _theTribe = _archersTribe;
                             if (_pUnit->unitType == Map::Units::UT_E_SWORD) {
                                 _theTribe = _swordsTribe;
                             }

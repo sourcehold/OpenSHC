@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -22,12 +22,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B570
         int TroopValueState::placeTunnelEntrances(int tribeID)
         {
-            int _tentPointIndex;
             int const _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             /*
               finds a route from target to siege engine location?
              */
-            _tentPointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
+            int _tentPointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
                 DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
                 (uint)(DAT_UnitsState::instance.units[_unitID].y), tribeID);
             if (_tentPointIndex) {

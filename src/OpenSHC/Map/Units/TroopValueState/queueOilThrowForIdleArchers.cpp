@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -26,11 +26,9 @@ namespace Map {
         void TroopValueState::queueOilThrowForIdleArchers()
         {
             BOOLEnum isAIPlayerWithKeep;
-            Unit* _pUnit;
-            int _unitID;
-            _unitID = 1;
+            int _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                         && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(

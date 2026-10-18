@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "../TroopValueState.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/AI/Tribes/AIVUnitTypeTribeArrayOffset.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -24,10 +24,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FB90
         void TroopValueState::recountAttackTroopValue(int param_1)
         {
-            BOOLEnum fullIDIsMinus1;
-            int _tribeID;
-            int _size;
-            AITribeTypeShort _tribeType;
             int counter = 0x10;
             if (!param_1) {
                 counter = DAT_TroopValueState::instance.attackInfo.counter;
@@ -50,10 +46,11 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.catapults = 0;
                 DAT_TroopValueState::instance.attackInfo.knights = 0;
                 DAT_TroopValueState::instance.attackInfo.ranged = 0;
-                for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                     if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
-                        fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
-                            DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
+                        BOOLEnum fullIDIsMinus1
+                            = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                                DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
                         if (!fullIDIsMinus1) {
                             if (DAT_TribesState::instance.tribes[_tribeID].owner
                                 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
@@ -62,8 +59,8 @@ namespace Map {
                                     + DAT_TribesState::instance.tribes[_tribeID].size;
                             }
                         } else {
-                            _tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType;
-                            _size = DAT_TribesState::instance.tribes[_tribeID].size;
+                            AITribeTypeShort _tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType;
+                            int _size = DAT_TribesState::instance.tribes[_tribeID].size;
                             ((int*)&DAT_TroopValueState::instance.attackInfo
                                     .aiTribeSizesPerTribeType)[(short)_tribeType]
                                 = ((int*)&DAT_TroopValueState::instance.attackInfo

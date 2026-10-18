@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -13,7 +13,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518BB0
         BOOLEnum TroopValueState::isLessThanPercentageOfTribesInAttackDying(int attackID, int leDyingPerc)
         {
-            int _status;
             int _dying = 0;
             int _living = 0;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
@@ -23,7 +22,7 @@ namespace Map {
                             .currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner]
                         == -1
                     && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackID) {
-                    _status = MACRO_CALL_MEMBER(
+                    int _status = MACRO_CALL_MEMBER(
                         Map::Units::TribesState_Func::getTribeAliveStatus, DAT_TribesState::ptr)(_tribeID);
                     if (_status < 50) {
                         _living = _living + 1;

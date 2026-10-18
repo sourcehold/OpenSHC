@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -21,12 +21,9 @@ namespace Map {
         void TroopValueState::updateArcherBrazierProximityFlags()
         {
             BOOLEnum isAIPlayerWithKeep;
-            int _isBrazierNearby;
-            Unit* _pUnit;
-            int _unitID;
-            _unitID = 1;
+            int _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
                         && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
@@ -35,7 +32,7 @@ namespace Map {
                         && (_pUnit->unitType == Map::Units::UT_E_ARCHER
                             || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
                         && !_pUnit->dying) {
-                        _isBrazierNearby = MACRO_CALL_MEMBER(
+                        int _isBrazierNearby = MACRO_CALL_MEMBER(
                             Map::Entities::EntityState_Func::isBrazierNearby, DAT_EntityState::ptr)((int)_pUnit->x,
                             (int)(_pUnit->y), (int)(_pUnit->buildingHeight + _pUnit->terrainOrClimbHeight));
                         _pUnit->field297_0x40d = _isBrazierNearby != 0;

@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"

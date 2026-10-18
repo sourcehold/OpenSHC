@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -21,14 +21,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519790
         void TroopValueState::setRallyPointForLaddermenTribe(int param_1)
         {
-            BOOLEnum fullIDIsMinus1;
-            Tribe* _pTribe;
             int _laddermenTribeCount = 0;
             int _tribeID = 1;
-            _pTribe = &DAT_TribesState::instance.tribes[1];
+            Tribe* _pTribe = &DAT_TribesState::instance.tribes[1];
             do {
                 if (_pTribe->tribeState != 0) {
-                    fullIDIsMinus1 = MACRO_CALL_MEMBER(
+                    BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(
                         Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(_pTribe->owner);
                     if (fullIDIsMinus1 && _pTribe->tribeType == AI::Tribes::AITT_LADDERMEN
                         && (_laddermenTribeCount = _laddermenTribeCount + 1,

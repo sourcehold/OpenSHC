@@ -1,4 +1,5 @@
 #include "../TroopValueState.func.hpp"
+
 #include "OpenSHC/Map/AttackInfoSubArrayElement1.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 

@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
-#include "../TroopValueState.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -21,14 +21,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00520F70
         void TroopValueState::aiControlNonSkirmishUnitMovement()
         {
-            BOOLEnum _canMove;
-            int _aiControlStatus;
-            int _waveCounter;
-            int _wavePhase;
             BOOLEnum _hasTribe;
-            int _index;
-            int _pitchTile;
-            int _nTribes;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::decrementTileMap1104, this)();
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER
@@ -44,7 +37,7 @@ namespace Map {
                 if (!DAT_TroopValueState::instance.attackInfo.aiTroops) {
                     DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
                 }
-                _aiControlStatus
+                int _aiControlStatus
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                           .aiControlStatusRelated;
                 if (_aiControlStatus != -1000) {
@@ -77,7 +70,7 @@ namespace Map {
                 }
                 DAT_TroopValueState::instance.attackInfo.value3Array01[0] = 0;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[0] = 0;
-                for (_index = 1; _index < 50; _index++) {
+                for (int _index = 1; _index < 50; _index++) {
                     DAT_TroopValueState::instance.attackInfo.attacker
                         = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[_index];
                     if (DAT_TroopValueState::instance.attackInfo.attacker != 1
@@ -85,11 +78,11 @@ namespace Map {
                             || (_hasTribe = MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::searchTribeWithProperties, this)(_index),
                                 _hasTribe))) {
-                        _nTribes = DAT_TroopValueState::instance.attackInfo.nof_tribes[_index];
+                        int _nTribes = DAT_TroopValueState::instance.attackInfo.nof_tribes[_index];
                         DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]
                             .attackedPlayerID = 1;
                         if (_nTribes) {
-                            _waveCounter = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
+                            int _waveCounter = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
                             DAT_TroopValueState::instance.attackInfo.index = _index;
                             DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] = _waveCounter;
                             if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated && 10 < _waveCounter
@@ -99,7 +92,7 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition,
                                     DAT_SoundSystemState::ptr)();
                             }
-                            _wavePhase = DAT_TroopValueState::instance.attackInfo.value3Array01[_index];
+                            int _wavePhase = DAT_TroopValueState::instance.attackInfo.value3Array01[_index];
                             if (!_wavePhase) {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::initializeOrAdvanceAttackWave, this)(_index);

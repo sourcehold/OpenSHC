@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
@@ -29,20 +29,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BA30
         void TroopValueState::placeTunnelForEveryTunneler(int attackWave)
         {
-            Unit* _pUnit;
-            int _tribe;
-            Unit* _pCandidateUnit;
-            int _remainingUnits;
             int _tribeID;
-            int _tribeArraySize;
-            int _nTunnelers;
-            int _index;
-            uint unitID;
-            int _playerID;
-            int _nTunnels;
-            _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
-            _nTunnelers = 0;
-            _nTunnels = 0;
+            int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
+            int _nTunnelers = 0;
+            int _nTunnels = 0;
             if (!_playerID) {
                 _playerID = 2;
             }
@@ -51,8 +41,8 @@ namespace Map {
                 _playerID = 2;
             }
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
-                _remainingUnits = DAT_UnitsState::instance.maxUnitCount - 1;
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
+                int _remainingUnits = DAT_UnitsState::instance.maxUnitCount - 1;
                 do {
                     if (_pUnit->logicalState == Map::Units::ULS_NORMAL && _pUnit->owner == _playerID && !_pUnit->dying
                         && _pUnit->unitType == Map::Units::UT_TUNNELER) {
@@ -63,7 +53,7 @@ namespace Map {
                 } while (_remainingUnits);
                 _nTunnels = _nTunnelers;
             }
-            _tribeArraySize = 0;
+            int _tribeArraySize = 0;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
             for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
@@ -76,7 +66,7 @@ namespace Map {
                 }
             }
             if (_tribeArraySize) {
-                _index = 0;
+                int _index = 0;
                 if (0 < _tribeArraySize) {
                     do {
                         _tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index];
@@ -90,11 +80,11 @@ namespace Map {
                         _tribeArraySize = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     } while (_index < _tribeArraySize);
                 }
-                unitID = 0;
+                uint unitID = 0;
                 attackWave = 0;
                 if (0 < _nTunnels) {
                     do {
-                        _tribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                        int _tribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
                             _playerID, 0);
                         DAT_TribesState::instance.tribes[_tribe].tribeType = AI::Tribes::AITT_TUNNELERS;
                         DAT_TribesState::instance.tribes[_tribe].tribeBehaviorType = Map::Units::STBT_0x415;
@@ -106,7 +96,7 @@ namespace Map {
                         if ((int)unitID >= (int)_maxUnitCount) {
                             return;
                         }
-                        _pCandidateUnit = &DAT_UnitsState::instance.units[unitID];
+                        Unit* _pCandidateUnit = &DAT_UnitsState::instance.units[unitID];
                         while (_pCandidateUnit->logicalState != Map::Units::ULS_NORMAL
                             || _pCandidateUnit->owner != _playerID || _pCandidateUnit->dying
                             || _pCandidateUnit->unitType != Map::Units::UT_TUNNELER || _pCandidateUnit->tribeID) {

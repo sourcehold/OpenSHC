@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -16,14 +16,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A8A0
         int TroopValueState::findNearestDiggableMoatPoint(int param_1)
         {
-            BOOLEnum tile;
-            int result;
-            tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
+            BOOLEnum tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
             if ((int)tile <= -1) {
                 return 0;
             }
-            result = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
+            int result = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
                 (uint)(DAT_UnitsState::instance.units[param_1].x), (uint)(DAT_UnitsState::instance.units[param_1].y));
             if (result <= 0) {
                 return 0;

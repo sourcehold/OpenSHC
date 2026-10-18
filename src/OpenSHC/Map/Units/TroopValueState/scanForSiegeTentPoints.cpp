@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -19,25 +19,18 @@ namespace Map {
         void TroopValueState::scanForSiegeTentPoints()
         {
             int _flatTileCount;
-            int _neighbourTile;
-            uint _x;
-            uint _y;
-            int _candidateTile;
-            int _innerDirection;
-            int _outerDirection;
-            int _index;
             DAT_TroopValueState::instance.attackInfo.tentPoints = 0;
-            for (_candidateTile = 0; _candidateTile < 80400; _candidateTile = _candidateTile + 1) {
+            for (int _candidateTile = 0; _candidateTile < 80400; _candidateTile = _candidateTile + 1) {
                 if ((DAT_TileMapState::instance.AIInfoLayer[_candidateTile] == '\b')
                     && (_flatTileCount = 0, DAT_TileMapState::instance.UnitLayer[_candidateTile] == 0)) {
-                    _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_candidateTile];
+                    uint _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_candidateTile];
                     uint const _baseHeight = (uint)DAT_TileMapState::instance.HeightLayer[_candidateTile];
-                    for (_outerDirection = 0; _outerDirection < 8; _outerDirection++) {
+                    for (int _outerDirection = 0; _outerDirection < 8; _outerDirection++) {
                         uint _neighbourHeight = (uint)DAT_TileMapState::instance
                                                     .HeightLayer[DAT_TileMapState::instance
                                                                      .directionTranslationMatrix[_y][_outerDirection]
                                                         + _candidateTile];
-                        _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[_y][_outerDirection]
+                        int _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[_y][_outerDirection]
                             + _candidateTile;
                         if ((int)_neighbourHeight > (int)(_baseHeight + 6)
                             || (int)_neighbourHeight < (int)(_baseHeight - 6)
@@ -48,7 +41,7 @@ namespace Map {
                             break;
                         }
                         _neighbourHeight = _baseHeight + 8;
-                        _innerDirection = 0;
+                        int _innerDirection = 0;
                         do {
                             uint _neighbourValue = (uint)DAT_TileMapState::instance
                                                        .HeightLayer[DAT_TileMapState::instance
@@ -126,7 +119,7 @@ namespace Map {
                         } while (_innerDirection < 8);
                     }
                     if (63 < _flatTileCount) {
-                        _x = _candidateTile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
+                        uint _x = _candidateTile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                         BOOLEnum hasTentZoneFlag
                             = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                                 DAT_PathFindingState::ptr)(6, _x, _y, 0x80);
@@ -135,7 +128,7 @@ namespace Map {
                                 = DAT_TileMapState::instance.AIInfoLayer[_candidateTile] | 0x80;
                             int _sIndex = MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::getSiegeIndexForTile, this)(_candidateTile);
-                            _index = DAT_TroopValueState::instance.attackInfo.tentPointsNext;
+                            int _index = DAT_TroopValueState::instance.attackInfo.tentPointsNext;
                             if (_sIndex) {
                                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[_sIndex].someCounter
                                     = DAT_TroopValueState::instance.attackInfo.someCounter1;

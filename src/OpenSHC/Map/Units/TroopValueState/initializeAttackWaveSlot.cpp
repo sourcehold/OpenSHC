@@ -1,8 +1,8 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -15,7 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518180
         void TroopValueState::initializeAttackWaveSlot(int param_1, int param_2)
         {
-            int _randomSignpost;
             DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.someIntArray2[param_1 + -1] = 0;
@@ -32,7 +31,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.playerInfo[_player].field22_0x3ea4 = 0;
                 DAT_TroopValueState::instance.attackInfo.playerInfo[_player].field_0x3ea8 = 0;
             }
-            _randomSignpost = MACRO_CALL_MEMBER(
+            int _randomSignpost = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry, DAT_GameState::ptr)();
             int _activeSignposts
                 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();

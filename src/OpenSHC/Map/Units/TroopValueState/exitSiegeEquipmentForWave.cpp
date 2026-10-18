@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
@@ -23,7 +23,6 @@ namespace Map {
         void TroopValueState::exitSiegeEquipmentForWave(int wave)
         {
             AITribeTypeShort tribeType;
-            int _unitID;
             int _tribeUnitIndex;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
@@ -35,7 +34,7 @@ namespace Map {
                                 || ((tribeType == ((AITribeType)0x17) || (tribeType == ((AITribeType)0x18)))))))
                     && (_tribeUnitIndex = 0, 0 < DAT_TribesState::instance.tribes[_tribeID].size)) {
                     do {
-                        _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
+                        int _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                             DAT_TribesState::ptr)(_tribeID, _tribeUnitIndex);
                         _tribeUnitIndex = _tribeUnitIndex + 1;
                         if ((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)

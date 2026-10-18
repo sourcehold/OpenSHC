@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -17,8 +17,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AB60
         int TroopValueState::calculateArch2ClosestToTribeTargetUnit(int tribeID)
         {
-            int fromXPosition;
-            int fromYPosition;
             int const _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             int _minDistance = 1000;
             int _bestIndex = -1;
@@ -30,9 +28,9 @@ namespace Map {
                                 .unknownCounterTo10000_0x2b4
                             < 9999
                         && !DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].unitID) {
-                        fromYPosition = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                                            [DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].tile2];
-                        fromXPosition = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].tile2
+                        int fromYPosition = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                                                [DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].tile2];
+                        int fromXPosition = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,

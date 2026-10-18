@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -16,8 +16,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A5B0
         undefined4 TroopValueState::getClosestWideValueBasedOnPlayer(int playerID)
         {
-            int fromXPosition;
-            int fromYPosition;
             int const _owner = DAT_UnitsState::instance.units[playerID].owner;
             int _minDistance = 1000;
             int _bestIndex = -1;
@@ -33,12 +31,13 @@ namespace Map {
                     if (DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].buildingID
                             < 5999
                         && !DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].unitID) {
-                        fromYPosition = (int)DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
-                                                    .playerInfo[_owner - 1]
-                                                    .wideValuesArray[i]
-                                                    .tile2];
-                        fromXPosition
+                        int fromYPosition
+                            = (int)DAT_ViewportRenderState::instance
+                                  .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
+                                          .playerInfo[_owner - 1]
+                                          .wideValuesArray[i]
+                                          .tile2];
+                        int fromXPosition
                             = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,

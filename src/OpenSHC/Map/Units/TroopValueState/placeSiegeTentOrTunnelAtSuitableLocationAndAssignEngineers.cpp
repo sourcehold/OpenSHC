@@ -1,6 +1,6 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -23,14 +23,14 @@ namespace Map {
         BOOLEnum TroopValueState::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers(
             int tribeID, MappersEnum commandBuildingType, uint strategicDistance, UnitInstructionType instruction)
         {
-            dword _targetTile;
             uint x;
             uint y;
             int const _targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            _targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAppropriateLocationForSiegeTent,
-                DAT_PathFindingState::ptr)(100, (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
-                (uint)(DAT_UnitsState::instance.units[_targetUnitID].y), (undefined4)((int)(tribeID)),
-                strategicDistance, DAT_TribesState::instance.tribes[tribeID].owner);
+            dword _targetTile
+                = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAppropriateLocationForSiegeTent,
+                    DAT_PathFindingState::ptr)(100, (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
+                    (uint)(DAT_UnitsState::instance.units[_targetUnitID].y), (undefined4)((int)(tribeID)),
+                    strategicDistance, DAT_TribesState::instance.tribes[tribeID].owner);
             if (!_targetTile
                 && (_targetTile
                     = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAppropriateLocationForSiegeTent,

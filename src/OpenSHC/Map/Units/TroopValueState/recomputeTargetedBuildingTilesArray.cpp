@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -19,18 +19,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005198C0
         void TroopValueState::recomputeTargetedBuildingTilesArray(int playerID)
         {
-            Unit* _pUnit;
-            int _arraySize;
-            int _unitID;
             DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray), '\0',
                 (void*)((int)(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray)));
             uint const _maxUnitCount = DAT_UnitsState::instance.maxUnitCount;
-            _unitID = 1;
+            int _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit = &DAT_UnitsState::instance.units[1];
-                _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
+                int _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
                 do {
                     if (_pUnit->logicalState == Map::Units::ULS_NORMAL && _pUnit->isSelectable_OR_matchTime
                         && _pUnit->owner == playerID && _pUnit->targetedBuildingTile

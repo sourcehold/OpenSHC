@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
-
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/WildlifeState.func.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 

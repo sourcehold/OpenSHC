@@ -1,7 +1,7 @@
-#include "OpenSHC/Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -22,11 +22,10 @@ namespace Map {
         void TroopValueState::buildRallyPointsFromSiegeUnits(int tribeID)
         {
             int _unitID;
-            BOOLEnum fullIDIsMinus1;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
-                    fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                    BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
                         DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
                     if (fullIDIsMinus1) {
                         if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16))
