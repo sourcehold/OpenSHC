@@ -24,18 +24,22 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051CA50
         void TroopValueState::collectArcherUnitsByLocation()
         {
-            BOOLEnum BVar1;
+            BOOLEnum isAIPlayerWithKeep;
             Unit* _pUnit;
             uint _unitID;
             int _index;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                2000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2b57c)));
+                sizeof(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2b57c), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2b57c)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                800, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.tileArray_0x2bd50)));
+                sizeof(DAT_TroopValueState::instance.attackInfo.tileArray_0x2bd50), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.tileArray_0x2bd50)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                400, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2c070)));
+                sizeof(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2c070), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.unitIDArray_0x2c070)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                800, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.uidArray_0x2c200)));
+                sizeof(DAT_TroopValueState::instance.attackInfo.uidArray_0x2c200), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.uidArray_0x2c200)));
             _unitID = 1;
             DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c = 0;
             DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520 = 0;
@@ -43,17 +47,16 @@ namespace Map {
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
-                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
-                                (int)_pUnit->owner),
-                            BVar1)
+                        && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
+                                Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)((int)_pUnit->owner),
+                            isAIPlayerWithKeep)
                         && (_pUnit->unitType == Map::Units::UT_E_ARCHER
                             || (_pUnit->unitType == Map::Units::UT_E_XBOW))) {
                         if ((DAT_TileMapState::instance.LogicLayer[_pUnit->tile] & 0x10000100U)) {
-                            int _tribeID = (int)_pUnit->tribeID;
+                            int const _tribeID = (int)_pUnit->tribeID;
                             _index = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520;
                             if (_index < 200
-                                && (!_tribeID
-                                    || (DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk == 0))) {
+                                && (!_tribeID || (DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk == 0))) {
                                 /*
                                   not rallying or part of tribe
                                  */

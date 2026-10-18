@@ -21,21 +21,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519690
         void TroopValueState::buildRallyPointsFromSiegeUnits(int tribeID)
         {
-            short* psVar1;
-            int sVar2;
-            BOOLEnum BVar3;
+            int _unitID;
+            BOOLEnum fullIDIsMinus1;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
-                    BVar3 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
-                    if (BVar3) {
-                        if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16)) || (DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x17)))
-                            && (sVar2 = (int)DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
-                                0 < DAT_UnitsState::instance.units[sVar2].stoneAmmunition)) {
+                    fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
+                    if (fullIDIsMinus1) {
+                        if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16))
+                                || (DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x17)))
+                            && (_unitID = (int)DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
+                                0 < DAT_UnitsState::instance.units[_unitID].stoneAmmunition)) {
                             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
-                                DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[sVar2].x),
-                                (int)(DAT_UnitsState::instance.units[sVar2].y));
+                                DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[_unitID].x),
+                                (int)(DAT_UnitsState::instance.units[_unitID].y));
                             DAT_TribesState::instance.tribes[tribeID]
                                 .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][0]
                                 = (short)DAT_PathFindingState::instance.ALG_ResultX;

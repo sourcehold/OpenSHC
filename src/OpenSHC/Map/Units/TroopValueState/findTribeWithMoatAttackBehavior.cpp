@@ -5,9 +5,9 @@
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -19,20 +19,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A920
         undefined4 TroopValueState::findTribeWithMoatAttackBehavior()
         {
-            BOOLEnum BVar1;
-            for (int iVar3 = 1; iVar3 < 1250; iVar3 = iVar3 + 1) {
-                if (DAT_TribesState::instance.tribes[iVar3].tribeState != 0) {
-                    BVar1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
-                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[iVar3].owner);
-                    if (BVar1 && DAT_TribesState::instance.tribes[iVar3].tribeBehaviorType == Map::Units::STBT_0x3f7) {
-                        this->x = (int)DAT_TribesState::instance.tribes[iVar3].targetX;
-                        this->y = (int)DAT_TribesState::instance.tribes[iVar3].targetY;
-                        DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = iVar3;
-                        return (undefined4)(1);
+            BOOLEnum fullIDIsMinus1;
+            for (int tribeID = 1; tribeID < 1250; tribeID = tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[tribeID].tribeState != 0) {
+                    fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner);
+                    if (fullIDIsMinus1
+                        && DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType == Map::Units::STBT_0x3f7) {
+                        this->x = (int)DAT_TribesState::instance.tribes[tribeID].targetX;
+                        this->y = (int)DAT_TribesState::instance.tribes[tribeID].targetY;
+                        DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = tribeID;
+                        return 1;
                     }
                 }
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

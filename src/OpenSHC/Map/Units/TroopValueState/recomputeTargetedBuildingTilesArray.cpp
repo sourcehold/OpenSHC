@@ -19,35 +19,36 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005198C0
         void TroopValueState::recomputeTargetedBuildingTilesArray(int playerID)
         {
-            Unit* psVar2;
-            int iVar2;
-            int iVar3;
+            Unit* _pUnit;
+            int _arraySize;
+            int _unitID;
             DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray)));
-            uint uVar1 = DAT_UnitsState::instance.maxUnitCount;
-            iVar3 = 1;
+                sizeof(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray)));
+            uint const _maxUnitCount = DAT_UnitsState::instance.maxUnitCount;
+            _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                psVar2 = &DAT_UnitsState::instance.units[1];
-                iVar2 = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
+                _pUnit = &DAT_UnitsState::instance.units[1];
+                _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
                 do {
-                    if (psVar2->logicalState == Map::Units::ULS_NORMAL && psVar2->isSelectable_OR_matchTime
-                        && psVar2->owner == playerID && psVar2->targetedBuildingTile
-                        && psVar2->unitType != Map::Units::UT_A_SLAVE) {
-                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[iVar2]
-                            = psVar2->targetedBuildingTile;
+                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && _pUnit->isSelectable_OR_matchTime
+                        && _pUnit->owner == playerID && _pUnit->targetedBuildingTile
+                        && _pUnit->unitType != Map::Units::UT_A_SLAVE) {
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[_arraySize]
+                            = _pUnit->targetedBuildingTile;
                         /*
                           Units.targetBuildingTile
                          */
-                        iVar2 = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
-                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = iVar2;
-                        if (4000 <= iVar2) {
+                        _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = _arraySize;
+                        if (4000 <= _arraySize) {
                             break;
                         }
                     }
-                    iVar3 = iVar3 + 1;
-                    psVar2 = psVar2 + 1;
-                } while (iVar3 < (int)uVar1);
+                    _unitID = _unitID + 1;
+                    _pUnit = _pUnit + 1;
+                } while (_unitID < (int)_maxUnitCount);
             }
         }
 

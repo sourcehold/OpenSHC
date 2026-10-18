@@ -20,14 +20,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00520450
         void TroopValueState::updateInProgressAttackWave(int attackID)
         {
-            int* piVar1;
+            int* _pAttackWaveTicker;
             int tribeSizeSumLimit;
-            BOOLEnum BVar2;
-            int bVar3;
+            BOOLEnum isAttackMostlyAlive;
+            BOOLEnum isMission39;
             int _playerID;
-            BVar2 = MACRO_CALL_MEMBER(
+            isAttackMostlyAlive = MACRO_CALL_MEMBER(
                 Map::Units::TroopValueState_Func::isLessThanPercentageOfTribesInAttackDying, this)(attackID, (int)(50));
-            if (BVar2 && !DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
+            if (isAttackMostlyAlive && !DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
             }
             if (!DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed) {
@@ -60,16 +60,18 @@ namespace Map {
                         Map::Units::STBT_0x3fb, Map::Units::STBT_1, 5, 0x1e);
                 }
             }
-            piVar1 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + attackID;
-            *piVar1 = *piVar1 + 1;
+            // The pointer stays: indexing attackWaveTicker[attackID] directly here took the match from
+            // 84.1% to 61.4%, so the original really held the element's address.
+            _pAttackWaveTicker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + attackID;
+            *_pAttackWaveTicker = *_pAttackWaveTicker + 1;
             if (DAT_AttackInfoDefinedData::instance
                     .AttackWaveDurationPerAttacker[DAT_TroopValueState::instance.attackInfo.attacker]
                 <= DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID]) {
-                bVar3 = DAT_GameCore::instance.missionNumber1to20 == 39;
+                isMission39 = DAT_GameCore::instance.missionNumber1to20 == 39;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID] = 10000;
                 DAT_TroopValueState::instance.attackInfo.value3Array01[attackID] = 3;
                 DAT_TroopValueState::instance.attackInfo.value10 = 0;
-                if ((bVar3) && (DAT_TroopValueState::instance.attackInfo.attacker == 4)) {
+                if ((isMission39) && (DAT_TroopValueState::instance.attackInfo.attacker == 4)) {
                     /*
                       "we are the macemen"
                      */

@@ -22,117 +22,150 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518C50
         void TroopValueState::renderAttackInfoDebugOverlay(int x, int y, int width, int height)
         {
-            char local_3ec[1000];
-            uint local_4 = MSVC_SecurityCookie::instance ^ (uint)local_3ec;
-            int xParam = x + 2;
+            char textBuffer[1000];
+            uint securityCookie = MSVC_SecurityCookie::instance ^ (uint)textBuffer;
+            int const xParam = x + 2;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 "Biggest zone: ", xParam, y, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_TroopValueState::instance.attackInfo.biggestZone, xParam, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            int iVar2 = xParam + 0xa;
+            int const xParam2 = xParam + 0xa;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "Start zone: ", iVar2, y, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+                "Start zone: ", xParam2, y, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.startZone, iVar2, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            int iVar1 = y + 0x10;
+                DAT_TroopValueState::instance.attackInfo.startZone, xParam2, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            int yParam = y + 0x10;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "Scale zone: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+                "Scale zone: ", xParam, yParam, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.scaleZone, xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
+                DAT_TroopValueState::instance.attackInfo.scaleZone, xParam, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
                 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "keep POS: ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+                "keep POS: ", xParam2, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .keep.yEntry,
-                iVar2, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            iVar1 = y + 0x20;
+                xParam2, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            yParam = y + 0x20;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "nof fpoints: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+                "nof fpoints: ", xParam, yParam, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.nof_fpoints, xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
+                DAT_TroopValueState::instance.attackInfo.nof_fpoints, xParam, yParam, Text::TTA_LEFT, 0x80ff, 0x12,
+                TRUE, 0);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                "inv count: ", xParam2, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
+                DAT_TroopValueState::instance.attackInfo.inv_count, xParam2, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
                 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "inv count: ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.inv_count, iVar2, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
-                0);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "nof tribes: ", xParam + 0x14, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+                "nof tribes: ", xParam + 0x14, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 (int)(char)DAT_TroopValueState::instance.attackInfo
                     .nof_tribes[DAT_TroopValueState::instance.attackInfo.inv_count],
-                xParam + 0x14, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            iVar1 = y + 0x30;
+                xParam + 0x14, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            yParam = y + 0x30;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "Start con: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+                "Start con: ", xParam, yParam, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.startCon, xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
+                DAT_TroopValueState::instance.attackInfo.startCon, xParam, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
                 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "Keep con: ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+                "Keep con: ", xParam2, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.keepCon, iVar2, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "cas dis: ", xParam + 0x14, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.casDis, xParam + 0x14, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
+                DAT_TroopValueState::instance.attackInfo.keepCon, xParam2, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
                 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "zone size: ", xParam + 0x1e, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+                "cas dis: ", xParam + 0x14, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                DAT_TroopValueState::instance.attackInfo.zoneSize, xParam + 0x1e, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
-                0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Hack:%d(%d)(%d)  Scale:%d(%d)(%d) Stone:%d",
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].hack1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].hack2,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].hack3,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].scale1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].scale2,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].scale3,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].stone1);
+                DAT_TroopValueState::instance.attackInfo.casDis, xParam + 0x14, yParam, Text::TTA_LEFT, 0x80ff, 0x12,
+                TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x40, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Town:%d(%d)  Gate:%d(%d)  Moat:%d(%d) Lord:%d(%d)",
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].town1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].town3,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].gate1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].gate2,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].moat1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].moat3,
+                "zone size: ", xParam + 0x1e, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
+                DAT_TroopValueState::instance.attackInfo.zoneSize, xParam + 0x1e, yParam, Text::TTA_LEFT, 0x80ff, 0x12,
+                TRUE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Hack:%d(%d)(%d)  Scale:%d(%d)(%d) Stone:%d",
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .hack1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .hack2,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .hack3,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .scale1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .scale2,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .scale3,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .stone1);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                textBuffer, xParam, y + 0x40, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Town:%d(%d)  Gate:%d(%d)  Moat:%d(%d) Lord:%d(%d)",
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .town1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .town3,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .gate1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .gate2,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .moat1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .moat3,
                 DAT_TroopValueState::instance.attackInfo.lord1, DAT_TroopValueState::instance.attackInfo.lord2);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x50, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "High:%d(%d)(%d)  Arch:%d(%d)(%d)  People:%d(%d)(%d)",
+                textBuffer, xParam, y + 0x50, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "High:%d(%d)(%d)  Arch:%d(%d)(%d)  People:%d(%d)(%d)",
                 DAT_TroopValueState::instance.attackInfo.high1, DAT_TroopValueState::instance.attackInfo.high2,
                 DAT_TroopValueState::instance.attackInfo.high3, DAT_TroopValueState::instance.attackInfo.arch1,
                 DAT_TroopValueState::instance.attackInfo.arch2, DAT_TroopValueState::instance.attackInfo.arch3,
                 DAT_TroopValueState::instance.attackInfo.people1, DAT_TroopValueState::instance.attackInfo.people2,
                 DAT_TroopValueState::instance.attackInfo.people3);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x60, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Wide:%d(%d)(%d)",
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].wide1,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].wide2,
-                DAT_TroopValueState::instance.attackInfo.playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1].wide3);
+                textBuffer, xParam, y + 0x60, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Wide:%d(%d)(%d)",
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .wide1,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .wide2,
+                DAT_TroopValueState::instance.attackInfo
+                    .playerInfo[DAT_TroopValueState::instance.attackInfo.attacker - 1]
+                    .wide3);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x70, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Archer points:%d,  Next:%d",
+                textBuffer, xParam, y + 0x70, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Archer points:%d,  Next:%d",
                 DAT_TroopValueState::instance.attackInfo.archerPoints,
                 DAT_TroopValueState::instance.attackInfo.archerPointsNext);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x80, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Support points:%d,  Next:%d",
+                textBuffer, xParam, y + 0x80, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Support points:%d,  Next:%d",
                 DAT_TroopValueState::instance.attackInfo.supportPoints,
                 DAT_TroopValueState::instance.attackInfo.supportPointsNext);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0x90, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Tent points:%d,  Next:%d",
+                textBuffer, xParam, y + 0x90, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Tent points:%d,  Next:%d",
                 DAT_TroopValueState::instance.attackInfo.tentPoints,
                 DAT_TroopValueState::instance.attackInfo.tentPointsNext);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0xa0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "ai troops: A:%d X:%d S:%d P:%d M:%d S:%d K:%d L:%d E:%d T:%d",
+                textBuffer, xParam, y + 0xa0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "ai troops: A:%d X:%d S:%d P:%d M:%d S:%d K:%d L:%d E:%d T:%d",
                 DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_A,
                 DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_X,
                 DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_S,
@@ -144,14 +177,14 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_E,
                 DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_T);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0xb0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "killed:%d lost:%d AI troops:%d",
+                textBuffer, xParam, y + 0xb0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "killed:%d lost:%d AI troops:%d",
                 DAT_GameState::instance.playerDataArray[1].troopsKilled,
                 DAT_GameState::instance.playerDataArray[1].troopsLost,
                 DAT_TroopValueState::instance.attackInfo.aiTroops);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0xc0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-            MACRO_CALL(OS_Func::_sprintf)(local_3ec, "Points: %d, %d, %d, %d, %d, %d, %d, %d, %d ",
+                textBuffer, xParam, y + 0xc0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+            MACRO_CALL(OS_Func::_sprintf)(textBuffer, "Points: %d, %d, %d, %d, %d, %d, %d, %d, %d ",
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[0],
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[1],
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[2],
@@ -162,7 +195,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[7],
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[8]);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                local_3ec, xParam, y + 0xd0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+                textBuffer, xParam, y + 0xd0, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             ;
         }
 

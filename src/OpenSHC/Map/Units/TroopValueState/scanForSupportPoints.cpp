@@ -18,8 +18,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F4B0
         void TroopValueState::scanForSupportPoints()
         {
-            BOOLEnum BVar2;
-            int iVar3;
+            BOOLEnum hasSupportZoneFlag;
+            int _existingPointIndex;
             DAT_TroopValueState::instance.attackInfo.supportPoints = 0;
             for (int tile = 0; tile < 80400; tile = tile + 1) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '') {
@@ -33,25 +33,27 @@ namespace Map {
                                      [DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + tile]
                                 & 3)) {
                             uint x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                            BVar2 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
-                                DAT_PathFindingState::ptr)(8, x, y, 0x40);
-                            if (!BVar2) {
+                            hasSupportZoneFlag
+                                = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
+                                    DAT_PathFindingState::ptr)(8, x, y, 0x40);
+                            if (!hasSupportZoneFlag) {
                                 DAT_TileMapState::instance.AIInfoLayer[tile]
                                     = DAT_TileMapState::instance.AIInfoLayer[tile] | 0x40;
-                                iVar3 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getSupportPointIndex, this)(
-                                    tile);
-                                int iVar1 = DAT_TroopValueState::instance.attackInfo.supportPointsNext;
-                                if (iVar3) {
-                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar3].someCounter
-                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                _existingPointIndex = MACRO_CALL_MEMBER(
+                                    Map::Units::TroopValueState_Func::getSupportPointIndex, this)(tile);
+                                int const _nextPointIndex = DAT_TroopValueState::instance.attackInfo.supportPointsNext;
+                                if (_existingPointIndex) {
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[_existingPointIndex]
+                                        .someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 } else {
                                     DAT_TroopValueState::instance.attackInfo
                                         .supportPointsArray[DAT_TroopValueState::instance.attackInfo.supportPointsNext]
                                         .x = x;
-                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].y = y;
-                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].tile = tile;
-                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar1].someCounter
-                                        = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[_nextPointIndex].y = y;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[_nextPointIndex].tile
+                                        = tile;
+                                    DAT_TroopValueState::instance.attackInfo.supportPointsArray[_nextPointIndex]
+                                        .someCounter = DAT_TroopValueState::instance.attackInfo.someCounter1;
                                 }
                                 DAT_TroopValueState::instance.attackInfo.supportPoints
                                     = DAT_TroopValueState::instance.attackInfo.supportPoints + 1;

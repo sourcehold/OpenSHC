@@ -15,44 +15,34 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518180
         void TroopValueState::initializeAttackWaveSlot(int param_1, int param_2)
         {
-            int iVar1;
+            int _randomSignpost;
             DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.someIntArray2[param_1 + -1] = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                10, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore + param_1)));
+                sizeof(DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1]), '\0',
+                (void*)((int)(DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore + param_1)));
             DAT_TroopValueState::instance.attackInfo.aiTickPhase = 0;
             DAT_TroopValueState::instance.attackInfo.counter = 0x10;
             DAT_TroopValueState::instance.attackInfo.archerPointCountPrev = 0xffffffff;
             DAT_TroopValueState::instance.attackInfo.delayedWaveAssignmentCount = 0;
             DAT_TroopValueState::instance.attackInfo.buildingDamageEventCount = 0;
             DAT_TroopValueState::instance.attackInfo.enemyUnitsInsideCastleCount = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[0].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[0].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[1].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[1].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[2].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[2].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[3].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[3].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[4].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[4].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[5].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[5].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[6].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[6].field_0x3ea8 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[7].field22_0x3ea4 = 0;
-            DAT_TroopValueState::instance.attackInfo.playerInfo[7].field_0x3ea8 = 0;
-            iVar1 = MACRO_CALL_MEMBER(
+            for (int _player = 0; _player < 8; ++_player) {
+                DAT_TroopValueState::instance.attackInfo.playerInfo[_player].field22_0x3ea4 = 0;
+                DAT_TroopValueState::instance.attackInfo.playerInfo[_player].field_0x3ea8 = 0;
+            }
+            _randomSignpost = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry, DAT_GameState::ptr)();
-            int iVar2 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
-            if ((param_2 <= iVar2) && (param_2)) {
+            int _activeSignposts
+                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
+            if ((param_2 <= _activeSignposts) && (param_2)) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = param_2 + -1;
                 DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = param_2 + -1;
                 return;
             }
-            DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = iVar1;
-            DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = iVar1;
+            DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = _randomSignpost;
+            DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = _randomSignpost;
         }
 
     }

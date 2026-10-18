@@ -17,22 +17,21 @@ namespace Map {
         int TroopValueState::findNearestDiggableMoatPoint(int param_1)
         {
             BOOLEnum tile;
-            int iVar1;
+            int result;
             tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
             if ((int)tile <= -1) {
                 return 0;
             }
-            iVar1 = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
-                (uint)(DAT_UnitsState::instance.units[param_1].x),
-                (uint)(DAT_UnitsState::instance.units[param_1].y));
-            if (iVar1 <= 0) {
+            result = MACRO_CALL_MEMBER(Map::TileMapState_Func::setXYBasedOnMoatID, DAT_TileMapState::ptr)(tile, 2,
+                (uint)(DAT_UnitsState::instance.units[param_1].x), (uint)(DAT_UnitsState::instance.units[param_1].y));
+            if (result <= 0) {
                 return 0;
             }
             this->x = DAT_TileMapState::instance.ALG_MoatXResult;
             this->y = DAT_TileMapState::instance.ALG_MoatYResult;
             this->tile = DAT_TileMapState::instance.someMoatTile;
-            return iVar1;
+            return result;
         }
 
     }

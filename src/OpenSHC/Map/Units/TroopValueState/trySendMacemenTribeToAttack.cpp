@@ -6,6 +6,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -17,6 +18,8 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using WindowsHelper::Enums::BOOLEnum;
+
         using Game::GameMode2;
         using Map::Units::Behavior::UnitStanceEnum;
         using Map::Units::Instructions::UnitMatchSpeedEnum;
@@ -25,15 +28,17 @@ namespace Map {
         void TroopValueState::trySendMacemenTribeToAttack()
         {
             int _unitID;
-            int _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
+            int const _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
                 && 4 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                bool bVar1 = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
-                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
-                int _macemen = DAT_TroopValueState::instance.attackInfo.macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
+                BOOLEnum const isNotCampaignMission = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
+                DAT_TroopValueState::instance.attackInfo.macemenTribeCount
+                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
+                int _macemen = DAT_TroopValueState::instance.attackInfo
+                                   .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                if ((bVar1) || (0xf <= DAT_GameCore::instance.missionNumber1to20)) {
+                if ((isNotCampaignMission) || (0xf <= DAT_GameCore::instance.missionNumber1to20)) {
                     _unitID = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(_playerID);
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(

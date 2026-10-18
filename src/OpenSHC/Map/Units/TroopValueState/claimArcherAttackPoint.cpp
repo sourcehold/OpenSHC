@@ -19,29 +19,35 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AFF0
         int TroopValueState::claimArcherAttackPoint(int param_1)
         {
-            int iVar3;
-            int _unitID = (int)DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
-            iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(
-                param_1);
-            if (!iVar3) {
-                iVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
-                    DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
-                    (uint)(DAT_UnitsState::instance.units[_unitID].y), param_1);
-                if (iVar3) {
-                    short sVar1 = DAT_TribesState::instance.tribes[param_1].archerRelated;
-                    int iVar2 = DAT_TribesState::instance.tribes[param_1].uid;
-                    DAT_TribesState::instance.tribes[param_1].archerRelated2 = sVar1;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].buildingID = 0;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[sVar1 * 2 + 0x3ea].unitID = 0;
-                    uint y1 = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].unitID;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].unitID = iVar2;
-                    uint x1 = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3e9].buildingID;
-                    DAT_TribesState::instance.tribes[param_1].archerRelated = (short)iVar3;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3ea].buildingID = param_1;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar3 * 2 + 0x3eb].tile = 3;
+            int _pointIndex;
+            int const _unitID = (int)DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            _pointIndex = MACRO_CALL_MEMBER(
+                Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(param_1);
+            if (!_pointIndex) {
+                _pointIndex
+                    = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
+                        DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
+                        (uint)(DAT_UnitsState::instance.units[_unitID].y), param_1);
+                if (_pointIndex) {
+                    short const _archerRelated = DAT_TribesState::instance.tribes[param_1].archerRelated;
+                    int const _tribeUID = DAT_TribesState::instance.tribes[param_1].uid;
+                    DAT_TribesState::instance.tribes[param_1].archerRelated2 = _archerRelated;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_archerRelated * 2 + 0x3ea].buildingID
+                        = 0;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_archerRelated * 2 + 0x3ea].unitID = 0;
+                    uint const y1
+                        = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3e9].unitID;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3ea].unitID
+                        = _tribeUID;
+                    uint x1
+                        = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3e9].buildingID;
+                    DAT_TribesState::instance.tribes[param_1].archerRelated = (short)_pointIndex;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3ea].buildingID
+                        = param_1;
+                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3eb].tile = 3;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                         param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
-                    return iVar3;
+                    return _pointIndex;
                 }
             }
             return 0;

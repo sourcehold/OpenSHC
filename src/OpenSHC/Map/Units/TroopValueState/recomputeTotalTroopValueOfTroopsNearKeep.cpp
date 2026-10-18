@@ -20,31 +20,23 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FA70
         void TroopValueState::recomputeTotalTroopValueOfTroopsNearKeep()
         {
-            int* piVar1;
-            UnitTypeShort UVar2;
+            UnitTypeShort _troopType;
             int _troopValue;
-            int iVar3;
+            int _unitID;
             Unit* ptrUnit;
             int _playerID;
-            iVar3 = 1;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[0] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[1] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[2] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[3] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[4] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[5] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[6] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[7] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[8] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[9] = 0;
+            _unitID = 1;
+            for (int _player = 0; _player < 10; ++_player) {
+                DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[_player] = 0;
+            }
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 ptrUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (ptrUnit->logicalState != Map::Units::ULS_INVISIBLE && !ptrUnit->dying
                         && ptrUnit->isSelectable_OR_matchTime
-                        && (UVar2 = ptrUnit->unitType,
-                            UVar2 != Map::Units::UT_E_ENGINEER && (UVar2 != Map::Units::UT_TUNNELER))
-                        && UVar2 != Map::Units::UT_E_LADDER) {
+                        && (_troopType = ptrUnit->unitType,
+                            _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
+                        && _troopType != Map::Units::UT_E_LADDER) {
                         _playerID = ptrUnit->owner;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(
@@ -54,14 +46,15 @@ namespace Map {
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh <= 40) {
                             _troopValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                                 this)((Map::Units::UnitType)(short)ptrUnit->unitType);
-                            piVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep
-                                + _playerID;
-                            *piVar1 = *piVar1 + _troopValue;
+                            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[_playerID]
+                                = DAT_TroopValueState::instance.attackInfo
+                                      .playerTotalTroopValueOfTroopsNearKeep[_playerID]
+                                + _troopValue;
                         }
                     }
-                    iVar3 = iVar3 + 1;
+                    _unitID = _unitID + 1;
                     ptrUnit = ptrUnit + 1;
-                } while (iVar3 < DAT_UnitsState::instance.maxUnitCount);
+                } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
         }
 

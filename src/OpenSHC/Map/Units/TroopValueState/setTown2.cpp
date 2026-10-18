@@ -14,8 +14,10 @@ namespace Map {
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2; i = i + 1) {
-                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[i].unitID == 0 || param_1) {
-                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 + 1;
+                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[i].unitID == 0
+                        || param_1) {
+                        DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3
+                            = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 + 1;
                     }
                 }
             }

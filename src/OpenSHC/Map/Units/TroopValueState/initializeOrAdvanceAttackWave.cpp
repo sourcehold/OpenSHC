@@ -42,10 +42,11 @@ namespace Map {
             }
             if ((int)(char)DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1]
                 >= (char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] + -5) {
-                DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
+                DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
+                    = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
                 if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
                     >= DAT_AttackInfoDefinedData::instance
-                           .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
+                        .AIAttackWaveAdvanceDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
                     if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
                         DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;

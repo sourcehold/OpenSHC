@@ -18,39 +18,32 @@ namespace Map {
         void TroopValueState::recountTotalTroopValue()
         {
             int _troopTypeValue;
-            Unit* pUVar2;
-            int iVar2;
+            Unit* _pUnit;
+            int remainingUnits;
             int _playerID;
             UnitTypeShort _troopType;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[0] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[1] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[2] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[3] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[4] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[5] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[6] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[7] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[8] = 0;
-            DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[9] = 0;
+            for (int _player = 0; _player < 10; ++_player) {
+                DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_player] = 0;
+            }
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                pUVar2 = &DAT_UnitsState::instance.units[1];
-                iVar2 = DAT_UnitsState::instance.maxUnitCount - 1;
+                _pUnit = &DAT_UnitsState::instance.units[1];
+                remainingUnits = DAT_UnitsState::instance.maxUnitCount - 1;
                 do {
-                    if (pUVar2->logicalState != Map::Units::ULS_INVISIBLE && !pUVar2->dying
-                        && pUVar2->isSelectable_OR_matchTime
-                        && (_troopType = pUVar2->unitType,
+                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE && !_pUnit->dying
+                        && _pUnit->isSelectable_OR_matchTime
+                        && (_troopType = _pUnit->unitType,
                             _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
                         && _troopType != Map::Units::UT_E_LADDER) {
                         _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                             DAT_TroopValueState::ptr)((Map::Units::UnitType)(short)_troopType);
-                        _playerID = pUVar2->owner;
+                        _playerID = _pUnit->owner;
                         DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
                             = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
                             + _troopTypeValue;
                     }
-                    pUVar2 = pUVar2 + 1;
-                    iVar2 = iVar2 + -1;
-                } while (iVar2);
+                    _pUnit = _pUnit + 1;
+                    remainingUnits = remainingUnits + -1;
+                } while (remainingUnits);
             }
         }
 

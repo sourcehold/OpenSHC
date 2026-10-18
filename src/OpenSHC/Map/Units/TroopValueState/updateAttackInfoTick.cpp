@@ -23,7 +23,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FE80
         void TroopValueState::updateAttackInfoTick()
         {
-            BOOLEnum BVar1;
+            BOOLEnum canMoveFromKeep;
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID = 1;
@@ -64,9 +64,9 @@ namespace Map {
                     = DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount + 1;
                 DAT_TroopValueState::instance.attackInfo.aiTickPhase = 2;
             }
-            BVar1 = MACRO_CALL_MEMBER(
+            canMoveFromKeep = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::unitsCanMoveFromKeepOfPlayerToAnotherArea, DAT_GameState::ptr)(1);
-            if ((BVar1) && (!DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag)) {
+            if ((canMoveFromKeep) && (!DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag)) {
                 DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::commandUnitsToMoveToKeep, this)();
             }

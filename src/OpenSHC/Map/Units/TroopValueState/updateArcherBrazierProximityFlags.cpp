@@ -20,29 +20,29 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051C2D0
         void TroopValueState::updateArcherBrazierProximityFlags()
         {
-            BOOLEnum BVar1;
-            int iVar2;
-            Unit* pUVar2;
-            int iVar3;
-            iVar3 = 1;
+            BOOLEnum isAIPlayerWithKeep;
+            int _isBrazierNearby;
+            Unit* _pUnit;
+            int _unitID;
+            _unitID = 1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                pUVar2 = &DAT_UnitsState::instance.units[1];
+                _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
-                    if (pUVar2->logicalState != Map::Units::ULS_INVISIBLE
-                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
-                                (int)pUVar2->owner),
-                            BVar1)
-                        && (pUVar2->unitType == Map::Units::UT_E_ARCHER
-                            || (pUVar2->unitType == Map::Units::UT_A_ARCHER))
-                        && !pUVar2->dying) {
-                        iVar2 = MACRO_CALL_MEMBER(
-                            Map::Entities::EntityState_Func::isBrazierNearby, DAT_EntityState::ptr)((int)pUVar2->x,
-                            (int)(pUVar2->y), (int)(pUVar2->buildingHeight + pUVar2->terrainOrClimbHeight));
-                        pUVar2->field297_0x40d = iVar2 != 0;
+                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
+                        && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
+                                Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)((int)_pUnit->owner),
+                            isAIPlayerWithKeep)
+                        && (_pUnit->unitType == Map::Units::UT_E_ARCHER
+                            || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
+                        && !_pUnit->dying) {
+                        _isBrazierNearby = MACRO_CALL_MEMBER(
+                            Map::Entities::EntityState_Func::isBrazierNearby, DAT_EntityState::ptr)((int)_pUnit->x,
+                            (int)(_pUnit->y), (int)(_pUnit->buildingHeight + _pUnit->terrainOrClimbHeight));
+                        _pUnit->field297_0x40d = _isBrazierNearby != 0;
                     }
-                    iVar3 = iVar3 + 1;
-                    pUVar2 = pUVar2 + 1;
-                } while (iVar3 < DAT_UnitsState::instance.maxUnitCount);
+                    _unitID = _unitID + 1;
+                    _pUnit = _pUnit + 1;
+                } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
         }
 

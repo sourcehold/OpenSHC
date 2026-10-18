@@ -19,10 +19,9 @@ namespace Map {
         void TroopValueState::sortAttackInfoTribeIDArrayBasedOn(
             int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier)
         {
-            Tribe* psVar1;
-            int* piVar2;
+            int* _pPriority;
             AI::Tribes::AITribeTypeInt const* _tribeTypePriority;
-            int iVar3;
+            int _sumIndex;
             int _currentTribeType;
             int _nextValue;
             int _lookupValue3;
@@ -103,22 +102,23 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i] = 0xc;
             }
             _index = 0;
-            _tribeID = 1;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
-            psVar1 = &DAT_TribesState::instance.tribes[1];
-            do {
-                if (psVar1->tribeState && psVar1->tribeState != 3
-                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[psVar1->owner] == -1
-                    && psVar1->attackWave == attackWave
-                    && psVar1->attackInfo_someCounter1 != DAT_TroopValueState::instance.attackInfo.someCounter1
-                    && psVar1->tribeBehaviorType != 1040 && psVar1->tribeBehaviorType != 1045) {
+            for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
+                    && DAT_GameSynchronyState::instance
+                            .currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner]
+                        == -1
+                    && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackWave
+                    && DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1
+                        != DAT_TroopValueState::instance.attackInfo.someCounter1
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType != 1040
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType != 1045) {
                     DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index] = _tribeID;
                     _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + 1;
                     DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = _index;
                 }
-                psVar1 = psVar1 + 1;
-                _tribeID = _tribeID + 1;
-            } while ((int)psVar1 < 0x17623a0);
+            }
             if ((0 < shrinkSize) && (0 < tribeSizeSumLimit)) {
                 do {
                     /*
@@ -126,68 +126,71 @@ namespace Map {
                      */
                     _index2 = 0;
                     _swapped = 0;
-                    if (_index + -1 <= 0)
+                    if (_index + -1 <= 0) {
                         break;
+                    }
                     do {
                         _current = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2];
                         _next = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2 + 1];
                         _currentTribeType = (int)(short)DAT_TribesState::instance.tribes[_current].tribeType;
                         _nextTribeType = (int)(short)DAT_TribesState::instance.tribes[_next].tribeType;
                         _currentValue = 0;
-                        piVar2 = (int*)(_tribeTypePriority + 2);
+                        _pPriority = (int*)(_tribeTypePriority + 2);
                         do {
-                            if (piVar2[-2] == _currentTribeType)
+                            if (_pPriority[-2] == _currentTribeType) {
                                 break;
-                            if (piVar2[-1] == _currentTribeType) {
+                            }
+                            if (_pPriority[-1] == _currentTribeType) {
                                 _currentValue = _currentValue + 1;
                                 break;
                             }
-                            if (*piVar2 == _currentTribeType) {
+                            if (*_pPriority == _currentTribeType) {
                                 _currentValue = _currentValue + 2;
                                 break;
                             }
-                            if (piVar2[1] == _currentTribeType) {
+                            if (_pPriority[1] == _currentTribeType) {
                                 _currentValue = _currentValue + 3;
                                 break;
                             }
-                            if (piVar2[2] == _currentTribeType) {
+                            if (_pPriority[2] == _currentTribeType) {
                                 _currentValue = _currentValue + 4;
                                 break;
                             }
-                            if (piVar2[3] == _currentTribeType) {
+                            if (_pPriority[3] == _currentTribeType) {
                                 _currentValue = _currentValue + 5;
                                 break;
                             }
                             _currentValue = _currentValue + 6;
-                            piVar2 = piVar2 + 6;
+                            _pPriority = _pPriority + 6;
                         } while (_currentValue < 12);
                         _nextValue = 0;
-                        piVar2 = (int*)(_tribeTypePriority + 2);
+                        _pPriority = (int*)(_tribeTypePriority + 2);
                         do {
-                            if (piVar2[-2] == _nextTribeType)
+                            if (_pPriority[-2] == _nextTribeType) {
                                 break;
-                            if (piVar2[-1] == _nextTribeType) {
+                            }
+                            if (_pPriority[-1] == _nextTribeType) {
                                 _nextValue = _nextValue + 1;
                                 break;
                             }
-                            if (*piVar2 == _nextTribeType) {
+                            if (*_pPriority == _nextTribeType) {
                                 _nextValue = _nextValue + 2;
                                 break;
                             }
-                            if (piVar2[1] == _nextTribeType) {
+                            if (_pPriority[1] == _nextTribeType) {
                                 _nextValue = _nextValue + 3;
                                 break;
                             }
-                            if (piVar2[2] == _nextTribeType) {
+                            if (_pPriority[2] == _nextTribeType) {
                                 _nextValue = _nextValue + 4;
                                 break;
                             }
-                            if (piVar2[3] == _nextTribeType) {
+                            if (_pPriority[3] == _nextTribeType) {
                                 _nextValue = _nextValue + 5;
                                 break;
                             }
                             _nextValue = _nextValue + 6;
-                            piVar2 = piVar2 + 6;
+                            _pPriority = _pPriority + 6;
                         } while (_nextValue < 0xc);
                         if (_nextValue < _currentValue) {
                             _swapped = 1;
@@ -205,32 +208,33 @@ namespace Map {
                                          .tribes[DAT_TroopValueState::instance.attackInfo.tribeIDArray[_counter2]]
                                          .tribeType;
                         _lookupValue3 = 0;
-                        piVar2 = (int*)(_tribeTypePriority + 2);
+                        _pPriority = (int*)(_tribeTypePriority + 2);
                         do {
-                            if (piVar2[-2] == _tribeType)
+                            if (_pPriority[-2] == _tribeType) {
                                 break;
-                            if (piVar2[-1] == _tribeType) {
+                            }
+                            if (_pPriority[-1] == _tribeType) {
                                 _lookupValue3 = _lookupValue3 + 1;
                                 break;
                             }
-                            if (*piVar2 == _tribeType) {
+                            if (*_pPriority == _tribeType) {
                                 _lookupValue3 = _lookupValue3 + 2;
                                 break;
                             }
-                            if (piVar2[1] == _tribeType) {
+                            if (_pPriority[1] == _tribeType) {
                                 _lookupValue3 = _lookupValue3 + 3;
                                 break;
                             }
-                            if (piVar2[2] == _tribeType) {
+                            if (_pPriority[2] == _tribeType) {
                                 _lookupValue3 = _lookupValue3 + 4;
                                 break;
                             }
-                            if (piVar2[3] == _tribeType) {
+                            if (_pPriority[3] == _tribeType) {
                                 _lookupValue3 = _lookupValue3 + 5;
                                 break;
                             }
                             _lookupValue3 = _lookupValue3 + 6;
-                            piVar2 = piVar2 + 6;
+                            _pPriority = _pPriority + 6;
                         } while (_lookupValue3 < 0xc);
                         DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_counter2]
                             = _lookupValue3;
@@ -239,17 +243,17 @@ namespace Map {
                     } while (_counter2 < _index);
                 }
                 _tribeSizeSum = 0;
-                iVar3 = 0;
+                _sumIndex = 0;
                 if (0 < _index) {
                     do {
-                        int iVar1 = DAT_TroopValueState::instance.attackInfo.tribeIDArray[iVar3];
+                        int const _sumTribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_sumIndex];
                         if (tribeSizeSumLimit < _tribeSizeSum) {
-                            DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[iVar3] = 0xc;
+                            DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_sumIndex] = 0xc;
                             _index = _index;
                         }
-                        iVar3 = iVar3 + 1;
-                        _tribeSizeSum = _tribeSizeSum + DAT_TribesState::instance.tribes[iVar1].size;
-                    } while (iVar3 < _index);
+                        _sumIndex = _sumIndex + 1;
+                        _tribeSizeSum = _tribeSizeSum + DAT_TribesState::instance.tribes[_sumTribeID].size;
+                    } while (_sumIndex < _index);
                 }
                 if (shrinkSize < _index) {
                     _index = shrinkSize;

@@ -27,7 +27,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BF70
         undefined4 TroopValueState::giveLightPitchInstructionToUnitClosestToPitch(int tile)
         {
-            BOOLEnum BVar1;
+            BOOLEnum isAIPlayerWithKeep;
             int _shot;
             Unit* _pUnit;
             int _unitID;
@@ -44,17 +44,17 @@ namespace Map {
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
-                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
-                                (int)_pUnit->owner),
-                            BVar1)
+                        && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
+                                Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)((int)_pUnit->owner),
+                            isAIPlayerWithKeep)
                         && (_pUnit->unitType == Map::Units::UT_E_ARCHER
                             || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
                         && !_pUnit->dying && _pUnit->field297_0x40d != false
                         && _pUnit->targetingType != Map::Units::UIT_LIGHT_PITCH) {
-                        int _ditchY = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].y;
-                        int _ditchX = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].x;
-                        int _unitY = _ditchY - _pUnit->y;
-                        int _unitX = _ditchX - _pUnit->x;
+                        int const _ditchY = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].y;
+                        int const _ditchX = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].x;
+                        int const _unitY = _ditchY - _pUnit->y;
+                        int const _unitX = _ditchX - _pUnit->x;
                         int _distancePyth = _unitX * _unitX + _unitY * _unitY;
                         if (_distancePyth <= 2500
                             && (_shot = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::arrowShootingRelated,
@@ -74,21 +74,19 @@ namespace Map {
                 } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
             if (!_minUnitID) {
-                return (undefined4)(0);
+                return 0;
             }
             DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroX
                 = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroY
                 = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
-            _height = DAT_TileMapState::instance
-                          .HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
+            _height = DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
             DAT_UnitsState::instance.units[_minUnitID].targetID_OR_targetBuildingID = (short)_ditchID;
             _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetZ = (ushort)_height;
             DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
             DAT_UnitsState::instance.units[_minUnitID]
-                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
-                = _ditchUID;
+                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID = _ditchUID;
             DAT_UnitsState::instance.units[_minUnitID].field253_0x3c5 = 0x22;
             DAT_UnitsState::instance.units[_minUnitID].targetingType = Map::Units::UIT_LIGHT_PITCH;
             DAT_UnitsState::instance.units[_minUnitID].field283_0x3f8 = 0;
@@ -96,7 +94,7 @@ namespace Map {
                 DAT_UnitsState::ptr)(_minUnitID);
             DAT_UnitsState::instance.units[_minUnitID].state.generic = Map::Units::States::US_FIRE_WEAPONUnk;
             DAT_UnitsState::instance.units[_minUnitID].field298_0x40e = true;
-            return (undefined4)(1);
+            return 1;
         }
 
     }

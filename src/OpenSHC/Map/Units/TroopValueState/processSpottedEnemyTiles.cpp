@@ -14,26 +14,28 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F950
         void TroopValueState::processSpottedEnemyTiles()
         {
-            BOOLEnum BVar1;
+            BOOLEnum shouldLightPitch;
             for (int i = 0; i < 100; i = i + 1) {
-                int iVar2 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile;
-                if (0 < iVar2) {
-                    if (80400 <= iVar2) {
+                int tileOrCountdown = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile;
+                if (0 < tileOrCountdown) {
+                    if (80400 <= tileOrCountdown) {
                         DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;
                     }
                     if (DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value == 100) {
-                        BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue,
-                            this)(iVar2, DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID, DAT_TroopValueState::instance.attackInfo.playerID_0x2c850);
-                        if (BVar1) {
+                        shouldLightPitch
+                            = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue,
+                                this)(tileOrCountdown, DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID,
+                                DAT_TroopValueState::instance.attackInfo.playerID_0x2c850);
+                        if (shouldLightPitch) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TroopValueState_Func::giveLightPitchInstructionToUnitClosestToPitch, this)(
-                                iVar2);
+                                tileOrCountdown);
                         }
                         DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = 99;
                     } else {
-                        iVar2 = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value + -1;
-                        DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = iVar2;
-                        if (iVar2 <= 0) {
+                        tileOrCountdown = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value + -1;
+                        DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = tileOrCountdown;
+                        if (tileOrCountdown <= 0) {
                             DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;
                         }
                     }

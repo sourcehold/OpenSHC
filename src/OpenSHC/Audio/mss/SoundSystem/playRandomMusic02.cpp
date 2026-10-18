@@ -70,19 +70,19 @@ namespace Audio {
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 2;
                 }
             } else {
-                int iVar1 = 3;
+                int musicChoice = 3;
                 if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
-                    iVar1 = SEC_RNG::ptr->currentNumber1 % 5;
+                    musicChoice = SEC_RNG::ptr->currentNumber1 % 5;
                 }
-                if ((iVar1 == 0) || (iVar1 == 1)) {
+                if ((musicChoice == 0) || (musicChoice == 1)) {
                     param_1 = 0;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 0;
-                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = (iVar1 + 1);
+                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = (musicChoice + 1);
                 }
-                if (iVar1 == 2) {
+                if (musicChoice == 2) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_BATTLE_L1A);
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 1;
-                } else if (iVar1 >= 3) {
+                } else if (musicChoice >= 3) {
                     MACRO_CALL_MEMBER(
                         Map::Units::TroopValueState_Func::recountTotalTroopValue, DAT_TroopValueState::ptr)();
                     int const currentPlayerTotalTroopValue

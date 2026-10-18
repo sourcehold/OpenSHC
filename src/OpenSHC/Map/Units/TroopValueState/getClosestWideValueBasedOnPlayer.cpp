@@ -18,13 +18,15 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            int _owner = DAT_UnitsState::instance.units[playerID].owner;
+            int const _owner = DAT_UnitsState::instance.units[playerID].owner;
             int _minDistance = 1000;
             int _bestIndex = -1;
             int _attackedPlayerID = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                         .currentPlayerID_OR_attackedPlayerID_OR_one;
-            int destinationXPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.xEntry;
-            int destinationYPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.yEntry;
+            int const destinationXPosition
+                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.xEntry;
+            int const destinationYPosition
+                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.yEntry;
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2; i = i + 1) {
@@ -42,18 +44,18 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[playerID].x,
                             (int)(DAT_UnitsState::instance.units[playerID].y), fromXPosition, fromYPosition);
-                        int iVar1 = DAT_DirectionAlgorithmState::instance.distanceHigh;
+                        int distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(
                             destinationXPosition, destinationYPosition, fromXPosition, fromYPosition);
-                        iVar1 = iVar1 + DAT_DirectionAlgorithmState::instance.distanceHigh;
-                        if (iVar1 < _minDistance) {
+                        distance = distance + DAT_DirectionAlgorithmState::instance.distanceHigh;
+                        if (distance < _minDistance) {
                             this->y = fromYPosition;
                             this->x = fromXPosition;
                             this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                              .wideValuesArray[i]
                                              .tile;
-                            _minDistance = iVar1;
+                            _minDistance = distance;
                             _bestIndex = i;
                         }
                     }
@@ -66,7 +68,7 @@ namespace Map {
                         .tile2;
                 }
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

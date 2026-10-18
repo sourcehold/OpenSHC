@@ -29,11 +29,11 @@ namespace Map {
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 playerID = 2;
             }
-            int iVar2 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
-            int iVar1 = iVar2 + 1;
-            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = iVar1;
-            if (0 < iVar2) {
-                if (100 < iVar1) {
+            int const _ticker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
+            int const _nextTicker = _ticker + 1;
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = _nextTicker;
+            if (0 < _ticker) {
+                if (100 < _nextTicker) {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                         attackWave, (SomeTribeBehaviorType)((int)(1024)));
                 }

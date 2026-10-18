@@ -22,16 +22,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BD10
         void TroopValueState::exitSiegeEquipmentForWave(int wave)
         {
-            AITribeTypeShort AVar1;
+            AITribeTypeShort tribeType;
             int _unitID;
             int _tribeUnitIndex;
             for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
-                if (DAT_TribesState::instance.tribes[_tribeID].tribeState && DAT_TribesState::instance.tribes[_tribeID].attackWave == wave
-                    && (AVar1 = DAT_TribesState::instance.tribes[_tribeID].tribeType,
-                        AVar1 == ((AITribeType)0x13)
-                            || ((((AVar1 == ((AITribeType)0x14) || (AVar1 == ((AITribeType)0x15)))
-                                     || (AVar1 == ((AITribeType)0x16)))
-                                || ((AVar1 == ((AITribeType)0x17) || (AVar1 == ((AITribeType)0x18)))))))
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState
+                    && DAT_TribesState::instance.tribes[_tribeID].attackWave == wave
+                    && (tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType,
+                        tribeType == ((AITribeType)0x13)
+                            || ((((tribeType == ((AITribeType)0x14) || (tribeType == ((AITribeType)0x15)))
+                                     || (tribeType == ((AITribeType)0x16)))
+                                || ((tribeType == ((AITribeType)0x17) || (tribeType == ((AITribeType)0x18)))))))
                     && (_tribeUnitIndex = 0, 0 < DAT_TribesState::instance.tribes[_tribeID].size)) {
                     do {
                         _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,

@@ -24,19 +24,20 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FB90
         void TroopValueState::recountAttackTroopValue(int param_1)
         {
-            BOOLEnum BVar2;
-            Tribe* _pTribe;
+            BOOLEnum fullIDIsMinus1;
+            int _tribeID;
             int _size;
             AITribeTypeShort _tribeType;
-            int iVar1 = 0x10;
+            int counter = 0x10;
             if (!param_1) {
-                iVar1 = DAT_TroopValueState::instance.attackInfo.counter;
+                counter = DAT_TroopValueState::instance.attackInfo.counter;
             }
-            DAT_TroopValueState::instance.attackInfo.counter = iVar1 + 1;
+            DAT_TroopValueState::instance.attackInfo.counter = counter + 1;
             if (16 <= DAT_TroopValueState::instance.attackInfo.counter) {
                 DAT_TroopValueState::instance.attackInfo.counter = 0;
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160, '\0', (void*)((int)(&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)));
+                    sizeof(DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType), '\0',
+                    (void*)((int)(&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)));
                 DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 0;
                 DAT_TroopValueState::instance.attackInfo.size = 0;
                 DAT_TroopValueState::instance.attackInfo.aiTroops = 0;
@@ -49,21 +50,25 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.catapults = 0;
                 DAT_TroopValueState::instance.attackInfo.knights = 0;
                 DAT_TroopValueState::instance.attackInfo.ranged = 0;
-                _pTribe = &DAT_TribesState::instance.tribes[1];
-                do {
-                    if (_pTribe->tribeState) {
-                        BVar2 = MACRO_CALL_MEMBER(
-                            Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(_pTribe->owner);
-                        if (!BVar2) {
-                            if (_pTribe->owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                    if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
+                        fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
+                            DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
+                        if (!fullIDIsMinus1) {
+                            if (DAT_TribesState::instance.tribes[_tribeID].owner
+                                == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                                 DAT_TroopValueState::instance.attackInfo.size
-                                    = DAT_TroopValueState::instance.attackInfo.size + _pTribe->size;
+                                    = DAT_TroopValueState::instance.attackInfo.size
+                                    + DAT_TribesState::instance.tribes[_tribeID].size;
                             }
                         } else {
-                            _tribeType = _pTribe->tribeType;
-                            _size = _pTribe->size;
-                            ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)[(short)_tribeType]
-                                = ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)[(short)_tribeType] + _size;
+                            _tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType;
+                            _size = DAT_TribesState::instance.tribes[_tribeID].size;
+                            ((int*)&DAT_TroopValueState::instance.attackInfo
+                                    .aiTribeSizesPerTribeType)[(short)_tribeType]
+                                = ((int*)&DAT_TroopValueState::instance.attackInfo
+                                          .aiTribeSizesPerTribeType)[(short)_tribeType]
+                                + _size;
                             if (_tribeType == AI::Tribes::AITT_ENGINEERS) {
                                 DAT_TroopValueState::instance.attackInfo.engineers
                                     = DAT_TroopValueState::instance.attackInfo.engineers + 1;
@@ -73,13 +78,15 @@ namespace Map {
                             } else if (_tribeType != (AITribeType)0x13 && _tribeType != (AITribeType)0x14
                                 && _tribeType != (AITribeType)0x15) {
                                 if (_tribeType == (AITribeType)0x16) {
-                                    if (0 < DAT_UnitsState::instance.units[_pTribe->selectionTargetUnitID]
+                                    if (0 < DAT_UnitsState::instance
+                                            .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
                                             .stoneAmmunition) {
                                         DAT_TroopValueState::instance.attackInfo.catapults
                                             = DAT_TroopValueState::instance.attackInfo.catapults + 1;
                                     }
                                 } else if (_tribeType == (AITribeType)0x17) {
-                                    if (0 < DAT_UnitsState::instance.units[_pTribe->selectionTargetUnitID]
+                                    if (0 < DAT_UnitsState::instance
+                                            .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
                                             .stoneAmmunition) {
                                         DAT_TroopValueState::instance.attackInfo.catapults
                                             = DAT_TroopValueState::instance.attackInfo.catapults + 1;
@@ -129,8 +136,7 @@ namespace Map {
                             }
                         }
                     }
-                    _pTribe = _pTribe + 1;
-                } while ((int)_pTribe < 0x17623a2);
+                }
                 if (DAT_TroopValueState::instance.attackInfo.knights) {
                     if (DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen) {
                         DAT_TroopValueState::instance.attackInfo.knights = 0;

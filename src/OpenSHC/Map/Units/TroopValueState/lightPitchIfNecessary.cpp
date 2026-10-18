@@ -24,10 +24,10 @@ namespace Map {
             int _targetID;
             BOOLEnum _yes;
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
-                int _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
+                int const _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
                 if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1)
                     && (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
-                    int _unit2Tile = DAT_UnitsState::instance.units[unitID2].tile;
+                    int const _unit2Tile = DAT_UnitsState::instance.units[unitID2].tile;
                     if ((DAT_TileMapState::instance.LogicLayer[_unit2Tile] & 8)
                         && (_targetID = MACRO_CALL_MEMBER(
                                 Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(_unit2Tile),
@@ -36,12 +36,12 @@ namespace Map {
                                         Map::Units::TroopValueState_Func::shouldLightPitchBasedOnTroopValue, this)(
                                         _unit2Tile, _playerID, (int)(DAT_UnitsState::instance.units[unitID2].owner)),
                                     _yes))) {
-                        short _y = DAT_TileMapState::instance.pitchDitches[_targetID].y;
+                        short const _y = DAT_TileMapState::instance.pitchDitches[_targetID].y;
                         DAT_UnitsState::instance.units[unitID].shootTargetMicroX
                             = DAT_TileMapState::instance.pitchDitches[_targetID].x * 8 + 4;
-                        int _tile = DAT_TileMapState::instance.pitchDitches[_targetID].tile;
+                        int const _tile = DAT_TileMapState::instance.pitchDitches[_targetID].tile;
                         DAT_UnitsState::instance.units[unitID].shootTargetMicroY = _y * 8 + 4;
-                        int _pitchDitchUID = DAT_TileMapState::instance.pitchDitches[_targetID].uid;
+                        int const _pitchDitchUID = DAT_TileMapState::instance.pitchDitches[_targetID].uid;
                         DAT_UnitsState::instance.units[unitID].shootTargetZ
                             = (ushort)DAT_TileMapState::instance.HeightLayer[_tile];
                         DAT_UnitsState::instance.units[unitID].shootTargetedUnit = -1;

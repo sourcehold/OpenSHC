@@ -10,35 +10,35 @@ namespace Input {
     // FUNCTION: STRONGHOLDCRUSADER 0x00470BC0
     void MouseState::updateRightDragCameraControl()
     {
-        int iVar6 = this->mapOrientationCopy3;
+        int newMapOrientation = this->mapOrientationCopy3;
 
         this->mouseBasedEvent = 0;
         this->field41_0x17c = 0;
         this->field40_0x178 = 0;
         this->field56_0x1b8 = 0;
 
-        DWORD DVar4 = timeGetTime();
+        DWORD currentTime = timeGetTime();
 
-        this->currentTime3 = DVar4;
-        this->field53_0x1ac = DVar4 - this->currentTime2;
+        this->currentTime3 = currentTime;
+        this->field53_0x1ac = currentTime - this->currentTime2;
 
         ++this->field39_0x174;
         if (this->field53_0x1ac > this->field54_0x1b0) {
-            this->currentTime2 = DVar4;
+            this->currentTime2 = currentTime;
             this->field55_0x1b4 = 0;
             this->field48_0x198 = 0;
             this->field49_0x19c = 0;
         }
 
-        int iVar5
+        int mouseVectorLength
             = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
                 DAT_DirectionAlgorithmState::ptr)(
                 this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 4);
 
-        if (iVar5 < 12 || this->field58_0x1c0) {
+        if (mouseVectorLength < 12 || this->field58_0x1c0) {
             this->field40_0x178 = 0;
-        } else if (iVar5 < 28) {
-            this->field40_0x178 = iVar5 / 2;
+        } else if (mouseVectorLength < 28) {
+            this->field40_0x178 = mouseVectorLength / 2;
             this->mouseBasedEvent = 2;
         } else {
             this->field56_0x1b8 = 1;
@@ -49,15 +49,16 @@ namespace Input {
             this->mouseBasedEvent = 1;
         }
 
-        iVar5 = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
-            DAT_DirectionAlgorithmState::ptr)(
-            this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 0);
-        if (iVar5 < 22 || this->field57_0x1bc) {
+        mouseVectorLength
+            = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
+                DAT_DirectionAlgorithmState::ptr)(
+                this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 0);
+        if (mouseVectorLength < 22 || this->field57_0x1bc) {
             this->field39_0x174 = 0;
             this->field55_0x1b4 = 0;
 
-            if (this->field56_0x1b8 == 2 || iVar5 < 22) {
-                this->currentTime2 = DVar4;
+            if (this->field56_0x1b8 == 2 || mouseVectorLength < 22) {
+                this->currentTime2 = currentTime;
             }
         } else {
             this->field58_0x1c0 = 1;
@@ -69,9 +70,9 @@ namespace Input {
             if (!this->field55_0x1b4) {
                 this->field55_0x1b4 = 1;
 
-                iVar6 = this->mapOrientationCopy3 + 6;
-                if (iVar6 >= 8) {
-                    iVar6 -= 8;
+                newMapOrientation = this->mapOrientationCopy3 + 6;
+                if (newMapOrientation >= 8) {
+                    newMapOrientation -= 8;
                 }
 
                 this->field44_0x188 = 0;
@@ -80,9 +81,9 @@ namespace Input {
             }
         }
 
-        if (iVar6 != this->mapOrientationCopy2) {
-            this->mapOrientationCopy2 = iVar6;
-            this->mapOrientationCopy3 = iVar6;
+        if (newMapOrientation != this->mapOrientationCopy2) {
+            this->mapOrientationCopy2 = newMapOrientation;
+            this->mapOrientationCopy3 = newMapOrientation;
             this->mouseBasedEvent = 3;
         }
 
@@ -94,7 +95,7 @@ namespace Input {
 
             this->field39_0x174 = 0;
             if (this->field56_0x1b8 == 3) {
-                this->currentTime2 = DVar4;
+                this->currentTime2 = currentTime;
             }
         } else {
             this->field58_0x1c0 = 1;
@@ -117,7 +118,7 @@ namespace Input {
 
             this->field39_0x174 = 0;
             if (this->field56_0x1b8 == 4) {
-                this->currentTime2 = DVar4;
+                this->currentTime2 = currentTime;
             }
         } else {
             this->field58_0x1c0 = 1;

@@ -45,7 +45,7 @@ namespace IO {
 
         char* _mapName
             = MACRO_CALL_MEMBER(ResourceManager_Func::getFileNameOfCurrentActiveResource, DAT_ResourceManager::ptr)();
-        int _fileDescriptor = MACRO_CALL(OS_Func::_ucrt_open)(_mapName, _O_BINARY, 0);
+        int const _fileDescriptor = MACRO_CALL(OS_Func::_ucrt_open)(_mapName, _O_BINARY, 0);
         if (_fileDescriptor == -1) {
             MACRO_CALL(OS_Func::_free_base)(_previewOrDescriptionUnk);
             MACRO_CALL(OS_Func::_free_base)(this->tempMem);

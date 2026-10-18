@@ -234,7 +234,7 @@ namespace Audio {
                 }
 
                 int const battleLevelTemp = DAT_GameCore::instance.battleLevel2 + 2500;
-                int const iVar7 = DAT_GameCore::instance.battleLevel2;
+                int const previousBattleLevel2 = DAT_GameCore::instance.battleLevel2;
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState != 5) {
                     if (0 < DAT_GameCore::instance.battleLevel2) {
                         --DAT_GameCore::instance.battleLevel2;
@@ -249,7 +249,7 @@ namespace Audio {
                     }
                 }
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState == 5) {
-                    if (DAT_GameCore::instance.battleLevel < iVar7) {
+                    if (DAT_GameCore::instance.battleLevel < previousBattleLevel2) {
                         MACRO_CALL_MEMBER(
                             SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     }
@@ -258,12 +258,13 @@ namespace Audio {
                         && 30000 < timeGetTime() - DAT_SoundEffectsHelperData1::instance.DAT_SomeSoundTime2) {
                         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                         int const randomNumber = SEC_RNG::instance.currentNumber1 % 3;
-                        if (randomNumber == 0)
+                        if (randomNumber == 0) {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 1;
-                        else if (randomNumber == 1)
+                        } else if (randomNumber == 1) {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 2;
-                        else
+                        } else {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 0;
+                        }
                     }
                 }
 

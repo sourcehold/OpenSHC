@@ -68,7 +68,7 @@ namespace Map {
                 this->countdown = 0;
             }
             for (int i = 0; i < this->index; i++) {
-                int _tile = this->wallPlacementInfoArray[i].tile_OR_pitchID;
+                int const _tile = this->wallPlacementInfoArray[i].tile_OR_pitchID;
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100) == 0) {
                     this->countdown = 0;
                 }

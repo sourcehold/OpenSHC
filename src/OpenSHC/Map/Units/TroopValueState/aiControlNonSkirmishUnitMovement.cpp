@@ -21,9 +21,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00520F70
         void TroopValueState::aiControlNonSkirmishUnitMovement()
         {
-            int* piVar1;
             BOOLEnum _canMove;
-            int iVar2;
+            int _aiControlStatus;
+            int _waveCounter;
+            int _wavePhase;
             BOOLEnum _hasTribe;
             int _index;
             int _pitchTile;
@@ -32,7 +33,9 @@ namespace Map {
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SKIRMISH_AND_MULTIPLAYER
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
-                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id <= 0) {
+                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .keep.id
+                    <= 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateAttackInfoTick, this)();
                     return;
                 }
@@ -41,28 +44,37 @@ namespace Map {
                 if (!DAT_TroopValueState::instance.attackInfo.aiTroops) {
                     DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
                 }
-                iVar2 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .aiControlStatusRelated;
-                piVar1 = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .aiControlStatusRelated;
-                if (iVar2 != -1000) {
-                    if (!iVar2) {
-                        for (int iVar2 = 0; iVar2 < 0x32; iVar2 = iVar2 + 1) {
-                            if ((DAT_TroopValueState::instance.attackInfo.nof_tribes[iVar2] != 0)
-                                && (DAT_TroopValueState::instance.attackInfo.value3Array01[iVar2] != 6))
-                                goto LAB_0052103d;
+                _aiControlStatus
+                    = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .aiControlStatusRelated;
+                if (_aiControlStatus != -1000) {
+                    if (!_aiControlStatus) {
+                        BOOLEnum anyWaveStillRunning = FALSE;
+                        for (int _waveIndex = 0; _waveIndex < 0x32; _waveIndex = _waveIndex + 1) {
+                            if ((DAT_TroopValueState::instance.attackInfo.nof_tribes[_waveIndex] != 0)
+                                && (DAT_TroopValueState::instance.attackInfo.value3Array01[_waveIndex] != 6)) {
+                                anyWaveStillRunning = TRUE;
+                                break;
+                            }
                         }
-                        *piVar1 = 600;
-                    } else if (0 < iVar2) {
-                        *piVar1 = iVar2 + -1;
-                        if (iVar2 + -1 == 0) {
-                            *piVar1 = -1000;
+                        if (!anyWaveStillRunning) {
+                            DAT_GameState::instance
+                                .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                .aiControlStatusRelated = 600;
                         }
-                    } else if (iVar2 < 0) {
-                        *piVar1 = iVar2 + 1;
+                    } else if (0 < _aiControlStatus) {
+                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .aiControlStatusRelated = _aiControlStatus + -1;
+                        if (_aiControlStatus + -1 == 0) {
+                            DAT_GameState::instance
+                                .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                .aiControlStatusRelated = -1000;
+                        }
+                    } else if (_aiControlStatus < 0) {
+                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .aiControlStatusRelated = _aiControlStatus + 1;
                     }
                 }
-            LAB_0052103d:
                 DAT_TroopValueState::instance.attackInfo.value3Array01[0] = 0;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[0] = 0;
                 for (_index = 1; _index < 50; _index++) {
@@ -77,34 +89,34 @@ namespace Map {
                         DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]
                             .attackedPlayerID = 1;
                         if (_nTribes) {
-                            iVar2 = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
+                            _waveCounter = DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] + 1;
                             DAT_TroopValueState::instance.attackInfo.index = _index;
-                            DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] = iVar2;
-                            if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated && 10 < iVar2
+                            DAT_TroopValueState::instance.attackInfo.someIntArray2[_index + -1] = _waveCounter;
+                            if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated && 10 < _waveCounter
                                 && DAT_TroopValueState::instance.attackInfo.value3Array01[_index] != 6) {
                                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[_index] = 0;
                                 DAT_TroopValueState::instance.attackInfo.value3Array01[_index] = 6;
                                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition,
                                     DAT_SoundSystemState::ptr)();
                             }
-                            iVar2 = DAT_TroopValueState::instance.attackInfo.value3Array01[_index];
-                            if (!iVar2) {
+                            _wavePhase = DAT_TroopValueState::instance.attackInfo.value3Array01[_index];
+                            if (!_wavePhase) {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::initializeOrAdvanceAttackWave, this)(_index);
-                            } else if (iVar2 == 1) {
+                            } else if (_wavePhase == 1) {
                                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::advanceAttackWaveStaging, this)(
                                     _index);
-                            } else if (iVar2 == 2) {
+                            } else if (_wavePhase == 2) {
                                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateInProgressAttackWave, this)(
                                     _index);
-                            } else if (iVar2 == 3) {
+                            } else if (_wavePhase == 3) {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::executeAttackWaveTargetAssignment, this)(_index);
-                            } else if (iVar2 == 4) {
+                            } else if (_wavePhase == 4) {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::TroopValueState_Func::executeDelayedAttackWaveTargetAssignment, this)(
                                     _index);
-                            } else if ((iVar2 != 5) && (iVar2 == 6)) {
+                            } else if ((_wavePhase != 5) && (_wavePhase == 6)) {
                                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateActiveAttackWaveState, this)(
                                     _index);
                             }

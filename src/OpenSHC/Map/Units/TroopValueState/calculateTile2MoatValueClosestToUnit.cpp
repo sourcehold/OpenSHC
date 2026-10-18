@@ -15,9 +15,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A780
         undefined4 TroopValueState::calculateTile2MoatValueClosestToUnit(int unitID)
         {
-            int iVar1;
+            int fromXPosition;
             int fromYPosition;
-            int _owner = DAT_UnitsState::instance.units[unitID].owner;
+            int const _owner = DAT_UnitsState::instance.units[unitID].owner;
             int _minDistance = 100000;
             int _bestIndex = -1;
             int i = 0;
@@ -32,11 +32,12 @@ namespace Map {
                                                     .playerInfo[_owner - 1]
                                                     .moatValuesArray[i]
                                                     .tile2];
-                        iVar1 = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[i].tile2
+                        fromXPosition
+                            = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[i].tile2
                             - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)(DAT_UnitsState::instance.units[unitID].y), iVar1, fromYPosition);
+                            (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
                         int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
                             + DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                     .moatValuesArray[i]
@@ -46,7 +47,7 @@ namespace Map {
                         if (_distance < _minDistance) {
                             _minDistance = _distance;
                             this->y = fromYPosition;
-                            this->x = iVar1;
+                            this->x = fromXPosition;
                             this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                              .moatValuesArray[i]
                                              .tile;
@@ -63,7 +64,7 @@ namespace Map {
                         .tile2;
                 }
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

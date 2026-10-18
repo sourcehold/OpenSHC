@@ -28,35 +28,35 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005205A0
         void TroopValueState::executeAttackWaveTargetAssignment(int param_1)
         {
-            int* piVar1;
-            int iVar2;
-            BOOLEnum BVar3;
-            int iVar4;
-            int iVar5;
-            int local_8;
-            int local_4;
-            iVar5 = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
-            local_8 = 0;
-            local_4 = 0;
+            int _limit;
+            BOOLEnum _canReachSignpostZone;
+            int _currentPlayerSlotID;
+            int _playerInfoOffset;
+            int _playerID;
+            int _tribeSizeSumLimit;
+            int _siegeArcherBudget;
+            int _siegeHackBudget;
+            _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
+            _siegeArcherBudget = 0;
+            _siegeHackBudget = 0;
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
-                iVar5 = 2;
-                local_8 = 5;
-                local_4 = -1;
+                _playerID = 2;
+                _siegeArcherBudget = 5;
+                _siegeHackBudget = -1;
             }
-            piVar1 = DAT_TroopValueState::instance.attackInfo.attackWaveTicker + param_1;
-            *piVar1 = *piVar1 + 1;
-            if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
-                < DAT_AttackInfoDefinedData::instance
-                      .AIAttackWaveTargetDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
+                = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
+            if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] < DAT_AttackInfoDefinedData::instance
+                    .AIAttackWaveTargetDelay[DAT_TroopValueState::instance.attackInfo.attacker]) {
                 return;
             }
-            iVar4 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+            _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.value10 = DAT_TroopValueState::instance.attackInfo.value10 + 1;
-            BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone, DAT_GameState::ptr)(
-                iVar4, iVar5, param_1);
-            if ((BVar3) && (DAT_TroopValueState::instance.attackInfo.attacker != 8)) {
+            _canReachSignpostZone = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
+                DAT_GameState::ptr)(_currentPlayerSlotID, _playerID, param_1);
+            if ((_canReachSignpostZone) && (DAT_TroopValueState::instance.attackInfo.attacker != 8)) {
                 DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 4;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
                 DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1] = 0;
@@ -65,9 +65,9 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.someCounter1
                 = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(0, param_1);
-            iVar4 = iVar5 * 0x177bc;
-            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar4 + -0x18)
-                < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar4 + -0x1c)) {
+            _playerInfoOffset = _playerID * 0x177bc;
+            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset + -0x18)
+                < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset + -0x1c)) {
                 DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes
                     = DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes + 1;
             }
@@ -79,25 +79,27 @@ namespace Map {
                         Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     return;
                 }
-                BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
-                    DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, iVar5, param_1);
-                if (BVar3
-                    && *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -4) != 0) {
+                _canReachSignpostZone = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
+                    DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, _playerID, param_1);
+                if (_canReachSignpostZone
+                    && *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _playerInfoOffset + -4)
+                        != 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                         param_1, 1000, 10000, Map::Units::STBT_0x3f6);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                         Map::Units::STBT_0x3f6, Map::Units::STBT_1, 0, 10);
                 }
-                iVar5 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar4 + -4);
-                if (iVar5) {
+                _tribeSizeSumLimit
+                    = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4);
+                if (_tribeSizeSumLimit) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                        param_1, 1000, iVar5, (SomeTribeBehaviorType)((int)(1013)));
+                        param_1, 1000, _tribeSizeSumLimit, (SomeTribeBehaviorType)((int)(1013)));
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                         Map::Units::STBT_0x3f5, Map::Units::STBT_1, 0, 0x14);
                 }
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, 1000,
-                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + iVar4 + -4),
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    1000,
+                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _playerInfoOffset + -4),
                     Map::Units::STBT_0x3f2);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f2, Map::Units::STBT_1, 0, 10);
@@ -123,45 +125,45 @@ namespace Map {
                     DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes
                         = DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes * 2;
                 }
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes), 1000,
-                    Map::Units::STBT_0x3fd);
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxLordAttackTribes), 1000, Map::Units::STBT_0x3fd);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::assignBehaviorTypeToNearbyTribes, this)(
                     Map::Units::STBT_0x3fd, 1, 0, 1);
             }
             if (DAT_TroopValueState::instance.attackInfo.attacker == 3) {
-                *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar4 + -4)
-                    = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar4 + -4) * 2;
+                *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4)
+                    = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4)
+                    * 2;
             }
-            iVar2 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar4 + -4);
-            if ((iVar2)
+            _limit = *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + _playerInfoOffset + -4);
+            if ((_limit)
                 && (2 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes), iVar2,
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxTownAttackTribes), _limit,
                     Map::Units::STBT_0x3f5);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f5, Map::Units::STBT_1, 0, 0x14);
             }
-            BVar3 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZoneViaPathfinder,
-                DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, iVar5, param_1);
-            if (BVar3) {
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes), 10000,
-                    Map::Units::STBT_0x3fa);
+            _canReachSignpostZone
+                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZoneViaPathfinder,
+                    DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, _playerID, param_1);
+            if (_canReachSignpostZone) {
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxWallScaleTribes), 10000, Map::Units::STBT_0x3fa);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_7, Map::Units::STBT_1, 10, 0x14);
             }
-            if (0 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + iVar4 + -4)
+            if (0 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _playerInfoOffset + -4)
                 && 2 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget) {
                 if (DAT_TroopValueState::instance.attackInfo.attacker == 4) {
                     DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes
                         = (int)DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes / 2;
                 }
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes),
-                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + iVar4 + -4),
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxMoatAttackTribes),
+                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _playerInfoOffset + -4),
                     Map::Units::STBT_0x3f7);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f7, Map::Units::STBT_1, 10, 10);
@@ -176,7 +178,7 @@ namespace Map {
                 param_1, 1000, 10000, Map::Units::STBT_0x419);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                 Map::Units::STBT_0x419, Map::Units::STBT_1, 0x14, 0x46);
-            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -4) != 0) {
+            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _playerInfoOffset + -4) != 0) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                     param_1, 2, 10000, Map::Units::STBT_0x41a);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
@@ -188,8 +190,8 @@ namespace Map {
                 Map::Units::STBT_0x41b, Map::Units::STBT_1, 0x14, 0x14);
             if ((0 < DAT_TroopValueState::instance.attackInfo.archerPoints)
                 && (DAT_TroopValueState::instance.attackInfo.value10
-                            - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget
-                        > local_8 + 1)) {
+                        - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget
+                    > _siegeArcherBudget + 1)) {
                 DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount
                     = DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
@@ -198,57 +200,57 @@ namespace Map {
                     Map::Units::STBT_0x3fc, Map::Units::STBT_1, 0, 5);
             }
             if (DAT_TroopValueState::instance.attackInfo.people3) {
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes),
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxPeopleAttackTribes),
                     DAT_TroopValueState::instance.attackInfo.people3, Map::Units::STBT_0x3fb);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3fb, Map::Units::STBT_1, 5, 0x1e);
             }
-            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -4) != 0
+            if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _playerInfoOffset + -4) != 0
                 && 3 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget) {
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, (int)(DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes), 10000,
-                    Map::Units::STBT_0x3f6);
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    (int)(DAT_TroopValueState::instance.attackInfo.maxGateAttackTribes), 10000, Map::Units::STBT_0x3f6);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f6, Map::Units::STBT_1, 0, 10);
             }
-            iVar2 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + iVar4 + -4);
-            if ((iVar2)
+            _limit = *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _playerInfoOffset + -4);
+            if ((_limit)
                 && (3 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, iVar2, 10000, Map::Units::STBT_0x413);
+                    param_1, _limit, 10000, Map::Units::STBT_0x413);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x413, Map::Units::STBT_1, 0, 0x28);
             }
-            iVar2 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + iVar4 + -4);
-            if (iVar2) {
+            _limit = *(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + _playerInfoOffset + -4);
+            if (_limit) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, iVar2, 10000, Map::Units::STBT_0x414);
+                    param_1, _limit, 10000, Map::Units::STBT_0x414);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x414, Map::Units::STBT_1, 0, 0x28);
             }
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                 param_1, 1000, 10000, Map::Units::STBT_0x411);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::assignBehaviorTypeAndLinkSupportTribe, this)(
-                param_1, iVar5, Map::Units::STBT_0x411, 0, 0x14);
+                param_1, _playerID, Map::Units::STBT_0x411, 0, 0x14);
             if ((5 < DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType.aiTroops_L)
                 && (2 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
-                iVar5 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + iVar4 + -4);
-                if (1 < iVar5) {
-                    if (iVar5 <= 2) {
-                        iVar5 = 1;
-                    } else if (iVar5 <= 6) {
-                        iVar5 = 2;
-                    } else if (iVar5 <= 0xc) {
-                        iVar5 = 3;
+                _tribeSizeSumLimit
+                    = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset + -4);
+                if (1 < _tribeSizeSumLimit) {
+                    if (_tribeSizeSumLimit <= 2) {
+                        _tribeSizeSumLimit = 1;
+                    } else if (_tribeSizeSumLimit <= 6) {
+                        _tribeSizeSumLimit = 2;
+                    } else if (_tribeSizeSumLimit <= 0xc) {
+                        _tribeSizeSumLimit = 3;
                     } else {
-                        iVar5 = 4;
+                        _tribeSizeSumLimit = 4;
                     }
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                        param_1, iVar5, 10000, Map::Units::STBT_0x3f4);
+                        param_1, _tribeSizeSumLimit, 10000, Map::Units::STBT_0x3f4);
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                         Map::Units::STBT_0x3f4, Map::Units::STBT_5, 0, 0x19);
                 }
@@ -260,26 +262,27 @@ namespace Map {
                         Map::Units::STBT_0x3fc, Map::Units::STBT_1, 0, 0x14);
                 }
             }
-            if (local_4 + 4 < DAT_TroopValueState::instance.attackInfo.value10
+            if (_siegeHackBudget + 4 < DAT_TroopValueState::instance.attackInfo.value10
                     - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget) {
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, 1000,
-                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + iVar4 + -4),
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(param_1,
+                    1000,
+                    *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + _playerInfoOffset + -4),
                     Map::Units::STBT_0x3f2);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f2, ((SomeTribeBehaviorType)0), 0, 10);
             }
-            iVar5 = *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + iVar4 + -4);
-            if ((0 < iVar5)
+            _tribeSizeSumLimit
+                = *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + _playerInfoOffset + -4);
+            if ((0 < _tribeSizeSumLimit)
                 && (4 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget)) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                    param_1, 1000, iVar5, Map::Units::STBT_0x3f7);
+                    param_1, 1000, _tribeSizeSumLimit, Map::Units::STBT_0x3f7);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f7, Map::Units::STBT_1, 10, 5);
             }
             if (DAT_TroopValueState::instance.attackInfo.knights
-                && *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + iVar4 + -4) != 0
+                && *(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + _playerInfoOffset + -4) != 0
                 && 3 < DAT_TroopValueState::instance.attackInfo.value10
                         - DAT_TroopValueState::instance.attackInfo.reservedTroopBudget) {
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(

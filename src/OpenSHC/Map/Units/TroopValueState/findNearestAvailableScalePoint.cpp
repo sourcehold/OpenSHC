@@ -17,7 +17,7 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            int _playerID = DAT_UnitsState::instance.units[unitID].owner;
+            int const _playerID = DAT_UnitsState::instance.units[unitID].owner;
             int _minDistance = 1000;
             int _bestIndex = -1;
             int i = 0;
@@ -62,7 +62,7 @@ namespace Map {
                         .tile2;
                 }
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

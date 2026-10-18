@@ -19,7 +19,7 @@ namespace Map {
         {
             int fromXPosition;
             int fromYPosition;
-            int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int const _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             int _minDistance = 1000;
             int _bestIndex = -1;
             int i = 0;

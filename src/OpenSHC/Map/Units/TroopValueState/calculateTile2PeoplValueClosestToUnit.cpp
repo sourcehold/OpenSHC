@@ -42,10 +42,10 @@ namespace Map {
                 } while (i < DAT_TroopValueState::instance.attackInfo.people2);
                 if (-1 < _bestIndex) {
                     DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].unitID = unitID;
-                    return (undefined4)(DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].tile2);
+                    return DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].tile2;
                 }
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

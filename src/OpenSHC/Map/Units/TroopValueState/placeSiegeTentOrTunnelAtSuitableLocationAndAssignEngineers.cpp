@@ -26,7 +26,7 @@ namespace Map {
             dword _targetTile;
             uint x;
             uint y;
-            int _targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int const _targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             _targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAppropriateLocationForSiegeTent,
                 DAT_PathFindingState::ptr)(100, (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
                 (uint)(DAT_UnitsState::instance.units[_targetUnitID].y), (undefined4)((int)(tribeID)),
@@ -43,8 +43,7 @@ namespace Map {
             int _buildingID = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_targetTile];
             x = (_targetTile - DAT_ViewportRenderState::instance.translationMatrix[_buildingID].addXgetTile) - 1;
             y = _buildingID - 1;
-            if (399 < x || 399 < y
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 DAT_TileMapState::instance.buildingPlacementFail = TRUE;
                 return FALSE;
             }

@@ -22,23 +22,23 @@ namespace Map {
         void TroopValueState::sendAttackingPatrolTribeToComputedDestination(int tribeID)
         {
             dword _tile;
-            int sVar1 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int const _unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
             _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                (uint)(DAT_UnitsState::instance.units[sVar1].y), (int)(DAT_UnitsState::instance.units[sVar1].owner),
+                DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
+                (uint)(DAT_UnitsState::instance.units[_unitID].y), (int)(DAT_UnitsState::instance.units[_unitID].owner),
                 (uint)(12), 1);
             if ((int)_tile <= 0) {
                 _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                    DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                    (uint)(DAT_UnitsState::instance.units[sVar1].y), (int)(DAT_UnitsState::instance.units[sVar1].owner),
-                    (uint)(30), 1);
+                    DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
+                    (uint)(DAT_UnitsState::instance.units[_unitID].y),
+                    (int)(DAT_UnitsState::instance.units[_unitID].owner), (uint)(30), 1);
                 if ((int)_tile <= 0) {
                     _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                        DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
-                        (uint)(DAT_UnitsState::instance.units[sVar1].y),
-                        (int)(DAT_UnitsState::instance.units[sVar1].owner), (uint)(50), 1);
+                        DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
+                        (uint)(DAT_UnitsState::instance.units[_unitID].y),
+                        (int)(DAT_UnitsState::instance.units[_unitID].owner), (uint)(50), 1);
                 }
             }
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(

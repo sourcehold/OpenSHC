@@ -14,10 +14,10 @@ namespace Map {
         {
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
                 DAT_PathFindingState::ptr)(playerID, 1, 1, tile, 10);
-            int iVar1 = DAT_PathFindingState::instance.ALGO_TotalTroopValue;
+            int const nearbyTroopValue = DAT_PathFindingState::instance.ALGO_TotalTroopValue;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
                 DAT_PathFindingState::ptr)(playerID, 0, 1, tile, 6);
-            return (uint)(DAT_PathFindingState::instance.ALGO_TotalTroopValue > iVar1 * 2);
+            return DAT_PathFindingState::instance.ALGO_TotalTroopValue > nearbyTroopValue * 2;
         }
 
     }

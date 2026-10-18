@@ -22,32 +22,29 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D020
         void TroopValueState::trySendKnightTribeToAttack()
         {
-            int iVar2 = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
+            int _unitID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount
                 && 10 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                 && (100 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
-                    || (0 < DAT_GameState::instance
-                            .playerDataArray[iVar2]
-                            .previousSiegeWeaponsCount))
+                    || (0 < DAT_GameState::instance.playerDataArray[_unitID].previousSiegeWeaponsCount))
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                int iVar1
-                    = DAT_GameState::instance.playerDataArray[iVar2]
-                          .previousSiegeWeaponsCount;
+                int const _siegeWeaponsCount
+                    = DAT_GameState::instance.playerDataArray[_unitID].previousSiegeWeaponsCount;
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount
                     = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;
                 int tribeID = DAT_TroopValueState::instance.attackInfo
                                   .knightTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount];
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                if (iVar1) {
-                    iVar2 = MACRO_CALL_MEMBER(
-                        Map::Units::UnitsState_Func::findActiveSiegeEngineForTribe, DAT_UnitsState::ptr)(iVar2);
+                if (_siegeWeaponsCount) {
+                    _unitID = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::findActiveSiegeEngineForTribe, DAT_UnitsState::ptr)(_unitID);
                 } else {
-                    iVar2 = MACRO_CALL_MEMBER(
-                        Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(iVar2);
+                    _unitID = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(_unitID);
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
-                    (uint)(DAT_UnitsState::instance.units[iVar2].x), (uint)(DAT_UnitsState::instance.units[iVar2].y), 0,
-                    0, Map::Units::Instructions::UMSE_0);
+                    (uint)(DAT_UnitsState::instance.units[_unitID].x),
+                    (uint)(DAT_UnitsState::instance.units[_unitID].y), 0, 0, Map::Units::Instructions::UMSE_0);
             }
         }
 

@@ -22,37 +22,37 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B570
         int TroopValueState::placeTunnelEntrances(int tribeID)
         {
-            int iVar4;
-            int _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int _tentPointIndex;
+            int const _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             /*
               finds a route from target to siege engine location?
              */
-            iVar4 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
+            _tentPointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
                 DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
                 (uint)(DAT_UnitsState::instance.units[_unitID].y), tribeID);
-            if (iVar4) {
-                short sVar1 = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
-                int iVar2 = DAT_TribesState::instance.tribes[tribeID].uid;
-                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = sVar1;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[sVar1].tribeID = 0;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[sVar1].tribeUID = 0;
-                int iVar3 = DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].y;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].tribeUID = iVar2;
-                int playerID = DAT_TribesState::instance.tribes[tribeID].owner;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].tribeID = tribeID;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].three = 3;
-                iVar2 = DAT_TroopValueState::instance.attackInfo.tentPointsValues[iVar4].x;
-                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)iVar4;
+            if (_tentPointIndex) {
+                short const _previousSiegeIndex = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
+                int _tribeUID = DAT_TribesState::instance.tribes[tribeID].uid;
+                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = _previousSiegeIndex;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_previousSiegeIndex].tribeID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_previousSiegeIndex].tribeUID = 0;
+                int const _tentPointY = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].y;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].tribeUID = _tribeUID;
+                int const playerID = DAT_TribesState::instance.tribes[tribeID].owner;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].tribeID = tribeID;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].three = 3;
+                _tribeUID = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].x;
+                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)_tentPointIndex;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
-                    playerID, iVar2 + -1, iVar3 + -1, (MappersEnum)((int)(66)), 3, 0xf);
-                iVar2 = DAT_TileMapState::instance.placedBuildingID;
-                if (0 < iVar2) {
-                    DAT_BuildingsState::instance.buildings[iVar2].attackWave
+                    playerID, _tribeUID + -1, _tentPointY + -1, (MappersEnum)((int)(66)), 3, 0xf);
+                _tribeUID = DAT_TileMapState::instance.placedBuildingID;
+                if (0 < _tribeUID) {
+                    DAT_BuildingsState::instance.buildings[_tribeUID].attackWave
                         = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
-                        tribeID, ((UnitInstructionType)0x15), iVar2, DAT_BuildingsState::instance.buildings[iVar2].uid,
-                        0);
-                    return iVar4;
+                        tribeID, ((UnitInstructionType)0x15), _tribeUID,
+                        DAT_BuildingsState::instance.buildings[_tribeUID].uid, 0);
+                    return _tentPointIndex;
                 }
             }
             return 0;
