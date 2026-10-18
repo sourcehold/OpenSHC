@@ -9,3 +9,5 @@ src/OpenSHC/IO/ResourceManager/readFirstPartOfCurrentResourceIntoMemory.cpp
 src/OpenSHC/IO/ResourceManager/readNextPartOfCurrentResourceIntoMemory.cpp
 src/OpenSHC/Map/Navigation/DirectionAlgorithmState/getMouseVectorLengthBasedOnDirection.cpp
 src/OpenSHC/Input/MouseState/updateRightDragCameraControl.cpp
+src/OpenSHC/Text/FontSizeClass/setupFontSizeClassObject.cpp
+src/OpenSHC/Text/TextManager/setupFontSizeClassObjects.cpp
