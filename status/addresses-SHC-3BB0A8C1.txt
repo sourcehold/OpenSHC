@@ -51143,7 +51143,7 @@ SHC_3BB0A8C1_0x00536690 | 97.4% | Jcc scheduling differs
 
 SHC_3BB0A8C1_0x00536710 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536780 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536780 | 73.7% | Asm differs
 
 SHC_3BB0A8C1_0x00536860 | 0.0% | Pending
 
