@@ -234,6 +234,14 @@ Style expected of reimplemented code:
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
   The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
   diff patterns below.
+- Prefer `const` on a local that is assigned once, spelled with `const` *after* the type (`int const tribeID = ...`).
+  This is not free: a `const` local whose initialiser is a **compile-time literal** lets MSVC fold the value into its
+  use sites and drop instructions the original still has, so leave those non-const. A `const` local initialised from a
+  memory read or a call is code-generation neutral. Over `AI::AICState` 165 of 172 candidates were neutral and 7 were
+  not - every one of them an `int tribeIndex = <literal>` feeding an array index, each costing 4 instructions and
+  0.18-0.50 of match (`setTribe0x11ToAggressiveAndAttackIfConditionMet` went 1.0000 -> 0.5000). Isolate before
+  blaming the qualifier: in `aiCommandTribe13DefensiveWave`, keeping `int const tribeID = <array read>` while
+  reverting `int tribeIndex = 13` alone restored 1.0000.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -324,6 +332,15 @@ Diff patterns that were reliable (more in the cheat sheet):
 - MSVC1400 at `/O2` does unroll small constant-trip loops (`applyAIV`'s 10-iteration unit loop comes out five copies
   wide from a plain `for`), and `!=` as the bound suppresses it - see the cheat sheet. A body repeated N times in the
   asm is therefore not proof that the source wrote it out N times; compile the plain loop first and compare.
+  What the asm pins down is the unroll *factor*, and the way to hit a factor the compiler will not pick on its own is
+  an outer loop stepping by N with the inner N left to it: that compiles identically to writing the N copies out by
+  hand, down to everything but MSVC's label numbering. Read the factor off how the index is held. Once the whole trip
+  count is visible the compiler constant-folds every index, so each body carries absolute addresses and an immediate;
+  an original that instead keeps the index in a register and computes stored values with `lea` still had an induction
+  variable, so its source had a loop. `someChatMessageSelection` is the worked case: a plain 1..8 loop and 8
+  hand-written copies both give 154 instructions at 0.6745, while outer-step-4 plus an inner 0..3 gives 132 at 0.9198
+  against the original's 119. Do not bother varying the loop variable - a fresh `int i`, the function's already
+  declared `i`, a fresh name and a pre-declared one all produced byte-identical code.
 - A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
