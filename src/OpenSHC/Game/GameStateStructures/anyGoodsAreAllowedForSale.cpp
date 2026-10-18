@@ -16,12 +16,11 @@ namespace Game {
     {
         int index = 0;
         int allowedCount = 0;
-        while (DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != -1) {
+        for (; DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != -1; ++index) {
             if (this->mapAndTime.isResourceTradeable[DAT_TroopDefinedData::instance.MarketResourceCycleArray[index]]
                 != 0) {
                 ++allowedCount;
             }
-            ++index;
         }
         if (allowedCount >= 2) {
             return TRUE;

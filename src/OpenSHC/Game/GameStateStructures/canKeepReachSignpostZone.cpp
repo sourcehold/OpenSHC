@@ -15,7 +15,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457870
     BOOLEnum GameStateStructures::canKeepReachSignpostZone(int playerID, int param_2, int signpostSlot)
     {
-        int keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
         int signpostTile
             = this->mapAndTime
                   .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[signpostSlot]]

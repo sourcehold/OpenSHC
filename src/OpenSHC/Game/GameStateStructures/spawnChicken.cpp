@@ -78,8 +78,8 @@ namespace Game {
                                 DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY * 8,
                                 DAT_TileMapState::instance.HeightLayer[tile], Map::Units::UT_CHICKEN);
                         if (chickenUnitID != 0) {
-                            int chickenY = DAT_UnitsState::instance.units[chickenUnitID].y;
-                            int chickenX = DAT_UnitsState::instance.units[chickenUnitID].x;
+                            int const chickenY = DAT_UnitsState::instance.units[chickenUnitID].y;
+                            int const chickenX = DAT_UnitsState::instance.units[chickenUnitID].x;
                             DAT_UnitsState::instance.units[chickenUnitID].isDisappearingUnk = 1;
                             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                                 chickenX, chickenY, DE::SHCDE::FX_CHICKEN_START);

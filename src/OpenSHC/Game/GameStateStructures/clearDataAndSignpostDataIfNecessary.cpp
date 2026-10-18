@@ -28,7 +28,7 @@ namespace Game {
             6400, '\0', this->mapAndTime.signpostsMapEdge);
         // fixme: wrong?
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            2560, '\0', this->mapAndTime.unitMoveDestinationXYPairs);
+            sizeof(this->mapAndTime.unitMoveDestinationXYPairs), '\0', this->mapAndTime.unitMoveDestinationXYPairs);
         for (int slot = 0; slot < 8; ++slot) {
             if (this->mapAndTime.signpostIDs[slot] == 0
                 || DAT_BuildingsState::instance.buildings[this->mapAndTime.signpostIDs[slot]].buildingType
@@ -40,19 +40,19 @@ namespace Game {
             }
         }
         // close the holes by bubbling the remaining signposts to the front
-        int signpostMoved;
+        BOOLEnum signpostMoved;
         do {
-            signpostMoved = 0;
+            signpostMoved = FALSE;
             for (int slot = 0; slot < 7; ++slot) {
                 if (this->mapAndTime.signpostIDs[slot] == 0 && this->mapAndTime.signpostIDs[slot + 1] != 0) {
                     this->mapAndTime.signpostIDs[slot] = this->mapAndTime.signpostIDs[slot + 1];
                     this->mapAndTime.signpostIDs[slot + 1] = 0;
-                    signpostMoved = 1;
+                    signpostMoved = TRUE;
                 }
             }
-        } while (signpostMoved != 0);
+        } while (signpostMoved);
         for (int signpostSlot = 0; signpostSlot < 8; ++signpostSlot) {
-            int buildingID = this->mapAndTime.signpostIDs[signpostSlot];
+            int const buildingID = this->mapAndTime.signpostIDs[signpostSlot];
             if (buildingID == 0) {
                 continue;
             }

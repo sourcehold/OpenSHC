@@ -19,7 +19,7 @@ namespace Game {
         int tribeIndex = 0;
         int slotID = 0;
         while (tribeIndex < DAT_TribesState::instance.tribes[tribeID].size) {
-            int unitID = MACRO_CALL_MEMBER(
+            int const unitID = MACRO_CALL_MEMBER(
                 Map::Units::TribesState_Func::getUnitIDForIndexInTribe, DAT_TribesState::ptr)(tribeID, tribeIndex);
             tribeIndex++;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL

@@ -15,7 +15,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004572A0
     void GameStateStructures::validateBuildingCategoryReference(int playerID, int buildingCategory)
     {
-        int buildingID = (&this->playerDataArray[playerID].keep)[buildingCategory].id;
+        int const buildingID = (&this->playerDataArray[playerID].keep)[buildingCategory].id;
         if (buildingID - 1U <= 1998) {
             if (buildingCategory == 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingType != Map::Buildings::BT_MANORHOUSE

@@ -26,8 +26,8 @@ namespace Game {
     void GameStateStructures::renderDebugDataCurrentPlayerData(int x, int y, int width, int height)
     {
         int rowY;
-        int number = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-        int textX = x + 4;
+        int const number = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        int const textX = x + 4;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "player ", textX, y + 0xe, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -211,7 +211,6 @@ namespace Game {
             "PdLim: ", x + 0x2c, y, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_TileMapState::instance.maxPitchDitchCount, x + 0x36, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-        return;
     }
 
 }

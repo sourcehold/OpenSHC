@@ -14,7 +14,7 @@ namespace Game {
         if (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
             return;
         }
-        DWORD currentTime = timeGetTime();
+        DWORD const currentTime = timeGetTime();
         if (this->playerDataArray[playerID].lastTimeSFXNoPlaceInStockpile == 0
             || currentTime - timeGetTime() >= 10000) {
             // "No space in the stockpile"

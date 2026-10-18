@@ -6,7 +6,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00458940
     int GameStateStructures::getSellResourceAmount(int playerID, int resourceType)
     {
-        int stock = this->playerDataArray[playerID].currentResources[resourceType];
+        int const stock = this->playerDataArray[playerID].currentResources[resourceType];
         if (stock < 5) {
             return stock;
         }

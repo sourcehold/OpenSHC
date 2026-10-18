@@ -68,7 +68,7 @@ namespace Game {
             }
         }
         if (DAT_GameSynchronyState::instance.currentGameMode != GM_SOLITARY) {
-            int enemyPlayerID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID;
+            int const enemyPlayerID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID;
             DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[enemyPlayerID][playerID]
                 = DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[enemyPlayerID][playerID] + 1;
             if (DAT_GameState::instance.mapAndTime.playerTeams[enemyPlayerID]

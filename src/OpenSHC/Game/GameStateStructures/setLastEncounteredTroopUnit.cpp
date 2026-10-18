@@ -12,7 +12,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004565A0
     void GameStateStructures::setLastEncounteredTroopUnit(int playerID, int unitID)
     {
-        int enemyUnitID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyUnitIDUnk;
+        int const enemyUnitID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyUnitIDUnk;
         if ((uint)(playerID - 1) > 7) {
             return;
         }

@@ -21,7 +21,7 @@ namespace Game {
         int keepArea
             = (short)
                   DAT_TileMapState::instance.PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry];
-        int zoneSize = DAT_PathFindingState::instance.zoneSizesArray[keepArea];
+        int const zoneSize = DAT_PathFindingState::instance.zoneSizesArray[keepArea];
         if (zoneSize < 300) {
             return FALSE;
         }
@@ -54,7 +54,7 @@ namespace Game {
                 == DAT_GameState::instance.mapAndTime.playerTeams[otherPlayerID]) {
                 continue;
             }
-            int otherTile = this->playerDataArray[otherPlayerID].campground.tileEntry;
+            int const otherTile = this->playerDataArray[otherPlayerID].campground.tileEntry;
             if (this->playerDataArray[otherPlayerID].campground.id != 0
                 && DAT_GameState::instance.playerDataArray[otherPlayerID].lordKilledByPlayerID == 0
                 && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[otherPlayerID] != -1

@@ -22,10 +22,13 @@ namespace Game {
             if (this->playerDataArray[playerID].playerDeathRelated != 0) {
                 continue;
             }
-            // the original walks one pointer over currentPlayerFullIDArray and reaches currentAIArray off it, 27 ints
-            // further on; reading the second array by name costs the induction base
-            int* currentPlayerFullID = &DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID];
-            if (*currentPlayerFullID == -1 && currentPlayerFullID[0x1b] == 0) {
+            // playerSlot[0x1b] is currentAIArray[playerID]: the two arrays sit 0x1b ints apart
+            // (GameSynchronyState.hpp, 0x714 - 0x6a8 = 0x6c) and the original reaches the second
+            // off the induction base it walks over the first. Naming currentAIArray instead moves
+            // the anchor onto it and costs the match (measured: quick_diff 0.9737 -> 0.9211), so
+            // this pointer is load-bearing rather than a decompiler artefact.
+            int const* const playerSlot = &DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID];
+            if (playerSlot[0] == -1 && playerSlot[0x1b] == 0) {
                 continue;
             }
             if (this->playerDataArray[playerID].currentResources[0xf]

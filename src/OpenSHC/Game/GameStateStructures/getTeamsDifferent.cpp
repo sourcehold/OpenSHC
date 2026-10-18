@@ -16,7 +16,7 @@ namespace Game {
         if (secondPlayerId == 0) {
             return FALSE;
         }
-        return (uint)(this->mapAndTime.playerTeams[firstPlayerId] != this->mapAndTime.playerTeams[secondPlayerId]);
+        return this->mapAndTime.playerTeams[firstPlayerId] != this->mapAndTime.playerTeams[secondPlayerId];
     }
 
 }

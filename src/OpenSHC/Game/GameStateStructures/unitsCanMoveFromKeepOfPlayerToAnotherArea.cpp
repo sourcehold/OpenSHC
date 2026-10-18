@@ -14,8 +14,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457800
     BOOLEnum GameStateStructures::unitsCanMoveFromKeepOfPlayerToAnotherArea(int playerID)
     {
-        int keepTile = this->playerDataArray[playerID].campground.tileEntry;
-        int signpostTile = this->mapAndTime.signpostEntryData[0].tile;
+        int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int const signpostTile = this->mapAndTime.signpostEntryData[0].tile;
         if (DAT_TileMapState::instance.PathConnectionLayer[keepTile] == 0) {
             return FALSE;
         }

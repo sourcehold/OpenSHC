@@ -38,7 +38,7 @@ namespace Game {
         if (accessibleCount <= 0) {
             return 0;
         }
-        int randomIndex = SEC_RNG::instance.currentNumber1 % accessibleCount;
+        int const randomIndex = SEC_RNG::instance.currentNumber1 % accessibleCount;
         int accessibleIndex = 0;
         for (int slot = 0; slot < 8; ++slot) {
             if (this->mapAndTime.signpostIDs[slot] > 0

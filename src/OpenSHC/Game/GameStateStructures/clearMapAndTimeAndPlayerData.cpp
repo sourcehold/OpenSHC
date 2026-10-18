@@ -13,10 +13,10 @@ namespace Game {
     {
         for (int playerID = 0; playerID < 9; ++playerID) {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                14836, '\0', &this->playerDataArray[playerID]);
+                sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
         }
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            262608, '\0', &DAT_GameState::instance.mapAndTime);
+            sizeof(DAT_GameState::instance.mapAndTime), '\0', &DAT_GameState::instance.mapAndTime);
     }
 
 }

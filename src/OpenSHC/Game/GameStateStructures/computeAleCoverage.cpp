@@ -12,7 +12,7 @@ namespace Game {
         if (this->playerDataArray[playerID].currentPopulation <= 0) {
             return 0;
         }
-        int aleCoverage = (this->playerDataArray[playerID].workingInnsCount * 3000)
+        int const aleCoverage = (this->playerDataArray[playerID].workingInnsCount * 3000)
             / this->playerDataArray[playerID].currentPopulation;
         if (aleCoverage < 0) {
             return 0;

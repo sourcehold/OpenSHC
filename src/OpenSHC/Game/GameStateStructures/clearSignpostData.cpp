@@ -17,7 +17,7 @@ namespace Game {
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             0x1900, '\0', this->mapAndTime.signpostsMapEdge);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0xa00, '\0', this->mapAndTime.unitMoveDestinationXYPairs);
+            sizeof(this->mapAndTime.unitMoveDestinationXYPairs), '\0', this->mapAndTime.unitMoveDestinationXYPairs);
     }
 
 }

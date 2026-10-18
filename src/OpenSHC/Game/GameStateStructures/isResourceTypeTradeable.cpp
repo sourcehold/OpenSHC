@@ -13,7 +13,7 @@ namespace Game {
         if (resourceType == Resources::RT_PITCH) {
             resourceType = Resources::RT_PARTIALPITCH;
         }
-        return (uint)(this->mapAndTime.isResourceTradeable[resourceType] != 0);
+        return this->mapAndTime.isResourceTradeable[resourceType] != 0;
     }
 
 }

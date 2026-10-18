@@ -49,19 +49,19 @@ namespace Game {
             == 0) {
             return;
         }
-        int visitingPlayerID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        int const visitingPlayerID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         this->mapAndTime.traderVisitsPlayer = visitingPlayerID;
         if (visitingPlayerID == 0) {
             return;
         }
         this->mapAndTime.traderRelated2 = 1;
-        int traderUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
+        int const traderUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
             this->mapAndTime.signpostsMapEdge[0][0].x * 8, this->mapAndTime.signpostsMapEdge[0][0].y * 8, 8,
             Map::Units::UT_TRADER);
         if (traderUnitID == 0) {
             return;
         }
-        int horseUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
+        int const horseUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
             this->mapAndTime.signpostsMapEdge[0][0].x * 8, this->mapAndTime.signpostsMapEdge[0][0].y * 8, 8,
             Map::Units::UT_TRADERHORSE);
         if (horseUnitID == 0) {

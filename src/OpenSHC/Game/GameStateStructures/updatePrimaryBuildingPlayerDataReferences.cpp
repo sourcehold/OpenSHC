@@ -13,7 +13,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457960
     void GameStateStructures::updatePrimaryBuildingPlayerDataReferences(uint buildingID)
     {
-        int playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
+        int const playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
         // the primary building entries follow each other, starting at the keep
         for (int entryIndex = 0; entryIndex < 20; ++entryIndex) {
             if ((&this->playerDataArray[playerID].keep)[entryIndex].id == buildingID) {

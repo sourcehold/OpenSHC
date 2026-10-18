@@ -14,8 +14,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004585F0
     int GameStateStructures::moveUnitAroundCampfire(int unitID, int availablePeasants)
     {
-        int playerID = DAT_UnitsState::instance.units[unitID].owner;
-        int campfireID = this->playerDataArray[playerID].campground.id;
+        int const playerID = DAT_UnitsState::instance.units[unitID].owner;
+        int const campfireID = this->playerDataArray[playerID].campground.id;
         if (campfireID > 0) {
             if (DAT_BuildingsState::instance.buildings[campfireID].owner == playerID
                 && DAT_BuildingsState::instance.buildings[campfireID].buildingType == Map::Buildings::BT_CAMPGROUND) {

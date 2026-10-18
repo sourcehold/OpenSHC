@@ -29,15 +29,15 @@ namespace Game {
         MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk)
     {
         int result = 1;
-        int isAI = 0;
-        BuildingType buildingType
+        BOOLEnum isAI = FALSE;
+        BuildingType const buildingType
             = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                 DAT_BuildingsState::ptr)(commandBuildingType);
-        int requiredIron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8;
-        int requiredPitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc;
-        int requiredWood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
+        int const requiredIron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8;
+        int const requiredPitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc;
+        int const requiredWood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
         int requiredStone = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4;
-        int requiredGold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold;
+        int const requiredGold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold;
         if (DAT_GameCore::instance.solitaryAllBuildingsAreFree != FALSE
             || DAT_GameCore::instance.gameMode_2 == GM_EDITOR) {
             return 1;
@@ -54,7 +54,7 @@ namespace Game {
             }
         } else if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
             && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
-            isAI = 1;
+            isAI = TRUE;
         }
         if (MACRO_CALL_MEMBER(
                 Map::Buildings::BuildingsState_Func::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters,
@@ -68,8 +68,8 @@ namespace Game {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_IRON);
             }
-            if (isAI != 0) {
-                int ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[6];
+            if (isAI) {
+                int const ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[6];
                 if (ironToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[6]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[6] = ironToBuy;
                 }
@@ -82,8 +82,8 @@ namespace Game {
                     MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX,
                         DAT_MissingResourceState::ptr)(1, Audio::SFX::RLSFX_PITCH);
                 }
-                if (isAI != 0) {
-                    int pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[7];
+                if (isAI) {
+                    int const pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[7];
                     if (pitchToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[7]) {
                         this->playerDataArray[playerID].resourcesToAcquireArray[7] = pitchToBuy;
                     }
@@ -102,7 +102,7 @@ namespace Game {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_PARTIAL_STONEUnk);
             }
-            if (isAI != 0) {
+            if (isAI) {
                 int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[2];
                 if (woodToBuy > 0 && woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[2]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodToBuy;
@@ -119,7 +119,7 @@ namespace Game {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_WOOD);
             }
-            if (isAI != 0) {
+            if (isAI) {
                 int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[2];
                 if (woodShortage > 0 && woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[2]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodShortage;
@@ -131,7 +131,7 @@ namespace Game {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_STONE);
             }
-            if (isAI != 0) {
+            if (isAI) {
                 int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[4];
                 if (stoneToBuy > 0 && stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[4]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuy;

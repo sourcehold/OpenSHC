@@ -21,14 +21,14 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459490
     void GameStateStructures::spawnDrunkard(int buildingID)
     {
-        uint entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-        uint entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        uint const entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+        uint const entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         if (entryX > 399 || entryY > 399
             || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[entryY * 400 + entryX] == 0) {
             return;
         }
-        int playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
-        int tile = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile + entryX;
+        int const playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
+        int const tile = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile + entryX;
         this->playerDataArray[playerID].field640_0x2178 = buildingID;
         int drunkardLimit;
         if (this->playerDataArray[playerID].populationRelatedCrowdingCountUnk < 20) {
@@ -45,7 +45,7 @@ namespace Game {
             drunkardsToSpawn = drunkardLimit;
         }
         for (int i = 0; i < drunkardsToSpawn; ++i) {
-            int unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID,
+            int const unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID,
                 playerID, DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX * 8,
                 DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY * 8,
                 DAT_TileMapState::instance.HeightLayer[tile], Map::Units::UT_DRUNK);

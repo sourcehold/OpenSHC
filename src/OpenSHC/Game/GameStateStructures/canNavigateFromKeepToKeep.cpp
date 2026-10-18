@@ -20,8 +20,8 @@ namespace Game {
         if (this->playerDataArray[playerID2].keep.id == 0) {
             return TRUE;
         }
-        int keepTile2 = this->playerDataArray[playerID2].campground.tileEntry;
-        int keepTile1 = this->playerDataArray[playerID1].campground.tileEntry;
+        int const keepTile2 = this->playerDataArray[playerID2].campground.tileEntry;
+        int const keepTile1 = this->playerDataArray[playerID1].campground.tileEntry;
         if (DAT_TileMapState::instance.PathConnectionLayer[keepTile2] == 0) {
             return FALSE;
         }

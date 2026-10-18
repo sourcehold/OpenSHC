@@ -25,7 +25,7 @@ namespace Game {
                 || DAT_BuildingsState::instance.buildings[buildingID].logicalState == Map::Buildings::BLS_REMOVE) {
                 continue;
             }
-            int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+            int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
             if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_CHAPEL) {
                 DAT_GameState::instance.playerDataArray[owner].religionVar1 += 1;
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_CHURCH) {

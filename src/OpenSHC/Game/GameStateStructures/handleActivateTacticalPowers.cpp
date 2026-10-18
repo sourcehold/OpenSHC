@@ -26,7 +26,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459E40
     void GameStateStructures::handleActivateTacticalPowers(int playerID, int powerType, int tile)
     {
-        int powerCost = (powerType + 1) * 0x27c;
+        int const powerCost = (powerType + 1) * 0x27c;
         if (DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel < powerCost) {
             return;
         }
@@ -62,9 +62,9 @@ namespace Game {
                 unitType = Map::Units::UT_E_KNIGHT;
                 unitCount = 10;
             }
-            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-            int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-            dword tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
+            int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            dword const tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
                 DAT_TribesState::ptr)(1, x, y, playerID, unitType, unitCount);
             if ((int)tribeID > 0) {
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;

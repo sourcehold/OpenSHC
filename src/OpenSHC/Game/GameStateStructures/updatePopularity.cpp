@@ -128,7 +128,7 @@ namespace Game {
                 popularityChange = this->playerDataArray[playerID].taxesSetting == 10 ? -500 : -600;
             }
             this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
-            int popularityAfterTax = this->playerDataArray[playerID].popularity;
+            int const popularityAfterTax = this->playerDataArray[playerID].popularity;
             this->playerDataArray[playerID].popularityChangeBasedOnTax = popularityChange;
             if (popularityChange < worstChange) {
                 worstChange = popularityChange;

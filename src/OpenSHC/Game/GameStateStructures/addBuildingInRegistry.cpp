@@ -11,7 +11,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0045AE10
     void GameStateStructures::addBuildingInRegistry(int buildingID)
     {
-        int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+        int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
         if (DAT_GameSynchronyState::instance.currentGameMode == GM_SOLITARY) {
             return;
         }
@@ -21,7 +21,7 @@ namespace Game {
         if (DAT_BuildingsState::instance.buildings[buildingID].fireDuration != 0) {
             return;
         }
-        this->first500BuildingsPerPlayer[owner][this->first500BuildingsCurrentIndexCounter[owner]] = (short)buildingID;
+        this->first500BuildingsPerPlayer[owner][this->first500BuildingsCurrentIndexCounter[owner]] = buildingID;
         ++this->first500BuildingsCurrentIndexCounter[owner];
     }
 
