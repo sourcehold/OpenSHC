@@ -104,11 +104,11 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.scaleZone = 1000;
             DAT_TroopValueState::instance.attackInfo.someArea = 0;
             DAT_TroopValueState::instance.attackInfo.field127541_0x2c85c = 0;
-            if (_isSolitary) {
-                DAT_TroopValueState::instance.attackInfo.someDistanceLimit
-                    = ((2999 < DAT_TroopValueState::instance.attackInfo.zoneSize) - 1 & 6) + 4;
-            } else {
+            if (!_isSolitary) {
                 DAT_TroopValueState::instance.attackInfo.someDistanceLimit = 4;
+            } else {
+                DAT_TroopValueState::instance.attackInfo.someDistanceLimit
+                    = ((3000 <= DAT_TroopValueState::instance.attackInfo.zoneSize) - 1 & 6) + 4;
             }
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 16000, '\0', (void*)((int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hackValuesArray)));

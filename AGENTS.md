@@ -863,3 +863,32 @@ reachable from C++.
 Also neutral, do not retry: moving `placeTunnelForEveryTunneler`'s zero
 initialisations after the `if (!local_c)` test to stop MSVC reusing a zeroed
 register as the comparison operand. MSVC reorders them back.
+
+## `recomputeAttackInfo` (0x51E300): what it actually is, and why diffs mislead
+
+Ghidra's control-flow analysis: 4124 bytes, 997 instructions, 143 basic blocks,
+cyclomatic complexity 144, 11 loops, **42 calls, 1 return**. Our file has exactly
+42 `MACRO_CALL_MEMBER` and exactly 1 `return`, and 9 loops. So the function is
+*not* missing code or returns - the call and exit structure already match.
+
+Two real fixes found by reading the first non-register divergence (30.5% -> 31.0%):
+- `((2999 < zoneSize) - 1 & 6) + 4` -> `3000 <=`, which is what produces the
+  original's `cmp 0xbb8 / setge` instead of our `cmp 0xbb7 / setg`.
+- the `_isSolitary` if/else arms were swapped; the original lays the
+  `someDistanceLimit = 4` arm as the fallthrough (`je` over it), ours jumped to it.
+
+**The large asymmetric runs in its diff are aligner artifacts, not missing code.**
+The diff shows three separate `orig 29 insns / ours 0` runs and one
+`orig 3 / ours 37`, which look like whole blocks we failed to write. They are not:
+the block in question (`mov eax,[TileMapState+5589560] / shl eax,5 / ...`) occurs
+40 times across the function and *most of its occurrences match*. When a block
+repeats many times reccmp pairs the copies arbitrarily, so one copy matches and
+another shows as wholly absent.
+
+Consequence: do not read this function's diff for missing-code leads. What is
+left is (a) register allocation - the original keeps `_unitID` in `si` and the
+loop index in `ebp` across the main loop while ours spills both to the frame -
+and (b) the pairing noise above. Combined with the sub-70% aligner problem
+documented earlier, its diff cannot validate a local change either. If this
+function is to be moved, it needs Ghidra's control flow read block by block
+against the source, not reccmp.
