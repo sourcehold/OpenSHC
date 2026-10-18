@@ -32,7 +32,7 @@ namespace Map {
                     return;
                 }
                 this->searchQueue.readIndex += 1;
-                if ((int)this->searchQueue.readIndex >= 80400) {
+                if ((int)this->searchQueue.readIndex >= Map::MC_MAP_TILES_COUNT) {
                     this->searchQueue.readIndex = 0;
                 }
             }
