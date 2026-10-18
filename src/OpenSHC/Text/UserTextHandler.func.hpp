@@ -63,7 +63,7 @@ namespace Text {
             &UserTextHandler::handleCharacterIntoInputBuffer)
         handleCharacterIntoInputBuffer;
 
-        MACRO_FUNCTION_RESOLVER(uint (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004699E0,
+        MACRO_FUNCTION_RESOLVER(int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004699E0,
             &UserTextHandler::dequeueInputBufferChar)
         dequeueInputBufferChar;
 
