@@ -341,7 +341,16 @@ Diff patterns that were reliable (more in the cheat sheet):
   hand-written copies both give 154 instructions at 0.6745, while outer-step-4 plus an inner 0..3 gives 132 at 0.9198
   against the original's 119. Do not bother varying the loop variable - a fresh `int i`, the function's already
   declared `i`, a fresh name and a pre-declared one all produced byte-identical code.
-- A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+- A flag stored with `mov dword ptr [..], 0/1` is four bytes wide, so it is not a `bool`, which stores a byte. It
+  does not follow that it is a plain `int`: `BOOLEnum` is a typedef of `BOOL` and so of `int`, which means a dword
+  store is exactly what a `BOOLEnum` field looks like and is no evidence against one. Decide from the writes, not
+  the width - xref the field's address and read every store. `PlayerData::isNotNervousByEnemyTroopValue` is written
+  7 times across the image and every store is 0 or 1 (three through a register: two `xor eax, eax` and an `ebx` the
+  decompiler renders as `= 1`), and its 6 reads are all boolean tests - five `cmp .., 0x0` plus one against a zeroed
+  register that Ghidra prints as `== FALSE` - so the field is a `BOOLEnum`. Grepping our own sources would have
+  missed this, because 3 of its 4 writing functions are not reimplemented yet. Check Ghidra's own type for the
+  field too; it already had this one as `BOOLEnum`. Correcting such a field is free: the underlying type is the
+  same, so the match does not move.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
   physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`
