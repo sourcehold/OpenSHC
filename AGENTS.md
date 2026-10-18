@@ -151,12 +151,17 @@ restyling anything large:
   `__asm` block rather than C++. Functions are never `__declspec(naked)`: write a normal function, keep the
   compiler-generated statements as C++, and refer to parameters, locals and `this` by name. Prettify offsets with
   MSVC's struct-member asm syntax (`mov esi, dword ptr [eax]TileMapState.ptr_LogicLayer`) - `::` is not parseable in an
-  asm operand, so a resolver global cannot be named there.
-- a frame pointer plus a `this` spill - the original was built without optimisation. Add `#pragma optimize(, off)`
-  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
-  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
-  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
-  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+  asm operand, so a resolver global cannot be named there. Where the handwritten block reaches a *global* layer rather
+  than a `this` field, give it a C++ pointer local and name that local in the asm; the original caches the same bases in
+  stack slots anyway, so the inner loop still matches. `mov eax, 0` followed by `mov ax, word ptr [..]` is the giveaway
+  in its own right - that is a hand-rolled `movzx`, which the compiler always emits as one instruction.
+  Such a block is usually a **macro**: the same instruction stream appears verbatim in several functions and never as a
+  call, so it belongs in a hand-written `*Asm.hpp` beside them (`NeighbourFlagsAsm.hpp`, `LinkageNeighbourAsm.hpp`).
+  This has been worth ~45 points per function, three times over.
+- a frame pointer plus a `this` spill - the original was built without optimisation, **unless the same function also
+  reports `mov reg, 0`**. MSVC keeps `ebp` in any function containing an `__asm` block, so for a function with
+  handwritten assembly the frame pointer says nothing about the optimisation level: reimplement the handwritten part as
+  inline asm.
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
@@ -252,6 +257,13 @@ unrelated height, a `break` left outside its `if` that made six `switch` arms un
 of the switch leaving the value it should have set uninitialised. Fixing them was also worth 7.7% of match, so a
 suspicious dead store is worth decompiling for rather than deleting. Note this is the opposite of the duplicate-tail
 pattern below, where our shared block should have been two separate branches - check the predecessor count either way.
+
+Duplicating a `LAB_*` is correct C++ but not automatically a better match, so **measure every `goto` removal**. A
+`goto` in the decompiler output usually marks a block the original compiler emitted once and jumped to, and writing
+the block out twice makes MSVC emit it twice: duplicating the single shared tail in
+`setClimbBasedOnClosestClimbData` - two `if` arms that set a coordinate pair and then share the distance test - was
+semantically identical and cost **35 points**. Keep the `goto` where the measurement says the original shared the
+block, and record that in the commit remark rather than trading match for style.
 
 Diff patterns that were reliable (more in the cheat sheet):
 
