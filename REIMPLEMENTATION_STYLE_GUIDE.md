@@ -161,7 +161,7 @@ A local does not qualify if anything later assigns it, steps it (`++`, `--`, `+=
 Loop counters never qualify. A `const` that has to be removed again later to accommodate a fix is worse than
 no `const`, so prefer it on reads of state that the function plainly only samples once.
 
-## 7. Resolve a pointer into a field or an array access — unless it is the anchor
+## 7. Resolve a pointer into a field or an array access
 
 Ghidra turns field walks into pointer arithmetic, and the offsets it leaves behind can point into a
 completely different member. `unptr.py` and `unoffset_matrix.py` undo the common shapes.
@@ -231,6 +231,17 @@ On `anyGoodsAreAllowedForSale` the first form moves `xor esi, esi` one instructi
 `quick_diff` from 0.9048 to 0.8571; the second is byte-for-byte the `while` loop it replaced. Hoisting the
 initialiser out of the `for` header looks like a half-done conversion, so say why in a comment or leave the
 `while` alone.
+
+## 10. No magic addresses
+
+For example, sometimes addresses are referred in while loops, but in reality, they are not used: looping over the array
+with a for-loop naturally reproduces the address in the machine code without the literal address being required in the source code.
+```cpp
+ptr = &value;
+while (ptr < 0x401000) {
+    ptr += 4;
+}
+```
 
 ---
 
