@@ -243,6 +243,13 @@ while (ptr < 0x401000) {
 }
 ```
 
+## 11. Prefer for-loops everywhere
+All do-while and while loops should be rewritten as for-loops.
+
+## 12. Literal strings should be imported
+Literal strings should be replaced with the appropriate entry from:
+src/OpenSHC/string-literals.hpp or src/OpenSHC/wstring-literals.hpp
+
 ---
 
 ## Measuring
