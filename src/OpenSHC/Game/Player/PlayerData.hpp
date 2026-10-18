@@ -358,7 +358,7 @@ namespace Game {
             int someCounter2; // 0x00003688 length: 4
             AISiegeUnitCreation aiSiegeCreationInformation[4][5]; // 0x0000368C length: 400
             int attackAssaultDelayRelatedValue; // 0x0000381C length: 4
-            int isNotNervousByEnemyTroopValue; // 0x00003820 length: 4
+            BOOLEnum isNotNervousByEnemyTroopValue; // 0x00003820 length: 4
             short requestedGoodsArray1Unk[10]; // 0x00003824 length: 20
             short requestedGoodsArray2Unk[10]; // 0x00003838 length: 20
             int requestStateUnk; // 0x0000384C length: 4

@@ -128,7 +128,7 @@ namespace Map {
             short currentStoredResourceType; // 0x0000018C length: 2
             short uidPlaced; // 0x0000018E length: 2
             short field125_0x190; // 0x00000190 length: 2
-            undefined2 quarryStockpileID; // 0x00000192 length: 2
+            short quarryStockpileID; // 0x00000192 length: 2
             short field127_0x194; // 0x00000194 length: 2
             short numberOfPopulationProvided; // 0x00000196 length: 2
             short buildingTypeBasedEmployeeCount; // 0x00000198 length: 2
