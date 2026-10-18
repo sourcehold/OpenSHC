@@ -1,11 +1,15 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace AI {
+
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D3780
     void AICState::computeNervousness(int playerID)
@@ -14,7 +18,7 @@ namespace AI {
             = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
         int enemyTroopValue = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
 
-        int isNotNervous = 1;
+        BOOLEnum isNotNervous = TRUE;
         int margin;
         if (enemyTroopValue < 50)
             margin = -20;
@@ -32,8 +36,8 @@ namespace AI {
             margin = 500;
 
         if (troopValueNearKeep > enemyTroopValue + margin) {
-            isNotNervous = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue == 0) {
+            isNotNervous = FALSE;
+        } else if (!DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue) {
             if (DAT_GameState::instance.playerDataArray[playerID]
                     .totalEnemyTroopValueByPlayerID[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 > troopValueNearKeep)

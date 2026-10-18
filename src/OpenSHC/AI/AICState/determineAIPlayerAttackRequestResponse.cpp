@@ -15,7 +15,7 @@ namespace AI {
             return FALSE;
         int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
 
-        if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue != 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue) {
             MACRO_CALL_MEMBER(AICState_Func::playWillNotAttack1BikFromPlayerToPlayer, this)(
                 playerID, requestedByPlayerID);
             return FALSE;
