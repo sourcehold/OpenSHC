@@ -28,7 +28,7 @@ namespace AI {
 
         for (int i = 0; i < 6; i++) {
             int const count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
-                            [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType];
+                                  [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType];
             for (int j = 0; j < count; j++) {
                 int const tribeID
                     = DAT_GameState::instance.playerDataArray[playerID]

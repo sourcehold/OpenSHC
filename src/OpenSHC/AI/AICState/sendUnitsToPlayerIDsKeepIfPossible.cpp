@@ -28,8 +28,9 @@ namespace AI {
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
                 playerID1, playerID2)
             == FALSE) {
-            uint const gatehouseTile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
-                DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
+            uint const gatehouseTile
+                = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
+                    DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
             if (gatehouseTile != 0) {
                 gatehouseY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[gatehouseTile];
                 gatehouseX

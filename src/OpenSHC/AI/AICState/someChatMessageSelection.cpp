@@ -54,7 +54,7 @@ namespace AI {
                     if (DAT_GameSynchronyState::instance.currentAIArray[playerID + offset] != 0
                         && DAT_GameState::instance.mapAndTime.playerTeams[playerID + offset]
                             != DAT_GameState::instance.mapAndTime
-                                   .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                                .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
                         candidates[candidateCount] = playerID + offset;
                         candidateCount++;
                     }

@@ -20,8 +20,9 @@ namespace AI {
     void AICState::recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance)
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
-        int const keepArea = (short)DAT_TileMapState::instance
-                           .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+        int const keepArea
+            = (short)DAT_TileMapState::instance
+                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
 
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {

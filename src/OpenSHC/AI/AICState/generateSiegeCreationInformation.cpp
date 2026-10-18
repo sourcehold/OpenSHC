@@ -30,7 +30,8 @@ namespace AI {
             return;
 
         int const slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
-        int const locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
+        int const locationCount
+            = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
         while (i < locationCount) {
             int const index = i;
             i++;

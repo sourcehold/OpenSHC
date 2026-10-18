@@ -44,7 +44,8 @@ namespace AI {
             }
 
             for (int j = 0; j < tribeCount; j++) {
-                int const tribeID = DAT_GameState::instance.playerDataArray[attackingPlayerIndex].aiTribeIDs[tribeType + j];
+                int const tribeID
+                    = DAT_GameState::instance.playerDataArray[attackingPlayerIndex].aiTribeIDs[tribeType + j];
                 if (tribeID == 0) {
                     continue;
                 }
