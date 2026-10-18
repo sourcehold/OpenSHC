@@ -1,4 +1,4 @@
-#include "../../../Map.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"

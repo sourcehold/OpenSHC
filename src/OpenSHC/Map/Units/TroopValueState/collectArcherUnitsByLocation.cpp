@@ -1,4 +1,4 @@
-#include "../../../Map.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"

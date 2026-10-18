@@ -1,4 +1,4 @@
-#include "../../../Map.func.hpp"
+#include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
