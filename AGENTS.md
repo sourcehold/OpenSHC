@@ -959,3 +959,70 @@ types. Not obviously source-addressable.
 4. Instruction-count delta - a large positive delta means we do extra work.
    Count only lines matching `[a-z]` in the diff; blank lines otherwise inflate
    it (this produced a bogus "+26" on oil before correction).
+
+# The instruction-surplus ranking: the technique that works below 70%
+
+The reccmp diff gives both sides' instruction totals, so no Ghidra call is
+needed: `orig = matched + orig-only`, `ours = matched + ours-only`. Totals are
+**pairing-independent**, so unlike every other reading of the diff this number
+survives the aligner being out of phase. A positive delta is real extra work,
+and removing real work moves the score even on a sub-50% function - which is the
+one thing local encoding fixes cannot do there.
+
+Exclude `0xcc`, `nop` and the `lea esp,[esp]` / `mov edi,edi` alignment fillers
+or the ranking is wrong: `updateTribeBehaviorBasedOnBehaviorType` has 12 `int3`
+padding bytes counted as original instructions.
+
+Results from the first pass of this ranking:
+
+| function | delta | fix | % |
+|---|---|---|---|
+| `placeSiegeTentsAndAssignEngineers` | +18 | redundant reload in the pop loop | 32.6 -> **44.1** |
+| `computeSiegeSpotScores` | +27 | `-(uint)(cond) & mask` -> ternary | 63.2 -> **66.4** |
+| `placeTunnelForEveryTunneler` | +17 | hoist a loop-invariant store | 70.2 -> **75.7** |
+
+## The two shapes that paid
+
+**A store inside a loop whose target is only read after it.** `placeSiegeTents`
+re-read `tribeIDArraySize` at the end of a loop body that the loop condition
+then re-read anyway; `placeTunnelForEveryTunneler` assigned
+`_nTunnels = _nTunnelers` every iteration. One extra load/store per iteration
+each.
+
+**A 0-or-N mask written as arithmetic on a bool.** `-(uint)(cond) & 9999` and
+`(cond) - 1 & 9999` both make MSVC materialise the bool as 0/1 then negate it
+back into a mask:
+
+    orig:  cmp bl,byte[..] / sbb edx,edx /                     and edx,0x270f
+    ours:  cmp bl,byte[..] / sbb edx,edx / neg edx / neg edx / and edx,0x270f
+
+`cond ? N : 0` lowers straight from `sbb` to `and`. **But only where the
+comparison feeds `sbb`**: the same rewrite on the two `(cond) - 1 & N` sites in
+`computeAttackWaveTroopComposition` and `recomputeAttackInfo`, where there is no
+memory compare, lost 0.3 each. Check for the `neg` pair before rewriting.
+
+## Do not delete a loop store without tracing the gotos
+
+`recomputeAttackInfo:325` sets `_someLimit = 1` inside a loop and `_someLimit` is
+read only at line 596, which looks dead. It is not: the `goto LAB_0051f316` on
+the next line jumps *past* the line-590 assignment that would otherwise
+overwrite it, so line 325 supplies the value actually passed to
+`recomputeALGPathFindingTileMapUnk`. Deleting it would have been a behaviour bug.
+
+## `updateTribeBehaviorBasedOnBehaviorType`: one stack slot, 33 instructions
+
+Its +46 surplus is almost entirely one cause, and it is precisely quantified:
+
+    ret   orig 32  ours 32     <- exits match exactly
+    pop   orig 128 ours 160    <- exactly one extra pop per exit
+
+Ours opens with an extra `push ecx` (the MSVC idiom for allocating one 4-byte
+slot) and every one of the 32 epilogues carries a matching `pop ecx`. The
+original keeps `this` in `ebx` (`mov ebx,ecx`); we spill it
+(`mov [esp+0x10],ecx`). So our source holds **exactly one more value live than
+the original**, and finding it is worth 33 instructions.
+
+Not the cause (measured): the `uVar7` local, loaded at line 73 and read only at
+line 381, whose live range spans the whole switch. Inlining it to its use site
+is safe (the only writers of `attackWaveRetargetCount` are in other functions
+not reachable on that path) but left `pop` at 160 and cost 10.1 points.
