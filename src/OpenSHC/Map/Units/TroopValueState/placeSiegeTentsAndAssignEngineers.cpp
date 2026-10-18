@@ -120,7 +120,6 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(
                             _tribeID);
                         sVar2 = DAT_TribesState::instance.tribes[_tribeID].size;
-                        iVar5 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     }
                 }
                 _unitID = 0;
