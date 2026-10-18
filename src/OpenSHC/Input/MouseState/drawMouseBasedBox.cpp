@@ -13,7 +13,7 @@ namespace Input {
     // FUNCTION: STRONGHOLDCRUSADER 0x00472A90
     void MouseState::drawMouseBasedBox()
     {
-        if (!DAT_MouseState::instance.field31_0x94) {
+        if (!DAT_MouseState::instance.selectionBoxState) {
             return;
         }
         if (!DAT_MouseState::instance.leftClickState && !DAT_MouseState::instance.draggingStopped) {

@@ -42,7 +42,7 @@ namespace UI {
         short* destination2; // 0x0000005C length: 4
         pointer sliderCallbackFunction; // 0x00000060 length: 4
         dword mbr_0x64; // 0x00000064 length: 4
-        dword disappearAfter; // 0x00000068 length: 4
+        int disappearAfter; // 0x00000068 length: 4
         dword mbr_0x6c; // 0x0000006C length: 4
         dword timeItIsSet; // 0x00000070 length: 4
         int minus1; // 0x00000074 length: 4

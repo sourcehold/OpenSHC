@@ -18,7 +18,7 @@ namespace UI {
                 &OpenSHC::UI::MenuViews::GameStartEnterName::MenuView_GameStartEnterName_DoEveryFrame)
             MenuView_GameStartEnterName_DoEveryFrame;
 
-            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(void* param_1), false, Address::SHC_3BB0A8C1_0x00440560,
+            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00440560,
                 &OpenSHC::UI::MenuViews::GameStartEnterName::MenuView_GameStartEnterName_Prepare)
             MenuView_GameStartEnterName_Prepare;
 

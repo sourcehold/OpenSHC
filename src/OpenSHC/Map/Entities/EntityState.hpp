@@ -33,7 +33,7 @@ namespace Map {
         public:
             undefined4 totalEntityCount; // 0x00000000 length: 4
             undefined4 maxEntityCount; // 0x00000004 length: 4
-            undefined4 every10Ticks; // 0x00000008 length: 4
+            int everyTenTicks; // 0x00000008 length: 4
             int lineOfSightClearanceSteps; // 0x0000000C length: 4
             undefined4 fireCount; // 0x00000010 length: 4
             Entity entityArray[3000]; // 0x00000014 length: 696000

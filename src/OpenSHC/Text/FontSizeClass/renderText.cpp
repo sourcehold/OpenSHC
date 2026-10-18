@@ -39,12 +39,12 @@ namespace Text {
                 = DAT_TextInputDefinedData::instance
                       .CharToImageSeqIDMapping[DAT_TextManagerObject::instance.alternativeCodePageUsedUnk][currentChar];
 
-            if (_xPos + this->whiteSpaceWidth_0x1c * 5 > DAT_TextManagerObject::instance.field2_0x8
-                && _xPos < DAT_TextManagerObject::instance.field3_0xc) {
+            if (_xPos + this->whiteSpaceWidth_0x1c * 5 > DAT_TextManagerObject::instance.textClipMin
+                && _xPos < DAT_TextManagerObject::instance.textClipMax) {
 
                 if (imageSeqId == -1) {
                     if (currentChar >= ' ') {
-                        if (DAT_TextManagerObject::instance.field6_0x18) {
+                        if (DAT_TextManagerObject::instance.helpTextLinkActive) {
                             int const lineY = this->baselineOffset_0x10 + _yPos + 2;
                             MACRO_CALL_MEMBER(
                                 UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(

@@ -339,10 +339,10 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                      != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER)
                                     && (DAT_GameCore::instance.activeMenuTab.tabType
                                         != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD))
-                                || (DAT_WindowAndDirectDraw::instance.mbr_0xd0 = 2,
+                                || (DAT_WindowAndDirectDraw::instance.pendingBltMode = 2,
                                     DAT_GameCore::instance.currentMenuViewType
                                         == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU)) {
-                                DAT_WindowAndDirectDraw::instance.mbr_0xd0 = 1;
+                                DAT_WindowAndDirectDraw::instance.pendingBltMode = 1;
                             }
                             DAT_GameCore::instance.currentlyInGameUnk_0xa4 = TRUE;
                             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderMap,
@@ -383,7 +383,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                             == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                             if (DAT_GameCore::instance.activeMenuTab.tabType
                                 != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER) {
-                                DAT_MinimapViewState::instance.field0_0x0 = 1;
+                                DAT_MinimapViewState::instance.needsRedraw = 1;
                                 MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapLandscaping,
                                     DAT_MinimapViewState::ptr)(DAT_MenuHandlerState::instance.x + 664,
                                     ((DAT_MenuHandlerState::instance.y + 464)), ((128)), ((128)));
@@ -401,7 +401,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                     && !DAT_GameCore::instance.isBinkVideoPlaying)) {
                                 DAT_RenderMiniMapOrBinkFlag::instance = DAT_RenderMiniMapOrBinkFlag::instance ^ TRUE;
                                 if (DAT_RenderMiniMapOrBinkFlag::instance) {
-                                    DAT_MinimapViewState::instance.field0_0x0 = 1;
+                                    DAT_MinimapViewState::instance.needsRedraw = 1;
                                     MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapMain,
                                         DAT_MinimapViewState::ptr)();
                                     DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 3;

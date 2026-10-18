@@ -13,8 +13,8 @@ namespace Input {
         this->resetPending = 0;
         this->waitCursorToggle = 0;
         this->cursorType = 0;
-        this->field70_0x1e4 = 0;
-        this->field68_0x1dc = -1;
+        this->field67_0x1e4 = 0;
+        this->field65_0x1dc = -1;
         return this;
     }
 

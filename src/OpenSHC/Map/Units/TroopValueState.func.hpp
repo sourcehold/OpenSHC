@@ -129,8 +129,8 @@ namespace Map {
                 &TroopValueState::calculateTile2PeoplValueClosestToUnit)
             calculateTile2PeoplValueClosestToUnit;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0051A220,
-                &TroopValueState::findEnemyLord)
+            MACRO_FUNCTION_RESOLVER(
+                int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A220, &TroopValueState::findEnemyLord)
             findEnemyLord;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A2D0,

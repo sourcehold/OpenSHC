@@ -13,7 +13,7 @@ namespace UI {
     {
         if (DAT_GameCore::instance.taxesSettingUnk == 0) {
             DAT_GameCore::instance.taxesSettingUnk = taxesSettingUnk;
-            DAT_GameCore::instance.unknownScribeRelatedFlag_0x130 = TRUE;
+            DAT_GameCore::instance.scribeAnimationPhase = TRUE;
             DAT_GameCore::instance.taxestimeUnk = timeGetTime();
             DAT_GameCore::instance.scribeAnimationFrame2 = 0;
         }

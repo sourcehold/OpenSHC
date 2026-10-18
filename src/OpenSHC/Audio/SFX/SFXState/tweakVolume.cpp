@@ -40,16 +40,16 @@ namespace Audio {
                     if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 7) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
-                            (int)((DAT_SpeechDefinedData::instance.field5_0x41eb04[5].volumeUnk_0x28
-                                          [DAT_SpeechDefinedData::instance.field5_0x41eb04[5].field3_0x44]
+                            (int)((DAT_SpeechDefinedData::instance.AmbientSounds[5].volumeUnk_0x28
+                                          [DAT_SpeechDefinedData::instance.AmbientSounds[5].variationIndex]
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }
                     if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 8) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
-                            (int)((DAT_SpeechDefinedData::instance.field5_0x41eb04[6].volumeUnk_0x28
-                                          [DAT_SpeechDefinedData::instance.field5_0x41eb04[6].field3_0x44]
+                            (int)((DAT_SpeechDefinedData::instance.AmbientSounds[6].volumeUnk_0x28
+                                          [DAT_SpeechDefinedData::instance.AmbientSounds[6].variationIndex]
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }
@@ -67,16 +67,16 @@ namespace Audio {
                     if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 7) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
-                            (int)((DAT_SpeechDefinedData::instance.field5_0x41eb04[5].volumeUnk_0x28
-                                          [DAT_SpeechDefinedData::instance.field5_0x41eb04[5].field3_0x44]
+                            (int)((DAT_SpeechDefinedData::instance.AmbientSounds[5].volumeUnk_0x28
+                                          [DAT_SpeechDefinedData::instance.AmbientSounds[5].variationIndex]
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }
                     if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 8) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
-                            (int)((DAT_SpeechDefinedData::instance.field5_0x41eb04[6].volumeUnk_0x28
-                                          [DAT_SpeechDefinedData::instance.field5_0x41eb04[6].field3_0x44]
+                            (int)((DAT_SpeechDefinedData::instance.AmbientSounds[6].volumeUnk_0x28
+                                          [DAT_SpeechDefinedData::instance.AmbientSounds[6].variationIndex]
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }

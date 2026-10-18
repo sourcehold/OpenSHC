@@ -9,8 +9,8 @@ namespace Game {
         if (this->currentMenuViewType == UI::Enums::MVT_BUILD_MENU) {
             this->secondaryActiveMenuTabToSwitchTo = this->buildmenuMenuTabToSwitchTo;
         }
-        if (this->currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
-            this->secondaryActiveMenuTabToSwitchTo.tabType = this->landscapingmenuMenuTabToSwitchTo;
+        if (this->currentMenuViewType == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
+            this->secondaryActiveMenuTabToSwitchTo = this->landscapingmenuMenuTabToSwitchTo;
         }
     }
 

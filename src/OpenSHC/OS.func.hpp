@@ -108,7 +108,7 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x00580A1D, &OpenSHC::OS::_wcsncpy)
     _wcsncpy;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(wchar_t* _Str1, wchar_t* _Str2), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(wchar_t const* _Str1, wchar_t const* _Str2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x00580B69, &OpenSHC::OS::__wcsicmp)
     __wcsicmp;
 

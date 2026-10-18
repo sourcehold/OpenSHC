@@ -49,7 +49,7 @@ namespace Audio {
                         (eMusicIDs)(DAT_SoundEffectsHelperData1::instance.DAT_RandomVariationCurrentPlayingMusic_02
                             + DE::SHCDE::MUSIC_FLUTE1));
                 }
-                this->mbr_0x3288 = 0;
+                this->lastMusicChangeTime = 0;
                 return;
             }
 
@@ -92,9 +92,9 @@ namespace Audio {
                     DAT_SoundEffectsHelperData1::instance.field18_0x64 = 0;
                 }
             }
-            this->mbr_0x3288 = 0;
+            this->lastMusicChangeTime = 0;
             ++DAT_SoundEffectsHelperData1::instance.field8_0x3c;
-            this->mbr_0x3288 = 0;
+            this->lastMusicChangeTime = 0;
         }
 
     }

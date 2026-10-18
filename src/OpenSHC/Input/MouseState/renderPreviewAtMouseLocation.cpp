@@ -33,7 +33,7 @@ namespace Input {
             iVar1 = 1;
         }
 
-        if (!this->field60_0x1bc) {
+        if (!this->field57_0x1bc) {
             int imageIndex = GMTotalPicturesProcessed::instance[16] + 37 + iVar1;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_FLOATS, 38 + iVar1,
@@ -43,7 +43,7 @@ namespace Input {
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY - 50);
         }
 
-        if (!this->field61_0x1c0) {
+        if (!this->field58_0x1c0) {
             int uVar2 = this->mouseBasedEvent == 1;
 
             int imageIndex = GMTotalPicturesProcessed::instance[16] + 35 + uVar2;
@@ -55,9 +55,9 @@ namespace Input {
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + 50);
         }
 
-        if (!this->field63_0x1c8) {
+        if (!this->field60_0x1c8) {
             int uVar2 = !DAT_ViewportRenderState::instance.viewportState.isZoomedOutUnk;
-            if (this->field59_0x1b8 == 3) {
+            if (this->field56_0x1b8 == 3) {
                 uVar2 += 2;
             }
 
@@ -70,9 +70,9 @@ namespace Input {
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY);
         }
 
-        if (!this->field62_0x1c4) {
+        if (!this->field59_0x1c4) {
             int uVar2 = !!DAT_TileMapState::instance.flatViewToggleValue1;
-            if (this->field59_0x1b8 == 4) {
+            if (this->field56_0x1b8 == 4) {
                 uVar2 += 2;
             }
 

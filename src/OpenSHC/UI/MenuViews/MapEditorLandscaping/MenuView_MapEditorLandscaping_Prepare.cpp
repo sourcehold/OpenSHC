@@ -15,7 +15,7 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x00430CC0
             void MenuView_MapEditorLandscaping_Prepare()
             {
-                DAT_WindowAndDirectDraw::instance.field37_0xdc = 1;
+                DAT_WindowAndDirectDraw::instance.pendingMenuRedraw = 1;
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                     OpenSHC::UI::Enums::DEID_PEOPLE_LEFT_TO_PLACE, 0);
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(

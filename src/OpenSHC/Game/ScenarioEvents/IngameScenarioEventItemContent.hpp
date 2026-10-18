@@ -26,8 +26,8 @@ namespace Game {
             byte magic; // 0x00000009 length: 1
             byte repeat; // 0x0000000A length: 1
             byte repeatMonths; // 0x0000000B length: 1
-            ScenarioEventCondition conditions[39]; // 0x0000000C length: 156
-            undefined1 padding_0xa8[44]; // 0x000000A8 length: 44
+            ScenarioEventCondition conditions[40]; // 0x0000000C length: 160
+            undefined1 padding_0xac[40]; // 0x000000AC length: 40
 
         } IngameScenarioEventItemContent;
 #pragma pack(pop)
