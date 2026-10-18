@@ -2,7 +2,7 @@
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"

@@ -1,6 +1,6 @@
 #include "../SoundSystem.func.hpp"
 
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"

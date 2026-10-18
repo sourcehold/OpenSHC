@@ -2,7 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"

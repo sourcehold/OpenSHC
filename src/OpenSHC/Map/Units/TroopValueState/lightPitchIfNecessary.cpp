@@ -1,7 +1,7 @@
 #include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

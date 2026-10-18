@@ -2,7 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/AI/Tribes/AIVUnitTypeTribeArrayOffset.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

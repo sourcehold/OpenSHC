@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/UI/MenuModals/DebugDataZoneDataUnk.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"

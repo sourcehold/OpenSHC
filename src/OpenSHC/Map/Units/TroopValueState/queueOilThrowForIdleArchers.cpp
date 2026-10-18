@@ -1,7 +1,7 @@
 #include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"

@@ -1,7 +1,7 @@
 #include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
