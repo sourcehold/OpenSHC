@@ -43,10 +43,12 @@ namespace AI {
             }
 
             candidateCount = 0;
-            // Players 1..8. The original unrolls this 4 at a time, so the outer loop has to step by 4;
-            // the compiler unrolls the inner 4 itself, producing the same instructions as writing the
-            // four copies out. A plain 1..8 loop does not work: MSVC then unrolls all 8 and the match
-            // drops from 0.92 to 0.67 (writing 8 copies out by hand compiles to exactly the same thing).
+            // Players 1..8, unrolled 4 at a time. The outer loop has to step by 4 and the inner 4 can be
+            // left to the compiler, which unrolls them into the same instructions as four written-out
+            // copies. A plain 1..8 loop does not work (0.92 -> 0.67, and the same for every spelling of
+            // it): MSVC unrolls all 8 and, with the trip count known, constant-folds every index into an
+            // absolute address and an immediate. The original keeps the index in a register, so its
+            // source had an induction variable surviving the unroll - which is what stepping by 4 gives.
             for (playerID = 1; playerID < 9; playerID += 4) {
                 for (int offset = 0; offset < 4; offset++) {
                     if (DAT_GameSynchronyState::instance.currentAIArray[playerID + offset] != 0
