@@ -161,13 +161,7 @@ restyling anything large:
 - a frame pointer plus a `this` spill - the original was built without optimisation, **unless the same function also
   reports `mov reg, 0`**. MSVC keeps `ebp` in any function containing an `__asm` block, so for a function with
   handwritten assembly the frame pointer says nothing about the optimisation level: reimplement the handwritten part as
-  inline asm and leave the rest at `/O2`. Checking the prologue settles it - values kept in registers across the entry
-  tests mean `/O2`. Taking the `/Od` reading instead took `findLinkageBasedPathOrWalkRadius` from 5.1% to 2.8%, where
-  the same body without the pragma reaches 49.2%. When it really is `/Od`, add `#pragma optimize(, off)`
-  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
-  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
-  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
-  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+  inline asm.
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
@@ -327,8 +321,6 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Trust the asm over the decompilation for constants and their sign. Ghidra rendered `2400 / n + 40` where the binary
   has `sub eax, 0x28`, so the formula is `- 40`; the function reached 100% once corrected (`diff_types.py` finds these).
   A `(longlong)` in a Ghidra division is usually spurious too - it emits `_alldiv` where the original has a plain `idiv`.
-- MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
-  times. A plain loop where the original is unrolled has cost 80 points on its own.
 - A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
