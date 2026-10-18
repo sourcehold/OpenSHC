@@ -1059,3 +1059,66 @@ removing it only pays when the removal is **local** - a dead store in a loop, a
 redundant reload, a mask spelled as bool arithmetic. When the only way to remove
 the work is to move code across basic blocks, the alignment loss dominates.
 Check that a surplus fix is local before attempting it.
+
+# Decoding a jump table with ghidra-mcp: the one reliable structural lever
+
+Ghidra's decompiled C is the seed (see above), but its **jump tables are ground
+truth and arm layout is source-controllable**. This is the one structural thing
+worth reading Ghidra for.
+
+## Procedure
+
+1. `disassemble_function <addr>` and find the dispatch, e.g.
+   `JMP dword ptr [ECX*0x4 + 0x51c7d8]`. A preceding
+   `MOVZX ECX,byte ptr [ECX + <t>]` means there is a byte index table at `<t>`
+   as well as the dword jump table.
+2. `disassemble_bytes` the few instructions before it to get `min` from the
+   `SUB EAX,<min>` / `ADD EAX,-<min>` and the default from the `JA` target.
+3. `read_memory <jump table> <4 * (max-min+1)>` and decode little-endian dwords.
+4. Entry *i* is value `i + min`. Sort the distinct body addresses ascending -
+   that is the **arm layout order**, which is set by the order the arms appear in
+   the source.
+
+## Result: `ifNecessaryThrowOilAutomatically` 36.5% -> 37.80%
+
+The building-type switch lays its arms out `7, 5, 4`
+(`MOV [ESP+0x1c],0x7` at 0051c69a, `0x5` at 0051c6a4, `0x4` at 0051c6ae); our
+source had them `4, 5, 7`. Reversing the source order matched it.
+
+## Result: `updateTribeBehaviorBasedOnBehaviorType`'s low switch is already correct
+
+Worth recording so nobody re-derives it. Table at **0x51E240**, `min = 1`,
+default = **0x51E22C** (the `JA` target):
+
+| value | target | meaning |
+|---|---|---|
+| 1 | 0051d9e0 | body |
+| 2 | 0051e22c | **default** |
+| 3 | 0051d882 | body |
+| 4 | 0051e237 | bare epilogue - do nothing |
+| 5 | 0051d8e3 | body |
+| 6 | 0051e237 | bare epilogue - do nothing |
+| 7 | 0051d932 | body |
+| 8 | 0051d9b5 | body |
+
+So our `case 4: case 6: break;` is right, having no `case 2` is right (it falls
+to `default`), and the arm layout `3, 5, 7, 8, 1, default` already matches.
+Moving the empty `4/6` arm after `default` to mirror 0x51e237 sitting after
+0x51e22c is exactly neutral - MSVC points an empty arm at the shared exit
+wherever it appears in the source.
+
+## `getValueOfTroopType`: the last 3.2% is cold-block placement
+
+Its tail is two separate compares both jumping *forward* to one shared
+`XOR EAX,EAX / RET`:
+
+    0051c3d2: CMP ECX,0x16 / JL 0x0051c3e6
+    0051c3d7: CMP ECX,0x1e / JG 0x0051c3e6
+    0051c3dc: MOV EAX,[ECX*0x4 + 0x6172a0] / RET 0x4
+    0051c3e6: XOR EAX,EAX / RET 0x4
+
+Three source spellings were measured. `&&` and a nested `if` both get fused into
+a range check (`LEA EDX,[ECX-0x16] / CMP EDX,8 / JA`), losing 0.4. Two `goto`s to
+a trailing label keeps the two compares but MSVC still places the cold
+`xor/ret` *first* (`jl 0x5 / jle 0x5` instead of `jl 0xf / jg 0xa`), scoring the
+same 96.8%. No lever found for cold-block placement.
