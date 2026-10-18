@@ -17,3 +17,9 @@ src/OpenSHC/Game/GameStateStructures/getSellResourceAmount.cpp
 src/OpenSHC/Map/TileMapState/determineBuildingPlacementRotation.cpp
 src/OpenSHC/Map/Navigation/DirectionAlgorithmState/getMouseVectorLengthBasedOnDirection.cpp
 src/OpenSHC/Input/MouseState/updateRightDragCameraControl.cpp
+src/OpenSHC/Game/GameStateStructures/updateFoodTypesInStockForAllPlayers.cpp
+src/OpenSHC/Game/GameStateStructures/clearEnemyRelatedStructures.cpp
+src/OpenSHC/Game/GameStateStructures/fillWith0xFF.cpp
+src/OpenSHC/Game/GameStateStructures/computeSignPostEntryData.cpp
+src/OpenSHC/Game/GameStateStructures/resetSomethingBuildingRelatedForAllPlayers.cpp
+src/OpenSHC/Game/GameStateStructures/setVariousGameStateToInitialValues.cpp

@@ -8,6 +8,7 @@ namespace Game {
     {
         this->mapAndTime.traderRelated2 = 2;
         this->mapAndTime.traderRelatedCounter1 = 0;
+        return;
     }
 
 }
