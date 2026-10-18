@@ -101,11 +101,10 @@ namespace Map {
                                          .scaleValuesArray
                         + 8);
                     do {
-                        *puVar3 = -(uint)(5 < DAT_TileMapState::instance
+                        *puVar3 = (5 < DAT_TileMapState::instance
                                               .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
                                                       .playerInfo[attackingPlayerID - 1]
-                                                      .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]])
-                            & 9999;
+                                                      .currentPlayerID_OR_attackedPlayerID_OR_one][puVar3[-2]]) ? 9999 : 0;
                         iVar4 = iVar4 + 1;
                         puVar3 = puVar3 + 4;
                     } while (iVar4 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2);
@@ -171,7 +170,7 @@ namespace Map {
                             bVar6 = _pathFindingCost == 0x14;
                         }
                         iVar2 = iVar2 + 1;
-                        *puVar3 = (bVar6 || bVar7 != (int)(_pathFindingCost + iVar4) < 0) - 1 & 9999;
+                        *puVar3 = (bVar6 || bVar7 != (int)(_pathFindingCost + iVar4) < 0) ? 0 : 9999;
                         puVar3 = puVar3 + 4;
                     } while (iVar2 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                  .some1000ArrayIndex_2);
@@ -182,12 +181,11 @@ namespace Map {
                         + _offset + 8);
                     do {
                         ((int*)puVar4->hackValuesArray)[2]
-                            = -(uint)(5 < DAT_TileMapState::instance
+                            = (5 < DAT_TileMapState::instance
                                           .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
                                                   .playerInfo[attackingPlayerID - 1]
                                                   .currentPlayerID_OR_attackedPlayerID_OR_one]
-                                                                         [((int*)puVar4->hackValuesArray)[0]])
-                            & 9999;
+                                                                         [((int*)puVar4->hackValuesArray)[0]]) ? 9999 : 0;
                         _counter = _counter + 1;
                         puVar4 = (AttackInfoSubElement*)(((int*)puVar4->hackValuesArray) + 6);
                     } while (
