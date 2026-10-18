@@ -17,3 +17,6 @@ src/OpenSHC/Game/GameStateStructures/getSellResourceAmount.cpp
 src/OpenSHC/Map/TileMapState/determineBuildingPlacementRotation.cpp
 src/OpenSHC/Map/Navigation/DirectionAlgorithmState/getMouseVectorLengthBasedOnDirection.cpp
 src/OpenSHC/Input/MouseState/updateRightDragCameraControl.cpp
+src/OpenSHC/Game/GameStateStructures/processFoodConsumption.cpp
+src/OpenSHC/Game/GameStateStructures/computePopulationStatistics.cpp
+src/OpenSHC/Game/GameStateStructures/resetVariousCountsAndStatisticsAndStartGoodsAndResources.cpp
