@@ -480,6 +480,27 @@ case is a function that returns the ID it was passed: changing `void EntityState
 to `int` with a trailing `return entityID;` took SHC_3BB0A8C1_0x004039B0 from 36.4% to 100%. Fix the signature in the
 generated header rather than working around the difference.
 
+### Per-file optimization pragmas
+
+`/O2` is a bundle (`/Og /Oi /Ot /Oy /Ob2 /GF /Gy`), and a few translation units in the original were plainly not
+built with all of it. Two of its parts are worth testing per file when a function is stuck and the diff shows
+structural noise rather than a source bug:
+
+- `#pragma inline_depth(1)` - `/Ob2` inlines things the original did not. `disconnectDPlay` 66.0% -> 87.4% and
+  `createCompoundAddressBasedOnSelectedProvider` 54.1% -> 61.2%, `checkMultiplayerLaggingPlayers` 90.6% -> 91.0%.
+  Depth 1 beat depth 0 by about a point on both of the first two; depths 2 and 3 are the same as the default.
+- `#pragma optimize("y", off)` - with `/Oy` the optimizer may use `ebp` as a general register and cross-jump
+  identical epilogues into one. `waitForMultiplayerHost` has two `DAT_HostAnnounced = 1` returns that the original
+  keeps separate: 87.0% -> 98.9%. Note that putting `/Oy-` on the command line through
+  `set_source_files_properties` does **not** reproduce this; only the pragma does.
+
+Sweep them rather than guess: patch one file at a time, rebuild, and keep the ones that win. Over the 25
+non-matching functions of `GameSynchronyState` only four files wanted either pragma, and
+`optimize("s", on)`, `optimize("g", off)`, `optimize("t", off)` and `auto_inline(off)` never won anywhere.
+Toggling a file in or out of `cmake/compiler-flags-gl.txt` is worth the same sweep - it found one win
+(`receiveAllTransmittedCommands`, +1.3) and showed that the `/GL` entries for `determineGameTicksToPerform` and
+`computeLatencyAdjustmentFromMatchTimes` currently measure as no-ops.
+
 ### Link-Time Code Generation
 
 A volatile register (usually ECX or EDX) that stays live across a call in the original, without being reloaded, means
