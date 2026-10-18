@@ -9,7 +9,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2830
     void AICState::ifHasTribe0SendUnitsToKeep(int playerID)
     {
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0];
         if (tribeID <= 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid

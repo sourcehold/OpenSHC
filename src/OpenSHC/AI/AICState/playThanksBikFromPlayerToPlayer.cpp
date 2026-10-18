@@ -19,7 +19,7 @@ namespace AI {
             return;
         }
 
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         DAT_GameState::instance.playerDataArray[playerID].aiRequestDelay = this->aics[aicIndex].aiRequestDelay;
 
         if (targetPlayerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {

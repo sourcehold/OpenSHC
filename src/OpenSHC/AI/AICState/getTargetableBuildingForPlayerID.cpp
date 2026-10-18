@@ -12,13 +12,13 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == 0)
             return 0;
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         if (this->aics[aicIndex].OuterPatrolGroupsCount <= 0)
             return 0;
         if (DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker <= 0)
             return 0;
 
-        int step = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker
+        int const step = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker
             / this->aics[aicIndex].OuterPatrolGroupsCount;
         DAT_GameState::instance.playerDataArray[playerID].someCounter2++;
         if (DAT_GameState::instance.playerDataArray[playerID].someCounter2
@@ -27,7 +27,7 @@ namespace AI {
         int index = (step * patrolGroupIndex + DAT_GameState::instance.playerDataArray[playerID].someCounter2)
             % DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
         for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
-            int buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[index];
+            int const buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[index];
             index++;
             if (index >= DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker)
                 index = 0;

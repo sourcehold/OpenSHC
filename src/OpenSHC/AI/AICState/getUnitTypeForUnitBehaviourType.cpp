@@ -12,10 +12,10 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC250
     UnitType AICState::getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourType unitBehaviourType)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return (UnitType)0;
-        int aicIndex = aiType - 1;
+        int const aicIndex = aiType - 1;
 
         if (unitBehaviourType == OpenSHC::AI::AIUBT_ENGINEERING)
             return OpenSHC::Map::Units::UT_E_ENGINEER;
@@ -45,8 +45,8 @@ namespace AI {
             if (DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex >= 4)
                 DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
 
-            int choice = DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex;
-            UnitType unitType = (UnitType)(&this->aics[aicIndex].AttUnitMain1)[choice];
+            int const choice = DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex;
+            UnitType const unitType = (UnitType)(&this->aics[aicIndex].AttUnitMain1)[choice];
             DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = choice + 1;
             return unitType;
         }

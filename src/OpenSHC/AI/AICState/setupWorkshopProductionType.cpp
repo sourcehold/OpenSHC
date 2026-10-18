@@ -21,7 +21,7 @@ namespace AI {
             return;
         }
 
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_BLACKSMITH) {
             int setting = this->aics[aicIndex].blacksmithSetting;
             if (setting == -999) {

@@ -19,8 +19,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE040
     void AICState::recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance)
     {
-        int attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
-        int keepArea = (short)DAT_TileMapState::instance
+        int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
+        int const keepArea = (short)DAT_TileMapState::instance
                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
 
         int borderDistance;

@@ -13,7 +13,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2660
     void AICState::assignUnitToATribe(int unitID)
     {
-        int owner = DAT_UnitsState::instance.units[unitID].owner;
+        int const owner = DAT_UnitsState::instance.units[unitID].owner;
         if (DAT_GameState::instance.playerDataArray[owner].aiType == AITA_NULL)
             return;
 

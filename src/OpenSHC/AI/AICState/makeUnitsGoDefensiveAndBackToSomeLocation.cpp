@@ -21,20 +21,20 @@ namespace AI {
             return;
 
         for (int i = 0; i < 11; i++) {
-            int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
-            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            int const tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int const tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
             for (int j = 0; j < tribeCount; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
+                int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
                 if (tribeID == 0)
                     continue;
                 if (DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
                     continue;
 
-                int x = DAT_GameState::instance.playerDataArray[playerID].someX;
+                int const x = DAT_GameState::instance.playerDataArray[playerID].someX;
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
-                int y = DAT_GameState::instance.playerDataArray[playerID].someY;
-                uint result = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                int const y = DAT_GameState::instance.playerDataArray[playerID].someY;
+                uint const result = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
                     DAT_TribesState::ptr)(tribeID, x, y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
                 if (result == 0)
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeAllTribeUnits, DAT_TribesState::ptr)(

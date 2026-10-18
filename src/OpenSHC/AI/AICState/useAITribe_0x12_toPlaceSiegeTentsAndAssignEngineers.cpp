@@ -27,11 +27,11 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEFD0
     void AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int aicIndex = aiType - 1;
-        int aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        int const aicIndex = aiType - 1;
+        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
         if (aiTribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[aiTribeID].uid
@@ -82,7 +82,7 @@ namespace AI {
                 return;
             availableEngineers -= requiredEngineers;
 
-            int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToSelection, this)(
+            int const tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToSelection, this)(
                 playerID, requiredEngineers);
             if (tribeID == 0)
                 return;

@@ -15,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4940
     void AICState::updateTribeLocations(int playerID)
     {
-        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        AITypeInt const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
 
         if (aiType == OpenSHC::AI::AIT_NULL) {
             return;

@@ -29,10 +29,10 @@ namespace AI {
         else
             return;
 
-        int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
-        int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
+        int const slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
+        int const locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
         while (i < locationCount) {
-            int index = i;
+            int const index = i;
             i++;
             if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][index] > 0
                 && buildingID

@@ -27,7 +27,7 @@ namespace AI {
                 continue;
             if (DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID != 0)
                 continue;
-            int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+            int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
 
             if (DAT_GameState::instance.mapAndTime.dayTicks == playerID) {
                 if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks == 0) {

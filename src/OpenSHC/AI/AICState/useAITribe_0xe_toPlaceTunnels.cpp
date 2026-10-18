@@ -26,7 +26,7 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
+        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
         if (aiTribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[aiTribeID].uid
@@ -38,12 +38,12 @@ namespace AI {
             if (countdown <= 0)
                 break;
 
-            int unitID = MACRO_CALL_MEMBER(
+            int const unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(aiTribeID);
             // Yes this line has to be right here for the code to match.
             countdown--;
 
-            int tribeID = MACRO_CALL_MEMBER(
+            int const tribeID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
 
             DAT_TribesState::instance.tribes[tribeID].attackWave

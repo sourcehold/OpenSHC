@@ -14,8 +14,8 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
-        int randomPercent = SEC_RNG::instance.currentNumber2 % 100;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int const randomPercent = SEC_RNG::instance.currentNumber2 % 100;
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
         DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength

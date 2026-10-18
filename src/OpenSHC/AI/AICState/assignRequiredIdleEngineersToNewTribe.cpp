@@ -14,7 +14,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC5A0
     int AICState::assignRequiredIdleEngineersToNewTribe(int playerID, int count)
     {
-        int tribeID
+        int const tribeID
             = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
         for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (count <= 0)

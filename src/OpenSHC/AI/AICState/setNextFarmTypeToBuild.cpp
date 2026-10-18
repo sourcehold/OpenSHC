@@ -10,10 +10,10 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB1B0
     int AICState::setNextFarmTypeToBuild(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
             return 0;
-        int aicIndex = aiType - 1;
+        int const aicIndex = aiType - 1;
 
         DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex++;
         if (DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex >= 8)

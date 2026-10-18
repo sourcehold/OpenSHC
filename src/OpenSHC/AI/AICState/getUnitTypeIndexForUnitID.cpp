@@ -21,8 +21,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC390
     AIVUnitType AICState::getUnitTypeIndexForUnitID(int unitID, int allowSlaveSlotForRanged)
     {
-        UnitTypeShort unitType = DAT_UnitsState::instance.units[unitID].unitType;
-        int owner = DAT_UnitsState::instance.units[unitID].owner;
+        UnitTypeShort const unitType = DAT_UnitsState::instance.units[unitID].unitType;
+        int const owner = DAT_UnitsState::instance.units[unitID].owner;
         UnitTypeInt effectiveUnitType;
         if (unitType == OpenSHC::Map::Units::UT_PEASANT) {
             effectiveUnitType = DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto;

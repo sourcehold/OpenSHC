@@ -17,7 +17,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2E00
     void AICState::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
     {
-        int owner = DAT_TribesState::instance.tribes[tribeID].owner;
+        int const owner = DAT_TribesState::instance.tribes[tribeID].owner;
 
         // Find the slotIndex-th non-empty slot
         int tile = 0;
@@ -32,8 +32,8 @@ namespace AI {
             }
         }
 
-        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-        int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+        int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
 
         if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile)
             != FALSE) {

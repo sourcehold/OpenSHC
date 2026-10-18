@@ -21,14 +21,14 @@ namespace AI {
             return;
         }
 
-        int aicIndex = DAT_GameState::instance.playerDataArray[owner].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[owner].aiType - 1;
 
         int targetPlayer = 0;
         int minDistance = 10000;
         int maxGold = 0;
         int minPoints = 1000000;
-        int ownerKeepX = DAT_GameState::instance.playerDataArray[owner].campground.xEntry;
-        int ownerKeepY = DAT_GameState::instance.playerDataArray[owner].campground.yEntry;
+        int const ownerKeepX = DAT_GameState::instance.playerDataArray[owner].campground.xEntry;
+        int const ownerKeepY = DAT_GameState::instance.playerDataArray[owner].campground.yEntry;
         for (int player = 1; player < 9; player++) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[player]
                 == DAT_GameState::instance.mapAndTime.playerTeams[owner]) {
@@ -62,7 +62,7 @@ namespace AI {
                     targetPlayer = player;
                 }
             } else if (this->aics[aicIndex].TargetChoice == AIC::AITC_BALANCED) {
-                int points = DAT_GameState::instance.playerDataArray[player].currentPopulation * 5
+                int const points = DAT_GameState::instance.playerDataArray[player].currentPopulation * 5
                     + DAT_GameState::instance.playerDataArray[player].totalTroopValue
                     + DAT_GameState::instance.playerDataArray[player].currentResources[Game::Resources::RT_GOLD] / 100
                     + DAT_DirectionAlgorithmState::instance.distanceHigh * 2;

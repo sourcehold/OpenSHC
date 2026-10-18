@@ -19,10 +19,10 @@ namespace AI {
         int y = 0;
         for (int i = 0; i < 11; i++) {
             int targetUnitID = 0;
-            int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
-            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            int const tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int const tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
             for (int j = 0; j < tribeCount; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
+                int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
                 if (tribeID == 0)
                     continue;
                 if (DAT_TribesState::instance.tribes[tribeID].uid
@@ -42,13 +42,13 @@ namespace AI {
         if (x == 0)
             return;
 
-        int tile = MACRO_CALL_MEMBER(
+        int const tile = MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::tracePathToFriendlyDefensesAndReturnTileUnk,
             DAT_PathFindingState::ptr)(playerID, x, y);
         if (tile <= 0)
             return;
 
-        int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        int const tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         DAT_GameState::instance.playerDataArray[playerID].someTile = tile;
         DAT_GameState::instance.playerDataArray[playerID].someY = tileY;
         DAT_GameState::instance.playerDataArray[playerID].someX

@@ -12,7 +12,7 @@ namespace AI {
         if (0 >= DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops) {
             return;
         }
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
         if (tribeID != 0) {
             if (DAT_TribesState::instance.tribes[tribeID].uid
                 != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12]) {

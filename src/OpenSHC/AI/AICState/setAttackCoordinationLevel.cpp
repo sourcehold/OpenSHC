@@ -21,7 +21,7 @@ namespace AI {
         if (90 < willingnessPercentage) {
             willingnessPercentage = 90;
         }
-        int rngMod100 = SEC_RNG::instance.currentNumber2 % 100;
+        int const rngMod100 = SEC_RNG::instance.currentNumber2 % 100;
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
         if (rngMod100 < willingnessPercentage / 2) {
             DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel = 2;

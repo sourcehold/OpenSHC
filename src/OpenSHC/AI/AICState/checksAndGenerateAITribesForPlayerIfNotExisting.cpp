@@ -16,19 +16,19 @@ namespace AI {
     int AICState::checksAndGenerateAITribesForPlayerIfNotExisting(int playerID, int maxAmount, BOOLEnum checkOnly)
     {
         int offset = 0;
-        int baseOffset = DAT_SkirmishDefinedData::instance.AITribeIDOffsetForAIVUnitType[1];
+        int const baseOffset = DAT_SkirmishDefinedData::instance.AITribeIDOffsetForAIVUnitType[1];
         for (; offset < maxAmount; offset++) {
             if (offset >= 10) {
                 return 0;
             }
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[baseOffset + offset];
+            int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[baseOffset + offset];
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[baseOffset + offset]) {
                 if (checkOnly) {
                     return 1;
                 }
-                int newTribeID = MACRO_CALL_MEMBER(
+                int const newTribeID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[baseOffset + offset] = (short)newTribeID;
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[baseOffset + offset]

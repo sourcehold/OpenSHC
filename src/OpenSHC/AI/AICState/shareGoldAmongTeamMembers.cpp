@@ -38,13 +38,13 @@ namespace AI {
             return;
         }
 
-        int goldPerPlayer = gold / candidateCount;
+        int const goldPerPlayer = gold / candidateCount;
         if (goldPerPlayer == 0) {
             return;
         }
 
         for (int j = 0; j < candidateCount; j++) {
-            int targetPlayer = candidates[j];
+            int const targetPlayer = candidates[j];
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[targetPlayer] != -1) {
                 // "Goods received from ally"
                 strcpy(DAT_GameSynchronyState::instance.receivedChatMessage,

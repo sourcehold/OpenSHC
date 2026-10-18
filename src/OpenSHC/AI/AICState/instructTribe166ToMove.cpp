@@ -16,17 +16,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD7B0
     void AICState::instructTribe166ToMove(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int aicIndex = aiType - 1;
+        int const aicIndex = aiType - 1;
 
         if (DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 > 0)
             DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01--;
         if (DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 > 50)
             DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 = 50;
 
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[166];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[166];
         BOOLEnum keepEnclosed = MACRO_CALL_MEMBER(
             OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
         if (tribeID == 0)

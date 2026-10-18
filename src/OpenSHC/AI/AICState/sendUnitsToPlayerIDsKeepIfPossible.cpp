@@ -20,15 +20,15 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
     {
-        uint campfireX = DAT_GameState::instance.playerDataArray[playerID1].campground.xEntry;
-        uint campfireY = DAT_GameState::instance.playerDataArray[playerID1].campground.yEntry;
+        uint const campfireX = DAT_GameState::instance.playerDataArray[playerID1].campground.xEntry;
+        uint const campfireY = DAT_GameState::instance.playerDataArray[playerID1].campground.yEntry;
 
         uint gatehouseX;
         uint gatehouseY;
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
                 playerID1, playerID2)
             == FALSE) {
-            uint gatehouseTile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
+            uint const gatehouseTile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
                 DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
             if (gatehouseTile != 0) {
                 gatehouseY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[gatehouseTile];
@@ -41,10 +41,10 @@ namespace AI {
         }
 
         for (int i = 0; i < 11; i++) {
-            int tribeTypeStart = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
-            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            int const tribeTypeStart = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int const tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
             for (int j = 0; j < tribeCount; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs[tribeTypeStart + j];
+                int const tribeID = DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs[tribeTypeStart + j];
                 if (tribeID == 0) {
                     continue;
                 }

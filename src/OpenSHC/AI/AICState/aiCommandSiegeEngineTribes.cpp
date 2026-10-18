@@ -75,18 +75,18 @@ namespace AI {
                 if (shieldCount >= 3)
                     continue;
 
-                int targetTribeID = shieldTargetTribeIDs[shieldCount];
+                int const targetTribeID = shieldTargetTribeIDs[shieldCount];
                 DAT_TribesState::instance.tribes[tribeID].supportTribeID = targetTribeID;
                 DAT_TribesState::instance.tribes[tribeID].uid2 = DAT_TribesState::instance.tribes[targetTribeID].uid;
                 DAT_TribesState::instance.tribes[targetTribeID].tribeID = tribeID;
-                int targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;
-                int tile = DAT_UnitsState::instance.units[targetUnitID].tile;
+                int const targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;
+                int const tile = DAT_UnitsState::instance.units[targetUnitID].tile;
                 shieldCount++;
                 if (tile <= 0)
                     continue;
 
-                int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                 MACRO_CALL_MEMBER(TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                     tribeID, x, y, 0, 0, Instructions::UMSE_0);
                 MACRO_CALL_MEMBER(

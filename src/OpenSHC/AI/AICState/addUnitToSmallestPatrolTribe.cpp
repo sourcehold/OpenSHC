@@ -13,13 +13,13 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2730
     void AICState::addUnitToSmallestPatrolTribe(int unitID)
     {
-        int owner = DAT_UnitsState::instance.units[unitID].owner;
+        int const owner = DAT_UnitsState::instance.units[unitID].owner;
         if (DAT_GameState::instance.playerDataArray[owner].aiType == AITA_NULL)
             return;
-        int aicIndex = DAT_GameState::instance.playerDataArray[owner].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[owner].aiType - 1;
 
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 4;
-        int tribeID = MACRO_CALL_MEMBER(AICState_Func::getSmallestPatrolTribe, this)(
+        int const tribeID = MACRO_CALL_MEMBER(AICState_Func::getSmallestPatrolTribe, this)(
             owner, this->aics[aicIndex].OuterPatrolGroupsCount);
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
     }

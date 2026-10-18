@@ -13,7 +13,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC8D0
     BOOLEnum AICState::unitIDIsRangedOrArmored(int unitID)
     {
-        int unitType = DAT_UnitsState::instance.units[unitID].unitType;
+        int const unitType = DAT_UnitsState::instance.units[unitID].unitType;
 
         for (int i = 0; i < 7; i++) {
             if (DAT_SkirmishDefinedData::instance.RangedAndArmoredUnits[i] == unitType) {

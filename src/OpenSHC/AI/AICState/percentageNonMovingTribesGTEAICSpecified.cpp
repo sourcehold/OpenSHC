@@ -18,21 +18,21 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CED90
     BOOLEnum AICState::percentageNonMovingTribesGTEAICSpecified(int playerID)
     {
-        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        AITypeInt const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL) {
             return FALSE;
         }
 
-        int aicIndex = aiType - 1;
+        int const aicIndex = aiType - 1;
         int tribeTotal = 0;
         int notReallyMoving = 0;
 
         for (int i = 0; i < 11; i++) {
-            int tribeIndex = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
-            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            int const tribeIndex = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int const tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
 
             for (int j = 0; j < tribeCount; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex + j];
+                int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex + j];
                 if (tribeID == 0) {
                     continue;
                 }

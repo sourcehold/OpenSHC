@@ -14,7 +14,7 @@ namespace AI {
         int selectedBuildingID = 0;
         int bestPriority = 46;
         for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
-            int buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[i];
+            int const buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[i];
             if (buildingID == 0) {
                 continue;
             }

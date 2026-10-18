@@ -16,7 +16,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE3B0
     void AICState::setNextMoveLocationForUnits(int playerID)
     {
-        int organismID
+        int const organismID
             = (short)DAT_TileMapState::instance.OrganismLayer
                   [DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]

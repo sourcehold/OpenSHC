@@ -10,9 +10,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CFF60
     BOOLEnum AICState::yieldCowThrow(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType != AITA_NULL) {
-            int aicIndex = aiType - 1;
+            int const aicIndex = aiType - 1;
             if (DAT_GameState::instance.mapAndTime.skirmishNoCowThrowing == 0
                 && this->aics[aicIndex].CowThrowInterval != 0
                 && DAT_GameState::instance.playerDataArray[playerID].counter > 0) {

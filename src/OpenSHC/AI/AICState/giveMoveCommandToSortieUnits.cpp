@@ -18,12 +18,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD8F0
     void AICState::giveMoveCommandToSortieUnits(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
 
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[167];
-        int aicIndex = aiType - 1;
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[167];
+        int const aicIndex = aiType - 1;
         if (tribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid
@@ -34,13 +34,13 @@ namespace AI {
             < DAT_GameState::instance.playerDataArray[playerID].totalTroopsType7 - 1)
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::syncBehaviourType7UnitTribes, this)(playerID);
 
-        int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+        int const targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
         bool sendToKeep = true;
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0) {
             if (DAT_TribesState::instance.tribes[tribeID].size < this->aics[aicIndex].SortieUnitMeleeMin) {
                 sendToKeep = false;
             } else {
-                int unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
+                int const unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
                 if (unitID != 0
                     && DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitUID
                         == DAT_UnitsState::instance.units[unitID].uid

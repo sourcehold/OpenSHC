@@ -19,13 +19,13 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC070
     AIUnitBehaviourType AICState::randomlySelectAttackUnitTypeToRecruit(int playerID)
     {
-        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        AITypeInt const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL) {
             return OpenSHC::AI::AIUBT_ATTUNITMAIN;
         }
 
-        int attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
-        int aicIndex = aiType - 1;
+        int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
+        int const aicIndex = aiType - 1;
         int requiredCount = 0;
 
         // clear out flags

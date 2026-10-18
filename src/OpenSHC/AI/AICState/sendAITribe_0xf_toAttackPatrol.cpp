@@ -20,7 +20,7 @@ namespace AI {
         }
 
         // Bug: only tribe 15 is sent, although tribe 16 can also exist if 'AIC: AttUnitPatrolGroupsCount' is 2
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0) {
             return;
         }

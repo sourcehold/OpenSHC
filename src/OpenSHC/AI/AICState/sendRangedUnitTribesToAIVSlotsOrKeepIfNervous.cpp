@@ -24,10 +24,10 @@ namespace AI {
     void AICState::sendRangedUnitTribesToAIVSlotsOrKeepIfNervous(int playerID)
     {
         for (int i = 0; i < 5; i++) {
-            int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
+            int const count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].aivUnitType];
             for (int j = 0; j < count; j++) {
-                int tribeID
+                int const tribeID
                     = DAT_GameState::instance.playerDataArray[playerID]
                           .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].tribeArrayOffset
                               + j];

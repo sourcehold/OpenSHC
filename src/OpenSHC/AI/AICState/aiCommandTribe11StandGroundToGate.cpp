@@ -17,7 +17,7 @@ namespace AI {
         int tribeIndex = 11;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid

@@ -15,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC520
     void AICState::aiRecruitEngineers(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
             return;
         if (DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired == FALSE)
@@ -26,7 +26,7 @@ namespace AI {
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
             < 30)
             return;
-        int guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int const guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
         if (guildID <= 0)
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != Map::Buildings::BT_ENGINEERSGUILD)

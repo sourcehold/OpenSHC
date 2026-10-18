@@ -12,7 +12,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDA50
     void AICState::addBuildingToTargetableBuildings(int buildingID)
     {
-        int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+        int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
         if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
             return;
         if (DAT_GameState::instance.playerDataArray[owner].top100TargetableBuildingsTracker >= 100)

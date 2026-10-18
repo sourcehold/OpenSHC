@@ -20,7 +20,7 @@ namespace AI {
         }
 
         int bik = 0;
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
             == DAT_GameState::instance.mapAndTime.playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
             bik = 23;

@@ -19,7 +19,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D44E0
     void AICState::sendOilMenForOilPickupOrToAIVLocations(int playerID)
     {
-        int oilSmelterID = DAT_GameState::instance.playerDataArray[playerID].oilSmelter.id;
+        int const oilSmelterID = DAT_GameState::instance.playerDataArray[playerID].oilSmelter.id;
         int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[1];
         if (count < 1) {
             return;
@@ -30,7 +30,7 @@ namespace AI {
 
         // Oil men tribes start at offset 71 in the tribe ID array
         for (int i = 1; i <= count; i++) {
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[70 + i];
+            int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[70 + i];
             if (tribeID == 0) {
                 continue;
             }

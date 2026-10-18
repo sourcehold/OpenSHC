@@ -9,7 +9,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2870
     void AICState::sendTribeAtOffset1ToCampfire(int playerID)
     {
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[1];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[1];
         if (tribeID <= 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid

@@ -9,7 +9,7 @@ namespace AI {
     void AICState::makeOutpostTribesAttack()
     {
         for (int i = 0; i < 1000; i++) {
-            int tribeID = this->tribeIDArray[i];
+            int const tribeID = this->tribeIDArray[i];
             if (tribeID == 0)
                 continue;
             if (DAT_TribesState::instance.tribes[tribeID].uid != this->tribeUIDArray[i])
