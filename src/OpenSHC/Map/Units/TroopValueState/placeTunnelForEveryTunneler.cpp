@@ -60,8 +60,8 @@ namespace Map {
                     }
                     psVar3 = psVar3 + 1;
                     iVar3 = iVar3 + -1;
-                    _nTunnels = _nTunnelers;
                 } while (iVar3);
+                _nTunnels = _nTunnelers;
             }
             iVar4 = 0;
             iVar3 = 1;
