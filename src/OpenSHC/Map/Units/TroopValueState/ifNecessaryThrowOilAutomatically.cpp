@@ -74,11 +74,9 @@ namespace Map {
                                 [DAT_UnitsState::instance.units[DAT_PathFindingState::instance.field34_0x64].tile];
                     if (sVar2) {
                         switch (DAT_BuildingsState::instance.buildings[sVar2].buildingType) {
-                        case Map::Buildings::BT_CAMPFIRE:
-                            _buildingSize = 4;
+                        case Map::Buildings::BT_CAMPGROUND:
+                            _buildingSize = 7;
                             break;
-                        default:
-                            goto switchD_0051c693_caseD_34;
                         case Map::Buildings::BT_PARADEGROUND:
                         case Map::Buildings::BT_PARADEGROUND2:
                         case Map::Buildings::BT_PARADEGROUND3:
@@ -86,8 +84,11 @@ namespace Map {
                         case Map::Buildings::BT_PARADEGROUND5:
                             _buildingSize = 5;
                             break;
-                        case Map::Buildings::BT_CAMPGROUND:
-                            _buildingSize = 7;
+                        default:
+                            goto switchD_0051c693_caseD_34;
+                        case Map::Buildings::BT_CAMPFIRE:
+                            _buildingSize = 4;
+                            break;
                         }
                         uVar3 = DAT_BuildingsState::instance.buildings[sVar2].x;
                         uVar4 = DAT_BuildingsState::instance.buildings[sVar2].y;
