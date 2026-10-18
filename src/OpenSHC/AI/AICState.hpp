@@ -112,7 +112,7 @@ namespace AI {
 
         uint aiShouldBuildQuarry(int playerID);
 
-        undefined4 aiRequiresExtraOxtethers(int playerID);
+        BOOLEnum aiRequiresExtraOxtethers(int playerID);
 
         uint aiShouldBuildIronMine(int playerID);
 
@@ -128,7 +128,7 @@ namespace AI {
 
         BOOLEnum shouldDestroyWoodCutterUnk(int playerID);
 
-        undefined4 destroyBuildingIfNoWorker(int buildingID);
+        BOOLEnum destroyBuildingIfNoWorker(int buildingID);
 
         BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, MappersEnum param_2);
 
@@ -390,7 +390,7 @@ namespace AI {
 
         void moveAttackingUnitsToNextRallyPoint(int playerID);
 
-        undefined4 sendUnitsToAttackBreachedCastle(int attackingPlayerIndex);
+        BOOLEnum sendUnitsToAttackBreachedCastle(int attackingPlayerIndex);
 
         void updateAIStrengthState(int playerID, int aiRecruitUnitChoicePreference);
 

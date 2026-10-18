@@ -7,9 +7,14 @@ a do-while repeating the same test:
         do { ... } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
     }
 
-which is just `while (cond) { ... }`. MSVC generates the same code for both, so this
-is a readability change; it is applied because the original source cannot plausibly
-have written the test twice.
+which is just `while (cond) { ... }`.
+
+The two forms are NOT interchangeable in the generated code, so every conversion has to be
+measured. Collapsing all five sites in Map/Navigation/PathFindingState cost 1.3, 3.4, 3.9 and
+25.5 points on four functions and gained 0.9 on the fifth: MSVC rotates the loop differently, so
+the guard decides which copy of the test is the physical one and where the loop's tail lands.
+Treat a hit as a candidate, convert one function at a time, and keep the guarded form wherever the
+percentage says the original compiler emitted the test twice.
 
 usage: unguarded_do.py [filter] [--apply]   (dry run unless --apply)
 """

@@ -194,6 +194,33 @@ SEC_RNG::ptr->currentNumber1 % 4
   arithmetic, an inlined accessor, in-place decrement, unsigned) all folded - only the missing local matters. The
   same applies to any other decompiler local for a field (`tracker`, `outerPatrolGroupsCount`): reading the field at
   every use took `getTargetableBuildingForPlayerID` from 65% to 100%.
+- **A field compared straight from memory and then reloaded was read with two different types.** The signature is
+  `cmp dword ptr [esi + off], -1; je ...; mov eax, dword ptr [esi + off]` in the original where we emit one load and
+  compare the register. MSVC 14.00 only CSEs two reads of the same expression, and an `int` compare and an unsigned
+  array index are not the same expression, so cast the *indexing* use to `(uint)` and keep the compare on the plain
+  field:
+  ```cpp
+  if (this->buildingApproriateGridXPosition == -1)
+      return;
+  this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition] = ...;
+  ```
+  `AIVState::aiPlaceWoodcuttershut` went 91.4% -> 100% on that alone. Grep a reccmp diff for `-cmp dword ptr [...]`
+  followed by `+mov ..., dword ptr` of the same address; try the cast on the index first, then on the compared operand.
+  The cast does nothing when the two uses are already different expressions (`hostChecksLobbyAIVAvailability` keeps
+  its `currentAIArray[player]` reload for another reason), so measure with `quick_diff.py` before building.
+- **A read through a reference or pointer alias is not merged with the direct read.** `int const& r = arr[i];`
+  (or `int const* p = &arr[i];`) followed by `arr[i]` written out is two loads for MSVC 14, while `int const copy =
+  arr[i];` is merged with the direct read. This is the lever when the `(uint)` cast above is neutral, i.e. when the
+  second use is a plain value rather than an index:
+  - the original compares memory and reloads it after a branch (`cmp dword ptr [esi*4 + G], ebx; je ...;
+    mov ecx, dword ptr [esi*4 + G]`): keep the test on the field and read the value again through an alias,
+    `int const& ai = arr[player]; int const aiID = ai;` (`hostChecksLobbyAIVAvailability`, 68.6% -> 100%, together
+    with `int const* const availability = &this->array[aiIndex];` per outer iteration, which gave the original its
+    third induction register);
+  - the original compares a register to itself (`cmp eax, eax; je`): that is a third clause `arr[player] == ref`
+    with `int const& ref = arr[player];` - every spelling of `x == x`, a duplicated `== -1` and the casts fold away
+    (`updateBuildingsStateAndUpdateAIBuildingDecisions`, 91.3% -> 100%).
+  Our `/FA` listing shows `npad 5` where the original has `jmp` + `lea ecx, [ecx]`; that pair is the pad, not a diff.
 - **A constant index held in a local stops the per-struct multiply being shared.** When the original recomputes
   `playerID * 0x39f4` in every basic block (`mov eax, ecx; imul eax, eax, 0x39f4` three times, with `playerID` staying
   in its register) while we multiply once, the array index in the source was a *variable* that the optimizer only
@@ -225,6 +252,20 @@ SEC_RNG::ptr->currentNumber1 % 4
 - The opposite does happen for the operands of a single statement: in `SHC_3BB0A8C1_0x00522520` the original evaluates
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
   and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
+
+- **Ghidra's `_nextIndex`/`_index2` temporaries with a `LAB: index = _nextIndex;` tail are an in-place `i++`.** Every
+  branch of the body assigning a "next" copy that one shared label writes back is how the decompiler renders a loop
+  that updates its own index. Deleting the temporaries and incrementing in place removed two stack slots and brought
+  `handleCommandLineArguments` to the original's `sub esp, 0x40c` (14.6% -> 31.3%).
+- A local written just before a call and read back just after it (`local_408 = _candidateIndex; ... call ...;
+  _candidateIndex = local_408;`) is usually not a variable at all but the spill slot of the one it copies. Deleting it
+  and using the original variable throughout was worth 5% on the same function.
+- A flag the decompiler types as `bool` is often an `int`. `bool` gives `mov bl, 1` / `xor bl, bl` / `test bl, bl`
+  where the original uses a full register (`getCommandIDFromCommandSelectionStuff` 43.8% -> 50.3%). Measure it, the
+  reverse happens too (`checkSkirmishGameDefeat` came out 0.3% worse as `int`).
+- An element the original addresses with one `lea` and then several displacements off that register wants a pointer
+  local, not repeated `array[index]`: `GameCommand* _pCommand = &this->DAT_GameCommandArray[id];` replacing two
+  indexed accesses took `scheduleReceivedCommand` 90.5% -> 96.9%.
 
 ### Conditionals
 
@@ -278,6 +319,22 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
+- Non-consecutive case labels will likely result in a mixture of if-else and switch cases, sometimes even only if-elses. These are hard to spot. One sign, outside of weird decompiler artifacts, is that logic might be put inside a lot of conditions that feature only a single variable. Another can be a lot of GOTOs.
+
+- Write a comparison with its operands in the order the assembly shows. `if (a > b)` gives `cmp eax, ecx` where
+  `if (b < a)` gives `cmp ecx, eax`; flipping seven `iVar6 < lag[n].average1` to `lag[n].average1 > iVar6` took
+  `broadcastDesyncResyncCommands` 90.7% -> 95.8%, and four of them took `determineGameTicksToPerform` 46.2% -> 64.7%.
+  Use the literal the assembly shows as well: `<= 0x2710` rather than `< 0x2711`, `0 <= x` rather than `-1 < x`.
+- **A call reached from several branches with its arguments in variables was written once per branch.** When the
+  original pushes literals in each arm (`push 0xfffd` / `push 0x601`) where we build `_dwFlags`/`_dwPriority` and
+  share one call site, duplicate the whole call into every arm with the constants spelled out: `transmitCommand`
+  72.1% -> 98.5%. This is the opposite of *Several exits that end in the same statement* under **Loops**: MSVC
+  copies a shared tail of plain stores into each predecessor by itself, but a call whose constant arguments differ
+  per arm was written out per arm. Measure both.
+- `(-(uint)(c) & MASK) + BASE` has three candidate forms and they do not rank the same way twice: leaving the mask,
+  an `if` that overwrites a default, and a ternary. `broadcastDesyncResyncCommands` wanted the ternary
+  (92.3% mask / 92.1% `if` / 93.8% ternary), `renderDebugDataSplitInfo` wanted the `if`
+  (31.5% / 51.8% / 31.0%). Try all three.
 
 ### Loops
 
@@ -330,6 +387,8 @@ you might have found an unrolled loop. Therefore, try to reproduce the logic in 
 
 If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
 
+If an explicit loop condition is removed from the compiler, it is able to prove all paths through the loop. If such a case happens where the condition is actually eliminated from the re-implementation, the re-implementation might be missing a condition that is present in the logic somewhere, but removed from the loop condition itself. The optimization pass failed to detect the resulting predictable loop in this latter case and the condition remains.
+
 A global used as a running counter alongside the loop index is usually incremented inside the loop, even when its final
 value is a constant. Ghidra shows the folded result: `DAT_CurrentUnitSlotID = 2500;` placed around the loop is really
 `DAT_CurrentUnitSlotID = 1;` before it and `DAT_CurrentUnitSlotID += 1;` as the first statement of the body. This was
@@ -371,6 +430,21 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
+- **Ghidra's `while (cond) { i++; if (N <= i) goto LAB; }` is a `for` loop whose body holds the whole block that
+  follows it, ending in `break`.** The decompiler lifts the one interesting iteration out of the loop and leaves a
+  goto into the code after it. Putting that code back inside the `if` in the body, replacing the `goto` with `break`
+  and keeping whatever genuinely follows the loop after it was the highest-yield rewrite found in
+  `GameSynchronyState`: `checkLagAndSyncStatus` 36.8% -> 100%, `advanceSyncStatusAndKickLaggers` 59.4% -> 100%,
+  `checkGameLagStatusAndKickAccordingly` 34.1% -> 100%. Read the function from the raw disassembly and write it out
+  fresh rather than patching the decompiler's control flow.
+- A pointer walked over a member array is compared **signed** in the original (`jl`), so write
+  `(int)p < (int)(array + 9)`; a plain pointer `<` emits `jb` and costs the last two percent
+  (`checkGameLagStatusAndKickAccordingly` 98.0% -> 100%).
+- An early exit out of a loop nest that the decompiler renders as `goto` to a shared tail is often a `return`
+  duplicated into every site. Inlining the three statements plus `return` at all 13 `goto` sites took
+  `sendPendingResyncCommandsInBudget` 57.5% -> 63.2%, and it fixed a real bug: the shared tail fell through and
+  carried on looping where the original returns.
 
 ### GOTO
 
@@ -419,10 +493,31 @@ A volatile register (usually ECX or EDX) that stays live across a call in the or
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
 
+`/GL` on both sides is not sufficient on its own. The callee also has to be **enabled in its `.func.hpp`**, i.e.
+`MACRO_FUNCTION_RESOLVER(..., true, Address::...)`, because with `false` the `MACRO_CALL_MEMBER` dispatches to the
+original binary and the compiler has nothing to analyse - it cannot know the callee leaves `ecx` alone, so the caller
+spills `this`. Enabling the callee is only legitimate once that callee is itself at 100%.
+
+`processSyncPacket` sat at 26.2% for exactly this reason, with the whole diff being `mov esi, ecx` and the register
+rename it causes. Flipping `translateMultiplayerIDsIntoPlayerIDs` (already 100%) to `true` took it to 79.2%
+immediately, and the rest was an `abs()`. Enabling all 23 finished functions of `GameSynchronyState` moved the
+namespace average 84.6% -> 85.7% with no function getting worse.
+
+So the measurement setup is two switches, not one: `Enable-Reimplemented-Data.ps1` /
+`enable_reimplemented_data.py` for the struct resolvers **and** `Enable-Reimplemented-Functions.ps1` for the
+function resolvers. Neither belongs in a commit. Measuring with only the data half makes every cross-function call
+look worse than it is.
+
+Explanations that were tested on this pair and are **not** the cause, so do not spend time on them: the callee being
+exported from the DLL (`OpenSHC.dll` exports one symbol, `luaopen_OpenSHC`); its address being taken by
+`MACRO_FUNCTION_RESOLVER`; the other callers not being in the LTCG set; and caller and callee not sharing a
+translation unit.
+
 ### Parameters
 
 Parameters might not be pushed like normal in certain cases.
-Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.
+Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.  
+This possibility is actually universal. If a computation of a value happens between pushes of parameters, it makes it likely the value was computed in-place. The other way around is also possible. If a computed value is created completely or partially before any push, it might have been a temporary.
 
 ### Implicit functions
 
@@ -451,25 +546,36 @@ They are replaced by specific assembly instructions or otherwise inlined.
 A list of all intrinsics can be found in `intrin.h` in the std library, but these are mainly very low level instructions.
 However, there are also C functions that can be replaced by intrinsics. The following attempts to extract these from the header:
 
-| Intrinsic | Does                                                                                           |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `memcpy`  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).   |
-| `memset`  | Fills a memory block with a byte value.                                                        |
-| `memcmp`  | Compares two memory blocks byte-by-byte.                                                       |
-| `memchr`  | Searches memory for the first occurrence of a byte.                                            |
-| `strcpy`  | Copies a null-terminated C string.                                                             |
-| `strlen`  | Returns the length of a null-terminated string (excluding `\0`).                               |
-| `strcmp`  | Compares two null-terminated C strings.                                                        |
-| `strcat`  | Appends one null-terminated C string to another.                                               |
-| `strncpy` | Copies up to N characters from a string; **may not null-terminate** if the source is too long. |
-| `strncmp` | Compares up to N characters of two strings.                                                    |
-| `wcscpy`  | Copies a null-terminated wide-character string.                                                |
-| `wcslen`  | Returns the length of a null-terminated wide string.                                           |
-| `ceil`    | Rounds a floating-point value upward to the nearest integer value.                             |
-| `abs`     | Returns the absolute value of an `int`.                                                        |
-| `labs`    | Returns the absolute value of a `long`.                                                        |
-| `longjmp` | Restores a saved execution context created by `setjmp`, continuing execution from that point.  |
-| `_setjmp` | Saves the current execution context for later restoration with `longjmp`.                      |
+| Intrinsic                 | Does                                                                                                                 |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `memcpy`                  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).                         |
+| `memset`                  | Fills a memory block with a byte value.                                                                              |
+| `memcmp`                  | Compares two memory blocks byte-by-byte.                                                                             |
+| `memchr`                  | Searches memory for the first occurrence of a byte.                                                                  |
+| `strcpy`                  | Copies a null-terminated C string.                                                                                   |
+| `strlen`                  | Returns the length of a null-terminated string (excluding `\0`).                                                     |
+| `strcmp`                  | Compares two null-terminated C strings.                                                                              |
+| `strcat`                  | Appends one null-terminated C string to another.                                                                     |
+| `strncpy`                 | Copies up to N characters from a string; **may not null-terminate** if the source is too long.                       |
+| `strncmp`                 | Compares up to N characters of two strings.                                                                          |
+| `strset`                  | Sets every character in a null-terminated string to the specified character.                                         |
+| `_strset`                 | Microsoft-specific version of `strset`; sets every character in a null-terminated string to the specified character. |
+| `wcscpy`                  | Copies a null-terminated wide-character string.                                                                      |
+| `wcslen`                  | Returns the length of a null-terminated wide string.                                                                 |
+| `wcscmp`                  | Compares two null-terminated wide-character strings.                                                                 |
+| `wcscat`                  | Appends one null-terminated wide-character string to another.                                                        |
+| `wcsncpy`                 | Copies up to N wide characters; **may not null-terminate** if the source is too long.                                |
+| `wcsncmp`                 | Compares up to N wide characters of two strings.                                                                     |
+| `_wcsset`                 | Sets every character in a null-terminated wide string to the specified wide character.                               |
+| `ceil`                    | Returns the smallest integral floating-point value greater than or equal to the argument.                            |
+| `abs`                     | Returns the absolute value of an `int`.                                                                              |
+| `labs`                    | Returns the absolute value of a `long`.                                                                              |
+| `longjmp`                 | Restores a saved execution context created by `setjmp`, continuing execution from that point.                        |
+| `_setjmp`                 | Saves the current execution context for later restoration with `longjmp`.                                            |
+| `_AddressOfReturnAddress` | Returns the address of the current function's return-address storage.                                                |
+| `_WriteBarrier`           | Prevents certain compiler memory-write reorderings across the barrier.                                               |
+| `__trap`                  | Generates a processor/compiler trap, optionally with arguments.                                                      |
+
 
 In cases where the decompiler seems to perform one of these actions via simple instructions, one can also try one of these functions.
 
@@ -509,6 +615,14 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
+
+- A run of adjacent single-byte zero stores in our output against dword and word stores in the original is an inlined
+  `memset`. Thirty `this->connectTarget[n] = '\0';` became seven `mov dword ptr ..., eax` plus one `mov word` when
+  written `memset(this->connectTarget, 0, 30);`, which also freed the register MSVC had been holding the zero in
+  (`handleCommandLineArguments` 35.7% -> 39.0%).
+- MSVC folds a two-character `strcpy(p, "\\")` to `mov word ptr [p], 0x5c`. Where the original loads the literal
+  instead (`mov dx, word ptr [str]; mov word ptr [edi], dx`) the source passed the string through a `char*`
+  variable (`readGameSpyConfig` 53.3% -> 58.5%).
 
 ### Copy Elision and Return Value Optimization
 

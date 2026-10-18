@@ -85124,7 +85124,7 @@ enum {
     // location:
     // type: /GUID
     SHC_3BB0A8C1_0x005A6EE0 = 0x005A6EE0,
-    // label: GUID_UNKNOWN
+    // label: GUID_APP
     // location:
     // type: /GUID
     SHC_3BB0A8C1_0x005A6EF0 = 0x005A6EF0,
@@ -87504,14 +87504,10 @@ enum {
     SHC_3BB0A8C1_0x005AC10C = 0x005AC10C,
     // type: /string
     SHC_3BB0A8C1_0x005AC118 = 0x005AC118,
-    // type: /undefined4
+    // label: GUID_NULL
+    // location:
+    // type: /GUID
     SHC_3BB0A8C1_0x005AC12C = 0x005AC12C,
-    // type: /undefined4
-    SHC_3BB0A8C1_0x005AC130 = 0x005AC130,
-    // type: /undefined4
-    SHC_3BB0A8C1_0x005AC134 = 0x005AC134,
-    // type: /undefined4
-    SHC_3BB0A8C1_0x005AC138 = 0x005AC138,
     // label: vftable_meta_ptr
     // location: std/locale/_Locimp
     // type: /pointer
@@ -97258,6 +97254,8 @@ enum {
     SHC_3BB0A8C1_0x00EB0AB0 = 0x00EB0AB0,
     // type: /int[9]
     SHC_3BB0A8C1_0x00EB0AF0 = 0x00EB0AF0,
+    // label: TIME_LastThanksBikPlaybackTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
     // type: /undefined4

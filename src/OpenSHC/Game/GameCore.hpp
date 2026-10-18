@@ -55,7 +55,7 @@ namespace Game {
         dword field8_0x20; // 0x00000020 length: 4
         ActiveMenuTab buildmenuMenuTabToSwitchTo; // 0x00000024 length: 4
         dword buildingandstatusmenuMenuTabToSwitchTo; // 0x00000028 length: 4
-        dword landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
+        ActiveMenuTab landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
         dword field12_0x30; // 0x00000030 length: 4
         ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
         BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
