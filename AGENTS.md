@@ -1026,3 +1026,36 @@ Not the cause (measured): the `uVar7` local, loaded at line 73 and read only at
 line 381, whose live range spans the whole switch. Inlining it to its use site
 is safe (the only writers of `attackWaveRetargetCount` are in other functions
 not reachable on that path) but left `pop` at 160 and cost 10.1 points.
+
+## `updateTribeBehaviorBasedOnBehaviorType`: the stack slot is removable, and it is not worth it
+
+Follow-up to the 33-instruction lead above. The extra slot is caused by our
+source keeping **three** values live across the switch dispatch where the
+original keeps none:
+
+- `_playerID_7` (`currentPlayerSlotID`, cached line 72, used at lines 111-122 and 270)
+- `uVar7` (`attackWaveRetargetCount`, cached line 73, used only at line 381)
+- `_attackWave_2` (cached line 60, used at lines 61, 64 and 164)
+
+Removing any **one** of them does nothing - MSVC simply spills a different one
+(measured: `uVar7` alone -10.1, `_playerID_7` alone -14.4, both left `pop` at 160).
+Removing **all three** does fix it exactly:
+
+    before:  pop orig 128 ours 160    surplus +46
+    after:   pop orig 128 ours 128    surplus  +9
+
+So the diagnosis was right and the slot is reachable. But it is still a net loss
+(**71.3% -> 56.4%**) because matched instructions fall from ~566 to 401: pushing
+the three reads down into the arms re-phases the arm bodies, and that costs far
+more than the 33 prologue/epilogue instructions it saves.
+
+Conclusion: this function's +46 surplus is **not** worth collecting. Note also
+that the original reads `currentPlayerSlotID` twice and `unknownAttackRelatedUpdateCounter`
+twice - both already match our counts - and `sVar3` is a *reused* variable
+(reassigned at line 82), not a long-lived cache, so it is not a candidate either.
+
+Generalisation: the instruction-surplus ranking finds real extra work, but
+removing it only pays when the removal is **local** - a dead store in a loop, a
+redundant reload, a mask spelled as bool arithmetic. When the only way to remove
+the work is to move code across basic blocks, the alignment loss dominates.
+Check that a surplus fix is local before attempting it.
