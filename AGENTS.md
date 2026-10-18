@@ -892,3 +892,70 @@ and (b) the pairing noise above. Combined with the sub-70% aligner problem
 documented earlier, its diff cannot validate a local change either. If this
 function is to be moved, it needs Ghidra's control flow read block by block
 against the source, not reccmp.
+
+# The Ghidra reading: what it establishes, and how to use Ghidra here
+
+## Every decompiled function in this namespace is the seed our .cpp came from
+
+`get_plate_comment` on all seven functions checked (`recomputeAttackInfo`,
+`ifNecessaryThrowOilAutomatically`, `commandUnitsToMoveToKeep`,
+`exitSiegeEquipmentForWave`, `pruneStaleArcherPoints`,
+`findOrReserveArcherPointSlot`, `giveLightPitchInstructionToUnitClosestToPitch`)
+returns the identical banner:
+
+    decompilerscript: committed: 2025-01-30 21:57:43.216000
+
+One bulk script run. So **Ghidra's decompiled C is the text our files were
+generated from** - it cannot contain information our files lack, and on a file
+already tuned past the seed, following it *undoes* that tuning. Measured on
+`ifNecessaryThrowOilAutomatically`: rewriting the body to mirror Ghidra exactly
+(its variable set, its `param_1`-as-size-index and `sVar2`-as-y reuse, its merged
+guard) scored **36.5% -> 29.2%**.
+
+Worse, the decompiler actively misleads on control flow: it renders two
+*sequential early returns* as one `||` chain. Ghidra prints
+
+    if ((iVar9 < 1) || (0x50 < ...closestEnemyMicroDistance) || (...)) return 0;
+
+but the disassembly shows `test edi,edi / jg 0xa` - a 10-byte hop over an inline
+epilogue, i.e. genuinely two separate `if (...) return 0;` statements, which is
+what our file already had. Merging them cost 7.3 points on its own.
+
+## What Ghidra *is* good for: the disassembly and the control-flow metrics
+
+Those come from the binary, not the script. `analyze_control_flow` gives a
+structural checksum worth running before touching a low-scoring function:
+
+| function | calls (Ghidra/ours) | instrs (orig/ours) | delta |
+|---|---|---|---|
+| `recomputeAttackInfo` | 42 / 42 | 981 / 941 | -40 |
+| `assignMacemenAndKnights...` | 8 / 8 | 213 / 213 | 0 |
+| `placeSiegeTentsAndAssignEngineers` | 5 / 5 | 211 / 224 | +13 |
+| `scanForSiegeTentPoints` | 2 / 2 | 193 / 200 | +7 |
+| `ifNecessaryThrowOilAutomatically` | 4 / 4 | 176 / 169 | -7 |
+| `recountTotalTroopValue` | 1 / 1 | 48 / 48 | -3 |
+
+**Call counts match exactly on every function.** And diffing the *set of global
+offsets* each side touches (`I<Class>::instance+N` in the reccmp diff) finds
+**zero** offsets the original reads or writes that our side does not - so no
+data access is missing either.
+
+Conclusion: the big low-% functions are not missing logic. Their gap is
+instruction selection and ordering. For `recomputeAttackInfo` the mnemonic
+histogram of the gap is `movzx +25 / mov -41 / add -17 / jge -12 / jg +7` -
+narrow-unsigned loads where the original loads dwords, and comparison polarity.
+Our 16-bit temps are already declared 2-byte (`undefined2`, `ushort`), so the
+extra `movzx` come from MSVC promoting spilled 16-bit temps, not from the source
+types. Not obviously source-addressable.
+
+### Checks worth running, in order, before editing a low-scoring function
+1. `get_plate_comment` - if it carries the bulk banner, do not read the
+   decompiled C as evidence; read `disassemble_function`.
+2. `analyze_control_flow` - compare `calls` against our `MACRO_CALL_MEMBER`
+   count. A mismatch is real missing/extra code and is worth a lot.
+   `returns` and `loops_detected` are *not* comparable to source `return`/loop
+   counts (they count merged epilogues and back-edges).
+3. The global-offset set difference above - catches missing data access.
+4. Instruction-count delta - a large positive delta means we do extra work.
+   Count only lines matching `[a-z]` in the diff; blank lines otherwise inflate
+   it (this produced a bogus "+26" on oil before correction).
