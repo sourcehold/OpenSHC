@@ -11,6 +11,11 @@
 namespace OpenSHC {
 namespace UI {
 
+    struct NumberOfDigitsThreshold {
+        int maxNumber;
+        int numberOfDigits;
+    };
+
 #pragma pack(push, 1)
     // SIZE: 0x00000734
     typedef struct TextInputDefinedData {
@@ -20,7 +25,7 @@ namespace UI {
         byte UserTextHandler_CharacterFilter_B_1_8_9[256]; // 0x00000084 length: 256
         byte UserTextHandler_CharacterFilter_A_2_3[256]; // 0x00000184 length: 256
         short CharToImageSeqIDMapping[2][256]; // 0x00000284 length: 1024
-        int field5_0x684[8][2]; // 0x00000684 length: 64
+        NumberOfDigitsThreshold numberOfDigitsThresholds[8]; // 0x00000684 length: 64
         int field6_0x6c4[10]; // 0x000006C4 length: 40
         char field7_0x6ec[4]; // 0x000006EC length: 4
         char field8_0x6f0[6]; // 0x000006F0 length: 6
