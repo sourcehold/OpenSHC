@@ -177,6 +177,8 @@ def is_symbol_addr_in_useful_range(addr, include_code = True):
     return False
   if addr < 0x005a6e20:
     return False
+  if addr == 0x005ac12c:
+    return True
   if addr >= 0x005a6f00 and addr < 0x005b6004:
     return False
   if addr >= 0x00b93208 and addr < 0x00b94220:

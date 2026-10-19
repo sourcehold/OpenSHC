@@ -31,6 +31,8 @@ PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOPA@@StructResolver@@2U_GUID@@A
 
+PUBLIC ?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A
+
 PUBLIC ?instance@?$Extern@UEntityDefinedData@Entities@Map@OpenSHC@@$0FLGAAE@@StructResolver@@2UEntityDefinedData@Entities@Map@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@UBuildingDefinedData@Buildings@Map@OpenSHC@@$0FLHJHE@@StructResolver@@2UBuildingDefinedData@Buildings@Map@OpenSHC@@A
@@ -1691,6 +1693,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A EQU 005A6EE0h
 
 ?instance@?$Extern@U_GUID@@$0FKGOPA@@StructResolver@@2U_GUID@@A EQU 005A6EF0h
+
+?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A EQU 005AC12Ch
 
 ?instance@?$Extern@UEntityDefinedData@Entities@Map@OpenSHC@@$0FLGAAE@@StructResolver@@2UEntityDefinedData@Entities@Map@OpenSHC@@A EQU 005B6004h
 
