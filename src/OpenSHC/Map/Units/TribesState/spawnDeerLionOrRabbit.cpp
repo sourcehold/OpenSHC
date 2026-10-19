@@ -22,7 +22,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525F20
         BOOLEnum TribesState::spawnDeerLionOrRabbit(int tribeID, int param_2, UnitType unitType)
         {
-            short* psVar1;
+            ushort* psVar1;
             int sVar2;
             int _finalTargetUnitID;
             int iVar3;
@@ -56,7 +56,12 @@ namespace Map {
                 if (_tribeSize <= _unknown) {
                     param_2 = param_2 / 4;
                 }
-                psVar1 = (short*)&this->tribes[tribeID].field138_0x284;
+                /*
+                  Keeping the pointer rather than naming the field: resolving it costs one
+                  instruction here (quick_diff 0.7295 -> 0.7265), because the field form
+                  re-evaluates tribes[tribeID] while the pointer freezes the address.
+                 */
+                psVar1 = &this->tribes[tribeID].field138_0x284;
                 *psVar1 = *psVar1 + 1;
                 if ((param_2 <= this->tribes[tribeID].field138_0x284)
                     && (sVar2 = this->tribes[tribeID].herdMaxSize, this->tribes[tribeID].field138_0x284 = 0,
@@ -65,7 +70,7 @@ namespace Map {
                         && (DAT_GameState::instance.mapAndTime.eventCountdownRabbitInfestation)) {
                         iVar3 = 110;
                     } else {
-                        iVar3 = ((_unknown <= _tribeSize) - 1 & 0xffffffb5) + 100;
+                        iVar3 = _tribeSize < _unknown ? 25 : 100;
                     }
                     if (iVar3 <= (int)(_rng2 & 0x7f)) {
                         _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(

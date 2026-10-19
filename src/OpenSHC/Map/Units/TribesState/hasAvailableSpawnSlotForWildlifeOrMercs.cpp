@@ -16,27 +16,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523520
         undefined4 TribesState::hasAvailableSpawnSlotForWildlifeOrMercs()
         {
-            int iVar1;
-            bool bVar4;
-            if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                && (iVar1 = 0, DAT_GameState::instance.mapAndTime.wildlifeCount < 0xa0)) {
-                do {
-                    if (iVar1 < 4) {
-                        uint uVar3 = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar1][0];
-                        uint uVar2 = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar1][1];
-                        if ((uVar3 < 400) && (uVar2 < 400)) {
-                            bVar4 = *(char*)(uVar2 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar3) == '\0';
-                            goto LAB_00523574;
-                        }
-                    } else {
-                        bVar4 = DAT_GameState::instance.mapAndTime.mercRecruitable[iVar1 + 4] == 0;
-                    LAB_00523574:
-                        if (!bVar4) {
-                            return (undefined4)(1);
-                        }
+            if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                || 0xa0 <= DAT_GameState::instance.mapAndTime.wildlifeCount) {
+                return (undefined4)(0);
+            }
+            for (int _slot = 0; _slot < 0xc; _slot = _slot + 1) {
+                if (_slot < 4) {
+                    uint const _x = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];
+                    uint const _y = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1];
+                    if (_x <= 399 && _y <= 399
+                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != 0) {
+                        return (undefined4)(1);
                     }
-                    iVar1 = iVar1 + 1;
-                } while (iVar1 < 0xc);
+                } else if (DAT_GameState::instance.mapAndTime.mercRecruitable[_slot + 4] != 0) {
+                    return (undefined4)(1);
+                }
             }
             return (undefined4)(0);
         }
