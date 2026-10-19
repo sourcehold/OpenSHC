@@ -46,7 +46,7 @@ namespace Synchrony {
                 (undefined4)((int)(_time)),
                 (char*)((int)(&this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].parameters)),
                 (size_t)((int)(this->DAT_CommandSize)), this->DAT_PlayerIDReceiver);
-            this->DAT_GameCommandArrayIndex = this->DAT_GameCommandArrayIndex + 1;
+            ++this->DAT_GameCommandArrayIndex;
             if (200 <= (int)this->DAT_GameCommandArrayIndex) {
                 this->DAT_GameCommandArrayIndex = 0;
             }

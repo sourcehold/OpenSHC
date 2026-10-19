@@ -17,8 +17,8 @@ namespace Synchrony {
     void GameSynchronyState::serializeOrDeserializeCommandParameter(void* destination, size_t size,
         GameCommandParameterLocation srcSwitch, GameCommandParameterReadWrite destSwitch)
     {
-        byte* _parameter;
         if ((0 < (int)size) && (destination != (void*)0x0)) {
+            byte* _parameter;
             if (srcSwitch == Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS) {
                 _parameter = this->DAT_GameCommandFixedParameterLocation + this->DAT_CommandParameterOffset;
             } else {

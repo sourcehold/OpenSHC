@@ -13,32 +13,32 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047F6A0
     void GameSynchronyState::addChatMessageToDisplayList(int subjectPlayerID, int objectPlayerID)
     {
-        this->DAT_ChatMessageArrayIndex = this->DAT_ChatMessageArrayIndex + 1;
-        if (20 <= (int)this->DAT_ChatMessageArrayIndex) {
+        ++this->DAT_ChatMessageArrayIndex;
+        if (20 <= this->DAT_ChatMessageArrayIndex) {
             this->DAT_ChatMessageArrayIndex = 0;
         }
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].subjectPlayer = subjectPlayerID;
-        DWORD _now = timeGetTime();
-        this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].time = _now;
+        this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].time = timeGetTime();
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].flag = 1;
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].objectPlayer = objectPlayerID;
-        MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
+        MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(sizeof(this->receivedChatMessage),
             (void*)((int)(this->receivedChatMessage)),
             (void*)((int)(this->DAT_ChatMessageArray[this->DAT_ChatMessageArrayIndex])));
         if (!subjectPlayerID) {
             // "Host"
-            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
+                sizeof(this->receivedChatMessage),
                 (void*)((int)(MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)76, 7))),
                 (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray[this->DAT_ChatMessageArrayIndex])));
         } else {
-            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
-                (void*)((int)(this->DAT_PlayerNames[subjectPlayerID])),
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
+                sizeof(this->receivedChatMessage), (void*)((int)(this->DAT_PlayerNames[subjectPlayerID])),
                 (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray[this->DAT_ChatMessageArrayIndex])));
         }
         if (objectPlayerID) {
-            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(250,
-                (void*)((int)(this->DAT_PlayerNames[objectPlayerID])),
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
+                sizeof(this->receivedChatMessage), (void*)((int)(this->DAT_PlayerNames[objectPlayerID])),
                 (void*)((int)(this->DAT_ChatMessageObjectPlayerNameArray[this->DAT_ChatMessageArrayIndex])));
         }
         this->chatScrollOffset = 0;

@@ -33,7 +33,7 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     Commands::GCT_LEAVE_GAME);
             }
-            this->unknownIncrementBy40_01 = this->unknownIncrementBy40_01 + 40;
+            this->unknownIncrementBy40_01 += 40;
             this->unknownPlayerInfo_03[playerID] = 1;
             return;
         }

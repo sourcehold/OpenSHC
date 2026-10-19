@@ -15,7 +15,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00487E30
     void GameSynchronyState::sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2)
     {
-        int _countdown;
         if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
             && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2, DAT_LowLevelMemory::ptr)(
@@ -31,18 +30,19 @@ namespace Synchrony {
             uint _playerID = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
                 this)(this->DPLAYX_PlayerHandle);
             this->matchTimes[_playerID] = DAT_GameCore::instance.mapTimeInTicks;
-            this->receivedMatchTimesTrackerUnk = this->receivedMatchTimesTrackerUnk + 1;
+            ++this->receivedMatchTimesTrackerUnk;
             if (6 < this->receivedMatchTimesTrackerUnk) {
-                this->commandDelay = this->commandDelay + -1;
+                --this->commandDelay;
                 this->receivedMatchTimesTrackerUnk = 0;
                 if (!this->syncRelatedCountdown) {
                     int _maxLatency = 0;
-                    for (int _player = 1; _player < 9; _player = _player + 1) {
+                    for (int _player = 1; _player < 9; ++_player) {
                         if ((this->currentPlayerFullIDArray[_player] != -1)
                             && (this->connectionLagInfoArray[_player].average1 > _maxLatency)) {
                             _maxLatency = this->connectionLagInfoArray[_player].average1;
                         }
                     }
+                    int _countdown;
                     if (_maxLatency < 2) {
                         _countdown = 20;
                     } else if (_maxLatency == 2) {
@@ -57,7 +57,7 @@ namespace Synchrony {
                         this->commandDelay = _countdown;
                     }
                 }
-                this->clTimeDiff = this->clTimeDiff + -1;
+                --this->clTimeDiff;
                 if (this->clTimeDiff < 0) {
                     this->clTimeDiff = 0;
                 }

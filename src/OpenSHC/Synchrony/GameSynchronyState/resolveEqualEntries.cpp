@@ -18,7 +18,7 @@ namespace Synchrony {
         // Measured: declaring _index in the for costs the match (100.0% -> 94.1%), so it stays here.
         int _index = 0;
         if (0 < _count) {
-            for (; _index < _count; _index = _index + 1) {
+            for (; _index < _count; ++_index) {
                 BOOLEnum _equality = MACRO_CALL(OS_Func::isEqualGUID)(
                     pGUID, DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[_index]);
                 if (_equality) {

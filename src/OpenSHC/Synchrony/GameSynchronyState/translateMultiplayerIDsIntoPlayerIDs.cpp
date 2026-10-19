@@ -20,7 +20,7 @@ namespace Synchrony {
         }
         // Do not stop at the first match: the original lets the last matching slot win, including
         // duplicate or sentinel-valued IDs.
-        for (int _slot = 1; _slot < 9; _slot = _slot + 1) {
+        for (int _slot = 1; _slot < 9; ++_slot) {
             if (this->currentPlayerFullIDArray[_slot] == multiplayerID) {
                 _playerID = _slot;
             }

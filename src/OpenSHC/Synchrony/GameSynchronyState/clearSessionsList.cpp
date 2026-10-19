@@ -12,7 +12,7 @@ namespace Synchrony {
     void GameSynchronyState::clearSessionsList()
     {
         if (0 < this->DPLAY_SessionsCount) {
-            for (int _session = 0; _session < this->DPLAY_SessionsCount; _session = _session + 1) {
+            for (int _session = 0; _session < this->DPLAY_SessionsCount; ++_session) {
                 MACRO_CALL(OS_Func::_free_base)(DAT_GameSynchronyState::instance.DPLAY_SessionNames[_session]);
                 void* _guidHandle = GlobalHandle(DAT_GameSynchronyState::instance.DPLAY_SessionGUIDs[_session]);
                 GlobalUnlock(_guidHandle);

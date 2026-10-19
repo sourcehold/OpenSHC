@@ -14,18 +14,18 @@ namespace Synchrony {
         // matches exactly. A plain 1..8 loop measures 27.0% and stays there under /GL and under
         // every per-file pragma lever (optimize "t" on, "s" off, "y" off, "g" on, inline_depth(1)),
         // so this compiler does not rebuild the unroll from the rolled source.
-        for (int _player = 1; _player < 9; _player = _player + 4) {
+        for (int _player = 1; _player < 9; _player += 4) {
             if ((this->currentPlayerFullIDArray[_player] != -1) || (this->currentAIArray[_player] != 0)) {
-                _sum = _sum + 1;
+                ++_sum;
             }
             if ((this->currentPlayerFullIDArray[_player + 1] != -1) || (this->currentAIArray[_player + 1] != 0)) {
-                _sum = _sum + 1;
+                ++_sum;
             }
             if ((this->currentPlayerFullIDArray[_player + 2] != -1) || (this->currentAIArray[_player + 2] != 0)) {
-                _sum = _sum + 1;
+                ++_sum;
             }
             if ((this->currentPlayerFullIDArray[_player + 3] != -1) || (this->currentAIArray[_player + 3] != 0)) {
-                _sum = _sum + 1;
+                ++_sum;
             }
         }
         return _sum;
