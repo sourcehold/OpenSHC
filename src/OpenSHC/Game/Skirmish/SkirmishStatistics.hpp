@@ -44,11 +44,9 @@ namespace Game {
             short unknownShortArray1[9]; // 0x000006C4 length: 18
             short unknownShortArray2[9]; // 0x000006D6 length: 18
             int finalDateOfDeathInMonths[9]; // 0x000006E8 length: 36
-            int yearStart; // 0x0000070C length: 4
-            int monthStart; // 0x00000710 length: 4
-            int yearEnd; // 0x00000714 length: 4
-            int monthEnd; // 0x00000718 length: 4
-            byte padding3[92]; // 0x0000071C length: 92
+            int field28_0x70c[9]; // 0x0000070C length: 36
+            int field29_0x730[9]; // 0x00000730 length: 36
+            int field30_0x754[9]; // 0x00000754 length: 36
 
         } SkirmishStatistics;
 #pragma pack(pop)
