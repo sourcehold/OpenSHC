@@ -9,33 +9,15 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EA40
     int GameSynchronyState::countPlayersInSameTeam(int playerID)
     {
-        int iVar2 = 0;
-        int iVar1 = DAT_GameState::instance.mapAndTime.playerTeams[playerID];
-        if ((this->currentPlayerFullIDArray[1] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[1] == iVar1)) {
-            iVar2 = 1;
+        int _count = 0;
+        int _team = DAT_GameState::instance.mapAndTime.playerTeams[playerID];
+        for (int _player = 1; _player < 9; _player = _player + 1) {
+            if ((this->currentPlayerFullIDArray[_player] != -1)
+                && (DAT_GameState::instance.mapAndTime.playerTeams[_player] == _team)) {
+                _count = _count + 1;
+            }
         }
-        if ((this->currentPlayerFullIDArray[2] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[2] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[3] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[3] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[4] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[4] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[5] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[5] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[6] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[6] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[7] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[7] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        if ((this->currentPlayerFullIDArray[8] != -1) && (DAT_GameState::instance.mapAndTime.playerTeams[8] == iVar1)) {
-            iVar2 = iVar2 + 1;
-        }
-        return iVar2;
+        return _count;
     }
 
 }

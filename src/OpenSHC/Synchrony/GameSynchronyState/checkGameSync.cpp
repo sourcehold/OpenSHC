@@ -23,8 +23,7 @@ namespace Synchrony {
         }
         this->DAT_GameHalted = 0;
         for (_playerID = 1; _playerID < 9; _playerID = _playerID + 1) {
-            if ((this->currentPlayerFullIDArray[_playerID] != -1)
-                && (this->unknownPlayerInfo_03[_playerID] == 0)) {
+            if ((this->currentPlayerFullIDArray[_playerID] != -1) && (this->unknownPlayerInfo_03[_playerID] == 0)) {
                 _currentHash = this->HASH_HashTotal[_playerID];
                 _currentMatchTime = this->DAT_PlayerMatchTimes[_playerID];
                 break;
@@ -37,8 +36,7 @@ namespace Synchrony {
             return;
         }
         for (_playerID = 1; _playerID < 9; _playerID = _playerID + 1) {
-            if ((this->currentPlayerFullIDArray[_playerID] != -1)
-                && (this->unknownPlayerInfo_03[_playerID] == 0)) {
+            if ((this->currentPlayerFullIDArray[_playerID] != -1) && (this->unknownPlayerInfo_03[_playerID] == 0)) {
                 if (this->HASH_HashTotal[_playerID] == 0) {
                     return;
                 }
@@ -48,22 +46,19 @@ namespace Synchrony {
             }
         }
         for (_playerID = 1; _playerID < 9; _playerID = _playerID + 1) {
-            if ((this->currentPlayerFullIDArray[_playerID] != -1)
-                && (this->unknownPlayerInfo_03[_playerID] == 0)) {
+            if ((this->currentPlayerFullIDArray[_playerID] != -1) && (this->unknownPlayerInfo_03[_playerID] == 0)) {
                 if (this->HASH_HashTotal[_playerID] == 0) {
                     return;
                 }
                 if ((this->DAT_PlayerMatchTimes[_playerID] == _currentMatchTime)
                     && (this->HASH_HashTotal[_playerID] != _currentHash)) {
-                    /*
-                      hash mismatch for same game time
-                     */
+                    // hash mismatch for the same game time
                     if (this->syncRelatedCountdown) {
                         this->syncRelatedCountdown = 0;
-                        this->commandDelay = 0x1e;
+                        this->commandDelay = 30;
                     }
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(Commands::GCT_GAME_DESYNCUnk);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_GAME_DESYNCUnk);
                     this->flag_0xbec = 1;
                     for (int _slot = 1; _slot < 9; _slot = _slot + 1) {
                         this->receivedSyncStatusByPlayerUnk[_slot] = 0;

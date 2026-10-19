@@ -15,6 +15,7 @@ namespace Synchrony {
     void GameSynchronyState::resolveEqualEntries(GUID* pGUID)
     {
         int _count = this->DPLAY_SessionsCount;
+        // Measured: declaring _index in the for costs the match (100.0% -> 94.1%), so it stays here.
         int _index = 0;
         if (0 < _count) {
             for (; _index < _count; _index = _index + 1) {

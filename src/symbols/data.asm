@@ -27,8 +27,6 @@ PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOMA@@StructResolver@@2U_GUID@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0FKGONA@@StructResolver@@2U_GUID@@A
 
-PUBLIC ?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A
-
 PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOPA@@StructResolver@@2U_GUID@@A
@@ -1691,8 +1689,6 @@ _TEXT SEGMENT
 ?instance@?$Extern@U_GUID@@$0FKGOMA@@StructResolver@@2U_GUID@@A EQU 005A6EC0h
 
 ?instance@?$Extern@U_GUID@@$0FKGONA@@StructResolver@@2U_GUID@@A EQU 005A6ED0h
-
-?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A EQU 005AC12Ch
 
 ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A EQU 005A6EE0h
 

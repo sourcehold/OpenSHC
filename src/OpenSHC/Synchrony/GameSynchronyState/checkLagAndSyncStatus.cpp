@@ -15,22 +15,22 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048DA60
     void GameSynchronyState::checkLagAndSyncStatus()
     {
-        DWORD DVar3;
+        DWORD _now;
         int _player;
         int _domain;
         this->syncStatus10Related[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
         for (_player = 1; _player < 9; _player = _player + 1) {
             if ((this->currentPlayerFullIDArray[_player] != -1) && (this->syncStatus10Related[_player] == 0)) {
                 if (this->announcementReceivedBool) {
-                    DVar3 = timeGetTime();
-                    if (DVar3 - this->announcementReceiveTime <= 0xafc8) {
+                    _now = timeGetTime();
+                    if (_now - this->announcementReceiveTime <= 45000) {
                         return;
                     }
                     for (_player = 1; _player < 9; _player = _player + 1) {
                         if ((this->currentPlayerFullIDArray[_player] != -1)
                             && (this->syncStatus10Related[_player] == 0)) {
                             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = _player;
-                            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 0x3f;
+                            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 63;
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
                                 DAT_GameSynchronyState::ptr)(Commands::GCT_LEAVE_GAME);
                             this->syncStatus10Related[_player] = 1;
@@ -38,8 +38,8 @@ namespace Synchrony {
                     }
                     break;
                 }
-                DVar3 = timeGetTime();
-                if (DVar3 - this->announcementReceiveTime <= 0xea60) {
+                _now = timeGetTime();
+                if (_now - this->announcementReceiveTime <= 60000) {
                     return;
                 }
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
@@ -53,17 +53,19 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.field76_0xbe8 = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceiveTime = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceivedBool = FALSE;
+        // The original runs 14 domains over a 12-slot-per-player block, so a domain above 11
+        // deliberately reads into the next player's slots; keep the bounds exactly as they are.
         for (_domain = 0; _domain < 14; _domain = _domain + 1) {
             this->sharedDesyncFlags[_domain] = 0;
             for (_player = 1; _player < 9; _player = _player + 1) {
                 if (this->currentPlayerFullIDArray[_player] != -1) {
-                    _hash = ((int*)&this->HASH_PartialHashPerPlayer)[_player * 12 + _domain];
+                    _hash = this->HASH_PartialHashPerPlayer.player[_player].domain[_domain];
                     break;
                 }
             }
             for (_player = 1; _player < 9; _player = _player + 1) {
                 if (this->currentPlayerFullIDArray[_player] != -1
-                    && _hash != ((int*)&this->HASH_PartialHashPerPlayer)[_player * 12 + _domain]) {
+                    && _hash != this->HASH_PartialHashPerPlayer.player[_player].domain[_domain]) {
                     this->sharedDesyncFlags[_domain] = 1;
                 }
             }

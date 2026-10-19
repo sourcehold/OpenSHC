@@ -13,24 +13,24 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00480580
     int GameSynchronyState::getPendingGameCommandsCount()
     {
-        GameCommandStateByte* pGVar3;
-        int iVar1 = 0;
-        int iVar3 = this->gameCommandID;
-        if (iVar3 < 200) {
-            pGVar3 = &this->DAT_GameCommandArray[iVar3].stateUnk;
-            int iVar2 = 200 - iVar3;
-            /*
-              Measured: rewriting this do-while as a for loop costs the match (100.0% -> 91.7%), so it stays.
-             */
+        GameCommandStateByte* _statePtr;
+        int _pending = 0;
+        int _firstCommand = this->gameCommandID;
+        if (_firstCommand < 200) {
+            _statePtr = &this->DAT_GameCommandArray[_firstCommand].stateUnk;
+            int _remaining = 200 - _firstCommand;
+            // Measured: the counted do-while over a walking pointer is what the original compiles to.
+            // A for loop costs the match (100.0% -> 91.7%), a while loop adds an instruction, and
+            // indexing DAT_GameCommandArray per iteration loses three, so this shape stays.
             do {
-                if (*pGVar3 != (GameCommandState)0 && (char)*pGVar3 < '\n') {
-                    iVar1 = iVar1 + 1;
+                if (*_statePtr != (GameCommandState)0 && (char)*_statePtr < '\n') {
+                    _pending = _pending + 1;
                 }
-                pGVar3 = pGVar3 + 0x4f8;
-                iVar2 = iVar2 + -1;
-            } while (iVar2);
+                _statePtr = _statePtr + 1272;
+                _remaining = _remaining + -1;
+            } while (_remaining);
         }
-        return iVar1;
+        return _pending;
     }
 
 }

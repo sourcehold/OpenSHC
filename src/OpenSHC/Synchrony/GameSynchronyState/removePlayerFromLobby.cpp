@@ -21,19 +21,19 @@ namespace Synchrony {
     void GameSynchronyState::removePlayerFromLobby(int playerID)
     {
         this->syncRelatedStatusArray[playerID] = 1;
-        BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-        if ((BVar1) && (playerID != (int)DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
+        BOOLEnum _inGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+        if ((_inGameMenu) && (playerID != (int)DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = playerID;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = this->kickDueToLagStatusUnk;
             if ((!this->syncStatus) && (!this->saveRelated)) {
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)((Commands::GameCommandType)(Commands::GCT_SEND_RESYNC_TILEMAPDATA2
-                    | Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS));
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    (Commands::GameCommandType)(Commands::GCT_SEND_RESYNC_TILEMAPDATA2
+                        | Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS));
             } else {
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)(Commands::GCT_LEAVE_GAME);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    Commands::GCT_LEAVE_GAME);
             }
-            this->unknownIncrementBy40_01 = this->unknownIncrementBy40_01 + 0x28;
+            this->unknownIncrementBy40_01 = this->unknownIncrementBy40_01 + 40;
             this->unknownPlayerInfo_03[playerID] = 1;
             return;
         }

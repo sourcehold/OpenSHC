@@ -17,13 +17,13 @@ namespace Synchrony {
         this->matchTimes[_player]
             = this->receivedCommandMapTimeInTicks + this->connectionLagInfoArray[_player].average1;
         int _countDown = this->commandDelay;
-        int iVar2 = (char)this->DPLAY_ReceiveData.packet.payload[0] + 10;
-        if (iVar2 > _countDown) {
-            int iVar1 = _countDown + 5;
-            if (iVar2 >= iVar1) {
-                iVar2 = iVar1;
+        int _delay = (char)this->DPLAY_ReceiveData.packet.payload[0] + 10;
+        if (_delay > _countDown) {
+            int _cappedDelay = _countDown + 5;
+            if (_delay >= _cappedDelay) {
+                _delay = _cappedDelay;
             }
-            this->commandDelay = iVar2;
+            this->commandDelay = _delay;
         }
         uint _difference = (DAT_GameCore::instance.mapTimeInTicks - this->receivedCommandMapTimeInTicks)
             - this->connectionLagInfoArray[_player].average1;
@@ -34,7 +34,7 @@ namespace Synchrony {
                 _absoluteDifference = _newDiff;
             }
             this->clTimeDiff = _absoluteDifference;
-            if (0x2d < _absoluteDifference) {
+            if (45 < _absoluteDifference) {
                 this->clTimeDiff = 45;
             }
         }

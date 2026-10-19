@@ -3,10 +3,10 @@
 
 #include "OpenSHC/Game/GameMode.hpp"
 
-#include "string.h"
-
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+
+#include "string.h"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -25,9 +25,7 @@ namespace Synchrony {
             if (this->currentPlayerFullIDArray[_somePlayerID] != -1) {
                 _someCounter = _someCounter + 1;
             }
-            /*
-              no human player and no AI in this slot
-             */
+            // no human player and no AI in this slot
             if ((this->currentPlayerFullIDArray[_somePlayerID] == -1) && (this->currentAIArray[_somePlayerID] == 0)) {
                 continue;
             }
