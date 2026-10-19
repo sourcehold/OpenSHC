@@ -37,7 +37,7 @@ namespace Map {
                         }
                     }
                 } while (_unitSelectionIndex < iVar2);
-                if (_europeanArcherCount < _arabArcherCount) {
+                if (_arabArcherCount > _europeanArcherCount) {
                     return Map::Units::UT_A_ARCHER;
                 }
             }

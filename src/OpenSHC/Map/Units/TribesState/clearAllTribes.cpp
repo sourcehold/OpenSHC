@@ -16,12 +16,11 @@ namespace Map {
             this->clans = 0;
             this->field2_0x8 = 1;
             this->field9_0x24 = 0;
-            DAT_CurrentTribeID::instance = 1;
-            do {
+            for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < 1250;
+                DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    0x334, '\0', (void*)((int)(this->tribes + DAT_CurrentTribeID::instance)));
-                DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1;
-            } while (DAT_CurrentTribeID::instance < 1250);
+                    sizeof(Tribe), '\0', &this->tribes[DAT_CurrentTribeID::instance]);
+            }
         }
 
     }
