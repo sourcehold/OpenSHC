@@ -76,7 +76,7 @@ message(STATUS "CMAKE_CXX_FLAGS_RELWITHDEBINFO is ${CMAKE_CXX_FLAGS_RELWITHDEBIN
 include_directories(${CMAKE_SOURCE_DIR}/MSVC1400-SP1/VC/include ${CMAKE_SOURCE_DIR}/MSVC1400-SP1/VC/PlatformSDK/Include)
 
 # Handle Windows dependencies that need explicit linking
-link_libraries(winmm ws2_32)
+link_libraries(winmm)
 
 # Handle dependencies without source files
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/include)
