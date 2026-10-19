@@ -24,8 +24,8 @@ namespace Map {
         char ironCount; // 0x00000009 length: 1
         char oilCount; // 0x0000000A length: 1
         char marshCount; // 0x0000000B length: 1
-        char lowestTerrainHeight; // 0x0000000C length: 1
-        char highestTerrainHeight; // 0x0000000D length: 1
+        byte lowestTerrainHeight; // 0x0000000C length: 1
+        byte highestTerrainHeight; // 0x0000000D length: 1
         char terrainDiffHigherThan12; // 0x0000000E length: 1
         char structureCount; // 0x0000000F length: 1
         char isNotNearEdgeUnk; // 0x00000010 length: 1
