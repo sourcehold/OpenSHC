@@ -14,8 +14,7 @@ namespace Map {
         {
             short* psVar1;
             uint _mod16;
-            psVar1 = &this->tribes[tribeID].size;
-            *psVar1 = *psVar1 + 1;
+            this->tribes[tribeID].size = this->tribes[tribeID].size + 1;
             /*
               basically, it sets a bit flag for every unitID that is in the selection
              */

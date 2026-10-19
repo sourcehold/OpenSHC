@@ -30,8 +30,7 @@ namespace Map {
             int sVar5;
             BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeFreeOfTunnelingUnits, this)(
                 param_1, this->tribes[param_1].uid);
-            psVar1 = &this->tribes[param_1].unknownCounter01;
-            *psVar1 = *psVar1 + 1;
+            this->tribes[param_1].unknownCounter01 = this->tribes[param_1].unknownCounter01 + 1;
             sVar5 = this->tribes[param_1].unknownCounter01;
             this->tribes[param_1].unkIsAnimalTribe = 1;
             if (8000 <= sVar5) {
@@ -66,8 +65,7 @@ namespace Map {
                         (uint)((int)this->tribes[param_1].rallyPointArray[sVar5][0]),
                         (uint)((int)this->tribes[param_1].rallyPointArray[sVar5][1]), 0, 0,
                         Map::Units::Instructions::UMSE_0);
-                    psVar1 = &this->tribes[param_1].currentRallyPointIndex;
-                    *psVar1 = *psVar1 + 1;
+                    this->tribes[param_1].currentRallyPointIndex = this->tribes[param_1].currentRallyPointIndex + 1;
                     if (this->tribes[param_1].rallyPointCount <= this->tribes[param_1].currentRallyPointIndex) {
                         this->tribes[param_1].rallyPointCount = 0;
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;

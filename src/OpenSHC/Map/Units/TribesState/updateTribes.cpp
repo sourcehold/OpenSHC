@@ -29,8 +29,8 @@ namespace Map {
             do {
                 if (this->tribes[DAT_CurrentTribeID::instance].tribeState == 2) {
                     if (0 < this->tribes[DAT_CurrentTribeID::instance].countdown2) {
-                        psVar1 = &this->tribes[DAT_CurrentTribeID::instance].countdown2;
-                        *psVar1 = *psVar1 + -1;
+                        this->tribes[DAT_CurrentTribeID::instance].countdown2
+                            = this->tribes[DAT_CurrentTribeID::instance].countdown2 + -1;
                     }
                     if ((DAT_CurrentTribeID::instance & 0x1f) == _tickBasedNumberUpTo32) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::computeTribePercentages, this)(
@@ -52,8 +52,8 @@ namespace Map {
                             goto switchD_0052b92a_caseD_f;
                         case ((AITribeType)0x10):
                             goto switchD_0052b92a_caseD_10;
-                            default:
-                                goto switchD_0052b92a_caseD_4;
+                        default:
+                            goto switchD_0052b92a_caseD_4;
                         }
                     }
                     switch (this->tribes[DAT_CurrentTribeID::instance].tribeType) {
@@ -81,8 +81,7 @@ namespace Map {
                     case ((AITribeType)0x1d):
                     case AI::Tribes::OFFSET_CROSSBOWMAN:
                     case ((AITribeType)0x1f):
-                        MACRO_CALL_MEMBER(
-                            Map::Units::TroopValueState_Func::updateTribeBehaviorBasedOnBehaviorType,
+                        MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateTribeBehaviorBasedOnBehaviorType,
                             DAT_TroopValueState::ptr)(DAT_CurrentTribeID::instance);
                         break;
                     case AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_SPEARMEN:
@@ -113,10 +112,10 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::markTribeAsAnimalTribe, this)(
                             DAT_CurrentTribeID::instance);
                         break;
-                        default:
-                            switchD_0052b92a_caseD_4
-                            : MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeCombatStanceBehavior,
-                                  this)(DAT_CurrentTribeID::instance);
+                    default:
+                    switchD_0052b92a_caseD_4:
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeCombatStanceBehavior, this)(
+                            DAT_CurrentTribeID::instance);
                     }
                     psVar1 = (short*)&this->tribes[DAT_CurrentTribeID::instance].countdown;
                     if (this->tribes[DAT_CurrentTribeID::instance].countdown != 0) {

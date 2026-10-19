@@ -65,6 +65,11 @@ def scan_top(s):
                     continue
                 if tok in ("<", ">") and s[i - 1:i + 1] == "->":
                     continue
+                # a shift is not a comparison: splitting `1 << n` at the first `<`
+                # rejoins it as `1 < < n`, which still parses as far as the rewriter
+                # is concerned and then fails to compile.
+                if tok in ("<", ">") and tok in (s[i - 1:i], s[i + 1:i + 2]):
+                    continue
                 hit = tok
                 break
             if hit:
