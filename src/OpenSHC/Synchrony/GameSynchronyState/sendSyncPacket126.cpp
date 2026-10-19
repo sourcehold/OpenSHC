@@ -22,8 +22,8 @@ namespace Synchrony {
             && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
             BOOLEnum _inGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (_inGameMenu) {
-                this->syncRelated2 = this->syncRelated2 + 1;
-                for (int _player = 0; _player < 9; _player = _player + 1) {
+                ++this->syncRelated2;
+                for (int _player = 0; _player < 9; ++_player) {
                     this->connectionLagInfoArray[_player].mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks;
                     this->connectionLagInfoArray[_player].counter = (char)this->syncRelated2;
                     this->connectionLagInfoArray[_player].now = _now;

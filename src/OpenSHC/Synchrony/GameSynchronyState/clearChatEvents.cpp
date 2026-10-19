@@ -21,7 +21,7 @@ namespace Synchrony {
         this->DAT_ChatMessageArrayIndex = 0;
         // The original walks one pointer over &DAT_ChatEventArray[0].time and clears the three
         // fields around it with negative and positive indices; objectPlayer stays untouched.
-        for (int _chatEvent = 0; _chatEvent < 20; _chatEvent = _chatEvent + 1) {
+        for (int _chatEvent = 0; _chatEvent < 20; ++_chatEvent) {
             this->DAT_ChatEventArray[_chatEvent].subjectPlayer = 0;
             this->DAT_ChatEventArray[_chatEvent].time = 0;
             this->DAT_ChatEventArray[_chatEvent].flag = 0;

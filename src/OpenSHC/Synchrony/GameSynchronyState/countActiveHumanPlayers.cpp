@@ -8,9 +8,9 @@ namespace Synchrony {
     int GameSynchronyState::countActiveHumanPlayers()
     {
         uint _count = 0;
-        for (int _player = 1; _player < 9; _player = _player + 1) {
+        for (int _player = 1; _player < 9; ++_player) {
             if (this->currentPlayerFullIDArray[_player] != -1) {
-                _count = _count + 1;
+                ++_count;
             }
         }
         return _count;

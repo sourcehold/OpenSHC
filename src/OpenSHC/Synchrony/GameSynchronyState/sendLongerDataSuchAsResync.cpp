@@ -40,7 +40,7 @@ namespace Synchrony {
             _size = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::compressOrCreateLengthPrefixedPacketUnk,
                 this)(this->DAT_CommandSize, (char*)((int)(this->DAT_GameCommandFixedParameterLocation)),
                 (void*)((int)(((int)&this->DAT_Packet + 5))));
-            _size = _size + 1;
+            ++_size;
         }
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearGameCommandEntry, this)(
             this->DAT_CurrentGameCommandID);

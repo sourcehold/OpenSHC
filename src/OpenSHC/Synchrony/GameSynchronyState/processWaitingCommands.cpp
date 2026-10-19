@@ -39,9 +39,9 @@ namespace Synchrony {
                 ((void (*)())DAT_ProtocolDefinedData::instance
                         .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType
                             + 21])();
-                _gameCommandID = _gameCommandID + 1;
+                ++_gameCommandID;
                 this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_PROCESSED;
-                _selected = _selected + 1;
+                ++_selected;
             }
         }
     }

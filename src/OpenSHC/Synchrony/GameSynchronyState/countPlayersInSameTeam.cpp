@@ -11,10 +11,10 @@ namespace Synchrony {
     {
         int _count = 0;
         int _team = DAT_GameState::instance.mapAndTime.playerTeams[playerID];
-        for (int _player = 1; _player < 9; _player = _player + 1) {
+        for (int _player = 1; _player < 9; ++_player) {
             if ((this->currentPlayerFullIDArray[_player] != -1)
                 && (DAT_GameState::instance.mapAndTime.playerTeams[_player] == _team)) {
-                _count = _count + 1;
+                ++_count;
             }
         }
         return _count;

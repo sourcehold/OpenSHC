@@ -24,7 +24,8 @@ namespace Synchrony {
             BOOLEnum _inGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (_inGameMenu && !this->syncStatus && !this->saveRelated) {
                 DWORD _now = timeGetTime();
-                if ((int)(_now - this->timeSkirmishGameStart) > this->skirmishAutoSaveEveryMinutes * 60000) {
+                int _elapsed = _now - this->timeSkirmishGameStart;
+                if (_elapsed > this->skirmishAutoSaveEveryMinutes * 60000) {
                     this->lastAutoSaveTime = _now;
                     this->timeSkirmishGameStart = _now;
                     // Kept as a literal: s_autosave_005a74b4 from string-literals.hpp measures 100% -> 62.2%.
