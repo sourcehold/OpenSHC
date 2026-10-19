@@ -61,8 +61,8 @@ namespace AI {
         AIMapExtraInfo mapExtraInfo; // 0x0005CA14 length: 816
         HeatMap heatMaps[80][80]; // 0x0005CD44 length: 307200
         int visitCount; // 0x000A7D44 length: 4
-        undefined4 algAIndex; // 0x000A7D48 length: 4
-        undefined4 algBIndex; // 0x000A7D4C length: 4
+        int algAIndex; // 0x000A7D48 length: 4
+        int algBIndex; // 0x000A7D4C length: 4
         int heatMapXArray[6400]; // 0x000A7D50 length: 25600
         int heatMapYArray[6400]; // 0x000AE150 length: 25600
         int buildingApproriateGridXPosition; // 0x000B4550 length: 4
@@ -112,7 +112,7 @@ namespace AI {
 
         int computeLargestSeparateArea();
 
-        int findSuitableFarmLocationAndPlaceFarm(int playerID, MappersEnum commandBuildingType);
+        BOOLEnum findSuitableFarmLocationAndPlaceFarm(int playerID, MappersEnum commandBuildingType);
 
         void findAppropriateWoodCutterGridLocation(int playerID);
 
