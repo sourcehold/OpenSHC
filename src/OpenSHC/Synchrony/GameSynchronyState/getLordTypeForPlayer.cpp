@@ -2,8 +2,8 @@
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
-#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {

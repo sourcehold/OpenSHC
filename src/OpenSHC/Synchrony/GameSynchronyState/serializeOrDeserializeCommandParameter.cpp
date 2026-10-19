@@ -17,20 +17,20 @@ namespace Synchrony {
     void GameSynchronyState::serializeOrDeserializeCommandParameter(void* destination, size_t size,
         GameCommandParameterLocation srcSwitch, GameCommandParameterReadWrite destSwitch)
     {
-        byte* _addr;
+        byte* _parameter;
         if ((0 < (int)size) && (destination != (void*)0x0)) {
             if (srcSwitch == Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS) {
-                _addr = this->DAT_GameCommandFixedParameterLocation + this->DAT_CommandParameterOffset;
+                _parameter = this->DAT_GameCommandFixedParameterLocation + this->DAT_CommandParameterOffset;
             } else {
-                _addr = &this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].parameters
+                _parameter = &this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].parameters
                     + this->DAT_CommandParameterOffset;
             }
             if (destSwitch == Commands::GCPRW_SERIALIZE_INTO_PARAM_1) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-                    size, destination, (void*)((int)(_addr)));
+                    size, destination, (void*)((int)(_parameter)));
             } else {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-                    size, (void*)((int)(_addr)), destination);
+                    size, (void*)((int)(_parameter)), destination);
             }
             this->DAT_CommandParameterOffset = this->DAT_CommandParameterOffset + size;
         }

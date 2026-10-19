@@ -15,16 +15,16 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004892F0
     void GameSynchronyState::processWaitingCommands()
     {
-        int (*paiVar1)[2];
+        int (*_selected)[2];
         int _gameCommandID
             = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getCommandIDFromCommandSelectionStuff, this)();
         if ((_gameCommandID) && (_gameCommandID = 0, 0 < this->someIndex)) {
-            paiVar1 = this->selectedGameCommands;
-            do {
-                /*
-                  process all commands that should have been executed by now
-                 */
-                this->DAT_CurrentGameCommandID = (*paiVar1)[0];
+            _selected = this->selectedGameCommands;
+            while (_gameCommandID < this->someIndex) {
+                // process all commands that should have been executed by now.
+                // Measured: indexing selectedGameCommands per iteration instead of walking
+                // _selected costs the match, so the pointer stays.
+                this->DAT_CurrentGameCommandID = (*_selected)[0];
                 this->protocolInvokerPlayerID
                     = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
                         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].playerUnk);
@@ -38,11 +38,11 @@ namespace Synchrony {
                 this->DAT_CommandParameterOffset = 0;
                 ((void (*)())DAT_ProtocolDefinedData::instance
                         .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType
-                            + 0x15])();
+                            + 21])();
                 _gameCommandID = _gameCommandID + 1;
                 this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_PROCESSED;
-                paiVar1 = paiVar1 + 1;
-            } while (_gameCommandID < this->someIndex);
+                _selected = _selected + 1;
+            }
         }
     }
 

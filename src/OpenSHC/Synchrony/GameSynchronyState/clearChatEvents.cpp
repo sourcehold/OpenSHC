@@ -11,20 +11,20 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047F7E0
     void GameSynchronyState::clearChatEvents()
     {
-        int* _chatEventPtr;
-        int _chatEventCounter;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0xfa, '\0', (void*)((int)(this->receivedChatMessage)));
+            sizeof(this->receivedChatMessage), '\0', (void*)((int)(this->receivedChatMessage)));
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            5000, '\0', (void*)((int)(this->DAT_ChatMessageArray)));
+            sizeof(this->DAT_ChatMessageArray), '\0', (void*)((int)(this->DAT_ChatMessageArray)));
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            5000, '\0', (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray)));
+            sizeof(this->DAT_ChatMessageSubjectPlayerNameArray), '\0',
+            (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray)));
         this->DAT_ChatMessageArrayIndex = 0;
-        for (_chatEventPtr = &this->DAT_ChatEventArray[0].time, _chatEventCounter = 0x14; _chatEventCounter;
-            _chatEventPtr = _chatEventPtr + 4, _chatEventCounter = _chatEventCounter + -1) {
-            _chatEventPtr[-1] = 0;
-            _chatEventPtr[0] = 0;
-            _chatEventPtr[1] = 0;
+        // The original walks one pointer over &DAT_ChatEventArray[0].time and clears the three
+        // fields around it with negative and positive indices; objectPlayer stays untouched.
+        for (int _chatEvent = 0; _chatEvent < 20; _chatEvent = _chatEvent + 1) {
+            this->DAT_ChatEventArray[_chatEvent].subjectPlayer = 0;
+            this->DAT_ChatEventArray[_chatEvent].time = 0;
+            this->DAT_ChatEventArray[_chatEvent].flag = 0;
         }
         this->chatScrollOffset = 0;
     }

@@ -7,20 +7,12 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047E890
     int GameSynchronyState::countOccupiedPlayerSlots()
     {
-        int* _aiPtr;
-        int iVar1;
         int _sum = 0;
-        for (_aiPtr = this->currentAIArray + 1, iVar1 = 2; iVar1; _aiPtr = _aiPtr + 4, iVar1 = iVar1 + -1) {
-            if ((_aiPtr[-0x1b] != -1) || (*_aiPtr != 0)) {
-                _sum = _sum + 1;
-            }
-            if ((_aiPtr[-0x1a] != -1) || (_aiPtr[1] != 0)) {
-                _sum = _sum + 1;
-            }
-            if ((_aiPtr[-0x19] != -1) || (_aiPtr[2] != 0)) {
-                _sum = _sum + 1;
-            }
-            if ((_aiPtr[-0x18] != -1) || (_aiPtr[3] != 0)) {
+        // The original unrolls this four slots at a time, walking one pointer over currentAIArray
+        // and reaching back into currentPlayerFullIDArray with a negative index. Indexing both
+        // arrays by player costs part of the match but keeps every access inside its own field.
+        for (int _player = 1; _player < 9; _player = _player + 1) {
+            if ((this->currentPlayerFullIDArray[_player] != -1) || (this->currentAIArray[_player] != 0)) {
                 _sum = _sum + 1;
             }
         }

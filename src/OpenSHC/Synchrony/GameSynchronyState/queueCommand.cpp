@@ -15,9 +15,6 @@ namespace Synchrony {
     using Commands::GameCommandScheduling;
     using Commands::GameCommandState;
 
-    /*
-      juggernaunt: MultiplayerManager_SendCmdAddress   decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00489100
     void GameSynchronyState::queueCommand(GameCommandType commandType)
     {
@@ -38,12 +35,10 @@ namespace Synchrony {
         this->DAT_CommandActionPlan = Commands::GCS_SCHEDULE_AND_SEND;
         this->DAT_PlayerIDReceiver = 0;
         this->DAT_CommandParameterOffset = 0;
-        /*
-          Calls the callback function for a specific command. See "GameCommandType" for   possible commands. Includes
-          placing buildings, walls, moving units,..
-         */
+        // Calls the callback function for a specific command. See "GameCommandType" for possible
+        // commands: placing buildings, walls, moving units, ...
         ((void (*)())DAT_ProtocolDefinedData::instance
-                .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
+                .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 21])();
         this->DAT_CommandParameterOffset = 0;
         dword _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
         if (0 < (int)_time) {
@@ -56,10 +51,8 @@ namespace Synchrony {
                 this->DAT_GameCommandArrayIndex = 0;
             }
         } else {
-            /*
-              time == 0 means it is an immediate (out of game time) command, commands that   don't change game state
-              (gold, buildings, units, etc.), but rather operate on   a meta level
-             */
+            // time == 0 means an immediate (out of game time) command: one that does not change
+            // game state (gold, buildings, units, ...) but operates on a meta level
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::transmitCommand, this)(_commandType,
                 (undefined4)((int)(_time)), (char*)((int)(this->DAT_GameCommandFixedParameterLocation)),
                 (size_t)((int)(this->DAT_CommandSize)), this->DAT_PlayerIDReceiver);
@@ -74,7 +67,7 @@ namespace Synchrony {
                 this->protocolInvokerPlayerID = this->currentPlayerSlotID;
                 ((void (*)())DAT_ProtocolDefinedData::instance
                         .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType
-                            + 0x15])();
+                            + 21])();
             }
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearGameCommandEntry, this)(
                 this->DAT_CurrentGameCommandID);

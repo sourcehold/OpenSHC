@@ -30,9 +30,6 @@ namespace Synchrony {
             }
             uint _playerID = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
                 this)(this->DPLAYX_PlayerHandle);
-            /*
-              matchTime
-             */
             this->matchTimes[_playerID] = DAT_GameCore::instance.mapTimeInTicks;
             this->receivedMatchTimesTrackerUnk = this->receivedMatchTimesTrackerUnk + 1;
             if (6 < this->receivedMatchTimesTrackerUnk) {
@@ -40,36 +37,11 @@ namespace Synchrony {
                 this->receivedMatchTimesTrackerUnk = 0;
                 if (!this->syncRelatedCountdown) {
                     int _maxLatency = 0;
-                    if ((this->currentPlayerFullIDArray[1] != -1) && (0 < this->connectionLagInfoArray[1].average1)) {
-                        _maxLatency = this->connectionLagInfoArray[1].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[2] != -1)
-                        && (this->connectionLagInfoArray[2].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[2].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[3] != -1)
-                        && (this->connectionLagInfoArray[3].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[3].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[4] != -1)
-                        && (this->connectionLagInfoArray[4].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[4].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[5] != -1)
-                        && (this->connectionLagInfoArray[5].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[5].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[6] != -1)
-                        && (this->connectionLagInfoArray[6].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[6].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[7] != -1)
-                        && (this->connectionLagInfoArray[7].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[7].average1;
-                    }
-                    if ((this->currentPlayerFullIDArray[8] != -1)
-                        && (this->connectionLagInfoArray[8].average1 > _maxLatency)) {
-                        _maxLatency = this->connectionLagInfoArray[8].average1;
+                    for (int _player = 1; _player < 9; _player = _player + 1) {
+                        if ((this->currentPlayerFullIDArray[_player] != -1)
+                            && (this->connectionLagInfoArray[_player].average1 > _maxLatency)) {
+                            _maxLatency = this->connectionLagInfoArray[_player].average1;
+                        }
                     }
                     if (_maxLatency < 2) {
                         _countdown = 20;
