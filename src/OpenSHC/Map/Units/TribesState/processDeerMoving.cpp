@@ -63,12 +63,18 @@ namespace Map {
                 tribeID, 100, Map::Units::UT_ANTELOPESHDEER);
             if (!BVar7) {
                 if (this->tribes[tribeID].initialMoveOrderGiven == 0) {
+                    /*
+                      The original returns here - its block ends in `ret 4` after setting
+                      the behaviour type - which is also why it can reuse the register that
+                      held initialMoveOrderGiven for the unit ID.
+                     */
                     sVar2 = this->tribes[tribeID].selectionTargetUnitID;
                     this->tribes[tribeID].initialMoveOrderGiven = 1;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
                         (uint)(DAT_UnitsState::instance.units[sVar2].x),
                         (uint)(DAT_UnitsState::instance.units[sVar2].y), 0, 0, Map::Units::Instructions::UMSE_0);
                     this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
+                    return;
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                     this->tribes[tribeID].unknownCounter01 = 0;

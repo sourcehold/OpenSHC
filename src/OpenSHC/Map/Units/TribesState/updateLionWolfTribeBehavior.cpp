@@ -50,6 +50,12 @@ namespace Map {
                 }
                 sVar2 = this->tribes[param_1].initialMoveOrderGiven;
                 if (!sVar2) {
+                    /*
+                      The original returns here - its block ends in `ret 4` after setting
+                      the behaviour type - which is also why it can reuse the register that
+                      held initialMoveOrderGiven for the unit ID. Without the return, the
+                      `sVar2 == 1` test below reads a unit ID.
+                     */
                     sVar2 = this->tribes[param_1].selectionTargetUnitID;
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     this->tribes[param_1].initialMoveOrderGiven = 2;
@@ -57,6 +63,7 @@ namespace Map {
                         (uint)(DAT_UnitsState::instance.units[sVar2].x),
                         (uint)(DAT_UnitsState::instance.units[sVar2].y), 0, 0, Map::Units::Instructions::UMSE_0);
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
+                    return;
                 }
                 if (sVar2 == 1) {
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;

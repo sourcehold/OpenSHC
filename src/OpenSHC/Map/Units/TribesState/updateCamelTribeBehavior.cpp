@@ -45,6 +45,11 @@ namespace Map {
             }
             sVar5 = this->tribes[param_1].initialMoveOrderGiven;
             if (!sVar5) {
+                /*
+                  The original returns here - its block ends in `ret 4` - which is also why
+                  it can reuse the register that held initialMoveOrderGiven for the unit ID.
+                  Without the return, the `sVar5 == 1` test below reads a unit ID.
+                 */
                 sVar5 = this->tribes[param_1].selectionTargetUnitID;
                 this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                 this->tribes[param_1].initialMoveOrderGiven = 2;
@@ -52,6 +57,7 @@ namespace Map {
                     (uint)(DAT_UnitsState::instance.units[sVar5].x), (uint)(DAT_UnitsState::instance.units[sVar5].y), 0,
                     0, Map::Units::Instructions::UMSE_0);
                 this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
+                return;
             }
             if (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 if (sVar5 == 1) {
