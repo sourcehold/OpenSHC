@@ -21,22 +21,20 @@ namespace Map {
             uint uVar3;
             int* piVar6;
             uint uVar7;
-            uint x1;
-            uint y1;
-            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            int sVar1 = this->tribes[param_1].selectionTargetUnitID;
             uint uVar4 = (uint)DAT_UnitsState::instance.units[sVar1].y;
             uVar7 = (uint)DAT_UnitsState::instance.units[sVar1].x;
             int iVar2 = (int)this->tribes[param_1].someIndex;
-            int iVar5 = iVar2 % 0x28;
+            int iVar5 = iVar2 % 40;
             if (iVar5 <= 0) {
                 iVar5 = 0;
-            } else if (0x27 < iVar5) {
-                return iVar2 / 0x28;
+            } else if (39 < iVar5) {
+                return iVar2 / 40;
             }
             piVar6 = &DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[iVar5].y;
             do {
-                x1 = ((XYPair*)(piVar6 + -1))->x + uVar7;
-                y1 = *piVar6 + uVar4;
+                uint const x1 = piVar6[-1] + uVar7;
+                uint const y1 = *piVar6 + uVar4;
                 uVar3 = uVar4;
                 if (x1 < 400 && y1 < 400 && *(char*)(y1 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + x1) != '\0') {
                     iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribePathToDestinationClear, this)(

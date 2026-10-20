@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentTribeID.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -17,6 +18,7 @@ namespace Map {
 
         using Map::Units::UnitLogicState;
         using Map::Units::UnitType;
+        using WindowsHelper::Enums::BOOLEnum;
         using Map::Units::Instructions::UnitMatchSpeedEnum;
         using Map::Units::States::UnitState;
 
@@ -27,7 +29,12 @@ namespace Map {
             int _unitID;
             UnitTypeShort _unitType;
             int _selectionUnitID = 0;
-            bool bVar1 = true;
+            /*
+              A dword flag, not a `bool`: diff_triage.py's BYTE column counts the original's
+              two byte-sized stack accesses, which are the two `(char)matchUnitSpeeds`
+              tests, and a byte-sized flag adds three more.
+             */
+            BOOLEnum bVar1 = TRUE;
             if (0 < this->tribes[tribeID].size) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -69,7 +76,7 @@ namespace Map {
                                 || ((DAT_UnitsState::instance.units[_unitID].resourceToDeposit != 0
                                     && (DAT_UnitsState::instance.units[_unitID].field252_0x3c4 == 0))))) {
                             DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 0;
-                            bVar1 = false;
+                            bVar1 = FALSE;
                         } else {
                             DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 1;
                         }
