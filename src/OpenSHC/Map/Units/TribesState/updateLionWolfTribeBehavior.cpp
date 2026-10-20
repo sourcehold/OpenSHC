@@ -83,8 +83,13 @@ namespace Map {
                     }
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                 }
+                /*
+                  The original returns from this one: the block at 0x52b297 ends in `ret 4`
+                  right after zeroing the counter, as in its three sibling updaters.
+                 */
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                     this->tribes[param_1].unknownCounter01 = 0;
+                    return;
                 }
                 SVar3 = this->tribes[param_1].tribeBehaviorType;
                 if (SVar3 == (SomeTribeBehaviorType)0) {

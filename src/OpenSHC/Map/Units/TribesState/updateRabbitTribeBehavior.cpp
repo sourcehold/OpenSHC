@@ -59,9 +59,19 @@ namespace Map {
                     (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
                     (uint)(DAT_UnitsState::instance.units[_targetUnitID].y), 0, 0, Map::Units::Instructions::UMSE_0);
                 this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
+                /*
+                  And from this one: the block at 0x52b440 ends in `ret 4` after setting
+                  the behaviour type, like its three sibling updaters.
+                 */
+                return;
             }
+            /*
+              The original returns from this one: the block at 0x52b489 ends in `ret 4`
+              right after zeroing the counter.
+             */
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 this->tribes[tribeID].unknownCounter01 = 0;
+                return;
             }
             sVar2 = this->tribes[tribeID].predatorNearby;
             if (!sVar2) {
