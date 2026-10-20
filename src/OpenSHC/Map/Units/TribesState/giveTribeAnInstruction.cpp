@@ -1140,8 +1140,18 @@ namespace Map {
                         DAT_UnitsState::instance.units[uVar13]._someX_2 = 0;
                         DAT_UnitsState::instance.units[uVar13]._someY_2 = 0;
                         switch (DAT_UnitsState::instance.units[uVar13].unitType) {
+                        case Map::Units::UT_S_BATTERINGRAM:
+                            if (DAT_UnitsState::instance.units[uVar13]
+                                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                                != 4) {
+                                break;
+                            }
+                            local_8 = local_8 + 1;
+                            /*
+                              a crewed ram counts as a horseman too, which is the goto the
+                              decompiler printed back into this arm
+                             */
                         case Map::Units::UT_E_KNIGHT:
-                        switchD_005290c7_caseD_1c:
                             _ramOrHorse = _ramOrHorse + 1;
                         case Map::Units::UT_TUNNELER:
                         case Map::Units::UT_E_SPEAR:
@@ -1152,7 +1162,6 @@ namespace Map {
                         case Map::Units::UT_LORD:
                         case Map::Units::UT_A_SLAVE:
                         case Map::Units::UT_A_SWORDSMAN:
-                        switchD_005290c7_caseD_5:
                             id = id + 1;
                             break;
                         case Map::Units::UT_S_CATAPULT:
@@ -1206,14 +1215,6 @@ namespace Map {
                                     - (short)DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile;
                             }
                             break;
-                        case Map::Units::UT_S_BATTERINGRAM:
-                            if (DAT_UnitsState::instance.units[uVar13]
-                                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                                == 4) {
-                                local_8 = local_8 + 1;
-                                goto switchD_005290c7_caseD_1c;
-                            }
-                            break;
                         case Map::Units::UT_A_HARCHER:
                             _ramOrHorse = _ramOrHorse + 1;
                             /*
@@ -1226,8 +1227,9 @@ namespace Map {
                         case Map::Units::UT_A_SLINGER:
                         case Map::Units::UT_A_ASSASSIN:
                         case Map::Units::UT_A_FIRETHROWER:
-                            if (unitInstructionType == (UnitInstructionType)0x23)
-                                goto switchD_005290c7_caseD_5;
+                            if (unitInstructionType == (UnitInstructionType)0x23) {
+                                id = id + 1;
+                            }
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
                 }
