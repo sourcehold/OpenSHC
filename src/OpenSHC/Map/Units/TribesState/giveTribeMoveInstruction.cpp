@@ -30,6 +30,22 @@ namespace Map {
         using Map::Units::States::UnitState;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          Two declaration moves were measured here and all of them reverted, because raw
+          and normalized disagree and raw is what this function is scored on:
+
+            as written                              raw 30.0%  norm 22.5%
+            `_searchBudget` declared at this level   raw 28.0%  norm 26.1%
+            plus `_tribeUnitIndex` scoped to its loop  raw 27.1%  norm 27.0%
+            only `_tribeUnitIndex` scoped            raw 21.7%  norm 21.9%
+
+          The original does declare the search budget at function scope - its prologue
+          stores 0x1f4 into the slot alongside the zeroed locals, which is what the middle
+          two variants reproduce - and `_tribeUnitIndex` is a slot too many when it does,
+          so the frame only matches with both moves. Whatever is costing the raw match is
+          downstream of the stack displacements those moves shift, so this needs the
+          allocation understood rather than another declaration permutation.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005263A0
         undefined4 TribesState::giveTribeMoveInstruction(
             int tribeID, uint x1, uint y1, int rallyBool, int storeAsRallyPoint, UnitMatchSpeedEnum speedMatching)
