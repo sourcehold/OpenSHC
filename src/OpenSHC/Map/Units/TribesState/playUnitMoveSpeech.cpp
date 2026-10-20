@@ -14,6 +14,14 @@ namespace Map {
 
         using Audio::SFX::SpeechEffectID;
 
+        /*
+          The original tail-calls playSpeechSFX with 0x2e - it writes the argument into the
+          incoming slot, pops and jumps - so one of the two call sites here ends the
+          function. Adding the `return` to the stone-ammunition site costs 6.2 points
+          (82.8% -> 76.6%) and dropping the `param_1 = 0x2e` write with it costs 11.0
+          (82.8% -> 71.8%), so it is the other site, or the block layout costs more than
+          the matched jump is worth. Needs the two sites told apart before trying again.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00521EF0
         void TribesState::playUnitMoveSpeech(undefined4 param_1)
         {

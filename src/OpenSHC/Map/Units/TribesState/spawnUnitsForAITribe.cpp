@@ -22,10 +22,11 @@ namespace Map {
             int aiUnitBehaviourType;
             if (((0 < param_2) || (0 < param_3)) && 0 < param_6) {
                 int microXPosition = param_2 * 8;
+                int microYPosition = param_3 * 8;
                 param_2 = param_6;
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        param_4, param_4, microXPosition, param_3 * 8, 8, param_5);
+                        param_4, param_4, microXPosition, microYPosition, 8, param_5);
                     if (unitID) {
                         DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = param_7;
                         UnitTypeShort UVar1 = DAT_UnitsState::instance.units[unitID].unitType;
