@@ -17,6 +17,12 @@ namespace Map {
         using Map::Units::UnitLogicState;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          The two guards stay as `||` chains. Splitting them into six separate `if`s, which
+          is what recovered trySpawnAdditionalWildlifeForTribe's inline return blocks,
+          measures worse here (quick_diff 0.6635 -> 0.6296): the original merges every
+          failure into one `return 0` at 0x524cd7 rather than shrink-wrapping them.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00524CA0
         undefined4 TribesState::isTribePathToDestinationClear(
             int tribeID, uint fromX, uint fromY, uint toX, uint toY)
