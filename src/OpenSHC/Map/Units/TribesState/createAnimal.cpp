@@ -33,7 +33,17 @@ namespace Map {
             if ((int)tribeID <= 0) {
                 return (dword)(0);
             }
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            /*
+              Three separate guards: the original gives each of them its own forward jump
+              rather than folding them into one chain.
+             */
+            if (399 < x) {
+                return (dword)(0);
+            }
+            if (399 < y) {
+                return (dword)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return (dword)(0);
             }
             int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;

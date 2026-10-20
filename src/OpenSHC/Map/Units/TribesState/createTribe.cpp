@@ -27,10 +27,14 @@ namespace Map {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         sizeof(Tribe), '\0', &this->tribes[DAT_CurrentTribeID::instance]);
                     /*
-                      The claim is the cold-last arm, which is what puts it out of line in
-                      the original, behind the shared `return 0` epilogue.
+                      An early return, which is where the original puts its `return 0`:
+                      `cmp edi, ebx; jg` falls straight into `xor eax, eax` with the claim
+                      following, rather than jumping over the claim to a shared epilogue.
                      */
-                    if (0 < _tribeID) {
+                    if (_tribeID <= 0) {
+                        return 0;
+                    }
+                    {
                         Tribe& _tribe = this->tribes[_tribeID];
                         if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
                             && (setAsCurrentTribeID)) {
@@ -50,7 +54,6 @@ namespace Map {
                         _tribe.size = 0;
                         return _tribeID;
                     }
-                    return 0;
                 }
                 DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1;
             } while ((int)DAT_CurrentTribeID::instance < 1250);
