@@ -13,9 +13,14 @@ namespace Map {
             if ((this->tribes[tribeID].tribeState == 2) && (unitSelectionIndex < this->tribes[tribeID].size)) {
                 short* psVar3 = this->tribes[tribeID].unitSelectionBitMasked;
                 do {
-                    if (*psVar3 != 0) {
+                    /*
+                      The word is read once: `movzx edx, word ptr [esi]` for the zero test,
+                      then `movsx edx, dx` for the bit tests, rather than a load per bit.
+                     */
+                    short const _bits = *psVar3;
+                    if (_bits != 0) {
                         for (int iVar2 = 0; iVar2 < 16; iVar2++) {
-                            if ((int)*psVar3 & 1 << iVar2) {
+                            if ((int)_bits & 1 << iVar2) {
                                 if (_counter == unitSelectionIndex) {
                                     return iVar1 * 0x10 + iVar2;
                                 }

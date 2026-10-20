@@ -54,17 +54,24 @@ namespace Map {
                     _pUnit = _pUnit + 1;
                     _unitIDCountdown = _unitIDCountdown + -1;
                 } while (_unitIDCountdown);
-                _countAggressive = _stanceCount[2];
-                _countDefensive = _stanceCount[1];
-                _countStandground = _stanceCount[0];
                 if (_lastTribeID != -1 && !_atLeastTwoTribes) {
                     /*
                       A whole-struct assignment, which is the `rep movsd` of 0xcd dwords the
                       original has; a hand-written int-by-int copy compiles to a loop.
+
+                      And then it returns: the block at 0x522d42 ends in its own `ret 4`, so
+                      a selection that is all one tribe keeps the stance it just copied
+                      instead of having the majority written over it. That is also why the
+                      three counts are only loaded out of the array at 0x522d6a, on the path
+                      where the copy did not happen.
                      */
                     this->tribes[0] = this->tribes[_lastTribeID];
                     this->tribeCopiedToSlot0 = 1;
+                    return;
                 }
+                _countAggressive = _stanceCount[2];
+                _countDefensive = _stanceCount[1];
+                _countStandground = _stanceCount[0];
             }
             if (_countAggressive + _countDefensive + _countStandground == 0) {
                 this->tribes[0].unitStance = Map::Units::Behavior::USE_STAND_GROUND;

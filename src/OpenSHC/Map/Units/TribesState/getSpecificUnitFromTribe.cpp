@@ -25,9 +25,14 @@ namespace Map {
             if (iVar1 < 200) {
                 psVar3 = this->tribes[tribeID].unitSelectionBitMasked + iVar1;
                 do {
-                    if ((*psVar3 != 0) && (iVar2 < 0x10)) {
+                    /*
+                      The word is read once: `movzx edx, word ptr [esi]` for the zero test,
+                      then `movsx edx, dx` for the bit tests, rather than a load per bit.
+                     */
+                    short const _bits = *psVar3;
+                    if ((_bits != 0) && (iVar2 < 0x10)) {
                         do {
-                            if ((int)*psVar3 & 1 << iVar2) {
+                            if ((int)_bits & 1 << iVar2) {
                                 DAT_00ee0fb4::instance = iVar2 + 1;
                                 if (iVar2 + 1 != 0x10) {
                                     DAT_Tribe_HighestID::instance = iVar1;

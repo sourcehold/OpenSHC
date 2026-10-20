@@ -96,6 +96,12 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
                 return (undefined4)(0);
             }
+            /*
+              The subscript is repeated rather than bound to a `Tribe&`, although the
+              original does take the address once (`lea eax, [edx + ecx]` at 0x526417, kept
+              in a stack slot) and read every later field through it: binding all 21 uses to
+              a reference costs 1.1 points (30.0% -> 28.9%, norm 65.2% -> 21.8%).
+             */
             int _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
             int _targetUnitX = (int)DAT_UnitsState::instance.units[_targetUnitID].x;
             int _targetUnitY = (int)DAT_UnitsState::instance.units[_targetUnitID].y;

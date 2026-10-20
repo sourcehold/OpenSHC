@@ -28,7 +28,13 @@ namespace Map {
             }
             iVar2 = 1249;
             _Dst = this->tribes + 0x4e1;
-            _Src = this->tribes[944].unitSelectionBitMasked + 0x7a;
+            /*
+              The source cursor starts at `this + 0xbd114`, which is tribes[944] + 0x1ac:
+              `unitSelectionBitMasked` sits at 0x38, so the index is (0x1ac - 0x38) / 2 =
+              0xba. The import's 0x7a put it 128 bytes short, and every tribe this loop
+              moved came from the wrong place.
+             */
+            _Src = this->tribes[944].unitSelectionBitMasked + 0xba;
             do {
                 if (_Dst != (Tribe*)_Src) {
                     memmove(_Dst, (void*)((int)(_Src)), (size_t)((int)(620)));

@@ -25,11 +25,17 @@ namespace Map {
             uint uVar4 = (uint)DAT_UnitsState::instance.units[sVar1].y;
             uVar7 = (uint)DAT_UnitsState::instance.units[sVar1].x;
             int iVar2 = (int)this->tribes[param_1].someIndex;
+            /*
+              One division: the original's `cdq`/`idiv` leaves the quotient in EAX and the
+              remainder in EDX, and the unreachable arm returns that same EAX rather than
+              dividing again.
+             */
+            int const _quotient = iVar2 / 40;
             int iVar5 = iVar2 % 40;
             if (iVar5 <= 0) {
                 iVar5 = 0;
             } else if (39 < iVar5) {
-                return iVar2 / 40;
+                return _quotient;
             }
             piVar6 = &DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[iVar5].y;
             do {

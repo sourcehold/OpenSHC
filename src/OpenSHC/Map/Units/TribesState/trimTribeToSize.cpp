@@ -22,8 +22,14 @@ namespace Map {
             int _currentTribeID;
             _currentTribeID = DAT_CurrentTribeID::instance;
             unitSelectionIndex = 0;
+            /*
+              The size stays a repeated subscript. The original does read it through a base
+              it takes once (`lea ebp, [eax + edi]` at 0x522f0b), but hoisting a pointer for
+              it costs 1.2 points (54.1% -> 52.9%).
+             */
             if (this->tribes[DAT_CurrentTribeID::instance].tribeState != 0
-                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, iVar3 >= smallerSize) && 0 < iVar3) {
+                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, iVar3 >= smallerSize)
+                && 0 < iVar3) {
                 do {
                     iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         _currentTribeID, unitSelectionIndex);
