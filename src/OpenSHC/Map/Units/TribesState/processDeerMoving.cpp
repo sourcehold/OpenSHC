@@ -32,9 +32,7 @@ namespace Map {
         {
             int sVar2;
             int SVar3;
-            int iVar4;
             int iVar5;
-            int iVar6;
             BOOLEnum BVar7;
             int iVar8;
             int _x10;
@@ -43,20 +41,29 @@ namespace Map {
             _x10 = (int)DAT_UnitsState::instance.units[sVar2].x / 10;
             _y10 = (int)DAT_UnitsState::instance.units[sVar2].y / 10;
             iVar8 = DAT_WildlifeState::instance.grid[_x10][_y10].rockyTiles;
-            iVar4 = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount;
+            /*
+              One local for the sum, not two for the terms: the original adds them as it
+              reads (`mov ebp, [eax + 0x28]` then `add ebp, [eax + 0x48]`) and keeps only
+              the result, which is two stack slots fewer than diff_slots.py reports for us.
+             */
+            int const _predatorCount = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount
+                + DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
             iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
-            iVar6 = DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
             sVar2 = (ushort)this->tribes[tribeID].size;
             this->tribes[tribeID].unkIsAnimalTribe = 1;
-            if (sVar2 < 0x1f) {
-                this->tribes[tribeID].herdMinSize = sVar2 / 2;
-                this->tribes[tribeID].herdMaxSize = sVar2 * 2;
-            } else {
+            /*
+              The trim is the arm the original places first: `cmp cx, 0x1e; jle` falls into
+              it and jumps to the herd-size arm.
+             */
+            if (30 < sVar2) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::trimTribeToSize, this)(tribeID, (int)(30));
                 this->tribes[tribeID].herdMinSize = 0xf;
                 this->tribes[tribeID].herdMaxSize = 0x3c;
+            } else {
+                this->tribes[tribeID].herdMinSize = sVar2 / 2;
+                this->tribes[tribeID].herdMaxSize = sVar2 * 2;
             }
-            if ((iVar4 + iVar6 != 0) && (this->tribes[tribeID].predatorNearby == 0)) {
+            if ((_predatorCount != 0) && (this->tribes[tribeID].predatorNearby == 0)) {
                 this->tribes[tribeID].predatorNearby = 1;
             }
             BVar7 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnDeerLionOrRabbit, this)(
@@ -76,8 +83,13 @@ namespace Map {
                     this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                     return;
                 }
+                /*
+                  The original returns from this one too: the block at 0x52af03 ends in
+                  `ret 4` right after zeroing the counter.
+                 */
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                     this->tribes[tribeID].unknownCounter01 = 0;
+                    return;
                 }
                 sVar2 = this->tribes[tribeID].predatorNearby;
                 if (!sVar2) {
