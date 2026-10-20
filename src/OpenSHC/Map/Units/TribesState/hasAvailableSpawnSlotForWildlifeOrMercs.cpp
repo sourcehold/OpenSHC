@@ -20,6 +20,11 @@ namespace Map {
                 || 0xa0 <= DAT_GameState::instance.mapAndTime.wildlifeCount) {
                 return (undefined4)(0);
             }
+            /*
+              The last instruction of difference is the original's `xor eax, eax` sitting
+              before the wildlifeCount guard rather than after it. Declaring the counter
+              there costs 10 points (96.0% -> 85.7%), so it stays in the `for` header.
+             */
             for (int _slot = 0; _slot < 0xc; _slot = _slot + 1) {
                 if (_slot < 4) {
                     uint const _x = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];

@@ -16,10 +16,14 @@ namespace Map {
         void TribesState::standUpAllTribeUnits(int param_1)
         {
             int iVar1;
-            Tribe* psVar1;
-            psVar1 = &this->tribes[param_1];
+            /*
+              A cursor on the size field rather than on the tribe: diff_anchor's territory -
+              the original's `lea eax, [eax + ebp + 0x5c]` points at Tribe::size and reads
+              it as [eax], where a Tribe* reads it as [eax + 0x34].
+             */
+            short* _tribeSize = &this->tribes[param_1].size;
             int unitSelectionIndex = 0;
-            if (0 < psVar1->size) {
+            if (0 < *_tribeSize) {
                 do {
                     iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         param_1, unitSelectionIndex);
@@ -30,7 +34,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[iVar1].animationCycleNumber = 0;
                         DAT_UnitsState::instance.units[iVar1].rabbitMovementSlowdown = '\0';
                     }
-                } while (unitSelectionIndex < psVar1->size);
+                } while (unitSelectionIndex < *_tribeSize);
             }
         }
 

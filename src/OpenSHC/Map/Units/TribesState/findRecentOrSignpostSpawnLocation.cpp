@@ -22,7 +22,8 @@ namespace Map {
                     uint uVar3 = (uint)DAT_GameState::instance.mapAndTime.lionLocationsXY[uVar2].y;
                     *param_2 = uVar3;
                     uVar2 = *param_1;
-                    if (uVar2 < 400 && uVar3 < 400 && *(char*)(uVar2 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar3 * 400) != '\0'
+                    if (uVar2 <= 399 && uVar3 <= 399
+                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar3 * 400 + uVar2] != 0
                         && !(DAT_TileMapState::instance
                                  .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[uVar3].addXgetTile
                                      + uVar2]
@@ -33,7 +34,7 @@ namespace Map {
                     }
                 }
                 iVar4 = iVar4 + 1;
-                if (3 < iVar4) {
+                if (4 <= iVar4) {
                     for (iVar4 = 0; iVar4 < 8; iVar4++) {
                         if (DAT_GameState::instance.mapAndTime.signpostIDs[iVar4] != 0) {
                             *param_1 = DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar4][0].x;

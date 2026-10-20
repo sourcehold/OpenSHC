@@ -19,9 +19,9 @@ namespace Map {
                 return 0;
             }
             int unitSelectionIndex = 0;
-            short _size = this->tribes[tribeID].size;
+            int _size = this->tribes[tribeID].size;
             do {
-                if (_size <= unitSelectionIndex) {
+                if (unitSelectionIndex >= _size) {
                     return 0;
                 }
                 iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
