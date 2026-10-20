@@ -38,34 +38,41 @@ namespace Map {
             int _x10;
             int _y10;
             sVar2 = this->tribes[tribeID].selectionTargetUnitID;
-            _x10 = (int)DAT_UnitsState::instance.units[sVar2].x / 10;
-            _y10 = (int)DAT_UnitsState::instance.units[sVar2].y / 10;
+            /*
+              Both coordinates are read before either division: the original has
+              `movsx edx, [+0x610]`, `movsx ecx, [+0x612]` and only then the two
+              reciprocal multiplies.
+             */
+            short const _unitX = DAT_UnitsState::instance.units[sVar2].x;
+            short const _unitY = DAT_UnitsState::instance.units[sVar2].y;
+            _x10 = (int)_unitX / 10;
+            _y10 = (int)_unitY / 10;
+            /*
+              The predator sum's second term is read after the marsh tiles, not with the
+              first: the original reads 0x1c, then 0x00, then 0x18, and only then
+              `add ebp, [.. + 0x20]`.
+             */
             iVar8 = DAT_WildlifeState::instance.grid[_x10][_y10].rockyTiles;
-            /*
-              One local for the sum, not two for the terms: the original adds them as it
-              reads (`mov ebp, [eax + 0x28]` then `add ebp, [eax + 0x48]`) and keeps only
-              the result, which is two stack slots fewer than diff_slots.py reports for us.
-             */
-            int const _predatorCount = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount
-                + DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
+            int _predatorCount = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount;
             iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
+            _predatorCount = _predatorCount + DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
             /*
-              Signed: the halving at 0x52adfe is `movsx`, `cdq`, `sub`, `sar 1`, which is
-              what a signed `/ 2` compiles to. The `(ushort)` cast turned it into a `shr`.
+              A `short`, compared as one: `movzx ecx, word ptr [esi + 0x5c]` then
+              `cmp cx, 0x1e`, with the sign extension deferred to the halving.
              */
-            sVar2 = (int)this->tribes[tribeID].size;
+            short const _size = this->tribes[tribeID].size;
             this->tribes[tribeID].unkIsAnimalTribe = 1;
             /*
               The trim is the arm the original places first: `cmp cx, 0x1e; jle` falls into
               it and jumps to the herd-size arm.
              */
-            if (30 < sVar2) {
+            if (30 < _size) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::trimTribeToSize, this)(tribeID, (int)(30));
                 this->tribes[tribeID].herdMinSize = 0xf;
                 this->tribes[tribeID].herdMaxSize = 0x3c;
             } else {
-                this->tribes[tribeID].herdMinSize = sVar2 / 2;
-                this->tribes[tribeID].herdMaxSize = sVar2 * 2;
+                this->tribes[tribeID].herdMinSize = _size / 2;
+                this->tribes[tribeID].herdMaxSize = _size * 2;
             }
             if ((_predatorCount != 0) && (this->tribes[tribeID].predatorNearby == 0)) {
                 this->tribes[tribeID].predatorNearby = 1;
