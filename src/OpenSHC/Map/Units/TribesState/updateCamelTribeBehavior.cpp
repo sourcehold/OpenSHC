@@ -40,8 +40,13 @@ namespace Map {
                 && (iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::trySpawnAdditionalWildlifeForTribe, this)(
                         param_1, 1000, 10, 0x2f),
                     iVar4 != 0)) {
+                /*
+                  The original returns here too: the block at 0x52b69c ends in `ret 4`, so
+                  the read of initialMoveOrderGiven below never sees the 1 just written.
+                 */
                 this->tribes[param_1].initialMoveOrderGiven = 1;
                 this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
+                return;
             }
             sVar5 = this->tribes[param_1].initialMoveOrderGiven;
             if (!sVar5) {
@@ -59,7 +64,16 @@ namespace Map {
                 this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                 return;
             }
-            if (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
+            /*
+              The map-editor branch at 0x52b704 ends in `ret 4` and is the only path that
+              zeroes the counter; the import had it zeroed on every call, which wiped the
+              counter the 0x65 and 0x1f40 tests at the top of the function read.
+             */
+            if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
+                this->tribes[param_1].unknownCounter01 = 0;
+                return;
+            }
+            {
                 if (sVar5 == 1) {
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     this->tribes[param_1].initialMoveOrderGiven = 2;
@@ -76,7 +90,13 @@ namespace Map {
                         this->tribes[param_1].rallyPointCount = 0;
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                     }
+                    /*
+                      And this block returns as well: 0x52b794 stores the behaviour type a
+                      second time and falls into its own `ret 4`, so the dispatch below is
+                      not reached on this path.
+                     */
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
+                    return;
                 }
                 SVar2 = this->tribes[param_1].tribeBehaviorType;
                 if (SVar2 == (SomeTribeBehaviorType)0) {
@@ -110,7 +130,6 @@ namespace Map {
                     }
                 }
             }
-            this->tribes[param_1].unknownCounter01 = 0;
         }
 
     }

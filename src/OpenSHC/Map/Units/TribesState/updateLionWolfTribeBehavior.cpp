@@ -45,8 +45,13 @@ namespace Map {
                     && (BVar6 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnDeerLionOrRabbit, this)(
                             param_1, 500, Map::Units::UT_LIONSHWOLF),
                         BVar6)) {
+                    /*
+                      This block returns too: 0x52b1ab ends in `ret 4`, so the read of
+                      initialMoveOrderGiven below never sees the 1 just written.
+                     */
                     this->tribes[param_1].initialMoveOrderGiven = 1;
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
+                    return;
                 }
                 sVar2 = this->tribes[param_1].initialMoveOrderGiven;
                 if (!sVar2) {
@@ -81,7 +86,13 @@ namespace Map {
                         this->tribes[param_1].rallyPointCount = 0;
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                     }
+                    /*
+                      And this one returns: 0x52b28c stores the behaviour type a second time
+                      and falls into its own `ret 4`, so neither the map-editor test nor the
+                      dispatch below is reached on this path.
+                     */
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
+                    return;
                 }
                 /*
                   The original returns from this one: the block at 0x52b297 ends in `ret 4`
@@ -106,7 +117,7 @@ namespace Map {
                         }
                     } else if (sVar2 == 0x96) {
                         if ((this->tribes[param_1].unknownBool02 == 0)
-                            && (sVar2 = (ushort)this->tribes[param_1].rallyPointCount, 0 < sVar2)) {
+                            && (sVar2 = (int)this->tribes[param_1].rallyPointCount, 0 < sVar2)) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
                                 param_1, (uint)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][0]),

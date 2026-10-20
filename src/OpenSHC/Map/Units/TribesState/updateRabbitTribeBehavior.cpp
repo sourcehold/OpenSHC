@@ -93,7 +93,11 @@ namespace Map {
                                 tribeID);
                         }
                     } else if (sVar2 == 0x96) {
-                        sVar2 = (ushort)this->tribes[tribeID].rallyPointCount;
+                        /*
+                          Signed: `cmp ax, dx` with a `jle`, and the index that follows is
+                          `movsx ax`, so a negative count does not wrap into a huge index.
+                         */
+                        sVar2 = (int)this->tribes[tribeID].rallyPointCount;
                         if (0 < sVar2) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
@@ -105,14 +109,16 @@ namespace Map {
                         this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                     }
                 } else if (SVar3 == Map::Units::STBT_1) {
-                    if (!iVar6) {
-                        if (iVar5 < 0x15) {
-                            this->tribes[tribeID].wanderIntervalTicks = 400;
-                        } else {
-                            this->tribes[tribeID].wanderIntervalTicks = 0x14;
-                        }
-                    } else {
+                    /*
+                      The marsh-tile arm comes first: `cmp ebp, edx; jz` falls into the
+                      0x14 store and jumps away to the rocky-tile test.
+                     */
+                    if (iVar6) {
                         this->tribes[tribeID].wanderIntervalTicks = 0x14;
+                    } else if (0x14 < iVar5) {
+                        this->tribes[tribeID].wanderIntervalTicks = 0x14;
+                    } else {
+                        this->tribes[tribeID].wanderIntervalTicks = 400;
                     }
                     psVar1 = (short*)&this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
                     *psVar1 = *psVar1 + 1;
