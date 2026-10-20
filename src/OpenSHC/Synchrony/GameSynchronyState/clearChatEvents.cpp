@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -12,12 +11,11 @@ namespace Synchrony {
     void GameSynchronyState::clearChatEvents()
     {
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(this->receivedChatMessage), '\0', (void*)((int)(this->receivedChatMessage)));
+            sizeof(this->receivedChatMessage), '\0', this->receivedChatMessage);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(this->DAT_ChatMessageArray), '\0', (void*)((int)(this->DAT_ChatMessageArray)));
+            sizeof(this->DAT_ChatMessageArray), '\0', this->DAT_ChatMessageArray);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(this->DAT_ChatMessageSubjectPlayerNameArray), '\0',
-            (void*)((int)(this->DAT_ChatMessageSubjectPlayerNameArray)));
+            sizeof(this->DAT_ChatMessageSubjectPlayerNameArray), '\0', this->DAT_ChatMessageSubjectPlayerNameArray);
         this->DAT_ChatMessageArrayIndex = 0;
         // The original walks one pointer over &DAT_ChatEventArray[0].time and clears the three
         // fields around it with negative and positive indices; objectPlayer stays untouched.

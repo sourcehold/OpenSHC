@@ -1,6 +1,5 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 

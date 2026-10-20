@@ -1,10 +1,10 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -28,8 +28,9 @@ namespace Synchrony {
                 if (_elapsed > this->skirmishAutoSaveEveryMinutes * 60000) {
                     this->lastAutoSaveTime = _now;
                     this->timeSkirmishGameStart = _now;
-                    // Kept as a literal: s_autosave_005a74b4 from string-literals.hpp measures 100% -> 62.2%.
-                    strcpy(DAT_GameSynchronyState::instance.shortMapName, "autosave");
+                    // The macro expands to the literal, so this keeps the match that the
+                    // s_autosave_005a74b4 *global* from string-literals.hpp costs (100% -> 62.2%).
+                    strcpy(DAT_GameSynchronyState::instance.shortMapName, S_AUTOSAVE_005A74B4);
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = DAT_GameCore::instance.mapTimeInTicks;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = MACRO_CALL_MEMBER(
                         Synchrony::GameSynchronyState_Func::computeSomeHashOnUnitArray, DAT_GameSynchronyState::ptr)();

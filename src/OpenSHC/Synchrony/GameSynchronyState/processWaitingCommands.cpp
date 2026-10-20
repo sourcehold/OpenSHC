@@ -1,6 +1,5 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
 #include "OpenSHC/Commands/GameCommandState.hpp"
 
@@ -15,11 +14,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004892F0
     void GameSynchronyState::processWaitingCommands()
     {
-        int (*_selected)[2];
         int _gameCommandID
             = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getCommandIDFromCommandSelectionStuff, this)();
         if ((_gameCommandID) && (_gameCommandID = 0, 0 < this->someIndex)) {
-            _selected = this->selectedGameCommands;
+            int (*_selected)[2] = this->selectedGameCommands;
             while (_gameCommandID < this->someIndex) {
                 // process all commands that should have been executed by now.
                 // Measured: indexing selectedGameCommands per iteration instead of walking
@@ -36,9 +34,8 @@ namespace Synchrony {
                 this->DAT_GameCommandParam0 = 0;
                 this->DAT_CommandActionPlan = Commands::GCS_EXECUTE;
                 this->DAT_CommandParameterOffset = 0;
-                ((void (*)())DAT_ProtocolDefinedData::instance
-                        .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType
-                            + 21])();
+                (&DAT_ProtocolDefinedData::instance
+                        .commandFunctions)[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
                 ++_gameCommandID;
                 this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_PROCESSED;
                 ++_selected;

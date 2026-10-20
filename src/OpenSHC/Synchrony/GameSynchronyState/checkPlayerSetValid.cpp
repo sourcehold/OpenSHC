@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameMode.hpp"

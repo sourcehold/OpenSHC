@@ -1,9 +1,8 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/AI/AIVState.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Synchrony/Actions.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -22,7 +21,7 @@ namespace Synchrony {
     {
         this->syncRelatedStatusArray[playerID] = 1;
         BOOLEnum _inGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-        if ((_inGameMenu) && (playerID != (int)DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
+        if ((_inGameMenu) && (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = playerID;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = this->kickDueToLagStatusUnk;
             if ((!this->syncStatus) && (!this->saveRelated)) {
@@ -47,7 +46,7 @@ namespace Synchrony {
         MACRO_CALL(Synchrony::Actions_Func::RemovePositionOfPlayer)(playerID);
         this->DAT_MultiplayerGameVersions[playerID] = 0;
         this->slotActionPending[playerID] = 0;
-        if ((playerID != (int)DAT_GameSynchronyState::instance.currentPlayerSlotID) && (this->isHost)) {
+        if ((playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) && (this->isHost)) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, this)();
         }
     }

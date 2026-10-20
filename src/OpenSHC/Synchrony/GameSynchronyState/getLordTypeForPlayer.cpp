@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -11,6 +10,8 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00486A70
     int GameSynchronyState::getLordTypeForPlayer(int playerID)
     {
+        // For an AI slot the lord's look (Crusader or Saracen) is not taken from the AIC that
+        // defines the rest of the character: it is hardcoded here, per AI type.
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
             switch (DAT_GameState::instance.playerDataArray[playerID].aiType) {
             case AI::AIT_RAT:

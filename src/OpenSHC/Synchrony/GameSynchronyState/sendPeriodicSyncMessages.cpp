@@ -1,6 +1,4 @@
-#include "../../Synchrony.func.hpp"
-
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {

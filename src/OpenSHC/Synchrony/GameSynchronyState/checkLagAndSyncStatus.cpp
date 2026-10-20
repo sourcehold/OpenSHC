@@ -1,6 +1,5 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -48,10 +47,14 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.field76_0xbe8 = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceiveTime = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceivedBool = FALSE;
-        // The original runs 14 domains over a 12-slot-per-player block, so a domain above 11
-        // deliberately reads into the next player's slots; keep the bounds exactly as they are.
-        // Measured: the two hash loops below share this counter because declaring one in each
-        // for header costs the match (100.0% -> 97.8%).
+        // A bug in the original, reproduced on purpose: HashContainerElement is 12 ints wide, so
+        // the two domain loops below run 14 domains over a 12-slot-per-player row, and a domain of
+        // 12 or 13 reads the next player's first two slots instead of this player's. The desync
+        // flag for those two domains therefore compares the wrong values. Redefining HashContainer
+        // would not help - the overrun is in the original's loop bound, not in how the field is
+        // typed - so the bounds stay exactly as they are and the aliasing stays visible here.
+        // Measured: the two loops share this counter because declaring one in each for header
+        // costs the match (100.0% -> 97.8%).
         int _player;
         for (int _domain = 0; _domain < 14; ++_domain) {
             this->sharedDesyncFlags[_domain] = 0;

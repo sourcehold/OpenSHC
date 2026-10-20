@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
@@ -14,7 +13,6 @@ namespace Synchrony {
     {
         HKEY__* _key;
         DWORD _valueType;
-        char const* _pathSeparator = s___005a6f60;
         DWORD _valueSize = 512;
         this->gameSpyArcadeAvailable = 0;
         LONG _result = RegOpenKeyExA(HKEY_CURRENT_USER, s_Software_GameSpy_GameSpy_Arcade_005a6f6c, 0, KEY_READ, &_key);
@@ -26,7 +24,7 @@ namespace Synchrony {
                 // The original indexes with the full length, so this reads the terminator and the
                 // branch is always taken; a trailing-separator test would have wanted length - 1.
                 if (this->shellExecuteTarget[strlen(this->shellExecuteTarget)] != '\\') {
-                    strcat(this->shellExecuteTarget, _pathSeparator);
+                    strcat(this->shellExecuteTarget, s___005a6f60);
                 }
                 strcat(this->shellExecuteTarget, s_aphex_exe_005a6f54);
                 FILE* _file = MACRO_CALL(OS_Func::_fopen)(this->shellExecuteTarget, s_rb_005a4e18);
