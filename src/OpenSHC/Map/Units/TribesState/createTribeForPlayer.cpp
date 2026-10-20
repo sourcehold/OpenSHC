@@ -19,6 +19,13 @@ namespace Map {
           The inner slot-ID guard stays a positive `if` around the claim: inverting it to an
           early return, which took spawnUnitsIntoNewTribe from 89.4% to 98.3%, costs 2.0
           points here (75.2% -> 73.2%).
+
+          The repeated subscript stays too. The original does take the tribe's address once
+          before the clear (`lea esi, [edx + ecx]`, `lea eax, [esi + 0x28]` at 0x522823) and
+          reach every store through it, and writing that as a `Tribe&` is what took the twin
+          createTribe from 30.3% to 67.2% - but here the identical change costs 37.3 points
+          (75.2% -> 37.9%). The two functions differ only in how they find the slot, so the
+          shape that matches one does not match the other.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005227E0
         int TribesState::createTribeForPlayer(int playerID)
