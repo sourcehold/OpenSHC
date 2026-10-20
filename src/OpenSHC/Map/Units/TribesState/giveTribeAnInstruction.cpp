@@ -54,7 +54,11 @@ namespace Map {
             byte bVar2;
             UnitStateShort UVar3;
             UnitTypeShort UVar4;
-            bool bVar5;
+            /*
+              Dword flags, not `bool`s: diff_slots.py shows byte-aligned stack slots at
+              0x13 and 0x1b on our side and none on the original's.
+             */
+            BOOLEnum bVar5;
             Unit* pUVar6;
             char cVar7;
             short sVar8;
@@ -85,7 +89,7 @@ namespace Map {
             int* piVar18;
             uint y;
             uint uVar19;
-            bool _gamemodeSiegeThat;
+            BOOLEnum _gamemodeSiegeThat;
             int _unitTribeIndex;
             int _ramOrHorse;
             uint local_8;
@@ -93,8 +97,6 @@ namespace Map {
             int _tile1_528565;
             short _y_528565;
             int _param_1_tribeID;
-            int _paramUnitID;
-            int _paramUnitUID;
             short _tribeSize;
             int _freeTile;
             uint _defensiveTile1;
@@ -103,7 +105,6 @@ namespace Map {
             short _y;
             short _x;
             uint _id;
-            int _param_3_id_x_tile_buildingID;
             int _param_4_unitUID_Y;
             ushort _targetArea;
             _param_4_unitUID_Y = unitUID;
@@ -113,7 +114,7 @@ namespace Map {
             _param_4_unitUID_Y_copy = unitUID;
             _ramOrHorse = 0;
             local_8 = 0;
-            bVar5 = false;
+            bVar5 = FALSE;
             this->tribes[tribeID].someUnitID = 0;
             this->tribes[tribeID].containsRabbit = 0;
             _param_3_id_x_tile_buildingID_copy = (short)id;
@@ -245,12 +246,13 @@ namespace Map {
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
                     /*
-                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
-                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
-                      condition and it has to be rebuilt from the original's own branches
-                      along with the rest of the function's thirteen jump tables.
+                      `id` is zeroed before the loop and counted up in the melee arm, so
+                      this asks whether the selection held any melee units. The original is
+                      one `cmp dword ptr [esp + 0x38], 0` against that counter's slot; the
+                      decompiler rendered it as `id | x | id != 0`, which read an
+                      uninitialised local and raised C4700.
                      */
-                    if (id | x | id != 0) {
+                    if (id != 0) {
                         /*
                           if there are melee units in the selection
                          */
@@ -625,7 +627,11 @@ namespace Map {
                 if ((((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
                          || (DAT_GameState::instance.mapAndTime.skirmishStrongWalls == 0))
                         || (4 < (int)(short)DAT_BuildingsState::instance.buildings[iVar11].buildingType - 0x4aU))
-                    && (id | x | id != 0)) {
+                    /*
+                      Again the melee counter against zero, which the decompiler rendered
+                      as `id | x | id != 0`.
+                     */
+                    && (id != 0)) {
                     sVar9 = this->tribes[_param_1_tribeID].selectionTargetUnitID;
                     if (unitInstructionType == Map::Units::UIT_ATTACK_BUILDING
                         || unitInstructionType == (UnitInstructionType)0x26) {
@@ -715,7 +721,7 @@ namespace Map {
                                         iVar12 = MACRO_CALL_MEMBER(
                                             Map::Navigation::PathFindingState_Func::findBuildingAccessPoint,
                                             DAT_PathFindingState::ptr)(_unitID, iVar11, &param_5);
-                                        bVar5 = true;
+                                        bVar5 = TRUE;
                                         if (iVar12 == 0)
                                             goto LAB_00528f32;
                                         sVar9 = DAT_ViewportRenderState::instance
@@ -934,7 +940,7 @@ namespace Map {
                 /*
                   disband siege engines?
                  */
-                _param_4_unitUID_Y_copy = -(uint)(param_5 != 0) & 0x10;
+                _param_4_unitUID_Y_copy = param_5 != 0 ? 0x10 : 0;
                 param_5 = (int)SEC_RNG::instance.currentNumber2 & 0x8000000f;
                 if (param_5 < 0) {
                     param_5 = (param_5 - 1U | 0xfffffff0) + 1;
@@ -1227,7 +1233,10 @@ namespace Map {
                     && (DAT_GameState::instance.mapAndTime.skirmishStrongWalls != 0)) {
                     id = local_8;
                 }
-                if (id | x | id != 0) {
+                /*
+                  The melee counter against zero again, as at the two sites above.
+                 */
+                if (id != 0) {
                     sVar9 = this->tribes[_param_1_tribeID].selectionTargetUnitID;
                     if (unitInstructionType == Map::Units::UIT_ATTACK_WALL
                         || unitInstructionType == (UnitInstructionType)0x25) {
@@ -1290,7 +1299,7 @@ namespace Map {
                                             != 4)
                                             break;
                                         if (!bVar5) {
-                                            bVar5 = true;
+                                            bVar5 = TRUE;
                                             iVar15
                                                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                         findUnitPreferredOrientationBasedConnectedTile,
@@ -1394,12 +1403,9 @@ namespace Map {
                         }
                     } while (iVar12 < this->tribes[_param_1_tribeID].size);
                     /*
-                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
-                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
-                      condition and it has to be rebuilt from the original's own branches
-                      along with the rest of the function's thirteen jump tables.
+                      The melee counter against zero, as at the first site.
                      */
-                    if (id | x | id != 0) {
+                    if (id != 0) {
                         sVar9 = this->tribes[_param_1_tribeID].selectionTargetUnitID;
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                               populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea,
@@ -1673,12 +1679,9 @@ namespace Map {
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
                     /*
-                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
-                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
-                      condition and it has to be rebuilt from the original's own branches
-                      along with the rest of the function's thirteen jump tables.
+                      The melee counter against zero, as at the first site.
                      */
-                    if (id | x | id != 0) {
+                    if (id != 0) {
                         iVar12 = (int)this->tribes[_param_1_tribeID].selectionTargetUnitID;
                         param_5 = (int)DAT_UnitsState::instance.units[iVar12].x;
                         unitInstructionType = (UnitInstructionType)DAT_UnitsState::instance.units[iVar12].y;
