@@ -23,7 +23,7 @@ namespace Game {
 
         if (!MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::isValueInRangeOneToTwenty, DAT_MapPropertiesState::ptr)(
                 this->missionNumber1to20)) {
-            DAT_GameCore::instance.field22_0x64 = 0;
+            DAT_GameCore::instance.gameSuspended = 0;
             MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
         } else {
@@ -32,7 +32,7 @@ namespace Game {
                 MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
             } else {
-                DAT_GameCore::instance.field22_0x64 = 0;
+                DAT_GameCore::instance.gameSuspended = 0;
                 MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SCENARIO_DESCRIPTION, 0);
             }

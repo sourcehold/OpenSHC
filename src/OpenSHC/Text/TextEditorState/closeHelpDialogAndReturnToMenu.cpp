@@ -48,7 +48,7 @@ namespace Text {
                     (UI::Enums::MenuViewType)this->savedMenuViewType, 0);
 
             } else if (this->savedMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
-                DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo = this->savedActiveMenuTab;
+                DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo.buildMenuTab = this->savedActiveMenuTab;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     (UI::Enums::MenuViewType)this->savedMenuViewType, 0);
 
