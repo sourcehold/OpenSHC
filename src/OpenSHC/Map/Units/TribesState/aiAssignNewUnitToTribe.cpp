@@ -40,7 +40,13 @@ namespace Map {
                     DAT_GameState::instance.playerDataArray[playerID].monkTribeUIDUnk
                         = this->tribes[_monkTribe].uid;
                 }
+                /*
+                  The monk arm is a block of its own in the disassembly, from 0x5238ac to
+                  its own `ret 0xc` at 0x52390f: it never reaches the shared path below, so
+                  a monk is added to one tribe rather than two.
+                 */
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(unitID, _monkTribe);
+                return;
             }
             short* psVar1 = DAT_GameState::instance.playerDataArray[playerID].freshUnitTribeIDs + _index;
             int _tribe = (int)*psVar1;

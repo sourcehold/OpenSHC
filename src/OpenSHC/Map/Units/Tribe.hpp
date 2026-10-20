@@ -75,8 +75,7 @@ namespace Map {
             UnitTypeShort unitType; // 0x00000228 length: 2
             short aggressiveStanceCounter; // 0x0000022A length: 2
             undefined1 padding_0x22c[12]; // 0x0000022C length: 12
-            short rallyPointArray[9][2]; // 0x00000238 length: 36
-            undefined1 padding_0x25c[4]; // 0x0000025C length: 4
+            short rallyPointArray[10][2]; // 0x00000238 length: 40
             short currentRallyPointIndex; // 0x00000260 length: 2
             short rallyPointCount; // 0x00000262 length: 2
             undefined1 padding_0x264[20]; // 0x00000264 length: 20
