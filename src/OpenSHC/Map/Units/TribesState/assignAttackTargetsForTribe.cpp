@@ -28,7 +28,16 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         /*
-          The `bool` flag stays a byte: BOOLEnum costs 0.2 points (44.6% -> 44.4%).
+          The gotos and the `bVar7` flag stay, against the style list. The nesting reads
+          wrongly - `if (targetType == 1010)` sits inside `if (targetType == 1021)`, so from
+          the top of the function it can never be true - but it is reachable, because the
+          unit-state gate below jumps into it, and the shape is the original's: writing the
+          gate as `continue`s, the target dispatch as a flat chain, and both arms as
+          fall-through into the shared tail costs 11.3 points (44.6% -> 33.3%, norm 40.7%
+          -> 28.4%).
+
+          The `bool` flag stays a byte for the same reason: BOOLEnum costs 0.2 points
+          (44.6% -> 44.4%).
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005244D0
         undefined4 TribesState::assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType)
