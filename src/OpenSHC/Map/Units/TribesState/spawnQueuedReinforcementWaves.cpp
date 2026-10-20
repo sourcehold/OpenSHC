@@ -129,6 +129,17 @@ namespace Map {
                                 _tribeType = 10;
                                 _unitType = Map::Units::UT_E_KNIGHT;
                                 break;
+                            /*
+                              This switch is the one whose table is 0x527c34, where entry 7
+                              is the laddermen arm at 0x527a43 - the arm that sets 4 and
+                              0x1d. The other 18-entry table, 0x527bec, sends entry 7
+                              straight to the merge point, which is why the fourth switch
+                              below has no case 7. Which switch is which is settled by the
+                              call each one feeds: 0x527c34's reaches
+                              createTribeWithSpawnedUnit (0x523190) and 0x527bec's reaches
+                              spawnUnitsIntoNewTribe (0x523030). Moving the arm the other
+                              way costs 17.1 points (59.6% -> 42.5%).
+                             */
                             case 7:
                                 _tribeType = 4;
                                 _unitType = Map::Units::UT_E_LADDER;
@@ -414,6 +425,12 @@ namespace Map {
                                             _tribeType = 10;
                                             _unitType = Map::Units::UT_E_KNIGHT;
                                             break;
+                                        /*
+                                          No case 7: entry 7 of this switch's table,
+                                          0x527bec, is the merge point 0x5278a6, so a
+                                          laddermen wave here reuses whatever the previous
+                                          iteration left in the two variables.
+                                         */
                                         case 8:
                                             _tribeType = 0xb;
                                             _unitType = Map::Units::UT_E_ENGINEER;

@@ -22,14 +22,6 @@ namespace Map {
             _stanceCount[0] = 0;
             _stanceCount[1] = 0;
             _stanceCount[2] = 0;
-            /*
-              Three locals rather than reading _stanceCount[] again at the end: the extra
-              stack slot costs nothing and reading the array directly measures worse
-              (quick_diff 0.5806 -> 0.4725, and it moves `this` out of ebx).
-             */
-            int _countAggressive = 0;
-            int _countDefensive = 0;
-            int _countStandground = 0;
             int _lastTribeID = -1;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 Unit* _pUnit = &DAT_UnitsState::instance.units[1];
@@ -69,16 +61,19 @@ namespace Map {
                     this->tribeCopiedToSlot0 = 1;
                     return;
                 }
-                _countAggressive = _stanceCount[2];
-                _countDefensive = _stanceCount[1];
-                _countStandground = _stanceCount[0];
             }
-            if (_countAggressive + _countDefensive + _countStandground == 0) {
+            /*
+              The three counts are read straight out of the array, which is where the
+              original's own three slots are: it loads [esp+0x18], [esp+0x14] and
+              [esp+0x10] into registers at 0x522d6a and nowhere else, and diff_slots.py
+              shows our extra fourth slot is a spill of a redundant copy.
+             */
+            if (_stanceCount[2] + _stanceCount[1] + _stanceCount[0] == 0) {
                 this->tribes[0].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
                 return;
             }
-            if (_countAggressive < _countDefensive || _countAggressive < _countStandground) {
-                this->tribes[0].unitStance = (ushort)(_countStandground <= _countDefensive);
+            if (_stanceCount[2] < _stanceCount[1] || _stanceCount[2] < _stanceCount[0]) {
+                this->tribes[0].unitStance = (ushort)(_stanceCount[0] <= _stanceCount[1]);
                 return;
             }
             this->tribes[0].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
