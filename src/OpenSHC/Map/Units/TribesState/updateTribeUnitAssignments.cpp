@@ -31,12 +31,12 @@ namespace Map {
              */
             for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < 1250;
                 DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1) {
-                int _state = this->tribes[DAT_CurrentTribeID::instance].tribeState;
+                int _state = (ushort)this->tribes[DAT_CurrentTribeID::instance].tribeState;
                 int _tribeUnitIndex = 0;
                 if (_state) {
                     int _tribeID = DAT_CurrentTribeID::instance;
                     if (_state != 3) {
-                        int _tribeSize = this->tribes[DAT_CurrentTribeID::instance].size;
+                        int _tribeSize = (ushort)this->tribes[DAT_CurrentTribeID::instance].size;
                         if (_tribeSize <= 0) {
                             int _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
                             if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
