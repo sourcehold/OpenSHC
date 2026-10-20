@@ -66,7 +66,6 @@ namespace Map {
             int _unitID_0x04;
             int _targetUnitID;
             uint _x_528565;
-            BOOL _isAllAssassins_528565;
             UnitInstructionType UVar10;
             int iVar11;
             int _unitID_0x05_0x16;
@@ -100,11 +99,9 @@ namespace Map {
             short _tribeSize;
             int _freeTile;
             uint _defensiveTile1;
-            int _defensiveTile2;
             short _freeTileY;
             short _y;
             short _x;
-            uint _id;
             int _param_4_unitUID_Y;
             ushort _targetArea;
             _param_4_unitUID_Y = unitUID;
@@ -1449,8 +1446,11 @@ namespace Map {
                                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
                                         DAT_UnitsState::ptr)(_laddermanID, _freeTileX, (uint)(_freeTileY), 0);
                                     DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
+                                    /*
+                                      One local: the decompiler read the same `*piVar18`
+                                      into two.
+                                     */
                                     _defensiveTile1 = *piVar18;
-                                    _defensiveTile2 = *piVar18;
                                     /*
                                       set ladder man ladder target id
                                      */
@@ -1459,7 +1459,7 @@ namespace Map {
                                                 .tileTranslationMatrix_YComponent[_defensiveTile1];
                                     DAT_UnitsState::instance.units[_laddermanID].attackAtTileY = sVar9;
                                     piVar18 = piVar18 + 3;
-                                    DAT_UnitsState::instance.units[_laddermanID].attackAtTileX = (short)_defensiveTile2
+                                    DAT_UnitsState::instance.units[_laddermanID].attackAtTileX = (short)_defensiveTile1
                                         - (short)DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile;
                                 }
                             } while (iVar11 < this->tribes[_param_1_tribeID].size);
@@ -1767,9 +1767,9 @@ namespace Map {
                                             }
                                             DAT_UnitsState::instance.units[iVar14].state.generic
                                                 = Map::Units::States::US_MOVE_TO_DESTINATION;
-                                            _isAllAssassins_528565 = MACRO_CALL_MEMBER(
-                                                Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
-                                            if (_isAllAssassins_528565 == 0) {
+                                            if (MACRO_CALL_MEMBER(
+                                                    Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID)
+                                                == 0) {
                                                 DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
                                             } else {
                                                 DAT_PathFindingState::instance.allAssassinsUnk = 1;
