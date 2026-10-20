@@ -1,6 +1,4 @@
-#include "../../Synchrony.func.hpp"
-
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 
@@ -28,7 +26,7 @@ namespace Synchrony {
         uint _difference = (DAT_GameCore::instance.mapTimeInTicks - this->receivedCommandMapTimeInTicks)
             - this->connectionLagInfoArray[_player].average1;
         int _absoluteDifference = abs((int)_difference);
-        if ((int)this->clTimeDiff < _absoluteDifference) {
+        if (this->clTimeDiff < _absoluteDifference) {
             int _newDiff = this->clTimeDiff + 5;
             if (_absoluteDifference >= _newDiff) {
                 _absoluteDifference = _newDiff;
@@ -39,7 +37,7 @@ namespace Synchrony {
             }
         }
         int _newDiff2 = this->clTimeDiff + 10;
-        if (_newDiff2 > (int)this->commandDelay) {
+        if (_newDiff2 > this->commandDelay) {
             int _capped = _countDown + 5;
             if (_newDiff2 >= _capped) {
                 _newDiff2 = _capped;

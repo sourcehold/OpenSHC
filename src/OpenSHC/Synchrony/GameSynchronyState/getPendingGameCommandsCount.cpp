@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Commands/GameCommandState.hpp"
@@ -14,23 +13,14 @@ namespace Synchrony {
     int GameSynchronyState::getPendingGameCommandsCount()
     {
         int _pending = 0;
-        int _firstCommand = this->gameCommandID;
-        if (_firstCommand < 200) {
-            GameCommandStateByte* _statePtr = &this->DAT_GameCommandArray[_firstCommand].stateUnk;
-            int _remaining = 200 - _firstCommand;
-            // Not a CRT routine: this is a strided scan, stepping 1272 bytes per entry over
-            // DAT_GameCommandArray[i].stateUnk and counting those in 1..9, so no strlen/memchr
-            // shape fits it.
-            // Measured: the counted do-while over a walking pointer is what the original compiles to.
-            // A for loop costs the match (100.0% -> 91.7%), a while loop adds an instruction, and
-            // indexing DAT_GameCommandArray per iteration loses three, so this shape stays.
-            do {
-                if (*_statePtr != (GameCommandState)0 && (char)*_statePtr < '\n') {
-                    ++_pending;
-                }
-                _statePtr += 1272;
-                --_remaining;
-            } while (_remaining);
+        // A command slot holds 0 while empty, and GCS_UNPROCESSED..GCS_PROCESSED - 1 while it
+        // still waits to be run. Measured: this plain index loop ties the walking-pointer
+        // do-while Ghidra produced, so the 1272-byte stride and the pointer are both gone.
+        for (int _command = this->gameCommandID; _command < 200; ++_command) {
+            GameCommandStateByte _state = this->DAT_GameCommandArray[_command].stateUnk;
+            if (_state != 0 && _state < Commands::GCS_PROCESSED) {
+                ++_pending;
+            }
         }
         return _pending;
     }

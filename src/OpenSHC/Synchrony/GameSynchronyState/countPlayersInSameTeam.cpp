@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
