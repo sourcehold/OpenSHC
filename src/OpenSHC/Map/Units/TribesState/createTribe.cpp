@@ -25,28 +25,35 @@ namespace Map {
                 int _tribeID = DAT_CurrentTribeID::instance;
                 if (this->tribes[DAT_CurrentTribeID::instance].tribeState == 0) {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        820, '\0', (void*)((int)(this->tribes + DAT_CurrentTribeID::instance)));
-                    if (_tribeID <= 0) {
-                        return 0;
+                        sizeof(Tribe), '\0', &this->tribes[DAT_CurrentTribeID::instance]);
+                    /*
+                      The claim is the cold-last arm, which is what puts it out of line in
+                      the original, behind the shared `return 0` epilogue.
+                     */
+                    if (0 < _tribeID) {
+                        Tribe& _tribe = this->tribes[_tribeID];
+                        if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
+                            && (setAsCurrentTribeID)) {
+                            this->DAT_CurrentTribeID = _tribeID;
+                        }
+                        _tribe.owner = playerID;
+                        _tribe.tribeState = 2;
+                        _tribe.uid = DAT_GameCore::instance.uniqueGameObjectTracker;
+                        DAT_GameCore::instance.uniqueGameObjectTracker
+                            = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
+                        _tribe.tribeType = ((AITribeType)0);
+                        _tribe.field18_0x1c = 0;
+                        _tribe.field19_0x1e = 0;
+                        _tribe.tribeBehaviorType = ((SomeTribeBehaviorType)0);
+                        _tribe.field29_0x30 = 0;
+                        _tribe.selectionTargetUnitID = 0;
+                        _tribe.size = 0;
+                        return _tribeID;
                     }
-                    if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) && (setAsCurrentTribeID)) {
-                        this->DAT_CurrentTribeID = _tribeID;
-                    }
-                    this->tribes[_tribeID].owner = playerID;
-                    this->tribes[_tribeID].tribeState = 2;
-                    this->tribes[_tribeID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
-                    DAT_GameCore::instance.uniqueGameObjectTracker = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
-                    this->tribes[_tribeID].tribeType = ((AITribeType)0);
-                    this->tribes[_tribeID].field18_0x1c = 0;
-                    this->tribes[_tribeID].field19_0x1e = 0;
-                    this->tribes[_tribeID].tribeBehaviorType = ((SomeTribeBehaviorType)0);
-                    this->tribes[_tribeID].field29_0x30 = 0;
-                    this->tribes[_tribeID].selectionTargetUnitID = 0;
-                    this->tribes[_tribeID].size = 0;
-                    return _tribeID;
+                    return 0;
                 }
                 DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1;
-            } while (DAT_CurrentTribeID::instance < 0x4e2);
+            } while ((int)DAT_CurrentTribeID::instance < 1250);
             return 0;
         }
 

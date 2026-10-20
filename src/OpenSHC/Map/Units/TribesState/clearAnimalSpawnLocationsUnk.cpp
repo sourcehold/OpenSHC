@@ -13,19 +13,22 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005232E0
         void TribesState::clearAnimalSpawnLocationsUnk()
         {
-            short* psVar1;
-            psVar1 = &DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[0].y;
-            do {
-                ((Point4ShortXY*)(psVar1 + -1))->x = 0;
-                *psVar1 = 0;
-                psVar1[0x1d7] = 0;
-                psVar1[0x1d8] = 0;
-                psVar1[0xe9f] = 0;
-                psVar1[0xea0] = 0;
-                psVar1[0xea9] = 0;
-                psVar1[0xeaa] = 0;
-                psVar1 = psVar1 + 2;
-            } while ((int)psVar1 < 0x117d1de);
+            /*
+              The import walked a cursor over deerSpawnLocationsXY and reached the other
+              three arrays through offsets from it (0x3ae to lionLocationsXY, 0x1d3e to
+              rabbitSpawnXY, 0x1d52 to camelSpawnXY), ending on the absolute address
+              0x117d1de. All four hold four XY pairs.
+             */
+            for (int _slot = 0; _slot < 4; _slot = _slot + 1) {
+                DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[_slot].x = 0;
+                DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[_slot].y = 0;
+                DAT_GameState::instance.mapAndTime.lionLocationsXY[_slot].x = 0;
+                DAT_GameState::instance.mapAndTime.lionLocationsXY[_slot].y = 0;
+                DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0] = 0;
+                DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1] = 0;
+                DAT_GameState::instance.mapAndTime.camelSpawnXY[_slot].x = 0;
+                DAT_GameState::instance.mapAndTime.camelSpawnXY[_slot].y = 0;
+            }
             DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor = 0;
         }
 

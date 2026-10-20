@@ -244,6 +244,12 @@ namespace Map {
                             }
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
+                    /*
+                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
+                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
+                      condition and it has to be rebuilt from the original's own branches
+                      along with the rest of the function's thirteen jump tables.
+                     */
                     if (id | x | id != 0) {
                         /*
                           if there are melee units in the selection
@@ -1387,6 +1393,12 @@ namespace Map {
                             DAT_UnitsState::instance.units[iVar14]._someY_2 = 0;
                         }
                     } while (iVar12 < this->tribes[_param_1_tribeID].size);
+                    /*
+                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
+                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
+                      condition and it has to be rebuilt from the original's own branches
+                      along with the rest of the function's thirteen jump tables.
+                     */
                     if (id | x | id != 0) {
                         sVar9 = this->tribes[_param_1_tribeID].selectionTargetUnitID;
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
@@ -1660,6 +1672,12 @@ namespace Map {
                             }
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
+                    /*
+                      fixme: `id | x | id != 0` reads `x`, which nothing in this function
+                      ever assigns - MSVC reports C4700 here. The decompiler mangled this
+                      condition and it has to be rebuilt from the original's own branches
+                      along with the rest of the function's thirteen jump tables.
+                     */
                     if (id | x | id != 0) {
                         iVar12 = (int)this->tribes[_param_1_tribeID].selectionTargetUnitID;
                         param_5 = (int)DAT_UnitsState::instance.units[iVar12].x;
