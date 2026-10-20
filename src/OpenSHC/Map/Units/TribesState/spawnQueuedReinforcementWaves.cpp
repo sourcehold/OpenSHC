@@ -25,6 +25,12 @@ namespace Map {
         using Map::Units::UnitTypeInt;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          The two flags stay `bool`, although the original zeroes its own with
+          `xor ebx, ebx` and diff_triage.py's BYTE column counts four byte-sized slots on
+          our side: making them BOOLEnum costs 6.4 points (58.5% -> 52.1%, norm 52.9% ->
+          44.3%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00527440
         void TribesState::spawnQueuedReinforcementWaves()
         {

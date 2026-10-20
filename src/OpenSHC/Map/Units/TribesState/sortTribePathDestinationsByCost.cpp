@@ -18,6 +18,11 @@ namespace Map {
         using Map::Navigation::PathHelper12;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          The unit-ID local stays `short`, although our movzx-plus-movsx pair against the
+          original's single movsx says otherwise: widening it costs 2.2 points
+          (28.8% -> 26.6%, norm 30.3% -> 28.0%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00524930
         void TribesState::sortTribePathDestinationsByCost(int tribeID, int horseAndRamCount)
         {
