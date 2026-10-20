@@ -25,10 +25,10 @@ namespace Map {
                 /*
                   find an empty tribe
                  */
-                psVar1 = (short*)((int)this + _selectionID * 0x334 + 0x40);
+                psVar1 = &this->tribes[_selectionID].tribeState;
                 while (*psVar1 != 0) {
                     _selectionID = _selectionID + -8;
-                    psVar1 = psVar1 + -0xcd0;
+                    psVar1 = psVar1 - 0xcd0;
                     if (_selectionID <= 0) {
                         return 0;
                     }
@@ -37,7 +37,7 @@ namespace Map {
                   wipe the tribe
                  */
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    820, '\0', (void*)((int)(this->tribes + _selectionID)));
+                    sizeof(Tribe), '\0', &this->tribes[_selectionID]);
                 if (0 < _selectionID) {
                     this->tribes[_selectionID].owner = playerID;
                     this->tribes[_selectionID].tribeState = 2;
