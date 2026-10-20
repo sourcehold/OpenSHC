@@ -23,7 +23,9 @@ namespace Map {
 
         /*
           The `short` local stays narrow: widening it costs 3.9 points
-          (41.8% -> 37.9%).
+          (41.8% -> 37.9%). Splitting it so that only the three target-ID uses get an `int`
+          - which is where our `movzx` plus `movsx` pairs are against the original's single
+          `movsx` - costs 1.3 points too (47.0% -> 45.7%).
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00523A30
         void TribesState::drawFlagsAndUnitDestinations(int tribeID)

@@ -29,9 +29,16 @@ namespace Map {
               candidate is reachable. 0xb4df44 is one past field1608_0xcc4[39].y, so the
               loop runs over all 40 entries.
              */
-            for (int _candidate = 0; _candidate < 40; _candidate = _candidate + 1) {
-                uint const x1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[_candidate].x + uVar5;
-                uint const y1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[_candidate].y + uVar2;
+            /*
+              A cursor against the literal end address, as in the sibling
+              moveTribeToIndexedNearbyTile: an index over the array makes the bound a
+              relocated `&field1608_0xcc4[40]` where the original has a plain
+              `cmp ebx, 0xb4df44`.
+             */
+            int* _pCandidate = &DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[0].y;
+            do {
+                uint const x1 = _pCandidate[-1] + uVar5;
+                uint const y1 = *_pCandidate + uVar2;
                 if (x1 <= 399 && y1 <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] != 0
                     && MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribePathToDestinationClear, this)(
@@ -41,7 +48,8 @@ namespace Map {
                         param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
                     return;
                 }
-            }
+                _pCandidate = _pCandidate + 2;
+            } while ((int)_pCandidate < 0xb4df44);
         }
 
     }

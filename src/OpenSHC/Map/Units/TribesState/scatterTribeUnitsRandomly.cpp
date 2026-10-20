@@ -49,12 +49,15 @@ namespace Map {
                         index = index + 1 + (DAT_UnitsState::instance.units[iVar2].fixedRng & 0xf);
                         iVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getTileInSearchQueue,
                             DAT_PathFindingState::ptr)(index);
-                        iVar4 = DAT_ViewportRenderState::instance
-                                    .translationMatrix[DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[iVar3]]
-                                    .addXgetTile;
-                        DAT_UnitsState::instance.units[iVar2].targetY
+                        /*
+                          One sign-extended read shared by both uses: the original has a
+                          single `movsx ecx, word ptr [..]` and stores its low word, where
+                          reading the `short` array twice leaves a `movzx` plus a `movsx`.
+                         */
+                        int const _targetTileY
                             = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar3];
+                        iVar4 = DAT_ViewportRenderState::instance.translationMatrix[_targetTileY].addXgetTile;
+                        DAT_UnitsState::instance.units[iVar2].targetY = (short)_targetTileY;
                         DAT_UnitsState::instance.units[iVar2].targetX = (short)iVar3 - (short)iVar4;
                         DAT_UnitsState::instance.units[iVar2].state.generic = ((UnitStateShort)0xd1);
                     }

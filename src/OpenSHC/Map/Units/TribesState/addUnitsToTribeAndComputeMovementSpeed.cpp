@@ -20,12 +20,19 @@ namespace Map {
         {
             Unit* _pUnit;
             uint _unitID;
+            /*
+              The three speeds are `int`, as in the sibling
+              addUnitToTribeAndUpdateTribeMovementSpeed, where the same change gained 9.9
+              points: the original reads one with a single `movsx` and compares and copies
+              it 32 bits wide, where `short` locals give a `movzx` plus 16-bit compares.
+              The size and the target unit stay narrow.
+             */
             int local_8;
-            short _movementSpeed;
-            short _maximumSpeed;
+            int _movementSpeed;
+            int _maximumSpeed;
             short _targetUnit;
             local_8 = 0;
-            short _minimumSpeed = 100;
+            int _minimumSpeed = 100;
             _maximumSpeed = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 _pUnit = &DAT_UnitsState::instance.units[1];

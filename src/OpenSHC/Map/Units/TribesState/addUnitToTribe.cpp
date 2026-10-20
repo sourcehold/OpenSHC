@@ -13,14 +13,19 @@ namespace Map {
         void TribesState::addUnitToTribe(uint unitID, int tribeID)
         {
             short* psVar1;
-            uint _mod16;
             this->tribes[tribeID].size = this->tribes[tribeID].size + 1;
             /*
               basically, it sets a bit flag for every unitID that is in the selection
              */
+            /*
+              The remainder is not named, which is a wash on the score (86.7% either way).
+              The gap here is a register: the original builds the cursor in a scratch
+              register (`mov edx, edi`, `imul edx, edx, 0x19a`, `add edx, eax`,
+              `lea eax, [ecx + edx*2 + 0x60]`) where ours needs EBP and so a push and a pop,
+              and dropping the local was not enough to free one.
+             */
             psVar1 = this->tribes[tribeID].unitSelectionBitMasked + ((int)unitID / 16);
-            _mod16 = (int)unitID % 16;
-            *psVar1 = *psVar1 | DAT_UnitSelectionDefinedData::instance.BitMaskHelper[_mod16];
+            *psVar1 = *psVar1 | DAT_UnitSelectionDefinedData::instance.BitMaskHelper[(int)unitID % 16];
             if (this->tribes[tribeID].selectionTargetUnitID == 0) {
                 this->tribes[tribeID].selectionTargetUnitID = (short)unitID;
             }

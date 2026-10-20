@@ -71,6 +71,15 @@ namespace Map {
             int _unitID_0x05_0x16;
             int iVar12;
             int _unitID;
+            /*
+              This one stays `short`, although nine of our `movzx` plus `movsx` pairs are
+              its `tileTranslationMatrix_YComponent` reads indexing `translationMatrix` -
+              the same shape that took scatterTribeUnitsRandomly to 100% and gained the two
+              movement-speed functions about ten points each. Widening it costs 0.8 points
+              (27.9% -> 27.1%): the decompiler folded several of the original's variables
+              into this one, so the change lands on all of them at once and the losses eat
+              the gains.
+             */
             short sVar9;
             uint uVar13;
             int iVar14;

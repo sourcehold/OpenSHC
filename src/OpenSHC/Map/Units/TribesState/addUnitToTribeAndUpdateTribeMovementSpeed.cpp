@@ -14,12 +14,19 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522B00
         void TribesState::addUnitToTribeAndUpdateTribeMovementSpeed(int param_1, uint unitID, int tribeID)
         {
+            /*
+              The three speeds are `int`: the original reads one with
+              `movsx ecx, word ptr [eax]` and compares and copies it 32 bits wide
+              (`cmp ecx, esi`, `mov esi, ecx`), where `short` locals give a `movzx` and
+              16-bit `cmp cx, si` / `movzx esi, cx`. The tribe size stays narrow - that one
+              really is `movzx` plus `test ax, ax`.
+             */
             Unit* _ptrUnit;
-            short _maximumSpeed;
-            short _minimumSpeed;
+            int _maximumSpeed;
+            int _minimumSpeed;
             int _totalHealth;
             short _tribeSize;
-            short _movementSpeed;
+            int _movementSpeed;
             int _tribeID;
             _tribeID = tribeID;
             _maximumSpeed = 0;
