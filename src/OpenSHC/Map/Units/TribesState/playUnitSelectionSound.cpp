@@ -15,132 +15,140 @@ namespace Map {
         using Map::Units::UnitType;
 
         /*
-          fixme: this function is a chain of tail calls in the original and the
-          decompilation of it is wrong in two places. The UT_E_SWORD arm reaches
-          `iVar5 = 0xad` unconditionally, so for a two-unit selection it plays 0xae, then
-          0xaf, then 0xad where the original plays 0xae alone and returns; the original has
-          three separate blocks, each with its own `ret`, and a selection below three units
-          that is neither one nor two plays nothing. `if (param_1 < 3) {}` is that case.
-          Every `param_1 = <id>;` in front of a playUnitSpeechEffect call is MSVC writing
-          the argument into the incoming parameter slot for a tail call, not a real
-          assignment, and the siege arm's five arms each return rather than falling into
-          the shared block at the end.
-
-          Rebuilding it from those branches was tried and reverted: writing the arms out
-          separately costs 32 points of raw match (46.5% -> 14.5%) because the original
-          shares the play calls through its tail calls, while the normalized match rises
-          (34.4% -> 40.8%). It needs the sharing reproduced, not just the arms corrected.
+          Rebuilt from Ghidra's disassembly of 0x5217e0 rather than its decompilation: the
+          jump table at 0x521a48 has six arms and the byte table at 0x521a60 maps
+          unitType - 0x1b onto them. The speech calls in the engineer and siege arms are
+          tail calls (`mov [esp + 4], <id>` then `jmp`), which is what the decompiler
+          printed as an assignment to `param_1` in front of each one.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005217E0
         void TribesState::playUnitSelectionSound(int param_1)
         {
-            short* psVar1;
-            short* psVar2;
-            int iVar3;
-            UnitType UVar4;
-            int iVar5;
-            int sfxOffsetInArray;
-            iVar3 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
-            UVar4
+            int const iVar3
+                = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
+            UnitType const UVar4
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(param_1, &param_1);
-            iVar5 = param_1;
             switch (UVar4) {
             case Map::Units::UT_E_SWORD:
-                if (param_1 != 1) {
-                    if (param_1 == 2) {
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                            (int)DAT_UnitsState::instance.units[iVar3].x,
-                            (int)(DAT_UnitsState::instance.units[iVar3].y), 0xae);
-                    }
-                    if (param_1 < 3) {}
-                    iVar5 = 0xaf;
-                LAB_0052188b:
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                        (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
-                        iVar5);
-                }
-                iVar5 = 0xad;
-                goto LAB_00521827;
-            case Map::Units::UT_E_KNIGHT:
+                /*
+                  Three separate blocks at 0x521819, each with its own `ret 4`, and a
+                  selection below three that is neither one nor two plays nothing.
+                 */
                 if (param_1 == 1) {
-                    iVar5 = 0x56;
-                LAB_005218ec:
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                        (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
-                        iVar5);
+                        (int)DAT_UnitsState::instance.units[iVar3].x,
+                        (int)(DAT_UnitsState::instance.units[iVar3].y), 0xad);
+                    return;
+                }
+                if (param_1 == 2) {
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x,
+                        (int)(DAT_UnitsState::instance.units[iVar3].y), 0xae);
+                    return;
+                }
+                if (param_1 < 3) {
+                    return;
+                }
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                    (int)DAT_UnitsState::instance.units[iVar3].x,
+                    (int)(DAT_UnitsState::instance.units[iVar3].y), 0xaf);
+                return;
+            case Map::Units::UT_E_KNIGHT: {
+                /*
+                  The arm at 0x5218aa: one shared play of the size-dependent effect, then
+                  0x59. A selection of two or three gets 0x57 as well, and one of four or
+                  more gets 0x58 instead of 0x56.
+                 */
+                int _sfx;
+                if (param_1 == 1) {
+                    _sfx = 0x56;
                 } else {
-                    if ((param_1 == 2) || (param_1 == 3)) {
+                    if (param_1 == 2 || param_1 == 3) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                             (int)DAT_UnitsState::instance.units[iVar3].x,
                             (int)(DAT_UnitsState::instance.units[iVar3].y), 0x57);
                     }
-                    if (3 < iVar5) {
-                        iVar5 = 0x58;
-                        goto LAB_005218ec;
+                    if (param_1 < 4) {
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[iVar3].x,
+                            (int)(DAT_UnitsState::instance.units[iVar3].y), 0x59);
+                        return;
                     }
+                    _sfx = 0x58;
                 }
-                iVar5 = 0x59;
-            LAB_00521827:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
-                    iVar5);
+                    (int)DAT_UnitsState::instance.units[iVar3].x,
+                    (int)(DAT_UnitsState::instance.units[iVar3].y), _sfx);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                    (int)DAT_UnitsState::instance.units[iVar3].x,
+                    (int)(DAT_UnitsState::instance.units[iVar3].y), 0x59);
                 return;
+            }
             case Map::Units::UT_E_ENGINEER:
-                if ((DAT_UnitsState::instance.units[iVar3].unitType == Map::Units::UT_E_ENGINEER)
-                    && (DAT_UnitsState::instance.units[iVar3].resourceToDeposit != 0)) {
-                    param_1 = 0x24;
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0x24);
+                if (DAT_UnitsState::instance.units[iVar3].unitType != Map::Units::UT_E_ENGINEER) {
+                    return;
                 }
-                break;
+                if (DAT_UnitsState::instance.units[iVar3].resourceToDeposit == 0) {
+                    return;
+                }
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0x24);
+                return;
             case Map::Units::UT_S_CATAPULT:
             case Map::Units::UT_S_TOWER:
-            case Map::Units::UT_S_BATTERINGRAM:
-                iVar5 = MACRO_CALL_MEMBER(
+            case Map::Units::UT_S_BATTERINGRAM: {
+                int const _requiredEngineers = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::getRemainingRequiredEngineers, DAT_UnitsState::ptr)(iVar3);
-                if (iVar5 <= 0) {
-                    iVar5 = 0x68;
-                    goto LAB_0052188b;
+                if (_requiredEngineers <= 0) {
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x,
+                        (int)(DAT_UnitsState::instance.units[iVar3].y), 0x68);
+                    return;
                 }
-                if ((DAT_UnitsState::instance.units[iVar3]
+                if (DAT_UnitsState::instance.units[iVar3]
                             .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                        == 0)
-                    || (3 < iVar5)) {
-                    param_1 = 0xe;
+                        == 0
+                    || 3 < _requiredEngineers) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xe);
+                    return;
                 }
-                if (iVar5 == 1) {
-                    param_1 = 0xb;
+                if (_requiredEngineers == 1) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xb);
+                    return;
                 }
-                if (iVar5 == 2) {
-                    param_1 = 0xc;
+                if (_requiredEngineers == 2) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xc);
+                    return;
                 }
-                if (iVar5 == 3) {
-                    param_1 = 0xd;
+                /*
+                  The last arm at 0x5219d9 tests for three and returns without a speech
+                  otherwise, which the earlier count tests already make unreachable.
+                 */
+                if (_requiredEngineers == 3) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xd);
                 }
-                break;
-            case Map::Units::UT_A_HARCHER:
-                psVar1 = &DAT_UnitsState::instance.units[iVar3].y;
-                psVar2 = &DAT_UnitsState::instance.units[iVar3].x;
+                return;
+            }
+            case Map::Units::UT_A_HARCHER: {
+                /*
+                  The arm at 0x521915 keeps a pointer to each coordinate (`lea edi, [esi +
+                  0x1388612]`, `lea esi, [esi + 0x1388610]`) and reads through them four
+                  times rather than re-indexing the unit.
+                 */
+                short* const _unitY = &DAT_UnitsState::instance.units[iVar3].y;
+                short* const _unitX = &DAT_UnitsState::instance.units[iVar3].x;
+                int sfxOffsetInArray;
                 if (param_1 == 1) {
-                    iVar3 = (int)*psVar1;
-                    iVar5 = (int)*psVar2;
                     sfxOffsetInArray = 0xea;
-                } else if (param_1 < 5) {
-                    iVar3 = (int)*psVar1;
-                    iVar5 = (int)*psVar2;
+                } else if (param_1 <= 4) {
                     sfxOffsetInArray = 0xeb;
                 } else {
-                    iVar3 = (int)*psVar1;
-                    iVar5 = (int)*psVar2;
                     sfxOffsetInArray = 0xec;
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    iVar5, iVar3, sfxOffsetInArray);
+                    (int)*_unitX, (int)(*_unitY), sfxOffsetInArray);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    (int)*psVar2, (int)(*psVar1), 0x59);
+                    (int)*_unitX, (int)(*_unitY), 0x59);
+            }
             }
         }
 
