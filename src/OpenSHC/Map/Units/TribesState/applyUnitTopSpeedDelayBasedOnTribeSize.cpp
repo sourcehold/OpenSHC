@@ -100,15 +100,23 @@ namespace Map {
                 UnitIDMovementDistancePair* _nextUnit = this->someUnitIDMovementDistancePair + 1;
                 do {
                     UnitIDMovementDistancePair* pUVar2 = _nextUnit - 1;
-                    short const _unitID = pUVar2->unitID;
-                    short const _distance = pUVar2->movementDistance;
-                    short const _nextDistance = _nextUnit->movementDistance;
+                    /*
+                      All four values are read up front and all four are `int`: the original
+                      has `movsx edi, [eax - 4]`, `movsx ebx, [eax]`, `movsx ecx, [eax - 2]`,
+                      `movsx edx, [eax + 2]` in that order, where `short` locals give
+                      `movzx` and leaving the next entry's ID to be read inside the swap
+                      loses the fourth load entirely.
+                     */
+                    int const _unitID = pUVar2->unitID;
+                    int const _nextUnitID = _nextUnit->unitID;
+                    int const _distance = pUVar2->movementDistance;
+                    int const _nextDistance = _nextUnit->movementDistance;
                     if ((!param_2) && (_nextDistance < _distance)) {
                         _foundUnsortedEntry = 1;
-                        pUVar2->unitID = _nextUnit->unitID;
-                        _nextUnit->unitID = _unitID;
-                        pUVar2->movementDistance = _nextDistance;
-                        _nextUnit->movementDistance = _distance;
+                        pUVar2->unitID = (short)_nextUnitID;
+                        _nextUnit->unitID = (short)_unitID;
+                        pUVar2->movementDistance = (short)_nextDistance;
+                        _nextUnit->movementDistance = (short)_distance;
                     }
                     _pairIndex = _pairIndex + 1;
                     _nextUnit = _nextUnit + 1;
