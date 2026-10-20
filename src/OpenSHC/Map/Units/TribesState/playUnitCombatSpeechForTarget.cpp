@@ -62,12 +62,16 @@ namespace Map {
                 } else if (_ptrptrCurrentSelectionID == Map::Units::UT_A_HARCHER) {
                     _distance = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[1]
                         * DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[1];
+                } else if (_ptrptrCurrentSelectionID == Map::Units::UT_A_FIRETHROWER) {
+                    /*
+                      The firethrower range is tested before the fallback, not after it:
+                      the chain at 0x521ae3 is six `cmp`/`jnz` pairs with
+                      `mov ecx, [esp + 0x1c]` only on the fall-through.
+                     */
+                    _distance = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[0x22]
+                        * DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[0x22];
                 } else {
                     _distance = unitID;
-                    if (_ptrptrCurrentSelectionID == Map::Units::UT_A_FIRETHROWER) {
-                        _distance = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[0x22]
-                            * DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[0x22];
-                    }
                 }
                 _xDifference = (int)DAT_UnitsState::instance.units[_otherUnitID].x
                     - (int)DAT_UnitsState::instance.units[unitID].x;
@@ -177,11 +181,18 @@ namespace Map {
                 break;
             default:
                 UVar2 = DAT_UnitsState::instance.units[unitID].unitType;
+                /*
+                  The two speeches are exclusive. Ghidra's disassembly of the table arm at
+                  0x521df7 is a `jz` chain over the five target types into the 0x11 block,
+                  with the 0x15 block inline and its own `ret 8`; the decompilation played
+                  0x15 conditionally and then 0x11 unconditionally.
+                 */
                 if (UVar2 != Map::Units::UT_E_KNIGHT && UVar2 != Map::Units::UT_E_SWORD
                     && UVar2 != Map::Units::UT_E_MACE && UVar2 != Map::Units::UT_E_PIKE
                     && UVar2 != Map::Units::UT_LORD) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                         (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
+                    return;
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x11);
@@ -191,9 +202,15 @@ namespace Map {
                 if (sVar1 < 0xf) {
                     return;
                 }
+                /*
+                  The table arm at 0x521dc8 ends in `ret 8`. Without the return this fell
+                  out of the switch into the shared play below with `_otherX` never
+                  assigned on this path.
+                 */
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                     (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x14);
+                return;
             }
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                 (int)DAT_UnitsState::instance.units[_otherUnitID].x,
