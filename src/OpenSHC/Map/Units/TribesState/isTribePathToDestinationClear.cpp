@@ -51,10 +51,16 @@ namespace Map {
             int const _searchMode = (DAT_TileMapState::instance.LogicLayer[_toTile] & 0x100) != 0 ? 1 : 2;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
                 DAT_PathFindingState::ptr)(toX, toY, -1, -1, 500, FALSE);
+            /*
+              The size lives behind a pointer the original takes once, after the search is
+              seeded (`lea edx, [ecx + edi + 0x5c]` at 0x524d6e, kept in a stack slot and
+              re-read at the top of every iteration).
+             */
+            short const* const _size = &this->tribes[tribeID].size;
             while (true) {
                 int _unitID;
                 do {
-                    if (_unitIndex >= this->tribes[tribeID].size) {
+                    if (_unitIndex >= *_size) {
                         return (undefined4)(1);
                     }
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

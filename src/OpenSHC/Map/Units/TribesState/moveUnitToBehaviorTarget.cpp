@@ -76,7 +76,7 @@ namespace Map {
                             Map::Units::TroopValueState_Func::findEnemyWalls, DAT_TroopValueState::ptr)(unitID);
                         if (!iVar4)
                             goto LAB_0052143b;
-                        if (DAT_TribesState::instance.tribes[sVar1].selectionTargetUnitID == unitID) {
+                        if (this->tribes[sVar1].selectionTargetUnitID == unitID) {
                             DAT_TribesState::instance.tribes[sVar1].tribeBehaviorType = Map::Units::STBT_0x3f2;
                         }
                         local_c = DAT_TroopValueState::instance.y;
@@ -131,9 +131,14 @@ namespace Map {
             sVar5 = (short)uVar6 - (short)DAT_ViewportRenderState::instance.translationMatrix[sVar5].addXgetTile;
             DAT_UnitsState::instance.units[unitID].state.generic = Map::Units::States::US_MOVE_TO_DESTINATION;
             DAT_UnitsState::instance.units[unitID].attackAtTileX = sVar5;
+            /*
+              Reached through `this`, which the original keeps in a stack slot
+              ([esp + 0x18]) across the whole dispatch; only the behaviour-type store in the
+              0x3fb arm goes through the global's absolute address.
+             */
             if (sVar2 == unitID) {
-                DAT_TribesState::instance.tribes[sVar1].targetX = sVar5;
-                DAT_TribesState::instance.tribes[sVar1].targetY = DAT_UnitsState::instance.units[unitID].attackAtTileY;
+                this->tribes[sVar1].targetX = sVar5;
+                this->tribes[sVar1].targetY = DAT_UnitsState::instance.units[unitID].attackAtTileY;
             }
             iVar4 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::stopUnitIfNextToTarget, DAT_UnitsState::ptr)(unitID);
             if (!iVar4) {

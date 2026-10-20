@@ -22,10 +22,17 @@ namespace Map {
         {
             DAT_CurrentTribeID::instance = 1;
             do {
-                int _tribeID = DAT_CurrentTribeID::instance;
                 if (this->tribes[DAT_CurrentTribeID::instance].tribeState == 0) {
+                    /*
+                      The index is only copied out of the loop counter once the slot is
+                      known free (`mov edi, eax` at 0x5228c9), and the tribe's address is
+                      taken before the clear (`lea esi, [edx + ebp]`, `lea eax, [esi +
+                      0x28]`), then reused for every store below it.
+                     */
+                    int const _tribeID = DAT_CurrentTribeID::instance;
+                    Tribe& _tribe = this->tribes[_tribeID];
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        sizeof(Tribe), '\0', &this->tribes[DAT_CurrentTribeID::instance]);
+                        sizeof(Tribe), '\0', &_tribe);
                     /*
                       An early return, which is where the original puts its `return 0`:
                       `cmp edi, ebx; jg` falls straight into `xor eax, eax` with the claim
@@ -35,7 +42,6 @@ namespace Map {
                         return 0;
                     }
                     {
-                        Tribe& _tribe = this->tribes[_tribeID];
                         if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
                             && (setAsCurrentTribeID)) {
                             this->DAT_CurrentTribeID = _tribeID;

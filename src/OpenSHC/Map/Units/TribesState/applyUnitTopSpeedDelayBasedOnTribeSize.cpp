@@ -84,7 +84,12 @@ namespace Map {
                  */
                 _foundUnsortedEntry = 0;
                 int _pairIndex = 0;
-                if (this->someUnitIDArrayCount == 1 || this->someUnitIDArrayCount + -1 < 0) {
+                /*
+                  One test, not two: the original subtracts one from the count and jumps on
+                  the sign-or-zero (`sub edx, 1; test edx, edx; jle`), which the decompiler
+                  split into an equality and a sign test.
+                 */
+                if (this->someUnitIDArrayCount - 1 <= 0) {
                     break;
                 }
                 /*

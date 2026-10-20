@@ -49,7 +49,11 @@ namespace Map {
             int const _predatorCount = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount
                 + DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
             iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
-            sVar2 = (ushort)this->tribes[tribeID].size;
+            /*
+              Signed: the halving at 0x52adfe is `movsx`, `cdq`, `sub`, `sar 1`, which is
+              what a signed `/ 2` compiles to. The `(ushort)` cast turned it into a `shr`.
+             */
+            sVar2 = (int)this->tribes[tribeID].size;
             this->tribes[tribeID].unkIsAnimalTribe = 1;
             /*
               The trim is the arm the original places first: `cmp cx, 0x1e; jle` falls into
@@ -110,11 +114,14 @@ namespace Map {
                                 = (4 - ((byte)SEC_RNG::instance.currentNumber2 & 3)) * 200;
                             /*
                               Compared against the memory operand, not through a local: the
-                              original has `cmp word ptr [..], 0; jg`.
+                              original has `cmp word ptr [..], 0; jg`. The block it falls
+                              into at 0x52b064 ends in `ret 4`, so a tribe with no rally
+                              points stops here instead of walking the array it has not got.
                              */
                             if (this->tribes[tribeID].rallyPointCount <= 0) {
                                 MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                                     DAT_WildlifeState::ptr)(tribeID, 5, 0);
+                                return;
                             }
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
                             sVar2 = this->tribes[tribeID].currentRallyPointIndex;

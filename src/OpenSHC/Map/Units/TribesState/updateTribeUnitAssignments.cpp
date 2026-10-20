@@ -31,18 +31,26 @@ namespace Map {
              */
             for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < 1250;
                 DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1) {
-                int _state = (ushort)this->tribes[DAT_CurrentTribeID::instance].tribeState;
+                /*
+                  The state, the size and the time are all compared as 16-bit values
+                  (`movzx ecx, word ptr`, then `cmp cx, bx` / `cmp cx, 3` / `jle`), so they
+                  stay `short` here; the earlier `(ushort)` casts turned the signed `jle` on
+                  the size into a test only zero could pass. It costs 1.4 points
+                  (58.4% -> 57.0%), which is the price of being right about negative sizes.
+                 */
+                short const _state = this->tribes[DAT_CurrentTribeID::instance].tribeState;
                 int _tribeUnitIndex = 0;
                 if (_state) {
                     int _tribeID = DAT_CurrentTribeID::instance;
                     if (_state != 3) {
-                        int _tribeSize = (ushort)this->tribes[DAT_CurrentTribeID::instance].size;
-                        if (_tribeSize <= 0) {
-                            int _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
+                        short const _size = this->tribes[DAT_CurrentTribeID::instance].size;
+                        if (_size <= 0) {
+                            short const _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
                             if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
                                 && _tribeTime)
                                 continue;
                         } else {
+                            int const _tribeSize = (int)_size;
                             int local_4 = 0;
                             if (0 < _tribeSize) {
                                 do {
@@ -50,8 +58,8 @@ namespace Map {
                                         this)(_tribeID, _tribeUnitIndex);
                                     int _unitLogicalState = DAT_UnitsState::instance.units[_unitID].logicalState;
                                     _tribeUnitIndex = _tribeUnitIndex + 1;
-                                    if ((short)_unitLogicalState < 1
-                                        || (2 < (short)_unitLogicalState
+                                    if (_unitLogicalState < 1
+                                        || (2 < _unitLogicalState
                                             && (_unitLogicalState != Map::Units::ULS_TRANSITIONING))
                                         || DAT_UnitsState::instance.units[_unitID].dying != 0
                                         || DAT_UnitsState::instance.units[_unitID].tribeID != _tribeID) {
