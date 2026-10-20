@@ -21,11 +21,18 @@ namespace Map {
         using Map::Units::UnitLogicState;
         using Map::Units::States::UnitState;
 
+        /*
+          The gotos stay here, against the style list, because the original really does
+          duplicate these tails and three goto-free shapes all measure worse: merging the
+          two `local_c = y` tails into one `if (iVar4)` block gives quick_diff 0.2730 at 137
+          instructions against the original's 156, duplicating the success tail into all
+          eight arms gives 0.2951 at 149, and this form gives 0.4092 at 147.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00521280
         undefined4 TribesState::moveUnitToBehaviorTarget(int unitID, int param_2)
         {
             int iVar4;
-            short sVar1 = DAT_UnitsState::instance.units[unitID].tribeID;
+            int sVar1 = DAT_UnitsState::instance.units[unitID].tribeID;
             int bVar3 = 0;
             uint x = 0;
             uint uVar6 = 0;

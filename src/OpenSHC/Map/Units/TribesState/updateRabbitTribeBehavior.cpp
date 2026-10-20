@@ -83,7 +83,7 @@ namespace Map {
                                 tribeID);
                         }
                     } else if (sVar2 == 0x96) {
-                        sVar2 = this->tribes[tribeID].rallyPointCount;
+                        sVar2 = (ushort)this->tribes[tribeID].rallyPointCount;
                         if (0 < sVar2) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
