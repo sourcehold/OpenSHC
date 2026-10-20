@@ -84,7 +84,14 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, _actionID);
-                if (_ptrptrCurrentSelectionID != Map::Units::UT_A_HARCHER) {}
+                /*
+                  The import left this guard with an empty body. The original jumps to the
+                  common epilogue (`cmp dword ptr [esp + 0x18], 0x4a; jnz 0x521e48`), so
+                  only a horse archer reaches the two plays below.
+                 */
+                if (_ptrptrCurrentSelectionID != Map::Units::UT_A_HARCHER) {
+                    return;
+                }
                 if (_ptrCurrentSelectionID == (TribesState*)0x1) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
@@ -100,8 +107,15 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     _otherX, _otherY, sfxOffsetInArray);
-                _otherX = 0x59;
-                break;
+                /*
+                  A second play, of 0x59, with the coordinates read again (0x521c0b,
+                  0x521c12) - which is what the decompiler turned into an assignment of
+                  0x59 to one of the coordinate locals - and then `ret 8`.
+                 */
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                    (int)DAT_UnitsState::instance.units[_otherUnitID].x,
+                    (int)DAT_UnitsState::instance.units[_otherUnitID].y, 0x59);
+                return;
             case Map::Units::UT_E_SPEAR:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);

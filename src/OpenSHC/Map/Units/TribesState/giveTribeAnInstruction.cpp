@@ -812,6 +812,16 @@ namespace Map {
                                 Map::Buildings::BuildingsState_Func::resolveBuildingEntryAccessibility,
                                 DAT_BuildingsState::ptr)(iVar11, 1, (int)(DAT_UnitsState::instance.units[uVar13].x),
                                 (int)(DAT_UnitsState::instance.units[uVar13].y));
+                            /*
+                              The `extraout_var` reassembly of the upper three bytes stays,
+                              although it is a decompiler artifact: 0x421be0 really returns
+                              0, 1 or 2 in the whole of EAX (0x421d4f sets ECX to 1 or 2),
+                              and the original's test is `test eax, eax`. Our header
+                              declares the callee `char`, so a plain `cVar7 != 0` tests only
+                              AL and costs 1.7 points (27.9% -> 26.2%). Fixing it properly
+                              means giving BuildingsState::resolveBuildingEntryAccessibility
+                              an `int` return, which is outside this namespace.
+                             */
                             if (((((uint)(extraout_var) & 0xffffff) << 8) | (uint)(byte)(cVar7)) != 0
                                 && (iVar14 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
