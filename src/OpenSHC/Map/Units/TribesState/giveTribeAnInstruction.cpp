@@ -516,12 +516,6 @@ namespace Map {
                         DAT_UnitsState::instance.units[iVar12]._someX_2 = 0;
                         DAT_UnitsState::instance.units[iVar12]._someY_2 = 0;
                         switch (DAT_UnitsState::instance.units[iVar12].unitType) {
-                        case Map::Units::UT_E_ARCHER:
-                        case Map::Units::UT_E_XBOW:
-                        case Map::Units::UT_A_ARCHER:
-                        case Map::Units::UT_A_SLINGER:
-                        case Map::Units::UT_A_FIRETHROWER:
-                            goto switchD_00528b77_caseD_16;
                         case Map::Units::UT_E_KNIGHT:
                             if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
                                 != Map::Buildings::BT_PITCHDITCH) {
@@ -570,7 +564,16 @@ namespace Map {
                             break;
                         case Map::Units::UT_A_HARCHER:
                             _ramOrHorse = _ramOrHorse + 1;
-                        switchD_00528b77_caseD_16:
+                            /*
+                              The ranged types share this arm; only the horse archer counts
+                              towards _ramOrHorse, which is why the decompiler had them
+                              jumping in from their own label.
+                             */
+                        case Map::Units::UT_E_ARCHER:
+                        case Map::Units::UT_E_XBOW:
+                        case Map::Units::UT_A_ARCHER:
+                        case Map::Units::UT_A_SLINGER:
+                        case Map::Units::UT_A_FIRETHROWER:
                             if (unitInstructionType == (UnitInstructionType)0x24) {
                                 switch (DAT_BuildingsState::instance.buildings[iVar11].buildingType) {
                                 case Map::Buildings::BT_GATEHOUSELARGE:
@@ -1137,13 +1140,6 @@ namespace Map {
                         DAT_UnitsState::instance.units[uVar13]._someX_2 = 0;
                         DAT_UnitsState::instance.units[uVar13]._someY_2 = 0;
                         switch (DAT_UnitsState::instance.units[uVar13].unitType) {
-                        case Map::Units::UT_E_ARCHER:
-                        case Map::Units::UT_E_XBOW:
-                        case Map::Units::UT_A_ARCHER:
-                        case Map::Units::UT_A_SLINGER:
-                        case Map::Units::UT_A_ASSASSIN:
-                        case Map::Units::UT_A_FIRETHROWER:
-                            goto switchD_005290c7_caseD_16;
                         case Map::Units::UT_E_KNIGHT:
                         switchD_005290c7_caseD_1c:
                             _ramOrHorse = _ramOrHorse + 1;
@@ -1220,7 +1216,16 @@ namespace Map {
                             break;
                         case Map::Units::UT_A_HARCHER:
                             _ramOrHorse = _ramOrHorse + 1;
-                        switchD_005290c7_caseD_16:
+                            /*
+                              The ranged types share this arm; only the horse archer counts
+                              towards _ramOrHorse.
+                             */
+                        case Map::Units::UT_E_ARCHER:
+                        case Map::Units::UT_E_XBOW:
+                        case Map::Units::UT_A_ARCHER:
+                        case Map::Units::UT_A_SLINGER:
+                        case Map::Units::UT_A_ASSASSIN:
+                        case Map::Units::UT_A_FIRETHROWER:
                             if (unitInstructionType == (UnitInstructionType)0x23)
                                 goto switchD_005290c7_caseD_5;
                         }
