@@ -15,9 +15,7 @@ namespace Map {
         void TribesState::clearTribesOfUnitType(int param_1, int param_2)
         {
             Unit* psVar1;
-            int tribeID;
             uint unitID;
-            short* psVar2;
             undefined1 local_4e8[1252];
             uint local_4;
             local_4 = MSVC_SecurityCookie::instance ^ (uint)local_4e8;
@@ -38,21 +36,18 @@ namespace Map {
                         local_4e8[psVar1->tribeID] = 1;
                     }
                     unitID = unitID + 1;
-                    psVar1 = psVar1 + 0x248;
+                    psVar1 = psVar1 + 1;
                 } while ((int)unitID < DAT_UnitsState::instance.maxUnitCount);
             }
-            tribeID = 1;
-            psVar2 = &this->tribes[1].selectionTargetUnitID;
-            do {
-                if (psVar2[-0xd] == 2) {
-                    if (*psVar2 == -1) {
+            for (int tribeID = 1; tribeID < 1250; tribeID = tribeID + 1) {
+                Tribe& _tribe = this->tribes[tribeID];
+                if (_tribe.tribeState == 2) {
+                    if (_tribe.selectionTargetUnitID == -1) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(tribeID);
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(tribeID);
                 }
-                tribeID = tribeID + 1;
-                psVar2 = psVar2 + 0x19a;
-            } while (tribeID < 0x4e2);
+            }
             ;
         }
 

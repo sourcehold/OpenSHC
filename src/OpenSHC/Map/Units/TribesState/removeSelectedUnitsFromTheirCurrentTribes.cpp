@@ -19,10 +19,8 @@ namespace Map {
         {
             Unit* _pUnit;
             int _unitTribeID;
-            int _tribeID;
             uint _unitID;
             bool _unitRemovedFromTribeByID[1250];
-            Tribe* _pTribe;
             uint uVar1 = MSVC_SecurityCookie::instance ^ (uint)_unitRemovedFromTribeByID;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 1250, '\0', (void*)((int)(_unitRemovedFromTribeByID)));
@@ -38,24 +36,18 @@ namespace Map {
                         _unitRemovedFromTribeByID[_unitTribeID] = true;
                     }
                     _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 0x248;
+                    _pUnit = _pUnit + 1;
                 } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
-            _tribeID = 1;
-            _pTribe = &this->tribes[1];
-            do {
-                /*
-                  tribeState
-                 */
-                if (_pTribe->tribeState == 2) {
-                    if (_pTribe->selectionTargetUnitID == -1) {
+            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                Tribe& _tribe = this->tribes[_tribeID];
+                if (_tribe.tribeState == 2) {
+                    if (_tribe.selectionTargetUnitID == -1) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(_tribeID);
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(_tribeID);
                 }
-                _tribeID = _tribeID + 1;
-                _pTribe = _pTribe + 1;
-            } while (_tribeID < 1250);
+            }
             ;
         }
 

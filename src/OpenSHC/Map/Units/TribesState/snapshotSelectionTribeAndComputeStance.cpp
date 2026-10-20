@@ -54,7 +54,7 @@ namespace Map {
                          */
                         _atLeastTwoTribes = true;
                     }
-                    _pUnit = _pUnit + 0x248;
+                    _pUnit = _pUnit + 1;
                     _unitIDCountdown = _unitIDCountdown + -1;
                     _tribeID_1 = _tribeID_chosen;
                 } while (_unitIDCountdown);

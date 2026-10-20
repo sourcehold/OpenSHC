@@ -40,7 +40,7 @@ namespace Map {
                         local_8 = local_8 + _pUnit->healthPercentage;
                     }
                     _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 0x248;
+                    _pUnit = _pUnit + 1;
                 } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
             short sVar1 = this->tribes[tribeID].size;

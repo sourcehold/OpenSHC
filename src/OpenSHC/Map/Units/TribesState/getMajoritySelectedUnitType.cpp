@@ -42,7 +42,7 @@ namespace Map {
                         *(int*)((int)_countOfUnitTypes + (short)_pUnit->unitType * 4)
                             = *(int*)((int)_countOfUnitTypes + (short)_pUnit->unitType * 4) + 1;
                     }
-                    _pUnit = _pUnit + 0x248;
+                    _pUnit = _pUnit + 1;
                     _countInclusive = _countInclusive + -1;
                 } while (_countInclusive);
             }
