@@ -24,7 +24,7 @@ namespace Map {
             if (!param_1) {
                 return 0;
             }
-            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            int sVar1 = this->tribes[param_1].selectionTargetUnitID;
             int unitSelectionIndex = 0;
             int index = 100;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk,
