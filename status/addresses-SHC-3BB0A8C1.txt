@@ -46949,7 +46949,7 @@ SHC_3BB0A8C1_0x00525A70 | 67.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00525B70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00525BA0 | 44.4% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00525BA0 | 46.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00525F20 | 68.0% | Reimplemented, asm differs
 
