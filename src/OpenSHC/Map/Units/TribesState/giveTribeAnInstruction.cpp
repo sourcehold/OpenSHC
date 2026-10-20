@@ -131,6 +131,15 @@ namespace Map {
             this->tribes[tribeID].containsRabbit = 0;
             _param_3_id_x_tile_buildingID_copy = (short)id;
             uVar13 = id;
+            /*
+              The arm order here is the original's block order and is worth 23.9 points, but
+              the nested switches' arm order is not. Two were tried against their own jump
+              tables and both measure worse or flat: putting the archer arm of 0x528e3a
+              first so that it falls through into the block below it, which is exactly what
+              0x528e41 does, costs 0.9 points; and reordering the eight arms of 0x5290c7
+              into their table order adds 0.1 back. Once the arms are at the right
+              addresses, MSVC lays out the blocks inside them to its own taste.
+             */
             switch (unitInstructionType) {
             case Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk:
                 _unitSelectionIndex = 0;
