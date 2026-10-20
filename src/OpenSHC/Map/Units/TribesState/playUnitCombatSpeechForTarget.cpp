@@ -101,7 +101,9 @@ namespace Map {
             case Map::Units::UT_E_SPEAR:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {}
+                if (sVar1 < 0xf) {
+                    return;
+                }
                 _otherX = 0x14;
                 break;
             case Map::Units::UT_E_PIKE:
@@ -116,7 +118,9 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, _otherX);
-                if (sVar1 < 0xf) {}
+                if (sVar1 < 0xf) {
+                    return;
+                }
                 _otherX = 0x14;
                 break;
             case Map::Units::UT_E_SWORD:
@@ -135,7 +139,9 @@ namespace Map {
             LAB_00521d1b:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {}
+                if (sVar1 < 0xf) {
+                    return;
+                }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                     (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x14);
@@ -164,7 +170,9 @@ namespace Map {
                     (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x59);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {}
+                if (sVar1 < 0xf) {
+                    return;
+                }
                 _otherX = 0xfa;
                 break;
             default:
@@ -180,7 +188,9 @@ namespace Map {
             case Map::Units::UT_E_ENGINEER:
                 return;
             case Map::Units::UT_A_SWORDSMAN:
-                if (sVar1 < 0xf) {}
+                if (sVar1 < 0xf) {
+                    return;
+                }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                     (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x14);

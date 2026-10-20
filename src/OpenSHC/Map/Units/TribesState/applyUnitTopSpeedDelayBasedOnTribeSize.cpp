@@ -18,105 +18,96 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00524EF0
         void TribesState::applyUnitTopSpeedDelayBasedOnTribeSize(int tribeID, BOOLEnum param_2)
         {
-            int _unitInSelection;
-            int _selectionUnit;
-            UnitIDMovementDistancePair* _nextUnit;
-            int _delayIndex;
-            int iVar1;
-            UnitIDMovementDistancePair* pUVar2;
-            short* _ptrMovementDistance;
-            int _unitSelectionIndex;
-            short _distance;
-            int _foundUnsortedEntry;
-            short _nextUnitID;
-            short* _tribeSize;
-            short _unitID;
-            _tribeSize = &this->tribes[tribeID].size;
-            _unitSelectionIndex = 0;
-            if (*_tribeSize < 40) {
-                /*
-                  For selections (tribes) of size 40 or less
-                 */
-                this->someUnitIDArrayCount = 0;
-                MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    4004, '\0', (void*)((int)(this->someUnitIDMovementDistancePair)));
+            short* _tribeSize = &this->tribes[tribeID].size;
+            int _unitSelectionIndex = 0;
+            /*
+              The original places the big-tribe branch first: it tests the size and jumps
+              away when it is below 40.
+             */
+            if (40 <= *_tribeSize) {
                 if (0 < *_tribeSize) {
-                    /*
-                      Of all units in the selection store unitID and optionally their   movementDistance into an array
-                     */
-                    _ptrMovementDistance = &this->someUnitIDMovementDistancePair[0].movementDistance;
                     do {
-                        _selectionUnit
+                        /*
+                          Set incremental delay on the first 199 units, then the same value
+                          of 199 for the rest
+                         */
+                        int const _unitInSelection
                             = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                                 tribeID, _unitSelectionIndex);
-                        if ((DAT_UnitsState::instance.units[_selectionUnit].logicalState
-                                == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[_selectionUnit].dying == 0)) {
-                            this->someUnitIDArrayCount = this->someUnitIDArrayCount + 1;
-                            /*
-                              sets unitID
-                             */
-                            ((UnitIDMovementDistancePair*)(_ptrMovementDistance + -1))->unitID = (short)_selectionUnit;
-                            if (!param_2) {
-                                *_ptrMovementDistance = DAT_UnitsState::instance.units[_selectionUnit].movementDistance;
-                            }
+                        int iVar1 = _unitSelectionIndex;
+                        if (199 <= _unitSelectionIndex) {
+                            iVar1 = 199;
                         }
+                        DAT_UnitsState::instance.units[_unitInSelection].topSpeedDelayIndex = (short)iVar1;
                         _unitSelectionIndex = _unitSelectionIndex + 1;
-                        _ptrMovementDistance = _ptrMovementDistance + 2;
                     } while (_unitSelectionIndex < *_tribeSize);
                 }
+                return;
+            }
+            /*
+              For selections (tribes) of size 39 or less
+             */
+            this->someUnitIDArrayCount = 0;
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                sizeof(this->someUnitIDMovementDistancePair), '\0', this->someUnitIDMovementDistancePair);
+            if (0 < *_tribeSize) {
+                /*
+                  Of all units in the selection store unitID and optionally their
+                  movementDistance into an array
+                 */
+                UnitIDMovementDistancePair* _entry = this->someUnitIDMovementDistancePair;
                 do {
-                    /*
-                      Do a sort of the array, sort by distance value (low to high)
-                     */
-                    _foundUnsortedEntry = 0;
-                    /*
-                      fixme:reuse: WARNING reuse of parameter
-                     */
-                    tribeID = 0;
-                    if (this->someUnitIDArrayCount == 1 || this->someUnitIDArrayCount + -1 < 0)
-                        break;
-                    pUVar2 = this->someUnitIDMovementDistancePair;
-                    do {
-                        _nextUnit = pUVar2 + 1;
-                        _distance = pUVar2->unitID;
-                        _unitID = pUVar2->movementDistance;
-                        _nextUnitID = pUVar2[1].movementDistance;
-                        if ((!param_2) && (_nextUnitID < _unitID)) {
-                            _foundUnsortedEntry = 1;
-                            pUVar2->unitID = _nextUnit->unitID;
-                            _nextUnit->unitID = _distance;
-                            pUVar2->movementDistance = _nextUnitID;
-                            pUVar2[1].movementDistance = _unitID;
-                        }
-                        tribeID = tribeID + 1;
-                        pUVar2 = _nextUnit;
-                    } while (tribeID < this->someUnitIDArrayCount + -1);
-                } while (_foundUnsortedEntry);
-                _delayIndex = 0;
-                if (0 < this->someUnitIDArrayCount) {
-                    pUVar2 = this->someUnitIDMovementDistancePair;
-                    do {
-                        DAT_UnitsState::instance.units[pUVar2->unitID].topSpeedDelayIndex = (short)_delayIndex;
-                        _delayIndex = _delayIndex + 1;
-                        pUVar2 = pUVar2 + 1;
-                    } while (_delayIndex < this->someUnitIDArrayCount);
-                }
-            } else if (0 < *_tribeSize) {
-                do {
-                    /*
-                      Set incremental delay on first 199 units, then set same value of 199
-                     */
-                    _unitInSelection
+                    int const _selectionUnit
                         = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                             tribeID, _unitSelectionIndex);
-                    iVar1 = _unitSelectionIndex;
-                    if (199 < _unitSelectionIndex) {
-                        iVar1 = 199;
+                    if ((DAT_UnitsState::instance.units[_selectionUnit].logicalState == Map::Units::ULS_NORMAL)
+                        && (DAT_UnitsState::instance.units[_selectionUnit].dying == 0)) {
+                        this->someUnitIDArrayCount = this->someUnitIDArrayCount + 1;
+                        _entry->unitID = (short)_selectionUnit;
+                        if (!param_2) {
+                            _entry->movementDistance
+                                = DAT_UnitsState::instance.units[_selectionUnit].movementDistance;
+                        }
                     }
-                    DAT_UnitsState::instance.units[_unitInSelection].topSpeedDelayIndex = (short)iVar1;
                     _unitSelectionIndex = _unitSelectionIndex + 1;
+                    _entry = _entry + 1;
                 } while (_unitSelectionIndex < *_tribeSize);
+            }
+            int _foundUnsortedEntry;
+            do {
+                /*
+                  Bubble sort of the array by movementDistance, low to high
+                 */
+                _foundUnsortedEntry = 0;
+                int _pairIndex = 0;
+                if (this->someUnitIDArrayCount == 1 || this->someUnitIDArrayCount + -1 < 0) {
+                    break;
+                }
+                UnitIDMovementDistancePair* pUVar2 = this->someUnitIDMovementDistancePair;
+                do {
+                    UnitIDMovementDistancePair* _nextUnit = pUVar2 + 1;
+                    short const _unitID = pUVar2->unitID;
+                    short const _distance = pUVar2->movementDistance;
+                    short const _nextDistance = _nextUnit->movementDistance;
+                    if ((!param_2) && (_nextDistance < _distance)) {
+                        _foundUnsortedEntry = 1;
+                        pUVar2->unitID = _nextUnit->unitID;
+                        _nextUnit->unitID = _unitID;
+                        pUVar2->movementDistance = _nextDistance;
+                        _nextUnit->movementDistance = _distance;
+                    }
+                    _pairIndex = _pairIndex + 1;
+                    pUVar2 = _nextUnit;
+                } while (_pairIndex < this->someUnitIDArrayCount + -1);
+            } while (_foundUnsortedEntry);
+            int _delayIndex = 0;
+            if (0 < this->someUnitIDArrayCount) {
+                UnitIDMovementDistancePair* pUVar2 = this->someUnitIDMovementDistancePair;
+                do {
+                    DAT_UnitsState::instance.units[pUVar2->unitID].topSpeedDelayIndex = (short)_delayIndex;
+                    _delayIndex = _delayIndex + 1;
+                    pUVar2 = pUVar2 + 1;
+                } while (_delayIndex < this->someUnitIDArrayCount);
             }
         }
 
