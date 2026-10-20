@@ -46385,15 +46385,15 @@ SHC_3BB0A8C1_0x005211B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00521210 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00521240 | 80.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00521240 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00521280 | 27.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00521500 | 22.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00521500 | 30.9% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00521690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00521720 | 69.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00521720 | 71.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005217E0 | 46.5% | Reimplemented, asm differs
 
@@ -46505,7 +46505,7 @@ SHC_3BB0A8C1_0x00521A8E | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00521A8F | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00521A90 | 26.1% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00521A90 | 28.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00521E50 | 0.0% | Pending
 
@@ -46771,7 +46771,7 @@ SHC_3BB0A8C1_0x00522150 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522160 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005221A0 | 67.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005221A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005221C0 | 0.0% | Pending
 
@@ -46783,17 +46783,17 @@ SHC_3BB0A8C1_0x00522360 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522390 | 36.7% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522410 | 16.5% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522410 | 53.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005224E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522520 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00522550 | 56.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522550 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522590 | 86.7% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522630 | 30.5% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522630 | 79.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00522720 | 60.4% | Reimplemented, asm differs
 
@@ -46803,9 +46803,9 @@ SHC_3BB0A8C1_0x00522890 | 30.2% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00522950 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005229C0 | 62.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005229C0 | 64.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522B00 | 56.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522B00 | 57.9% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00522BC0 | 100.0% | Reimplemented
 
@@ -46815,9 +46815,9 @@ SHC_3BB0A8C1_0x00522C20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522C50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00522CA0 | 14.5% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522CA0 | 47.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522DD0 | 32.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522DD0 | 42.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00522EF0 | 51.8% | Reimplemented, asm differs
 
@@ -46829,7 +46829,7 @@ SHC_3BB0A8C1_0x00523190 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00523240 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005232E0 | 40.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005232E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005232F0 | 0.0% | Pending
 
@@ -46837,7 +46837,7 @@ SHC_3BB0A8C1_0x00523340 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00523370 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005233A0 | 92.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005233A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005233E0 | 100.0% | Reimplemented
 
@@ -46853,9 +46853,9 @@ SHC_3BB0A8C1_0x005236A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00523730 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00523750 | 72.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00523750 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00523790 | 25.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00523790 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005237F0 | 32.1% | Reimplemented, asm differs
 
@@ -46911,9 +46911,9 @@ SHC_3BB0A8C1_0x00524CA0 | 18.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00524D80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00524E20 | 27.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00524E20 | 93.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00524EF0 | 25.6% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00524EF0 | 39.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00525060 | 0.0% | Pending
 
@@ -46939,11 +46939,11 @@ SHC_3BB0A8C1_0x00525470 | 58.6% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005254C0 | 98.3% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00525790 | 95.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00525790 | 96.8% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00525870 | 95.6% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00525870 | 97.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00525970 | 94.1% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00525970 | 97.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00525A70 | 67.1% | Reimplemented, asm differs
 
@@ -46955,7 +46955,7 @@ SHC_3BB0A8C1_0x00525F20 | 68.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005260B0 | 66.7% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x005261B0 | 57.1% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005261B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005262A0 | 100.0% | Reimplemented
 
@@ -46971,7 +46971,7 @@ SHC_3BB0A8C1_0x00526F00 | 39.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005270F0 | 42.8% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00527330 | 60.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00527330 | 58.4% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00527440 | 58.5% | Reimplemented, asm differs
 
@@ -48875,7 +48875,7 @@ SHC_3BB0A8C1_0x0052A637 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052A638 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052A640 | 77.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0052A640 | 98.4% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052A700 | 42.0% | Reimplemented, asm differs
 
@@ -49149,7 +49149,7 @@ SHC_3BB0A8C1_0x0052B390 | 32.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052B630 | 50.9% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x0052B860 | 80.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0052B860 | 91.2% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052B9A0 | 0.0% | Pending
 
