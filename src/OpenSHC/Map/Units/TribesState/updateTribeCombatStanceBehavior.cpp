@@ -143,90 +143,101 @@ namespace Map {
                     if (this->tribes[tribeID].unitStance == Map::Units::Behavior::USE_AGGRESSIVE) {
                         psVar1 = &this->tribes[tribeID].aggressiveStanceCounter;
                         *psVar1 = *psVar1 + 1;
-                        if (this->tribes[tribeID].aggressiveStanceCounter < 0x3c) {}
-                        _buildingIndex_2 = this->tribes[tribeID].size;
-                        this->tribes[tribeID].aggressiveStanceCounter = 0;
-                        if (0 < _buildingIndex_2) {
-                            iVar5 = 0;
-                            do {
-                                iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
-                                    tribeID, iVar5);
-                                iVar5 = iVar5 + 1;
-                                if (DAT_UnitsState::instance.units[iVar4].logicalState == Map::Units::ULS_NORMAL
-                                    && DAT_UnitsState::instance.units[iVar4].dying == 0
-                                    && DAT_UnitsState::instance.units[iVar4].state.generic
-                                        != Map::Units::States::US_MELEE_ATTACK) {
-                                    switch (DAT_UnitsState::instance.units[iVar4].unitType) {
-                                    case Map::Units::UT_TUNNELER:
-                                    case Map::Units::UT_E_SPEAR:
-                                    case Map::Units::UT_E_PIKE:
-                                    case Map::Units::UT_E_MACE:
-                                    case Map::Units::UT_E_SWORD:
-                                    case Map::Units::UT_E_KNIGHT:
-                                    case Map::Units::UT_E_MONK:
-                                    case Map::Units::UT_S_BATTERINGRAM:
-                                    case Map::Units::UT_A_SLAVE:
-                                    case Map::Units::UT_A_ASSASSIN:
-                                    case Map::Units::UT_A_SWORDSMAN:
-                                        if (DAT_UnitsState::instance.units[iVar4].SA == 0)
-                                            goto LAB_0052ac8d;
+                        /*
+                          The import had this guard with an empty body, so the counter was
+                          reset and the arm entered on every tick. The original's
+                          `cmp ax, 0x3c; jl` skips the whole arm.
+                         */
+                        if (0x3c <= this->tribes[tribeID].aggressiveStanceCounter) {
+                            _buildingIndex_2 = this->tribes[tribeID].size;
+                            this->tribes[tribeID].aggressiveStanceCounter = 0;
+                            if (0 < _buildingIndex_2) {
+                                iVar5 = 0;
+                                do {
+                                    iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
+                                        tribeID, iVar5);
+                                    iVar5 = iVar5 + 1;
+                                    if (DAT_UnitsState::instance.units[iVar4].logicalState == Map::Units::ULS_NORMAL
+                                        && DAT_UnitsState::instance.units[iVar4].dying == 0
+                                        && DAT_UnitsState::instance.units[iVar4].state.generic
+                                            != Map::Units::States::US_MELEE_ATTACK) {
+                                        switch (DAT_UnitsState::instance.units[iVar4].unitType) {
+                                        case Map::Units::UT_TUNNELER:
+                                        case Map::Units::UT_E_SPEAR:
+                                        case Map::Units::UT_E_PIKE:
+                                        case Map::Units::UT_E_MACE:
+                                        case Map::Units::UT_E_SWORD:
+                                        case Map::Units::UT_E_KNIGHT:
+                                        case Map::Units::UT_E_MONK:
+                                        case Map::Units::UT_S_BATTERINGRAM:
+                                        case Map::Units::UT_A_SLAVE:
+                                        case Map::Units::UT_A_ASSASSIN:
+                                        case Map::Units::UT_A_SWORDSMAN:
+                                            if (DAT_UnitsState::instance.units[iVar4].SA == 0)
+                                                goto LAB_0052ac8d;
+                                        }
                                     }
-                                }
-                            } while (iVar5 < this->tribes[tribeID].size);
-                        }
-                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::aggressiveStanceTargetBuildingAtRange,
-                            DAT_PathFindingState::ptr)(_targetUnitID, (int)(15));
-                        if (DAT_PathFindingState::instance.ALG_ResultTile) {
-                            _buildingIndex_2 = DAT_TileMapState::instance
-                                                   .BuildingLayer[DAT_PathFindingState::instance.ALG_ResultTile];
-                            if (!_buildingIndex_2) {
-                                _buildingID = 0;
-                                _unitInstructionType = ((UnitInstructionType)0x25);
-                                _buildingIndex = DAT_PathFindingState::instance.ALG_ResultTile;
-                            } else {
-                                _buildingID = DAT_BuildingsState::instance.buildings[_buildingIndex_2].uid;
-                                _unitInstructionType = ((UnitInstructionType)0x26);
-                                _buildingIndex = (int)_buildingIndex_2;
+                                } while (iVar5 < this->tribes[tribeID].size);
                             }
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
-                                tribeID, _unitInstructionType, _buildingIndex, _buildingID, 0);
+                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::aggressiveStanceTargetBuildingAtRange,
+                                DAT_PathFindingState::ptr)(_targetUnitID, (int)(15));
+                            if (DAT_PathFindingState::instance.ALG_ResultTile) {
+                                _buildingIndex_2 = DAT_TileMapState::instance
+                                                       .BuildingLayer[DAT_PathFindingState::instance.ALG_ResultTile];
+                                if (!_buildingIndex_2) {
+                                    _buildingID = 0;
+                                    _unitInstructionType = ((UnitInstructionType)0x25);
+                                    _buildingIndex = DAT_PathFindingState::instance.ALG_ResultTile;
+                                } else {
+                                    _buildingID = DAT_BuildingsState::instance.buildings[_buildingIndex_2].uid;
+                                    _unitInstructionType = ((UnitInstructionType)0x26);
+                                    _buildingIndex = (int)_buildingIndex_2;
+                                }
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
+                                    tribeID, _unitInstructionType, _buildingIndex, _buildingID, 0);
+                            }
                         }
                     }
                 } else {
                     BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::allUnitsReachedTheirDestination, this)(
                         tribeID);
-                    if (!BVar3) {}
-                    _buildingIndex_2 = this->tribes[tribeID].rallyPointCount;
-                    iVar5 = this->tribes[tribeID].currentRallyPointIndex + 1;
-                    this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                    if (_buildingIndex_2 <= iVar5) {
-                        if (this->tribes[tribeID].isRallyingUnk == -1) {
-                            this->tribes[tribeID].currentRallyPointIndex = 0;
-                            this->tribes[tribeID].isRallyingUnk = 0;
-                        }
-                        iVar5 = 0;
-                    }
-                    if (this->tribes[tribeID].isRallyingUnk != 0) {
-                        x1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][0];
-                        y1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][1];
-                        this->tribes[tribeID].currentRallyPointIndex = (short)iVar5;
-                        UVar2 = DAT_UnitsState::instance.units[_targetUnitID].unitType;
-                        if (UVar2 == Map::Units::UT_E_ARCHER || UVar2 == Map::Units::UT_E_XBOW
-                            || UVar2 == Map::Units::UT_A_ARCHER || UVar2 == Map::Units::UT_A_SLINGER
-                            || UVar2 == Map::Units::UT_A_FIRETHROWER) {
-                            if (0x1b0 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
-                                    tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                    /*
+                      The import had this guard with an empty body; nothing advances the
+                      rally point until the tribe has arrived.
+                     */
+                    if (BVar3) {
+                        _buildingIndex_2 = this->tribes[tribeID].rallyPointCount;
+                        iVar5 = this->tribes[tribeID].currentRallyPointIndex + 1;
+                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                        if (_buildingIndex_2 <= iVar5) {
+                            if (this->tribes[tribeID].isRallyingUnk == -1) {
+                                this->tribes[tribeID].currentRallyPointIndex = 0;
+                                this->tribes[tribeID].isRallyingUnk = 0;
                             }
-                        } else if (UVar2 == Map::Units::UT_A_HARCHER) {
-                            MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, x1, y1, 0, 0);
-                        } else if ((0x60 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance)
-                            || (this->tribes[tribeID].unitStance != Map::Units::Behavior::USE_AGGRESSIVE)) {
-                            MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, x1, y1, 0, 0);
+                            iVar5 = 0;
+                        }
+                        if (this->tribes[tribeID].isRallyingUnk != 0) {
+                            x1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][0];
+                            y1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][1];
+                            this->tribes[tribeID].currentRallyPointIndex = (short)iVar5;
+                            UVar2 = DAT_UnitsState::instance.units[_targetUnitID].unitType;
+                            if (UVar2 == Map::Units::UT_E_ARCHER || UVar2 == Map::Units::UT_E_XBOW
+                                || UVar2 == Map::Units::UT_A_ARCHER || UVar2 == Map::Units::UT_A_SLINGER
+                                || UVar2 == Map::Units::UT_A_FIRETHROWER) {
+                                if (0x1b0 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance) {
+                                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
+                                        tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                                }
+                            } else if (UVar2 == Map::Units::UT_A_HARCHER) {
+                                MACRO_CALL_MEMBER(
+                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                    tribeID, x1, y1, 0, 0);
+                            } else if ((0x60 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance)
+                                || (this->tribes[tribeID].unitStance != Map::Units::Behavior::USE_AGGRESSIVE)) {
+                                MACRO_CALL_MEMBER(
+                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                    tribeID, x1, y1, 0, 0);
+                            }
                         }
                     }
                 }
