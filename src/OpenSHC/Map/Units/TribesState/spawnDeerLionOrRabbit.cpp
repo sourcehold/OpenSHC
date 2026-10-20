@@ -49,8 +49,11 @@ namespace Map {
                 }
                 _rng2 = (uint)(byte)SEC_RNG::instance.currentNumber2;
                 _terrainHeight = DAT_UnitsState::instance.units[_finalTargetUnitID].terrainOrClimbHeight;
-                _unknown = this->tribes[tribeID].herdMinSize;
-                _tribeSize = this->tribes[tribeID].size;
+                /*
+                  Both of these reads are `movzx` in the original, not `movsx`.
+                 */
+                _unknown = (ushort)this->tribes[tribeID].herdMinSize;
+                _tribeSize = (ushort)this->tribes[tribeID].size;
                 _unitX = DAT_UnitsState::instance.units[_finalTargetUnitID].x;
                 _unitY = DAT_UnitsState::instance.units[_finalTargetUnitID].y;
                 if (_tribeSize <= _unknown) {

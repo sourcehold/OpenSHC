@@ -23,7 +23,7 @@ namespace Map {
             _currentTribeID = DAT_CurrentTribeID::instance;
             unitSelectionIndex = 0;
             if (this->tribes[DAT_CurrentTribeID::instance].tribeState != 0
-                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, smallerSize <= iVar3) && 0 < iVar3) {
+                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, iVar3 >= smallerSize) && 0 < iVar3) {
                 do {
                     iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         _currentTribeID, unitSelectionIndex);
