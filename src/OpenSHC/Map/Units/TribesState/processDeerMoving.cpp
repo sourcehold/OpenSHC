@@ -30,14 +30,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052AD50
         void TribesState::processDeerMoving(int tribeID)
         {
-            int sVar2;
-            int SVar3;
-            int iVar5;
             BOOLEnum BVar7;
             int iVar8;
-            int _x10;
-            int _y10;
-            sVar2 = this->tribes[tribeID].selectionTargetUnitID;
+            int sVar2 = this->tribes[tribeID].selectionTargetUnitID;
             /*
               Both coordinates are read before either division: the original has
               `movsx edx, [+0x610]`, `movsx ecx, [+0x612]` and only then the two
@@ -45,8 +40,8 @@ namespace Map {
              */
             short const _unitX = DAT_UnitsState::instance.units[sVar2].x;
             short const _unitY = DAT_UnitsState::instance.units[sVar2].y;
-            _x10 = (int)_unitX / 10;
-            _y10 = (int)_unitY / 10;
+            int _x10 = (int)_unitX / 10;
+            int _y10 = (int)_unitY / 10;
             /*
               The predator sum's second term is read after the marsh tiles, not with the
               first: the original reads 0x1c, then 0x00, then 0x18, and only then
@@ -54,7 +49,7 @@ namespace Map {
              */
             iVar8 = DAT_WildlifeState::instance.grid[_x10][_y10].rockyTiles;
             int _predatorCount = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount;
-            iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
+            int iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
             _predatorCount = _predatorCount + DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
             /*
               A `short`, compared as one: `movzx ecx, word ptr [esi + 0x5c]` then
@@ -104,7 +99,7 @@ namespace Map {
                 }
                 sVar2 = this->tribes[tribeID].predatorNearby;
                 if (!sVar2) {
-                    SVar3 = this->tribes[tribeID].tribeBehaviorType;
+                    int SVar3 = this->tribes[tribeID].tribeBehaviorType;
                     if (SVar3 == (SomeTribeBehaviorType)0) {
                         if (iVar5) {
                             this->tribes[tribeID].wanderIntervalTicks = 200;

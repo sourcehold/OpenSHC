@@ -33,7 +33,6 @@ namespace Map {
             UnitInstructionTypeShort UVar2;
             int _unitID;
             int iVar4;
-            uint _rallyIndex;
             short (*_pRallyPoints)[2];
             int tile;
             short _isRallying;
@@ -45,31 +44,30 @@ namespace Map {
               the starting index is a branch rather than a `setl`
               (`test ax, ax`, `jge`, `mov esi, 1`).
              */
-            if (_isRallying
-                && DAT_GameSynchronyState::instance.currentPlayerSlotID == this->tribes[tribeID].owner) {
-                _rallyIndex = 0;
+            if (_isRallying && DAT_GameSynchronyState::instance.currentPlayerSlotID == this->tribes[tribeID].owner) {
+                uint _rallyIndex = 0;
                 if (_isRallying < 0) {
                     _rallyIndex = 1;
                 }
                 if ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount) {
-                _pRallyPoints = this->tribes[tribeID].rallyPointArray + _rallyIndex;
-                do {
-                    /*
-                      spawn the rally point flag
-                     */
-                    MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(IO::Graphics::GID_FLOATS_NEW,
-                        (int)(((*_pRallyPoints)[0] + DAT_TileMapState::instance.flagAnimationFrame + _rallyIndex
-                                  + (*_pRallyPoints)[1])
-                                % 10
-                            + 0x61),
-                        0x12, -1,
-                        (int)(DAT_ViewportRenderState::instance.translationMatrix[(*_pRallyPoints)[1]].addXgetTile
-                            + (*_pRallyPoints)[0]),
-                        0xa0022);
-                    _rallyIndex = _rallyIndex + 1;
-                    _pRallyPoints = _pRallyPoints + 1;
-                } while ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount);
+                    _pRallyPoints = this->tribes[tribeID].rallyPointArray + _rallyIndex;
+                    do {
+                        /*
+                          spawn the rally point flag
+                         */
+                        MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
+                            DAT_ViewportRenderState::ptr)(IO::Graphics::GID_FLOATS_NEW,
+                            (int)(((*_pRallyPoints)[0] + DAT_TileMapState::instance.flagAnimationFrame + _rallyIndex
+                                      + (*_pRallyPoints)[1])
+                                    % 10
+                                + 0x61),
+                            0x12, -1,
+                            (int)(DAT_ViewportRenderState::instance.translationMatrix[(*_pRallyPoints)[1]].addXgetTile
+                                + (*_pRallyPoints)[0]),
+                            0xa0022);
+                        _rallyIndex = _rallyIndex + 1;
+                        _pRallyPoints = _pRallyPoints + 1;
+                    } while ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount);
                 }
             }
             int iVar5 = 0;
