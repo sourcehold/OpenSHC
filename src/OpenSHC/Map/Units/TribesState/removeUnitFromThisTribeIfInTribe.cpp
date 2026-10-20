@@ -8,6 +8,12 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        /*
+          diff_lea.py reports RLEA here - the original keeps &tribes[tribeID] in a register
+          where we recompute it - but a `Tribe&` for the repeated subscript is not the way
+          to get it: 79.5% -> 58.8% (norm 73.2% -> 58.8%). Measured twice, by quick_diff
+          and by reccmp.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00522630
         void TribesState::removeUnitFromThisTribeIfInTribe(uint unitID, int tribeID)
         {

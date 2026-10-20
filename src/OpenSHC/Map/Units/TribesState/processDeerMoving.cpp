@@ -88,10 +88,13 @@ namespace Map {
                         if (this->tribes[tribeID].wanderIntervalTicks
                             <= this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
                             this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                            sVar2 = this->tribes[tribeID].rallyPointCount;
                             this->tribes[tribeID].wanderIntervalTicks
                                 = (4 - ((byte)SEC_RNG::instance.currentNumber2 & 3)) * 200;
-                            if (sVar2 < 1) {
+                            /*
+                              Compared against the memory operand, not through a local: the
+                              original has `cmp word ptr [..], 0; jg`.
+                             */
+                            if (this->tribes[tribeID].rallyPointCount <= 0) {
                                 MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                                     DAT_WildlifeState::ptr)(tribeID, 5, 0);
                             }

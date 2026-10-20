@@ -55,7 +55,12 @@ namespace Map {
                   Of all units in the selection store unitID and optionally their
                   movementDistance into an array
                  */
-                UnitIDMovementDistancePair* _entry = this->someUnitIDMovementDistancePair;
+                /*
+                  The cursor walks the movementDistance member, not the pair: that is the
+                  anchor the original picks (`lea ebx, [esi + 0xfa412]`, with the unit ID
+                  stored at [ebx - 2]).
+                 */
+                short* _movementDistance = &this->someUnitIDMovementDistancePair[0].movementDistance;
                 do {
                     int const _selectionUnit
                         = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -63,14 +68,13 @@ namespace Map {
                     if ((DAT_UnitsState::instance.units[_selectionUnit].logicalState == Map::Units::ULS_NORMAL)
                         && (DAT_UnitsState::instance.units[_selectionUnit].dying == 0)) {
                         this->someUnitIDArrayCount = this->someUnitIDArrayCount + 1;
-                        _entry->unitID = (short)_selectionUnit;
+                        _movementDistance[-1] = (short)_selectionUnit;
                         if (!param_2) {
-                            _entry->movementDistance
-                                = DAT_UnitsState::instance.units[_selectionUnit].movementDistance;
+                            *_movementDistance = DAT_UnitsState::instance.units[_selectionUnit].movementDistance;
                         }
                     }
                     _unitSelectionIndex = _unitSelectionIndex + 1;
-                    _entry = _entry + 1;
+                    _movementDistance = _movementDistance + 2;
                 } while (_unitSelectionIndex < *_tribeSize);
             }
             int _foundUnsortedEntry;
@@ -83,9 +87,14 @@ namespace Map {
                 if (this->someUnitIDArrayCount == 1 || this->someUnitIDArrayCount + -1 < 0) {
                     break;
                 }
-                UnitIDMovementDistancePair* pUVar2 = this->someUnitIDMovementDistancePair;
+                /*
+                  The cursor walks the *second* element of each pair, which is the anchor
+                  the original picks (diff_anchor.py: `lea eax, [esi + 0xfa414]`, with the
+                  current entry reached as [eax - 4] and [eax - 2]).
+                 */
+                UnitIDMovementDistancePair* _nextUnit = this->someUnitIDMovementDistancePair + 1;
                 do {
-                    UnitIDMovementDistancePair* _nextUnit = pUVar2 + 1;
+                    UnitIDMovementDistancePair* pUVar2 = _nextUnit - 1;
                     short const _unitID = pUVar2->unitID;
                     short const _distance = pUVar2->movementDistance;
                     short const _nextDistance = _nextUnit->movementDistance;
@@ -97,7 +106,7 @@ namespace Map {
                         _nextUnit->movementDistance = _distance;
                     }
                     _pairIndex = _pairIndex + 1;
-                    pUVar2 = _nextUnit;
+                    _nextUnit = _nextUnit + 1;
                 } while (_pairIndex < this->someUnitIDArrayCount + -1);
             } while (_foundUnsortedEntry);
             int _delayIndex = 0;
