@@ -83,11 +83,17 @@ namespace Map {
                 if ((int)x1 < 0) {
                     return (undefined4)(0);
                 }
-                if (399 < (int)x1) {
+                /*
+                  `cmp 0x190; jge`, not `cmp 0x18f; jg`.
+                 */
+                if (400 <= (int)x1) {
                     return (undefined4)(0);
                 }
             }
-            if ((399 < y1) || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0)) {
+            if (399 < y1) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
                 return (undefined4)(0);
             }
             int _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
