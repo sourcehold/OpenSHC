@@ -14,6 +14,23 @@ namespace Map {
 
         using Map::Units::UnitType;
 
+        /*
+          fixme: this function is a chain of tail calls in the original and the
+          decompilation of it is wrong in two places. The UT_E_SWORD arm reaches
+          `iVar5 = 0xad` unconditionally, so for a two-unit selection it plays 0xae, then
+          0xaf, then 0xad where the original plays 0xae alone and returns; the original has
+          three separate blocks, each with its own `ret`, and a selection below three units
+          that is neither one nor two plays nothing. `if (param_1 < 3) {}` is that case.
+          Every `param_1 = <id>;` in front of a playUnitSpeechEffect call is MSVC writing
+          the argument into the incoming parameter slot for a tail call, not a real
+          assignment, and the siege arm's five arms each return rather than falling into
+          the shared block at the end.
+
+          Rebuilding it from those branches was tried and reverted: writing the arms out
+          separately costs 32 points of raw match (46.5% -> 14.5%) because the original
+          shares the play calls through its tail calls, while the normalized match rises
+          (34.4% -> 40.8%). It needs the sharing reproduced, not just the arms corrected.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005217E0
         void TribesState::playUnitSelectionSound(int param_1)
         {
