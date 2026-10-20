@@ -129,7 +129,7 @@ namespace Text {
 
         char* getTextStringInGroupAtOffset(eTextSections offsetIndex, int numInGroup);
 
-        int renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
+        void renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
             int bgr24, int digitSet, BOOL useCurrentXOffsetUnk);
 
         int calcRenderedNumberWidth(int param_1, int param_2);
