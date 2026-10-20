@@ -19,8 +19,18 @@ namespace Map {
             uint _unitID;
             this->clans = 0;
             this->field2_0x8 = 1;
-            DAT_CurrentTribeID::instance = 1;
-            do {
+            /*
+              A `for`, not the original's do-while, because the two `continue`s have to run
+              the increment: the label they replace sat in front of it. The first test is
+              always true, so the two forms are equivalent. This costs 2.9 points
+              (60.0% -> 57.1%) for the entry test the do-while does not have; writing the
+              arms out with a `clearTribe` call in each instead measures worse still
+              (quick_diff 0.6076 against 0.6250), so the `for` stands. The import's
+              `if (0x4e1 < instance) {}` had an empty body, which made this loop run
+              forever.
+             */
+            for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < 1250;
+                DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1) {
                 int _state = this->tribes[DAT_CurrentTribeID::instance].tribeState;
                 int _tribeUnitIndex = 0;
                 if (_state) {
@@ -31,7 +41,7 @@ namespace Map {
                             int _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
                             if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
                                 && _tribeTime)
-                                goto LAB_00527425;
+                                continue;
                         } else {
                             int local_4 = 0;
                             if (0 < _tribeSize) {
@@ -55,17 +65,14 @@ namespace Map {
                                 if (local_4) {
                                     this->clans = this->clans + 1;
                                     this->field2_0x8 = DAT_CurrentTribeID::instance;
-                                    goto LAB_00527425;
+                                    continue;
                                 }
                             }
                         }
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::clearTribe, this)(_tribeID);
                 }
-            LAB_00527425:
-                DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1;
-                if (0x4e1 < DAT_CurrentTribeID::instance) {}
-            } while (true);
+            }
         }
 
     }

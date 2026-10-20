@@ -11,25 +11,27 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522630
         void TribesState::removeUnitFromThisTribeIfInTribe(uint unitID, int tribeID)
         {
-            short* psVar1;
-            uint uVar2;
-            short _size;
-            if (DAT_UnitsState::instance.units[unitID].tribeID == 0) {
-                uVar2 = (int)unitID % 16;
-                if ((ushort)(DAT_UnitSelectionDefinedData::instance.BitMaskHelper[uVar2]
-                        & this->tribes[tribeID].unitSelectionBitMasked[(int)unitID / 16])
-                    == 0) {}
+            /*
+              The import had this guard with an empty body; the original returns. Like
+              removeUnitFromTribe, unitID is divided and taken modulo as a signed int, and
+              the selection-bit test is a 32-bit `test` of a movsx'd field against a
+              movzx'd mask.
+             */
+            if (DAT_UnitsState::instance.units[unitID].tribeID == 0
+                && ((int)this->tribes[tribeID].unitSelectionBitMasked[(int)unitID / 16]
+                       & (int)DAT_UnitSelectionDefinedData::instance.BitMaskHelper[(int)unitID % 16])
+                    == 0) {
+                return;
             }
-            _size = this->tribes[tribeID].size;
+            short const _size = this->tribes[tribeID].size;
             if (0 < _size) {
                 this->tribes[tribeID].size = _size + -1;
             }
             if (this->tribes[tribeID].size <= 0) {
                 this->tribes[tribeID].tribeState = 3;
             }
-            psVar1 = this->tribes[tribeID].unitSelectionBitMasked + ((int)unitID / 16);
-            uVar2 = (int)unitID % 16;
-            *psVar1 = *psVar1 & DAT_UnitSelectionDefinedData::instance.BitMaskHelper2[uVar2];
+            short* psVar1 = this->tribes[tribeID].unitSelectionBitMasked + ((int)unitID / 16);
+            *psVar1 = *psVar1 & DAT_UnitSelectionDefinedData::instance.BitMaskHelper2[(int)unitID % 16];
             if (DAT_UnitsState::instance.units[unitID].tribeID == tribeID) {
                 DAT_UnitsState::instance.units[unitID].selectionTargetUnitID = 0;
                 DAT_UnitsState::instance.units[unitID].tribeID = 0;

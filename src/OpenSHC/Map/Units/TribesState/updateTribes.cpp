@@ -123,8 +123,7 @@ namespace Map {
                     }
                 }
                 DAT_CurrentTribeID::instance = DAT_CurrentTribeID::instance + 1;
-                if (1250 < DAT_CurrentTribeID::instance) {}
-            } while (true);
+            } while ((int)DAT_CurrentTribeID::instance < 1250);
         }
 
     }

@@ -40,31 +40,38 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 && DAT_GameState::instance.mapAndTime.aliveDeerCount
                 && DAT_GameState::instance.mapAndTime.deerCount < 6) {
-                int _counter = 0;
-                while (true) {
-                    _x = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].x;
-                    _y = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].y;
+                /*
+                  One `for` over five spawn candidates, where the import had a `while (true)`
+                  with an `if (4 < _counter) {}` that never left it and a goto back in from
+                  the tile check. The original ends the loop on `cmp ebp, 5; jl`, and spawns
+                  at most one deer before returning.
+                 */
+                for (int _counter = 0; _counter < 5; _counter = _counter + 1) {
                     if (_counter < 4) {
                         _x = (int)DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[_counter].x;
                         _y = (int)DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[_counter].y;
+                    } else {
+                        _x = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].x;
+                        _y = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].y;
                     }
                     BVar1 = MACRO_CALL_MEMBER(
                         Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(_x, _y);
-                    if (BVar1)
-                        break;
-                LAB_00526268:
-                    _counter = _counter + 1;
-                    if (4 < _counter) {}
+                    if (!BVar1) {
+                        continue;
+                    }
+                    int _tile = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile + _x;
+                    if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x50501581U)) {
+                        int const _organismID = DAT_TileMapState::instance.OrganismLayer[_tile];
+                        if (_organismID == 0) {
+                            continue;
+                        }
+                        MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
+                            _organismID);
+                    }
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
+                        Commands::M_MAPPER_DEER, _x, _y, (int)(DAT_TileMapState::instance.HeightLayer[_tile]));
+                    return;
                 }
-                int _tile = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile + _x;
-                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x50501581U)) {
-                    if (DAT_TileMapState::instance.OrganismLayer[_tile] == 0)
-                        goto LAB_00526268;
-                    MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
-                        (int)DAT_TileMapState::instance.OrganismLayer[_tile]);
-                }
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                    Commands::M_MAPPER_DEER, _x, _y, (int)(DAT_TileMapState::instance.HeightLayer[_tile]));
             }
         }
 

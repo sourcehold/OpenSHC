@@ -18,28 +18,30 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052A640
         void TribesState::moveTribeToNearbyClearTile(int param_1)
         {
-            int iVar3;
-            int* piVar4;
-            uint uVar5;
-            uint x1;
-            uint y1;
-            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
-            uVar5 = (uint)DAT_UnitsState::instance.units[sVar1].x;
+            int sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            uint uVar5 = (uint)DAT_UnitsState::instance.units[sVar1].x;
             uint uVar2 = (uint)DAT_UnitsState::instance.units[sVar1].y;
-            piVar4 = &DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[0].y;
-            while (true) {
-                x1 = ((XYPair*)(piVar4 + -1))->x + uVar5;
-                y1 = *piVar4 + uVar2;
-                if (x1 < 400 && y1 < 400 && *(char*)(y1 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + x1) != '\0'
-                    && (iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribePathToDestinationClear, this)(
-                            param_1, uVar5, uVar2, x1, y1),
-                        iVar3 != 0))
-                    break;
-                piVar4 = piVar4 + 2;
-                if (0xb4df43 < (int)piVar4) {}
+            /*
+              The import walked a cursor over the candidate offsets and left the loop's exit
+              test as `if (0xb4df43 < (int)piVar4) {}`, so it fell out of the `while (true)`
+              only through the `break` and then issued a move order with whatever x1/y1 the
+              last candidate had left behind. The original returns without an order when no
+              candidate is reachable. 0xb4df44 is one past field1608_0xcc4[39].y, so the
+              loop runs over all 40 entries.
+             */
+            for (int _candidate = 0; _candidate < 40; _candidate = _candidate + 1) {
+                uint const x1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[_candidate].x + uVar5;
+                uint const y1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[_candidate].y + uVar2;
+                if (x1 <= 399 && y1 <= 399
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] != 0
+                    && MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribePathToDestinationClear, this)(
+                           param_1, uVar5, uVar2, x1, y1)
+                        != 0) {
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
+                        param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                    return;
+                }
             }
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
-                param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
         }
 
     }

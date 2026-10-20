@@ -27,16 +27,30 @@ namespace Map {
                     unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         param_1, unitSelectionIndex);
                     unitSelectionIndex = unitSelectionIndex + 1;
-                    if ((DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL)
-                        && (DAT_UnitsState::instance.units[unitID].dying == 0)) {
-                        if (DAT_UnitsState::instance.units[unitID].usingTeleport != 0) {}
-                        if (DAT_UnitsState::instance.units[unitID].field303_0x413 != 0) {}
-                        if (DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging == 2) {}
-                        if (DAT_UnitsState::instance.units[unitID].state.generic
-                            == Map::Units::States::US_MELEE_ATTACK) {}
-                        bool bVar2 = this->tribes[param_1].unknownBool02 == 0;
-                        BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::computeLadderClimbPath,
-                            DAT_UnitsState::ptr)(unitID, (uint)(bVar2), 0, (int)(bVar2));
+                    /*
+                      The import left four of these six tests as `if (...) {}` with empty
+                      bodies; the original skips the unit on each of them, so they belong
+                      in the one condition.
+                     */
+                    if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[unitID].dying == 0
+                        && DAT_UnitsState::instance.units[unitID].usingTeleport == 0
+                        && DAT_UnitsState::instance.units[unitID].field303_0x413 == 0
+                        && DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging != 2
+                        && DAT_UnitsState::instance.units[unitID].state.generic
+                            != Map::Units::States::US_MELEE_ATTACK) {
+                        /*
+                          Two calls, not one with a computed flag: the original branches on
+                          the tribe flag and pushes the constants in each arm, where
+                          `(uint)(unknownBool02 == 0)` costs a `sete`.
+                         */
+                        if (this->tribes[param_1].unknownBool02 != 0) {
+                            BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::computeLadderClimbPath,
+                                DAT_UnitsState::ptr)(unitID, 0, 0, 0);
+                        } else {
+                            BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::computeLadderClimbPath,
+                                DAT_UnitsState::ptr)(unitID, 1, 0, 1);
+                        }
                         if (BVar1) {
                             DAT_UnitsState::instance.units[unitID].state.generic
                                 = Map::Units::States::US_DEATH_02 | Map::Units::States::US_STAND_UPUnk;
