@@ -15,6 +15,11 @@ namespace Map {
         using AI::Tribes::AITribeType;
         using Map::Units::SomeTribeBehaviorType;
 
+        /*
+          The inner slot-ID guard stays a positive `if` around the claim: inverting it to an
+          early return, which took spawnUnitsIntoNewTribe from 89.4% to 98.3%, costs 2.0
+          points here (75.2% -> 73.2%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005227E0
         int TribesState::createTribeForPlayer(int playerID)
         {

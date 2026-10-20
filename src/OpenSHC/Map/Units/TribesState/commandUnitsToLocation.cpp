@@ -82,14 +82,18 @@ namespace Map {
                         }
                     }
                 } while (_selectionUnitID < this->tribes[tribeID].size);
-                if (!bVar1) {
-                    if ((char)matchUnitSpeeds != '\0') {
-                        this->tribes[tribeID].freeUnitSpeeds = 0;
-                    }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
-                        tribeID, destinationX, destinationY, 0, 0, Map::Units::Instructions::UMSE_0);
-                    return (undefined4)(1);
+                /*
+                  An early return, which is where the original puts its own `xor eax, eax`.
+                 */
+                if (bVar1) {
+                    return (undefined4)(0);
                 }
+                if ((char)matchUnitSpeeds != '\0') {
+                    this->tribes[tribeID].freeUnitSpeeds = 0;
+                }
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
+                    tribeID, destinationX, destinationY, 0, 0, Map::Units::Instructions::UMSE_0);
+                return (undefined4)(1);
             }
             return (undefined4)(0);
         }
