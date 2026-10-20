@@ -20,7 +20,14 @@ namespace Map {
                 return (dword)(0);
             }
             dword _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
-            if (0 < (int)_tribeID) {
+            /*
+              An early return: the original's `jg` skips an inline `xor eax, eax` epilogue
+              here rather than jumping over the whole body to a shared one.
+             */
+            if ((int)_tribeID <= 0) {
+                return (dword)(0);
+            }
+            {
                 this->tribes[_tribeID].tribeType = (AITribeTypeShort)tribeType;
                 this->tribes[_tribeID].someIndex = (short)counter;
                 this->tribes[_tribeID].attackWave = (short)DAT_TroopValueState::instance.attackInfo.inv_count;
@@ -54,7 +61,6 @@ namespace Map {
                 this->tribes[_tribeID].pendingScatterMove = 1;
                 return (dword)(_tribeID);
             }
-            return (dword)(0);
         }
 
     }
