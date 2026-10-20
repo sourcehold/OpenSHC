@@ -1269,6 +1269,16 @@ namespace Map {
                                 UVar4 = DAT_UnitsState::instance.units[iVar14].unitType;
                                 switch (UVar4) {
                                 case Map::Units::UT_TUNNELER:
+                                case Map::Units::UT_E_ARCHER:
+                                case Map::Units::UT_E_XBOW:
+                                case Map::Units::UT_A_ARCHER:
+                                case Map::Units::UT_A_SLINGER:
+                                case Map::Units::UT_A_ASSASSIN:
+                                case Map::Units::UT_A_HARCHER:
+                                case Map::Units::UT_A_FIRETHROWER:
+                                    if (unitInstructionType != (UnitInstructionType)0x23) {
+                                        break;
+                                    }
                                 case Map::Units::UT_E_SPEAR:
                                 case Map::Units::UT_E_PIKE:
                                 case Map::Units::UT_E_MACE:
@@ -1278,23 +1288,17 @@ namespace Map {
                                 case Map::Units::UT_LORD:
                                 case Map::Units::UT_A_SLAVE:
                                 case Map::Units::UT_A_SWORDSMAN:
-                                switchD_0052932a_caseD_5:
-                                    if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                                        || (DAT_GameState::instance.mapAndTime.skirmishStrongWalls == 0))
-                                        goto switchD_0052932a_caseD_3b;
-                                    break;
-                                case Map::Units::UT_E_ARCHER:
-                                case Map::Units::UT_E_XBOW:
-                                case Map::Units::UT_A_ARCHER:
-                                case Map::Units::UT_A_SLINGER:
-                                case Map::Units::UT_A_ASSASSIN:
-                                case Map::Units::UT_A_HARCHER:
-                                case Map::Units::UT_A_FIRETHROWER:
-                                    if (unitInstructionType == (UnitInstructionType)0x23)
-                                        goto switchD_0052932a_caseD_5;
-                                    break;
+                                    if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                                        && DAT_GameState::instance.mapAndTime.skirmishStrongWalls != 0) {
+                                        break;
+                                    }
+                                    /*
+                                      The three groups chain: a ranged unit under
+                                      instruction 0x23 falls into the melee test, and a
+                                      melee unit that passes it falls into the ram arm.
+                                      That is the web of gotos the decompiler printed.
+                                     */
                                 case Map::Units::UT_S_BATTERINGRAM:
-                                switchD_0052932a_caseD_3b:
                                     if (UVar4 == Map::Units::UT_S_BATTERINGRAM) {
                                         if (DAT_UnitsState::instance.units[iVar14]
                                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
@@ -1618,6 +1622,17 @@ namespace Map {
                                     id = id + 1;
                                 }
                                 break;
+                            case Map::Units::UT_S_MANGONEL:
+                            case Map::Units::UT_S_BALLISTA:
+                            case Map::Units::UT_S_FBALLISTA:
+                                if (unitInstructionType == Map::Units::UIT_SHOOT_TARGETUnk) {
+                                    break;
+                                }
+                                DAT_UnitsState::instance.units[iVar12].shootBeforeStop = 10;
+                                /*
+                                  and on into the ranged arm, which is what the
+                                  decompiler's goto back into it said
+                                 */
                             case Map::Units::UT_E_ARCHER:
                             case Map::Units::UT_E_XBOW:
                             case Map::Units::UT_E_ARCHER_DEBUG:
@@ -1625,7 +1640,6 @@ namespace Map {
                             case Map::Units::UT_A_SLINGER:
                             case Map::Units::UT_A_HARCHER:
                             case Map::Units::UT_A_FIRETHROWER:
-                            switchD_005282f6_caseD_16:
                                 if (UVar3 == (UnitState)0x69) {
                                     DAT_UnitsState::instance.units[iVar12].state.generic
                                         = Map::Units::States::US_MOVE_TO_DESTINATION;
@@ -1673,13 +1687,6 @@ namespace Map {
                                     DAT_UnitsState::instance.units[iVar12].shootBeforeStop = 10;
                                 }
                                 break;
-                            case Map::Units::UT_S_MANGONEL:
-                            case Map::Units::UT_S_BALLISTA:
-                            case Map::Units::UT_S_FBALLISTA:
-                                if (unitInstructionType != Map::Units::UIT_SHOOT_TARGETUnk) {
-                                    DAT_UnitsState::instance.units[iVar12].shootBeforeStop = 10;
-                                    goto switchD_005282f6_caseD_16;
-                                }
                             }
                         }
                     } while (_unitTribeIndex < this->tribes[_param_1_tribeID].size);
