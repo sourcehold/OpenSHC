@@ -27,7 +27,13 @@ namespace Map {
         {
             uint _unitID;
             BOOLEnum BVar3;
-            short _percentage = this->tribes[tribeID].selectionTargetUnitID;
+            /*
+              The unit index is its own `int`: the original reaches it with a single
+              `movsx eax, word ptr [esi + 0x5a]`, where sharing the `short` that later holds
+              the percentages costs a `movzx` plus a `movsx`.
+             */
+            int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
+            short _percentage = 0;
             int iVar4 = 0;
             short sVar1 = this->tribes[tribeID].size;
             this->tribes[tribeID].percentageDyingUnk = 0;
@@ -37,13 +43,13 @@ namespace Map {
             this->tribes[tribeID].percentageShootingUnk = 0;
             this->tribes[tribeID].field152_0x2a0 = 0;
             this->tribes[tribeID].percentageSomething = 0;
-            this->tribes[tribeID].movementSpeed = DAT_UnitsState::instance.units[_percentage].movementSpeed;
+            this->tribes[tribeID].movementSpeed = DAT_UnitsState::instance.units[_targetUnitID].movementSpeed;
             int local_8 = 0;
             int _countRangeUnk = 0;
             int _countAttackingUnk = 0;
             int _countMoving = 0;
             int _countDying = 0;
-            this->tribes[tribeID].unitType = DAT_UnitsState::instance.units[_percentage].unitType;
+            this->tribes[tribeID].unitType = DAT_UnitsState::instance.units[_targetUnitID].unitType;
             if (0 < sVar1) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getSpecificUnitFromTribe, this)(

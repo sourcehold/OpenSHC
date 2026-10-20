@@ -36,9 +36,20 @@ namespace Map {
             int tile;
             short _isRallying;
             _isRallying = this->tribes[tribeID].isRallyingUnk;
-            if (_isRallying && this->tribes[tribeID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && (_rallyIndex = (uint)(_isRallying < 0),
-                    (int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount)) {
+            /*
+              Three nested tests, not one chain: the original has three separate forward
+              jumps (0x523a53, 0x523a62, 0x523a7d). The player ID is loaded first and the
+              tribe's owner compared to it (`mov esi, [..]`, `cmp [ebp + 0x2c], esi`), and
+              the starting index is a branch rather than a `setl`
+              (`test ax, ax`, `jge`, `mov esi, 1`).
+             */
+            if (_isRallying
+                && DAT_GameSynchronyState::instance.currentPlayerSlotID == this->tribes[tribeID].owner) {
+                _rallyIndex = 0;
+                if (_isRallying < 0) {
+                    _rallyIndex = 1;
+                }
+                if ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount) {
                 _pRallyPoints = this->tribes[tribeID].rallyPointArray + _rallyIndex;
                 do {
                     /*
@@ -57,6 +68,7 @@ namespace Map {
                     _rallyIndex = _rallyIndex + 1;
                     _pRallyPoints = _pRallyPoints + 1;
                 } while ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount);
+                }
             }
             int iVar5 = 0;
             if (0 < this->tribes[tribeID].size) {

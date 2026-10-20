@@ -46861,7 +46861,7 @@ SHC_3BB0A8C1_0x005237F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00523920 | 90.9% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00523A30 | 41.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00523A30 | 47.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00523B00 | 0.0% | Pending
 
