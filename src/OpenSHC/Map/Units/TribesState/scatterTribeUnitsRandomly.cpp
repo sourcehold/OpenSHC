@@ -33,31 +33,34 @@ namespace Map {
             iVar2 = MACRO_CALL_MEMBER(
                 Map::Navigation::PathFindingState_Func::getComputationalTileIndex, DAT_PathFindingState::ptr)();
             int iVar4 = (int)this->tribes[param_1].size;
-            if (iVar4 * 0x10 + 200 <= iVar2) {
-                if (0 < iVar4) {
-                    do {
-                        iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
-                            param_1, unitSelectionIndex);
-                        unitSelectionIndex = unitSelectionIndex + 1;
-                        if ((DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[iVar2].dying == 0)) {
-                            index = index + 1 + (DAT_UnitsState::instance.units[iVar2].fixedRng & 0xf);
-                            iVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getTileInSearchQueue,
-                                DAT_PathFindingState::ptr)(index);
-                            iVar4 = DAT_ViewportRenderState::instance
-                                        .translationMatrix[DAT_ViewportRenderState::instance
-                                                .tileTranslationMatrix_YComponent[iVar3]]
-                                        .addXgetTile;
-                            DAT_UnitsState::instance.units[iVar2].targetY
-                                = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar3];
-                            DAT_UnitsState::instance.units[iVar2].targetX = (short)iVar3 - (short)iVar4;
-                            DAT_UnitsState::instance.units[iVar2].state.generic = ((UnitStateShort)0xd1);
-                        }
-                    } while (unitSelectionIndex < this->tribes[param_1].size);
-                }
-                return 1;
+            /*
+              An early return, which is where the original puts its own `xor eax, eax`.
+             */
+            if (iVar2 < iVar4 * 0x10 + 200) {
+                return 0;
             }
-            return 0;
+            if (0 < iVar4) {
+                do {
+                    iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
+                        param_1, unitSelectionIndex);
+                    unitSelectionIndex = unitSelectionIndex + 1;
+                    if ((DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL)
+                        && (DAT_UnitsState::instance.units[iVar2].dying == 0)) {
+                        index = index + 1 + (DAT_UnitsState::instance.units[iVar2].fixedRng & 0xf);
+                        iVar3 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getTileInSearchQueue,
+                            DAT_PathFindingState::ptr)(index);
+                        iVar4 = DAT_ViewportRenderState::instance
+                                    .translationMatrix[DAT_ViewportRenderState::instance
+                                            .tileTranslationMatrix_YComponent[iVar3]]
+                                    .addXgetTile;
+                        DAT_UnitsState::instance.units[iVar2].targetY
+                            = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar3];
+                        DAT_UnitsState::instance.units[iVar2].targetX = (short)iVar3 - (short)iVar4;
+                        DAT_UnitsState::instance.units[iVar2].state.generic = ((UnitStateShort)0xd1);
+                    }
+                } while (unitSelectionIndex < this->tribes[param_1].size);
+            }
+            return 1;
         }
 
     }
