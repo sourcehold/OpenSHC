@@ -18,6 +18,10 @@ namespace Map {
         using Map::Units::States::UnitState;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          Its three `short` locals stay narrow: widening all three costs 0.9 points
+          (42.8% -> 41.9%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005270F0
         void TribesState::computeTribePercentages(int tribeID)
         {

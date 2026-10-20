@@ -23,6 +23,10 @@ namespace Map {
         using Commands::MappersEnum;
         using Map::Units::UnitType;
 
+        /*
+          The `short` tribe-size local stays narrow: widening it costs 0.4 points
+          (46.8% -> 46.4%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00525BA0
         dword TribesState::createAnimal(MappersEnum animalType, uint x, uint y, int tile)
         {

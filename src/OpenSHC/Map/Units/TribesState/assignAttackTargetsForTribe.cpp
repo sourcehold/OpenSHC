@@ -27,6 +27,9 @@ namespace Map {
         using Map::Units::States::UnitState;
         using WindowsHelper::Enums::BOOLEnum;
 
+        /*
+          The `bool` flag stays a byte: BOOLEnum costs 0.2 points (44.6% -> 44.4%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005244D0
         undefined4 TribesState::assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType)
         {

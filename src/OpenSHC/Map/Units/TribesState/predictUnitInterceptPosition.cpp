@@ -39,7 +39,7 @@ namespace Map {
             if (_targetTribeMinSpeed < 2) {
                 _targetTribeMinSpeedBounded = 1;
             }
-            short _tribeMinSpeed = this->tribes[DAT_UnitsState::instance.units[unitID].tribeID].minimumMovementSpeed;
+            int _tribeMinSpeed = this->tribes[DAT_UnitsState::instance.units[unitID].tribeID].minimumMovementSpeed;
             int iVar3 = _targetTribeMinSpeedBounded * 4;
             int _tribeMinSpeedBounded = (int)_tribeMinSpeed;
             if (_tribeMinSpeed < 2) {

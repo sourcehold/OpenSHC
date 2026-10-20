@@ -11,6 +11,10 @@ namespace Map {
 
         using Map::Units::UnitLogicState;
 
+        /*
+          Its `short` tribe-size local stays narrow: widening it costs 17.6 points
+          (64.1% -> 46.5%), the largest such loss in the namespace.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x005229C0
         void TribesState::addUnitsToTribeAndComputeMovementSpeed(int playerID, int tribeID)
         {

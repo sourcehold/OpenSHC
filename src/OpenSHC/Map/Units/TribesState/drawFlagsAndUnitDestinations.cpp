@@ -21,6 +21,10 @@ namespace Map {
         using Map::Units::UnitInstructionType;
         using Map::Units::UnitLogicState;
 
+        /*
+          The `short` local stays narrow: widening it costs 3.9 points
+          (41.8% -> 37.9%).
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00523A30
         void TribesState::drawFlagsAndUnitDestinations(int tribeID)
         {
