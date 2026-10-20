@@ -26,10 +26,10 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         /*
-          The two flags stay `bool`, although the original zeroes its own with
-          `xor ebx, ebx` and diff_triage.py's BYTE column counts four byte-sized slots on
-          our side: making them BOOLEnum costs 6.4 points (58.5% -> 52.1%, norm 52.9% ->
-          44.3%).
+          The two flags measure in opposite directions, so only one of them is widened.
+          Both together cost 6.4 points (58.5% -> 52.1%); `bVar2` alone gains 1.1
+          (58.5% -> 59.6%), so `bVar1` stays `bool` despite the original's `xor ebx, ebx`
+          and the byte-sized slot diff_slots.py reports for it at 0x13.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00527440
         void TribesState::spawnQueuedReinforcementWaves()
@@ -43,7 +43,6 @@ namespace Map {
             SiegeUnitCounts* pSVar8;
             int _siegeInfoSubIndex;
             int _playerID;
-            int _nextDestination;
             int _tribeType;
             UnitTypeInt _unitType;
             int _destinationIndexTracker;
@@ -55,9 +54,10 @@ namespace Map {
             int _newCount;
             _tribeType = 0;
             bool bVar1 = false;
+
             _unitType = ((UnitType)0);
             _destinationIndexTracker = 0;
-            bool bVar2 = false;
+            BOOLEnum bVar2 = FALSE;
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
                 && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
@@ -185,7 +185,6 @@ namespace Map {
                                 if (39 < _destinationIndexTracker) {
                                     _destinationIndex = 0;
                                 }
-                                _nextDestination = _destinationIndexTracker + 1;
                                 _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit,
                                     this)((short)_destinationIndexTracker, (undefined4)((int)(_tribeType)),
                                     DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][_destinationIndex]
@@ -195,7 +194,7 @@ namespace Map {
                                     2, (UnitType)((int)(_unitType)), _nUnits);
                                 _newCount = DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19];
                                 this->tribes[_tribeID1].unknownAttackRelatedUpdateCounter = 0x32;
-                                _destinationIndexTracker = _nextDestination;
+                                _destinationIndexTracker = _destinationIndexTracker + 1;
                             } while (_newCount);
                         }
                         _siegeInfoSubIndex = _siegeInfoSubIndex + 1;
@@ -288,7 +287,7 @@ namespace Map {
                                     _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), _playerID,
                                     (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
-                                bVar2 = true;
+                                bVar2 = TRUE;
                                 _destinationIndexTracker = _destinationIndexTracker + 1;
                             }
                             _playerID = _playerID + 1;
@@ -349,7 +348,7 @@ namespace Map {
                                     _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), iVar5,
                                     (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
-                                bVar2 = true;
+                                bVar2 = TRUE;
                                 _destinationIndexTracker = _destinationIndexTracker + 1;
                             }
                             iVar5 = iVar5 + 1;
