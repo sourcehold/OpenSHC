@@ -51,19 +51,32 @@ namespace Map {
                 int sVar3 = DAT_UnitsState::instance.units[iVar6].y;
                 int sVar4 = DAT_UnitsState::instance.units[iVar6].terrainOrClimbHeight;
                 this->tribes[param_1].field_0x288 = this->tribes[param_1].field_0x288 + 1;
-                if (this->tribes[param_1].field_0x288 >= param_2
-                    && (this->tribes[param_1].field_0x288 = 0, 100 <= bVar5)) {
-                    iVar6 = MACRO_CALL_MEMBER(
-                        Map::Units::UnitsState_Func::countLivingNondyingUnitsForPlayer, DAT_UnitsState::ptr)(param_4);
-                    if (iVar6 < param_3) {
-                        if (param_4 == 0x2f) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                                Commands::M_MAPPER_CAMEL, (uint)(sVar2), (uint)(sVar3), (int)(sVar4));
-                        }
-                        return (undefined4)(1);
-                    }
+                /*
+                  Flat guards, not a nested chain. All three tests already had the right
+                  sense; what differed was where the merged `return 0` landed. The
+                  original puts it between the third guard and the success body, so the
+                  first two jump forward into it (`jl 0x23`, `jl 0x15`) and the third
+                  jumps over it (`jl 0xa`) - which is what early returns give. Nested,
+                  MSVC moves the block to the end of the function and the third test
+                  inverts to a `jge` reaching back for it.
+                 */
+                if (this->tribes[param_1].field_0x288 < param_2) {
+                    return (undefined4)(0);
                 }
-                return (undefined4)(0);
+                this->tribes[param_1].field_0x288 = 0;
+                if (bVar5 < 100) {
+                    return (undefined4)(0);
+                }
+                iVar6 = MACRO_CALL_MEMBER(
+                    Map::Units::UnitsState_Func::countLivingNondyingUnitsForPlayer, DAT_UnitsState::ptr)(param_4);
+                if (iVar6 >= param_3) {
+                    return (undefined4)(0);
+                }
+                if (param_4 == 0x2f) {
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
+                        Commands::M_MAPPER_CAMEL, (uint)(sVar2), (uint)(sVar3), (int)(sVar4));
+                }
+                return (undefined4)(1);
             }
             return (undefined4)(0);
         }

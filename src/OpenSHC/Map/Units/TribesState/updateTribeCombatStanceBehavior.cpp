@@ -146,8 +146,65 @@ namespace Map {
         LAB_0052aa77:
             psVar1 = (short*)&this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
             *psVar1 = *psVar1 + 1;
-            if (0x32 < this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
-                if (this->tribes[tribeID].isRallyingUnk == 0) {
+            /*
+              Signed, and sixteen bits wide. The field is a ushort, so testing it directly
+              gives an unsigned `jbe`; the original has `movzx eax, word ptr [esi + 0x56]`,
+              `cmp ax, 0x32` and a signed `jle`. A `short` local reproduces both - the load
+              may zero-extend because nothing above bit 15 is read, and the test stays
+              signed. The field type is left alone: 43 places read it, most outside this
+              namespace.
+             */
+            short const _attackCounter = (short)this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
+            if (0x32 < _attackCounter) {
+                /*
+                  The rallying arm comes first: `xor ebx, ebx; cmp word ptr [esi + 0x22e],
+                  bx; je 0x109` jumps away when the flag is clear, so the tribe-is-rallying
+                  body is the fall-through and the aggressive-stance body goes in the far
+                  block.
+                 */
+                if (this->tribes[tribeID].isRallyingUnk) {
+                    BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::allUnitsReachedTheirDestination, this)(
+                        tribeID);
+                    /*
+                      The import had this guard with an empty body; nothing advances the
+                      rally point until the tribe has arrived.
+                     */
+                    if (BVar3) {
+                        _buildingIndex_2 = this->tribes[tribeID].rallyPointCount;
+                        iVar5 = this->tribes[tribeID].currentRallyPointIndex + 1;
+                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                        if (_buildingIndex_2 <= iVar5) {
+                            if (this->tribes[tribeID].isRallyingUnk == -1) {
+                                this->tribes[tribeID].currentRallyPointIndex = 0;
+                                this->tribes[tribeID].isRallyingUnk = 0;
+                            }
+                            iVar5 = 0;
+                        }
+                        if (this->tribes[tribeID].isRallyingUnk != 0) {
+                            x1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][0];
+                            y1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][1];
+                            this->tribes[tribeID].currentRallyPointIndex = (short)iVar5;
+                            UVar2 = DAT_UnitsState::instance.units[_targetUnitID].unitType;
+                            if (UVar2 == Map::Units::UT_E_ARCHER || UVar2 == Map::Units::UT_E_XBOW
+                                || UVar2 == Map::Units::UT_A_ARCHER || UVar2 == Map::Units::UT_A_SLINGER
+                                || UVar2 == Map::Units::UT_A_FIRETHROWER) {
+                                if (0x1b0 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance) {
+                                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
+                                        tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                                }
+                            } else if (UVar2 == Map::Units::UT_A_HARCHER) {
+                                MACRO_CALL_MEMBER(
+                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                    tribeID, x1, y1, 0, 0);
+                            } else if ((0x60 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance)
+                                || (this->tribes[tribeID].unitStance != Map::Units::Behavior::USE_AGGRESSIVE)) {
+                                MACRO_CALL_MEMBER(
+                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                    tribeID, x1, y1, 0, 0);
+                            }
+                        }
+                    }
+                } else {
                     if (this->tribes[tribeID].unitStance == Map::Units::Behavior::USE_AGGRESSIVE) {
                         psVar1 = &this->tribes[tribeID].aggressiveStanceCounter;
                         *psVar1 = *psVar1 + 1;
@@ -203,48 +260,6 @@ namespace Map {
                                 }
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
                                     tribeID, _unitInstructionType, _buildingIndex, _buildingID, 0);
-                            }
-                        }
-                    }
-                } else {
-                    BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::allUnitsReachedTheirDestination, this)(
-                        tribeID);
-                    /*
-                      The import had this guard with an empty body; nothing advances the
-                      rally point until the tribe has arrived.
-                     */
-                    if (BVar3) {
-                        _buildingIndex_2 = this->tribes[tribeID].rallyPointCount;
-                        iVar5 = this->tribes[tribeID].currentRallyPointIndex + 1;
-                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                        if (_buildingIndex_2 <= iVar5) {
-                            if (this->tribes[tribeID].isRallyingUnk == -1) {
-                                this->tribes[tribeID].currentRallyPointIndex = 0;
-                                this->tribes[tribeID].isRallyingUnk = 0;
-                            }
-                            iVar5 = 0;
-                        }
-                        if (this->tribes[tribeID].isRallyingUnk != 0) {
-                            x1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][0];
-                            y1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][1];
-                            this->tribes[tribeID].currentRallyPointIndex = (short)iVar5;
-                            UVar2 = DAT_UnitsState::instance.units[_targetUnitID].unitType;
-                            if (UVar2 == Map::Units::UT_E_ARCHER || UVar2 == Map::Units::UT_E_XBOW
-                                || UVar2 == Map::Units::UT_A_ARCHER || UVar2 == Map::Units::UT_A_SLINGER
-                                || UVar2 == Map::Units::UT_A_FIRETHROWER) {
-                                if (0x1b0 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance) {
-                                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
-                                        tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
-                                }
-                            } else if (UVar2 == Map::Units::UT_A_HARCHER) {
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                    tribeID, x1, y1, 0, 0);
-                            } else if ((0x60 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance)
-                                || (this->tribes[tribeID].unitStance != Map::Units::Behavior::USE_AGGRESSIVE)) {
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                    tribeID, x1, y1, 0, 0);
                             }
                         }
                     }

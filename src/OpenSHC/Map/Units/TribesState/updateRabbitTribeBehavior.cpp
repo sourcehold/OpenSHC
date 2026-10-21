@@ -111,6 +111,15 @@ namespace Map {
                           only for the index, `movsx eax, ax`. An `int` local compares
                           `cmp eax, edx` and loses the pair. The `jle` is still signed, so
                           a negative count does not wrap into a huge index.
+
+                          This is the only local here that wants narrowing, and the
+                          reasoning does not carry to its neighbours. diff_inv_jcc.py
+                          still reports `cmp ax, dx` against our `cmp eax, edx` for the
+                          predator flag at the top of the function, and the original
+                          really does test that one sixteen bits wide too - but making it
+                          a `short` measures 63.0 -> 43.5%. Tested alone, so it is the
+                          predator flag specifically, not the attack counter it was first
+                          bundled with. Leave it as an `int` and ignore the hint.
                          */
                         _rallyPointCount = _tb->tribes[0].rallyPointCount;
                         if (0 < _rallyPointCount) {
