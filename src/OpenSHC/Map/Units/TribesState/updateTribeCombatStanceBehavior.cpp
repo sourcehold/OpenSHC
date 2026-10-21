@@ -48,7 +48,36 @@ namespace Map {
             UnitInstructionType _unitInstructionType;
             _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
             _buildingIndex_2 = this->tribes[tribeID].someUnitID;
-            if (!_buildingIndex_2) {
+            /*
+              The non-zero arm comes first. The original tests the id sixteen bits wide
+              and skips forward when it is zero - `test ax, ax; je 0x8d` - so the block
+              that runs when the tribe still has a target unit is the fall-through. Written
+              the other way round (`if (!id)`) that whole 25-instruction block, down to the
+              UIT_UNIT_ATTACK_UNIT call, is emitted past the stance loop and every branch
+              in it is displaced.
+             */
+            if (_buildingIndex_2) {
+                iVar5 = (int)_buildingIndex_2;
+                if (DAT_UnitsState::instance.units[iVar5].uid == this->tribes[tribeID].someUnitUID) {
+                    if ((int)DAT_UnitsState::instance.units[iVar5].destinationX_2Unk
+                            + DAT_ViewportRenderState::instance
+                                .translationMatrix[DAT_UnitsState::instance.units[iVar5].destinationY_2Unk]
+                                .addXgetTile
+                        == this->tribes[tribeID].someTile2) {
+                        _buildingIndex_2 = this->tribes[tribeID].field166_0x2be;
+                        if (_buildingIndex_2) {
+                            this->tribes[tribeID].field166_0x2be = _buildingIndex_2 + -1;
+                            goto LAB_0052aa77;
+                        }
+                        if (DAT_UnitsState::instance.units[iVar5].tile == this->tribes[tribeID].someTile)
+                            goto LAB_0052aa77;
+                    }
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
+                        tribeID, Map::Units::UIT_UNIT_ATTACK_UNIT, iVar5, this->tribes[tribeID].someUnitUID, 1);
+                } else {
+                    this->tribes[tribeID].someUnitID = 0;
+                }
+            } else {
                 if (this->tribes[tribeID].unitStance == Map::Units::Behavior::USE_AGGRESSIVE) {
                     local_c = 0;
                     do {
@@ -87,27 +116,6 @@ namespace Map {
                         }
                         local_c = local_c + 1;
                     } while (local_c < 10);
-                }
-            } else {
-                iVar5 = (int)_buildingIndex_2;
-                if (DAT_UnitsState::instance.units[iVar5].uid == this->tribes[tribeID].someUnitUID) {
-                    if ((int)DAT_UnitsState::instance.units[iVar5].destinationX_2Unk
-                            + DAT_ViewportRenderState::instance
-                                .translationMatrix[DAT_UnitsState::instance.units[iVar5].destinationY_2Unk]
-                                .addXgetTile
-                        == this->tribes[tribeID].someTile2) {
-                        _buildingIndex_2 = this->tribes[tribeID].field166_0x2be;
-                        if (_buildingIndex_2) {
-                            this->tribes[tribeID].field166_0x2be = _buildingIndex_2 + -1;
-                            goto LAB_0052aa77;
-                        }
-                        if (DAT_UnitsState::instance.units[iVar5].tile == this->tribes[tribeID].someTile)
-                            goto LAB_0052aa77;
-                    }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
-                        tribeID, Map::Units::UIT_UNIT_ATTACK_UNIT, iVar5, this->tribes[tribeID].someUnitUID, 1);
-                } else {
-                    this->tribes[tribeID].someUnitID = 0;
                 }
             }
             goto LAB_0052aa77;
