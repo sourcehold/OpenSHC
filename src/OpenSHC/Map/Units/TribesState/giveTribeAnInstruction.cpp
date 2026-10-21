@@ -162,6 +162,28 @@ namespace Map {
               0x1c. The two slots still over are one use each, which makes them compiler
               temporaries for argument shuffling rather than locals this file can drop.
              */
+            /*
+              Declaration order is a dead end here, and this can be shown rather than
+              measured, so do not run perm_decls.py over this run. The frame matches, so
+              diff_slots.py reports the same seven local slots on both sides - but the
+              access counts per slot are
+
+                original   6, 9, 10, 14, 24, 25, 53   (total 141)
+                ours       6, 14, 19, 21, 25, 29, 32  (total 146)
+
+              and reordering declarations only permutes which slot carries which count. The
+              two multisets are not equal, so no order can make them agree. What differs is
+              the distribution: the original's hottest local takes 53 accesses - from the
+              prologue that slot is its `id` copy, `mov edi, [esp + 0x38]` at 0x527ca6 then
+              `mov [esp + 0x10], edi` at 0x527cb0 - where ours tops out at 32, and its three
+              zeroed counters take 9, 10 and 14 against our 19, 21 and 29. The original
+              holds those values in registers across stretches where we spill them, which is
+              register allocation and not something declaration order reaches.
+
+              The obvious-looking repair does not exist either: our `iVar11` and `uVar13` are
+              not further copies of `id` that could be merged into one hot local, they are
+              the decompiler's general scratch, reassigned at fifteen and twelve sites.
+             */
             _tribeSize = _tribe.size;
             _param_4_unitUID_Y_copy = unitUID;
             _ramOrHorse = 0;
