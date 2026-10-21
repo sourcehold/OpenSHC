@@ -29,6 +29,16 @@ namespace Map {
                     == 0) {
                 return;
             }
+            /*
+              The base is NOT taken once here, although the original does take it
+              (`lea ebp, [eax + ecx]`) and read the size, the tribe state and the
+              target unit through it as `[ebp + 0x5c]`, `[ebp + 0x40]` and `[ebp + 0x5a]`.
+              Mirroring that - shifted TribesState pointer, bitmask accesses left on the
+              subscript where the original also keeps them - costs 34.4 points
+              (79.5% -> 45.1%). The same change is worth +11.8 in trimTribeToSize, which
+              differs in having only the two size reads on the base; here a second
+              addressing base is live for the bitmask and the two fight over registers.
+             */
             short const _size = this->tribes[tribeID].size;
             if (0 < _size) {
                 this->tribes[tribeID].size = _size + -1;

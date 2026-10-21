@@ -23,12 +23,17 @@ namespace Map {
             _currentTribeID = DAT_CurrentTribeID::instance;
             unitSelectionIndex = 0;
             /*
-              The size stays a repeated subscript. The original does read it through a base
-              it takes once (`lea ebp, [eax + edi]` at 0x522f0b), but hoisting a pointer for
-              it costs 1.2 points (54.1% -> 52.9%).
+              The size is read through a base taken once, which is what the original does
+              (`lea ebp, [eax + edi]` at 0x522f0b, then `[ebp + 0x5c]`); the tribeState test
+              above it stays on the subscript, where the original has
+              `cmp word ptr [eax + edi + 0x40], si`. Hoisting a pointer to the size field
+              itself was tried earlier and cost 1.2 points - that gives `[ptr]` with no
+              displacement, not the `+0x5c` the original uses.
              */
+            TribesState* const _tb
+                = (TribesState*)((char*)this + DAT_CurrentTribeID::instance * sizeof(Tribe));
             if (this->tribes[DAT_CurrentTribeID::instance].tribeState != 0
-                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, iVar3 >= smallerSize)
+                && (iVar3 = (int)_tb->tribes[0].size, iVar3 >= smallerSize)
                 && 0 < iVar3) {
                 do {
                     iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -41,7 +46,7 @@ namespace Map {
                         && smallerSize <= unitSelectionIndex) {
                         *pUVar1 = Map::Units::ULS_REMOVE;
                     }
-                } while (unitSelectionIndex < this->tribes[_currentTribeID].size);
+                } while (unitSelectionIndex < _tb->tribes[0].size);
             }
         }
 
