@@ -287,26 +287,41 @@ namespace Map {
                             continue;
                         DAT_UnitsState::instance.units[_unitID_0x04]._someX_2 = 0;
                         DAT_UnitsState::instance.units[_unitID_0x04]._someY_2 = 0;
+                        /*
+                          Arm order from the dispatch at 0x52a258: five dword entries and a
+                          0x49-entry byte index table at 0x52a26c, indexed by `unitType -
+                          5`. By address the arms run 0x527eac (mangonel, ballista,
+                          fire ballista), 0x527efd (the six ranged types), 0x527f4b (the
+                          eleven melee types) and 0x527f6d (catapult, trebuchet), so the
+                          siege pair the import had third is really last and the mangonel
+                          group it had last is first.
+
+                          LAB_00527ee1 sits inside the mangonel arm's tail, which is why
+                          the ranged arm's `goto` is a backward jump in the original
+                          (0x527efd to 0x527ee1). With that arm moved to the front the
+                          label block needs an explicit `break` - the original ends it with
+                          `jmp 0x527fab`, the switch's exit - or the melee labels below
+                          would be fallen into.
+                         */
                         switch (DAT_UnitsState::instance.units[_unitID_0x04].unitType) {
-                        case Map::Units::UT_TUNNELER:
-                        case Map::Units::UT_E_SPEAR:
-                        case Map::Units::UT_E_PIKE:
-                        case Map::Units::UT_E_MACE:
-                        case Map::Units::UT_E_SWORD:
-                        case Map::Units::UT_E_KNIGHT:
-                        case Map::Units::UT_E_MONK:
-                        case Map::Units::UT_LORD:
-                        case Map::Units::UT_A_SLAVE:
-                        case Map::Units::UT_A_ASSASSIN:
-                        case Map::Units::UT_A_SWORDSMAN:
-                            /*
-                              melee units
-                             */
-                            if (DAT_UnitsState::instance.units[iVar11].unitType != Map::Units::UT_ANTELOPESHDEER
-                                && (param_5 != 1
-                                    || (DAT_UnitsState::instance.units[iVar11].state.generic
-                                        != Map::Units::States::US_MELEE_ATTACK))) {
-                                id = id + 1;
+                        case Map::Units::UT_S_MANGONEL:
+                        case Map::Units::UT_S_BALLISTA:
+                        case Map::Units::UT_S_FBALLISTA:
+                            DAT_UnitsState::instance.units[_unitID_0x04].targetingType
+                                = Map::Units::UIT_UNIT_ATTACK_UNIT;
+                            DAT_UnitsState::instance.units[_unitID_0x04]
+                                .targetedUnitID__OR__engineerMannedSiegeEngineRef = _param_3_id_x_tile_buildingID_copy;
+                            DAT_UnitsState::instance.units[_unitID_0x04]
+                                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
+                                = unitUID;
+                            DAT_UnitsState::instance.units[_unitID_0x04].field283_0x3f8 = 0;
+                            MACRO_CALL_MEMBER(
+                                Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
+                                DAT_UnitsState::ptr)(_unitID_0x04);
+                            DAT_UnitsState::instance.units[_unitID_0x04].shootBeforeStop = 10;
+                        LAB_00527ee1:
+                            if (DAT_UnitsState::instance.units[iVar11].unitType == Map::Units::UT_RABBIT) {
+                                this->tribes[tribeID].containsRabbit = 1;
                             }
                             break;
                         case Map::Units::UT_E_ARCHER:
@@ -337,6 +352,27 @@ namespace Map {
                                 Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                                 DAT_UnitsState::ptr)(_unitID_0x04);
                             goto LAB_00527ee1;
+                        case Map::Units::UT_TUNNELER:
+                        case Map::Units::UT_E_SPEAR:
+                        case Map::Units::UT_E_PIKE:
+                        case Map::Units::UT_E_MACE:
+                        case Map::Units::UT_E_SWORD:
+                        case Map::Units::UT_E_KNIGHT:
+                        case Map::Units::UT_E_MONK:
+                        case Map::Units::UT_LORD:
+                        case Map::Units::UT_A_SLAVE:
+                        case Map::Units::UT_A_ASSASSIN:
+                        case Map::Units::UT_A_SWORDSMAN:
+                            /*
+                              melee units
+                             */
+                            if (DAT_UnitsState::instance.units[iVar11].unitType != Map::Units::UT_ANTELOPESHDEER
+                                && (param_5 != 1
+                                    || (DAT_UnitsState::instance.units[iVar11].state.generic
+                                        != Map::Units::States::US_MELEE_ATTACK))) {
+                                id = id + 1;
+                            }
+                            break;
                         case Map::Units::UT_S_CATAPULT:
                         case Map::Units::UT_S_TREBUCHET:
                             DAT_UnitsState::instance.units[_unitID_0x04].field253_0x3c5 = 5;
@@ -348,25 +384,6 @@ namespace Map {
                             DAT_UnitsState::instance.units[_unitID_0x04].unkAttackRelated = 0xb;
                             DAT_UnitsState::instance.units[_unitID_0x04].shootBeforeStop = 10;
                             break;
-                        case Map::Units::UT_S_MANGONEL:
-                        case Map::Units::UT_S_BALLISTA:
-                        case Map::Units::UT_S_FBALLISTA:
-                            DAT_UnitsState::instance.units[_unitID_0x04].targetingType
-                                = Map::Units::UIT_UNIT_ATTACK_UNIT;
-                            DAT_UnitsState::instance.units[_unitID_0x04]
-                                .targetedUnitID__OR__engineerMannedSiegeEngineRef = _param_3_id_x_tile_buildingID_copy;
-                            DAT_UnitsState::instance.units[_unitID_0x04]
-                                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
-                                = unitUID;
-                            DAT_UnitsState::instance.units[_unitID_0x04].field283_0x3f8 = 0;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
-                                DAT_UnitsState::ptr)(_unitID_0x04);
-                            DAT_UnitsState::instance.units[_unitID_0x04].shootBeforeStop = 10;
-                        LAB_00527ee1:
-                            if (DAT_UnitsState::instance.units[iVar11].unitType == Map::Units::UT_RABBIT) {
-                                this->tribes[tribeID].containsRabbit = 1;
-                            }
                         }
                     } while (_unitTribeIndex < this->tribes[tribeID].size);
                     /*
