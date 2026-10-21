@@ -54,8 +54,6 @@ namespace Map {
             UnitTypeShort UVar2;
             int _firstUnitID;
             int _navArea;
-            uint _one;
-            uint _one2;
             uint _someUnitCanClimb;
             dword _area3;
             int iVar7;
@@ -122,10 +120,10 @@ namespace Map {
                         (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
                         (uint)(DAT_UnitsState::instance.units[_targetUnitID].y));
                     if (!_navArea) {
-                        _one = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyMoveCommandOrRallyCommandToTribe,
-                            this)(tribeID, (undefined4)((int)(x1)), (undefined4)((int)(y1)),
-                            (undefined4)((int)(rallyBool)), storeAsRallyPoint);
-                        return (undefined4)(_one);
+                        return (undefined4)(MACRO_CALL_MEMBER(
+                            Map::Units::TribesState_Func::applyMoveCommandOrRallyCommandToTribe, this)(tribeID,
+                            (undefined4)((int)(x1)), (undefined4)((int)(y1)), (undefined4)((int)(rallyBool)),
+                            storeAsRallyPoint));
                     }
                     _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
                     _bool1 = 1;
@@ -133,10 +131,10 @@ namespace Map {
                 } else {
                     _area_2 = _targetUnitArea;
                     if (!_targetUnitArea) {
-                        _one2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyMoveCommandOrRallyCommandToTribe,
-                            this)(tribeID, (undefined4)((int)(x1)), (undefined4)((int)(y1)),
-                            (undefined4)((int)(rallyBool)), storeAsRallyPoint);
-                        return (undefined4)(_one2);
+                        return (undefined4)(MACRO_CALL_MEMBER(
+                            Map::Units::TribesState_Func::applyMoveCommandOrRallyCommandToTribe, this)(tribeID,
+                            (undefined4)((int)(x1)), (undefined4)((int)(y1)), (undefined4)((int)(rallyBool)),
+                            storeAsRallyPoint));
                     }
                 }
                 /*

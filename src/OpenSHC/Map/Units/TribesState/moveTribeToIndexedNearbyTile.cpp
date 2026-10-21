@@ -26,10 +26,21 @@ namespace Map {
             uVar7 = (uint)DAT_UnitsState::instance.units[sVar1].x;
             int iVar2 = (int)this->tribes[param_1].someIndex;
             /*
-              Only the remainder is named. The original divides once, with `cdq`, `mov ecx,
-              0x28`, `idiv ecx`, and the unreachable arm returns the quotient that same
-              instruction left in EAX; naming the quotient in a local of its own turns the
-              division into a reciprocal multiply and costs a stack slot.
+              The division here will not match from this direction, and naming the
+              quotient is not the lever. The original divides once - `cdq`, `mov ecx,
+              0x28`, `idiv ecx` - and the unreachable arm returns the quotient that same
+              instruction left in EAX. Ours emits a reciprocal multiply instead:
+              `mov eax, 0x66666667`, `imul`, `sar edx, 4`, `shr`, four `add`s, a `sub`.
+
+              Naming the quotient in a local of its own, so that MSVC can see both halves
+              are wanted, does not help: measured 45.9% -> 45.9%, and the reciprocal
+              multiply is still there. MSVC1400 under /O2 turns division by any literal
+              constant into a reciprocal multiply regardless of whether the remainder is
+              also needed, so no arrangement of `/ 40` and `% 40` will produce an `idiv`.
+              For the original to have one, its divisor cannot have been a literal in the
+              source - something that reads 40 from memory, or a named value the compiler
+              could not fold. That is the thing to find; it is not a statement-order or
+              local-naming problem.
              */
             int iVar5 = iVar2 % 40;
             if (iVar5 <= 0) {
