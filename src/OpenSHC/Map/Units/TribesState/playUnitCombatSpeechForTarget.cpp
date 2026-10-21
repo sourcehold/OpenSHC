@@ -29,16 +29,23 @@ namespace Map {
             int _xDifference;
             int _otherY;
             int sfxOffsetInArray;
-            TribesState* _ptrCurrentSelectionID;
+            /*
+              This is the selected-unit count the majority lookup writes back, not a
+              pointer. The decompiler typed it `TribesState*` because the import assigned
+              `this` to it before the call - which the original never does: it passes the
+              slot's address with `lea eax, [esp + 0x10]; push eax` and stores nothing into
+              it first. That assignment is what made us spill `this`
+              (`mov dword ptr [esp + 0x14], edi`) where the original just keeps it in ebx.
+             */
+            int _selectedCount;
             uint _actionID;
             int _distance;
-            TribesState* _ptrCurrentSelectionID_2;
-            _ptrCurrentSelectionID = this;
+            int _selectedCount_2;
             _otherUnitID
                 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
-            _ptrptrCurrentSelectionID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                this)(selectionID, (int*)&_ptrCurrentSelectionID);
-            _ptrCurrentSelectionID_2 = _ptrCurrentSelectionID;
+            _ptrptrCurrentSelectionID = MACRO_CALL_MEMBER(
+                Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(selectionID, &_selectedCount);
+            _selectedCount_2 = _selectedCount;
             /*
               An `int`, not a `short`. The original reads the size once,
               `movsx ebp, word ptr [edi + 0x1667fd4]` at 0x521abc, and keeps the
@@ -126,11 +133,11 @@ namespace Map {
                 if (_ptrptrCurrentSelectionID != Map::Units::UT_A_HARCHER) {
                     return;
                 }
-                if (_ptrCurrentSelectionID == (TribesState*)0x1) {
+                if (_selectedCount == 1) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
                     sfxOffsetInArray = 0xea;
-                } else if ((int)_ptrCurrentSelectionID < 5) {
+                } else if (_selectedCount < 5) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
                     sfxOffsetInArray = 0xeb;
@@ -151,20 +158,19 @@ namespace Map {
                     (int)DAT_UnitsState::instance.units[_otherUnitID].y, 0x59);
                 return;
             case Map::Units::UT_E_KNIGHT:
-                if (_ptrCurrentSelectionID == (TribesState*)0x1) {
+                if (_selectedCount == 1) {
                     _otherX = 0x56;
                 LAB_00521c6f:
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                         (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                         (int)(DAT_UnitsState::instance.units[_otherUnitID].y), _otherX);
                 } else {
-                    if ((_ptrCurrentSelectionID == (TribesState*)0x2)
-                        || (_ptrCurrentSelectionID == (TribesState*)0x3)) {
+                    if ((_selectedCount == 2) || (_selectedCount == 3)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                             (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                             (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x57);
                     }
-                    if (3 < (int)_ptrCurrentSelectionID_2) {
+                    if (3 < _selectedCount_2) {
                         _otherX = 0x58;
                         goto LAB_00521c6f;
                     }
@@ -198,12 +204,12 @@ namespace Map {
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x11);
                 return;
             case Map::Units::UT_E_SWORD:
-                if (_ptrCurrentSelectionID == (TribesState*)0x1) {
+                if (_selectedCount == 1) {
                     _otherX = 0xad;
-                } else if (_ptrCurrentSelectionID == (TribesState*)0x2) {
+                } else if (_selectedCount == 2) {
                     _otherX = 0xae;
                 } else {
-                    if ((int)_ptrCurrentSelectionID < 3)
+                    if (_selectedCount < 3)
                         goto LAB_00521d1b;
                     _otherX = 0xaf;
                 }
