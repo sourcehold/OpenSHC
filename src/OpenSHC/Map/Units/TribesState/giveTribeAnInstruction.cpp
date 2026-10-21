@@ -46,6 +46,27 @@ namespace Map {
           gynt: unitID and x and y and id are the target of the instruction   decompilerscript: committed: 2025-01-30
           21:57:43.216000
          */
+        /*
+          All thirteen switch dispatches in this function have been checked against their
+          tables, so this does not need redoing. They are at 0x52a1e8, 0x52a258, 0x52a2b8,
+          0x52a308, 0x52a368, 0x52a3b8, 0x52a3fc, 0x52a464, 0x52a490, 0x52a4e4, 0x52a550,
+          0x52a5a8 and 0x52a5e4 - found by searching the function for the indirect
+          `jmp dword ptr [reg*4 + disp]` rather than hunting them one at a time.
+
+          Corrected: the outer switch's arm order (worth 23.9 earlier), then the second,
+          fourth, seventh, ninth and tenth, and one wrong label on the eleventh
+          (UT_TUNNELER, a behaviour bug). Already correct and left alone: the third,
+          fifth, eighth and twelfth have a single real arm each; the sixth and thirteenth
+          match in both order and labels.
+
+          Every label set matched the import except the eleventh's, so the
+          catapult-for-mangonel class of mistake found in playUnitSelectionSound is not
+          widespread here.
+
+          What is left in this function is cold-block placement and register allocation -
+          UIT_MAN_SIEGE_EQUIPMENT is emitted after our epilogue where the original has it
+          inline at 0x529a8b - which no arrangement of the source reaches.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00527C80
         undefined4 TribesState::giveTribeAnInstruction(
             int tribeID, UnitInstructionType unitInstructionType, int id, int unitUID, int param_5)
