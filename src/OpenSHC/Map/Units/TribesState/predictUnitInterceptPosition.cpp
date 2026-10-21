@@ -82,10 +82,22 @@ namespace Map {
             if (_yOff_2b < _xOff_2b) {
                 _yOff_2b = _xOff_2b;
             }
-            if ((-1 < (_yOff_2b + -2) * unitID)
-                && (_currentIndexInPathPlan = (int)DAT_UnitsState::instance.units[_unitID].currentIndexInPathPlan,
-                    local_8 = _tribeMinSpeedBounded * 4,
-                    (int)_currentIndexInPathPlan < (int)DAT_UnitsState::instance.units[_unitID].totalSizeOfPathPlan)) {
+            /*
+              Flat guards. Nesting the loop inside one `&&` chain puts the merged exit at
+              the end of the function; the original reaches it directly from each test.
+              This is the same shape that took trySpawnAdditionalWildlifeForTribe from
+              87.2% to a full match, and it drops two comma operators from inside an `&&`.
+             */
+            if ((_yOff_2b + -2) * unitID < 0) {
+                return;
+            }
+            _currentIndexInPathPlan = (int)DAT_UnitsState::instance.units[_unitID].currentIndexInPathPlan;
+            local_8 = _tribeMinSpeedBounded * 4;
+            if ((int)DAT_UnitsState::instance.units[_unitID].totalSizeOfPathPlan
+                <= (int)_currentIndexInPathPlan) {
+                return;
+            }
+            {
                 do {
                     /*
                       get current value in pathPlan, each byte contains two move instructions

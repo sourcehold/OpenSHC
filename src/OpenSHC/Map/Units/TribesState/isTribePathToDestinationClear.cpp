@@ -18,10 +18,22 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         /*
-          The two guards stay as `||` chains. Splitting them into six separate `if`s, which
-          is what recovered trySpawnAdditionalWildlifeForTribe's inline return blocks,
-          measures worse here (quick_diff 0.6635 -> 0.6296): the original merges every
-          failure into one `return 0` at 0x524cd7 rather than shrink-wrapping them.
+          The two guards stay as `||` chains. The original merges every failure into a
+          single `return 0` at 0x524cd7 and places it inline right after the first chain,
+          so the second chain's tests jump backward into it (`ja 0x00524cd7`, encoded
+          `77ea`) - a full epilogue, `pop/pop/pop/xor eax,eax/pop/pop/ret 0x14`, not a
+          jump to a shared one. Ours emits that block at the end of the function instead,
+          and that placement is what the remaining gap is mostly made of.
+
+          Splitting the chains into six separate `if`s is what took
+          trySpawnAdditionalWildlifeForTribe from 87.2% to a full match, so it was worth
+          retrying here. Measured with reccmp: 18.8% -> 17.4%. The earlier note against
+          it cited quick_diff 0.6635 -> 0.6296, which is below the ratio that tool is
+          documented to be reliable at; the conclusion was right anyway.
+
+          What ours also lacks is the original's second local slot: it allocates one
+          (`push ecx`) and reuses the dead tribeID parameter slot for the second counter,
+          where the original has `sub esp, 8` and two proper locals.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00524CA0
         undefined4 TribesState::isTribePathToDestinationClear(
