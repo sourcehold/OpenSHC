@@ -26,6 +26,15 @@ namespace Map {
           createTribe from 30.3% to 67.2% - but here the identical change costs 37.3 points
           (75.2% -> 37.9%). The two functions differ only in how they find the slot, so the
           shape that matches one does not match the other.
+
+          The `if (0 < slot)` around the stores also stays. The original returns zero
+          through an epilogue of its own right there - `cmp edi, ebx; jg 0x9` over
+          `pop/pop/pop/xor eax,eax/pop/ret 4` - where ours sends that return to the shared
+          epilogue and inverts the test to `jle`, so a flat guard looks like the obvious
+          fix. It measures 75.2% -> 73.2%. Flattening guard chains is as unpredictable as
+          caching the base: it took trySpawnAdditionalWildlifeForTribe to a full match
+          (+12.8) and gained +0.6 on predictUnitInterceptPosition, but costs 1.4 on
+          isTribePathToDestinationClear and 2.0 here. Measure it; do not assume it.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005227E0
         int TribesState::createTribeForPlayer(int playerID)
