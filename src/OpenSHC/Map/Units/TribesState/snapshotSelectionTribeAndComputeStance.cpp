@@ -68,15 +68,24 @@ namespace Map {
               [esp+0x10] into registers at 0x522d6a and nowhere else, and diff_slots.py
               shows our extra fourth slot is a spill of a redundant copy.
              */
-            if (_stanceCount[2] + _stanceCount[1] + _stanceCount[0] == 0) {
-                this->tribes[0].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
+            /*
+              The stand-ground store goes last, and the two counts are compared the other
+              way round. By address the original's three exits are the aggressive store,
+              then the computed one, then `mov word ptr [ebx + 0x2e0], 0` with an epilogue
+              of its own - so the empty-tally arm is the far block, not the first guard.
+              The computed one is `cmp ecx, esi; setge al`, which is
+              `_stanceCount[1] >= _stanceCount[0]`; writing it as `[0] <= [1]` gives the
+              same answer from `cmp esi, ecx; setle al`, with the operands swapped.
+             */
+            if (_stanceCount[2] + _stanceCount[1] + _stanceCount[0] != 0) {
+                if (_stanceCount[2] < _stanceCount[1] || _stanceCount[2] < _stanceCount[0]) {
+                    this->tribes[0].unitStance = (ushort)(_stanceCount[1] >= _stanceCount[0]);
+                    return;
+                }
+                this->tribes[0].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
                 return;
             }
-            if (_stanceCount[2] < _stanceCount[1] || _stanceCount[2] < _stanceCount[0]) {
-                this->tribes[0].unitStance = (ushort)(_stanceCount[0] <= _stanceCount[1]);
-                return;
-            }
-            this->tribes[0].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+            this->tribes[0].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
         }
 
     }

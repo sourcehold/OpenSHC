@@ -26,12 +26,18 @@ namespace Map {
                         && DAT_UnitsState::instance.units[iVar1].dying == 0
                         && DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue == 2) {
                         /*
-                          Signed: the original compares against the literal with
-                          `cmp ecx, 1; jg` and derives the second value with `setg`, where a
-                          `uint` gives `jae` and `seta` against a register holding 1.
+                          Signed, and tested against 1 rather than 2. The original has
+                          `cmp ecx, 1; jg` and derives the second value with `setg`, where
+                          a `uint` gives `jae` and `seta`. Written `< 2` the literal does
+                          not appear in the compare at all - MSVC puts 2 in a register and
+                          emits `cmp ecx, ebx; jge` - so the bound is written as `<= 1`,
+                          which is the same test on ints and the instruction the original
+                          has. The arms are already the right way round: the original's
+                          `jg` skips the nine bytes of the zero store, so that store is
+                          its fall-through.
                          */
                         int uVar2 = DAT_UnitsState::instance.units[iVar1].fixedRng & 7;
-                        if (uVar2 < 2) {
+                        if (uVar2 <= 1) {
                             DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue = 0;
                         } else {
                             DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue = (5 < uVar2) + 1;
