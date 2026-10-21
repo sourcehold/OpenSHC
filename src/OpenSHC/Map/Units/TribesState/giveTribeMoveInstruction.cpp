@@ -144,6 +144,18 @@ namespace Map {
                 if (0 < _area) {
                     int _firstUnit
                         = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+                    /*
+                      The nesting here stays, against the asm. The original tests the
+                      all-assassins result and jumps 0x38 forward when it is zero
+                      (`test eax, eax; je 0x38`), so the one-line `bVar4 = 1` is its
+                      fall-through and the thirty lines of cross-area path handling go
+                      far - ours is the other way round. Swapping the arms measures
+                      30.0% -> 29.6% raw, although normalized rises 22.5% -> 23.4%: the
+                      instruction sequence does get closer and the branch displacements
+                      get worse. Everywhere else in this namespace fixing an inverted arm
+                      gained raw, nine times out of nine; this is the one that did not, so
+                      it is left as it was and the measurement recorded.
+                     */
                     if (!_firstUnit) {
                         if (_area != y1) {
                             _someUnitCanClimb = MACRO_CALL_MEMBER(

@@ -461,10 +461,19 @@ namespace Map {
                                                 = Map::Units::States::US_MOVE_TO_DESTINATION;
                                             BVar16 = MACRO_CALL_MEMBER(
                                                 Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
-                                            if (!BVar16) {
-                                                DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
-                                            } else {
+                                            /*
+                                              The all-assassins store is the fall-through.
+                                              The original jumps 0xc forward when the
+                                              result is zero (`test eax, eax; je 0xc`), so
+                                              the +136 store follows the test and the +128
+                                              store goes in the far block - the same
+                                              displacement either way, just the two arms
+                                              the other way round.
+                                             */
+                                            if (BVar16) {
                                                 DAT_PathFindingState::instance.allAssassinsUnk = 1;
+                                            } else {
+                                                DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
                                             }
                                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
                                                 DAT_UnitsState::ptr)(iVar11, uVar13, (uint)(sVar9), 0);
