@@ -36,8 +36,9 @@ namespace Map {
               Mirroring that - shifted TribesState pointer, bitmask accesses left on the
               subscript where the original also keeps them - costs 34.4 points
               (79.5% -> 45.1%). The same change is worth +11.8 in trimTribeToSize, which
-              differs in having only the two size reads on the base; here a second
-              addressing base is live for the bitmask and the two fight over registers.
+              is the one function where it has ever paid. Why is not known: the
+              "only addressing base" explanation I first wrote here is wrong, since
+              updateAnimalHerdBehaviorState fits it and lost 40.8 points.
              */
             short const _size = this->tribes[tribeID].size;
             if (0 < _size) {
