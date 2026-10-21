@@ -536,22 +536,16 @@ namespace Map {
                             && DAT_UnitsState::instance.units[iVar12].field303_0x413 == 0
                             && (UVar3 = DAT_UnitsState::instance.units[iVar12].state.generic,
                                 UVar3 != Map::Units::States::US_MELEE_ATTACK)) {
+                            /*
+                              Arm order from 0x52a308: five dwords, 0x49-entry byte table
+                              at 0x52a31c, base 5. By address 0x5282fd (mangonel group),
+                              0x528311 (ranged), 0x52838a (melee), 0x528398 (catapult
+                              pair) - so the melee arm the import had first belongs third.
+                              The mangonel arm falls through into the ranged arm, so that
+                              pair has to stay adjacent and in that order, which it
+                              already was.
+                             */
                             switch (DAT_UnitsState::instance.units[iVar12].unitType) {
-                            case Map::Units::UT_TUNNELER:
-                            case Map::Units::UT_E_SPEAR:
-                            case Map::Units::UT_E_PIKE:
-                            case Map::Units::UT_E_MACE:
-                            case Map::Units::UT_E_SWORD:
-                            case Map::Units::UT_E_KNIGHT:
-                            case Map::Units::UT_E_MONK:
-                            case Map::Units::UT_LORD:
-                            case Map::Units::UT_A_SLAVE:
-                            case Map::Units::UT_A_ASSASSIN:
-                            case Map::Units::UT_A_SWORDSMAN:
-                                if (unitInstructionType != Map::Units::UIT_SHOOT_TARGETUnk) {
-                                    id = id + 1;
-                                }
-                                break;
                             case Map::Units::UT_S_MANGONEL:
                             case Map::Units::UT_S_BALLISTA:
                             case Map::Units::UT_S_FBALLISTA:
@@ -593,6 +587,21 @@ namespace Map {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                                     DAT_UnitsState::ptr)(iVar12);
+                                break;
+                            case Map::Units::UT_TUNNELER:
+                            case Map::Units::UT_E_SPEAR:
+                            case Map::Units::UT_E_PIKE:
+                            case Map::Units::UT_E_MACE:
+                            case Map::Units::UT_E_SWORD:
+                            case Map::Units::UT_E_KNIGHT:
+                            case Map::Units::UT_E_MONK:
+                            case Map::Units::UT_LORD:
+                            case Map::Units::UT_A_SLAVE:
+                            case Map::Units::UT_A_ASSASSIN:
+                            case Map::Units::UT_A_SWORDSMAN:
+                                if (unitInstructionType != Map::Units::UIT_SHOOT_TARGETUnk) {
+                                    id = id + 1;
+                                }
                                 break;
                             case Map::Units::UT_S_CATAPULT:
                             case Map::Units::UT_S_TREBUCHET:
