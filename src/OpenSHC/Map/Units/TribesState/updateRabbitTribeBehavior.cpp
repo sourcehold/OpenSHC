@@ -41,6 +41,7 @@ namespace Map {
             int sVar2;
             SomeTribeBehaviorTypeShort SVar3;
             int sVar4;
+            short _rallyPointCount;
             int iVar5;
             int iVar6;
             BOOLEnum BVar7;
@@ -105,15 +106,18 @@ namespace Map {
                         }
                     } else if (sVar2 == 0x96) {
                         /*
-                          Signed: `cmp ax, dx` with a `jle`, and the index that follows is
-                          `movsx ax`, so a negative count does not wrap into a huge index.
+                          The count is read into a `short`: the original compares it
+                          sixteen bits wide, `cmp ax, dx` with a signed `jle`, and widens
+                          only for the index, `movsx eax, ax`. An `int` local compares
+                          `cmp eax, edx` and loses the pair. The `jle` is still signed, so
+                          a negative count does not wrap into a huge index.
                          */
-                        sVar2 = (int)_tb->tribes[0].rallyPointCount;
-                        if (0 < sVar2) {
+                        _rallyPointCount = _tb->tribes[0].rallyPointCount;
+                        if (0 < _rallyPointCount) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)_tb->tribes[0].rallyPointArray[sVar2 + -1][0]),
-                                (uint)((int)_tb->tribes[0].rallyPointArray[sVar2 + -1][1]), 0, 0);
+                                tribeID, (uint)((int)_tb->tribes[0].rallyPointArray[(int)_rallyPointCount + -1][0]),
+                                (uint)((int)_tb->tribes[0].rallyPointArray[(int)_rallyPointCount + -1][1]), 0, 0);
                         }
                     } else if (BVar7) {
                         _tb->tribes[0].tribeBehaviorType = Map::Units::STBT_1;
