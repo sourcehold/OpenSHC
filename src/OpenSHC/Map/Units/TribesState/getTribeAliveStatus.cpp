@@ -37,6 +37,13 @@ namespace Map {
                         }
                     }
                 } while (_index < _size);
+                /*
+                  The nesting stays. The original returns 100 from here as well as from the
+                  empty-tribe path, jumping 0xf forward when the tally is non-zero
+                  (`test ecx, ecx; jne 0xf`) over its own `mov eax, 0x64` epilogue, so that
+                  return is duplicated rather than shared. Writing it as an early
+                  `if (!_alive) return 100;` measures 67.2% -> 67.2%.
+                 */
                 if (_alive != 0) {
                     if (_alive <= _other) {
                         return (int)(50);

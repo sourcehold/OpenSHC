@@ -86,6 +86,14 @@ namespace Map {
                 if (iVar3 <= (int)(_rng2 & 0x7f)) {
                     _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, 0, (int)(_unitX * 8), (int)(_unitY * 8), (int)(_terrainHeight), unitType);
+                    /*
+                      The `if (_rng2)` stays. The original returns FALSE through an
+                      epilogue of its own right here - `test esi, esi; jne 0xc` over
+                      `pop/pop/pop/xor eax,eax/pop/add esp,0xc/ret 0xc` - where ours jumps
+                      to the shared one at the end, so a flat `if (!_rng2) return FALSE;`
+                      looks like the fix. Measured 73.0% -> 73.0%, raw and normalized both
+                      unchanged.
+                     */
                     if (_rng2) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(_rng2, tribeID);
                         DAT_UnitsState::instance.units[_rng2].substate

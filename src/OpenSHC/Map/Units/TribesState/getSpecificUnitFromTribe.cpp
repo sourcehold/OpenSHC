@@ -34,12 +34,19 @@ namespace Map {
                         do {
                             if ((int)_bits & 1 << iVar2) {
                                 DAT_00ee0fb4::instance = iVar2 + 1;
-                                if (iVar2 + 1 != 0x10) {
-                                    DAT_Tribe_HighestID::instance = iVar1;
+                                /*
+                                  The wrap arm is the fall-through. The original stores the
+                                  incremented bit index, tests it and jumps 0x1d forward
+                                  when it has not reached sixteen (`cmp edx, 0x10; mov
+                                  [..], edx; jne 0x1d`), so the arm that advances the tribe
+                                  id and resets the bit index is what follows the test.
+                                 */
+                                if (iVar2 + 1 == 0x10) {
+                                    DAT_Tribe_HighestID::instance = iVar1 + 1;
+                                    DAT_00ee0fb4::instance = 0;
                                     return iVar1 * 0x10 + iVar2;
                                 }
-                                DAT_Tribe_HighestID::instance = iVar1 + 1;
-                                DAT_00ee0fb4::instance = 0;
+                                DAT_Tribe_HighestID::instance = iVar1;
                                 return iVar1 * 0x10 + iVar2;
                             }
                             iVar2 = iVar2 + 1;
