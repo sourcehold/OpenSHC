@@ -46799,7 +46799,7 @@ SHC_3BB0A8C1_0x00522720 | 62.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005227E0 | 75.2% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522890 | 67.2% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522890 | 79.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00522950 | 100.0% | Reimplemented
 

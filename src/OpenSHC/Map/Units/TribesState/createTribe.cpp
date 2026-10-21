@@ -30,9 +30,17 @@ namespace Map {
                       0x28]`), then reused for every store below it.
                      */
                     int const _tribeID = DAT_CurrentTribeID::instance;
-                    Tribe& _tribe = this->tribes[_tribeID];
+                    /*
+                      A shifted TribesState pointer, not a `Tribe&`. The original computes
+                      the base without the `tribes` offset (`lea esi, [edx + ebp]`) and then
+                      takes `lea eax, [esi + 0x28]` separately for the clear's argument,
+                      reaching the fields as `[esi + 0x2c]` and so on. A reference folds the
+                      0x28 into one lea and shifts every field displacement by it.
+                     */
+                    TribesState* const _tb
+                        = (TribesState*)((char*)this + _tribeID * sizeof(Tribe));
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        sizeof(Tribe), '\0', &_tribe);
+                        sizeof(Tribe), '\0', &_tb->tribes[0]);
                     /*
                       An early return, which is where the original puts its `return 0`:
                       `cmp edi, ebx; jg` falls straight into `xor eax, eax` with the claim
@@ -46,18 +54,18 @@ namespace Map {
                             && (setAsCurrentTribeID)) {
                             this->DAT_CurrentTribeID = _tribeID;
                         }
-                        _tribe.owner = playerID;
-                        _tribe.tribeState = 2;
-                        _tribe.uid = DAT_GameCore::instance.uniqueGameObjectTracker;
+                        _tb->tribes[0].owner = playerID;
+                        _tb->tribes[0].tribeState = 2;
+                        _tb->tribes[0].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
                         DAT_GameCore::instance.uniqueGameObjectTracker
                             = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
-                        _tribe.tribeType = ((AITribeType)0);
-                        _tribe.field18_0x1c = 0;
-                        _tribe.field19_0x1e = 0;
-                        _tribe.tribeBehaviorType = ((SomeTribeBehaviorType)0);
-                        _tribe.field29_0x30 = 0;
-                        _tribe.selectionTargetUnitID = 0;
-                        _tribe.size = 0;
+                        _tb->tribes[0].tribeType = ((AITribeType)0);
+                        _tb->tribes[0].field18_0x1c = 0;
+                        _tb->tribes[0].field19_0x1e = 0;
+                        _tb->tribes[0].tribeBehaviorType = ((SomeTribeBehaviorType)0);
+                        _tb->tribes[0].field29_0x30 = 0;
+                        _tb->tribes[0].selectionTargetUnitID = 0;
+                        _tb->tribes[0].size = 0;
                         return _tribeID;
                     }
                 }
