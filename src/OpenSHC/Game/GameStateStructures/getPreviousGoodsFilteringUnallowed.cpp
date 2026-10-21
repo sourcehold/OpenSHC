@@ -15,12 +15,16 @@ namespace Game {
         if (resourceType == Resources::RT_PITCH) {
             resourceType = Resources::RT_PARTIALPITCH;
         }
+        // index is the search result, so it outlives the loop and cannot be scoped to a for-init
         int index = 0;
-        for (; DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != resourceType; ++index) {}
+        while (DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != resourceType) {
+            ++index;
+        }
         --index;
         if (index < 0) {
             index = 19;
         }
+        // not a for-loop: the step is an advance plus a wrap, which does not fit a for-increment
         while (
             this->mapAndTime.isResourceTradeable[DAT_TroopDefinedData::instance.MarketResourceCycleArray[index]] == 0) {
             --index;

@@ -25,10 +25,10 @@ namespace Game {
     // NOTE: buttonID = building Type
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00457B80
-    undefined4 GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy(
+    BOOLEnum GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy(
         MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk)
     {
-        int result = 1;
+        BOOLEnum result = TRUE;
         BOOLEnum isAI = FALSE;
         BuildingType const buildingType
             = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
@@ -40,17 +40,17 @@ namespace Game {
         int const requiredGold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold;
         if (DAT_GameCore::instance.solitaryAllBuildingsAreFree != FALSE
             || DAT_GameCore::instance.gameMode_2 == GM_EDITOR) {
-            return 1;
+            return TRUE;
         }
         if (DAT_GameSynchronyState::instance.currentGameMode == GM_SOLITARY) {
             if (commandBuildingType == Commands::M_MAPPER_KEEP1) {
-                return 1;
+                return TRUE;
             }
             if (commandBuildingType == Commands::M_MAPPER_KEEP2) {
-                return 1;
+                return TRUE;
             }
             if (commandBuildingType == Commands::M_MAPPER_KEEP3) {
-                return 1;
+                return TRUE;
             }
         } else if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
             && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
@@ -60,10 +60,10 @@ namespace Game {
                 Map::Buildings::BuildingsState_Func::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters,
                 DAT_BuildingsState::ptr)(playerID, buildingType)
             != 0) {
-            return 1;
+            return TRUE;
         }
         if (requiredIron > this->playerDataArray[playerID].currentResources[6]) {
-            result = 0;
+            result = FALSE;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_IRON);
@@ -77,7 +77,7 @@ namespace Game {
         } else if (requiredPitch > this->playerDataArray[playerID].currentResources[7]) {
             if (buildingType != Map::Buildings::BT_PITCHDITCH
                 || this->playerDataArray[playerID].pitchDitchCounterTo4 == 0) {
-                result = 0;
+                result = FALSE;
                 if (playResourceLackMsgUnk != FALSE) {
                     MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX,
                         DAT_MissingResourceState::ptr)(1, Audio::SFX::RLSFX_PITCH);
@@ -90,14 +90,14 @@ namespace Game {
                 }
             }
         } else if (requiredGold > this->playerDataArray[playerID].currentResources[0xf]) {
-            result = 0;
+            result = FALSE;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_GOLD);
             }
         } else if (requiredWood > this->playerDataArray[playerID].currentResources[2]
             && requiredStone > this->playerDataArray[playerID].currentResources[4]) {
-            result = 0;
+            result = FALSE;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_PARTIAL_STONEUnk);
@@ -114,7 +114,7 @@ namespace Game {
                 }
             }
         } else if (requiredWood > this->playerDataArray[playerID].currentResources[2]) {
-            result = 0;
+            result = FALSE;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_WOOD);
@@ -126,7 +126,7 @@ namespace Game {
                 }
             }
         } else if (requiredStone > this->playerDataArray[playerID].currentResources[4]) {
-            result = 0;
+            result = FALSE;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_STONE);

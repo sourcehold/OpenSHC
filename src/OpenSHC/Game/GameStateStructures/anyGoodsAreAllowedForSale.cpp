@@ -14,6 +14,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00458760
     BOOLEnum GameStateStructures::anyGoodsAreAllowedForSale()
     {
+        // measured: scoping index to the for-init costs the match (100.0 -> 95.5), because the zeroing xors
+        // follow declaration order and swap against the original. Both locals stay here.
         int index = 0;
         int allowedCount = 0;
         for (; DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != -1; ++index) {

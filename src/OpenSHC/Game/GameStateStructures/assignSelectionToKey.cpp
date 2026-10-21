@@ -16,6 +16,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459C10
     void GameStateStructures::assignSelectionToKey(int number, int tribeID)
     {
+        // measured: a for-loop over tribeIndex costs the match (100.0 -> 83.2). The original advances tribeIndex
+        // right after the call, not at the bottom of the body, so the increment has to stay where it is.
         int tribeIndex = 0;
         int slotID = 0;
         while (tribeIndex < DAT_TribesState::instance.tribes[tribeID].size) {
