@@ -1101,7 +1101,25 @@ namespace Map {
                                 && DAT_UnitsState::instance.units[_unitID].dying == 0
                                 && DAT_UnitsState::instance.units[_unitID].field303_0x413 == 0) {
                                 UVar4 = DAT_UnitsState::instance.units[_unitID].unitType;
+                                /*
+                                  Arm order from 0x52a490: three dwords, 0x48-entry byte
+                                  table at 0x52a49c, base 5. The ranged arm is first, at
+                                  0x528e41, and the melee arm second at 0x528e4c - eleven
+                                  bytes later, which is the whole of the ranged arm: it is
+                                  just the 0x24 test and a jump into the melee body. With
+                                  the import's order that `goto` was a backward jump and
+                                  the ranged arm sat past ninety lines of melee handling.
+                                 */
                                 switch (UVar4) {
+                                case Map::Units::UT_E_ARCHER:
+                                case Map::Units::UT_E_XBOW:
+                                case Map::Units::UT_A_ARCHER:
+                                case Map::Units::UT_A_SLINGER:
+                                case Map::Units::UT_A_HARCHER:
+                                case Map::Units::UT_A_FIRETHROWER:
+                                    if (unitInstructionType == (UnitInstructionType)0x24)
+                                        goto switchD_00528e3a_caseD_5;
+                                    break;
                                 case Map::Units::UT_TUNNELER:
                                 case Map::Units::UT_E_SPEAR:
                                 case Map::Units::UT_E_PIKE:
@@ -1199,14 +1217,6 @@ namespace Map {
                                     }
                                     DAT_UnitsState::instance.units[_unitID].attackAtTileX = sVar9;
                                     break;
-                                case Map::Units::UT_E_ARCHER:
-                                case Map::Units::UT_E_XBOW:
-                                case Map::Units::UT_A_ARCHER:
-                                case Map::Units::UT_A_SLINGER:
-                                case Map::Units::UT_A_HARCHER:
-                                case Map::Units::UT_A_FIRETHROWER:
-                                    if (unitInstructionType == (UnitInstructionType)0x24)
-                                        goto switchD_00528e3a_caseD_5;
                                 }
                             }
                             if (this->tribes[tribeID].size <= _unitTribeIndex) {
@@ -1233,30 +1243,36 @@ namespace Map {
                             continue;
                         DAT_UnitsState::instance.units[uVar13]._someX_2 = 0;
                         DAT_UnitsState::instance.units[uVar13]._someY_2 = 0;
+                        /*
+                          Arm order from 0x52a4e4: eight dwords, 0x49-entry byte table at
+                          0x52a504, base 5. By address: 0x5290ce (horse archer), 0x5290d3
+                          (the other six ranged types), 0x5290e3 (the five siege types),
+                          0x52914f (tower), 0x5291d6 (battering ram), 0x5291e5 (knight),
+                          0x5291ea (the nine melee types).
+
+                          Ram, knight and melee are a three-way fall-through - the comment
+                          below says so - and the original's spacing confirms it: 0x5291d6
+                          to 0x5291e5 is the ram body, 0x5291e5 to 0x5291ea is the knight's
+                          single increment. Horse archer falls into ranged the same way. So
+                          the only thing wrong was which end those two chains sat at: the
+                          import had ram-knight-melee first and horse-archer-ranged last.
+                         */
                         switch (DAT_UnitsState::instance.units[uVar13].unitType) {
-                        case Map::Units::UT_S_BATTERINGRAM:
-                            if (DAT_UnitsState::instance.units[uVar13]
-                                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                                != 4) {
-                                break;
-                            }
-                            local_8 = local_8 + 1;
-                            /*
-                              a crewed ram counts as a horseman too, which is the goto the
-                              decompiler printed back into this arm
-                             */
-                        case Map::Units::UT_E_KNIGHT:
+                        case Map::Units::UT_A_HARCHER:
                             _ramOrHorse = _ramOrHorse + 1;
-                        case Map::Units::UT_TUNNELER:
-                        case Map::Units::UT_E_SPEAR:
-                        case Map::Units::UT_E_PIKE:
-                        case Map::Units::UT_E_MACE:
-                        case Map::Units::UT_E_SWORD:
-                        case Map::Units::UT_E_MONK:
-                        case Map::Units::UT_LORD:
-                        case Map::Units::UT_A_SLAVE:
-                        case Map::Units::UT_A_SWORDSMAN:
-                            id = id + 1;
+                            /*
+                              The ranged types share this arm; only the horse archer counts
+                              towards _ramOrHorse.
+                             */
+                        case Map::Units::UT_E_ARCHER:
+                        case Map::Units::UT_E_XBOW:
+                        case Map::Units::UT_A_ARCHER:
+                        case Map::Units::UT_A_SLINGER:
+                        case Map::Units::UT_A_ASSASSIN:
+                        case Map::Units::UT_A_FIRETHROWER:
+                            if (unitInstructionType == (UnitInstructionType)0x23) {
+                                id = id + 1;
+                            }
                             break;
                         case Map::Units::UT_S_CATAPULT:
                         case Map::Units::UT_S_TREBUCHET:
@@ -1309,21 +1325,30 @@ namespace Map {
                                     - (short)DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile;
                             }
                             break;
-                        case Map::Units::UT_A_HARCHER:
-                            _ramOrHorse = _ramOrHorse + 1;
-                            /*
-                              The ranged types share this arm; only the horse archer counts
-                              towards _ramOrHorse.
-                             */
-                        case Map::Units::UT_E_ARCHER:
-                        case Map::Units::UT_E_XBOW:
-                        case Map::Units::UT_A_ARCHER:
-                        case Map::Units::UT_A_SLINGER:
-                        case Map::Units::UT_A_ASSASSIN:
-                        case Map::Units::UT_A_FIRETHROWER:
-                            if (unitInstructionType == (UnitInstructionType)0x23) {
-                                id = id + 1;
+                        case Map::Units::UT_S_BATTERINGRAM:
+                            if (DAT_UnitsState::instance.units[uVar13]
+                                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                                != 4) {
+                                break;
                             }
+                            local_8 = local_8 + 1;
+                            /*
+                              a crewed ram counts as a horseman too, which is the goto the
+                              decompiler printed back into this arm
+                             */
+                        case Map::Units::UT_E_KNIGHT:
+                            _ramOrHorse = _ramOrHorse + 1;
+                        case Map::Units::UT_TUNNELER:
+                        case Map::Units::UT_E_SPEAR:
+                        case Map::Units::UT_E_PIKE:
+                        case Map::Units::UT_E_MACE:
+                        case Map::Units::UT_E_SWORD:
+                        case Map::Units::UT_E_MONK:
+                        case Map::Units::UT_LORD:
+                        case Map::Units::UT_A_SLAVE:
+                        case Map::Units::UT_A_SWORDSMAN:
+                            id = id + 1;
+                            break;
                         }
                     } while (_unitTribeIndex < this->tribes[tribeID].size);
                 }
@@ -1364,7 +1389,6 @@ namespace Map {
                                 && DAT_UnitsState::instance.units[iVar14].field303_0x413 == 0) {
                                 UVar4 = DAT_UnitsState::instance.units[iVar14].unitType;
                                 switch (UVar4) {
-                                case Map::Units::UT_TUNNELER:
                                 case Map::Units::UT_E_ARCHER:
                                 case Map::Units::UT_E_XBOW:
                                 case Map::Units::UT_A_ARCHER:
@@ -1375,6 +1399,20 @@ namespace Map {
                                     if (unitInstructionType != (UnitInstructionType)0x23) {
                                         break;
                                     }
+                                /*
+                                  UT_TUNNELER belongs to this arm, not the ranged one
+                                  above. The byte table at 0x52a560 maps index 0 - unit
+                                  type 5 - to arm 0x52933c, the melee arm, while the
+                                  ranged types 0x16, 0x17, 0x46, 0x48, 0x49, 0x4a and 0x4c
+                                  map to 0x529331. With the label on the ranged arm a
+                                  tunneler met the `!= 0x23` test and broke out instead of
+                                  running this body.
+
+                                  The two arms are adjacent and fall through in the
+                                  original as well - 0x529331 to 0x52933c is eleven bytes,
+                                  the `cmp` and the `jnz` - so only the label moved.
+                                 */
+                                case Map::Units::UT_TUNNELER:
                                 case Map::Units::UT_E_SPEAR:
                                 case Map::Units::UT_E_PIKE:
                                 case Map::Units::UT_E_MACE:
