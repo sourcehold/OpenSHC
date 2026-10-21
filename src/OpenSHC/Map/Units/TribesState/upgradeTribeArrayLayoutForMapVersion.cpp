@@ -29,12 +29,14 @@ namespace Map {
             iVar2 = 1249;
             _Dst = this->tribes + 0x4e1;
             /*
-              The source cursor starts at `this + 0xbd114`, which is tribes[944] + 0x1ac:
-              `unitSelectionBitMasked` sits at 0x38, so the index is (0x1ac - 0x38) / 2 =
-              0xba. The import's 0x7a put it 128 bytes short, and every tribe this loop
-              moved came from the wrong place.
+              0x7a, which puts the cursor at `this + 0xbd114` - the `lea esi, [ecx +
+              0xbd114]` the original starts its loop with. I changed this to 0xba earlier on
+              arithmetic that used 944 * 0x334 = 0xbcf40; the product is 0xbcfc0, so the
+              import's index was right all along and 0xba put the cursor 0x80 too high.
+              0x28 + 944 * 0x334 + 0x38 + 0x7a * 2 == 0xbd114. diff_anchor.py names this
+              error directly - use it rather than doing the arithmetic by hand.
              */
-            _Src = this->tribes[944].unitSelectionBitMasked + 0xba;
+            _Src = this->tribes[944].unitSelectionBitMasked + 0x7a;
             do {
                 if (_Dst != (Tribe*)_Src) {
                     memmove(_Dst, (void*)((int)(_Src)), (size_t)((int)(620)));
