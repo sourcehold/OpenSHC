@@ -158,6 +158,17 @@ namespace Map {
               length, better ratio, worse score. The plain subscript re-derives
               `tribeID * 0x334` at all 74 accesses and is still the better match, so do not
               trust instruction count or quick_diff here without confirming on reccmp.
+
+              The paradox resolves into register selection, which no source form reaches.
+              The UNIT_ATTACK_UNIT arm shows the original reading the size as
+              `movsx eax, word ptr [ebp + 0x5c]` - base cached in EBP, no imul - so it
+              really does cache. It also materialises zero in EAX (`xor eax, eax`) where we
+              use EDI and EDX. Asking for a cached base gets us one, but MSVC puts it in a
+              register of its own choosing and that cascades through everything else; the
+              re-derived form happens to leave the other registers where the original has
+              them. That is the whole of the remaining gap in this arm, together with cold
+              blocks: MAN_SIEGE_EQUIPMENT is emitted after the epilogue here and inline at
+              0x529a8b in the original, with the arm order already matching the table.
              */
             /*
               Declaration order is a dead end here, and this can be shown rather than
