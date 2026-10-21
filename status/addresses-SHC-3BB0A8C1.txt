@@ -49145,7 +49145,7 @@ SHC_3BB0A8C1_0x0052AD50 | 50.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052B110 | 66.8% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x0052B390 | 58.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0052B390 | 60.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052B630 | 70.8% | Reimplemented, asm differs
 
