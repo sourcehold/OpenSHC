@@ -944,53 +944,21 @@ namespace Map {
                             continue;
                         DAT_UnitsState::instance.units[iVar12]._someX_2 = 0;
                         DAT_UnitsState::instance.units[iVar12]._someY_2 = 0;
+                        /*
+                          Arm order from 0x52a3fc: seven dwords, 0x49-entry byte table at
+                          0x52a418, base 5. By address the arms are 0x528b7e (horse
+                          archer), 0x528b83 (the other five ranged types), 0x528c76
+                          (the five siege types), 0x528ca2 (battering ram), 0x528ccd
+                          (knight) and 0x528ce4 (the ten melee types). The import had the
+                          two fall-through pairs the wrong way round: knight-into-melee
+                          first and horse-archer-into-ranged last.
+
+                          LAB_00528c46 is inside the horse archer arm's tail, which is why
+                          the siege arm's `goto` is backward in the original (0x528c76 to
+                          0x528c46). With that arm moved to the front it needs an explicit
+                          `break` - the original ends it `jmp 0x528cfb`, the switch's exit.
+                         */
                         switch (DAT_UnitsState::instance.units[iVar12].unitType) {
-                        case Map::Units::UT_E_KNIGHT:
-                            if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
-                                != Map::Buildings::BT_PITCHDITCH) {
-                                _ramOrHorse = _ramOrHorse + 1;
-                            }
-                        case Map::Units::UT_TUNNELER:
-                        case Map::Units::UT_E_SPEAR:
-                        case Map::Units::UT_E_PIKE:
-                        case Map::Units::UT_E_MACE:
-                        case Map::Units::UT_E_SWORD:
-                        case Map::Units::UT_E_MONK:
-                        case Map::Units::UT_LORD:
-                        case Map::Units::UT_A_SLAVE:
-                        case Map::Units::UT_A_ASSASSIN:
-                        case Map::Units::UT_A_SWORDSMAN:
-                        switchD_00528b77_caseD_5:
-                            if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
-                                != Map::Buildings::BT_PITCHDITCH) {
-                                id = id + 1;
-                            }
-                            break;
-                        case Map::Units::UT_S_CATAPULT:
-                        case Map::Units::UT_S_TREBUCHET:
-                        case Map::Units::UT_S_MANGONEL:
-                        case Map::Units::UT_S_BALLISTA:
-                        case Map::Units::UT_S_FBALLISTA:
-                            if (unitInstructionType == (UnitInstructionType)0x26
-                                || DAT_BuildingsState::instance.buildings[iVar11].buildingType
-                                    == Map::Buildings::BT_PITCHDITCH)
-                                break;
-                            DAT_UnitsState::instance.units[iVar12].targetID_OR_targetBuildingID
-                                = _param_3_id_x_tile_buildingID_copy;
-                            DAT_UnitsState::instance.units[iVar12]
-                                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
-                                = unitUID;
-                            goto LAB_00528c46;
-                        case Map::Units::UT_S_BATTERINGRAM:
-                            if ((DAT_BuildingsState::instance.buildings[iVar11].buildingType
-                                    != Map::Buildings::BT_PITCHDITCH)
-                                && (DAT_UnitsState::instance.units[iVar12]
-                                        .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                                    == 4)) {
-                                id = id + 1;
-                                _ramOrHorse = _ramOrHorse + 1;
-                            }
-                            break;
                         case Map::Units::UT_A_HARCHER:
                             _ramOrHorse = _ramOrHorse + 1;
                             /*
@@ -1050,6 +1018,53 @@ namespace Map {
                                     DAT_UnitsState::ptr)(iVar12);
                                 DAT_UnitsState::instance.units[iVar12].shootBeforeStop = 10;
                             }
+                                break;
+                        case Map::Units::UT_S_CATAPULT:
+                        case Map::Units::UT_S_TREBUCHET:
+                        case Map::Units::UT_S_MANGONEL:
+                        case Map::Units::UT_S_BALLISTA:
+                        case Map::Units::UT_S_FBALLISTA:
+                            if (unitInstructionType == (UnitInstructionType)0x26
+                                || DAT_BuildingsState::instance.buildings[iVar11].buildingType
+                                    == Map::Buildings::BT_PITCHDITCH)
+                                break;
+                            DAT_UnitsState::instance.units[iVar12].targetID_OR_targetBuildingID
+                                = _param_3_id_x_tile_buildingID_copy;
+                            DAT_UnitsState::instance.units[iVar12]
+                                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
+                                = unitUID;
+                            goto LAB_00528c46;
+                        case Map::Units::UT_S_BATTERINGRAM:
+                            if ((DAT_BuildingsState::instance.buildings[iVar11].buildingType
+                                    != Map::Buildings::BT_PITCHDITCH)
+                                && (DAT_UnitsState::instance.units[iVar12]
+                                        .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                                    == 4)) {
+                                id = id + 1;
+                                _ramOrHorse = _ramOrHorse + 1;
+                            }
+                            break;
+                        case Map::Units::UT_E_KNIGHT:
+                            if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
+                                != Map::Buildings::BT_PITCHDITCH) {
+                                _ramOrHorse = _ramOrHorse + 1;
+                            }
+                        case Map::Units::UT_TUNNELER:
+                        case Map::Units::UT_E_SPEAR:
+                        case Map::Units::UT_E_PIKE:
+                        case Map::Units::UT_E_MACE:
+                        case Map::Units::UT_E_SWORD:
+                        case Map::Units::UT_E_MONK:
+                        case Map::Units::UT_LORD:
+                        case Map::Units::UT_A_SLAVE:
+                        case Map::Units::UT_A_ASSASSIN:
+                        case Map::Units::UT_A_SWORDSMAN:
+                        switchD_00528b77_caseD_5:
+                            if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
+                                != Map::Buildings::BT_PITCHDITCH) {
+                                id = id + 1;
+                            }
+                            break;
                         }
                     } while (_unitTribeIndex < this->tribes[tribeID].size);
                 }
