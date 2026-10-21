@@ -20,13 +20,10 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00456C50
     void GameStateStructures::clearDataAndSignpostDataIfNecessary()
     {
-        // fixme: current data type specifies length 128, not 256
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            256, '\0', this->mapAndTime.signpostEntryData);
-        // fixme: multiple data?
+            sizeof(this->mapAndTime.signpostEntryData), '\0', this->mapAndTime.signpostEntryData);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            6400, '\0', this->mapAndTime.signpostsMapEdge);
-        // fixme: wrong?
+            sizeof(this->mapAndTime.signpostsMapEdge), '\0', this->mapAndTime.signpostsMapEdge);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->mapAndTime.unitMoveDestinationXYPairs), '\0', this->mapAndTime.unitMoveDestinationXYPairs);
         for (int slot = 0; slot < 8; ++slot) {
@@ -40,8 +37,8 @@ namespace Game {
             }
         }
         // close the holes by bubbling the remaining signposts to the front
-        BOOLEnum signpostMoved;
-        do {
+        BOOLEnum signpostMoved = TRUE;
+        while (signpostMoved) {
             signpostMoved = FALSE;
             for (int slot = 0; slot < 7; ++slot) {
                 if (this->mapAndTime.signpostIDs[slot] == 0 && this->mapAndTime.signpostIDs[slot + 1] != 0) {
@@ -50,7 +47,7 @@ namespace Game {
                     signpostMoved = TRUE;
                 }
             }
-        } while (signpostMoved);
+        }
         for (int signpostSlot = 0; signpostSlot < 8; ++signpostSlot) {
             int const buildingID = this->mapAndTime.signpostIDs[signpostSlot];
             if (buildingID == 0) {

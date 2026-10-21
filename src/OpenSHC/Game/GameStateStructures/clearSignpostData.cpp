@@ -11,11 +11,11 @@ namespace Game {
     void GameStateStructures::clearSignpostData()
     {
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x40, '\0', this->mapAndTime.signpostIDs);
+            sizeof(this->mapAndTime.signpostIDs), '\0', this->mapAndTime.signpostIDs);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x100, '\0', this->mapAndTime.signpostEntryData);
+            sizeof(this->mapAndTime.signpostEntryData), '\0', this->mapAndTime.signpostEntryData);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x1900, '\0', this->mapAndTime.signpostsMapEdge);
+            sizeof(this->mapAndTime.signpostsMapEdge), '\0', this->mapAndTime.signpostsMapEdge);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->mapAndTime.unitMoveDestinationXYPairs), '\0', this->mapAndTime.unitMoveDestinationXYPairs);
     }

@@ -221,14 +221,9 @@ namespace Game {
             undefined1 padding_0x27fc[252]; // 0x000027FC length: 252
             int mercRecruitable[7]; // 0x000028F8 length: 28
             undefined1 padding_0x2914[4]; // 0x00002914 length: 4
-            int signpostIDs[8]; // 0x00002918 length: 32
-            undefined1 padding_0x2938[32]; // 0x00002938 length: 32
-            SignpostLocation signpostEntryData[8]; // 0x00002958 length: 128
-            undefined1 padding_0x29d8[124]; // 0x000029D8 length: 124
-            int strongWalls; // 0x00002A54 length: 4
-            XYTileObject signpostsMapEdge[7][50]; // 0x00002A58 length: 5600
-            undefined1 padding_0x4038[480]; // 0x00004038 length: 480
-            Point8IntXY aiTribeMoveDestinationXYPairArray1[5][8]; // 0x00004218 length: 320
+            int signpostIDs[16]; // 0x00002918 length: 64
+            SignpostLocation signpostEntryData[16]; // 0x00002958 length: 256
+            XYTileObject signpostsMapEdge[8][50]; // 0x00002A58 length: 6400
             XYPair unitMoveDestinationXYPairs[8][40]; // 0x00004358 length: 2560
             AttackVector attackVectors[9][50]; // 0x00004D58 length: 7200
             undefined1 padding_0x6978[800]; // 0x00006978 length: 800
