@@ -40,7 +40,19 @@ namespace Map {
                 this->tribes[param_1].unknownCounter01 = 4000;
             }
             sVar2 = this->tribes[param_1].countdown;
-            if (!sVar2) {
+            /*
+              The non-zero side is the fall-through. The original reads the countdown and
+              jumps 0x25 forward when it is zero (`cmp ax, dx; je 0x25`) - exactly the span
+              of the setStateForAllTribeUnits arm - then tests `cmp ax, 0x64` and leaves
+              when it is not 100. So the 100 arm sits under the test and the ninety lines
+              of wander and attack handling go in the far block.
+             */
+            if (sVar2) {
+                if (sVar2 == 100) {
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setStateForAllTribeUnits, this)(param_1, 0xd0);
+                    this->tribes[param_1].unknownBool01 = 1;
+                }
+            } else {
                 if ((BVar5)
                     && (BVar6 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnDeerLionOrRabbit, this)(
                             param_1, 500, Map::Units::UT_LIONSHWOLF),
@@ -133,9 +145,6 @@ namespace Map {
                     this->tribes[param_1].tribeBehaviorType = ((SomeTribeBehaviorType)0);
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                 }
-            } else if (sVar2 == 100) {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setStateForAllTribeUnits, this)(param_1, 0xd0);
-                this->tribes[param_1].unknownBool01 = 1;
             }
         }
 

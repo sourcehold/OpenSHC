@@ -44,12 +44,14 @@ namespace Map {
                     int _tribeID = DAT_CurrentTribeID::instance;
                     if (_state != 3) {
                         short const _size = this->tribes[DAT_CurrentTribeID::instance].size;
-                        if (_size <= 0) {
-                            short const _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
-                            if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
-                                && _tribeTime)
-                                continue;
-                        } else {
+                        /*
+                          The unit sweep is the fall-through. The original compares the
+                          size against the zero it is holding in bx and jumps 0x7d forward
+                          when it is not positive (`cmp cx, bx; jle 0x7d`), so the sweep
+                          follows the test and the four-line time check goes in the far
+                          block. The `<= 0` sense itself is right and stays - see above.
+                         */
+                        if (0 < _size) {
                             int const _tribeSize = (int)_size;
                             int local_4 = 0;
                             if (0 < _tribeSize) {
@@ -76,6 +78,11 @@ namespace Map {
                                     continue;
                                 }
                             }
+                        } else {
+                            short const _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
+                            if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
+                                && _tribeTime)
+                                continue;
                         }
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::clearTribe, this)(_tribeID);
