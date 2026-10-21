@@ -39,7 +39,24 @@ namespace Map {
             _ptrptrCurrentSelectionID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType,
                 this)(selectionID, (int*)&_ptrCurrentSelectionID);
             _ptrCurrentSelectionID_2 = _ptrCurrentSelectionID;
-            short sVar1 = DAT_TribesState::instance.tribes[selectionID].size;
+            /*
+              An `int`, not a `short`. The original reads the size once,
+              `movsx ebp, word ptr [edi + 0x1667fd4]` at 0x521abc, and keeps the
+              sign-extended value in ebp for the whole function - all five `< 0xf` tests
+              compare against it. A `short` local gets a `movzx` here instead.
+              giveTribeAnInstruction reads the same field the same way, `movsx esi, word
+              ptr [ebp + 0x5c]`, and wanted `int` for the same reason.
+
+              That is as far as it generalises, and it is worth only +0.1 even here. I
+              took the two confirmed cases as a rule and changed the `.size` local to
+              `int` in the nine other functions in this namespace that read it into a
+              `short`. One build measured all nine:
+              addUnitsToTribeAndComputeMovementSpeed -21.2, processDeerMoving -1.4,
+              createAnimal -0.4, updateTribeUnitAssignments +0.1, and five flat. `short`
+              is right in almost all of them. Read the load at the site; do not carry
+              this across functions.
+             */
+            int const _tribeSize = DAT_TribesState::instance.tribes[selectionID].size;
             /*
               Arm order comes from the dispatch at 0x521e50: eight dword entries with a
               55-entry byte index table at 0x521e70, indexed by `unitType - 0x16`. The
@@ -157,7 +174,7 @@ namespace Map {
                     (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x59);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {
+                if (_tribeSize < 0xf) {
                     return;
                 }
                 _otherX = 0xfa;
@@ -196,7 +213,7 @@ namespace Map {
             LAB_00521d1b:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {
+                if (_tribeSize < 0xf) {
                     return;
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
@@ -206,7 +223,7 @@ namespace Map {
             case Map::Units::UT_E_SPEAR:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
-                if (sVar1 < 0xf) {
+                if (_tribeSize < 0xf) {
                     return;
                 }
                 _otherX = 0x14;
@@ -223,13 +240,13 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, _otherX);
-                if (sVar1 < 0xf) {
+                if (_tribeSize < 0xf) {
                     return;
                 }
                 _otherX = 0x14;
                 break;
             case Map::Units::UT_A_SWORDSMAN:
-                if (sVar1 < 0xf) {
+                if (_tribeSize < 0xf) {
                     return;
                 }
                 /*

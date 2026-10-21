@@ -35,7 +35,6 @@ namespace Map {
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
             short _percentage = 0;
             int iVar4 = 0;
-            short sVar1 = this->tribes[tribeID].size;
             this->tribes[tribeID].percentageDyingUnk = 0;
             this->tribes[tribeID].percentageMovingUnk = 0;
             this->tribes[tribeID].percentageAttackingUnk = 0;
@@ -50,7 +49,13 @@ namespace Map {
             int _countMoving = 0;
             int _countDying = 0;
             this->tribes[tribeID].unitType = DAT_UnitsState::instance.units[_targetUnitID].unitType;
-            if (0 < sVar1) {
+            /*
+              The size is read in the test, not into a local. The original never loads it
+              into a register: it compares the field in place against the zero it already
+              has in bp for the seven word stores above - `cmp word ptr [esi + 0x5c], bp`.
+              A local forces a load of its own.
+             */
+            if (0 < this->tribes[tribeID].size) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getSpecificUnitFromTribe, this)(
                         tribeID, iVar4);
@@ -125,10 +130,19 @@ namespace Map {
                 _percentage = (short)((_countRangeUnk * 100) / _tribeSize);
             }
             this->tribes[tribeID].percentageShootingUnk = _percentage;
-            if (_tribeSize) {
-                this->tribes[tribeID].percentageSomething = (short)((local_8 * 100) / _tribeSize);
+            /*
+              The last percentage is the same shape as the four above it, not a guarded
+              store followed by an unconditional 100 - which is what the import had, and
+              it pinned the field at 100 whatever the tally was. The original tests the
+              size once and duplicates the epilogue, storing to 0x2ca and returning in
+              each arm (0x5272fc and 0x527315, each with its own `ret 4`), so it is
+              written as an early return rather than through the shared `_percentage`.
+             */
+            if (!_tribeSize) {
+                this->tribes[tribeID].percentageSomething = 100;
+                return;
             }
-            this->tribes[tribeID].percentageSomething = 100;
+            this->tribes[tribeID].percentageSomething = (short)((local_8 * 100) / _tribeSize);
         }
 
     }

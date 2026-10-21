@@ -47,18 +47,26 @@ namespace Map {
             BOOLEnum BVar8 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
             short sVar1 = this->tribes[tribeID].selectionTargetUnitID;
             x = (uint)DAT_UnitsState::instance.units[sVar1].x;
-            if (!horseAndRamCount) {
-                y = (uint)DAT_UnitsState::instance.units[sVar1].y;
-                if (!BVar8) {
-                    MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
-                        DAT_PathFindingState::ptr)(x, y, -1, -1, 100000, FALSE);
-                } else {
-                    MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
-                        DAT_PathFindingState::ptr)(x, y, 0xffffffff, 0xffffffff, 100000, 0);
-                }
-            } else {
+            /*
+              Both of these were the wrong way round. The original computes x before the
+              first test and jumps away when the count is zero - `cmp dword ptr [esp +
+              0x10], 0; je 0x1e` - so the ram-and-horse call is the fall-through, and
+              inside the other branch `test ecx, ecx; je 0x7` falls through to the
+              all-assassins call. Written `if (!count)` and `if (!BVar8)` both bodies are
+              emitted in the far block and every branch past them shifts.
+             */
+            if (horseAndRamCount) {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
                     DAT_PathFindingState::ptr)(x, (int)(DAT_UnitsState::instance.units[sVar1].y), -1, -1, 100000);
+            } else {
+                y = (uint)DAT_UnitsState::instance.units[sVar1].y;
+                if (BVar8) {
+                    MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
+                        DAT_PathFindingState::ptr)(x, y, 0xffffffff, 0xffffffff, 100000, 0);
+                } else {
+                    MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
+                        DAT_PathFindingState::ptr)(x, y, -1, -1, 100000, FALSE);
+                }
             }
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 != 0) {
                 _p = &DAT_PathFindingState::instance.searchQueue;
