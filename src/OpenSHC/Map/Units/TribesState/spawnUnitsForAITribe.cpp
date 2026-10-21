@@ -21,8 +21,13 @@ namespace Map {
             int unitID;
             int aiUnitBehaviourType;
             if (((0 < param_2) || (0 < param_3)) && 0 < param_6) {
-                int microXPosition = param_2 * 8;
+                /*
+                  The Y scaling is computed first: the original has `lea ebx, [edx*8]` for
+                  param_3 and `lea ebp, [ecx*8]` for param_2, which is the opposite register
+                  pairing from declaring X first.
+                 */
                 int microYPosition = param_3 * 8;
+                int microXPosition = param_2 * 8;
                 param_2 = param_6;
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
