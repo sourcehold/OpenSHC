@@ -64,7 +64,16 @@ namespace Map {
                         BVar3 = MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::isComputerManagedNonPeasant, DAT_UnitsState::ptr)(_unitID);
                         if (!BVar3) {
-                            if (DAT_UnitsState::instance.units[_unitID].dying == 0) {
+                            /*
+                              The dying tally is the fall-through. The original jumps 0xa
+                              forward when the flag is clear (`je 0xa`) - exactly the
+                              `add dword ptr [esp + 0x14], 1` and `jmp` that follow - so
+                              the one-line increment sits under the test and the thirty
+                              lines of tallying go in the far block.
+                             */
+                            if (DAT_UnitsState::instance.units[_unitID].dying != 0) {
+                                _countDying = _countDying + 1;
+                            } else {
                                 if (DAT_UnitsState::instance.units[_unitID].movementRelated != 8) {
                                     _countMoving = _countMoving + 1;
                                 }
@@ -95,8 +104,6 @@ namespace Map {
                                 if (this->tribes[tribeID].movementSpeed < _movementSpeed) {
                                     this->tribes[tribeID].movementSpeed = _movementSpeed;
                                 }
-                            } else {
-                                _countDying = _countDying + 1;
                             }
                         } else {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, this)(

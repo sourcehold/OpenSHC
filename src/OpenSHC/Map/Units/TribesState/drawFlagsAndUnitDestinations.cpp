@@ -82,27 +82,14 @@ namespace Map {
                         && DAT_UnitsState::instance.units[_unitID].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         short sVar1 = DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk;
-                        if (!sVar1) {
-                            if (DAT_UnitsState::instance.units[_unitID].currentIndexInPathPlan
-                                    < DAT_UnitsState::instance.units[_unitID].totalSizeOfPathPlan
-                                && (UVar2 = DAT_UnitsState::instance.units[_unitID].targetingType,
-                                    UVar2 != Map::Units::UIT_UNIT_ATTACK_UNIT)
-                                && UVar2 != Map::Units::UIT_ATTACK_LAND
-                                && UVar2 != Map::Units::UIT_MAN_SIEGE_EQUIPMENT) {
-                                iVar4 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + -1;
-                                if (7 < iVar4) {
-                                    iVar4 = 0xf - iVar4;
-                                }
-                                MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                                    DAT_ViewportRenderState::ptr)(IO::Graphics::GID_CURSORS, iVar4 + 0x52, 0xc, 6,
-                                    (int)DAT_UnitsState::instance.units[_unitID].plannedDestinationX
-                                        + DAT_ViewportRenderState::instance
-                                            .translationMatrix[DAT_UnitsState::instance.units[_unitID]
-                                                    .plannedDestinationY]
-                                            .addXgetTile,
-                                    2);
-                            }
-                        } else {
+                        /*
+                          The speed-matching arm is the fall-through. The original reads
+                          the field and tests it sixteen bits wide, then jumps 0x91 forward
+                          when it is zero (`test dx, dx; je 0x91`), so the arm that draws
+                          the speed cursor follows the test and the planned-destination arm
+                          goes in the far block.
+                         */
+                        if (sVar1) {
                             if (sVar1 < 8) {
                                 iVar4 = (8 - sVar1) * 4;
                             } else {
@@ -122,6 +109,26 @@ namespace Map {
                             MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                                 DAT_ViewportRenderState::ptr)(IO::Graphics::GID_CURSORS, iVar4 + 0x52, 0xc, 6, tile,
                                 (int)(DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk << 0x11 | 2));
+                        } else {
+                            if (DAT_UnitsState::instance.units[_unitID].currentIndexInPathPlan
+                                    < DAT_UnitsState::instance.units[_unitID].totalSizeOfPathPlan
+                                && (UVar2 = DAT_UnitsState::instance.units[_unitID].targetingType,
+                                    UVar2 != Map::Units::UIT_UNIT_ATTACK_UNIT)
+                                && UVar2 != Map::Units::UIT_ATTACK_LAND
+                                && UVar2 != Map::Units::UIT_MAN_SIEGE_EQUIPMENT) {
+                                iVar4 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + -1;
+                                if (7 < iVar4) {
+                                    iVar4 = 0xf - iVar4;
+                                }
+                                MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
+                                    DAT_ViewportRenderState::ptr)(IO::Graphics::GID_CURSORS, iVar4 + 0x52, 0xc, 6,
+                                    (int)DAT_UnitsState::instance.units[_unitID].plannedDestinationX
+                                        + DAT_ViewportRenderState::instance
+                                            .translationMatrix[DAT_UnitsState::instance.units[_unitID]
+                                                    .plannedDestinationY]
+                                            .addXgetTile,
+                                    2);
+                            }
                         }
                         UVar2 = DAT_UnitsState::instance.units[_unitID].targetingType;
                         if ((UVar2 == Map::Units::UIT_ATTACK_LAND) || (UVar2 == Map::Units::UIT_THROW_COW)) {
