@@ -172,13 +172,20 @@ namespace Map {
             _param_3_id_x_tile_buildingID_copy = (short)id;
             uVar13 = id;
             /*
-              The arm order here is the original's block order and is worth 23.9 points, but
-              the nested switches' arm order is not. Two were tried against their own jump
-              tables and both measure worse or flat: putting the archer arm of 0x528e3a
-              first so that it falls through into the block below it, which is exactly what
-              0x528e41 does, costs 0.9 points; and reordering the eight arms of 0x5290c7
-              into their table order adds 0.1 back. Once the arms are at the right
-              addresses, MSVC lays out the blocks inside them to its own taste.
+              The arm order here is the original's block order and is worth 23.9 points. The
+              nested switches' arm order is not worth anything, and that has now been tested
+              three times, each against the switch's own jump table:
+
+                - 0x528e3a: putting the archer arm first so it falls through into the block
+                  below, which is exactly what 0x528e41 does, costs 0.9 points;
+                - 0x5290c7: reordering its eight arms into table order adds 0.1 back;
+                - 0x52a308: moving the big arm to third, where 0x52838a puts it, costs 0.3.
+
+              So the rule is about scope, not about ordering as such. The outer switch fixes
+              where each hundred-instruction arm begins, and getting that wrong misaligns
+              everything downstream - which is why it was worth 23.9. Inside an arm the
+              blocks are small and MSVC lays them out to its own branch heuristics, so
+              forcing source order on them just fights the compiler. Do not re-run these.
              */
             switch (unitInstructionType) {
             case Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk:
