@@ -74,105 +74,15 @@ namespace Map {
             }
             BVar7 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnDeerLionOrRabbit, this)(
                 tribeID, 100, Map::Units::UT_ANTELOPESHDEER);
-            if (!BVar7) {
-                if (this->tribes[tribeID].initialMoveOrderGiven == 0) {
-                    /*
-                      The original returns here - its block ends in `ret 4` after setting
-                      the behaviour type - which is also why it can reuse the register that
-                      held initialMoveOrderGiven for the unit ID.
-                     */
-                    sVar2 = this->tribes[tribeID].selectionTargetUnitID;
-                    this->tribes[tribeID].initialMoveOrderGiven = 1;
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
-                        (uint)(DAT_UnitsState::instance.units[sVar2].x),
-                        (uint)(DAT_UnitsState::instance.units[sVar2].y), 0, 0, Map::Units::Instructions::UMSE_0);
-                    this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
-                    return;
-                }
-                /*
-                  The original returns from this one too: the block at 0x52af03 ends in
-                  `ret 4` right after zeroing the counter.
-                 */
-                if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
-                    this->tribes[tribeID].unknownCounter01 = 0;
-                    return;
-                }
-                sVar2 = this->tribes[tribeID].predatorNearby;
-                if (!sVar2) {
-                    int SVar3 = this->tribes[tribeID].tribeBehaviorType;
-                    if (SVar3 == (SomeTribeBehaviorType)0) {
-                        if (iVar5) {
-                            this->tribes[tribeID].wanderIntervalTicks = 200;
-                        }
-                        if (0x14 < iVar8) {
-                            this->tribes[tribeID].wanderIntervalTicks = 200;
-                        }
-                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter
-                            = this->tribes[tribeID].unknownAttackRelatedUpdateCounter + 1;
-                        if (this->tribes[tribeID].wanderIntervalTicks
-                            <= this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
-                            this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                            this->tribes[tribeID].wanderIntervalTicks
-                                = (4 - ((byte)SEC_RNG::instance.currentNumber2 & 3)) * 200;
-                            /*
-                              Compared against the memory operand, not through a local: the
-                              original has `cmp word ptr [..], 0; jg`. The block it falls
-                              into at 0x52b064 ends in `ret 4`, so a tribe with no rally
-                              points stops here instead of walking the array it has not got.
-                             */
-                            if (this->tribes[tribeID].rallyPointCount <= 0) {
-                                MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
-                                    DAT_WildlifeState::ptr)(tribeID, 5, 0);
-                                return;
-                            }
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
-                            sVar2 = this->tribes[tribeID].currentRallyPointIndex;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][0]),
-                                (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0);
-                            this->tribes[tribeID].currentRallyPointIndex
-                                = this->tribes[tribeID].currentRallyPointIndex + 1;
-                            if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
-                                this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
-                                this->tribes[tribeID].rallyPointCount = 0;
-                            }
-                        }
-                    } else if (SVar3 == Map::Units::STBT_1) {
-                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter
-                            = this->tribes[tribeID].unknownAttackRelatedUpdateCounter + 1;
-                        if (this->tribes[tribeID].unknownAttackRelatedUpdateCounter == 800) {
-                            this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
-                            this->tribes[tribeID].tribeBehaviorType = ((SomeTribeBehaviorType)0);
-                        }
-                    }
-                } else {
-                    if (sVar2 == 1) {
-                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
-                            DAT_WildlifeState::ptr)(tribeID, 5, 0);
-                        if ((this->tribes[tribeID].rallyPointCount < 1)
-                            && (MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
-                                    DAT_WildlifeState::ptr)(tribeID, 5, 1),
-                                this->tribes[tribeID].rallyPointCount < 1)) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::scatterTribeUnitsRandomly, this)(tribeID);
-                        } else {
-                            sVar2 = this->tribes[tribeID].selectionTargetUnitID;
-                            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                                (int)DAT_UnitsState::instance.units[sVar2].x,
-                                (int)(DAT_UnitsState::instance.units[sVar2].y), DE::SHCDE::FX_DEER_RUN);
-                            iVar8 = (int)this->tribes[tribeID].rallyPointCount;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][0]),
-                                (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][1]), 0, 0);
-                        }
-                    }
-                    this->tribes[tribeID].predatorNearby = this->tribes[tribeID].predatorNearby + 1;
-                    if (799 < this->tribes[tribeID].predatorNearby) {
-                        this->tribes[tribeID].predatorNearby = 0;
-                    }
-                }
-            } else {
+            /*
+              The spawn-succeeded arm comes first. The original tests the result and jumps
+              0x7d forward to the did-not-spawn body (`je 0x7d`), so the arm that gives the
+              move order is the fall-through and ends in its own `ret 4`. Written
+              `if (!BVar7)` that whole arm - the rally-point call, standUpAllTribeUnits,
+              giveTribeMoveInstruction, the currentRallyPointIndex bump and the
+              rallyPointCount reset - lands in the far block and the test inverts to `jne`.
+             */
+            if (BVar7) {
                 MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                     DAT_WildlifeState::ptr)(tribeID, 2, 0);
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
@@ -185,6 +95,101 @@ namespace Map {
                 if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
                     this->tribes[tribeID].rallyPointCount = 0;
                     this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
+                }
+                return;
+            }
+            if (this->tribes[tribeID].initialMoveOrderGiven == 0) {
+                /*
+                  The original returns here - its block ends in `ret 4` after setting
+                  the behaviour type - which is also why it can reuse the register that
+                  held initialMoveOrderGiven for the unit ID.
+                 */
+                sVar2 = this->tribes[tribeID].selectionTargetUnitID;
+                this->tribes[tribeID].initialMoveOrderGiven = 1;
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
+                    (uint)(DAT_UnitsState::instance.units[sVar2].x), (uint)(DAT_UnitsState::instance.units[sVar2].y), 0,
+                    0, Map::Units::Instructions::UMSE_0);
+                this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
+                return;
+            }
+            /*
+              The original returns from this one too: the block at 0x52af03 ends in
+              `ret 4` right after zeroing the counter.
+             */
+            if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
+                this->tribes[tribeID].unknownCounter01 = 0;
+                return;
+            }
+            sVar2 = this->tribes[tribeID].predatorNearby;
+            if (!sVar2) {
+                int SVar3 = this->tribes[tribeID].tribeBehaviorType;
+                if (SVar3 == (SomeTribeBehaviorType)0) {
+                    if (iVar5) {
+                        this->tribes[tribeID].wanderIntervalTicks = 200;
+                    }
+                    if (0x14 < iVar8) {
+                        this->tribes[tribeID].wanderIntervalTicks = 200;
+                    }
+                    this->tribes[tribeID].unknownAttackRelatedUpdateCounter
+                        = this->tribes[tribeID].unknownAttackRelatedUpdateCounter + 1;
+                    if (this->tribes[tribeID].wanderIntervalTicks
+                        <= this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
+                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                        this->tribes[tribeID].wanderIntervalTicks
+                            = (4 - ((byte)SEC_RNG::instance.currentNumber2 & 3)) * 200;
+                        /*
+                          Compared against the memory operand, not through a local: the
+                          original has `cmp word ptr [..], 0; jg`. The block it falls
+                          into at 0x52b064 ends in `ret 4`, so a tribe with no rally
+                          points stops here instead of walking the array it has not got.
+                         */
+                        if (this->tribes[tribeID].rallyPointCount <= 0) {
+                            MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
+                                DAT_WildlifeState::ptr)(tribeID, 5, 0);
+                            return;
+                        }
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
+                        sVar2 = this->tribes[tribeID].currentRallyPointIndex;
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
+                            this)(tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][0]),
+                            (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0);
+                        this->tribes[tribeID].currentRallyPointIndex = this->tribes[tribeID].currentRallyPointIndex + 1;
+                        if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
+                            this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
+                            this->tribes[tribeID].rallyPointCount = 0;
+                        }
+                    }
+                } else if (SVar3 == Map::Units::STBT_1) {
+                    this->tribes[tribeID].unknownAttackRelatedUpdateCounter
+                        = this->tribes[tribeID].unknownAttackRelatedUpdateCounter + 1;
+                    if (this->tribes[tribeID].unknownAttackRelatedUpdateCounter == 800) {
+                        this->tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+                        this->tribes[tribeID].tribeBehaviorType = ((SomeTribeBehaviorType)0);
+                    }
+                }
+            } else {
+                if (sVar2 == 1) {
+                    MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
+                        DAT_WildlifeState::ptr)(tribeID, 5, 0);
+                    if ((this->tribes[tribeID].rallyPointCount < 1)
+                        && (MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
+                                DAT_WildlifeState::ptr)(tribeID, 5, 1),
+                            this->tribes[tribeID].rallyPointCount < 1)) {
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::scatterTribeUnitsRandomly, this)(tribeID);
+                    } else {
+                        sVar2 = this->tribes[tribeID].selectionTargetUnitID;
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[sVar2].x,
+                            (int)(DAT_UnitsState::instance.units[sVar2].y), DE::SHCDE::FX_DEER_RUN);
+                        iVar8 = (int)this->tribes[tribeID].rallyPointCount;
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
+                            this)(tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][0]),
+                            (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][1]), 0, 0);
+                    }
+                }
+                this->tribes[tribeID].predatorNearby = this->tribes[tribeID].predatorNearby + 1;
+                if (799 < this->tribes[tribeID].predatorNearby) {
+                    this->tribes[tribeID].predatorNearby = 0;
                 }
             }
         }
