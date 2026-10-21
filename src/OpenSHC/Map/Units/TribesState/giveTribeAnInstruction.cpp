@@ -140,6 +140,14 @@ namespace Map {
               frame: the reference costing 2.8 points on its own, and the frame fix netting
               only 0.1 when it was bundled with the reference - it got the frame exactly
               right and broke every displacement at the same time, so the two cancelled.
+
+              Caching the base while keeping the displacement does not work either, though
+              the slot census makes it look inviting: the original touches its tribeID
+              argument 36 times where the plain subscript touches it 90, because it holds
+              `this + tribeID * 0x334` in EBP. Shifting a TribesState pointer by whole Tribe
+              strides and subscripting at zero gives the right address with the right
+              encoding and one base to cache - and costs 3.5 points (56.8% -> 53.3%). It
+              also puts a slot back over. The subscript stands.
              */
             _param_4_unitUID_Y_copy = unitUID;
             _ramOrHorse = 0;
