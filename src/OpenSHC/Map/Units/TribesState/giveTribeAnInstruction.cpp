@@ -146,8 +146,18 @@ namespace Map {
               argument 36 times where the plain subscript touches it 90, because it holds
               `this + tribeID * 0x334` in EBP. Shifting a TribesState pointer by whole Tribe
               strides and subscripting at zero gives the right address with the right
-              encoding and one base to cache - and costs 3.5 points (56.8% -> 53.3%). It
-              also puts a slot back over. The subscript stands.
+              encoding and one base to cache - and it loses. Measured twice, because the
+              first run was on the build where _tribeSize had lost its initialisation: on
+              corrected code it is 52.0% against the subscript's 56.8%, which is also what
+              the `Tribe&` scored. Caching the base costs 4.8 points whichever way the
+              displacement is written.
+
+              The instructive part is that every cheap signal said the opposite. Caching
+              takes the function from 2312 instructions to 2187 against the original's 2157,
+              and lifts quick_diff from 0.4296 to 0.4622 - fewer instructions, closer
+              length, better ratio, worse score. The plain subscript re-derives
+              `tribeID * 0x334` at all 74 accesses and is still the better match, so do not
+              trust instruction count or quick_diff here without confirming on reccmp.
              */
             /*
               Declaration order is a dead end here, and this can be shown rather than
