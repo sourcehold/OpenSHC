@@ -122,6 +122,24 @@ namespace Map {
             _param_4_unitUID_Y = unitUID;
             iVar11 = id;
             _param_1_tribeID = tribeID;
+            /*
+              The subscripts are repeated rather than bound to a `Tribe&`, and the reason is
+              worth writing down because the evidence points the other way. The original
+              takes the tribe's address once before it reads anything - `lea ebp, [eax +
+              ecx]` at 0x527c93, spilled to [esp + 0x18] at 0x527cc4 - and reaches every
+              tribe field as `[ebp + ...]`: `[ebp + 0x5c]` for the size, `[ebp + 0x2e8]` and
+              `[ebp + 0x23a]` for the two stores below.
+
+              Recomputing `tribeID * 0x334` per subscript is indeed what puts extra dwords
+              in our frame: 0x28 against the original's 0x1c, which shifts every `[esp + N]`
+              in the function by 0xc, and 675 of the 3041 differing lines carry an
+              `[esp + N]` operand. Binding all 74 subscripts to a reference does remove one
+              of the three extra slots - but it costs 2.8 points (51.9% -> 49.1%), because
+              the frame then measures 0x24 and every stack offset mismatches by 8 instead of
+              12. Partial credit is worth nothing here; the frame has to land exactly on
+              0x1c. The two slots still over are one use each, which makes them compiler
+              temporaries for argument shuffling rather than locals this file can drop.
+             */
             _tribeSize = this->tribes[tribeID].size;
             _param_4_unitUID_Y_copy = unitUID;
             _ramOrHorse = 0;
