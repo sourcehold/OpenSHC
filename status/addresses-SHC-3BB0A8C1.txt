@@ -46783,7 +46783,7 @@ SHC_3BB0A8C1_0x00522360 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522390 | 58.0% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522410 | 53.5% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522410 | 55.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005224E0 | 100.0% | Reimplemented
 
@@ -46817,7 +46817,7 @@ SHC_3BB0A8C1_0x00522C50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522CA0 | 85.7% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00522DD0 | 94.5% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00522DD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00522EF0 | 65.9% | Reimplemented, asm differs
 
@@ -46861,7 +46861,7 @@ SHC_3BB0A8C1_0x005237F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00523920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00523A30 | 47.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00523A30 | 54.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00523B00 | 0.0% | Pending
 
@@ -46969,9 +46969,9 @@ SHC_3BB0A8C1_0x00526D50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00526F00 | 42.3% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x005270F0 | 43.4% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x005270F0 | 45.3% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00527330 | 57.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00527330 | 75.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00527440 | 59.6% | Reimplemented, asm differs
 
@@ -47085,7 +47085,7 @@ SHC_3BB0A8C1_0x00527C74 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00527C78 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00527C80 | 56.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00527C80 | 56.9% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x005292C0 | 0.0% | Pending
 
@@ -49141,9 +49141,9 @@ SHC_3BB0A8C1_0x0052AD41 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052AD42 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052AD50 | 50.7% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0052AD50 | 62.6% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x0052B110 | 66.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0052B110 | 71.6% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0052B390 | 63.0% | Reimplemented, asm differs
 

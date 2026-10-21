@@ -74,6 +74,16 @@ namespace Map {
                     pSVar8 = &DAT_GameState::instance.mapAndTime.siegeInformation;
                     do {
                         iVar3 = 100;
+                        /*
+                          The difficulty chain stays an if/else-if, against the asm. The
+                          original dispatches it by subtracting through the values -
+                          `test ecx, ecx; je`, `sub ecx, 2; je`, `sub ecx, 1; jne` - which
+                          is MSVC's shape for a switch over a few close-together cases,
+                          where an equality chain gives a `cmp` per arm. Rewriting these
+                          three arms as `switch (difficulty)` measures 59.6% -> 55.9%, so
+                          whatever the sub-chain buys is less than the arm placement it
+                          changes. Reverted.
+                         */
                         if (!DAT_GameState::instance.mapAndTime.difficulty) {
                             if (_playerID_2 == 1) {
                                 iVar3 = 0x43;
