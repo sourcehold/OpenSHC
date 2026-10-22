@@ -75,6 +75,21 @@ namespace Map {
             byte bVar2;
             UnitStateShort UVar3;
             /*
+              Both of this function's wide scratch locals stay as they are, and the two
+              measurements together say when widening pays and when it does not.
+
+              `sVar9` is a `short` used 82 times, and the diff shows 33 register-to-
+              register re-extensions against the original's 10 - `movsx ecx, cx` each time
+              it is used as an index again. Widening it to `int` to extend once measures
+              59.0% -> 58.3%.
+
+              The same change was worth +17.4 on getMajoritySelectedUnitType. The
+              difference is that there the local had one purpose - the unit type, used for
+              a bound test and then as an array index - where `sVar9` here is the
+              decompiler's general short scratch, holding a tribe size in one arm and a
+              unit id in the next. Widening a single-purpose local that is tested and then
+              indexed with pays; widening a shared scratch does not.
+
               UVar4 stays 16 bits wide. The original compares it 32-bit in places - `cmp
               ecx, 0x16` and `cmp ecx, 0x46` at the pitch-ditch arm against our
               `cmp cx, ..` - and the switch dispatches on it 32-bit too, so UnitTypeInt

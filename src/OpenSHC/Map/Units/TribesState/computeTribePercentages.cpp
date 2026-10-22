@@ -33,7 +33,14 @@ namespace Map {
               the percentages costs a `movzx` plus a `movsx`.
              */
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
-            short _percentage = 0;
+            /*
+              An `int`, not a `short`. The original keeps each percentage in a 32-bit
+              register and stores `ax` straight into the field - `idiv ecx` then
+              `mov word ptr [esi + 0x2be], ax`. A `short` local makes MSVC truncate the
+              division result and widen it back before every store, adding a
+              `movzx eax, ax` at all four sites; the original has none.
+             */
+            int _percentage = 0;
             int iVar4 = 0;
             this->tribes[tribeID].percentageDyingUnk = 0;
             this->tribes[tribeID].percentageMovingUnk = 0;
@@ -116,27 +123,27 @@ namespace Map {
             if (!_tribeSize) {
                 _percentage = 100;
             } else {
-                _percentage = (short)((_countDying * 100) / _tribeSize);
+                _percentage = (_countDying * 100) / _tribeSize;
             }
-            this->tribes[tribeID].percentageDyingUnk = _percentage;
+            this->tribes[tribeID].percentageDyingUnk = (short)_percentage;
             if (!_tribeSize) {
                 _percentage = 100;
             } else {
-                _percentage = (short)((_countMoving * 100) / _tribeSize);
+                _percentage = (_countMoving * 100) / _tribeSize;
             }
-            this->tribes[tribeID].percentageMovingUnk = _percentage;
+            this->tribes[tribeID].percentageMovingUnk = (short)_percentage;
             if (!_tribeSize) {
                 _percentage = 100;
             } else {
-                _percentage = (short)((_countAttackingUnk * 100) / _tribeSize);
+                _percentage = (_countAttackingUnk * 100) / _tribeSize;
             }
-            this->tribes[tribeID].percentageAttackingUnk = _percentage;
+            this->tribes[tribeID].percentageAttackingUnk = (short)_percentage;
             if (!_tribeSize) {
                 _percentage = 100;
             } else {
-                _percentage = (short)((_countRangeUnk * 100) / _tribeSize);
+                _percentage = (_countRangeUnk * 100) / _tribeSize;
             }
-            this->tribes[tribeID].percentageShootingUnk = _percentage;
+            this->tribes[tribeID].percentageShootingUnk = (short)_percentage;
             /*
               The last percentage is the same shape as the four above it, not a guarded
               store followed by an unconditional 100 - which is what the import had, and
