@@ -19,7 +19,6 @@ namespace Map {
             undefined4 param_1, int param_2, int param_3, int param_4, UnitType param_5, int param_6, int param_7)
         {
             int unitID;
-            int aiUnitBehaviourType;
             if (((0 < param_2) || (0 < param_3)) && 0 < param_6) {
                 /*
                   The Y scaling is computed first: the original has `lea ebx, [edx*8]` for
@@ -35,15 +34,27 @@ namespace Map {
                     if (unitID) {
                         DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = param_7;
                         UnitTypeShort UVar1 = DAT_UnitsState::instance.units[unitID].unitType;
+                        /*
+                          The call is written out in both arms. The original pushes the
+                          behaviour constant straight from each one - `push 0x14`,
+                          `jmp 0x2`, `push 0x11` - and shares the `push eax` and the call
+                          after them, which is what MSVC produces when it tail-merges two
+                          call sites. Assigning a local and calling once makes it
+                          materialise the value instead (`mov ecx, 0x14` / `mov ecx, 0x11`
+                          and a `push ecx`), five bytes more, and that is what every
+                          branch displacement in this function was out by. Declaring the
+                          local at its use rather than at function scope does not change
+                          it; the two call sites do.
+                         */
                         if (UVar1 == Map::Units::UT_E_ARCHER || UVar1 == Map::Units::UT_E_XBOW
                             || UVar1 == Map::Units::UT_A_ARCHER || UVar1 == Map::Units::UT_A_SLINGER
                             || UVar1 == Map::Units::UT_A_HARCHER || UVar1 == Map::Units::UT_A_FIRETHROWER) {
-                            aiUnitBehaviourType = 0x11;
+                            MACRO_CALL_MEMBER(AI::AICState_Func::addUnitToItsTribe, DAT_AICState::ptr)(
+                                unitID, 0x11);
                         } else {
-                            aiUnitBehaviourType = 0x14;
+                            MACRO_CALL_MEMBER(AI::AICState_Func::addUnitToItsTribe, DAT_AICState::ptr)(
+                                unitID, 0x14);
                         }
-                        MACRO_CALL_MEMBER(AI::AICState_Func::addUnitToItsTribe, DAT_AICState::ptr)(
-                            unitID, aiUnitBehaviourType);
                     }
                     param_2 = param_2 + -1;
                 } while (param_2);

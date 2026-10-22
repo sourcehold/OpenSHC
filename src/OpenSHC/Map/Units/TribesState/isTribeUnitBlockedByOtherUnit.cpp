@@ -18,6 +18,15 @@ namespace Map {
         undefined4 TribesState::isTribeUnitBlockedByOtherUnit(int param_1)
         {
             int iVar2;
+            /*
+              The unit is re-indexed at every test, and that is cheaper than the
+              alternative. The original keeps its address in a register across the body -
+              `cmp word ptr [ecx + ..]` for the dying test with no multiply in front of
+              it - where ours emits `mov edx, eax; imul edx, edx, 0x490` again inside the
+              loop. Hoisting a `Unit*` for all eight accesses removes those, and measures
+              80.7% -> 74.3%: the pointer needs a home across the call in the loop and
+              costs more than the multiply it saves.
+             */
             int unitSelectionIndex = 0;
             int sVar1 = this->tribes[param_1].size;
             while (true) {

@@ -55,7 +55,14 @@ namespace Map {
                     _finalTargetUnitID = (int)_targetUnitID;
                 }
             }
-            _rng2 = (uint)(byte)SEC_RNG::instance.currentNumber2;
+            /*
+              Masked here, not at the use. The original does `and edx, 0x7f` right after
+              reading the byte, before it reads the herd size and the coordinates; leaving
+              the mask on the comparison forty lines down makes MSVC do it there instead.
+              The value is only ever read masked - it is overwritten by the spawn result
+              straight afterwards - so this is the same program.
+             */
+            _rng2 = (uint)(byte)SEC_RNG::instance.currentNumber2 & 0x7f;
             _terrainHeight = DAT_UnitsState::instance.units[_finalTargetUnitID].terrainOrClimbHeight;
             /*
               Both of these reads are `movzx` in the original, not `movsx`.
@@ -83,7 +90,7 @@ namespace Map {
                 } else {
                     iVar3 = _tribeSize < _unknown ? 25 : 100;
                 }
-                if (iVar3 <= (int)(_rng2 & 0x7f)) {
+                if (iVar3 <= (int)_rng2) {
                     _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, 0, (int)(_unitX * 8), (int)(_unitY * 8), (int)(_terrainHeight), unitType);
                     /*
