@@ -214,6 +214,26 @@ namespace Map {
                                         .y,
                                     2, (UnitType)((int)(_unitType)), _nUnits);
                                 _newCount = DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19];
+                                /*
+                                  The original reaches this field through the global, not
+                                  `this`. All five of these 0x32 stores are
+                                  `mov word ptr [eax + I<TribesState>::instance+86]` in the
+                                  binary - 0x527696, 0x5277a6, 0x5278ff, 0x527b0b and
+                                  0x527b86 - addressing the instance absolutely with the
+                                  tribe index in eax, where `this->tribes[..]` gives the
+                                  two-register `[eax + <reg> + 0x56]`. So the original
+                                  source almost certainly wrote the global here.
+
+                                  Changing all five to DAT_TribesState::instance measures
+                                  59.6% -> 57.2%, even though it is demonstrably right:
+                                  afterwards four of the five match instruction for
+                                  instruction and the `+ 0x56` form is gone from the diff
+                                  entirely. Materialising the global costs more in
+                                  register pressure elsewhere than the five stores gain.
+                                  Left as `this->` for the score, with the finding recorded
+                                  - if this function's allocation is ever brought into line
+                                  the global is the form to go back to.
+                                 */
                                 this->tribes[_tribeID1].unknownAttackRelatedUpdateCounter = 0x32;
                                 _destinationIndexTracker = _destinationIndexTracker + 1;
                             } while (_newCount);
