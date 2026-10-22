@@ -1,6 +1,8 @@
 #include "../../../Map.func.hpp"
 #include "../TribesState.func.hpp"
 
+#include "OpenSHC/OS.func.hpp"
+
 #include "string.h"
 #include <intrin.h>
 
@@ -12,7 +14,6 @@ namespace Map {
         void TribesState::upgradeTribeArrayLayoutForMapVersion(
             PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion)
         {
-            int iVar1;
             Tribe* _Dst;
             int iVar2;
             short* _Src;
@@ -40,10 +41,11 @@ namespace Map {
             _Src = this->tribes[944].unitSelectionBitMasked + 0x7a;
             do {
                 if (_Dst != (Tribe*)_Src) {
-                    memmove(_Dst, (void*)((int)(_Src)), (size_t)((int)(620)));
+                    MACRO_CALL(OS_Func::_memmove)(_Dst, (void*)((int)(_Src)), (size_t)((int)(620)));
                 }
                 psVar3 = _Dst->unitSelectionBitMasked;
-                memmove(&_Dst->field34_0x1c8, (void*)((int)(_Src + 0x80)), (size_t)((int)(364)));
+                MACRO_CALL(OS_Func::_memmove)(
+                    &_Dst->field34_0x1c8, (void*)((int)(_Src + 0x80)), (size_t)((int)(364)));
                 iVar2 = iVar2 + -1;
                 _Src = _Src + -0x136;
                 _Dst = _Dst + -1;

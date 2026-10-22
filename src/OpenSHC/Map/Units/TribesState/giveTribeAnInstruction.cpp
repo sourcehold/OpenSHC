@@ -1722,7 +1722,12 @@ namespace Map {
                                   + (int)_x];
                 unitUID = MACRO_CALL_MEMBER(
                     Map::Buildings::BuildingsState_Func::getRequiredEngineersCount, DAT_BuildingsState::ptr)(iVar11);
-                if (((unitUID | unitUID != 0)
+                /*
+                  `unitUID | unitUID != 0` is only ever truthy when unitUID is non-zero,
+                  so this is that test written three ways at once - the same decompiler
+                  artifact as the counter below, but harmless here.
+                 */
+                if ((unitUID != 0
                         || (DAT_BuildingsState::instance.buildings[iVar11].buildingType
                             == Map::Buildings::BT_OILSMELTER))
                     && 0 < this->tribes[tribeID].size) {
@@ -1809,7 +1814,7 @@ namespace Map {
                 if (DAT_UnitsState::instance.units[id].uid == unitUID
                     && (unitUID = MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::getRemainingRequiredEngineers, DAT_UnitsState::ptr)(id),
-                        unitUID | unitUID != 0)
+                        unitUID != 0)
                     && (iVar12 = 0, 0 < this->tribes[tribeID].size)) {
                     do {
                         uVar13 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -1939,7 +1944,18 @@ namespace Map {
                                     if (DAT_PathFindingState::instance.ALG_ResultTile != 0)
                                         break;
                                     unitUID = unitUID + 1;
-                                    if (unitUID | unitUID != 0x10)
+                                    /*
+                                      `unitUID | unitUID != 0x10` is always true - it
+                                      parses as `unitUID | (unitUID != 0x10)`, which is
+                                      0x10 when the counter reaches 16 and 1 when it is 0.
+                                      So the goto was unconditional and the three lines
+                                      below it were dead, leaving this retry loop to walk
+                                      off the end of the 16-entry table at 0xb4c7f0 that
+                                      LAB_00529da0 indexes with it (`movsx edi, word ptr
+                                      [eax*4 + 0xb4c7f0]`) until the path search happened
+                                      to succeed. The counter test is what was meant.
+                                     */
+                                    if (unitUID != 0x10)
                                         goto LAB_00529da0;
                                     sVar9 = DAT_UnitsState::instance.units[iVar11].x;
                                     sVar8 = DAT_UnitsState::instance.units[iVar11].y;
