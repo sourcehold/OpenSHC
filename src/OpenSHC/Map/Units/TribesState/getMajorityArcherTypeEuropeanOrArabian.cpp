@@ -17,10 +17,10 @@ namespace Map {
         UnitType TribesState::getMajorityArcherTypeEuropeanOrArabian(int selectionID)
         {
             int _unitID;
-            int iVar2 = (int)this->tribes[selectionID].size;
             int _unitSelectionIndex = 0;
             int _europeanArcherCount = 0;
             int _arabArcherCount = 0;
+            int iVar2 = (int)this->tribes[selectionID].size;
             if (0 < iVar2) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
