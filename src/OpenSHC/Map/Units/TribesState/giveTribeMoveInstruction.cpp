@@ -67,9 +67,26 @@ namespace Map {
           changes nothing at all now (identical numbers), where on its own it used to move
           both figures.
 
-          Reverted, because raw is what the status file tracks. But the shape is not in
-          doubt any more: this function wants the six call sites and a 0x34 frame at the
-          same time, and that needs two locals the decompiler did not name.
+          Reverted, because raw is what the status file tracks.
+
+          The two missing locals do not exist, and this is now settled rather than
+          suspected. 0x526676 reads the tile's logic word once into a register and then has
+          `test eax, 0x100; jz; mov [esp + 0x20], ebx` followed by
+          `test eax, 0x10000000; jz; mov [esp + 0x20], ebx` - two tests storing the same 1
+          into the *same* slot - so the original has one defensive-structure flag where the
+          decompiler printed three variables and two loads. Writing that shape out, which
+          is what the original demonstrably does, measures:
+
+            as written (three flags, `_modulo`)        frame 0x34   raw 30.0%  norm 22.5%
+            six call sites (three flags, no `_modulo`) frame 0x2c   raw 28.9%  norm 29.4%
+            one flag, `_modulo`                        frame 0x2c   raw 23.4%  norm 21.5%
+            one flag, six call sites                   frame 0x2c   raw 28.3%  norm 28.1%
+
+          Each local removed costs a slot and the frame drops to 0x2c, so our 0x34 is made
+          of a different set of locals than the original's thirteen slots and matching the
+          size was a coincidence. A copy of the x parameter alongside `_y` does not add one
+          back - MSVC coalesces it. Normalized says plainly that the six call sites are the
+          right shape; raw cannot see past the displacement bytes. Do not re-run these four.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005263A0
         undefined4 TribesState::giveTribeMoveInstruction(
