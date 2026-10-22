@@ -239,6 +239,15 @@ namespace Map {
                             } while (_newCount);
                         }
                         _siegeInfoSubIndex = _siegeInfoSubIndex + 1;
+                        /*
+                          The tunneler count stays inside the loop body, where the
+                          decompiler put it. The original reads it after the back-edge -
+                          `jl` closing the do-while, then `mov esi, [MapPropertiesState +
+                          340]; test esi, esi; je` - and moving it there is the same value,
+                          since it is assigned in the loop and read nowhere until the
+                          while below. It measures 60.4% -> 54.8%, so the read being
+                          loop-carried is worth more here than its position.
+                         */
                         iVar3 = DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount;
                     } while (_siegeInfoSubIndex < 20);
                     while (iVar3) {
@@ -336,10 +345,30 @@ namespace Map {
                         } while (_playerID < 9);
                     LAB_005276b5:
                         iVar3 = 10;
-                        while (DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] == 0) {
+                        /*
+                          Top-tested, with the back-edge returning to the test, and the
+                          bound written as `< 0x14` because that is the constant the
+                          original compares against. Its loop at 0x005276c0 is
+
+                            L:cmp dword ptr [ecx*4 + 0x117ce50], 0
+                              jnz <found>
+                              add ecx, 1
+                              cmp ecx, 0x14
+                              jl  L
+                              jmp <exhausted>
+
+                          so the index stays scaled into the addressing rather than being
+                          walked as a pointer, and the test is at the top. A `while` gets
+                          rotated: MSVC peels the first test and bottom-tests the rest.
+                          Same change as createTribeForPlayer, worth +11.0 there.
+                         */
+                    LAB_005276c0:
+                        if (DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] == 0) {
                             iVar3 = iVar3 + 1;
-                            if (0x13 < iVar3)
-                                goto LAB_005277c5;
+                            if (iVar3 < 0x14) {
+                                goto LAB_005276c0;
+                            }
+                            goto LAB_005277c5;
                         }
                         switch (iVar3) {
                         case 10:
