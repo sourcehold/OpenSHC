@@ -82,9 +82,18 @@ namespace Map {
                   0x59. A selection of two or three gets 0x57 as well, and one of four or
                   more gets 0x58 instead of 0x56.
                  */
-                int _sfx;
+                /*
+                  The play is written out in each arm with its constant. The original
+                  pushes them directly - `cmp edi, 1; jne 0x4; push 0x56; jmp 0x35` for
+                  the first and `push 0x58` for the four-or-more case - and shares the
+                  coordinate pushes and the call after them, which is MSVC tail-merging
+                  two call sites. An `_sfx` local and one shared call makes it
+                  materialise the value into a register first instead.
+                 */
                 if (param_1 == 1) {
-                    _sfx = 0x56;
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x,
+                        (int)(DAT_UnitsState::instance.units[iVar3].y), 0x56);
                 } else {
                     if (param_1 == 2 || param_1 == 3) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
@@ -107,11 +116,10 @@ namespace Map {
                             (int)(DAT_UnitsState::instance.units[iVar3].y), 0x59);
                         return;
                     }
-                    _sfx = 0x58;
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x,
+                        (int)(DAT_UnitsState::instance.units[iVar3].y), 0x58);
                 }
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    (int)DAT_UnitsState::instance.units[iVar3].x,
-                    (int)(DAT_UnitsState::instance.units[iVar3].y), _sfx);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[iVar3].x,
                     (int)(DAT_UnitsState::instance.units[iVar3].y), 0x59);

@@ -28,7 +28,6 @@ namespace Map {
             int _otherX;
             int _xDifference;
             int _otherY;
-            int sfxOffsetInArray;
             /*
               This is the selected-unit count the majority lookup writes back, not a
               pointer. The decompiler typed it `TribesState*` because the import assigned
@@ -133,21 +132,29 @@ namespace Map {
                 if (_ptrptrCurrentSelectionID != Map::Units::UT_A_HARCHER) {
                     return;
                 }
+                /*
+                  The play is written out in each arm with its constant, as in the sibling
+                  playUnitSelectionSound. The original pushes 0xea, 0xeb and 0xec directly
+                  and shares the coordinate pushes and the call, which is MSVC tail-merging
+                  three call sites; a named offset and one shared call makes it materialise
+                  the value into a register first.
+                 */
                 if (_selectedCount == 1) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
-                    sfxOffsetInArray = 0xea;
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        _otherX, _otherY, 0xea);
                 } else if (_selectedCount < 5) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
-                    sfxOffsetInArray = 0xeb;
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        _otherX, _otherY, 0xeb);
                 } else {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
-                    sfxOffsetInArray = 0xec;
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        _otherX, _otherY, 0xec);
                 }
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    _otherX, _otherY, sfxOffsetInArray);
                 /*
                   A second play, of 0x59, with the coordinates read again (0x521c0b,
                   0x521c12) - which is what the decompiler turned into an assignment of
