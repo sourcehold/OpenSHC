@@ -47,11 +47,14 @@ namespace Map {
                 _Src = _Src + -0x136;
                 _Dst = _Dst + -1;
                 psVar3 = psVar3 + 100;
-                for (iVar1 = 50; iVar1 != 0; iVar1 = iVar1 + -1) {
-                    psVar3[0] = 0;
-                    psVar3[1] = 0;
-                    psVar3 = psVar3 + 2;
-                }
+                /*
+                  A memset, not a loop. The original clears these 200 bytes with
+                  `mov ecx, 0x32` and a single `rep stosd` - fifty dwords - which is what
+                  MSVC inlines a constant-size memset to. The decompiler's two-shorts-per-
+                  iteration loop compiles to eight instructions instead: the pair of
+                  stores, the cursor bump, the counter decrement and the branch.
+                 */
+                memset(psVar3, 0, (size_t)((int)(200)));
             } while (-1 < iVar2);
             return;
         }
