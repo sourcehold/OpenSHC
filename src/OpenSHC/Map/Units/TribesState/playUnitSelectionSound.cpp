@@ -106,9 +106,18 @@ namespace Map {
                       its fall-through and the lone 0x59 play sits in the far block -
                       ours is the other way round. Rewriting it as
                       `if (param_1 >= 4) { _sfx = 0x58; } else { ...; return; }` measures
-                      62.1% -> 56.0%. Second loss for the inverted-arm fix after
-                      giveTribeMoveInstruction, and both are in functions whose remaining
-                      gap is dominated by where the shared epilogue lands.
+                      62.1% -> 56.0%. Retried after the play was written out in each arm,
+                      in case the surrounding blocks had changed enough to matter: still a
+                      loss, 65.4% -> 60.2%. Second and third losses for the inverted-arm
+                      fix after giveTribeMoveInstruction, and all of them are in functions
+                      whose remaining gap is dominated by where the shared epilogue lands.
+
+                      What is left here is how far MSVC tail-merges. The original shares
+                      one coordinate-read-and-call block between the 0x56 and 0x58 arms,
+                      duplicating only the `push`, and its 0x59 plays jump back to a second
+                      shared block. Ours pushes the constants per arm correctly but keeps
+                      its own copy of the coordinate reads, which is the two extra reads of
+                      units[].x and units[].y the diff shows (orig 4 and 5, ours 6 and 7).
                      */
                     if (param_1 < 4) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(

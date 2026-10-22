@@ -104,6 +104,19 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateCamelTribeBehavior, this)(
                             DAT_CurrentTribeID::instance);
                         break;
+                    /*
+                      These two arms are the whole of this function's remaining gap, and it
+                      is not reachable. The original's jump table at 0x52b9a0 sends
+                      tribeType 0x11 to 0x52b90a and 0x12 to 0x52b914, ten bytes apart, and
+                      both blocks are byte-for-byte the same work:
+
+                        push eax; mov ecx, esi; call 0x523730; jmp 0x52b961
+
+                      So the original carries two identical blocks that its compiler did not
+                      tail-merge, and ours merges them - which is the 0xa every branch
+                      displacement in this function is out by. Nothing in the source
+                      distinguishes two identical arms without changing what they do.
+                     */
                     case ((AITribeType)0x11):
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::markTribeAsAnimalTribe, this)(
                             DAT_CurrentTribeID::instance);

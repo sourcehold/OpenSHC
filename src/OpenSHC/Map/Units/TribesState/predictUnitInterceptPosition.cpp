@@ -35,14 +35,23 @@ namespace Map {
             }
             _targetTribeMinSpeed
                 = this->tribes[DAT_UnitsState::instance.units[targetUnitID].tribeID].minimumMovementSpeed;
+            /*
+              Both bounds are tested against 1, not 2, and both speeds are `short`. The
+              original has `cmp dx, 1` and `cmp cx, 1` - sixteen bits wide, against the
+              literal 1, each with a `jg` over a `mov reg, 1` - where `< 2` on an `int`
+              gives a 32-bit `jge` against 2. Same test either way; one is the
+              instruction the original has. The second read is `movzx ecx, word ptr
+              [esi + ecx + 0x222]`, so it is a narrow load too.
+             */
             int _targetTribeMinSpeedBounded = (int)_targetTribeMinSpeed;
-            if (_targetTribeMinSpeed < 2) {
+            if (_targetTribeMinSpeed <= 1) {
                 _targetTribeMinSpeedBounded = 1;
             }
-            int _tribeMinSpeed = this->tribes[DAT_UnitsState::instance.units[unitID].tribeID].minimumMovementSpeed;
+            short _tribeMinSpeed
+                = this->tribes[DAT_UnitsState::instance.units[unitID].tribeID].minimumMovementSpeed;
             int iVar3 = _targetTribeMinSpeedBounded * 4;
             int _tribeMinSpeedBounded = (int)_tribeMinSpeed;
-            if (_tribeMinSpeed < 2) {
+            if (_tribeMinSpeed <= 1) {
                 _tribeMinSpeedBounded = 1;
             }
             int iVar4 = (int)DAT_UnitsState::instance.units[targetUnitID].x;
