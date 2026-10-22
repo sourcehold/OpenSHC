@@ -65,7 +65,10 @@ namespace Map {
             _rng2 = (uint)(byte)SEC_RNG::instance.currentNumber2 & 0x7f;
             _terrainHeight = DAT_UnitsState::instance.units[_finalTargetUnitID].terrainOrClimbHeight;
             /*
-              Both of these reads are `movzx` in the original, not `movsx`.
+              Both of these reads are `movzx` in the original, not `movsx`. They stay
+              `int`s cast on the way in rather than `ushort` locals, although the original
+              compares them against each other sixteen bits wide (`cmp cx, di`): as
+              `ushort` the function measures 74.1% -> 70.2%.
              */
             _unknown = (ushort)this->tribes[tribeID].herdMinSize;
             _tribeSize = (ushort)this->tribes[tribeID].size;

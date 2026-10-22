@@ -60,6 +60,14 @@ namespace Map {
                                         this)(_tribeID, _tribeUnitIndex);
                                     int _unitLogicalState = DAT_UnitsState::instance.units[_unitID].logicalState;
                                     _tribeUnitIndex = _tribeUnitIndex + 1;
+                                    /*
+                                      `< 1` stays although the original has
+                                      `test edx, edx; jle` where ours gives
+                                      `cmp edx, 1; jl`: written `<= 0` the whole chain
+                                      below it re-lays out and the function measures
+                                      75.0% -> 55.3%. The instruction is one line; the
+                                      block order it costs is twenty.
+                                     */
                                     if (_unitLogicalState < 1
                                         || (2 < _unitLogicalState
                                             && (_unitLogicalState != Map::Units::ULS_TRANSITIONING))
