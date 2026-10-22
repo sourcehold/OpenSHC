@@ -190,7 +190,7 @@ namespace Map {
 
             BOOLEnum hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters(int playerID, int param_2);
 
-            int getResourceSpace(int param_1, int* resourceType);
+            int getResourceSpace(int param_1, ResourceType resourceType);
 
             void countPlayerResources(int playerID);
 

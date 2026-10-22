@@ -227,7 +227,7 @@ namespace Map {
                 &BuildingsState::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters)
             hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int*), false, Address::SHC_3BB0A8C1_0x0040C1F0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType), false, Address::SHC_3BB0A8C1_0x0040C1F0,
                 &BuildingsState::getResourceSpace)
             getResourceSpace;
 
