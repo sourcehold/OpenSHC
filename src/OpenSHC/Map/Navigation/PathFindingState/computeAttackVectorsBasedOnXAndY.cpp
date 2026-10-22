@@ -1,5 +1,6 @@
 #include "../PathFindingState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
