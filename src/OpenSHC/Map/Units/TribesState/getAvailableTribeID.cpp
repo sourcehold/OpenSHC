@@ -27,6 +27,24 @@ namespace Map {
                   Stored once before the loop (0x52272e) and then only after each
                   decrement; the decompiler's repeat of the store after the loop is not in
                   the instruction stream.
+
+                  Both of these loops stay as `while`. The original recomputes the address
+                  every iteration and does not strength-reduce them (0x00522733 and
+                  0x00522790):
+
+                    L:mov edx, eax; imul edx, edx, 0x334; add edx, ecx
+                      cmp word ptr [edx + 0x40], 0 ... jg L
+
+                  where ours hoists `lea edx, [ecx + 0xfa0de]` and walks it with
+                  `sub edx, 0x334`. Rewriting both as a top test with an explicit jump
+                  back - the change that took the twin createTribeForPlayer from 75.2% to
+                  86.2% - fixes the rotation but not the reduction: MSVC still hoists the
+                  address, and the result is flat at 62.3%.
+
+                  The difference between the two functions is that createTribeForPlayer's
+                  original strength-reduces as well (`sub eax, 0x19a0`), so matching its
+                  loop shape was enough there. Here the reduction is the whole gap and it
+                  is not reachable from the source.
                  */
                 DAT_CurrentTribeID::instance = _tribeID;
                 while (this->tribes[_tribeID].tribeState != 0 || this->tribes[_tribeID].time != 0) {
