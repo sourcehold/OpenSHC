@@ -90,10 +90,17 @@ namespace Map {
                           goes in the far block.
                          */
                         if (sVar1) {
-                            if (sVar1 < 8) {
-                                iVar4 = (8 - sVar1) * 4;
-                            } else {
+                            /*
+                              The zero is the fall-through. The original has
+                              `cmp dx, 8; jl 0x4` - jumping over `xor eax, eax` into the
+                              scaling - so `iVar4 = 0` sits under the test and the
+                              `(8 - speed) * 4` arm comes after it. Written `sVar1 < 8`
+                              first they swap and the test inverts to `jge`.
+                             */
+                            if (sVar1 >= 8) {
                                 iVar4 = 0;
+                            } else {
+                                iVar4 = (8 - sVar1) * 4;
                             }
                             tile = (int)DAT_UnitsState::instance.units[_unitID].plannedDestinationX
                                 + DAT_ViewportRenderState::instance

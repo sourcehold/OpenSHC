@@ -91,6 +91,16 @@ namespace Map {
                             (int)DAT_UnitsState::instance.units[iVar3].x,
                             (int)(DAT_UnitsState::instance.units[iVar3].y), 0x57);
                     }
+                    /*
+                      This one stays, against the asm. The original has `cmp edi, 4;
+                      jl 0x24`, jumping away for a smaller selection, so `push 0x58` is
+                      its fall-through and the lone 0x59 play sits in the far block -
+                      ours is the other way round. Rewriting it as
+                      `if (param_1 >= 4) { _sfx = 0x58; } else { ...; return; }` measures
+                      62.1% -> 56.0%. Second loss for the inverted-arm fix after
+                      giveTribeMoveInstruction, and both are in functions whose remaining
+                      gap is dominated by where the shared epilogue lands.
+                     */
                     if (param_1 < 4) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                             (int)DAT_UnitsState::instance.units[iVar3].x,
