@@ -35,6 +35,12 @@ namespace Map {
               namespace caching the base now stands at two clear wins (trimTribeToSize and
               createTribe, +11.8 each, the latter also fixing displacements), this +1.4, one
               flat, and five losses from -2.1 to -40.8. There is no predictor; measure.
+
+              Re-measured once the namespace had moved on by twenty-odd other changes,
+              because the three near-identical siblings all use the plain subscript and
+              two of them score higher than this one (updateCamelTribeBehavior 71.9,
+              updateLionWolfTribeBehavior 72.7, processDeerMoving 63.3). Reverting the
+              base here to the subscript still loses: 63.0% -> 61.1%. The +1.4 stands.
              */
             TribesState* const _tb = (TribesState*)((char*)this + tribeID * sizeof(Tribe));
             short* psVar1;
