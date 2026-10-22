@@ -42,14 +42,14 @@ namespace Map {
             }
 
             if (growing >= 6) {
-                *(short*)&this->buildings[buildingID].farmGrowState = 5;
+                this->buildings[buildingID].farmGrowState = 5;
                 return;
             }
             if (growing != 0 && ripe != 0) {
-                *(short*)&this->buildings[buildingID].farmGrowState = 5;
+                this->buildings[buildingID].farmGrowState = 5;
                 return;
             }
-            *(short*)&this->buildings[buildingID].farmGrowState = empty != 0 ? 3 : 2;
+            this->buildings[buildingID].farmGrowState = empty != 0 ? 3 : 2;
         }
 
     }

@@ -52,7 +52,7 @@ namespace Map {
             MACRO_CALL_MEMBER(Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                 DAT_GameState::ptr)(buildingID);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(this->buildings[buildingID]), 0, &this->buildings[buildingID]);
+                sizeof(Building), 0, &this->buildings[buildingID]);
         }
 
     }

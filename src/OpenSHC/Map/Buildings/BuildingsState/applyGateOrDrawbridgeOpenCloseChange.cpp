@@ -27,11 +27,11 @@ namespace Map {
                         return;
                     }
                 }
-                if (open != FALSE) {
+                if (open) {
                     if (DAT_BuildingsState::instance.buildings[gateID].pathLinkageRelated2 != 2) {
                         return;
                     }
-                    if (setTimer != FALSE) {
+                    if (setTimer) {
                         DAT_BuildingsState::instance.buildings[gateID].gateCloseOpenTimer = 600;
                     }
                     DAT_BuildingsState::instance.buildings[gateID].gateState = 11;
@@ -39,7 +39,7 @@ namespace Map {
                     if (DAT_BuildingsState::instance.buildings[gateID].pathLinkageRelated2 != 0) {
                         return;
                     }
-                    if (setTimer != FALSE) {
+                    if (setTimer) {
                         DAT_BuildingsState::instance.buildings[gateID].gateCloseOpenTimer = -1;
                     }
                     DAT_BuildingsState::instance.buildings[gateID].gateState = 10;
@@ -57,7 +57,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].y,
                 DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight, BT_DRAWBRIDGE, drawbridgeID);
             while (drawbridgeID != 0) {
-                if (open == FALSE) {
+                if (!open) {
                     if (DAT_BuildingsState::instance.buildings[drawbridgeID].drawBridgeState1 == 0) {
                         DAT_BuildingsState::instance.buildings[drawbridgeID].drawbridgeState2 = 10;
                     }
