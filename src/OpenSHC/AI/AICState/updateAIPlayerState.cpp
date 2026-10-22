@@ -48,11 +48,9 @@ namespace AI {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackCoordinationLevel, this)(playerID);
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackStrength, this)(playerID);
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackRaidParameter, this)(playerID);
-                // fixme: struct layout. This looks like an int[10][8] attack tracker starting at
-                // attackedByPlayerArrayUnk (0x2BDC) and ending where aivUnitLocationSlots begins (0x2D1C).
-                (&DAT_GameState::instance
-                        .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
-                        .attackedByPlayerArrayUnk)[playerID * 8]++;
+                ++DAT_GameState::instance
+                      .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
+                      .attackedByPlayerArrayUnk[playerID][0];
             } else {
                 // send own units back to keep or campfire
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiRetreatUnits, this)(playerID);
