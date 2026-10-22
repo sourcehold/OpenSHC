@@ -46,13 +46,33 @@ namespace Map {
                 /*
                   find an empty tribe
                  */
+                /*
+                  Top-tested, with the back-edge returning to the test, which is what the
+                  original has at 0x522801:
+
+                    lea eax, [eax + ecx + 0x40]   ; the cursor, taken once
+                  L:cmp word ptr [eax], bx        ; tested through it
+                    je  <found>
+                    sub edi, 8
+                    sub eax, 0x19a0
+                    cmp edi, ebx
+                    jg  L
+
+                  A `while (*psVar1 != 0)` gets rotated: MSVC peels the first test, and
+                  does that one through two-register addressing (`cmp word ptr [eax + ecx
+                  + 0x40], bx`) before taking the cursor at all, then bottom-tests the
+                  rest. Writing the test at the top with an explicit jump back keeps the
+                  cursor as the only way the field is read.
+                 */
                 psVar1 = &this->tribes[_selectionID].tribeState;
-                while (*psVar1 != 0) {
+            LAB_00522801:
+                if (*psVar1 != 0) {
                     _selectionID = _selectionID + -8;
                     psVar1 = psVar1 - 0xcd0;
-                    if (_selectionID <= 0) {
-                        return 0;
+                    if (0 < _selectionID) {
+                        goto LAB_00522801;
                     }
+                    return 0;
                 }
                 /*
                   wipe the tribe
