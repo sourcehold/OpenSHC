@@ -126,7 +126,13 @@ namespace Map {
                     }
                 } else if (SVar2 == Map::Units::STBT_1) {
                     sVar5 = 800;
-                    if (this->tribes[param_1].unknownCounter01 < 0x65) {
+                    /*
+                      Written `<= 0x64`, which is the literal the original compares -
+                      `cmp word ptr [esi + ..], 100` with a `jg` - where `< 0x65` gives
+                      `cmp .., 101` and a `jge`. The same test; MSVC emits the constant
+                      it is handed.
+                     */
+                    if (this->tribes[param_1].unknownCounter01 <= 0x64) {
                         sVar5 = 10;
                     }
                     psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter;
