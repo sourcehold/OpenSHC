@@ -47,6 +47,27 @@ namespace Map {
           21:57:43.216000
          */
         /*
+          The subscript stays, and this is the measurement that says why nothing else here
+          is worth trying from the instruction counts.
+
+          The original has exactly one `imul .., 0x334` in the whole function; we have 63,
+          because every `this->tribes[tribeID].` recomputes the stride. Caching the base as
+          a shifted `TribesState*` - which keeps the field displacements identical to the
+          subscript's, unlike a `Tribe&` - fixes that completely and brings three separate
+          measures of closeness almost exactly into line:
+
+            imul 0x334        63   -> 1    (original: 1)
+            instructions    2628   -> 2514 (original: 2501)
+            quick_diff     0.4296 -> 0.4622
+
+          reccmp scores it 60.4% -> 55.6%. And it is not register naming: the
+          register-blind ratio diff_regalloc.py computes goes 66.6% -> 66.4%, flat. So the
+          instruction sequence is no closer at all, even with the counts and the mnemonic
+          histogram matching. Three independent "looks closer" signals can all improve
+          while the actual alignment does not; only reccmp decides, and the 21-site pointer
+          hoist on _unitID_0x04 that was tried alongside this did not even change the imul
+          count - MSVC was already common-subexpressioning those.
+
           All thirteen switch dispatches in this function have been checked against their
           tables, so this does not need redoing. They are at 0x52a1e8, 0x52a258, 0x52a2b8,
           0x52a308, 0x52a368, 0x52a3b8, 0x52a3fc, 0x52a464, 0x52a490, 0x52a4e4, 0x52a550,
