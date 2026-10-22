@@ -1,5 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
+#include "OpenSHC/Game/GameStateStructures.func.hpp"
+
 namespace OpenSHC {
 namespace Game {
 
@@ -7,9 +9,9 @@ namespace Game {
     void GameStateStructures::resetSomethingBuildingRelatedForAllPlayers()
     {
         for (int playerID = 1; playerID < 9; ++playerID) {
-            for (int category = 0; category < 20; ++category) {
-                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::validateBuildingCategoryReference, this)(
-                    playerID, category);
+            for (int buildingCategory = 0; buildingCategory < 0x14; ++buildingCategory) {
+                MACRO_CALL_MEMBER(GameStateStructures_Func::validateBuildingCategoryReference, this)(
+                    playerID, buildingCategory);
             }
         }
     }
