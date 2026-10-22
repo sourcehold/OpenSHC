@@ -110,7 +110,14 @@ namespace Map {
                                 DAT_ViewportRenderState::ptr)(
                                 IO::Graphics::GID_CURSORS, (int)(0x6a - sVar1), 10, 6, tile, iVar4 << 0x10 | 2);
                             iVar4 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + -1;
-                            if (7 < iVar4) {
+                            /*
+                              Negated rather than written `7 < iVar4`: the original has
+                              `cmp eax, 8` with a `jl` jumping over the subtraction, and
+                              MSVC emits the constant it is handed, so the greater-than
+                              spelling gives `cmp eax, 7; jle` instead. Same test, and
+                              writing it this way is worth 1.7% here (55.9 -> 57.6).
+                             */
+                            if (!(iVar4 < 8)) {
                                 iVar4 = 0xf - iVar4;
                             }
                             MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
@@ -124,7 +131,7 @@ namespace Map {
                                 && UVar2 != Map::Units::UIT_ATTACK_LAND
                                 && UVar2 != Map::Units::UIT_MAN_SIEGE_EQUIPMENT) {
                                 iVar4 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + -1;
-                                if (7 < iVar4) {
+                                if (!(iVar4 < 8)) {
                                     iVar4 = 0xf - iVar4;
                                 }
                                 MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
