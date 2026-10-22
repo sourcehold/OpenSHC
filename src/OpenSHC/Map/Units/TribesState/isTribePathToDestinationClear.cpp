@@ -34,6 +34,11 @@ namespace Map {
           What ours also lacks is the original's second local slot: it allocates one
           (`push ecx`) and reuses the dead tribeID parameter slot for the second counter,
           where the original has `sub esp, 8` and two proper locals.
+
+          Copying the parameter into `int const _tribeID` and using that through the loop
+          does not buy the slot: measured 18.8% -> 18.8%, MSVC coalesces the copy back onto
+          the incoming argument. The slot comes from whatever second value the original
+          keeps live, not from naming the first one.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00524CA0
         undefined4 TribesState::isTribePathToDestinationClear(

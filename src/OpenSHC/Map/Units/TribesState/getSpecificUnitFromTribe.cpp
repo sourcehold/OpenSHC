@@ -52,6 +52,16 @@ namespace Map {
                             iVar2 = iVar2 + 1;
                         } while (iVar2 < 0x10);
                     }
+                    /*
+                      MSVC keeps a zero of its own in a register here - `xor edi, edi` up
+                      front, which costs it `ebx` and turns the function's immediate tests
+                      into register compares (`cmp dx, di` where the original has
+                      `test dx, dx`). The original materialises its zero into the counter
+                      and stores from there. Writing the store below as
+                      `DAT_00ee0fb4::instance = iVar2` to say the same thing measures
+                      55.1% -> 55.1%: the dedicated zero register survives it, so this is
+                      the register allocator rather than the spelling.
+                     */
                     iVar2 = 0;
                     iVar1 = iVar1 + 1;
                     psVar3 = psVar3 + 1;
