@@ -118,6 +118,14 @@ namespace Map {
                       shared block. Ours pushes the constants per arm correctly but keeps
                       its own copy of the coordinate reads, which is the two extra reads of
                       units[].x and units[].y the diff shows (orig 4 and 5, ours 6 and 7).
+
+                      Tried making those two arms adjacent so MSVC would have the chance:
+                      the 0x57 play lifted out ahead as `if (param_1 == 2 || param_1 == 3)
+                      { play(0x57); play(0x59); return; }`, leaving `if (param_1 == 1)
+                      play(0x56); else play(0x58);` as the whole of its if/else. Measured
+                      65.4% -> 59.9%. MSVC merged nothing extra and the rearranged tests
+                      cost more than the duplicated reads do, so the shape here stays as
+                      the original's test order has it.
                      */
                     if (param_1 < 4) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
