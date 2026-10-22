@@ -74,6 +74,12 @@ namespace Map {
             short* psVar1;
             byte bVar2;
             UnitStateShort UVar3;
+            /*
+              UVar4 stays 16 bits wide. The original compares it 32-bit in places - `cmp
+              ecx, 0x16` and `cmp ecx, 0x46` at the pitch-ditch arm against our
+              `cmp cx, ..` - and the switch dispatches on it 32-bit too, so UnitTypeInt
+              looks right. It measures 59.0% -> 57.6% across the sixteen uses. Reverted.
+             */
             UnitTypeShort UVar4;
             /*
               Dword flags, not `bool`s: diff_slots.py shows byte-aligned stack slots at
