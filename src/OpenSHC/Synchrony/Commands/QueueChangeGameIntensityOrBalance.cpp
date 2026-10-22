@@ -14,8 +14,8 @@ namespace Synchrony {
     {
         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
             OpenSHC::Commands::GCT_CHANGE_GAME_INTENSITY_OR_BALANCE);
-        DAT_GameSynchronyState::instance.field235_0x1072e8 = -1;
-        DAT_GameSynchronyState::instance.field236_0x1072ec = -1;
+        DAT_GameSynchronyState::instance.field234_0x1072e8 = -1;
+        DAT_GameSynchronyState::instance.field235_0x1072ec = -1;
     }
 
 }

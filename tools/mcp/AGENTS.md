@@ -27,7 +27,7 @@ We want to generate assembly that matches the original binary. Each function has
 
 1. Use `read_cpp_code_for_function` to take in the current reimplemented code for a function, which are always specified by their full namespace name, e.g. `OpenSHC::Rendering::ViewportRenderState::xyAreValid`.
 2. Use `compile_cpp_code_for_function` to write the reimplemented code to the cpp file and compile the project. If there are compilation problems, try to address them.
-   The project is compiled using `MSVC1400` with the /Zi and /O2 flags. Use `#pragma optimize()` variations in case of issues with byte matches.
+   The project is compiled using `MSVC1400` with the /Zi and /O2 flags. Don't use `#pragma optimize()` variations in case of issues with byte matches, they never lead to productive matches.
    The project's layout is like so: methods starting with a non-capital letter are class methods.
    The include file for a namespace `A::B::C` is `A/B/C.hpp`. Namespaces usually need to be referred to explicitly in the case of enum constants for example.
    Globals usually start with three or more capital letters, like `DAT_` and can be found in `OpenSHC/Globals/<variable>.hpp`. So if global GreatGlobal is missing, find it here `OpenSHC/Globals/GreatGlobal.hpp`. These globals need to be accessed with `::ptr`, like `DAT_Example::ptr` to get a pointer. `DAT_ExampleArray[100]` becomes `(*DAT_ExampleArray::ptr)[100]`.

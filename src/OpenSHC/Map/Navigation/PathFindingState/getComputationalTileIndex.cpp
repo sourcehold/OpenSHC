@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Navigation/PathFindingState.hpp"
+#include "../PathFindingState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -7,6 +7,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00496E20
         undefined4 PathFindingState::getComputationalTileIndex() { return this->searchQueue.writeIndex; }
 
-    } // namespace Navigation
-} // namespace Map
-} // namespace OpenSHC
+    }
+}
+}

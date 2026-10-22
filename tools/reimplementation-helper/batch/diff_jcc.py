@@ -11,6 +11,12 @@ site can be found in the source:
         shows, e.g. `cmp x,0xa0; jle` is `x <= 160`, not `x < 160`.
   CMP   the same two operands compared the other way round; swap the sides of
         the comparison in the source.
+  ORDER the same test with the two sides the other way round (jl/jg, jle/jge,
+        jb/ja), which the operands alone cannot show once the two sides use
+        different registers.  Swap the comparison in the source: writing
+        `(int)uVar3 >= (int)_init_10` for Ghidra's `(int)_init_10 <= (int)uVar3`
+        is what MSVC compiled the original from.  Weaker evidence than the other
+        two - a flipped test also falls out of block placement - so measure it.
 
 This has found genuine bugs where Ghidra's decompilation was wrong, so confirm
 a fix by re-running this tool and checking the pair is gone - the match
@@ -35,6 +41,8 @@ CMP = re.compile(r"^cmp (.+?), (.+)$")
 STEP = {("jl", "jle"), ("jle", "jl"), ("jg", "jge"), ("jge", "jg"),
         ("ja", "jae"), ("jae", "ja"), ("jb", "jbe"), ("jbe", "jb"),
         ("jl", "jge"), ("jge", "jl"), ("jg", "jle"), ("jle", "jg")}
+ORDER = {("jl", "jg"), ("jg", "jl"), ("jle", "jge"), ("jge", "jle"),
+         ("jb", "ja"), ("ja", "jb"), ("jbe", "jae"), ("jae", "jbe")}
 
 want = sys.argv[1] if len(sys.argv) > 1 else ""
 
@@ -70,6 +78,9 @@ for f, e, address in common.entries(common.load_diff()):
         ja, jc = JCC.match(a), JCC.match(c)
         if ja and jc and (ja.group(1), jc.group(1)) in STEP:
             hits.append(("JCC  orig %-4s / ours %-4s" % (ja.group(1), jc.group(1)), src, i))
+            continue
+        if ja and jc and (ja.group(1), jc.group(1)) in ORDER:
+            hits.append(("ORDER orig %-4s / ours %-4s" % (ja.group(1), jc.group(1)), src, i))
             continue
         ma, mc = CMP.match(a), CMP.match(c)
         if ma and mc and ma.group(1).strip() == mc.group(2).strip() and ma.group(2).strip() == mc.group(1).strip():
