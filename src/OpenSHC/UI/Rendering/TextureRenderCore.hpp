@@ -58,7 +58,7 @@ namespace UI {
             Range screenMenuSurfaceHeightRange; // 0x00000060 length: 8
             dword activeMenuTabIndex; // 0x00000068 length: 4
             dword mbr_0x6c; // 0x0000006C length: 4
-            dword mbr_0x70; // 0x00000070 length: 4
+            dword colorPaletteOverride; // 0x00000070 length: 4
             int gmProcessedImageDataBufferSize_0x74; // 0x00000074 length: 4
             void* gmProcessedImageData; // 0x00000078 length: 4
             int unknownMemSize_1_0x7c; // 0x0000007C length: 4
@@ -68,7 +68,7 @@ namespace UI {
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
             void* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
             void* bitmapsFaces_0x94; // 0x00000094 length: 4
-            int field69_0x98[20]; // 0x00000098 length: 80
+            int bitmapFaceSizes[20]; // 0x00000098 length: 80
             int unknownPlayerDependentRenderValue[8]; // 0x000000E8 length: 32
             int field71_0x108; // 0x00000108 length: 4
             int field72_0x10c; // 0x0000010C length: 4

@@ -53,8 +53,8 @@ namespace Audio {
             for (int i = 0; i < 1000; ++i) {
                 this->soundFileCurrSampleNum_0x28c[i] = -1;
             }
-            this->mbr_0x14c = 100;
-            this->mbr_0x154 = 0;
+            this->musicVolumePercent = 100;
+            this->musicFadeState = 0;
             this->musicSampleUnk_0x170 = AIL_allocate_sample_handle(this->digSndDriver_0x4);
             this->sampleBufferSizeUnk_0x184
                 = AIL_minimum_sample_buffer_size(this->digSndDriver_0x4, 22050, DIG_F_STEREO_16);
@@ -67,7 +67,7 @@ namespace Audio {
             this->musicFileHandle_0x178 = -1;
             this->currentSoundID_0x3278 = -1;
             this->sec_Section1055_0x3274 = 0;
-            this->mbr_0x3288 = 0;
+            this->lastMusicChangeTime = 0;
 
             timecaps_tag _timeCaps;
             MMRESULT const _err = timeGetDevCaps(&_timeCaps, sizeof(timecaps_tag));

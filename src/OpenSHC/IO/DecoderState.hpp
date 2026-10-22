@@ -41,11 +41,11 @@ namespace IO {
 
         int decompressRLE(char* param_1, char* param_2);
 
-        BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst, int sizeUncompressed);
+        BOOLEnum doImplode(int* ptrHash, int* ptrSize, uchar* src, uchar* dst, int sizeUncompressed);
 
         BOOLEnum doExplode(int* hash, uchar* src, int sizeCompressed, uchar* dst, int sizeUncompressed);
 
-        int encodeData(int sizeUncompressed, undefined* src, undefined* dst);
+        int encodeData(int sizeUncompressed, uchar* src, uchar* dst);
 
         dword decodeData(void* source, void* destination);
     };

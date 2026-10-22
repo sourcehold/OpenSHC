@@ -67,10 +67,10 @@ namespace UI {
             BOOLEnum isNotProcessingInputEvents; // 0x000000C4 length: 4
             BOOLEnum gameFocused; // 0x000000C8 length: 4
             dword mbr_0xcc; // 0x000000CC length: 4
-            dword mbr_0xd0; // 0x000000D0 length: 4
+            dword pendingBltMode; // 0x000000D0 length: 4
             ushort* surfacePointer_screenMenu; // 0x000000D4 length: 4
             ushort* surfacePointer_mapGame; // 0x000000D8 length: 4
-            dword field37_0xdc; // 0x000000DC length: 4
+            dword pendingMenuRedraw; // 0x000000DC length: 4
             BOOLEnum not_DDCAPS2_CANBOBHARDWARE_0xe0; // 0x000000E0 length: 4
             undefined1 padding_0xe4[8]; // 0x000000E4 length: 8
             IDirectDraw* pointerToIDirectDrawInterface; // 0x000000EC length: 4

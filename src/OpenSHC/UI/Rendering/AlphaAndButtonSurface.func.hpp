@@ -36,16 +36,16 @@ namespace UI {
             isMouseOnButtonImageUnk;
 
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463270,
-                &AlphaAndButtonSurface::ProcessBuildingClickBonus)
-            ProcessBuildingClickBonus;
+                &AlphaAndButtonSurface::processBuildingClickBonus)
+            processBuildingClickBonus;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463310,
                 &AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID)
             openBuildingStatusMenuForBuildingID;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463A00,
-                &AlphaAndButtonSurface::SelectUnitAndOpenStatusMenu)
-            SelectUnitAndOpenStatusMenu;
+                &AlphaAndButtonSurface::selectUnitAndOpenStatusMenu)
+            selectUnitAndOpenStatusMenu;
 
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTarget), false,
                 Address::SHC_3BB0A8C1_0x00463A90, &AlphaAndButtonSurface::renderBasicButton)

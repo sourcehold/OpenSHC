@@ -3,7 +3,6 @@
 */
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -15,7 +14,6 @@ namespace Map {
     namespace TileMapState_Func {
 
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::LogicHelpers::Logic1;
@@ -758,7 +756,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005160C0, &TileMapState::prepareAreaForBuildingPlacement)
         prepareAreaForBuildingPlacement;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PlayerID, int, int, MappersEnum, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int, MappersEnum, int, int), false,
             Address::SHC_3BB0A8C1_0x005162D0, &TileMapState::placeBuilding)
         placeBuilding;
 

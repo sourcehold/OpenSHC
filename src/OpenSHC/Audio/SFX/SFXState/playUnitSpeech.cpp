@@ -177,23 +177,22 @@ namespace Audio {
             }
 
             if (actionID < 0 || _soundSet >= 18 || actionID >= 42
-                || !DAT_SpeechDefinedData::instance.field6_0x41edd4[actionID].numberOfVariations) {
+                || !DAT_SpeechDefinedData::instance.UnitSpeech[actionID].numberOfVariations) {
                 return;
             }
 
-            int numberOfVariations = DAT_SpeechDefinedData::instance.field6_0x41edd4[actionID].numberOfVariations;
+            int numberOfVariations = DAT_SpeechDefinedData::instance.UnitSpeech[actionID].numberOfVariations;
             if (1 < numberOfVariations) {
                 /* Calculate action speech variation. */
-                variationIndex
-                    = DAT_SpeechDefinedData::instance.field6_0x41edd4[actionID].variationCounter[_soundSet]++;
-                if (DAT_SpeechDefinedData::instance.field6_0x41edd4[actionID].variationCounter[_soundSet]
+                variationIndex = DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet]++;
+                if (DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet]
                     >= numberOfVariations) {
-                    DAT_SpeechDefinedData::instance.field6_0x41edd4[actionID].variationCounter[_soundSet] = 0;
+                    DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet] = 0;
                 }
             }
             char _filename[64];
             MACRO_CALL(OS_Func::_sprintf)(_filename, s_fx_speech_s_005a4d68,
-                DAT_SpeechDefinedData::instance.field6_0x41edd4[variationIndex + actionID].filenames[_soundSet]);
+                DAT_SpeechDefinedData::instance.UnitSpeech[variationIndex + actionID].filenames[_soundSet]);
             if (MACRO_CALL(OS_Func::__stricmp)(_filename, DAT_LastSpeechSFXFilename::instance)
                 || (!MACRO_CALL_MEMBER(MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
                         MSS::enums::SND_STR_SPEECH_1)

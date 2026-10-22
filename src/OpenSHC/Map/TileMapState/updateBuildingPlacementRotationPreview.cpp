@@ -1,4 +1,3 @@
-
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -7,18 +6,12 @@ namespace Map {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00504EE0
-    void TileMapState::updateBuildingPlacementRotationPreview(int param_1, int param_2)
+    void TileMapState::updateBuildingPlacementRotationPreview(int x, int y)
     {
-        BOOLEnum previousPlacementFail = this->buildingPlacementFail;
+        BOOLEnum const previousPlacementFail = this->buildingPlacementFail;
         this->buildingPlacementFail = FALSE;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::determineBuildingPlacementRotation, this)(param_1, param_2);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::determineBuildingPlacementRotation, this)(x, y);
         this->buildingPlacementFail = previousPlacementFail;
     }
 

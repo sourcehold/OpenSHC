@@ -176,9 +176,9 @@ namespace Audio {
 
             for (int i = 0; i < 10; ++i) {
                 for (int j = 0; j < 8; ++j) {
-                    DAT_SpeechDefinedData::instance.field5_0x41eb04[i].volumeUnk_0x28[j]
+                    DAT_SpeechDefinedData::instance.AmbientSounds[i].volumeUnk_0x28[j]
                         = MACRO_CALL_MEMBER(SFXState_Func::getSoundVolumeForFilename, this)(
-                            DAT_SpeechDefinedData::instance.field5_0x41eb04[i].ambientWavs_0x8[j]);
+                            DAT_SpeechDefinedData::instance.AmbientSounds[i].ambientWavs_0x8[j]);
                 }
             }
         }

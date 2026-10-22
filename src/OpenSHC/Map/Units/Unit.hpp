@@ -165,7 +165,7 @@ namespace Map {
             short state_2; // 0x000002CC length: 2
             UnitTypeShort unitType_3; // 0x000002CE length: 2
             short someUnitStat2_meleeDamageUnk; // 0x000002D0 length: 2
-            short unknownMovementRelated_0x2d2; // 0x000002D2 length: 2
+            short movementCooldown; // 0x000002D2 length: 2
             short healthPercentage; // 0x000002D4 length: 2
             short selectionTargetUnitID; // 0x000002D6 length: 2
             short tribeID; // 0x000002D8 length: 2

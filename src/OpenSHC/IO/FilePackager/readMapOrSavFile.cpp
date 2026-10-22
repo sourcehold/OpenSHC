@@ -53,8 +53,8 @@ namespace IO {
             return;
         }
 
-        if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 == 5) {
-            DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 = 1;
+        if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState == 5) {
+            DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
         }
 

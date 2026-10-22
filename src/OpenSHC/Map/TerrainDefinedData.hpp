@@ -43,8 +43,9 @@ namespace Map {
         XYPair StockpilePathableOffsets[9]; // 0x000001DC length: 72
         undefined1 padding_0x224[64]; // 0x00000224 length: 64
         XYPair field130_0x264[3][12]; // 0x00000264 length: 288
-        Point8IntXY keepOutbuildingOffsets_0x384[3][4]; // 0x00000384 length: 96
-        Point8IntXY keepOutbuildingOffsets_0x3e4[3][4]; // 0x000003E4 length: 96
+        Point8IntXY unkXYOffsets_0x384[8]; // 0x00000384 length: 64
+        Point8IntXY field132_0x3c4[8]; // 0x000003C4 length: 64
+        undefined1 padding_0x404[64]; // 0x00000404 length: 64
         XYPair field197_0x444[24]; // 0x00000444 length: 192
         undefined1 padding_0x504[8]; // 0x00000504 length: 8
         XYPair field206_0x50c; // 0x0000050C length: 8
@@ -59,43 +60,42 @@ namespace Map {
         undefined1 padding_0x5d4[184]; // 0x000005D4 length: 184
         XYPair field555_0x68c; // 0x0000068C length: 8
         undefined1 padding_0x694[308]; // 0x00000694 length: 308
-        int field600_0x7c8[32]; // 0x000007C8 length: 128
-        undefined1 padding_0x848[4]; // 0x00000848 length: 4
-        int field996_0x84c[25]; // 0x0000084C length: 100
+        int ConstructionSpriteRotationTable[33]; // 0x000007C8 length: 132
+        int field865_0x84c[25]; // 0x0000084C length: 100
         undefined1 padding_0x8b0[4]; // 0x000008B0 length: 4
-        int field1001_0x8b4[25]; // 0x000008B4 length: 100
+        int field870_0x8b4[25]; // 0x000008B4 length: 100
         undefined1 padding_0x918[4]; // 0x00000918 length: 4
         XYPair WheatFarmTiles[4][36]; // 0x0000091C length: 1152
         XYPair HopFarmProperty1[2][24]; // 0x00000D9C length: 384
         XYPair AppleFarmOffsets[8]; // 0x00000F1C length: 64
-        WheatFarmFieldSpec field1009_0xf5c[4][27]; // 0x00000F5C length: 1296
+        WheatFarmFieldSpec field878_0xf5c[4][27]; // 0x00000F5C length: 1296
         undefined1 padding_0x146c[1280]; // 0x0000146C length: 1280
-        XYPair field2290_0x196c[4]; // 0x0000196C length: 32
-        XYPair field2291_0x198c[9]; // 0x0000198C length: 72
-        XYPair field2292_0x19d4[16]; // 0x000019D4 length: 128
-        int field2293_0x1a54[4][16]; // 0x00001A54 length: 256
-        int field2294_0x1b54[4][16]; // 0x00001B54 length: 256
-        int field2295_0x1c54[4][16]; // 0x00001C54 length: 256
-        byte field2296_0x1d54[4][2]; // 0x00001D54 length: 8
-        byte field2297_0x1d5c[4][2]; // 0x00001D5C length: 8
-        UnkBytePair field2298_0x1d64[8]; // 0x00001D64 length: 16
+        XYPair field2159_0x196c[4]; // 0x0000196C length: 32
+        XYPair field2160_0x198c[9]; // 0x0000198C length: 72
+        XYPair MacroLayerScanOffsets[16]; // 0x000019D4 length: 128
+        int field2162_0x1a54[4][16]; // 0x00001A54 length: 256
+        int field2163_0x1b54[4][16]; // 0x00001B54 length: 256
+        int field2164_0x1c54[4][16]; // 0x00001C54 length: 256
+        byte field2165_0x1d54[4][2]; // 0x00001D54 length: 8
+        byte field2166_0x1d5c[4][2]; // 0x00001D5C length: 8
+        UnkBytePair TerrainFlagGraphicLookup[8]; // 0x00001D64 length: 16
         int MapSizes[5]; // 0x00001D74 length: 20
         undefined1 padding_0x1d88[164]; // 0x00001D88 length: 164
         int SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
-        int field2465_0x1e4c[32]; // 0x00001E4C length: 128
+        int field2334_0x1e4c[32]; // 0x00001E4C length: 128
         XYPair drawBridgeOffsets[4][9]; // 0x00001ECC length: 288
-        int field2467_0x1fec[4][25]; // 0x00001FEC length: 400
+        int field2336_0x1fec[4][25]; // 0x00001FEC length: 400
         int TowerTileOffsetsBySize[7][4]; // 0x0000217C length: 112
-        int field2469_0x21ec[4][25]; // 0x000021EC length: 400
+        int field2338_0x21ec[4][25]; // 0x000021EC length: 400
         int DrawbridgeOrientationMapping[4][25]; // 0x0000237C length: 400
         int DrawbridgeTileMoatProperty[26]; // 0x0000250C length: 104
         int orientationRelativeBuildingTileOffset2[60]; // 0x00002574 length: 240
         int orientationRelativeBuildingTileOffset1[64]; // 0x00002664 length: 256
-        XYPair field2474_0x2764[501]; // 0x00002764 length: 4008
-        int field2475_0x370c[8]; // 0x0000370C length: 32
-        XYPair field2476_0x372c[8]; // 0x0000372C length: 64
-        XYPair field2477_0x376c[4]; // 0x0000376C length: 32
-        XYPair field2478_0x378c[4]; // 0x0000378C length: 32
+        XYPair field2343_0x2764[501]; // 0x00002764 length: 4008
+        int field2344_0x370c[8]; // 0x0000370C length: 32
+        XYPair field2345_0x372c[8]; // 0x0000372C length: 64
+        XYPair field2346_0x376c[4]; // 0x0000376C length: 32
+        XYPair field2347_0x378c[4]; // 0x0000378C length: 32
 
     } TerrainDefinedData;
 #pragma pack(pop)
