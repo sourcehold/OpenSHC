@@ -65,6 +65,18 @@ namespace Map {
                     }
                 }
                 piVar6 = piVar6 + 2;
+                /*
+                  0xb4df44 is one past the end of the forty-entry candidate array - it is
+                  at 0xb4d13c + 0xcc4 and the cursor points at the second member of each
+                  eight-byte entry, so the end is 0xb4de00 + 40 * 8 + 4. The literal stays
+                  against the style list: written
+                  `< (int)(&...field1608_0xcc4[39].y + 2)`, which is the same address, the
+                  function measures 45.9% -> 38.5%.
+
+                  Carrying the return value in `iVar5`, which is dead from the line above,
+                  to save the stack slot the original does not have (`sub esp, 8` against
+                  our 0xc) was measured at the same time and is not what costs the points.
+                 */
             } while ((int)piVar6 < 0xb4df44);
             return (int)(uVar3);
         }
