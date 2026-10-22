@@ -86,7 +86,14 @@ namespace Map {
                         (uint)((int)this->tribes[param_1].rallyPointArray[sVar5][1]), 0, 0,
                         Map::Units::Instructions::UMSE_0);
                     this->tribes[param_1].currentRallyPointIndex = this->tribes[param_1].currentRallyPointIndex + 1;
-                    if (this->tribes[param_1].rallyPointCount <= this->tribes[param_1].currentRallyPointIndex) {
+                    /*
+                      Operands this way round, not `rallyPointCount <= index`. The
+                      original has `cmp ax, word ptr [esi + 0x28a]` with a `jl` - the
+                      index first, the count second - where the reverse spelling gives
+                      `cmp word ptr [esi + 0x28a], ax` and a `jg`. Same test, two
+                      different instructions. diff_cmp_operands.py finds these.
+                     */
+                    if (this->tribes[param_1].currentRallyPointIndex >= this->tribes[param_1].rallyPointCount) {
                         this->tribes[param_1].rallyPointCount = 0;
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                     }

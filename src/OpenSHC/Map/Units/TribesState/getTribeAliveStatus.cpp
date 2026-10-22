@@ -45,7 +45,7 @@ namespace Map {
                   `if (!_alive) return 100;` measures 67.2% -> 67.2%.
                  */
                 if (_alive != 0) {
-                    if (_alive <= _other) {
+                    if (_other >= _alive) {
                         return (int)(50);
                     }
                     return (uint)(_other != 0);

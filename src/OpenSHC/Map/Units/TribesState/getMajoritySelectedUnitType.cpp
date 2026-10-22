@@ -50,7 +50,7 @@ namespace Map {
             _maximumCount = -1;
             _index = 1;
             do {
-                if (_maximumCount < *(int*)((int)_countOfUnitTypes + _index * 4)) {
+                if (*(int*)((int)_countOfUnitTypes + _index * 4) > _maximumCount) {
                     _maximumTroopType = _index;
                     _maximumCount = *(int*)((int)_countOfUnitTypes + _index * 4);
                 }

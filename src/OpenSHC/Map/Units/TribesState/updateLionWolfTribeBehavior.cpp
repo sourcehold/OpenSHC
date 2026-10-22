@@ -94,7 +94,7 @@ namespace Map {
                         (uint)((int)this->tribes[param_1].rallyPointArray[sVar2][1]), 0, 0,
                         Map::Units::Instructions::UMSE_0);
                     this->tribes[param_1].currentRallyPointIndex = this->tribes[param_1].currentRallyPointIndex + 1;
-                    if (this->tribes[param_1].rallyPointCount <= this->tribes[param_1].currentRallyPointIndex) {
+                    if (this->tribes[param_1].currentRallyPointIndex >= this->tribes[param_1].rallyPointCount) {
                         this->tribes[param_1].rallyPointCount = 0;
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                     }

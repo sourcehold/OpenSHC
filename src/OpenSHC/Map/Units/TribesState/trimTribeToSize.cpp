@@ -55,7 +55,7 @@ namespace Map {
                         && smallerSize <= unitSelectionIndex) {
                         *pUVar1 = Map::Units::ULS_REMOVE;
                     }
-                } while (unitSelectionIndex < _tb->tribes[0].size);
+                } while (_tb->tribes[0].size > unitSelectionIndex);
             }
         }
 

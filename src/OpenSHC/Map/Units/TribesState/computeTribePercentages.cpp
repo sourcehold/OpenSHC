@@ -101,7 +101,7 @@ namespace Map {
                                     this->tribes[tribeID].unitType = ((UnitType)0);
                                 }
                                 short _movementSpeed = DAT_UnitsState::instance.units[_unitID].movementSpeed;
-                                if (this->tribes[tribeID].movementSpeed < _movementSpeed) {
+                                if (_movementSpeed > this->tribes[tribeID].movementSpeed) {
                                     this->tribes[tribeID].movementSpeed = _movementSpeed;
                                 }
                             }

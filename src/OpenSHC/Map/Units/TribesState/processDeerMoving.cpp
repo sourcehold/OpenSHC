@@ -92,7 +92,7 @@ namespace Map {
                     (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0,
                     Map::Units::Instructions::UMSE_0);
                 this->tribes[tribeID].currentRallyPointIndex = this->tribes[tribeID].currentRallyPointIndex + 1;
-                if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
+                if (this->tribes[tribeID].currentRallyPointIndex >= this->tribes[tribeID].rallyPointCount) {
                     this->tribes[tribeID].rallyPointCount = 0;
                     this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                 }
@@ -154,7 +154,7 @@ namespace Map {
                             this)(tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][0]),
                             (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0);
                         this->tribes[tribeID].currentRallyPointIndex = this->tribes[tribeID].currentRallyPointIndex + 1;
-                        if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
+                        if (this->tribes[tribeID].currentRallyPointIndex >= this->tribes[tribeID].rallyPointCount) {
                             this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                             this->tribes[tribeID].rallyPointCount = 0;
                         }

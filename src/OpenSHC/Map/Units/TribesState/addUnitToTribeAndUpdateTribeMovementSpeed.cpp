@@ -43,7 +43,7 @@ namespace Map {
                         if (_movementSpeed < _minimumSpeed) {
                             _minimumSpeed = _movementSpeed;
                         }
-                        if (_maximumSpeed < _movementSpeed) {
+                        if (_movementSpeed > _maximumSpeed) {
                             _maximumSpeed = _movementSpeed;
                         }
                         _totalHealth = _totalHealth + _ptrUnit->healthPercentage;
