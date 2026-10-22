@@ -22468,7 +22468,7 @@ enum {
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004692E0 = 0x004692E0,
-    // label: initializeUserTextHandler
+    // label: Constructor_UserTextHandler
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004694A0 = 0x004694A0,
@@ -97254,6 +97254,8 @@ enum {
     SHC_3BB0A8C1_0x00EB0AB0 = 0x00EB0AB0,
     // type: /int[9]
     SHC_3BB0A8C1_0x00EB0AF0 = 0x00EB0AF0,
+    // label: TIME_LastThanksBikPlaybackTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
     // type: /undefined4

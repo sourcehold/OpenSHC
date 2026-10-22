@@ -4,6 +4,13 @@ This file is meant to contain general behaviors, patterns and oddities of the co
 It should be used as a reference for the reimplementation process by providing possible options on how the code can be changed to produce different assembly while keeping the logic flow.  
 Update whenever new information is discovered!
 
+reccmp renders the same bytes differently on the two sides, so a diff line is not automatically a mismatch. The
+original's side resolves addresses through the `StructResolver`/`trampoline` symbols and prints `__security_cookie`
+as `StructResolver::Instance<unsigned int,12141088>::instance`, and it will print a plain immediate such as
+`0xffffff` as whatever global happens to live at that address. Eleven functions in `GameSynchronyState` score
+between 84% and 98% while being byte-identical for this reason alone. Before working on a function, canonicalise
+the `-`/`+` lines (symbols to one token, call/jump targets to one token) and check they are not already equal.
+
 Note, that Ghidra and reccmp use slightly different disassembly styles, so there might be different opcodes generated. Example: JZ (Jump if Zero) and JE (Jump if Equal) mean the same and are the same instruction. So do not get confused.
 
 ## Boundaries
@@ -98,6 +105,18 @@ This also applies when putting instructions inside the condition branches.
 
 Naturally, the logic flow needs to be kept, so the update of a variable can not move before or after another usage of the same variable.
 
+The order in which **initialised** declarations appear decides which register each one gets. `countPlayersInSameTeam`
+matched instruction for instruction except that the parameter was loaded into `eax` instead of `edx`; moving
+`int iVar2 = 0;` in front of `int iVar1 = DAT_GameState::instance.mapAndTime.playerTeams[playerID];` freed `edx`
+for the parameter load and took it from 95.7% to 100%. Uninitialised declarations do not have this effect - a
+sweep of `quick_reorder.py -s` over the declaration block of 27 functions found no win at all.
+
+Stack *slot* assignment for spilled locals is a different matter and is not reachable from the source. Where the
+original lays its locals out in Ghidra order (`local_1c` at the lowest `esp` offset through `local_4` at the
+highest) and our build permutes them, neither declaration order, initialisation order, nor renaming changes
+anything; this was tried on `setupSkirmishLobby`, `initMultiplayerLobbyState`, `initializeFinalResultsForActivePlayers`
+and `createCompoundAddressBasedOnSelectedProvider`. Spend the effort elsewhere.
+
 ### Statement Order
 
 The order of instructions in the assembly is not the order of the statements in the original source.
@@ -167,6 +186,11 @@ SEC_RNG::ptr->currentNumber1 % 4
 ```
 
 ### Variables
+
+A 16-bit field saved into a `short` temp and written straight back is loaded with `movzx`; the same field saved into
+an `int` temp is loaded with `movsx`. When the original sign-extends a `short` field it only reads and restores,
+widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, six entity fields, +0.6%).
+
 
 - Ghidra declares all variables at the start of a function. Please try to declare them when needed. Helps the readability.
 - Always prefer direct usage of parameters and member variables over the creation of a local temporary on first attempts. Real local variables are rare.
@@ -253,20 +277,6 @@ SEC_RNG::ptr->currentNumber1 % 4
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
   and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
 
-- **Ghidra's `_nextIndex`/`_index2` temporaries with a `LAB: index = _nextIndex;` tail are an in-place `i++`.** Every
-  branch of the body assigning a "next" copy that one shared label writes back is how the decompiler renders a loop
-  that updates its own index. Deleting the temporaries and incrementing in place removed two stack slots and brought
-  `handleCommandLineArguments` to the original's `sub esp, 0x40c` (14.6% -> 31.3%).
-- A local written just before a call and read back just after it (`local_408 = _candidateIndex; ... call ...;
-  _candidateIndex = local_408;`) is usually not a variable at all but the spill slot of the one it copies. Deleting it
-  and using the original variable throughout was worth 5% on the same function.
-- A flag the decompiler types as `bool` is often an `int`. `bool` gives `mov bl, 1` / `xor bl, bl` / `test bl, bl`
-  where the original uses a full register (`getCommandIDFromCommandSelectionStuff` 43.8% -> 50.3%). Measure it, the
-  reverse happens too (`checkSkirmishGameDefeat` came out 0.3% worse as `int`).
-- An element the original addresses with one `lea` and then several displacements off that register wants a pointer
-  local, not repeated `array[index]`: `GameCommand* _pCommand = &this->DAT_GameCommandArray[id];` replacing two
-  indexed accesses took `scheduleReceivedCommand` 90.5% -> 96.9%.
-
 ### Conditionals
 
 - Ghidra's decompiler sometimes uses a number off by one for the condition compared to the assembly. Use the assembly as reference in this case.
@@ -319,21 +329,6 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
-
-- Write a comparison with its operands in the order the assembly shows. `if (a > b)` gives `cmp eax, ecx` where
-  `if (b < a)` gives `cmp ecx, eax`; flipping seven `iVar6 < lag[n].average1` to `lag[n].average1 > iVar6` took
-  `broadcastDesyncResyncCommands` 90.7% -> 95.8%, and four of them took `determineGameTicksToPerform` 46.2% -> 64.7%.
-  Use the literal the assembly shows as well: `<= 0x2710` rather than `< 0x2711`, `0 <= x` rather than `-1 < x`.
-- **A call reached from several branches with its arguments in variables was written once per branch.** When the
-  original pushes literals in each arm (`push 0xfffd` / `push 0x601`) where we build `_dwFlags`/`_dwPriority` and
-  share one call site, duplicate the whole call into every arm with the constants spelled out: `transmitCommand`
-  72.1% -> 98.5%. This is the opposite of *Several exits that end in the same statement* under **Loops**: MSVC
-  copies a shared tail of plain stores into each predecessor by itself, but a call whose constant arguments differ
-  per arm was written out per arm. Measure both.
-- `(-(uint)(c) & MASK) + BASE` has three candidate forms and they do not rank the same way twice: leaving the mask,
-  an `if` that overwrites a default, and a ternary. `broadcastDesyncResyncCommands` wanted the ternary
-  (92.3% mask / 92.1% `if` / 93.8% ternary), `renderDebugDataSplitInfo` wanted the `if`
-  (31.5% / 51.8% / 31.0%). Try all three.
 
 ### Loops
 
@@ -422,26 +417,27 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   function needed `int i = 0;` declared *first*, before the other zero-initialised locals, to get the original's
   `xor` order - declaration order did not matter anywhere else it was tried.
 
+- When a loop walks a pointer **and** counts an index, the two initialisers are not interchangeable. The original
+  of `broadcastDesyncResyncCommands` sets the index first (`xor edi, edi`) and the row pointer second, where our
+  source had the pointer first; swapping the two statements was worth 0.3%. In the same function the original
+  starts the walker one element in and advances it at the **tail**, next to the index increment, where the source
+  had `do { p = p + 1; ... }` - moving the `+ 1` into the initialiser and the advance to the loop tail took it from
+  96.1% to 97.4%.
+- A Ghidra temp reused as the index of several unrelated loops costs a spill. `recomputeHashesAndSendResync` shared
+  `iVar39` between its hash accumulator and the climb-data loop; giving that loop its own `int _climbIndex` kept the
+  index in a register as the original does (58.4% -> 58.8%). Splitting the *other* loops that share the same temp
+  changed nothing, so split the loop that the diff points at rather than all of them.
+- An early `return <constant>;` is sometimes a fall-through in the original. `addPlayerToCurrentPlayerArray` ends its
+  last search loop with `return 0;`, but the original zeroes the slot index and falls into the shared store, writing
+  the id into slot 0 before returning it. The tell is a store between the `pop`s of the epilogue
+  (`xor eax, eax; pop esi; pop edi; mov [ecx + eax*4 + ...], ebx; pop ebx; ret`) - one epilogue where the
+  reimplementation has two.
+
 - `mov edx, esi; add esi, 1` at the **top** of a loop body, with the body then indexing by the copy, is a `while`
   loop that takes the index and advances the counter first: `while (i < count) { int index = i; i++; if (...[index]...)
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
-
-- **Ghidra's `while (cond) { i++; if (N <= i) goto LAB; }` is a `for` loop whose body holds the whole block that
-  follows it, ending in `break`.** The decompiler lifts the one interesting iteration out of the loop and leaves a
-  goto into the code after it. Putting that code back inside the `if` in the body, replacing the `goto` with `break`
-  and keeping whatever genuinely follows the loop after it was the highest-yield rewrite found in
-  `GameSynchronyState`: `checkLagAndSyncStatus` 36.8% -> 100%, `advanceSyncStatusAndKickLaggers` 59.4% -> 100%,
-  `checkGameLagStatusAndKickAccordingly` 34.1% -> 100%. Read the function from the raw disassembly and write it out
-  fresh rather than patching the decompiler's control flow.
-- A pointer walked over a member array is compared **signed** in the original (`jl`), so write
-  `(int)p < (int)(array + 9)`; a plain pointer `<` emits `jb` and costs the last two percent
-  (`checkGameLagStatusAndKickAccordingly` 98.0% -> 100%).
-- An early exit out of a loop nest that the decompiler renders as `goto` to a shared tail is often a `return`
-  duplicated into every site. Inlining the three statements plus `return` at all 13 `goto` sites took
-  `sendPendingResyncCommandsInBudget` 57.5% -> 63.2%, and it fixed a real bug: the shared tail fell through and
-  carried on looping where the original returns.
 
 ### GOTO
 
@@ -484,31 +480,32 @@ case is a function that returns the ID it was passed: changing `void EntityState
 to `int` with a trailing `return entityID;` took SHC_3BB0A8C1_0x004039B0 from 36.4% to 100%. Fix the signature in the
 generated header rather than working around the difference.
 
+### Per-file optimization pragmas
+
+`/O2` is a bundle (`/Og /Oi /Ot /Oy /Ob2 /GF /Gy`), and a few translation units in the original were plainly not
+built with all of it. Two of its parts are worth testing per file when a function is stuck and the diff shows
+structural noise rather than a source bug:
+
+- `#pragma inline_depth(1)` - `/Ob2` inlines things the original did not. `disconnectDPlay` 66.0% -> 87.4% and
+  `createCompoundAddressBasedOnSelectedProvider` 54.1% -> 61.2%, `checkMultiplayerLaggingPlayers` 90.6% -> 91.0%.
+  Depth 1 beat depth 0 by about a point on both of the first two; depths 2 and 3 are the same as the default.
+- `#pragma optimize("y", off)` - with `/Oy` the optimizer may use `ebp` as a general register and cross-jump
+  identical epilogues into one. `waitForMultiplayerHost` has two `DAT_HostAnnounced = 1` returns that the original
+  keeps separate: 87.0% -> 98.9%. Note that putting `/Oy-` on the command line through
+  `set_source_files_properties` does **not** reproduce this; only the pragma does.
+
+Sweep them rather than guess: patch one file at a time, rebuild, and keep the ones that win. Over the 25
+non-matching functions of `GameSynchronyState` only four files wanted either pragma, and
+`optimize("s", on)`, `optimize("g", off)`, `optimize("t", off)` and `auto_inline(off)` never won anywhere.
+Toggling a file in or out of `cmake/compiler-flags-gl.txt` is worth the same sweep - it found one win
+(`receiveAllTransmittedCommands`, +1.3) and showed that the `/GL` entries for `determineGameTicksToPerform` and
+`computeLatencyAdjustmentFromMatchTimes` currently measure as no-ops.
+
 ### Link-Time Code Generation
 
 A volatile register (usually ECX or EDX) that stays live across a call in the original, without being reloaded, means
 that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
 so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
-
-`/GL` on both sides is not sufficient on its own. The callee also has to be **enabled in its `.func.hpp`**, i.e.
-`MACRO_FUNCTION_RESOLVER(..., true, Address::...)`, because with `false` the `MACRO_CALL_MEMBER` dispatches to the
-original binary and the compiler has nothing to analyse - it cannot know the callee leaves `ecx` alone, so the caller
-spills `this`. Enabling the callee is only legitimate once that callee is itself at 100%.
-
-`processSyncPacket` sat at 26.2% for exactly this reason, with the whole diff being `mov esi, ecx` and the register
-rename it causes. Flipping `translateMultiplayerIDsIntoPlayerIDs` (already 100%) to `true` took it to 79.2%
-immediately, and the rest was an `abs()`. Enabling all 23 finished functions of `GameSynchronyState` moved the
-namespace average 84.6% -> 85.7% with no function getting worse.
-
-So the measurement setup is two switches, not one: `Enable-Reimplemented-Data.ps1` /
-`enable_reimplemented_data.py` for the struct resolvers **and** `Enable-Reimplemented-Functions.ps1` for the
-function resolvers. Neither belongs in a commit. Measuring with only the data half makes every cross-function call
-look worse than it is.
-
-Explanations that were tested on this pair and are **not** the cause, so do not spend time on them: the callee being
-exported from the DLL (`OpenSHC.dll` exports one symbol, `luaopen_OpenSHC`); its address being taken by
-`MACRO_FUNCTION_RESOLVER`; the other callers not being in the LTCG set; and caller and callee not sharing a
-translation unit.
 
 ### Parameters
 
@@ -591,6 +588,12 @@ do {
 
 #### Known special cases
 
+- `memset` emits its stores from the **lowest** address upwards. When the original clears two adjacent fields from a
+  zero register in the other order, the `memset` is wrong even though the effect is identical: in
+  `recomputeHashesAndSendResync` the original clears `field309_0x420` before `field308_0x41c`, and replacing
+  `memset(&unit.field308_0x41c, 0, 8)` with those two stores in that order was worth 4 points (54.4% -> 58.4%).
+  Check the store order in the diff before reaching for `memset`, and keep it where the order does match - the two
+  other `memset`s in the same function both lose 3-9 points when expanded.
 - `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple **byte-sized** memory locations.
 
 ### CRT Functions
@@ -600,14 +603,6 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
-
-- A run of adjacent single-byte zero stores in our output against dword and word stores in the original is an inlined
-  `memset`. Thirty `this->connectTarget[n] = '\0';` became seven `mov dword ptr ..., eax` plus one `mov word` when
-  written `memset(this->connectTarget, 0, 30);`, which also freed the register MSVC had been holding the zero in
-  (`handleCommandLineArguments` 35.7% -> 39.0%).
-- MSVC folds a two-character `strcpy(p, "\\")` to `mov word ptr [p], 0x5c`. Where the original loads the literal
-  instead (`mov dx, word ptr [str]; mov word ptr [edi], dx`) the source passed the string through a `char*`
-  variable (`readGameSpyConfig` 53.3% -> 58.5%).
 
 ### Copy Elision and Return Value Optimization
 

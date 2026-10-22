@@ -1,0 +1,49 @@
+#include "../AICState.func.hpp"
+
+#include "OpenSHC/AI/AIVState.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_AIVState.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+
+namespace OpenSHC {
+namespace AI {
+
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004CB940
+    BOOLEnum AICState::destroyBuildingIfNoWorker(int buildingID)
+    {
+        short const countdown = DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue;
+        int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+        if (countdown <= 0)
+            return FALSE;
+        if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] != -1)
+            return FALSE;
+        if (DAT_GameSynchronyState::instance.currentAIArray[owner] == 0)
+            return FALSE;
+        if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
+            return FALSE;
+
+        if (DAT_BuildingsState::instance.buildings[buildingID].workers[0] != 0) {
+            if (DAT_GameState::instance.mapAndTime.monthTicks == owner)
+                DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue = countdown - 1;
+            return FALSE;
+        }
+        if (countdown < 20)
+            return FALSE;
+
+        MACRO_CALL_MEMBER(AIVState_Func::resetCountdownInHeatMap, DAT_AIVState::ptr)(
+            (short)DAT_BuildingsState::instance.buildings[buildingID].x,
+            (short)DAT_BuildingsState::instance.buildings[buildingID].y);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
+            DAT_BuildingsState::ptr)(buildingID, owner, 50);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(buildingID);
+        return TRUE;
+    }
+}
+}

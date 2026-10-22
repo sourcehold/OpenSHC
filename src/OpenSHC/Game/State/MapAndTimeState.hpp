@@ -13,7 +13,6 @@
 #include "OpenSHC/Game/Signpost/SignpostLocation.hpp"
 #include "OpenSHC/Game/Skirmish/AttackVector.hpp"
 #include "OpenSHC/Map/Location/Point4ShortXY.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYTileObject.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -27,7 +26,6 @@ namespace Game {
         using OpenSHC::Game::Signpost::SignpostLocation;
         using OpenSHC::Game::Skirmish::AttackVector;
         using OpenSHC::Map::Location::Point4ShortXY;
-        using OpenSHC::Map::Location::Point8IntXY;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::Map::Navigation::Algorithms::XYTileObject;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;

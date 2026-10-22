@@ -23,3 +23,5 @@ src/OpenSHC/Game/GameStateStructures/fillWith0xFF.cpp
 src/OpenSHC/Game/GameStateStructures/computeSignPostEntryData.cpp
 src/OpenSHC/Game/GameStateStructures/resetSomethingBuildingRelatedForAllPlayers.cpp
 src/OpenSHC/Game/GameStateStructures/setVariousGameStateToInitialValues.cpp
+src/OpenSHC/AI/AIVState/executeDefaultCastleAIV.cpp
+src/OpenSHC/AI/AIVState/findAppropriateGridLocationForBuilding.cpp
