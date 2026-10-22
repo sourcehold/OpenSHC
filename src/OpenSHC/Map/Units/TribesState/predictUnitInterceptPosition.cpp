@@ -21,7 +21,6 @@ namespace Map {
             int local_8;
             short _targetTribeMinSpeed;
             int _unitID = unitID;
-            int _unitAddressOffset = unitID * 0x490;
             *unitCurrentX = (int)DAT_UnitsState::instance.units[unitID].x;
             int _yOffb = (int)DAT_UnitsState::instance.units[unitID].y;
             *unitCurrentY = _yOffb;
@@ -111,8 +110,16 @@ namespace Map {
                     /*
                       get current value in pathPlan, each byte contains two move instructions
                      */
-                    uint _pathPlanPair
-                        = (uint) * (char*)((int)_currentIndexInPathPlan / 2 + 0x138864a + _unitAddressOffset);
+                    /*
+                      0x138864a is `units[0].pathPlanStart`: the unit array starts at
+                      0x138854c, since the x the original reads at 0x1388610 is at 0xc4 in
+                      a Unit, and 0x138864a - 0x138854c is 0xfe. The byte is signed -
+                      `movsx eax, byte ptr [eax + ebp + 0x138864a]` - so the cast stays,
+                      and the unit's own offset is still added separately because that is
+                      how the original addresses it.
+                     */
+                    uint _pathPlanPair = (uint)(char)DAT_UnitsState::instance.units[_unitID]
+                                             .pathPlanStart[(int)_currentIndexInPathPlan / 2];
                     if (!(_currentIndexInPathPlan & 1)) {
                         /*
                           if index is even, retain the lowest 4 bits
@@ -128,8 +135,8 @@ namespace Map {
                                         .int_.xOffset
                         + _unitCurrentX_2;
                     *unitCurrentY = *unitCurrentY
-                        + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                            + _pathPlanPair * 8 + 4);
+                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_pathPlanPair]
+                              .int_.yOffset;
                     _unitCurrentX_2 = *unitCurrentX;
                     uint _xOff = _unitCurrentX_2 - iVar4;
                     uint _yOff = *unitCurrentY - iVar2;
