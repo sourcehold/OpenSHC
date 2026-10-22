@@ -152,6 +152,14 @@ namespace Map {
                     }
                     psVar1 = (short*)&_tb->tribes[0].unknownAttackRelatedUpdateCounter;
                     *psVar1 = *psVar1 + 1;
+                    /*
+                      The original compares these two sixteen bits wide (`cmp ax, dx`)
+                      where the fields compared in place promote to `int` and give
+                      `cmp eax, edx`. Reading both into `short` locals first to say so
+                      measures 63.0% -> 62.5%, so the narrowing is not worth what the two
+                      extra loads cost here - unlike updateCamelTribeBehavior, where the
+                      same change to a threshold local is worth 3.2.
+                     */
                     if (_tb->tribes[0].wanderIntervalTicks
                         <= _tb->tribes[0].unknownAttackRelatedUpdateCounter) {
                         _tb->tribes[0].tribeBehaviorType = ((SomeTribeBehaviorType)0);

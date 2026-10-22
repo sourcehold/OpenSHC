@@ -125,7 +125,12 @@ namespace Map {
                         this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     }
                 } else if (SVar2 == Map::Units::STBT_1) {
-                    sVar5 = 800;
+                    /*
+                      A `short` of its own rather than another use of `sVar5`, which is an
+                      `int`: the original compares this against the counter sixteen bits
+                      wide (`cmp ax, dx`), where an `int` threshold gives `cmp eax, ecx`.
+                     */
+                    short _behaviourTimeout = 800;
                     /*
                       Written `<= 0x64`, which is the literal the original compares -
                       `cmp word ptr [esi + ..], 100` with a `jg` - where `< 0x65` gives
@@ -133,11 +138,11 @@ namespace Map {
                       it is handed.
                      */
                     if (this->tribes[param_1].unknownCounter01 <= 0x64) {
-                        sVar5 = 10;
+                        _behaviourTimeout = 10;
                     }
                     psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter;
                     *psVar1 = *psVar1 + 1;
-                    if (sVar5 <= this->tribes[param_1].unknownAttackRelatedUpdateCounter) {
+                    if (_behaviourTimeout <= this->tribes[param_1].unknownAttackRelatedUpdateCounter) {
                         this->tribes[param_1].tribeBehaviorType = ((SomeTribeBehaviorType)0);
                         this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     }
