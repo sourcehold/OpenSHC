@@ -100,6 +100,14 @@ namespace Map {
               mov [esp + 0x14], ecx; mov [esp + 0x18], ecx`), so they are assigned at the
               top of the outer loop and the test follows them.
              */
+            /*
+              The flag stays a `bool` although the original stores a dword into its slot
+              (`mov [esp + 0x18], ecx` and `mov [esp + 0x18], 1`) where ours stores the
+              byte `bl`: as an `int`, together with spelling both inner path-finding calls'
+              arguments identically so MSVC could share their push sequence the way the
+              original does, it measures 56.2% -> 54.9%. Whatever the original's flag was,
+              its slot widths are not what the remaining gap is made of.
+             */
             bool bVar7;
             do {
                 _index = 0;
