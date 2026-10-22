@@ -58,7 +58,7 @@ namespace Map {
             short supportTribeID; // 0x000001F2 length: 2
             int uid2; // 0x000001F4 length: 4
             short tribeID; // 0x000001F8 length: 2
-            short minimumMovementSpeed; // 0x000001FA length: 2
+            ushort minimumMovementSpeed; // 0x000001FA length: 2
             short movementSpeed; // 0x000001FC length: 2
             short maximumMovementSpeed; // 0x000001FE length: 2
             short field61_0x200; // 0x00000200 length: 2

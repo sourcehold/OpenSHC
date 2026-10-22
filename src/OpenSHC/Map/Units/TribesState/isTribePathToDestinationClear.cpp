@@ -25,6 +25,11 @@ namespace Map {
           jump to a shared one. Ours emits that block at the end of the function instead,
           and that placement is what the remaining gap is mostly made of.
 
+          Writing the first chain positively with the whole rest of the function nested
+          inside it, so that the shared `return 0` is the fall-out rather than the taken
+          branch, measures 18.8% -> 18.8%. MSVC puts that epilogue at the end of the
+          function whichever way round the guard is written.
+
           Splitting the chains into six separate `if`s is what took
           trySpawnAdditionalWildlifeForTribe from 87.2% to a full match, so it was worth
           retrying here. Measured with reccmp: 18.8% -> 17.4%. The earlier note against

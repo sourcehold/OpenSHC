@@ -32,6 +32,15 @@ namespace Map {
               `movsx eax, word ptr [esi + 0x5a]`, where sharing the `short` that later holds
               the percentages costs a `movzx` plus a `movsx`.
              */
+            /*
+              The tribe stays a subscript at each access. The original computes its address
+              once in the prologue (`lea esi, [eax + ecx]`) and then reloads `this` from a
+              stack slot for the call in the loop (`mov ecx, [esp + 0x24]`), where we hold
+              `this` in a register and spill the loop counter instead - so a
+              `TribesState*` base of our own looks like the way to free it. It is not:
+              measured 47.2% -> 45.2%. MSVC commons the base out of the subscripts anyway
+              and the explicit pointer only changes which register it picks.
+             */
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
             /*
               An `int`, not a `short`. The original keeps each percentage in a 32-bit

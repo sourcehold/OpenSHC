@@ -19,7 +19,7 @@ namespace Map {
             UnitTypeShort UVar1;
             uint _currentIndexInPathPlan;
             int local_8;
-            short _targetTribeMinSpeed;
+            ushort _targetTribeMinSpeed;
             int _unitID = unitID;
             *unitCurrentX = (int)DAT_UnitsState::instance.units[unitID].x;
             int _yOffb = (int)DAT_UnitsState::instance.units[unitID].y;
@@ -39,18 +39,23 @@ namespace Map {
               original has `cmp dx, 1` and `cmp cx, 1` - sixteen bits wide, against the
               literal 1, each with a `jg` over a `mov reg, 1` - where `< 2` on an `int`
               gives a 32-bit `jge` against 2. Same test either way; one is the
-              instruction the original has. The second read is `movzx ecx, word ptr
-              [esi + ecx + 0x222]`, so it is a narrow load too.
+              instruction the original has.
+
+              Both loads are `movzx` - `movzx ecx, word ptr [esi + ecx + 0x222]` at
+              0x521576 - and both are then sign-extended (`movsx edx, dx` at 0x521566,
+              `movsx ecx, cx` at 0x52158a) before the test, so the field is an unsigned
+              word that the code treats as signed. Tribe::minimumMovementSpeed is `ushort`
+              for that reason and the casts here are what the sign extension is.
              */
-            int _targetTribeMinSpeedBounded = (int)_targetTribeMinSpeed;
-            if (_targetTribeMinSpeed <= 1) {
+            int _targetTribeMinSpeedBounded = (short)_targetTribeMinSpeed;
+            if ((short)_targetTribeMinSpeed <= 1) {
                 _targetTribeMinSpeedBounded = 1;
             }
-            short _tribeMinSpeed
+            ushort _tribeMinSpeed
                 = this->tribes[DAT_UnitsState::instance.units[unitID].tribeID].minimumMovementSpeed;
             int iVar3 = _targetTribeMinSpeedBounded * 4;
-            int _tribeMinSpeedBounded = (int)_tribeMinSpeed;
-            if (_tribeMinSpeed <= 1) {
+            int _tribeMinSpeedBounded = (short)_tribeMinSpeed;
+            if ((short)_tribeMinSpeed <= 1) {
                 _tribeMinSpeedBounded = 1;
             }
             int iVar4 = (int)DAT_UnitsState::instance.units[targetUnitID].x;

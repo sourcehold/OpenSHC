@@ -116,6 +116,13 @@ namespace Map {
                 local_c = DAT_TroopValueState::instance.y;
             }
         LAB_0052142a:
+            /*
+              The flag stays, although its slot is the local our frame has and the
+              original's does not (`sub esp, 0xc` against our 0x10). Writing the one store
+              the success and failure paths share - `targetedBuildingTile = 0` - out in
+              each of them and dropping the flag measures 33.3% -> 23.0%: the shared tail
+              is what holds the block order together here.
+             */
             bVar3 = 1;
             x = DAT_TroopValueState::instance.x;
             uVar6 = DAT_TroopValueState::instance.tile;
