@@ -79,7 +79,7 @@ namespace Game {
         int someSoundMatchTime_1; // 0x0000008C length: 4
         dword field33_0x90; // 0x00000090 length: 4
         int battleLevel2; // 0x00000094 length: 4
-        dword mapTimeInTicks; // 0x00000098 length: 4
+        int mapTimeInTicks; // 0x00000098 length: 4
         dword section1127; // 0x0000009C length: 4
         dword field37_0xa0; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4

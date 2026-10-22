@@ -143,7 +143,7 @@ namespace Map {
             short growCounter; // 0x000001C4 length: 2
             undefined1 padding_0x1c6[2]; // 0x000001C6 length: 2
             int tileRefs[36]; // 0x000001C8 length: 144
-            short wheatGrowStateRelated; // 0x00000258 length: 2
+            short farmGrowState; // 0x00000258 length: 2
             undefined1 padding_0x25a[2]; // 0x0000025A length: 2
             int tunnelerCounter; // 0x0000025C length: 4
             short someX; // 0x00000260 length: 2
