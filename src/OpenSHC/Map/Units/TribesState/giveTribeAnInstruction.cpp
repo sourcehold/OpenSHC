@@ -519,7 +519,7 @@ namespace Map {
                                                                                .totalSizeOfPathPlan
                                                 / 2);
                                             DAT_UnitsState::instance.units[iVar11].lookForEnemy = -0x32;
-                                            if ((int)unitInstructionType < (int)UVar10) {
+                                            if ((int)UVar10 > (int)unitInstructionType) {
                                                 unitInstructionType = UVar10;
                                             }
                                             id = id + 0xc;
@@ -761,7 +761,7 @@ namespace Map {
                                             UVar10 = (UnitInstructionType)((int)DAT_UnitsState::instance.units[iVar14]
                                                                                .totalSizeOfPathPlan
                                                 / 2);
-                                            if ((int)unitInstructionType < (int)UVar10) {
+                                            if ((int)UVar10 > (int)unitInstructionType) {
                                                 unitInstructionType = UVar10;
                                             }
                                             id = id + 0xc;

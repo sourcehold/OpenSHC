@@ -79,7 +79,7 @@ namespace Map {
             uint _yOff_2 = _yOffb - iVar2;
             int _xOff_2b = (_xOff_2 ^ (int)_xOff_2 >> 0x1f) - ((int)_xOff_2 >> 0x1f);
             int _yOff_2b = (_yOff_2 ^ (int)_yOff_2 >> 0x1f) - ((int)_yOff_2 >> 0x1f);
-            if (_yOff_2b < _xOff_2b) {
+            if (_xOff_2b > _yOff_2b) {
                 _yOff_2b = _xOff_2b;
             }
             /*
@@ -126,7 +126,7 @@ namespace Map {
                     uint _yOff = *unitCurrentY - iVar2;
                     iVar3 = (_xOff ^ (int)_xOff >> 0x1f) - ((int)_xOff >> 0x1f);
                     _yOffb = (_yOff ^ (int)_yOff >> 0x1f) - ((int)_yOff >> 0x1f);
-                    if (_yOffb < iVar3) {
+                    if (iVar3 > _yOffb) {
                         _yOffb = iVar3;
                     }
                     if ((_yOffb + -2) * unitID < local_8) {

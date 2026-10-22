@@ -74,7 +74,7 @@ namespace Map {
              */
             psVar1 = &this->tribes[tribeID].field138_0x284;
             *psVar1 = *psVar1 + 1;
-            if ((param_2 <= this->tribes[tribeID].field138_0x284)
+            if ((this->tribes[tribeID].field138_0x284 >= param_2)
                 && (sVar2 = this->tribes[tribeID].herdMaxSize, this->tribes[tribeID].field138_0x284 = 0,
                     _tribeSize < sVar2)) {
                 if ((unitType == Map::Units::UT_RABBIT)

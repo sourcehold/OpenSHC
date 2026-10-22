@@ -52,10 +52,19 @@ namespace Map {
                     unitSelectionIndex = unitSelectionIndex + 1;
                     if ((((UVar2 == ((UnitLogicState)1)) || (UVar2 == Map::Units::ULS_NORMAL))
                             || (UVar2 == Map::Units::ULS_TRANSITIONING))
-                        && smallerSize <= unitSelectionIndex) {
+                        /*
+                          The index comes first in both of this loop's comparisons. The
+                          original has `cmp esi, dword ptr [esp + 0x18]` with a `jl` here
+                          and `cmp esi, ecx` with a `jl` on the back-edge - esi being the
+                          index in each - where `smallerSize <= index` gives the reverse
+                          `cmp` and a `jg`. I first swapped the back-edge instead of this
+                          one, which made a correct comparison wrong and measured flat
+                          overall; the two cancelled out.
+                         */
+                        && unitSelectionIndex >= smallerSize) {
                         *pUVar1 = Map::Units::ULS_REMOVE;
                     }
-                } while (_tb->tribes[0].size > unitSelectionIndex);
+                } while (unitSelectionIndex < _tb->tribes[0].size);
             }
         }
 
