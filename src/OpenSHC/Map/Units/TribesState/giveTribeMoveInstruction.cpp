@@ -45,6 +45,31 @@ namespace Map {
           so the frame only matches with both moves. Whatever is costing the raw match is
           downstream of the stack displacements those moves shift, so this needs the
           allocation understood rather than another declaration permutation.
+
+          The strongest evidence for that, and the closest this function has come: the
+          original reaches the modulo search through six separate call sites, pushing the
+          constant from each and jumping back to a shared tail - `push ebp; push edi;
+          push 2; jmp -0x19b` and the same with 4 and 1 - where the import assigns
+          `_modulo` in six places and calls once. Writing the six call sites out is the
+          change that took spawnUnitsForAITribe from 78% to a full match, and here it
+          moves everything except the score:
+
+            instructions   726 -> 721   (original: 720)
+            normalized    22.6 -> 29.4
+            register-blind 36.7 -> 46.1
+            raw           30.0 -> 28.9
+
+          What it costs is the frame. `_modulo` is one of the slots, and without it MSVC
+          drops to `sub esp, 0x2c` where the original - and the import - have `sub esp,
+          0x34`, and the `mov dword ptr [esp + 0x38], 0x1f4` goes with it. So the
+          instruction sequence gets within one instruction of the original while the frame
+          stops matching, and raw follows the frame. Adding the `_searchBudget` move on top
+          changes nothing at all now (identical numbers), where on its own it used to move
+          both figures.
+
+          Reverted, because raw is what the status file tracks. But the shape is not in
+          doubt any more: this function wants the six call sites and a 0x34 frame at the
+          same time, and that needs two locals the decompiler did not name.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x005263A0
         undefined4 TribesState::giveTribeMoveInstruction(

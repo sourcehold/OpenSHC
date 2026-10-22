@@ -165,12 +165,17 @@ namespace Map {
                     (int)DAT_UnitsState::instance.units[_otherUnitID].y, 0x59);
                 return;
             case Map::Units::UT_E_KNIGHT:
+                /*
+                  The same two call sites written out, which is what the decompiler's
+                  `_otherX = 0x56` / `goto` back into the first one was: the original
+                  pushes 0x56 and 0x58 directly and shares the coordinate pushes and the
+                  call. Every path still reaches the 0x59 play below, as it did through
+                  the goto.
+                 */
                 if (_selectedCount == 1) {
-                    _otherX = 0x56;
-                LAB_00521c6f:
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                         (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                        (int)(DAT_UnitsState::instance.units[_otherUnitID].y), _otherX);
+                        (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x56);
                 } else {
                     if ((_selectedCount == 2) || (_selectedCount == 3)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
@@ -178,8 +183,9 @@ namespace Map {
                             (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x57);
                     }
                     if (3 < _selectedCount_2) {
-                        _otherX = 0x58;
-                        goto LAB_00521c6f;
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[_otherUnitID].x,
+                            (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x58);
                     }
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
