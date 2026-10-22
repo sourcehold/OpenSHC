@@ -16,7 +16,7 @@ namespace IO {
     using OpenSHC::IO::Base64State;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    void __cdecl SwapInts(undefined4* param_1, undefined4* param_2);
+    void __cdecl SwapInts(int* param_1, int* param_2);
 
     void __cdecl Base64EncodeInit(Base64State* state);
 

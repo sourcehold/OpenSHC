@@ -149,8 +149,8 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00473BE0, &TextManager::renderSomeSpecificTextUnk)
         renderSomeSpecificTextUnk;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, BGR24, int, BOOLEnum, int), false,
-            Address::SHC_3BB0A8C1_0x00474250, &TextManager::renderTextToScreen)
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char const*, int, int, TextAlignment, BGR24, int, BOOLEnum, int),
+            false, Address::SHC_3BB0A8C1_0x00474250, &TextManager::renderTextToScreen)
         renderTextToScreen;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(LPWSTR, int, int, TextAlignment, uint, int, BOOL, int), false,

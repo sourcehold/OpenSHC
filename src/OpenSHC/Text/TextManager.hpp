@@ -154,7 +154,7 @@ namespace Text {
         void renderSomeSpecificTextUnk(
             int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, uint color, int fontSize);
 
-        void renderTextToScreen(char* textAddress, int xParam, int yParam, TextAlignment alignment, BGR24 color,
+        void renderTextToScreen(char const* textAddress, int xParam, int yParam, TextAlignment alignment, BGR24 color,
             int fontSize, BOOLEnum keepOffsetX, int blendStrength);
 
         void renderWideText(LPWSTR wideText, int xPos, int yPos, TextAlignment alignment, uint color, int fontSize,
