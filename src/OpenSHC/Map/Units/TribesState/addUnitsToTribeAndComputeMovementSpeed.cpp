@@ -35,6 +35,22 @@ namespace Map {
             int _minimumSpeed = 100;
             _maximumSpeed = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
+            /*
+              The loop cursor is anchored on the wrong field, and that is most of what is
+              left here. MSVC bases the whole unit loop on one address: the original uses
+              `mov esi, I<UnitsState>::instance+3568`, which is `&units[1].movementSpeed`
+              (unit offset 0x34c), and reads the speed at `[esi]` with dying at
+              `[esi - 0xac]`, logicalState at `[esi - 0x2c0]`, the owner at `[esi - 0x29a]`
+              and the health at `[esi - 0x78]`. We get +3396, `&units[1].dying` (0x2a0),
+              and every displacement in the loop differs by 0xac while the opcodes line up.
+              Same addresses at run time; five different instructions per iteration.
+
+              diff_anchor.py now reports this - it used to miss it, because it only
+              recognised `lea`/`add` anchors and a cursor into a global array is set up
+              with `mov reg, <global>+N`. Its notes list what has already been tried on
+              anchors elsewhere and found ineffective, so this is recorded rather than
+              guessed at.
+             */
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 _unitID = 1;
                 do {

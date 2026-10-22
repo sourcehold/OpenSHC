@@ -35,6 +35,15 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(unitID, tribeID);
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 tribeID = DAT_UnitsState::instance.maxUnitCount - 1;
+            /*
+              Same anchor difference as its twin addUnitsToTribeAndComputeMovementSpeed,
+              and most of what is left here. The original bases the unit loop on
+              `mov esi, I<UnitsState>::instance+3568` - `&units[1].movementSpeed`, unit
+              offset 0x34c - and reads the speed at `[esi]`; we anchor on +3396,
+              `&units[1].dying` (0x2a0), so every displacement in the loop differs by 0xac
+              while the opcodes line up. diff_anchor.py reports both; see the fuller note
+              on the twin.
+             */
                 _ptrUnit = &DAT_UnitsState::instance.units[1];
                 do {
                     if (_ptrUnit->logicalState == Map::Units::ULS_NORMAL && !_ptrUnit->dying
