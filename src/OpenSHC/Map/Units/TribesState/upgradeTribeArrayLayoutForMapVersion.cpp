@@ -2,6 +2,7 @@
 #include "../TribesState.func.hpp"
 
 #include "string.h"
+#include <intrin.h>
 
 namespace OpenSHC {
 namespace Map {
@@ -48,13 +49,22 @@ namespace Map {
                 _Dst = _Dst + -1;
                 psVar3 = psVar3 + 100;
                 /*
-                  A memset, not a loop. The original clears these 200 bytes with
-                  `mov ecx, 0x32` and a single `rep stosd` - fifty dwords - which is what
-                  MSVC inlines a constant-size memset to. The decompiler's two-shorts-per-
-                  iteration loop compiles to eight instructions instead: the pair of
-                  stores, the cursor bump, the counter decrement and the branch.
+                  The original clears these 200 bytes with `mov ecx, 0x32` and a single
+                  `rep stosd` - fifty dwords. Three spellings, measured:
+
+                    the decompiler's two-shorts-per-iteration loop   46.5%
+                    memset(psVar3, 0, 200)                           49.4%
+                    __stosd((unsigned long*)psVar3, 0, 50)           57.5%
+
+                  The loop compiles to eight instructions. `memset` is better but this
+                  build does not inline it - it emits `push 0xc8; push 0; push ebx; call
+                  memset; add esp, 0x18`, so the original's `rep stosd` is an inlined
+                  memset and /Oi is not on here. The intrinsic emits the instruction
+                  directly, which is why it is used in preference to the more idiomatic
+                  memset: it is the only one of the three that produces what the original
+                  has.
                  */
-                memset(psVar3, 0, (size_t)((int)(200)));
+                __stosd((unsigned long*)psVar3, 0, 50);
             } while (-1 < iVar2);
             return;
         }
