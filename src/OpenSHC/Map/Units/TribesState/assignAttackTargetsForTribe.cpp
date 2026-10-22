@@ -201,6 +201,17 @@ namespace Map {
                                         || UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk
                                         || UVar1 == Map::Units::States::US_STAND_UPUnk)
                                         continue;
+                                    /*
+                                      This stays a flag assignment although MSVC
+                                      materialises it - `cmp ax, 9; sete al; test al, al;
+                                      jne` where the original has the bare `cmp ax, 9` and
+                                      lets the shared `jne` below consume the flags. The
+                                      other three arms do carry their comparison in the
+                                      flags; this one is the arm that falls through to the
+                                      shared test and MSVC will not carry it across that
+                                      edge. Testing and jumping here instead, which removes
+                                      the `sete` and the `test`, measures 44.6% -> 43.7%.
+                                     */
                                     bVar7 = UVar1
                                         == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk);
                                 }
