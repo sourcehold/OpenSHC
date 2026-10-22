@@ -58,13 +58,10 @@ namespace AI {
 
         if (initialize) {
             for (int tile = 0; tile < 80400; ++tile) {
-                int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
-                int const gridX = (tile
-                                      - DAT_ViewportRenderState::instance
-                                          .translationMatrix[DAT_ViewportRenderState::instance
-                                                  .tileTranslationMatrix_YComponent[tile]]
-                                          .addXgetTile)
-                    / 5;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                int const gridY = y / 5;
+                int const gridX = x / 5;
                 if (gridX >= 1 && gridX <= 78 && gridY >= 1 && gridY <= 78) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
