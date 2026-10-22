@@ -21,7 +21,7 @@ namespace Map {
                             = (char)DAT_TileMapState::instance.DamageLayer[tile] < 8 ? 0 : 101;
                     }
                     this->buildings[buildingID].growCounter = -1200;
-                    this->buildings[buildingID].wheatGrowStateRelated = 2;
+                    this->buildings[buildingID].farmGrowState = 2;
                 }
             }
         }

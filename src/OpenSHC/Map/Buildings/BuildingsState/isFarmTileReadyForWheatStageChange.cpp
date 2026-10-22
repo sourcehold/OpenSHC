@@ -15,22 +15,22 @@ namespace Map {
                 int const tile = (&this->buildings[buildingID].tileRef1)[tileIndex];
                 int const damage = (char)DAT_TileMapState::instance.DamageLayer[tile];
                 DAT_BuildingsState::instance.farmerDestinationTile = tile;
-                if (this->buildings[buildingID].wheatGrowStateRelated == 6) {
+                if (this->buildings[buildingID].farmGrowState == 6) {
                     if (damage >= 11 && damage < 101) {
                         return 1;
                     }
-                } else if (this->buildings[buildingID].wheatGrowStateRelated == 8) {
+                } else if (this->buildings[buildingID].farmGrowState == 8) {
                     if (damage == 121) {
                         return 1;
                     }
-                } else if (this->buildings[buildingID].wheatGrowStateRelated == 3) {
+                } else if (this->buildings[buildingID].farmGrowState == 3) {
                     if (damage == 0 || damage == 120) {
                         return 1;
                     }
                     if (damage >= 101 && damage < 120) {
                         return 1;
                     }
-                } else if (this->buildings[buildingID].wheatGrowStateRelated == 5) {
+                } else if (this->buildings[buildingID].farmGrowState == 5) {
                     if (damage >= 1 && damage < 2) {
                         return 1;
                     }
