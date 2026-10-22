@@ -139,7 +139,7 @@ namespace Game {
                 worstChange = 0;
                 worstChangeReason = 3;
             }
-            popularityChange = this->playerDataArray[playerID].areCarnivalUnitsPresent != FALSE ? 400 : 0;
+            popularityChange = this->playerDataArray[playerID].areCarnivalUnitsPresent ? 400 : 0;
             this->playerDataArray[playerID].popularity = popularityAfterTax + popularityChange;
             this->playerDataArray[playerID].popularityChangeBasedOnFair = popularityChange;
             if (popularityChange < worstChange) {

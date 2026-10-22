@@ -14,8 +14,7 @@ namespace Game {
     int GameStateStructures::getWallTilesThatCanBeBuilt(int playerID, int wallMaterial)
     {
         int wallTiles = 0;
-        if (DAT_GameCore::instance.solitaryAllBuildingsAreFree == FALSE
-            && DAT_GameCore::instance.gameMode_2 != GM_EDITOR) {
+        if (!DAT_GameCore::instance.solitaryAllBuildingsAreFree && DAT_GameCore::instance.gameMode_2 != GM_EDITOR) {
             if (DAT_GameCore::instance.gameMode_2 == GM_SIEGE_THAT) {
                 return this->playerDataArray[playerID].startResources[4];
             }

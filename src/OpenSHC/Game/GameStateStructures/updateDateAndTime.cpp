@@ -31,16 +31,15 @@ namespace Game {
             this->mapAndTime.dayTicks = 0;
         }
         // key "H" in scenario editor mode for example
-        if (DAT_GameCore::instance.isTimeHalted != FALSE) {
+        if (DAT_GameCore::instance.isTimeHalted) {
             return;
         }
         // we are at the start of Castle Builder mode or in a tutorial
         if (MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
-                UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO)
-            != FALSE) {
+                UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO)) {
             return;
         }
-        if (startOfWeekAsCurrentTickIs0 == FALSE) {
+        if (!startOfWeekAsCurrentTickIs0) {
             return;
         }
         ++this->mapAndTime.week;

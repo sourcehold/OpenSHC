@@ -27,7 +27,7 @@ namespace Game {
             && currentPlayerSlotID == 2) {
             return 1;
         }
-        if (this->mapAndTime.singlePlayerHasKeepAndGranary != FALSE) {
+        if (this->mapAndTime.singlePlayerHasKeepAndGranary) {
             return 1;
         }
         if (DAT_GameSynchronyState::instance.currentGameMode != GM_SOLITARY) {

@@ -52,7 +52,7 @@ namespace Game {
     {
         DAT_RotateMapOrPullDownTerrain::instance = 0;
         if (DAT_GameSynchronyState::instance.saveRelated != 0) {
-            if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+            if (DAT_GameSynchronyState::instance.isHost) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::checkGameLagStatusAndKickAccordingly,
                     DAT_GameSynchronyState::ptr)();
                 return;
@@ -60,7 +60,7 @@ namespace Game {
             return;
         }
         if (DAT_GameSynchronyState::instance.syncStatus != 0) {
-            if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+            if (DAT_GameSynchronyState::instance.isHost) {
                 if (DAT_GameSynchronyState::instance.syncStatus == 10) {
                     MACRO_CALL_MEMBER(
                         Synchrony::GameSynchronyState_Func::checkLagAndSyncStatus, DAT_GameSynchronyState::ptr)();
@@ -109,10 +109,10 @@ namespace Game {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 Commands::GCT_SEND_QUIT_GAME_VOTE);
         }
-        if (MACRO_CALL_MEMBER(GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE
+        if (MACRO_CALL_MEMBER(GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
             && (DAT_GameCore::instance.gamePausedLogical == 0
                 || (int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8)
-            && MACRO_CALL_MEMBER(GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() == FALSE) {
+            && !MACRO_CALL_MEMBER(GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()) {
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
             ++DAT_GameCore::instance.mapTimeInTicks;
@@ -145,7 +145,7 @@ namespace Game {
                 return;
             }
             if (DAT_GameCore::instance.gamePausedLogical == 0) {
-                if (MACRO_CALL_MEMBER(GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() != FALSE) {
+                if (MACRO_CALL_MEMBER(GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()) {
                     return;
                 }
             } else {
@@ -155,7 +155,7 @@ namespace Game {
         if (DAT_GameCore::instance.gameMode_2 == GM_EDITOR && DAT_GameCore::instance.isTimeHalted2 != 0) {
             return;
         }
-        if (MACRO_CALL_MEMBER(GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() == FALSE) {
+        if (!MACRO_CALL_MEMBER(GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             return;
         }
         // From here on only gets called if game is unpaused
