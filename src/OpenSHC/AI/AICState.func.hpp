@@ -140,7 +140,7 @@ namespace AI {
         aiShouldBuildQuarry;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB3A0, &AICState::aiRequiresExtraOxtethers)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB3A0, &AICState::aiRequiresExtraOxtethers)
         aiRequiresExtraOxtethers;
 
         MACRO_FUNCTION_RESOLVER(
@@ -171,8 +171,8 @@ namespace AI {
             BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB890, &AICState::shouldDestroyWoodCutterUnk)
         shouldDestroyWoodCutterUnk;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB940,
-            &AICState::destroyBuildingIfNoWorker)
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB940, &AICState::destroyBuildingIfNoWorker)
         destroyBuildingIfNoWorker;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB9F0,
@@ -690,7 +690,7 @@ namespace AI {
             &AICState::moveAttackingUnitsToNextRallyPoint)
         moveAttackingUnitsToNextRallyPoint;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D30E0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D30E0,
             &AICState::sendUnitsToAttackBreachedCastle)
         sendUnitsToAttackBreachedCastle;
 

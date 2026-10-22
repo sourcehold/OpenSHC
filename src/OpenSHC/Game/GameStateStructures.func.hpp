@@ -143,7 +143,7 @@ namespace Game {
             &GameStateStructures::destroyPlayerCompletely)
         destroyPlayerCompletely;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(MappersEnum, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(MappersEnum, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00457B80, &GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy)
         checkRequiredResourcesForBuildingOrPlanToBuy;
 

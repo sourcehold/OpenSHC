@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/AI/AITypeA.hpp"
 
@@ -9,14 +9,11 @@ namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB120
     int AICState::getAIBuildInterval(int playerID)
-
     {
-        int const aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
-        if (aiType == AITA_NULL) {
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == AITA_NULL)
             return 0;
-        }
-
-        return this->aics[(aiType - 1)].buildInterval;
+        return this->aics[aiType - 1].buildInterval;
     }
 }
 }

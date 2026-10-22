@@ -1,0 +1,150 @@
+#include "../AICState.func.hpp"
+
+#include "OpenSHC/AI/AIC/AITargetChoice.hpp"
+
+namespace OpenSHC {
+namespace AI {
+
+    using OpenSHC::AI::AIC::AITargetChoice;
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004CA0C0
+    void AICState::setAICParameters_14(int aicIndex)
+    {
+        this->aics[aicIndex].flagType = 13;
+        this->aics[aicIndex].unknown002 = 0;
+        this->aics[aicIndex].unknown001 = 0;
+        this->aics[aicIndex].unknown003 = 0;
+        this->aics[aicIndex].unknown004 = 1;
+        this->aics[aicIndex].unknown005 = 1;
+        this->aics[aicIndex].criticalPopularity = 4000;
+        this->aics[aicIndex].lowestPopularity = 6000;
+        this->aics[aicIndex].highestPopularity = 9000;
+        this->aics[aicIndex].taxesMin = 3;
+        this->aics[aicIndex].taxesMax = 11;
+        this->aics[aicIndex].farm1 = 32;
+        this->aics[aicIndex].farm2 = 31;
+        this->aics[aicIndex].farm3 = 33;
+        this->aics[aicIndex].populationPerFarm = 4;
+        this->aics[aicIndex].unknown011 = 10;
+        this->aics[aicIndex].maxFood = 300;
+        this->aics[aicIndex].minimumApples = 20;
+        this->aics[aicIndex].minimumCheese = 20;
+        this->aics[aicIndex].minimumBread = -1;
+        this->aics[aicIndex].minimumWheat = -1;
+        this->aics[aicIndex].minimumHop = 2;
+        this->aics[aicIndex].tradeAmountFood = 10;
+        this->aics[aicIndex].tradeAmountEquipment = 2;
+        this->aics[aicIndex].aiRequestDelay = 40;
+        this->aics[aicIndex].minimumGoodsRequiredAfterTrade = 40;
+        this->aics[aicIndex].doubleRationsFoodThreshold = 40;
+        this->aics[aicIndex].maxWood = 50;
+        this->aics[aicIndex].maxStone = 50;
+        this->aics[aicIndex].maxResourceOther = 10;
+        this->aics[aicIndex].maxEquipment = 10;
+        this->aics[aicIndex].maxBeer = 10;
+        this->aics[aicIndex].maxResourceVariance = 5;
+        this->aics[aicIndex].recruitGoldThreshold = 200;
+        this->aics[aicIndex].populationPerWoodcutter = 7;
+        this->aics[aicIndex].populationPerQuarry = 10;
+        this->aics[aicIndex].populationPerIronmine = 12;
+        this->aics[aicIndex].populationPerPitchrig = 15;
+        this->aics[aicIndex].maxQuarries = 3;
+        this->aics[aicIndex].maxIronmines = 6;
+        this->aics[aicIndex].maxWoodcutters = 10;
+        this->aics[aicIndex].maxPitchrigs = 4;
+        this->aics[aicIndex].maxFarms = 10;
+        this->aics[aicIndex].buildInterval = 3;
+        this->aics[aicIndex].resourceRebuildDelay = 8;
+        this->aics[aicIndex].blacksmithSetting = 21;
+        this->aics[aicIndex].fletcherSetting = 18;
+        this->aics[aicIndex].poleturnerSetting = 20;
+        this->aics[aicIndex].sellResource05 = 9;
+        this->aics[aicIndex].sellResource07 = 16;
+        this->aics[aicIndex].sellResource08 = 17;
+        this->aics[aicIndex].sellResource10 = 19;
+        this->aics[aicIndex].sellResource11 = 20;
+        this->aics[aicIndex].sellResource13 = 22;
+        this->aics[aicIndex].sellResource15 = 24;
+        this->aics[aicIndex].defWallPatrolRallyTime = 8;
+        this->aics[aicIndex].defWallPatrolGroups = 2;
+        this->aics[aicIndex].defSiegeEngineGoldThreshold = 200;
+        this->aics[aicIndex].defSiegeEngineBuildDelay = 4;
+        this->aics[aicIndex].unknown072 = 200;
+        this->aics[aicIndex].unknown073 = 30;
+        this->aics[aicIndex].recruitProbDefWeak = 100;
+        this->aics[aicIndex].recruitProbDefDefault = 50;
+        this->aics[aicIndex].recruitProbDefStrong = 30;
+        this->aics[aicIndex].recruitProbRaidWeak = 0;
+        this->aics[aicIndex].recruitProbRaidDefault = 30;
+        this->aics[aicIndex].recruitProbRaidStrong = 50;
+        this->aics[aicIndex].recruitProbAttackWeak = 0;
+        this->aics[aicIndex].recruitProbAttackDefault = 20;
+        this->aics[aicIndex].recruitProbAttackStrong = 20;
+        this->aics[aicIndex].RecruitIntervalWeak = 1;
+        this->aics[aicIndex].RecruitInterval = 4;
+        this->aics[aicIndex].RecruitIntervalStrong = 4;
+        this->aics[aicIndex].SortieUnitRangedMin = 10;
+        this->aics[aicIndex].SortieUnitRanged = 23;
+        this->aics[aicIndex].SortieUnitMeleeMin = 10;
+        this->aics[aicIndex].SortieUnitMelee = 26;
+        this->aics[aicIndex].DefDiggingUnitMax = 4;
+        this->aics[aicIndex].DefDiggingUnit = 26;
+        this->aics[aicIndex].DefWalls = 40;
+        this->aics[aicIndex].DefTotal = 50;
+        this->aics[aicIndex].OuterPatrolGroupsCount = 1;
+        this->aics[aicIndex].OuterPatrolGroupsMove = 1;
+        this->aics[aicIndex].OuterPatrolRallyDelay = 5;
+        this->aics[aicIndex].DefUnit1 = 23;
+        this->aics[aicIndex].DefUnit2 = 23;
+        this->aics[aicIndex].RaidUnitsBase = 10;
+        this->aics[aicIndex].RaidUnitsRandom = 4;
+        this->aics[aicIndex].DefUnit3 = 23;
+        this->aics[aicIndex].DefUnit4 = 76;
+        this->aics[aicIndex].DefUnit5 = 73;
+        this->aics[aicIndex].RaidUnit1 = 26;
+        this->aics[aicIndex].HarassingSiegeEnginesMax = 5;
+        this->aics[aicIndex].HarassingSiegeEngine1 = 190;
+        this->aics[aicIndex].HarassingSiegeEngine2 = 358;
+        this->aics[aicIndex].RaidRetargetDelay = 4;
+        this->aics[aicIndex].AttForceBase = 50;
+        this->aics[aicIndex].AttForceRandom = 20;
+        this->aics[aicIndex].AttForceSupportAllyThreshold = 50;
+        this->aics[aicIndex].AttForceRallyPercentage = 80;
+        this->aics[aicIndex].AttMovingTribesThreshold = 100;
+        this->aics[aicIndex].AttAssaultDelay = 5;
+        this->aics[aicIndex].AttUnitPatrolRecommandDelay = 8;
+        this->aics[aicIndex].AttCoordinationPreference = 50;
+        this->aics[aicIndex].CowThrowInterval = 6;
+        this->aics[aicIndex].SiegeEngine1 = 39;
+        this->aics[aicIndex].SiegeEngine2 = 39;
+        this->aics[aicIndex].SiegeEngine3 = 77;
+        this->aics[aicIndex].SiegeEngine4 = 77;
+        this->aics[aicIndex].SiegeEngine5 = 77;
+        this->aics[aicIndex].AttMaxEngineers = 10;
+        this->aics[aicIndex].AttDiggingUnit = 71;
+        this->aics[aicIndex].AttDiggingUnitMax = 80;
+        this->aics[aicIndex].AttMaxAssassins = 10;
+        this->aics[aicIndex].AttUnit2 = 26;
+        this->aics[aicIndex].AttUnit2Max = 10;
+        this->aics[aicIndex].AttMaxLaddermen = 0;
+        this->aics[aicIndex].AttMaxTunnelers = 0;
+        this->aics[aicIndex].AttUnitPatrol = 76;
+        this->aics[aicIndex].AttUnitPatrolMax = 0;
+        this->aics[aicIndex].AttUnitPatrolGroupsCount = 0;
+        this->aics[aicIndex].AttUnitBackup = 23;
+        this->aics[aicIndex].AttUnitBackupMax = 50;
+        this->aics[aicIndex].AttUnitBackupGroupsCount = 1;
+        this->aics[aicIndex].AttUnitEngageMax = 0;
+        this->aics[aicIndex].AttUnitEngage = 0;
+        this->aics[aicIndex].AttUnitSiegeDef = 26;
+        this->aics[aicIndex].AttUnitSiegeDefMax = 6;
+        this->aics[aicIndex].AttUnitSiegeDefGroupsCount = 1;
+        this->aics[aicIndex].AttUnitMain1 = 26;
+        this->aics[aicIndex].AttUnitMain2 = 26;
+        this->aics[aicIndex].AttMaxDefault = 200;
+        this->aics[aicIndex].AttMainGroupsCount = 3;
+        this->aics[aicIndex].TargetChoice = OpenSHC::AI::AIC::AITC_CLOSEST;
+    }
+
+}
+}

@@ -14,6 +14,7 @@
 #include "WinDef.h"
 #include "crtdefs.h"
 #include "ddraw.h"
+#include "dplay.h"
 #include "winnt.h"
 namespace OpenSHC {
 namespace Synchrony_Func {
