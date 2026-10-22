@@ -24,9 +24,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523F70
         undefined4 TribesState::updateTribeRallyFlags(int param_1)
         {
-            short* const _size = &this->tribes[param_1].size;
             int unitSelectionIndex = 0;
             undefined4 _anyRallying = 0;
+            short* const _size = &this->tribes[param_1].size;
             if (0 < *_size) {
                 do {
                     int const _unitID
