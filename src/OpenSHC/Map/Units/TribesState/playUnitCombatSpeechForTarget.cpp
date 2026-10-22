@@ -113,6 +113,16 @@ namespace Map {
                 } else {
                     _distance = unitID;
                 }
+                /*
+                  The original reads all four coordinates before either subtraction -
+                  `movsx edx, [esi + 0x610]`, `movsx ebx, [eax + 0x610]`,
+                  `movsx edi, [esi + 0x612]`, `movsx ebp, [eax + 0x612]`, then `sub edx,
+                  ebx` and `sub eax, ebp` - where ours interleaves each pair with its
+                  subtraction. Writing the four reads out into locals of their own first
+                  measures 40.6% -> 40.6%: MSVC schedules these loads where it wants them,
+                  and the same spelling is flat in updateRabbitTribeBehavior and
+                  processDeerMoving too.
+                 */
                 _xDifference = (int)DAT_UnitsState::instance.units[_otherUnitID].x
                     - (int)DAT_UnitsState::instance.units[unitID].x;
                 _yDifference = (int)DAT_UnitsState::instance.units[_otherUnitID].y
