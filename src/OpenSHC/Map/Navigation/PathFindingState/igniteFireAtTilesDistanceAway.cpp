@@ -24,13 +24,10 @@ namespace Map {
         undefined4 PathFindingState::igniteFireAtTilesDistanceAway(int tile, int maxDistance, int playerID)
         {
             int iVar5;
-            int _index2;
-            int _index;
             uint _tiles[100];
             uint _tile;
-            uint _cTile;
             this->calculations = this->calculations + 1;
-            _index = 0;
+            int _index = 0;
             this->searchGeneration = this->searchGeneration + 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
@@ -151,10 +148,10 @@ namespace Map {
                         break;
                 }
             }
-            _index2 = 0;
+            int _index2 = 0;
             if (0 < _index) {
                 do {
-                    _cTile = _tiles[_index2];
+                    uint _cTile = _tiles[_index2];
                     MACRO_CALL(OpenSHC::Map::Entities_Func::IgniteFireAtMiniTile_Convenience)(playerID,
                         (_cTile
                             - DAT_ViewportRenderState::instance
