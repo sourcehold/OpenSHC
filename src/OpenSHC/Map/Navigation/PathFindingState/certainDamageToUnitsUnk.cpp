@@ -41,10 +41,7 @@ namespace Map {
             int param_1, int param_2, int param_3, int param_4, undefined4 param_5)
         {
             short sVar6;
-            int iVar9;
             int iVar11;
-            EntityType local_8;
-            int local_4;
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
             if (32000 < this->searchGeneration) {
@@ -53,8 +50,8 @@ namespace Map {
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             uint uVar7 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[param_1];
-            iVar9 = param_1 - DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile;
-            local_4 = 1;
+            int iVar9 = param_1 - DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile;
+            int local_4 = 1;
             uint uVar1 = iVar9 + 100;
             if (399 < uVar1 || 399 < uVar7
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar1] == '\0') {
@@ -68,7 +65,7 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             DAT_TileMapState::instance.CertainPathLayer[param_1] = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-            local_8 = OpenSHC::Map::Entities::ET_ARROW_AND_DEFAULT;
+            EntityType local_8 = OpenSHC::Map::Entities::ET_ARROW_AND_DEFAULT;
             if ((char)param_5 == '\0') {
                 local_8 = OpenSHC::Map::Entities::ET_CATAPULT;
             }
