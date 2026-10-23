@@ -18,8 +18,7 @@ namespace Map {
             }
             int const centerX = DAT_BuildingsState::instance.buildings[campfireID].x + 3;
             int const centerY = DAT_BuildingsState::instance.buildings[campfireID].y + 3;
-            // tileRef1 .. tileRef36 are consecutive fields in the generated header
-            int const tile = (&DAT_BuildingsState::instance.buildings[campfireID].tileRef1)[availablePeasants];
+            int const tile = DAT_BuildingsState::instance.buildings[campfireID].tileRefs[availablePeasants];
             int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             this->campfireSpotY = y;

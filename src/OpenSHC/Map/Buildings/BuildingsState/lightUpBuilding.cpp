@@ -22,7 +22,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C810
-        undefined4 BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
+        BOOLEnum BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
         {
             int const type = this->buildings[buildingID].buildingType;
             switch (type) {
@@ -36,19 +36,19 @@ namespace Map {
                 break;
             default:
                 if (this->buildings[buildingID].cooldownTimer != 0) {
-                    return 0;
+                    return FALSE;
                 }
                 break;
             }
             if (this->buildings[buildingID].fireDuration != 0) {
-                return 1;
+                return TRUE;
             }
             if (MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingFlammabilityFactor, this)(buildingID) == 0) {
-                return 0;
+                return FALSE;
             }
             if (this->buildings[buildingID].owner == burnerPlayerID
                 && MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingFlammabilityFactor, this)(buildingID) != 4) {
-                return 0;
+                return FALSE;
             }
             if (spareGrounds != 0) {
                 switch (type) {
@@ -59,14 +59,14 @@ namespace Map {
                 case BT_PARADEGROUND3:
                 case BT_PARADEGROUND4:
                 case BT_PARADEGROUND5:
-                    return 1;
+                    return TRUE;
                 }
             }
             this->buildings[buildingID].fireDuration = 1;
             this->buildings[buildingID].ifFireThenResponsiblePlayer = burnerPlayerID;
             if (this->buildings[buildingID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && (int)(DAT_GameCore::instance.mapTimeInTicks
-                       - DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime)
+                && DAT_GameCore::instance.mapTimeInTicks
+                        - DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
                     > 800) {
                 DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
                     = DAT_GameCore::instance.mapTimeInTicks;
@@ -95,7 +95,7 @@ namespace Map {
                 }
                 ++i;
             } while (i < DAT_TileMapState::instance.constructionTileCount);
-            return 1;
+            return TRUE;
         }
 
     }

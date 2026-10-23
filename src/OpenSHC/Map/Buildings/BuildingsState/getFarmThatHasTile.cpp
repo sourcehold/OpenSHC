@@ -16,9 +16,8 @@ namespace Map {
                         || this->buildings[buildingID].buildingType == BT_HOPFARM
                         || this->buildings[buildingID].buildingType == BT_APPLEFARM
                         || this->buildings[buildingID].buildingType == BT_DAIRYFARM)) {
-                    // tileRef1 .. tileRef36 are consecutive fields in the generated header
                     for (int tileIndex = 0; tileIndex < 36; ++tileIndex) {
-                        if ((&this->buildings[buildingID].tileRef1)[tileIndex] == tile) {
+                        if (this->buildings[buildingID].tileRefs[tileIndex] == tile) {
                             return buildingID;
                         }
                     }

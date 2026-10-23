@@ -16,7 +16,7 @@ namespace Map {
             int grown = 0;
             int ripe = 0;
             for (int i = 0; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRef1)[i];
+                int tile = this->buildings[buildingID].tileRefs[i];
                 if ((char)DAT_TileMapState::instance.DamageLayer[tile] >= 2) {
                     if ((char)DAT_TileMapState::instance.DamageLayer[tile] > 84) {
                         DAT_TileMapState::instance.DamageLayer[tile] = 0;

@@ -22,7 +22,7 @@ namespace Map {
             if (this->buildings[buildingID].buildingType == BT_SIGNPOST) {
                 MACRO_CALL_MEMBER(BuildingsState_Func::destroySignpostData, this)(buildingID);
             }
-            if (MACRO_CALL_MEMBER(BuildingsState_Func::isFearFactorBuilding, this)(buildingID) != 0) {
+            if (MACRO_CALL_MEMBER(BuildingsState_Func::isFearFactorBuilding, this)(buildingID)) {
                 MACRO_CALL_MEMBER(BuildingsState_Func::recomputeAllFearFactors, DAT_BuildingsState::ptr)();
             }
             if (MACRO_CALL_MEMBER(BuildingsState_Func::isReligiousBuilding, this)(buildingID) != FALSE) {

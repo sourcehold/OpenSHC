@@ -14,7 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00419C70
         void BuildingsState::updatePathLinkageForGatesKeepsSiegeTowers()
         {
-            if ((int)this->pathLinkageKeepWasUpdatedUnk < 1) {
+            if (this->pathLinkageKeepWasUpdatedUnk < 1) {
                 return;
             }
             this->counter += 1;

@@ -15,7 +15,7 @@ namespace Map {
                 uint y = DAT_BuildingDefinedData::instance.field412_0xa00c[i].y + (short)this->buildings[buildingID].y;
                 if (x <= 399 && y <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[x + y * 400] != 0) {
-                    (&this->buildings[buildingID].tileRef1)[i]
+                    this->buildings[buildingID].tileRefs[i]
                         = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                 }
             }

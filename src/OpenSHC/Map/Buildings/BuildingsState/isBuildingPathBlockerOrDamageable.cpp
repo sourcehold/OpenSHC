@@ -14,10 +14,10 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B840
-        uint BuildingsState::isBuildingPathBlockerOrDamageable(uint param_1, int param_2)
+        BOOLEnum BuildingsState::isBuildingPathBlockerOrDamageable(uint param_1, int param_2)
         {
             if (param_1 == 0) {
-                return 0;
+                return FALSE;
             }
             switch (this->buildings[param_1].buildingType) {
             case BT_GATEHOUSELARGE:

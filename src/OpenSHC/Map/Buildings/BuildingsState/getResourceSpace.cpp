@@ -12,10 +12,8 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040C1F0
-        int BuildingsState::getResourceSpace(int param_1, int* resourceType)
+        int BuildingsState::getResourceSpace(int param_1, ResourceType resource)
         {
-            // resourceType is actually passed as a ResourceType value
-            ResourceType resource = (ResourceType)(int)resourceType;
             int space = -1;
             BuildingType storageType = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingStorageTypeForResourceType, this)(resource);

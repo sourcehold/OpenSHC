@@ -34,9 +34,7 @@ namespace Map {
                             DAT_TileMapState::instance.LogicLayer[tile] = DAT_TileMapState::instance.LogicLayer[tile]
                                     & ~(LogicHelpers::L_WALL_OR_GATEHOUSE | LogicHelpers::L_UNKNOWN_WALL_RELATED)
                                 | LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
-                            // MiscDisplayLayer is ushort in the header, but the original masks it as a signed short
-                            // (and with imm8)
-                            *(short*)&DAT_TileMapState::instance.MiscDisplayLayer[tile] &= ~0x20;
+                            DAT_TileMapState::instance.MiscDisplayLayer[tile] &= ~0x20;
                             DAT_TileMapState::instance.HeightLayer[tile]
                                 = (byte)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk;
                         } else {

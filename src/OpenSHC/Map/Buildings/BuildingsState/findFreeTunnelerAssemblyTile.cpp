@@ -14,7 +14,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E410
-        undefined4 BuildingsState::findFreeTunnelerAssemblyTile(int playerID, int unitID)
+        BOOLEnum BuildingsState::findFreeTunnelerAssemblyTile(int playerID, int unitID)
         {
             int const index = (int)DAT_GameState::instance.playerDataArray[playerID].someCount29;
             if (DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[2].x != 0) {
@@ -42,12 +42,12 @@ namespace Map {
                         this->DAT_TempYOffset = y;
                         if (x == DAT_UnitsState::instance.units[unitID].x
                             && y == DAT_UnitsState::instance.units[unitID].y) {
-                            return 0;
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
-                return 0;
+                return FALSE;
             }
             for (int i = index; i < 25; ++i) {
                 int const x
@@ -68,11 +68,11 @@ namespace Map {
                 this->DAT_TempXOffset = x;
                 this->DAT_TempYOffset = y;
                 if (x == DAT_UnitsState::instance.units[unitID].x && y == DAT_UnitsState::instance.units[unitID].y) {
-                    return 0;
+                    return FALSE;
                 }
-                return 1;
+                return TRUE;
             }
-            return 0;
+            return FALSE;
         }
 
     }

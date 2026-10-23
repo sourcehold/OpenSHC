@@ -17,7 +17,7 @@ namespace Map {
                     && (this->buildings[buildingID].buildingType == BT_WHEATFARM
                         || this->buildings[buildingID].buildingType == BT_APPLEFARM
                         || this->buildings[buildingID].buildingType == BT_DAIRYFARM)
-                    && (param_2 == 0 || this->buildings[buildingID].field240_0x2c8 == 0)) {
+                    && (param_2 == 0 || this->buildings[buildingID].field202_0x2c8 == 0)) {
                     ++count;
                 }
             }

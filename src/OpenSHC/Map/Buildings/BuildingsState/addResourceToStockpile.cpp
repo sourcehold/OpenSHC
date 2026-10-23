@@ -12,26 +12,26 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BB30
-        undefined4 BuildingsState::addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType,
+        BOOLEnum BuildingsState::addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType,
             int amount, int maxCapacity, int recomputeResources)
         {
             int const owner = this->buildings[buildingID].owner;
             int const newAmount = this->buildings[buildingID].resources[resourceType] + amount;
             if (this->buildings[buildingID].uid != buildingUID) {
-                return 0;
+                return FALSE;
             }
             if (maxCapacity == 0) {
                 this->buildings[buildingID].resources[resourceType] = 0;
-                return 0;
+                return FALSE;
             }
             if (newAmount < 0) {
-                return 0;
+                return FALSE;
             }
             if (newAmount > maxCapacity) {
-                return 0;
+                return FALSE;
             }
             if (recomputeResources == 0) {
-                return 1;
+                return TRUE;
             }
             this->buildings[buildingID].resources[resourceType] = newAmount;
             int const buildingType = this->buildings[buildingID].buildingType;
@@ -44,7 +44,7 @@ namespace Map {
             MACRO_CALL_MEMBER(BuildingsState_Func::computeResourceSumForBuilding, this)(buildingID);
             MACRO_CALL_MEMBER(BuildingsState_Func::countPlayerResources, this)(owner);
             MACRO_CALL_MEMBER(TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(buildingID);
-            return 1;
+            return TRUE;
         }
 
     }
