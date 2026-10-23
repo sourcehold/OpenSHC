@@ -20,13 +20,13 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB770
     void TileMapState::applyRockGraphicsToFootprint(int rockID)
     {
-        short rockX = DAT_LandscapeState::instance.rocks[rockID].x;
-        short rockY = DAT_LandscapeState::instance.rocks[rockID].y;
+        int rockX = DAT_LandscapeState::instance.rocks[rockID].x;
+        int rockY = DAT_LandscapeState::instance.rocks[rockID].y;
         int orientation = DAT_LandscapeState::instance.rocks[rockID].orientation + this->mapOrientation;
         if (orientation > 7) {
             orientation = orientation - 8;
         }
-        short size = DAT_LandscapeState::instance.rocks[rockID].size;
+        int size = DAT_LandscapeState::instance.rocks[rockID].size;
         short surface = (short)(orientation / 2) * size * size;
 
         int index = 0;
