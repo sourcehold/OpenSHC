@@ -32,30 +32,32 @@ namespace Map {
             return 0;
         }
 
-        ushort area
-            = this->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1];
+        int area = (short)this
+                       ->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1];
         int targetTile = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
         uint targetHeight = this->HeightLayer[targetTile];
         int bestDistance = 10000;
         int bestIndex = -1;
-        if (this->BuildingLayer[targetTile] != 0) {
+        int targetBuildingID = this->BuildingLayer[targetTile];
+        if (targetBuildingID != 0) {
             targetHeight = targetHeight
                 + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                    DAT_BuildingsState::ptr)(this->BuildingLayer[targetTile]);
+                    DAT_BuildingsState::ptr)(targetBuildingID);
         }
 
         for (int index = 0; index < 4; index++) {
             int fromXPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].x + x2;
             int fromYPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
-            if (this->PathConnectionLayer[tile] != area) {
+            if ((short)this->PathConnectionLayer[tile] != area) {
                 continue;
             }
             uint height = this->HeightLayer[tile];
-            if (this->BuildingLayer[tile] != 0) {
+            int buildingID = this->BuildingLayer[tile];
+            if (buildingID != 0) {
                 height = height
                     + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                        DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                        DAT_BuildingsState::ptr)(buildingID);
             }
             if ((int)height >= (int)(targetHeight + 0x10) || (int)(targetHeight - 0x10) >= (int)height) {
                 continue;
