@@ -36,14 +36,11 @@ namespace Map {
         void PathFindingState::placeCommemoratingStatueAtGoodLocation(int playerID)
         {
             int iVar3;
-            int iVar6;
             MappersEnum commandBuildingType;
-            uint uVar7;
-            uint uVar8;
             int sVar1 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
-            uVar7 = (uint)sVar1;
+            uint uVar7 = (uint)sVar1;
             int sVar2 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
-            uVar8 = (uint)sVar2;
+            uint uVar8 = (uint)sVar2;
             if (uVar7 > 399 || uVar8 > 399) {
                 return;
             }
@@ -93,7 +90,7 @@ namespace Map {
                     if (DAT_TileMapState::instance.buildingPlacementFail == FALSE)
                         break;
                     for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                        iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[uVar7][_direction] + iVar3;
+                        int iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[uVar7][_direction] + iVar3;
                         if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar6] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar6]
