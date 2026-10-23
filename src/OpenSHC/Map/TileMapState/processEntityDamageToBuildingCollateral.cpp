@@ -132,7 +132,7 @@ namespace Map {
                     == OpenSHC::Map::Buildings::BLS_REMOVE) {
                 continue;
             }
-            short health = DAT_BuildingsState::instance.buildings[buildingID].currentHealth;
+            int health = DAT_BuildingsState::instance.buildings[buildingID].currentHealth;
             if (health == 0) {
                 continue;
             }
@@ -179,7 +179,7 @@ namespace Map {
             }
 
             if (buildingType != 0x4f && (buildingType < 0x56 || buildingType > 0x59)) {
-                short owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+                int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                 DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID]
                     = DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID] + 1;
                 DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[owner]
@@ -383,7 +383,7 @@ namespace Map {
 
             if (destroyNormally) {
                 int destroyedType = (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType;
-                short destroyedOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+                int destroyedOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                 this->showNoRubbleWhenDestroyingBuilding
                     = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed[destroyedType] == 0;
                 MACRO_CALL_MEMBER(
