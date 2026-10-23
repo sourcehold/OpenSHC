@@ -26,13 +26,13 @@ namespace Map {
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             int direction = (*(short*)this->buildings[buildingID].padding_0x26e == 0x51) * 2 + 2;
             for (int i = 0; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRef1)[i];
+                int tile = (&this->buildings[buildingID].tileRefs[0])[i];
                 int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int stage = (char)DAT_TileMapState::instance.DamageLayer[tile];
                 DAT_BuildingsState::instance.farmerDestinationTile = tile;
                 int height = MACRO_CALL_MEMBER(
                     OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(tile);
-                if (*(short*)&this->buildings[buildingID].wheatGrowStateRelated == 5) {
+                if (*(short*)&this->buildings[buildingID].farmGrowState == 5) {
                     if (stage >= 14 && stage < 28) {
                         for (int n = 0; n < 4; ++n) {
                             DAT_BuildingsState::instance.hopFarmerDestinationOffsetX
@@ -56,7 +56,7 @@ namespace Map {
                             }
                         }
                     }
-                } else if (*(short*)&this->buildings[buildingID].wheatGrowStateRelated == 3) {
+                } else if (*(short*)&this->buildings[buildingID].farmGrowState == 3) {
                     if ((uint)stage < 2) {
                         for (int n = 0; n < 4; ++n) {
                             DAT_BuildingsState::instance.hopFarmerDestinationOffsetX

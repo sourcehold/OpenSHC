@@ -14,7 +14,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040C1A0
-        uint BuildingsState::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters(int playerID, int param_2)
+        BOOLEnum BuildingsState::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters(int playerID, int param_2)
         {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                 return 0;

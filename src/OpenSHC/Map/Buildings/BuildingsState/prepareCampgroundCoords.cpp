@@ -8,7 +8,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B660
-        undefined4 BuildingsState::prepareCampgroundCoords(int playerID)
+        BOOLEnum BuildingsState::prepareCampgroundCoords(int playerID)
         {
             int campground = DAT_GameState::instance.playerDataArray[playerID].campground.id;
             if (campground <= 0) {

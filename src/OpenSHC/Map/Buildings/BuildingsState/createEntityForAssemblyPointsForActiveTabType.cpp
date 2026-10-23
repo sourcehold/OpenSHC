@@ -41,7 +41,7 @@ namespace Map {
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field382_0x9e1c[i][0],
                         DAT_BuildingDefinedData::instance.field382_0x9e1c[i][1],
@@ -74,7 +74,7 @@ namespace Map {
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field384_0x9e9c[i][0],
                         DAT_BuildingDefinedData::instance.field384_0x9e9c[i][1],
@@ -93,24 +93,24 @@ namespace Map {
             if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_ENGINEERSGUILD) {
                 for (int i = 0; i < 2; ++i) {
                     if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .engineersAssemblyPoints[i]
+                            .specialBuildingAssemblyPoints[i]
                             .x
                         == 0) {
                         continue;
                     }
                     int tile
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .engineersAssemblyPoints[i]
+                              .specialBuildingAssemblyPoints[i]
                               .x
                         + DAT_ViewportRenderState::instance
                               .translationMatrix[DAT_GameState::instance
                                       .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                      .engineersAssemblyPoints[i]
+                                      .specialBuildingAssemblyPoints[i]
                                       .y]
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field401_0x9f1c[i][0],
                         DAT_BuildingDefinedData::instance.field401_0x9f1c[i][1],
@@ -121,40 +121,46 @@ namespace Map {
             }
             if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_TUNNELERSGUILD) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                        .tunnelersGuildAssemblyPointX
+                        .specialBuildingAssemblyPoints[2]
+                        .x
                     == 0) {
                     return;
                 }
                 int tile = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                               .tunnelersGuildAssemblyPointX
+                               .specialBuildingAssemblyPoints[2]
+                               .x
                     + DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_GameState::instance
                                   .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                  .tunnelersGuildAssemblyPointY]
+                                  .specialBuildingAssemblyPoints[2]
+                                  .y]
                           .addXgetTile;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                    (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                    (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_BODY_TUNNELOR, 3, 14, -40, tile, 0xc0006);
                 return;
             }
             if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_CATHEDRAL) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                        .cathedralAssemblyPointX
+                        .specialBuildingAssemblyPoints[3]
+                        .x
                     == 0) {
                     return;
                 }
                 int tile = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                               .cathedralAssemblyPointX
+                               .specialBuildingAssemblyPoints[3]
+                               .x
                     + DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_GameState::instance
                                   .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                  .cathedralAssemblyPointY]
+                                  .specialBuildingAssemblyPoints[3]
+                                  .y]
                           .addXgetTile;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                    (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                    (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(
                     OpenSHC::IO::Graphics::GID_BODY_FIGHTING_MONK, 3, 14, -40, tile, 0xc0006);

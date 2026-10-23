@@ -167,9 +167,9 @@ namespace Map {
                 = DAT_BuildingDefinedData::instance.AnimAdvanceThrottles[buildingType];
             this->buildings[buildingID].animationFrame = 0;
             this->buildings[buildingID].campgroundVclock = 0;
-            this->buildings[buildingID].field25_0x4c = 0;
-            this->buildings[buildingID].field26_0x50 = 0;
-            this->buildings[buildingID].field27_0x54 = 0;
+            this->buildings[buildingID].extraAnimationFrame1 = 0;
+            this->buildings[buildingID].extraAnimationFrame2 = 0;
+            this->buildings[buildingID].extraAnimationFrame3 = 0;
             this->buildings[buildingID].spriteID2
                 = DAT_BuildingDefinedData::instance.SpriteIDs2[buildingType].shortValue;
             this->buildings[buildingID].animStateCounterTracker = 0;
@@ -193,11 +193,11 @@ namespace Map {
             this->buildings[buildingID].unknownFlag3
                 = DAT_BuildingDefinedData::instance.field15_0x1404[buildingType].shortValue;
             this->buildings[buildingID].flag1
-                = DAT_BuildingDefinedData::instance.field16_0x15bc[buildingType].shortValue;
+                = DAT_BuildingDefinedData::instance.BuildingFlag1Defaults[buildingType].shortValue;
             this->buildings[buildingID].unknownFlag4
-                = DAT_BuildingDefinedData::instance.field18_0x192c[buildingType].byteValue;
+                = DAT_BuildingDefinedData::instance.BuildingFlag4Defaults[buildingType].byteValue;
             this->buildings[buildingID].flag2
-                = DAT_BuildingDefinedData::instance.field24_0x237c[buildingType].shortValue;
+                = DAT_BuildingDefinedData::instance.BuildingFlag2Defaults[buildingType].shortValue;
             this->buildings[buildingID].maxHealth
                 = DAT_BuildingDefinedData::instance.BuildingHP[buildingType].shortValue;
             this->buildings[buildingID].currentHealth
@@ -223,7 +223,7 @@ namespace Map {
                     this)(buildingID, 1, FALSE);
                 break;
             case BT_OXTETHER:
-                this->buildings[buildingID].field28_0x58 = 50;
+                this->buildings[buildingID].animationTickCounter = 50;
                 break;
             case BT_SIGNPOST:
                 this->buildings[buildingID].unknownStockpileOrSignpostRelated = 0;
@@ -337,8 +337,7 @@ namespace Map {
                 break;
             case BT_HOVEL:
             case BT_HOUSE:
-                this->buildings[buildingID].padding_0x2a5[0]
-                    = (this->buildings[buildingID].fireRelatedRNG1 >> 5) % 3 + 1;
+                this->buildings[buildingID].maxOccupants = (this->buildings[buildingID].fireRelatedRNG1 >> 5) % 3 + 1;
                 break;
             case BT_OILSMELTER:
                 MACRO_CALL_MEMBER(
@@ -380,8 +379,8 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
                     this)(buildingID, 1, FALSE);
                 for (int i = 0; i < 4; ++i) {
-                    (&this->buildings[buildingID].insideUnitID1)[i] = 0;
-                    (&this->buildings[buildingID].insideUnitUID1)[i] = 0;
+                    (&this->buildings[buildingID].insideUnitID[0])[i] = 0;
+                    (&this->buildings[buildingID].insideUnitUID[0])[i] = 0;
                 }
                 // Every cage holds four dogs
                 {
@@ -396,8 +395,8 @@ namespace Map {
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
                         DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 0;
-                        this->buildings[buildingID].insideUnitID1 = dogID;
-                        this->buildings[buildingID].insideUnitUID1 = DAT_UnitsState::instance.units[dogID].uid;
+                        this->buildings[buildingID].insideUnitID[0] = dogID;
+                        this->buildings[buildingID].insideUnitUID[0] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
@@ -413,8 +412,8 @@ namespace Map {
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
                         DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 1;
-                        this->buildings[buildingID].insideUnitID2 = dogID;
-                        this->buildings[buildingID].insideUnitUID2 = DAT_UnitsState::instance.units[dogID].uid;
+                        this->buildings[buildingID].insideUnitID[1] = dogID;
+                        this->buildings[buildingID].insideUnitUID[1] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
@@ -430,8 +429,8 @@ namespace Map {
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
                         DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 2;
-                        this->buildings[buildingID].insideUnitID3 = dogID;
-                        this->buildings[buildingID].insideUnitUID3 = DAT_UnitsState::instance.units[dogID].uid;
+                        this->buildings[buildingID].insideUnitID[2] = dogID;
+                        this->buildings[buildingID].insideUnitUID[2] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
@@ -446,8 +445,8 @@ namespace Map {
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
                         DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 3;
-                        this->buildings[buildingID].insideUnitID4 = dogID;
-                        this->buildings[buildingID].insideUnitUID4 = DAT_UnitsState::instance.units[dogID].uid;
+                        this->buildings[buildingID].insideUnitID[3] = dogID;
+                        this->buildings[buildingID].insideUnitUID[3] = DAT_UnitsState::instance.units[dogID].uid;
                         this->buildings[buildingID].unitRefID = dogID;
                         this->buildings[buildingID].unitRefUID = DAT_UnitsState::instance.units[dogID].uid;
                     }

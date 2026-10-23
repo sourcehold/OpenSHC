@@ -8,7 +8,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingLogicalState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00410C40
-        undefined4 BuildingsState::playerHasBurningBuilding(int playerID)
+        BOOLEnum BuildingsState::playerHasBurningBuilding(int playerID)
         {
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].fireDuration != 0 && this->buildings[i].owner == playerID

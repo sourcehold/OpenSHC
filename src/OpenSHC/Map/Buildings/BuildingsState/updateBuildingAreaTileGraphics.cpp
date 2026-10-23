@@ -12,7 +12,7 @@ namespace Map {
         ushort* BuildingsState::updateBuildingAreaTileGraphics(int param_1)
         {
             for (int i = 0; i < 23; ++i) {
-                int tile = (&this->buildings[param_1].tileRef5)[i];
+                int tile = (&this->buildings[param_1].tileRefs[4])[i];
                 int gfx = GMTotalPicturesProcessed::instance[14] + 55
                     + MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getRubbleGraphicStageForDamageLevel,
                         DAT_TileMapState::ptr)((char)DAT_TileMapState::instance.DamageLayer[tile]);

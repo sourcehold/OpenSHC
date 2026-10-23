@@ -10,7 +10,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040AA10
-        int BuildingsState::countFarms(PlayerID playerID, int param_2)
+        int BuildingsState::countFarms(int playerID, int param_2)
         {
             int count = 0;
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
@@ -18,7 +18,7 @@ namespace Map {
                     && (this->buildings[i].buildingType == BT_WHEATFARM
                         || this->buildings[i].buildingType == BT_APPLEFARM
                         || this->buildings[i].buildingType == BT_DAIRYFARM)
-                    && (param_2 == 0 || this->buildings[i].field245_0x2c8 == 0)) {
+                    && (param_2 == 0 || this->buildings[i].field202_0x2c8 == 0)) {
                     ++count;
                 }
             }

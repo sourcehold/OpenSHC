@@ -19,7 +19,7 @@ namespace Map {
                 start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
             }
             for (int i = 0; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRef1)[(i + start) % 24];
+                int tile = (&this->buildings[buildingID].tileRefs[0])[(i + start) % 24];
                 char stage = DAT_TileMapState::instance.DamageLayer[tile];
                 int frame;
                 if (stage == 0) {

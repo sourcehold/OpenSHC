@@ -12,7 +12,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B840
-        uint BuildingsState::isBuildingPathBlockerOrDamageable(uint param_1, int param_2)
+        BOOLEnum BuildingsState::isBuildingPathBlockerOrDamageable(uint param_1, int param_2)
         {
             // Gatehouses and towers can be attacked if they block the way to the tile param_2
             if (param_1 == 0) {

@@ -7,7 +7,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00409E80
         undefined4 BuildingsState::getBuildingHeightForBuildingID2(int buildingID)
         {
-            if (this->buildings[buildingID].field62_0xb0 == 0) {
+            if (this->buildings[buildingID].useOffsetGraphics == 0) {
                 return 0;
             }
             switch (this->buildings[buildingID].buildingType) {

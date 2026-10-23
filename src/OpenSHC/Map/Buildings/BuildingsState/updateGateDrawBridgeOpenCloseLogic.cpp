@@ -129,10 +129,10 @@ namespace Map {
                         flagColor = strongest;
                         newController = strongest;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6 == 0
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 == 0
                     || attacker == 0) {
                     // Defended, the owner keeps or regains control
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6 = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 = 0;
                     flagColor = defender;
                 }
 
@@ -173,14 +173,14 @@ namespace Map {
                     } while (t2 < DAT_TileMapState::instance.constructionTileCount);
                 }
                 if (newController != 0) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6
                             != newController
                         && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                             (char*)SFX_WeLostControlOfAGatehouse);
                     }
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6
                         = newController;
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 11;
                     MACRO_CALL_MEMBER(
@@ -189,11 +189,11 @@ namespace Map {
                 }
             }
 
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6 != 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 != 0) {
                 // Captured gatehouses are released once the owner is back in control
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6
                     == DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6 = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 = 0;
                 }
                 return;
             }
@@ -208,9 +208,9 @@ namespace Map {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray
                         [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner]
                     == -1
-                && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6 == 0
+                && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 == 0
                     || DAT_GameSynchronyState::instance.currentPlayerFullIDArray
-                            [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field244_0x2c6]
+                            [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6]
                         == -1)
                 && DAT_GameState::instance.playerDataArray[gateOwner].aiPlayerState == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCloseOpenTimer = 0;
@@ -261,7 +261,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2 = 1200;
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 0) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 10;
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field235_0x2b6 = 10;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field192_0x2b6 = 10;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange, this)(
                         DAT_CurrentBuildingID::instance, FALSE, FALSE);

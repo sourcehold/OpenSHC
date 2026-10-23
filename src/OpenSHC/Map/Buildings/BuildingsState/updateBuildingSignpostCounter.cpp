@@ -8,7 +8,7 @@ namespace Map {
         int BuildingsState::updateBuildingSignpostCounter(int param_1, int param_2)
         {
             if (param_2 == 2) {
-                this->buildings[param_1].field14_0x2c = 0;
+                this->buildings[param_1].animationCycleCompleted = 0;
                 this->buildings[param_1].state = 0;
                 this->buildings[param_1].animationIndex = 0;
                 return 0;
@@ -26,10 +26,10 @@ namespace Map {
             }
             if (this->buildings[param_1].renderAnimation == 0) {
                 this->buildings[param_1].animationIndex = 0;
-                this->buildings[param_1].field13_0x28 = 0;
-                this->buildings[param_1].field14_0x2c = 0;
+                this->buildings[param_1].animationCycleCount = 0;
+                this->buildings[param_1].animationCycleCompleted = 0;
             }
-            return this->buildings[param_1].field14_0x2c;
+            return this->buildings[param_1].animationCycleCompleted;
         }
 
     }

@@ -13,7 +13,7 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BA00
         int BuildingsState::findParticularBuilding(
-            undefined4 param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID)
+            int param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID)
         {
             // Finds another building of the type that touches the given building location
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[buildingSize];

@@ -9,7 +9,7 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00420BF0
         void BuildingsState::upgradeBuildingsForMapVersion(
-            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion)
+            int receivedMapVersion, PackagedFileMagicNum packagerMapVersion)
         {
             MACRO_CALL(OpenSHC::Map::Version_Func::SetUndamagedBuildingHealthToValue)();
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeBuildingProperties1)(receivedMapVersion);

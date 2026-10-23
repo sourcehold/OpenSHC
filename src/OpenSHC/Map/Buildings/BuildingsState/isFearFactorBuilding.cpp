@@ -8,7 +8,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A400
-        uint BuildingsState::isFearFactorBuilding(int buildingID)
+        BOOLEnum BuildingsState::isFearFactorBuilding(int buildingID)
         {
             if (this->buildings[buildingID].buildingType == BT_GALLOWS) {
                 return 1;

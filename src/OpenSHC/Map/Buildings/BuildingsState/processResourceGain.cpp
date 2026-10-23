@@ -24,7 +24,7 @@ namespace Map {
             // keeps the storage type in eax and loads currentNumberOfResource once for both of its checks, where our
             // compiler folds the duplicated check differently.
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getResourceSpace, this)(
-                    playerID, (int*)resourceType)
+                    playerID, resourceType)
                 < amount) {
                 return FALSE;
             }

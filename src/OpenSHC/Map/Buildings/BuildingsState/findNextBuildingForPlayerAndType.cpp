@@ -8,8 +8,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingLogicalState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040AB30
-        int BuildingsState::findNextBuildingForPlayerAndType(
-            PlayerID playerID, BuildingType buildingType, int buildingID)
+        int BuildingsState::findNextBuildingForPlayerAndType(int playerID, BuildingType buildingType, int buildingID)
         {
             for (int i = buildingID + 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE

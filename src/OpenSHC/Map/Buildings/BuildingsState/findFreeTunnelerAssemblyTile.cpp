@@ -13,14 +13,14 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E410
-        undefined4 BuildingsState::findFreeTunnelerAssemblyTile(int param_1, int param_2)
+        BOOLEnum BuildingsState::findFreeTunnelerAssemblyTile(int param_1, int param_2)
         {
             // param_1 is the player, param_2 the unit
-            short pointX = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildAssemblyPointX;
+            short pointX = DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[2].x;
             int start = DAT_GameState::instance.playerDataArray[param_1].someCount29;
             if (pointX != 0) {
                 // Search around the assembly point
-                short pointY = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildAssemblyPointY;
+                short pointY = DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[2].y;
                 for (int i = start; i < 49; ++i) {
                     int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].y + pointY;
                     int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].x + pointX;

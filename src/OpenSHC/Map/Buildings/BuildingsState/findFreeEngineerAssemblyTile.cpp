@@ -27,11 +27,12 @@ namespace Map {
                 isLadderman = 1;
                 i = laddermenCount;
             }
-            short pointX = DAT_GameState::instance.playerDataArray[playerIndex].engineersAssemblyPoints[isLadderman].x;
+            short pointX
+                = DAT_GameState::instance.playerDataArray[playerIndex].specialBuildingAssemblyPoints[isLadderman].x;
             if (pointX != 0) {
                 // Search around the assembly point
                 short pointY
-                    = DAT_GameState::instance.playerDataArray[playerIndex].engineersAssemblyPoints[isLadderman].y;
+                    = DAT_GameState::instance.playerDataArray[playerIndex].specialBuildingAssemblyPoints[isLadderman].y;
                 for (; i < 49; ++i) {
                     int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].y + pointY;
                     int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].x + pointX;

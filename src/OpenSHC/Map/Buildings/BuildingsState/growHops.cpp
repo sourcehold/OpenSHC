@@ -16,7 +16,7 @@ namespace Map {
             int grown = 0;
             int ripe = 0;
             for (int i = 0; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRef1)[i];
+                int tile = (&this->buildings[buildingID].tileRefs[0])[i];
                 if ((char)DAT_TileMapState::instance.DamageLayer[tile] >= 2) {
                     if ((char)DAT_TileMapState::instance.DamageLayer[tile] > 84) {
                         DAT_TileMapState::instance.DamageLayer[tile] = 0;
@@ -42,14 +42,14 @@ namespace Map {
             }
 
             if (growing >= 6) {
-                *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 5;
+                *(short*)&this->buildings[buildingID].farmGrowState = 5;
                 return;
             }
             if (growing != 0 && ripe != 0) {
-                *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 5;
+                *(short*)&this->buildings[buildingID].farmGrowState = 5;
                 return;
             }
-            *(short*)&this->buildings[buildingID].wheatGrowStateRelated = empty != 0 ? 3 : 2;
+            *(short*)&this->buildings[buildingID].farmGrowState = empty != 0 ? 3 : 2;
         }
 
     }

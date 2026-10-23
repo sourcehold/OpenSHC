@@ -16,9 +16,9 @@ namespace Map {
         undefined4 BuildingsState::findFreeCathedralAssemblyTile(int param_1, int param_2)
         {
             // param_1 is the player, param_2 the unit
-            if (DAT_GameState::instance.playerDataArray[param_1].cathedralAssemblyPointX != 0) {
-                int pointX = (short)DAT_GameState::instance.playerDataArray[param_1].cathedralAssemblyPointX;
-                int pointY = (short)DAT_GameState::instance.playerDataArray[param_1].cathedralAssemblyPointY;
+            if (DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].x != 0) {
+                int pointX = (short)DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].x;
+                int pointY = (short)DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].y;
                 for (int i = (short)DAT_GameState::instance.playerDataArray[param_1].someCount30; i < 49; ++i) {
                     // Note: the original always uses the same search offset instead of the i-th one
                     int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].y + pointY;

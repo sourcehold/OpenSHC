@@ -20,7 +20,7 @@ namespace Map {
                     continue;
                 }
                 for (int t = 0; t < 36; ++t) {
-                    if ((&this->buildings[i].tileRef1)[t] == tile) {
+                    if ((&this->buildings[i].tileRefs[0])[t] == tile) {
                         return i;
                     }
                 }

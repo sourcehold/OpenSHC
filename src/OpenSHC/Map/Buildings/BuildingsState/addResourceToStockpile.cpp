@@ -13,7 +13,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BB30
-        undefined4 BuildingsState::addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType,
+        BOOLEnum BuildingsState::addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType,
             int amount, int maxCapacity, int recomputeResources)
         {
             int playerID = this->buildings[buildingID].owner;

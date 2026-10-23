@@ -11,7 +11,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041B7C0
         void BuildingsState::computeBuildingEntranceFlagsForOrientations(int param_1)
         {
-            // Marks the sides of a keep-like building that have an entrance (padding_0x280 holds one flag per side)
+            // Marks the sides of a keep-like building that have an entrance (field162_0x280 holds one flag per side)
             uint size = this->buildings[param_1].widthOrHeight;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int try_;
@@ -26,7 +26,7 @@ namespace Map {
             default:
                 return;
             }
-            *(int*)this->buildings[param_1].padding_0x280 = 0;
+            *(int*)this->buildings[param_1].field162_0x280 = 0;
             for (int i = 0; i < tileCount; ++i) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
                     size, 1, try_, 0);
@@ -41,7 +41,7 @@ namespace Map {
                                           .addXgetTile
                               + (short)this->buildings[param_1].x + this->DAT_TempXOffset];
                 if ((logic & 0x100) != 0 && (logic & 2) == 0 && (logic & 0x200) == 0) {
-                    this->buildings[param_1].padding_0x280[i / (int)size] = 1;
+                    this->buildings[param_1].field162_0x280[i / (int)size] = 1;
                 }
             }
         }

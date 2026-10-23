@@ -22,7 +22,7 @@ namespace Map {
             }
             for (int i = 0; i < 36; ++i) {
                 int tile = (&this->buildings[buildingID]
-                        .tileRef1)[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
+                        .tileRefs[0])[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
                 char stage = DAT_TileMapState::instance.DamageLayer[tile];
                 if (stage == 0) {
                     frame = 0;

@@ -20,7 +20,7 @@ namespace Map {
 
             int buildingY = (short)DAT_BuildingsState::instance.buildings[campfireID].y;
             int buildingX = (short)DAT_BuildingsState::instance.buildings[campfireID].x;
-            int tile = (&DAT_BuildingsState::instance.buildings[campfireID].tileRef1)[availablePeasants];
+            int tile = (&DAT_BuildingsState::instance.buildings[campfireID].tileRefs[0])[availablePeasants];
             int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             this->campfireSpotY = y;

@@ -7,7 +7,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F3D0
         void BuildingsState::setBuildingToAppleFarm(int buildingID)
         {
-            this->buildings[buildingID].field66_0xbe = BT_APPLEFARM;
+            this->buildings[buildingID].renderBlendStrength = BT_APPLEFARM;
         }
 
     }

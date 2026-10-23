@@ -20,7 +20,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C810
-        undefined4 BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
+        BOOLEnum BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
         {
             switch (this->buildings[buildingID].buildingType) {
             case BT_CAMPFIRE:

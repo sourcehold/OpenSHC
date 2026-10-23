@@ -226,16 +226,16 @@ namespace Map {
                     return;
                 }
                 DAT_GameState::instance.playerDataArray[playerID].someUnitID01 = ghostID;
-                DAT_GameState::instance.playerDataArray[playerID].field714_0x22cc
+                DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc
                     = DAT_UnitsState::instance.units[ghostID].uid;
                 DAT_UnitsState::instance.units[ghostID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 DAT_UnitsState::instance.units[ghostID].disappearFadeAlphaCountdown = 32;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].field714_0x22cc
+            if (DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc
                 != DAT_UnitsState::instance.units[ghostID].uid) {
                 DAT_GameState::instance.playerDataArray[playerID].someUnitID01 = 0;
-                DAT_GameState::instance.playerDataArray[playerID].field714_0x22cc = 0;
+                DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc = 0;
                 return;
             }
             DAT_UnitsState::instance.units[ghostID].workplaceBuildingID_1 = shrineID;
