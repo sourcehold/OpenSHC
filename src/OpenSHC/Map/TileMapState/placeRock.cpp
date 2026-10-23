@@ -95,7 +95,7 @@ namespace Map {
 
         /* the original reuses the kind parameter to hold the lowest height under the footprint */
         kind = 1000;
-        uint highest = 0;
+        int highest = 0;
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
@@ -112,7 +112,7 @@ namespace Map {
             if (highest < this->HeightLayer[tile]) {
                 highest = this->HeightLayer[tile];
             }
-            if (this->HeightLayer[tile] < kind) {
+            if (this->HeightLayer[tile] < (int)kind) {
                 kind = this->HeightLayer[tile];
             }
             index++;
