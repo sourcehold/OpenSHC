@@ -90,6 +90,13 @@ namespace Map {
             int _unitCurrentX_2 = *unitCurrentX;
             uint _xOff_2 = _unitCurrentX_2 - iVar4;
             uint _yOff_2 = _yOffb - iVar2;
+            /*
+              The shift-and-xor absolute values stay, although the original has
+              `cdq; xor eax, edx; sub eax, edx` at 0x521645 and 0x521654 - which is what
+              MSVC emits for `x < 0 ? -x : x`. Written that way, at both of the two sites,
+              the function measures 40.1% -> 27.3%: it produces the `cdq` and re-lays out
+              everything around it.
+             */
             int _xOff_2b = (_xOff_2 ^ (int)_xOff_2 >> 0x1f) - ((int)_xOff_2 >> 0x1f);
             int _yOff_2b = (_yOff_2 ^ (int)_yOff_2 >> 0x1f) - ((int)_yOff_2 >> 0x1f);
             if (_xOff_2b > _yOff_2b) {

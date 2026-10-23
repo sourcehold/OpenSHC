@@ -594,6 +594,22 @@ namespace Map {
                             } while (iVar12 < this->tribes[tribeID].size);
                         }
                         iVar11 = unitInstructionType * 8;
+                        /*
+                          `< 9` stays, against the asm. The original has `cmp eax, 8` with
+                          a `jg` at 0x52822b, where this gives `cmp 9` and a `jge`, and the
+                          same at the other copy of this block. The height test further
+                          down is the same story: 0x529bdb is `cmp eax, 0x10; jg` where
+                          `< 0x11` gives `cmp 0x11; jge`, and 0x529bd6 is `cdq; xor eax,
+                          edx; sub eax, edx` - a plain `x < 0 ? -x : x` - where the
+                          decompiler's shift-and-xor gives the `sar` it was read back from.
+
+                          All four instructions are wrong in our output and correcting them
+                          costs the same 0.9 points whichever subset is applied: the
+                          constants alone, the absolute value alone, and all of them
+                          together each measure 60.6% -> 59.7%. They sit in the same two
+                          blocks, and the jump lengths those blocks are reached by are
+                          worth more than the instructions themselves.
+                         */
                         if (iVar11 < 9) {
                             iVar11 = 8;
                         }

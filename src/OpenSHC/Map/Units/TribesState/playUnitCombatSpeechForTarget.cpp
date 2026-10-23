@@ -154,7 +154,12 @@ namespace Map {
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                         _otherX, _otherY, 0xea);
-                } else if (_selectedCount < 5) {
+                /*
+                  `<= 4` and `>= 4` below, which are the `cmp .., 4` the original compares
+                  against with a `jg` and a `jl`; `< 5` and `3 <` give `cmp 5`/`cmp 3` and
+                  the other arm of each pair.
+                 */
+                } else if (_selectedCount <= 4) {
                     _otherY = (int)DAT_UnitsState::instance.units[_otherUnitID].y;
                     _otherX = (int)DAT_UnitsState::instance.units[_otherUnitID].x;
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
@@ -192,7 +197,7 @@ namespace Map {
                             (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                             (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x57);
                     }
-                    if (3 < _selectedCount_2) {
+                    if (_selectedCount_2 >= 4) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                             (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                             (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x58);
