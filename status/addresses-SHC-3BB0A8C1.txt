@@ -17039,7 +17039,7 @@ SHC_3BB0A8C1_0x00455D40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00455D90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00455E10 | 0.0% | Pending
+SHC_3BB0A8C1_0x00455E10 | 92.2% | Volatile reg naming differs
 
 SHC_3BB0A8C1_0x00455E40 | 0.0% | Pending
 
@@ -17155,7 +17155,7 @@ SHC_3BB0A8C1_0x00456C50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00456EF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00456FD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00456FD0 | 33.5% | Join block placed after arm 1
 
 SHC_3BB0A8C1_0x004572A0 | 0.0% | Pending
 
@@ -17685,7 +17685,7 @@ SHC_3BB0A8C1_0x004580C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004580F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00458280 | 0.0% | Pending
+SHC_3BB0A8C1_0x00458280 | 54.6% | Budget spilled, base in EBX
 
 SHC_3BB0A8C1_0x00458360 | 0.0% | Pending
 
@@ -17733,7 +17733,7 @@ SHC_3BB0A8C1_0x00458A70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00458A80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00458AD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00458AD0 | 96.8% | Field read would move the anch
 
 SHC_3BB0A8C1_0x00458D38 | 0.0% | Pending
 
@@ -17749,7 +17749,7 @@ SHC_3BB0A8C1_0x00458D50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00458E20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00458E60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00458E60 | 37.7% | 4 stores anchor on crowding
 
 SHC_3BB0A8C1_0x00458EC0 | 0.0% | Pending
 
@@ -17901,7 +17901,7 @@ SHC_3BB0A8C1_0x004598B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00459930 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00459A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00459A20 | 92.4% | loop counter kept in a reg
 
 SHC_3BB0A8C1_0x00459A40 | 0.0% | Pending
 
@@ -18027,7 +18027,7 @@ SHC_3BB0A8C1_0x0045AEB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045AF00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045AF30 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045AF30 | 98.0% | Reg alloc differs
 
 SHC_3BB0A8C1_0x0045B1C0 | 0.0% | Pending
 
@@ -18037,7 +18037,7 @@ SHC_3BB0A8C1_0x0045B3E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045B460 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045B4A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045B4A0 | 84.0% | Shared store moves the anchor
 
 SHC_3BB0A8C1_0x0045B6B0 | 0.0% | Pending
 

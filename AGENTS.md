@@ -165,6 +165,19 @@ restyling anything large:
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
+`quick_diff.py` is a triage tool and it misranks two things. It prints the **wrong immediates for the
+original side** (`0x51eb851f` where the binary holds `0x66666667` or `0x10624dd3`), so never read a constant
+out of its output - use `orig_asm.py` or Ghidra. And its difflib ratio can invert the reccmp ranking even well
+above the 0.6 the README warns about, because a changed base anchor makes every displacement differ textually
+while the opcodes still line up: on `updateCrowding` it preferred a variant that measured 25.5% over one that
+measured 33.3%. Rank with it, then settle small functions with `try_styles.py`, which narrows the build list to
+one file and therefore costs about a minute per variant.
+
+reccmp symbolizes an immediate that happens to coincide with a data address, and it does so per binary. The
+thirty `push 0xffffff` of `renderDebugDataCurrentPlayerData` come out as
+`push I<BuildingsState>::instance+424671` on the original side and as the plain immediate on ours, which caps
+that function at ~96% with no source change possible. Check for that before chasing a stable few percent.
+
 `diff_triage.py` gives one line per function in the build list and says whether more source work can pay at all: it
 flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
 cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
@@ -180,6 +193,40 @@ dropped because every hit it produced was a loop-induction stride rather than a 
 `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
 statements sit between two calls or on a loop back-edge.
+
+### Switching the reimplementation on before measuring
+
+There are **two** switches, and both are deliberately uncommitted, so a rebase, a fresh clone or a
+`git checkout -- src/OpenSHC` turns both off at once:
+
+- `tools/reimplementation-control/enable_reimplemented_data.py` - the `MACRO_STRUCT_RESOLVER` flags in
+  `src/OpenSHC/Globals/*.hpp`.
+- `tools/reimplementation-helper/batch/enable_local_functions.py` - the `MACRO_FUNCTION_RESOLVER` flags for
+  exactly the files in `cmake/openshc-sources.txt.local`. The repository-wide
+  `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1` flips every resolver that has a .cpp
+  anywhere in the tree, which does not link while the build list is a subset: each enabled resolver whose
+  .cpp is not compiled becomes an unresolved external.
+
+With the function resolvers off, every call leaves the module for the original game address, so **`/GL`
+buys nothing**: LTCG cannot see a callee it does not compile. `getSalesPrice` sat at 68.4% for as long as
+`getSellResourceAmount`'s resolver was `false`, and reached 100% the moment it was `true` - the original
+keeps `this` in the volatile EDX across that call, which is exactly what LTCG provides. `clearEnemyRelatedStructures`
+went 97.7% -> 100% the same way. So to chase a "volatile register survives a call" diff: put the callee's .cpp in
+the build list, enable its resolver, and add **both** files to `cmake/compiler-flags-gl.txt`.
+
+**`/GL` can also make a function worse, and not only through the LTCG unit.** LTCG lets MSVC see that a
+callee does not touch a given struct, so it starts hoisting loads the original's compiler had to repeat:
+`spawnPoisonCloudsAroundBuilding` fell 92.4% -> 69.6% because LTCG hoisted
+`buildings[buildingID].x`/`.y` out of the retry loop across `nextRandomNumber2`, which the original
+re-reads every iteration. So add `/GL` for a pair only when the *original* shows the cross-call knowledge -
+a volatile register still live after a `call`, or a missing `mov ecx, <global>` reload. A reimplemented
+callee is not a reason on its own.
+
+`/GL` is whole-program, so the list is not a free-for-all. Adding files that are not part of the pair under
+test re-codegens everything in the LTCG unit: one such round cost `processFoodConsumption` 20 points and
+`spawnPoisonCloudsAroundBuilding` 23 while gaining 1.3 elsewhere. Add one caller/callee pair at a time and
+keep only what measures better. A callee that is not itself at 100% is worse than useless here, because
+LTCG then propagates *our* register use rather than the original's.
 
 ### Binary Comparison (`reccmp`)
 
