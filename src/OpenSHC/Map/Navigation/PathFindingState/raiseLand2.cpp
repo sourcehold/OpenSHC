@@ -23,7 +23,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A6D0
         void PathFindingState::raiseLand2(uint x, uint y, int maxDistance)
         {
-            int iVar5;
             if (x > 399 || y > 399) {
                 return;
             }
@@ -53,7 +52,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(
                         tile, (uint)(sVar3), 4, 1);
                     for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction] + tile;
+                        int iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction] + tile;
                         if (DAT_TileMapState::instance.CertainPathLayer[iVar5] < 1
                             && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
                             && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
