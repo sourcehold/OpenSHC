@@ -54,28 +54,26 @@ namespace Rendering {
             int hitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex - 1) * 10;
             int nextHitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex - 1) * 10;
             int hitBoxAnchor = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][0].x;
-            if (hitBoxAnchor != -1) {
-                do {
-                    if (mouseXScreenSpace >= DAT_MenuHandlerState::instance.x + hitBoxAnchor
-                        && mouseXScreenSpace
-                            <= DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][1].x
-                                + hitBoxAnchor + DAT_MenuHandlerState::instance.x
-                        && (hitBoxAnchor
-                            = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][0].y,
-                            mouseYScreenSpace >= hitBoxAnchor + DAT_MenuHandlerState::instance.y)
-                        && mouseYScreenSpace
-                            <= DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][1].y
-                                + hitBoxAnchor + DAT_MenuHandlerState::instance.y) {
-                        this->viewportState.field0_0x0 = 0;
-                        return;
-                    }
-                    hitBoxAnchor
-                        = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[nextHitBoxRow + 1][0]
-                              .x;
-                    hitBoxRow = nextHitBoxRow + 1;
-                    nextHitBoxRow = hitBoxRow;
-                } while (hitBoxAnchor != -1);
-            }
+            while (hitBoxAnchor != -1) {
+                if (mouseXScreenSpace >= DAT_MenuHandlerState::instance.x + hitBoxAnchor
+                    && mouseXScreenSpace
+                        <= DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][1].x
+                            + hitBoxAnchor + DAT_MenuHandlerState::instance.x
+                    && (hitBoxAnchor
+                        = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][0].y,
+                        mouseYScreenSpace >= hitBoxAnchor + DAT_MenuHandlerState::instance.y)
+                    && mouseYScreenSpace
+                        <= DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][1].y
+                            + hitBoxAnchor + DAT_MenuHandlerState::instance.y) {
+                    this->viewportState.field0_0x0 = 0;
+                    return;
+                }
+                hitBoxAnchor
+                    = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[nextHitBoxRow + 1][0]
+                          .x;
+                hitBoxRow = nextHitBoxRow + 1;
+                nextHitBoxRow = hitBoxRow;
+                }
         }
 
         if (this->viewportState.field0_0x0 == 0) {
@@ -175,8 +173,7 @@ namespace Rendering {
         }
 
         int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[quadrantY][quadrantX];
-        int lookupIndex
-            = ((int)(unclampedX + (unclampedX >> 0x1f & 0x1fU)) >> 5) + orientationBase + (unclampedY >> 4) * 0x191;
+        int lookupIndex = (unclampedX / 32) + orientationBase + (unclampedY >> 4) * 0x191;
         if (quadrant == 1) {
             lookupIndex = lookupIndex + 200;
         } else if (quadrant == 2) {
@@ -259,14 +256,12 @@ namespace Rendering {
                 int probeY = (this->viewportState.viewportY - this->windowY) + 0x10 + probeScreenY;
                 int probeX = (this->viewportState.viewportX - this->windowX) + mouseXScreenSpace;
                 probeRowY = ((this->viewportState.viewportY & 0x8000000fU) - this->windowY) + probeScreenY;
-                probeIndex = ((int)(probeX + (probeX >> 0x1f & 0x1fU)) >> 5)
-                    + ((int)(probeY + (probeY >> 0x1f & 0xfU)) >> 4) * 0x191 + orientationBase;
+                probeIndex = (probeX / 32) + (probeY / 16) * 0x191 + orientationBase;
             } else {
                 int probeX = ((mouseXScreenSpace * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
                 probeRowY = ((this->viewportState.viewportY & 0x8000000fU) - this->windowY) + probeDoubledY;
                 int probeY = (this->viewportState.viewportY - this->windowY) + probeDoubledY;
-                probeIndex = ((int)(probeY + (probeY >> 0x1f & 0xfU)) >> 4) * 0x191
-                    + ((int)(probeX + (probeX >> 0x1f & 0x1fU)) >> 5) + orientationBase;
+                probeIndex = (probeY / 16) * 0x191 + (probeX / 32) + orientationBase;
             }
 
             int probeQuadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[probeRowY & 0xf][quadrantX];
