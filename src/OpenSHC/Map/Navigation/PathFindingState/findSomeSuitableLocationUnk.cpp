@@ -30,7 +30,6 @@ namespace Map {
         undefined4 PathFindingState::findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4)
         {
             int iVar5;
-            int iVar8;
             if (399 < x || 399 < y) {
                 return (undefined4)(0);
             }
@@ -84,7 +83,7 @@ namespace Map {
                         return (undefined4)(1);
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                        iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + iVar5;
+                        int iVar8 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + iVar5;
                         if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar8]
