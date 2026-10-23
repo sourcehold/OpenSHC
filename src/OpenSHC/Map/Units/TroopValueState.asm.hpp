@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstddef>
+
+#include "OpenSHC/Map/TileMapState.hpp"
+
 /**
   Hand-written assembly macros for OpenSHC::Map::Units::TroopValueState.
 
@@ -8,24 +12,41 @@
   equivalent is kept as a comment above it so the behaviour stays readable.
 
   A resolver global cannot be named inside an __asm operand (`::` is not
-  parseable there), so the operands are absolute addresses derived from the
-  one instance base below. That base is the same address the resolver uses,
-  `Address::SHC_3BB0A8C1_0x01A93208` in `DAT_TileMapState.hpp`, so with the
-  struct resolvers enabled these operands are the original's own addresses.
+  parseable there), and a base passed in as a pointer would assemble as
+  register-indirect addressing where the original uses absolute. So the
+  namespace below re-declares the resolver's own address as unqualified
+  enumerators, which the inline assembler accepts as compile-time constants.
+  The address comes from the project's address table and the field offsets from
+  the generated struct, so no literal is repeated here.
 
   The `ds:` override is load bearing: a bracketed constant expression on its
   own assembles as an immediate, which would load the field's address instead
   of its value.
  */
 
-// StructResolver::Instance<OpenSHC::Map::TileMapState,27865608>::instance
-#define ASM_TileMapState 0x01A93208
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
 
-#define ASM_TileMapState_DAT_SomeY (ASM_TileMapState + 0x554A38)
-#define ASM_TileMapState_DAT_SomeTile (ASM_TileMapState + 0x554A3C)
-#define ASM_TileMapState_ptr_MovementDirectionTranslationMatrix (ASM_TileMapState + 0x554A68)
-#define ASM_TileMapState_ptr_PathConnectionLayer (ASM_TileMapState + 0x554A74)
-#define ASM_TileMapState_ptr_SpecialAreasArray (ASM_TileMapState + 0x554A7C)
+        // The same address DAT_TileMapState.hpp hands to MACRO_STRUCT_RESOLVER,
+        // so with the struct resolvers enabled these are the original's own
+        // addresses. Unqualified on purpose: __asm cannot parse `::`.
+        enum {
+            ASM_TileMapState = Address::SHC_3BB0A8C1_0x01A93208,
+
+            ASM_TileMapState_DAT_SomeY = ASM_TileMapState + offsetof(TileMapState, DAT_SomeY),
+            ASM_TileMapState_DAT_SomeTile = ASM_TileMapState + offsetof(TileMapState, DAT_SomeTile),
+            ASM_TileMapState_ptr_MovementDirectionTranslationMatrix
+            = ASM_TileMapState + offsetof(TileMapState, ptr_MovementDirectionTranslationMatrix),
+            ASM_TileMapState_ptr_PathConnectionLayer
+            = ASM_TileMapState + offsetof(TileMapState, ptr_PathConnectionLayer),
+            ASM_TileMapState_ptr_SpecialAreasArray
+            = ASM_TileMapState + offsetof(TileMapState, ptr_SpecialAreasArray),
+        };
+
+    }
+}
+}
 
 /**
   Shared prologue of both neighbour fills. Leaves
@@ -41,13 +62,13 @@
  */
 #define MACRO_ASM_LOAD_CARDINAL_BASES()                                                                                \
     __asm mov edi, dword ptr ds:[ASM_TileMapState_ptr_MovementDirectionTranslationMatrix]                              \
-    __asm mov esi, dword ptr ds:[ASM_TileMapState_ptr_PathConnectionLayer]                                              \
-    __asm mov edx, dword ptr ds:[ASM_TileMapState_ptr_SpecialAreasArray]                                                \
-    __asm mov eax, dword ptr ds:[ASM_TileMapState_DAT_SomeTile]                                                         \
+    __asm mov esi, dword ptr ds:[ASM_TileMapState_ptr_PathConnectionLayer]                                             \
+    __asm mov edx, dword ptr ds:[ASM_TileMapState_ptr_SpecialAreasArray]                                               \
+    __asm mov eax, dword ptr ds:[ASM_TileMapState_DAT_SomeTile]                                                        \
     __asm shl eax, 1                                                                                                   \
     __asm add esi, eax                                                                                                 \
     __asm push esi                                                                                                     \
-    __asm mov eax, dword ptr ds:[ASM_TileMapState_DAT_SomeY]                                                            \
+    __asm mov eax, dword ptr ds:[ASM_TileMapState_DAT_SomeY]                                                           \
     __asm shl eax, 5                                                                                                   \
     __asm add edi, eax
 
