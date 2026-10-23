@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
@@ -31,7 +32,9 @@ namespace Map {
             int _y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
             DAT_TileMapState::instance.DamageLayer[_tile] = this->receivedWallPlacementInfoArray[i].damage;
             DAT_TileMapState::instance.HeightLayer[_tile] = this->receivedWallPlacementInfoArray[i].height;
-            DAT_TileMapState::instance.LogicLayer[_tile] &= 0xffb8f4ff;
+            DAT_TileMapState::instance.LogicLayer[_tile] &= ~(LogicHelpers::L_WALL_OR_GATEHOUSE | LogicHelpers::L_CRENEL
+                | LogicHelpers::L_STAIRS | LogicHelpers::L_UNKNOWN_WALL_RELATED | LogicHelpers::L_BOULDERS
+                | LogicHelpers::L_PEBBLES | LogicHelpers::L_CRENEL_VARIATIONUnk);
             DAT_TileMapState::instance.LogicLayer[_tile] |= this->receivedWallPlacementInfoArray[i].logic;
             int _tileDelta = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

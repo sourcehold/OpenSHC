@@ -161,13 +161,7 @@ restyling anything large:
 - a frame pointer plus a `this` spill - the original was built without optimisation, **unless the same function also
   reports `mov reg, 0`**. MSVC keeps `ebp` in any function containing an `__asm` block, so for a function with
   handwritten assembly the frame pointer says nothing about the optimisation level: reimplement the handwritten part as
-  inline asm and leave the rest at `/O2`. Checking the prologue settles it - values kept in registers across the entry
-  tests mean `/O2`. Taking the `/Od` reading instead took `findLinkageBasedPathOrWalkRadius` from 5.1% to 2.8%, where
-  the same body without the pragma reaches 49.2%. When it really is `/Od`, add `#pragma optimize(, off)`
-  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
-  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
-  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
-  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+  inline asm.
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
@@ -201,12 +195,23 @@ of namespace average this way, and a snapshot taken on one side of that change c
 with anything measured on the other. `tools/reimplementation-control/enable_reimplemented_data.py`
 turns them back on; `git checkout -- src/OpenSHC/Globals/` turns them off again.
 
+**The function resolvers are a second, separate switch, and they matter just as much.** Every
+`MACRO_FUNCTION_RESOLVER(..., false, Address::...)` in a `*.func.hpp` routes `MACRO_CALL`/`MACRO_CALL_MEMBER` to the
+*original binary*, so with it off the compiler never sees our callee. It cannot then know the callee leaves `ecx`
+alone, and the caller spills `this` into a callee-saved register, which renames every register downstream of the
+call. `processSyncPacket` read 26.2% for that reason alone; enabling its (already 100%) callee took it to 79.2%,
+and enabling all 23 finished functions of `GameSynchronyState` moved the namespace average 84.6% -> 85.7% with
+nothing getting worse. It is also the missing precondition for `cmake/compiler-flags-gl.txt`: `/GL` on both sides
+does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
+flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
 
-0. Switch the global data reimplementations on (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`)
-   before measuring anything, and never commit those files. With the resolvers inactive, reccmp collapses every
+0. Switch **both** sets of reimplementations on before measuring anything, and never commit those files: the
+   global data (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`) and the finished functions
+   (the `MACRO_FUNCTION_RESOLVER` flag in the `*.func.hpp` files). With the resolvers inactive, reccmp collapses every
    absolute address to one token, so a `this->` that should be the global instance, and a wrong field offset, both
    look like a match.
 1. Save a baseline: `reccmp_report.py --run save base.json`.
@@ -234,6 +239,14 @@ Style expected of reimplemented code:
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
   The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
   diff patterns below.
+- Prefer `const` on a local that is assigned once, spelled with `const` *after* the type (`int const tribeID = ...`).
+  This is not free: a `const` local whose initialiser is a **compile-time literal** lets MSVC fold the value into its
+  use sites and drop instructions the original still has, so leave those non-const. A `const` local initialised from a
+  memory read or a call is code-generation neutral. Over `AI::AICState` 165 of 172 candidates were neutral and 7 were
+  not - every one of them an `int tribeIndex = <literal>` feeding an array index, each costing 4 instructions and
+  0.18-0.50 of match (`setTribe0x11ToAggressiveAndAttackIfConditionMet` went 1.0000 -> 0.5000). Isolate before
+  blaming the qualifier: in `aiCommandTribe13DefensiveWave`, keeping `int const tribeID = <array read>` while
+  reverting `int tribeIndex = 13` alone restored 1.0000.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -261,7 +274,8 @@ Diff patterns that were reliable (more in the cheat sheet):
 - A tail call to the same callee from our code but a jump back to a shared block in the original means separate
   `if` branches with identical bodies, not a combined condition.
 - Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
-  not a source difference.
+  not a source difference. Investigate by adding the caller and callee to the txt and enabling their reimplementation in the .func.hpp files.
+  Only makes sense if the callee is 100% matching (e.g. ECX not touched).
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
   independent stores into one object says nothing about the order the fields were assigned in the original source
@@ -327,9 +341,28 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Trust the asm over the decompilation for constants and their sign. Ghidra rendered `2400 / n + 40` where the binary
   has `sub eax, 0x28`, so the formula is `- 40`; the function reached 100% once corrected (`diff_types.py` finds these).
   A `(longlong)` in a Ghidra division is usually spurious too - it emits `_alldiv` where the original has a plain `idiv`.
-- MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
-  times. A plain loop where the original is unrolled has cost 80 points on its own.
-- A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+- MSVC1400 at `/O2` does unroll small constant-trip loops (`applyAIV`'s 10-iteration unit loop comes out five copies
+  wide from a plain `for`), and `!=` as the bound suppresses it - see the cheat sheet. A body repeated N times in the
+  asm is therefore not proof that the source wrote it out N times; compile the plain loop first and compare.
+  What the asm pins down is the unroll *factor*, and the way to hit a factor the compiler will not pick on its own is
+  an outer loop stepping by N with the inner N left to it: that compiles identically to writing the N copies out by
+  hand, down to everything but MSVC's label numbering. Read the factor off how the index is held. Once the whole trip
+  count is visible the compiler constant-folds every index, so each body carries absolute addresses and an immediate;
+  an original that instead keeps the index in a register and computes stored values with `lea` still had an induction
+  variable, so its source had a loop. `someChatMessageSelection` is the worked case: a plain 1..8 loop and 8
+  hand-written copies both give 154 instructions at 0.6745, while outer-step-4 plus an inner 0..3 gives 132 at 0.9198
+  against the original's 119. Do not bother varying the loop variable - a fresh `int i`, the function's already
+  declared `i`, a fresh name and a pre-declared one all produced byte-identical code.
+- A flag stored with `mov dword ptr [..], 0/1` is four bytes wide, so it is not a `bool`, which stores a byte. It
+  does not follow that it is a plain `int`: `BOOLEnum` is a typedef of `BOOL` and so of `int`, which means a dword
+  store is exactly what a `BOOLEnum` field looks like and is no evidence against one. Decide from the writes, not
+  the width - xref the field's address and read every store. `PlayerData::isNotNervousByEnemyTroopValue` is written
+  7 times across the image and every store is 0 or 1 (three through a register: two `xor eax, eax` and an `ebx` the
+  decompiler renders as `= 1`), and its 6 reads are all boolean tests - five `cmp .., 0x0` plus one against a zeroed
+  register that Ghidra prints as `== FALSE` - so the field is a `BOOLEnum`. Grepping our own sources would have
+  missed this, because 3 of its 4 writing functions are not reimplemented yet. Check Ghidra's own type for the
+  field too; it already had this one as `BOOLEnum`. Correcting such a field is free: the underlying type is the
+  same, so the match does not move.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
   physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`

@@ -27,7 +27,7 @@ namespace Map {
         int hack1; // 0x00000004 length: 4
         int hack2; // 0x00000008 length: 4
         int hack3; // 0x0000000C length: 4
-        int hackValuesArray[4000]; // 0x00000010 length: 16000
+        AttackInfoSubArrayElement2 hackValuesArray[1000]; // 0x00000010 length: 16000
         int minPathCostToKeep; // 0x00003E90 length: 4
         int minPathCostToGate; // 0x00003E94 length: 4
         undefined1 padding_0x3e98[8]; // 0x00003E98 length: 8

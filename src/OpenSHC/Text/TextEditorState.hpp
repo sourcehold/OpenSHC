@@ -94,7 +94,7 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(int x, int y, int height, int width);
+        void setHelpWindowBounds(int x, int y, int width, int height);
 
         void resetHelpStateFields();
 
@@ -168,7 +168,7 @@ namespace Text {
 
         void openMapDescriptionEditorDialog(int sectionId);
 
-        void setCustomHelpText(char* helpText, undefined4 bufferSize);
+        void setCustomHelpText(char* helpText, int bufferSize);
 
         void popHelpDialogStack();
 
