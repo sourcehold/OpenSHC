@@ -20,7 +20,7 @@ namespace AI {
 
     // builds a generic castle for AIs without an AIV, the number of each building depends on the AI character
     // FUNCTION: STRONGHOLDCRUSADER 0x004F0060
-    BOOLEnum AIVState::executeDefaultCastleAIV(PlayerID playerID, int isPausing)
+    BOOLEnum AIVState::executeDefaultCastleAIV(int playerID, int isPausing)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
         int stockpiles = 0;
@@ -623,7 +623,7 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[placedID].field242_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[placedID].field202_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
                 this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {

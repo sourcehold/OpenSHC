@@ -9,7 +9,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F15C0
-    void AIVState::aiDecideOnNewBuildings(PlayerID playerID)
+    void AIVState::aiDecideOnNewBuildings(int playerID)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
 
