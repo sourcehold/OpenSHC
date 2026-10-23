@@ -88,6 +88,28 @@ namespace Map {
           UIT_MAN_SIEGE_EQUIPMENT is emitted after our epilogue where the original has it
           inline at 0x529a8b - which no arrangement of the source reaches.
          */
+        /*
+          The arms were not out-of-line helpers, and this is settled rather than assumed.
+          Ghidra has no unnamed function anywhere in 0x521180 - 0x52b860: every address in
+          that span is a named TribesState method and the gap between consecutive ones is
+          the preceding method's own length, so the original translation unit emitted no
+          static function of its own. Whatever helpers the 2002 source had, the compiler
+          inlined all of them.
+
+          Inlining them back does not change the code either. The ladder arm - eighty-five
+          lines, nine locals of its own, one call site - was extracted into
+
+            static BOOLEnum setLaddersAgainstWallTile(
+                TribesState* self, int tribeID, int _tribeSize, int _wallTile)
+
+          with the arm reduced to `if (setLaddersAgainstWallTile(...)) return 1;`. MSVC
+          inlined it - no call appears in the diff and the function keeps its length - and
+          the score moved 60.6% -> 60.5%. An inlined static body therefore gets the same
+          slots and the same registers as the same statements written inline, which is also
+          why splitting the decompiler's folded scratch into a local per arm is exactly
+          neutral. Writing the arms as helpers is a readability choice with a small price,
+          not a way into the register allocation.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00527C80
         undefined4 TribesState::giveTribeAnInstruction(
             int tribeID, UnitInstructionType unitInstructionType, int id, int unitUID, int param_5)
