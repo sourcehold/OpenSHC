@@ -43,15 +43,15 @@ namespace Map {
             local_8 = param_6 / 2;
         }
         iVar2 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(param_1, (uint)((int)(param_2)), param_3, (undefined4)((int)(param_7)),
-            (BuildingType)((int)((int)(short)param_4)), param_5, param_1, 0xf);
+            DAT_BuildingsState::ptr)(param_1, (uint)(param_2), param_3, (undefined4)((int)(param_7)),
+            (BuildingType)((int)((short)param_4)), param_5, param_1, 0xf);
         buildingID = (int)(short)iVar2;
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = iVar5;
         param_2 = &DAT_BuildingsState::instance.buildings[buildingID].tileRefs[0];
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                iVar4, (int)((int)(param_5)));
+                iVar4, (int)(param_5));
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + param_3].addXgetTile
                 + this->buildingX + (int)piVar1;
             *param_2 = iVar3;
@@ -76,7 +76,7 @@ namespace Map {
         param_5 = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                param_5, (int)((int)(DAT_BuildingsState::instance.buildings[iVar2].widthOrHeight)));
+                param_5, (int)(DAT_BuildingsState::instance.buildings[iVar2].widthOrHeight));
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar5);
