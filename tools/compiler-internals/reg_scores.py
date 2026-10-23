@@ -1,6 +1,7 @@
 """Print the register-candidate scores MSVC computes for one of our functions.
 
 usage: reg_scores.py FILE.cpp --probe
+       reg_scores.py FILE.cpp --find [LOCALNAME ...]
        reg_scores.py FILE.cpp --invocation N
 
 `OrderGlobregs` scores every candidate value and orders them by descending score; `Color`
@@ -16,8 +17,12 @@ ours is not distinguishable by size (hundreds of resolver-template instantiation
 identically):
 
 * `--probe` prints how many candidates each `GlobalRegAlloc` invocation inserted, biggest
-  first. Our function is normally the largest; confirm it by checking that the names in
-  `--invocation` are the locals you expect.
+  first. Our function is normally the largest, but only because the resolver templates all
+  score identically (33 candidates in a typical TU) - a function with fewer candidates than
+  that cannot be picked out this way.
+* `--find LOCALNAME` prints every *named* candidate with its invocation index, so the
+  function can be identified by one of its locals instead of by size. This is the reliable
+  mode; `--probe` is the quick one.
 * `--invocation N` dumps that invocation's candidates as `score, symbol id, name`, in the
   order the compiler scored them. `(temp)` is a compiler temporary with no source name.
 
@@ -86,6 +91,29 @@ def run(script_lines, tag):
     common.write_text(out / (tag + '.log'), r.stdout)
     return r.stdout
 
+
+find = '--find' in sys.argv
+if find:
+    # every named candidate with its invocation index: identification by name, which works
+    # for functions smaller than the resolver-template flood that --probe ranks by size
+    q = BS + '"'
+    cand = ('.if (poi(poi(@eax)) != 0) { .printf ' + q + 'N %d %d ' + q +
+            ', @$t0, poi(@eax+0xc); da poi(poi(poi(@eax))+4)+1 L28 }; gc')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + INSERT_IN_LIST + ' "' + cand + '"',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'find')
+    rows = {}
+    for m in re.finditer(r'N (\d+) (-?\d+) [0-9a-f]{8}\s+"([^"]*)"', txt):
+        rows.setdefault(int(m.group(1)), []).append((int(m.group(2)), m.group(3)))
+    want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
+    print('invocations holding a named candidate: %d' % len(rows))
+    for i in sorted(rows):
+        names = [n for _s, n in rows[i]]
+        if not want or any(w in names for w in want):
+            print('  #%-5d %s' % (i, ', '.join('%s(%+d)' % (n, s) for s, n in rows[i])))
+    sys.exit(0)
 
 if probe:
     # count candidate inserts per invocation, print only the busy ones
