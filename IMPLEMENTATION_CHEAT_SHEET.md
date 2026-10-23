@@ -153,6 +153,40 @@ Three consequences for reading a diff:
 the class byte at +0x18, is not yet decoded, so arrays and address-taken locals interleave for reasons the tool
 cannot currently explain - treat a non-monotone report as a hint, not a contradiction.
 
+Which **register** a value gets is decided by the same pass in a much simpler way, and it is not a preference
+list. A register set is a 64-bit bitvector with set/clear mask tables indexed by `reg & 0x3f`, and the iterator
+that hands out members takes the **lowest set bit** and clears it:
+
+```c
+// c2.dll 0x10b04fa0, "next member of a register set"
+for (; (set >> bit & 1) == 0; bit++) {}   // low dword first, then the high one
+return set_base + bit + dword_offset;     // and the bit is cleared, so the next call advances
+```
+
+`.rdata` holds the register names in three parallel 4-byte-stride tables terminated by `"noreg"`, which gives the
+numbering - the **reverse** of the x86 encoding order:
+
+```
+edi=0  esi=1  ebp=2  esp=3  ebx=4  edx=5  ecx=6  eax=7
+```
+
+So allocation prefers the callee-saved registers in the order `edi`, `esi`, `ebp`, `ebx`, and only then the
+volatile `edx`, `ecx`, `eax`. `Spillcosts` is 854 lines of live-set bitvector work with no cost arithmetic in it:
+the cost model decides *who gets spilled*, not *which register a winner gets*.
+
+The consequence is worth more than the rule. A register mismatch is never a preference difference, because there
+is no preference to match - it means **interference differs**: at that allocation point a different set was free,
+because some other value's live range covered the register we expected. `sellExcessGoods` holding `playerID` in
+`edx` where the original uses `ebp` is not a tie-break to nudge; it says the two sides have a different set of
+simultaneously live values. The lever is therefore where each value is born and dies, which is the statement and
+expression structure - the same thing `quick_reorder.py` permutes, but with a predictable outcome once you know
+which registers are free.
+
+This much is read out of the compiler; it has not yet been turned into a tested source-level recipe, and the live
+range computation that feeds those sets is not decoded. For one stuck function the shorter path is a debugger:
+`c2.pdb` is published on Microsoft's symbol server, so `cl.exe` can be run under `cdb` with breakpoints on the
+allocator by name and the free set dumped at each allocation point.
+
 ### Statement Order
 
 The order of instructions in the assembly is not the order of the statements in the original source.

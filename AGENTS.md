@@ -182,7 +182,10 @@ sign. It carries only those two rules on purpose: a third, "same instruction wit
 dropped because every hit it produced was a loop-induction stride rather than a constant the source chose.
 `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
-statements sit between two calls or on a loop back-edge.
+statements sit between two calls or on a loop back-edge. `alloc-only` is worth reading literally: the register
+pick rule is "lowest-numbered free register", with the numbering `edi`<`esi`<`ebp`<`esp`<`ebx`<`edx`<`ecx`<`eax`,
+so a register mismatch is an interference difference rather than a preference the source can state - see the
+register note in the cheat sheet.
 
 ### Binary Comparison (`reccmp`)
 
