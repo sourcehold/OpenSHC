@@ -57,7 +57,7 @@ namespace Map {
                     continue;
                 }
 
-                uint height = this->HeightLayer[tile];
+                int height = this->HeightLayer[tile];
                 int screenY = this->heightBasedScreenYOffset[height];
                 this->ShowHiLayer[tile] = '\0';
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffef;
