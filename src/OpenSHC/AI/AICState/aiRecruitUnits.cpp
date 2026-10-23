@@ -42,7 +42,7 @@ namespace AI {
                 .RecruitInterval)[DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling];
         int recruitCount = recruitInterval != 0 ? 1 : 2;
         if (isExtremeTrail)
-            recruitCount++;
+            recruitCount = recruitInterval != 0 ? 2 : 3;
 
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
             recruitCount = 4;
