@@ -38,7 +38,6 @@ namespace Map {
         BOOLEnum PathFindingState::isSignPostWithinDistance(uint x, uint y, int limit)
         {
             int iVar3;
-            int iVar6;
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 return FALSE;
             }
@@ -82,7 +81,7 @@ namespace Map {
                         return TRUE;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                        iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + iVar3;
+                        int iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + iVar3;
                         if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar6] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar6]
