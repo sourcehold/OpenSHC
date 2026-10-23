@@ -50,7 +50,8 @@ namespace Map {
             short orientationRelatedPositionX; // 0x00000026 length: 2
             short orientationRelatedPositionY; // 0x00000028 length: 2
             short field22_0x2a; // 0x0000002A length: 2
-            int unknownV; // 0x0000002C length: 4
+            short unknownV; // 0x0000002C length: 2
+            undefined1 padding_0x2e[2]; // 0x0000002E length: 2
             int field_0x30_animRelated; // 0x00000030 length: 4
             short isSelected; // 0x00000034 length: 2
             undefined1 padding_0x36[2]; // 0x00000036 length: 2
@@ -277,8 +278,7 @@ namespace Map {
             undefined1 padding_0x3da[2]; // 0x000003DA length: 2
             short field265_0x3dc; // 0x000003DC length: 2
             short field266_0x3de; // 0x000003DE length: 2
-            undefined1 horseOriginStableIDUnk; // 0x000003E0 length: 1
-            undefined1 padding_0x3e1[3]; // 0x000003E1 length: 3
+            int horseOriginStableIDUnk; // 0x000003E0 length: 4
             int blessedAmount; // 0x000003E4 length: 4
             short attackAtTileX; // 0x000003E8 length: 2
             short attackAtTileY; // 0x000003EA length: 2
