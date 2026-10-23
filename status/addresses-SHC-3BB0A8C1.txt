@@ -24373,7 +24373,7 @@ SHC_3BB0A8C1_0x00498020 | 61.4% | counted direction loop, combin
 
 SHC_3BB0A8C1_0x00498170 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00498400 | 49.8% | uniform unrolled bodies with d
+SHC_3BB0A8C1_0x00498400 | 49.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004985D0 | 0.0% | Pending
 
