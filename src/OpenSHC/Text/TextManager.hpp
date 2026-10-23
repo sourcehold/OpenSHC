@@ -38,16 +38,16 @@ namespace Text {
     public:
         int currentXOffset_0x0; // 0x00000000 length: 4
         dword field1_0x4; // 0x00000004 length: 4
-        int field2_0x8; // 0x00000008 length: 4
-        int field3_0xc; // 0x0000000C length: 4
+        int textClipMin; // 0x00000008 length: 4
+        int textClipMax; // 0x0000000C length: 4
         CodePageInt codePage; // 0x00000010 length: 4
         dword field5_0x14; // 0x00000014 length: 4
-        dword field6_0x18; // 0x00000018 length: 4
+        BOOLEnum helpTextLinkActive; // 0x00000018 length: 4
         RenderTargetInt textSurfaceTarget; // 0x0000001C length: 4
         dword field8_0x20; // 0x00000020 length: 4
         int field9_0x24; // 0x00000024 length: 4
         int field10_0x28; // 0x00000028 length: 4
-        dword field11_0x2c; // 0x0000002C length: 4
+        dword drawingTextShadow; // 0x0000002C length: 4
         dword field12_0x30; // 0x00000030 length: 4
         dword field13_0x34; // 0x00000034 length: 4
         dword textColor; // 0x00000038 length: 4
@@ -154,7 +154,7 @@ namespace Text {
         void renderSomeSpecificTextUnk(
             int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, uint color, int fontSize);
 
-        void renderTextToScreen(char* textAddress, int xParam, int yParam, TextAlignment alignment, BGR24 color,
+        void renderTextToScreen(char const* textAddress, int xParam, int yParam, TextAlignment alignment, BGR24 color,
             int fontSize, BOOLEnum keepOffsetX, int blendStrength);
 
         void renderWideText(LPWSTR wideText, int xPos, int yPos, TextAlignment alignment, uint color, int fontSize,

@@ -39,6 +39,8 @@ namespace AI {
             quarryYOffset + this->buildingAppropriateGridYPosition * 5, Commands::M_MAPPER_QUARRY,
             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                 Commands::M_MAPPER_QUARRY),
+            // rotation 15 is a magic value: the building ends up with rotation 0
+            // unless DAT_TileMapState::skipPlacementCheck is set
             15);
         if (DAT_TileMapState::instance.buildingPlacementFail) {
             return;
@@ -59,6 +61,8 @@ namespace AI {
                 yOffset + this->buildingAppropriateGridYPosition * 5, Commands::M_MAPPER_OXENBASE,
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                     Commands::M_MAPPER_OXENBASE),
+                // rotation 15 is a magic value: the building ends up with rotation 0
+                // unless DAT_TileMapState::skipPlacementCheck is set
                 15);
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
                 int const oxTetherID = DAT_TileMapState::instance.placedBuildingID;

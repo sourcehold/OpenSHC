@@ -17,8 +17,8 @@ namespace Text {
 
         short xPos; // 0x00000000 length: 2
         short yPos; // 0x00000002 length: 2
-        short imageRelated; // 0x00000004 length: 2
-        short unknown3; // 0x00000006 length: 2
+        short imageIndex; // 0x00000004 length: 2
+        short linkId; // 0x00000006 length: 2
 
     } ImageHotspot;
 #pragma pack(pop)

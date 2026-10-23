@@ -17,22 +17,22 @@ namespace Audio {
                 return;
             }
             DAT_SoundSystemState::instance.streamFileVolumeNextUnk_0x48[2]
-                = DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].volumeUnk_0x28
-                      [DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44];
+                = DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].volumeUnk_0x28
+                      [DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex];
             if (ambientSoundIndexUnk == 5) {
                 MACRO_CALL_MEMBER(MSS::SoundSystem_Func::playSoundOnSfxSoundStream2, DAT_SoundSystemState::ptr)(
-                    DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].ambientWavs_0x8
-                        [DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44],
+                    DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].ambientWavs_0x8
+                        [DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex],
                     50);
             } else {
                 MACRO_CALL_MEMBER(MSS::SoundSystem_Func::playSoundOnSoundStream2, DAT_SoundSystemState::ptr)(
-                    DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].ambientWavs_0x8
-                        [DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44]);
+                    DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].ambientWavs_0x8
+                        [DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex]);
             }
-            DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44++;
-            if (DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44
-                >= DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field0_0x0) {
-                DAT_SpeechDefinedData::instance.field5_0x41eb04[ambientSoundIndexUnk].field3_0x44 = 0;
+            DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex++;
+            if (DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex
+                >= DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationCount) {
+                DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex = 0;
             }
         }
 

@@ -56,7 +56,7 @@ namespace AI {
         while (this->algAIndex != this->algBIndex) {
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
+            this->visitCount = this->heatMaps[x][y].algorithmVisitCountUnk;
             if (this->visitCount > 40) {
                 break;
             }
@@ -74,12 +74,12 @@ namespace AI {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const blockedCount = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
-                    - (char)this->heatMaps[gridX][gridY].impassableCount;
+                int const blockedCount = this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
+                    - this->heatMaps[gridX][gridY].impassableCount;
                 if (blockedCount >= 16) {
                     continue;
                 }
-                int const owner = (char)this->heatMaps[gridX][gridY].tileOwnership;
+                int const owner = this->heatMaps[gridX][gridY].tileOwnership;
                 if ((blockedCount == 0 || resourceType == AIGCRT_IRON) && blockedCount <= 4
                     && !this->heatMaps[gridX][gridY].structureCount
                     && !this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
@@ -87,8 +87,7 @@ namespace AI {
                         || DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                             == DAT_GameState::instance.mapAndTime.playerTeams[owner])) {
                     if (resourceType == AIGCRT_OIL) {
-                        if ((char)this->heatMaps[gridX][gridY].oilCount > 2
-                            && (char)this->heatMaps[gridX][gridY].marshCount >= 10
+                        if (this->heatMaps[gridX][gridY].oilCount > 2 && this->heatMaps[gridX][gridY].marshCount >= 10
                             && this->heatMaps[gridX][gridY].highestTerrainHeight
                                     - this->heatMaps[gridX][gridY].lowestTerrainHeight
                                 < 12) {
@@ -97,7 +96,7 @@ namespace AI {
                             return;
                         }
                     } else if (resourceType == AIGCRT_IRON) {
-                        if ((char)this->heatMaps[gridX][gridY].ironCount > 6
+                        if (this->heatMaps[gridX][gridY].ironCount > 6
                             && this->heatMaps[gridX][gridY].highestTerrainHeight
                                     - this->heatMaps[gridX][gridY].lowestTerrainHeight
                                 < 12) {
@@ -106,7 +105,7 @@ namespace AI {
                             return;
                         }
                     } else if (resourceType == AIGCRT_BOULDER) {
-                        if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8
+                        if (this->heatMaps[gridX][gridY].bouldersCount >= 8
                             && this->heatMaps[gridX][gridY].highestTerrainHeight
                                     - this->heatMaps[gridX][gridY].lowestTerrainHeight
                                 < 40) {
@@ -120,12 +119,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if ((int)this->algBIndex >= 6400) {
+                if (this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if ((int)this->algAIndex >= 6400) {
+            if (this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }

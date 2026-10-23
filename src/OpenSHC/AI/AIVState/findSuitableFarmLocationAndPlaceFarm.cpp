@@ -13,16 +13,16 @@ namespace AI {
 
     // breadth first search from the campground for an oasis grid cell and places the farm there
     // FUNCTION: STRONGHOLDCRUSADER 0x004EDDF0
-    int AIVState::findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum farmType)
+    BOOLEnum AIVState::findSuitableFarmLocationAndPlaceFarm(int playerID, MappersEnum farmType)
     {
         if (DAT_BuildingsState::instance.unknownCountdown01 < 20
             || DAT_GameState::instance.playerDataArray[playerID].countFarms
                 >= DAT_GameState::instance.playerDataArray[playerID].availableOasisGridTiles) {
-            return 0;
+            return FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].algoOasisCooldownUnk > 0) {
             --DAT_GameState::instance.playerDataArray[playerID].algoOasisCooldownUnk;
-            return 0;
+            return FALSE;
         }
 
         this->visitCount = 1;
@@ -51,7 +51,7 @@ namespace AI {
         while (this->algAIndex != this->algBIndex) {
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
+            this->visitCount = this->heatMaps[x][y].algorithmVisitCountUnk;
             if (this->visitCount > 40) {
                 break;
             }
@@ -68,7 +68,7 @@ namespace AI {
                     == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
-                int const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
+                int const notInLargestArea = this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
                 if (notInLargestArea > 16) {
                     continue;
@@ -77,14 +77,14 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if ((int)this->algBIndex >= 6400) {
+                if (this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
                 if (this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
                     || this->heatMaps[gridX][gridY].structureCount || this->heatMaps[gridX][gridY].treeCount
                     || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
-                    || (char)this->heatMaps[gridX][gridY].oasisScrubCount < 25
-                    || (char)this->heatMaps[gridX][gridY].oasisThickScrubCount < 14) {
+                    || this->heatMaps[gridX][gridY].oasisScrubCount < 25
+                    || this->heatMaps[gridX][gridY].oasisThickScrubCount < 14) {
                     continue;
                 }
                 int const xOffset
@@ -98,19 +98,21 @@ namespace AI {
                     xOffset + gridX * 5, yOffset + gridY * 5, mapper,
                     MACRO_CALL_MEMBER(
                         Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(mapper),
+                    // rotation 15 is a magic value: the building ends up with rotation 0
+                    // unless DAT_TileMapState::skipPlacementCheck is set
                     15);
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
                     this->heatMaps[gridX][gridY].structureCount = 1;
-                    return 1;
+                    return TRUE;
                 }
             }
             ++this->algAIndex;
-            if ((int)this->algAIndex >= 6400) {
+            if (this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }
         DAT_GameState::instance.playerDataArray[playerID].algoOasisCooldownUnk = 5;
-        return 0;
+        return FALSE;
     }
 
 }

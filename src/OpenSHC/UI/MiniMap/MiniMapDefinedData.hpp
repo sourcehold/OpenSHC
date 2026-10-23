@@ -20,27 +20,27 @@ namespace UI {
         // SIZE: 0x000002C4
         typedef struct MiniMapDefinedData {
 
-            int field0_0x0[8]; // 0x00000000 length: 32
+            int LuminescenceBrightnessPercent[8]; // 0x00000000 length: 32
             ushort field1_0x20[2]; // 0x00000020 length: 4
-            ushort field2_0x24[16]; // 0x00000024 length: 32
-            ushort field3_0x44[8]; // 0x00000044 length: 16
-            ushort field4_0x54[8]; // 0x00000054 length: 16
+            ushort SeaMinimapColors[16]; // 0x00000024 length: 32
+            ushort RiverMinimapColors[8]; // 0x00000044 length: 16
+            ushort FordMinimapColors[8]; // 0x00000054 length: 16
             ushort field5_0x64[8]; // 0x00000064 length: 16
             ushort field6_0x74[8]; // 0x00000074 length: 16
-            ushort field7_0x84[16]; // 0x00000084 length: 32
+            ushort BouldersMinimapColors[16]; // 0x00000084 length: 32
             ushort MinimapColorArray[8]; // 0x000000A4 length: 16
-            ushort field9_0xb4[8]; // 0x000000B4 length: 16
+            ushort PebblesMinimapColors[8]; // 0x000000B4 length: 16
             ushort field10_0xc4[8]; // 0x000000C4 length: 16
-            ushort field11_0xd4[8]; // 0x000000D4 length: 16
-            ushort field12_0xe4[8]; // 0x000000E4 length: 16
-            ushort field13_0xf4[8]; // 0x000000F4 length: 16
-            ushort field14_0x104[16]; // 0x00000104 length: 32
-            ushort field15_0x124[16]; // 0x00000124 length: 32
+            ushort BeachMinimapColors[8]; // 0x000000D4 length: 16
+            ushort IronMinimapColors[8]; // 0x000000E4 length: 16
+            ushort MarshOrOilMinimapColors[8]; // 0x000000F4 length: 16
+            ushort EarthMinimapColors[16]; // 0x00000104 length: 32
+            ushort EarthAndStonesMinimapColors[16]; // 0x00000124 length: 32
             ushort field16_0x144[8]; // 0x00000144 length: 16
-            ushort field17_0x154[8]; // 0x00000154 length: 16
-            ushort field18_0x164[8]; // 0x00000164 length: 16
-            ushort field19_0x174[8]; // 0x00000174 length: 16
-            ushort field20_0x184[52]; // 0x00000184 length: 104
+            ushort StonesOrDrivenSandMinimapColors[8]; // 0x00000154 length: 16
+            ushort ScrubMinimapColors[8]; // 0x00000164 length: 16
+            ushort ThickScrubMinimapColors[8]; // 0x00000174 length: 16
+            ushort OasisGrassMinimapColors[52]; // 0x00000184 length: 104
             ushort PlayerColorColors[2][2]; // 0x000001EC length: 8
             ushort AnimalMinimapColour_RGB15; // 0x000001F4 length: 2
             ushort AnimalMinimapColour_RGB16; // 0x000001F6 length: 2
@@ -110,9 +110,9 @@ namespace UI {
             ushort field87_0x276; // 0x00000276 length: 2
             ushort field88_0x278; // 0x00000278 length: 2
             ushort field89_0x27a; // 0x0000027A length: 2
-            MapColorRelatedStructure1 field90_0x27c[8]; // 0x0000027C length: 64
-            int field91_0x2bc; // 0x000002BC length: 4
-            int field92_0x2c0; // 0x000002C0 length: 4
+            MapColorRelatedStructure1 MinimapColorByLogicBit[8]; // 0x0000027C length: 64
+            int cachedKeepEnclosed; // 0x000002BC length: 4
+            int cachedMapOrientation; // 0x000002C0 length: 4
 
         } MiniMapDefinedData;
 #pragma pack(pop)

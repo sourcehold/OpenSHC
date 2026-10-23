@@ -9,7 +9,6 @@
 #pragma once
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -23,7 +22,6 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::Map::Moat;
     using OpenSHC::Map::PitchDitch;
@@ -65,7 +63,7 @@ namespace Map {
         byte WallOwnerLayer[80400]; // 0x002C6E50 length: 80400
         uchar LuminesenceLayer[80400]; // 0x002DA860 length: 80400
         uchar ShowHiLayer[80400]; // 0x002EE270 length: 80400
-        ushort MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
+        short MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
         byte DamageLayer[80400]; // 0x003290A0 length: 80400
         ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
         ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
@@ -106,49 +104,49 @@ namespace Map {
         undefined4 field68_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
-        undefined4 field78_0x55488c; // 0x0055488C length: 4
+        undefined4 gateOrientationVariant; // 0x0055488C length: 4
         undefined4 rockOrientation; // 0x00554890 length: 4
-        undefined4 field80_0x554894; // 0x00554894 length: 4
+        undefined4 editorRockType; // 0x00554894 length: 4
         undefined4 lastTime; // 0x00554898 length: 4
         int mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
-        int field84_0x5548a4; // 0x005548A4 length: 4
-        int field85_0x5548a8; // 0x005548A8 length: 4
-        int field86_0x5548ac; // 0x005548AC length: 4
-        int field87_0x5548b0; // 0x005548B0 length: 4
-        int field88_0x5548b4; // 0x005548B4 length: 4
+        int screenSouthEastDirection; // 0x005548A4 length: 4
+        int screenEastDirection; // 0x005548A8 length: 4
+        int screenSouthDirection; // 0x005548AC length: 4
+        int screenSouthWestDirection; // 0x005548B0 length: 4
+        int orientedRowStep; // 0x005548B4 length: 4
         undefined4 refreshCertainTileMap; // 0x005548B8 length: 4
         undefined4 refreshCertainTileMap_old; // 0x005548BC length: 4
         undefined4 counter1; // 0x005548C0 length: 4
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
-        undefined4 field93_0x5548c8; // 0x005548C8 length: 4
+        undefined4 disableElevationRendering; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
         undefined1 padding_0x5548d0[4]; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
-        undefined4 field101_0x5548dc; // 0x005548DC length: 4
+        undefined4 savedEditorActiveBrush; // 0x005548DC length: 4
         undefined4 editorActiveBrush; // 0x005548E0 length: 4
         MappersEnum currentMapperCommand; // 0x005548E4 length: 4
         undefined4 DAT_BuildingSize; // 0x005548E8 length: 4
-        undefined4 field105_0x5548ec; // 0x005548EC length: 4
+        undefined4 unitPlacementCount; // 0x005548EC length: 4
         BOOLEnum mapperMax; // 0x005548F0 length: 4
         undefined4 rockFlagStartNumber; // 0x005548F4 length: 4
         undefined4 unknownBrushRelated; // 0x005548F8 length: 4
-        undefined4 unknownZero_0x5548fc; // 0x005548FC length: 4
+        undefined4 editorSnapToMode; // 0x005548FC length: 4
         undefined4 unknownZero_0x554900; // 0x00554900 length: 4
-        undefined4 unknownZero_0x554904; // 0x00554904 length: 4
-        undefined4 field112_0x554908; // 0x00554908 length: 4
+        undefined4 editorAffectType; // 0x00554904 length: 4
+        undefined4 wallCornerRotation; // 0x00554908 length: 4
         undefined4 dragStartX; // 0x0055490C length: 4
         undefined4 dragStartY; // 0x00554910 length: 4
         undefined4 dragEndX; // 0x00554914 length: 4
         undefined4 dragEndY; // 0x00554918 length: 4
         BOOLEnum illegalBuild; // 0x0055491C length: 4
         undefined4 field118_0x554920; // 0x00554920 length: 4
-        undefined4 field119_0x554924; // 0x00554924 length: 4
+        undefined4 maxWallHeightInPath; // 0x00554924 length: 4
         undefined4 DAT_ClickedTileX; // 0x00554928 length: 4
         undefined4 DAT_ClickedTileY; // 0x0055492C length: 4
-        undefined4 field122_0x554930; // 0x00554930 length: 4
-        BOOLEnum buildingPlacementFail; // 0x00554934 length: 4
+        undefined4 skipPlacementCheck; // 0x00554930 length: 4
+        int buildingPlacementFail; // 0x00554934 length: 4
         BuildingFailReasonEnumInt buildingPlacementFailReason; // 0x00554938 length: 4
         undefined4 placementWarning; // 0x0055493C length: 4
         undefined4 uiBuildingRotation; // 0x00554940 length: 4
@@ -156,7 +154,7 @@ namespace Map {
         undefined4 buildingSpriteSheetID_1; // 0x00554948 length: 4
         undefined4 buildingSpriteID1; // 0x0055494C length: 4
         undefined4 buildingSpriteID2; // 0x00554950 length: 4
-        undefined4 field131_0x554954; // 0x00554954 length: 4
+        undefined4 cursorTargetID; // 0x00554954 length: 4
         undefined4 buildingHeightLimit; // 0x00554958 length: 4
         undefined4 buildingMinHeight; // 0x0055495C length: 4
         undefined4 buildingMaxHeight; // 0x00554960 length: 4
@@ -167,35 +165,35 @@ namespace Map {
         undefined4 buildingPlacementProperty_6; // 0x00554974 length: 4
         undefined4 buildingPlacementProperty_7; // 0x00554978 length: 4
         undefined1 padding_0x55497c[4]; // 0x0055497C length: 4
-        undefined4 field145_0x554980; // 0x00554980 length: 4
+        undefined4 wallDragButtonUp; // 0x00554980 length: 4
         int constructionTileCount; // 0x00554984 length: 4
         int DAT_WallTileCountCurrentDrag; // 0x00554988 length: 4
         undefined4 buildingX; // 0x0055498C length: 4
         undefined4 buildingY; // 0x00554990 length: 4
         undefined4 buildingRotationRelatedValue; // 0x00554994 length: 4
-        undefined4 field151_0x554998; // 0x00554998 length: 4
-        undefined4 field152_0x55499c; // 0x0055499C length: 4
-        undefined4 field153_0x5549a0; // 0x005549A0 length: 4
+        undefined4 placementOnWall; // 0x00554998 length: 4
+        undefined4 placementOnMoat; // 0x0055499C length: 4
+        undefined4 savedCursorTile; // 0x005549A0 length: 4
         int showNoRubbleWhenDestroyingBuilding; // 0x005549A4 length: 4
         undefined4 field155_0x5549a8; // 0x005549A8 length: 4
         undefined4 field156_0x5549ac; // 0x005549AC length: 4
         int wallPlacementCost; // 0x005549B0 length: 4
         int DAT_TempBuildingRotation; // 0x005549B4 length: 4
         int field159_0x5549b8; // 0x005549B8 length: 4
-        undefined4 unknownTime_0x5549bc; // 0x005549BC length: 4
-        undefined4 field161_0x5549c0; // 0x005549C0 length: 4
-        undefined4 field162_0x5549c4; // 0x005549C4 length: 4
-        undefined4 field163_0x5549c8; // 0x005549C8 length: 4
-        undefined4 field164_0x5549cc; // 0x005549CC length: 4
-        undefined4 field165_0x5549d0; // 0x005549D0 length: 4
+        undefined4 cursorAnimationTime; // 0x005549BC length: 4
+        undefined4 cursorOverlayAnimationFrame; // 0x005549C0 length: 4
+        undefined4 cursorOverlayImageBase; // 0x005549C4 length: 4
+        undefined4 cursorOverlayGmID; // 0x005549C8 length: 4
+        undefined4 flagAnimationDivisor; // 0x005549CC length: 4
+        undefined4 flagAnimationFrame; // 0x005549D0 length: 4
         undefined4 DAT_SelectionIconType; // 0x005549D4 length: 4
-        undefined4 field167_0x5549d8; // 0x005549D8 length: 4
+        undefined4 pendingUnitCommand; // 0x005549D8 length: 4
         undefined1 padding_0x5549dc[8]; // 0x005549DC length: 8
         int shiftRelated0or3; // 0x005549E4 length: 4
-        undefined4 field177_0x5549e8; // 0x005549E8 length: 4
-        undefined4 field178_0x5549ec; // 0x005549EC length: 4
-        undefined4 field179_0x5549f0; // 0x005549F0 length: 4
-        undefined4 field180_0x5549f4; // 0x005549F4 length: 4
+        undefined4 instructionTargetUnitID; // 0x005549E8 length: 4
+        undefined4 activeTacticalPower; // 0x005549EC length: 4
+        undefined4 instructionTargetX; // 0x005549F0 length: 4
+        undefined4 instructionTargetY; // 0x005549F4 length: 4
         undefined4 uiSelectedUnitIDUnk; // 0x005549F8 length: 4
         undefined4 DAT_SomeUNitUIDUIRelated; // 0x005549FC length: 4
         undefined4 field183_0x554a00; // 0x00554A00 length: 4
@@ -203,11 +201,11 @@ namespace Map {
         undefined4 field185_0x554a08; // 0x00554A08 length: 4
         int mapSize; // 0x00554A0C length: 4
         undefined4 field187_0x554a10; // 0x00554A10 length: 4
-        undefined4 field188_0x554a14; // 0x00554A14 length: 4
+        undefined4 skipPlacementFailChecks; // 0x00554A14 length: 4
         undefined1 padding_0x554a18[4]; // 0x00554A18 length: 4
-        undefined4 field193_0x554a1c; // 0x00554A1C length: 4
-        undefined4 field194_0x554a20; // 0x00554A20 length: 4
-        undefined4 field195_0x554a24; // 0x00554A24 length: 4
+        undefined4 decorationVariantIndex; // 0x00554A1C length: 4
+        undefined4 demolishBlocked; // 0x00554A20 length: 4
+        undefined4 clearKeepFootprintOnPlace; // 0x00554A24 length: 4
         undefined1 padding_0x554a28[8]; // 0x00554A28 length: 8
         int field204_0x554a30; // 0x00554A30 length: 4
         int DAT_SomeX; // 0x00554A34 length: 4
@@ -218,7 +216,7 @@ namespace Map {
         undefined4 DAT_CardinalTilesAroundTile; // 0x00554A44 length: 4
         undefined4 field213_0x554a48; // 0x00554A48 length: 4
         undefined1 padding_0x554a4c[4]; // 0x00554A4C length: 4
-        undefined2 field218_0x554a50; // 0x00554A50 length: 2
+        undefined2 gfxTileHeight; // 0x00554A50 length: 2
         undefined1 padding_0x554a52[6]; // 0x00554A52 length: 6
         pointer ptr_LogicLayer; // 0x00554A58 length: 4
         pointer ptr_TerrainTypeTileMap; // 0x00554A5C length: 4
@@ -634,7 +632,7 @@ namespace Map {
         BOOLEnum prepareAreaForBuildingPlacement(
             int playerID, uint x, uint y, MappersEnum commandBuildingType, int buildingWidthOrHeight);
 
-        void placeBuilding(PlayerID playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation);
+        void placeBuilding(int playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation);
 
         BOOLEnum processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5,
             int playerID, BOOLEnum aiBuildDelayRelated, int unitID);

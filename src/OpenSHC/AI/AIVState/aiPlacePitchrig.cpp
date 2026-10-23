@@ -29,6 +29,8 @@ namespace AI {
             Commands::M_MAPPER_PITCH_WORKINGS,
             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                 Commands::M_MAPPER_PITCH_WORKINGS),
+            // rotation 15 is a magic value: the building ends up with rotation 0
+            // unless DAT_TileMapState::skipPlacementCheck is set
             15);
     }
 

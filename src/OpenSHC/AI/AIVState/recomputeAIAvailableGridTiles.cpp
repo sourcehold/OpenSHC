@@ -34,7 +34,7 @@ namespace AI {
         while (this->algAIndex != this->algBIndex) {
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
+            this->visitCount = this->heatMaps[x][y].algorithmVisitCountUnk;
             if (this->visitCount > 40) {
                 break;
             }
@@ -51,40 +51,39 @@ namespace AI {
                     == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
-                int const impassable = (char)this->heatMaps[gridX][gridY].impassableCount;
+                int const impassable = this->heatMaps[gridX][gridY].impassableCount;
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const blockedCount
-                    = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - impassable;
+                int const blockedCount = this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - impassable;
                 if (blockedCount >= 16) {
                     continue;
                 }
-                if ((char)this->heatMaps[gridX][gridY].oilCount > 2
-                    && (char)this->heatMaps[gridX][gridY].marshCount >= 10 && blockedCount == 0) {
+                if (this->heatMaps[gridX][gridY].oilCount > 2 && this->heatMaps[gridX][gridY].marshCount >= 10
+                    && blockedCount == 0) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableOilGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].ironCount > 6 && blockedCount <= 4) {
+                } else if (this->heatMaps[gridX][gridY].ironCount > 6 && blockedCount <= 4) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableIronGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8 && blockedCount == 0) {
+                } else if (this->heatMaps[gridX][gridY].bouldersCount >= 8 && blockedCount == 0) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 40) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableBoulderGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].treeCount > 0 && blockedCount < 6) {
+                } else if (this->heatMaps[gridX][gridY].treeCount > 0 && blockedCount < 6) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableTreeGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].oasisScrubCount >= 25
-                    && (char)this->heatMaps[gridX][gridY].oasisThickScrubCount >= 14 && blockedCount == 0
+                } else if (this->heatMaps[gridX][gridY].oasisScrubCount >= 25
+                    && this->heatMaps[gridX][gridY].oasisThickScrubCount >= 14 && blockedCount == 0
                     && this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
@@ -94,12 +93,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if ((int)this->algBIndex >= 6400) {
+                if (this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if ((int)this->algAIndex >= 6400) {
+            if (this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }

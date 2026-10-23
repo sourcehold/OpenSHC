@@ -17,8 +17,8 @@ namespace AI {
             return FALSE;
         }
         MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
-            (short)DAT_BuildingsState::instance.buildings[guildID].x / 5,
-            (short)DAT_BuildingsState::instance.buildings[guildID].y / 5);
+            DAT_BuildingsState::instance.buildings[guildID].x / 5,
+            DAT_BuildingsState::instance.buildings[guildID].y / 5);
         if (this->buildingApproriateGridXPosition == -1) {
             return FALSE;
         }

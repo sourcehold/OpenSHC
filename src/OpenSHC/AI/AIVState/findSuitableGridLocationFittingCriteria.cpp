@@ -26,7 +26,7 @@ namespace AI {
         while (this->algAIndex != this->algBIndex) {
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
+            this->visitCount = this->heatMaps[x][y].algorithmVisitCountUnk;
             for (int direction = 0; direction < 8; ++direction) {
                 uint const candidateX
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
@@ -35,8 +35,7 @@ namespace AI {
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX > 79 || candidateY > 79)) {
                     continue;
                 }
-                int const notInLargestArea
-                    = (char)this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
+                int const notInLargestArea = this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
                 if (this->heatMaps[candidateX][candidateY].algorithmIterationNumber
                     == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
@@ -51,7 +50,7 @@ namespace AI {
                     && !this->heatMaps[candidateX][candidateY].isNotNearEdgeUnk
                     && !this->heatMaps[candidateX][candidateY].destructionBasedPlacementCooldown
                     && !this->heatMaps[candidateX][candidateY].treeCount
-                    && (char)this->heatMaps[candidateX][candidateY].bouldersCount <= 0 && !notInLargestArea) {
+                    && this->heatMaps[candidateX][candidateY].bouldersCount <= 0 && !notInLargestArea) {
                     this->buildingApproriateGridXPosition = candidateX;
                     this->buildingAppropriateGridYPosition = candidateY;
                     return;
@@ -60,12 +59,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = candidateX;
                 this->heatMapYArray[this->algBIndex] = candidateY;
                 ++this->algBIndex;
-                if ((int)this->algBIndex >= 6400) {
+                if (this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if ((int)this->algAIndex >= 6400) {
+            if (this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }

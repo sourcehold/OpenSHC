@@ -24,7 +24,7 @@ namespace AI {
             return FALSE;
         }
         return MACRO_CALL_MEMBER(AIVState_Func::findSuitableFarmLocationAndPlaceFarm, this)(playerID, buildingType)
-            != 0;
+            != FALSE;
     }
 
 }

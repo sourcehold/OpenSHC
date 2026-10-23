@@ -19,11 +19,11 @@ namespace Audio {
                 || DAT_GameCore::ptr->gameMode_2 == Game::GM_SIEGE_THAT) {
                 return;
             }
-            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 != 5
-                || DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 != 0) {
+            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState != 5
+                || DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.battleEndHandled != 0) {
                 return;
             }
-            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 = 1;
+            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.battleEndHandled = 1;
             if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
                 int const volumeLevel = DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel;
                 if (volumeLevel < 1 || volumeLevel > 5) {
@@ -31,7 +31,7 @@ namespace Audio {
                 }
 
                 MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
-                DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
+                DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState = 1;
                 if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
                     return;
                 }
@@ -41,7 +41,7 @@ namespace Audio {
             case 1:
                 if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
-                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
+                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState = 1;
                 } else {
                     MACRO_CALL_MEMBER(SoundSystem_Func::stopMusicPlayback, this)();
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier, this)(
@@ -61,7 +61,7 @@ namespace Audio {
                         DAT_SoundEffectsHelperData1::ptr->DAT_WinMusicVariation = 0;
                     }
                 } else {
-                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
+                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState = 1;
                 }
                 MACRO_CALL_MEMBER(SFX::SFXState_Func::playVictoryMusic678, DAT_SFXState::ptr)();
                 break;

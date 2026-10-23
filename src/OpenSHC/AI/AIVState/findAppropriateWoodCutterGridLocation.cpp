@@ -34,7 +34,7 @@ namespace AI {
         while (this->algAIndex != this->algBIndex) {
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
+            this->visitCount = this->heatMaps[x][y].algorithmVisitCountUnk;
             if (this->visitCount > 40) {
                 break;
             }
@@ -52,13 +52,13 @@ namespace AI {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                char const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
+                char const notInLargestArea = this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 if (notInLargestArea >= 16 || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown) {
                     continue;
                 }
-                if (notInLargestArea < 6 && (char)this->heatMaps[gridX][gridY].treeCount > 0) {
+                if (notInLargestArea < 6 && this->heatMaps[gridX][gridY].treeCount > 0) {
                     ++foundCount;
-                    int score = (char)this->heatMaps[gridX][gridY].treeCount * 5 - this->visitCount * 3;
+                    int score = this->heatMaps[gridX][gridY].treeCount * 5 - this->visitCount * 3;
                     // prefer cells that were not used for a woodcutter recently
                     if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
                         if (score > 0) {
@@ -81,12 +81,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if ((int)this->algBIndex >= 6400) {
+                if (this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if ((int)this->algAIndex >= 6400) {
+            if (this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }

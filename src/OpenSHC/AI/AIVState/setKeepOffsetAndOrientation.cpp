@@ -18,7 +18,10 @@ namespace AI {
         // orient the castle towards the map center
         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
             DAT_DirectionAlgorithmState::ptr)(keepX, keepY, 200, 200);
+        // the orientation is one of the 8 compass directions; clearing the low bit snaps a diagonal onto the
+        // preceding cardinal direction, so only 0, 2, 4 and 6 remain
         this->aivs[aivID].keepOrientation = DAT_DirectionAlgorithmState::instance.orientation & 0xfffe;
+        // east and west are swapped relative to the direction algorithm's numbering
         if (this->aivs[aivID].keepOrientation == 6) {
             this->aivs[aivID].keepOrientation = 2;
             return;

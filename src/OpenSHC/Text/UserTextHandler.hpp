@@ -30,7 +30,7 @@ namespace Text {
         int textCursorIndexArray[16]; // 0x000000D0 length: 64
         int textBoxMaxTextWidthDimensionArray[16]; // 0x00000110 length: 64
         char textArray[16][250]; // 0x00000150 length: 4000
-        char inputBuffer[30]; // 0x000010F0 length: 30
+        byte inputBuffer[30]; // 0x000010F0 length: 30
         undefined1 padding_0x110e[2]; // 0x0000110E length: 2
         int inputBufferIndex; // 0x00001110 length: 4
 
@@ -42,7 +42,7 @@ namespace Text {
         UserTextHandler() {};
         ~UserTextHandler() {};
 
-        void FUN_004694a0();
+        void Constructor_UserTextHandler();
 
         void resetToTextIndex(int textIndex);
 
@@ -50,7 +50,7 @@ namespace Text {
 
         char* getTextArrayPointer(int param_1);
 
-        void setTextEntryAndUpdateCursor(undefined4 param_1, undefined4 param_2);
+        void setTextEntryAndUpdateCursor(int textIndex, char* text);
 
         int getCurrentFontSize();
 
@@ -70,7 +70,7 @@ namespace Text {
 
         void handleCharacterIntoInputBuffer(int characterCode);
 
-        uint dequeueInputBufferChar();
+        int dequeueInputBufferChar();
 
         int getTextWidthUntilCurrentCursor();
 

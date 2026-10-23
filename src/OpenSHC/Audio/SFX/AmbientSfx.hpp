@@ -16,10 +16,10 @@ namespace Audio {
         // SIZE: 0x00000048
         typedef struct AmbientSfx {
 
-            int field0_0x0; // 0x00000000 length: 4
+            int variationCount; // 0x00000000 length: 4
             char* ambientWavs_0x8[8]; // 0x00000004 length: 32
             int volumeUnk_0x28[8]; // 0x00000024 length: 32
-            int field3_0x44; // 0x00000044 length: 4
+            int variationIndex; // 0x00000044 length: 4
 
         } AmbientSfx;
 #pragma pack(pop)
