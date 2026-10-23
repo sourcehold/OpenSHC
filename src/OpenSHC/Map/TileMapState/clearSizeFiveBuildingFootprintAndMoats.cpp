@@ -27,8 +27,8 @@ namespace Map {
                 buildingSizeTileIndex, 5);
             int targetedTile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            short buildingID = this->BuildingLayer[targetedTile];
-            short variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
+            int buildingID = this->BuildingLayer[targetedTile];
+            int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
             this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] & ~L_BUILDING;
             if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation / 2][buildingSizeTileIndex]
                 != 0) {
