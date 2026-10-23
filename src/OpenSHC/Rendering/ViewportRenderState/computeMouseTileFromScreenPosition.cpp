@@ -39,10 +39,7 @@ namespace Rendering {
                 quadrantX = (int)((viewportXInTile + screenX * 2) - this->windowX) >> 1 & 0xf;
             }
 
-            uint viewportYInTile = this->viewportState.viewportY & 0x8000000f;
-            if ((int)viewportYInTile < 0) {
-                viewportYInTile = (viewportYInTile - 1 | 0xfffffff0) + 1;
-            }
+            uint viewportYInTile = (int)this->viewportState.viewportY % 16;
             int probeOffset = probeScreenY - screenY;
             int probeDoubledY = screenY + probeScreenY;
             if (DAT_TileMapState::instance.mapOrientation == 0) {
@@ -68,14 +65,12 @@ namespace Rendering {
                     int unclampedY = (this->viewportState.viewportY - this->windowY) + 8 + probeScreenY;
                     tileRowY = (viewportYInTile - this->windowY) + -8 + probeScreenY;
                     int unclampedX = (screenX - this->windowX) + this->viewportState.viewportX;
-                    lookupIndex = ((int)(unclampedX + (unclampedX >> 0x1f & 0x1fU)) >> 5)
-                        + ((int)(unclampedY + (unclampedY >> 0x1f & 0xfU)) >> 4) * 0x191 + orientationBase;
+                    lookupIndex = (unclampedX / 32) + (unclampedY / 16) * 0x191 + orientationBase;
                 } else {
                     int unclampedX = ((screenX * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
                     tileRowY = (viewportYInTile - this->windowY) + probeDoubledY;
                     int unclampedY = (probeDoubledY - this->windowY) + this->viewportState.viewportY;
-                    lookupIndex = ((int)(unclampedY + (unclampedY >> 0x1f & 0xfU)) >> 4) * 0x191
-                        + ((int)(unclampedX + (unclampedX >> 0x1f & 0x1fU)) >> 5) + orientationBase;
+                    lookupIndex = (unclampedY / 16) * 0x191 + (unclampedX / 32) + orientationBase;
                 }
 
                 int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[tileRowY & 0xf][quadrantX];
@@ -118,10 +113,7 @@ namespace Rendering {
             this->viewportState.cursorTile = foundTile;
             if (DAT_TileMapState::instance.PathConnectionLayer[foundTile] == 0
                 || (DAT_TileMapState::instance.LogicLayer[foundTile] & 0x200U) != 0) {
-                uint direction = DAT_TileMapState::instance.screenSouthEastDirection + 4U & 0x80000007;
-                if ((int)direction < 0) {
-                    direction = (direction - 1 | 0xfffffff8) + 1;
-                }
+                uint direction = (DAT_TileMapState::instance.screenSouthEastDirection + 4) % 8;
                 uint tileFlags = DAT_TileMapState::instance.LogicLayer[foundTile];
                 int neighbourTile
                     = DAT_TileMapState::instance
