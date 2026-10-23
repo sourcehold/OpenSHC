@@ -81,7 +81,7 @@ namespace Map {
         }
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(iVar3, 3);
-            param_3._0_2_ = (short)buildingID;
+            *(short*)&param_3 = (short)buildingID;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + uVar2].addXgetTile
                 + this->buildingX + param_2;
             this->HeightLayer[iVar5] = (byte)param_7;
@@ -117,7 +117,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[param_1].currentPopulation
                 || (DAT_GameState::instance.playerDataArray[param_1].popularity < 5000)))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, (TextMessageBLLookupStructUnion)0x0, 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
         return;
     }
