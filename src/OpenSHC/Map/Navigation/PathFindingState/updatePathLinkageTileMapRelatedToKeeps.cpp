@@ -17,11 +17,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A1C0
         void PathFindingState::updatePathLinkageTileMapRelatedToKeeps(int buildingID)
         {
-            uint uVar2;
             int iVar3;
             int iVar4;
-            short _orientation;
-            _orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
+            short _orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
             if (_orientation == 4) {
                 iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y + -1;
                 iVar3 = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
@@ -39,7 +37,7 @@ namespace Map {
                 iVar4 = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
                     + (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
             } else {
-                uVar2 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+                uint uVar2 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
                 if (_orientation != 2) {
                     iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y + (int)uVar2 + -1;
                     iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x + (int)uVar2 / 2;
