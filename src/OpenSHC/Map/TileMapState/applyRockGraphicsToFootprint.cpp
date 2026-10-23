@@ -36,7 +36,7 @@ namespace Map {
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
                 + this->buildingX;
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
-                if (this->field93_0x5548c8 == 0) {
+                if (this->disableElevationRendering == 0) {
                     this->GfxLayer[tile]
                         = ((short)GMTotalPicturesProcessed::instance[DAT_LandscapeState::instance.rocks[rockID]
                                    .unknownGMID]

@@ -38,7 +38,8 @@ namespace Map {
         /* the original reuses the brush parameter to hold the lowest height seen */
         brush = 200;
         for (int index = 0; index < brushSize; index++) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&y, baseTile, baseY);
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
                 int height = this->HeightLayer[tile];
                 if (height > highest) {
@@ -54,20 +55,20 @@ namespace Map {
         tile = baseTile;
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&y, baseTile, baseY);
             int brushTile = tile;
             uint logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
-            if ((logic & (L_SEA | L_MARSH)) != 0 && this->unknownZero_0x554904 == 0) {
+            if ((logic & (L_SEA | L_MARSH)) != 0 && this->editorAffectType == 0) {
                 continue;
             }
-            if ((logic & (L_SEA | L_MARSH)) == 0 && this->unknownZero_0x554904 == 1) {
+            if ((logic & (L_SEA | L_MARSH)) == 0 && this->editorAffectType == 1) {
                 continue;
             }
-            if ((logic
-                    & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
+            if ((logic & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
                 != 0) {
                 continue;
             }
@@ -111,7 +112,8 @@ namespace Map {
 
             /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
             MACRO_MARK_CHANGED_NEIGHBOURS()
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(brushY, brushTile);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                DAT_PathFindingState::ptr)(brushY, brushTile);
         }
     }
 

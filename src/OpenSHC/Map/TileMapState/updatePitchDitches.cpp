@@ -4,8 +4,8 @@
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
-#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -51,13 +51,14 @@ namespace Map {
                     for (int i = 0; i < 4; i++) {
                         int neighbour = DAT_ViewportRenderState::instance
                                             .translationMatrix[this->pitchDitches[id].y
-                                                + DAT_TerrainDefinedData::instance.field2477_0x376c[i].y]
+                                                + DAT_TerrainDefinedData::instance.field2346_0x376c[i].y]
                                             .addXgetTile
-                            + this->pitchDitches[id].x + DAT_TerrainDefinedData::instance.field2477_0x376c[i].x;
+                            + this->pitchDitches[id].x + DAT_TerrainDefinedData::instance.field2346_0x376c[i].x;
                         if ((this->LogicLayer[neighbour] & L_PLAIN2_AND_PITCH) == 0) {
                             continue;
                         }
-                        int other = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(neighbour);
+                        int other = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(
+                            neighbour);
                         if (other == 0 || this->pitchDitches[other].state != 1) {
                             continue;
                         }

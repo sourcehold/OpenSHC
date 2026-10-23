@@ -65,8 +65,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(
-                1, 0x4d, 1, OpenSHC::UI::TextMessageBLLookupStructUnion(), 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

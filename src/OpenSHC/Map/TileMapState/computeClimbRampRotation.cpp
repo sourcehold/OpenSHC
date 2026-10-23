@@ -21,7 +21,7 @@ namespace Map {
             height = this->DefaultHeightLayer[tile];
         }
 
-        int neighbour = this->directionTranslationMatrix[y][this->field86_0x5548ac] + tile;
+        int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tile;
         uint heightAt86;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt86 = this->HeightLayer[neighbour];
@@ -29,7 +29,7 @@ namespace Map {
             heightAt86 = this->DefaultHeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->field85_0x5548a8] + tile;
+        neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tile;
         uint heightAt85;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt85 = this->HeightLayer[neighbour];
@@ -37,7 +37,7 @@ namespace Map {
             heightAt85 = this->DefaultHeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->field84_0x5548a4] + tile;
+        neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tile;
         uint heightAt84;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt84 = this->HeightLayer[neighbour];
@@ -71,23 +71,23 @@ namespace Map {
 
         if (this->mapOrientation == 0) {
             if (rotation == 1) {
-                this->field112_0x554908 = 0x20 - (x & 0x1f);
+                this->wallCornerRotation = 0x20 - (x & 0x1f);
             } else {
-                this->field112_0x554908 = 0x20 - (y & 0x1f);
+                this->wallCornerRotation = 0x20 - (y & 0x1f);
             }
         } else if (this->mapOrientation == 4) {
             if (rotation == 1) {
-                this->field112_0x554908 = (x & 0x1f) + 1;
+                this->wallCornerRotation = (x & 0x1f) + 1;
             } else {
-                this->field112_0x554908 = (y & 0x1f) + 1;
+                this->wallCornerRotation = (y & 0x1f) + 1;
             }
         } else if (this->mapOrientation == 2) {
-            this->field112_0x554908 = (y & 0x1f) + 1;
+            this->wallCornerRotation = (y & 0x1f) + 1;
         } else {
-            this->field112_0x554908 = 0x20 - (y & 0x1f);
+            this->wallCornerRotation = 0x20 - (y & 0x1f);
         }
-        if (this->field112_0x554908 > 0x1f) {
-            this->field112_0x554908 = 1;
+        if (this->wallCornerRotation > 0x1f) {
+            this->wallCornerRotation = 1;
         }
         return rotation;
     }

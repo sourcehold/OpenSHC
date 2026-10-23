@@ -61,7 +61,7 @@ namespace Map {
                 != OpenSHC::Map::Buildings::BT_KILLINGPIT) {
             this->buildingPlacementFail = TRUE;
         }
-        this->field131_0x554954 = buildingID;
+        this->cursorTargetID = buildingID;
     }
 
 }

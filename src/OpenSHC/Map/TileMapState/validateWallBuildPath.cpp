@@ -50,8 +50,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x005029D0
-    void TileMapState::validateWallBuildPath(
-        int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
+    void TileMapState::validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
     {
         int budget = 0;
         int overshoot = 2;
@@ -82,14 +81,16 @@ namespace Map {
         this->DAT_SomeTile = tile;
         if ((short)command == 0x1b) {
             /* a stair needs an enclosed wall to lean against, and enough height on it */
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(tile, y1) == FALSE) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(tile, y1)
+                == FALSE) {
                 return;
             }
-            this->field119_0x554924 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getMaxWallHeightInBrushArea, this)(tile, y1);
-            if (this->field119_0x554924 < 0x11) {
+            this->maxWallHeightInPath
+                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getMaxWallHeightInBrushArea, this)(tile, y1);
+            if (this->maxWallHeightInPath < 0x11) {
                 return;
             }
-            budget = this->field119_0x554924;
+            budget = this->maxWallHeightInPath;
         } else if ((short)command == 0x1a
             && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y1) == 0) {
             this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
@@ -145,20 +146,21 @@ namespace Map {
                 return;
             }
             if (this->UnitLayer[tile] != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0
-                && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType != OpenSHC::Map::Units::UT_CHICKEN) {
+                && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType
+                    != OpenSHC::Map::Units::UT_CHICKEN) {
                 return;
             }
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
-                       playerID, x, y, enemyRange)
+                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
+                       DAT_PathFindingState::ptr)(playerID, x, y, enemyRange)
                     != FALSE) {
                 this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
                 return;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange, DAT_PathFindingState::ptr)(
-                        playerID, x, y, searchRange, -1, -1, -1)
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
+                        DAT_PathFindingState::ptr)(playerID, x, y, searchRange, -1, -1, -1)
                     != 0) {
                     if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)0x12) {
                         return;
@@ -167,9 +169,10 @@ namespace Map {
                     return;
                 }
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                    int buildRange = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
-                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange, DAT_PathFindingState::ptr)(
-                            playerID, x, y, buildRange)
+                    int buildRange
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
+                            DAT_PathFindingState::ptr)(playerID, x, y, buildRange)
                         != 0) {
                         if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)0x12) {
                             return;
@@ -180,20 +183,20 @@ namespace Map {
                 }
             }
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange, DAT_PathFindingState::ptr)(
-                       playerID, x, y, 7, -1, -1, -1)
+                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
+                       DAT_PathFindingState::ptr)(playerID, x, y, 7, -1, -1, -1)
                     != 0) {
                 this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
                 return;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk, DAT_PathFindingState::ptr)(
-                    playerID, x, y, 2)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
+                    DAT_PathFindingState::ptr)(playerID, x, y, 2)
                 != 0) {
                 this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
                 return;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance, DAT_PathFindingState::ptr)(
-                    x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
+                    DAT_PathFindingState::ptr)(x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
                 != FALSE) {
                 this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x15;
                 return;

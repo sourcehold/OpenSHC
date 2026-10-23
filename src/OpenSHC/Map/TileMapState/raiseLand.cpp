@@ -39,8 +39,8 @@ namespace Map {
             int brushTile = tile;
             uint logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) == 0
-                && ((logic & (L_SEA | L_MARSH)) == 0 || this->unknownZero_0x554904 != 0)
-                && ((logic & (L_SEA | L_MARSH)) != 0 || this->unknownZero_0x554904 != 1)
+                && ((logic & (L_SEA | L_MARSH)) == 0 || this->editorAffectType != 0)
+                && ((logic & (L_SEA | L_MARSH)) != 0 || this->editorAffectType != 1)
                 && (logic
                        & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
                     == 0

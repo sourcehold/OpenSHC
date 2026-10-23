@@ -1,7 +1,7 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
-
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -10,6 +10,12 @@
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Map::LogicHelpers::L_BUILDING;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_DAIRY;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_WHEAT;
 
     /*
       WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -21,12 +27,12 @@ namespace Map {
     void TileMapState::clearBuildingTilesAndTrees(int buildingID, int surfaceArea)
     {
         int _treeID;
-        Building* _pTileRef;
+        int* _pTileRef;
         int _tile;
         if (0 < surfaceArea) {
-            _pTileRef = &DAT_BuildingsState::instance.buildings[buildingID];
+            _pTileRef = DAT_BuildingsState::instance.buildings[buildingID].tileRefs;
             do {
-                _tile = _pTileRef->tileRefs[0];
+                _tile = _pTileRef[0];
                 if ((((this->LogicLayer[_tile] & L_FARM_FIELD_APPLE) != 0)
                         && (_treeID = (int)this->OrganismLayer[_tile], _treeID != 0))
                     && (_treeID < 2000)) {
@@ -47,7 +53,7 @@ namespace Map {
                 /*
                   process next tile
                  */
-                _pTileRef = &_pTileRef->tileRefs[1];
+                _pTileRef = &_pTileRef[1];
                 surfaceArea = surfaceArea + -1;
             } while (surfaceArea != 0);
         }

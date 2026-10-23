@@ -30,32 +30,32 @@ namespace Map {
         DAT_BuildingsState::instance.field4_0x10 = 5;
         switch (this->mapOrientation) {
         case 0:
-            this->field84_0x5548a4 = 3;
-            this->field88_0x5548b4 = 1;
-            this->field85_0x5548a8 = 2;
-            this->field86_0x5548ac = 4;
-            this->field87_0x5548b0 = 5;
+            this->screenSouthEastDirection = 3;
+            this->orientedRowStep = 1;
+            this->screenEastDirection = 2;
+            this->screenSouthDirection = 4;
+            this->screenSouthWestDirection = 5;
             return;
         case 2:
-            this->field84_0x5548a4 = 5;
-            this->field88_0x5548b4 = 1;
-            this->field85_0x5548a8 = 4;
-            this->field86_0x5548ac = 6;
-            this->field87_0x5548b0 = 7;
+            this->screenSouthEastDirection = 5;
+            this->orientedRowStep = 1;
+            this->screenEastDirection = 4;
+            this->screenSouthDirection = 6;
+            this->screenSouthWestDirection = 7;
             return;
         case 4:
-            this->field84_0x5548a4 = 7;
-            this->field85_0x5548a8 = 6;
-            this->field86_0x5548ac = 0;
-            this->field87_0x5548b0 = 1;
-            this->field88_0x5548b4 = -1;
+            this->screenSouthEastDirection = 7;
+            this->screenEastDirection = 6;
+            this->screenSouthDirection = 0;
+            this->screenSouthWestDirection = 1;
+            this->orientedRowStep = -1;
             return;
         case 6:
-            this->field84_0x5548a4 = 1;
-            this->field85_0x5548a8 = 0;
-            this->field86_0x5548ac = 2;
-            this->field87_0x5548b0 = 3;
-            this->field88_0x5548b4 = -1;
+            this->screenSouthEastDirection = 1;
+            this->screenEastDirection = 0;
+            this->screenSouthDirection = 2;
+            this->screenSouthWestDirection = 3;
+            this->orientedRowStep = -1;
         }
     }
 

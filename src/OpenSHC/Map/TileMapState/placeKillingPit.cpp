@@ -30,15 +30,16 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x00514520
-    void TileMapState::placeKillingPit(int playerID, uint x, uint y, undefined4 buildingType, uint sizeIndex,
-        int buildingState, int height)
+    void TileMapState::placeKillingPit(
+        int playerID, uint x, uint y, undefined4 buildingType, uint sizeIndex, int buildingState, int height)
     {
         /* the original masks the terrain bits once, before the building is even created */
         int grassOrScrub = this->Logic2Layer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
             & (OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB);
         int index = 0;
-        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y, height,
-            (BuildingType)(int)(short)buildingType, sizeIndex, playerID, buildingState);
+        int buildingID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            playerID, x, y, height, (BuildingType)(int)(short)buildingType, sizeIndex, playerID, buildingState);
         this->placedBuildingID = buildingID;
         if ((short)buildingType != 0x43) {
             height = height - 4;
@@ -49,7 +50,8 @@ namespace Map {
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
             if (index < 0x24) {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             }
@@ -80,8 +82,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(
-                1, 0x4d, 1, OpenSHC::UI::TextMessageBLLookupStructUnion(), 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

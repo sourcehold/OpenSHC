@@ -45,8 +45,8 @@ namespace Map {
         }
 
         for (int index = 0; index < 4; index++) {
-            int fromXPosition = DAT_TerrainDefinedData::instance.field2478_0x378c[index].x + x2;
-            int fromYPosition = DAT_TerrainDefinedData::instance.field2478_0x378c[index].y + y2;
+            int fromXPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].x + x2;
+            int fromYPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
             if (this->PathConnectionLayer[tile] != area) {
                 continue;
@@ -69,8 +69,8 @@ namespace Map {
         }
 
         if (bestIndex >= 0) {
-            this->field155_0x5549a8 = DAT_TerrainDefinedData::instance.field2478_0x378c[bestIndex].x + x2;
-            this->field156_0x5549ac = DAT_TerrainDefinedData::instance.field2478_0x378c[bestIndex].y + y2;
+            this->field155_0x5549a8 = DAT_TerrainDefinedData::instance.field2347_0x378c[bestIndex].x + x2;
+            this->field156_0x5549ac = DAT_TerrainDefinedData::instance.field2347_0x378c[bestIndex].y + y2;
             return 1;
         }
         this->field155_0x5549a8 = x2;

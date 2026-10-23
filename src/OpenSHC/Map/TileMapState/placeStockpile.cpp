@@ -31,8 +31,8 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x00508540
-    void TileMapState::placeStockpile(int playerID, int x, int y, undefined4 buildingType, undefined4 param_5,
-        int variation, int averageHeight)
+    void TileMapState::placeStockpile(
+        int playerID, int x, int y, undefined4 buildingType, undefined4 param_5, int variation, int averageHeight)
     {
         int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
         byte height = (char)averageHeight + 10;
@@ -41,18 +41,22 @@ namespace Map {
 
         int buildingID;
         for (int part = 0; part < 4; part++) {
-            buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID,
-                DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].x + x, DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y + y,
-                averageHeight + 10, (BuildingType)type, 2, playerID, variation);
+            buildingID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID,
+                DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].x + x,
+                DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y + y, averageHeight + 10,
+                (BuildingType)type, 2, playerID, variation);
             DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uid;
             DAT_BuildingsState::instance.buildings[buildingID].field125_0x190 = part + 1;
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 2);
                 index++;
-                int tile = DAT_ViewportRenderState::instance
-                               .translationMatrix[DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y + this->buildingY + y]
-                               .addXgetTile
+                int tile
+                    = DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y
+                              + this->buildingY + y]
+                          .addXgetTile
                     + DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].x + x + this->buildingX;
                 this->HeightLayer[tile] = height;
                 /* the stockpile body itself cannot be walked over */
@@ -68,7 +72,9 @@ namespace Map {
         this->placedBuildingID = buildingID;
         /* the surrounding tiles carry the stockpile graphic but stay walkable */
         for (int slot = 0; slot < 9; slot++) {
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y].addXgetTile
+            int tile = DAT_ViewportRenderState::instance
+                           .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y]
+                           .addXgetTile
                 + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].x + x;
             this->LogicLayer[tile] = this->LogicLayer[tile] | (L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = height;
@@ -85,8 +91,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(
-                1, 0x4d, 1, OpenSHC::UI::TextMessageBLLookupStructUnion(), 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

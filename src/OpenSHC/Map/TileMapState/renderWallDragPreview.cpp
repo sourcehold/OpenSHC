@@ -1,6 +1,5 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
-
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -22,8 +21,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8BD0
-    void TileMapState::renderWallDragPreview(
-        int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
+    void TileMapState::renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
     {
         int budget = 0;
         if (x1 > 399 || y1 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
@@ -36,7 +34,7 @@ namespace Map {
         this->DAT_WallTileCountCurrentDrag = 0;
         int overshoot = 2;
         if ((short)command == 0x1b) {
-            budget = this->field119_0x554924;
+            budget = this->maxWallHeightInPath;
             if (this->field118_0x554920 == 0) {
                 this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1]
                     = (short)GMTotalPicturesProcessed::instance[6] + 0x13;
@@ -88,7 +86,8 @@ namespace Map {
                             if (steps > 10) {
                                 steps = 10;
                             }
-                            this->ConstructionGFXLayer[tile] = (short)steps + 8 + (ushort)GMTotalPicturesProcessed::instance[6];
+                            this->ConstructionGFXLayer[tile]
+                                = (short)steps + 8 + (ushort)GMTotalPicturesProcessed::instance[6];
                         } else {
                             this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
                         }
@@ -175,16 +174,16 @@ namespace Map {
         if (this->illegalBuild != FALSE) {
             this->DAT_WallTileCountCurrentDrag = 0;
         }
-        if (this->field145_0x554980 != 0) {
+        if (this->wallDragButtonUp != 0) {
             return;
         }
         if ((short)command == 0x2e) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss, DAT_BuildingsState::ptr)(
-                playerID, 0, this->DAT_WallTileCountCurrentDrag, 1);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+                DAT_BuildingsState::ptr)(playerID, 0, this->DAT_WallTileCountCurrentDrag, 1);
             return;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss, DAT_BuildingsState::ptr)(
-            playerID, this->DAT_WallTileCountCurrentDrag, 0, 1);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+            DAT_BuildingsState::ptr)(playerID, this->DAT_WallTileCountCurrentDrag, 0, 1);
     }
 
 }

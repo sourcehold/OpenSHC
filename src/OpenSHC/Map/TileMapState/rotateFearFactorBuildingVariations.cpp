@@ -23,7 +23,7 @@ namespace Map {
           biased by M_MAPPER_GARDEN1. The "- 1 & 6" forms are the original's setcc/dec/and idiom.
         */
         DWORD now = timeGetTime();
-        if (this->field80_0x554894 == 5) {
+        if (this->editorRockType == 5) {
             if (this->rockOrientation == 0) {
                 this->rockOrientation = 2;
             } else if (this->rockOrientation == 2) {
@@ -37,8 +37,8 @@ namespace Map {
         }
 
         this->lastTime = now;
-        this->field78_0x55488c = (this->field78_0x55488c == 0x50) + 0x50;
-        if (this->field80_0x554894 == 0) {
+        this->gateOrientationVariant = (this->gateOrientationVariant == 0x50) + 0x50;
+        if (this->editorRockType == 0) {
             if (this->rockOrientation == 0) {
                 this->rockOrientation = 2;
             } else if (this->rockOrientation == 2) {

@@ -40,22 +40,25 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x00508250
-    void TileMapState::placeQuarry(int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize,
-        int buildingOrientation, uint height)
+    void TileMapState::placeQuarry(
+        int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize, int buildingOrientation, uint height)
     {
         uint baseY = y;
         int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
-        int quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y, height,
-            (BuildingType)(int)(short)buildingType, buildingSize, playerID, buildingOrientation);
+        int quarryID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y,
+            height, (BuildingType)(int)(short)buildingType, buildingSize, playerID, buildingOrientation);
         this->placedBuildingID = quarryID;
         DAT_BuildingsState::instance.buildings[quarryID].uidWhenPlaced = uid;
 
         int index = 0;
         do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, buildingSize);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                index, buildingSize);
             /* the original reuses the y parameter to hold the truncated building id */
             y = (short)quarryID;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + baseY].addXgetTile + x + this->buildingX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + baseY].addXgetTile + x
+                + this->buildingX;
             index++;
             this->HeightLayer[tile] = (byte)height;
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
@@ -69,7 +72,8 @@ namespace Map {
         /* nine attempts at a pile location, moving further from the quarry each time */
         int attempt = 1;
         do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findQuarryPileLocation, DAT_BuildingsState::ptr)(
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::findQuarryPileLocation, DAT_BuildingsState::ptr)(
                 playerID, x, baseY, buildingSize, 2, attempt, OpenSHC::Commands::M_MAPPER_QUARRYPILE);
             if (this->buildingPlacementFail == FALSE) {
                 break;
@@ -87,8 +91,10 @@ namespace Map {
         uint highest = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(buildingSize, 2);
-            uint tileHeight = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + pileY].addXgetTile
-                + pileX + this->buildingX];
+            uint tileHeight
+                = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + pileY]
+                                        .addXgetTile
+                    + pileX + this->buildingX];
             if (highest < tileHeight) {
                 highest = tileHeight;
             }
@@ -100,15 +106,16 @@ namespace Map {
         int pileHeight = (int)(highest - height) / 2 + height;
 
         buildingSize = 0;
-        int pileID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, pileX, pileY,
-            pileHeight, OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE, 2, playerID, buildingOrientation);
-        MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::incrementStructureHeatMapTile, DAT_AIVState::ptr)(
-            pileX, pileY);
+        int pileID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, pileX,
+            pileY, pileHeight, OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE, 2, playerID, buildingOrientation);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::incrementStructureHeatMapTile, DAT_AIVState::ptr)(pileX, pileY);
         DAT_BuildingsState::instance.buildings[pileID].uidWhenPlaced = uid;
         DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID = (short)pileID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(buildingSize, 2);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + pileY].addXgetTile + pileX + this->buildingX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + pileY].addXgetTile + pileX
+                + this->buildingX;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
             this->HeightLayer[tile] = (byte)pileHeight;
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
@@ -128,8 +135,7 @@ namespace Map {
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             /* "Not enough workers available to run this building." */
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(
-                1, 0x4d, 1, OpenSHC::UI::TextMessageBLLookupStructUnion(), 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

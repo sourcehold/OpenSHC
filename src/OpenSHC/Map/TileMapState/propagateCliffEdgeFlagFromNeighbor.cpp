@@ -26,8 +26,8 @@ namespace Map {
         }
 
         for (int index = 0; index < 8; index++) {
-            uint neighbourY = DAT_TerrainDefinedData::instance.field2476_0x372c[index].y + y;
-            uint neighbourX = DAT_TerrainDefinedData::instance.field2476_0x372c[index].x + x;
+            uint neighbourY = DAT_TerrainDefinedData::instance.field2345_0x372c[index].y + y;
+            uint neighbourX = DAT_TerrainDefinedData::instance.field2345_0x372c[index].x + x;
             if (neighbourX > 399 || neighbourY > 399) {
                 continue;
             }
@@ -35,7 +35,7 @@ namespace Map {
                 continue;
             }
             int neighbour = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile
-                + DAT_TerrainDefinedData::instance.field2476_0x372c[index].x + x;
+                + DAT_TerrainDefinedData::instance.field2345_0x372c[index].x + x;
             if ((this->LogicLayer[neighbour] & L_RIVER) == 0) {
                 continue;
             }

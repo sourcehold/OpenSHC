@@ -34,9 +34,9 @@ namespace Map {
     {
         ushort buildingXPos = DAT_BuildingsState::instance.buildings[buildingID].x;
         ushort buildingYPos = DAT_BuildingsState::instance.buildings[buildingID].y;
-        DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 = 0;
+        DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics = 0;
         if (this->refreshRelatedOne == 0 && DAT_BuildingsState::instance.buildings[buildingID].gfxOffset != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 = 1;
+            DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics = 1;
         }
         int stored = DAT_BuildingsState::instance.buildings[buildingID].currentNumberOfResource
             - (int)DAT_BuildingsState::instance.buildings[buildingID].someResourceNumber;
@@ -48,7 +48,7 @@ namespace Map {
             int tile
                 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + (short)buildingYPos].addXgetTile
                 + (short)buildingXPos + this->buildingX;
-            if (this->field93_0x5548c8 != 0) {
+            if (this->disableElevationRendering != 0) {
                 /* the placement overlay replaces every building graphic with its outline */
                 this->AlphaGFXLayer[tile] = 0;
                 this->GfxLayer[tile]
@@ -67,12 +67,12 @@ namespace Map {
                 } else {
                     short resource = DAT_BuildingsState::instance.buildings[buildingID].currentStoredResourceType;
                     short pile;
-                    if (DAT_TerrainDefinedData::instance.field1001_0x8b4[resource] == 2) {
+                    if (DAT_TerrainDefinedData::instance.field870_0x8b4[resource] == 2) {
                         int remaining
                             = DAT_BuildingsState::instance.buildings[buildingID].currentLimitOfResource - stored;
                         pile = (short)this->buildingRotationRelatedValue
                             + ((short)(remaining / 4) + ((ushort)remaining & 3) * 0xc) * 4;
-                    } else if (DAT_TerrainDefinedData::instance.field1001_0x8b4[resource] == 0) {
+                    } else if (DAT_TerrainDefinedData::instance.field870_0x8b4[resource] == 0) {
                         pile = (short)this->buildingRotationRelatedValue + -4 + (short)stored * 4;
                     } else {
                         pile = (short)this->buildingRotationRelatedValue
@@ -81,7 +81,7 @@ namespace Map {
                                 * 4;
                     }
                     this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance[0xf]
-                        + (short)DAT_TerrainDefinedData::instance.field996_0x84c[resource] + -1 + pile;
+                        + (short)DAT_TerrainDefinedData::instance.field865_0x84c[resource] + -1 + pile;
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_MERCENARYPOST
@@ -104,7 +104,7 @@ namespace Map {
                     || DAT_BuildingsState::instance.buildings[buildingID].orientation == 2) {
                     facing = (this->mapOrientation + 2) % 8;
                 }
-                if (DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 == 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (facing == 2 || facing == 6) {
                         this->GfxLayer[tile]
                             = (short)GMTotalPicturesProcessed::instance
@@ -134,7 +134,7 @@ namespace Map {
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                 == OpenSHC::Map::Buildings::BT_KEEPDOOR) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 == 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (this->mapOrientation != 2 && this->mapOrientation != 6) {
                         this->GfxLayer[tile]
                             = ((short)GMTotalPicturesProcessed::instance
@@ -172,7 +172,7 @@ namespace Map {
                 } else {
                     variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
                 }
-                if (DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 == 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (variation == 0x50) {
                         this->GfxLayer[tile]
                             = ((short)GMTotalPicturesProcessed::instance
@@ -209,7 +209,7 @@ namespace Map {
                 if (this->mapOrientation == 2 || this->mapOrientation == 6) {
                     variation = 0x51;
                 }
-                if (DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 != 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics != 0) {
                     if (variation == 0x50) {
                         this->GfxLayer[tile]
                             = (((short)GMTotalPicturesProcessed::instance
@@ -239,7 +239,7 @@ namespace Map {
                 == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
                 int plank
                     = DAT_TerrainDefinedData::instance
-                          .field2467_0x1fec[(int)DAT_BuildingsState::instance.buildings[buildingID].buildingVariation
+                          .field2336_0x1fec[(int)DAT_BuildingsState::instance.buildings[buildingID].buildingVariation
                               / 2][index];
                 if (plank != 0) {
                     this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance
@@ -264,7 +264,7 @@ namespace Map {
                     != OpenSHC::Map::Buildings::BT_SIEGETOWER_PLACED) {
                 /* a killing pit is invisible to anyone not on the owner's team */
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingVariation == 0xf) {
-                    if (DAT_BuildingsState::instance.buildings[buildingID].field62_0xb0 != 0) {
+                    if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics != 0) {
                         this->GfxLayer[tile]
                             = ((short)GMTotalPicturesProcessed::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]

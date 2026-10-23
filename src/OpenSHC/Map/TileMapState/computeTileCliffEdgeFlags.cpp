@@ -1,5 +1,4 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
-
 #include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -38,13 +37,13 @@ namespace Map {
         int lowest = height;
         int highest = height;
         for (int i = 0; i < 8; i++) {
-            uint neighbourY = y + DAT_TerrainDefinedData::instance.field2476_0x372c[i].y;
-            uint neighbourX = x + DAT_TerrainDefinedData::instance.field2476_0x372c[i].x;
+            uint neighbourY = y + DAT_TerrainDefinedData::instance.field2345_0x372c[i].y;
+            uint neighbourX = x + DAT_TerrainDefinedData::instance.field2345_0x372c[i].x;
             heights[i] = height;
             if (neighbourX < 400 && neighbourY < 400
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] != 0) {
                 int neighbour = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile
-                    + DAT_TerrainDefinedData::instance.field2476_0x372c[i].x + x;
+                    + DAT_TerrainDefinedData::instance.field2345_0x372c[i].x + x;
                 if ((this->LogicLayer[neighbour] & L_RIVER) != 0) {
                     heights[i] = this->HeightLayer[neighbour];
                     if (heights[i] < lowest) {
@@ -56,8 +55,9 @@ namespace Map {
             }
         }
 
-        this->Logic2Layer[tile]
-            = this->Logic2Layer[tile] & (OpenSHC::Map::LogicHelpers::L2_BEACH | OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH);
+        this->Logic2Layer[tile] = this->Logic2Layer[tile]
+            & (OpenSHC::Map::LogicHelpers::L2_BEACH | OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS
+                | OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH);
         byte flags = this->Logic2Layer[tile];
         if (lowest >= height) {
             /* a bank all round: low step becomes a beach, a high one a cliff */

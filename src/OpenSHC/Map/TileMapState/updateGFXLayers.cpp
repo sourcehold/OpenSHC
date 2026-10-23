@@ -255,24 +255,24 @@ namespace Map {
                                             if (gfxMode == 1) {
                                                 this->GfxLayer[this->DAT_SomeTile] = 0;
                                                 for (index = 0; index < 4; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field2296_0x1d54[index][0]
+                                                    if (DAT_TerrainDefinedData::instance.field2165_0x1d54[index][0]
                                                         == this->bitFlag) {
                                                         this->GfxLayer[this->DAT_SomeTile]
                                                             = GMTotalPicturesProcessed::instance[55] + gfxBaseA
                                                             + (luminescence - 2) * gfxStride - 1
                                                             + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
                                                             + DAT_TerrainDefinedData::instance
-                                                                  .field2296_0x1d54[index][1];
+                                                                  .field2165_0x1d54[index][1];
                                                     }
                                                 }
                                                 for (index = 4; index < 8; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field2296_0x1d54[index][0]
+                                                    if (DAT_TerrainDefinedData::instance.field2165_0x1d54[index][0]
                                                         == this->bitFlag) {
                                                         this->GfxLayer[this->DAT_SomeTile]
                                                             = GMTotalPicturesProcessed::instance[55] + gfxBaseB
                                                             + (luminescence - 2) * gfxStride - 1
                                                             + DAT_TerrainDefinedData::instance
-                                                                  .field2296_0x1d54[index][1];
+                                                                  .field2165_0x1d54[index][1];
                                                     }
                                                 }
                                                 if (this->GfxLayer[this->DAT_SomeTile] == 0) {
@@ -336,17 +336,17 @@ namespace Map {
                                             }
                                         } else if (macroLow == 4) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2293_0x1a54[this->mapOrientation / 2][macroMid];
+                                                           .field2162_0x1a54[this->mapOrientation / 2][macroMid];
                                             this->GfxLayer[this->DAT_SomeTile] = GMTotalPicturesProcessed::instance[55]
                                                 + gfxBaseE + macroMid + macroHigh * 4 - 1;
                                         } else if (macroLow == 8) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2294_0x1b54[this->mapOrientation / 2][macroMid];
+                                                           .field2163_0x1b54[this->mapOrientation / 2][macroMid];
                                             this->GfxLayer[this->DAT_SomeTile] = macroHigh * 9
                                                 + (GMTotalPicturesProcessed::instance[55] + gfxBaseE + macroMid) + 0xf;
                                         } else if (macroLow == 0x10) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2295_0x1c54[this->mapOrientation / 2][macroMid];
+                                                           .field2164_0x1c54[this->mapOrientation / 2][macroMid];
                                             this->GfxLayer[this->DAT_SomeTile] = macroHigh * 16
                                                 + (GMTotalPicturesProcessed::instance[55] + gfxBaseE + macroMid) + 0x33;
                                         }

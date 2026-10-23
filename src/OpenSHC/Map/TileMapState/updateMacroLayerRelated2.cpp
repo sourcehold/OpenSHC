@@ -30,62 +30,82 @@ namespace Map {
                     this->DAT_SomeX = sub * 10;
                     int group = 2;
                     do {
-                    if ((uint)this->DAT_SomeX < 400 && (uint)this->DAT_SomeY < 400
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX] != 0) {
-                        this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + this->DAT_SomeX;
-                        if (this->ChangedLayer[this->DAT_SomeTile] != 0
-                        && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
-                            this->MacroLayer[this->DAT_SomeTile] = 0x800;
-                        }
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
+                        if ((uint)this->DAT_SomeX < 400 && (uint)this->DAT_SomeY < 400
+                            && DAT_ViewportRenderState::instance
+                                    .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX]
+                                != 0) {
+                            this->DAT_SomeTile
+                                = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                + this->DAT_SomeX;
                             if (this->ChangedLayer[this->DAT_SomeTile] != 0
-                        && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
+                                && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
                                 this->MacroLayer[this->DAT_SomeTile] = 0x800;
                             }
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->ChangedLayer[this->DAT_SomeTile] != 0
-                        && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
-                                this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->ChangedLayer[this->DAT_SomeTile] != 0
-                        && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
-                                this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->ChangedLayer[this->DAT_SomeTile] != 0
-                        && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
-                                this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 0x800;
+                                }
+                            }
+                            this->DAT_SomeX = nextX;
+                        }
                         this->DAT_SomeX = this->DAT_SomeX + 1;
                         group = group + -1;
                     } while (group != 0);
@@ -106,7 +126,9 @@ namespace Map {
                     int column = 10;
                     do {
                         if ((uint)this->DAT_SomeX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX] != 0) {
+                            && DAT_ViewportRenderState::instance
+                                    .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX]
+                                != 0) {
                             this->DAT_SomeTile = this->DAT_SomeX
                                 + DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile;
                             if (this->MacroLayer[this->DAT_SomeTile] == 0x800
@@ -118,10 +140,12 @@ namespace Map {
                                 bool complete = true;
                                 for (int i = 0; i < 0x10; i++) {
                                     if (this->MacroLayer[DAT_ViewportRenderState::instance
-                                                             .translationMatrix[DAT_TerrainDefinedData::instance.field2292_0x19d4[i].y
+                                                             .translationMatrix[DAT_TerrainDefinedData::instance
+                                                                                    .MacroLayerScanOffsets[i]
+                                                                                    .y
                                                                  + this->DAT_SomeY]
                                                              .addXgetTile
-                                            + DAT_TerrainDefinedData::instance.field2292_0x19d4[i].x + corner]
+                                            + DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[i].x + corner]
                                         != 0x800) {
                                         complete = false;
                                         break;
@@ -130,10 +154,12 @@ namespace Map {
                                 if (complete) {
                                     for (int i = 0; i < 0x10; i++) {
                                         this->MacroLayer[DAT_ViewportRenderState::instance
-                                                             .translationMatrix[DAT_TerrainDefinedData::instance.field2292_0x19d4[i].y
+                                                             .translationMatrix[DAT_TerrainDefinedData::instance
+                                                                                    .MacroLayerScanOffsets[i]
+                                                                                    .y
                                                                  + this->DAT_SomeY]
                                                              .addXgetTile
-                                            + DAT_TerrainDefinedData::instance.field2292_0x19d4[i].x + corner]
+                                            + DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[i].x + corner]
                                             = (ushort)(byte)random * 0x1000 + 0x10 + (short)(i << 6);
                                     }
                                 }
@@ -158,57 +184,77 @@ namespace Map {
                     this->DAT_SomeX = sub * 10;
                     int group = 2;
                     do {
-                    if ((uint)this->DAT_SomeX < 400 && (uint)this->DAT_SomeY < 400
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX] != 0) {
-                        this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + this->DAT_SomeX;
-                        if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
-                            this->MacroLayer[this->DAT_SomeTile] = 2;
-                        }
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
+                        if ((uint)this->DAT_SomeX < 400 && (uint)this->DAT_SomeY < 400
+                            && DAT_ViewportRenderState::instance
+                                    .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + this->DAT_SomeX]
+                                != 0) {
+                            this->DAT_SomeTile
+                                = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                + this->DAT_SomeX;
                             if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
                                 this->MacroLayer[this->DAT_SomeTile] = 2;
                             }
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
-                                this->MacroLayer[this->DAT_SomeTile] = 2;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 2;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
-                                this->MacroLayer[this->DAT_SomeTile] = 2;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 2;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
-                    {
-                        uint nextX = this->DAT_SomeX + 1;
-                        if (nextX < 400 && (uint)this->DAT_SomeY < 400
-                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX] != 0) {
-                            this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile + nextX;
-                            if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
-                                this->MacroLayer[this->DAT_SomeTile] = 2;
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 2;
+                                }
                             }
+                            this->DAT_SomeX = nextX;
                         }
-                        this->DAT_SomeX = nextX;
-                    }
+                        {
+                            uint nextX = this->DAT_SomeX + 1;
+                            if (nextX < 400 && (uint)this->DAT_SomeY < 400
+                                && DAT_ViewportRenderState::instance
+                                        .DAT_BinaryTileMap400x400[this->DAT_SomeY * 400 + nextX]
+                                    != 0) {
+                                this->DAT_SomeTile
+                                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_SomeY].addXgetTile
+                                    + nextX;
+                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                    this->MacroLayer[this->DAT_SomeTile] = 2;
+                                }
+                            }
+                            this->DAT_SomeX = nextX;
+                        }
                         this->DAT_SomeX = this->DAT_SomeX + 1;
                         group = group + -1;
                     } while (group != 0);

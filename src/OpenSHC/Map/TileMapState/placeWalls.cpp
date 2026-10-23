@@ -59,19 +59,21 @@ namespace Map {
         int budget = 0;
         int wallCount = 0;
         int placed = 0;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallBuildPath, this)(playerID, x1, y1, x2, y2, wallType);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallBuildPath, this)(
+            playerID, x1, y1, x2, y2, wallType);
         if (this->illegalBuild != FALSE) {
             return;
         }
 
-        this->constructionTileCount = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::getWallTilesThatCanBeBuilt, DAT_GameState::ptr)(
-            playerID, 4);
+        this->constructionTileCount = MACRO_CALL_MEMBER(
+            OpenSHC::Game::GameStateStructures_Func::getWallTilesThatCanBeBuilt, DAT_GameState::ptr)(playerID, 4);
         int overshoot = 2;
         if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR) {
-            budget = this->field119_0x554924;
+            budget = this->maxWallHeightInPath;
         }
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::resetWallPlacementInfo, DAT_WallAndPitchState::ptr)();
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::WallAndPitchState_Func::resetWallPlacementInfo, DAT_WallAndPitchState::ptr)();
         }
 
         int upY = y1 - y2;
@@ -104,14 +106,15 @@ namespace Map {
             }
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || overCrenel) {
                 if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::addWallPlacementInfoForTile, DAT_WallAndPitchState::ptr)(tile);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::addWallPlacementInfoForTile,
+                        DAT_WallAndPitchState::ptr)(tile);
                 }
                 if (this->DamageLayer[tile] != 0 || overCrenel) {
                     this->DamageLayer[tile] = 0;
                     this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
                     if (overCrenel) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_CRENEL | L_CRENEL_VARIATIONUnk)
-                            | L_WALL_OR_GATEHOUSE;
+                        this->LogicLayer[tile]
+                            = this->LogicLayer[tile] & ~(L_CRENEL | L_CRENEL_VARIATIONUnk) | L_WALL_OR_GATEHOUSE;
                     }
                 }
 
@@ -123,7 +126,8 @@ namespace Map {
                     this->HeightLayer[tile] = this->HeightLayer[tile] + 0x3c;
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_CRENAL) {
                     this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-                    BOOLEnum onlyTowers = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::hasOnlyTowerNeighborsNoWalls, this)(tile, y1);
+                    BOOLEnum onlyTowers = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::TileMapState_Func::hasOnlyTowerNeighborsNoWalls, this)(tile, y1);
                     if (onlyTowers == FALSE) {
                         this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
                     } else {
@@ -151,9 +155,11 @@ namespace Map {
                         = this->LogicLayer[tile] & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
                         | L_WALL_OR_GATEHOUSE;
                     if (this->UnitLayer[tile] != 0
-                        && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
+                        && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType
+                            == OpenSHC::Map::Units::UT_CHICKEN) {
                         int unitID = (short)this->UnitLayer[tile];
-                        DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                        DAT_UnitsState::instance.units[unitID].state.generic
+                            = OpenSHC::Map::Units::States::US_DISAPPEAR;
                         DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
                         DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
                     }
@@ -187,10 +193,12 @@ namespace Map {
                     this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
                 }
                 if (updateLinkages) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(
-                        y1, tile);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                        DAT_PathFindingState::ptr)(y1, tile);
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(7, x, y1);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+                        DAT_PathFindingState::ptr)(7, x, y1);
                 }
             }
 
@@ -270,8 +278,8 @@ namespace Map {
             woodCount = 0;
             stoneCount = wallCount;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss, DAT_BuildingsState::ptr)(
-            playerID, stoneCount, woodCount, 0);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+            DAT_BuildingsState::ptr)(playerID, stoneCount, woodCount, 0);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
         this->field204_0x554a30 = 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);

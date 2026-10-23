@@ -62,21 +62,22 @@ namespace Map {
         short command;
         iVar1 = x;
         command = (short)type;
-        iVar14 = this->field188_0x554a14;
+        iVar14 = this->skipPlacementFailChecks;
         local_14 = 0;
-        this->field188_0x554a14 = 0;
+        this->skipPlacementFailChecks = 0;
         if (iVar14 != 0) {
             BVar2 = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                 DAT_BuildingsState::ptr)((MappersEnum)command);
-            this->buildingSpriteSheetID_1 = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[BVar2].intValue;
+            this->buildingSpriteSheetID_1
+                = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[BVar2].intValue;
             this->buildingSpriteID1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID,
                 DAT_BuildingsState::ptr)((MappersEnum)command);
             this->buildingSpriteID2 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID2,
                 DAT_BuildingsState::ptr)((MappersEnum)command);
         } else {
             if (this->buildingPlacementFail == 2) {
-                this->field188_0x554a14 = 0;
+                this->skipPlacementFailChecks = 0;
                 return (int)(2);
             }
             if (this->buildingPlacementFail != FALSE) {
@@ -96,8 +97,7 @@ namespace Map {
                 uVar8 = (undefined2)((uint)local_14 >> 0x10);
                 if (((command == OpenSHC::Commands::M_MAPPER_KEEP1) || (command == OpenSHC::Commands::M_MAPPER_KEEP2))
                     || (command == OpenSHC::Commands::M_MAPPER_KEEP3)) {
-                    piVar12
-                        = (int*)((int)DAT_TerrainDefinedData::ptr + ((short)command + -0x3c) * 0x60 + 0x264);
+                    piVar12 = (int*)((int)DAT_TerrainDefinedData::ptr + ((short)command + -0x3c) * 0x60 + 0x264);
                     x = 3;
                     do {
                         iVar14 = DAT_ViewportRenderState::instance.translationMatrix[piVar12[1] + y].addXgetTile
@@ -151,8 +151,10 @@ namespace Map {
                         iVar3 = iVar3 + 1;
                     } while (iVar3 < this->constructionTileCount);
                 }
-                if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
-                    || ((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)))) {
+                if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
+                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
+                    || ((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)))) {
                     MVar10 = (MappersEnum)command;
                     iVar14 = MVar10 * 3 + -0x1a4;
                     iVar15 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar14 * 8 + 0x56c);
@@ -199,7 +201,8 @@ namespace Map {
                     } while (type != OpenSHC::Commands::M_MAPPER_NULL);
                     return iVar14;
                 }
-                if ((command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO) || (command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB)) {
+                if ((command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO)
+                    || (command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB)) {
                     iVar14 = 0;
                     do {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
@@ -253,7 +256,8 @@ namespace Map {
                     } while (iVar14 < this->constructionTileCount);
                     return iVar13;
                 }
-                if ((command != OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD) && (command != OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD)) {
+                if ((command != OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD)
+                    && (command != OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD)) {
                     if (command != OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
                         /* the original returns eax with a leftover tile index still in its high half */
                         return (ushort)command;
@@ -304,13 +308,16 @@ namespace Map {
             size = 3;
         } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
             size = 3;
-        } else if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
+        } else if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
+                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
                        || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE1A))
             || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE2A)) {
-            this->field78_0x55488c = 0x51;
-        } else if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B) || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D))
-            || ((command == OpenSHC::Commands::M_MAPPER_GATE_STONE1B || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE2B)))) {
-            this->field78_0x55488c = 0x50;
+            this->gateOrientationVariant = 0x51;
+        } else if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B)
+                       || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D))
+            || ((command == OpenSHC::Commands::M_MAPPER_GATE_STONE1B
+                || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE2B)))) {
+            this->gateOrientationVariant = 0x50;
         }
         MVar10 = (MappersEnum)command;
         do {
@@ -324,9 +331,9 @@ namespace Map {
             }
             sprite = (short)this->buildingSpriteID1;
             if ((this->mapOrientation == 2) || (this->mapOrientation == 6)) {
-                if (this->field78_0x55488c != 0x51)
+                if (this->gateOrientationVariant != 0x51)
                     goto LAB_00505714;
-            } else if (this->field78_0x55488c == 0x51) {
+            } else if (this->gateOrientationVariant == 0x51) {
             LAB_00505714:
                 sprite = (short)this->buildingSpriteID2;
             }
@@ -372,7 +379,8 @@ namespace Map {
             local_14 = local_14 + 1;
             if (this->constructionTileCount <= local_14) {
                 iVar15 = (ushort)command;
-                if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
+                if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
+                         || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
                         || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
                     || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)) {
                     /*
@@ -409,7 +417,7 @@ namespace Map {
                             this->ConstructionGFXLayer[iVar6]
                                 = (short)GMTotalPicturesProcessed::instance[0x34] + 0x60e + (short)iVar5;
                         } else {
-                            iVar7 = DAT_TerrainDefinedData::instance.field600_0x7c8[iVar5 + iVar13 * 4]
+                            iVar7 = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[iVar5 + iVar13 * 4]
                                 - this->mapOrientation;
                             if (iVar7 < 0) {
                                 iVar7 = iVar7 + 8;
@@ -449,7 +457,7 @@ namespace Map {
                             this->ConstructionGFXLayer[iVar5]
                                 = (short)GMTotalPicturesProcessed::instance[0x34] + 0x60e + (short)iVar4;
                         } else {
-                            iVar6 = DAT_TerrainDefinedData::instance.field600_0x7c8[iVar4 + iVar13 * 4]
+                            iVar6 = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[iVar4 + iVar13 * 4]
                                 - this->mapOrientation;
                             if (iVar6 < 0) {
                                 iVar6 = iVar6 + 8;
@@ -526,13 +534,13 @@ namespace Map {
                             iVar13
                                 = DAT_ViewportRenderState::instance
                                       .translationMatrix
-                                          [DAT_TerrainDefinedData::instance.field1009_0xf5c[iVar3][iVar15 + 4].offset.y
+                                          [DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].offset.y
                                               + y]
                                       .addXgetTile
-                                + DAT_TerrainDefinedData::instance.field1009_0xf5c[iVar3][iVar15 + 4].offset.x + iVar1;
+                                + DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].offset.x + iVar1;
                             iVar3 = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::TileMapState_Func::getRubbleGraphicStageForDamageLevel, this)(
-                                DAT_TerrainDefinedData::instance.field1009_0xf5c[iVar3][iVar15 + 4].property);
+                                DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].property);
                             iVar3 = iVar3 + 0x37 + GMTotalPicturesProcessed::instance[0xe];
                             this->ConstructionGFXLayer[iVar13] = (ushort)iVar3;
                             if (iVar14 != 0) {
@@ -555,7 +563,8 @@ namespace Map {
                         } while ((int)pXVar11 < 0xb49eb0);
                         return iVar15;
                     }
-                    if ((command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO) || (command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB)) {
+                    if ((command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO)
+                        || (command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB)) {
                         iVar15 = 0;
                         do {
                             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
@@ -719,7 +728,8 @@ namespace Map {
                         } while (iVar3 < this->constructionTileCount);
                         return iVar13;
                     }
-                    if ((command == OpenSHC::Commands::M_MAPPER_KEEP2) || (command == OpenSHC::Commands::M_MAPPER_KEEP3)) {
+                    if ((command == OpenSHC::Commands::M_MAPPER_KEEP2)
+                        || (command == OpenSHC::Commands::M_MAPPER_KEEP3)) {
                         uVar9 = (ushort)(this->mapOrientation == 2);
                         iVar15 = (MVar10 - OpenSHC::Commands::M_MAPPER_KEEP1) * 0x60;
                         iVar3 = DAT_ViewportRenderState::instance

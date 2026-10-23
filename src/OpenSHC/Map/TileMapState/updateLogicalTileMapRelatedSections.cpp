@@ -1,6 +1,5 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
-
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -48,15 +47,13 @@ namespace Map {
             return;
         }
         this->forceUpdateLogicalAndMiscDisplayLayers = 0;
-        int tile = DAT_ViewportRenderState::instance
-                       .translationMatrix[DAT_PathFindingState::instance.mappingYRelated]
+        int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_PathFindingState::instance.mappingYRelated]
                        .firstTileOfRow;
         DAT_BuildingsState::instance.field34_0x18e074 = 1;
         for (int row = DAT_PathFindingState::instance.mappingYRelated;
-             row < 400 && row <= DAT_PathFindingState::instance.yLimit; row++) {
+            row < 400 && row <= DAT_PathFindingState::instance.yLimit; row++) {
             for (int column = 0; column < this->yArray1[row]; column++, tile++) {
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0
-                    || this->ChangedLayer[tile] == 0) {
+                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0 || this->ChangedLayer[tile] == 0) {
                     continue;
                 }
 
@@ -66,8 +63,7 @@ namespace Map {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffef;
                 /* whether the tile draws its own texture or the default earth */
                 if (height == 0) {
-                    if (((this->LogicLayer[tile] & L_RIVER) == 0
-                            && (this->Logic2Layer[tile] & L2_BEACH) != 0)
+                    if (((this->LogicLayer[tile] & L_RIVER) == 0 && (this->Logic2Layer[tile] & L2_BEACH) != 0)
                         || (this->LogicLayer[tile] & L_MOAT) != 0) {
                         this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
                     } else {
@@ -78,8 +74,7 @@ namespace Map {
                 } else if ((this->Logic2Layer[tile] & L2_PLATEAU_MEDIUM) != 0
                     || (this->Logic2Layer[tile] & L2_PLATEAU_HIGH) != 0
                     || (this->Logic2Layer[tile] & L2_EARTH_AND_STONES) != 0
-                    || (this->Logic2Layer[tile] & L2_OASIS_GRASS) != 0
-                    || (this->Logic2Layer[tile] & L2_SCRUB) != 0
+                    || (this->Logic2Layer[tile] & L2_OASIS_GRASS) != 0 || (this->Logic2Layer[tile] & L2_SCRUB) != 0
                     || (char)this->Logic2Layer[tile] < '\0'
                     || (this->Logic2Layer[tile] & L2_STONES_OR_DRIVEN_SANDUnk) != 0) {
                     this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
@@ -90,8 +85,7 @@ namespace Map {
                 /* a tile level with all eight neighbours keeps its texture */
                 for (int i = 0; i < 8; i++) {
                     int neighbour = this->directionTranslationMatrix[row][i] + tile;
-                    if ((height > 8 || this->HeightLayer[neighbour] == 0)
-                        && height != this->HeightLayer[neighbour]) {
+                    if ((height > 8 || this->HeightLayer[neighbour] == 0) && height != this->HeightLayer[neighbour]) {
                         if ((this->LogicLayer[neighbour] & (L_RIVER | L_MOAT)) == 0) {
                             this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_DEFAULT_EARTH_OR_TEXTURE;
                         }
@@ -104,10 +98,10 @@ namespace Map {
                     this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x10;
                 }
 
-                if (this->field93_0x5548c8 == 0) {
+                if (this->disableElevationRendering == 0) {
                     /* look up the light's diagonal for anything standing high enough to shadow us */
                     int walkTile = tile;
-                    int* direction = this->directionTranslationMatrix[row] + this->field84_0x5548a4;
+                    int* direction = this->directionTranslationMatrix[row] + this->screenSouthEastDirection;
                     bool shadowed = false;
                     for (int depth = 0; depth < 0x80; depth = depth + 0x10) {
                         walkTile = walkTile + *direction;
@@ -119,7 +113,7 @@ namespace Map {
                             shadowed = true;
                             break;
                         }
-                        direction = direction + this->field88_0x5548b4 * 8;
+                        direction = direction + this->orientedRowStep * 8;
                     }
                     if (height == 0 || shadowed) {
                         continue;
@@ -132,8 +126,7 @@ namespace Map {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0
                     && (this->LogicLayer[tile] & L_TREE_VARIATION) == 0
                     && (this->LogicLayer[tile] & L_FARM_FIELD_WHEAT) == 0
-                    && (this->LogicLayer[tile] & L_FARM_FIELD_HOP) == 0
-                    && (this->LogicLayer[tile] & L_CRENEL) == 0
+                    && (this->LogicLayer[tile] & L_FARM_FIELD_HOP) == 0 && (this->LogicLayer[tile] & L_CRENEL) == 0
                     && (this->LogicLayer[tile] & L_STAIRS) == 0) {
                     this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x10;
                     occluded = false;
@@ -156,7 +149,7 @@ namespace Map {
 
                 bool stepLeft = false;
                 bool stepRight = false;
-                int shadowTile = this->directionTranslationMatrix[row][this->field84_0x5548a4] + tile;
+                int shadowTile = this->directionTranslationMatrix[row][this->screenSouthEastDirection] + tile;
                 int lowest = 0xfa;
                 if (this->heightBasedScreenYOffset[this->HeightLayer[shadowTile]] < 0xfa) {
                     lowest = this->heightBasedScreenYOffset[this->HeightLayer[shadowTile]];
@@ -166,82 +159,91 @@ namespace Map {
                     occluded = true;
                 }
                 if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
-                                if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[shadowTile])
-                                        != 0) {
-                                    occluded = true;
-                                }
-                                int rightTile = this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile;
-                                if (((this->LogicLayer[rightTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[rightTile])
-                                        != 0)
-                                    || ((this->LogicLayer[rightTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[rightTile] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                int leftTile = this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile;
-                                if (((this->LogicLayer[leftTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[leftTile])
-                                        != 0)
-                                    || ((this->LogicLayer[leftTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[leftTile] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                int rightTile2 = this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile;
-                                if (((this->LogicLayer[rightTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[rightTile2])
-                                        != 0)
-                                    || ((this->LogicLayer[rightTile2] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[rightTile2] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                int leftTile2 = this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile;
-                                if (((this->LogicLayer[leftTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[leftTile2])
-                                        != 0)
-                                    || ((this->LogicLayer[leftTile2] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[leftTile2] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                shadowTile = shadowTile
-                                    + this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field84_0x5548a4];
-                                if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[shadowTile])
-                                        != 0) {
-                                    occluded = true;
-                                }
-                                int rightTile3 = this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile;
-                                if (((this->LogicLayer[rightTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[rightTile3])
-                                        != 0)
-                                    || ((this->LogicLayer[rightTile3] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[rightTile3] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                int leftTile3 = this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile;
-                                if (((this->LogicLayer[leftTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[leftTile3])
-                                        != 0)
-                                    || ((this->LogicLayer[leftTile3] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[leftTile3] & L_STOCKPILEUnk) == 0)) {
-                                    occluded = true;
-                                }
-                                shadowTile = shadowTile
-                                    + this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field84_0x5548a4];
-                                if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                                    && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[shadowTile])
-                                        != 0) {
-                                    occluded = true;
-                                }
+                    if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                        && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                               DAT_BuildingsState::ptr)(this->BuildingLayer[shadowTile])
+                            != 0) {
+                        occluded = true;
+                    }
+                    int rightTile = this->directionTranslationMatrix[row][this->screenSouthDirection] + tile;
+                    if (((this->LogicLayer[rightTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[rightTile])
+                                != 0)
+                        || ((this->LogicLayer[rightTile] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[rightTile] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    int leftTile = this->directionTranslationMatrix[row][this->screenEastDirection] + tile;
+                    if (((this->LogicLayer[leftTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[leftTile])
+                                != 0)
+                        || ((this->LogicLayer[leftTile] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[leftTile] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    int rightTile2
+                        = this->directionTranslationMatrix[this->orientedRowStep + row][this->screenSouthDirection]
+                        + shadowTile;
+                    if (((this->LogicLayer[rightTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[rightTile2])
+                                != 0)
+                        || ((this->LogicLayer[rightTile2] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[rightTile2] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    int leftTile2
+                        = this->directionTranslationMatrix[this->orientedRowStep + row][this->screenEastDirection]
+                        + shadowTile;
+                    if (((this->LogicLayer[leftTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[leftTile2])
+                                != 0)
+                        || ((this->LogicLayer[leftTile2] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[leftTile2] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    shadowTile = shadowTile
+                        + this->directionTranslationMatrix[this->orientedRowStep + row][this->screenSouthEastDirection];
+                    if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                        && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                               DAT_BuildingsState::ptr)(this->BuildingLayer[shadowTile])
+                            != 0) {
+                        occluded = true;
+                    }
+                    int rightTile3
+                        = this->directionTranslationMatrix[row + this->orientedRowStep * 2][this->screenSouthDirection]
+                        + shadowTile;
+                    if (((this->LogicLayer[rightTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[rightTile3])
+                                != 0)
+                        || ((this->LogicLayer[rightTile3] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[rightTile3] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    int leftTile3
+                        = this->directionTranslationMatrix[row + this->orientedRowStep * 2][this->screenEastDirection]
+                        + shadowTile;
+                    if (((this->LogicLayer[leftTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                                   DAT_BuildingsState::ptr)(this->BuildingLayer[leftTile3])
+                                != 0)
+                        || ((this->LogicLayer[leftTile3] & L_WALL_OR_GATEHOUSE) != 0
+                            && (this->LogicLayer[leftTile3] & L_STOCKPILEUnk) == 0)) {
+                        occluded = true;
+                    }
+                    shadowTile = shadowTile
+                        + this->directionTranslationMatrix[row + this->orientedRowStep * 2]
+                                                          [this->screenSouthEastDirection];
+                    if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                        && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                               DAT_BuildingsState::ptr)(this->BuildingLayer[shadowTile])
+                            != 0) {
+                        occluded = true;
+                    }
                 } else {
                     if (DAT_BuildingsState::instance.buildings[this->BuildingLayer[shadowTile]].flag2 != 0) {
                         occluded = true;
@@ -251,9 +253,8 @@ namespace Map {
                         occluded = true;
                     }
                     if (DAT_BuildingsState::instance
-                            .buildings[this->BuildingLayer[this->directionTranslationMatrix
-                                                               [this->field88_0x5548b4 + row]
-                                                               [this->field84_0x5548a4]
+                            .buildings[this->BuildingLayer[this->directionTranslationMatrix[this->orientedRowStep
+                                                               + row][this->screenSouthEastDirection]
                                 + shadowTile]]
                             .flag2
                         != 0) {
@@ -261,7 +262,7 @@ namespace Map {
                     }
                 }
 
-                int leftTile = this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile;
+                int leftTile = this->directionTranslationMatrix[row][this->screenSouthDirection] + tile;
                 if (this->heightBasedScreenYOffset[this->HeightLayer[leftTile]] < lowest) {
                     lowest = this->heightBasedScreenYOffset[this->HeightLayer[leftTile]];
                 }
@@ -273,8 +274,8 @@ namespace Map {
                 }
                 if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                     if ((this->LogicLayer[leftTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                               this->BuildingLayer[leftTile])
+                        && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                               DAT_BuildingsState::ptr)(this->BuildingLayer[leftTile])
                             != 0) {
                         occluded = true;
                     }
@@ -288,7 +289,7 @@ namespace Map {
                     }
                 }
 
-                int rightTile = this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile;
+                int rightTile = this->directionTranslationMatrix[row][this->screenEastDirection] + tile;
                 if (this->heightBasedScreenYOffset[this->HeightLayer[rightTile]] < lowest) {
                     lowest = this->heightBasedScreenYOffset[this->HeightLayer[rightTile]];
                 }
@@ -302,8 +303,8 @@ namespace Map {
                 if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                     if ((this->LogicLayer[tile] & L_KEEP_NON_MANOR_HOUSE) != 0
                         || (this->LogicLayer[rightTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0
-                        || MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                               this->BuildingLayer[rightTile])
+                        || MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
+                               DAT_BuildingsState::ptr)(this->BuildingLayer[rightTile])
                             == 0) {
                         clear = occluded;
                     } else {
@@ -327,7 +328,7 @@ namespace Map {
                 }
 
                 if (lowest < screenY) {
-                    if (this->field93_0x5548c8 == 0) {
+                    if (this->disableElevationRendering == 0) {
                         this->ShowHiLayer[tile] = (char)screenY - (char)lowest;
                     }
                     if ((this->LogicLayer[tile] & L_SEA) == 0) {

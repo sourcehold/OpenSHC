@@ -27,7 +27,7 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
-            if (DAT_TerrainDefinedData::instance.field2469_0x21ec[variation][buildingSizeTileIndex] == 0
+            if (DAT_TerrainDefinedData::instance.field2338_0x21ec[variation][buildingSizeTileIndex] == 0
                 && this->UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + buildingY]
                                        .addXgetTile
                        + this->buildingX + buildingX]

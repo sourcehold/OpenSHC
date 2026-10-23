@@ -38,23 +38,24 @@ namespace Map {
     {
         uint baseX = x;
         uint baseY = y;
-        if (this->field195_0x554a24 != 0) {
+        if (this->clearKeepFootprintOnPlace != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::demolishBuildingsInKeepsConstructionFootprint, this)(
                 playerID, x, y, type, size, orientation, xyValue);
-            this->field195_0x554a24 = 0;
+            this->clearKeepFootprintOnPlace = 0;
         }
 
         int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
         int keepKind = 0;
         byte logic2 = this->Logic2Layer[DAT_ViewportRenderState::instance.translationMatrix[baseY].addXgetTile + baseX];
-        int keepID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, baseX, baseY, xyValue, (BuildingType)(short)type, size, playerID, 0xf);
+        int keepID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
+            DAT_BuildingsState::ptr)(playerID, baseX, baseY, xyValue, (BuildingType)(short)type, size, playerID, 0xf);
         this->placedBuildingID = keepID;
         DAT_BuildingsState::instance.buildings[keepID].uidWhenPlaced = uid;
         short keepOrientation = (short)orientation;
         DAT_BuildingsState::instance.buildings[keepID].orientation = keepOrientation;
-        MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding, DAT_GameState::ptr)(
-            keepID, playerID, OpenSHC::Game::Player::PDBCE_KEEP);
+        MACRO_CALL_MEMBER(
+            OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+            DAT_GameState::ptr)(keepID, playerID, OpenSHC::Game::Player::PDBCE_KEEP);
         if (orientation == 0xf) {
             orientation = 0;
         }
@@ -62,7 +63,8 @@ namespace Map {
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + baseY].addXgetTile + this->buildingX + baseX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + baseY].addXgetTile
+                + this->buildingX + baseX;
             if (index < 0x24) {
                 DAT_BuildingsState::instance.buildings[keepID].tileRefs[index] = tile;
             }
@@ -77,7 +79,8 @@ namespace Map {
             /* grass and scrub come back as scrub, anything else as bare earth */
             Logic2 terrain;
             uint brush;
-            if ((logic2 & (OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB)) == 0) {
+            if ((logic2 & (OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB))
+                == 0) {
                 terrain = OpenSHC::Map::LogicHelpers::L2_EARTH_AND_STONES;
                 brush = 6;
             } else {
@@ -91,7 +94,8 @@ namespace Map {
         } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(keepID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(keepID);
-        if ((short)type == OpenSHC::Map::Buildings::BT_MANORHOUSE || (short)type == OpenSHC::Map::Buildings::BT_STONEKEEP) {
+        if ((short)type == OpenSHC::Map::Buildings::BT_MANORHOUSE
+            || (short)type == OpenSHC::Map::Buildings::BT_STONEKEEP) {
             keepKind = 2;
         }
 
@@ -101,7 +105,8 @@ namespace Map {
             int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 0].x + baseX;
             uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 0].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
-            int doorID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            int doorID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
                 playerID, doorX, doorY, xyValue, OpenSHC::Map::Buildings::BT_KEEPDOOR_LEFT, 1, playerID, 0xf);
             DAT_BuildingsState::instance.buildings[doorID].uidWhenPlaced = uid;
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind;
@@ -110,15 +115,16 @@ namespace Map {
             this->LogicLayer[doorTile] = this->LogicLayer[doorTile] | L_BUILDING;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(
-                (short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                DAT_PathFindingState::ptr)((short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
         }
 
         {
             int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 1].x + baseX;
             uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 1].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
-            int doorID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            int doorID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
                 playerID, doorX, doorY, xyValue, OpenSHC::Map::Buildings::BT_KEEPDOOR, 1, playerID, 0xf);
             DAT_BuildingsState::instance.buildings[doorID].uidWhenPlaced = uid;
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind / 2;
@@ -127,15 +133,16 @@ namespace Map {
             this->MiscDisplayLayer[doorTile] = this->MiscDisplayLayer[doorTile] | 4;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(
-                (short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                DAT_PathFindingState::ptr)((short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
         }
 
         {
             int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 2].x + baseX;
             uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 2].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
-            int doorID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            int doorID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
                 playerID, doorX, doorY, xyValue, OpenSHC::Map::Buildings::BT_KEEPDOOR_RIGHT, 1, playerID, 0xf);
             DAT_BuildingsState::instance.buildings[doorID].uidWhenPlaced = uid;
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind;
@@ -144,25 +151,28 @@ namespace Map {
             this->LogicLayer[doorTile] = this->LogicLayer[doorTile] | L_BUILDING;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(
-                (short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                DAT_PathFindingState::ptr)((short)DAT_BuildingsState::instance.buildings[doorID].y, doorTile);
         }
 
         uint campX = baseX + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][group].xOffset;
         uint campY = baseY + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][group].yOffset;
-        int campID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+        int campID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             playerID, campX, campY, xyValue, OpenSHC::Map::Buildings::BT_CAMPGROUND, 7, playerID, 0xf);
         DAT_BuildingsState::instance.buildings[campID].uidWhenPlaced = uid;
         DAT_BuildingsState::instance.buildings[campID].quarryStockpileID = (short)this->placedBuildingID;
         DAT_BuildingsState::instance.buildings[campID].orientation = keepOrientation;
-        MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding, DAT_GameState::ptr)(
-            campID, playerID, OpenSHC::Game::Player::PDBCE_CAMPGROUND);
+        MACRO_CALL_MEMBER(
+            OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+            DAT_GameState::ptr)(campID, playerID, OpenSHC::Game::Player::PDBCE_CAMPGROUND);
 
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 7);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(
-                DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + campY].addXgetTile + this->buildingX + campX);
+                DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + campY].addXgetTile
+                + this->buildingX + campX);
             index++;
         } while (index < this->constructionTileCount);
 
@@ -170,13 +180,16 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_BuildingsState::instance.buildings[campID].widthOrHeight);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + campY].addXgetTile + this->buildingX + campX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + campY].addXgetTile
+                + this->buildingX + campX;
             if (index < 0x18) {
                 DAT_BuildingsState::instance.buildings[campID].tileRefs[index]
                     = DAT_ViewportRenderState::instance
-                          .translationMatrix[(short)DAT_BuildingsState::instance.buildings[campID].y + DAT_TerrainDefinedData::instance.field197_0x444[index].y]
+                          .translationMatrix[(short)DAT_BuildingsState::instance.buildings[campID].y
+                              + DAT_TerrainDefinedData::instance.field197_0x444[index].y]
                           .addXgetTile
-                    + (short)DAT_BuildingsState::instance.buildings[campID].x + DAT_TerrainDefinedData::instance.field197_0x444[index].x;
+                    + (short)DAT_BuildingsState::instance.buildings[campID].x
+                    + DAT_TerrainDefinedData::instance.field197_0x444[index].x;
             }
             this->HeightLayer[tile] = (byte)xyValue;
             /* only the campground's cross of five middle tiles blocks movement */
@@ -199,7 +212,8 @@ namespace Map {
             this->ChangedLayer[tile] = 2;
             Logic2 terrain;
             uint brush;
-            if ((logic2 & (OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB)) == 0) {
+            if ((logic2 & (OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS | OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB))
+                == 0) {
                 terrain = OpenSHC::Map::LogicHelpers::L2_EARTH_AND_STONES;
                 brush = 6;
             } else {
@@ -212,7 +226,8 @@ namespace Map {
         } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(campID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(campID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(10, campX, campY);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+            DAT_PathFindingState::ptr)(10, campX, campY);
 
         int stockpileX = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][group].xOffset;
         int stockpileY = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][group].yOffset;
@@ -220,8 +235,8 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 5);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(
-                DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + stockpileY + baseY].addXgetTile + this->buildingX
-                + stockpileX + baseX);
+                DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + stockpileY + baseY].addXgetTile
+                + this->buildingX + stockpileX + baseX);
             index++;
         } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeStockpile, this)(

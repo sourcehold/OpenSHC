@@ -89,7 +89,7 @@ namespace Map {
         }
 
         int rotation = this->rockOrientation + this->mapOrientation;
-        if (this->field80_0x554894 == 5) {
+        if (this->editorRockType == 5) {
             rotation = this->mapOrientation;
         }
         if (rotation >= 8) {
@@ -100,7 +100,8 @@ namespace Map {
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
             uint logic = this->LogicLayer[tile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return;
@@ -119,9 +120,8 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
-                + this->buildingX + x]
-                = (short)this->buildingRotationRelatedValue + (short)GMTotalPicturesProcessed::instance[0x38]
-                + (short)variationStep + (short)base - 1;
+                + this->buildingX + x] = (short)this->buildingRotationRelatedValue
+                + (short)GMTotalPicturesProcessed::instance[0x38] + (short)variationStep + (short)base - 1;
             index++;
         } while (index < this->constructionTileCount);
     }

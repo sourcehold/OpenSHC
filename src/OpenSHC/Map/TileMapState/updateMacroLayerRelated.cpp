@@ -167,8 +167,8 @@ namespace Map {
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
                                     randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 0x10; index++) {
-                                        tableX = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].x;
-                                        tableY = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].y;
+                                        tableX = DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[index].x;
+                                        tableY = DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[index].y;
                                         neighbourTile = MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
@@ -179,8 +179,8 @@ namespace Map {
                                     }
                                     if (index >= 0x10) {
                                         for (index = 0; index < 0x10; index++) {
-                                            tableX = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].x;
-                                            tableY = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].y;
+                                            tableX = DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[index].x;
+                                            tableY = DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[index].y;
                                             neighbourTile = MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                                 DAT_ViewportRenderState::ptr)(
@@ -221,8 +221,8 @@ namespace Map {
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
                                     randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 9; index++) {
-                                        tableX = DAT_TerrainDefinedData::instance.field2291_0x198c[index].x;
-                                        tableY = DAT_TerrainDefinedData::instance.field2291_0x198c[index].y;
+                                        tableX = DAT_TerrainDefinedData::instance.field2160_0x198c[index].x;
+                                        tableY = DAT_TerrainDefinedData::instance.field2160_0x198c[index].y;
                                         neighbourTile = MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
@@ -233,8 +233,8 @@ namespace Map {
                                     }
                                     if (index >= 9) {
                                         for (index = 0; index < 9; index++) {
-                                            tableX = DAT_TerrainDefinedData::instance.field2291_0x198c[index].x;
-                                            tableY = DAT_TerrainDefinedData::instance.field2291_0x198c[index].y;
+                                            tableX = DAT_TerrainDefinedData::instance.field2160_0x198c[index].x;
+                                            tableY = DAT_TerrainDefinedData::instance.field2160_0x198c[index].y;
                                             neighbourTile = MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                                 DAT_ViewportRenderState::ptr)(
@@ -275,8 +275,8 @@ namespace Map {
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
                                     randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 4; index++) {
-                                        tableX = DAT_TerrainDefinedData::instance.field2290_0x196c[index].x;
-                                        tableY = DAT_TerrainDefinedData::instance.field2290_0x196c[index].y;
+                                        tableX = DAT_TerrainDefinedData::instance.field2159_0x196c[index].x;
+                                        tableY = DAT_TerrainDefinedData::instance.field2159_0x196c[index].y;
                                         neighbourTile = MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
@@ -287,8 +287,8 @@ namespace Map {
                                     }
                                     if (index >= 4) {
                                         for (index = 0; index < 4; index++) {
-                                            tableX = DAT_TerrainDefinedData::instance.field2290_0x196c[index].x;
-                                            tableY = DAT_TerrainDefinedData::instance.field2290_0x196c[index].y;
+                                            tableX = DAT_TerrainDefinedData::instance.field2159_0x196c[index].x;
+                                            tableY = DAT_TerrainDefinedData::instance.field2159_0x196c[index].y;
                                             neighbourTile = MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                                 DAT_ViewportRenderState::ptr)(

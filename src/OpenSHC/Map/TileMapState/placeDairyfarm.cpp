@@ -58,17 +58,17 @@ namespace Map {
               0 to 3*27 + 26 = 107
              */
             iVar1 = DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_TerrainDefinedData::instance.field1009_0xf5c[iVar1][iVar5].offset.y
+                        .translationMatrix[DAT_TerrainDefinedData::instance.field878_0xf5c[iVar1][iVar5].offset.y
                             + param_3]
                         .addXgetTile
-                + DAT_TerrainDefinedData::instance.field1009_0xf5c[iVar1][iVar5].offset.x + param_2;
+                + DAT_TerrainDefinedData::instance.field878_0xf5c[iVar1][iVar5].offset.x + param_2;
             *param_6 = iVar1;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar1);
             if (3 < iVar5) {
                 this->DamageLayer[*param_6]
                     = (byte)DAT_TerrainDefinedData::instance
-                          .field1009_0xf5c[DAT_GameState::instance.playerDataArray[param_1].dairyFarmVariationMod4]
-                                          [iVar5]
+                          .field878_0xf5c[DAT_GameState::instance.playerDataArray[param_1].dairyFarmVariationMod4]
+                                         [iVar5]
                           .property;
             }
             param_6 = param_6 + 1;

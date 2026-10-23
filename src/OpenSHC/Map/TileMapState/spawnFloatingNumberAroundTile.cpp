@@ -22,26 +22,27 @@ namespace Map {
     void TileMapState::spawnFloatingNumberAroundTile(int x, int y, int type)
     {
         int radius = type / 2;
-        int xOffset = DAT_TerrainDefinedData::instance.field2474_0x2764[radius * 60].x;
+        int xOffset = DAT_TerrainDefinedData::instance.field2343_0x2764[radius * 60].x;
         if (xOffset == -1) {
             return;
         }
 
         uint index = 0;
         do {
-            int yOffset = DAT_TerrainDefinedData::instance.field2474_0x2764[radius * 60 + index].y;
+            int yOffset = DAT_TerrainDefinedData::instance.field2343_0x2764[radius * 60 + index].y;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[yOffset + (y - radius)].addXgetTile + xOffset
                 + (x - radius);
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0
                 && (index & 1) == 0) {
                 uint frame
-                    = (this->field161_0x5549c0 + yOffset + xOffset + index + (x - radius) - 1 + (y - radius)) % 16;
+                    = (this->cursorOverlayAnimationFrame + yOffset + xOffset + index + (x - radius) - 1 + (y - radius))
+                    % 16;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame + 0xe5, 16, 14, tile, 0x100021);
             }
             index++;
-            xOffset = DAT_TerrainDefinedData::instance.field2474_0x2764[radius * 60 + index].x;
+            xOffset = DAT_TerrainDefinedData::instance.field2343_0x2764[radius * 60 + index].x;
         } while (xOffset != -1);
     }
 
