@@ -1,4 +1,5 @@
 #include "../TroopValueState.func.hpp"
+#include "../TroopValueState.asm.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -47,17 +48,12 @@ namespace Map {
             int _tile;
             int _offset;
             int _directionStep;
-            char* _pTranslated;
             int* _pValueCount;
             int _direction;
             BOOLEnum _isSolitary;
             uint _defaultHeight;
             int _directionMin1;
             BuildingTypeShort _buildingType;
-            undefined* _pSpecialAreas;
-            undefined* _pConnectionLayer;
-            ushort _areaTile1;
-            ushort _area2;
             int _y;
             ushort _unitID;
             uint _logic;
@@ -169,8 +165,6 @@ namespace Map {
                     if (_unitID) {
                         _teamsDifferent = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getTeamsDifferent,
                             DAT_GameState::ptr)((int)DAT_UnitsState::instance.units[(short)_unitID].owner, playerID);
-                        _pSpecialAreas = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
-                        _pConnectionLayer = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
                         if (_teamsDifferent) {
                             /*
                               path cost is zero
@@ -186,20 +180,8 @@ namespace Map {
                                     = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                                 DAT_TroopValueState::instance.attackInfo.people1
                                     = DAT_TroopValueState::instance.attackInfo.people1 + 1;
-                                _pTranslated
-                                    = (char*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                        + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                                _areaTile1 = *(ushort*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                    + _tile * 2 + -2);
                                 DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                                *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + 2);
-                                *(ushort*)(_pSpecialAreas + 0xc) = _areaTile1;
-                                _area2 = *(ushort*)(_pConnectionLayer + *(int*)(_pTranslated + 0x10) * 2 + _tile * 2);
-                                *(undefined2*)_pSpecialAreas
-                                    = *(undefined2*)(_pConnectionLayer + *(int*)_pTranslated * 2 + _tile * 2);
-                                *(ushort*)(_pSpecialAreas + 8) = _area2;
+                                MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
                                 _directionStep = 0;
                                 do {
                                     if (DAT_TileMapState::instance.specialAreasArray[_directionStep] == _startCon) {
@@ -286,22 +268,8 @@ namespace Map {
                                 _pSpecialAreasBase = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
                                 DAT_TileMapState::instance.DAT_SomeY
                                     = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                                _pValueCount
-                                    = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                        + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                                _pathConnectionValue
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + -2);
                                 DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                                *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + 2);
-                                *(undefined2*)(_pPathConnectionBase + 0xc) = _pathConnectionValue;
-                                _pathConnectionValue
-                                    = *(undefined2*)(_pSpecialAreasBase + _pValueCount[4] * 2 + _tile * 2);
-                                *(undefined2*)_pPathConnectionBase
-                                    = *(undefined2*)(_pSpecialAreasBase + *_pValueCount * 2 + _tile * 2);
-                                *(undefined2*)(_pPathConnectionBase + 8) = _pathConnectionValue;
+                                MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
                                 _directionStep = 0;
                                 do {
                                     _candidateTile = MACRO_CALL_MEMBER(
@@ -375,21 +343,8 @@ namespace Map {
                             && !_buildingID) {
                             DAT_TileMapState::instance.DAT_SomeY
                                 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                            _pValueCount
-                                = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                    + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                            _pathConnectionValue
-                                = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer) + _tile * 2
-                                    + -2);
                             DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                            *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer) + _tile * 2
-                                    + 2);
-                            *(undefined2*)(_pPathConnectionBase + 0xc) = _pathConnectionValue;
-                            _pathConnectionValue = *(undefined2*)(_pSpecialAreasBase + _pValueCount[4] * 2 + _tile * 2);
-                            *(undefined2*)_pPathConnectionBase = (undefined2)((
-                                undefined*)(*(undefined2*)(_pSpecialAreasBase + *_pValueCount * 2 + _tile * 2)));
-                            *(undefined2*)(_pPathConnectionBase + 8) = (undefined2)((undefined*)(_pathConnectionValue));
+                            MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
                             _pPathConnectionBase = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
                             _pSpecialAreasBase = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
                             _candidateTile = DAT_TileMapState::instance.DAT_SomeTile;
@@ -657,22 +612,8 @@ namespace Map {
                                     - DAT_ViewportRenderState::instance
                                           .translationMatrix[DAT_TileMapState::instance.DAT_SomeY]
                                           .addXgetTile;
-                                _pValueCount
-                                    = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                        + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                                _pathConnectionValue
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + -2);
                                 DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                                *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                    = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                        + _tile * 2 + 2);
-                                *(undefined2*)(_pPathConnectionBase + 0xc) = _pathConnectionValue;
-                                _pathConnectionValue
-                                    = *(undefined2*)(_pSpecialAreasBase + _pValueCount[4] * 2 + _tile * 2);
-                                *(undefined2*)_pPathConnectionBase
-                                    = *(undefined2*)(_pSpecialAreasBase + *_pValueCount * 2 + _tile * 2);
-                                *(undefined2*)(_pPathConnectionBase + 8) = _pathConnectionValue;
+                                MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
                                 _directionStep = 0;
                                 // The decompiler encoded this scan as a label plus a fragment after the tile
                                 // loop: its "break" was the back edge and falling off the end left the scan.
@@ -749,22 +690,8 @@ namespace Map {
                                         = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
                                     _pSpecialAreasBase
                                         = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
-                                    _pValueCount = (int*)(((char*)DAT_TileMapState::instance
-                                                                  .ptr_MovementDirectionTranslationMatrix)
-                                        + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                                    _pathConnectionValue
-                                        = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                            + _tile * 2 + -2);
                                     DAT_TileMapState::instance.DAT_SomeTile = _tile;
-                                    *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 4)
-                                        = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                            + _tile * 2 + 2);
-                                    *(undefined2*)(_pPathConnectionBase + 0xc) = _pathConnectionValue;
-                                    _pathConnectionValue
-                                        = *(undefined2*)(_pSpecialAreasBase + _pValueCount[4] * 2 + _tile * 2);
-                                    *(undefined2*)_pPathConnectionBase
-                                        = *(undefined2*)(_pSpecialAreasBase + *_pValueCount * 2 + _tile * 2);
-                                    *(undefined2*)(_pPathConnectionBase + 8) = _pathConnectionValue;
+                                    MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
                                     _directionStep = 0;
                                     do {
                                         if (DAT_TileMapState::instance.specialAreasArray[_directionStep]
