@@ -25,7 +25,6 @@ namespace Map {
         BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint x, uint y, undefined4 aiInfoFlags)
         {
             int _candidate;
-            int _tile;
             this->calculations = this->calculations + 1;
             if (x > 399 || y > 399) {
                 return FALSE;
@@ -50,7 +49,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (_tile < 0) {
                         break;
                     }
