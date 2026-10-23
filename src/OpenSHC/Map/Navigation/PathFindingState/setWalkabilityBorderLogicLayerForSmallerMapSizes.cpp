@@ -24,7 +24,6 @@ namespace Map {
         void PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes()
         {
             short sVar3;
-            int _candidateTile;
             this->searchGeneration = this->searchGeneration + 1;
             this->resultTile = 0;
             this->resultY = 0;
@@ -52,7 +51,8 @@ namespace Map {
                 int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                 for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                    _candidateTile = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + uVar4;
+                    int _candidateTile
+                        = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + uVar4;
                     if (DAT_TileMapState::instance.WalkLayer[_candidateTile] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidateTile] & 0x30) == 0) {
                         DAT_TileMapState::instance.CertainPathLayer[_candidateTile]
