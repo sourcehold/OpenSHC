@@ -65,11 +65,11 @@ namespace Map {
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x005162D0
     void TileMapState::placeBuilding(
-        PlayerID playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation)
+        int playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation)
     {
         MappersEnum command = (MappersEnum)(short)cbt;
         int pitchDitchID = 0;
-        if (this->field122_0x554930 == 0) {
+        if (this->skipPlacementCheck == 0) {
             if (buildingOrientation == 0xf) {
                 this->DAT_TempBuildingRotation = 0;
             } else {
@@ -80,7 +80,7 @@ namespace Map {
                 return;
             }
         }
-        this->field122_0x554930 = 0;
+        this->skipPlacementCheck = 0;
 
         BuildingType buildingType = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
@@ -308,7 +308,7 @@ namespace Map {
                     hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters,
                 DAT_BuildingsState::ptr)(playerID, (int)(short)shortType)
             != 0) {
-            DAT_BuildingsState::instance.buildings[this->placedBuildingID].field203_0x288 = 1;
+            DAT_BuildingsState::instance.buildings[this->placedBuildingID].suppressDestroyRefund = 1;
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
         int radius;
