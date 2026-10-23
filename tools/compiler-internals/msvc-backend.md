@@ -145,8 +145,51 @@ ascending-order mechanic, and is retracted.
 `Spillcosts` is 854 lines of live-set bitvector manipulation with no cost arithmetic in it, which suggests the
 cost model decides *who gets spilled* rather than *which register a winner gets*, but that is also not traced.
 
-The open question is where a physical register number is written into a tuple or symbol. `P2/regasg.c` is the
-file; `@Color@4`, `@CgiColorTmpregs@8` and `@CanColorPseudoreg@12` are the candidates to trace.
+### Where registers are actually chosen
+
+Tracing one function's allocation answered this. During `sellExcessGoods` (invocation #613) the colouring entry
+points ran as follows - `Color` once, `SsaColor` twice, `ColorStackElements` once, `Spillcosts` six times,
+`SpillOrDefer` seven times, and `CanColorPseudoreg` and `RegSpill` not at all. So `@Color@4` is the per-function
+register colourer, and bounding it with the next public symbol gives its 29 direct callees, among them:
+
+| callee | VA |
+|---|---|
+| `@ChoosePhysReg@12` | `0x10b14b70` |
+| `@OrderGlobregs@12` | `0x10b11770` |
+| `@SubsumeGlobregs@8` | `0x10b0fdb0` |
+| `@InsertNewGlobregs@8` | `0x10b133e0` |
+| `@UpdateAffectedGlobregs@20` | `0x10b15470` |
+| `@HandleCurrUncolorable@8` | `0x10b0d830` |
+| `@BetterToDefer@4` | `0x10b19de0` |
+| `@InitialSplitPoints@16`, `@InsertSplitPoints@28` | `0x10b0ded0`, `0x10b13460` |
+
+**`@ChoosePhysReg@12` is where a physical register is picked.** Its second argument (`edx`, it is `__fastcall`)
+is the **mask of still-available registers**, and watching that mask across calls gives the consumption order
+directly. During `sellExcessGoods` it ran 18 times and the mask walked:
+
+```
+ffffffff -> fffffffd -> ffffffed -> fffffeed -> fffffeec -> fffffee8
+            bit 1       +bit 4      +bit 8      +bit 0      +bit 2
+            esi         ebx         (non-GPR)   edi         ebp
+```
+
+which is exactly our generated prologue, `push esi; push ebx; push ebp; push edi`. The original consumes the same
+four registers in the opposite order, `ebp -> edi -> ebx -> esi`. That difference is now an **observable**, not an
+inference: run the trace, read the mask progression, compare with the original's prologue.
+
+`eax` is not the chosen register - it returns pointers or 0 - so the assignment is recorded in a structure rather
+than returned.
+
+Internally `ChoosePhysReg` does use `bsf` (lowest set bit) over a mask, at `0x10b14d03` and `0x10b151de`, and the
+mask is first narrowed with the same 64-bit set/clear tables (`and`/`or` against `DAT_10cf65e8`/`DAT_10cf67e8`).
+So "lowest-numbered free register" holds **within the already-filtered candidate set**, which is why the observed
+consumption order (1, 4, 0, 2) is not ascending.
+
+Not decoded: what narrows the mask before the `bsf` - that filtering is the remaining question, and it is what
+decides why our first candidate got `esi` where the original's got `ebp`. `@OrderGlobregs@12` runs once per
+function and is the candidate-priority pass, so it is the next thing to read. A table at `0x10ce5a08` is indexed
+by `eax * 4` in `ChoosePhysReg` and looked like a per-register table, but it holds pointers and runs into
+unrelated data after a few entries, so that reading is unconfirmed.
 
 ## Debugger harness
 
