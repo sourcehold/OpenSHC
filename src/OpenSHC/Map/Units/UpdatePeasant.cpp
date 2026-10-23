@@ -342,7 +342,7 @@ namespace Map {
         }
         if (state == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
             // walking to a free place at the campfire
-            DAT_BuildingsState::instance.buildings[campfire].field196_0x272 += 1;
+            DAT_BuildingsState::instance.buildings[campfire].field157_0x272 += 1;
             DAT_GameState::instance.playerDataArray[owner].idlePeasantsCount += 1;
             DAT_GameState::instance.playerDataArray[owner].availablePeasantsAtFire += 1;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset = 1;
@@ -383,7 +383,7 @@ namespace Map {
         // idling at the campfire
         DAT_GameState::instance.playerDataArray[owner].idlePeasantsCount += 1;
         DAT_GameState::instance.playerDataArray[owner].availablePeasantsAtFire += 1;
-        DAT_BuildingsState::instance.buildings[campfire].field195_0x270 += 1;
+        DAT_BuildingsState::instance.buildings[campfire].field156_0x270 += 1;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].facingDirection
             = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field38_0x56;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationSpeed = 2;
@@ -724,27 +724,27 @@ namespace Map {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                 = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
         }
-        if (DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 1) {
+        if (DAT_BuildingsState::instance.buildings[campfire].campStage == 1) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0x66;
-        } else if (DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 2) {
+        } else if (DAT_BuildingsState::instance.buildings[campfire].campStage == 2) {
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].seated == 0) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate
                     = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate == 0x66 ? 0x67 : 0x66;
             } else {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 100;
             }
-        } else if (DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 4) {
+        } else if (DAT_BuildingsState::instance.buildings[campfire].campStage == 4) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate
                 = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].seated != 0 ? 100 : 0x78;
-        } else if (DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 3) {
+        } else if (DAT_BuildingsState::instance.buildings[campfire].campStage == 3) {
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].seated == 0) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0x65;
             } else {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate
                     = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate == 0x6a ? 0x6b : 0x6a;
             }
-        } else if (DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 5
-            || DAT_BuildingsState::instance.buildings[campfire].field197_0x274 == 6) {
+        } else if (DAT_BuildingsState::instance.buildings[campfire].campStage == 5
+            || DAT_BuildingsState::instance.buildings[campfire].campStage == 6) {
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].peasantAlwaysZero == 0) {
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].seated == 0) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0x65;

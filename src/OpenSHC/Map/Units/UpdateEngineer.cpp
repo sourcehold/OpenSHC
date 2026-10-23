@@ -68,7 +68,7 @@ namespace Map {
             DAT_CurrentUnitSlotID::instance);
         DAT_GameState::instance.playerDataArray[owner].armySize += 1;
         if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].dying == 0) {
-            DAT_GameState::instance.playerDataArray[owner].field852_0x2b58 += 1;
+            DAT_GameState::instance.playerDataArray[owner].field843_0x2b58 += 1;
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].aiUnitBehaviourType != 10
                 && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].aiUnitBehaviourType == 0x16) {
                 DAT_GameState::instance.playerDataArray[owner].unknownHarrassingSiegeRelated += 1;
@@ -525,7 +525,8 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::removeMoat, DAT_TileMapState::ptr)(
-                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].digTileTarget)
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].digTileTarget,
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tile)
                 != 1) {
                 return;
             }
@@ -891,14 +892,14 @@ namespace Map {
                     if (DAT_BuildingsState::instance.buildings[target].uid
                         == DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetUID) {
                         if (DAT_BuildingsState::instance.buildings[target].resources[7] <= 0
-                            || (DAT_BuildingsState::instance.buildings[target].waitingEngineerIDUnk == 0
+                            || (DAT_BuildingsState::instance.buildings[target].engineerUnitID == 0
                                 && DAT_BuildingsState::instance.buildings[target].resources[7] < 9)) {
                             // fetch more pitch
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                                 = (UnitState)12;
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationNeeded
                                 = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
-                        } else if (DAT_BuildingsState::instance.buildings[target].waitingEngineerIDUnk != 0) {
+                        } else if (DAT_BuildingsState::instance.buildings[target].engineerUnitID != 0) {
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].resourceToDeposit = 0;
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                                 = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
@@ -916,12 +917,12 @@ namespace Map {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber
                         = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationFrame + 0x178;
                 }
-                DAT_BuildingsState::instance.buildings[target].waitingEngineerIDUnk = 0;
+                DAT_BuildingsState::instance.buildings[target].engineerUnitID = 0;
             } else {
                 // waiting for oil
-                if (DAT_BuildingsState::instance.buildings[target].waitingEngineerIDUnk <= 0
+                if (DAT_BuildingsState::instance.buildings[target].engineerUnitID <= 0
                     && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].resourceToDeposit == 0) {
-                    DAT_BuildingsState::instance.buildings[target].waitingEngineerIDUnk
+                    DAT_BuildingsState::instance.buildings[target].engineerUnitID
                         = (short)DAT_CurrentUnitSlotID::instance;
                 }
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber > 4) {
@@ -1301,7 +1302,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processUnitLossStatistic, DAT_GameState::ptr)(
                 owner, DAT_CurrentUnitSlotID::instance);
             if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                DAT_GameState::instance.mapAndTime.ownLossesArray
+                DAT_GameState::instance.mapAndTime.hitsDealtToPlayerArray
                     [DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].lastEncounteredEnemyPlayerID] += 1;
                 return;
             }

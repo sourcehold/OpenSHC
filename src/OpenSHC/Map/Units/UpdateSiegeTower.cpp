@@ -482,14 +482,14 @@ namespace Map {
                     DAT_UnitsState::instance.units[engineer].updateTickTracker = 0;
                     DAT_UnitsState::instance.units[engineer].field39_0x58 = 1;
                     DAT_UnitsState::instance.units[engineer].totalSizeOfPathPlan = 0;
-                    DAT_UnitsState::instance.units[engineer].unknownMovementRelated_0x2d2 = 0;
+                    DAT_UnitsState::instance.units[engineer].movementCooldown = 0;
                     int attempts = 0;
                     int tile = 0;
                     int x;
                     int y;
                     while (tile == 0) {
-                        int dx = DAT_AttackInfoDefinedData::instance.field10_0xec[offsetIndex][0];
-                        int dy = DAT_AttackInfoDefinedData::instance.field10_0xec[offsetIndex][1];
+                        int dx = DAT_AttackInfoDefinedData::instance.SiegeCrewPositionOffsets[offsetIndex][0];
+                        int dy = DAT_AttackInfoDefinedData::instance.SiegeCrewPositionOffsets[offsetIndex][1];
                         offsetIndex = (offsetIndex + 1) % 16;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::findWalkableTileThatDoesNotContainUnit,
@@ -539,7 +539,7 @@ namespace Map {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                     .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 = 0;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)((PlayerID)owner,
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(owner,
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x - 1,
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y - 1,
                 OpenSHC::Commands::M_MAPPER_SIEGE_TOWER_BASE, 3, 15);
@@ -613,7 +613,8 @@ namespace Map {
                         .logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                     if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_GameState::instance.mapAndTime
-                            .ownLossesArray[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID] += 1;
+                            .hitsDealtToPlayerArray[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID]
+                            += 1;
                     } else if (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_GameState::instance.mapAndTime.emenyHitArray[owner] += 1;

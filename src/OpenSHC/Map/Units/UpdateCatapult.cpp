@@ -673,7 +673,8 @@ namespace Map {
                         .logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                     if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_GameState::instance.mapAndTime
-                            .ownLossesArray[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID] += 1;
+                            .hitsDealtToPlayerArray[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID]
+                            += 1;
                     } else if (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_GameState::instance.mapAndTime.emenyHitArray[owner] += 1;

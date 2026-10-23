@@ -651,7 +651,8 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::removeMoat, DAT_TileMapState::ptr)(
-                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].digTileTarget)
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].digTileTarget,
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tile)
                 != 1) {
                 return;
             }
@@ -826,7 +827,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processUnitLossStatistic, DAT_GameState::ptr)(
                 owner, DAT_CurrentUnitSlotID::instance);
             if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                DAT_GameState::instance.mapAndTime.ownLossesArray
+                DAT_GameState::instance.mapAndTime.hitsDealtToPlayerArray
                     [DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].lastEncounteredEnemyPlayerID] += 1;
                 return;
             }

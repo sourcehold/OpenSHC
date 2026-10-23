@@ -29,7 +29,7 @@ namespace Map {
     void Units::UpdateRabbit()
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
-        DAT_GameState::instance.mapAndTime.field3166_0x277c += 1;
+        DAT_GameState::instance.mapAndTime.wildlifeCount += 1;
         short tribe = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tribeID;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].calculatedOwnerPlayerIndex
             = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].fixedRng & 0xf;

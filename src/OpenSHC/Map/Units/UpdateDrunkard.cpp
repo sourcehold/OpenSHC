@@ -27,7 +27,7 @@ namespace Map {
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
         DAT_GameState::instance.playerDataArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner]
-            .field645_0x2174 += 1;
+            .field639_0x2174 += 1;
         DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = 0;
         if (DAT_UnitsState::instance.units[unitID].field280_0x3f4 > 1) {
             DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;

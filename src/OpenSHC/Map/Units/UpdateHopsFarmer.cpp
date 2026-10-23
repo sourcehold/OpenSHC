@@ -92,7 +92,7 @@ namespace Map {
                 return;
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
-                = DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated;
+                = DAT_BuildingsState::instance.buildings[farm].farmGrowState;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationYPosition
                 = DAT_ViewportRenderState::instance
                       .tileTranslationMatrix_YComponent[DAT_BuildingsState::instance.farmerDestinationTile];
@@ -198,7 +198,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setNewOnFarmDestination,
                     DAT_BuildingsState::ptr)(farm)
                     != 0
-                && DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated == 3) {
+                && DAT_BuildingsState::instance.buildings[farm].farmGrowState == 3) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationYPosition
                     = DAT_ViewportRenderState::instance
                           .tileTranslationMatrix_YComponent[DAT_BuildingsState::instance.farmerDestinationTile];
@@ -283,7 +283,7 @@ namespace Map {
                     = OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk;
                 return;
             }
-            if (found == 0 || DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated != 5) {
+            if (found == 0 || DAT_BuildingsState::instance.buildings[farm].farmGrowState != 5) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic = (UnitState)2;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationNeeded
                     = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
@@ -410,7 +410,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setNewOnFarmDestination,
                     DAT_BuildingsState::ptr)(ownFarm)
                     != 0
-                && DAT_BuildingsState::instance.buildings[ownFarm].wheatGrowStateRelated == 5) {
+                && DAT_BuildingsState::instance.buildings[ownFarm].farmGrowState == 5) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                     = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationYPosition

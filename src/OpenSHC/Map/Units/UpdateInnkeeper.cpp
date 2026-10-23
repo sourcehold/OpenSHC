@@ -212,7 +212,7 @@ namespace Map {
                 return;
             }
             DAT_BuildingsState::instance.buildings[DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1]
-                .field207_0x28a = 300;
+                .field165_0x28a = 300;
             int storage = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::getStorageBuildingForResourceTypeAndAmount,
                 DAT_BuildingsState::ptr)(
@@ -249,7 +249,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].gfxNumber = 1;
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_BuildingsState::instance.buildings[DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1]
-                .field207_0x28a = 300;
+                .field165_0x28a = 300;
             if (DAT_BuildingsState::instance.buildings[DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1]
                     .flagonsOfAleOrCheeseOrReleaseDogs
                 <= 0) {

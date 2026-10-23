@@ -118,7 +118,7 @@ namespace Map {
                 = OpenSHC::Map::Units::States::US_IDLEUnk;
             DAT_BuildingsState::instance
                 .buildings[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1]
-                .field249_0x2d4 = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan;
+                .field206_0x2d4 = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan;
             return;
         }
         if (state == OpenSHC::Map::Units::States::US_IDLEUnk) {

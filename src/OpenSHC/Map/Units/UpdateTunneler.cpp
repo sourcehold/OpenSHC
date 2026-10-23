@@ -675,8 +675,8 @@ namespace Map {
             }
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown == 1) {
                 // the tunnel entrance appears
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
-                    (PlayerID)owner, DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].attackAtTileX,
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(owner,
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].attackAtTileX,
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].attackAtTileY,
                     OpenSHC::Commands::M_MAPPER_TUNNEL, 3, 15);
                 int entrance = DAT_TileMapState::instance.placedBuildingID;
@@ -774,7 +774,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processUnitLossStatistic, DAT_GameState::ptr)(
                 owner, DAT_CurrentUnitSlotID::instance);
             if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                DAT_GameState::instance.mapAndTime.ownLossesArray
+                DAT_GameState::instance.mapAndTime.hitsDealtToPlayerArray
                     [DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].lastEncounteredEnemyPlayerID] += 1;
                 return;
             }

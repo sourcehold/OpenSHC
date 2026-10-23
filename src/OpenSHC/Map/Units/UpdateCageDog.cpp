@@ -177,7 +177,7 @@ namespace Map {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
-            if (DAT_TribesState::instance.tribes[tribe].field133_0x278 == 0) {
+            if (DAT_TribesState::instance.tribes[tribe].predatorNearby == 0) {
                 DAT_UnitsState::instance.units[unitID].movementSpeed = 3;
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 1;
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;

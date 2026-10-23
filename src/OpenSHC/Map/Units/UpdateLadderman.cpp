@@ -236,7 +236,7 @@ namespace Map {
             return;
         case 3:
             // holding the ladder against the wall
-            DAT_TroopValueState::instance.attackInfo.field86986_0x20f98 += 1;
+            DAT_TroopValueState::instance.attackInfo.attackWaveSweepActive += 1;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].seated = 0;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field43_0x64 = -1;

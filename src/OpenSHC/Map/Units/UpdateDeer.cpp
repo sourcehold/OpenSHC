@@ -122,7 +122,7 @@ namespace Map {
             }
             {
                 int frameOffset = 1;
-                if (DAT_TribesState::instance.tribes[tribe].field133_0x278 == 0
+                if (DAT_TribesState::instance.tribes[tribe].predatorNearby == 0
                     || DAT_UnitsState::instance.units[unitID].currentIndexInPathPlan
                         > DAT_UnitsState::instance.units[unitID].totalSizeOfPathPlan - 2) {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;

@@ -147,8 +147,8 @@ namespace Map {
         }
         if (state == (UnitState)3) {
             DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 32;
-            if ((char)DAT_BuildingsState::instance.buildings[building].field217_0x298 > 2
-                && (char)DAT_BuildingsState::instance.buildings[building].field217_0x298 <= 4) {
+            if ((char)DAT_BuildingsState::instance.buildings[building].dairyProductionStage > 2
+                && (char)DAT_BuildingsState::instance.buildings[building].dairyProductionStage <= 4) {
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::resetUnitMovementState, DAT_UnitsState::ptr)(

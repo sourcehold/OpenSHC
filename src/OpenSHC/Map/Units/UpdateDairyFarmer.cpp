@@ -92,11 +92,11 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[workplace].resources[11] != 0) {
                 DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
                 DAT_BuildingsState::instance.buildings[workplace].resources[11] = 0;
-                DAT_BuildingsState::instance.buildings[workplace].field23_0x44 = 0;
+                DAT_BuildingsState::instance.buildings[workplace].extraAnimationSprite4 = 0;
                 return;
             }
-            if ((char)DAT_BuildingsState::instance.buildings[workplace].field217_0x298 < 3
-                || (char)DAT_BuildingsState::instance.buildings[workplace].field217_0x298 > 4) {
+            if ((char)DAT_BuildingsState::instance.buildings[workplace].dairyProductionStage < 3
+                || (char)DAT_BuildingsState::instance.buildings[workplace].dairyProductionStage > 4) {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown += 1;
@@ -149,8 +149,8 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
-            if ((char)DAT_BuildingsState::instance.buildings[workplace].field217_0x298 >= 3
-                && (char)DAT_BuildingsState::instance.buildings[workplace].field217_0x298 <= 4) {
+            if ((char)DAT_BuildingsState::instance.buildings[workplace].dairyProductionStage >= 3
+                && (char)DAT_BuildingsState::instance.buildings[workplace].dairyProductionStage <= 4) {
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::resetUnitMovementState, DAT_UnitsState::ptr)(

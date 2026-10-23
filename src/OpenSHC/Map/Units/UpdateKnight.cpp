@@ -647,7 +647,7 @@ namespace Map {
                     DAT_GameState::ptr)(owner, unitID);
                 if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     DAT_GameState::instance.mapAndTime
-                        .ownLossesArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
+                        .hitsDealtToPlayerArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                 .lastEncounteredEnemyPlayerID] += 1;
                 } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].lastEncounteredEnemyPlayerID
                     == DAT_GameSynchronyState::instance.currentPlayerSlotID) {

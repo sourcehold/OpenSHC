@@ -99,7 +99,7 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                 = (OpenSHC::Map::Units::States::UnitState_WheatFarmer)DAT_BuildingsState::instance.buildings[farm]
-                      .wheatGrowStateRelated;
+                      .farmGrowState;
             DAT_UnitsState::instance.units[unitID].destinationYPosition
                 = DAT_ViewportRenderState::instance
                       .tileTranslationMatrix_YComponent[DAT_BuildingsState::instance.farmerDestinationTile];
@@ -212,7 +212,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFarmTileReadyForWheatStageChange,
                     DAT_BuildingsState::ptr)(farm)
                     == 0
-                || DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated != 3) {
+                || DAT_BuildingsState::instance.buildings[farm].farmGrowState != 3) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                     = OpenSHC::Map::Units::States::USWF_GOING_TO_WORKPLACE;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationNeeded
@@ -252,7 +252,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFarmTileReadyForWheatStageChange,
                     DAT_BuildingsState::ptr)(farm)
                     == 0
-                || DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated != 5) {
+                || DAT_BuildingsState::instance.buildings[farm].farmGrowState != 5) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                     = OpenSHC::Map::Units::States::USWF_GOING_TO_WORKPLACE;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationNeeded
@@ -351,9 +351,9 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFarmTileReadyForWheatStageChange,
                     DAT_BuildingsState::ptr)(farm)
                     == 0
-                || (DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated
+                || (DAT_BuildingsState::instance.buildings[farm].farmGrowState
                         != OpenSHC::Map::Units::States::USWF_WORKING_6
-                    && DAT_BuildingsState::instance.buildings[farm].wheatGrowStateRelated
+                    && DAT_BuildingsState::instance.buildings[farm].farmGrowState
                         != OpenSHC::Map::Units::States::USWF_WORKING_8)) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                     = OpenSHC::Map::Units::States::USWF_GOING_TO_WORKPLACE;
@@ -363,7 +363,7 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                 = (OpenSHC::Map::Units::States::UnitState_WheatFarmer)DAT_BuildingsState::instance.buildings[farm]
-                      .wheatGrowStateRelated;
+                      .farmGrowState;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationYPosition
                 = DAT_ViewportRenderState::instance
                       .tileTranslationMatrix_YComponent[DAT_BuildingsState::instance.farmerDestinationTile];
@@ -490,9 +490,9 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFarmTileReadyForWheatStageChange,
                     DAT_BuildingsState::ptr)(workplace)
                     == 0
-                || (DAT_BuildingsState::instance.buildings[workplace].wheatGrowStateRelated
+                || (DAT_BuildingsState::instance.buildings[workplace].farmGrowState
                         != OpenSHC::Map::Units::States::USWF_WORKING_6
-                    && DAT_BuildingsState::instance.buildings[workplace].wheatGrowStateRelated
+                    && DAT_BuildingsState::instance.buildings[workplace].farmGrowState
                         != OpenSHC::Map::Units::States::USWF_WORKING_8)) {
                 MACRO_CALL(OpenSHC::Map::Units_Func::IncrementAndOptionalUpdateAVValueRelated)(
                     DAT_CurrentUnitSlotID::instance, TRUE);
@@ -504,7 +504,7 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.wheatFarmer
                 = (OpenSHC::Map::Units::States::UnitState_WheatFarmer)DAT_BuildingsState::instance.buildings[workplace]
-                      .wheatGrowStateRelated;
+                      .farmGrowState;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].destinationYPosition
                 = DAT_ViewportRenderState::instance
                       .tileTranslationMatrix_YComponent[DAT_BuildingsState::instance.farmerDestinationTile];
