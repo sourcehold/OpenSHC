@@ -25,8 +25,6 @@ namespace Map {
             int x1, int y1, int x2, int y2, int maxTries)
         {
             uint uVar4;
-            int iVar6;
-            uint _tile;
             if (399 < (uint)x1 || 399 < (uint)y1) {
                 return (undefined4)(0);
             }
@@ -58,7 +56,7 @@ namespace Map {
                 }
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while (true) {
-                        _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        uint _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (_tile == uVar4) {
                             return (undefined4)(1);
                         }
@@ -68,125 +66,125 @@ namespace Map {
                         int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                         for (int iVar3 = 0; iVar3 < 8; iVar3 = iVar3 + 4) {
-                            iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][iVar3] + _tile;
+                            int iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][iVar3] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
-                            && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                   & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3])
-                                != 0
-                            && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                    || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
-                                || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
-                                    && (DAT_BuildingDefinedData::instance
-                                            .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
-                                                    .buildingType]
-                                        != 0))))) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar6]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3]
-                                      .short_.yOffset
-                                + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                                    || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
+                                        && (DAT_BuildingDefinedData::instance
+                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
+                                                        .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
+                                                        .buildingType]
+                                            != 0))))) {
+                                DAT_TileMapState::instance.CertainPathLayer[iVar6]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3]
+                                          .short_.xOffset
+                                    + sVar2;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3]
+                                          .short_.yOffset
+                                    + sVar1;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
+                                }
                             }
                             iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][iVar3 + 1] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
-                            && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                   & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 1])
-                                != 0
-                            && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                    || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
-                                || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
-                                    && (DAT_BuildingDefinedData::instance
-                                            .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
-                                                    .buildingType]
-                                        != 0))))) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar6]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 1]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 1]
-                                      .short_.yOffset
-                                + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 1])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                                    || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
+                                        && (DAT_BuildingDefinedData::instance
+                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
+                                                        .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
+                                                        .buildingType]
+                                            != 0))))) {
+                                DAT_TileMapState::instance.CertainPathLayer[iVar6]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 1]
+                                          .short_.xOffset
+                                    + sVar2;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 1]
+                                          .short_.yOffset
+                                    + sVar1;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
+                                }
                             }
                             iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][iVar3 + 2] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
-                            && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                   & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 2])
-                                != 0
-                            && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                    || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
-                                || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
-                                    && (DAT_BuildingDefinedData::instance
-                                            .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
-                                                    .buildingType]
-                                        != 0))))) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar6]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 2]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 2]
-                                      .short_.yOffset
-                                + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 2])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                                    || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
+                                        && (DAT_BuildingDefinedData::instance
+                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
+                                                        .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
+                                                        .buildingType]
+                                            != 0))))) {
+                                DAT_TileMapState::instance.CertainPathLayer[iVar6]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 2]
+                                          .short_.xOffset
+                                    + sVar2;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 2]
+                                          .short_.yOffset
+                                    + sVar1;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
+                                }
                             }
                             iVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][iVar3 + 3] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
-                            && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                   & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 3])
-                                != 0
-                            && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                    || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
-                                || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
-                                    && (DAT_BuildingDefinedData::instance
-                                            .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
-                                                    .buildingType]
-                                        != 0))))) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar6]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 3]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 3]
-                                      .short_.yOffset
-                                + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 3])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                                    || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
+                                        && (DAT_BuildingDefinedData::instance
+                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
+                                                        .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
+                                                        .buildingType]
+                                            != 0))))) {
+                                DAT_TileMapState::instance.CertainPathLayer[iVar6]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 3]
+                                          .short_.xOffset
+                                    + sVar2;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 3]
+                                          .short_.yOffset
+                                    + sVar1;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar6;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
+                                }
                             }
                         }
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
