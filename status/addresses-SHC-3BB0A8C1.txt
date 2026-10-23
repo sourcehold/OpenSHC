@@ -46327,7 +46327,7 @@ SHC_3BB0A8C1_0x0051E2F2 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051E2F3 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0051E300 | 41.0% | asm macro, 5 exact blocks
+SHC_3BB0A8C1_0x0051E300 | 42.5% | asm macros, 6 exact blocks
 
 SHC_3BB0A8C1_0x0051E4D0 | 0.0% | Pending
 

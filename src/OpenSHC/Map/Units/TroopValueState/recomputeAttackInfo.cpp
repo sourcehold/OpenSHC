@@ -345,25 +345,7 @@ namespace Map {
                                 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                             DAT_TileMapState::instance.DAT_SomeTile = _tile;
                             MACRO_ASM_FILL_CARDINAL_PATH_CONNECTIONS();
-                            _pPathConnectionBase = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
-                            _pSpecialAreasBase = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
-                            _candidateTile = DAT_TileMapState::instance.DAT_SomeTile;
-                            _pValueCount
-                                = (int*)(((char*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix)
-                                    + DAT_TileMapState::instance.DAT_SomeY * 0x20);
-                            _directionStep = *_pValueCount * 2 + DAT_TileMapState::instance.DAT_SomeTile * 2;
-                            _pathConnectionValue
-                                = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                    + _directionStep + -2);
-                            *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray) + 2)
-                                = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_PathConnectionLayer)
-                                    + _directionStep + 2);
-                            *(undefined2*)(_pPathConnectionBase + 0xe) = _pathConnectionValue;
-                            _directionStep = _pValueCount[4] * 2 + _candidateTile * 2;
-                            _pathConnectionValue = *(undefined2*)(_pSpecialAreasBase + _directionStep + -2);
-                            *(undefined2*)(_pPathConnectionBase + 6)
-                                = *(undefined2*)(_pSpecialAreasBase + _directionStep + 2);
-                            *(undefined2*)(_pPathConnectionBase + 10) = _pathConnectionValue;
+                            MACRO_ASM_FILL_DIAGONAL_PATH_CONNECTIONS();
                             for (_direction = 0; _direction < 8; _direction += 2) {
                                 dword _toArea = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                       calculateCanPlayerUnitsNavigateToAreaFromArea,
