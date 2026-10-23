@@ -14,7 +14,6 @@
 #include "OpenSHC/AI/AIV/AIVBuildingType2Short.hpp"
 #include "OpenSHC/AI/AIV/AIVSpec.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Map/HeatMap.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -27,7 +26,6 @@ namespace AI {
     using OpenSHC::AI::AIV::AIVBuildingType2Short;
     using OpenSHC::AI::AIV::AIVSpec;
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::Map::HeatMap;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -63,8 +61,8 @@ namespace AI {
         AIMapExtraInfo mapExtraInfo; // 0x0005CA14 length: 816
         HeatMap heatMaps[80][80]; // 0x0005CD44 length: 307200
         int visitCount; // 0x000A7D44 length: 4
-        undefined4 algAIndex; // 0x000A7D48 length: 4
-        undefined4 algBIndex; // 0x000A7D4C length: 4
+        int algAIndex; // 0x000A7D48 length: 4
+        int algBIndex; // 0x000A7D4C length: 4
         int heatMapXArray[6400]; // 0x000A7D50 length: 25600
         int heatMapYArray[6400]; // 0x000AE150 length: 25600
         int buildingApproriateGridXPosition; // 0x000B4550 length: 4
@@ -100,13 +98,13 @@ namespace AI {
 
         void rotateAIV(int orientation);
 
-        void aiPlaceFlag(PlayerID playerID);
+        void aiPlaceFlag(int playerID);
 
-        void aiPlaceBrazier(PlayerID playerID);
+        void aiPlaceBrazier(int playerID);
 
         void incrementStructureHeatMapTile(int x, int y);
 
-        BOOLEnum aiPlaceAIVBuilding(PlayerID playerID, int step, int isPausing);
+        BOOLEnum aiPlaceAIVBuilding(int playerID, int step, int isPausing);
 
         void clearTheHeatmaps();
 
@@ -114,7 +112,7 @@ namespace AI {
 
         int computeLargestSeparateArea();
 
-        int findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum commandBuildingType);
+        BOOLEnum findSuitableFarmLocationAndPlaceFarm(int playerID, MappersEnum commandBuildingType);
 
         void findAppropriateWoodCutterGridLocation(int playerID);
 
@@ -139,7 +137,7 @@ namespace AI {
 
         BOOLEnum findSpotNearEngineersGuild(int param_1);
 
-        void aiPlaceAdditionalOxtether(PlayerID playerID);
+        void aiPlaceAdditionalOxtether(int playerID);
 
         void aiPlacePitchrig(int playerID);
 
@@ -147,7 +145,7 @@ namespace AI {
 
         void aiPlaceQuarryAndOxtether(int playerID);
 
-        BOOLEnum executeDefaultCastleAIV(PlayerID playerID, int param_2);
+        BOOLEnum executeDefaultCastleAIV(int playerID, int param_2);
 
         void recomputeHeatmaps(int initialize);
 
@@ -155,7 +153,7 @@ namespace AI {
 
         int tryPlaceAIVAndReturnFitPercentage(int playerID, int castleID);
 
-        void aiDecideOnNewBuildings(PlayerID playerID);
+        void aiDecideOnNewBuildings(int playerID);
 
         void updateBuildingsStateAndUpdateAIBuildingDecisions();
     };

@@ -15,6 +15,7 @@ namespace UI {
 
             MVT_NO_VIEW = 0, // 0x00000000
             MVT_UNUSED_OLD_TITLE_MENU = 1, // 0x00000001
+            MVT_UNKNOWN_2 = 2, // 0x00000002
             MVT_INTRO_LOGOS = 3, // 0x00000003
             MVT_EMPTY_10 = 10, // 0x0000000A
             MVT_EMPTY_11 = 11, // 0x0000000B

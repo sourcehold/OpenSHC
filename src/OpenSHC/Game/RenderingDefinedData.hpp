@@ -224,10 +224,10 @@ namespace Game {
         int field1024_0x54930; // 0x00054930 length: 4
         int field1025_0x54934; // 0x00054934 length: 4
         int field1026_0x54938; // 0x00054938 length: 4
-        int field1027_0x5493c[24]; // 0x0005493C length: 96
-        int field1028_0x5499c[24]; // 0x0005499C length: 96
-        int field1029_0x549fc[24]; // 0x000549FC length: 96
-        UnitTypeInt field1030_0x54a5c[28]; // 0x00054A5C length: 112
+        int ScribeAnimationFrames1[24]; // 0x0005493C length: 96
+        int ScribeAnimationFrames2[24]; // 0x0005499C length: 96
+        int ScribeAnimationFrames3[24]; // 0x000549FC length: 96
+        UnitTypeInt SelectionSlotUnitTypes[28]; // 0x00054A5C length: 112
         char* ChimpTgxArray[70]; // 0x00054ACC length: 280
         char* ChimpTgxSketchArray[80]; // 0x00054BE4 length: 320
         char* ChimpHelpArray[70]; // 0x00054D24 length: 280
@@ -235,18 +235,18 @@ namespace Game {
         char* BuildingHelpArray[108]; // 0x00054F54 length: 432
         char* BuildingBikArray[108]; // 0x00055104 length: 432
         char* BuildingTgxSketchArray[108]; // 0x000552B4 length: 432
-        ResourceTypeInt field1038_0x55464[8]; // 0x00055464 length: 32
-        int field1039_0x55484[8]; // 0x00055484 length: 32
+        ResourceTypeInt StockpileMenuResourceTypes[8]; // 0x00055464 length: 32
+        int StockpileMenuResourceIcons[8]; // 0x00055484 length: 32
         Position StockpileIconsPositionNudges[8]; // 0x000554A4 length: 64
-        int field1041_0x554e4[8]; // 0x000554E4 length: 32
-        int field1042_0x55504[8]; // 0x00055504 length: 32
-        Position field1043_0x55524[8]; // 0x00055524 length: 64
+        int ArmoryMenuResourceTypes[8]; // 0x000554E4 length: 32
+        int ArmoryMenuResourceIcons[8]; // 0x00055504 length: 32
+        Position ArmoryIconsPositionNudges[8]; // 0x00055524 length: 64
         int MarketStonksOrder[20]; // 0x00055564 length: 80
         ResourceTypeInt FoodTypes[8]; // 0x000555B4 length: 32
         int RawResourceTypes[4]; // 0x000555D4 length: 16
         int field1047_0x555e4[8]; // 0x000555E4 length: 32
         Position field1048_0x55604[25]; // 0x00055604 length: 200
-        int field1049_0x556cc[7][3]; // 0x000556CC length: 84
+        int PopularityMessageLayout[7][3]; // 0x000556CC length: 84
         int field1050_0x55720[4]; // 0x00055720 length: 16
         undefined1 padding_0x55730[68]; // 0x00055730 length: 68
         UnitTypeInt UnitTypeGroups[3][9]; // 0x00055774 length: 108

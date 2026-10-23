@@ -32,10 +32,10 @@ namespace UI {
         int zero; // 0x00000018 length: 4
         int mouseXScreenSpace; // 0x0000001C length: 4
         int mouseYScreenSpace; // 0x00000020 length: 4
-        int field9_0x24; // 0x00000024 length: 4
-        int field10_0x28; // 0x00000028 length: 4
-        int field11_0x2c; // 0x0000002C length: 4
-        int field12_0x30; // 0x00000030 length: 4
+        int hoverTextX; // 0x00000024 length: 4
+        int hoverTextY; // 0x00000028 length: 4
+        int textIndexInGroup; // 0x0000002C length: 4
+        int textGroupIndex; // 0x00000030 length: 4
         int someTimestampUnk; // 0x00000034 length: 4
         MenuItem* hoveredItem; // 0x00000038 length: 4
         MenuItem* someMenuItemPtr_0x3c; // 0x0000003C length: 4

@@ -105,7 +105,7 @@ namespace Map {
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
-            int findEnemyLord(undefined4 param_1);
+            int findEnemyLord(int unitID);
 
             void setGate2(int param_1, int param_2);
 

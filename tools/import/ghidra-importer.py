@@ -177,6 +177,8 @@ def is_symbol_addr_in_useful_range(addr, include_code = True):
     return False
   if addr < 0x005a6e20:
     return False
+  if addr == 0x005ac12c:
+    return True
   if addr >= 0x005a6f00 and addr < 0x005b6004:
     return False
   if addr >= 0x00b93208 and addr < 0x00b94220:
@@ -320,6 +322,13 @@ for obj in objs:
     collection.add(exporter.export_typedef(td))
 
 def write_patches(output_dir: pathlib.Path):
+  path = (output_dir / "OpenSHC" / "OS.hpp")
+  content = path.read_bytes().replace(b"void __cdecl _exit(", b"__declspec(noreturn) void __cdecl _exit(")
+  path.write_bytes(content)
+
+  (output_dir / "OpenSHC/Map/Navigation/PathFindingState/" / "LinkageNeighbourAsm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "LinkageNeighbourAsm.hpp").read_bytes()
+  )
   pass # Overwrite hpp files in this function
 
 if not args.dry_run:

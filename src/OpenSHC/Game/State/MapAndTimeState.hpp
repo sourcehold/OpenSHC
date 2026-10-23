@@ -13,12 +13,9 @@
 #include "OpenSHC/Game/Signpost/SignpostLocation.hpp"
 #include "OpenSHC/Game/Skirmish/AttackVector.hpp"
 #include "OpenSHC/Map/Location/Point4ShortXY.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYTileObject.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
-#include "WinDef.h"
 
 namespace OpenSHC {
 namespace Game {
@@ -29,7 +26,6 @@ namespace Game {
         using OpenSHC::Game::Signpost::SignpostLocation;
         using OpenSHC::Game::Skirmish::AttackVector;
         using OpenSHC::Map::Location::Point4ShortXY;
-        using OpenSHC::Map::Location::Point8IntXY;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::Map::Navigation::Algorithms::XYTileObject;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -60,7 +56,7 @@ namespace Game {
             int field19_0x4c; // 0x0000004C length: 4
             int field20_0x50; // 0x00000050 length: 4
             int field21_0x54; // 0x00000054 length: 4
-            int field22_0x58[2][5]; // 0x00000058 length: 40
+            int playerKeepTile[10]; // 0x00000058 length: 40
             int field23_0x80; // 0x00000080 length: 4
             int field24_0x84; // 0x00000084 length: 4
             int field25_0x88; // 0x00000088 length: 4
@@ -71,23 +67,15 @@ namespace Game {
             int field30_0x9c; // 0x0000009C length: 4
             int field31_0xa0; // 0x000000A0 length: 4
             int field32_0xa4; // 0x000000A4 length: 4
-            int field33_0xa8; // 0x000000A8 length: 4
-            int field34_0xac; // 0x000000AC length: 4
-            int field35_0xb0; // 0x000000B0 length: 4
-            int field36_0xb4; // 0x000000B4 length: 4
-            int field37_0xb8; // 0x000000B8 length: 4
-            int field38_0xbc; // 0x000000BC length: 4
-            int field39_0xc0; // 0x000000C0 length: 4
-            int field40_0xc4; // 0x000000C4 length: 4
-            int field41_0xc8; // 0x000000C8 length: 4
+            int hitsDealtToPlayerArray[9]; // 0x000000A8 length: 36
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4
             int field44_0xf4; // 0x000000F4 length: 4
             int multiplayerUnitSameTileLinkageTimeWindow; // 0x000000F8 length: 4
-            DWORD gameOverTime; // 0x000000FC length: 4
+            dword gameOverTime; // 0x000000FC length: 4
             int drunkenManStatus; // 0x00000100 length: 4
             undefined1 padding_0x104[144]; // 0x00000104 length: 144
-            int field192_0x194; // 0x00000194 length: 4
+            int syncedStateBase; // 0x00000194 length: 4
             int field193_0x198; // 0x00000198 length: 4
             undefined1 padding_0x19c[380]; // 0x0000019C length: 380
             int cathedralRelated1; // 0x00000318 length: 4
@@ -110,8 +98,7 @@ namespace Game {
             BOOLEnum startOfDay; // 0x00000364 length: 4
             int skirmishFogOfWar; // 0x00000368 length: 4
             undefined1 padding_0x36c[436]; // 0x0000036C length: 436
-            XYPair somePairArray; // 0x00000520 length: 8
-            undefined1 padding_0x528[312]; // 0x00000528 length: 312
+            XYPair somePairArray[40]; // 0x00000520 length: 320
             int startGoods[25]; // 0x00000660 length: 100
             SiegeUnitCounts siegeInformation; // 0x000006C4 length: 80
             int startingPopularity; // 0x00000714 length: 4
@@ -140,7 +127,7 @@ namespace Game {
             int euroRecruitableCopy_index_1_b; // 0x00000D9C length: 4
             int euroRecruitableCopy_index_2; // 0x00000DA0 length: 4
             int euroRecruitableCopy_index_3_b; // 0x00000DA4 length: 4
-            int field2257_0xda8; // 0x00000DA8 length: 4
+            int euroRecruitableCopy_index_4; // 0x00000DA8 length: 4
             int euroRecruitableCopy_index_6_a; // 0x00000DAC length: 4
             int euroRecruitableCopy_index_1_a; // 0x00000DB0 length: 4
             int euroRecruitableCopy_index_3_a_and_6_b; // 0x00000DB4 length: 4
@@ -152,7 +139,7 @@ namespace Game {
             short scenarioGold; // 0x00000DE8 length: 2
             short editScenarioExtraOptions; // 0x00000DEA length: 2
             short eventCountdownRabbitInfestation; // 0x00000DEC length: 2
-            short field2269_0xdee; // 0x00000DEE length: 2
+            short animalSpawnSlotCursor; // 0x00000DEE length: 2
             Point4ShortXY lionLocationsXY[4]; // 0x00000DF0 length: 16
             short unitLadyRelated; // 0x00000E00 length: 2
             short unitJesterRelated; // 0x00000E02 length: 2
@@ -160,38 +147,7 @@ namespace Game {
             int populationIndex; // 0x0000231C length: 4
             undefined1 padding_0x2320[816]; // 0x00002320 length: 816
             int signpostsMapEdgeDataCounter; // 0x00002650 length: 4
-            int field3092_0x2654; // 0x00002654 length: 4
-            int field3093_0x2658; // 0x00002658 length: 4
-            int field3094_0x265c; // 0x0000265C length: 4
-            int field3095_0x2660; // 0x00002660 length: 4
-            int field3096_0x2664; // 0x00002664 length: 4
-            int field3097_0x2668; // 0x00002668 length: 4
-            int field3098_0x266c; // 0x0000266C length: 4
-            int field3099_0x2670; // 0x00002670 length: 4
-            int field3100_0x2674; // 0x00002674 length: 4
-            int field3101_0x2678; // 0x00002678 length: 4
-            int field3102_0x267c; // 0x0000267C length: 4
-            int field3103_0x2680; // 0x00002680 length: 4
-            int field3104_0x2684; // 0x00002684 length: 4
-            int field3105_0x2688; // 0x00002688 length: 4
-            int field3106_0x268c; // 0x0000268C length: 4
-            int field3107_0x2690; // 0x00002690 length: 4
-            int field3108_0x2694; // 0x00002694 length: 4
-            int field3109_0x2698; // 0x00002698 length: 4
-            int field3110_0x269c; // 0x0000269C length: 4
-            int field3111_0x26a0; // 0x000026A0 length: 4
-            int field3112_0x26a4; // 0x000026A4 length: 4
-            int field3113_0x26a8; // 0x000026A8 length: 4
-            int field3114_0x26ac; // 0x000026AC length: 4
-            int field3115_0x26b0; // 0x000026B0 length: 4
-            int field3116_0x26b4; // 0x000026B4 length: 4
-            int field3117_0x26b8; // 0x000026B8 length: 4
-            int field3118_0x26bc; // 0x000026BC length: 4
-            int field3119_0x26c0; // 0x000026C0 length: 4
-            int field3120_0x26c4; // 0x000026C4 length: 4
-            int field3121_0x26c8; // 0x000026C8 length: 4
-            int field3122_0x26cc; // 0x000026CC length: 4
-            int field3123_0x26d0; // 0x000026D0 length: 4
+            int scenarioEventTimers[32]; // 0x00002654 length: 128
             int field3124_0x26d4; // 0x000026D4 length: 4
             int field3125_0x26d8; // 0x000026D8 length: 4
             int field3126_0x26dc; // 0x000026DC length: 4
@@ -234,7 +190,7 @@ namespace Game {
             int field3163_0x2770; // 0x00002770 length: 4
             int gameEventRelatedCountdown; // 0x00002774 length: 4
             int unk_signpostDistance; // 0x00002778 length: 4
-            int field3166_0x277c; // 0x0000277C length: 4
+            int wildlifeCount; // 0x0000277C length: 4
             short rabbitSpawnXY[4][2]; // 0x00002780 length: 16
             int field3168_0x2790; // 0x00002790 length: 4
             Point4ShortXY camelSpawnXY[4]; // 0x00002794 length: 16
@@ -244,11 +200,11 @@ namespace Game {
             int somePlayerID; // 0x000027B0 length: 4
             short playerIsAlive[9]; // 0x000027B4 length: 18
             short field3175_0x27c6; // 0x000027C6 length: 2
-            int field3176_0x27c8; // 0x000027C8 length: 4
+            int burningTreeCount; // 0x000027C8 length: 4
             int aliveDeerCount; // 0x000027CC length: 4
             int armySizeLimit; // 0x000027D0 length: 4
-            short field3179_0x27d4; // 0x000027D4 length: 2
-            short field3180_0x27d6; // 0x000027D6 length: 2
+            short militaryCampaignStage; // 0x000027D4 length: 2
+            short militaryCampaignFlags; // 0x000027D6 length: 2
             short yearCopy; // 0x000027D8 length: 2
             short monthCopy; // 0x000027DA length: 2
             short field3183_0x27dc; // 0x000027DC length: 2
@@ -263,14 +219,9 @@ namespace Game {
             undefined1 padding_0x27fc[252]; // 0x000027FC length: 252
             int mercRecruitable[7]; // 0x000028F8 length: 28
             undefined1 padding_0x2914[4]; // 0x00002914 length: 4
-            int signpostIDs[8]; // 0x00002918 length: 32
-            undefined1 padding_0x2938[32]; // 0x00002938 length: 32
-            SignpostLocation signpostEntryData[8]; // 0x00002958 length: 128
-            undefined1 padding_0x29d8[124]; // 0x000029D8 length: 124
-            int strongWalls; // 0x00002A54 length: 4
-            XYTileObject signpostsMapEdge[7][50]; // 0x00002A58 length: 5600
-            undefined1 padding_0x4038[480]; // 0x00004038 length: 480
-            Point8IntXY aiTribeMoveDestinationXYPairArray1[5][8]; // 0x00004218 length: 320
+            int signpostIDs[16]; // 0x00002918 length: 64
+            SignpostLocation signpostEntryData[16]; // 0x00002958 length: 256
+            XYTileObject signpostsMapEdge[8][50]; // 0x00002A58 length: 6400
             XYPair unitMoveDestinationXYPairs[8][40]; // 0x00004358 length: 2560
             AttackVector attackVectors[9][50]; // 0x00004D58 length: 7200
             undefined1 padding_0x6978[800]; // 0x00006978 length: 800

@@ -19,7 +19,7 @@ namespace Rendering {
         int mouseTileX; // 0x00000004 length: 4
         int mouseTileY; // 0x00000008 length: 4
         int mouseTile; // 0x0000000C length: 4
-        int field4_0x10; // 0x00000010 length: 4
+        int previousMouseTile; // 0x00000010 length: 4
         undefined4 field5_0x14; // 0x00000014 length: 4
         undefined4 field6_0x18; // 0x00000018 length: 4
         int mouseRayBuildingID; // 0x0000001C length: 4
@@ -36,10 +36,10 @@ namespace Rendering {
         undefined4 field18_0x48; // 0x00000048 length: 4
         undefined4 field19_0x4c; // 0x0000004C length: 4
         undefined4 field20_0x50; // 0x00000050 length: 4
-        undefined4 field21_0x54; // 0x00000054 length: 4
+        undefined4 cursorWallTile; // 0x00000054 length: 4
         undefined4 field22_0x58; // 0x00000058 length: 4
         undefined4 field23_0x5c; // 0x0000005C length: 4
-        undefined4 field24_0x60; // 0x00000060 length: 4
+        undefined4 cursorTile; // 0x00000060 length: 4
         int mouseX; // 0x00000064 length: 4
         int mouseY; // 0x00000068 length: 4
         undefined4 field27_0x6c; // 0x0000006C length: 4
