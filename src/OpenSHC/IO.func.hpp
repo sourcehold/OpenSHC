@@ -17,8 +17,8 @@ namespace IO_Func {
     using OpenSHC::IO::Base64State;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4* param_1, undefined4* param_2), false,
-        Address::SHC_3BB0A8C1_0x0041A740, &OpenSHC::IO::SwapInts)
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(int* param_1, int* param_2), false, Address::SHC_3BB0A8C1_0x0041A740, &OpenSHC::IO::SwapInts)
     SwapInts;
 
     MACRO_FUNCTION_RESOLVER(
