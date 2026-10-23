@@ -53,6 +53,7 @@ BS = chr(92)
 
 args = [a for a in sys.argv[1:] if not a.startswith('--')]
 probe = '--probe' in sys.argv
+find = '--find' in sys.argv
 inv = None
 for a in sys.argv[1:]:
     if a.startswith('--invocation'):
@@ -61,7 +62,7 @@ if inv is None and '--invocation' in sys.argv:
     i = sys.argv.index('--invocation')
     if i + 1 < len(sys.argv):
         inv = sys.argv[i + 1]
-if not args or (not probe and not inv):
+if not args or (not probe and not find and not inv):
     sys.exit(__doc__)
 src = os.path.abspath(args[0])
 out = (common.ROOT / common.TMP / 'regscores').resolve()
@@ -92,7 +93,6 @@ def run(script_lines, tag):
     return r.stdout
 
 
-find = '--find' in sys.argv
 if find:
     # every named candidate with its invocation index: identification by name, which works
     # for functions smaller than the resolver-template flood that --probe ranks by size
