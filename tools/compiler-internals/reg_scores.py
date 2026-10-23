@@ -3,6 +3,7 @@
 usage: reg_scores.py FILE.cpp --probe
        reg_scores.py FILE.cpp --find [LOCALNAME ...]
        reg_scores.py FILE.cpp --advise LOCALNAME
+       reg_scores.py FILE.cpp --rankdiff LOCALNAME
        reg_scores.py FILE.cpp --invocation N
 
 `OrderGlobregs` orders the candidate values and `Color` walks that order, calling
@@ -34,6 +35,10 @@ identically):
 * `--invocation N` dumps that invocation's candidates as `score, symbol id, name`, in the
   order the compiler scored them. `(temp)` is a compiler temporary with no source name.
 * `--advise LOCALNAME` prints the score table per candidate and names the patterns in it.
+* `--rankdiff LOCALNAME` pairs our benefit ranking with the callee-saved save order on both
+  sides, taken from the last reccmp run, and names the candidate that is served later than
+  the original serves it - and which candidates it would have to outrank. Needs a current
+  `reccmp_report.py --run`.
 
 On what `--advise` is worth: its suggestions were tested on `aiRecruitUnits` (50.0%), whose
 scores show the strongest structural signal of any function tried - a loop counter `i` at
@@ -76,6 +81,7 @@ BS = chr(92)
 args = [a for a in sys.argv[1:] if not a.startswith('--')]
 probe = '--probe' in sys.argv
 find = '--find' in sys.argv
+rankdiff = '--rankdiff' in sys.argv
 advise = '--advise' in sys.argv
 inv = None
 for a in sys.argv[1:]:
@@ -85,7 +91,7 @@ if inv is None and '--invocation' in sys.argv:
     i = sys.argv.index('--invocation')
     if i + 1 < len(sys.argv):
         inv = sys.argv[i + 1]
-if not args or (not probe and not find and not advise and not inv):
+if not args or (not probe and not find and not advise and not rankdiff and not inv):
     sys.exit(__doc__)
 src = os.path.abspath(args[0])
 out = (common.ROOT / common.TMP / 'regscores').resolve()
@@ -174,7 +180,112 @@ def advise_on(rows):
     print('Measure each one with reccmp_report.py --run before keeping it.')
 
 
-if find or advise:
+def push_orders(funcname):
+    """(original, ours) callee-saved save order for one function, from the last reccmp run.
+
+    Registers are consumed in the order they are first needed, and MSVC saves a callee-saved
+    register where it first needs it, so the push order is the consumption order.
+    """
+    import common as _c
+    try:
+        byaddr = _c.load_diff()
+    except Exception:
+        return None, None, None
+    push = re.compile(r'^push (ebx|esi|edi|ebp)$')
+    for _f, e, _a in _c.entries(byaddr):
+        if e is None or not e.get('diff') or not e['name'].endswith('::' + funcname):
+            continue
+        orig, ours = _c._asm_lines(e)
+        seqs = []
+        for stream in (orig, ours):
+            seq = []
+            for line in stream:
+                m = push.match(line.strip())
+                if m and m.group(1) not in seq:
+                    seq.append(m.group(1))
+            seqs.append(seq)
+        return seqs[0], seqs[1], float(e['matching']) * 100
+    return None, None, None
+
+
+def rank_diff(funcname, rows):
+    """Pair our benefit ranking with each side's register consumption order."""
+    best = {}
+    for benefit, name in rows:
+        if name != '(temp)':
+            best[name] = max(best.get(name, benefit), benefit)
+    ranked = sorted(best.items(), key=lambda kv: -kv[1])
+    orig, ours, pct = push_orders(funcname)
+    print('')
+    print('our benefit ranking (candidates, highest first):')
+    for i, (n, b) in enumerate(ranked[:12], 1):
+        print('  %2d %-28s %d' % (i, n, b))
+    if orig is None:
+        print('')
+        print('No reccmp entry for %s, so the original ordering is unknown.' % funcname)
+        print('Run reccmp_report.py --run first.')
+        return
+    print('')
+    print('callee-saved consumption order (= push order):')
+    print('  original: %s' % ' '.join(orig))
+    print('  ours:     %s' % ' '.join(ours))
+    if orig == ours:
+        print('')
+        print('The two orders agree, so our candidates are served in the original\'s order.')
+        print('Whatever is left in this function is not a candidate-ranking difference.')
+        return
+    if len(orig) == len(ours) and orig == list(reversed(ours)) and len(orig) > 2:
+        print('')
+        print('The two orders are exact reverses of each other. That is a systematic difference -')
+        print('every position is wrong in the same way - which points at the register pick rather')
+        print('than at the candidate ranking: ChoosePhysReg narrows the available mask before it')
+        print('takes the lowest bit, and that narrowing is not decoded. A per-candidate ranking')
+        print('difference shows up as one candidate out of place, not as a reversal.')
+        print('Changing use counts will not fix this; do not read the pairing below as advice.')
+    if set(orig) == set(ours) and orig != ours:
+        print('')
+        print('Both sides use the same registers, just in a different order, so neither side')
+        print('carries a value the other does not - the candidate *set* matches. A permutation')
+        print('like this has two possible causes and they cannot be told apart from here: our')
+        print('candidates are ranked differently, or they are ranked the same and ChoosePhysReg')
+        print('narrowed the available mask differently (that narrowing is not decoded). The')
+        print('pairing below assumes the first. Treat it as a hypothesis to test, not a finding.')
+    print('')
+    print('Pairing position k of the ranking with position k of the save order - candidates are')
+    print('served in benefit order, so the k-th register saved goes to the k-th ranked candidate:')
+    print('')
+    print('  %-4s %-28s %-9s %-9s' % ('pos', 'our candidate', 'ours', 'original'))
+    for i in range(max(len(orig), len(ours))):
+        nm = ranked[i][0] if i < len(ranked) else '-'
+        o = ours[i] if i < len(ours) else '-'
+        g = orig[i] if i < len(orig) else '-'
+        flag = '' if o == g else '   <- differs'
+        print('  %-4d %-28s %-9s %-9s%s' % (i + 1, nm, o, g, flag))
+    first = next((i for i in range(min(len(orig), len(ours))) if orig[i] != ours[i]), None)
+    if first is None:
+        return
+    print('')
+    print('First divergence at position %d: we save %s there, the original saves %s.'
+          % (first + 1, ours[first], orig[first]))
+    where = next((j for j, r in enumerate(ours) if r == orig[first]), None)
+    if where is not None and where > first:
+        print('We save %s at position %d instead, so the candidate we rank %d - %s - is served'
+              % (orig[first], where + 1, where + 1, ranked[where][0] if where < len(ranked) else '?'))
+        print('later than the original serves it. To match, it has to outrank the %d candidate(s)'
+              % (where - first))
+        print('above it: %s.' % ', '.join(n for n, _b in ranked[first:where]))
+        print('')
+        print('That means raising its weighted use count above %d, or lowering theirs - a change to'
+              % (ranked[first][1] if first < len(ranked) else 0))
+        print('how often and at what loop depth those values are used. No reordering or renaming')
+        print('will do it, and whether it is reachable without changing behaviour is a judgement')
+        print('call about the function, not something this tool can decide.')
+    else:
+        print('The original uses a register we do not use at all here, so the two sides do not')
+        print('have the same candidate set - look for a value one side carries and the other does not.')
+
+
+if find or advise or rankdiff:
     # every named candidate with its invocation index: identification by name, which works
     # for functions smaller than the resolver-template flood that --probe ranks by size
     q = BS + '"'
@@ -191,6 +302,14 @@ if find or advise:
     want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
     hits = [i for i in sorted(rows)
             if not want or any(w in [n for _s, n in rows[i]] for w in want)]
+    if rankdiff:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        fname = os.path.basename(src)[:-4]
+        print('### invocation #%d of %s, %d candidates' % (pick, fname, len(rows[pick])))
+        rank_diff(fname, rows[pick])
+        sys.exit(0)
     if advise:
         if not hits:
             sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))

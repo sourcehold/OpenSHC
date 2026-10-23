@@ -314,8 +314,28 @@ What the numbers do support is a sharper statement of the problem. For an `alloc
   unreachable from the source. `recruitHarrassingSiegeEngines`, with four candidates tied at +36, is this case
   and should be abandoned.
 
-`reg_scores.py` tells you which of the two you are in, per variable. That is the useful form of "fixer" the
-evidence supports; it is a decision procedure, not an automatic rewrite.
+`reg_scores.py --rankdiff` tells you which of the two you are in, per variable. It pairs our benefit ranking
+with the callee-saved save order on both sides - registers are consumed in the order they are first needed, so
+the push order *is* the consumption order, and it comes free from the last reccmp run. For `sellExcessGoods`:
+
+```
+our benefit ranking:        1 amount 70   2 variance 22   3 resourceType 20   4 resourceOffset 20 ...
+consumption order  original: ebp edi ebx esi
+                   ours:     esi ebx ebp edi
+```
+
+Both sides use the same four registers, so the candidate *set* matches and neither side carries a value the other
+does not - that much is solid, and it rules out the `aiRecruitUnits` case for this function. What the permutation
+*means* cannot be settled from here: either our candidates are ranked differently, or they are ranked the same
+and `ChoosePhysReg` narrowed the mask differently. The tool says so and labels the pairing a hypothesis rather
+than a finding, because the mask narrowing is undecoded. It also flags the degenerate case where the two orders
+are exact reverses, which would be systematic rather than per-candidate.
+
+So the honest scope of the "fixer" is: it decides set-mismatch against order-mismatch, names the candidate that
+would have to be re-ranked under the ranking hypothesis, and states what that would cost (a change in weighted
+use counts, which is a change in what the code does). It is a decision procedure, not an automatic rewrite, and
+the last step from "this candidate is mis-ranked" to "therefore edit this line" needs the mask narrowing decoded
+first.
 
 ### Do the suggestions prescribe a fix? Measured: no
 
