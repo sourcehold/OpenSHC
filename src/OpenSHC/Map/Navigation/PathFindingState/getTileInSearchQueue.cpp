@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "../PathFindingState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

@@ -233,9 +233,9 @@ namespace Synchrony {
         char DAT_ChatMessageSubjectPlayerNameArray[20][250]; // 0x00102F5A length: 5000
         char DAT_ChatMessageObjectPlayerNameArray[20][250]; // 0x001042E2 length: 5000
         undefined1 padding_0x10566a[2]; // 0x0010566A length: 2
-        undefined4 DAT_ChatMessageArrayIndex; // 0x0010566C length: 4
-        undefined4 chatMessageRenderIndex; // 0x00105670 length: 4
-        undefined4 DAT_InsultTextIndex; // 0x00105674 length: 4
+        int DAT_ChatMessageArrayIndex; // 0x0010566C length: 4
+        int chatMessageRenderIndex; // 0x00105670 length: 4
+        int DAT_InsultTextIndex; // 0x00105674 length: 4
         ChatEvent DAT_ChatEventArray[20]; // 0x00105678 length: 320
         char shortMapName[120]; // 0x001057B8 length: 120
         int skirmishRelated1; // 0x00105830 length: 4

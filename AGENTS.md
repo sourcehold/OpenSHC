@@ -151,12 +151,17 @@ restyling anything large:
   `__asm` block rather than C++. Functions are never `__declspec(naked)`: write a normal function, keep the
   compiler-generated statements as C++, and refer to parameters, locals and `this` by name. Prettify offsets with
   MSVC's struct-member asm syntax (`mov esi, dword ptr [eax]TileMapState.ptr_LogicLayer`) - `::` is not parseable in an
-  asm operand, so a resolver global cannot be named there.
-- a frame pointer plus a `this` spill - the original was built without optimisation. Add `#pragma optimize(, off)`
-  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
-  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
-  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
-  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+  asm operand, so a resolver global cannot be named there. Where the handwritten block reaches a *global* layer rather
+  than a `this` field, give it a C++ pointer local and name that local in the asm; the original caches the same bases in
+  stack slots anyway, so the inner loop still matches. `mov eax, 0` followed by `mov ax, word ptr [..]` is the giveaway
+  in its own right - that is a hand-rolled `movzx`, which the compiler always emits as one instruction.
+  Such a block is usually a **macro**: the same instruction stream appears verbatim in several functions and never as a
+  call, so it belongs in a hand-written `*Asm.hpp` beside them (`NeighbourFlagsAsm.hpp`, `LinkageNeighbourAsm.hpp`).
+  This has been worth ~45 points per function, three times over.
+- a frame pointer plus a `this` spill - the original was built without optimisation, **unless the same function also
+  reports `mov reg, 0`**. MSVC keeps `ebp` in any function containing an `__asm` block, so for a function with
+  handwritten assembly the frame pointer says nothing about the optimisation level: reimplement the handwritten part as
+  inline asm.
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
@@ -281,6 +286,14 @@ Style expected of reimplemented code:
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
   The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
   diff patterns below.
+- Prefer `const` on a local that is assigned once, spelled with `const` *after* the type (`int const tribeID = ...`).
+  This is not free: a `const` local whose initialiser is a **compile-time literal** lets MSVC fold the value into its
+  use sites and drop instructions the original still has, so leave those non-const. A `const` local initialised from a
+  memory read or a call is code-generation neutral. Over `AI::AICState` 165 of 172 candidates were neutral and 7 were
+  not - every one of them an `int tribeIndex = <literal>` feeding an array index, each costing 4 instructions and
+  0.18-0.50 of match (`setTribe0x11ToAggressiveAndAttackIfConditionMet` went 1.0000 -> 0.5000). Isolate before
+  blaming the qualifier: in `aiCommandTribe13DefensiveWave`, keeping `int const tribeID = <array read>` while
+  reverting `int tribeIndex = 13` alone restored 1.0000.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -291,6 +304,13 @@ unrelated height, a `break` left outside its `if` that made six `switch` arms un
 of the switch leaving the value it should have set uninitialised. Fixing them was also worth 7.7% of match, so a
 suspicious dead store is worth decompiling for rather than deleting. Note this is the opposite of the duplicate-tail
 pattern below, where our shared block should have been two separate branches - check the predecessor count either way.
+
+Duplicating a `LAB_*` is correct C++ but not automatically a better match, so **measure every `goto` removal**. A
+`goto` in the decompiler output usually marks a block the original compiler emitted once and jumped to, and writing
+the block out twice makes MSVC emit it twice: duplicating the single shared tail in
+`setClimbBasedOnClosestClimbData` - two `if` arms that set a coordinate pair and then share the distance test - was
+semantically identical and cost **35 points**. Keep the `goto` where the measurement says the original shared the
+block, and record that in the commit remark rather than trading match for style.
 
 Diff patterns that were reliable (more in the cheat sheet):
 
@@ -371,7 +391,25 @@ Diff patterns that were reliable (more in the cheat sheet):
 - MSVC1400 at `/O2` does unroll small constant-trip loops (`applyAIV`'s 10-iteration unit loop comes out five copies
   wide from a plain `for`), and `!=` as the bound suppresses it - see the cheat sheet. A body repeated N times in the
   asm is therefore not proof that the source wrote it out N times; compile the plain loop first and compare.
-- A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+  What the asm pins down is the unroll *factor*, and the way to hit a factor the compiler will not pick on its own is
+  an outer loop stepping by N with the inner N left to it: that compiles identically to writing the N copies out by
+  hand, down to everything but MSVC's label numbering. Read the factor off how the index is held. Once the whole trip
+  count is visible the compiler constant-folds every index, so each body carries absolute addresses and an immediate;
+  an original that instead keeps the index in a register and computes stored values with `lea` still had an induction
+  variable, so its source had a loop. `someChatMessageSelection` is the worked case: a plain 1..8 loop and 8
+  hand-written copies both give 154 instructions at 0.6745, while outer-step-4 plus an inner 0..3 gives 132 at 0.9198
+  against the original's 119. Do not bother varying the loop variable - a fresh `int i`, the function's already
+  declared `i`, a fresh name and a pre-declared one all produced byte-identical code.
+- A flag stored with `mov dword ptr [..], 0/1` is four bytes wide, so it is not a `bool`, which stores a byte. It
+  does not follow that it is a plain `int`: `BOOLEnum` is a typedef of `BOOL` and so of `int`, which means a dword
+  store is exactly what a `BOOLEnum` field looks like and is no evidence against one. Decide from the writes, not
+  the width - xref the field's address and read every store. `PlayerData::isNotNervousByEnemyTroopValue` is written
+  7 times across the image and every store is 0 or 1 (three through a register: two `xor eax, eax` and an `ebx` the
+  decompiler renders as `= 1`), and its 6 reads are all boolean tests - five `cmp .., 0x0` plus one against a zeroed
+  register that Ghidra prints as `== FALSE` - so the field is a `BOOLEnum`. Grepping our own sources would have
+  missed this, because 3 of its 4 writing functions are not reimplemented yet. Check Ghidra's own type for the
+  field too; it already had this one as `BOOLEnum`. Correcting such a field is free: the underlying type is the
+  same, so the match does not move.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
   physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`
