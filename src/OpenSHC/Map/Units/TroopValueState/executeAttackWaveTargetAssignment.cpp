@@ -29,9 +29,9 @@ namespace Map {
         void TroopValueState::executeAttackWaveTargetAssignment(int param_1)
         {
             int _tribeSizeSumLimit;
-            int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
             int _siegeArcherBudget = 0;
             int _siegeHackBudget = 0;
+            int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
                 && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
                 _playerID = 2;
