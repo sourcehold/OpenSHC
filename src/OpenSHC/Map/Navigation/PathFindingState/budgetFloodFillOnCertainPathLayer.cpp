@@ -24,15 +24,10 @@ namespace Map {
         void PathFindingState::budgetFloodFillOnCertainPathLayer(uint x, uint y, int marker, int budget)
         {
             int iVar1;
-            uint _candidate;
-            int _readIndex;
             uint _tilesQueue[1000];
             uint _xs[1000];
             uint _ys[1000];
-            uint _tile;
-            uint _xUnk;
-            uint _yUnk;
-            _readIndex = 0;
+            int _readIndex = 0;
             int _writeIndex = 1;
             if (x > 399 || y > 399) {
                 return;
@@ -45,7 +40,7 @@ namespace Map {
             _xs[0] = x;
             _tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             do {
-                _tile = _tilesQueue[_readIndex];
+                uint _tile = _tilesQueue[_readIndex];
                 if (0x13a0f < _tile) {
                     return;
                 }
@@ -55,11 +50,11 @@ namespace Map {
                 if (999 <= _writeIndex) {
                     return;
                 }
-                _yUnk = _xs[_readIndex];
-                _xUnk = _ys[_readIndex];
+                uint _yUnk = _xs[_readIndex];
+                uint _xUnk = _ys[_readIndex];
                 DAT_TileMapState::instance.CertainPathLayer[_tile] = (short)marker;
                 for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction] + _tile;
+                    uint _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
                             budget = budget + -1;
