@@ -29,13 +29,8 @@ namespace Map {
         BOOLEnum PathFindingState::doMoveFromTileToTile(
             int unitID, int tile, int y, int direction, int param_5, int ignoreAssassinClimbing)
         {
-            byte bVar2;
             uint uVar3;
-            int _targetTile;
             uint uVar4;
-            ushort _terrainHeight2;
-            ushort _height;
-            ushort _terrainHeight;
             if (param_5 == 0) {
                 /*
                   if we cannot move in that direction from the current tile?
@@ -43,7 +38,7 @@ namespace Map {
                 if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[direction]
                         & DAT_TileMapState::instance.PathLinkageLayer[tile])
                     == 0) {
-                    _targetTile = DAT_TileMapState::instance.directionTranslationMatrix[y][direction] + tile;
+                    int _targetTile = DAT_TileMapState::instance.directionTranslationMatrix[y][direction] + tile;
                     if (ignoreAssassinClimbing == 0) {
                         if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN) {
                             uVar3 = DAT_TileMapState::instance.LogicLayer[_targetTile];
@@ -51,12 +46,12 @@ namespace Map {
                                 && (uVar4 = DAT_TileMapState::instance.LogicLayer[tile] & 0x100,
                                     uVar4 == 0 || ((uVar3 & 0x100) == 0))
                                 && (uVar4 != 0 || ((uVar3 & 0x100) != 0))) {
-                                _height = DAT_TileMapState::instance.HeightLayer[tile];
+                                ushort _height = DAT_TileMapState::instance.HeightLayer[tile];
                                 DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
                                 DAT_UnitsState::instance.units[unitID].field306_0x418 = 0;
                                 if (uVar4 == 0) {
-                                    _terrainHeight = DAT_TileMapState::instance.HeightLayer[_targetTile];
-                                    bVar2 = DAT_TileMapState::instance.WallOwnerLayer[_targetTile];
+                                    ushort _terrainHeight = DAT_TileMapState::instance.HeightLayer[_targetTile];
+                                    byte bVar2 = DAT_TileMapState::instance.WallOwnerLayer[_targetTile];
                                     DAT_UnitsState::instance.units[unitID].state.generic
                                         = OpenSHC::Map::Units::States::US_ASSASSIN_THROWING_HOOK;
                                     DAT_UnitsState::instance.units[unitID].assassinHeightDifference
@@ -66,7 +61,7 @@ namespace Map {
                                     DAT_UnitsState::instance.units[unitID].ownerOfAssassinScaledObject
                                         = (bVar2 & 7) + 1;
                                 } else {
-                                    _terrainHeight2 = DAT_TileMapState::instance.HeightLayer[_targetTile];
+                                    ushort _terrainHeight2 = DAT_TileMapState::instance.HeightLayer[_targetTile];
                                     DAT_UnitsState::instance.units[unitID].state.generic
                                         = OpenSHC::Map::Units::States::US_ASSASSIN_START_CLIMBING_DOWN;
                                     DAT_UnitsState::instance.units[unitID].assassinHeightDifference

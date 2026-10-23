@@ -24359,7 +24359,7 @@ SHC_3BB0A8C1_0x00497080 | 78.1% | hoist signed start-tile read
 
 SHC_3BB0A8C1_0x00497180 | 97.1% | int locals for the 16-bit read
 
-SHC_3BB0A8C1_0x00497280 | 55.8% | param_5 block out of line
+SHC_3BB0A8C1_0x00497280 | 55.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004974D0 | 32.1% | statement order
 
