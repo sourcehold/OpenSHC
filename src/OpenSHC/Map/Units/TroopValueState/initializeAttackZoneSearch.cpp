@@ -20,10 +20,10 @@ namespace Map {
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1]]
                       .tile;
-            DAT_TroopValueState::instance.attackInfo.startCon
-                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
             DAT_TroopValueState::instance.attackInfo.startZone
                 = (int)(char)DAT_TileMapState::instance.AIZoneLayer[_tile];
+            DAT_TroopValueState::instance.attackInfo.startCon
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
             DAT_TroopValueState::instance.attackInfo.zoneSize
                 = DAT_PathFindingState::instance
                       .zoneSizesArray[(short)DAT_TileMapState::instance.PathConnectionLayer[_tile]];
