@@ -169,7 +169,10 @@ restyling anything large:
 flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
 cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
 *naming* is left (`alloc-only`). Chase a `FRAME` flag with `diff_slots.py NAME`, which lists every `[esp + N]` slot per
-side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
+side: one extra slot is often one local the original does not have, and removing it has been worth 10-30 points -
+but locals with disjoint live ranges share a slot, so a slot count is not a local count. `slot_weight.py NAME.cpp`
+reads MSVC's own `_name$ = N` table out of a `/FA` listing and says which local actually got which slot, instead
+of inferring it from the diff.
 `diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
 are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
 than by the percentage. `diff_types.py` is its counterpart away from comparisons: `movsx` against `movzx` for one field
@@ -326,7 +329,10 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `diff_triage.py`'s `FRAME` column is worth checking but, unlike `BYTE`, is not mechanically actionable. Every
   cheap hypothesis for the frame mismatches in `Map::Units::UnitsState` came back an exact tie or worse: local
   declaration order, array element type, widening unsigned locals, and splitting a local the decompiler had reused
-  for two values. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
+  for two values. Declaration order was never going to work: the stack colorer sorts its elements by **reference
+  weight per byte**, not by declaration order, and leaves only the ties to the order the symbols happen to arrive
+  in - see "Variable Usage" in the cheat sheet for the comparator and the evidence. The lever on a slot layout is
+  how often, and at what loop depth, each local is read. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
   extra slots are all heavily used has genuine live values rather than a stray local, and needs structural
   understanding rather than a rule.
 - `jmp dword ptr [reg*4 + table]` on one side only is a dispatch-form mismatch: a `switch` over contiguous values

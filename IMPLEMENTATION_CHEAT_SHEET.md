@@ -111,11 +111,47 @@ matched instruction for instruction except that the parameter was loaded into `e
 for the parameter load and took it from 95.7% to 100%. Uninitialised declarations do not have this effect - a
 sweep of `quick_reorder.py -s` over the declaration block of 27 functions found no win at all.
 
-Stack *slot* assignment for spilled locals is a different matter and is not reachable from the source. Where the
-original lays its locals out in Ghidra order (`local_1c` at the lowest `esp` offset through `local_4` at the
-highest) and our build permutes them, neither declaration order, initialisation order, nor renaming changes
-anything; this was tried on `setupSkirmishLobby`, `initMultiplayerLobbyState`, `initializeFinalResultsForActivePlayers`
-and `createCompoundAddressBasedOnSelectedProvider`. Spend the effort elsewhere.
+Stack *slot* assignment for spilled locals is a different matter: it follows the **reference weight** of each
+local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
+slot - that was observed on `setupSkirmishLobby`, `initMultiplayerLobbyState`,
+`initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and the compiler
+itself says why. `ColorStackElements` (`P2/stack.c`, which the retail `c2.dll` names in its own assert at line
+1372) builds one 28-byte record per stack element holding the local's size rounded up to 4 and its accumulated
+reference weight, sorts the records with `StkColorCmp`, and then hands out offsets in that order:
+
+```c
+// StkColorCmp, c2.dll 14.00.50727.762
+if (a->class != b->class)                  // byte at +0x18, unsigned
+    return (a->class > b->class) ? (dir ? +1 : -1) : (dir ? -1 : +1);
+ka = (a->weight * 1000) / a->size;         // +0x0C scaled, divided by +0x08
+kb = (b->weight * 1000) / b->size;
+return ka == kb ? 0 : (ka >= kb ? +1 : -1);
+```
+
+So for a homogeneous block of same-class scalars the layout is **descending weight per byte**, and the only lever
+on it from the source is how often, and at what loop depth, each local is read. In
+`planToBuyWhenLowOnResourceAndSnoozeBuildings` the eleven colored `int` locals come out exactly in that order
+(reference counts 5 5 4 4 4 4 4 3 3 3 from the lowest `esp` offset upward) with their declaration positions
+scrambled (the 4th declared sits between the 8th and the 9th, the 1st sits last). Adding a single reference to one
+of them reshuffled the whole table - another local left the stack for a register entirely - and the new layout was
+again exactly monotone in weight. Renaming is inert, as the comparator never looks at a name: `allowQuarries` ->
+`zzz` and `allowWoodcutters` -> `aaaaaaaaaa` left the function byte-identical.
+
+Three consequences for reading a diff:
+
+* A slot-order mismatch means our locals carry **different reference counts** from the original's, so look for a
+  read the original has and we do not. It is not a declaration-order problem.
+* Weight **ties** are left to the order the symbols arrive in, permuted by `QSortColors`, which is an unstable
+  quicksort. That is the whole reason `perm_decls.py` took `assignSelectionToKey` from 95.9% to 100% once and does
+  nothing in most functions: permuting declarations can only decide ties.
+* Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
+  is already dead (`writeMapOrSaveFile` puts eight locals on the first parameter's slot). A slot count is therefore
+  not a local count, and Ghidra's "repurposed parameter" rendering - `playerID = 0` used as a loop counter in
+  `aiRecruitUnits` - is this reuse, not something the original source wrote. Transcribing it back cost 7 points.
+
+`slot_weight.py` prints this table for one function, with the original's slot census beside it. The primary key,
+the class byte at +0x18, is not yet decoded, so arrays and address-taken locals interleave for reasons the tool
+cannot currently explain - treat a non-monotone report as a hint, not a contradiction.
 
 ### Statement Order
 
