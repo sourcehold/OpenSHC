@@ -33,9 +33,8 @@ namespace Map {
             _pTileRef = DAT_BuildingsState::instance.buildings[buildingID].tileRefs;
             do {
                 _tile = _pTileRef[0];
-                if ((((this->LogicLayer[_tile] & L_FARM_FIELD_APPLE) != 0)
-                        && (_treeID = (int)this->OrganismLayer[_tile], _treeID != 0))
-                    && (_treeID < 2000)) {
+                if ((this->LogicLayer[_tile] & L_FARM_FIELD_APPLE) != 0
+                    && (_treeID = (int)this->OrganismLayer[_tile], _treeID != 0) && _treeID < 2000) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(_treeID);
                 }
                 this->LogicLayer[_tile] = this->LogicLayer[_tile]
