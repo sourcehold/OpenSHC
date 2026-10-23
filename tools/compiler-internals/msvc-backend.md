@@ -251,6 +251,26 @@ and then a second round re-scores several of them - `this` and `playerID` from -
 `playerResourceBase` from -52 to +97, `resourceType` from -34 to +64 and then to -2 - because the colourer
 iterates, which is also why `Spillcosts` and `SpillOrDefer` run six and seven times here.
 
+Run across the functions that had resisted every source-level hypothesis, the scores give each one a
+recognisable signature:
+
+| function | match | scores |
+|---|---|---|
+| `aiRecruitUnits` | 50.0% | `buildingID` +188, `unitID` +174, `unitType` +51, `recruitInterval` +47 against `recruitDiggingUnit` **-335**, `i` **-279**, `behaviourType` -251, `recruitCount` -197 |
+| `decideOnTribeAttackLocation` | 68.8% | `destinationTile` +122, `tribeID` +93, `destinationY` +58, `destinationX` +42, `buildingID` +42, `targetPlayer` +40, `this` -1 |
+| `recruitHarrassingSiegeEngines` | 73.2% | everything positive and bunched: `unitID` +44, `tribeID`/`engineIndex`/`buildingID` +36, `aiType` +32, `siegeEngineToBuild` +26, `harrassingSiegeEnginesMax`/`this` +21, `aicIndex` +11, `playerID` +9, `engineersGuild` +2 |
+| `planToBuy...SnoozeBuildings` | 90.3% | the fourteen `allowX` locals all **negative** at first (-20 to -94) with only `playerID` +46 and `wood` +26 positive; a later round flips some to +48 while `allowWells` stays worst (-94, -93, -76, -43) |
+
+Three different diagnoses fall out, where before all four looked like the same "allocator noise":
+
+* `recruitHarrassingSiegeEngines` is decided by **near-ties** - four candidates at +36, two at +21. With equal
+  scores the order falls to the symbol-id tiebreak, so no source change states a preference and small edits flip
+  the result arbitrarily. That matches it resisting every targeted attempt.
+* `aiRecruitUnits` has a **structural** difference: our loop counter `i` is a candidate at -279, where the
+  original reuses the dead `playerID` parameter as its counter and so has no such candidate competing at all.
+* `planToBuy` is **iteration-dependent** - the locals that matter start negative and only become positive in a
+  later colourer round, so its layout is decided by the spill rounds rather than by a single ordering.
+
 That makes the register side measurable per variable. `playerID` scoring -134 in the first round is why our build
 serves it late and leaves it in a volatile register (`edx`), where the original keeps it in `ebp` from the start;
 the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
