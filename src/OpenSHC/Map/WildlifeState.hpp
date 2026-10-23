@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Wildlife/WildlifeGridElement.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::Wildlife::WildlifeGridElement;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
@@ -51,7 +53,7 @@ namespace Map {
 
         void findAndSetNewRallyPointForDeerAndLions(int tribeID, int always2or3or5, int always0or1);
 
-        undefined4 buildRallyPointPathForTribe(int param_1);
+        BOOLEnum buildRallyPointPathForTribe(int param_1, int param_2);
 
         undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
 

@@ -1,4 +1,6 @@
 #include "OpenSHC/Map/Units.func.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
@@ -12,7 +14,7 @@ namespace Map {
     BOOLEnum Units::UpdateWorker_ConsiderTakingABreakUnk(int unitID)
     {
         return MACRO_CALL(OpenSHC::Map::Units_Func::ConsiderHavingABreakNowUnk)(
-            unitID, (UnitState)DAT_UnitsState::instance.units[unitID].state.generic);
+            unitID, (UnitState)(short)DAT_UnitsState::instance.units[unitID].state.generic);
     }
 
 }

@@ -20,15 +20,15 @@ namespace UI {
     // SIZE: 0x00000024
     class BottomLeftTextDisplayState {
     public:
-        dword currentlyDisplayedTextIsDisplayedUnk; // 0x00000000 length: 4
-        dword currentlyDisplayedUnkTextGroupIndex_0x4; // 0x00000004 length: 4
-        dword currentlyDisplayedUnkTextNumInGroup_0x8; // 0x00000008 length: 4
+        int currentlyDisplayedTextIsDisplayedUnk; // 0x00000000 length: 4
+        int currentlyDisplayedUnkTextGroupIndex_0x4; // 0x00000004 length: 4
+        int currentlyDisplayedUnkTextNumInGroup_0x8; // 0x00000008 length: 4
         TextMessageBLLookupStructUnion currentlyDisplayedUnktextExtraObject; // 0x0000000C length: 4
         int currentlyDisplayedTextImportanceUnk; // 0x00000010 length: 4
         int textMessageDurationUnk; // 0x00000014 length: 4
         int textMessageTime; // 0x00000018 length: 4
         int unknownCountdown01; // 0x0000001C length: 4
-        dword countdown; // 0x00000020 length: 4
+        int countdown; // 0x00000020 length: 4
 
     private:
         BottomLeftTextDisplayState(BottomLeftTextDisplayState const&);
@@ -38,8 +38,8 @@ namespace UI {
         BottomLeftTextDisplayState() {};
         ~BottomLeftTextDisplayState() {};
 
-        void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup,
-            TextMessageBLLookupStructUnion param_4, int importanceUnk, int displayDurationUnk);
+        void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup, int param_4,
+            int importanceUnk, int displayDurationUnk);
 
         void hasPassedCountdownOrDuration();
 

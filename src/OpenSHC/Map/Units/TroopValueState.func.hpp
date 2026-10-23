@@ -26,8 +26,8 @@ namespace Map {
             // Constructor
 
             MACRO_FUNCTION_RESOLVER(TroopValueState* (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051D680,
-                &TroopValueState::constructTroopValueState)
-            constructTroopValueState;
+                &TroopValueState::Constructor_TroopValueState)
+            Constructor_TroopValueState;
 
             MACRO_FUNCTION_RESOLVER(
                 void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00518130, &TroopValueState::clearAttackInfo)
@@ -129,8 +129,8 @@ namespace Map {
                 &TroopValueState::calculateTile2PeoplValueClosestToUnit)
             calculateTile2PeoplValueClosestToUnit;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0051A220,
-                &TroopValueState::findEnemyLord)
+            MACRO_FUNCTION_RESOLVER(
+                int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A220, &TroopValueState::findEnemyLord)
             findEnemyLord;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A2D0,
@@ -278,8 +278,8 @@ namespace Map {
                 &TroopValueState::registerSpottedEnemyTile)
             registerSpottedEnemyTile;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051BF20,
-                &TroopValueState::shouldLightPitchBasedOnTroopValue)
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int, int), false,
+                Address::SHC_3BB0A8C1_0x0051BF20, &TroopValueState::shouldLightPitchBasedOnTroopValue)
             shouldLightPitchBasedOnTroopValue;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BF70,

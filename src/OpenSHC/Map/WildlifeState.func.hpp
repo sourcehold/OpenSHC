@@ -3,9 +3,12 @@
 */
 
 #include "OpenSHC/Map/WildlifeState.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace WildlifeState_Func {
+
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor
 
@@ -37,7 +40,7 @@ namespace Map {
             &WildlifeState::findAndSetNewRallyPointForDeerAndLions)
         findAndSetNewRallyPointForDeerAndLions;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int), false, Address::SHC_3BB0A8C1_0x0052CFE0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052CFE0,
             &WildlifeState::buildRallyPointPathForTribe)
         buildRallyPointPathForTribe;
 

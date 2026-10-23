@@ -25,21 +25,22 @@ namespace Audio {
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL) {
                 return;
             }
-            ++DAT_SFXDefinedData::instance.field6_0x4e0;
-            if (DAT_SFXDefinedData::instance.field6_0x4e0 > 4) {
-                DAT_SFXDefinedData::instance.field6_0x4e0 = 3;
+            ++DAT_SFXDefinedData::instance.speechStreamCursor;
+            if (DAT_SFXDefinedData::instance.speechStreamCursor > 4) {
+                DAT_SFXDefinedData::instance.speechStreamCursor = 3;
             }
-            if (this->streamActiveUnk_0x20[DAT_SFXDefinedData::instance.field6_0x4e0]) {
+            if (this->streamActiveUnk_0x20[DAT_SFXDefinedData::instance.speechStreamCursor]) {
                 MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(
-                    (SHC_SoundStream)DAT_SFXDefinedData::instance.field6_0x4e0);
+                    (SHC_SoundStream)DAT_SFXDefinedData::instance.speechStreamCursor);
             }
             int const nextVolume
                 = MACRO_CALL_MEMBER(SFX::SFXState_Func::getSoundVolumeForFilename, DAT_SFXState::ptr)(soundFileName);
             this->streamFileVolumeNextUnk_0x48[3] = nextVolume;
             this->streamFileVolumeNextUnk_0x48[4] = nextVolume;
             MACRO_CALL_MEMBER(SoundSystem_Func::playSoundStreamUnk, this)(
-                (SHC_SoundStream)DAT_SFXDefinedData::instance.field6_0x4e0, soundFileName, 1);
-            DAT_SoundSystemState::instance.lastUsedSpeechStreamUnk_0x3284 = DAT_SFXDefinedData::instance.field6_0x4e0;
+                (SHC_SoundStream)DAT_SFXDefinedData::instance.speechStreamCursor, soundFileName, 1);
+            DAT_SoundSystemState::instance.lastUsedSpeechStreamUnk_0x3284
+                = DAT_SFXDefinedData::instance.speechStreamCursor;
         }
     }
 

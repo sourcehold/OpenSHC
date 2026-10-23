@@ -28,8 +28,8 @@ namespace Audio {
 
             undefined1 padding_0x0[4]; // 0x00000000 length: 4
             char WavFileGroups[2][270][8][1000]; // 0x00000004 length: 4320000
-            AmbientSfx field5_0x41eb04[10]; // 0x0041EB04 length: 720
-            UnitSpeechData field6_0x41edd4[42]; // 0x0041EDD4 length: 6216
+            AmbientSfx AmbientSounds[10]; // 0x0041EB04 length: 720
+            UnitSpeechData UnitSpeech[42]; // 0x0041EDD4 length: 6216
             SpeechEffectPath SpeechEffectPathArray[40]; // 0x0042061C length: 640
             char SpeechEffectFileArray[65][1000]; // 0x0042089C length: 65000
             NameSpeechPair LordNameToCall[223]; // 0x00430684 length: 446000

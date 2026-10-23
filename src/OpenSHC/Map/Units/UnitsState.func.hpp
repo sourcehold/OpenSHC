@@ -224,7 +224,7 @@ namespace Map {
             computeDistanceToNearestEnemyForLegacyMissions;
 
             MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00533090, &UnitsState::returnFalseStub)
+                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533090, &UnitsState::returnFalseStub)
             returnFalseStub;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x005330A0,
@@ -263,7 +263,7 @@ namespace Map {
                 &UnitsState::hasTunnelerNotFinishedDigging)
             hasTunnelerNotFinishedDigging;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, uint, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, uint, int, int), false,
                 Address::SHC_3BB0A8C1_0x00533A10, &UnitsState::computeLadderClimbPath)
             computeLadderClimbPath;
 

@@ -48,7 +48,7 @@ namespace Map {
         SiegeGameModeRelatedSection SEC_Section1067; // 0x0000013C length: 28
         int SEC_StartingPopularity; // 0x00000158 length: 4
         short buildingAvailability[100]; // 0x0000015C length: 200
-        undefined4 field8_0x224; // 0x00000224 length: 4
+        undefined4 buildingAvailabilityRowCount; // 0x00000224 length: 4
         short buildingAvailabilityRelatedFlags[380]; // 0x00000228 length: 760
         short buildingAvailabilityArray2[49]; // 0x00000520 length: 98
         BarracksRecruitabilityShort barracksRecruitability; // 0x00000582 length: 14
@@ -70,20 +70,23 @@ namespace Map {
         undefined4 SEC_Section1090; // 0x00013540 length: 4
         undefined4 SEC_Section1080; // 0x00013544 length: 4
         undefined4 SEC_Section1081; // 0x00013548 length: 4
-        undefined1 padding_0x1354c[16]; // 0x0001354C length: 16
-        undefined4 field47_0x1355c; // 0x0001355C length: 4
-        int field48_0x13560; // 0x00013560 length: 4
+        undefined1 padding_0x1354c[4]; // 0x0001354C length: 4
+        int visibleRowCount; // 0x00013550 length: 4
+        undefined1 padding_0x13554[8]; // 0x00013554 length: 8
+        int eventListScrollOffset; // 0x0001355C length: 4
+        int eventListSelection; // 0x00013560 length: 4
         undefined4 currentEventID; // 0x00013564 length: 4
-        undefined4 field50_0x13568; // 0x00013568 length: 4
-        undefined1 padding_0x1356c[4]; // 0x0001356C length: 4
+        undefined4 editedEventType; // 0x00013568 length: 4
+        int field_0x1356c; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
         undefined4 flag; // 0x00013578 length: 4
         undefined4 offset; // 0x0001357C length: 4
         undefined4 indexStored; // 0x00013580 length: 4
-        undefined1 padding_0x13584[8]; // 0x00013584 length: 8
+        int selectedAbsoluteIndex; // 0x00013584 length: 4
+        dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
-        undefined4 field69_0x13590; // 0x00013590 length: 4
+        undefined4 field57_0x13590; // 0x00013590 length: 4
         undefined1 padding_0x13594[8]; // 0x00013594 length: 8
         undefined4 total; // 0x0001359C length: 4
         int unknownArray_01[1000]; // 0x000135A0 length: 4000
@@ -91,40 +94,22 @@ namespace Map {
         undefined4 DAT_MapEditorUnitPointsSum; // 0x00014544 length: 4
         undefined4 DAT_InvasionEventItemUnitCountSum; // 0x00014548 length: 4
         undefined1 padding_0x1454c[8]; // 0x0001454C length: 8
-        undefined4 field91_0x14554; // 0x00014554 length: 4
-        undefined4 field92_0x14558; // 0x00014558 length: 4
-        undefined4 field93_0x1455c; // 0x0001455C length: 4
-        undefined4 field94_0x14560; // 0x00014560 length: 4
-        undefined4 field95_0x14564; // 0x00014564 length: 4
-        undefined4 field96_0x14568; // 0x00014568 length: 4
-        undefined4 field97_0x1456c; // 0x0001456C length: 4
-        undefined4 field98_0x14570; // 0x00014570 length: 4
-        undefined4 field99_0x14574; // 0x00014574 length: 4
-        undefined4 field100_0x14578; // 0x00014578 length: 4
-        undefined4 field101_0x1457c; // 0x0001457C length: 4
-        undefined4 field102_0x14580; // 0x00014580 length: 4
-        undefined4 field103_0x14584; // 0x00014584 length: 4
-        undefined4 field104_0x14588; // 0x00014588 length: 4
-        undefined4 field105_0x1458c; // 0x0001458C length: 4
-        undefined4 field106_0x14590; // 0x00014590 length: 4
-        undefined4 field107_0x14594; // 0x00014594 length: 4
-        undefined1 padding_0x14598[4]; // 0x00014598 length: 4
-        undefined4 field112_0x1459c; // 0x0001459C length: 4
-        undefined4 field113_0x145a0; // 0x000145A0 length: 4
-        undefined4 field114_0x145a4; // 0x000145A4 length: 4
-        undefined4 field115_0x145a8; // 0x000145A8 length: 4
-        undefined4 field116_0x145ac; // 0x000145AC length: 4
-        undefined4 field117_0x145b0; // 0x000145B0 length: 4
-        undefined1 padding_0x145b4[4]; // 0x000145B4 length: 4
-        undefined4 field122_0x145b8; // 0x000145B8 length: 4
-        undefined4 field123_0x145bc; // 0x000145BC length: 4
-        undefined4 field124_0x145c0; // 0x000145C0 length: 4
-        undefined4 field125_0x145c4; // 0x000145C4 length: 4
-        undefined4 field126_0x145c8; // 0x000145C8 length: 4
-        undefined1 padding_0x145cc[4]; // 0x000145CC length: 4
-        undefined4 field131_0x145d0; // 0x000145D0 length: 4
-        undefined4 field132_0x145d4; // 0x000145D4 length: 4
-        undefined1 padding_0x145d8[4]; // 0x000145D8 length: 4
+        undefined4 missionScore; // 0x00014554 length: 4
+        undefined4 monthsRemaining; // 0x00014558 length: 4
+        undefined4 timeBonusScore; // 0x0001455C length: 4
+        int objectiveGoodsCount; // 0x00014560 length: 4
+        int objectiveGoodsSurplus[7]; // 0x00014564 length: 28
+        int objectiveGoodsScore[7]; // 0x00014580 length: 28
+        int objectiveGoodsType[7]; // 0x0001459C length: 28
+        int troopSurvivalScore; // 0x000145B8 length: 4
+        int troopLossPercent; // 0x000145BC length: 4
+        int enemyTroopValueTotal; // 0x000145C0 length: 4
+        int enemyTroopValueSurviving; // 0x000145C4 length: 4
+        int enemyTroopValueLost; // 0x000145C8 length: 4
+        int sliderPopupDelay; // 0x000145CC length: 4
+        int sliderPopupX; // 0x000145D0 length: 4
+        int sliderPopupY; // 0x000145D4 length: 4
+        undefined4 field133_0x145d8; // 0x000145D8 length: 4
         undefined4 eventType; // 0x000145DC length: 4
         IngameEventHeader invasionEvent; // 0x000145E0 length: 16
         IngameInvasionEventItemContent invasionEventContent; // 0x000145F0 length: 176

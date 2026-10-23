@@ -23,15 +23,15 @@ namespace Map {
         typedef struct PathFindingStatePartB {
 
             PathHelper12 destinationsArray[500]; // 0x00000000 length: 6000
-            undefined4 currentDistance; // 0x00001770 length: 4
-            undefined4 readIndex; // 0x00001774 length: 4
-            undefined4 previousReadIndex; // 0x00001778 length: 4
-            undefined4 writeIndex; // 0x0000177C length: 4
-            undefined4 nextWriteIndex; // 0x00001780 length: 4
+            int currentDistance; // 0x00001770 length: 4
+            int readIndex; // 0x00001774 length: 4
+            int previousReadIndex; // 0x00001778 length: 4
+            int writeIndex; // 0x0000177C length: 4
+            int nextWriteIndex; // 0x00001780 length: 4
             undefined1 padding_0x1784[12]; // 0x00001784 length: 12
             int depth; // 0x00001790 length: 4
             byte* ptrPathPlan; // 0x00001794 length: 4
-            undefined4 pathPlanIndex; // 0x00001798 length: 4
+            int pathPlanIndex; // 0x00001798 length: 4
             int tilesQueue[80400]; // 0x0000179C length: 321600
             short yQueue[80400]; // 0x0004FFDC length: 160800
             short xQueue[80400]; // 0x000773FC length: 160800

@@ -31,6 +31,8 @@ PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0FKGOPA@@StructResolver@@2U_GUID@@A
 
+PUBLIC ?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A
+
 PUBLIC ?instance@?$Extern@UEntityDefinedData@Entities@Map@OpenSHC@@$0FLGAAE@@StructResolver@@2UEntityDefinedData@Entities@Map@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@UBuildingDefinedData@Buildings@Map@OpenSHC@@$0FLHJHE@@StructResolver@@2UBuildingDefinedData@Buildings@Map@OpenSHC@@A
@@ -863,6 +865,8 @@ PUBLIC ?instance@?$Extern@$$BY0PK@USkMasterDataEntry@IO@OpenSHC@@$0NPGCFA@@Struc
 
 PUBLIC ?instance@?$Extern@$$BY0EA@D$0OLAKLA@@StructResolver@@2PADA
 
+PUBLIC ?instance@?$Extern@K$0OLALBI@@StructResolver@@2KA
+
 PUBLIC ?instance@?$Extern@I$0OLAODM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@$$BY1CB@EAA@D$0OLBCNI@@StructResolver@@2PAY0EAA@DA
@@ -945,7 +949,7 @@ PUBLIC ?instance@?$Extern@I$0OOAPLM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0OOAPME@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@I$0OOAPMI@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0OOAPMI@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@K$0OOBADM@@StructResolver@@2KA
 
@@ -967,17 +971,7 @@ PUBLIC ?instance@?$Extern@VAIMessageQueue@Bink@Rendering@OpenSHC@@$0OOBAKA@@Stru
 
 PUBLIC ?instance@?$Extern@VWallAndPitchState@Map@OpenSHC@@$0OOBJNA@@StructResolver@@2VWallAndPitchState@Map@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@H$0OOCDFE@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDGE@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDGI@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDHE@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDIA@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDJA@@StructResolver@@2HA
+PUBLIC ?instance@?$Extern@$$BY0BB@H$0OOCDFA@@StructResolver@@2PAHA
 
 PUBLIC ?instance@?$Extern@I$0OOCDJE@@StructResolver@@2IA
 
@@ -1403,8 +1397,6 @@ PUBLIC ?instance@?$Extern@H$0NPFGFE@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@$$BY08H$0OLAKPA@@StructResolver@@2PAHA
 
-PUBLIC ?instance@?$Extern@K$0OLALBI@@StructResolver@@2KA
-
 PUBLIC ?instance@?$Extern@I$0OLALCA@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0OLALCE@@StructResolver@@2IA
@@ -1665,28 +1657,6 @@ PUBLIC ?instance@?$Extern@I$0OOBAJA@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0OOBAJE@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@H$0OOCDFA@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDFI@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDFM@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDGA@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDGM@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDHA@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDHI@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDHM@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDIE@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDII@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@H$0OOCDIM@@StructResolver@@2HA
-
 PUBLIC ?instance@?$Extern@K$0CECHEGM@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@H$0CECHEHA@@StructResolver@@2HA
@@ -1723,6 +1693,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@U_GUID@@$0FKGOOA@@StructResolver@@2U_GUID@@A EQU 005A6EE0h
 
 ?instance@?$Extern@U_GUID@@$0FKGOPA@@StructResolver@@2U_GUID@@A EQU 005A6EF0h
+
+?instance@?$Extern@U_GUID@@$0FKMBCM@@StructResolver@@2U_GUID@@A EQU 005AC12Ch
 
 ?instance@?$Extern@UEntityDefinedData@Entities@Map@OpenSHC@@$0FLGAAE@@StructResolver@@2UEntityDefinedData@Entities@Map@OpenSHC@@A EQU 005B6004h
 
@@ -2556,6 +2528,8 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@$$BY0EA@D$0OLAKLA@@StructResolver@@2PADA EQU 00EB0AB0h
 
+?instance@?$Extern@K$0OLALBI@@StructResolver@@2KA EQU 00EB0B18h
+
 ?instance@?$Extern@I$0OLAODM@@StructResolver@@2IA EQU 00EB0E3Ch
 
 ?instance@?$Extern@$$BY1CB@EAA@D$0OLBCNI@@StructResolver@@2PAY0EAA@DA EQU 00EB12D8h
@@ -2638,7 +2612,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0OOAPME@@StructResolver@@2IA EQU 00EE0FC4h
 
-?instance@?$Extern@I$0OOAPMI@@StructResolver@@2IA EQU 00EE0FC8h
+?instance@?$Extern@H$0OOAPMI@@StructResolver@@2HA EQU 00EE0FC8h
 
 ?instance@?$Extern@K$0OOBADM@@StructResolver@@2KA EQU 00EE103Ch
 
@@ -2660,17 +2634,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@VWallAndPitchState@Map@OpenSHC@@$0OOBJNA@@StructResolver@@2VWallAndPitchState@Map@OpenSHC@@A EQU 00EE19D0h
 
-?instance@?$Extern@H$0OOCDFE@@StructResolver@@2HA EQU 00EE2354h
-
-?instance@?$Extern@H$0OOCDGE@@StructResolver@@2HA EQU 00EE2364h
-
-?instance@?$Extern@H$0OOCDGI@@StructResolver@@2HA EQU 00EE2368h
-
-?instance@?$Extern@H$0OOCDHE@@StructResolver@@2HA EQU 00EE2374h
-
-?instance@?$Extern@H$0OOCDIA@@StructResolver@@2HA EQU 00EE2380h
-
-?instance@?$Extern@H$0OOCDJA@@StructResolver@@2HA EQU 00EE2390h
+?instance@?$Extern@$$BY0BB@H$0OOCDFA@@StructResolver@@2PAHA EQU 00EE2350h
 
 ?instance@?$Extern@I$0OOCDJE@@StructResolver@@2IA EQU 00EE2394h
 
@@ -3096,8 +3060,6 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@$$BY08H$0OLAKPA@@StructResolver@@2PAHA EQU 00EB0AF0h
 
-?instance@?$Extern@K$0OLALBI@@StructResolver@@2KA EQU 00EB0B18h
-
 ?instance@?$Extern@I$0OLALCA@@StructResolver@@2IA EQU 00EB0B20h
 
 ?instance@?$Extern@I$0OLALCE@@StructResolver@@2IA EQU 00EB0B24h
@@ -3357,28 +3319,6 @@ _TEXT SEGMENT
 ?instance@?$Extern@I$0OOBAJA@@StructResolver@@2IA EQU 00EE1090h
 
 ?instance@?$Extern@I$0OOBAJE@@StructResolver@@2IA EQU 00EE1094h
-
-?instance@?$Extern@H$0OOCDFA@@StructResolver@@2HA EQU 00EE2350h
-
-?instance@?$Extern@H$0OOCDFI@@StructResolver@@2HA EQU 00EE2358h
-
-?instance@?$Extern@H$0OOCDFM@@StructResolver@@2HA EQU 00EE235Ch
-
-?instance@?$Extern@H$0OOCDGA@@StructResolver@@2HA EQU 00EE2360h
-
-?instance@?$Extern@H$0OOCDGM@@StructResolver@@2HA EQU 00EE236Ch
-
-?instance@?$Extern@H$0OOCDHA@@StructResolver@@2HA EQU 00EE2370h
-
-?instance@?$Extern@H$0OOCDHI@@StructResolver@@2HA EQU 00EE2378h
-
-?instance@?$Extern@H$0OOCDHM@@StructResolver@@2HA EQU 00EE237Ch
-
-?instance@?$Extern@H$0OOCDIE@@StructResolver@@2HA EQU 00EE2384h
-
-?instance@?$Extern@H$0OOCDII@@StructResolver@@2HA EQU 00EE2388h
-
-?instance@?$Extern@H$0OOCDIM@@StructResolver@@2HA EQU 00EE238Ch
 
 ?instance@?$Extern@K$0CECHEGM@@StructResolver@@2KA EQU 0242746Ch
 
