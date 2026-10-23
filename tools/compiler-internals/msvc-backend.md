@@ -224,12 +224,41 @@ rounds.
 values are used, the source-level lever on register assignment is the same one as for stack slots - how often and
 where each value is read - which is why permuting statements sometimes moves a register and usually does not.
 
-Still not decoded: how the `+0x0c` benefit is computed, and what narrows `ChoosePhysReg`'s mask before the `bsf`.
-Those two are what decide why our first candidate took `esi` where the original's took `ebp`. Dead ends recorded
-so they are not retried: the table at `0x10ce5a08`, indexed by `eax * 4` in `ChoosePhysReg`, holds pointers and
-runs into unrelated data after a few entries, so it is not a per-register preference table; and the candidate's
-symbol record has a pointer at offset 0 for named locals and 0 for temporaries, but it does not point at a plain
-name string, so candidates could not be mapped back to source variable names that way.
+### Reading the scores per source variable
+
+The candidates *can* be mapped back to source names. A candidate node's `+0x00` is its symbol record (0 for a
+compiler temporary), the symbol record's `+0x04` points one byte before the variable's name, and the names sit in
+a string pool with a small header packed after each string:
+
+```
+name = poi(poi(poi(candidate) + 4)) + 1
+```
+
+`reg_scores.py` does this. `--probe` counts candidate insertions per `GlobalRegAlloc` invocation so the function
+can be picked out (ours is normally the largest - for `sellExcessGoods` 42 candidates against the
+resolver-template flood at 33, which identifies it in one run with no source edits), and `--invocation N` dumps
+the table. For `sellExcessGoods`:
+
+| score | name | | score | name |
+|---|---|---|---|---|
+| +104 | `amount` | | -4 | `variance` |
+| +88 | `aicIndex` | | -26 | `resourceOffset` |
+| +88 | `j` | | -34 | `resourceType` |
+| +42 | `aiType` | | -52 | `playerResourceBase` |
+| +72, +96, +85 | temporaries | | -134 | `this`, `playerID` |
+
+and then a second round re-scores several of them - `this` and `playerID` from -134 to +32,
+`playerResourceBase` from -52 to +97, `resourceType` from -34 to +64 and then to -2 - because the colourer
+iterates, which is also why `Spillcosts` and `SpillOrDefer` run six and seven times here.
+
+That makes the register side measurable per variable. `playerID` scoring -134 in the first round is why our build
+serves it late and leaves it in a volatile register (`edx`), where the original keeps it in `ebp` from the start;
+the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
+being inferred from a register permutation in the reccmp diff.
+
+Still not decoded: how the score itself is computed, and what narrows `ChoosePhysReg`'s mask before the `bsf`.
+One dead end recorded so it is not retried: the table at `0x10ce5a08`, indexed by `eax * 4` in `ChoosePhysReg`,
+holds pointers and runs into unrelated data after a few entries, so it is not a per-register preference table.
 
 ## Debugger harness
 
