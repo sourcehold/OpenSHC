@@ -115,82 +115,29 @@ Stack *slot* assignment for spilled locals is a different matter: it follows the
 local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
 slot - that was observed on `setupSkirmishLobby`, `initMultiplayerLobbyState`,
 `initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and the compiler
-itself says why. `ColorStackElements` (`P2/stack.c`, which the retail `c2.dll` names in its own assert at line
-1372) builds one 28-byte record per stack element holding the local's size rounded up to 4 and its accumulated
-reference weight, sorts the records with `StkColorCmp`, and then hands out offsets in that order:
-
-```c
-// StkColorCmp, c2.dll 14.00.50727.762
-if (a->class != b->class)                  // byte at +0x18, unsigned
-    return (a->class > b->class) ? (dir ? +1 : -1) : (dir ? -1 : +1);
-ka = (a->weight * 1000) / a->size;         // +0x0C scaled, divided by +0x08
-kb = (b->weight * 1000) / b->size;
-return ka == kb ? 0 : (ka >= kb ? +1 : -1);
-```
-
-So for a homogeneous block of same-class scalars the layout is **descending weight per byte**, and the only lever
-on it from the source is how often, and at what loop depth, each local is read. In
-`planToBuyWhenLowOnResourceAndSnoozeBuildings` the eleven colored `int` locals come out exactly in that order
-(reference counts 5 5 4 4 4 4 4 3 3 3 from the lowest `esp` offset upward) with their declaration positions
-scrambled (the 4th declared sits between the 8th and the 9th, the 1st sits last). Adding a single reference to one
-of them reshuffled the whole table - another local left the stack for a register entirely - and the new layout was
-again exactly monotone in weight. Renaming is inert, as the comparator never looks at a name: `allowQuarries` ->
-`zzz` and `allowWoodcutters` -> `aaaaaaaaaa` left the function byte-identical.
-
-Three consequences for reading a diff:
+itself says why: its stack colorer sorts the elements by weight per byte and hands out offsets in that order. The
+mechanism, the evidence and the debugger recipe are in
+[tools/compiler-internals/msvc-backend.md](tools/compiler-internals/msvc-backend.md); what matters here is how to
+read a diff:
 
 * A slot-order mismatch means our locals carry **different reference counts** from the original's, so look for a
-  read the original has and we do not. It is not a declaration-order problem.
-* Weight **ties** are left to the order the symbols arrive in, permuted by `QSortColors`, which is an unstable
-  quicksort. That is the whole reason `perm_decls.py` took `assignSelectionToKey` from 95.9% to 100% once and does
-  nothing in most functions: permuting declarations can only decide ties.
+  read the original has and we do not. It is not a declaration-order problem, which is why every declaration-order
+  hypothesis for the `Map::Units::UnitsState` frame mismatches came back a tie.
+* Weight **ties** are left to the order the symbols arrive in, permuted by an unstable quicksort. That is the
+  whole reason `perm_decls.py` took `assignSelectionToKey` from 95.9% to 100% once and does nothing in most
+  functions: permuting declarations can only decide ties.
 * Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
-  is already dead (`writeMapOrSaveFile` puts eight locals on the first parameter's slot). A slot count is therefore
-  not a local count, and Ghidra's "repurposed parameter" rendering - `playerID = 0` used as a loop counter in
-  `aiRecruitUnits` - is this reuse, not something the original source wrote. Transcribing it back cost 7 points.
+  is already dead (`writeMapOrSaveFile` puts eight locals on the first parameter's slot). A slot count is
+  therefore not a local count, and Ghidra's "repurposed parameter" rendering - `playerID = 0` used as a loop
+  counter in `aiRecruitUnits` - is this reuse, not something the original source wrote. Transcribing it back cost
+  7 points.
+* Renaming locals is inert; the comparator never looks at a name.
 
-`slot_weight.py` prints this table for one function, with the original's slot census beside it. The primary key,
-the class byte at +0x18, is not yet decoded, so arrays and address-taken locals interleave for reasons the tool
-cannot currently explain - treat a non-monotone report as a hint, not a contradiction.
+`slot_weight.py` prints the slot table for one function with each local's weight beside it, read out of MSVC's own
+`/FA` symbol table rather than inferred from the diff.
 
-About **registers** two things are established and a third is not. A set in this compiler is a 64-bit bitvector
-with set/clear mask tables indexed by `n & 0x3f`, and the iterator that hands out members takes the **lowest set
-bit** and clears it, so a set is always walked in ascending order:
-
-```c
-// c2.dll 0x10b04fa0, "next member of a register set"
-for (; (set >> bit & 1) == 0; bit++) {}   // low dword first, then the high one
-return set_base + bit + dword_offset;     // and the bit is cleared, so the next call advances
-```
-
-`.rdata` holds the register names in three parallel 4-byte-stride tables terminated by `"noreg"`, which gives the
-numbering - the **reverse** of the x86 encoding order:
-
-```
-edi=0  esi=1  ebp=2  esp=3  ebx=4  edx=5  ecx=6  eax=7
-```
-
-What does **not** follow is that physical register choice is "the lowest-numbered free register". That iterator
-is a *generic* bitset iterator: where its use could be observed it was walking sets of symbols, not registers
-(`ColorStackElements` feeds its result straight into a symbol array as `DAT_10d0faa4 + n * 4`), and tracing one
-function's allocation under a debugger returned members numbered 0 to 40 across 140 distinct set objects - a
-symbol or pseudo-register space, not the eight GPRs. The numbering above is real and the ascending-order mechanic
-is real; which physical register a value ends up in has not been traced to a rule. `Spillcosts` is 854 lines of
-live-set bitvector work with no cost arithmetic in it, which at least suggests the cost model decides *who gets
-spilled* rather than *which register a winner gets*.
-
-So treat a register mismatch as an interference difference - a different set of values was live at that point -
-but as a working hypothesis rather than a decoded rule. The lever is still where each value is born and dies,
-which is what `quick_reorder.py` permutes blindly.
-
-The debugger route works and is the way to settle this per function. `c2.pdb` is published on Microsoft's symbol
-server and `c2.dll` loads at its preferred base `0x10b00000` unrebased, so `cl.exe` can be run under the x86 `cdb`
-with breakpoints taken straight from the PDB's public addresses - no symbol loading needed. Two practical notes:
-one TU of ours costs ~1455 `GlobalRegAlloc` invocations and ~118k set-iterator calls, so breakpoints must be left
-**disabled** (`bd`) and enabled only for the invocation of interest, and `gu` inside a breakpoint command makes
-cdb skip the rest of that command. Identifying which invocation is the function you care about is the fiddly part:
-hundreds of resolver-template instantiations allocate identically, so compile the file twice with the function
-body emptied the second time and find the invocation whose iterator count drops by the difference.
+For **registers** there is no decoded rule yet. Treat a register-only mismatch as an interference difference - a
+different set of values was live at that point - which is a working hypothesis, not an established mechanism.
 
 ### Statement Order
 
