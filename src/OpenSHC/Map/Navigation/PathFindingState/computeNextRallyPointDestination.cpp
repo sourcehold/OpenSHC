@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CB00
         void PathFindingState::computeNextRallyPointDestination(int unitID, int xPos, int yPos)
         {
-            int _cY_2;
             int (*_cY2)[8];
             int _cTile;
             short _cX;
@@ -53,7 +52,7 @@ namespace Map {
                         -1 < _cTile && (_cTile < 0x13a10))) {
                         _cX = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _cY = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        _cY_2 = (int)_cY;
+                        int _cY_2 = (int)_cY;
                         if ((short)DAT_TileMapState::instance.UnitLayer[_cTile] == unitID) {
                             this->ALG_ResultX = (int)_cX;
                             this->ALG_ResultY = _cY_2;
