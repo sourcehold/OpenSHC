@@ -15,7 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9680
         void PathFindingState::updateClimbData()
         {
-            int iVar1;
             this->numberOfClimbTeleports = 0;
             this->debugGreatestClimbLoading = 0;
             this->maxClimbDataCount = 0;
@@ -33,7 +32,7 @@ namespace Map {
                         goto LAB_004a9740;
                     }
                     this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
-                    iVar1 = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
+                    int iVar1 = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
                     if (iVar1 <= this->debugGreatestClimbLoading)
                         goto LAB_004a9740;
                     this->debugGreatestClimbLoading = iVar1;
