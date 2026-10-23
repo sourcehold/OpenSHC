@@ -78,7 +78,7 @@ namespace Map {
             /*
               fixme: repurposed
              */
-            variation._0_2_ = (short)buildingID;
+            *(short*)&variation = (short)buildingID;
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + uVar1
                 + this->buildingX;
             this->HeightLayer[iVar3] = (byte)averageHeight;
@@ -111,7 +111,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, (TextMessageBLLookupStructUnion)0x0, 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
         return;
     }
