@@ -34,9 +34,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 79;
                     this->viewportState.mbr_0xac = 0xc;
                     this->viewportState.mbr_0xb0 = 40;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0x14;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 40;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 40;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 30;
                     this->viewportState.someXOffset = 8;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -47,9 +47,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 100;
                     this->viewportState.mbr_0xac = 0xf;
                     this->viewportState.mbr_0xb0 = 0x2e;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0x11;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x34;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x23;
                     this->viewportState.someXOffset = 10;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -60,9 +60,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x4f;
                     this->viewportState.mbr_0xac = 15;
                     this->viewportState.mbr_0xb0 = 0x28;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0x11;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x34;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x23;
                     this->viewportState.someXOffset = 10;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -73,9 +73,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x84;
                     this->viewportState.mbr_0xac = 0x13;
                     this->viewportState.mbr_0xb0 = 0x34;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 15;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x28;
                     this->viewportState.someXOffset = 0xc;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -86,9 +86,9 @@ namespace Rendering {
                     this->viewportState.viewportHeight = 0x19;
                     this->viewportState.mbr_0xac = 10;
                     this->viewportState.mbr_0xb0 = 0x1e;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0x28;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x14;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x28;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x14;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x1e;
                     this->viewportState.someXOffset = 7;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -103,9 +103,9 @@ namespace Rendering {
                         this->viewportState.viewportWidth = 94;
                         this->viewportState.mbr_0xac = 19;
                         this->viewportState.mbr_0xb0 = 48;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 15;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x34;
                         this->viewportState.someXOffset = 0x11;
                         MACRO_CALL_MEMBER(
@@ -118,9 +118,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x16;
                         this->viewportState.mbr_0xb0 = 0x3c;
                         this->viewportState.someXOffset = 10;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -133,9 +133,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x1d;
                         this->viewportState.mbr_0xb0 = 0x48;
                         this->viewportState.someXOffset = 0xd;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -146,9 +146,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x1d;
                         this->viewportState.viewportHeight = 0x41;
                         this->viewportState.mbr_0xb0 = 0x50;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x4c;
                         this->viewportState.someXOffset = 0xe;
                         MACRO_CALL_MEMBER(
@@ -160,9 +160,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 96;
                         this->viewportState.viewportHeight = 85;
                         this->viewportState.mbr_0xac = 39;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 16;
                         MACRO_CALL_MEMBER(
@@ -174,9 +174,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 0x70;
                         this->viewportState.viewportHeight = 85;
                         this->viewportState.mbr_0xac = 39;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 16;
                         MACRO_CALL_MEMBER(
@@ -191,9 +191,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x16;
                         this->viewportState.mbr_0xb0 = 0x2e;
                         this->viewportState.someXOffset = someXOffsetDefault;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -205,9 +205,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x18;
                         this->viewportState.mbr_0xb0 = 0x48;
                         this->viewportState.someXOffset = 0xd;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -230,9 +230,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x9e;
                     this->viewportState.mbr_0xac = 0x1f;
                     this->viewportState.mbr_0xb0 = 0x44;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 10;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x50;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 2;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 10;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x50;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 2;
                     this->viewportState.someYOffset = 0x41;
                     this->viewportState.someXOffset = 6;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -243,9 +243,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 200;
                     this->viewportState.mbr_0xac = 0x24;
                     this->viewportState.mbr_0xb0 = 0x54;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 7;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                     return;
                 }
@@ -254,9 +254,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x9e;
                     this->viewportState.mbr_0xac = 0x24;
                     this->viewportState.mbr_0xb0 = 0x44;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 7;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                     return;
                 }
@@ -265,9 +265,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x108;
                     this->viewportState.mbr_0xac = 0x29;
                     this->viewportState.mbr_0xb0 = 0x5e;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 5;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 5;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                     return;
                 }
@@ -276,9 +276,9 @@ namespace Rendering {
                     this->viewportState.viewportHeight = 0x32;
                     this->viewportState.mbr_0xac = 0x19;
                     this->viewportState.mbr_0xb0 = 0x32;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0x14;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x28;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x1e;
                     this->viewportState.someXOffset = 7;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -290,9 +290,9 @@ namespace Rendering {
                     this->viewportState.mbr_0xac = 0x32;
                     this->viewportState.mbr_0xb0 = 0x6e;
                     this->viewportState.someXOffset = 6;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x40;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                     return;
@@ -302,9 +302,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0xbc;
                     this->viewportState.mbr_0xac = 0x29;
                     this->viewportState.mbr_0xb0 = 0x50;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x34;
                     this->viewportState.someXOffset = 6;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -327,9 +327,9 @@ namespace Rendering {
                         this->viewportState.viewportWidth = 0x134;
                         this->viewportState.mbr_0xac = 0x38;
                         this->viewportState.mbr_0xb0 = 0x6e;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x4c;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -341,9 +341,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 0x78;
                         this->viewportState.viewportHeight = 0xaa;
                         this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -355,9 +355,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 0x82;
                         this->viewportState.viewportHeight = 0xaa;
                         this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -372,9 +372,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xac = 0x2f;
                         this->viewportState.mbr_0xb0 = 0x54;
                         this->viewportState.someXOffset = 3;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -405,9 +405,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x3f;
                 this->viewportState.mbr_0xac = 0xc;
                 this->viewportState.mbr_0xb0 = 0x28;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0x14;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x28;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x1e;
                 this->viewportState.someXOffset = 7;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -418,9 +418,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x54;
                 this->viewportState.mbr_0xac = 0xf;
                 this->viewportState.mbr_0xb0 = 0x2e;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0x11;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x34;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x28;
                 this->viewportState.someXOffset = 8;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -431,9 +431,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x3f;
                 this->viewportState.mbr_0xac = 0xf;
                 this->viewportState.mbr_0xb0 = 0x28;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0x11;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x34;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x28;
                 this->viewportState.someXOffset = 8;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -444,9 +444,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x74;
                 this->viewportState.mbr_0xac = 0x13;
                 this->viewportState.mbr_0xb0 = 0x34;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x34;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x32;
                 this->viewportState.someXOffset = 8;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -457,9 +457,9 @@ namespace Rendering {
                 this->viewportState.viewportHeight = 0x19;
                 this->viewportState.mbr_0xac = 10;
                 this->viewportState.mbr_0xb0 = 0x1e;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0x28;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x14;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x28;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x14;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x1e;
                 this->viewportState.someXOffset = 7;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -471,9 +471,9 @@ namespace Rendering {
                 this->viewportState.viewportHeight = 0x37;
                 this->viewportState.mbr_0xac = 0x18;
                 this->viewportState.someXOffset = someXOffsetDefault;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -483,9 +483,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x4e;
                 this->viewportState.mbr_0xac = 0x13;
                 this->viewportState.mbr_0xb0 = 0x30;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x34;
                 this->viewportState.someXOffset = 0x11;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -497,9 +497,9 @@ namespace Rendering {
                 this->viewportState.mbr_0xac = 0x16;
                 this->viewportState.mbr_0xb0 = 0x3c;
                 this->viewportState.someXOffset = 10;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -511,9 +511,9 @@ namespace Rendering {
                 this->viewportState.mbr_0xac = 0x1d;
                 this->viewportState.mbr_0xb0 = 0x48;
                 this->viewportState.someXOffset = 0xd;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -523,9 +523,9 @@ namespace Rendering {
                 this->viewportState.mbr_0xac = 0x27;
                 this->viewportState.viewportHeight = 0x41;
                 this->viewportState.mbr_0xb0 = 0x50;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x4c;
                 this->viewportState.someXOffset = 0xe;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -536,9 +536,9 @@ namespace Rendering {
                 this->viewportState.mbr_0xb0 = 0x5a;
                 this->viewportState.viewportHeight = 85;
                 this->viewportState.mbr_0xac = 39;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 100;
                 this->viewportState.someXOffset = 16;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -549,9 +549,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0xbc;
                 this->viewportState.mbr_0xac = 0x1d;
                 this->viewportState.mbr_0xb0 = 100;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 100;
                 this->viewportState.someXOffset = 0x12;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -564,9 +564,9 @@ namespace Rendering {
                 this->viewportState.mbr_0xac = 0x16;
                 this->viewportState.mbr_0xb0 = 0x2e;
                 this->viewportState.someXOffset = 8;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -581,9 +581,9 @@ namespace Rendering {
                 this->viewportState.viewportHeight = 0x37;
                 this->viewportState.mbr_0xac = 0x18;
                 this->viewportState.someXOffset = someXOffsetDefault;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -599,9 +599,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x7e;
                 this->viewportState.mbr_0xac = 0x1f;
                 this->viewportState.mbr_0xb0 = 0x44;
-                DAT_ScrollingHandler::instance.field12_0x30 = 10;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x50;
-                DAT_ScrollingHandler::instance.field11_0x2c = 2;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 10;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x50;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 2;
                 this->viewportState.someYOffset = 0x41;
                 this->viewportState.someXOffset = 6;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -612,9 +612,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0xa8;
                 this->viewportState.mbr_0xac = 0x24;
                 this->viewportState.mbr_0xb0 = 0x54;
-                DAT_ScrollingHandler::instance.field12_0x30 = 7;
-                DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                 this->viewportState.someYOffset = 0x4e;
                 this->viewportState.someXOffset = 6;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -625,9 +625,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0x7e;
                 this->viewportState.mbr_0xac = 0x24;
                 this->viewportState.mbr_0xb0 = 0x44;
-                DAT_ScrollingHandler::instance.field12_0x30 = 7;
-                DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                 this->viewportState.someYOffset = 0x4e;
                 this->viewportState.someXOffset = 6;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -638,9 +638,9 @@ namespace Rendering {
                 this->viewportState.viewportWidth = 0xe8;
                 this->viewportState.mbr_0xac = 0x29;
                 this->viewportState.mbr_0xb0 = 0x5e;
-                DAT_ScrollingHandler::instance.field12_0x30 = 5;
-                DAT_ScrollingHandler::instance.field13_0x34 = 100;
-                DAT_ScrollingHandler::instance.field11_0x2c = 3;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 5;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
                 this->viewportState.someYOffset = 0x5b;
                 this->viewportState.someXOffset = 6;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -651,9 +651,9 @@ namespace Rendering {
                 this->viewportState.viewportHeight = 0x32;
                 this->viewportState.mbr_0xac = 0x19;
                 this->viewportState.mbr_0xb0 = 0x32;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0x14;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x28;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x1e;
                 this->viewportState.someXOffset = 7;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -665,9 +665,9 @@ namespace Rendering {
                     this->viewportState.viewportWidth = 0x9c;
                     this->viewportState.mbr_0xac = 0x29;
                     this->viewportState.mbr_0xb0 = 0x50;
-                    DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                    DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                    DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 0x34;
                     this->viewportState.someXOffset = 6;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -690,9 +690,9 @@ namespace Rendering {
                         this->viewportState.viewportWidth = 0x114;
                         this->viewportState.mbr_0xac = 0x38;
                         this->viewportState.mbr_0xb0 = 0x6e;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x4c;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -704,9 +704,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 0x78;
                         this->viewportState.viewportHeight = 0xaa;
                         this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -718,9 +718,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 0x82;
                         this->viewportState.viewportHeight = 0xaa;
                         this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 100;
                         this->viewportState.someXOffset = 6;
                         MACRO_CALL_MEMBER(
@@ -743,9 +743,9 @@ namespace Rendering {
                             this->viewportState.viewportHeight = 0x6e;
                             this->viewportState.mbr_0xac = 0x32;
                             this->viewportState.someXOffset = 6;
-                            DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                            DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                            DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                            DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                            DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                            DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                             this->viewportState.someYOffset = 0x40;
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -756,9 +756,9 @@ namespace Rendering {
                         this->viewportState.mbr_0xb0 = 100;
                         this->viewportState.mbr_0xac = 0x32;
                         this->viewportState.someXOffset = 6;
-                        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                         this->viewportState.someYOffset = 0x40;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
@@ -770,9 +770,9 @@ namespace Rendering {
                     this->viewportState.mbr_0xb0 = 0x54;
                 }
                 this->viewportState.someXOffset = 6;
-                DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-                DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-                DAT_ScrollingHandler::instance.field11_0x2c = 1;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 0x40;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
                 return;
@@ -783,9 +783,9 @@ namespace Rendering {
             this->viewportState.mbr_0xb0 = 0x6e;
             this->viewportState.someXOffset = 6;
         }
-        DAT_ScrollingHandler::instance.field13_0x34 = 0x3c;
-        DAT_ScrollingHandler::instance.field12_0x30 = 0xf;
-        DAT_ScrollingHandler::instance.field11_0x2c = 1;
+        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
         this->viewportState.someYOffset = 0x40;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
     }

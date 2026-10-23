@@ -19,7 +19,7 @@ namespace Rendering {
         int orientationBase = 8;
 
         this->viewportState.field27_0x6c = 0;
-        this->viewportState.field24_0x60 = 0;
+        this->viewportState.cursorTile = 0;
         this->viewportState.mouseX = 0;
         this->viewportState.mouseY = 0;
         if (this->viewportState.field0_0x0 != 0) {
@@ -56,7 +56,7 @@ namespace Rendering {
             }
 
             do {
-                if ((DAT_TileMapState::instance.field93_0x5548c8 != 0
+                if ((DAT_TileMapState::instance.disableElevationRendering != 0
                         || DAT_TileMapState::instance.flatViewToggleValue2 != 0)
                     && probeOffset != -8) {
                     break;
@@ -105,7 +105,7 @@ namespace Rendering {
                 }
 
                 if ((probeOffset - tileHeightOffset) + 8 + screenY <= screenY
-                    || DAT_TileMapState::instance.field93_0x5548c8 != 0
+                    || DAT_TileMapState::instance.disableElevationRendering != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0) {
                     foundTile = tile;
                 }
@@ -115,10 +115,10 @@ namespace Rendering {
                 probeOffset = probeOffset + 1;
             } while (probeOffset < 0xff);
 
-            this->viewportState.field24_0x60 = foundTile;
+            this->viewportState.cursorTile = foundTile;
             if (DAT_TileMapState::instance.PathConnectionLayer[foundTile] == 0
                 || (DAT_TileMapState::instance.LogicLayer[foundTile] & 0x200U) != 0) {
-                uint direction = DAT_TileMapState::instance.field84_0x5548a4 + 4U & 0x80000007;
+                uint direction = DAT_TileMapState::instance.screenSouthEastDirection + 4U & 0x80000007;
                 if ((int)direction < 0) {
                     direction = (direction - 1 | 0xfffffff8) + 1;
                 }
@@ -145,36 +145,36 @@ namespace Rendering {
                             case OpenSHC::Map::Buildings::BT_TOWER4:
                             case OpenSHC::Map::Buildings::BT_TOWER5:
                                 if ((DAT_TileMapState::instance.LogicLayer[neighbourTile] & 0x10000000U) != 0) {
-                                    this->viewportState.field24_0x60 = neighbourTile;
+                                    this->viewportState.cursorTile = neighbourTile;
                                 }
                                 break;
                             default:
-                                this->viewportState.field24_0x60 = 0;
+                                this->viewportState.cursorTile = 0;
                                 break;
                             }
                         } else {
-                            this->viewportState.field24_0x60 = 0;
+                            this->viewportState.cursorTile = 0;
                         }
                     } else if ((DAT_TileMapState::instance.LogicLayer[neighbourTile] & 0x100U) != 0) {
-                        this->viewportState.field24_0x60 = neighbourTile;
+                        this->viewportState.cursorTile = neighbourTile;
                     }
                 }
             }
 
-            if ((DAT_TileMapState::instance.LogicLayer[this->viewportState.field24_0x60] & 0x10000300U) != 0
-                && (DAT_TileMapState::instance.LogicLayer[this->viewportState.field24_0x60] & 2U) == 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[this->viewportState.cursorTile] & 0x10000300U) != 0
+                && (DAT_TileMapState::instance.LogicLayer[this->viewportState.cursorTile] & 2U) == 0) {
                 this->viewportState.field27_0x6c = 1;
             }
             this->viewportState.somePitchDitchID = 0;
             this->viewportState.mouseAtomRefFloorTile = foundTile;
 
-        if (this->viewportState.field24_0x60 != 0) {
+            if (this->viewportState.cursorTile != 0) {
 
-                this->viewportState.mouseY = this->tileTranslationMatrix_YComponent[this->viewportState.field24_0x60];
+                this->viewportState.mouseY = this->tileTranslationMatrix_YComponent[this->viewportState.cursorTile];
                 this->viewportState.mouseX
-                    = this->viewportState.field24_0x60 - this->translationMatrix[this->viewportState.mouseY].addXgetTile;
+                    = this->viewportState.cursorTile - this->translationMatrix[this->viewportState.mouseY].addXgetTile;
 
-                int hoveredTile = this->viewportState.field24_0x60;
+                int hoveredTile = this->viewportState.cursorTile;
                 if (DAT_TileMapState::instance.flatViewToggleValue1 != 0) {
                     hoveredTile = this->viewportState.mouseTile;
                 }
@@ -201,16 +201,16 @@ namespace Rendering {
                     this->viewportState.somePitchDitchID = MACRO_CALL_MEMBER(
                         OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(hoveredTile);
                 }
-        } else {
+            } else {
                 this->viewportState.mouseY = 0;
                 this->viewportState.mouseX = 0;
                 this->viewportState.field27_0x6c = 0;
                 this->viewportState.field14_0x38 = 0;
                 this->viewportState.field16_0x40 = 0;
                 this->viewportState.field15_0x3c = 0;
-        }
+            }
         } else {
-            this->viewportState.field24_0x60 = 0;
+            this->viewportState.cursorTile = 0;
             this->viewportState.mouseX = 0;
             this->viewportState.mouseY = 0;
             this->viewportState.field27_0x6c = 0;

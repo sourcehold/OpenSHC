@@ -8,7 +8,7 @@ namespace Rendering {
     {
         this->viewportState.viewportX = 32;
         this->viewportState.viewportY = 8;
-        this->viewportState.field4_0x10 = -1;
+        this->viewportState.previousMouseTile = -1;
 
         DWORD now = timeGetTime();
         this->previousIntervalTime_02 = now;

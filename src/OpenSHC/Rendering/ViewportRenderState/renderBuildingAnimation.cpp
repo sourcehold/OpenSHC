@@ -20,7 +20,7 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
             return;
         }
-        if (DAT_TileMapState::instance.field93_0x5548c8 != 0) {
+        if (DAT_TileMapState::instance.disableElevationRendering != 0) {
             return;
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].drawBridgeState1 != 0) {
@@ -38,14 +38,14 @@ namespace Rendering {
 
         DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
         DAT_CurrentlyRenderedSpriteID::instance = DAT_BuildingsState::instance.buildings[buildingID].spriteID2;
-        if (DAT_BuildingsState::instance.buildings[buildingID].field66_0xbe != 0) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength != 0) {
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)
             ((OpenSHC::IO::Graphics::GmID)DAT_CurrentlyRenderedSpriteID::instance,
                 DAT_BuildingsState::instance.buildings[buildingID].animationFrame,
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY,
-                DAT_BuildingsState::instance.buildings[buildingID].field66_0xbe);
+                DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength);
         } else {
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)

@@ -8,7 +8,6 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/UI/TextMessageBLLookupStructUnion.hpp"
 
 #include "OpenSHC/Globals/DAT_BottomLeftTextDisplayState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -29,7 +28,6 @@ namespace Rendering {
     using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Map::Units::States::UnitState;
-    using OpenSHC::UI::TextMessageBLLookupStructUnion;
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
     using OpenSHC::UI::Enums::MenuViewType;
 
@@ -114,7 +112,7 @@ namespace Rendering {
             }
             if (0 <= minimapGateTile) {
                 this->viewportState.mouseRayBuildingID = 0;
-                this->viewportState.field21_0x54 = minimapGateTile;
+                this->viewportState.cursorWallTile = minimapGateTile;
             }
 
             this->viewportState.mouseX = mouseXScreenSpace;
@@ -123,7 +121,7 @@ namespace Rendering {
             this->viewportState.mouseTileY = mouseYScreenSpace;
             this->viewportState.field14_0x38 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x40000000;
             this->viewportState.mouseTile = minimapTile;
-            this->viewportState.field24_0x60 = minimapTile;
+            this->viewportState.cursorTile = minimapTile;
             this->viewportState.mouseAtomRefFloorTile = minimapTile;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(
                     minimapTile)
@@ -249,7 +247,7 @@ namespace Rendering {
         int probeOffset = -8;
         int probeScreenY = mouseYScreenSpace + -8;
         do {
-            if ((DAT_TileMapState::instance.field93_0x5548c8 != 0
+            if ((DAT_TileMapState::instance.disableElevationRendering != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0)
                 && probeOffset != -8) {
                 break;
@@ -293,7 +291,7 @@ namespace Rendering {
                                         .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[probeTile]]
                                     / zoomDivisor
                             <= mouseYScreenSpace
-                        || DAT_TileMapState::instance.field93_0x5548c8 != 0
+                        || DAT_TileMapState::instance.disableElevationRendering != 0
                         || DAT_TileMapState::instance.flatViewToggleValue2 != 0) {
                         this->viewportState.field18_0x48 = DAT_TileMapState::instance.BuildingWasLayer[probeTile];
                         hoveredBuildingID = -1;
@@ -303,7 +301,7 @@ namespace Rendering {
                                     .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[probeTile]]
                                 / zoomDivisor
                         <= mouseYScreenSpace
-                    || DAT_TileMapState::instance.field93_0x5548c8 != 0
+                    || DAT_TileMapState::instance.disableElevationRendering != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0) {
                     hoveredBuildingID = -1;
                     hoveredGateTile = probeTile;
@@ -328,11 +326,11 @@ namespace Rendering {
             probeScreenY = probeScreenY + 1;
         } while (probeOffset < 0xff);
 
-        this->viewportState.field21_0x54 = 0;
+        this->viewportState.cursorWallTile = 0;
         if (hoveredBuildingID == -1) {
             if (-1 <= hoveredGateTile) {
                 this->viewportState.mouseRayBuildingID = 0;
-                this->viewportState.field21_0x54 = hoveredGateTile;
+                this->viewportState.cursorWallTile = hoveredGateTile;
             }
         } else {
             BuildingTypeShort hoveredBuildingType
@@ -370,10 +368,8 @@ namespace Rendering {
                 textNumInGroup = 0x4d;
             }
             // set the text also for ruins tooltip: "This was a Round Tower"
-            TextMessageBLLookupStructUnion noAssociatedType;
-            noAssociatedType.buildingType = (OpenSHC::Commands::MappersEnum)0;
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(5, 0x4e, textNumInGroup, noAssociatedType, 0x28, -1);
+                DAT_BottomLeftTextDisplayState::ptr)(5, 0x4e, textNumInGroup, 0, 0x28, -1);
         }
 
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeMouseTileFromScreenPosition, this)(
