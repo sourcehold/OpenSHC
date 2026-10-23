@@ -320,7 +320,7 @@ namespace Synchrony {
         byte slotActionPending[9]; // 0x00109E5F length: 9
         char playerPositionsArray[8]; // 0x00109E68 length: 8
         undefined4 protocolInvokerPlayerID; // 0x00109E70 length: 4
-        undefined4 currentPlayerSlotID; // 0x00109E74 length: 4
+        int currentPlayerSlotID; // 0x00109E74 length: 4
         undefined4 DAT_SomePlayerID; // 0x00109E78 length: 4
         undefined4 editorPlacementPlayerID; // 0x00109E7C length: 4
         byte field299_0x109e80[9]; // 0x00109E80 length: 9
@@ -329,7 +329,7 @@ namespace Synchrony {
         undefined1 padding_0x109e90[4]; // 0x00109E90 length: 4
         undefined4 lastCommandReceiveTime; // 0x00109E94 length: 4
         undefined4 minPlayerMapTime; // 0x00109E98 length: 4
-        undefined4 mapTimeInTicksSinglePlayer; // 0x00109E9C length: 4
+        int mapTimeInTicksSinglePlayer; // 0x00109E9C length: 4
         undefined4 localPlayerMapTime; // 0x00109EA0 length: 4
         undefined4 playerMapTimeSpread; // 0x00109EA4 length: 4
         undefined4 ticksAheadOfSlowestPlayer; // 0x00109EA8 length: 4
@@ -346,9 +346,9 @@ namespace Synchrony {
         undefined4 now2; // 0x00109ED4 length: 4
         dword field328_0x109ed8; // 0x00109ED8 length: 4
         undefined4 gameCommandID; // 0x00109EDC length: 4
-        undefined4 DAT_GameCommandArrayIndex; // 0x00109EE0 length: 4
+        int DAT_GameCommandArrayIndex; // 0x00109EE0 length: 4
         undefined4 DAT_CommandParameterOffset; // 0x00109EE4 length: 4
-        undefined4 commandDelay; // 0x00109EE8 length: 4
+        int commandDelay; // 0x00109EE8 length: 4
         int selectedGameCommands[100][2]; // 0x00109EEC length: 800
         int someIndex; // 0x0010A20C length: 4
         int DPLAYX_SendAndReceiveREsult; // 0x0010A210 length: 4
@@ -435,7 +435,7 @@ namespace Synchrony {
 
         int getCommandIDFromCommandSelectionStuff();
 
-        undefined4 getGameCommandArrayIndex();
+        int getGameCommandArrayIndex();
 
         int getPendingGameCommandsCount();
 
