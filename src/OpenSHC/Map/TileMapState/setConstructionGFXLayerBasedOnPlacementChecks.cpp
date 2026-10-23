@@ -87,26 +87,25 @@ namespace Map {
                     iVar14 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                         + this->buildingX + x;
                     if ((this->LogicLayer[iVar14] & 0x10000500U) == 0) {
-                        iVar15 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar14, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                            (MappersEnum)command, 0);
+                        iVar15 = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar14,
+                            (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                         this->ConstructionGFXLayer[iVar14] = (-(ushort)(iVar15 != 0) & 0xfff9) + 0x3e;
                     }
                     local_14 = local_14 + 1;
                 } while (local_14 < this->constructionTileCount);
                 uVar8 = (undefined2)((uint)local_14 >> 0x10);
-                if (((command == OpenSHC::Commands::M_MAPPER_KEEP1) || (command == OpenSHC::Commands::M_MAPPER_KEEP2))
-                    || (command == OpenSHC::Commands::M_MAPPER_KEEP3)) {
+                if (command == OpenSHC::Commands::M_MAPPER_KEEP1 || command == OpenSHC::Commands::M_MAPPER_KEEP2
+                    || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
                     piVar12 = (int*)((int)DAT_TerrainDefinedData::ptr + ((short)command + -0x3c) * 0x60 + 0x264);
                     x = 3;
                     do {
                         iVar14 = DAT_ViewportRenderState::instance.translationMatrix[piVar12[1] + y].addXgetTile
                             + *piVar12 + iVar1;
                         if ((this->LogicLayer[iVar14] & 0x10000500U) == 0) {
-                            iVar15
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                    this)(iVar14, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                    (MappersEnum)command, 0);
+                            iVar15 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar14,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             this->ConstructionGFXLayer[iVar14] = (-(ushort)(iVar15 != 0) & 0xfff9) + 0x3e;
                         }
                         piVar12 = piVar12 + 2;
@@ -123,9 +122,9 @@ namespace Map {
                                      .addXgetTile
                             + this->buildingX + iVar1 + iVar14;
                         if ((this->LogicLayer[iVar13] & 0x10000500U) == 0) {
-                            iVar4 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                this)(iVar13, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                (MappersEnum)command, 0);
+                            iVar4 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar13,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             this->ConstructionGFXLayer[iVar13] = (-(ushort)(iVar4 != 0) & 0xfff9) + 0x3e;
                         }
                         local_14 = local_14 + 1;
@@ -140,10 +139,9 @@ namespace Map {
                         iVar4 = DAT_ViewportRenderState::instance.translationMatrix[iVar13].addXgetTile
                             + this->buildingX + iVar14 + iVar1;
                         if ((this->LogicLayer[iVar4] & 0x10000500U) == 0) {
-                            iVar13
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                    this)(iVar4, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                    (MappersEnum)command, 0);
+                            iVar13 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar4,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             iVar13 = (-(uint)(iVar13 != 0) & 0xfffffff9) + 0x3e;
                             this->ConstructionGFXLayer[iVar4] = (ushort)iVar13;
                         }
@@ -151,10 +149,10 @@ namespace Map {
                         iVar3 = iVar3 + 1;
                     } while (iVar3 < this->constructionTileCount);
                 }
-                if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
-                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
-                    || ((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
-                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)))) {
+                if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
                     MVar10 = (MappersEnum)command;
                     iVar14 = MVar10 * 3 + -0x1a4;
                     iVar15 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar14 * 8 + 0x56c);
@@ -168,7 +166,7 @@ namespace Map {
                                     .addXgetTile
                             + this->buildingX + iVar15 + iVar1;
                         iVar4 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar5, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), MVar10, 0);
+                            this)(iVar5, (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), MVar10, 0);
                         iVar13 = iVar13 + 1;
                         this->ConstructionGFXLayer[iVar5] = (-(ushort)(iVar4 != 0) & 0xfff9) + 0x3e;
                     } while (iVar13 < this->constructionTileCount);
@@ -182,7 +180,7 @@ namespace Map {
                                     .addXgetTile
                             + this->buildingX + iVar15 + iVar1;
                         iVar13 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar4, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), MVar10, 0);
+                            this)(iVar4, (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), MVar10, 0);
                         iVar3 = iVar3 + 1;
                         this->ConstructionGFXLayer[iVar4] = (-(ushort)(iVar13 != 0) & 0xfff9) + 0x3e;
                     } while (iVar3 < this->constructionTileCount);
@@ -191,9 +189,8 @@ namespace Map {
                     do {
                         iVar15 = DAT_ViewportRenderState::instance.translationMatrix[piVar12[1] + y].addXgetTile
                             + *piVar12 + iVar1;
-                        iVar14 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                            iVar15, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), MVar10, 0);
+                        iVar14 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
+                            this)(iVar15, (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), MVar10, 0);
                         iVar14 = (-(uint)(iVar14 != 0) & 0xfffffff9) + 0x3e;
                         piVar12 = piVar12 + 2;
                         type = (MappersEnum)(type - OpenSHC::Commands::M_MAPPER_AREA);
@@ -210,11 +207,10 @@ namespace Map {
                         iVar3 = this->buildingX;
                         iVar15 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile;
                         if ((this->LogicLayer[iVar1 + this->buildingX + iVar15 + 5] & 0x10000500U) == 0) {
-                            iVar13
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                    this)(iVar15 + this->buildingX + iVar1 + 5,
-                                    (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                    (MappersEnum)command, 0);
+                            iVar13 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                                iVar15 + this->buildingX + iVar1 + 5,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             this->ConstructionGFXLayer[iVar1 + iVar3 + iVar15 + 5]
                                 = (-(ushort)(iVar13 != 0) & 0xfff9) + 0x3e;
                         }
@@ -228,9 +224,9 @@ namespace Map {
                             = DAT_ViewportRenderState::instance.translationMatrix[y + this->buildingY + 5].addXgetTile
                             + this->buildingX + iVar1;
                         if ((this->LogicLayer[iVar15] & 0x10000500U) == 0) {
-                            iVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                this)(iVar15, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                (MappersEnum)command, 0);
+                            iVar3 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar15,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             this->ConstructionGFXLayer[iVar15] = (-(ushort)(iVar3 != 0) & 0xfff9) + 0x3e;
                         }
                         iVar14 = iVar14 + 1;
@@ -244,11 +240,10 @@ namespace Map {
                         iVar15
                             = DAT_ViewportRenderState::instance.translationMatrix[y + this->buildingY + 5].addXgetTile;
                         if ((this->LogicLayer[iVar1 + this->buildingX + iVar15 + 5] & 0x10000500U) == 0) {
-                            iVar13
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                    this)(iVar15 + this->buildingX + iVar1 + 5,
-                                    (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                                    (MappersEnum)command, 0);
+                            iVar13 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                                iVar15 + this->buildingX + iVar1 + 5,
+                                (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                             iVar13 = (-(uint)(iVar13 != 0) & 0xfffffff9) + 0x3e;
                             this->ConstructionGFXLayer[iVar1 + iVar3 + iVar15 + 5] = (ushort)iVar13;
                         }
@@ -272,7 +267,7 @@ namespace Map {
                         if ((this->LogicLayer[iVar3] & 0x10000500U) == 0) {
                             iVar15
                                 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                    this)(iVar3, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
+                                    this)(iVar3, (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID),
                                     OpenSHC::Commands::M_MAPPER_OIL_SMELTER, 0);
                             iVar15 = (-(uint)(iVar15 != 0) & 0xfffffff9) + 0x3e;
                             this->ConstructionGFXLayer[iVar3] = (ushort)iVar15;
@@ -289,9 +284,9 @@ namespace Map {
                     iVar3 = DAT_ViewportRenderState::instance.translationMatrix[y + this->buildingY + 5].addXgetTile
                         + this->buildingX + iVar1;
                     if ((this->LogicLayer[iVar3] & 0x10000500U) == 0) {
-                        iVar15 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar3, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                            (MappersEnum)command, 0);
+                        iVar15 = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(iVar3,
+                            (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), (MappersEnum)command, 0);
                         iVar15 = (-(uint)(iVar15 != 0) & 0xfffffff9) + 0x3e;
                         this->ConstructionGFXLayer[iVar3] = (ushort)iVar15;
                     }
@@ -308,15 +303,13 @@ namespace Map {
             size = 3;
         } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
             size = 3;
-        } else if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
-                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
-                       || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE1A))
-            || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE2A)) {
+        } else if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C || command == OpenSHC::Commands::M_MAPPER_GATE_STONE1A
+            || command == OpenSHC::Commands::M_MAPPER_GATE_STONE2A) {
             this->gateOrientationVariant = 0x51;
-        } else if (((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B)
-                       || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D))
-            || ((command == OpenSHC::Commands::M_MAPPER_GATE_STONE1B
-                || (command == OpenSHC::Commands::M_MAPPER_GATE_STONE2B)))) {
+        } else if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D || command == OpenSHC::Commands::M_MAPPER_GATE_STONE1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_STONE2B) {
             this->gateOrientationVariant = 0x50;
         }
         MVar10 = (MappersEnum)command;
@@ -325,7 +318,7 @@ namespace Map {
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + iVar1;
             iVar15 = this->uiBuildingRotation;
-            if (((this->uiBuildingRotation != 0xf) && (this->uiBuildingRotation != 8))
+            if (this->uiBuildingRotation != 0xf && this->uiBuildingRotation != 8
                 && (iVar15 = this->uiBuildingRotation - this->mapOrientation, iVar15 < 0)) {
                 iVar15 = iVar15 + 8;
             }
@@ -379,10 +372,10 @@ namespace Map {
             local_14 = local_14 + 1;
             if (this->constructionTileCount <= local_14) {
                 iVar15 = (ushort)command;
-                if ((((command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
-                         || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
-                        || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
-                    || (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)) {
+                if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
                     /*
                       0 3 6 9
                      */
