@@ -41093,7 +41093,7 @@ SHC_3BB0A8C1_0x004FC650 | 45.5% | orientation chain regalloc
 
 SHC_3BB0A8C1_0x004FC7C0 | 79.0% | setg vs sbb/neg
 
-SHC_3BB0A8C1_0x004FC810 | 67.2% | height compare regalloc
+SHC_3BB0A8C1_0x004FC810 | 81.8% | signed height compares, was 67
 
 SHC_3BB0A8C1_0x004FC9E0 | 66.7% | signed layer reads
 

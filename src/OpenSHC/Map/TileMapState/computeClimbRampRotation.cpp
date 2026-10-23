@@ -14,7 +14,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC810
     int TileMapState::computeClimbRampRotation(int tile, uint x, uint y)
     {
-        uint height;
+        int height;
         if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
             height = this->HeightLayer[tile];
         } else {
@@ -22,7 +22,7 @@ namespace Map {
         }
 
         int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tile;
-        uint heightAt86;
+        int heightAt86;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt86 = this->HeightLayer[neighbour];
         } else {
@@ -30,7 +30,7 @@ namespace Map {
         }
 
         neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tile;
-        uint heightAt85;
+        int heightAt85;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt85 = this->HeightLayer[neighbour];
         } else {
@@ -38,7 +38,7 @@ namespace Map {
         }
 
         neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tile;
-        uint heightAt84;
+        int heightAt84;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
             heightAt84 = this->HeightLayer[neighbour];
         } else {
