@@ -117,9 +117,9 @@ namespace Map {
                 DAT_BuildingsState::ptr)(_commandBuildingType);
         this->buildingPlacementProperty_4
             = DAT_BuildingDefinedData::instance.BuildingPlacement_Property_4[_buildingType];
-        if (((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
-                || (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1))
-            || (DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
+            || DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1
+            || DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0) {
             this->buildingPlacementProperty_4 = 0;
         }
         _buildingType
@@ -166,7 +166,7 @@ namespace Map {
                         x, buildingSize);
                     BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                         DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y,
-                        (int)((int)((-(uint)bVar10 & 0xfffffff1) + 0x1e)));
+                        (int)((-(uint)bVar10 & 0xfffffff1) + 0x1e));
                     if (BVar3 != FALSE) {
                         this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
                         bVar11 = false;
@@ -203,8 +203,8 @@ namespace Map {
                         iVar8, buildingSize);
                     iVar4
                         = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
-                            DAT_PathFindingState::ptr)(playerID, (int)((int)(this->buildingX + x)),
-                            (int)((int)(this->buildingY + _y)), 7, -1, -1, -1);
+                            DAT_PathFindingState::ptr)(
+                            playerID, (int)(this->buildingX + x), (int)(this->buildingY + _y), 7, -1, -1, -1);
                     if (iVar4 != 0)
                         goto LAB_005039d6;
                     iVar8 = iVar8 + 1;
@@ -235,8 +235,8 @@ namespace Map {
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                         iVar8 = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
-                            DAT_PathFindingState::ptr)(playerID, (int)((int)(this->buildingX + _x)),
-                            (int)((int)(this->buildingY + _y)), _range, -1, -1, -1);
+                            DAT_PathFindingState::ptr)(
+                            playerID, (int)(this->buildingX + _x), (int)(this->buildingY + _y), _range, -1, -1, -1);
                         if (iVar8 != 0)
                             goto LAB_00503b32;
                         _buildRange
@@ -363,7 +363,8 @@ namespace Map {
             } while (iVar8 < this->constructionTileCount);
         }
     switchD_0050397c_caseD_33:
-        if (((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_DRAWBRIDGE) && (0xc < this->buildingMaxHeight)) {
+        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_DRAWBRIDGE
+            && 0xc < this->buildingMaxHeight) {
             this->buildingPlacementFail = TRUE;
         }
         x = 0;
@@ -427,10 +428,10 @@ namespace Map {
             }
             x = x + 1;
         } while ((int)x < this->constructionTileCount);
-        if (((((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM)
-                 || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_WHEATFARM))
-                || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_HOPSFARM))
-            || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_APPLEFARM)) {
+        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM
+            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_WHEATFARM
+            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_HOPSFARM
+            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
             if ((int)y__fertileLandCount < this->constructionTileCount) {
                 this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x16);
                 this->buildingPlacementFail = TRUE;
@@ -442,9 +443,9 @@ namespace Map {
             }
         } else {
             if ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_QUARRY) {
-                if ((((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP1)
-                        || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP2))
-                    || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP3)) {
+                if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP1
+                    || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP2
+                    || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP3) {
                     buildingSize = (_commandBuildingType - OpenSHC::Commands::M_MAPPER_KEEP1) * 0x60 + 0xb491b8;
                     commandBuildingType = OpenSHC::Commands::M_MAPPER_NULL;
                     do {
@@ -527,10 +528,10 @@ namespace Map {
                         }
                     }
                 } else {
-                    if (((((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1A)
-                             && ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1B))
-                            && ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1C))
-                        && ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1D)) {
+                    if ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
                         if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_IRON_MINE) {
                             if (3 < _ironCount) {
                                 return;
@@ -557,7 +558,7 @@ namespace Map {
                             if (iVar8 < 0x20) {
                                 BVar3 = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(playerID, (int)((int)(_x)), (int)((int)(_y)), buildingSize,
+                                    DAT_BuildingsState::ptr)(playerID, (int)(_x), (int)(_y), buildingSize,
                                     OpenSHC::Map::Buildings::BT_STOCKPILE);
                                 if (BVar3 != FALSE) {
                                     return;
@@ -579,8 +580,8 @@ namespace Map {
                             if (iVar8 < 8) {
                                 BVar3 = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(playerID, (int)((int)(_x)), (int)((int)(_y)), buildingSize,
-                                    OpenSHC::Map::Buildings::BT_GRANARY);
+                                    DAT_BuildingsState::ptr)(
+                                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_GRANARY);
                                 if (BVar3 != FALSE) {
                                     return;
                                 }
@@ -601,8 +602,8 @@ namespace Map {
                             if (iVar8 < 8) {
                                 BVar3 = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(playerID, (int)((int)(_x)), (int)((int)(_y)), buildingSize,
-                                    OpenSHC::Map::Buildings::BT_ARMORY);
+                                    DAT_BuildingsState::ptr)(
+                                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_ARMORY);
                                 if (BVar3 != FALSE) {
                                     return;
                                 }
@@ -613,8 +614,8 @@ namespace Map {
                             this->buildingPlacementFail = TRUE;
                             return;
                         }
-                        if (((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO)
-                            || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB)) {
+                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
+                            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
                             iVar4 = _x
                                 + DAT_TerrainDefinedData::instance
                                       .BuildingPartsOffsets[this->DAT_TempBuildingRotation][0]
@@ -726,8 +727,8 @@ namespace Map {
                             this->buildingPlacementFail = 2;
                             return;
                         }
-                        if (((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD)
-                            || ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD)) {
+                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD
+                            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
                             iVar4 = _x
                                 + DAT_TerrainDefinedData::instance
                                       .BuildingPartsOffsets[this->DAT_TempBuildingRotation][1]
@@ -801,8 +802,7 @@ namespace Map {
                             return;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::algTunnelerFindTarget,
-                            DAT_PathFindingState::ptr)(
-                            playerID, 0, (int)((int)(76)), (int)((int)(_x)), (int)((int)(_y)));
+                            DAT_PathFindingState::ptr)(playerID, 0, (int)(76), (int)(_x), (int)(_y));
                         if (DAT_PathFindingState::instance.ALG_TargetTile != 0) {
                             return;
                         }
