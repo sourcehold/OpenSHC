@@ -29,7 +29,6 @@ namespace Map {
         {
             int iVar4;
             int _candidate;
-            int _tile;
             if (399 < x || 399 < y) {
                 return 0;
             }
@@ -54,7 +53,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (_tile < 0) {
                         break;
                     }
@@ -95,7 +94,7 @@ namespace Map {
                             DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
                             int sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5]
-                                              .short_.xOffset;
+                                            .short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
