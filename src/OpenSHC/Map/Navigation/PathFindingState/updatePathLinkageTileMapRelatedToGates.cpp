@@ -17,20 +17,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00499FA0
         void PathFindingState::updatePathLinkageTileMapRelatedToGates(int buildingID)
         {
-            int iVar2;
             int iVar3;
             int _anotherTile;
             int iVar4;
-            int _middleTileUnk;
-            uint uVar5;
-            int _xMiddleUnk;
             int _pl2;
-            uint _widthOrHeight;
-            _middleTileUnk = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            _widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+            int _middleTileUnk = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
+            uint _widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
             int _half = (int)_widthOrHeight / 2;
             if (DAT_BuildingsState::instance.buildings[buildingID].buildingVariation == 80) {
-                iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                int iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
                 iVar4 = iVar2 + _half;
                 _pl2 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
                 int _blocked = _pl2 == 2;
@@ -71,14 +66,14 @@ namespace Map {
                 return;
             }
             iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
-            _xMiddleUnk = _middleTileUnk + _half;
+            int _xMiddleUnk = _middleTileUnk + _half;
             _pl2 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
             int _rowBelow = _widthOrHeight + iVar3;
             int _blocked = _pl2 == 2;
             int _row = iVar3 + -1;
             _middleTileUnk = DAT_ViewportRenderState::instance.translationMatrix[_row].addXgetTile;
             iVar4 = DAT_ViewportRenderState::instance.translationMatrix[_row + 1].addXgetTile;
-            uVar5 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk + _xMiddleUnk];
+            uint uVar5 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk + _xMiddleUnk];
             uint _otherHeight = (uint)DAT_TileMapState::instance.DefaultHeightLayer[iVar4 + _xMiddleUnk];
             _middleTileUnk = _middleTileUnk + _xMiddleUnk;
             _anotherTile = iVar4 + _xMiddleUnk;
