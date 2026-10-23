@@ -28,7 +28,6 @@ namespace Map {
         {
             uint uVar2;
             int _candidateNorthOrSouth;
-            uint _tile;
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
             if (32000 < this->searchGeneration) {
@@ -48,7 +47,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    uint _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if ((int)_tile < 0) {
                         break;
                     }
