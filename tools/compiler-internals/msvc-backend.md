@@ -201,7 +201,29 @@ else                                        advance to p->next;
 ```
 
 with an insert-at-front fast path when the new node outranks the head, so among equal keys the newer candidate
-goes first. `+0x0c` is a **signed benefit score** and `+0x44` is a small symbol id used only as a tiebreak.
+goes first. `+0x44` is a small symbol id used only as a tiebreak.
+
+`+0x0c` is **not** the benefit, though an earlier reading of these notes said so. The sibling inserter
+`@InsertByBenefit@8` (`0x10b119f0`) orders on `+0x40` and *copies* `+0x0c` from the list neighbour
+(`mov ecx,[ecx+0xc]; mov [edx+0xc],ecx`), and `@BetterToDefer@4` sets `+0x0c` to `min(components) - 1`, so
+`+0x0c` is a rank derived while ordering. The benefit is **`+0x40`**, which `BetterToDefer` also gates on
+(`cmp dword ptr [eax+0x40], 0; jle` - not worth it). Tracing all three fields for `sellExcessGoods`:
+
+| name | `+0x0c` rank | `+0x40` benefit | `+0x44` id |
+|---|---|---|---|
+| `amount` | +104 | **70** | 111 |
+| `variance` | -4 | **22** | 110 |
+| `resourceType` | -34 | **20** | 39 |
+| `j` | +88 | **20** | 108 |
+| `resourceOffset` | -26 | **20** | 35 |
+| `playerResourceBase` | -52 | **12** | 17 |
+| `aicIndex` | +88 | **8** | 20 |
+| `this` / `aiType` | -134 / +42 | **6** | 8 / 4 |
+| `playerID` | -134 | **4** | 7 |
+
+The benefit is a small positive **weighted use count**: `amount`, assigned in eight branches and read by the
+`sellGoods` call, scores 70; `playerID` scores 4. So register candidacy is driven by the same quantity as stack
+slot order - how often, and at what loop depth, a value is used.
 
 Traced over `sellExcessGoods`, the candidates and their scores look like this (40+ insertions, abbreviated):
 
@@ -276,7 +298,26 @@ serves it late and leaves it in a volatile register (`edx`), where the original 
 the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
 being inferred from a register permutation in the reccmp diff.
 
-### Do the scores prescribe a fix? Measured: no
+### Why there is no source-level fixer
+
+The benefit is a property of what the code *does*, not of how it is written. It counts uses weighted by block
+frequency, so none of the levers that cost nothing semantically - declaration order, statement order, renaming,
+redeclaring - can move it. That is the reason every syntactic hill-climb in this repo has failed to shift a
+register assignment, and it means a tool cannot be asked to "fix" a register mismatch by rewriting syntax.
+
+What the numbers do support is a sharper statement of the problem. For an `alloc-only` function either
+
+* our use counts differ from the original's, in which case the fix is to restructure the computation so each
+  value is used the same number of times in the same places - `aiRecruitUnits` carrying a loop counter the
+  original does not have is this case - or
+* our use counts already match, in which case what remains is the symbol-id tiebreak and the function is
+  unreachable from the source. `recruitHarrassingSiegeEngines`, with four candidates tied at +36, is this case
+  and should be abandoned.
+
+`reg_scores.py` tells you which of the two you are in, per variable. That is the useful form of "fixer" the
+evidence supports; it is a decision procedure, not an automatic rewrite.
+
+### Do the suggestions prescribe a fix? Measured: no
 
 `reg_scores.py --advise` names the patterns above and suggests what to try. Those suggestions were then tested
 against reccmp on `aiRecruitUnits` (50.0%), the function with the strongest structural signal - a loop counter `i`

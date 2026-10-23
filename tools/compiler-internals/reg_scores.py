@@ -5,10 +5,17 @@ usage: reg_scores.py FILE.cpp --probe
        reg_scores.py FILE.cpp --advise LOCALNAME
        reg_scores.py FILE.cpp --invocation N
 
-`OrderGlobregs` scores every candidate value and orders them by descending score; `Color`
-walks that order and `ChoosePhysReg` serves each from the still-available registers. So the
-score decides *which* value gets a register, and this script reads the scores out of the
-running compiler, with the candidates resolved back to source variable names.
+`OrderGlobregs` orders the candidate values and `Color` walks that order, calling
+`ChoosePhysReg` to serve each from the still-available registers. The ordering key is the
+candidate's **benefit** at `+0x40`, which is a weighted use count - `amount` in
+`sellExcessGoods`, assigned in eight branches and read by the call, scores 70 where
+`playerID` scores 4. This script reads those numbers out of the running compiler with the
+candidates resolved back to source variable names.
+
+The benefit is a property of what the code *does*, not of how it is written: it counts uses
+weighted by block frequency. No reordering, renaming or redeclaring moves it, which is why
+syntactic hill-climbing does not shift a register assignment. What can move it is changing
+how many times, and at what loop depth, a value is actually used.
 
 It drives `cl.exe` under the x86 `cdb` with breakpoints taken from `c2.pdb`'s public
 addresses - see msvc-backend.md for how that works and why no symbol loading is needed.
@@ -171,16 +178,16 @@ if find or advise:
     # every named candidate with its invocation index: identification by name, which works
     # for functions smaller than the resolver-template flood that --probe ranks by size
     q = BS + '"'
-    cand = ('.if (poi(poi(@eax)) != 0) { .printf ' + q + 'N %d %d ' + q +
-            ', @$t0, poi(@eax+0xc); da poi(poi(poi(@eax))+4)+1 L28 }; gc')
+    cand = ('.if (poi(poi(@eax)) != 0) { .printf ' + q + 'N %d %d %d ' + q +
+            ', @$t0, poi(@eax+0x40), poi(@eax+0xc); da poi(poi(poi(@eax))+4)+1 L28 }; gc')
     lines = ['sxe ld:c2', 'g', 'r $t0=0',
              'bp1 ' + INSERT_IN_LIST + ' "' + cand + '"',
              'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; gc"',
              'g', 'q', '']
     txt = run(lines, 'find')
     rows = {}
-    for m in re.finditer(r'N (\d+) (-?\d+) [0-9a-f]{8}\s+"([^"]*)"', txt):
-        rows.setdefault(int(m.group(1)), []).append((int(m.group(2)), m.group(3)))
+    for m in re.finditer(r'N (\d+) (-?\d+) (-?\d+) [0-9a-f]{8}\s+"([^"]*)"', txt):
+        rows.setdefault(int(m.group(1)), []).append((int(m.group(2)), m.group(4)))
     want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
     hits = [i for i in sorted(rows)
             if not want or any(w in [n for _s, n in rows[i]] for w in want)]
@@ -216,7 +223,7 @@ if probe:
     sys.exit(0)
 
 q = BS + '"'
-cand = ('.printf ' + q + 'CAND %4d %02x ' + q + ', poi(@eax+0xc), poi(@eax+0x44); '
+cand = ('.printf ' + q + 'CAND %4d %02x ' + q + ', poi(@eax+0x40), poi(@eax+0x44); '
         '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
         '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
 lines = ['sxe ld:c2', 'g', 'r $t0=0',
