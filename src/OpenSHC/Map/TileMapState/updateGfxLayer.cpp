@@ -135,7 +135,7 @@ namespace Map {
                             this->DAT_SomeX = local_10 * 10;
                             for (local_30 = 0; local_30 < 10; local_30 = local_30 + 1) {
                                 bVar9 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)((int)(this->DAT_SomeY)));
+                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)(this->DAT_SomeY));
                                 if ((bVar9 != 0)
                                     && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
@@ -158,15 +158,14 @@ namespace Map {
                                                         if ((this->LogicLayer[this->DAT_SomeTile] & L_FARM_FIELD_APPLE
                                                                 | L_FARM_FIELD_DAIRY)
                                                             == 0) {
-                                                            if ((((this->LogicLayer[this->DAT_SomeTile]
-                                                                          & L_WALL_OR_GATEHOUSE
-                                                                      | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)
-                                                                     == 0)
-                                                                    && (this->BuildingWasLayer[this->DAT_SomeTile]
-                                                                        != '\0'))
-                                                                && (((short)this->MiscDisplayLayer[this->DAT_SomeTile]
-                                                                        & 0x10)
-                                                                    != 0)) {
+                                                            if ((this->LogicLayer[this->DAT_SomeTile]
+                                                                        & L_WALL_OR_GATEHOUSE
+                                                                    | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)
+                                                                    == 0
+                                                                && this->BuildingWasLayer[this->DAT_SomeTile] != '\0'
+                                                                && ((short)this->MiscDisplayLayer[this->DAT_SomeTile]
+                                                                       & 0x10)
+                                                                    != 0) {
                                                                 local_44 = 0;
                                                                 switch (this->BuildingWasLayer[this->DAT_SomeTile]) {
                                                                 case '\t':
@@ -330,18 +329,18 @@ namespace Map {
                                                                                 < bVar7) {
                                                                                 this->WallGFXLayer[this->DAT_SomeTile]
                                                                                     = (ushort)bVar7;
-                                                                                if (((DAT_TileMapState::instance
-                                                                                             .DamageLayer[local_68]
-                                                                                         != 0)
-                                                                                        || (DAT_TileMapState::instance
-                                                                                                .DamageLayer[local_60]
-                                                                                            != 0))
-                                                                                    || ((DAT_TileMapState::instance
+                                                                                if (DAT_TileMapState::instance
+                                                                                            .DamageLayer[local_68]
+                                                                                        != 0
+                                                                                    || DAT_TileMapState::instance
+                                                                                            .DamageLayer[local_60]
+                                                                                        != 0
+                                                                                    || (DAT_TileMapState::instance
                                                                                                 .DamageLayer[local_54]
                                                                                             != 0
                                                                                         && ((this->LogicLayer[local_54]
                                                                                                 & 0x100U)
-                                                                                            != 0)))) {
+                                                                                            != 0))) {
                                                                                     this->WallOwnerLayer[this
                                                                                             ->DAT_SomeTile]
                                                                                         = this->WallOwnerLayer[this
@@ -820,8 +819,8 @@ namespace Map {
                                                     } else {
                                                         MACRO_CALL_MEMBER(
                                                             OpenSHC::Map::TileMapState_Func::computeClimbRampRotation,
-                                                            this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                            (uint)((int)(this->DAT_SomeY)));
+                                                            this)(this->DAT_SomeTile, (uint)(iVar17),
+                                                            (uint)(this->DAT_SomeY));
                                                         this->PillarGFXLayer[this->DAT_SomeTile]
                                                             = (short)GMTotalPicturesProcessed::instance[9] + -1
                                                             + (short)this->wallCornerRotation;
@@ -835,8 +834,8 @@ namespace Map {
                                                 } else {
                                                     MACRO_CALL_MEMBER(
                                                         OpenSHC::Map::TileMapState_Func::computeClimbRampRotation,
-                                                        this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                        (uint)((int)(this->DAT_SomeY)));
+                                                        this)(
+                                                        this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                                         = (short)GMTotalPicturesProcessed::instance[9] + -1
                                                         + (short)this->wallCornerRotation;
@@ -850,8 +849,7 @@ namespace Map {
                                             } else {
                                                 BVar11 = MACRO_CALL_MEMBER(
                                                     OpenSHC::Map::TileMapState_Func::isTileSuitableForBrushPlacement,
-                                                    this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                    (uint)((int)(this->DAT_SomeY)));
+                                                    this)(this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                                 if (BVar11 == FALSE) {
                                                     this->PillarGFXLayer[this->DAT_SomeTile] = 0x20;
                                                 } else {
@@ -864,8 +862,7 @@ namespace Map {
                                         } else {
                                             BVar11 = MACRO_CALL_MEMBER(
                                                 OpenSHC::Map::TileMapState_Func::isTileSuitableForBrushPlacement, this)(
-                                                this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                (uint)((int)(this->DAT_SomeY)));
+                                                this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                             if (BVar11 == FALSE) {
                                                 this->PillarGFXLayer[this->DAT_SomeTile] = 0x20;
                                             } else {
@@ -900,15 +897,15 @@ namespace Map {
                             this->DAT_SomeX = local_10 * 10;
                             for (local_30 = 0; local_30 < 10; local_30 = local_30 + 1) {
                                 BVar11 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)((int)(this->DAT_SomeY)));
-                                if ((((BVar11 != FALSE)
-                                         && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
-                                                 OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
-                                                 DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
-                                             (this->LogicLayer[this->DAT_SomeTile] & 0x100201U) != 0))
-                                        && ((char)this->ChangedLayer[this->DAT_SomeTile] != 0))
-                                    && ((this->BuildingLayer[this->DAT_SomeTile] == 0
-                                        && ((this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0)))) {
+                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)(this->DAT_SomeY));
+                                if (BVar11 != FALSE
+                                    && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
+                                            OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
+                                            DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
+                                        (this->LogicLayer[this->DAT_SomeTile] & 0x100201U) != 0)
+                                    && (char)this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && this->BuildingLayer[this->DAT_SomeTile] == 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0) {
                                     if ((this->LogicLayer[this->DAT_SomeTile] & 1U) == 0) {
                                         if ((this->LogicLayer[this->DAT_SomeTile] & 0x100000U) != 0) {
                                             MACRO_CALL_MEMBER(
@@ -953,8 +950,8 @@ namespace Map {
                                                     this->bitFlag
                                                         = this->bitFlag | (byte)(0x80 >> ((byte)local_70 & 0x1f));
                                                 }
-                                                if (((this->LogicLayer[iVar17] & 0x100001U) == 0)
-                                                    && (((char)this->Logic2Layer[iVar17] & 0x20) != 0)) {
+                                                if ((this->LogicLayer[iVar17] & 0x100001U) == 0
+                                                    && ((char)this->Logic2Layer[iVar17] & 0x20) != 0) {
                                                     local_74 = 0x80 >> ((byte)local_70 & 0x1f) | local_74;
                                                 }
                                             }
@@ -973,9 +970,9 @@ namespace Map {
                                         uVar12 = (this->screenSouthEastDirection + 1) % 8;
                                         iVar13 = this->DAT_SomeTile
                                             + this->directionTranslationMatrix[this->DAT_SomeY][uVar12];
-                                        if (((((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0)
-                                                && (((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0))
-                                            && (((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0)) {
+                                        if (((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0
+                                            && ((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0
+                                            && ((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0) {
                                             if (this->LuminesenceLayer[this->DAT_SomeTile] < 4) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = (short)GMTotalPicturesProcessed::instance[0xc] + 0x60
@@ -992,9 +989,9 @@ namespace Map {
                                         uVar12 = (this->screenSouthEastDirection + 3) % 8;
                                         iVar13 = this->DAT_SomeTile
                                             + this->directionTranslationMatrix[this->DAT_SomeY][uVar12];
-                                        if (((((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0)
-                                                && (((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0))
-                                            && (((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0)) {
+                                        if (((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0
+                                            && ((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0
+                                            && ((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0) {
                                             if ((this->DAT_SomeY & 1U) == 0) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = (short)GMTotalPicturesProcessed::instance[0xc] + 0x138;
@@ -1011,9 +1008,9 @@ namespace Map {
                                         uVar12 = (this->screenSouthEastDirection + 7) % 8;
                                         iVar13 = this->DAT_SomeTile
                                             + this->directionTranslationMatrix[this->DAT_SomeY][uVar12];
-                                        if (((((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0)
-                                                && (((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0))
-                                            && (((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0)) {
+                                        if (((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0
+                                            && ((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0
+                                            && ((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0) {
                                             if ((this->DAT_SomeY & 1U) == 0) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = (short)GMTotalPicturesProcessed::instance[0xc] + 0x13a;
@@ -1030,9 +1027,9 @@ namespace Map {
                                         uVar12 = (this->screenSouthEastDirection + 5) % 8;
                                         iVar13 = this->DAT_SomeTile
                                             + this->directionTranslationMatrix[this->DAT_SomeY][uVar12];
-                                        if (((((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0)
-                                                && (((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0))
-                                            && (((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0)) {
+                                        if (((this->LogicLayer[iVar17] | this->LogicLayer[iVar13]) & 1U) == 0
+                                            && ((short)this->MiscDisplayLayer[iVar17] & 0x3c0) != 0
+                                            && ((short)this->MiscDisplayLayer[iVar13] & 0x3c0) != 0) {
                                             uVar12 = (int)this->DAT_SomeY % 8;
                                             this->GfxLayer[this->DAT_SomeTile]
                                                 = (short)GMTotalPicturesProcessed::instance[0xc] + 0x12f
@@ -1059,16 +1056,16 @@ namespace Map {
                             this->DAT_SomeX = local_10 * 10;
                             for (local_30 = 0; local_30 < 10; local_30 = local_30 + 1) {
                                 BVar11 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)((int)(this->DAT_SomeY)));
-                                if (((BVar11 != FALSE)
-                                        && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
-                                                OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
-                                                DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
-                                            (this->LogicLayer[this->DAT_SomeTile] & 1U) != 0))
-                                    && ((((char)this->ChangedLayer[this->DAT_SomeTile] != 0
-                                             && (((this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0
-                                                 && (this->BuildingLayer[this->DAT_SomeTile] == 0))))
-                                        && (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) == 0)))) {
+                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)(this->DAT_SomeY));
+                                if (BVar11 != FALSE
+                                    && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
+                                            OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
+                                            DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
+                                        (this->LogicLayer[this->DAT_SomeTile] & 1U) != 0)
+                                    && (char)this->ChangedLayer[this->DAT_SomeTile] != 0
+                                    && (this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0
+                                    && this->BuildingLayer[this->DAT_SomeTile] == 0
+                                    && ((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) == 0) {
                                     MACRO_NEIGHBOUR_FLAGS_MISC_8(m2, 0x80)
                                     bVar19 = this->bitFlag;
                                     MACRO_NEIGHBOUR_FLAGS_MISC_8(m3, 0x40)
@@ -1100,13 +1097,13 @@ namespace Map {
                             this->DAT_SomeX = local_10 * 10;
                             for (local_30 = 0; local_30 < 10; local_30 = local_30 + 1) {
                                 BVar11 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)((int)(this->DAT_SomeY)));
-                                if (((BVar11 != FALSE)
-                                        && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
-                                                OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
-                                                DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
-                                            (this->LogicLayer[this->DAT_SomeTile] & L_BORDER | L_BORDER_EDGE) == 0))
-                                    && ((char)this->ChangedLayer[this->DAT_SomeTile] != 0)) {
+                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, (uint)(this->DAT_SomeY));
+                                if (BVar11 != FALSE
+                                    && (this->DAT_SomeTile = MACRO_CALL_MEMBER(
+                                            OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
+                                            DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY),
+                                        (this->LogicLayer[this->DAT_SomeTile] & L_BORDER | L_BORDER_EDGE) == 0)
+                                    && (char)this->ChangedLayer[this->DAT_SomeTile] != 0) {
                                     this->ChangedLayer[this->DAT_SomeTile]
                                         = (char)this->ChangedLayer[this->DAT_SomeTile] - 1;
                                     iVar17 = this->DAT_SomeX;
@@ -1128,13 +1125,13 @@ namespace Map {
                                                         }
                                                         iVar14 = MACRO_CALL_MEMBER(
                                                             OpenSHC::Map::TileMapState_Func::computeClimbRampRotation,
-                                                            this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                            (uint)((int)(this->DAT_SomeY)));
+                                                            this)(this->DAT_SomeTile, (uint)(iVar17),
+                                                            (uint)(this->DAT_SomeY));
                                                         BVar1 = DAT_BuildingsState::instance.buildings[iVar13]
                                                                     .buildingType;
                                                         if (((BVar1 == OpenSHC::Map::Buildings::BT_FIREBALLISTA)
                                                                 || ((0x4f < (short)BVar1 && ((short)BVar1 < 0x55))))
-                                                            && (iVar14 == 0)) {
+                                                            && iVar14 == 0) {
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
                                                                 = (short)(((((int)(uint)this
                                                                                     ->HeightLayer[this->DAT_SomeTile]
@@ -1153,22 +1150,19 @@ namespace Map {
                                                                 = (short)this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                 | 0x800;
                                                         }
-                                                        if (((DAT_BuildingsState::instance.buildings[iVar13]
-                                                                     .buildingType
-                                                                 == OpenSHC::Map::Buildings::BT_KILLINGPIT)
-                                                                && (DAT_BuildingsState::instance.buildings[iVar13].state
-                                                                    < 1))
-                                                            && ((
-                                                                BVar11 = MACRO_CALL_MEMBER(
+                                                        if (DAT_BuildingsState::instance.buildings[iVar13].buildingType
+                                                                == OpenSHC::Map::Buildings::BT_KILLINGPIT
+                                                            && DAT_BuildingsState::instance.buildings[iVar13].state < 1
+                                                            && (BVar11 = MACRO_CALL_MEMBER(
                                                                     OpenSHC::Game::GameStateStructures_Func::isSameTeam,
                                                                     DAT_GameState::ptr)(
                                                                     (int)DAT_BuildingsState::instance.buildings[iVar13]
                                                                         .owner,
-                                                                    (int)((int)(DAT_GameSynchronyState::instance
-                                                                            .currentPlayerSlotID))),
+                                                                    (int)(DAT_GameSynchronyState::instance
+                                                                            .currentPlayerSlotID)),
                                                                 BVar11 == FALSE
                                                                     && (DAT_GameCore::instance.gameMode_2
-                                                                        != OpenSHC::Game::GM_EDITOR)))) {
+                                                                        != OpenSHC::Game::GM_EDITOR))) {
                                                             if ((this->LogicLayer[this->DAT_SomeTile]
                                                                     & L_DEFAULT_EARTH_OR_TEXTURE)
                                                                 == 0)
@@ -1192,10 +1186,10 @@ namespace Map {
                                                     }
                                                     if ((this->LogicLayer[this->DAT_SomeTile] & L_KEEP_NON_MANOR_HOUSE)
                                                         == 0) {
-                                                        if (((this->LogicLayer[this->DAT_SomeTile] & L_ROCKY) == 0)
-                                                            || ((this->LogicLayer[this->DAT_SomeTile]
-                                                                    & L_WALL_OR_GATEHOUSE)
-                                                                != 0)) {
+                                                        if ((this->LogicLayer[this->DAT_SomeTile] & L_ROCKY) == 0
+                                                            || (this->LogicLayer[this->DAT_SomeTile]
+                                                                   & L_WALL_OR_GATEHOUSE)
+                                                                != 0) {
                                                             if ((this->LogicLayer[this->DAT_SomeTile] & L_BOULDERS)
                                                                 == 0) {
                                                                 if ((this->LogicLayer[this->DAT_SomeTile] & L_PEBBLES)
@@ -1208,18 +1202,18 @@ namespace Map {
                                                                             if ((this->LogicLayer[this->DAT_SomeTile]
                                                                                     & L_MOAT)
                                                                                 == 0) {
-                                                                                if (((this->LogicLayer[this
-                                                                                              ->DAT_SomeTile]
-                                                                                             & L_WALL_OR_GATEHOUSE
-                                                                                         | L_FARM_FIELD_WHEAT
-                                                                                         | L_FARM_FIELD_HOP
-                                                                                         | L_FARM_FIELD_APPLE
-                                                                                         | L_FARM_FIELD_DAIRY)
-                                                                                        == 0)
-                                                                                    || ((this->LogicLayer[this
-                                                                                                 ->DAT_SomeTile]
-                                                                                            & L_FARM_FIELD_APPLE)
-                                                                                        != 0)) {
+                                                                                if ((this->LogicLayer[this
+                                                                                             ->DAT_SomeTile]
+                                                                                            & L_WALL_OR_GATEHOUSE
+                                                                                        | L_FARM_FIELD_WHEAT
+                                                                                        | L_FARM_FIELD_HOP
+                                                                                        | L_FARM_FIELD_APPLE
+                                                                                        | L_FARM_FIELD_DAIRY)
+                                                                                        == 0
+                                                                                    || (this->LogicLayer[this
+                                                                                                ->DAT_SomeTile]
+                                                                                           & L_FARM_FIELD_APPLE)
+                                                                                        != 0) {
                                                                                     sVar8 = 0;
                                                                                     if ((this->WallOwnerLayer[this
                                                                                                  ->DAT_SomeTile]
@@ -1232,19 +1226,19 @@ namespace Map {
                                                                                             & 0x80)
                                                                                         != 0)
                                                                                         goto LAB_0050ffbc;
-                                                                                    if ((((this->LogicLayer[this
+                                                                                    if ((this->LogicLayer[this
+                                                                                                 ->DAT_SomeTile]
+                                                                                                & L_WALL_OR_GATEHOUSE
+                                                                                            | L_BUILDING
+                                                                                            | L_KEEP_NON_MANOR_HOUSE)
+                                                                                            != 0
+                                                                                        || this->BuildingWasLayer[this
                                                                                                    ->DAT_SomeTile]
-                                                                                                  & L_WALL_OR_GATEHOUSE
-                                                                                              | L_BUILDING
-                                                                                              | L_KEEP_NON_MANOR_HOUSE)
-                                                                                             != 0)
-                                                                                            || (this->BuildingWasLayer
-                                                                                                    [this->DAT_SomeTile]
-                                                                                                == '\0'))
-                                                                                        || (((short)this->MiscDisplayLayer
-                                                                                                    [this->DAT_SomeTile]
-                                                                                                & 0x10)
-                                                                                            == 0))
+                                                                                            == '\0'
+                                                                                        || ((short)this->MiscDisplayLayer
+                                                                                                   [this->DAT_SomeTile]
+                                                                                               & 0x10)
+                                                                                            == 0)
                                                                                         goto LAB_00510585;
                                                                                 }
                                                                             } else {
@@ -1258,16 +1252,16 @@ namespace Map {
                                                                                     if ((this->LogicLayer[iVar13]
                                                                                             & L_MOAT)
                                                                                         == 0) {
-                                                                                        if (((this->BuildingLayer
-                                                                                                     [iVar13]
-                                                                                                 != 0)
-                                                                                                && (DAT_BuildingsState::instance
-                                                                                                        .buildings[this->BuildingLayer
+                                                                                        if (this->BuildingLayer[iVar13]
+                                                                                                != 0
+                                                                                            && DAT_BuildingsState::instance
+                                                                                                    .buildings[this
+                                                                                                            ->BuildingLayer
                                                                                                                 [iVar13]]
-                                                                                                        .buildingType
-                                                                                                    == OpenSHC::Map::
-                                                                                                        Buildings::
-                                                                                                            BT_DRAWBRIDGE))
+                                                                                                    .buildingType
+                                                                                                == OpenSHC::Map::
+                                                                                                    Buildings::
+                                                                                                        BT_DRAWBRIDGE
                                                                                             && (iVar13
                                                                                                 = MACRO_CALL_MEMBER(
                                                                                                     OpenSHC::Map::
@@ -1300,17 +1294,16 @@ namespace Map {
                                                                                         if ((this->LogicLayer[iVar13]
                                                                                                 & L_MOAT)
                                                                                             == 0) {
-                                                                                            if (((this->BuildingLayer
-                                                                                                         [iVar13]
-                                                                                                     != 0)
-                                                                                                    && (DAT_BuildingsState::instance
-                                                                                                            .buildings
-                                                                                                                [this->BuildingLayer
-                                                                                                                        [iVar13]]
-                                                                                                            .buildingType
-                                                                                                        == OpenSHC::Map::
-                                                                                                            Buildings::
-                                                                                                                BT_DRAWBRIDGE))
+                                                                                            if (this->BuildingLayer
+                                                                                                        [iVar13]
+                                                                                                    != 0
+                                                                                                && DAT_BuildingsState::instance
+                                                                                                        .buildings[this->BuildingLayer
+                                                                                                                [iVar13]]
+                                                                                                        .buildingType
+                                                                                                    == OpenSHC::Map::
+                                                                                                        Buildings::
+                                                                                                            BT_DRAWBRIDGE
                                                                                                 && (iVar13
                                                                                                     = MACRO_CALL_MEMBER(
                                                                                                         OpenSHC::Map::
@@ -1633,8 +1626,8 @@ namespace Map {
                                                                             OpenSHC::Map::TileMapState_Func::
                                                                                 computeClimbRampRotation,
                                                                             this)(this->DAT_SomeTile,
-                                                                            (uint)((int)(this->DAT_SomeX)),
-                                                                            (uint)((int)(this->DAT_SomeY)));
+                                                                            (uint)(this->DAT_SomeX),
+                                                                            (uint)(this->DAT_SomeY));
                                                                         this->PillarGFXLayer[this->DAT_SomeTile]
                                                                             = (short)
                                                                                   GMTotalPicturesProcessed::instance[9]
@@ -1656,8 +1649,8 @@ namespace Map {
                                                                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::
                                                                                           computeClimbRampRotation,
                                                                         this)(this->DAT_SomeTile,
-                                                                        (uint)((int)(this->DAT_SomeX)),
-                                                                        (uint)((int)(this->DAT_SomeY)));
+                                                                        (uint)(this->DAT_SomeX),
+                                                                        (uint)(this->DAT_SomeY));
                                                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                                                         = (short)GMTotalPicturesProcessed::instance[9]
                                                                         + -1 + (short)this->wallCornerRotation;
@@ -1685,9 +1678,8 @@ namespace Map {
                                                             } else {
                                                                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::
                                                                                       computeClimbRampRotation,
-                                                                    this)(this->DAT_SomeTile,
-                                                                    (uint)((int)(this->DAT_SomeX)),
-                                                                    (uint)((int)(this->DAT_SomeY)));
+                                                                    this)(this->DAT_SomeTile, (uint)(this->DAT_SomeX),
+                                                                    (uint)(this->DAT_SomeY));
                                                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                                                     = (short)GMTotalPicturesProcessed::instance[9] + -1
                                                                     + (short)this->wallCornerRotation;
@@ -1710,9 +1702,8 @@ namespace Map {
                                                         } else {
                                                             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::
                                                                                   computeClimbRampRotation,
-                                                                this)(this->DAT_SomeTile,
-                                                                (uint)((int)(this->DAT_SomeX)),
-                                                                (uint)((int)(this->DAT_SomeY)));
+                                                                this)(this->DAT_SomeTile, (uint)(this->DAT_SomeX),
+                                                                (uint)(this->DAT_SomeY));
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
                                                                 = (short)GMTotalPicturesProcessed::instance[9] + -1
                                                                 + (short)this->wallCornerRotation;
@@ -1755,17 +1746,16 @@ namespace Map {
                                                         OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(
                                                         this->DAT_SomeTile);
                                                     if (iVar13 != 0) {
-                                                        if (((this->pitchDitches[iVar13].state < 2)
-                                                                && (BVar11 = MACRO_CALL_MEMBER(
-                                                                        OpenSHC::Game::GameStateStructures_Func::
-                                                                            isSameTeam,
-                                                                        DAT_GameState::ptr)(
-                                                                        (int)this->pitchDitches[iVar13].owner,
-                                                                        (int)((int)(DAT_GameSynchronyState::instance
-                                                                                .currentPlayerSlotID))),
-                                                                    BVar11 == FALSE))
-                                                            && (DAT_GameCore::instance.gameMode_2
-                                                                != OpenSHC::Game::GM_EDITOR)) {
+                                                        if (this->pitchDitches[iVar13].state < 2
+                                                            && (BVar11 = MACRO_CALL_MEMBER(
+                                                                    OpenSHC::Game::GameStateStructures_Func::isSameTeam,
+                                                                    DAT_GameState::ptr)(
+                                                                    (int)this->pitchDitches[iVar13].owner,
+                                                                    (int)(DAT_GameSynchronyState::instance
+                                                                            .currentPlayerSlotID)),
+                                                                BVar11 == FALSE)
+                                                            && DAT_GameCore::instance.gameMode_2
+                                                                != OpenSHC::Game::GM_EDITOR) {
                                                             if ((this->LogicLayer[this->DAT_SomeTile]
                                                                     & L_DEFAULT_EARTH_OR_TEXTURE)
                                                                 == 0)
@@ -1774,8 +1764,8 @@ namespace Map {
                                                         } else {
                                                             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::
                                                                                   computeClimbRampRotation,
-                                                                this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                                (uint)((int)(this->DAT_SomeY)));
+                                                                this)(this->DAT_SomeTile, (uint)(iVar17),
+                                                                (uint)(this->DAT_SomeY));
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
                                                                 = (short)GMTotalPicturesProcessed::instance[9] + -1
                                                                 + (short)this->wallCornerRotation;
@@ -1802,8 +1792,8 @@ namespace Map {
                                                     local_8 = uVar12 * 0x40 + 1;
                                                     iVar13 = MACRO_CALL_MEMBER(
                                                         OpenSHC::Map::TileMapState_Func::computeClimbRampRotation,
-                                                        this)(this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                        (uint)((int)(this->DAT_SomeY)));
+                                                        this)(
+                                                        this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                                     if ((this->HeightLayer[this->DAT_SomeTile] < 0x88)
                                                         && (iVar13 == 0)) {
                                                         if (local_8 < 1) {
@@ -1953,7 +1943,7 @@ namespace Map {
                                                 = (char)this->Logic2Layer[this->DAT_SomeTile] & 0xf7;
                                             MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c2, 1)
                                             bVar19 = this->bitFlag;
-                                            if ((bVar19 != 0)
+                                            if (bVar19 != 0
                                                 && (this->Logic2Layer[this->DAT_SomeTile]
                                                     = (char)this->Logic2Layer[this->DAT_SomeTile] | 8,
                                                     ((char)this->Logic2Layer[this->DAT_SomeTile] & 0x20) != 0)) {
@@ -2102,15 +2092,13 @@ namespace Map {
                                                         MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m5, 0x100000)
                                                         if (this->bitFlag != 0) {
                                                             for (local_14 = 0; local_14 < 8; local_14 = local_14 + 1) {
-                                                                if ((((uint)this->bitFlag
-                                                                         & 1 << ((byte)local_14 & 0x1f))
-                                                                        != 0)
-                                                                    && (this->HeightLayer[this->DAT_SomeTile
-                                                                            + this->directionTranslationMatrix
-                                                                                [this->DAT_SomeY]
-                                                                                [DAT_TerrainDefinedData::instance
-                                                                                        .field2344_0x370c[local_14]]]
-                                                                        <= this->HeightLayer[this->DAT_SomeTile])) {
+                                                                if (((uint)this->bitFlag & 1 << ((byte)local_14 & 0x1f))
+                                                                        != 0
+                                                                    && this->HeightLayer[this->DAT_SomeTile
+                                                                           + this->directionTranslationMatrix[this
+                                                                                   ->DAT_SomeY][DAT_TerrainDefinedData::
+                                                                                   instance.field2344_0x370c[local_14]]]
+                                                                        <= this->HeightLayer[this->DAT_SomeTile]) {
                                                                     this->bitFlag = this->bitFlag
                                                                         & ~(byte)(1 << ((byte)local_14 & 0x1f));
                                                                 }
@@ -2306,8 +2294,7 @@ namespace Map {
                                             bVar19 = this->DefaultHeightLayer[this->DAT_SomeTile];
                                             iVar17 = MACRO_CALL_MEMBER(
                                                 OpenSHC::Map::TileMapState_Func::computeClimbRampRotation, this)(
-                                                this->DAT_SomeTile, (uint)((int)(iVar17)),
-                                                (uint)((int)(this->DAT_SomeY)));
+                                                this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                             sVar5 = (short)GMTotalPicturesProcessed::instance[9];
                                             sVar4 = (short)this->wallCornerRotation;
                                             if (this->DefaultHeightLayer[this->DAT_SomeTile] < 0x88) {
