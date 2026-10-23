@@ -32,7 +32,7 @@ namespace Map {
             int iVar2 = -1;
             this->searchQueue.readIndex = 0;
             if (this->searchQueue.writeIndex != 0) {
-                local_4 = &DAT_GameState::instance.mapAndTime.somePairArray.y;
+                local_4 = &DAT_GameState::instance.mapAndTime.somePairArray[0].y;
                 do {
                     uint _y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
