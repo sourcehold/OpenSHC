@@ -24,7 +24,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049F2D0
         int PathFindingState::findSupportPointIndex(int max, uint x, uint y, int tribeID)
         {
-            int iVar4;
             int iVar5;
             int tile;
             if (399 < x || 399 < y) {
@@ -51,7 +50,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (iVar4 < 0) {
                         break;
                     }
@@ -86,7 +85,7 @@ namespace Map {
                             DAT_TileMapState::instance.CertainPathLayer[tile]
                                 = (short)this->searchQueue.currentDistance + 1;
                             int sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
-                                              .short_.xOffset;
+                                            .short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[tile] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
