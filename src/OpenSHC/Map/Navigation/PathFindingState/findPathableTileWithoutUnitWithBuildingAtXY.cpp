@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CE40
         void PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int x, int y)
         {
-            int iVar2;
             int (*paiVar3)[8];
             int _buildingAtStart;
             int _tile;
@@ -61,7 +60,7 @@ namespace Map {
                         }
                         _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        iVar2 = (int)_y;
+                        int iVar2 = (int)_y;
                         int _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[_tile];
                         if (_unitID == unitID) {
                             this->ALG_ResultX = (int)_x;
