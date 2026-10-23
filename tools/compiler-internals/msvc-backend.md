@@ -185,11 +185,51 @@ mask is first narrowed with the same 64-bit set/clear tables (`and`/`or` against
 So "lowest-numbered free register" holds **within the already-filtered candidate set**, which is why the observed
 consumption order (1, 4, 0, 2) is not ascending.
 
-Not decoded: what narrows the mask before the `bsf` - that filtering is the remaining question, and it is what
-decides why our first candidate got `esi` where the original's got `ebp`. `@OrderGlobregs@12` runs once per
-function and is the candidate-priority pass, so it is the next thing to read. A table at `0x10ce5a08` is indexed
-by `eax * 4` in `ChoosePhysReg` and looked like a per-register table, but it holds pointers and runs into
-unrelated data after a few entries, so that reading is unconfirmed.
+### Which candidate asks first: OrderGlobregs and InsertInList
+
+`@OrderGlobregs@12` (`0x10b11770`, 512 bytes) runs once per function and does **not** sort - it builds an ordered
+list by repeated insertion through `@InsertInList@8` (`0x10b11970`), which is 128 bytes and fully readable. In it
+`eax` is the candidate being inserted and `edi` the list head, `+0x14`/`+0x18` are next/prev, and there are two
+sort keys:
+
+```c
+// InsertInList - list kept in descending (key, key2) order
+if (new->key  >  p->key)                    insert new before p;   // +0x0c, compared SIGNED
+else if (new->key == p->key &&
+         new->key2 >= p->key2)              insert new before p;   // +0x44, compared UNSIGNED
+else                                        advance to p->next;
+```
+
+with an insert-at-front fast path when the new node outranks the head, so among equal keys the newer candidate
+goes first. `+0x0c` is a **signed benefit score** and `+0x44` is a small symbol id used only as a tiebreak.
+
+Traced over `sellExcessGoods`, the candidates and their scores look like this (40+ insertions, abbreviated):
+
+```
+key=+104 key2=6f    key=+97 key2=11    key=+96 key2=22    key=+88 key2=14
+key= +88 key2=6c    key=+85 key2=74    key=+72 key2=6b    key=+64 key2=27
+key= +42 key2=04    key=+40 key2=0b    key=+32 key2=08    key=+32 key2=07 ...
+key=  -4 key2=6e    key=-20            key=-26 key2=23    key=-34 key2=27 ...
+key=-155             key=-156           key=-160
+```
+
+So the pass scores every candidate and orders them by descending benefit; the positive-scoring ones are the
+handful that actually win registers, and they ask `ChoosePhysReg` in that order. Candidates recur with different
+scores across the run (`key2=0x27` appears at -34, then +64, then -2), which is the colourer iterating - `Color`
+runs once but `Spillcosts` and `SpillOrDefer` run six and seven times for this function, re-scoring between
+rounds.
+
+**The whole chain, then:** `OrderGlobregs` scores and orders the candidates, `Color` walks that order, and
+`ChoosePhysReg` serves each from the still-available mask. Since the order is a benefit score derived from how
+values are used, the source-level lever on register assignment is the same one as for stack slots - how often and
+where each value is read - which is why permuting statements sometimes moves a register and usually does not.
+
+Still not decoded: how the `+0x0c` benefit is computed, and what narrows `ChoosePhysReg`'s mask before the `bsf`.
+Those two are what decide why our first candidate took `esi` where the original's took `ebp`. Dead ends recorded
+so they are not retried: the table at `0x10ce5a08`, indexed by `eax * 4` in `ChoosePhysReg`, holds pointers and
+runs into unrelated data after a few entries, so it is not a per-register preference table; and the candidate's
+symbol record has a pointer at offset 0 for named locals and 0 for temporaries, but it does not point at a plain
+name string, so candidates could not be mapped back to source variable names that way.
 
 ## Debugger harness
 
