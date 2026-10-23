@@ -153,9 +153,9 @@ Three consequences for reading a diff:
 the class byte at +0x18, is not yet decoded, so arrays and address-taken locals interleave for reasons the tool
 cannot currently explain - treat a non-monotone report as a hint, not a contradiction.
 
-Which **register** a value gets is decided by the same pass in a much simpler way, and it is not a preference
-list. A register set is a 64-bit bitvector with set/clear mask tables indexed by `reg & 0x3f`, and the iterator
-that hands out members takes the **lowest set bit** and clears it:
+About **registers** two things are established and a third is not. A set in this compiler is a 64-bit bitvector
+with set/clear mask tables indexed by `n & 0x3f`, and the iterator that hands out members takes the **lowest set
+bit** and clears it, so a set is always walked in ascending order:
 
 ```c
 // c2.dll 0x10b04fa0, "next member of a register set"
@@ -170,22 +170,27 @@ numbering - the **reverse** of the x86 encoding order:
 edi=0  esi=1  ebp=2  esp=3  ebx=4  edx=5  ecx=6  eax=7
 ```
 
-So allocation prefers the callee-saved registers in the order `edi`, `esi`, `ebp`, `ebx`, and only then the
-volatile `edx`, `ecx`, `eax`. `Spillcosts` is 854 lines of live-set bitvector work with no cost arithmetic in it:
-the cost model decides *who gets spilled*, not *which register a winner gets*.
+What does **not** follow is that physical register choice is "the lowest-numbered free register". That iterator
+is a *generic* bitset iterator: where its use could be observed it was walking sets of symbols, not registers
+(`ColorStackElements` feeds its result straight into a symbol array as `DAT_10d0faa4 + n * 4`), and tracing one
+function's allocation under a debugger returned members numbered 0 to 40 across 140 distinct set objects - a
+symbol or pseudo-register space, not the eight GPRs. The numbering above is real and the ascending-order mechanic
+is real; which physical register a value ends up in has not been traced to a rule. `Spillcosts` is 854 lines of
+live-set bitvector work with no cost arithmetic in it, which at least suggests the cost model decides *who gets
+spilled* rather than *which register a winner gets*.
 
-The consequence is worth more than the rule. A register mismatch is never a preference difference, because there
-is no preference to match - it means **interference differs**: at that allocation point a different set was free,
-because some other value's live range covered the register we expected. `sellExcessGoods` holding `playerID` in
-`edx` where the original uses `ebp` is not a tie-break to nudge; it says the two sides have a different set of
-simultaneously live values. The lever is therefore where each value is born and dies, which is the statement and
-expression structure - the same thing `quick_reorder.py` permutes, but with a predictable outcome once you know
-which registers are free.
+So treat a register mismatch as an interference difference - a different set of values was live at that point -
+but as a working hypothesis rather than a decoded rule. The lever is still where each value is born and dies,
+which is what `quick_reorder.py` permutes blindly.
 
-This much is read out of the compiler; it has not yet been turned into a tested source-level recipe, and the live
-range computation that feeds those sets is not decoded. For one stuck function the shorter path is a debugger:
-`c2.pdb` is published on Microsoft's symbol server, so `cl.exe` can be run under `cdb` with breakpoints on the
-allocator by name and the free set dumped at each allocation point.
+The debugger route works and is the way to settle this per function. `c2.pdb` is published on Microsoft's symbol
+server and `c2.dll` loads at its preferred base `0x10b00000` unrebased, so `cl.exe` can be run under the x86 `cdb`
+with breakpoints taken straight from the PDB's public addresses - no symbol loading needed. Two practical notes:
+one TU of ours costs ~1455 `GlobalRegAlloc` invocations and ~118k set-iterator calls, so breakpoints must be left
+**disabled** (`bd`) and enabled only for the invocation of interest, and `gu` inside a breakpoint command makes
+cdb skip the rest of that command. Identifying which invocation is the function you care about is the fiddly part:
+hundreds of resolver-template instantiations allocate identically, so compile the file twice with the function
+body emptied the second time and find the invocation whose iterator count drops by the difference.
 
 ### Statement Order
 
