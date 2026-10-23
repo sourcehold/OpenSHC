@@ -44755,7 +44755,7 @@ SHC_3BB0A8C1_0x00514DE0 | 95.2% | was uncompilable; rebuilt tile
 
 SHC_3BB0A8C1_0x00514F30 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005151C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005151C0 | 73.5% | was uncompilable; 16-bit store
 
 SHC_3BB0A8C1_0x00515250 | 0.0% | Pending
 
