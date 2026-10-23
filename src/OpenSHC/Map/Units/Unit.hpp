@@ -81,7 +81,7 @@ namespace Map {
             short gmIDUnk; // 0x0000007E length: 2
             short displayColorPlayerID; // 0x00000080 length: 2
             undefined1 heightDiv10; // 0x00000082 length: 1
-            undefined1 padding_0x83[1]; // 0x00000083 length: 1
+            undefined1 field_0x83; // 0x00000083 length: 1
             short field58_0x84; // 0x00000084 length: 2
             short field59_0x86; // 0x00000086 length: 2
             short field60_0x88; // 0x00000088 length: 2

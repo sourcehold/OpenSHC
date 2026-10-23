@@ -76,11 +76,11 @@ namespace Map {
         uchar unitDeathHeatMap[80400]; // 0x00428370 length: 80400
         uchar SEC_TileMap1104[80400]; // 0x0043BD80 length: 80400
         uchar SEC_PathfindingCostTileMap1105[9][80400]; // 0x0044F790 length: 723600
-        undefined4 someIndex; // 0x00500220 length: 4
-        undefined4 someLimit; // 0x00500224 length: 4
-        undefined4 someYLike; // 0x00500228 length: 4
-        undefined4 someYLikeLimit; // 0x0050022C length: 4
-        byte mapping40x40[40][40]; // 0x00500230 length: 1600
+        int someIndex; // 0x00500220 length: 4
+        int someLimit; // 0x00500224 length: 4
+        int someYLike; // 0x00500228 length: 4
+        int someYLikeLimit; // 0x0050022C length: 4
+        char mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
         int currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4
@@ -88,19 +88,19 @@ namespace Map {
         undefined4 ALG_MoatYResult; // 0x0053F07C length: 4
         int someMoatTile; // 0x0053F080 length: 4
         PitchDitch pitchDitches[4000]; // 0x0053F084 length: 80000
-        undefined4 maxPitchDitchCount; // 0x00552904 length: 4
+        int maxPitchDitchCount; // 0x00552904 length: 4
         undefined1 padding_0x552908[4]; // 0x00552908 length: 4
         short specialAreasArray[8]; // 0x0055290C length: 16
-        undefined4 temporaryTerrainTypeIndex; // 0x0055291C length: 4
-        undefined4 SEC_Section1052; // 0x00552920 length: 4
-        undefined4 SEC_Section1053; // 0x00552924 length: 4
-        undefined4 SEC_Section1054; // 0x00552928 length: 4
+        int temporaryTerrainTypeIndex; // 0x0055291C length: 4
+        int SEC_Section1052; // 0x00552920 length: 4
+        int SEC_Section1053; // 0x00552924 length: 4
+        int SEC_Section1054; // 0x00552928 length: 4
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
         undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
-        undefined4 forceUpdateTextureTilemap; // 0x00554870 length: 4
-        undefined4 forceUpdateGFXLayers; // 0x00554874 length: 4
-        undefined4 forceUpdateMacroLayerFlag; // 0x00554878 length: 4
+        int forceUpdateTextureTilemap; // 0x00554870 length: 4
+        int forceUpdateGFXLayers; // 0x00554874 length: 4
+        int forceUpdateMacroLayerFlag; // 0x00554878 length: 4
         undefined4 field68_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
@@ -121,7 +121,7 @@ namespace Map {
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
         undefined4 disableElevationRendering; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
-        undefined1 padding_0x5548d0[4]; // 0x005548D0 length: 4
+        undefined4 field95_0x5548d0; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
         undefined4 savedEditorActiveBrush; // 0x005548DC length: 4
@@ -156,8 +156,8 @@ namespace Map {
         undefined4 buildingSpriteID2; // 0x00554950 length: 4
         undefined4 cursorTargetID; // 0x00554954 length: 4
         undefined4 buildingHeightLimit; // 0x00554958 length: 4
-        undefined4 buildingMinHeight; // 0x0055495C length: 4
-        undefined4 buildingMaxHeight; // 0x00554960 length: 4
+        int buildingMinHeight; // 0x0055495C length: 4
+        int buildingMaxHeight; // 0x00554960 length: 4
         undefined4 buildingMaxHeightDifference; // 0x00554964 length: 4
         undefined4 buildingPlacementProperty_3; // 0x00554968 length: 4
         undefined4 buildingPlacementProperty_4; // 0x0055496C length: 4
