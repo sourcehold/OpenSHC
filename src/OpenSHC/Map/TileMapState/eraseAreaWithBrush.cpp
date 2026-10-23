@@ -98,7 +98,7 @@ namespace Map {
                             0, DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + baseX);
                     } else if (this->cursorTargetID != 0xffffffff) {
                         /* razing a keep takes the stockpile with it, and the other way round */
-                        short owner = DAT_BuildingsState::instance.buildings[this->cursorTargetID].owner;
+                        int owner = DAT_BuildingsState::instance.buildings[this->cursorTargetID].owner;
                         if (this->cursorTargetID == DAT_GameState::instance.playerDataArray[owner].keep.id
                             && DAT_GameState::instance.playerDataArray[owner].stockpile.id != 0) {
                             this->showNoRubbleWhenDestroyingBuilding = 1;
