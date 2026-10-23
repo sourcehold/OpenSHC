@@ -45,7 +45,7 @@ namespace IO {
         char loadedMapNames[500][1001]; // 0x00000BC8 length: 500500
         undefined1 padding_0x7aedc[4]; // 0x0007AEDC length: 4
         char resourceFileNameArray[20][1001]; // 0x0007AEE0 length: 20020
-        dword mapFileTimes[500]; // 0x0007FD14 length: 2000
+        int mapFileTimes[500]; // 0x0007FD14 length: 2000
         byte unused_0x804e4[2006]; // 0x000804E4 length: 2006
         OPENFILENAMEA_Truncated openFileNameA; // 0x00080CBA length: 76
         undefined1 padding_0x80d06[2]; // 0x00080D06 length: 2

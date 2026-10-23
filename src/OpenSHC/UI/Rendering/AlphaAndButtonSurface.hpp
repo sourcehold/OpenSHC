@@ -24,8 +24,8 @@ namespace UI {
         class AlphaAndButtonSurface {
         public:
             ushort* surfacePtr; // 0x00000000 length: 4
-            dword dim1_intMinimal350_1; // 0x00000004 length: 4
-            dword dim2_intMinimal350_2; // 0x00000008 length: 4
+            int dim1_intMinimal350_1; // 0x00000004 length: 4
+            int dim2_intMinimal350_2; // 0x00000008 length: 4
             int currentImageWidth; // 0x0000000C length: 4
 
         private:
@@ -47,11 +47,11 @@ namespace UI {
 
             BOOLEnum isMouseOnButtonImageUnk();
 
-            void ProcessBuildingClickBonus(int buildingIndex);
+            void processBuildingClickBonus(int buildingIndex);
 
             BOOLEnum openBuildingStatusMenuForBuildingID(int buildingID);
 
-            BOOLEnum SelectUnitAndOpenStatusMenu(int unitIndex);
+            BOOLEnum selectUnitAndOpenStatusMenu(int unitIndex);
 
             void renderBasicButton(int reverseOrBlendStrength, RenderTarget renderSurface);
         };

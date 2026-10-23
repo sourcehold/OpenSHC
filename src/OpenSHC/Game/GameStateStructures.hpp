@@ -63,7 +63,7 @@ namespace Game {
 
         void processUnitLossStatistic(int playerID, int unitID);
 
-        uint setLastEncounteredTroopUnit(int playerID, int unitID);
+        void setLastEncounteredTroopUnit(int playerID, int unitID);
 
         void updateDateAndTime(BOOLEnum startOfWeekAsCurrentTickIs0, int currentTick);
 
@@ -112,7 +112,7 @@ namespace Game {
 
         void destroyPlayerCompletely(int playerID);
 
-        undefined4 checkRequiredResourcesForBuildingOrPlanToBuy(
+        BOOLEnum checkRequiredResourcesForBuildingOrPlanToBuy(
             MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
 
         int getWallTilesThatCanBeBuilt(int playerID, int wallMaterial);

@@ -85,7 +85,7 @@ namespace Map {
 
             void predictUnitInterceptPosition(int targetUnitID, int unitID, int* unitCurrentX, int* unitCurrentY);
 
-            UnitType getMajoritySelectedUnitType(undefined4 tribeID, int* maximumCount);
+            UnitType getMajoritySelectedUnitType(int tribeID, int* maximumCount);
 
             void playUnitSelectionSound(int param_1);
 
@@ -240,7 +240,7 @@ namespace Map {
 
             void applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe(int param_1);
 
-            undefined4 isTribeFreeOfTunnelingUnits(int param_1);
+            BOOLEnum isTribeFreeOfTunnelingUnits(int param_1, int param_2);
 
             void setTargetUnitForTribe(int tribeID);
 

@@ -32,11 +32,11 @@ namespace Synchrony {
 
     HRESULT __stdcall EnumDisplayModesCallback(DDSURFACEDESC* displayDesc, LPVOID userParam);
 
-    BOOL __stdcall EnumConnectionsCallback(
-        LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize, DPNAME* lpName, DWORD dwFlags, LPVOID lpContext);
+    BOOL __stdcall EnumConnectionsCallback(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
+        LPCDPNAME lpName, DWORD dwFlags, LPVOID lpContext);
 
-    bool __stdcall EnumSessionsCallback_addSession_async(
-        DPSESSIONDESC2* lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
+    BOOL __stdcall EnumSessionsCallback_addSession_async(
+        LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
 
     BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationCallback(int* param_1, undefined4 param_2, char* param_3);
 
@@ -44,7 +44,7 @@ namespace Synchrony {
 
     void __cdecl ProgressBarRelated();
 
-    void __cdecl syncPlayerGroupArrays();
+    void __cdecl SyncPlayerGroupArrays();
 
     void __cdecl LoadSkirmishCampaignData(int missionID);
 

@@ -15,7 +15,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB060
     void AICState::setFoodBuyPlan(int playerID)
     {
-
         int const aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
 
         // Early return if not an AI player (human player has aiType == 0)

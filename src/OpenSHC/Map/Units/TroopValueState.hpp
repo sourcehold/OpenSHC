@@ -49,7 +49,7 @@ namespace Map {
             ~TroopValueState() {};
 
             // Constructor
-            TroopValueState* constructTroopValueState();
+            TroopValueState* Constructor_TroopValueState();
 
             void clearAttackInfo();
 
@@ -105,7 +105,7 @@ namespace Map {
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
-            int findEnemyLord(undefined4 param_1);
+            int findEnemyLord(int unitID);
 
             void setGate2(int param_1, int param_2);
 
@@ -180,7 +180,7 @@ namespace Map {
 
             void registerSpottedEnemyTile(int param_1);
 
-            BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID);
+            BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID, int param_3);
 
             undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
 

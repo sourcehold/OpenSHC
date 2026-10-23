@@ -23,15 +23,20 @@ if "%~1"=="" (
 set "PRESET=%~1"
 set "TARGET=%~2"
 
-:: --- Kill mspdbsrv.exe if it's running ---
-tasklist | find /I "mspdbsrv.exe" >nul
-if not errorlevel 1 (
-    if not defined WRAP_QUIET echo Stopping mspdbsrv.exe...
-    taskkill /f /t /im mspdbsrv.exe >nul
-    if errorlevel 1 (
-        if not defined WRAP_QUIET echo [WARNING] Failed to stop mspdbsrv.exe, continuing...
-    )
+:: --- Give this worktree its own PDB server ---
+:: mspdbsrv.exe is a per-user singleton keyed on _MSPDBSRV_ENDPOINT_, and every worktree
+:: carries its own copy of the toolchain. Sharing one endpoint across worktrees makes
+:: cl.exe talk to whichever copy started first and fail with
+::   fatal error C1090: PDB API call failed, error code '23'
+if not defined _MSPDBSRV_ENDPOINT_ (
+    for %%I in ("%~dp0.") do set "_MSPDBSRV_ENDPOINT_=openshc_%%~nxI"
 )
+
+:: --- Kill this worktree's mspdbsrv.exe if it's running ---
+:: Only ours: killing every instance by image name takes down the PDB server of any other
+:: worktree that is building at the same time, which fails their build with C1090.
+powershell -NoProfile -Command ^
+    "Get-Process mspdbsrv -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '%~dp0*' } | Stop-Process -Force -ErrorAction SilentlyContinue" >nul 2>&1
 
 :: --- Run cmake configure using preset ---
 if not defined WRAP_QUIET echo [INFO] Configuring with preset "%PRESET%"...

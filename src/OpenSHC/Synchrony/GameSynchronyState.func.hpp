@@ -24,8 +24,8 @@ namespace Synchrony {
         // Constructor
 
         MACRO_FUNCTION_RESOLVER(GameSynchronyState* (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C150,
-            &GameSynchronyState::constructGameSynchronyState)
-        constructGameSynchronyState;
+            &GameSynchronyState::Constructor_GameSynchronyState)
+        Constructor_GameSynchronyState;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x004010B0,
             &GameSynchronyState::isAIPlayer)
@@ -188,7 +188,7 @@ namespace Synchrony {
             &GameSynchronyState::getLordTypeForPlayer)
         getLordTypeForPlayer;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x00486F20,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00486F20,
             &GameSynchronyState::initializeFinalResultsForActivePlayers)
         initializeFinalResultsForActivePlayers;
 
@@ -220,7 +220,7 @@ namespace Synchrony {
             &GameSynchronyState::sendSomeMultiplayerSyncMessageWithType)
         sendSomeMultiplayerSyncMessageWithType;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00488010,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x00488010,
             &GameSynchronyState::processSyncPacket)
         processSyncPacket;
 

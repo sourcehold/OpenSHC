@@ -14,7 +14,7 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0047A130
         void SoundSystem::mapLoadingAndLaunchGameRelated1()
         {
-            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
+            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState = 1;
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field1_0x4 = SEC_RNG::ptr->currentNumber1 % 4;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.incrementorUpTo4 = SEC_RNG::ptr->currentNumber1 % 4 + 1;
@@ -23,9 +23,9 @@ namespace Audio {
             DAT_GameCore::ptr->battleLevel = 0;
             DAT_GameCore::ptr->battleLevel2 = 0;
             DAT_GameCore::ptr->field33_0x90 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field128057_0x469d8 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field128059_0x469e0 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field128058_0x469dc = 0;
+            DAT_TroopValueState::ptr->attackInfo.delayedWaveAssignmentCount = 0;
+            DAT_TroopValueState::ptr->attackInfo.buildingDamageEventCount = 0;
+            DAT_TroopValueState::ptr->attackInfo.enemyUnitsInsideCastleCount = 0;
             DAT_SoundEffectsHelperData1::ptr->field8_0x3c = 0;
         }
 

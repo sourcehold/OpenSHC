@@ -20,6 +20,14 @@
       "args": "--sarif 'Stronghold Crusader.exe.sarif' --output-dir 'src' --overwrite-all --verbose"
     },
     {
+        "name": "Debug refactor",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "tools/reimplementation-helper/batch/refactor_struct_fields.py",
+        "console": "integratedTerminal",
+        "args": "syntax-log.txt"
+    },
+    {
       "name": "Debug status txt",
       "type": "debugpy",
       "request": "launch",

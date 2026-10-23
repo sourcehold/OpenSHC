@@ -3,7 +3,6 @@
 */
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -15,7 +14,6 @@ namespace Map {
     namespace TileMapState_Func {
 
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::LogicHelpers::Logic1;
@@ -212,7 +210,7 @@ namespace Map {
             &TileMapState::getBuildingSizeForCommandBuildingType)
         getBuildingSizeForCommandBuildingType;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int, int, undefined4, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int, int, undefined4, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004FA760, &TileMapState::demolishBuildingsInKeepsConstructionFootprint)
         demolishBuildingsInKeepsConstructionFootprint;
 
@@ -500,7 +498,7 @@ namespace Map {
             &TileMapState::createPlateau)
         createPlateau;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00502110,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x00502110,
             &TileMapState::useLevelBrush)
         useLevelBrush;
 
@@ -667,7 +665,7 @@ namespace Map {
         findNearestFriendlyMoatTileForDigging;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (TileMapState::*)(uint), false, Address::SHC_3BB0A8C1_0x005113F0, &TileMapState::removeMoat)
+            BOOLEnum (TileMapState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x005113F0, &TileMapState::removeMoat)
         removeMoat;
 
         MACRO_FUNCTION_RESOLVER(
@@ -758,7 +756,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005160C0, &TileMapState::prepareAreaForBuildingPlacement)
         prepareAreaForBuildingPlacement;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PlayerID, int, int, MappersEnum, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int, MappersEnum, int, int), false,
             Address::SHC_3BB0A8C1_0x005162D0, &TileMapState::placeBuilding)
         placeBuilding;
 

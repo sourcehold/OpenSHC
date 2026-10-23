@@ -32,7 +32,7 @@ namespace Game {
             int finalWoodProduced[9]; // 0x0000056C length: 36
             int finalPitchProduced[9]; // 0x00000590 length: 36
             byte finalMaxBadThings[9]; // 0x000005B4 length: 9
-            byte finalKilledLords[9]; // 0x000005BD length: 9
+            char finalKilledLords[9]; // 0x000005BD length: 9
             byte padding2[2]; // 0x000005C6 length: 2
             int finalWeaponsProduced[9]; // 0x000005C8 length: 36
             int finalBuidingsDestroyed[9]; // 0x000005EC length: 36
@@ -41,7 +41,8 @@ namespace Game {
             int finalTroopsProduced[9]; // 0x00000658 length: 36
             int finalGoodsRecieved[9]; // 0x0000067C length: 36
             int finalGoodsSent[9]; // 0x000006A0 length: 36
-            int unusedUnk[9]; // 0x000006C4 length: 36
+            short unknownShortArray1[9]; // 0x000006C4 length: 18
+            short unknownShortArray2[9]; // 0x000006D6 length: 18
             int finalDateOfDeathInMonths[9]; // 0x000006E8 length: 36
             int yearStart; // 0x0000070C length: 4
             int monthStart; // 0x00000710 length: 4

@@ -55,7 +55,7 @@ namespace Map {
 
         void destroyWall(int playerID, int count, int amount, int param_4);
 
-        void destroyPitch(int playerID, int count, int amount);
+        void destroyPitch(int playerID, int count, int amount, int param_4);
 
         void updateDestructionConfirmationCountdown();
 
