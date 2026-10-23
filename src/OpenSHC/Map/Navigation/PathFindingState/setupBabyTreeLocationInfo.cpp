@@ -29,7 +29,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020
         undefined4 PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y)
         {
-            int iVar4;
             int (*paiVar8)[8];
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
@@ -58,7 +57,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (iVar4 < 0) {
                         break;
                     }
