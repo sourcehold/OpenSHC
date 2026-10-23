@@ -92,6 +92,12 @@ Provides project-specific utilities including:
 
 Imports and synchronizes Ghidra-exported data.
 
+### Compiler Internals (`tools/compiler-internals`)
+
+Notes on the bundled MSVC backend itself - what `c2.dll` does, how its symbols and source layout were recovered,
+the decoded stack-slot rule, and a `cdb` recipe for observing one function's allocation from inside the compiler.
+Read it when a diff is down to register or stack-slot allocation and no source-level hypothesis is paying.
+
 ### Reimplementation Control (`tools/reimplementation-control`)
 
 Scripts for enabling implementations and maintaining project state.
@@ -184,8 +190,9 @@ dropped because every hit it produced was a loop-induction stride rather than a 
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
 statements sit between two calls or on a loop back-edge. `alloc-only` is worth reading literally: a register
 mismatch is most likely an interference difference - a different set of values was live at that point - rather
-than a preference the source could state. That is a hypothesis, not a decoded rule; see the register note in the
-cheat sheet for what is actually established and for the debugger recipe that can settle it per function.
+than a preference the source could state. That is a hypothesis, not a decoded rule;
+`tools/compiler-internals/msvc-backend.md` has what is actually established about the compiler's allocator and
+the debugger recipe that can settle it per function.
 
 ### Binary Comparison (`reccmp`)
 
@@ -334,7 +341,7 @@ Diff patterns that were reliable (more in the cheat sheet):
   declaration order, array element type, widening unsigned locals, and splitting a local the decompiler had reused
   for two values. Declaration order was never going to work: the stack colorer sorts its elements by **reference
   weight per byte**, not by declaration order, and leaves only the ties to the order the symbols happen to arrive
-  in - see "Variable Usage" in the cheat sheet for the comparator and the evidence. The lever on a slot layout is
+  in - see `tools/compiler-internals/msvc-backend.md` for the comparator and the evidence. The lever on a slot layout is
   how often, and at what loop depth, each local is read. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
   extra slots are all heavily used has genuine live values rather than a stray local, and needs structural
   understanding rather than a rule.
