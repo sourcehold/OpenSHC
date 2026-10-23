@@ -17,13 +17,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A2E0
         void PathFindingState::updatePathLinkageTileMapRelatedToSiegeTower(int param_1)
         {
-            int iVar2;
-            int iVar3;
-            int iVar4;
-            int iVar5;
-            iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].x;
-            iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].y;
-            iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + -1].addXgetTile + iVar4 + 1;
+            int iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].x;
+            int iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].y;
+            int iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + -1].addXgetTile + iVar4 + 1;
             DAT_TileMapState::instance.PathLinkageLayer[iVar5]
                 = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x10;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2].addXgetTile + iVar4 + 1;
@@ -33,9 +29,8 @@ namespace Map {
             DAT_TileMapState::instance.PathLinkageLayer[iVar5]
                 = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x11;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 3].addXgetTile + iVar4 + 1;
-            iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 1].addXgetTile + iVar4;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 1;
+            int iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 1].addXgetTile + iVar4;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5] = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 1;
             DAT_TileMapState::instance.PathLinkageLayer[iVar3 + -1]
                 = DAT_TileMapState::instance.PathLinkageLayer[iVar3 + -1] | 4;
             DAT_TileMapState::instance.PathLinkageLayer[iVar3]

@@ -24397,7 +24397,7 @@ SHC_3BB0A8C1_0x00499FA0 | 37.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049A1C0 | 62.2% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x0049A2E0 | 96.3% | index locals + statement order
+SHC_3BB0A8C1_0x0049A2E0 | 96.3% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049A370 | 12.5% | statement order
 
