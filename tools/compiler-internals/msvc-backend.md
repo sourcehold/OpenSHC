@@ -276,6 +276,27 @@ serves it late and leaves it in a volatile register (`edx`), where the original 
 the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
 being inferred from a register permutation in the reccmp diff.
 
+### Do the scores prescribe a fix? Measured: no
+
+`reg_scores.py --advise` names the patterns above and suggests what to try. Those suggestions were then tested
+against reccmp on `aiRecruitUnits` (50.0%), the function with the strongest structural signal - a loop counter `i`
+at -279 and a flag `recruitDiggingUnit` at -335 against a +188 top candidate:
+
+| variant | suggestion acted on | match |
+|---|---|---|
+| baseline | - | **50.0%** |
+| count `recruitCount` down, drop `i` | DISFAVOURED loop counter | 48.7% |
+| `recruitDiggingUnit` as `bool` | DISFAVOURED flag, and Ghidra renders it `bool` | 49.5% |
+
+Both lost ground. Removing a disfavoured candidate changes the whole scoring landscape - fewer candidates means
+different spill rounds - so "delete the worst one" is not a monotone improvement, and the scores diagnose without
+prescribing.
+
+What the scores are reliably good for is **triage**, including the negative verdict. A function whose candidates
+share scores (`recruitHarrassingSiegeEngines`: four at +36, two at +21) cannot be steered from the source at all,
+because the order falls to the symbol-id tiebreak - so the correct action is to stop working on it. That is worth
+knowing before spending an afternoon on hill-climbing, even though it never adds a percent.
+
 Still not decoded: how the score itself is computed, and what narrows `ChoosePhysReg`'s mask before the `bsf`.
 One dead end recorded so it is not retried: the table at `0x10ce5a08`, indexed by `eax * 4` in `ChoosePhysReg`,
 holds pointers and runs into unrelated data after a few entries, so it is not a per-register preference table.
