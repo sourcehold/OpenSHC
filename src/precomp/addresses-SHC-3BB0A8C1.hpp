@@ -22468,7 +22468,7 @@ enum {
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004692E0 = 0x004692E0,
-    // label: initializeUserTextHandler
+    // label: Constructor_UserTextHandler
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004694A0 = 0x004694A0,
