@@ -26,7 +26,6 @@ namespace Map {
         {
             int _siegeIndex;
             int _tile;
-            int _tileOption;
             if (399 < x || 399 < y) {
                 return 0;
             }
@@ -51,7 +50,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
-                    _tileOption = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int _tileOption = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (_tileOption < 0) {
                         break;
                     }
