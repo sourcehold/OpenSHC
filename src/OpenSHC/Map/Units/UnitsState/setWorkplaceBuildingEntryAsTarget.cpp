@@ -9,7 +9,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005343F0
-        undefined4 UnitsState::setWorkplaceBuildingEntryAsTarget(int unitID, int entryAngleUnk)
+        BOOLEnum UnitsState::setWorkplaceBuildingEntryAsTarget(int unitID, int entryAngleUnk)
         {
             int _buildingID = this->units[unitID].workplaceBuildingID_1;
             if (DAT_BuildingsState::instance.buildings[_buildingID].uid == this->units[unitID].workplaceBuildingUID) {
@@ -18,10 +18,10 @@ namespace Map {
                     != 0) {
                     this->units[unitID].targetX_2 = DAT_BuildingsState::instance.buildings[_buildingID].buildingEntryX;
                     this->units[unitID].targetY_2 = DAT_BuildingsState::instance.buildings[_buildingID].buildingEntryY;
-                    return 1;
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

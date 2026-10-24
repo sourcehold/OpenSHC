@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -16,8 +17,11 @@ namespace Map {
                 || this->selectionArabFireThrower != 0 || this->selectionFireBallista != 0
                 || this->selectionCatapults != 0 || this->selectionTrebuchets != 0) {
                 for (int i = 0; i <= 26; ++i) {
-                    if (i != 0 && i != 3 && i != 19 && i != 21 && i != 23 && i != 25 && i != 26 && i != 11 && i != 12
-                        && (&this->selectionEuropeanArchers)[i] != 0) {
+                    if (i != Selection::USE_E_ARCHERS && i != Selection::USE_E_CROSSBOWMEN
+                        && i != Selection::USE_A_ARAB_ARCHERS && i != Selection::USE_A_SLINGERS
+                        && i != Selection::USE_A_HORSE_ARCHERS && i != Selection::USE_A_FIRETHROWERS
+                        && i != Selection::USE_A_FIRE_BALLISTAS && i != Selection::USE_E_CATAPULTS
+                        && i != Selection::USE_E_TREBUCHETS && (&this->selectionEuropeanArchers)[i] != 0) {
                         return FALSE;
                     }
                 }

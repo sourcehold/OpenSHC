@@ -1,5 +1,7 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
+
 namespace OpenSHC {
 namespace Map {
     namespace Units {
@@ -14,7 +16,7 @@ namespace Map {
                 // but that didn't work
                 int* pUnitSelection = (int*)&this->selectionEuropeanArchers;
                 for (int index = 0; index <= 26; index++) {
-                    if ((index != 15) && (*pUnitSelection != 0)) {
+                    if ((index != Selection::USE_E_SHIELDS) && (*pUnitSelection != 0)) {
                         return FALSE;
                     }
                     pUnitSelection++;

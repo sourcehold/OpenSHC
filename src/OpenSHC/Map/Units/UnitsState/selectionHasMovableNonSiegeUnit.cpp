@@ -11,7 +11,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536260
-        undefined4 UnitsState::selectionHasMovableNonSiegeUnit()
+        BOOLEnum UnitsState::selectionHasMovableNonSiegeUnit()
         {
             int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
@@ -26,17 +26,17 @@ namespace Map {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
-                    return 0;
+                    return FALSE;
                 }
                 int _unitType = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                if (_unitType < 40) {
-                    return 1;
+                if (_unitType < UT_S_TREBUCHET) {
+                    return TRUE;
                 }
-                if (_unitType > 41 && _unitType != OpenSHC::Map::Units::UT_S_BALLISTA) {
-                    return 1;
+                if (_unitType > UT_S_MANGONEL && _unitType != UT_S_BALLISTA) {
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

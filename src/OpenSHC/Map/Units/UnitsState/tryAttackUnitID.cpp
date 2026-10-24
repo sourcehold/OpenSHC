@@ -13,29 +13,29 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00537D60
-        undefined4 UnitsState::tryAttackUnitID(int unitID_1, int unitID_2)
+        BOOLEnum UnitsState::tryAttackUnitID(int unitID_1, int unitID_2)
         {
             if (unitID_2 <= 0) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].dying) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_2].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_2].dying) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].state.generic == (UnitState)0xcf) {
-                return 0;
+                return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].state.generic
                 == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                return 0;
+                return FALSE;
             }
             DAT_UnitsState::instance.units[unitID_1].movementType_OR_targetUnitID = (short)unitID_2;
             DAT_UnitsState::instance.units[unitID_1].targetedUnitID__OR__engineerMannedSiegeEngineRef = (short)unitID_2;
@@ -46,7 +46,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID_1].state.generic = (UnitState)0xcf;
             DAT_UnitsState::instance.units[unitID_1].destinationNeeded
                 = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
-            return 1;
+            return TRUE;
         }
 
     }

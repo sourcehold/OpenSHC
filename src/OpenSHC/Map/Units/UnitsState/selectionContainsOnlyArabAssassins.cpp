@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -18,7 +19,7 @@ namespace Map {
                 // but that didn't work
                 int* pUnitSelection = (int*)&this->selectionEuropeanArchers;
                 for (int index = 0; index <= 26; index++) {
-                    if ((index != 22) && (*pUnitSelection != 0)) {
+                    if ((index != Selection::USE_A_ASSASSINS) && (*pUnitSelection != 0)) {
                         return FALSE;
                     }
                     pUnitSelection++;
