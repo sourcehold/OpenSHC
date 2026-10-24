@@ -574,6 +574,64 @@ locals to look for; the mix told us *which*.
 The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
 evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
 
+## The mode flag at 0x10d0ffdc is not a lever, and neither pragma pays here
+
+`FUN_10b10420` switches the penalty on `cmp dword ptr [0x10d0ffdc], 2` - `key -= weight` when it
+equals 2, `key -= count * weight` otherwise - which raised the obvious question of whether the
+original was simply compiled in the other mode. It was not, and the flag is not reachable from the
+source:
+
+* measured during our own compile, with a breakpoint on `dop2_GlobalRegAlloc` printing it:
+  **`MODEFLAG 0`**. So we take the larger `count * weight` penalty.
+* `#pragma optimize("s", on)` does **not** change it - still 0 - so it is not the per-file
+  size/speed switch. It is read in about 400 places and is set at invocation level.
+* and size-favoured code is plainly not what the original used anyway: that pragma takes
+  `aiGiveRaidInstructions` from 241-vs-234 instructions and a mix delta of 7 to 205 instructions
+  and a delta of **52**, with the quick_diff ratio collapsing 0.728 -> 0.372.
+
+So both sides compute the key with the same formula, and the ranking difference is not a flag.
+
+The two pragmas that the cheat sheet records as sometimes winning were also measured here, and both
+**do** fix the structural defect while losing more than they gain. `aiGiveRaidInstructions` is
+missing one copy of its tile computation because MSVC cross-jumped three identical `if`/`else` arm
+tails into one, and the original kept two:
+
+| variant | quick_diff ratio | mix delta | `imul 0x32c` (original has 4) | `this` lands in |
+| --- | --- | --- | --- | --- |
+| as committed | **0.728** | **7** | 3 | ebp |
+| `optimize("y", off)` | 0.262 | 10 | **4** | edi |
+| `inline_depth(1)` | 0.708 | 15 | **4** | ebp |
+| both | 0.253 | 26 | **4** | edi |
+| `optimize("s", on)` | 0.372 | 52 | 4 | - |
+
+`optimize("y", off)` restores the duplicate exactly as its cheat-sheet entry predicts - it is the
+pragma that stops `/Oy` cross-jumping identical sequences - but it also reserves `ebp` as a frame
+pointer, which moves `this` to `edi` and rearranges everything. The original uses `ebp` as a
+general register (`mov ebp, [esp+N]; imul ebp, ebp, 0x39f4`), so `/Oy` has to stay on, and with it
+on the cross-jump happens.
+
+Why it cannot be separated: the original's two copies are the same instructions in *different*
+registers -
+
+```
+copy A   lea edx, [ecx + ecx*2]   add eax, dword ptr [edx*4 + 0x2337300]
+copy B   lea ecx, [ecx + ecx*2]   add eax, dword ptr [ecx*4 + 0x2337300]
+```
+
+Cross-jumping runs after register allocation, so in the original it was the differing registers
+that made the two tails non-identical and saved them from being merged. Ours were allocated the
+same registers and merged. The duplicate and the `ebx`/`ebp` swap are therefore one coupled
+phenomenon, not cause and effect - an earlier note in this file claimed the duplicate was upstream
+of the register swap, which this corrects. Rewriting the expression does not break the tie either:
+commuting the addition in one arm only, so its text differs, changes nothing because MSVC
+canonicalises it.
+
+What did pay on that function was an ordinary source defect the mix delta pointed at by
+subtraction: delta 9 decomposed as the seven-instruction duplicate plus a leftover `je -1, jne +1`,
+which is one inverted branch. The final `if` tested the navigation result the opposite way round,
+and swapping its arms took it **56.8% -> 60.3%**. `diff_jcc.py` does not catch that because it
+covers strictness steps and operand order, not a plain polarity flip - worth adding.
+
 ## The ordering key decoded: a per-region benefit/penalty balance
 
 `+0x0c` is accumulated at the tail of `FUN_10b10420`, which the colourer calls for each register
