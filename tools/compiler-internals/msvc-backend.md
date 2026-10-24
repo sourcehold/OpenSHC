@@ -12,6 +12,152 @@ proxy for it.
 For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
 order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
 
+## The PGO flag: three gated behaviours, and the phase order
+
+The global at `0x10d0ffdc` that an earlier section could only describe as "a mode flag, read in
+about 400 places, set at invocation level" is **`_PogoFlag`**, the per-function copy of
+**`_PogoMasterFlag`** at `0x10d44b4c`. Pogo is Microsoft's internal name for PGO, and the flag
+gates three separate behaviours that between them cover both the allocation and the scheduling
+walls this file keeps running into:
+
+| value | what changes |
+| --- | --- |
+| 0 (our builds) | full tail merging; `Spillcosts` penalty is `count * weight` |
+| 1 (instrument) | `FgTryTailMerge` returns immediately - **no tail merging at all** |
+| 2 (optimise) | `Spillcosts` penalty is just `weight`; `PogoOptCodeMotion` runs as an extra pass |
+
+`FgTryTailMerge` at `0x10b2e1b0` opens with `if (_PogoFlag != 1)` wrapping its entire body, which
+makes sense - merging blocks would corrupt the profile counters being collected. That is the pass
+that merges the duplicate `aiGiveRaidInstructions` is missing.
+
+**The phase order**, from the twelve `dop2_*` entry points in address order:
+
+```
+GetInitialTuples -> InitialOptsAndSetup -> PreLowerGlobalOpts -> Codegen ->
+PostLowerPreRegAllocGlobalOpts -> GlobalRegAlloc -> CodegenUpdate ->
+PostCodegenFlowOpts -> CodegenFinish -> FinalFlowOpts -> PreEncode -> EncodeAndRelated
+```
+
+`GlobalRegAlloc` is phase 6 and `FinalFlowOpts` is phase 10, and `dop2_FinalFlowOpts` is where
+`FgDoLateFlowOpts`, `FgCodeMotion` and - only when `_PogoFlag == 2` - `PogoOptCodeMotion` are
+called. So **tail merging and code motion run after register allocation**, which independently
+confirms the claim made earlier in this file: two arms whose instructions are identical except
+for their registers are not mergeable, so the allocation can be what preserves a duplicate.
+`FgCodeMotion` is also the pass that sinks a load past a branch, which is what no source form of
+`playNervous2BikFromPlayer` could prevent.
+
+### Forcing the flag: a real lever, but not the explanation
+
+`pogo_probe.py` compiles one file twice, the second time with `_PogoFlag` forced across
+`Spillcosts` only - an entry breakpoint sets it and the `ret` at `0x10b1153f` restores it - so the
+allocation penalty changes while the profile-dependent passes never see a value the build was not
+configured for. It does change allocation, measurably, on
+`addUnitToSmallestBehaviourTypeTribe`:
+
+| | frame | distinct callee-saved | instructions | `kind` vs original | mix delta |
+| --- | --- | --- | --- | --- | --- |
+| original | **8** | **4** | **122** | - | - |
+| baseline | 12 | 3 | 122 | **0.893** | **10** |
+| `_PogoFlag=2` | **8** | **4** | 115 | 0.624 | 15 |
+
+The smaller penalty does exactly what the formula predicts - the frame drops from 12 to the
+original's 8 and one more value is enregistered, which is the direction every register-pressure
+difference in this namespace pointed. But the overall match gets **worse**, because other `== 2`
+paths activate and strip seven instructions. On `aiGiveRaidInstructions` it moves the two
+contested values from `ebx`/`ebp` - the original's pair, merely swapped - to `esi`/`edi`, which is
+further away.
+
+So the spill-penalty term is a confirmed lever on allocation and on frame size, and it is not the
+explanation for the gap; the original was not simply built in this mode. It is worth re-testing
+per function when a frame comes out too large, since that is the one symptom it reliably fixes.
+
+A warning from getting this wrong once: the first attempt put the restore breakpoint on the last
+*byte* of `Spillcosts` rather than on its `ret`, so it never fired, the flag stayed 2 into the
+profile-dependent passes, and the compile died on a null dereference in `FgFindDominatorsGraph`.
+Bracket on a real instruction address, and keep a second restore at the next phase entry.
+
+### Reading the symbol table without Ghidra
+
+`pdbnames.py` recovers 9687 public symbols from `c2.pdb` by scanning for `S_PUB32` records
+(`u16 reclen | u16 0x110e | u32 flags | u32 offset | u16 segment | name`) and mapping
+segment-plus-offset through the PE section table. It is the practical name-to-address route,
+because ghidra-mcp's name searches ignore the `program` argument and query whatever program is
+current, while only `get_function_by_address` honours it. PDB names are decorated
+(`@Spillcosts@12`) where Ghidra shows them stripped; every address agrees.
+
+Pass names worth knowing, all from that map:
+
+| area | symbols |
+| --- | --- |
+| tail merge / cross jump | `@FgTryTailMerge@16`, `@FgDoCommonTailMerge@20`, `@FgTailMergeWithoutCheck@8`, `@FgCrossJumpRemove@4`, `@PpSsaMdSubstPreventsTailMerge@8` |
+| code motion and sinking | `@FgCodeMotion@4`, `@FgChangeSink@12`, `@GoptInvariantCodeMotion@12`, `@GoptCodeMotionBlock@12` |
+| scheduling | `@Schedule@8`, `@SchNeedSchedule@8`, `@SchSchedGraph@4`, `@SchmdBlockNeedPreSchedule@8`, `_preSched` |
+| profile-driven | `@PogoOptCodeMotion@*`, `@PogoCreateFinalOrder@4`, `@PogoDecorateFG@4`, `@BpComputeFlowgraphPogoProbabilities@4` |
+
+`SchNeedSchedule` turns out to be a weak lever - it schedules any block with more than one real
+instruction, gated only on `_preSched` for the pre-pass - but `@PogoCreateFinalOrder@4` shows that
+final block order is profile-driven in PGO builds, which is a scheduling difference no source
+change can reach.
+
+## The resolver switches change the score but not the code
+
+Both resolver switches are **off** in a fresh checkout - 829 `MACRO_STRUCT_RESOLVER(..., false, ...)`
+in `src/OpenSHC/Globals` and every `MACRO_FUNCTION_RESOLVER` in the `.func.hpp` files - and every
+measurement in this file was taken that way until it was checked. Turning both on
+(`tools/reimplementation-control/enable_reimplemented_data.py` and
+`tools/reimplementation-helper/batch/enable_local_functions.py`) moves the reccmp percentage a long
+way:
+
+| function | resolvers off | resolvers on |
+| --- | --- | --- |
+| `computeAttackPossibilities` | 72.4 | **89.7** |
+| `recruitHarrassingSiegeEngines` | 65.9 | **73.2** |
+| `playNervous2BikFromPlayer` | 64.0 | **76.0** |
+| `decideOnTribeAttackLocation` | 64.4 | **68.8** |
+| `renderDebugDataAiInfo` | 95.4 | **99.0** |
+| `updateAIPlayerState` | 78.6 | **81.7** |
+| `aiShouldAttackOrWaitForTeamCoordination` | 80.2 | **83.2** |
+| `aiRecruitUnits` | 48.0 | **50.0** |
+
+The whole build list averages **94.20 over 60** functions with them on. So any percentage quoted
+from a default checkout is understated, sometimes by seventeen points, and a figure is only
+comparable to another taken in the same configuration.
+
+**But the structural measures do not move at all.** With the resolvers on, `slot_map.py`,
+`structural_diff.py` and `quick_diff.py` return byte-identical results -
+`addUnitToSmallestBehaviourTypeTribe` still reports frame `+4`, `kind` 0.893 and mix delta 10, and
+the quick_diff ratios stay at 0.8000, 0.6803 and 0.7284 to four decimals. The reason is that a
+resolver changes an *operand*, not an instruction: `mov ecx, OFFSET ?instance@...StructResolver@@`
+against `mov ecx, 0x2157578` is the same `mov`, and a call through a trampoline is still one
+`call`. reccmp scores operands, so it sees the difference; a mnemonic-level or frame-level
+comparison does not.
+
+That is a useful division of labour rather than a problem. The structural tools can be run in a
+default checkout and trusted, and the resolvers only need flipping when a percentage is about to be
+recorded. It also means the conclusions this file draws about frames, instruction mix and register
+pressure are unaffected by the switch - they were checked.
+
+### /GL does not transfer to this namespace
+
+`enable_local_functions.py` documents the reason the function resolvers matter beyond runtime:
+`/GL` buys nothing while a call still leaves the module, because LTCG cannot see the callee's
+register use, and flipping `getSellResourceAmount` took `getSalesPrice` from 68.4% to 100% because
+the original keeps `this` in the volatile `edx` across that call. That is exactly the symptom class
+behind every register-pressure wall in this file, and no AICState file had ever been given `/GL` -
+`cmake/compiler-flags-gl.txt` had 22 entries, none of them AICState.
+
+Adding all sixty, with the function resolvers on, and verifying `/GL` really reached the compile
+command (120 of 120 AICState entries carry it; `file_dependent_read_list` in `CMakeLists.txt`
+makes cmake reconfigure when that list changes) produced **no gain whatsoever** - every function
+identical, and `planToBuyWhenLowOnResourceAndSnoozeBuildings` 0.8 worse.
+
+The likely reason is visible in the call sites: AICState's hot callees -
+`checkTribeActivityPercentages`, `selectRandomBuildingIDFromListOfBuildingTypes`, and the
+`TribesState`/`UnitsState` methods - are not in the build list at all, so those calls leave the
+module whatever the flags say. `getSalesPrice` won because its callee was in the list beside it.
+So the lever is real but its precondition is unmet here, and the concrete next step is to bring
+those callees into the build list first and only then retest `/GL`.
+
 ## Every decoded name, confirmed against c2.pdb
 
 The whole backend model in this file was decoded from unnamed code, so it is worth recording
