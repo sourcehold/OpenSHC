@@ -87,6 +87,62 @@ values that several of these functions spill), and `@BpOpcodeHeuristic@12` with
 probability - that would make `!= 0` against `> 0` a codegen-relevant choice rather than a
 stylistic one.
 
+### Correction: tested, and it is not a usable lever
+
+The section above was written before the lever was tested. Two things it claimed are wrong, and
+the practical conclusion does not survive.
+
+**`BpGuardHeuristic` is inert.** Decoding `0x10c72e70` shows every path, including the one that
+reaches the computation at `0x10c72edb`, falling through to
+
+```
+0x10c72eec  or   eax, 0xffffffff
+0x10c72ef1  ret  4
+```
+
+`or eax, -1` discards whatever was computed, so the function **always returns -1**, which is the
+abstain value. The guard heuristic never contributes in this build - the opposite of the
+prediction above that it would be the most valuable one to read next. Whether that is deliberate
+neutering or a discarded result, the behaviour is the same.
+
+**The retro-explanation of `aiGiveRaidInstructions` was wrong.** Its winning branch is
+`if (canNavigate(...)) commandUnitsToLocation(...) else sendUnitsToCampfire(...)`. Both arms
+contain a call, so `BpCallHeuristic` abstains; neither arm returns, so `BpReturnHeuristic`
+abstains. Both heuristics abstain on the one branch whose arm order was worth 3.5 points, so that
+gain was plain instruction ordering and had nothing to do with block weights. Fitting it to this
+model was wishful.
+
+**The direct test shows no effect on allocation.** `addUnitToSmallestBehaviourTypeTribe` opens
+with `if (aiType == AITA_NULL) return 0;` followed by the body - a branch where
+`BpReturnHeuristic` genuinely discriminates, one arm being a return block and the other the rest
+of the function. Rewriting it as `if (aiType != AITA_NULL) { body } return 0;` is semantically
+identical and flips which arm the heuristic predicts taken. Measured:
+
+| | instructions | `kind` | mix delta | quick_diff | frame | register substitutions |
+| --- | --- | --- | --- | --- | --- | --- |
+| baseline | 122 | 0.893 | 10 | 0.6803 | +4 | 27 |
+| inverted guard | 123 | 0.849 | 11 | 0.5878 | +4 | 29 |
+
+The code changed - one extra jump and a different block layout - but the **register allocation did
+not move at all**. The substitution profile is identical in kind and count: `eax -> edi` 8 times,
+`ecx -> edi` 5, `edi -> edx` 4, `eax -> edx` 3, `edi -> ecx` 1, `ebp -> edi` 1 in both, with the
+totals differing only by the two added instructions. The frame stayed at `+4`.
+
+So what survives is only what was read directly off the code: the call chain from the `Bp*`
+heuristics through `BpBlockProbabilities` and `FgWeightFlowGraph` into the weight that
+`Spillcosts` multiplies, and the decoded behaviour of `BpReturnHeuristic` and `BpCallHeuristic`.
+What does **not** survive is the claim that this gives the source a handle on allocation. On the
+one function where the construction could be made cleanly, flipping a discriminating branch moved
+the block structure and left every register where it was.
+
+Possible reasons, none of them established: the weight change may be too small to reorder any
+candidate given the margins seen in the `+0x0c` keys (`tile` 212 against the next at 148); the two
+source forms may present the same successor shapes to the heuristic despite looking different;
+or the probability-to-weight step may compress differences more than the chain suggests. Settling
+it would mean reading `FgWeightFlowGraph` and `BpBlockProbabilities` rather than inferring from
+the ends of the chain, and measuring the weights directly under the debugger the way `Spillcosts`
+was measured - which is the next thing to do before anyone trusts this path again.
+
 ## The PGO flag: three gated behaviours, and the phase order
 
 The global at `0x10d0ffdc` that an earlier section could only describe as "a mode flag, read in
