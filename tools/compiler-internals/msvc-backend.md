@@ -60,6 +60,62 @@ key(+0x0c) = sum over regions where the value IS referenced     ( refs * count *
 
 with `2^depth` replaced by the scaled profile share under PGO.
 
+### The weight formula, verified by measurement
+
+The `1 << depth` reading above was tested on `addUnitToSmallestBehaviourTypeTribe` rather than left
+as a reading of the instructions, and it holds quantitatively.
+
+**The spilled values are the lowest-keyed ones.** `reg_scores.py --find smallestSize` locates the
+function at invocation #371 and gives its `+0x0c` keys:
+
+```
+aicIndex +87   slot +79   firstSlot +71   groupsCount +40   aiType +32
+playerID +30   selectedTribeID +28   this +23   selectedSlot +14   smallestSize +2
+```
+
+`slot_map.py` independently reports exactly two values in stack slots - `_smallestSize$` and
+`_selectedSlot$` - and those are precisely the two lowest keys, **+2** and **+14**. Two tools, one
+reading the compiler's own records through a debugger and one inferring the frame from the
+original's disassembly, agreeing without being fitted to each other.
+
+**Removing one in-loop reference costs exactly one `count * weight` term.** Rewriting the loop
+from a bound to a counter,
+
+```cpp
+for (int slot = firstSlot; slot < firstSlot + groupsCount; slot++)      // bound in the condition
+for (int slot = firstSlot, remaining = groupsCount; remaining > 0; slot++, remaining--)
+```
+
+takes the `firstSlot + groupsCount` expression out of the loop condition, so `firstSlot` and `slot`
+each lose one depth-1 reference. Measured:
+
+| candidate | bound form | counter form | change |
+| --- | --- | --- | --- |
+| `firstSlot` | +71 | +57 | **-14** |
+| `slot` | +79 | +65 | **-14** |
+| `groupsCount` | +40 | +52 | +12 |
+| `smallestSize` | +2 | -1 | -3 |
+| `aicIndex`, `aiType`, `this` | +87, +32, +23 | unchanged | 0 |
+
+Two independent values each lose **exactly 14** for losing one reference in the same loop - the
+same `count * weight` term, as the formula requires - while every candidate the edit does not touch
+moves not at all. `groupsCount` gains because the counter form gives it a new reference in the loop
+initialiser.
+
+**But the lever does not fix the function.** The point of the rewrite was that a counter is
+referenced every iteration where a bound merely lives across the body, so its key should rise
+enough to win a register and drop the frame from 12 to the original's 8. It does not: the frame
+stays at `+4`, and the instruction mix gets much worse - delta 10 to 22, `kind` 0.893 to 0.846,
+quick_diff 0.6803 to 0.6179 - because the counter form emits a decrement the original does not
+have. The original keeps a genuine bound in `edx`; the counter shape is simply not what it
+compiled.
+
+So the formula is now verified and usable for *predicting* which value is at risk of spilling, and
+the measurement confirms the mechanism. What it does not provide is a way to rescue a particular
+value here: the only moves available change the instruction stream more than they change the
+ranking. Treat it as a diagnostic - "this value will spill because its key is lowest, and here is
+the term responsible" - rather than as a fix.
+
 ### What the Bp heuristics actually feed
 
 Not this. `@BpBlockProbabilities@4` has exactly one caller,
