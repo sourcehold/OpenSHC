@@ -12,6 +12,66 @@ proxy for it.
 For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
 order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
 
+## Every decoded name, confirmed against c2.pdb
+
+The whole backend model in this file was decoded from unnamed code, so it is worth recording
+that it has since been checked against the real symbols. Loading `c2.dll` **with its PDB** into
+a Ghidra project confirms every function this file names, and resolves the one naming confusion
+it had:
+
+| address | PDB name | what this file decoded it as |
+| --- | --- | --- |
+| `0x10c07350` | `dop2_GlobalRegAlloc` | the register-allocation driver |
+| `0x10b10420` | **`Spillcosts`** | accumulates the `+0x0c` ordering key |
+| `0x10b11970` | `InsertInList` | candidate priority list, sorts on `+0x0c` |
+| `0x10b119f0` | **`InsertByBenefit`** | the other insert, sorts on `+0x40` |
+| `0x10b14b70` | `ChoosePhysReg` | picks the cheapest free register |
+| `0x10beaef0` | `ColorStackElements` | the stack-slot colourer |
+| `0x10beb760` | `colorElemental` | per-element slot placement |
+| `0x10beb730` | **`StkGSBufferLevel`** | the class byte at `+0x18` |
+
+Three of those are worth dwelling on.
+
+**`Spillcosts`** is the function whose tail accumulates `+0x0c`, and the name is the semantic:
+the key is a spill cost. A value gains `refs * count * weight` in each region where it is
+referenced and is charged `count * weight` for each region it is live across without being
+referenced - which is exactly what "what would it cost to spill this" means. The formula was
+derived from the arithmetic before the name was known, and they agree.
+
+**`InsertInList` against `InsertByBenefit`** explains the error this file used to contain. The
+two are adjacent and nearly identical; the old note said "InsertInList sorts on `+0x40`, the
+benefit" when in fact `InsertInList` sorts on `+0x0c` and it is `InsertByBenefit`, 0x80 bytes
+later, that sorts on `+0x40`. The names make the distinction explicit, and the candidate list
+the harness breakpoints is the former.
+
+**`StkGSBufferLevel`** settles the class byte outright. The `/GS` reading in the section above
+was an inference from the arithmetic plus one observed layout; the name says it directly - `Stk`
+for stack, `GS` for the buffer security check, `BufferLevel` for the classification. Its
+decompilation is also identical to the hand-decode, including `sym+0x63 < 3` for `<= 2`:
+
+```c
+char StkGSBufferLevel(sym)            /* sym in EAX */
+{
+  if (((sym+0x37 & 0x40000) != 0) && (sym+0x63 < 3) && (4 < sym+0x1c))
+    return 3;
+  return ((sym+0x20 & 0x4000000) != 0) + 1;
+}
+```
+
+The PDB does **not** apply struct types, so the operands are still raw offsets and the fields of
+the symbol record remain unnamed. The function names are what the PDB buys.
+
+**How to query it.** `ghidra-mcp`'s read tools take a `program` argument, so a non-current
+program can be queried without disturbing anything:
+
+    get_function_by_address(address="0x10beb730", program="c2.dll")
+
+That matters because `switch_program` reports success but does **not** redirect the query tools -
+after switching, `get_metadata` still named the game executable and symbol lookups still missed.
+Pass `program` instead of switching, and a shared session's `currentProgram` is never touched.
+REA remains the alternative when no PDB is wanted, but it refuses a caller-supplied PDB
+companion, which is why it could only ever report `FUN_` names.
+
 ## Getting symbols
 
 `c2.dll` references `c2.pdb`, and Microsoft still publishes it:
