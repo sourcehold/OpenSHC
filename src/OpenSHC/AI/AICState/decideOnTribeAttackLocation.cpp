@@ -93,8 +93,8 @@ namespace AI {
                 return;
             }
 
-            int destinationX = DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
             DAT_TribesState::instance.tribes[tribeID].targetBuildingID = 0;
+            int destinationX = DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
             int destinationY = DAT_GameState::instance.playerDataArray[targetPlayer].campground.yEntry;
             if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID,
                     DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX)
