@@ -218,6 +218,12 @@ nothing getting worse. It is also the missing precondition for `cmake/compiler-f
 does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
 flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
 
+`structural_diff.py --all` splits the build list by *what kind* of difference is left - wrong instruction mix
+(`mix`), right mix in the wrong order (`order`), or register naming only (`allocation`). Check it before picking
+a target: the reccmp percentage is dominated by allocation, so it will rank a structurally wrong function above a
+structurally perfect one. On `AI::AICState` it puts `aiGiveRaidInstructions` (delta 21) at the top while marking
+`sellExcessGoods` - a 62.4% function - as having nothing structural left to fix.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
