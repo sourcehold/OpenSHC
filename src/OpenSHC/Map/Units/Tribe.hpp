@@ -43,7 +43,7 @@ namespace Map {
             SomeTribeBehaviorTypeShort tribeBehaviorType; // 0x00000028 length: 2
             undefined1 padding_0x2a[2]; // 0x0000002A length: 2
             short someUpdateUpperLimit; // 0x0000002C length: 2
-            short unknownAttackRelatedUpdateCounter; // 0x0000002E length: 2
+            ushort unknownAttackRelatedUpdateCounter; // 0x0000002E length: 2
             short field29_0x30; // 0x00000030 length: 2
             short selectionTargetUnitID; // 0x00000032 length: 2
             short size; // 0x00000034 length: 2
@@ -58,12 +58,12 @@ namespace Map {
             short supportTribeID; // 0x000001F2 length: 2
             int uid2; // 0x000001F4 length: 4
             short tribeID; // 0x000001F8 length: 2
-            short minimumMovementSpeed; // 0x000001FA length: 2
+            ushort minimumMovementSpeed; // 0x000001FA length: 2
             short movementSpeed; // 0x000001FC length: 2
             short maximumMovementSpeed; // 0x000001FE length: 2
             short field61_0x200; // 0x00000200 length: 2
             short field62_0x202; // 0x00000202 length: 2
-            short initialMoveOrderGiven; // 0x00000204 length: 2
+            ushort initialMoveOrderGiven; // 0x00000204 length: 2
             short isRallyingUnk; // 0x00000206 length: 2
             short field65_0x208; // 0x00000208 length: 2
             short unitsHealthPercentage; // 0x0000020A length: 2
@@ -75,23 +75,22 @@ namespace Map {
             UnitTypeShort unitType; // 0x00000228 length: 2
             short aggressiveStanceCounter; // 0x0000022A length: 2
             undefined1 padding_0x22c[12]; // 0x0000022C length: 12
-            short rallyPointArray[9][2]; // 0x00000238 length: 36
-            undefined1 padding_0x25c[4]; // 0x0000025C length: 4
+            short rallyPointArray[10][2]; // 0x00000238 length: 40
             short currentRallyPointIndex; // 0x00000260 length: 2
             short rallyPointCount; // 0x00000262 length: 2
             undefined1 padding_0x264[20]; // 0x00000264 length: 20
-            short predatorNearby; // 0x00000278 length: 2
+            ushort predatorNearby; // 0x00000278 length: 2
             short pendingScatterMove; // 0x0000027A length: 2
             short unkIsAnimalTribe; // 0x0000027C length: 2
             short wanderIntervalTicks; // 0x0000027E length: 2
             short herdMinSize; // 0x00000280 length: 2
             short herdMaxSize; // 0x00000282 length: 2
-            short field138_0x284; // 0x00000284 length: 2
+            ushort field138_0x284; // 0x00000284 length: 2
             short unknownCounter01; // 0x00000286 length: 2
             short field_0x288; // 0x00000288 length: 2
             short unknownBool02; // 0x0000028A length: 2
             short unknownBool01; // 0x0000028C length: 2
-            short countdown; // 0x0000028E length: 2
+            ushort countdown; // 0x0000028E length: 2
             short someUnitArrayIndex; // 0x00000290 length: 2
             short someIndex; // 0x00000292 length: 2
             short attackWave; // 0x00000294 length: 2
