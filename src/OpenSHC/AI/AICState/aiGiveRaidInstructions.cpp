@@ -147,11 +147,11 @@ namespace AI {
             int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile)
-                == FALSE)
-                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
-            else
+                != FALSE)
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
                     tribeID, x, y, 0);
+            else
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
         }
     }
 }

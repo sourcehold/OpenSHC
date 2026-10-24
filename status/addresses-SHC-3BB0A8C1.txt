@@ -35501,7 +35501,7 @@ SHC_3BB0A8C1_0x004D2870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D28B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2A70 | 58.6% | Tile copies merged differently
+SHC_3BB0A8C1_0x004D2A70 | 60.3% | Navigate branch polarity
 
 SHC_3BB0A8C1_0x004D2E00 | 100.0% | Reimplemented
 
