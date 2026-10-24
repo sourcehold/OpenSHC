@@ -29,23 +29,24 @@ Three tiers are reported, each ignoring more than the last:
 `delta` sums the per-mnemonic count mismatches, which is the most directly actionable figure:
 it says "we emit two `xor` the original does not" rather than giving a ratio. Chase it to zero.
 
-Only real instruction lines are counted: `common._asm_lines` also yields bare tokens like
-`0x4` (a normalised operand) and `0xcc` (inter-function padding), which would otherwise inflate
-the delta with noise no source change can affect.
-Epilogue instructions (`pop`, `ret`, `leave`) are excluded, because reccmp's window frequently
-cuts the original's stream before its epilogue - a function whose original stream holds no `ret`
-at all has been truncated, which the report says outright. Counting those would report an
-extraction artefact as a source defect, which is the same mistake as steering by the percentage.
+Both instruction streams are complete, and come from the code itself via `asm_streams.py` - the
+original disassembled from `_original/`, ours from a `/FA` compile. They deliberately do NOT
+come from `reccmp/dll/diff.json`, which holds only the diff view and therefore keeps *less* of a
+function the better it matches: `aiCreateSiegeUnits` at 99.7% leaves 22 lines per side behind,
+against a real body of 322 instructions. An earlier version of this script read those lines, and
+its figures for well-matching functions were meaningless. Only `raw` still comes from reccmp.
 
-Needs a current `reccmp_report.py --run`. Reads the same `diff.json` as the other tools, so it
-costs nothing to run.
+Each function is compiled on demand, so `--all` takes about a second per file and needs a
+configured build directory - but no build and no reccmp run, except for the `raw` column.
 """
 
 import collections
 import difflib
+import os
 import re
 import sys
 
+import asm_streams
 import common
 
 SCORE_ONLY = '--score' in sys.argv
@@ -54,80 +55,49 @@ want = next((a for a in sys.argv[1:] if not a.startswith('--')), None)
 if not ALL and want is None:
     sys.exit(__doc__)
 
-# the epilogue is compiler-generated and, worse, reccmp's window often cuts the original
-# before it, so counting these would report an extraction artefact as a source defect
-EPILOGUE = ('pop', 'ret', 'leave')
-# 0xcc / int3 are inter-function padding that the extraction sometimes includes, and `nop`
-# is alignment filler - none of the three is anything a source change controls
-PADDING = ('0xcc', 'int3', 'nop')
-REG = re.compile(r'\b(e?(?:ax|bx|cx|dx|si|di|bp|sp)|[a-d][lh]|al|ah)\b')
+REG = re.compile(r'\b(e?(?:ax|bx|cx|dx|si|di|bp|sp)|[a-d][lh])\b')
 IMM = re.compile(r'\b(?:0x[0-9a-f]+|\d+)\b')
-
-
-def mnemonic(line):
-    return line.split()[0] if line.split() else ''
-
-
-def is_instruction(line):
-    """True for a real instruction line.
-
-    `common._asm_lines` also yields bare tokens such as `0x4` and `0xcc` - normalised
-    operands and inter-function padding, not instructions. Counting them inflates the delta
-    with noise that no source change can affect.
-    """
-    m = mnemonic(line)
-    return bool(m) and m[0].isalpha() and m not in PADDING
 
 
 def shape(line):
     """Operand form with register names and constants anonymised."""
-    out = REG.sub('r', line)
-    out = IMM.sub('k', out)
-    return out
+    return IMM.sub('k', REG.sub('r', line))
 
 
 def ratio(a, b):
     return difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
 
 
-def measure(entry):
-    orig, ours = common._asm_lines(entry)
-    orig = [l.strip() for l in orig if is_instruction(l.strip())]
-    ours = [l.strip() for l in ours if is_instruction(l.strip())]
-    mo, mu = [mnemonic(l) for l in orig], [mnemonic(l) for l in ours]
-    so, su = [shape(l) for l in orig], [shape(l) for l in ours]
+def measure(path, name, raw):
+    orig, ours = asm_streams.streams(path)
+    if ours is None:
+        return None
+    mo, mu = asm_streams.mnemonics(orig), asm_streams.mnemonics(ours)
     co, cu = collections.Counter(mo), collections.Counter(mu)
-    kinds = sorted(set(co) | set(cu))
-    deltas = [(k, co.get(k, 0), cu.get(k, 0)) for k in kinds
-              if co.get(k, 0) != cu.get(k, 0) and k not in EPILOGUE]
-    truncated = 'ret' not in co        # no ret at all means reccmp cut the original short
+    deltas = [(k, co.get(k, 0), cu.get(k, 0)) for k in sorted(set(co) | set(cu))
+              if co.get(k, 0) != cu.get(k, 0)]
     return {
-        'name': entry['name'],
-        'raw': float(entry['matching']),
+        'name': name,
+        'raw': raw,
         'kind': ratio(mo, mu),
-        'shape': ratio(so, su),
-        'n_orig': len(orig),
-        'n_ours': len(ours),
+        'shape': ratio([shape(l) for l in orig], [shape(l) for l in ours]),
+        'n_orig': len(mo),
+        'n_ours': len(mu),
         'delta': sum(abs(a - b) for _k, a, b in deltas),
-        'truncated': truncated,
         'deltas': sorted(deltas, key=lambda t: -abs(t[1] - t[2])),
     }
 
 
 def report(m):
     print('### %s' % m['name'])
-    if m['truncated']:
-        print('  NOTE: the original stream holds no `ret`, so reccmp cut it short. The instruction')
-        print('  counts are not comparable and differences near the tail are extraction artefacts,')
-        print('  not source defects. Treat only the mnemonic mismatches below as signal.')
-    print('  instructions   original %d   ours %d   (%+d)%s'
-          % (m['n_orig'], m['n_ours'], m['n_ours'] - m['n_orig'],
-             '   <- not comparable, stream truncated' if m['truncated'] else ''))
+    print('  instructions   original %d   ours %d   (%+d)'
+          % (m['n_orig'], m['n_ours'], m['n_ours'] - m['n_orig']))
     print('  kind  %.3f   <- drive this to 1.000 first; every difference here is real'
           % m['kind'])
     print('  shape %.3f   <- operand form, once registers and constants are anonymised'
           % m['shape'])
-    print('  raw   %.3f   <- reccmp, mostly register and slot naming' % m['raw'])
+    if m['raw'] is not None:
+        print('  raw   %.3f   <- reccmp, mostly register and slot naming' % m['raw'])
     print('  delta %d instruction(s) of mismatched kind' % m['delta'])
     if m['deltas']:
         print('')
@@ -141,41 +111,48 @@ def report(m):
     elif m['kind'] < 0.99:
         print('')
         print('  No mnemonic mismatch, but the sequences differ: the two sides emit the same')
-        print('  instructions in a different ORDER. That is statement order, and it is reachable -')
-        print('  it is what took the sixteen setAICParameters_NN functions to 100%. Use the')
-        print('  original stream (orig_asm.py NAME) as the skeleton and reorder the source to it.')
+        print('  instructions in a different ORDER. That is statement order, and it is reachable')
+        print('  - it is what took the sixteen setAICParameters_NN functions to 100%. Use the')
+        print('  original stream (orig_body.py FILE) as the skeleton and reorder the source.')
     else:
         print('')
         print('  Same instructions, same order. What is left is operand form and register naming,')
         print('  so there is no structural work to do here - see tools/compiler-internals.')
 
 
-def entries():
+def targets():
+    """[(path, name, raw)] for the build list; `raw` is None when reccmp has no entry."""
     byaddr = common.load_diff()
-    for _f, e, _a in common.entries(byaddr):
-        if e is None or not e.get('diff'):
+    for f, e, _a in common.entries(byaddr):
+        # the build list is git-ignored, so it routinely names files that are not on the
+        # current branch; both streams need the source, so such an entry has to be skipped
+        if not os.path.exists(f):
             continue
-        yield e
+        name = e['name'] if e else common.repo_relative(f)
+        yield f, name, (float(e['matching']) if e else None)
 
 
 if ALL:
-    rows = [measure(e) for e in entries()]
-    rows = [r for r in rows if r['raw'] < 0.9999]
+    rows = []
+    for f, name, raw in targets():
+        if raw is not None and raw >= 0.9999:
+            continue
+        try:
+            m = measure(f, name, raw)
+        except Exception as exc:
+            print('# %-44s skipped: %s: %s' % (name, type(exc).__name__, exc))
+            continue
+        if m:
+            rows.append(m)
     if not rows:
         sys.exit('every function in the build list matches; nothing to rank')
     rows.sort(key=lambda r: (-r['delta'], r['kind']))
     print('%-50s %6s %6s %6s %5s  %s' % ('function', 'kind', 'shape', 'raw', 'delta', 'verdict'))
     for r in rows:
-        if r['delta'] > 0:
-            verdict = 'mix'
-        elif r['kind'] < 0.99:
-            verdict = 'order'
-        else:
-            verdict = 'allocation'
-        if r['truncated']:
-            verdict += ' (truncated)'
-        print('%-50s %6.3f %6.3f %6.3f %5d  %s'
-              % (r['name'].split('::')[-1], r['kind'], r['shape'], r['raw'], r['delta'], verdict))
+        verdict = 'mix' if r['delta'] > 0 else ('order' if r['kind'] < 0.99 else 'allocation')
+        print('%-50s %6.3f %6.3f %6s %5d  %s'
+              % (r['name'].split('::')[-1], r['kind'], r['shape'],
+                 '-' if r['raw'] is None else '%.3f' % r['raw'], r['delta'], verdict))
     print('')
     print('Three categories, in descending order of how reachable they are from the source:')
     print('  delta > 0                  wrong instruction mix. Each mismatched mnemonic is a')
@@ -185,11 +162,14 @@ if ALL:
     print('                             form and register naming; leave these alone.')
     sys.exit(0)
 
-hits = [e for e in entries() if want in e['name']]
+hits = [(f, n, r) for f, n, r in targets()
+        if want.lower() in n.lower() or want.lower() in f.lower()]
 if not hits:
-    sys.exit('no function matching %r in the last reccmp run' % want)
-for e in hits:
-    m = measure(e)
+    sys.exit('no function matching %r in the build list' % want)
+for f, n, r in hits:
+    m = measure(f, n, r)
+    if m is None:
+        continue
     if SCORE_ONLY:
         print('%.4f %d' % (m['kind'], m['delta']))
     else:
