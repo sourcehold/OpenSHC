@@ -1437,6 +1437,70 @@ The general rule: to get a computation duplicated per arm, share in the source e
 original shares, and write the rest out. Sharing less gets the whole thing hoisted; sharing more - a
 pointer where the original had an index - adds the instruction that materialises what you shared.
 
+## Settled: the aiRecruitUnits recruitCount tension
+
+The tooling notes have carried an unresolved observation for a while - that `recruitCount++` gets
+the original's `neg`/`sbb`/`jmp` counts right and scores 47.3%, while
+`recruitCount = interval != 0 ? 2 : 3` gets them wrong and scores 50.0%, and that this is why
+`structural_diff.py` exists. The duplication detector now explains it, and the answer is that the
+structurally correct form cannot be recovered from.
+
+**The duplicate is real and the detector names it.** On the committed form the report reads
+
+```
+DUPLICATION: we compute this run 2 time(s), the original computes it 1:
+      mov r, r
+      neg r
+      sbb r, r
+```
+
+`neg r; sbb r, r` is the convert-to-boolean idiom, and the source says why - the test is written
+twice:
+
+```cpp
+int recruitCount = recruitInterval != 0 ? 1 : 2;
+if (isExtremeTrail)
+    recruitCount = recruitInterval != 0 ? 2 : 3;     // second `!= 0`
+```
+
+Three forms were measured against it:
+
+| form | instructions | `kind` | mix delta | quick_diff |
+| --- | --- | --- | --- | --- |
+| committed ternary | 304 | 0.9305 | 6 | **0.6821** |
+| `if (isExtremeTrail) recruitCount++;` | 303 | **0.9320** | **5** | 0.6600 |
+| shared `int hasInterval = interval != 0;` | 305 | 0.9322 | 11 | 0.6545 |
+| `(interval != 0 ? 1 : 2) + isExtremeTrail` | 301 | 0.9185 | 7 | 0.6556 |
+
+The increment form is the structurally correct one: the duplication disappears, `neg` and `sbb`
+drop to the original's counts, delta falls 6 to 5. Note that sharing the boolean in a named local
+makes things markedly *worse* - delta 11 - which is the same "share exactly what the original
+shares, no more" rule seen in the AIV block.
+
+**But it costs 2.7 points with nothing to recoup them.** Measured, not recalled: the increment
+form builds at **45.3 / 47.3** against the committed ternary's **48.0 / 50.0**.
+
+What decides it is what is left afterwards. At delta 5 the remainder is `xor +2`, `cmp -1`,
+`jmp +1`, `test +1`, and reading the streams shows all of it to be one idiom:
+
+```
+original                        ours
+mov eax, dword ptr [esi + G]    mov eax, dword ptr [esi + G]
+xor ebx, ebx                    test eax, eax
+cmp eax, ebx
+```
+
+The original keeps 0 in `ebx` and compares against the register where we emit `test`, and it
+materialises zero twice where we do it four times. That is exactly the class recorded above for
+`updateAIPlayerState` - which constant occupies a register - and it has no source handle:
+`aiType == AIT_NULL`, `aiType == 0` and `!aiType` all compile to `test`.
+
+So this is the opposite case to `renderDebugDataAiInfo`, where a frame fix cost 0.9 points and was
+worth committing because the frame was provably byte-exact and a next step existed. Here the
+structural gain is one instruction, the cost is 2.7 points, and the remaining defects are in a
+class already shown to be unreachable - so there is no path that recovers it. Left at the ternary
+form, 50.0%, with this recorded so the question does not get reopened a third time.
+
 ## A defect class: which constant gets the callee-saved register
 
 `updateAIPlayerState` (78.6% with resolvers off, 81.7% with them on) is structurally almost
