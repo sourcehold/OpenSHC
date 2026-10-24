@@ -12,6 +12,81 @@ proxy for it.
 For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
 order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
 
+## The next lever: static branch prediction feeds register allocation
+
+`Spillcosts` keys on `refs * count * weight`, and `weight` is a block frequency. Following where
+that comes from leads to the one lever found so far that the source actually controls.
+
+Block weights come from `@FgWeightFlowGraph@4` / `@FgWeightGraph@12`, which consume edge
+probabilities from `@BpBlockProbabilities@4`. With a profile loaded that is
+`@BpComputeFlowgraphPogoProbabilities@4`; without one it is `@BpComputeFlowgraphProbabilities@4`,
+which combines a suite of static heuristics - the classic Ball-Larus set, each one named:
+
+```
+@BpLoopBranchHeuristic@12   @BpReturnHeuristic@12     @BpCallHeuristic@12
+@BpPointerHeuristic@12      @BpOpcodeHeuristic@12     @BpGuardHeuristic@12
+@BpLoopExitHeuristic@12     @BpLoopHeaderHeuristic@12 @BpCmpHeuristicTemplate@8
+```
+
+So the chain is
+
+```
+branch shape -> Bp*Heuristic -> BpBlockProbabilities -> FgWeightFlowGraph -> block weight
+             -> Spillcosts key -> InsertInList order -> ChoosePhysReg
+```
+
+and **which arm of a branch you write first can change the register allocation**.
+
+### Two of them decoded
+
+Each heuristic returns three values - `-1`, `0` or `+1` - built with the `sbb eax, eax` and
+`lea ecx, [ecx + ecx - 1]` idioms, where `-1` means "this heuristic does not apply".
+
+`BpReturnHeuristic` at `0x10c72f00` walks each successor to its terminating instruction, chasing
+up to five links through `+0xc`, and tests the tuple opcode at `+8` against **`0x10` and `0x19`**,
+the two return forms:
+
+* both successors return, or neither does - `cmp esi, eax; jne` falls through to
+  `or eax, 0xffffffff` - the heuristic **abstains**
+* exactly one returns - the **non-returning** arm is predicted taken
+
+`BpCallHeuristic` at `0x10c73030` is the same shape against opcode **`0x0f`**, a call: scan each
+successor's instruction list, and if exactly one arm contains a call, the arm **without** the call
+is predicted taken. (The opcode numbers are inferred from the function names plus the surrounding
+code, not from a typed enum; the control flow is read directly.)
+
+### Why this is the useful one
+
+It is predictive rather than trial-and-error. A branch only has its probability - and therefore
+its block weight, and therefore its contribution to every candidate's spill cost - decided by arm
+order **when the heuristic discriminates**, which is when exactly one arm returns or exactly one
+arm calls. Otherwise the heuristic abstains and arm order is free.
+
+That retro-explains both results this file already records, which is the reason to trust it:
+
+* `aiGiveRaidInstructions` gained **56.8% -> 60.3%** from swapping the arms of its final
+  `if`/`else`. Swapping changed which arm is the fallthrough, and with it the predicted
+  probabilities feeding the weights.
+* `playNervous2BikFromPlayer` was **byte-identical** across four source forms, including
+  early-return against guarded-call. Under this model that is expected: both forms leave both
+  arms reaching a return, so `BpReturnHeuristic` abstains either way and nothing downstream
+  moves.
+
+### How to use it
+
+When a function is structurally correct but its registers or frame differ, look for branches where
+exactly one arm returns or exactly one arm calls, and check our arm order against the original's.
+`structural_diff.py` already reports polarity flips; this says which of them are worth acting on -
+a flip on a branch where the heuristics abstain is cosmetic, a flip on a discriminating branch
+moves the block weights and can move the allocation.
+
+Still unread, in rough order of likely value: `@BpGuardHeuristic@12` (guard clauses, which the AI
+code is full of), `@BpLoopExitHeuristic@12` and `@BpLoopBranchHeuristic@12` (the loop-carried
+values that several of these functions spill), and `@BpOpcodeHeuristic@12` with
+`@BpCmpHeuristicTemplate@8`, which would say whether the *comparison operator* itself shifts a
+probability - that would make `!= 0` against `> 0` a codegen-relevant choice rather than a
+stylistic one.
+
 ## The PGO flag: three gated behaviours, and the phase order
 
 The global at `0x10d0ffdc` that an earlier section could only describe as "a mode flag, read in
