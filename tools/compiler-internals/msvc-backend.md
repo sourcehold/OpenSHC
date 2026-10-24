@@ -518,3 +518,64 @@ identically (exactly 463 iterator calls each), so size alone does not single out
 twice, with the function's body replaced by `return;` the second time, and find the invocation whose count drops
 by the total difference. For `sellExcessGoods` the total fell by 524 and the matching invocation was #613 at 532
 calls; re-running with the breakpoints armed captured exactly 532, which confirms it.
+
+## Frame size as a local-count oracle
+
+`sub esp, N` in the prologue is the one number in the original that states, directly and without any
+allocation noise, **how much stack the original function's locals occupy**. It is worth checking first,
+because a mismatch there is a missing or surplus local and no amount of statement reordering will fix it.
+
+Worked example, `AICState::renderDebugDataAiInfo` (`0x004d1320`). The original opens `sub esp, 0x400`; our
+version opened `sub esp, 0x3f8`, so the original had 8 bytes - two dwords - of locals we did not. Two
+independent instruction-mix defects pointed at the same two values:
+
+* `this->aics[aiType - 1]` appeared at three call sites, each emitting its own `imul reg, reg, 0x2a4`.
+  The original emits that `imul` **once**, and earlier stores `aiType - 1` to a slot (`add ecx, -0x1;
+  mov [esp+N], ecx`). Caching the index in a local collapsed three `imul` to one.
+* the original *also* caches the resulting element address: `add eax, ecx; mov [esp+N], eax`, read back
+  later as `mov ecx, [esp+N]; add eax, [ecx + 0x1f4]`. That is the second dword.
+
+Adding the two locals took the frame from `0x3f8` to exactly `0x400`, the instruction-mix delta from 13 to
+3 and the mnemonic-sequence similarity from 0.943 to 0.979. The frame size is what told us *how many*
+locals to look for; the mix told us *which*.
+
+The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
+evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
+
+## Two things that do not work
+
+**Declaration order, when there are no ties.** `StkColorCmp` sorts by class and weight and uses declaration
+order only to break ties, so where the weights are distinct the declaration order is simply inert. On
+`renderDebugDataAiInfo`, moving both new locals to the top of the loop body and then swapping them against
+each other gave byte-identical output three times over - `67.5 / 71.0` in every case. Permuting declarations
+is worth trying only once `slot_weight.py` shows an equal-weight group.
+
+**Forcing the compiler to duplicate a computation.** The original duplicates the whole argument setup in
+both arms of one `if`/`else`, using `eax` in one arm and `edx` in the other - two separate computations the
+compiler never merged. Ours hoists the common part above the branch. Three source forms were tried: the
+expression written out inline in both arms, a shared local assigned before the branch, and a local declared
+before the branch but assigned separately inside each arm. MSVC CSE'd all three. Whatever produces the
+original's duplication is not expressible by moving that expression around, so this is a dead end to stop
+pushing on rather than a defect to keep chasing.
+
+## Structural similarity and the match percentage can move in opposite directions
+
+Measured on `renderDebugDataAiInfo`, three source forms, each a full build and reccmp run:
+
+| form | reccmp raw / normalised | mnemonic similarity | mix delta | frame |
+| --- | --- | --- | --- | --- |
+| committed baseline | **68.4 / 72.6** | 0.943 | 13 | `0x3f8` |
+| index cached | 66.2 / 69.7 | 0.972 | 5 | `0x3fc` |
+| index and element address cached | 67.5 / 71.0 | **0.979** | **3** | **`0x400`** |
+
+The percentage is monotone *against* the structural measures across all three points, while the frame size
+says the third form is the one that matches the original's locals. The mechanism is that adding a local
+shifts every `[esp + N]` displacement in the function, and reccmp scores each of those as a mismatch until
+the whole layout happens to line up - so a structurally correct change can cost points for as long as the
+slot layout stays wrong.
+
+The practical consequence is that **the percentage is not a safe objective for hill-climbing while the frame
+size is still wrong**, and a drop of a point or two against a confirmed frame match is not evidence the
+change was wrong. It also means a correct intermediate state can look like a regression, which is a reason
+to record the frame size and the mix delta in the commit message alongside the percentage, not just the
+percentage.
