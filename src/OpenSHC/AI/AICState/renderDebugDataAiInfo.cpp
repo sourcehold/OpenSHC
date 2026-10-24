@@ -90,12 +90,13 @@ namespace AI {
                 text, x + 302, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
 
             // fixme: Castle (AIV); the castle ID is passed even for human players, whose format ignores it
-            int castleID
-                = DAT_AIVState::instance.aivs[DAT_GameState::instance.playerDataArray[playerID].aivID].castleID + 1;
+            int aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
             if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL) {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV:n/a", castleID);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV:n/a",
+                    DAT_AIVState::instance.aivs[aivID].castleID + 1);
             } else {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV: %d", castleID);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV: %d",
+                    DAT_AIVState::instance.aivs[aivID].castleID + 1);
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 382, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
