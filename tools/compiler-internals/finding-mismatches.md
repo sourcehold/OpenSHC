@@ -330,3 +330,35 @@ Two traps worth repeating:
   numbers for good functions were meaningless. Both streams now come from the code itself.
 * **A dropping percentage does not mean the change was wrong.** Check the frame and `delta`
   first. The one worked example here got better three times while the score went down once.
+
+## When several functions stop on the same number, stop looking at the functions
+
+Everything above hunts for a defect *inside* one function. Some defects are not in any
+function, and they have a signature you can spot in the `pct` table in a second: several
+unrelated functions sitting on **exactly** the same percentage.
+
+`Text/FontSizeClass` looked like this:
+
+```
+ 92.6  96.0 getWidthOfWideText
+ 95.6  96.0 renderMultilineWideTextUnk
+ 99.0  96.0 renderSomeSpecificTextUnk
+ 94.3  96.0 renderWideText
+```
+
+Four functions of very different sizes, all at 96.0 normalized. Running `structural_diff.py`
+on each one said the same thing four times - `delta 0`, same instructions in the same order,
+`kind 1.000`. That combination is the tell: **structurally perfect, yet not 100, and tied with
+its neighbours.** No amount of rewriting the C++ can move a function that is already emitting
+the right instructions in the right order.
+
+So go straight to `reccmp_report.py diff` on the *smallest* of the group, because whatever is
+shared will be a larger fraction of it and easier to see. Here the first line of the diff was
+the whole answer: our `/GS` prologue read `__security_cookie` from our own `.data`, the
+original read it from 0x00B94220. The fix was one new file in `src/symbols/`, it was worth 4%
+in *every* `/GS`-protected function in the project, and no amount of staring at
+`getWidthOfWideText`'s source would ever have found it, because its source was already right.
+
+The general rule: `delta 0` plus a percentage below 100 means the cause is outside the
+function - the build, the headers, a resolver, a calling convention. A tie across unrelated
+functions tells you how far outside.
