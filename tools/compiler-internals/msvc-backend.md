@@ -114,9 +114,66 @@ result was again exactly monotone (`5 5 5 4 4 4 4 3 3 3`); and renaming `allowQu
 `allowWoodcutters` to `aaaaaaaaaa`, inverting both alphabetical order and length for an adjacent equal-weight
 pair, left the function byte-identical.
 
-Known unknown: the **class byte at `+0x18`** is the primary key and its assignment has not been decoded, so
-arrays and address-taken locals interleave for reasons the model does not cover (`wrapTextIntoLines` is a
-worked example of a non-monotone report).
+The **class byte at `+0x18`** is the primary key, and it is no longer unknown. A twelve-instruction
+classifier at `0x10beb730` computes it, and the placement pass at `0x10beb760` inlines the same thing:
+
+```
+0x10beb730  test dword ptr [eax + 0x37], 0x40000
+0x10beb737  je   0x10beb748
+0x10beb739  cmp  dword ptr [eax + 0x63], 2
+0x10beb73d  jg   0x10beb748
+0x10beb73f  cmp  dword ptr [eax + 0x1c], 4
+0x10beb743  jle  0x10beb748
+0x10beb745  mov  al, 3
+0x10beb747  ret
+0x10beb748  test dword ptr [eax + 0x20], 0x4000000
+0x10beb74f  setne al
+0x10beb752  add  al, 1
+0x10beb754  ret
+```
+
+that is
+
+```
+class(symbol) = 3                                      when (symbol+0x37 & 0x40000)
+                                                        and symbol+0x63 <= 2
+                                                        and symbol+0x1c  >  4
+              = 1 + ((symbol+0x20 & 0x4000000) != 0)   otherwise
+```
+
+so the class is **1, 2 or 3**, and the only size-dependent term is `symbol+0x1c > 4`: anything wider
+than a dword takes class 3 and sorts as a group apart from the scalars. The byte is written only when
+a gate holds -
+
+```
+((flags(DAT_10d195cc + 0x44c) & 0x20000) && DAT_10d0d700[0x17]) || (byte(DAT_10d0d700 + 0x2b) & 1)
+```
+
+- and otherwise stays 0, so with that feature off every slot shares one class and the key degenerates
+to the weight alone.
+
+**What it is.** Read off the arithmetic rather than from a symbol name, this is the `/GS`
+buffer-ordering rule: arrays are what can overflow, so they are classed separately and placed nearest
+the canary. `renderDebugDataAiInfo` corroborates it - `char text[1000]` sits at `-1004`, above every
+int scalar (`-1024` through `-1008`) and immediately below `__$ArrayPad$` at `-4`, which is the layout
+that rule produces. The `/GS` reading is an inference from the arithmetic plus that one observation,
+not a proven name; the arithmetic itself is read directly off the instructions.
+
+That explains the symptom this entry used to record as unexplained - arrays and address-taken locals
+interleaving with scalars for reasons the weight model does not cover - because the class outranks the
+weight.
+
+**It does not unblock `planToBuyWhenLowOnResourceAndSnoozeBuildings`**, which is what prompted the
+work, and the prediction that it would was wrong. All ten of that function's locals are `int`, so
+`symbol+0x1c` is 4 for each, none reaches class 3, and the class is uniform unless the `0x4000000`
+flag differs between them. That leaves the weight, where both sides agree, and then declaration
+order, which a hill-climb over all fourteen declarations plus three hand-made swaps showed is already
+a local optimum. The byte discriminates by width, and that function has nothing but dwords.
+
+Finding this file's functions, since it is not obvious: the four `P2/stack.c` assert sites come from
+searching the image for the UTF-16 path and then for pushes of its address. Their line numbers are
+1372, 2533, 2534 and 2573, and 1372 is the one already attributed to `ColorStackElements`, which
+fixes that function at `0x10beaef0`.
 
 `slot_weight.py` in `../reimplementation-helper/batch/` reports this per function.
 
