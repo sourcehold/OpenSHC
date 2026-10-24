@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::GameCommandType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005370C0
         void UnitsState::extendRallyPoint(int tribeID, int mouseX, int mouseY, int rallyCount)
         {
