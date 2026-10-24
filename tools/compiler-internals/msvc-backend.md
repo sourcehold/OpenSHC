@@ -1749,3 +1749,81 @@ a check: a list of all 860 `.cpp` files with a `FUNCTION:` marker does not compi
 exist. That is pre-existing and unrelated, but it does mean the curated per-developer
 `cmake/openshc-sources.txt.local` is the only build that works, and a project-wide before/after
 has to be assembled from namespace-sized runs.
+
+## Settled: renderMultilineTextUnk is an edi/ebx two-cycle, priced by c2.dll
+
+58.7% looks like a badly wrong function and is not one. The frame is exact (`0x84` both sides,
+all 18 distinct slot offsets matching), `kind` is 0.953, and `delta 8` is almost all scheduling.
+The percentage is low because **one pair of values is swapped between two registers**, and that
+swap renames 34 operands:
+
+| | original | ours |
+| --- | --- | --- |
+| `this` | **edi** | ebx |
+| `{_runXPos, possibleWidth}` | **ebx** | edi |
+| `singleLineHeight` | esi | esi |
+| `xPos` | ebp | ebp |
+
+`esi` and `ebp` agree. It is a clean 2-cycle on `edi`/`ebx`, and `reg_scores.py` reads the whole
+decision out of the running compiler.
+
+**The two values are one unit on both sides.** The original computes `possibleWidth`
+*destructively into `_runXPos`'s own register* at all three sites - `sub ebx, eax` at 0x4731ad,
+`sub ebx, ebp` at 0x47321f and 0x4732a3 - then restores it with `mov ebx, ebp`. That is exactly
+what the source says, because `_runXPos = xPos` follows the comparison, so `_runXPos` is dead and
+its register is reusable. We coalesce the same pair; we just coalesce it into `edi`.
+
+**The pick, with the cost array that decided it** (`--whyreg`, `--whycost`):
+
+```
+_runXPos -> edi
+    eax   total   +2   PREF +1 by charWidth; PREF +1 by (temp)
+...
+this$GSCopy -> ebx
+    ecx   total   -6   OWN -6 by itself
+    edi   total   +4   PREF +4 by possibleWidth
+```
+
+`_runXPos` is served while `eax`, `ecx`, `edx` and `esi` are already consumed, so the class list
+(eax, ecx, edx, esi, edi, ebx, ebp) hands it **edi** as the first free entry, at zero cost.
+`possibleWidth`, coalesced with it, then carries an affinity for `edi`. Seven picks later
+`this$GSCopy` is served, finds `edi` charged **+4** by that affinity and `ebx` at 0, and takes
+`ebx`. Remove the +4 and `edi` ties with `ebx` at zero, ties go to the earlier class entry, and
+`edi` (5th) beats `ebx` (6th) - the original's assignment. The whole 58.7% hangs on four cost
+units.
+
+**What actually sets the order, and the correction that matters.** The serve order is the
+`+0x40` benefit, *not* the `+0x0c` spill cost. Read the wrong column and the function looks
+reachable, because by `+0x0c` `this$GSCopy` (149) appears to outrank `_runXPos` (135). By the
+column that decides:
+
+```
+wt+0x40   key+0xc   name
+    112       392   length
+    104       135   _runXPos      <- served first
+     66       -65   this$GSCopy   <- served later
+```
+
+`_runXPos` outranks `this` by **38 units**, decisively rather than marginally. Note also that
+`this$GSCopy` recurs later in the dump at wt 16 and 20: those are the colourer's re-scorings in
+subsequent rounds, **not** additional regions, so they must not be summed. Summing them gives 102
+against `_runXPos`'s 104 and invents a near-tie that does not exist.
+
+For the original to put `this` in `edi`, its `this` had to outrank `_runXPos`. The benefit is a
+block-frequency-weighted use count, and `_runXPos` genuinely has far more uses than `this` in any
+source spelling of these semantics - `this` appears only as the `ecx` setup before nine member
+calls, while `_runXPos` is read and written throughout both loops.
+
+**Three levers tested, all refuted:**
+
+| lever | why it should have worked | result |
+| --- | --- | --- |
+| `/GL` on the file and its four callees | the documented `ecx` lever; LTCG sees the callees do not clobber `ecx`, which should change `this`'s reference count | **58.7 -> 45.4**, much worse: it inlines the callees and rewrites the IR |
+| one shared `possibleWidth` instead of three scoped ones | collapses three candidates each carrying an `edi` affinity into one | **byte-identical** (quick_diff 0.7492 either way) |
+| hoisting the `/GS`-protected `_wordReceiver[64]` to function scope | the `/GS` shadow copy fragments `this`; a different protection scope might not | **byte-identical** |
+
+So this is the pressure class after all, but now with a number on it: not "the allocator decided"
+but "`_runXPos`'s benefit beats `this`'s by 38, which no spelling of equivalent code changes".
+Left at 58.7%. The useful general lesson is the middle column above - `--whyreg` naming a single
+`PREF +4` makes a function look one edit away from matching, and the benefit table is what tells
+you whether any edit can reach it.
