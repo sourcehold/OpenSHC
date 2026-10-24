@@ -49,11 +49,10 @@ import sys
 import asm_streams
 import common
 
-SCORE_ONLY = '--score' in sys.argv
-ALL = '--all' in sys.argv
-want = next((a for a in sys.argv[1:] if not a.startswith('--')), None)
-if not ALL and want is None:
-    sys.exit(__doc__)
+# parsed in main(), not at import: the other tools import this module for `measure()` and
+# `duplication()`, and a module-level sys.exit turns that into an abrupt exit with a usage dump
+SCORE_ONLY = False
+ALL = False
 
 REG = re.compile(r'\b(e?(?:ax|bx|cx|dx|si|di|bp|sp)|[a-d][lh])\b')
 IMM = re.compile(r'\b(?:0x[0-9a-f]+|\d+)\b')
@@ -134,6 +133,7 @@ def measure(path, name, raw):
         'name': name,
         'raw': raw,
         'div': register_divergence(orig, ours),
+        'dup': duplication(orig, ours),
         'kind': ratio(mo, mu),
         'shape': ratio([shape(l) for l in orig], [shape(l) for l in ours]),
         'n_orig': len(mo),
@@ -141,6 +141,108 @@ def measure(path, name, raw):
         'delta': sum(abs(a - b) for _k, a, b in deltas),
         'deltas': sorted(deltas, key=lambda t: -abs(t[1] - t[2])),
     }
+
+
+def _count_run(lines, run):
+    """How many non-overlapping times `run` occurs in `lines`."""
+    n, i, total = len(run), 0, 0
+    while i + n <= len(lines):
+        if lines[i:i + n] == run:
+            total += 1
+            i += n
+        else:
+            i += 1
+    return total
+
+
+def duplication(orig, ours):
+    """Computations one side repeats and the other shares.
+
+    This is the signal that is easy to misread. When MSVC hoists an expression out of both
+    arms of an `if`/`else` and the original did not, the mix delta shows up as one missing
+    copy of each mnemonic in the run - on `renderDebugDataAiInfo` it read `add -1, mov -1,
+    push -1`, which looks like three unrelated missing instructions and is really one missing
+    duplicate of `mov reg, [reg + G]; add reg, 1; push reg`.
+
+    Comparing the number of occurrences, with registers anonymised so the two copies match
+    despite being allocated differently, names it directly. The fix direction follows from
+    which side repeats: MSVC hoists the *maximal* common expression, so if the original
+    repeats a run that we share, writing the whole expression out in both arms will not
+    reproduce it - the source has to share exactly the prefix the original shares, typically
+    an index in a local, and write the rest out.
+    """
+    so = [skeleton(l) for l in orig]
+    su = [skeleton(l) for l in ours]
+    sm = difflib.SequenceMatcher(None, so, su, autojunk=False)
+    found = []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == 'equal':
+            continue
+        # whichever side has the surplus instructions in this region is the side that might
+        # be repeating something; a `replace` can hold a whole extra copy too
+        if tag == 'delete' or (tag == 'replace' and (i2 - i1) >= (j2 - j1)):
+            extra, side, mine, other = so[i1:i2], 'original', so, su
+        else:
+            extra, side, mine, other = su[j1:j2], 'ours', su, so
+        # Search the region's sub-runs, longest first: the repeated computation is often only
+        # part of a larger differing region. Require the run to occur at least TWICE on its
+        # own side - otherwise a single instruction that merely MOVED looks like a
+        # duplication, which is what a first version of this reported (`cmp`/`jne` at 1 vs 0).
+        best = None
+        for length in range(len(extra), 1, -1):
+            for start in range(0, len(extra) - length + 1):
+                run = extra[start:start + length]
+                c_mine = _count_run(mine, run)
+                if c_mine < 2:
+                    continue
+                c_other = _count_run(other, run)
+                if c_mine > c_other:
+                    best = (side, run, c_mine, c_other)
+                    break
+            if best:
+                break
+        if best:
+            found.append(best)
+    # the longest run is the most informative, and duplicate reports of the same run add
+    # nothing
+    seen, out = set(), []
+    for side, run, mine_c, other_c in sorted(found, key=lambda f: -len(f[1])):
+        key = (side, tuple(run))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append((side, run, mine_c, other_c))
+    return out
+
+
+def report_duplication(found):
+    """Name a hoisted-or-not-hoisted duplicate and which way to fix it."""
+    for side, run, mine, theirs in found[:3]:
+        print('')
+        if side == 'original':
+            print('  DUPLICATION: the original computes this run %d time(s), we compute it %d:'
+                  % (mine, theirs))
+        else:
+            print('  DUPLICATION: we compute this run %d time(s), the original computes it %d:'
+                  % (mine, theirs))
+        for line in run[:8]:
+            print('      %s' % line)
+        if len(run) > 8:
+            print('      ... %d more' % (len(run) - 8))
+        print('')
+        if side == 'original':
+            print('  So MSVC hoisted out of a branch what the original left duplicated. It hoists')
+            print('  the MAXIMAL common expression, so writing the whole expression out in both')
+            print('  arms will NOT reproduce this - that only makes the whole chain common. Share')
+            print('  in the source exactly the prefix the original shares (an index or a base in a')
+            print('  local) and write the rest out in each arm. Sharing more than it did costs an')
+            print('  instruction too: a pointer to the element pays an `add` where the original')
+            print('  keeps index*size and re-folds the base into each load.')
+        else:
+            print('  So we recompute in each arm what the original computes once. Introduce a')
+            print('  local for it, placed where the original shares it.')
+        print('  Worked example: tools/compiler-internals/msvc-backend.md, the AIV block of')
+        print('  renderDebugDataAiInfo - this exact signal was 67.5% -> 83.6%.')
 
 
 def report_registers(div):
@@ -211,6 +313,7 @@ def report(m):
     if m['raw'] is not None:
         print('  raw   %.3f   <- reccmp, mostly register and slot naming' % m['raw'])
     print('  delta %d instruction(s) of mismatched kind' % m['delta'])
+    report_duplication(m['dup'])
     report_registers(m['div'])
     if m['deltas']:
         print('')
@@ -245,45 +348,56 @@ def targets():
         yield f, name, (float(e['matching']) if e else None)
 
 
-if ALL:
-    rows = []
-    for f, name, raw in targets():
-        if raw is not None and raw >= 0.9999:
-            continue
-        try:
-            m = measure(f, name, raw)
-        except Exception as exc:
-            print('# %-44s skipped: %s: %s' % (name, type(exc).__name__, exc))
-            continue
-        if m:
-            rows.append(m)
-    if not rows:
-        sys.exit('every function in the build list matches; nothing to rank')
-    rows.sort(key=lambda r: (-r['delta'], r['kind']))
-    print('%-50s %6s %6s %6s %5s  %s' % ('function', 'kind', 'shape', 'raw', 'delta', 'verdict'))
-    for r in rows:
-        verdict = 'mix' if r['delta'] > 0 else ('order' if r['kind'] < 0.99 else 'allocation')
-        print('%-50s %6.3f %6.3f %6s %5d  %s'
-              % (r['name'].split('::')[-1], r['kind'], r['shape'],
-                 '-' if r['raw'] is None else '%.3f' % r['raw'], r['delta'], verdict))
-    print('')
-    print('Three categories, in descending order of how reachable they are from the source:')
-    print('  delta > 0                  wrong instruction mix. Each mismatched mnemonic is a')
-    print('                             concrete defect; this is where source work pays.')
-    print('  delta 0, kind < 0.99       right mix, wrong order - statement order, reachable.')
-    print('  delta 0, kind ~ 1.000      same instructions in the same order. The gap is operand')
-    print('                             form and register naming; leave these alone.')
-    sys.exit(0)
+def main():
+    global SCORE_ONLY, ALL
+    SCORE_ONLY = '--score' in sys.argv
+    ALL = '--all' in sys.argv
+    want = next((a for a in sys.argv[1:] if not a.startswith('--')), None)
+    if not ALL and want is None:
+        sys.exit(__doc__)
+    if ALL:
+        rows = []
+        for f, name, raw in targets():
+            if raw is not None and raw >= 0.9999:
+                continue
+            try:
+                m = measure(f, name, raw)
+            except Exception as exc:
+                print('# %-44s skipped: %s: %s' % (name, type(exc).__name__, exc))
+                continue
+            if m:
+                rows.append(m)
+        if not rows:
+            sys.exit('every function in the build list matches; nothing to rank')
+        rows.sort(key=lambda r: (-r['delta'], r['kind']))
+        print('%-50s %6s %6s %6s %5s  %s' % ('function', 'kind', 'shape', 'raw', 'delta', 'verdict'))
+        for r in rows:
+            verdict = 'mix' if r['delta'] > 0 else ('order' if r['kind'] < 0.99 else 'allocation')
+            print('%-50s %6.3f %6.3f %6s %5d  %s'
+                  % (r['name'].split('::')[-1], r['kind'], r['shape'],
+                     '-' if r['raw'] is None else '%.3f' % r['raw'], r['delta'], verdict))
+        print('')
+        print('Three categories, in descending order of how reachable they are from the source:')
+        print('  delta > 0                  wrong instruction mix. Each mismatched mnemonic is a')
+        print('                             concrete defect; this is where source work pays.')
+        print('  delta 0, kind < 0.99       right mix, wrong order - statement order, reachable.')
+        print('  delta 0, kind ~ 1.000      same instructions in the same order. The gap is operand')
+        print('                             form and register naming; leave these alone.')
+        return
 
-hits = [(f, n, r) for f, n, r in targets()
-        if want.lower() in n.lower() or want.lower() in f.lower()]
-if not hits:
-    sys.exit('no function matching %r in the build list' % want)
-for f, n, r in hits:
-    m = measure(f, n, r)
-    if m is None:
-        continue
-    if SCORE_ONLY:
-        print('%.4f %d' % (m['kind'], m['delta']))
-    else:
-        report(m)
+    hits = [(f, n, r) for f, n, r in targets()
+            if want.lower() in n.lower() or want.lower() in f.lower()]
+    if not hits:
+        sys.exit('no function matching %r in the build list' % want)
+    for f, n, r in hits:
+        m = measure(f, n, r)
+        if m is None:
+            continue
+        if SCORE_ONLY:
+            print('%.4f %d' % (m['kind'], m['delta']))
+        else:
+            report(m)
+
+
+if __name__ == '__main__':
+    main()
