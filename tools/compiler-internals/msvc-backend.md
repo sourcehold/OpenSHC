@@ -574,6 +574,72 @@ locals to look for; the mix told us *which*.
 The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
 evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
 
+## The ordering key decoded: a per-region benefit/penalty balance
+
+`+0x0c` is accumulated at the tail of `FUN_10b10420`, which the colourer calls for each register
+class just before it builds the ordered list. The call chain is
+
+```
+dop2_GlobalRegAlloc   0x10c07350   driver
+  -> colourer         0x10b0cf40   loops register classes 6..0
+       -> 0x10b0ded0               live ranges
+       -> 0x10b10420               ** accumulates +0x0c **
+       -> 0x10b11560, 0x10b11770   walks the symbol hash table, calls InsertInList per candidate
+            -> 0x10b16720          interference, per block
+                 -> 0x10b16bd0     interference, per instruction
+  -> ChoosePhysReg    0x10b14e2a   picks the cheapest free register
+```
+
+and the accumulation itself is:
+
+```
+0x10b1145b  add  edi, 1            ; count every element of list A
+0x10b11476  add  edi, 1            ; plus list B elements carrying flag 0x10
+0x10b11484  imul edi, ebp          ; ebp: a weight passed in - block frequency
+0x10b11489  mov  esi, edi          ; esi = count * weight
+
+; a candidate REFERENCED in this region:
+0x10b11495  mov  ecx, [eax+0x18]   ; its reference multiplier for the region
+0x10b11498  imul ecx, esi
+0x10b1149b  add  [eax+0xc], ecx    ; key += refs * count * weight
+0x10b114a2  mov  [eax+0x18], edx   ; reset the multiplier
+
+; a candidate LIVE here but NOT referenced:
+0x10b114d2  cmp  dword ptr [0x10d0ffdc], 2
+0x10b114db  sub  [eax+0xc], ebp    ; key -= weight          (when that global is 2)
+0x10b114e0  sub  [eax+0xc], esi    ; key -= count * weight  (otherwise)
+```
+
+So the key is **not** a use count. It is a balance taken region by region: a value gains
+`refs * count * weight` where it is used, and is **penalised** `count * weight` for every region
+it is live across without being referenced. A register held open through code that does not touch
+it is charged for.
+
+That predicts the numbers we measured, which is the check worth doing. On
+`aiGiveRaidInstructions` `playerID` comes out at **-147** - live across the whole loop and barely
+read inside it - and `i` at **1**; both are among the locals `slot_map.py` independently shows in
+stack slots, and the negative-key candidates are exactly the spilled set.
+
+**The consequence is that the key depends on the block structure, not just on how often a value
+is named.** Two source versions with identical reference counts can rank differently if their
+regions differ. That resolves the `aiGiveRaidInstructions` question left open above: our base
+temporary outranks `this` (128 against 93) while the original's `this` won `ebx`, and the two
+binaries reference those values an identical 27 and 22 times - but our block structure still
+differs, because we emit one copy of the tile computation where the original emits two, which is
+one region fewer. The register swap is downstream of that mix defect, which is what
+`structural_diff.py` reports from the divergence positions alone.
+
+So the lever for that function is the duplication, not anything register-side. Moving `i` into
+the `for` initialiser reached delta 3 but disturbed too much else (56.8% -> 44.1%); what is wanted
+is the missing duplicate on its own.
+
+A note on tooling for this kind of chase: REA runs Ghidra in an ephemeral isolated project, which
+decompiles `c2.dll` without touching a shared Ghidra session's `currentProgram`. It will not load
+a caller-supplied PDB, though, so symbol names are absent - `FUN_10b10420` and friends are as good
+as it gets, and the `P2/*.c` assert strings are what anchor a function to its source file
+(`FUN_10b133e0` reports `P2/color.c` line 0x1b37). For named symbols a separate Ghidra project
+with `c2.pdb` alongside would be the escalation.
+
 ## Correction: the candidate ordering key is +0x0c, not +0x40
 
 An earlier version of these notes said `InsertInList` sorts candidates on `+0x40`, a weighted use
