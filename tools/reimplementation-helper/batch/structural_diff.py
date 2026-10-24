@@ -57,11 +57,65 @@ if not ALL and want is None:
 
 REG = re.compile(r'\b(e?(?:ax|bx|cx|dx|si|di|bp|sp)|[a-d][lh])\b')
 IMM = re.compile(r'\b(?:0x[0-9a-f]+|\d+)\b')
+NAMED = re.compile(r'\b(e(?:ax|bx|cx|dx|si|di|bp))\b')
 
 
 def shape(line):
     """Operand form with register names and constants anonymised."""
     return IMM.sub('k', REG.sub('r', line))
+
+
+def skeleton(line):
+    """The instruction with only its register NAMES anonymised."""
+    return NAMED.sub('r', line)
+
+
+def register_divergence(orig, ours):
+    """Where each side first diverges, and how the register names map.
+
+    A function can be structurally identical and still score badly purely because the
+    registers are named differently, and the two cases need opposite responses - so it
+    matters which one you are looking at. The discriminator is WHERE each kind of difference
+    starts. Register allocation is deterministic given the IR, so when the first register
+    difference sits at or after the first structural difference, the registers are an *effect*
+    of that structural defect and will follow once it is fixed; attacking them directly is
+    wasted work. There is also no cost-side lever to attack them with: in `ChoosePhysReg` the
+    per-register cost array came out all zeros for every pick in `renderDebugDataAiInfo`, so
+    the choice was simply the first free register in class order.
+
+    That function is the worked case: 293 of its 305 instructions align once register names
+    are stripped, the first 149 have identical registers, and the rotation starts inside the
+    one block whose instruction stream still differs.
+    """
+    so = [skeleton(l) for l in orig]
+    su = [skeleton(l) for l in ours]
+    # the first STRUCTURAL difference is measured on mnemonics alone. Measuring it on whole
+    # operands instead puts it at instruction 1 of almost every function, because our side
+    # names `___security_cookie` where the original has a bare address - a symbolisation
+    # difference, not a structural one, and it would make the comparison below meaningless.
+    mo = [l.split()[0] for l in orig if l.split()]
+    mu = [l.split()[0] for l in ours if l.split()]
+    ops = difflib.SequenceMatcher(None, mo, mu, autojunk=False).get_opcodes()
+    first_struct = next((i1 for tag, i1, _i2, _j1, _j2 in ops if tag != 'equal'), None)
+    sm = difflib.SequenceMatcher(None, so, su, autojunk=False)
+    first_reg = None
+    aligned = 0
+    subs = collections.Counter()
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag != 'equal':
+            continue
+        for k in range(i2 - i1):
+            aligned += 1
+            ra = NAMED.findall(orig[i1 + k])
+            rb = NAMED.findall(ours[j1 + k])
+            if ra != rb:
+                if first_reg is None:
+                    first_reg = i1 + k
+                for a, b in zip(ra, rb):
+                    if a != b:
+                        subs[(a, b)] += 1
+    return {'skel': sm.ratio(), 'aligned': aligned, 'first_struct': first_struct,
+            'first_reg': first_reg, 'subs': subs}
 
 
 def ratio(a, b):
@@ -79,6 +133,7 @@ def measure(path, name, raw):
     return {
         'name': name,
         'raw': raw,
+        'div': register_divergence(orig, ours),
         'kind': ratio(mo, mu),
         'shape': ratio([shape(l) for l in orig], [shape(l) for l in ours]),
         'n_orig': len(mo),
@@ -86,6 +141,61 @@ def measure(path, name, raw):
         'delta': sum(abs(a - b) for _k, a, b in deltas),
         'deltas': sorted(deltas, key=lambda t: -abs(t[1] - t[2])),
     }
+
+
+def report_registers(div):
+    """Say whether the register naming is a cause or an effect."""
+    if not div['subs']:
+        return
+    fs, fr = div['first_struct'], div['first_reg']
+    print('')
+    total = sum(div['subs'].values())
+    print('  registers: %d operand(s) differ only in which register was used.' % total)
+    print('  %-14s %s' % ('substitution', 'count'))
+    for (a, b), c in div['subs'].most_common(6):
+        print('  %-4s -> %-6s %5d' % (a, b, c))
+    # A permutation that closes into a cycle means the allocation is structurally right and
+    # the scratch registers were simply handed out in a different order. Take each source
+    # register's most common target rather than any target, and report what share of the
+    # substitutions that permutation actually covers - the minority ones are real and
+    # claiming a clean cycle over them would overstate the result.
+    best = {}
+    for (a, b), c in div['subs'].most_common():
+        if a not in best:
+            best[a] = (b, c)
+    mapping = dict((a, b) for a, (b, _c) in best.items())
+    covered = sum(c for _a, (_b, c) in best.items())
+    closed = (len(set(mapping.values())) == len(mapping)
+              and all(b in mapping for b in mapping.values())
+              and len(mapping) > 2)
+    if closed:
+        cycle = []
+        a = sorted(mapping)[0]
+        for _ in range(len(mapping)):
+            cycle.append(a)
+            a = mapping[a]
+        print('')
+        print('  The dominant substitution is a closed cycle %s, covering %d of %d (%.0f%%).'
+              % (' -> '.join(cycle + [cycle[0]]), covered, total, 100.0 * covered / total))
+        print('  A closed cycle means the allocation is structurally right and the scratch')
+        print('  registers were merely handed out in a different order.')
+    if fs is not None and fr is not None and fr >= fs:
+        print('')
+        print('  The first STRUCTURAL difference is at original instruction %d and the first' % fs)
+        print('  REGISTER difference at %d, so the registers diverge at or after the structure'
+              % fr)
+        print('  does. Allocation is deterministic given the IR, so these register names are')
+        print('  an effect of that structural defect - fix it and they follow. Where this was')
+        print('  measured (renderDebugDataAiInfo) there was also no cost-side lever to pull:')
+        print('  ChoosePhysReg picked on an all-zero cost array, so the first free register in')
+        print('  class order won. Check it per function with reg_scores.py --whyreg.')
+    elif fr is not None and (fs is None or fr < fs):
+        print('')
+        print('  The registers diverge at instruction %d, BEFORE any structural difference' % fr)
+        print('  (%s), so this is not downstream of a mix defect. The levers are the order'
+              % ('none at all' if fs is None else 'at %d' % fs))
+        print('  values are created in and what is live across each point - statement order -')
+        print('  not how anything is spelled or typed. See tools/compiler-internals.')
 
 
 def report(m):
@@ -96,9 +206,12 @@ def report(m):
           % m['kind'])
     print('  shape %.3f   <- operand form, once registers and constants are anonymised'
           % m['shape'])
+    print('  skel  %.3f   <- the same instructions with only REGISTER NAMES anonymised'
+          % m['div']['skel'])
     if m['raw'] is not None:
         print('  raw   %.3f   <- reccmp, mostly register and slot naming' % m['raw'])
     print('  delta %d instruction(s) of mismatched kind' % m['delta'])
+    report_registers(m['div'])
     if m['deltas']:
         print('')
         print('  %-8s %-8s %-8s' % ('mnemonic', 'original', 'ours'))

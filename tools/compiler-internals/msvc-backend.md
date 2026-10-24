@@ -571,6 +571,54 @@ locals to look for; the mix told us *which*.
 The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
 evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
 
+## Register allocation is an effect, not a cause
+
+The register names in a near-matching function are not a problem to be attacked directly, and
+`ChoosePhysReg` says why. Dumping the per-register cost array at every pick in
+`renderDebugDataAiInfo` (invocation #800, 41 candidates) gave **all zeros** for every volatile
+pick:
+
+```
+candidate              got   eax     ecx     edx     ebx     esp     ebp     esi     edi
+(temp)                 esi   0       0       0       0       0       0       [0]     0
+y                      edi   0       0       0       0       0       0       0       [0]
+x                      ebx   0       0       0       [0]     0       0       0       0
+color                  ebp   0       0       0       0       0       [7500]  0       0
+siegeTroops            eax   [0]     0       0       0       0       0       -1      0
+castleID               eax   [0]     0       0       0       0       0       0       0
+```
+
+With the costs tied at zero the minimisation is vacuous and the winner is simply the first free
+entry in the class list - `eax, ecx, edx, esi, edi, ebx, ebp`. Nothing about how the source is
+spelled or typed enters into it. The only inputs left are the order candidates are served
+(score descending, then the symbol-id tiebreak) and which registers are still live at that
+point, and both of those are decided by the instruction stream.
+
+That makes the useful question not *which* registers differ but **where** they start to
+differ, which `structural_diff.py` now reports:
+
+| | `renderDebugDataAiInfo` | `aiCreateSiegeUnits` |
+| --- | --- | --- |
+| instructions aligned on the register-stripped skeleton | 293 of 305 | 319 of 322 |
+| first structural difference | instruction 139 | instruction 30 |
+| first register difference | instruction 152 | instruction 223 |
+| dominant substitution | `eax -> edx -> ecx -> eax`, 90% of 59 | `esi <-> ecx`, 2 |
+
+In both cases the registers diverge *after* the structure does, and in
+`renderDebugDataAiInfo` the first 149 instructions have identical registers while the
+callee-saved assignments - `ebx` for `x`, `edi` for `y`, `esi` for the player base, `ebp` for
+the colour - are identical throughout. A substitution set that closes into a cycle is the
+signature of this: the allocation is structurally right and the scratch registers were handed
+out in a different order, which happens as soon as one extra or missing instruction changes
+what is live.
+
+So the rule is: if the first register difference is at or after the first structural
+difference, the register names are an effect of that structural defect and will follow once it
+is fixed. Spending effort on them while a mix defect remains is spending it on a symptom. The
+converse case - registers diverging *before* any structural difference - is the one worth
+investigating, and there the lever is statement order, because that is what sets both the
+serve order and the liveness.
+
 ## Two things that do not work
 
 **Declaration order, when there are no ties.** `StkColorCmp` sorts by class and weight and uses declaration
