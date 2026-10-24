@@ -134,6 +134,7 @@ def measure(path, name, raw):
         'raw': raw,
         'div': register_divergence(orig, ours),
         'dup': duplication(orig, ours),
+        'flips': polarity(orig, ours),
         'kind': ratio(mo, mu),
         'shape': ratio([shape(l) for l in orig], [shape(l) for l in ours]),
         'n_orig': len(mo),
@@ -141,6 +142,57 @@ def measure(path, name, raw):
         'delta': sum(abs(a - b) for _k, a, b in deltas),
         'deltas': sorted(deltas, key=lambda t: -abs(t[1] - t[2])),
     }
+
+
+NEGATION = {'je': 'jne', 'jne': 'je', 'jl': 'jge', 'jge': 'jl', 'jg': 'jle', 'jle': 'jg',
+            'jb': 'jae', 'jae': 'jb', 'ja': 'jbe', 'jbe': 'ja', 'js': 'jns', 'jns': 'js',
+            'jp': 'jnp', 'jnp': 'jp'}
+
+
+def polarity(orig, ours):
+    """Branches where one side jumps on a condition and the other on its negation.
+
+    `diff_jcc.py` covers strictness steps (`jl` against `jle`) and swapped compare operands,
+    but not a plain polarity flip, which is a different source defect: the `if`/`else` arms are
+    the other way round, so the original's fallthrough is our jump target. Worth 56.8% -> 60.3%
+    on `aiGiveRaidInstructions`, whose final navigation test read `== FALSE` where the original
+    had `!= FALSE`.
+
+    Only pairs inside a differing region are considered, positionally - a flip shows up there
+    because the inverted branch makes the surrounding block fail to align.
+    """
+    so = [skeleton(l) for l in orig]
+    su = [skeleton(l) for l in ours]
+    out = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, so, su,
+                                                       autojunk=False).get_opcodes():
+        if tag != 'replace':
+            continue
+        ob = [(i1 + k, orig[i1 + k].split()[0]) for k in range(i2 - i1)
+              if orig[i1 + k].split() and orig[i1 + k].split()[0] in NEGATION]
+        ub = [(j1 + k, ours[j1 + k].split()[0]) for k in range(j2 - j1)
+              if ours[j1 + k].split() and ours[j1 + k].split()[0] in NEGATION]
+        for (oi, om), (_uj, um) in zip(ob, ub):
+            if NEGATION[om] == um:
+                out.append((oi, om, um, ' / '.join(orig[max(0, oi - 2):oi])))
+    return out
+
+
+def report_polarity(flips):
+    """Name an inverted branch and how to fix it."""
+    if not flips:
+        return
+    print('')
+    print('  POLARITY: %d branch(es) jump on the opposite condition:' % len(flips))
+    for oi, om, um, ctx in flips[:4]:
+        print('      original instruction %-4d  original %-4s ours %-4s' % (oi, om, um))
+        if ctx:
+            print('          preceded by: %s' % ctx[:70])
+    print('')
+    print('  The original falls through where we jump, so its `if`/`else` arms are the other')
+    print('  way round. Swap them and invert the test - semantically identical, and it is what')
+    print('  took aiGiveRaidInstructions from 56.8% to 60.3%. Note diff_jcc.py does NOT report')
+    print('  this: it covers strictness steps and operand order, not a plain polarity flip.')
 
 
 def _count_run(lines, run):
@@ -325,6 +377,7 @@ def report(m):
     if m['raw'] is not None:
         print('  raw   %.3f   <- reccmp, mostly register and slot naming' % m['raw'])
     print('  delta %d instruction(s) of mismatched kind' % m['delta'])
+    report_polarity(m['flips'])
     report_duplication(m['dup'])
     report_registers(m['div'])
     if m['deltas']:
