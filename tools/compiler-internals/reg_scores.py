@@ -422,7 +422,9 @@ if find or advise or rankdiff or whyreg or whycost:
     txt = run(lines, 'find')
     rows = {}
     for m in re.finditer(r'N (\d+) (-?\d+) (-?\d+) [0-9a-f]{8}\s+"([^"]*)"', txt):
-        rows.setdefault(int(m.group(1)), []).append((int(m.group(2)), m.group(4)))
+        # group(2) is +0x40 and group(3) is +0x0c. The ORDERING key is +0x0c - see the note
+        # in the header - so that is what goes in the ranking.
+        rows.setdefault(int(m.group(1)), []).append((int(m.group(3)), m.group(4)))
     want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
     hits = [i for i in sorted(rows)
             if not want or any(w in [n for _s, n in rows[i]] for w in want)]
@@ -480,7 +482,7 @@ if probe:
     sys.exit(0)
 
 q = BS + '"'
-cand = ('.printf ' + q + 'CAND %4d %02x ' + q + ', poi(@eax+0x40), poi(@eax+0x44); '
+cand = ('.printf ' + q + 'CAND %4d %4d %02x ' + q + ', poi(@eax+0xc), poi(@eax+0x40), poi(@eax+0x44); '
         '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
         '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
 lines = ['sxe ld:c2', 'g', 'r $t0=0',
@@ -491,11 +493,15 @@ lines = ['sxe ld:c2', 'g', 'r $t0=0',
          'g', 'q', '']
 txt = run(lines, 'inv' + str(int(inv)))
 rows = []
-for m in re.finditer(r'CAND\s+(-?\d+)\s+([0-9a-f]+)\s*(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
-    rows.append((int(m.group(1)), m.group(2), m.group(3) or '(temp)'))
+for m in re.finditer(r'CAND\s+(-?\d+)\s+(-?\d+)\s+([0-9a-f]+)\s*(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
+    rows.append((int(m.group(1)), int(m.group(2)), m.group(3), m.group(4) or '(temp)'))
 if not rows:
     sys.exit('no candidates seen for invocation %s - run --probe to pick one' % inv)
-print('%-6s %-5s %s' % ('score', 'id', 'name'))
-for score, sid, name in rows:
-    print('%-6d %-5s %s' % (score, sid, name))
+print('%-8s %-8s %-5s %s' % ('key+0xc', 'wt+0x40', 'id', 'name'))
+for key, wt, sid, name in rows:
+    print('%-8d %-8d %-5s %s' % (key, wt, sid, name))
+print('')
+print('Candidates are served in `key+0xc` order, highest first, and each takes the cheapest')
+print('register still free, so this column decides who gets ebx and who gets ebp. A low or')
+print('negative key is a value headed for the stack - compare with slot_map.py.')
 print('\n%d candidates; higher score is served first and gets its pick of the registers.' % len(rows))

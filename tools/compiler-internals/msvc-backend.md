@@ -574,6 +574,95 @@ locals to look for; the mix told us *which*.
 The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
 evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
 
+## Correction: the candidate ordering key is +0x0c, not +0x40
+
+An earlier version of these notes said `InsertInList` sorts candidates on `+0x40`, a weighted use
+count, and that `+0x0c` was only a tie-break. That is backwards, and it sent a whole afternoon of
+work on `aiGiveRaidInstructions` chasing the wrong number. Disassembling `@InsertInList@8` at
+`0x10b11970` settles it:
+
+```
+0x10b1197f  mov ecx, dword ptr [edi + 0xc]     ; the candidate already in the list
+0x10b11983  mov esi, dword ptr [eax + 0xc]     ; the one being inserted
+0x10b11986  cmp esi, ecx
+0x10b11988  jg  0x10b119e3                     ; greater goes first - descending on +0x0c
+0x10b1198a  jne 0x10b11994
+0x10b1198c  mov ecx, dword ptr [eax + 0x44]    ; tie on +0x0c: compare the symbol id
+0x10b1198f  cmp ecx, dword ptr [edi + 0x44]
+```
+
+**Primary key `+0x0c`, descending; tie-break `+0x44`, the symbol id.** `+0x40` is a separate
+weight that does not decide the order.
+
+Where the old claim came from: there is a *second*, very similar insert function immediately
+after this one, at `0x10b119f0`, and that one does sort on `+0x40` - and it *writes* `+0x0c`,
+copying it from a neighbouring record:
+
+```
+0x10b11a49  mov edi, dword ptr [edx + 0x40]
+0x10b11a4c  cmp edi, dword ptr [ecx + 0x40]
+...
+0x10b11a63  mov eax, dword ptr [eax + 0xc]
+0x10b11a67  mov dword ptr [edx + 0xc], eax
+```
+
+The two are easy to confuse. The one the harness breakpoints, and the one whose candidates match
+the function being compiled, is `0x10b11970`.
+
+**How to verify which field orders the picks**, rather than trusting either note: dump both
+fields per candidate and compare each ordering against the actual sequence of register
+assignments from `--whyreg`. On `aiGiveRaidInstructions` the picks went `tile`, temp, 
+`targetBuildingID`, temp, temp, `this`, `buildingID` x3, `y`, `x`:
+
+| field | order it predicts | matches the picks? |
+| --- | --- | --- |
+| `+0x0c` | tile 212, temp 148, targetBuildingID 140, temp 128, temp 108, this 93, buildingID 88, y 80 | **yes, exactly** |
+| `+0x40` | temp 82, this 60, tile 52, i 46, temp 44, tribeID 44 | no - puts `this` and a temp ahead of `tile` |
+
+`+0x0c` reads as a *net* benefit: the values that come out low or negative (`i` at 1,
+`playerID` at -147) are exactly the ones `slot_map.py` shows living in stack slots, so the two
+tools cross-check each other.
+
+A dead end worth not repeating: trying to find the code that *computes* `+0x0c` by taking a
+candidate record's address from one run and arming `ba w4 <addr>+0xc` in the next. The records
+are heap-allocated and the addresses are **not** stable between runs - the watchpoint fired
+inside `ntdll!RtlpFreeHeap` and the record read back a symbol id of `311b11c`. The address has
+to be captured and the watchpoint armed within a single run, which needs a breakpoint command
+that stops rather than continuing (omit the trailing `gc`) so the script regains control.
+
+Also: a linear capstone sweep of `c2.dll`'s `.text` stops at the first byte it cannot decode,
+which gave 12106 instructions out of a 1.9 MB section and made a scan for field writes look
+almost empty. Resync by skipping one byte and continuing; the real count is 647653, with 291
+writes to `[reg + 0x40]` and 2543 to `[reg + 0xc]`.
+
+## What this does and does not unlock for aiGiveRaidInstructions
+
+The function's remaining register gap is a clean two-cycle: the original keeps `this` in `ebx`
+and `playerID * 0x39f4` (the player-record base) in `ebp`; ours has them swapped, which accounts
+for 46 of its 70 differing operands. `ebx` precedes `ebp` in the class list, so whichever is
+served first takes it, and with the corrected key our base temporary sits at **128** against
+`this` at **93** - so the temporary is served first and takes `ebx`.
+
+For the original to have given `this` `ebx`, its `this` must have outranked its base temporary.
+Both binaries reference those two values an identical 27 and 22 times, and the call pattern is
+identical on both sides (14 `mov ecx, <this>` plus 3 `mov ecx, <global>`), so there is no
+difference in use counts to exploit. `this` is a genuine `__thiscall` parameter in both - the
+original does `mov ebx, ecx`, ours `mov ebp, ecx` - so this is not a case of the object being
+reached as a global instead.
+
+Three source forms were measured and all rejected:
+
+| change | effect |
+| --- | --- |
+| `PlayerData& pd = ...playerDataArray[playerID]` used throughout | base moves to `esi`, `this` stays in `ebp`; quick_diff ratio 0.695 -> 0.499 |
+| `AICState* self = this;` for the member calls | byte-identical output, the optimiser folds it |
+| `i` moved into the `for` initialiser | mix delta 9 -> 3, but 56.8% -> **44.1%** |
+
+So the ordering key is now known and measurable, and it says the two values are ranked the way
+they are for reasons that are not expressible in the source. What would settle it is the formula
+behind `+0x0c`, which is still open - the write that computes it has not been located, only the
+two places that copy it.
+
 ## Register allocation is an effect, not a cause
 
 The register names in a near-matching function are not a problem to be attacked directly, and
