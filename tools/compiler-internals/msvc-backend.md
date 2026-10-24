@@ -1827,3 +1827,266 @@ but "`_runXPos`'s benefit beats `this`'s by 38, which no spelling of equivalent 
 Left at 58.7%. The useful general lesson is the middle column above - `--whyreg` naming a single
 `PREF +4` makes a function look one edit away from matching, and the benefit table is what tells
 you whether any edit can reach it.
+
+**Correction (next day).** The paragraph above says the serve order is the `+0x40` benefit and
+that `_runXPos` beat `this$GSCopy` 104 to 66. The call graph read since (see "The two keys,
+settled by the call graph") shows `Color` walks `InsertInList`, which sorts by **`+0x0c`**; `+0x40`
+is what `SpillOrDefer` ranks by. The decision was still made in round one and still against
+`this`: `_runXPos` keys **135** and `this$GSCopy`'s *first-round* key is **-65** - the +149 that
+appeared to put it ahead is a split region from a later round, exactly the "re-scoring, not
+regions" trap the paragraph warns about one line later, applied to the wrong column. The
+conclusion is unchanged (and stronger: 200 units, not 38). The mechanism statement was wrong,
+and the `--rankdiff` output quoted above labels the `+0x0c` column "benefit", which is what
+started it.
+
+## The two keys, settled by the call graph: `+0x0c` orders colouring, `+0x40` orders spilling
+
+This document has flipped twice on which field orders the register candidates. The call graph
+settles it, and both earlier readings were partly right about different things.
+
+**The static evidence** (`call` scan of `.text`, names from c2.pdb):
+
+```
+@Color@4            10b0d155  call @Spillcosts@12          (and again at 10b0d2ab - rounds)
+                    10b0d3aa  call @InsertInList@8          sorts by +0x0c desc, tie-break +0x44
+                    10b0d37e  call @SpillOrDefer@12
+                    10b0d471  call @ChoosePhysReg@...       walks the list
+@SpillOrDefer@12    10b0d6e5  call @InsertByBenefit@8       sorts by +0x40
+@OrderGlobregs@12   10b118c6  call @InsertInList@8
+@StackPacking@4     10be8c8a  call @ColorStackElements@12   -> @colorElemental   (STACK SLOTS, not registers)
+```
+
+So: **`Color` colours in `InsertInList` order, which is `+0x0c` descending** (the spill-cost key
+decoded earlier as `refs x count x 2^depth` per region). **`+0x40` is the benefit `SpillOrDefer`
+ranks by** when a candidate cannot be coloured and something has to be spilled or deferred to a
+later round. And `ColorStackElements` / `colorElemental`, whose names suggest a Chaitin-Briggs
+colouring stack, are the *stack-slot* allocator - they hang off `StackPacking`, which is the
+frame layout `slot_map.py` already models. A Chaitin-style stack is not how registers are
+served here.
+
+**The dynamic evidence agrees once rounds are respected.** `recruitHarrassingSiegeEngines` serves
+`unitID` (key 44) at pick 5 and `tribeID` (key 36) at pick 11 - descending `+0x0c`, not
+descending `+0x40` (12 vs 20, which would be the other way). `renderMultilineTextUnk` serves
+`_runXPos` (key 135) before `this$GSCopy`, whose *first-round* key is **-65**; the +149 entry
+that made it look like it should have won is a later-round split region. The decision was made
+in round one, by 200 units, and the section on that function below has been corrected to say so.
+
+### `+0x40` decoded anyway: `CmdLoadCost x 2^depth` per reference
+
+`Spillcosts` writes both fields. Four sites for `+0x40`, two `add`/`sub` pairs (uses at
+`0x10b10957`/`0x10b109c5`, definitions at `0x10b10f85`/`0x10b11007` with the signs swapped):
+
+```
+if CmdCanDirectSubstitute(tuple):  eax = CmdSubCost(...)      ; folds into the instruction
+else:                              eax = CmdLoadCost(operand)   ; a load would be needed
+[ebp+0x18] += eax          ; raw sum, unweighted
+[ebp+0x24] += 1            ; reference count
+[ebp+0x40] += eax * weight ; weight = 1 << loop_depth without PGO
+```
+
+`@CmdLoadCost@4` (0x10c23740) with `_Speed != 0` - every `/O2` build - returns **2**, or **1**
+for an operand whose type byte at `+4` is `0xd`. `@CmdSubCost@8` (0x10c237c0) returns **0** on
+every path read. The subtract side charges `2`, `6`, or `_regAvail[+0x18] + 3` by opcode class,
+times weight. So the spill benefit is two points per depth-weighted reference that would
+otherwise be a load, nothing for references that fold into their instruction, less a small
+per-kind penalty. It does not multiply by the reference count the way `+0x0c` does, which is
+why the two columns can rank the same candidates differently - and why reading the wrong one
+produces confident wrong answers.
+
+### What this says about `(temp)` candidates
+
+The open question was why an unnamed `(temp)` in `renderMultilineTextUnk` sat above every named
+local and consumed `eax/ecx/edx/esi` before `_runXPos` was served. By the right column it is no
+mystery: that temp's `+0x0c` key is **552**, the highest in the function. Temps are CSE'd
+subexpressions and go through the same `refs x count x 2^depth` as everything else; one used in
+the innermost loop keys enormously. (Which subexpression it is cannot be read out of the
+candidate record - temps carry no name - so the natural guess, the `_wordReceiver` address used
+at depth 2 and 3, stays a guess.)
+
+That answers "does expression shape control temp benefits" with a narrow yes. A temp's key is
+a function of **the set of uses and their depths**, not of spelling. Naming a subexpression,
+splitting it into three scoped copies, or hoisting a buffer declaration changes none of that -
+which is exactly why three such variants came back byte-identical. What moves a temp is whether
+MSVC treats two uses as the same subexpression at all, which is the "share exactly the prefix
+the original shares" rule already recorded for `renderDebugDataAiInfo`. No second lever here.
+
+## Block merging: what runs, what it costs to misread, and `merge_probe.py`
+
+`structural_diff.py`'s POLARITY report says the original branches the other way round and
+suggests swapping the arms. That was right for `aiGiveRaidInstructions` (+3.5) and would have
+been wrong for `renderMultilineTextUnk`, where the flip was MSVC folding our two return blocks
+together after allocation - the arms were already in the original's order. The two cases are
+indistinguishable in the diff. This is about telling them apart without guessing, and it took two
+corrections to get right, both recorded because both are easy to repeat.
+
+**The call graph, from c2.pdb names and a `call` scan of `.text`:**
+
+```
+@FgDoLateFlowOptsOnce@20 ---+--> @FgTryTailMerge@16        0x10b2e1b0   pairwise tail merge
+                            +--> @FgTryCommonTailMerge@8   0x10b306c0
+                                     '--> @FgDoCommonTailMerge@20  0x10b307e0   common tail of all preds
+@FgTryEpilogMerge@20 -------+--> both of the above again
+@FgTryHeadMerge@16 -------------> @FgCompareMerge@12       0x10b2f700   head-merge comparison
+```
+
+Two merge *families*, both live for us. Each of the two "Try/Do" routines has exactly two exits,
+which is what makes the whole thing instrumentable without decoding a predicate:
+
+```
+FgTryTailMerge        mov eax, 1  @ 0x10b2e6e5   merged      xor eax, eax @ 0x10b2e6f7   declined
+FgDoCommonTailMerge   mov eax, 1  @ 0x10b30d73   merged      xor eax, eax @ 0x10b30833   declined
+```
+
+**Correction 1 - `_PogoFlag` does not select an implementation, it disables all of them.** Every
+routine above opens with `cmp dword ptr [_PogoFlag], 1` and returns 0 on the `== 1` side. A first
+reading had `FgCompareMerge` with the opposite polarity, which would have meant two mutually
+exclusive implementations with one of them dead for us. It does not: `jne` skips *past* the
+`xor eax, eax; ret` in all three. `_PogoFlag == 1` is PGO instrumentation, which has to keep
+blocks intact for its counters, so it turns block merging off wholesale. Without a profile all of
+it runs. The flag is printed on every probe run so this stays checked.
+
+**Correction 2 - both families must be counted, or the tool lies.** The first version of the
+probe read `FgTryTailMerge` alone and reported `renderMultilineTextUnk` as "20 attempts, 0
+merged - a real source-shape difference, swap the arms". Wrong: in the same window
+`FgDoCommonTailMerge` ran 17 times. The pairwise path declined everything and the common-tail
+path did the folding. A single-routine reading of a two-family mechanism produced a confident,
+specific, incorrect instruction.
+
+**Two instrument pitfalls, since both bit here.** `cdb -cf` echoes every script line, so a
+textual tag inside a breakpoint command is counted once in the echo - the first run reported
+exactly 2 of everything, which was the echoed command plus the echoed error. Print `EV %d` with
+a numeric id instead; the echo says `%d`, the hit says `3`. And a string nested inside a `bp`
+command needs `\"` - plain quotes are "Malformed string", silently setting no breakpoint.
+
+### `merge_probe.py`
+
+```
+python tools/compiler-internals/reg_scores.py FILE.cpp --find LOCAL      # invocation N
+python tools/compiler-internals/merge_probe.py FILE.cpp --invocation N
+```
+
+Counts entries and both exits of both families inside the `GlobalRegAlloc` N..N+1 window (the
+same per-function trick `reg_scores.py` uses; the late flow optimisations fall in the window).
+Get N **in the same session**: it depends on the translation unit's template population, which
+moves with the resolver state and compile command - `renderMultilineTextUnk` was #37 under one
+configuration and #74 under another, and the stale number silently measured a different function.
+
+Without `--invocation` the counts cover the whole translation unit and are dominated by the
+resolver templates merging among themselves. Those numbers are meaningful only as a **difference
+between two variants of the same file**, where the template noise cancels exactly.
+
+### Validation
+
+**Ground truth, by difference.** `countOccupiedPlayerSlots` was known to fold: the `else if`
+form with two `++_sum` sites compiles to one `add eax, 1` per unrolled body. Whole-TU probe of
+both variants:
+
+```
+                        || form     else-if form    delta
+pairwise attempts         1653          1657         +4
+pairwise merged            439           443         +4
+pairwise declined         1214          1214          0
+common-tail attempts       300           300          0
+```
+
+Exactly +4 merges for exactly 4 unrolled bodies, all pairwise, nothing else moved. That is the
+mechanism confirmed quantitatively, and it also confirms the earlier reading of *why* the else-if
+form matches: the body is larger at unroll time (two increment blocks), so the unroller stops at
+x4 instead of x8, and tail merge then folds the duplicate back - once per body - in
+FinalFlowOpts. The duplication exists only inside the window where the unroll factor is chosen.
+
+**The live case.** `renderMultilineTextUnk`, invocation #74:
+
+```
+pairwise  FgTryTailMerge       attempts  20   merged   0   declined  20
+common    FgDoCommonTailMerge  attempts  17   merged     2   declined   15
+```
+
+So the pairwise family rejected everything and the common-tail family did the work. The
+polarity flip in this function is a merge artefact, as suspected from reading the streams, and
+the instrument now says so directly instead of by inference.
+
+## Triage of every sub-100 function in AICState + FontSizeClass, and what it turned up
+
+The point of decoding the allocator was never to fix functions one at a time; it was to know
+which ones *can* be fixed before spending an afternoon on one that cannot. This is that pass,
+run over all 21 functions below normalized 100 in the 207-file build (not the 51 the status file
+suggested - see "Four stale 100s" below). Per function: `structural_diff.py`, then
+`reg_scores.py --whyreg` for who holds which register, then `--invocation N` for the
+first-round `+0x0c` keys of the two candidates in each swapped register pair.
+
+**One rule fell out of it that is worth more than the list.** When two candidates are swapped
+between two registers and their first-round keys are within a few units, one statement reorder
+can flip them. When the gap is tens of units, nothing can. The gap is the triage.
+
+### Fixed during the pass
+
+**`decideOnTribeAttackLocation`: 68.8 -> 91.6 raw, 68.2 -> 85.7 normalized, one line moved.**
+The swapped pair was `destinationX` (key 42, in `ebp`) against `targetPlayer` (key 40, in `ebx`)
+- the original has them the other way round, and 2 units is one depth-1 reference. The source
+had a store sandwiched between the two campground reads:
+
+```cpp
+int destinationX = ...playerDataArray[targetPlayer].campground.xEntry;
+tribes[tribeID].targetBuildingID = 0;                       // <- between the two reads
+int destinationY = ...playerDataArray[targetPlayer].campground.yEntry;
+```
+
+Moving the store above both reads: quick_diff 0.748 -> 0.960, register operand differences
+58 -> 6. Two further variants (inlining the reads, a `tile` local before the call) were both
+worse, so it stays there. The residue is `delta 2` - the `this` reload scheduled before the
+argument computation in the original and after it in ours - and a volatile `eax/ecx/edx` chain.
+
+### The work-list: reachable, in order
+
+| function | now | signal | the lever |
+| --- | --- | --- | --- |
+| `recruitHarrassingSiegeEngines` | 73.2 / 64.5 | delta 0, `ebx<->edi` 14/11 = `tribeID` (36) vs `unitID` (44) | key gap 8; `unitID` is served first and takes `edi`. One or two depth-1 references moved would flip it. Untested. |
+| `aiShouldAttackOrWaitForTeamCoordination` | 83.2 / 78.1 | delta 2, first structural difference at instruction 8, 5 register operands | small and structural-first; read the two mismatched instructions before anything else |
+| `computeAttackPossibilities` | 89.7 / 85.7 | delta 0, different ORDER, a DUPLICATION report | statement order, untested |
+| `updateAIStrengthState` | 97.2 / 83.3 | `kind 1.000`, same order, 12 register operands | pure register permutation, not yet analysed - `--whyreg _aicIndex` and read the gap |
+| `smallestTribeOfUnitType` | 96.2 / 93.4 | same instructions, 3 register operands | tiny; same recipe |
+
+### The stop-list, with the reason each time
+
+| function | now | why no source edit reaches it |
+| --- | --- | --- |
+| `aiRecruitUnits` | 50.0 | settled earlier: zero-register idiom plus the recruitCount increment; both forms measured |
+| `renderMultilineTextUnk` | 58.7 | settled: `_runXPos` (135) vs `this$GSCopy` (first-round -65); 200 units |
+| `addUnitToSmallestBehaviourTypeTribe` | 80.1 / 59.1 | settled: frame +4, loop-depth lever measured and refuted |
+| `sellExcessGoods` | 62.4 | two 2-cycles (`edi<->esi`, `ebp<->ebx`), each a named local against a *temp*; the named keys are -4 / -26 / -34 against `j` 88 and `amount` 104 - the temps are what win the callee-saved registers |
+| `aiGiveRaidInstructions` | 62.0 / 63.3 | `this` (93, `ebp`) swapped with a temp in `ebx`; the polarity lever here is already spent (+3.5) |
+| `chooseRandomBuildingID...` | 66.0 | delta 0, but the original computes the `buildings` pointer in the loop preheader *after* the `jle` guard and we hoist it above, which frees `ecx` and moves the tracker from `esi` to `ecx`; `[i]` indexing (0.83 -> 0.47) and a `for(...; i++, buildings++)` clause (-> 0.66) both worse |
+| `playNervous2BikFromPlayer` | 76.0 / 75.0 | 25 instructions, delta 0; the original loads `aiType` before the countdown store, we sink it past the team compare. Three orderings of the source (early `aiIndex`, `currentPlayerID` first, load after the store) all **byte-identical** - the scheduler decides, not the declaration order. `structural_diff`'s "statement order, reachable" label is wrong for this one. |
+| `sendWallPatrolUnitTribesToAIVLocations` | 77.2 / 69.4 | settled earlier: slot permutation, declaration order already optimal |
+| `updateAIPlayerState` | 81.7 / 79.9 | settled: which constant gets the callee-saved register |
+| `planToBuyWhenLowOnResource...` | 90.3 / 86.5 | settled: slot permutation |
+| `renderDebugDataAiInfo` | 98.4 / 96.3 | settled; the cookie fix gave it the last +1.2 |
+
+### Four stale 100s: header drift, not source
+
+`countSiegeEngineUnits` (now 53.8), `teamIsWeakRelativeToEnemy` (90.1), `setTribe0x11...` (96.7)
+and `someChatMessageSelection` (99.2) are all recorded as **100%** in the status file, all
+committed as such on 2026-10-18 in #261, and all have **source identical** to that commit.
+`countSiegeEngineUnits` is the clean case: `kind 1.000`, same instructions in the same order, a
+pure `ecx<->edx` swap of two temps - and it calls nothing, so no resolver flip can be the cause.
+Measured directly: data resolvers on or off, quick_diff 0.5385 either way. What *has* changed
+since that commit is 22 struct headers under `Game/` and `Map/Units/` (909 lines, the upstream
+Ghidra imports). A field that changes type or offset changes the address arithmetic, the
+address arithmetic is the temps, and the temps are what swapped.
+
+Two consequences. The status file's recorded percentages are only valid for the headers they
+were measured against, and nothing re-measures a function once it reads 100 - so a Ghidra import
+can silently regress any number of "done" functions. And the count of sub-100 functions I started
+this pass with (51, from the status file) was wrong in the other direction too: with resolvers
+on and the current headers, it is 21. **Re-measure the 100s after every upstream import.**
+
+### Two tool verdicts to distrust
+
+`structural_diff.py`'s "same instructions in a different ORDER - that is statement order, and it
+is reachable" fired on five functions here. It was right for `decideOnTribeAttackLocation` and
+wrong for `playNervous2BikFromPlayer` and `chooseRandomBuildingID`, where the reorder is the
+scheduler's and no declaration order reaches it. The label should say *may be*. And its
+DUPLICATION report pointed the wrong way on `countOccupiedPlayerSlots` (repetition from unrolling
+read as repetition from branch arms). Both are counts without a cause attached; the cause is
+what the second step - the register picks and their keys - is for.
