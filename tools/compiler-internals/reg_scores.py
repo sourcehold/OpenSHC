@@ -4,6 +4,7 @@ usage: reg_scores.py FILE.cpp --probe
        reg_scores.py FILE.cpp --find [LOCALNAME ...]
        reg_scores.py FILE.cpp --advise LOCALNAME
        reg_scores.py FILE.cpp --rankdiff LOCALNAME
+       reg_scores.py FILE.cpp --whyreg LOCALNAME
        reg_scores.py FILE.cpp --invocation N
 
 `OrderGlobregs` orders the candidate values and `Color` walks that order, calling
@@ -39,6 +40,8 @@ identically):
   sides, taken from the last reccmp run, and names the candidate that is served later than
   the original serves it - and which candidates it would have to outrank. Needs a current
   `reccmp_report.py --run`.
+* `--whyreg LOCALNAME` dumps the per-register cost array at each pick, which is the whole
+  reason one register was chosen over another, with the taken register bracketed.
 
 On what `--advise` is worth: its suggestions were tested on `aiRecruitUnits` (50.0%), whose
 scores show the strongest structural signal of any function tried - a loop counter `i` at
@@ -76,12 +79,17 @@ import common
 CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 GLOBAL_REG_ALLOC = '0x10c07350'      # @dop2_GlobalRegAlloc@4
 INSERT_IN_LIST = '0x10b11970'        # @InsertInList@8, the candidate priority insert
+ASSIGN_REG = '0x10b14e2a'            # in ChoosePhysReg: mov [cand+0x10], rec; ebx = register number
+COST_ARRAY = '0x10d14f10'            # per-register cost, indexed reg*4, rebuilt for every pick
+REGNAMES = {1: 'eax', 2: 'ecx', 3: 'edx', 4: 'ebx', 5: 'esp', 6: 'ebp', 7: 'esi', 8: 'edi'}
+CLASS0 = [1, 2, 3, 7, 8, 4, 6]       # integer class candidate list, in preference order
 BS = chr(92)
 
 args = [a for a in sys.argv[1:] if not a.startswith('--')]
 probe = '--probe' in sys.argv
 find = '--find' in sys.argv
 rankdiff = '--rankdiff' in sys.argv
+whyreg = '--whyreg' in sys.argv
 advise = '--advise' in sys.argv
 inv = None
 for a in sys.argv[1:]:
@@ -91,7 +99,7 @@ if inv is None and '--invocation' in sys.argv:
     i = sys.argv.index('--invocation')
     if i + 1 < len(sys.argv):
         inv = sys.argv[i + 1]
-if not args or (not probe and not find and not advise and not rankdiff and not inv):
+if not args or (not probe and not find and not advise and not rankdiff and not whyreg and not inv):
     sys.exit(__doc__)
 src = os.path.abspath(args[0])
 out = (common.ROOT / common.TMP / 'regscores').resolve()
@@ -285,7 +293,54 @@ def rank_diff(funcname, rows):
         print('have the same candidate set - look for a value one side carries and the other does not.')
 
 
-if find or advise or rankdiff:
+def why_register(invocation):
+    """For each pick in one invocation: the candidate, the register taken, and the cost array.
+
+    ChoosePhysReg (P2/color.c) zeroes a per-register cost array, adds each interfering
+    candidate's preference counts, adds benefit*100 for any neighbour left with a single
+    legal register, subtracts this candidate's own preference counts, and then takes the
+    cheapest register from its class list. The cost array is therefore the whole
+    explanation of one pick, and the counterfactual is arithmetic.
+    """
+    q = BS + '"'
+    costs = ', '.join('poi(' + COST_ARRAY + '+' + hex(4 * n) + ')' for n in range(1, 9))
+    cmd = ('.printf ' + q + 'PICK reg=%d costs=%d,%d,%d,%d,%d,%d,%d,%d ' + q + ', @ebx, ' + costs + '; '
+           '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
+           '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + ASSIGN_REG + ' "' + cmd + '"',
+             'bd 1',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
+             ') { be 1 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1 }; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'why' + str(invocation))
+    rows = []
+    for m in re.finditer(r'PICK reg=(-?\d+) costs=([\d,-]+) (?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
+        rows.append((int(m.group(1)), [int(x) for x in m.group(2).split(',')], m.group(3) or '(temp)'))
+    if not rows:
+        print('no register assignment seen in invocation %d' % invocation)
+        return
+    print('')
+    print('%-22s %-5s %s' % ('candidate', 'got', 'cost per register (lowest wins)'))
+    print('%-22s %-5s %s' % ('', '', ' '.join('%-7s' % REGNAMES[n] for n in range(1, 9))))
+    for reg, cost, name in rows:
+        cells = []
+        for n in range(1, 9):
+            c = str(cost[n - 1])
+            cells.append('%-7s' % (c if n != reg else '[' + c + ']'))
+        print('%-22s %-5s %s' % (name, REGNAMES.get(reg, reg), ' '.join(cells)))
+    print('')
+    print('The bracketed cost is the register that was taken. To move a candidate elsewhere,')
+    print('that register needs a cost below the bracketed one. Cost is built from interference')
+    print('- a neighbour left with one legal register charges benefit*100 for it - minus this')
+    print('candidate\'s own affinities. Affinities come from copies between the value and a')
+    print('fixed register: a parameter arriving, an argument passed in a particular slot, a')
+    print('return value in eax. So the lever is where the value crosses a call boundary, not')
+    print('how the source is spelled. Ties go to the earlier class-list entry: ' +
+          ', '.join(REGNAMES[n] for n in CLASS0) + '.')
+
+
+if find or advise or rankdiff or whyreg:
     # every named candidate with its invocation index: identification by name, which works
     # for functions smaller than the resolver-template flood that --probe ranks by size
     q = BS + '"'
@@ -302,6 +357,13 @@ if find or advise or rankdiff:
     want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
     hits = [i for i in sorted(rows)
             if not want or any(w in [n for _s, n in rows[i]] for w in want)]
+    if whyreg:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        print('### invocation #%d, register picks' % pick)
+        why_register(pick)
+        sys.exit(0)
     if rankdiff:
         if not hits:
             sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
