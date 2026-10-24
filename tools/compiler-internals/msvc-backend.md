@@ -120,11 +120,14 @@ worked example of a non-monotone report).
 ## Registers - what is and is not known
 
 **Established.** `.rdata` holds the register names in three parallel 4-byte-stride tables terminated by
-`"noreg"`, which gives the internal numbering - the reverse of the x86 encoding order:
+`"noreg"`. The table is indexed **backwards from its end**, and the numbering is 1-based in x86 encoding order:
 
 ```
-edi=0  esi=1  ebp=2  esp=3  ebx=4  edx=5  ecx=6  eax=7
+eax=1  ecx=2  edx=3  ebx=4  esp=5  ebp=6  esi=7  edi=8      (0 = none)
 ```
+
+An earlier revision of this file read the table forwards and recorded the reverse (`edi=0 ... eax=7`). That was
+wrong; reading `0x10cfc190 - (n-1)*4` reproduces the names above exactly.
 
 **Established.** A set is a 64-bit bitvector with set/clear mask tables indexed by `n & 0x3f`
 (`DAT_10cf65e8`/`DAT_10cf67e8`), and the iterator at `0x10b04fa0` takes the lowest set bit, adds the set's base,
@@ -298,12 +301,61 @@ serves it late and leaves it in a volatile register (`edx`), where the original 
 the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
 being inferred from a register permutation in the reccmp diff.
 
-### Why there is no source-level fixer
+### ChoosePhysReg decoded: a cost minimisation
+
+The pick is not a bit-scan over a narrowed mask - that reading was wrong, and so was the note here calling
+`0x10ce5a08` "not a per-register preference table". It is a table of **per-class candidate lists**, which is why
+it holds pointers; class 0, the integer class, reads `eax, ecx, edx, esi, edi, ebx, ebp` - volatiles first, then
+callee-saved, `esp` excluded. The rule, from `P2/color.c`:
+
+```c
+cost[] = 0                                        // array at 0x10d14f10, indexed reg*4, per pick
+for each interfering candidate g with g->benefit > 0:
+    for each (reg, count) preference pair of g:
+        cost[reg] += count;                       // a neighbour wanting reg makes reg dearer
+    if g has exactly one legal register R:
+        cost[R] += g->benefit * 100;              // taking R from a single-choice neighbour is expensive
+for each (reg, count) preference pair of this candidate:
+    cost[reg] -= count;                           // our own affinity makes reg cheaper
+pick = the register in classList[class] that is legal here with the lowest cost
+       (ties to the earlier class-list entry)
+```
+
+`reg_scores.py --whyreg` dumps that array at each pick. For `sellExcessGoods`:
+
+```
+candidate            got   eax    ecx    edx    ebx    esp   ebp   esi    edi
+aicIndex             eax   [0]    2      0      0      0     0     0      0
+j                    edx   0      2      [0]    0      0     0     0      0
+variance             edi   0      2      0      0      0     0     0      [0]
+resourceOffset       ebx   0      2      0      [0]    0     0     0      0
+playerResourceBase   edx   0      2001   [0]    0      0     0     0      0
+this                 ecx   0      [-1]   1      0      0     0     0      0
+playerID             edx   0      0      [-1]   0      0     0     1200   0
+resourceType         ebx   -1     0      0      [-1]   0     0     0      0
+```
+
+Every entry is accounted for: `ecx` costs 2 for everyone because `this` has a thiscall affinity to it, and `this`
+takes it at -1 because its own affinity subtracts; `playerID` sees `esi` at 1200, which is
+`playerResourceBase`'s benefit of 12 times 100, a neighbour with one register left; the zeros are ties and fall
+to class-list order, which is why `aicIndex` lands in `eax`.
+
+So the counterfactual is arithmetic. To move `playerID` out of `edx` into `ebp`, `ebp` needs a cost below -1,
+i.e. `playerID` needs an affinity to `ebp` worth 2 or more.
+
+### Why there is still no source-level fixer
 
 The benefit is a property of what the code *does*, not of how it is written. It counts uses weighted by block
 frequency, so none of the levers that cost nothing semantically - declaration order, statement order, renaming,
 redeclaring - can move it. That is the reason every syntactic hill-climb in this repo has failed to shift a
 register assignment, and it means a tool cannot be asked to "fix" a register mismatch by rewriting syntax.
+
+Affinities are the only term a programmer could hope to influence, and they come from **copies between a value
+and a fixed register**: a parameter arriving, an argument passed in a particular slot, a return value in `eax`,
+`this` in `ecx`. That is a semantic property - where a value crosses a call boundary - and for the
+*callee-saved* registers it is barely reachable at all, because affinities to `ebx`, `ebp`, `esi` and `edi` come
+from copies the allocator itself inserts rather than from anything the source states. The interference term is
+likewise a property of which values are simultaneously live.
 
 What the numbers do support is a sharper statement of the problem. For an `alloc-only` function either
 
