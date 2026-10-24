@@ -903,6 +903,51 @@ The general rule: to get a computation duplicated per arm, share in the source e
 original shares, and write the rest out. Sharing less gets the whole thing hoisted; sharing more - a
 pointer where the original had an index - adds the instruction that materialises what you shared.
 
+## Two slot-layout leads that were not source defects
+
+Both functions whose frames still disagreed after the jump-table fix turned out not to be
+source problems, and the way each failed is worth keeping.
+
+**`aiCreateSiegeUnits` (96.9%) was a tool artifact.** It reported 13 slots against our 12, with
+one at **-52 inside a 0x30 frame** - an offset past the end of what the prologue allocated,
+which is arithmetically impossible. The cause is visible in its own warning: two paths reach
+`0x4d23a7` with esp depths 4 apart, so the depth tracking drifted and invented a slot.
+`slot_map.py` now excludes references below `-frame` and says so, with the explicit note that a
+slot-count difference on a function reporting a depth conflict must not be read as a defect.
+With the phantom gone both sides show 12 slots at matching offsets, and the function's real
+residue is the 2-instruction `jmp` delta it already had.
+
+That is the third artifact of this kind this session - an unreferenced slot symbol MSVC emits
+but never uses, switch cases unreachable without following the jump table, and now depth drift -
+and they share a cause: our side is *stated* by the `/FA` listing while the original's is
+*inferred*, so the inferred side needs sanity checks before any difference it reports is
+believed.
+
+**`planToBuyWhenLowOnResourceAndSnoozeBuildings` (89.9%) is a real slot permutation with no
+reachable lever.** 248 instructions on both sides, frame `0x30` on both, 10 slots on both, the
+same reference weights - but the locals sit in different slots, and the zero-initialising stores
+come out in a different order:
+
+```
+original:  mov [esp+0x3c], edi / mov [esp+0x48], edi / mov [esp+0x38], edi
+ours:      mov [esp+0x48], edi / mov [esp+0x3c], edi / ...
+```
+
+With several locals tied on weight (three at 5 references, four at 4, two at 3) this looked like
+the textbook declaration-order tie-break, which is the one case `perm_decls.py` and
+`quick_reorder.py` exist for. It is not: a `quick_reorder -s` hill-climb over all fourteen
+declarations kept **no** move, start and final both 0.9234.
+
+`final == start` is also what the documented concurrent-run corruption looks like, so it was
+checked rather than believed - three hand-made swaps of equal-weight pairs score **0.9194**,
+**0.9153** and **0.9113**, all worse. The scoring is live, and our declaration order is already
+a local optimum. The residue is therefore neither weight nor declaration order, which leaves the
+class byte at `+0x18` - the part of `StkColorCmp` that is still undecoded.
+
+So the earlier guess that "a slot-count difference is more likely source-reachable than a
+pressure difference" was wrong in both directions: one difference was not real, and the other is
+real but sits in the one input to the sort that has not been decoded.
+
 ## Two things that do not work
 
 **Declaration order, when there are no ties.** `StkColorCmp` sorts by class and weight and uses declaration
