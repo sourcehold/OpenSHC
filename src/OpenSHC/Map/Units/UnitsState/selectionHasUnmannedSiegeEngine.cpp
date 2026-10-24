@@ -1,0 +1,34 @@
+#include "../UnitsState.func.hpp"
+
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x005369F0
+        BOOLEnum UnitsState::selectionHasUnmannedSiegeEngine(int unitID)
+        {
+            if (DAT_UnitsState::instance.units[unitID]
+                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                != 0) {
+                return FALSE;
+            }
+            switch (DAT_UnitsState::instance.units[unitID].unitType) {
+            case OpenSHC::Map::Units::UT_S_CATAPULT:
+            case OpenSHC::Map::Units::UT_S_TREBUCHET:
+            case OpenSHC::Map::Units::UT_S_TOWER:
+            case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
+            case OpenSHC::Map::Units::UT_S_SHIELD:
+                return (BOOLEnum)(this->selectionEngineers != 0);
+            }
+            return FALSE;
+        }
+
+    }
+}
+}
