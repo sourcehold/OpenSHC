@@ -377,6 +377,35 @@ The 1200 is charged by a **compiler temporary**, not by a named local - an earli
 `playerResourceBase` because its benefit of 12 times 100 matches, and that was a coincidence. Attribution is
 what tells the two apart, and only a named source variable is something a programmer can act on.
 
+### Acting on the attribution: measured, and it does not pay
+
+`--whycost` named `behaviourType` (+1400) and `i` (+1000) as the two source variables pinning `ebp` in
+`aiRecruitUnits`, so the indicated edit is to stop them being separate candidates. Every form of that was tried
+against reccmp, from a 50.0% baseline:
+
+| edit | match |
+|---|---|
+| baseline | **50.0%** |
+| `recruitDiggingUnit` as `bool` | 49.5% |
+| count `recruitCount` down, drop `i` | 48.7% |
+| narrow `behaviourType` into the loop | 48.9% |
+| narrow both `behaviourType` and `unitType` | 36.6% |
+
+All five lose, and the tool explains why - which is the part worth keeping. Re-running `--whycost` on the
+narrowed variant shows `behaviourType`'s pin went **up**, from +1400 to +1600, and `ebp`'s total from 4700 to
+4900. Benefit is uses per unit of live range, so shortening a live range with the same uses *raises* the
+benefit, and the pin is `benefit * 100`. The three levers therefore all fail for the same reason, coherently:
+
+* narrowing a range raises the benefit, so the pin gets dearer;
+* deleting a candidate moves the pin to whatever replaces it (`recruitCount` took it over);
+* widening a range adds interference instead.
+
+So the pin cannot be reduced from the source at all: only *fewer uses* would lower it, and the uses are what
+the function has to do. `aiRecruitUnits` at 50.0% is a local optimum under every lever this model exposes, and
+that is now a derived statement rather than five failed guesses.
+
+See [reading-reg-scores.md](reading-reg-scores.md) for a plain-language walkthrough of the output.
+
 So across the three functions measured: `recruitHarrassingSiegeEngines` charges nothing at all (pure class-list
 order, nothing to act on), `sellExcessGoods` is pinned by temporaries (nothing to act on), and `aiRecruitUnits`
 is pinned by `behaviourType` and `i` (something to act on, if the computation can be restructured so those
