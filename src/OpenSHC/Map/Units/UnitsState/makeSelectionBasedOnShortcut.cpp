@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00535FD0
         void UnitsState::makeSelectionBasedOnShortcut(int section1099ID)
         {

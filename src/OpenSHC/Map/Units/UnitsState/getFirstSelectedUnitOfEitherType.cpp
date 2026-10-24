@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005362F0
         uint UnitsState::getFirstSelectedUnitOfEitherType(int unitType_1, int unitType_2)
         {

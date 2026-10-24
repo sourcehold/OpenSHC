@@ -5,8 +5,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00537840
         int UnitsState::getRawDeerCount()
         {

@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FE00
         void UnitsState::setFacingDirectionTowardUnitMicro(int unitID, int targetUnitID)
         {

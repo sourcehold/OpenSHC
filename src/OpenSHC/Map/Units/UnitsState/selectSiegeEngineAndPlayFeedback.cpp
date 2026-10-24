@@ -15,9 +15,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Audio::SFX::SpeechEffectID;
         using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00535E20
         void UnitsState::selectSiegeEngineAndPlayFeedback(int playerID, int unitID, int tribeID)

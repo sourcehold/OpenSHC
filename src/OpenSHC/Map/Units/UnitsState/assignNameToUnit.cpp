@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0052EED0
         void UnitsState::assignNameToUnit(int unitID)
         {

@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00536610
         undefined4 UnitsState::canAUnitClimb()
         {

@@ -5,8 +5,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0053A560
         int UnitsState::getLivingSelectableUnit(int playerID)
         {

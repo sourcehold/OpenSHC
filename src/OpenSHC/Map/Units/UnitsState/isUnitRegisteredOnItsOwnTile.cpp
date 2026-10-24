@@ -7,8 +7,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F4E0
         undefined4 UnitsState::isUnitRegisteredOnItsOwnTile(int unitID)
         {

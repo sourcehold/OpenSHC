@@ -8,9 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005350B0
         void UnitsState::selectAllUnitsOfTypeForPlayer(int playerID, int unitType)
         {

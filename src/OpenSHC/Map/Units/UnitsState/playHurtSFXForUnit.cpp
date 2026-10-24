@@ -9,9 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::DE::SHCDE::eSFX;
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005300B0
         void UnitsState::playHurtSFXForUnit(int unitID)
         {
