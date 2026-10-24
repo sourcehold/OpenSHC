@@ -282,14 +282,20 @@ def original(address):
     # at or above the entry esp sit the return address and the incoming arguments, which are
     # the caller's, not this frame's. Drop them BEFORE measuring spans, or the last local's
     # span is the gap to the return address rather than its own size.
-    offs = [o for o in sorted(hits) if o < 0]
+    #
+    # Below -frame is impossible: the prologue allocated exactly `frame` bytes, so an offset
+    # past that is proof the depth tracking drifted rather than a slot. `aiCreateSiegeUnits`
+    # produced one at -52 against a 0x30 frame, which made it look a slot bigger than ours;
+    # it is counted separately and reported, not listed as if it were real.
+    impossible = sorted(o for o in hits if o < 0 and frame and o < -frame)
+    offs = [o for o in sorted(hits) if o < 0 and not (frame and o < -frame)]
     out = []
     for i, off in enumerate(offs):
         span = (offs[i + 1] - off) if i + 1 < len(offs) else None
         h = hits[off]
         out.append((off, span, h['acc'], h['refs'], h['addrs']))
     return frame, out, {'conflicts': conflicts, 'unknown_calls': unknown_calls,
-                        'unreached': unreached}
+                        'unreached': unreached, 'impossible': impossible}
 
 
 def key(refs, size):
@@ -318,6 +324,12 @@ def main():
         print('NOTE: %d indirect call(s), e.g. %#x - the callee pops an unknown number of'
               % (len(trouble['unknown_calls']), trouble['unknown_calls'][0]))
         print('      argument bytes, assumed 0. Offsets after it are suspect.')
+    if trouble.get('impossible'):
+        print('WARNING: %d reference(s) landed below the frame (%s), which cannot be a slot -'
+              % (len(trouble['impossible']),
+                 ', '.join(str(o) for o in trouble['impossible'][:4])))
+        print('         the depth tracking drifted. They are excluded, but every offset below')
+        print('         is suspect; do not read a slot-count difference as a real defect.')
     if trouble['unreached']:
         print('NOTE: %d instruction(s) were not reached from the entry, so their stack'
               % trouble['unreached'])
