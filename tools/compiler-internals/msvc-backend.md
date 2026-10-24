@@ -619,6 +619,74 @@ converse case - registers diverging *before* any structural difference - is the 
 investigating, and there the lever is statement order, because that is what sets both the
 serve order and the liveness.
 
+## MSVC hoists the maximal common expression, which decides how to write it
+
+When the same expression appears in both arms of an `if`/`else`, MSVC's global optimiser hoists it
+above the branch - and it hoists as *much* of it as is common, which is the part that matters when
+matching. `renderDebugDataAiInfo` has two `sprintf` calls differing only in the format string. The
+original duplicates the whole argument setup in each arm:
+
+```
+imul eax, eax, 0x6d98              ; shared: the AIV index, scaled
+cmp  dword ptr [esi - 0xdf4], 0
+jne  arm_b
+mov  eax, dword ptr [eax + 0x1866ac0]   ; arm A: load castleID, base folded in
+add  eax, 1
+push eax
+push 0x5aad50                      ; "AIV:n/a"
+lea  ecx, [esp + 0x2c]
+push ecx
+jmp  shared_call
+arm_b:
+mov  edx, dword ptr [eax + 0x1866ac0]   ; arm B: the SAME load again
+add  edx, 1
+push edx
+push 0x5aad48                      ; "AIV: %d"
+lea  eax, [esp + 0x2c]
+push eax
+shared_call:
+call sprintf
+add  esp, 0xc
+```
+
+Only the `imul` is shared; the identical load is not. Writing the full expression out in both arms
+does **not** reproduce that - MSVC hoists the load, the `add`, the value `push` and the `lea` of the
+buffer above the `cmp`, leaving just `push OFFSET <string>` per arm. Four forms were tried and all
+four hoisted: the expression inline in both arms, a shared local assigned before the branch, a local
+declared before and assigned separately inside each arm, and a ternary on the format string. (The
+`push` moving above the branch is worth noticing on its own - a post-allocation peephole cannot move
+a push across a branch, so this is the global optimiser, before register allocation.)
+
+The reason is the *extent* of the common expression. Written out twice, the whole chain
+`playerDataArray[playerID].aivID` -> `* 0x6d98` -> load `castleID` -> `+ 1` is common, so all of it
+is hoisted. The original shares only the front of that chain, which is what you get when **the source
+holds the index in a local** and writes the array access out in each arm:
+
+```cpp
+int aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+if (...) sprintf(text, "AIV:n/a", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+else     sprintf(text, "AIV: %d", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+```
+
+The index is shared because the source shares it; the two loads are left alone. That took the function
+from 305-vs-302 instructions and a mix delta of 3 to **305 against 305 with a delta of 0**, and
+reccmp from 67.5% to 83.6%.
+
+A pointer or reference local to the element gets close but not there - delta 1, because it keeps the
+address as a value and pays an `add` to materialise `base + index * size`, where the original keeps
+only `index * size` in the register and re-folds the array base into each load's displacement:
+
+| form | mix delta | instructions | note |
+| --- | --- | --- | --- |
+| expression inline in both arms | 5 | 300 | whole chain hoisted |
+| shared local before the branch | 3 | 302 | hoisted by construction |
+| `AIVSpec*` / `AIVSpec&` to the element | 1 | 306 | extra `add` for the address |
+| **index in a local** | **0** | **305** | matches |
+
+The general rule: to get a computation duplicated per arm, share in the source exactly the prefix the
+original shares, and write the rest out. Sharing less gets the whole thing hoisted; sharing more - a
+pointer where the original had an index - adds the instruction that materialises what you shared.
+
 ## Two things that do not work
 
 **Declaration order, when there are no ties.** `StkColorCmp` sorts by class and weight and uses declaration
