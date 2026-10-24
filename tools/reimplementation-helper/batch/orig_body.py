@@ -48,6 +48,19 @@ SYNONYMS = {
     'cmovnz': 'cmovne', 'repe': 'rep', 'repz': 'rep', 'retn': 'ret',
 }
 PADDING = ('int3', 'nop')
+# MSVC pads with nop-equivalents rather than `nop`: `lea esp, [esp]`, `lea ecx, [ecx]` and
+# `mov edi, edi`. They are not real memory references, and anything reading stack operands has
+# to skip them or `lea esp, [esp]` reads as a reference to the slot at the current esp.
+_NOP_LEA = re.compile(r'^(\w+), \[\1(?: \+ 0x0)?\]$')
+
+
+def is_padding(mnemonic, ops):
+    """True for an instruction that only exists to fill space."""
+    if mnemonic in PADDING:
+        return True
+    if mnemonic == 'lea' and _NOP_LEA.match(ops):
+        return True
+    return mnemonic == 'mov' and ops.replace(' ', '') == 'edi,edi'
 
 
 def canon(mnemonic):

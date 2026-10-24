@@ -519,6 +519,35 @@ twice, with the function's body replaced by `return;` the second time, and find 
 by the total difference. For `sellExcessGoods` the total fell by 524 and the matching invocation was #613 at 532
 calls; re-running with the breakpoints armed captured exactly 532, which confirms it.
 
+## Order of work, and where reccmp belongs in it
+
+The match percentage is the goal, but it is a poor instrument for most of the way there, because it is
+dominated by register and stack-slot *naming* - terms the source cannot state. Worse, it moves against
+real progress: adding a local that the original has shifts every `[esp + N]` displacement in the function,
+and each of those is scored as a mismatch until the layout lines up, so a correct change reads as a
+regression. Work in this order instead, and each step has an instrument that is immune to the next step's
+noise:
+
+1. **Frame size and slot layout** - `slot_map.py FILE.cpp`. Compares our `/FA` slot table against the
+   layout inferred from the original's disassembly: offsets, sizes, reference counts and the sort key.
+   A frame that is too small is a missing local, and the reference counts say which local is in the wrong
+   place. Independent of every later step.
+2. **Instruction mix** - `structural_diff.py NAME`. `delta` names concrete defects ("we emit two `xor`
+   the original does not"); `kind` is the bare mnemonic sequence. Independent of register naming.
+3. **Statement order** - the same `kind` tier, once `delta` is zero. This is what took the sixteen
+   `setAICParameters_NN` functions to 100%.
+4. **Register and slot naming** - only now is the percentage the right objective, because it is all that
+   is left. `reorder_search.py` and `perm_decls.py` hill-climb on it.
+
+The reason this ordering works is that the earlier steps are *causes* and the later ones are *effects*:
+register allocation is deterministic given the compiler's IR, so an identical instruction stream in an
+identical frame allocates identically. Chasing the effect while the cause is still wrong is what makes a
+function feel stuck.
+
+A worked case of the instruments disagreeing, and of trusting the right one, is below: on
+`renderDebugDataAiInfo` the frame went from wrong to byte-exact - all seven slots, every offset and every
+reference count - while reccmp *fell* by 0.9 points.
+
 ## Frame size as a local-count oracle
 
 `sub esp, N` in the prologue is the one number in the original that states, directly and without any
