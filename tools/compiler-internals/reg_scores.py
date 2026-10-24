@@ -5,6 +5,7 @@ usage: reg_scores.py FILE.cpp --probe
        reg_scores.py FILE.cpp --advise LOCALNAME
        reg_scores.py FILE.cpp --rankdiff LOCALNAME
        reg_scores.py FILE.cpp --whyreg LOCALNAME
+       reg_scores.py FILE.cpp --whycost LOCALNAME
        reg_scores.py FILE.cpp --invocation N
 
 `OrderGlobregs` orders the candidate values and `Color` walks that order, calling
@@ -80,7 +81,10 @@ CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 GLOBAL_REG_ALLOC = '0x10c07350'      # @dop2_GlobalRegAlloc@4
 INSERT_IN_LIST = '0x10b11970'        # @InsertInList@8, the candidate priority insert
 ASSIGN_REG = '0x10b14e2a'            # in ChoosePhysReg: mov [cand+0x10], rec; ebx = register number
-COST_ARRAY = '0x10d14f10'            # per-register cost, indexed reg*4, rebuilt for every pick
+COST_ARRAY = '0x10d14f10'
+COST_PREF = '0x10b14c2c'             # add [eax*4+cost], ecx    - neighbour ebx's preference pair
+COST_PIN = '0x10b14caa'              # add [esi*4+cost], ecx    - ebx has one legal register: benefit*100
+COST_OWN = '0x10b14d59'              # sub [ecx*4+cost], edx    - this candidate's own affinity            # per-register cost, indexed reg*4, rebuilt for every pick
 REGNAMES = {1: 'eax', 2: 'ecx', 3: 'edx', 4: 'ebx', 5: 'esp', 6: 'ebp', 7: 'esi', 8: 'edi'}
 CLASS0 = [1, 2, 3, 7, 8, 4, 6]       # integer class candidate list, in preference order
 BS = chr(92)
@@ -90,6 +94,7 @@ probe = '--probe' in sys.argv
 find = '--find' in sys.argv
 rankdiff = '--rankdiff' in sys.argv
 whyreg = '--whyreg' in sys.argv
+whycost = '--whycost' in sys.argv
 advise = '--advise' in sys.argv
 inv = None
 for a in sys.argv[1:]:
@@ -99,7 +104,8 @@ if inv is None and '--invocation' in sys.argv:
     i = sys.argv.index('--invocation')
     if i + 1 < len(sys.argv):
         inv = sys.argv[i + 1]
-if not args or (not probe and not find and not advise and not rankdiff and not whyreg and not inv):
+if not args or (not probe and not find and not advise and not rankdiff and not whyreg
+        and not whycost and not inv):
     sys.exit(__doc__)
 src = os.path.abspath(args[0])
 out = (common.ROOT / common.TMP / 'regscores').resolve()
@@ -293,6 +299,69 @@ def rank_diff(funcname, rows):
         print('have the same candidate set - look for a value one side carries and the other does not.')
 
 
+def why_cost(invocation):
+    """Attribute every term of the cost array to the candidate that charged it.
+
+    Each pick scans the interfering candidates. A neighbour's preference pair adds its
+    count to that register; a neighbour left with a single legal register adds its
+    benefit*100, which is what produces the large numbers; this candidate's own affinities
+    subtract. Breaking on the three accumulation sites and reading the neighbour's name
+    turns "ebx costs 1100" into "ebx is pinned by <name>".
+    """
+    q = BS + '"'
+    name_of = lambda reg: ('.if (poi(poi(@' + reg + ')) != 0) { da poi(poi(poi(@' + reg + '))+4)+1 L28 } '
+                           '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + COST_PIN + ' ".printf ' + q + 'PIN reg=%d delta=%d by=' + q +
+             ', @esi, @ecx; ' + name_of('ebx') + '; gc"',
+             'bp2 ' + COST_PREF + ' ".printf ' + q + 'PREF reg=%d delta=%d by=' + q +
+             ', @eax, @ecx; ' + name_of('ebx') + '; gc"',
+             'bp3 ' + COST_OWN + ' ".printf ' + q + 'OWN reg=%d delta=-%d' + BS + BS + 'n' + q +
+             ', @ecx, @edx; gc"',
+             'bp4 ' + ASSIGN_REG + ' ".printf ' + q + 'PICK reg=%d ' + q + ', @ebx; ' +
+             name_of('eax') + '; gc"',
+             'bd 1-4',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
+             ') { be 1-4 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1-4 }; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'whycost' + str(invocation))
+    ev = re.findall(
+        r'(PIN|PREF) reg=(\d+) delta=(-?\d+) by=(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")'
+        r'|OWN reg=(\d+) delta=(-\d+)'
+        r'|PICK reg=(-?\d+) (?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt)
+    picks, pending = [], []
+    for kind, reg, delta, by, oreg, odelta, preg, pname in ev:
+        if kind:
+            pending.append((kind, int(reg), int(delta), by or '(temp)'))
+        elif oreg:
+            pending.append(('OWN', int(oreg), int(odelta), 'itself'))
+        else:
+            picks.append((pname or '(temp)', int(preg), pending))
+            pending = []
+    if not picks:
+        print('no picks seen in invocation %d' % invocation)
+        return
+    print('')
+    for name, reg, terms in picks:
+        got = REGNAMES.get(reg, reg)
+        charged = {}
+        for kind, r, delta, by in terms:
+            charged.setdefault(r, []).append((kind, delta, by))
+        print('%s -> %s' % (name, got))
+        for r in sorted(charged, key=lambda k: -sum(abs(d) for _k, d, _b in charged[k])):
+            total = sum(d for _k, d, _b in charged[r])
+            who = '; '.join('%s %+d by %s' % (k, d, b) for k, d, b in charged[r][:3])
+            star = '  <- taken' if r == reg else ''
+            print('    %-5s total %+7d   %s%s' % (REGNAMES.get(r, r), total, who, star))
+        if not charged:
+            print('    (no cost charged: every register was free, so the class list decided)')
+        print('')
+    print('A PIN term is a neighbour with one legal register left charging benefit*100 for it.')
+    print('That names a value to look at: if our source carries it and the original does not,')
+    print('the register it pins is free in the original. OWN terms are this candidate\'s own')
+    print('affinities. An empty table means nothing was charged and the pick was class order.')
+
+
 def why_register(invocation):
     """For each pick in one invocation: the candidate, the register taken, and the cost array.
 
@@ -340,7 +409,7 @@ def why_register(invocation):
           ', '.join(REGNAMES[n] for n in CLASS0) + '.')
 
 
-if find or advise or rankdiff or whyreg:
+if find or advise or rankdiff or whyreg or whycost:
     # every named candidate with its invocation index: identification by name, which works
     # for functions smaller than the resolver-template flood that --probe ranks by size
     q = BS + '"'
@@ -357,6 +426,13 @@ if find or advise or rankdiff or whyreg:
     want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
     hits = [i for i in sorted(rows)
             if not want or any(w in [n for _s, n in rows[i]] for w in want)]
+    if whycost:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        print('### invocation #%d, cost attribution' % pick)
+        why_cost(pick)
+        sys.exit(0)
     if whyreg:
         if not hits:
             sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))

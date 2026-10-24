@@ -343,6 +343,45 @@ to class-list order, which is why `aicIndex` lands in `eax`.
 So the counterfactual is arithmetic. To move `playerID` out of `edx` into `ebp`, `ebp` needs a cost below -1,
 i.e. `playerID` needs an affinity to `ebp` worth 2 or more.
 
+### Attributing each cost term: `--whycost`
+
+"`ebx` costs 1100" is not yet a statement about the source. Three instructions do the accumulating -
+`0x10b14c2c` adds a neighbour's preference count, `0x10b14caa` adds `benefit * 100` when a neighbour has one
+legal register left (`ebx` holds that neighbour), and `0x10b14d59` subtracts this candidate's own affinity - so
+breaking on them and reading the neighbour's name attributes every term. `--whycost` does that:
+
+```
+aiRecruitUnits
+  playerID -> ebx
+      ebx   total  +13800   PIN +800 by (temp); PIN +300 by (temp); PIN +100 by (temp)
+  (temp) -> edx
+      ebp   total   +4700   PIN +300 by (temp); PIN +1400 by behaviourType; PIN +1000 by i
+      edx   total   +1600   PIN +1600 by this
+```
+
+The useful line is the second: **`ebp` is expensive for everyone because `behaviourType` pins it with 1400 and
+`i` with 1000**. Those are named source variables, and it is a stronger statement than their own bad scores -
+they do not merely lose their own pick, they make `ebp` cost 2400 more for every other candidate. It also
+explains why removing `i` by counting `recruitCount` down lost ground: that just moves the pin to
+`recruitCount`.
+
+The same run on `sellExcessGoods` is the cautionary half:
+
+```
+  playerID -> edx
+      esi   total   +1200   PIN +1200 by (temp)
+      edx   total      -1   OWN -1 by itself
+```
+
+The 1200 is charged by a **compiler temporary**, not by a named local - an earlier note here guessed it was
+`playerResourceBase` because its benefit of 12 times 100 matches, and that was a coincidence. Attribution is
+what tells the two apart, and only a named source variable is something a programmer can act on.
+
+So across the three functions measured: `recruitHarrassingSiegeEngines` charges nothing at all (pure class-list
+order, nothing to act on), `sellExcessGoods` is pinned by temporaries (nothing to act on), and `aiRecruitUnits`
+is pinned by `behaviourType` and `i` (something to act on, if the computation can be restructured so those
+values do not exist as separate candidates).
+
 ### Why there is still no source-level fixer
 
 The benefit is a property of what the code *does*, not of how it is written. It counts uses weighted by block
