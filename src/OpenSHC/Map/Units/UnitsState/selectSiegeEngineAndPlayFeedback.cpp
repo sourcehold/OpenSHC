@@ -1,6 +1,6 @@
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "../UnitsState.func.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

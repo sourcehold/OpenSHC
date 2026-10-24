@@ -1,5 +1,5 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 
