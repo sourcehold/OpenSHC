@@ -1,3 +1,5 @@
+#pragma warning(disable : 4996)
+
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
