@@ -34189,7 +34189,7 @@ SHC_3BB0A8C1_0x004CA4D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CA8A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CAC70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CAC70 | 95.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CACB0 | 100.0% | Reimplemented
 
@@ -34209,17 +34209,17 @@ SHC_3BB0A8C1_0x004CB180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB1B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB220 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB220 | 97.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB290 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB290 | 98.1% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB330 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB330 | 97.5% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB3A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB4D0 | 97.5% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB540 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB540 | 97.5% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB5B0 | 100.0% | Reimplemented
 
@@ -34845,7 +34845,7 @@ SHC_3BB0A8C1_0x004CB803 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CB804 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CB810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB810 | 92.3% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB890 | 100.0% | Reimplemented
 
@@ -34853,13 +34853,13 @@ SHC_3BB0A8C1_0x004CB940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB9F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CBA50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CBA50 | 90.3% | Flag store order/slots
 
 SHC_3BB0A8C1_0x004CBE30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CBFA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC000 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004CC000 | 92.9% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC070 | 100.0% | Reimplemented
 
@@ -34877,23 +34877,23 @@ SHC_3BB0A8C1_0x004CC680 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CC720 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC720 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC7B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC7B0 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC840 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC840 | 94.3% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC910 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC910 | 97.1% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC990 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC990 | 96.2% | Init store before guard
 
 SHC_3BB0A8C1_0x004CCAF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CCBE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCBE0 | 99.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CCD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCD20 | 80.1% | Register allocation differs
 
 SHC_3BB0A8C1_0x004CCEDC | 0.0% | Pending
 
@@ -35269,15 +35269,15 @@ SHC_3BB0A8C1_0x004CD0C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CD110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD160 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD160 | 91.7% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CD250 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD250 | 94.7% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD2A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD2A0 | 73.2% | tribeID/unitID regs swapped
 
-SHC_3BB0A8C1_0x004CD560 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD560 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD690 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD690 | 94.9% | Reimplemented
 
 SHC_3BB0A8C1_0x004CD7B0 | 100.0% | Reimplemented
 
@@ -35287,17 +35287,17 @@ SHC_3BB0A8C1_0x004CDA50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CDAB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDB20 | 66.0% | Loop register allocation
 
 SHC_3BB0A8C1_0x004CDBC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CDCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDCF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDCF0 | 83.2% | Pools 1 in a register
 
 SHC_3BB0A8C1_0x004CDE60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDF10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDF10 | 98.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CDFD0 | 100.0% | Reimplemented
 
@@ -35307,7 +35307,7 @@ SHC_3BB0A8C1_0x004CE110 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE1A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE200 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE200 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE270 | 0.0% | Pending
 
@@ -35315,7 +35315,7 @@ SHC_3BB0A8C1_0x004CE3B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE4D0 | 93.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE530 | 0.0% | Pending
 
@@ -35325,7 +35325,7 @@ SHC_3BB0A8C1_0x004CE660 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CE6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CE790 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE790 | 98.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE830 | 100.0% | Reimplemented
 
@@ -35337,7 +35337,7 @@ SHC_3BB0A8C1_0x004CE930 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CEA50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CEB50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEB50 | 98.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CEB80 | 0.0% | Pending
 
@@ -35355,7 +35355,7 @@ SHC_3BB0A8C1_0x004CF180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF270 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF2E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF2E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF400 | 100.0% | Reimplemented
 
@@ -35367,23 +35367,23 @@ SHC_3BB0A8C1_0x004CF560 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF660 | 100.0% | Reimplemented without for-loop
+SHC_3BB0A8C1_0x004CF660 | 97.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF6E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF750 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF7C0 | 100.0% | Reimplemented, for-loop didn't work
+SHC_3BB0A8C1_0x004CF7C0 | 98.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF7F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CF870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF920 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF920 | 96.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFA10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFA10 | 96.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFB20 | 97.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CFBC0 | 100.0% | Reimplemented
 
@@ -35421,7 +35421,7 @@ SHC_3BB0A8C1_0x004D0A20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0A80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0B10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0B10 | 76.0% | aiType-1 load sunk past branch
 
 SHC_3BB0A8C1_0x004D0B70 | 100.0% | Reimplemented
 
@@ -35455,7 +35455,7 @@ SHC_3BB0A8C1_0x004D1000 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D1050 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1090 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1090 | 90.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D10B0 | 100.0% | Reimplemented, one reordered push edi
 
@@ -35463,7 +35463,7 @@ SHC_3BB0A8C1_0x004D11C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D12A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1320 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1320 | 95.4% | siegeTroops inlined
 
 SHC_3BB0A8C1_0x004D1700 | 0.0% | Pending
 
@@ -35471,47 +35471,47 @@ SHC_3BB0A8C1_0x004D1710 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D18B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1950 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1950 | 98.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1A00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1A00 | 68.8% | targetPlayer/zero regs swapped
 
-SHC_3BB0A8C1_0x004D1D60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1D60 | 62.4% | register permutation
 
 SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2000 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2000 | 99.7% | Loop latch reload order
 
 SHC_3BB0A8C1_0x004D2080 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D20C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D2500 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2500 | 94.6% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2660 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2730 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2790 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D2790 | 91.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004D27E0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D27E0 | 92.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2830 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D28B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D28B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2A70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2A70 | 60.3% | Navigate branch polarity
 
 SHC_3BB0A8C1_0x004D2E00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2EC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2EC0 | 89.7% | Address computed after 1st call
 
 SHC_3BB0A8C1_0x004D2F80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D30E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D3320 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3320 | 97.2% | ebp/ebx regalloc differs
 
 SHC_3BB0A8C1_0x004D3780 | 100.0% | Reimplemented
 
@@ -35523,23 +35523,23 @@ SHC_3BB0A8C1_0x004D3940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D3960 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D39B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D39B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D39F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D3AE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3AE0 | 50.0% | recruitCount recomputed
 
-SHC_3BB0A8C1_0x004D3F20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3F20 | 97.4% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4040 | 100.0% | Reimplemented, for loop didn't work
+SHC_3BB0A8C1_0x004D4040 | 97.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D40B0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D40B0 | 94.9% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4130 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4220 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4340 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4340 | 77.2% | playerID not kept in ebp
 
 SHC_3BB0A8C1_0x004D4400 | 0.0% | Pending
 
@@ -35551,7 +35551,7 @@ SHC_3BB0A8C1_0x004D45E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4630 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4680 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4680 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4870 | 0.0% | Pending
 
@@ -35559,7 +35559,7 @@ SHC_3BB0A8C1_0x004D48F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4940 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D49E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D49E0 | 81.7% | Pools 1 instead of 0 in ebp
 
 SHC_3BB0A8C1_0x004D5010 | 100.0% | Reimplemented
 
