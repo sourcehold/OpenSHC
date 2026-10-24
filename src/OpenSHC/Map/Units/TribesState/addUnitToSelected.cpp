@@ -12,7 +12,7 @@ namespace Map {
         {
             int const bitFlagsIndex = unitID / 16;
             int const bitMaskIndex = unitID % 16;
-            DAT_UnitsState::instance.selectedUnitsBitFlags[bitFlagsIndex]
+            ((short*)DAT_UnitsState::instance.selectedUnitsBitFlags)[bitFlagsIndex]
                 |= DAT_UnitSelectionDefinedData::instance.BitMaskHelper[bitMaskIndex];
         }
 
