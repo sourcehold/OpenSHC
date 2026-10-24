@@ -1437,6 +1437,63 @@ The general rule: to get a computation duplicated per arm, share in the source e
 original shares, and write the rest out. Sharing less gets the whole thing hoisted; sharing more - a
 pointer where the original had an index - adds the instruction that materialises what you shared.
 
+## A defect class: which constant gets the callee-saved register
+
+`updateAIPlayerState` (78.6% with resolvers off, 81.7% with them on) is structurally almost
+perfect - 483 instructions against 486, `kind` 0.989 - and its whole mix delta of 3 is
+`xor +2, mov +1`. The cause is worth recording because it is a distinct class from the defects
+already in this file, and because the obvious source fix does not work.
+
+A census of the two streams:
+
+| | immediate dword stores | `xor r, r` zeroings | `mov r, 1` |
+| --- | --- | --- | --- |
+| original | `0x9` x3, `0x5` x2, `0x1` x1, `0x8`, `0x7`, `0x2` - **no `0x0` at all** | **1** | 1 |
+| ours | `0x9` x3, **`0x0` x3**, `0x5` x2, `0x8`, `0x7`, `0x2` | **3** | 2 |
+
+The source has fourteen `= 0;` assignments and one `= 1;`. The original keeps **0** in `ebp` for
+essentially the whole function and never stores it as an immediate; we keep **1** there and
+materialise 0 three separate times.
+
+Where it starts is exact. Both sides are identical for 45 instructions, including
+
+```
+36  mov ebp, dword ptr [edi + G]     ; ebp = _aiPlayerState
+37  test ebp, ebp
+40  jne L                            ; so on the fallthrough ebp is known to be 0
+```
+
+and then diverge immediately:
+
+```
+original                              ours
+46  mov dword ptr [edi + G], ebp      46  xor eax, eax
+47  mov dword ptr [edi + G], 0x1      47  mov ebp, 0x1
+48  mov dword ptr [edi + G], ebp      48  mov dword ptr [edi + G], eax
+49  mov dword ptr [edi + G], ebp      49  mov dword ptr [edi + G], ebp
+```
+
+The original reuses the register that already holds `_aiPlayerState` - known zero on this path -
+for all three zero stores, and writes the literal 1 as an immediate. We materialise a fresh zero
+in `eax` and **clobber** the known-zero `ebp` with the constant 1. The same inversion then runs
+through the whole function: every `xor ebp, ebp` in the original is a `mov ebp, 0x1` in ours, and
+the original's `add dword ptr [...], 0x1` is our `add dword ptr [...], ebp`.
+
+**The obvious fix fails.** Inside `if (_aiPlayerState == 0)` the local is zero, so writing
+`attackTicker = _aiPlayerState;` instead of `= 0` is semantically identical and ought to force the
+reuse. It produces **byte-identical** output - quick_diff 0.8669 either way, delta still 3.
+Constant propagation replaces `_aiPlayerState` with 0 before allocation ever runs, so the source
+cannot express the difference; the compiler knows the value is zero in both spellings and still
+chooses to dedicate the callee-saved register to 1.
+
+So this is a third symptom of the same underlying thing as the frame and pressure walls: the
+allocator's choice of what to keep in a callee-saved register, decided by the `+0x0c` keys, with
+no source handle. What is new is the *signature* - a small `xor` surplus with matching immediate
+stores, and an `xor r,r` against `mov r,1` at the same instruction on both sides - which is worth
+recognising, because it looks like a code-shape defect and is not one. If a function shows
+`xor +N` with the stores otherwise matching, check whether the original is reusing a known-zero
+variable's register before looking for a source cause.
+
 ## Two slot-layout leads that were not source defects
 
 Both functions whose frames still disagreed after the jump-table fix turned out not to be
