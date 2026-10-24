@@ -46,6 +46,7 @@ Needs capstone and a configured build directory; no build and no reccmp run.
 
 import collections
 import os
+import struct
 import re
 import sys
 
@@ -153,6 +154,36 @@ def popped(image, target):
     return _POPPED[target]
 
 
+_TABLE = re.compile(r'\[\w+\*4 \+ (0x[0-9a-f]+)\]')
+
+
+def _jump_table(image, ops, lo, hi):
+    """Targets of a switch's `jmp dword ptr [reg*4 + TABLE]`.
+
+    MSVC emits the table just past the function's last instruction, and for a sparse switch
+    puts a byte index table after it, so the dword entries are followed only while they point
+    back inside the body - the first value that does not is the next table's data. On
+    `addUnitToSmallestBehaviourTypeTribe` that yields exactly five case targets and stops on
+    `0x04040400`, which is the byte table.
+    """
+    m = _TABLE.search(ops)
+    if not m:
+        return []
+    base = int(m.group(1), 16)
+    off = image.offset(base)
+    if off is None:
+        return []
+    out = []
+    for i in range(256):
+        if off + 4 * i + 4 > len(image.data):
+            break
+        t = struct.unpack_from('<I', image.data, off + 4 * i)[0]
+        if not (lo <= t <= hi):
+            break
+        out.append(t)
+    return out
+
+
 def _delta(image, mnemonic, ops, unknown_calls, addr):
     """How much this instruction lowers `esp` (negative means it raises it)."""
     if mnemonic in ('push', 'pushfd'):
@@ -195,6 +226,13 @@ def original(address):
         target = _imm(ops) if mnemonic.startswith('j') else None
         if target is not None and lo <= target <= hi and target in idx:
             out.append(idx[target])
+        elif mnemonic == 'jmp':
+            # a switch: `jmp dword ptr [reg*4 + 0x4ccedc]`. Without following it, every case
+            # body is unreachable and its stack references go uncounted - 52 instructions of
+            # `addUnitToSmallestBehaviourTypeTribe`, which is most of the function.
+            for t in _jump_table(image, ops, lo, hi):
+                if t in idx:
+                    out.append(idx[t])
         if mnemonic != 'jmp' and mnemonic != 'ret' and i + 1 < len(stream):
             out.append(i + 1)
         succs.append(out)
