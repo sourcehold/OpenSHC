@@ -273,7 +273,7 @@ namespace AI {
 
         void clearOutdatedAITribes(int playerID);
 
-        undefined4 giveSomeRaidCommand(int tribeIndex, int tribeType);
+        BOOLEnum giveSomeRaidCommand(int tribeIndex, int tribeType);
 
         void addRallyPointForTribe(int tribeID);
 

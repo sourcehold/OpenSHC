@@ -57,7 +57,7 @@ namespace Map {
                 int (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x00401540, &EntityState::getFireEntityIDAtTile)
             getFireEntityIDAtTile;
 
-            MACRO_FUNCTION_RESOLVER(int (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x00401570,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x00401570,
                 &EntityState::updateAllFireEntitiesAtTile)
             updateAllFireEntitiesAtTile;
 
@@ -89,7 +89,7 @@ namespace Map {
                 &EntityState::destroyEntitiesOnTile)
             destroyEntitiesOnTile;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (EntityState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00401A50,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00401A50,
                 &EntityState::isBrazierNearby)
             isBrazierNearby;
 

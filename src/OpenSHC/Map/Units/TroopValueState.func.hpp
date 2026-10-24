@@ -161,7 +161,7 @@ namespace Map {
                 &TroopValueState::findNearestDiggableMoatPoint)
             findNearestDiggableMoatPoint;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051A920,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051A920,
                 &TroopValueState::findTribeWithMoatAttackBehavior)
             findTribeWithMoatAttackBehavior;
 
@@ -282,7 +282,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0051BF20, &TroopValueState::shouldLightPitchBasedOnTroopValue)
             shouldLightPitchBasedOnTroopValue;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BF70,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BF70,
                 &TroopValueState::giveLightPitchInstructionToUnitClosestToPitch)
             giveLightPitchInstructionToUnitClosestToPitch;
 
@@ -302,7 +302,7 @@ namespace Map {
                 &TroopValueState::queueOilThrowForIdleArchers)
             queueOilThrowForIdleArchers;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051C570,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051C570,
                 &TroopValueState::ifNecessaryThrowOilAutomatically)
             ifNecessaryThrowOilAutomatically;
 
@@ -342,7 +342,7 @@ namespace Map {
                 &TroopValueState::decideAndExecuteTribeAttackAction)
             decideAndExecuteTribeAttackAction;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D450,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D450,
                 &TroopValueState::moveTribeToNearbyGatehouse)
             moveTribeToNearbyGatehouse;
 

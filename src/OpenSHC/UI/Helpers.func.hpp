@@ -64,7 +64,7 @@ namespace UI {
             &OpenSHC::UI::Helpers::SetTribesPatrolButtonPressed)
         SetTribesPatrolButtonPressed;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x004347F0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x004347F0,
             &OpenSHC::UI::Helpers::SomeUnitAndViewportCheck)
         SomeUnitAndViewportCheck;
 
@@ -136,7 +136,7 @@ namespace UI {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00466E10, &OpenSHC::UI::Helpers::DisableMercPostPortraits)
         DisableMercPostPortraits;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90,
             &OpenSHC::UI::Helpers::TicksSinceCounterStart)
         TicksSinceCounterStart;
 

@@ -286,7 +286,7 @@ namespace Map {
 
         BOOLEnum isTileEnclosedByWallsOrGates(int param_1, int param_2);
 
-        undefined4 isTileEnclosedByWalls(int param_1, int param_2);
+        BOOLEnum isTileEnclosedByWalls(int param_1, int param_2);
 
         BOOLEnum isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
@@ -431,7 +431,7 @@ namespace Map {
 
         int setXYBasedOnMoatID(int tile, int param_2, uint x, uint y);
 
-        undefined4 advanceMoatDigProgress(int moatID);
+        BOOLEnum advanceMoatDigProgress(int moatID);
 
         void clearMoat(int tile);
 
@@ -457,7 +457,7 @@ namespace Map {
 
         void swapPitchOwnership(int param_1, int param_2);
 
-        undefined4 findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
+        BOOLEnum findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
 
         int computeTileAlongAxisOffset(int param_1, int param_2, uint param_3);
 

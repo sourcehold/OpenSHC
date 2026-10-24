@@ -221,7 +221,7 @@ namespace Map {
 
             void setupMercenaryPostCampgroundPositions(int playerID);
 
-            undefined4 isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
+            BOOLEnum isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
 
             undefined4 getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
 
@@ -229,13 +229,13 @@ namespace Map {
 
             void setupEngineersGuildParagroundPositions(int playerID);
 
-            int findFreeEngineerAssemblyTile(int playerIndex, int param_2);
+            BOOLEnum findFreeEngineerAssemblyTile(int playerIndex, int param_2);
 
             void setupTunnelersGuildCampgroundPositions(int param_1);
 
             BOOLEnum findFreeTunnelerAssemblyTile(int param_1, int param_2);
 
-            undefined4 findFreeCathedralAssemblyTile(int param_1, int param_2);
+            BOOLEnum findFreeCathedralAssemblyTile(int param_1, int param_2);
 
             void setTileRefsForOilSmelter(int buildingID);
 
@@ -243,7 +243,7 @@ namespace Map {
 
             uint getActiveEngineerForBuilding(int buildingID);
 
-            undefined4 setNewOnFarmDestination(int buildingID);
+            BOOLEnum setNewOnFarmDestination(int buildingID);
 
             void growHops(int buildingID);
 
@@ -271,7 +271,7 @@ namespace Map {
 
             int getBuildingFlag1(int param_1);
 
-            undefined4 determinePeasantSitPosition(int campfireID, int availablePeasants);
+            BOOLEnum determinePeasantSitPosition(int campfireID, int availablePeasants);
 
             void refreshAllBuildingTileDisplays();
 
@@ -297,9 +297,9 @@ namespace Map {
 
             BOOLEnum updateRepairCostAndReturnIfDamaged(int buildingIndex);
 
-            undefined4 canUnitReachBuildingPerimeter(int param_1, int param_2);
+            BOOLEnum canUnitReachBuildingPerimeter(int param_1, int param_2);
 
-            undefined4 canUnitReachAdjacentTile(int param_1, int param_2);
+            BOOLEnum canUnitReachAdjacentTile(int param_1, int param_2);
 
             void processDamageToUnitsOnBuilding(int buildingID, int damageBonus);
 

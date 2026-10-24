@@ -411,7 +411,7 @@ namespace Synchrony {
 
         void handleUnexpectedDPlayXResult();
 
-        undefined4 checkAllPlayersReadyAndCleanupSlots();
+        BOOLEnum checkAllPlayersReadyAndCleanupSlots();
 
         int computeSomeHashOnUnitArray();
 
@@ -485,7 +485,7 @@ namespace Synchrony {
 
         void sendPeriodicSyncMessages();
 
-        undefined4 reorderTeamsAndPositions();
+        BOOLEnum reorderTeamsAndPositions();
 
         void checkGameSync();
 

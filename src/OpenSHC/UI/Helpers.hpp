@@ -43,7 +43,7 @@ namespace UI {
 
         void __cdecl SetTribesPatrolButtonPressed(BOOLEnum param_1);
 
-        undefined4 __cdecl SomeUnitAndViewportCheck(int unitID);
+        BOOLEnum __cdecl SomeUnitAndViewportCheck(int unitID);
 
         void __cdecl HandleWallTerrainMouseDrag();
 
@@ -79,7 +79,7 @@ namespace UI {
 
         void __cdecl DisableMercPostPortraits();
 
-        undefined4 __cdecl TicksSinceCounterStart();
+        BOOLEnum __cdecl TicksSinceCounterStart();
 
         void __cdecl SetupPreviewMinimapDataUnk();
 

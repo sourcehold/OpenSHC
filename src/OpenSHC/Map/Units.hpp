@@ -31,7 +31,7 @@ namespace Map {
 
         BOOLEnum __cdecl ConsiderHavingABreakNowUnk(int unitID, UnitState nextUnitState);
 
-        undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
+        BOOLEnum __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
 
         BOOLEnum __cdecl CheckUnitProductionPaused(int param_1);
 

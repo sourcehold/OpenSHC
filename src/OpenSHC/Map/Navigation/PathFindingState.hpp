@@ -124,7 +124,7 @@ namespace Map {
             BOOLEnum findLinkageBasedPathOrWalkRadius(
                 uint x, uint y, int x2, int y2, int maxIterations, BOOLEnum continuePreviousSearch);
 
-            undefined4 findSuitableSpawnLocationUnk(int x, int y, int x2, int y2, int param_5, int param_6);
+            BOOLEnum findSuitableSpawnLocationUnk(int x, int y, int x2, int y2, int param_5, int param_6);
 
             BOOLEnum findPathUsingClimbingWithHeightMargin16(
                 uint x, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch);
@@ -132,7 +132,7 @@ namespace Map {
             BOOLEnum pathFindingWithBuildingsIncluded(
                 uint x, uint y, uint x2, uint y2, int maxOptionsToTry, int zeroMeansResetAlgorithm);
 
-            undefined4 calculatePathKeepAndWallsGatesNotAllowed(int x1, int y1, int x2, int y2, int maxTries);
+            BOOLEnum calculatePathKeepAndWallsGatesNotAllowed(int x1, int y1, int x2, int y2, int maxTries);
 
             uint commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3);
 
@@ -170,7 +170,7 @@ namespace Map {
 
             void getTileInSquareBrush(int brushTileIndex, uint x, uint y);
 
-            undefined4 setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y);
+            BOOLEnum setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y);
 
             BOOLEnum findNoTreeInRange(int budget, uint x, uint y);
 
@@ -189,10 +189,9 @@ namespace Map {
 
             void findWalkableTileThatDoesNotContainUnit(int unitID, uint x, uint y, int considerUnits);
 
-            undefined4 someBinaryAlgFunctionPathFinding(int param_1);
+            BOOLEnum someBinaryAlgFunctionPathFinding(int param_1);
 
-            undefined4 findClosestFreeTileNearUnitOnBuilding(
-                int buildingID, int unitID, int x, int y, int* pX, int* pY);
+            BOOLEnum findClosestFreeTileNearUnitOnBuilding(int buildingID, int unitID, int x, int y, int* pX, int* pY);
 
             BOOLEnum checkEnemyBuildingOrDefensiveStructureWithin12Tiles(int playerID, uint x, uint y);
 
@@ -239,23 +238,23 @@ namespace Map {
 
             dword findOwnedGatehouse(int playerID, uint x, uint y);
 
-            undefined4 isTileInRangeOfKeepRange(int playerID, uint x, uint y, int range);
+            BOOLEnum isTileInRangeOfKeepRange(int playerID, uint x, uint y, int range);
 
-            undefined4 findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4);
+            BOOLEnum findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4);
 
             void placeCommemoratingStatueAtGoodLocation(int playerID);
 
             BOOLEnum isSignPostWithinDistance(uint x, uint y, int limit);
 
-            undefined4 spreadAlgorithmForFlagsAndBraziersUnk(int playerID, uint x, uint y, int param_4, int param_5);
+            BOOLEnum spreadAlgorithmForFlagsAndBraziersUnk(int playerID, uint x, uint y, int param_4, int param_5);
 
-            undefined4 igniteFireAtTilesDistanceAway(int tile, int maxDistance, int playerID);
+            BOOLEnum igniteFireAtTilesDistanceAway(int tile, int maxDistance, int playerID);
 
             BOOLEnum findAccessibleWallAndNearbyFreeTile(uint unitID, int tile, int* pFreeTile, int* pDefensesTile);
 
-            undefined4 healUnitsOfPlayerWithinRadius(int param_1, int param_2, int param_3, int param_4);
+            BOOLEnum healUnitsOfPlayerWithinRadius(int param_1, int param_2, int param_3, int param_4);
 
-            undefined4 certainDamageToUnitsUnk(int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
+            BOOLEnum certainDamageToUnitsUnk(int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
 
             BOOLEnum pathFindingToAttackCastleIncludingMoat(undefined4 playerID, int wallOwnerPlayerID, uint x, uint y,
                 byte* out_successUnk, int* out_x, int* out_y);
@@ -304,7 +303,7 @@ namespace Map {
 
             void computeAttackVectorsBasedOnXAndY(int playerID);
 
-            undefined4 findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3);
+            BOOLEnum findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3);
 
             int canNavigateFunctionReturnsArea(int playerID, dword targetArea, uint unitX, uint unitY);
 
@@ -327,7 +326,7 @@ namespace Map {
 
             void pathfindingUpdate_0x4a8ab0(int param_1);
 
-            undefined4 isOpponentBuildingInRange(
+            BOOLEnum isOpponentBuildingInRange(
                 int playerID, int x, int y, int range, int param_5, int param_6, int keepRange);
 
             void clearAllClimbData();

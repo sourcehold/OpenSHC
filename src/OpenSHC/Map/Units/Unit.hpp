@@ -122,7 +122,7 @@ namespace Map {
             short mimicCurrentXPosition; // 0x000000E0 length: 2
             short mimicCurrentYPosition; // 0x000000E2 length: 2
             int nextTileUnk; // 0x000000E4 length: 4
-            int field105_0xe8; // 0x000000E8 length: 4
+            BOOLEnum field105_0xe8; // 0x000000E8 length: 4
             short destinationX_2Unk; // 0x000000EC length: 2
             short destinationY_2Unk; // 0x000000EE length: 2
             short _someX_2; // 0x000000F0 length: 2
@@ -282,8 +282,8 @@ namespace Map {
             int blessedAmount; // 0x000003E4 length: 4
             short attackAtTileX; // 0x000003E8 length: 2
             short attackAtTileY; // 0x000003EA length: 2
-            byte firstNameIndex; // 0x000003EC length: 1
-            byte rng1_to_70; // 0x000003ED length: 1
+            char firstNameIndex; // 0x000003EC length: 1
+            char rng1_to_70; // 0x000003ED length: 1
             char nextAttackHurtsWall; // 0x000003EE length: 1
             undefined1 poleturner_spearOrPike; // 0x000003EF length: 1
             short killedFlagUnk; // 0x000003F0 length: 2

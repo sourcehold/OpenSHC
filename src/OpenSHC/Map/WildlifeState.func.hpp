@@ -48,7 +48,7 @@ namespace Map {
             &WildlifeState::hasAdjacentCellWithField24Or25)
         hasAdjacentCellWithField24Or25;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
             &WildlifeState::isSuitableWildlifeSpawnCell)
         isSuitableWildlifeSpawnCell;
 

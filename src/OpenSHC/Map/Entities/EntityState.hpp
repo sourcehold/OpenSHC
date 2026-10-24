@@ -69,7 +69,7 @@ namespace Map {
 
             int getFireEntityIDAtTile(int tile);
 
-            int updateAllFireEntitiesAtTile(int tile);
+            BOOLEnum updateAllFireEntitiesAtTile(int tile);
 
             void processFireDamageToUnitsAtTile(int tile, int playerID, int fireLowIntensity);
 
@@ -85,7 +85,7 @@ namespace Map {
 
             void destroyEntitiesOnTile(int tile);
 
-            undefined4 isBrazierNearby(int unitX, int unitY, int unitZ);
+            BOOLEnum isBrazierNearby(int unitX, int unitY, int unitZ);
 
             void reassignEntitiesOwner(int param_1, undefined4 param_2);
 

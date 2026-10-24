@@ -57,7 +57,7 @@ namespace Map {
 
         undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
 
-        undefined4 isSuitableWildlifeSpawnCell(int param_1, int param_2);
+        BOOLEnum isSuitableWildlifeSpawnCell(int param_1, int param_2);
 
         void floodFillUnknownNonZero01FromCell(int param_1, int param_2, int param_3);
 

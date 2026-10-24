@@ -131,11 +131,11 @@ namespace Map {
 
             void setupUnitSharingTileIDs(int unitID, int unitCurrentTilePosition);
 
-            undefined4 isUnitRegisteredOnItsOwnTile(int unitID);
+            BOOLEnum isUnitRegisteredOnItsOwnTile(int unitID);
 
             BOOLEnum ifAnyUnitOnSameTileIsLadder(int unitID);
 
-            undefined4 ifAnyUnitOnSameTileIsLadderInRightDirection(int tile, int y);
+            BOOLEnum ifAnyUnitOnSameTileIsLadderInRightDirection(int tile, int y);
 
             void triggerDesyncIfTileUnitLinkageInvalid(int tile);
 
@@ -151,7 +151,7 @@ namespace Map {
 
             void setFacingDirectionTowardCoords(int param_1, int param_2, int param_3);
 
-            undefined4 setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID);
+            BOOLEnum setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID);
 
             void setFacingDirectionTowardUnitMicro(int param_1, int param_2);
 
@@ -189,11 +189,11 @@ namespace Map {
 
             int computeDamageFearFactorBonus(int damage, int playerID);
 
-            undefined4 processUnitAttackOtherUnit(int unitID, int unit2ID);
+            BOOLEnum processUnitAttackOtherUnit(int unitID, int unit2ID);
 
             BOOLEnum processEntityDamageToUnit(int unitID, int entityID, int tileDistance);
 
-            undefined4 processFireDamageToUnit(int unitID, int playerID, int halfTheDamage);
+            BOOLEnum processFireDamageToUnit(int unitID, int playerID, int halfTheDamage);
 
             void shootProjectile(int unitID, EntityType projectileType, int targetX, int targetY, int targetZUnk);
 
@@ -245,9 +245,9 @@ namespace Map {
 
             int stopUnitIfNextToTarget(int unitID);
 
-            undefined4 isWorkplaceBuildingOnAdjacentTile(int param_1);
+            BOOLEnum isWorkplaceBuildingOnAdjacentTile(int param_1);
 
-            undefined4 setWorkplaceBuildingEntryAsTarget(int unitID, int entryAngleUnk);
+            BOOLEnum setWorkplaceBuildingEntryAsTarget(int unitID, int entryAngleUnk);
 
             BOOLEnum unitIsInMoat(int unitID);
 
@@ -284,9 +284,9 @@ namespace Map {
 
             BOOLEnum selectionHasArchers();
 
-            undefined4 selectionHasMobileAssaultUnits();
+            BOOLEnum selectionHasMobileAssaultUnits();
 
-            undefined4 selectionHasMixedAssaultAndInfantry();
+            BOOLEnum selectionHasMixedAssaultAndInfantry();
 
             uint getSelectedEngineerCarryingResource();
 
@@ -294,19 +294,19 @@ namespace Map {
 
             BOOLEnum selectionContainsRangedOnlyUnits();
 
-            int selectionContainsLaddermenOnly();
+            BOOLEnum selectionContainsLaddermenOnly();
 
             BOOLEnum selectionContainsOnlyArabAssassins();
 
             int selectionContainsShieldmenOnly();
 
-            undefined4 selectionHasShieldOrSiegeMobileUnits();
+            BOOLEnum selectionHasShieldOrSiegeMobileUnits();
 
-            undefined4 selectionHasShieldOrSiegeTower();
+            BOOLEnum selectionHasShieldOrSiegeTower();
 
-            undefined4 selectionHasNoRangedUnits();
+            BOOLEnum selectionHasNoRangedUnits();
 
-            undefined4 selectionHasFootSoldiers();
+            BOOLEnum selectionHasFootSoldiers();
 
             uint getSelectedLordIDIfOwnedByCurrentPlayer();
 
@@ -328,7 +328,7 @@ namespace Map {
 
             UnitType getUnitTypeOfFirstSelectedUnit();
 
-            undefined4 selectionHasMovableNonSiegeUnit();
+            BOOLEnum selectionHasMovableNonSiegeUnit();
 
             uint getFirstSelectedUnitOfEitherType(int param_1, int param_2);
 
@@ -342,7 +342,7 @@ namespace Map {
 
             uint getFirstSelectedLadderUnitID();
 
-            undefined4 canAUnitClimb();
+            BOOLEnum canAUnitClimb();
 
             uint getFirstSelectedSiegeEngineID();
 
@@ -350,7 +350,7 @@ namespace Map {
 
             BOOLEnum isTowerTileOvercrowdedByCurrentPlayer(int param_1);
 
-            undefined4 checkAnySelectedUnitCannotClimb();
+            BOOLEnum checkAnySelectedUnitCannotClimb();
 
             BOOLEnum selectionHasUnmannedSiegeEngine(int param_1);
 
@@ -402,7 +402,7 @@ namespace Map {
 
             int findClosestEnemyByAreaAndRange(int param_1, uint param_2, uint param_3, int param_4);
 
-            undefined4 tryAttackUnitID(int unitID_1, int unitID_2);
+            BOOLEnum tryAttackUnitID(int unitID_1, int unitID_2);
 
             void setTowerSiegeEngineToIdle(int buildingID);
 
@@ -412,9 +412,9 @@ namespace Map {
 
             GmID getPeasantGmID(int unitID);
 
-            undefined4 chooseHusbandAndWife(int* husbandID, int* wifeID);
+            BOOLEnum chooseHusbandAndWife(int* husbandID, int* wifeID);
 
-            undefined4 isWorkerAtProductionIdleState(int param_1);
+            BOOLEnum isWorkerAtProductionIdleState(int param_1);
 
             int getWorkerBlockingStateIfStuck(int param_1);
 
@@ -436,7 +436,7 @@ namespace Map {
 
             int prepareProjectileTarget(int shooterID, int targetID, int param_3);
 
-            undefined4 harassBuildingsWithSiegeAI(int unitID);
+            BOOLEnum harassBuildingsWithSiegeAI(int unitID);
 
             BOOLEnum setDestinationForUnit(int unitID, uint x, uint y, int reusePathingInfo);
 
@@ -446,7 +446,7 @@ namespace Map {
 
             uint getUnitInHitBox(undefined4 param_1);
 
-            undefined4 setDestinationNearTargetedBuilding(int unitID, int param_2);
+            BOOLEnum setDestinationNearTargetedBuilding(int unitID, int param_2);
 
             int selectWorkerSpeechOrMoraleStateID(int unitID);
 
@@ -488,7 +488,7 @@ namespace Map {
 
             BOOLEnum moveToFreeTileNearby(int unitID);
 
-            undefined4 processUnitMove(int unitID, int speedCategory);
+            BOOLEnum processUnitMove(int unitID, int speedCategory);
 
             void updateUnits();
         };

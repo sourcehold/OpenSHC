@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Buildings/BuildingFlagSlot.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/Enums/DefensiveTowerEngineTypeByte.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -21,6 +22,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingFlagSlot;
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
+        using OpenSHC::Map::Buildings::Enums::DefensiveTowerEngineTypeByte;
 
 #pragma pack(push, 1)
         // SIZE: 0x0000032C
@@ -169,7 +171,7 @@ namespace Map {
             byte field169_0x292; // 0x00000292 length: 1
             byte drawbridgeState2; // 0x00000293 length: 1
             byte drawBridgeState1; // 0x00000294 length: 1
-            byte containsSiegeMangonel1OrBallista2; // 0x00000295 length: 1
+            DefensiveTowerEngineTypeByte defensiveTowerEngineType; // 0x00000295 length: 1
             bool sleeping; // 0x00000296 length: 1
             char numberOfAnimals; // 0x00000297 length: 1
             byte dairyProductionStage; // 0x00000298 length: 1
