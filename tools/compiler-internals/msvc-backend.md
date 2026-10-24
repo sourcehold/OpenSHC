@@ -1640,3 +1640,112 @@ size is still wrong**, and a drop of a point or two against a confirmed frame ma
 change was wrong. It also means a correct intermediate state can look like a regression, which is a reason
 to record the frame size and the mix delta in the commit message alongside the percentage, not just the
 percentage.
+
+## The /GS cookie was costing every protected function its first instruction
+
+This one is not a codegen subtlety, it is a build defect, and it had been capping a whole
+class of functions below 100% for as long as `/GS` has been on.
+
+**The signal.** `Text/FontSizeClass` has four functions that `structural_diff.py` calls
+perfect - `delta 0`, same instructions in the same order, `kind 1.000` - and which all
+scored *exactly* 96.0% normalized. Four unrelated functions stopping on the same number is
+a shared cause, not four coincidences. `reccmp_report.py diff` on the smallest of them,
+`getWidthOfWideText` at 27 instructions, named it on the first line:
+
+```
+-mov eax, dword ptr [StructResolver::Instance<unsigned int,12141088>::instance (DATA)]
++mov eax, dword ptr [__security_cookie (DATA)]
+```
+
+12141088 is 0x00B94220. Every `/GS`-protected function in the original reads its stack
+cookie from that address; ours read the copy of `__security_cookie` that LIBCMT links into
+our own `.data`. Two instructions per function - the prologue load and the epilogue
+`call __security_check_cookie` - never matched, in *every* protected function in the
+project. In a 27-instruction function that is 4%.
+
+**The fix is a MASM absolute, which the project was already doing for data.** `src/symbols/data.asm`
+already gives every game global an address with `EQU`, so the mechanism existed; it simply had
+never been pointed at the CRT's own symbols. `src/symbols/crt-gs.asm` now declares
+
+```
+___security_cookie            EQU 00B94220h
+___security_cookie_complement EQU 00B94224h
+```
+
+An absolute symbol makes `mov eax, [__security_cookie]` assemble to the literal address
+rather than a relocation into our `.data`, and the instruction then matches the original
+byte for byte. Verified in the linked image, not inferred: the built DLL contains **348**
+occurrences of `A1 20 42 B9 00`, `mov eax, [0x00B94220]`.
+
+**Two things have to come along with it, and both are load-bearing.**
+
+*`__security_cookie_complement`.* Declaring only the cookie still fails with
+`LNK2005: ___security_cookie already defined`. All three symbols live in one CRT object,
+LIBCMT's `gs_cookie.obj`, so leaving the complement undefined pulls that object in on its
+own account and brings its definition of the cookie with it. Defining all three means the
+object is never linked and there is no duplicate - no `/FORCE:MULTIPLE` needed. (That flag
+*does* make it link and was used to measure the upside first, but it is not a mechanism:
+it silently keeps whichever definition came first.)
+
+*`__security_init_cookie`, stubbed to `ret`.* This is a correctness requirement, not a
+matching one. The real one generates a fresh random cookie and stores it to the cookie
+variable - which is now 0x00B94220, *the game's own cookie*. Running it at our DLL's
+startup would replace the value that every already-live game stack frame is going to check
+when it returns, and those frames would take `__report_gsfailure`. The game initialises the
+cookie in its own startup long before we are injected, so for us the right initialisation
+is to do nothing.
+
+**What is deliberately left alone.** The epilogue's `call __security_check_cookie` still
+goes to our own copy. The game's is at 0x0057F755, but that reference is a *relative* call,
+and a displacement computed at link time into a fixed foreign address is only correct while
+the DLL loads at its preferred base - it cannot be relocated. Our copy is functionally
+identical, and a differing call target is exactly what the normalized percentage forgives.
+
+**Result.** Five of the fourteen functions in `Text/FontSizeClass` went to normalized
+100.0: `getWidthOfWideText`, `renderMultilineWideTextUnk`, `renderSomeSpecificTextUnk` and
+`renderWideText` from 96.0, and `wrapTextIntoLines` from 98.4. Raw percentages do not move,
+and that is expected rather than disappointing - reccmp cannot *name* an address outside our
+module, so it prints `<OFFSET1>` and still scores the operand as different, while the
+normalized measure treats it as a resolver address and forgives it. The instruction is
+nonetheless correct in the image.
+
+The gain is not specific to this namespace. It applies to every `/GS`-protected function in
+the project - any function with a local array - so it is worth re-measuring namespaces that
+were previously parked just short of 100.
+
+**Measured with a controlled A/B, because a build-level change deserves one.** Same 207-file
+list (all of `AI/AICState` plus `Text/FontSizeClass`), same resolver state, toggling only this
+one file:
+
+```
+207 functions: 200 identical, 7 improved, 0 worse
+normalized 100 count:  181 -> 186
+average normalized:    97.340 -> 97.432
+```
+
+`renderDebugDataAiInfo` also picked up 95.1 -> 96.3, so the fix reaches AICState too, not only
+the namespace that exposed it.
+
+**The change provably cannot perturb codegen**, which is worth knowing because it means an A/B
+like the above can only ever come back "identical or better". `crt-gs.asm` is its own
+translation unit and changes no `.cpp` compile command, and the compiled objects reference
+`___security_cookie` as an *unresolved external* with none of the address bytes present - check
+it with `grep -c ___security_cookie` on any `/GS` object. Only the link-time value of that
+operand moves, so instruction selection, scheduling and register allocation are untouched. The
+200 byte-identical functions are the confirmation.
+
+**A warning about what is NOT a valid baseline.** The first attempt at this comparison used the
+recorded percentages in `status/addresses-SHC-3BB0A8C1.txt` as the "before", and it reported 11
+regressions and 37 improvements - all of it noise. Those numbers were recorded with a *different*
+`cmake/openshc-sources.txt.local` (60 AICState files against this run's 193), and widening the
+list changes cross-TU inlining enough to move real percentages in both directions, by as much as
+46 points in one case. **Recorded status percentages are only comparable against the build list
+they were taken under.** For any change that could affect more than one function, build the
+control yourself.
+
+**A note on regression-testing it.** Building every implemented function is not available as
+a check: a list of all 860 `.cpp` files with a `FUNCTION:` marker does not compile, because
+`AI/AIVState/aiPlaceAIVBuilding.cpp` references `Building::field240_0x2c8`, which does not
+exist. That is pre-existing and unrelated, but it does mean the curated per-developer
+`cmake/openshc-sources.txt.local` is the only build that works, and a project-wide before/after
+has to be assembled from namespace-sized runs.
