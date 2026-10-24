@@ -12,7 +12,91 @@ proxy for it.
 For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
 order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
 
-## The next lever: static branch prediction feeds register allocation
+## The spill-cost weight, read directly: it is `1 << loop_depth`
+
+This supersedes the inferred chain in the two sections below, which was wrong at both ends. Read
+out of the code rather than reasoned from the names, `Spillcosts` computes its own weight and
+never consults the branch-prediction machinery.
+
+### Where the weight comes from
+
+`Spillcosts` opens `sub esp, 0x30` followed by four pushes, so the `[esp+0x28]` that it multiplies
+by is a **local** at frame offset 0x18, not an incoming argument - the first thing that ruled out
+the idea that a weight is handed in from elsewhere. It is written at five sites, all inside this
+block:
+
+```
+0x10b1066a  cmp  dword ptr [_PogoFlag], 2
+0x10b10671  jne  0x10b106d9                  ; no profile
+            ; profile path: esi:edi = total count, [ebx+0x190] = this block's 64-bit count
+            ;   total == 0            -> weight = 1
+            ;   count <= 0            -> weight = 1
+            ;   otherwise             -> weight = count * 0x2710 / total + 1
+            ;                            (0x2710 = 10000, two 64-bit helper calls)
+0x10b106d9  mov  cl, byte ptr [ebx + 0x17e]
+0x10b106df  mov  eax, 1
+0x10b106e4  shl  eax, cl                     ; weight = 1 << [ebx+0x17e]
+0x10b106e6  mov  dword ptr [esp + 0x28], eax
+```
+
+So:
+
+* **without a profile** - every build here - `weight = 1 << depth`, where depth is the `word` at
+  `+0x17e` of the block record;
+* **with `_PogoFlag == 2`** the weight is the block's share of the total execution count scaled by
+  10000, plus one.
+
+`+0x17e` is a **loop nesting depth**. Every write to it comes from loop machinery -
+`@HoistOutOfLoop@16`, `@LpCanonicalizeLoops@4`, `@LgFindExitBlocks1@12`, `@LurNewBlock@12`,
+`@FPHoistOutOfLoop@20` - and the block creators zero it or copy it from a parent:
+`@FgSplitBlock@12`, `@FgInsertAirlockBlock@16`, `@PtInlDupInlineeBlock@8`, `@PogoOptNewBlock@4`.
+
+### So the full key is
+
+```
+key(+0x0c) = sum over regions where the value IS referenced     ( refs * count * 2^depth )
+           - sum over regions where it is live but UNREFERENCED (        count * 2^depth )
+```
+
+with `2^depth` replaced by the scaled profile share under PGO.
+
+### What the Bp heuristics actually feed
+
+Not this. `@BpBlockProbabilities@4` has exactly one caller,
+`@BpComputeFlowgraphProbabilities@4`, and that has exactly two:
+`@PtInlFindInitialPartialInlineeAux@12` and `@PtInlComputeBenefit@4`. `@FgWeightFlowGraph@4`'s
+five callers are `@DoInline@24`, `@PtInlCollectBUInfo@12`, `@LiListFunction@4`,
+`@X87MapGFxToSTx@4` and `@PogoFgCreateScaledZeroCounts@20`.
+
+The static branch-prediction suite is an **inliner** input - it estimates how much a partial
+inline is worth - plus an x87 mapping use and a profile path. It does not reach register
+allocation, and `Spillcosts` does not call any of it.
+
+That is the whole reason the guard-inversion test came out flat: inverting
+`if (aiType == AITA_NULL) return 0;` changes which arm is predicted taken, but it does not change
+any block's **loop depth**, so no weight moves, so no key moves, so the allocation is untouched -
+which is exactly what was measured, with the register substitution profile identical in kind and
+count. It also explains, in passing, why `#pragma inline_depth(1)` perturbed codegen in the
+earlier pragma sweeps while the branch-shape rewrites did not: inlining is the consumer of that
+chain.
+
+### The lever this does give
+
+Loop depth, and it is predictive. A reference inside a loop at depth *d* contributes `2^d` to its
+value's key; the same reference outside contributes 1. A value that is live across a loop without
+being referenced in it is charged `2^d` per such region. So moving a reference into or out of a
+loop changes that value's allocation priority by a factor of two per level, in a direction the
+formula states in advance - which is a much sharper instrument than the branch-shape rewrites
+tried above, and the one to reach for when a value is enregistered on one side and spilled on the
+other.
+
+Worth noting what this predicts about the functions in this file: `playerID` in
+`aiGiveRaidInstructions` keys at **-147** because it is live across a depth-1 loop while being
+referenced almost entirely outside it, so it collects the `count * 2` penalty repeatedly - and
+`slot_map.py` independently shows it in a stack slot. The model and the observation agree without
+being fitted to each other.
+
+## Superseded: static branch prediction feeds register allocation (it does not)
 
 `Spillcosts` keys on `refs * count * weight`, and `weight` is a block frequency. Following where
 that comes from leads to the one lever found so far that the source actually controls.
