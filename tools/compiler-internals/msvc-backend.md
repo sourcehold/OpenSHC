@@ -9,6 +9,9 @@ Everything here is about `MSVC1400-SP1/VC/bin/c2.dll`, `Microsoft (R) Optimizing
 14.00.50727.762` - the toolchain this project builds with, so it is the authority on our codegen rather than a
 proxy for it.
 
+For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
+order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
+
 ## Getting symbols
 
 `c2.dll` references `c2.pdb`, and Microsoft still publishes it:

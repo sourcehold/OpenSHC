@@ -271,16 +271,28 @@ def report_registers(div):
               and all(b in mapping for b in mapping.values())
               and len(mapping) > 2)
     if closed:
-        cycle = []
-        a = sorted(mapping)[0]
-        for _ in range(len(mapping)):
-            cycle.append(a)
-            a = mapping[a]
+        # decompose into disjoint cycles and walk each until it returns to its start. Running
+        # one walk for len(mapping) steps instead printed nonsense whenever the permutation
+        # had more than one cycle - `eax -> ecx -> edx -> eax -> ecx -> eax` for what is
+        # really ebp <-> ebx alongside eax -> ecx -> edx -> eax.
+        cycles, seen_r = [], set()
+        for start in sorted(mapping):
+            if start in seen_r:
+                continue
+            cycle, a = [], start
+            while a not in seen_r:
+                seen_r.add(a)
+                cycle.append(a)
+                a = mapping[a]
+            cycles.append(cycle)
         print('')
-        print('  The dominant substitution is a closed cycle %s, covering %d of %d (%.0f%%).'
-              % (' -> '.join(cycle + [cycle[0]]), covered, total, 100.0 * covered / total))
-        print('  A closed cycle means the allocation is structurally right and the scratch')
-        print('  registers were merely handed out in a different order.')
+        shown = ', '.join(' -> '.join(c + [c[0]]) if len(c) > 1 else '%s (unchanged)' % c[0]
+                          for c in cycles)
+        print('  The dominant substitution is a permutation in %d closed cycle(s), covering'
+              % len(cycles))
+        print('  %d of %d (%.0f%%): %s' % (covered, total, 100.0 * covered / total, shown))
+        print('  Closed cycles mean the allocation is structurally right and the registers')
+        print('  were merely handed out in a different order.')
     if fs is not None and fr is not None and fr >= fs:
         print('')
         print('  The first STRUCTURAL difference is at original instruction %d and the first' % fs)
