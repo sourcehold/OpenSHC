@@ -2341,3 +2341,124 @@ shape differs with it).
   increment); the rest are a single instruction one position away, and nothing in the source
   reaches that.
 
+
+## The deep work: four PathFindingState functions, and the inline-assembly discovery
+
+The branch pass left the sub-60 functions as "big, multi-defect, take them one at a time with
+the frame signal first". This is that pass. Four functions moved, three of them by a mechanism
+that no amount of C++ tuning could ever have reached.
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `tracePathPlanToDestinationViaUnoccupiedTiles` | 12.5 | **85.7 / 83.6** | the whole walk is handwritten assembly |
+| `findSuitableSpawnLocationUnk` | 52.6 | **82.5 / 81.3** | the loop head is assembly too, and the indices live in parameter slots |
+| `findLinkageBasedPathOrWalkRadius` | 50.5 | **79.7** | same |
+| `findNextTileInExistingSearchThatIsModuloDistanceAway` | 56.5 | **66.1 / 65.6** | two source defects: a global written every iteration, and a result routed through a temp |
+
+### `findNextTileInExistingSearch...`: the two missing slots were two source defects
+
+The hoisted `WalkLayer[tilesQueue[0]]` recovered one slot (recorded in the branch pass). The
+side-by-side of the result showed the other two differences were not allocation at all. Ours
+stored the global `ALG_ResultTileIndex` on *every iteration* (`mov [G], ebx` inside the loop,
+ours only) and compared it unsigned (`ja` against the original's `jg`); the original keeps the
+counter in a signed local and writes the global once at the end. And the missing slot was
+`local_10`: the original stores `0` to it at entry and the index into it on the found path
+(`mov [esp+0x10], ebx`); ours routed the result through `iVar2` and assigned `local_10` after
+the loop, so the compiler folded it into a register and materialised the zero late. A local
+counter and a direct assignment on the found path: frame exact, 63 = 63 instructions, `delta 0`,
+reccmp 56.5 -> 66.1. The remainder is an `ebx`/`ebp` 2-cycle between `_index` (key 34) and
+`_dist` (key 38) - a 4-unit gap that four spellings did not move - plus epilogue volatiles.
+
+### The inline-assembly discovery
+
+`tracePathPlanToDestinationViaUnoccupiedTiles` sat at 12.5% with a frame of 0x18 against the
+original's 0x3c - nine locals short - and the original's prologue was `push ebp / mov ebp, esp /
+sub esp, 0x3c`. The file already carried `#pragma optimize("y", off)` with the comment "original
+keeps an ebp frame", which got the frame pointer and nothing else. The body told the rest:
+
+```
+mov  ax, word ptr [ebp-0x30]        ; a 16-bit load no compiler writes for an int local
+mov  dword ptr [ebp-0xc], 6         ; the direction stored as a constant...
+mov  eax, dword ptr [ebp-0xc]       ; ...and read back three instructions later
+add  dword ptr [ebp-8], 1           ; the step budget counted in memory
+cmp  dword ptr [ebp-8], 0x190
+mov  esi, dword ptr [ebp-0x24]      ; every layer base reloaded from its slot before each use
+```
+
+Every optimisation level was tried first - `("g", off)`, `("", off)`, `("gt", off)` - and all
+made it *worse* (0.13 -> 0.05): the surrounding code (bounds checks, the `searchGeneration`
+bump) is plainly optimised, so this is not a function compiled at `/Od`. It is a function whose
+loop is an `__asm` block, exactly as `LinkageNeighbourAsm.hpp` already documents for three
+siblings: MSVC keeps an `ebp` frame in any function containing inline assembly, and every local
+the block names has to live in memory. The nine missing locals *were* the asm's operands.
+
+Rewriting the loop as an `__asm` block mirroring the original instruction for instruction - x, y,
+the tile and the walk layer kept in `ebx/ecx/edx/edi` across iterations, everything else
+reloaded, the direction stored as a constant, the three-way compare on y then x - gave frame
+0x3c = 0x3c, 182 = 182 instructions and 85.7%. The residue is two things: `_budget` and
+`_direction` occupy each other's slots (`-8`/`-0xc`), which neither declaration nor
+initialisation order moves, so it is weight-driven and the original's weights came from a shape
+not reproduced; and the second early-return epilogue is laid out at the end instead of inline. A
+mixed form - the budget loop in C with the asm as its body, to give the budget a depth-1 weight -
+costs nine instructions and scrambles the slots (0.43). The pure-asm form is right.
+
+**A scanner for the signature.** Over every sub-100 PathFindingState original: an `ebp` frame
+without `and esp` alignment, `mov eax, 0` followed by `mov ax, ...`, 16-bit compares, and bases
+reloaded from `[ebp-N]`. Exactly four functions carry it: `tracePathPlan...` and the three
+`LinkageNeighbourAsm.hpp` users. The other 93 low scores on the branch are ordinary C++ problems.
+It also corrected a mistake in the branch write-up above: those three macro users are **not** at
+100 - a lookup had defaulted to it - they were at 50.5, 52.6 and 66.7.
+
+### The two macro users: the loop head is assembly too
+
+`findLinkageBasedPathOrWalkRadius` and `findSuitableSpawnLocationUnk` use the push macros for
+the eight-neighbour expansion but had the loop *head* in C. The original's head is in the same
+hand as the pushes:
+
+```
+mov  ecx, [ebp+0x10]        ; the read index - in the x2 PARAMETER's slot
+cmp  ecx, [ebp+0xc]         ; the write index - in y's slot
+mov  eax, [ebp+0x1c]        ; the depth - in continuePreviousSearch's slot
+cmp  eax, [ebp+0x18]        ; maxIterations
+mov  bx, word ptr [esi+edx*2]
+add  bx, 1                   ; the distance kept in bx (and in findLinkage..., cmp bx, 0x320)
+mov  eax, 0
+mov  ax, word ptr [esi+ecx*2]   ; the row, zero-extended the asm way
+mov  edi, _walkLayer / mov edx, _tile / mov esi, _linkage / mov bl, byte ptr [esi+edx]
+```
+
+Three consequences for the source. The read index is the `x2` parameter, so our `_readIndex`
+local was the extra frame slot (+4 on both). There is no `_cLink` local - the original loads `bl`
+straight from the layer - so the shared `MACRO_LINKAGE_EXPAND_NEIGHBOURS`, whose first three
+instructions load `_cLink`, is not what these two functions do before the pushes; the pushes
+themselves (`MACRO_LINKAGE_PUSH` / `_FREE`) match exactly and are reused. And `_curGen` and
+`_cCardinalDistance` are dword slots written as words, so they are `int`s in C with `word ptr`
+in the asm. With a function-specific asm head wrapped around the push macros and the indices
+back in the parameters, both frames are exact and **every slot of both functions sits at the
+original's offset** - twelve in one, thirteen in the other - without any ordering work: the
+asm-named locals come out in declaration order. 50.5 -> 79.7 and 52.6 -> 82.5.
+
+What remains in both is the C prologue around the `fillMemory` call: the original keeps `y` in
+`edi` and `x2` in `ebx` across it and rematerialises the constant `1` in `eax`; ours parks the
+`1` in `edi` and reloads the parameters. That follows from the original pushing `edi` at entry
+and ours delaying the push past the first bounds check, which is the same early-exit layout
+difference as the two functions above, and the same wall.
+
+**`updateSeparateAreaTileMap` (66.7)** is the third macro user and is frame-exact, but its slot
+layout is not: the original has *two* copies each of the `yQueue` and `tilesQueue` pointers
+(`lea eax, [esi+0x6a380]` stored to both `[ebp-0x24]` and `[ebp-0x34]`), one per loop, where
+ours has one local and two compiler temps. Its residue is ~55 slot stores and `esi`/`eax` renames
+on top of a zero/one-register prologue (`xor ecx,ecx; lea ebx,[ecx+1]`). The duplicate pointer
+locals are the next step for it; not started.
+
+### What the deep work says
+
+* **A function stuck below ~20% with an `ebp` frame and no `and esp` is probably inline
+  assembly**, and the pragma that gets the frame pointer gets nothing else. The scanner above
+  finds the rest in a minute; the LinkageNeighbourAsm header already said how to write them.
+* **For asm-bound functions the frame is not a signal, it is the specification.** Every named
+  local is a slot, in declaration order; getting the local set right got all 25 slots across two
+  functions to the exact offsets with no tuning.
+* **The remaining residues are all one class** - early-exit layout, which decides where `push
+  edi` lands, which decides which value gets a callee-saved register across the first call.
+  Four functions on this branch stop at the same wall, 80-86%.
