@@ -103,6 +103,54 @@ def add_cmd():
             ', @edx, poi(@edx+0x20), poi(@edx+0x38), poi(@esp), @ebx, poi(@ebx+4), @esi, @edi; ' + NAME)
 
 
+ADD_RE = re.compile(r'^ADD ([0-9a-f]+) sz=(\d+) wt=(-?\d+) ret=([0-9a-f]+)(?: tup=([0-9a-f]+) op=([0-9a-f]+))?'
+                    r'(?: esi=([0-9a-f]+) edi=([0-9a-f]+))? \s*(?:[0-9a-f]{8}\s+"([^"]*)"|\((temp|nosym)\))', re.M)
+LIST_RE = re.compile(r'^LIST (\d+) ([0-9a-f]+) sz=(\d+) wt=(\d+) kind=(\d+) \s*(?:[0-9a-f]{8}\s+"([^"]*)"|\((temp|nosym)\))', re.M)
+
+
+def parse(txt):
+    """The ADD sequence and the final LIST of a probe log, as plain tuples."""
+    adds = [(m.group(1), int(m.group(2)), int(m.group(3)), m.group(9) or m.group(10)) for m in ADD_RE.finditer(txt)]
+    lst = [(m.group(2), int(m.group(3)), int(m.group(4)), m.group(6) or m.group(7)) for m in LIST_RE.finditer(txt)]
+    return adds, lst, bool(re.search(r'^SORTED', txt, re.M))
+
+
+def simulate(adds):
+    """Replay AddStackElement (c2.dll 0x10be9190) over an ADD sequence of (elem, size, ...).
+
+    First call for an element: insert it after every element whose size is <= its own, weight 1.
+    Later calls: weight += 1, then move it forward past the same-size predecessors whose weight
+    is strictly lower, stopping behind the first whose weight is >= the new one. Returns the
+    list head-to-tail as [(elem, size, weight)]. test_slot_rules.py checks this against the
+    recorded lists; slot_probe.py prints a mismatch if the live list ever disagrees.
+    """
+    order = []                        # elem ids head-to-tail
+    size, weight = {}, {}
+    for elem, sz in ((a[0], a[1]) for a in adds):
+        if elem not in weight:
+            size[elem], weight[elem] = sz, 1
+            i = 0
+            while i < len(order) and size[order[i]] <= sz:
+                i += 1
+            order.insert(i, elem)
+            continue
+        weight[elem] += 1
+        i = order.index(elem)
+        j = i
+        while j > 0 and size[order[j - 1]] == sz and weight[order[j - 1]] < weight[elem]:
+            j -= 1
+        if j != i:
+            order.pop(i)
+            order.insert(j, elem)
+    return [(e, size[e], weight[e]) for e in order]
+
+
+def regime(frame, gs_buffer):
+    """Does ColorStackElements sort the colours? Only for a frame over 0x80 bytes or a /GS
+    buffer (Function+0xAC & 1); otherwise the element list order IS the slot order."""
+    return 'sorted' if (frame > 0x80 or gs_buffer) else 'list-order'
+
+
 def probe(src, invocation):
     lines = ['sxe ld:c2', 'g',
              'bp1 ' + ADD_STACK_ELEMENT + ' "' + add_cmd() + '; gc"',
@@ -162,7 +210,13 @@ if __name__ == '__main__':
     print('### symStackElements at ColorStackElements entry (head to tail)')
     for m in re.finditer(r'^LIST (\d+) ([0-9a-f]+) sz=(\d+) wt=(\d+) kind=(\d+) \s*' + name_re, txt, re.M):
         print('  %3s %8s sz=%-3s wt=%-3s kind=%s  %s' % (m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), m.group(6) or m.group(7)))
-    print('### QSortColors ran: %s' % ('yes' if re.search(r'^SORTED', txt, re.M) else 'NO (frame <= 0x80, no /GS buffer)'))
+    adds, lst, sorted_ = parse(txt)
+    predicted = [e for e, _s, _w in simulate(adds)]
+    if predicted == [e for e, _s, _w, _n in lst]:
+        print('### simulate() reproduces the recorded list (%d elements)' % len(lst))
+    else:
+        print('### simulate() DISAGREES with the recorded list - the rule in slot_probe.py is incomplete here')
+    print('### QSortColors ran: %s' % ('yes' if sorted_ else 'NO (frame <= 0x80, no /GS buffer)'))
     print('### colour records after the (optional) sort')
     for m in re.finditer(r'^REC OUT (\d+) sz=(\d+) wt=(\d+) cls=(\d+) al=(\d+)', txt, re.M):
         print('  %3s sz=%-3s wt=%-3s cls=%s al=%s' % m.groups())

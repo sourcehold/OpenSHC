@@ -32,11 +32,21 @@ touched once through `lea` at its base, so its size shows up as the gap to the n
 is referenced. The report prints the gap as `span` and the widest observed access as `acc`,
 and never pretends the two are the same thing.
 
-Reference counts matter as much as the offsets. The decoded `StkColorCmp` sorts slots by the
-class byte at `+0x18`, then by `weight * 1000 / size` descending, with declaration order only
-breaking ties - so a local in the wrong place usually means our reference count for it differs
-from the original's, not that we declared it in the wrong order. The `key` column prints that
-sort key, and `--refs` lists every referencing address per slot.
+Reference counts matter as much as the offsets, and there are two regimes (decoded from
+c2.dll, see tools/compiler-internals/msvc-backend.md "The slot tiebreak, decoded"):
+
+* frame > 0x80 bytes, or a /GS buffer: `QSortColors` sorts the slots by the class byte, then by
+  `weight * 1000 / size` descending. The `key` column prints that key.
+* otherwise the sort is SKIPPED and the slot order is c2's element list as built: size
+  ascending, then reference count descending, and among equal counts the local whose LAST
+  reference comes first in the tuple stream gets the higher address. Declaration order is not in
+  the rule. An `__asm` block counts each local once per operand set (def-set, use-list, def-set
+  again), and its def-set is iterated in name-hash order, so for asm-written locals the name
+  itself is the tiebreak. The `key` column then prints the reference count, and
+  `tools/compiler-internals/slot_probe.py` shows the exact reference sequence.
+
+Either way a local in the wrong place usually means our reference count differs from the
+original's. `--refs` lists every referencing address per slot. The report names the regime.
 
 A `?` row on either side is a slot that side does not have. Those are the actionable rows: a
 `?` under ours is a local the original has and we do not.
@@ -92,6 +102,7 @@ def ours(path):
     f = re.search(r'\n\tsub\tesp, (\d+)', body)
     if f:
         frame = int(f.group(1))
+    gs = '___security_cookie' in body
     out = []
     for off, size, nm in sorted(slots):
         if off >= 8:
@@ -105,7 +116,7 @@ def ours(path):
             # made a frameless function look three slots too big.
             continue
         out.append((off, size, refs, nm))
-    return frame, out
+    return frame, out, gs
 
 
 def _imm(text):
@@ -263,6 +274,7 @@ def original(address):
             frame = _imm(ops.split(',', 1)[1]) or 0
             break
 
+    gs = any('0xb94220' in ops for _a, _m, ops in stream)
     hits = collections.defaultdict(lambda: {'refs': 0, 'acc': 0, 'addrs': []})
     unreached = 0
     for i, (addr, mnemonic, ops) in enumerate(stream):
@@ -295,11 +307,20 @@ def original(address):
         h = hits[off]
         out.append((off, span, h['acc'], h['refs'], h['addrs']))
     return frame, out, {'conflicts': conflicts, 'unknown_calls': unknown_calls,
-                        'unreached': unreached, 'impossible': impossible}
+                        'unreached': unreached, 'impossible': impossible, 'gs': gs}
 
 
-def key(refs, size):
-    """StkColorCmp's secondary sort key: weight * 1000 / size, descending."""
+def regime(frame, gs):
+    """'sorted' when ColorStackElements runs QSortColors (frame over 0x80 bytes, or a /GS buffer),
+    else 'list-order': the element list as AddStackElement built it is the slot order."""
+    return 'sorted' if (frame > 0x80 or gs) else 'list-order'
+
+
+def key(refs, size, mode='sorted'):
+    """The ordering key per regime: StkColorCmp's weight * 1000 / size when the sort runs, the
+    bare reference count (the list is weight-descending) when it does not."""
+    if mode != 'sorted':
+        return refs
     return (refs * 1000 // size) if size else 0
 
 
@@ -343,8 +364,20 @@ def main():
         for off, span, acc, refs, addrs in o_slots:
             print('  %6d  span %-5s acc %-2s refs %-3d' % (off, span, acc or '?', refs))
         return
-    u_frame, u_slots = ours(path)
+    u_frame, u_slots, u_gs = ours(path)
     print('%#x   (%+d)' % (u_frame, u_frame - o_frame))
+    mode = regime(o_frame, trouble.get('gs', False))
+    u_mode = regime(u_frame, u_gs)
+    if mode == 'sorted':
+        print('regime  sorted: frame > 0x80 or /GS buffer, so slots follow weight*1000/size (the `key` column)')
+    else:
+        print('regime  list-order: frame <= 0x80 and no /GS buffer, so QSortColors is skipped - slots follow')
+        print('        reference count (the `key` column), ties by whose LAST reference comes first;')
+        print('        for asm-written locals that is the name-hash order of the def-set (slot_probe.py)')
+    if u_mode != mode:
+        print('WARNING: ours is in the %s regime (frame %#x, cookie %s) while the original is %s - the'
+              % (u_mode, u_frame, 'yes' if u_gs else 'no', mode))
+        print('         orders are not comparable until the frame size / GS state agrees')
     print('')
     # pair the two layouts in offset order; both are entry-relative, so a constant shift means
     # the layout is right and only the frame size differs
@@ -361,12 +394,12 @@ def main():
             off, span, acc, refs, _a = o_slots[i - o_pad]
             size = span if span else (acc or 4)
             left = '%6d %6s %4s %5d %6d' % (off, span if span else '-', acc or '?', refs,
-                                            key(refs, size))
+                                            key(refs, size, mode))
         else:
             left = '%6s %6s %4s %5s %6s' % ('?', '', '', '', '')
         if i >= u_pad:
             uoff, usize, urefs, nm = u_slots[i - u_pad]
-            right = '%6d %6d %5d %6d  %s' % (uoff, usize, urefs, key(urefs, usize), nm)
+            right = '%6d %6d %5d %6d  %s' % (uoff, usize, urefs, key(urefs, usize, mode), nm)
         else:
             right = '%6s %6s %5s %6s  %s' % ('?', '', '', '', '<-- a local we do not have')
         print('%s | %s' % (left, right))
@@ -380,7 +413,11 @@ def main():
         print('  be either a surplus local or a spill, so it is weaker evidence.')
     else:
         print('  Frame sizes agree, so the set of locals is probably right and what is left is')
-        print('  their ORDER - compare the `key` columns, since that is what the sort uses.')
+        if mode == 'sorted':
+            print('  their ORDER - compare the `key` columns, since that is what the sort uses.')
+        else:
+            print('  their ORDER - compare the reference counts; equal counts are ordered by the position')
+            print('  of the LAST reference, which slot_probe.py prints for each local.')
     if SHOW_REFS:
         print('')
         for off, _span, _acc, refs, addrs in o_slots:

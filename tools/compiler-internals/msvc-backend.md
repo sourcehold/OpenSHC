@@ -2576,3 +2576,30 @@ The `_tile`/`_cY` case is the warning about the ranking: in the three macro user
 followed declaration order, which only happens when two names hash to the same bucket - the
 `name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
 what settled each one.
+
+### The rule, as code: `simulate()`, `regime()`, and the regression tests
+
+`slot_probe.simulate(adds)` replays `AddStackElement` over a recorded reference sequence and
+`slot_probe.regime(frame, gs)` says whether `QSortColors` runs. `tests/test_slot_rules.py` holds
+nine recorded c2.dll traces as fixtures (the four asm functions, the rename / declaration-swap /
+split-block variants of tracePathPlan, and the 39-local name_rank run where the sort did run) and
+checks that the simulation reproduces every recorded list element for element, that the rename
+and not the declaration swap moves the pair, that list order maps onto `-4, -8, ...` when the
+sort is skipped, and that the two `regime()` copies agree. No compiler needed:
+`python tools/compiler-internals/tests/test_slot_rules.py`. If the rule is ever refined, a
+recorded compile that stops replaying is the regression.
+
+`slot_map.py` now prints the regime for the function and, in the list-order regime, shows the
+bare reference count as the key and says that ties go by the position of the last reference.
+
+**Sweep of the 60 AICState files (reimpl/AICState-leftover), same build A/B against a saved
+baseline:** every sub-100 function with a frame already has the original's slot count, order
+and reference counts (`aiRecruitUnits`, `sellExcessGoods`, `smallestTribeOfUnitType`,
+`sendWallPatrolUnitTribesToAIVLocations`, `aiShouldAttackOrWaitForTeamCoordination`) - their
+residue is register allocation, and `diff_triage.py` already said so (`alloc-only`). The one
+FRAME mismatch, `addUnitToSmallestBehaviourTypeTribe` (0xc vs 8), is not an ordering problem:
+the original keeps two locals in dead *parameter* homes (`[esp+0x1c]` a pointer iterator over
+the tribe-ID row, `[esp+0x24]` the running minimum), which is `ColorStackElements` phase 2
+sharing a local into a parameter colour. Rewriting the loop with the pointer iterator made it
+worse (80.1 -> 77.3) and was reverted; what decides the sharing is liveness of the parameter,
+i.e. where the last read of each argument sits, and that is the next thing to look at there.
