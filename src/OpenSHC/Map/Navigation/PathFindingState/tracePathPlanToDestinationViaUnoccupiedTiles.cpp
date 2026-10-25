@@ -21,7 +21,6 @@ namespace Map {
         /*
              @return bool whether destination was reached   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
-#pragma optimize("y", off) // original keeps an ebp frame
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A370
         BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY)
         {
@@ -62,8 +61,8 @@ namespace Map {
             _direction = 0;
             _gen = (ushort)this->searchGeneration;
             _fireCount = DAT_EntityState::instance.fireCount;
-            _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
             _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
             _occupancy = DAT_TileMapState::instance.OccupancyLayer;
             _walkLayer = DAT_TileMapState::instance.WalkLayer;
             _linkage = DAT_TileMapState::instance.PathLinkageLayer;
@@ -71,82 +70,126 @@ namespace Map {
             _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
             _pPathPlan = this->searchQueue.ptrPathPlan;
             _ppIndex = this->searchQueue.pathPlanIndex;
-            while (true) {
-                _budget = _budget + 1;
-                if (399 < _budget) {
-                    break;
-                }
-                _walkLayer[_tile] = (short)_gen;
-                if (_tile == _destTile) {
-                    _result = 1;
-                    break;
-                }
-                if (_fireCount != 0 && _occupancy[_tile] != '\0') {
-                    break;
-                }
-                byte _links = _linkage[_tile];
-                if ((int)y > (int)destY) {
-                    if ((int)x > (int)destX) {
-                        _direction = 7;
-                        if ((_links & 0x80) == 0) {
-                            break;
-                        }
-                    } else if ((int)x < (int)destX) {
-                        _direction = 1;
-                        if ((_links & 2) == 0) {
-                            break;
-                        }
-                    } else {
-                        _direction = 0;
-                        if ((_links & 1) == 0) {
-                            break;
-                        }
-                    }
-                } else if ((int)y < (int)destY) {
-                    if ((int)x > (int)destX) {
-                        _direction = 5;
-                        if ((_links & 0x20) == 0) {
-                            break;
-                        }
-                    } else if ((int)x < (int)destX) {
-                        _direction = 3;
-                        if ((_links & 8) == 0) {
-                            break;
-                        }
-                    } else {
-                        _direction = 4;
-                        if ((_links & 0x10) == 0) {
-                            break;
-                        }
-                    }
-                } else if ((int)x > (int)destX) {
-                    _direction = 6;
-                    if ((_links & 0x40) == 0) {
-                        break;
-                    }
-                } else if ((int)x < (int)destX) {
-                    _direction = 2;
-                    if ((_links & 4) == 0) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-                _tile = _tile + _dirMatrix[y * 8 + _direction];
-                x = x + _cardinal[_direction].int_.xOffset;
-                y = y + _cardinal[_direction].int_.yOffset;
-                uint _slot = _ppIndex;
-                _ppIndex = _ppIndex + 1;
-                if ((_slot & 1) == 0) {
-                    _pPathPlan[_slot >> 1] = (byte)_direction;
-                } else {
-                    _pPathPlan[_slot >> 1] = (_pPathPlan[_slot >> 1] & 0xf) | (byte)(_direction << 4);
-                }
+            // The walk itself is handwritten assembly in the original (0x0049A481..0x0049A5BB), in
+            // the same hand as LinkageNeighbourAsm.hpp: x, y, the tile and the walk layer stay in
+            // ebx, ecx, edx and edi across iterations, everything else is reloaded from its slot
+            // before each use, the direction is stored as a constant and read back, and the
+            // three-way compare on y then x picks the direction and its linkage bit.
+            // clang-format off
+            __asm {
+                mov edi, _walkLayer
+                mov ebx, x
+                mov ecx, y
+                mov edx, _tile
+            trace_loop:
+                add dword ptr _budget, 1
+                cmp dword ptr _budget, 400
+                jge trace_exit
+                mov ax, word ptr _gen
+                mov word ptr [edi + edx*2], ax
+                mov eax, _destTile
+                cmp edx, eax
+                je trace_found
+                mov eax, _fireCount
+                cmp eax, 0
+                je trace_links
+                mov esi, _occupancy
+                mov al, byte ptr [esi + edx]
+                cmp al, 0
+                jne trace_exit
+            trace_links:
+                mov esi, _linkage
+                mov al, byte ptr [esi + edx]
+                cmp ecx, destY
+                jg trace_y_greater
+                jl trace_y_less
+                cmp ebx, destX
+                jg trace_dir6
+                jl trace_dir2
+                jmp trace_exit
+            trace_dir6:
+                mov dword ptr _direction, 6
+                test al, 0x40
+                je trace_exit
+                jmp trace_step
+            trace_dir2:
+                mov dword ptr _direction, 2
+                test al, 4
+                je trace_exit
+                jmp trace_step
+            trace_y_greater:
+                cmp ebx, destX
+                jg trace_dir7
+                jl trace_dir1
+                mov dword ptr _direction, 0
+                test al, 1
+                je trace_exit
+                jmp trace_step
+            trace_dir7:
+                mov dword ptr _direction, 7
+                test al, 0x80
+                je trace_exit
+                jmp trace_step
+            trace_dir1:
+                mov dword ptr _direction, 1
+                test al, 2
+                je trace_exit
+                jmp trace_step
+            trace_y_less:
+                cmp ebx, destX
+                jg trace_dir5
+                jl trace_dir3
+                mov dword ptr _direction, 4
+                test al, 0x10
+                je trace_exit
+                jmp trace_step
+            trace_dir5:
+                mov dword ptr _direction, 5
+                test al, 0x20
+                je trace_exit
+                jmp trace_step
+            trace_dir3:
+                mov dword ptr _direction, 3
+                test al, 8
+                je trace_exit
+                jmp trace_step
+            trace_step:
+                mov eax, ecx
+                shl eax, 3
+                add eax, _direction
+                shl eax, 2
+                mov esi, _dirMatrix
+                add edx, dword ptr [esi + eax]
+                mov esi, _cardinal
+                mov eax, _direction
+                add ebx, dword ptr [esi + eax*8]
+                add ecx, dword ptr [esi + eax*8 + 4]
+                mov eax, _ppIndex
+                mov esi, _pPathPlan
+                add dword ptr _ppIndex, 1
+                test eax, 1
+                je trace_even_slot
+                shr eax, 1
+                add esi, eax
+                mov eax, _direction
+                shl eax, 4
+                and byte ptr [esi], 0xf
+                or byte ptr [esi], al
+                jmp trace_loop
+            trace_even_slot:
+                shr eax, 1
+                add esi, eax
+                mov eax, _direction
+                mov byte ptr [esi], al
+                jmp trace_loop
+            trace_found:
+                mov dword ptr _result, 1
+            trace_exit:
             }
+            // clang-format on
             this->searchQueue.pathPlanIndex = _ppIndex;
             return (BOOLEnum)_result;
         }
     }
-#pragma optimize("", on)
 }
 }
