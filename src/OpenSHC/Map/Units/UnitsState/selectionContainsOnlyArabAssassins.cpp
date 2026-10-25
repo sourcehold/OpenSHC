@@ -13,16 +13,11 @@ namespace Map {
         BOOLEnum UnitsState::selectionContainsOnlyArabAssassins()
         {
             BOOLEnum result = FALSE;
-            // I tried simplifying this with an early-return but didn't work
-            if (this->selectionArabAssassin != 0) {
-                // This really is field pointer increment style. I tried a for loop over the fields as a int[]
-                // but that didn't work
-                int* pUnitSelection = (int*)&this->selectionEuropeanArchers;
+            if (this->selectionUnitType[Selection::USE_A_ASSASSINS] != 0) {
                 for (int index = 0; index <= 26; index++) {
-                    if ((index != Selection::USE_A_ASSASSINS) && (*pUnitSelection != 0)) {
+                    if ((index != Selection::USE_A_ASSASSINS) && (this->selectionUnitType[index] != 0)) {
                         return FALSE;
                     }
-                    pUnitSelection++;
                 }
                 result = TRUE;
             }

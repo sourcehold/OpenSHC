@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -24,7 +25,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_TOWER:
             case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
             case OpenSHC::Map::Units::UT_S_SHIELD:
-                return (BOOLEnum)(this->selectionEngineers != 0);
+                return (BOOLEnum)(this->selectionUnitType[Selection::USE_E_ENGINEERS] != 0);
             }
             return FALSE;
         }

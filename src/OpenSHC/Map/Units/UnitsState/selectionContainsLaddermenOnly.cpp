@@ -12,11 +12,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005357E0
         BOOLEnum UnitsState::selectionContainsLaddermenOnly()
         {
-            if (this->selectionLaddermen == 0) {
+            if (this->selectionUnitType[Selection::USE_E_LADDERMEN] == 0) {
                 return FALSE;
             }
             for (int i = 0; i <= 26; ++i) {
-                if (i != Selection::USE_E_LADDERMEN && (&this->selectionEuropeanArchers)[i] != 0) {
+                if (i != Selection::USE_E_LADDERMEN && this->selectionUnitType[i] != 0) {
                     return FALSE;
                 }
             }

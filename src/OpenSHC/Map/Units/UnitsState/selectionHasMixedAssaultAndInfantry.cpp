@@ -9,16 +9,20 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005355E0
         BOOLEnum UnitsState::selectionHasMixedAssaultAndInfantry()
         {
-            if (this->selectionKnights != 0 || this->selectionLaddermen != 0 || this->selectionBatteringRam != 0
-                || this->selectionTrebuchets != 0 || this->selectionCatapults != 0
-                || this->selectionArabHorseArchers != 0 || this->selectionFireBallista != 0
-                || this->selectionSiegeTower != 0) {
+            if (this->selectionUnitType[Selection::USE_E_KNIGHTS] != 0
+                || this->selectionUnitType[Selection::USE_E_LADDERMEN] != 0
+                || this->selectionUnitType[Selection::USE_E_BATTERING_RAMS] != 0
+                || this->selectionUnitType[Selection::USE_E_TREBUCHETS] != 0
+                || this->selectionUnitType[Selection::USE_E_CATAPULTS] != 0
+                || this->selectionUnitType[Selection::USE_A_HORSE_ARCHERS] != 0
+                || this->selectionUnitType[Selection::USE_A_FIRE_BALLISTAS] != 0
+                || this->selectionUnitType[Selection::USE_E_SIEGETOWERS] != 0) {
                 for (int i = 0; i <= 26; ++i) {
                     if (i != Selection::USE_E_KNIGHTS && i != Selection::USE_E_LADDERMEN
                         && i != Selection::USE_E_BATTERING_RAMS && i != Selection::USE_E_TREBUCHETS
                         && i != Selection::USE_E_CATAPULTS && i != Selection::USE_A_HORSE_ARCHERS
                         && i != Selection::USE_A_FIRE_BALLISTAS && i != Selection::USE_E_SIEGETOWERS
-                        && (&this->selectionEuropeanArchers)[i] != 0) {
+                        && this->selectionUnitType[i] != 0) {
                         return FALSE;
                     }
                 }
