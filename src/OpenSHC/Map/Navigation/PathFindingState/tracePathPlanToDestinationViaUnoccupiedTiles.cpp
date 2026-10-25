@@ -26,7 +26,7 @@ namespace Map {
         {
             byte* _pPathPlan;
             int _budget;
-            int _direction;
+            int _heading;
             int _result;
             uint _ppIndex;
             Point8* _cardinal;
@@ -58,7 +58,7 @@ namespace Map {
             }
             _budget = 0;
             _result = 0;
-            _direction = 0;
+            _heading = 0;
             _gen = (ushort)this->searchGeneration;
             _fireCount = DAT_EntityState::instance.fireCount;
             _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -108,12 +108,12 @@ namespace Map {
                 jl trace_dir2
                 jmp trace_exit
             trace_dir6:
-                mov dword ptr _direction, 6
+                mov dword ptr _heading, 6
                 test al, 0x40
                 je trace_exit
                 jmp trace_step
             trace_dir2:
-                mov dword ptr _direction, 2
+                mov dword ptr _heading, 2
                 test al, 4
                 je trace_exit
                 jmp trace_step
@@ -121,17 +121,17 @@ namespace Map {
                 cmp ebx, destX
                 jg trace_dir7
                 jl trace_dir1
-                mov dword ptr _direction, 0
+                mov dword ptr _heading, 0
                 test al, 1
                 je trace_exit
                 jmp trace_step
             trace_dir7:
-                mov dword ptr _direction, 7
+                mov dword ptr _heading, 7
                 test al, 0x80
                 je trace_exit
                 jmp trace_step
             trace_dir1:
-                mov dword ptr _direction, 1
+                mov dword ptr _heading, 1
                 test al, 2
                 je trace_exit
                 jmp trace_step
@@ -139,29 +139,29 @@ namespace Map {
                 cmp ebx, destX
                 jg trace_dir5
                 jl trace_dir3
-                mov dword ptr _direction, 4
+                mov dword ptr _heading, 4
                 test al, 0x10
                 je trace_exit
                 jmp trace_step
             trace_dir5:
-                mov dword ptr _direction, 5
+                mov dword ptr _heading, 5
                 test al, 0x20
                 je trace_exit
                 jmp trace_step
             trace_dir3:
-                mov dword ptr _direction, 3
+                mov dword ptr _heading, 3
                 test al, 8
                 je trace_exit
                 jmp trace_step
             trace_step:
                 mov eax, ecx
                 shl eax, 3
-                add eax, _direction
+                add eax, _heading
                 shl eax, 2
                 mov esi, _dirMatrix
                 add edx, dword ptr [esi + eax]
                 mov esi, _cardinal
-                mov eax, _direction
+                mov eax, _heading
                 add ebx, dword ptr [esi + eax*8]
                 add ecx, dword ptr [esi + eax*8 + 4]
                 mov eax, _ppIndex
@@ -171,7 +171,7 @@ namespace Map {
                 je trace_even_slot
                 shr eax, 1
                 add esi, eax
-                mov eax, _direction
+                mov eax, _heading
                 shl eax, 4
                 and byte ptr [esi], 0xf
                 or byte ptr [esi], al
@@ -179,7 +179,7 @@ namespace Map {
             trace_even_slot:
                 shr eax, 1
                 add esi, eax
-                mov eax, _direction
+                mov eax, _heading
                 mov byte ptr [esi], al
                 jmp trace_loop
             trace_found:
