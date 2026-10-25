@@ -2693,3 +2693,42 @@ branch tuple) at `FgTryCommonTailMerge` entry for A, and look at what `FgWeightF
 (`FgTryEpilogMerge+0x55`) writes into the two copies' +0x1c words; then look for the source
 property that reorders them (candidates: the order the front end emits the `||` block versus
 the inline block, i.e. whether the `||` statement comes first or second in the pair).
+
+### Applying the workflow to a 1300-instruction function: `processHelpRichTextTokens` (70.2%, not solved)
+
+What the c2 workflow gave in six builds, and where it stopped.
+
+**Frame (`slot_probe.py --name`, `slot_map.py --end=0x46137c`).** Sorted regime (0x13c frame, /GS
+cookie). `orig_body` stops this function 0x140 bytes early (its main switch's cases sit after the
+first `ret` path, the jump table at 0x46137c), hence `--end`. With it the original has 30 slots
+and we had 37 symbols for the same 28 dword colours. Mapping the original's slots from the
+prologue stores and the reference sites gave the original's local set exactly:
+
+* textMemIndex -316, leftPosition -312, local_134 -308, currentFontLineHeight -304,
+  local_12c -300, textToRender -296, charColor -292, centerCurrentLine -288, local_11c -284,
+  **one `i` for both character loops** -280 (14 refs; ours had two), local_114 -276,
+  currentFontClass -272, local_10c -268, lineEndY -264, **a loop-1 `charIndex`
+  (= local_114 + i, incremented) sharing its slot with loop-2's charYPos** -260, local_100 -256,
+  centreActive -252, **local_f8 sharing with a hoisted `local_114 - local_11c`** -248, **one
+  `width` for the PIC-HERE width, the TAB advance (30), the word width and the char width,
+  sharing with positionToken** -244, local_f0 -240, currentLinkId -236, lineStartY -232,
+  local_e4 -228, charXPos -224, imageCount -220, color -216, **one `wordLength`** -212,
+  linkColor -208, wideTextBuffer -204, cookie -4.
+* Our `textToRender` had c2 weight 22 (rank 4) where the original's rank is 6 (between 19 and
+  17). Hoisting the five identical `textToRender.text = wideTextBuffer` of the PIC debug
+  sub-switch to one after it gave exactly 18 and rank 6; the original keeps `textMemIndex += 2`
+  per branch (each has its own `add ebx, 2`), hoisting that too cost 4 points (build 5).
+
+**What did not work.** A shared debug tail after the main switch (one `textToRender =
+wideTextBuffer`, normal paths `continue`) is what the original's *code* looks like (every debug
+case jumps to 0x460777, every normal case to the loop head) - but it is c2's late tail merge
+doing that, not the source: written that way, textToRender leaves the frame entirely and the
+function drops to 41%. The shape that keeps the original's frame is per-case assignments.
+
+**Where it ended.** Build 6 (`examples-processHelpRichTextTokens-frame-variant.cpp`): frame
+identical to the original through rank 9, structural `kind` 0.835 -> 0.868, instruction count
++63, reccmp 67.9 against the committed 70.2 - the five weight-11 locals (i, local_114,
+currentFontClass, local_10c, lineEndY) land in quicksort tie order and the loop-1/loop-2
+temporaries take the -280 colour the original gives `i`; the rest is register allocation across
+1300 instructions. Not committed. Next: break the weight-11 ties the way the original has them
+(i above local_114: the original references `i` 14 times, ours 11), then the allocation.

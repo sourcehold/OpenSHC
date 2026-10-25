@@ -1,6 +1,6 @@
 """Compare a function's stack frame against the original's, without reccmp.
 
-usage: slot_map.py FILE.cpp [--orig-only] [--refs]
+usage: slot_map.py FILE.cpp [--orig-only] [--refs] [--end=0xADDR]
 
 Checking the frame first is worth it because the frame is the one part of the output that is
 decided by information the source controls directly - which locals exist, how big they are and
@@ -217,7 +217,7 @@ def _delta(image, mnemonic, ops, unknown_calls, addr):
     return 0
 
 
-def original(address):
+def original(address, end=None):
     """(frame_size, [(offset, span, acc_width, refs, addrs)]) inferred from the disassembly.
 
     `esp` depth cannot be tracked by walking the listing top to bottom: both arms of an
@@ -226,7 +226,7 @@ def original(address):
     graph instead, which also makes a genuine disagreement at a join point detectable.
     """
     image = orig_body.Image()
-    stream = orig_body.disassemble(address, None, image)
+    stream = orig_body.disassemble(address, end, image)
     idx = dict((a, i) for i, (a, _m, _o) in enumerate(stream))
     lo, hi = stream[0][0], stream[-1][0]
     unknown_calls = []
@@ -335,7 +335,14 @@ def main():
         sys.exit(__doc__)
     path = args[0]
     address = orig_body.address_of(path)
-    o_frame, o_slots, trouble = original(address)
+    # --end 0xADDR: the original's true end when orig_body's detection stops early. A function
+    # whose switch cases sit after the detected end (processHelpRichTextTokens: 703 instructions
+    # unreached, its jump table at the real end) needs this or its slot counts are a fraction.
+    end = None
+    for a in sys.argv[1:]:
+        if a.startswith('--end='):
+            end = int(a.split('=', 1)[1], 16)
+    o_frame, o_slots, trouble = original(address, end)
     for addr, had, got in trouble['conflicts'][:3]:
         print('WARNING: two paths reach %#x with different esp depths (%+d and %+d), so the'
               % (addr, had, got))
