@@ -22,7 +22,7 @@ namespace Game {
                 && DAT_BuildingsState::instance.buildings[buildingID].logicalState != Map::Buildings::BLS_REMOVE
                 && DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_STABLES
                 && DAT_BuildingsState::instance.buildings[buildingID].owner == playerID
-                && (char)DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals
+                && DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals
                     > DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField) {
                 --this->playerDataArray[playerID].availableHorses;
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::validateBuildingTetheredUnits,

@@ -25,7 +25,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459E40
     void GameStateStructures::handleActivateTacticalPowers(int playerID, int powerType, int tile)
     {
-        int const powerCost = (powerType + 1) * 0x27c;
+        int const powerCost = (powerType + 1) * 636;
         if (DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel < powerCost) {
             return;
         }
@@ -34,28 +34,28 @@ namespace Game {
         case 3:
         case 4:
         case 6:
-        case 0xd:
-        case 0x10: {
+        case 13:
+        case 16: {
             UnitType unitType = ((UnitType)0);
-            int unitCount = 0x14;
+            int unitCount = 20;
             switch (powerType) {
             case 2:
                 unitType = Map::Units::UT_E_SPEAR;
                 break;
-            case 0xd:
+            case 13:
                 unitType = Map::Units::UT_E_ARCHER;
-                unitCount = 0xf;
+                unitCount = 15;
                 break;
             case 4:
                 unitType = Map::Units::UT_E_MACE;
                 break;
-            case 0x10:
+            case 16:
                 unitType = Map::Units::UT_A_FIRETHROWER;
-                unitCount = 0xc;
+                unitCount = 12;
                 break;
             case 3:
                 unitType = Map::Units::UT_E_ENGINEER;
-                unitCount = 0xe;
+                unitCount = 14;
                 break;
             case 6:
                 unitType = Map::Units::UT_E_KNIGHT;
@@ -70,7 +70,7 @@ namespace Game {
             }
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    ((SoundEffectID)0x104));
+                    ((SoundEffectID)260));
             }
             break;
         }
@@ -84,7 +84,7 @@ namespace Game {
             break;
         case 5:
             DAT_GameState::instance.playerDataArray[playerID].goldDonation
-                += SEC_RNG::instance.currentNumber2 % 0x5dc + 1000;
+                += SEC_RNG::instance.currentNumber2 % 1500 + 1000;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             break;
         case 0:
@@ -96,7 +96,7 @@ namespace Game {
                 DAT_PathFindingState::ptr)(tile, 9, playerID, 18000, 0);
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    ((SoundEffectID)0x105));
+                    ((SoundEffectID)261));
             }
             break;
         default:

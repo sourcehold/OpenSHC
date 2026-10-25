@@ -118,10 +118,7 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 141) {
-                // the four arrays of ten entries starting at field2_0x8, field12_0x30, playerKeepTile and field23_0x80
-                // are copied from the ones starting at field3124_0x26d4, field3134_0x26fc, field3144_0x2724 and
-                // field3154_0x274c, exactly as the original binary does
+            if ((int)receivedMapVersion < 0x8d) {
                 for (int index = 0; index < 10; ++index) {
                     (&DAT_GameState::instance.mapAndTime.field2_0x8)[index]
                         = (&DAT_GameState::instance.mapAndTime.field3124_0x26d4)[index];
@@ -133,7 +130,7 @@ namespace Game {
                         = (&DAT_GameState::instance.mapAndTime.field3154_0x274c)[index];
                 }
             }
-            if ((int)receivedMapVersion < 143 && DAT_GameCore::instance.gameMode_2 == GM_CAMPAIGN_MISSION) {
+            if ((int)receivedMapVersion < 0x8f && DAT_GameCore::instance.gameMode_2 == GM_CAMPAIGN_MISSION) {
                 for (int unitID = 1; unitID < 2500; ++unitID) {
                     if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_INVISIBLE
                         && ((DAT_UnitsState::instance.units[unitID].unitType == Map::Units::UT_JESTER
@@ -144,7 +141,7 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 148) {
+            if ((int)receivedMapVersion < 0x94) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     for (int foodType = 0; foodType < 4; ++foodType) {
                         DAT_GameState::instance.playerDataArray[playerID].isFoodTypeBanned[foodType] = 0;

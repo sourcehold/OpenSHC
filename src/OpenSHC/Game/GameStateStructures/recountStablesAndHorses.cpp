@@ -23,7 +23,7 @@ namespace Game {
                 // number of animals - number of animals in use (horses)
                 this->playerDataArray[DAT_BuildingsState::instance.buildings[buildingID].owner].availableHorses
                     = this->playerDataArray[DAT_BuildingsState::instance.buildings[buildingID].owner].availableHorses
-                    + ((short)(char)DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals
+                    + ((short)DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals
                         - (short)DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField);
             }
         }

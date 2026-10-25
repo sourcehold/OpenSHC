@@ -18,7 +18,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004563D0
     void GameStateStructures::processUnitLossStatistic(int playerID, int unitID)
     {
-        if (playerID - 1U > 7) {
+        if (playerID < 1 || playerID > 8) {
             return;
         }
         int lossValue;

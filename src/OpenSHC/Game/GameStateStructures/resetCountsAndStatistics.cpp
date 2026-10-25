@@ -76,7 +76,7 @@ namespace Game {
                 this->playerDataArray[playerID].top100TargetableBuildings[targetSlot] = 0;
             }
             this->playerDataArray[playerID].top100TargetableBuildingsTracker = 0;
-            // clears the 20 counters from rallySearchOffsetsUnk up to and including someCount26 as one array, exactly
+            // fixme: clears the 20 counters from rallySearchOffsetsUnk up to and including someCount26 as one array, exactly
             // as the original binary does
             for (int counterIndex = 0; counterIndex < 20; ++counterIndex) {
                 this->playerDataArray[playerID].rallySearchOffsetsUnk[counterIndex] = 0;

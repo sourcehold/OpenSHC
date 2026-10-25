@@ -6,6 +6,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -21,7 +22,6 @@ namespace Game {
     using Map::Buildings::BuildingType;
     using WindowsHelper::Enums::BOOLEnum;
 
-    // NOTE: buttonID = building Type
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00457B80
     BOOLEnum GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy(
@@ -60,19 +60,19 @@ namespace Game {
             != 0) {
             return TRUE;
         }
-        if (requiredIron > this->playerDataArray[playerID].currentResources[6]) {
+        if (requiredIron > this->playerDataArray[playerID].currentResources[Resources::RT_IRON]) {
             result = FALSE;
             if (playResourceLackMsgUnk) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_IRON);
             }
             if (isAI) {
-                int const ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[6];
-                if (ironToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[6]) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[6] = ironToBuy;
+                int const ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[Resources::RT_IRON];
+                if (ironToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_IRON]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_IRON] = ironToBuy;
                 }
             }
-        } else if (requiredPitch > this->playerDataArray[playerID].currentResources[7]) {
+        } else if (requiredPitch > this->playerDataArray[playerID].currentResources[Resources::RT_PITCH]) {
             if (buildingType != Map::Buildings::BT_PITCHDITCH
                 || this->playerDataArray[playerID].pitchDitchCounterTo4 == 0) {
                 result = FALSE;
@@ -81,58 +81,58 @@ namespace Game {
                         DAT_MissingResourceState::ptr)(1, Audio::SFX::RLSFX_PITCH);
                 }
                 if (isAI) {
-                    int const pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[7];
-                    if (pitchToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[7]) {
-                        this->playerDataArray[playerID].resourcesToAcquireArray[7] = pitchToBuy;
+                    int const pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[Resources::RT_PITCH];
+                    if (pitchToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_PITCH]) {
+                        this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_PITCH] = pitchToBuy;
                     }
                 }
             }
-        } else if (requiredGold > this->playerDataArray[playerID].currentResources[0xf]) {
+        } else if (requiredGold > this->playerDataArray[playerID].currentResources[Resources::RT_GOLD]) {
             result = FALSE;
             if (playResourceLackMsgUnk) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_GOLD);
             }
-        } else if (requiredWood > this->playerDataArray[playerID].currentResources[2]
-            && requiredStone > this->playerDataArray[playerID].currentResources[4]) {
+        } else if (requiredWood > this->playerDataArray[playerID].currentResources[Resources::RT_WOOD]
+            && requiredStone > this->playerDataArray[playerID].currentResources[Resources::RT_STONE]) {
             result = FALSE;
             if (playResourceLackMsgUnk) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_PARTIAL_STONEUnk);
             }
             if (isAI) {
-                int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[2];
-                if (woodToBuy > 0 && woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[2]) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodToBuy;
+                int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[Resources::RT_WOOD];
+                if (woodToBuy > 0 && woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD] = woodToBuy;
                 }
-                int stoneToBuyAsWell = requiredStone - this->playerDataArray[playerID].currentResources[4];
+                int stoneToBuyAsWell = requiredStone - this->playerDataArray[playerID].currentResources[Resources::RT_STONE];
                 if (stoneToBuyAsWell > 0
-                    && stoneToBuyAsWell > this->playerDataArray[playerID].resourcesToAcquireArray[4]) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuyAsWell;
+                    && stoneToBuyAsWell > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE] = stoneToBuyAsWell;
                 }
             }
-        } else if (requiredWood > this->playerDataArray[playerID].currentResources[2]) {
+        } else if (requiredWood > this->playerDataArray[playerID].currentResources[Resources::RT_WOOD]) {
             result = FALSE;
             if (playResourceLackMsgUnk) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_WOOD);
             }
             if (isAI) {
-                int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[2];
-                if (woodShortage > 0 && woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[2]) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodShortage;
+                int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[Resources::RT_WOOD];
+                if (woodShortage > 0 && woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD] = woodShortage;
                 }
             }
-        } else if (requiredStone > this->playerDataArray[playerID].currentResources[4]) {
+        } else if (requiredStone > this->playerDataArray[playerID].currentResources[Resources::RT_STONE]) {
             result = FALSE;
             if (playResourceLackMsgUnk) {
                 MACRO_CALL_MEMBER(Audio::MissingResourceState_Func::playResourceLackSFX, DAT_MissingResourceState::ptr)(
                     1, Audio::SFX::RLSFX_STONE);
             }
             if (isAI) {
-                int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[4];
-                if (stoneToBuy > 0 && stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[4]) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuy;
+                int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[Resources::RT_STONE];
+                if (stoneToBuy > 0 && stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE] = stoneToBuy;
                 }
             }
         }

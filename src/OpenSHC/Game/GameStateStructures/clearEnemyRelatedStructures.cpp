@@ -30,12 +30,11 @@ namespace Game {
         // field2_0x8 to field11_0x2c, field12_0x30 to field21_0x54, playerKeepTile and field23_0x80 to field32_0xa4 are
         // four arrays of ten entries that are reset together, exactly as the original binary does
         for (int index = 0; index < 10; ++index) {
-            (&this->mapAndTime.field2_0x8)[index] = 0;
-            (&this->mapAndTime.field12_0x30)[index] = 0;
+            this->mapAndTime.field2_0x8[index] = 0;
+            this->mapAndTime.field12_0x30[index] = 0;
             this->mapAndTime.playerKeepTile[index] = -1;
-            (&this->mapAndTime.field23_0x80)[index] = -1;
+            this->mapAndTime.field23_0x80[index] = -1;
         }
-        // hitsDealtToPlayerArray is an array of nine entries next to emenyHitArray
         for (int index = 0; index < 9; ++index) {
             this->mapAndTime.hitsDealtToPlayerArray[index] = 0;
             this->mapAndTime.emenyHitArray[index] = 0;
