@@ -24353,7 +24353,7 @@ SHC_3BB0A8C1_0x00496EA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00496EC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00496F90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00496F90 | 66.1% | local counter, hoisted walk
 
 SHC_3BB0A8C1_0x00497080 | 0.0% | Pending
 
@@ -24365,9 +24365,9 @@ SHC_3BB0A8C1_0x004974D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00497690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00497740 | 0.0% | Pending
+SHC_3BB0A8C1_0x00497740 | 84.3% | _cY/_tile decl order (bucket)
 
-SHC_3BB0A8C1_0x00497B80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00497B80 | 86.7% | _cY/_tile decl order (bucket)
 
 SHC_3BB0A8C1_0x00498020 | 0.0% | Pending
 
@@ -24385,7 +24385,7 @@ SHC_3BB0A8C1_0x00498FD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004990F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004995E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004995E0 | 91.9% | frame exact; asm locals pre-ca
 
 SHC_3BB0A8C1_0x00499970 | 0.0% | Pending
 
@@ -24399,7 +24399,7 @@ SHC_3BB0A8C1_0x0049A1C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0049A2E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0049A370 | 0.0% | Pending
+SHC_3BB0A8C1_0x0049A370 | 94.5% | _heading: def-set name order
 
 SHC_3BB0A8C1_0x0049A5E0 | 0.0% | Pending
 
@@ -24875,7 +24875,7 @@ SHC_3BB0A8C1_0x004A0E4A | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A0E4B | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004A0E50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004A0E50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004A1230 | 0.0% | Pending
 
