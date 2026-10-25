@@ -2497,3 +2497,82 @@ then declaration order) is right about everything except a final tiebreak among 
 asm-referenced locals, and that tiebreak is what decides the last 10-15 points of all three.
 Finding it is a c2.dll question (`StackPacking` / `ColorStackElements`, already located) rather
 than a source one, and it is the single most valuable open item on this branch.
+
+### The slot tiebreak, decoded: for small frames there is no sort, and the asm's def-set is name-hashed
+
+`slot_probe.py` (tools/compiler-internals) traces the three c2.dll routines that decide a frame
+and prints their state for one GlobalRegAlloc invocation. What it showed on
+`tracePathPlanToDestinationViaUnoccupiedTiles` (invocation 204) rewrites the frame model for the
+inline-assembly functions:
+
+**1. `QSortColors` is conditional, and does not run for these functions.** `ColorStackElements`
+(0x10beaef0) only sorts when the frame is larger than 0x80 bytes, or the function has a /GS buffer
+(`Function+0xAC & 1`, or `Function+0x5c` with module flag 0x20000). A 0x3c-byte frame with no
+array is handed out **unsorted**: slot order is purely the order of the element list, head at the
+highest address (`-4`) and tail at the lowest. The `(class, weight*1000/size)` key of
+`StkColorCmp` never enters. That is why `slot_map.py`'s key column explained the large frames and
+the /GS functions and was silent on these.
+
+**2. The element list is built by `AddStackElement` (0x10be9190), once per operand reference,
+in tuple order.** `CollectStackElements` walks the final tuple stream, block by block, dst
+operands then src operands, and calls `AddStackElement` for every stack symbol it meets. The first
+call inserts the element after every element of smaller-or-equal size (so the list is size
+ascending, FIFO among equals) with weight 1. Every later call adds 1 to the weight and moves the
+element forward past the same-size elements whose weight is *strictly* lower, stopping behind the
+first with weight >= the new one. Net effect: size ascending, weight descending, and among equal
+weights **the element that reached its final weight first comes first**, i.e. gets the higher
+address. Declaration order and initialisation order are nowhere in it (both re-tested: no change).
+
+**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol
+counts once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list
+that `CollectStackElements` flattens as: the *def-set* (every local the block writes) as a nested
+set, then the *use-list* (every local the block reads, in reverse order of first mention), then the
+def-set again. For the walk in `tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18
+symbols. The written locals therefore get +3 from the block, read-only ones +1, write-only ones +2;
+a local's C-side references add 1 each before and after.
+
+**4. The def-set is iterated in hash order of the symbol name.** The second def-set pass is the
+*last* reference of every asm-written local that the C code does not touch afterwards, so their
+relative order in it is the tiebreak among equal weights - and that order is not textual. Renaming
+`_direction` to `_dirn` with no other change moved it from first to last in the set and flipped the
+`_budget`/`_direction` pair into the original's order; swapping declarations or initialisations
+did nothing. A synthetic file with one block writing 39 candidate names
+(`scratchpad/var/nameRank.cpp`) gives the whole ranking in one probe run, and it is consistent
+with every real function traced so far:
+
+    _best _direction _count _found _distance _dir _cTile _tileIndex _facing _first _step
+    _ppIndex _result _budget _links _link _dist _tileNo _areaID _cY _tile _way _course _walk
+    _tilePos _dirIndex _readIndex _octant _dirn _heading _curTile _rowEnd _turn _radius _cX
+    _moveDir _n _cLink _row
+
+Earlier in this list = earlier last-bump = earlier in the element list = higher address, for
+asm-written locals of equal weight whose last reference is the asm block. So the "tiebreak" is
+our own choice of variable names, and the original's layout is recovered by picking names in the
+right hash order - `_budget` before the direction local here, which `_heading` (or `_dirn`,
+`_octant`, `_course`) satisfies and `_direction`/`_dir` do not.
+
+Caveats: the ranking only orders *these* names against each other (a different name may land
+anywhere, and two names can share a bucket), so a new name is confirmed with one `slot_probe.py`
+run on the real function, not assumed. And this only governs equal-weight ties: a pair with
+different weights is still a reference-count problem, and the trace shows exactly which references
+each side has.
+
+How to use it: `slot_probe.py FILE.cpp --find LOCAL` prints the invocation(s) whose frame holds
+LOCAL; `slot_probe.py FILE.cpp --invocation N` prints the AddStackElement sequence with names,
+tuple and nested-set markers, the final element list, whether the sort ran, and the colour records.
+
+**Applied to the four functions (one build each, declaration swaps and a rename only):**
+
+| function | before | after | what moved |
+|---|---|---|---|
+| tracePathPlanToDestinationViaUnoccupiedTiles | 85.7 | 94.5 | `_direction` -> `_heading`: def-set order now `_budget` first |
+| findSuitableSpawnLocationUnk | 82.5 | 86.6 | `_tile`/`_cY` declared the other way round (they share a bucket, so the chain keeps declaration order) |
+| findLinkageBasedPathOrWalkRadius | 79.7 | 84.3 | same swap |
+| updateSeparateAreaTileMap | 68.0 | 91.9 | the swap the other way (its original has `_cY` higher), plus the asm locals initialised *before* the fillMemory calls so the two queue-pointer copies die in registers and are reloaded at the loop head - their second reference then precedes the asm's use-list and they land at `-0x24/-0x28` as in the original; `*_yQueueStart` stored before `*_tilesQueueStart` |
+
+Every frame of the four is now at the original's offsets. What remains is the early-exit epilogue
+layout in the first three (the known wall) and register choice for the constant 1 in the fourth.
+The `_tile`/`_cY` case is the warning about the ranking: in the three macro users the pair's order
+followed declaration order, which only happens when two names hash to the same bucket - the
+`name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
+what settled each one.
