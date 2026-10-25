@@ -2642,3 +2642,54 @@ sites (which of the pair survives); (2) a block-order dump at GlobalRegAlloc ent
 see whether the fourth return block is already last; (3) the front end's handling of a
 `return` whose fallthrough successor is the main body - the one thing that differs between the
 third and fourth guards is that the fourth is followed by the body.
+
+### The early-exit epilogue wall, second session: the mechanism, down to the two folds
+
+Tools: `blocks_probe.py` dumps the function's block list / tuple stream (kind/opcode per tuple,
+tuple addresses) at chosen points; `--name FUNC` gates on the function's mangled name read at
+`GlobalRegAlloc` entry (`poi(poi(eax)+4)` = "?name@Class@..."), because **GlobalRegAlloc
+invocation numbers are not stable across runs** (433 and 425 for the same file: function order
+depends on pointer values) - every earlier `--invocation N` probe risked landing on a neighbour.
+`--passes` dumps at the entry of each late pass; `--scan` dumps every invocation.
+
+Tuple legend read off the dumps: kind 0x18/0x2f4 OPENTRY, 0x19/0x2f5 OPEXIT, 0x1a/0x2f3 block
+boundary, 0x1b/0x2f2 label, 0x12/0xf conditional branch, 0x12/0x10 goto, 0xf/0xe call,
+0x16/0x2ce the `__asm` block (one opaque tuple), 0xd/* ordinary instructions (0x34 = the
+materialised `xor eax, eax`, 0xba/0xb9 push/pop), 0x15/0x2d9 and 0x17/0x2f7-0x2f9 pseudo.
+
+What happens to `tracePathPlan...`'s four `return FALSE` (2+2 guard shape, the only shape that
+keeps `push edi` between the pairs like the original):
+
+1. **The front end makes two kinds of return block.** `if (map == 0) return FALSE;` gives an
+   inline block (fallthrough of the test). `if (399 < x || 399 < y) return FALSE;` gives a
+   *labelled block at the end of the function*, the shared short-circuit target of both `ja`s.
+   At GlobalRegAlloc entry the function has 16 blocks: BLK 4 (pair 1 inline), BLK 8 (pair 2
+   inline), BLK 12 and BLK 13 (the two `||` blocks, after the body). `FgEarlyTailDup` sees only
+   the empty landing pad before OPEXIT and does nothing.
+2. **Prologue/epilogue insertion** (between `MscFixOpexitGoto` and the first
+   `FgDoLateFlowOpts`) linearises the stream, places `push edi` lazily after pair 1, and adds a
+   pop-edi exit stub (`label; pop edi; goto EXIT`) for the paths that pushed it. The gotos'
+   16-bit field at +0x1c (what the merge code compares and propagates) is this exit-depth.
+3. **`FgDoLateFlowOptsOnce` materialises `xor eax, eax` and `FgTryCommonTailMerge` folds
+   identical `xor eax, eax; goto EXIT` tails**, pairing the exit block's predecessors in
+   predecessor-list order, outer first: the earlier predecessor survives, the later one is cut
+   to a jump (`newlabel` into the survivor, `TupReplaceBranchTarget`, `TupRemoveRange`).
+   Observed, with tuple addresses: fold #1 cut pair 2's *inline* copy and pointed it at pair 1's
+   *end* block; fold #2 removed pair 2's *end* block and moved its label onto pair 1's *inline*
+   copy. The depth-1 predecessors are then re-routed to a pop-edi epilogue that is emitted at
+   the end - which is exactly our `$LN3` and the 3 jumps to it.
+4. The original's layout is what you get if pair 2's inline copy survives its fold. Same
+   source shape, same compiler: so the input that differs is the exit block's predecessor
+   order (or the weights `FgWeightFlowGraph` gives the copies), not the statements.
+
+Listing experiments (20 s each, in `scratchpad/var/tpp*.cpp`, all against A = committed):
+`[x||y],[map]` + `[destX],[destY||map2]` (M2) = A's layout; six simple `if`s (L), or any
+pair-1 split (M1, M3): the pushes shrink-wrap per guard (`push esi` before test 1) - not the
+original; `goto fail` (B) and `||`-collapsed pairs (C, D, E): one epilogue at the end and
+`push edi` at entry. So the guard statements are A's; what is left is the predecessor order.
+
+Next, if resumed: print the exit block's predecessor list (block+0x28 chain, `[edge+0xc]` the
+branch tuple) at `FgTryCommonTailMerge` entry for A, and look at what `FgWeightFlowGraph`
+(`FgTryEpilogMerge+0x55`) writes into the two copies' +0x1c words; then look for the source
+property that reorders them (candidates: the order the front end emits the `||` block versus
+the inline block, i.e. whether the `||` statement comes first or second in the pair).
