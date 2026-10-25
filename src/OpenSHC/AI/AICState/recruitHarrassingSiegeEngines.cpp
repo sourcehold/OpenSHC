@@ -101,10 +101,10 @@ namespace AI {
             }
 
             DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[165] = (short)tribeID;
-            DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
-                = DAT_TribesState::instance.tribes[tribeID].uid;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                 unitID, tribeID);
+            DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
+                = DAT_TribesState::instance.tribes[tribeID].uid;
             DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = OpenSHC::AI::AIUBT_HARASS_SIEGE;
         } else {
             // Enough engineers: pick the next siege engine from the AIC list and place its tent
