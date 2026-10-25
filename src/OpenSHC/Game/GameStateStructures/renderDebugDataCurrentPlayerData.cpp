@@ -20,9 +20,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Text::TextAlignment;
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0045A060
     void GameStateStructures::renderDebugDataCurrentPlayerData(int x, int y, int width, int height)
     {

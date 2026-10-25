@@ -15,8 +15,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004563D0
     void GameStateStructures::processUnitLossStatistic(int playerID, int unitID)
     {

@@ -21,7 +21,6 @@ namespace Game {
 
     using Audio::SFX::SoundEffectID;
     using Map::Units::UnitType;
-    using Map::Units::Behavior::UnitStanceEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00459E40
     void GameStateStructures::handleActivateTacticalPowers(int playerID, int powerType, int tile)

@@ -20,12 +20,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using DE::SHCDE::eSFX;
-    using Map::Buildings::BuildingType;
-    using Map::Units::UnitLogicState;
-    using Map::Units::UnitType;
-    using Map::Units::States::UnitState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004580C0
     void GameStateStructures::spawnChicken()
     {

@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004585F0
     int GameStateStructures::moveUnitAroundCampfire(int unitID, int availablePeasants)
     {

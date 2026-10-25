@@ -9,7 +9,6 @@ namespace OpenSHC {
 namespace Game {
 
     using Map::Buildings::BuildingLogicalState;
-    using Map::Buildings::BuildingType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004598B0
     void GameStateStructures::recountStablesAndHorses()

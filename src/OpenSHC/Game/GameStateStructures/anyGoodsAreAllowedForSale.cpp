@@ -8,7 +8,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Resources::ResourceType;
     using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00458760

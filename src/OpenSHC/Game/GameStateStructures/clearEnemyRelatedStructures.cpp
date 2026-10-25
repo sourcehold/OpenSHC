@@ -14,8 +14,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B1C0
     void GameStateStructures::clearEnemyRelatedStructures()
     {

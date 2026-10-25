@@ -18,10 +18,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Audio::SFX::SpeechEffectID;
-    using Map::MapType2;
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B830
     void GameStateStructures::updatePopularity()
     {

@@ -44,9 +44,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Commands::GameCommandType;
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0045CD10
     void GameStateStructures::processGameTick()
     {

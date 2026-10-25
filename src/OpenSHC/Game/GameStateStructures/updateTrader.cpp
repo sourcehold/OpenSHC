@@ -12,8 +12,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B6B0
     void GameStateStructures::updateTrader()
     {

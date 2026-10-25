@@ -5,8 +5,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004560F0
     void GameStateStructures::resetCountsAndStatistics()
     {

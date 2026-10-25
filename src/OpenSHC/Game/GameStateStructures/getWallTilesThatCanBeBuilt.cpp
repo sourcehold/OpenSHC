@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00457E80
     int GameStateStructures::getWallTilesThatCanBeBuilt(int playerID, int wallMaterial)
     {

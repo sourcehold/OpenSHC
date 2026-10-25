@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00457960
     void GameStateStructures::updatePrimaryBuildingPlayerDataReferences(uint buildingID)
     {

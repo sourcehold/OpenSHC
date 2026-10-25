@@ -7,8 +7,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004569E0
     BOOLEnum GameStateStructures::hasAnySignpost()
     {

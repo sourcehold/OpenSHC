@@ -10,8 +10,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004595D0
     int GameStateStructures::singlePlayerHasKeepAndGranaryCheck()
     {

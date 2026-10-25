@@ -10,9 +10,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitLogicState;
-    using Map::Units::UnitType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00459C10
     void GameStateStructures::assignSelectionToKey(int number, int tribeID)
     {

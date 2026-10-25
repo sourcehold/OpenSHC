@@ -10,10 +10,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitLogicState;
-    using Map::Units::UnitType;
-    using Map::Units::States::UnitState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004591F0
     void GameStateStructures::despawnPeasantOrWorker(int playerID)
     {

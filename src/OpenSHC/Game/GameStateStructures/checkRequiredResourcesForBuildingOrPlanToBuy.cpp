@@ -17,7 +17,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Audio::SFX::ResourceLackSFX;
     using Commands::MappersEnum;
     using Map::Buildings::BuildingType;
     using WindowsHelper::Enums::BOOLEnum;

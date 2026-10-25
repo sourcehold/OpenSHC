@@ -10,7 +10,6 @@ namespace OpenSHC {
 namespace Game {
 
     using Map::Buildings::BuildingLogicalState;
-    using Map::Buildings::BuildingType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004572A0
     void GameStateStructures::validateBuildingCategoryReference(int playerID, int buildingCategory)

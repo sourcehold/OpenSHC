@@ -10,7 +10,6 @@ namespace OpenSHC {
 namespace Game {
 
     using Map::Buildings::BuildingLogicalState;
-    using Map::Buildings::BuildingType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00458F70
     void GameStateStructures::recomputeReligionBonuses()

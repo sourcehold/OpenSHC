@@ -14,10 +14,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitType;
-    using Map::Units::Pathfinding::DestinationNeededEnum;
-    using Map::Units::States::UnitState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00459490
     void GameStateStructures::spawnDrunkard(int buildingID)
     {

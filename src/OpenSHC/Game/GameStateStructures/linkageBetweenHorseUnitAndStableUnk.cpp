@@ -11,7 +11,6 @@ namespace OpenSHC {
 namespace Game {
 
     using Map::Buildings::BuildingLogicalState;
-    using Map::Buildings::BuildingType;
 
     // NOTE: returns stable where the horse was taken from?
 

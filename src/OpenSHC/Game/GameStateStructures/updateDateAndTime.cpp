@@ -9,7 +9,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    using UI::Enums::DisplayElementID;
     using WindowsHelper::Enums::BOOLEnum;
 
     // NOTE: currentTick is a value in 0-199 used for load balancing

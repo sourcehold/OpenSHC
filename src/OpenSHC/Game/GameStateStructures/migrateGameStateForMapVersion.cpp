@@ -20,9 +20,7 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Map::Units::UnitLogicState;
     using Map::Units::UnitType;
-    using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045C1C0
     void GameStateStructures::migrateGameStateForMapVersion(
