@@ -2196,3 +2196,148 @@ check, the original stores both zeros after it. Moving the initialiser below the
 * **A byte-class value live across a call pins `ebx`.** New, named, and the first allocator
   mechanism found here that a source `(char)` cast creates directly. When `--whycost` shows a
   PIN by a parameter or a `(char)`-typed local, look for a second use across a call.
+
+## The three branches: UnitsState, AIVState-leftover, PathFindingState-development
+
+The same workflow applied to three branches outside AICState, with the measurement done fresh
+(resolvers on, the namespace's own files as the build list) rather than taken from the status
+file. These namespaces are in a different regime from AICState: `Map/Units/UnitsState` has 82 of
+114 functions below normalized 100, averaging 76, with 29 under 60. The AICState pass was a
+clean-up of a nearly finished namespace; this is triage of an unfinished one, and the useful
+tools change accordingly - `structural_diff.py --all` for the ranking, a frame scan over every
+sub-100 function, and the Ghidra decompile for the frame cases, because a missing local is
+usually a *named* thing the decompiler already shows.
+
+### `reimpl/UnitsState` - four commits
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `queueDisbandAndAttackCommand5Params` | 57.1 | **100.0** | store order |
+| `selectionContainsCombatUnit` | 88.8 | **98.5 / 92.0** | a `bool` flag that the original keeps as `int` |
+| `recomputeTroopValuesForPlayer` | 51.7 / 50.3 | 54.1 / 52.0 | `this->units` vs the global `units` split |
+| `setDestinationForUnit` | 44.3 / 44.6 | 44.5 / 44.9 | word stores re-read the field |
+
+**Store order, and a detector that cannot see it.** The five parameter-to-global stores were in
+the wrong order. `quick_diff` reports 1.0000 for *every* ordering, because it collapses globals
+to `G`; only reccmp's raw diff shows the displacements. But `quick_diff -s` keeps the `[esp+N]`
+*load* offsets, and the loads follow the stores, so it does see the order - an exhaustive search
+over all 120 permutations took eight minutes and found the plain `Param0..Param4` order at 1.0000.
+Confirmed 100.0 by reccmp. Worth knowing: a first, hand-read ordering of the stores scored
+*worse* (57.1 -> 28.6), because the scheduler reorders independent stores and the emitted order
+is not the source order. Search it, do not reason it.
+
+**`bool` vs `int`.** The original holds the flag in `esi` as a dword; ours was `bool`, which put it
+in `bl` and changed every test and set of it. 88.8 -> 98.5 on the type alone. The residue is the
+320-byte array sitting at the other end of the frame, which is slot ordering of a `/GS` buffer.
+
+**`this->` vs global.** `recomputeTroopValuesForPlayer` had a frame 12 bytes short. The decompile
+shows why: the original walks the unit array with *two* pointers, one relative to `this` for
+`logicalState/dying/owner/isSelectable/unitType/...` and one absolute into the global for
+`x/y/unitType-as-value/owner-as-index/uid`, plus the counter in a slot. Ours used the global for
+everything, so there was one pointer and nothing to split. Routing the accesses the way the
+decompile shows recovered two of the three slots (-12 -> -4). The third is the original spilling
+its `this`-relative pointer, and writing the pointers explicitly as locals is byte-identical to
+the indexed form - the compiler strength-reduces either way. Allocator; left at 54.1.
+
+**Re-reading a field for a 16-bit store.** `setDestinationForUnit`'s original loads `units[].x`
+with `movzx` and sign-extends from `ax` because it also stores that same load as a word
+(`ladderExitXPosition = units[].x`); ours routed every use through an `int` local. Re-reading the
+field for the word stores is the "share only what the original shares" rule and is correct, but
+it is worth +0.2 here against a 0x14-vs-0x8 frame and a tail-merged early exit, and the
+`(short)(ushort)` double cast - the type-based guess - is byte-identical to baseline. Ghidra and
+our header agree `x` is `short`.
+
+**Not taken, with the reason.** `processEntityDamageToUnit` (+12, three *extra* slots) and
+`acquireShootTarget` (-4) are 300-line functions where the slots in question are real locals the
+two compilers chose to spill differently - pressure class. `selectionContainsCombatUnit`'s array
+placement, `createTribeFromSelectedUnits`' zero register, `changeDestinationByAmount`'s one copy
+and `getFirstSelectedSiegeEngineID`'s one `jle` are all single-instruction scheduling or
+allocation residues.
+
+### `reimpl/AIVState-leftover` - nothing to commit, and one measurement artefact
+
+38 functions, 7 below normalized 100, every frame exact. Four of the seven are a single
+scheduling residue: one `mov ebp, [esp+0x10]` one position away (`findAppropriateGridLocation-
+ForBuilding`, 99.3), two `lea`s swapped (`rotateAIV`, 97.2), a store moved across a `jle`
+(`aiDecideOnNewBuildings`, 99.0). Nothing in the source reaches those.
+
+**`aiPlaceFlag` (98.2 / 94.7) is done and the tool does not know it.** Its one differing line is
+
+```
+-mov ebx, dword ptr [ecx + I<EntityState>::instance+705348 (OFFSET)]
++mov ebx, dword ptr [ecx + cached+24 (OFFSET)]
+```
+
+Same instruction, a resolver address on both sides - with the data resolver on, `instance` is
+our own `Instance<EntityState>::instance` object, 700 KB of it, and reccmp labels an address
+705348 bytes into it by the nearest symbol it can find, which turns out to be some unrelated
+`cached` static. The original's side gets the proper `instance+705348` label from our GLOBAL
+marker, the two labels differ, and the normalized score - which forgives resolver addresses
+only when it recognises them - docks it 5 points. Checked at the byte level: the original's
+encoding is in the exe once and in our DLL not at all, so the displacement really is a DLL
+address, exactly as every other resolved global is; this one is just mislabelled. A tooling
+fix (label addresses inside a known instance object by that object) would reclaim it and any
+other large-struct access like it.
+
+`executeDefaultCastleAIV` (53.6, 971 instructions, delta 39, a `/GL` file) is the only real
+work in the namespace and is a project on its own; not started.
+
+
+### `reimpl/PathFindingState-development` - one commit, and the richest frame signal of the three
+
+114 functions, 97 below normalized 100, average 71 - the least finished of the three - and
+**13 frame mismatches**, nine of them +-4 or +-8, which is one or two locals each and the most
+mechanical case the workflow has. The slot tables name them; the decompile usually says what they
+are.
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `setWalkabilityBorderLogicLayerForSmallerMapSizes` | 99.2 / 92.3 | **100.0** | three zero-stores moved *before* the increment |
+
+The original compares `searchGeneration` in memory (`cmp dword ptr [esi+4], 0x7d00`) straight
+after incrementing it; ours loaded it into `eax` first because three stores to other `this`
+fields sat between the increment and the compare in the source. Moving the stores *after* the
+`if` made it worse (0.987 -> 0.971); moving them *before* the increment made it exact. The
+scheduler places them between the compare and the branch either way; what the source order
+decides is whether the compare can read memory.
+
+**`findNextTileInExistingSearchThatIsModuloDistanceAway` (56.5, frame -8): the hoist is right
+and not yet enough.** The original's two missing slots are `WalkLayer[tilesQueue[0]]` hoisted out
+of the loop (compared against the current tile's `WalkLayer` each iteration) and `abs(dx)` held
+across `abs(dy)`. Hoisting the first into a local recovers one slot (-8 -> -4), takes `delta`
+7 -> 5 and the instruction count 60 -> 62 of 63 - every cause metric improves - and reccmp falls
+56.5 -> 45.2 because the allocation reshuffles around it. The second local did not come from
+reordering the `abs` terms. Not committed, because the frame is still not exact and the drop is
+eleven points, but this is the function's next step and the hoist should be the first edit of it.
+
+**Byte-identical levers, recorded so they are not retried.** `igniteFireAtTilesDistanceAway`
+(+4: `_tile` appears as both a local and a temp) - declaring `_tile` inside the loop instead of
+in a comma-assignment condition changes nothing. `pathPlanningForTribe` (-4) - the clamped
+`unitCount` is a parameter overwritten in place, and giving it a local changes nothing either; the
+missing slot is something else. `updatePathLinkageTileMapRelatedToSiegeTower`'s one moved `or`
+is scheduling; so are `isTileInRangeOfKeepRange`'s `mov edi, imm` and
+`updateWalkLayerAndAIPathCostLayer`'s `add edi`.
+
+**Ranked but not opened:** `updatePathLinkageLayerAtTileForSomeLogicalReason` (-8: the original
+holds the loop counter and one of the `BitFlagHelper` pointer temps in slots; the source is still
+decompiler-shaped), `pathFindingWithBuildingsIncluded` (the original's `push ecx` frame is 4 bytes,
+not 0 - slot_map does not count a `push ecx` frame - so the real difference is +4, one extra local
+of ours), `commitUnitPathPlanUsingWalkLayer` (+4 at 19.9%, `__direction` is the extra),
+`findBuildingAccessPoint` (+8: `__accessibleIndex` and `__validAccessPointsCount` where the
+original has one counter), `setClimbBasedOnClosestClimbData` (75.7: the walking pointer is biased
+to the field 4 bytes before the original's, `lea esi,[ebx+0x1288]` against `+0x128c`, and the loop
+shape differs with it).
+
+### What the three branches say together
+
+* **The frame scan earns its place in unfinished namespaces.** In AICState every frame was exact
+  and the scan was a formality; here 13 of 97 were off, nine by one or two locals, and the slot
+  table plus the decompile named the local in every case that was opened.
+* **Fresh measurement, not the status file.** UnitsState's 82 and PathFindingState's 97 sub-100
+  counts are measured with resolvers on; the recorded numbers were taken under other
+  configurations and are only comparable to themselves.
+* **The near-done tail is almost all scheduling.** Of the functions above 95 on all three
+  branches, one in five had a source lever (`bool` vs `int`, store order, a store moved across an
+  increment); the rest are a single instruction one position away, and nothing in the source
+  reaches that.
+
