@@ -24,10 +24,10 @@ namespace Map {
         void PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes()
         {
             short sVar3;
-            this->searchGeneration = this->searchGeneration + 1;
             this->resultTile = 0;
             this->resultY = 0;
             this->resultX = 0;
+            this->searchGeneration = this->searchGeneration + 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
