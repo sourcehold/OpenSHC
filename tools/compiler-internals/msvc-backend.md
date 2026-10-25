@@ -2090,3 +2090,109 @@ scheduler's and no declaration order reaches it. The label should say *may be*. 
 DUPLICATION report pointed the wrong way on `countOccupiedPlayerSlots` (repetition from unrolling
 read as repetition from branch arms). Both are counts without a cause attached; the cause is
 what the second step - the register picks and their keys - is for.
+
+## The work-list, worked: one fix, four measured stops
+
+The triage above left five functions ranked by how reachable they looked. All five were taken to
+the point of a measured verdict. One moved; the other four each refuted a specific, plausible
+lever, and the refutations are worth more than the labels that sent us to them.
+
+### `recruitHarrassingSiegeEngines`: 73.2 / 64.5 -> 85.0 / 84.7
+
+The swapped pair was `tribeID` (key 36, ours `ebx`) against `unitID` (key 44, ours `edi`). Two
+things had to be read correctly first. There are *two* `unitID`s in the source, and the one in
+the pair is the `nonEuroRecruit` result, not the loop variable - the loop is byte-identical on
+both sides, with its counter in the volatile `edx` and `edi` holding the constant `0x15` for a
+16-bit compare. And the original assigns `tribeID` at instruction 31, before `unitID` exists, and
+gives it `edi` - so the original *served* `tribeID` first.
+
+The lever that worked was live range, not reference count. Moving the two tribe stores to after
+the `addUnitToTribe` call:
+
+```
+ST1 ST2 call BEH   (as written)        0.7317
+call ST1 ST2 BEH                       0.9358
+ST1 call ST2 BEH   <- committed        0.9419
+BEH call ST1 ST2                       0.8232
+call ST2 ST1 BEH                       0.7317
+uid read into a local before the call  0.8354
+```
+
+`tribeID` referenced after the call gains a region, outranks `unitID`, is served first, takes
+`edi`. The residue is one instruction (the uid reload moved past the call) and a volatile
+`eax/ecx/edx` rotation. Normalized went up twenty points.
+
+### `aiShouldAttackOrWaitForTeamCoordination`: 83.2 / 78.1, stop
+
+The original pushes `ebp`/`esi` at entry and `ebx`/`edi` only just before the loop, so its early
+exits pop two registers fewer - that is the `pop +2`. Ours keeps the constant `1` in `edi` from
+instruction 10 and reuses it for the early `cmp ..., edi` and `mov eax, edi`, which forces the
+early save. The original uses immediates there and materialises `mov edi, 1` at the loop.
+
+The obvious lever is to stop `int otherPlayerID = 1;` from being the first statement. Four
+placements, all worse: in the `for` header **0.51**, assigned just before the loop **0.51**, after
+the `aiType` check **0.81**, after the `requestState` check **0.61**. The side-by-side of the 0.51
+variants shows why: with the shared constant gone the compiler moved the `playerID` *base* from
+`esi` to `ebx` and still put the constant `1` in a register (`esi`) for the two early uses. The
+constant is materialised because it has two nearby uses regardless of the loop; where the
+declaration sits only decides which other value gets displaced.
+
+### `computeAttackPossibilities`: 89.7 / 85.7, stop
+
+The original takes the address of the `attackedPlayerID` field once (`lea edi, [eax+0x115e9d0]`)
+before the first call and reloads `[edi]` four times; we fold the first use and share the other
+three. `int* attackedPlayerID = &...;` reproduces the shape exactly - four `[edi]` reloads,
+duplication count 4 = 4 - and scores **79.3 / 80.4**, ten points *down*. The pointer is formed
+with `mov edi, esi; imul edi; add edi, G` where the original keeps the product in `eax` and
+`lea`s, and the four reloads rotate through `eax/ecx/edx` differently. Matching the duplication
+count is not the same as matching the code, and `quick_diff` had already said so (0.90 -> 0.79)
+before the build confirmed it.
+
+### `updateAIStrengthState`: 97.2 / 83.3, stop - with the mechanism named
+
+Twelve operands `ebp` where the original has `ebx`, one value, same instructions, same order.
+`--whycost` names the cause exactly:
+
+```
+_recruitProbDefensive -> ebp
+    ebx   total   +6500   PIN +700 by (temp); PIN +800 by (temp); PIN +400 by (temp) ...
+_totalRecruitProb -> ecx
+    ebx   total   +2300   ... PIN +800 by aiRecruitUnitChoicePreference
+```
+
+The parameter is used three times: `(char)x == 0` at the top, `= x` as an int after the random
+call, `(char)x == 0` again near the end. The two byte tests CSE into one byte-class temp that
+lives across the call, and a byte-class value that must survive a call has exactly one legal
+register on x86 - `ebx`. It pins `ebx` with `benefit x 100`, `_recruitProbDefensive` takes
+`ebp`, and every later `ebp`/`ebx` choice follows.
+
+Seven variants. Changing the casts (`unsigned char`, `!(char)x`, both tests, one test) -
+**byte-identical**, four times. Reading the byte through `*(char*)&x` to take the address and
+force memory residence - **byte-identical**, three forms; MSVC folds it straight back. The one
+form that dissolves the pin, casting the *assignment* too so all three uses are the same byte
+expression, scores 0.969 -> 0.994 on quick_diff and 83.3 -> 86.4 normalized, and is **wrong**: the
+original assigns with `mov ebp, dword ptr [esp+0x20]`, a dword load, and the variant emits a byte
+load that is one byte longer, shifting every later branch target by one. Raw stayed at 97.2 for
+exactly that reason. Rejected. The original's compiler did not create the cross-call byte temp
+from the same source, and no spelling of ours stops it.
+
+### `smallestTribeOfUnitType`: 96.2 / 93.4, stop
+
+Three operands, one visible difference: we store `smallestTribeID = 0` before the `aiType`
+check, the original stores both zeros after it. Moving the initialiser below the check:
+**0.961 -> 0.517**. Left alone.
+
+### What the five say together
+
+* **Live range beats reference count as a lever.** `recruitHarrassingSiegeEngines` moved on a
+  statement reorder that gave a value a region after a call; `decideOnTribeAttackLocation` moved
+  on a store moved out from between two reads. Neither changed what was computed.
+* **A reorder that fixes the pair can displace a third value.** Three of the four stops failed
+  because the compiler re-spent the freed register elsewhere (`esi` -> `ebx` for the base in
+  `aiShouldAttack`, the frame in `smallestTribeOfUnitType`). Check the whole side-by-side, not the
+  pair.
+* **Matching a detector's count is not matching the code**, twice now (`computeAttackPossibilities`
+  here, `countOccupiedPlayerSlots`' DUPLICATION earlier).
+* **A byte-class value live across a call pins `ebx`.** New, named, and the first allocator
+  mechanism found here that a source `(char)` cast creates directly. When `--whycost` shows a
+  PIN by a parameter or a `(char)`-typed local, look for a second use across a call.
