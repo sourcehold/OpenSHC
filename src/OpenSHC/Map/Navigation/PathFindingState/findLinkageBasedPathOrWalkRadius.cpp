@@ -63,52 +63,94 @@ namespace Map {
                 this->searchQueue.depth = 0;
             }
             /*
-              The eight-neighbour expansion below is handwritten assembly in the original and reaches
-              the layers and the queue through these locals; see LinkageNeighbourAsm.hpp. The queue
-              indices and the target tile live in the parameter slots, as they do in the original.
+              From here to the return the original is handwritten assembly in the hand of
+              LinkageNeighbourAsm.hpp, including the loop head: the queue indices live in the
+              parameter slots (y is the write index, x2 the read index, continuePreviousSearch the
+              depth, x the target tile), every layer base is reloaded from its slot before each use,
+              the row position is zero-extended with "mov eax, 0 / mov ax" and the distance is kept
+              in bx. Only the local set-up before the loop and the write-back after it are C.
              */
-            short _curGen = (short)this->searchGeneration;
+            uint _curGen = (ushort)this->searchGeneration;
             short* _walkLayer = DAT_TileMapState::instance.WalkLayer;
             short* _certainPath = DAT_TileMapState::instance.CertainPathLayer;
             int* _tilesQueue = this->searchQueue.tilesQueue;
             short* _yQueue = this->searchQueue.yQueue;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
-
+            int _tile;
+            int _cY;
+            int _cCardinalDistance = 0;
+            int _result = 0;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
-            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = _curGen;
-
+            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)_curGen;
             y = this->searchQueue.writeIndex;
-            int _readIndex = this->searchQueue.readIndex;
             continuePreviousSearch = this->searchQueue.depth;
             if (x2 == -1) {
                 x = 0;
             } else {
                 x = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
             }
-            int _result = 0;
-            while (_readIndex != (int)y && (int)continuePreviousSearch < maxIterations) {
-                continuePreviousSearch = continuePreviousSearch + 1;
-                int _tile = this->searchQueue.tilesQueue[_readIndex];
-                if (_tile == (int)x) {
-                    _result = 1;
-                    break;
-                }
-                short _cCardinalDistance = _certainPath[_tile] + 1;
-                if (800 <= _cCardinalDistance) {
-                    break;
-                }
-                int _cLink = _linkage[_tile];
-                int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
-
-                MACRO_LINKAGE_EXPAND_NEIGHBOURS(1, y)
-
-                _readIndex = _readIndex + 1;
+            x2 = this->searchQueue.readIndex;
+            // clang-format off
+            __asm {
+            flr_loop:
+                mov ecx, x2
+                cmp ecx, y
+                je flr_exit
+                mov eax, continuePreviousSearch
+                cmp eax, maxIterations
+                jge flr_exit
+                add dword ptr continuePreviousSearch, 1
+                mov esi, _tilesQueue
+                mov edx, dword ptr [esi + ecx*4]
+                mov _tile, edx
+                cmp edx, x
+                je flr_found
+                mov esi, _certainPath
+                mov bx, word ptr [esi + edx*2]
+                add bx, 1
+                cmp bx, 0x320
+                jge flr_exit
+                mov word ptr _cCardinalDistance, bx
+                mov esi, _yQueue
+                mov eax, 0
+                mov ax, word ptr [esi + ecx*2]
+                mov _cY, eax
+                mov edi, _walkLayer
+                mov edx, _tile
+                mov esi, _linkage
+                mov bl, byte ptr [esi + edx]
             }
+            MACRO_LINKAGE_PUSH(1, w, y, -2, 0x40, MACRO_ASM_SAME, MACRO_ASM_DEC, MACRO_ASM_SAME)
+            MACRO_LINKAGE_PUSH(1, e, y, +2, 0x04, MACRO_ASM_SAME, MACRO_ASM_INC, MACRO_ASM_SAME)
+            __asm mov eax, _cY
+            __asm shl eax, 3
+            __asm mov esi, _dirMatrix
+            __asm add edx, dword ptr [esi + eax*4]
+            MACRO_LINKAGE_PUSH(1, n, y, 0, 0x01, MACRO_ASM_SAME, MACRO_ASM_SAME, MACRO_ASM_DEC)
+            MACRO_LINKAGE_PUSH(1, nw, y, -2, 0x80, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_DEC)
+            MACRO_LINKAGE_PUSH(1, ne, y, +2, 0x02, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_DEC)
+            __asm mov edx, _tile
+            __asm mov eax, _cY
+            __asm shl eax, 3
+            __asm add eax, 4
+            __asm mov esi, _dirMatrix
+            __asm add edx, dword ptr [esi + eax*4]
+            MACRO_LINKAGE_PUSH(1, s, y, 0, 0x10, MACRO_ASM_SAME, MACRO_ASM_SAME, MACRO_ASM_INC)
+            MACRO_LINKAGE_PUSH(1, sw, y, -2, 0x20, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_INC)
+            MACRO_LINKAGE_PUSH(1, se, y, +2, 0x08, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_INC)
+            __asm {
+                add dword ptr x2, 1
+                jmp flr_loop
+            flr_found:
+                mov dword ptr _result, 1
+            flr_exit:
+            }
+            // clang-format on
             this->searchQueue.writeIndex = y;
-            this->searchQueue.readIndex = _readIndex;
+            this->searchQueue.readIndex = x2;
             this->searchQueue.depth = continuePreviousSearch;
             return (BOOLEnum)_result;
         }
