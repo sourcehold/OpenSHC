@@ -1,6 +1,6 @@
 #include "../UnitsState.func.hpp"
 
-#include "OpenSHC/Map/Units/UnitsState.hpp"
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -12,16 +12,11 @@ namespace Map {
         int UnitsState::selectionContainsEngineersOnly()
         {
             int result = FALSE;
-            // I tried simplifying this with an early-return but didn't work
-            if (this->selectionEngineers != 0) {
-                // This really is field pointer increment style. I tried a for loop over the fields as a int[]
-                // but that didn't work
-                int* pUnitSelection = (int*)&this->selectionEuropeanArchers;
+            if (this->selectionUnitType[Selection::USE_E_ENGINEERS] != 0) {
                 for (int index = 0; index <= 26; index++) {
-                    if ((index != 7) && (*pUnitSelection != 0)) {
+                    if ((index != Selection::USE_E_ENGINEERS) && (this->selectionUnitType[index] != 0)) {
                         return FALSE;
                     }
-                    pUnitSelection++;
                 }
                 result = TRUE;
             }

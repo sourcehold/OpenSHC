@@ -11,7 +11,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F460
-        undefined4 BuildingsState::determinePeasantSitPosition(int campfireID, int availablePeasants)
+        BOOLEnum BuildingsState::determinePeasantSitPosition(int campfireID, int availablePeasants)
         {
             if (availablePeasants >= 24) {
                 availablePeasants = 23;
@@ -27,7 +27,7 @@ namespace Map {
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(x, y, centerX, centerY);
             this->campfireSpotOrientation = DAT_DirectionAlgorithmState::instance.orientation;
-            return 1;
+            return TRUE;
         }
 
     }
