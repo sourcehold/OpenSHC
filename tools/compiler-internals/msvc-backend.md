@@ -2462,3 +2462,38 @@ locals are the next step for it; not started.
 * **The remaining residues are all one class** - early-exit layout, which decides where `push
   edi` lands, which decides which value gets a callee-saved register across the first call.
   Four functions on this branch stop at the same wall, 80-86%.
+
+### `updateSeparateAreaTileMap`: 66.7 -> 68.0, and the slot tiebreak the model does not have
+
+The third macro user's residue was predicted above to be the duplicate queue pointers. Reading
+the original properly, both sides have them: the asm-named `_tilesQueue`/`_yQueue` in slots, and
+a second copy of each address that the C loop uses for `tilesQueue[0] = first` / `yQueue[0] = row`
+and that gets spilled across the asm block (the block clobbers every register, so anything live
+across it is spilled - which is also why `_first`, `_row`, `_rowEnd` and `_areaID` are all slots).
+Ours has exactly the same sixteen slots. What differs is the *order* of two adjacent pairs:
+
+```
+                 original              ours
+  -0x14 / -0x18  _cY  / _tile          _tile / _cY
+  -0x28 / -0x24  queue-start copies    (ours puts them at -0x3c / -0x40, below everything)
+```
+
+Six source edits brought the other three ordering differences into line (`_readIndex` zeroed in
+the prologue at function scope like the original, `forceUpdate = 1` set before the loop as well
+as inside it, the row test as `_first >= *_rowEnd`, the cap as `>= 1000`): `row/rowEnd/readIndex`
+now sit at `-0xc/-8/-4` exactly, instruction count 284 vs 281. 66.7 -> 68.0. The two pairs did not
+move, and the reccmp diff is 182 lines of nothing but those four slots' displacements through the
+asm block.
+
+**What the pairs are not.** Not weight: the original references `_tile` 3 times and `_cY` 11,
+identical to ours, and places them the other way round. Not declaration order: swapping the
+declarations changes nothing (also tested on `_budget`/`_direction` in `tracePathPlan...`, where
+neither declaration nor initialisation order moved them). Not first mention in the asm text: both
+originals store `_tile` before `_cY` and still disagree with each other about which goes higher.
+Not alphabetical (the layer pointers rule that out). Across the three asm functions, every slot
+landed at the original's offset except exactly one adjacent pair per function plus, here, the
+two compiler temps - so the frame model in `slot_map.py` (class byte, then `weight*1000/size`,
+then declaration order) is right about everything except a final tiebreak among equal-weight
+asm-referenced locals, and that tiebreak is what decides the last 10-15 points of all three.
+Finding it is a c2.dll question (`StackPacking` / `ColorStackElements`, already located) rather
+than a source one, and it is the single most valuable open item on this branch.
