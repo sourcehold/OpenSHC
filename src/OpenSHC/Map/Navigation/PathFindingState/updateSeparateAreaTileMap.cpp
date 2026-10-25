@@ -46,31 +46,31 @@ namespace Map {
             this->toggleUpdateSeparateAreaTileMap = 0;
             this->totalZones = 0;
             this->sum = 0;
-            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
-            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                4000, '\0', (void*)((int)(this->zoneSizesArray)));
-            MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
             /*
               The eight-neighbour expansion below is handwritten assembly in the original and reaches
               the area layer and the queue through these locals; see LinkageNeighbourAsm.hpp. The
               queue end lives in the forceUpdate parameter slot, as it does in the original.
              */
             ushort* _areaLayer = DAT_TileMapState::instance.PathConnectionLayer;
-            int* _tilesQueue = this->searchQueue.tilesQueue;
             short* _yQueue = this->searchQueue.yQueue;
-            int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
-            int* _tilesQueueStart = this->searchQueue.tilesQueue;
             short* _yQueueStart = this->searchQueue.yQueue;
+            int* _tilesQueue = this->searchQueue.tilesQueue;
+            int* _tilesQueueStart = this->searchQueue.tilesQueue;
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
+            int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
             int* _zoneSizes = this->zoneSizesArray;
-            int _cY;
             int _tile;
+            int _cY;
             short _areaID = 1;
+            int _readIndex = 0;
+            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
+            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                4000, '\0', (void*)((int)(this->zoneSizesArray)));
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
             int _row = 0;
             int* _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
-            int _readIndex = 0;
             forceUpdate = 1;
             for (int _first = 0; _first < 80400; _first = _first + 1) {
                 if (_first >= *_rowEnd) {
@@ -81,8 +81,8 @@ namespace Map {
                     || (DAT_TileMapState::instance.LogicLayer[_first] & 0x4a5014b1) != 0) {
                     continue;
                 }
-                *_tilesQueueStart = _first;
                 *_yQueueStart = (short)_row;
+                *_tilesQueueStart = _first;
                 DAT_TileMapState::instance.PathConnectionLayer[_first] = _areaID;
                 forceUpdate = 1;
                 _readIndex = 0;
