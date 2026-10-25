@@ -167,7 +167,7 @@ namespace Synchrony {
             &GameSynchronyState::getCommandIDFromCommandSelectionStuff)
         getCommandIDFromCommandSelectionStuff;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
             &GameSynchronyState::getGameCommandArrayIndex)
         getGameCommandArrayIndex;
 

@@ -52,3 +52,5 @@ src/OpenSHC/Map/Buildings/BuildingsState/clearBuildings.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/applyVersionUpgradeAccessibilityRecompute.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/recomputeAccessibilityForAllBuildings.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getResourceSpace.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/processSyncPacket.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/translateMultiplayerIDsIntoPlayerIDs.cpp

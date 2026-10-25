@@ -435,7 +435,7 @@ namespace Synchrony {
 
         int getCommandIDFromCommandSelectionStuff();
 
-        undefined4 getGameCommandArrayIndex();
+        int getGameCommandArrayIndex();
 
         int getPendingGameCommandsCount();
 
