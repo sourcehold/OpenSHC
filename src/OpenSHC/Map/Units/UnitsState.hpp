@@ -54,41 +54,15 @@ namespace Map {
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
-            int field15_0x560; // 0x00000560 length: 4
-            int selectionEuropeanArchers; // 0x00000564 length: 4
-            int selectionSpearmen; // 0x00000568 length: 4
-            int selectionMacemen; // 0x0000056C length: 4
-            int selectionCrossbowmen; // 0x00000570 length: 4
-            int selectionPikemen; // 0x00000574 length: 4
-            int selectionSwordsmen; // 0x00000578 length: 4
-            int selectionKnights; // 0x0000057C length: 4
-            int selectionEngineers; // 0x00000580 length: 4
-            int selectionLaddermen; // 0x00000584 length: 4
-            int selectionTunnelers; // 0x00000588 length: 4
-            int selectionMonks; // 0x0000058C length: 4
-            int selectionCatapults; // 0x00000590 length: 4
-            int selectionTrebuchets; // 0x00000594 length: 4
-            int selectionBatteringRam; // 0x00000598 length: 4
-            int selectionSiegeTower; // 0x0000059C length: 4
-            int selectionShield; // 0x000005A0 length: 4
-            int selectionMangonel; // 0x000005A4 length: 4
-            int selectionBallista; // 0x000005A8 length: 4
-            int nSelectionFireBallistas; // 0x000005AC length: 4
-            int selectionArabArcher; // 0x000005B0 length: 4
-            int selectionArabSlave; // 0x000005B4 length: 4
-            int selectionArabSlinger; // 0x000005B8 length: 4
-            int selectionArabAssassin; // 0x000005BC length: 4
-            int selectionArabHorseArchers; // 0x000005C0 length: 4
-            int selectionArabSwordsman; // 0x000005C4 length: 4
-            int selectionArabFireThrower; // 0x000005C8 length: 4
-            int selectionFireBallista; // 0x000005CC length: 4
+            int unitIDSelectedCatapultOrTrebuchet; // 0x00000560 length: 4
+            int selectionUnitType[27]; // 0x00000564 length: 108
             int selectionSlots[8]; // 0x000005D0 length: 32
             int nHasOwnedUnitInSelection; // 0x000005F0 length: 4
             int climbX2; // 0x000005F4 length: 4
             int climbY2; // 0x000005F8 length: 4
             byte unusedBytes03[8]; // 0x000005FC length: 8
-            dword field48_0x604; // 0x00000604 length: 4
-            int field49_0x608; // 0x00000608 length: 4
+            dword timePreviousDoubleClick; // 0x00000604 length: 4
+            int someSelectedUnitID; // 0x00000608 length: 4
             int euroUnitAcquisitionFailReason; // 0x0000060C length: 4
             int euroUnitRequiredResource; // 0x00000610 length: 4
             Unit units[2500]; // 0x00000614 length: 2920000
