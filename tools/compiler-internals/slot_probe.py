@@ -1,6 +1,7 @@
 """Trace how c2 decides a function's stack slot order, for one GlobalRegAlloc invocation.
 
-usage: slot_probe.py FILE.cpp --invocation N
+usage: slot_probe.py FILE.cpp --name FUNCTIONNAME     (preferred; invocation numbers drift between runs)
+       slot_probe.py FILE.cpp --invocation N
        slot_probe.py FILE.cpp --find LOCALNAME      which invocation(s) hold that local
 
 What it prints, and why each part matters (msvc-backend.md, "The slot tiebreak, decoded"):
@@ -151,17 +152,28 @@ def regime(frame, gs_buffer):
     return 'sorted' if (frame > 0x80 or gs_buffer) else 'list-order'
 
 
-def probe(src, invocation):
+def gate_for(name):
+    """bp0 command that enables bps 1-4 only for the function whose mangled name starts with
+    "?NAME": GlobalRegAlloc invocation numbers drift between runs (function order depends on
+    pointer values), so a --invocation N probe can land on a neighbour; the name cannot."""
+    import struct
+    w0, w1 = struct.unpack('<II', ('?' + name + '        ')[:8].encode('ascii'))
+    return ('r $t7=poi(poi(@eax)+4); .if ((poi(@$t7)==0x%x) & (poi(@$t7+4)==0x%x)) { .printf ' % (w0, w1) + EQ +
+            'FOUND' + NL + EQ + '; be 1-4 } .else { bd 1-4 }; gc')
+
+
+def probe(src, invocation, name=None):
     lines = ['sxe ld:c2', 'g',
              'bp1 ' + ADD_STACK_ELEMENT + ' "' + add_cmd() + '; gc"',
              'bp2 ' + COLOR_ENTRY + ' "' + list_cmd() + '; gc"',
              'bp3 ' + BEFORE_SORT + ' ".printf ' + EQ + 'SORTED' + NL + EQ + '; gc"',
              'bp4 ' + AFTER_SORT + ' "' + dump_cmd('OUT') + '; gc"',
              'bd 1-4', 'r $t0=0',
-             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
-             ') { be 1-4 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1-4 }; gc"',
+             ('bp0 ' + GLOBAL_REG_ALLOC + ' "' + gate_for(name) + '"') if name else
+             ('bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
+              ') { be 1-4 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1-4 }; gc"'),
              'g', 'q', '']
-    txt = run(lines, src, 'slots-%s-%d' % (os.path.basename(src)[:-4], invocation))
+    txt = run(lines, src, 'slots-%s-%s' % (os.path.basename(src)[:-4], name or invocation))
     if 'Malformed' in txt or 'Syntax error' in txt:
         sys.exit('cdb rejected a command - see ' + str(out))
     return txt
@@ -200,9 +212,13 @@ if __name__ == '__main__':
         for inv, names in find(argv[0], want):
             print('invocation %d: %s' % (inv, ' '.join(names)))
         sys.exit(0)
-    if not argv or inv is None:
+    name = None
+    for i, a in enumerate(sys.argv):
+        if a == '--name' and i + 1 < len(sys.argv):
+            name = sys.argv[i + 1]; argv = [x for x in argv if x != name]
+    if not argv or (inv is None and name is None):
         sys.exit(__doc__)
-    txt = probe(argv[0], inv)
+    txt = probe(argv[0], inv, name)
     name_re = r'(?:[0-9a-f]{8}\s+"([^"]*)"|\((temp|nosym)\))'
     print('### AddStackElement calls (walk order)')
     for m in re.finditer(r'^ADD ([0-9a-f]+) sz=(\d+) wt=(-?\d+) ret=([0-9a-f]+) tup=([0-9a-f]+) op=([0-9a-f]+) esi=([0-9a-f]+) edi=([0-9a-f]+) \s*' + name_re, txt, re.M):
