@@ -2603,3 +2603,42 @@ the tribe-ID row, `[esp+0x24]` the running minimum), which is `ColorStackElement
 sharing a local into a parameter colour. Rewriting the loop with the pointer iterator made it
 worse (80.1 -> 77.3) and was reverted; what decides the sharing is liveness of the parameter,
 i.e. where the last read of each argument sits, and that is the next thing to look at there.
+
+### The early-exit epilogue wall: what it is and is not (first probes)
+
+The residue left in `tracePathPlan...` (94.5), both `find*` asm functions and earlier
+`decideOnTribe`/`aiShouldAttack`: the original's second guard pair has its `pop edi / pop esi /
+xor eax, eax / ... / ret` inline as the fallthrough of its last test; ours appends that block at
+the end and reaches it by three jumps. Everything else in the prologue is identical, including
+the lazily placed `push edi` between the two pairs.
+
+**Not `FgEarlyTailDup`.** It is called first thing in `GlobalRegAlloc` (0x10c0738c) under /O2
+and copies the block *immediately before the exit block* into its predecessors when that block
+starts with a label, holds at most two real tuples, none a call/asm, and `preds x tuples <= 8`.
+`taildup_probe.py` shows it entering and finding `TAIL 0` on every function tried: the block
+before the exit is an empty landing pad (label plus one pseudo tuple, kind 0x17 opcode 0x2f9),
+so there is never anything to duplicate. The inline epilogues come from elsewhere.
+
+**What the listing experiments say** (20 s each, `/FA` of the file alone, no debugger):
+
+| guards written as | instructions | FALSE epilogues |
+|---|---|---|
+| 2 + 2 statements (ours, `tppA`) | 182 | pair 1 inline, pair 2 at the end |
+| the pairs swapped (`tppI`) | 182 | first pair inline, second at the end - positional |
+| `goto fail` to one `return FALSE` at the end | 176 | one, at the end; `push edi` moves to entry |
+| either or both pairs as one `a \|\| b \|\| c` statement | 176 | one, at the end; `push edi` at entry |
+
+So only the 2+2 shape keeps `push edi` between the pairs like the original, and in that shape
+`merge_probe.py` counts exactly two post-allocation `FgDoCommonTailMerge` folds (R1+R2, R3+R4)
+and nothing pairwise. The fold of the first pair keeps the fallthrough block in place; the fold
+of the second pair ends up at the end of the function. `FgDoCommonTailMerge` does not create
+blocks (it calls `FgTailMergeWithoutCheck` from two sites, 0x10b30ac7 / 0x10b30ae5, or inserts
+a `newlabel` and retargets), so the second pair's survivor must already have been at the end
+before the fold - i.e. the last guard's return block is placed after the body by something
+earlier than GlobalRegAlloc, and the original's was not.
+
+Next probes, in order: (1) the condition choosing between the two `FgTailMergeWithoutCheck`
+sites (which of the pair survives); (2) a block-order dump at GlobalRegAlloc entry for tppA to
+see whether the fourth return block is already last; (3) the front end's handling of a
+`return` whose fallthrough successor is the main body - the one thing that differs between the
+third and fourth guards is that the fourth is followed by the body.

@@ -55,14 +55,14 @@ EQ = BS + Q
 NL = BS + BS + 'n'
 
 
-def compile_command(src):
+def compile_command(src, tag='r'):
     cc = json.loads(common.read_text(common.BUILD_DIR / 'compile_commands.json'))
     ours = [e for e in cc if 'OpenSHC.dll.dir' in e['command']
             and '/src/OpenSHC/' in e['file'].replace('\\', '/')]
     if not ours:
         sys.exit('configure the build first')
     o = str(out).replace('\\', '/')
-    cmd = re.sub(r'/Fo\S+', lambda _m: '/Fo%s/%s.obj' % (o, os.path.basename(src)[:-4]), ours[0]['command'])
+    cmd = re.sub(r'/Fo\S+', lambda _m: '/Fo%s/%s.obj' % (o, tag), ours[0]['command'])   # one .obj per run, so runs can overlap
     cmd = re.sub(r'-c \S+$', lambda _m: '-c ' + os.path.abspath(src), cmd)
     return cmd, ours[0]['directory']
 
@@ -70,7 +70,7 @@ def compile_command(src):
 def run(lines, src, tag):
     path = out / (tag + '.cdb')
     common.write_text(path, '\r\n'.join(lines) + '\r\n')
-    cmd, cwd = compile_command(src)
+    cmd, cwd = compile_command(src, tag)
     env = common.build_env()
     env['PATH'] = str(common.ROOT / 'MSVC1400-SP1' / 'Common7' / 'IDE') + os.pathsep + env['PATH']
     full = '"%s" -cf "%s" %s' % (CDB, path, cmd)
