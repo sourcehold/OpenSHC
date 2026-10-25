@@ -65,8 +65,8 @@ namespace Map {
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
             uchar* _occupancy = DAT_TileMapState::instance.OccupancyLayer;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
-            int _tile;
             int _cY;
+            int _tile;
             int _cCardinalDistance = 0;
             int _result = 0;
             this->searchQueue.yQueue[0] = (short)y;
