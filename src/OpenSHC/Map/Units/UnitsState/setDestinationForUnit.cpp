@@ -40,7 +40,7 @@ namespace Map {
                 this->units[unitID].tunnelerFinishedDigging = 0;
                 this->units[unitID].currentIndexInPathPlan = 0;
                 this->units[unitID].destinationXPosition = (short)x;
-                this->units[unitID].ladderExitXPosition = (short)_unitX;
+                this->units[unitID].ladderExitXPosition = this->units[unitID].x;
                 this->units[unitID].previousTilePosition
                     = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + _unitX;
                 this->units[unitID].ladderExitYPosition = this->units[unitID].y;
@@ -197,7 +197,7 @@ namespace Map {
                 this->units[unitID].ladderExitYPosition = this->units[unitID].y;
                 this->units[unitID].destinationTilePosition = (short)_pathTargetX
                     + DAT_ViewportRenderState::instance.translationMatrix[(short)_pathTargetY].addXgetTile;
-                this->units[unitID].ladderExitXPosition = (short)_unitX;
+                this->units[unitID].ladderExitXPosition = this->units[unitID].x;
                 this->units[unitID].cannotClimb = (ushort)(DAT_PathFindingState::instance.climbIsIllegal != 0);
                 DAT_PathFindingState::instance.climbIsIllegal = 0;
                 this->units[unitID].previousTilePosition = this->units[unitID].x
