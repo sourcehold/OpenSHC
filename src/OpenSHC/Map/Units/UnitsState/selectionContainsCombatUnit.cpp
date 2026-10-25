@@ -23,7 +23,7 @@ namespace Map {
                mentioned in the size 80 array. Then, we put that ID at that location.
 
                map<unit_type, unit_id> */
-            bool _hasMatch = false;
+            int _hasMatch = 0;
             for (DAT_CurrentUnitSlotID::instance = unitID;
                 (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
@@ -35,7 +35,7 @@ namespace Map {
                     && selectedUnitsMap[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType] == 0) {
                     selectedUnitsMap[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
                         = DAT_CurrentUnitSlotID::instance;
-                    _hasMatch = true;
+                    _hasMatch = 1;
                 }
             }
             /* if we have at least 1 match, return it. the order of returning seems really
