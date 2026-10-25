@@ -50,18 +50,18 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 5000, '\0', DAT_GameState::instance.playerDataArray[playerID].enemyIDArray);
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
-                if (DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (DAT_UnitsState::instance.units[unitID].dying != 0) {
+                if (this->units[unitID].dying != 0) {
                     continue;
                 }
-                if (DAT_UnitsState::instance.units[unitID].unknownTestAgainst0_2 != 0) {
+                if (this->units[unitID].unknownTestAgainst0_2 != 0) {
                     continue;
                 }
-                if (DAT_GameState::instance.mapAndTime.playerTeams[DAT_UnitsState::instance.units[unitID].owner]
+                if (DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID].owner]
                     == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                    if (DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0) {
+                    if (this->units[unitID].isSelectable_OR_matchTime == 0) {
                         continue;
                     }
                     MACRO_CALL_MEMBER(
@@ -76,7 +76,7 @@ namespace Map {
                     continue;
                 }
                 /* unit not in our team */
-                switch (DAT_UnitsState::instance.units[unitID].unitType) {
+                switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_TRADER:
                 case OpenSHC::Map::Units::UT_TRADERHORSE:
                 case OpenSHC::Map::Units::UT_CAMELSHBEAR:
@@ -85,10 +85,10 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_CHILD:
                     continue;
                 }
-                if (DAT_UnitsState::instance.units[unitID].owner == 0) {
+                if (this->units[unitID].owner == 0) {
                     continue;
                 }
-                switch (DAT_UnitsState::instance.units[unitID].unitType) {
+                switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
                 case OpenSHC::Map::Units::UT_S_TREBUCHET:
                 case OpenSHC::Map::Units::UT_S_MANGONEL:
@@ -103,8 +103,8 @@ namespace Map {
                         continue;
                     }
                 }
-                if (DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0) {
-                    if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
+                if (this->units[unitID].isSelectable_OR_matchTime == 0) {
+                    if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
                         DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
                     }
                 } else {
@@ -120,7 +120,7 @@ namespace Map {
                             || DAT_GameSynchronyState::instance
                                     .currentAIArray[DAT_UnitsState::instance.units[unitID].owner]
                                 == 0
-                            || DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID == playerID)) {
+                            || this->units[unitID].siegeTargetPlayerID == playerID)) {
                         DAT_GameState::instance.playerDataArray[playerID]
                             .totalEnemyTroopValueByPlayerID[DAT_UnitsState::instance.units[unitID].owner]
                             += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
