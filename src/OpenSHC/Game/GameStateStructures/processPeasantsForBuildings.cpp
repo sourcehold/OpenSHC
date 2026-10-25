@@ -9,7 +9,7 @@
 namespace OpenSHC {
 namespace Game {
 
-    // NOTE: Checks each player's buildings and assignes corresponding peasants if they need workers
+    
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004589E0
     void GameStateStructures::processPeasantsForBuildings()

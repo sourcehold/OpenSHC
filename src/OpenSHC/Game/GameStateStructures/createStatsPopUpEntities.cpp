@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -31,7 +32,7 @@ namespace Game {
             if (playerSlot[0] == -1 && playerSlot[0x1b] == 0) {
                 continue;
             }
-            if (this->playerDataArray[playerID].currentResources[0xf]
+            if (this->playerDataArray[playerID].currentResources[Resources::RT_GOLD]
                 == this->playerDataArray[playerID].currentGoldDelayed) {
                 continue;
             }
@@ -39,7 +40,7 @@ namespace Game {
             if (this->playerDataArray[playerID].field490_0x450 < 2) {
                 continue;
             }
-            this->playerDataArray[playerID].currentGoldDelayed = this->playerDataArray[playerID].currentResources[0xf];
+            this->playerDataArray[playerID].currentGoldDelayed = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
             this->playerDataArray[playerID].field490_0x450 = 0;
             if (this->playerDataArray[playerID].keep.id != 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
