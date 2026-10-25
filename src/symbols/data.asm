@@ -873,9 +873,9 @@ PUBLIC ?instance@?$Extern@$$BY1CB@EAA@D$0OLBCNI@@StructResolver@@2PAY0EAA@DA
 
 PUBLIC ?instance@?$Extern@$$BY0CA@D$0OLJKMI@@StructResolver@@2PADA
 
-PUBLIC ?instance@?$Extern@I$0OLJKPA@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0OLJKPA@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0OLJLFA@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0OLJLFA@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0OLJLFI@@StructResolver@@2IA
 
@@ -2536,9 +2536,9 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@$$BY0CA@D$0OLJKMI@@StructResolver@@2PADA EQU 00EB9AC8h
 
-?instance@?$Extern@I$0OLJKPA@@StructResolver@@2IA EQU 00EB9AF0h
+?instance@?$Extern@H$0OLJKPA@@StructResolver@@2HA EQU 00EB9AF0h
 
-?instance@?$Extern@I$0OLJLFA@@StructResolver@@2IA EQU 00EB9B50h
+?instance@?$Extern@H$0OLJLFA@@StructResolver@@2HA EQU 00EB9B50h
 
 ?instance@?$Extern@I$0OLJLFI@@StructResolver@@2IA EQU 00EB9B58h
 

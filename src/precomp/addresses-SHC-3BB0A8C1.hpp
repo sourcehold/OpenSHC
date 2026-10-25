@@ -97304,7 +97304,7 @@ enum {
     SHC_3BB0A8C1_0x00EB9AE8 = 0x00EB9AE8,
     // label: DAT_UnknownBinkIndex
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9AF0 = 0x00EB9AF0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9AF4 = 0x00EB9AF4,
@@ -97342,7 +97342,7 @@ enum {
     SHC_3BB0A8C1_0x00EB9B4C = 0x00EB9B4C,
     // label: DAT_UnknownBinkCount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B50 = 0x00EB9B50,
     // label: DAT_StoredGameMode
     // location:

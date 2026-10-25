@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -54,8 +55,9 @@ namespace Map {
                     = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].x;
                 int const y
                     = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].y;
-                if ((uint)x > 399 || (uint)y > 399
-                    || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+                if ((uint)x > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 || (uint)y > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+                    || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * OpenSHC::Map::MC_MAP_XY_LIMIT + x]
+                        == 0) {
                     continue;
                 }
                 int const occupantID
