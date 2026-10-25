@@ -61,15 +61,19 @@ namespace Map {
             int* _tilesQueue = this->searchQueue.tilesQueue;
             short* _yQueue = this->searchQueue.yQueue;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
+            int* _tilesQueueStart = this->searchQueue.tilesQueue;
+            short* _yQueueStart = this->searchQueue.yQueue;
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
             int* _zoneSizes = this->zoneSizesArray;
-            int _tile;
             int _cY;
+            int _tile;
             short _areaID = 1;
             int _row = 0;
             int* _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
+            int _readIndex = 0;
+            forceUpdate = 1;
             for (int _first = 0; _first < 80400; _first = _first + 1) {
-                if (*_rowEnd <= _first) {
+                if (_first >= *_rowEnd) {
                     _row = _row + 1;
                     _rowEnd = _rowEnd + 3;
                 }
@@ -77,14 +81,14 @@ namespace Map {
                     || (DAT_TileMapState::instance.LogicLayer[_first] & 0x4a5014b1) != 0) {
                     continue;
                 }
-                this->searchQueue.tilesQueue[0] = _first;
-                this->searchQueue.yQueue[0] = _row;
+                *_tilesQueueStart = _first;
+                *_yQueueStart = (short)_row;
                 DAT_TileMapState::instance.PathConnectionLayer[_first] = _areaID;
                 forceUpdate = 1;
-                int _readIndex = 0;
+                _readIndex = 0;
                 MACRO_LINKAGE_AREA_LOOP(1, _readIndex, forceUpdate)
                 _areaID = _areaID + 1;
-                if (999 < _areaID) {
+                if (_areaID >= 1000) {
                     break;
                 }
             }
