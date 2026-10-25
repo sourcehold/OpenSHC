@@ -77,8 +77,8 @@ namespace Map {
             short* _yQueue = this->searchQueue.yQueue;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
-            int _tile;
             int _cY;
+            int _tile;
             int _cCardinalDistance = 0;
             int _result = 0;
             this->searchQueue.yQueue[0] = (short)y;
