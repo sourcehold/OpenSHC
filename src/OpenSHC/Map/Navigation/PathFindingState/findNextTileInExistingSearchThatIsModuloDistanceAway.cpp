@@ -17,31 +17,28 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00496F90
         void PathFindingState::findNextTileInExistingSearchThatIsModuloDistanceAway(int modulo, int x, int y)
         {
-            int iVar2;
             int _dx;
             int _dy;
-            int* _pLastTile;
-            int local_10;
-            local_10 = 0;
-            _pLastTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
+            int _firstTileWalk = DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
+            int _index = DAT_TribesState::instance.ALG_ResultTileIndex;
+            int local_10 = 0;
+            int* _pLastTile = this->searchQueue.tilesQueue + _index;
             while (true) {
                 int iVar1 = *_pLastTile;
                 int _tileY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1];
                 int _dist = DAT_TileMapState::instance.CertainPathLayer[iVar1];
                 if (0 < _dist
                     && (_dx = (iVar1 - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile) - x,
-                        _dy = _tileY - y, (abs(_dy) + abs(_dx)) % modulo == 0)
-                    && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex, _dist < 4000))
+                        _dy = _tileY - y, (abs(_dx) + abs(_dy)) % modulo == 0)
+                    && _dist < 4000) {
+                    local_10 = _index;
                     break;
-                DAT_TribesState::instance.ALG_ResultTileIndex = DAT_TribesState::instance.ALG_ResultTileIndex + 1;
+                }
+                _index = _index + 1;
                 _pLastTile = _pLastTile + 1;
-                iVar2 = local_10;
-                if ((4000 < DAT_TribesState::instance.ALG_ResultTileIndex)
-                    || (DAT_TileMapState::instance.WalkLayer[iVar1]
-                        != DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]))
+                if (4000 < _index || DAT_TileMapState::instance.WalkLayer[iVar1] != _firstTileWalk)
                     break;
             }
-            local_10 = iVar2;
             DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[local_10];
             DAT_TribesState::instance.ALG_ResultX = this->searchQueue.tilesQueue[local_10]
                 - DAT_ViewportRenderState::instance.translationMatrix[DAT_TribesState::instance.ALG_ResultY]
