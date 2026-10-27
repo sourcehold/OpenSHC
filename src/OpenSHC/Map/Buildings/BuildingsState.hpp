@@ -104,7 +104,7 @@ namespace Map {
 
             void displayPopularityAndGoldPopups(int buildingID, int param_2, int param_3, undefined4 param_4);
 
-            int spawnCrowForBuilding(int buildingID);
+            void spawnCrowForBuilding(int buildingID);
 
             BOOLEnum isFearFactorBuilding(int buildingID);
 
@@ -251,7 +251,7 @@ namespace Map {
 
             void harmHopFarmsOfPlayer(int param_1);
 
-            ushort* updateBuildingAreaTileGraphics(int param_1);
+            void updateBuildingAreaTileGraphics(int param_1);
 
             void setDairyFarmCheeseCounter(int param_1);
 
