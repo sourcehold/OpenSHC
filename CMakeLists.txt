@@ -174,6 +174,10 @@ target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll
 # Add the asm file containing the game globals symbols as reference
 set(GAME_SYMBOLS_FILE ${CMAKE_SOURCE_DIR}/src/symbols/data.asm)
 
+# Resolve MSVC's /GS cookie to the game's own, so every protected prologue matches
+set(GAME_SYMBOLS_FILE ${GAME_SYMBOLS_FILE} ${CMAKE_SOURCE_DIR}/src/symbols/crt-gs.asm)
+
+
 # Create the OpenSHC.dll target, should not require the game
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES} ${GAME_SYMBOLS_FILE})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
