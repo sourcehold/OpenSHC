@@ -54,3 +54,11 @@ src/OpenSHC/Map/Buildings/BuildingsState/recomputeAccessibilityForAllBuildings.c
 src/OpenSHC/Map/Buildings/BuildingsState/getResourceSpace.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/processSyncPacket.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/translateMultiplayerIDsIntoPlayerIDs.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/computeBuildingEntranceFlagsForOrientations.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/aiFindBuildingToAttack.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/sortBuildingIDsNeedPeasantsQueue.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/resolveBuildingEntryAccessibility.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/spreadFireRandomlyToBuildings.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/determineBuildingEntranceFromCustomArea.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/determineBuildingEntranceFromKeepArea.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/processResourceGain.cpp
