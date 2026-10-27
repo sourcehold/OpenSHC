@@ -9,8 +9,14 @@ once: only the *first* assignment has to dominate every later use, which is chec
 tracking brace depth from that assignment to the last use. Anything it cannot prove is
 left alone and reported, so the output doubles as a list of what still needs a hand.
 
-Declaration position does not change code generation, so this is a readability pass; run
-it before measuring, not instead of.
+Declaration position *does* change code generation, so measure after running this. MSVC
+assigns stack slots in declaration order - see perm_decls.py - and moving a declaration
+past another one moves both locals between slots, which usually moves them between
+registers too. Three functions in Map/Units/TribesState turned on nothing else:
+getMajorityArcherTypeEuropeanOrArabian 69.6% -> 88.2%, getTribeAliveStatus
+68.6% -> 85.9% and updateTribeRallyFlags 74.7% -> 100%, all three just by declaring the
+local that reads the tribe size after the zero-initialised counters instead of before
+them. This docstring used to say the opposite; it was wrong.
 
 usage:
   declare_at_use.py [path-filter]

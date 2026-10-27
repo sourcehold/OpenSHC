@@ -1,0 +1,567 @@
+#include "../../../Map.func.hpp"
+
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/TrailType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+#include "OpenSHC/Globals/DAT_SH1_SiegeAdvancedMode.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using Game::GameMode;
+        using Game::GameMode2;
+        using Game::TrailType;
+        using Map::Units::UnitType;
+        using Map::Units::UnitTypeInt;
+        using WindowsHelper::Enums::BOOLEnum;
+
+        /*
+          The two flags measure in opposite directions, so only one of them is widened.
+          Both together cost 6.4 points (58.5% -> 52.1%); `bVar2` alone gains 1.1
+          (58.5% -> 59.6%), so `bVar1` stays `bool` despite the original's `xor ebx, ebx`
+          and the byte-sized slot diff_slots.py reports for it at 0x13.
+         */
+        // FUNCTION: STRONGHOLDCRUSADER 0x00527440
+        void TribesState::spawnQueuedReinforcementWaves()
+        {
+            int iVar3;
+            dword dVar4;
+            dword _tribeID1;
+            int iVar5;
+            int iVar6;
+            int* piVar7;
+            SiegeUnitCounts* pSVar8;
+            int _siegeInfoSubIndex;
+            int _playerID;
+            int _tribeType;
+            UnitTypeInt _unitType;
+            int _destinationIndexTracker;
+            int _unitType1Count;
+            int local_4;
+            int _playerID_2;
+            int _count;
+            int _destinationIndex;
+            int _newCount;
+            _tribeType = 0;
+            bool bVar1 = false;
+
+            _unitType = ((UnitType)0);
+            _destinationIndexTracker = 0;
+            BOOLEnum bVar2 = FALSE;
+            if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
+                && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                    || (((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+                             || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL))
+                        || (0 < DAT_GameState::instance
+                                .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                .keep.id))))
+                && 0 <= DAT_GameState::instance.mapAndTime.countUpTo201) {
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeUnitAssignments, this)();
+                _playerID_2 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+                if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
+                    || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL)) {
+                    pSVar8 = &DAT_GameState::instance.mapAndTime.siegeInformation;
+                    do {
+                        iVar3 = 100;
+                        /*
+                          The difficulty chain stays an if/else-if, against the asm. The
+                          original dispatches it by subtracting through the values -
+                          `test ecx, ecx; je`, `sub ecx, 2; je`, `sub ecx, 1; jne` - which
+                          is MSVC's shape for a switch over a few close-together cases,
+                          where an equality chain gives a `cmp` per arm. Rewriting these
+                          three arms as `switch (difficulty)` measures 59.6% -> 55.9%, so
+                          whatever the sub-chain buys is less than the arm placement it
+                          changes. Reverted.
+                         */
+                        if (!DAT_GameState::instance.mapAndTime.difficulty) {
+                            if (_playerID_2 == 1) {
+                                iVar3 = 0x43;
+                            } else if (!DAT_SH1_SiegeAdvancedMode::instance) {
+                            LAB_005279a0:
+                                iVar3 = 167;
+                            }
+                        } else if (DAT_GameState::instance.mapAndTime.difficulty == 2) {
+                            if (_playerID_2 == 1) {
+                                iVar3 = 133;
+                            } else if (!DAT_SH1_SiegeAdvancedMode::instance) {
+                                iVar3 = 75;
+                            }
+                        } else if (DAT_GameState::instance.mapAndTime.difficulty == 3) {
+                            if (_playerID_2 == 1)
+                                goto LAB_005279a0;
+                            if (!DAT_SH1_SiegeAdvancedMode::instance) {
+                                iVar3 = 50;
+                            }
+                        }
+                        pSVar8->archers = (pSVar8->archers * iVar3) / 100;
+                        pSVar8 = (SiegeUnitCounts*)&pSVar8->crossbowmen;
+                    } while ((int)pSVar8 < 0x117cea0);
+                    _siegeInfoSubIndex = 0;
+                    do {
+                        if (DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19] != 0) {
+                            switch (_siegeInfoSubIndex) {
+                            case 0:
+                                _tribeType = 3;
+                                _unitType = Map::Units::UT_E_ARCHER;
+                                break;
+                            case 1:
+                                _tribeType = 7;
+                                _unitType = Map::Units::UT_E_XBOW;
+                                break;
+                            case 2:
+                                _tribeType = 5;
+                                _unitType = Map::Units::UT_E_SPEAR;
+                                break;
+                            case 3:
+                                _tribeType = 6;
+                                _unitType = Map::Units::UT_E_PIKE;
+                                break;
+                            case 4:
+                                _tribeType = 9;
+                                _unitType = Map::Units::UT_E_MACE;
+                                break;
+                            case 5:
+                                _tribeType = 8;
+                                _unitType = Map::Units::UT_E_SWORD;
+                                break;
+                            case 6:
+                                _tribeType = 10;
+                                _unitType = Map::Units::UT_E_KNIGHT;
+                                break;
+                            /*
+                              This switch is the one whose table is 0x527c34, where entry 7
+                              is the laddermen arm at 0x527a43 - the arm that sets 4 and
+                              0x1d. The other 18-entry table, 0x527bec, sends entry 7
+                              straight to the merge point, which is why the fourth switch
+                              below has no case 7. Which switch is which is settled by the
+                              call each one feeds: 0x527c34's reaches
+                              createTribeWithSpawnedUnit (0x523190) and 0x527bec's reaches
+                              spawnUnitsIntoNewTribe (0x523030). Moving the arm the other
+                              way costs 17.1 points (59.6% -> 42.5%).
+                             */
+                            case 7:
+                                _tribeType = 4;
+                                _unitType = Map::Units::UT_E_LADDER;
+                                break;
+                            case 8:
+                                _tribeType = 0xb;
+                                _unitType = Map::Units::UT_E_ENGINEER;
+                                break;
+                            case 9:
+                                _tribeType = 0xc;
+                                _unitType = Map::Units::UT_E_MONK;
+                                break;
+                            case 10:
+                                _tribeType = 0x19;
+                                _unitType = Map::Units::UT_A_ARCHER;
+                                break;
+                            case 0xb:
+                                _tribeType = 0x1a;
+                                _unitType = Map::Units::UT_A_SLAVE;
+                                break;
+                            case 0xc:
+                                _tribeType = 0x1b;
+                                _unitType = Map::Units::UT_A_SLINGER;
+                                break;
+                            case 0xd:
+                                _tribeType = 0x1c;
+                                _unitType = Map::Units::UT_A_ASSASSIN;
+                                break;
+                            case 0xe:
+                                _tribeType = 0x1d;
+                                _unitType = Map::Units::UT_A_HARCHER;
+                                break;
+                            case 0xf:
+                                _tribeType = 0x1e;
+                                _unitType = Map::Units::UT_A_SWORDSMAN;
+                                break;
+                            case 0x10:
+                                _tribeType = 0x1f;
+                                _unitType = Map::Units::UT_A_FIRETHROWER;
+                                break;
+                            case 0x11:
+                                _tribeType = 0x18;
+                                _unitType = Map::Units::UT_S_FBALLISTA;
+                            }
+                            do {
+                                _count = DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19];
+                                int _nUnits = _count;
+                                if (9 < _count) {
+                                    _nUnits = 9;
+                                }
+                                DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19]
+                                    = _count - _nUnits;
+                                _destinationIndex = _destinationIndexTracker;
+                                if (39 < _destinationIndexTracker) {
+                                    _destinationIndex = 0;
+                                }
+                                _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit,
+                                    this)((short)_destinationIndexTracker, (undefined4)((int)(_tribeType)),
+                                    DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][_destinationIndex]
+                                        .x,
+                                    DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][_destinationIndex]
+                                        .y,
+                                    2, (UnitType)((int)(_unitType)), _nUnits);
+                                _newCount = DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19];
+                                /*
+                                  The original reaches this field through the global, not
+                                  `this`. All five of these 0x32 stores are
+                                  `mov word ptr [eax + I<TribesState>::instance+86]` in the
+                                  binary - 0x527696, 0x5277a6, 0x5278ff, 0x527b0b and
+                                  0x527b86 - addressing the instance absolutely with the
+                                  tribe index in eax, where `this->tribes[..]` gives the
+                                  two-register `[eax + <reg> + 0x56]`. So the original
+                                  source almost certainly wrote the global here.
+
+                                  Changing all five to DAT_TribesState::instance measures
+                                  59.6% -> 57.2%, even though it is demonstrably right:
+                                  afterwards four of the five match instruction for
+                                  instruction and the `+ 0x56` form is gone from the diff
+                                  entirely. Materialising the global costs more in
+                                  register pressure elsewhere than the five stores gain.
+                                  Left as `this->` for the score, with the finding recorded
+                                  - if this function's allocation is ever brought into line
+                                  the global is the form to go back to.
+                                 */
+                                this->tribes[_tribeID1].unknownAttackRelatedUpdateCounter = 0x32;
+                                _destinationIndexTracker = _destinationIndexTracker + 1;
+                            } while (_newCount);
+                        }
+                        _siegeInfoSubIndex = _siegeInfoSubIndex + 1;
+                        /*
+                          The tunneler count stays inside the loop body, where the
+                          decompiler put it. The original reads it after the back-edge -
+                          `jl` closing the do-while, then `mov esi, [MapPropertiesState +
+                          340]; test esi, esi; je` - and moving it there is the same value,
+                          since it is assigned in the loop and read nowhere until the
+                          while below. It measures 60.4% -> 54.8%, so the read being
+                          loop-carried is worth more here than its position.
+                         */
+                        iVar3 = DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount;
+                    } while (_siegeInfoSubIndex < 20);
+                    while (iVar3) {
+                        iVar6 = iVar3;
+                        if (9 < iVar3) {
+                            iVar6 = 9;
+                        }
+                        iVar5 = _destinationIndexTracker;
+                        if (0x27 < _destinationIndexTracker) {
+                            iVar5 = 0;
+                        }
+                        dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit, this)(
+                            (short)_destinationIndexTracker, 2,
+                            DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][iVar5].x,
+                            DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][iVar5].y, 2,
+                            Map::Units::UT_TUNNELER, iVar6);
+                        this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
+                        iVar3 = iVar3 - iVar6;
+                        _destinationIndexTracker = _destinationIndexTracker + 1;
+                    }
+                    DAT_GameState::instance.mapAndTime.countUpTo201 = -1;
+                } else if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
+                    DAT_GameState::instance.mapAndTime.countUpTo201
+                        = DAT_GameState::instance.mapAndTime.countUpTo201 + 1;
+                    if (200 < DAT_GameState::instance.mapAndTime.countUpTo201) {
+                        DAT_GameState::instance.mapAndTime.countUpTo201 = 0;
+                        iVar3 = 0;
+                        while (true) {
+                            if (iVar3 == 7) {
+                                iVar3 = 8;
+                            }
+                            if (DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] != 0)
+                                break;
+                            iVar3 = iVar3 + 1;
+                            if (9 < iVar3)
+                                goto LAB_005276b5;
+                        }
+                        switch (iVar3) {
+                        case 0:
+                            _tribeType = 3;
+                            _unitType = Map::Units::UT_E_ARCHER;
+                            break;
+                        case 1:
+                            _tribeType = 7;
+                            _unitType = Map::Units::UT_E_XBOW;
+                            break;
+                        case 2:
+                            _tribeType = 5;
+                            _unitType = Map::Units::UT_E_SPEAR;
+                            break;
+                        case 3:
+                            _tribeType = 6;
+                            _unitType = Map::Units::UT_E_PIKE;
+                            break;
+                        case 4:
+                            _tribeType = 9;
+                            _unitType = Map::Units::UT_E_MACE;
+                            break;
+                        case 5:
+                            _tribeType = 8;
+                            _unitType = Map::Units::UT_E_SWORD;
+                            break;
+                        case 6:
+                            _tribeType = 10;
+                            _unitType = Map::Units::UT_E_KNIGHT;
+                            break;
+                        case 8:
+                            _tribeType = 0xb;
+                            _unitType = Map::Units::UT_E_ENGINEER;
+                            break;
+                        case 9:
+                            _tribeType = 0xc;
+                            _unitType = Map::Units::UT_E_MONK;
+                        }
+                        iVar6 = DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19];
+                        _unitType1Count = iVar6;
+                        if (9 < iVar6) {
+                            _unitType1Count = 9;
+                        }
+                        _playerID = 1;
+                        DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] = iVar6 - _unitType1Count;
+                        piVar7 = &DAT_GameState::instance.playerDataArray[1].campground.xEntry;
+                        do {
+                            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] != -1)
+                                || (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
+                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
+                                    _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), _playerID,
+                                    (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
+                                this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
+                                bVar2 = TRUE;
+                                _destinationIndexTracker = _destinationIndexTracker + 1;
+                            }
+                            _playerID = _playerID + 1;
+                            piVar7 = piVar7 + 0xe7d;
+                        } while (_playerID < 9);
+                    LAB_005276b5:
+                        iVar3 = 10;
+                        /*
+                          Top-tested, with the back-edge returning to the test, and the
+                          bound written as `< 0x14` because that is the constant the
+                          original compares against. Its loop at 0x005276c0 is
+
+                            L:cmp dword ptr [ecx*4 + 0x117ce50], 0
+                              jnz <found>
+                              add ecx, 1
+                              cmp ecx, 0x14
+                              jl  L
+                              jmp <exhausted>
+
+                          so the index stays scaled into the addressing rather than being
+                          walked as a pointer, and the test is at the top. A `while` gets
+                          rotated: MSVC peels the first test and bottom-tests the rest.
+                          Same change as createTribeForPlayer, worth +11.0 there.
+                         */
+                    LAB_005276c0:
+                        if (DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] == 0) {
+                            iVar3 = iVar3 + 1;
+                            if (iVar3 < 0x14) {
+                                goto LAB_005276c0;
+                            }
+                            goto LAB_005277c5;
+                        }
+                        switch (iVar3) {
+                        case 10:
+                            _tribeType = 0x19;
+                            _unitType = Map::Units::UT_A_ARCHER;
+                            break;
+                        case 0xb:
+                            _tribeType = 0x1a;
+                            _unitType = Map::Units::UT_A_SLAVE;
+                            break;
+                        case 0xc:
+                            _tribeType = 0x1b;
+                            _unitType = Map::Units::UT_A_SLINGER;
+                            break;
+                        case 0xd:
+                            _tribeType = 0x1c;
+                            _unitType = Map::Units::UT_A_ASSASSIN;
+                            break;
+                        case 0xe:
+                            _tribeType = 0x1d;
+                            _unitType = Map::Units::UT_A_HARCHER;
+                            break;
+                        case 0xf:
+                            _tribeType = 0x1e;
+                            _unitType = Map::Units::UT_A_SWORDSMAN;
+                            break;
+                        case 0x10:
+                            _tribeType = 0x1f;
+                            _unitType = Map::Units::UT_A_FIRETHROWER;
+                            break;
+                        case 0x11:
+                            _tribeType = 0x18;
+                            _unitType = Map::Units::UT_S_FBALLISTA;
+                        }
+                        iVar6 = DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19];
+                        _unitType1Count = iVar6;
+                        if (9 < iVar6) {
+                            _unitType1Count = 9;
+                        }
+                        iVar5 = 1;
+                        DAT_GameState::instance.mapAndTime.startGoods[iVar3 + 0x19] = iVar6 - _unitType1Count;
+                        piVar7 = &DAT_GameState::instance.playerDataArray[1].campground.xEntry;
+                        do {
+                            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar5] != -1)
+                                || (DAT_GameSynchronyState::instance.currentAIArray[iVar5] != 0)) {
+                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
+                                    _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), iVar5,
+                                    (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
+                                this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
+                                bVar2 = TRUE;
+                                _destinationIndexTracker = _destinationIndexTracker + 1;
+                            }
+                            iVar5 = iVar5 + 1;
+                            piVar7 = piVar7 + 0xe7d;
+                        } while (iVar5 < 9);
+                    LAB_005277c5:
+                        if (!bVar2) {
+                            DAT_GameState::instance.mapAndTime.countUpTo201 = -1;
+                        }
+                    }
+                } else if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)
+                    || (!DAT_GameState::instance.mapAndTime.skirmishNoRushTicks)) {
+                    DAT_GameState::instance.mapAndTime.countUpTo201
+                        = DAT_GameState::instance.mapAndTime.countUpTo201 + 1;
+                    iVar3 = 200;
+                    if (DAT_GameCore::instance.gameMode_2 == Game::GM_SKIRMISH_AND_MULTIPLAYER
+                        && DAT_GameCore::instance.isSkirmishTrail == TRUE
+                        && DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME) {
+                        iVar3 = 0x32;
+                    }
+                    if (iVar3 < DAT_GameState::instance.mapAndTime.countUpTo201) {
+                        DAT_GameState::instance.mapAndTime.countUpTo201 = 0;
+                        local_4 = 1;
+                        _unitType1Count = 0x14;
+                        piVar7 = &DAT_GameState::instance.playerDataArray[1].campground.xEntry;
+                        do {
+                            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[local_4] != -1)
+                                || (DAT_GameSynchronyState::instance.currentAIArray[local_4] != 0)) {
+                                iVar3 = 0;
+                                do {
+                                    if (iVar3 == 7) {
+                                        iVar3 = 8;
+                                    }
+                                    if (*(int*)(DAT_GameState::instance.mapAndTime.unused_0x3ff00
+                                            + (_unitType1Count + iVar3) * 4)
+                                        != 0) {
+                                        switch (iVar3) {
+                                        case 0:
+                                            _tribeType = 3;
+                                            _unitType = Map::Units::UT_E_ARCHER;
+                                            break;
+                                        case 1:
+                                            _tribeType = 7;
+                                            _unitType = Map::Units::UT_E_XBOW;
+                                            break;
+                                        case 2:
+                                            _tribeType = 5;
+                                            _unitType = Map::Units::UT_E_SPEAR;
+                                            break;
+                                        case 3:
+                                            _tribeType = 6;
+                                            _unitType = Map::Units::UT_E_PIKE;
+                                            break;
+                                        case 4:
+                                            _tribeType = 9;
+                                            _unitType = Map::Units::UT_E_MACE;
+                                            break;
+                                        case 5:
+                                            _tribeType = 8;
+                                            _unitType = Map::Units::UT_E_SWORD;
+                                            break;
+                                        case 6:
+                                            _tribeType = 10;
+                                            _unitType = Map::Units::UT_E_KNIGHT;
+                                            break;
+                                        /*
+                                          No case 7: entry 7 of this switch's table,
+                                          0x527bec, is the merge point 0x5278a6, so a
+                                          laddermen wave here reuses whatever the previous
+                                          iteration left in the two variables.
+                                         */
+                                        case 8:
+                                            _tribeType = 0xb;
+                                            _unitType = Map::Units::UT_E_ENGINEER;
+                                            break;
+                                        case 9:
+                                            _tribeType = 0xc;
+                                            _unitType = Map::Units::UT_E_MONK;
+                                            break;
+                                        case 10:
+                                            _tribeType = 0x19;
+                                            _unitType = Map::Units::UT_A_ARCHER;
+                                            break;
+                                        case 0xb:
+                                            _tribeType = 0x1a;
+                                            _unitType = Map::Units::UT_A_SLAVE;
+                                            break;
+                                        case 0xc:
+                                            _tribeType = 0x1b;
+                                            _unitType = Map::Units::UT_A_SLINGER;
+                                            break;
+                                        case 0xd:
+                                            _tribeType = 0x1c;
+                                            _unitType = Map::Units::UT_A_ASSASSIN;
+                                            break;
+                                        case 0xe:
+                                            _tribeType = 0x1d;
+                                            _unitType = Map::Units::UT_A_HARCHER;
+                                            break;
+                                        case 0xf:
+                                            _tribeType = 0x1e;
+                                            _unitType = Map::Units::UT_A_SWORDSMAN;
+                                            break;
+                                        case 0x10:
+                                            _tribeType = 0x1f;
+                                            _unitType = Map::Units::UT_A_FIRETHROWER;
+                                            break;
+                                        case 0x11:
+                                            _tribeType = 0x18;
+                                            _unitType = Map::Units::UT_S_FBALLISTA;
+                                        }
+                                        iVar6 = *(int*)(DAT_GameState::instance.mapAndTime.unused_0x3ff00
+                                            + (_unitType1Count + iVar3) * 4);
+                                        iVar5 = iVar6;
+                                        if (9 < iVar6) {
+                                            iVar5 = 9;
+                                        }
+                                        *(int*)(DAT_GameState::instance.mapAndTime.unused_0x3ff00
+                                            + (_unitType1Count + iVar3) * 4) = iVar6 - iVar5;
+                                        dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
+                                            this)(_destinationIndexTracker, _tribeType, (int)(*piVar7),
+                                            (int)(piVar7[1]), local_4, (UnitType)((int)(_unitType)), ((UnitType)0),
+                                            iVar5, 0);
+                                        this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
+                                        bVar1 = true;
+                                        _destinationIndexTracker = _destinationIndexTracker + 1;
+                                        break;
+                                    }
+                                    iVar3 = iVar3 + 1;
+                                } while (iVar3 < 0x14);
+                            }
+                            _unitType1Count = _unitType1Count + 0x14;
+                            local_4 = local_4 + 1;
+                            piVar7 = piVar7 + 0xe7d;
+                        } while (local_4 < 9);
+                        if (!bVar1) {
+                            DAT_GameState::instance.mapAndTime.countUpTo201 = -1;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+}
