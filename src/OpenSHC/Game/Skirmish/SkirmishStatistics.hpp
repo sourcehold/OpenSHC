@@ -21,7 +21,7 @@ namespace Game {
             byte padding0; // 0x00000333 length: 1
             int finalGold[9]; // 0x00000334 length: 36
             short finalMaxPopulation[9]; // 0x00000358 length: 18
-            byte finalMaxGoodThings[9]; // 0x0000036A length: 9
+            char finalMaxGoodThings[9]; // 0x0000036A length: 9
             byte padding1; // 0x00000373 length: 1
             int finalTimeAlive[9]; // 0x00000374 length: 36
             int finalKillMatrix[9][9]; // 0x00000398 length: 324
@@ -31,7 +31,7 @@ namespace Game {
             int finalStoneProduced[9]; // 0x00000548 length: 36
             int finalWoodProduced[9]; // 0x0000056C length: 36
             int finalPitchProduced[9]; // 0x00000590 length: 36
-            byte finalMaxBadThings[9]; // 0x000005B4 length: 9
+            char finalMaxBadThings[9]; // 0x000005B4 length: 9
             char finalKilledLords[9]; // 0x000005BD length: 9
             byte padding2[2]; // 0x000005C6 length: 2
             int finalWeaponsProduced[9]; // 0x000005C8 length: 36

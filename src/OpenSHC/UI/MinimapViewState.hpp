@@ -26,15 +26,15 @@ namespace UI {
         undefined4 lastRenderedXOffset; // 0x00000004 length: 4
         undefined4 lastRenderedYOffset; // 0x00000008 length: 4
         undefined4 field3_0xc; // 0x0000000C length: 4
-        undefined4 tileOffsetY; // 0x00000010 length: 4
-        undefined4 tileOffsetX; // 0x00000014 length: 4
-        undefined4 width; // 0x00000018 length: 4
-        undefined4 height; // 0x0000001C length: 4
-        undefined4 widthFactor; // 0x00000020 length: 4
-        undefined4 heightFactor; // 0x00000024 length: 4
-        undefined4 x; // 0x00000028 length: 4
-        undefined4 y; // 0x0000002C length: 4
-        undefined4 oneOrTwo; // 0x00000030 length: 4
+        int tileOffsetY; // 0x00000010 length: 4
+        int tileOffsetX; // 0x00000014 length: 4
+        uint width; // 0x00000018 length: 4
+        uint height; // 0x0000001C length: 4
+        int widthFactor; // 0x00000020 length: 4
+        int heightFactor; // 0x00000024 length: 4
+        int x; // 0x00000028 length: 4
+        int y; // 0x0000002C length: 4
+        int oneOrTwo; // 0x00000030 length: 4
         undefined4 field13_0x34; // 0x00000034 length: 4
         undefined4 field14_0x38; // 0x00000038 length: 4
         undefined4 minimapClickEnabled; // 0x0000003C length: 4
@@ -46,7 +46,7 @@ namespace UI {
         int spawnMomentX[20]; // 0x00061B04 length: 80
         int spawnMomentY[20]; // 0x00061B54 length: 80
         DWORD spawnMoment[20]; // 0x00061BA4 length: 80
-        undefined4 spawnMomentCount; // 0x00061BF4 length: 4
+        int spawnMomentCount; // 0x00061BF4 length: 4
 
     private:
         MinimapViewState(MinimapViewState const&);

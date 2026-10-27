@@ -63,7 +63,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040A060, &BuildingsState::displayPopularityAndGoldPopups)
             displayPopularityAndGoldPopups;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A260,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A260,
                 &BuildingsState::spawnCrowForBuilding)
             spawnCrowForBuilding;
 
@@ -347,7 +347,7 @@ namespace Map {
                 &BuildingsState::harmHopFarmsOfPlayer)
             harmHopFarmsOfPlayer;
 
-            MACRO_FUNCTION_RESOLVER(ushort* (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EFD0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EFD0,
                 &BuildingsState::updateBuildingAreaTileGraphics)
             updateBuildingAreaTileGraphics;
 

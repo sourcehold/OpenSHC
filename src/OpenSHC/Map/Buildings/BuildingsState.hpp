@@ -44,8 +44,8 @@ namespace Map {
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
             int pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
             undefined4 counter; // 0x0018D070 length: 4
-            undefined2 DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
-            undefined4 DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
+            short DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
+            int DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
             int campfireSpotX; // 0x0018E018 length: 4
             int campfireSpotY; // 0x0018E01C length: 4
             int campfireSpotOrientation; // 0x0018E020 length: 4
@@ -104,7 +104,7 @@ namespace Map {
 
             void displayPopularityAndGoldPopups(int buildingID, int param_2, int param_3, undefined4 param_4);
 
-            int spawnCrowForBuilding(int buildingID);
+            void spawnCrowForBuilding(int buildingID);
 
             BOOLEnum isFearFactorBuilding(int buildingID);
 
@@ -251,7 +251,7 @@ namespace Map {
 
             void harmHopFarmsOfPlayer(int param_1);
 
-            ushort* updateBuildingAreaTileGraphics(int param_1);
+            void updateBuildingAreaTileGraphics(int param_1);
 
             void setDairyFarmCheeseCounter(int param_1);
 

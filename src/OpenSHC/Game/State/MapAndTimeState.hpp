@@ -36,37 +36,10 @@ namespace Game {
 
             int field0_0x0; // 0x00000000 length: 4
             BOOLEnum singlePlayerHasKeepAndGranary; // 0x00000004 length: 4
-            int field2_0x8; // 0x00000008 length: 4
-            int field3_0xc; // 0x0000000C length: 4
-            int field4_0x10; // 0x00000010 length: 4
-            int field5_0x14; // 0x00000014 length: 4
-            int field6_0x18; // 0x00000018 length: 4
-            int field7_0x1c; // 0x0000001C length: 4
-            int field8_0x20; // 0x00000020 length: 4
-            int field9_0x24; // 0x00000024 length: 4
-            int field10_0x28; // 0x00000028 length: 4
-            int field11_0x2c; // 0x0000002C length: 4
-            int field12_0x30; // 0x00000030 length: 4
-            int field13_0x34; // 0x00000034 length: 4
-            int field14_0x38; // 0x00000038 length: 4
-            int field15_0x3c; // 0x0000003C length: 4
-            int field16_0x40; // 0x00000040 length: 4
-            int field17_0x44; // 0x00000044 length: 4
-            int field18_0x48; // 0x00000048 length: 4
-            int field19_0x4c; // 0x0000004C length: 4
-            int field20_0x50; // 0x00000050 length: 4
-            int field21_0x54; // 0x00000054 length: 4
+            int field2_0x8[10]; // 0x00000008 length: 40
+            int field3_0x30[10]; // 0x00000030 length: 40
             int playerKeepTile[10]; // 0x00000058 length: 40
-            int field23_0x80; // 0x00000080 length: 4
-            int field24_0x84; // 0x00000084 length: 4
-            int field25_0x88; // 0x00000088 length: 4
-            int field26_0x8c; // 0x0000008C length: 4
-            int field27_0x90; // 0x00000090 length: 4
-            int field28_0x94; // 0x00000094 length: 4
-            int field29_0x98; // 0x00000098 length: 4
-            int field30_0x9c; // 0x0000009C length: 4
-            int field31_0xa0; // 0x000000A0 length: 4
-            int field32_0xa4; // 0x000000A4 length: 4
+            int field5_0x80[10]; // 0x00000080 length: 40
             int hitsDealtToPlayerArray[9]; // 0x000000A8 length: 36
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4
@@ -148,46 +121,10 @@ namespace Game {
             undefined1 padding_0x2320[816]; // 0x00002320 length: 816
             int signpostsMapEdgeDataCounter; // 0x00002650 length: 4
             int scenarioEventTimers[32]; // 0x00002654 length: 128
-            int field3124_0x26d4; // 0x000026D4 length: 4
-            int field3125_0x26d8; // 0x000026D8 length: 4
-            int field3126_0x26dc; // 0x000026DC length: 4
-            int field3127_0x26e0; // 0x000026E0 length: 4
-            int field3128_0x26e4; // 0x000026E4 length: 4
-            int field3129_0x26e8; // 0x000026E8 length: 4
-            int field3130_0x26ec; // 0x000026EC length: 4
-            int field3131_0x26f0; // 0x000026F0 length: 4
-            int field3132_0x26f4; // 0x000026F4 length: 4
-            int field3133_0x26f8; // 0x000026F8 length: 4
-            int field3134_0x26fc; // 0x000026FC length: 4
-            int field3135_0x2700; // 0x00002700 length: 4
-            int field3136_0x2704; // 0x00002704 length: 4
-            int field3137_0x2708; // 0x00002708 length: 4
-            int field3138_0x270c; // 0x0000270C length: 4
-            int field3139_0x2710; // 0x00002710 length: 4
-            int field3140_0x2714; // 0x00002714 length: 4
-            int field3141_0x2718; // 0x00002718 length: 4
-            int field3142_0x271c; // 0x0000271C length: 4
-            int field3143_0x2720; // 0x00002720 length: 4
-            int field3144_0x2724; // 0x00002724 length: 4
-            int field3145_0x2728; // 0x00002728 length: 4
-            int field3146_0x272c; // 0x0000272C length: 4
-            int field3147_0x2730; // 0x00002730 length: 4
-            int field3148_0x2734; // 0x00002734 length: 4
-            int field3149_0x2738; // 0x00002738 length: 4
-            int field3150_0x273c; // 0x0000273C length: 4
-            int field3151_0x2740; // 0x00002740 length: 4
-            int field3152_0x2744; // 0x00002744 length: 4
-            int field3153_0x2748; // 0x00002748 length: 4
-            int field3154_0x274c; // 0x0000274C length: 4
-            int field3155_0x2750; // 0x00002750 length: 4
-            int field3156_0x2754; // 0x00002754 length: 4
-            int field3157_0x2758; // 0x00002758 length: 4
-            int field3158_0x275c; // 0x0000275C length: 4
-            int field3159_0x2760; // 0x00002760 length: 4
-            int field3160_0x2764; // 0x00002764 length: 4
-            int field3161_0x2768; // 0x00002768 length: 4
-            int field3162_0x276c; // 0x0000276C length: 4
-            int field3163_0x2770; // 0x00002770 length: 4
+            int field3124_0x26d4[10]; // 0x000026D4 length: 40
+            int field3134_0x26fc[10]; // 0x000026FC length: 40
+            int field3144_0x2724[10]; // 0x00002724 length: 40
+            int field3154_0x274c[10]; // 0x0000274C length: 40
             int gameEventRelatedCountdown; // 0x00002774 length: 4
             int unk_signpostDistance; // 0x00002778 length: 4
             int wildlifeCount; // 0x0000277C length: 4
