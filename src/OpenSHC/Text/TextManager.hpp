@@ -132,7 +132,7 @@ namespace Text {
         void renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
             int bgr24, int digitSet, BOOL useCurrentXOffsetUnk);
 
-        int calcRenderedNumberWidth(int param_1, int param_2);
+        int calcRenderedNumberWidth(int number, int fontSet);
 
         int getCharWidth(char character, int fontSize);
 
