@@ -37,7 +37,7 @@ namespace Map {
                 int const height
                     = MACRO_CALL_MEMBER(TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(tile);
                 if (this->buildings[buildingID].farmGrowState == 5) {
-                    if ((uint)(damage - 14) > 13) {
+                    if (damage < 14 || damage > 27) {
                         continue;
                     }
                     for (int k = 0; k < 4; ++k) {
@@ -61,7 +61,7 @@ namespace Map {
                         }
                     }
                 } else if (this->buildings[buildingID].farmGrowState == 3) {
-                    if ((uint)damage > 1) {
+                    if (damage < 0 || damage > 1) {
                         continue;
                     }
                     for (int k = 0; k < 4; ++k) {
