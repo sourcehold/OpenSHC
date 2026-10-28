@@ -44,8 +44,8 @@ namespace Map {
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
             int pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
             undefined4 counter; // 0x0018D070 length: 4
-            undefined2 DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
-            undefined4 DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
+            short DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
+            int DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
             int campfireSpotX; // 0x0018E018 length: 4
             int campfireSpotY; // 0x0018E01C length: 4
             int campfireSpotOrientation; // 0x0018E020 length: 4

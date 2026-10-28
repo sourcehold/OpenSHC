@@ -142,7 +142,7 @@ namespace Map {
             short climbDirection; // 0x0000029C length: 2
             short usingTeleport; // 0x0000029E length: 2
             short dying; // 0x000002A0 length: 2
-            ushort nextUnitOnTheSameTile; // 0x000002A2 length: 2
+            short nextUnitOnTheSameTile; // 0x000002A2 length: 2
             short isSelectable_OR_matchTime; // 0x000002A4 length: 2
             short closestEnemyMicroDistance; // 0x000002A6 length: 2
             short field129_0x2a8; // 0x000002A8 length: 2
