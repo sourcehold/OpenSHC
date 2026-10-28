@@ -20,10 +20,10 @@ namespace Map {
         void BuildingsState::giveBackResourceForDestroyedBuilding(
             int buildingIDORIfNegResourceType, int playerID, int param_3)
         {
-            // Matching note: The pitch and gold calls are written out in each branch. With one shared tail after
-            // the chain our compiler also merges the three branches' wood/stone/iron calls (57%); per branch it
-            // keeps them like the original, which then shares only the pitch and gold calls (the siege branches jump
-            // into them) and spills this to one more stack slot.
+            // Matching note: The calls are written out in each branch. With one shared tail after the chain our
+            // compiler also merges the three branches' wood/stone/iron calls (57%); per branch it keeps them like
+            // the original. The original shares the pitch and gold calls (the siege branches jump into them) and
+            // spills this to one more stack slot; the goto for gold gets closest.
             // param_3 is the percentage of the costs that is given back
             if (param_3 == 0) {
                 return;
@@ -99,12 +99,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
-                    == FALSE) {
-                    MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
-                        DAT_GameState::ptr)(playerID);
-                }
+                goto goldGain;
             } else if (buildingIDORIfNegResourceType == -4) {
                 // Ballista on a tower
                 int wood = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredWood * percentage / 100;
@@ -137,12 +132,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
-                    == FALSE) {
-                    MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
-                        DAT_GameState::ptr)(playerID);
-                }
+                goto goldGain;
             } else {
                 int buildingType = this->buildings[buildingIDORIfNegResourceType].buildingType;
                 int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood * percentage / 100;
@@ -185,6 +175,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
+            goldGain:
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
                         DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
                     == FALSE) {

@@ -33,7 +33,7 @@ namespace Map {
                 if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE) {
                     continue;
                 }
-                int goodOrBad = 0;
+                int goodOrBad;
                 if (this->buildings[i].buildingType == BT_GALLOWS) {
                     goodOrBad = -1;
                 } else if (this->buildings[i].buildingType == BT_STOCKS) {
@@ -60,6 +60,8 @@ namespace Map {
                     || this->buildings[i].buildingType == BT_STATUE || this->buildings[i].buildingType == BT_SHRINE
                     || this->buildings[i].buildingType == BT_DANCINGBEAR) {
                     goodOrBad = 1;
+                } else {
+                    continue;
                 }
                 int const owner = this->buildings[i].owner;
                 if (goodOrBad < 0) {

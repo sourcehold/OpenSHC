@@ -78,63 +78,71 @@ namespace Map {
                         }
                     }
                     int entityID = DAT_TileMapState::instance.EntityLayer[tile];
-                    if (entityID != 0) {
-                        for (int n = 1; n != 10; ++n) {
-                            if (DAT_EntityState::instance.entityArray[entityID].entityType
-                                    == OpenSHC::Map::Entities::ET_FLAG_1
-                                || DAT_EntityState::instance.entityArray[entityID].entityType
-                                    == OpenSHC::Map::Entities::ET_FLAG_4
-                                || DAT_EntityState::instance.entityArray[entityID].entityType
-                                    == OpenSHC::Map::Entities::ET_FLAG_2
-                                || DAT_EntityState::instance.entityArray[entityID].entityType
-                                    == OpenSHC::Map::Entities::ET_FLAG_3) {
-                                flagEntityID = entityID;
-                            }
-                            int next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
-                            if (entityID == next || next == 0) {
-                                break;
-                            }
-                            entityID = next;
+                    int n = 0;
+                    while (entityID != 0) {
+                        ++n;
+                        if (n >= 10) {
+                            break;
                         }
+                        if (DAT_EntityState::instance.entityArray[entityID].entityType
+                                == OpenSHC::Map::Entities::ET_FLAG_1
+                            || DAT_EntityState::instance.entityArray[entityID].entityType
+                                == OpenSHC::Map::Entities::ET_FLAG_4
+                            || DAT_EntityState::instance.entityArray[entityID].entityType
+                                == OpenSHC::Map::Entities::ET_FLAG_2
+                            || DAT_EntityState::instance.entityArray[entityID].entityType
+                                == OpenSHC::Map::Entities::ET_FLAG_3) {
+                            flagEntityID = entityID;
+                        }
+                        int next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
+                        if (entityID == next) {
+                            break;
+                        }
+                        entityID = next;
                     }
                     ++t;
                 } while (t < DAT_TileMapState::instance.constructionTileCount);
 
                 int flagColor = 0;
-                int newController = 0;
-                if (defender == 0) {
-                    if (attacker != 0) {
-                        // Undefended and attacked, the strongest player captures the gatehouse
-                        if (flagEntityID == 0) {
-                            int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
-                            int height = DAT_TileMapState::instance.HeightLayer[DAT_BuildingsState::instance
-                                                 .buildings[DAT_CurrentBuildingID::instance]
-                                                 .currentTilePositionAdjusted]
-                                + 30;
-                            int microY
-                                = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8;
-                            int microX
-                                = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8;
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                                DAT_EntityState::ptr)(0, owner, owner, microX, microY, height, microX, microY, height,
-                                OpenSHC::Map::Entities::ET_FLAG_1, 0);
-                        }
-                        int strongest = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
-                        int strongestStrength = 0;
-                        for (int p = 1; p < 9; ++p) {
-                            if (strongestStrength < strength[p]) {
-                                strongest = p;
-                                strongestStrength = strength[p];
-                            }
-                        }
-                        flagColor = strongest;
-                        newController = strongest;
+                int newController;
+                if (defender != 0) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 == 0
+                        || attacker == 0) {
+                        // Defended, the owner keeps or regains control
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 = 0;
+                        flagColor = defender;
+                        newController = 0;
+                    } else {
+                        newController = 0;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 == 0
-                    || attacker == 0) {
-                    // Defended, the owner keeps or regains control
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field201_0x2c6 = 0;
-                    flagColor = defender;
+                } else if (attacker != 0) {
+                    // Undefended and attacked, the strongest player captures the gatehouse
+                    if (flagEntityID == 0) {
+                        int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+                        int height = DAT_TileMapState::instance.HeightLayer[DAT_BuildingsState::instance
+                                             .buildings[DAT_CurrentBuildingID::instance]
+                                             .currentTilePositionAdjusted]
+                            + 30;
+                        int microY
+                            = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8;
+                        int microX
+                            = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
+                            DAT_EntityState::ptr)(0, owner, owner, microX, microY, height, microX, microY, height,
+                            OpenSHC::Map::Entities::ET_FLAG_1, 0);
+                    }
+                    int strongest = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+                    int strongestStrength = 0;
+                    for (int p = 1; p < 9; ++p) {
+                        if (strength[p] > strongestStrength) {
+                            strongestStrength = strength[p];
+                            strongest = p;
+                        }
+                    }
+                    flagColor = strongest;
+                    newController = strongest;
+                } else {
+                    newController = 0;
                 }
 
                 if (flagColor != 0 && flagEntityID != 0) {
@@ -151,24 +159,27 @@ namespace Map {
                                                    .translationMatrix[DAT_TileMapState::instance.buildingY + gateY]
                                                    .addXgetTile
                                       + DAT_TileMapState::instance.buildingX + gateX];
-                        if (entityID != 0) {
-                            for (int n = 1; n != 10; ++n) {
-                                if (DAT_EntityState::instance.entityArray[entityID].entityType
-                                        == OpenSHC::Map::Entities::ET_FLAG_1
-                                    || DAT_EntityState::instance.entityArray[entityID].entityType
-                                        == OpenSHC::Map::Entities::ET_FLAG_4
-                                    || DAT_EntityState::instance.entityArray[entityID].entityType
-                                        == OpenSHC::Map::Entities::ET_FLAG_2
-                                    || DAT_EntityState::instance.entityArray[entityID].entityType
-                                        == OpenSHC::Map::Entities::ET_FLAG_3) {
-                                    DAT_EntityState::instance.entityArray[entityID].colorUnk = flagColor;
-                                }
-                                int next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
-                                if (entityID == next || next == 0) {
-                                    break;
-                                }
-                                entityID = next;
+                        int n = 0;
+                        while (entityID != 0) {
+                            ++n;
+                            if (n >= 10) {
+                                break;
                             }
+                            if (DAT_EntityState::instance.entityArray[entityID].entityType
+                                    == OpenSHC::Map::Entities::ET_FLAG_1
+                                || DAT_EntityState::instance.entityArray[entityID].entityType
+                                    == OpenSHC::Map::Entities::ET_FLAG_4
+                                || DAT_EntityState::instance.entityArray[entityID].entityType
+                                    == OpenSHC::Map::Entities::ET_FLAG_2
+                                || DAT_EntityState::instance.entityArray[entityID].entityType
+                                    == OpenSHC::Map::Entities::ET_FLAG_3) {
+                                DAT_EntityState::instance.entityArray[entityID].colorUnk = flagColor;
+                            }
+                            int next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
+                            if (entityID == next) {
+                                break;
+                            }
+                            entityID = next;
                         }
                         ++t2;
                     } while (t2 < DAT_TileMapState::instance.constructionTileCount);
