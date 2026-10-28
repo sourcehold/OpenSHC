@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-MACRO_STRUCT_RESOLVER(BOOLEnum[17], true, Address::SHC_3BB0A8C1_0x00EE2350) FLAG_JokeAIMessageArray;
+MACRO_STRUCT_RESOLVER(BOOLEnum[17], false, Address::SHC_3BB0A8C1_0x00EE2350) FLAG_JokeAIMessageArray;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE2350);

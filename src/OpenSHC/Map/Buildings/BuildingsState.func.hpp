@@ -23,40 +23,40 @@ namespace Map {
 
             // Constructor
 
-            MACRO_FUNCTION_RESOLVER(BuildingsState* (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0041A760,
+            MACRO_FUNCTION_RESOLVER(BuildingsState* (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0041A760,
                 &BuildingsState::Constructor_BuildingsState)
             Constructor_BuildingsState;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, ResourceType), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x00409330, &BuildingsState::getBuildingResourceAmountByUid)
             getBuildingResourceAmountByUid;
 
-            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(MappersEnum), true,
+            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(MappersEnum), false,
                 Address::SHC_3BB0A8C1_0x00409370, &BuildingsState::convertCommandBuildingTypeToBuildingType)
             convertCommandBuildingTypeToBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(MappersEnum (BuildingsState::*)(BuildingType), true,
+            MACRO_FUNCTION_RESOLVER(MappersEnum (BuildingsState::*)(BuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00409DB0,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
                 &BuildingsState::getBuildingHeightForBuildingID)
             getBuildingHeightForBuildingID;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00409E80,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409E80,
                 &BuildingsState::getBuildingHeightForBuildingID2)
             getBuildingHeightForBuildingID2;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), true, Address::SHC_3BB0A8C1_0x00409F50,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), false, Address::SHC_3BB0A8C1_0x00409F50,
                 &BuildingsState::getSpriteID)
             getSpriteID;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), true, Address::SHC_3BB0A8C1_0x00409FF0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), false, Address::SHC_3BB0A8C1_0x00409FF0,
                 &BuildingsState::getSpriteID2)
             getSpriteID2;
 
             MACRO_FUNCTION_RESOLVER(
-                void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040A020, &BuildingsState::clearBuildings)
+                void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040A020, &BuildingsState::clearBuildings)
             clearBuildings;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, undefined4), false,
@@ -67,75 +67,75 @@ namespace Map {
                 &BuildingsState::spawnCrowForBuilding)
             spawnCrowForBuilding;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040A400,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A400,
                 &BuildingsState::isFearFactorBuilding)
             isFearFactorBuilding;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040A4A0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A4A0,
                 &BuildingsState::isReligiousBuilding)
             isReligiousBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040A4E0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040A4E0,
                 &BuildingsState::copyPlayerDataArrayValues)
             copyPlayerDataArrayValues;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), true, Address::SHC_3BB0A8C1_0x0040A8A0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040A8A0,
                 &BuildingsState::chooseProductionItemType)
             chooseProductionItemType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), true, Address::SHC_3BB0A8C1_0x0040A950,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040A950,
                 &BuildingsState::getEmptyBuildingCount)
             getEmptyBuildingCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040A9B0, &BuildingsState::countBuildingsForPlayer)
             countBuildingsForPlayer;
 
             MACRO_FUNCTION_RESOLVER(
-                int (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040AA10, &BuildingsState::countFarms)
+                int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040AA10, &BuildingsState::countFarms)
             countFarms;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), true, Address::SHC_3BB0A8C1_0x0040AA80,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AA80,
                 &BuildingsState::findFirstBuildingOfType)
             findFirstBuildingOfType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), true, Address::SHC_3BB0A8C1_0x0040AAD0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AAD0,
                 &BuildingsState::findFirstBuildingIDForPlayerAndType)
             findFirstBuildingIDForPlayerAndType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040AB30, &BuildingsState::findNextBuildingForPlayerAndType)
             findNextBuildingForPlayerAndType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int), true, Address::SHC_3BB0A8C1_0x0040AB90,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0040AB90,
                 &BuildingsState::findNextBuildingIDForOwnerAndType)
             findNextBuildingIDForOwnerAndType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040AC00, &BuildingsState::findNextBuildingForPlayerAndOneOfThreeTypes)
             findNextBuildingForPlayerAndOneOfThreeTypes;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040AC80, &BuildingsState::canNavigateToDefensiveBuilding)
             canNavigateToDefensiveBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040ADB0, &BuildingsState::findNextReachableDefensiveBuildingForPlayer)
             findNextReachableDefensiveBuildingForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), true, Address::SHC_3BB0A8C1_0x0040AEF0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AEF0,
                 &BuildingsState::pickARandomBuildingOfType)
             pickARandomBuildingOfType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, BuildingType, BuildingType), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, BuildingType, BuildingType), false,
                 Address::SHC_3BB0A8C1_0x0040AFB0, &BuildingsState::pickARandomBuildingIDOfTheseThreeTypes)
             pickARandomBuildingIDOfTheseThreeTypes;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B090,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B090,
                 &BuildingsState::pickARandomPositiveFearFactorBuilding)
             pickARandomPositiveFearFactorBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B1A0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B1A0,
                 &BuildingsState::findClosestInnBuildingID)
             findClosestInnBuildingID;
 
@@ -143,91 +143,91 @@ namespace Map {
                 &BuildingsState::recomputeAllFearFactors)
             recomputeAllFearFactors;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, BuildingType), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, BuildingType), false,
                 Address::SHC_3BB0A8C1_0x0040B4E0, &BuildingsState::findBuildingOfTypeForPlayer)
             findBuildingOfTypeForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040B540,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040B540,
                 &BuildingsState::removeSiegeBuildings)
             removeSiegeBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, undefined4), true, Address::SHC_3BB0A8C1_0x0040B5D0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, undefined4), false, Address::SHC_3BB0A8C1_0x0040B5D0,
                 &BuildingsState::setBuildingInitialEntryTileTry)
             setBuildingInitialEntryTileTry;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B660,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B660,
                 &BuildingsState::prepareCampgroundCoords)
             prepareCampgroundCoords;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B720,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B720,
                 &BuildingsState::hasBuildingEntranceFlagForOrientation)
             hasBuildingEntranceFlagForOrientation;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B7B0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B7B0,
                 &BuildingsState::hasBuildingExitFlagForOrientation)
             hasBuildingExitFlagForOrientation;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint, int), true, Address::SHC_3BB0A8C1_0x0040B840,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x0040B840,
                 &BuildingsState::isBuildingPathBlockerOrDamageable)
             isBuildingPathBlockerOrDamageable;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint, int), true, Address::SHC_3BB0A8C1_0x0040B900,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x0040B900,
                 &BuildingsState::getBuildingHasHealthProperty)
             getBuildingHasHealthProperty;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040B980,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B980,
                 &BuildingsState::hasHumanPlayerUnitsOnBuilding)
             hasHumanPlayerUnitsOnBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BA10, &BuildingsState::setupBuildingEntrancesOffset)
             setupBuildingEntrancesOffset;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BC40, &BuildingsState::setupNextCandidateLocationComputeOffsets2)
             setupNextCandidateLocationComputeOffsets2;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceType), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x0040BE70, &BuildingsState::buildingHasSpaceForResource)
             buildingHasSpaceForResource;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BEE0, &BuildingsState::extendResourceCountdownForPlayerBuildingsOfType)
             extendResourceCountdownForPlayerBuildingsOfType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType, int), false,
                 Address::SHC_3BB0A8C1_0x0040BF40, &BuildingsState::canBuildingStoreTheAmount)
             canBuildingStoreTheAmount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, undefined4, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, undefined4, int), false,
                 Address::SHC_3BB0A8C1_0x0040BFA0, &BuildingsState::getResourceCountThatCanBeDeposited)
             getResourceCountThatCanBeDeposited;
 
-            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(ResourceType), true,
+            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(ResourceType), false,
                 Address::SHC_3BB0A8C1_0x0040BFD0, &BuildingsState::getBuildingStorageTypeForResourceType)
             getBuildingStorageTypeForResourceType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BFE0, &BuildingsState::getStorageBuildingForResourceTypeAndAmount)
             getStorageBuildingForResourceTypeAndAmount;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(uint, undefined4, int, int), true,
+            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(uint, undefined4, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040C060, &BuildingsState::getArmoryIDIfSpaceLeft)
             getArmoryIDIfSpaceLeft;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040C0D0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040C0D0,
                 &BuildingsState::computeArmoryRemainingCapacity)
             computeArmoryRemainingCapacity;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040C130,
+            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040C130,
                 &BuildingsState::computeResourceSumForBuilding)
             computeResourceSumForBuilding;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040C1A0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040C1A0,
                 &BuildingsState::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters)
             hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType), true, Address::SHC_3BB0A8C1_0x0040C1F0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType), false, Address::SHC_3BB0A8C1_0x0040C1F0,
                 &BuildingsState::getResourceSpace)
             getResourceSpace;
 
@@ -235,11 +235,11 @@ namespace Map {
                 &BuildingsState::countPlayerResources)
             countPlayerResources;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040C4B0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040C4B0,
                 &BuildingsState::recomputePlayerDataStocksBasedOnStorageBuildings)
             recomputePlayerDataStocksBasedOnStorageBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(MappersEnum, int*, int*), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(MappersEnum, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0040C5F0, &BuildingsState::getBuildingCost)
             getBuildingCost;
 
@@ -247,23 +247,23 @@ namespace Map {
                 &BuildingsState::getPriceForDisbandedUnitType)
             getPriceForDisbandedUnitType;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int*, int*), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0040C9B0, &BuildingsState::resourceGainForKillingPitAndPitchDitch)
             resourceGainForKillingPitAndPitchDitch;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040C9F0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040C9F0,
                 &BuildingsState::subtractPitchAndMoatFromStartingGoldInSiegeThatMode)
             subtractPitchAndMoatFromStartingGoldInSiegeThatMode;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040CAC0,
+            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040CAC0,
                 &BuildingsState::hasEnoughGoldForMoat)
             hasEnoughGoldForMoat;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040CB10,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040CB10,
                 &BuildingsState::getFarmThatHasTile)
             getFarmThatHasTile;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040CB90,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040CB90,
                 &BuildingsState::isFarmTileReadyForWheatStageChange)
             isFarmTileReadyForWheatStageChange;
 
@@ -275,7 +275,7 @@ namespace Map {
                 &BuildingsState::updateWheatFieldTileGraphics)
             updateWheatFieldTileGraphics;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040D090,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040D090,
                 &BuildingsState::harmWheatFarmsOfPlayer)
             harmWheatFarmsOfPlayer;
 
@@ -295,11 +295,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040D9C0, &BuildingsState::getKeepLocationForAIUnit)
             getKeepLocationForAIUnit;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040DC70,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040DC70,
                 &BuildingsState::createEntityForAssemblyPointsForActiveTabType)
             createEntityForAssemblyPointsForActiveTabType;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040E040,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040E040,
                 &BuildingsState::setupEngineersGuildParagroundPositions)
             setupEngineersGuildParagroundPositions;
 
@@ -307,11 +307,11 @@ namespace Map {
                 &BuildingsState::findFreeEngineerAssemblyTile)
             findFreeEngineerAssemblyTile;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040E330,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040E330,
                 &BuildingsState::setupTunnelersGuildCampgroundPositions)
             setupTunnelersGuildCampgroundPositions;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040E410,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040E410,
                 &BuildingsState::findFreeTunnelerAssemblyTile)
             findFreeTunnelerAssemblyTile;
 
@@ -319,15 +319,15 @@ namespace Map {
                 &BuildingsState::findFreeCathedralAssemblyTile)
             findFreeCathedralAssemblyTile;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040E740,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040E740,
                 &BuildingsState::setTileRefsForOilSmelter)
             setTileRefsForOilSmelter;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040E900, &BuildingsState::isEngineerNotAtAssignedWorkTile)
             isEngineerNotAtAssignedWorkTile;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040E990,
+            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040E990,
                 &BuildingsState::getActiveEngineerForBuilding)
             getActiveEngineerForBuilding;
 
@@ -336,14 +336,14 @@ namespace Map {
             setNewOnFarmDestination;
 
             MACRO_FUNCTION_RESOLVER(
-                void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040EBF0, &BuildingsState::growHops)
+                void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EBF0, &BuildingsState::growHops)
             growHops;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EDF0,
                 &BuildingsState::updateHopsFieldTileGraphics)
             updateHopsFieldTileGraphics;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040EF40,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EF40,
                 &BuildingsState::harmHopFarmsOfPlayer)
             harmHopFarmsOfPlayer;
 
@@ -351,67 +351,67 @@ namespace Map {
                 &BuildingsState::updateBuildingAreaTileGraphics)
             updateBuildingAreaTileGraphics;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F040,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F040,
                 &BuildingsState::setDairyFarmCheeseCounter)
             setDairyFarmCheeseCounter;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F090,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F090,
                 &BuildingsState::harmAppleFarmTreesOfPlayer)
             harmAppleFarmTreesOfPlayer;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040F1E0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040F1E0,
                 &BuildingsState::setSignpostDataForBuildings)
             setSignpostDataForBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F240,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F240,
                 &BuildingsState::destroySignpostData)
             destroySignpostData;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040F360,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F360,
                 &BuildingsState::updateBuildingSignpostCounter)
             updateBuildingSignpostCounter;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F3D0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F3D0,
                 &BuildingsState::setBuildingToAppleFarm)
             setBuildingToAppleFarm;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040F3F0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040F3F0,
                 &BuildingsState::clearBuildingValueWhenStateIsTwo)
             clearBuildingValueWhenStateIsTwo;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F420,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F420,
                 &BuildingsState::getBuildingFlag3)
             getBuildingFlag3;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F440,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F440,
                 &BuildingsState::getBuildingFlag1)
             getBuildingFlag1;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040F460,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F460,
                 &BuildingsState::determinePeasantSitPosition)
             determinePeasantSitPosition;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x0040F4F0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040F4F0,
                 &BuildingsState::refreshAllBuildingTileDisplays)
             refreshAllBuildingTileDisplays;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040F540,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F540,
                 &BuildingsState::hasWorker)
             hasWorker;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int), true, Address::SHC_3BB0A8C1_0x0040F5C0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0040F5C0,
                 &BuildingsState::assignWorkerToBuilding)
             assignWorkerToBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040F620,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040F620,
                 &BuildingsState::updateNeededEmployeeCount)
             updateNeededEmployeeCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040F700,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F700,
                 &BuildingsState::getBuildingPriority)
             getBuildingPriority;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0040F750,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F750,
                 &BuildingsState::updateAllBuildingsSnoozedState)
             updateAllBuildingsSnoozedState;
 
@@ -423,15 +423,15 @@ namespace Map {
                 &BuildingsState::processBuildingIDsNeedPeasantsQueue)
             processBuildingIDsNeedPeasantsQueue;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0040FC40,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040FC40,
                 &BuildingsState::updateLordLadyJesterAndGhostUnits)
             updateLordLadyJesterAndGhostUnits;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00410200,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00410200,
                 &BuildingsState::getRequiredEngineerCountForSiegeBuilding)
             getRequiredEngineerCountForSiegeBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00410290,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00410290,
                 &BuildingsState::updateVisuallyActiveState)
             updateVisuallyActiveState;
 
@@ -455,7 +455,7 @@ namespace Map {
                 &BuildingsState::spawnRandomFireEffectOnBuilding)
             spawnRandomFireEffectOnBuilding;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00410920,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00410920,
                 &BuildingsState::getBuildingFlammabilityFactor)
             getBuildingFlammabilityFactor;
 
@@ -467,19 +467,19 @@ namespace Map {
                 &BuildingsState::findClosestReachableAlliedBuilding)
             findClosestReachableAlliedBuilding;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00410C40,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00410C40,
                 &BuildingsState::playerHasBurningBuilding)
             playerHasBurningBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x004173D0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x004173D0,
                 &BuildingsState::validateBuildingTetheredUnits)
             validateBuildingTetheredUnits;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x00417450,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00417450,
                 &BuildingsState::removeTetheredUnitFromBuilding)
             removeTetheredUnitFromBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00418EC0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00418EC0,
                 &BuildingsState::getRequiredEngineersCount)
             getRequiredEngineersCount;
 
@@ -487,35 +487,35 @@ namespace Map {
                 void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00419780, &BuildingsState::initBuildingCosts)
             initBuildingCosts;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x004197C0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x004197C0,
                 &BuildingsState::updatePathLinkageLayerForAllBuildings)
             updatePathLinkageLayerForAllBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00419800,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419800,
                 &BuildingsState::processDamageFromKillingPit)
             processDamageFromKillingPit;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00419960,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419960,
                 &BuildingsState::updatePathLinkageTileMap)
             updatePathLinkageTileMap;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00419A30,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419A30,
                 &BuildingsState::initializeGatePathfindingForOwner)
             initializeGatePathfindingForOwner;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x00419AC0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00419AC0,
                 &BuildingsState::rebuildTileLogicLayerForGatesAndWalls)
             rebuildTileLogicLayerForGatesAndWalls;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x00419BE0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00419BE0,
                 &BuildingsState::rebuildTileLogicLayerForKeeps)
             rebuildTileLogicLayerForKeeps;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x00419C70,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00419C70,
                 &BuildingsState::updatePathLinkageForGatesKeepsSiegeTowers)
             updatePathLinkageForGatesKeepsSiegeTowers;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00419D70,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419D70,
                 &BuildingsState::updateEnemyBuildings)
             updateEnemyBuildings;
 
@@ -527,15 +527,15 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00419FA0, &BuildingsState::findClosestEnemyBuildingWithinRadius)
             findClosestEnemyBuildingWithinRadius;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0041A7A0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0041A7A0,
                 &BuildingsState::destroyBuilding)
             destroyBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0041A860,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0041A860,
                 &BuildingsState::destroyBuildings)
             destroyBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0041A8D0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0041A8D0,
                 &BuildingsState::swapOwnersOfCastle)
             swapOwnersOfCastle;
 
@@ -551,31 +551,31 @@ namespace Map {
                 &BuildingsState::computeBuildingEntranceFlagsForOrientations)
             computeBuildingEntranceFlagsForOrientations;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(undefined4, int, int, int, int, int, MappersEnum), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(undefined4, int, int, int, int, int, MappersEnum), false,
                 Address::SHC_3BB0A8C1_0x0041B890, &BuildingsState::findQuarryPileLocation)
             findQuarryPileLocation;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int, int, BuildingType), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int, int, BuildingType), false,
                 Address::SHC_3BB0A8C1_0x0041B940, &BuildingsState::hasBuildingAsNeighbour)
             hasBuildingAsNeighbour;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int, BuildingType, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0041BA00, &BuildingsState::findParticularBuilding)
             findParticularBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int), true, Address::SHC_3BB0A8C1_0x0041BAB0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0041BAB0,
                 &BuildingsState::findAccessibleAreaNearBuildingLocation)
             findAccessibleAreaNearBuildingLocation;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, ResourceType, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, ResourceType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BB30, &BuildingsState::addResourceToStockpile)
             addResourceToStockpile;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BC10, &BuildingsState::addResourceToGranary)
             addResourceToGranary;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BCA0, &BuildingsState::addResourceToArmory)
             addResourceToArmory;
 
@@ -583,7 +583,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041BD70, &BuildingsState::processResourceLoss)
             processResourceLoss;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x0041BF50,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0041BF50,
                 &BuildingsState::subtractResourcesStoredInBuilding)
             subtractResourcesStoredInBuilding;
 
@@ -591,11 +591,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041BFD0, &BuildingsState::processPlacementResourceLossForBuildingType)
             processPlacementResourceLossForBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041C190, &BuildingsState::processWallBuildingLoss)
             processWallBuildingLoss;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x0041C240,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0041C240,
                 &BuildingsState::applyFoodLossPercentageToPlayer)
             applyFoodLossPercentageToPlayer;
 
@@ -603,7 +603,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041C310, &BuildingsState::processResourceGain)
             processResourceGain;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, BOOLEnum, BOOLEnum), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, BOOLEnum, BOOLEnum), false,
                 Address::SHC_3BB0A8C1_0x0041C570, &BuildingsState::applyGateOrDrawbridgeOpenCloseChange)
             applyGateOrDrawbridgeOpenCloseChange;
 
@@ -611,11 +611,11 @@ namespace Map {
                 &BuildingsState::sortBuildingIDsNeedPeasantsQueue)
             sortBuildingIDsNeedPeasantsQueue;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041C810, &BuildingsState::lightUpBuilding)
             lightUpBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, PackagedFileMagicNum), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00420BF0, &BuildingsState::upgradeBuildingsForMapVersion)
             upgradeBuildingsForMapVersion;
 
@@ -623,15 +623,15 @@ namespace Map {
                 false, Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
             setupBuildingData;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), true, Address::SHC_3BB0A8C1_0x00421890,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00421890,
                 &BuildingsState::deleteBuilding)
             deleteBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), true, Address::SHC_3BB0A8C1_0x00421990,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00421990,
                 &BuildingsState::destroyBuildingAndLinkedDuplicates)
             destroyBuildingAndLinkedDuplicates;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), true, Address::SHC_3BB0A8C1_0x00421A40,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00421A40,
                 &BuildingsState::buildingIsAccessible)
             buildingIsAccessible;
 
@@ -643,15 +643,15 @@ namespace Map {
                 &BuildingsState::giveBackResourceForDestroyedBuilding)
             giveBackResourceForDestroyedBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x00422230, &BuildingsState::getBuildingThatCanStoreThisResource)
             getBuildingThatCanStoreThisResource;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(uint, undefined4, int, int), true,
+            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(uint, undefined4, int, int), false,
                 Address::SHC_3BB0A8C1_0x00422370, &BuildingsState::getArmoryWithSpaceLeft)
             getArmoryWithSpaceLeft;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), true,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00422400, &BuildingsState::findQuarryPileThatIsCloseAndHasMostStone)
             findQuarryPileThatIsCloseAndHasMostStone;
 
@@ -659,7 +659,7 @@ namespace Map {
                 &BuildingsState::updateGateDrawBridgeOpenCloseLogic)
             updateGateDrawBridgeOpenCloseLogic;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00422B80,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00422B80,
                 &BuildingsState::checkBuildingsNeedPeasants)
             checkBuildingsNeedPeasants;
 
@@ -671,15 +671,15 @@ namespace Map {
                 void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00422E20, &BuildingsState::updateBuildings)
             updateBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), true, Address::SHC_3BB0A8C1_0x00424220,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x00424220,
                 &BuildingsState::recomputeAccessibilityForAllBuildings)
             recomputeAccessibilityForAllBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), true, Address::SHC_3BB0A8C1_0x00424270,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00424270,
                 &BuildingsState::updateHeatmapBasedOnBuildingAccessibility)
             updateHeatmapBasedOnBuildingAccessibility;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), true,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00424310, &BuildingsState::applyVersionUpgradeAccessibilityRecompute)
             applyVersionUpgradeAccessibilityRecompute;
 
