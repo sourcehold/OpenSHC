@@ -56,16 +56,17 @@ namespace Map {
                 do {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                         DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
-                    short random = DAT_TileMapState::instance
-                                     .RandomLayer[DAT_ViewportRenderState::instance
-                                                      .translationMatrix[(short)this->buildings[buildingID].y
-                                                          + DAT_TileMapState::instance.buildingY]
-                                                      .addXgetTile
-                                         + (short)this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX];
+                    short random
+                        = DAT_TileMapState::instance
+                              .RandomLayer[DAT_ViewportRenderState::instance
+                                               .translationMatrix[(short)this->buildings[buildingID].y
+                                                   + DAT_TileMapState::instance.buildingY]
+                                               .addXgetTile
+                                  + (short)this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX];
                     if (random % 5 == 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                            DAT_EntityState::ptr)(0, 0, 0,
-                            ((short)this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX) * 8,
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0,
+                            0, ((short)this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX) * 8,
                             ((short)this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY) * 8,
                             DAT_TileMapState::instance
                                 .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],

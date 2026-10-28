@@ -44,7 +44,8 @@ namespace Map {
             }
             // Note: indexes past the declared size of rallySearchOffsetsUnk
             int searchOffset = DAT_GameState::instance.playerDataArray[playerID].rallySearchOffsetsUnk[group];
-            if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[requestedGroup - 10][0] != 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[requestedGroup - 10][0]
+                != 0) {
                 // Search around the rally point
                 if (requestedGroup == 16) {
                     searchOffset = DAT_GameState::instance.playerDataArray[playerID].someCount23;
@@ -61,8 +62,7 @@ namespace Map {
                     int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].y + pointY;
                     int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                     int const occupant = DAT_TileMapState::instance.UnitLayer[tile];
-                    if ((occupant == 0
-                            || occupant == unitID
+                    if ((occupant == 0 || occupant == unitID
                             || DAT_UnitsState::instance.units[unitID].movementRelated != 8)
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -95,13 +95,16 @@ namespace Map {
                     // The search runs across the three 24-entry pieces, so the formation is read as 72 flat slots.
                     for (; searchOffset < 72; ++searchOffset) {
                         int const x = (&DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
-                                .x;
+                                .structure
+                                .mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
+                                          .x;
                         int const y = (&DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
-                                .y;
-                        int const occupant = DAT_TileMapState::instance
-                                .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
+                                .structure
+                                .mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
+                                          .y;
+                        int const occupant
+                            = DAT_TileMapState::instance
+                                  .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
                         if (occupant != 0 && occupant != unitID
                             && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
                             continue;

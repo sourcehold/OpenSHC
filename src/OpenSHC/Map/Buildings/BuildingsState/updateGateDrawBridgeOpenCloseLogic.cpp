@@ -1,5 +1,6 @@
-#include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "../BuildingsState.func.hpp"
+
+#include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
@@ -119,9 +120,10 @@ namespace Map {
                     // Undefended and attacked, the strongest player captures the gatehouse
                     if (flagEntityID == 0) {
                         int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
-                        int height = DAT_TileMapState::instance.HeightLayer[DAT_BuildingsState::instance
-                                             .buildings[DAT_CurrentBuildingID::instance]
-                                             .currentTilePositionAdjusted]
+                        int height
+                            = DAT_TileMapState::instance
+                                  .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                          .currentTilePositionAdjusted]
                             + 30;
                         int microY
                             = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8;

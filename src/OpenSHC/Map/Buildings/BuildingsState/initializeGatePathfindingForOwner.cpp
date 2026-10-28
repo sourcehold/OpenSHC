@@ -21,7 +21,8 @@ namespace Map {
                     && DAT_BuildingsState::instance.buildings[buildingID].field200_0x2c6 == 0) {
                     DAT_PathFindingState::instance
                         .climbData[DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID]
-                        .isRecognizedByPathfinding = 1;
+                        .isRecognizedByPathfinding
+                        = 1;
                     DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 = 0;
                     DAT_BuildingsState::instance.buildings[buildingID].gateState = 11;
                     DAT_BuildingsState::instance.buildings[buildingID].gateCloseOpenTimer = 2500;
