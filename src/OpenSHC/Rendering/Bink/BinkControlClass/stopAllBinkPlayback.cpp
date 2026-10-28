@@ -9,7 +9,7 @@ namespace Rendering {
         // FUNCTION: STRONGHOLDCRUSADER 0x00408EB0
         void BinkControlClass::stopAllBinkPlayback()
         {
-            for(int binkObjIndex = 0; binkObjIndex < 2; binkObjIndex ++) {
+            for (int binkObjIndex = 0; binkObjIndex < 2; binkObjIndex++) {
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, this)(
                     binkObjIndex);
             }
