@@ -1,0 +1,75 @@
+
+name: PR label commands
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+env:
+  ALLOWED_LABELS: '["declaration/type change", "in progress", "documentation", "help wanted", "halted"]'
+
+jobs:
+  label:
+    if: >-
+      github.event.issue.pull_request &&
+      (
+        contains(github.event.comment.body, '/label-add') ||
+        contains(github.event.comment.body, '/label-remove')
+      )
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Process label commands
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const body = context.payload.comment.body;
+
+            const allowedLabels = new Set(
+              JSON.parse(process.env.ALLOWED_LABELS)
+            );
+
+            const commandRegex = /^[ \t]*\/label-(add|remove)[ \t]+([^\r\n]+)/gm;
+
+            for (const command of body.matchAll(commandRegex)) {
+              const action = command[1];
+              const labels = command[2]
+                .split(',')
+                .map(label => label.trim())
+                .filter(Boolean);
+
+              for (const label of labels) {
+                if (!allowedLabels.has(label)) {
+                  core.warning(`Ignoring unapproved label: ${label}`);
+                  continue;
+                }
+
+                if (action === 'add') {
+                  await github.rest.issues.addLabels({
+                    owner,
+                    repo,
+                    issue_number,
+                    labels: [label]
+                  });
+                  core.info(`Added: ${label}`);
+                } else {
+                  try {
+                    await github.rest.issues.removeLabel({
+                      owner,
+                      repo,
+                      issue_number,
+                      name: label
+                    });
+                    core.info(`Removed: ${label}`);
+                  } catch (error) {
+                    if (error.status !== 404) throw error;
+                    core.info(`Already absent: ${label}`);
+                  }
+                }
+              }
+            }

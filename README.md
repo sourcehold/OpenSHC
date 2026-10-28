@@ -26,6 +26,9 @@ All developers are welcome to contribute.
 
 Get an overview [here](https://sourcehold.github.io/OpenSHC/wiki.html) or dive straight in [here](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-0.html)!
 
+Note, that you can use the commands `/label-add <label>, <label>, ...` and `/label-remove <label>, <label>, ...` in a PR comment(!) to add or remove the labels `declaration/type change`, `in progress`, `documentation`, `help wanted` and `halted` to inform the maintainers about the progress of the PR.
+The commands need to be alone on a single line.
+
 ### Requirements
 
 Before you begin, install the following:
