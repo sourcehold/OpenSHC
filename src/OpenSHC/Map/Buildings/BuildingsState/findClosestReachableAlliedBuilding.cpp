@@ -41,9 +41,9 @@ namespace Map {
                 if (DAT_DirectionAlgorithmState::instance.distanceHigh >= closestDistance) {
                     continue;
                 }
-                int const tile = DAT_ViewportRenderState::instance
-                                     .translationMatrix[this->buildings[buildingID].buildingEntryY]
-                                     .addXgetTile
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].buildingEntryY]
+                          .addXgetTile
                     + this->buildings[buildingID].buildingEntryX;
                 if (MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                         DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, fromArea,

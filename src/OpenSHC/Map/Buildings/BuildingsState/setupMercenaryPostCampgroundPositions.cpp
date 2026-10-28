@@ -39,7 +39,9 @@ namespace Map {
                     continue;
                 }
                 // quarryStockpileID holds the linked building here.
-                if (DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID].buildingType
+                if (DAT_BuildingsState::instance
+                        .buildings[DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID]
+                        .buildingType
                     != BT_MERCENARYPOST) {
                     continue;
                 }
