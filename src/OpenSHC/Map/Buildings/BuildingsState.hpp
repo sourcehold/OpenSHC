@@ -223,7 +223,7 @@ namespace Map {
 
             BOOLEnum isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
 
-            undefined4 getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
+            BOOLEnum getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
 
             void createEntityForAssemblyPointsForActiveTabType();
 
