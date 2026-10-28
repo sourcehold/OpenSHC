@@ -69,3 +69,10 @@ src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
 src/OpenSHC/Map/Buildings/UpdateIronMine.cpp
 
+src/OpenSHC/Map/Buildings/UpdateTannersWorkshop.cpp
+src/OpenSHC/Map/Buildings/UpdateBrewery.cpp
+src/OpenSHC/Map/Buildings/UpdateMill.cpp
+src/OpenSHC/Map/Buildings/UpdateGranary.cpp
+src/OpenSHC/Map/Buildings/UpdateArmory.cpp
+src/OpenSHC/Map/Buildings/UpdateStockpile.cpp
+src/OpenSHC/Map/Buildings/UpdateQuarry.cpp
