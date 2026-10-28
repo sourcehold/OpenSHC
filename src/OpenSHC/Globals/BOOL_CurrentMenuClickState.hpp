@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x00ED31D4) BOOL_CurrentMenuClickState;
+MACRO_STRUCT_RESOLVER(BOOLEnum, true, Address::SHC_3BB0A8C1_0x00ED31D4) BOOL_CurrentMenuClickState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00ED31D4);

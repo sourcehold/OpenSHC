@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Synchrony::ProtocolDefinedData;
 
-MACRO_STRUCT_RESOLVER(ProtocolDefinedData, false, Address::SHC_3BB0A8C1_0x00B38B7C) DAT_ProtocolDefinedData;
+MACRO_STRUCT_RESOLVER(ProtocolDefinedData, true, Address::SHC_3BB0A8C1_0x00B38B7C) DAT_ProtocolDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B38B7C);

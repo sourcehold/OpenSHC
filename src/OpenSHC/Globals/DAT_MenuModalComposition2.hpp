@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::MenuModalComposition;
 
-MACRO_STRUCT_RESOLVER(MenuModalComposition, false, Address::SHC_3BB0A8C1_0x02403678) DAT_MenuModalComposition2;
+MACRO_STRUCT_RESOLVER(MenuModalComposition, true, Address::SHC_3BB0A8C1_0x02403678) DAT_MenuModalComposition2;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x02403678);

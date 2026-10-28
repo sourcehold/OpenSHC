@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Rendering::PencilRenderCore;
 
-MACRO_STRUCT_RESOLVER(PencilRenderCore, false, Address::SHC_3BB0A8C1_0x0191D720) DAT_PencilRenderCore;
+MACRO_STRUCT_RESOLVER(PencilRenderCore, true, Address::SHC_3BB0A8C1_0x0191D720) DAT_PencilRenderCore;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x0191D720);

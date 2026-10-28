@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(byte[1004], false, Address::SHC_3BB0A8C1_0x021AE7EC) UNK_UnusedTextLocation1;
+MACRO_STRUCT_RESOLVER(byte[1004], true, Address::SHC_3BB0A8C1_0x021AE7EC) UNK_UnusedTextLocation1;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x021AE7EC);

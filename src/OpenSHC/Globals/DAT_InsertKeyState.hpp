@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Input::InsertKeyState;
 
-MACRO_STRUCT_RESOLVER(InsertKeyState, false, Address::SHC_3BB0A8C1_0x00EE239C) DAT_InsertKeyState;
+MACRO_STRUCT_RESOLVER(InsertKeyState, true, Address::SHC_3BB0A8C1_0x00EE239C) DAT_InsertKeyState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE239C);

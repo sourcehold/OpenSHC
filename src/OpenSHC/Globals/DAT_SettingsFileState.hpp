@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::SettingsFileState;
 
-MACRO_STRUCT_RESOLVER(SettingsFileState, false, Address::SHC_3BB0A8C1_0x00EE109A) DAT_SettingsFileState;
+MACRO_STRUCT_RESOLVER(SettingsFileState, true, Address::SHC_3BB0A8C1_0x00EE109A) DAT_SettingsFileState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE109A);

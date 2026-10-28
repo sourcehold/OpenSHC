@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::DisplayElement;
 
-MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF460C) MissionWinDefeatBannerDisplayElement;
+MACRO_STRUCT_RESOLVER(DisplayElement, true, Address::SHC_3BB0A8C1_0x00DF460C) MissionWinDefeatBannerDisplayElement;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF460C);

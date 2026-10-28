@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Util::Timing::Stopwatch;
 
-MACRO_STRUCT_RESOLVER(Stopwatch, false, Address::SHC_3BB0A8C1_0x0112B05C) DAT_UnknownStopwatch;
+MACRO_STRUCT_RESOLVER(Stopwatch, true, Address::SHC_3BB0A8C1_0x0112B05C) DAT_UnknownStopwatch;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x0112B05C);

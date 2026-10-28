@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::WallAndPitchState;
 
-MACRO_STRUCT_RESOLVER(WallAndPitchState, false, Address::SHC_3BB0A8C1_0x00EE19D0) DAT_WallAndPitchState;
+MACRO_STRUCT_RESOLVER(WallAndPitchState, true, Address::SHC_3BB0A8C1_0x00EE19D0) DAT_WallAndPitchState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE19D0);

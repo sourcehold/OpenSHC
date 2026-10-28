@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::UserHelpDefinedData;
 
-MACRO_STRUCT_RESOLVER(UserHelpDefinedData, false, Address::SHC_3BB0A8C1_0x00AB916C) DAT_UserHelpDefinedData;
+MACRO_STRUCT_RESOLVER(UserHelpDefinedData, true, Address::SHC_3BB0A8C1_0x00AB916C) DAT_UserHelpDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00AB916C);

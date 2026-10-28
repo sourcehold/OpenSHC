@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(byte[1024], false, Address::SHC_3BB0A8C1_0x024036F8) UNK_UnknownClassLocation2;
+MACRO_STRUCT_RESOLVER(byte[1024], true, Address::SHC_3BB0A8C1_0x024036F8) UNK_UnknownClassLocation2;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x024036F8);

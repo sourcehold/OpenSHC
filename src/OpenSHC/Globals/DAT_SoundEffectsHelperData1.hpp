@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::SoundEffectsHelperData1;
 
-MACRO_STRUCT_RESOLVER(SoundEffectsHelperData1, false, Address::SHC_3BB0A8C1_0x00DF37F0) DAT_SoundEffectsHelperData1;
+MACRO_STRUCT_RESOLVER(SoundEffectsHelperData1, true, Address::SHC_3BB0A8C1_0x00DF37F0) DAT_SoundEffectsHelperData1;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF37F0);

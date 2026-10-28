@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::Buildings::BuildingDefinedData;
 
-MACRO_STRUCT_RESOLVER(BuildingDefinedData, false, Address::SHC_3BB0A8C1_0x005B7974) DAT_BuildingDefinedData;
+MACRO_STRUCT_RESOLVER(BuildingDefinedData, true, Address::SHC_3BB0A8C1_0x005B7974) DAT_BuildingDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x005B7974);

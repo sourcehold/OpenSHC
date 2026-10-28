@@ -15,7 +15,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(DWORD, false, Address::SHC_3BB0A8C1_0x00B986E4) DAT_SFX_Cooldown_WeAreUnderAttack;
+MACRO_STRUCT_RESOLVER(DWORD, true, Address::SHC_3BB0A8C1_0x00B986E4) DAT_SFX_Cooldown_WeAreUnderAttack;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B986E4);

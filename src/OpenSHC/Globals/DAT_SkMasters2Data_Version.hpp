@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(float, false, Address::SHC_3BB0A8C1_0x00DF6248) DAT_SkMasters2Data_Version;
+MACRO_STRUCT_RESOLVER(float, true, Address::SHC_3BB0A8C1_0x00DF6248) DAT_SkMasters2Data_Version;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF6248);

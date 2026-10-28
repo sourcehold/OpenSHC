@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::TextInputDefinedData;
 
-MACRO_STRUCT_RESOLVER(TextInputDefinedData, false, Address::SHC_3BB0A8C1_0x00B37CBC) DAT_TextInputDefinedData;
+MACRO_STRUCT_RESOLVER(TextInputDefinedData, true, Address::SHC_3BB0A8C1_0x00B37CBC) DAT_TextInputDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B37CBC);

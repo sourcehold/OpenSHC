@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::ScrollingHandler;
 
-MACRO_STRUCT_RESOLVER(ScrollingHandler, false, Address::SHC_3BB0A8C1_0x0112B070) DAT_ScrollingHandler;
+MACRO_STRUCT_RESOLVER(ScrollingHandler, true, Address::SHC_3BB0A8C1_0x0112B070) DAT_ScrollingHandler;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x0112B070);

@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00B9865C) DAT_IsKeepEnclosed;
+MACRO_STRUCT_RESOLVER(undefined4, true, Address::SHC_3BB0A8C1_0x00B9865C) DAT_IsKeepEnclosed;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B9865C);

@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::Speech::SpeechDefinedData;
 
-MACRO_STRUCT_RESOLVER(SpeechDefinedData, false, Address::SHC_3BB0A8C1_0x00618254) DAT_SpeechDefinedData;
+MACRO_STRUCT_RESOLVER(SpeechDefinedData, true, Address::SHC_3BB0A8C1_0x00618254) DAT_SpeechDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00618254);

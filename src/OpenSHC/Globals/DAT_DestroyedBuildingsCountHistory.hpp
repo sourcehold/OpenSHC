@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(int[5], false, Address::SHC_3BB0A8C1_0x00B9861C) DAT_DestroyedBuildingsCountHistory;
+MACRO_STRUCT_RESOLVER(int[5], true, Address::SHC_3BB0A8C1_0x00B9861C) DAT_DestroyedBuildingsCountHistory;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B9861C);

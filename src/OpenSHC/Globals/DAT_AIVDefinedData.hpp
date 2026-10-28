@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::AI::AIV::AIVDefinedData;
 
-MACRO_STRUCT_RESOLVER(AIVDefinedData, false, Address::SHC_3BB0A8C1_0x00B46124) DAT_AIVDefinedData;
+MACRO_STRUCT_RESOLVER(AIVDefinedData, true, Address::SHC_3BB0A8C1_0x00B46124) DAT_AIVDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B46124);

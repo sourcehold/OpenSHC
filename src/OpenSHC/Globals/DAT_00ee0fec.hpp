@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00EE0FEC) DAT_00ee0fec;
+MACRO_STRUCT_RESOLVER(undefined4, true, Address::SHC_3BB0A8C1_0x00EE0FEC) DAT_00ee0fec;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE0FEC);

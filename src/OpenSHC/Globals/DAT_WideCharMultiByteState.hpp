@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Util::WideCharMultiByteState;
 
-MACRO_STRUCT_RESOLVER(WideCharMultiByteState, false, Address::SHC_3BB0A8C1_0x00EE1099) DAT_WideCharMultiByteState;
+MACRO_STRUCT_RESOLVER(WideCharMultiByteState, true, Address::SHC_3BB0A8C1_0x00EE1099) DAT_WideCharMultiByteState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE1099);

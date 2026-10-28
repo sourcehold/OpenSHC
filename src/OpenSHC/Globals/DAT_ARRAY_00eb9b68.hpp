@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Credits::CreditsRelatedStructure2;
 
-MACRO_STRUCT_RESOLVER(CreditsRelatedStructure2[288], false, Address::SHC_3BB0A8C1_0x00EB9B68) DAT_ARRAY_00eb9b68;
+MACRO_STRUCT_RESOLVER(CreditsRelatedStructure2[288], true, Address::SHC_3BB0A8C1_0x00EB9B68) DAT_ARRAY_00eb9b68;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EB9B68);

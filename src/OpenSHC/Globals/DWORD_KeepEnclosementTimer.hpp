@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(dword, false, Address::SHC_3BB0A8C1_0x00B98618) DWORD_KeepEnclosementTimer;
+MACRO_STRUCT_RESOLVER(dword, true, Address::SHC_3BB0A8C1_0x00B98618) DWORD_KeepEnclosementTimer;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B98618);

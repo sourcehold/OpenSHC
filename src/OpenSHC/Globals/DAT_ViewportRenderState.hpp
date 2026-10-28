@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::ViewportRenderState;
 
-MACRO_STRUCT_RESOLVER(ViewportRenderState, false, Address::SHC_3BB0A8C1_0x021AEBD8) DAT_ViewportRenderState;
+MACRO_STRUCT_RESOLVER(ViewportRenderState, true, Address::SHC_3BB0A8C1_0x021AEBD8) DAT_ViewportRenderState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x021AEBD8);

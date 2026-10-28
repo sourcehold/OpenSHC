@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Game::CampaignInfoSubStructure1;
 
-MACRO_STRUCT_RESOLVER(CampaignInfoSubStructure1, false, Address::SHC_3BB0A8C1_0x00EC02F4) DAT_00ec02f4;
+MACRO_STRUCT_RESOLVER(CampaignInfoSubStructure1, true, Address::SHC_3BB0A8C1_0x00EC02F4) DAT_00ec02f4;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EC02F4);

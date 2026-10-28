@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::DisplayElement;
 
-MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF4C28)
+MACRO_STRUCT_RESOLVER(DisplayElement, true, Address::SHC_3BB0A8C1_0x00DF4C28)
 ConnectAndPathLinkageInfoTextDisplayElement;
 } // namespace OpenSHC
 

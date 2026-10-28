@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Game::Skirmish::SkirmishDefinedData;
 
-MACRO_STRUCT_RESOLVER(SkirmishDefinedData, false, Address::SHC_3BB0A8C1_0x00B3EB34) DAT_SkirmishDefinedData;
+MACRO_STRUCT_RESOLVER(SkirmishDefinedData, true, Address::SHC_3BB0A8C1_0x00B3EB34) DAT_SkirmishDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B3EB34);

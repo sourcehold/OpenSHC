@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::MSS::SoundSystem;
 
-MACRO_STRUCT_RESOLVER(SoundSystem, false, Address::SHC_3BB0A8C1_0x01127DD0) DAT_SoundSystemState;
+MACRO_STRUCT_RESOLVER(SoundSystem, true, Address::SHC_3BB0A8C1_0x01127DD0) DAT_SoundSystemState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01127DD0);

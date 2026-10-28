@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Menu;
 
-MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B967D0) Menu_SkirmishPlayOptions;
+MACRO_STRUCT_RESOLVER(Menu, true, Address::SHC_3BB0A8C1_0x00B967D0) Menu_SkirmishPlayOptions;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B967D0);

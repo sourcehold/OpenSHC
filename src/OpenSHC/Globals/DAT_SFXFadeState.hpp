@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::SFX::SFXFadeStateInt;
 
-MACRO_STRUCT_RESOLVER(SFXFadeStateInt, false, Address::SHC_3BB0A8C1_0x00B986FC) DAT_SFXFadeState;
+MACRO_STRUCT_RESOLVER(SFXFadeStateInt, true, Address::SHC_3BB0A8C1_0x00B986FC) DAT_SFXFadeState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B986FC);

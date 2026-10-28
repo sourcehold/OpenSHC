@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Game::MissionAestheticsDefinedData;
 
-MACRO_STRUCT_RESOLVER(MissionAestheticsDefinedData, false, Address::SHC_3BB0A8C1_0x00B3962C)
+MACRO_STRUCT_RESOLVER(MissionAestheticsDefinedData, true, Address::SHC_3BB0A8C1_0x00B3962C)
 DAT_MissionAestheticsDefinedData;
 } // namespace OpenSHC
 

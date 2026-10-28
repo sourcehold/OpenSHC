@@ -62,3 +62,7 @@ src/OpenSHC/Map/Buildings/UpdateBlacksmithsWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
 src/OpenSHC/Map/Buildings/UpdateIronMine.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/validateBuildingTetheredUnits.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/updateVisuallyActiveState.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/buildingHasSpaceForResource.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/getBuildingResourceAmountByUid.cpp

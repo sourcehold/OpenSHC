@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::DisplayElement;
 
-MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF4C74) ResourceMissing2DisplayElement;
+MACRO_STRUCT_RESOLVER(DisplayElement, true, Address::SHC_3BB0A8C1_0x00DF4C74) ResourceMissing2DisplayElement;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF4C74);

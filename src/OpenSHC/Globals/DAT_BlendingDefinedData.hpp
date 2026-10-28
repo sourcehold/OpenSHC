@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::BlendingDefinedData;
 
-MACRO_STRUCT_RESOLVER(BlendingDefinedData, false, Address::SHC_3BB0A8C1_0x00AB571C) DAT_BlendingDefinedData;
+MACRO_STRUCT_RESOLVER(BlendingDefinedData, true, Address::SHC_3BB0A8C1_0x00AB571C) DAT_BlendingDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00AB571C);

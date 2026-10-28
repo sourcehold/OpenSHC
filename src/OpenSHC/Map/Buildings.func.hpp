@@ -14,23 +14,23 @@ namespace Map {
     namespace Buildings_Func {
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00410CA0, &OpenSHC::Map::Buildings::UpdateHovel)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00410CA0, &OpenSHC::Map::Buildings::UpdateHovel)
         UpdateHovel;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00410D20, &OpenSHC::Map::Buildings::UpdateWoodcuttersHut)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00410D20, &OpenSHC::Map::Buildings::UpdateWoodcuttersHut)
         UpdateWoodcuttersHut;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00410EE0, &OpenSHC::Map::Buildings::UpdatePitchRig)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00410EE0, &OpenSHC::Map::Buildings::UpdatePitchRig)
         UpdatePitchRig;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004113C0, &OpenSHC::Map::Buildings::UpdateMercenaryPost)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004113C0, &OpenSHC::Map::Buildings::UpdateMercenaryPost)
         UpdateMercenaryPost;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00411480, &OpenSHC::Map::Buildings::UpdateBarracks)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00411480, &OpenSHC::Map::Buildings::UpdateBarracks)
         UpdateBarracks;
 
         MACRO_FUNCTION_RESOLVER(
@@ -45,20 +45,20 @@ namespace Map {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00412730, &OpenSHC::Map::Buildings::UpdateArmory)
         UpdateArmory;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00412D50,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00412D50,
             &OpenSHC::Map::Buildings::UpdateFletchersWorkshop)
         UpdateFletchersWorkshop;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004130D0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004130D0,
             &OpenSHC::Map::Buildings::UpdateBlacksmithsWorkshop)
         UpdateBlacksmithsWorkshop;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004138D0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004138D0,
             &OpenSHC::Map::Buildings::UpdatePoleturnersWorkshop)
         UpdatePoleturnersWorkshop;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00413DC0, &OpenSHC::Map::Buildings::UpdateArmorersWorkshop)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00413DC0, &OpenSHC::Map::Buildings::UpdateArmorersWorkshop)
         UpdateArmorersWorkshop;
 
         MACRO_FUNCTION_RESOLVER(
@@ -66,7 +66,7 @@ namespace Map {
         UpdateTannersWorkshop;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00414720, &OpenSHC::Map::Buildings::UpdateBakery)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00414720, &OpenSHC::Map::Buildings::UpdateBakery)
         UpdateBakery;
 
         MACRO_FUNCTION_RESOLVER(
@@ -78,7 +78,7 @@ namespace Map {
         UpdateGranary;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004156F0, &OpenSHC::Map::Buildings::UpdateInn)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004156F0, &OpenSHC::Map::Buildings::UpdateInn)
         UpdateInn;
 
         MACRO_FUNCTION_RESOLVER(
@@ -86,7 +86,7 @@ namespace Map {
         UpdateApothecary;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00415BF0, &OpenSHC::Map::Buildings::UpdateTunnelersGuild)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00415BF0, &OpenSHC::Map::Buildings::UpdateTunnelersGuild)
         UpdateTunnelersGuild;
 
         MACRO_FUNCTION_RESOLVER(
@@ -106,7 +106,7 @@ namespace Map {
         UpdateHopsFarm;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00416720, &OpenSHC::Map::Buildings::UpdateAppleFarm)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00416720, &OpenSHC::Map::Buildings::UpdateAppleFarm)
         UpdateAppleFarm;
 
         MACRO_FUNCTION_RESOLVER(
@@ -118,15 +118,15 @@ namespace Map {
         UpdateMill;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004174E0, &OpenSHC::Map::Buildings::UpdateStables)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004174E0, &OpenSHC::Map::Buildings::UpdateStables)
         UpdateStables;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00417740, &OpenSHC::Map::Buildings::UpdateBuildingShared2)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00417740, &OpenSHC::Map::Buildings::UpdateBuildingShared2)
         UpdateBuildingShared2;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004177E0, &OpenSHC::Map::Buildings::UpdateCathedral)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004177E0, &OpenSHC::Map::Buildings::UpdateCathedral)
         UpdateCathedral;
 
         MACRO_FUNCTION_RESOLVER(
@@ -146,7 +146,7 @@ namespace Map {
         UpdateDrawBridge;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00417FD0, &OpenSHC::Map::Buildings::UpdateTunnel)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00417FD0, &OpenSHC::Map::Buildings::UpdateTunnel)
         UpdateTunnel;
 
         MACRO_FUNCTION_RESOLVER(
@@ -154,7 +154,7 @@ namespace Map {
         UpdateBuildingShared1;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00418100, &OpenSHC::Map::Buildings::UpdateCampGround)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00418100, &OpenSHC::Map::Buildings::UpdateCampGround)
         UpdateCampGround;
 
         MACRO_FUNCTION_RESOLVER(
@@ -190,19 +190,19 @@ namespace Map {
         UpdatePlacedSiegeTower;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00418900, &OpenSHC::Map::Buildings::UpdateWellOrWaterpot)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00418900, &OpenSHC::Map::Buildings::UpdateWellOrWaterpot)
         UpdateWellOrWaterpot;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004189A0, &OpenSHC::Map::Buildings::UpdateKeepDoorLeft)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004189A0, &OpenSHC::Map::Buildings::UpdateKeepDoorLeft)
         UpdateKeepDoorLeft;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00418A60, &OpenSHC::Map::Buildings::UpdateKeepDoorRight)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00418A60, &OpenSHC::Map::Buildings::UpdateKeepDoorRight)
         UpdateKeepDoorRight;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00418B20, &OpenSHC::Map::Buildings::UpdateKeepDoor)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00418B20, &OpenSHC::Map::Buildings::UpdateKeepDoor)
         UpdateKeepDoor;
 
         MACRO_FUNCTION_RESOLVER(
@@ -233,7 +233,7 @@ namespace Map {
             &OpenSHC::Map::Buildings::UpdateBadBuildingRackFlogging)
         UpdateBadBuildingRackFlogging;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00419370,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00419370,
             &OpenSHC::Map::Buildings::UpdateBadBuildingChoppingBlock)
         UpdateBadBuildingChoppingBlock;
 
@@ -241,11 +241,11 @@ namespace Map {
             &OpenSHC::Map::Buildings::UpdateBadBuildingDunkingStool)
         UpdateBadBuildingDunkingStool;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00419630,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00419630,
             &OpenSHC::Map::Buildings::UpdateGoodBuildingStatue)
         UpdateGoodBuildingStatue;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00419670,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00419670,
             &OpenSHC::Map::Buildings::UpdateGoodBuildingShrine)
         UpdateGoodBuildingShrine;
 
@@ -258,7 +258,7 @@ namespace Map {
         UpdateOxTether;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0041CC70, &OpenSHC::Map::Buildings::UpdateIronMine)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x0041CC70, &OpenSHC::Map::Buildings::UpdateIronMine)
         UpdateIronMine;
 
         MACRO_FUNCTION_RESOLVER(
@@ -314,7 +314,7 @@ namespace Map {
         UpdateDogCage;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00423370, &OpenSHC::Map::Buildings::UpdateHuntersPost)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x00423370, &OpenSHC::Map::Buildings::UpdateHuntersPost)
         UpdateHuntersPost;
 
         MACRO_FUNCTION_RESOLVER(
@@ -326,7 +326,7 @@ namespace Map {
         UpdateGateHouseSmall;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004240D0, &OpenSHC::Map::Buildings::UpdateWoodGate1)
+            void(__cdecl*)(), true, Address::SHC_3BB0A8C1_0x004240D0, &OpenSHC::Map::Buildings::UpdateWoodGate1)
         UpdateWoodGate1;
 
     } // namespace Buildings_Func

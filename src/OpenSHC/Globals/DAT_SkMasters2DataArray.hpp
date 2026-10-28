@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::SkMasterDataEntry;
 
-MACRO_STRUCT_RESOLVER(SkMasterDataEntry[250], false, Address::SHC_3BB0A8C1_0x00DF6250) DAT_SkMasters2DataArray;
+MACRO_STRUCT_RESOLVER(SkMasterDataEntry[250], true, Address::SHC_3BB0A8C1_0x00DF6250) DAT_SkMasters2DataArray;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF6250);

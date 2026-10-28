@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(int, false, Address::SHC_3BB0A8C1_0x00EB9B64) DAT_FinalResultsOrderByColumn;
+MACRO_STRUCT_RESOLVER(int, true, Address::SHC_3BB0A8C1_0x00EB9B64) DAT_FinalResultsOrderByColumn;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EB9B64);

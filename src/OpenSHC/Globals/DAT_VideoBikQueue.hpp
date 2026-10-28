@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::Bink::AIMessageQueue;
 
-MACRO_STRUCT_RESOLVER(AIMessageQueue, false, Address::SHC_3BB0A8C1_0x00EE10A0) DAT_VideoBikQueue;
+MACRO_STRUCT_RESOLVER(AIMessageQueue, true, Address::SHC_3BB0A8C1_0x00EE10A0) DAT_VideoBikQueue;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE10A0);

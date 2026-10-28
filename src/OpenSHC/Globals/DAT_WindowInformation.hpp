@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::WindowInformation;
 
-MACRO_STRUCT_RESOLVER(WindowInformation, false, Address::SHC_3BB0A8C1_0x01A27980) DAT_WindowInformation;
+MACRO_STRUCT_RESOLVER(WindowInformation, true, Address::SHC_3BB0A8C1_0x01A27980) DAT_WindowInformation;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01A27980);

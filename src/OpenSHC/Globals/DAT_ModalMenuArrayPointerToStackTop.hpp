@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::MenuModal;
 
-MACRO_STRUCT_RESOLVER(MenuModal*, false, Address::SHC_3BB0A8C1_0x00DF42A4) DAT_ModalMenuArrayPointerToStackTop;
+MACRO_STRUCT_RESOLVER(MenuModal*, true, Address::SHC_3BB0A8C1_0x00DF42A4) DAT_ModalMenuArrayPointerToStackTop;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF42A4);

@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::Graphics::ImageHeaders;
 
-MACRO_STRUCT_RESOLVER(ImageHeaders, false, Address::SHC_3BB0A8C1_0x00B98790) DAT_GMImageHeaders;
+MACRO_STRUCT_RESOLVER(ImageHeaders, true, Address::SHC_3BB0A8C1_0x00B98790) DAT_GMImageHeaders;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B98790);

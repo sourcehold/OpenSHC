@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::Navigation::DirectionAlgorithmState;
 
-MACRO_STRUCT_RESOLVER(DirectionAlgorithmState, false, Address::SHC_3BB0A8C1_0x00EE23BC) DAT_DirectionAlgorithmState;
+MACRO_STRUCT_RESOLVER(DirectionAlgorithmState, true, Address::SHC_3BB0A8C1_0x00EE23BC) DAT_DirectionAlgorithmState;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE23BC);

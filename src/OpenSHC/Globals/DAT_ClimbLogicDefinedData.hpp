@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::Units::Climbing::ClimbLogicDefinedData;
 
-MACRO_STRUCT_RESOLVER(ClimbLogicDefinedData, false, Address::SHC_3BB0A8C1_0x00B3907C) DAT_ClimbLogicDefinedData;
+MACRO_STRUCT_RESOLVER(ClimbLogicDefinedData, true, Address::SHC_3BB0A8C1_0x00B3907C) DAT_ClimbLogicDefinedData;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B3907C);

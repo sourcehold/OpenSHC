@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Menu;
 
-MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B979D0) Menu_StartEnterName;
+MACRO_STRUCT_RESOLVER(Menu, true, Address::SHC_3BB0A8C1_0x00B979D0) Menu_StartEnterName;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B979D0);

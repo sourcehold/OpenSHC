@@ -17,7 +17,7 @@ namespace OpenSHC {
 
 using OpenSHC::Text::TextManager;
 
-MACRO_STRUCT_RESOLVER(TextManager, false, Address::SHC_3BB0A8C1_0x02157578) DAT_TextManagerObject;
+MACRO_STRUCT_RESOLVER(TextManager, true, Address::SHC_3BB0A8C1_0x02157578) DAT_TextManagerObject;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x02157578);
