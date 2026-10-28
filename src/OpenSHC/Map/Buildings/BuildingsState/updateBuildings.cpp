@@ -38,9 +38,8 @@ namespace Map {
             }
 
             this->structCount = 0;
-            for (int p = 0; p < 9; ++p) {
-                DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[p] = 0;
-            }
+            memset(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits, 0,
+                sizeof(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits));
             for (int p = 0; p < 9; ++p) {
                 DAT_GameState::instance.playerDataArray[p].dogCageCount = 0;
             }

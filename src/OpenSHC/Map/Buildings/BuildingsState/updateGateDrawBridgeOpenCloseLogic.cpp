@@ -49,9 +49,7 @@ namespace Map {
                 // Count the troops of every player on the gatehouse and look for its flag.
                 // The original does not check the tile count before the first iteration.
                 int strength[9];
-                for (int p = 0; p < 9; ++p) {
-                    strength[p] = 0;
-                }
+                memset(strength, 0, sizeof(strength));
                 int t = 0;
                 do {
                     MACRO_CALL_MEMBER(
