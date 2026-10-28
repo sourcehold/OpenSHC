@@ -30,83 +30,18 @@ jobs:
             const issue_number = context.issue.number;
             const body = context.payload.comment.body;
 
-            core.info('=== Workflow diagnostic information ===');
-            core.info(`Repository: ${owner}/${repo}`);
-            core.info(`Event: ${context.eventName}`);
-            core.info(`Actor: ${context.actor}`);
-            core.info(`Issue/PR number: ${issue_number}`);
-            core.info(`Run ID: ${context.runId}`);
-            core.info(`Workflow ref: ${context.ref}`);
-            core.info(`SHA: ${context.sha}`);
-
-            core.info('=== Event details ===');
-            core.info(`Comment author: ${context.payload.comment.user.login}`);
-            core.info(`Comment author association: ${context.payload.comment.author_association}`);
-            core.info(`Target issue URL: ${context.payload.issue.html_url}`);
-            core.info(`Is pull request: ${Boolean(context.payload.issue.pull_request)}`);
-            core.info(`Comment body: ${JSON.stringify(body)}`);
-
             const allowedLabels = new Set(
               JSON.parse(process.env.ALLOWED_LABELS)
             );
 
-            core.info(`Allowed labels: ${JSON.stringify([...allowedLabels])}`);
+            const commandRegex = /^[ \t]*\/label-(add|remove)[ \t]+([^\r\n]+)/gm;
 
-            core.info('=== Checking API access ===');
-
-            try {
-              const issueResponse = await github.rest.issues.get({
-                owner,
-                repo,
-                issue_number
-              });
-
-              core.info(`Issue API status: ${issueResponse.status}`);
-              core.info(`Target title: ${issueResponse.data.title}`);
-              core.info(`Target state: ${issueResponse.data.state}`);
-              core.info(`Is PR: ${Boolean(issueResponse.data.pull_request)}`);
-
-              const labelsResponse =
-                await github.rest.issues.listLabelsOnIssue({
-                  owner,
-                  repo,
-                  issue_number
-                });
-
-              core.info(`List labels API status: ${labelsResponse.status}`);
-              core.info(
-                `Current labels: ${JSON.stringify(
-                  labelsResponse.data.map(label => label.name)
-                )}`
-              );
-            } catch (error) {
-              core.error('=== API read diagnostic failed ===');
-              core.error(`Status: ${error.status ?? 'unknown'}`);
-              core.error(`Message: ${error.message}`);
-              core.error(
-                `Response: ${JSON.stringify(error.response?.data ?? null)}`
-              );
-              throw error;
-            }
-
-            core.info('=== Parsing commands ===');
-
-            const commandRegex =
-              /^[ \t]*\/label-(add|remove)[ \t]+([^\r\n]+)/gm;
-
-            const commands = [...body.matchAll(commandRegex)];
-
-            core.info(`Commands found: ${commands.length}`);
-
-            for (const command of commands) {
+            for (const command of body.matchAll(commandRegex)) {
               const action = command[1];
               const labels = command[2]
                 .split(',')
                 .map(label => label.trim())
                 .filter(Boolean);
-
-              core.info(`Command: ${action}`);
-              core.info(`Requested labels: ${JSON.stringify(labels)}`);
 
               for (const label of labels) {
                 if (!allowedLabels.has(label)) {
@@ -114,58 +49,27 @@ jobs:
                   continue;
                 }
 
-                core.info(`Processing approved label: ${label}`);
-
-                try {
-                  if (action === 'add') {
-                    const response = await github.rest.issues.addLabels({
-                      owner,
-                      repo,
-                      issue_number,
-                      labels: [label]
-                    });
-
-                    core.info(`Add label API status: ${response.status}`);
-                    core.info(`Added: ${label}`);
-                  } else {
-                    const response = await github.rest.issues.removeLabel({
+                if (action === 'add') {
+                  await github.rest.issues.addLabels({
+                    owner,
+                    repo,
+                    issue_number,
+                    labels: [label]
+                  });
+                  core.info(`Added: ${label}`);
+                } else {
+                  try {
+                    await github.rest.issues.removeLabel({
                       owner,
                       repo,
                       issue_number,
                       name: label
                     });
-
-                    core.info(`Remove label API status: ${response.status}`);
                     core.info(`Removed: ${label}`);
+                  } catch (error) {
+                    if (error.status !== 404) throw error;
+                    core.info(`Already absent: ${label}`);
                   }
-                } catch (error) {
-                  if (action === 'remove' && error.status === 404) {
-                    core.info(`Label already absent: ${label}`);
-                    continue;
-                  }
-
-                  core.error(`=== Label operation failed ===`);
-                  core.error(`Action: ${action}`);
-                  core.error(`Label: ${label}`);
-                  core.error(`Repository: ${owner}/${repo}`);
-                  core.error(`Issue/PR: ${issue_number}`);
-                  core.error(`HTTP status: ${error.status ?? 'unknown'}`);
-                  core.error(`Error message: ${error.message}`);
-                  core.error(
-                    `API response: ${JSON.stringify(
-                      error.response?.data ?? null
-                    )}`
-                  );
-                  core.error(
-                    `Request method: ${error.request?.method ?? 'unknown'}`
-                  );
-                  core.error(
-                    `Request URL: ${error.request?.url ?? 'unknown'}`
-                  );
-
-                  throw error;
                 }
               }
             }
-
-            core.info('=== Workflow processing completed ===');
