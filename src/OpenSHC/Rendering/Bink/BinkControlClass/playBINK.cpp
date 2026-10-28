@@ -21,12 +21,6 @@ namespace Rendering {
         using OpenSHC::Rendering::Bink::UnsortedBinkFlag;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "UnsortedBinkFlagInt": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00408ED0
         void BinkControlClass::playBINK(
             int binkObjIndex, char* binkFileName, DWORD param_3, DWORD param_4, int xPos, int yPos, DWORD param_7)
@@ -44,19 +38,12 @@ namespace Rendering {
                 || (DAT_SoundSystemState::instance.soundActiveUnk_0x0 == 0)) {
                 _videoFileName = MACRO_CALL_MEMBER(
                     OpenSHC::IO::ResourceManager_Func::getFileNameOfCurrentActiveResource, DAT_ResourceManager::ptr)();
-                /*
-                  That bink flag feels wrong. Maybe the sources are to old?   Could also be right. Would need
-                  validation. -TheRedDaemon
-                 */
                 _binkObjPtr = BinkOpen(_videoFileName, OpenSHC::Rendering::Bink::UBF_BINKNOSKIP);
                 this->binkObjPtrArray[binkObjIndex] = _binkObjPtr;
                 BinkSetVolume(_binkObjPtr, 0, 0);
             } else {
                 _videoFileName = MACRO_CALL_MEMBER(
                     OpenSHC::IO::ResourceManager_Func::getFileNameOfCurrentActiveResource, DAT_ResourceManager::ptr)();
-                /*
-                  That flag bink feels wrong. -TheRedDaemon
-                 */
                 _binkObjPtr = BinkOpen(_videoFileName, OpenSHC::Rendering::Bink::UBF_BINKNOSKIP);
                 this->binkObjPtrArray[binkObjIndex] = _binkObjPtr;
             }
@@ -64,7 +51,7 @@ namespace Rendering {
                 && (DAT_SoundSystemState::instance.soundActiveUnk_0x0 != 0)) {
                 _fileSoundVolumne = MACRO_CALL_MEMBER(
                     OpenSHC::Audio::SFX::SFXState_Func::getSoundVolumeForFilename, DAT_SFXState::ptr)(binkFileName);
-                BinkSetVolume(this->binkObjPtrArray[binkObjIndex], 0, (long)((int)(_fileSoundVolumne * 0xfa)));
+                BinkSetVolume(this->binkObjPtrArray[binkObjIndex], 0, (long)((int)(_fileSoundVolumne * 250)));
             }
             this->xPos[binkObjIndex] = xPos;
             this->yPos[binkObjIndex] = yPos;

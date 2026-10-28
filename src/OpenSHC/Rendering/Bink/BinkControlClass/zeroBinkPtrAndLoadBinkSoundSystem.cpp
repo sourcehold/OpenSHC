@@ -10,7 +10,6 @@ namespace Rendering {
             this->binkObjPtrArray[0] = NULL;
             this->binkObjPtrArray[1] = NULL;
             BinkSetSoundSystem(BinkOpenMiles, (ulong)drvrPtr);
-            return;
         }
 
     }
