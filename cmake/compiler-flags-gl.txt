@@ -62,3 +62,4 @@ src/OpenSHC/Map/Buildings/BuildingsState/spreadFireRandomlyToBuildings.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/determineBuildingEntranceFromCustomArea.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/determineBuildingEntranceFromKeepArea.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/processResourceGain.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/buildingHasSpaceForResource.cpp
