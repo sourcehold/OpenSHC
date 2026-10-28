@@ -54,3 +54,5 @@ src/OpenSHC/Map/Buildings/BuildingsState/recomputeAccessibilityForAllBuildings.c
 src/OpenSHC/Map/Buildings/BuildingsState/getResourceSpace.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/processSyncPacket.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/translateMultiplayerIDsIntoPlayerIDs.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/processResourceLoss.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/canUnitReachBuildingPerimeter.cpp
