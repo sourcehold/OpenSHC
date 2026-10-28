@@ -51,15 +51,14 @@ namespace Map {
                 return TRUE;
             }
 
-            // Fill up the stockpiles that already store this resource first. Note: the original checks
-            // currentNumberOfResource twice.
+            // Fill up the stockpiles that already store this resource first. The original has
+            // buildingHasSpaceForResource inlined here (currentNumberOfResource is tested twice); ours calls it.
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID
                     || this->buildings[i].buildingType != storageType || this->buildings[i].currentNumberOfResource == 0
-                    || this->buildings[i].resources[resourceType] == 0
-                    || this->buildings[i].currentNumberOfResource == 0
-                    || this->buildings[i].resources[resourceType]
-                        >= DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]) {
+                    || MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingHasSpaceForResource,
+                           this)(i, resourceType)
+                        == 0) {
                     continue;
                 }
                 int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
