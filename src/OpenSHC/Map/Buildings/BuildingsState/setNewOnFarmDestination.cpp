@@ -28,7 +28,7 @@ namespace Map {
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile
                           + entryX];
             // The header has no field for the short at 0x26e.
-            int direction = *(short*)this->buildings[buildingID].padding_0x26e == 0x51 ? 4 : 2;
+            int direction = this->buildings[buildingID].someFarmRelatedState == 0x51 ? 4 : 2;
             for (int i = 0; i < 24; ++i) {
                 int const tile = this->buildings[buildingID].tileRefs[i];
                 int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];

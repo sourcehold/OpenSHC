@@ -19,8 +19,8 @@ namespace Map {
         void BuildingsState::processBuildingIDsNeedPeasantsQueue(undefined4 playerID)
         {
             // Assigns peasants to the free worker slots of the queued buildings
-            for (int i = 0; i < (int)this->DAT_CountOfBuildingsNeedPeasants; ++i) {
-                int buildingID = (short)this->DAT_BuildingIDsNeedPeasantsQueue[i];
+            for (int i = 0; i < this->DAT_CountOfBuildingsNeedPeasants; ++i) {
+                int buildingID = this->DAT_BuildingIDsNeedPeasantsQueue[i];
                 if (this->buildings[buildingID].buildingTypeBasedEmployeeCount == 1) {
                     UnitType workerType = (UnitType)DAT_BuildingDefinedData::instance
                                               .WorkerTypeForBuildingType[this->buildings[buildingID].buildingType];

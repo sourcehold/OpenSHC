@@ -26,7 +26,7 @@ namespace Map {
                     int const x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].x + assemblyX;
                     int const y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].y + assemblyY;
                     int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int const occupantID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+                    int const occupantID = DAT_TileMapState::instance.UnitLayer[tile];
                     if (occupantID != 0 && occupantID != unitID
                         && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
                         continue;

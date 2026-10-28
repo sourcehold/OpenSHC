@@ -55,7 +55,6 @@ namespace Map {
                 return;
             }
             DAT_GameState::instance.playerDataArray[playerID].structureRelated1 = 72;
-            // The header splits this 6 x 72 location table into separately named fields.
             for (int formation = 0; formation < 6; ++formation) {
                 int const shape = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_1[formation];
                 // The loop index above is reused, so an unknown selector keeps the previous building.
@@ -71,12 +70,12 @@ namespace Map {
                 int const x0 = this->buildings[buildingID].x;
                 int const y0 = this->buildings[buildingID].y;
                 for (int i = 0; i < 24; ++i) {
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][0][i]
                         .x
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x0;
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][0][i]
                         .y
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y0;
                 }
@@ -92,12 +91,12 @@ namespace Map {
                 int const x1 = this->buildings[buildingID].x;
                 int const y1 = this->buildings[buildingID].y;
                 for (int i = 0; i < 24; ++i) {
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + 24 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][1][i]
                         .x
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x1;
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + 24 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][1][i]
                         .y
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y1;
                 }
@@ -113,12 +112,12 @@ namespace Map {
                 int const x2 = this->buildings[buildingID].x;
                 int const y2 = this->buildings[buildingID].y;
                 for (int i = 0; i < 24; ++i) {
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + 48 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][2][i]
                         .x
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x2;
-                    (&DAT_GameState::instance.playerDataArray[playerID]
-                            .structure.mercenaryOutpostCampgroundLocations[0])[formation * 72 + 48 + i]
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .structure.mercenaryOutpostCampgroundLocations[formation][2][i]
                         .y
                         = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y2;
                 }

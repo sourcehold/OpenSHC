@@ -20,12 +20,12 @@ namespace Map {
             int const y = this->buildings[buildingID].y;
             do {
                 MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(i, size);
-                for (int unitID = (short)DAT_TileMapState::instance
+                for (int unitID = DAT_TileMapState::instance
                          .UnitLayer[DAT_ViewportRenderState::instance
                                         .translationMatrix[y + DAT_TileMapState::instance.buildingY]
                                         .addXgetTile
                              + DAT_TileMapState::instance.buildingX + x];
-                    unitID != 0; unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
+                    unitID != 0; unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                     int const maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
                     DAT_UnitsState::instance.units[unitID].health += maxHealth * damagePercentage / -100;
                     if (DAT_UnitsState::instance.units[unitID].health <= 0) {
