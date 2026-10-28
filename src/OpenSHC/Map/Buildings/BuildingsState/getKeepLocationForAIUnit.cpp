@@ -18,7 +18,7 @@ namespace Map {
         using OpenSHC::Game::GameMode;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D9C0
-        undefined4 BuildingsState::getKeepLocationForAIUnit(int playerID, int group, int unitID)
+        BOOLEnum BuildingsState::getKeepLocationForAIUnit(int playerID, int group, int unitID)
         {
             // Matching note: The parameter is the adjusted group and a copy keeps the requested one (as in the
             // original, and in isSpaceAvailableAtUnitRallyPoint); the tile's unit is read once into an int. The rest is
@@ -32,11 +32,11 @@ namespace Map {
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
                 int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
                 if (keepID == 0) {
-                    return 0;
+                    return FALSE;
                 }
                 this->DAT_TempXOffset = DAT_BuildingsState::instance.buildings[keepID].someX;
                 this->DAT_TempYOffset = DAT_BuildingsState::instance.buildings[keepID].someY;
-                return 1;
+                return TRUE;
             }
 
             if (requestedGroup == 16) {
@@ -75,9 +75,9 @@ namespace Map {
                         this->DAT_TempYOffset = y;
                         if (x == DAT_UnitsState::instance.units[unitID].x
                             && y == DAT_UnitsState::instance.units[unitID].y) {
-                            return 0;
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
             } else {
@@ -113,13 +113,13 @@ namespace Map {
                         this->DAT_TempYOffset = y;
                         if (x == DAT_UnitsState::instance.units[unitID].x
                             && y == DAT_UnitsState::instance.units[unitID].y) {
-                            return 0;
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }
