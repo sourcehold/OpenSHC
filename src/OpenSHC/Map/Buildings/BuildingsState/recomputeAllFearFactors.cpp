@@ -104,11 +104,11 @@ namespace Map {
                     && DAT_UnitsState::instance.units[lordID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
                     int level = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
                     if (level > 0) {
-                        if (level > (char)DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]) {
+                        if (level > DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]) {
                             DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p] = level;
                         }
                     } else if (level < 0) {
-                        if (level < (char)DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
+                        if (level < DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
                             DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p] = level;
                         }
                     }

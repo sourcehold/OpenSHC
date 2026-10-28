@@ -9,7 +9,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C6F0
         void BuildingsState::sortBuildingIDsNeedPeasantsQueue(int playerID)
         {
-            if ((int)this->DAT_CountOfBuildingsNeedPeasants <= 1) {
+            if (this->DAT_CountOfBuildingsNeedPeasants <= 1) {
                 return;
             }
             int const hasBurningBuilding
@@ -17,9 +17,9 @@ namespace Map {
             int swapped;
             do {
                 swapped = 0;
-                for (int i = 0; i < (int)this->DAT_CountOfBuildingsNeedPeasants - 1; ++i) {
-                    int const secondID = (short)this->DAT_BuildingIDsNeedPeasantsQueue[i + 1];
-                    int const firstID = (short)this->DAT_BuildingIDsNeedPeasantsQueue[i];
+                for (int i = 0; i < this->DAT_CountOfBuildingsNeedPeasants - 1; ++i) {
+                    int const secondID = this->DAT_BuildingIDsNeedPeasantsQueue[i + 1];
+                    int const firstID = this->DAT_BuildingIDsNeedPeasantsQueue[i];
                     short const firstIdle = this->buildings[firstID].idleTimerUnk;
                     short const secondIdle = this->buildings[secondID].idleTimerUnk;
                     if (firstIdle > secondIdle

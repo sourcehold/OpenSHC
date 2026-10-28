@@ -60,7 +60,7 @@ namespace Map {
                     int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].x + pointX;
                     int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].y + pointY;
                     int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int const occupant = (short)DAT_TileMapState::instance.UnitLayer[tile];
+                    int const occupant = DAT_TileMapState::instance.UnitLayer[tile];
                     if ((occupant == 0
                             || occupant == unitID
                             || DAT_UnitsState::instance.units[unitID].movementRelated != 8)
@@ -92,14 +92,15 @@ namespace Map {
                         && DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[16][0] != 0) {
                         searchOffset -= DAT_GameState::instance.playerDataArray[playerID].someCount23;
                     }
+                    // The search runs across the three 24-entry pieces, so the formation is read as 72 flat slots.
                     for (; searchOffset < 72; ++searchOffset) {
-                        int const x = DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[(group - 10) * 72 + searchOffset]
+                        int const x = (&DAT_GameState::instance.playerDataArray[playerID]
+                                .structure.mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
                                 .x;
-                        int const y = DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[(group - 10) * 72 + searchOffset]
+                        int const y = (&DAT_GameState::instance.playerDataArray[playerID]
+                                .structure.mercenaryOutpostCampgroundLocations[0][0][0])[(group - 10) * 72 + searchOffset]
                                 .y;
-                        int const occupant = (short)DAT_TileMapState::instance
+                        int const occupant = DAT_TileMapState::instance
                                 .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
                         if (occupant != 0 && occupant != unitID
                             && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {

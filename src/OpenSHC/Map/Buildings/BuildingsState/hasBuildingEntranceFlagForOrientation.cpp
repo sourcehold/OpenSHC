@@ -11,19 +11,19 @@ namespace Map {
         BOOLEnum BuildingsState::hasBuildingEntranceFlagForOrientation(int buildingID)
         {
             if (DAT_TileMapState::instance.mapOrientation == 0) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[1]) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].field161_0x280[1]) {
                     return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[2]) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].field161_0x280[2]) {
                     return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[3]) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].field161_0x280[3]) {
                     return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[0]) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].field161_0x280[0]) {
                     return TRUE;
                 }
             }

@@ -56,7 +56,7 @@ namespace Map {
                 do {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                         DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
-                    short random = (short)DAT_TileMapState::instance
+                    short random = DAT_TileMapState::instance
                                      .RandomLayer[DAT_ViewportRenderState::instance
                                                       .translationMatrix[(short)this->buildings[buildingID].y
                                                           + DAT_TileMapState::instance.buildingY]
