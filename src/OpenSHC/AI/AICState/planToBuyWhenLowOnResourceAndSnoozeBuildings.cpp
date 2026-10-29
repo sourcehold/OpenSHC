@@ -22,19 +22,19 @@ namespace AI {
             return;
         }
 
-        int allowIronMines = 1;
-        int allowArmourers = 1;
         int allowFletchers = 1;
+        int allowFarms = 1;
+        int allowIronMines = 1;
+        int allowQuarries = 1;
         int allowPitchRigs = 1;
         int allowWoodcutters = 1;
         int allowPoleturners = 1;
         int allowBlacksmiths = 1;
+        int allowArmourers = 1;
         int allowTanners = 1;
-        int allowQuarries = 1;
         int allowBakeries = 1;
         int allowBreweries = 1;
         int allowInns = 1;
-        int allowFarms = 1;
         int allowWells = 1;
 
         int buildingBurning = MACRO_CALL_MEMBER(
@@ -82,10 +82,12 @@ namespace AI {
         }
 
         int population = DAT_GameState::instance.playerDataArray[playerID].currentPopulation;
-        if (population < 10
-            && (DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers != 0
-                || DAT_GameState::instance.playerDataArray[playerID].countWoodcutters > 2)) {
-            allowQuarries = 0;
+        if (population < 10) {
+            if (DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers != 0) {
+                allowQuarries = 0;
+            } else if (DAT_GameState::instance.playerDataArray[playerID].countWoodcutters > 2) {
+                allowQuarries = 0;
+            }
         }
 
         if (wood >= 20 && population < 10 && DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers != 0
@@ -142,10 +144,10 @@ namespace AI {
 
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
             allowFletchers = 1;
-            allowIronMines = 0;
-            allowQuarries = 0;
-            allowPitchRigs = 0;
             allowFarms = 0;
+            allowQuarries = 0;
+            allowIronMines = 0;
+            allowPitchRigs = 0;
             allowWoodcutters = 0;
             allowPoleturners = 1;
             allowBlacksmiths = 1;
@@ -172,17 +174,17 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_OXTETHER] = true;
         }
 
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_PITCHRIG] = !allowPitchRigs;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_POLETURNER] = !allowPoleturners;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_FLETCHER] = !allowFletchers;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_ARMOURER] = !allowArmourers;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_BLACKSMITH] = !allowBlacksmiths;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_TANNER] = !allowTanners;
         DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_WOODCUTTERSHUT] = !allowWoodcutters;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_IRONMINE] = !allowIronMines;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_PITCHRIG] = !allowPitchRigs;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_FLETCHER] = !allowFletchers;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_POLETURNER] = !allowPoleturners;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_BLACKSMITH] = !allowBlacksmiths;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_ARMOURER] = !allowArmourers;
+        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_TANNER] = !allowTanners;
         DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_BAKERY] = !allowBakeries;
         DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_BREWERY] = !allowBreweries;
         DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_INN] = !allowInns;
-        DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_IRONMINE] = !allowIronMines;
 
         if (allowFarms) {
             DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_WHEATFARM] = false;

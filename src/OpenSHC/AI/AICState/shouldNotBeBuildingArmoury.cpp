@@ -7,7 +7,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004ECA60
-    BOOLEnum AICState::shouldNotBeBuildingArmoury(PlayerID playerID, Commands::MappersEnum commandBuildingType)
+    BOOLEnum AICState::shouldNotBeBuildingArmoury(int playerID, Commands::MappersEnum commandBuildingType)
     {
         if (commandBuildingType != Commands::M_MAPPER_ARMOURY) {
             return FALSE;
