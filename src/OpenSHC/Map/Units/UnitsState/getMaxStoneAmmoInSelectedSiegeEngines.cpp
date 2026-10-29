@@ -15,6 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00536370
         int UnitsState::getMaxStoneAmmoInSelectedSiegeEngines()
         {
+            int _currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             int _maxStoneAmmunition = 0;
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
@@ -27,15 +28,14 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayer) {
                     return 0;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_S_CATAPULT
                     && this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_S_TREBUCHET) {
                     continue;
                 }
-                if (_maxStoneAmmunition < this->units[DAT_CurrentUnitSlotID::instance].stoneAmmunition) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].stoneAmmunition > _maxStoneAmmunition) {
                     _maxStoneAmmunition = this->units[DAT_CurrentUnitSlotID::instance].stoneAmmunition;
                 }
             }

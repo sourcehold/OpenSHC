@@ -13,12 +13,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00532F80
         int UnitsState::computeDistanceToNearestEnemyForLegacyMissions(int unitID)
         {
-            int _owner = this->units[unitID].owner;
-            int _unitMicroY = this->units[unitID].microYPosition;
-            int _unitMicroX = this->units[unitID].microXPosition;
             /* kept in step with the result but never read back */
             int _closestWithinThousand = 1000;
+            int _owner = this->units[unitID].owner;
             int _closestDistance = 10000;
+            int _unitMicroX = this->units[unitID].microXPosition;
+            int _unitMicroY = this->units[unitID].microYPosition;
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 return 10000;
             }
@@ -27,25 +27,25 @@ namespace Map {
             }
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {
                 int _enemyUnitID = DAT_GameState::instance.playerDataArray[_owner].enemyIDArray[i];
-                if (this->units[_enemyUnitID].uid
+                if (this->units[_enemyUnitID].climbDataRelated
                     != DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[_owner][i]) {
                     continue;
                 }
+                int _enemyMicroX = this->units[_enemyUnitID].microXPosition;
                 int _distanceX;
-                if (_unitMicroX > this->units[_enemyUnitID].microXPosition) {
-                    _distanceX = _unitMicroX - this->units[_enemyUnitID].microXPosition;
+                if (_unitMicroX > _enemyMicroX) {
+                    _distanceX = _unitMicroX - _enemyMicroX;
                 } else {
-                    _distanceX = this->units[_enemyUnitID].microXPosition - _unitMicroX;
+                    _distanceX = _enemyMicroX - _unitMicroX;
                 }
-                int _distance;
-                if (_unitMicroY > this->units[_enemyUnitID].microYPosition) {
-                    _distance = _unitMicroY - this->units[_enemyUnitID].microYPosition;
+                int _enemyMicroY = this->units[_enemyUnitID].microYPosition;
+                int _distanceY;
+                if (_unitMicroY > _enemyMicroY) {
+                    _distanceY = _unitMicroY - _enemyMicroY;
                 } else {
-                    _distance = this->units[_enemyUnitID].microYPosition - _unitMicroY;
+                    _distanceY = _enemyMicroY - _unitMicroY;
                 }
-                if (_distanceX >= _distance) {
-                    _distance = _distanceX;
-                }
+                int _distance = _distanceX < _distanceY ? _distanceY : _distanceX;
                 if (_distance < _closestWithinThousand) {
                     _closestWithinThousand = _distance;
                 }

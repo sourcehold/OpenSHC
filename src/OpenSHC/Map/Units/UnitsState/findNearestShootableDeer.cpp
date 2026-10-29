@@ -19,10 +19,11 @@ namespace Map {
         int UnitsState::findNearestShootableDeer(int unitID)
         {
             int _bestUnitID = 0;
+            int _shooterX = this->units[unitID].x;
+            int _shooterY = this->units[unitID].y;
             int _bestDistance = 100000;
-            int _x = this->units[unitID].x;
-            int _y = this->units[unitID].y;
-            for (int _minimumDistance = 20;; _minimumDistance = 5) {
+            int _minimumDistance = 20;
+            while (true) {
                 for (int _deerUnitID = 1; _deerUnitID < (int)this->maxUnitCount; ++_deerUnitID) {
                     if (this->units[_deerUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
@@ -39,7 +40,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(
-                        _x, _y, this->units[_deerUnitID].x, this->units[_deerUnitID].y);
+                        _shooterX, _shooterY, this->units[_deerUnitID].x, this->units[_deerUnitID].y);
                     if (DAT_DirectionAlgorithmState::instance.distanceHigh <= _minimumDistance) {
                         continue;
                     }
@@ -51,7 +52,7 @@ namespace Map {
                             this->units[_deerUnitID].microXPosition, this->units[_deerUnitID].microYPosition,
                             this->units[_deerUnitID].terrainOrClimbHeight + 0x1a
                                 + this->units[_deerUnitID].buildingHeight);
-                        if (_shotResult - 1U > 0x1af) {
+                        if ((uint)(_shotResult + -1) > 0x1af) {
                             continue;
                         }
                     }
@@ -60,15 +61,12 @@ namespace Map {
                         _bestUnitID = _deerUnitID;
                     }
                 }
-                if (_bestUnitID != 0) {
+                if (_bestUnitID != 0 || _minimumDistance != 20) {
                     return _bestUnitID;
                 }
-                if (_minimumDistance != 20) {
-                    return 0;
-                }
+                _minimumDistance = 5;
             }
         }
-
     }
 }
 }

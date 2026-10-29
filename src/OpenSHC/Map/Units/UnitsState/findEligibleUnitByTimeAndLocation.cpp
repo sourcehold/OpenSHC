@@ -35,14 +35,18 @@ namespace Map {
                 if (_candidateUnitID == unitID) {
                     continue;
                 }
-                if (zero2 == 1 || zero2 == 10) {
-                    if (this->units[_candidateUnitID].field131_0x2ac != (short)zero2) {
+                if (zero2 == 1) {
+                    if (this->units[_candidateUnitID].field131_0x2ac != 1) {
+                        continue;
+                    }
+                } else if (zero2 == 10) {
+                    if (this->units[_candidateUnitID].field131_0x2ac != 10) {
                         continue;
                     }
                 }
-                /* DAT_MatchTime - SEC_Units[_candidateUnitID].someMatchTimeVariable */
+                // signed shift in the original (0x00534636 sar)
                 int _score
-                    = (DAT_GameCore::instance.mapTimeInTicks - this->units[_candidateUnitID].someMatchTimeVariable)
+                    = (int)(DAT_GameCore::instance.mapTimeInTicks - this->units[_candidateUnitID].someMatchTimeVariable)
                     >> 5;
                 if (zero1 != 0) {
                     int _distance = MACRO_CALL_MEMBER(
@@ -51,16 +55,16 @@ namespace Map {
                         unitXPosition, unitYPosition, this->units[_candidateUnitID].x, this->units[_candidateUnitID].y);
                     _score = _score - (_distance / 4);
                 }
-                if (_bestScore < _score) {
+                if (_score > _bestScore) {
                     _bestScore = _score;
                     _bestUnitID = _candidateUnitID;
                 }
             }
-            if (_bestUnitID == 0) {
-                return 0;
+            if (_bestUnitID != 0) {
+                this->units[_bestUnitID].someMatchTimeVariable = DAT_GameCore::instance.mapTimeInTicks;
+                return _bestUnitID;
             }
-            this->units[_bestUnitID].someMatchTimeVariable = DAT_GameCore::instance.mapTimeInTicks;
-            return _bestUnitID;
+            return 0;
         }
 
     }

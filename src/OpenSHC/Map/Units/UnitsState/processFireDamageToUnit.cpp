@@ -27,41 +27,38 @@ namespace Map {
             if (this->units[unitID].dying != 0) {
                 return 0;
             }
-            UnitTypeShort _unitType = this->units[unitID].unitType;
-            uint _damage;
-            if (_unitType == OpenSHC::Map::Units::UT_LORD) {
-                _damage = 25;
-            } else if (_unitType == OpenSHC::Map::Units::UT_FIREFIGHTER) {
-                _damage = 1;
-            } else if (_unitType == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
-                _damage = 10;
+            UnitTypeShort unitType = this->units[unitID].unitType;
+            int damage;
+            if (unitType == OpenSHC::Map::Units::UT_LORD) {
+                damage = 25;
+            } else if (unitType == OpenSHC::Map::Units::UT_FIREFIGHTER) {
+                damage = 1;
+            } else if (unitType == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+                damage = 10;
             } else {
-                _damage = 100;
+                damage = 100;
             }
             if (halfTheDamage != 0) {
-                _damage = _damage / 2;
+                damage = damage / 2;
             }
             if (playerID != 0 && playerID != this->units[unitID].owner) {
                 this->units[unitID].lastEncounteredEnemyPlayerID = (short)playerID;
                 this->units[unitID].lastEncounteredEnemyUnitIDUnk = 0;
             }
-            this->units[unitID].health = this->units[unitID].health - _damage;
+            this->units[unitID].health -= damage;
             if (this->units[unitID].health <= 0) {
                 this->units[unitID].health = 0;
             }
-            if (this->units[unitID].maxHealth == 0) {
-                this->units[unitID].healthPercentage = 100;
-            } else {
-                this->units[unitID].healthPercentage
-                    = (short)((this->units[unitID].health * 100) / this->units[unitID].maxHealth);
-            }
+            this->units[unitID].healthPercentage = this->units[unitID].maxHealth == 0
+                ? 100
+                : this->units[unitID].health * 100 / this->units[unitID].maxHealth;
             this->units[unitID].healthbar = this->units[unitID].healthPercentage / 10;
             if (this->units[unitID].health > 0) {
                 return 1;
             }
             this->units[unitID].animationCycleNumber = 0;
             this->units[unitID].field323_0x442 = 1;
-            if (_unitType == OpenSHC::Map::Units::UT_LORD) {
+            if (unitType == OpenSHC::Map::Units::UT_LORD) {
                 this->units[unitID].dying = 1;
                 this->units[unitID].tunnelerFinishedDigging = 1;
                 this->units[unitID].health = 0;
@@ -71,7 +68,8 @@ namespace Map {
             }
             this->units[unitID].logicalState = OpenSHC::Map::Units::ULS_TRANSITIONING;
             this->units[unitID].state_2 = 0;
-            switch (_unitType) {
+            int const unitTypeID = unitType;
+            switch (unitTypeID) {
             case OpenSHC::Map::Units::UT_ANTELOPESHDEER:
                 if (this->units[unitID].antelopeBasedRngValue == 2) {
                     this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL;
@@ -81,18 +79,18 @@ namespace Map {
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
                 this->units[unitID].state_2 = 1;
                 break;
+            case OpenSHC::Map::Units::UT_RABBIT:
+            case OpenSHC::Map::Units::UT_HUNTERDOG:
+            case OpenSHC::Map::Units::UT_CHICKEN:
+                this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL;
+                this->units[unitID].state_2 = 1;
+                break;
             case OpenSHC::Map::Units::UT_QUARRYOX:
             case OpenSHC::Map::Units::UT_LIONSHWOLF:
             case OpenSHC::Map::Units::UT_CAMELSHBEAR:
             case OpenSHC::Map::Units::UT_COW:
             case OpenSHC::Map::Units::UT_CAGEDOG:
-                this->units[unitID].state_2 = 1;
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
-                break;
-            case OpenSHC::Map::Units::UT_RABBIT:
-            case OpenSHC::Map::Units::UT_HUNTERDOG:
-            case OpenSHC::Map::Units::UT_CHICKEN:
-                this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL;
                 this->units[unitID].state_2 = 1;
                 break;
             default:
@@ -102,17 +100,17 @@ namespace Map {
                 return 1;
             }
             /* if a male */
-            if (_unitType != OpenSHC::Map::Units::UT_BREWER && _unitType != OpenSHC::Map::Units::UT_TANNER
-                && _unitType != OpenSHC::Map::Units::UT_LADY && _unitType != OpenSHC::Map::Units::UT_MOTHER
-                && (_unitType != OpenSHC::Map::Units::UT_CHILD || this->units[unitID].spriteID != 0x81)) {
+            if (unitTypeID != OpenSHC::Map::Units::UT_BREWER && unitTypeID != OpenSHC::Map::Units::UT_TANNER
+                && unitTypeID != OpenSHC::Map::Units::UT_LADY && unitTypeID != OpenSHC::Map::Units::UT_MOTHER
+                && (unitTypeID != OpenSHC::Map::Units::UT_CHILD || this->units[unitID].spriteID != 0x81)) {
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                if (((byte)SEC_RNG::instance.currentNumber1 & 1) == 0) {
+                if ((SEC_RNG::instance.currentNumber1 & 1) != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_MAN_BURN);
+                } else {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_MAN_BURN2);
-                    return 1;
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_MAN_BURN);
                 return 1;
             }
             /* if female */

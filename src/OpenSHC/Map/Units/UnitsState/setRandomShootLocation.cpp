@@ -16,20 +16,19 @@ namespace Map {
         void UnitsState::setRandomShootLocation(int unitID, int microX, int microY, int z)
         {
             int _distanceX;
-            if (this->units[unitID].microXPosition < microX) {
+            if (microX > this->units[unitID].microXPosition) {
                 _distanceX = microX - this->units[unitID].microXPosition;
             } else {
                 _distanceX = this->units[unitID].microXPosition - microX;
             }
-            int _distance;
-            if (this->units[unitID].microYPosition < microY) {
-                _distance = microY - this->units[unitID].microYPosition;
+            int _distanceY;
+            if (microY > this->units[unitID].microYPosition) {
+                _distanceY = microY - this->units[unitID].microYPosition;
             } else {
-                _distance = this->units[unitID].microYPosition - microY;
+                _distanceY = this->units[unitID].microYPosition - microY;
             }
-            if (_distance <= _distanceX) {
-                _distance = _distanceX;
-            }
+            int _distance = _distanceX < _distanceY ? _distanceY : _distanceX;
+
             int _rng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             int _spreadAlong;
@@ -73,11 +72,11 @@ namespace Map {
             } else if (z > 250) {
                 z = 250;
             }
-            if (_distance / 2 < _spreadAlong) {
+            if (_spreadAlong > _distance / 2) {
                 _spreadAlong = _spreadAlong / 2;
                 _spreadAcross = _spreadAcross / 2;
             }
-            if (_distance < _spreadAlong) {
+            if (_spreadAlong > _distance) {
                 _spreadAlong = -_spreadAlong;
             }
             switch (this->units[unitID].facingDirection) {
@@ -85,33 +84,34 @@ namespace Map {
                 microY = microY + _spreadAlong;
                 microX = microX + _spreadAcross;
                 break;
-            case 1:
-                microX = microX + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
-                microY = microY + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
+            case 4:
+                microY = microY - _spreadAlong;
+                microX = microX + _spreadAcross;
                 break;
             case 2:
                 microX = microX - _spreadAlong;
                 microY = microY + _spreadAcross;
                 break;
-            case 3:
-                microX = microX + (-((_spreadAlong * 3) / 4) - (_spreadAcross * 3) / 4);
-                microY = microY + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
-                break;
-            case 4:
-                microY = microY - _spreadAlong;
-                microX = microX + _spreadAcross;
-                break;
-            case 5:
-                microY = microY + (-((_spreadAcross * 3) / 4) - (_spreadAlong * 3) / 4);
-                microX = microX + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
-                break;
             case 6:
                 microX = microX + _spreadAlong;
                 microY = microY + _spreadAcross;
                 break;
+            case 1:
+                microX = microX + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
+                microY = microY + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
+                break;
             case 7:
-                microY = microY + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
                 microX = microX + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
+                microY = microY + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
+                break;
+            case 3:
+                microX = microX + (-((_spreadAlong * 3) / 4) - (_spreadAcross * 3) / 4);
+                microY = microY + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
+                break;
+            case 5:
+                microX = microX + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
+                microY = microY + (-((_spreadAcross * 3) / 4) - (_spreadAlong * 3) / 4);
+                break;
             }
             this->units[unitID].shootTargetZ = (short)z;
             this->units[unitID].shootTargetMicroY = (short)microY;

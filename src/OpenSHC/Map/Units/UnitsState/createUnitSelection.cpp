@@ -23,9 +23,9 @@ namespace Map {
         int UnitsState::createUnitSelection()
         {
             /* clear selected units */
+            int _selectedCount = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 400, '\0', this->selectedUnitsBitFlags);
-            int _selectedCount = 0;
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {

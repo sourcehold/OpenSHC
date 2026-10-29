@@ -15,6 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00536690
         uint UnitsState::getFirstSelectedSiegeEngineID()
         {
+            int _currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
@@ -26,8 +27,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayer) {
                     return 0;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {

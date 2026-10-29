@@ -66,7 +66,7 @@ namespace Map {
                     = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
                         DAT_UnitsState::ptr)(_siegeEngineUnitID);
                 if (_remainingEngineers > 0) {
-                    if (this->units[_siegeEngineUnitID]
+                    if (DAT_UnitsState::instance.units[_siegeEngineUnitID]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                             == 0
                         || _remainingEngineers > 3) {
@@ -89,8 +89,9 @@ namespace Map {
                     || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                     if ((DAT_UnitsState::instance.units[_siegeEngineUnitID].unitType
                                 == OpenSHC::Map::Units::UT_S_CATAPULT
-                            || this->units[_siegeEngineUnitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)
-                        && this->units[_siegeEngineUnitID].stoneAmmunition <= 0) {
+                            || DAT_UnitsState::instance.units[_siegeEngineUnitID].unitType
+                                == OpenSHC::Map::Units::UT_S_TREBUCHET)
+                        && DAT_UnitsState::instance.units[_siegeEngineUnitID].stoneAmmunition < 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
                             OpenSHC::Audio::SFX::SEID_RESOURCE_NEED25);
                         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
