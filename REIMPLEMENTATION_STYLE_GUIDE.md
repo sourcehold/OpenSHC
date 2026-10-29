@@ -60,7 +60,7 @@ return this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b];
 
 Generally **neutral** but watch out for a return statement including arithmetic that is meant to lead to a 1 or 0.
 
-## 3. No cast that only repeats the destination type in field assignments
+## 3. Remove casts that are non-destructive and casts that are redundant
 
 ```cpp
 short first500BuildingsPerPlayer[9][500];
@@ -70,11 +70,16 @@ this->first500BuildingsPerPlayer[owner][idx] = (short)buildingID;
 
 // yes
 this->first500BuildingsPerPlayer[owner][idx] = buildingID;
+
+// no
+int x = (short) this->first500BuildingsPerPlayer[owner][idx];
+
+// yes
+int x = this->first500BuildingsPerPlayer[owner][idx];
 ```
 
-**neutral**, the cast is already implied by the field, so the cast doesn't change anything if the cast and field type are the same.
-Check both: a cast that without it would implicitly change a field type should remain.
-The cases of a *condition* or an *argument* is not covered by this rule, because there the conversion is the operation.
+**neutral**, if the cast type is the same as the field type and if a smaller type (e.g. short) is assigned to a larger type (e.g. int).
+In case of uncertainty, check the matching.
 
 ## 4. `sizeof` instead of a byte count — but only when it is provably the same
 
@@ -329,7 +334,8 @@ for (int j = 0; j < candidateCount; j++) {
 ## 18. Use the name, not the number
 
 The project already has names for most numbers. Search before you write a number. Some
-numbers appear multiple times across enums, choose the right enum.
+numbers appear multiple times across enums, choose the right enum. If you can't settle on an enum number,
+add a comment and don't write magic numbers in hexadecimals, but in decimals.
 
 ```cpp
 // no
@@ -361,10 +367,10 @@ strcpy(..., MACRO_CALL_MEMBER(...)(DE::SHCDE::TEXT_ALLIES2, 1));
 
 **neutral**
 
-## 20. `continue` keeps a loop flat
+## 20. Keep nesting low in function bodies and loops
 
-When the rest of the loop should only run in some cases, skip the other cases with `continue`. Do not put
-the rest of the loop inside an `if`. This is the same idea as an early `return`, inside a loop.
+Using `continue` keeps a loop flat and are preferred if the match is not affected.
+Prefer early returns in function bodies if execution flow and match is not affected.
 
 ```cpp
 // no — the body moves one step to the right, and keeps moving
