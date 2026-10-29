@@ -44,11 +44,11 @@ namespace Map {
         int buildingOrientation, uint high)
     {
         int index = 0;
-        int climbDataRelated = DAT_GameCore::instance.uniqueGameObjectTracker;
+        int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
         int quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y, high,
             (BuildingType)(int)(short)buildingType, buildingSize, playerID, buildingOrientation);
         this->placedBuildingID = quarryID;
-        DAT_BuildingsState::instance.buildings[quarryID].uidWhenPlaced = climbDataRelated;
+        DAT_BuildingsState::instance.buildings[quarryID].uidWhenPlaced = uid;
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, buildingSize);
@@ -101,7 +101,7 @@ namespace Map {
         int pileID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y,
             high, OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE, 2, playerID, buildingOrientation);
         MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::incrementStructureHeatMapTile, DAT_AIVState::ptr)(x, y);
-        DAT_BuildingsState::instance.buildings[pileID].uidWhenPlaced = climbDataRelated;
+        DAT_BuildingsState::instance.buildings[pileID].uidWhenPlaced = uid;
         DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID = (short)pileID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 2);
