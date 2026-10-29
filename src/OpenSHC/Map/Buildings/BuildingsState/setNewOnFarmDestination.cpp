@@ -10,43 +10,48 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
+        /* inlined copy of ViewportRenderState::xyAreValid */
+        static inline int xyAreValid(uint x, uint y)
+        {
+            return x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0;
+        }
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0040EA00
         undefined4 BuildingsState::setNewOnFarmDestination(int buildingID)
         {
             int x = this->buildings[buildingID].buildingEntryX;
             int y = this->buildings[buildingID].buildingEntryY;
-            if ((uint)x > 399 || (uint)y > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (!xyAreValid(x, y)) {
                 return 0;
             }
 
-            // Look for a field tile that needs work and that can be reached from the entrance of the farm
+            // Look for a field tileUnk that needs work and that can be reached from the entrance of the farm
             int entryConnection
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
-            int direction = (*(short*)this->buildings[buildingID].padding_0x26e == 0x51) * 2 + 2;
+            int direction = *(short*)this->buildings[buildingID].padding_0x26e == 0x51 ? 4 : 2;
             for (int i = 0; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRefs[0])[i];
-                int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                int stage = (char)DAT_TileMapState::instance.DamageLayer[tile];
-                DAT_BuildingsState::instance.farmerDestinationTile = tile;
-                int height = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(tile);
+                int tileUnk = this->buildings[buildingID].tileRefs[i];
+                int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
+                int stage = (char)DAT_TileMapState::instance.DamageLayer[tileUnk];
+                DAT_BuildingsState::instance.farmerDestinationTile = tileUnk;
+                int high = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(tileUnk);
                 if (*(short*)&this->buildings[buildingID].farmGrowState == 5) {
                     if (stage >= 14 && stage < 28) {
                         for (int n = 0; n < 4; ++n) {
-                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
-                                      .int_.xOffset;
-                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
-                                      .int_.yOffset;
+                            int offsetX
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset;
+                            int offsetY
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
                             int neighbour
-                                = DAT_TileMapState::instance.directionTranslationMatrix[tileY][direction] + tile;
+                                = DAT_TileMapState::instance.directionTranslationMatrix[tileY][direction] + tileUnk;
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX = offsetX;
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY = offsetY;
                             if ((short)DAT_TileMapState::instance.PathConnectionLayer[neighbour] == entryConnection
                                 && abs((int)MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
                                            DAT_TileMapState::ptr)(neighbour)
-                                       - height)
+                                       - high)
                                     < 16) {
                                 return 1;
                             }
@@ -57,20 +62,20 @@ namespace Map {
                         }
                     }
                 } else if (*(short*)&this->buildings[buildingID].farmGrowState == 3) {
-                    if ((uint)stage < 2) {
+                    if ((uint)stage <= 1) {
                         for (int n = 0; n < 4; ++n) {
-                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
-                                      .int_.xOffset;
-                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
-                                      .int_.yOffset;
+                            int offsetX
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset;
+                            int offsetY
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
                             int neighbour
-                                = DAT_TileMapState::instance.directionTranslationMatrix[tileY][direction] + tile;
+                                = DAT_TileMapState::instance.directionTranslationMatrix[tileY][direction] + tileUnk;
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX = offsetX;
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY = offsetY;
                             if ((short)DAT_TileMapState::instance.PathConnectionLayer[neighbour] == entryConnection
                                 && abs((int)MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
                                            DAT_TileMapState::ptr)(neighbour)
-                                       - height)
+                                       - high)
                                     < 16) {
                                 return 1;
                             }

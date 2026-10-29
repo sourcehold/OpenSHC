@@ -18,16 +18,16 @@ namespace Map {
                 availablePeasants = 23;
             }
 
-            int buildingY = (short)DAT_BuildingsState::instance.buildings[campfireID].y;
-            int buildingX = (short)DAT_BuildingsState::instance.buildings[campfireID].x;
-            int tile = (&DAT_BuildingsState::instance.buildings[campfireID].tileRefs[0])[availablePeasants];
-            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-            int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            int buildingX = (short)DAT_BuildingsState::instance.buildings[campfireID].x + 3;
+            int buildingY = (short)DAT_BuildingsState::instance.buildings[campfireID].y + 3;
+            int tileUnk = DAT_BuildingsState::instance.buildings[campfireID].tileRefs[availablePeasants];
+            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
+            int x = tileUnk - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             this->campfireSpotY = y;
             this->campfireSpotX = x;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
-                DAT_DirectionAlgorithmState::ptr)(x, y, buildingX + 3, buildingY + 3);
+                DAT_DirectionAlgorithmState::ptr)(x, y, buildingX, buildingY);
             this->campfireSpotOrientation = DAT_DirectionAlgorithmState::instance.orientation;
             return 1;
         }

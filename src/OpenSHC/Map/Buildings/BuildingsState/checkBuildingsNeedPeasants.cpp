@@ -25,26 +25,24 @@ namespace Map {
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
             this->DAT_CountOfBuildingsNeedPeasants = 0;
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID
-                    || this->buildings[i].currentlyNeededEmployeeCount <= 0
-                    || this->buildings[i].buildingType == BT_MERCENARYPOST
-                    || this->buildings[i].buildingType == BT_BARRACKS) {
-                    continue;
-                }
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Buildings::BuildingsState_Func::buildingIsAccessible, DAT_BuildingsState::ptr)(i, 0);
-                if (MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                        DAT_PathFindingState::ptr)(this->buildings[i].owner,
-                        (short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_ViewportRenderState::instance
-                                                     .translationMatrix[this->buildings[i].buildingEntryY]
-                                                     .addXgetTile
-                                + this->buildings[i].buildingEntryX],
-                        campgroundArea, 0)
-                    != 0) {
-                    this->DAT_BuildingIDsNeedPeasantsQueue[this->DAT_CountOfBuildingsNeedPeasants] = i;
-                    ++this->DAT_CountOfBuildingsNeedPeasants;
+                if (this->buildings[i].logicalState == BLS_NORMAL && this->buildings[i].owner == playerID
+                    && this->buildings[i].currentlyNeededEmployeeCount > 0
+                    && this->buildings[i].buildingType != BT_MERCENARYPOST
+                    && this->buildings[i].buildingType != BT_BARRACKS) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingIsAccessible,
+                        DAT_BuildingsState::ptr)(i, 0);
+                    int area = (short)DAT_TileMapState::instance
+                                   .PathConnectionLayer[DAT_ViewportRenderState::instance
+                                                            .translationMatrix[this->buildings[i].buildingEntryY]
+                                                            .addXgetTile
+                                       + this->buildings[i].buildingEntryX];
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                              calculateCanPlayerUnitsNavigateToAreaFromArea,
+                            DAT_PathFindingState::ptr)(this->buildings[i].owner, area, campgroundArea, 0)
+                        != 0) {
+                        this->DAT_BuildingIDsNeedPeasantsQueue[this->DAT_CountOfBuildingsNeedPeasants] = i;
+                        ++this->DAT_CountOfBuildingsNeedPeasants;
+                    }
                 }
             }
         }

@@ -53,7 +53,15 @@ namespace Map {
                 }
                 int stored = this->buildings[i].resources[resourceType];
                 found = 1;
-                if (stored < amount) {
+                if (stored >= amount) {
+                    if (param_4 != 0) {
+                        this->buildings[i].someResourceNumber = amount;
+                    } else {
+                        this->buildings[i].resources[resourceType] = stored - amount;
+                        DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= amount;
+                    }
+                    amount = 0;
+                } else {
                     amount -= stored;
                     if (param_4 != 0) {
                         this->buildings[i].someResourceNumber = stored;
@@ -61,14 +69,6 @@ namespace Map {
                         this->buildings[i].resources[resourceType] = 0;
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= stored;
                     }
-                } else {
-                    if (param_4 == 0) {
-                        this->buildings[i].resources[resourceType] = stored - amount;
-                        DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= amount;
-                    } else {
-                        this->buildings[i].someResourceNumber = amount;
-                    }
-                    amount = 0;
                 }
                 if (param_4 == 0) {
                     MACRO_CALL_MEMBER(

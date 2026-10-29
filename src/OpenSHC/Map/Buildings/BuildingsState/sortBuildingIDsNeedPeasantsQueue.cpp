@@ -29,9 +29,9 @@ namespace Map {
                     short previousIdle = this->buildings[previous].idleTimerUnk;
                     if (previousIdle > currentIdle
                         || (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingPriority, this)(
-                                this->buildings[previous].buildingType, hasBurningBuilding)
-                                > MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingPriority,
-                                    this)(this->buildings[current].buildingType, hasBurningBuilding)
+                                this->buildings[current].buildingType, hasBurningBuilding)
+                                < MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingPriority,
+                                    this)(this->buildings[previous].buildingType, hasBurningBuilding)
                             && currentIdle <= previousIdle)) {
                         swapped = 1;
                         current = (short)this->DAT_BuildingIDsNeedPeasantsQueue[i + 1];

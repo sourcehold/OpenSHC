@@ -18,8 +18,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D120
         void BuildingsState::setupBarracksCampgroundPositions(int buildingID)
         {
-            // Matching note: The original unrolls the three formation parts, reproduced here. The
-            // remaining differences are register allocation and the pointer based inner loop of the original.
+            // Matching note: The original writes out the three formation parts, reproduced here. The inner loops end on
+            // != 24, which keeps MSVC from unrolling them.
             // buildingID is actually the playerID
             int paradeGround2 = 0;
             int paradeGround3 = 0;
@@ -33,7 +33,8 @@ namespace Map {
             }
 
             // Find the three parade grounds of the barracks
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
+            int i;
+            for (i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
                     && this->buildings[i].owner == buildingID
                     && (this->buildings[i].buildingType == BT_PARADEGROUND2
@@ -58,90 +59,84 @@ namespace Map {
 
             // Every formation uses 24 positions on each of the three parade grounds
             DAT_GameState::instance.playerDataArray[buildingID].barracksParadegroundLocationsTotal = 72;
-            // Note: not initialised in the original, an unknown part type keeps the previous parade ground
-            int paradeGround;
+            // The original reuses the loop index as the parade ground: an unknown part type keeps the previous value
             int x;
             int y;
             for (int formation = 0; formation < 6; ++formation) {
+                int layoutRow = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_1[formation];
                 // The three parts of the formation are written out in the original
                 if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0] == 0) {
-                    paradeGround = paradeGround2;
+                    i = paradeGround2;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0]
                     == 1) {
-                    paradeGround = paradeGround3;
+                    i = paradeGround3;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0]
                     == 2) {
-                    paradeGround = paradeGround4;
+                    i = paradeGround4;
                 }
-                x = (short)this->buildings[paradeGround].x;
-                y = (short)this->buildings[paradeGround].y;
-                for (int k = 0; k < 24; ++k) {
+                x = (short)this->buildings[i].x;
+                y = (short)this->buildings[i].y;
+                for (int k = 0; k != 24; ++k) {
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][0 + k]
                         .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .x
                         + x;
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][0 + k]
                         .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .y
                         + y;
                 }
                 if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1] == 0) {
-                    paradeGround = paradeGround2;
+                    i = paradeGround2;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1]
                     == 1) {
-                    paradeGround = paradeGround3;
+                    i = paradeGround3;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1]
                     == 2) {
-                    paradeGround = paradeGround4;
+                    i = paradeGround4;
                 }
-                x = (short)this->buildings[paradeGround].x;
-                y = (short)this->buildings[paradeGround].y;
-                for (int k = 0; k < 24; ++k) {
+                x = (short)this->buildings[i].x;
+                y = (short)this->buildings[i].y;
+                for (int k = 0; k != 24; ++k) {
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][24 + k]
                         .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .x
                         + x;
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][24 + k]
                         .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .y
                         + y;
                 }
                 if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2] == 0) {
-                    paradeGround = paradeGround2;
+                    i = paradeGround2;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2]
                     == 1) {
-                    paradeGround = paradeGround3;
+                    i = paradeGround3;
                 } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2]
                     == 2) {
-                    paradeGround = paradeGround4;
+                    i = paradeGround4;
                 }
-                x = (short)this->buildings[paradeGround].x;
-                y = (short)this->buildings[paradeGround].y;
-                for (int k = 0; k < 24; ++k) {
+                x = (short)this->buildings[i].x;
+                y = (short)this->buildings[i].y;
+                for (int k = 0; k != 24; ++k) {
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][48 + k]
                         .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .x
                         + x;
                     DAT_GameState::instance.playerDataArray[buildingID]
                         .barracksParadegroundLocations[formation][48 + k]
                         .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[DAT_BuildingDefinedData::instance
-                                         .PlayerDataUnknownStructureRelatedArray_1[formation]][k]
+                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
                                  .y
                         + y;
                 }

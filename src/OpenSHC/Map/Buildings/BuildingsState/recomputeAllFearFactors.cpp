@@ -59,11 +59,14 @@ namespace Map {
                     || this->buildings[i].buildingType == BT_STATUE || this->buildings[i].buildingType == BT_SHRINE
                     || this->buildings[i].buildingType == BT_DANCINGBEAR) {
                     goodOrBad = 1;
+                } else {
+                    continue;
                 }
+                int const owner = this->buildings[i].owner;
                 if (goodOrBad < 0) {
-                    ++DAT_GameState::instance.playerDataArray[this->buildings[i].owner].badStuffCount;
+                    ++DAT_GameState::instance.playerDataArray[owner].badStuffCount;
                 } else if (goodOrBad > 0) {
-                    ++DAT_GameState::instance.playerDataArray[this->buildings[i].owner].goodStuffCount;
+                    ++DAT_GameState::instance.playerDataArray[owner].goodStuffCount;
                 }
             }
 
@@ -96,7 +99,7 @@ namespace Map {
                 // Track the extremes for the final statistics while the lord is alive
                 int lordID = DAT_GameState::instance.playerDataArray[p].lordID;
                 if (lordID != 0
-                    && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].uid
+                    && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].climbDataRelated
                     && DAT_UnitsState::instance.units[lordID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
                     int level = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
                     if (level > 0) {
