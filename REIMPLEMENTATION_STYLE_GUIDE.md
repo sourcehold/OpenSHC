@@ -1,24 +1,21 @@
 # Reimplementation Style Guide
 
-How a reimplemented `.cpp` should read once it matches. [AGENTS.md](AGENTS.md) covers the workflow and
-[IMPLEMENTATION_CHEAT_SHEET.md](IMPLEMENTATION_CHEAT_SHEET.md) the compiler patterns that decide *whether* a
-function can match at all; this file is about the source that is left behind afterwards.
+This guide describes how a reimplemented `.cpp` should read in terms of style. [AGENTS.md](AGENTS.md) covers the workflow and
+[IMPLEMENTATION_CHEAT_SHEET.md](IMPLEMENTATION_CHEAT_SHEET.md) how to improve match results. This file is about the source file that is created.
 
-Every rule below was applied across the 99 functions of `Game::GameStateStructures` and measured with
-`reccmp_report.py cmp`. Rules marked **neutral** cost nothing. Rules marked **measure** have been seen to
-change code generation, so apply them one file at a time and revert what drops.
+Rules marked **neutral** cost nothing. Rules marked **measure** have been seen to
+change code generation sometimes, so always check if match results drop after applying the style.
+Usually, following this style improves the match results.
 
 The overriding rule: **the match comes first.** A readability change that costs a percent is not a
-readability change, it is a regression. When a rule and the match disagree, keep the ugly form and leave a
-comment saying what was measured, so the next reader does not retry it. Decompiler output is a starting
-point, not a style.
+readability change, it is a regression in matching. When a rule and the match disagree, keep the ugly form and leave a
+comment saying what was measured, so the next reader does not retry it.
 
 ---
 
 ## 1. Drop the decompiler's trailing `return;`
 
-Ghidra ends every `void` function with an explicit `return;`. It carries no meaning as the last statement of
-a function body.
+Functions that return `void` don't need an explicit `return;` at the end of the function body.
 
 ```cpp
 // no
@@ -38,15 +35,16 @@ void GameStateStructures::activateTraderState()
 ```
 
 **neutral.** Only the *trailing* one goes. An early `return;` inside an `if`, a loop or a `switch` arm is
-control flow and must stay — and the cold-block placement note in AGENTS.md (`RET`) means moving one can
-cost double digits. A regex over `return;\n}` will eat early returns in nested blocks, because their closing
+control flow and must stay obviously. 
+
+> Note: A regex over `return;\n}` will eat early returns in nested blocks, because their closing
 brace looks the same; match on the function's own closing brace (`    }` at four spaces against a statement
 at eight) or do it by hand.
 
 ## 2. No cast on a `BOOLEnum` return
 
 `BOOLEnum` is `typedef BOOL`, which is `int`, so a comparison converts to it implicitly and yields exactly
-0 or 1. The decompiler's `(uint)` says nothing.
+0 or 1. The decompiler's `(uint)` says nothing generally speaking, but there are exceptions.
 
 ```cpp
 // no
@@ -56,7 +54,9 @@ return (uint)(this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b]
 return this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b];
 ```
 
-**neutral** across `getTeamsDifferent`, `isSameTeam`, `isFullIDEqualsToMinus1` and `isResourceTypeTradeable`.
+Generally **neutral**.
+
+## 2.5 Improve arithmetic
 
 Keep a cast that does arithmetic work. `if ((uint)(playerID - 1) > 7)` in `setLastEncounteredTroopUnit` is an
 unsigned range check that folds a `< 1` and a `> 8` into one `cmp`, which is what the original does; dropping
