@@ -31,14 +31,18 @@ namespace Map {
         if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber <= 500) {
             return;
         }
-        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
-            = OpenSHC::Map::Units::ULS_TRANSITIONING;
-        if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].fixedRng % 4 < 2) {
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
-                = OpenSHC::Map::Units::UT_S_CATAPULT;
-        } else {
+        // fixedRng % 4 >= 2 becomes a trebuchet, otherwise a catapult (the state store in both branches keeps the
+        // original's branches instead of a branchless select)
+        if ((DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].fixedRng & 2) != 0) {
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
+                = OpenSHC::Map::Units::ULS_TRANSITIONING;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
                 = OpenSHC::Map::Units::UT_S_TREBUCHET;
+        } else {
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
+                = OpenSHC::Map::Units::ULS_TRANSITIONING;
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
+                = OpenSHC::Map::Units::UT_S_CATAPULT;
         }
         // face the keep of player 1
         int keepY = DAT_GameState::instance.playerDataArray[1].keep.yEntry;
@@ -46,8 +50,7 @@ namespace Map {
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state_2 = 6;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
             DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x,
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y,
-            keepX, keepY);
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y, keepX, keepY);
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].facingDirection
             = DAT_DirectionAlgorithmState::instance.orientation;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field248_0x3bc = 0;

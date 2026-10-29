@@ -28,11 +28,11 @@ namespace Map {
         if (timeGetTime() - DWORD_00ee0fcc::instance <= 60000) {
             return;
         }
+        int currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         for (int i = 1; i < DAT_BuildingsState::instance.maxBuildingsCount; ++i) {
             if (DAT_BuildingsState::instance.buildings[i].logicalState == OpenSHC::Map::Buildings::BLS_NORMAL
                 && DAT_BuildingsState::instance.buildings[i].buildingType == OpenSHC::Map::Buildings::BT_GRANARY
-                && DAT_BuildingsState::instance.buildings[i].owner
-                    == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                && DAT_BuildingsState::instance.buildings[i].owner == currentPlayer) {
                 // "The granary is full my lord"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     s_placement_warning10_wav_005abbd8);

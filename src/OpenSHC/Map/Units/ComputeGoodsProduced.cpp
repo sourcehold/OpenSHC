@@ -31,8 +31,10 @@ namespace Map {
         // Fractional bonus goods are kept as a percentage and added next time.
         int bonusPercentage
             = (productivity - 100) * goodsCount * 100 / 100 + DAT_UnitsState::instance.units[unitID].productivityMod100;
-        DAT_UnitsState::instance.units[unitID].productivityDiv100 = (short)(bonusPercentage / 100);
-        DAT_UnitsState::instance.units[unitID].productivityMod100 = (short)(bonusPercentage % 100);
+        // held in a variable: the original computes quotient and remainder with one idiv
+        int divisor = 100;
+        DAT_UnitsState::instance.units[unitID].productivityDiv100 = (short)(bonusPercentage / divisor);
+        DAT_UnitsState::instance.units[unitID].productivityMod100 = (short)(bonusPercentage % divisor);
         return DAT_UnitsState::instance.units[unitID].productivityDiv100 + goodsCount;
     }
 
