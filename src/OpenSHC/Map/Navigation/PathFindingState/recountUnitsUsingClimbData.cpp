@@ -29,7 +29,7 @@ namespace Map {
                         if (DAT_UnitsState::instance.units[_unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                             *_ptrUnitID = 0;
                             *_ptrUnitUID = 0;
-                        } else if (DAT_UnitsState::instance.units[_unitID].climbDataRelated != _unitUID) {
+                        } else if (DAT_UnitsState::instance.units[_unitID].uid != _unitUID) {
                             *_ptrUnitID = 0;
                             *_ptrUnitUID = 0;
                         } else if (DAT_UnitsState::instance.units[_unitID].climbDataID != climbDataID) {
