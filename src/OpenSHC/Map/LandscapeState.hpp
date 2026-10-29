@@ -115,6 +115,7 @@ namespace Map {
             PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void updateTrees();
+        void ageFourFifthsOfGrowingTrees();
     };
 
     static_assert_cpp98_obj(sizeof(LandscapeState) == 440064, LandscapeState);
