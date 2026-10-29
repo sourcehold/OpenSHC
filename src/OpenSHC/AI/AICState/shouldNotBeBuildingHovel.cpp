@@ -7,7 +7,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB5B0
-    BOOLEnum AICState::shouldNotBeBuildingHovel(PlayerID playerID, Commands::MappersEnum param_2)
+    BOOLEnum AICState::shouldNotBeBuildingHovel(int playerID, Commands::MappersEnum param_2)
     {
         if (param_2 != Commands::M_MAPPER_HOVEL) {
             return FALSE;

@@ -10,7 +10,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB4D0
-    uint AICState::aiShouldBuildIronMine(PlayerID playerID)
+    uint AICState::aiShouldBuildIronMine(int playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)

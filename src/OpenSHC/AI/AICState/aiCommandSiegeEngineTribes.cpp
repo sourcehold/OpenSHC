@@ -79,7 +79,7 @@ namespace AI {
                     continue;
 
                 int targetTribeID = shieldTargetTribeIDs[shieldCount];
-                DAT_TribesState::instance.tribes[tribeID].field56_0x1f2 = targetTribeID;
+                DAT_TribesState::instance.tribes[tribeID].supportTribeID = targetTribeID;
                 DAT_TribesState::instance.tribes[tribeID].uid2 = DAT_TribesState::instance.tribes[targetTribeID].uid;
                 DAT_TribesState::instance.tribes[targetTribeID].tribeID = tribeID;
                 int targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;
