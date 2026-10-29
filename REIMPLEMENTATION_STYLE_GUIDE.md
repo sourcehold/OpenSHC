@@ -56,7 +56,7 @@ return this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b];
 
 Generally **neutral** but watch out for a return statement including arithmetic that is meant to lead to a 1 or 0.
 
-## 3. No cast that only repeats the destination type
+## 3. No cast that only repeats the destination type in field assignments
 
 ```cpp
 short first500BuildingsPerPlayer[9][500];
@@ -68,9 +68,9 @@ this->first500BuildingsPerPlayer[owner][idx] = (short)buildingID;
 this->first500BuildingsPerPlayer[owner][idx] = buildingID;
 ```
 
-**neutral**, and silent at `/W3` — the narrowing is already implied by the field, so the cast buys neither
-code nor a warning. Check both: a cast that silences a real `/W3` warning earns its place, and a cast in a
-*condition* or an *argument* is not covered by this rule, because there the conversion is the operation.
+**neutral**, the cast is already implied by the field, so the cast doesn't change anything if the cast and field type are the same.
+Check both: a cast that without it would implicitly change a field type should remain.
+The cases of a *condition* or an *argument* is not covered by this rule, because there the conversion is the operation.
 
 ## 4. `sizeof` instead of a byte count — but only when it is provably the same
 
@@ -82,11 +82,11 @@ fillMemory_ByteValue(14836, '\0', &this->playerDataArray[playerID]);
 fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
 ```
 
-**neutral**, and it ties the call to the layout.
+**neutral**, and it binds the call to the layout of the structure.
 
 **Verify the arithmetic before every single substitution.** If the size of substitution does not match the value from the original binary then the referenced struct header likely needs an improvement.
 
-## 5. Integer flags that only hold 0 or 1 are `BOOLEnum`, and are tested as such
+## 5. Integer flags that only hold 0 or 1 are `BOOLEnum`, and are tested in if-statements as such
 
 ```cpp
 // no
@@ -104,19 +104,19 @@ isAI = TRUE;
 if (isAI) {
 ```
 
-**neutral** — `BOOLEnum` is `int`, so nothing moves.
+**neutral** — `BOOLEnum` is `int`, so the matching doesn't change.
 
 Prove the claim before making it. The test is *every* store, not the name:
 
 - a **local** whose stores are all `0`/`1` is provable by reading the function body.
 - a struct field is provable if all lines of all functions that refer to the field are read.
-- a **counter** or **enum** keeps its comparison.
+- a **counter** or **enum** keeps its comparison like it was.
 
-So `!= 0` is not a wart to be removed on sight without checking.
+So `!= 0` is not something to be removed without checking.
 
 ## 6. `const` on a local that is assigned once
 
-Written **after** the type, matching the project's existing `int const*` spellings:
+Written **after** the type, as is convention in this project:
 
 ```cpp
 // no
@@ -127,12 +127,12 @@ int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
 ```
 
 **measure.** It is generally neutral, but `const` is exactly the kind of extra information
-that lets MSVC rematerialise a value instead of spilling it, and a changed spill changes every stack
-displacement after it, so measure matching.
+that lets MSVC change how it deals with the constant value. Perhaps it is not assigned a register anymore,
+and that changes the whole stack layout or register allocation.
 
-A local does not qualify if anything later assigns it, steps it (`++`, `--`, `+=`), or takes its address.
+A local does not qualify for this rule if anything later assigns it, steps it (`++`, `--`, `+=`), or takes its address.
 Loop counters never qualify. A `const` that has to be removed again later to accommodate a fix is worse than
-no `const`, so prefer it on reads of state that the function plainly only samples once.
+no `const`, so prefer it on reads of state that the function plainly only reads once.
 
 ## 7. Resolve a pointer into a field or an array access
 
@@ -151,12 +151,12 @@ if (*currentPlayerFullID == -1 && currentPlayerFullID[0x1b] == 0) {
 if (...currentPlayerFullIDArray[playerID] == -1 && ...currentAIArray[playerID] == 0) {
 ```
 
-> `unptr.py` and `unoffset_matrix.py` undo the common shapes.
+> The tools `unptr.py` and `unoffset_matrix.py` repair these common shapes.
 
 ## 8. Let the compiler unroll
 
 A body repeated four times with `playerID`, `playerID + 1`, `playerID + 2`, `playerID + 3` is not something
-a human wrote. The original's compiler unrolled an ordinary loop, and ours does too.
+a human wrote. The original's compiler unrolled an ordinary loop, which we should replicate.
 
 ```cpp
 // no — 49 lines, four copies, outer loop stepping by 4
@@ -173,14 +173,18 @@ for (int playerID = 1; playerID < 9; ++playerID) {
 }
 ```
 
-**neutral** on `areActivePlayersMostlySameTeam`: 73 instructions against 73, and the only line `quick_diff`
-reports is its own `ret`/`ret 0x0` formatting artefact. Try the plain loop before writing copies out, and if
+**neutral** (actually better most of the time). Try the plain loop before writing copies out, and if
 a hand-unrolled body is already in the tree, try collapsing it.
 
-## 9. Declaration order outranks loop shape
+## 9. Prefer for-loops everywhere
+All do-while and while loops should be rewritten as for-loops.
 
-A `while` that a `for` would say better can usually become one — but the conversion must not reorder the
-declarations, because MSVC assigns stack slots and registers in declaration order (see `perm_decls.py`).
+**neutral** (usually better).
+
+## 10. Declaration order outranks loop shape
+
+A `while` that a `for` would say better can usually become one, see rule 9, but the conversion must not reorder the
+declarations, because MSVC assigns stack slots and registers in declaration order.
 
 ```cpp
 // no — allowedCount is now declared before index, and the two xor instructions swap
@@ -193,12 +197,9 @@ int allowedCount = 0;
 for (; ...[index] != -1; ++index) {
 ```
 
-On `anyGoodsAreAllowedForSale` the first form moves `xor esi, esi` one instruction earlier and takes
-`quick_diff` from 0.9048 to 0.8571; the second is byte-for-byte the `while` loop it replaced. Hoisting the
-initialiser out of the `for` header looks like a half-done conversion, so say why in a comment or leave the
-`while` alone.
+> The tool `perm_decls.py` can assist.
 
-## 10. No magic addresses
+## 11. No magic addresses
 
 For example, sometimes addresses are referred in while loops, but in reality, they are not used: looping over the array
 with a for-loop naturally reproduces the address in the machine code without the literal address being required in the source code.
@@ -209,30 +210,34 @@ while (ptr < 0x401000) {
 }
 ```
 
-## 11. Prefer for-loops everywhere
-All do-while and while loops should be rewritten as for-loops.
+**neutral**
+
+> Note that the relevant data should be set to reimplemented in the Globals/<Global>.hpp file.
+
 
 ## 12. Literal strings should be imported
 Literal strings should be replaced with the appropriate entry from:
-src/OpenSHC/string-literals.hpp or src/OpenSHC/wstring-literals.hpp
+`src/OpenSHC/string-literals.hpp` or `src/OpenSHC/wstring-literals.hpp`
+
+**neutral** in most cases, if not use `src/OpenSHC/string-macros.hpp` or `src/OpenSHC/wstring-macros.hpp`
 
 ## 13. One function per file, and the file is named after it
 
-Almost every `.cpp` on `main` holds exactly one function (1078 of 1087), and the file name is the function
-name.
+Almost every `.cpp` on `main` holds exactly one function, except for some functions that are only called by
+another function and MSVC needs to see the body of that function as well. The file name is the function
+name, or in case of the exception to the rule the main function name is the same as the file name, the
+functions that are only called by the main function are suffixed with `_name`.
 
 ```text
-src/OpenSHC/Game/GameStateStructures/activateTraderState.cpp   -> activateTraderState()
-src/OpenSHC/IO/ResourceManager/getCurrentResourceCoreNameUnk.cpp -> getCurrentResourceCoreNameUnk()
+src/OpenSHC/Game/GameStateStructures/activateTraderState.cpp   -> GameStateStructures::activateTraderState()
+src/OpenSHC/IO/ResourceManager/getCurrentResourceCoreNameUnk.cpp -> ResourceManager::getCurrentResourceCoreNameUnk()
 ```
 
 The folder is the class: a method of `ResourceManager` lives in a folder called `ResourceManager`.
 
-If you add a second function to a file, the next person cannot find it by name. Make a new file.
-
 ## 14. The shape of a file
 
-Every file looks like this. Copy it.
+Every file has the following template.
 
 ```cpp
 #include "../ResourceManager.func.hpp"          // 1. your own class, with ../
@@ -254,9 +259,8 @@ namespace IO {
 
 Three things to copy exactly:
 
-- the first include is your own class, written with `../` (773 files do it this way).
+- the first include is the class or namespace you are working on, written with `../` (773 files do it this way).
 - the `// FUNCTION:` line sits directly above the function. **Never change the address in it.**
-- the body is indented one step per `namespace`.
 
 ## 15. Write `- 1`, not `+ -1`
 
@@ -272,12 +276,16 @@ if (this->cursorPosX >= ...screenHorizontalResolutionInPixels - 1) {
 for (int basenameStart = basenameEnd - 1; basenameStart >= 0; --basenameStart) {
 ```
 
-**neutral.** The compiler sees one value either way. There are still 15 of these on `main`.
+**neutral.** The compiler sees one value either way.
 
 ## 16. Give variables a name that says what they hold
 
 The decompiler invents names like `iVar5`, `uVar2`, `local_8`, `bVar1`. These names mean nothing. A reader
-cannot guess what the value is, and cannot see when it is wrong.
+cannot guess what the value is, and cannot see when it is wrong. Plus, giving better names detects situations
+in which stack variables are reused according to the decompiler, but instead the original code had stack variable
+whose lifetime ended before the end of the function and its slot was used by another new local variable.
+Replicating the life cycle of stack variables throughout the function is usually key to get a good match with the
+original binary.
 
 ```cpp
 // no
@@ -316,7 +324,8 @@ for (int j = 0; j < candidateCount; j++) {
 
 ## 18. Use the name, not the number
 
-The project already has names for most numbers. Search before you write a number.
+The project already has names for most numbers. Search before you write a number. Some
+numbers appear multiple times across enums, choose the right enum.
 
 ```cpp
 // no
@@ -330,23 +339,12 @@ this->streamFlagsUnkAndLoopCount_0x34[3] &= ~FLAG_SOUND_UNINTERRUPTABLE;
 drawText(..., COL_WHITE::instance.shortValue);
 ```
 
-**neutral** — the name *is* the number. Where to look:
-
-| kind of number | look for |
-|---|---|
-| resource (gold, meat, ...) | `RT_...` |
-| building | `BT_...` |
-| unit | `UT_...` |
-| colour | `COL_...` |
-| text in the game's language | `TEXT_...` |
-| a single bit | `FLAG_...` |
-
-`0` and `1`, array sizes, and the player count do not need a name.
+**neutral**
 
 ## 19. Say what a string is, in a comment
 
-Imported string names (rule 12) are unreadable on purpose — they are built from the address. Put the real
-text above the line, so a reader knows what the game shows.
+Imported string names (rule 12) are unreadable on purpose as they are built from the address. Put the real
+text above the line, if known, so a reader knows what the game shows.
 
 ```cpp
 // no
@@ -357,8 +355,7 @@ strcpy(..., MACRO_CALL_MEMBER(...)(DE::SHCDE::TEXT_ALLIES2, 1));
 strcpy(..., MACRO_CALL_MEMBER(...)(DE::SHCDE::TEXT_ALLIES2, 1));
 ```
 
-**neutral** — it is a comment. Both forms are already used on `main`
-(`shareGoldAmongTeamMembers`, `UpdateUnitLossSpeechFeedback`).
+**neutral**
 
 ## 20. `continue` keeps a loop flat
 
@@ -384,8 +381,7 @@ for (int basenameStart = basenameEnd - 1; basenameStart >= 0; --basenameStart) {
 }
 ```
 
-**measure.** This moves code, so it can move the match. 343 `continue`s across 111 files say it is usually
-fine, but check the number on the file you touched.
+**measure.** This moves code, so it can move the match.
 
 ## 21. When the ugly form is needed, write down why
 
@@ -403,7 +399,7 @@ Use `fixme:` when the code is wrong but matching, and say what is wrong:
 // fixme: NOTE: the original performs the exact same food check a second time, it cannot be removed
 ```
 
-**neutral.** A comment costs nothing, and this is the cheapest way to stop the same work being done twice.
+**neutral.** A comment costs nothing, and this is the cheapest way to communicate what has been tried.
 
 ## 22 Prefer descriptive code
 ```cpp
@@ -420,7 +416,7 @@ Generally **neutral**.
 
 ## Measuring
 
-Nothing here is worth trusting unmeasured, and two tools disagree often enough to matter.
+All style changes that should be measured should use manual before and after checks or the following tools.
 
 ```sh
 cd tools/reimplementation-helper/batch
@@ -428,20 +424,14 @@ python build_quiet.py && python reccmp_report.py --run save base.json   # before
 # edit
 python syntax_check.py                                                  # seconds, catches a bad rewrite
 python quick_diff.py <files>                                            # ~6s/file, ranks variants
-python build_quiet.py && python reccmp_report.py --run cmp base.json     # the number that counts
+python build_quiet.py && python reccmp_report.py --run cmp base.json    # the number that counts
 ```
 
-- **`reccmp_report.py` is authoritative**, and its *second* column (normalized, call targets ignored) is
-  what "100% Reimplemented" means.
+- **`reccmp_report.py` produces good match percentages**, and its *second* column is
+  what can be considered almost "100% Reimplemented" if reccmp itself doesn't show 100%.
 - **`quick_diff.py` is for ranking variants of one file**, not for judging a file in absolute terms. It
   compiles without LTCG and without the real link, so on some functions it disagrees with reccmp outright:
-  `handleActivateTacticalPowers` measures 67 original instructions against 128 of ours and a 0.6462 ratio
-  while reccmp calls it a full match. Compare a file against *itself* before and after a change, and never
-  read a `quick_diff` ratio as a percentage.
-- Its `ret` against `ret 0x0` lines are a disassembler artefact on both sides. On a three-instruction
-  function they drag the ratio to 0.6667 and mean nothing.
-- `build.bat` exits 0 on a failed compile, so an unchanged percentage is the symptom of a build that never
-  happened. `build_quiet.py` exits non-zero instead — use it.
-- Resolver flags are not committed. `enable_local_functions.py` has to be re-run after any
+- `build_quiet.py` exits non-zero if compilation failed.
+- Resolver flags are not committed. `enable_local_functions.py` and `Enable-Reimplemented-Data.ps1` have to be re-run after any
   `git checkout -- src/OpenSHC`, and a resolver left `true` with no `.cpp` in the build list is an
-  unresolved external at link time.
+  unresolved external at link time. Never commit resolvers set to `true` nor local build lists.
