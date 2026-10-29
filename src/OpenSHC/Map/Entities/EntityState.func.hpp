@@ -205,6 +205,13 @@ namespace Map {
             MACRO_FUNCTION_RESOLVER(
                 void (EntityState::*)(), false, Address::SHC_3BB0A8C1_0x004087C0, &EntityState::updateEntities)
             updateEntities;
+            MACRO_FUNCTION_RESOLVER(int (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004016E0,
+                &EntityState::findNearestDiseaseCloudForHealer)
+            findNearestDiseaseCloudForHealer;
+            MACRO_FUNCTION_RESOLVER(
+                uint (EntityState::*)(int, undefined4, uint, int, int, int, int, int, int, EntityType, int), false,
+                Address::SHC_3BB0A8C1_0x00404AE0, &EntityState::spawnEntity)
+            spawnEntity;
 
         } // namespace EntityState_Func
     } // namespace Entities
