@@ -63,6 +63,9 @@ namespace UI {
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x004B2820,
             &MenuModalComposition::activateModalDialog2)
         activateModalDialog2;
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, dword, dword, undefined*, undefined*), false,
+            Address::SHC_3BB0A8C1_0x004AA930, &MenuModalComposition::setDropDownListParameters)
+        setDropDownListParameters;
 
     } // namespace MenuModalComposition_Func
 } // namespace UI
