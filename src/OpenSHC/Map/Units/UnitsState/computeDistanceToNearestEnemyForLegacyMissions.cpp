@@ -27,7 +27,7 @@ namespace Map {
             }
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {
                 int _enemyUnitID = DAT_GameState::instance.playerDataArray[_owner].enemyIDArray[i];
-                if (this->units[_enemyUnitID].climbDataRelated
+                if (this->units[_enemyUnitID].uid
                     != DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[_owner][i]) {
                     continue;
                 }
