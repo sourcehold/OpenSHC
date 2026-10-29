@@ -50,6 +50,12 @@ namespace UI {
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTarget), false,
                 Address::SHC_3BB0A8C1_0x00463A90, &AlphaAndButtonSurface::renderBasicButton)
             renderBasicButton;
+            MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463270,
+                &AlphaAndButtonSurface::ProcessBuildingClickBonus)
+            ProcessBuildingClickBonus;
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463A00,
+                &AlphaAndButtonSurface::SelectUnitAndOpenStatusMenu)
+            SelectUnitAndOpenStatusMenu;
 
         } // namespace AlphaAndButtonSurface_Func
     } // namespace Rendering
