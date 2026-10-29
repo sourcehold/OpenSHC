@@ -82,6 +82,8 @@ namespace UI {
         void renderMenuModal();
 
         void activateModalDialog2(MenuModalType modalDialogID);
+        void setDropDownListParameters(
+            int param_1, int param_2, dword param_3, dword param_4, undefined* param_5, undefined* param_6);
     };
 
     static_assert_cpp98_obj(sizeof(MenuModalComposition) == 124, MenuModalComposition);
