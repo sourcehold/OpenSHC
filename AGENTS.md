@@ -79,12 +79,6 @@ Implementation code belongs in `.cpp` files:
 The [Implementation Cheat Sheet](IMPLEMENTATION_CHEAT_SHEET.md) is a reference for patterns and oddities of the compiler that are found during the reimplementation process.
 Scan this document if you are instructed to reimplement a function.
 
-### Reimplementation Style Guide
-
-The [Reimplementation Style Guide](REIMPLEMENTATION_STYLE_GUIDE.md) covers how a reimplemented `.cpp` should read
-once it matches: which decompiler artefacts to remove, which ones are load-bearing, and what each rule measured.
-Read it before a readability pass, and before removing a cast, a pointer or a hand-unrolled loop.
-
 ### MCP Server (`tools/mcp`)
 
 Provides project-specific utilities including:
