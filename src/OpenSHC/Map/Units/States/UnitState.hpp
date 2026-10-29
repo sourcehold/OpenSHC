@@ -16,12 +16,16 @@ namespace Map {
 
                 US_DETERMINE_NEXT_STATEUnk = 0, // 0x00000000
                 US_IDLEUnk = 1, // 0x00000001
+                US_STATE_2Unk = 2, // 0x00000002
+                US_STATE_3Unk = 3, // 0x00000003
                 US_RELOAD_WEAPONUnk = 4, // 0x00000004
                 US_AIM_WEAPONUnk = 5, // 0x00000005
                 US_FIRE_WEAPONUnk = 6, // 0x00000006
                 US_LOOK_AROUNDUnk = 7, // 0x00000007
                 US_STAND_UPUnk = 8, // 0x00000008
+                US_STATE_9Unk = 9, // 0x00000009
                 US_SIT_DOWNUnk = 11, // 0x0000000B
+                US_STATE_12Unk = 12, // 0x0000000C
                 US_MOVE_TO_DESTINATION = 101, // 0x00000065
                 US_MELEE_ATTACK = 106, // 0x0000006A
                 US_MELEE_ATTACK_WALL = 107, // 0x0000006B

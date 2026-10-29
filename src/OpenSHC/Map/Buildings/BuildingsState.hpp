@@ -424,6 +424,8 @@ namespace Map {
 
             void applyVersionUpgradeAccessibilityRecompute(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+
+            int updateWorkshopProgressSign(int buildingID, int animationMode);
         };
 
         static_assert_cpp98_obj(sizeof(BuildingsState) == 1630344, BuildingsState);

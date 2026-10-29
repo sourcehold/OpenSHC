@@ -682,6 +682,9 @@ namespace Map {
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00424310, &BuildingsState::applyVersionUpgradeAccessibilityRecompute)
             applyVersionUpgradeAccessibilityRecompute;
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040F360,
+                &BuildingsState::updateWorkshopProgressSign)
+            updateWorkshopProgressSign;
 
         } // namespace BuildingsState_Func
     } // namespace Buildings
