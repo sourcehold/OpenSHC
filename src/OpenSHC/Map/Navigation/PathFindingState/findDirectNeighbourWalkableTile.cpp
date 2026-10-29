@@ -19,25 +19,27 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CD60
-        BOOLEnum PathFindingState::findDirectNeighbourWalkableTile(uint x, uint y)
+        BOOLEnum PathFindingState::findDirectNeighbourWalkableTile(uint ySpace, uint y)
         {
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (ySpace > 399 || y > 399) {
                 return FALSE;
             }
-            int _directionIndex = 0;
-            do {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+                return FALSE;
+            }
+            int _rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            for (int _directionIndex = 0; _directionIndex < 8; _directionIndex++) {
                 uint _x
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.xOffset
-                    + x;
+                    + ySpace;
                 uint _y
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.yOffset
                     + y;
                 if (_x <= 399 && _y <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
-                    int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex]
-                        + DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0xb1U) == 0
-                        && (DAT_TileMapState::instance.LogicLayer[_tile] & 0x50101400U) == 0) {
+                    int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex] + _rowTile;
+                    uint _logic = DAT_TileMapState::instance.LogicLayer[_tile];
+                    if ((_logic & 0xb1U) == 0 && (_logic & 0x50101400U) == 0) {
                         /*
                           No sea, borders, rocky, building, tree, river, keep, moat
                          */
@@ -47,11 +49,7 @@ namespace Map {
                         return TRUE;
                     }
                 }
-                _directionIndex = _directionIndex + 1;
-                if (7 < _directionIndex) {
-                    return FALSE;
-                }
-            } while (true);
+            }
             return FALSE;
         }
 

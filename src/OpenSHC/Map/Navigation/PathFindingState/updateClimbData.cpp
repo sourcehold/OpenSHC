@@ -15,7 +15,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9680
         void PathFindingState::updateClimbData()
         {
-            int iVar1;
             this->numberOfClimbTeleports = 0;
             this->debugGreatestClimbLoading = 0;
             this->maxClimbDataCount = 0;
@@ -30,21 +29,17 @@ namespace Map {
                     if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
                             DAT_CurrentClimbDataID::instance);
-                        iVar1 = this->debugGreatestClimbLoading;
                     } else {
                         this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
-                        iVar1 = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
-                        if (iVar1 <= this->debugGreatestClimbLoading)
-                            goto LAB_004a9740;
+                        int numberOfUnitsUsing
+                            = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
+                        if (numberOfUnitsUsing > this->debugGreatestClimbLoading) {
+                            this->debugGreatestClimbLoading = numberOfUnitsUsing;
+                        }
                     }
-                    this->debugGreatestClimbLoading = iVar1;
                 }
-            LAB_004a9740:
                 DAT_CurrentClimbDataID::instance = DAT_CurrentClimbDataID::instance + 1;
-                if (199 < DAT_CurrentClimbDataID::instance) {
-                    return;
-                }
-            } while (true);
+            } while ((int)DAT_CurrentClimbDataID::instance < 200);
         }
 
     }

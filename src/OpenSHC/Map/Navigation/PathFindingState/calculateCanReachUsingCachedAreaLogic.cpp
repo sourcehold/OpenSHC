@@ -25,14 +25,17 @@ namespace Map {
             AreaPairInt* pAVar2;
             BOOLEnum BVar3;
             int iVar4;
-            int _area1;
             int _area2;
-            _area2 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
+            int _area1;
             _area1 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile1];
+            _area2 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
             if (_area1 == _area2) {
                 return TRUE;
             }
-            if ((_area1 == 0) || (_area2 == 0)) {
+            if (_area1 == 0) {
+                return FALSE;
+            }
+            if (_area2 == 0) {
                 return FALSE;
             }
             if (this->field48_0x90 == 0) {
@@ -109,19 +112,13 @@ namespace Map {
                     pAVar2 = pAVar2 + 1;
                 } while (iVar4 < 10);
             }
+            int _y1 = (int)(short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1];
+            int _x1 = tile1 - DAT_ViewportRenderState::instance.translationMatrix[_y1].addXgetTile;
+            int _y2 = (int)(short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2];
+            int _x2 = tile2 - DAT_ViewportRenderState::instance.translationMatrix[_y2].addXgetTile;
             BVar3 = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded, this)(tile1
-                    - DAT_ViewportRenderState::instance
-                        .translationMatrix[(
-                            short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]]
-                        .addXgetTile,
-                (uint)((short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]),
-                (uint)(tile2
-                    - DAT_ViewportRenderState::instance
-                        .translationMatrix[(
-                            short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]]
-                        .addXgetTile),
-                (uint)((short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]), 100000, 0);
+                OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded, this)(
+                _x1, (uint)_y1, (uint)_x2, (uint)_y2, 100000, 0);
             if (BVar3 != FALSE) {
                 iVar4 = 0;
                 pAVar2 = this->searchQueue.acceptAreaPairArray1;

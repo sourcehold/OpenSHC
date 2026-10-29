@@ -15,47 +15,38 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00496F90
-        void PathFindingState::findNextTileInExistingSearchThatIsModuloDistanceAway(int modulo, int x, int y)
+        void PathFindingState::findNextTileInExistingSearchThatIsModuloDistanceAway(int modulo, int ySpace, int y)
         {
-            int iVar2;
-            uint uVar3;
-            uint uVar4;
-            int* _pLastTile;
-            uint uVar5;
-            uint uVar6;
-            int local_10;
-            local_10 = 0;
-            _pLastTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
-            while (true) {
-                int iVar1 = *_pLastTile;
-                if (0 < DAT_TileMapState::instance.CertainPathLayer[iVar1]
-                    && (uVar3 = (iVar1
-                                    - DAT_ViewportRenderState::instance
-                                        .translationMatrix[DAT_ViewportRenderState::instance
-                                                .tileTranslationMatrix_YComponent[iVar1]]
-                                        .addXgetTile)
-                            - x,
-                        uVar5 = (int)uVar3 >> 0x1f,
-                        uVar4 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
-                        uVar6 = (int)uVar4 >> 0x1f,
-                        (int)(((uVar4 ^ uVar6) - uVar6) + ((uVar3 ^ uVar5) - uVar5)) % modulo == 0)
-                    && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex,
-                        DAT_TileMapState::instance.CertainPathLayer[iVar1] < 4000))
+            int result = 0;
+            int generation = DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
+            int index = DAT_TribesState::instance.ALG_ResultTileIndex;
+            int* pTile = this->searchQueue.tilesQueue + index;
+            int tileUnk;
+            do {
+                tileUnk = *pTile;
+                int distance = DAT_TileMapState::instance.CertainPathLayer[tileUnk];
+                int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
+                if (distance > 0
+                    && (abs(tileUnk - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile - ySpace)
+                           + abs(tileY - y))
+                            % modulo
+                        == 0
+                    && distance < 4000) {
+                    result = index;
                     break;
-                DAT_TribesState::instance.ALG_ResultTileIndex = DAT_TribesState::instance.ALG_ResultTileIndex + 1;
-                _pLastTile = _pLastTile + 1;
-                iVar2 = local_10;
-                if ((4000 < DAT_TribesState::instance.ALG_ResultTileIndex)
-                    || (DAT_TileMapState::instance.WalkLayer[iVar1]
-                        != DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]))
+                }
+                index = index + 1;
+                pTile = pTile + 1;
+                if (index > 4000)
                     break;
-            }
-            local_10 = iVar2;
-            DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[local_10];
-            DAT_TribesState::instance.ALG_ResultX = this->searchQueue.tilesQueue[local_10]
+            } while (DAT_TileMapState::instance.WalkLayer[tileUnk] == generation);
+            tileUnk = this->searchQueue.tilesQueue[result];
+            DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[result];
+            DAT_TribesState::instance.ALG_ResultX
+                = tileUnk
                 - DAT_ViewportRenderState::instance.translationMatrix[DAT_TribesState::instance.ALG_ResultY]
                       .addXgetTile;
-            DAT_TribesState::instance.ALG_ResultTileIndex = local_10;
+            DAT_TribesState::instance.ALG_ResultTileIndex = result;
             return;
         }
 

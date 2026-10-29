@@ -15,37 +15,22 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497080
-        dword PathFindingState::pathFindingResultBased(int param_1, int x, int y, int extraDistance)
+        dword PathFindingState::pathFindingResultBased(int param_1, int ySpace, int y, int extraDistance)
         {
-            int* _tilesPointer;
-            uint _isNegativeNumberX;
-            uint _isNegativeNumberY;
-            int _index;
-            int _distance;
+            int _generation = DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
+            int _index = DAT_TribesState::instance.ALG_ResultTileIndex;
+            int* _tilesPointer = &this->searchQueue.tilesQueue[_index];
             int _tile;
-            _tilesPointer = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
-            _index = DAT_TribesState::instance.ALG_ResultTileIndex;
             do {
                 _tile = *_tilesPointer;
-                _distance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                int _tileY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                int _distance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0 && 0 < _distance) {
-                    if (extraDistance + 0xc < _distance) {
+                    if (_distance > extraDistance + 0xc) {
                         return (dword)(0);
                     }
-                    uint _someX = (_tile
-                                      - DAT_ViewportRenderState::instance
-                                          .translationMatrix[DAT_ViewportRenderState::instance
-                                                  .tileTranslationMatrix_YComponent[_tile]]
-                                          .addXgetTile)
-                        - x;
-                    _isNegativeNumberX = (int)_someX >> 0x1f;
-                    uint _someY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
-                    _isNegativeNumberY = (int)_someY >> 0x1f;
-                    if ((int)(((_someY ^ _isNegativeNumberY) - _isNegativeNumberY)
-                            + ((_someX ^ _isNegativeNumberX) - _isNegativeNumberX))
-                                % param_1
-                            == 0
-                        && _distance < 4000) {
+                    int _absX = abs(_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile - ySpace);
+                    if ((_absX + abs(_tileY - y)) % param_1 == 0 && _distance < 4000) {
                         dword dVar1 = this->searchQueue.tilesQueue[_index];
                         DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[_index];
                         DAT_TribesState::instance.ALG_ResultTileIndex = _index;
@@ -60,8 +45,7 @@ namespace Map {
                 if (4000 < _index) {
                     return (dword)(0);
                 }
-            } while (DAT_TileMapState::instance.WalkLayer[_tile]
-                == DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]);
+            } while (DAT_TileMapState::instance.WalkLayer[_tile] == _generation);
             return (dword)(0);
         }
 
