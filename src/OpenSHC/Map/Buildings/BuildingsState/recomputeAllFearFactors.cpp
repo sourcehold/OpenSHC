@@ -99,7 +99,7 @@ namespace Map {
                 // Track the extremes for the final statistics while the lord is alive
                 int lordID = DAT_GameState::instance.playerDataArray[p].lordID;
                 if (lordID != 0
-                    && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].climbDataRelated
+                    && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].uid
                     && DAT_UnitsState::instance.units[lordID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
                     int level = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
                     if (level > 0) {
