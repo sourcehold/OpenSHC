@@ -1,4 +1,3 @@
-
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
@@ -19,104 +18,69 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::Map::LogicHelpers::Logic1;
-    using OpenSHC::Map::LogicHelpers::Logic2;
+    using OpenSHC::Map::LogicHelpers::L_BUILDING;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
+    using OpenSHC::Map::LogicHelpers::L_NONE;
+    using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
+    /* the header declares the high parameter as int*; it is the plain average high */
     // FUNCTION: STRONGHOLDCRUSADER 0x00515740
     void TileMapState::placeApplefarm(
-        int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int* param_7)
+        int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int variation, int* averageHeight)
     {
-        int _buildingID;
-        int iVar1;
-        int local_4;
-        int _buildingTileRef;
-        local_4 = 0;
-        _buildingID = MACRO_CALL_MEMBER(
-            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, (undefined4)((int)(param_7)), (BuildingType)((int)(short)(undefined2)buildingType), 3, playerID, param_6);
-        this->placedBuildingID = _buildingID;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, (int)((int)(y)), 10);
-        _buildingTileRef = DAT_TerrainDefinedData::instance.AppleFarmOffsets[1].y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[0]
-            = DAT_ViewportRenderState::instance
-                  .translationMatrix[DAT_TerrainDefinedData::instance.AppleFarmOffsets[0].y + y]
-                  .addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[0].x + x;
-        iVar1 = DAT_TerrainDefinedData::instance.AppleFarmOffsets[2].y + y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[1]
-            = DAT_ViewportRenderState::instance.translationMatrix[_buildingTileRef + y].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[1].x + x;
-        _buildingTileRef = DAT_TerrainDefinedData::instance.AppleFarmOffsets[3].y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[2]
-            = DAT_ViewportRenderState::instance.translationMatrix[iVar1].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[2].x + x;
-        iVar1 = DAT_TerrainDefinedData::instance.AppleFarmOffsets[4].y + y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[3]
-            = DAT_ViewportRenderState::instance.translationMatrix[_buildingTileRef + y].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[3].x + x;
-        _buildingTileRef = DAT_TerrainDefinedData::instance.AppleFarmOffsets[5].y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[4]
-            = DAT_ViewportRenderState::instance.translationMatrix[iVar1].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[4].x + x;
-        iVar1 = DAT_TerrainDefinedData::instance.AppleFarmOffsets[6].y + y;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[5]
-            = DAT_ViewportRenderState::instance.translationMatrix[_buildingTileRef + y].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[5].x + x;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[6]
-            = DAT_ViewportRenderState::instance.translationMatrix[iVar1].addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[6].x + x;
-        DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[7]
-            = DAT_ViewportRenderState::instance
-                  .translationMatrix[DAT_TerrainDefinedData::instance.AppleFarmOffsets[7].y + y]
-                  .addXgetTile
-            + DAT_TerrainDefinedData::instance.AppleFarmOffsets[7].x + x;
-        do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(local_4, 3);
-            *(short*)&param_6 = (short)_buildingID;
-            _buildingTileRef = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
-                + this->buildingX;
-            this->HeightLayer[_buildingTileRef] = (byte)param_7;
-            this->LogicLayer[_buildingTileRef] = this->LogicLayer[_buildingTileRef] | 0x400;
-            this->BuildingLayer[_buildingTileRef] = (short)param_6;
-            this->BuildingWasLayer[_buildingTileRef] = (undefined1)buildingType;
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(playerID, _buildingTileRef,
-                this->buildingY + y, 2, OpenSHC::Map::LogicHelpers::L_NONE, OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB);
-            local_4 = local_4 + 1;
-            this->ChangedLayer[_buildingTileRef] = 2;
-        } while (local_4 < this->constructionTileCount);
+        int index = 0;
+        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
+            DAT_BuildingsState::ptr)(playerID, x, y, (undefined4)averageHeight, (BuildingType)(short)buildingType, 3,
+            playerID, variation);
+        this->placedBuildingID = buildingID;
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, y, 10);
+
+        /* the 8 apple tree tiles */
         for (int i = 0; i < 8; i++) {
-            _buildingTileRef = DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[i];
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(_buildingTileRef);
-            this->LogicLayer[_buildingTileRef] = this->LogicLayer[_buildingTileRef] | 0x4000000;
-            this->ChangedLayer[_buildingTileRef] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::placeAppleTree, DAT_LandscapeState::ptr)(_buildingID,
-                (undefined4)((int)(DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].x + x)),
-                (undefined4)((int)(DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].y + y)));
+            DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]
+                = DAT_ViewportRenderState::instance
+                      .translationMatrix[DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].y + y]
+                      .addXgetTile
+                + DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].x + x;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(_buildingID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(_buildingID);
-        if (((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                && (DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                    < (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount))
-            && ((DAT_GameState::instance.playerDataArray[playerID].populationCap
+
+        /* the farm house */
+        do {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 3);
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
+                + this->buildingX;
+            this->HeightLayer[tileUnk] = (byte)(int)averageHeight;
+            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+            this->BuildingLayer[tileUnk] = (short)buildingID;
+            this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(
+                playerID, tileUnk, this->buildingY + y, 2, L_NONE, L2_THICK_SCRUB);
+            index++;
+            this->ChangedLayer[tileUnk] = 2;
+        } while (index < this->constructionTileCount);
+
+        for (int i = 0; i < 8; i++) {
+            int tileUnk = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tileUnk);
+            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_FARM_FIELD_APPLE;
+            this->ChangedLayer[tileUnk] = 2;
+            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::placeAppleTree, DAT_LandscapeState::ptr)(buildingID,
+                DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].x + x,
+                DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].y + y);
+        }
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
+
+        /* not enough idle peasants for the workers: tell the local player */
+        if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+            && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
+            && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
-                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)))) {
+                || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
-        return;
     }
 
 }

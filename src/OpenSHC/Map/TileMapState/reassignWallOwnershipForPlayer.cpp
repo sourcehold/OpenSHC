@@ -16,71 +16,47 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9000
     void TileMapState::reassignWallOwnershipForPlayer(int playerID, int newOwner)
     {
-        for (int tile = 0; tile < 80400; tile += 6) {
-            if ((this->LogicLayer[tile + 0] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 0] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 0] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 0]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 0] = this->WallOwnerLayer[tile + 0] & 0xf8 | (char)newOwner - 1U;
+        for (int tileUnk = 0; tileUnk < 80400; tileUnk += 6) {
+            if ((this->LogicLayer[tileUnk + 0] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 0];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 0] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 0] = this->WallOwnerLayer[tileUnk + 0] & 0xf8 | (char)newOwner - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 1] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 1] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 1] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 1]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 1] = this->WallOwnerLayer[tile + 1] & 0xf8 | (char)newOwner - 1U;
+            if ((this->LogicLayer[tileUnk + 1] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 1];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 1] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 1] = this->WallOwnerLayer[tileUnk + 1] & 0xf8 | (char)newOwner - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 2] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 2] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 2] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 2]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 2] = this->WallOwnerLayer[tile + 2] & 0xf8 | (char)newOwner - 1U;
+            if ((this->LogicLayer[tileUnk + 2] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 2];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 2] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 2] = this->WallOwnerLayer[tileUnk + 2] & 0xf8 | (char)newOwner - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 3] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 3] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 3] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 3]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 3] = this->WallOwnerLayer[tile + 3] & 0xf8 | (char)newOwner - 1U;
+            if ((this->LogicLayer[tileUnk + 3] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 3];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 3] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 3] = this->WallOwnerLayer[tileUnk + 3] & 0xf8 | (char)newOwner - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 4] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 4] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 4] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 4]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 4] = this->WallOwnerLayer[tile + 4] & 0xf8 | (char)newOwner - 1U;
+            if ((this->LogicLayer[tileUnk + 4] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 4];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 4] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 4] = this->WallOwnerLayer[tileUnk + 4] & 0xf8 | (char)newOwner - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 5] & L_WALL_OR_GATEHOUSE) != 0) {
-                bool matches;
-                if (this->BuildingLayer[tile + 5] == 0) {
-                    matches = (this->WallOwnerLayer[tile + 5] & 7) + 1 == playerID;
-                } else {
-                    matches = DAT_BuildingsState::instance.buildings[this->BuildingLayer[tile + 5]].owner == newOwner;
-                }
-                if (matches) {
-                    this->WallOwnerLayer[tile + 5] = this->WallOwnerLayer[tile + 5] & 0xf8 | (char)newOwner - 1U;
+            if ((this->LogicLayer[tileUnk + 5] & L_WALL_OR_GATEHOUSE) != 0) {
+                int building = this->BuildingLayer[tileUnk + 5];
+                if (building != 0 ? DAT_BuildingsState::instance.buildings[building].owner == newOwner
+                                  : (this->WallOwnerLayer[tileUnk + 5] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 5] = this->WallOwnerLayer[tileUnk + 5] & 0xf8 | (char)newOwner - 1U;
                 }
             }
         }

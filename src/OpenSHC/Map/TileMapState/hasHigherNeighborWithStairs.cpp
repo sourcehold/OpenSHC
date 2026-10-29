@@ -13,7 +13,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8A40
-    BOOLEnum TileMapState::hasHigherNeighborWithStairs(int tile, int y, int direction)
+    BOOLEnum TileMapState::hasHigherNeighborWithStairs(int tileUnk, int y, int direction)
     {
         int rotatedDirection = 0;
         if (this->mapOrientation == 0) {
@@ -29,11 +29,11 @@ namespace Map {
             rotatedDirection = rotatedDirection - 8;
         }
 
-        int neighbour = this->directionTranslationMatrix[y][rotatedDirection] + tile;
-        if (this->HeightLayer[neighbour] > this->HeightLayer[tile]) {
-            return this->LogicLayer[neighbour] >> 0xb & TRUE;
+        int neighbour = this->directionTranslationMatrix[y][rotatedDirection] + tileUnk;
+        if (this->HeightLayer[neighbour] <= this->HeightLayer[tileUnk]) {
+            return FALSE;
         }
-        return FALSE;
+        return (uint)this->LogicLayer[neighbour] >> 0xb & TRUE;
     }
 
 }

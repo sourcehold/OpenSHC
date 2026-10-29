@@ -10,7 +10,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F89C0
-    uint TileMapState::getWallFlagForOrientedDirection(int tile, int y, int twoOrFour)
+    uint TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int twoOrFour)
     {
         int direction = 0;
         if (twoOrFour == 2) {
@@ -20,20 +20,23 @@ namespace Map {
                 direction = 4;
             } else if (this->mapOrientation == 4) {
                 direction = 6;
+            } else if (this->mapOrientation == 6) {
+                direction = 0;
             }
-        } else {
-            if (twoOrFour != 4) {
-                return 0;
-            }
+        } else if (twoOrFour == 4) {
             if (this->mapOrientation == 0) {
                 direction = 4;
             } else if (this->mapOrientation == 2) {
                 direction = 6;
+            } else if (this->mapOrientation == 4) {
+                direction = 0;
             } else if (this->mapOrientation == 6) {
                 direction = 2;
             }
+        } else {
+            return 0;
         }
-        return this->LogicLayer[this->directionTranslationMatrix[y][direction] + tile] >> 8 & 1;
+        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & 1;
     }
 
 }

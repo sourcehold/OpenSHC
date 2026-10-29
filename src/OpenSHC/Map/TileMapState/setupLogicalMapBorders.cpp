@@ -15,8 +15,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6C60
     void TileMapState::setupLogicalMapBorders()
     {
+        int rowWidth = 0;
         int index = 0;
-        for (int rowWidth = 0; rowWidth < 400; rowWidth += 2) {
+        for (; rowWidth < 400; rowWidth += 2) {
             this->LogicLayer[index] = L_BORDER;
             index++;
             if (rowWidth > 0) {
@@ -29,7 +30,7 @@ namespace Map {
             this->LogicLayer[index] = L_BORDER;
             index++;
         }
-        for (int rowWidth = 398; rowWidth >= 0; rowWidth -= 2) {
+        for (rowWidth = 398;rowWidth >= 0; rowWidth -= 2) {
             this->LogicLayer[index] = L_BORDER;
             index++;
             if (rowWidth > 0) {

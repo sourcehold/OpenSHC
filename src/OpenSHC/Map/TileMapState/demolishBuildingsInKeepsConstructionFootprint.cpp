@@ -22,13 +22,15 @@ namespace Map {
     void TileMapState::demolishBuildingsInKeepsConstructionFootprint(undefined4 param_1, int x, int y,
         undefined4 buildingType, int sizeIndex, int param_6, int param_7)
     {
+        int keepX = x;
+        int keepY = y;
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
-            if (this->BuildingLayer[tile] != 0) {
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
             index++;
         } while (index < this->constructionTileCount);
@@ -36,52 +38,54 @@ namespace Map {
         /* the keep drags three towers and two outbuildings with it, laid out per keep variant */
         int variant = (short)buildingType - 0x28;
         {
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][0].y + y].addXgetTile
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][0].y + y].addXgetTile
                 + DAT_TerrainDefinedData::instance.field130_0x264[variant][0].x + x;
-            if (this->BuildingLayer[tile] != 0) {
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
         }
 
         {
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][1].y + y].addXgetTile
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][1].y + y].addXgetTile
                 + DAT_TerrainDefinedData::instance.field130_0x264[variant][1].x + x;
-            if (this->BuildingLayer[tile] != 0) {
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
         }
 
         {
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][2].y + y].addXgetTile
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[variant][2].y + y].addXgetTile
                 + DAT_TerrainDefinedData::instance.field130_0x264[variant][2].x + x;
-            if (this->BuildingLayer[tile] != 0) {
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
         }
 
+        x = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].xOffset;
+        y = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].yOffset;
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 7);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].yOffset].addXgetTile + this->buildingX + x
-                + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].xOffset;
-            if (this->BuildingLayer[tile] != 0) {
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
             index++;
         } while (index < this->constructionTileCount);
 
+        x = keepX + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].xOffset;
+        y = keepY + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].yOffset;
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 5);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].yOffset].addXgetTile + this->buildingX + x
-                + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].xOffset;
-            if (this->BuildingLayer[tile] != 0) {
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            if (this->BuildingLayer[tileUnk] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tileUnk]);
             }
             index++;
         } while (index < this->constructionTileCount);

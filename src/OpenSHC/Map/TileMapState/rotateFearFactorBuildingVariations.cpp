@@ -32,7 +32,7 @@ namespace Map {
                 this->rockOrientation = (this->rockOrientation != 4) - 1 & 6;
             }
         }
-        if ((int)(this->lastTime + 1000) > (int)now) {
+        if ((int)now < (int)(this->lastTime + 1000)) {
             return;
         }
 
@@ -68,8 +68,7 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_SHRINE1:
         case OpenSHC::Commands::M_MAPPER_POND1:
         case OpenSHC::Commands::M_MAPPER_POND3_LARGE1:
-            DAT_TileMapState::instance.currentMapperCommand
-                = (MappersEnum)(DAT_TileMapState::instance.currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
+            DAT_TileMapState::instance.currentMapperCommand = (MappersEnum)(DAT_TileMapState::instance.currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
             return;
         case OpenSHC::Commands::M_MAPPER_GARDEN6:
             DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN1;

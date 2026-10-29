@@ -12,43 +12,43 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC810
-    int TileMapState::computeClimbRampRotation(int tile, uint x, uint y)
+    int TileMapState::computeClimbRampRotation(int tileUnk, uint x, uint y)
     {
-        int height;
-        if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
-            height = this->HeightLayer[tile];
+        int high;
+        if ((this->LogicLayer[tileUnk] & L_WALL_OR_GATEHOUSE) != 0) {
+            high = this->DefaultHeightLayer[tileUnk];
         } else {
-            height = this->DefaultHeightLayer[tile];
+            high = this->HeightLayer[tileUnk];
         }
 
-        int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tile;
+        int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tileUnk;
         int heightAt86;
-        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
-            heightAt86 = this->HeightLayer[neighbour];
-        } else {
+        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
             heightAt86 = this->DefaultHeightLayer[neighbour];
+        } else {
+            heightAt86 = this->HeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tile;
+        neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tileUnk;
         int heightAt85;
-        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
-            heightAt85 = this->HeightLayer[neighbour];
-        } else {
+        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
             heightAt85 = this->DefaultHeightLayer[neighbour];
+        } else {
+            heightAt85 = this->HeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tile;
+        neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tileUnk;
         int heightAt84;
-        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) == 0) {
-            heightAt84 = this->HeightLayer[neighbour];
-        } else {
+        if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
             heightAt84 = this->DefaultHeightLayer[neighbour];
+        } else {
+            heightAt84 = this->HeightLayer[neighbour];
         }
 
         uint rotation;
-        if (heightAt86 + 0x14 < height && heightAt86 < 0x88) {
-            if (heightAt85 + 0x14 < height && heightAt85 < 0x88) {
-                if (heightAt84 + 0x14 < height && heightAt84 < 0x88) {
+        if (high > heightAt86 + 0x14 && heightAt86 < 0x88) {
+            if (high > heightAt85 + 0x14 && heightAt85 < 0x88) {
+                if (high > heightAt84 + 0x14 && heightAt84 < 0x88) {
                     rotation = 5;
                 } else {
                     rotation = 3;
@@ -56,15 +56,15 @@ namespace Map {
             } else {
                 rotation = 1;
             }
-        } else if (heightAt85 + 0x14 < height && heightAt85 < 0x88) {
-            if (heightAt86 + 0x14 < height && heightAt86 < 0x88) {
+        } else if (high > heightAt85 + 0x14 && heightAt85 < 0x88) {
+            if (high > heightAt86 + 0x14 && heightAt86 < 0x88) {
                 rotation = 3;
             } else {
                 rotation = 2;
             }
         } else if (heightAt86 < 0x88 || heightAt85 < 0x88) {
-            /* 0 when the tile is not high enough above its neighbour, 5 when it is */
-            rotation = (uint)(height <= heightAt84 + 0x14) - 1 & 5;
+            /* 0 when the tileUnk is not high enough above its neighbour, 5 when it is */
+            rotation = (high <= heightAt84 + 0x14) - 1 & 5;
         } else {
             rotation = 4;
         }
@@ -86,7 +86,7 @@ namespace Map {
         } else {
             this->wallCornerRotation = 0x20 - (y & 0x1f);
         }
-        if (this->wallCornerRotation > 0x1f) {
+        if ((int)this->wallCornerRotation > 0x1f) {
             this->wallCornerRotation = 1;
         }
         return rotation;
