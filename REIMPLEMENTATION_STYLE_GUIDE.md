@@ -13,6 +13,10 @@ comment saying what was measured, so the next reader does not retry it.
 
 ---
 
+## 0. Run clang-format on cpp files
+This style check changes the cpp files to match the repo style. It is necessary for cpp files to be merged on main.
+The rules below are not covered by clang-format.
+
 ## 1. Drop the decompiler's trailing `return;`
 
 Functions that return `void` don't need an explicit `return;` at the end of the function body.
