@@ -54,7 +54,7 @@ return (uint)(this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b]
 return this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b];
 ```
 
-Generally **neutral**.
+Generally **neutral** but watch out for a return statement including arithmetic that is meant to lead to a 1 or 0.
 
 ## 3. No cast that only repeats the destination type
 
@@ -82,26 +82,11 @@ fillMemory_ByteValue(14836, '\0', &this->playerDataArray[playerID]);
 fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
 ```
 
-**neutral**, and it ties the call to the layout, so a header correction can no longer leave the clear behind.
+**neutral**, and it ties the call to the layout.
 
-**Verify the arithmetic before every single substitution.** Over seven `fillMemory_ByteValue` calls in
-`GameStateStructures`, only three of the constants actually equalled the field:
+**Verify the arithmetic before every single substitution.** If the size of substitution does not match the value from the original binary then the referenced struct header likely needs an improvement.
 
-| call | constant | `sizeof` | |
-|---|---|---|---|
-| `playerDataArray[playerID]` | 14836 | 14836 | substituted |
-| `mapAndTime` | 262608 | 262608 | substituted |
-| `unitMoveDestinationXYPairs` | 0xa00 / 2560 | 2560 | substituted |
-| `signpostIDs` | 0x40 | 32 | **left alone** |
-| `signpostEntryData` | 0x100 / 256 | 128 | **left alone** |
-| `signpostsMapEdge` | 0x1900 / 6400 | 5600 | **left alone** |
-
-The four that disagree are not rounding: the original clears more bytes than the generated header declares,
-and `clearDataAndSignpostDataIfNecessary` already carries `fixme` comments about it. Substituting `sizeof`
-there would silently shrink a memset and change behaviour, which no percentage would catch — the call target
-is the same. Leave the constant, keep the `fixme`, and fix the header instead.
-
-## 5. Flags that only hold 0 or 1 are `BOOLEnum`, and are tested as such
+## 5. Integer flags that only hold 0 or 1 are `BOOLEnum`, and are tested as such
 
 ```cpp
 // no
@@ -123,17 +108,11 @@ if (isAI) {
 
 Prove the claim before making it. The test is *every* store, not the name:
 
-- a **local** whose stores are all `0`/`1` is provable by reading the function — `isAI` in
-  `checkRequiredResourcesForBuildingOrPlanToBuy` and `signpostMoved` in
-  `clearDataAndSignpostDataIfNecessary` are the two in this namespace.
-- a **field** usually is not. Most are written by original code we have not reimplemented, so our source
-  cannot show the range. `currentAIArray[playerID] != 0` reads like a boolean and is not one: it holds the
-  AI lord's identity, and the comparison asks whether the slot is taken. Leaving `!= 0` is the honest form.
-- a **counter** keeps its comparison. `livingPlayers != 0` and `allowedCount >= 2` are quantities;
-  `if (livingPlayers)` would read as a flag test.
+- a **local** whose stores are all `0`/`1` is provable by reading the function body.
+- a struct field is provable if all lines of all functions that refer to the field are read.
+- a **counter** or **enum** keeps its comparison.
 
-So `!= 0` is not a wart to be removed on sight. It is the right spelling for *is this non-zero*, and only
-the wrong one for *is this true*.
+So `!= 0` is not a wart to be removed on sight without checking.
 
 ## 6. `const` on a local that is assigned once
 
@@ -147,9 +126,9 @@ int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
 int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
 ```
 
-**measure.** It is neutral in every case measured here, but `const` is exactly the kind of extra information
+**measure.** It is generally neutral, but `const` is exactly the kind of extra information
 that lets MSVC rematerialise a value instead of spilling it, and a changed spill changes every stack
-displacement after it. Re-run `reccmp_report.py cmp` over the files touched.
+displacement after it, so measure matching.
 
 A local does not qualify if anything later assigns it, steps it (`++`, `--`, `+=`), or takes its address.
 Loop counters never qualify. A `const` that has to be removed again later to accommodate a fix is worse than
@@ -157,8 +136,8 @@ no `const`, so prefer it on reads of state that the function plainly only sample
 
 ## 7. Resolve a pointer into a field or an array access
 
-Ghidra turns field walks into pointer arithmetic, and the offsets it leaves behind can point into a
-completely different member. `unptr.py` and `unoffset_matrix.py` undo the common shapes.
+Ghidra turned field walks into pointer arithmetic, and the offsets it left behind can point into a
+completely different member.
 
 ```cpp
 // no — [0x1b] is not this array at all, it is currentAIArray[playerID]
@@ -166,20 +145,13 @@ int* currentPlayerFullID = &...currentPlayerFullIDArray[playerID];
 if (*currentPlayerFullID == -1 && currentPlayerFullID[0x1b] == 0) {
 ```
 
-**measure, and expect this one to fight back.** Naming both arrays is the readable form:
+**measure** Naming both arrays is the readable form.
 
 ```cpp
 if (...currentPlayerFullIDArray[playerID] == -1 && ...currentAIArray[playerID] == 0) {
 ```
 
-and in `createStatsPopUpEntities` it costs the match. MSVC keeps one induction register either way, but
-naming the second array moves the anchor onto it: the two reads become `[edi - 0x6c]` and `[edi]` where the
-original has `[edi]` and `[edi + 0x6c]`. Same 38 instructions, two of them different — `quick_diff` 0.9737
-down to 0.9211. The cheat sheet records the general pattern (*two arrays of one struct in a condition*).
-
-When the pointer has to stay, pay for it in comments rather than leaving a bare magic offset: say which
-member the offset reaches, show the arithmetic from the header (`0x714 - 0x6a8 = 0x6c`), and record the
-measurement so nobody retries it. Make it `int const* const` while you are there.
+> `unptr.py` and `unoffset_matrix.py` undo the common shapes.
 
 ## 8. Let the compiler unroll
 
