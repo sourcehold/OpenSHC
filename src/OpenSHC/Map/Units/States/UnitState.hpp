@@ -41,7 +41,12 @@ namespace Map {
                 US_ASSASSIN_CLIMBING_DOWN = 129, // 0x00000081
                 UnitStateInt__US_APPLEFARMER_PLUCK_APPLES = 2, // 0x00000002
                 UnitStateInt__US_Appear = 122, // 0x0000007A
-                UnitStateInt__US_Dig = 125 // 0x0000007D
+                UnitStateInt__US_Dig = 125,  // 0x0000007D
+                US_STATE_3Unk = 3, // 0x00000003
+                US_STATE_9Unk = 9, // 0x00000009
+                US_STATE_12Unk = 12, // 0x0000000C
+                US_RALLYING = 105, // 0x00000069
+                US_DIG_MOAT = 124 // 0x0000007C
 
             } UnitState;
 

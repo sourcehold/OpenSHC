@@ -25,6 +25,8 @@ namespace Map {
         void __cdecl UpdateClimbDataState07();
 
         void __cdecl UpdateLadderman_SetClimbData(int unitID);
+        void __cdecl updateClimbDataType07BuildingLink();
+        int __cdecl calcApproxEuclideanDistance(int x1, int x2, int y1, int y2);
 
     } // namespace Navigation
 } // namespace Map

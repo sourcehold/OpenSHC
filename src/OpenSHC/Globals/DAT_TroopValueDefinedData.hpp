@@ -1,0 +1,23 @@
+/**
+  THIS FILE IS AUTO GENERATED
+  Communicate changes to the dev team (e.g. via a Pull Request).
+  Changes get lost otherwise.
+
+  path: 'OpenSHC/Globals/DAT_TroopValueDefinedData.hpp'
+*/
+
+#pragma once
+
+#include "OpenSHC/Game/RenderingDefinedData.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x005C2A6C
+// StructResolver::Instance<OpenSHC::Game::RenderingDefinedData,6040172>::instance
+
+namespace OpenSHC {
+
+using OpenSHC::Game::RenderingDefinedData;
+
+MACRO_STRUCT_RESOLVER(RenderingDefinedData, false, Address::SHC_3BB0A8C1_0x005C2A6C) DAT_TroopValueDefinedData;
+} // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x005C2A6C);

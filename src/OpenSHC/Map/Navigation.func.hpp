@@ -40,6 +40,12 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00530720,
             &OpenSHC::Map::Navigation::UpdateLadderman_SetClimbData)
         UpdateLadderman_SetClimbData;
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int param_1, int param_2, int param_3, int param_4), false,
+            Address::SHC_3BB0A8C1_0x0049B8C0, &OpenSHC::Map::Navigation::calcApproxEuclideanDistance)
+        calcApproxEuclideanDistance;
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004A5230,
+            &OpenSHC::Map::Navigation::updateClimbDataType07BuildingLink)
+        updateClimbDataType07BuildingLink;
 
     } // namespace Navigation_Func
 } // namespace Map
