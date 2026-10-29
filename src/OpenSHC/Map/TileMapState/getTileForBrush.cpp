@@ -29,35 +29,37 @@ namespace Map {
         if (index >= 37) {
             index = 0;
         }
-        int direction = DAT_TerrainDefinedData::instance.field12_0xc[index];
-        if (direction == 0xf) {
+        int brushStep = DAT_TerrainDefinedData::instance.field12_0xc[index];
+        if (brushStep == 0xf) {
             return;
         }
-        if (direction < 8) {
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
+        if (brushStep < 8) {
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
             *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             return;
         }
 
-        /* 20 to 27 step twice in a direction, 40 to 47 three times */
-        if (direction < 28) {
-            direction = direction - 20;
-        } else {
-            if (direction >= 48) {
-                return;
-            }
-            direction = direction - 40;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
+        if (brushStep < 28) {
+            brushStep = brushStep - 20;
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer
+                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer
+                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+        } else if (brushStep < 48) {
+            brushStep = brushStep - 40;
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer
+                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer
+                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer
+                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
         }
-        *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
-        *yPointer
-            = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
-        *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
-        *yPointer
-            = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
     }
 
 }

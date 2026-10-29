@@ -30,42 +30,43 @@ namespace Map {
     void TileMapState::placeWorkshopOrHovel(
         int playerID, uint x, uint y, BuildingType type, uint size, int orientation, undefined4 averageHeight)
     {
+        int tileIndex = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             playerID, x, y, averageHeight, (BuildingType)(short)type, size, playerID, orientation);
         /* the original stores only the low half of the int field */
         *(short*)&DAT_BuildingsState::instance.buildings[buildingID].hovelVisualStyle
             = (short)DAT_GameState::instance.playerDataArray[playerID].hovelCountUpToEight;
-        this->placedBuildingID = buildingID;
-        if (type == OpenSHC::Map::Buildings::BT_HOVEL) {
+        if ((short)type == OpenSHC::Map::Buildings::BT_HOVEL) {
             DAT_GameState::instance.playerDataArray[playerID].hovelCountUpToEight
                 = (DAT_GameState::instance.playerDataArray[playerID].hovelCountUpToEight + 1) % 7;
         }
-        int tileIndex = 0;
+        this->placedBuildingID = buildingID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             if (tileIndex < 36) {
-                DAT_BuildingsState::instance.buildings[buildingID].tileRefs[tileIndex] = tile;
+                DAT_BuildingsState::instance.buildings[buildingID].tileRefs[tileIndex] = tileUnk;
             }
-            this->HeightLayer[tile] = (byte)averageHeight;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->HeightLayer[tileUnk] = (byte)averageHeight;
+            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+            this->BuildingLayer[tileUnk] = (short)buildingID;
             tileIndex++;
-            this->BuildingWasLayer[tile] = (uchar)type;
-            this->ChangedLayer[tile] = 2;
+            this->BuildingWasLayer[tileUnk] = (uchar)type;
+            this->ChangedLayer[tileUnk] = 2;
         } while (tileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
-            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
             && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(
+                1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

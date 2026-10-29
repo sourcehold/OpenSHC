@@ -25,12 +25,13 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
-            int y = DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile
+            int tileUnk = DAT_ViewportRenderState::instance
+                           .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY]
+                           .addXgetTile
                 + DAT_BuildingsState::instance.buildings[buildingID].x + this->buildingX;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                DAT_PathFindingState::ptr)(y, tile);
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);
+                DAT_PathFindingState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tileUnk);
             buildingSizeTileIndex++;
         } while (buildingSizeTileIndex < this->constructionTileCount);
 

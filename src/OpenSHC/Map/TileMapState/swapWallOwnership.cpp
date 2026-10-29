@@ -14,53 +14,47 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9220
     void TileMapState::swapWallOwnership(int playerID, int otherPlayerID)
     {
-        for (int tile = 0; tile < 80400; tile += 6) {
-            if ((this->LogicLayer[tile + 0] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 0] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 0] = this->WallOwnerLayer[tile + 0] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 0] = this->WallOwnerLayer[tile + 0] & 0xf8 | (char)playerID - 1U;
+        for (int tileUnk = 0; tileUnk < 80400; tileUnk += 6) {
+            if ((this->LogicLayer[tileUnk + 0] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 0] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 0] = this->WallOwnerLayer[tileUnk + 0] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 0] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 0] = this->WallOwnerLayer[tileUnk + 0] & 0xf8 | (char)playerID - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 1] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 1] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 1] = this->WallOwnerLayer[tile + 1] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 1] = this->WallOwnerLayer[tile + 1] & 0xf8 | (char)playerID - 1U;
+            if ((this->LogicLayer[tileUnk + 1] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 1] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 1] = this->WallOwnerLayer[tileUnk + 1] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 1] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 1] = this->WallOwnerLayer[tileUnk + 1] & 0xf8 | (char)playerID - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 2] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 2] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 2] = this->WallOwnerLayer[tile + 2] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 2] = this->WallOwnerLayer[tile + 2] & 0xf8 | (char)playerID - 1U;
+            if ((this->LogicLayer[tileUnk + 2] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 2] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 2] = this->WallOwnerLayer[tileUnk + 2] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 2] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 2] = this->WallOwnerLayer[tileUnk + 2] & 0xf8 | (char)playerID - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 3] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 3] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 3] = this->WallOwnerLayer[tile + 3] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 3] = this->WallOwnerLayer[tile + 3] & 0xf8 | (char)playerID - 1U;
+            if ((this->LogicLayer[tileUnk + 3] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 3] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 3] = this->WallOwnerLayer[tileUnk + 3] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 3] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 3] = this->WallOwnerLayer[tileUnk + 3] & 0xf8 | (char)playerID - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 4] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 4] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 4] = this->WallOwnerLayer[tile + 4] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 4] = this->WallOwnerLayer[tile + 4] & 0xf8 | (char)playerID - 1U;
+            if ((this->LogicLayer[tileUnk + 4] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 4] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 4] = this->WallOwnerLayer[tileUnk + 4] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 4] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 4] = this->WallOwnerLayer[tileUnk + 4] & 0xf8 | (char)playerID - 1U;
                 }
             }
-            if ((this->LogicLayer[tile + 5] & L_WALL_OR_GATEHOUSE) != 0) {
-                int owner = (this->WallOwnerLayer[tile + 5] & 7) + 1;
-                if (owner == playerID) {
-                    this->WallOwnerLayer[tile + 5] = this->WallOwnerLayer[tile + 5] & 0xf8 | (char)otherPlayerID - 1U;
-                } else if (owner == otherPlayerID) {
-                    this->WallOwnerLayer[tile + 5] = this->WallOwnerLayer[tile + 5] & 0xf8 | (char)playerID - 1U;
+            if ((this->LogicLayer[tileUnk + 5] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tileUnk + 5] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tileUnk + 5] = this->WallOwnerLayer[tileUnk + 5] & 0xf8 | (char)otherPlayerID - 1U;
+                } else if ((this->WallOwnerLayer[tileUnk + 5] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tileUnk + 5] = this->WallOwnerLayer[tileUnk + 5] & 0xf8 | (char)playerID - 1U;
                 }
             }
         }

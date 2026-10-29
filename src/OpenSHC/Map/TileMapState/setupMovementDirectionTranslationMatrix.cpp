@@ -20,8 +20,7 @@ namespace Map {
         */
         int step = 2;
         int counter = 0;
-        int row = 0;
-        do {
+        for (int row = 0; row < 199; row++) {
             this->directionTranslationMatrix[row][0] = counter - 1;
             this->directionTranslationMatrix[row][3] = step + 2;
             this->directionTranslationMatrix[row][4] = step + 1;
@@ -33,8 +32,7 @@ namespace Map {
             this->yArray1[row] = step;
             counter = counter - 2;
             step = step + 2;
-            row++;
-        } while (counter > -398);
+        }
 
         this->directionTranslationMatrix[199][1] = 2 - step;
         this->directionTranslationMatrix[199][4] = step;

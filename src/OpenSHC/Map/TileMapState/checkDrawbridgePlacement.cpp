@@ -32,24 +32,26 @@ namespace Map {
         }
         this->buildingPlacementFail = TRUE;
 
-        for (int rotation = 0; rotation < 4; rotation++) {
+        int rotation;
+        for (rotation = 0; rotation < 4; rotation++) {
             int buildings[9];
             int count = 0;
             do {
-                uint offsetY = DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].y + y;
+                uint offsetY = y + DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].y;
                 int offsetX = DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].x;
+                uint tileX = offsetX + x;
                 buildings[count] = 0;
-                if ((uint)(offsetX + x) > 399 || offsetY > 399) {
+                if (tileX > 399 || offsetY > 399) {
                     break;
                 }
-                if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[offsetY * 400 + offsetX + x] == 0) {
+                if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[offsetY * 400 + tileX] == 0) {
                     break;
                 }
-                int tile = DAT_ViewportRenderState::instance.translationMatrix[offsetY].addXgetTile + offsetX + x;
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[offsetY].addXgetTile + offsetX + x;
+                if ((this->LogicLayer[tileUnk] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     break;
                 }
-                buildings[count] = this->BuildingLayer[tile];
+                buildings[count] = this->BuildingLayer[tileUnk];
                 count++;
             } while (count < 9);
 
@@ -73,24 +75,28 @@ namespace Map {
                 if (rotation == 1 || rotation == 3) {
                     continue;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingVariation == 0x50
-                && (rotation == 0 || rotation == 2)) {
-                continue;
+            } else if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingVariation == 0x50) {
+                if (rotation == 0 || rotation == 2) {
+                    continue;
+                }
             }
 
+            int i = 0;
             int matching = 0;
-            for (int i = 0; i < span; i++) {
+            for (; i < span; i++) {
                 if (buildings[i] == buildings[0]) {
                     matching++;
                 }
             }
             if (matching == span) {
-                this->buildingPlacementFail = FALSE;
-                this->uiBuildingRotation = rotation * 2;
-                this->field127_0x554944 = this->uiBuildingRotation * 25;
-                return;
+                goto found;
             }
         }
+        return;
+    found:
+        this->uiBuildingRotation = rotation * 2;
+        this->field127_0x554944 = this->uiBuildingRotation * 25;
+        this->buildingPlacementFail = FALSE;
     }
 
 }
