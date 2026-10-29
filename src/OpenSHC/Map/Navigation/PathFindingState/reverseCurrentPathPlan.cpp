@@ -24,18 +24,17 @@ namespace Map {
             /*
               Index from end of path
              */
+            _endIndex = this->searchQueue.pathPlanIndex - 1;
             if (1 < (int)this->searchQueue.pathPlanIndex) {
                 /*
                   Calculate number of swaps needed (swap pairs from both ends toward center)   Example: 8 elements = 4
                   swaps, 7 elements = 3 swaps
                  */
                 _swapCounter = (this->searchQueue.pathPlanIndex - 2 >> 1) + 1;
-                _endIndex = this->searchQueue.pathPlanIndex;
                 do {
                     /*
                       === SWAP LOOP: Exchange elements from both ends ===   === EXTRACT DIRECTION AT START (uVar3) ===
                      */
-                    _endIndex = _endIndex - 1;
                     if ((_index & 1) == 0) {
                         /*
                           Even index: direction is in LOW nibble (bits 0-3)
@@ -79,7 +78,7 @@ namespace Map {
                         /*
                           Shift value to HIGH nibble position
                          */
-                        bVar1 = bVar1 << 4;
+                        bVar1 = (char)(bVar1 << 4);
                     }
                     /*
                       Write the direction value
@@ -104,7 +103,7 @@ namespace Map {
                         /*
                           Shift value to HIGH nibble position
                          */
-                        bVar2 = bVar2 << 4;
+                        bVar2 = (char)(bVar2 << 4);
                     }
                     /*
                       Write the direction value
@@ -117,6 +116,7 @@ namespace Map {
                     /*
                       Move start index forward
                      */
+                    _endIndex = _endIndex - 1;
                     _index = _index + 1;
                     /*
                       Decrement swap counter

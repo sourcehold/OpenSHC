@@ -22,21 +22,20 @@ namespace Map {
           faulty   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BE60
-        void PathFindingState::getTileInSquareBrush(int brushTileIndex, uint x, uint y)
+        void PathFindingState::getTileInSquareBrush(int brushTileIndex, uint ySpace, uint y)
         {
             int (*_dirAtTile)[8];
             int _index_3;
             int _tracker_3;
             int _tracker;
-            uint _yArray[1000];
-            int _tileArray[1000];
+            int _queue[2][1000]; // [0] = row (y) of each queued tileUnk, [1] = the tileUnk
+            int _y;
             int _tile_2;
-            uint _y;
             int _yTranslationUnk;
             /*
               __chkstk
              */
-            _tileArray[999] = 0x49be6a;
+            _queue[1][999] = 0x49be6a;
             _index_3 = 1;
             this->calculations = this->calculations + 1;
             this->searchGeneration = this->searchGeneration + 1;
@@ -50,17 +49,17 @@ namespace Map {
             this->resultTile = 0;
             this->resultY = 0;
             this->resultX = 0;
-            if (x <= 399 && y <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
-                _tileArray[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                _yArray[0] = y;
-                if (brushTileIndex < 1) {
+            if (ySpace <= 399 && y <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0') {
+                _queue[1][0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+                _queue[0][0] = y;
+                if (brushTileIndex <= 0) {
                     this->resultY = y;
-                    this->resultTile = _tileArray[0];
+                    this->resultTile = _queue[1][0];
                     return;
                 }
-                while ((_tile_2 = _tileArray[_tracker_3], -1 < _tile_2 && (_tile_2 < 80400))) {
-                    _y = _yArray[_tracker_3];
+                while ((_tile_2 = _queue[1][_tracker_3], -1 < _tile_2 && (_tile_2 < 80400))) {
+                    _y = _queue[0][_tracker_3];
                     if ((DAT_TileMapState::instance.LogicLayer[_tile_2] & 0x30) == 0) {
                         int _direction = 0;
                         _dirAtTile = DAT_TileMapState::instance.directionTranslationMatrix + _y;
@@ -69,19 +68,19 @@ namespace Map {
                             if (DAT_TileMapState::instance.WalkLayer[_currentTile] != this->searchGeneration) {
                                 _tracker = _tracker + 1;
                                 if (brushTileIndex <= _tracker) {
+                                    this->resultTile = _currentTile;
                                     this->resultY = DAT_TerrainDefinedData::instance
                                                         .clockwiseCardinalTranslationMatrix[_direction]
                                                         .int_.yOffset
                                         + _y;
-                                    this->resultTile = _currentTile;
                                     return;
                                 }
                                 DAT_TileMapState::instance.WalkLayer[_currentTile] = (short)this->searchGeneration;
                                 _yTranslationUnk
                                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .int_.yOffset;
-                                _tileArray[_index_3] = _currentTile;
-                                _yArray[_index_3] = _yTranslationUnk + _y;
+                                _queue[1][_index_3] = _currentTile;
+                                _queue[0][_index_3] = _yTranslationUnk + _y;
                                 _index_3 = _index_3 + 1;
                                 if (_index_3 >= 80400) {
                                     _index_3 = 0;
@@ -92,7 +91,7 @@ namespace Map {
                         } while (_direction < 8);
                     }
                     _tracker_3 = _tracker_3 + 1;
-                    if (80400 < _tracker_3) {
+                    if (_tracker_3 >= 80400) {
                         _tracker_3 = 0;
                     }
                     if (_tracker_3 == _index_3) {

@@ -22,9 +22,9 @@ namespace Map {
              @return bool whether destination was reached   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A370
-        BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY)
+        BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint ySpace, uint y, uint destX, uint destY)
         {
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < ySpace || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return FALSE;
             }
             if (399 < destX || 399 < destY
@@ -38,99 +38,139 @@ namespace Map {
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             /*
-              The original keeps every layer base and both end points in its own stack slot for the
-              whole walk rather than reloading the globals, so they are locals here too.
+              The walk itself is handwritten assembly in the original (0x0049A481-0x0049A5C2): every layer
+              base and both end points live in their own stack slot and are reloaded at each use,
+              "cmp eax, 0" instead of "test", and a "jmp" to the very next instruction. The setup and the
+              epilogue around it are compiler-generated.
              */
             int _budget = 0;
-            uint _ppIndex = 0;
+            int _result = 0;
             int _direction = 0;
             uint _gen = (ushort)this->searchGeneration;
             int _fireCount = DAT_EntityState::instance.fireCount;
-            short* _walkLayer = DAT_TileMapState::instance.WalkLayer;
+            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            int _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
             uchar* _occupancy = DAT_TileMapState::instance.OccupancyLayer;
+            short* _walkLayer = DAT_TileMapState::instance.WalkLayer;
             uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
             Point8* _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
-            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-            int _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
             byte* _pPathPlan = this->searchQueue.ptrPathPlan;
-            _ppIndex = this->searchQueue.pathPlanIndex;
-            while (true) {
-                _budget = _budget + 1;
-                if (399 < _budget) {
-                    break;
-                }
-                _walkLayer[_tile] = (short)_gen;
-                /*
-                  tile2 matches tile ?
-                 */
-                if (_tile == _destTile) {
-                    this->searchQueue.pathPlanIndex = _ppIndex;
-                    return TRUE;
-                }
-                /*
-                  tile is occupied and fire?
-                 */
-                if (_fireCount != 0 && _occupancy[_tile] != '\0') {
-                    break;
-                }
-                int _canTraverseThisDirection = _linkage[_tile];
-                if ((int)destY < (int)y) {
-                    if ((int)destX < (int)x) {
-                        _direction = 7;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x80;
-                    } else if ((int)x < (int)destX) {
-                        _direction = 1;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 2;
-                    } else {
-                        _direction = 0;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 1;
-                    }
-                } else if ((int)y < (int)destY) {
-                    if ((int)destX < (int)x) {
-                        _direction = 5;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x20;
-                    } else if ((int)x < (int)destX) {
-                        _direction = 3;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 8;
-                    } else {
-                        _direction = 4;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x10;
-                    }
-                } else if ((int)destX < (int)x) {
-                    _direction = 6;
-                    _canTraverseThisDirection = _canTraverseThisDirection & 0x40;
-                } else {
-                    if ((int)destX <= (int)x) {
-                        break;
-                    }
-                    _direction = 2;
-                    _canTraverseThisDirection = _canTraverseThisDirection & 4;
-                }
-                /*
-                  if cannot go any direction, stop
-                 */
-                if (_canTraverseThisDirection == 0) {
-                    break;
-                }
-                /*
-                  update tile with new direction
-                 */
-                _tile = _tile + _dirMatrix[y * 8 + _direction];
-                x = x + _cardinal[_direction].int_.xOffset;
-                y = y + _cardinal[_direction].int_.yOffset;
-                /*
-                  store direction in path plan
-                 */
-                if ((_ppIndex & 1) == 0) {
-                    _pPathPlan[_ppIndex >> 1] = (byte)_direction;
-                } else {
-                    _pPathPlan[_ppIndex >> 1] = (_pPathPlan[_ppIndex >> 1] & 0xf) | (byte)(_direction << 4);
-                }
-                _ppIndex = _ppIndex + 1;
+            uint _ppIndex = this->searchQueue.pathPlanIndex;
+            // clang-format off
+            __asm {
+                mov edi, _walkLayer
+                mov ebx, ySpace
+                mov ecx, y
+                mov edx, _tile
+            L_loop:
+                add _budget, 1
+                cmp _budget, 0x190
+                jge L_exit
+                mov ax, word ptr _gen
+                mov word ptr [edi + edx*2], ax
+                mov eax, _destTile
+                cmp edx, eax
+                je L_found
+                mov eax, _fireCount
+                cmp eax, 0
+                je L_noFire
+                mov esi, _occupancy
+                mov al, byte ptr [esi + edx]
+                cmp al, 0
+                jne L_exit
+            L_noFire:
+                mov esi, _linkage
+                mov al, byte ptr [esi + edx]
+                cmp ecx, destY
+                jg L_north
+                jl L_south
+                cmp ebx, destX
+                jg L_west
+                jl L_east
+                jmp L_exit
+            L_west:
+                mov _direction, 6
+                test al, 0x40
+                je L_exit
+                jmp L_step
+            L_east:
+                mov _direction, 2
+                test al, 4
+                je L_exit
+                jmp L_step
+            L_north:
+                cmp ebx, destX
+                jg L_northWest
+                jl L_northEast
+                mov _direction, 0
+                test al, 1
+                je L_exit
+                jmp L_step
+            L_northWest:
+                mov _direction, 7
+                test al, 0x80
+                je L_exit
+                jmp L_step
+            L_northEast:
+                mov _direction, 1
+                test al, 2
+                je L_exit
+                jmp L_step
+            L_south:
+                cmp ebx, destX
+                jg L_southWest
+                jl L_southEast
+                mov _direction, 4
+                test al, 0x10
+                je L_exit
+                jmp L_step
+            L_southWest:
+                mov _direction, 5
+                test al, 0x20
+                je L_exit
+                jmp L_step
+            L_southEast:
+                mov _direction, 3
+                test al, 8
+                je L_exit
+                jmp L_step
+            L_step:
+                mov eax, ecx
+                shl eax, 3
+                add eax, _direction
+                shl eax, 2
+                mov esi, _dirMatrix
+                add edx, dword ptr [esi + eax]
+                mov esi, _cardinal
+                mov eax, _direction
+                add ebx, dword ptr [esi + eax*8]
+                add ecx, dword ptr [esi + eax*8 + 4]
+                mov eax, _ppIndex
+                mov esi, _pPathPlan
+                add _ppIndex, 1
+                test eax, 1
+                je L_even
+                shr eax, 1
+                add esi, eax
+                mov eax, _direction
+                shl eax, 4
+                and byte ptr [esi], 0xf
+                or byte ptr [esi], al
+                jmp L_loop
+            L_even:
+                shr eax, 1
+                add esi, eax
+                mov eax, _direction
+                mov byte ptr [esi], al
+                jmp L_loop
+            L_found:
+                mov _result, 1
+            L_exit:
             }
+            // clang-format on
             this->searchQueue.pathPlanIndex = _ppIndex;
-            return FALSE;
+            return (BOOLEnum)_result;
         }
     }
 }

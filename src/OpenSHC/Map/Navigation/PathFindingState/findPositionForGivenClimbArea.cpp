@@ -16,27 +16,26 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497690
-        void PathFindingState::findPositionForGivenClimbArea(int area, uint x, uint y)
+        void PathFindingState::findPositionForGivenClimbArea(int area, uint ySpace, uint y)
         {
             int _direction;
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (ySpace > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
-            int _directionIndex = 0;
-            while (_direction = (int)(char)DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex],
-                (short)DAT_TileMapState::instance
+            int _baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            for (int _directionIndex = 0; _directionIndex < 8; _directionIndex++) {
+                _direction = (int)(char)DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex];
+                if ((short)DAT_TileMapState::instance
                         .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction]
-                            + DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
-                    != area) {
-                _directionIndex = _directionIndex + 1;
-                if (7 < _directionIndex) {
+                            + _baseTile]
+                    == area) {
+                    this->climbX
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset + ySpace;
+                    this->climbY
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y;
                     return;
                 }
             }
-            this->climbX
-                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset + x;
-            this->climbY
-                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y;
             return;
         }
 

@@ -14,14 +14,16 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A4B30
         BOOLEnum PathFindingState::isUsableClimbWithinArea(int area, int wallDataID)
         {
-            if ((this->climbData[wallDataID].canBeUsed == 1)
-                && (this->climbData[wallDataID].isRecognizedByPathfinding != 0)) {
-                if (this->climbData[wallDataID].area == area) {
-                    return TRUE;
-                }
-                return (uint)(this->climbData[wallDataID].wallGroupAreaID == area);
+            if (this->climbData[wallDataID].canBeUsed != 1) {
+                return FALSE;
             }
-            return FALSE;
+            if (this->climbData[wallDataID].isRecognizedByPathfinding == 0) {
+                return FALSE;
+            }
+            if (this->climbData[wallDataID].area == area) {
+                return TRUE;
+            }
+            return (uint)(this->climbData[wallDataID].wallGroupAreaID == area);
         }
 
     }

@@ -24,7 +24,7 @@ namespace Map {
         {
             int (*paiVar5)[8];
             int iVar6;
-            ushort _area;
+            int _area;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
@@ -48,7 +48,8 @@ namespace Map {
             this->searchQueue.xQueue[0] = (short)unitX;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[unitY].addXgetTile + unitX;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
@@ -56,7 +57,7 @@ namespace Map {
                     if (iVar3 < 0) {
                         return 0;
                     }
-                    if (80400 < iVar3) {
+                    if (80400 <= iVar3) {
                         return 0;
                     }
                     int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
@@ -93,7 +94,7 @@ namespace Map {
                                 _area = (short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
                                 _tile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                    this)(playerID, (dword)((int)((short)_area)), (dword)((int)(targetArea)), 0);
+                                    this)(playerID, (dword)(_area), (dword)((int)(targetArea)), 0);
                                 if (_tile != 0) {
                                     this->climbX
                                         = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
@@ -103,7 +104,7 @@ namespace Map {
                                         = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
                                               .int_.yOffset
                                         + (int)sVar2;
-                                    return (int)(short)_area;
+                                    return _area;
                                 }
                             }
                         }

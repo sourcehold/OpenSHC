@@ -20,7 +20,7 @@ namespace Map {
          * Finds an appropriate location for placing a siege tent near a target position.    * Uses breadth-first search
          * (BFS) to explore tiles radiating outward from the starting position.    *     * @param this -
          * PathFindingState object pointer    * @param distance? - Maximum search distance (typically 100 or 200 tiles)
-         * * @param x - Starting X coordinate (0-399)    * @param y - Starting Y coordinate (0-399)    * @param
+         * * @param ySpace - Starting X coordinate (0-399)    * @param y - Starting Y coordinate (0-399)    * @param
          * selectionID - ID for selected unit/object (unused in function body)    * @param requiredDistanceFromAIZone -
          * Exact match required for AI zone tactical distance if   nonzero    * @param playerID - Current player's ID
          * * @return Tile index of valid siege tent location, or 0 if none found      decompilerscript: committed:
@@ -28,21 +28,13 @@ namespace Map {
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049F7D0
         dword PathFindingState::findAppropriateLocationForSiegeTent(
-            int distanceUnk, uint x, uint y, undefined4 selectionID, uint requiredDistanceFromAIZone, int playerID)
+            int distanceUnk, uint ySpace, uint y, undefined4 selectionID, uint requiredDistanceFromAIZone, int playerID)
         {
-            int* piVar4;
-            int iVar5;
-            int iVar6;
-            dword _offsetTile;
-            uint uVar7;
-            uint uVar8;
-            int local_c;
-            int _tile;
             /*
-              === INITIAL VALIDATION ===   Check if coordinates are within map bounds (400x400) and if the tile is
+              === INITIAL VALIDATION ===   Check if coordinates are within map bounds (400x400) and if the tileUnk is
               walkable
              */
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < ySpace || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 /*
                   Invalid position - out of bounds or unwalkable
                  */
@@ -57,7 +49,7 @@ namespace Map {
              */
             this->searchGeneration = this->searchGeneration + 1;
             /*
-              If flag value exceeds 32000, reset to 1 and clear the entire WalkLayer   This prevents overflow and avoids
+              If flag value exceeds 32000, reset to 1 and clear the entire WalkLayer   This prevents underflow and avoids
               having to clear the layer every search
              */
             if (32000 < this->searchGeneration) {
@@ -69,7 +61,7 @@ namespace Map {
                     160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             /*
-              === BFS QUEUE INITIALIZATION ===   Initialize BFS queue indices      Current tile being processed
+              === BFS QUEUE INITIALIZATION ===   Initialize BFS queue indices      Current tileUnk being processed
              */
             this->searchQueue.readIndex = 0;
             /*
@@ -85,11 +77,11 @@ namespace Map {
              */
             this->searchQueue.yQueue[0] = (short)y;
             /*
-              Convert 2D coordinates to 1D tile index
+              Convert 2D coordinates to 1D tileUnk index
              */
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             /*
-              Mark starting tile with distance 1
+              Mark starting tileUnk with distance 1
              */
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             /*
@@ -100,236 +92,109 @@ namespace Map {
               === MAIN BFS LOOP ===   Continue while there are tiles in the queue to process
              */
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
-                    -1 < _tile && (_tile < 0x13a10))) {
-                    /*
-                      Get Y coordinate of current tile being processed
-                     */
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    /*
-                      Get distance from start for current tile
-                     */
-                    this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    /*
-                      Safety check: if distance exceeds max tile count, abort
-                     */
-                    if (80400 < this->searchQueue.currentDistance) {
+                do {
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (_tile < 0 || _tile >= 80400) {
                         return (dword)(0);
                     }
                     /*
-                      If we've exceeded search radius, stop searching
+                      Y coordinate and distance from start of the current tileUnk
                      */
-                    if (this->searchQueue.currentDistance > distanceUnk) {
+                    int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_tile];
+                    /*
+                      Safety check, then stop once the search radius is exceeded
+                     */
+                    if ((int)this->searchQueue.currentDistance > 80400) { // 0x49F8D5 signed jg
+                        return (dword)(0);
+                    }
+                    if ((int)this->searchQueue.currentDistance > distanceUnk) { // 0x49F8EA signed jg (diffemu 2026-10-16)
                         return (dword)(0);
                     }
                     /*
-                      === EXPLORE 8 ADJACENT TILES ===   Check all 8 cardinal/diagonal directions from current tile
+                      === EXPLORE 8 ADJACENT TILES ===
                      */
-                    y = 0;
-                    do {
+                    for (int _direction = 0; _direction < 8; _direction++) {
+                        if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction]
+                                & DAT_TileMapState::instance.PathLinkageLayer[_tile])
+                            == 0)
+                            continue;
+                        dword _offsetTile = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
+                        if (DAT_TileMapState::instance.WalkLayer[_offsetTile] == this->searchGeneration)
+                            continue;
                         /*
-                          Check if movement is possible in this direction (using bitflag for direction   y)   Check if
-                          adjacent tile hasn't been visited this iteration
+                          === AI Zone DISTANCE CHECK ===   If specified (i.e. not 0), then the strategic distance of
+                          the current tileUnk must be exactly that value
                          */
-                        if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[y])
-                                != 0
-                            && (_offsetTile = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][y] + _tile,
-                                DAT_TileMapState::instance.WalkLayer[_offsetTile] != this->searchGeneration)) {
-                            int bVar2 = 1;
+                        int _zoneOk = 1;
+                        if (requiredDistanceFromAIZone != 0
+                            && *(byte*)(*(int*)(((int)&DAT_TroopValueState::instance.attackInfo + 0x301d0 /* old hackValuesArray: AttackInfoSubElement of player p at +0x301C0 + p*0x177BC */)
+                                                + playerID * 0x177bc + -0x10)
+                                           * 0x13a10
+                                       + 0x1ee2998 + _offsetTile)
+                                != requiredDistanceFromAIZone) {
+                            _zoneOk = 0;
+                        }
+                        /*
+                          === SIEGE TENT PLACEMENT VALIDATION ===   Only beyond distance 4, on a tileUnk without units
+                         */
+                        if ((int)this->searchQueue.currentDistance > 4 && DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0
+                            && _zoneOk) {
                             /*
-                              === AI Zone DISTANCE CHECK ===   If specified (i.e. not 0), then the strategic distance of
-                              the current tile   must be exactly that value
+                              All 8 surrounding tiles must be free (no impassable terrain 0x4a7014b1 / 4, units or
+                              buildings) and the terrain flat (high spread < 12)
                              */
-                            if (requiredDistanceFromAIZone != 0
-                                && (bVar2 = true,
-                                    *(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                 + playerID * 0x177bc + -0x10)
-                                            * 0x13a10
-                                        + 0x1ee2998 + _offsetTile)
-                                        != requiredDistanceFromAIZone)) {
-                                bVar2 = 0;
-                            }
-                            /*
-                              === SIEGE TENT PLACEMENT VALIDATION ===   Only check for valid placement if distance > 4
-                              (minimum spacing requirement)
-                             */
-                            if (4 < this->searchQueue.currentDistance
-                                && (short)DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
-                                /*
-                                  Get height of candidate tile
-                                 */
-                                uVar7 = (uint)DAT_TileMapState::instance.HeightLayer[_offsetTile];
-                                iVar6 = 0;
-                                local_c = 0;
-                                /*
-                                  Get pointer to movement direction offsets for checking surrounding tiles   Track
-                                  minimum height in surrounding area
-                                 */
-                                x = uVar7;
-                                /*
-                                  === CHECK 8 SURROUNDING TILES FOR TENT PLACEMENT ===   Loop checks tiles in groups of
-                                  4 for optimization
-                                 */
-                                do {
-                                    /*
-                                      Check first tile in group
-                                     */
-                                    iVar5 = DAT_TileMapState::instance
-                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                                                                .clockwiseCardinalTranslationMatrix[y]
-                                                                                .int_.yOffset
-                                                    + (int)sVar1][local_c]
-                                        + _offsetTile;
-                                    /*
-                                      Disqualify if tile has: impassable terrain, units, or buildings   0x4a7014b1
-                                      checks for: sea, border, border_edge, rocky, building,    tree, river, ford,
-                                      crenel wall impassible, farm field hop tree,    farm field dairy fence, moat, farm
-                                     */
-                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
-                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)
-                                        break;
-                                    /*
-                                      Track height variation (for flatness check)
-                                     */
-                                    uint uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        /*
-                                          Update minimum height
-                                         */
-                                        x = uVar3;
-                                    }
-                                    uVar7 = uVar8;
-                                    /*
-                                      Update maximum height   Repeat checks for tiles 2, 3, and 4 in the group (Pattern
-                                      repeats with piVar4[0],
-                                      DAT_TileMapState::instance.directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                      .clockwiseCardinalTranslationMatrix[y] .int_.yOffset + (int)sVar1][local_c + 2],
-                                      DAT_TileMapState::instance.directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                      .clockwiseCardinalTranslationMatrix[y] .int_.yOffset + (int)sVar1][local_c + 3])
-                                      Each tile checks: LogicLayer, UnitLayer, BuildingLayer, HeightLayer
-                                     */
-                                    iVar5 = DAT_TileMapState::instance
-                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                                                                .clockwiseCardinalTranslationMatrix[y]
-                                                                                .int_.yOffset
-                                                    + (int)sVar1][local_c + 1]
-                                        + _offsetTile;
-                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
-                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
-                                        iVar6 = iVar6 + 1;
-                                        break;
-                                    }
-                                    uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        x = uVar3;
-                                    }
-                                    uVar7 = uVar8;
-                                    iVar5 = DAT_TileMapState::instance
-                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                                                                .clockwiseCardinalTranslationMatrix[y]
-                                                                                .int_.yOffset
-                                                    + (int)sVar1][local_c + 2]
-                                        + _offsetTile;
-                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
-                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
-                                        iVar6 = iVar6 + 2;
-                                        break;
-                                    }
-                                    uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        x = uVar3;
-                                    }
-                                    iVar5 = DAT_TileMapState::instance
-                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                                                                .clockwiseCardinalTranslationMatrix[y]
-                                                                                .int_.yOffset
-                                                    + (int)sVar1][local_c + 3]
-                                        + _offsetTile;
-                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
-                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
-                                        iVar6 = iVar6 + 3;
-                                        uVar7 = uVar8;
-                                        break;
-                                    }
-                                    uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar7 = uVar3;
-                                    if ((uVar3 <= uVar8) && (uVar7 = uVar8, uVar3 < x)) {
-                                        x = uVar3;
-                                    }
-                                    local_c = local_c + 4;
-                                    iVar6 = iVar6 + 4;
-                                } while (local_c < 8);
-                                /*
-                                  === FINAL VALIDATION ===   If all 8 surrounding tiles are clear (iVar6 == 8)   AND
-                                  terrain is relatively flat (height difference < 12)
-                                 */
-                                if (iVar6 == 8 && (int)(uVar7 - x) < 0xc) {
-                                    /*
-                                      FOUND VALID LOCATION!
-                                     */
-                                    return (dword)(_offsetTile);
+                            int _maxHeight = DAT_TileMapState::instance.HeightLayer[_offsetTile];
+                            int _minHeight = _maxHeight;
+                            int _row = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + _y;
+                            int _free = 0;
+                            for (int _around = 0; _around < 8; _around++) {
+                                int _neighbour
+                                    = DAT_TileMapState::instance.directionTranslationMatrix[_row][_around] + _offsetTile;
+                                if ((DAT_TileMapState::instance.LogicLayer[_neighbour] & 0x4a7014b1) != 0
+                                    || (DAT_TileMapState::instance.LogicLayer[_neighbour] & 4) != 0
+                                    || DAT_TileMapState::instance.UnitLayer[_neighbour] != 0
+                                    || DAT_TileMapState::instance.BuildingLayer[_neighbour] != 0)
+                                    break;
+                                int _height = DAT_TileMapState::instance.HeightLayer[_neighbour];
+                                if (_height > _maxHeight) {
+                                    _maxHeight = _height;
+                                } else if (_height < _minHeight) {
+                                    _minHeight = _height;
                                 }
+                                _free = _free + 1;
                             }
-                            /*
-                              === ADD TILE TO BFS QUEUE ===   Mark this tile's distance (current distance + 1)
-                             */
-                            DAT_TileMapState::instance.CertainPathLayer[_offsetTile]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            /*
-                              Mark as visited
-                             */
-                            DAT_TileMapState::instance.WalkLayer[_offsetTile] = (short)this->searchGeneration;
-                            /*
-                              Add Y coordinate to queue
-                             */
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[y].short_.yOffset
-                                + sVar1;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
-                            /*
-                              Increment queue write position
-                             */
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 < this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
+                            if (_free == 8 && _maxHeight - _minHeight < 12) {
+                                /*
+                                  FOUND VALID LOCATION!
+                                 */
+                                return _offsetTile;
                             }
                         }
                         /*
-                          Move to next direction
+                          === ADD TILE TO BFS QUEUE ===
                          */
-                        y = y + 1;
-                        /*
-                           Process all 8 directions
-                         */
-                    } while ((int)y < 8);
+                        DAT_TileMapState::instance.CertainPathLayer[_offsetTile]
+                            = (short)this->searchQueue.currentDistance + 1;
+                        DAT_TileMapState::instance.WalkLayer[_offsetTile] = (short)this->searchGeneration;
+                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                            + (short)_y;
+                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
+                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                        if ((int)this->searchQueue.writeIndex >= 80400) {
+                            this->searchQueue.writeIndex = 0;
+                        }
+                    }
                     /*
                       === ADVANCE TO NEXT TILE IN QUEUE ===
                      */
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (80400 < this->searchQueue.readIndex) {
+                    if ((int)this->searchQueue.readIndex >= 80400) {
                         this->searchQueue.readIndex = 0;
                     }
-                    /*
-                      Check if queue is empty (read position caught up to write position)
-                     */
-                    if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
-                        return (dword)(0);
-                    }
-                }
-            }
-            /*
+                } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
+            }            /*
               No valid location found
              */
             return (dword)(0);

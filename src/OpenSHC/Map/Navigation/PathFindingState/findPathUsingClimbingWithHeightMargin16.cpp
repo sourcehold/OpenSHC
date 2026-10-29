@@ -9,6 +9,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -21,6 +22,15 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        /* inlined copy of ViewportRenderState::xyAreValid */
+        static inline BOOLEnum xyAreValid(uint ySpace, uint y)
+        {
+            if (ySpace <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0) {
+                return TRUE;
+            }
+            return FALSE;
+        }
+
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
          */
@@ -29,32 +39,24 @@ namespace Map {
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00498020
         BOOLEnum PathFindingState::findPathUsingClimbingWithHeightMargin16(
-            uint x, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch)
+            uint ySpace, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch)
         {
             int (*paiVar4)[8];
             int _keepHeight;
             int _tDiff;
             int _direction;
-            uint _cHeight;
+            int _cHeight;
             int _candidate;
             BuildingTypeShort _cType;
             uint _cLogic;
             uint _tLogic;
             BuildingTypeShort _tType;
             uint _tile;
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (xyAreValid(ySpace, y) == FALSE) {
                 return FALSE;
             }
-            if (x2 != 0xffffffff) {
-                if (399 < x2) {
-                    return FALSE;
-                }
-                if (399 < y2) {
-                    return FALSE;
-                }
-                if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0') {
-                    return FALSE;
-                }
+            if (x2 != 0xffffffff && xyAreValid(x2, y2) == FALSE) {
+                return FALSE;
             }
             if (continueSearch == FALSE) {
                 this->searchGeneration = this->searchGeneration + 1;
@@ -68,136 +70,131 @@ namespace Map {
                 this->searchQueue.currentDistance = 1;
             }
             this->searchQueue.yQueue[0] = (short)y;
-            this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.xQueue[0] = (short)ySpace;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (x2 == 0xffffffff) {
-                x = 0;
+                ySpace = 0;
             } else {
-                x = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
+                ySpace = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
             }
-            while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (_tile == x) {
-                    /*
-                      if candidate matches target tile
-                     */
-                    this->searchMatchCounter = this->searchMatchCounter + 1;
-                    return TRUE;
-                }
-                if ((budget <= this->searchQueue.readIndex) || (0x13a0f < _tile))
-                    break;
-                int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (0x78 < this->searchQueue.currentDistance)
-                    break;
-                uint _tHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
-                _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
-                _direction = 0;
-                paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
+            if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
-                    /*
-                      for each direction, do:
-                     */
-                    _candidate = (*paiVar4)[0] + _tile;
-                    if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
-                        if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
-                            == 0) {
-                            /*
-                              tile is not wall or gatehouse
-                             */
-                            if ((_tLogic & 0x100) == 0) {
+                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (_tile == ySpace) {
+                        /*
+                          if candidate matches target tileUnk
+                         */
+                        DAT_PathFindingState::instance.searchMatchCounter
+                            = DAT_PathFindingState::instance.searchMatchCounter + 1;
+                        return TRUE;
+                    }
+                    if (((int)this->searchQueue.readIndex >= budget) || (0x13a0f < _tile))
+                        break;
+                    int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                    if (0x78 < (int)this->searchQueue.currentDistance)
+                        break;
+                    int _tHeight = (int)DAT_TileMapState::instance.HeightLayer[_tile];
+                    _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
+                    _direction = 0;
+                    paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
+                    do {
+                        /*
+                          for each direction, do:
+                         */
+                        _candidate = (*paiVar4)[0] + _tile;
+                        if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
+                                == 0) {
                                 /*
-                                  tile is not moat
+                                  tileUnk is not wall or gatehouse
+                                 */
+                                if ((_tLogic & 0x100) != 0)
+                                    goto LAB_0049838d;
+                                /*
+                                  tileUnk is not moat
                                  */
                                 _cLogic = DAT_TileMapState::instance.LogicLayer[_candidate];
-                                if ((_tLogic & 0x40000000) == 0) {
-                                    if ((_cLogic & 0x40000000) != 0)
-                                        goto LAB_0049825d;
-                                } else if ((_cLogic & 0x40000800) != 0 || (_cLogic & 0x4a5015b1) == 0) {
-                                LAB_0049825d:
+                                if ((_tLogic & 0x40000000) != 0) {
+                                    if ((_cLogic & 0x40000800) == 0 && (_cLogic & 0x4a5015b1) != 0)
+                                        goto LAB_0049838d;
+                                } else if ((_cLogic & 0x40000000) == 0)
+                                    goto LAB_0049838d;
+                                /*
+                                  candidate is moat or stairs OR not sea, border (edge), rocky, wall or
+                                  gatehouse, building, tree, rivere, crenel, farm field, moat
+                                 */
+                                _cHeight = (int)DAT_TileMapState::instance.HeightLayer[_candidate];
+                                if ((_cLogic & 0x10000000) != 0) {
                                     /*
-                                      candidate is moat or stairs OR not sea, border (edge), rocky, wall or
-                                      gatehouse, building, tree, rivere, crenel, farm field, moat
+                                      candidate is keep
                                      */
-                                    _cHeight = (uint)DAT_TileMapState::instance.HeightLayer[_candidate];
-                                    if ((_cLogic & 0x10000000) != 0) {
-                                        /*
-                                          candidate is keep
-                                         */
-                                        _keepHeight = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
-                                                                            getBuildingHeightForBuildingID,
-                                            DAT_BuildingsState::ptr)(
-                                            (int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
-                                        _cHeight = _cHeight + _keepHeight;
-                                    }
-                                    /*
-                                      test if height difference is within margin
-                                     */
-                                    if ((int)_tHeight <= (int)(_cHeight + 16)
-                                        && (int)(_cHeight - 4294967280) <= (int)_tHeight)
-                                        goto LAB_00498308;
+                                    _keepHeight = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                        DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
+                                    _cHeight = _cHeight + _keepHeight;
+                                }
+                                /*
+                                  test if high difference is within margin
+                                 */
+                                if (_tHeight > _cHeight + 16 || _tHeight < _cHeight - 16) {
                                     _cType = DAT_BuildingsState::instance
                                                  .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate]]
+                                                 .buildingType;
+                                    _tType = DAT_BuildingsState::instance
+                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
                                                  .buildingType;
                                     _tDiff = 0;
                                     if ((_cType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE)
                                         || (_cType == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL)) {
                                         _cHeight = _cHeight - 90;
                                     } else {
-                                        _tType = DAT_BuildingsState::instance
-                                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
-                                                     .buildingType;
                                         if ((_tType != OpenSHC::Map::Buildings::BT_GATEHOUSELARGE)
                                             && (_tType != OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))
                                             goto LAB_0049838d;
                                         _tDiff = -90;
                                     }
                                     /*
-                                      test if height difference is within margin
+                                      test if high difference is within margin
                                      */
-                                    if ((int)(_tHeight + _tDiff) <= (int)(_cHeight + 0x10)
-                                        && (int)(_cHeight - 0x10) <= (int)(_tHeight + _tDiff))
-                                        goto LAB_00498308;
+                                    if (_tHeight + _tDiff > _cHeight + 0x10 || _tHeight + _tDiff < _cHeight - 0x10)
+                                        goto LAB_0049838d;
                                 }
                             }
-                        } else {
-                        LAB_00498308:
                             /*
-                              add to queue   also jumped to when height difference is within margin
+                              add to queue   also jumped to when high difference is within margin
                              */
                             DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
                             short sVar3
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                      .short_.xOffset;
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + (short)sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                      .short_.yOffset
-                                + sVar2;
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                                + (short)sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
+                    LAB_0049838d:
+                        _direction = _direction + 1;
+                        paiVar4 = (int (*)[8])(*paiVar4 + 1);
+                    } while (_direction < 8);
+                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                    if (0x13a10 <= (int)this->searchQueue.readIndex) {
+                        this->searchQueue.readIndex = 0;
                     }
-                LAB_0049838d:
-                    _direction = _direction + 1;
-                    paiVar4 = (int (*)[8])(*paiVar4 + 1);
-                } while (_direction < 8);
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (0x13a10 <= (int)this->searchQueue.readIndex) {
-                    this->searchQueue.readIndex = 0;
-                }
+                } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
             }
-            this->searchNonmatchCount = this->searchNonmatchCount + 1;
+            DAT_PathFindingState::instance.searchNonmatchCount = DAT_PathFindingState::instance.searchNonmatchCount + 1;
             return FALSE;
         }
 

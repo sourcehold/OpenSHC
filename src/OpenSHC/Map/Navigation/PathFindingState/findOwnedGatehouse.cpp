@@ -13,6 +13,12 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
+        /* inlined copy of ViewportRenderState::xyAreValid */
+        static inline int xyAreValid(uint ySpace, uint y)
+        {
+            return ySpace <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0;
+        }
+
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
          */
@@ -20,13 +26,13 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A19B0
-        dword PathFindingState::findOwnedGatehouse(int playerID, uint x, uint y)
+        dword PathFindingState::findOwnedGatehouse(int playerID, uint ySpace, uint y)
         {
             int (*paiVar3)[8];
             short _building;
-            int _link;
+            char _link;
             dword _tile;
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (!xyAreValid(ySpace, y)) {
                 return (dword)(0);
             }
             this->calculations = this->calculations + 1;
@@ -40,20 +46,21 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
-            this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
+            this->searchQueue.xQueue[0] = (short)ySpace;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if ((int)_tile < 0) {
                     return (dword)(0);
                 }
-                if (0x13a0f < (int)_tile) {
+                if ((int)_tile >= 0x13a10) {
                     return (dword)(0);
                 }
-                short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                 if (0x13a10 < (int)this->searchQueue.currentDistance) {
                     return (dword)(0);
@@ -68,13 +75,17 @@ namespace Map {
                         if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction] & _link)
                             == 0) {
                             _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
-                            if (_building != 0
-                                && (int)(short)DAT_BuildingsState::instance.buildings[_building].buildingType - 45 < 2
-                                && DAT_BuildingsState::instance.buildings[_building].owner == playerID) {
-                                /*
-                                  if gate house from player
-                                 */
-                                return (dword)(_tile);
+                            if (_building != 0) {
+                                switch (DAT_BuildingsState::instance.buildings[_building].buildingType) {
+                                case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
+                                case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
+                                    if (DAT_BuildingsState::instance.buildings[_building].owner == playerID) {
+                                        /*
+                                          if gate house from player
+                                         */
+                                        return (dword)(_tile);
+                                    }
+                                }
                             }
                         } else {
                             /*
@@ -86,11 +97,11 @@ namespace Map {
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
-                                + sVar1;
+                                + (short)sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
-                                + sVar2;
+                                + (short)sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
