@@ -31,17 +31,17 @@ namespace Map {
                     && this->buildings[i].buildingType != BT_ARMORY) {
                     continue;
                 }
-                if (this->buildings[i].buildingType == BT_GRANARY) {
-                    for (int r = OpenSHC::Game::Resources::RT_BREAD; r <= OpenSHC::Game::Resources::RT_APPLE; ++r) {
-                        DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
-                            += this->buildings[i].resources[r];
-                    }
-                } else if (this->buildings[i].buildingType == BT_STOCKPILE) {
+                if (this->buildings[i].buildingType == BT_STOCKPILE) {
                     for (int r = OpenSHC::Game::Resources::RT_WOOD; r <= OpenSHC::Game::Resources::RT_FLOUR; ++r) {
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
                             += this->buildings[i].resources[r];
                     }
-                } else {
+                } else if (this->buildings[i].buildingType == BT_GRANARY) {
+                    for (int r = OpenSHC::Game::Resources::RT_BREAD; r <= OpenSHC::Game::Resources::RT_APPLE; ++r) {
+                        DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
+                            += this->buildings[i].resources[r];
+                    }
+                } else if (this->buildings[i].buildingType == BT_ARMORY) {
                     for (int r = OpenSHC::Game::Resources::RT_BOW; r < 25; ++r) {
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
                             += this->buildings[i].resources[r];

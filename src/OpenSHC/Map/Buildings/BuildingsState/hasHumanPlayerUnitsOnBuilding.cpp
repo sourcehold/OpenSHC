@@ -16,13 +16,13 @@ namespace Map {
         BOOLEnum BuildingsState::hasHumanPlayerUnitsOnBuilding(int buildingID)
         {
             int size = this->buildings[buildingID].widthOrHeight;
-            int x = (short)this->buildings[buildingID].x;
-            int y = (short)this->buildings[buildingID].y;
             for (int row = 0; row < size; ++row) {
                 for (int column = 0; column < size; ++column) {
-                    int unitID = (short)DAT_TileMapState::instance
-                                     .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y + row].addXgetTile
-                                         + x + column];
+                    int unitID = (short)DAT_TileMapState::instance.UnitLayer
+                                     [DAT_ViewportRenderState::instance
+                                             .translationMatrix[(short)this->buildings[buildingID].y + row]
+                                             .addXgetTile
+                                         + (short)this->buildings[buildingID].x + column];
                     if (unitID != 0
                         && DAT_GameSynchronyState::instance
                                 .currentPlayerFullIDArray[DAT_UnitsState::instance.units[unitID].owner]

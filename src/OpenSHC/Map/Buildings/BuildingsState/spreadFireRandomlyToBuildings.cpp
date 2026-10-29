@@ -17,7 +17,7 @@ namespace Map {
         void BuildingsState::spreadFireRandomlyToBuildings(int param_1, int param_2)
         {
             // Sets param_2 random buildings of player param_1 on fire. Very flammable buildings are 5 times as likely.
-            if (param_2 <= 0 || DAT_GameState::instance.playerDataArray[param_1].campground.id <= 0) {
+            if (param_2 < 1 || DAT_GameState::instance.playerDataArray[param_1].campground.id <= 0) {
                 return;
             }
 

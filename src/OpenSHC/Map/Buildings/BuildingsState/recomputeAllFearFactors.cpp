@@ -59,11 +59,14 @@ namespace Map {
                     || this->buildings[i].buildingType == BT_STATUE || this->buildings[i].buildingType == BT_SHRINE
                     || this->buildings[i].buildingType == BT_DANCINGBEAR) {
                     goodOrBad = 1;
+                } else {
+                    continue;
                 }
+                int const owner = this->buildings[i].owner;
                 if (goodOrBad < 0) {
-                    ++DAT_GameState::instance.playerDataArray[this->buildings[i].owner].badStuffCount;
+                    ++DAT_GameState::instance.playerDataArray[owner].badStuffCount;
                 } else if (goodOrBad > 0) {
-                    ++DAT_GameState::instance.playerDataArray[this->buildings[i].owner].goodStuffCount;
+                    ++DAT_GameState::instance.playerDataArray[owner].goodStuffCount;
                 }
             }
 

@@ -16,11 +16,11 @@ namespace Map {
         void BuildingsState::processDamageToUnitsOnBuilding(int buildingID, int damageBonus)
         {
             // Changes the health of all units standing on the building by damageBonus percent of their maximum health
-            // (damageBonus is negative for damage). The original does not check the tile count before the first
-            // iteration.
-            int x = (short)this->buildings[buildingID].x;
+            // (damageBonus is positive for damage: the original divides by -100, magic 0xAE147AE1 at 0x410761). The
+            // original does not check the tileUnk count before the first iteration.
             int t = 0;
             uint size = this->buildings[buildingID].widthOrHeight;
+            int x = (short)this->buildings[buildingID].x;
             int y = (short)this->buildings[buildingID].y;
             do {
                 MACRO_CALL_MEMBER(
@@ -32,7 +32,7 @@ namespace Map {
                              + DAT_TileMapState::instance.buildingX + x];
                     unitID != 0; unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                     int maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
-                    DAT_UnitsState::instance.units[unitID].health += maxHealth * damageBonus / 100;
+                    DAT_UnitsState::instance.units[unitID].health += maxHealth * damageBonus / -100;
                     if (DAT_UnitsState::instance.units[unitID].health <= 0) {
                         DAT_UnitsState::instance.units[unitID].health = 0;
                         DAT_UnitsState::instance.units[unitID].dying = 1;
@@ -40,14 +40,14 @@ namespace Map {
                         DAT_UnitsState::instance.units[unitID].state.generic
                             = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                     }
-                    short healthPercentage;
+                    int healthPercentage;
                     if (maxHealth == 0) {
                         healthPercentage = 100;
                     } else {
                         healthPercentage = DAT_UnitsState::instance.units[unitID].health * 100 / maxHealth;
                     }
                     DAT_UnitsState::instance.units[unitID].healthPercentage = healthPercentage;
-                    DAT_UnitsState::instance.units[unitID].healthbar = healthPercentage / 10;
+                    DAT_UnitsState::instance.units[unitID].healthbar = (short)healthPercentage / 10;
                 }
                 ++t;
             } while (t < DAT_TileMapState::instance.constructionTileCount);
