@@ -54,6 +54,8 @@ namespace UI {
             BOOLEnum selectUnitAndOpenStatusMenu(int unitIndex);
 
             void renderBasicButton(int reverseOrBlendStrength, RenderTarget renderSurface);
+            BOOLEnum SelectUnitAndOpenStatusMenu(int unitIndex);
+            void ProcessBuildingClickBonus(int buildingIndex);
         };
 
         static_assert_cpp98_obj(sizeof(AlphaAndButtonSurface) == 16, AlphaAndButtonSurface);

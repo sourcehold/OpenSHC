@@ -101,6 +101,9 @@ namespace UI {
             MACRO_FUNCTION_RESOLVER(void (WindowAndDirectDraw::*)(int), false, Address::SHC_3BB0A8C1_0x00479540,
                 &WindowAndDirectDraw::takeScreenshot)
             takeScreenshot;
+            MACRO_FUNCTION_RESOLVER(void (WindowAndDirectDraw::*)(LPRECT, LPRECT), false,
+                Address::SHC_3BB0A8C1_0x00467E50, &WindowAndDirectDraw::clipBlitRectsToScreenInWindowedMode)
+            clipBlitRectsToScreenInWindowedMode;
 
         } // namespace WindowAndDirectDraw_Func
     } // namespace Rendering

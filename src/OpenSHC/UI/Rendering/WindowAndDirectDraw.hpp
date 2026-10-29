@@ -134,6 +134,7 @@ namespace UI {
             void prepareWindowAndDDraw_2Unk(BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnum resEnum);
 
             void takeScreenshot(int param_1);
+            void clipBlitRectsToScreenInWindowedMode(LPRECT destinationRect, LPRECT sourceRect);
         };
 
         static_assert_cpp98_obj(sizeof(WindowAndDirectDraw) == 484, WindowAndDirectDraw);
