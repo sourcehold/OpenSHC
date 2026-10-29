@@ -56,12 +56,6 @@ return this->mapAndTime.playerTeams[a] != this->mapAndTime.playerTeams[b];
 
 Generally **neutral**.
 
-## 2.5 Improve arithmetic
-
-Keep a cast that does arithmetic work. `if ((uint)(playerID - 1) > 7)` in `setLastEncounteredTroopUnit` is an
-unsigned range check that folds a `< 1` and a `> 8` into one `cmp`, which is what the original does; dropping
-it changes the comparison.
-
 ## 3. No cast that only repeats the destination type
 
 ```cpp
@@ -438,6 +432,17 @@ Use `fixme:` when the code is wrong but matching, and say what is wrong:
 ```
 
 **neutral.** A comment costs nothing, and this is the cheapest way to stop the same work being done twice.
+
+## 22 Prefer descriptive code
+```cpp
+// no
+if ((uint)(playerID - 1) > 7)
+
+// yes
+if (playerID < 1 || playerID > 8)
+```
+
+Generally **neutral**.
 
 ---
 
