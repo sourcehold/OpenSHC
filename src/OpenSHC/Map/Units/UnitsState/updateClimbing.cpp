@@ -32,14 +32,13 @@ namespace Map {
                 int _ladderUnitID
                     = (short)DAT_TileMapState::instance
                           .UnitLayer[DAT_PathFindingState::instance.climbData[_climbDataID].bottomTilePosition];
+                for (; _ladderUnitID != 0; _ladderUnitID = (short)this->units[_ladderUnitID].nextUnitOnTheSameTile) {
+                    if (DAT_PathFindingState::instance.climbData[_climbDataID].unitID == _ladderUnitID) {
+                        break;
+                    }
+                }
                 if (_ladderUnitID == 0) {
                     return FALSE;
-                }
-                while (DAT_PathFindingState::instance.climbData[_climbDataID].unitID != _ladderUnitID) {
-                    _ladderUnitID = (short)this->units[_ladderUnitID].nextUnitOnTheSameTile;
-                    if (_ladderUnitID == 0) {
-                        return FALSE;
-                    }
                 }
                 short _climbDirection = this->units[unitID].climbDirection;
                 this->units[unitID].facingDirection = this->units[_ladderUnitID].facingDirection;
@@ -57,9 +56,17 @@ namespace Map {
                 this->units[unitID].unknownStateCopyClimbRelated = this->units[unitID].state.generic;
                 this->units[unitID].state.generic = (UnitState)0x68;
                 this->units[unitID].animationCycleNumber = 0;
-            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 7
-                || DAT_PathFindingState::instance.climbData[_climbDataID].type == 6
-                || DAT_PathFindingState::instance.climbData[_climbDataID].type == 5
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 7) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
+                    unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 6) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
+                    unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 5
                 || DAT_PathFindingState::instance.climbData[_climbDataID].type == 4
                 || DAT_PathFindingState::instance.climbData[_climbDataID].type == 3) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
@@ -67,19 +74,19 @@ namespace Map {
                     unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
             }
-            if (this->units[unitID].climbDirection != 0) {
-                this->units[unitID].mimicCurrentYPosition
-                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomYPosition;
-                /* Climb down */
+            if (this->units[unitID].climbDirection == 0) {
+                /* Climb up */
                 this->units[unitID].mimicCurrentXPosition
-                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomXPosition;
+                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].topXPosition;
+                this->units[unitID].mimicCurrentYPosition
+                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].topYPosition;
                 return TRUE;
             }
-            /* Climb up */
+            /* Climb down */
             this->units[unitID].mimicCurrentXPosition
-                = (short)DAT_PathFindingState::instance.climbData[_climbDataID].topXPosition;
+                = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomXPosition;
             this->units[unitID].mimicCurrentYPosition
-                = (short)DAT_PathFindingState::instance.climbData[_climbDataID].topYPosition;
+                = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomYPosition;
             return TRUE;
         }
 

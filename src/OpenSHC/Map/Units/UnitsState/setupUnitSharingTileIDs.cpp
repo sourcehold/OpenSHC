@@ -19,10 +19,16 @@ namespace Map {
                 this->units[unitID].nextUnitOnTheSameTile = 0;
                 return;
             }
-            int _previousUnitID = (short)DAT_TileMapState::instance.UnitLayer[unitCurrentTilePosition];
-            while (_previousUnitID != 0 && (short)this->units[_previousUnitID].nextUnitOnTheSameTile != unitID) {
-                _previousUnitID = (short)this->units[_previousUnitID].nextUnitOnTheSameTile;
-                if (_previousUnitID == 0) {
+            int _currentUnitID = (short)DAT_TileMapState::instance.UnitLayer[unitCurrentTilePosition];
+            /* an empty tileUnk falls through and relinks unit 0 */
+            int _previousUnitID = _currentUnitID;
+            while (_currentUnitID != 0) {
+                _previousUnitID = _currentUnitID;
+                _currentUnitID = (short)this->units[_previousUnitID].nextUnitOnTheSameTile;
+                if (_currentUnitID == unitID) {
+                    break;
+                }
+                if (_currentUnitID == 0) {
                     return;
                 }
             }

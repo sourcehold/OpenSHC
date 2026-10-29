@@ -34,15 +34,15 @@ namespace Map {
             if (_counterClockwiseSteps < 0) {
                 _counterClockwiseSteps = _counterClockwiseSteps + 8;
             }
-            if (_counterClockwiseSteps < _clockwiseSteps) {
-                this->units[unitID].facingDirection = this->units[unitID].facingDirection - 1;
-            } else {
+            if (_clockwiseSteps <= _counterClockwiseSteps) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection + 1;
+            } else {
+                this->units[unitID].facingDirection = this->units[unitID].facingDirection - 1;
             }
             if (this->units[unitID].facingDirection < 0) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection + 8;
             }
-            if (this->units[unitID].facingDirection > 7) {
+            if (this->units[unitID].facingDirection >= 8) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection - 8;
             }
             this->units[unitID].facingDirectionMapOrientationCorrected = this->units[unitID].facingDirection;

@@ -12,7 +12,7 @@ namespace Map {
             int tribeID, uint x, uint y, int rallyBool, MatchSpeedInstructionEnum speedMatching)
         {
             DAT_TribesState::instance.tribes[tribeID].freeUnitSpeeds = 0;
-            if ((char)speedMatching < 0) {
+            if ((speedMatching & 0x80) != 0) {
                 speedMatching = (Instructions::MatchSpeedInstructionEnum)(speedMatching & 0xffffff7f);
                 DAT_TribesState::instance.tribes[tribeID].freeUnitSpeeds = 1;
             }

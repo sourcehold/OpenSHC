@@ -34,21 +34,23 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter = -1;
                 return FALSE;
             }
-            ushort _buildingX = DAT_BuildingsState::instance.buildings[originBuildingID].x;
-            ushort _tunnelStartY;
             if ((DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter & 1) != 0) {
-                DAT_BuildingsState::instance.buildings[originBuildingID].someX = _buildingX - 1;
-                _tunnelStartY = DAT_BuildingsState::instance.buildings[originBuildingID].y;
+                DAT_BuildingsState::instance.buildings[originBuildingID].someX
+                    = DAT_BuildingsState::instance.buildings[originBuildingID].x - 1;
+                DAT_BuildingsState::instance.buildings[originBuildingID].someY
+                    = DAT_BuildingsState::instance.buildings[originBuildingID].y;
             } else {
-                DAT_BuildingsState::instance.buildings[originBuildingID].someX = _buildingX;
-                _tunnelStartY = DAT_BuildingsState::instance.buildings[originBuildingID].y - 1;
+                DAT_BuildingsState::instance.buildings[originBuildingID].someX
+                    = DAT_BuildingsState::instance.buildings[originBuildingID].x;
+                DAT_BuildingsState::instance.buildings[originBuildingID].someY
+                    = DAT_BuildingsState::instance.buildings[originBuildingID].y - 1;
             }
             DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter
                 = DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter + 1;
-            DAT_BuildingsState::instance.buildings[originBuildingID].someY = _tunnelStartY;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::algTunnelerFindTarget,
                 DAT_PathFindingState::ptr)(DAT_BuildingsState::instance.buildings[originBuildingID].owner, targetPlayer,
-                _distance, DAT_BuildingsState::instance.buildings[originBuildingID].someX, (short)_tunnelStartY);
+                _distance, DAT_BuildingsState::instance.buildings[originBuildingID].someX,
+                DAT_BuildingsState::instance.buildings[originBuildingID].someY);
             if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
                 return FALSE;
             }

@@ -21,26 +21,24 @@ namespace Map {
                     DAT_TribesState::ptr)(playerID, unitType);
                 return;
             }
-            if (unitID == 0) {
-                this->unitCountOfSelection[playerID] = 0;
-                for (DAT_CurrentUnitSlotID::instance = 1;
-                    (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
-                    DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner == playerID) {
-                        this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID = 0;
-                    }
+            if (unitID != 0) {
+                if (this->units[unitID].tribeID != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeUnitFromTribe,
+                        DAT_TribesState::ptr)(unitID, this->units[unitID].tribeID);
+                }
+                if (this->units[unitID].ifSelectedThenPlayerID != 0) {
+                    this->units[unitID].ifSelectedThenPlayerID = 0;
+                    this->unitCountOfSelection[playerID] = this->unitCountOfSelection[playerID] - 1;
                 }
                 return;
             }
-            if (this->units[unitID].tribeID != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
-                    unitID, this->units[unitID].tribeID);
+            this->unitCountOfSelection[playerID] = 0;
+            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].owner == playerID) {
+                    this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID = 0;
+                }
             }
-            if (this->units[unitID].ifSelectedThenPlayerID == 0) {
-                return;
-            }
-            this->units[unitID].ifSelectedThenPlayerID = 0;
-            this->unitCountOfSelection[playerID] = this->unitCountOfSelection[playerID] - 1;
         }
 
     }

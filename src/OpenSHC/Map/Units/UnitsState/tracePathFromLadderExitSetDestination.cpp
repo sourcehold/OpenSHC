@@ -18,15 +18,13 @@ namespace Map {
             for (; _stepIndex < this->units[unitID].totalSizeOfPathPlan; ++_stepIndex) {
                 uint _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
                 uint _direction;
-                if ((_stepIndex & 1) == 0) {
-                    _direction = _packedDirections & 0xf;
-                } else {
+                if ((_stepIndex & 1) != 0) {
                     _direction = (int)_packedDirections >> 4;
+                } else {
+                    _direction = _packedDirections & 0xf;
                 }
-                _exitY = _exitY
-                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
-                _exitX = _exitX
-                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
+                _exitY = _exitY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
+                _exitX = _exitX + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
                 _tile = DAT_ViewportRenderState::instance.translationMatrix[_exitY].addXgetTile + _exitX;
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x800U) != 0) {
                     break;

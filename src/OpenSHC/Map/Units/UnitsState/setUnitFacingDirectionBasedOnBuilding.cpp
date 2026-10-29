@@ -12,10 +12,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FF80
         uint UnitsState::setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID)
         {
+            int previousFacingDirection = this->units[unitID].facingDirection;
             if (buildingID == 0) {
                 return 0;
             }
-            int _previousFacingDirection = this->units[unitID].facingDirection;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y,
@@ -27,25 +27,25 @@ namespace Map {
             if (this->units[unitID].facingDirection == DAT_DirectionAlgorithmState::instance.orientation) {
                 return 0;
             }
-            int _clockwiseSteps
+            int clockwiseSteps
                 = DAT_DirectionAlgorithmState::instance.orientation - this->units[unitID].facingDirection;
-            if (_clockwiseSteps < 0) {
-                _clockwiseSteps = _clockwiseSteps + 8;
+            if (clockwiseSteps < 0) {
+                clockwiseSteps = clockwiseSteps + 8;
             }
-            int _counterClockwiseSteps
+            int counterClockwiseSteps
                 = this->units[unitID].facingDirection - DAT_DirectionAlgorithmState::instance.orientation;
-            if (_counterClockwiseSteps < 0) {
-                _counterClockwiseSteps = _counterClockwiseSteps + 8;
+            if (counterClockwiseSteps < 0) {
+                counterClockwiseSteps = counterClockwiseSteps + 8;
             }
-            if (_counterClockwiseSteps < _clockwiseSteps) {
-                this->units[unitID].facingDirection = this->units[unitID].facingDirection - 1;
-            } else {
+            if (clockwiseSteps <= counterClockwiseSteps) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection + 1;
+            } else {
+                this->units[unitID].facingDirection = this->units[unitID].facingDirection - 1;
             }
             if (this->units[unitID].facingDirection < 0) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection + 8;
             }
-            if (this->units[unitID].facingDirection > 7) {
+            if (this->units[unitID].facingDirection >= 8) {
                 this->units[unitID].facingDirection = this->units[unitID].facingDirection - 8;
             }
             this->units[unitID].facingDirectionMapOrientationCorrected = this->units[unitID].facingDirection;
@@ -56,7 +56,7 @@ namespace Map {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;
             }
-            return (uint)(_previousFacingDirection != this->units[unitID].facingDirection);
+            return (uint)(previousFacingDirection != this->units[unitID].facingDirection);
         }
 
     }
