@@ -14,7 +14,11 @@ namespace Map {
                 && DAT_TileMapState::instance.HeightLayer[tile]
                     <= DAT_TileMapState::instance.DefaultHeightLayer[tile]) {
                 DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
-                DAT_TileMapState::instance.LogicLayer[tile] &= 0xffbef4ff;
+                DAT_TileMapState::instance.LogicLayer[tile] &= ~0x100;
+                DAT_TileMapState::instance.LogicLayer[tile] &= ~0x200;
+                DAT_TileMapState::instance.LogicLayer[tile] &= ~0x800;
+                DAT_TileMapState::instance.LogicLayer[tile] &= ~0x10000;
+                DAT_TileMapState::instance.LogicLayer[tile] &= ~0x400000;
             }
         }
     }
