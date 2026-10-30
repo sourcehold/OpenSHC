@@ -93913,9 +93913,24 @@ enum {
     // label: DAT_BuildingTgxSketchArray
     // location:
     SHC_3BB0A8C1_0x00617D20 = 0x00617D20,
+    // label: DAT_StockpileMenuResourceTypes
+    // location:
+    SHC_3BB0A8C1_0x00617ED0 = 0x00617ED0,
+    // label: DAT_StockpileMenuResourceIcons
+    // location:
+    SHC_3BB0A8C1_0x00617EF0 = 0x00617EF0,
     // label: DAT_StockpileIconsPositionNudges
     // location:
     SHC_3BB0A8C1_0x00617F10 = 0x00617F10,
+    // label: DAT_ArmoryMenuResourceTypes
+    // location:
+    SHC_3BB0A8C1_0x00617F50 = 0x00617F50,
+    // label: DAT_ArmoryMenuResourceIcons
+    // location:
+    SHC_3BB0A8C1_0x00617F70 = 0x00617F70,
+    // label: DAT_ArmoryIconsPositionNudges
+    // location:
+    SHC_3BB0A8C1_0x00617F90 = 0x00617F90,
     // label: DAT_MarketStonksOrder
     // location:
     SHC_3BB0A8C1_0x00617FD0 = 0x00617FD0,
@@ -93925,9 +93940,24 @@ enum {
     // label: DAT_RawResourceTypes
     // location:
     SHC_3BB0A8C1_0x00618040 = 0x00618040,
+    // label: DAT_ARRAY_00618050
+    // location:
+    SHC_3BB0A8C1_0x00618050 = 0x00618050,
+    // label: DAT_ARRAY_00618070
+    // location:
+    SHC_3BB0A8C1_0x00618070 = 0x00618070,
+    // label: DAT_PopularityMessageLayout
+    // location:
+    SHC_3BB0A8C1_0x00618138 = 0x00618138,
+    // label: DAT_ARRAY_0061818c
+    // location:
+    SHC_3BB0A8C1_0x0061818C = 0x0061818C,
     // label: DAT_UnitTypeGroups
     // location:
     SHC_3BB0A8C1_0x006181E0 = 0x006181E0,
+    // label: DAT_0061824c
+    // location:
+    SHC_3BB0A8C1_0x0061824C = 0x0061824C,
     // type: /pointer
     SHC_3BB0A8C1_0x00618250 = 0x00618250,
     // label: DAT_SpeechDefinedData
