@@ -3873,7 +3873,7 @@ SHC_3BB0A8C1_0x00409FF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040A020 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040A060 | 69.6% | compiler folds the height offset into the entity type
+SHC_3BB0A8C1_0x0040A060 | 87.0% | popup centre y computed in place; the original keeps the raw y and the sum in two registers
 
 SHC_3BB0A8C1_0x0040A228 | 0.0% | Pending
 
@@ -4979,7 +4979,7 @@ SHC_3BB0A8C1_0x0040D6E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040D910 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0040D9C0 | 81.6% | register allocation differs
+SHC_3BB0A8C1_0x0040D9C0 | 94.6% | the first search loop keeps its own return TRUE copy; the original jumps into the second loop's
 
 SHC_3BB0A8C1_0x0040DC70 | 100.0% | Reimplemented
 
@@ -5813,9 +5813,9 @@ SHC_3BB0A8C1_0x00419EA1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00419EA2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00419EB0 | 39.4% | original strength-reduces the two enemy arrays into one pointer
+SHC_3BB0A8C1_0x00419EB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00419FA0 | 48.3% | Layout-bound: the enemy building ID and UID arrays are one struct in the DLL, so MSVC folds their distance and allocates differently
+SHC_3BB0A8C1_0x00419FA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041A060 | 100.0% | Reimplemented
 
@@ -6083,17 +6083,17 @@ SHC_3BB0A8C1_0x0041A860 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041A8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0041ADE0 | 64.5% | field pointers in stack slots
+SHC_3BB0A8C1_0x0041ADE0 | 71.7% | field pointers in stack slots
 
 SHC_3BB0A8C1_0x0041B11E | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0041B190 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041B2B0 | 59.6% | field pointers in stack slots
+SHC_3BB0A8C1_0x0041B2B0 | 77.1% | field pointers in stack slots
 
 SHC_3BB0A8C1_0x0041B6A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041B7C0 | 66.2% | size branch block layout and register swap
+SHC_3BB0A8C1_0x0041B7C0 | 87.2% | size 6 test placed inline; the original moves it out of line after the loop setup
 
 SHC_3BB0A8C1_0x0041B890 | 100.0% | Reimplemented
 
@@ -6117,7 +6117,7 @@ SHC_3BB0A8C1_0x0041BF50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041BF90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041BFD0 | 76.8% | block layout of the pitch ditch path
+SHC_3BB0A8C1_0x0041BFD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041C190 | 100.0% | Reimplemented
 
@@ -6127,7 +6127,7 @@ SHC_3BB0A8C1_0x0041C310 | 68.5% | original inlines buildingHasSpaceForResource, 
 
 SHC_3BB0A8C1_0x0041C570 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0041C6F0 | 52.0% | stack slot layout of the idle timers
+SHC_3BB0A8C1_0x0041C6F0 | 53.2% | stack slot layout of the idle timers
 
 SHC_3BB0A8C1_0x0041C810 | 100.0% | Reimplemented
 
@@ -6519,7 +6519,7 @@ SHC_3BB0A8C1_0x00422400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00422430 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004224F0 | 83.4% | stack slot allocation differs
+SHC_3BB0A8C1_0x004224F0 | 87.9% | stack slot allocation differs
 
 SHC_3BB0A8C1_0x00422600 | 0.0% | Pending
 
@@ -6529,11 +6529,11 @@ SHC_3BB0A8C1_0x00422A70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00422B80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00422C60 | 68.2% | edx kept across the flammability call
+SHC_3BB0A8C1_0x00422C60 | 80.6% | playerID kept in a register in the first loop; the original compares it from the stack
 
 SHC_3BB0A8C1_0x00422D10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00422E20 | 97.9% | dog-cage loop pointer loaded before the kill-pit zeros in the original
+SHC_3BB0A8C1_0x00422E20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00422E70 | 0.0% | Pending
 

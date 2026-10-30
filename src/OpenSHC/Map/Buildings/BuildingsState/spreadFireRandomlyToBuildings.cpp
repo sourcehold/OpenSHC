@@ -15,14 +15,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00422C60
         void BuildingsState::spreadFireRandomlyToBuildings(int playerID, int count)
         {
+            int weight = 0;
+            int buildingID = 1;
             if (playerID < 1) {
                 return;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].campground.id <= 0) {
                 return;
             }
-            int weight = 0;
-            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+            for (; buildingID < this->maxBuildingsCount; ++buildingID) {
                 if (this->buildings[buildingID].logicalState == 0
                     || this->buildings[buildingID].logicalState == BLS_REMOVE
                     || this->buildings[buildingID].owner != playerID || this->buildings[buildingID].fireDuration != 0
@@ -47,7 +48,7 @@ namespace Map {
                 }
                 int pick = SEC_RNG::instance.currentNumber2 % weight;
                 MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                for (buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
                     if (this->buildings[buildingID].logicalState == 0
                         || this->buildings[buildingID].logicalState == BLS_REMOVE
                         || this->buildings[buildingID].owner != playerID

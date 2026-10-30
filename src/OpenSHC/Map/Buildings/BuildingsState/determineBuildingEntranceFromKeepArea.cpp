@@ -32,7 +32,7 @@ namespace Map {
             int areaFrom
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
-            int index = 0;
+            int index;
             int found = 0;
             int heightStep = 16;
             if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_QUARRY) {
@@ -40,7 +40,9 @@ namespace Map {
             }
             int size = this->buildings[buildingID].widthOrHeight + flag * 2;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            if (tileCount > 0) {
+            if (tileCount <= 0) {
+                index = 0;
+            } else {
                 index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
             }
@@ -63,7 +65,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + heightStep
-                    && tileHeight - heightStep <= height
+                    && height >= tileHeight - heightStep
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -103,7 +105,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height
+                    && height >= tileHeight - 16
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -148,7 +150,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
+                    && height >= tileHeight - 16 && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
                     && ++found >= workerIndexPlus1) {
                     this->buildings[buildingID].buildingEntryX
                         = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;

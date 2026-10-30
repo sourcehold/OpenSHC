@@ -10,14 +10,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00419EB0
         int BuildingsState::aiFindBuildingToAttack(int playerID, int x, int y, int radius)
         {
-            int closestDistance = 1000000;
             int closestBuildingID = 0;
+            int closestDistance = 1000000;
+            int const* ids = DAT_GameState::instance.mapAndTime.playerEnemyBuildingIDs[playerID];
+            int const* uids = DAT_GameState::instance.mapAndTime.playerEnemyBuildingUID[playerID];
             int const radiusSquared = radius * radius;
             for (int i = 0; i < DAT_GameState::instance.mapAndTime.playerBuildingInfoIndex[playerID]; ++i) {
-                int const buildingID = DAT_GameState::instance.mapAndTime.playerEnemyBuildingIDs[playerID][i];
-                if (this->buildings[buildingID].uid
-                        != DAT_GameState::instance.mapAndTime.playerEnemyBuildingUID[playerID][i]
-                    || this->buildings[buildingID].fireDuration != 0) {
+                int const buildingID = ids[i];
+                if (this->buildings[buildingID].uid != uids[i] || this->buildings[buildingID].fireDuration != 0) {
                     continue;
                 }
                 int const flammability = MACRO_CALL_MEMBER(

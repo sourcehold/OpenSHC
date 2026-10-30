@@ -20,14 +20,15 @@ namespace Map {
             if (size == 4) {
                 tilesPerSide = 4;
                 try_ = tileCount - 1;
-            } else if (size == 5) {
-                tilesPerSide = 5;
-                try_ = tileCount - 2;
-            } else if (size == 6) {
-                tilesPerSide = 6;
-                try_ = tileCount - 2;
             } else {
-                return;
+                if (size == 5) {
+                    tilesPerSide = 5;
+                } else if (size == 6) {
+                    tilesPerSide = 6;
+                } else {
+                    return;
+                }
+                try_ = tileCount - 2;
             }
             // The four per-orientation entrance flags are cleared with a single dword store.
             *(undefined4*)this->buildings[buildingID].field161_0x280 = 0;

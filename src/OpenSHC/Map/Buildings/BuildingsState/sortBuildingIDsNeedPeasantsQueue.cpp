@@ -18,19 +18,22 @@ namespace Map {
             do {
                 swapped = 0;
                 for (int i = 0; i < this->DAT_CountOfBuildingsNeedPeasants - 1; ++i) {
-                    int const secondID = this->DAT_BuildingIDsNeedPeasantsQueue[i + 1];
-                    int const firstID = this->DAT_BuildingIDsNeedPeasantsQueue[i];
-                    short const firstIdle = this->buildings[firstID].idleTimerUnk;
-                    short const secondIdle = this->buildings[secondID].idleTimerUnk;
+                    short* const second = &this->DAT_BuildingIDsNeedPeasantsQueue[i + 1];
+                    int const secondID = second[0];
+                    int const firstID = second[-1];
+                    Building const& secondBuilding = this->buildings[secondID];
+                    Building const& firstBuilding = this->buildings[firstID];
+                    short const firstIdle = firstBuilding.idleTimerUnk;
+                    short const secondIdle = secondBuilding.idleTimerUnk;
                     if (firstIdle > secondIdle
                         || (MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingPriority, this)(
-                                this->buildings[secondID].buildingType, hasBurningBuilding)
+                                secondBuilding.buildingType, hasBurningBuilding)
                                 < MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingPriority, this)(
-                                    this->buildings[firstID].buildingType, hasBurningBuilding)
+                                    firstBuilding.buildingType, hasBurningBuilding)
                             && secondIdle <= firstIdle)) {
                         swapped = 1;
-                        this->DAT_BuildingIDsNeedPeasantsQueue[i + 1] = firstID;
-                        this->DAT_BuildingIDsNeedPeasantsQueue[i] = secondID;
+                        second[0] = firstID;
+                        second[-1] = secondID;
                     }
                 }
             } while (swapped != 0);
