@@ -5137,7 +5137,7 @@ SHC_3BB0A8C1_0x00410286 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00410290 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00410320 | 60.0% | Allocator-bound: original keeps this in ebp with a stack spill, ours keeps it in ecx
+SHC_3BB0A8C1_0x00410320 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00410440 | 100.0% | Reimplemented
 
@@ -6529,7 +6529,7 @@ SHC_3BB0A8C1_0x00422A70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00422B80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00422C60 | 80.6% | playerID kept in a register in the first loop; the original compares it from the stack
+SHC_3BB0A8C1_0x00422C60 | 85.1% | playerID kept in a register in the first loop; the original compares it from the stack
 
 SHC_3BB0A8C1_0x00422D10 | 0.0% | Pending
 
