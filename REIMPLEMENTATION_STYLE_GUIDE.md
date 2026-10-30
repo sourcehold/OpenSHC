@@ -422,6 +422,41 @@ if (playerID < 1 || playerID > 8)
 
 Generally **neutral**.
 
+## 23 Prefer if-else over ternary
+The MSVC compiler optimizes the last branch of a longer if-else chain into an else-statement with a ternary in it, usually when the thing being compared has a limited number of possible values. Extending the if-else chain is more natural code.
+```cpp
+// no
+if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel == 0) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 100;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 1) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 90;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 2) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 80;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 3) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 70;
+} else {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk
+        = (int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 4 ? 60 : 50;
+}
+
+// yes
+if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel == 0) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 100;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 1) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 90;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 2) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 80;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 3) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 70;
+} else if ((int)DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 4) {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 60;
+} else {
+    DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 50;
+}
+```
+
+**neutral**
+
 ---
 
 ## Measuring
