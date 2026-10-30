@@ -148,3 +148,16 @@ When you are set up, follow any of the tutorials such as [this one](https://sour
 ## Help
 
 Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/SKJGEGgPTv) server.
+
+## Additional Contributors
+
+Also thanks to all the people who have contributed code and solutions through other means then direct commits!
+
+- [Wilps](https://github.com/Wilps93)
+
+## Special Thanks
+
+- to [Firefly Studios](https://fireflyworlds.com/) for creating Stronghold Crusader.
+- to the [Ghidra project](https://github.com/NationalSecurityAgency/ghidra)
+- to the people behind [reccmp](https://github.com/isledecomp/reccmp)
+- to the whole [UCP team](https://unofficialcrusaderpatch.com/)
