@@ -5485,7 +5485,7 @@ SHC_3BB0A8C1_0x00412356 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00412360 | 81.6% | Register allocation differs
 
-SHC_3BB0A8C1_0x00412730 | 52.0% | Register allocation differs
+SHC_3BB0A8C1_0x00412730 | 53.2% | Register allocation differs
 
 SHC_3BB0A8C1_0x00412D50 | 100.0% | Reimplemented
 
@@ -5501,7 +5501,7 @@ SHC_3BB0A8C1_0x00414720 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00414B60 | 76.6% | Register allocation differs
 
-SHC_3BB0A8C1_0x00415110 | 50.3% | Register allocation differs
+SHC_3BB0A8C1_0x00415110 | 60.9% | Register allocation differs
 
 SHC_3BB0A8C1_0x004156F0 | 100.0% | Reimplemented
 
@@ -5509,7 +5509,7 @@ SHC_3BB0A8C1_0x00415A80 | 95.3% | Register allocation differs
 
 SHC_3BB0A8C1_0x00415BF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00415C90 | 95.6% | Register allocation differs
+SHC_3BB0A8C1_0x00415C90 | 97.3% | Register allocation differs
 
 SHC_3BB0A8C1_0x00415E80 | 99.7% | Only a backward branch offset differs (3 bytes of alignment padding)
 
@@ -5553,7 +5553,7 @@ SHC_3BB0A8C1_0x004184D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00418500 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00418530 | 90.8% | Register allocation differs
+SHC_3BB0A8C1_0x00418530 | 96.6% | Register allocation differs
 
 SHC_3BB0A8C1_0x00418640 | 96.4% | Register allocation differs
 
@@ -5579,11 +5579,11 @@ SHC_3BB0A8C1_0x00418F70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00418F90 | 98.6% | Register allocation differs
 
-SHC_3BB0A8C1_0x004190D0 | 91.3% | Register allocation differs
+SHC_3BB0A8C1_0x004190D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00419190 | 92.9% | Register allocation differs
+SHC_3BB0A8C1_0x00419190 | 96.4% | Register allocation differs
 
-SHC_3BB0A8C1_0x00419290 | 90.5% | Register allocation differs
+SHC_3BB0A8C1_0x00419290 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00419340 | 100.0% | Reimplemented
 
@@ -6181,7 +6181,7 @@ SHC_3BB0A8C1_0x0041CC70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041D510 | 94.3% | Register allocation differs
 
-SHC_3BB0A8C1_0x0041E240 | 99.6% | Building ID load scheduled before the crew count reload (was 100 before main's 2026-10-27 header sync)
+SHC_3BB0A8C1_0x0041E240 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041E3F0 | 0.0% | Pending
 
@@ -6197,13 +6197,13 @@ SHC_3BB0A8C1_0x0041E85C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0041E860 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041E870 | 92.1% | Register allocation differs
+SHC_3BB0A8C1_0x0041E870 | 94.0% | Register allocation differs
 
 SHC_3BB0A8C1_0x0041EB00 | 90.6% | Register allocation differs
 
 SHC_3BB0A8C1_0x0041EC80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041EDA0 | 75.5% | Register allocation differs
+SHC_3BB0A8C1_0x0041EDA0 | 76.7% | Register allocation differs
 
 SHC_3BB0A8C1_0x0041EF30 | 0.0% | Pending
 
@@ -6225,7 +6225,7 @@ SHC_3BB0A8C1_0x00420120 | 73.8% | Register allocation differs
 
 SHC_3BB0A8C1_0x004202E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004205B0 | 72.0% | Register allocation differs
+SHC_3BB0A8C1_0x004205B0 | 75.7% | Register allocation differs
 
 SHC_3BB0A8C1_0x00420760 | 0.0% | Pending
 

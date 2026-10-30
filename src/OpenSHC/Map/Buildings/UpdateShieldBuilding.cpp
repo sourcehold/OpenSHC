@@ -122,7 +122,8 @@ namespace Map {
             }
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].currentEmployeeCount = 0;
         } else {
-            for (int i = 0; i < 1; ++i) {
+            for (int i = 0;
+                i < DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].currentEmployeeCount; ++i) {
                 DAT_UnitsState::instance
                     .units[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[i]]
                     .state.generic = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
