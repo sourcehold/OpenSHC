@@ -19,7 +19,9 @@ namespace Map {
                 && DAT_BuildingsState::instance.buildings[buildingID].buildingType == Buildings::BT_HOVEL) {
                 DAT_BuildingsState::instance.buildings[buildingID].buildMonthOrBuildOrder = buildOrder;
                 buildOrder += 1;
-                DAT_BuildingsState::instance.buildings[buildingID].hovelVisualStyle = 0;
+                // hovelVisualStyle is cleared as two 16-bit halves
+                ((short*)&DAT_BuildingsState::instance.buildings[buildingID].hovelVisualStyle)[0] = 0;
+                ((short*)&DAT_BuildingsState::instance.buildings[buildingID].hovelVisualStyle)[1] = 0;
             }
         }
     }
