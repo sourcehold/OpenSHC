@@ -18,8 +18,7 @@ namespace Game {
         int index = 0;
         int allowedCount = 0;
         for (; DAT_TroopDefinedData::instance.MarketResourceCycleArray[index] != -1; ++index) {
-            if (this->mapAndTime.isResourceTradeable[DAT_TroopDefinedData::instance.MarketResourceCycleArray[index]]
-                != 0) {
+            if (this->mapAndTime.isResourceTradeable[DAT_TroopDefinedData::instance.MarketResourceCycleArray[index]]) {
                 ++allowedCount;
             }
         }

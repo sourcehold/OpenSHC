@@ -8,9 +8,9 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B7F0
     int GameStateStructures::getSalesPrice(int playerID, int resourceType)
     {
-        int sellAmount
-            = MACRO_CALL_MEMBER(GameStateStructures_Func::getSellResourceAmount, this)(playerID, resourceType);
-        return (this->mapAndTime.buyAndSalesPriceArray[resourceType].salesPrice / 5) * sellAmount;
+        return (this->mapAndTime.buyAndSalesPriceArray[resourceType].salesPrice / 5)
+            * MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::getSellResourceAmount, this)(
+                playerID, resourceType);
     }
 
 }
