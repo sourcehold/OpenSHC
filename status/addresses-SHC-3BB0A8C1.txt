@@ -5505,7 +5505,7 @@ SHC_3BB0A8C1_0x00415110 | 60.9% | Register allocation differs
 
 SHC_3BB0A8C1_0x004156F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00415A80 | 95.3% | Register allocation differs
+SHC_3BB0A8C1_0x00415A80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00415BF0 | 100.0% | Reimplemented
 
@@ -5513,9 +5513,9 @@ SHC_3BB0A8C1_0x00415C90 | 97.3% | Register allocation differs
 
 SHC_3BB0A8C1_0x00415E80 | 99.7% | Only a backward branch offset differs (3 bytes of alignment padding)
 
-SHC_3BB0A8C1_0x00416540 | 95.3% | Register allocation differs
+SHC_3BB0A8C1_0x00416540 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00416630 | 95.3% | Register allocation differs
+SHC_3BB0A8C1_0x00416630 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00416720 | 100.0% | Reimplemented
 
@@ -5533,11 +5533,11 @@ SHC_3BB0A8C1_0x00417740 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004177E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004178E0 | 97.6% | Register allocation differs
+SHC_3BB0A8C1_0x004178E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004179B0 | 97.7% | Register allocation differs
+SHC_3BB0A8C1_0x004179B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00417AA0 | 97.7% | Register allocation differs
+SHC_3BB0A8C1_0x00417AA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00417B90 | 99.2% | Register allocation differs
 
@@ -5595,7 +5595,7 @@ SHC_3BB0A8C1_0x00419630 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00419670 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004196D0 | 97.3% | Register allocation differs
+SHC_3BB0A8C1_0x004196D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00419780 | 0.0% | Pending
 

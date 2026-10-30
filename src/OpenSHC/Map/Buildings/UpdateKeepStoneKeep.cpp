@@ -1,6 +1,5 @@
 #include "OpenSHC/Map/Buildings.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentBuildingID.hpp"
@@ -10,10 +9,12 @@
 namespace OpenSHC {
 namespace Map {
 
+    // Pending start gold (startResources[15]) moves into currentResources[15] every 4th tick in chunks of
+    // 1 / 10 / 100 (signed compares against 0, 100 and 1000).
     // FUNCTION: STRONGHOLDCRUSADER 0x004179B0
     void Buildings::UpdateKeepStoneKeep()
     {
-        int const owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].currentHealth
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].maxHealth;
@@ -22,35 +23,28 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y + 2;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 24;
-        if ((DAT_GameCore::instance.mapTimeInTicks & 3) != 0) {
-            return;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0x18;
+        if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
+            int pending = DAT_GameState::instance.playerDataArray[owner].startResources[15];
+            if (pending > 0) {
+                int chunk = 1;
+                if (pending > 1000) {
+                    chunk = 100;
+                } else if (pending > 100) {
+                    chunk = 10;
+                }
+                DAT_GameState::instance.playerDataArray[owner].startResources[15] = pending - chunk;
+                DAT_GameState::instance.playerDataArray[owner].currentResources[15] += chunk;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resourceRelatedCountDown = 100;
+                DAT_GameState::instance.playerDataArray[owner].beforeLastMonthsGold
+                    = (short)DAT_GameState::instance.playerDataArray[owner].currentResources[15];
+                DAT_GameState::instance.playerDataArray[owner].lastMonthsGold
+                    = (short)DAT_GameState::instance.playerDataArray[owner].currentResources[15];
+                DAT_GameCore::instance.countdown = 1;
+            }
         }
-        if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR
-            || DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {
-            return;
-        }
-        // The starting gold is paid out into the treasury in steps.
-        int const startingGold
-            = DAT_GameState::instance.playerDataArray[owner].startResources[Game::Resources::RT_GOLD];
-        if (startingGold <= 0) {
-            return;
-        }
-        int amount = 1;
-        if (startingGold > 1000) {
-            amount = 100;
-        } else if (startingGold > 100) {
-            amount = 10;
-        }
-        int const remainingGold = startingGold - amount;
-        DAT_GameState::instance.playerDataArray[owner].currentResources[Game::Resources::RT_GOLD] += amount;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resourceRelatedCountDown = 100;
-        DAT_GameState::instance.playerDataArray[owner].startResources[Game::Resources::RT_GOLD] = remainingGold;
-        DAT_GameState::instance.playerDataArray[owner].beforeLastMonthsGold
-            = DAT_GameState::instance.playerDataArray[owner].currentResources[Game::Resources::RT_GOLD];
-        DAT_GameState::instance.playerDataArray[owner].lastMonthsGold
-            = DAT_GameState::instance.playerDataArray[owner].currentResources[Game::Resources::RT_GOLD];
-        DAT_GameCore::instance.countdown = 1;
     }
 
 }

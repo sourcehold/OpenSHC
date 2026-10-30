@@ -12,25 +12,27 @@
 namespace OpenSHC {
 namespace Map {
 
+    // renderAnimation = (owner fearFactorLevel >= 3) (signed setge at 0x41973E). Frame table entry read with
+    // movsx; <= 0 (jg at 0x41975E) restarts the animation at index 0, frame 1.
     // FUNCTION: STRONGHOLDCRUSADER 0x004196D0
     void Buildings::UpdateGoodBuildingDancingBear()
     {
-        int const owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        int const buildingID = DAT_CurrentBuildingID::instance;
+        int buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
             DAT_BuildingsState::ptr)(buildingID, 1);
-        DAT_BuildingsState::instance.buildings[buildingID].renderAnimation
-            = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel >= 3;
-        DAT_BuildingsState::instance.buildings[buildingID].animationFrame
-            = (char)DAT_BuildingDefinedData::instance.GoodBuildingDancingBearAnimationFrames
-                  [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
-        if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame <= 0) {
+        OpenSHC::Map::Buildings::Building* bear = &DAT_BuildingsState::instance.buildings[buildingID];
+        bear->renderAnimation = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel >= 3;
+        int frame = (char)DAT_BuildingDefinedData::instance.GoodBuildingDancingBearAnimationFrames
+                        [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        DAT_BuildingsState::instance.buildings[buildingID].animationFrame = frame;
+        if (frame <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[buildingID].animationFrame = 1;
         }
