@@ -13,7 +13,7 @@ namespace Game {
     void GameStateStructures::setLastEncounteredTroopUnit(int playerID, int unitID)
     {
         int const enemyUnitID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyUnitIDUnk;
-        if ((uint)(playerID - 1) > 7) {
+        if (playerID < 1 || playerID > 8) {
             return;
         }
         if (enemyUnitID <= 0) {

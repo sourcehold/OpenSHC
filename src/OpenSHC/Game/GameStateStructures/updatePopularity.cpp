@@ -3,6 +3,7 @@
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
@@ -43,7 +44,7 @@ namespace Game {
                 this->playerDataArray[playerID].popularity = 7500;
                 continue;
             }
-            int currentGold = this->playerDataArray[playerID].currentResources[0xf];
+            int currentGold = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
             int worstChange = 0;
             int worstChangeReason = 0;
             this->playerDataArray[playerID].storedPopularityPercent = this->playerDataArray[playerID].popularity;
@@ -75,7 +76,7 @@ namespace Game {
                 popularityChange = popularityChange + 75;
             }
             // sets popularity
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeBasedOnFood = popularityChange;
             if (popularityChange < 0) {
                 worstChange = popularityChange;
@@ -92,7 +93,7 @@ namespace Game {
             } else {
                 popularityChange = this->playerDataArray[playerID].crowding <= 180 ? -200 : -250;
             }
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeBasedOnCrowding = popularityChange;
             if (popularityChange < worstChange) {
                 worstChange = popularityChange;
@@ -123,7 +124,7 @@ namespace Game {
             } else {
                 popularityChange = this->playerDataArray[playerID].taxesSetting == 10 ? -500 : -600;
             }
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             int const popularityAfterTax = this->playerDataArray[playerID].popularity;
             this->playerDataArray[playerID].popularityChangeBasedOnTax = popularityChange;
             if (popularityChange < worstChange) {
@@ -153,17 +154,17 @@ namespace Game {
                 popularityChange = this->playerDataArray[playerID].blessedPeoplePercentage <= 94 ? 150 : 200;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].ownsChurchUnk != 0) {
-                popularityChange = popularityChange + 25;
+                popularityChange += 25;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].ownsCathedralUnk != 0) {
-                popularityChange = popularityChange + 50;
+                popularityChange += 50;
             }
             if (popularityChange < 0) {
                 popularityChange = 0;
             }
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityReligionBasedDiv25
-                = this->playerDataArray[playerID].popularityReligionBasedDiv25 + popularityChange / 25;
+                += popularityChange / 25;
             this->playerDataArray[playerID].popularityChangeBasedOnReligion = popularityChange;
             if (popularityChange < worstChange) {
                 worstChange = popularityChange;
@@ -171,17 +172,17 @@ namespace Game {
             }
             this->playerDataArray[playerID].beerPercentage
                 = MACRO_CALL_MEMBER(GameStateStructures_Func::computeAleCoverage, this)(playerID);
-            if ((int)this->playerDataArray[playerID].beerPercentage < 25) {
+            if (this->playerDataArray[playerID].beerPercentage < 25) {
                 popularityChange = 0;
-            } else if ((int)this->playerDataArray[playerID].beerPercentage < 50) {
+            } else if (this->playerDataArray[playerID].beerPercentage < 50) {
                 popularityChange = 50;
-            } else if ((int)this->playerDataArray[playerID].beerPercentage < 75) {
+            } else if (this->playerDataArray[playerID].beerPercentage < 75) {
                 popularityChange = 100;
             } else {
                 // if aleCoverage > 99: 200; else: 150
-                popularityChange = (int)this->playerDataArray[playerID].beerPercentage < 100 ? 150 : 200;
+                popularityChange = this->playerDataArray[playerID].beerPercentage < 100 ? 150 : 200;
             }
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeAleBased = popularityChange;
             if (popularityChange < worstChange) {
                 worstChange = popularityChange;
@@ -194,7 +195,7 @@ namespace Game {
             } else {
                 popularityChange = 0;
             }
-            this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + popularityChange;
+            this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeFearFactorBased = popularityChange;
             if (popularityChange < worstChange) {
                 worstChangeReason = 8;
@@ -218,7 +219,7 @@ namespace Game {
                 } else {
                     siegePenalty = this->playerDataArray[playerID].someCount60 <= 25 ? -25 : 0;
                 }
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + siegePenalty;
+                this->playerDataArray[playerID].popularity += siegePenalty;
                 this->playerDataArray[playerID].someCount54 = (short)siegePenalty;
             } else {
                 this->playerDataArray[playerID].someCount54 = 0;
@@ -226,35 +227,35 @@ namespace Game {
             }
             if (this->playerDataArray[playerID].someCount49 != 0) {
                 --this->playerDataArray[playerID].someCount49;
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 75;
+                this->playerDataArray[playerID].popularity -= 75;
                 this->playerDataArray[playerID].someCount55 = -75;
             } else {
                 this->playerDataArray[playerID].someCount55 = 0;
             }
             if (this->playerDataArray[playerID].someCount50 != 0) {
                 --this->playerDataArray[playerID].someCount50;
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 125;
+                this->playerDataArray[playerID].popularity -= 125;
                 this->playerDataArray[playerID].someCount56 = -125;
             } else {
                 this->playerDataArray[playerID].someCount56 = 0;
             }
             if (this->playerDataArray[playerID].someCount51 != 0) {
                 --this->playerDataArray[playerID].someCount51;
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 50;
+                this->playerDataArray[playerID].popularity -= 50;
                 this->playerDataArray[playerID].someCount57 = -50;
             } else {
                 this->playerDataArray[playerID].someCount57 = 0;
             }
             if (this->playerDataArray[playerID].someCount52 != 0) {
                 --this->playerDataArray[playerID].someCount52;
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + 200;
+                this->playerDataArray[playerID].popularity += 200;
                 this->playerDataArray[playerID].someCount58 = 200;
             } else {
                 this->playerDataArray[playerID].someCount58 = 0;
             }
             if (this->playerDataArray[playerID].someCount53 != 0) {
                 --this->playerDataArray[playerID].someCount53;
-                this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + 50;
+                this->playerDataArray[playerID].popularity += 50;
                 this->playerDataArray[playerID].someCount59 = 50;
             } else {
                 this->playerDataArray[playerID].someCount59 = 0;

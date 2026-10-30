@@ -22,8 +22,6 @@ namespace Game {
             if (this->playerDataArray[playerID].playerDeathRelated != 0) {
                 continue;
             }
-            // the original walks one pointer over currentPlayerFullIDArray and reaches currentAIArray off it, 27 ints
-            // further on; reading the second array by name costs the induction base
             int* currentPlayerFullID = &DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID];
             if (*currentPlayerFullID == -1 && currentPlayerFullID[0x1b] == 0) {
                 continue;

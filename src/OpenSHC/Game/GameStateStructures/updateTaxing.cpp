@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
@@ -14,33 +15,28 @@ namespace Game {
             if (this->playerDataArray[playerID].keep.id > 0 && this->playerDataArray[playerID].campground.id > 0) {
                 if (this->playerDataArray[playerID].taxesSetting < 3) {
                     this->playerDataArray[playerID].taxBribeMonthlyAccumulator
-                        = this->playerDataArray[playerID].taxBribeMonthlyAccumulator
-                        + MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxBribeExpenseForPlayer, this)(playerID,
+                        += MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxBribeExpenseForPlayer, this)(playerID,
                             this->playerDataArray[playerID].taxesSetting,
                             this->playerDataArray[playerID].currentPopulation);
                 } else if (this->playerDataArray[playerID].taxesSetting > 3) {
                     this->playerDataArray[playerID].taxIncomeMonthlyAccumulator
-                        = this->playerDataArray[playerID].taxIncomeMonthlyAccumulator
-                        + MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxIncomeForPlayer, this)(playerID,
+                        += MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxIncomeForPlayer, this)(playerID,
                             this->playerDataArray[playerID].taxesSetting,
                             this->playerDataArray[playerID].currentPopulation);
                 }
                 if (this->mapAndTime.monthChanged != 0) {
                     this->playerDataArray[playerID].taxBribeMonthlyAccumulator
-                        = this->playerDataArray[playerID].taxBribeMonthlyAccumulator / 10;
+                        /= 10;
                     this->playerDataArray[playerID].taxIncomeMonthlyAccumulator
-                        = this->playerDataArray[playerID].taxIncomeMonthlyAccumulator / 10;
-                    this->playerDataArray[playerID].currentResources[0xf]
-                        = this->playerDataArray[playerID].currentResources[0xf]
-                        + this->playerDataArray[playerID].taxIncomeMonthlyAccumulator;
+                        /= 10;
+                    this->playerDataArray[playerID].currentResources[Resources::RT_GOLD]
+                        += this->playerDataArray[playerID].taxIncomeMonthlyAccumulator;
                     DAT_GameSynchronyState::instance.finalResults.finalGold[playerID]
-                        = DAT_GameSynchronyState::instance.finalResults.finalGold[playerID]
-                        + this->playerDataArray[playerID].taxIncomeMonthlyAccumulator;
-                    this->playerDataArray[playerID].currentResources[0xf]
-                        = this->playerDataArray[playerID].currentResources[0xf]
-                        - this->playerDataArray[playerID].taxBribeMonthlyAccumulator;
-                    if (this->playerDataArray[playerID].currentResources[0xf] < 0) {
-                        this->playerDataArray[playerID].currentResources[0xf] = 0;
+                        += this->playerDataArray[playerID].taxIncomeMonthlyAccumulator;
+                    this->playerDataArray[playerID].currentResources[Resources::RT_GOLD]
+                        -= this->playerDataArray[playerID].taxBribeMonthlyAccumulator;
+                    if (this->playerDataArray[playerID].currentResources[Resources::RT_GOLD] < 0) {
+                        this->playerDataArray[playerID].currentResources[Resources::RT_GOLD] = 0;
                     }
                     this->playerDataArray[playerID].lastMonthsBribeTax
                         = this->playerDataArray[playerID].taxBribeMonthlyAccumulator;
@@ -51,7 +47,7 @@ namespace Game {
                     this->playerDataArray[playerID].beforeLastMonthsGold
                         = this->playerDataArray[playerID].lastMonthsGold;
                     this->playerDataArray[playerID].lastMonthsGold
-                        = (short)this->playerDataArray[playerID].currentResources[0xf];
+                        = (short)this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
                     this->playerDataArray[playerID].marketGold = 0;
                 }
             }

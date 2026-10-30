@@ -14,19 +14,10 @@ namespace Game {
             return playerFlags;
         }
         int const team = DAT_GameState::instance.mapAndTime.playerTeams[DAT_UnitsState::instance.units[unitID].owner];
-        // four players are handled per pass, exactly as the original binary does
-        for (int playerID = 1; playerID < 9; playerID += 4) {
+
+        for (int playerID = 1; playerID < 9; playerID += 1) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[playerID] == team) {
-                playerFlags = playerFlags & ~(1 << (playerID - 1));
-            }
-            if (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 1] == team) {
-                playerFlags = playerFlags & ~(1 << playerID);
-            }
-            if (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 2] == team) {
-                playerFlags = playerFlags & ~(1 << (playerID + 1));
-            }
-            if (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 3] == team) {
-                playerFlags = playerFlags & ~(1 << (playerID + 2));
+                playerFlags &=  ~(1 << (playerID - 1));
             }
         }
         return playerFlags;

@@ -9,7 +9,7 @@ namespace Game {
     void GameStateStructures::resetSomethingBuildingRelatedForAllPlayers()
     {
         for (int playerID = 1; playerID < 9; ++playerID) {
-            for (int buildingCategory = 0; buildingCategory < 0x14; ++buildingCategory) {
+            for (int buildingCategory = 0; buildingCategory < 20; ++buildingCategory) {
                 MACRO_CALL_MEMBER(GameStateStructures_Func::validateBuildingCategoryReference, this)(
                     playerID, buildingCategory);
             }

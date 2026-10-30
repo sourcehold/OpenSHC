@@ -1,11 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 namespace OpenSHC {
 namespace Game {
-
-    using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004596D0
     BOOLEnum GameStateStructures::getTeamsDifferent(int firstPlayerId, int secondPlayerId)
