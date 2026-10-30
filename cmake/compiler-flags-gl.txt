@@ -69,3 +69,19 @@ src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
 src/OpenSHC/Map/Buildings/UpdateIronMine.cpp
 
+src/OpenSHC/Map/Buildings/BuildingsState/destroyBuilding.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/growHops.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/growWheat.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/isFearFactorBuilding.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/isReligiousBuilding.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/updateBuildingSignpostCounter.cpp
+src/OpenSHC/Map/Buildings/UpdateApothecary.cpp
+src/OpenSHC/Map/Buildings/UpdateBadBuildingGibbet.cpp
+src/OpenSHC/Map/Buildings/UpdateBadBuildingStretchingRack.cpp
+src/OpenSHC/Map/Buildings/UpdateFireBallistaBuilding.cpp
+src/OpenSHC/Map/Buildings/UpdateGoodBuildingDancingBear.cpp
+src/OpenSHC/Map/Buildings/UpdateHopsFarm.cpp
+src/OpenSHC/Map/Buildings/UpdateKeepManorHouse.cpp
+src/OpenSHC/Map/Buildings/UpdateKeepStoneKeep.cpp
+src/OpenSHC/Map/Buildings/UpdateKeepStronghold.cpp
+src/OpenSHC/Map/Buildings/UpdateWheatFarm.cpp
