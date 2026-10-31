@@ -14,7 +14,7 @@ namespace Map {
                 if (this->buildings[buildingID].logicalState == BLS_NORMAL
                     && this->buildings[buildingID].owner == playerID
                     && this->buildings[buildingID].buildingType == buildingType
-                    && (includeBool == 0 || this->buildings[buildingID].field201_0x2c8 == 0)) {
+                    && (includeBool == 0 || this->buildings[buildingID].field200_0x2c8 == 0)) {
                     ++count;
                 }
             }
