@@ -131,14 +131,14 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 0;
         }
 
-        // padding_0x2b2 holds the short tick counter towards the next flagon drunk
+        // aleTracker counts the ticks towards the next flagon drunk
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagonsOfAleOrCheeseOrReleaseDogs
             > 0) {
             if (workerID != 0) {
-                *(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2 += 1;
-                if (*(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker += 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker
                     >= DAT_GameState::instance.playerDataArray[owner].aleRate) {
-                    *(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2 = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker = 0;
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                         .flagonsOfAleOrCheeseOrReleaseDogs -= 1;
                 }
