@@ -1,0 +1,2734 @@
+# MSVC 14.00 backend notes (`c2.dll`)
+
+Notes on the **compiler** rather than the game: what the bundled optimizer does, how it was read, and how to
+observe it. The reimplementation-facing conclusions live in
+[IMPLEMENTATION_CHEAT_SHEET.md](../../IMPLEMENTATION_CHEAT_SHEET.md); this file is the evidence behind them and
+the starting point for digging further.
+
+Everything here is about `MSVC1400-SP1/VC/bin/c2.dll`, `Microsoft (R) Optimizing Compiler Version
+14.00.50727.762` - the toolchain this project builds with, so it is the authority on our codegen rather than a
+proxy for it.
+
+For a step-by-step walkthrough of the tooling aimed at a newcomer - what to measure, in what
+order, and how to read each report - see [finding-mismatches.md](finding-mismatches.md).
+
+## The spill-cost weight, read directly: it is `1 << loop_depth`
+
+This supersedes the inferred chain in the two sections below, which was wrong at both ends. Read
+out of the code rather than reasoned from the names, `Spillcosts` computes its own weight and
+never consults the branch-prediction machinery.
+
+### Where the weight comes from
+
+`Spillcosts` opens `sub esp, 0x30` followed by four pushes, so the `[esp+0x28]` that it multiplies
+by is a **local** at frame offset 0x18, not an incoming argument - the first thing that ruled out
+the idea that a weight is handed in from elsewhere. It is written at five sites, all inside this
+block:
+
+```
+0x10b1066a  cmp  dword ptr [_PogoFlag], 2
+0x10b10671  jne  0x10b106d9                  ; no profile
+            ; profile path: esi:edi = total count, [ebx+0x190] = this block's 64-bit count
+            ;   total == 0            -> weight = 1
+            ;   count <= 0            -> weight = 1
+            ;   otherwise             -> weight = count * 0x2710 / total + 1
+            ;                            (0x2710 = 10000, two 64-bit helper calls)
+0x10b106d9  mov  cl, byte ptr [ebx + 0x17e]
+0x10b106df  mov  eax, 1
+0x10b106e4  shl  eax, cl                     ; weight = 1 << [ebx+0x17e]
+0x10b106e6  mov  dword ptr [esp + 0x28], eax
+```
+
+So:
+
+* **without a profile** - every build here - `weight = 1 << depth`, where depth is the `word` at
+  `+0x17e` of the block record;
+* **with `_PogoFlag == 2`** the weight is the block's share of the total execution count scaled by
+  10000, plus one.
+
+`+0x17e` is a **loop nesting depth**. Every write to it comes from loop machinery -
+`@HoistOutOfLoop@16`, `@LpCanonicalizeLoops@4`, `@LgFindExitBlocks1@12`, `@LurNewBlock@12`,
+`@FPHoistOutOfLoop@20` - and the block creators zero it or copy it from a parent:
+`@FgSplitBlock@12`, `@FgInsertAirlockBlock@16`, `@PtInlDupInlineeBlock@8`, `@PogoOptNewBlock@4`.
+
+### So the full key is
+
+```
+key(+0x0c) = sum over regions where the value IS referenced     ( refs * count * 2^depth )
+           - sum over regions where it is live but UNREFERENCED (        count * 2^depth )
+```
+
+with `2^depth` replaced by the scaled profile share under PGO.
+
+### The weight formula, verified by measurement
+
+The `1 << depth` reading above was tested on `addUnitToSmallestBehaviourTypeTribe` rather than left
+as a reading of the instructions, and it holds quantitatively.
+
+**The spilled values are the lowest-keyed ones.** `reg_scores.py --find smallestSize` locates the
+function at invocation #371 and gives its `+0x0c` keys:
+
+```
+aicIndex +87   slot +79   firstSlot +71   groupsCount +40   aiType +32
+playerID +30   selectedTribeID +28   this +23   selectedSlot +14   smallestSize +2
+```
+
+`slot_map.py` independently reports exactly two values in stack slots - `_smallestSize$` and
+`_selectedSlot$` - and those are precisely the two lowest keys, **+2** and **+14**. Two tools, one
+reading the compiler's own records through a debugger and one inferring the frame from the
+original's disassembly, agreeing without being fitted to each other.
+
+**Removing one in-loop reference costs exactly one `count * weight` term.** Rewriting the loop
+from a bound to a counter,
+
+```cpp
+for (int slot = firstSlot; slot < firstSlot + groupsCount; slot++)      // bound in the condition
+for (int slot = firstSlot, remaining = groupsCount; remaining > 0; slot++, remaining--)
+```
+
+takes the `firstSlot + groupsCount` expression out of the loop condition, so `firstSlot` and `slot`
+each lose one depth-1 reference. Measured:
+
+| candidate | bound form | counter form | change |
+| --- | --- | --- | --- |
+| `firstSlot` | +71 | +57 | **-14** |
+| `slot` | +79 | +65 | **-14** |
+| `groupsCount` | +40 | +52 | +12 |
+| `smallestSize` | +2 | -1 | -3 |
+| `aicIndex`, `aiType`, `this` | +87, +32, +23 | unchanged | 0 |
+
+Two independent values each lose **exactly 14** for losing one reference in the same loop - the
+same `count * weight` term, as the formula requires - while every candidate the edit does not touch
+moves not at all. `groupsCount` gains because the counter form gives it a new reference in the loop
+initialiser.
+
+**But the lever does not fix the function.** The point of the rewrite was that a counter is
+referenced every iteration where a bound merely lives across the body, so its key should rise
+enough to win a register and drop the frame from 12 to the original's 8. It does not: the frame
+stays at `+4`, and the instruction mix gets much worse - delta 10 to 22, `kind` 0.893 to 0.846,
+quick_diff 0.6803 to 0.6179 - because the counter form emits a decrement the original does not
+have. The original keeps a genuine bound in `edx`; the counter shape is simply not what it
+compiled.
+
+So the formula is now verified and usable for *predicting* which value is at risk of spilling, and
+the measurement confirms the mechanism. What it does not provide is a way to rescue a particular
+value here: the only moves available change the instruction stream more than they change the
+ranking. Treat it as a diagnostic - "this value will spill because its key is lowest, and here is
+the term responsible" - rather than as a fix.
+
+### What the Bp heuristics actually feed
+
+Not this. `@BpBlockProbabilities@4` has exactly one caller,
+`@BpComputeFlowgraphProbabilities@4`, and that has exactly two:
+`@PtInlFindInitialPartialInlineeAux@12` and `@PtInlComputeBenefit@4`. `@FgWeightFlowGraph@4`'s
+five callers are `@DoInline@24`, `@PtInlCollectBUInfo@12`, `@LiListFunction@4`,
+`@X87MapGFxToSTx@4` and `@PogoFgCreateScaledZeroCounts@20`.
+
+The static branch-prediction suite is an **inliner** input - it estimates how much a partial
+inline is worth - plus an x87 mapping use and a profile path. It does not reach register
+allocation, and `Spillcosts` does not call any of it.
+
+That is the whole reason the guard-inversion test came out flat: inverting
+`if (aiType == AITA_NULL) return 0;` changes which arm is predicted taken, but it does not change
+any block's **loop depth**, so no weight moves, so no key moves, so the allocation is untouched -
+which is exactly what was measured, with the register substitution profile identical in kind and
+count. It also explains, in passing, why `#pragma inline_depth(1)` perturbed codegen in the
+earlier pragma sweeps while the branch-shape rewrites did not: inlining is the consumer of that
+chain.
+
+### The lever this does give
+
+Loop depth, and it is predictive. A reference inside a loop at depth *d* contributes `2^d` to its
+value's key; the same reference outside contributes 1. A value that is live across a loop without
+being referenced in it is charged `2^d` per such region. So moving a reference into or out of a
+loop changes that value's allocation priority by a factor of two per level, in a direction the
+formula states in advance - which is a much sharper instrument than the branch-shape rewrites
+tried above, and the one to reach for when a value is enregistered on one side and spilled on the
+other.
+
+Worth noting what this predicts about the functions in this file: `playerID` in
+`aiGiveRaidInstructions` keys at **-147** because it is live across a depth-1 loop while being
+referenced almost entirely outside it, so it collects the `count * 2` penalty repeatedly - and
+`slot_map.py` independently shows it in a stack slot. The model and the observation agree without
+being fitted to each other.
+
+## Superseded: static branch prediction feeds register allocation (it does not)
+
+`Spillcosts` keys on `refs * count * weight`, and `weight` is a block frequency. Following where
+that comes from leads to the one lever found so far that the source actually controls.
+
+Block weights come from `@FgWeightFlowGraph@4` / `@FgWeightGraph@12`, which consume edge
+probabilities from `@BpBlockProbabilities@4`. With a profile loaded that is
+`@BpComputeFlowgraphPogoProbabilities@4`; without one it is `@BpComputeFlowgraphProbabilities@4`,
+which combines a suite of static heuristics - the classic Ball-Larus set, each one named:
+
+```
+@BpLoopBranchHeuristic@12   @BpReturnHeuristic@12     @BpCallHeuristic@12
+@BpPointerHeuristic@12      @BpOpcodeHeuristic@12     @BpGuardHeuristic@12
+@BpLoopExitHeuristic@12     @BpLoopHeaderHeuristic@12 @BpCmpHeuristicTemplate@8
+```
+
+So the chain is
+
+```
+branch shape -> Bp*Heuristic -> BpBlockProbabilities -> FgWeightFlowGraph -> block weight
+             -> Spillcosts key -> InsertInList order -> ChoosePhysReg
+```
+
+and **which arm of a branch you write first can change the register allocation**.
+
+### Two of them decoded
+
+Each heuristic returns three values - `-1`, `0` or `+1` - built with the `sbb eax, eax` and
+`lea ecx, [ecx + ecx - 1]` idioms, where `-1` means "this heuristic does not apply".
+
+`BpReturnHeuristic` at `0x10c72f00` walks each successor to its terminating instruction, chasing
+up to five links through `+0xc`, and tests the tuple opcode at `+8` against **`0x10` and `0x19`**,
+the two return forms:
+
+* both successors return, or neither does - `cmp esi, eax; jne` falls through to
+  `or eax, 0xffffffff` - the heuristic **abstains**
+* exactly one returns - the **non-returning** arm is predicted taken
+
+`BpCallHeuristic` at `0x10c73030` is the same shape against opcode **`0x0f`**, a call: scan each
+successor's instruction list, and if exactly one arm contains a call, the arm **without** the call
+is predicted taken. (The opcode numbers are inferred from the function names plus the surrounding
+code, not from a typed enum; the control flow is read directly.)
+
+### Why this is the useful one
+
+It is predictive rather than trial-and-error. A branch only has its probability - and therefore
+its block weight, and therefore its contribution to every candidate's spill cost - decided by arm
+order **when the heuristic discriminates**, which is when exactly one arm returns or exactly one
+arm calls. Otherwise the heuristic abstains and arm order is free.
+
+That retro-explains both results this file already records, which is the reason to trust it:
+
+* `aiGiveRaidInstructions` gained **56.8% -> 60.3%** from swapping the arms of its final
+  `if`/`else`. Swapping changed which arm is the fallthrough, and with it the predicted
+  probabilities feeding the weights.
+* `playNervous2BikFromPlayer` was **byte-identical** across four source forms, including
+  early-return against guarded-call. Under this model that is expected: both forms leave both
+  arms reaching a return, so `BpReturnHeuristic` abstains either way and nothing downstream
+  moves.
+
+### How to use it
+
+When a function is structurally correct but its registers or frame differ, look for branches where
+exactly one arm returns or exactly one arm calls, and check our arm order against the original's.
+`structural_diff.py` already reports polarity flips; this says which of them are worth acting on -
+a flip on a branch where the heuristics abstain is cosmetic, a flip on a discriminating branch
+moves the block weights and can move the allocation.
+
+Still unread, in rough order of likely value: `@BpGuardHeuristic@12` (guard clauses, which the AI
+code is full of), `@BpLoopExitHeuristic@12` and `@BpLoopBranchHeuristic@12` (the loop-carried
+values that several of these functions spill), and `@BpOpcodeHeuristic@12` with
+`@BpCmpHeuristicTemplate@8`, which would say whether the *comparison operator* itself shifts a
+probability - that would make `!= 0` against `> 0` a codegen-relevant choice rather than a
+stylistic one.
+
+### Correction: tested, and it is not a usable lever
+
+The section above was written before the lever was tested. Two things it claimed are wrong, and
+the practical conclusion does not survive.
+
+**`BpGuardHeuristic` is inert.** Decoding `0x10c72e70` shows every path, including the one that
+reaches the computation at `0x10c72edb`, falling through to
+
+```
+0x10c72eec  or   eax, 0xffffffff
+0x10c72ef1  ret  4
+```
+
+`or eax, -1` discards whatever was computed, so the function **always returns -1**, which is the
+abstain value. The guard heuristic never contributes in this build - the opposite of the
+prediction above that it would be the most valuable one to read next. Whether that is deliberate
+neutering or a discarded result, the behaviour is the same.
+
+**The retro-explanation of `aiGiveRaidInstructions` was wrong.** Its winning branch is
+`if (canNavigate(...)) commandUnitsToLocation(...) else sendUnitsToCampfire(...)`. Both arms
+contain a call, so `BpCallHeuristic` abstains; neither arm returns, so `BpReturnHeuristic`
+abstains. Both heuristics abstain on the one branch whose arm order was worth 3.5 points, so that
+gain was plain instruction ordering and had nothing to do with block weights. Fitting it to this
+model was wishful.
+
+**The direct test shows no effect on allocation.** `addUnitToSmallestBehaviourTypeTribe` opens
+with `if (aiType == AITA_NULL) return 0;` followed by the body - a branch where
+`BpReturnHeuristic` genuinely discriminates, one arm being a return block and the other the rest
+of the function. Rewriting it as `if (aiType != AITA_NULL) { body } return 0;` is semantically
+identical and flips which arm the heuristic predicts taken. Measured:
+
+| | instructions | `kind` | mix delta | quick_diff | frame | register substitutions |
+| --- | --- | --- | --- | --- | --- | --- |
+| baseline | 122 | 0.893 | 10 | 0.6803 | +4 | 27 |
+| inverted guard | 123 | 0.849 | 11 | 0.5878 | +4 | 29 |
+
+The code changed - one extra jump and a different block layout - but the **register allocation did
+not move at all**. The substitution profile is identical in kind and count: `eax -> edi` 8 times,
+`ecx -> edi` 5, `edi -> edx` 4, `eax -> edx` 3, `edi -> ecx` 1, `ebp -> edi` 1 in both, with the
+totals differing only by the two added instructions. The frame stayed at `+4`.
+
+So what survives is only what was read directly off the code: the call chain from the `Bp*`
+heuristics through `BpBlockProbabilities` and `FgWeightFlowGraph` into the weight that
+`Spillcosts` multiplies, and the decoded behaviour of `BpReturnHeuristic` and `BpCallHeuristic`.
+What does **not** survive is the claim that this gives the source a handle on allocation. On the
+one function where the construction could be made cleanly, flipping a discriminating branch moved
+the block structure and left every register where it was.
+
+Possible reasons, none of them established: the weight change may be too small to reorder any
+candidate given the margins seen in the `+0x0c` keys (`tile` 212 against the next at 148); the two
+source forms may present the same successor shapes to the heuristic despite looking different;
+or the probability-to-weight step may compress differences more than the chain suggests. Settling
+it would mean reading `FgWeightFlowGraph` and `BpBlockProbabilities` rather than inferring from
+the ends of the chain, and measuring the weights directly under the debugger the way `Spillcosts`
+was measured - which is the next thing to do before anyone trusts this path again.
+
+## The PGO flag: three gated behaviours, and the phase order
+
+The global at `0x10d0ffdc` that an earlier section could only describe as "a mode flag, read in
+about 400 places, set at invocation level" is **`_PogoFlag`**, the per-function copy of
+**`_PogoMasterFlag`** at `0x10d44b4c`. Pogo is Microsoft's internal name for PGO, and the flag
+gates three separate behaviours that between them cover both the allocation and the scheduling
+walls this file keeps running into:
+
+| value | what changes |
+| --- | --- |
+| 0 (our builds) | full tail merging; `Spillcosts` penalty is `count * weight` |
+| 1 (instrument) | `FgTryTailMerge` returns immediately - **no tail merging at all** |
+| 2 (optimise) | `Spillcosts` penalty is just `weight`; `PogoOptCodeMotion` runs as an extra pass |
+
+`FgTryTailMerge` at `0x10b2e1b0` opens with `if (_PogoFlag != 1)` wrapping its entire body, which
+makes sense - merging blocks would corrupt the profile counters being collected. That is the pass
+that merges the duplicate `aiGiveRaidInstructions` is missing.
+
+**The phase order**, from the twelve `dop2_*` entry points in address order:
+
+```
+GetInitialTuples -> InitialOptsAndSetup -> PreLowerGlobalOpts -> Codegen ->
+PostLowerPreRegAllocGlobalOpts -> GlobalRegAlloc -> CodegenUpdate ->
+PostCodegenFlowOpts -> CodegenFinish -> FinalFlowOpts -> PreEncode -> EncodeAndRelated
+```
+
+`GlobalRegAlloc` is phase 6 and `FinalFlowOpts` is phase 10, and `dop2_FinalFlowOpts` is where
+`FgDoLateFlowOpts`, `FgCodeMotion` and - only when `_PogoFlag == 2` - `PogoOptCodeMotion` are
+called. So **tail merging and code motion run after register allocation**, which independently
+confirms the claim made earlier in this file: two arms whose instructions are identical except
+for their registers are not mergeable, so the allocation can be what preserves a duplicate.
+`FgCodeMotion` is also the pass that sinks a load past a branch, which is what no source form of
+`playNervous2BikFromPlayer` could prevent.
+
+### Forcing the flag: a real lever, but not the explanation
+
+`pogo_probe.py` compiles one file twice, the second time with `_PogoFlag` forced across
+`Spillcosts` only - an entry breakpoint sets it and the `ret` at `0x10b1153f` restores it - so the
+allocation penalty changes while the profile-dependent passes never see a value the build was not
+configured for. It does change allocation, measurably, on
+`addUnitToSmallestBehaviourTypeTribe`:
+
+| | frame | distinct callee-saved | instructions | `kind` vs original | mix delta |
+| --- | --- | --- | --- | --- | --- |
+| original | **8** | **4** | **122** | - | - |
+| baseline | 12 | 3 | 122 | **0.893** | **10** |
+| `_PogoFlag=2` | **8** | **4** | 115 | 0.624 | 15 |
+
+The smaller penalty does exactly what the formula predicts - the frame drops from 12 to the
+original's 8 and one more value is enregistered, which is the direction every register-pressure
+difference in this namespace pointed. But the overall match gets **worse**, because other `== 2`
+paths activate and strip seven instructions. On `aiGiveRaidInstructions` it moves the two
+contested values from `ebx`/`ebp` - the original's pair, merely swapped - to `esi`/`edi`, which is
+further away.
+
+So the spill-penalty term is a confirmed lever on allocation and on frame size, and it is not the
+explanation for the gap; the original was not simply built in this mode. It is worth re-testing
+per function when a frame comes out too large, since that is the one symptom it reliably fixes.
+
+A warning from getting this wrong once: the first attempt put the restore breakpoint on the last
+*byte* of `Spillcosts` rather than on its `ret`, so it never fired, the flag stayed 2 into the
+profile-dependent passes, and the compile died on a null dereference in `FgFindDominatorsGraph`.
+Bracket on a real instruction address, and keep a second restore at the next phase entry.
+
+### Reading the symbol table without Ghidra
+
+`pdbnames.py` recovers 9687 public symbols from `c2.pdb` by scanning for `S_PUB32` records
+(`u16 reclen | u16 0x110e | u32 flags | u32 offset | u16 segment | name`) and mapping
+segment-plus-offset through the PE section table. It is the practical name-to-address route,
+because ghidra-mcp's name searches ignore the `program` argument and query whatever program is
+current, while only `get_function_by_address` honours it. PDB names are decorated
+(`@Spillcosts@12`) where Ghidra shows them stripped; every address agrees.
+
+Pass names worth knowing, all from that map:
+
+| area | symbols |
+| --- | --- |
+| tail merge / cross jump | `@FgTryTailMerge@16`, `@FgDoCommonTailMerge@20`, `@FgTailMergeWithoutCheck@8`, `@FgCrossJumpRemove@4`, `@PpSsaMdSubstPreventsTailMerge@8` |
+| code motion and sinking | `@FgCodeMotion@4`, `@FgChangeSink@12`, `@GoptInvariantCodeMotion@12`, `@GoptCodeMotionBlock@12` |
+| scheduling | `@Schedule@8`, `@SchNeedSchedule@8`, `@SchSchedGraph@4`, `@SchmdBlockNeedPreSchedule@8`, `_preSched` |
+| profile-driven | `@PogoOptCodeMotion@*`, `@PogoCreateFinalOrder@4`, `@PogoDecorateFG@4`, `@BpComputeFlowgraphPogoProbabilities@4` |
+
+`SchNeedSchedule` turns out to be a weak lever - it schedules any block with more than one real
+instruction, gated only on `_preSched` for the pre-pass - but `@PogoCreateFinalOrder@4` shows that
+final block order is profile-driven in PGO builds, which is a scheduling difference no source
+change can reach.
+
+## The resolver switches change the score but not the code
+
+Both resolver switches are **off** in a fresh checkout - 829 `MACRO_STRUCT_RESOLVER(..., false, ...)`
+in `src/OpenSHC/Globals` and every `MACRO_FUNCTION_RESOLVER` in the `.func.hpp` files - and every
+measurement in this file was taken that way until it was checked. Turning both on
+(`tools/reimplementation-control/enable_reimplemented_data.py` and
+`tools/reimplementation-helper/batch/enable_local_functions.py`) moves the reccmp percentage a long
+way:
+
+| function | resolvers off | resolvers on |
+| --- | --- | --- |
+| `computeAttackPossibilities` | 72.4 | **89.7** |
+| `recruitHarrassingSiegeEngines` | 65.9 | **73.2** |
+| `playNervous2BikFromPlayer` | 64.0 | **76.0** |
+| `decideOnTribeAttackLocation` | 64.4 | **68.8** |
+| `renderDebugDataAiInfo` | 95.4 | **99.0** |
+| `updateAIPlayerState` | 78.6 | **81.7** |
+| `aiShouldAttackOrWaitForTeamCoordination` | 80.2 | **83.2** |
+| `aiRecruitUnits` | 48.0 | **50.0** |
+
+The whole build list averages **94.20 over 60** functions with them on. So any percentage quoted
+from a default checkout is understated, sometimes by seventeen points, and a figure is only
+comparable to another taken in the same configuration.
+
+**But the structural measures do not move at all.** With the resolvers on, `slot_map.py`,
+`structural_diff.py` and `quick_diff.py` return byte-identical results -
+`addUnitToSmallestBehaviourTypeTribe` still reports frame `+4`, `kind` 0.893 and mix delta 10, and
+the quick_diff ratios stay at 0.8000, 0.6803 and 0.7284 to four decimals. The reason is that a
+resolver changes an *operand*, not an instruction: `mov ecx, OFFSET ?instance@...StructResolver@@`
+against `mov ecx, 0x2157578` is the same `mov`, and a call through a trampoline is still one
+`call`. reccmp scores operands, so it sees the difference; a mnemonic-level or frame-level
+comparison does not.
+
+That is a useful division of labour rather than a problem. The structural tools can be run in a
+default checkout and trusted, and the resolvers only need flipping when a percentage is about to be
+recorded. It also means the conclusions this file draws about frames, instruction mix and register
+pressure are unaffected by the switch - they were checked.
+
+### /GL does not transfer to this namespace
+
+`enable_local_functions.py` documents the reason the function resolvers matter beyond runtime:
+`/GL` buys nothing while a call still leaves the module, because LTCG cannot see the callee's
+register use, and flipping `getSellResourceAmount` took `getSalesPrice` from 68.4% to 100% because
+the original keeps `this` in the volatile `edx` across that call. That is exactly the symptom class
+behind every register-pressure wall in this file, and no AICState file had ever been given `/GL` -
+`cmake/compiler-flags-gl.txt` had 22 entries, none of them AICState.
+
+Adding all sixty, with the function resolvers on, and verifying `/GL` really reached the compile
+command (120 of 120 AICState entries carry it; `file_dependent_read_list` in `CMakeLists.txt`
+makes cmake reconfigure when that list changes) produced **no gain whatsoever** - every function
+identical, and `planToBuyWhenLowOnResourceAndSnoozeBuildings` 0.8 worse.
+
+The likely reason is visible in the call sites: AICState's hot callees -
+`checkTribeActivityPercentages`, `selectRandomBuildingIDFromListOfBuildingTypes`, and the
+`TribesState`/`UnitsState` methods - are not in the build list at all, so those calls leave the
+module whatever the flags say. `getSalesPrice` won because its callee was in the list beside it.
+So the lever is real but its precondition is unmet here, and the concrete next step is to bring
+those callees into the build list first and only then retest `/GL`.
+
+## Every decoded name, confirmed against c2.pdb
+
+The whole backend model in this file was decoded from unnamed code, so it is worth recording
+that it has since been checked against the real symbols. Loading `c2.dll` **with its PDB** into
+a Ghidra project confirms every function this file names, and resolves the one naming confusion
+it had:
+
+| address | PDB name | what this file decoded it as |
+| --- | --- | --- |
+| `0x10c07350` | `dop2_GlobalRegAlloc` | the register-allocation driver |
+| `0x10b10420` | **`Spillcosts`** | accumulates the `+0x0c` ordering key |
+| `0x10b11970` | `InsertInList` | candidate priority list, sorts on `+0x0c` |
+| `0x10b119f0` | **`InsertByBenefit`** | the other insert, sorts on `+0x40` |
+| `0x10b14b70` | `ChoosePhysReg` | picks the cheapest free register |
+| `0x10beaef0` | `ColorStackElements` | the stack-slot colourer |
+| `0x10beb760` | `colorElemental` | per-element slot placement |
+| `0x10beb730` | **`StkGSBufferLevel`** | the class byte at `+0x18` |
+
+Three of those are worth dwelling on.
+
+**`Spillcosts`** is the function whose tail accumulates `+0x0c`, and the name is the semantic:
+the key is a spill cost. A value gains `refs * count * weight` in each region where it is
+referenced and is charged `count * weight` for each region it is live across without being
+referenced - which is exactly what "what would it cost to spill this" means. The formula was
+derived from the arithmetic before the name was known, and they agree.
+
+**`InsertInList` against `InsertByBenefit`** explains the error this file used to contain. The
+two are adjacent and nearly identical; the old note said "InsertInList sorts on `+0x40`, the
+benefit" when in fact `InsertInList` sorts on `+0x0c` and it is `InsertByBenefit`, 0x80 bytes
+later, that sorts on `+0x40`. The names make the distinction explicit, and the candidate list
+the harness breakpoints is the former.
+
+**`StkGSBufferLevel`** settles the class byte outright. The `/GS` reading in the section above
+was an inference from the arithmetic plus one observed layout; the name says it directly - `Stk`
+for stack, `GS` for the buffer security check, `BufferLevel` for the classification. Its
+decompilation is also identical to the hand-decode, including `sym+0x63 < 3` for `<= 2`:
+
+```c
+char StkGSBufferLevel(sym)            /* sym in EAX */
+{
+  if (((sym+0x37 & 0x40000) != 0) && (sym+0x63 < 3) && (4 < sym+0x1c))
+    return 3;
+  return ((sym+0x20 & 0x4000000) != 0) + 1;
+}
+```
+
+The PDB does **not** apply struct types, so the operands are still raw offsets and the fields of
+the symbol record remain unnamed. The function names are what the PDB buys.
+
+**How to query it.** `ghidra-mcp`'s read tools take a `program` argument, so a non-current
+program can be queried without disturbing anything:
+
+    get_function_by_address(address="0x10beb730", program="c2.dll")
+
+That matters because `switch_program` reports success but does **not** redirect the query tools -
+after switching, `get_metadata` still named the game executable and symbol lookups still missed.
+Pass `program` instead of switching, and a shared session's `currentProgram` is never touched.
+REA remains the alternative when no PDB is wanted, but it refuses a caller-supplied PDB
+companion, which is why it could only ever report `FUN_` names.
+
+## Getting symbols
+
+`c2.dll` references `c2.pdb`, and Microsoft still publishes it:
+
+```
+https://msdl.microsoft.com/download/symbols/c2.pdb/8E3C6AD714BE4E55B528B0DBEB3BABD81/c2.pdb
+```
+
+(947 KB; the path is `<name>/<GUID><age>/<name>` from the RSDS record in the debug directory.) It is a
+publics-only PDB - no line numbers, no locals, no struct layouts - but it names every function, and mangled C++
+names carry parameter types for free, e.g.
+`?ProcessFunc@CControlGraph@OptDbgNameSpace@@QAEXPAUILivenessCallback@2@@Z`.
+
+Tools that will not accept a caller-supplied PDB can still be used: parse the `S_PUB32` records out of the PDB
+(`reclen, rectyp=0x110E, flags, off, seg, name`), map `(seg, off)` through the PE section table, and you have a
+name-to-address table to drive an address-based disassembler or a debugger. `c2.dll`'s image base is
+`0x10b00000`.
+
+The retail build has **no** internal dump switch - no `-d2*` option strings, no asserts, no trace output. The only
+diagnostic strings are the PGO log (`Trace formation`, `Copy Elim`, `HCO Def Push`, `PEEP:`). There is no free
+ground truth; it has to be read or traced.
+
+## The backend's own source layout
+
+The fatal-assert path passes `__FILE__`, so the binary leaks 66 source paths. Useful ones:
+
+| area | file |
+|---|---|
+| stack slot layout | `P2/stack.c` |
+| coloring | `P2/color.c` |
+| register assignment | `P2/regasg.c` |
+| global optimizer | `P2/globopt.c`, `P2/globlopt.c`, `P2/globdf.c` |
+| IR | `P2/tuple.c`, `P2/fg.c`, `P2/dag.c` |
+| x86 lowering and emission | `P2/x86/lower.c`, `P2/x86/code.c`, `P2/x86/mdlist.c`, `P2/x86/fpreg.c`, `P2/x86/fpo.c` |
+
+An assert also gives a file *and line*, which anchors a function to its source: `ColorStackElements` reports
+`P2/stack.c` line 1372.
+
+## Addresses
+
+VAs for an unrebased load at `0x10b00000`:
+
+| symbol | VA |
+|---|---|
+| `@dop2_GlobalRegAlloc@4` | `0x10c07350` |
+| `@dop2_PostLowerPreRegAllocGlobalOpts@4` | `0x10c07350`-adjacent, see PDB |
+| `@Color@4` | `0x10b0cf40` |
+| `@SsaColor@4` | `0x10be2b30` |
+| `@CanColorPseudoreg@12` | `0x10b1b920` |
+| `@ColorStackElements@12` | `0x10beaef0` |
+| `@StkColorCmp@12` | `0x10bebb30` |
+| `@QSortColors@12` | `0x10bebbb0` |
+| `@SwapColors@8` | `0x10bebcf0` |
+| `@StkColorWeightForEBPAdj@12` | `0x10bec120` |
+| `@StkInsertDummyColor@8` | `0x10bec3c0` |
+| `@Spillcosts@12` | `0x10b10420` |
+| `@SpillOrDefer@12` | `0x10b0d690` |
+| `@RegSpill@12` | `0x10bdad70` |
+| `@CgAnnotateEdgeWeight@12` | `0x10b061d0` |
+| generic bitset iterator (`FUN_10b04fa0`) | `0x10b04fa0` |
+
+## Stack slot assignment - decoded
+
+`ColorStackElements` builds one 28-byte record per stack element, sorts the records with `StkColorCmp`, and hands
+out offsets in the sorted order. Record fields in use: `+0x08` the local's size rounded up to 4, `+0x0C` its
+accumulated reference weight (accumulated with `+=` when elements merge), `+0x18` a class byte.
+
+```c
+// StkColorCmp
+if (a->class != b->class)                  // byte at +0x18, unsigned
+    return (a->class > b->class) ? (dir ? +1 : -1) : (dir ? -1 : +1);
+ka = (a->weight * 1000) / a->size;         // +0x0C scaled, divided by +0x08
+kb = (b->weight * 1000) / b->size;
+return ka == kb ? 0 : (ka >= kb ? +1 : -1);
+```
+
+So for a homogeneous block of same-class scalars the layout is **descending weight per byte**. The direction flag
+is a function-level property; `ColorStackElements` walks the sorted elements `0..n` or `n-1..0` accordingly and
+passes the same flag to `QSortColors`.
+
+Confirmed on `planToBuyWhenLowOnResourceAndSnoozeBuildings` (fourteen `int allowX = 1;` locals, eleven colored):
+
+| slot | local | refs | declared |
+|---|---|---|---|
+| -48 | allowBlacksmiths | 5 | 6th |
+| -44 | allowTanners | 5 | 7th |
+| -40 | allowQuarries | 4 | 8th |
+| -36 | allowWoodcutters | 4 | **4th** |
+| -32 | allowBakeries | 4 | 9th |
+| -28 | allowBreweries | 4 | 10th |
+| -24 | allowInns | 4 | 11th |
+| -20 | allowWells | 3 | 13th |
+| -16 | allowFarms | 3 | **12th** |
+| -8 | allowIronMines | 3 | **1st** |
+| +8 | allowArmourers | 5 | 1st, on `_playerID$`'s slot |
+
+Monotone in weight, scrambled in declaration order. Two further checks: adding **one** reference to a local
+reshuffled the whole table - another local left the stack for a register, a third took a vacated slot - and the
+result was again exactly monotone (`5 5 5 4 4 4 4 3 3 3`); and renaming `allowQuarries` to `zzz` and
+`allowWoodcutters` to `aaaaaaaaaa`, inverting both alphabetical order and length for an adjacent equal-weight
+pair, left the function byte-identical.
+
+The **class byte at `+0x18`** is the primary key, and it is no longer unknown. A twelve-instruction
+classifier at `0x10beb730` computes it, and the placement pass at `0x10beb760` inlines the same thing:
+
+```
+0x10beb730  test dword ptr [eax + 0x37], 0x40000
+0x10beb737  je   0x10beb748
+0x10beb739  cmp  dword ptr [eax + 0x63], 2
+0x10beb73d  jg   0x10beb748
+0x10beb73f  cmp  dword ptr [eax + 0x1c], 4
+0x10beb743  jle  0x10beb748
+0x10beb745  mov  al, 3
+0x10beb747  ret
+0x10beb748  test dword ptr [eax + 0x20], 0x4000000
+0x10beb74f  setne al
+0x10beb752  add  al, 1
+0x10beb754  ret
+```
+
+that is
+
+```
+class(symbol) = 3                                      when (symbol+0x37 & 0x40000)
+                                                        and symbol+0x63 <= 2
+                                                        and symbol+0x1c  >  4
+              = 1 + ((symbol+0x20 & 0x4000000) != 0)   otherwise
+```
+
+so the class is **1, 2 or 3**, and the only size-dependent term is `symbol+0x1c > 4`: anything wider
+than a dword takes class 3 and sorts as a group apart from the scalars. The byte is written only when
+a gate holds -
+
+```
+((flags(DAT_10d195cc + 0x44c) & 0x20000) && DAT_10d0d700[0x17]) || (byte(DAT_10d0d700 + 0x2b) & 1)
+```
+
+- and otherwise stays 0, so with that feature off every slot shares one class and the key degenerates
+to the weight alone.
+
+**What it is.** Read off the arithmetic rather than from a symbol name, this is the `/GS`
+buffer-ordering rule: arrays are what can overflow, so they are classed separately and placed nearest
+the canary. `renderDebugDataAiInfo` corroborates it - `char text[1000]` sits at `-1004`, above every
+int scalar (`-1024` through `-1008`) and immediately below `__$ArrayPad$` at `-4`, which is the layout
+that rule produces. The `/GS` reading is an inference from the arithmetic plus that one observation,
+not a proven name; the arithmetic itself is read directly off the instructions.
+
+That explains the symptom this entry used to record as unexplained - arrays and address-taken locals
+interleaving with scalars for reasons the weight model does not cover - because the class outranks the
+weight.
+
+**It does not unblock `planToBuyWhenLowOnResourceAndSnoozeBuildings`**, which is what prompted the
+work, and the prediction that it would was wrong. All ten of that function's locals are `int`, so
+`symbol+0x1c` is 4 for each, none reaches class 3, and the class is uniform unless the `0x4000000`
+flag differs between them. That leaves the weight, where both sides agree, and then declaration
+order, which a hill-climb over all fourteen declarations plus three hand-made swaps showed is already
+a local optimum. The byte discriminates by width, and that function has nothing but dwords.
+
+Finding this file's functions, since it is not obvious: the four `P2/stack.c` assert sites come from
+searching the image for the UTF-16 path and then for pushes of its address. Their line numbers are
+1372, 2533, 2534 and 2573, and 1372 is the one already attributed to `ColorStackElements`, which
+fixes that function at `0x10beaef0`.
+
+`slot_weight.py` in `../reimplementation-helper/batch/` reports this per function.
+
+## Registers - what is and is not known
+
+**Established.** `.rdata` holds the register names in three parallel 4-byte-stride tables terminated by
+`"noreg"`. The table is indexed **backwards from its end**, and the numbering is 1-based in x86 encoding order:
+
+```
+eax=1  ecx=2  edx=3  ebx=4  esp=5  ebp=6  esi=7  edi=8      (0 = none)
+```
+
+An earlier revision of this file read the table forwards and recorded the reverse (`edi=0 ... eax=7`). That was
+wrong; reading `0x10cfc190 - (n-1)*4` reproduces the names above exactly.
+
+**Established.** A set is a 64-bit bitvector with set/clear mask tables indexed by `n & 0x3f`
+(`DAT_10cf65e8`/`DAT_10cf67e8`), and the iterator at `0x10b04fa0` takes the lowest set bit, adds the set's base,
+and clears the bit - so a set is always walked in ascending order:
+
+```c
+for (; (set >> bit & 1) == 0; bit++) {}   // low dword first, then the high one
+return set_base + bit + dword_offset;
+```
+
+**Not established.** That iterator is *generic*, not a register allocator. Where its use could be observed it was
+walking sets of symbols - `ColorStackElements` feeds its result straight into a symbol array as
+`DAT_10d0faa4 + n * 4` - and tracing `sellExcessGoods`'s allocation returned members numbered 0 to 40 across 140
+distinct set objects, which is a symbol or pseudo-register space rather than the eight GPRs. An earlier claim here
+that register choice is "the lowest-numbered free register" was an inference from the name table plus the
+ascending-order mechanic, and is retracted.
+
+`Spillcosts` is 854 lines of live-set bitvector manipulation with no cost arithmetic in it, which suggests the
+cost model decides *who gets spilled* rather than *which register a winner gets*, but that is also not traced.
+
+### Where registers are actually chosen
+
+Tracing one function's allocation answered this. During `sellExcessGoods` (invocation #613) the colouring entry
+points ran as follows - `Color` once, `SsaColor` twice, `ColorStackElements` once, `Spillcosts` six times,
+`SpillOrDefer` seven times, and `CanColorPseudoreg` and `RegSpill` not at all. So `@Color@4` is the per-function
+register colourer, and bounding it with the next public symbol gives its 29 direct callees, among them:
+
+| callee | VA |
+|---|---|
+| `@ChoosePhysReg@12` | `0x10b14b70` |
+| `@OrderGlobregs@12` | `0x10b11770` |
+| `@SubsumeGlobregs@8` | `0x10b0fdb0` |
+| `@InsertNewGlobregs@8` | `0x10b133e0` |
+| `@UpdateAffectedGlobregs@20` | `0x10b15470` |
+| `@HandleCurrUncolorable@8` | `0x10b0d830` |
+| `@BetterToDefer@4` | `0x10b19de0` |
+| `@InitialSplitPoints@16`, `@InsertSplitPoints@28` | `0x10b0ded0`, `0x10b13460` |
+
+**`@ChoosePhysReg@12` is where a physical register is picked.** Its second argument (`edx`, it is `__fastcall`)
+is the **mask of still-available registers**, and watching that mask across calls gives the consumption order
+directly. During `sellExcessGoods` it ran 18 times and the mask walked:
+
+```
+ffffffff -> fffffffd -> ffffffed -> fffffeed -> fffffeec -> fffffee8
+            bit 1       +bit 4      +bit 8      +bit 0      +bit 2
+            esi         ebx         (non-GPR)   edi         ebp
+```
+
+which is exactly our generated prologue, `push esi; push ebx; push ebp; push edi`. The original consumes the same
+four registers in the opposite order, `ebp -> edi -> ebx -> esi`. That difference is now an **observable**, not an
+inference: run the trace, read the mask progression, compare with the original's prologue.
+
+`eax` is not the chosen register - it returns pointers or 0 - so the assignment is recorded in a structure rather
+than returned.
+
+Internally `ChoosePhysReg` does use `bsf` (lowest set bit) over a mask, at `0x10b14d03` and `0x10b151de`, and the
+mask is first narrowed with the same 64-bit set/clear tables (`and`/`or` against `DAT_10cf65e8`/`DAT_10cf67e8`).
+So "lowest-numbered free register" holds **within the already-filtered candidate set**, which is why the observed
+consumption order (1, 4, 0, 2) is not ascending.
+
+### Which candidate asks first: OrderGlobregs and InsertInList
+
+`@OrderGlobregs@12` (`0x10b11770`, 512 bytes) runs once per function and does **not** sort - it builds an ordered
+list by repeated insertion through `@InsertInList@8` (`0x10b11970`), which is 128 bytes and fully readable. In it
+`eax` is the candidate being inserted and `edi` the list head, `+0x14`/`+0x18` are next/prev, and there are two
+sort keys:
+
+```c
+// InsertInList - list kept in descending (key, key2) order
+if (new->key  >  p->key)                    insert new before p;   // +0x0c, compared SIGNED
+else if (new->key == p->key &&
+         new->key2 >= p->key2)              insert new before p;   // +0x44, compared UNSIGNED
+else                                        advance to p->next;
+```
+
+with an insert-at-front fast path when the new node outranks the head, so among equal keys the newer candidate
+goes first. `+0x44` is a small symbol id used only as a tiebreak.
+
+`+0x0c` is **not** the benefit, though an earlier reading of these notes said so. The sibling inserter
+`@InsertByBenefit@8` (`0x10b119f0`) orders on `+0x40` and *copies* `+0x0c` from the list neighbour
+(`mov ecx,[ecx+0xc]; mov [edx+0xc],ecx`), and `@BetterToDefer@4` sets `+0x0c` to `min(components) - 1`, so
+`+0x0c` is a rank derived while ordering. The benefit is **`+0x40`**, which `BetterToDefer` also gates on
+(`cmp dword ptr [eax+0x40], 0; jle` - not worth it). Tracing all three fields for `sellExcessGoods`:
+
+| name | `+0x0c` rank | `+0x40` benefit | `+0x44` id |
+|---|---|---|---|
+| `amount` | +104 | **70** | 111 |
+| `variance` | -4 | **22** | 110 |
+| `resourceType` | -34 | **20** | 39 |
+| `j` | +88 | **20** | 108 |
+| `resourceOffset` | -26 | **20** | 35 |
+| `playerResourceBase` | -52 | **12** | 17 |
+| `aicIndex` | +88 | **8** | 20 |
+| `this` / `aiType` | -134 / +42 | **6** | 8 / 4 |
+| `playerID` | -134 | **4** | 7 |
+
+The benefit is a small positive **weighted use count**: `amount`, assigned in eight branches and read by the
+`sellGoods` call, scores 70; `playerID` scores 4. So register candidacy is driven by the same quantity as stack
+slot order - how often, and at what loop depth, a value is used.
+
+Traced over `sellExcessGoods`, the candidates and their scores look like this (40+ insertions, abbreviated):
+
+```
+key=+104 key2=6f    key=+97 key2=11    key=+96 key2=22    key=+88 key2=14
+key= +88 key2=6c    key=+85 key2=74    key=+72 key2=6b    key=+64 key2=27
+key= +42 key2=04    key=+40 key2=0b    key=+32 key2=08    key=+32 key2=07 ...
+key=  -4 key2=6e    key=-20            key=-26 key2=23    key=-34 key2=27 ...
+key=-155             key=-156           key=-160
+```
+
+So the pass scores every candidate and orders them by descending benefit; the positive-scoring ones are the
+handful that actually win registers, and they ask `ChoosePhysReg` in that order. Candidates recur with different
+scores across the run (`key2=0x27` appears at -34, then +64, then -2), which is the colourer iterating - `Color`
+runs once but `Spillcosts` and `SpillOrDefer` run six and seven times for this function, re-scoring between
+rounds.
+
+**The whole chain, then:** `OrderGlobregs` scores and orders the candidates, `Color` walks that order, and
+`ChoosePhysReg` serves each from the still-available mask. Since the order is a benefit score derived from how
+values are used, the source-level lever on register assignment is the same one as for stack slots - how often and
+where each value is read - which is why permuting statements sometimes moves a register and usually does not.
+
+### Reading the scores per source variable
+
+The candidates *can* be mapped back to source names. A candidate node's `+0x00` is its symbol record (0 for a
+compiler temporary), the symbol record's `+0x04` points one byte before the variable's name, and the names sit in
+a string pool with a small header packed after each string:
+
+```
+name = poi(poi(poi(candidate) + 4)) + 1
+```
+
+`reg_scores.py` does this. `--probe` counts candidate insertions per `GlobalRegAlloc` invocation so the function
+can be picked out (ours is normally the largest - for `sellExcessGoods` 42 candidates against the
+resolver-template flood at 33, which identifies it in one run with no source edits), and `--invocation N` dumps
+the table. For `sellExcessGoods`:
+
+| score | name | | score | name |
+|---|---|---|---|---|
+| +104 | `amount` | | -4 | `variance` |
+| +88 | `aicIndex` | | -26 | `resourceOffset` |
+| +88 | `j` | | -34 | `resourceType` |
+| +42 | `aiType` | | -52 | `playerResourceBase` |
+| +72, +96, +85 | temporaries | | -134 | `this`, `playerID` |
+
+and then a second round re-scores several of them - `this` and `playerID` from -134 to +32,
+`playerResourceBase` from -52 to +97, `resourceType` from -34 to +64 and then to -2 - because the colourer
+iterates, which is also why `Spillcosts` and `SpillOrDefer` run six and seven times here.
+
+Run across the functions that had resisted every source-level hypothesis, the scores give each one a
+recognisable signature:
+
+| function | match | scores |
+|---|---|---|
+| `aiRecruitUnits` | 50.0% | `buildingID` +188, `unitID` +174, `unitType` +51, `recruitInterval` +47 against `recruitDiggingUnit` **-335**, `i` **-279**, `behaviourType` -251, `recruitCount` -197 |
+| `decideOnTribeAttackLocation` | 68.8% | `destinationTile` +122, `tribeID` +93, `destinationY` +58, `destinationX` +42, `buildingID` +42, `targetPlayer` +40, `this` -1 |
+| `recruitHarrassingSiegeEngines` | 73.2% | everything positive and bunched: `unitID` +44, `tribeID`/`engineIndex`/`buildingID` +36, `aiType` +32, `siegeEngineToBuild` +26, `harrassingSiegeEnginesMax`/`this` +21, `aicIndex` +11, `playerID` +9, `engineersGuild` +2 |
+| `planToBuy...SnoozeBuildings` | 90.3% | the fourteen `allowX` locals all **negative** at first (-20 to -94) with only `playerID` +46 and `wood` +26 positive; a later round flips some to +48 while `allowWells` stays worst (-94, -93, -76, -43) |
+
+Three different diagnoses fall out, where before all four looked like the same "allocator noise":
+
+* `recruitHarrassingSiegeEngines` is decided by **near-ties** - four candidates at +36, two at +21. With equal
+  scores the order falls to the symbol-id tiebreak, so no source change states a preference and small edits flip
+  the result arbitrarily. That matches it resisting every targeted attempt.
+* `aiRecruitUnits` has a **structural** difference: our loop counter `i` is a candidate at -279, where the
+  original reuses the dead `playerID` parameter as its counter and so has no such candidate competing at all.
+* `planToBuy` is **iteration-dependent** - the locals that matter start negative and only become positive in a
+  later colourer round, so its layout is decided by the spill rounds rather than by a single ordering.
+
+That makes the register side measurable per variable. `playerID` scoring -134 in the first round is why our build
+serves it late and leaves it in a volatile register (`edx`), where the original keeps it in `ebp` from the start;
+the question "did this source change move `playerID` up the list?" can now be answered with one trace instead of
+being inferred from a register permutation in the reccmp diff.
+
+### ChoosePhysReg decoded: a cost minimisation
+
+The pick is not a bit-scan over a narrowed mask - that reading was wrong, and so was the note here calling
+`0x10ce5a08` "not a per-register preference table". It is a table of **per-class candidate lists**, which is why
+it holds pointers; class 0, the integer class, reads `eax, ecx, edx, esi, edi, ebx, ebp` - volatiles first, then
+callee-saved, `esp` excluded. The rule, from `P2/color.c`:
+
+```c
+cost[] = 0                                        // array at 0x10d14f10, indexed reg*4, per pick
+for each interfering candidate g with g->benefit > 0:
+    for each (reg, count) preference pair of g:
+        cost[reg] += count;                       // a neighbour wanting reg makes reg dearer
+    if g has exactly one legal register R:
+        cost[R] += g->benefit * 100;              // taking R from a single-choice neighbour is expensive
+for each (reg, count) preference pair of this candidate:
+    cost[reg] -= count;                           // our own affinity makes reg cheaper
+pick = the register in classList[class] that is legal here with the lowest cost
+       (ties to the earlier class-list entry)
+```
+
+`reg_scores.py --whyreg` dumps that array at each pick. For `sellExcessGoods`:
+
+```
+candidate            got   eax    ecx    edx    ebx    esp   ebp   esi    edi
+aicIndex             eax   [0]    2      0      0      0     0     0      0
+j                    edx   0      2      [0]    0      0     0     0      0
+variance             edi   0      2      0      0      0     0     0      [0]
+resourceOffset       ebx   0      2      0      [0]    0     0     0      0
+playerResourceBase   edx   0      2001   [0]    0      0     0     0      0
+this                 ecx   0      [-1]   1      0      0     0     0      0
+playerID             edx   0      0      [-1]   0      0     0     1200   0
+resourceType         ebx   -1     0      0      [-1]   0     0     0      0
+```
+
+Every entry is accounted for: `ecx` costs 2 for everyone because `this` has a thiscall affinity to it, and `this`
+takes it at -1 because its own affinity subtracts; `playerID` sees `esi` at 1200, which is
+`playerResourceBase`'s benefit of 12 times 100, a neighbour with one register left; the zeros are ties and fall
+to class-list order, which is why `aicIndex` lands in `eax`.
+
+So the counterfactual is arithmetic. To move `playerID` out of `edx` into `ebp`, `ebp` needs a cost below -1,
+i.e. `playerID` needs an affinity to `ebp` worth 2 or more.
+
+### Attributing each cost term: `--whycost`
+
+"`ebx` costs 1100" is not yet a statement about the source. Three instructions do the accumulating -
+`0x10b14c2c` adds a neighbour's preference count, `0x10b14caa` adds `benefit * 100` when a neighbour has one
+legal register left (`ebx` holds that neighbour), and `0x10b14d59` subtracts this candidate's own affinity - so
+breaking on them and reading the neighbour's name attributes every term. `--whycost` does that:
+
+```
+aiRecruitUnits
+  playerID -> ebx
+      ebx   total  +13800   PIN +800 by (temp); PIN +300 by (temp); PIN +100 by (temp)
+  (temp) -> edx
+      ebp   total   +4700   PIN +300 by (temp); PIN +1400 by behaviourType; PIN +1000 by i
+      edx   total   +1600   PIN +1600 by this
+```
+
+The useful line is the second: **`ebp` is expensive for everyone because `behaviourType` pins it with 1400 and
+`i` with 1000**. Those are named source variables, and it is a stronger statement than their own bad scores -
+they do not merely lose their own pick, they make `ebp` cost 2400 more for every other candidate. It also
+explains why removing `i` by counting `recruitCount` down lost ground: that just moves the pin to
+`recruitCount`.
+
+The same run on `sellExcessGoods` is the cautionary half:
+
+```
+  playerID -> edx
+      esi   total   +1200   PIN +1200 by (temp)
+      edx   total      -1   OWN -1 by itself
+```
+
+The 1200 is charged by a **compiler temporary**, not by a named local - an earlier note here guessed it was
+`playerResourceBase` because its benefit of 12 times 100 matches, and that was a coincidence. Attribution is
+what tells the two apart, and only a named source variable is something a programmer can act on.
+
+### Acting on the attribution: measured, and it does not pay
+
+`--whycost` named `behaviourType` (+1400) and `i` (+1000) as the two source variables pinning `ebp` in
+`aiRecruitUnits`, so the indicated edit is to stop them being separate candidates. Every form of that was tried
+against reccmp, from a 50.0% baseline:
+
+| edit | match |
+|---|---|
+| baseline | **50.0%** |
+| `recruitDiggingUnit` as `bool` | 49.5% |
+| count `recruitCount` down, drop `i` | 48.7% |
+| narrow `behaviourType` into the loop | 48.9% |
+| narrow both `behaviourType` and `unitType` | 36.6% |
+
+All five lose, and the tool explains why - which is the part worth keeping. Re-running `--whycost` on the
+narrowed variant shows `behaviourType`'s pin went **up**, from +1400 to +1600, and `ebp`'s total from 4700 to
+4900. Benefit is uses per unit of live range, so shortening a live range with the same uses *raises* the
+benefit, and the pin is `benefit * 100`. The three levers therefore all fail for the same reason, coherently:
+
+* narrowing a range raises the benefit, so the pin gets dearer;
+* deleting a candidate moves the pin to whatever replaces it (`recruitCount` took it over);
+* widening a range adds interference instead.
+
+So the pin cannot be reduced from the source at all: only *fewer uses* would lower it, and the uses are what
+the function has to do. `aiRecruitUnits` at 50.0% is a local optimum under every lever this model exposes, and
+that is now a derived statement rather than five failed guesses.
+
+See [reading-reg-scores.md](reading-reg-scores.md) for a plain-language walkthrough of the output.
+
+So across the three functions measured: `recruitHarrassingSiegeEngines` charges nothing at all (pure class-list
+order, nothing to act on), `sellExcessGoods` is pinned by temporaries (nothing to act on), and `aiRecruitUnits`
+is pinned by `behaviourType` and `i` (something to act on, if the computation can be restructured so those
+values do not exist as separate candidates).
+
+### Why there is still no source-level fixer
+
+The benefit is a property of what the code *does*, not of how it is written. It counts uses weighted by block
+frequency, so none of the levers that cost nothing semantically - declaration order, statement order, renaming,
+redeclaring - can move it. That is the reason every syntactic hill-climb in this repo has failed to shift a
+register assignment, and it means a tool cannot be asked to "fix" a register mismatch by rewriting syntax.
+
+Affinities are the only term a programmer could hope to influence, and they come from **copies between a value
+and a fixed register**: a parameter arriving, an argument passed in a particular slot, a return value in `eax`,
+`this` in `ecx`. That is a semantic property - where a value crosses a call boundary - and for the
+*callee-saved* registers it is barely reachable at all, because affinities to `ebx`, `ebp`, `esi` and `edi` come
+from copies the allocator itself inserts rather than from anything the source states. The interference term is
+likewise a property of which values are simultaneously live.
+
+What the numbers do support is a sharper statement of the problem. For an `alloc-only` function either
+
+* our use counts differ from the original's, in which case the fix is to restructure the computation so each
+  value is used the same number of times in the same places - `aiRecruitUnits` carrying a loop counter the
+  original does not have is this case - or
+* our use counts already match, in which case what remains is the symbol-id tiebreak and the function is
+  unreachable from the source. `recruitHarrassingSiegeEngines`, with four candidates tied at +36, is this case
+  and should be abandoned.
+
+`reg_scores.py --rankdiff` tells you which of the two you are in, per variable. It pairs our benefit ranking
+with the callee-saved save order on both sides - registers are consumed in the order they are first needed, so
+the push order *is* the consumption order, and it comes free from the last reccmp run. For `sellExcessGoods`:
+
+```
+our benefit ranking:        1 amount 70   2 variance 22   3 resourceType 20   4 resourceOffset 20 ...
+consumption order  original: ebp edi ebx esi
+                   ours:     esi ebx ebp edi
+```
+
+Both sides use the same four registers, so the candidate *set* matches and neither side carries a value the other
+does not - that much is solid, and it rules out the `aiRecruitUnits` case for this function. What the permutation
+*means* cannot be settled from here: either our candidates are ranked differently, or they are ranked the same
+and `ChoosePhysReg` narrowed the mask differently. The tool says so and labels the pairing a hypothesis rather
+than a finding, because the mask narrowing is undecoded. It also flags the degenerate case where the two orders
+are exact reverses, which would be systematic rather than per-candidate.
+
+So the honest scope of the "fixer" is: it decides set-mismatch against order-mismatch, names the candidate that
+would have to be re-ranked under the ranking hypothesis, and states what that would cost (a change in weighted
+use counts, which is a change in what the code does). It is a decision procedure, not an automatic rewrite, and
+the last step from "this candidate is mis-ranked" to "therefore edit this line" needs the mask narrowing decoded
+first.
+
+### Do the suggestions prescribe a fix? Measured: no
+
+`reg_scores.py --advise` names the patterns above and suggests what to try. Those suggestions were then tested
+against reccmp on `aiRecruitUnits` (50.0%), the function with the strongest structural signal - a loop counter `i`
+at -279 and a flag `recruitDiggingUnit` at -335 against a +188 top candidate:
+
+| variant | suggestion acted on | match |
+|---|---|---|
+| baseline | - | **50.0%** |
+| count `recruitCount` down, drop `i` | DISFAVOURED loop counter | 48.7% |
+| `recruitDiggingUnit` as `bool` | DISFAVOURED flag, and Ghidra renders it `bool` | 49.5% |
+
+Both lost ground. Removing a disfavoured candidate changes the whole scoring landscape - fewer candidates means
+different spill rounds - so "delete the worst one" is not a monotone improvement, and the scores diagnose without
+prescribing.
+
+What the scores are reliably good for is **triage**, including the negative verdict. A function whose candidates
+share scores (`recruitHarrassingSiegeEngines`: four at +36, two at +21) cannot be steered from the source at all,
+because the order falls to the symbol-id tiebreak - so the correct action is to stop working on it. That is worth
+knowing before spending an afternoon on hill-climbing, even though it never adds a percent.
+
+Still not decoded: how the score itself is computed, and what narrows `ChoosePhysReg`'s mask before the `bsf`.
+One dead end recorded so it is not retried: the table at `0x10ce5a08`, indexed by `eax * 4` in `ChoosePhysReg`,
+holds pointers and runs into unrelated data after a few entries, so it is not a per-register preference table.
+
+## Debugger harness
+
+`cl.exe` is 32-bit, so use the x86 `cdb` (`C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe`).
+`c2.dll` loads **unrebased** at `0x10b00000`, so PDB addresses work directly as breakpoints and cdb never needs to
+load symbols. `c1xx.dll` and `c2.dll` run in-process, so no child-process debugging is needed.
+
+```
+sxe ld:c2
+g
+r $t0=0
+bp1 0x10b04fa0 ".printf \"IT arg=%08x\\n\", @eax; gc"
+bp2 <ret address> ".printf \"  ret %d\\n\", @eax; gc"
+bd 1-7
+bp0 0x10c07350 "r $t0=@$t0+1; .if (@$t0==0n613) { be 1-7 }; .if (@$t0==0n614) { bd 1-7 }; gc"
+g
+q
+```
+
+Four things learned the hard way:
+
+* One TU of ours costs about **1455 `GlobalRegAlloc` invocations and 118k iterator calls**. Leave the inner
+  breakpoints **disabled** and let the outer one enable them for the invocation of interest; seven enabled
+  conditional breakpoints blew a 900-second timeout, the disabled form finished comfortably.
+* `gu` inside a breakpoint command makes cdb skip the rest of that command ("previous commands caused target
+  execution inside an event handler"). To read a return value, break on the function's `ret` instead.
+* Nested `.printf` quoting breaks the outer parse. Keep every breakpoint command one level deep and gate it on a
+  pseudo-register flag that the outer breakpoint sets.
+* When taking `ret` addresses from a disassembly, bound the scan to the function. Reading 400 bytes and taking the
+  first six `ret`s crossed into neighbouring functions and produced 1210 "returns" from 532 calls, with pointer
+  values posing as register numbers.
+
+**Identifying the invocation** is the fiddly part: hundreds of resolver-template instantiations allocate
+identically (exactly 463 iterator calls each), so size alone does not single out the function. Compile the file
+twice, with the function's body replaced by `return;` the second time, and find the invocation whose count drops
+by the total difference. For `sellExcessGoods` the total fell by 524 and the matching invocation was #613 at 532
+calls; re-running with the breakpoints armed captured exactly 532, which confirms it.
+
+## Order of work, and where reccmp belongs in it
+
+The match percentage is the goal, but it is a poor instrument for most of the way there, because it is
+dominated by register and stack-slot *naming* - terms the source cannot state. Worse, it moves against
+real progress: adding a local that the original has shifts every `[esp + N]` displacement in the function,
+and each of those is scored as a mismatch until the layout lines up, so a correct change reads as a
+regression. Work in this order instead, and each step has an instrument that is immune to the next step's
+noise:
+
+1. **Frame size and slot layout** - `slot_map.py FILE.cpp`. Compares our `/FA` slot table against the
+   layout inferred from the original's disassembly: offsets, sizes, reference counts and the sort key.
+   A frame that is too small is a missing local, and the reference counts say which local is in the wrong
+   place. Independent of every later step.
+2. **Instruction mix** - `structural_diff.py NAME`. `delta` names concrete defects ("we emit two `xor`
+   the original does not"); `kind` is the bare mnemonic sequence. Independent of register naming.
+3. **Statement order** - the same `kind` tier, once `delta` is zero. This is what took the sixteen
+   `setAICParameters_NN` functions to 100%.
+4. **Register and slot naming** - only now is the percentage the right objective, because it is all that
+   is left. `reorder_search.py` and `perm_decls.py` hill-climb on it.
+
+The reason this ordering works is that the earlier steps are *causes* and the later ones are *effects*:
+register allocation is deterministic given the compiler's IR, so an identical instruction stream in an
+identical frame allocates identically. Chasing the effect while the cause is still wrong is what makes a
+function feel stuck.
+
+A worked case of the instruments disagreeing, and of trusting the right one, is below: on
+`renderDebugDataAiInfo` the frame went from wrong to byte-exact - all seven slots, every offset and every
+reference count - while reccmp *fell* by 0.9 points.
+
+## Frame size as a local-count oracle
+
+`sub esp, N` in the prologue is the one number in the original that states, directly and without any
+allocation noise, **how much stack the original function's locals occupy**. It is worth checking first,
+because a mismatch there is a missing or surplus local and no amount of statement reordering will fix it.
+
+Worked example, `AICState::renderDebugDataAiInfo` (`0x004d1320`). The original opens `sub esp, 0x400`; our
+version opened `sub esp, 0x3f8`, so the original had 8 bytes - two dwords - of locals we did not. Two
+independent instruction-mix defects pointed at the same two values:
+
+* `this->aics[aiType - 1]` appeared at three call sites, each emitting its own `imul reg, reg, 0x2a4`.
+  The original emits that `imul` **once**, and earlier stores `aiType - 1` to a slot (`add ecx, -0x1;
+  mov [esp+N], ecx`). Caching the index in a local collapsed three `imul` to one.
+* the original *also* caches the resulting element address: `add eax, ecx; mov [esp+N], eax`, read back
+  later as `mov ecx, [esp+N]; add eax, [ecx + 0x1f4]`. That is the second dword.
+
+Adding the two locals took the frame from `0x3f8` to exactly `0x400`, the instruction-mix delta from 13 to
+3 and the mnemonic-sequence similarity from 0.943 to 0.979. The frame size is what told us *how many*
+locals to look for; the mix told us *which*.
+
+The caveat is that the frame also moves when the compiler spills, so a frame that is too small is strong
+evidence of a missing local while a frame that is too large can be either a surplus local or a spill.
+
+## The mode flag at 0x10d0ffdc is not a lever, and neither pragma pays here
+
+`FUN_10b10420` switches the penalty on `cmp dword ptr [0x10d0ffdc], 2` - `key -= weight` when it
+equals 2, `key -= count * weight` otherwise - which raised the obvious question of whether the
+original was simply compiled in the other mode. It was not, and the flag is not reachable from the
+source:
+
+* measured during our own compile, with a breakpoint on `dop2_GlobalRegAlloc` printing it:
+  **`MODEFLAG 0`**. So we take the larger `count * weight` penalty.
+* `#pragma optimize("s", on)` does **not** change it - still 0 - so it is not the per-file
+  size/speed switch. It is read in about 400 places and is set at invocation level.
+* and size-favoured code is plainly not what the original used anyway: that pragma takes
+  `aiGiveRaidInstructions` from 241-vs-234 instructions and a mix delta of 7 to 205 instructions
+  and a delta of **52**, with the quick_diff ratio collapsing 0.728 -> 0.372.
+
+So both sides compute the key with the same formula, and the ranking difference is not a flag.
+
+The two pragmas that the cheat sheet records as sometimes winning were also measured here, and both
+**do** fix the structural defect while losing more than they gain. `aiGiveRaidInstructions` is
+missing one copy of its tile computation because MSVC cross-jumped three identical `if`/`else` arm
+tails into one, and the original kept two:
+
+| variant | quick_diff ratio | mix delta | `imul 0x32c` (original has 4) | `this` lands in |
+| --- | --- | --- | --- | --- |
+| as committed | **0.728** | **7** | 3 | ebp |
+| `optimize("y", off)` | 0.262 | 10 | **4** | edi |
+| `inline_depth(1)` | 0.708 | 15 | **4** | ebp |
+| both | 0.253 | 26 | **4** | edi |
+| `optimize("s", on)` | 0.372 | 52 | 4 | - |
+
+`optimize("y", off)` restores the duplicate exactly as its cheat-sheet entry predicts - it is the
+pragma that stops `/Oy` cross-jumping identical sequences - but it also reserves `ebp` as a frame
+pointer, which moves `this` to `edi` and rearranges everything. The original uses `ebp` as a
+general register (`mov ebp, [esp+N]; imul ebp, ebp, 0x39f4`), so `/Oy` has to stay on, and with it
+on the cross-jump happens.
+
+Why it cannot be separated: the original's two copies are the same instructions in *different*
+registers -
+
+```
+copy A   lea edx, [ecx + ecx*2]   add eax, dword ptr [edx*4 + 0x2337300]
+copy B   lea ecx, [ecx + ecx*2]   add eax, dword ptr [ecx*4 + 0x2337300]
+```
+
+Cross-jumping runs after register allocation, so in the original it was the differing registers
+that made the two tails non-identical and saved them from being merged. Ours were allocated the
+same registers and merged. The duplicate and the `ebx`/`ebp` swap are therefore one coupled
+phenomenon, not cause and effect - an earlier note in this file claimed the duplicate was upstream
+of the register swap, which this corrects. Rewriting the expression does not break the tie either:
+commuting the addition in one arm only, so its text differs, changes nothing because MSVC
+canonicalises it.
+
+What did pay on that function was an ordinary source defect the mix delta pointed at by
+subtraction: delta 9 decomposed as the seven-instruction duplicate plus a leftover `je -1, jne +1`,
+which is one inverted branch. The final `if` tested the navigation result the opposite way round,
+and swapping its arms took it **56.8% -> 60.3%**. `diff_jcc.py` does not catch that because it
+covers strictness steps and operand order, not a plain polarity flip - worth adding.
+
+## The ordering key decoded: a per-region benefit/penalty balance
+
+`+0x0c` is accumulated at the tail of `FUN_10b10420`, which the colourer calls for each register
+class just before it builds the ordered list. The call chain is
+
+```
+dop2_GlobalRegAlloc   0x10c07350   driver
+  -> colourer         0x10b0cf40   loops register classes 6..0
+       -> 0x10b0ded0               live ranges
+       -> 0x10b10420               ** accumulates +0x0c **
+       -> 0x10b11560, 0x10b11770   walks the symbol hash table, calls InsertInList per candidate
+            -> 0x10b16720          interference, per block
+                 -> 0x10b16bd0     interference, per instruction
+  -> ChoosePhysReg    0x10b14e2a   picks the cheapest free register
+```
+
+and the accumulation itself is:
+
+```
+0x10b1145b  add  edi, 1            ; count every element of list A
+0x10b11476  add  edi, 1            ; plus list B elements carrying flag 0x10
+0x10b11484  imul edi, ebp          ; ebp: a weight passed in - block frequency
+0x10b11489  mov  esi, edi          ; esi = count * weight
+
+; a candidate REFERENCED in this region:
+0x10b11495  mov  ecx, [eax+0x18]   ; its reference multiplier for the region
+0x10b11498  imul ecx, esi
+0x10b1149b  add  [eax+0xc], ecx    ; key += refs * count * weight
+0x10b114a2  mov  [eax+0x18], edx   ; reset the multiplier
+
+; a candidate LIVE here but NOT referenced:
+0x10b114d2  cmp  dword ptr [0x10d0ffdc], 2
+0x10b114db  sub  [eax+0xc], ebp    ; key -= weight          (when that global is 2)
+0x10b114e0  sub  [eax+0xc], esi    ; key -= count * weight  (otherwise)
+```
+
+So the key is **not** a use count. It is a balance taken region by region: a value gains
+`refs * count * weight` where it is used, and is **penalised** `count * weight` for every region
+it is live across without being referenced. A register held open through code that does not touch
+it is charged for.
+
+That predicts the numbers we measured, which is the check worth doing. On
+`aiGiveRaidInstructions` `playerID` comes out at **-147** - live across the whole loop and barely
+read inside it - and `i` at **1**; both are among the locals `slot_map.py` independently shows in
+stack slots, and the negative-key candidates are exactly the spilled set.
+
+**The consequence is that the key depends on the block structure, not just on how often a value
+is named.** Two source versions with identical reference counts can rank differently if their
+regions differ. That resolves the `aiGiveRaidInstructions` question left open above: our base
+temporary outranks `this` (128 against 93) while the original's `this` won `ebx`, and the two
+binaries reference those values an identical 27 and 22 times - but our block structure still
+differs, because we emit one copy of the tile computation where the original emits two, which is
+one region fewer. The register swap is downstream of that mix defect, which is what
+`structural_diff.py` reports from the divergence positions alone.
+
+So the lever for that function is the duplication, not anything register-side. Moving `i` into
+the `for` initialiser reached delta 3 but disturbed too much else (56.8% -> 44.1%); what is wanted
+is the missing duplicate on its own.
+
+A note on tooling for this kind of chase: REA runs Ghidra in an ephemeral isolated project, which
+decompiles `c2.dll` without touching a shared Ghidra session's `currentProgram`. It will not load
+a caller-supplied PDB, though, so symbol names are absent - `FUN_10b10420` and friends are as good
+as it gets, and the `P2/*.c` assert strings are what anchor a function to its source file
+(`FUN_10b133e0` reports `P2/color.c` line 0x1b37). For named symbols a separate Ghidra project
+with `c2.pdb` alongside would be the escalation.
+
+## Correction: the candidate ordering key is +0x0c, not +0x40
+
+An earlier version of these notes said `InsertInList` sorts candidates on `+0x40`, a weighted use
+count, and that `+0x0c` was only a tie-break. That is backwards, and it sent a whole afternoon of
+work on `aiGiveRaidInstructions` chasing the wrong number. Disassembling `@InsertInList@8` at
+`0x10b11970` settles it:
+
+```
+0x10b1197f  mov ecx, dword ptr [edi + 0xc]     ; the candidate already in the list
+0x10b11983  mov esi, dword ptr [eax + 0xc]     ; the one being inserted
+0x10b11986  cmp esi, ecx
+0x10b11988  jg  0x10b119e3                     ; greater goes first - descending on +0x0c
+0x10b1198a  jne 0x10b11994
+0x10b1198c  mov ecx, dword ptr [eax + 0x44]    ; tie on +0x0c: compare the symbol id
+0x10b1198f  cmp ecx, dword ptr [edi + 0x44]
+```
+
+**Primary key `+0x0c`, descending; tie-break `+0x44`, the symbol id.** `+0x40` is a separate
+weight that does not decide the order.
+
+Where the old claim came from: there is a *second*, very similar insert function immediately
+after this one, at `0x10b119f0`, and that one does sort on `+0x40` - and it *writes* `+0x0c`,
+copying it from a neighbouring record:
+
+```
+0x10b11a49  mov edi, dword ptr [edx + 0x40]
+0x10b11a4c  cmp edi, dword ptr [ecx + 0x40]
+...
+0x10b11a63  mov eax, dword ptr [eax + 0xc]
+0x10b11a67  mov dword ptr [edx + 0xc], eax
+```
+
+The two are easy to confuse. The one the harness breakpoints, and the one whose candidates match
+the function being compiled, is `0x10b11970`.
+
+**How to verify which field orders the picks**, rather than trusting either note: dump both
+fields per candidate and compare each ordering against the actual sequence of register
+assignments from `--whyreg`. On `aiGiveRaidInstructions` the picks went `tile`, temp, 
+`targetBuildingID`, temp, temp, `this`, `buildingID` x3, `y`, `x`:
+
+| field | order it predicts | matches the picks? |
+| --- | --- | --- |
+| `+0x0c` | tile 212, temp 148, targetBuildingID 140, temp 128, temp 108, this 93, buildingID 88, y 80 | **yes, exactly** |
+| `+0x40` | temp 82, this 60, tile 52, i 46, temp 44, tribeID 44 | no - puts `this` and a temp ahead of `tile` |
+
+`+0x0c` reads as a *net* benefit: the values that come out low or negative (`i` at 1,
+`playerID` at -147) are exactly the ones `slot_map.py` shows living in stack slots, so the two
+tools cross-check each other.
+
+A dead end worth not repeating: trying to find the code that *computes* `+0x0c` by taking a
+candidate record's address from one run and arming `ba w4 <addr>+0xc` in the next. The records
+are heap-allocated and the addresses are **not** stable between runs - the watchpoint fired
+inside `ntdll!RtlpFreeHeap` and the record read back a symbol id of `311b11c`. The address has
+to be captured and the watchpoint armed within a single run, which needs a breakpoint command
+that stops rather than continuing (omit the trailing `gc`) so the script regains control.
+
+Also: a linear capstone sweep of `c2.dll`'s `.text` stops at the first byte it cannot decode,
+which gave 12106 instructions out of a 1.9 MB section and made a scan for field writes look
+almost empty. Resync by skipping one byte and continuing; the real count is 647653, with 291
+writes to `[reg + 0x40]` and 2543 to `[reg + 0xc]`.
+
+## What this does and does not unlock for aiGiveRaidInstructions
+
+The function's remaining register gap is a clean two-cycle: the original keeps `this` in `ebx`
+and `playerID * 0x39f4` (the player-record base) in `ebp`; ours has them swapped, which accounts
+for 46 of its 70 differing operands. `ebx` precedes `ebp` in the class list, so whichever is
+served first takes it, and with the corrected key our base temporary sits at **128** against
+`this` at **93** - so the temporary is served first and takes `ebx`.
+
+For the original to have given `this` `ebx`, its `this` must have outranked its base temporary.
+Both binaries reference those two values an identical 27 and 22 times, and the call pattern is
+identical on both sides (14 `mov ecx, <this>` plus 3 `mov ecx, <global>`), so there is no
+difference in use counts to exploit. `this` is a genuine `__thiscall` parameter in both - the
+original does `mov ebx, ecx`, ours `mov ebp, ecx` - so this is not a case of the object being
+reached as a global instead.
+
+Three source forms were measured and all rejected:
+
+| change | effect |
+| --- | --- |
+| `PlayerData& pd = ...playerDataArray[playerID]` used throughout | base moves to `esi`, `this` stays in `ebp`; quick_diff ratio 0.695 -> 0.499 |
+| `AICState* self = this;` for the member calls | byte-identical output, the optimiser folds it |
+| `i` moved into the `for` initialiser | mix delta 9 -> 3, but 56.8% -> **44.1%** |
+
+So the ordering key is now known and measurable, and it says the two values are ranked the way
+they are for reasons that are not expressible in the source. What would settle it is the formula
+behind `+0x0c`, which is still open - the write that computes it has not been located, only the
+two places that copy it.
+
+## Register allocation is an effect, not a cause
+
+The register names in a near-matching function are not a problem to be attacked directly, and
+`ChoosePhysReg` says why. Dumping the per-register cost array at every pick in
+`renderDebugDataAiInfo` (invocation #800, 41 candidates) gave **all zeros** for every volatile
+pick:
+
+```
+candidate              got   eax     ecx     edx     ebx     esp     ebp     esi     edi
+(temp)                 esi   0       0       0       0       0       0       [0]     0
+y                      edi   0       0       0       0       0       0       0       [0]
+x                      ebx   0       0       0       [0]     0       0       0       0
+color                  ebp   0       0       0       0       0       [7500]  0       0
+siegeTroops            eax   [0]     0       0       0       0       0       -1      0
+castleID               eax   [0]     0       0       0       0       0       0       0
+```
+
+With the costs tied at zero the minimisation is vacuous and the winner is simply the first free
+entry in the class list - `eax, ecx, edx, esi, edi, ebx, ebp`. Nothing about how the source is
+spelled or typed enters into it. The only inputs left are the order candidates are served
+(score descending, then the symbol-id tiebreak) and which registers are still live at that
+point, and both of those are decided by the instruction stream.
+
+That makes the useful question not *which* registers differ but **where** they start to
+differ, which `structural_diff.py` now reports:
+
+| | `renderDebugDataAiInfo` | `aiCreateSiegeUnits` |
+| --- | --- | --- |
+| instructions aligned on the register-stripped skeleton | 293 of 305 | 319 of 322 |
+| first structural difference | instruction 139 | instruction 30 |
+| first register difference | instruction 152 | instruction 223 |
+| dominant substitution | `eax -> edx -> ecx -> eax`, 90% of 59 | `esi <-> ecx`, 2 |
+
+In both cases the registers diverge *after* the structure does, and in
+`renderDebugDataAiInfo` the first 149 instructions have identical registers while the
+callee-saved assignments - `ebx` for `x`, `edi` for `y`, `esi` for the player base, `ebp` for
+the colour - are identical throughout. A substitution set that closes into a cycle is the
+signature of this: the allocation is structurally right and the scratch registers were handed
+out in a different order, which happens as soon as one extra or missing instruction changes
+what is live.
+
+So the rule is: if the first register difference is at or after the first structural
+difference, the register names are an effect of that structural defect and will follow once it
+is fixed. Spending effort on them while a mix defect remains is spending it on a symptom. The
+converse case - registers diverging *before* any structural difference - is the one worth
+investigating, and there the lever is statement order, because that is what sets both the
+serve order and the liveness.
+
+## MSVC hoists the maximal common expression, which decides how to write it
+
+When the same expression appears in both arms of an `if`/`else`, MSVC's global optimiser hoists it
+above the branch - and it hoists as *much* of it as is common, which is the part that matters when
+matching. `renderDebugDataAiInfo` has two `sprintf` calls differing only in the format string. The
+original duplicates the whole argument setup in each arm:
+
+```
+imul eax, eax, 0x6d98              ; shared: the AIV index, scaled
+cmp  dword ptr [esi - 0xdf4], 0
+jne  arm_b
+mov  eax, dword ptr [eax + 0x1866ac0]   ; arm A: load castleID, base folded in
+add  eax, 1
+push eax
+push 0x5aad50                      ; "AIV:n/a"
+lea  ecx, [esp + 0x2c]
+push ecx
+jmp  shared_call
+arm_b:
+mov  edx, dword ptr [eax + 0x1866ac0]   ; arm B: the SAME load again
+add  edx, 1
+push edx
+push 0x5aad48                      ; "AIV: %d"
+lea  eax, [esp + 0x2c]
+push eax
+shared_call:
+call sprintf
+add  esp, 0xc
+```
+
+Only the `imul` is shared; the identical load is not. Writing the full expression out in both arms
+does **not** reproduce that - MSVC hoists the load, the `add`, the value `push` and the `lea` of the
+buffer above the `cmp`, leaving just `push OFFSET <string>` per arm. Four forms were tried and all
+four hoisted: the expression inline in both arms, a shared local assigned before the branch, a local
+declared before and assigned separately inside each arm, and a ternary on the format string. (The
+`push` moving above the branch is worth noticing on its own - a post-allocation peephole cannot move
+a push across a branch, so this is the global optimiser, before register allocation.)
+
+The reason is the *extent* of the common expression. Written out twice, the whole chain
+`playerDataArray[playerID].aivID` -> `* 0x6d98` -> load `castleID` -> `+ 1` is common, so all of it
+is hoisted. The original shares only the front of that chain, which is what you get when **the source
+holds the index in a local** and writes the array access out in each arm:
+
+```cpp
+int aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+if (...) sprintf(text, "AIV:n/a", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+else     sprintf(text, "AIV: %d", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+```
+
+The index is shared because the source shares it; the two loads are left alone. That took the function
+from 305-vs-302 instructions and a mix delta of 3 to **305 against 305 with a delta of 0**, and
+reccmp from 67.5% to 83.6%.
+
+A pointer or reference local to the element gets close but not there - delta 1, because it keeps the
+address as a value and pays an `add` to materialise `base + index * size`, where the original keeps
+only `index * size` in the register and re-folds the array base into each load's displacement:
+
+| form | mix delta | instructions | note |
+| --- | --- | --- | --- |
+| expression inline in both arms | 5 | 300 | whole chain hoisted |
+| shared local before the branch | 3 | 302 | hoisted by construction |
+| `AIVSpec*` / `AIVSpec&` to the element | 1 | 306 | extra `add` for the address |
+| **index in a local** | **0** | **305** | matches |
+
+The general rule: to get a computation duplicated per arm, share in the source exactly the prefix the
+original shares, and write the rest out. Sharing less gets the whole thing hoisted; sharing more - a
+pointer where the original had an index - adds the instruction that materialises what you shared.
+
+## Settled: the aiRecruitUnits recruitCount tension
+
+The tooling notes have carried an unresolved observation for a while - that `recruitCount++` gets
+the original's `neg`/`sbb`/`jmp` counts right and scores 47.3%, while
+`recruitCount = interval != 0 ? 2 : 3` gets them wrong and scores 50.0%, and that this is why
+`structural_diff.py` exists. The duplication detector now explains it, and the answer is that the
+structurally correct form cannot be recovered from.
+
+**The duplicate is real and the detector names it.** On the committed form the report reads
+
+```
+DUPLICATION: we compute this run 2 time(s), the original computes it 1:
+      mov r, r
+      neg r
+      sbb r, r
+```
+
+`neg r; sbb r, r` is the convert-to-boolean idiom, and the source says why - the test is written
+twice:
+
+```cpp
+int recruitCount = recruitInterval != 0 ? 1 : 2;
+if (isExtremeTrail)
+    recruitCount = recruitInterval != 0 ? 2 : 3;     // second `!= 0`
+```
+
+Three forms were measured against it:
+
+| form | instructions | `kind` | mix delta | quick_diff |
+| --- | --- | --- | --- | --- |
+| committed ternary | 304 | 0.9305 | 6 | **0.6821** |
+| `if (isExtremeTrail) recruitCount++;` | 303 | **0.9320** | **5** | 0.6600 |
+| shared `int hasInterval = interval != 0;` | 305 | 0.9322 | 11 | 0.6545 |
+| `(interval != 0 ? 1 : 2) + isExtremeTrail` | 301 | 0.9185 | 7 | 0.6556 |
+
+The increment form is the structurally correct one: the duplication disappears, `neg` and `sbb`
+drop to the original's counts, delta falls 6 to 5. Note that sharing the boolean in a named local
+makes things markedly *worse* - delta 11 - which is the same "share exactly what the original
+shares, no more" rule seen in the AIV block.
+
+**But it costs 2.7 points with nothing to recoup them.** Measured, not recalled: the increment
+form builds at **45.3 / 47.3** against the committed ternary's **48.0 / 50.0**.
+
+What decides it is what is left afterwards. At delta 5 the remainder is `xor +2`, `cmp -1`,
+`jmp +1`, `test +1`, and reading the streams shows all of it to be one idiom:
+
+```
+original                        ours
+mov eax, dword ptr [esi + G]    mov eax, dword ptr [esi + G]
+xor ebx, ebx                    test eax, eax
+cmp eax, ebx
+```
+
+The original keeps 0 in `ebx` and compares against the register where we emit `test`, and it
+materialises zero twice where we do it four times. That is exactly the class recorded above for
+`updateAIPlayerState` - which constant occupies a register - and it has no source handle:
+`aiType == AIT_NULL`, `aiType == 0` and `!aiType` all compile to `test`.
+
+So this is the opposite case to `renderDebugDataAiInfo`, where a frame fix cost 0.9 points and was
+worth committing because the frame was provably byte-exact and a next step existed. Here the
+structural gain is one instruction, the cost is 2.7 points, and the remaining defects are in a
+class already shown to be unreachable - so there is no path that recovers it. Left at the ternary
+form, 50.0%, with this recorded so the question does not get reopened a third time.
+
+## A defect class: which constant gets the callee-saved register
+
+`updateAIPlayerState` (78.6% with resolvers off, 81.7% with them on) is structurally almost
+perfect - 483 instructions against 486, `kind` 0.989 - and its whole mix delta of 3 is
+`xor +2, mov +1`. The cause is worth recording because it is a distinct class from the defects
+already in this file, and because the obvious source fix does not work.
+
+A census of the two streams:
+
+| | immediate dword stores | `xor r, r` zeroings | `mov r, 1` |
+| --- | --- | --- | --- |
+| original | `0x9` x3, `0x5` x2, `0x1` x1, `0x8`, `0x7`, `0x2` - **no `0x0` at all** | **1** | 1 |
+| ours | `0x9` x3, **`0x0` x3**, `0x5` x2, `0x8`, `0x7`, `0x2` | **3** | 2 |
+
+The source has fourteen `= 0;` assignments and one `= 1;`. The original keeps **0** in `ebp` for
+essentially the whole function and never stores it as an immediate; we keep **1** there and
+materialise 0 three separate times.
+
+Where it starts is exact. Both sides are identical for 45 instructions, including
+
+```
+36  mov ebp, dword ptr [edi + G]     ; ebp = _aiPlayerState
+37  test ebp, ebp
+40  jne L                            ; so on the fallthrough ebp is known to be 0
+```
+
+and then diverge immediately:
+
+```
+original                              ours
+46  mov dword ptr [edi + G], ebp      46  xor eax, eax
+47  mov dword ptr [edi + G], 0x1      47  mov ebp, 0x1
+48  mov dword ptr [edi + G], ebp      48  mov dword ptr [edi + G], eax
+49  mov dword ptr [edi + G], ebp      49  mov dword ptr [edi + G], ebp
+```
+
+The original reuses the register that already holds `_aiPlayerState` - known zero on this path -
+for all three zero stores, and writes the literal 1 as an immediate. We materialise a fresh zero
+in `eax` and **clobber** the known-zero `ebp` with the constant 1. The same inversion then runs
+through the whole function: every `xor ebp, ebp` in the original is a `mov ebp, 0x1` in ours, and
+the original's `add dword ptr [...], 0x1` is our `add dword ptr [...], ebp`.
+
+**The obvious fix fails.** Inside `if (_aiPlayerState == 0)` the local is zero, so writing
+`attackTicker = _aiPlayerState;` instead of `= 0` is semantically identical and ought to force the
+reuse. It produces **byte-identical** output - quick_diff 0.8669 either way, delta still 3.
+Constant propagation replaces `_aiPlayerState` with 0 before allocation ever runs, so the source
+cannot express the difference; the compiler knows the value is zero in both spellings and still
+chooses to dedicate the callee-saved register to 1.
+
+So this is a third symptom of the same underlying thing as the frame and pressure walls: the
+allocator's choice of what to keep in a callee-saved register, decided by the `+0x0c` keys, with
+no source handle. What is new is the *signature* - a small `xor` surplus with matching immediate
+stores, and an `xor r,r` against `mov r,1` at the same instruction on both sides - which is worth
+recognising, because it looks like a code-shape defect and is not one. If a function shows
+`xor +N` with the stores otherwise matching, check whether the original is reusing a known-zero
+variable's register before looking for a source cause.
+
+## Two slot-layout leads that were not source defects
+
+Both functions whose frames still disagreed after the jump-table fix turned out not to be
+source problems, and the way each failed is worth keeping.
+
+**`aiCreateSiegeUnits` (96.9%) was a tool artifact.** It reported 13 slots against our 12, with
+one at **-52 inside a 0x30 frame** - an offset past the end of what the prologue allocated,
+which is arithmetically impossible. The cause is visible in its own warning: two paths reach
+`0x4d23a7` with esp depths 4 apart, so the depth tracking drifted and invented a slot.
+`slot_map.py` now excludes references below `-frame` and says so, with the explicit note that a
+slot-count difference on a function reporting a depth conflict must not be read as a defect.
+With the phantom gone both sides show 12 slots at matching offsets, and the function's real
+residue is the 2-instruction `jmp` delta it already had.
+
+That is the third artifact of this kind this session - an unreferenced slot symbol MSVC emits
+but never uses, switch cases unreachable without following the jump table, and now depth drift -
+and they share a cause: our side is *stated* by the `/FA` listing while the original's is
+*inferred*, so the inferred side needs sanity checks before any difference it reports is
+believed.
+
+**`planToBuyWhenLowOnResourceAndSnoozeBuildings` (89.9%) is a real slot permutation with no
+reachable lever.** 248 instructions on both sides, frame `0x30` on both, 10 slots on both, the
+same reference weights - but the locals sit in different slots, and the zero-initialising stores
+come out in a different order:
+
+```
+original:  mov [esp+0x3c], edi / mov [esp+0x48], edi / mov [esp+0x38], edi
+ours:      mov [esp+0x48], edi / mov [esp+0x3c], edi / ...
+```
+
+With several locals tied on weight (three at 5 references, four at 4, two at 3) this looked like
+the textbook declaration-order tie-break, which is the one case `perm_decls.py` and
+`quick_reorder.py` exist for. It is not: a `quick_reorder -s` hill-climb over all fourteen
+declarations kept **no** move, start and final both 0.9234.
+
+`final == start` is also what the documented concurrent-run corruption looks like, so it was
+checked rather than believed - three hand-made swaps of equal-weight pairs score **0.9194**,
+**0.9153** and **0.9113**, all worse. The scoring is live, and our declaration order is already
+a local optimum. The residue is therefore neither weight nor declaration order, which leaves the
+class byte at `+0x18` - the part of `StkColorCmp` that is still undecoded.
+
+So the earlier guess that "a slot-count difference is more likely source-reachable than a
+pressure difference" was wrong in both directions: one difference was not real, and the other is
+real but sits in the one input to the sort that has not been decoded.
+
+## Two things that do not work
+
+**Declaration order, when there are no ties.** `StkColorCmp` sorts by class and weight and uses declaration
+order only to break ties, so where the weights are distinct the declaration order is simply inert. On
+`renderDebugDataAiInfo`, moving both new locals to the top of the loop body and then swapping them against
+each other gave byte-identical output three times over - `67.5 / 71.0` in every case. Permuting declarations
+is worth trying only once `slot_weight.py` shows an equal-weight group.
+
+**Forcing the compiler to duplicate a computation.** The original duplicates the whole argument setup in
+both arms of one `if`/`else`, using `eax` in one arm and `edx` in the other - two separate computations the
+compiler never merged. Ours hoists the common part above the branch. Three source forms were tried: the
+expression written out inline in both arms, a shared local assigned before the branch, and a local declared
+before the branch but assigned separately inside each arm. MSVC CSE'd all three. Whatever produces the
+original's duplication is not expressible by moving that expression around, so this is a dead end to stop
+pushing on rather than a defect to keep chasing.
+
+## Structural similarity and the match percentage can move in opposite directions
+
+Measured on `renderDebugDataAiInfo`, three source forms, each a full build and reccmp run:
+
+| form | reccmp raw / normalised | mnemonic similarity | mix delta | frame |
+| --- | --- | --- | --- | --- |
+| committed baseline | **68.4 / 72.6** | 0.943 | 13 | `0x3f8` |
+| index cached | 66.2 / 69.7 | 0.972 | 5 | `0x3fc` |
+| index and element address cached | 67.5 / 71.0 | **0.979** | **3** | **`0x400`** |
+
+The percentage is monotone *against* the structural measures across all three points, while the frame size
+says the third form is the one that matches the original's locals. The mechanism is that adding a local
+shifts every `[esp + N]` displacement in the function, and reccmp scores each of those as a mismatch until
+the whole layout happens to line up - so a structurally correct change can cost points for as long as the
+slot layout stays wrong.
+
+The practical consequence is that **the percentage is not a safe objective for hill-climbing while the frame
+size is still wrong**, and a drop of a point or two against a confirmed frame match is not evidence the
+change was wrong. It also means a correct intermediate state can look like a regression, which is a reason
+to record the frame size and the mix delta in the commit message alongside the percentage, not just the
+percentage.
+
+## The /GS cookie was costing every protected function its first instruction
+
+This one is not a codegen subtlety, it is a build defect, and it had been capping a whole
+class of functions below 100% for as long as `/GS` has been on.
+
+**The signal.** `Text/FontSizeClass` has four functions that `structural_diff.py` calls
+perfect - `delta 0`, same instructions in the same order, `kind 1.000` - and which all
+scored *exactly* 96.0% normalized. Four unrelated functions stopping on the same number is
+a shared cause, not four coincidences. `reccmp_report.py diff` on the smallest of them,
+`getWidthOfWideText` at 27 instructions, named it on the first line:
+
+```
+-mov eax, dword ptr [StructResolver::Instance<unsigned int,12141088>::instance (DATA)]
++mov eax, dword ptr [__security_cookie (DATA)]
+```
+
+12141088 is 0x00B94220. Every `/GS`-protected function in the original reads its stack
+cookie from that address; ours read the copy of `__security_cookie` that LIBCMT links into
+our own `.data`. Two instructions per function - the prologue load and the epilogue
+`call __security_check_cookie` - never matched, in *every* protected function in the
+project. In a 27-instruction function that is 4%.
+
+**The fix is a MASM absolute, which the project was already doing for data.** `src/symbols/data.asm`
+already gives every game global an address with `EQU`, so the mechanism existed; it simply had
+never been pointed at the CRT's own symbols. `src/symbols/crt-gs.asm` now declares
+
+```
+___security_cookie            EQU 00B94220h
+___security_cookie_complement EQU 00B94224h
+```
+
+An absolute symbol makes `mov eax, [__security_cookie]` assemble to the literal address
+rather than a relocation into our `.data`, and the instruction then matches the original
+byte for byte. Verified in the linked image, not inferred: the built DLL contains **348**
+occurrences of `A1 20 42 B9 00`, `mov eax, [0x00B94220]`.
+
+**Two things have to come along with it, and both are load-bearing.**
+
+*`__security_cookie_complement`.* Declaring only the cookie still fails with
+`LNK2005: ___security_cookie already defined`. All three symbols live in one CRT object,
+LIBCMT's `gs_cookie.obj`, so leaving the complement undefined pulls that object in on its
+own account and brings its definition of the cookie with it. Defining all three means the
+object is never linked and there is no duplicate - no `/FORCE:MULTIPLE` needed. (That flag
+*does* make it link and was used to measure the upside first, but it is not a mechanism:
+it silently keeps whichever definition came first.)
+
+*`__security_init_cookie`, stubbed to `ret`.* This is a correctness requirement, not a
+matching one. The real one generates a fresh random cookie and stores it to the cookie
+variable - which is now 0x00B94220, *the game's own cookie*. Running it at our DLL's
+startup would replace the value that every already-live game stack frame is going to check
+when it returns, and those frames would take `__report_gsfailure`. The game initialises the
+cookie in its own startup long before we are injected, so for us the right initialisation
+is to do nothing.
+
+**What is deliberately left alone.** The epilogue's `call __security_check_cookie` still
+goes to our own copy. The game's is at 0x0057F755, but that reference is a *relative* call,
+and a displacement computed at link time into a fixed foreign address is only correct while
+the DLL loads at its preferred base - it cannot be relocated. Our copy is functionally
+identical, and a differing call target is exactly what the normalized percentage forgives.
+
+**Result.** Five of the fourteen functions in `Text/FontSizeClass` went to normalized
+100.0: `getWidthOfWideText`, `renderMultilineWideTextUnk`, `renderSomeSpecificTextUnk` and
+`renderWideText` from 96.0, and `wrapTextIntoLines` from 98.4. Raw percentages do not move,
+and that is expected rather than disappointing - reccmp cannot *name* an address outside our
+module, so it prints `<OFFSET1>` and still scores the operand as different, while the
+normalized measure treats it as a resolver address and forgives it. The instruction is
+nonetheless correct in the image.
+
+The gain is not specific to this namespace. It applies to every `/GS`-protected function in
+the project - any function with a local array - so it is worth re-measuring namespaces that
+were previously parked just short of 100.
+
+**Measured with a controlled A/B, because a build-level change deserves one.** Same 207-file
+list (all of `AI/AICState` plus `Text/FontSizeClass`), same resolver state, toggling only this
+one file:
+
+```
+207 functions: 200 identical, 7 improved, 0 worse
+normalized 100 count:  181 -> 186
+average normalized:    97.340 -> 97.432
+```
+
+`renderDebugDataAiInfo` also picked up 95.1 -> 96.3, so the fix reaches AICState too, not only
+the namespace that exposed it.
+
+**The change provably cannot perturb codegen**, which is worth knowing because it means an A/B
+like the above can only ever come back "identical or better". `crt-gs.asm` is its own
+translation unit and changes no `.cpp` compile command, and the compiled objects reference
+`___security_cookie` as an *unresolved external* with none of the address bytes present - check
+it with `grep -c ___security_cookie` on any `/GS` object. Only the link-time value of that
+operand moves, so instruction selection, scheduling and register allocation are untouched. The
+200 byte-identical functions are the confirmation.
+
+**A warning about what is NOT a valid baseline.** The first attempt at this comparison used the
+recorded percentages in `status/addresses-SHC-3BB0A8C1.txt` as the "before", and it reported 11
+regressions and 37 improvements - all of it noise. Those numbers were recorded with a *different*
+`cmake/openshc-sources.txt.local` (60 AICState files against this run's 193), and widening the
+list changes cross-TU inlining enough to move real percentages in both directions, by as much as
+46 points in one case. **Recorded status percentages are only comparable against the build list
+they were taken under.** For any change that could affect more than one function, build the
+control yourself.
+
+**A note on regression-testing it.** Building every implemented function is not available as
+a check: a list of all 860 `.cpp` files with a `FUNCTION:` marker does not compile, because
+`AI/AIVState/aiPlaceAIVBuilding.cpp` references `Building::field240_0x2c8`, which does not
+exist. That is pre-existing and unrelated, but it does mean the curated per-developer
+`cmake/openshc-sources.txt.local` is the only build that works, and a project-wide before/after
+has to be assembled from namespace-sized runs.
+
+## Settled: renderMultilineTextUnk is an edi/ebx two-cycle, priced by c2.dll
+
+58.7% looks like a badly wrong function and is not one. The frame is exact (`0x84` both sides,
+all 18 distinct slot offsets matching), `kind` is 0.953, and `delta 8` is almost all scheduling.
+The percentage is low because **one pair of values is swapped between two registers**, and that
+swap renames 34 operands:
+
+| | original | ours |
+| --- | --- | --- |
+| `this` | **edi** | ebx |
+| `{_runXPos, possibleWidth}` | **ebx** | edi |
+| `singleLineHeight` | esi | esi |
+| `xPos` | ebp | ebp |
+
+`esi` and `ebp` agree. It is a clean 2-cycle on `edi`/`ebx`, and `reg_scores.py` reads the whole
+decision out of the running compiler.
+
+**The two values are one unit on both sides.** The original computes `possibleWidth`
+*destructively into `_runXPos`'s own register* at all three sites - `sub ebx, eax` at 0x4731ad,
+`sub ebx, ebp` at 0x47321f and 0x4732a3 - then restores it with `mov ebx, ebp`. That is exactly
+what the source says, because `_runXPos = xPos` follows the comparison, so `_runXPos` is dead and
+its register is reusable. We coalesce the same pair; we just coalesce it into `edi`.
+
+**The pick, with the cost array that decided it** (`--whyreg`, `--whycost`):
+
+```
+_runXPos -> edi
+    eax   total   +2   PREF +1 by charWidth; PREF +1 by (temp)
+...
+this$GSCopy -> ebx
+    ecx   total   -6   OWN -6 by itself
+    edi   total   +4   PREF +4 by possibleWidth
+```
+
+`_runXPos` is served while `eax`, `ecx`, `edx` and `esi` are already consumed, so the class list
+(eax, ecx, edx, esi, edi, ebx, ebp) hands it **edi** as the first free entry, at zero cost.
+`possibleWidth`, coalesced with it, then carries an affinity for `edi`. Seven picks later
+`this$GSCopy` is served, finds `edi` charged **+4** by that affinity and `ebx` at 0, and takes
+`ebx`. Remove the +4 and `edi` ties with `ebx` at zero, ties go to the earlier class entry, and
+`edi` (5th) beats `ebx` (6th) - the original's assignment. The whole 58.7% hangs on four cost
+units.
+
+**What actually sets the order, and the correction that matters.** The serve order is the
+`+0x40` benefit, *not* the `+0x0c` spill cost. Read the wrong column and the function looks
+reachable, because by `+0x0c` `this$GSCopy` (149) appears to outrank `_runXPos` (135). By the
+column that decides:
+
+```
+wt+0x40   key+0xc   name
+    112       392   length
+    104       135   _runXPos      <- served first
+     66       -65   this$GSCopy   <- served later
+```
+
+`_runXPos` outranks `this` by **38 units**, decisively rather than marginally. Note also that
+`this$GSCopy` recurs later in the dump at wt 16 and 20: those are the colourer's re-scorings in
+subsequent rounds, **not** additional regions, so they must not be summed. Summing them gives 102
+against `_runXPos`'s 104 and invents a near-tie that does not exist.
+
+For the original to put `this` in `edi`, its `this` had to outrank `_runXPos`. The benefit is a
+block-frequency-weighted use count, and `_runXPos` genuinely has far more uses than `this` in any
+source spelling of these semantics - `this` appears only as the `ecx` setup before nine member
+calls, while `_runXPos` is read and written throughout both loops.
+
+**Three levers tested, all refuted:**
+
+| lever | why it should have worked | result |
+| --- | --- | --- |
+| `/GL` on the file and its four callees | the documented `ecx` lever; LTCG sees the callees do not clobber `ecx`, which should change `this`'s reference count | **58.7 -> 45.4**, much worse: it inlines the callees and rewrites the IR |
+| one shared `possibleWidth` instead of three scoped ones | collapses three candidates each carrying an `edi` affinity into one | **byte-identical** (quick_diff 0.7492 either way) |
+| hoisting the `/GS`-protected `_wordReceiver[64]` to function scope | the `/GS` shadow copy fragments `this`; a different protection scope might not | **byte-identical** |
+
+So this is the pressure class after all, but now with a number on it: not "the allocator decided"
+but "`_runXPos`'s benefit beats `this`'s by 38, which no spelling of equivalent code changes".
+Left at 58.7%. The useful general lesson is the middle column above - `--whyreg` naming a single
+`PREF +4` makes a function look one edit away from matching, and the benefit table is what tells
+you whether any edit can reach it.
+
+**Correction (next day).** The paragraph above says the serve order is the `+0x40` benefit and
+that `_runXPos` beat `this$GSCopy` 104 to 66. The call graph read since (see "The two keys,
+settled by the call graph") shows `Color` walks `InsertInList`, which sorts by **`+0x0c`**; `+0x40`
+is what `SpillOrDefer` ranks by. The decision was still made in round one and still against
+`this`: `_runXPos` keys **135** and `this$GSCopy`'s *first-round* key is **-65** - the +149 that
+appeared to put it ahead is a split region from a later round, exactly the "re-scoring, not
+regions" trap the paragraph warns about one line later, applied to the wrong column. The
+conclusion is unchanged (and stronger: 200 units, not 38). The mechanism statement was wrong,
+and the `--rankdiff` output quoted above labels the `+0x0c` column "benefit", which is what
+started it.
+
+## The two keys, settled by the call graph: `+0x0c` orders colouring, `+0x40` orders spilling
+
+This document has flipped twice on which field orders the register candidates. The call graph
+settles it, and both earlier readings were partly right about different things.
+
+**The static evidence** (`call` scan of `.text`, names from c2.pdb):
+
+```
+@Color@4            10b0d155  call @Spillcosts@12          (and again at 10b0d2ab - rounds)
+                    10b0d3aa  call @InsertInList@8          sorts by +0x0c desc, tie-break +0x44
+                    10b0d37e  call @SpillOrDefer@12
+                    10b0d471  call @ChoosePhysReg@...       walks the list
+@SpillOrDefer@12    10b0d6e5  call @InsertByBenefit@8       sorts by +0x40
+@OrderGlobregs@12   10b118c6  call @InsertInList@8
+@StackPacking@4     10be8c8a  call @ColorStackElements@12   -> @colorElemental   (STACK SLOTS, not registers)
+```
+
+So: **`Color` colours in `InsertInList` order, which is `+0x0c` descending** (the spill-cost key
+decoded earlier as `refs x count x 2^depth` per region). **`+0x40` is the benefit `SpillOrDefer`
+ranks by** when a candidate cannot be coloured and something has to be spilled or deferred to a
+later round. And `ColorStackElements` / `colorElemental`, whose names suggest a Chaitin-Briggs
+colouring stack, are the *stack-slot* allocator - they hang off `StackPacking`, which is the
+frame layout `slot_map.py` already models. A Chaitin-style stack is not how registers are
+served here.
+
+**The dynamic evidence agrees once rounds are respected.** `recruitHarrassingSiegeEngines` serves
+`unitID` (key 44) at pick 5 and `tribeID` (key 36) at pick 11 - descending `+0x0c`, not
+descending `+0x40` (12 vs 20, which would be the other way). `renderMultilineTextUnk` serves
+`_runXPos` (key 135) before `this$GSCopy`, whose *first-round* key is **-65**; the +149 entry
+that made it look like it should have won is a later-round split region. The decision was made
+in round one, by 200 units, and the section on that function below has been corrected to say so.
+
+### `+0x40` decoded anyway: `CmdLoadCost x 2^depth` per reference
+
+`Spillcosts` writes both fields. Four sites for `+0x40`, two `add`/`sub` pairs (uses at
+`0x10b10957`/`0x10b109c5`, definitions at `0x10b10f85`/`0x10b11007` with the signs swapped):
+
+```
+if CmdCanDirectSubstitute(tuple):  eax = CmdSubCost(...)      ; folds into the instruction
+else:                              eax = CmdLoadCost(operand)   ; a load would be needed
+[ebp+0x18] += eax          ; raw sum, unweighted
+[ebp+0x24] += 1            ; reference count
+[ebp+0x40] += eax * weight ; weight = 1 << loop_depth without PGO
+```
+
+`@CmdLoadCost@4` (0x10c23740) with `_Speed != 0` - every `/O2` build - returns **2**, or **1**
+for an operand whose type byte at `+4` is `0xd`. `@CmdSubCost@8` (0x10c237c0) returns **0** on
+every path read. The subtract side charges `2`, `6`, or `_regAvail[+0x18] + 3` by opcode class,
+times weight. So the spill benefit is two points per depth-weighted reference that would
+otherwise be a load, nothing for references that fold into their instruction, less a small
+per-kind penalty. It does not multiply by the reference count the way `+0x0c` does, which is
+why the two columns can rank the same candidates differently - and why reading the wrong one
+produces confident wrong answers.
+
+### What this says about `(temp)` candidates
+
+The open question was why an unnamed `(temp)` in `renderMultilineTextUnk` sat above every named
+local and consumed `eax/ecx/edx/esi` before `_runXPos` was served. By the right column it is no
+mystery: that temp's `+0x0c` key is **552**, the highest in the function. Temps are CSE'd
+subexpressions and go through the same `refs x count x 2^depth` as everything else; one used in
+the innermost loop keys enormously. (Which subexpression it is cannot be read out of the
+candidate record - temps carry no name - so the natural guess, the `_wordReceiver` address used
+at depth 2 and 3, stays a guess.)
+
+That answers "does expression shape control temp benefits" with a narrow yes. A temp's key is
+a function of **the set of uses and their depths**, not of spelling. Naming a subexpression,
+splitting it into three scoped copies, or hoisting a buffer declaration changes none of that -
+which is exactly why three such variants came back byte-identical. What moves a temp is whether
+MSVC treats two uses as the same subexpression at all, which is the "share exactly the prefix
+the original shares" rule already recorded for `renderDebugDataAiInfo`. No second lever here.
+
+## Block merging: what runs, what it costs to misread, and `merge_probe.py`
+
+`structural_diff.py`'s POLARITY report says the original branches the other way round and
+suggests swapping the arms. That was right for `aiGiveRaidInstructions` (+3.5) and would have
+been wrong for `renderMultilineTextUnk`, where the flip was MSVC folding our two return blocks
+together after allocation - the arms were already in the original's order. The two cases are
+indistinguishable in the diff. This is about telling them apart without guessing, and it took two
+corrections to get right, both recorded because both are easy to repeat.
+
+**The call graph, from c2.pdb names and a `call` scan of `.text`:**
+
+```
+@FgDoLateFlowOptsOnce@20 ---+--> @FgTryTailMerge@16        0x10b2e1b0   pairwise tail merge
+                            +--> @FgTryCommonTailMerge@8   0x10b306c0
+                                     '--> @FgDoCommonTailMerge@20  0x10b307e0   common tail of all preds
+@FgTryEpilogMerge@20 -------+--> both of the above again
+@FgTryHeadMerge@16 -------------> @FgCompareMerge@12       0x10b2f700   head-merge comparison
+```
+
+Two merge *families*, both live for us. Each of the two "Try/Do" routines has exactly two exits,
+which is what makes the whole thing instrumentable without decoding a predicate:
+
+```
+FgTryTailMerge        mov eax, 1  @ 0x10b2e6e5   merged      xor eax, eax @ 0x10b2e6f7   declined
+FgDoCommonTailMerge   mov eax, 1  @ 0x10b30d73   merged      xor eax, eax @ 0x10b30833   declined
+```
+
+**Correction 1 - `_PogoFlag` does not select an implementation, it disables all of them.** Every
+routine above opens with `cmp dword ptr [_PogoFlag], 1` and returns 0 on the `== 1` side. A first
+reading had `FgCompareMerge` with the opposite polarity, which would have meant two mutually
+exclusive implementations with one of them dead for us. It does not: `jne` skips *past* the
+`xor eax, eax; ret` in all three. `_PogoFlag == 1` is PGO instrumentation, which has to keep
+blocks intact for its counters, so it turns block merging off wholesale. Without a profile all of
+it runs. The flag is printed on every probe run so this stays checked.
+
+**Correction 2 - both families must be counted, or the tool lies.** The first version of the
+probe read `FgTryTailMerge` alone and reported `renderMultilineTextUnk` as "20 attempts, 0
+merged - a real source-shape difference, swap the arms". Wrong: in the same window
+`FgDoCommonTailMerge` ran 17 times. The pairwise path declined everything and the common-tail
+path did the folding. A single-routine reading of a two-family mechanism produced a confident,
+specific, incorrect instruction.
+
+**Two instrument pitfalls, since both bit here.** `cdb -cf` echoes every script line, so a
+textual tag inside a breakpoint command is counted once in the echo - the first run reported
+exactly 2 of everything, which was the echoed command plus the echoed error. Print `EV %d` with
+a numeric id instead; the echo says `%d`, the hit says `3`. And a string nested inside a `bp`
+command needs `\"` - plain quotes are "Malformed string", silently setting no breakpoint.
+
+### `merge_probe.py`
+
+```
+python tools/compiler-internals/reg_scores.py FILE.cpp --find LOCAL      # invocation N
+python tools/compiler-internals/merge_probe.py FILE.cpp --invocation N
+```
+
+Counts entries and both exits of both families inside the `GlobalRegAlloc` N..N+1 window (the
+same per-function trick `reg_scores.py` uses; the late flow optimisations fall in the window).
+Get N **in the same session**: it depends on the translation unit's template population, which
+moves with the resolver state and compile command - `renderMultilineTextUnk` was #37 under one
+configuration and #74 under another, and the stale number silently measured a different function.
+
+Without `--invocation` the counts cover the whole translation unit and are dominated by the
+resolver templates merging among themselves. Those numbers are meaningful only as a **difference
+between two variants of the same file**, where the template noise cancels exactly.
+
+### Validation
+
+**Ground truth, by difference.** `countOccupiedPlayerSlots` was known to fold: the `else if`
+form with two `++_sum` sites compiles to one `add eax, 1` per unrolled body. Whole-TU probe of
+both variants:
+
+```
+                        || form     else-if form    delta
+pairwise attempts         1653          1657         +4
+pairwise merged            439           443         +4
+pairwise declined         1214          1214          0
+common-tail attempts       300           300          0
+```
+
+Exactly +4 merges for exactly 4 unrolled bodies, all pairwise, nothing else moved. That is the
+mechanism confirmed quantitatively, and it also confirms the earlier reading of *why* the else-if
+form matches: the body is larger at unroll time (two increment blocks), so the unroller stops at
+x4 instead of x8, and tail merge then folds the duplicate back - once per body - in
+FinalFlowOpts. The duplication exists only inside the window where the unroll factor is chosen.
+
+**The live case.** `renderMultilineTextUnk`, invocation #74:
+
+```
+pairwise  FgTryTailMerge       attempts  20   merged   0   declined  20
+common    FgDoCommonTailMerge  attempts  17   merged     2   declined   15
+```
+
+So the pairwise family rejected everything and the common-tail family did the work. The
+polarity flip in this function is a merge artefact, as suspected from reading the streams, and
+the instrument now says so directly instead of by inference.
+
+## Triage of every sub-100 function in AICState + FontSizeClass, and what it turned up
+
+The point of decoding the allocator was never to fix functions one at a time; it was to know
+which ones *can* be fixed before spending an afternoon on one that cannot. This is that pass,
+run over all 21 functions below normalized 100 in the 207-file build (not the 51 the status file
+suggested - see "Four stale 100s" below). Per function: `structural_diff.py`, then
+`reg_scores.py --whyreg` for who holds which register, then `--invocation N` for the
+first-round `+0x0c` keys of the two candidates in each swapped register pair.
+
+**One rule fell out of it that is worth more than the list.** When two candidates are swapped
+between two registers and their first-round keys are within a few units, one statement reorder
+can flip them. When the gap is tens of units, nothing can. The gap is the triage.
+
+### Fixed during the pass
+
+**`decideOnTribeAttackLocation`: 68.8 -> 91.6 raw, 68.2 -> 85.7 normalized, one line moved.**
+The swapped pair was `destinationX` (key 42, in `ebp`) against `targetPlayer` (key 40, in `ebx`)
+- the original has them the other way round, and 2 units is one depth-1 reference. The source
+had a store sandwiched between the two campground reads:
+
+```cpp
+int destinationX = ...playerDataArray[targetPlayer].campground.xEntry;
+tribes[tribeID].targetBuildingID = 0;                       // <- between the two reads
+int destinationY = ...playerDataArray[targetPlayer].campground.yEntry;
+```
+
+Moving the store above both reads: quick_diff 0.748 -> 0.960, register operand differences
+58 -> 6. Two further variants (inlining the reads, a `tile` local before the call) were both
+worse, so it stays there. The residue is `delta 2` - the `this` reload scheduled before the
+argument computation in the original and after it in ours - and a volatile `eax/ecx/edx` chain.
+
+### The work-list: reachable, in order
+
+| function | now | signal | the lever |
+| --- | --- | --- | --- |
+| `recruitHarrassingSiegeEngines` | 73.2 / 64.5 | delta 0, `ebx<->edi` 14/11 = `tribeID` (36) vs `unitID` (44) | key gap 8; `unitID` is served first and takes `edi`. One or two depth-1 references moved would flip it. Untested. |
+| `aiShouldAttackOrWaitForTeamCoordination` | 83.2 / 78.1 | delta 2, first structural difference at instruction 8, 5 register operands | small and structural-first; read the two mismatched instructions before anything else |
+| `computeAttackPossibilities` | 89.7 / 85.7 | delta 0, different ORDER, a DUPLICATION report | statement order, untested |
+| `updateAIStrengthState` | 97.2 / 83.3 | `kind 1.000`, same order, 12 register operands | pure register permutation, not yet analysed - `--whyreg _aicIndex` and read the gap |
+| `smallestTribeOfUnitType` | 96.2 / 93.4 | same instructions, 3 register operands | tiny; same recipe |
+
+### The stop-list, with the reason each time
+
+| function | now | why no source edit reaches it |
+| --- | --- | --- |
+| `aiRecruitUnits` | 50.0 | settled earlier: zero-register idiom plus the recruitCount increment; both forms measured |
+| `renderMultilineTextUnk` | 58.7 | settled: `_runXPos` (135) vs `this$GSCopy` (first-round -65); 200 units |
+| `addUnitToSmallestBehaviourTypeTribe` | 80.1 / 59.1 | settled: frame +4, loop-depth lever measured and refuted |
+| `sellExcessGoods` | 62.4 | two 2-cycles (`edi<->esi`, `ebp<->ebx`), each a named local against a *temp*; the named keys are -4 / -26 / -34 against `j` 88 and `amount` 104 - the temps are what win the callee-saved registers |
+| `aiGiveRaidInstructions` | 62.0 / 63.3 | `this` (93, `ebp`) swapped with a temp in `ebx`; the polarity lever here is already spent (+3.5) |
+| `chooseRandomBuildingID...` | 66.0 | delta 0, but the original computes the `buildings` pointer in the loop preheader *after* the `jle` guard and we hoist it above, which frees `ecx` and moves the tracker from `esi` to `ecx`; `[i]` indexing (0.83 -> 0.47) and a `for(...; i++, buildings++)` clause (-> 0.66) both worse |
+| `playNervous2BikFromPlayer` | 76.0 / 75.0 | 25 instructions, delta 0; the original loads `aiType` before the countdown store, we sink it past the team compare. Three orderings of the source (early `aiIndex`, `currentPlayerID` first, load after the store) all **byte-identical** - the scheduler decides, not the declaration order. `structural_diff`'s "statement order, reachable" label is wrong for this one. |
+| `sendWallPatrolUnitTribesToAIVLocations` | 77.2 / 69.4 | settled earlier: slot permutation, declaration order already optimal |
+| `updateAIPlayerState` | 81.7 / 79.9 | settled: which constant gets the callee-saved register |
+| `planToBuyWhenLowOnResource...` | 90.3 / 86.5 | settled: slot permutation |
+| `renderDebugDataAiInfo` | 98.4 / 96.3 | settled; the cookie fix gave it the last +1.2 |
+
+### Four stale 100s: header drift, not source
+
+`countSiegeEngineUnits` (now 53.8), `teamIsWeakRelativeToEnemy` (90.1), `setTribe0x11...` (96.7)
+and `someChatMessageSelection` (99.2) are all recorded as **100%** in the status file, all
+committed as such on 2026-10-18 in #261, and all have **source identical** to that commit.
+`countSiegeEngineUnits` is the clean case: `kind 1.000`, same instructions in the same order, a
+pure `ecx<->edx` swap of two temps - and it calls nothing, so no resolver flip can be the cause.
+Measured directly: data resolvers on or off, quick_diff 0.5385 either way. What *has* changed
+since that commit is 22 struct headers under `Game/` and `Map/Units/` (909 lines, the upstream
+Ghidra imports). A field that changes type or offset changes the address arithmetic, the
+address arithmetic is the temps, and the temps are what swapped.
+
+Two consequences. The status file's recorded percentages are only valid for the headers they
+were measured against, and nothing re-measures a function once it reads 100 - so a Ghidra import
+can silently regress any number of "done" functions. And the count of sub-100 functions I started
+this pass with (51, from the status file) was wrong in the other direction too: with resolvers
+on and the current headers, it is 21. **Re-measure the 100s after every upstream import.**
+
+### Two tool verdicts to distrust
+
+`structural_diff.py`'s "same instructions in a different ORDER - that is statement order, and it
+is reachable" fired on five functions here. It was right for `decideOnTribeAttackLocation` and
+wrong for `playNervous2BikFromPlayer` and `chooseRandomBuildingID`, where the reorder is the
+scheduler's and no declaration order reaches it. The label should say *may be*. And its
+DUPLICATION report pointed the wrong way on `countOccupiedPlayerSlots` (repetition from unrolling
+read as repetition from branch arms). Both are counts without a cause attached; the cause is
+what the second step - the register picks and their keys - is for.
+
+## The work-list, worked: one fix, four measured stops
+
+The triage above left five functions ranked by how reachable they looked. All five were taken to
+the point of a measured verdict. One moved; the other four each refuted a specific, plausible
+lever, and the refutations are worth more than the labels that sent us to them.
+
+### `recruitHarrassingSiegeEngines`: 73.2 / 64.5 -> 85.0 / 84.7
+
+The swapped pair was `tribeID` (key 36, ours `ebx`) against `unitID` (key 44, ours `edi`). Two
+things had to be read correctly first. There are *two* `unitID`s in the source, and the one in
+the pair is the `nonEuroRecruit` result, not the loop variable - the loop is byte-identical on
+both sides, with its counter in the volatile `edx` and `edi` holding the constant `0x15` for a
+16-bit compare. And the original assigns `tribeID` at instruction 31, before `unitID` exists, and
+gives it `edi` - so the original *served* `tribeID` first.
+
+The lever that worked was live range, not reference count. Moving the two tribe stores to after
+the `addUnitToTribe` call:
+
+```
+ST1 ST2 call BEH   (as written)        0.7317
+call ST1 ST2 BEH                       0.9358
+ST1 call ST2 BEH   <- committed        0.9419
+BEH call ST1 ST2                       0.8232
+call ST2 ST1 BEH                       0.7317
+uid read into a local before the call  0.8354
+```
+
+`tribeID` referenced after the call gains a region, outranks `unitID`, is served first, takes
+`edi`. The residue is one instruction (the uid reload moved past the call) and a volatile
+`eax/ecx/edx` rotation. Normalized went up twenty points.
+
+### `aiShouldAttackOrWaitForTeamCoordination`: 83.2 / 78.1, stop
+
+The original pushes `ebp`/`esi` at entry and `ebx`/`edi` only just before the loop, so its early
+exits pop two registers fewer - that is the `pop +2`. Ours keeps the constant `1` in `edi` from
+instruction 10 and reuses it for the early `cmp ..., edi` and `mov eax, edi`, which forces the
+early save. The original uses immediates there and materialises `mov edi, 1` at the loop.
+
+The obvious lever is to stop `int otherPlayerID = 1;` from being the first statement. Four
+placements, all worse: in the `for` header **0.51**, assigned just before the loop **0.51**, after
+the `aiType` check **0.81**, after the `requestState` check **0.61**. The side-by-side of the 0.51
+variants shows why: with the shared constant gone the compiler moved the `playerID` *base* from
+`esi` to `ebx` and still put the constant `1` in a register (`esi`) for the two early uses. The
+constant is materialised because it has two nearby uses regardless of the loop; where the
+declaration sits only decides which other value gets displaced.
+
+### `computeAttackPossibilities`: 89.7 / 85.7, stop
+
+The original takes the address of the `attackedPlayerID` field once (`lea edi, [eax+0x115e9d0]`)
+before the first call and reloads `[edi]` four times; we fold the first use and share the other
+three. `int* attackedPlayerID = &...;` reproduces the shape exactly - four `[edi]` reloads,
+duplication count 4 = 4 - and scores **79.3 / 80.4**, ten points *down*. The pointer is formed
+with `mov edi, esi; imul edi; add edi, G` where the original keeps the product in `eax` and
+`lea`s, and the four reloads rotate through `eax/ecx/edx` differently. Matching the duplication
+count is not the same as matching the code, and `quick_diff` had already said so (0.90 -> 0.79)
+before the build confirmed it.
+
+### `updateAIStrengthState`: 97.2 / 83.3, stop - with the mechanism named
+
+Twelve operands `ebp` where the original has `ebx`, one value, same instructions, same order.
+`--whycost` names the cause exactly:
+
+```
+_recruitProbDefensive -> ebp
+    ebx   total   +6500   PIN +700 by (temp); PIN +800 by (temp); PIN +400 by (temp) ...
+_totalRecruitProb -> ecx
+    ebx   total   +2300   ... PIN +800 by aiRecruitUnitChoicePreference
+```
+
+The parameter is used three times: `(char)x == 0` at the top, `= x` as an int after the random
+call, `(char)x == 0` again near the end. The two byte tests CSE into one byte-class temp that
+lives across the call, and a byte-class value that must survive a call has exactly one legal
+register on x86 - `ebx`. It pins `ebx` with `benefit x 100`, `_recruitProbDefensive` takes
+`ebp`, and every later `ebp`/`ebx` choice follows.
+
+Seven variants. Changing the casts (`unsigned char`, `!(char)x`, both tests, one test) -
+**byte-identical**, four times. Reading the byte through `*(char*)&x` to take the address and
+force memory residence - **byte-identical**, three forms; MSVC folds it straight back. The one
+form that dissolves the pin, casting the *assignment* too so all three uses are the same byte
+expression, scores 0.969 -> 0.994 on quick_diff and 83.3 -> 86.4 normalized, and is **wrong**: the
+original assigns with `mov ebp, dword ptr [esp+0x20]`, a dword load, and the variant emits a byte
+load that is one byte longer, shifting every later branch target by one. Raw stayed at 97.2 for
+exactly that reason. Rejected. The original's compiler did not create the cross-call byte temp
+from the same source, and no spelling of ours stops it.
+
+### `smallestTribeOfUnitType`: 96.2 / 93.4, stop
+
+Three operands, one visible difference: we store `smallestTribeID = 0` before the `aiType`
+check, the original stores both zeros after it. Moving the initialiser below the check:
+**0.961 -> 0.517**. Left alone.
+
+### What the five say together
+
+* **Live range beats reference count as a lever.** `recruitHarrassingSiegeEngines` moved on a
+  statement reorder that gave a value a region after a call; `decideOnTribeAttackLocation` moved
+  on a store moved out from between two reads. Neither changed what was computed.
+* **A reorder that fixes the pair can displace a third value.** Three of the four stops failed
+  because the compiler re-spent the freed register elsewhere (`esi` -> `ebx` for the base in
+  `aiShouldAttack`, the frame in `smallestTribeOfUnitType`). Check the whole side-by-side, not the
+  pair.
+* **Matching a detector's count is not matching the code**, twice now (`computeAttackPossibilities`
+  here, `countOccupiedPlayerSlots`' DUPLICATION earlier).
+* **A byte-class value live across a call pins `ebx`.** New, named, and the first allocator
+  mechanism found here that a source `(char)` cast creates directly. When `--whycost` shows a
+  PIN by a parameter or a `(char)`-typed local, look for a second use across a call.
+
+## The three branches: UnitsState, AIVState-leftover, PathFindingState-development
+
+The same workflow applied to three branches outside AICState, with the measurement done fresh
+(resolvers on, the namespace's own files as the build list) rather than taken from the status
+file. These namespaces are in a different regime from AICState: `Map/Units/UnitsState` has 82 of
+114 functions below normalized 100, averaging 76, with 29 under 60. The AICState pass was a
+clean-up of a nearly finished namespace; this is triage of an unfinished one, and the useful
+tools change accordingly - `structural_diff.py --all` for the ranking, a frame scan over every
+sub-100 function, and the Ghidra decompile for the frame cases, because a missing local is
+usually a *named* thing the decompiler already shows.
+
+### `reimpl/UnitsState` - four commits
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `queueDisbandAndAttackCommand5Params` | 57.1 | **100.0** | store order |
+| `selectionContainsCombatUnit` | 88.8 | **98.5 / 92.0** | a `bool` flag that the original keeps as `int` |
+| `recomputeTroopValuesForPlayer` | 51.7 / 50.3 | 54.1 / 52.0 | `this->units` vs the global `units` split |
+| `setDestinationForUnit` | 44.3 / 44.6 | 44.5 / 44.9 | word stores re-read the field |
+
+**Store order, and a detector that cannot see it.** The five parameter-to-global stores were in
+the wrong order. `quick_diff` reports 1.0000 for *every* ordering, because it collapses globals
+to `G`; only reccmp's raw diff shows the displacements. But `quick_diff -s` keeps the `[esp+N]`
+*load* offsets, and the loads follow the stores, so it does see the order - an exhaustive search
+over all 120 permutations took eight minutes and found the plain `Param0..Param4` order at 1.0000.
+Confirmed 100.0 by reccmp. Worth knowing: a first, hand-read ordering of the stores scored
+*worse* (57.1 -> 28.6), because the scheduler reorders independent stores and the emitted order
+is not the source order. Search it, do not reason it.
+
+**`bool` vs `int`.** The original holds the flag in `esi` as a dword; ours was `bool`, which put it
+in `bl` and changed every test and set of it. 88.8 -> 98.5 on the type alone. The residue is the
+320-byte array sitting at the other end of the frame, which is slot ordering of a `/GS` buffer.
+
+**`this->` vs global.** `recomputeTroopValuesForPlayer` had a frame 12 bytes short. The decompile
+shows why: the original walks the unit array with *two* pointers, one relative to `this` for
+`logicalState/dying/owner/isSelectable/unitType/...` and one absolute into the global for
+`x/y/unitType-as-value/owner-as-index/uid`, plus the counter in a slot. Ours used the global for
+everything, so there was one pointer and nothing to split. Routing the accesses the way the
+decompile shows recovered two of the three slots (-12 -> -4). The third is the original spilling
+its `this`-relative pointer, and writing the pointers explicitly as locals is byte-identical to
+the indexed form - the compiler strength-reduces either way. Allocator; left at 54.1.
+
+**Re-reading a field for a 16-bit store.** `setDestinationForUnit`'s original loads `units[].x`
+with `movzx` and sign-extends from `ax` because it also stores that same load as a word
+(`ladderExitXPosition = units[].x`); ours routed every use through an `int` local. Re-reading the
+field for the word stores is the "share only what the original shares" rule and is correct, but
+it is worth +0.2 here against a 0x14-vs-0x8 frame and a tail-merged early exit, and the
+`(short)(ushort)` double cast - the type-based guess - is byte-identical to baseline. Ghidra and
+our header agree `x` is `short`.
+
+**Not taken, with the reason.** `processEntityDamageToUnit` (+12, three *extra* slots) and
+`acquireShootTarget` (-4) are 300-line functions where the slots in question are real locals the
+two compilers chose to spill differently - pressure class. `selectionContainsCombatUnit`'s array
+placement, `createTribeFromSelectedUnits`' zero register, `changeDestinationByAmount`'s one copy
+and `getFirstSelectedSiegeEngineID`'s one `jle` are all single-instruction scheduling or
+allocation residues.
+
+### `reimpl/AIVState-leftover` - nothing to commit, and one measurement artefact
+
+38 functions, 7 below normalized 100, every frame exact. Four of the seven are a single
+scheduling residue: one `mov ebp, [esp+0x10]` one position away (`findAppropriateGridLocation-
+ForBuilding`, 99.3), two `lea`s swapped (`rotateAIV`, 97.2), a store moved across a `jle`
+(`aiDecideOnNewBuildings`, 99.0). Nothing in the source reaches those.
+
+**`aiPlaceFlag` (98.2 / 94.7) is done and the tool does not know it.** Its one differing line is
+
+```
+-mov ebx, dword ptr [ecx + I<EntityState>::instance+705348 (OFFSET)]
++mov ebx, dword ptr [ecx + cached+24 (OFFSET)]
+```
+
+Same instruction, a resolver address on both sides - with the data resolver on, `instance` is
+our own `Instance<EntityState>::instance` object, 700 KB of it, and reccmp labels an address
+705348 bytes into it by the nearest symbol it can find, which turns out to be some unrelated
+`cached` static. The original's side gets the proper `instance+705348` label from our GLOBAL
+marker, the two labels differ, and the normalized score - which forgives resolver addresses
+only when it recognises them - docks it 5 points. Checked at the byte level: the original's
+encoding is in the exe once and in our DLL not at all, so the displacement really is a DLL
+address, exactly as every other resolved global is; this one is just mislabelled. A tooling
+fix (label addresses inside a known instance object by that object) would reclaim it and any
+other large-struct access like it.
+
+`executeDefaultCastleAIV` (53.6, 971 instructions, delta 39, a `/GL` file) is the only real
+work in the namespace and is a project on its own; not started.
+
+
+### `reimpl/PathFindingState-development` - one commit, and the richest frame signal of the three
+
+114 functions, 97 below normalized 100, average 71 - the least finished of the three - and
+**13 frame mismatches**, nine of them +-4 or +-8, which is one or two locals each and the most
+mechanical case the workflow has. The slot tables name them; the decompile usually says what they
+are.
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `setWalkabilityBorderLogicLayerForSmallerMapSizes` | 99.2 / 92.3 | **100.0** | three zero-stores moved *before* the increment |
+
+The original compares `searchGeneration` in memory (`cmp dword ptr [esi+4], 0x7d00`) straight
+after incrementing it; ours loaded it into `eax` first because three stores to other `this`
+fields sat between the increment and the compare in the source. Moving the stores *after* the
+`if` made it worse (0.987 -> 0.971); moving them *before* the increment made it exact. The
+scheduler places them between the compare and the branch either way; what the source order
+decides is whether the compare can read memory.
+
+**`findNextTileInExistingSearchThatIsModuloDistanceAway` (56.5, frame -8): the hoist is right
+and not yet enough.** The original's two missing slots are `WalkLayer[tilesQueue[0]]` hoisted out
+of the loop (compared against the current tile's `WalkLayer` each iteration) and `abs(dx)` held
+across `abs(dy)`. Hoisting the first into a local recovers one slot (-8 -> -4), takes `delta`
+7 -> 5 and the instruction count 60 -> 62 of 63 - every cause metric improves - and reccmp falls
+56.5 -> 45.2 because the allocation reshuffles around it. The second local did not come from
+reordering the `abs` terms. Not committed, because the frame is still not exact and the drop is
+eleven points, but this is the function's next step and the hoist should be the first edit of it.
+
+**Byte-identical levers, recorded so they are not retried.** `igniteFireAtTilesDistanceAway`
+(+4: `_tile` appears as both a local and a temp) - declaring `_tile` inside the loop instead of
+in a comma-assignment condition changes nothing. `pathPlanningForTribe` (-4) - the clamped
+`unitCount` is a parameter overwritten in place, and giving it a local changes nothing either; the
+missing slot is something else. `updatePathLinkageTileMapRelatedToSiegeTower`'s one moved `or`
+is scheduling; so are `isTileInRangeOfKeepRange`'s `mov edi, imm` and
+`updateWalkLayerAndAIPathCostLayer`'s `add edi`.
+
+**Ranked but not opened:** `updatePathLinkageLayerAtTileForSomeLogicalReason` (-8: the original
+holds the loop counter and one of the `BitFlagHelper` pointer temps in slots; the source is still
+decompiler-shaped), `pathFindingWithBuildingsIncluded` (the original's `push ecx` frame is 4 bytes,
+not 0 - slot_map does not count a `push ecx` frame - so the real difference is +4, one extra local
+of ours), `commitUnitPathPlanUsingWalkLayer` (+4 at 19.9%, `__direction` is the extra),
+`findBuildingAccessPoint` (+8: `__accessibleIndex` and `__validAccessPointsCount` where the
+original has one counter), `setClimbBasedOnClosestClimbData` (75.7: the walking pointer is biased
+to the field 4 bytes before the original's, `lea esi,[ebx+0x1288]` against `+0x128c`, and the loop
+shape differs with it).
+
+### What the three branches say together
+
+* **The frame scan earns its place in unfinished namespaces.** In AICState every frame was exact
+  and the scan was a formality; here 13 of 97 were off, nine by one or two locals, and the slot
+  table plus the decompile named the local in every case that was opened.
+* **Fresh measurement, not the status file.** UnitsState's 82 and PathFindingState's 97 sub-100
+  counts are measured with resolvers on; the recorded numbers were taken under other
+  configurations and are only comparable to themselves.
+* **The near-done tail is almost all scheduling.** Of the functions above 95 on all three
+  branches, one in five had a source lever (`bool` vs `int`, store order, a store moved across an
+  increment); the rest are a single instruction one position away, and nothing in the source
+  reaches that.
+
+
+## The deep work: four PathFindingState functions, and the inline-assembly discovery
+
+The branch pass left the sub-60 functions as "big, multi-defect, take them one at a time with
+the frame signal first". This is that pass. Four functions moved, three of them by a mechanism
+that no amount of C++ tuning could ever have reached.
+
+| function | before | after | what it was |
+| --- | --- | --- | --- |
+| `tracePathPlanToDestinationViaUnoccupiedTiles` | 12.5 | **85.7 / 83.6** | the whole walk is handwritten assembly |
+| `findSuitableSpawnLocationUnk` | 52.6 | **82.5 / 81.3** | the loop head is assembly too, and the indices live in parameter slots |
+| `findLinkageBasedPathOrWalkRadius` | 50.5 | **79.7** | same |
+| `findNextTileInExistingSearchThatIsModuloDistanceAway` | 56.5 | **66.1 / 65.6** | two source defects: a global written every iteration, and a result routed through a temp |
+
+### `findNextTileInExistingSearch...`: the two missing slots were two source defects
+
+The hoisted `WalkLayer[tilesQueue[0]]` recovered one slot (recorded in the branch pass). The
+side-by-side of the result showed the other two differences were not allocation at all. Ours
+stored the global `ALG_ResultTileIndex` on *every iteration* (`mov [G], ebx` inside the loop,
+ours only) and compared it unsigned (`ja` against the original's `jg`); the original keeps the
+counter in a signed local and writes the global once at the end. And the missing slot was
+`local_10`: the original stores `0` to it at entry and the index into it on the found path
+(`mov [esp+0x10], ebx`); ours routed the result through `iVar2` and assigned `local_10` after
+the loop, so the compiler folded it into a register and materialised the zero late. A local
+counter and a direct assignment on the found path: frame exact, 63 = 63 instructions, `delta 0`,
+reccmp 56.5 -> 66.1. The remainder is an `ebx`/`ebp` 2-cycle between `_index` (key 34) and
+`_dist` (key 38) - a 4-unit gap that four spellings did not move - plus epilogue volatiles.
+
+### The inline-assembly discovery
+
+`tracePathPlanToDestinationViaUnoccupiedTiles` sat at 12.5% with a frame of 0x18 against the
+original's 0x3c - nine locals short - and the original's prologue was `push ebp / mov ebp, esp /
+sub esp, 0x3c`. The file already carried `#pragma optimize("y", off)` with the comment "original
+keeps an ebp frame", which got the frame pointer and nothing else. The body told the rest:
+
+```
+mov  ax, word ptr [ebp-0x30]        ; a 16-bit load no compiler writes for an int local
+mov  dword ptr [ebp-0xc], 6         ; the direction stored as a constant...
+mov  eax, dword ptr [ebp-0xc]       ; ...and read back three instructions later
+add  dword ptr [ebp-8], 1           ; the step budget counted in memory
+cmp  dword ptr [ebp-8], 0x190
+mov  esi, dword ptr [ebp-0x24]      ; every layer base reloaded from its slot before each use
+```
+
+Every optimisation level was tried first - `("g", off)`, `("", off)`, `("gt", off)` - and all
+made it *worse* (0.13 -> 0.05): the surrounding code (bounds checks, the `searchGeneration`
+bump) is plainly optimised, so this is not a function compiled at `/Od`. It is a function whose
+loop is an `__asm` block, exactly as `LinkageNeighbourAsm.hpp` already documents for three
+siblings: MSVC keeps an `ebp` frame in any function containing inline assembly, and every local
+the block names has to live in memory. The nine missing locals *were* the asm's operands.
+
+Rewriting the loop as an `__asm` block mirroring the original instruction for instruction - x, y,
+the tile and the walk layer kept in `ebx/ecx/edx/edi` across iterations, everything else
+reloaded, the direction stored as a constant, the three-way compare on y then x - gave frame
+0x3c = 0x3c, 182 = 182 instructions and 85.7%. The residue is two things: `_budget` and
+`_direction` occupy each other's slots (`-8`/`-0xc`), which neither declaration nor
+initialisation order moves, so it is weight-driven and the original's weights came from a shape
+not reproduced; and the second early-return epilogue is laid out at the end instead of inline. A
+mixed form - the budget loop in C with the asm as its body, to give the budget a depth-1 weight -
+costs nine instructions and scrambles the slots (0.43). The pure-asm form is right.
+
+**A scanner for the signature.** Over every sub-100 PathFindingState original: an `ebp` frame
+without `and esp` alignment, `mov eax, 0` followed by `mov ax, ...`, 16-bit compares, and bases
+reloaded from `[ebp-N]`. Exactly four functions carry it: `tracePathPlan...` and the three
+`LinkageNeighbourAsm.hpp` users. The other 93 low scores on the branch are ordinary C++ problems.
+It also corrected a mistake in the branch write-up above: those three macro users are **not** at
+100 - a lookup had defaulted to it - they were at 50.5, 52.6 and 66.7.
+
+### The two macro users: the loop head is assembly too
+
+`findLinkageBasedPathOrWalkRadius` and `findSuitableSpawnLocationUnk` use the push macros for
+the eight-neighbour expansion but had the loop *head* in C. The original's head is in the same
+hand as the pushes:
+
+```
+mov  ecx, [ebp+0x10]        ; the read index - in the x2 PARAMETER's slot
+cmp  ecx, [ebp+0xc]         ; the write index - in y's slot
+mov  eax, [ebp+0x1c]        ; the depth - in continuePreviousSearch's slot
+cmp  eax, [ebp+0x18]        ; maxIterations
+mov  bx, word ptr [esi+edx*2]
+add  bx, 1                   ; the distance kept in bx (and in findLinkage..., cmp bx, 0x320)
+mov  eax, 0
+mov  ax, word ptr [esi+ecx*2]   ; the row, zero-extended the asm way
+mov  edi, _walkLayer / mov edx, _tile / mov esi, _linkage / mov bl, byte ptr [esi+edx]
+```
+
+Three consequences for the source. The read index is the `x2` parameter, so our `_readIndex`
+local was the extra frame slot (+4 on both). There is no `_cLink` local - the original loads `bl`
+straight from the layer - so the shared `MACRO_LINKAGE_EXPAND_NEIGHBOURS`, whose first three
+instructions load `_cLink`, is not what these two functions do before the pushes; the pushes
+themselves (`MACRO_LINKAGE_PUSH` / `_FREE`) match exactly and are reused. And `_curGen` and
+`_cCardinalDistance` are dword slots written as words, so they are `int`s in C with `word ptr`
+in the asm. With a function-specific asm head wrapped around the push macros and the indices
+back in the parameters, both frames are exact and **every slot of both functions sits at the
+original's offset** - twelve in one, thirteen in the other - without any ordering work: the
+asm-named locals come out in declaration order. 50.5 -> 79.7 and 52.6 -> 82.5.
+
+What remains in both is the C prologue around the `fillMemory` call: the original keeps `y` in
+`edi` and `x2` in `ebx` across it and rematerialises the constant `1` in `eax`; ours parks the
+`1` in `edi` and reloads the parameters. That follows from the original pushing `edi` at entry
+and ours delaying the push past the first bounds check, which is the same early-exit layout
+difference as the two functions above, and the same wall.
+
+**`updateSeparateAreaTileMap` (66.7)** is the third macro user and is frame-exact, but its slot
+layout is not: the original has *two* copies each of the `yQueue` and `tilesQueue` pointers
+(`lea eax, [esi+0x6a380]` stored to both `[ebp-0x24]` and `[ebp-0x34]`), one per loop, where
+ours has one local and two compiler temps. Its residue is ~55 slot stores and `esi`/`eax` renames
+on top of a zero/one-register prologue (`xor ecx,ecx; lea ebx,[ecx+1]`). The duplicate pointer
+locals are the next step for it; not started.
+
+### What the deep work says
+
+* **A function stuck below ~20% with an `ebp` frame and no `and esp` is probably inline
+  assembly**, and the pragma that gets the frame pointer gets nothing else. The scanner above
+  finds the rest in a minute; the LinkageNeighbourAsm header already said how to write them.
+* **For asm-bound functions the frame is not a signal, it is the specification.** Every named
+  local is a slot, in declaration order; getting the local set right got all 25 slots across two
+  functions to the exact offsets with no tuning.
+* **The remaining residues are all one class** - early-exit layout, which decides where `push
+  edi` lands, which decides which value gets a callee-saved register across the first call.
+  Four functions on this branch stop at the same wall, 80-86%.
+
+### `updateSeparateAreaTileMap`: 66.7 -> 68.0, and the slot tiebreak the model does not have
+
+The third macro user's residue was predicted above to be the duplicate queue pointers. Reading
+the original properly, both sides have them: the asm-named `_tilesQueue`/`_yQueue` in slots, and
+a second copy of each address that the C loop uses for `tilesQueue[0] = first` / `yQueue[0] = row`
+and that gets spilled across the asm block (the block clobbers every register, so anything live
+across it is spilled - which is also why `_first`, `_row`, `_rowEnd` and `_areaID` are all slots).
+Ours has exactly the same sixteen slots. What differs is the *order* of two adjacent pairs:
+
+```
+                 original              ours
+  -0x14 / -0x18  _cY  / _tile          _tile / _cY
+  -0x28 / -0x24  queue-start copies    (ours puts them at -0x3c / -0x40, below everything)
+```
+
+Six source edits brought the other three ordering differences into line (`_readIndex` zeroed in
+the prologue at function scope like the original, `forceUpdate = 1` set before the loop as well
+as inside it, the row test as `_first >= *_rowEnd`, the cap as `>= 1000`): `row/rowEnd/readIndex`
+now sit at `-0xc/-8/-4` exactly, instruction count 284 vs 281. 66.7 -> 68.0. The two pairs did not
+move, and the reccmp diff is 182 lines of nothing but those four slots' displacements through the
+asm block.
+
+**What the pairs are not.** Not weight: the original references `_tile` 3 times and `_cY` 11,
+identical to ours, and places them the other way round. Not declaration order: swapping the
+declarations changes nothing (also tested on `_budget`/`_direction` in `tracePathPlan...`, where
+neither declaration nor initialisation order moved them). Not first mention in the asm text: both
+originals store `_tile` before `_cY` and still disagree with each other about which goes higher.
+Not alphabetical (the layer pointers rule that out). Across the three asm functions, every slot
+landed at the original's offset except exactly one adjacent pair per function plus, here, the
+two compiler temps - so the frame model in `slot_map.py` (class byte, then `weight*1000/size`,
+then declaration order) is right about everything except a final tiebreak among equal-weight
+asm-referenced locals, and that tiebreak is what decides the last 10-15 points of all three.
+Finding it is a c2.dll question (`StackPacking` / `ColorStackElements`, already located) rather
+than a source one, and it is the single most valuable open item on this branch.
+
+### The slot tiebreak, decoded: for small frames there is no sort, and the asm's def-set is name-hashed
+
+`slot_probe.py` (tools/compiler-internals) traces the three c2.dll routines that decide a frame
+and prints their state for one GlobalRegAlloc invocation. What it showed on
+`tracePathPlanToDestinationViaUnoccupiedTiles` (invocation 204) rewrites the frame model for the
+inline-assembly functions:
+
+**1. `QSortColors` is conditional, and does not run for these functions.** `ColorStackElements`
+(0x10beaef0) only sorts when the frame is larger than 0x80 bytes, or the function has a /GS buffer
+(`Function+0xAC & 1`, or `Function+0x5c` with module flag 0x20000). A 0x3c-byte frame with no
+array is handed out **unsorted**: slot order is purely the order of the element list, head at the
+highest address (`-4`) and tail at the lowest. The `(class, weight*1000/size)` key of
+`StkColorCmp` never enters. That is why `slot_map.py`'s key column explained the large frames and
+the /GS functions and was silent on these.
+
+**2. The element list is built by `AddStackElement` (0x10be9190), once per operand reference,
+in tuple order.** `CollectStackElements` walks the final tuple stream, block by block, dst
+operands then src operands, and calls `AddStackElement` for every stack symbol it meets. The first
+call inserts the element after every element of smaller-or-equal size (so the list is size
+ascending, FIFO among equals) with weight 1. Every later call adds 1 to the weight and moves the
+element forward past the same-size elements whose weight is *strictly* lower, stopping behind the
+first with weight >= the new one. Net effect: size ascending, weight descending, and among equal
+weights **the element that reached its final weight first comes first**, i.e. gets the higher
+address. Declaration order and initialisation order are nowhere in it (both re-tested: no change).
+
+**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol
+counts once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list
+that `CollectStackElements` flattens as: the *def-set* (every local the block writes) as a nested
+set, then the *use-list* (every local the block reads, in reverse order of first mention), then the
+def-set again. For the walk in `tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18
+symbols. The written locals therefore get +3 from the block, read-only ones +1, write-only ones +2;
+a local's C-side references add 1 each before and after.
+
+**4. The def-set is iterated in hash order of the symbol name.** The second def-set pass is the
+*last* reference of every asm-written local that the C code does not touch afterwards, so their
+relative order in it is the tiebreak among equal weights - and that order is not textual. Renaming
+`_direction` to `_dirn` with no other change moved it from first to last in the set and flipped the
+`_budget`/`_direction` pair into the original's order; swapping declarations or initialisations
+did nothing. A synthetic file with one block writing 39 candidate names
+(`scratchpad/var/nameRank.cpp`) gives the whole ranking in one probe run, and it is consistent
+with every real function traced so far:
+
+    _best _direction _count _found _distance _dir _cTile _tileIndex _facing _first _step
+    _ppIndex _result _budget _links _link _dist _tileNo _areaID _cY _tile _way _course _walk
+    _tilePos _dirIndex _readIndex _octant _dirn _heading _curTile _rowEnd _turn _radius _cX
+    _moveDir _n _cLink _row
+
+Earlier in this list = earlier last-bump = earlier in the element list = higher address, for
+asm-written locals of equal weight whose last reference is the asm block. So the "tiebreak" is
+our own choice of variable names, and the original's layout is recovered by picking names in the
+right hash order - `_budget` before the direction local here, which `_heading` (or `_dirn`,
+`_octant`, `_course`) satisfies and `_direction`/`_dir` do not.
+
+Caveats: the ranking only orders *these* names against each other (a different name may land
+anywhere, and two names can share a bucket), so a new name is confirmed with one `slot_probe.py`
+run on the real function, not assumed. And this only governs equal-weight ties: a pair with
+different weights is still a reference-count problem, and the trace shows exactly which references
+each side has.
+
+How to use it: `slot_probe.py FILE.cpp --find LOCAL` prints the invocation(s) whose frame holds
+LOCAL; `slot_probe.py FILE.cpp --invocation N` prints the AddStackElement sequence with names,
+tuple and nested-set markers, the final element list, whether the sort ran, and the colour records.
+
+**Applied to the four functions (one build each, declaration swaps and a rename only):**
+
+| function | before | after | what moved |
+|---|---|---|---|
+| tracePathPlanToDestinationViaUnoccupiedTiles | 85.7 | 94.5 | `_direction` -> `_heading`: def-set order now `_budget` first |
+| findSuitableSpawnLocationUnk | 82.5 | 86.6 | `_tile`/`_cY` declared the other way round (they share a bucket, so the chain keeps declaration order) |
+| findLinkageBasedPathOrWalkRadius | 79.7 | 84.3 | same swap |
+| updateSeparateAreaTileMap | 68.0 | 91.9 | the swap the other way (its original has `_cY` higher), plus the asm locals initialised *before* the fillMemory calls so the two queue-pointer copies die in registers and are reloaded at the loop head - their second reference then precedes the asm's use-list and they land at `-0x24/-0x28` as in the original; `*_yQueueStart` stored before `*_tilesQueueStart` |
+
+Every frame of the four is now at the original's offsets. What remains is the early-exit epilogue
+layout in the first three (the known wall) and register choice for the constant 1 in the fourth.
+The `_tile`/`_cY` case is the warning about the ranking: in the three macro users the pair's order
+followed declaration order, which only happens when two names hash to the same bucket - the
+`name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
+what settled each one.
+
+### The rule, as code: `simulate()`, `regime()`, and the regression tests
+
+`slot_probe.simulate(adds)` replays `AddStackElement` over a recorded reference sequence and
+`slot_probe.regime(frame, gs)` says whether `QSortColors` runs. `tests/test_slot_rules.py` holds
+nine recorded c2.dll traces as fixtures (the four asm functions, the rename / declaration-swap /
+split-block variants of tracePathPlan, and the 39-local name_rank run where the sort did run) and
+checks that the simulation reproduces every recorded list element for element, that the rename
+and not the declaration swap moves the pair, that list order maps onto `-4, -8, ...` when the
+sort is skipped, and that the two `regime()` copies agree. No compiler needed:
+`python tools/compiler-internals/tests/test_slot_rules.py`. If the rule is ever refined, a
+recorded compile that stops replaying is the regression.
+
+`slot_map.py` now prints the regime for the function and, in the list-order regime, shows the
+bare reference count as the key and says that ties go by the position of the last reference.
+
+**Sweep of the 60 AICState files (reimpl/AICState-leftover), same build A/B against a saved
+baseline:** every sub-100 function with a frame already has the original's slot count, order
+and reference counts (`aiRecruitUnits`, `sellExcessGoods`, `smallestTribeOfUnitType`,
+`sendWallPatrolUnitTribesToAIVLocations`, `aiShouldAttackOrWaitForTeamCoordination`) - their
+residue is register allocation, and `diff_triage.py` already said so (`alloc-only`). The one
+FRAME mismatch, `addUnitToSmallestBehaviourTypeTribe` (0xc vs 8), is not an ordering problem:
+the original keeps two locals in dead *parameter* homes (`[esp+0x1c]` a pointer iterator over
+the tribe-ID row, `[esp+0x24]` the running minimum), which is `ColorStackElements` phase 2
+sharing a local into a parameter colour. Rewriting the loop with the pointer iterator made it
+worse (80.1 -> 77.3) and was reverted; what decides the sharing is liveness of the parameter,
+i.e. where the last read of each argument sits, and that is the next thing to look at there.
+
+### The early-exit epilogue wall: what it is and is not (first probes)
+
+The residue left in `tracePathPlan...` (94.5), both `find*` asm functions and earlier
+`decideOnTribe`/`aiShouldAttack`: the original's second guard pair has its `pop edi / pop esi /
+xor eax, eax / ... / ret` inline as the fallthrough of its last test; ours appends that block at
+the end and reaches it by three jumps. Everything else in the prologue is identical, including
+the lazily placed `push edi` between the two pairs.
+
+**Not `FgEarlyTailDup`.** It is called first thing in `GlobalRegAlloc` (0x10c0738c) under /O2
+and copies the block *immediately before the exit block* into its predecessors when that block
+starts with a label, holds at most two real tuples, none a call/asm, and `preds x tuples <= 8`.
+`taildup_probe.py` shows it entering and finding `TAIL 0` on every function tried: the block
+before the exit is an empty landing pad (label plus one pseudo tuple, kind 0x17 opcode 0x2f9),
+so there is never anything to duplicate. The inline epilogues come from elsewhere.
+
+**What the listing experiments say** (20 s each, `/FA` of the file alone, no debugger):
+
+| guards written as | instructions | FALSE epilogues |
+|---|---|---|
+| 2 + 2 statements (ours, `tppA`) | 182 | pair 1 inline, pair 2 at the end |
+| the pairs swapped (`tppI`) | 182 | first pair inline, second at the end - positional |
+| `goto fail` to one `return FALSE` at the end | 176 | one, at the end; `push edi` moves to entry |
+| either or both pairs as one `a \|\| b \|\| c` statement | 176 | one, at the end; `push edi` at entry |
+
+So only the 2+2 shape keeps `push edi` between the pairs like the original, and in that shape
+`merge_probe.py` counts exactly two post-allocation `FgDoCommonTailMerge` folds (R1+R2, R3+R4)
+and nothing pairwise. The fold of the first pair keeps the fallthrough block in place; the fold
+of the second pair ends up at the end of the function. `FgDoCommonTailMerge` does not create
+blocks (it calls `FgTailMergeWithoutCheck` from two sites, 0x10b30ac7 / 0x10b30ae5, or inserts
+a `newlabel` and retargets), so the second pair's survivor must already have been at the end
+before the fold - i.e. the last guard's return block is placed after the body by something
+earlier than GlobalRegAlloc, and the original's was not.
+
+Next probes, in order: (1) the condition choosing between the two `FgTailMergeWithoutCheck`
+sites (which of the pair survives); (2) a block-order dump at GlobalRegAlloc entry for tppA to
+see whether the fourth return block is already last; (3) the front end's handling of a
+`return` whose fallthrough successor is the main body - the one thing that differs between the
+third and fourth guards is that the fourth is followed by the body.
+
+### The early-exit epilogue wall, second session: the mechanism, down to the two folds
+
+Tools: `blocks_probe.py` dumps the function's block list / tuple stream (kind/opcode per tuple,
+tuple addresses) at chosen points; `--name FUNC` gates on the function's mangled name read at
+`GlobalRegAlloc` entry (`poi(poi(eax)+4)` = "?name@Class@..."), because **GlobalRegAlloc
+invocation numbers are not stable across runs** (433 and 425 for the same file: function order
+depends on pointer values) - every earlier `--invocation N` probe risked landing on a neighbour.
+`--passes` dumps at the entry of each late pass; `--scan` dumps every invocation.
+
+Tuple legend read off the dumps: kind 0x18/0x2f4 OPENTRY, 0x19/0x2f5 OPEXIT, 0x1a/0x2f3 block
+boundary, 0x1b/0x2f2 label, 0x12/0xf conditional branch, 0x12/0x10 goto, 0xf/0xe call,
+0x16/0x2ce the `__asm` block (one opaque tuple), 0xd/* ordinary instructions (0x34 = the
+materialised `xor eax, eax`, 0xba/0xb9 push/pop), 0x15/0x2d9 and 0x17/0x2f7-0x2f9 pseudo.
+
+What happens to `tracePathPlan...`'s four `return FALSE` (2+2 guard shape, the only shape that
+keeps `push edi` between the pairs like the original):
+
+1. **The front end makes two kinds of return block.** `if (map == 0) return FALSE;` gives an
+   inline block (fallthrough of the test). `if (399 < x || 399 < y) return FALSE;` gives a
+   *labelled block at the end of the function*, the shared short-circuit target of both `ja`s.
+   At GlobalRegAlloc entry the function has 16 blocks: BLK 4 (pair 1 inline), BLK 8 (pair 2
+   inline), BLK 12 and BLK 13 (the two `||` blocks, after the body). `FgEarlyTailDup` sees only
+   the empty landing pad before OPEXIT and does nothing.
+2. **Prologue/epilogue insertion** (between `MscFixOpexitGoto` and the first
+   `FgDoLateFlowOpts`) linearises the stream, places `push edi` lazily after pair 1, and adds a
+   pop-edi exit stub (`label; pop edi; goto EXIT`) for the paths that pushed it. The gotos'
+   16-bit field at +0x1c (what the merge code compares and propagates) is this exit-depth.
+3. **`FgDoLateFlowOptsOnce` materialises `xor eax, eax` and `FgTryCommonTailMerge` folds
+   identical `xor eax, eax; goto EXIT` tails**, pairing the exit block's predecessors in
+   predecessor-list order, outer first: the earlier predecessor survives, the later one is cut
+   to a jump (`newlabel` into the survivor, `TupReplaceBranchTarget`, `TupRemoveRange`).
+   Observed, with tuple addresses: fold #1 cut pair 2's *inline* copy and pointed it at pair 1's
+   *end* block; fold #2 removed pair 2's *end* block and moved its label onto pair 1's *inline*
+   copy. The depth-1 predecessors are then re-routed to a pop-edi epilogue that is emitted at
+   the end - which is exactly our `$LN3` and the 3 jumps to it.
+4. The original's layout is what you get if pair 2's inline copy survives its fold. Same
+   source shape, same compiler: so the input that differs is the exit block's predecessor
+   order (or the weights `FgWeightFlowGraph` gives the copies), not the statements.
+
+Listing experiments (20 s each, in `scratchpad/var/tpp*.cpp`, all against A = committed):
+`[x||y],[map]` + `[destX],[destY||map2]` (M2) = A's layout; six simple `if`s (L), or any
+pair-1 split (M1, M3): the pushes shrink-wrap per guard (`push esi` before test 1) - not the
+original; `goto fail` (B) and `||`-collapsed pairs (C, D, E): one epilogue at the end and
+`push edi` at entry. So the guard statements are A's; what is left is the predecessor order.
+
+Next, if resumed: print the exit block's predecessor list (block+0x28 chain, `[edge+0xc]` the
+branch tuple) at `FgTryCommonTailMerge` entry for A, and look at what `FgWeightFlowGraph`
+(`FgTryEpilogMerge+0x55`) writes into the two copies' +0x1c words; then look for the source
+property that reorders them (candidates: the order the front end emits the `||` block versus
+the inline block, i.e. whether the `||` statement comes first or second in the pair).
+
+### Applying the workflow to a 1300-instruction function: `processHelpRichTextTokens` (70.2%, not solved)
+
+What the c2 workflow gave in six builds, and where it stopped.
+
+**Frame (`slot_probe.py --name`, `slot_map.py --end=0x46137c`).** Sorted regime (0x13c frame, /GS
+cookie). `orig_body` stops this function 0x140 bytes early (its main switch's cases sit after the
+first `ret` path, the jump table at 0x46137c), hence `--end`. With it the original has 30 slots
+and we had 37 symbols for the same 28 dword colours. Mapping the original's slots from the
+prologue stores and the reference sites gave the original's local set exactly:
+
+* textMemIndex -316, leftPosition -312, local_134 -308, currentFontLineHeight -304,
+  local_12c -300, textToRender -296, charColor -292, centerCurrentLine -288, local_11c -284,
+  **one `i` for both character loops** -280 (14 refs; ours had two), local_114 -276,
+  currentFontClass -272, local_10c -268, lineEndY -264, **a loop-1 `charIndex`
+  (= local_114 + i, incremented) sharing its slot with loop-2's charYPos** -260, local_100 -256,
+  centreActive -252, **local_f8 sharing with a hoisted `local_114 - local_11c`** -248, **one
+  `width` for the PIC-HERE width, the TAB advance (30), the word width and the char width,
+  sharing with positionToken** -244, local_f0 -240, currentLinkId -236, lineStartY -232,
+  local_e4 -228, charXPos -224, imageCount -220, color -216, **one `wordLength`** -212,
+  linkColor -208, wideTextBuffer -204, cookie -4.
+* Our `textToRender` had c2 weight 22 (rank 4) where the original's rank is 6 (between 19 and
+  17). Hoisting the five identical `textToRender.text = wideTextBuffer` of the PIC debug
+  sub-switch to one after it gave exactly 18 and rank 6; the original keeps `textMemIndex += 2`
+  per branch (each has its own `add ebx, 2`), hoisting that too cost 4 points (build 5).
+
+**What did not work.** A shared debug tail after the main switch (one `textToRender =
+wideTextBuffer`, normal paths `continue`) is what the original's *code* looks like (every debug
+case jumps to 0x460777, every normal case to the loop head) - but it is c2's late tail merge
+doing that, not the source: written that way, textToRender leaves the frame entirely and the
+function drops to 41%. The shape that keeps the original's frame is per-case assignments.
+
+**Where it ended.** Build 6 (`examples-processHelpRichTextTokens-frame-variant.cpp`): frame
+identical to the original through rank 9, structural `kind` 0.835 -> 0.868, instruction count
++63, reccmp 67.9 against the committed 70.2 - the five weight-11 locals (i, local_114,
+currentFontClass, local_10c, lineEndY) land in quicksort tie order and the loop-1/loop-2
+temporaries take the -280 colour the original gives `i`; the rest is register allocation across
+1300 instructions. Not committed. Next: break the weight-11 ties the way the original has them
+(i above local_114: the original references `i` 14 times, ours 11), then the allocation.

@@ -1,0 +1,507 @@
+"""Print the register-candidate scores MSVC computes for one of our functions.
+
+usage: reg_scores.py FILE.cpp --probe
+       reg_scores.py FILE.cpp --find [LOCALNAME ...]
+       reg_scores.py FILE.cpp --advise LOCALNAME
+       reg_scores.py FILE.cpp --rankdiff LOCALNAME
+       reg_scores.py FILE.cpp --whyreg LOCALNAME
+       reg_scores.py FILE.cpp --whycost LOCALNAME
+       reg_scores.py FILE.cpp --invocation N
+
+`OrderGlobregs` orders the candidate values and `Color` walks that order, calling
+`ChoosePhysReg` to serve each from the still-available registers. The ordering key is the
+candidate's **benefit** at `+0x40`, which is a weighted use count - `amount` in
+`sellExcessGoods`, assigned in eight branches and read by the call, scores 70 where
+`playerID` scores 4. This script reads those numbers out of the running compiler with the
+candidates resolved back to source variable names.
+
+The benefit is a property of what the code *does*, not of how it is written: it counts uses
+weighted by block frequency. No reordering, renaming or redeclaring moves it, which is why
+syntactic hill-climbing does not shift a register assignment. What can move it is changing
+how many times, and at what loop depth, a value is actually used.
+
+It drives `cl.exe` under the x86 `cdb` with breakpoints taken from `c2.pdb`'s public
+addresses - see msvc-backend.md for how that works and why no symbol loading is needed.
+
+Two steps, because the compiler allocates for every function in the translation unit and
+ours is not distinguishable by size (hundreds of resolver-template instantiations score
+identically):
+
+* `--probe` prints how many candidates each `GlobalRegAlloc` invocation inserted, biggest
+  first. Our function is normally the largest, but only because the resolver templates all
+  score identically (33 candidates in a typical TU) - a function with fewer candidates than
+  that cannot be picked out this way.
+* `--find LOCALNAME` prints every *named* candidate with its invocation index, so the
+  function can be identified by one of its locals instead of by size. This is the reliable
+  mode; `--probe` is the quick one.
+* `--invocation N` dumps that invocation's candidates as `score, symbol id, name`, in the
+  order the compiler scored them. `(temp)` is a compiler temporary with no source name.
+* `--advise LOCALNAME` prints the score table per candidate and names the patterns in it.
+* `--rankdiff LOCALNAME` pairs our benefit ranking with the callee-saved save order on both
+  sides, taken from the last reccmp run, and names the candidate that is served later than
+  the original serves it - and which candidates it would have to outrank. Needs a current
+  `reccmp_report.py --run`.
+* `--whyreg LOCALNAME` dumps the per-register cost array at each pick, which is the whole
+  reason one register was chosen over another, with the taken register bracketed.
+
+On what `--advise` is worth: its suggestions were tested on `aiRecruitUnits` (50.0%), whose
+scores show the strongest structural signal of any function tried - a loop counter `i` at
+-279 and a flag `recruitDiggingUnit` at -335 against a +188 top. Both suggested fixes made
+the match *worse*: eliminating the counter by counting `recruitCount` down gave 48.7%, and
+declaring the flag `bool` as Ghidra renders it gave 49.5%. Removing a disfavoured candidate
+changes the whole scoring landscape - fewer candidates means different spill rounds - so
+"delete the worst one" is not a monotone improvement.
+
+Treat the output as triage, not prescription. The reliably useful verdict is the negative
+one: when several candidates share a score, the order falls to the symbol-id tiebreak, no
+source change can state a preference, and the right move is to stop working on that
+function. That saves effort rather than adding points.
+
+Candidates recur with different scores because the colourer iterates, re-scoring between
+rounds; the first block is the initial scoring.
+
+Reading the output: a value with a high score is served early and gets its pick of the
+registers, a negative one is likely to be spilled or to land in whatever is left. Comparing
+two source variants of the same function shows whether a change moved the value you care
+about up or down the list, which is otherwise only visible as an unexplained register
+permutation in the reccmp diff.
+"""
+
+import json
+import os
+import re
+import subprocess
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                '..', 'reimplementation-helper', 'batch'))
+import common
+
+CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
+GLOBAL_REG_ALLOC = '0x10c07350'      # @dop2_GlobalRegAlloc@4
+INSERT_IN_LIST = '0x10b11970'        # @InsertInList@8, the candidate priority insert
+ASSIGN_REG = '0x10b14e2a'            # in ChoosePhysReg: mov [cand+0x10], rec; ebx = register number
+COST_ARRAY = '0x10d14f10'
+COST_PREF = '0x10b14c2c'             # add [eax*4+cost], ecx    - neighbour ebx's preference pair
+COST_PIN = '0x10b14caa'              # add [esi*4+cost], ecx    - ebx has one legal register: benefit*100
+COST_OWN = '0x10b14d59'              # sub [ecx*4+cost], edx    - this candidate's own affinity            # per-register cost, indexed reg*4, rebuilt for every pick
+REGNAMES = {1: 'eax', 2: 'ecx', 3: 'edx', 4: 'ebx', 5: 'esp', 6: 'ebp', 7: 'esi', 8: 'edi'}
+CLASS0 = [1, 2, 3, 7, 8, 4, 6]       # integer class candidate list, in preference order
+BS = chr(92)
+
+args = [a for a in sys.argv[1:] if not a.startswith('--')]
+probe = '--probe' in sys.argv
+find = '--find' in sys.argv
+rankdiff = '--rankdiff' in sys.argv
+whyreg = '--whyreg' in sys.argv
+whycost = '--whycost' in sys.argv
+advise = '--advise' in sys.argv
+inv = None
+for a in sys.argv[1:]:
+    if a.startswith('--invocation'):
+        inv = a.split('=', 1)[1] if '=' in a else None
+if inv is None and '--invocation' in sys.argv:
+    i = sys.argv.index('--invocation')
+    if i + 1 < len(sys.argv):
+        inv = sys.argv[i + 1]
+if not args or (not probe and not find and not advise and not rankdiff and not whyreg
+        and not whycost and not inv):
+    sys.exit(__doc__)
+src = os.path.abspath(args[0])
+out = (common.ROOT / common.TMP / 'regscores').resolve()
+out.mkdir(parents=True, exist_ok=True)
+
+
+def compile_command():
+    cc = json.loads(common.read_text(common.BUILD_DIR / 'compile_commands.json'))
+    ours = [e for e in cc if 'OpenSHC.dll.dir' in e['command']
+            and '/src/OpenSHC/' in e['file'].replace('\\', '/')]
+    if not ours:
+        sys.exit('configure the build first: no OpenSHC.dll entry in compile_commands.json')
+    o = str(out).replace('\\', '/')
+    cmd = re.sub(r'/Fo\S+', lambda _m: '/Fo%s/r.obj' % o, ours[0]['command'])
+    cmd = re.sub(r'-c \S+$', lambda _m: '-c ' + src, cmd)
+    return cmd, ours[0]['directory']
+
+
+def run(script_lines, tag):
+    path = out / (tag + '.cdb')
+    common.write_text(path, '\r\n'.join(script_lines) + '\r\n')
+    cmd, cwd = compile_command()
+    env = common.build_env()
+    env['PATH'] = str(common.ROOT / 'MSVC1400-SP1' / 'Common7' / 'IDE') + os.pathsep + env['PATH']
+    full = '"%s" -cf "%s" %s' % (CDB, path, cmd)
+    r = subprocess.run(full, cwd=cwd, env=env, capture_output=True, text=True, timeout=3600)
+    common.write_text(out / (tag + '.log'), r.stdout)
+    return r.stdout
+
+
+def advise_on(rows):
+    """Turn one invocation's (score, name) list into suggestions worth measuring."""
+    first, allscores = {}, {}
+    for sc, nm in rows:
+        allscores.setdefault(nm, []).append(sc)
+        first.setdefault(nm, sc)
+    named = {n: v for n, v in first.items() if n != '(temp)'}
+    print('')
+    print('%-28s %-8s %s' % ('candidate', 'first', 'all rounds'))
+    for n in sorted(named, key=lambda k: -named[k]):
+        print('%-28s %-8d %s' % (n, named[n], ' '.join('%+d' % x for x in allscores[n])))
+    print('')
+    out = []
+
+    # near-ties: with equal scores the order falls to the symbol-id tiebreak
+    buckets = {}
+    for n, v in named.items():
+        buckets.setdefault(v, []).append(n)
+    ties = {v: ns for v, ns in buckets.items() if len(ns) > 1}
+    tied = sum(len(ns) for ns in ties.values())
+    if tied >= 3:
+        detail = '; '.join('%+d: %s' % (v, ', '.join(ns)) for v, ns in sorted(ties.items(), reverse=True))
+        out.append(['NEAR-TIES: %d candidates share a score (%s).' % (tied, detail),
+                    'With equal scores the order falls to the symbol-id tiebreak, so no source change',
+                    'states a preference here. Expect small edits to flip the result arbitrarily, and',
+                    'do not spend hill-climbing effort on this function.'])
+
+    # a strongly disfavoured candidate is a local the original may not carry at all
+    spread = (max(named.values()) - min(named.values())) if named else 0
+    for n, v in sorted(named.items(), key=lambda kv: kv[1])[:3]:
+        if v < -100 and spread > 150:
+            msg = ['DISFAVOURED: %s scores %+d against a spread of %d.' % (n, v, spread),
+                   'A candidate this far down is one the original may not carry separately.',
+                   'Try removing it, or letting a value that already exists carry it.']
+            if n in ('i', 'j', 'k', 'index', 'idx', 'counter'):
+                msg.append('It is a loop counter: the original often reuses something it already has -')
+                msg.append('a dead parameter, or counting an existing local down - costing no candidate.')
+            out.append(msg)
+
+    # sign flips mean the colourer's later rounds decide, not one ordering
+    flips = sorted(n for n, v in allscores.items() if n != '(temp)' and min(v) < 0 < max(v))
+    if len(flips) >= 3:
+        out.append(['ITERATION-DEPENDENT: %s start negative and only turn positive later.' % ', '.join(flips[:6]),
+                    'The layout is settled by the spill rounds rather than by one ordering, so a single',
+                    'declaration permutation will not move it.'])
+
+    if not out:
+        out.append(['No pattern stands out: the scores are spread and untied, so the ordering does follow',
+                    'from how the values are used. Changing how often or where a value is read should move it.'])
+    for i, msg in enumerate(out, 1):
+        print('%d. %s' % (i, msg[0]))
+        for extra in msg[1:]:
+            print('   ' + extra)
+    print('')
+    print('Every suggestion above is a hypothesis about codegen, not a verified fix.')
+    print('Measure each one with reccmp_report.py --run before keeping it.')
+
+
+def push_orders(funcname):
+    """(original, ours) callee-saved save order for one function, from the last reccmp run.
+
+    Registers are consumed in the order they are first needed, and MSVC saves a callee-saved
+    register where it first needs it, so the push order is the consumption order.
+    """
+    import common as _c
+    try:
+        byaddr = _c.load_diff()
+    except Exception:
+        return None, None, None
+    push = re.compile(r'^push (ebx|esi|edi|ebp)$')
+    for _f, e, _a in _c.entries(byaddr):
+        if e is None or not e.get('diff') or not e['name'].endswith('::' + funcname):
+            continue
+        orig, ours = _c._asm_lines(e)
+        seqs = []
+        for stream in (orig, ours):
+            seq = []
+            for line in stream:
+                m = push.match(line.strip())
+                if m and m.group(1) not in seq:
+                    seq.append(m.group(1))
+            seqs.append(seq)
+        return seqs[0], seqs[1], float(e['matching']) * 100
+    return None, None, None
+
+
+def rank_diff(funcname, rows):
+    """Pair our benefit ranking with each side's register consumption order."""
+    best = {}
+    for benefit, name in rows:
+        if name != '(temp)':
+            best[name] = max(best.get(name, benefit), benefit)
+    ranked = sorted(best.items(), key=lambda kv: -kv[1])
+    orig, ours, pct = push_orders(funcname)
+    print('')
+    print('our benefit ranking (candidates, highest first):')
+    for i, (n, b) in enumerate(ranked[:12], 1):
+        print('  %2d %-28s %d' % (i, n, b))
+    if orig is None:
+        print('')
+        print('No reccmp entry for %s, so the original ordering is unknown.' % funcname)
+        print('Run reccmp_report.py --run first.')
+        return
+    print('')
+    print('callee-saved consumption order (= push order):')
+    print('  original: %s' % ' '.join(orig))
+    print('  ours:     %s' % ' '.join(ours))
+    if orig == ours:
+        print('')
+        print('The two orders agree, so our candidates are served in the original\'s order.')
+        print('Whatever is left in this function is not a candidate-ranking difference.')
+        return
+    if len(orig) == len(ours) and orig == list(reversed(ours)) and len(orig) > 2:
+        print('')
+        print('The two orders are exact reverses of each other. That is a systematic difference -')
+        print('every position is wrong in the same way - which points at the register pick rather')
+        print('than at the candidate ranking: ChoosePhysReg narrows the available mask before it')
+        print('takes the lowest bit, and that narrowing is not decoded. A per-candidate ranking')
+        print('difference shows up as one candidate out of place, not as a reversal.')
+        print('Changing use counts will not fix this; do not read the pairing below as advice.')
+    if set(orig) == set(ours) and orig != ours:
+        print('')
+        print('Both sides use the same registers, just in a different order, so neither side')
+        print('carries a value the other does not - the candidate *set* matches. A permutation')
+        print('like this has two possible causes and they cannot be told apart from here: our')
+        print('candidates are ranked differently, or they are ranked the same and ChoosePhysReg')
+        print('narrowed the available mask differently (that narrowing is not decoded). The')
+        print('pairing below assumes the first. Treat it as a hypothesis to test, not a finding.')
+    print('')
+    print('Pairing position k of the ranking with position k of the save order - candidates are')
+    print('served in benefit order, so the k-th register saved goes to the k-th ranked candidate:')
+    print('')
+    print('  %-4s %-28s %-9s %-9s' % ('pos', 'our candidate', 'ours', 'original'))
+    for i in range(max(len(orig), len(ours))):
+        nm = ranked[i][0] if i < len(ranked) else '-'
+        o = ours[i] if i < len(ours) else '-'
+        g = orig[i] if i < len(orig) else '-'
+        flag = '' if o == g else '   <- differs'
+        print('  %-4d %-28s %-9s %-9s%s' % (i + 1, nm, o, g, flag))
+    first = next((i for i in range(min(len(orig), len(ours))) if orig[i] != ours[i]), None)
+    if first is None:
+        return
+    print('')
+    print('First divergence at position %d: we save %s there, the original saves %s.'
+          % (first + 1, ours[first], orig[first]))
+    where = next((j for j, r in enumerate(ours) if r == orig[first]), None)
+    if where is not None and where > first:
+        print('We save %s at position %d instead, so the candidate we rank %d - %s - is served'
+              % (orig[first], where + 1, where + 1, ranked[where][0] if where < len(ranked) else '?'))
+        print('later than the original serves it. To match, it has to outrank the %d candidate(s)'
+              % (where - first))
+        print('above it: %s.' % ', '.join(n for n, _b in ranked[first:where]))
+        print('')
+        print('That means raising its weighted use count above %d, or lowering theirs - a change to'
+              % (ranked[first][1] if first < len(ranked) else 0))
+        print('how often and at what loop depth those values are used. No reordering or renaming')
+        print('will do it, and whether it is reachable without changing behaviour is a judgement')
+        print('call about the function, not something this tool can decide.')
+    else:
+        print('The original uses a register we do not use at all here, so the two sides do not')
+        print('have the same candidate set - look for a value one side carries and the other does not.')
+
+
+def why_cost(invocation):
+    """Attribute every term of the cost array to the candidate that charged it.
+
+    Each pick scans the interfering candidates. A neighbour's preference pair adds its
+    count to that register; a neighbour left with a single legal register adds its
+    benefit*100, which is what produces the large numbers; this candidate's own affinities
+    subtract. Breaking on the three accumulation sites and reading the neighbour's name
+    turns "ebx costs 1100" into "ebx is pinned by <name>".
+    """
+    q = BS + '"'
+    name_of = lambda reg: ('.if (poi(poi(@' + reg + ')) != 0) { da poi(poi(poi(@' + reg + '))+4)+1 L28 } '
+                           '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + COST_PIN + ' ".printf ' + q + 'PIN reg=%d delta=%d by=' + q +
+             ', @esi, @ecx; ' + name_of('ebx') + '; gc"',
+             'bp2 ' + COST_PREF + ' ".printf ' + q + 'PREF reg=%d delta=%d by=' + q +
+             ', @eax, @ecx; ' + name_of('ebx') + '; gc"',
+             'bp3 ' + COST_OWN + ' ".printf ' + q + 'OWN reg=%d delta=-%d' + BS + BS + 'n' + q +
+             ', @ecx, @edx; gc"',
+             'bp4 ' + ASSIGN_REG + ' ".printf ' + q + 'PICK reg=%d ' + q + ', @ebx; ' +
+             name_of('eax') + '; gc"',
+             'bd 1-4',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
+             ') { be 1-4 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1-4 }; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'whycost' + str(invocation))
+    ev = re.findall(
+        r'(PIN|PREF) reg=(\d+) delta=(-?\d+) by=(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")'
+        r'|OWN reg=(\d+) delta=(-\d+)'
+        r'|PICK reg=(-?\d+) (?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt)
+    picks, pending = [], []
+    for kind, reg, delta, by, oreg, odelta, preg, pname in ev:
+        if kind:
+            pending.append((kind, int(reg), int(delta), by or '(temp)'))
+        elif oreg:
+            pending.append(('OWN', int(oreg), int(odelta), 'itself'))
+        else:
+            picks.append((pname or '(temp)', int(preg), pending))
+            pending = []
+    if not picks:
+        print('no picks seen in invocation %d' % invocation)
+        return
+    print('')
+    for name, reg, terms in picks:
+        got = REGNAMES.get(reg, reg)
+        charged = {}
+        for kind, r, delta, by in terms:
+            charged.setdefault(r, []).append((kind, delta, by))
+        print('%s -> %s' % (name, got))
+        for r in sorted(charged, key=lambda k: -sum(abs(d) for _k, d, _b in charged[k])):
+            total = sum(d for _k, d, _b in charged[r])
+            who = '; '.join('%s %+d by %s' % (k, d, b) for k, d, b in charged[r][:3])
+            star = '  <- taken' if r == reg else ''
+            print('    %-5s total %+7d   %s%s' % (REGNAMES.get(r, r), total, who, star))
+        if not charged:
+            print('    (no cost charged: every register was free, so the class list decided)')
+        print('')
+    print('A PIN term is a neighbour with one legal register left charging benefit*100 for it.')
+    print('That names a value to look at: if our source carries it and the original does not,')
+    print('the register it pins is free in the original. OWN terms are this candidate\'s own')
+    print('affinities. An empty table means nothing was charged and the pick was class order.')
+
+
+def why_register(invocation):
+    """For each pick in one invocation: the candidate, the register taken, and the cost array.
+
+    ChoosePhysReg (P2/color.c) zeroes a per-register cost array, adds each interfering
+    candidate's preference counts, adds benefit*100 for any neighbour left with a single
+    legal register, subtracts this candidate's own preference counts, and then takes the
+    cheapest register from its class list. The cost array is therefore the whole
+    explanation of one pick, and the counterfactual is arithmetic.
+    """
+    q = BS + '"'
+    costs = ', '.join('poi(' + COST_ARRAY + '+' + hex(4 * n) + ')' for n in range(1, 9))
+    cmd = ('.printf ' + q + 'PICK reg=%d costs=%d,%d,%d,%d,%d,%d,%d,%d ' + q + ', @ebx, ' + costs + '; '
+           '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
+           '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + ASSIGN_REG + ' "' + cmd + '"',
+             'bd 1',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(invocation) +
+             ') { be 1 }; .if (@$t0==0n' + str(invocation + 1) + ') { bd 1 }; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'why' + str(invocation))
+    rows = []
+    for m in re.finditer(r'PICK reg=(-?\d+) costs=([\d,-]+) (?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
+        rows.append((int(m.group(1)), [int(x) for x in m.group(2).split(',')], m.group(3) or '(temp)'))
+    if not rows:
+        print('no register assignment seen in invocation %d' % invocation)
+        return
+    print('')
+    print('%-22s %-5s %s' % ('candidate', 'got', 'cost per register (lowest wins)'))
+    print('%-22s %-5s %s' % ('', '', ' '.join('%-7s' % REGNAMES[n] for n in range(1, 9))))
+    for reg, cost, name in rows:
+        cells = []
+        for n in range(1, 9):
+            c = str(cost[n - 1])
+            cells.append('%-7s' % (c if n != reg else '[' + c + ']'))
+        print('%-22s %-5s %s' % (name, REGNAMES.get(reg, reg), ' '.join(cells)))
+    print('')
+    print('The bracketed cost is the register that was taken. To move a candidate elsewhere,')
+    print('that register needs a cost below the bracketed one. Cost is built from interference')
+    print('- a neighbour left with one legal register charges benefit*100 for it - minus this')
+    print('candidate\'s own affinities. Affinities come from copies between the value and a')
+    print('fixed register: a parameter arriving, an argument passed in a particular slot, a')
+    print('return value in eax. So the lever is where the value crosses a call boundary, not')
+    print('how the source is spelled. Ties go to the earlier class-list entry: ' +
+          ', '.join(REGNAMES[n] for n in CLASS0) + '.')
+
+
+if find or advise or rankdiff or whyreg or whycost:
+    # every named candidate with its invocation index: identification by name, which works
+    # for functions smaller than the resolver-template flood that --probe ranks by size
+    q = BS + '"'
+    cand = ('.if (poi(poi(@eax)) != 0) { .printf ' + q + 'N %d %d %d ' + q +
+            ', @$t0, poi(@eax+0x40), poi(@eax+0xc); da poi(poi(poi(@eax))+4)+1 L28 }; gc')
+    lines = ['sxe ld:c2', 'g', 'r $t0=0',
+             'bp1 ' + INSERT_IN_LIST + ' "' + cand + '"',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'find')
+    rows = {}
+    for m in re.finditer(r'N (\d+) (-?\d+) (-?\d+) [0-9a-f]{8}\s+"([^"]*)"', txt):
+        # group(2) is +0x40 and group(3) is +0x0c. The ORDERING key is +0x0c - see the note
+        # in the header - so that is what goes in the ranking.
+        rows.setdefault(int(m.group(1)), []).append((int(m.group(3)), m.group(4)))
+    want = [a for a in sys.argv[1:] if not a.startswith('--') and not a.endswith('.cpp')]
+    hits = [i for i in sorted(rows)
+            if not want or any(w in [n for _s, n in rows[i]] for w in want)]
+    if whycost:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        print('### invocation #%d, cost attribution' % pick)
+        why_cost(pick)
+        sys.exit(0)
+    if whyreg:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        print('### invocation #%d, register picks' % pick)
+        why_register(pick)
+        sys.exit(0)
+    if rankdiff:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        fname = os.path.basename(src)[:-4]
+        print('### invocation #%d of %s, %d candidates' % (pick, fname, len(rows[pick])))
+        rank_diff(fname, rows[pick])
+        sys.exit(0)
+    if advise:
+        if not hits:
+            sys.exit('no invocation holds a candidate named %s - try another local' % ', '.join(want))
+        if len(hits) > 1:
+            print('note: %d invocations match; advising on the largest' % len(hits))
+        pick = max(hits, key=lambda i: len(rows[i]))
+        print('### invocation #%d, %d candidates' % (pick, len(rows[pick])))
+        advise_on(rows[pick])
+        sys.exit(0)
+    print('invocations holding a named candidate: %d' % len(rows))
+    for i in hits:
+        print('  #%-5d %s' % (i, ', '.join('%s(%+d)' % (n, s) for s, n in rows[i])))
+    sys.exit(0)
+
+if probe:
+    # count candidate inserts per invocation, print only the busy ones
+    lines = ['sxe ld:c2', 'g', 'r $t0=0', 'r $t1=0',
+             'bp0 ' + GLOBAL_REG_ALLOC + ' ".if (@$t1 > 0n15) { .printf ' + BS + '"RA %d %d' +
+             BS + BS + 'n' + BS + '", @$t0, @$t1 }; r $t1=0; r $t0=@$t0+1; gc"',
+             'bp1 ' + INSERT_IN_LIST + ' "r $t1=@$t1+1; gc"',
+             'g', 'q', '']
+    txt = run(lines, 'probe')
+    rows = [(int(b), int(a)) for a, b in re.findall(r'RA (\d+) (\d+)', txt)]
+    if not rows:
+        sys.exit('no invocation inserted more than 15 candidates - check the build and the file')
+    print('%-6s %s' % ('cands', 'invocation'))
+    for n, i in sorted(rows, reverse=True)[:15]:
+        print('%-6d #%d' % (n, i))
+    print('\nnow: reg_scores.py %s --invocation <N>' % args[0])
+    sys.exit(0)
+
+q = BS + '"'
+cand = ('.printf ' + q + 'CAND %4d %4d %02x ' + q + ', poi(@eax+0xc), poi(@eax+0x40), poi(@eax+0x44); '
+        '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
+        '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
+lines = ['sxe ld:c2', 'g', 'r $t0=0',
+         'bp1 ' + INSERT_IN_LIST + ' "' + cand + '"',
+         'bd 1',
+         'bp0 ' + GLOBAL_REG_ALLOC + ' "r $t0=@$t0+1; .if (@$t0==0n' + str(int(inv)) +
+         ') { be 1 }; .if (@$t0==0n' + str(int(inv) + 1) + ') { bd 1 }; gc"',
+         'g', 'q', '']
+txt = run(lines, 'inv' + str(int(inv)))
+rows = []
+for m in re.finditer(r'CAND\s+(-?\d+)\s+(-?\d+)\s+([0-9a-f]+)\s*(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
+    rows.append((int(m.group(1)), int(m.group(2)), m.group(3), m.group(4) or '(temp)'))
+if not rows:
+    sys.exit('no candidates seen for invocation %s - run --probe to pick one' % inv)
+print('%-8s %-8s %-5s %s' % ('key+0xc', 'wt+0x40', 'id', 'name'))
+for key, wt, sid, name in rows:
+    print('%-8d %-8d %-5s %s' % (key, wt, sid, name))
+print('')
+print('Candidates are served in `key+0xc` order, highest first, and each takes the cheapest')
+print('register still free, so this column decides who gets ebx and who gets ebp. A low or')
+print('negative key is a value headed for the stack - compare with slot_map.py.')
+print('\n%d candidates; higher score is served first and gets its pick of the registers.' % len(rows))

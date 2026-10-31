@@ -111,11 +111,33 @@ matched instruction for instruction except that the parameter was loaded into `e
 for the parameter load and took it from 95.7% to 100%. Uninitialised declarations do not have this effect - a
 sweep of `quick_reorder.py -s` over the declaration block of 27 functions found no win at all.
 
-Stack *slot* assignment for spilled locals is a different matter and is not reachable from the source. Where the
-original lays its locals out in Ghidra order (`local_1c` at the lowest `esp` offset through `local_4` at the
-highest) and our build permutes them, neither declaration order, initialisation order, nor renaming changes
-anything; this was tried on `setupSkirmishLobby`, `initMultiplayerLobbyState`, `initializeFinalResultsForActivePlayers`
-and `createCompoundAddressBasedOnSelectedProvider`. Spend the effort elsewhere.
+Stack *slot* assignment for spilled locals is a different matter: it follows the **reference weight** of each
+local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
+slot - that was observed on `setupSkirmishLobby`, `initMultiplayerLobbyState`,
+`initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and the compiler
+itself says why: its stack colorer sorts the elements by weight per byte and hands out offsets in that order. The
+mechanism, the evidence and the debugger recipe are in
+[tools/compiler-internals/msvc-backend.md](tools/compiler-internals/msvc-backend.md); what matters here is how to
+read a diff:
+
+* A slot-order mismatch means our locals carry **different reference counts** from the original's, so look for a
+  read the original has and we do not. It is not a declaration-order problem, which is why every declaration-order
+  hypothesis for the `Map::Units::UnitsState` frame mismatches came back a tie.
+* Weight **ties** are left to the order the symbols arrive in, permuted by an unstable quicksort. That is the
+  whole reason `perm_decls.py` took `assignSelectionToKey` from 95.9% to 100% once and does nothing in most
+  functions: permuting declarations can only decide ties.
+* Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
+  is already dead (`writeMapOrSaveFile` puts eight locals on the first parameter's slot). A slot count is
+  therefore not a local count, and Ghidra's "repurposed parameter" rendering - `playerID = 0` used as a loop
+  counter in `aiRecruitUnits` - is this reuse, not something the original source wrote. Transcribing it back cost
+  7 points.
+* Renaming locals is inert; the comparator never looks at a name.
+
+`slot_weight.py` prints the slot table for one function with each local's weight beside it, read out of MSVC's own
+`/FA` symbol table rather than inferred from the diff.
+
+For **registers** there is no decoded rule yet. Treat a register-only mismatch as an interference difference - a
+different set of values was live at that point - which is a working hypothesis, not an established mechanism.
 
 ### Statement Order
 
