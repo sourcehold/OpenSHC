@@ -1,7 +1,6 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -30,22 +29,22 @@ namespace Game {
             return FALSE;
         }
         switch (DAT_TileMapState::instance.mapSize) {
-        case Map::MC_MAP_SIZE_160:
+        case 160: // map edge length in tiles
             if (zoneSize > 8000) {
                 return FALSE;
             }
             break;
-        case Map::MC_MAP_SIZE_200:
+        case 200: // map edge length in tiles
             if (zoneSize > 10000) {
                 return FALSE;
             }
             break;
-        case Map::MC_MAP_SIZE_300:
+        case 300: // map edge length in tiles
             if (zoneSize > 20000) {
                 return FALSE;
             }
             break;
-        case Map::MC_MAP_SIZE_400:
+        case 400: // map edge length in tiles
             if (zoneSize > 25000) {
                 return FALSE;
             }
