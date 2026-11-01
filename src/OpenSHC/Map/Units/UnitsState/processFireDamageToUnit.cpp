@@ -1,5 +1,6 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"

@@ -1,6 +1,7 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -80,7 +81,7 @@ namespace Map {
             }
             if ((_westTile != 0 || _eastTile != 0)
                 && ((DAT_TileMapState::instance
-                            .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_originY + -1].addXgetTile
+                            .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_originY - 1].addXgetTile
                                 + _originX]
                         & 0x100)
                         == 0

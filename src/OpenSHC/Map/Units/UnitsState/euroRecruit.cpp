@@ -1,7 +1,8 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
@@ -30,7 +31,7 @@ namespace Map {
         {
             /* archer is unittype 0x16 */
             this->euroUnitAcquisitionFailReason = 0;
-            int _unitCost = DAT_TroopDefinedData::instance.MarketResourceCycleArray[unitType + -1];
+            int _unitCost = DAT_TroopDefinedData::instance.MarketResourceCycleArray[unitType - 1];
             int _armourResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x49];
             /* fixme: always 0 strange */
             int _unknownResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4a];

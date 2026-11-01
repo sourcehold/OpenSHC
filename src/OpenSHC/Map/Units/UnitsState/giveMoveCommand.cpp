@@ -1,8 +1,9 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -65,8 +66,9 @@ namespace Map {
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::selectionHasMobileAssaultUnits, DAT_UnitsState::ptr)()
                 != 0) {
-                int _destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                                        [DAT_ViewportRenderState::instance.viewportState.cursorTile];
+                int _destinationY
+                    = DAT_ViewportRenderState::instance
+                          .tileTranslationMatrix_YComponent[DAT_ViewportRenderState::instance.viewportState.cursorTile];
                 int _destinationX = DAT_ViewportRenderState::instance.viewportState.cursorTile
                     - DAT_ViewportRenderState::instance.translationMatrix[_destinationY].addXgetTile;
                 if (_blockedAtDestination != 0

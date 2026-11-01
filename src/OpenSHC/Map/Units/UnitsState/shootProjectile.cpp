@@ -1,5 +1,6 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 

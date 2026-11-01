@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"

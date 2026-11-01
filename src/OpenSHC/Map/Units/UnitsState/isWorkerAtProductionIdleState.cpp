@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 namespace OpenSHC {

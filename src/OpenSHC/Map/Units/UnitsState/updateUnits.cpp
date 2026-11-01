@@ -1,8 +1,9 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -91,7 +92,7 @@ namespace Map {
 
                     _shortFieldPtr = &this->units[_currentUnitID].targetShootRelated;
                     if (this->units[_currentUnitID].targetShootRelated != 0) {
-                        *_shortFieldPtr = *_shortFieldPtr + -1;
+                        *_shortFieldPtr = *_shortFieldPtr - 1;
                     }
                     if ((this->units[_currentUnitID].state.generic
                             == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk)
@@ -111,7 +112,7 @@ namespace Map {
                     }
                     if (this->units[DAT_CurrentUnitSlotID::instance].blessedAmount != 0) {
                         this->units[DAT_CurrentUnitSlotID::instance].blessedAmount
-                            = this->units[DAT_CurrentUnitSlotID::instance].blessedAmount + -1;
+                            = this->units[DAT_CurrentUnitSlotID::instance].blessedAmount - 1;
                         DAT_GameState::instance.playerDataArray[_buildingID].blessedPeopleCountUnk
                             = DAT_GameState::instance.playerDataArray[_buildingID].blessedPeopleCountUnk + 1;
                     } else if (DAT_UnitPropertiesDefinedData::instance
@@ -222,7 +223,7 @@ namespace Map {
                         }
                         _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0;
                         if (0 < this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0) {
-                            *_shortFieldPtr = *_shortFieldPtr + -1;
+                            *_shortFieldPtr = *_shortFieldPtr - 1;
                         }
                     }
                     DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1;
@@ -673,7 +674,7 @@ namespace Map {
                                 if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime <= 0) {
                                     *_shortFieldPtr = 0;
                                 } else {
-                                    *_shortFieldPtr = *_shortFieldPtr + -1;
+                                    *_shortFieldPtr = *_shortFieldPtr - 1;
                                 }
                                 _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove,
                                     this)(DAT_CurrentUnitSlotID::instance,
@@ -894,7 +895,7 @@ namespace Map {
                         }
                         _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {
-                            *_shortFieldPtr = *_shortFieldPtr + -1;
+                            *_shortFieldPtr = *_shortFieldPtr - 1;
                         }
                         byte _fadeAlpha = this->units[DAT_CurrentUnitSlotID::instance].fadeType;
                         if (_fadeAlpha != 0) {
