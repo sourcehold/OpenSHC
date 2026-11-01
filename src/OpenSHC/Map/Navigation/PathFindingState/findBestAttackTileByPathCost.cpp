@@ -18,9 +18,6 @@ namespace Map {
         using OpenSHC::Map::Entities::EntityType;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           BFS from (param_1, param_2), scores reachable tiles against a hack values array (indexed by   param_3) and a
           target zone value (param_4). Returns the tile index with the lowest combined path   cost and terrain cost
           weighting. Used to select the optimal attack position for a unit   approaching a target zone.      renamed by:

@@ -20,12 +20,6 @@ namespace Map {
         using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::Map::Trees::TreeTypeShort;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020
         undefined4 PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y)
         {

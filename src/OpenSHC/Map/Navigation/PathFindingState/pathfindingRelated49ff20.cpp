@@ -17,12 +17,6 @@ namespace Map {
 
         using OpenSHC::Map::Entities::EntityType;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049FF20
         dword PathFindingState::pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5)
         {

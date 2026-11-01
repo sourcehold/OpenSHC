@@ -11,12 +11,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497B80
         undefined4 PathFindingState::findSuitableSpawnLocationUnk(
             int x, int y, int x2, int y2, int param_5, int param_6)

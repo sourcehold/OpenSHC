@@ -15,54 +15,6 @@ namespace Map {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Removing unreachable block (ram,0x00498700)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498713)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x0049871e)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x0049872d)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498739)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498745)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498749)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498907)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x0049891a)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498925)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498934)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498940)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x0049894c)
-         */
-        /*
-          WARNING: Removing unreachable block (ram,0x00498950)
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00498400
         BOOLEnum PathFindingState::pathFindingWithBuildingsIncluded(
             uint x, uint y, uint x2, uint y2, int maxOptionsToTry, int zeroMeansResetAlgorithm)

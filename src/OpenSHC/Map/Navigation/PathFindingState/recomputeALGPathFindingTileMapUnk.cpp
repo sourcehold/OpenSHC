@@ -11,12 +11,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E510
         void PathFindingState::recomputeALGPathFindingTileMapUnk(int someMax, uint x, uint y, undefined4 param_4)
         {

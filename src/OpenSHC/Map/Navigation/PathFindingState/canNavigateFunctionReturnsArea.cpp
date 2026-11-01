@@ -13,9 +13,6 @@ namespace Map {
     namespace Navigation {
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           returns area (a value >= 1) if the unit can get there, if not, 0   decompilerscript: committed: 2025-01-30
           21:57:43.216000
          */

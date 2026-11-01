@@ -22,12 +22,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049DB30
         BOOLEnum PathFindingState::checkEnemyBuildingOrDefensiveStructureWithin12Tiles(int playerID, uint x, uint y)
         {

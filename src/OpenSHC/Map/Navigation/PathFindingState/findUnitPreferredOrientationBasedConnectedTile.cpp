@@ -16,12 +16,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A8780
         int PathFindingState::findUnitPreferredOrientationBasedConnectedTile(int unitID, int tile)
         {

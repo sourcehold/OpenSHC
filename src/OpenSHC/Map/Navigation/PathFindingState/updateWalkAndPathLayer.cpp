@@ -13,12 +13,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049AAD0
         void PathFindingState::updateWalkAndPathLayer(int param_1, uint xPosition, uint yPosition)
         {
@@ -81,7 +75,7 @@ namespace Map {
                 piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[iVar8] + 1;
                 psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                 do {
-                    iVar8 = (*(int (*)[8])(piVar7 + -1))[0] + uVar3;
+                    iVar8 = (*(int (*)[8])(piVar7 - 1))[0] + uVar3;
                     if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                         DAT_TileMapState::instance.CertainPathLayer[iVar8]

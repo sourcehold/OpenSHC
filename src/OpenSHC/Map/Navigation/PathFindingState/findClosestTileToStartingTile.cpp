@@ -8,12 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00496EC0
         int PathFindingState::findClosestTileToStartingTile(int param_1)
         {
@@ -23,8 +17,7 @@ namespace Map {
             int _closest;
             int _tile;
             int _startWalk = (short)DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
-            int _startDistance
-                = (short)DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]];
+            int _startDistance = (short)DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]];
             _closest = 4000;
             _match = 0;
             _pResultTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;

@@ -17,9 +17,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8IntXY;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Checks all cardinal neighbours of target tile (param_4, param_5) for tiles that are   height-compatible
           (within param_5 height margin) and navigable from (param_2, param_3) via
           calculateCanPlayerUnitsNavigateToAreaFromArea. Uses calcApproxEuclideanDistance to pick the   closest valid
@@ -82,10 +79,10 @@ namespace Map {
                             && (MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                                     DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
-                                    (int)(((Point8IntXY*)(piVar7 + -1))->xOffset + param_4), (int)(*piVar7 + param_5)),
+                                    (int)(((Point8IntXY*)(piVar7 - 1))->xOffset + param_4), (int)(*piVar7 + param_5)),
                                 DAT_DirectionAlgorithmState::instance.distanceHigh < local_10)) {
                             local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                            this->climbX = ((Point8IntXY*)(piVar7 + -1))->xOffset + param_4;
+                            this->climbX = ((Point8IntXY*)(piVar7 - 1))->xOffset + param_4;
                             this->climbY = *piVar7 + param_5;
                             local_8 = 1;
                         }

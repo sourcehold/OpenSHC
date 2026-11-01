@@ -20,9 +20,6 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           BFS from (param_2, param_3) up to distance param_4, checking each visited tile's BuildingLayer.   Returns the
           building ID of the first reachable enemy building (different team to param_1) that is   alive (logicalState !=
           0 and != 3), not on fire, and has a valid fire-related building parameter.   Returns 0 if none found. renamed

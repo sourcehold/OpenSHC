@@ -20,12 +20,6 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A1D30
         undefined4 PathFindingState::findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4)
         {

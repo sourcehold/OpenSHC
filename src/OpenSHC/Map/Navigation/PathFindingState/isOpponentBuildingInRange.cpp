@@ -17,12 +17,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9200
         undefined4 PathFindingState::isOpponentBuildingInRange(
             int playerID, int x, int y, int range, int param_5, int param_6, int keepRange)

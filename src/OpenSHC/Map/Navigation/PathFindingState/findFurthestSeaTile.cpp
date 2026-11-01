@@ -13,12 +13,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BBF0
         void PathFindingState::findFurthestSeaTile(int budget, uint x, uint y)
         {
@@ -98,8 +92,8 @@ namespace Map {
                 }
             }
             this->ALG_ResultX = (int)this->searchQueue.yQueue[this->searchQueue.readIndex + 0x13a0f];
-            this->ALG_ResultY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex + -1];
-            this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex + -1];
+            this->ALG_ResultY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex - 1];
+            this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex - 1];
             return;
         }
 

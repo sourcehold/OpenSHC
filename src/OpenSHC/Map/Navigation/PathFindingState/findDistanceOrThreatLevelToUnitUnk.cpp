@@ -16,12 +16,6 @@ namespace Map {
 
         using OpenSHC::Map::Units::UnitLogicState;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A0B20
         int PathFindingState::findDistanceOrThreatLevelToUnitUnk(int param_1, int param_2, int param_3, int param_4)
         {

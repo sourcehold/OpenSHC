@@ -16,12 +16,6 @@ namespace Map {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A3220
         BOOLEnum PathFindingState::findAccessibleWallAndNearbyFreeTile(
             uint unitID, int tile, int* pFreeTile, int* pDefensesTile)
@@ -169,7 +163,7 @@ namespace Map {
                             }
                         }
                         uVar2 = uVar2 + 4;
-                        local_8 = local_8 + -1;
+                        local_8 = local_8 - 1;
                     } while (local_8 != 0);
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a10 <= (int)this->searchQueue.readIndex) {

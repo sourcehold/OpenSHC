@@ -4,8 +4,8 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -15,12 +15,6 @@ namespace Map {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9B20
         dword PathFindingState::doPathfinding(int param_1, int param_2)
         {
@@ -36,7 +30,8 @@ namespace Map {
                     return (dword)(0);
                 }
                 dword dVar2 = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Navigation::PathFindingState_Func::findConnectingAreaBetweenTwoAreas, DAT_PathFindingState::ptr)(param_1,
+                    OpenSHC::Map::Navigation::PathFindingState_Func::findConnectingAreaBetweenTwoAreas,
+                    DAT_PathFindingState::ptr)(param_1,
                     (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer
                             [DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile
                                 + this->unitX])),

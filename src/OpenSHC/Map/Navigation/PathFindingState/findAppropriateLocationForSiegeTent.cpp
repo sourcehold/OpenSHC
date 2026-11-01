@@ -14,9 +14,6 @@ namespace Map {
     namespace Navigation {
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
          * Finds an appropriate location for placing a siege tent near a target position.    * Uses breadth-first search
          * (BFS) to explore tiles radiating outward from the starting position.    *     * @param this -
          * PathFindingState object pointer    * @param distance? - Maximum search distance (typically 100 or 200 tiles)

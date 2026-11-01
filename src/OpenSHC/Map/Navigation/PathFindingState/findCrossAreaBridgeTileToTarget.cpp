@@ -17,9 +17,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8IntXY;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           BFS from unit param_1's current tile, expanding within its own PathConnectionLayer area or   through
           walls/structures. When a tile in a different area is encountered, checks whether that   area connects to the
           target area (param_2, param_3) via   calculateCanPlayerUnitsNavigateToAreaFromArea. Selects the neighbour tile

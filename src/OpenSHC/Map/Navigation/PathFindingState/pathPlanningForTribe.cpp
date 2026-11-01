@@ -22,15 +22,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Type propagation algorithm not settling
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A79A0
         void PathFindingState::pathPlanningForTribe(
             uint tribeID, undefined4 targetUnitID, uint x, uint y, int unitCount, dword area, int playerID)
@@ -196,7 +187,7 @@ namespace Map {
                     }
                     if (iVar12 == 1 && (abs(tribeID - uVar11) < 0x20)) {
                         _destIndex = _destIndex + 1;
-                        ((PathHelper12*)(_pDest2 + -1))->tile1
+                        ((PathHelper12*)(_pDest2 - 1))->tile1
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         *_pDest2 = 1;
                         _pDest2 = _pDest2 + 3;
@@ -221,7 +212,7 @@ namespace Map {
                         iVar4 = iVar12;
                     }
                     if (2 < iVar4) {
-                        ((PathHelper12*)(_pDest3 + -1))->tile1
+                        ((PathHelper12*)(_pDest3 - 1))->tile1
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         _destIndex = _destIndex + 1;
                         *_pDest3 = 0;

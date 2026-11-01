@@ -7,12 +7,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00499DC0
         void PathFindingState::updatePathLinkageLayerAtTileForSomeLogicalReason(int tile, int y)
         {
@@ -26,10 +20,11 @@ namespace Map {
             _ptrY = DAT_TileMapState::instance.directionTranslationMatrix[y] + 1;
             tile = 2;
             do {
-                iVar3 = (*(int (*)[8])(_ptrY + -1))[0] + iVar2;
+                iVar3 = (*(int (*)[8])(_ptrY - 1))[0] + iVar2;
                 if ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x30U) == 0
                     && (DAT_TileMapState::instance.LogicLayer[iVar3] & 0x4a5014b1U) == 0) {
-                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 4]) == 0) {
+                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 4])
+                        == 0) {
                         uVar4 = uVar5 % 8;
                         DAT_TileMapState::instance.PathLinkageLayer[iVar3]
                             = DAT_TileMapState::instance.PathLinkageLayer[iVar3]
@@ -44,7 +39,8 @@ namespace Map {
                 iVar3 = *_ptrY + iVar2;
                 if ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x30U) == 0
                     && (DAT_TileMapState::instance.LogicLayer[iVar3] & 0x4a5014b1U) == 0) {
-                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 3]) == 0) {
+                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 3])
+                        == 0) {
                         uVar4 = (uVar5 + 1) % 8;
                         DAT_TileMapState::instance.PathLinkageLayer[iVar3]
                             = DAT_TileMapState::instance.PathLinkageLayer[iVar3]
@@ -59,7 +55,8 @@ namespace Map {
                 iVar3 = _ptrY[1] + iVar2;
                 if ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x30U) == 0
                     && (DAT_TileMapState::instance.LogicLayer[iVar3] & 0x4a5014b1U) == 0) {
-                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 2]) == 0) {
+                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 2])
+                        == 0) {
                         uVar4 = (uVar5 + 2) % 8;
                         DAT_TileMapState::instance.PathLinkageLayer[iVar3]
                             = DAT_TileMapState::instance.PathLinkageLayer[iVar3]
@@ -74,7 +71,8 @@ namespace Map {
                 iVar3 = _ptrY[2] + iVar2;
                 if ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x30U) == 0
                     && (DAT_TileMapState::instance.LogicLayer[iVar3] & 0x4a5014b1U) == 0) {
-                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 1]) == 0) {
+                    if ((bVar1 & (char)DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[uVar5 - 1])
+                        == 0) {
                         uVar4 = (uVar5 + 3) % 8;
                         DAT_TileMapState::instance.PathLinkageLayer[iVar3]
                             = DAT_TileMapState::instance.PathLinkageLayer[iVar3]
@@ -87,7 +85,7 @@ namespace Map {
                     }
                 }
                 _ptrY = _ptrY + 4;
-                tile = tile + -1;
+                tile = tile - 1;
                 uVar5 = uVar5 + 4;
             } while (tile != 0);
             return;

@@ -12,12 +12,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00498FD0
         uint PathFindingState::commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3)
         {
@@ -82,7 +76,7 @@ namespace Map {
                     _direction = 8;
                     _ptrTranslationMatrix = DAT_TileMapState::instance.directionTranslationMatrix[_y] + 1;
                     do {
-                        _candidateTile = (*(int (*)[8])(_ptrTranslationMatrix + -1))[0] + _tile;
+                        _candidateTile = (*(int (*)[8])(_ptrTranslationMatrix - 1))[0] + _tile;
                         if ((short)DAT_TileMapState::instance.WalkLayer[_candidateTile] == _walkLayer) {
                             _cp = (short)DAT_TileMapState::instance.CertainPathLayer[_candidateTile];
                             if (_inBounds == 0) {
@@ -130,12 +124,12 @@ namespace Map {
                                     uVar2
                                         = ((DAT_TileMapState::instance.RandomLayer[_candidateTile] ^ _rng) & 7) + uVar3;
                                     uVar5 = uVar2;
-                                    if (iVar4 + -1 == iVar6) {
+                                    if (iVar4 - 1 == iVar6) {
                                         uVar5 = uVar2 + 1;
                                     }
                                     if ((int)param_1 < (int)uVar5) {
                                         param_1 = uVar2;
-                                        _direction = iVar4 + -1;
+                                        _direction = iVar4 - 1;
                                         local_24 = uVar3;
                                     }
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;
@@ -147,12 +141,12 @@ namespace Map {
                                     uVar2
                                         = uVar3 - ((DAT_TileMapState::instance.RandomLayer[_candidateTile] ^ _rng) & 7);
                                     uVar5 = uVar2;
-                                    if (iVar4 + -1 == iVar6) {
+                                    if (iVar4 - 1 == iVar6) {
                                         uVar5 = uVar2 - 1;
                                     }
                                     if ((int)uVar5 < (int)param_1) {
                                         param_1 = uVar2;
-                                        _direction = iVar4 + -1;
+                                        _direction = iVar4 - 1;
                                         local_24 = uVar3;
                                     }
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;

@@ -5,8 +5,8 @@
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
-#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -15,9 +15,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
         /*
          * Updates the WalkLayer and AI Path Cost Layer using breadth-first search (BFS).    * This creates a distance
          * map showing how far each tile is from AI zones.    * The distance values are stored in the same layer that

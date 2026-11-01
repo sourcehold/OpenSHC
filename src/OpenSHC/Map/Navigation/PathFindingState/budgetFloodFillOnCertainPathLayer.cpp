@@ -11,15 +11,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8IntXY;
 
-        /*
-          WARNING: Function: __alloca_probe replaced with injection: alloca_probe
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049DDC0
         void PathFindingState::budgetFloodFillOnCertainPathLayer(uint x, uint y, int marker, int budget)
         {
@@ -57,7 +48,7 @@ namespace Map {
                     uint _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
-                            budget = budget + -1;
+                            budget = budget - 1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[_candidate]) {
                             iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                         .int_.xOffset;
@@ -74,12 +65,12 @@ namespace Map {
                             }
                         }
                     } else {
-                        budget = budget + -1;
+                        budget = budget - 1;
                     }
                     _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 1] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
-                            budget = budget + -1;
+                            budget = budget - 1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[_candidate]) {
                             iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
                                         .int_.xOffset;
@@ -96,12 +87,12 @@ namespace Map {
                             }
                         }
                     } else {
-                        budget = budget + -1;
+                        budget = budget - 1;
                     }
                     _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 2] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
-                            budget = budget + -1;
+                            budget = budget - 1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[_candidate]) {
                             iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
                                         .int_.xOffset;
@@ -118,12 +109,12 @@ namespace Map {
                             }
                         }
                     } else {
-                        budget = budget + -1;
+                        budget = budget - 1;
                     }
                     _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 3] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
-                            budget = budget + -1;
+                            budget = budget - 1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[_candidate]) {
                             iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
                                         .int_.xOffset;
@@ -140,7 +131,7 @@ namespace Map {
                             }
                         }
                     } else {
-                        budget = budget + -1;
+                        budget = budget - 1;
                     }
                 }
 

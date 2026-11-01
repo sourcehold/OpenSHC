@@ -19,9 +19,6 @@ namespace Map {
         using OpenSHC::Map::Units::UnitLogicStateShort;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Structurally identical to findNearestEnemyBuildingWithinDistance but checks UnitLayer instead of
           BuildingLayer. BFS from (param_2, param_3) up to distance param_4, returns the unit ID of the   first
           reachable live enemy unit (different team to param_1) that is not invisible, not flagged   for removal, and

@@ -22,12 +22,6 @@ namespace Map {
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A75B0
         void PathFindingState::pathfindingForAttacksUnk(
             int tribeID, int buildingID, int param_3, dword param_4, int param_5)
@@ -93,7 +87,7 @@ namespace Map {
                         && (uVar5 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
                                 - (uint)DAT_TileMapState::instance.HeightLayer[iVar13],
                             uVar9 = (int)uVar5 >> 0x1f, (int)((uVar5 ^ uVar9) - uVar9) < 0x10)) {
-                        ((PathHelper12*)(local_24 + -1))->tile1 = iVar13;
+                        ((PathHelper12*)(local_24 - 1))->tile1 = iVar13;
                         *local_24 = 0;
                         pXVar8 = DAT_ClimbLogicDefinedData::instance.CardinalHorizontalFirstSearchOrder;
                         do {
@@ -169,7 +163,7 @@ namespace Map {
                                             - (uint)DAT_TileMapState::instance.HeightLayer[tile2],
                                         uVar5 = (int)uVar7 >> 0x1f, (int)((uVar7 ^ uVar5) - uVar5) < local_20)) {
                                     local_28 = local_28 + 1;
-                                    ((PathHelper12*)(piVar11 + -1))->tile1 = tile2;
+                                    ((PathHelper12*)(piVar11 - 1))->tile1 = tile2;
                                     *piVar11 = 0;
                                     piVar11 = piVar11 + 3;
                                     if (local_28 >= param_3) {

@@ -8,12 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00499FA0
         void PathFindingState::updatePathLinkageTileMapRelatedToGates(int buildingID)
         {
@@ -30,7 +24,7 @@ namespace Map {
                 _pl2 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
                 int _blocked = _pl2 == 2;
                 _anotherTile = _widthOrHeight + _middleTileUnk;
-                iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + _middleTileUnk + -1;
+                iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + _middleTileUnk - 1;
                 uint _height = (uint)DAT_TileMapState::instance.HeightLayer[iVar3];
                 uint _defaultHeight = (uint)DAT_TileMapState::instance.DefaultHeightLayer[iVar3 + 1];
                 if ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x4a5014b1U) != 0
@@ -49,20 +43,20 @@ namespace Map {
                 _blocked = _pl2 == 2;
                 _middleTileUnk = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + _anotherTile;
                 _height = (uint)DAT_TileMapState::instance.HeightLayer[_middleTileUnk];
-                _defaultHeight = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk + -1];
+                _defaultHeight = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk - 1];
                 if ((DAT_TileMapState::instance.LogicLayer[_middleTileUnk] & 0x4a5014b1U) != 0
                     || (int)_height > (int)(_defaultHeight + 0x10) || (int)_height < (int)(_defaultHeight - 0x10)
                     || _blocked != 0) {
                     DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk]
                         = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk] & 0xbf;
-                    DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk + -1]
-                        = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk + -1] & 0xfb;
+                    DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk - 1]
+                        = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk - 1] & 0xfb;
                     return;
                 }
                 DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk]
                     = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk] | 0x40;
-                DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk + -1]
-                    = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk + -1] | 4;
+                DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk - 1]
+                    = DAT_TileMapState::instance.PathLinkageLayer[_middleTileUnk - 1] | 4;
                 return;
             }
             iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
@@ -70,7 +64,7 @@ namespace Map {
             _pl2 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
             int _rowBelow = _widthOrHeight + iVar3;
             int _blocked = _pl2 == 2;
-            int _row = iVar3 + -1;
+            int _row = iVar3 - 1;
             _middleTileUnk = DAT_ViewportRenderState::instance.translationMatrix[_row].addXgetTile;
             iVar4 = DAT_ViewportRenderState::instance.translationMatrix[_row + 1].addXgetTile;
             uint uVar5 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk + _xMiddleUnk];
@@ -94,7 +88,7 @@ namespace Map {
             _blocked = _pl2 == 2;
             _middleTileUnk = DAT_ViewportRenderState::instance.translationMatrix[_rowBelow].addXgetTile;
             uVar5 = (uint)DAT_TileMapState::instance.DefaultHeightLayer[_middleTileUnk + _xMiddleUnk];
-            iVar4 = DAT_ViewportRenderState::instance.translationMatrix[_rowBelow + -1].addXgetTile + _xMiddleUnk;
+            iVar4 = DAT_ViewportRenderState::instance.translationMatrix[_rowBelow - 1].addXgetTile + _xMiddleUnk;
             _middleTileUnk = _middleTileUnk + _xMiddleUnk;
             if ((DAT_TileMapState::instance.LogicLayer[_middleTileUnk] & 0x4a5014b1U) != 0
                 || (int)uVar5 > (int)(DAT_TileMapState::instance.DefaultHeightLayer[iVar4] + 0x10)

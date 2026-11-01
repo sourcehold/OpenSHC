@@ -19,12 +19,6 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497280
         BOOLEnum PathFindingState::doMoveFromTileToTile(
             int unitID, int tile, int y, int direction, int param_5, int ignoreAssassinClimbing)

@@ -13,12 +13,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D640
         undefined4 PathFindingState::someBinaryAlgFunctionPathFinding(int param_1)
         {
@@ -84,7 +78,7 @@ namespace Map {
                 if (0x13a10 <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             return (undefined4)(1);
         }
 

@@ -22,12 +22,6 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00498020
         BOOLEnum PathFindingState::findPathUsingClimbingWithHeightMargin16(
             uint x, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch)
@@ -75,8 +69,7 @@ namespace Map {
             this->searchQueue.xQueue[0] = (short)x;
             int _startTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->searchQueue.tilesQueue[0] = _startTile;
-            DAT_TileMapState::instance.CertainPathLayer[_startTile]
-                = (short)this->searchQueue.currentDistance;
+            DAT_TileMapState::instance.CertainPathLayer[_startTile] = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (x2 == 0xffffffff) {
                 x = 0;

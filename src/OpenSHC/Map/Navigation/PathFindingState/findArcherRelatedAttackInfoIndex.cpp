@@ -15,15 +15,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Type propagation algorithm not settling
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049F040
         int PathFindingState::findArcherRelatedAttackInfoIndex(int max, uint x, uint y, int tribeID)
         {

@@ -18,15 +18,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
-        /*
-          WARNING: Type propagation algorithm not settling
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A83B0
         void PathFindingState::populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea(
             int tile, int maxDestinations, dword area, int playerID)
@@ -140,7 +131,7 @@ namespace Map {
                                 if (_candidate2 != 0) {
                                     *piVar3 = _candidate2;
                                     _dIndex = _dIndex + 1;
-                                    ((PathHelper12*)(piVar3 + -1))->tile1 = _tile2;
+                                    ((PathHelper12*)(piVar3 - 1))->tile1 = _tile2;
                                     piVar3 = piVar3 + 3;
                                     if (_dIndex >= maxDestinations) {
                                         return;
@@ -165,7 +156,7 @@ namespace Map {
                       no wall tower gatehouse crenel nor keep
                      */
                     if ((DAT_TileMapState::instance.LogicLayer[iVar2] & 0x10000300U) == 0 && iVar2 != -1) {
-                        ((PathHelper12*)(piVar3 + -1))->tile1 = iVar2;
+                        ((PathHelper12*)(piVar3 - 1))->tile1 = iVar2;
                         *piVar3 = 0;
                         _dIndex = _dIndex + 1;
                         piVar3 = piVar3 + 3;

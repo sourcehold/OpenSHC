@@ -13,12 +13,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D880
         undefined4 PathFindingState::findClosestFreeTileNearUnitOnBuilding(
             int buildingID, int unitID, int x, int y, int* pX, int* pY)

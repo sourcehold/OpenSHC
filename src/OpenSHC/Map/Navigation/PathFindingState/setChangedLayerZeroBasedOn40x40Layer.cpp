@@ -7,12 +7,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049AF50
         void PathFindingState::setChangedLayerZeroBasedOn40x40Layer(uint flag_and_offset)
         {
@@ -107,7 +101,7 @@ namespace Map {
                                                         + (_x + 3)] = 0;
                                             }
                                             _x = _x + 5;
-                                            local_1c = local_1c + -1;
+                                            local_1c = local_1c - 1;
                                         } while (local_1c != 0);
                                         _cur10 = _cur10 + 1;
                                         _curX = _curX + 0xc;

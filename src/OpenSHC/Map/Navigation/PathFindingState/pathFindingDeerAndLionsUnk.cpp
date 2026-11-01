@@ -14,9 +14,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8IntXY;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Computes the distance to reach x and y, has a shortcut to basically return distance 1 if the area   of the
           destination is the same as the current area was   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */

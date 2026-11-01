@@ -14,9 +14,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Executes a flood file with logic layer 0x10 to indicate impenetrable land   decompilerscript: committed:
           2025-01-30 21:57:43.216000
          */

@@ -15,9 +15,6 @@ namespace Map {
         using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           BFS from tile param_1 up to distance param_2. For every unit owned by player param_3 found on   visited tiles,
           adds param_4 health, clamped to the unit's maxHealth. Also updates   healthPercentage and healthbar fields
           accordingly. Used for area healing effects such as from   buildings or abilities.      renamed by: Claude
@@ -72,8 +69,7 @@ namespace Map {
                                 sVar6 = (short)((DAT_UnitsState::instance.units[iVar8].health * 100) / iVar5);
                             }
                             DAT_UnitsState::instance.units[iVar8].healthPercentage = sVar6;
-                            DAT_UnitsState::instance.units[iVar8].healthbar
-                                = sVar6 / 10;
+                            DAT_UnitsState::instance.units[iVar8].healthbar = sVar6 / 10;
                         }
                         uVar3 = DAT_UnitsState::instance.units[iVar8].nextUnitOnTheSameTile;
                     }

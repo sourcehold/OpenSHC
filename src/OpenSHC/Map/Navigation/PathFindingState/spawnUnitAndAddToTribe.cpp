@@ -16,12 +16,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A67D0
         void PathFindingState::spawnUnitAndAddToTribe(
             int playerID, int displayColor, int count, UnitType unitType, undefined4 tribeID)
@@ -41,7 +35,7 @@ namespace Map {
                         int _unitID_2 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
                             DAT_UnitsState::ptr)(playerID, displayColor, (int)(_x * 8), (int)(_y * 8), 8, unitType);
                         if (_unitID_2 != 0) {
-                            count = count + -1;
+                            count = count - 1;
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe,
                                 DAT_TribesState::ptr)(_unitID_2, tribeID);
                         }
@@ -51,7 +45,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
                             _x, _y, 10, 2);
-                        ((XYPair*)(local_4 + -1))->x = _x;
+                        ((XYPair*)(local_4 - 1))->x = _x;
                         *local_4 = _y;
                         local_4 = local_4 + 2;
                         iVar2 = _tile;
@@ -75,7 +69,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                             _unitID, tribeID);
                     }
-                    count = count + -1;
+                    count = count - 1;
                 } while (0 < count);
             }
             return;

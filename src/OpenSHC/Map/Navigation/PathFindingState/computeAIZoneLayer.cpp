@@ -19,9 +19,6 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Computes the AI Zone Layer - a flood-fill from the player's keep that marks accessible areas.   This creates a
           "zone of control" or "accessible territory" map for strategic AI decisions.      The algorithm works in
           phases:   Phase 1: Flood-fill through walkable/connected areas (marks tiles with value 1)   Phase 2: Expand
@@ -190,7 +187,7 @@ namespace Map {
                                 /*
                                   === TILE 1 ===
                                  */
-                                _offsetTile = (*(int (*)[8])(piVar3 + -1))[0] + _direction;
+                                _offsetTile = (*(int (*)[8])(piVar3 - 1))[0] + _direction;
                                 /*
                                   Only process if:   1. Not already marked   2. No blocking terrain (0x31 = sea,
                                   cliff, or border)   3. Either no building OR building allows passage (unknownFlag4
@@ -305,7 +302,7 @@ namespace Map {
                                     }
                                 }
                                 piVar3 = piVar3 + 4;
-                                attackedPlayerID = attackedPlayerID + -1;
+                                attackedPlayerID = attackedPlayerID - 1;
                             } while (attackedPlayerID != 0);
                             /*
                               Move to next tile in queue

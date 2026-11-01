@@ -25,18 +25,6 @@ namespace Map {
         using OpenSHC::Game::GameMode2;
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-         */
-        /*
-          WARNING: Enum "DPERRInt": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A2A90
         undefined4 PathFindingState::spreadAlgorithmForFlagsAndBraziersUnk(
             int playerID, uint x, uint y, int param_4, int param_5)

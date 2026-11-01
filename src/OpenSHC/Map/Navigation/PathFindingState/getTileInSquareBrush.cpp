@@ -12,12 +12,6 @@ namespace Map {
     namespace Navigation {
 
         /*
-          WARNING: Function: __alloca_probe replaced with injection: alloca_probe
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           fixme:bug: the index parameter is off by -1 for brush indices larger than 6. Phrased differently,   index 7 is
           faulty   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */

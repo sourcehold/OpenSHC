@@ -15,9 +15,6 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
          * Performs BFS pathfinding for AI units to determine if a path exists between two points.    * This is a fast
          * "can reach" check rather than a full path reconstruction.    *     * Key features:    * - Diagonal movement
          * costs 2, cardinal movement costs 1    * - Can optionally reuse previous search state (for incremental

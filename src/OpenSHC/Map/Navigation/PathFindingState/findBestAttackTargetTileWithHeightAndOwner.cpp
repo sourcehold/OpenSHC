@@ -21,15 +21,6 @@ namespace Map {
         using OpenSHC::Game::GameMode;
 
         /*
-          WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-         */
-        /*
-          WARNING: Enum "DPERRInt": Some values do not have unique names
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           BFS from (param_2, param_3) up to distance param_1, scoring enemy buildings and walls owned by   player
           param_7. Buildings score higher for defensive structures (0x400 flag), distance, and fire   state. Walls are
           scored by height difference from base terrain. The best-scoring tile coordinates   are written to ALG_TargetX,
@@ -118,7 +109,7 @@ namespace Map {
                                     if ((int)this->searchQueue.currentDistance <= 0) {
                                         iVar9 = 100000;
                                     } else if ((int)this->searchQueue.currentDistance < 0x10) {
-                                        iVar9 = (iVar9 + -100) * this->searchQueue.currentDistance + 0x5dc;
+                                        iVar9 = (iVar9 - 100) * this->searchQueue.currentDistance + 0x5dc;
                                     } else {
                                         iVar9 = this->searchQueue.currentDistance * iVar9;
                                     }

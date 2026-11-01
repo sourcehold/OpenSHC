@@ -14,12 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00498A40
         undefined4 PathFindingState::calculatePathKeepAndWallsGatesNotAllowed(
             int x1, int y1, int x2, int y2, int maxTries)

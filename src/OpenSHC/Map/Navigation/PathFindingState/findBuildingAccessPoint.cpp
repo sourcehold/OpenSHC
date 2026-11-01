@@ -19,9 +19,6 @@ namespace Map {
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
         /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
           Function Summary: Find Building Access Point   This function solves the problem: "Where should a unit walk to
           interact with this building?"   What It Does:   Phase 1: Find All Valid Access Points      Iterates through
           predefined perimeter positions around the building   Validates each position with three checks:      Height
@@ -191,7 +188,7 @@ namespace Map {
                     if (_accessibleIndex >= _accessibleTilesCount) {
                         _accessibleIndex = 0;
                     }
-                    _limit = _limit + -1;
+                    _limit = _limit - 1;
                 } while (_limit != 0);
             }
             /*

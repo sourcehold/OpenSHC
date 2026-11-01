@@ -13,12 +13,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049B940
         void PathFindingState::findMapBorderEdgeTileAndStoreInSignpostData(
             int signpostID, int maxDistance, uint x, uint y)
