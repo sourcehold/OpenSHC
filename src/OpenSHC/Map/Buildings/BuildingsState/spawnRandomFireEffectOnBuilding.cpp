@@ -1,5 +1,6 @@
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"

@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"

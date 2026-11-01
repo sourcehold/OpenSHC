@@ -1,5 +1,6 @@
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"

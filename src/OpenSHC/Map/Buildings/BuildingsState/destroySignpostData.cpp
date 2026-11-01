@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 

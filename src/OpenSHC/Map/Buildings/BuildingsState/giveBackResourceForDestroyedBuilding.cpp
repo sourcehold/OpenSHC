@@ -1,5 +1,6 @@
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

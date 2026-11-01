@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Map/Version.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
