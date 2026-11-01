@@ -1,5 +1,5 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -14,12 +14,6 @@ namespace Map {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB9E0
     void TileMapState::renderWallPlacementPreview(uint x, uint y, short kind)
     {

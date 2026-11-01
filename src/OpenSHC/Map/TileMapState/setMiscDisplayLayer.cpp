@@ -1,5 +1,5 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,12 +11,6 @@ namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB0C0
     void TileMapState::setMiscDisplayLayer(int buildingID)
     {
@@ -28,7 +22,8 @@ namespace Map {
         int x = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
         int y = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
         uint size = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-        OpenSHC::Map::Buildings::BuildingTypeShort type = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+        OpenSHC::Map::Buildings::BuildingTypeShort type
+            = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         int typeInt = (short)type;
         int offsetIndex = rotation + size * 4;
         int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
@@ -82,7 +77,8 @@ namespace Map {
             workerTile = -1;
         }
 
-        if ((int)size < 3 && type != OpenSHC::Map::Buildings::BT_GIBBET && type != OpenSHC::Map::Buildings::BT_GALLOWS) {
+        if ((int)size < 3 && type != OpenSHC::Map::Buildings::BT_GIBBET
+            && type != OpenSHC::Map::Buildings::BT_GALLOWS) {
             this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
                 = this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x] | 4;
             return;
@@ -92,16 +88,19 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             index++;
-            this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x + this->buildingX]
-                = this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
-                      + this->buildingX]
+            this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + x + this->buildingX]
+                = this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
+                                             .addXgetTile
+                      + x + this->buildingX]
                 & 0xfff3;
         } while (index < this->constructionTileCount);
 
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x + this->buildingX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
+                + this->buildingX;
             if (typeInt == OpenSHC::Map::Buildings::BT_GRANARY) {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 8;
             } else if (typeInt == OpenSHC::Map::Buildings::BT_ARMORY) {

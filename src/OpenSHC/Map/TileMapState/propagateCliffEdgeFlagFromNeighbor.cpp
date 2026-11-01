@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -11,12 +11,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
     using OpenSHC::Map::LogicHelpers::L_RIVER;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC280
     void TileMapState::propagateCliffEdgeFlagFromNeighbor(int tile, int x, int y)
     {

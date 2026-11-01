@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -14,12 +15,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F81D0
     void TileMapState::resetTileToDefaultState(int param_1, uint param_2, uint param_3)
     {

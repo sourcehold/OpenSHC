@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -14,12 +15,6 @@ namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingLogicalState;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8160
     int TileMapState::getNonFarmFieldBuildingHealthAtTileOr1000(int tile)
     {

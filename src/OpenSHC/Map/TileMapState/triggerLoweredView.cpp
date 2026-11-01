@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -11,12 +12,6 @@ namespace Map {
     using OpenSHC::Map::Units::UnitLogicState;
     using OpenSHC::Map::Units::UnitType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
     void TileMapState::triggerLoweredView(int param_1)
     {

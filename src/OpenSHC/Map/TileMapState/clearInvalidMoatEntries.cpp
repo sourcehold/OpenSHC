@@ -1,5 +1,4 @@
-
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -9,12 +8,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_MOAT;
     using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005006C0
     void TileMapState::clearInvalidMoatEntries()
     {

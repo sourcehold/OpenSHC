@@ -1,8 +1,8 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -26,12 +26,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005146D0
     void TileMapState::placeKeep(
         int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue)

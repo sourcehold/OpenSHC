@@ -1,8 +1,8 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/WallAndPitchState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
@@ -37,21 +37,6 @@ namespace Map {
     using OpenSHC::Map::Units::States::UnitState;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "MappersEnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00502F30
     void TileMapState::placeWalls(
         int playerID, uint x1, uint y1, uint x2, uint y2, MappersEnum wallType, int tileCountUnk)

@@ -1,3 +1,4 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
@@ -6,7 +7,6 @@
 #include "OpenSHC/Map/Entities.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Version.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
@@ -54,19 +54,6 @@ namespace Map {
     using OpenSHC::Map::Units::States::UnitState;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      beware the renames! this is for both stones as well as units hitting walls   decompilerscript: committed:
-      2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00516B80
     BOOLEnum TileMapState::processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5,
         int playerID, BOOLEnum aiBuildDelayRelated, int unitID)

@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
@@ -18,18 +18,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00514F30
     void TileMapState::placeWheatfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5,
         int variation, undefined4 averageHeight)
@@ -42,11 +30,11 @@ namespace Map {
         int iVar5;
         uVar1 = x;
         iVar5 = 0;
-        buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, x, y, (undefined4)((int)(averageHeight)),
-            (BuildingType)((int)((int)(short)buildingType)), 3, playerID, variation);
+        buildingID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y,
+            (undefined4)((int)(averageHeight)), (BuildingType)((int)((short)buildingType)), 3, playerID, variation);
         this->placedBuildingID = buildingID;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, (int)((int)(y)), 9);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, (int)(y), 9);
         x = 6;
         pXVar2 = DAT_TerrainDefinedData::instance
                      .WheatFarmTiles[DAT_GameState::instance.playerDataArray[playerID].unkWheatFarmOrientation];
@@ -98,18 +86,18 @@ namespace Map {
             this->LogicLayer[iVar3] = this->LogicLayer[iVar3] | 16777216;
             this->BuildingLayer[iVar3] = (short)variation;
             piVar4 = piVar4 + 1;
-            iVar5 = iVar5 + -1;
+            iVar5 = iVar5 - 1;
             this->BuildingWasLayer[iVar3] = (uchar)buildingType;
             this->ChangedLayer[iVar3] = 2;
         } while (iVar5 != 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
-        if (((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                && (DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                    < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount))
-            && ((DAT_GameState::instance.playerDataArray[playerID].populationCap
+        if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
+                < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
-                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)))) {
+                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }

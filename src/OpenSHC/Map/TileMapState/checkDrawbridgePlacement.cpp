@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -18,12 +18,6 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA2D0
     void TileMapState::checkDrawbridgePlacement(int x, int y)
     {
@@ -56,14 +50,17 @@ namespace Map {
             if (buildings[0] == 0) {
                 continue;
             }
-            if (DAT_BuildingsState::instance.buildings[buildings[0]].logicalState != OpenSHC::Map::Buildings::BLS_NORMAL) {
+            if (DAT_BuildingsState::instance.buildings[buildings[0]].logicalState
+                != OpenSHC::Map::Buildings::BLS_NORMAL) {
                 continue;
             }
             int span;
-            if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE) {
+            if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingType
+                == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE) {
                 span = 7;
             } else {
-                if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingType != OpenSHC::Map::Buildings::BT_GATEHOUSESMALL) {
+                if (DAT_BuildingsState::instance.buildings[buildings[0]].buildingType
+                    != OpenSHC::Map::Buildings::BT_GATEHOUSESMALL) {
                     continue;
                 }
                 span = 5;

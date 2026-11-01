@@ -1,5 +1,4 @@
-
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -10,12 +9,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFF10
     uint TileMapState::getHeightAtTileIncludingOwnersBuildings(int tile, int playerID)
     {

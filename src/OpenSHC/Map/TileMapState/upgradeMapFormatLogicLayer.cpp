@@ -1,15 +1,11 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Version.func.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00511D70
     void TileMapState::upgradeMapFormatLogicLayer(
         PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion)
@@ -18,28 +14,28 @@ namespace Map {
         MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_Unknown2)();
         MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_Unknown3)();
         if (this->mapSize == 0) {
-            this->mapSize = 400;
+            this->mapSize = MC_MAP_XY_LIMIT;
         }
         if (receivedMapVersion == packagerMapVersion) {
             return;
         }
 
-        if ((int)receivedMapVersion < 0x66) {
+        if ((int)receivedMapVersion < 102) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_102)();
         }
-        if ((int)receivedMapVersion < 0x78) {
+        if ((int)receivedMapVersion < 120) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_120)();
         }
-        if ((int)receivedMapVersion < 0x7d) {
+        if ((int)receivedMapVersion < 125) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_125)();
         }
-        if ((int)receivedMapVersion < 0x80) {
+        if ((int)receivedMapVersion < 128) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_128)();
         }
-        if ((int)receivedMapVersion < 0x91) {
+        if ((int)receivedMapVersion < 145) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_145)();
         }
-        if ((int)receivedMapVersion < 0x93) {
+        if ((int)receivedMapVersion < 147) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_147)();
         }
     }

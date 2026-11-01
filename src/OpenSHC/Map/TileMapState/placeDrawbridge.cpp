@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -12,12 +12,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_MOAT;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00514DE0
     void TileMapState::placeDrawbridge(
         int playerID, uint x, uint y, undefined4 buildingType, uint width, int* orientation, undefined4 averageHeight)
@@ -28,12 +22,12 @@ namespace Map {
         _tileIndex = 0;
         buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
             DAT_BuildingsState::ptr)(playerID, x, y, (undefined4)((int)(averageHeight)),
-            (BuildingType)((int)((int)(short)buildingType)), width, playerID, (int)((int)(orientation)));
+            (BuildingType)((int)((short)buildingType)), width, playerID, (int)(orientation));
         orientation = DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[(int)orientation / 2];
         this->placedBuildingID = buildingID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                _tileIndex, (int)((int)(width)));
+                _tileIndex, (int)(width));
             /*
               fixme: repurposed parameter
              */

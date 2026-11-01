@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -12,12 +12,6 @@ namespace Map {
 
     using OpenSHC::Game::GameMode2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005110B0
     int TileMapState::createMoatData(undefined4 playerID, uint x, uint y, int filled)
     {

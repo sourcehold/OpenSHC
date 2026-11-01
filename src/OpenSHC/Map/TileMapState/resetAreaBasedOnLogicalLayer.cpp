@@ -1,5 +1,6 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -9,16 +10,10 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005127B0
     void TileMapState::resetAreaBasedOnLogicalLayer()
     {
-        for (int tile = 0; tile < 80400; tile++) {
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
                 continue;
             }

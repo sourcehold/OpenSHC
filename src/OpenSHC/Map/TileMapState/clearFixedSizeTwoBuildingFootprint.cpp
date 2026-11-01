@@ -1,5 +1,4 @@
-
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -15,12 +14,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAE50
     void TileMapState::clearFixedSizeTwoBuildingFootprint(int x, int y)
     {

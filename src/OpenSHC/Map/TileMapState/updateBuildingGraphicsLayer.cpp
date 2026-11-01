@@ -1,5 +1,5 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -17,18 +17,6 @@ namespace Map {
     using OpenSHC::Game::GameMode2;
     using OpenSHC::Map::Buildings::BuildingType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00506370
     void TileMapState::updateBuildingGraphicsLayer(int buildingID)
     {
@@ -81,7 +69,7 @@ namespace Map {
                                 * 4;
                     }
                     this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance[0xf]
-                        + (short)DAT_TerrainDefinedData::instance.field865_0x84c[resource] + -1 + pile;
+                        + (short)DAT_TerrainDefinedData::instance.field865_0x84c[resource] - 1 + pile;
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_MERCENARYPOST

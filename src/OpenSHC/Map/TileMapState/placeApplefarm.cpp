@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -22,18 +22,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00515740
     void TileMapState::placeApplefarm(
         int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int* param_7)
@@ -44,10 +32,10 @@ namespace Map {
         int _buildingTileRef;
         local_4 = 0;
         _buildingID = MACRO_CALL_MEMBER(
-            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, (undefined4)((int)(param_7)), (BuildingType)((int)(short)(undefined2)buildingType), 3, playerID, param_6);
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, x, y,
+            (undefined4)((int)(param_7)), (BuildingType)((int)(short)(undefined2)buildingType), 3, playerID, param_6);
         this->placedBuildingID = _buildingID;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, (int)((int)(y)), 10);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, (int)(y), 10);
         _buildingTileRef = DAT_TerrainDefinedData::instance.AppleFarmOffsets[1].y;
         DAT_BuildingsState::instance.buildings[_buildingID].tileRefs[0]
             = DAT_ViewportRenderState::instance
@@ -107,12 +95,12 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(_buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(_buildingID);
-        if (((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                && (DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                    < (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount))
-            && ((DAT_GameState::instance.playerDataArray[playerID].populationCap
+        if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
+                < (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount
+            && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
-                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)))) {
+                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }

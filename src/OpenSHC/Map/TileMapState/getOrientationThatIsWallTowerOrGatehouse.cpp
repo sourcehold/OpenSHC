@@ -1,4 +1,6 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -10,20 +12,14 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8B50
     int TileMapState::getOrientationThatIsWallTowerOrGatehouse(uint x, uint y)
     {
-        if (x > 399 || y > 399) {
-            return 0xf;
+        if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
+            return 15;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
-            return 0xf;
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
+            return 15;
         }
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -35,7 +31,7 @@ namespace Map {
                 return orientation;
             }
         }
-        return 0xf;
+        return 15;
     }
 
 }

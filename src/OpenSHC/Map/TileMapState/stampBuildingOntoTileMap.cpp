@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -10,12 +10,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00507060
     void TileMapState::stampBuildingOntoTileMap(int param_1, uint param_2, uint param_3, undefined4 param_4,
         undefined4 param_5, uint param_6, undefined4 param_7, undefined4 param_8)

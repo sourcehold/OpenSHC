@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -58,21 +58,6 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Restarted to delay deadcode elimination for space: ram
-     */
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
     {
@@ -123,7 +108,7 @@ namespace Map {
         int local_8;
         sVar8 = 0;
         if (0 < this->forceUpdateTextureTilemap) {
-            this->forceUpdateTextureTilemap = this->forceUpdateTextureTilemap + -1;
+            this->forceUpdateTextureTilemap = this->forceUpdateTextureTilemap - 1;
             local_c = DAT_PathFindingState::instance.mappingYRelated % 10;
             for (local_18 = this->someIndex; local_18 <= this->someLimit; local_18 = local_18 + 1) {
                 for (local_10 = this->someYLike; local_10 <= this->someYLikeLimit; local_10 = local_10 + 1) {
@@ -401,7 +386,7 @@ namespace Map {
                                                                         computeWallCornerRenderRotation,
                                                                     this)(iVar17);
                                                                 this->WallGFXLayer[this->DAT_SomeTile]
-                                                                    = (short)GMTotalPicturesProcessed::instance[10] + -1
+                                                                    = (short)GMTotalPicturesProcessed::instance[10] - 1
                                                                     + (short)this->wallCornerRotation;
                                                                 sVar4 = (short)GMTotalPicturesProcessed::instance[0xc];
                                                                 if ((char)this->DamageLayer[this->DAT_SomeTile] == 0) {
@@ -822,7 +807,7 @@ namespace Map {
                                                             this)(this->DAT_SomeTile, (uint)(iVar17),
                                                             (uint)(this->DAT_SomeY));
                                                         this->PillarGFXLayer[this->DAT_SomeTile]
-                                                            = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                            = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                             + (short)this->wallCornerRotation;
                                                         this->MiscDisplayLayer[this->DAT_SomeTile]
                                                             = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
@@ -837,7 +822,7 @@ namespace Map {
                                                         this)(
                                                         this->DAT_SomeTile, (uint)(iVar17), (uint)(this->DAT_SomeY));
                                                     this->PillarGFXLayer[this->DAT_SomeTile]
-                                                        = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                        = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                         + (short)this->wallCornerRotation;
                                                     this->MiscDisplayLayer[this->DAT_SomeTile]
                                                         = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
@@ -1120,7 +1105,7 @@ namespace Map {
                                                                                         computeWallCornerRenderRotation,
                                                                     this)(this->DAT_SomeX);
                                                             this->WallGFXLayer[this->DAT_SomeTile]
-                                                                = (short)GMTotalPicturesProcessed::instance[10] + -1
+                                                                = (short)GMTotalPicturesProcessed::instance[10] - 1
                                                                 + (short)this->wallCornerRotation;
                                                         }
                                                         iVar14 = MACRO_CALL_MEMBER(
@@ -1136,7 +1121,7 @@ namespace Map {
                                                                 = (short)(((((int)(uint)this
                                                                                     ->HeightLayer[this->DAT_SomeTile]
                                                                                 >> 3)
-                                                                               + -1)
+                                                                               - 1)
                                                                               * 0x40)
                                                                       / 2)
                                                                 + (short)GMTotalPicturesProcessed::instance[3]
@@ -1144,7 +1129,7 @@ namespace Map {
                                                                 + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                                         } else {
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
-                                                                = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                                = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                                 + (short)this->wallCornerRotation;
                                                             this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                 = (short)this->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1631,7 +1616,7 @@ namespace Map {
                                                                         this->PillarGFXLayer[this->DAT_SomeTile]
                                                                             = (short)
                                                                                   GMTotalPicturesProcessed::instance[9]
-                                                                            + -1 + (short)this->wallCornerRotation;
+                                                                            - 1 + (short)this->wallCornerRotation;
                                                                         this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                             = (short)this
                                                                                   ->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1653,7 +1638,7 @@ namespace Map {
                                                                         (uint)(this->DAT_SomeY));
                                                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                                                         = (short)GMTotalPicturesProcessed::instance[9]
-                                                                        + -1 + (short)this->wallCornerRotation;
+                                                                        - 1 + (short)this->wallCornerRotation;
                                                                     this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                         = (short)this
                                                                               ->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1681,7 +1666,7 @@ namespace Map {
                                                                     this)(this->DAT_SomeTile, (uint)(this->DAT_SomeX),
                                                                     (uint)(this->DAT_SomeY));
                                                                 this->PillarGFXLayer[this->DAT_SomeTile]
-                                                                    = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                                    = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                                     + (short)this->wallCornerRotation;
                                                                 this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                     = (short)this->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1705,7 +1690,7 @@ namespace Map {
                                                                 this)(this->DAT_SomeTile, (uint)(this->DAT_SomeX),
                                                                 (uint)(this->DAT_SomeY));
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
-                                                                = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                                = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                                 + (short)this->wallCornerRotation;
                                                             this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                 = (short)this->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1767,7 +1752,7 @@ namespace Map {
                                                                 this)(this->DAT_SomeTile, (uint)(iVar17),
                                                                 (uint)(this->DAT_SomeY));
                                                             this->PillarGFXLayer[this->DAT_SomeTile]
-                                                                = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                                = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                                 + (short)this->wallCornerRotation;
                                                             this->MiscDisplayLayer[this->DAT_SomeTile]
                                                                 = (short)this->MiscDisplayLayer[this->DAT_SomeTile]
@@ -1800,7 +1785,7 @@ namespace Map {
                                                             local_8 = 1;
                                                         }
                                                         this->PillarGFXLayer[this->DAT_SomeTile]
-                                                            = (short)((local_8 + -1) / 2)
+                                                            = (short)((local_8 - 1) / 2)
                                                             + (short)GMTotalPicturesProcessed::instance[3]
                                                             + (ushort)this->LuminesenceLayer[this->DAT_SomeTile] * 4
                                                             + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
@@ -1815,7 +1800,7 @@ namespace Map {
                                                         }
                                                     } else {
                                                         this->PillarGFXLayer[this->DAT_SomeTile]
-                                                            = (short)GMTotalPicturesProcessed::instance[9] + -1
+                                                            = (short)GMTotalPicturesProcessed::instance[9] - 1
                                                             + (short)this->wallCornerRotation;
                                                         this->MiscDisplayLayer[this->DAT_SomeTile]
                                                             = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
@@ -1858,7 +1843,7 @@ namespace Map {
                                                                     + ((short)((int)(uint)this
                                                                                    ->HeightLayer[this->DAT_SomeTile]
                                                                            >> 3)
-                                                                          + -1)
+                                                                          - 1)
                                                                         * 0x20
                                                                     + (ushort)this->LuminesenceLayer[this->DAT_SomeTile]
                                                                         * 4
@@ -2039,26 +2024,26 @@ namespace Map {
                                                 sVar4 = (this->WallGFXLayer[this->DAT_SomeTile] & 8) * 8 + 0x38d;
                                                 sVar5 = (short)GMTotalPicturesProcessed::instance[5];
                                                 if (this->mapOrientation == 0) {
-                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 + -1
+                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 - 1
                                                         + (short)((int)(this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0)
                                                               >> 5)
                                                             * 8;
                                                 } else if (this->mapOrientation == 2) {
-                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 + -1
+                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 - 1
                                                         + ((short)((int)(this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0)
                                                                >> 5)
                                                                   - 2U
                                                               & 7)
                                                             * 8;
                                                 } else if (this->mapOrientation == 4) {
-                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 + -1
+                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 - 1
                                                         + ((short)((int)(this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0)
                                                                >> 5)
                                                                   - 4U
                                                               & 7)
                                                             * 8;
                                                 } else {
-                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 + -1
+                                                    this->GfxLayer[this->DAT_SomeTile] = sVar5 + sVar4 - 1
                                                         + ((short)((int)(this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0)
                                                                >> 5)
                                                                   - 6U
@@ -2301,22 +2286,22 @@ namespace Map {
                                                 if (iVar17 == 0) {
                                                     if (((char)this->Logic2Layer[this->DAT_SomeTile] & 2) == 0) {
                                                         this->PillarGFXLayer[this->DAT_SomeTile]
-                                                            = (short)(((((int)(uint)bVar19 >> 3) + -1) * 0x40) / 2)
+                                                            = (short)(((((int)(uint)bVar19 >> 3) - 1) * 0x40) / 2)
                                                             + (short)GMTotalPicturesProcessed::instance[3]
                                                             + (ushort)this->LuminesenceLayer[this->DAT_SomeTile] * 4
                                                             + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                                     } else {
-                                                        this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 + -1 + sVar4;
+                                                        this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 - 1 + sVar4;
                                                         this->MiscDisplayLayer[this->DAT_SomeTile]
                                                             = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                                     }
                                                 } else {
-                                                    this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 + -1 + sVar4;
+                                                    this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 - 1 + sVar4;
                                                     this->MiscDisplayLayer[this->DAT_SomeTile]
                                                         = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                                 }
                                             } else {
-                                                this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 + -1 + sVar4;
+                                                this->PillarGFXLayer[this->DAT_SomeTile] = sVar5 - 1 + sVar4;
                                                 this->MiscDisplayLayer[this->DAT_SomeTile]
                                                     = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                             }

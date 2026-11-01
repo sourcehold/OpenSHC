@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/AI/AIVState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -24,21 +24,6 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "MappersEnumShort": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00508250
     void TileMapState::placeQuarry(
         int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize, int buildingOrientation, uint height)

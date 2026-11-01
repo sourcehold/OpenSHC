@@ -1,5 +1,6 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
@@ -30,12 +31,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
     using OpenSHC::Map::LogicHelpers::L_OIL;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FDB00
     void TileMapState::updateMacroLayerRelated(uint logic1, uint logic2, int clearMacroFirst)
     {

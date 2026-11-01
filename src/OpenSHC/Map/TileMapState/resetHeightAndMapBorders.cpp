@@ -1,5 +1,6 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -10,18 +11,12 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6CF0
     void TileMapState::resetHeightAndMapBorders(int mapSize)
     {
-        int inset = (400 - mapSize) / 2;
+        int inset = (MC_MAP_XY_LIMIT - mapSize) / 2;
         this->mapSize = mapSize;
-        for (int tile = 0; tile < 80400; tile++) {
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             }
@@ -44,7 +39,7 @@ namespace Map {
             this->LogicLayer[tile] = L_BORDER;
             rowLength = rowLength + 2;
             tile++;
-        } while (rowLength < 400);
+        } while (rowLength < MC_MAP_XY_LIMIT);
 
         for (rowLength = 398; rowLength >= 0; rowLength = rowLength - 2) {
             this->LogicLayer[tile] = L_BORDER;
@@ -68,7 +63,7 @@ namespace Map {
             row = row + 2;
         }
         int firstRow = row;
-        for (; row < 400; row = row + 2) {
+        for (; row < MC_MAP_XY_LIMIT; row = row + 2) {
             this->LogicLayer[tile + inset] = this->LogicLayer[tile + inset] | L_BORDER;
             tile++;
             if (row - inset > 0) {
@@ -94,13 +89,14 @@ namespace Map {
             this->LogicLayer[tile - inset] = this->LogicLayer[tile - inset] | L_BORDER;
             tile++;
         }
-        if (mapSize != 400) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setWalkabilityBorderLogicLayerForSmallerMapSizes,
+        if (mapSize != MC_MAP_XY_LIMIT) {
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Navigation::PathFindingState_Func::setWalkabilityBorderLogicLayerForSmallerMapSizes,
                 DAT_PathFindingState::ptr)();
         }
 
         /* every border tile ends up at the minimum height */
-        for (int borderTile = 0; borderTile < 80400; borderTile++) {
+        for (int borderTile = 0; borderTile < MC_MAP_TILES_COUNT; borderTile++) {
             if ((this->LogicLayer[borderTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 this->HeightLayer[borderTile] = 8;
             }

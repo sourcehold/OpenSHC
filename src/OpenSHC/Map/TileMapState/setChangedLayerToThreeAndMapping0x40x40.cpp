@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -9,12 +10,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6AE0
     void TileMapState::setChangedLayerToThreeAndMapping0x40x40()
     {

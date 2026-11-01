@@ -1,5 +1,6 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
@@ -16,12 +17,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500500
     undefined4 TileMapState::advanceMoatDigProgress(int moatID)
     {

@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -6,12 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005003D0
     int TileMapState::setXYBasedOnMoatID(int moatID, int param_2, uint x, uint y)
     {

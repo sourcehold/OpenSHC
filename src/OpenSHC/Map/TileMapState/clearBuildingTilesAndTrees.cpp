@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -17,12 +18,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_WHEAT;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAAB0
     void TileMapState::clearBuildingTilesAndTrees(int buildingID, int surfaceArea)
     {
@@ -53,7 +48,7 @@ namespace Map {
                   process next tile
                  */
                 _pTileRef = &_pTileRef[1];
-                surfaceArea = surfaceArea + -1;
+                surfaceArea = surfaceArea - 1;
             } while (surfaceArea != 0);
         }
         return;
