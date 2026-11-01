@@ -1,3 +1,5 @@
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
@@ -5,7 +7,6 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering.func.hpp"
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"

@@ -1,5 +1,6 @@
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"

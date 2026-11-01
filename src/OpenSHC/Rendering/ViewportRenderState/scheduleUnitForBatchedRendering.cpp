@@ -1,4 +1,4 @@
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "../ViewportRenderState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentlyRenderedSpriteID.hpp"
 #include "OpenSHC/Globals/DAT_RenderedUnitOwner.hpp"

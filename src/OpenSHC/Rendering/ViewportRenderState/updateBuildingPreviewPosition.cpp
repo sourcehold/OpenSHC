@@ -1,5 +1,6 @@
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -69,11 +70,10 @@ namespace Rendering {
                     return;
                 }
                 hitBoxAnchor
-                    = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[nextHitBoxRow + 1][0]
-                          .x;
+                    = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[nextHitBoxRow + 1][0].x;
                 hitBoxRow = nextHitBoxRow + 1;
                 nextHitBoxRow = hitBoxRow;
-                }
+            }
         }
 
         if (this->viewportState.field0_0x0 == 0) {

@@ -1,4 +1,5 @@
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"

@@ -1,4 +1,4 @@
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "../ViewportRenderState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"

@@ -1,4 +1,5 @@
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"

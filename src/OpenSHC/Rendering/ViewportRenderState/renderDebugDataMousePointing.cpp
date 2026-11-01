@@ -1,5 +1,6 @@
+#include "../ViewportRenderState.func.hpp"
+
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
