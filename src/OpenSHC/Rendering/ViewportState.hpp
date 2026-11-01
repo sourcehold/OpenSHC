@@ -44,7 +44,7 @@ namespace Rendering {
         int mouseY; // 0x00000068 length: 4
         undefined4 field27_0x6c; // 0x0000006C length: 4
         int mouseAtomRefFloorTile; // 0x00000070 length: 4
-        undefined4 ptrColor; // 0x00000074 length: 4
+        ushort* ptrColor; // 0x00000074 length: 4
         int viewportX; // 0x00000078 length: 4
         int viewportY; // 0x0000007C length: 4
         int currentCameraOffsetX; // 0x00000080 length: 4
