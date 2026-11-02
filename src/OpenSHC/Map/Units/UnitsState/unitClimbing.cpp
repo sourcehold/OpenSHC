@@ -27,22 +27,21 @@ namespace Map {
                     == this->units[unitID].climbDataRelated) {
                 if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 1) {
                     this->units[unitID].field203_0x35c = this->units[unitID].field203_0x35c + 1;
-                    if (this->units[unitID].field203_0x35c >= 0x60) {
+                    if (this->units[unitID].field203_0x35c >= 96) {
                         *(short*)&this->units[unitID].climbingState += 1;
                         this->units[unitID].field203_0x35c = 0;
                         if (this->units[unitID].climbingDirection == 1) {
                             /* Climbing up */
-                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 0xf;
+                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 15;
                         } else {
                             /* Climbing down */
-                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 0xf;
+                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 15;
                         }
-                        if (this->units[unitID].terrainOrClimbHeight
-                            > (short)(ushort)DAT_TileMapState::instance
-                                  .HeightLayer[DAT_ViewportRenderState::instance
-                                                   .translationMatrix[this->units[unitID].mimicCurrentYPosition]
-                                                   .addXgetTile
-                                      + this->units[unitID].mimicCurrentXPosition]) {
+                        if (this->units[unitID].terrainOrClimbHeight > (short)(ushort)DAT_TileMapState::instance
+                                .HeightLayer[DAT_ViewportRenderState::instance
+                                                 .translationMatrix[this->units[unitID].mimicCurrentYPosition]
+                                                 .addXgetTile
+                                    + this->units[unitID].mimicCurrentXPosition]) {
                             *(undefined2*)&this->units[unitID].climbingState = 5;
                         }
                     }
@@ -60,9 +59,9 @@ namespace Map {
                     } else {
                         /* Climbing down */
                         if (this->units[unitID].facingDirectionMapOrientationCorrected == 0) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 + -3;
+                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 - 3;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 2) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 + -8;
+                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 - 8;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 4) {
                             this->units[unitID].field41_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
@@ -81,7 +80,7 @@ namespace Map {
                                   .Frames_Shared_UnitClimbingDown[this->units[unitID].field203_0x35c / 8];
                     }
                     this->units[unitID].gfxNumber = this->units[unitID].animationSheetFrameOffset
-                        + this->units[unitID].animationFrame * 8 + -8
+                        + this->units[unitID].animationFrame * 8 - 8
                         + this->units[unitID].facingDirectionMapOrientationCorrected;
                     this->units[unitID].vanish = 0;
                     if (this->units[unitID].facingDirectionMapOrientationCorrected == 0
@@ -108,7 +107,7 @@ namespace Map {
                     && DAT_PathFindingState::instance.climbData[_climbDataID].type != 7) {
                     return;
                 }
-                if (this->units[unitID].state.generic == (UnitState)0x6c) {
+                if (this->units[unitID].state.generic == (UnitState)108) {
                     this->units[unitID].dying = 1;
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                     this->units[unitID].animationCycleNumber = 0;

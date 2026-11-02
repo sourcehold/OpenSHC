@@ -54,7 +54,7 @@ namespace Map {
                     this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 40;
                 }
                 this->units[unitID].unknownStateCopyClimbRelated = this->units[unitID].state.generic;
-                this->units[unitID].state.generic = (UnitState)0x68;
+                this->units[unitID].state.generic = (UnitState)104;
                 this->units[unitID].animationCycleNumber = 0;
             } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 7) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);

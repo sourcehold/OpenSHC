@@ -11,20 +11,20 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00536CF0
         void UnitsState::clearOrDeselectUnitFromSelection(int playerID, uint unitID, int unitType)
         {
-            if (unitID == 0xffffffff) {
+            if (unitID == 4294967295) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearTribesOfUnitType, DAT_TribesState::ptr)(
                     playerID, unitType);
                 return;
             }
-            if (unitID == 0xfffffffe) {
+            if (unitID == 4294967294) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearTribesNotOfUnitType,
                     DAT_TribesState::ptr)(playerID, unitType);
                 return;
             }
             if (unitID != 0) {
                 if (this->units[unitID].tribeID != 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeUnitFromTribe,
-                        DAT_TribesState::ptr)(unitID, this->units[unitID].tribeID);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
+                        unitID, this->units[unitID].tribeID);
                 }
                 if (this->units[unitID].ifSelectedThenPlayerID != 0) {
                     this->units[unitID].ifSelectedThenPlayerID = 0;

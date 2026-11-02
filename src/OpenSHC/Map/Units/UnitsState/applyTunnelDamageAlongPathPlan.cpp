@@ -43,11 +43,11 @@ namespace Map {
                 } else {
                     _direction = _packedDirections & 0xf;
                 }
-                _xPosition
-                    = _xPosition + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
+                _xPosition = _xPosition
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
                 _tile = _tile + DAT_TileMapState::instance.directionTranslationMatrix[_yPosition][_direction];
-                _yPosition
-                    = _yPosition + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
+                _yPosition = _yPosition
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
             }
         }
 

@@ -55,7 +55,7 @@ namespace Map {
                 return;
             }
             UnitType _unitType = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                DAT_TribesState::ptr)(_newTribeID, (int*)0x0);
+                DAT_TribesState::ptr)(_newTribeID, (int*)0);
             if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                 || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM || _unitType == OpenSHC::Map::Units::UT_S_SHIELD
                 || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA
@@ -71,16 +71,16 @@ namespace Map {
                             == 0
                         || _remainingEngineers > 3) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xe);
+                            14);
                     } else if (_remainingEngineers == 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xb);
+                            11);
                     } else if (_remainingEngineers == 2) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xc);
+                            12);
                     } else if (_remainingEngineers == 3) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xd);
+                            13);
                     }
                     DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
                     return;

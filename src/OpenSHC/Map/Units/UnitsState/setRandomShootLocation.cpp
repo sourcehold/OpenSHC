@@ -36,23 +36,23 @@ namespace Map {
             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                 _spreadAlong = 0;
                 if ((_rng & 3) == 0) {
-                    _spreadAlong = _rng % 0x60 + -0x30;
+                    _spreadAlong = _rng % 96 - 48;
                 }
-                _spreadAcross = (_rng / 256) % 0x60 + -0x30;
-                z = z + -0x10 + (_rng / 128) % 0x20;
+                _spreadAcross = (_rng / 256) % 96 - 48;
+                z = z - 16 + (_rng / 128) % 32;
             } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
-                _spreadAlong = _rng % 0x80 - 0x60;
-                _spreadAcross = (_rng / 256) % 0x60 + -0x30;
-                z = z + -0x30 + (_rng / 128) % 0x40;
+                _spreadAlong = _rng % 128 - 96;
+                _spreadAcross = (_rng / 256) % 96 - 48;
+                z = z - 48 + (_rng / 128) % 64;
             } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_MANGONEL) {
-                _spreadAlong = _rng % 0xe0 + -0x70;
-                _spreadAcross = (_rng / 256) % 0x80 - 0x40;
-                z = z + -0x40 + (_rng / 128) % 0x80;
+                _spreadAlong = _rng % 224 - 112;
+                _spreadAcross = (_rng / 256) % 128 - 64;
+                z = z - 64 + (_rng / 128) % 128;
             } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
                 if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_LAND) {
-                    _spreadAlong = _rng % 0x20 - 0x18;
-                    _spreadAcross = (_rng / 256) % 0x28 + -0x14;
-                    z = z + -0x14 + (_rng / 128) % 0x28;
+                    _spreadAlong = _rng % 32 - 24;
+                    _spreadAcross = (_rng / 256) % 40 - 20;
+                    z = z - 20 + (_rng / 128) % 40;
                 } else {
                     _spreadAlong = 0;
                     _spreadAcross = 0;
@@ -61,11 +61,11 @@ namespace Map {
                 && this->units[unitID].targetingType != OpenSHC::Map::Units::UIT_ATTACK_LAND) {
                 _spreadAlong = 0;
                 _spreadAcross = 0;
-                z = z + (_rng / 128) % 0x1e;
+                z = z + (_rng / 128) % 30;
             } else {
-                _spreadAlong = _rng % 0x60 + -0x30;
-                _spreadAcross = (_rng / 256) % 0x50 + -0x28;
-                z = z + -0x28 + (_rng / 128) % 0x50;
+                _spreadAlong = _rng % 96 - 48;
+                _spreadAcross = (_rng / 256) % 80 - 40;
+                z = z - 40 + (_rng / 128) % 80;
             }
             if (z < 8) {
                 z = 8;
