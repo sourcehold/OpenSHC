@@ -11,9 +11,6 @@ namespace UI {
     using OpenSHC::UI::ScrollSpeed;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00468A90
     ScrollingHandler* ScrollingHandler::Constructor_ScrollingHandler()
     {
@@ -27,8 +24,8 @@ namespace UI {
         this->scrollUp = FALSE;
         this->upKeyDown_0x24 = FALSE;
         this->scrollDirection_0x4 = OpenSHC::UI::SD_NONE;
-        this->scrollAccelerationInterval = 0x14;
-        this->scrollDistanceLimit = 0x28;
+        this->scrollAccelerationInterval = 20;
+        this->scrollDistanceLimit = 40;
         this->scrollDistanceMin = 1;
         this->scrollSpeedSetting_0x38 = OpenSHC::UI::SS_NORMAL;
         return this;

@@ -15,9 +15,6 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004917C0
     void MenuTextInputState::meth_0x4917c0()
     {
