@@ -85,3 +85,7 @@ src/OpenSHC/Map/Buildings/UpdateKeepManorHouse.cpp
 src/OpenSHC/Map/Buildings/UpdateKeepStoneKeep.cpp
 src/OpenSHC/Map/Buildings/UpdateKeepStronghold.cpp
 src/OpenSHC/Map/Buildings/UpdateWheatFarm.cpp
+src/OpenSHC/Map/Buildings/UpdateGoodBuildingMaypole.cpp
+src/OpenSHC/Map/Buildings/UpdateBadBuildingDungeon.cpp
+src/OpenSHC/Map/Buildings/UpdateBadBuildingGallows.cpp
+src/OpenSHC/Map/Buildings/UpdateBadBuildingBurningStake.cpp
