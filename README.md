@@ -151,7 +151,7 @@ Raise an issue here on GitHub to receive support. Or visit the [Discord](https:/
 
 ## Additional Contributors
 
-Also thanks to all the people who have contributed code and solutions through other means then direct commits!
+Also thanks to all the people who have contributed code and solutions through other means than direct commits!
 
 - [Wilps](https://github.com/Wilps93)
 
