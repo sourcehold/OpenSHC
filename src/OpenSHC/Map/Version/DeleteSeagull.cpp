@@ -25,7 +25,7 @@ namespace Map {
         }
         for (int i = 0; i < 100; ++i) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                100, 0, &DAT_EntityState::instance.seagullArray[i]);
+                sizeof(DAT_EntityState::instance.seagullArray[i]), 0, &DAT_EntityState::instance.seagullArray[i]);
         }
     }
 

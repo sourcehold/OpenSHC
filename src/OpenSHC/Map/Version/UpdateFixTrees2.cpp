@@ -10,16 +10,14 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Trees::TreeType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F37B0
     void Version::UpdateFixTrees2()
     {
         for (int treeID = 1; treeID < 2000; ++treeID) {
-            if (DAT_LandscapeState::instance.trees[treeID].treeType == (TreeType)1
-                || DAT_LandscapeState::instance.trees[treeID].treeType == (TreeType)2
-                || DAT_LandscapeState::instance.trees[treeID].treeType == (TreeType)3
-                || DAT_LandscapeState::instance.trees[treeID].treeType == (TreeType)4) {
+            if (DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_1
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_2
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_3
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_4) {
                 DAT_LandscapeState::instance.trees[treeID].gmOriginX
                     = DAT_TextureRenderCoreObject::instance
                           .gmFileHeaderColorpaletteArray[DAT_LandscapeState::instance.trees[treeID].treeTypeBasedValue1]
@@ -28,10 +26,9 @@ namespace Map {
                     = DAT_TextureRenderCoreObject::instance
                           .gmFileHeaderColorpaletteArray[DAT_LandscapeState::instance.trees[treeID].treeTypeBasedValue1]
                           .originY;
-                if (MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::findNoTreeInRange, DAT_PathFindingState::ptr)(
+                if (!MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::findNoTreeInRange, DAT_PathFindingState::ptr)(
                         2, DAT_LandscapeState::instance.trees[treeID].xPosition,
-                        DAT_LandscapeState::instance.trees[treeID].yPosition)
-                    == 0) {
+                        DAT_LandscapeState::instance.trees[treeID].yPosition)) {
                     MACRO_CALL_MEMBER(LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(treeID);
                 }
             }

@@ -25,11 +25,8 @@ namespace Map {
             SEC_SkirmishLobbySetupStructure::instance.aiVariationArray[i]
                 = DAT_SkirmishLobbySetupStructureLongMapName::instance.aiVariationArray[i];
         }
-        // The eight slot positions are copied as two dwords
-        *(int*)&SEC_SkirmishLobbySetupStructure::instance.slot1Position
-            = *(int*)&DAT_SkirmishLobbySetupStructureLongMapName::instance.slot1Position;
-        *(int*)&SEC_SkirmishLobbySetupStructure::instance.slot5Position
-            = *(int*)&DAT_SkirmishLobbySetupStructureLongMapName::instance.slot5Position;
+        memcpy(&SEC_SkirmishLobbySetupStructure::instance.slot1Position,
+            &DAT_SkirmishLobbySetupStructureLongMapName::instance.slot1Position, 8);
         SEC_SkirmishLobbySetupStructure::instance.currentPlayerSlotID
             = DAT_SkirmishLobbySetupStructureLongMapName::instance.currentPlayerSlotID;
         SEC_SkirmishLobbySetupStructure::instance.currentAdvantageBalance

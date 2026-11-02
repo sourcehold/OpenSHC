@@ -17,8 +17,7 @@ namespace Map {
         for (int buildingID = 1; buildingID < 2000; ++buildingID) {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0) {
                 int buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
-                // Only the lower half of spriteSheetID is written
-                *(short*)&DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID
+                DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID
                     = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[buildingType].shortValue;
                 switch (buildingType) {
                 case Buildings::BT_HOVEL:

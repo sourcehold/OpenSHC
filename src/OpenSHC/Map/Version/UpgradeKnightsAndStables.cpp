@@ -19,11 +19,11 @@ namespace Map {
                 for (int unitID = 0; unitID < 2500; ++unitID) {
                     if (DAT_UnitsState::instance.units[unitID].unitType == Units::UT_E_KNIGHT
                         && DAT_UnitsState::instance.units[unitID].horseOriginStablesBuildingIndexUnk == buildingID
-                        && *(int*)&DAT_UnitsState::instance.units[unitID].horseOriginStableIDUnk
+                        && DAT_UnitsState::instance.units[unitID].horseOriginStableIDUnk
                             == DAT_BuildingsState::instance.buildings[buildingID].uid) {
                         DAT_BuildingsState::instance.buildings[buildingID]
                             .insideUnitID[DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField]
-                            = (short)unitID;
+                            = unitID;
                         DAT_BuildingsState::instance.buildings[buildingID]
                             .insideUnitUID[DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField]
                             = DAT_UnitsState::instance.units[unitID].uid;
