@@ -18,63 +18,37 @@ namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00530A90
     void Units::UpdateBurningAnimal2()
-
     {
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner = 0;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].calculatedOwnerPlayerIndex = 0;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].dying = 1;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].isSelected = 0;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationSpeed = 3;
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 8;
-
         if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
             == OpenSHC::Map::Units::States::US_IDLEUnk) {
-
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
-
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0;
-
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = 1;
-
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic = ((UnitState)2);
-
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic = 2;
             return;
         }
-
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0;
-
-        int iVar1 = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber;
-
-        if (0x11 <= iVar1) {
-
+        int const _animationCycle
+            = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber;
+        if (17 <= _animationCycle) {
             DAT_UnitHasBecomeIdle::instance = 1;
-
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
                 = OpenSHC::Map::Units::ULS_REMOVE;
-
             return;
         }
-
-        bool bVar3 = DAT_UnitHasBecomeIdle::instance != 0;
-
-        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = iVar1 + 1;
-
-        if (bVar3) {
-
+        bool const _unitHadBecomeIdle = DAT_UnitHasBecomeIdle::instance != 0;
+        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = _animationCycle + 1;
+        if (_unitHadBecomeIdle) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
                 = OpenSHC::Map::Units::ULS_REMOVE;
         }
-
-        return;
     }
-
 }
 }
