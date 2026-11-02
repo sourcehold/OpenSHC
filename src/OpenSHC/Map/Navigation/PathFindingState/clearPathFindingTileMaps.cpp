@@ -19,13 +19,13 @@ namespace Map {
         void PathFindingState::clearPathFindingTileMaps()
         {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
+                160800, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x13a10, '\0', (void*)((int)(DAT_TileMapState::instance.PathLinkageLayer)));
+                80400, '\0', (void*)((int)(DAT_TileMapState::instance.PathLinkageLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
+                160800, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             return;
         }
 

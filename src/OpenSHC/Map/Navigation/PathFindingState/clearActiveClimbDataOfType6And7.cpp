@@ -14,22 +14,19 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A52D0
         void PathFindingState::clearActiveClimbDataOfType6And7()
         {
-            int* piVar2;
-            int iVar1 = 1;
-            piVar2 = &this->climbData[1].type;
-            do {
-                if (((ClimbData*)(piVar2 + -1))->canBeUsed != 0) {
-                    if (*piVar2 == 6) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(iVar1);
-                    }
-                    if (*piVar2 == 7) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(iVar1);
-                    }
+            for (int _climbDataID = 1; _climbDataID < 200; ++_climbDataID) {
+                if (this->climbData[_climbDataID].canBeUsed == 0) {
+                    continue;
                 }
-                iVar1 = iVar1 + 1;
-                piVar2 = piVar2 + 0x81;
-            } while (iVar1 < 200);
-            return;
+                if (this->climbData[_climbDataID].type == 6) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
+                        _climbDataID);
+                }
+                if (this->climbData[_climbDataID].type == 7) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
+                        _climbDataID);
+                }
+            }
         }
 
     }

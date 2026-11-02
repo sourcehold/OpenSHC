@@ -35,7 +35,7 @@ namespace Map {
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                        160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
                 }
                 this->searchQueue.readIndex = 0;
                 this->searchQueue.writeIndex = 1;
@@ -55,24 +55,25 @@ namespace Map {
                     _cX = this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _cY = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _unitID = (short)DAT_TileMapState::instance.UnitLayer[_cTile];
-                    if (_unitID == unitID || (DAT_TileMapState::instance.OccupancyLayer[_cTile] == '\0' && _unitID == 0)) {
+                    if (_unitID == unitID
+                        || (DAT_TileMapState::instance.OccupancyLayer[_cTile] == '\0' && _unitID == 0)) {
                         this->ALG_ResultTile = _cTile;
                         this->ALG_ResultY = _cY;
                         this->ALG_ResultX = _cX;
                         return;
                     }
                     this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_cTile];
-                    if (0x13a10 < (int)this->searchQueue.currentDistance) {
+                    if (80400 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
                         int _cTile2 = DAT_TileMapState::instance.directionTranslationMatrix[_cY][_direction] + _cTile;
                         uint _logic = DAT_TileMapState::instance.LogicLayer[_cTile2];
                         /*
-                          0xb1 == test against sea, rocky, and borders
+                          177 == test against sea, rocky, and borders
                          */
                         /*
-                          0x10001400 == test against building tree keep
+                          268440576 == test against building tree keep
                          */
                         if (DAT_TileMapState::instance.WalkLayer[_cTile2] != this->searchGeneration
                             && (_logic & 0xb1U) == 0 && (_logic & 0x10001400U) == 0) {
@@ -80,21 +81,23 @@ namespace Map {
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[_cTile2] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.xOffset
                                 + (short)_cX;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
                                 + (short)_cY;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _cTile2;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                            if (80400 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a10 <= (int)this->searchQueue.readIndex) {
+                    if (80400 <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 }

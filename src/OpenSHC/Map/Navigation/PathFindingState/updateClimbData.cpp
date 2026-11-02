@@ -31,8 +31,7 @@ namespace Map {
                             DAT_CurrentClimbDataID::instance);
                     } else {
                         this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
-                        int numberOfUnitsUsing
-                            = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
+                        int numberOfUnitsUsing = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
                         if (numberOfUnitsUsing > this->debugGreatestClimbLoading) {
                             this->debugGreatestClimbLoading = numberOfUnitsUsing;
                         }

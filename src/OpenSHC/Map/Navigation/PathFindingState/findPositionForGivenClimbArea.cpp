@@ -19,7 +19,8 @@ namespace Map {
         void PathFindingState::findPositionForGivenClimbArea(int area, uint ySpace, uint y)
         {
             int _direction;
-            if (ySpace > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (ySpace > 399 || y > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
             int _baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
@@ -30,9 +31,11 @@ namespace Map {
                             + _baseTile]
                     == area) {
                     this->climbX
-                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset + ySpace;
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset
+                        + ySpace;
                     this->climbY
-                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y;
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset
+                        + y;
                     return;
                 }
             }

@@ -72,7 +72,7 @@ namespace Map {
             forceUpdate = 1;
             _areaID = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
+                160800, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 4000, '\0', (void*)((int)(this->zoneSizesArray)));
             MACRO_CALL_MEMBER(
@@ -118,31 +118,30 @@ namespace Map {
                     mov ebx, _linkage
                     mov bl, byte ptr [ebx + edx]
                 }
-                MACRO_LINKAGE_PUSH_AREA(1, w, forceUpdate, -2, 0x40, MACRO_ASM_DEC, MACRO_ASM_SAME)
-                MACRO_LINKAGE_PUSH_AREA(1, e, forceUpdate, +2, 0x04, MACRO_ASM_INC, MACRO_ASM_SAME)
+                MACRO_LINKAGE_PUSH_AREA(1, w, forceUpdate, -2, 64, MACRO_ASM_DEC, MACRO_ASM_SAME)
+                MACRO_LINKAGE_PUSH_AREA(1, e, forceUpdate, +2, 4, MACRO_ASM_INC, MACRO_ASM_SAME)
                 __asm mov edx, _tile
                 __asm mov eax, _cY
                 __asm shl eax, 3
                 __asm mov esi, _dirMatrix
                 __asm add edx, dword ptr [esi + eax*4]
-                MACRO_LINKAGE_PUSH_AREA(1, nw, forceUpdate, -2, 0x80, MACRO_ASM_DEC, MACRO_ASM_DEC)
-                MACRO_LINKAGE_PUSH_AREA(1, n, forceUpdate, 0, 0x01, MACRO_ASM_SAME, MACRO_ASM_DEC)
-                MACRO_LINKAGE_PUSH_AREA(1, ne, forceUpdate, +2, 0x02, MACRO_ASM_INC, MACRO_ASM_DEC)
+                MACRO_LINKAGE_PUSH_AREA(1, nw, forceUpdate, -2, 128, MACRO_ASM_DEC, MACRO_ASM_DEC)
+                MACRO_LINKAGE_PUSH_AREA(1, n, forceUpdate, 0, 1, MACRO_ASM_SAME, MACRO_ASM_DEC)
+                MACRO_LINKAGE_PUSH_AREA(1, ne, forceUpdate, +2, 2, MACRO_ASM_INC, MACRO_ASM_DEC)
                 __asm mov edx, _tile
                 __asm mov eax, _cY
                 __asm shl eax, 3
                 __asm add eax, 4
                 __asm mov esi, _dirMatrix
                 __asm add edx, dword ptr [esi + eax*4]
-                MACRO_LINKAGE_PUSH_AREA(1, sw, forceUpdate, -2, 0x20, MACRO_ASM_DEC, MACRO_ASM_INC)
-                MACRO_LINKAGE_PUSH_AREA(1, s, forceUpdate, 0, 0x10, MACRO_ASM_SAME, MACRO_ASM_INC)
-                MACRO_LINKAGE_PUSH_AREA(1, se, forceUpdate, +2, 0x08, MACRO_ASM_INC, MACRO_ASM_INC)
+                MACRO_LINKAGE_PUSH_AREA(1, sw, forceUpdate, -2, 32, MACRO_ASM_DEC, MACRO_ASM_INC)
+                MACRO_LINKAGE_PUSH_AREA(1, s, forceUpdate, 0, 16, MACRO_ASM_SAME, MACRO_ASM_INC)
+                MACRO_LINKAGE_PUSH_AREA(1, se, forceUpdate, +2, 8, MACRO_ASM_INC, MACRO_ASM_INC)
                 __asm {
                     add _readIndex, 1
                     jmp area_loop
                 area_done:
-                }
-                // clang-format on
+                } // clang-format on
 
                 _areaID = _areaID + 1;
                 if (1000 <= (short)_areaID) {

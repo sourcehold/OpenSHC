@@ -12,13 +12,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A94E0
         void PathFindingState::clearAllClimbData()
         {
-            int iVar1 = 0;
             this->numberOfClimbTeleports = 0;
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(iVar1);
-                iVar1 = iVar1 + 1;
-            } while (iVar1 < 200);
-            return;
+            for (int _climbDataID = 0; _climbDataID < 200; ++_climbDataID) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(_climbDataID);
+            }
         }
 
     }

@@ -15,7 +15,7 @@ namespace Map {
         void PathFindingState::clearClimbData(int param_1)
         {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x204, '\0', (void*)((int)(this->climbData + param_1)));
+                516, '\0', (void*)((int)(this->climbData + param_1)));
             return;
         }
 

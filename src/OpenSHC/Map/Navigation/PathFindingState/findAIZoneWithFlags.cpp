@@ -27,36 +27,38 @@ namespace Map {
             int _candidate;
             int _tile;
             this->calculations = this->calculations + 1;
-            if (ySpace > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (ySpace > 399 || y > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return FALSE;
             }
             this->searchGeneration = this->searchGeneration + 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
-                    = (short)this->searchQueue.currentDistance;
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if (_tile < 0) {
                     return FALSE;
                 }
-                if (_tile >= 0x13a10) {
+                if (_tile >= 80400) {
                     return FALSE;
                 }
                 int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (0x13a10 < (int)this->searchQueue.currentDistance) {
+                if (80400 < (int)this->searchQueue.currentDistance) {
                     return FALSE;
                 }
                 if ((int)this->searchQueue.currentDistance > maxDistance) {
@@ -87,13 +89,13 @@ namespace Map {
                             + sVar2;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                        if (80400 <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
                 this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (0x13a10 <= (int)this->searchQueue.readIndex) {
+                if (80400 <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
