@@ -15,24 +15,16 @@ namespace Map {
         void EntityState::clearEntityArrayAndSeagullArray()
         {
             this->totalEntityCount = 0;
-            Entity* entity = this->entityArray;
-            int count = 3000;
-            do {
+            for (int entityID = 0; entityID < 3000; ++entityID) {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(Entity), 0, entity);
-                entity = entity + 1;
-                count = count - 1;
-            } while (count != 0);
-            ExtraEntityInfo* seagull = this->seagullArray;
-            count = 100;
-            do {
+                    sizeof(Entity), 0, &this->entityArray[entityID]);
+            }
+            for (int seagullID = 0; seagullID < 100; ++seagullID) {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(ExtraEntityInfo), 0, seagull);
-                seagull = seagull + 1;
-                count = count - 1;
-            } while (count != 0);
+                    sizeof(ExtraEntityInfo), 0, &this->seagullArray[seagullID]);
+            }
             this->maxEntityCount = 3000;
-            this->everyTenTicks = 0x19;
+            this->everyTenTicks = 25;
         }
 
     }

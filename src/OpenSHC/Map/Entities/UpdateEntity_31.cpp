@@ -11,7 +11,8 @@ namespace Map {
     {
         short variant = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unitID_OR_seaGullID;
         if (variant == 0) {
-            if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated >= 16) {
+            if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
+                >= 16) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 15;
             }
@@ -22,12 +23,14 @@ namespace Map {
             return;
         }
         if (variant == 1) {
-            if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated >= 8) {
+            if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
+                >= 8) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 7;
             }
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
-                = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated + 0x11;
+                = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
+                + 17;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne
                 = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated * 3;
         }

@@ -20,10 +20,11 @@ namespace Map {
             int nextEntityID = prevEntityID;
             if (prevEntityID != 0) {
                 int currentEntityID;
-                while (currentEntityID = nextEntityID, ++guardCounter < 100
-                    && (prevEntityID = currentEntityID,
-                        nextEntityID = this->entityArray[currentEntityID].nextEntityOnThisTileByID,
-                        nextEntityID != entityID)) {
+                while (currentEntityID = nextEntityID,
+                    ++guardCounter < 100
+                        && (prevEntityID = currentEntityID,
+                            nextEntityID = this->entityArray[currentEntityID].nextEntityOnThisTileByID,
+                            nextEntityID != entityID)) {
                     if (nextEntityID == 0) {
                         return;
                     }

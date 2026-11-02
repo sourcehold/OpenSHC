@@ -12,10 +12,10 @@ namespace Map {
     uint Entities::UpdateEntity_29()
     {
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].targetZ == 0) {
-            uint result = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 0x91;
+            uint result = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 145;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = result;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
-                = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 0xa1;
+                = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 161;
             return result;
         }
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 < 0) {
@@ -28,13 +28,12 @@ namespace Map {
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated + 1
             + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection * 8;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
-            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 0x81;
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 129;
         short randomValue = SEC_RNG::instance.currentNumber2;
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 > 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2--;
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 == 0) {
-                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2
-                    = -10 - randomValue % 50;
+                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = -10 - randomValue % 50;
             }
         }
         uint result = (ushort)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2;
@@ -43,8 +42,7 @@ namespace Map {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = (short)result;
             if ((short)result == 0) {
                 result = randomValue / 200;
-                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2
-                    = randomValue % 200 + 0xaa;
+                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = randomValue % 200 + 170;
             }
         }
         return result;

@@ -20,8 +20,7 @@ namespace Map {
                 if (angleDegrees <= -5) {
                     return 3;
                 }
-            }
-            else {
+            } else {
                 if (angleDegrees <= 20) {
                     return 5;
                 }

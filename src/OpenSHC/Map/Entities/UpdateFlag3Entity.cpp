@@ -21,9 +21,10 @@ namespace Map {
         }
         switch (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker) {
         case 0:
-            frameOffset = DAT_EntityDefinedData::instance
-                              .Flag3AnimationFrames1[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
-                                                         .unknownAnimationFrameRelated];
+            frameOffset
+                = DAT_EntityDefinedData::instance
+                      .Flag3AnimationFrames1[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
+                              .unknownAnimationFrameRelated];
             if (frameOffset <= 0) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 0;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker
@@ -37,7 +38,7 @@ namespace Map {
             frameOffset
                 = DAT_EntityDefinedData::instance
                       .Flag3AnimationFrames2[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
-                                                  .unknownAnimationFrameRelated];
+                              .unknownAnimationFrameRelated];
             if (frameOffset <= 0) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 0;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker

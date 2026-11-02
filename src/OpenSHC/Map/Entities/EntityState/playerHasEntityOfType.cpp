@@ -12,14 +12,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00401150
         BOOLEnum EntityState::playerHasEntityOfType(int playerID, EntityType entityType)
         {
-            if (entityType == 0x28) {
+            if (entityType == 40) {
                 if (DAT_GameState::instance.playerDataArray[playerID].someCount32 != 0) {
                     return TRUE;
                 }
             } else if (entityType == 0x29 && DAT_GameState::instance.playerDataArray[playerID].someCount33 != 0) {
                 return TRUE;
             }
-            for (int i = 1; i < 0x19; i++) {
+            for (int i = 1; i < 25; i++) {
                 if (this->entityArray[i].logicalState != 0 && this->entityArray[i].entityType == entityType
                     && this->entityArray[i].owner == playerID) {
                     return TRUE;

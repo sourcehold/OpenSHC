@@ -24,7 +24,7 @@ namespace Map {
                         || this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_HEADS_ON_SPIKES)
                     && this->entityArray[entityID].tile == tile) {
                     this->entityArray[entityID].logicalState = 3;
-                    DAT_TileMapState::instance.MiscDisplayLayer[tile] &= 0xefff;
+                    DAT_TileMapState::instance.MiscDisplayLayer[tile] &= ~0x1000;
                 }
             }
         }

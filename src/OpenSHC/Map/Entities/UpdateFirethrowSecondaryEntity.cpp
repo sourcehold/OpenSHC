@@ -12,14 +12,13 @@ namespace Map {
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
             >= DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkThree_1) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
-        }
-        else {
+        } else {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
                 = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset
                 + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         }
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].gmLookupValue == 1) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 0x10;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 16;
         }
     }
 

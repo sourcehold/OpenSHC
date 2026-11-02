@@ -13,46 +13,49 @@ namespace Map {
     {
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = -1;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2++;
-        short animFrame = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
+        short animFrame
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (animFrame < 8) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
                 = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset
                 - animFrame + 15;
-        }
-        else if (animFrame > 0x3f8) {
-            if (animFrame == 0x400) {
+        } else if (animFrame > 1016) {
+            if (animFrame == 1024) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
-            }
-            else {
+            } else {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
                     = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset
-                    + animFrame - 0x3f0;
+                    + animFrame - 1008;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne
-                    = (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated - 0x3f8)
+                    = (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
+                          - 1016)
                     * 4;
-                if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne > 0x1f) {
-                    DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 0x1f;
+                if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne > 31) {
+                    DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 31;
                 }
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne
                     = -1 - DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne;
             }
-        }
-        else {
+        } else {
             if (animFrame >= 16) {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 8;
             }
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
                 = (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_1
-                      + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated - 8)
+                      + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
+                          .unknownAnimationFrameRelated
+                      - 8)
                     % 8
                 + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset;
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 >= 800) {
-                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 0x3f8;
+                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
+                    = 1016;
             }
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
-            = (short)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 0x10;
-        short linkedID = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue;
+            = (short)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 16;
+        short linkedID
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue;
         if (linkedID != 0) {
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].uidRef
                 == DAT_EntityState::instance.entityArray[linkedID].uid) {
@@ -62,10 +65,10 @@ namespace Map {
                     DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].xPosition,
                     DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition);
                 if (DAT_DirectionAlgorithmState::instance.distanceHigh >= 7) {
-                    DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue = 0;
+                    DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue
+                        = 0;
                 }
-            }
-            else {
+            } else {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue = 0;
             }
         }

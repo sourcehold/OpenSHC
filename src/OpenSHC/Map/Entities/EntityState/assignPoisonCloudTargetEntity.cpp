@@ -19,7 +19,8 @@ namespace Map {
                     && this->entityArray[cloudEntityID].unknownAnimationFrameRelated <= 1000
                     && this->entityArray[cloudEntityID].unitID_healer == 0
                     && this->entityArray[cloudEntityID].unknownDistanceRelatedValue == 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(this->entityArray[cloudEntityID].xPosition,
                         this->entityArray[cloudEntityID].yPosition, this->entityArray[claimedCloudID].xPosition,
                         this->entityArray[claimedCloudID].yPosition);

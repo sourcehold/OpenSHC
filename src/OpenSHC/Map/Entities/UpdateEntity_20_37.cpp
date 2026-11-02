@@ -19,8 +19,8 @@ namespace Map {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 7;
             }
         }
-        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation == 0x4c) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation = 0x3c;
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation == 76) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation = 60;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 7;
         }
     }

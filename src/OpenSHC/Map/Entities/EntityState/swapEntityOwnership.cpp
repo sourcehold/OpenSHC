@@ -11,8 +11,7 @@ namespace Map {
                 if (this->entityArray[entityID].logicalState == 2) {
                     if (this->entityArray[entityID].owner == playerA) {
                         this->entityArray[entityID].owner = playerB;
-                    }
-                    else if (this->entityArray[entityID].owner == playerB) {
+                    } else if (this->entityArray[entityID].owner == playerB) {
                         this->entityArray[entityID].owner = playerA;
                     }
                 }

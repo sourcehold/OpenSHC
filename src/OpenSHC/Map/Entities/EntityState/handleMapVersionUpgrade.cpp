@@ -21,10 +21,10 @@ namespace Map {
             if (receivedMapVersion == 100) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeSetCurrentEntityID3000)();
             }
-            if (receivedMapVersion < 0x91) {
+            if (receivedMapVersion < 145) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::SetFlagEntityColor)();
             }
-            if (receivedMapVersion < 0xa0) {
+            if (receivedMapVersion < 160) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeFirst25Entities)();
             }
         }

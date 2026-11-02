@@ -1,6 +1,5 @@
-#include "OpenSHC/Map/Entities.func.hpp"
-
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
+#include "OpenSHC/Map/Entities.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentEntityID.hpp"
@@ -17,35 +16,27 @@ namespace Map {
     {
         short travelledDistance
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].travelledDistance;
-        if (travelledDistance < 0xe) {
+        if (travelledDistance < 14) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 8;
-        }
-        else if (travelledDistance < 0x10) {
+        } else if (travelledDistance < 16) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 9;
-        }
-        else if (travelledDistance < 0x12) {
+        } else if (travelledDistance < 18) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 10;
-        }
-        else if (travelledDistance < 0x14) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0xb;
-        }
-        else if (travelledDistance < 0x16) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0xc;
-        }
-        else if (travelledDistance < 0x18) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0xd;
-        }
-        else if (travelledDistance < 0x1a) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0xe;
-        }
-        else if (travelledDistance < 0x1c) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0xf;
-        }
-        else {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 0x10;
+        } else if (travelledDistance < 20) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 11;
+        } else if (travelledDistance < 22) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 12;
+        } else if (travelledDistance < 24) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 13;
+        } else if (travelledDistance < 26) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 14;
+        } else if (travelledDistance < 28) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 15;
+        } else {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 16;
         }
         if ((DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_1 & 3) == 0) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 += 0x10;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 += 16;
         }
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someCounter_OR_hitGround != 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
@@ -62,8 +53,8 @@ namespace Map {
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition,
                 OpenSHC::DE::SHCDE::FX_FIRE_START);
         }
-        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation == 0x4c) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation = 0x3c;
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation == 76) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].orientation = 60;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
         }
     }

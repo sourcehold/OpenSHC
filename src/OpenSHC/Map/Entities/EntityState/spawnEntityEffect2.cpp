@@ -41,7 +41,8 @@ namespace Map {
             MACRO_CALL_MEMBER(EntityState_Func::calculateEntityDrawOffset, this)(entityID);
             uint savedCurrentEntityID = DAT_CurrentEntityID::instance;
             DAT_CurrentEntityID::instance = entityID;
-            ((void(__cdecl*)())DAT_EntityDefinedData::instance.EntityCallbacks[this->entityArray[entityID].entityType])();
+            ((void(
+                __cdecl*)())DAT_EntityDefinedData::instance.EntityCallbacks[this->entityArray[entityID].entityType])();
             DAT_CurrentEntityID::instance = savedCurrentEntityID;
             return entityID;
         }
