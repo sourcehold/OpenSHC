@@ -28,10 +28,10 @@ namespace AI {
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {
             borderDistance = 98;
+        } else if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 90) {
+            borderDistance = 70;
         } else {
-            borderDistance
-                = DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 90 ? 70
-                                                                                                                  : 50;
+            borderDistance = 50;
         }
         if (useBorderDistance == 0) {
             borderDistance = 0;

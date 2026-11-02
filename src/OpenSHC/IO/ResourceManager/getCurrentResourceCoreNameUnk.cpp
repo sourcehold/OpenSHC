@@ -12,7 +12,7 @@ namespace IO {
         int basenameEnd = strlen(_resourceName);
         DAT_CurrentResourceCoreName::instance[0] = '\0';
 
-        for (int basenameStart = basenameEnd + -1; basenameStart >= 0; --basenameStart) {
+        for (int basenameStart = basenameEnd - 1; basenameStart >= 0; --basenameStart) {
             if (_resourceName[basenameStart] == '.') {
                 basenameEnd = basenameStart;
             }
