@@ -1,6 +1,5 @@
-#include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -9,65 +8,34 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-
+        // The statistics are recomputed over all selected units of playerID, not over the tribe members.
+        // maxUnitCount (uint) is compared signed (jle at 0x522B28).
         // FUNCTION: STRONGHOLDCRUSADER 0x00522B00
-        void TribesState::addUnitToTribeAndUpdateTribeMovementSpeed(int param_1, uint unitID, int tribeID)
+        void TribesState::addUnitToTribeAndUpdateTribeMovementSpeed(int playerID, uint unitID, int tribeID)
         {
-            /*
-              The three speeds are `int`: the original reads one with
-              `movsx ecx, word ptr [eax]` and compares and copies it 32 bits wide
-              (`cmp ecx, esi`, `mov esi, ecx`), where `short` locals give a `movzx` and
-              16-bit `cmp cx, si` / `movzx esi, cx`. The tribe size stays narrow - that one
-              really is `movzx` plus `test ax, ax`.
-             */
-            Unit* _ptrUnit;
-            int _maximumSpeed;
-            int _minimumSpeed;
-            int _totalHealth;
-            short _tribeSize;
-            int _movementSpeed;
-            int _tribeID;
-            _tribeID = tribeID;
-            _maximumSpeed = 0;
-            _totalHealth = 0;
-            _minimumSpeed = 100;
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(unitID, tribeID);
-            if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                tribeID = DAT_UnitsState::instance.maxUnitCount - 1;
-            /*
-              Same anchor difference as its twin addUnitsToTribeAndComputeMovementSpeed,
-              and most of what is left here. The original bases the unit loop on
-              `mov esi, I<UnitsState>::instance+3568` - `&units[1].movementSpeed`, unit
-              offset 0x34c - and reads the speed at `[esi]`; we anchor on +3396,
-              `&units[1].dying` (0x2a0), so every displacement in the loop differs by 0xac
-              while the opcodes line up. diff_anchor.py reports both; see the fuller note
-              on the twin.
-             */
-                _ptrUnit = &DAT_UnitsState::instance.units[1];
-                do {
-                    if (_ptrUnit->logicalState == Map::Units::ULS_NORMAL && !_ptrUnit->dying
-                        && _ptrUnit->ifSelectedThenPlayerID == param_1) {
-                        _movementSpeed = _ptrUnit->movementSpeed;
-                        if (_movementSpeed < _minimumSpeed) {
-                            _minimumSpeed = _movementSpeed;
-                        }
-                        if (_movementSpeed > _maximumSpeed) {
-                            _maximumSpeed = _movementSpeed;
-                        }
-                        _totalHealth = _totalHealth + _ptrUnit->healthPercentage;
+            int maxSpeed = 0;
+            int healthSum = 0;
+            int minSpeed = 100;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, this)(unitID, tribeID);
+            for (int i = 1; i < (int)DAT_UnitsState::instance.maxUnitCount; ++i) {
+                if (DAT_UnitsState::instance.units[i].logicalState == ULS_NORMAL
+                    && DAT_UnitsState::instance.units[i].dying == 0
+                    && DAT_UnitsState::instance.units[i].ifSelectedThenPlayerID == playerID) {
+                    if (DAT_UnitsState::instance.units[i].movementSpeed < minSpeed) {
+                        minSpeed = DAT_UnitsState::instance.units[i].movementSpeed;
                     }
-                    _ptrUnit = _ptrUnit + 1;
-                    tribeID = tribeID + -1;
-                } while (tribeID);
+                    if (DAT_UnitsState::instance.units[i].movementSpeed > maxSpeed) {
+                        maxSpeed = DAT_UnitsState::instance.units[i].movementSpeed;
+                    }
+                    healthSum += DAT_UnitsState::instance.units[i].healthPercentage;
+                }
             }
-            _tribeSize = this->tribes[_tribeID].size;
-            this->tribes[_tribeID].size2Unk = _tribeSize;
-            if (0 < _tribeSize) {
-                this->tribes[_tribeID].minimumMovementSpeed = _minimumSpeed;
-                this->tribes[_tribeID].movementSpeed = _minimumSpeed;
-                this->tribes[_tribeID].maximumMovementSpeed = _maximumSpeed;
-                this->tribes[_tribeID].unitsHealthPercentage = (short)(_totalHealth / (int)_tribeSize);
+            this->tribes[tribeID].size2Unk = this->tribes[tribeID].size;
+            if (this->tribes[tribeID].size > 0) {
+                this->tribes[tribeID].minimumMovementSpeed = (short)minSpeed;
+                this->tribes[tribeID].movementSpeed = (short)minSpeed;
+                this->tribes[tribeID].maximumMovementSpeed = (short)maxSpeed;
+                this->tribes[tribeID].unitsHealthPercentage = (short)(healthSum / this->tribes[tribeID].size);
             }
         }
 

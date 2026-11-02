@@ -1,6 +1,5 @@
-#include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -11,43 +10,37 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::States::UnitState;
-
+        // The tribe size is re-read every iteration (0x524906).
         // FUNCTION: STRONGHOLDCRUSADER 0x00524890
-        undefined4 TribesState::stopTribeMovementAndCheckIdle(int param_1)
+        undefined4 TribesState::stopTribeMovementAndCheckIdle(int tribeID)
         {
-            short* psVar1;
-            int unitID;
-            int iVar2;
-            int unitSelectionIndex;
-            psVar1 = &this->tribes[param_1].size;
-            unitSelectionIndex = 0;
-            iVar2 = 0;
-            if (0 < *psVar1) {
+            short* const tribeSize = &this->tribes[tribeID].size;
+            int unitSelectionIndex = 0;
+            int busyUnitCount = 0;
+            if (*tribeSize > 0) {
                 do {
-                    unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
-                        param_1, unitSelectionIndex);
-                    unitSelectionIndex = unitSelectionIndex + 1;
-                    if ((DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL)
-                        && (DAT_UnitsState::instance.units[unitID].dying == 0)) {
-                        if ((DAT_UnitsState::instance.units[unitID].usingTeleport == 0)
-                            && (DAT_UnitsState::instance.units[unitID].field303_0x413 == 0)) {
-                            if (DAT_UnitsState::instance.units[unitID].state.generic
-                                != Map::Units::States::US_MOVE_TO_DESTINATION)
-                                continue;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
+                    int const unitID
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
+                            tribeID, unitSelectionIndex);
+                    ++unitSelectionIndex;
+                    if (DAT_UnitsState::instance.units[unitID].logicalState == ULS_NORMAL
+                        && DAT_UnitsState::instance.units[unitID].dying == 0) {
+                        if (DAT_UnitsState::instance.units[unitID].usingTeleport != 0
+                            || DAT_UnitsState::instance.units[unitID].field303_0x413 != 0) {
+                            ++busyUnitCount;
+                        } else if (DAT_UnitsState::instance.units[unitID].state.generic
+                            == States::US_MOVE_TO_DESTINATION) {
+                            MACRO_CALL_MEMBER(UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                                 DAT_UnitsState::ptr)(unitID);
+                            ++busyUnitCount;
                         }
-                        iVar2 = iVar2 + 1;
                     }
-                } while (unitSelectionIndex < *psVar1);
-                if (iVar2) {
-                    return (undefined4)(0);
+                } while (unitSelectionIndex < *tribeSize);
+                if (busyUnitCount != 0) {
+                    return 0;
                 }
             }
-            return (undefined4)(1);
+            return 1;
         }
 
     }

@@ -1,7 +1,6 @@
-#include "../../../Map.func.hpp"
 #include "../TribesState.func.hpp"
 
-#include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/GameModeInt.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -11,33 +10,30 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Game::GameMode;
-
+        // Slots 4..11 read [i*4 + 0x117F094] (machine code 0x52356C) = mapAndTime.signpostIDs[i - 4]
+        // (0x117F0A4..0x117F0C0), not mercRecruitable as the header doc says.
         // FUNCTION: STRONGHOLDCRUSADER 0x00523520
         undefined4 TribesState::hasAvailableSpawnSlotForWildlifeOrMercs()
         {
-            if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
-                || 0xa0 <= DAT_GameState::instance.mapAndTime.wildlifeCount) {
-                return (undefined4)(0);
-            }
-            /*
-              The last instruction of difference is the original's `xor eax, eax` sitting
-              before the wildlifeCount guard rather than after it. Declaring the counter
-              there costs 10 points (96.0% -> 85.7%), so it stays in the `for` header.
-             */
-            for (int _slot = 0; _slot < 0xc; _slot = _slot + 1) {
-                if (_slot < 4) {
-                    uint const _x = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];
-                    uint const _y = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1];
-                    if (_x <= 399 && _y <= 399
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != 0) {
-                        return (undefined4)(1);
+            int i;
+            if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
+                && (i = 0, DAT_GameState::instance.mapAndTime.wildlifeCount < 0xa0)) {
+                do {
+                    if (i < 4) {
+                        uint const spawnX = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[i][0];
+                        uint const spawnY = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[i][1];
+                        if (spawnX <= 399 && spawnY <= 399
+                            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[spawnY * 400 + spawnX]
+                                != 0) {
+                            return 1;
+                        }
+                    } else if (DAT_GameState::instance.mapAndTime.signpostIDs[i - 4] != 0) {
+                        return 1;
                     }
-                } else if (DAT_GameState::instance.mapAndTime.mercRecruitable[_slot + 4] != 0) {
-                    return (undefined4)(1);
-                }
+                    ++i;
+                } while (i < 12);
             }
-            return (undefined4)(0);
+            return 0;
         }
 
     }

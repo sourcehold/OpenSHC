@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../TribesState.func.hpp"
 
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
@@ -10,82 +9,49 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::Behavior::UnitStanceEnum;
+        using OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+        using OpenSHC::Map::Units::Behavior::USE_STAND_GROUND;
 
+        // maxUnitCount (uint) is compared signed (jle at 0x522CCF). The stance counter array is indexed with the
+        // tribe's unitStance without a range check (0x522D15).
         // FUNCTION: STRONGHOLDCRUSADER 0x00522CA0
         void TribesState::snapshotSelectionTribeAndComputeStance(int playerID)
         {
-            BOOLEnum _atLeastTwoTribes = FALSE;
             this->tribeCopiedToSlot0 = 0;
-            int _stanceCount[3];
-            _stanceCount[0] = 0;
-            _stanceCount[1] = 0;
-            _stanceCount[2] = 0;
-            int _lastTribeID = -1;
-            if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
-                int _unitIDCountdown = DAT_UnitsState::instance.maxUnitCount - 1;
-                do {
-                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && !_pUnit->dying
-                        && _pUnit->ifSelectedThenPlayerID == playerID) {
-                        int const _unitTribeID = (int)_pUnit->tribeID;
-                        if (0 < _unitTribeID) {
-                            /*
-                              count the stance of every tribe the selection touches, and
-                              notice as soon as it touches two different ones
-                             */
-                            int const _stance = (short)this->tribes[_unitTribeID].unitStance;
-                            _stanceCount[_stance] = _stanceCount[_stance] + 1;
-                            if (_lastTribeID != -1 && _unitTribeID != _lastTribeID) {
-                                _atLeastTwoTribes = TRUE;
-                            }
-                            _lastTribeID = _unitTribeID;
+            BOOL multipleTribes = FALSE;
+            int stanceCount[3];
+            stanceCount[0] = 0;
+            stanceCount[1] = 0;
+            stanceCount[2] = 0;
+            int lastTribeID = -1;
+            for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; ++unitID) {
+                if (DAT_UnitsState::instance.units[unitID].logicalState == ULS_NORMAL
+                    && DAT_UnitsState::instance.units[unitID].dying == 0
+                    && DAT_UnitsState::instance.units[unitID].ifSelectedThenPlayerID == playerID) {
+                    int const tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
+                    if (tribeID > 0) {
+                        ++stanceCount[this->tribes[tribeID].unitStance];
+                        if (lastTribeID != -1 && tribeID != lastTribeID) {
+                            multipleTribes = TRUE;
                         }
+                        lastTribeID = tribeID;
                     }
-                    _pUnit = _pUnit + 1;
-                    _unitIDCountdown = _unitIDCountdown + -1;
-                } while (_unitIDCountdown);
-                if (_lastTribeID != -1 && !_atLeastTwoTribes) {
-                    /*
-                      A whole-struct assignment, which is the `rep movsd` of 0xcd dwords the
-                      original has; a hand-written int-by-int copy compiles to a loop.
-
-                      And then it returns: the block at 0x522d42 ends in its own `ret 4`, so
-                      a selection that is all one tribe keeps the stance it just copied
-                      instead of having the majority written over it. That is also why the
-                      three counts are only loaded out of the array at 0x522d6a, on the path
-                      where the copy did not happen.
-                     */
-                    this->tribes[0] = this->tribes[_lastTribeID];
-                    this->tribeCopiedToSlot0 = 1;
-                    return;
                 }
             }
-            /*
-              The three counts are read straight out of the array, which is where the
-              original's own three slots are: it loads [esp+0x18], [esp+0x14] and
-              [esp+0x10] into registers at 0x522d6a and nowhere else, and diff_slots.py
-              shows our extra fourth slot is a spill of a redundant copy.
-             */
-            /*
-              The stand-ground store goes last, and the two counts are compared the other
-              way round. By address the original's three exits are the aggressive store,
-              then the computed one, then `mov word ptr [ebx + 0x2e0], 0` with an epilogue
-              of its own - so the empty-tally arm is the far block, not the first guard.
-              The computed one is `cmp ecx, esi; setge al`, which is
-              `_stanceCount[1] >= _stanceCount[0]`; writing it as `[0] <= [1]` gives the
-              same answer from `cmp esi, ecx; setle al`, with the operands swapped.
-             */
-            if (_stanceCount[2] + _stanceCount[1] + _stanceCount[0] != 0) {
-                if (_stanceCount[2] < _stanceCount[1] || _stanceCount[2] < _stanceCount[0]) {
-                    this->tribes[0].unitStance = (ushort)(_stanceCount[1] >= _stanceCount[0]);
-                    return;
-                }
-                this->tribes[0].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+            if (lastTribeID != -1 && !multipleTribes) {
+                this->tribes[0] = this->tribes[lastTribeID];
+                this->tribeCopiedToSlot0 = 1;
                 return;
             }
-            this->tribes[0].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
+            if (stanceCount[2] + stanceCount[1] + stanceCount[0] != 0) {
+                if (stanceCount[2] >= stanceCount[1] && stanceCount[2] >= stanceCount[0]) {
+                    this->tribes[0].unitStance = USE_AGGRESSIVE;
+                } else {
+                    this->tribes[0].unitStance = stanceCount[1] >= stanceCount[0];
+                }
+            } else {
+                this->tribes[0].unitStance = USE_STAND_GROUND;
+            }
         }
 
     }
