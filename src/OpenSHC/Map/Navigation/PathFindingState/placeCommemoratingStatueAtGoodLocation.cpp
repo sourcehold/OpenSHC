@@ -1,0 +1,130 @@
+#include "../PathFindingState.func.hpp"
+
+#include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/SEC_RNG.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Navigation {
+
+        using OpenSHC::Commands::MappersEnum;
+        using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+        /*
+          WARNING: Enum "MappersEnum": Some values do not have unique names
+         */
+        /*
+          WARNING: Enum "MappersEnumInt": Some values do not have unique names
+         */
+        /*
+          decompilerscript: committed: 2025-01-30 21:57:43.216000
+         */
+        // FUNCTION: STRONGHOLDCRUSADER 0x004A21B0
+        void PathFindingState::placeCommemoratingStatueAtGoodLocation(int playerID)
+        {
+            int _tile;
+            short* psVar4;
+            int* piVar5;
+            int _candidate;
+            MappersEnum commandBuildingType;
+            int _startX = (int)DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
+            int _startY = (int)DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
+            if ((uint)_startX > 399 || (uint)_startY > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_startY * 400 + _startX] == '\0') {
+                return;
+            }
+            this->calculations = this->calculations + 1;
+            this->searchGeneration = this->searchGeneration + 1;
+            if (32000 < this->searchGeneration) {
+                this->searchGeneration = 1;
+                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+            }
+            this->searchQueue.currentDistance = 1;
+            this->searchQueue.readIndex = 0;
+            this->searchQueue.writeIndex = 1;
+            this->searchQueue.yQueue[0] = (short)_startY;
+            this->searchQueue.xQueue[0] = (short)_startX;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[_startY].addXgetTile + _startX;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
+                = (short)this->searchQueue.currentDistance;
+            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            commandBuildingType = (OpenSHC::Commands::MappersEnum)((int)SEC_RNG::instance.currentNumber2 % 5
+                + OpenSHC::Commands::M_MAPPER_STATUE1);
+            MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+            while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                if (_tile < 0) {
+                    return;
+                }
+                if (_tile >= 80400) {
+                    return;
+                }
+                _startX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                _startY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                if (80400 < (int)this->searchQueue.currentDistance) {
+                    return;
+                }
+                if (20 < (int)this->searchQueue.currentDistance) {
+                    return;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::checkBuildingCanBePlacedHere, DAT_TileMapState::ptr)(
+                    playerID, (uint)(_startX), (uint)(_startY), commandBuildingType, -2);
+                if (DAT_TileMapState::instance.buildingPlacementFail == FALSE) {
+                    DAT_TileMapState::instance.skipPlacementCheck = 1;
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
+                        playerID, _startX, _startY, commandBuildingType, 2, 15);
+                    _tile = DAT_TileMapState::instance.placedBuildingID;
+                    DAT_BuildingsState::instance.buildings[_tile].owner = 0;
+                    DAT_BuildingsState::instance.buildings[_tile].statueCommemoratingPlayerID = (short)playerID;
+                    return;
+                }
+                for (int _direction = 0; _direction < 8; ++_direction) {
+                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_startY][_direction] + _tile;
+                    if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
+                        DAT_TileMapState::instance.CertainPathLayer[_candidate]
+                            = (short)this->searchQueue.currentDistance + 1;
+                        DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
+                        this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.xOffset
+                            + (short)_startX;
+                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.yOffset
+                            + (short)_startY;
+                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                            this->searchQueue.writeIndex = 0;
+                        }
+                    }
+                }
+
+                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                if (80400 <= (int)this->searchQueue.readIndex) {
+                    this->searchQueue.readIndex = 0;
+                }
+            }
+            return;
+        }
+
+    }
+}
+}
