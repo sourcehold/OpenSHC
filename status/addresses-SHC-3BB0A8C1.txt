@@ -35421,7 +35421,7 @@ SHC_3BB0A8C1_0x004D0A20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0A80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0B10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0B10 | 76.0% | Register/slot naming differs
 
 SHC_3BB0A8C1_0x004D0B70 | 100.0% | Reimplemented
 
