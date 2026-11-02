@@ -22,19 +22,19 @@ namespace AI {
             return;
         }
 
-        int allowArmourers = 1;
-        int allowIronMines = 1;
         int allowFletchers = 1;
+        int allowFarms = 1;
+        int allowIronMines = 1;
+        int allowQuarries = 1;
         int allowPitchRigs = 1;
         int allowWoodcutters = 1;
         int allowPoleturners = 1;
         int allowBlacksmiths = 1;
+        int allowArmourers = 1;
         int allowTanners = 1;
-        int allowQuarries = 1;
         int allowBakeries = 1;
         int allowBreweries = 1;
         int allowInns = 1;
-        int allowFarms = 1;
         int allowWells = 1;
 
         int buildingBurning = MACRO_CALL_MEMBER(
