@@ -10,25 +10,39 @@ namespace Map {
         {
             switch (bits) {
             case 1:
-                __asm rol value, 1
+                __asm {
+                    rol value, 1
+                }
                 break;
             case 2:
-                __asm rol value, 2
+                __asm {
+                    rol value, 2
+                }
                 break;
             case 3:
-                __asm rol value, 3
+                __asm {
+                    rol value, 3
+                }
                 break;
             case 4:
-                __asm rol value, 4
+                __asm {
+                    rol value, 4
+                }
                 break;
             case 5:
-                __asm rol value, 5
+                __asm {
+                    rol value, 5
+                }
                 break;
             case 6:
-                __asm rol value, 6
+                __asm {
+                    rol value, 6
+                }
                 break;
             case 7:
-                __asm rol value, 7
+                __asm {
+                    rol value, 7
+                }
                 break;
             }
             return value;

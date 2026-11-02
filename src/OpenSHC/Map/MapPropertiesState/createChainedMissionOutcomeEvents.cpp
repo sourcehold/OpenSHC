@@ -41,8 +41,7 @@ namespace Map {
             this->scenarioEvents[this->currentEventID].data.scenario.ScenarioEventType = 0;
             this->scenarioEvents[this->currentEventID].data.scenario.conditions[3].enabled = 1;
             this->scenarioEvents[this->currentEventID].data.scenario.conditions[15].enabled = 1;
-        }
-        else if (outcomeMode == 1) {
+        } else if (outcomeMode == 1) {
             this->currentEventID = this->eventsCount;
             this->eventsCount = this->eventsCount + 1;
             this->editedEventType = 3;

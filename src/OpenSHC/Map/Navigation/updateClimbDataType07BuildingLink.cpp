@@ -13,9 +13,15 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004A5230
     void __cdecl Navigation::updateClimbDataType07BuildingLink()
     {
+        /*
+          The repeated `climbData[DAT_CurrentClimbDataID::instance]` cannot be collapsed into
+          a `ClimbData&`: the original re-reads the global index for every field, and the
+          reference measured 0.53 against 0.98 (quick_diff).
+         */
         if (DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].sourceUID
-            != DAT_BuildingsState::instance.buildings[DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID]
-                   .uid) {
+            != DAT_BuildingsState::instance
+                .buildings[DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID]
+                .uid) {
             DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].canBeUsed = 0;
         }
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].isRecognizedByPathfinding = 1;
@@ -25,17 +31,16 @@ namespace Map {
             = DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].bottomYPosition - 2;
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topTilePositionUnk
             = DAT_ViewportRenderState::instance
-                  .translationMatrix[DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topYPosition]
+                  .translationMatrix[DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance]
+                          .topYPosition]
                   .addXgetTile
             + DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topXPosition;
-        DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].area = (short)DAT_TileMapState::instance
-                                                                         .PathConnectionLayer[DAT_PathFindingState::instance
-                                                                                 .climbData[DAT_CurrentClimbDataID::instance]
-                                                                                 .bottomTilePosition];
-        DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].wallGroupAreaID = (short)DAT_TileMapState::instance
-                                                                            .PathConnectionLayer[DAT_PathFindingState::instance
-                                                                                    .climbData[DAT_CurrentClimbDataID::instance]
-                                                                                    .topTilePositionUnk];
+        DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].area
+            = (short)DAT_TileMapState::instance.PathConnectionLayer
+                  [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].bottomTilePosition];
+        DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].wallGroupAreaID
+            = (short)DAT_TileMapState::instance.PathConnectionLayer
+                  [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topTilePositionUnk];
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingArea = -1;
     }
 

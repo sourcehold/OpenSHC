@@ -42,37 +42,37 @@ namespace Map {
                 if (x > targetX) {
                     if (y > targetY) {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x48;
+                            this->orientation = 72;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x49;
+                            this->orientation = 73;
                         } else {
-                            this->orientation = 0x4a;
+                            this->orientation = 74;
                         }
                     } else {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x48;
+                            this->orientation = 72;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x47;
+                            this->orientation = 71;
                         } else {
-                            this->orientation = 0x46;
+                            this->orientation = 70;
                         }
                     }
                 } else {
                     if (y > targetY) {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x40;
+                            this->orientation = 64;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x3f;
+                            this->orientation = 63;
                         } else {
-                            this->orientation = 0x3e;
+                            this->orientation = 62;
                         }
                     } else {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x40;
+                            this->orientation = 64;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x41;
+                            this->orientation = 65;
                         } else {
-                            this->orientation = 0x42;
+                            this->orientation = 66;
                         }
                     }
                 }
@@ -80,44 +80,44 @@ namespace Map {
                 if (y > targetY) {
                     if (x > targetX) {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x3c;
+                            this->orientation = 60;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x4b;
+                            this->orientation = 75;
                         } else {
-                            this->orientation = 0x4a;
+                            this->orientation = 74;
                         }
                     } else {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x3c;
+                            this->orientation = 60;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x3d;
+                            this->orientation = 61;
                         } else {
-                            this->orientation = 0x3e;
+                            this->orientation = 62;
                         }
                     }
                 } else {
                     if (x > targetX) {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x44;
+                            this->orientation = 68;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x45;
+                            this->orientation = 69;
                         } else {
-                            this->orientation = 0x46;
+                            this->orientation = 70;
                         }
                     } else {
                         if (axisRatioPercent <= 25) {
-                            this->orientation = 0x44;
+                            this->orientation = 68;
                         } else if (axisRatioPercent < 75) {
-                            this->orientation = 0x43;
+                            this->orientation = 67;
                         } else {
-                            this->orientation = 0x42;
+                            this->orientation = 66;
                         }
                     }
                 }
             }
 
             if (this->distanceY + this->distanceX <= 0) {
-                this->orientation = 0x4c;
+                this->orientation = 76;
             }
         }
 

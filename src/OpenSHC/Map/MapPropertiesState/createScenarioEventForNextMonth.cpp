@@ -11,7 +11,7 @@ namespace Map {
     void MapPropertiesState::createScenarioEventForNextMonth()
     {
         this->currentEventID = this->eventsCount;
-        this->eventsCount = this->eventsCount + 1;
+        ++this->eventsCount;
         this->editedEventType = 3;
         MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::initializeScenarioEvent,
             &this->scenarioEvents[this->currentEventID])();
