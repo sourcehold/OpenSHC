@@ -523,11 +523,20 @@ Toggling a file in or out of `cmake/compiler-flags-gl.txt` is worth the same swe
 (`receiveAllTransmittedCommands`, +1.3) and showed that the `/GL` entries for `determineGameTicksToPerform` and
 `computeLatencyAdjustmentFromMatchTimes` currently measure as no-ops.
 
-### Link-Time Code Generation
+### A volatile register kept live across a call (the "LTCG" pattern)
 
 A volatile register (usually ECX or EDX) that stays live across a call in the original, without being reloaded, means
-that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
-so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
+the compiler knew which registers the callee writes. It was first read as LTCG, and adding the `.cpp` to
+`cmake/compiler-flags-gl.txt` does reproduce it (SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and
+SHC_3BB0A8C1_0x0045B7F0 to 100% that way) - but the original's Rich header has no `/GL` object at all. The real cause
+is that caller and callee were **in the same translation unit**: c2 stores the set of registers each function writes
+on its function record and reads it when lowering a later call to that function in the same module, and it compiles
+a unit bottom-up (callees before callers), so source order is irrelevant. `copyData` matches 100% without `/GL` as
+soon as its three callees are in its file; `updateMoatCountdownTimers` goes 0.51 -> 1.00 the same way; an `inline`
+callee in a header does not do it. `tools/compiler-internals/tu_merge.py CALLER.cpp CALLEE.cpp` measures the three
+layouts for any pair, and `tu_layout.py pairs` reads the original's unit membership off the function addresses
+(a callee below its caller in the image is the fingerprint). The `/GL` list stays the practical fix while the
+project keeps one function per file; the callee's resolver has to be on in either case.
 
 ### Parameters
 

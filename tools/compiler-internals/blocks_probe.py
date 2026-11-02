@@ -75,10 +75,8 @@ def probe_named(src, name):
     record: eax -> symbol at +0, mangled name at poi(sym+4) ("?name@Class@...")."""
     # aliases do not expand inside a breakpoint command, so match the first 8 bytes of the
     # mangled name ("?" + function name) as two little-endian dwords instead
-    import struct
-    mangled = ('?' + name + '        ')[:8].encode('ascii')
-    w0, w1 = struct.unpack('<II', mangled)
-    gate = ('r $t7=poi(poi(@eax)+4); .if ((poi(@$t7)==0x%x) & (poi(@$t7+4)==0x%x)) { .printf ' % (w0, w1) + EQ + 'FOUND ' + NL + EQ +
+    from slot_probe import name_test
+    gate = ('r $t7=poi(poi(@eax)+4); ' + name_test(name) + '; .if (@$t6 != 0) { .printf ' + EQ + 'FOUND ' + NL + EQ +
             '; da @$t7 L60; be 1-8 } .else { bd 1-8 }')
     lines = ['sxe ld:c2', 'g',
              'bp1 0x10b307e0 ".printf ' + EQ + 'CTM eax=%x edx=%x s=%x %x %x' + NL + EQ +
@@ -107,11 +105,9 @@ PASSES = [('Color', '0x10b0cf40'), ('FgDoLateFlowOpts', '0x10b2c950'), ('FgDoLat
 def probe_passes(src, name):
     """Dump the stream at the entry of each pass in PASSES (name-gated like probe_named), to see
     which one first shows a change - e.g. the end copies of the return blocks."""
-    import struct
-    mangled = ('?' + name + '        ')[:8].encode('ascii')
-    w0, w1 = struct.unpack('<II', mangled)
+    from slot_probe import name_test
     n = len(PASSES)
-    gate = ('r $t7=poi(poi(@eax)+4); .if ((poi(@$t7)==0x%x) & (poi(@$t7+4)==0x%x)) { .printf ' % (w0, w1) + EQ + 'FOUND' + NL + EQ +
+    gate = ('r $t7=poi(poi(@eax)+4); ' + name_test(name) + '; .if (@$t6 != 0) { .printf ' + EQ + 'FOUND' + NL + EQ +
             '; be 1-%d } .else { bd 1-%d }' % (n, n))
     lines = ['sxe ld:c2', 'g']
     for i, (pn, addr) in enumerate(PASSES):

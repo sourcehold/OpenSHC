@@ -76,13 +76,16 @@ WIDTH = {'byte': 1, 'word': 2, 'dword': 4, 'qword': 8, 'tbyte': 10, 'xmmword': 1
 def ours(path):
     """(frame_size, [(offset, size, refs, name)]) from the /FA listing."""
     text = common.read_text(path)
-    m = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', text)
+    m = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(?:(\w+)::)?(\w+)\(', text)
     if not m:
         raise ValueError('%s has no `// FUNCTION:` marker followed by a definition' % path)
     cls, name = m.groups()
+    if cls is None:      # a free function: the mangled scope is the innermost enclosing namespace
+        scopes = re.findall(r'^\s*namespace\s+(\w+)\s*\{', text[:m.start()], re.M)
+        cls = scopes[-1] if scopes else None
     asm_streams.streams(path, keep_slots=True)       # produces the listing
     listing = common.read_text(LISTING).splitlines()
-    pat = re.compile(r'^\?%s@%s@\S* PROC' % (re.escape(name), re.escape(cls)))
+    pat = re.compile(r'^\?%s@%s@\S* PROC' % (re.escape(name), re.escape(cls) if cls else r'\w+'))
     start = next((i for i, l in enumerate(listing) if pat.match(l)), None)
     if start is None:
         raise ValueError('no code emitted for %s::%s (inlined, or named differently)' % (cls, name))

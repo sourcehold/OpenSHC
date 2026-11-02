@@ -11,7 +11,12 @@ Patching the flag only around `Spillcosts` isolates the allocation change: the o
 behaviour - `FgTryTailMerge` being skipped at 1, and `PogoOptCodeMotion` running at 2 - needs
 profile data that does not exist here, and would crash or mislead.
 
-usage: pogo_probe.py FILE.cpp [--value N]
+usage: pogo_probe.py FILE.cpp [--value N] [--around ENTRY RET]
+
+`--around ENTRY RET` brackets a different routine instead of Spillcosts: the flag is set at
+ENTRY and restored at RET (the routine's `ret` instruction - an instruction boundary, see the
+note below). E.g. `--around 0x10c53e80 0x10c54065` is MdmInsertEntryExit, whose
+`PogoMdOptSuperBlock` (shrink-wrapping) only runs with the flag at 2.
 """
 
 import os
@@ -19,7 +24,7 @@ import re
 import subprocess
 import sys
 
-ROOT = r'C:\Users\Gynt\Projects\sourcehold\rea\OpenSHC-2'
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'reimplementation-helper', 'batch'))
 import common   # noqa: E402
 
@@ -29,7 +34,7 @@ POGOFLAG = 0x10d0ffdc
 BS = chr(92)
 
 
-def compile_once(src, out, patch_to=None):
+def compile_once(src, out, patch_to=None, around=None):
     """Compile `src` with /FA into `out`; if `patch_to` is set, force _PogoFlag across Spillcosts."""
     out.mkdir(parents=True, exist_ok=True)
     import json
@@ -46,14 +51,15 @@ def compile_once(src, out, patch_to=None):
         return r.returncode, r.stdout
     # Spillcosts ends at 0x10b11559; break on entry to set the flag and on the ret to restore it,
     # so nothing outside this one pass sees a value our build was not configured for
+    entry, ret = around or (SPILLCOSTS, 0x10b1153f)
     lines = [
         'sxe ld:c2', 'g',
-        'bp0 %#x "ed %#x %d; gc"' % (SPILLCOSTS, POGOFLAG, patch_to),
+        'bp0 %#x "ed %#x %d; gc"' % (entry, POGOFLAG, patch_to),
         # 0x10b1153f is Spillcosts' single `ret 0xc`; the first attempt used the last byte of
         # its body, which is not an instruction boundary, so the restore never fired and the
         # flag stayed 2 into the profile-dependent passes - the compile then died on a null
         # dereference in FgFindDominatorsGraph. The phase-entry restore is a second net.
-        'bp1 %#x "ed %#x 0; gc"' % (0x10b1153f, POGOFLAG),
+        'bp1 %#x "ed %#x 0; gc"' % (ret, POGOFLAG),
         'bp2 %#x "ed %#x 0; gc"' % (0x10c07400, POGOFLAG),
         'g', 'q', '',
     ]
@@ -68,11 +74,14 @@ def compile_once(src, out, patch_to=None):
 
 def body(listing_path, src):
     text = common.read_text(src)
-    m = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', text)
+    m = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(?:(\w+)::)?(\w+)\(', text)
     cls, name = m.groups()
+    if cls is None:      # a free function: the mangled scope is the innermost namespace
+        scopes = re.findall(r'^\s*namespace\s+(\w+)\s*\{', text[:m.start()], re.M)
+        cls = scopes[-1] if scopes else r'\w+'
     txt = common.read_text(listing_path)
     b = re.search(r'^(\?%s@%s@\S+) PROC.*?\n(.*?)^\1 ENDP'
-                  % (re.escape(name), re.escape(cls)), txt, re.S | re.M)
+                  % (re.escape(name), cls if cls == r'\w+' else re.escape(cls)), txt, re.S | re.M)
     if not b:
         return None
     out = []
@@ -91,9 +100,12 @@ def main():
         sys.exit(__doc__)
     src = sys.argv[1]
     val = 2
+    around = None
     for i, a in enumerate(sys.argv):
         if a == '--value' and i + 1 < len(sys.argv):
             val = int(sys.argv[i + 1])
+        if a == '--around' and i + 2 < len(sys.argv):
+            around = (int(sys.argv[i + 1], 16), int(sys.argv[i + 2], 16))
     os.chdir(ROOT)
     plain = (common.ROOT / common.TMP / 'pogo_plain').resolve()
     patched = (common.ROOT / common.TMP / 'pogo_patched').resolve()
@@ -103,7 +115,7 @@ def main():
         errs = [l for l in log.splitlines() if 'error' in l]
         sys.exit('baseline compile failed: %s' % (errs[:2] or log[-300:]))
     a = body(plain / 'p.asm', src)
-    compile_once(src, patched, val)
+    compile_once(src, patched, val, around)
     b = body(patched / 'p.asm', src)
     if a is None or b is None:
         sys.exit('could not extract the function from one of the listings')

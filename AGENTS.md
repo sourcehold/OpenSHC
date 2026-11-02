@@ -104,6 +104,19 @@ Notes on the bundled MSVC backend itself - what `c2.dll` does, how its symbols a
 the decoded stack-slot rule, and a `cdb` recipe for observing one function's allocation from inside the compiler.
 Read it when a diff is down to register or stack-slot allocation and no source-level hypothesis is paying.
 
+Two entry points that need none of that background: `tools/reimplementation-helper/batch/diagnose.py NAME` runs
+the measuring tools in the right order for one function and ends with a verdict and the next command, and
+`tools/compiler-internals/tuple_dump.py FILE.cpp --name NAME [--diff final preencode]` prints the function as c2
+holds it after every compiler phase (opcodes, registers and locals by name), so "which pass produced this
+difference" - and therefore whether any source edit can reach it - is one six-second run.
+`tools/compiler-internals/finding-mismatches.md` is the walkthrough. The `c2.dll` Ghidra project carries the same
+knowledge as plate comments on the key routines and as the `c2_*` structs; query it with `program="c2.dll"` on
+every ghidra-mcp call (switching programs does not redirect the query tools).
+`tools/compiler-internals/rich_header.py FILE` reads which tools built a PE's objects; measured against the bundled
+toolchain, the original has no `/GL`-compiled object at all (its 38 assembler objects are the static CRT), so an `ecx`
+reuse across a call is not evidence of link-time code generation - see msvc-backend.md, "The compiler the original
+was built with".
+
 ### Reimplementation Control (`tools/reimplementation-control`)
 
 Scripts for enabling implementations and maintaining project state.
@@ -298,9 +311,16 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `mov r, [x]; sub r, 1; je` inside a loop is a `switch` on `x`.
 - A tail call to the same callee from our code but a jump back to a shared block in the original means separate
   `if` branches with identical bodies, not a combined condition.
-- Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
-  not a source difference. Investigate by adding the caller and callee to the txt and enabling their reimplementation in the .func.hpp files.
-  Only makes sense if the callee is 100% matching (e.g. ECX not touched).
+- A volatile register (`ecx`/`edx`) kept live across a call without reload means the original compiler **knew the
+  callee's register usage**, which without `/GL` (and the original has none, see `rich_header.py`) means caller and
+  callee were in the **same translation unit**: c2 records the registers each function writes and uses that record
+  when lowering a later call to it in the same module, and it compiles a unit bottom-up, callees before callers, so
+  source order does not matter. `tools/compiler-internals/tu_merge.py CALLER.cpp CALLEE.cpp` measures the three
+  layouts in twenty seconds (callee in another file / before / after the caller) and `tu_layout.py pairs` says which
+  callees of the `/GL` list sit below their caller in the image, the fingerprint of that bottom-up emission. Adding
+  both files to `cmake/compiler-flags-gl.txt` reproduces the effect across files and remains the practical fix while
+  one-function-per-file is the project layout; an `inline` body in a header does *not* reproduce it. Either way the
+  callee's resolver must be on, or the compiler never sees our callee at all.
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
   independent stores into one object says nothing about the order the fields were assigned in the original source
