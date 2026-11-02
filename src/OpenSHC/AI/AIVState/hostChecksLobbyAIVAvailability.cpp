@@ -25,6 +25,8 @@ namespace AI {
             int const localPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             DAT_GameCore::instance.numOfAIsWithCastleUnk = 0;
             for (int aiIndex = 0; aiIndex < 16; ++aiIndex) {
+                // the original walks this entry with its own pointer next to the received array
+                int const* const availability = &this->aivFileAvailabilityPerAIArray[aiIndex];
                 BOOLEnum available = TRUE;
                 for (int player = 1; player < 9; ++player) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1) {
@@ -35,12 +37,12 @@ namespace AI {
                         if (player != localPlayer) {
                             continue;
                         }
-                        if (this->aivFileAvailabilityPerAIArray[aiIndex] == 0) {
+                        if (*availability == 0) {
                             available = FALSE;
                             break;
                         }
                     } else if (player == localPlayer) {
-                        if (this->aivFileAvailabilityPerAIArray[aiIndex] == 0) {
+                        if (*availability == 0) {
                             available = FALSE;
                             break;
                         }
@@ -64,10 +66,12 @@ namespace AI {
                     || DAT_GameSynchronyState::instance.currentAIArray[player] == 0) {
                     continue;
                 }
+                // read through an alias: the original loads the AI ID again after the test above
+                int const& ai = DAT_GameSynchronyState::instance.currentAIArray[player];
+                int const aiID = ai;
                 BOOLEnum hasAIV = FALSE;
                 for (int i = 0; i < DAT_GameCore::instance.numOfAIsWithCastleUnk; ++i) {
-                    if (DAT_GameSynchronyState::instance.currentAIArray[player]
-                        == DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[i]) {
+                    if (aiID == DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[i]) {
                         hasAIV = TRUE;
                         break;
                     }
