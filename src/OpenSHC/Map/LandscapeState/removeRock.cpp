@@ -18,7 +18,7 @@ namespace Map {
             DAT_PathFindingState::ptr)((short)this->rocks[rockID].y, this->rocks[rockID].tile);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x20, 0, &this->rocks[rockID]);
+            sizeof(Rock), 0, &this->rocks[rockID]);
     }
 
 }

@@ -15,10 +15,12 @@ namespace Map {
     void Trees::UpdateTree1()
     {
         if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].zeroUpTo2 != 0) {
-            short const frameIndex = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex;
+            short const frameIndex
+                = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex;
             if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].stage == 0) {
                 if (DAT_OrganismDefinedData::instance.Tree_2_A[frameIndex] <= 0) {
-                    DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex = frameIndex - 1;
+                    DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex
+                        = frameIndex - 1;
                 }
             } else if (DAT_OrganismDefinedData::instance.Tree_2_B[frameIndex] <= 0) {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex = frameIndex - 1;
@@ -28,11 +30,13 @@ namespace Map {
             if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                 if (((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)[frameIndex] <= 0) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex = 0;
-                    DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].one == 2;
+                    DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag
+                        = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].one == 2;
                 }
             } else if (((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)[frameIndex] <= 0) {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex = 0;
-                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].one == 2;
+                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag
+                    = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].one == 2;
             }
         }
         switch (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].stage) {
@@ -42,23 +46,27 @@ namespace Map {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
                     = DAT_OrganismDefinedData::instance
                           .Tree_2_A[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
-                    + 0x8b;
+                    + 139;
                 break;
             }
             if (zeroUpTo2 != 2) {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x4b;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 75;
                 } else {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x4b;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 75;
                 }
                 break;
             }
         }
         // stage 0 with zeroUpTo2 2 shares the default frame (je 0x4F2600)
         default:
-            DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 0x92;
+            DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 146;
             break;
         case 1: {
             short const zeroUpTo2 = DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].zeroUpTo2;
@@ -66,17 +74,22 @@ namespace Map {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
                     = DAT_OrganismDefinedData::instance
                           .Tree_2_B[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
-                    + 0x81;
+                    + 129;
             } else if (zeroUpTo2 == 2) {
-                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                    = 0x8c - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
+                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 140
+                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
+                          .treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x32;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 50;
                 } else {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x32;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 50;
                 }
             }
             break;
@@ -87,17 +100,22 @@ namespace Map {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
                     = DAT_OrganismDefinedData::instance
                           .Tree_2_B[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
-                    + 0x75;
+                    + 117;
             } else if (zeroUpTo2 == 2) {
-                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                    = 0x82 - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
+                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 130
+                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
+                          .treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x19;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 25;
                 } else {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex] + 0x19;
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)
+                              [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
+                        + 25;
                 }
             }
             break;
@@ -111,22 +129,25 @@ namespace Map {
                           .Tree_2_B[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex]
                     + 100;
             } else if (zeroUpTo2 == 2) {
-                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                    = 0x76 - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
+                DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 118
+                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
+                          .treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex];
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_B)
+                            [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex];
                 } else {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
-                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)[DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex];
+                        = ((signed char*)DAT_OrganismDefinedData::instance.Tree_1_A)
+                            [DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex];
                 }
             }
             break;
         }
         }
         if (DAT_LandscapeState::instance.field0_0x0 != 0) {
-            DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 0x94;
+            DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 148;
         }
     }
 

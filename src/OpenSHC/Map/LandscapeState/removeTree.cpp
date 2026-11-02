@@ -21,7 +21,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::applyTreeBrushToLogicalLayer, DAT_TileMapState::ptr)(
             treeID, 1);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x9c, 0, &this->trees[treeID]);
+            sizeof(Tree), 0, &this->trees[treeID]);
     }
 
 }

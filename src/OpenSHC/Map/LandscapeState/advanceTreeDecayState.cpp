@@ -9,7 +9,8 @@ namespace Map {
     {
         if (this->trees[treeID].uid == treeUID) {
             if ((short)this->trees[treeID].treeAdultHoodStageRelatedVisual3 > 0) {
-                this->trees[treeID].treeAdultHoodStageRelatedVisual3 = this->trees[treeID].treeAdultHoodStageRelatedVisual3 - 1;
+                this->trees[treeID].treeAdultHoodStageRelatedVisual3
+                    = this->trees[treeID].treeAdultHoodStageRelatedVisual3 - 1;
             }
             if ((short)this->trees[treeID].treeAdultHoodStageRelatedVisual3 <= 0) {
                 this->trees[treeID].state = 3;

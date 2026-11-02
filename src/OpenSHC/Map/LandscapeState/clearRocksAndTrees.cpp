@@ -16,11 +16,11 @@ namespace Map {
         DAT_GameState::instance.mapAndTime.newOrganisms = 0;
         for (int i = 0; i < 2000; i++) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x9c, 0, &this->trees[i]);
+                sizeof(Tree), 0, &this->trees[i]);
         }
         for (int i = 0; i < 4000; i++) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x20, 0, &this->rocks[i]);
+                sizeof(Rock), 0, &this->rocks[i]);
         }
         this->maxTreeCount = 2000;
     }

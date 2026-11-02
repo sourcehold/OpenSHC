@@ -16,7 +16,8 @@ namespace Map {
         if (frame == 4) {
             DAT_LandscapeState::instance.trees[treeID].animationFrameUnk = 3;
         }
-        DAT_LandscapeState::instance.trees[treeID].animationFrame2Unk = DAT_LandscapeState::instance.trees[treeID].animationFrameUnk;
+        DAT_LandscapeState::instance.trees[treeID].animationFrame2Unk
+            = DAT_LandscapeState::instance.trees[treeID].animationFrameUnk;
     }
 
 }

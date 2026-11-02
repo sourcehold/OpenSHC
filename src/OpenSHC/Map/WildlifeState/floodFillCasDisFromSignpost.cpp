@@ -45,23 +45,24 @@ namespace Map {
             }
             int const nextValue = this->casDisRelated + 1;
             for (int dir = 0; dir < 8; dir++) {
-                uint const x = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.xOffset + cellX;
-                uint const y = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + cellY;
-                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0
-                    && areaID == this->grid[x][y].separateAreaID && this->grid[x][y].unknownNonZero01 == 0
-                    && this->grid[x][y].casDisRelated2 == 0) {
+                uint const x
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.xOffset + cellX;
+                uint const y
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + cellY;
+                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && areaID == this->grid[x][y].separateAreaID
+                    && this->grid[x][y].unknownNonZero01 == 0 && this->grid[x][y].casDisRelated2 == 0) {
                     this->grid[x][y].casDisRelated2 = nextValue;
                     this->grid[x][y].field29_0x74++;
                     this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)x;
                     this->DAT_Y10_Array_Section1034[this->candidateIndex2] = (short)y;
                     this->candidateIndex2++;
-                    if ((int)this->candidateIndex2 >= 0x640) {
+                    if ((int)this->candidateIndex2 >= 1600) {
                         this->candidateIndex2 = 0;
                     }
                 }
             }
             this->candidateIndex++;
-            if ((int)this->candidateIndex >= 0x640) {
+            if ((int)this->candidateIndex >= 1600) {
                 this->candidateIndex = 0;
             }
         }

@@ -17,8 +17,7 @@ namespace Map {
             if (this->trees[treeID].stage >= 4) {
                 continue;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::isTreeAdult, this)(
-                    treeID, this->trees[treeID].uid)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::isTreeAdult, this)(treeID, this->trees[treeID].uid)
                 == FALSE) {
                 continue;
             }

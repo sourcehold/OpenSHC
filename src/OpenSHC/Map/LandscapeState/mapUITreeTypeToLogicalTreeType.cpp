@@ -1,4 +1,5 @@
 #include "OpenSHC/Map/LandscapeState.func.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -7,41 +8,41 @@ namespace Map {
     undefined4 LandscapeState::mapUITreeTypeToLogicalTreeType(undefined4 uiTreeType)
     {
         switch (uiTreeType) {
-        case 0x28:
+        case OpenSHC::Commands::M_MAPPER_CHESTNUT:
             return OpenSHC::Map::Trees::TT_CHESTNUT;
-        case 0x29:
+        case OpenSHC::Commands::M_MAPPER_OAK:
             return OpenSHC::Map::Trees::TT_OAK;
-        case 0x2A:
+        case OpenSHC::Commands::M_MAPPER_PINE:
             return OpenSHC::Map::Trees::TT_PINE;
-        case 0x2B:
+        case OpenSHC::Commands::M_MAPPER_BIRCH:
             return OpenSHC::Map::Trees::TT_BIRCH;
-        case 0x82:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1A:
             return OpenSHC::Map::Trees::TT_SHRUB1A;
-        case 0x83:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1B:
             return OpenSHC::Map::Trees::TT_SHRUB1B;
-        case 0x84:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1C:
             return OpenSHC::Map::Trees::TT_SHRUB1C;
-        case 0x85:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1D:
             return OpenSHC::Map::Trees::TT_SHRUB1D;
-        case 0x86:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1E:
             return OpenSHC::Map::Trees::TT_SHRUB1E;
-        case 0x87:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2A:
             return OpenSHC::Map::Trees::TT_SHRUB2A;
-        case 0x88:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2B:
             return OpenSHC::Map::Trees::TT_SHRUB2B;
-        case 0x89:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2C:
             return OpenSHC::Map::Trees::TT_SHRUB2C;
-        case 0x8A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2D:
             return OpenSHC::Map::Trees::TT_SHRUB2D;
-        case 0x8B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2E:
             return OpenSHC::Map::Trees::TT_SHRUB2E;
-        case 0x99:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3A:
             return OpenSHC::Map::Trees::TT_SHRUB3A;
-        case 0x9A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3B:
             return OpenSHC::Map::Trees::TT_SHRUB3B;
-        case 0x9B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3C:
             return OpenSHC::Map::Trees::TT_SHRUB3C;
-        case 0x9C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3D:
             return OpenSHC::Map::Trees::TT_SHRUB3D;
         default:
             return OpenSHC::Map::Trees::TT_DEFAULT;
