@@ -2732,3 +2732,312 @@ currentFontClass, local_10c, lineEndY) land in quicksort tie order and the loop-
 temporaries take the -280 colour the original gives `i`; the rest is register allocation across
 1300 instructions. Not committed. Next: break the weight-11 ties the way the original has them
 (i above local_114: the original references `i` 14 times, ours 11), then the allocation.
+
+## Tuples and operands, as the listing writer reads them - and `tuple_dump.py`
+
+Everything above reads c2's state through a few fields at a few breakpoints. The retail
+`c2.dll` turns out to carry the whole vocabulary needed to print its intermediate code the way
+the `/FA` listing does, because the listing writer *is* in the retail build: `LiPrintInstr` ->
+`MdPrintInstr` -> `MdPrintOpcode` / `MdPrintOperand` (`P2/x86/mdlist.c`). Reading those three
+with the PDB names gave the layouts below, and `tools/compiler-internals/tuple_dump.py` uses
+them to print one named function after every phase of the pipeline. The earlier claim in this
+file that the retail build has "no internal dump switch" stands; what it has is the listing
+writer plus its name tables, which is enough.
+
+**Name tables in c2.dll.** `_Opcode_name` (0x10cdf220) is `char*[0x274]`, one mnemonic per x86
+tuple opcode (`0xf _jcc`, `0x34 xor`, `0xb9 _epop`, `0xba _epush`, `0xc3 _movzxw`...).
+`_Opcode_oprnum` (0x10cdfbf0) is the printed operand count per opcode and `_Opcode_dope`
+(0x10ce1e60) a flag word, bit 0x800 meaning "print the src list before the dst list". The IL
+opcodes start right after the x86 ones: `OPILLEGAL = 0x274`, `OPICONST 0x275` ... `OPADD 0x2a5`,
+`OPCALL 0x2be`, `OPASM 0x2ce`, `OPLABEL 0x2f2`, `OPBLOCK 0x2f3`, `OPENTRY 0x2f4`, `OPEXIT 0x2f5`,
+`OPPROLOGEND 0x2f7`, `OPEPILOGSTART 0x2f9`, `OP_LIMIT_ 0x314`, named by a 161-entry pointer
+table at 0x10cebda8 (labelled `IlOpcodeName` in the Ghidra project; the strings sit in reverse
+order in `.rdata`, `OP_LIMIT_` at 0x10cfcd00 up to `OPILLEGAL` at 0x10cfd47c, and nothing in the
+retail code references the table). `_RegName` (0x10cec7b8) is 1-based: `eax ecx edx ebx esp ebp
+esi edi`, then `ax..di`, `al cl dl bl ah ch dh bh`, segment registers, `GF0..` for x87.
+`_CondCodeName` (0x10ce2b68) is in x86 encoding order. `tuple_dump.py --tables` reads all of
+these out of a running compile into `tools/compiler-internals/c2_tables.json` (committed).
+
+**The tuple** (struct `c2_Tuple` in Ghidra): `+0` next, `+4` opcode, `+8` kind byte (`0xd`
+instruction, `0xf` call, `0x12` conditional branch, `0x14` switch, `0x15` side effect, `0x16`
+`__asm`, `0x17..0x1b` pseudo/entry/exit/block/label), `+9` flags (bit 0: a real instruction -
+`LiPrintBlock` counts only those), `+0xa` a word whose low 12 bits are the operand size and
+whose low nibble, for `_jcc`, is the condition, `+0x10` prev, `+0x24` the label symbol of an
+`OPLABEL`, `+0x28` the dst operand list, `+0x2c` the src list. A pseudo tuple's `+0x28/+0x2c`
+hold other things; following them aborts a cdb script, which is why the dumper walks operands
+only when flag bit 0 is set.
+
+**The condition number is internal until the encoder.** The nibble in a `_jcc` tuple is *not*
+the x86 condition code: `1 e, 2 ne, 3 l, 4 g, 5 le, 6 ge, 7 b, 8 a, 9 be, 10 ae, 11 s, 12 ns,
+13 p, 14 np`. `EncCondCodes` (0x10b24d70) rewrites it through `_TupCCEncode` (0x10cec6e0)
+inside `dop2_EncodeAndRelated`, after every phase a probe can stop at, so a dump showing `w=2`
+is a `jne` and the 0x100 bit above it (`0x103`) is a flag, not part of the condition. The
+siblings `_TupCCInverse`, `_TupCCChain`, `_TupCCExclude`, `_TupCCReverse`, `_TupCCUnsigned` are
+the tables the optimiser uses to invert and combine conditions.
+
+**The operand** (struct `c2_TupleOperand`) is a leaf tuple: `+0` next, `+4` opcode (`0x275
+OPICONST`: value at `+0x18`; `0x276 OPSCONST`: symbol at `+0x18`, value at sym+0x24; `0x279
+OPREG`: register symbol at `+0x1c`, its number at sym+0x1c; `0x27a OPLOCAL`: symbol at `+0x18`,
+printed as `name[frame+off]`; `0x27b OPGLOBAL`: symbol at `+0x18`, a memory reference when the
+byte at `+8` is 2 and `OFFSET name` otherwise; `0x27c OPBASED`: symbol `+0x24`, base operand
+`+0x2c`, displacement `+0x28`; `0x27d OPINDEXED`: base `+0x2c`, index `+0x30`, scale `1 <<
+(byte +0x14 & 0xf)`, displacement `+0x28` minus `+0x10`; `0x27e OPLOCALSCALED`, `0x27f
+OPSCALED`, `0x280 OPSYMOFF`, `0x281 OPSYMSEG`, `0x282 OPSEGOFF`, `0x283 OPEXTERNAL` / `0x284
+OPINTERNAL`: symbol at `+0x18`, a branch target's label symbol for INTERNAL, `0x286 OPPCREL`).
+The printer's jump table is at 0x10c50cd8, indexed by `opcode - 0x275`.
+
+**The symbol** (struct `c2_Symbol`): `+0` a name record (the string is at `poi(namerec+4)+1`),
+`+4` the kind byte (1 register, 2 global register, 3 temporary, 6, 9, 0xe complex), `+8` an alias
+that `LiPrintBeSym` follows first, `+0x1c` the register number or the temporary's id, `+0x24`
+the frame offset. Function symbols differ: their name pointer is at `+4` directly. A symbol with
+no name record prints as `tv<n>`.
+
+**What `tuple_dump.py` prints.** One run compiles the file under cdb, gates on the function's
+mangled name at `dop2_InitialOptsAndSetup` (the first phase that has the Function in `eax`), and
+at the entry of each requested phase runs a script file (`$$>a<`, which has no quoting or length
+problems) that walks the block list and prints every tuple and operand as raw fields; the Python
+side renders them with the tables. Phases: `initial`, `prelower`, `codegen` (still IL, after the
+global optimiser), `postlower` (x86 tuples, pseudo-registers), `regalloc`, `update` (registers
+assigned), `postcodegen`, `finish`, `final` (before tail merge and code motion), `preencode` (the
+final order) and `color` (stack layout). `--diff A B` prints a unified diff of two phases, which
+is the question "which pass made this choice" answered in six seconds:
+
+```
+$ python tools/compiler-internals/tuple_dump.py src/.../RenderNoRushDisplayElementUnk.cpp --name RenderNoRushDisplayElementUnk --diff final preencode
+-      cmp       ecx, 4
+-      jne       L5
+-      sub       esi, 240
+-      jmp       L4
++      cmp       ecx, 4
++      je        L6a
+...
+```
+
+Three cdb facts cost most of a session and are now encoded in `slot_probe.name_test()`, which
+every name-gated probe shares: the default radix is 16, so `poi(@$t7+12)` reads at `+0x12`;
+`.if` evaluates to false, silently, once more than three comparisons are joined in one
+expression; and MASM expressions have no logical not. The gate therefore multiplies one
+comparison per `r` command into a flag. The old 8-byte gate also matched the wrong function
+(`?UpdateU` is the prefix of both `UpdateUnitLossSpeechFeedback` and its `_RelativeValueForGenie`
+helper), and `blocks_probe.py` now uses the full-name gate too.
+
+## The compiler the original was built with, from its Rich header
+
+The linker version in the original's PE header is 8.0 and the Rich header lists the tools that
+produced its objects (product id, build, object count). `tools/compiler-internals/rich_header.py`
+decodes it:
+
+```
+0x6d  build 50727  x170   0x6e  build 50727  x100   0x7d  build 50727  x38
+0x7c  build 50727  x1     0x7e  build 50327  x1     0x78  build 50727  x1
+0x5f  build  4035  x18    0x5d  build  4035  x27    0x69  build  2067  x15
+0x04  build  8447  x48    0x30  build  9044  x1     0x01  (imports)    x149
+```
+
+What the 14.00 ids mean was **measured with the bundled toolchain**, not taken from a published
+table: a one-line `t.c` / `t.cpp` compiled with and without `/GL`, a one-line `g.asm` through
+`ml.exe`, each linked alone into a DLL whose Rich header was then read back (and `@comp.id` in the
+plain objects with `dumpbin /symbols`):
+
+| id | produced by | in the original |
+|---|---|---|
+| 0x6d | `cl` on a `.c` file (C, no `/GL`) | x170 |
+| 0x6e | `cl` on a `.cpp` file (C++, no `/GL`) | x100 |
+| 0x71 | `cl /GL` on a `.c` file | - |
+| 0x72 | `cl /GL` on a `.cpp` file | - |
+| 0x7d | `ml.exe` (MASM 8.00) | x38 |
+| 0x78 | `link.exe` itself | x1 |
+| 0x7a | the `.exp` object `/export` creates | - |
+| 0x7c | one object, almost certainly `cvtres` (the resource section); not tested | x1 |
+
+So the original's compiler is exactly this project's (14.00 build 50727; SP1 is 50727.762, the
+header carries only the major build), and **no object in it carries the `/GL` ids** - every one
+of the 270 C and C++ objects was compiled without link-time code generation. The 38 objects at
+0x7d are assembler output, which is what the statically linked CRT contributes (`memcpy`,
+`strlen`, `_alldiv`, `_chkstk`, `_ftol2` and the rest of `libcmt`'s `.asm` sources); the 170 C
+objects are mostly the CRT too. The 13.10 objects at build 4035 and the older ids are
+third-party libraries.
+
+This contradicts the earlier reading, reported in the session that wrote this section, that 0x7d
+was the LTCG C++ compiler and that one object in six was `/GL`. That reading came from a published
+product-id table and the table was wrong for this id. The consequence for matching: the `ecx`
+reuse that `AGENTS.md` and the cheat sheet attribute to LTCG cannot come from `/GL` at the
+translation-unit level. The cause is that caller and callee were compiled in the same translation
+unit - measured, with the c2 routine that does it, under "The /GL conundrum" at the end of this
+file. `cmake/compiler-flags-gl.txt` is a workaround that reproduces that layout's effect, not
+evidence of how the original was built.
+
+## The eleven functions `origin/main` records below 100%
+
+The status file on `main` lists eleven entries below 100%. Measured fresh (resolvers on, the ten
+`.cpp` files plus `paths.cpp` as the build list - `discoverMapFiles` does not link without it),
+with the phase dumper and the probes on each. The eleventh, 0x584026, is `_DllMainCRTStartup`,
+the CRT's own entry rather than a game function, and is out of scope with `REIMPLEMENTED_CRT=0`.
+
+| function | raw / norm | class | verdict |
+|---|---|---|---|
+| `parseHlp` | 99.3 / 95.5 | allocation | two `[edx+ecx]` vs `[ecx+edx]` base/index flips in the `intArray1[textIndex][i]` loop; `*(i + p)`, `i[p]` and the committed `p[i]` compile byte-identical (quick_diff 0.9708), so the lowerer decides it, not the source. The normalized score is also docked by the cookie *label* (`Instance<unsigned int,12141088>` vs `__security_cookie`) - a reporting artefact, the bytes are right. Stop. |
+| `playRandomBackgroundMusicUnk` | 97.5 / 78.0 | RET | one early-return block placed inline where the original has it at the end; the source already carries the measured trade-off note. Not retried. |
+| `playUnitSelectSpeech` | 94.1 / 93.8 | order | the original pops `esi` *before* the last call's two pushes (`call; pop esi; push 0xb; push eax; mov ecx; call; ret 4`). That byte shape occurs exactly once in the whole executable - in this function. Four source forms (`return` of the call, nested call, a direct method call that bypasses the resolver helper, committed) are byte-identical at 0.9412; building caller and callee with `/GL` leaves it at 94.1; forcing `_PogoFlag=2` across `MdmInsertEntryExit` (so `PogoMdOptSuperBlock` could shrink-wrap) changes nothing; and `PpCallRetToJmp`, the only pass that hoists pops past a call, refuses at its size check (callee 8 bytes, caller 4) and only ever produces a `jmp`. Unexplained, with every lever this file knows measured. Stop. |
+| `discoverMapFiles` | 89.7 / 89.7 | mix 15 | two extra `text$x` entries and two extra `xor; call` runs - the EH funclets and destructor paths of the `std::string` returned by value from `paths_getDocumentsMapsFolderString`, whose own file must be in the build list (LNK2001 otherwise). The status remark already names the RVO dependency. Not opened. |
+| `RenderNoRushDisplayElementUnk` | 88.5 / 69.1 | order | `delta 0`; the four pairs of equal-bodied `else if` arms (`4`/`3` both `-240`, `10`/`11` `-560`, `12`/`13` `-880`, `8`/`7` `-400`) are folded by `FgDoCommonTailMerge` in `dop2_FinalFlowOpts` - the dumper shows all eight arms separate at `final` and merged at `preencode`. Ours keeps the **later** arm's copy and the earlier jumps forward; the original keeps the earlier and the later jumps back (`cmp ecx, 7; je -0x5d`). `optimize("t")` is identical (0.9054), `optimize("s")` 0.531, `optimize("y", off)` 0.777, a `switch` 0.853. The fold direction is the predecessor order at merge time, and no source form found reverses it. Stop. |
+| `updateAmbientSoundStream` | 86.2 / 82.4 | mix 1 | before this session the tools reported two false duplicates here (x87 operand spelling and indexed local-array slots, see below); with those fixed it is one missing `jmp` plus an `edi`/`ebp` two-cycle, ratio 0.8945. The `jmp` is the loop shape the source comment at line 193 already describes as unreproduced. |
+| `UpdateUnitLossSpeechFeedback` | 84.4 / 64.7 | mix 1 | one `jmp` fewer; the first structural difference is at instruction 12 (the four guards' shared far exit) and the first register difference at 226 - a closed six-register cycle covering 36 of 37 operands, so the registers are the symptom. The original also sums `hist[4]+[5]+...+[9]+[3]` where ours goes `[3]+[4]+...`, a loop-unrolling association order. Untested. |
+| `getCurrentResourceCoreNameUnk` | 83.0 / 80.9 | mix 4 | an `esi`/`edi` swap that moves `push edi`. `reg_scores.py` shows an **exact key tie**: `basenameLength` 44 (id 0x2f) against the `G - basenameStart` pointer temporary 44 (id 0x2d), broken by symbol id in our favour and the other way in the original. A counted loop (0.556), `do/while` (0.815 = baseline), an explicit destination pointer (0.815) and declaring the length before the increment (0.815) move nothing. The tie-by-id class is the one this file calls unreachable. Stop. |
+| `processHelpRichTextTokens` | 69.4 / 70.3 | mix 77 | settled on this branch, see the case study above. |
+| `renderMultilineTextUnk` | 58.7 / 59.6 | mix 8 | settled above: `_runXPos` outranks `this$GSCopy` by 200 key units. |
+| `_DllMainCRTStartup` | 0.0 | - | not a game function. |
+
+So none of the ten moved, and that is the finding: every one of them is already at the point
+where the remaining difference is decided inside c2 by something the source does not state -
+a predecessor order, a symbol-id tiebreak, a base/index convention, an epilogue placement this
+compiler build cannot be made to produce. The two that are structurally open
+(`UpdateUnitLossSpeechFeedback`, `discoverMapFiles`) are also the two not opened here.
+
+## Tool defects found along the way, now fixed
+
+Measuring the functions above exposed defects in the measuring tools themselves, each of which
+had been producing confident wrong signals:
+
+* **`quick_diff.py` x87 operands.** MASM writes `fmulp ST(2), ST(0)` and `fmul QWORD PTR
+  __real@3fb0000000000000`; capstone writes `fmulp st(2)` and `fmul qword ptr [0x5b1234]`. Our
+  side was never normalised, so every floating-point instruction mismatched and
+  `structural_diff.py` reported "the original computes `fmulp; fdivp` twice, we compute it 0
+  times" for `updateAmbientSoundStream` - the code was identical. The replacement order also
+  mattered: `WORD PTR` before `QWORD PTR` leaves `Qword ptr` behind. Ratio 0.8201 -> 0.8663.
+* **`quick_diff.py` indexed local-array slots.** `_arr$[esp+edi*8+112]` was stripped to
+  `[esp+edi*8+112]` instead of adding the slot's `_arr$ = -84`, so every element access of a
+  local array carried a wrong displacement and read as a duplicate the original "does 3 times
+  and we 0". Ratio 0.8663 -> 0.8945, and the false DUPLICATION reports vanished. Any function
+  with a local array indexed in a loop was affected.
+* **Free functions.** `quick_diff.py`, `slot_map.py` and `pogo_probe.py` required
+  `Class::name(` after the marker; `RenderNoRushDisplayElementUnk` and
+  `UpdateUnitLossSpeechFeedback` were skipped by `structural_diff.py --all` with an
+  `AttributeError`. The scope is now the innermost enclosing namespace.
+* **`quick_styles.py` ties.** The committed source was not a candidate, so a variant that
+  merely tied it was copied over the source and left there. It is now scored as `_original`
+  and kept on a tie.
+* **`pogo_probe.py`** had the worktree root hard-coded to `OpenSHC-2` and so measured a
+  different checkout; it derives the root from its own path now and takes `--around ENTRY RET`
+  to bracket any routine, not only `Spillcosts`.
+* **Name gating** in the probes compared 8 bytes (see the cdb facts above).
+
+`diagnose.py` (in the batch directory) runs the measuring tools in the order this file argues
+for - switches, frame, instruction mix, triage flags, detectors - and ends with a verdict and
+the next command, so the first step on an unknown function no longer needs this file open.
+
+## The /GL conundrum: how the original's compiler knew a callee's registers, and the file layout it implies
+
+The project has carried a list of files compiled with `/GL` (`cmake/compiler-flags-gl.txt`) because some
+callers keep `ecx` live across a call in the original where ours reloads it: ours compiles `this` into
+`esi` around the call (`push esi; mov esi, ecx; call; ... mov ecx, esi`), the original just calls. `/GL` on
+caller and callee reproduces the original. The CMake comment asks the right question - "perhaps they had
+multiple implementations per cpp file, but we need more cases to prove this" - and the Rich header (above)
+removes the LTCG explanation outright: no object in the original was compiled with `/GL`. This section is
+the proof, the mechanism in c2, and the layout that follows.
+
+### The mechanism in c2
+
+`LoAddCallScratchRegs` (0x10c3f5f0, lowering) appends to every call tuple the registers the call kills. For a
+direct call it looks the callee symbol up: if the symbol is a function defined in this module (flag 0x4000 at
+sym+0x37), has a function record (sym+0x88) that is its own, and that record carries a register set at +0x60,
+then only the *volatile registers in that set* are killed; otherwise every volatile register is. The set at
++0x60 is what `MscCollectUsedRegs` (0x10ba2030) gathers after the callee has been through register
+allocation: every register any real instruction of it writes. Three things follow and all three measure:
+
+- The callee must be compiled **in the same translation unit**. Our one-function-per-file layout can never
+  satisfy that; `/GL` does, because under LTCG the whole program is one module at link time.
+- Source order inside the unit does not matter: c2 compiles a unit **bottom-up**, every function after the
+  functions it calls (`order_probe.py`: a unit written as `A::top B::top C::top A::mid ... C::leaf` is emitted
+  as `A::leaf B::leaf C::leaf A::mid B::mid C::mid A::top B::top C::top` under `/O2`, and in source order
+  under `/Od`). So the record of the callee always exists when the caller is lowered.
+- An `inline`-declared callee (a body in a header, in-class or `inline` out of class) does **not** qualify
+  even when the compiler decides not to inline it; the flag test above excludes it.
+
+### Measured
+
+`tu_merge.py CALLER.cpp CALLEE.cpp` writes three scratch files - the caller alone, the callee's body pasted
+above it, the callee's body pasted below it - and runs `quick_diff.py` on the caller in each (no `/GL`
+anywhere; the callee's resolver on, so the call is direct):
+
+| caller -> callee | callee in another file | same file, callee first | same file, callee after | callee `inline`, same file |
+|---|---|---|---|---|
+| `copyData` -> `copyData_0x100/0x010/0x001` (asm bodies) | 0.4615 | 1.0000 | 1.0000 | - |
+| `updateMoatCountdownTimers` -> `recountTotalOwnedMoats` (plain C++) | 0.5128 | 1.0000 | 1.0000 | 0.5128 |
+
+`copyData.cpp` on `main` already holds its three callees after the caller, which is why it was in the `/GL`
+list *and* matched: the list entry was never doing anything for it. The remaining 0.0385 of the
+`updateMoatCountdownTimers` baseline was two `quick_diff` artefacts, fixed in passing: a struct offset
+above 0x400000 (`TileMapState::moats` at +0x50087f) was collapsed to `G` on the original side only, and MASM
+spells a plain `ret` as `ret 0`.
+
+### The layout of the original, read off the image
+
+Bottom-up emission has a fingerprint: inside one unit every callee sits at a **lower address** than its
+caller. The linker then keeps objects in command-line order (`order_probe.py` links three objects and the
+map file shows each object's functions contiguous, in the order the compiler emitted them). So:
+
+- `tu_layout.py calls` takes every `MACRO_CALL` in the reimplemented sources with a resolved callee: 1349
+  pairs, 952 with the callee below the caller. Within 64 KB of each other the split is **595 below against
+  36 above**; chance would be even. The 36 are the unit boundaries (help/menu code at 0x45d000-0x465000
+  calling the string helpers at 0x46b000; everything calling `SoundSystem` at 0x47a000; AIV placement at
+  0x4ed000 calling `TileMapState` at 0x4f9000).
+- `tu_layout.py units` stabs every upward interval with the fewest cuts: the reimplemented part of the
+  image needs **at least 11 units**, and the segments are large and mixed - 0x4f9980-0x5369f0 holds
+  `TileMapState`, `UnitsState`, `TribesState` and `TroopValueState` (543 functions, 10 classes);
+  0x4680c0-0x479a60 holds `ResourceManager`, `PencilRenderCore`, `UserTextHandler`, `TextManager`,
+  `GameCore`, `LowLevelMemory` and more (242 functions, 25 classes). The cuts are lower bounds: a downward
+  call says nothing, so a printed segment may still be several files.
+- `tu_layout.py runs` shows the same thing as repetition: around 0x466000-0x475000 the sequence
+  WindowAndDirectDraw, MouseState, PencilRenderCore, UserTextHandler, FontSizeClass, TextManager, RNG,
+  LowLevelMemory, GameCore, ResourceManager, BitMapState, DecoderState repeats three to four times. Each
+  repetition is one call-depth level of one unit: `copyData_0x100` (leaf) at 0x46aba0, `copyData` at
+  0x471830, `encodeData` (calls `copyData` and `doImplode` at 0x4724c0) at 0x473c10.
+- `tu_layout.py pairs` applies this to the `/GL` list: every callee that is itself in the list sits below
+  its caller; the callees that sit *above* a caller (`updateBuildingGraphicsLayer` from `addResourceToStockpile`,
+  `playWAVSFX` and `nextRandomNumber2` from `lightUpBuilding`, `fillMemory_ByteValue` from `clearBuildings`)
+  are exactly the ones nobody needed `/GL` for - the original did not know them either.
+
+So the original was **not** one function per file and **not** method bodies in headers: it was a modest
+number of large source files, each holding several classes, compiled as ordinary translation units. The
+`/GL` list is a faithful workaround for that layout, not evidence of LTCG, and `tu_merge.py` is the test to
+run before adding a file to it: if the callee-in-same-file variant does not move the caller, `/GL` will not
+either.
+
+### Measured over the whole `/GL` list (`tu_merge.py --batch`)
+
+Every file of `cmake/compiler-flags-gl.txt` against each of its resolvable callees, no `/GL` anywhere, all
+function resolvers on. `only` is the caller as committed, `first`/`after` the callee's body pasted into the
+caller's file before/after it (always equal, as the bottom-up order predicts). Pairs that moved:
+
+| caller | callee pasted into the file | only | merged | note |
+|---|---|---|---|---|
+| `processSyncPacket` | `translateMultiplayerIDsIntoPlayerIDs` | 0.2667 | **1.0000** | the 26.2% -> 79.2% case of AGENTS.md, finished |
+| `updateMoatCountdownTimers` | `recountTotalOwnedMoats` | 0.5128 | **1.0000** | |
+| `updateNeededEmployeeCount` | `hasWorker` | 0.5965 | **1.0000** | |
+| `buildingIsAccessible` | `getBuildingHeightForBuildingID` | 0.6079 | **1.0000** | |
+| `canUnitReachBuildingPerimeter` | `getBuildingHeightForBuildingID` | 0.7731 | **1.0000** | |
+| `encodeData` / `decodeData` / `swapMapDataWithNextMap` | `copyData` | 0.9756 / 0.9913 / 0.9867 | **1.0000** | |
+| `readFirst/NextPartOfCurrentResourceIntoMemory` | `putFileNameAndAppendFileExtension` | 0.9800 / 0.9821 | **1.0000** | |
+| `UpdateArmorersWorkshop` .. `UpdateBakery` (5) | `updateVisuallyActiveState` | 0.35-0.43 | **0.9945-0.9979** | cross-namespace paste |
+| `UpdateStables` | `validateBuildingTetheredUnits` | 0.6642 | **1.0000** | |
+| the same `Update*` callers | `playSFXAtLocation` | 0.35-0.44 | 0.57-0.82 | a second unit-mate; needs both |
+| `destroyBuildingAndLinkedDuplicates` | `destroySignpostData` | 0.6875 | 0.9375 | |
+| `lightUpBuilding` | `getBuildingFlammabilityFactor` | 0.8988 | 0.9268 | |
+
+Pairs that got **worse** when merged - `addBuildingToTargetableBuildings` into every `Update*` function,
+`selectionContainsOnlyArabAssassins` into `canUnitReachBuildingPerimeter`, `getFireEntityIDAtTile` into
+`lightUpBuilding` - are the converse proof: once the compiler knows that callee's registers it allocates the
+caller differently (an extra slot, `ebx`/`ebp` swapped), and the original did *not*, so that callee was in
+another unit. The first two also sit *above* their caller in the image. 53 pairs did not move at all; those
+callers' remaining differences are not about this call.
+
+`tu_merge.py --batch` prints a final `ALL n callees below` row per caller, because `this` has to survive
+every call in a sequence before the spill disappears; `getFireEntityIDAtTile` shows the address rule is a
+necessary condition, not a sufficient one (below `lightUpBuilding`, yet in another unit), so read that row
+with the per-callee rows.
+
+Two more `quick_diff.py` artefacts came out of this batch and are fixed: a `switch`'s byte and jump tables
+(`$LN38@f[edi]`, `jmp dword ptr [ecx*4 + 0x41c9d0]`) were not collapsed to `G` on either side, which alone
+held `lightUpBuilding` at 0.8988 where it is 0.9312; and the original's indirect jumps were skipping
+normalisation entirely.

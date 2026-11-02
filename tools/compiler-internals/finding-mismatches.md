@@ -29,8 +29,10 @@ That gives the order of work, and it is the opposite of what feels natural:
 
 | step | tool | what it answers |
 | --- | --- | --- |
+| 0 | `tu_merge.py` | does the original keep `ecx`/`edx` live across a call that we reload? then the callee was in the caller's source file |
 | 1 | `slot_map.py` | do we have the same local variables, in the same stack slots? |
 | 2 | `structural_diff.py` | do we emit the same instructions, in the same order? |
+| 2b | `tuple_dump.py` | which compiler pass produced the difference, and so whether the source can reach it |
 | 3 | - | registers. **Do not work on this directly.** It usually follows from 1 and 2. |
 | 4 | `reccmp_report.py` | the official percentage, to confirm at the end |
 
@@ -47,6 +49,27 @@ Why? Adding a local shifts every single `[esp + something]` offset in the functi
 counts each shifted offset as a mismatch. The change was right and the score got worse. If you
 steer by the percentage you will undo correct work. (That same function later reached 95.4%,
 so the frame fix was indeed on the way there.)
+
+## Step 0: a register kept live across a call (`tu_merge.py`)
+
+If the diff opens with `push esi; mov esi, ecx` on our side and a bare `call` on the original's, and `ecx`
+is reloaded from `esi` after the call only in ours, the original compiler knew which registers the callee
+writes. It knows that for exactly one kind of callee: one compiled **in the same translation unit** (c2 keeps
+each compiled function's written-register set and reads it when lowering later calls to it; it compiles a
+unit bottom-up, so the callee's position in the file is irrelevant). No source edit inside the caller can
+produce it, and neither can an `inline` body in a header. Measure it before anything else:
+
+```
+$ python tools/compiler-internals/tu_merge.py src/.../updateMoatCountdownTimers.cpp src/.../recountTotalOwnedMoats.cpp
+caller_only    ratio 0.5128  orig 19 ours 20
+callees_first  ratio 1.0000  orig 19 ours 19
+caller_first   ratio 1.0000  orig 19 ours 19
+```
+
+A jump between the first line and the other two is the proof. The project's fix is to put both files in
+`cmake/compiler-flags-gl.txt` (`/GL` makes the whole program one module, which has the same effect), with the
+callee's resolver switched on. `tu_layout.py pairs` tells you in advance which callees qualify: inside one unit
+the original's callee always sits at a lower address than its caller.
 
 ## Step 1: the stack frame
 
@@ -299,9 +322,62 @@ when they do, neither one alone is the answer. `delta` is the right target while
 the instruction mix is still wrong, because those are *causes*. Once they are right, the
 percentage is all that is left to steer by.
 
+## Step 2b: which pass made the choice (`tuple_dump.py`)
+
+Steps 1 and 2 tell you *what* differs. When the frame is right and the instruction mix is right
+but the order or the branch layout is not, the question becomes *which part of the compiler*
+produced our version - because that decides whether any source edit can reach it. The compiler
+runs twelve phases, and `tuple_dump.py` prints the function after each one, in the same notation
+as the listing:
+
+```
+$ python tools/compiler-internals/tuple_dump.py src/.../Thing.cpp --name Thing --at codegen,regalloc,final,preencode
+### final  (dop2_FinalFlowOpts)  155 instruction tuples
+      cmp       ecx, 4
+      jne       L5
+      sub       esi, 240
+      jmp       L4
+  L5:
+      cmp       ecx, 8
+      ...
+```
+
+`--diff final preencode` shows what the last flow pass changed, `--diff codegen postlower` what
+lowering did, and so on. Read it like this:
+
+| the difference first appears at | it was decided by | can the source reach it? |
+| --- | --- | --- |
+| `initial` / `prelower` | the front end: statement order, which expressions are shared | yes - this is the statement-order and "share the prefix" territory |
+| `codegen` | the global optimiser: CSE, hoisting, strength reduction | partly - what counts as a common expression follows from how you wrote it |
+| `postlower` | lowering: base/index of a memory operand, instruction choice | rarely - `[edx+ecx]` against `[ecx+edx]` is decided here and no operand order in the source changes it |
+| `update` | register allocation | no, except through live ranges (reg_scores.py says how far off a pair is) |
+| `final` -> `preencode` | tail merging and code motion, after allocation | no - which copy of a duplicate arm survives is the predecessor order at merge time |
+
+The worked case is `RenderNoRushDisplayElementUnk`: all eight duplicate `else if` arms are
+still separate at `final` and folded at `preencode`, the other way round from the original. That
+one line of output is what says to stop restyling the chain.
+
+Before the first run, `tuple_dump.py --tables FILE.cpp` reads the compiler's own name tables
+into `c2_tables.json` (already committed; rerun only if the toolchain changes).
+
+## Or just ask: `diagnose.py`
+
+```
+$ python tools/reimplementation-helper/batch/diagnose.py Thing
+```
+
+runs steps 0-2, the triage flags and every detector for one function, keeps the lines that
+matter, and ends with a verdict and the command to run next. It is the tools above with the
+reading rules from this document applied, so start there and come back here when the verdict
+needs interpreting.
+
 ## Cheat sheet
 
 ```bash
+# 0. ecx/edx kept live across a call in the original - was the callee in the caller's file?
+python tools/compiler-internals/tu_merge.py src/.../Thing.cpp src/.../Callee.cpp
+python tools/compiler-internals/tu_layout.py pairs        # which /GL-list callees sit below their caller
+
 # 1. the stack frame - do we have the right local variables?
 python tools/reimplementation-helper/batch/slot_map.py src/.../Thing.cpp
 
@@ -316,6 +392,13 @@ python tools/reimplementation-helper/batch/orig_body.py src/.../Thing.cpp
 
 # a fast register-sensitive score - a compile, not a build, so seconds per try
 python tools/reimplementation-helper/batch/quick_diff.py src/.../Thing.cpp -q
+
+# 2b. which compiler pass made the difference - the function after every phase, or two phases diffed
+python tools/compiler-internals/tuple_dump.py src/.../Thing.cpp --name Thing
+python tools/compiler-internals/tuple_dump.py src/.../Thing.cpp --name Thing --diff final preencode
+
+# all of steps 0-2 plus the detectors, with a verdict
+python tools/reimplementation-helper/batch/diagnose.py Thing
 
 # 4. the official number, last
 python tools/reimplementation-helper/batch/build_quiet.py

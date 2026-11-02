@@ -1,6 +1,6 @@
 """Compile ONE source file and diff its code against the original function, in seconds.
 
-usage: quick_diff.py FILE.cpp... [-q] [-s]
+usage: quick_diff.py FILE.cpp... [-q] [-s] [--name FUNCTION]
 
 Compiles each file with a DLL compile command plus /FA (no link, no reccmp), disassembles the original function
 at the file's `// FUNCTION:` address straight from `_original/` with capstone, normalizes both streams (globals,
@@ -28,7 +28,10 @@ import common
 
 quiet = '-q' in sys.argv
 keep_slots = '-s' in sys.argv
-files = [os.path.abspath(f) for f in sys.argv[1:] if f not in ('-q', '-s')]
+# --name NAME: diff that function of a file holding several `// FUNCTION:` markers (default: the first)
+want = sys.argv[sys.argv.index('--name') + 1] if '--name' in sys.argv else None
+_skip = {'-q', '-s', '--name'} | ({want} if want else set())
+files = [os.path.abspath(f) for f in sys.argv[1:] if f not in _skip]
 if not files and __name__ == "__main__":
     sys.exit(__doc__)
 ROOT = str(common.ROOT).replace(chr(92), '/')
@@ -86,7 +89,10 @@ def orig(va):
                 else:
                     s = i.mnemonic + ' F'
             except ValueError:
-                pass
+                # an indirect jump through a table: `jmp dword ptr [ecx*4 + 0x41c9d0]` - the table
+                # address is a global like any other
+                s = re.sub(r'0x[0-9a-f]+|\b\d+\b', num, s)
+                s = re.sub(r'(\w+) [+] G\b', r'\1 + G', s)
         else:
             s = re.sub(r'0x[0-9a-f]+|\b\d+\b', num, s)
             s = re.sub(r'(\w+) [+] G\b', r'\1 + G', s)
@@ -118,18 +124,19 @@ def ours(f, cls, name):
 
     def slot(mm):
         base = slots.get(mm.group(1))
-        off = (int(mm.group(2)[:-1], 16) if mm.group(2).endswith('H') else int(mm.group(2))) if mm.group(2) else 0
+        index = mm.group(2)      # `edi*8` in `_arr$[esp+edi*8+112]`, the indexed form of a local array
+        off = (int(mm.group(3)[:-1], 16) if mm.group(3).endswith('H') else int(mm.group(3))) if mm.group(3) else 0
         # a hex offset keeps its sign in the first character: int('+1cH'[:-1], 16) handles it
-        if base is None:
-            return '[esp + ' + hex(off) + ']'
-        v = base + off
-        return '[esp + ' + hex(v) + ']' if v >= 0 else '[esp - ' + hex(-v) + ']'
+        v = off if base is None else base + off
+        idx = ' + ' + index.replace('*', '*0x') + '' if index else ''
+        idx = re.sub(r'\*0x(\d+)', lambda m: '*' + hex(int(m.group(1))), idx)
+        return '[esp' + idx + (' + ' + hex(v) if v >= 0 else ' - ' + hex(-v)) + ']'
     for l in m.group(2).splitlines():
         l = l.split(';')[0].strip()
         if not l or l.endswith(':') or re.match(r'^\w+\$\w* = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
             continue
         l = l.replace('\t', ' ')
-        l = re.sub(r'(\w+\$\w*|tv\d+)\[esp(?:([+-][0-9a-fA-F]+H|[+-]\d+))?\]', slot, l)
+        l = re.sub(r'(\w+\$\w*|tv\d+)\[esp(?:\+(\w+\*\d+))?(?:([+-][0-9a-fA-F]+H|[+-]\d+))?\]', slot, l)
         op = l.split(' ')[0]
         if op.startswith('j') and 'DWORD PTR' not in l:
             l = op + (' L' if '$' in l else ' F')
@@ -137,11 +144,22 @@ def ours(f, cls, name):
             l = 'call F'
         else:
             l = re.sub(r'OFFSET ', '', l)
+            # a switch's byte and jump tables: `$LN38@f[edi]` and `$LN45@f[ecx*4]` are `[edi + G]`, `[ecx*4 + G]`
+            l = re.sub(r'\$LN\d+@\w+\[([^\]]+)\]', r'[\1 + G]', l)
             l = re.sub(r'\?[\w?$@]+', 'G', l)
             l = re.sub(r'_\w+\$\[', '[', l)
             l = re.sub(r'\b([0-9a-f]+)H\b', lambda m: hex(int(m.group(1), 16)), l)
             l = re.sub(r'(?<![\w])\d+\b', lambda m: hex(int(m.group(0))), l)
+            # the original side turns any number >= 0x400000 into G (it lies inside the image), so a
+            # struct offset that large (`[ecx + 0x53f070]`, TileMapState::moats) must become G here too
+            l = re.sub(r'\b0x([0-9a-f]{6,})\b', lambda m: 'G' if int(m.group(1), 16) >= 0x400000 else m.group(0), l)
+            # x87: MASM writes `fmulp ST(2), ST(0)` and `fmul QWORD PTR __real@3ff0...`; capstone
+            # (the original side) writes `fmulp st(2)` and `fmul qword ptr [0x5b1234]` -> `[G]`.
+            # QWORD before WORD, or the latter leaves `Qword ptr` behind.
+            l = l.replace('QWORD PTR', 'qword ptr').replace('TBYTE PTR', 'tbyte ptr').replace('ST(', 'st(')
             l = l.replace('DWORD PTR', 'dword ptr').replace('WORD PTR', 'word ptr').replace('BYTE PTR', 'byte ptr')
+            l = re.sub(r'(qword|dword|tbyte) ptr __real@[0-9a-fA-Fx]+', lambda m: m.group(1) + ' ptr [G]', l)
+            l = re.sub(r'^(f\w+) (st\((?:0x)?\d+\)), st\((?:0x)?0\)$', lambda m: m.group(1) + ' ' + m.group(2), l)
             l = re.sub(r'G\[(.*?)\]', r'[\1+G]', l)
             l = re.sub(r'G\+0x[0-9a-f]+', 'G', l)
             l = re.sub(r'\[(.*?)\+G\+0x[0-9a-f]+\]', r'[\1+G]', l)
@@ -158,10 +176,16 @@ def ours(f, cls, name):
 
 def canon(s):
     # esp-relative slots and globals compare loosely
+    # x87 two-operand forms: capstone writes `fadd st(0), st(0)` / MASM `fadd ST(0)`, and MASM
+    # `fsubr ST(0), ST(1)` / capstone `fsubr st(1)` - fold both to the one-operand spelling
+    s = re.sub(r'^(f\w+) st\((?:0x)?0\), (st\(\w+\))$', lambda m: m.group(1) + ' ' + m.group(2), s)
+    s = re.sub(r'^(f\w+) (st\(\w+\)), st\((?:0x)?0\)$', lambda m: m.group(1) + ' ' + m.group(2), s)
     if not keep_slots:
         s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
     s = re.sub(r'tv\d+\[', '[', s)
     s = re.sub(r'_\w+\$\w*\[', '[', s)
+    s = 'ret' if s == 'ret 0x0' else s      # MASM writes `ret 0` for a plain `ret`
+    s = re.sub(r'\*0x([0-9a-f]+)\b', lambda m: '*%d' % int(m.group(1), 16), s)   # `[ecx*0x4 + G]` -> `[ecx*4 + G]`
     s = s.replace('mov eax, G', 'mov eax, 0x51eb851f') if s == 'mov eax, G' else s
     s = re.sub(r'\[(\w+)\*(\d) [+] G\]', r'[\1*\2 + G]', s)
     return s
@@ -170,8 +194,19 @@ def canon(s):
 def streams(f):
     """(original, ours) normalized instruction lists for one source file."""
     src = open(f, encoding='utf-8').read()
-    va = int(re.search(r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)', src).group(1), 16)
-    cls, name = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', src).groups()
+    # the definition follows the marker: `Type Class::name(` for a method, `Type name(` for a
+    # free function, in which case the mangled scope is the innermost enclosing namespace.
+    # With --name, the marker of that function is used instead of the first one in the file.
+    marker = r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)[^\n]*\n[^\n(]*?(?:(\w+)::)?(\w+)\('
+    found = [m for m in re.finditer(marker, src) if want is None or m.group(3) == want]
+    if not found:
+        sys.exit('%s: no `// FUNCTION:` marker%s' % (f, '' if want is None else ' for ' + want))
+    m = found[0]
+    va = int(m.group(1), 16)
+    cls, name = m.group(2), m.group(3)
+    if cls is None:
+        scopes = re.findall(r'^\s*namespace\s+(\w+)\s*\{', src[:m.start()], re.M)
+        cls = scopes[-1] if scopes else r'\w+'
     b = ours(f, cls, name)
     return [canon(x) for x in orig(va)], (None if b is None else [canon(x) for x in b])
 

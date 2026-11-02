@@ -152,13 +152,35 @@ def regime(frame, gs_buffer):
     return 'sorted' if (frame > 0x80 or gs_buffer) else 'list-order'
 
 
-def gate_for(name):
-    """bp0 command that enables bps 1-4 only for the function whose mangled name starts with
-    "?NAME": GlobalRegAlloc invocation numbers drift between runs (function order depends on
-    pointer values), so a --invocation N probe can land on a neighbour; the name cannot."""
+def name_test(name):
+    """cdb commands that leave $t6 == 1 iff the mangled name at $t7 starts with "?NAME@":
+    every full dword of the prefix compared exactly, the tail dword under a mask, multiplied
+    into $t6 one comparison per command. Comparing only the first 8 bytes picked
+    UpdateUnitLossSpeechFeedback_RelativeValueForGenie for UpdateUnitLossSpeechFeedback."""
     import struct
-    w0, w1 = struct.unpack('<II', ('?' + name + '        ')[:8].encode('ascii'))
-    return ('r $t7=poi(poi(@eax)+4); .if ((poi(@$t7)==0x%x) & (poi(@$t7+4)==0x%x)) { .printf ' % (w0, w1) + EQ +
+    prefix = ('?' + name + '@').encode('ascii')
+    terms = []
+    full = len(prefix) // 4
+    for i in range(full):
+        (w,) = struct.unpack('<I', prefix[4 * i:4 * i + 4])
+        terms.append('(poi(@$t7+0x%x)==0x%x)' % (4 * i, w))     # cdb's default radix is 16: +12 would mean +0x12
+    rest = len(prefix) - 4 * full
+    if rest:
+        (w,) = struct.unpack('<I', prefix[4 * full:] + chr(0).encode() * (4 - rest))
+        mask = (1 << (8 * rest)) - 1
+        terms.append('((poi(@$t7+0x%x)&0x%x)==0x%x)' % (4 * full, mask, w))
+    # one comparison per `r` command, multiplied into the flag (MASM has no logical not)
+    cmds = ['r $t6=1']
+    for t in terms:
+        cmds.append('r $t6=@$t6*' + t)
+    return '; '.join(cmds)
+
+
+def gate_for(name):
+    """bp0 command that enables bps 1-4 only for the function whose mangled name is
+    "?NAME@...": GlobalRegAlloc invocation numbers drift between runs (function order depends on
+    pointer values), so a --invocation N probe can land on a neighbour; the name cannot."""
+    return ('r $t7=poi(poi(@eax)+4); ' + name_test(name) + '; .if (@$t6 != 0) { .printf ' + EQ +
             'FOUND' + NL + EQ + '; be 1-4 } .else { bd 1-4 }; gc')
 
 
