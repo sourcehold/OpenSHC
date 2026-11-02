@@ -17,6 +17,22 @@ comment saying what was measured, so the next reader does not retry it.
 This style check changes the cpp files to match the repo style. It is necessary for cpp files to be merged on main.
 The rules below are not covered by clang-format.
 
+> **Keep a blank line above the `// FUNCTION:` marker** when the file carries a `//` note
+above it. clang-format reflows a run of `//` lines as one paragraph and pulls the marker onto
+the end of the note:
+>
+> ```text
+> -    // ... jg at 0x41940F) into extraAnimationSprite1.
+> -    // FUNCTION: STRONGHOLDCRUSADER 0x00419370
+> +    // ... jg at 0x41940F) into extraAnimationSprite1. FUNCTION: STRONGHOLDCRUSADER 0x00419370
+> ```
+>
+> The file still compiles and the address is still there, so nothing looks wrong, but reccmp
+stops finding the function: its row disappears and the report goes from "23" to
+"avg 100.00 over 20" with every remaining line still reading 100.0%. Four files hit this in one
+pass over `Map::Buildings`. A blank line between the note and the marker prevents it; check the
+marker count before and after formatting a file that has a note.
+
 ## 1. Drop the decompiler's trailing `return;`
 
 Functions that return `void` don't need an explicit `return;` at the end of the function body.
@@ -184,6 +200,14 @@ for (int playerID = 1; playerID < 9; ++playerID) {
 
 **neutral** (actually better most of the time). Try the plain loop before writing copies out, and if
 a hand-unrolled body is already in the tree, try collapsing it.
+
+Reach for the **plain** loop, not an outer loop stepping by N with an inner 0..N-1 loop. Over the
+four-at-a-time neighbour loops in `Map::Navigation::PathFindingState` the plain `0..7` form was an
+exact tie on all three functions and saved about 90 lines each, while the nested form cost 11
+points on `updateAIZoneWithFloodFill0x20` (0.9972 -> 0.8817, 190 instructions against the
+original's 182). The nested form has beaten a plain loop elsewhere (`someChatMessageSelection`,
+see AGENTS.md), so this is a per-function measurement rather than a rule - but the plain loop is
+the one to try first.
 
 ## 9. Prefer for-loops everywhere
 All do-while and while loops should be rewritten as for-loops.

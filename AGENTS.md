@@ -211,6 +211,17 @@ nothing getting worse. It is also the missing precondition for `cmake/compiler-f
 does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
 flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
 
+**Several generated headers declare two resolvers for one address**, and `enable_local_functions.py` matches by
+address, so it turns on a twin whose body does not exist and the link fails with `LNK2001` on a name that appears
+nowhere in the build list. The report line to look for is `enabled N resolver(s) ... for M address(es)` with
+`N > M`, preceded by `warning: -K address(es) in the build list have no resolver`. Five namespaces hit this in one
+pass (`MenuModalComposition::setModalSliderParameters` /
+`setDropDownListParameters`, `AlphaAndButtonSurface::processBuildingClickBonus` / `ProcessBuildingClickBonus` and
+`selectUnitAndOpenStatusMenu` / `SelectUnitAndOpenStatusMenu`, `Navigation::UpdateClimbDataState07` /
+`updateClimbDataType07BuildingLink` and `CalcApproxEuclideanDistance` / `calcApproxEuclideanDistance`,
+`WildlifeState` and `LandscapeState` with four between them, `EntityState::somethingWithSeparateAreas1`). Setting
+the body-less twin's flag back to `false` by hand is enough to measure; the duplicate names want fixing in Ghidra.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
