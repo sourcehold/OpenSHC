@@ -9,9 +9,6 @@ namespace UI {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004707F0
         void WindowAndDirectDraw::bltScreenMenuSurfaceToScreen(
             int windowedX, int windowedY, int windowedWidth, int windowedHeigth)

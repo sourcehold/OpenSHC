@@ -5,22 +5,16 @@
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
-#include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
+#include "OpenSHC/Globals/DAT_CreditsBackgroundMode.hpp"
 #include "OpenSHC/Globals/DAT_CreditsScriptCommandCount.hpp"
 #include "OpenSHC/Globals/DAT_CreditsScriptCommandIndex.hpp"
-#include "OpenSHC/Globals/DAT_CreditsBackgroundMode.hpp"
+#include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
 
-    /*
-      WARNING: Enum "UnsortedBinkFlagInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004DA180
     void Credits::StopCreditsPlaybackAndSounds()
     {
@@ -37,7 +31,6 @@ namespace UI {
                 OpenSHC::Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(0);
             MACRO_CALL_MEMBER(
                 OpenSHC::Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(1);
-            DAT_CreditsScriptCommandIndex::instance = DAT_CreditsScriptCommandCount::instance;
         }
         DAT_CreditsScriptCommandIndex::instance = DAT_CreditsScriptCommandCount::instance;
     }

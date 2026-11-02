@@ -31,21 +31,10 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00433260
     void Rendering::RenderScribeFrame()
     {
-        BOOLEnum BVar1;
-        int yParam;
-        char* textAddress;
-        int xParam;
-        TextAlignment alignment;
-        uint foregroundColor;
-        uint backgroundColor;
-        int fontSize;
-        int blendStrength;
+        BOOLEnum _placementInfoShown;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         if (DAT_GameCore::instance.scribeAnimationFrame <= 0) {
             DAT_GameCore::instance.scribeAnimationFrame = 1;
@@ -54,31 +43,30 @@ namespace UI {
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
             OpenSHC::DE::SHCDE::GM_SCRIBE, DAT_GameCore::instance.scribeAnimationFrame,
-            DAT_MenuHandlerState::instance.x + 0x2c0, DAT_MenuHandlerState::instance.y + 399);
+            DAT_MenuHandlerState::instance.x + 704, DAT_MenuHandlerState::instance.y + 399);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        if ((((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU)
-                 && (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM))
-                && (DAT_GameCore::instance.isTimeHalted == FALSE))
-            && (BVar1 = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+        if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
+            && DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
+            && DAT_GameCore::instance.isTimeHalted == FALSE
+            && (_placementInfoShown = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                     OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO),
-                BVar1 == FALSE)) {
-            blendStrength = 0;
-            BVar1 = FALSE;
-            fontSize = 0x12;
-            backgroundColor = 0;
-            foregroundColor = 0xb8eefb;
-            alignment = OpenSHC::Text::TTA_LEFT;
-            yParam = DAT_WindowAndDirectDraw::instance.resolutionY + -0x14;
-            xParam = DAT_MenuHandlerState::instance.x + 0x124;
+                _placementInfoShown == FALSE)) {
+            int const blendStrength = 0;
+            BOOLEnum const withShadow = FALSE;
+            int const fontSize = 18;
+            uint const backgroundColor = 0;
+            uint const foregroundColor = 0xb8eefb;
+            TextAlignment const alignment = OpenSHC::Text::TTA_LEFT;
+            int const yParam = DAT_WindowAndDirectDraw::instance.resolutionY - 20;
+            int const xParam = DAT_MenuHandlerState::instance.x + 292;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_GameState::instance.mapAndTime.month),
-                xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, BVar1, blendStrength);
+                xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, withShadow, blendStrength);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                DAT_GameState::instance.mapAndTime.year, DAT_MenuHandlerState::instance.x + 0x128,
-                DAT_WindowAndDirectDraw::instance.resolutionY + -0x14, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 0x12, TRUE,
-                0);
+                DAT_GameState::instance.mapAndTime.year, DAT_MenuHandlerState::instance.x + 296,
+                DAT_WindowAndDirectDraw::instance.resolutionY - 20, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, TRUE, 0);
         }
     }
 

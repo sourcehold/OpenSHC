@@ -9,28 +9,23 @@ namespace UI {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004711B0
         void PencilRenderCore::drawBorderBox(int left, int top, int right, int bottom, ushort color)
         {
-            dword dVar1;
-            BOOLEnum _drawReady;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::setupPencilSurface, this)();
-            _drawReady = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::setupPencil, this)(
-                left, top, right, bottom, color);
-            if (_drawReady != FALSE) {
+            BOOLEnum const _drawReady = MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::PencilRenderCore_Func::setupPencil, this)(left, top, right, bottom, color);
+            if (_drawReady) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHorizontalLine, this)();
-                dVar1 = this->drawStartY;
+                dword const _savedStartY = this->drawStartY;
                 this->drawStartY = this->drawEndY;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHorizontalLine, this)();
-                this->drawStartY = dVar1;
+                this->drawStartY = _savedStartY;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawVerticalLine, this)();
-                dVar1 = this->drawStartX;
+                dword const _savedStartX = this->drawStartX;
                 this->drawStartX = this->drawEndX;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawVerticalLine, this)();
-                this->drawStartX = dVar1;
+                this->drawStartX = _savedStartX;
             }
         }
 
