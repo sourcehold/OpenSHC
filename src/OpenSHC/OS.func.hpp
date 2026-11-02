@@ -175,6 +175,10 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x005835BB, &OpenSHC::OS::__strnicmp)
     __strnicmp;
 
+    MACRO_FUNCTION_RESOLVER(void*(__cdecl*)(void* _Dst, void* _Src, size_t _Size), REIMPLEMENTED_CRT,
+        Address::SHC_3BB0A8C1_0x00583760, &OpenSHC::OS::_memmove)
+    _memmove;
+
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(int _Code), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00583D55, &OpenSHC::OS::_exit)
     _exit;

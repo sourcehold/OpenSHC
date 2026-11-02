@@ -143,6 +143,9 @@ namespace OS {
         return _strnicmp(_Str1, _Str2, _MaxCount);
     }
 
+    // STUB: STRONGHOLDCRUSADER 0x00583760
+    void* _memmove(void* _Dst, void* _Src, size_t _Size) { return memmove(_Dst, _Src, _Size); }
+
     // STUB: STRONGHOLDCRUSADER 0x00583D55
     void _exit(int _Code) { exit(_Code); }
 

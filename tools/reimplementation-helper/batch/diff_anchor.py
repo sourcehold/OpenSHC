@@ -42,10 +42,17 @@ import sys
 
 import common
 
-# `lea esi, [ecx + 0x367e4]`, `add esi, 0x367e4`, `lea ebx, [eax + ebp]` is not an anchor
+# `lea esi, [ecx + 0x367e4]`, `add esi, 0x367e4`, `lea ebx, [eax + ebp]` is not an anchor.
+# A cursor into a global array is set up with neither of those - it is
+# `mov esi, StructResolver::Instance<..>::instance+3568 (OFFSET)` - so that form counts too,
+# with the offset into the global as the constant. Missing it hid the 0xac anchor difference in
+# addUnitsToTribeAndComputeMovementSpeed and addUnitToTribeAndUpdateTribeMovementSpeed, where the
+# original anchors the unit cursor on `movementSpeed` and we anchor it on `dying`.
 ANCHOR_RE = re.compile(r"^(?:lea (e[a-z]{2}), \[(e[a-z]{2}) \+ (0x[0-9a-f]{4,}|\d{4,})\]"
-                       r"|add (e[a-z]{2}), (0x[0-9a-f]{4,}|\d{4,}))$")
+                       r"|add (e[a-z]{2}), (0x[0-9a-f]{4,}|\d{4,})"
+                       r"|mov (e[a-z]{2}), \S*::instance\+(\d{4,})(?: \(OFFSET\))?)$")
 MIN_ANCHOR = 0x1000
+MIN_FIELD_ANCHOR = 0x40
 
 
 def op(line):
@@ -59,9 +66,12 @@ def anchors(lines):
         m = ANCHOR_RE.match(line)
         if not m:
             continue
-        reg = m.group(1) or m.group(4)
-        value = int(m.group(3) or m.group(5), 0)
-        if value >= MIN_ANCHOR:
+        reg = m.group(1) or m.group(4) or m.group(6)
+        value = int(m.group(3) or m.group(5) or m.group(7), 0)
+        # MIN_ANCHOR exists to keep small `add reg, N` strides out of the way. It does not
+        # apply to the mov-into-global form: there the constant is an offset inside the
+        # global, so a few thousand is an ordinary anchor - 3568 for the unit cursor.
+        if value >= (MIN_FIELD_ANCHOR if m.group(6) else MIN_ANCHOR):
             out.append((reg, value))
     return out
 

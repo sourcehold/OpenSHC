@@ -29,6 +29,10 @@ CASES = [
     ("(a == 1)", "a == 1"),
     # nested || of the same operator flattens
     ("((a == 1 || (b == 2)) || c == 3)", "a == 1 || b == 2 || c == 3"),
+    # a shift is not a comparison: an earlier version split `1 << n` at the first `<`
+    # and rejoined it as `1 < < n`, which does not compile
+    ("((int)*p & 1 << ((byte)i & 0x1f))", "(int)*p & 1 << ((byte)i & 0x1f)"),
+    ("(x >> 2 == 0)", "x >> 2 == 0"),
 ]
 
 if __name__ == "__main__":

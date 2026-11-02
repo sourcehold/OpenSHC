@@ -101,6 +101,8 @@ namespace OS {
 
     int __cdecl __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount);
 
+    void* __cdecl _memmove(void* _Dst, void* _Src, size_t _Size);
+
     void __cdecl _exit(int _Code);
 
 } // namespace OS
