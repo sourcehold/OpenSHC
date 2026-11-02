@@ -98,25 +98,6 @@ Provides project-specific utilities including:
 
 Imports and synchronizes Ghidra-exported data.
 
-### Compiler Internals (`tools/compiler-internals`)
-
-Notes on the bundled MSVC backend itself - what `c2.dll` does, how its symbols and source layout were recovered,
-the decoded stack-slot rule, and a `cdb` recipe for observing one function's allocation from inside the compiler.
-Read it when a diff is down to register or stack-slot allocation and no source-level hypothesis is paying.
-
-Two entry points that need none of that background: `tools/reimplementation-helper/batch/diagnose.py NAME` runs
-the measuring tools in the right order for one function and ends with a verdict and the next command, and
-`tools/compiler-internals/tuple_dump.py FILE.cpp --name NAME [--diff final preencode]` prints the function as c2
-holds it after every compiler phase (opcodes, registers and locals by name), so "which pass produced this
-difference" - and therefore whether any source edit can reach it - is one six-second run.
-`tools/compiler-internals/finding-mismatches.md` is the walkthrough. The `c2.dll` Ghidra project carries the same
-knowledge as plate comments on the key routines and as the `c2_*` structs; query it with `program="c2.dll"` on
-every ghidra-mcp call (switching programs does not redirect the query tools).
-`tools/compiler-internals/rich_header.py FILE` reads which tools built a PE's objects; measured against the bundled
-toolchain, the original has no `/GL`-compiled object at all (its 38 assembler objects are the static CRT), so an `ecx`
-reuse across a call is not evidence of link-time code generation - see msvc-backend.md, "The compiler the original
-was built with".
-
 ### Reimplementation Control (`tools/reimplementation-control`)
 
 Scripts for enabling implementations and maintaining project state.
@@ -194,10 +175,7 @@ restyling anything large:
 flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
 cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
 *naming* is left (`alloc-only`). Chase a `FRAME` flag with `diff_slots.py NAME`, which lists every `[esp + N]` slot per
-side: one extra slot is often one local the original does not have, and removing it has been worth 10-30 points -
-but locals with disjoint live ranges share a slot, so a slot count is not a local count. `slot_weight.py NAME.cpp`
-reads MSVC's own `_name$ = N` table out of a `/FA` listing and says which local actually got which slot, instead
-of inferring it from the diff.
+side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
 `diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
 are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
 than by the percentage. `diff_types.py` is its counterpart away from comparisons: `movsx` against `movzx` for one field
@@ -207,11 +185,7 @@ sign. It carries only those two rules on purpose: a third, "same instruction wit
 dropped because every hit it produced was a loop-induction stride rather than a constant the source chose.
 `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
-statements sit between two calls or on a loop back-edge. `alloc-only` is worth reading literally: a register
-mismatch is most likely an interference difference - a different set of values was live at that point - rather
-than a preference the source could state. That is a hypothesis, not a decoded rule;
-`tools/compiler-internals/msvc-backend.md` has what is actually established about the compiler's allocator and
-the debugger recipe that can settle it per function.
+statements sit between two calls or on a loop back-edge.
 
 ### Binary Comparison (`reccmp`)
 
@@ -236,12 +210,6 @@ and enabling all 23 finished functions of `GameSynchronyState` moved the namespa
 nothing getting worse. It is also the missing precondition for `cmake/compiler-flags-gl.txt`: `/GL` on both sides
 does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
 flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
-
-`structural_diff.py --all` splits the build list by *what kind* of difference is left - wrong instruction mix
-(`mix`), right mix in the wrong order (`order`), or register naming only (`allocation`). Check it before picking
-a target: the reccmp percentage is dominated by allocation, so it will rank a structurally wrong function above a
-structurally perfect one. On `AI::AICState` it puts `aiGiveRaidInstructions` (delta 21) at the top while marking
-`sellExcessGoods` - a 62.4% function - as having nothing structural left to fix.
 
 ## Working on Many Functions
 
@@ -311,16 +279,9 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `mov r, [x]; sub r, 1; je` inside a loop is a `switch` on `x`.
 - A tail call to the same callee from our code but a jump back to a shared block in the original means separate
   `if` branches with identical bodies, not a combined condition.
-- A volatile register (`ecx`/`edx`) kept live across a call without reload means the original compiler **knew the
-  callee's register usage**, which without `/GL` (and the original has none, see `rich_header.py`) means caller and
-  callee were in the **same translation unit**: c2 records the registers each function writes and uses that record
-  when lowering a later call to it in the same module, and it compiles a unit bottom-up, callees before callers, so
-  source order does not matter. `tools/compiler-internals/tu_merge.py CALLER.cpp CALLEE.cpp` measures the three
-  layouts in twenty seconds (callee in another file / before / after the caller) and `tu_layout.py pairs` says which
-  callees of the `/GL` list sit below their caller in the image, the fingerprint of that bottom-up emission. Adding
-  both files to `cmake/compiler-flags-gl.txt` reproduces the effect across files and remains the practical fix while
-  one-function-per-file is the project layout; an `inline` body in a header does *not* reproduce it. Either way the
-  callee's resolver must be on, or the compiler never sees our callee at all.
+- Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
+  not a source difference. Investigate by adding the caller and callee to the txt and enabling their reimplementation in the .func.hpp files.
+  Only makes sense if the callee is 100% matching (e.g. ECX not touched).
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
   independent stores into one object says nothing about the order the fields were assigned in the original source
@@ -371,10 +332,7 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `diff_triage.py`'s `FRAME` column is worth checking but, unlike `BYTE`, is not mechanically actionable. Every
   cheap hypothesis for the frame mismatches in `Map::Units::UnitsState` came back an exact tie or worse: local
   declaration order, array element type, widening unsigned locals, and splitting a local the decompiler had reused
-  for two values. Declaration order was never going to work: the stack colorer sorts its elements by **reference
-  weight per byte**, not by declaration order, and leaves only the ties to the order the symbols happen to arrive
-  in - see `tools/compiler-internals/msvc-backend.md` for the comparator and the evidence. The lever on a slot layout is
-  how often, and at what loop depth, each local is read. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
+  for two values. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
   extra slots are all heavily used has genuine live values rather than a stray local, and needs structural
   understanding rather than a rule.
 - `jmp dword ptr [reg*4 + table]` on one side only is a dispatch-form mismatch: a `switch` over contiguous values
