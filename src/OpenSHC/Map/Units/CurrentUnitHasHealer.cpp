@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units.func.hpp"
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

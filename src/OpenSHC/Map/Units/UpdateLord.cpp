@@ -1,3 +1,5 @@
+#include "../Units.func.hpp"
+
 #include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
@@ -5,7 +7,6 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/Units.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/OS.func.hpp"
@@ -60,10 +61,6 @@ namespace Map {
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    /*
-      WARNING: Unable to use type for symbol _matchTime
-     */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0056C560
     void Units::UpdateLord()

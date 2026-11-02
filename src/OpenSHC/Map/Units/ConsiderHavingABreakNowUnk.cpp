@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units.func.hpp"
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Map/Units/Pathfinding/DestinationNeededEnum.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

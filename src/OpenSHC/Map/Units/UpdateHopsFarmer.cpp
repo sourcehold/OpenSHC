@@ -1,8 +1,9 @@
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Map/Units.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Game/GameMode.hpp"

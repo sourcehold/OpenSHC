@@ -1,5 +1,6 @@
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "OpenSHC/Map/Units.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"

@@ -1,5 +1,6 @@
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Map/Units.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

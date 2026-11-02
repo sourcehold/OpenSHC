@@ -1,7 +1,8 @@
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Map/Units.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
@@ -51,8 +52,7 @@ namespace Map {
                 return;
             }
             if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
-                DAT_UnitsState::instance.units[unitID].state.generic
-                    = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
+                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
                 DAT_UnitsState::instance.units[unitID].destinationNeeded
                     = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
                 return;

@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units.func.hpp"
+#include "../Units.func.hpp"
+
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 
