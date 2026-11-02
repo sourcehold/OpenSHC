@@ -23,10 +23,12 @@ namespace AI {
         this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount;
 
+        int x;
+        int y;
         while (this->algAIndex != this->algBIndex) {
             int freeCount = 0;
-            int const x = this->heatMapXArray[this->algAIndex];
-            int const y = this->heatMapYArray[this->algAIndex];
+            x = this->heatMapXArray[this->algAIndex];
+            y = this->heatMapYArray[this->algAIndex];
             if (!this->heatMaps[x][y].tilesNotPartOfLargestAreaCount) {
                 freeCount = 1;
             }
@@ -67,11 +69,9 @@ namespace AI {
                 }
             }
             if (freeCount == 9) {
-                // the result is the last visited neighbour
-                uint const resultY
-                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.yOffset + y;
-                uint const resultX
-                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.xOffset + x;
+                // the result is the last visited neighbour (direction 7)
+                int const resultY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.yOffset + y;
+                int const resultX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.xOffset + x;
                 this->buildingApproriateGridXPosition = resultX;
                 this->buildingAppropriateGridYPosition = resultY;
                 return;
