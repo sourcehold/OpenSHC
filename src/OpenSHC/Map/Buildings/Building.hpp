@@ -29,7 +29,8 @@ namespace Map {
         typedef struct Building {
 
             int spriteID; // 0x00000000 length: 4
-            int spriteSheetID; // 0x00000004 length: 4
+            short spriteSheetID; // 0x00000004 length: 2
+            undefined1 padding_0x6[2]; // 0x00000006 length: 2
             int playerColorUnk; // 0x00000008 length: 4
             short spriteOffetX; // 0x0000000C length: 2
             short spriteOffetY; // 0x0000000E length: 2
@@ -162,7 +163,8 @@ namespace Map {
             int buildingProgress; // 0x00000278 length: 4
             int timeAlive; // 0x0000027C length: 4
             bool field161_0x280[4]; // 0x00000280 length: 4
-            int hovelVisualStyle; // 0x00000284 length: 4
+            short hovelVisualStyle; // 0x00000284 length: 2
+            short field163_0x286; // 0x00000286 length: 2
             short suppressDestroyRefund; // 0x00000288 length: 2
             short field164_0x28a; // 0x0000028A length: 2
             short flag2; // 0x0000028C length: 2
