@@ -1,9 +1,7 @@
-#include "../TroopValueState.func.hpp"
+#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -13,32 +11,33 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B290
         void TroopValueState::pruneStaleTentPoints()
         {
-            AttackInfoSubArrayElement3* point = &DAT_TroopValueState::instance.attackInfo.tentPointsValues[1];
-            do {
-                if (point->someCounter != DAT_TroopValueState::instance.attackInfo.someCounter1) {
-                    MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        sizeof(*point), '\0', (void*)((int)(point)));
-                } else {
-                    if (point->tribeID != 0) {
-                        BOOLEnum tribeMatchesUID
-                            = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeCorrespondsWithUID,
-                                DAT_TribesState::ptr)(point->tribeID, point->tribeUID);
-                        if (!tribeMatchesUID) {
-                            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                                sizeof(*point), '\0', (void*)((int)(point)));
-                        }
+            // The original walks slots 1..1999 (end 0x17A52B4): the tent point table really has 2000 entries,
+            // tentPointsValues is declared with only 216.
+            for (int slot = 1; slot < 2000; ++slot) {
+                if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].someCounter
+                    != DAT_TroopValueState::instance.attackInfo.someCounter1) {
+                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        sizeof(DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot]), 0,
+                        &DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot]);
+                }
+                else {
+                    if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].tribeID != 0
+                        && MACRO_CALL_MEMBER(TribesState_Func::tribeCorrespondsWithUID, DAT_TribesState::ptr)(
+                               DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].tribeID,
+                               DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].tribeUID)
+                            == FALSE) {
+                        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue,
+                            DAT_LowLevelMemory::ptr)(sizeof(DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot]),
+                            0, &DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot]);
                     }
-                    if (0 < point->three) {
-                        point->three = point->three + -1;
+                    if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].three > 0) {
+                        DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].three--;
                     }
                 }
-                point = point + 1;
-            } while ((int)point < (int)&DAT_TroopValueState::instance.attackInfo.tentPointsValues[2000]);
+            }
         }
 
     }
