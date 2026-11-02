@@ -56,38 +56,40 @@ namespace Map {
             *counterPtr = *counterPtr + 1;
             DAT_BuildingsState::instance.buildings[buildingID].animationCycleCompleted = 1;
         }
-        int frame = (char)DAT_BuildingDefinedData::instance
-                        .WoodcuttersHutAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        int frame
+            = (char)DAT_BuildingDefinedData::instance
+                  .WoodcuttersHutAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = frame;
         if (frame == 0x10 && DAT_BuildingsState::instance.buildings[buildingID].animationActive != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 DAT_BuildingsState::instance.buildings[buildingID].x,
                 DAT_BuildingsState::instance.buildings[buildingID].y, OpenSHC::DE::SHCDE::FX_SAW);
         }
-        int pictureBase = GMFirstPictureIndex::instance[0x43];
+        int pictureBase = GMFirstPictureIndex::instance[67];
         buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
         int stock = DAT_BuildingsState::instance.buildings[buildingID].resources[1];
         if (stock != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite1 = stock + 0x12 + pictureBase;
+            DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite1 = stock + 18 + pictureBase;
         } else {
             DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite1 = 0;
         }
         stock = DAT_BuildingsState::instance.buildings[buildingID].resources[2];
         if (stock != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = stock + 0x15 + pictureBase;
+            DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = stock + 21 + pictureBase;
         } else {
             DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = 0;
         }
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;

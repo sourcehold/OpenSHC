@@ -3,8 +3,8 @@
 #include "OpenSHC/Map/Buildings.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -39,8 +39,8 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 0;
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
-            buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateVisuallyActiveState,
+            DAT_BuildingsState::ptr)(buildingID);
         short* incrementPtr = &DAT_BuildingsState::instance.buildings[buildingID].animationIncrement;
         *incrementPtr = 1;
         if ((char)DAT_BuildingDefinedData::instance
@@ -68,13 +68,14 @@ namespace Map {
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;

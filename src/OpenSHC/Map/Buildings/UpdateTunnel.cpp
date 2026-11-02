@@ -1,7 +1,7 @@
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings.func.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -29,13 +29,14 @@ namespace Map {
         if (unitState != OpenSHC::Map::Units::States::US_STATE_9Unk) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame = (char)DAT_BuildingDefinedData::instance
-                .TunnelAnimationFrames[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame
+                = (char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
             return;
         }
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
-        if ((char)DAT_BuildingDefinedData::instance
-                .TunnelAnimationFrames[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex]
+        if ((char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
+                [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex]
             == -1) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
@@ -43,13 +44,14 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging = 2;
             return;
         }
-        int frame = (char)DAT_BuildingDefinedData::instance
-                        .TunnelAnimationFrames[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
+        int frame = (char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
+                        [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame = frame;
-        if ((frame == 10 || frame == 0x19) && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
+        if ((frame == 10 || frame == 0x19)
+            && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y,
-                OpenSHC::DE::SHCDE::FX_DIG2);
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y, OpenSHC::DE::SHCDE::FX_DIG2);
         }
     }
 

@@ -1,6 +1,6 @@
 #include "OpenSHC/Map/Buildings.func.hpp"
-#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentBuildingID.hpp"
@@ -22,17 +22,15 @@ namespace Map {
         OpenSHC::Map::Buildings::BuildingTypeShort keepType
             = DAT_BuildingsState::instance.buildings[keepBuildingID].buildingType;
         if (keepType == OpenSHC::Map::Buildings::BT_MANORHOUSE) {
-            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 0x531;
-            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 0x528;
-        } else {
-            if (keepType != OpenSHC::Map::Buildings::BT_STONEKEEP && keepType != OpenSHC::Map::Buildings::BT_STRONGHOLD) {
-                goto checkSprite;
-            }
-            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 0x52c;
-            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 0x526;
+            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 1329;
+            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 1320;
+            DAT_BuildingsState::instance.buildings[buildingID].unknownManorHouseOrStoneKeepRelated = 0;
+        } else if (keepType == OpenSHC::Map::Buildings::BT_STONEKEEP
+            || keepType == OpenSHC::Map::Buildings::BT_STRONGHOLD) {
+            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 1324;
+            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 1318;
+            DAT_BuildingsState::instance.buildings[buildingID].unknownManorHouseOrStoneKeepRelated = 0;
         }
-        DAT_BuildingsState::instance.buildings[buildingID].unknownManorHouseOrStoneKeepRelated = 0;
-    checkSprite:
         if (DAT_BuildingsState::instance.buildings[buildingID].spriteID
             != DAT_BuildingsState::instance.buildings[buildingID].oldVisualActiveState) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(

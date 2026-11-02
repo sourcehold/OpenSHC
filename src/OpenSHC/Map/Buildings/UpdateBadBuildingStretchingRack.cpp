@@ -12,8 +12,9 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Animated while fearFactorLevel <= -3 (setle at 0x419301); BadBuildingStretchingRackAnimationFrames entries are signed bytes
-    // (movsx, jg at 0x419321).
+    // Animated while fearFactorLevel <= -3 (setle at 0x419301); BadBuildingStretchingRackAnimationFrames entries are
+    // signed bytes (movsx, jg at 0x419321).
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00419290
     void Buildings::UpdateBadBuildingStretchingRack()
     {
@@ -30,8 +31,8 @@ namespace Map {
             DAT_BuildingsState::ptr)(buildingID, 1);
         short* renderPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
         *renderPtr = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -3;
-        int frame = (char)DAT_BuildingDefinedData::instance
-                        .BadBuildingStretchingRackAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        int frame = (char)DAT_BuildingDefinedData::instance.BadBuildingStretchingRackAnimationFrames
+                        [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = frame;
         if (frame <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;

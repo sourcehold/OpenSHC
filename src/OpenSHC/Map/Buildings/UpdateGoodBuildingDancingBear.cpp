@@ -28,10 +28,9 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateWorkshopProgressSign,
             DAT_BuildingsState::ptr)(buildingID, 1);
         OpenSHC::Map::Buildings::Building* bear = &DAT_BuildingsState::instance.buildings[buildingID];
-        bear->renderAnimation
-            = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel >= 3;
-        int frame = (char)DAT_BuildingDefinedData::instance
-                        .GoodBuildingDancingBearAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        bear->renderAnimation = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel >= 3;
+        int frame = (char)DAT_BuildingDefinedData::instance.GoodBuildingDancingBearAnimationFrames
+                        [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = frame;
         if (frame <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;

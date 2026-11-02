@@ -22,7 +22,8 @@ namespace Map {
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + 3;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y + 9;
-        if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0 && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+        if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
             && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
             int pending = DAT_GameState::instance.playerDataArray[owner].startResources[15];
             if (pending > 0) {

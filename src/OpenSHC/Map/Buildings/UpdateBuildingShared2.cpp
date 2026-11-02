@@ -27,13 +27,14 @@ namespace Map {
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;

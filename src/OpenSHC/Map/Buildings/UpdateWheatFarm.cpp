@@ -31,23 +31,25 @@ namespace Map {
         short* renderPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
         *renderPtr = 0;
         DAT_BuildingsState::instance.buildings[buildingID].growCounter += 1;
-        if (DAT_BuildingsState::instance.buildings[buildingID].growCounter > 0x96) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].growCounter > 150) {
             DAT_BuildingsState::instance.buildings[buildingID].growCounter = 0;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::growWheat, DAT_BuildingsState::ptr)(buildingID);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::growWheat, DAT_BuildingsState::ptr)(
+                buildingID);
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateWheatFieldTileGraphics, DAT_BuildingsState::ptr)(
-            buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateWheatFieldTileGraphics,
+            DAT_BuildingsState::ptr)(buildingID);
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;

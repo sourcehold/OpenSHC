@@ -21,10 +21,8 @@ namespace Map {
         OpenSHC::Map::Buildings::Building* shrine = &DAT_BuildingsState::instance.buildings[buildingID];
         shrine->renderAnimation = 0;
         shrine->displayOwnerFlag = 0;
-        shrine->someX
-            = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-        shrine->someY
-            = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        shrine->someX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+        shrine->someY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
     }
 
 }

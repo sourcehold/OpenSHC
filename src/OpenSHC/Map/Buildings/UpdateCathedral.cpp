@@ -32,23 +32,25 @@ namespace Map {
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
         } else {
             DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;
         }
-        if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION && DAT_GameCore::instance.missionNumber1to20 == 7) {
+        if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
+            && DAT_GameCore::instance.missionNumber1to20 == 7) {
             if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth
                 <= DAT_BuildingsState::instance.buildings[buildingID].maxHealth * 3 / 10) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].field209_0x2da == 0
                     || DAT_BuildingsState::instance.buildings[buildingID].spriteID != 0x11f) {
                     DAT_BuildingsState::instance.buildings[buildingID].field209_0x2da = 1;
-                    DAT_BuildingsState::instance.buildings[buildingID].spriteID = 0x11f;
+                    DAT_BuildingsState::instance.buildings[buildingID].spriteID = 287;
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer,
                         DAT_TileMapState::ptr)(buildingID);
                     return;

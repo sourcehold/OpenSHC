@@ -11,8 +11,10 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Every second tick (animationTickCounter > 1, signed jle at 0x4193D4): displayOwnerFlag = fearFactorLevel <= -4 (setle),
-    // campgroundVclock steps through BadBuildingChoppingBlockAnimationFrames (signed bytes, jg at 0x41940F) into extraAnimationSprite1.
+    // Every second tick (animationTickCounter > 1, signed jle at 0x4193D4): displayOwnerFlag = fearFactorLevel <= -4
+    // (setle), campgroundVclock steps through BadBuildingChoppingBlockAnimationFrames (signed bytes, jg at 0x41940F)
+    // into extraAnimationSprite1.
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00419370
     void Buildings::UpdateBadBuildingChoppingBlock()
     {
@@ -33,8 +35,8 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag = fear <= -4;
             counterPtr = &DAT_BuildingsState::instance.buildings[buildingID].campgroundVclock;
             *counterPtr += 1;
-            int frame = (char)DAT_BuildingDefinedData::instance
-                            .BadBuildingChoppingBlockAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].campgroundVclock];
+            int frame = (char)DAT_BuildingDefinedData::instance.BadBuildingChoppingBlockAnimationFrames
+                            [DAT_BuildingsState::instance.buildings[buildingID].campgroundVclock];
             DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite1 = frame;
             if (frame <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].campgroundVclock = 0;

@@ -13,8 +13,9 @@
 namespace OpenSHC {
 namespace Map {
 
-    // The game mode is tested before the three stores (cmp at 0x415C20, je at 0x415C3F); SharedOverlayAnimationFrames entries
-    // are signed (jg at 0x415C5E).
+    // The game mode is tested before the three stores (cmp at 0x415C20, je at 0x415C3F); SharedOverlayAnimationFrames
+    // entries are signed (jg at 0x415C5E).
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00415BF0
     void Buildings::UpdateTunnelersGuild()
     {
@@ -32,13 +33,14 @@ namespace Map {
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance
-                    .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
                 <= 0) {
                 DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = (char)DAT_BuildingDefinedData::instance
-                .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
+            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
+                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;

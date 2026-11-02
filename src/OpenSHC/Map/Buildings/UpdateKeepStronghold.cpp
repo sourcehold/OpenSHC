@@ -19,12 +19,13 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].currentHealth
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].maxHealth;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0x1b;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 27;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + 5;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y + 4;
-        if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0 && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+        if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
             && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
             int pending = DAT_GameState::instance.playerDataArray[owner].startResources[15];
             if (pending > 0) {
