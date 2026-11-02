@@ -92,11 +92,11 @@ namespace AI {
             // fixme: Castle (AIV); the castle ID is passed even for human players, whose format ignores it
             int aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
             if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL) {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV:n/a",
-                    DAT_AIVState::instance.aivs[aivID].castleID + 1);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(
+                    text, "AIV:n/a", DAT_AIVState::instance.aivs[aivID].castleID + 1);
             } else {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "AIV: %d",
-                    DAT_AIVState::instance.aivs[aivID].castleID + 1);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(
+                    text, "AIV: %d", DAT_AIVState::instance.aivs[aivID].castleID + 1);
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 382, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
@@ -112,13 +112,15 @@ namespace AI {
             // Siege troops (attack troops without engineers): attack ticker in white when not attacking,
             // otherwise the attack force target
             if (DAT_GameState::instance.playerDataArray[playerID].aiPlayerState != 0) {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(
-                    text, "%d/%d", DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
-                        - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops, DAT_GameState::instance.playerDataArray[playerID].attackTicker);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "%d/%d",
+                    DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
+                        - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops,
+                    DAT_GameState::instance.playerDataArray[playerID].attackTicker);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
                     DAT_TextManagerObject::ptr)(text, x + 512, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0, 18, FALSE, 0);
             } else {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Sg:%d/%d", DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Sg:%d/%d",
+                    DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
                         - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops,
                     DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength
                         + this->aics[aiIndex].AttForceBase);

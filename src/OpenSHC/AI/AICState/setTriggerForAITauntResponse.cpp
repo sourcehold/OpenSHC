@@ -1,5 +1,6 @@
+#include "../AICState.hpp"
+
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/AI/AICState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 
