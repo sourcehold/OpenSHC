@@ -39,10 +39,10 @@ namespace Map {
                 this->units[unitID].destinationTilePosition = (short)_destinationX
                     + DAT_ViewportRenderState::instance.translationMatrix[(short)_destinationY].addXgetTile;
             } else {
-                this->units[unitID].destinationTilePosition = this->units[unitID].previousTilePosition;
                 this->units[unitID].totalSizeOfPathPlan = 0;
                 this->units[unitID].destinationXPosition = this->units[unitID].ladderExitXPosition;
                 this->units[unitID].destinationYPosition = this->units[unitID].ladderExitYPosition;
+                this->units[unitID].destinationTilePosition = this->units[unitID].previousTilePosition;
                 this->units[unitID].destinationX_2Unk = this->units[unitID].ladderExitXPosition;
                 this->units[unitID].destinationY_2Unk = this->units[unitID].ladderExitYPosition;
             }

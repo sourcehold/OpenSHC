@@ -39,10 +39,10 @@ namespace Map {
                 }
                 uint _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
                 uint _direction;
-                if ((_stepIndex & 1) == 0) {
-                    _direction = _packedDirections & 0xf;
-                } else {
+                if ((_stepIndex & 1) != 0) {
                     _direction = (int)_packedDirections >> 4;
+                } else {
+                    _direction = _packedDirections & 0xf;
                 }
                 _xPosition = _xPosition
                     + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;

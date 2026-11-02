@@ -56,7 +56,7 @@ namespace Map {
                 return;
             }
             UnitType _unitType = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                DAT_TribesState::ptr)(_newTribeID, (int*)0x0);
+                DAT_TribesState::ptr)(_newTribeID, (int*)0);
             if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                 || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM || _unitType == OpenSHC::Map::Units::UT_S_SHIELD
                 || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA
@@ -67,21 +67,21 @@ namespace Map {
                     = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
                         DAT_UnitsState::ptr)(_siegeEngineUnitID);
                 if (_remainingEngineers > 0) {
-                    if (this->units[_siegeEngineUnitID]
+                    if (DAT_UnitsState::instance.units[_siegeEngineUnitID]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                             == 0
                         || _remainingEngineers > 3) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xe);
+                            14);
                     } else if (_remainingEngineers == 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xb);
+                            11);
                     } else if (_remainingEngineers == 2) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xc);
+                            12);
                     } else if (_remainingEngineers == 3) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                            0xd);
+                            13);
                     }
                     DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
                     return;
@@ -90,8 +90,9 @@ namespace Map {
                     || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                     if ((DAT_UnitsState::instance.units[_siegeEngineUnitID].unitType
                                 == OpenSHC::Map::Units::UT_S_CATAPULT
-                            || this->units[_siegeEngineUnitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)
-                        && this->units[_siegeEngineUnitID].stoneAmmunition <= 0) {
+                            || DAT_UnitsState::instance.units[_siegeEngineUnitID].unitType
+                                == OpenSHC::Map::Units::UT_S_TREBUCHET)
+                        && DAT_UnitsState::instance.units[_siegeEngineUnitID].stoneAmmunition < 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
                             OpenSHC::Audio::SFX::SEID_RESOURCE_NEED25);
                         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
