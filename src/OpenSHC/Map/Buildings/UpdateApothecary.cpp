@@ -40,11 +40,13 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateVisuallyActiveState,
             DAT_BuildingsState::ptr)(buildingID);
+        // assignment via a local stack pointer is required for 100% match
         short* incrementPtr = &DAT_BuildingsState::instance.buildings[buildingID].animationIncrement;
         *incrementPtr = 1;
         if ((char)DAT_BuildingDefinedData::instance
                 .ApothecaryAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex]
             < 0) {
+            // assignment via a local stack pointer is required for 100% match
             short* indexPtr = &DAT_BuildingsState::instance.buildings[buildingID].animationIndex;
             *indexPtr = 0;
             DAT_BuildingsState::instance.buildings[buildingID].animationCycleCount += 1;
@@ -52,6 +54,7 @@ namespace Map {
         } else {
             DAT_BuildingsState::instance.buildings[buildingID].animationCycleCompleted = 0;
         }
+        // assignment via a local stack pointer is required for 100% match
         int* framePtr = &DAT_BuildingsState::instance.buildings[buildingID].animationFrame;
         *framePtr = (char)DAT_BuildingDefinedData::instance
                         .ApothecaryAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
@@ -64,6 +67,7 @@ namespace Map {
                 = DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive;
         }
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
+            // assignment via a local stack pointer is required for 100% match
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
