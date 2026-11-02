@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -13,12 +13,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00507130
     void TileMapState::placeTower(
         int param_1, uint param_2, uint param_3, undefined4 param_4, uint size, int param_6, undefined4 param_7)

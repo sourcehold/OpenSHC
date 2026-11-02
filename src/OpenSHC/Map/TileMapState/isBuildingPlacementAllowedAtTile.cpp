@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
@@ -37,19 +37,6 @@ namespace Map {
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      @return int 0 if allowed, 1 if not allowed, 2 not allowed because of clashing building placement decompilerscript:
-      committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9A60
     int TileMapState::isBuildingPlacementAllowedAtTile(
         int tile, int playerID, MappersEnum commandBuildingType, int param_4)
@@ -117,8 +104,8 @@ namespace Map {
 
         if (this->UnitLayer[tile] != 0) {
             int unitID = (short)this->UnitLayer[tile];
-            if (MACRO_CALL_MEMBER(
-                    OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID)
+            if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(
+                    playerID)
                 == FALSE) {
                 if (DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_CHICKEN) {
                     return 1;
@@ -202,8 +189,8 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                     return 1;
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
-                        DAT_GameSynchronyState::ptr)(playerID)
+                if (MACRO_CALL_MEMBER(
+                        OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID)
                     == 0) {
                     return 1;
                 }

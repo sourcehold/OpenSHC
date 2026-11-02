@@ -1,5 +1,5 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -12,12 +12,6 @@ namespace Map {
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00515F40
     TileMapState* TileMapState::Constructor_TileMapState()
     {

@@ -1,5 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,11 +13,8 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_MOAT;
-
     using OpenSHC::Map::Buildings::BuildingType;
-
-    /* orientation is a plain int in the original (cdq; sar at 0x514E1B); the header declares it int*.
-       Every footprint tileUnk is stored in tileRefs without a bound check (0x514E78). */
+  
     // FUNCTION: STRONGHOLDCRUSADER 0x00514DE0
     void TileMapState::placeDrawbridge(
         int playerID, uint x, uint y, undefined4 buildingType, uint total, int* orientation, undefined4 averageHeight)

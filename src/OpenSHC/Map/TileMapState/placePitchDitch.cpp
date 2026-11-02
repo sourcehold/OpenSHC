@@ -1,5 +1,5 @@
+#include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -11,12 +11,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005116E0
     int TileMapState::placePitchDitch(undefined4 playerID, uint x, uint y)
     {

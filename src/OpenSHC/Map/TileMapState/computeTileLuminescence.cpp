@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
@@ -18,12 +18,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F7A80
     void TileMapState::computeTileLuminescence(int tileUnk, int y)
     {
@@ -146,8 +140,8 @@ namespace Map {
             }
             if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
                 sampled = this->HeightLayer[rayTile];
-            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3, DAT_BuildingsState::ptr)(
-                           this->BuildingLayer[rayTile])
+            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                           DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile])
                 == 0) {
                 if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
                         this->BuildingLayer[rayTile])
@@ -155,14 +149,15 @@ namespace Map {
                     sampled = this->HeightLayer[rayTile] + 0x10;
                 } else {
                     sampled = (uint)this->HeightLayer[rayTile]
-                        + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                              this->BuildingLayer[rayTile]);
+                        + MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                            DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile]);
                 }
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
                 sampled = sampled
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage, DAT_LandscapeState::ptr)(
-                          this->OrganismLayer[rayTile])
+                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                          DAT_LandscapeState::ptr)(this->OrganismLayer[rayTile])
                         * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
                 sampled = sampled + 0x28;
@@ -197,8 +192,8 @@ namespace Map {
             }
             if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
                 sampled = this->HeightLayer[rayTile];
-            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3, DAT_BuildingsState::ptr)(
-                           this->BuildingLayer[rayTile])
+            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                           DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile])
                 == 0) {
                 if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
                         this->BuildingLayer[rayTile])
@@ -206,14 +201,15 @@ namespace Map {
                     sampled = this->HeightLayer[rayTile] + 0x10;
                 } else {
                     sampled = (uint)this->HeightLayer[rayTile]
-                        + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                              this->BuildingLayer[rayTile]);
+                        + MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                            DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile]);
                 }
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
                 sampled = sampled
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage, DAT_LandscapeState::ptr)(
-                          this->OrganismLayer[rayTile])
+                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                          DAT_LandscapeState::ptr)(this->OrganismLayer[rayTile])
                         * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
                 sampled = sampled + 0x28;
@@ -252,8 +248,8 @@ namespace Map {
                     lightSide = this->HeightLayer[diagonalTile];
                 } else {
                     lightSide = sampled;
-                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3, DAT_BuildingsState::ptr)(
-                            this->BuildingLayer[diagonalTile])
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                            DAT_BuildingsState::ptr)(this->BuildingLayer[diagonalTile])
                         == 0) {
                         if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
                                 this->BuildingLayer[diagonalTile])
@@ -261,7 +257,8 @@ namespace Map {
                             lightSide = this->HeightLayer[diagonalTile] + 0x10;
                         } else {
                             lightSide = (uint)this->HeightLayer[diagonalTile]
-                                + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                + MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                                     DAT_BuildingsState::ptr)(this->BuildingLayer[diagonalTile]);
                         }
                     }

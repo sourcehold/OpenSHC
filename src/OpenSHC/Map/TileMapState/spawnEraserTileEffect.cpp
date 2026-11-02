@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 
@@ -22,12 +23,6 @@ namespace Map {
 
     using OpenSHC::Map::Entities::EntityType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9F00
     void TileMapState::spawnEraserTileEffect(undefined4 param_1, int tile)
     {

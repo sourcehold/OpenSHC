@@ -1,5 +1,6 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -24,12 +25,6 @@ namespace Map {
     using OpenSHC::Map::Units::UnitLogicState;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F94A0
     void TileMapState::validateWallPlacementAtTile(int playerID, uint x, uint y, MappersEnum param_4)
     {

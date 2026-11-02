@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -10,12 +11,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500980
     undefined4 TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
     {

@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -24,12 +24,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00514480
     void TileMapState::planMoat(undefined4 playerID, int tile, uint tileY)
     {
@@ -54,8 +48,9 @@ namespace Map {
         }
 
         int moatX = tile - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile;
-        if ((logic & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0 && this->HeightLayer[tile] <= 0xc) {
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, 0) != 0) {
+        if ((logic & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0 && this->HeightLayer[tile] <= 12) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, 0)
+                != 0) {
                 this->LogicLayer[tile] = this->LogicLayer[tile] | L_MOAT_DUG_OR_PLANNED;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

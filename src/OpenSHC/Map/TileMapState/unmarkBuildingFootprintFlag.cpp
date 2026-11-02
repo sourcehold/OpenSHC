@@ -1,5 +1,4 @@
-
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -8,12 +7,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_PLAIN1_AND_FARM;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAD20
     void TileMapState::unmarkBuildingFootprintFlag(int param_1, int param_2, int param_3)
     {

@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BottomLeftTextDisplayState.hpp"
@@ -14,18 +14,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00506E10
     void TileMapState::placeSiegeTent(
         int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize, int param_6, undefined4 height)

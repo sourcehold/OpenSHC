@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -14,12 +14,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_RIVER;
     using OpenSHC::Map::LogicHelpers::L_SEA;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC340
     void TileMapState::collectCliffEdgeTilesForClimbData()
     {

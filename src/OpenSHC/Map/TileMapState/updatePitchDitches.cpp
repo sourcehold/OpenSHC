@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Entities.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -12,12 +12,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005114C0
     void TileMapState::updatePitchDitches()
     {
@@ -43,7 +37,7 @@ namespace Map {
                 this->pitchDitches[id].field7_0x12 = 0;
             } else if (this->pitchDitches[id].state == 2) {
                 this->pitchDitches[id].field7_0x12 = this->pitchDitches[id].field7_0x12 + 1;
-                if (this->pitchDitches[id].field7_0x12 == 0x14) {
+                if (this->pitchDitches[id].field7_0x12 == 20) {
                     this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
                     this->pitchDitches[id].field7_0x12 = 0;
                     uint height = DAT_TileMapState::instance.HeightLayer[tile];
@@ -62,7 +56,7 @@ namespace Map {
                         if (other == 0 || this->pitchDitches[other].state != 1) {
                             continue;
                         }
-                        if (abs((int)(height - DAT_TileMapState::instance.HeightLayer[neighbour])) < 0x19) {
+                        if (abs((int)(height - DAT_TileMapState::instance.HeightLayer[neighbour])) < 25) {
                             MACRO_CALL(OpenSHC::Map::Entities_Func::SetPlaceOnFire)(this->pitchDitches[other].owner,
                                 this->pitchDitches[other].x * 8, this->pitchDitches[other].y * 8,
                                 DAT_TileMapState::instance.HeightLayer[this->pitchDitches[other].tile], 3);

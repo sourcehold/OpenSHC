@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -31,18 +31,6 @@ namespace Map {
     using OpenSHC::Game::GameMode2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005024F0
     BOOLEnum TileMapState::isValidCastleSiteLocation(int x, uint y, int cbt)
     {
@@ -63,7 +51,8 @@ namespace Map {
 
         int tile = baseTile;
         for (int index = 0; index < 9; index++) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(0, index, &tile, (int*)&y, baseTile, baseY);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                0, index, &tile, (int*)&y, baseTile, baseY);
             /* the brush call may move both, so the original keeps its own copies for later use */
             int brushTile = tile;
             uint brushY = y;
@@ -76,8 +65,7 @@ namespace Map {
             if (this->BuildingLayer[tile] != 0) {
                 continue;
             }
-            if ((this->LogicLayer[tile]
-                    & (L_WALL_OR_GATEHOUSE | L_BOULDERS | L_IRON | L_RIVER | L_FORD | L_MARSH))
+            if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BOULDERS | L_IRON | L_RIVER | L_FORD | L_MARSH))
                 != 0) {
                 continue;
             }
@@ -88,15 +76,18 @@ namespace Map {
             uint brushX = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
+                && MACRO_CALL_MEMBER(
+                       OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
                        DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, y, enemyRange)
                     != FALSE) {
                 continue;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                int buildRange = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange, DAT_PathFindingState::ptr)(
-                        DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, brushY, searchRange, -1, -1, buildRange + 5)
+                int buildRange
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
+                        DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, brushY,
+                        searchRange, -1, -1, buildRange + 5)
                     != 0) {
                     continue;
                 }

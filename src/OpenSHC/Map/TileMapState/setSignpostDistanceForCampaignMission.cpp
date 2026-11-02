@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Game/GameMode2.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -10,12 +11,6 @@ namespace Map {
 
     using OpenSHC::Game::GameMode2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500BB0
     void TileMapState::setSignpostDistanceForCampaignMission()
     {

@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -19,15 +19,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_ROCKY;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-
     using OpenSHC::Map::Buildings::BuildingType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFBA0
     int TileMapState::getTotalHeightAt(int tile, int playerID)
     {
@@ -36,9 +29,13 @@ namespace Map {
         int exposed = 0;
         if ((logic & L_KEEP_NON_MANOR_HOUSE) != 0) {
             int buildingID = this->BuildingLayer[tile];
-            extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(buildingID);
+            extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                DAT_BuildingsState::ptr)(buildingID);
             for (int i = 0; i < 8; i++) {
-                if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]][i] + tile] != buildingID) {
+                if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::
+                                                instance.tileTranslationMatrix_YComponent[tile]][i]
+                        + tile]
+                    != buildingID) {
                     exposed = 1;
                     break;
                 }
@@ -56,7 +53,9 @@ namespace Map {
             case 0x4c:
             case 0x4d:
             case 0x4e:
-                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(buildingID) + 0x14;
+                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                            DAT_BuildingsState::ptr)(buildingID)
+                    + 0x14;
                 exposed = 1;
                 break;
             case 0x28:
@@ -64,10 +63,16 @@ namespace Map {
             case 0x2a:
             case 0x2b:
             case 0x2c:
-                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(buildingID);
-                if (DAT_BuildingsState::instance.buildings[buildingID].buildingType != OpenSHC::Map::Buildings::BT_MANORHOUSE) {
+                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                    DAT_BuildingsState::ptr)(buildingID);
+                if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                    != OpenSHC::Map::Buildings::BT_MANORHOUSE) {
                     for (int i = 0; i < 8; i++) {
-                        if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]][i] + tile] != buildingID) {
+                        if (this->BuildingLayer[DAT_TileMapState::instance
+                                                    .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                            .tileTranslationMatrix_YComponent[tile]][i]
+                                + tile]
+                            != buildingID) {
                             exposed = 1;
                             break;
                         }
@@ -76,7 +81,8 @@ namespace Map {
                 break;
             case 0x2d:
             case 0x2e:
-                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(buildingID);
+                extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                    DAT_BuildingsState::ptr)(buildingID);
                 exposed = 1;
                 break;
             default:
@@ -127,10 +133,18 @@ namespace Map {
                         first = 0;
                         second = 4;
                     }
-                    if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]][first] + tile] != buildingID) {
+                    if (this->BuildingLayer[DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                        .tileTranslationMatrix_YComponent[tile]][first]
+                            + tile]
+                        != buildingID) {
                         exposed = 1;
                     }
-                    if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]][second] + tile] != buildingID) {
+                    if (this->BuildingLayer[DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                        .tileTranslationMatrix_YComponent[tile]][second]
+                            + tile]
+                        != buildingID) {
                         exposed = 1;
                     }
                 }

@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
@@ -39,12 +40,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_DEFAULT_EARTH_OR_TEXTURE;
     using OpenSHC::Map::LogicHelpers::L_MARSH;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC9E0
     void TileMapState::updateGFXLayers()
     {

@@ -1,6 +1,8 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -22,16 +24,10 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004F93E0
     void TileMapState::destroyWallsOfPlayer(int playerID)
     {
-        for (int tile = 0; tile < 80400; tile++) {
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 continue;
             }

@@ -1,7 +1,8 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -12,6 +13,12 @@ namespace OpenSHC {
 namespace Map {
     using namespace OpenSHC::Map::LogicHelpers; // L_* flags
     using OpenSHC::Map::Buildings::Building;
+
+    using OpenSHC::Map::LogicHelpers::L_BUILDING;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_DAIRY;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_WHEAT;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAAB0
     void TileMapState::clearBuildingTilesAndTrees(int buildingID, int surfaceArea)

@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -22,12 +22,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00502680
     void TileMapState::useTerrainHeightBrush(int tile, uint y, uint brush, undefined4 mapper)
     {
@@ -41,7 +35,8 @@ namespace Map {
         if (brushSize > 0) {
             int index = 0;
             do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                    1, index, &tile, (int*)&y, baseTile, baseY);
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
                     if ((int)(uint)this->HeightLayer[tile] > highest) {
                         highest = this->HeightLayer[tile];
@@ -58,7 +53,8 @@ namespace Map {
         tile = baseTile;
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&y, baseTile, baseY);
             int brushTile = tile;
             if ((this->LogicLayer[brushTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
@@ -123,7 +119,8 @@ namespace Map {
 
             /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
             MACRO_MARK_CHANGED_NEIGHBOURS()
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(brushY, brushTile);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                DAT_PathFindingState::ptr)(brushY, brushTile);
         }
         this->forceUpdateLogicalAndMiscDisplayLayers = 1;
     }

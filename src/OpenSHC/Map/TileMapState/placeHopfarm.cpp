@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
@@ -20,18 +20,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005151C0
     void TileMapState::placeHopfarm(
         int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7)
@@ -47,10 +35,9 @@ namespace Map {
         buildingSizeTileIndex = 0;
         buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(param_1, param_2,
-            param_3, (undefined4)((int)(param_7)), (BuildingType)((int)((int)(short)param_4)), 3, param_1, param_6);
+            param_3, (undefined4)((int)(param_7)), (BuildingType)((int)((short)param_4)), 3, param_1, param_6);
         this->placedBuildingID = buildingID;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(
-            param_2, (int)((int)(param_3)), 9);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(param_2, (int)(param_3), 9);
         iVar4 = *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation;
         param_2 = 4;
         pXVar3 = DAT_TerrainDefinedData::instance.HopFarmProperty1[iVar4];
@@ -120,12 +107,12 @@ namespace Map {
         if (1 < *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation) {
             *(undefined4*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation = 0;
         }
-        if (((param_1 == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                && (DAT_GameState::instance.playerDataArray[param_1].availablePeasantsAtFire
-                    < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount))
-            && ((DAT_GameState::instance.playerDataArray[param_1].populationCap
+        if (param_1 == DAT_GameSynchronyState::instance.currentPlayerSlotID
+            && DAT_GameState::instance.playerDataArray[param_1].availablePeasantsAtFire
+                < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && (DAT_GameState::instance.playerDataArray[param_1].populationCap
                     <= DAT_GameState::instance.playerDataArray[param_1].currentPopulation
-                || (DAT_GameState::instance.playerDataArray[param_1].popularity < 5000)))) {
+                || (DAT_GameState::instance.playerDataArray[param_1].popularity < 5000))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }

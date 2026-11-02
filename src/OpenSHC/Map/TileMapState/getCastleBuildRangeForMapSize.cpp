@@ -1,14 +1,10 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
+
+#include "OpenSHC/Map/MapConstants.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FBC30
     undefined4 TileMapState::getCastleBuildRangeForMapSize()
     {
@@ -19,7 +15,7 @@ namespace Map {
             return 50;
         case 300:
             return 60;
-        case 400:
+        case MC_MAP_XY_LIMIT:
             return 70;
         }
         return 70;

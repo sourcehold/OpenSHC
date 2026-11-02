@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -17,12 +17,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00508DD0
     void TileMapState::applyTreeBrushToLogicalLayer(int treeID, int noVariation)
     {
@@ -48,9 +42,9 @@ namespace Map {
                 }
             }
         }
-        MACRO_CALL_MEMBER(
-            OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(7,
-            (short)DAT_LandscapeState::instance.trees[treeID].xPosition, (short)DAT_LandscapeState::instance.trees[treeID].yPosition);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+            DAT_PathFindingState::ptr)(7, (short)DAT_LandscapeState::instance.trees[treeID].xPosition,
+            (short)DAT_LandscapeState::instance.trees[treeID].yPosition);
     }
 
 }

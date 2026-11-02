@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -9,12 +9,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_SEA;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FF080
     void TileMapState::updateMacroLayerRelated2()
     {
@@ -107,7 +101,7 @@ namespace Map {
                             this->DAT_SomeX = nextX;
                         }
                         this->DAT_SomeX = this->DAT_SomeX + 1;
-                        group = group + -1;
+                        group = group - 1;
                     } while (group != 0);
                 }
                 startRow = 0;
@@ -166,7 +160,7 @@ namespace Map {
                             }
                         }
                         this->DAT_SomeX = this->DAT_SomeX + 1;
-                        column = column + -1;
+                        column = column - 1;
                     } while (column != 0);
                 }
                 startRow = 0;
@@ -256,7 +250,7 @@ namespace Map {
                             this->DAT_SomeX = nextX;
                         }
                         this->DAT_SomeX = this->DAT_SomeX + 1;
-                        group = group + -1;
+                        group = group - 1;
                     } while (group != 0);
                 }
                 startRow = 0;

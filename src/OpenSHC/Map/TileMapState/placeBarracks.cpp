@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -19,18 +19,6 @@ namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005076A0
     void TileMapState::placeBarracks(int playerID, uint xPosition, int* yPosition_param, undefined4 buildingType,
         uint buildingSize, int buildingOrientation, undefined4 param_7)
@@ -53,15 +41,15 @@ namespace Map {
             local_c = buildingOrientation / 2;
         }
         _buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, xPosition, (uint)((int)(yPosition_param)), (undefined4)((int)(param_7)),
-            (BuildingType)((int)((int)(short)buildingType)), buildingSize, playerID, 0xf);
+            DAT_BuildingsState::ptr)(playerID, xPosition, (uint)(yPosition_param), (undefined4)((int)(param_7)),
+            (BuildingType)((int)((short)buildingType)), buildingSize, playerID, 0xf);
         iVar2 = (int)(short)_buildingID;
         this->placedBuildingID = iVar2;
         DAT_BuildingsState::instance.buildings[iVar2].uidWhenPlaced = iVar7;
         yPosition_param = &DAT_BuildingsState::instance.buildings[iVar2].tileRefs[0];
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                iVar5, (int)((int)(buildingSize)));
+                iVar5, (int)(buildingSize));
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + (int)piVar1].addXgetTile
                 + this->buildingX + xPosition;
             *yPosition_param = iVar3;
@@ -86,7 +74,7 @@ namespace Map {
         buildingSize = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                buildingSize, (int)((int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight)));
+                buildingSize, (int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight));
             iVar2 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + uVar6].addXgetTile
                 + this->buildingX + uVar4;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar2);
@@ -114,7 +102,7 @@ namespace Map {
         buildingSize = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                buildingSize, (int)((int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight)));
+                buildingSize, (int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight));
             iVar2 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + uVar6].addXgetTile
                 + this->buildingX + uVar4;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar2);
@@ -142,7 +130,7 @@ namespace Map {
         buildingSize = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                buildingSize, (int)((int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight)));
+                buildingSize, (int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight));
             iVar7 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + uVar6].addXgetTile
                 + this->buildingX + uVar4;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar7);
@@ -166,12 +154,12 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBarracksCampgroundPositions,
                 DAT_BuildingsState::ptr)(playerID);
         }
-        if (((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                && (DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                    < (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount))
-            && ((DAT_GameState::instance.playerDataArray[playerID].populationCap
+        if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
+                < (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount
+            && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
-                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)))) {
+                || (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000))) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }

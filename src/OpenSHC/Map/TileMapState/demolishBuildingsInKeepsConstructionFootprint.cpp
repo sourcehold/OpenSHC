@@ -1,6 +1,6 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -12,15 +12,9 @@ namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingLogicalState;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA760
-    void TileMapState::demolishBuildingsInKeepsConstructionFootprint(undefined4 param_1, int x, int y,
-        undefined4 buildingType, int sizeIndex, int param_6, int param_7)
+    void TileMapState::demolishBuildingsInKeepsConstructionFootprint(
+        undefined4 param_1, int x, int y, undefined4 buildingType, int sizeIndex, int param_6, int param_7)
     {
         int keepX = x;
         int keepY = y;
@@ -91,8 +85,10 @@ namespace Map {
         } while (index < this->constructionTileCount);
 
         for (int buildingID = 1; buildingID < 2000; buildingID++) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == OpenSHC::Map::Buildings::BLS_REMOVE) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding, DAT_BuildingsState::ptr)(buildingID);
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState
+                == OpenSHC::Map::Buildings::BLS_REMOVE) {
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding, DAT_BuildingsState::ptr)(buildingID);
             }
         }
     }

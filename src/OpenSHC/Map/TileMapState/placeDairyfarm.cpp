@@ -1,6 +1,7 @@
+#include "../TileMapState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -23,7 +24,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_NONE;
     using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
 
-    /* the header declares the variation parameter as int*; it is the plain int variation index */
     // FUNCTION: STRONGHOLDCRUSADER 0x005154D0
     void TileMapState::placeDairyfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5,
         int* variation, undefined4 averageHeight)

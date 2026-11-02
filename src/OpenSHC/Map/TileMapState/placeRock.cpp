@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -25,12 +25,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_ROCKY;
     using OpenSHC::Map::LogicHelpers::L_SEA;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB4D0
     void TileMapState::placeRock(uint x, uint y, uint kind)
     {
@@ -99,7 +93,8 @@ namespace Map {
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return;
             }
@@ -126,7 +121,8 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             index++;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
             this->HeightLayer[tile] = height;
             this->DefaultHeightLayer[tile] = height;
             this->LogicLayer[tile] = this->LogicLayer[tile]
@@ -136,7 +132,8 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_ROCKY;
             this->OrganismLayer[tile] = organism;
         } while (index < this->constructionTileCount);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(9, x, y);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+            DAT_PathFindingState::ptr)(9, x, y);
         this->forceUpdateMacroLayerFlag = 1;
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
     }

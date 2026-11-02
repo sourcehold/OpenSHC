@@ -1,7 +1,7 @@
+#include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -40,15 +40,6 @@ namespace Map {
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "MappersEnumShort": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x005034A0
     void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
     {
@@ -111,13 +102,16 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
         }
         this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(y, tile);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+            DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(7, x, y);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+            DAT_PathFindingState::ptr)(7, x, y);
         if (command != OpenSHC::Commands::M_MAPPER_STAIR1 && command != OpenSHC::Commands::M_MAPPER_STAIR2
             && command != OpenSHC::Commands::M_MAPPER_STAIR3 && command != OpenSHC::Commands::M_MAPPER_STAIR4
             && command != OpenSHC::Commands::M_MAPPER_STAIR5 && command != OpenSHC::Commands::M_MAPPER_STAIR6) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss, DAT_BuildingsState::ptr)(playerID, 1, 0, 0);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+                DAT_BuildingsState::ptr)(playerID, 1, 0, 0);
         }
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
