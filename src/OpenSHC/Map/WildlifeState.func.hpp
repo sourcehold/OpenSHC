@@ -75,6 +75,15 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052E120, &WildlifeState::updateNofFpoints)
         updateNofFpoints;
+        MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052D720,
+            &WildlifeState::floodFillZoneProximityFromCell)
+        floodFillZoneProximityFromCell;
+        MACRO_FUNCTION_RESOLVER(int (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DD20,
+            &WildlifeState::getDistanceFromAttackSignpostToZoneProximity)
+        getDistanceFromAttackSignpostToZoneProximity;
+        MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
+            &WildlifeState::isAttackStagingCandidateCell)
+        isAttackStagingCandidateCell;
 
     } // namespace WildlifeState_Func
 } // namespace Map
