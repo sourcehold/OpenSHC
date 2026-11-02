@@ -6,7 +6,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00500B50
-    int TileMapState::computeTileAlongAxisOffset(int tile, int addend, uint offset)
+    int TileMapState::computeTileAlongAxisOffset(int tileUnk, int addend, uint offset)
     {
         int yStep = 1;
         int direction = 4;
@@ -15,12 +15,13 @@ namespace Map {
             direction = 0;
         }
 
-        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-        for (int remaining = abs((int)offset); remaining > 0; remaining--) {
-            tile = tile + this->directionTranslationMatrix[y][direction];
+        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
+        int count = abs((int)offset);
+        for (int i = 0; i < count; i++) {
+            tileUnk = tileUnk + this->directionTranslationMatrix[y][direction];
             y = y + yStep;
         }
-        return tile + addend;
+        return tileUnk + addend;
     }
 
 }
