@@ -205,69 +205,69 @@ namespace Game {
             if (popularityChange < worstChange) {
                 worstChangeReason = 8;
             }
-            if (this->playerDataArray[playerID].someCount48 != 0) {
-                --this->playerDataArray[playerID].someCount48;
-                if (this->playerDataArray[playerID].someCount60 != 0) {
-                    ++this->playerDataArray[playerID].someCount60;
+            if (this->playerDataArray[playerID].eventPlagueCountdown != 0) {
+                --this->playerDataArray[playerID].eventPlagueCountdown;
+                if (this->playerDataArray[playerID].eventPlagueHealerActivity != 0) {
+                    ++this->playerDataArray[playerID].eventPlagueHealerActivity;
                 }
-                int siegePenalty;
-                if (this->playerDataArray[playerID].someCount60 <= 0) {
-                    siegePenalty = -150;
-                } else if (this->playerDataArray[playerID].someCount60 <= 5) {
-                    siegePenalty = -125;
-                } else if (this->playerDataArray[playerID].someCount60 <= 10) {
-                    siegePenalty = -100;
-                } else if (this->playerDataArray[playerID].someCount60 <= 15) {
-                    siegePenalty = -75;
-                } else if (this->playerDataArray[playerID].someCount60 <= 20) {
-                    siegePenalty = -50;
-                } else if (this->playerDataArray[playerID].someCount60 <= 25) {
-                    siegePenalty = -25;
+                int plaguePenalty;
+                if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 0) {
+                    plaguePenalty = -150;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 5) {
+                    plaguePenalty = -125;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 10) {
+                    plaguePenalty = -100;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 15) {
+                    plaguePenalty = -75;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 20) {
+                    plaguePenalty = -50;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 25) {
+                    plaguePenalty = -25;
                 } else {
-                    siegePenalty = 0;
+                    plaguePenalty = 0;
                 }
-                this->playerDataArray[playerID].popularity += siegePenalty;
-                this->playerDataArray[playerID].someCount54 = siegePenalty;
+                this->playerDataArray[playerID].popularity += plaguePenalty;
+                this->playerDataArray[playerID].currentPlaguePenalty = plaguePenalty;
             } else {
-                this->playerDataArray[playerID].someCount54 = 0;
-                this->playerDataArray[playerID].someCount60 = 0;
+                this->playerDataArray[playerID].currentPlaguePenalty = 0;
+                this->playerDataArray[playerID].eventPlagueHealerActivity = 0;
             }
-            if (this->playerDataArray[playerID].someCount49 != 0) {
-                --this->playerDataArray[playerID].someCount49;
+            if (this->playerDataArray[playerID].eventLionsCountdown != 0) {
+                --this->playerDataArray[playerID].eventLionsCountdown;
                 this->playerDataArray[playerID].popularity -= 75;
-                this->playerDataArray[playerID].someCount55 = -75;
+                this->playerDataArray[playerID].currentLionsPenalty = -75;
             } else {
-                this->playerDataArray[playerID].someCount55 = 0;
+                this->playerDataArray[playerID].currentLionsPenalty = 0;
             }
-            if (this->playerDataArray[playerID].someCount50 != 0) {
-                --this->playerDataArray[playerID].someCount50;
+            if (this->playerDataArray[playerID].eventBanditsCountdown != 0) {
+                --this->playerDataArray[playerID].eventBanditsCountdown;
                 this->playerDataArray[playerID].popularity -= 125;
-                this->playerDataArray[playerID].someCount56 = -125;
+                this->playerDataArray[playerID].currentBanditsPenalty = -125;
             } else {
-                this->playerDataArray[playerID].someCount56 = 0;
+                this->playerDataArray[playerID].currentBanditsPenalty = 0;
             }
-            if (this->playerDataArray[playerID].someCount51 != 0) {
-                --this->playerDataArray[playerID].someCount51;
+            if (this->playerDataArray[playerID].eventFireCountdown != 0) {
+                --this->playerDataArray[playerID].eventFireCountdown;
                 this->playerDataArray[playerID].popularity -= 50;
-                this->playerDataArray[playerID].someCount57 = -50;
+                this->playerDataArray[playerID].currentFirePenalty = -50;
             } else {
-                this->playerDataArray[playerID].someCount57 = 0;
+                this->playerDataArray[playerID].currentFirePenalty = 0;
             }
-            if (this->playerDataArray[playerID].someCount52 != 0) {
-                --this->playerDataArray[playerID].someCount52;
+            if (this->playerDataArray[playerID].eventMarriageCountdown != 0) {
+                --this->playerDataArray[playerID].eventMarriageCountdown;
                 this->playerDataArray[playerID].popularity += 200;
-                this->playerDataArray[playerID].someCount58 = 200;
+                this->playerDataArray[playerID].currentMarriageBoost = 200;
             } else {
-                this->playerDataArray[playerID].someCount58 = 0;
+                this->playerDataArray[playerID].currentMarriageBoost = 0;
             }
-            if (this->playerDataArray[playerID].someCount53 != 0) {
-                --this->playerDataArray[playerID].someCount53;
+            if (this->playerDataArray[playerID].eventJesterCountdown != 0) {
+                --this->playerDataArray[playerID].eventJesterCountdown;
                 this->playerDataArray[playerID].popularity += 50;
-                this->playerDataArray[playerID].someCount59 = 50;
+                this->playerDataArray[playerID].currentJesterBoost = 50;
             } else {
-                this->playerDataArray[playerID].someCount59 = 0;
+                this->playerDataArray[playerID].currentJesterBoost = 0;
             }
-            this->playerDataArray[playerID].someCount40 = worstChangeReason;
+            this->playerDataArray[playerID].largestPopularityChangeReason = worstChangeReason;
             if (this->playerDataArray[playerID].popularity < 0) {
                 this->playerDataArray[playerID].popularity = 0;
             }
