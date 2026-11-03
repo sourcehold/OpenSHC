@@ -8,7 +8,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -22,7 +22,7 @@ namespace UI {
         int population = DAT_GameState::instance.playerDataArray[playerID].currentPopulation;
         int gold = DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD];
         DAT_TextManagerObject::instance.currentXOffset_0x0
-            = DAT_GMImageHeaders::instance.imh[GMTotalPicturesProcessed::instance[DE::SHCDE::GM_INTERFACE_ICONS2] + 123]
+            = DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[DE::SHCDE::GM_INTERFACE_ICONS2] + 123]
                   .width;
 
         int goldDigitSet = 0;
