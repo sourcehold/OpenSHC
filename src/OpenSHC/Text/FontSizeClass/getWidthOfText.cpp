@@ -3,7 +3,7 @@
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/DAT_TextInputDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Text {
@@ -22,7 +22,7 @@ namespace Text {
         int iVar1 = 0;
         if (this->fontStartImageId_0x8 == -1) {
             this->fontStartImageId_0x8
-                = GMTotalPicturesProcessed::instance[this->fontGmID_0x0] + -1 + this->numberOfFontStartInGm_0x4;
+                = GMFirstPictureIndex::instance[this->fontGmID_0x0] + -1 + this->numberOfFontStartInGm_0x4;
         }
 
         for (int _textIndex = 0; _textIndex < length; ++_textIndex) {
@@ -53,7 +53,7 @@ namespace Text {
 
                     if (iVar1 != 0) {
                         _currentLineWidthUnk += 3
-                            + DAT_GMImageHeaders::instance.imh[GMTotalPicturesProcessed::instance[156] + iVar1 - 1]
+                            + DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[156] + iVar1 - 1]
                                   .width
                             - DAT_GMImageHeaders::instance.imh[imageID].width - this->letterSpacing_0x18;
                     }
