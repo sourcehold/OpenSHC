@@ -49,20 +49,20 @@ namespace Map {
         hasAdjacentCellWithField24Or25;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
-            &WildlifeState::isSuitableWildlifeSpawnCell)
-        isSuitableWildlifeSpawnCell;
+            &WildlifeState::isAttackStagingCandidateCell)
+        isAttackStagingCandidateCell;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052D720,
-            &WildlifeState::floodFillUnknownNonZero01FromCell)
-        floodFillUnknownNonZero01FromCell;
+            &WildlifeState::floodFillZoneProximityFromCell)
+        floodFillZoneProximityFromCell;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052D9D0,
             &WildlifeState::floodFillCasDisFromSignpost)
         floodFillCasDisFromSignpost;
 
         MACRO_FUNCTION_RESOLVER(int (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DD20,
-            &WildlifeState::getDistanceToNearestUnknownNonZero01FromSignpost)
-        getDistanceToNearestUnknownNonZero01FromSignpost;
+            &WildlifeState::getDistanceFromAttackSignpostToZoneProximity)
+        getDistanceFromAttackSignpostToZoneProximity;
 
         MACRO_FUNCTION_RESOLVER(
             void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DF30, &WildlifeState::updateWildlife)
@@ -75,15 +75,6 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052E120, &WildlifeState::updateNofFpoints)
         updateNofFpoints;
-        MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052D720,
-            &WildlifeState::floodFillZoneProximityFromCell)
-        floodFillZoneProximityFromCell;
-        MACRO_FUNCTION_RESOLVER(int (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DD20,
-            &WildlifeState::getDistanceFromAttackSignpostToZoneProximity)
-        getDistanceFromAttackSignpostToZoneProximity;
-        MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
-            &WildlifeState::isAttackStagingCandidateCell)
-        isAttackStagingCandidateCell;
 
     } // namespace WildlifeState_Func
 } // namespace Map

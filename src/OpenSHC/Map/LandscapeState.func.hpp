@@ -74,8 +74,8 @@ namespace Map {
         setTreeSpreadInterval;
 
         MACRO_FUNCTION_RESOLVER(
-            void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F2DA0, &LandscapeState::killEveryFifthTree)
-        killEveryFifthTree;
+            void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F2DA0, &LandscapeState::ageFourFifthsOfGrowingTrees)
+        ageFourFifthsOfGrowingTrees;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(uint, int, uint, uint), false,
             Address::SHC_3BB0A8C1_0x004F2E00, &LandscapeState::setupBabyTreeLocation)
@@ -136,9 +136,6 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F3D60, &LandscapeState::updateTrees)
         updateTrees;
-        MACRO_FUNCTION_RESOLVER(
-            void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F2DA0, &LandscapeState::ageFourFifthsOfGrowingTrees)
-        ageFourFifthsOfGrowingTrees;
 
     } // namespace LandscapeState_Func
 } // namespace Map

@@ -43,15 +43,15 @@ namespace Map {
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth
             <= DAT_BuildingsState::instance.buildings[buildingID].maxHealth * 3 / 10) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].field208_0x2da == 0
+            if (DAT_BuildingsState::instance.buildings[buildingID].field207_0x2da == 0
                 || DAT_BuildingsState::instance.buildings[buildingID].spriteID != 0x11f) {
-                DAT_BuildingsState::instance.buildings[buildingID].field208_0x2da = 1;
+                DAT_BuildingsState::instance.buildings[buildingID].field207_0x2da = 1;
                 DAT_BuildingsState::instance.buildings[buildingID].spriteID = 0x11f;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
                     buildingID);
             }
         } else {
-            DAT_BuildingsState::instance.buildings[buildingID].field208_0x2da = 0;
+            DAT_BuildingsState::instance.buildings[buildingID].field207_0x2da = 0;
         }
     }
 

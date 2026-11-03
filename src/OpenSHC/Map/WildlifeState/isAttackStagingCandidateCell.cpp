@@ -6,7 +6,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0052D690
-    undefined4 WildlifeState::isAttackStagingCandidateCell(int cellX, int cellY)
+    BOOLEnum WildlifeState::isAttackStagingCandidateCell(int cellX, int cellY)
     {
         if (this->grid[cellX][cellY].unclaimedArea > 8) {
             return 0;

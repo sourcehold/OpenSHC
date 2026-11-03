@@ -57,13 +57,11 @@ namespace Map {
 
         undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
 
-        BOOLEnum isSuitableWildlifeSpawnCell(int param_1, int param_2);
+        BOOLEnum isAttackStagingCandidateCell(int cellX, int cellY);
 
-        void floodFillUnknownNonZero01FromCell(int param_1, int param_2, int param_3);
 
         void floodFillCasDisFromSignpost();
 
-        int getDistanceToNearestUnknownNonZero01FromSignpost();
 
         void updateWildlife();
 
@@ -72,7 +70,6 @@ namespace Map {
         void updateNofFpoints();
         int getDistanceFromAttackSignpostToZoneProximity();
         void floodFillZoneProximityFromCell(int cellX, int cellY, int strength);
-        undefined4 isAttackStagingCandidateCell(int cellX, int cellY);
     };
 
     static_assert_cpp98_obj(sizeof(WildlifeState) == 262416, WildlifeState);
