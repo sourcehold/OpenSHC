@@ -180,7 +180,8 @@ jobs:
           done < previews.txt
 
       - name: Comment the preview link on the PR
-        if: ${{ steps.ctx.outputs.mode == 'pr' }}
+        #if: ${{ steps.ctx.outputs.mode == 'pr' }}
+        if: false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}

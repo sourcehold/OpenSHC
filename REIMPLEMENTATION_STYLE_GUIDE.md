@@ -457,6 +457,23 @@ if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel == 0) {
 
 **neutral**
 
+## 24. Declare stack variables upon first usage
+```cpp
+// no
+int intValue;
+
+if (someCondition) {
+  intValue = 10;
+}
+
+// yes
+if (someCondition) {
+  int intValue = 10;
+}
+```
+
+
+
 ---
 
 ## Measuring
