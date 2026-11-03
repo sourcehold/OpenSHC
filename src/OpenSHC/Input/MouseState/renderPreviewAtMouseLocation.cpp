@@ -7,7 +7,7 @@
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Input {
@@ -34,7 +34,7 @@ namespace Input {
         }
 
         if (!this->field57_0x1bc) {
-            int imageIndex = GMTotalPicturesProcessed::instance[16] + 37 + iVar1;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 37 + iVar1;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_FLOATS, 38 + iVar1,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
@@ -46,7 +46,7 @@ namespace Input {
         if (!this->field58_0x1c0) {
             int uVar2 = this->mouseBasedEvent == 1;
 
-            int imageIndex = GMTotalPicturesProcessed::instance[16] + 35 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 35 + uVar2;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_FLOATS, 36 + uVar2,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
@@ -61,7 +61,7 @@ namespace Input {
                 uVar2 += 2;
             }
 
-            int imageIndex = GMTotalPicturesProcessed::instance[16] + 45 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 45 + uVar2;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_FLOATS, 46 + uVar2,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
@@ -76,7 +76,7 @@ namespace Input {
                 uVar2 += 2;
             }
 
-            int imageIndex = GMTotalPicturesProcessed::instance[16] + 124 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 124 + uVar2;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_FLOATS, 125 + uVar2,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
