@@ -52,8 +52,8 @@ namespace Map {
             workerCount += 1;
         }
 
-        // The puller (state, campgroundVclock), the ox (field117_0x11a, extraAnimationFrame1), the pryer
-        // (killingPitField, extraAnimationFrame2) and the mason (field119_0x11e, extraAnimationFrame3) wait on each
+        // The puller (state, campgroundVclock), the ox (field119_0x11a, extraAnimationFrame1), the pryer
+        // (killingPitField, extraAnimationFrame2) and the mason (field121_0x11e, extraAnimationFrame3) wait on each
         // other. The QuarryAnimationFrames* tables are declared byte, but the original reads them signed
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[1] == 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 0;
@@ -169,7 +169,7 @@ namespace Map {
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 3) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 4;
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 4) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 0) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 5;
                     }
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 5) {
@@ -182,11 +182,11 @@ namespace Map {
 
         {
             int done = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 122;
                 done = 1;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames5[DAT_BuildingsState::instance
@@ -199,11 +199,11 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                         = f + 61;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 2) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 85;
                 done = 1;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 3) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 3) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames6[DAT_BuildingsState::instance
@@ -216,11 +216,11 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                         = f + 83;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 4) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 4) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 102;
                 done = 1;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 5) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 5) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.SomeAnimationNumbersUnk[DAT_BuildingsState::instance
@@ -233,7 +233,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                         = f + 102;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 6) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 6) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames7[DAT_BuildingsState::instance
@@ -248,32 +248,32 @@ namespace Map {
                 }
             }
             if (done != 0) {
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 0) {
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 0) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField == 7) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 1;
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 1;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 1) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 2;
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 2;
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 2) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField == 9) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 3;
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 3;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 3) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 4;
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 4;
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 4) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 0) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 5;
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 5;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 5) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 6;
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 6;
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
                     == 6) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
                 }
             }
         }
@@ -493,7 +493,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField = 7;
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField
                     <= 7) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 2) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField = 8;
                     }
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField
@@ -525,20 +525,20 @@ namespace Map {
         }
 
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[2] == 0) {
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 0;
         } else if (workerCount < 3) {
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 193;
         } else {
             int done = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 193;
                 done = 1;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 1) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames18[DAT_BuildingsState::instance
@@ -600,7 +600,7 @@ namespace Map {
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y,
                         OpenSHC::DE::SHCDE::FX_MASON_CRUMBLE);
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 2) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 2) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames19[DAT_BuildingsState::instance
@@ -613,7 +613,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4
                         = f + 193;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 3) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 3) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames20[DAT_BuildingsState::instance
@@ -626,7 +626,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4
                         = f + 193;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 4) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 4) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 += 1;
                 char const f
                     = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames21[DAT_BuildingsState::instance
@@ -641,13 +641,13 @@ namespace Map {
                 }
             }
             if (done != 0) {
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e == 0) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field117_0x11a == 6) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e = 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 6) {
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 1;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e
                     <= 4) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11e = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 0;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
                         DAT_BuildingsState::ptr)(stockpileID, DAT_BuildingsState::instance.buildings[stockpileID].uid,
                         OpenSHC::Game::Resources::RT_STONE, 1, 48, 1);
