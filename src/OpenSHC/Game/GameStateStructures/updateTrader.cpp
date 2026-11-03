@@ -65,7 +65,7 @@ namespace Game {
         if (horseUnitID == 0) {
             return;
         }
-        DAT_UnitsState::instance.units[horseUnitID].traderHorsesTrader = (short)traderUnitID;
+        DAT_UnitsState::instance.units[horseUnitID].traderHorsesTrader = traderUnitID;
         DAT_UnitsState::instance.units[horseUnitID].workplaceBuildingUID
             = DAT_UnitsState::instance.units[traderUnitID].uid;
     }

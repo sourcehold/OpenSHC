@@ -22,7 +22,6 @@ namespace Game {
     using Map::Buildings::BuildingType;
     using WindowsHelper::Enums::BOOLEnum;
 
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00457B80
     BOOLEnum GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy(
         MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk)
@@ -67,7 +66,8 @@ namespace Game {
                     1, Audio::SFX::RLSFX_IRON);
             }
             if (isAI) {
-                int const ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[Resources::RT_IRON];
+                int const ironToBuy
+                    = requiredIron - this->playerDataArray[playerID].currentResources[Resources::RT_IRON];
                 if (ironToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_IRON]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_IRON] = ironToBuy;
                 }
@@ -81,7 +81,8 @@ namespace Game {
                         DAT_MissingResourceState::ptr)(1, Audio::SFX::RLSFX_PITCH);
                 }
                 if (isAI) {
-                    int const pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[Resources::RT_PITCH];
+                    int const pitchToBuy
+                        = requiredPitch - this->playerDataArray[playerID].currentResources[Resources::RT_PITCH];
                     if (pitchToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_PITCH]) {
                         this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_PITCH] = pitchToBuy;
                     }
@@ -102,12 +103,15 @@ namespace Game {
             }
             if (isAI) {
                 int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[Resources::RT_WOOD];
-                if (woodToBuy > 0 && woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
+                if (woodToBuy > 0
+                    && woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD] = woodToBuy;
                 }
-                int stoneToBuyAsWell = requiredStone - this->playerDataArray[playerID].currentResources[Resources::RT_STONE];
+                int stoneToBuyAsWell
+                    = requiredStone - this->playerDataArray[playerID].currentResources[Resources::RT_STONE];
                 if (stoneToBuyAsWell > 0
-                    && stoneToBuyAsWell > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
+                    && stoneToBuyAsWell
+                        > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE] = stoneToBuyAsWell;
                 }
             }
@@ -119,7 +123,8 @@ namespace Game {
             }
             if (isAI) {
                 int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[Resources::RT_WOOD];
-                if (woodShortage > 0 && woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
+                if (woodShortage > 0
+                    && woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_WOOD] = woodShortage;
                 }
             }
@@ -131,7 +136,8 @@ namespace Game {
             }
             if (isAI) {
                 int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[Resources::RT_STONE];
-                if (stoneToBuy > 0 && stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
+                if (stoneToBuy > 0
+                    && stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE]) {
                     this->playerDataArray[playerID].resourcesToAcquireArray[Resources::RT_STONE] = stoneToBuy;
                 }
             }

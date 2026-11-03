@@ -27,9 +27,10 @@ namespace Game {
                 DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 80;
             } else if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 3) {
                 DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 70;
+            } else if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 4) {
+                DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 60;
             } else {
-                DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk
-                    = DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel <= 4 ? 60 : 50;
+                DAT_GameState::instance.playerDataArray[playerID].fearFactorProductivityUnk = 50;
             }
         }
     }

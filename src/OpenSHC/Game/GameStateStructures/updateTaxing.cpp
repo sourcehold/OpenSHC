@@ -15,8 +15,8 @@ namespace Game {
             if (this->playerDataArray[playerID].keep.id > 0 && this->playerDataArray[playerID].campground.id > 0) {
                 if (this->playerDataArray[playerID].taxesSetting < 3) {
                     this->playerDataArray[playerID].taxBribeMonthlyAccumulator
-                        += MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxBribeExpenseForPlayer, this)(playerID,
-                            this->playerDataArray[playerID].taxesSetting,
+                        += MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxBribeExpenseForPlayer, this)(
+                            playerID, this->playerDataArray[playerID].taxesSetting,
                             this->playerDataArray[playerID].currentPopulation);
                 } else if (this->playerDataArray[playerID].taxesSetting > 3) {
                     this->playerDataArray[playerID].taxIncomeMonthlyAccumulator
@@ -25,10 +25,8 @@ namespace Game {
                             this->playerDataArray[playerID].currentPopulation);
                 }
                 if (this->mapAndTime.monthChanged != 0) {
-                    this->playerDataArray[playerID].taxBribeMonthlyAccumulator
-                        /= 10;
-                    this->playerDataArray[playerID].taxIncomeMonthlyAccumulator
-                        /= 10;
+                    this->playerDataArray[playerID].taxBribeMonthlyAccumulator /= 10;
+                    this->playerDataArray[playerID].taxIncomeMonthlyAccumulator /= 10;
                     this->playerDataArray[playerID].currentResources[Resources::RT_GOLD]
                         += this->playerDataArray[playerID].taxIncomeMonthlyAccumulator;
                     DAT_GameSynchronyState::instance.finalResults.finalGold[playerID]
@@ -47,7 +45,7 @@ namespace Game {
                     this->playerDataArray[playerID].beforeLastMonthsGold
                         = this->playerDataArray[playerID].lastMonthsGold;
                     this->playerDataArray[playerID].lastMonthsGold
-                        = (short)this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
+                        = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
                     this->playerDataArray[playerID].marketGold = 0;
                 }
             }

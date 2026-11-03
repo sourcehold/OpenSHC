@@ -55,8 +55,8 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_CRC_005a523c, x + 0x12e, y + 0x2a, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.HASH_HashTotal[1] & 0xfff, x + 0x13a, y + 0x2a, Text::TTA_LEFT, 0x80ff,
-            18, TRUE, 0);
+            DAT_GameSynchronyState::instance.HASH_HashTotal[1] & 0xfff, x + 0x13a, y + 0x2a, Text::TTA_LEFT, 0x80ff, 18,
+            TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Total_chimps_005a522c, textX, y + 0x38, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -162,8 +162,7 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Test_gatehouse__005a5128, x + 0x9a, y + 0x9a, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_PathFindingState::instance.DAT_Test_gatehouse, x + 0xa4, y + 0x9a, Text::TTA_LEFT, 0x80ff, 18, TRUE,
-            0);
+            DAT_PathFindingState::instance.DAT_Test_gatehouse, x + 0xa4, y + 0x9a, Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Spreads__005a511c, textX, y + 0xa8, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(

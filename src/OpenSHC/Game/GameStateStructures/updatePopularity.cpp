@@ -3,9 +3,9 @@
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -90,8 +90,10 @@ namespace Game {
                 popularityChange = -100;
             } else if (this->playerDataArray[playerID].crowding <= 160) {
                 popularityChange = -150;
+            } else if (this->playerDataArray[playerID].crowding <= 180) {
+                popularityChange = -200;
             } else {
-                popularityChange = this->playerDataArray[playerID].crowding <= 180 ? -200 : -250;
+                popularityChange = -250;
             }
             this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeBasedOnCrowding = popularityChange;
@@ -121,8 +123,10 @@ namespace Game {
                 popularityChange = -300;
             } else if (this->playerDataArray[playerID].taxesSetting == 9) {
                 popularityChange = -400;
+            } else if (this->playerDataArray[playerID].taxesSetting == 10) {
+                popularityChange = -500;
             } else {
-                popularityChange = this->playerDataArray[playerID].taxesSetting == 10 ? -500 : -600;
+                popularityChange = -600;
             }
             this->playerDataArray[playerID].popularity += popularityChange;
             int const popularityAfterTax = this->playerDataArray[playerID].popularity;
@@ -149,9 +153,10 @@ namespace Game {
                 popularityChange = 50;
             } else if (this->playerDataArray[playerID].blessedPeoplePercentage <= 74) {
                 popularityChange = 100;
+            } else if (this->playerDataArray[playerID].blessedPeoplePercentage <= 94) {
+                popularityChange = 150;
             } else {
-                // < 95? => 150 >= 95? 200
-                popularityChange = this->playerDataArray[playerID].blessedPeoplePercentage <= 94 ? 150 : 200;
+                popularityChange = 200;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].ownsChurchUnk != 0) {
                 popularityChange += 25;
@@ -163,8 +168,7 @@ namespace Game {
                 popularityChange = 0;
             }
             this->playerDataArray[playerID].popularity += popularityChange;
-            this->playerDataArray[playerID].popularityReligionBasedDiv25
-                += popularityChange / 25;
+            this->playerDataArray[playerID].popularityReligionBasedDiv25 += popularityChange / 25;
             this->playerDataArray[playerID].popularityChangeBasedOnReligion = popularityChange;
             if (popularityChange < worstChange) {
                 worstChange = popularityChange;
@@ -178,9 +182,10 @@ namespace Game {
                 popularityChange = 50;
             } else if (this->playerDataArray[playerID].beerPercentage < 75) {
                 popularityChange = 100;
+            } else if (this->playerDataArray[playerID].beerPercentage < 100) {
+                popularityChange = 150;
             } else {
-                // if aleCoverage > 99: 200; else: 150
-                popularityChange = this->playerDataArray[playerID].beerPercentage < 100 ? 150 : 200;
+                popularityChange = 200;
             }
             this->playerDataArray[playerID].popularity += popularityChange;
             this->playerDataArray[playerID].popularityChangeAleBased = popularityChange;
@@ -216,11 +221,13 @@ namespace Game {
                     siegePenalty = -75;
                 } else if (this->playerDataArray[playerID].someCount60 <= 20) {
                     siegePenalty = -50;
+                } else if (this->playerDataArray[playerID].someCount60 <= 25) {
+                    siegePenalty = -25;
                 } else {
-                    siegePenalty = this->playerDataArray[playerID].someCount60 <= 25 ? -25 : 0;
+                    siegePenalty = 0;
                 }
                 this->playerDataArray[playerID].popularity += siegePenalty;
-                this->playerDataArray[playerID].someCount54 = (short)siegePenalty;
+                this->playerDataArray[playerID].someCount54 = siegePenalty;
             } else {
                 this->playerDataArray[playerID].someCount54 = 0;
                 this->playerDataArray[playerID].someCount60 = 0;
@@ -272,7 +279,7 @@ namespace Game {
                     && this->playerDataArray[playerID].currentPopulation >= 4
                     && this->playerDataArray[playerID].field25_0x40 == 0) {
                     this->playerDataArray[playerID].field25_0x40 = 1;
-                    this->playerDataArray[playerID].someCount44 = (short)this->playerDataArray[playerID].popularity;
+                    this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
                     if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && MACRO_CALL_MEMBER(
                                Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -287,7 +294,7 @@ namespace Game {
                 && this->playerDataArray[playerID].currentPopulation >= 4
                 && this->playerDataArray[playerID].field25_0x40 == 1) {
                 this->playerDataArray[playerID].field25_0x40 = 0;
-                this->playerDataArray[playerID].someCount44 = (short)this->playerDataArray[playerID].popularity;
+                this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
                 if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                     && MACRO_CALL_MEMBER(
                            Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()

@@ -17,7 +17,7 @@ namespace Game {
 
         for (int playerID = 1; playerID < 9; playerID += 1) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[playerID] == team) {
-                playerFlags &=  ~(1 << (playerID - 1));
+                playerFlags &= ~(1 << (playerID - 1));
             }
         }
         return playerFlags;

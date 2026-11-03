@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -42,7 +43,7 @@ namespace Game {
                   .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
                   .addXgetTile;
         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findMapBorderEdgeTileAndStoreInSignpostData,
-            DAT_PathFindingState::ptr)(signpostSlot, 80400,
+            DAT_PathFindingState::ptr)(signpostSlot, Map::MC_MAP_TILES_COUNT,
             DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX,
             DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY);
     }

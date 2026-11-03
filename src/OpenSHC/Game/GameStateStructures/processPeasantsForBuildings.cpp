@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Game {
 
-    
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004589E0
     void GameStateStructures::processPeasantsForBuildings()
     {

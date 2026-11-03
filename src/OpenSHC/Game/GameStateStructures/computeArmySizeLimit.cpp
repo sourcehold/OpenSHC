@@ -18,12 +18,12 @@ namespace Game {
         int livingPlayers = 0;
         for (int playerID = 1; playerID < 9; playerID += 1) {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
-                if(DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID == 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID == 0) {
                     ++livingPlayers;
                 }
-                
-            } else if(DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
-                if(DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID == 0) {
+
+            } else if (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID == 0) {
                     ++livingPlayers;
                 }
             }

@@ -29,7 +29,7 @@ namespace Game {
                     DAT_BuildingsState::ptr)(buildingID);
                 for (int tetherSlot = 0; tetherSlot < 4; ++tetherSlot) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[tetherSlot] == 0) {
-                        DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[tetherSlot] = (short)unitID;
+                        DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[tetherSlot] = unitID;
                         DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[tetherSlot]
                             = DAT_UnitsState::instance.units[unitID].uid;
                         DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField

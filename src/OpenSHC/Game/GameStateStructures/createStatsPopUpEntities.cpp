@@ -40,7 +40,8 @@ namespace Game {
             if (this->playerDataArray[playerID].field490_0x450 < 2) {
                 continue;
             }
-            this->playerDataArray[playerID].currentGoldDelayed = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
+            this->playerDataArray[playerID].currentGoldDelayed
+                = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
             this->playerDataArray[playerID].field490_0x450 = 0;
             if (this->playerDataArray[playerID].keep.id != 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,

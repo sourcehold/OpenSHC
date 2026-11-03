@@ -54,19 +54,19 @@ namespace Game {
                     wantedChickens = 100;
                 }
                 if (this->playerDataArray[playerID].chickenCount2 < wantedChickens) {
-                    int buildingID
+                    int const buildingID
                         = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::pickARandomBuildingIDOfTheseThreeTypes,
                             DAT_BuildingsState::ptr)(
                             playerID, Map::Buildings::BT_BAKERY, Map::Buildings::BT_MILL, Map::Buildings::BT_GRANARY);
                     if (MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::buildingIsAccessible,
                             DAT_BuildingsState::ptr)(buildingID, 0)
                         != 0) {
-                        int tile
+                        int const tile
                             = DAT_ViewportRenderState::instance
                                   .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
                                   .addXgetTile
                             + DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-                        int chickenUnitID
+                        int const chickenUnitID
                             = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID,
                                 playerID, DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX * 8,
                                 DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY * 8,

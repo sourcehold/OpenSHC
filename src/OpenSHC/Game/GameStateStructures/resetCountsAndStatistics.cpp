@@ -24,7 +24,7 @@ namespace Game {
             this->playerDataArray[playerID].previousSiegeWeaponsCount
                 = this->playerDataArray[playerID].currentSiegeWeaponCount;
             this->playerDataArray[playerID].previousBlessedPeoplePercentage
-                = (short)this->playerDataArray[playerID].blessedPeoplePercentage;
+                = this->playerDataArray[playerID].blessedPeoplePercentage;
             this->playerDataArray[playerID].countEconomyBuilding_fixme = 0;
             this->playerDataArray[playerID].populationCap = 0;
             this->playerDataArray[playerID].countEntities = 0;
@@ -76,8 +76,8 @@ namespace Game {
                 this->playerDataArray[playerID].top100TargetableBuildings[targetSlot] = 0;
             }
             this->playerDataArray[playerID].top100TargetableBuildingsTracker = 0;
-            // fixme: clears the 20 counters from rallySearchOffsetsUnk up to and including someCount26 as one array, exactly
-            // as the original binary does
+            // fixme: clears the 20 counters from rallySearchOffsetsUnk up to and including someCount26 as one array,
+            // exactly as the original binary does
             for (int counterIndex = 0; counterIndex < 20; ++counterIndex) {
                 this->playerDataArray[playerID].rallySearchOffsetsUnk[counterIndex] = 0;
             }

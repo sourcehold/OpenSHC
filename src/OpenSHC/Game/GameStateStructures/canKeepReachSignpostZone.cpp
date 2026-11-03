@@ -16,7 +16,7 @@ namespace Game {
     BOOLEnum GameStateStructures::canKeepReachSignpostZone(int playerID, int param_2, int signpostSlot)
     {
         int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
-        int signpostTile
+        int const signpostTile
             = this->mapAndTime
                   .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[signpostSlot]]
                   .tile;
