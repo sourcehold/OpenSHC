@@ -328,7 +328,7 @@ namespace Global {
 
         void __cdecl Constructor_MenuModal_OverlaySlider();
 
-        void __cdecl Constructor_MenuModal_UnusedWinCondition();
+        void __cdecl Constructor_MenuModal_SliderHeightHolderUnk();
 
         void __cdecl Constructor_MenuModal_DebugDataCurrentPlayerData();
 

@@ -205,8 +205,8 @@ namespace Meta_Func {
     Destructor_MenuModal_OverlaySlider;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D040,
-        &OpenSHC::Meta::Destructor_MenuModal_UnusedWinCondition)
-    Destructor_MenuModal_UnusedWinCondition;
+        &OpenSHC::Meta::Destructor_MenuModal_SliderHeightHolderUnk)
+    Destructor_MenuModal_SliderHeightHolderUnk;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D050,
         &OpenSHC::Meta::Destructor_MenuModal_DebugDataCurrentPlayerData)
