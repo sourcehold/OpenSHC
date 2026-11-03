@@ -7,7 +7,7 @@ namespace OpenSHC {
 namespace UI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004AA930
-    void MenuModalComposition::setDropDownListParameters(int textGroup, int textIndex, dword itemCount,
+    void MenuModalComposition::setModalSliderParameters(int textGroup, int textIndex, dword itemCount,
         dword sliderValue, undefined* destination, undefined* sliderCallbackFunction)
     {
         this->textGroup = textGroup;
