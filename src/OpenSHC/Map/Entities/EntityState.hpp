@@ -77,7 +77,7 @@ namespace Map {
 
             void flagUnitsWithActiveEntity();
 
-            int somethingWithSeparateAreas1(int unitID);
+            int findNearestDiseaseCloudForHealer(int unitID);
 
             void refreshPoisonCloudNearUnit(int param_1);
 
