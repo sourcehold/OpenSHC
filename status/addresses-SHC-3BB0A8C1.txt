@@ -21203,7 +21203,7 @@ SHC_3BB0A8C1_0x0046F6B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046F730 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046F750 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046F750 | 100.0% | Reimplemented, only the SetWindowLongA call target differs
 
 SHC_3BB0A8C1_0x0046F77C | 0.0% | Pending
 
