@@ -12,58 +12,43 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004874B0
     void GameSynchronyState::createDirectPlayInterfaceModem()
     {
-        void* _allocateMem;
-        int* _allocateMemLock;
-        void* pvVar4;
-        int* piVar5;
-        IDirectPlay4A* _interface;
-        IDirectPlay4A* _refIDirectPlay;
-        DWORD _playerAddress;
-        GUID _guid;
-        /*
-          GUID for modem service provider
-         */
-        _refIDirectPlay = (IDirectPlay4A*)0x0;
-        _interface = (IDirectPlay4A*)0x0;
-        _playerAddress = 0;
-        _guid = GUID_DPSPGUID_MODEM::instance;
-        int iVar2 = DirectPlayCreate(&_guid, (LPDIRECTPLAY*)&_refIDirectPlay, 0);
-        if (0 <= iVar2) {
-            /*
-              create IDirectPlay4A
-             */
-            HRESULT HVar3 = _refIDirectPlay->QueryInterface(GUID_IID_IDirectPlay4A::instance, (LPVOID*)&_interface);
-            if (HVar3 < 0) {
-                _refIDirectPlay->Release();
-                return;
-            }
-            HVar3 = _interface->GetPlayerAddress(0, (void*)0x0, &_playerAddress);
-            if (HVar3 != -0x7788ffe2) {
-                _refIDirectPlay->Release();
-                _interface->Release();
-                return;
-            }
-            _allocateMem = GlobalAlloc(66, _playerAddress);
-            _allocateMemLock = (int*)GlobalLock(_allocateMem);
-            if (_allocateMemLock == (int*)0x0) {
-                _refIDirectPlay->Release();
-                _interface->Release();
-                return;
-            }
-            piVar5 = _allocateMemLock;
-            HVar3 = _interface->GetPlayerAddress(0, _allocateMemLock, &_playerAddress);
-            if (0 <= HVar3) {
-                this->DPLAYX_LOBBY->EnumAddress((LPDPENUMADDRESSCALLBACK)MACRO_CALL(
-                                                    Synchrony_Func::DirectPlayModemRelated_MemoryAllocationCallback),
-                    _allocateMemLock, _playerAddress, (void*)0x0);
-            }
-            _refIDirectPlay->Release();
-            _interface->Release();
-            pvVar4 = GlobalHandle(_allocateMemLock);
-            GlobalUnlock(pvVar4);
-            pvVar4 = GlobalHandle(_allocateMemLock);
-            GlobalFree(pvVar4);
+        IDirectPlay4A* directPlay = NULL;
+        IDirectPlay4A* directPlay4A = NULL;
+        DWORD addressSize = 0;
+        // GUID for the modem service provider
+        GUID modemGuid = GUID_DPSPGUID_MODEM::instance;
+        if (DirectPlayCreate(&modemGuid, (LPDIRECTPLAY*)&directPlay, 0) < 0) {
+            return;
         }
+        HRESULT result = directPlay->QueryInterface(GUID_IID_IDirectPlay4A::instance, (LPVOID*)&directPlay4A);
+        if (result < 0) {
+            directPlay->Release();
+            return;
+        }
+        // The first call only asks for the size of the player address.
+        result = directPlay4A->GetPlayerAddress(0, NULL, &addressSize);
+        if (result != DPERR_BUFFERTOOSMALL) {
+            directPlay->Release();
+            directPlay4A->Release();
+            return;
+        }
+        HGLOBAL const addressMemory = GlobalAlloc(GHND, addressSize);
+        void* const address = GlobalLock(addressMemory);
+        if (address == NULL) {
+            directPlay->Release();
+            directPlay4A->Release();
+            return;
+        }
+        result = directPlay4A->GetPlayerAddress(0, address, &addressSize);
+        if (0 <= result) {
+            this->DPLAYX_LOBBY->EnumAddress(
+                (LPDPENUMADDRESSCALLBACK)MACRO_CALL(Synchrony_Func::DirectPlayModemRelated_MemoryAllocationCallback),
+                address, addressSize, NULL);
+        }
+        directPlay->Release();
+        directPlay4A->Release();
+        GlobalUnlock(GlobalHandle(address));
+        GlobalFree(GlobalHandle(address));
     }
 
 }

@@ -12,7 +12,7 @@ namespace Synchrony {
     BOOLEnum GameSynchronyState::checkAllPlayersReadyAndCleanupSlots()
     {
         if (this->isHost) {
-            for (int player = 1; player < 9; player = player + 1) {
+            for (int player = 1; player < 9; player++) {
                 if ((this->DAT_CurrentPlayerFullIDArray2[player] != -1) && (this->unknownPlayerInfo_01[player] == 0)) {
                     return FALSE;
                 }

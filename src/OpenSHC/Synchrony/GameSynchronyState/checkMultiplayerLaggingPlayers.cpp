@@ -10,9 +10,6 @@
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
-// /O2 implies /Ob2, and the inlining it then does is not in the original here. 90.6% -> 91.0%.
-#pragma inline_depth(1)
-
 namespace OpenSHC {
 namespace Synchrony {
 
@@ -82,15 +79,9 @@ namespace Synchrony {
             }
             return;
         }
-        this->connectionLagInfoArray[0].time = 0;
-        this->connectionLagInfoArray[1].time = 0;
-        this->connectionLagInfoArray[2].time = 0;
-        this->connectionLagInfoArray[3].time = 0;
-        this->connectionLagInfoArray[4].time = 0;
-        this->connectionLagInfoArray[5].time = 0;
-        this->connectionLagInfoArray[6].time = 0;
-        this->connectionLagInfoArray[7].time = 0;
-        this->connectionLagInfoArray[8].time = 0;
+        for (int player = 0; player < 9; player++) {
+            this->connectionLagInfoArray[player].time = 0;
+        }
     }
 
 }

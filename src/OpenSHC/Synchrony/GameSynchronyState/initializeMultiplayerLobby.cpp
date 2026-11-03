@@ -13,26 +13,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048BF80
     void GameSynchronyState::initializeMultiplayerLobby()
     {
-        DAT_GameSynchronyState::instance.providerNames[0] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[0] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[1] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[1] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[2] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[2] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[3] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[3] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[4] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[4] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[5] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[5] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[6] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[6] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[7] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[7] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[8] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[8] = (GUID*)0x0;
-        DAT_GameSynchronyState::instance.providerNames[9] = (WCHAR*)0x0;
-        DAT_GameSynchronyState::instance.guids[9] = (GUID*)0x0;
+        for (int provider = 0; provider < 10; provider++) {
+            DAT_GameSynchronyState::instance.providerNames[provider] = NULL;
+            DAT_GameSynchronyState::instance.guids[provider] = NULL;
+        }
         this->DPLAYX_Connection = 0;
         DAT_GameSynchronyState::instance.scrollBarItemOffset = 0;
         DAT_GameSynchronyState::instance.selectedProviderIndex = 0;
@@ -64,24 +48,10 @@ namespace Synchrony {
             WSACleanup();
         }
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setupSkirmishLobby, DAT_GameSynchronyState::ptr)();
-        this->connectionLagInfoArray[0].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[0].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[1].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[1].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[2].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[2].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[3].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[3].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[4].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[4].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[5].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[5].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[6].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[6].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[7].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[7].subtractedMapTicks = 0;
-        this->connectionLagInfoArray[8].mapTimeInTicks = 0;
-        this->connectionLagInfoArray[8].subtractedMapTicks = 0;
+        for (int player = 0; player < 9; player++) {
+            this->connectionLagInfoArray[player].mapTimeInTicks = 0;
+            this->connectionLagInfoArray[player].subtractedMapTicks = 0;
+        }
     }
 
 }

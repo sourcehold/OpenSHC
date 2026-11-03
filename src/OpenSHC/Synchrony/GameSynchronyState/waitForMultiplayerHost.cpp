@@ -34,16 +34,11 @@ namespace Synchrony {
         this->DAT_HostAnnounced = 0;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
             Commands::GCT_MULTIPLAYER_INITIATE_ANNOUNCE_HOST);
+        // Wait up to 20 seconds for the host to announce itself.
         this->DAT_TickCount = GetTickCount();
-        DWORD DVar1 = GetTickCount();
-        uint uVar2 = DVar1 - this->DAT_TickCount;
-        /*
-          20 seconds? 2 seconds? wait
-         */
-        while (uVar2 < 20000 && !this->DAT_HostAnnounced) {
+        for (DWORD waited = GetTickCount() - this->DAT_TickCount; waited < 20000 && !this->DAT_HostAnnounced;
+            waited = GetTickCount() - this->DAT_TickCount) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::receiveAllTransmittedCommands, this)();
-            DVar1 = GetTickCount();
-            uVar2 = DVar1 - this->DAT_TickCount;
         }
         if (!this->DAT_HostAnnounced) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::disconnectDPlay, this)();

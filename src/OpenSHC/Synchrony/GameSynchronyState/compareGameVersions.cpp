@@ -80,15 +80,9 @@ namespace Synchrony {
                     Commands::GCT_TAUNT_OR_CHAT);
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
                     DAT_UserTextHandlerState::ptr)(4, currentText);
-                this->DAT_ChatMessageReceiverArray[0] = savedReceivers[0];
-                this->DAT_ChatMessageReceiverArray[1] = savedReceivers[1];
-                this->DAT_ChatMessageReceiverArray[2] = savedReceivers[2];
-                this->DAT_ChatMessageReceiverArray[3] = savedReceivers[3];
-                this->DAT_ChatMessageReceiverArray[4] = savedReceivers[4];
-                this->DAT_ChatMessageReceiverArray[5] = savedReceivers[5];
-                this->DAT_ChatMessageReceiverArray[6] = savedReceivers[6];
-                this->DAT_ChatMessageReceiverArray[7] = savedReceivers[7];
-                this->DAT_ChatMessageReceiverArray[8] = savedReceivers[8];
+                for (int receiver = 0; receiver < 9; receiver++) {
+                    this->DAT_ChatMessageReceiverArray[receiver] = savedReceivers[receiver];
+                }
             }
             if (DAT_GameSynchronyState::instance
                     .DAT_PlayerSlotArraySomeValue[DAT_GameSynchronyState::instance.currentPlayerSlotID]
