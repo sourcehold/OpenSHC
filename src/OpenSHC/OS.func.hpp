@@ -24,7 +24,7 @@ namespace OS_Func {
     using OpenSHC::OS::_atexit_t;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int*(__cdecl*)(void* param_1, char param_2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
     basic_ofstream_write;
 
