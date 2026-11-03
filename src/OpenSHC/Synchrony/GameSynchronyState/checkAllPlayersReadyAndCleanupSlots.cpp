@@ -1,6 +1,5 @@
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {

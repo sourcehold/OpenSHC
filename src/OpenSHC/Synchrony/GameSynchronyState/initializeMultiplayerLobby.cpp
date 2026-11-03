@@ -1,14 +1,9 @@
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
-
-    using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0048BF80
     void GameSynchronyState::initializeMultiplayerLobby()

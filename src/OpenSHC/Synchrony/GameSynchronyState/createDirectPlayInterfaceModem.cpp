@@ -14,13 +14,12 @@ namespace Synchrony {
         IDirectPlay4A* directPlay = NULL;
         IDirectPlay4A* directPlay4A = NULL;
         DWORD addressSize = 0;
-        // GUID for the modem service provider
         GUID modemGuid = GUID_DPSPGUID_MODEM::instance;
-        if (DirectPlayCreate(&modemGuid, (LPDIRECTPLAY*)&directPlay, 0) < 0) {
+        if (FAILED(DirectPlayCreate(&modemGuid, (LPDIRECTPLAY*)&directPlay, NULL))) {
             return;
         }
         HRESULT result = directPlay->QueryInterface(GUID_IID_IDirectPlay4A::instance, (LPVOID*)&directPlay4A);
-        if (result < 0) {
+        if (FAILED(result)) {
             directPlay->Release();
             return;
         }
@@ -39,7 +38,7 @@ namespace Synchrony {
             return;
         }
         result = directPlay4A->GetPlayerAddress(0, address, &addressSize);
-        if (0 <= result) {
+        if (SUCCEEDED(result)) {
             this->DPLAYX_LOBBY->EnumAddress(
                 (LPDPENUMADDRESSCALLBACK)MACRO_CALL(Synchrony_Func::DirectPlayModemRelated_MemoryAllocationCallback),
                 address, addressSize, NULL);

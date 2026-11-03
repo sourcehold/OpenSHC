@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/string-literals.hpp"
 #include "OpenSHC/wstring-literals.hpp"
@@ -12,8 +11,6 @@
 
 namespace OpenSHC {
 namespace Synchrony {
-
-    using Game::GameMode;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0048C150
     GameSynchronyState* GameSynchronyState::Constructor_GameSynchronyState()

@@ -1,14 +1,11 @@
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
-
-    using Game::GameMode;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EB80
     int GameSynchronyState::addPlayerToCurrentPlayerArray(int playerFullID)

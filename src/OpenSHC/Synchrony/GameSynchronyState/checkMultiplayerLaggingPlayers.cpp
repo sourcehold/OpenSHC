@@ -1,9 +1,7 @@
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
-#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -13,8 +11,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using Commands::GameCommandType;
-    using Game::GameMode;
     using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00490480

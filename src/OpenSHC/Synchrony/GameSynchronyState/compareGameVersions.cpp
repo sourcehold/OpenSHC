@@ -1,6 +1,8 @@
+// disable deprecation warnings for strcpy
+#pragma warning(disable : 4996)
+
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
@@ -14,8 +16,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using Commands::GameCommandType;
-    using DE::SHCDE::eTextSections;
     using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0048BD40
@@ -23,7 +23,7 @@ namespace Synchrony {
     {
         BOOLEnum const wasMatching = this->flag_0x7aad8;
         int firstVersion = -1;
-        int lowestVersion = 2147483647;
+        int lowestVersion = INT_MAX;
         this->flag_0x7aad8 = TRUE;
         int player;
         for (player = 1; player < 9; player++) {
@@ -43,7 +43,7 @@ namespace Synchrony {
             }
         }
         if (!this->flag_0x7aad8) {
-            if ((wasMatching)
+            if (wasMatching
                 && (this->DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     > lowestVersion)) {
                 // "Someone has an old version, please get him or her to upgrade"

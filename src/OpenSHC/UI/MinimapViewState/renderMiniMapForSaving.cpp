@@ -19,7 +19,7 @@ namespace UI {
             + (DAT_ViewportRenderState::instance.viewportState.viewportHeight - 5) / 2;
         int const yOffset
             = (mapOffset / 2 * 8 + 8) / 8 + DAT_ViewportRenderState::instance.viewportState.viewportWidth / 2;
-        MACRO_CALL(OpenSHC::OS_Func::_memset)(this->loadedMiniMap, 0, 80000);
+        MACRO_CALL(OpenSHC::OS_Func::_memset)(this->loadedMiniMap, 0, sizeof(this->loadedMiniMap));
         if (200 < DAT_TileMapState::instance.mapSize) {
             MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::drawMinimap, this)(
                 xPos, yPos, width, height, 5, xOffset, yOffset, 2, 1, 1);

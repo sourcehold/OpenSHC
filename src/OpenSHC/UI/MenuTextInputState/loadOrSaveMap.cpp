@@ -24,7 +24,8 @@ namespace UI {
     {
         DAT_MouseState::instance.waitCursorToggle = 1;
         MACRO_CALL(OpenSHC::UI::Helpers_Func::SetCursorDependingOnProgramState)();
-        MACRO_CALL(OpenSHC::OS_Func::_memset)(DAT_MinimapViewState::instance.loadedMiniMap, 0, 80000);
+        MACRO_CALL(OpenSHC::OS_Func::_memset)(
+            DAT_MinimapViewState::instance.loadedMiniMap, 0, sizeof(DAT_MinimapViewState::instance.loadedMiniMap));
         INT_00b95b64::instance = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
             s_maps_tmp_005a75b0); // "maps\\*.tmp"

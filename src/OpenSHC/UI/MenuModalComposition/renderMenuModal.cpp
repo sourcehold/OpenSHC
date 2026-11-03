@@ -10,7 +10,6 @@
 #include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/COL_BLUE.hpp"
@@ -31,13 +30,6 @@
 
 namespace OpenSHC {
 namespace UI {
-
-    using OpenSHC::IO::Graphics::GmID;
-    using OpenSHC::Rendering::Enums::RenderTarget;
-    using OpenSHC::UI::Enums::MenuItemHandleState;
-    using OpenSHC::UI::Enums::MenuModalType;
-    using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004B0B30
     void MenuModalComposition::renderMenuModal()

@@ -2,16 +2,12 @@
 
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
 namespace UI {
-
-    using OpenSHC::UI::Enums::MenuModalType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004AA3E0
     void MenuModalComposition::fillWithMenuModalDimensions(int* xPtr, int* yPtr, int* widthPtr, int* heightPtr)
@@ -30,8 +26,8 @@ namespace UI {
         *heightPtr = this->modalMenu.height;
         if ((this->modalMenu.borderStyle & 2) != 0) {
             // below the title bar
-            *yPtr = *yPtr + 12;
-            *heightPtr = *heightPtr - 12;
+            *yPtr += 12;
+            *heightPtr -= 12;
         }
     }
 

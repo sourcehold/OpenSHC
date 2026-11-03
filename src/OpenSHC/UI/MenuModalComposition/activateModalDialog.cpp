@@ -16,7 +16,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::UI::Enums::MenuItemHandleState;
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -52,25 +51,25 @@ namespace UI {
             if (this->modalMenu.x == -1) {
                 this->modalMenu.x = DAT_WindowAndDirectDraw::instance.gameResolutionX / 2 - this->modalMenu.width / 2;
             } else {
-                this->modalMenu.x = (DAT_WindowAndDirectDraw::instance.gameResolutionX - 800) / 2 + this->modalMenu.x;
+                this->modalMenu.x += (DAT_WindowAndDirectDraw::instance.gameResolutionX - 800) / 2;
             }
             if (this->modalMenu.y == -1) {
                 // centred over the map, above the 128 pixel high menu bar
                 this->modalMenu.y
                     = (DAT_WindowAndDirectDraw::instance.gameResolutionY - 128) / 2 - this->modalMenu.height / 2;
             } else {
-                this->modalMenu.y = (DAT_WindowAndDirectDraw::instance.gameResolutionY - 600) / 2 + this->modalMenu.y;
+                this->modalMenu.y += (DAT_WindowAndDirectDraw::instance.gameResolutionY - 600) / 2;
             }
         } else {
             if (this->modalMenu.x == -1) {
                 this->modalMenu.x = DAT_WindowAndDirectDraw::instance.gameResolutionX / 2 - this->modalMenu.width / 2;
             } else {
-                this->modalMenu.x = (DAT_WindowAndDirectDraw::instance.gameResolutionX - 800) / 2 + this->modalMenu.x;
+                this->modalMenu.x += (DAT_WindowAndDirectDraw::instance.gameResolutionX - 800) / 2;
             }
             if (this->modalMenu.y == -1) {
                 this->modalMenu.y = DAT_WindowAndDirectDraw::instance.gameResolutionY / 2 - this->modalMenu.height / 2;
             } else {
-                this->modalMenu.y = (DAT_WindowAndDirectDraw::instance.gameResolutionY - 600) / 2 + this->modalMenu.y;
+                this->modalMenu.y += (DAT_WindowAndDirectDraw::instance.gameResolutionY - 600) / 2;
             }
         }
         this->disappearAfter = 32;

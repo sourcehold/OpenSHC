@@ -3,7 +3,6 @@
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
@@ -13,9 +12,6 @@
 
 namespace OpenSHC {
 namespace UI {
-
-    using OpenSHC::UI::Enums::MenuModalType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00491750
     void MenuTextInputState::clearAnyOtherModalDialogs()

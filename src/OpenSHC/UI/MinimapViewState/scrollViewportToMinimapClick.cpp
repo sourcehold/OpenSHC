@@ -3,7 +3,6 @@
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
@@ -12,10 +11,6 @@
 
 namespace OpenSHC {
 namespace UI {
-
-    using OpenSHC::UI::Enums::BuildMenuTabType;
-    using OpenSHC::UI::Enums::MenuViewType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // Scrolls the main view to the minimap point under the mouse.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5110
