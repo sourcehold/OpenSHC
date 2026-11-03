@@ -11105,7 +11105,7 @@ SHC_3BB0A8C1_0x004335A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00433630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00433780 | 0.0% | Pending
+SHC_3BB0A8C1_0x00433780 | 95.4% | Two locals in swapped stack slots
 
 SHC_3BB0A8C1_0x00433BC0 | 0.0% | Pending
 
