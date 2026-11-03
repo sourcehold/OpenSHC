@@ -3,6 +3,7 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_UIDragDropDefinedData.hpp"
@@ -110,7 +111,7 @@ namespace UI {
                 sourceRect.right = this->gameResolutionX;
                 sourceRect.bottom = this->gameResolutionY;
                 if (param_1 == 1) {
-                    MACRO_CALL(OpenSHC::OS_Func::_sprintf)(debugText, "Vid %d, sys %d",
+                    MACRO_CALL(OpenSHC::OS_Func::_sprintf)(debugText, s_Vid__d__sys__d_005a6208,
                         this->directDrawBackbufferSurfacePointer, this->directDrawOffscreenSurfacePointer_screenMenu);
                 }
                 if (this->runGameAsExclusiveFullscreen != FALSE) {
