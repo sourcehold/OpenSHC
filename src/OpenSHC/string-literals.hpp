@@ -4415,6 +4415,9 @@ char const* const s_Stronghold_16_aa_005a5314 = S_STRONGHOLD_16_AA_005A5314;
 // 0x005a5328
 char const* const s_Stronghold_14_aa_005a5328 = S_STRONGHOLD_14_AA_005A5328;
 
+// 0x005a5339
+char const* const s__005a5339 = S__005A5339;
+
 // 0x005a5510
 char const* const s_wb_005a5510 = S_WB_005A5510;
 
