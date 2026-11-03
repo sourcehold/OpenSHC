@@ -1,6 +1,6 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -35,9 +35,7 @@ namespace Synchrony {
             gameSpeed = DAT_GameCore::instance.gameSpeedLevel;
             tickTimeOffset = this->relativeTickTime;
         } else {
-            /*
-              Calculate multiplayer game speed.
-             */
+            // Calculate multiplayer game speed.
             DAT_GameCore::instance.gameSpeedMultiplicator = 1;
             gameSpeed = this->skirmishGameSpeedLevel;
             DAT_GameSynchronyState::instance.relativeTickTime = 0;
@@ -48,7 +46,7 @@ namespace Synchrony {
             } else {
                 if (0 < (int)this->ticksAheadOfSlowestPlayer) {
                     DAT_GameSynchronyState::instance.relativeTickTime = (int)this->ticksAheadOfSlowestPlayer;
-                    if ((int)this->ticksAheadOfSlowestPlayer > (int)this->commandDelay + 0x4b) {
+                    if ((int)this->ticksAheadOfSlowestPlayer > (int)this->commandDelay + 75) {
                         if ((int)this->unknownIncrementBy40_01 < 1) {
                             this->unknownIncrementBy40_01 = 1;
                         }
@@ -73,44 +71,34 @@ namespace Synchrony {
         } else {
             tickDuration = 1000 / (int)gameSpeed;
             if (1 < DAT_GameCore::instance.gameSpeedMultiplicator) {
-                tickDuration = tickDuration / DAT_GameCore::instance.gameSpeedMultiplicator;
+                tickDuration /= DAT_GameCore::instance.gameSpeedMultiplicator;
             }
         }
         int const millisecCarry
             = DAT_MillisecCarry::instance + (DAT_GameLoopStopwatch::instance.duration_0x0 - tickDuration);
         DAT_MillisecCarry::instance = millisecCarry;
         if (millisecCarry < 0) {
-            /*
-              Wait
-             */
+            // Wait
             if (millisecCarry < -tickDuration) {
                 DAT_MillisecCarry::instance = millisecCarry + tickDuration;
                 return 0;
             }
         } else {
-            /*
-              Execute game ticks
-             */
+            // Execute game ticks
             if (DAT_GameCore::instance.averageTimePerGameTick > tickDuration && millisecCarry >= tickDuration * 2
                 && tickDuration == 1000 / (int)gameSpeed) {
-                /*
-                  Slow down
-                 */
+                // Slow down
                 DAT_MillisecCarry::instance = 0;
                 return 2;
             }
             if (DAT_GameCore::instance.averageTimePerGameTick > (tickDuration * 7) / 10
                 && millisecCarry >= tickDuration * 2 && tickDuration == 1000 / (int)gameSpeed) {
-                /*
-                  Slow down
-                 */
+                // Slow down
                 DAT_MillisecCarry::instance = 0;
                 return 3;
             }
             if (millisecCarry > tickDuration * 10) {
-                /*
-                  Cap game ticks per rendering
-                 */
+                // Cap game ticks per rendering
                 DAT_MillisecCarry::instance = 0;
                 return 11;
             }

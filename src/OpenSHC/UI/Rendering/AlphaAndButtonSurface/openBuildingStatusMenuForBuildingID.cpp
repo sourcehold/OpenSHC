@@ -40,7 +40,7 @@ namespace UI {
                 if (owner == 0
                     && DAT_BuildingsState::instance.buildings[buildingID].buildingType
                         == OpenSHC::Map::Buildings::BT_STATUE) {
-                    menuTab = 0x59;
+                    menuTab = 89;
                     goto openMenu;
                 }
                 switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
@@ -148,12 +148,12 @@ namespace UI {
             int const currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
             case OpenSHC::Map::Buildings::BT_MERCENARYPOST:
-                menuTab = 0x2c;
+                menuTab = 44;
                 break;
             case OpenSHC::Map::Buildings::BT_OUTPOST_EUROPEAN:
             case OpenSHC::Map::Buildings::BT_OUTPOST_ARABIAN:
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
-                    menuTab = 0x2d;
+                    menuTab = 45;
                     break;
                 }
                 MACRO_CALL_MEMBER(
@@ -202,31 +202,31 @@ namespace UI {
                 menuTab = 10;
                 break;
             case OpenSHC::Map::Buildings::BT_STOCKPILE:
-                menuTab = 0xb;
+                menuTab = 11;
                 break;
             case OpenSHC::Map::Buildings::BT_ARMORY:
-                menuTab = 0xc;
+                menuTab = 12;
                 break;
             case OpenSHC::Map::Buildings::BT_FLETCHER:
-                menuTab = 0xd;
+                menuTab = 13;
                 break;
             case OpenSHC::Map::Buildings::BT_BLACKSMITH:
-                menuTab = 0xe;
+                menuTab = 14;
                 break;
             case OpenSHC::Map::Buildings::BT_POLETURNER:
-                menuTab = 0xf;
+                menuTab = 15;
                 break;
             case OpenSHC::Map::Buildings::BT_ARMOURER:
-                menuTab = 0x10;
+                menuTab = 16;
                 break;
             case OpenSHC::Map::Buildings::BT_TANNER:
-                menuTab = 0x11;
+                menuTab = 17;
                 break;
             case OpenSHC::Map::Buildings::BT_BAKERY:
-                menuTab = 0x12;
+                menuTab = 18;
                 break;
             case OpenSHC::Map::Buildings::BT_BREWERY:
-                menuTab = 0x13;
+                menuTab = 19;
                 break;
             case OpenSHC::Map::Buildings::BT_GRANARY: {
                 int const rations
@@ -239,59 +239,59 @@ namespace UI {
                 break;
             }
             case OpenSHC::Map::Buildings::BT_QUARRY:
-                menuTab = 0x14;
+                menuTab = 20;
                 break;
             case OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE:
-                menuTab = 0x15;
+                menuTab = 21;
                 break;
             case OpenSHC::Map::Buildings::BT_APOTHECARY:
-                menuTab = 0x16;
+                menuTab = 22;
                 break;
             case OpenSHC::Map::Buildings::BT_ENGINEERSGUILD:
-                menuTab = 0x17;
+                menuTab = 23;
                 break;
             case OpenSHC::Map::Buildings::BT_TUNNELERSGUILD:
-                menuTab = 0x18;
+                menuTab = 24;
                 break;
             case OpenSHC::Map::Buildings::BT_MARKETPLACE:
-                menuTab = 0x19;
+                menuTab = 25;
                 break;
             case OpenSHC::Map::Buildings::BT_WELL:
-                menuTab = 0x1a;
+                menuTab = 26;
                 break;
             case OpenSHC::Map::Buildings::BT_WATERPOT:
-                menuTab = 0x28;
+                menuTab = 40;
                 break;
             case OpenSHC::Map::Buildings::BT_OILSMELTER:
-                menuTab = 0x1b;
+                menuTab = 27;
                 break;
             case OpenSHC::Map::Buildings::BT_SIEGETENT:
-                menuTab = 0x1c;
+                menuTab = 28;
                 break;
             case OpenSHC::Map::Buildings::BT_WHEATFARM:
-                menuTab = 0x1d;
+                menuTab = 29;
                 break;
             case OpenSHC::Map::Buildings::BT_HOPFARM:
-                menuTab = 0x1e;
+                menuTab = 30;
                 break;
             case OpenSHC::Map::Buildings::BT_APPLEFARM:
-                menuTab = 0x1f;
+                menuTab = 31;
                 break;
             case OpenSHC::Map::Buildings::BT_DAIRYFARM:
-                menuTab = 0x20;
+                menuTab = 32;
                 break;
             case OpenSHC::Map::Buildings::BT_MILL:
-                menuTab = 0x21;
+                menuTab = 33;
                 break;
             case OpenSHC::Map::Buildings::BT_STABLES:
-                menuTab = 0x22;
+                menuTab = 34;
                 break;
             case OpenSHC::Map::Buildings::BT_CHAPEL:
             case OpenSHC::Map::Buildings::BT_CHURCH:
-                menuTab = 0x23;
+                menuTab = 35;
                 break;
             case OpenSHC::Map::Buildings::BT_CATHEDRAL:
-                menuTab = 0x60;
+                menuTab = 96;
                 break;
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
             case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
@@ -299,7 +299,7 @@ namespace UI {
                 if (DAT_BuildingsState::instance.buildings[buildingID].field203_0x2c6 != 0) {
                     return FALSE;
                 }
-                menuTab = 0x24;
+                menuTab = 36;
                 break;
             case OpenSHC::Map::Buildings::BT_DRAWBRIDGE: {
                 // The drawbridge belongs to the large or the small gatehouse next to it.
@@ -320,45 +320,45 @@ namespace UI {
                 if (gatehouse != 0 && DAT_BuildingsState::instance.buildings[gatehouse].field203_0x2c6 != 0) {
                     return FALSE;
                 }
-                menuTab = 0x25;
+                menuTab = 37;
                 break;
             }
             case OpenSHC::Map::Buildings::BT_WOODGATE2:
-                menuTab = 0x26;
+                menuTab = 38;
                 break;
             case OpenSHC::Map::Buildings::BT_TUNNEL:
-                menuTab = 0x27;
+                menuTab = 39;
                 break;
             case OpenSHC::Map::Buildings::BT_SIGNPOST:
-                menuTab = 0x29;
+                menuTab = 41;
                 break;
             case OpenSHC::Map::Buildings::BT_KILLINGPIT:
-                menuTab = 0x2a;
+                menuTab = 42;
                 break;
             case OpenSHC::Map::Buildings::BT_CAMPGROUND:
-                menuTab = 0x2b;
+                menuTab = 43;
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER1:
             case OpenSHC::Map::Buildings::BT_TOWER2:
             case OpenSHC::Map::Buildings::BT_TOWER3:
             case OpenSHC::Map::Buildings::BT_TOWER4:
             case OpenSHC::Map::Buildings::BT_TOWER5:
-                menuTab = 0x2e;
+                menuTab = 46;
                 break;
             case OpenSHC::Map::Buildings::BT_GALLOWS:
-                menuTab = 0x2f;
+                menuTab = 47;
                 break;
             case OpenSHC::Map::Buildings::BT_STOCKS:
-                menuTab = 0x30;
+                menuTab = 48;
                 break;
             case OpenSHC::Map::Buildings::BT_WITCHHOIST:
-                menuTab = 0x31;
+                menuTab = 49;
                 break;
             case OpenSHC::Map::Buildings::BT_MAYPOLE:
-                menuTab = 0x32;
+                menuTab = 50;
                 break;
             case OpenSHC::Map::Buildings::BT_GARDEN:
-                menuTab = 0x33;
+                menuTab = 51;
                 break;
             case OpenSHC::Map::Buildings::BT_CAMPFIRE:
             case OpenSHC::Map::Buildings::BT_PARADEGROUND:
@@ -366,67 +366,67 @@ namespace UI {
             case OpenSHC::Map::Buildings::BT_PARADEGROUND3:
             case OpenSHC::Map::Buildings::BT_PARADEGROUND4:
             case OpenSHC::Map::Buildings::BT_PARADEGROUND5:
-                menuTab = 0x34;
+                menuTab = 52;
                 break;
             case OpenSHC::Map::Buildings::BT_CATAPULT:
-                menuTab = 0x3a;
+                menuTab = 58;
                 break;
             case OpenSHC::Map::Buildings::BT_TREBUCHET:
-                menuTab = 0x3b;
+                menuTab = 59;
                 break;
             case OpenSHC::Map::Buildings::BT_BATTERINGRAM:
-                menuTab = 0x3c;
+                menuTab = 60;
                 break;
             case OpenSHC::Map::Buildings::BT_SIEGETOWER:
-                menuTab = 0x3d;
+                menuTab = 61;
                 break;
             case OpenSHC::Map::Buildings::BT_SHIELD:
-                menuTab = 0x3e;
+                menuTab = 62;
                 break;
             case OpenSHC::Map::Buildings::BT_FIREBALLISTA:
-                menuTab = 0x5f;
+                menuTab = 95;
                 break;
             case OpenSHC::Map::Buildings::BT_CESSPIT:
-                menuTab = 0x50;
+                menuTab = 80;
                 break;
             case OpenSHC::Map::Buildings::BT_BURNINGSTAKE:
-                menuTab = 0x51;
+                menuTab = 81;
                 break;
             case OpenSHC::Map::Buildings::BT_GIBBET:
-                menuTab = 0x52;
+                menuTab = 82;
                 break;
             case OpenSHC::Map::Buildings::BT_DUNGEON:
-                menuTab = 0x53;
+                menuTab = 83;
                 break;
             case OpenSHC::Map::Buildings::BT_STRETCHINGRACK:
-                menuTab = 0x54;
+                menuTab = 84;
                 break;
             case OpenSHC::Map::Buildings::BT_RACKFLOGGING:
-                menuTab = 0x55;
+                menuTab = 85;
                 break;
             case OpenSHC::Map::Buildings::BT_CHOPPINGBLOCK:
-                menuTab = 0x56;
+                menuTab = 86;
                 break;
             case OpenSHC::Map::Buildings::BT_DUNKINGSTOOL:
-                menuTab = 0x57;
+                menuTab = 87;
                 break;
             case OpenSHC::Map::Buildings::BT_DOGCAGE:
-                menuTab = 0x58;
+                menuTab = 88;
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .releaseDogsFlag
                     = DAT_BuildingsState::instance.buildings[buildingID].flagonsOfAleOrCheeseOrReleaseDogs;
                 break;
             case OpenSHC::Map::Buildings::BT_SHRINE:
-                menuTab = 0x5a;
+                menuTab = 90;
                 break;
             case OpenSHC::Map::Buildings::BT_BEEHIVE:
-                menuTab = 0x5b;
+                menuTab = 91;
                 break;
             case OpenSHC::Map::Buildings::BT_DANCINGBEAR:
-                menuTab = 0x5c;
+                menuTab = 92;
                 break;
             case OpenSHC::Map::Buildings::BT_BEARCAVE:
-                menuTab = 0x5e;
+                menuTab = 94;
                 break;
             case OpenSHC::Map::Buildings::BT_BARRACKS:
                 break;
@@ -438,7 +438,7 @@ namespace UI {
                     = DAT_BuildingsState::instance.buildings[buildingID].uid;
                 return FALSE;
             case OpenSHC::Map::Buildings::BT_STATUE:
-                menuTab = 0x59;
+                menuTab = 89;
                 break;
             }
         openMenu:

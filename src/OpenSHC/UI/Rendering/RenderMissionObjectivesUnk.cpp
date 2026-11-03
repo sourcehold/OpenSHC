@@ -332,7 +332,7 @@ namespace UI {
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + boxX, y);
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                y = y + 30;
+                y += 30;
             }
 
             // objective 39: a progress bar
@@ -373,7 +373,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_SLIDER_BAR, 1, barX, y - 1,
                     OpenSHC::IO::Graphics::GID_INTERFACE_SLIDER_BAR, 3, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                y = y + 21;
+                y += 21;
             }
 
             // time until the next one-off invasion or the deadline of the mission, as a progress bar
@@ -442,7 +442,7 @@ namespace UI {
                         y - 1, OpenSHC::IO::Graphics::GID_INTERFACE_SLIDER_BAR, 3, 0);
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                    y = y + 21;
+                    y += 21;
                 }
             }
         }
@@ -460,7 +460,7 @@ namespace UI {
             0);
         // the visible height, rounded up to whole lines of 23 pixels
         int pageHeight = 377 - offset;
-        pageHeight = pageHeight + 22 - (pageHeight + 22) % 23;
+        pageHeight += 22 - (pageHeight + 22) % 23;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRange,
             DAT_TextureRenderCoreObject::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + offset + 45,
             DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + pageHeight + offset + 45);

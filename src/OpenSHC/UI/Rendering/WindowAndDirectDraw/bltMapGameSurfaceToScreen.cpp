@@ -1,6 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -15,7 +14,7 @@ namespace UI {
         void WindowAndDirectDraw::bltMapGameSurfaceToScreen(
             int windowedX, int windowedY, int windowedWidth, int windowedHeigth)
         {
-            if (this->drawingReady_0x0 == FALSE) {
+            if (!this->drawingReady_0x0) {
                 return;
             }
             if (GetForegroundWindow() != this->windowHandle) {
@@ -24,7 +23,7 @@ namespace UI {
             RECT sourceRect;
             RECT destinationRect;
             int const cameraOffsetX = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
-            if (this->NOTSelfBufferOrWindowMode_0xf8 == FALSE) {
+            if (!this->NOTSelfBufferOrWindowMode_0xf8) {
                 sourceRect.left = windowedX - 32;
                 sourceRect.top = windowedY - 8;
                 sourceRect.right = windowedWidth + 32;

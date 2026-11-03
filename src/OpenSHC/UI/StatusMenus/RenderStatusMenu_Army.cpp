@@ -40,8 +40,8 @@ namespace UI {
         int const x = DAT_MenuHandlerState::instance.x;
         int const y = DAT_MenuHandlerState::instance.y;
         int const firstGroupIcon = DAT_00b95b68::instance * 9;
-        int const top = y + 0x1bf;
-        DAT_00b9845c::instance = DAT_00b9845c::instance + 1;
+        int const top = y + 447;
+        ++DAT_00b9845c::instance;
         int nudge = 0;
         if (40 < (int)DAT_00b9845c::instance) {
             DAT_00b9845c::instance = 0;
@@ -52,7 +52,7 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 5),
-            x + 0x19, y + 0x1d3, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            x + 25, y + 467, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         int groupSize;
         if (DAT_00b95b68::instance == 2) {
             groupSize = 8;
@@ -63,10 +63,10 @@ namespace UI {
         // an icon and the head count of each unit type in the group
         for (int i = 0; i < groupSize; i++) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-                DAT_TextureRenderCoreObject::ptr)(firstGroupIcon + i + 4, x + 0x55 + i * 0x2e, top + 0x28);
+                DAT_TextureRenderCoreObject::ptr)(firstGroupIcon + i + 4, x + 85 + i * 46, top + 40);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_UnitTypeRelatedCounter::instance[DAT_UnitTypeGroups::instance[0][firstGroupIcon + i]],
-                nudge + i * 0x2e + x + 0x6f, top + 0x7d, OpenSHC::Text::TTA_CENTER, 0, 0x11, FALSE, 0);
+                nudge + i * 46 + x + 111, top + 125, OpenSHC::Text::TTA_CENTER, 0, 17, FALSE, 0);
             if (2 < i) {
                 nudge = 0;
             }
@@ -75,11 +75,11 @@ namespace UI {
             // "Total Troops"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x10),
-                x + 0x74, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 16),
+                x + 116, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].armySize,
-                x + 0x7a, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+                x + 122, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             return;
         }
@@ -92,46 +92,46 @@ namespace UI {
         if (0 < fearFactor) {
             DAT_TextManagerObject::instance.field8_0x20 = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 0xb1, x + 0x74, top + 0x1b);
+                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 177, x + 116, top + 27);
             // "Troop combat bonus:"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1f),
-                x + 0x9c, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 31),
+                x + 156, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 0xa2, top + 0x19, OpenSHC::Text::TTA_LEFT, 0xff00, 0, 0x12, TRUE, 0);
-            color = 0xff00;
-            percentX = x + 0xa4;
+                x + 162, top + 25, OpenSHC::Text::TTA_LEFT, 65280, 0, 18, TRUE, 0);
+            color = 65280;
+            percentX = x + 164;
         } else if (fearFactor < 0) {
             DAT_TextManagerObject::instance.field8_0x20 = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 0xb2, x + 0x74, top + 0x11);
+                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 178, x + 116, top + 17);
             // "Troop combat bonus:"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1f),
-                x + 0x92, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 31),
+                x + 146, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 0x98, top + 0x19, OpenSHC::Text::TTA_LEFT, 0xff, 0, 0x12, TRUE, 0);
-            color = 0xff;
-            percentX = x + 0x9a;
+                x + 152, top + 25, OpenSHC::Text::TTA_LEFT, 255, 0, 18, TRUE, 0);
+            color = 255;
+            percentX = x + 154;
         } else {
             // "No 'fear factor' bonus."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1e),
-                x + 0x74, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 30),
+                x + 116, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             return;
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-            s_percentage_005a2770, percentX, top + 0x19, OpenSHC::Text::TTA_LEFT, color, 0, 0x12, TRUE, 0);
+            s_percentage_005a2770, percentX, top + 25, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         DAT_TextManagerObject::instance.field8_0x20 = 0;
     }

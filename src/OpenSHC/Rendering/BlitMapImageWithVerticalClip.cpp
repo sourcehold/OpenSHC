@@ -45,8 +45,8 @@ void Rendering::BlitMapImageWithVerticalClip()
         int const clippedRows = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start - drawY;
         nextSkip = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start - height - drawY;
         drawY = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start;
-        DAT_00ed3170::instance = DAT_00ed3170::instance - clippedRows;
-        height = height - clippedRows;
+        DAT_00ed3170::instance -= clippedRows;
+        height -= clippedRows;
         skip = clippedRows * 60;
     }
     if ((int)(DAT_00ed3170::instance + drawY) >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
@@ -58,17 +58,17 @@ void Rendering::BlitMapImageWithVerticalClip()
     int firstRows;
     if (height <= 0) {
         firstRows = 0;
-        nextSkip = nextSkip * 60;
+        nextSkip *= 60;
     } else if (height < (int)DAT_00ed3170::instance) {
         firstRows = height;
-        DAT_00ed3170::instance = DAT_00ed3170::instance - height;
+        DAT_00ed3170::instance -= height;
         nextSkip = 0;
     } else {
         firstRows = DAT_00ed3170::instance;
         DAT_00ed3170::instance = 0;
     }
-    image = image + DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
-    nextImage = nextImage + DAT_GMImageOffsets::instance[DAT_00ed316c::instance];
+    image += DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
+    nextImage += DAT_GMImageOffsets::instance[DAT_00ed316c::instance];
     if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
         // clang-format off
         __asm {

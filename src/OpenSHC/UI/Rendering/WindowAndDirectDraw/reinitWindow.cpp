@@ -1,6 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -19,7 +18,7 @@ namespace UI {
                 return;
             }
             this->isNotProcessingInputEvents = FALSE;
-            if (DAT_WindowAndDirectDraw::instance.runGameAsExclusiveFullscreen != FALSE) {
+            if (DAT_WindowAndDirectDraw::instance.runGameAsExclusiveFullscreen) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::prepareWindowAndDDrawUnk, this)();
                 SetRect(
                     &this->clientOnScreenCoords, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));

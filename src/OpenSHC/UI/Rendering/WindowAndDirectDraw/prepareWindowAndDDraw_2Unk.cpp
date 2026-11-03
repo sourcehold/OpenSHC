@@ -2,7 +2,6 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -21,11 +20,11 @@ namespace UI {
         void WindowAndDirectDraw::prepareWindowAndDDraw_2Unk(
             BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnum resEnum)
         {
-            if (this->drawingReady_0x0 != FALSE) {
+            if (this->drawingReady_0x0) {
                 dword const pendingBltMode = this->pendingBltMode;
                 this->pendingBltMode = 0;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    this->byteSizeofScreenResolution, 0, (void*)((int)(this->surfacePointer_screenMenu)));
+                    this->byteSizeofScreenResolution, 0, this->surfacePointer_screenMenu);
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::renderBltAndFlip, this)(1);
                 this->pendingBltMode = pendingBltMode;
             }
@@ -39,7 +38,7 @@ namespace UI {
             this->drawingReady_0x0
                 = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::initializeDirectDraw, this)();
             // If DirectDraw can't start in the chosen resolution, retry once in 800x600, else ask to close.
-            while (this->drawingReady_0x0 == FALSE) {
+            while (!this->drawingReady_0x0) {
                 if (this->currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                     this->postWindowCloseMessage = 1;
                     break;

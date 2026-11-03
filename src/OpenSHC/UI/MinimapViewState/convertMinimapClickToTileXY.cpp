@@ -20,15 +20,15 @@ namespace UI {
             *tileY = screenY;
             if (DAT_TileMapState::instance.mapOrientation != 0) {
                 if (DAT_TileMapState::instance.mapOrientation == 6) {
-                    orientationOffset = 0x13a10;
+                    orientationOffset = 80400;
                 } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                    orientationOffset = 0x27420;
+                    orientationOffset = 160800;
                 } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                    orientationOffset = 0x3ae30;
+                    orientationOffset = 241200;
                 }
             }
             int const tile = DAT_ViewportRenderState::instance
-                                 .screenPointToTileNumber[*tileX / 32 + screenY / 16 * 0x191 + orientationOffset - 6];
+                                 .screenPointToTileNumber[*tileX / 32 + screenY / 16 * 401 + orientationOffset - 6];
             int const row = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             *tileY = row;
             *tileX = tile - DAT_ViewportRenderState::instance.translationMatrix[row].addXgetTile;

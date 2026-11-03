@@ -31,15 +31,15 @@ namespace UI {
         int rowParity = viewportHeight + 1;
         if (DAT_TileMapState::instance.mapOrientation != 0) {
             if (DAT_TileMapState::instance.mapOrientation == 6) {
-                orientationOffset = 0x13a18;
+                orientationOffset = 80408;
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                orientationOffset = 0x27428;
+                orientationOffset = 160808;
             } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                orientationOffset = 0x3ae38;
+                orientationOffset = 241208;
             }
         }
         int const firstColumn = firstRow / 2;
-        int rowBase = firstColumn * 0x191 + orientationOffset + 1;
+        int rowBase = firstColumn * 401 + orientationOffset + 1;
         for (int row = firstRow; row < lastRow - firstRow; row++) {
             // the screen tile rows are staggered: every other row is half a tile in and one tile longer
             int rowX;
@@ -84,7 +84,7 @@ namespace UI {
                     }
                 }
             }
-            rowBase = rowBase + rowLength;
+            rowBase += rowLength;
         }
     }
 

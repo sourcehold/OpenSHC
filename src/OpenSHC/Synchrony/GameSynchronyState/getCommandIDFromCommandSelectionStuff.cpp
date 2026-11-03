@@ -1,7 +1,7 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Commands/GameCommandState.hpp"
 #include "OpenSHC/Commands/GameCommandStateByte.hpp"
 
@@ -19,10 +19,10 @@ namespace Synchrony {
     {
         this->someIndex = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            800, 0, (void*)((int)(this->selectedGameCommands)));
+            sizeof(this->selectedGameCommands), 0, this->selectedGameCommands);
         for (int command = this->gameCommandID; command < 200; command++) {
             // The command has not been processed yet, should be processed, and its time has come.
-            if (this->DAT_GameCommandArray[command].stateUnk != (GameCommandState)0
+            if (this->DAT_GameCommandArray[command].stateUnk != 0
                 && (char)this->DAT_GameCommandArray[command].stateUnk < 10
                 && (int)this->DAT_GameCommandArray[command].time <= (int)DAT_GameCore::instance.mapTimeInTicks) {
                 this->protocolInvokerPlayerID
@@ -30,7 +30,7 @@ namespace Synchrony {
                         this->DAT_GameCommandArray[command].playerUnk);
                 this->selectedGameCommands[this->someIndex][0] = command;
                 this->selectedGameCommands[this->someIndex][1] = this->protocolInvokerPlayerID;
-                this->someIndex = this->someIndex + 1;
+                ++this->someIndex;
                 if (this->someIndex >= 100) {
                     break;
                 }

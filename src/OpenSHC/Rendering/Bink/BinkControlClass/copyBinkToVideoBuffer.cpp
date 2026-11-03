@@ -1,7 +1,7 @@
-#include "../../../Rendering.func.hpp"
+#include "../BinkControlClass.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
-#include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
+#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlag.hpp"
@@ -25,7 +25,7 @@ namespace Rendering {
         // increment. Plain `inline` is not expanded by MSVC here, so it has to be __forceinline (same code as a goto,
         // no goto needed).
         static __forceinline void copyBinkToVideoBuffer_copyFrame(
-            BinkControlClass* self, int binkObjIndex, dword param_1)
+            BinkControlClass* self, int binkObjIndex, dword videoTarget)
         {
             if (self->soundStreamIndex[binkObjIndex] != OpenSHC::Audio::MSS::enums::SND_STR_MUSIC) {
                 if (!MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
@@ -35,12 +35,12 @@ namespace Rendering {
                 }
             }
 
-            if (self->unknownParam07[binkObjIndex] == param_1) {
+            if (self->unknownParam07[binkObjIndex] == videoTarget) {
                 self->unknown01_zero[binkObjIndex] = 0;
                 self->unknown02_zero[binkObjIndex] = 0;
             }
 
-            if (self->binkObjPtrArray[binkObjIndex] == NULL || self->unknownParam07[binkObjIndex] != param_1) {
+            if (self->binkObjPtrArray[binkObjIndex] == NULL || self->unknownParam07[binkObjIndex] != videoTarget) {
                 return;
             }
 
@@ -50,14 +50,14 @@ namespace Rendering {
                 if ((self->binkObjPtrArray[binkObjIndex]->FrameNum == self->binkObjPtrArray[binkObjIndex]->Frames)
                     && (self->unknownParam03[binkObjIndex] == 0)) {
                     if (self->soundStreamIndex[binkObjIndex] == OpenSHC::Audio::MSS::enums::SND_STR_MUSIC) {
-                        if (param_1 != 2) {
+                        if (videoTarget != 2) {
                             self->unknown01_zero[binkObjIndex] = 1;
                             MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, self)(
                                 binkObjIndex);
                             return;
                         }
                         self->unknown02_zero[binkObjIndex] = 1;
-                    } else if (param_1 == 2) {
+                    } else if (videoTarget == 2) {
                         self->unknown02_zero[binkObjIndex] = 1;
                     }
                 } else {
@@ -67,7 +67,7 @@ namespace Rendering {
                 self->frameReadyToDisplay[binkObjIndex] = TRUE;
             }
 
-            if (param_1 == 2) {
+            if (videoTarget == 2) {
                 int const menuBorderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
                 int const menuBorderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
                 OpenSHC::UI::Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
@@ -124,10 +124,10 @@ namespace Rendering {
         }
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00408FC0
-        void BinkControlClass::copyBinkToVideoBuffer(dword param_1)
+        void BinkControlClass::copyBinkToVideoBuffer(dword videoTarget)
         {
             for (int binkObjIndex = 0; binkObjIndex < 2; binkObjIndex++) {
-                copyBinkToVideoBuffer_copyFrame(this, binkObjIndex, param_1);
+                copyBinkToVideoBuffer_copyFrame(this, binkObjIndex, videoTarget);
             }
         }
 

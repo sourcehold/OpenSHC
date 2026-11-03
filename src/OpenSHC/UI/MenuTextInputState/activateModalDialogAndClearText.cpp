@@ -17,9 +17,7 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      dialogID is 0xb for Exit Crusader or Restart Game, 0xc for Options
-     */
+    // dialogID is 11 for Exit Crusader or Restart Game, 12 for Options
     // FUNCTION: STRONGHOLDCRUSADER 0x004916C0
     void MenuTextInputState::activateModalDialogAndClearText(MenuModalType dialogID)
     {

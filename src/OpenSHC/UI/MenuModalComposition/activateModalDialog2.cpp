@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
-#include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
@@ -34,8 +33,7 @@ namespace UI {
         if (this->activeModalDialogID == OpenSHC::UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE) {
             this->activeModalDialogID = OpenSHC::UI::Enums::MMT_NONE;
             if (MACRO_CALL_MEMBER(
-                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()
-                != FALSE) {
+                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()) {
                 return;
             }
         }
@@ -52,7 +50,7 @@ namespace UI {
             this->modalMenu.width = ((this->modalMenu.width - 1) / 24 + 1) * 24;
             this->modalMenu.height = ((this->modalMenu.height - 1) / 24 + 1) * 24;
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             if (this->modalMenu.x == -1) {
                 this->modalMenu.x = DAT_WindowAndDirectDraw::instance.gameResolutionX / 2 - this->modalMenu.width / 2;
             } else {
@@ -91,9 +89,9 @@ namespace UI {
                 = MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             int x = this->modalMenu.x;
             int y = this->modalMenu.y;
-            if (inGame != FALSE) {
-                x = x + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
-                y = y + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
+            if (inGame) {
+                x += DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
+                y += DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
                 DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::bltMapGameSurfaceToScreen,
                     DAT_WindowAndDirectDraw::ptr)(x, y, this->modalMenu.width + x, this->modalMenu.height + y);

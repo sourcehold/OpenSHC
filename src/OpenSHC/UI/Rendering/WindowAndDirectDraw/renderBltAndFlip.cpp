@@ -1,7 +1,6 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
@@ -67,22 +66,22 @@ namespace UI {
         }
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00470040
-        void WindowAndDirectDraw::renderBltAndFlip(int param_1)
+        void WindowAndDirectDraw::renderBltAndFlip(int request)
         {
             RECT destinationRect;
             RECT sourceRect;
             int menuBarHeight = 128;
             BOOL mapBltPending = FALSE;
-            if (param_1 >= 100) {
-                param_1 -= 100;
+            if (request >= 100) {
+                request -= 100;
             }
             if (this->pendingBltMode != 0) {
                 mapBltPending = TRUE;
             }
-            if (param_1 != 0) {
+            if (request != 0) {
                 this->windowMoveEventBlitCountdown = 0;
             }
-            if (this->drawingReady_0x0 == FALSE) {
+            if (!this->drawingReady_0x0) {
                 DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
                 return;
             }
@@ -109,12 +108,12 @@ namespace UI {
                 sourceRect.top = 0;
                 sourceRect.right = this->gameResolutionX;
                 sourceRect.bottom = this->gameResolutionY;
-                if (param_1 == 1) {
+                if (request == 1) {
                     char debugText[2000];
                     MACRO_CALL(OpenSHC::OS_Func::_sprintf)(debugText, s_Vid__d__sys__d_005a6208,
                         this->directDrawBackbufferSurfacePointer, this->directDrawOffscreenSurfacePointer_screenMenu);
                 }
-                if (this->runGameAsExclusiveFullscreen != FALSE) {
+                if (this->runGameAsExclusiveFullscreen) {
                     this->directDrawBackbufferSurfacePointer->BltFast(0, 0,
                         this->directDrawOffscreenSurfacePointer_screenMenu, &this->clientOnScreenCoords,
                         DDBLTFAST_WAIT);

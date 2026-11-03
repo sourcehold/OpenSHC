@@ -40,10 +40,10 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
     }
     if (drawY < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start) {
         skip = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start - drawY;
-        DAT_00ed3170::instance = DAT_00ed3170::instance - skip;
+        DAT_00ed3170::instance -= skip;
         drawY = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start;
-        nextSkip = nextSkip + skip;
-        height = height - skip;
+        nextSkip += skip;
+        height -= skip;
     }
     if ((int)(DAT_00ed3170::instance + drawY) >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
         DAT_00ed3170::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
@@ -52,25 +52,25 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
             + (DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - DAT_00ed3170::instance - drawY);
     }
     // rows to bytes: tile objects are 15 dwords per row
-    skip = skip * 60;
-    nextSkip = nextSkip * 60;
+    skip *= 60;
+    nextSkip *= 60;
     int firstRows;
     if (height <= 0) {
         firstRows = 0;
     } else if (height < (int)DAT_00ed3170::instance) {
-        DAT_00ed3170::instance = DAT_00ed3170::instance - height;
+        DAT_00ed3170::instance -= height;
         firstRows = height;
-        nextSkip = nextSkip + height * 60;
+        nextSkip += height * 60;
     } else {
         firstRows = DAT_00ed3170::instance;
         DAT_00ed3170::instance = 0;
         skip = nextSkip;
     }
     if (DAT_00ed317c::instance == 3) {
-        skip = skip - 480;
+        skip -= 480;
     }
-    image = image + DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
-    nextImage = nextImage + DAT_GMImageOffsets::instance[DAT_00ed316c::instance];
+    image += DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
+    nextImage += DAT_GMImageOffsets::instance[DAT_00ed316c::instance];
     if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
         // clang-format off
         __asm {

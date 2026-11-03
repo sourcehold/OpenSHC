@@ -76,7 +76,7 @@ namespace UI {
                     break;
                 }
                 if (drawY + imageHeight > heightMax) {
-                    imageHeight = imageHeight - (drawY + imageHeight - heightMax);
+                    imageHeight -= (drawY + imageHeight - heightMax);
                     if (imageHeight <= 0) {
                         return;
                     }
@@ -1347,7 +1347,7 @@ namespace UI {
                 lineStride = 4056 * 2;
                 heightStart = this->mapGameSurfaceHeightRange.start;
                 if (drawY + imageHeight > this->mapGameSurfaceHeightRange.end) {
-                    imageHeight = imageHeight - (drawY + imageHeight - this->mapGameSurfaceHeightRange.end);
+                    imageHeight -= (drawY + imageHeight - this->mapGameSurfaceHeightRange.end);
                     if (imageHeight <= 0) {
                         return;
                     }

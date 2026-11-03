@@ -40,15 +40,15 @@ namespace UI {
         int rowParity = viewportHeight + 1;
         if (DAT_TileMapState::instance.mapOrientation != 0) {
             if (DAT_TileMapState::instance.mapOrientation == 6) {
-                orientationOffset = 0x13a18;
+                orientationOffset = 80408;
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                orientationOffset = 0x27428;
+                orientationOffset = 160808;
             } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                orientationOffset = 0x3ae38;
+                orientationOffset = 241208;
             }
         }
         int const firstColumn = firstRow / 2;
-        int rowBase = firstColumn * 0x191 + orientationOffset + 1;
+        int rowBase = firstColumn * 401 + orientationOffset + 1;
         for (int row = firstRow; row < lastRow - firstRow; row++) {
             // the screen tile rows are staggered: every other row is half a tile in and one tile longer
             int rowX;
@@ -95,7 +95,7 @@ namespace UI {
                                 if (DAT_MiniMapDefinedData::instance.MinimapColorByLogicBit[bit].integer == 0) {
                                     break;
                                 }
-                                bit = bit + 1;
+                                ++bit;
                             }
                             if (DAT_MiniMapDefinedData::instance.MinimapColorByLogicBit[bit].integer != 0) {
                                 color = DAT_MiniMapDefinedData::instance.MinimapColorByLogicBit[bit]
@@ -111,30 +111,30 @@ namespace UI {
                             int green;
                             if (isRGB565 == 0) {
                                 red = (int)(((ushort)color & 0x7c00) * brightness) / 100;
-                                if (0x7c00 < red) {
-                                    red = 0x7c00;
+                                if (31744 < red) {
+                                    red = 31744;
                                 }
                                 green = (int)(((ushort)color & 0x3e0) * brightness) / 100;
-                                red = red & 0x7c00;
-                                if (0x3e0 < green) {
-                                    green = 0x3e0;
+                                red &= 0x7c00;
+                                if (992 < green) {
+                                    green = 992;
                                 }
-                                green = green & 0x3e0;
+                                green &= 0x3e0;
                             } else {
                                 red = (int)(((ushort)color & 0xf800) * brightness) / 100;
-                                if (0xf800 < red) {
-                                    red = 0xf800;
+                                if (63488 < red) {
+                                    red = 63488;
                                 }
                                 green = (int)(((ushort)color & 0x7e0) * brightness) / 100;
-                                red = red & 0xf800;
-                                if (0x7e0 < green) {
-                                    green = 0x7e0;
+                                red &= 0xf800;
+                                if (2016 < green) {
+                                    green = 2016;
                                 }
-                                green = green & 0x7e0;
+                                green &= 0x7e0;
                             }
                             int blue = (int)(((ushort)color & 0x1f) * brightness) / 100;
-                            if (0x1f < blue) {
-                                blue = 0x1f;
+                            if (31 < blue) {
+                                blue = 31;
                             }
                             color = (ushort)(blue & 0x1f | green | red);
                         }
@@ -151,7 +151,7 @@ namespace UI {
                             }
                         } else {
                             // zoomed out: every other pixel, at half the position
-                            for (int dx = x & 1; dx < widthFactor; dx = dx + 2) {
+                            for (int dx = x & 1; dx < widthFactor; dx += 2) {
                                 if (0 <= x + dx && x + dx < columns * widthFactor) {
                                     int const pixelX = (x + dx) / scale;
                                     for (int dy = 0; dy < heightFactor; dy++) {
@@ -167,7 +167,7 @@ namespace UI {
                     }
                 }
             }
-            rowBase = rowBase + rowLength;
+            rowBase += rowLength;
         }
     }
 

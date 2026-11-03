@@ -31,7 +31,7 @@ namespace UI {
     void StatusMenus::RenderStatusMenu_Population()
     {
         int const player = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-        int const top = DAT_MenuHandlerState::instance.y + 0x1bf;
+        int const top = DAT_MenuHandlerState::instance.y + 447;
         int const x = DAT_MenuHandlerState::instance.x;
         // the graph shows the last 300 months
         int months = DAT_GameState::instance.mapAndTime.populationIndex;
@@ -39,41 +39,41 @@ namespace UI {
             months = 300;
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(1, x + 0xe, DAT_MenuHandlerState::instance.y + 0x1e9);
+            DAT_TextureRenderCoreObject::ptr)(1, x + 14, DAT_MenuHandlerState::instance.y + 489);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         // "Population"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 3),
-            DAT_MenuHandlerState::instance.x + 0x19, DAT_MenuHandlerState::instance.y + 0x1d3, OpenSHC::Text::TTA_LEFT,
-            0, 0x11, FALSE, 0);
+            DAT_MenuHandlerState::instance.x + 25, DAT_MenuHandlerState::instance.y + 467, OpenSHC::Text::TTA_LEFT, 0,
+            17, FALSE, 0);
         // the axes, three pixels thick
-        int const bottom = top + 0x7e;
-        int const right = x + 0x1ed;
+        int const bottom = top + 126;
+        int const right = x + 493;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbc, bottom, right, bottom, COL_BLACK::instance.shortValue);
+            x + 188, bottom, right, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbc, top + 0x7f, right, top + 0x7f, COL_BLACK::instance.shortValue);
+            x + 188, top + 127, right, top + 127, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbc, top + 0x80, right, top + 0x80, COL_BLACK::instance.shortValue);
-        int const graphTop = top + 0x32;
+            x + 188, top + 128, right, top + 128, COL_BLACK::instance.shortValue);
+        int const graphTop = top + 50;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbe, graphTop, x + 0xbe, bottom, COL_BLACK::instance.shortValue);
+            x + 190, graphTop, x + 190, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbd, graphTop, x + 0xbd, bottom, COL_BLACK::instance.shortValue);
+            x + 189, graphTop, x + 189, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0xbc, graphTop, x + 0xbc, bottom, COL_BLACK::instance.shortValue);
+            x + 188, graphTop, x + 188, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0x1eb, graphTop, x + 0x1eb, bottom, COL_BLACK::instance.shortValue);
+            x + 491, graphTop, x + 491, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-            x + 0x1ec, graphTop, x + 0x1ec, bottom, COL_BLACK::instance.shortValue);
+            x + 492, graphTop, x + 492, bottom, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
             right, graphTop, right, bottom, COL_BLACK::instance.shortValue);
         // "Years"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0xd),
-            x + 0x154, top + 0x8e, OpenSHC::Text::TTA_CENTER, 0, 0x13, FALSE, 0);
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 13),
+            x + 340, top + 142, OpenSHC::Text::TTA_CENTER, 0, 19, FALSE, 0);
         // the vertical scale: 50 people per 75 pixels, doubled until the highest population fits
         int highest = 0;
         for (int month = 0; month < months; month++) {
@@ -85,7 +85,7 @@ namespace UI {
         if (highest <= 50) {
             scale = 1;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                50, x + 0xac, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x13, FALSE, 0);
+                50, x + 172, top + 45, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
         } else {
             if (highest <= 100) {
                 scale = 2;
@@ -100,14 +100,14 @@ namespace UI {
             }
             if (scale == 32) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    1600, x + 0x9c, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x13, FALSE, 0);
+                    1600, x + 156, top + 45, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    scale * 50, x + 0xa4, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x13, FALSE, 0);
+                    scale * 50, x + 164, top + 45, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
             }
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            0, x + 0xb4, top + 0x78, OpenSHC::Text::TTA_LEFT, 0, 0x13, FALSE, 0);
+            0, x + 180, top + 120, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
         // a year label every five years
         for (int label = 0; label <= 5; label++) {
             int firstYear = (DAT_GameState::instance.mapAndTime.populationIndex - 300) / 12;
@@ -115,8 +115,8 @@ namespace UI {
                 firstYear = 0;
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                firstYear + label * 5, label * 1475 / 25 + 0xbe + x, top + 0x82, OpenSHC::Text::TTA_LEFT, 0, 0x13,
-                FALSE, 0);
+                firstYear + label * 5, label * 1475 / 25 + 190 + x, top + 130, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE,
+                0);
         }
         // one bar per month
         if (months <= 300) {
@@ -129,7 +129,7 @@ namespace UI {
                             DAT_TextureRenderCoreObject::ptr)(
                             0, 0, DAT_WindowAndDirectDraw::instance.resolutionX, bottom);
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
-                            DAT_TextureRenderCoreObject::ptr)(0, x + 0xbf + month, top - height + 0x7e);
+                            DAT_TextureRenderCoreObject::ptr)(0, x + 191 + month, top - height + 126);
                     }
                 }
             }

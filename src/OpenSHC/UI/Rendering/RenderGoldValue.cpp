@@ -31,16 +31,16 @@ namespace UI {
         }
         int goldColor;
         if (gold > 0) {
-            goldColor = 0x7d3e;
+            goldColor = 32062;
         } else {
             gold = 0;
-            goldColor = 0xff;
+            goldColor = 255;
         }
-        goldDigitSet = goldDigitSet + 1;
+        ++goldDigitSet;
         int goldWidth = MACRO_CALL_MEMBER(Text::TextManager_Func::calcRenderedNumberWidth, DAT_TextManagerObject::ptr)(
             gold, goldDigitSet);
         if (gold >= 100000) {
-            goldWidth = goldWidth - 2;
+            goldWidth -= 2;
         }
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(gold,
             DAT_MenuHandlerState::instance.x - goldWidth + 743, DAT_MenuHandlerState::instance.y + 537, 5, goldColor,
@@ -64,12 +64,12 @@ namespace UI {
         int populationDigitSetUnk = 0;
         int populationColor;
         if (DAT_GameState::instance.playerDataArray[playerID].crowding <= 100) {
-            populationColor = 0x7d3e;
+            populationColor = 32062;
         } else {
-            populationColor = 0xff;
+            populationColor = 255;
         }
         if (populationCap == 0) {
-            populationColor = 0x7d3e;
+            populationColor = 32062;
             population = 0;
         } else {
             if (populationCap >= 100) {
@@ -109,9 +109,9 @@ namespace UI {
 
         int popularityColor;
         if (popularity < 50) {
-            popularityColor = 0xff;
+            popularityColor = 255;
         } else {
-            popularityColor = 0x7d3e;
+            popularityColor = 32062;
         }
         int const popularityHalfWidth = MACRO_CALL_MEMBER(Text::TextManager_Func::calcRenderedNumberWidth,
                                             DAT_TextManagerObject::ptr)(popularity, 0)

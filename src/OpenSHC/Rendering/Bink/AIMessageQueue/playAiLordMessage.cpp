@@ -1,8 +1,8 @@
-#include "../../../Rendering.func.hpp"
 #include "../AIMessageQueue.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
+#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/DisplayElements.func.hpp"
@@ -55,7 +55,7 @@ namespace Rendering {
             }
             if (MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                     UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO)) {
-                yOffset = yOffset - 40;
+                yOffset -= 40;
             }
             int textHeight;
             int textWidth;

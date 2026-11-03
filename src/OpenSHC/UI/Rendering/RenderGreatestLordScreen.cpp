@@ -83,14 +83,14 @@ namespace UI {
             int kills = 0;
             for (int victim = 1; victim < 9; ++victim) {
                 if (victim != player) {
-                    kills = kills + DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[player][victim];
+                    kills += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[player][victim];
                 }
             }
             tables.kills[player] = kills;
             int losses = 0;
             for (int killer = 0; killer < 9; ++killer) {
                 if (killer != player) {
-                    losses = losses + DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[killer][player];
+                    losses += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[killer][player];
                 }
             }
             tables.losses[player] = losses;
@@ -216,25 +216,25 @@ namespace UI {
         }
 
         // bonus points for the winner and for a clear lead in a statistic
-        tables.points[tables.overallOrder[1]] = tables.points[tables.overallOrder[1]] + 3;
+        tables.points[tables.overallOrder[1]] += 3;
         if (tables.kills[tables.statOrder[0][1]] > 10
             && tables.kills[tables.statOrder[0][1]] > tables.kills[tables.statOrder[0][2]] * 2) {
-            tables.points[tables.statOrder[0][1]] = tables.points[tables.statOrder[0][1]] + 3;
+            tables.points[tables.statOrder[0][1]] += 3;
         }
         int value = DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[tables.statOrder[1][1]];
         if (value > 2
             && value > DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[tables.statOrder[1][2]] * 2) {
-            tables.points[tables.statOrder[1][1]] = tables.points[tables.statOrder[1][1]] + 2;
+            tables.points[tables.statOrder[1][1]] += 2;
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[tables.statOrder[2][1]];
         if (value > 50
             && value > DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[tables.statOrder[2][2]] * 2) {
-            tables.points[tables.statOrder[2][1]] = tables.points[tables.statOrder[2][1]] + 2;
+            tables.points[tables.statOrder[2][1]] += 2;
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalGold[tables.statOrder[3][1]];
         if (value > 100
             && value > DAT_GameSynchronyState::instance.finalResults.finalGold[tables.statOrder[3][2]] * 2) {
-            tables.points[tables.statOrder[3][1]] = tables.points[tables.statOrder[3][1]] + 3;
+            tables.points[tables.statOrder[3][1]] += 3;
         }
         short const maxPopulation
             = DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[tables.statOrder[4][1]];
@@ -242,33 +242,33 @@ namespace UI {
             && maxPopulation
                 > DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[tables.statOrder[4][2]] * 2) {
             // fixme: the original gives the population point to the player with the most kills
-            tables.points[tables.statOrder[0][1]] = tables.points[tables.statOrder[0][1]] + 1;
+            ++tables.points[tables.statOrder[0][1]];
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[tables.statOrder[5][1]];
         if (value > 100
             && value > DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[tables.statOrder[5][2]] * 2) {
-            tables.points[tables.statOrder[5][1]] = tables.points[tables.statOrder[5][1]] + 1;
+            ++tables.points[tables.statOrder[5][1]];
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[tables.statOrder[6][1]];
         if (value > 50
             && value > DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[tables.statOrder[6][2]] * 2) {
-            tables.points[tables.statOrder[6][1]] = tables.points[tables.statOrder[6][1]] + 1;
+            ++tables.points[tables.statOrder[6][1]];
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalIronProduced[tables.statOrder[7][1]];
         if (value > 10
             && value > DAT_GameSynchronyState::instance.finalResults.finalIronProduced[tables.statOrder[7][2]] * 2) {
-            tables.points[tables.statOrder[7][1]] = tables.points[tables.statOrder[7][1]] + 1;
+            ++tables.points[tables.statOrder[7][1]];
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[tables.statOrder[8][1]];
         if (value > 20
             && value > DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[tables.statOrder[8][2]] * 2) {
-            tables.points[tables.statOrder[8][1]] = tables.points[tables.statOrder[8][1]] + 1;
+            ++tables.points[tables.statOrder[8][1]];
         }
         value = DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[tables.statOrder[11][1]];
         if (value > 20
             && value
                 > DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[tables.statOrder[11][2]] * 2) {
-            tables.points[tables.statOrder[11][1]] = tables.points[tables.statOrder[11][1]] + 1;
+            ++tables.points[tables.statOrder[11][1]];
         }
 
         // three points per star, at most five, and at most four unless player slot 1 took part
@@ -302,9 +302,9 @@ namespace UI {
             // "Greatest Lord"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(225, 1, DAT_MenuHandlerState::instance.x - 104, y - 30, 1008, 0);
-            y = y + 20;
+            y += 20;
         }
-        y = y + 190;
+        y += 190;
         int iconY = y - 18;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         int player;
@@ -380,12 +380,12 @@ namespace UI {
             for (int star = 0; star < tables.stars[player]; ++star) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 139, iconX, iconY - 2);
-                iconX = iconX + 22;
+                iconX += 22;
             }
             for (int lord = 0; lord < DAT_GameSynchronyState::instance.finalResults.finalKilledLords[player]; ++lord) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 138, iconX, iconY - 5);
-                iconX = iconX + 22;
+                iconX += 22;
             }
             if (DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] != 0) {
                 // "("
@@ -399,7 +399,7 @@ namespace UI {
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
                         DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] % 12),
                     iconX + 28, iconY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, FALSE, 0);
-                iconX = iconX + 32;
+                iconX += 32;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] / 12, iconX, iconY,
                     OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, TRUE, 0);
@@ -478,8 +478,8 @@ namespace UI {
                     DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[player], x + 627, y,
                     OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
             }
-            y = y + 45;
-            iconY = iconY + 45;
+            y += 45;
+            iconY += 45;
         }
 
         if ((char)INT_00eb0e44::instance == '\0') {
