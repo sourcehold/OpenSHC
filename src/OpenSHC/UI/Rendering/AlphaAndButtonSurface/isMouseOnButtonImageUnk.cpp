@@ -15,7 +15,7 @@
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_UIButtonDefinedData.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -29,7 +29,7 @@ namespace UI {
         {
             ushort* const surface = this->surfacePtr;
             if ((int)DAT_CurrentButtonPictureInGm::instance >= 0) {
-                int const imageIndex = GMTotalPicturesProcessed::instance[DAT_UIButtonDefinedData::instance
+                int const imageIndex = GMFirstPictureIndex::instance[DAT_UIButtonDefinedData::instance
                                                .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                                                .gmId_0x0]
                     + DAT_CurrentButtonPictureInGm::instance - 1;
@@ -52,7 +52,7 @@ namespace UI {
             }
             // A negative picture number means the alpha image of the button.
             DAT_CurrentButtonPictureInGm::instance = -DAT_CurrentButtonPictureInGm::instance;
-            int const imageIndex = GMTotalPicturesProcessed::instance[DAT_UIButtonDefinedData::instance
+            int const imageIndex = GMFirstPictureIndex::instance[DAT_UIButtonDefinedData::instance
                                            .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                                            .alphaGmIdUnk_0xc]
                 + DAT_CurrentButtonPictureInGm::instance - 1;
