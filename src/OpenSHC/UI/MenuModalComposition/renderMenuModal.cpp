@@ -154,8 +154,10 @@ namespace UI {
                 int rowImage;
                 if (y == 0) {
                     rowImage = 1;
+                } else if (y == this->modalMenu.height - 24) {
+                    rowImage = 13;
                 } else {
-                    rowImage = y == this->modalMenu.height - 24 ? 13 : 7;
+                    rowImage = 7;
                 }
                 for (int x = 0; x < this->modalMenu.width; x = x + 24) {
                     int imageID = rowImage;

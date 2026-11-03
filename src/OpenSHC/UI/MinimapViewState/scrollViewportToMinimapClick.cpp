@@ -17,15 +17,8 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      Converts the current mouse screen position into viewport coordinates using the minimap's   position, scale
-      factors, and map offsets, then calls setViewportBasedOnMapSize to scroll the main   view. Skipped if in build menu
-      with soldiers tab active, shift-related state is 1, or right mouse   button is held.      renamed by: Claude
-      Sonnet 4.6
-     */
+    // Scrolls the main view to the minimap point under the mouse. Skipped in the build menu when its soldiers tab is
+    // open or the shift-related state is 1, unless the right button is down.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5110
     void MinimapViewState::scrollViewportToMinimapClick()
     {
