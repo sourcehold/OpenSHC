@@ -10,7 +10,7 @@ namespace Map {
         {
             this->tribes[tribeID].rallyPointArray[step][0] = destinationX;
             this->tribes[tribeID].rallyPointArray[step][1] = destinationY;
-            this->tribes[tribeID].rallyPointCount = (short)(step + 1);
+            this->tribes[tribeID].rallyPointCount = step + 1;
         }
 
     }

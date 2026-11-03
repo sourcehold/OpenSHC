@@ -22,7 +22,7 @@ namespace Map {
             }
             this->tribes[_tribeID].someIndex = 0;
             this->tribes[_tribeID].attackWave = 0;
-            this->tribes[_tribeID].tribeType = (AITribeTypeShort)param_1;
+            this->tribes[_tribeID].tribeType = param_1;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk,
                 DAT_PathFindingState::ptr)(aroundX, aroundY, -1, -1, 2000, 0);
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::spawnUnitAndAddToTribe,

@@ -28,14 +28,14 @@ namespace Map {
                 uint x;
                 uint y;
                 if (_slot < 4) {
-                    x = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];
-                    y = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1];
+                    x = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];
+                    y = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1];
                 } else {
                     if (DAT_GameState::instance.mapAndTime.signpostIDs[_slot - 4] == 0) {
                         continue;
                     }
-                    x = (uint)DAT_GameState::instance.mapAndTime.signpostsMapEdge[_slot - 4][0].x;
-                    y = (uint)DAT_GameState::instance.mapAndTime.signpostsMapEdge[_slot - 4][0].y;
+                    x = DAT_GameState::instance.mapAndTime.signpostsMapEdge[_slot - 4][0].x;
+                    y = DAT_GameState::instance.mapAndTime.signpostsMapEdge[_slot - 4][0].y;
                 }
                 if (x <= 399 && y <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0) {
@@ -47,7 +47,7 @@ namespace Map {
                                 | LogicHelpers::L_MOAT))
                         == 0) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                            Commands::M_MAPPER_RABBIT, x, y, (int)(DAT_TileMapState::instance.HeightLayer[_tile]));
+                            Commands::M_MAPPER_RABBIT, x, y, DAT_TileMapState::instance.HeightLayer[_tile]);
                         this->unknownX_01 = x;
                         this->unknownY_01 = y;
                         return;

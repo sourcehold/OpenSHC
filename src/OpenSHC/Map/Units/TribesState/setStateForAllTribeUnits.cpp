@@ -21,7 +21,7 @@ namespace Map {
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
                     && DAT_UnitsState::instance.units[unitID].dying == 0) {
-                    DAT_UnitsState::instance.units[unitID].state.generic = (short)param_2;
+                    DAT_UnitsState::instance.units[unitID].state.generic = param_2;
                     DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
                     DAT_UnitsState::instance.units[unitID].seated = 0;
                 }

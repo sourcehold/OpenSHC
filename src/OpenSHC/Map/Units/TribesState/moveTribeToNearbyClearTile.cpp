@@ -19,8 +19,8 @@ namespace Map {
         void TribesState::moveTribeToNearbyClearTile(int tribeID)
         {
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
-            uint const x0 = (uint)DAT_UnitsState::instance.units[_targetUnitID].x;
-            uint const y0 = (uint)DAT_UnitsState::instance.units[_targetUnitID].y;
+            uint const x0 = DAT_UnitsState::instance.units[_targetUnitID].x;
+            uint const y0 = DAT_UnitsState::instance.units[_targetUnitID].y;
             for (int candidate = 0; candidate < 40; ++candidate) {
                 uint const x1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[candidate].x + x0;
                 uint const y1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[candidate].y + y0;

@@ -17,7 +17,7 @@ namespace Map {
                 if (_tribe.tribeState && _tribe.attackWave == attackWave
                     && _tribe.tribeBehaviorType != tribeBehaviorType
                     && _tribe.attackInfo_someCounter1 != attackInfoCounter1) {
-                    _tribe.tribeBehaviorType = (SomeTribeBehaviorTypeShort)tribeBehaviorType;
+                    _tribe.tribeBehaviorType = tribeBehaviorType;
                     _tribe.unknownAttackRelatedUpdateCounter = 0;
                 }
             }

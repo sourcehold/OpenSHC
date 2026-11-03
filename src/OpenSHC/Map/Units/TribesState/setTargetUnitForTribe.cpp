@@ -25,8 +25,8 @@ namespace Map {
                     && DAT_UnitsState::instance.units[_unitID].dying == 0) {
                     short _tribeTargetUnitID = this->tribes[tribeID].selectionTargetUnitID;
                     if (!_tribeTargetUnitID) {
-                        this->tribes[tribeID].selectionTargetUnitID = (short)_unitID;
-                        DAT_UnitsState::instance.units[_unitID].selectionTargetUnitID = (short)_unitID;
+                        this->tribes[tribeID].selectionTargetUnitID = _unitID;
+                        DAT_UnitsState::instance.units[_unitID].selectionTargetUnitID = _unitID;
                     } else {
                         DAT_UnitsState::instance.units[_unitID].selectionTargetUnitID = _tribeTargetUnitID;
                     }

@@ -21,9 +21,9 @@ namespace Map {
             if ((int)_tribeID <= 0) {
                 return 0;
             }
-            this->tribes[_tribeID].tribeType = (AITribeTypeShort)tribeType;
+            this->tribes[_tribeID].tribeType = tribeType;
             this->tribes[_tribeID].someIndex = someIndex;
-            this->tribes[_tribeID].attackWave = (short)DAT_TroopValueState::instance.attackInfo.inv_count;
+            this->tribes[_tribeID].attackWave = DAT_TroopValueState::instance.attackInfo.inv_count;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk,
                 DAT_PathFindingState::ptr)(x, y, -1, -1, 2000, 0);
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::spawnUnitAndAddToTribe,

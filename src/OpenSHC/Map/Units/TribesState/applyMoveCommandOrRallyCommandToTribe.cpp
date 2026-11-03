@@ -29,11 +29,11 @@ namespace Map {
             this->tribes[tribeID].someUnitID = 0;
             if (storeAsRallyPoint) {
                 int _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
-                this->tribes[tribeID].isRallyingUnk = (short)isRallying;
+                this->tribes[tribeID].isRallyingUnk = isRallying;
                 this->tribes[tribeID].rallyPointArray[0][0] = DAT_UnitsState::instance.units[_targetUnitID].x;
                 this->tribes[tribeID].rallyPointArray[0][1] = DAT_UnitsState::instance.units[_targetUnitID].y;
-                this->tribes[tribeID].rallyPointArray[1][0] = (short)x1;
-                this->tribes[tribeID].rallyPointArray[1][1] = (short)y1;
+                this->tribes[tribeID].rallyPointArray[1][0] = x1;
+                this->tribes[tribeID].rallyPointArray[1][1] = y1;
                 this->tribes[tribeID].currentRallyPointIndex = 1;
                 this->tribes[tribeID].rallyPointCount = 2;
             }
@@ -48,12 +48,12 @@ namespace Map {
                     && DAT_UnitsState::instance.units[_unitID].state.generic != Map::Units::States::US_MELEE_ATTACK
                     && DAT_UnitsState::instance.units[_unitID].moveableUnk != 0
                     && DAT_UnitsState::instance.units[_unitID].moveRelatedFlag != 1) {
-                    DAT_UnitsState::instance.units[_unitID].plannedDestinationX = (short)x1;
+                    DAT_UnitsState::instance.units[_unitID].plannedDestinationX = x1;
                     DAT_UnitsState::instance.units[_unitID].state.generic = Map::Units::States::US_MOVE_TO_DESTINATION;
                     DAT_UnitsState::instance.units[_unitID].targetingType = Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     DAT_UnitsState::instance.units[_unitID]._someX_2 = 0;
                     DAT_UnitsState::instance.units[_unitID]._someY_2 = 0;
-                    DAT_UnitsState::instance.units[_unitID].plannedDestinationY = (short)y1;
+                    DAT_UnitsState::instance.units[_unitID].plannedDestinationY = y1;
                     DAT_UnitsState::instance.units[_unitID].moveDelay = 0;
                     DAT_UnitsState::instance.units[_unitID].moveInstructionSpeedDelayTracker = 0;
                     if (_allAssassins) {

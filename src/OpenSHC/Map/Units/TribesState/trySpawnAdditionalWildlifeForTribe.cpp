@@ -46,7 +46,7 @@ namespace Map {
                     _unitID = _targetUnitID;
                 }
             }
-            int const _spawnRoll = (byte)SEC_RNG::instance.currentNumber2 & 127;
+            int const _spawnRoll = SEC_RNG::instance.currentNumber2 & 127;
             int const _spawnX = DAT_UnitsState::instance.units[_unitID].x;
             int const _spawnY = DAT_UnitsState::instance.units[_unitID].y;
             int const _spawnHeight = DAT_UnitsState::instance.units[_unitID].terrainOrClimbHeight;

@@ -23,7 +23,7 @@ namespace Map {
                 if (_spawnX) {
                     *_outX = _spawnX;
                     _slot = (DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor + _slotOffset) % 4;
-                    uint const _spawnY = (uint)DAT_GameState::instance.mapAndTime.lionLocationsXY[_slot].y;
+                    uint const _spawnY = DAT_GameState::instance.mapAndTime.lionLocationsXY[_slot].y;
                     *_outY = _spawnY;
                     uint const _candidateX = *_outX;
                     if (_candidateX <= 399 && _spawnY <= 399
@@ -37,7 +37,7 @@ namespace Map {
                                 | LogicHelpers::L_FARM_FIELD_HOP | LogicHelpers::L_FARM_FIELD_DAIRY
                                 | LogicHelpers::L_MOAT))) {
                         _slot = (DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor + 1 + _slotOffset) % 4;
-                        DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor = (short)_slot;
+                        DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor = _slot;
                         return TRUE;
                     }
                 }

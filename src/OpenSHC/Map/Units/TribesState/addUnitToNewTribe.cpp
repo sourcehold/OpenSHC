@@ -30,9 +30,9 @@ namespace Map {
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
                 return FALSE;
             }
-            int _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
+            int _playerID = DAT_UnitsState::instance.units[unitID].owner;
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1) {
-                int const _tribeID = (int)DAT_UnitsState::instance.units[unitID].tribeID;
+                int const _tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
                 if (_tribeID <= 0 || this->tribes[_tribeID].uid != DAT_UnitsState::instance.units[unitID].tribeUID
                     || this->tribes[_tribeID].tribeState == 0) {
                     int _newTribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(_playerID, 0);
@@ -79,7 +79,7 @@ namespace Map {
                         }
                         this->tribes[_newTribeID].someIndex = 1;
                         this->tribes[_newTribeID].attackWave
-                            = (short)DAT_TroopValueState::instance.attackInfo.inv_count;
+                            = DAT_TroopValueState::instance.attackInfo.inv_count;
                         _unitType = DAT_UnitsState::instance.units[unitID].unitType;
                         if (_unitType == Map::Units::UT_E_ENGINEER) {
                             if (DAT_UnitsState::instance.units[unitID].state.generic

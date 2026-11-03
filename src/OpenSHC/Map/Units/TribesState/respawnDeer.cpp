@@ -68,7 +68,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(organismID);
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                    Commands::M_MAPPER_DEER, x, y, (int)(DAT_TileMapState::instance.HeightLayer[tile]));
+                    Commands::M_MAPPER_DEER, x, y, DAT_TileMapState::instance.HeightLayer[tile]);
                 return;
             }
         }

@@ -26,13 +26,13 @@ namespace Map {
             if (peasantCountUnk <= 1) {
                 peasantCountUnk = 1;
             } else if (peasantCountUnk <= 3) {
-                peasantCountUnk = ((byte)SEC_RNG::instance.currentNumber2 & 1) + 1;
+                peasantCountUnk = (SEC_RNG::instance.currentNumber2 & 1) + 1;
             } else if (peasantCountUnk <= 7) {
-                peasantCountUnk = ((byte)SEC_RNG::instance.currentNumber2 & 3) + 1;
+                peasantCountUnk = (SEC_RNG::instance.currentNumber2 & 3) + 1;
             } else if (peasantCountUnk <= 15) {
-                peasantCountUnk = ((byte)SEC_RNG::instance.currentNumber2 & 7) + 1;
+                peasantCountUnk = (SEC_RNG::instance.currentNumber2 & 7) + 1;
             } else {
-                peasantCountUnk = ((byte)SEC_RNG::instance.currentNumber2 & 15) + 1;
+                peasantCountUnk = (SEC_RNG::instance.currentNumber2 & 15) + 1;
             }
             for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; ++unitID) {
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL

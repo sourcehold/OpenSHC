@@ -12,12 +12,12 @@ namespace Map {
         {
             for (int _slot = 0; _slot < 4; ++_slot) {
                 if (DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0] == 0) {
-                    DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0] = (short)x;
-                    DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1] = (short)y;
+                    DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0] = x;
+                    DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1] = y;
                 }
             }
-            DAT_GameState::instance.mapAndTime.rabbitSpawnXY[0][0] = (short)x;
-            DAT_GameState::instance.mapAndTime.rabbitSpawnXY[0][1] = (short)y;
+            DAT_GameState::instance.mapAndTime.rabbitSpawnXY[0][0] = x;
+            DAT_GameState::instance.mapAndTime.rabbitSpawnXY[0][1] = y;
         }
 
     }

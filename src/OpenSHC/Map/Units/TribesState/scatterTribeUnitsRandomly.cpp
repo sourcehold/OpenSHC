@@ -48,8 +48,8 @@ namespace Map {
                         = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_targetTile];
                     int const _rowStartTile
                         = DAT_ViewportRenderState::instance.translationMatrix[_targetTileY].addXgetTile;
-                    DAT_UnitsState::instance.units[unitID].targetY = (short)_targetTileY;
-                    DAT_UnitsState::instance.units[unitID].targetX = (short)_targetTile - (short)_rowStartTile;
+                    DAT_UnitsState::instance.units[unitID].targetY = _targetTileY;
+                    DAT_UnitsState::instance.units[unitID].targetX = _targetTile - _rowStartTile;
                     DAT_UnitsState::instance.units[unitID].state.generic = 209;
                 }
             }
