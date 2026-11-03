@@ -8,6 +8,7 @@
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -29,6 +30,8 @@
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004205B0
     void Buildings::UpdateShieldBuilding()
@@ -133,9 +136,11 @@ namespace Map {
             DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
             DAT_UnitsState::instance.units[unitID].y,
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .campground.xEntry,
+                .buildingEntryInfos[BEIE_CAMPGROUND]
+                .xEntry,
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .campground.yEntry);
+                .buildingEntryInfos[BEIE_CAMPGROUND]
+                .yEntry);
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray
                     [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner]
                 == -1

@@ -9,6 +9,7 @@
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -31,6 +32,9 @@
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+    using OpenSHC::Game::Player::Enums::BEIE_KEEP;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0041F7C0
     void Buildings::UpdateTrebutchetBuilding()
@@ -137,15 +141,17 @@ namespace Map {
             DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
             DAT_UnitsState::instance.units[unitID].y,
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .campground.xEntry,
+                .buildingEntryInfos[BEIE_CAMPGROUND]
+                .xEntry,
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .campground.yEntry);
+                .buildingEntryInfos[BEIE_CAMPGROUND]
+                .yEntry);
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] == -1
             && DAT_GameSynchronyState::instance.currentAIArray[owner] == 0) {
             DAT_UnitsState::instance.units[unitID].facingDirection = DAT_DirectionAlgorithmState::instance.orientation;
         } else {
             DAT_UnitsState::instance.units[unitID].facingDirection = 0;
-            if (DAT_GameState::instance.playerDataArray[owner].keep.id == 0) {
+            if (DAT_GameState::instance.playerDataArray[owner].buildingEntryInfos[BEIE_KEEP].id == 0) {
                 DAT_GameState::instance.playerDataArray[owner].counter += 2;
             }
         }
