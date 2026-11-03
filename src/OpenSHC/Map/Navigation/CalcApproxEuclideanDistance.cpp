@@ -4,7 +4,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0049B8C0
-    int __cdecl Navigation::calcApproxEuclideanDistance(int x1, int x2, int y1, int y2)
+    int __cdecl Navigation::CalcApproxEuclideanDistance(int x1, int x2, int y1, int y2)
     {
         int dx;
         if (x1 > x2) {

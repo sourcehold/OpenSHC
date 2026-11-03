@@ -1,7 +1,7 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
-#include "OpenSHC/Globals/DAT_TroopValueDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_RenderingDefinedData.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -20,10 +20,10 @@ namespace Map {
         for (int i = 0; i < 25; i++) {
             DAT_GameState::instance.mapAndTime.copyOfBuyAndSalesPrice[i].buyPrice
                 = DAT_GameState::instance.mapAndTime.copyOfBuyAndSalesPrice[i + 25].buyPrice
-                = DAT_TroopValueDefinedData::instance.BuyPricePerResource[i];
+                = DAT_RenderingDefinedData::instance.BuyPricePerResource[i];
             DAT_GameState::instance.mapAndTime.copyOfBuyAndSalesPrice[i].salesPrice
                 = DAT_GameState::instance.mapAndTime.copyOfBuyAndSalesPrice[i + 25].salesPrice
-                = DAT_TroopValueDefinedData::instance.SalesPricePerResource[i];
+                = DAT_RenderingDefinedData::instance.SalesPricePerResource[i];
             DAT_GameState::instance.mapAndTime.unknownResouceFlagArray1[i] = 0;
             DAT_GameState::instance.mapAndTime.unknownResourceFlagArray2[i] = 0;
             DAT_GameState::instance.mapAndTime.isResourceTradeable[i] = this->SEC_Section1065.tradeabilityArray[i];
