@@ -107,7 +107,7 @@ namespace Meta {
 
     void __cdecl Destructor_MenuModal_OverlaySlider();
 
-    void __cdecl Destructor_MenuModal_UnusedWinCondition();
+    void __cdecl Destructor_MenuModal_SliderHeightHolderUnk();
 
     void __cdecl Destructor_MenuModal_DebugDataCurrentPlayerData();
 

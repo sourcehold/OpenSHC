@@ -646,8 +646,8 @@ namespace Global {
         Constructor_MenuModal_OverlaySlider;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059B160,
-            &OpenSHC::Global::Init::Constructor_MenuModal_UnusedWinCondition)
-        Constructor_MenuModal_UnusedWinCondition;
+            &OpenSHC::Global::Init::Constructor_MenuModal_SliderHeightHolderUnk)
+        Constructor_MenuModal_SliderHeightHolderUnk;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059B1A0,
             &OpenSHC::Global::Init::Constructor_MenuModal_DebugDataCurrentPlayerData)
