@@ -664,7 +664,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401690 = 0x00401690,
-    // label: somethingWithSeparateAreas1
+    // label: findNearestDiseaseCloudForHealer
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004016E0 = 0x004016E0,
@@ -96398,7 +96398,7 @@ enum {
     // location:
     // type: /int[116000]
     SHC_3BB0A8C1_0x00D0BA10 = 0x00D0BA10,
-    // label: GMTotalPicturesProcessed
+    // label: GMFirstPictureIndex
     // location:
     // type: /int[240]
     SHC_3BB0A8C1_0x00D7CE90 = 0x00D7CE90,
