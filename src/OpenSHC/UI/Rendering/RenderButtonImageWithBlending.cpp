@@ -22,12 +22,12 @@ namespace UI {
     void Rendering::RenderButtonImageWithBlending()
     {
         if (DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance].alphaGmIdUnk_0xc
-            != (GmID)0) {
+            != 0) {
             if (DAT_ButtonBlendStrength::instance != 32) {
                 ButtonGmData* const buttonGmData
                     = &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                    DAT_TextureRenderCoreObject::ptr)((OpenSHC::IO::Graphics::GmID)buttonGmData->gmId_0x0,
+                    DAT_TextureRenderCoreObject::ptr)((GmID)buttonGmData->gmId_0x0,
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::ButtonGmData_Func::getPictureNumberInGm, buttonGmData)(
                         DAT_ButtonCurrentlyInteracting::instance),
                     DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonBlendStrength::instance);

@@ -4,9 +4,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -14,11 +12,7 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eTextSections;
     using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0043CC30
     void Rendering::RenderPeasantMenu_CurrentActionUnk(int unitID, int xPos, int yPos)

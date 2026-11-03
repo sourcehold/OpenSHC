@@ -14,8 +14,10 @@ namespace UI {
             RECT destinationRect;
             sourceRect.left = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
             sourceRect.top = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
+            // The original reads these fields through the global instance, not through this.
             sourceRect.right = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX
                 + DAT_WindowAndDirectDraw::instance.resolutionX;
+            // 128 is the height of the bottom panel
             sourceRect.bottom = DAT_WindowAndDirectDraw::instance.resolutionY - 128
                 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
             destinationRect.bottom = DAT_WindowAndDirectDraw::instance.resolutionY - 128;

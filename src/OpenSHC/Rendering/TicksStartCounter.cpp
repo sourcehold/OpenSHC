@@ -1,7 +1,5 @@
 #include "../Rendering.func.hpp"
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 #include "OpenSHC/Globals/DAT_HasNoQueryPerformanceFrequency.hpp"
 #include "OpenSHC/Globals/DAT_PerformanceCounterFrequency.hpp"
 #include "OpenSHC/Globals/FLOAT_Between1And5.hpp"
@@ -10,8 +8,6 @@
 #include "OpenSHC/Globals/TIME_QueryMargin.hpp"
 
 namespace OpenSHC {
-
-using WindowsHelper::Enums::BOOLEnum;
 
 // FUNCTION: STRONGHOLDCRUSADER 0x0046CF10
 void Rendering::TicksStartCounter()

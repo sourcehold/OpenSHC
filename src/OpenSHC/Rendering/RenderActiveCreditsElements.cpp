@@ -46,14 +46,14 @@ void Rendering::RenderActiveCreditsElements()
         }
     }
 
-    for (int layer = 0; layer < 8; layer++) {
-        for (int i = 0; i < 24; i++) {
+    for (int layer = 0; layer < 8; ++layer) {
+        for (int i = 0; i < 24; ++i) {
             CreditsRelatedStructure& element = DAT_ARRAY_00ec0348::instance[i];
             if (element.isValid == 0 || element.field7_0x1c != layer) {
                 continue;
             }
 
-            // isValid doubles as the element type: 1 image, 2 text, 3 hover image, 4 bordered box.
+            // Element types: 1 image, 2 text, 3 hover image, 4 bordered box.
             // Images fade at twice the speed of the other types.
             if (element.isValid == 1) {
                 int gfxIndex = element.xSpace;

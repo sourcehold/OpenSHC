@@ -5,8 +5,6 @@
 #include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
-#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -23,7 +21,7 @@ namespace UI {
             if (this->pointerToIDirectDrawInterface == NULL) {
                 // Both creates are checked: the emulation-only branch jumps to the same result test.
                 HRESULT result;
-                if (MACRO_CALL(OpenSHC::Global_Func::TestOSVersion)() != 0) {
+                if (MACRO_CALL(OpenSHC::Global_Func::TestOSVersion)()) {
                     result
                         = DirectDrawCreate((GUID*)DDCREATE_EMULATIONONLY, &this->pointerToIDirectDrawInterface, NULL);
                     this->NOTSelfBufferOrWindowMode_0xf8 = TRUE;
@@ -47,11 +45,10 @@ namespace UI {
             this->pointerToIDirectDrawInterface->EnumDisplayModes(
                 0, NULL, NULL, MACRO_CALL(OpenSHC::Synchrony_Func::EnumDisplayModesCallback));
 
-            // resolutionSupported_0x68 is indexed by ScreenResolutionEnum.
             if (this->currentGameResolution < 0
                 || (&this->resolutionSupported_0x68.noneUnk)[this->currentGameResolution] == 0) {
                 this->currentGameResolution = OpenSHC::Rendering::SRE_neg1;
-                for (int resolution = OpenSHC::Rendering::SRE_1920x1200; resolution > 0; resolution--) {
+                for (int resolution = OpenSHC::Rendering::SRE_1920x1200; resolution > 0; --resolution) {
                     if ((&this->resolutionSupported_0x68.noneUnk)[resolution] != 0) {
                         this->currentGameResolution = resolution;
                         break;

@@ -18,9 +18,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00463A90
         void AlphaAndButtonSurface::renderBasicButton(int reverseOrBlendStrength, RenderTarget renderSurface)
@@ -28,7 +26,7 @@ namespace UI {
             int x = DAT_ButtonX::instance;
             int const y = DAT_ButtonY::instance;
             // -1 asks for a plain button of any width, tiled from 10 pixel wide images.
-            BOOL plainTiled = FALSE;
+            BOOLEnum plainTiled = FALSE;
             if (reverseOrBlendStrength == 32) {
                 return;
             }
@@ -69,7 +67,7 @@ namespace UI {
                 }
                 width -= 10;
                 x += 10;
-                image += 1;
+                ++image;
                 for (; width > 10; width -= 10) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                         DAT_TextureRenderCoreObject::ptr)(
@@ -81,7 +79,7 @@ namespace UI {
                     }
                     x += 10;
                 }
-                image += 1;
+                ++image;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                     DAT_TextureRenderCoreObject::ptr)(
                     OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, image, x, y, blendStrength);

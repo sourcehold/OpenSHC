@@ -1,7 +1,6 @@
 #include "../AlphaAndButtonSurface.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/IO/Graphics/GmID.hpp"
 
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/DAT_UIButtonDefinedData.hpp"
@@ -11,18 +10,16 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::IO::Graphics::GmID;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00462FF0
         void AlphaAndButtonSurface::prepareButtonAndAlphaSurface()
         {
             // The surface has to hold the largest image of any button state, and at least 350x350.
             int maxWidth = 0;
             int maxHeight = 0;
-            for (int button = 0; button < 650; button++) {
+            for (int button = 0; button < 650; ++button) {
                 int const stateCount
                     = DAT_UIButtonDefinedData::instance.ButtonGmDataArray[button].numOfAdditionalIconStates_0x8 + 1;
-                for (int state = 0; state < stateCount; state++) {
+                for (int state = 0; state < stateCount; ++state) {
                     GmIDInt const gmID = DAT_UIButtonDefinedData::instance.ButtonGmDataArray[button].gmId_0x0;
                     if (gmID == 0) {
                         continue;
@@ -50,7 +47,7 @@ namespace UI {
             }
             this->dim2_intMinimal350_2 = maxHeight;
             this->dim1_intMinimal350_1 = maxWidth;
-            this->surfacePtr = (ushort*)MACRO_CALL(OpenSHC::OS_Func::_malloc)(maxHeight * maxWidth * 2);
+            this->surfacePtr = (ushort*)MACRO_CALL(OpenSHC::OS_Func::_malloc)(maxHeight * maxWidth * sizeof(ushort));
         }
 
     }

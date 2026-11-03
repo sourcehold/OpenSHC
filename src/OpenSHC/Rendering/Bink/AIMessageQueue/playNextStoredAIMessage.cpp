@@ -3,9 +3,7 @@
 
 #include "../AIMessageQueue.func.hpp"
 
-#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -31,7 +29,7 @@ namespace Rendering {
             this->messagePlaying_0x0 = FALSE;
             if (this->storedMessages_0x924) {
                 this->currentMessageUnknownValue_0x4 = this->savedMessageUnknownValue_0x104[0];
-                // Two identical arms: the original keeps two blocks here (the flag says whether the text is wide).
+                // Two identical arms: the original keeps two blocks here.
                 if (!this->savedMessageUnknownValue_0x104[0]) {
                     this->currentMessageText_0x8 = this->savedMessageTextPtr_0xdc[0];
                     this->currentMessageUnknownValue2_0xd4 = this->savedMessageUnknownValue2_0x8fc[0];

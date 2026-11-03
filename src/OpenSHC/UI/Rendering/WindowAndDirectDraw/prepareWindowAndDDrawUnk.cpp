@@ -1,8 +1,6 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
-#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -10,9 +8,6 @@
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
-
-        using OpenSHC::Rendering::ScreenResolutionEnum;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046FFB0
         void WindowAndDirectDraw::prepareWindowAndDDrawUnk()
@@ -41,6 +36,7 @@ namespace UI {
                     = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::initializeDirectDraw, this)();
             }
             this->unk_resetViewportRelated = 2;
+            // The original writes this field through the global instance, not through this.
             DAT_WindowAndDirectDraw::instance.pendingMenuRedraw = 1;
             MACRO_CALL_MEMBER(
                 OpenSHC::Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(0);

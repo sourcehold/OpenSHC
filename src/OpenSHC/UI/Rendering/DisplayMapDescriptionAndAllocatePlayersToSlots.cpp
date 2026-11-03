@@ -12,8 +12,6 @@
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_00b95b74.hpp"
@@ -29,12 +27,6 @@
 
 namespace OpenSHC {
 namespace UI {
-
-    using OpenSHC::Commands::GameCommandType;
-    using OpenSHC::DE::SHCDE::eTextSections;
-    using OpenSHC::IO::FileResourceType;
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004410D0
     void Rendering::DisplayMapDescriptionAndAllocatePlayersToSlots()

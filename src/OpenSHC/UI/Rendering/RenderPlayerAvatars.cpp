@@ -10,29 +10,27 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eGM;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D8AE0
-    void Rendering::RenderPlayerAvatars(int imageID, int x, int y)
+    void Rendering::RenderPlayerAvatars(int playerID, int x, int y)
     {
         int aiCharacter = 0;
-        if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[imageID] == -1) {
-            aiCharacter = DAT_GameSynchronyState::instance.currentAIArray[imageID];
+        if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
+            aiCharacter = DAT_GameSynchronyState::instance.currentAIArray[playerID];
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-            OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, imageID + 546, x, y);
+            OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, playerID + 546, x, y);
         if (aiCharacter == 0) {
-            if (DAT_GameCore::instance.lordIcons[imageID] == 0) {
+            if (DAT_GameCore::instance.lordIcons[playerID] == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 539, x, y);
-            } else if (DAT_GameCore::instance.lordIcons[imageID] == 1) {
+            } else if (DAT_GameCore::instance.lordIcons[playerID] == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 540, x, y);
-            } else if (DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[imageID + 19] > 0) {
+            } else if (DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[playerID + 19] > 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 541, x, y);
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawBitmapFace,
-                    DAT_TextureRenderCoreObject::ptr)(imageID + 19, x + 4, y + 4);
+                    DAT_TextureRenderCoreObject::ptr)(playerID + 19, x + 4, y + 4);
             }
         } else {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,

@@ -1,14 +1,10 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/WindowsDeviceCap.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
-
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::WindowsHelper::Enums::WindowsDeviceCap;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00467B40
         void WindowAndDirectDraw::getDeviceCapsAndSetup()

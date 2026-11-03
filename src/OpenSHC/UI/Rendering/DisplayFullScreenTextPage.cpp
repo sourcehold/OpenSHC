@@ -15,8 +15,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Rendering::Enums::RenderTarget;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004DB0D0
     void Rendering::DisplayFullScreenTextPage(int stringIndex)
     {

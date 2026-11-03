@@ -3,14 +3,9 @@
 
 #include "../AIMessageQueue.func.hpp"
 
-#include "OpenSHC/Rendering.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 namespace OpenSHC {
 namespace Rendering {
     namespace Bink {
-
-        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004BE8A0
         void AIMessageQueue::prepareSFXandVFX(

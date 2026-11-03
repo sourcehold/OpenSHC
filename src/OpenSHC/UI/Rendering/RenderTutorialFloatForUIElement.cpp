@@ -14,10 +14,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-    using OpenSHC::UI::Enums::MenuViewType;
-
     // Shows the animated tutorial arrow next to one UI element, unless the current menu or state rules it out.
     // FUNCTION: STRONGHOLDCRUSADER 0x004BC910
     void Rendering::RenderTutorialFloatForUIElement(int uiElementID)
@@ -26,8 +22,8 @@ namespace UI {
             || uiElementID == 8 || uiElementID == 10 || uiElementID == 11 || uiElementID == 12) {
             switch (uiElementID) {
             case 2:
-                if ((DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_KEEP1)
-                    && (DAT_00df5560::instance == 0)) {
+                if (DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_KEEP1
+                    && DAT_00df5560::instance == 0) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(120, 515);
                 }
                 break;
@@ -39,6 +35,7 @@ namespace UI {
                 }
                 break;
             case 8:
+                // shown until the player has picked rations setting 4
                 if (DAT_00df5558::instance == 0
                     && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .rationsSetting
@@ -49,16 +46,16 @@ namespace UI {
                 }
                 break;
             case 10:
-                if ((DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                // shown until the player has picked taxes setting 7
+                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .taxesSetting
-                        != 7)
-                    && (DAT_GameCore::instance.activeMenuTab.tabType
-                        == OpenSHC::UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX)) {
+                        != 7
+                    && DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(442, 535);
                 }
                 break;
             case 11:
-                if ((DAT_00df5558::instance == 1) && (DAT_00df5560::instance == 0)) {
+                if (DAT_00df5558::instance == 1 && DAT_00df5560::instance == 0) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(735, 528);
                 }
                 break;
@@ -69,7 +66,7 @@ namespace UI {
                 break;
             case 16:
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(120, 550);
-                return;
+                break;
             case 17:
                 if (DAT_00df5560::instance == 0) {
                     if (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_QUARRY) {
@@ -90,7 +87,7 @@ namespace UI {
                 break;
             case 23:
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(727, 570);
-                return;
+                break;
             case 24:
                 if (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_HOPFARM) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(140, 582);

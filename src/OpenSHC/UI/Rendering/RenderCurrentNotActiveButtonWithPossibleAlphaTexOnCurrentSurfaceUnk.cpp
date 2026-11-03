@@ -3,7 +3,6 @@
 #include "OpenSHC/UI/Rendering/ButtonGmData.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonBlendStrength.hpp"
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
@@ -19,7 +18,6 @@ namespace OpenSHC {
 namespace UI {
 
     using IO::Graphics::GmID;
-    using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004640D0
     void Rendering::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk()
@@ -35,10 +33,10 @@ namespace UI {
             ++imageID;
         }
         if (DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance].alphaGmIdUnk_0xc
-            != (GmID)0) {
+            != 0) {
             if (DAT_ButtonBlendStrength::instance != 32) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                    DAT_TextureRenderCoreObject::ptr)((IO::Graphics::GmID)buttonGmData->gmId_0x0, imageID + stateOffset,
+                    DAT_TextureRenderCoreObject::ptr)((GmID)buttonGmData->gmId_0x0, imageID + stateOffset,
                     DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonBlendStrength::instance);
             }
             DAT_CurrentButtonPictureInGm::instance

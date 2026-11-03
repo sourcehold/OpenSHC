@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Rendering::ColorMode;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0044E510
     void Rendering::InitBlendFilterArraysUnk()
     {
@@ -31,8 +29,8 @@ namespace UI {
                     DAT_BlendFilterArrays::instance[level][value][0] = scaled;
                     DAT_BlendFilterArrays::instance[level][value][2] = scaled << 11;
                     // green has 6 bits, so two entries per step
-                    DAT_BlendFilterArrays::instance[level][value * 2][1] = value * level * 4 / 64 << 5;
-                    DAT_BlendFilterArrays::instance[level][value * 2 + 1][1] = (value * level * 4 + level) / 64 << 5;
+                    DAT_BlendFilterArrays::instance[level][value * 2][1] = (value * level * 4 / 64) << 5;
+                    DAT_BlendFilterArrays::instance[level][value * 2 + 1][1] = ((value * level * 4 + level) / 64) << 5;
                 }
             }
         }

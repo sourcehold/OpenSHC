@@ -1,15 +1,12 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
 #include "OpenSHC/Rendering/WindowInformation.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_WindowInformation.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
-
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046F750
         void WindowAndDirectDraw::setWindowStyleRectAndPosition()

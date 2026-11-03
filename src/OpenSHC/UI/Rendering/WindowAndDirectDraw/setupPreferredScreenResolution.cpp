@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
-#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
@@ -10,8 +9,6 @@
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
-
-        using OpenSHC::Rendering::ScreenResolutionEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046F880
         void WindowAndDirectDraw::setupPreferredScreenResolution()
@@ -77,7 +74,7 @@ namespace UI {
             // 1366x768 seems to have a different handling. It uses the x-res 1368 * 2. No wonder 1366x768 once broke my
             // display engine change. Interesting though, ignoring this handling fixed my issue. -TheRedDaemon
             if (this->currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
-                this->byteSizeOfOneHorizontalLine = 2736;
+                this->byteSizeOfOneHorizontalLine = 1368 * 2;
             }
             this->gameResolutionY_3_0x44 = this->gameResolutionY;
             this->byteSizeofScreenResolution = this->byteSizeOfOneHorizontalLine * this->gameResolutionY;

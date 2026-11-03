@@ -1,12 +1,8 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
-
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00467E50
         void WindowAndDirectDraw::adjustForNotExclusiveFullscreenUnk(LPRECT destinationRect, LPRECT sourceRect)
