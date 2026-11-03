@@ -279,7 +279,7 @@ namespace IO {
 
             if (_loadAndSaveBarFunc) {
                 (*_loadAndSaveBarFunc)(
-                    (this->currentlyReadFileSectionIndex * 950) / (this->directory.sectionCount + -1) + 50);
+                    (this->currentlyReadFileSectionIndex * 950) / (this->directory.sectionCount - 1) + 50);
             }
             ++this->currentlyReadFileSectionIndex;
         }

@@ -42,7 +42,7 @@ namespace Text {
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                         x1, y2, x2, y2, COL_GREYISH_YELLOW::instance.shortValue);
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                        x1, y2 + -1, x2, y2 + -1, COL_GREYISH_YELLOW::instance.shortValue);
+                        x1, y2 - 1, x2, y2 - 1, COL_GREYISH_YELLOW::instance.shortValue);
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                         x1, y1, x1, y2, COL_GREYISH_YELLOW::instance.shortValue);
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
@@ -50,7 +50,7 @@ namespace Text {
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                         x2, y1, x2, y2, COL_GREYISH_YELLOW::instance.shortValue);
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                        x2 + -1, y1, x2 + -1, y2, COL_GREYISH_YELLOW::instance.shortValue);
+                        x2 - 1, y1, x2 - 1, y2, COL_GREYISH_YELLOW::instance.shortValue);
                 }
             }
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,

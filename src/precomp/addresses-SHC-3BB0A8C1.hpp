@@ -93915,48 +93915,61 @@ enum {
     SHC_3BB0A8C1_0x00617D20 = 0x00617D20,
     // label: DAT_StockpileMenuResourceTypes
     // location:
+    // type: OpenSHC/Game/Resources/ResourceTypeInt[8]
     SHC_3BB0A8C1_0x00617ED0 = 0x00617ED0,
     // label: DAT_StockpileMenuResourceIcons
     // location:
+    // type: /int[8]
     SHC_3BB0A8C1_0x00617EF0 = 0x00617EF0,
     // label: DAT_StockpileIconsPositionNudges
     // location:
+    // type: OpenSHC/UI/Position[8]
     SHC_3BB0A8C1_0x00617F10 = 0x00617F10,
     // label: DAT_ArmoryMenuResourceTypes
     // location:
+    // type: /int[8]
     SHC_3BB0A8C1_0x00617F50 = 0x00617F50,
     // label: DAT_ArmoryMenuResourceIcons
     // location:
+    // type: /int[8]
     SHC_3BB0A8C1_0x00617F70 = 0x00617F70,
     // label: DAT_ArmoryIconsPositionNudges
     // location:
+    // type: OpenSHC/UI/Position[8]
     SHC_3BB0A8C1_0x00617F90 = 0x00617F90,
     // label: DAT_MarketStonksOrder
     // location:
+    // type: /int[20]
     SHC_3BB0A8C1_0x00617FD0 = 0x00617FD0,
     // label: DAT_FoodTypes
     // location:
+    // type: OpenSHC/Game/Resources/ResourceTypeInt[8]
     SHC_3BB0A8C1_0x00618020 = 0x00618020,
     // label: DAT_RawResourceTypes
     // location:
+    // type: /int[4]
     SHC_3BB0A8C1_0x00618040 = 0x00618040,
     // label: DAT_ARRAY_00618050
     // location:
+    // type: /int[8]
     SHC_3BB0A8C1_0x00618050 = 0x00618050,
     // label: DAT_ARRAY_00618070
     // location:
+    // type: OpenSHC/UI/Position[25]
     SHC_3BB0A8C1_0x00618070 = 0x00618070,
     // label: DAT_PopularityMessageLayout
     // location:
+    // type: /int[7][3]
     SHC_3BB0A8C1_0x00618138 = 0x00618138,
     // label: DAT_ARRAY_0061818c
     // location:
+    // type: /int[21]
     SHC_3BB0A8C1_0x0061818C = 0x0061818C,
     // label: DAT_UnitTypeGroups
     // location:
+    // type: OpenSHC/Map/Units/UnitTypeInt[3][9]
     SHC_3BB0A8C1_0x006181E0 = 0x006181E0,
-    // label: DAT_0061824c
-    // location:
+    // type: /int
     SHC_3BB0A8C1_0x0061824C = 0x0061824C,
     // type: /pointer
     SHC_3BB0A8C1_0x00618250 = 0x00618250,

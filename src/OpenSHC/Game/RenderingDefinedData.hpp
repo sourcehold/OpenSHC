@@ -8,31 +8,27 @@
 
 #pragma once
 
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Game/Skirmish/StartingResourceStructureInt.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/UI/MenuIDMenuElementAddressPair.hpp"
 #include "OpenSHC/UI/MenuItem.hpp"
-#include "OpenSHC/UI/Position.hpp"
 #include "OpenSHC/UI/TextMessageBLLookupStruct.hpp"
 #include "OpenSHC/UI/UC.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
-    using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Game::Skirmish::StartingResourceStructureInt;
     using OpenSHC::Map::Units::UnitTypeInt;
     using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::UI::MenuIDMenuElementAddressPair;
     using OpenSHC::UI::MenuItem;
-    using OpenSHC::UI::Position;
     using OpenSHC::UI::TextMessageBLLookupStruct;
     using OpenSHC::UI::UC;
 
 #pragma pack(push, 1)
-    // SIZE: 0x000557E4
+    // SIZE: 0x00055464
     typedef struct RenderingDefinedData {
 
         int StartGold[3]; // 0x00000000 length: 12

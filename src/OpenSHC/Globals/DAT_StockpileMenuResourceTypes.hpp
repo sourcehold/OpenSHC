@@ -11,7 +11,7 @@
 #include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00617ED0
-// StructResolver::Instance<int [8],6389456>::instance
+// StructResolver::Instance<int,6389456>::instance
 
 namespace OpenSHC {
 

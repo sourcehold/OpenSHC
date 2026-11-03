@@ -37,8 +37,8 @@ namespace IO {
             }
         }
         if (index > 2) {
-            if (_configPathBufferUnk[index + -1] == '\\') {
-                _configPathBufferUnk[index + -1] = '\0';
+            if (_configPathBufferUnk[index - 1] == '\\') {
+                _configPathBufferUnk[index - 1] = '\0';
             }
             this->configPathLoadedUnk_0x7da = true;
             strcpy(this->configPathUnk_0x7db, _configPathBufferUnk);
