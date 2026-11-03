@@ -21245,7 +21245,7 @@ SHC_3BB0A8C1_0x0046FF50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046FFB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00470040 | 56.7% | Zero not kept in ebp; param_1 takes the register instead
+SHC_3BB0A8C1_0x00470040 | 57.2% | Zero not kept in ebp; param_1 takes the register instead
 
 SHC_3BB0A8C1_0x00470610 | 0.0% | Pending
 
@@ -22125,7 +22125,7 @@ SHC_3BB0A8C1_0x00479369 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00479400 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00479540 | 87.1% | Game STL ctor/dtor; reg rotation
+SHC_3BB0A8C1_0x00479540 | 88.2% | Game STL ctor/dtor; reg rotation
 
 SHC_3BB0A8C1_0x00479790 | 0.0% | Pending
 
@@ -23071,7 +23071,7 @@ SHC_3BB0A8C1_0x00487770 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487A30 | 81.2% | Game speed not kept in a register; return-block layout
+SHC_3BB0A8C1_0x00487A30 | 68.3% | this spilled to edi across the proxied computeLatencyAdjustmentFromMatchTimes (81.2% with that callee reimplemented); return-block layout
 
 SHC_3BB0A8C1_0x00487C50 | 0.0% | Pending
 
@@ -35577,7 +35577,7 @@ SHC_3BB0A8C1_0x004D55D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D5780 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D5810 | 58.7% | Frame 8 bytes larger, reg alloc
+SHC_3BB0A8C1_0x004D5810 | 58.8% | Frame 8 bytes larger, reg alloc
 
 SHC_3BB0A8C1_0x004D5990 | 0.0% | Pending
 
