@@ -89,3 +89,6 @@ src/OpenSHC/Map/Buildings/UpdateGoodBuildingMaypole.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingDungeon.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingGallows.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingBurningStake.cpp
+src/OpenSHC/UI/Rendering/ButtonGmData/getPictureNumberInGm.cpp
+src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
+src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
