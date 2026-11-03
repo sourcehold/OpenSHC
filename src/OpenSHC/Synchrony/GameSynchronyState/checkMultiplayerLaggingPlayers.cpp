@@ -31,7 +31,7 @@ namespace Synchrony {
             if (MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                 // Only when every other player in the game has reported in.
                 BOOLEnum allReported = TRUE;
-                for (int player = 0; player < 9; player++) {
+                for (int player = 0; player < 9; ++player) {
                     if (this->currentPlayerFullIDArray[player] != -1
                         && player != DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && this->connectionLagInfoArray[player].checkFor0 == 0) {
@@ -40,7 +40,7 @@ namespace Synchrony {
                 }
                 if (allReported) {
                     DWORD const now = timeGetTime();
-                    for (int player = 0; player < 9; player++) {
+                    for (int player = 0; player < 9; ++player) {
                         if (this->currentPlayerFullIDArray[player] != -1
                             && player != DAT_GameSynchronyState::instance.currentPlayerSlotID
                             && this->connectionLagInfoArray[player].time != 0) {
@@ -74,7 +74,7 @@ namespace Synchrony {
             }
             return;
         }
-        for (int player = 0; player < 9; player++) {
+        for (int player = 0; player < 9; ++player) {
             this->connectionLagInfoArray[player].time = 0;
         }
     }

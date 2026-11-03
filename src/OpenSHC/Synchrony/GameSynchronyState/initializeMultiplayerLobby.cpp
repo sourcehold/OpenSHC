@@ -9,7 +9,7 @@ namespace Synchrony {
     void GameSynchronyState::initializeMultiplayerLobby()
     {
         // the original reads some fields through the global instance rather than this, so they stay that way
-        for (int provider = 0; provider < 10; provider++) {
+        for (int provider = 0; provider < 10; ++provider) {
             DAT_GameSynchronyState::instance.providerNames[provider] = NULL;
             DAT_GameSynchronyState::instance.guids[provider] = NULL;
         }

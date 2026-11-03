@@ -33,7 +33,7 @@ namespace UI {
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 6),
             x + 25, y + 467, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         // an icon and the stock of each of the eight goods
-        for (int good = 0; good < 8; good++) {
+        for (int good = 0; good < 8; ++good) {
             int const iconX = left + good * 52;
             int const amount
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
