@@ -25,7 +25,7 @@ namespace Map {
         int buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateWorkshopProgressSign,
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
             DAT_BuildingsState::ptr)(buildingID, 1);
         OpenSHC::Map::Buildings::Building* bear = &DAT_BuildingsState::instance.buildings[buildingID];
         bear->renderAnimation = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel >= 3;
