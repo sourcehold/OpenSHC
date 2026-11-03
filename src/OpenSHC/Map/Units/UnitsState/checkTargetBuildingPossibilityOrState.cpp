@@ -24,11 +24,11 @@ namespace Map {
                 return TRUE;
             }
             if (DAT_UnitsState::instance.units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
-                return (BOOLEnum)(DAT_BuildingsState::instance
-                                      .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
-                                      .uid
+                return DAT_BuildingsState::instance
+                           .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                           .uid
                     == DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
-                        .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID);
+                           .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID;
             }
             int _shootTargetX = DAT_UnitsState::instance.units[unitID].shootTargetMicroX / 8;
             int _shootTargetY = DAT_UnitsState::instance.units[unitID].shootTargetMicroY / 8;

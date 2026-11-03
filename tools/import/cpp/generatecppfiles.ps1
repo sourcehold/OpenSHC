@@ -9,15 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 
-# Create SARIF ZIP
-Write-Host "Writing 'Stronghold Crusader.exe.sarif' to 'sarif-$SHA.zip'"
 
-7z a `
-    -tzip `
-    -mm=LZMA `
-    -mx=9 `
-    "sarif-$SHA.zip" `
-    "Stronghold Crusader.exe.sarif"
 
 
 

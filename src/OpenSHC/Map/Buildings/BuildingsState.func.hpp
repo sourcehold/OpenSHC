@@ -39,7 +39,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
                 &BuildingsState::getBuildingHeightForBuildingID)
             getBuildingHeightForBuildingID;
 
@@ -635,7 +635,7 @@ namespace Map {
                 &BuildingsState::buildingIsAccessible)
             buildingIsAccessible;
 
-            MACRO_FUNCTION_RESOLVER(char (BuildingsState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00421BE0, &BuildingsState::resolveBuildingEntryAccessibility)
             resolveBuildingEntryAccessibility;
 
