@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::GameCommandType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00537160
         void UnitsState::queueDisbandAndAttackCommand4Params(
             undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)
