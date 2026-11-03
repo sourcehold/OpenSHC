@@ -2,7 +2,7 @@
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -46,8 +46,8 @@ namespace Map {
                     frame = 0;
                 }
 
-                int gfx = GMTotalPicturesProcessed::instance[14]
-                    + (DAT_TileMapState::instance.RandomLayer[tile] & 1) * 9 + 37 + frame;
+                int gfx = GMFirstPictureIndex::instance[14] + (DAT_TileMapState::instance.RandomLayer[tile] & 1) * 9
+                    + 37 + frame;
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft == 0) {
                         continue;

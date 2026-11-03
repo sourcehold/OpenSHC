@@ -1,5 +1,6 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -17,6 +18,8 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0041ADE0
         undefined4 BuildingsState::determineBuildingEntranceFromKeepArea(
             int buildingID, int workerIndexPlus1, BOOLEnum flag)
@@ -30,8 +33,8 @@ namespace Map {
             // otherwise.
             int playerID = this->buildings[buildingID].owner;
             int areaFrom
-                = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+                = (short)DAT_TileMapState::instance.PathConnectionLayer
+                      [DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
             int index;
             int found = 0;
             int heightStep = 16;

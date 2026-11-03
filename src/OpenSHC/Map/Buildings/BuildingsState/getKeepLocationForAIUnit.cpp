@@ -1,6 +1,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -17,6 +18,9 @@ namespace Map {
 
         using OpenSHC::Game::GameMode;
 
+        using OpenSHC::Game::Player::Enums::BEIE_KEEP;
+        using OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D9C0
         BOOLEnum BuildingsState::getKeepLocationForAIUnit(int playerID, int group, int unitID)
         {
@@ -30,7 +34,7 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
-                int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
+                int keepID = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_KEEP].id;
                 if (keepID == 0) {
                     return FALSE;
                 }
@@ -82,7 +86,7 @@ namespace Map {
                 }
             } else {
                 // No rally point, use the parade ground of the mercenary post
-                if (DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id > 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_MERCENARYPOST].id > 0) {
                     if (requestedGroup == 16) {
                         if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[3][0] != 0) {
                             searchOffset = DAT_GameState::instance.playerDataArray[playerID].someCount23;
