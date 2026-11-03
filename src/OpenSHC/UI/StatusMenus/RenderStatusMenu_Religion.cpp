@@ -8,6 +8,7 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00b98448.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -80,8 +81,10 @@ namespace UI {
             effect = 50;
         } else if (blessed <= 74) {
             effect = 100;
+        } else if (blessed <= 94) {
+            effect = 150;
         } else {
-            effect = blessed <= 94 ? 150 : 200;
+            effect = 200;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
             DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xf0 + x, y + 0x52, effect, TRUE);
@@ -109,7 +112,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 nextLevel, x + 0xe1, y + 0x68, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "%", x + 0xe2, y + 0x68, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+                s_percentage_005a2770, x + 0xe2, y + 0x68, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
         } else {
             // "Max bonus achieved."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
