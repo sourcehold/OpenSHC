@@ -271,7 +271,7 @@ namespace Map {
 
             void respawnDeer();
 
-            void spawnWildlifeOrMercAtAvailableSlot();
+            void spawnRabbitAtFirstFreeSpawnPoint();
 
             void upgradeMapTribesState(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);

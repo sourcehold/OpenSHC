@@ -53123,7 +53123,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005261B0 = 0x005261B0,
-    // label: spawnWildlifeOrMercAtAvailableSlot
+    // label: spawnRabbitAtFirstFreeSpawnPoint
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005262A0 = 0x005262A0,
@@ -84176,9 +84176,7 @@ enum {
     SHC_3BB0A8C1_0x005A5314 = 0x005A5314,
     // type: /string
     SHC_3BB0A8C1_0x005A5328 = 0x005A5328,
-    // label: DAT_EmptyStr
-    // location:
-    // type: /char
+    // type: /string
     SHC_3BB0A8C1_0x005A5339 = 0x005A5339,
     // type: /undefined1
     SHC_3BB0A8C1_0x005A533A = 0x005A533A,
@@ -95460,7 +95458,9 @@ enum {
     SHC_3BB0A8C1_0x00B960EC = 0x00B960EC,
     // type: /int
     SHC_3BB0A8C1_0x00B960F0 = 0x00B960F0,
-    // type: /undefined4
+    // label: DAT_00b960f4
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B960F4 = 0x00B960F4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960F8 = 0x00B960F8,
@@ -97317,7 +97317,9 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0E3C = 0x00EB0E3C,
-    // type: /undefined4
+    // label: DAT_00eb0e40
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00EB0E40 = 0x00EB0E40,
     // type: /int
     SHC_3BB0A8C1_0x00EB0E44 = 0x00EB0E44,
@@ -97588,11 +97590,11 @@ enum {
     SHC_3BB0A8C1_0x00ED31AC = 0x00ED31AC,
     // label: DAT_ButtonW
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31B0 = 0x00ED31B0,
     // label: DAT_ButtonH
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31B4 = 0x00ED31B4,
     // label: DAT_ButtonCurrentlyInteracting
     // location:
