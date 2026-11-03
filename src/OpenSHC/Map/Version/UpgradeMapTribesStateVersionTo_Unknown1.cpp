@@ -21,7 +21,7 @@ namespace Map {
                     DAT_TribesState::instance.tribes[tribeID].herdMaxSize
                         = DAT_TribesState::instance.tribes[tribeID].size * 2;
                 }
-                DAT_TribesState::instance.tribes[tribeID].field138_0x284 = 0;
+                DAT_TribesState::instance.tribes[tribeID].field134_0x284 = 0;
             }
         }
     }
