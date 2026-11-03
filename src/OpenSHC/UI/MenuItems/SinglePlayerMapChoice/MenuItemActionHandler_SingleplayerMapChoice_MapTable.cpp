@@ -1,0 +1,174 @@
+// disable deprecation warnings for strcpy and strcat
+#pragma warning(disable : 4996)
+
+#include "../SinglePlayerMapChoice.func.hpp"
+
+#include "OpenSHC/IO/FilePackager.func.hpp"
+#include "OpenSHC/IO/ResourceManager.func.hpp"
+#include "OpenSHC/Text/FontSizeClass.func.hpp"
+#include "OpenSHC/Text/TextManager.func.hpp"
+#include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-macros.hpp"
+
+#include "OpenSHC/Globals/DAT_00b95b74.hpp"
+#include "OpenSHC/Globals/DAT_00b960f4.hpp"
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_MapDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_MapMissionType.hpp"
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+#include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
+#include "OpenSHC/Globals/DAT_MouseState.hpp"
+#include "OpenSHC/Globals/DAT_ResourceManager.hpp"
+#include "OpenSHC/Globals/DAT_SH1_SiegeAdvancedMode.hpp"
+#include "OpenSHC/Globals/DAT_SiegeInformationArray.hpp"
+#include "OpenSHC/Globals/DAT_SiegeRemainingPoints.hpp"
+#include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
+#include "OpenSHC/Globals/FilePackagerObj.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuItems {
+
+        using OpenSHC::Rendering::Colors::BGR24;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00442C30
+        void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
+        {
+            int* piVar4;
+            char* pcVar5;
+            int iVar6;
+            int yPos;
+            int maxWidth;
+            BGR24 color;
+            int blendStrength;
+            int modeUnk;
+            char fileName[1008];
+            if (DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber
+                <= DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1)
+                goto LAB_00442f24;
+            DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = param_1;
+            DWORD _currentTime = timeGetTime();
+            if (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
+                        + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
+                    == DAT_MenuTextInputState::instance.lastClickedListIndex
+                && (int)(_currentTime - DAT_MenuTextInputState::instance.lastListClickTime) < 500) {
+                DAT_MouseState::instance.waitCursorToggle = 1;
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::SetCursorDependingOnProgramState)();
+                MACRO_CALL(OpenSHC::UI::MenuItems::SinglePlayerMapChoice_Func::
+                        MenuItemActionHandler_SingleplayerMapChoice_ButtonsAndHands)(65);
+            }
+            if (DAT_MouseState::instance.leftClickStart != 0) {
+                DAT_MenuTextInputState::instance.lastClickedListIndex
+                    = DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
+                    + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset;
+                DAT_MenuTextInputState::instance.lastListClickTime = _currentTime;
+            }
+            strcpy(fileName,
+                MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
+                    DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
+                        .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
+                            + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset - 1]));
+            // ".map"
+            strcat(fileName, S__MAP_005A2294);
+            MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
+                OpenSHC::IO::FRT_MAPS, fileName);
+            MACRO_CALL_MEMBER(OpenSHC::IO::FilePackager_Func::readMapHeader, FilePackagerObj::ptr)(TRUE);
+            DAT_00b95b74::instance = 0;
+            DAT_00b960f4::instance = 0;
+            if (DAT_GameCore::instance.mapDescUseStringTable == 0) {
+                modeUnk = 1;
+                blendStrength = 0;
+                color = 0;
+                maxWidth = 413;
+                yPos = 0;
+                iVar6 = 0;
+                pcVar5 = DAT_GameCore::instance.mapDescription;
+            LAB_00442d94:
+                DAT_00b95b74::instance = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
+                    &DAT_TextManagerObject::instance.fontSizeClassArray[19])(
+                    pcVar5, iVar6, yPos, maxWidth, color, blendStrength, modeUnk);
+            } else if (DAT_GameCore::instance.mapDescUseStringTableIndex != 0) {
+                modeUnk = 1;
+                blendStrength = 0;
+                color = 0;
+                maxWidth = 413;
+                yPos = 0;
+                iVar6 = 0;
+                pcVar5 = MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                    OpenSHC::DE::SHCDE::TEXT_MAP_NAMES, DAT_GameCore::instance.mapDescUseStringTableIndex);
+                goto LAB_00442d94;
+            }
+            if (DAT_MapMissionType::instance == 2) {
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::ClearSiegeInformationArray2)();
+                MACRO_CALL_MEMBER(OpenSHC::IO::FilePackager_Func::readMapHeaderSectionByID, FilePackagerObj::ptr)(
+                    DAT_MapDefinedData::instance.MapSectionAddressArray, 1059);
+                piVar4 = DAT_SiegeInformationArray::instance;
+                if (DAT_GameCore::instance.mapU4Int1_2 != 0) {
+                    do {
+                        if (0 < *piVar4)
+                            goto LAB_00442e64;
+                        ++piVar4;
+                    } while ((int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84);
+                    DAT_SiegeInformationArray::instance[0] = 0;
+                    DAT_SiegeInformationArray::instance[1] = 0;
+                    DAT_SiegeInformationArray::instance[2] = 0;
+                    DAT_SiegeInformationArray::instance[3] = 0;
+                    DAT_SiegeInformationArray::instance[4] = 0;
+                    DAT_SiegeInformationArray::instance[5] = 0;
+                    DAT_SiegeInformationArray::instance[6] = 0;
+                    DAT_SiegeInformationArray::instance[7] = 0;
+                    DAT_SiegeInformationArray::instance[8] = 0;
+                    DAT_SiegeInformationArray::instance[9] = 0;
+                    DAT_SiegeInformationArray::instance[10] = 0;
+                    DAT_SiegeInformationArray::instance[11] = 0;
+                    DAT_SiegeInformationArray::instance[12] = 0;
+                    DAT_SiegeInformationArray::instance[13] = 0;
+                    DAT_SiegeInformationArray::instance[14] = 0;
+                    DAT_SiegeInformationArray::instance[15] = 0;
+                    DAT_SiegeInformationArray::instance[16] = 0;
+                    DAT_SiegeInformationArray::instance[17] = 0;
+                    DAT_SiegeInformationArray::instance[18] = 0;
+                    DAT_SiegeInformationArray::instance[19] = 0;
+                    DAT_SiegeInformationArray::instance[20] = 0;
+                    DAT_SiegeRemainingPoints::instance = 2000;
+                LAB_00442e64:
+                    DAT_SH1_SiegeAdvancedMode::instance = 1;
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID = 2;
+                    DAT_GameState::instance.mapAndTime.difficulty = 1;
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
+                    iVar6 = 1;
+                    return;
+                } else {
+                    do {
+                        if (0 < *piVar4)
+                            goto LAB_00442f24;
+                        ++piVar4;
+                    } while ((int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84);
+                    iVar6 = 0;
+                    do {
+                        *(int*)((int)DAT_SiegeInformationArray::instance + iVar6)
+                            = (*(int*)((int)DAT_MapPropertiesState::instance.SEC_StartingResources + iVar6 + 100) * 7)
+                            / 10;
+                        iVar6 += 4;
+                    } while (iVar6 < 80);
+                    DAT_SiegeInformationArray::instance[10]
+                        = (DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount * 7) / 10;
+                    DAT_SiegeRemainingPoints::instance = 0;
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
+                    iVar6 = DAT_GameState::instance.mapAndTime.difficulty;
+                }
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeRelatedCopying)(iVar6);
+            }
+        LAB_00442f24:;
+        }
+
+    }
+}
+}
