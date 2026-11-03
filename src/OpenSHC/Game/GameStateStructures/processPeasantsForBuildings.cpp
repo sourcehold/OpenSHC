@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,7 +17,8 @@ namespace Game {
             return;
         }
         for (int playerID = 1; playerID < 9; ++playerID) {
-            if (this->playerDataArray[playerID].keep.id > 0 && this->playerDataArray[playerID].campground.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
+                && this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateLordLadyJesterAndGhostUnits,
                     DAT_BuildingsState::ptr)(playerID);
                 if (DAT_GameCore::instance.gameMode_2 != GM_EDITOR

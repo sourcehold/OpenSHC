@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -41,16 +42,17 @@ namespace Game {
                 == this->playerDataArray[playerID].currentGoldDelayed) {
                 continue;
             }
-            this->playerDataArray[playerID].field490_0x450 += 1;
-            if (this->playerDataArray[playerID].field490_0x450 < 2) {
+            this->playerDataArray[playerID].field198_0x450 += 1;
+            if (this->playerDataArray[playerID].field198_0x450 < 2) {
                 continue;
             }
             this->playerDataArray[playerID].currentGoldDelayed
                 = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
-            this->playerDataArray[playerID].field490_0x450 = 0;
-            if (this->playerDataArray[playerID].keep.id != 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
-                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].keep.id, 0, 0, 0);
+            this->playerDataArray[playerID].field198_0x450 = 0;
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id != 0) {
+                MACRO_CALL_MEMBER(
+                    Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups, DAT_BuildingsState::ptr)(
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id, 0, 0, 0);
             }
         }
     }

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -46,9 +47,10 @@ namespace Game {
             }
             this->playerDataArray[playerID].popularityAtWeekTick100 = this->playerDataArray[playerID].popularity / 100;
             this->playerDataArray[playerID].counterTrackingPopGoldPopup = 0;
-            if (this->playerDataArray[playerID].campground.id != 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
-                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].campground.id, 0, 0, 0);
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id != 0) {
+                MACRO_CALL_MEMBER(
+                    Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups, DAT_BuildingsState::ptr)(
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id, 0, 0, 0);
             }
         }
     }

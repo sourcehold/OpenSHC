@@ -5,6 +5,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -29,7 +30,8 @@ namespace Game {
         }
         MACRO_CALL_MEMBER(GameStateStructures_Func::recomputeReligionBonuses, this)();
         for (int playerID = 1; playerID < 9; ++playerID) {
-            if (this->playerDataArray[playerID].keep.id <= 0 || this->playerDataArray[playerID].campground.id <= 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id <= 0
+                || this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id <= 0) {
                 continue;
             }
             if (DAT_GameCore::instance.gameMode_2 == GM_BUILDERUnk
@@ -135,7 +137,7 @@ namespace Game {
                 worstChange = popularityChange;
                 worstChangeReason = 4;
             }
-            this->playerDataArray[playerID].field636_0x2168 = 0;
+            this->playerDataArray[playerID].field344_0x2168 = 0;
             if (worstChange > 0) {
                 worstChange = 0;
                 worstChangeReason = 3;

@@ -71,7 +71,7 @@ namespace Game {
                 = DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[enemyPlayerID][playerID] + 1;
             if (DAT_GameState::instance.mapAndTime.playerTeams[enemyPlayerID]
                 != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                if (DAT_UnitsState::instance.units[unitID].field323_0x442 != 0) {
+                if (DAT_UnitsState::instance.units[unitID].field320_0x442 != 0) {
                     DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID]
                         += lossValue / 4;
                 } else {

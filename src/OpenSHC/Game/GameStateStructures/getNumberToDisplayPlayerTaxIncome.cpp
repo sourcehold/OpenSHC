@@ -1,6 +1,5 @@
 #include "../GameStateStructures.func.hpp"
 
-
 namespace OpenSHC {
 namespace Game {
 

@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Version.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -74,14 +75,12 @@ namespace Game {
                 }
             }
             if ((int)receivedMapVersion < 0x87) {
-                // field2_0x8 to field11_0x2c, field12_0x30 to field21_0x54, playerKeepTile and field23_0x80 to
-                // field32_0xa4 are four arrays of ten entries that are reset together, exactly as the original binary
-                // does
+                // the four ten-entry arrays are reset together, exactly as the original binary does
                 for (int index = 0; index < 10; ++index) {
-                    (&DAT_GameState::instance.mapAndTime.field2_0x8)[index] = 0;
-                    (&DAT_GameState::instance.mapAndTime.field12_0x30)[index] = 0;
+                    DAT_GameState::instance.mapAndTime.field2_0x8[index] = 0;
+                    DAT_GameState::instance.mapAndTime.field3_0x30[index] = 0;
                     DAT_GameState::instance.mapAndTime.playerKeepTile[index] = -1;
-                    (&DAT_GameState::instance.mapAndTime.field23_0x80)[index] = -1;
+                    DAT_GameState::instance.mapAndTime.field5_0x80[index] = -1;
                 }
             }
             if ((int)receivedMapVersion < 0x88) {
@@ -111,7 +110,10 @@ namespace Game {
                             }
                         }
                     }
-                    if (DAT_GameState::instance.playerDataArray[playerID].keep.id != 0) {
+                    if (DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Player::Enums::BEIE_KEEP]
+                            .id
+                        != 0) {
                         DAT_GameState::instance.playerDataArray[playerID].counter = cowCount;
                     } else {
                         DAT_GameState::instance.playerDataArray[playerID].counter = siegeEngineCount;
@@ -120,14 +122,14 @@ namespace Game {
             }
             if ((int)receivedMapVersion < 0x8d) {
                 for (int index = 0; index < 10; ++index) {
-                    (&DAT_GameState::instance.mapAndTime.field2_0x8)[index]
-                        = (&DAT_GameState::instance.mapAndTime.field3124_0x26d4)[index];
-                    (&DAT_GameState::instance.mapAndTime.field12_0x30)[index]
-                        = (&DAT_GameState::instance.mapAndTime.field3134_0x26fc)[index];
+                    DAT_GameState::instance.mapAndTime.field2_0x8[index]
+                        = DAT_GameState::instance.mapAndTime.field3124_0x26d4[index];
+                    DAT_GameState::instance.mapAndTime.field3_0x30[index]
+                        = DAT_GameState::instance.mapAndTime.field3134_0x26fc[index];
                     DAT_GameState::instance.mapAndTime.playerKeepTile[index]
-                        = (&DAT_GameState::instance.mapAndTime.field3144_0x2724)[index];
-                    (&DAT_GameState::instance.mapAndTime.field23_0x80)[index]
-                        = (&DAT_GameState::instance.mapAndTime.field3154_0x274c)[index];
+                        = DAT_GameState::instance.mapAndTime.field3144_0x2724[index];
+                    DAT_GameState::instance.mapAndTime.field5_0x80[index]
+                        = DAT_GameState::instance.mapAndTime.field3154_0x274c[index];
                 }
             }
             if ((int)receivedMapVersion < 0x8f && DAT_GameCore::instance.gameMode_2 == GM_CAMPAIGN_MISSION) {

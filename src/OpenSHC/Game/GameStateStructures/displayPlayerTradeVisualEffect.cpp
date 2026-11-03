@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -22,11 +23,12 @@ namespace Game {
         if (this->playerDataArray[playerID].playerDeathRelated != 0) {
             return;
         }
-        if (this->playerDataArray[playerID].marketplace.id == 0) {
+        if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id == 0) {
             return;
         }
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups, DAT_BuildingsState::ptr)(
-            this->playerDataArray[playerID].marketplace.id, param_2, amount, resourceType);
+            this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id, param_2, amount,
+            resourceType);
     }
 
 }

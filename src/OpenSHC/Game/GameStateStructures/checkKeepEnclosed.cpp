@@ -1,5 +1,6 @@
 #include "../GameStateStructures.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -15,12 +16,12 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004574C0
     BOOLEnum GameStateStructures::checkKeepEnclosed(int playerID)
     {
-        if (this->playerDataArray[playerID].campground.id == 0) {
+        if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id == 0) {
             return FALSE;
         }
         int keepArea
-            = (short)
-                  DAT_TileMapState::instance.PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry];
+            = (short)DAT_TileMapState::instance.PathConnectionLayer
+                  [this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry];
         int const zoneSize = DAT_PathFindingState::instance.zoneSizesArray[keepArea];
         if (zoneSize < 300) {
             return FALSE;
@@ -54,8 +55,9 @@ namespace Game {
                 == DAT_GameState::instance.mapAndTime.playerTeams[otherPlayerID]) {
                 continue;
             }
-            int const otherTile = this->playerDataArray[otherPlayerID].campground.tileEntry;
-            if (this->playerDataArray[otherPlayerID].campground.id != 0
+            int const otherTile
+                = this->playerDataArray[otherPlayerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry;
+            if (this->playerDataArray[otherPlayerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id != 0
                 && DAT_GameState::instance.playerDataArray[otherPlayerID].lordKilledByPlayerID == 0
                 && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[otherPlayerID] != -1
                     || DAT_GameSynchronyState::instance.currentAIArray[otherPlayerID] != 0)

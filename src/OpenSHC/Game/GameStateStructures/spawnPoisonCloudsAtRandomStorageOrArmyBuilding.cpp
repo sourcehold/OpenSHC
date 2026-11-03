@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -16,11 +17,11 @@ namespace Game {
     void GameStateStructures::spawnPoisonCloudsAtRandomStorageOrArmyBuilding(int playerID, int count)
     {
         int targetCount = 0;
-        if (this->playerDataArray[playerID].campground.id <= 0) {
+        if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id <= 0) {
             return;
         }
         MACRO_CALL_MEMBER(GameStateStructures_Func::spawnPoisonCloudsAroundBuilding, this)(
-            this->playerDataArray[playerID].campground.id);
+            this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id);
         for (int buildingID = 1; buildingID < DAT_BuildingsState::instance.maxBuildingsCount; ++buildingID) {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0
                 && DAT_BuildingsState::instance.buildings[buildingID].logicalState != Map::Buildings::BLS_REMOVE

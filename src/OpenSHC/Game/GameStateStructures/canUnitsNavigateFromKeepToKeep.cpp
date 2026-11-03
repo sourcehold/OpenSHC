@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -14,14 +15,16 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457770
     BOOLEnum GameStateStructures::canUnitsNavigateFromKeepToKeep(int playerID, int targetPlayerID)
     {
-        if (this->playerDataArray[playerID].keep.id == 0) {
+        if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id == 0) {
             return TRUE;
         }
-        if (this->playerDataArray[targetPlayerID].keep.id == 0) {
+        if (this->playerDataArray[targetPlayerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id == 0) {
             return TRUE;
         }
-        int const targetKeepTile = this->playerDataArray[targetPlayerID].campground.tileEntry;
-        int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int const targetKeepTile
+            = this->playerDataArray[targetPlayerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry;
+        int const keepTile
+            = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry;
         if (DAT_TileMapState::instance.PathConnectionLayer[targetKeepTile] == 0) {
             return FALSE;
         }

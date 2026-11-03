@@ -27,13 +27,12 @@ namespace Game {
         MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::commitBuildingAvailability, DAT_MapPropertiesState::ptr)();
         DAT_GameCore::instance.isTimeHalted = FALSE;
         DAT_GameCore::instance.section1076 = 0;
-        // field2_0x8 to field11_0x2c, field12_0x30 to field21_0x54, playerKeepTile and field23_0x80 to field32_0xa4 are
-        // four arrays of ten entries that are reset together, exactly as the original binary does
+        // the four ten-entry arrays are reset together, exactly as the original binary does
         for (int index = 0; index < 10; ++index) {
-            (&this->mapAndTime.field2_0x8)[index] = 0;
-            (&this->mapAndTime.field12_0x30)[index] = 0;
+            this->mapAndTime.field2_0x8[index] = 0;
+            this->mapAndTime.field3_0x30[index] = 0;
             this->mapAndTime.playerKeepTile[index] = -1;
-            (&this->mapAndTime.field23_0x80)[index] = -1;
+            this->mapAndTime.field5_0x80[index] = -1;
         }
         for (int index = 0; index < 9; ++index) {
             this->mapAndTime.hitsDealtToPlayerArray[index] = 0;

@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -14,7 +15,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457800
     BOOLEnum GameStateStructures::unitsCanMoveFromKeepOfPlayerToAnotherArea(int playerID)
     {
-        int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int const keepTile
+            = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry;
         int const signpostTile = this->mapAndTime.signpostEntryData[0].tile;
         if (DAT_TileMapState::instance.PathConnectionLayer[keepTile] == 0) {
             return FALSE;

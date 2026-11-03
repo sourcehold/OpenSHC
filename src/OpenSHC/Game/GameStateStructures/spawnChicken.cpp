@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -30,7 +31,8 @@ namespace Game {
             return;
         }
         for (int playerID = 1; playerID < 9; ++playerID) {
-            if (this->playerDataArray[playerID].keep.id > 0 && this->playerDataArray[playerID].campground.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
+                && this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id > 0) {
                 int wantedChickens;
                 if (this->playerDataArray[playerID].totalFood <= 0) {
                     wantedChickens = 0;
@@ -50,7 +52,7 @@ namespace Game {
                         wantedChickens = 10;
                     }
                 }
-                if (DAT_GameCore::instance.unknownAlwaysZero02 != 0) {
+                if (DAT_GameCore::instance.jokeChickenSpam != 0) {
                     wantedChickens = 100;
                 }
                 if (this->playerDataArray[playerID].chickenCount2 < wantedChickens) {

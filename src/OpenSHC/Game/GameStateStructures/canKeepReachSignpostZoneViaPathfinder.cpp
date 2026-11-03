@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -15,7 +16,8 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004578F0
     BOOLEnum GameStateStructures::canKeepReachSignpostZoneViaPathfinder(int playerID, int param_2, int signpostSlot)
     {
-        int const keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int const keepTile
+            = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry;
         int const signpostTile
             = this->mapAndTime
                   .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[signpostSlot]]

@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -13,7 +14,7 @@ namespace Game {
     int GameStateStructures::moveUnitAroundCampfire(int unitID, int availablePeasants)
     {
         int const playerID = DAT_UnitsState::instance.units[unitID].owner;
-        int const campfireID = this->playerDataArray[playerID].campground.id;
+        int const campfireID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id;
         if (campfireID > 0) {
             if (DAT_BuildingsState::instance.buildings[campfireID].owner == playerID
                 && DAT_BuildingsState::instance.buildings[campfireID].buildingType == Map::Buildings::BT_CAMPGROUND) {
