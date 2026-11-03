@@ -15,7 +15,7 @@ namespace Game {
     void GameStateStructures::validateBuildingCategoryReference(int playerID, int buildingCategory)
     {
         int const buildingID = (&this->playerDataArray[playerID].keep)[buildingCategory].id;
-        if (buildingID - 1U <= 1998) {
+        if (buildingID > 0 && buildingID <= 1999) {
             if (buildingCategory == 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingType != Map::Buildings::BT_MANORHOUSE
                     && DAT_BuildingsState::instance.buildings[buildingID].buildingType != Map::Buildings::BT_STONEKEEP
