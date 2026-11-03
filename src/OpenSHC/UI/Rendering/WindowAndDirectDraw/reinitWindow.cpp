@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004708F0
         void WindowAndDirectDraw::reinitWindow()
         {

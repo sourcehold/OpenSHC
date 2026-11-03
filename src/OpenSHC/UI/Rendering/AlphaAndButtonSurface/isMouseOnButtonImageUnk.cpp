@@ -21,7 +21,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004630D0

@@ -16,7 +16,6 @@
 
 namespace OpenSHC {
 
-using Rendering::ColorMode;
 using UI::Rendering::WindowAndDirectDraw;
 
 // Blends the tile being drawn into the map surface, pixel by pixel: every colour component of the tile and of the

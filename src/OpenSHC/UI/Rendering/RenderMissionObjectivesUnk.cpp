@@ -33,14 +33,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eGM;
-    using OpenSHC::DE::SHCDE::eTextSections;
-    using OpenSHC::Game::GameMode2;
-    using OpenSHC::IO::Graphics::GmID;
-    using OpenSHC::Rendering::Enums::RenderTarget;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D76A0
     int Rendering::RenderMissionObjectivesUnk()
     {

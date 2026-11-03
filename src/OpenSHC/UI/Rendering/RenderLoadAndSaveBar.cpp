@@ -19,11 +19,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Rendering::Enums::RenderTarget;
-    using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-    using OpenSHC::UI::Enums::MenuViewType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00493690
     void Rendering::RenderLoadAndSaveBar(int progressValueUnk)
     {

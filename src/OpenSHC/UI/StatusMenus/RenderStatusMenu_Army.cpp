@@ -26,14 +26,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eGM;
-    using OpenSHC::DE::SHCDE::eTextSections;
-    using OpenSHC::Map::Units::UnitTypeInt;
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Rendering::Enums::RenderTarget;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00447FA0
     void StatusMenus::RenderStatusMenu_Army()
     {

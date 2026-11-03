@@ -12,7 +12,6 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::UI::Enums::MenuModalType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00493900
     void MenuTextInputState::popModalDialog()

@@ -12,9 +12,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using Game::GameMode;
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00487A30
     int GameSynchronyState::determineGameTicksToPerform(int currentPlayerSlotID)
     {

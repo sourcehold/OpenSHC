@@ -19,7 +19,6 @@ namespace Rendering {
     namespace Bink {
 
         using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // The original inlined this per-video body into the loop: its early returns are the jumps to the loop
         // increment. Plain `inline` is not expanded by MSVC here, so it has to be __forceinline (same code as a goto,

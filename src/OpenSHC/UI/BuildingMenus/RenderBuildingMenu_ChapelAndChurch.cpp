@@ -34,12 +34,8 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eTextSections;
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
-    using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Rendering::Enums::RenderTarget;
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 

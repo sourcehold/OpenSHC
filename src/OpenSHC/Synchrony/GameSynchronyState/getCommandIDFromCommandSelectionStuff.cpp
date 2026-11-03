@@ -11,9 +11,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using Commands::GameCommandState;
-    using Commands::GameCommandStateByte;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00480440
     int GameSynchronyState::getCommandIDFromCommandSelectionStuff()
     {

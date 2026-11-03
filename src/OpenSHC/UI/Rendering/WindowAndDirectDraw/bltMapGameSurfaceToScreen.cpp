@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004706E0
         void WindowAndDirectDraw::bltMapGameSurfaceToScreen(
             int windowedX, int windowedY, int windowedWidth, int windowedHeigth)

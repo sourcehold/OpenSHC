@@ -19,9 +19,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Game::GameMode2;
         using OpenSHC::Map::Buildings::BuildingType;
-        using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00463310

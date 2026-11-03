@@ -15,10 +15,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::IO::Graphics::GmID;
-    using OpenSHC::Rendering::ScreenResolutionEnum;
-    using OpenSHC::Rendering::Enums::RenderTarget;
-
     // Renders the animated tutorial arrow (GID_FLOATS_NEW) at (x, y), moved down by a per-resolution offset. It
     // cycles through 10 frames at about 60 ms each and is drawn twice: to the screen menu surface and, with the
     // camera offset, to the map surface. Skipped while DAT_00df5540 is set.

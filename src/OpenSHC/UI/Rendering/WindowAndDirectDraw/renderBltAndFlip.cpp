@@ -13,8 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // Blits the menu bar (mode 2) or one of two menu panels (modes 3 and 4) from the screen menu surface over the
         // map. The original has this code twice, word for word: after the map blit and again after the flip.
         static __forceinline void blitMenuOverlayUnk(

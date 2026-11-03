@@ -28,14 +28,6 @@ namespace OpenSHC {
 namespace Rendering {
     namespace Bink {
 
-        using Audio::MSS::enums::SHC_SoundStream;
-        using DE::SHCDE::eGM;
-        using UI::Enums::BuildingsAndStatusMenuTabType;
-        using UI::Enums::DisplayElementID;
-        using UI::Enums::MenuModalType;
-        using UI::Enums::MenuViewType;
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004B7C90
         void AIMessageQueue::playAiLordMessage(int x, int y)
         {

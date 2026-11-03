@@ -35,13 +35,7 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eGM;
     using OpenSHC::DE::SHCDE::eTextSections;
-    using OpenSHC::IO::Graphics::GmID;
-    using OpenSHC::Rendering::ScreenResolutionEnum;
-    using OpenSHC::Rendering::Enums::RenderTarget;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // The tables behind the Greatest Lord screen, one entry per player slot (index 0 unused). The original keeps them
     // in one block of the stack frame, and its statistic orders are filled by one strided loop, so they are one
