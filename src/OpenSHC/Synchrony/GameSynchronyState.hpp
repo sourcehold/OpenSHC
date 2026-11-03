@@ -100,10 +100,8 @@ namespace Synchrony {
         int aiVariationArray[9]; // 0x00000738 length: 36
         byte field48_0x75c[9]; // 0x0000075C length: 9
         byte field49_0x765[3][9]; // 0x00000765 length: 27
-        BOOLEnum displayYourIP; // 0x00000780 length: 4
-        BOOLEnum lanOrWan; // 0x00000784 length: 4
-        IN_ADDR lanIP; // 0x00000788 length: 4
-        IN_ADDR wanIP; // 0x0000078C length: 4
+        BOOLEnum hasHostAddress[2]; // 0x00000780 length: 8
+        IN_ADDR hostAddress[2]; // 0x00000788 length: 8
         BOOLEnum isHost; // 0x00000790 length: 4
         int DAT_HostPlayerSlotID; // 0x00000794 length: 4
         int DAT_HostAnnounced; // 0x00000798 length: 4
