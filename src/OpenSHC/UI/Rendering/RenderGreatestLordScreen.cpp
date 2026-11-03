@@ -61,7 +61,6 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D5810
     void Rendering::RenderGreatestLordScreen()
     {
-        int y;
         int columnOffset;
         int index;
         int x;
@@ -75,7 +74,7 @@ namespace UI {
             x = DAT_MenuHandlerState::instance.x - 102;
             columnOffset = 522;
         }
-        y = DAT_MenuHandlerState::instance.y;
+        int y = DAT_MenuHandlerState::instance.y;
 
         for (int player = 1; player < 9; ++player) {
             tables.points[player] = 0;

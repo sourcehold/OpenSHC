@@ -37,7 +37,7 @@ namespace Rendering {
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B7C90
-        void AIMessageQueue::playAiLordMessage(int param_1, int param_2)
+        void AIMessageQueue::playAiLordMessage(int x, int y)
         {
             DWORD const now = timeGetTime();
             int yOffset = 0;
@@ -67,8 +67,8 @@ namespace Rendering {
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
                     (WCHAR*)this->currentMessageText_0x8, 0, 0, 580, 0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineWideTextUnk, DAT_TextManagerObject::ptr)(
-                    (WCHAR*)this->currentMessageText_0x8, param_1 - textWidth, yOffset - textHeight + param_2, 580,
-                    0xccfaff, 0, 18, 0);
+                    (WCHAR*)this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580, 0xccfaff, 0, 18,
+                    0);
             } else {
                 textHeight = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
@@ -77,8 +77,7 @@ namespace Rendering {
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
                     this->currentMessageText_0x8, 0, 0, 580, 0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
-                    this->currentMessageText_0x8, param_1 - textWidth, yOffset - textHeight + param_2, 580, 0xccfaff, 0,
-                    18, 0);
+                    this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580, 0xccfaff, 0, 18, 0);
             }
             if ((int)this->currentMessageUnknownValue2_0xd4 > 0) {
                 int const nameHeight = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
@@ -91,15 +90,15 @@ namespace Rendering {
                     0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.DAT_PlayerNames[this->currentMessageUnknownValue2_0xd4],
-                    param_1 - nameWidth, yOffset - nameHeight + param_2, 580, 0xccfaff, 0, 18, 0);
+                    x - nameWidth, yOffset - nameHeight + y, 580, 0xccfaff, 0, 18, 0);
                 int aiCharacter = 0;
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->currentMessageUnknownValue2_0xd4]
                     == -1) {
                     aiCharacter
                         = DAT_GameSynchronyState::instance.currentAIArray[this->currentMessageUnknownValue2_0xd4];
                 }
-                int const faceX = param_1 - nameWidth - 80;
-                int const faceY = param_2 - nameHeight - 48;
+                int const faceX = x - nameWidth - 80;
+                int const faceY = y - nameHeight - 48;
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     DE::SHCDE::GM_INTERFACE_ICONS2, this->currentMessageUnknownValue2_0xd4 + 546, faceX, faceY);
                 if (!aiCharacter) {

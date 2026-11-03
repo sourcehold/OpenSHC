@@ -62,7 +62,12 @@ namespace UI {
             goldDigitSet, TRUE);
 
         int populationDigitSetUnk = 0;
-        int populationColor = DAT_GameState::instance.playerDataArray[playerID].crowding <= 100 ? 0x7d3e : 0xff;
+        int populationColor;
+        if (DAT_GameState::instance.playerDataArray[playerID].crowding <= 100) {
+            populationColor = 0x7d3e;
+        } else {
+            populationColor = 0xff;
+        }
         if (populationCap == 0) {
             populationColor = 0x7d3e;
             population = 0;
@@ -102,7 +107,12 @@ namespace UI {
             DAT_MenuHandlerState::instance.x + 727 + populationDigitSetUnk, DAT_MenuHandlerState::instance.y + 552, 0,
             populationColor, populationDigitSet, TRUE);
 
-        int const popularityColor = popularity < 50 ? 0xff : 0x7d3e;
+        int popularityColor;
+        if (popularity < 50) {
+            popularityColor = 0xff;
+        } else {
+            popularityColor = 0x7d3e;
+        }
         int const popularityHalfWidth = MACRO_CALL_MEMBER(Text::TextManager_Func::calcRenderedNumberWidth,
                                             DAT_TextManagerObject::ptr)(popularity, 0)
             / 2;
