@@ -1,3 +1,6 @@
+// disable deprecation warnings for strcpy
+#pragma warning(disable : 4996)
+
 #include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Synchrony.func.hpp"
