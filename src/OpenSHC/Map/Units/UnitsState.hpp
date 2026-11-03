@@ -50,7 +50,7 @@ namespace Map {
             int totalUnitsInSelection; // 0x00000020 length: 4
             int unitCountOfSelection[9]; // 0x00000024 length: 36
             byte unusedBytes01[44]; // 0x00000048 length: 44
-            byte selectedUnitsBitFlags[400]; // 0x00000074 length: 400
+            short selectedUnitsBitFlags[200]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
