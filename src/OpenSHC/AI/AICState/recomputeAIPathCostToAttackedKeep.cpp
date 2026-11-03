@@ -3,6 +3,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -22,8 +23,9 @@ namespace AI {
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         int const keepArea
-            = (short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+            = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                    .tileEntry];
 
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {
