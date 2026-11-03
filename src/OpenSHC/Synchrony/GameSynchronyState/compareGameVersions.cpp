@@ -21,12 +21,13 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048BD40
     void GameSynchronyState::compareGameVersions()
     {
+        // the original reads some fields through the global instance rather than this, so they stay that way
         BOOLEnum const wasMatching = this->flag_0x7aad8;
         int firstVersion = -1;
         int lowestVersion = INT_MAX;
         this->flag_0x7aad8 = TRUE;
         int player;
-        for (player = 1; player < 9; player++) {
+        for (player = 1; player < 9; ++player) {
             if (this->currentPlayerFullIDArray[player] != -1) {
                 if (!this->isIncludedPlayer[player]) {
                     this->flag_0x7aad8 = TRUE;
@@ -53,10 +54,11 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
                     DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 0);
                 int savedReceivers[9];
-                for (int receiver = 0; receiver < 9; receiver++) {
+                for (int receiver = 0; receiver < 9; ++receiver) {
                     savedReceivers[receiver] = this->DAT_ChatMessageReceiverArray[receiver];
                     this->DAT_ChatMessageReceiverArray[receiver] = 0;
-                    // As in the original, this tests the first loop's last player, not the receiver.
+                    // fixme: player is always 9 here, so this reads currentPlayerFullIDArray[9], one past the end,
+                    // which is DAT_CurrentPlayerFullIDArray2[0], not the receiver's slot
                     if (this->currentPlayerFullIDArray[player] != -1
                         && this->DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             > this->DAT_MultiplayerGameVersions[receiver]) {
@@ -76,7 +78,7 @@ namespace Synchrony {
                     Commands::GCT_TAUNT_OR_CHAT);
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
                     DAT_UserTextHandlerState::ptr)(4, currentText);
-                for (int receiver = 0; receiver < 9; receiver++) {
+                for (int receiver = 0; receiver < 9; ++receiver) {
                     this->DAT_ChatMessageReceiverArray[receiver] = savedReceivers[receiver];
                 }
             }

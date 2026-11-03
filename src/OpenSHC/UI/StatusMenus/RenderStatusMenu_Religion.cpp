@@ -30,6 +30,7 @@ namespace UI {
         MACRO_CALL_MEMBER(
             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
             1, DAT_MenuHandlerState::instance.x + 14, DAT_MenuHandlerState::instance.y + 489);
+        // the title position is computed before the draw-buffer store, as the original orders it
         int const titleY = DAT_MenuHandlerState::instance.y + 467;
         int const titleX = DAT_MenuHandlerState::instance.x + 25;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
@@ -90,6 +91,7 @@ namespace UI {
             nextLevel = 50;
         } else if (blessedNow <= 74) {
             nextLevel = 75;
+            // the same threshold as <= 94 above; the original compares it this way here
         } else if (blessedNow < 95) {
             nextLevel = 100;
         } else {

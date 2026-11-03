@@ -72,6 +72,7 @@ namespace UI {
         }
         Menu* const menu = this->modalMenu.pointerToMenu;
         if (menu != NULL) {
+            // y is read first and pointerToMenu again for the call, as the original does
             int const y = this->modalMenu.y;
             menu->xPosition = this->modalMenu.x;
             menu->yPosition = y;

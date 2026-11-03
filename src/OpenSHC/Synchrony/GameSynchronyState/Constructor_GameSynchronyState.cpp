@@ -15,6 +15,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048C150
     GameSynchronyState* GameSynchronyState::Constructor_GameSynchronyState()
     {
+        // the original reads some fields through the global instance rather than this, so they stay that way
         this->currentGameMode = Game::GM_SOLITARY;
         DAT_GameSynchronyState::instance.field303_0x109e8c = 1;
         this->DPLAYX_ReceivedPlayerID = 0;

@@ -67,6 +67,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::handleMenuItems, menu)(
                 OpenSHC::UI::Enums::MIHS_RESET_MENU_ITEM_STATEUnk);
             menu->zero = 0;
+            // pointerToMenu is read again for these two stores, as the original does
             this->modalMenu.pointerToMenu->thousand = 0;
             this->modalMenu.pointerToMenu->one = 1;
         }

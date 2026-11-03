@@ -21,6 +21,7 @@ namespace UI {
             && !DAT_MouseState::instance.rightClickState) {
             return;
         }
+        // the original computes the Y offset before X
         int const mouseY = DAT_MouseState::instance.screenSpaceY - this->y;
         DAT_ViewportRenderState::instance.viewportState.viewportX
             = ((DAT_MouseState::instance.screenSpaceX - this->x) / this->widthFactor * this->oneOrTwo

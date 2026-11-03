@@ -188,6 +188,7 @@ namespace UI {
         if (menu != NULL) {
             menu->xPosition = left;
             menu->yPosition = top;
+            // read again after the two stores, as the original does
             menu = this->modalMenu.pointerToMenu;
             MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::handleMenuItems, menu)(
                 OpenSHC::UI::Enums::MIHS_PREPARE_AND_RENDER);

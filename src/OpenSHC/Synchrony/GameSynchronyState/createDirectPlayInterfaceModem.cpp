@@ -11,11 +11,11 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004874B0
     void GameSynchronyState::createDirectPlayInterfaceModem()
     {
-        IDirectPlay4A* directPlay = NULL;
+        LPDIRECTPLAY directPlay = NULL;
         IDirectPlay4A* directPlay4A = NULL;
         DWORD addressSize = 0;
         GUID modemGuid = GUID_DPSPGUID_MODEM::instance;
-        if (FAILED(DirectPlayCreate(&modemGuid, (LPDIRECTPLAY*)&directPlay, NULL))) {
+        if (FAILED(DirectPlayCreate(&modemGuid, &directPlay, NULL))) {
             return;
         }
         HRESULT result = directPlay->QueryInterface(GUID_IID_IDirectPlay4A::instance, (LPVOID*)&directPlay4A);
@@ -30,8 +30,7 @@ namespace Synchrony {
             directPlay4A->Release();
             return;
         }
-        HGLOBAL const addressMemory = GlobalAlloc(GHND, addressSize);
-        void* const address = GlobalLock(addressMemory);
+        void* const address = GlobalLock(GlobalAlloc(GHND, addressSize));
         if (address == NULL) {
             directPlay->Release();
             directPlay4A->Release();

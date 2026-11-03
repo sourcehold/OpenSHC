@@ -16,6 +16,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00491750
     void MenuTextInputState::clearAnyOtherModalDialogs()
     {
+        // the original reads some fields through the global instance rather than this, so they stay that way
         DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
         MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
             DAT_MenuTextInputState::instance.DAT_SomeTextArrayIndex);

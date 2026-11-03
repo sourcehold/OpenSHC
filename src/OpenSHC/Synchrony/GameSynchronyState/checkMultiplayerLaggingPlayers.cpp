@@ -16,6 +16,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00490480
     void GameSynchronyState::checkMultiplayerLaggingPlayers()
     {
+        // the original reads some fields through the global instance rather than this, so they stay that way
         this->currentGameModeCopy_SEC_Section1106 = this->currentGameMode;
         if ((this->currentGameMode == Game::GM_SOLITARY)
             || (this->currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {

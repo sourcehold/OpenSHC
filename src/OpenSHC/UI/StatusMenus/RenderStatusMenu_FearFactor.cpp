@@ -55,6 +55,7 @@ namespace UI {
         int const fearFactor
             = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                   .fearFactorLevel;
+        // both signs compute the effect in their own branch, as the original does
         int effect;
         if (fearFactor >= 1) {
             effect = fearFactor * 25;
@@ -65,6 +66,7 @@ namespace UI {
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
             DAT_TextManagerObject::instance.currentXOffset_0x0 + languageOffset + x + 300, top + 25, effect, FALSE);
+        // the original reads the level again here
         int const level = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .fearFactorLevel;
         if (level >= 5) {
