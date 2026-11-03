@@ -1,3 +1,4 @@
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
@@ -34,14 +35,17 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+        using OpenSHC::Game::Player::Enums::BEIE_KEEP;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0040FC40
         void BuildingsState::updateLordLadyJesterAndGhostUnits(int playerID)
         {
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::validateBuildingCategoryReference,
                 DAT_GameState::ptr)(playerID, 0);
-            int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
-            int campgroundX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
-            int campgroundY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry - 1;
+            int keepID = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_KEEP].id;
+            int campgroundX = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry;
+            int campgroundY = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry - 1;
             if (keepID != 0 && DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_MANORHOUSE) {
                 ++campgroundY;
             }
@@ -226,16 +230,16 @@ namespace Map {
                     return;
                 }
                 DAT_GameState::instance.playerDataArray[playerID].someUnitID01 = ghostID;
-                DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc
+                DAT_GameState::instance.playerDataArray[playerID].field416_0x22cc
                     = DAT_UnitsState::instance.units[ghostID].uid;
                 DAT_UnitsState::instance.units[ghostID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 DAT_UnitsState::instance.units[ghostID].disappearFadeAlphaCountdown = 32;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc
+            if (DAT_GameState::instance.playerDataArray[playerID].field416_0x22cc
                 != DAT_UnitsState::instance.units[ghostID].uid) {
                 DAT_GameState::instance.playerDataArray[playerID].someUnitID01 = 0;
-                DAT_GameState::instance.playerDataArray[playerID].field708_0x22cc = 0;
+                DAT_GameState::instance.playerDataArray[playerID].field416_0x22cc = 0;
                 return;
             }
             DAT_UnitsState::instance.units[ghostID].workplaceBuildingID_1 = shrineID;

@@ -1,5 +1,6 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
@@ -17,13 +18,15 @@ namespace AI {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE040
     void AICState::recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance)
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         int const keepArea
             = (short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
 
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {

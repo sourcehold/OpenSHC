@@ -1,5 +1,6 @@
 #include "../AIVState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 
@@ -7,6 +8,8 @@ namespace OpenSHC {
 namespace AI {
 
     // counts the grid cells around the campground that are usable for the resource buildings
+    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004EE830
     void AIVState::recomputeAIAvailableGridTiles(int playerID)
     {
@@ -23,9 +26,9 @@ namespace AI {
         this->visitCount = 1;
         this->algBIndex = 1;
         this->algAIndex = 0;
-        int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
+        int const campX = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry / 5;
         this->heatMapXArray[0] = campX;
-        int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
+        int const campY = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry / 5;
         ++this->mapExtraInfo.algorithmIterationNumber;
         this->heatMapYArray[0] = campY;
         this->heatMaps[campX][campY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;

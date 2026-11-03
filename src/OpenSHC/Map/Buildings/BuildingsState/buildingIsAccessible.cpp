@@ -1,5 +1,6 @@
 #include "../BuildingsState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
@@ -14,6 +15,8 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
+        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x00421A40
         int BuildingsState::buildingIsAccessible(int buildingID, int amountUnk)
         {
@@ -22,7 +25,7 @@ namespace Map {
             }
             int const campgroundArea
                 = (short)DAT_TileMapState::instance.PathConnectionLayer
-                      [DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].campground.tileEntry];
+                      [DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
             int const buildingHeight
                 = DAT_TileMapState::instance.HeightLayer
                       [DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y].addXgetTile

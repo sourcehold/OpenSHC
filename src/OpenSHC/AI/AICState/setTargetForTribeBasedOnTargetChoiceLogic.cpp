@@ -1,5 +1,6 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIC/AITargetChoice.hpp"
@@ -14,6 +15,8 @@
 namespace OpenSHC {
 namespace AI {
 
+    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004CACB0
     void AICState::setTargetForTribeBasedOnTargetChoiceLogic(int owner, int tribe)
     {
@@ -27,8 +30,8 @@ namespace AI {
         int minDistance = 10000;
         int maxGold = 0;
         int minPoints = 1000000;
-        int const ownerKeepX = DAT_GameState::instance.playerDataArray[owner].campground.xEntry;
-        int const ownerKeepY = DAT_GameState::instance.playerDataArray[owner].campground.yEntry;
+        int const ownerKeepX = DAT_GameState::instance.playerDataArray[owner].buildingEntryInfos[BEIE_CAMPGROUND].xEntry;
+        int const ownerKeepY = DAT_GameState::instance.playerDataArray[owner].buildingEntryInfos[BEIE_CAMPGROUND].yEntry;
         for (int player = 1; player < 9; player++) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[player]
                 == DAT_GameState::instance.mapAndTime.playerTeams[owner]) {
@@ -40,8 +43,8 @@ namespace AI {
             }
 
             MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[player].campground.xEntry,
-                DAT_GameState::instance.playerDataArray[player].campground.yEntry, ownerKeepX, ownerKeepY);
+                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[player].buildingEntryInfos[BEIE_CAMPGROUND].xEntry,
+                DAT_GameState::instance.playerDataArray[player].buildingEntryInfos[BEIE_CAMPGROUND].yEntry, ownerKeepX, ownerKeepY);
 
             if (this->aics[aicIndex].TargetChoice == AIC::AITC_PLAYER) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] != -1
@@ -86,8 +89,8 @@ namespace AI {
                 }
 
                 MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                    DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[player].campground.xEntry,
-                    DAT_GameState::instance.playerDataArray[player].campground.yEntry, ownerKeepX, ownerKeepY);
+                    DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[player].buildingEntryInfos[BEIE_CAMPGROUND].xEntry,
+                    DAT_GameState::instance.playerDataArray[player].buildingEntryInfos[BEIE_CAMPGROUND].yEntry, ownerKeepX, ownerKeepY);
                 if (DAT_DirectionAlgorithmState::instance.distanceHigh <= minDistance) {
                     minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                     targetPlayer = player;
