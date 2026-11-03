@@ -59,7 +59,7 @@ namespace Rendering {
         undefined4 someYOffset; // 0x000000A4 length: 4
         undefined4 someXOffset; // 0x000000A8 length: 4
         dword mbr_0xac; // 0x000000AC length: 4
-        dword mbr_0xb0; // 0x000000B0 length: 4
+        int mbr_0xb0; // 0x000000B0 length: 4
 
     } ViewportState;
 #pragma pack(pop)
