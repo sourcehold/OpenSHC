@@ -27,7 +27,7 @@ namespace Synchrony {
             return;
         }
         if (this->shouldSendAnnouncementUnk) {
-            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)((Commands::GameCommandType)93);
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_UNKNOWN_93);
             this->shouldSendAnnouncementUnk = 0;
         }
         if ((!this->syncStatus) && (!this->saveRelated)) {
@@ -52,7 +52,7 @@ namespace Synchrony {
                                 this->DAT_GameCommandParam0 = player;
                                 this->laggingPlayerIDUnk = player;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                                    (Commands::GameCommandType)98);
+                                    Commands::GCT_UNKNOWN_98);
                             }
                             if (60000 < (int)(now - this->connectionLagInfoArray[player].time)) {
                                 this->kickDueToLagStatusUnk = 62;
