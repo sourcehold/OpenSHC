@@ -1,10 +1,10 @@
 #include "../SoundSystem.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -30,7 +30,8 @@ namespace Audio {
                 && MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .buildingEntryInfos[BEIE_CAMPGROUND].id
+                            .buildingEntryInfos[BEIE_CAMPGROUND]
+                            .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .lordID

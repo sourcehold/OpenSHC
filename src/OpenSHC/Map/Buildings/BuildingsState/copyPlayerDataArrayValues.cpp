@@ -73,9 +73,13 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].yEntry
                 = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].yEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].tileEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].tileEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_ENGINEERSGUILD]
+                      .tileEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].areaEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].areaEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_ENGINEERSGUILD]
+                      .areaEntry;
             if (fromPlayerID != toPlayerID) {
                 DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].id = 0;
             }
@@ -86,9 +90,13 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].yEntry
                 = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].yEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].tileEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].tileEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_TUNNELERSGUILD]
+                      .tileEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].areaEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].areaEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_TUNNELERSGUILD]
+                      .areaEntry;
             if (fromPlayerID != toPlayerID) {
                 DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_TUNNELERSGUILD].id = 0;
             }
@@ -151,9 +159,13 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].yEntry
                 = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].yEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].tileEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].tileEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_MERCENARYPOST]
+                      .tileEntry;
             DAT_GameState::instance.playerDataArray[toPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].areaEntry
-                = DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].areaEntry;
+                = DAT_GameState::instance.playerDataArray[fromPlayerID]
+                      .buildingEntryInfos[BEIE_MERCENARYPOST]
+                      .areaEntry;
             if (fromPlayerID != toPlayerID) {
                 DAT_GameState::instance.playerDataArray[fromPlayerID].buildingEntryInfos[BEIE_MERCENARYPOST].id = 0;
             }

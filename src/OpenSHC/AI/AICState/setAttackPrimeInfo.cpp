@@ -1,6 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -22,7 +23,9 @@ namespace AI {
         DAT_TroopValueState::instance.attackInfo.unknownOne_0x20f90 = 1;
         DAT_TroopValueState::instance.attackInfo.keepCon
             = (short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
+                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                          .buildingEntryInfos[BEIE_CAMPGROUND]
+                          .tileEntry];
     }
 }
 }

@@ -1,4 +1,3 @@
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
@@ -6,6 +5,7 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
@@ -44,8 +44,10 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::validateBuildingCategoryReference,
                 DAT_GameState::ptr)(playerID, 0);
             int keepID = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_KEEP].id;
-            int campgroundX = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry;
-            int campgroundY = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry - 1;
+            int campgroundX
+                = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry;
+            int campgroundY
+                = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry - 1;
             if (keepID != 0 && DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_MANORHOUSE) {
                 ++campgroundY;
             }

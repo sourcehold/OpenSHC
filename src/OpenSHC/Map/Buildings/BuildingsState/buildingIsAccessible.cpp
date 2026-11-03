@@ -1,7 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -24,8 +24,10 @@ namespace Map {
                 return 0;
             }
             int const campgroundArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer
-                      [DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
+                = (short)DAT_TileMapState::instance
+                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner]
+                              .buildingEntryInfos[BEIE_CAMPGROUND]
+                              .tileEntry];
             int const buildingHeight
                 = DAT_TileMapState::instance.HeightLayer
                       [DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y].addXgetTile

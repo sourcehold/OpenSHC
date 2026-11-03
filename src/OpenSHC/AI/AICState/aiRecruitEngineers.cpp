@@ -1,8 +1,8 @@
 #include "../AICState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -29,7 +29,8 @@ namespace AI {
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
             < 30)
             return;
-        int const guildID = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].id;
+        int const guildID
+            = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].id;
         if (guildID <= 0)
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != Map::Buildings::BT_ENGINEERSGUILD)

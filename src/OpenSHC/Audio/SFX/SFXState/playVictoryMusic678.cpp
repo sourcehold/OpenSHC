@@ -28,7 +28,8 @@ namespace Audio {
             }
             if ((DAT_VictoryMusicVariation::instance == 0 || DAT_VictoryMusicVariation::instance == 2)
                 && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .buildingEntryInfos[BEIE_CAMPGROUND].id
+                            .buildingEntryInfos[BEIE_CAMPGROUND]
+                            .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .lordID
