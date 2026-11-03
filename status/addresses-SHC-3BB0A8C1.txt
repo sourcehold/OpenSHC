@@ -21245,7 +21245,7 @@ SHC_3BB0A8C1_0x0046FF50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046FFB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00470040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00470040 | 56.7% | Zero not kept in ebp; param_1 takes the register instead
 
 SHC_3BB0A8C1_0x00470610 | 0.0% | Pending
 
