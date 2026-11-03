@@ -12,7 +12,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    // Scrolls the main view to the minimap point under the mouse.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5110
     void MinimapViewState::scrollViewportToMinimapClick()
     {

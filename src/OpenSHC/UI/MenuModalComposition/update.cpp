@@ -90,7 +90,7 @@ namespace UI {
                 this->minus1 = 1;
             }
             if (this->slot == 0
-                && MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() != 0) {
+                && MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()) {
                 this->minus1 = 1;
             }
         } else {

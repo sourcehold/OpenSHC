@@ -104,7 +104,8 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 nextLevel, x + 225, y + 104, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                s_percentage_005a2770, x + 226, y + 104, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0); // "%"
+                // "%"
+                s_percentage_005a2770, x + 226, y + 104, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
         } else {
             // "Max bonus achieved."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

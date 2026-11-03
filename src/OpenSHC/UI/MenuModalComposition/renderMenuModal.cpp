@@ -100,7 +100,8 @@ namespace UI {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         }
         if ((this->modalMenu.borderStyle & 0x400) != 0 && this->disappearAfter < 32 && this->mbr_0x6c == 0) {
-            // fixme
+            // fixme: this adds the whole time since timeItIsSet on every frame, so disappearAfter grows faster
+            // than linearly and can pass 32 on its last step
             this->disappearAfter += (timeGetTime() - this->timeItIsSet) / 75;
         }
         if ((this->modalMenu.borderStyle & 2) != 0) {
@@ -176,7 +177,7 @@ namespace UI {
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         }
-        (*this->modalMenu.menuModalRenderFunction)(left, top, this->modalMenu.width, this->modalMenu.height);
+        this->modalMenu.menuModalRenderFunction(left, top, this->modalMenu.width, this->modalMenu.height);
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;

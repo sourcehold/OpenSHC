@@ -20,10 +20,10 @@ namespace Synchrony {
         DAT_GameCore::instance.solitaryAllBuildingsAreFree = FALSE;
         DAT_GameCore::instance.solitaryAltUDungeon = FALSE;
         if (this->isHost) {
-            this->DAT_HostAnnounced = 1;
+            this->DAT_HostAnnounced = TRUE;
             return;
         }
-        this->DAT_HostAnnounced = 0;
+        this->DAT_HostAnnounced = FALSE;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
             Commands::GCT_MULTIPLAYER_INITIATE_ANNOUNCE_HOST);
         // Wait up to 20 seconds for the host to announce itself.

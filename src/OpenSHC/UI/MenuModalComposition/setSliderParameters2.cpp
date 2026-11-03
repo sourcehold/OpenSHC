@@ -13,7 +13,7 @@ namespace UI {
         this->sliderMinimum = minimum;
         this->sliderMaximum = maximum;
         if (200 < range) {
-            // ranges wider than 200 are compressed: the bottom fifth of the slider gets 4 steps per value
+            // ranges wider than 200 are compressed: the lowest fifth of the values takes 4 slider steps each
             int const offset = value - minimum;
             this->sliderValue = offset;
             if (offset > range / 5) {

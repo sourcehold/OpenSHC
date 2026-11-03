@@ -26,7 +26,8 @@ namespace UI {
             DAT_MinimapViewState::instance.loadedMiniMap, 0, sizeof(DAT_MinimapViewState::instance.loadedMiniMap));
         INT_00b95b64::instance = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
-            s_maps_map_005a64b0); // "maps\\*.map"
+            // "maps\\*.map"
+            s_maps_map_005a64b0);
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
         int i = 0;
@@ -50,7 +51,7 @@ namespace UI {
         this->field46_0xac = 0;
         DAT_MouseState::instance.waitCursorToggle = 0;
         this->fileListVisibleRowCount = 16;
-        if (loadOrSaveMap == 9) {
+        if (loadOrSaveMap == OpenSHC::UI::Enums::MMT_LOAD_MAP) {
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText, this)(
                 OpenSHC::UI::Enums::MMT_LOAD_MAP);
         } else {

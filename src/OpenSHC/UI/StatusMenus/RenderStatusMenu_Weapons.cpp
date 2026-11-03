@@ -32,18 +32,18 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 7),
             x + 25, y + 467, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
-        // an icon and the stock of each of the eight goods
+        // an icon and the stock of each of the eight weapons
         for (int good = 0; good < 8; good++) {
-            int const x = left + good * 52;
+            int const iconX = left + good * 52;
             int const amount
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                       .currentResources[DAT_ArmoryMenuResourceTypes::instance[good]];
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2,
-                DAT_ArmoryMenuResourceIcons::instance[good], DAT_ArmoryIconsPositionNudges::instance[good].x + x,
+                DAT_ArmoryMenuResourceIcons::instance[good], DAT_ArmoryIconsPositionNudges::instance[good].x + iconX,
                 DAT_ArmoryIconsPositionNudges::instance[good].y + top);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                amount, x + 12, top + 50, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
+                amount, iconX + 12, top + 50, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         }
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }

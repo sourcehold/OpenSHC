@@ -12,7 +12,7 @@ namespace Synchrony {
             DAT_GameSynchronyState::instance.providerNames[provider] = NULL;
             DAT_GameSynchronyState::instance.guids[provider] = NULL;
         }
-        this->DPLAYX_Connection = 0;
+        this->DPLAYX_Connection = NULL;
         DAT_GameSynchronyState::instance.scrollBarItemOffset = 0;
         DAT_GameSynchronyState::instance.selectedProviderIndex = 0;
         DAT_GameSynchronyState::instance.modemScrollBarOffset = 0;
@@ -24,9 +24,9 @@ namespace Synchrony {
         this->displayYourIP = FALSE;
         this->lanOrWan = FALSE;
         WSADATA wsaData;
-        if (WSAStartup(257, &wsaData) == 0) {
+        if (WSAStartup(MAKEWORD(1, 1), &wsaData) == 0) {
             char hostName[80];
-            if (gethostname(hostName, 80) != -1) {
+            if (gethostname(hostName, sizeof(hostName)) != SOCKET_ERROR) {
                 hostent* const host = gethostbyname(hostName);
                 if (host != NULL && host->h_addr_list[0] != NULL) {
                     // Up to two addresses: the first goes to lanIP and sets displayYourIP, the second to wanIP and

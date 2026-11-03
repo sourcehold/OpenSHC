@@ -36,7 +36,6 @@ namespace UI {
         }
         this->activeModalDialogID = menuModalID;
         if (menuModalID != OpenSHC::UI::Enums::MMT_NONE) {
-            // just copy the menumodal into a fixed spot in memory.
             memcpy(&this->modalMenu,
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::findModalMenu, this)(menuModalID),
                 sizeof(MenuModal));

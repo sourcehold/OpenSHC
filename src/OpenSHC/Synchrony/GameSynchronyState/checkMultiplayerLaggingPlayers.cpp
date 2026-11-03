@@ -24,7 +24,7 @@ namespace Synchrony {
         }
         if (this->shouldSendAnnouncementUnk) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_UNKNOWN_93);
-            this->shouldSendAnnouncementUnk = 0;
+            this->shouldSendAnnouncementUnk = FALSE;
         }
         if ((!this->syncStatus) && (!this->saveRelated)) {
             if (MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
@@ -42,9 +42,9 @@ namespace Synchrony {
                     for (int player = 0; player < 9; player++) {
                         if (this->currentPlayerFullIDArray[player] != -1
                             && player != DAT_GameSynchronyState::instance.currentPlayerSlotID
-                            && this->connectionLagInfoArray[player].time) {
+                            && this->connectionLagInfoArray[player].time != 0) {
                             if (15000 < (int)(now - this->connectionLagInfoArray[player].time) && this->isHost
-                                && !this->laggingPlayerIDUnk) {
+                                && this->laggingPlayerIDUnk == 0) {
                                 this->DAT_GameCommandParam0 = player;
                                 this->laggingPlayerIDUnk = player;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -59,13 +59,13 @@ namespace Synchrony {
                     }
                 }
             }
-            DWORD const now2 = timeGetTime();
-            if (1800 < (int)(now2 - this->otherTime1)) {
-                this->otherTime1 = now2;
+            DWORD const currentTime = timeGetTime();
+            if (1800 < (int)(currentTime - this->otherTime1)) {
+                this->otherTime1 = currentTime;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSyncPacket126, this)();
             }
-            if (180 <= (int)(now2 - this->now2)) {
-                this->now2 = now2;
+            if (180 <= (int)(currentTime - this->now2)) {
+                this->now2 = currentTime;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSomeMultiplayerSyncMessageWithType, this)(0);
                 if (0 < this->syncRelatedCountdown) {
                     --this->syncRelatedCountdown;

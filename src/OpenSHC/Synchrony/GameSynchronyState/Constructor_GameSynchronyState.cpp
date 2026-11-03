@@ -28,14 +28,15 @@ namespace Synchrony {
         this->field319_0x109ec0 = 0;
         this->field315_0x109eb0 = 1;
         this->field316_0x109eb4 = 1;
-        this->DAT_HostAnnounced = 0;
-        // The original clears the first four bytes of this area with a single dword store.
+        this->DAT_HostAnnounced = FALSE;
+        // the first four bytes of this area are cleared with one dword store
         *(int*)this->field57_0x79c = 0;
         DAT_GameSynchronyState::instance.relativeTickTime = 0;
         // L"Crusader"
         MACRO_CALL(Global_Func::PrintToDestination)(this->DPLAYX_SessionName, u_Crusader_005a6f40);
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-            12, (void*)s_Contestant_005a74a8, this->DPLAY_PlayerShortName); // "Contestant"
+            // "Contestant"
+            12, (void*)s_Contestant_005a74a8, this->DPLAY_PlayerShortName);
         this->scrollBarItemCount = 0;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setupSkirmishLobby, this)();
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::readGameSpyConfig, this)();

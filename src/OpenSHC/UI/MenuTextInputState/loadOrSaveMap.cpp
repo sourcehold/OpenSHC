@@ -28,7 +28,8 @@ namespace UI {
             DAT_MinimapViewState::instance.loadedMiniMap, 0, sizeof(DAT_MinimapViewState::instance.loadedMiniMap));
         INT_00b95b64::instance = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
-            s_maps_tmp_005a75b0); // "maps\\*.tmp"
+            // "maps\\*.tmp"
+            s_maps_tmp_005a75b0);
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
         int i = 0;
