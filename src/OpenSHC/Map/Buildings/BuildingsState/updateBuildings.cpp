@@ -96,8 +96,8 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateNeededEmployeeCount, this)(
                     DAT_CurrentBuildingID::instance);
-                if (this->buildings[DAT_CurrentBuildingID::instance].field127_0x194 > 0) {
-                    --this->buildings[DAT_CurrentBuildingID::instance].field127_0x194;
+                if (this->buildings[DAT_CurrentBuildingID::instance].field129_0x194 > 0) {
+                    --this->buildings[DAT_CurrentBuildingID::instance].field129_0x194;
                 }
                 DAT_GameState::instance.playerDataArray[owner].populationCap
                     += this->buildings[DAT_CurrentBuildingID::instance].numberOfPopulationProvided;
