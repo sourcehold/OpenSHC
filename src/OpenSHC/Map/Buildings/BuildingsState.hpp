@@ -42,10 +42,10 @@ namespace Map {
             undefined4 field4_0x10; // 0x00000010 length: 4
             Building buildings[2000]; // 0x00000014 length: 1624000
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
-            int field7_0x18d06c; // 0x0018D06C length: 4
+            int pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
             undefined4 counter; // 0x0018D070 length: 4
-            undefined2 DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
-            undefined4 DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
+            short DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
+            int DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
             int campfireSpotX; // 0x0018E018 length: 4
             int campfireSpotY; // 0x0018E01C length: 4
             int campfireSpotOrientation; // 0x0018E020 length: 4
@@ -92,7 +92,7 @@ namespace Map {
 
             MappersEnum convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
-            undefined4 getBuildingHeightForBuildingID(int buildingID);
+            int getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 getBuildingHeightForBuildingID2(int buildingID);
 
@@ -104,7 +104,7 @@ namespace Map {
 
             void displayPopularityAndGoldPopups(int buildingID, int param_2, int param_3, undefined4 param_4);
 
-            int spawnCrowForBuilding(int buildingID);
+            void spawnCrowForBuilding(int buildingID);
 
             BOOLEnum isFearFactorBuilding(int buildingID);
 
@@ -221,21 +221,21 @@ namespace Map {
 
             void setupMercenaryPostCampgroundPositions(int playerID);
 
-            undefined4 isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
+            BOOLEnum isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
 
-            undefined4 getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
+            BOOLEnum getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
 
             void createEntityForAssemblyPointsForActiveTabType();
 
             void setupEngineersGuildParagroundPositions(int playerID);
 
-            int findFreeEngineerAssemblyTile(int playerIndex, int param_2);
+            BOOLEnum findFreeEngineerAssemblyTile(int playerIndex, int param_2);
 
             void setupTunnelersGuildCampgroundPositions(int param_1);
 
             BOOLEnum findFreeTunnelerAssemblyTile(int param_1, int param_2);
 
-            undefined4 findFreeCathedralAssemblyTile(int param_1, int param_2);
+            BOOLEnum findFreeCathedralAssemblyTile(int param_1, int param_2);
 
             void setTileRefsForOilSmelter(int buildingID);
 
@@ -243,7 +243,7 @@ namespace Map {
 
             uint getActiveEngineerForBuilding(int buildingID);
 
-            undefined4 setNewOnFarmDestination(int buildingID);
+            BOOLEnum setNewOnFarmDestination(int buildingID);
 
             void growHops(int buildingID);
 
@@ -251,7 +251,7 @@ namespace Map {
 
             void harmHopFarmsOfPlayer(int param_1);
 
-            ushort* updateBuildingAreaTileGraphics(int param_1);
+            void updateBuildingAreaTileGraphics(int param_1);
 
             void setDairyFarmCheeseCounter(int param_1);
 
@@ -271,7 +271,7 @@ namespace Map {
 
             int getBuildingFlag1(int param_1);
 
-            undefined4 determinePeasantSitPosition(int campfireID, int availablePeasants);
+            BOOLEnum determinePeasantSitPosition(int campfireID, int availablePeasants);
 
             void refreshAllBuildingTileDisplays();
 
@@ -297,9 +297,9 @@ namespace Map {
 
             BOOLEnum updateRepairCostAndReturnIfDamaged(int buildingIndex);
 
-            undefined4 canUnitReachBuildingPerimeter(int param_1, int param_2);
+            BOOLEnum canUnitReachBuildingPerimeter(int param_1, int param_2);
 
-            undefined4 canUnitReachAdjacentTile(int param_1, int param_2);
+            BOOLEnum canUnitReachAdjacentTile(int param_1, int param_2);
 
             void processDamageToUnitsOnBuilding(int buildingID, int damageBonus);
 
@@ -399,7 +399,7 @@ namespace Map {
 
             int buildingIsAccessible(int buildingID, int amountUnk);
 
-            char resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
+            int resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
             void giveBackResourceForDestroyedBuilding(int buildingIDORIfNegResourceType, int playerID, int param_3);
 

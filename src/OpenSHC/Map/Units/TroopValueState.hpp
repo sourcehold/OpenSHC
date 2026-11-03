@@ -121,7 +121,7 @@ namespace Map {
 
             int findNearestDiggableMoatPoint(int param_1);
 
-            undefined4 findTribeWithMoatAttackBehavior();
+            BOOLEnum findTribeWithMoatAttackBehavior();
 
             void countAvailableHighValueSlots(int param_1);
 
@@ -182,7 +182,7 @@ namespace Map {
 
             BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID, int param_3);
 
-            undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
+            BOOLEnum giveLightPitchInstructionToUnitClosestToPitch(int tile);
 
             void lightPitchIfNecessary(int unitID, int unitID2);
 
@@ -192,7 +192,7 @@ namespace Map {
 
             void queueOilThrowForIdleArchers();
 
-            undefined4 ifNecessaryThrowOilAutomatically(int param_1);
+            BOOLEnum ifNecessaryThrowOilAutomatically(int param_1);
 
             void commandUnitsToMoveToKeep();
 
@@ -212,7 +212,7 @@ namespace Map {
 
             void decideAndExecuteTribeAttackAction(int tribeID);
 
-            undefined4 moveTribeToNearbyGatehouse(int param_1);
+            BOOLEnum moveTribeToNearbyGatehouse(int param_1);
 
             void moveTowardsParticularUnits(int param_1);
 

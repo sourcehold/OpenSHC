@@ -111,7 +111,7 @@ namespace Rendering {
 
         void tweakValidTilesToExcludeMapBorders();
 
-        int resetBatchedRender();
+        BOOLEnum resetBatchedRender();
 
         void renderAssassinClimbingOverlay(int param_1);
 

@@ -45,13 +45,13 @@ namespace Synchrony_Func {
         Address::SHC_3BB0A8C1_0x00467BC0, &OpenSHC::Synchrony::EnumDisplayModesCallback)
     EnumDisplayModesCallback;
 
-    MACRO_FUNCTION_RESOLVER(BOOL(__stdcall*)(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
+    MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
                                 LPCDPNAME lpName, DWORD dwFlags, LPVOID lpContext),
         false, Address::SHC_3BB0A8C1_0x0047D5B0, &OpenSHC::Synchrony::EnumConnectionsCallback)
     EnumConnectionsCallback;
 
     MACRO_FUNCTION_RESOLVER(
-        BOOL(__stdcall*)(LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext), false,
+        BOOLEnum(__stdcall*)(LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext), false,
         Address::SHC_3BB0A8C1_0x0047DF40, &OpenSHC::Synchrony::EnumSessionsCallback_addSession_async)
     EnumSessionsCallback_addSession_async;
 

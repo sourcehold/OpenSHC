@@ -119,7 +119,7 @@ namespace Synchrony {
             &GameSynchronyState::handleUnexpectedDPlayXResult)
         handleUnexpectedDPlayXResult;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EDE0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EDE0,
             &GameSynchronyState::checkAllPlayersReadyAndCleanupSlots)
         checkAllPlayersReadyAndCleanupSlots;
 
@@ -167,7 +167,7 @@ namespace Synchrony {
             &GameSynchronyState::getCommandIDFromCommandSelectionStuff)
         getCommandIDFromCommandSelectionStuff;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
             &GameSynchronyState::getGameCommandArrayIndex)
         getGameCommandArrayIndex;
 
@@ -264,7 +264,7 @@ namespace Synchrony {
             &GameSynchronyState::sendPeriodicSyncMessages)
         sendPeriodicSyncMessages;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C7B0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C7B0,
             &GameSynchronyState::reorderTeamsAndPositions)
         reorderTeamsAndPositions;
 

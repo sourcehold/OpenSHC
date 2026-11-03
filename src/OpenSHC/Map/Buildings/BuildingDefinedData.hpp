@@ -78,22 +78,22 @@ namespace Map {
             int BuildingHeights[110]; // 0x00003F9C length: 440
             int BuildingDestroyedScoreWeight[110]; // 0x00004154 length: 440
             byte field43_0x430c[312]; // 0x0000430C length: 312
-            byte FletcherWorkshopAnimationCycle[160]; // 0x00004444 length: 160
+            char FletcherWorkshopAnimationCycle[160]; // 0x00004444 length: 160
             byte field45_0x44e4[400]; // 0x000044E4 length: 400
             byte field46_0x4674[608]; // 0x00004674 length: 608
             char FletchersWorkshopAnimationFrames2[56]; // 0x000048D4 length: 56
-            byte ArmorersWorkshopAnimationFrames1[448]; // 0x0000490C length: 448
-            byte ArmorersWorkshopAnimationFrames2[112]; // 0x00004ACC length: 112
-            byte ArmorersWorkshopAnimationFrames3[20]; // 0x00004B3C length: 20
-            byte HuntersPostAnimationFrames1[24]; // 0x00004B50 length: 24
+            char ArmorersWorkshopAnimationFrames1[448]; // 0x0000490C length: 448
+            char ArmorersWorkshopAnimationFrames2[112]; // 0x00004ACC length: 112
+            char ArmorersWorkshopAnimationFrames3[20]; // 0x00004B3C length: 20
+            char HuntersPostAnimationFrames1[24]; // 0x00004B50 length: 24
             char HuntersPostAnimationFrames2[40]; // 0x00004B68 length: 40
-            byte HuntersPostAnimationFrames3[28]; // 0x00004B90 length: 28
-            byte WoodcuttersHutAnimationFrames[104]; // 0x00004BAC length: 104
-            byte BakeryAnimationFrames1[396]; // 0x00004C14 length: 396
-            byte BakeryAnimationFrames2[20]; // 0x00004DA0 length: 20
-            byte BreweryAnimationFrames1[420]; // 0x00004DB4 length: 420
-            byte BreweryAnimationFrames2[44]; // 0x00004F58 length: 44
-            byte BreweryAnimationFrames3[48]; // 0x00004F84 length: 48
+            char HuntersPostAnimationFrames3[28]; // 0x00004B90 length: 28
+            char WoodcuttersHutAnimationFrames[104]; // 0x00004BAC length: 104
+            char BakeryAnimationFrames1[396]; // 0x00004C14 length: 396
+            char BakeryAnimationFrames2[20]; // 0x00004DA0 length: 20
+            char BreweryAnimationFrames1[420]; // 0x00004DB4 length: 420
+            char BreweryAnimationFrames2[44]; // 0x00004F58 length: 44
+            char BreweryAnimationFrames3[48]; // 0x00004F84 length: 48
             char BreweryAnimationFrames4[36]; // 0x00004FB4 length: 36
             char BreweryAnimationFrames5[36]; // 0x00004FD8 length: 36
             char BlacksmithsWorkshopAnimationFrames1[20]; // 0x00004FFC length: 20
@@ -108,109 +108,109 @@ namespace Map {
             char BlacksmithsWorkshopAnimationFrames10[244]; // 0x000051DC length: 244
             char BlacksmithsWorkshopAnimationFrames11[36]; // 0x000052D0 length: 36
             char BlacksmithsWorkshopAnimationFrames12[112]; // 0x000052F4 length: 112
-            byte PoleturnersWorkshopAnimationFrames1[88]; // 0x00005364 length: 88
+            char PoleturnersWorkshopAnimationFrames1[88]; // 0x00005364 length: 88
             byte field75_0x53bc[200]; // 0x000053BC length: 200
-            byte PoleturnersWorkshopAnimationFrames2[36]; // 0x00005484 length: 36
+            char PoleturnersWorkshopAnimationFrames2[36]; // 0x00005484 length: 36
             char PoleturnersWorkshopAnimationFrames3[36]; // 0x000054A8 length: 36
             byte field78_0x54cc[144]; // 0x000054CC length: 144
-            byte PoleturnersWorkshopAnimationFrames4[72]; // 0x0000555C length: 72
-            byte PoleturnersWorkshopAnimationFrames5[28]; // 0x000055A4 length: 28
+            char PoleturnersWorkshopAnimationFrames4[72]; // 0x0000555C length: 72
+            char PoleturnersWorkshopAnimationFrames5[28]; // 0x000055A4 length: 28
             char SecondaryOverlayAnimationFrames[20]; // 0x000055C0 length: 20
             char BreweryAnimationFrames6[260]; // 0x000055D4 length: 260
-            byte AnimTannerSolitary[44]; // 0x000056D8 length: 44
-            byte AnimTanner[12]; // 0x00005704 length: 12
+            char AnimTannerSolitary[44]; // 0x000056D8 length: 44
+            char AnimTanner[12]; // 0x00005704 length: 12
             char AnimTanner3[28]; // 0x00005710 length: 28
             char AnimTanner4[32]; // 0x0000572C length: 32
             char AnimTannerSolitary2[56]; // 0x0000574C length: 56
-            byte AnimTanner2[16]; // 0x00005784 length: 16
-            byte TannersWorkshopAnimationFrames1[92]; // 0x00005794 length: 92
-            byte TannersWorkshopAnimationFrames2[36]; // 0x000057F0 length: 36
-            byte AnimTanner5[40]; // 0x00005814 length: 40
-            byte AnimTannerSolitary4[152]; // 0x0000583C length: 152
-            byte AnimTanner6[152]; // 0x000058D4 length: 152
-            byte AnimTanner7[172]; // 0x0000596C length: 172
-            byte TunnelAnimationFrames[52]; // 0x00005A18 length: 52
-            byte CampGroundAnimationFrames[36]; // 0x00005A4C length: 36
-            byte QuarryAnimationFrames1[28]; // 0x00005A70 length: 28
-            byte QuarryAnimationFrames2[64]; // 0x00005A8C length: 64
-            byte QuarryAnimationFrames3[20]; // 0x00005ACC length: 20
-            byte QuarryAnimationFrames4[24]; // 0x00005AE0 length: 24
-            byte QuarryAnimationFrames5[28]; // 0x00005AF8 length: 28
-            byte QuarryAnimationFrames6[56]; // 0x00005B14 length: 56
-            byte SomeAnimationNumbersUnk[24]; // 0x00005B4C length: 24
-            byte QuarryAnimationFrames7[32]; // 0x00005B64 length: 32
-            byte QuarryAnimationFrames8[16]; // 0x00005B84 length: 16
-            byte QuarryAnimationFrames9[64]; // 0x00005B94 length: 64
-            byte QuarryAnimationFrames10[112]; // 0x00005BD4 length: 112
-            byte QuarryAnimationFrames11[20]; // 0x00005C44 length: 20
-            byte QuarryAnimationFrames12[40]; // 0x00005C58 length: 40
-            byte QuarryAnimationFrames13[60]; // 0x00005C80 length: 60
-            byte QuarryAnimationFrames14[72]; // 0x00005CBC length: 72
-            byte QuarryAnimationFrames15[24]; // 0x00005D04 length: 24
-            byte QuarryAnimationFrames16[64]; // 0x00005D1C length: 64
-            byte QuarryAnimationFrames17[16]; // 0x00005D5C length: 16
-            byte QuarryAnimationFrames18[376]; // 0x00005D6C length: 376
-            byte QuarryAnimationFrames19[264]; // 0x00005EE4 length: 264
-            byte QuarryAnimationFrames20[304]; // 0x00005FEC length: 304
-            byte QuarryAnimationFrames21[384]; // 0x0000611C length: 384
-            byte IronMineAnimationFrames1[88]; // 0x0000629C length: 88
-            byte IronMineAnimationFrames2[80]; // 0x000062F4 length: 80
-            byte IronMineAnimationFrames3[472]; // 0x00006344 length: 472
-            byte IronMineAnimationFrames4[112]; // 0x0000651C length: 112
-            byte IronMineAnimationFrames5[104]; // 0x0000658C length: 104
-            byte IronMineAnimationFrames6[184]; // 0x000065F4 length: 184
-            byte IronMineAnimationFrames7[24]; // 0x000066AC length: 24
-            byte IronMineAnimationFrames8[12]; // 0x000066C4 length: 12
-            byte IronMineAnimationFrames9[60]; // 0x000066D0 length: 60
-            byte IronMineAnimationFrames10[452]; // 0x0000670C length: 452
-            byte IronMineAnimationFrames11[36]; // 0x000068D0 length: 36
-            byte IronMineAnimationFrames12[84]; // 0x000068F4 length: 84
+            char AnimTanner2[16]; // 0x00005784 length: 16
+            char TannersWorkshopAnimationFrames1[92]; // 0x00005794 length: 92
+            char TannersWorkshopAnimationFrames2[36]; // 0x000057F0 length: 36
+            char AnimTanner5[40]; // 0x00005814 length: 40
+            char AnimTannerSolitary4[152]; // 0x0000583C length: 152
+            char AnimTanner6[152]; // 0x000058D4 length: 152
+            char AnimTanner7[172]; // 0x0000596C length: 172
+            char TunnelAnimationFrames[52]; // 0x00005A18 length: 52
+            char CampGroundAnimationFrames[36]; // 0x00005A4C length: 36
+            char QuarryAnimationFrames1[28]; // 0x00005A70 length: 28
+            char QuarryAnimationFrames2[64]; // 0x00005A8C length: 64
+            char QuarryAnimationFrames3[20]; // 0x00005ACC length: 20
+            char QuarryAnimationFrames4[24]; // 0x00005AE0 length: 24
+            char QuarryAnimationFrames5[28]; // 0x00005AF8 length: 28
+            char QuarryAnimationFrames6[56]; // 0x00005B14 length: 56
+            char SomeAnimationNumbersUnk[24]; // 0x00005B4C length: 24
+            char QuarryAnimationFrames7[32]; // 0x00005B64 length: 32
+            char QuarryAnimationFrames8[16]; // 0x00005B84 length: 16
+            char QuarryAnimationFrames9[64]; // 0x00005B94 length: 64
+            char QuarryAnimationFrames10[112]; // 0x00005BD4 length: 112
+            char QuarryAnimationFrames11[20]; // 0x00005C44 length: 20
+            char QuarryAnimationFrames12[40]; // 0x00005C58 length: 40
+            char QuarryAnimationFrames13[60]; // 0x00005C80 length: 60
+            char QuarryAnimationFrames14[72]; // 0x00005CBC length: 72
+            char QuarryAnimationFrames15[24]; // 0x00005D04 length: 24
+            char QuarryAnimationFrames16[64]; // 0x00005D1C length: 64
+            char QuarryAnimationFrames17[16]; // 0x00005D5C length: 16
+            char QuarryAnimationFrames18[376]; // 0x00005D6C length: 376
+            char QuarryAnimationFrames19[264]; // 0x00005EE4 length: 264
+            char QuarryAnimationFrames20[304]; // 0x00005FEC length: 304
+            char QuarryAnimationFrames21[384]; // 0x0000611C length: 384
+            char IronMineAnimationFrames1[88]; // 0x0000629C length: 88
+            char IronMineAnimationFrames2[80]; // 0x000062F4 length: 80
+            char IronMineAnimationFrames3[472]; // 0x00006344 length: 472
+            char IronMineAnimationFrames4[112]; // 0x0000651C length: 112
+            char IronMineAnimationFrames5[104]; // 0x0000658C length: 104
+            char IronMineAnimationFrames6[184]; // 0x000065F4 length: 184
+            char IronMineAnimationFrames7[24]; // 0x000066AC length: 24
+            char IronMineAnimationFrames8[12]; // 0x000066C4 length: 12
+            char IronMineAnimationFrames9[60]; // 0x000066D0 length: 60
+            char IronMineAnimationFrames10[452]; // 0x0000670C length: 452
+            char IronMineAnimationFrames11[36]; // 0x000068D0 length: 36
+            char IronMineAnimationFrames12[84]; // 0x000068F4 length: 84
             char PitchRigAnimationFrames1[52]; // 0x00006948 length: 52
-            byte PitchRigAnimationFrames2[56]; // 0x0000697C length: 56
-            byte PitchRigAnimationFrames3[104]; // 0x000069B4 length: 104
+            char PitchRigAnimationFrames2[56]; // 0x0000697C length: 56
+            char PitchRigAnimationFrames3[104]; // 0x000069B4 length: 104
             char MillAnimationFrames1[16]; // 0x00006A1C length: 16
-            byte MillAnimationFrames2[16]; // 0x00006A2C length: 16
-            byte MillAnimationFrames3[16]; // 0x00006A3C length: 16
-            byte MillAnimationFrames4[136]; // 0x00006A4C length: 136
-            byte MillAnimationFrames5[16]; // 0x00006AD4 length: 16
-            byte DrawBridgeAnimationFrames1[32]; // 0x00006AE4 length: 32
-            byte DrawBridgeAnimationFrames2[36]; // 0x00006B04 length: 36
-            byte GateHouseLargeAnimationFrames[28]; // 0x00006B28 length: 28
-            byte GateHouseOverlayAnimationFrames[32]; // 0x00006B44 length: 32
-            byte DairyFarmAnimationFrames1[264]; // 0x00006B64 length: 264
-            byte DairyFarmAnimationFrames2[664]; // 0x00006C6C length: 664
-            byte DairyFarmAnimationFrames3[448]; // 0x00006F04 length: 448
-            byte DairyFarmAnimationFrames4[152]; // 0x000070C4 length: 152
+            char MillAnimationFrames2[16]; // 0x00006A2C length: 16
+            char MillAnimationFrames3[16]; // 0x00006A3C length: 16
+            char MillAnimationFrames4[136]; // 0x00006A4C length: 136
+            char MillAnimationFrames5[16]; // 0x00006AD4 length: 16
+            char DrawBridgeAnimationFrames1[32]; // 0x00006AE4 length: 32
+            char DrawBridgeAnimationFrames2[36]; // 0x00006B04 length: 36
+            char GateHouseLargeAnimationFrames[28]; // 0x00006B28 length: 28
+            char GateHouseOverlayAnimationFrames[32]; // 0x00006B44 length: 32
+            char DairyFarmAnimationFrames1[264]; // 0x00006B64 length: 264
+            char DairyFarmAnimationFrames2[664]; // 0x00006C6C length: 664
+            char DairyFarmAnimationFrames3[448]; // 0x00006F04 length: 448
+            char DairyFarmAnimationFrames4[152]; // 0x000070C4 length: 152
             char StablesAnimationFrames[644]; // 0x0000715C length: 644
-            byte OilSmelterAnimationFrames1[52]; // 0x000073E0 length: 52
-            byte OilSmelterAnimationFrames2[80]; // 0x00007414 length: 80
-            byte OilSmelterAnimationFrames3[48]; // 0x00007464 length: 48
-            byte OilSmelterAnimationFrames4[48]; // 0x00007494 length: 48
-            byte OilSmelterAnimationFrames5[48]; // 0x000074C4 length: 48
-            byte OilSmelterAnimationFrames6[48]; // 0x000074F4 length: 48
-            byte OilSmelterAnimationFrames7[48]; // 0x00007524 length: 48
-            byte OilSmelterAnimationFrames8[48]; // 0x00007554 length: 48
-            byte OilSmelterAnimationFrames9[40]; // 0x00007584 length: 40
-            byte OilSmelterAnimationFrames10[80]; // 0x000075AC length: 80
-            byte BadBuildingGallowsAnimationFrames[40]; // 0x000075FC length: 40
-            byte BadBuildingStocksAnimationFrames[72]; // 0x00007624 length: 72
-            byte BadBuildingDungeonAnimationFrames[80]; // 0x0000766C length: 80
-            byte BadBuildingDunkingStoolAnimationFrames[172]; // 0x000076BC length: 172
-            byte BadBuildingGibbetAnimationFrames[36]; // 0x00007768 length: 36
-            byte BadBuildingBurningStakeAnimationFrames[88]; // 0x0000778C length: 88
-            byte BadBuildingStretchingRackAnimationFrames[160]; // 0x000077E4 length: 160
-            byte BadBuildingChoppingBlockAnimationFrames[200]; // 0x00007884 length: 200
-            byte DogCageAnimationFrames[40]; // 0x0000794C length: 40
-            byte GoodBuildingMaypoleAnimationFrames1[80]; // 0x00007974 length: 80
-            byte GoodBuildingMaypoleAnimationFrames2[80]; // 0x000079C4 length: 80
-            byte GoodBuildingDancingBearAnimationFrames[344]; // 0x00007A14 length: 344
-            byte AnimMarketPlace[104]; // 0x00007B6C length: 104
-            byte ApothecaryAnimationFrames[104]; // 0x00007BD4 length: 104
-            byte InnAnimationFrames1[88]; // 0x00007C3C length: 88
-            byte InnAnimationFrames2[136]; // 0x00007C94 length: 136
-            byte InnAnimationFrames3[140]; // 0x00007D1C length: 140
-            byte InnAnimationFrames4[36]; // 0x00007DA8 length: 36
-            byte InnAnimationFrames5[80]; // 0x00007DCC length: 80
+            char OilSmelterAnimationFrames1[52]; // 0x000073E0 length: 52
+            char OilSmelterAnimationFrames2[80]; // 0x00007414 length: 80
+            char OilSmelterAnimationFrames3[48]; // 0x00007464 length: 48
+            char OilSmelterAnimationFrames4[48]; // 0x00007494 length: 48
+            char OilSmelterAnimationFrames5[48]; // 0x000074C4 length: 48
+            char OilSmelterAnimationFrames6[48]; // 0x000074F4 length: 48
+            char OilSmelterAnimationFrames7[48]; // 0x00007524 length: 48
+            char OilSmelterAnimationFrames8[48]; // 0x00007554 length: 48
+            char OilSmelterAnimationFrames9[40]; // 0x00007584 length: 40
+            char OilSmelterAnimationFrames10[80]; // 0x000075AC length: 80
+            char BadBuildingGallowsAnimationFrames[40]; // 0x000075FC length: 40
+            char BadBuildingStocksAnimationFrames[72]; // 0x00007624 length: 72
+            char BadBuildingDungeonAnimationFrames[80]; // 0x0000766C length: 80
+            char BadBuildingDunkingStoolAnimationFrames[172]; // 0x000076BC length: 172
+            char BadBuildingGibbetAnimationFrames[36]; // 0x00007768 length: 36
+            char BadBuildingBurningStakeAnimationFrames[88]; // 0x0000778C length: 88
+            char BadBuildingStretchingRackAnimationFrames[160]; // 0x000077E4 length: 160
+            char BadBuildingChoppingBlockAnimationFrames[200]; // 0x00007884 length: 200
+            char DogCageAnimationFrames[40]; // 0x0000794C length: 40
+            char GoodBuildingMaypoleAnimationFrames1[80]; // 0x00007974 length: 80
+            char GoodBuildingMaypoleAnimationFrames2[80]; // 0x000079C4 length: 80
+            char GoodBuildingDancingBearAnimationFrames[344]; // 0x00007A14 length: 344
+            char AnimMarketPlace[104]; // 0x00007B6C length: 104
+            char ApothecaryAnimationFrames[104]; // 0x00007BD4 length: 104
+            char InnAnimationFrames1[88]; // 0x00007C3C length: 88
+            char InnAnimationFrames2[136]; // 0x00007C94 length: 136
+            char InnAnimationFrames3[140]; // 0x00007D1C length: 140
+            char InnAnimationFrames4[36]; // 0x00007DA8 length: 36
+            char InnAnimationFrames5[80]; // 0x00007DCC length: 80
             char SharedOverlayAnimationFrames[52]; // 0x00007E1C length: 52
             int BuildingAccessibleTilesCountForOneLarger[15]; // 0x00007E50 length: 60
             XYPair field179_0x7e8c[8]; // 0x00007E8C length: 64

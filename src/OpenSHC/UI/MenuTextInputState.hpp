@@ -56,7 +56,7 @@ namespace UI {
         undefined4 fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
-        undefined4 fileListVisibleRowCount; // 0x00000084 length: 4
+        int fileListVisibleRowCount; // 0x00000084 length: 4
         undefined4 DAT_SomeTextArrayIndex; // 0x00000088 length: 4
         undefined4 lastClickedListIndex; // 0x0000008C length: 4
         undefined4 lastListClickTime; // 0x00000090 length: 4

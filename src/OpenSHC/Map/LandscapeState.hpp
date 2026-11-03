@@ -85,13 +85,13 @@ namespace Map {
 
         void killEveryFifthTree();
 
-        undefined4 setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
+        BOOLEnum setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 
         BOOLEnum isTreeAliveAndMatchingUID(int treeID, int param_2);
 
         BOOLEnum isTreeAdult(int treeID, int treeUID);
 
-        undefined4 damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
+        BOOLEnum damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
 
         void advanceTreeDecayState(int treeID, int param_2);
 

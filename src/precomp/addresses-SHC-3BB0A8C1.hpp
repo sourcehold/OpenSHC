@@ -664,7 +664,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401690 = 0x00401690,
-    // label: somethingWithSeparateAreas1
+    // label: findNearestDiseaseCloudForHealer
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004016E0 = 0x004016E0,
@@ -93913,21 +93913,64 @@ enum {
     // label: DAT_BuildingTgxSketchArray
     // location:
     SHC_3BB0A8C1_0x00617D20 = 0x00617D20,
+    // label: DAT_StockpileMenuResourceTypes
+    // location:
+    // type: OpenSHC/Game/Resources/ResourceTypeInt[8]
+    SHC_3BB0A8C1_0x00617ED0 = 0x00617ED0,
+    // label: DAT_StockpileMenuResourceIcons
+    // location:
+    // type: /int[8]
+    SHC_3BB0A8C1_0x00617EF0 = 0x00617EF0,
     // label: DAT_StockpileIconsPositionNudges
     // location:
+    // type: OpenSHC/UI/Position[8]
     SHC_3BB0A8C1_0x00617F10 = 0x00617F10,
+    // label: DAT_ArmoryMenuResourceTypes
+    // location:
+    // type: /int[8]
+    SHC_3BB0A8C1_0x00617F50 = 0x00617F50,
+    // label: DAT_ArmoryMenuResourceIcons
+    // location:
+    // type: /int[8]
+    SHC_3BB0A8C1_0x00617F70 = 0x00617F70,
+    // label: DAT_ArmoryIconsPositionNudges
+    // location:
+    // type: OpenSHC/UI/Position[8]
+    SHC_3BB0A8C1_0x00617F90 = 0x00617F90,
     // label: DAT_MarketStonksOrder
     // location:
+    // type: /int[20]
     SHC_3BB0A8C1_0x00617FD0 = 0x00617FD0,
     // label: DAT_FoodTypes
     // location:
+    // type: OpenSHC/Game/Resources/ResourceTypeInt[8]
     SHC_3BB0A8C1_0x00618020 = 0x00618020,
     // label: DAT_RawResourceTypes
     // location:
+    // type: /int[4]
     SHC_3BB0A8C1_0x00618040 = 0x00618040,
+    // label: DAT_ARRAY_00618050
+    // location:
+    // type: /int[8]
+    SHC_3BB0A8C1_0x00618050 = 0x00618050,
+    // label: DAT_ARRAY_00618070
+    // location:
+    // type: OpenSHC/UI/Position[25]
+    SHC_3BB0A8C1_0x00618070 = 0x00618070,
+    // label: DAT_PopularityMessageLayout
+    // location:
+    // type: /int[7][3]
+    SHC_3BB0A8C1_0x00618138 = 0x00618138,
+    // label: DAT_ARRAY_0061818c
+    // location:
+    // type: /int[21]
+    SHC_3BB0A8C1_0x0061818C = 0x0061818C,
     // label: DAT_UnitTypeGroups
     // location:
+    // type: OpenSHC/Map/Units/UnitTypeInt[3][9]
     SHC_3BB0A8C1_0x006181E0 = 0x006181E0,
+    // type: /int
+    SHC_3BB0A8C1_0x0061824C = 0x0061824C,
     // type: /pointer
     SHC_3BB0A8C1_0x00618250 = 0x00618250,
     // label: DAT_SpeechDefinedData
@@ -96355,7 +96398,7 @@ enum {
     // location:
     // type: /int[116000]
     SHC_3BB0A8C1_0x00D0BA10 = 0x00D0BA10,
-    // label: GMTotalPicturesProcessed
+    // label: GMFirstPictureIndex
     // location:
     // type: /int[240]
     SHC_3BB0A8C1_0x00D7CE90 = 0x00D7CE90,
@@ -97304,7 +97347,7 @@ enum {
     SHC_3BB0A8C1_0x00EB9AE8 = 0x00EB9AE8,
     // label: DAT_UnknownBinkIndex
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9AF0 = 0x00EB9AF0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9AF4 = 0x00EB9AF4,
@@ -97342,7 +97385,7 @@ enum {
     SHC_3BB0A8C1_0x00EB9B4C = 0x00EB9B4C,
     // label: DAT_UnknownBinkCount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B50 = 0x00EB9B50,
     // label: DAT_StoredGameMode
     // location:

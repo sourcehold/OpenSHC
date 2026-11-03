@@ -46,16 +46,16 @@ namespace Map {
         ushort PillarGFXLayer[80400]; // 0x000C80E0 length: 160800
         ushort WallGFXLayer[80400]; // 0x000EF500 length: 160800
         ushort FloatingLayer[80400]; // 0x00116920 length: 160800
-        ushort RandomLayer[80400]; // 0x0013DD40 length: 160800
+        short RandomLayer[80400]; // 0x0013DD40 length: 160800
         int LogicLayer[80400]; // 0x00165160 length: 321600
         byte unknownData1[1600]; // 0x001B39A0 length: 1600
-        byte Logic2Layer[80400]; // 0x001B3FE0 length: 80400
+        char Logic2Layer[80400]; // 0x001B3FE0 length: 80400
         byte unknownData2[400]; // 0x001C79F0 length: 400
         byte ChangedLayer[80400]; // 0x001C7B80 length: 80400
         short OrganismLayer[80400]; // 0x001DB590 length: 160800
         short BuildingLayer[80400]; // 0x002029B0 length: 160800
         uchar BuildingWasLayer[80400]; // 0x00229DD0 length: 80400
-        ushort UnitLayer[80400]; // 0x0023D7E0 length: 160800
+        short UnitLayer[80400]; // 0x0023D7E0 length: 160800
         short EntityLayer[80400]; // 0x00264C00 length: 160800
         char EntityLayerLT25[80400]; // 0x0028C020 length: 80400
         byte HeightLayer[80400]; // 0x0029FA30 length: 80400
@@ -64,7 +64,7 @@ namespace Map {
         uchar LuminesenceLayer[80400]; // 0x002DA860 length: 80400
         uchar ShowHiLayer[80400]; // 0x002EE270 length: 80400
         short MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
-        byte DamageLayer[80400]; // 0x003290A0 length: 80400
+        char DamageLayer[80400]; // 0x003290A0 length: 80400
         ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
         ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
@@ -286,7 +286,7 @@ namespace Map {
 
         BOOLEnum isTileEnclosedByWallsOrGates(int param_1, int param_2);
 
-        undefined4 isTileEnclosedByWalls(int param_1, int param_2);
+        BOOLEnum isTileEnclosedByWalls(int param_1, int param_2);
 
         BOOLEnum isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
@@ -296,7 +296,7 @@ namespace Map {
 
         BOOLEnum hasOnlyTowerNeighborsNoWalls(int tile, int y);
 
-        uint getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
+        BOOLEnum getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
 
         BOOLEnum hasHigherNeighborWithStairs(int tile, int y, int direction);
 
@@ -431,7 +431,7 @@ namespace Map {
 
         int setXYBasedOnMoatID(int tile, int param_2, uint x, uint y);
 
-        undefined4 advanceMoatDigProgress(int moatID);
+        BOOLEnum advanceMoatDigProgress(int moatID);
 
         void clearMoat(int tile);
 
@@ -457,7 +457,7 @@ namespace Map {
 
         void swapPitchOwnership(int param_1, int param_2);
 
-        undefined4 findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
+        BOOLEnum findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
 
         int computeTileAlongAxisOffset(int param_1, int param_2, uint param_3);
 

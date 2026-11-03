@@ -79,7 +79,7 @@ namespace Game {
         int someSoundMatchTime_1; // 0x0000008C length: 4
         dword field33_0x90; // 0x00000090 length: 4
         int battleLevel2; // 0x00000094 length: 4
-        dword mapTimeInTicks; // 0x00000098 length: 4
+        int mapTimeInTicks; // 0x00000098 length: 4
         dword section1127; // 0x0000009C length: 4
         dword field37_0xa0; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4
@@ -109,8 +109,8 @@ namespace Game {
         dword field62_0x104; // 0x00000104 length: 4
         dword field63_0x108; // 0x00000108 length: 4
         dword unknownAlwaysZero; // 0x0000010C length: 4
-        dword unknownAlwaysZero02; // 0x00000110 length: 4
-        int unknownAlwaysZero03; // 0x00000114 length: 4
+        dword jokeChickenSpam; // 0x00000110 length: 4
+        int showTextMessageInsteadOfEdit; // 0x00000114 length: 4
         BOOLEnum isNameEntryActive; // 0x00000118 length: 4
         DWORD nameEntryStartTime; // 0x0000011C length: 4
         byte unused_0x120[8]; // 0x00000120 length: 8
