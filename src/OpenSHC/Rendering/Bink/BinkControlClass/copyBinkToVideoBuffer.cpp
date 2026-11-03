@@ -40,8 +40,9 @@ namespace Rendering {
                 self->unknown02_zero[binkObjIndex] = 0;
             }
 
-            if (self->binkObjPtrArray[binkObjIndex] == NULL || self->unknownParam07[binkObjIndex] != param_1)
+            if (self->binkObjPtrArray[binkObjIndex] == NULL || self->unknownParam07[binkObjIndex] != param_1) {
                 return;
+            }
 
             if (BinkWait(self->binkObjPtrArray[binkObjIndex]) == 0) {
                 BinkDoFrame(self->binkObjPtrArray[binkObjIndex]);
@@ -79,16 +80,19 @@ namespace Rendering {
                     DAT_WindowAndDirectDraw::instance.resolutionY, COL_BLACK::instance.shortValue);
             }
 
-            if (!self->frameReadyToDisplay[binkObjIndex])
+            if (!self->frameReadyToDisplay[binkObjIndex]) {
                 return;
+            }
 
             IDirectDrawSurface* surface;
             if (self->unknownParam04[binkObjIndex] != 0) {
                 HRESULT result = DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_mapGame->Lock(
                     NULL, &DAT_WindowAndDirectDraw::instance.surfDescBink_offSurfMapGame, DDLOCK_WAIT, NULL);
                 while (result == DDERR_SURFACELOST) {
-                    if (DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_mapGame->Restore() != DD_OK)
+                    if (DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_mapGame->Restore()
+                        != DD_OK) {
                         return;
+                    }
                     result = DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_mapGame->Lock(
                         NULL, &DAT_WindowAndDirectDraw::instance.surfDescBink_offSurfMapGame, DDLOCK_WAIT, NULL);
                 }
@@ -103,8 +107,9 @@ namespace Rendering {
                     NULL, &DAT_WindowAndDirectDraw::instance.surfDescBink_offSurfScreenMenu_0x104, DDLOCK_WAIT, NULL);
                 while (result == DDERR_SURFACELOST) {
                     if (DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_screenMenu->Restore()
-                        != DD_OK)
+                        != DD_OK) {
                         return;
+                    }
                     result = DAT_WindowAndDirectDraw::instance.directDrawOffscreenSurfacePointer_screenMenu->Lock(NULL,
                         &DAT_WindowAndDirectDraw::instance.surfDescBink_offSurfScreenMenu_0x104, DDLOCK_WAIT, NULL);
                 }

@@ -23071,7 +23071,7 @@ SHC_3BB0A8C1_0x00487770 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487A30 | 68.3% | this spilled to edi across the proxied computeLatencyAdjustmentFromMatchTimes (81.2% with that callee reimplemented); return-block layout
+SHC_3BB0A8C1_0x00487A30 | 69.4% | this spilled to edi across the proxied computeLatencyAdjustmentFromMatchTimes (81.2% with that callee reimplemented); return-block layout
 
 SHC_3BB0A8C1_0x00487C50 | 0.0% | Pending
 

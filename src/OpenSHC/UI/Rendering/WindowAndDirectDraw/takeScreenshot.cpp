@@ -35,8 +35,9 @@ namespace UI {
             // game's own operator<<(ostream&, char), OS::basic_ofstream_write (0x004791B0); the stream object is our
             // library's std::ofstream, which has the same VC8 layout.
             std::ofstream file(path, std::ios::binary);
-            if (file.fail())
+            if (file.fail()) {
                 return;
+            }
 
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::bltMapGameSurfaceToScreenMenuSurfaceComplete, this)();

@@ -71,7 +71,6 @@ namespace UI {
         {
             RECT destinationRect;
             RECT sourceRect;
-            char debugText[2000];
             int menuBarHeight = 128;
             BOOL mapBltPending = FALSE;
             if (param_1 >= 100) {
@@ -111,6 +110,7 @@ namespace UI {
                 sourceRect.right = this->gameResolutionX;
                 sourceRect.bottom = this->gameResolutionY;
                 if (param_1 == 1) {
+                    char debugText[2000];
                     MACRO_CALL(OpenSHC::OS_Func::_sprintf)(debugText, s_Vid__d__sys__d_005a6208,
                         this->directDrawBackbufferSurfacePointer, this->directDrawOffscreenSurfacePointer_screenMenu);
                 }

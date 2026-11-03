@@ -44,8 +44,9 @@ namespace UI {
             int lineTail;
             void** streamRunHandlers = s_tgxStreamPixelHandlers;
             void** repeatedPixelHandlers = s_tgxRepeatedPixelHandlers;
-            if (imageHeight <= 0)
+            if (imageHeight <= 0) {
                 return;
+            }
 
             if (DAT_TextureRenderCoreObject::instance.isZoom2 == 0) {
                 switch (this->drawBufferChoiceValue) {
@@ -76,8 +77,9 @@ namespace UI {
                 }
                 if (drawY + imageHeight > heightMax) {
                     imageHeight = imageHeight - (drawY + imageHeight - heightMax);
-                    if (imageHeight <= 0)
+                    if (imageHeight <= 0) {
                         return;
+                    }
                 }
                 // clang-format off
                 __asm {
@@ -1346,8 +1348,9 @@ namespace UI {
                 heightStart = this->mapGameSurfaceHeightRange.start;
                 if (drawY + imageHeight > this->mapGameSurfaceHeightRange.end) {
                     imageHeight = imageHeight - (drawY + imageHeight - this->mapGameSurfaceHeightRange.end);
-                    if (imageHeight <= 0)
+                    if (imageHeight <= 0) {
                         return;
+                    }
                 }
                 // clang-format off
                 __asm {

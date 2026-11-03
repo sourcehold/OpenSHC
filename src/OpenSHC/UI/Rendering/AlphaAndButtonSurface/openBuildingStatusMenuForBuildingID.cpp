@@ -146,8 +146,6 @@ namespace UI {
                         .buildingType),
                 1, DAT_GameSynchronyState::instance.currentPlayerSlotID);
             int const currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-            int setting;
-            int gatehouse;
             switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
             case OpenSHC::Map::Buildings::BT_MERCENARYPOST:
                 menuTab = 0x2c;
@@ -171,14 +169,16 @@ namespace UI {
             case OpenSHC::Map::Buildings::BT_KEEPFIVE:
             case OpenSHC::Map::Buildings::BT_KEEPDOOR_LEFT:
             case OpenSHC::Map::Buildings::BT_KEEPDOOR_RIGHT:
-            case OpenSHC::Map::Buildings::BT_KEEPDOOR:
-                setting = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .taxesSetting;
+            case OpenSHC::Map::Buildings::BT_KEEPDOOR: {
+                int const taxes
+                    = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .taxesSetting;
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .taxesSetting2 = setting;
+                    .taxesSetting2 = taxes;
                 menuTab = 2;
-                DAT_GameState::instance.playerDataArray[currentPlayer].taxesSliderUI = setting;
+                DAT_GameState::instance.playerDataArray[currentPlayer].taxesSliderUI = taxes;
                 break;
+            }
             case OpenSHC::Map::Buildings::BT_INN:
                 menuTab = 3;
                 break;
@@ -228,14 +228,16 @@ namespace UI {
             case OpenSHC::Map::Buildings::BT_BREWERY:
                 menuTab = 0x13;
                 break;
-            case OpenSHC::Map::Buildings::BT_GRANARY:
-                setting = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .rationsSetting;
+            case OpenSHC::Map::Buildings::BT_GRANARY: {
+                int const rations
+                    = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .rationsSetting;
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .rationsSetting2 = setting;
+                    .rationsSetting2 = rations;
                 menuTab = 4;
-                DAT_GameState::instance.playerDataArray[currentPlayer].rationsSetting3 = setting;
+                DAT_GameState::instance.playerDataArray[currentPlayer].rationsSetting3 = rations;
                 break;
+            }
             case OpenSHC::Map::Buildings::BT_QUARRY:
                 menuTab = 0x14;
                 break;
@@ -299,27 +301,28 @@ namespace UI {
                 }
                 menuTab = 0x24;
                 break;
-            case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:
-                gatehouse = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
+            case OpenSHC::Map::Buildings::BT_DRAWBRIDGE: {
+                // The drawbridge belongs to the large or the small gatehouse next to it.
+                int gatehouse = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     (int)((short)DAT_BuildingsState::instance.buildings[buildingID].x),
                     (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y),
                     (int)(DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight),
                     OpenSHC::Map::Buildings::BT_GATEHOUSELARGE, 0);
-                if (((gatehouse != 0)
-                        || (gatehouse
-                            = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
-                                DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
-                                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].x),
-                                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y),
-                                (int)(DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight),
-                                OpenSHC::Map::Buildings::BT_GATEHOUSESMALL, 0),
-                            gatehouse != 0))
-                    && DAT_BuildingsState::instance.buildings[gatehouse].field203_0x2c6 != 0) {
+                if (gatehouse == 0) {
+                    gatehouse = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
+                        DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].x),
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y),
+                        (int)(DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight),
+                        OpenSHC::Map::Buildings::BT_GATEHOUSESMALL, 0);
+                }
+                if (gatehouse != 0 && DAT_BuildingsState::instance.buildings[gatehouse].field203_0x2c6 != 0) {
                     return FALSE;
                 }
                 menuTab = 0x25;
                 break;
+            }
             case OpenSHC::Map::Buildings::BT_WOODGATE2:
                 menuTab = 0x26;
                 break;
