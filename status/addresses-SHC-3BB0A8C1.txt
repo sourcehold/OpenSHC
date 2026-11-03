@@ -23061,7 +23061,7 @@ SHC_3BB0A8C1_0x00487250 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487390 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004874B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004874B0 | 100.0% | Reimplemented, only the GUID resolver names, the DirectPlayCreate thunk and the callback address differ
 
 SHC_3BB0A8C1_0x00487555 | 0.0% | Pending
 
