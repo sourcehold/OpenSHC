@@ -9,15 +9,9 @@
 namespace OpenSHC {
 namespace UI {
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      Renders a horizontal strip of minimap pixels for a given map row range. For each tile, determines   the base
-      colour from LogicLayer flags (water, trees, terrain type) and MiniMapDefinedData colour   tables, then applies a
-      luminescence multiplier per channel (RGB555 or RGB565). Writes results   into the minimap pixel buffer at
-      DAT_MinimapViewState, with support for 1x and 2x scale modes.      renamed by: Claude Sonnet 4.6
-     */
+    // Draws a strip of minimap rows (stripStart% to stripStart + stripLength% of the screen tile rows) into the minimap
+    // pixel buffer: each tile's colour comes from its LogicLayer flags and MiniMapDefinedData's tables, scaled by its
+    // luminescence (RGB555 or RGB565); zoomed out, every other pixel at half the position.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5330
     void MinimapViewState::renderMinimapTileStripWithLuminescence(
         uint flags, int widthFactor, int heightFactor, uint stripStart, int stripLength)
