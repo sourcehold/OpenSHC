@@ -15,6 +15,8 @@ namespace UI {
         if (mapOffset == 400) {
             mapOffset = 0;
         }
+        // the viewport position in pixels (32 per tile across, 8 down), divided back into tiles as
+        // renderMinimapEditor divides viewportX by 32 and viewportY by 8
         int const xOffset = (mapOffset / 2 / 2 + 1) * 32 / 32
             + (DAT_ViewportRenderState::instance.viewportState.viewportHeight - 5) / 2;
         int const yOffset
