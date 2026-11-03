@@ -31,16 +31,18 @@ namespace UI {
                     result = DirectDrawCreate(NULL, &this->pointerToIDirectDrawInterface, NULL);
                     this->NOTSelfBufferOrWindowMode_0xf8 = TRUE;
                 }
-                if (result != DD_OK)
+                if (result != DD_OK) {
                     return FALSE;
+                }
             }
 
             DDCAPS caps;
             MACRO_CALL(OpenSHC::OS_Func::_memset)(&caps, 0, sizeof(caps));
             caps.dwSize = sizeof(caps);
             this->pointerToIDirectDrawInterface->GetCaps(&caps, NULL);
-            if ((caps.dwCaps2 & DDCAPS2_CANBOBHARDWARE) == 0)
+            if ((caps.dwCaps2 & DDCAPS2_CANBOBHARDWARE) == 0) {
                 this->not_DDCAPS2_CANBOBHARDWARE_0xe0 = TRUE;
+            }
 
             this->pointerToIDirectDrawInterface->EnumDisplayModes(
                 0, NULL, NULL, MACRO_CALL(OpenSHC::Synchrony_Func::EnumDisplayModesCallback));
@@ -178,8 +180,9 @@ namespace UI {
             this->directDrawBackbufferSurfacePointer->GetSurfaceDesc(&desc);
             this->colorBitMode = OpenSHC::Rendering::RGB_555;
             // a 6-bit green mask means RGB565
-            if (desc.ddpfPixelFormat.dwGBitMask == 0x7e0)
+            if (desc.ddpfPixelFormat.dwGBitMask == 0x7e0) {
                 this->colorBitMode = OpenSHC::Rendering::RGB_565;
+            }
             MACRO_CALL(OpenSHC::Rendering_Func::InitializeColors)();
 
             // NOTE: the original reads these two fields through the global instance, not through this.

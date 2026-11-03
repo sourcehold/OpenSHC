@@ -49,8 +49,9 @@ void Rendering::RenderActiveCreditsElements()
     for (int layer = 0; layer < 8; layer++) {
         for (int i = 0; i < 24; i++) {
             CreditsRelatedStructure& element = DAT_ARRAY_00ec0348::instance[i];
-            if (element.isValid == 0 || element.field7_0x1c != layer)
+            if (element.isValid == 0 || element.field7_0x1c != layer) {
                 continue;
+            }
 
             // isValid doubles as the element type: 1 image, 2 text, 3 hover image, 4 bordered box.
             // Images fade at twice the speed of the other types.
@@ -74,13 +75,15 @@ void Rendering::RenderActiveCreditsElements()
                         gfxIndex, element.x, element.y, (int)element.blendStrength);
                     if (element.fadeMode == 1) {
                         element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5 * 2.0;
-                        if (element.blendStrength < 1.0)
+                        if (element.blendStrength < 1.0) {
                             element.fadeMode = 0;
+                        }
                     }
                     if (element.fadeMode == 2) {
                         element.blendStrength = FLOAT_Between1And5::instance * 0.5 * 2.0 + element.blendStrength;
-                        if (element.blendStrength > 31.0)
+                        if (element.blendStrength > 31.0) {
                             element.isValid = 0;
+                        }
                     }
                 }
             } else if (element.isValid == 4) {
@@ -100,13 +103,15 @@ void Rendering::RenderActiveCreditsElements()
                 }
                 if (element.fadeMode == 1) {
                     element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5;
-                    if (element.blendStrength < 1.0)
+                    if (element.blendStrength < 1.0) {
                         element.fadeMode = 0;
+                    }
                 }
                 if (element.fadeMode == 2) {
                     element.blendStrength = FLOAT_Between1And5::instance * 0.5 + element.blendStrength;
-                    if (element.blendStrength > 31.0)
+                    if (element.blendStrength > 31.0) {
                         element.isValid = 0;
+                    }
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             } else if (element.isValid == 2) {
@@ -128,13 +133,15 @@ void Rendering::RenderActiveCreditsElements()
                         (int)element.blendStrength);
                     if (element.fadeMode == 1) {
                         element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5;
-                        if (element.blendStrength < 1.0)
+                        if (element.blendStrength < 1.0) {
                             element.fadeMode = 0;
+                        }
                     }
                     if (element.fadeMode == 2) {
                         element.blendStrength = FLOAT_Between1And5::instance * 0.5 + element.blendStrength;
-                        if (element.blendStrength > 31.0)
+                        if (element.blendStrength > 31.0) {
                             element.isValid = 0;
+                        }
                     }
                 }
             } else if (element.isValid == 3) {
@@ -158,8 +165,9 @@ void Rendering::RenderActiveCreditsElements()
     if (DWORD_00eb9ac4::instance != 0) {
         MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTextPageProgressBar)();
     }
-    if (DAT_00eb0e40::instance == 0 || DAT_00eb0e40::instance == 5)
+    if (DAT_00eb0e40::instance == 0 || DAT_00eb0e40::instance == 5) {
         return;
+    }
 
     // Two calls (not one with locals): the original pushes the arguments in each branch.
     if ((int)DAT_00eb0e40::instance >= 3) {
@@ -196,7 +204,6 @@ void Rendering::RenderActiveCreditsElements()
         if (FLOAT_00eb0e2c::instance < 0.0) {
             DAT_00eb0e40::instance = 0;
             MACRO_CALL(OpenSHC::UI::Credits_Func::AppendCreditsSoundEntry)(0, 0);
-            return;
         }
     }
 }
