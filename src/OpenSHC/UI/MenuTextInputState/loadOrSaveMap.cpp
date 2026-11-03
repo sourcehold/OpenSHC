@@ -31,8 +31,6 @@ namespace UI {
             s_maps_tmp_005a75b0);
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
-        // The header has DAT_MapSelectionPreloadMapIndexMapping as one dword, but the list of map indices starts
-        // there: one entry per map file.
         int i = 0;
         if (0 < DAT_ResourceManager::instance.mapFileCounter) {
             int* mapIndex = (int*)&this->DAT_MapSelectionPreloadMapIndexMapping;
