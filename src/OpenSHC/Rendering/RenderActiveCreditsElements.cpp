@@ -170,7 +170,7 @@ void Rendering::RenderActiveCreditsElements()
     }
 
     // Two calls (not one with locals): the original pushes the arguments in each branch.
-    if ((int)DAT_00eb0e40::instance >= 3) {
+    if (DAT_00eb0e40::instance >= 3) {
         MACRO_CALL_MEMBER(
             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
             DAT_RenderRelatedX::instance + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth,

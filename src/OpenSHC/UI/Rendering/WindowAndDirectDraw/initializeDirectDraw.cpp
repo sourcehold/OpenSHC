@@ -45,19 +45,18 @@ namespace UI {
             this->pointerToIDirectDrawInterface->EnumDisplayModes(
                 0, NULL, NULL, MACRO_CALL(OpenSHC::Synchrony_Func::EnumDisplayModesCallback));
 
-            if (this->currentGameResolution < 0
-                || (&this->resolutionSupported_0x68.noneUnk)[this->currentGameResolution] == 0) {
+            if (this->currentGameResolution < 0 || this->resolutionSupported_0x68[this->currentGameResolution] == 0) {
                 this->currentGameResolution = OpenSHC::Rendering::SRE_neg1;
                 for (int resolution = OpenSHC::Rendering::SRE_1920x1200; resolution > 0; --resolution) {
-                    if ((&this->resolutionSupported_0x68.noneUnk)[resolution] != 0) {
+                    if (this->resolutionSupported_0x68[resolution] != 0) {
                         this->currentGameResolution = resolution;
                         break;
                     }
                 }
                 if (this->currentGameResolution == OpenSHC::Rendering::SRE_neg1) {
-                    if (this->resolutionSupported_0x68._1360x768 != 0) {
+                    if (this->resolutionSupported_0x68[OpenSHC::Rendering::SRE_1360x768] != 0) {
                         this->currentGameResolution = OpenSHC::Rendering::SRE_1360x768;
-                    } else if (this->resolutionSupported_0x68._1024x600 != 0) {
+                    } else if (this->resolutionSupported_0x68[OpenSHC::Rendering::SRE_1024x600] != 0) {
                         this->currentGameResolution = OpenSHC::Rendering::SRE_1024x600;
                     } else {
                         this->currentGameResolution = OpenSHC::Rendering::SRE_800x600;

@@ -40,8 +40,8 @@ namespace UI {
                 return;
             }
             if (plainTiled) {
-                int width = (int)DAT_ButtonW::instance + 9 - ((int)DAT_ButtonW::instance + 9) % 10;
-                x += ((int)DAT_ButtonW::instance - width) / 2;
+                int width = DAT_ButtonW::instance + 9 - (DAT_ButtonW::instance + 9) % 10;
+                x += (DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
@@ -52,7 +52,7 @@ namespace UI {
                 }
                 // Buttons taller than 30 pixels use the tall variant, 9 images earlier.
                 int image;
-                if ((int)DAT_ButtonH::instance > 30) {
+                if (DAT_ButtonH::instance > 30) {
                     image = 115;
                 } else {
                     image = 124;
@@ -95,27 +95,27 @@ namespace UI {
             // Buttons with a size of their own use one image; any other size is tiled, short or tall.
             int image;
             int imageWidth;
-            if ((int)DAT_ButtonW::instance == 100 && (int)DAT_ButtonH::instance == 100) {
+            if (DAT_ButtonW::instance == 100 && DAT_ButtonH::instance == 100) {
                 image = 179;
                 imageWidth = 100;
-            } else if ((int)DAT_ButtonW::instance <= 30 && (int)DAT_ButtonH::instance < 20) {
+            } else if (DAT_ButtonW::instance <= 30 && DAT_ButtonH::instance < 20) {
                 image = 27;
                 imageWidth = 20;
-            } else if ((int)DAT_ButtonW::instance <= 70 && (int)DAT_ButtonH::instance < 20) {
+            } else if (DAT_ButtonW::instance <= 70 && DAT_ButtonH::instance < 20) {
                 image = 24;
                 imageWidth = 60;
-            } else if ((int)DAT_ButtonW::instance <= 90 && (int)DAT_ButtonH::instance < 20) {
+            } else if (DAT_ButtonW::instance <= 90 && DAT_ButtonH::instance < 20) {
                 image = 42;
                 imageWidth = 80;
-            } else if ((int)DAT_ButtonW::instance <= 220 && (int)DAT_ButtonH::instance > 35) {
+            } else if (DAT_ButtonW::instance <= 220 && DAT_ButtonH::instance > 35) {
                 image = 39;
                 imageWidth = 200;
-            } else if ((int)DAT_ButtonW::instance <= 310 && (int)DAT_ButtonH::instance >= 35) {
+            } else if (DAT_ButtonW::instance <= 310 && DAT_ButtonH::instance >= 35) {
                 image = 97;
                 imageWidth = 300;
-            } else if ((int)DAT_ButtonH::instance < 20) {
-                int width = (int)DAT_ButtonW::instance + 9 - ((int)DAT_ButtonW::instance + 9) % 10;
-                x += ((int)DAT_ButtonW::instance - width) / 2;
+            } else if (DAT_ButtonH::instance < 20) {
+                int width = DAT_ButtonW::instance + 9 - (DAT_ButtonW::instance + 9) % 10;
+                x += (DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
@@ -157,8 +157,8 @@ namespace UI {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = savedRenderTarget;
                 return;
             } else {
-                int width = (int)DAT_ButtonW::instance + 9 - ((int)DAT_ButtonW::instance + 9) % 10;
-                x += ((int)DAT_ButtonW::instance - width) / 2;
+                int width = DAT_ButtonW::instance + 9 - (DAT_ButtonW::instance + 9) % 10;
+                x += (DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
@@ -200,7 +200,7 @@ namespace UI {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = savedRenderTarget;
                 return;
             }
-            x += ((int)DAT_ButtonW::instance - imageWidth) / 2;
+            x += (DAT_ButtonW::instance - imageWidth) / 2;
             savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;

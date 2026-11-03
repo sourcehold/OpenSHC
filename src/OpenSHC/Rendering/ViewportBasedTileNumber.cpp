@@ -23,7 +23,7 @@ int Rendering::ViewportBasedTileNumber()
     return DAT_ViewportRenderState::instance
         .screenPointToTileNumber[DAT_ViewportRenderState::instance.viewportState.viewportX / 32
             + (DAT_ViewportRenderState::instance.viewportState.viewportY / 16
-                  + (int)DAT_ViewportRenderState::instance.viewportState.mbr_0xb0 / 2)
+                  + DAT_ViewportRenderState::instance.viewportState.mbr_0xb0 / 2)
                 * 401
             + DAT_ViewportRenderState::instance.viewportState.mbr_0xac + orientationOffset - 8];
 }
