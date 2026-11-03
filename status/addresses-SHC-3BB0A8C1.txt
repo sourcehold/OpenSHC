@@ -36185,7 +36185,7 @@ SHC_3BB0A8C1_0x004DAE90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DAF50 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DAFB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAFB0 | 67.8% | Loop registers and RECT spills differ
 
 SHC_3BB0A8C1_0x004DB0D0 | 0.0% | Pending
 
