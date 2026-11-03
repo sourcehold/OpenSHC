@@ -269,15 +269,12 @@ widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, 
 - The original's `add reg, -N` against our `sub reg, N` or `cmp reg, N` has two causes, told apart by whether a
   second constant is in sight. **With one**, they were merged: the source compared a derived value, `aicIndex == 7`
   with `aicIndex = aiType - 1`, not `aiType == 8` (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
-- **With none**, the value is a separate derived local rather than a self-decrement: `x -= N`, `x = x - N`,
-  `x = x + -N`, `x += -N`, `-N + x`, `x - (N+2) + 2`, `x + ~(N-1)`, the unsigned casts and `/GL` all fold to `sub`;
-  only `int y = x - N;` with `x` dead after emits the `add`. But `y` then joins global register allocation and can
-  take the register the original spends on another value, which loses more than the instruction gains
-  (99.6% -> 91.7%). The allocator orders candidates by a weighted use count, so when two are within a point or two
-  of each other (44 against 42) no reordering or renaming moves either and one local must go; the one to delete is
-  usually Ghidra's reload-after-a-call artefact - a global re-read decompiles as a local reassigned in every arm
-  with the same value, so reading the global again drops four of its five uses
-  (`RenderStartingGoodDisplayElement` 99.6% -> 100%).
+- **With none**, the value is a separate derived local rather than a self-decrement: the typical case leads to the reimplementation
+  writing `sub` whereas the original had `add` (e.g. `int value -= N`). A solution is to write `int y = x - N;`
+  with `x` becoming a dead local right after. However, this creates another local variable which can cause register and stack
+  allocation changes elsewhere. The solution is to drop a local variable: the one to delete is
+  usually a global that is cached instead of re-read, so reading the global again instead of using the cached value in
+  a local drops the local's importance to allocation and causes a match.
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
