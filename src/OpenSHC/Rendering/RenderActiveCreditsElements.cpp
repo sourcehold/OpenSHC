@@ -80,7 +80,7 @@ void Rendering::RenderActiveCreditsElements()
                         }
                     }
                     if (element.fadeMode == 2) {
-                        element.blendStrength = FLOAT_Between1And5::instance * 0.5 * 2.0 + element.blendStrength;
+                        element.blendStrength += FLOAT_Between1And5::instance * 0.5 * 2.0;
                         if (element.blendStrength > 31.0) {
                             element.isValid = 0;
                         }
@@ -108,7 +108,7 @@ void Rendering::RenderActiveCreditsElements()
                     }
                 }
                 if (element.fadeMode == 2) {
-                    element.blendStrength = FLOAT_Between1And5::instance * 0.5 + element.blendStrength;
+                    element.blendStrength += FLOAT_Between1And5::instance * 0.5;
                     if (element.blendStrength > 31.0) {
                         element.isValid = 0;
                     }
@@ -138,7 +138,7 @@ void Rendering::RenderActiveCreditsElements()
                         }
                     }
                     if (element.fadeMode == 2) {
-                        element.blendStrength = FLOAT_Between1And5::instance * 0.5 + element.blendStrength;
+                        element.blendStrength += FLOAT_Between1And5::instance * 0.5;
                         if (element.blendStrength > 31.0) {
                             element.isValid = 0;
                         }
@@ -189,7 +189,7 @@ void Rendering::RenderActiveCreditsElements()
     if (DAT_00eb0e40::instance == 1 || DAT_00eb0e40::instance == 3) {
         FLOAT_00eb0e2c::instance += FLOAT_Between1And5::instance * 0.5;
         if (DAT_00eb0e40::instance == 3) {
-            FLOAT_00eb0e2c::instance = FLOAT_Between1And5::instance * 0.5 + FLOAT_00eb0e2c::instance;
+            FLOAT_00eb0e2c::instance += FLOAT_Between1And5::instance * 0.5;
         }
         if (FLOAT_00eb0e2c::instance > 31.0) {
             DAT_00eb0e40::instance = 0;

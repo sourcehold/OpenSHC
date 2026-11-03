@@ -24,8 +24,10 @@ namespace UI {
         int imageID;
         if (displayedValue > 0) {
             imageID = 128;
+        } else if (displayedValue != 0) {
+            imageID = 130;
         } else {
-            imageID = (displayedValue != 0) + 129;
+            imageID = 129;
         }
         int yOffset;
         if (!otherImageFlagUnk) {

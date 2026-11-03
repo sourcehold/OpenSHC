@@ -72,12 +72,11 @@ namespace Rendering {
                     Audio::MSS::FLAG_SOUND_UNINTERRUPTABLE | Audio::MSS::FLAG_SOUND_UNKNOWN_FLAG_2
                         | Audio::MSS::FLAG_SOUND_UNKNOWN_FLAG_1 | 1);
                 this->mbr_0x92c = 0;
-                if (this->currentMessageVfxFile_0xc[0] != '\0') {
-                    if (MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
-                            DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_1)) {
-                        MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::setBinkSndStreamAndStartTime,
-                            DAT_BinkControlState::ptr)(1, Audio::MSS::enums::SND_STR_SPEECH_1);
-                    }
+                if (this->currentMessageVfxFile_0xc[0] != '\0'
+                    && MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
+                        DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_1)) {
+                    MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::setBinkSndStreamAndStartTime,
+                        DAT_BinkControlState::ptr)(1, Audio::MSS::enums::SND_STR_SPEECH_1);
                 }
             }
             this->messagePlaying_0x0 = TRUE;

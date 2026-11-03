@@ -10,8 +10,8 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004DB490
     void Rendering::RenderHistoryBookEdgeUnk()
     {
-        FLOAT_00ed312c::instance = FLOAT_Between1And5::instance / 6.0 + FLOAT_00ed312c::instance;
-        if (50.0 <= FLOAT_00ed312c::instance) {
+        FLOAT_00ed312c::instance += FLOAT_Between1And5::instance / 6.0;
+        if (FLOAT_00ed312c::instance >= 50.0) {
             FLOAT_00ed312c::instance = 0.0;
         }
         int const frame = (int)FLOAT_00ed312c::instance;

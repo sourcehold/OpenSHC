@@ -27,7 +27,7 @@ namespace Rendering {
             this->currentMessageSfxFile_0x70[0] = '\0';
             this->currentMessageText_0x8 = NULL;
             this->messagePlaying_0x0 = FALSE;
-            if (this->storedMessages_0x924) {
+            if (this->storedMessages_0x924 != 0) {
                 this->currentMessageUnknownValue_0x4 = this->savedMessageUnknownValue_0x104[0];
                 // Two identical arms: the original keeps two blocks here.
                 if (!this->savedMessageUnknownValue_0x104[0]) {

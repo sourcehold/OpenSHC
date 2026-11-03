@@ -44,10 +44,11 @@ namespace UI {
                 x += ((int)DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
-                    renderSurface
-                        = (RenderTarget)(MACRO_CALL_MEMBER(
-                                             OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
-                            != FALSE);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+                    } else {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+                    }
                 }
                 // Buttons taller than 30 pixels use the tall variant, 9 images earlier.
                 int image;
@@ -117,10 +118,11 @@ namespace UI {
                 x += ((int)DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
-                    renderSurface
-                        = (RenderTarget)(MACRO_CALL_MEMBER(
-                                             OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
-                            != FALSE);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+                    } else {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+                    }
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = renderSurface;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
@@ -159,10 +161,11 @@ namespace UI {
                 x += ((int)DAT_ButtonW::instance - width) / 2;
                 savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
                 if (renderSurface == OpenSHC::Rendering::Enums::RT_CONTEXT_BASED) {
-                    renderSurface
-                        = (RenderTarget)(MACRO_CALL_MEMBER(
-                                             OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
-                            != FALSE);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+                    } else {
+                        renderSurface = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+                    }
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = renderSurface;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
@@ -199,8 +202,11 @@ namespace UI {
             }
             x += ((int)DAT_ButtonW::instance - imageWidth) / 2;
             savedRenderTarget = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
-            DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
-                = MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE;
+            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
+                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            } else {
+                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+            }
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)(
                 OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, image, x, y, blendStrength);

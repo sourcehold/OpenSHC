@@ -8,8 +8,10 @@ namespace OpenSHC {
 // FUNCTION: STRONGHOLDCRUSADER 0x004B2A60
 int Rendering::ViewportBasedTileNumber()
 {
+    // The four orientations' tables are 80400 entries apart; the original adds 8 here and takes it off again
+    // in the index below, so both stay.
     int orientationOffset = 8;
-    if (DAT_TileMapState::instance.mapOrientation) {
+    if (DAT_TileMapState::instance.mapOrientation != 0) {
         if (DAT_TileMapState::instance.mapOrientation == 6) {
             orientationOffset = 80408;
         } else if (DAT_TileMapState::instance.mapOrientation == 4) {
