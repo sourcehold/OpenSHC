@@ -37,7 +37,7 @@ namespace UI {
                 this->mouseRelativeX = DAT_MouseState::instance.screenSpaceX - this->modalMenu.x;
                 this->mouseRelativeY = DAT_MouseState::instance.screenSpaceY - this->modalMenu.y;
             } else if (this->modalDragDropUnk != 0) {
-                if (DAT_MouseState::instance.leftClickState == FALSE) {
+                if (!DAT_MouseState::instance.leftClickState) {
                     this->modalDragDropUnk = 0;
                 } else {
                     this->modalMenu.x = DAT_MouseState::instance.screenSpaceX - this->mouseRelativeX;
@@ -48,8 +48,7 @@ namespace UI {
                     if (this->modalMenu.y < 0) {
                         this->modalMenu.y = 0;
                     }
-                    if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
-                        != FALSE) {
+                    if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                         if (this->modalMenu.x + this->modalMenu.width
                             >= DAT_WindowAndDirectDraw::instance.gameResolutionX) {
                             this->modalMenu.x
@@ -91,7 +90,7 @@ namespace UI {
                 || this->modalDragDropUnk != 0) {
                 this->minus1 = 1;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() == FALSE
+            if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_SCENARIO_DESCRIPTION) {
                 this->minus1 = 1;
             }

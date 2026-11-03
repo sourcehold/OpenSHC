@@ -34,17 +34,17 @@ namespace UI {
     {
         int const x = DAT_MenuHandlerState::instance.x;
         int const y = DAT_MenuHandlerState::instance.y;
-        int const top = y + 0x1fb;
-        int const left = x + 0x69;
+        int const top = y + 507;
+        int const left = x + 105;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         // "Weapons"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 7),
-            x + 0x19, y + 0x1d3, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            x + 25, y + 467, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         // an icon and the stock of each of the eight goods
         for (int good = 0; good < 8; good++) {
-            int const x = left + good * 0x34;
+            int const x = left + good * 52;
             int const amount
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                       .currentResources[DAT_ArmoryMenuResourceTypes::instance[good]];
@@ -53,7 +53,7 @@ namespace UI {
                 DAT_ArmoryMenuResourceIcons::instance[good], DAT_ArmoryIconsPositionNudges::instance[good].x + x,
                 DAT_ArmoryIconsPositionNudges::instance[good].y + top);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                amount, x + 12, top + 0x32, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+                amount, x + 12, top + 50, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         }
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }

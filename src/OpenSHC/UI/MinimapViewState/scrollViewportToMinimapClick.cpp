@@ -17,15 +17,14 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    // Scrolls the main view to the minimap point under the mouse. Skipped in the build menu when its soldiers tab is
-    // open or the shift-related state is 1, unless the right button is down.
+    // Scrolls the main view to the minimap point under the mouse.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5110
     void MinimapViewState::scrollViewportToMinimapClick()
     {
         if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
             && (DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_SOLDIERS
                 || DAT_TileMapState::instance.shiftRelated0or3 == 1)
-            && DAT_MouseState::instance.rightClickState == FALSE) {
+            && !DAT_MouseState::instance.rightClickState) {
             return;
         }
         int const mouseY = DAT_MouseState::instance.screenSpaceY - this->y;

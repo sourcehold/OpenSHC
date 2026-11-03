@@ -1,7 +1,7 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"

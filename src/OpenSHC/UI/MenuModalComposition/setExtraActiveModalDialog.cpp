@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
 #include "OpenSHC/UI/Menu.func.hpp"
-#include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -29,8 +28,7 @@ namespace UI {
         if (this->activeModalDialogID == OpenSHC::UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE) {
             this->activeModalDialogID = OpenSHC::UI::Enums::MMT_NONE;
             if (MACRO_CALL_MEMBER(
-                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()
-                != FALSE) {
+                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()) {
                 return;
             }
         }

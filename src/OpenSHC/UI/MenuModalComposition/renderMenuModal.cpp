@@ -3,7 +3,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Text/TextEditorState.func.hpp"
 #include "OpenSHC/UI/Menu.func.hpp"
-#include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
@@ -48,7 +47,7 @@ namespace UI {
             return;
         }
         if (this->mbr_0x6c != 0) {
-            this->disappearAfter = this->disappearAfter - (timeGetTime() - this->timeItIsSet) / 75;
+            this->disappearAfter -= (timeGetTime() - this->timeItIsSet) / 75;
             if (this->disappearAfter <= 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog, this)(
                     OpenSHC::UI::Enums::MMT_NONE, FALSE);
@@ -59,7 +58,7 @@ namespace UI {
         }
         int left;
         int top;
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             left = this->modalMenu.x + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
             top = this->modalMenu.y + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
@@ -102,7 +101,7 @@ namespace UI {
             color = COL_VIVID_BLUE::instance.shortValue;
             break;
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         } else {
@@ -110,14 +109,14 @@ namespace UI {
         }
         if ((this->modalMenu.borderStyle & 0x400) != 0 && this->disappearAfter < 32 && this->mbr_0x6c == 0) {
             // fixme
-            this->disappearAfter = this->disappearAfter + (timeGetTime() - this->timeItIsSet) / 75;
+            this->disappearAfter += (timeGetTime() - this->timeItIsSet) / 75;
         }
         if ((this->modalMenu.borderStyle & 2) != 0) {
             // title bar
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 left, top, left + width, top + 12, COL_DARK_CYAN_GREY::instance.shortValue);
-            top = top + 12;
-            height = height - 12;
+            top += 12;
+            height -= 12;
         }
         if ((this->modalMenu.borderStyle & 1) != 0) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
@@ -150,7 +149,7 @@ namespace UI {
         }
         if ((this->modalMenu.borderStyle & 0x200) != 0 || (this->modalMenu.borderStyle & 0x20) != 0) {
             // a frame of 24x24 tiles: corners and edges, the inside is left empty
-            for (int y = 0; y < this->modalMenu.height; y = y + 24) {
+            for (int y = 0; y < this->modalMenu.height; y += 24) {
                 int rowImage;
                 if (y == 0) {
                     rowImage = 1;
@@ -159,7 +158,7 @@ namespace UI {
                 } else {
                     rowImage = 7;
                 }
-                for (int x = 0; x < this->modalMenu.width; x = x + 24) {
+                for (int x = 0; x < this->modalMenu.width; x += 24) {
                     int imageID = rowImage;
                     if (x != 0) {
                         if (x == this->modalMenu.width - 24) {
@@ -181,12 +180,12 @@ namespace UI {
                 DAT_PencilRenderCore::ptr)(left + 24, top + 24, left + this->modalMenu.width - 25,
                 top + this->modalMenu.height - 25, 32 - this->disappearAfter * 16 / 32);
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         }
         (*this->modalMenu.menuModalRenderFunction)(left, top, this->modalMenu.width, this->modalMenu.height);
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         } else {

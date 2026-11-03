@@ -1,6 +1,6 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
@@ -23,7 +23,7 @@ namespace Synchrony {
     {
         BOOLEnum const wasMatching = this->flag_0x7aad8;
         int firstVersion = -1;
-        int lowestVersion = 0x7fffffff;
+        int lowestVersion = 2147483647;
         this->flag_0x7aad8 = TRUE;
         int player;
         for (player = 1; player < 9; player++) {
@@ -46,9 +46,7 @@ namespace Synchrony {
             if ((wasMatching)
                 && (this->DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     > lowestVersion)) {
-                /*
-                  added by script: "Someone has an old version, please get him or her to   upgrade"
-                 */
+                // "Someone has an old version, please get him or her to upgrade"
                 strcpy(DAT_GameSynchronyState::instance.receivedChatMessage,
                     MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                         DE::SHCDE::TEXT_MP_VERSION_CONTROL, 2));
@@ -69,9 +67,7 @@ namespace Synchrony {
                 char currentText[100];
                 strcpy(currentText,
                     MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)());
-                /*
-                  added by script: "You have an old version, please upgrade to the latest   version"
-                 */
+                // "You have an old version, please upgrade to the latest version"
                 char* const oldVersionText = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MP_VERSION_CONTROL, 1);
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,

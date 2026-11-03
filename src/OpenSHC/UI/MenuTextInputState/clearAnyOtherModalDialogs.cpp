@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
-#include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 

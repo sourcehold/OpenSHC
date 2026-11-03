@@ -3,7 +3,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
 #include "OpenSHC/UI/Menu.func.hpp"
-#include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -24,7 +23,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004A9ED0
     void MenuModalComposition::activateModalDialog(MenuModalType menuModalID, BOOLEnum retainOther)
     {
-        if (retainOther == FALSE && this->slot == 0
+        if (!retainOther && this->slot == 0
             && DAT_MenuTextInputState::instance.currentModalDialog != OpenSHC::UI::Enums::MMT_NO_MENU) {
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
@@ -32,8 +31,7 @@ namespace UI {
         if (this->activeModalDialogID == OpenSHC::UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE) {
             this->activeModalDialogID = OpenSHC::UI::Enums::MMT_NONE;
             if (MACRO_CALL_MEMBER(
-                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()
-                != FALSE) {
+                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, DAT_VideoBikQueue::ptr)()) {
                 return;
             }
         }
@@ -50,7 +48,7 @@ namespace UI {
             this->modalMenu.width = ((this->modalMenu.width - 1) / 24 + 1) * 24;
             this->modalMenu.height = ((this->modalMenu.height - 1) / 24 + 1) * 24;
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             if (this->modalMenu.x == -1) {
                 this->modalMenu.x = DAT_WindowAndDirectDraw::instance.gameResolutionX / 2 - this->modalMenu.width / 2;
             } else {

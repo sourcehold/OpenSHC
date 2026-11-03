@@ -5,7 +5,6 @@
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuItems/SaveLoadMap.func.hpp"
-#include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
@@ -28,7 +27,7 @@ namespace UI {
         MACRO_CALL(OpenSHC::OS_Func::_memset)(DAT_MinimapViewState::instance.loadedMiniMap, 0, 80000);
         INT_00b95b64::instance = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
-            s_maps_map_005a64b0);
+            s_maps_map_005a64b0); // "maps\\*.map"
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
         int i = 0;
@@ -36,8 +35,8 @@ namespace UI {
             int* mapIndex = (int*)&this->DAT_MapSelectionPreloadMapIndexMapping;
             do {
                 *mapIndex = i;
-                i = i + 1;
-                mapIndex = mapIndex + 1;
+                ++i;
+                ++mapIndex;
             } while (i < DAT_ResourceManager::instance.mapFileCounter);
         }
         this->fileListSortOrder = 0;
@@ -48,10 +47,10 @@ namespace UI {
             this->menuLoadGameRelativeSelectionIndex = 0;
         }
         this->lastListClickTime = 0;
-        this->lastClickedListIndex = 0xffffffff;
+        this->lastClickedListIndex = -1;
         this->field46_0xac = 0;
         DAT_MouseState::instance.waitCursorToggle = 0;
-        this->fileListVisibleRowCount = 0x10;
+        this->fileListVisibleRowCount = 16;
         if (loadOrSaveMap == 9) {
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText, this)(
                 OpenSHC::UI::Enums::MMT_LOAD_MAP);
@@ -63,7 +62,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
             DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
         }
-        this->previewedListIndex = 0xffffffff;
+        this->previewedListIndex = -1;
         this->fileListContext = 2;
         if (this->menuLoadGameRelativeSelectionIndex != -1) {
             this->menuLoadGameRelativeSelectionIndex = this->savedListSelection3;

@@ -1,6 +1,6 @@
-#include "../../Synchrony.func.hpp"
 #include "../GameSynchronyState.func.hpp"
 
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"

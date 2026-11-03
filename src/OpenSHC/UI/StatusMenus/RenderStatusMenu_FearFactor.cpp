@@ -29,7 +29,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043F2F0
     void StatusMenus::RenderStatusMenu_FearFactor()
     {
-        int const top = DAT_MenuHandlerState::instance.y + 0x1bf;
+        int const top = DAT_MenuHandlerState::instance.y + 447;
         int const x = DAT_MenuHandlerState::instance.x;
         // longer translations get 20 more pixels for the descriptions
         int languageOffset = 0;
@@ -42,26 +42,25 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 2),
-            x + 0x19, top + 0x14, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            x + 25, top + 20, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         // the good and the bad things the player has built
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(0, x + 100, top + 0x32);
+            DAT_TextureRenderCoreObject::ptr)(0, x + 100, top + 50);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .goodStuffCount,
-            x + 0x80, top + 0x76, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            x + 128, top + 118, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(1, x + 0xb4, top + 0x32);
+            DAT_TextureRenderCoreObject::ptr)(1, x + 180, top + 50);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].badStuffCount,
-            x + 0xd0, top + 0x76, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
-        // The descriptions start at languageOffset + x + 0x118. It is written out at each use because the original
-        // evaluates it there, after the y argument.
+            x + 208, top + 118, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
+        // languageOffset + x + 280 is written out at each use: the original evaluates it after the y argument.
         // "Popularity Effect:"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x12),
-            languageOffset + x + 0x118, top + 0x19, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 18),
+            languageOffset + x + 280, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
         int const fearFactor
             = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                   .fearFactorLevel;
@@ -74,21 +73,21 @@ namespace UI {
             effect = 0;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
-            DAT_TextManagerObject::instance.currentXOffset_0x0 + languageOffset + x + 300, top + 0x19, effect, FALSE);
+            DAT_TextManagerObject::instance.currentXOffset_0x0 + languageOffset + x + 300, top + 25, effect, FALSE);
         int const level = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .fearFactorLevel;
         if (level >= 5) {
             // the top level reached
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x19),
-                languageOffset + x + 0x118, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 25),
+                languageOffset + x + 280, top + 45, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
         } else if (level <= -5) {
             // the bottom level reached
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x18),
-                languageOffset + x + 0x118, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 24),
+                languageOffset + x + 280, top + 45, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
         } else {
             int const good
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -100,21 +99,21 @@ namespace UI {
                 // "Good things for next level:"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1b),
-                    languageOffset + x + 0x118, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 27),
+                    languageOffset + x + 280, top + 45, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .objectsLeftUntilNextLevel,
-                    languageOffset + x + 0x11d, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
+                    languageOffset + x + 285, top + 45, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 18, TRUE, 0);
             } else if (bad > good) {
                 // "Bad things for next level:"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                    OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1a, languageOffset + x + 0x118, top + 0x2d,
-                    OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE);
+                    OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 26, languageOffset + x + 280, top + 45,
+                    OpenSHC::Text::TTA_LEFT, 0, 18, FALSE);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .objectsLeftUntilNextLevel,
-                    languageOffset + x + 0x11d, top + 0x2d, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
+                    languageOffset + x + 285, top + 45, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 18, TRUE, 0);
             }
         }
         if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -124,15 +123,15 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 10),
-                languageOffset + x + 0x118, top + 0x4b, 0xfa, 0, 0x12, 0);
+                languageOffset + x + 280, top + 75, 250, 0, 18, 0);
         }
         if (0 < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .fearFactorLevel) {
             // "People are happier, but idler."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0xb),
-                languageOffset + x + 0x118, top + 0x4b, 0xfa, 0, 0x12, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 11),
+                languageOffset + x + 280, top + 75, 250, 0, 18, 0);
         }
         if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .fearFactorLevel
@@ -140,18 +139,18 @@ namespace UI {
             // "People are less happy, but more efficient."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0xc),
-                languageOffset + x + 0x118, top + 0x4b, 0xfa, 0, 0x12, 0);
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 12),
+                languageOffset + x + 280, top + 75, 250, 0, 18, 0);
         }
         // "Efficiency %:"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x13),
-            languageOffset + x + 0x118, top + 0x7d, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE, 0);
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 19),
+            languageOffset + x + 280, top + 125, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .fearFactorProductivityUnk,
-            languageOffset + x + 0x11d, top + 0x7e, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
+            languageOffset + x + 285, top + 126, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 18, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 

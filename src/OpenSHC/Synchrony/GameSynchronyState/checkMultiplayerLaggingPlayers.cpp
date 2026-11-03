@@ -1,7 +1,7 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
@@ -27,19 +27,18 @@ namespace Synchrony {
             return;
         }
         if (this->shouldSendAnnouncementUnk) {
-            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                (Commands::GameCommandType)Commands::M_MAPPER_HEALER);
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)((Commands::GameCommandType)93);
             this->shouldSendAnnouncementUnk = 0;
         }
         if ((!this->syncStatus) && (!this->saveRelated)) {
             if (MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                 // Only when every other player in the game has reported in.
-                int allReported = 1;
+                BOOLEnum allReported = TRUE;
                 for (int player = 0; player < 9; player++) {
                     if (this->currentPlayerFullIDArray[player] != -1
                         && player != DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && this->connectionLagInfoArray[player].checkFor0 == 0) {
-                        allReported = 0;
+                        allReported = FALSE;
                     }
                 }
                 if (allReported) {
@@ -53,8 +52,7 @@ namespace Synchrony {
                                 this->DAT_GameCommandParam0 = player;
                                 this->laggingPlayerIDUnk = player;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                                    (Commands::GameCommandType)(Commands::GCT_SEND_RESYNC_TILEMAPDATA2
-                                        | Commands::GCT_CHANGE_TAXES));
+                                    (Commands::GameCommandType)98);
                             }
                             if (60000 < (int)(now - this->connectionLagInfoArray[player].time)) {
                                 this->kickDueToLagStatusUnk = 62;
@@ -74,7 +72,7 @@ namespace Synchrony {
                 this->now2 = now2;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSomeMultiplayerSyncMessageWithType, this)(0);
                 if (0 < this->syncRelatedCountdown) {
-                    this->syncRelatedCountdown = this->syncRelatedCountdown - 1;
+                    --this->syncRelatedCountdown;
                 }
             }
             return;

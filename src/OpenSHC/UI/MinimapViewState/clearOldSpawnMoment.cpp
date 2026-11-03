@@ -18,7 +18,7 @@ namespace UI {
                     this->spawnMomentY[next - 1] = this->spawnMomentY[next];
                     this->spawnMoment[next - 1] = this->spawnMoment[next];
                 }
-                this->spawnMomentCount = this->spawnMomentCount - 1;
+                --this->spawnMomentCount;
                 return;
             }
         }

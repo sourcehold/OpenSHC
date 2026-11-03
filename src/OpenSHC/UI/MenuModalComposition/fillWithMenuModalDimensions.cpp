@@ -19,7 +19,7 @@ namespace UI {
         if (this->activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
             return;
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
             *xPtr = this->modalMenu.x + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
             *yPtr = this->modalMenu.y + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
         } else {

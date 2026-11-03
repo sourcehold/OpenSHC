@@ -1,8 +1,8 @@
-#include "../../Synchrony.func.hpp"
+#include "../GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/string-literals.hpp"
 #include "OpenSHC/wstring-literals.hpp"
@@ -22,7 +22,7 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.field303_0x109e8c = 1;
         this->DPLAYX_ReceivedPlayerID = 0;
         this->DPLAY_ToID = 0;
-        this->DPLAYX_PlayerHandle = 0xffffffff;
+        this->DPLAYX_PlayerHandle = -1;
         this->currentPlayerSlotID = 0;
         this->field325_0x109ecc = GetTickCount();
         this->now2 = GetTickCount();
@@ -37,9 +37,8 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.relativeTickTime = 0;
         // L"Crusader"
         MACRO_CALL(Global_Func::PrintToDestination)(this->DPLAYX_SessionName, u_Crusader_005a6f40);
-        // "Contestant"
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-            12, (void*)s_Contestant_005a74a8, this->DPLAY_PlayerShortName);
+            12, (void*)s_Contestant_005a74a8, this->DPLAY_PlayerShortName); // "Contestant"
         this->scrollBarItemCount = 0;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setupSkirmishLobby, this)();
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::readGameSpyConfig, this)();

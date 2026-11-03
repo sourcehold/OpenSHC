@@ -1,7 +1,6 @@
 #include "../MinimapViewState.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/UI/MinimapViewState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
