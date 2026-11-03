@@ -21,8 +21,6 @@ namespace Rendering {
             }
             // zero-based from here on: a separate local for it costs the match
             messageType = messageType - 1;
-            // The header has no arrays here yet: the speech tables are char*[33][17] (message, AI type) at 0x184
-            // and 0xa64, and the greeting sounds are char*[17] (AI type) at 0x12c.
             MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::prepareSFXandVFX, this)(
                 "", "", (char*)(&DAT_MissionAestheticsDefinedData::instance.field75_0x12c)[aiType], playerIndex);
             MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::prepareSFXandVFX, this)(
