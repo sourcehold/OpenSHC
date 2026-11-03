@@ -1,9 +1,9 @@
 // disable deprecation warnings for strcpy
 #pragma warning(disable : 4996)
 
-#include "../../../Rendering.func.hpp"
+#include "../AIMessageQueue.func.hpp"
 
-#include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
+#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -31,8 +31,7 @@ namespace Rendering {
             this->messagePlaying_0x0 = FALSE;
             if (this->storedMessages_0x924) {
                 this->currentMessageUnknownValue_0x4 = this->savedMessageUnknownValue_0x104[0];
-                // fixme: both arms are identical, but the original keeps them as two blocks (the flag says whether the
-                // text is wide, so the source probably differed only in a cast)
+                // Two identical arms: the original keeps two blocks here (the flag says whether the text is wide).
                 if (!this->savedMessageUnknownValue_0x104[0]) {
                     this->currentMessageText_0x8 = this->savedMessageTextPtr_0xdc[0];
                     this->currentMessageUnknownValue2_0xd4 = this->savedMessageUnknownValue2_0x8fc[0];
@@ -52,7 +51,7 @@ namespace Rendering {
                     strcpy(this->savedMessageSfxFile_0x514[i - 1], this->savedMessageSfxFile_0x514[i]);
                     this->savedMessageUnknownValue2_0x8fc[i - 1] = this->savedMessageUnknownValue2_0x8fc[i];
                 }
-                this->storedMessages_0x924 = this->storedMessages_0x924 - 1;
+                --this->storedMessages_0x924;
                 return TRUE;
             }
             return FALSE;

@@ -32,7 +32,7 @@ namespace UI {
             = &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];
         int imageID = MACRO_CALL_MEMBER(UI::Rendering::ButtonGmData_Func::getPictureNumberInGm, buttonGmData)(FALSE);
         if (DAT_ButtonCurrentlyInteracting::instance) {
-            imageID = imageID + 1;
+            ++imageID;
         }
         if (DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance].alphaGmIdUnk_0xc
             != (GmID)0) {

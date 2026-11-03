@@ -15,9 +15,13 @@ namespace UI {
         void WindowAndDirectDraw::setWindowStyleRectAndPosition()
         {
             // Exclusive fullscreen is a bare pop-up; otherwise a window with a title bar, system menu and minimise box.
-            DWORD const style
-                = (this->runGameAsExclusiveFullscreen ? WS_POPUP : WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX)
-                | WS_VISIBLE;
+            DWORD style;
+            if (this->runGameAsExclusiveFullscreen) {
+                style = WS_POPUP;
+            } else {
+                style = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+            }
+            style |= WS_VISIBLE;
             SetWindowLongA(this->windowHandle, GWL_STYLE, style);
             RECT windowRect;
             SetRect(&windowRect, 0, 0, this->resolutionX, this->resolutionY);

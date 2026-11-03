@@ -157,6 +157,7 @@ namespace UI {
             // size of the map rendering surface
             desc.dwHeight = 2076;
             desc.dwWidth = 4056;
+            // The original keeps this field's address in a register for both uses below.
             LPDIRECTDRAWSURFACE* const mapGameSurface = &this->directDrawOffscreenSurfacePointer_mapGame;
             if (this->pointerToIDirectDrawInterface->CreateSurface(&desc, mapGameSurface, NULL) != DD_OK) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::releaseSurfacesAndDirectDraw, this)(
@@ -180,12 +181,12 @@ namespace UI {
             this->directDrawBackbufferSurfacePointer->GetSurfaceDesc(&desc);
             this->colorBitMode = OpenSHC::Rendering::RGB_555;
             // a 6-bit green mask means RGB565
-            if (desc.ddpfPixelFormat.dwGBitMask == 0x7e0) {
+            if (desc.ddpfPixelFormat.dwGBitMask == 2016) {
                 this->colorBitMode = OpenSHC::Rendering::RGB_565;
             }
             MACRO_CALL(OpenSHC::Rendering_Func::InitializeColors)();
 
-            // NOTE: the original reads these two fields through the global instance, not through this.
+            // The original reads these two fields through the global instance, not through this.
             if (DAT_WindowAndDirectDraw::instance.runGameAsExclusiveFullscreen) {
                 SetRect(&DAT_WindowAndDirectDraw::instance.clientOnScreenCoords, 0, 0, GetSystemMetrics(SM_CXSCREEN),
                     GetSystemMetrics(SM_CYSCREEN));

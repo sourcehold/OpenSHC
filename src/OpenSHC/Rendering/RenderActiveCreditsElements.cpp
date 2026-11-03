@@ -40,7 +40,7 @@ void Rendering::RenderActiveCreditsElements()
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
             DAT_PencilRenderCore::ptr)(0, 0, DAT_WindowAndDirectDraw::instance.resolutionX - 1,
             DAT_WindowAndDirectDraw::instance.resolutionY - 1, (int)FLOAT_00eb0e2c::instance);
-        FLOAT_00eb0e2c::instance = FLOAT_00eb0e2c::instance - FLOAT_Between1And5::instance * 0.5;
+        FLOAT_00eb0e2c::instance -= FLOAT_Between1And5::instance * 0.5;
         if (FLOAT_00eb0e2c::instance < 16.0) {
             FLOAT_00eb0e2c::instance = 16.0;
         }
@@ -74,7 +74,7 @@ void Rendering::RenderActiveCreditsElements()
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderMenuGfxHelper)(
                         gfxIndex, element.x, element.y, (int)element.blendStrength);
                     if (element.fadeMode == 1) {
-                        element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5 * 2.0;
+                        element.blendStrength -= FLOAT_Between1And5::instance * 0.5 * 2.0;
                         if (element.blendStrength < 1.0) {
                             element.fadeMode = 0;
                         }
@@ -102,7 +102,7 @@ void Rendering::RenderActiveCreditsElements()
                         element.height, (int)element.blendStrength);
                 }
                 if (element.fadeMode == 1) {
-                    element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5;
+                    element.blendStrength -= FLOAT_Between1And5::instance * 0.5;
                     if (element.blendStrength < 1.0) {
                         element.fadeMode = 0;
                     }
@@ -132,7 +132,7 @@ void Rendering::RenderActiveCreditsElements()
                         element.x, element.y, element.width, color, element.field8_0x20, element.field9_0x24,
                         (int)element.blendStrength);
                     if (element.fadeMode == 1) {
-                        element.blendStrength = element.blendStrength - FLOAT_Between1And5::instance * 0.5;
+                        element.blendStrength -= FLOAT_Between1And5::instance * 0.5;
                         if (element.blendStrength < 1.0) {
                             element.fadeMode = 0;
                         }
@@ -187,7 +187,7 @@ void Rendering::RenderActiveCreditsElements()
     }
 
     if (DAT_00eb0e40::instance == 1 || DAT_00eb0e40::instance == 3) {
-        FLOAT_00eb0e2c::instance = FLOAT_00eb0e2c::instance + FLOAT_Between1And5::instance * 0.5;
+        FLOAT_00eb0e2c::instance += FLOAT_Between1And5::instance * 0.5;
         if (DAT_00eb0e40::instance == 3) {
             FLOAT_00eb0e2c::instance = FLOAT_Between1And5::instance * 0.5 + FLOAT_00eb0e2c::instance;
         }
@@ -197,9 +197,9 @@ void Rendering::RenderActiveCreditsElements()
         }
     }
     if (DAT_00eb0e40::instance == 2 || DAT_00eb0e40::instance == 4) {
-        FLOAT_00eb0e2c::instance = FLOAT_00eb0e2c::instance - FLOAT_Between1And5::instance * 0.5;
+        FLOAT_00eb0e2c::instance -= FLOAT_Between1And5::instance * 0.5;
         if (DAT_00eb0e40::instance == 4) {
-            FLOAT_00eb0e2c::instance = FLOAT_00eb0e2c::instance - FLOAT_Between1And5::instance * 0.5;
+            FLOAT_00eb0e2c::instance -= FLOAT_Between1And5::instance * 0.5;
         }
         if (FLOAT_00eb0e2c::instance < 0.0) {
             DAT_00eb0e40::instance = 0;

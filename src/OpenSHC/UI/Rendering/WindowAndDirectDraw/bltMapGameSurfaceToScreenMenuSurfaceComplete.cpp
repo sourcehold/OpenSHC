@@ -1,7 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
-
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 

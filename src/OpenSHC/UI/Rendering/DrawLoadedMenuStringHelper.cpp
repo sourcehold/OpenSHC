@@ -20,9 +20,9 @@ namespace UI {
     void Rendering::DrawLoadedMenuStringHelper(
         int loadedMenuStringIndex, int xPos, int yPos, int maxWidth, uint color, int fontSize, BOOLEnum isSingleLine)
     {
-        xPos = xPos + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-        yPos = yPos + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-        if (isSingleLine == FALSE) {
+        xPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+        yPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+        if (!isSingleLine) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 DAT_ArrayOfStoredMenuStrings::instance[loadedMenuStringIndex], xPos, yPos, maxWidth, color, fontSize,
                 0);

@@ -1,7 +1,5 @@
 #include "../Rendering.func.hpp"
 
-#include "OpenSHC/UI/Rendering.func.hpp"
-
 #include "OpenSHC/Globals/DAT_MissionDefinedData.hpp"
 #include "OpenSHC/Globals/FLOAT_00ed312c.hpp"
 #include "OpenSHC/Globals/FLOAT_Between1And5.hpp"

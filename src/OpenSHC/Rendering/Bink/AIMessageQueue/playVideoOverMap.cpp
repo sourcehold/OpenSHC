@@ -1,12 +1,12 @@
 // disable deprecation warnings for strcpy
 #pragma warning(disable : 4996)
 
-#include "../../../Rendering.func.hpp"
 #include "../AIMessageQueue.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/IO/ResourceManager.func.hpp"
+#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
@@ -44,7 +44,7 @@ namespace Rendering {
             strcpy(this->currentMessageSfxFile_0x70, sfxFileName);
             this->mbr_0x928 = this->currentMessageUnknownValue2_0xd4;
             MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
-                UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE, DAT_MenuHandlerState::instance.x + 0x2d5,
+                UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE, DAT_MenuHandlerState::instance.x + 725,
                 DAT_WindowAndDirectDraw::instance.resolutionY - 153);
             if (this->currentMessageVfxFile_0xc[0] != '\0') {
                 DAT_GameCore::instance.isBinkVideoPlaying = 1;
@@ -65,8 +65,8 @@ namespace Rendering {
                         (UI::Enums::MenuViewType)DAT_GameCore::instance.currentMenuViewType, 0);
                 }
                 MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::playBINK, DAT_BinkControlState::ptr)(1,
-                    binkFileName, 0, 0, DAT_MenuHandlerState::instance.x + 0x23b,
-                    DAT_MenuHandlerState::instance.y + 0x1d1, 1);
+                    binkFileName, 0, 0, DAT_MenuHandlerState::instance.x + 571, DAT_MenuHandlerState::instance.y + 465,
+                    1);
             }
             if (this->currentMessageSfxFile_0x70[0] != '\0') {
                 MACRO_CALL_MEMBER(IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(

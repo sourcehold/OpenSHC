@@ -45,13 +45,14 @@ namespace UI {
             || (!DAT_GameSynchronyState::instance.isHost && strlen(DAT_GameSynchronyState::instance.mapName) != 0)) {
             char mapFileName[1008];
             strcpy(mapFileName, DAT_GameSynchronyState::instance.mapName);
+            // ".map"
             strcat(mapFileName, S__MAP_005A2294);
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 OpenSHC::IO::FRT_MAPS, mapFileName);
             MACRO_CALL_MEMBER(OpenSHC::IO::FilePackager_Func::readMapHeader, FilePackagerObj::ptr)(TRUE);
             INT_00b95958::instance = 1;
             DAT_00b95b74::instance = 0;
-            DAT_00b960f4::instance = 0xffffffed;
+            DAT_00b960f4::instance = -19;
             if (DAT_GameCore::instance.mapDescUseStringTable == 0) {
                 DAT_00b95b74::instance = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
                     &DAT_TextManagerObject::instance.fontSizeClassArray[19])(

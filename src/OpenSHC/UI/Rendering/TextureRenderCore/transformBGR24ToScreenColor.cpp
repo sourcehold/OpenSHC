@@ -11,9 +11,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044CBE0
         RGB15 TextureRenderCore::transformBGR24ToScreenColor(BGR24 color)
         {
-            // The input holds red in the low byte and blue in the third byte (0x00BBGGRR, like a Windows
-            // COLORREF), while screen colors keep red in the top bits. So red moves up and blue moves down.
-            // The screenColor local is needed: returning from each branch loses the match (20%).
+            // The input is 0x00BBGGRR like a COLORREF; screen colors keep red in the top bits, so red moves up.
+            // One exit: returning from each branch loses the match.
             RGB15 screenColor;
             if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_555) {
                 screenColor = ((color & 0xf8) << 7) | ((color >> 6) & 0x3e0) | ((color >> 19) & 0x1f);

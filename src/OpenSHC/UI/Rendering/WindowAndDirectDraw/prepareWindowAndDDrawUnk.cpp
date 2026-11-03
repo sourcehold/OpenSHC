@@ -1,7 +1,6 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -25,11 +24,9 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::setWindowStyleRectAndPosition, this)();
             this->drawingReady_0x0
                 = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::initializeDirectDraw, this)();
-            /*
-              I think it tries again with the default resolution of 800x600 (assuming the DAT_CurrentResolution is
-              right). If it fails again, it sets another flag and also returns. -TheRedDaemon
-             */
-            while (this->drawingReady_0x0 == FALSE) {
+            // I think it tries again with the default resolution of 800x600 (assuming the DAT_CurrentResolution is
+            // right). If it fails again, it sets another flag and also returns. -TheRedDaemon
+            while (!this->drawingReady_0x0) {
                 if (this->currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                     this->postWindowCloseMessage = 1;
                     break;
