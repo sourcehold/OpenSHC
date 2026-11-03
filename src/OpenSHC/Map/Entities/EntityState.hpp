@@ -77,7 +77,7 @@ namespace Map {
 
             void flagUnitsWithActiveEntity();
 
-            int somethingWithSeparateAreas1(int unitID);
+            int findNearestDiseaseCloudForHealer(int unitID);
 
             void refreshPoisonCloudNearUnit(int param_1);
 
@@ -150,12 +150,6 @@ namespace Map {
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             void updateEntities();
-
-            int findNearestDiseaseCloudForHealer(int unitID);
-
-            uint spawnEntity(int unitID, undefined4 playerID1, uint ownerColorUnk, int microX,
-                int microY, int totalHeight, int targetX, int targetY, int targetZUnk,
-                EntityType entityType, int param_11);
         };
 
         static_assert_cpp98_obj(sizeof(EntityState) == 706024, EntityState);

@@ -26,7 +26,7 @@ namespace Map {
             int targetTileY = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition
                 + (randomValue >> 8) % 100 - 50;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnEntity, DAT_EntityState::ptr)(0,
+            MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner, 0,
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].microX,
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].microY,
