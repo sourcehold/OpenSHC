@@ -109,8 +109,8 @@ namespace Game {
         dword field62_0x104; // 0x00000104 length: 4
         dword field63_0x108; // 0x00000108 length: 4
         dword unknownAlwaysZero; // 0x0000010C length: 4
-        dword unknownAlwaysZero02; // 0x00000110 length: 4
-        int unknownAlwaysZero03; // 0x00000114 length: 4
+        dword jokeChickenSpam; // 0x00000110 length: 4
+        int showTextMessageInsteadOfEdit; // 0x00000114 length: 4
         BOOLEnum isNameEntryActive; // 0x00000118 length: 4
         DWORD nameEntryStartTime; // 0x0000011C length: 4
         byte unused_0x120[8]; // 0x00000120 length: 8

@@ -8,6 +8,12 @@ Run from the repo root:
     python -I tools/reimplementation-helper/todo/status_rollup.py
 
 Output: status_rollup.tsv in the current working directory.
+
+Set REIMPL_FILTER to a regex to widen or narrow which remote-tracking branches
+are scanned (default '/reimpl/'). Note for Git Bash on Windows: a value that
+starts with '/' is rewritten into a Windows path by MSYS, which silently turns
+the regex into one that matches nothing -- prefix the command with
+MSYS_NO_PATHCONV=1, or write the pattern without a leading slash.
 """
 
 import os, re, subprocess
@@ -73,8 +79,12 @@ for dirpath, dirs, files in os.walk(ROOT):
 print('resolvers in main headers:', len(cpp_of))
 
 # --- collect every ref's status rows --------------------------------------
+# which remote-tracking branches to include; override in CI with REIMPL_FILTER
+BRANCH_FILTER = re.compile(os.environ.get('REIMPL_FILTER', '/reimpl/'))
 rc, out = run(['git', 'branch', '-r', '--format=%(refname:short)'])
-refs = ['HEAD'] + [b.strip() for b in out.splitlines() if '/reimpl/' in b and b.strip()]
+refs = ['HEAD'] + sorted(
+    b.strip() for b in out.splitlines() if b.strip() and BRANCH_FILTER.search(b) and '->' not in b
+)
 
 per_ref = {}
 missing = []
