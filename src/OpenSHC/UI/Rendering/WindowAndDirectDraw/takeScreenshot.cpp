@@ -31,9 +31,9 @@ namespace UI {
                 strcat(path, fileName);
             }
 
-            // NOTE: the original writes through its own statically linked VC8 std::ofstream. OS::basic_ofstream_write
-            // (0x004791B0) is that operator<<(ostream&, char), but it is cdecl while OS.hpp declares it __stdcall,
-            // so this uses the operator<< of our own library on our own stream.
+            // NOTE: the original writes through its own statically linked VC8 std::ofstream. The bytes go through the
+            // game's own operator<<(ostream&, char), OS::basic_ofstream_write (0x004791B0); the stream object is our
+            // library's std::ofstream, which has the same VC8 layout.
             std::ofstream file(path, std::ios::binary);
             if (file.fail())
                 return;
@@ -50,7 +50,7 @@ namespace UI {
                 = this->numPixel_GameX_x_3_x_GameY_0x4c + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
             fileHeader.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
             for (uint i = 0; i < sizeof(fileHeader); i++) {
-                file << ((char*)&fileHeader)[i];
+                MACRO_CALL(OpenSHC::OS_Func::basic_ofstream_write)(&file, ((char*)&fileHeader)[i]);
             }
 
             BITMAPINFOHEADER infoHeader;
@@ -64,7 +64,7 @@ namespace UI {
             infoHeader.biCompression = BI_RGB;
             infoHeader.biSizeImage = this->numPixel_GameX_x_3_x_GameY_0x4c;
             for (uint i = 0; i < sizeof(infoHeader); i++) {
-                file << ((char*)&infoHeader)[i];
+                MACRO_CALL(OpenSHC::OS_Func::basic_ofstream_write)(&file, ((char*)&infoHeader)[i]);
             }
 
             // RGB565 rows, bottom-up, written as BGR24. The walking pointer and the named char locals are both
@@ -74,11 +74,11 @@ namespace UI {
                 for (int x = 0; x < this->resolutionX; x++) {
                     int const pixel = *pixelPtr++;
                     char const blue = (char)pixel << 3;
-                    file << blue;
+                    MACRO_CALL(OpenSHC::OS_Func::basic_ofstream_write)(&file, blue);
                     char const green = (char)(pixel >> 5) * 4;
-                    file << green;
+                    MACRO_CALL(OpenSHC::OS_Func::basic_ofstream_write)(&file, green);
                     char const red = (char)((short)pixel >> 11) << 3;
-                    file << red;
+                    MACRO_CALL(OpenSHC::OS_Func::basic_ofstream_write)(&file, red);
                 }
             }
         }
