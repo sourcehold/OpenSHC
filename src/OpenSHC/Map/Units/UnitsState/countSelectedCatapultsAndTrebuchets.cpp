@@ -12,14 +12,15 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Game::Player::Enums::BEIE_KEEP;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00536400
         undefined4 UnitsState::countSelectedCatapultsAndTrebuchets()
         {
             int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             this->unitIDSelectedCatapultOrTrebuchet = 0;
-            if (DAT_GameState::instance.playerDataArray[_currentPlayerSlotID].buildingEntryInfos[BEIE_KEEP].id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[_currentPlayerSlotID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                    .id
+                <= 0) {
                 return 0;
             }
             int _count = 0;
