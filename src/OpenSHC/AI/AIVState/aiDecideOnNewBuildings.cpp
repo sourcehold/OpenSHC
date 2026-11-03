@@ -12,12 +12,12 @@ namespace AI {
     void AIVState::aiDecideOnNewBuildings(int playerID)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+        int isPausing = 0;
 
         if (aivID <= 0) {
             return;
         }
 
-        int isPausing = 0;
         int stepIncrement = 1;
 
         if (DAT_GameState::instance.playerDataArray[playerID].resourceRebuildDelay != 0) {

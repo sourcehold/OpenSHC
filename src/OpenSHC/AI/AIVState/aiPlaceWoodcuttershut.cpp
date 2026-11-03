@@ -22,7 +22,7 @@ namespace AI {
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
-        this->heatMaps[this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition]
+        this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition]
             .woodRelatedCountdownTo0 = 4;
         // search around the result of the woodcutter search
         MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
@@ -30,7 +30,8 @@ namespace AI {
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
-        ++this->heatMaps[this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition].structureCount;
+        ++this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition]
+              .structureCount;
         MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
             this->buildingApproriateGridXPosition * 5, this->buildingAppropriateGridYPosition * 5,
             Commands::M_MAPPER_WOODSMAN,

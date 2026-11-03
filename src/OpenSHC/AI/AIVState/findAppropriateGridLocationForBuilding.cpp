@@ -69,21 +69,18 @@ namespace AI {
                 }
             }
             if (freeCount == 9) {
-                goto found;
+                // the result is the last visited neighbour (direction 7)
+                int const resultY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.yOffset + y;
+                int const resultX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.xOffset + x;
+                this->buildingApproriateGridXPosition = resultX;
+                this->buildingAppropriateGridYPosition = resultY;
+                return;
             }
             ++this->algAIndex;
             if ((int)this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }
-        return;
-
-    found:
-        // the result is the last visited neighbour (direction 7)
-        int const resultY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.yOffset + y;
-        int const resultX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.xOffset + x;
-        this->buildingApproriateGridXPosition = resultX;
-        this->buildingAppropriateGridYPosition = resultY;
     }
 
 }

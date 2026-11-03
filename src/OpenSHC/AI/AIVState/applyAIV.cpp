@@ -24,9 +24,9 @@ namespace AI {
 
         // single buildings and the keep, steps is accessed as a flat 100 * 100 array
         int x;
-        int y;
+        int y = 0;
         int index = 0;
-        for (y = 0; y < 100; ++y) {
+        for (; y < 100; ++y) {
             for (x = 0; x < 100; ++x, ++index) {
                 if (this->isHandled[index]) {
                     continue;
@@ -58,16 +58,17 @@ namespace AI {
                         continue;
                     }
                     int const realY = this->aivs[aivID].keepYOffset + y;
+                    int const realX = this->aivs[aivID].keepXOffset + x;
                     if (!MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(this->aivs[aivID].keepXOffset + x, realY)) {
+                            DAT_ViewportRenderState::ptr)(realX, this->aivs[aivID].keepYOffset + y)) {
                         continue;
                     }
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
+                        + this->aivs[aivID].keepXOffset + x;
                     this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
                     this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
                     this->aivs[aivID].aivBuildingSteps[step].quantity = 1;
-                    this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
-                        = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
-                        + this->aivs[aivID].keepXOffset + x;
+                    this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
                     if (step > this->aivs[aivID].totalSteps) {
                         this->aivs[aivID].totalSteps = step;
                     }
@@ -81,9 +82,6 @@ namespace AI {
         do {
             selected = FALSE;
             index = startY * 100;
-            if (startY >= 100) {
-                break;
-            }
             int step;
             MappersEnum mapper;
             for (y = startY; y < 100; ++y) {
@@ -104,24 +102,33 @@ namespace AI {
                     } else if (this->steps[0][index] != step) {
                         continue;
                     }
-                    uint const realX = this->aivs[aivID].keepXOffset + x;
-                    uint const realY = this->aivs[aivID].keepYOffset + y;
-                    if (realX <= 399 && realY <= 399
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
-                        this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
-                        this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
-                        ++this->aivs[aivID].aivBuildingSteps[step].quantity;
-                        this->aivs[aivID].locationsArray[this->aivs[aivID].wallLocationsArrayIndex]
-                            = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
-                            + this->aivs[aivID].keepXOffset + x;
-                        ++this->aivs[aivID].wallLocationsArrayIndex;
-                        if (step > this->aivs[aivID].totalSteps) {
-                            this->aivs[aivID].totalSteps = step;
-                        }
+                    int const realY = this->aivs[aivID].keepYOffset + y;
+                    int const realX = this->aivs[aivID].keepXOffset + x;
+                    if (realX < 0 || realX > 399) {
                         this->isHandled[index] = 1;
-                    } else {
-                        this->isHandled[index] = 1;
+                        continue;
                     }
+                    if (realY < 0 || realY > 399) {
+                        this->isHandled[index] = 1;
+                        continue;
+                    }
+                    if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
+                        this->isHandled[index] = 1;
+                        continue;
+                    }
+                    int const tile
+                        = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y]
+                              .addXgetTile
+                        + this->aivs[aivID].keepXOffset + x;
+                    this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
+                    this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
+                    ++this->aivs[aivID].aivBuildingSteps[step].quantity;
+                    this->aivs[aivID].locationsArray[this->aivs[aivID].wallLocationsArrayIndex] = tile;
+                    ++this->aivs[aivID].wallLocationsArrayIndex;
+                    if (step > this->aivs[aivID].totalSteps) {
+                        this->aivs[aivID].totalSteps = step;
+                    }
+                    this->isHandled[index] = 1;
                 }
             }
         } while (selected);
@@ -149,14 +156,13 @@ namespace AI {
                     x = 99 - relativeY;
                     y = relativeX;
                 } else if (this->aivs[aivID].keepOrientation == 2) {
-                    y = 99 - relativeX;
                     x = relativeY;
+                    y = 99 - relativeX;
                 }
-                int const tile
+                DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i]
                     = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y].addXgetTile
                     + this->aivs[aivID].keepXOffset + x;
-                DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i] = tile;
-                if (tile > 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i] > 0) {
                     ++DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[unitType];
                 }
             }
