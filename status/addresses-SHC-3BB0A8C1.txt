@@ -26883,7 +26883,7 @@ SHC_3BB0A8C1_0x004B5280 | 87.5% | Globals via statics in asm
 
 SHC_3BB0A8C1_0x004B5300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B5330 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B5330 | 21.4% | Pixel store and registers differ
 
 SHC_3BB0A8C1_0x004B5480 | 0.0% | Pending
 
