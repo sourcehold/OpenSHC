@@ -5,7 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/DAT_UIButtonDefinedData.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -31,7 +31,7 @@ namespace UI {
                     if (pictureInGm == 0) {
                         continue;
                     }
-                    int const imageIndex = GMTotalPicturesProcessed::instance[gmID] + pictureInGm + state - 1;
+                    int const imageIndex = GMFirstPictureIndex::instance[gmID] + pictureInGm + state - 1;
                     int const width = DAT_GMImageHeaders::instance.imh[imageIndex].width;
                     if (width > maxWidth) {
                         maxWidth = width;
