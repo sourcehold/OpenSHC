@@ -18,7 +18,7 @@ namespace Map {
                     && DAT_BuildingsState::instance.buildings[buildingID].owner == param_1
                     && (DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_GATEHOUSELARGE
                         || DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_GATEHOUSESMALL)
-                    && DAT_BuildingsState::instance.buildings[buildingID].field200_0x2c6 == 0) {
+                    && DAT_BuildingsState::instance.buildings[buildingID].field199_0x2c6 == 0) {
                     DAT_PathFindingState::instance
                         .climbData[DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID]
                         .isRecognizedByPathfinding = 1;
