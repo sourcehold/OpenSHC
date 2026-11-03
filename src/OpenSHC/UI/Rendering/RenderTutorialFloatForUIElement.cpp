@@ -19,27 +19,14 @@ namespace UI {
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
     using OpenSHC::UI::Enums::MenuViewType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      Given a UI element ID (param_1), renders the animated tutorial float overlay at a hardcoded   screen position
-      matching that element (e.g. granary, taxes slider, rations, quarry, hop farm   etc). Guards against showing while
-      in incorrect menu states or when certain conditions aren't   met. Delegates to renderAnimatedTutorialFloatOverlay
-      with per-element x/y positions.      renamed by: Claude Sonnet 4.6
-     */
+    // Shows the animated tutorial arrow next to one UI element (granary, tax slider, rations, quarry, hop farm, ...)
+    // at that element's fixed screen position, unless the current menu or state rules it out.
     // FUNCTION: STRONGHOLDCRUSADER 0x004BC910
-    void Rendering::RenderTutorialFloatForUIElement(int param_1)
+    void Rendering::RenderTutorialFloatForUIElement(int uiElementID)
     {
         if (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU
-            || param_1 == 8 || param_1 == 10 || param_1 == 0xb || param_1 == 0xc) {
-            switch (param_1) {
+            || uiElementID == 8 || uiElementID == 10 || uiElementID == 0xb || uiElementID == 0xc) {
+            switch (uiElementID) {
             case 2:
                 if ((DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_KEEP1)
                     && (DAT_00df5560::instance == 0)) {

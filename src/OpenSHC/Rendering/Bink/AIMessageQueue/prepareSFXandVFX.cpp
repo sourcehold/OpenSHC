@@ -14,7 +14,7 @@ namespace Rendering {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004BE8A0
         void AIMessageQueue::prepareSFXandVFX(
-            char* messageText, char* messageVfxFile, char* messageSfxFile, int param_4)
+            char* messageText, char* messageVfxFile, char* messageSfxFile, int unknownValue2)
         {
             if (messageText == NULL) {
                 return;
@@ -27,11 +27,11 @@ namespace Rendering {
                 this->savedMessageTextPtr_0xdc[this->storedMessages_0x924] = messageText;
                 strcpy(this->savedMessageVfxFile_0x12c[this->storedMessages_0x924], messageVfxFile);
                 strcpy(this->savedMessageSfxFile_0x514[this->storedMessages_0x924], messageSfxFile);
-                this->savedMessageUnknownValue2_0x8fc[this->storedMessages_0x924] = param_4;
+                this->savedMessageUnknownValue2_0x8fc[this->storedMessages_0x924] = unknownValue2;
                 this->storedMessages_0x924 = this->storedMessages_0x924 + 1;
             } else {
                 this->currentMessageText_0x8 = messageText;
-                this->currentMessageUnknownValue2_0xd4 = param_4;
+                this->currentMessageUnknownValue2_0xd4 = unknownValue2;
                 this->currentMessageUnknownValue_0x4 = 1;
                 MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playVideoOverMap, this)(
                     messageVfxFile, messageSfxFile);
