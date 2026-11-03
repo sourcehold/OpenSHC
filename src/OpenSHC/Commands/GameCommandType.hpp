@@ -45,6 +45,7 @@ namespace Commands {
         GCT_DISBAND_AND_ATTACK_UNITS = 36, // 0x00000024
         GCT_BUY_OR_SELL = 38, // 0x00000026
         GCT_SAVE = 39, // 0x00000027
+        GCT_UNKNOWN_40 = 40, // 0x00000028
         GCT_DESTROY2Unk = 41, // 0x00000029
         GCT_SIEGE_TENT = 42, // 0x0000002A
         GCT_BUILDING_SLEEP = 43, // 0x0000002B
