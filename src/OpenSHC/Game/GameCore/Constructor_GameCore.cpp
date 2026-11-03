@@ -10,7 +10,7 @@ namespace Game {
         this->unknownAlwaysZero01 = 0;
         this->currentlyInGameUnk_0xa4 = FALSE;
         this->mapTimeInTicks = 0;
-        this->unknownAlwaysZero02 = 0;
+        this->jokeChickenSpam = 0;
         this->field26_0x74 = 0;
         this->field24_0x6c = 0;
         this->isTimeHalted2 = 0;
