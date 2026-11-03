@@ -18,15 +18,14 @@ namespace AI {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE040
     void AICState::recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance)
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         int const keepArea
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
-                  [DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
+            = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                    .tileEntry];
 
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {

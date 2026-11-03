@@ -10,12 +10,12 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::Game::Player::Enums::BEIE_KEEP;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD0C0
     void AICState::sendUnitsToKeep(int tribeID, int playerID)
     {
-        int const keepID = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_KEEP].id;
+        int const keepID = DAT_GameState::instance.playerDataArray[playerID]
+                               .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                               .id;
         if (keepID <= 0) {
             return;
         }

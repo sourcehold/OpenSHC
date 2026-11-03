@@ -15,14 +15,14 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00422B80
         void BuildingsState::checkBuildingsNeedPeasants(int playerID)
         {
             int const campgroundArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer
-                      [DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].tileEntry];
+                = (short)
+                      DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .tileEntry];
             this->DAT_CountOfBuildingsNeedPeasants = 0;
             for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
                 if (this->buildings[buildingID].logicalState == BLS_NORMAL

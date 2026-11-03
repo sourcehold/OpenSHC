@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace AI {
 
     // breadth first search from the campground for the grid cell with the best tree score
-    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004EE140
     void AIVState::findAppropriateWoodCutterGridLocation(int playerID)
     {
@@ -21,11 +19,15 @@ namespace AI {
         int foundCount = 0;
         this->visitCount = 1;
         this->algBIndex = 1;
-        int const campX
-            = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry / 5;
+        int const campX = DAT_GameState::instance.playerDataArray[playerID]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .xEntry
+            / 5;
         this->heatMapXArray[0] = campX;
-        int const campY
-            = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry / 5;
+        int const campY = DAT_GameState::instance.playerDataArray[playerID]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .yEntry
+            / 5;
         this->heatMapYArray[0] = campY;
         this->buildingApproriateGridXPosition = -1;
         this->buildingAppropriateGridYPosition = -1;

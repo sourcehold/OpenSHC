@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace Audio {
     namespace SFX {
 
-        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0044A620
         void SFXState::playVictoryMusic678()
         {
@@ -28,7 +26,7 @@ namespace Audio {
             }
             if ((DAT_VictoryMusicVariation::instance == 0 || DAT_VictoryMusicVariation::instance == 2)
                 && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .buildingEntryInfos[BEIE_CAMPGROUND]
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                             .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]

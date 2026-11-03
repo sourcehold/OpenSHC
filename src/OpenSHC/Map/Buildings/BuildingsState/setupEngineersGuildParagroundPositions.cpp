@@ -13,8 +13,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E040
         void BuildingsState::setupEngineersGuildParagroundPositions(int playerID)
         {
@@ -23,7 +21,10 @@ namespace Map {
                 sizeof(DAT_GameState::instance.playerDataArray[playerID].engineersParadegroundLocations), 0,
                 DAT_GameState::instance.playerDataArray[playerID].engineersParadegroundLocations);
             DAT_GameState::instance.playerDataArray[playerID].engineersParadegroundLocationsTotal = 0;
-            if (DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                    .id
+                <= 0) {
                 return;
             }
             for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {

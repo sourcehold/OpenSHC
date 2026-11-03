@@ -21,8 +21,6 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0047B890
         void SoundSystem::playRandomAmbientMusic()
         {
@@ -30,7 +28,7 @@ namespace Audio {
                 && MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .buildingEntryInfos[BEIE_CAMPGROUND]
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                             .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]

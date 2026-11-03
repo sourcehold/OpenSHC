@@ -14,8 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D400
         void BuildingsState::setupMercenaryPostCampgroundPositions(int playerID)
         {
@@ -26,7 +24,10 @@ namespace Map {
                 sizeof(DAT_GameState::instance.playerDataArray[playerID].structure), 0,
                 &DAT_GameState::instance.playerDataArray[playerID].structure);
             DAT_GameState::instance.playerDataArray[playerID].structureRelated1 = 0;
-            if (DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_MERCENARYPOST].id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                    .id
+                <= 0) {
                 return;
             }
             int buildingID;

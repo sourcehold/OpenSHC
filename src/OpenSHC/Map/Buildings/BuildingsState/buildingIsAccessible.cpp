@@ -15,8 +15,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00421A40
         int BuildingsState::buildingIsAccessible(int buildingID, int amountUnk)
         {
@@ -26,7 +24,7 @@ namespace Map {
             int const campgroundArea
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner]
-                              .buildingEntryInfos[BEIE_CAMPGROUND]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                               .tileEntry];
             int const buildingHeight
                 = DAT_TileMapState::instance.HeightLayer

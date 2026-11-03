@@ -14,8 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_BARRACKS;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D120
         void BuildingsState::setupBarracksCampgroundPositions(int playerID)
         {
@@ -26,7 +24,10 @@ namespace Map {
                 sizeof(DAT_GameState::instance.playerDataArray[playerID].barracksParadegroundLocations), 0,
                 DAT_GameState::instance.playerDataArray[playerID].barracksParadegroundLocations);
             DAT_GameState::instance.playerDataArray[playerID].barracksParadegroundLocationsTotal = 0;
-            if (DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_BARRACKS].id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
+                    .id
+                <= 0) {
                 return;
             }
             int buildingID;

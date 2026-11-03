@@ -10,8 +10,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDFD0
     void AICState::setAttackPrimeInfo(int playerID, int attackedPlayerID)
     {
@@ -24,7 +22,7 @@ namespace AI {
         DAT_TroopValueState::instance.attackInfo.keepCon
             = (short)DAT_TileMapState::instance
                   .PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID]
-                          .buildingEntryInfos[BEIE_CAMPGROUND]
+                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                           .tileEntry];
     }
 }

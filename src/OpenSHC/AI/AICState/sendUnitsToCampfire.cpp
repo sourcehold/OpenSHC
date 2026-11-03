@@ -10,18 +10,24 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD110
     void AICState::sendUnitsToCampfire(int tribeID, int playerID)
     {
-        if (DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].id <= 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                .id
+            <= 0) {
             return;
         }
 
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(tribeID,
-            DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].xEntry,
-            DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].yEntry, 0);
+            DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                .xEntry,
+            DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                .yEntry,
+            0);
         DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
     }
 }

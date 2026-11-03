@@ -18,15 +18,15 @@ namespace AI {
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
 
-    using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
     {
-        uint const campfireX
-            = DAT_GameState::instance.playerDataArray[playerID1].buildingEntryInfos[BEIE_CAMPGROUND].xEntry;
-        uint const campfireY
-            = DAT_GameState::instance.playerDataArray[playerID1].buildingEntryInfos[BEIE_CAMPGROUND].yEntry;
+        uint const campfireX = DAT_GameState::instance.playerDataArray[playerID1]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .xEntry;
+        uint const campfireY = DAT_GameState::instance.playerDataArray[playerID1]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .yEntry;
 
         uint gatehouseX;
         uint gatehouseY;

@@ -9,13 +9,12 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B660
         BOOLEnum BuildingsState::prepareCampgroundCoords(int playerID)
         {
-            int const campgroundID
-                = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_CAMPGROUND].id;
+            int const campgroundID = DAT_GameState::instance.playerDataArray[playerID]
+                                         .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                         .id;
             if (campgroundID <= 0) {
                 return FALSE;
             }

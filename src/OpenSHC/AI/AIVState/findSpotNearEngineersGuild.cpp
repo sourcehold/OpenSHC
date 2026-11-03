@@ -8,13 +8,12 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004EFB90
     BOOLEnum AIVState::findSpotNearEngineersGuild(int playerID)
     {
-        int const guildID
-            = DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[BEIE_ENGINEERSGUILD].id;
+        int const guildID = DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                .id;
         if (guildID <= 0) {
             return FALSE;
         }
