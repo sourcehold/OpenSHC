@@ -31,15 +31,13 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
         int i = 0;
-        // the indices run from DAT_MapSelectionPreloadMapIndexMapping on into DAT_ArrayOfMapIndices; a for loop changes
-        // the code
+        // the indices run from DAT_MapSelectionPreloadMapIndexMapping on into DAT_ArrayOfMapIndices; the match needs
+        // the counter outside the guard
         if (0 < DAT_ResourceManager::instance.mapFileCounter) {
-            int* mapIndex = (int*)&this->DAT_MapSelectionPreloadMapIndexMapping;
-            do {
+            for (int* mapIndex = (int*)&this->DAT_MapSelectionPreloadMapIndexMapping;
+                i < DAT_ResourceManager::instance.mapFileCounter; ++i, ++mapIndex) {
                 *mapIndex = i;
-                ++i;
-                ++mapIndex;
-            } while (i < DAT_ResourceManager::instance.mapFileCounter);
+            }
         }
         this->fileListSortOrder = 0;
         this->menuLoadGameRelativeSelectionOffset = 0;
