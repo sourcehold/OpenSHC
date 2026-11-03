@@ -142,7 +142,10 @@ jobs:
           fi
           head -1 status_rollup.tsv | grep -q '^shc_id	address	done	' \
             || { echo "Refusing to publish: unexpected header" >&2; exit 1; }
-          mv status_rollup.tsv "$ASSET"
+          # On a push to main the asset already has this name.
+          if [ "$ASSET" != 'status_rollup.tsv' ]; then
+            mv status_rollup.tsv "$ASSET"
+          fi
 
       - name: Publish to the latest-sarif release
         if: ${{ steps.ctx.outputs.mode != 'skip' }}
