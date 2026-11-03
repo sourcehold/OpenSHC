@@ -15,9 +15,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525370
         void TribesState::standUpAllTribeUnits(int tribeID)
         {
-            short* _tribeSize = &this->tribes[tribeID].size;
             int unitSelectionIndex = 0;
-            while (unitSelectionIndex < *_tribeSize) {
+            while (unitSelectionIndex < this->tribes[tribeID].size) {
                 int const unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;

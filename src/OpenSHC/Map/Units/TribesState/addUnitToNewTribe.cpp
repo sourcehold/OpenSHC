@@ -57,25 +57,25 @@ namespace Map {
                         } else if (_unitType == Map::Units::UT_E_ENGINEER) {
                             this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ENGINEERS;
                         } else if (_unitType == Map::Units::UT_HOPSFARMER) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)12;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_HOPS_FARMER_UNK;
                         } else if (_unitType == Map::Units::UT_TUNNELER) {
                             this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_TUNNELERS;
                         } else if (_unitType == Map::Units::UT_A_ARCHER) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)25;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_ARCHER;
                         } else if (_unitType == Map::Units::UT_A_SLAVE) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)26;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_SLAVE;
                         } else if (_unitType == Map::Units::UT_A_SLINGER) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)27;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_SLINGER;
                         } else if (_unitType == Map::Units::UT_A_ASSASSIN) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)28;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_ASSASSIN;
                         } else if (_unitType == Map::Units::UT_A_HARCHER) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)29;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_HORSE_ARCHER;
                         } else if (_unitType == Map::Units::UT_A_SWORDSMAN) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)30;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_SWORDSMAN;
                         } else if (_unitType == Map::Units::UT_A_FIRETHROWER) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)31;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARAB_FIRETHROWER;
                         } else if (_unitType == Map::Units::UT_S_FBALLISTA) {
-                            this->tribes[_newTribeID].tribeType = (AITribeType)24;
+                            this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_FIRE_BALLISTA;
                         }
                         this->tribes[_newTribeID].someIndex = 1;
                         this->tribes[_newTribeID].attackWave
