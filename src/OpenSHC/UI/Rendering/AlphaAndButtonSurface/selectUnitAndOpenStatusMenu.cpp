@@ -24,7 +24,7 @@ namespace UI {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00463A00
-        BOOLEnum AlphaAndButtonSurface::SelectUnitAndOpenStatusMenu(int unitIndex)
+        BOOLEnum AlphaAndButtonSurface::selectUnitAndOpenStatusMenu(int unitIndex)
         {
             if (0 < unitIndex
                 && DAT_UnitsState::instance.units[unitIndex].owner

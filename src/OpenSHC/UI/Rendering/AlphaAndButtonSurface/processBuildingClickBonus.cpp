@@ -16,7 +16,7 @@ namespace UI {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00463270
-        void AlphaAndButtonSurface::ProcessBuildingClickBonus(int buildingIndex)
+        void AlphaAndButtonSurface::processBuildingClickBonus(int buildingIndex)
         {
             if (0 < buildingIndex) {
                 int _playerIndex = (int)DAT_BuildingsState::instance.buildings[buildingIndex].owner;

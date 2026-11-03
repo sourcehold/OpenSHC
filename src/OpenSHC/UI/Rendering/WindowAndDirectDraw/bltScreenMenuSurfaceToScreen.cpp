@@ -39,7 +39,7 @@ namespace UI {
                         _destinationRect.bottom = this->gameResolutionY;
                     }
                     MACRO_CALL_MEMBER(
-                        OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::clipBlitRectsToScreenInWindowedMode, this)(
+                        OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
                     /*
                       Normal waiting blt. --TheRedDaemon
