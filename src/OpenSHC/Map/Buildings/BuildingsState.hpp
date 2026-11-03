@@ -92,7 +92,7 @@ namespace Map {
 
             MappersEnum convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
-            undefined4 getBuildingHeightForBuildingID(int buildingID);
+            int getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 getBuildingHeightForBuildingID2(int buildingID);
 

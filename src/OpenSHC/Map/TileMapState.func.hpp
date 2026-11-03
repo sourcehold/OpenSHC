@@ -130,7 +130,7 @@ namespace Map {
             &TileMapState::hasOnlyTowerNeighborsNoWalls)
         hasOnlyTowerNeighborsNoWalls;
 
-        MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F89C0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F89C0,
             &TileMapState::getWallFlagForOrientedDirection)
         getWallFlagForOrientedDirection;
 

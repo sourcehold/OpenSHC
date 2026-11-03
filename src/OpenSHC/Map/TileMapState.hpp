@@ -296,7 +296,7 @@ namespace Map {
 
         BOOLEnum hasOnlyTowerNeighborsNoWalls(int tile, int y);
 
-        uint getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
+        BOOLEnum getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
 
         BOOLEnum hasHigherNeighborWithStairs(int tile, int y, int direction);
 
