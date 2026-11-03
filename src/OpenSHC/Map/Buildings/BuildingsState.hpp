@@ -92,7 +92,7 @@ namespace Map {
 
             MappersEnum convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
-            undefined4 getBuildingHeightForBuildingID(int buildingID);
+            int getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 getBuildingHeightForBuildingID2(int buildingID);
 
@@ -399,7 +399,7 @@ namespace Map {
 
             int buildingIsAccessible(int buildingID, int amountUnk);
 
-            char resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
+            int resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
             void giveBackResourceForDestroyedBuilding(int buildingIDORIfNegResourceType, int playerID, int param_3);
 

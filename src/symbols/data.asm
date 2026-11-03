@@ -39,6 +39,34 @@ PUBLIC ?instance@?$Extern@UBuildingDefinedData@Buildings@Map@OpenSHC@@$0FLHJHE@@
 
 PUBLIC ?instance@?$Extern@URenderingDefinedData@Game@OpenSHC@@$0FMCKGM@@StructResolver@@2URenderingDefinedData@Game@OpenSHC@@A
 
+PUBLIC ?instance@?$Extern@$$BY07H$0GBHONA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07H$0GBHOPA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07UPosition@UI@OpenSHC@@$0GBHPBA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A
+
+PUBLIC ?instance@?$Extern@$$BY07H$0GBHPFA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07H$0GBHPHA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07UPosition@UI@OpenSHC@@$0GBHPJA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A
+
+PUBLIC ?instance@?$Extern@$$BY0BE@H$0GBHPNA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07H$0GBIACA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY03H$0GBIAEA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY07H$0GBIAFA@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY0BJ@UPosition@UI@OpenSHC@@$0GBIAHA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A
+
+PUBLIC ?instance@?$Extern@$$BY162H$0GBIBDI@@StructResolver@@2PAY02HA
+
+PUBLIC ?instance@?$Extern@$$BY0BF@H$0GBIBIM@@StructResolver@@2PAHA
+
+PUBLIC ?instance@?$Extern@$$BY128H$0GBIBOA@@StructResolver@@2PAY08HA
+
 PUBLIC ?instance@?$Extern@USpeechDefinedData@Speech@Audio@OpenSHC@@$0GBICFE@@StructResolver@@2USpeechDefinedData@Speech@Audio@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@UBlendingDefinedData@Rendering@OpenSHC@@$0KLFHBM@@StructResolver@@2UBlendingDefinedData@Rendering@OpenSHC@@A
@@ -1085,6 +1113,8 @@ PUBLIC ?instance@?$Extern@PAX$0FLHJHA@@StructResolver@@2PAXA
 
 PUBLIC ?instance@?$Extern@PAX$0FMCKGI@@StructResolver@@2PAXA
 
+PUBLIC ?instance@?$Extern@H$0GBICEM@@StructResolver@@2HA
+
 PUBLIC ?instance@?$Extern@PAX$0KLFHBI@@StructResolver@@2PAXA
 
 PUBLIC ?instance@?$Extern@PAX$0KLIOBA@@StructResolver@@2PAXA
@@ -1701,6 +1731,34 @@ _TEXT SEGMENT
 ?instance@?$Extern@UBuildingDefinedData@Buildings@Map@OpenSHC@@$0FLHJHE@@StructResolver@@2UBuildingDefinedData@Buildings@Map@OpenSHC@@A EQU 005B7974h
 
 ?instance@?$Extern@URenderingDefinedData@Game@OpenSHC@@$0FMCKGM@@StructResolver@@2URenderingDefinedData@Game@OpenSHC@@A EQU 005C2A6Ch
+
+?instance@?$Extern@$$BY07H$0GBHONA@@StructResolver@@2PAHA EQU 00617ED0h
+
+?instance@?$Extern@$$BY07H$0GBHOPA@@StructResolver@@2PAHA EQU 00617EF0h
+
+?instance@?$Extern@$$BY07UPosition@UI@OpenSHC@@$0GBHPBA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A EQU 00617F10h
+
+?instance@?$Extern@$$BY07H$0GBHPFA@@StructResolver@@2PAHA EQU 00617F50h
+
+?instance@?$Extern@$$BY07H$0GBHPHA@@StructResolver@@2PAHA EQU 00617F70h
+
+?instance@?$Extern@$$BY07UPosition@UI@OpenSHC@@$0GBHPJA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A EQU 00617F90h
+
+?instance@?$Extern@$$BY0BE@H$0GBHPNA@@StructResolver@@2PAHA EQU 00617FD0h
+
+?instance@?$Extern@$$BY07H$0GBIACA@@StructResolver@@2PAHA EQU 00618020h
+
+?instance@?$Extern@$$BY03H$0GBIAEA@@StructResolver@@2PAHA EQU 00618040h
+
+?instance@?$Extern@$$BY07H$0GBIAFA@@StructResolver@@2PAHA EQU 00618050h
+
+?instance@?$Extern@$$BY0BJ@UPosition@UI@OpenSHC@@$0GBIAHA@@StructResolver@@2PAUPosition@UI@OpenSHC@@A EQU 00618070h
+
+?instance@?$Extern@$$BY162H$0GBIBDI@@StructResolver@@2PAY02HA EQU 00618138h
+
+?instance@?$Extern@$$BY0BF@H$0GBIBIM@@StructResolver@@2PAHA EQU 0061818Ch
+
+?instance@?$Extern@$$BY128H$0GBIBOA@@StructResolver@@2PAY08HA EQU 006181E0h
 
 ?instance@?$Extern@USpeechDefinedData@Speech@Audio@OpenSHC@@$0GBICFE@@StructResolver@@2USpeechDefinedData@Speech@Audio@OpenSHC@@A EQU 00618254h
 
@@ -2747,6 +2805,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@PAX$0FLHJHA@@StructResolver@@2PAXA EQU 005B7970h
 
 ?instance@?$Extern@PAX$0FMCKGI@@StructResolver@@2PAXA EQU 005C2A68h
+
+?instance@?$Extern@H$0GBICEM@@StructResolver@@2HA EQU 0061824Ch
 
 ?instance@?$Extern@PAX$0KLFHBI@@StructResolver@@2PAXA EQU 00AB5718h
 
