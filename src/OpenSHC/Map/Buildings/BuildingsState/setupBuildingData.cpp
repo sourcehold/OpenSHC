@@ -148,8 +148,8 @@ namespace Map {
             this->buildings[buildingID].fireRelatedRNG1 = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
-            // Rendering data. Only the lower half of spriteSheetID is written.
-            *(short*)&this->buildings[buildingID].spriteSheetID
+            // Rendering data.
+            this->buildings[buildingID].spriteSheetID
                 = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[buildingType].shortValue;
             this->buildings[buildingID].spriteID
                 = DAT_BuildingDefinedData::instance.Building_Sprite_ID_Array_1[buildingType]
