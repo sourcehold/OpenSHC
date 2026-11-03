@@ -23071,7 +23071,7 @@ SHC_3BB0A8C1_0x00487770 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487A30 | 81.2% | Game speed not kept in a register; return-block layout
 
 SHC_3BB0A8C1_0x00487C50 | 0.0% | Pending
 
