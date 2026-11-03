@@ -8,31 +8,27 @@
 
 #pragma once
 
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Game/Skirmish/StartingResourceStructureInt.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/UI/MenuIDMenuElementAddressPair.hpp"
 #include "OpenSHC/UI/MenuItem.hpp"
-#include "OpenSHC/UI/Position.hpp"
 #include "OpenSHC/UI/TextMessageBLLookupStruct.hpp"
 #include "OpenSHC/UI/UC.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
-    using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Game::Skirmish::StartingResourceStructureInt;
     using OpenSHC::Map::Units::UnitTypeInt;
     using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::UI::MenuIDMenuElementAddressPair;
     using OpenSHC::UI::MenuItem;
-    using OpenSHC::UI::Position;
     using OpenSHC::UI::TextMessageBLLookupStruct;
     using OpenSHC::UI::UC;
 
 #pragma pack(push, 1)
-    // SIZE: 0x000557E4
+    // SIZE: 0x00055464
     typedef struct RenderingDefinedData {
 
         int StartGold[3]; // 0x00000000 length: 12
@@ -235,26 +231,10 @@ namespace Game {
         char* BuildingHelpArray[108]; // 0x00054F54 length: 432
         char* BuildingBikArray[108]; // 0x00055104 length: 432
         char* BuildingTgxSketchArray[108]; // 0x000552B4 length: 432
-        ResourceTypeInt StockpileMenuResourceTypes[8]; // 0x00055464 length: 32
-        int StockpileMenuResourceIcons[8]; // 0x00055484 length: 32
-        Position StockpileIconsPositionNudges[8]; // 0x000554A4 length: 64
-        int ArmoryMenuResourceTypes[8]; // 0x000554E4 length: 32
-        int ArmoryMenuResourceIcons[8]; // 0x00055504 length: 32
-        Position ArmoryIconsPositionNudges[8]; // 0x00055524 length: 64
-        int MarketStonksOrder[20]; // 0x00055564 length: 80
-        ResourceTypeInt FoodTypes[8]; // 0x000555B4 length: 32
-        int RawResourceTypes[4]; // 0x000555D4 length: 16
-        int field1047_0x555e4[8]; // 0x000555E4 length: 32
-        Position field1048_0x55604[25]; // 0x00055604 length: 200
-        int PopularityMessageLayout[7][3]; // 0x000556CC length: 84
-        int field1050_0x55720[4]; // 0x00055720 length: 16
-        undefined1 padding_0x55730[68]; // 0x00055730 length: 68
-        UnitTypeInt UnitTypeGroups[3][9]; // 0x00055774 length: 108
-        int field1120_0x557e0; // 0x000557E0 length: 4
 
     } RenderingDefinedData;
 #pragma pack(pop)
 
-    static_assert_cpp98_obj(sizeof(RenderingDefinedData) == 350180, RenderingDefinedData);
+    static_assert_cpp98_obj(sizeof(RenderingDefinedData) == 349284, RenderingDefinedData);
 } // namespace Game
 } // namespace OpenSHC

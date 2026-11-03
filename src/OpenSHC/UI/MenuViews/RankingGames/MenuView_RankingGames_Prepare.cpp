@@ -2,6 +2,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuViews/RankingGames.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00ed27a0.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -19,8 +20,9 @@ namespace UI {
                 MACRO_CALL(OpenSHC::Game::Skirmish_Func::Skirmish_PrepareLeaderboardView)();
                 DAT_00ed27a0::instance = 0;
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+                // "frontend_combat3.tgx"
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("frontend_combat3.tgx");
+                    DAT_TextureRenderCoreObject::ptr)(s_frontend_combat3_tgx_005a2134);
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
                 DAT_StoredGameMode::instance = DAT_GameSynchronyState::instance.currentGameMode;
             }
