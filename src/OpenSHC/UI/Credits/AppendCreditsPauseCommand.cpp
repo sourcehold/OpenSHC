@@ -1,7 +1,7 @@
 #include "OpenSHC/UI/Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
-#include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
+#include "OpenSHC/Globals/DAT_CreditsScriptCommandCount.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -10,9 +10,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DA840
         void AppendCreditsPauseCommand()
         {
-            if ((int)DAT_UnknownBinkCount::instance < 288) {
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = 0x1c;
-                DAT_UnknownBinkCount::instance += 1;
+            if ((int)DAT_CreditsScriptCommandCount::instance < 288) {
+                DAT_ARRAY_00eb9b68::instance[DAT_CreditsScriptCommandCount::instance].commandType = 0x1c;
+                DAT_CreditsScriptCommandCount::instance += 1;
             }
         }
 
