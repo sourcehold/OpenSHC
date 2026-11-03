@@ -68,8 +68,7 @@ namespace UI {
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
             void* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
             void* bitmapsFaces_0x94; // 0x00000094 length: 4
-            int bitmapFaceSizes[20]; // 0x00000098 length: 80
-            int unknownPlayerDependentRenderValue[8]; // 0x000000E8 length: 32
+            int bitmapFaceSizes[28]; // 0x00000098 length: 112
             int field71_0x108; // 0x00000108 length: 4
             int field72_0x10c; // 0x0000010C length: 4
             int field73_0x110; // 0x00000110 length: 4
