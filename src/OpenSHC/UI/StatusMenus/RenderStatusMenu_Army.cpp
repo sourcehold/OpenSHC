@@ -10,6 +10,7 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00b95b68.hpp"
 #include "OpenSHC/Globals/DAT_00b9845c.hpp"
@@ -130,7 +131,7 @@ namespace UI {
             return;
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-            "%", percentX, top + 0x19, OpenSHC::Text::TTA_LEFT, color, 0, 0x12, TRUE, 0);
+            s_percentage_005a2770, percentX, top + 0x19, OpenSHC::Text::TTA_LEFT, color, 0, 0x12, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         DAT_TextManagerObject::instance.field8_0x20 = 0;
     }

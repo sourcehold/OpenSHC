@@ -43,12 +43,6 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x0043C1E0
     void BuildingMenus::RenderBuildingMenu_ChapelAndChurch()
     {
@@ -67,9 +61,7 @@ namespace UI {
         iVar4 = DAT_BuildingsState::instance.menuSelectedBuildingID;
         BVar2
             = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType;
-        /*
-          added by script: "Cathedral"
-         */
+        // "Cathedral"
         if (BVar2 == OpenSHC::Map::Buildings::BT_CHAPEL) {
             iVar11 = DAT_MenuHandlerState::instance.y + 0x1d3;
             iVar8 = DAT_MenuHandlerState::instance.x + 0x19;
@@ -116,9 +108,7 @@ namespace UI {
             TVar6 = OpenSHC::Text::TTA_LEFT;
             iVar4 = DAT_MenuHandlerState::instance.y + 0x205;
             iVar5 = DAT_MenuHandlerState::instance.x + 0xaf;
-            /*
-              added by script: "No Wedding this month"
-             */
+            // "No Wedding this month"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
@@ -138,9 +128,7 @@ namespace UI {
                 TVar6 = OpenSHC::Text::TTA_LEFT;
                 iVar4 = DAT_MenuHandlerState::instance.y + 0x205;
                 iVar5 = DAT_MenuHandlerState::instance.x + 0xaf;
-                /*
-                added by script: "No Wedding this month"
-                */
+                // "No Wedding this month"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
@@ -280,9 +268,7 @@ namespace UI {
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar4 = DAT_MenuHandlerState::instance.y + 0x205;
         iVar5 = DAT_MenuHandlerState::instance.x + 0xaf;
-        /*
-          added by script: "No Wedding this month"
-         */
+        // "No Wedding this month"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
