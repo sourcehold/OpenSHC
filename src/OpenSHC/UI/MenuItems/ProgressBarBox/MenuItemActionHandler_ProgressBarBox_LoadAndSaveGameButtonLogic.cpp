@@ -126,7 +126,7 @@ namespace UI {
                     DAT_MapDefinedData::instance.MapSectionAddressArray);
                 INT_00b95b64::instance = 1;
                 DAT_WallAndPitchState::instance.countdown = 0;
-                DAT_MenuTextInputState::instance.field44_0xa4 = 1;
+                DAT_MenuTextInputState::instance.field_0xa4 = 1;
                 if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
                     || (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
                     MACRO_CALL_MEMBER(
@@ -139,8 +139,8 @@ namespace UI {
                 break;
             case 31: {
                 // load
-                int const index = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                    + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex;
+                int const index = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
+                    + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 DAT_VideoBikQueue::instance.storedMessages_0x924 = 0;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                     DAT_MenuModalComposition2::ptr)(OpenSHC::UI::Enums::MMT_NONE, FALSE);

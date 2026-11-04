@@ -12,9 +12,9 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0042C1E0
     void Helpers::SomeSiegeUnitsComputation(int slot)
     {
-        // The value table starts at ARCHER (7 entries of 3), the slot percentages at field1003_0x548dc.
+        // The value table starts at ARCHER (7 entries of 3), the slot percentages at field_0x548dc.
         int* const unitValues = &DAT_RenderingDefinedData::instance.ARCHER;
-        int* const slotPercentages = &DAT_RenderingDefinedData::instance.field1003_0x548dc;
+        int* const slotPercentages = &DAT_RenderingDefinedData::instance.field_0x548dc;
         int total = INT_ARRAY_00b960b8::instance[1];
         for (int unit = 0; unit < 7; ++unit) {
             for (int value = 0; value < 3; ++value) {

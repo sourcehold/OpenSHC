@@ -342,8 +342,8 @@ namespace UI {
                 && DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_PLACE_ASSEMBLY_POINTE2
                 && DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_PLACE_ASSEMBLY_POINTT1
                 && DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_PLACE_ASSEMBLY_POINTK1
-                && DAT_GameCore::instance.activeMenuTab.tabType != DAT_GameCore::instance.field12_0x30) {
-                DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = DAT_GameCore::instance.field12_0x30;
+                && DAT_GameCore::instance.activeMenuTab.tabType != DAT_GameCore::instance.field_0x30) {
+                DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = DAT_GameCore::instance.field_0x30;
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
             }

@@ -54,9 +54,9 @@ namespace UI {
                 return;
             case -3:
                 if (DAT_TextEditorState::instance.useAlternateHelpTab != 0) {
-                    if (0 <= DAT_TextEditorState::instance.field49_0x23964) {
+                    if (0 <= DAT_TextEditorState::instance.field_0x23964) {
                         DAT_TextEditorState::instance.activeHelpHotspotIndex
-                            = DAT_TextEditorState::instance.field49_0x23964;
+                            = DAT_TextEditorState::instance.field_0x23964;
                     }
                 } else if (0 <= DAT_TextEditorState::instance.currentLinkId) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::openUnusedHelpTextEditorDialog,
@@ -438,7 +438,7 @@ namespace UI {
                     OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
                 return;
             case 32:
-                switch (DAT_TextEditorState::instance.field52_0x23970) {
+                switch (DAT_TextEditorState::instance.field_0x23970) {
                 case 4:
                     DAT_ResourceManager::instance.strFileTitle[0] = '\0';
                     DAT_ResourceManager::instance.strFile[0] = '\0';
@@ -509,7 +509,7 @@ namespace UI {
                 }
                 break;
             case 33:
-                switch (DAT_TextEditorState::instance.field52_0x23970) {
+                switch (DAT_TextEditorState::instance.field_0x23970) {
                 case 1:
                     DAT_TextEditorState::instance
                         .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
@@ -560,7 +560,7 @@ namespace UI {
             case 31:
                 break;
             case 34:
-                switch (DAT_TextEditorState::instance.field52_0x23970) {
+                switch (DAT_TextEditorState::instance.field_0x23970) {
                 case 1:
                     DAT_TextEditorState::instance
                         .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
@@ -594,7 +594,7 @@ namespace UI {
                 }
                 break;
             case 35:
-                if (DAT_TextEditorState::instance.field52_0x23970 == 1) {
+                if (DAT_TextEditorState::instance.field_0x23970 == 1) {
                     DAT_TextEditorState::instance
                         .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
                         = L'\x02';
@@ -603,7 +603,7 @@ namespace UI {
                 }
                 break;
             case 36:
-                if (DAT_TextEditorState::instance.field52_0x23970 == 1) {
+                if (DAT_TextEditorState::instance.field_0x23970 == 1) {
                     DAT_TextEditorState::instance
                         .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
                         = L'\x03';
