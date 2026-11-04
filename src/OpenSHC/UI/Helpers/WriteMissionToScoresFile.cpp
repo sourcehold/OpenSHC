@@ -56,7 +56,7 @@ namespace UI {
         MACRO_CALL(OS_Func::_fclose)(file);
         INT_00ec0828::instance = scoresFile.scores[0];
         int rank = 0;
-        while (score <= scoresFile.scores[rank]) {
+        for (; score <= scoresFile.scores[rank];) {
             ++rank;
             if (rank >= 10) {
                 return;

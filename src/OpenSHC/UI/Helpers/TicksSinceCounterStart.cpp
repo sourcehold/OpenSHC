@@ -20,7 +20,7 @@ namespace UI {
     {
         // Wait until at least TIME_QueryMargin ticks have passed since the last call.
         DWORD now = DAT_00df33ac::instance;
-        do {
+        for (;;) {
             if (!DAT_HasNoQueryPerformanceFrequency::instance) {
                 QueryPerformanceCounter(DAT_PerformanceCounterFrequency::ptr);
                 now = DAT_PerformanceCounterFrequency::instance.LowPart;
@@ -30,7 +30,10 @@ namespace UI {
                 now = timeGetTime();
                 DAT_00df33ac::instance = now;
             }
-        } while (now - TIME_PreviousQuery::instance < TIME_QueryMargin::instance);
+            if (now - TIME_PreviousQuery::instance >= TIME_QueryMargin::instance) {
+                break;
+            }
+        }
         FLOAT_Between1and0dot2::instance
             = (float)TIME_QueryMargin::instance / (float)(DWORD)(now - TIME_PreviousQuery::instance);
         TIME_PreviousQuery::instance = now;
