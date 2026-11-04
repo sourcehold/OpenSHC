@@ -43,8 +43,7 @@ namespace Synchrony {
         words[1][0] = '\0';
         int word = 0;
         int length = 0;
-        int index = 0;
-        for (; !done;) {
+        for (int index = 0; !done;) {
             char const character = arguments[index];
             if (character == '"') {
                 ++index;
@@ -61,7 +60,7 @@ namespace Synchrony {
                 }
                 word = 0;
             } else if (character == '\0') {
-                words[word][length] = character;
+                words[word][length] = '\0';
                 length = 0;
                 done = true;
             } else if (character == ' ') {
@@ -88,10 +87,11 @@ namespace Synchrony {
             }
             strcpy(words[2], words[0]);
             strcpy(words[3], words[1]);
+            // The options are "+connect", "+host" and "+name".
             if (MACRO_CALL(OS_Func::__stricmp)(s__connect_005a74e4, words[0]) == 0) {
                 this->useTCPIP = TRUE;
-                // The address goes into connectTarget, at most 29 characters; a port follows a colon.
-                int const targetLength = min(strlen(words[1]), 29);
+                // The address goes into connectTarget, leaving its last byte 0; a port follows a colon.
+                int const targetLength = min(strlen(words[1]), sizeof(this->connectTarget) - 1);
                 memset(this->connectTarget, 0, sizeof(this->connectTarget));
                 int colon = 0;
                 for (; colon < targetLength; ++colon) {
@@ -130,7 +130,7 @@ namespace Synchrony {
         }
         if (strlen(MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0))
             == 0) {
-            // Without a player name the default one from the game options texts is used.
+            // Without a player name the default one is used: "Lord Crusader" from the game options texts.
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(0);
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
