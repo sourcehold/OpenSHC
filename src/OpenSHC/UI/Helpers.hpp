@@ -11,6 +11,7 @@
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -21,6 +22,7 @@ namespace UI {
         using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::Units::EuroRecruitableState;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         void __cdecl LoadTGX_shc_back();
@@ -63,7 +65,7 @@ namespace UI {
 
         EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
-        int __cdecl GetUnitRecruitPermission(int param_1);
+        EuroRecruitableState __cdecl GetUnitRecruitPermission(UnitType unitType);
 
         BOOLEnum __cdecl HasEnoughGold(int param_1);
 
