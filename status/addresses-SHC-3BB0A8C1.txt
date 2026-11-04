@@ -11105,7 +11105,7 @@ SHC_3BB0A8C1_0x004335A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00433630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00433780 | 95.4% | Two locals in swapped stack slots
+SHC_3BB0A8C1_0x00433780 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00433BC0 | 0.0% | Pending
 
@@ -16947,7 +16947,7 @@ SHC_3BB0A8C1_0x0044D330 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044D340 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044D3D0 | 99.5% | Asm reads surface via this; own handler tables
+SHC_3BB0A8C1_0x0044D3D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044E510 | 100.0% | Reimplemented
 
@@ -16965,11 +16965,11 @@ SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00452900 | 98.1% | Globals via statics in asm
+SHC_3BB0A8C1_0x00452900 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00453600 | 89.4% | Globals via statics in asm
+SHC_3BB0A8C1_0x00453600 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00453B00 | 92.6% | Globals via statics in asm
+SHC_3BB0A8C1_0x00453B00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00454080 | 86.3% | the C++ part before the asm keeps its values in other registers; the asm matches
 
@@ -22423,7 +22423,7 @@ SHC_3BB0A8C1_0x004800E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00480210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00480440 | 95.7% | ebp is saved at entry; the original saves it only for the sort
+SHC_3BB0A8C1_0x00480440 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00480570 | 100.0% | Reimplemented
 
@@ -23047,7 +23047,7 @@ SHC_3BB0A8C1_0x00486C40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00486C60 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00486F20 | 98.9% | One lea scheduled earlier
+SHC_3BB0A8C1_0x00486F20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487080 | 100.0% | Reimplemented
 
@@ -26879,7 +26879,7 @@ SHC_3BB0A8C1_0x004B5110 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B51A0 | 87.1% | Two registers swapped
 
-SHC_3BB0A8C1_0x004B5280 | 87.5% | Globals via statics in asm
+SHC_3BB0A8C1_0x004B5280 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B5300 | 100.0% | Reimplemented
 
@@ -29089,7 +29089,7 @@ SHC_3BB0A8C1_0x004BA7D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BA8B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BA910 | 97.2% | One push scheduled later
+SHC_3BB0A8C1_0x004BA910 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BA980 | 0.0% | Pending
 
