@@ -89,16 +89,16 @@ namespace UI {
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::ClearSiegeInformationArray2)();
                 MACRO_CALL_MEMBER(OpenSHC::IO::FilePackager_Func::readMapHeaderSectionByID, FilePackagerObj::ptr)(
                     DAT_MapDefinedData::instance.MapSectionAddressArray, 1059);
-                piVar4 = DAT_SiegeInformationArray::instance;
+                piVar4 = &DAT_SiegeInformationArray::instance[0][0];
                 if (DAT_GameCore::instance.mapU4Int1_2 != 0) {
                     for (; (int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84; ++piVar4) {
                         if (*piVar4 > 0) {
                             break;
                         }
                     }
-                    if (piVar4 == DAT_SiegeInformationArray::instance + 21) {
+                    if (piVar4 == &DAT_SiegeInformationArray::instance[0][0] + 21) {
                         for (int i = 0; i < 21; ++i) {
-                            DAT_SiegeInformationArray::instance[i] = 0;
+                            (&DAT_SiegeInformationArray::instance[0][0])[i] = 0;
                         }
                         DAT_SiegeRemainingPoints::instance = 2000;
                     }
@@ -117,9 +117,9 @@ namespace UI {
                     int const* const siegeInformation
                         = (int const*)&DAT_MapPropertiesState::instance.SEC_SiegeInformation;
                     for (int i = 0; i < 20; ++i) {
-                        DAT_SiegeInformationArray::instance[i] = siegeInformation[i] * 7 / 10;
+                        (&DAT_SiegeInformationArray::instance[0][0])[i] = siegeInformation[i] * 7 / 10;
                     }
-                    DAT_SiegeInformationArray::instance[10]
+                    DAT_SiegeInformationArray::instance[3][1]
                         = (DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount * 7) / 10;
                     DAT_SiegeRemainingPoints::instance = 0;
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
