@@ -78,6 +78,7 @@ namespace UI {
         MACRO_CALL(UI::Credits_Func::AppendCreditsCommand)(43);
         MACRO_CALL(UI::Credits_Func::AppendCreditsImageTransitionCommand)(6, 9, 260, 10, 4);
         MACRO_CALL(UI::Credits_Func::AppendCreditsSoundStreamCommand)(2, 9);
+        // Written out too: a for loop over these five blocks stays a loop, and the original has none.
         MACRO_CALL(UI::Credits_Func::AppendCreditsSoundStreamCommand)(1, 40);
         MACRO_CALL(UI::Credits_Func::AppendCreditsImageTransitionCommand)(6, 0, 95, 128, 4);
         MACRO_CALL(UI::Credits_Func::AppendCreditsTextCommand)(15, 0, 18, 0, 135, 140, 600, 0);
