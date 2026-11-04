@@ -58,6 +58,7 @@ namespace UI {
             // While the game is suspended, take the last such event that is not in the future.
             if (DAT_GameCore::instance.gameSuspended == 1) {
                 int latest = event;
+                // The scan advances event itself: a separate index for it compiles differently.
                 for (++event; event < DAT_MapPropertiesState::instance.eventsCount; ++event) {
                     InGameEventUnionVersion const& laterEvent = DAT_MapPropertiesState::instance.scenarioEvents[event];
                     if (laterEvent.header.tl_type == 3
