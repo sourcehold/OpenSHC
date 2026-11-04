@@ -233,7 +233,7 @@ namespace UI {
         BuildIntroLogoSequence;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
         PrepareHistoryBook;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,

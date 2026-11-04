@@ -127,7 +127,7 @@ namespace UI {
 
         void __cdecl BuildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
 
-        int __cdecl PrepareHistoryBook();
+        void __cdecl PrepareHistoryBook();
 
         void __cdecl TrimStoredMenuString(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
             int allowedWidth, undefined4 param_5, int fontSize);
