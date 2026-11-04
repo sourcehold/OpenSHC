@@ -16,20 +16,20 @@ namespace Synchrony {
     {
         this->DPLAYX_4A = NULL;
         this->DPLAYX_LOBBY = NULL;
-        IDirectPlay4A* directPlay = NULL;
+        IDirectPlay4* directPlay = NULL;
         IDirectPlayLobby3* lobby = NULL;
-        // TCP/IP, IPX and modem have the first three slots reserved.
+        // TCP/IP, IPX and modem have the first three slots reserved. Setting the count through the global instance
+        // is needed for the match.
         DAT_GameSynchronyState::instance.scrollBarItemCount = 3;
-        if (SUCCEEDED(CoCreateInstance(*GUID_CLSID_DirectPlay::ptr, NULL, CLSCTX_INPROC_SERVER,
-                *GUID_IID_IDirectPlay4::ptr, (LPVOID*)&directPlay))) {
-            if (FAILED(CoCreateInstance(*GUID_CLSID_DirectPlayLobby::ptr, NULL, CLSCTX_INPROC_SERVER,
-                    *GUID_IID_IDirectPlayLobby3::ptr, (LPVOID*)&lobby))) {
+        if (SUCCEEDED(CoCreateInstance(GUID_CLSID_DirectPlay::instance, NULL, CLSCTX_INPROC_SERVER,
+                GUID_IID_IDirectPlay4::instance, (LPVOID*)&directPlay))) {
+            if (FAILED(CoCreateInstance(GUID_CLSID_DirectPlayLobby::instance, NULL, CLSCTX_INPROC_SERVER,
+                    GUID_IID_IDirectPlayLobby3::instance, (LPVOID*)&lobby))) {
                 directPlay->Release();
                 return;
             }
             directPlay->EnumConnections(NULL, MACRO_CALL(Synchrony_Func::EnumConnectionsCallback), NULL, 0);
-            // A reserved provider that is not installed leaves its slot; one block per slot, as the original has no
-            // loop.
+            // A reserved provider that is not installed leaves its slot; written per slot: a loop does not match.
             if (this->guids[2] == NULL) {
                 for (int provider = 2; provider < this->scrollBarItemCount; ++provider) {
                     this->guids[provider] = this->guids[provider + 1];
