@@ -34,8 +34,8 @@ namespace Game {
             s___005a2280, textX, y + 28, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         for (int resourceType = 0; resourceType < 25; ++resourceType) {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                this->playerDataArray[number].currentResources[resourceType], textX, y + 28, Text::TTA_LEFT, 0x80ff,
-                18, TRUE, 0);
+                this->playerDataArray[number].currentResources[resourceType], textX, y + 28, Text::TTA_LEFT, 0x80ff, 18,
+                TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 s___005a2280, textX, y + 28, Text::TTA_LEFT, 0xffffff, 18, TRUE, 0);
         }
@@ -50,8 +50,8 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s___005a2304, x + 164, y + 42, Text::TTA_LEFT, 0xffffff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameState::instance.mapAndTime.newOrganismsValue2, x + 164, y + 42, Text::TTA_LEFT, 0x80ff, 18,
-            TRUE, 0);
+            DAT_GameState::instance.mapAndTime.newOrganismsValue2, x + 164, y + 42, Text::TTA_LEFT, 0x80ff, 18, TRUE,
+            0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_CRC_005a523c, x + 302, y + 42, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -72,18 +72,16 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_lightning_count_005a5208, textX, y + 70, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameState::instance.mapAndTime.treeSpreadCounter, x + 14, y + 70, Text::TTA_LEFT, 0x80ff, 18, TRUE,
-            0);
+            DAT_GameState::instance.mapAndTime.treeSpreadCounter, x + 14, y + 70, Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_power_005a5200, x + 152, y + 70, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameState::instance.mapAndTime.treeSpreadInterval, x + 164, y + 70, Text::TTA_LEFT, 0x80ff, 18,
-            TRUE, 0);
+            DAT_GameState::instance.mapAndTime.treeSpreadInterval, x + 164, y + 70, Text::TTA_LEFT, 0x80ff, 18, TRUE,
+            0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_enemies_005a51f4, x + 302, y + 70, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            this->playerDataArray[number].totalEnemyUnitsCount, x + 314, y + 70, Text::TTA_LEFT, 0x80ff, 18, TRUE,
-            0);
+            this->playerDataArray[number].totalEnemyUnitsCount, x + 314, y + 70, Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_popular__005a51e8, textX, y + 84, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -103,8 +101,7 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_lord_killed_005a51b8, x + 152, y + 98, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            this->playerDataArray[number].lordKilledByPlayerID, x + 164, y + 98, Text::TTA_LEFT, 0x80ff, 18, TRUE,
-            0);
+            this->playerDataArray[number].lordKilledByPlayerID, x + 164, y + 98, Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Ale_rate_005a51ac, x + 302, y + 98, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -116,8 +113,7 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_skipped_isos_005a5190, x + 22, y + 112, Text::TTA_LEFT, 0xffffff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_ViewportRenderState::instance.DAT_skipped_isos, x + 34, y + 112, Text::TTA_LEFT, 0x80ff, 18, TRUE,
-            0);
+            DAT_ViewportRenderState::instance.DAT_skipped_isos, x + 34, y + 112, Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Moat_tiles_005a5184, textX, y + 126, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
