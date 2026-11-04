@@ -27,7 +27,7 @@ namespace Map {
             short x1; // 0x0000000C length: 2
             short y1; // 0x0000000E length: 2
             short unkOne_1; // 0x00000010 length: 2
-            short field7_0x12; // 0x00000012 length: 2
+            short field_0x12; // 0x00000012 length: 2
             short unknownAnimationFrameRelated; // 0x00000014 length: 2
             short unkThree_1; // 0x00000016 length: 2
             short originX; // 0x00000018 length: 2
@@ -41,7 +41,7 @@ namespace Map {
             short owner; // 0x0000002C length: 2
             byte unused_0x2e[2]; // 0x0000002E length: 2
             int uid; // 0x00000030 length: 4
-            int field21_0x34; // 0x00000034 length: 4
+            int field_0x34; // 0x00000034 length: 4
             short microX; // 0x00000038 length: 2
             short microY; // 0x0000003A length: 2
             short height; // 0x0000003C length: 2
@@ -57,7 +57,7 @@ namespace Map {
             short startingHeight_2; // 0x00000054 length: 2
             short height_2; // 0x00000056 length: 2
             short startingHeight; // 0x00000058 length: 2
-            short field37_0x5a; // 0x0000005A length: 2
+            short field_0x5a; // 0x0000005A length: 2
             short pathTargetX; // 0x0000005C length: 2
             short pathDeltaX; // 0x0000005E length: 2
             short someMicroX; // 0x00000060 length: 2
@@ -76,12 +76,12 @@ namespace Map {
             float vCos; // 0x0000007C length: 4
             float vSin; // 0x00000080 length: 4
             short travelledDistance; // 0x00000084 length: 2
-            byte field56_0x86[2]; // 0x00000086 length: 2
+            byte field_0x86[2]; // 0x00000086 length: 2
             int orientation; // 0x00000088 length: 4
             short totalFlightDistance; // 0x0000008C length: 2
             undefined1 padding_0x8e[2]; // 0x0000008E length: 2
             int heightDifference; // 0x00000090 length: 4
-            short field62_0x94; // 0x00000094 length: 2
+            short field_0x94; // 0x00000094 length: 2
             short velocityUnk; // 0x00000096 length: 2
             float _elapsedTimeOrGravityAccumulator; // 0x00000098 length: 4
             short startingAngle; // 0x0000009C length: 2
@@ -90,25 +90,25 @@ namespace Map {
             short unitID_OR_seaGullID; // 0x000000A2 length: 2
             undefined1 padding_0xa4[2]; // 0x000000A4 length: 2
             short gmLookupValue; // 0x000000A6 length: 2
-            short field72_0xa8; // 0x000000A8 length: 2
+            short field_0xa8; // 0x000000A8 length: 2
             EntityTypeShort entityType2; // 0x000000AA length: 2
             int rng_1; // 0x000000AC length: 4
             short unkMinusOne; // 0x000000B0 length: 2
             short hasDoneEffectUnk; // 0x000000B2 length: 2
             short someTracker; // 0x000000B4 length: 2
             short fireParameter_0xb6; // 0x000000B6 length: 2
-            short field79_0xb8; // 0x000000B8 length: 2
+            short field_0xb8; // 0x000000B8 length: 2
             short clearanceStepsRemaining; // 0x000000BA length: 2
             short rng_2; // 0x000000BC length: 2
-            short field82_0xbe; // 0x000000BE length: 2
-            short field83_0xc0; // 0x000000C0 length: 2
+            short field_0xbe; // 0x000000BE length: 2
+            short field_0xc0; // 0x000000C0 length: 2
             byte unused_0xc2[2]; // 0x000000C2 length: 2
             int displayValue; // 0x000000C4 length: 4
-            short field86_0xc8; // 0x000000C8 length: 2
-            short field87_0xca; // 0x000000CA length: 2
-            short field88_0xcc; // 0x000000CC length: 2
-            short field89_0xce; // 0x000000CE length: 2
-            short field90_0xd0; // 0x000000D0 length: 2
+            short field_0xc8; // 0x000000C8 length: 2
+            short field_0xca; // 0x000000CA length: 2
+            short field_0xcc; // 0x000000CC length: 2
+            short field_0xce; // 0x000000CE length: 2
+            short field_0xd0; // 0x000000D0 length: 2
             short unitID_healer; // 0x000000D2 length: 2
             int unitUID; // 0x000000D4 length: 4
             short fireIntensity; // 0x000000D8 length: 2
