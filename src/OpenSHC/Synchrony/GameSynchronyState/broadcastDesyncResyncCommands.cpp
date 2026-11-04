@@ -41,9 +41,9 @@ namespace Synchrony {
                 Commands::GCT_KILL_GAME);
             return;
         }
-        this->field63_0xb9c = 0;
-        this->field64_0xba0 = 0;
-        this->field65_0xba4 = 1;
+        this->field_0xb9c = 0;
+        this->field_0xba0 = 0;
+        this->field_0xba4 = 1;
         // Add up the size of the resync command for every entry whose hash differs from an active player's.
         int resyncSize = 0;
         if (this->sharedDesyncFlags[0]) {
