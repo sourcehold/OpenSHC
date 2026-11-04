@@ -90,8 +90,8 @@ namespace Synchrony {
         byte unused02[104]; // 0x00000620 length: 104
         DPNAME DPLAY_PlayerNameStructure; // 0x00000688 length: 16
         void* DPLAYX_Connection; // 0x00000698 length: 4
-        undefined4 DPLAYX_ReceivedPlayerID; // 0x0000069C length: 4
-        dword DPLAY_ToID; // 0x000006A0 length: 4
+        DPID DPLAYX_ReceivedPlayerID; // 0x0000069C length: 4
+        DPID DPLAY_ToID; // 0x000006A0 length: 4
         undefined4 DPLAYX_PlayerHandle; // 0x000006A4 length: 4
         int currentPlayerFullIDArray[9]; // 0x000006A8 length: 36
         int DAT_CurrentPlayerFullIDArray2[9]; // 0x000006CC length: 36
@@ -173,7 +173,7 @@ namespace Synchrony {
         undefined3 mapTimeInTicksLower3Bytes; // 0x0002D815 length: 3
         undefined1 syncParamTimeDiff; // 0x0002D818 length: 1
         undefined1 padding_0x2d819[3]; // 0x0002D819 length: 3
-        undefined4 DPLAY_ReceiveDataSize; // 0x0002D81C length: 4
+        DWORD DPLAY_ReceiveDataSize; // 0x0002D81C length: 4
         undefined4 DAT_CurrentTransmitCommandPacketSize; // 0x0002D820 length: 4
         undefined4 DAT_CurrentGameCommandID; // 0x0002D824 length: 4
         GameCommandSchedulingInt DAT_CommandActionPlan; // 0x0002D828 length: 4
