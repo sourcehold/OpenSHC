@@ -300,7 +300,7 @@ namespace Map {
                 &TribesState::getMajorityArcherTypeEuropeanOrArabian)
             getMajorityArcherTypeEuropeanOrArabian;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, undefined4, undefined4, undefined4, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00524340, &TribesState::applyMoveCommandOrRallyCommandToTribe)
             applyMoveCommandOrRallyCommandToTribe;
 
