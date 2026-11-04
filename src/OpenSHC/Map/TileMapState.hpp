@@ -136,10 +136,10 @@ namespace Map {
         undefined4 unknownZero_0x554900; // 0x00554900 length: 4
         undefined4 editorAffectType; // 0x00554904 length: 4
         undefined4 wallCornerRotation; // 0x00554908 length: 4
-        undefined4 dragStartX; // 0x0055490C length: 4
-        undefined4 dragStartY; // 0x00554910 length: 4
-        undefined4 dragEndX; // 0x00554914 length: 4
-        undefined4 dragEndY; // 0x00554918 length: 4
+        int dragStartX; // 0x0055490C length: 4
+        int dragStartY; // 0x00554910 length: 4
+        int dragEndX; // 0x00554914 length: 4
+        int dragEndY; // 0x00554918 length: 4
         BOOLEnum illegalBuild; // 0x0055491C length: 4
         undefined4 field118_0x554920; // 0x00554920 length: 4
         undefined4 maxWallHeightInPath; // 0x00554924 length: 4
