@@ -225,10 +225,11 @@ def preset_environment():
 # ---------------------------------------------------------------- the jobs
 
 class Job(object):
-    def __init__(self, obj, source, argv):
-        self.obj = obj              # repo-relative native path of the .obj
-        self.source = source        # repo-relative native path of the source, or None
+    def __init__(self, obj, source, argv, prereqs):
+        self.obj = obj              # build-dir-relative posix path of the .obj
+        self.source = source        # repo-relative posix path of the source, or None
         self.argv = argv
+        self.prereqs = prereqs      # what this object's own rule declares it depends on
         self.output = ""
         self.ok = True
 
@@ -251,6 +252,16 @@ def read_jobs():
     if not m:
         sys.exit("no CMAKE_COMMAND in %s" % build_make)
     cmake = m.group(1).strip()
+
+    # "<obj>: <prerequisite>", one per line above each recipe. Taking them from the rule
+    # instead of hard-coding a list is what keeps the PCH right: every ordinary object
+    # depends on cmake_pch.cxx.pch, but the PCH's own object depends on cmake_pch.cxx and
+    # must not depend on the .pch it produces, or it would always look out of date.
+    prereqs = {}
+    for line in text.splitlines():
+        m = re.match(r"^(\S+\.obj): (\S.*)$", line)
+        if m:
+            prereqs.setdefault(m.group(1), []).append(m.group(2).strip())
 
     RSP_DIR.mkdir(parents=True, exist_ok=True)
     pch, jobs = None, []
@@ -279,7 +290,7 @@ def read_jobs():
         source = rel[len(prefix):-4] if rel.startswith(prefix) and rel.endswith(".obj") else None
         if source is not None and not (common.ROOT / source).exists():
             source = None  # generated, e.g. the PCH's own cmake_pch.cxx
-        job = Job(rel, source, argv)
+        job = Job(rel, source, argv, prereqs.get(obj, []))
         if rel.endswith("cmake_pch.cxx.obj"):
             pch = job
         else:
@@ -305,10 +316,13 @@ def out_of_date(job):
     if newest_allowed.st_size == 0:  # a killed compile leaves an empty object behind
         return True
     stamp = newest_allowed.st_mtime
-    fixed = [TARGET_DIR / "flags.make", TARGET_DIR / "cmake_pch.cxx.pch"]
-    if job.source:
-        fixed.append(common.ROOT / job.source)
-    for dep in fixed:
+    for spelling in job.prereqs:
+        if re.match(r"^[A-Za-z]:", spelling):
+            dep = win_to_native(spelling)
+        else:  # relative to the build directory, where nmake evaluates the rule
+            dep = BUILD_DIR / spelling.replace("\\", "/")
+        if dep is None:
+            return True
         try:
             if dep.stat().st_mtime > stamp:
                 return True
@@ -390,13 +404,14 @@ if args.filter:
 env = preset_environment()
 jobcount = args.jobs or (os.cpu_count() or 1)
 
-stale = [j for j in jobs if out_of_date(j)]
 pch_stale = out_of_date(pch)
 if args.dry_run:
+    stale = [j for j in jobs if out_of_date(j)]
     for job in stale:
         print(job.name)
     print("%d of %d object(s) out of date%s"
-          % (len(stale), len(jobs), "; the PCH too" if pch_stale else ""))
+          % (len(stale), len(jobs), "; the PCH too, which makes every object stale"
+             if pch_stale else ""))
     raise SystemExit(0)
 
 failed = []
@@ -405,6 +420,21 @@ if pch_stale:
     print("building the precompiled header", file=sys.stderr)
     if not run_job(pch, env).ok:
         failed = [pch]
+    else:
+        # build.make has a rule of its own for the .pch:
+        #   cmake_pch.cxx.pch: cmake_pch.cxx.obj -> cmake -E touch_nocreate <.pch>
+        # /Yc writes the .pch before the .obj, so nmake would run that touch the next time
+        # it is asked to build anything - which is *after* this script has compiled every
+        # object. The .pch is a prerequisite of all of them, so that one touch would leave
+        # the whole target out of date again and nmake would rebuild all 1138 serially,
+        # throwing away the work this script just did. Do the touch here instead, at the
+        # point a serial build would have done it: before any object is compiled.
+        os.utime(TARGET_DIR / "cmake_pch.cxx.pch", None)
+
+# After the PCH, never before: it is a prerequisite of every object, so a rebuilt (and
+# freshly touched) .pch legitimately makes all of them stale. Scanning first would report
+# only the handful that were already missing and leave the rest to nmake, one at a time.
+stale = [j for j in jobs if out_of_date(j)] if not failed else []
 
 if not failed and stale:
     print("compiling %d of %d object(s), %d at a time" % (len(stale), len(jobs), jobcount),
