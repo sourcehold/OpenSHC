@@ -213,7 +213,7 @@ namespace Map {
             UnitType getMajorityArcherTypeEuropeanOrArabian(int selectionID);
 
             BOOLEnum applyMoveCommandOrRallyCommandToTribe(
-                int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint);
+                int tribeID, int x1, int y1, int isRallying, int storeAsRallyPoint);
 
             BOOLEnum assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType);
 
