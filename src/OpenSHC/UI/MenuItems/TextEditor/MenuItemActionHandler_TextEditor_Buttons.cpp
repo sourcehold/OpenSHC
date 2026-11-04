@@ -34,11 +34,12 @@ namespace UI {
             switch (param_1) {
             case -1:
                 iVar4 = DAT_TextEditorState::instance.helpContentScrollOffsetY;
-                if (18 <= iVar4) {
-                    DAT_TextEditorState::instance.helpContentScrollOffsetY = iVar4 - 18;
-                    return;
+                if (iVar4 >= 18) {
+                    iVar4 -= 18;
+                } else {
+                    iVar4 = 0;
                 }
-                DAT_TextEditorState::instance.helpContentScrollOffsetY = 0;
+                DAT_TextEditorState::instance.helpContentScrollOffsetY = iVar4;
                 return;
             case -2:
                 iVar5 = DAT_TextEditorState::instance.topVisibleLineIndex
