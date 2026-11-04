@@ -27,7 +27,7 @@ namespace UI {
             && DAT_TextEditorState::instance.helpDialogVariant == 0
             && !DAT_TextEditorState::instance.isDialogStateInitialized) {
             // Two ifs with the same body, as in the original: one condition with || orders the blocks differently.
-            if (DAT_MouseState::instance.field65_0x1dc >= 0 && DAT_MouseState::instance.field65_0x1dc <= 999) {
+            if (DAT_MouseState::instance.field_0x1dc >= 0 && DAT_MouseState::instance.field_0x1dc <= 999) {
                 return MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(1);
             }
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_INTRO_LOGOS) {

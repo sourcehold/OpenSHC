@@ -78,7 +78,7 @@ namespace UI {
             // "%s%s", "fx\\speech\\"
             MACRO_CALL(OS_Func::_sprintf)(speechPath, s__s_s_005aa800, s_fx_speech__005a64cc,
                 DAT_MissionAestheticsDefinedData::instance
-                    .field112_0x41e4[DAT_TutorialCurrentStep::instance][DAT_00df5558::instance]);
+                    .field_0x41e4[DAT_TutorialCurrentStep::instance][DAT_00df5558::instance]);
             if (MACRO_CALL(IO_Func::FileExists)(speechPath)) {
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop, DAT_SoundSystemState::ptr)(
                     speechPath);
@@ -106,7 +106,7 @@ namespace UI {
             if (fade >= 32) {
                 // "%s%s", "fx\\speech\\"
                 MACRO_CALL(OS_Func::_sprintf)(speechPath, s__s_s_005aa800, s_fx_speech__005a64cc,
-                    DAT_MissionAestheticsDefinedData::instance.field112_0x41e4[DAT_TutorialCurrentStep::instance][0]);
+                    DAT_MissionAestheticsDefinedData::instance.field_0x41e4[DAT_TutorialCurrentStep::instance][0]);
                 if (MACRO_CALL(IO_Func::FileExists)(speechPath)) {
                     MACRO_CALL_MEMBER(
                         Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop, DAT_SoundSystemState::ptr)(speechPath);
@@ -346,7 +346,7 @@ namespace UI {
                 char praisePath[32];
                 // "%s%s", "fx\\speech\\"
                 MACRO_CALL(OS_Func::_sprintf)(praisePath, s__s_s_005aa800, s_fx_speech__005a64cc,
-                    DAT_MissionAestheticsDefinedData::instance.field112_0x41e4[DAT_00df556c::instance++][0]);
+                    DAT_MissionAestheticsDefinedData::instance.field_0x41e4[DAT_00df556c::instance++][0]);
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop, DAT_SoundSystemState::ptr)(
                     praisePath);
                 if (DAT_00df556c::instance > 39) {

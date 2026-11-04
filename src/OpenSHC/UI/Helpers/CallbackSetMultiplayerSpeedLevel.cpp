@@ -20,8 +20,8 @@ namespace UI {
     {
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
             Commands::GCT_CHANGE_GAME_INTENSITY_OR_BALANCE);
-        DAT_GameSynchronyState::instance.field232_0x1072e8 = -1;
-        DAT_GameSynchronyState::instance.field233_0x1072ec = -1;
+        DAT_GameSynchronyState::instance.field_0x1072e8 = -1;
+        DAT_GameSynchronyState::instance.field_0x1072ec = -1;
         // "Game Speed"
         MACRO_CALL(OS_Func::_sprintf)(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__d_005a2284,
             MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(

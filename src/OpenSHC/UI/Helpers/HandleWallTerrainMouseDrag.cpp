@@ -21,7 +21,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00437CC0
     void Helpers::HandleWallTerrainMouseDrag()
     {
-        if (!DAT_ViewportRenderState::instance.viewportState.field0_0x0) {
+        if (!DAT_ViewportRenderState::instance.viewportState.field_0x0) {
             return;
         }
         if (DAT_TileMapState::instance.flatViewToggleValue1) {
