@@ -5,7 +5,6 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/UI/GreatestLord.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/BOOLEnum_02427470.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
