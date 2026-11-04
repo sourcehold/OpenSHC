@@ -18,7 +18,8 @@ namespace Synchrony {
         DWORD const now = timeGetTime();
         GUID selectedSession = GUID_NULL::instance;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::fetchSessionGUID, this)(&selectedSession);
-        // With respectTimeout, the sessions are enumerated again at most every 3 seconds.
+        // With respectTimeout, the sessions are enumerated again at most every 3 seconds. It is compared with TRUE,
+        // as in the original: a plain truth test changes the code.
         if (this->unkEnumerationRelatedBool
             || (respectTimeout == TRUE && (int)(now - TIME_EnumerateSessionsMoment::instance) < 3000)) {
             return;

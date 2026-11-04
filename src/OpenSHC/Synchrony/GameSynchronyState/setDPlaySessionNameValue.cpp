@@ -21,7 +21,7 @@ namespace Synchrony {
             MACRO_CALL(Global_Func::PrintToDestination)(this->DPLAYX_SessionName, u_Crusader_005a6f40);
             return;
         }
-        char sessionName[252];
+        char sessionName[250];
         // "Stronghold-%s"
         MACRO_CALL(OS_Func::_sprintf)(sessionName, s_Stronghold_s_005a6f30,
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0));

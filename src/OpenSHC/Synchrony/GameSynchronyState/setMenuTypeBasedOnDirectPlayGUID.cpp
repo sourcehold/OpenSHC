@@ -18,13 +18,9 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getGUIDForSelectedProvider, this)(&provider);
         if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_MODEM::ptr)) {
             DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM;
-            return;
-        }
-        if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_TCPIP::ptr)) {
+        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_TCPIP::ptr)) {
             DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP;
-            return;
-        }
-        if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_IPX::ptr)) {
+        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_IPX::ptr)) {
             DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_INN_OR_MPMMENU_UNK;
         } else {
             DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX;
