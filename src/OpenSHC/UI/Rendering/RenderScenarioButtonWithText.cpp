@@ -23,7 +23,7 @@ namespace UI {
     {
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
             AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
-        int const x = (int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
+        int const x = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
         int const y = DAT_ButtonY::instance + 6;
         if (!DAT_ButtonCurrentlyInteracting::instance) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
