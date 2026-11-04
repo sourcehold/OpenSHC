@@ -11,7 +11,7 @@
 #include "winnt.h"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF33E8
-// StructResolver::Instance<_LARGE_INTEGER,14627816>::instance
+// StructResolver::Instance<LARGE_INTEGER,14627816>::instance
 
 namespace OpenSHC {
 
