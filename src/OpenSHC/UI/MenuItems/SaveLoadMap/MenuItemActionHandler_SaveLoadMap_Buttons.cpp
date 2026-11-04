@@ -11,9 +11,9 @@
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -30,14 +30,17 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004943B0
         void SaveLoadMap::MenuItemActionHandler_SaveLoadMap_Buttons(int action, ...)
         {
-            char fileName[1008];
+            // The original copies the name and appends the extension inline, so the macros are used here.
+            char fileName[1008]; // the size of the original's buffer
             switch (action) {
             case -1:
+                // scroll up
                 if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset > 0) {
                     --DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 }
                 break;
             case -2:
+                // scroll down
                 if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                     < DAT_MenuTextInputState::instance.fileListEntryCount
                         - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
@@ -46,23 +49,26 @@ namespace UI {
                 break;
             case 2: {
                 // load
+                // An if around the body, so the early exit shares the case's resetMouseState2 call as in the original.
                 if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex != -1) {
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                         && DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER
-                        && DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
+                        && DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices2
                                 [DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
                                         [DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
                                             + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset - 1]
-                                    + 499]
+                                    - 1]
                             == 0) {
                         break;
                     }
-                    int const index = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
+                    int const listIndex = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
                         + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                     strcpy(fileName,
                         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                             DAT_ResourceManager::ptr)(
-                            DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
+                            DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex - 1]));
+                    // One resolve call per arm and != tests with the else arm last: the original lays the chain out
+                    // this way.
                     if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_UNUSED_CREATE_SIEGE) {
                         // ".tmp"
                         strcat(fileName, S__TMP_005A75A8);
@@ -98,7 +104,7 @@ namespace UI {
                             strcpy(DAT_GameSynchronyState::instance.shortMapName,
                                 MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                                     DAT_ResourceManager::ptr)(
-                                    DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
+                                    DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex - 1]));
                             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                                 DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_UNKNOWN_40);
                         } else {
@@ -114,9 +120,12 @@ namespace UI {
             }
             case 3:
                 // save
+                // An if around the body, so the early exit shares the case's resetMouseState2 call as in the original.
                 if (DAT_UserTextHandlerState::instance
                         .textContentLengthArray[DAT_UserTextHandlerState::instance.textArrayIndex]
                     != 0) {
+                    // One resolve call per arm and != tests with the else arm last: the original lays the chain out
+                    // this way.
                     if (DAT_MenuTextInputState::instance.field46_0xac != 0) {
                         strcpy(fileName,
                             MACRO_CALL_MEMBER(
@@ -181,14 +190,14 @@ namespace UI {
                             DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_PROGRESS_BAR_BOX);
                     }
                     DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex,
+                        DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_NINE__FILTER_B);
                     DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 return;
             case 17:
-                // "Back"
+                // back
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
                 DAT_MenuTextInputState::instance.dialogResult = -1;
                 break;
