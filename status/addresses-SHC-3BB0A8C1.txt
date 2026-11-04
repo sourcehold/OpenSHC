@@ -19851,7 +19851,7 @@ SHC_3BB0A8C1_0x00464D90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00464DA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00464E80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00464E80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00464EF0 | 0.0% | Pending
 
@@ -22331,23 +22331,23 @@ SHC_3BB0A8C1_0x0047D3F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D410 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047D4A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D4A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047D500 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D500 | 100.0% | Reimplemented, Security Cookie mismatches
 
 SHC_3BB0A8C1_0x0047D5B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047D6A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047DA70 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047DA70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047DB10 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047DB10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047DE00 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047DE00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047DEA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047DEA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047DF40 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047DF40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047E010 | 100.0% | Reimplemented
 
@@ -22389,7 +22389,7 @@ SHC_3BB0A8C1_0x0047EAF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047EB80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047EC10 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047EC10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047EDE0 | 100.0% | Reimplemented
 
@@ -23057,9 +23057,9 @@ SHC_3BB0A8C1_0x004870B0 | 100.0% | Reimplemented, requires SHC_3BB0A8C1_0x004870
 
 SHC_3BB0A8C1_0x00487200 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487250 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487250 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00487390 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487390 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004874B0 | 100.0% | Reimplemented, only the GUID resolver names, the DirectPlayCreate thunk and the callback address differ
 
@@ -23073,7 +23073,7 @@ SHC_3BB0A8C1_0x00487800 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487A30 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487C50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487C50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00487E30 | 100.0% | Reimplemented
 
@@ -23085,7 +23085,7 @@ SHC_3BB0A8C1_0x004882A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00488480 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00488540 | 0.0% | Pending
+SHC_3BB0A8C1_0x00488540 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00489100 | 100.0% | Reimplemented
 
@@ -23197,7 +23197,7 @@ SHC_3BB0A8C1_0x0048D7C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0048DA60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0048DC50 | 0.0% | Pending
+SHC_3BB0A8C1_0x0048DC50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0048DCD0 | 0.0% | Pending
 
@@ -23215,7 +23215,7 @@ SHC_3BB0A8C1_0x0048E4A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0048E4B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0048E680 | 0.0% | Pending
+SHC_3BB0A8C1_0x0048E680 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0048E8D0 | 0.0% | Pending
 
@@ -23379,7 +23379,7 @@ SHC_3BB0A8C1_0x00490380 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00490480 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00490690 | 0.0% | Pending
+SHC_3BB0A8C1_0x00490690 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00490920 | 100.0% | Reimplemented
 
