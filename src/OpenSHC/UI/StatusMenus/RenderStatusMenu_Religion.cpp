@@ -24,7 +24,7 @@ namespace UI {
         int const y = DAT_MenuHandlerState::instance.y + 432;
         int const x = DAT_MenuHandlerState::instance.x;
         ++DAT_00b98448::instance;
-        if (40 < (int)DAT_00b98448::instance) {
+        if (40 < DAT_00b98448::instance) {
             DAT_00b98448::instance = 0;
         }
         MACRO_CALL_MEMBER(
