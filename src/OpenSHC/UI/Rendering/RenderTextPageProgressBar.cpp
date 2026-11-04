@@ -19,7 +19,7 @@ namespace UI {
             elapsed = 0;
         }
         DAT_00ed2784::instance = elapsed / 80;
-        if ((int)DAT_00ed2784::instance > 580) {
+        if (DAT_00ed2784::instance > 580) {
             DAT_00ed2784::instance = 580;
         }
         RECT sourceRect;

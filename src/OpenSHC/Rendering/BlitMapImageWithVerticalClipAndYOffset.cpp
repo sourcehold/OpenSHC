@@ -24,7 +24,7 @@ using UI::Rendering::WindowAndDirectDraw;
 static WindowAndDirectDraw* const s_windowAndDirectDraw = &DAT_WindowAndDirectDraw::instance;
 static uint* const s_drawSomeX = &DAT_RenderMap_DrawSomeX::instance;
 static uint* const s_blitModeUnk = &DAT_00ed317c::instance;
-static uint* const s_remainingRowsUnk = &DAT_00ed3170::instance;
+static int* const s_remainingRowsUnk = &DAT_00ed3170::instance;
 
 // FUNCTION: STRONGHOLDCRUSADER 0x00454080
 void Rendering::BlitMapImageWithVerticalClipAndYOffset()
@@ -35,7 +35,7 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
     int height = DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height - 7;
     int skip = 0;
     int nextSkip = 160 - DAT_RenderMap_YOffset::instance;
-    if ((int)DAT_00ed3170::instance <= 0) {
+    if (DAT_00ed3170::instance <= 0) {
         return;
     }
     if (drawY < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start) {
@@ -45,7 +45,7 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
         nextSkip += skip;
         height -= skip;
     }
-    if ((int)(DAT_00ed3170::instance + drawY) >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
+    if (DAT_00ed3170::instance + drawY >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
         DAT_00ed3170::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
         // fixme: always adds 0, the original subtracts the already shortened row count
         height = height
@@ -57,7 +57,7 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
     int firstRows;
     if (height <= 0) {
         firstRows = 0;
-    } else if (height < (int)DAT_00ed3170::instance) {
+    } else if (height < DAT_00ed3170::instance) {
         DAT_00ed3170::instance -= height;
         firstRows = height;
         nextSkip += height * 60;

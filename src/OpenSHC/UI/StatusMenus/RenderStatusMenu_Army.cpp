@@ -35,7 +35,7 @@ namespace UI {
         int const top = y + 447;
         ++DAT_00b9845c::instance;
         int nudge = 0;
-        if (40 < (int)DAT_00b9845c::instance) {
+        if (40 < DAT_00b9845c::instance) {
             DAT_00b9845c::instance = 0;
             MACRO_CALL(OpenSHC::UI::Helpers_Func::CountPlayerUnitsByType)();
         }

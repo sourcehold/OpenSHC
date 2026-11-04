@@ -27,7 +27,7 @@ namespace UI {
         BOOLEnum AlphaAndButtonSurface::isMouseOnButtonImageUnk()
         {
             ushort* const surface = this->surfacePtr;
-            if ((int)DAT_CurrentButtonPictureInGm::instance >= 0) {
+            if (DAT_CurrentButtonPictureInGm::instance >= 0) {
                 int const imageIndex = GMFirstPictureIndex::instance[DAT_UIButtonDefinedData::instance
                                                .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                                                .gmId_0x0]
