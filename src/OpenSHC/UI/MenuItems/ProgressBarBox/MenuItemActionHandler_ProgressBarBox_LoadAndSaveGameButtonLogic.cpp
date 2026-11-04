@@ -154,7 +154,44 @@ namespace UI {
                     strcat(fileName, S__TMP_005A75A8);
                     MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
                         DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_MAPS, fileName);
-                } else if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_CUSTOM_SCENARIOS) {
+                } else if (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_CUSTOM_SCENARIOS) {
+                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                        && DAT_GameSynchronyState::instance.currentGameMode
+                            != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
+                        if (DAT_GameSynchronyState::instance.isHost) {
+                            strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
+                            MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
+                                DAT_UserTextHandlerState::ptr)(2, fileName);
+                            // ".msv"
+                            strcat(fileName, S__MSV_005A7498);
+                            MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
+                            MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
+                                DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_UNKNOWN, fileName);
+                        } else {
+                            strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
+                            MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
+                                DAT_UserTextHandlerState::ptr)(2, fileName);
+                            // ".msv"
+                            strcat(fileName, S__MSV_005A7498);
+                            MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
+                            MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
+                                DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_UNKNOWN, fileName);
+                        }
+                    } else {
+                        strcpy(fileName,
+                            MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
+                                DAT_ResourceManager::ptr)(
+                                DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
+                        MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
+                            DAT_UserTextHandlerState::ptr)(2, fileName);
+                        // ".sav"
+                        strcat(fileName, S__SAV_005A75A0);
+                        MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
+                            DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_UNKNOWN, fileName);
+                    }
+                } else {
                     strcpy(fileName,
                         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                             DAT_ResourceManager::ptr)(
@@ -165,33 +202,6 @@ namespace UI {
                     strcat(fileName, S__MAP_005A2294);
                     MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
                         DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_MAPS, fileName);
-                } else if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
-                    || DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
-                    strcpy(fileName,
-                        MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
-                            DAT_ResourceManager::ptr)(
-                            DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
-                    MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                        DAT_UserTextHandlerState::ptr)(2, fileName);
-                    // ".sav"
-                    strcat(fileName, S__SAV_005A75A0);
-                    MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
-                        DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_UNKNOWN, fileName);
-                } else {
-                    if (!DAT_GameSynchronyState::instance.isHost) {
-                        strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
-                        MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                            DAT_UserTextHandlerState::ptr)(2, fileName);
-                    } else {
-                        strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
-                        MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                            DAT_UserTextHandlerState::ptr)(2, fileName);
-                    }
-                    // ".msv"
-                    strcat(fileName, S__MSV_005A7498);
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
-                    MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
-                        DAT_ResourceManager::ptr)(OpenSHC::IO::FRT_UNKNOWN, fileName);
                 }
                 DAT_SoundSystemState::instance.streamFlagsUnkAndLoopCount_0x34[4] = 0;
                 DAT_SoundSystemState::instance.streamFlagsUnkAndLoopCount_0x34[3] = 0;
@@ -242,20 +252,46 @@ namespace UI {
                     OpenSHC::Map::Units::UnitsState_Func::deselectAllUnitsOneByOne, DAT_UnitsState::ptr)();
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::clearSelectionCountsAndPlayerIDs, DAT_UnitsState::ptr)();
-                int const soundID = DAT_SoundSystemState::instance.currentSoundID_0x3278;
                 if (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_UNUSED_CREATE_SIEGE) {
-                    if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_CUSTOM_SCENARIOS) {
+                    if (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_CUSTOM_SCENARIOS) {
+                        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                            && DAT_GameSynchronyState::instance.currentGameMode
+                                != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
+                            DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER;
+                            MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
+                                OpenSHC::UI::Enums::MVT_UNKNOWN_33, 0);
+                        } else {
+                            int const soundID = DAT_SoundSystemState::instance.currentSoundID_0x3278;
+                            DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
+                                = OpenSHC::UI::Enums::BASMTT_HUNTERSHUT;
+                            MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
+                                OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
+                            if (soundID > 0) {
+                                DAT_SoundSystemState::instance.currentSoundID_0x3278 = soundID;
+                            }
+                            for (int i = 0; i < 9; ++i) {
+                                DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] = -1;
+                            }
+                            if (!DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                                DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
+                            }
+                            DAT_GameSynchronyState::instance
+                                .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
+                            if (DAT_GameSynchronyState::instance.currentGameMode
+                                == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
+                                DAT_GameCore::instance.lordIcons[1] = DAT_GameCore::instance.lordIconUnk;
+                                if (DAT_GameCore::instance.lordIconUnk >= 2) {
+                                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                                        DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_AIV_HASH);
+                                }
+                            }
+                        }
+                    } else {
                         MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                             OpenSHC::UI::Enums::MVT_MAP_EDITOR_PROPERTIES, 0);
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[0] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[1] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[2] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[3] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[4] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[5] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[6] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[7] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[8] = -1;
+                        for (int i = 0; i < 9; ++i) {
+                            DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] = -1;
+                        }
                         if (!DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                             DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
                         }
@@ -263,49 +299,9 @@ namespace UI {
                             .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
                         INT_00b960e4::instance = 1;
                         DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_EDITOR;
-                        DAT_GameState::instance.playerDataArray[1].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[2].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[3].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[4].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[5].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[6].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[7].playerDeathRelated = 0;
-                        DAT_GameState::instance.playerDataArray[8].playerDeathRelated = 0;
-                    } else if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
-                        || (DAT_GameSynchronyState::instance.currentGameMode
-                            == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
-                        DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
-                            = OpenSHC::UI::Enums::BASMTT_HUNTERSHUT;
-                        MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                            OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
-                        if (soundID > 0) {
-                            DAT_SoundSystemState::instance.currentSoundID_0x3278 = soundID;
+                        for (int i = 1; i < 9; ++i) {
+                            DAT_GameState::instance.playerDataArray[i].playerDeathRelated = 0;
                         }
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[0] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[1] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[2] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[3] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[4] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[5] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[6] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[7] = -1;
-                        DAT_GameSynchronyState::instance.currentPlayerFullIDArray[8] = -1;
-                        if (!DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                            DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
-                        }
-                        DAT_GameSynchronyState::instance
-                            .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
-                        if ((DAT_GameSynchronyState::instance.currentGameMode
-                                == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)
-                            && (DAT_GameCore::instance.lordIcons[1] = DAT_GameCore::instance.lordIconUnk,
-                                1 < DAT_GameCore::instance.lordIconUnk)) {
-                            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                                DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_AIV_HASH);
-                        }
-                    } else {
-                        DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER;
-                        MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                            OpenSHC::UI::Enums::MVT_UNKNOWN_33, 0);
                     }
                 }
                 break;
