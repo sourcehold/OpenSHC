@@ -230,7 +230,7 @@ namespace Map {
             }
         }
 
-        // The smelter, in field119_0x11a and extraAnimationFrame1, with its glow in field172_0x292
+        // The smelter, in field119_0x11a and extraAnimationFrame1, with its glow in field171_0x292
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] == 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
@@ -328,19 +328,19 @@ namespace Map {
                             .buildings[DAT_CurrentBuildingID::instance]
                             .extraAnimationFrame1];
                 if (heat < 4) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 24;
                 } else if (heat < 8) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 20;
                 } else if (heat < 12) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 16;
                 } else if (heat < 16) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 12;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 12;
                 } else if (heat < 20) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 16;
                 } else if (heat < 24) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 20;
                 } else {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 24;
                 }
             } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
                 char const heat
@@ -348,19 +348,19 @@ namespace Map {
                             .buildings[DAT_CurrentBuildingID::instance]
                             .extraAnimationFrame1];
                 if (heat < 4) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 24;
                 } else if (heat < 8) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 20;
                 } else if (heat < 12) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 16;
                 } else if (heat < 16) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 12;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 12;
                 } else if (heat < 20) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 16;
                 } else if (heat < 24) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 20;
                 } else {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field171_0x292 = 24;
                 }
             }
         }

@@ -38,12 +38,12 @@ namespace Map {
         }
         int const buildingID = DAT_CurrentBuildingID::instance;
         if (DAT_BuildingsState::instance.buildings[buildingID].field203_0x2c8 != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].field208_0x2d4 = 0;
+            DAT_BuildingsState::instance.buildings[buildingID].field207_0x2d4 = 0;
         }
-        if (DAT_BuildingsState::instance.buildings[buildingID].field208_0x2d4
+        if (DAT_BuildingsState::instance.buildings[buildingID].field207_0x2d4
             > DAT_GameState::instance.playerDataArray[owner].someCount10) {
             DAT_GameState::instance.playerDataArray[owner].someCount10
-                = DAT_BuildingsState::instance.buildings[buildingID].field208_0x2d4;
+                = DAT_BuildingsState::instance.buildings[buildingID].field207_0x2d4;
             DAT_GameState::instance.playerDataArray[owner].someCount11 = buildingID;
         }
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(buildingID);
