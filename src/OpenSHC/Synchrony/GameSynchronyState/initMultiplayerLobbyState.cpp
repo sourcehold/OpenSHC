@@ -33,7 +33,7 @@ namespace Synchrony {
         this->transmissionCounterUnk = 0;
         this->DAT_GameHalted = 0;
         this->lateCommandPenalty = 0;
-        this->field76_0xbf0 = 0;
+        this->field_0xbf0 = 0;
         this->DAT_HashCountdown = 0;
         this->quitGameVoteRelated = 0;
         this->shouldSendAnnouncementUnk = 0;
@@ -54,8 +54,8 @@ namespace Synchrony {
         for (int player = 0; player < 9; ++player) {
             this->unknownPlayerInfo_03[player] = 0;
             this->matchTimes[player] = -1;
-            this->field297_0x109e80[player] = 0;
-            this->field48_0x75c[player] = 0;
+            this->field_0x109e80[player] = 0;
+            this->field_0x75c[player] = 0;
             this->unknownPlayerInfoArray_01[player] = 0;
             this->somePlayerRelatedArray[player] = 0;
             this->currentAIArray[player] = 0;
@@ -112,8 +112,8 @@ namespace Synchrony {
         this->skirmishStartGold = 0;
         this->skirmishDefaultPopularity = 100;
         this->skirmishGameSpeedLevel = 40;
-        this->field232_0x1072e8 = -1;
-        this->field233_0x1072ec = -1;
+        this->field_0x1072e8 = -1;
+        this->field_0x1072ec = -1;
         this->skirmishCurrentAdvantageBalance = 3;
         this->skirmishTechLevel = 4;
         this->skirmishGameIntensityType = 1;
@@ -161,7 +161,7 @@ namespace Synchrony {
                 = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[slot];
         }
         // Setting this field and queuing the slot request through the global instance is needed for the match.
-        DAT_GameSynchronyState::instance.field222_0x106ee4 = 1;
+        DAT_GameSynchronyState::instance.field_0x106ee4 = 1;
         MACRO_CALL(Synchrony_Func::InitSkirmishLobbyData)();
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setDirectPlaySessionDescription, this)();
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(

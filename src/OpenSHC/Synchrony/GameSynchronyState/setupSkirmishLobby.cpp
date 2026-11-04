@@ -23,7 +23,7 @@ namespace Synchrony {
         this->transmissionCounterUnk = 0;
         this->DAT_GameHalted = 0;
         this->lateCommandPenalty = 0;
-        this->field76_0xbf0 = 0;
+        this->field_0xbf0 = 0;
         this->DAT_HashCountdown = 0;
         this->quitGameVoteRelated = 0;
         this->shouldSendAnnouncementUnk = 0;
@@ -35,7 +35,7 @@ namespace Synchrony {
         this->currentPlayerSlotID = 0;
         this->DAT_HostAnnounced = 0;
         for (int i = 0; i < 4; ++i) {
-            this->field55_0x79c[i] = 0;
+            this->field_0x79c[i] = 0;
         }
         this->unknownIncrementBy40_01 = 1;
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearChatEvents, this)();
@@ -54,8 +54,8 @@ namespace Synchrony {
             this->matchTimes[player] = -1;
             this->aiVariationArray[player] = 0;
             this->unknownPlayerInfo_03[player] = 0;
-            this->field297_0x109e80[player] = 0;
-            this->field48_0x75c[player] = 0;
+            this->field_0x109e80[player] = 0;
+            this->field_0x75c[player] = 0;
             this->unknownPlayerInfoArray_01[player] = 0;
             this->somePlayerRelatedArray[player] = 0;
             this->DAT_ReceivedAIVFileAvailabilityPerAIArray[player][0] = -1;
@@ -112,8 +112,8 @@ namespace Synchrony {
         this->skirmishDefaultPopularity = 100;
         this->skirmishGameSpeedLevel = 40;
         this->skirmishCurrentAdvantageBalance = 3;
-        this->field232_0x1072e8 = -1;
-        this->field233_0x1072ec = -1;
+        this->field_0x1072e8 = -1;
+        this->field_0x1072ec = -1;
         // The faces of player slots 1 to 8 (slot + 19).
         for (int face = 20; face < 28; ++face) {
             DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[face] = 0;
