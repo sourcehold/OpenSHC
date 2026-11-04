@@ -13,7 +13,7 @@ namespace Synchrony {
     using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00480440
-    BOOLEnum GameSynchronyState::getCommandIDFromCommandSelectionStuff()
+    int GameSynchronyState::getCommandIDFromCommandSelectionStuff()
     {
         this->someIndex = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
