@@ -58,12 +58,12 @@ namespace UI {
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
         int fileListVisibleRowCount; // 0x00000084 length: 4
         undefined4 DAT_SomeTextArrayIndex; // 0x00000088 length: 4
-        undefined4 lastClickedListIndex; // 0x0000008C length: 4
+        int lastClickedListIndex; // 0x0000008C length: 4
         undefined4 lastListClickTime; // 0x00000090 length: 4
         undefined4 progressBarX; // 0x00000094 length: 4
         undefined4 progressBarY; // 0x00000098 length: 4
         undefined4 field42_0x9c; // 0x0000009C length: 4
-        undefined4 previewedListIndex; // 0x000000A0 length: 4
+        int previewedListIndex; // 0x000000A0 length: 4
         int field44_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
         undefined4 field46_0xac; // 0x000000AC length: 4

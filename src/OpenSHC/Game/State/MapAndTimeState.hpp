@@ -154,8 +154,7 @@ namespace Game {
             int skirmishNoRushTicksLeft; // 0x000027F4 length: 4
             int rawDeerCount; // 0x000027F8 length: 4
             undefined1 padding_0x27fc[252]; // 0x000027FC length: 252
-            int mercRecruitable[7]; // 0x000028F8 length: 28
-            undefined1 padding_0x2914[4]; // 0x00002914 length: 4
+            int mercRecruitable[8]; // 0x000028F8 length: 32
             int signpostIDs[16]; // 0x00002918 length: 64
             SignpostLocation signpostEntryData[16]; // 0x00002958 length: 256
             XYTileObject signpostsMapEdge[8][50]; // 0x00002A58 length: 6400
