@@ -14135,7 +14135,7 @@ SHC_3BB0A8C1_0x00442C2C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00442C2D | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00442C30 | 88.1% | for loops instead of gotos and do-whiles; registers
+SHC_3BB0A8C1_0x00442C30 | 92.6% | behaviour fix (siege copy call); pointer search loops; register allocation
 
 SHC_3BB0A8C1_0x00442E90 | 0.0% | Pending
 

@@ -39,11 +39,11 @@ namespace UI {
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
         {
             int* piVar4;
-            int iVar6;
             char fileName[1008];
-            if (DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber
-                <= DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1)
+            if (DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1
+                >= DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber) {
                 return;
+            }
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = param_1;
             DWORD _currentTime = timeGetTime();
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
@@ -91,13 +91,12 @@ namespace UI {
                     DAT_MapDefinedData::instance.MapSectionAddressArray, 1059);
                 piVar4 = DAT_SiegeInformationArray::instance;
                 if (DAT_GameCore::instance.mapU4Int1_2 != 0) {
-                    int found = 0;
-                    for (; found < 21; ++found) {
-                        if (DAT_SiegeInformationArray::instance[found] > 0) {
+                    for (; (int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84; ++piVar4) {
+                        if (*piVar4 > 0) {
                             break;
                         }
                     }
-                    if (found == 21) {
+                    if (piVar4 == DAT_SiegeInformationArray::instance + 21) {
                         for (int i = 0; i < 21; ++i) {
                             DAT_SiegeInformationArray::instance[i] = 0;
                         }
@@ -107,8 +106,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance.currentPlayerSlotID = 2;
                     DAT_GameState::instance.mapAndTime.difficulty = 1;
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
-                    iVar6 = 1;
-                    return;
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeRelatedCopying)(1);
                 } else {
                     for (; (int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84; ++piVar4) {
                         if (*piVar4 > 0) {
@@ -125,9 +123,9 @@ namespace UI {
                         = (DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount * 7) / 10;
                     DAT_SiegeRemainingPoints::instance = 0;
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
-                    iVar6 = DAT_GameState::instance.mapAndTime.difficulty;
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeRelatedCopying)(
+                        DAT_GameState::instance.mapAndTime.difficulty);
                 }
-                MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeRelatedCopying)(iVar6);
             }
         }
 
