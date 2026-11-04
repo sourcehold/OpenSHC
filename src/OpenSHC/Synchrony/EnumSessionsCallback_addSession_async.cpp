@@ -17,6 +17,7 @@ namespace Synchrony {
         if (dwFlags & DPESC_TIMEDOUT) {
             return FALSE;
         }
+        // 50 is the length of DPLAY_SessionNames and DPLAY_SessionGUIDs.
         if (DAT_GameSynchronyState::instance.DPLAY_SessionsCount >= 50) {
             return FALSE;
         }

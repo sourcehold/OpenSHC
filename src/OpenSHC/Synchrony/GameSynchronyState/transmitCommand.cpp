@@ -22,7 +22,7 @@ namespace Synchrony {
         }
         ++this->transmissionCounterUnk;
         // Small commands go as they are; larger ones are compressed behind the prefix 125.
-        if (size <= 200 || commandCategory == 65) {
+        if (size <= 200 || commandCategory == Commands::GCT_SEND_RESYNC_LOGICALTILEMAP) {
             this->DAT_Packet.packet.commandProtocol = commandCategory;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2, DAT_LowLevelMemory::ptr)(
                 &time, &this->DAT_Packet.packet.time);
@@ -39,6 +39,7 @@ namespace Synchrony {
                        this->DAT_Packet.prefixedPacket.packet.payload)
                 + 1;
             if (size > uncompressedSize) {
+                // A packet that grew is formatted into a debug message that nothing reads.
                 char message[1000];
                 // "packet size:%d new size:%d type:%d"
                 MACRO_CALL(OS_Func::_sprintf)(
@@ -46,22 +47,24 @@ namespace Synchrony {
             }
         }
         this->DAT_CurrentTransmitCommandPacketSize = size;
-        if (commandCategory == 117) {
+        if (commandCategory == Commands::GCT_UPDATE_LOBBY_FACE_BITMAPSPECIALTRANSMITLOGIC) {
             if (MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                 this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo,
-                    DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet, size + 4, 65533, 0,
-                    NULL, NULL);
+                    DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet,
+                    size + offsetof(Networking::Packet, payload), 65533, 0, NULL, NULL);
             } else {
-                this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo,
-                    DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet, size + 4, 65533, 0, NULL, NULL);
+                this->DPLAYX_SendAndReceiveREsult
+                    = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo, DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG,
+                        &this->DAT_Packet, size + offsetof(Networking::Packet, payload), 65533, 0, NULL, NULL);
             }
-        } else if (commandCategory == 12) {
-            this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo,
-                DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet, size + 4, 65534, 0, NULL, NULL);
+        } else if (commandCategory == Commands::GCT_ANNOUNCE_PLAYER_INFORMATION_AVAILABLE_AIVSSPECIALTRANSMITLOGIC) {
+            this->DPLAYX_SendAndReceiveREsult
+                = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo, DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG,
+                    &this->DAT_Packet, size + offsetof(Networking::Packet, payload), 65534, 0, NULL, NULL);
         } else {
             this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, idTo,
-                DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet, size + 4, 65535, 0,
-                NULL, NULL);
+                DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->DAT_Packet,
+                size + offsetof(Networking::Packet, payload), 65535, 0, NULL, NULL);
         }
         if (this->DPLAYX_SendAndReceiveREsult != DP_OK && this->DPLAYX_SendAndReceiveREsult != DPERR_PENDING) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
