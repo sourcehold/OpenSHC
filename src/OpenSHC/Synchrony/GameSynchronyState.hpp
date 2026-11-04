@@ -207,8 +207,8 @@ namespace Synchrony {
         undefined1 syncRelated2; // 0x0007AC32 length: 1
         undefined1 padding_0x7ac33[1]; // 0x0007AC33 length: 1
         int historicalLagInfoPerPlayer[9][100][2]; // 0x0007AC34 length: 7200
-        undefined4 counter; // 0x0007C854 length: 4
-        undefined4 limit; // 0x0007C858 length: 4
+        int counter; // 0x0007C854 length: 4
+        int limit; // 0x0007C858 length: 4
         int HASH_Units[9][2500]; // 0x0007C85C length: 90000
         int HASH_Buildings[9][2000]; // 0x000927EC length: 72000
         int HASH_Trees[9][2000]; // 0x000A412C length: 72000
