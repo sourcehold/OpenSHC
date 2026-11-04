@@ -41,9 +41,9 @@ namespace Synchrony {
                 return;
             }
         }
-        this->field65_0xb9c = 0;
-        this->field66_0xba0 = 0;
-        this->field67_0xba4 = 1;
+        this->field63_0xb9c = 0;
+        this->field64_0xba0 = 0;
+        this->field65_0xba4 = 1;
         // Queue a resync for every entry whose hash differs from another player's, and add up the sizes.
         int resyncSize = 0;
         if (this->sharedDesyncFlags[0]) {
