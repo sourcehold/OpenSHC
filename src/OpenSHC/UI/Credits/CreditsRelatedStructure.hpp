@@ -16,7 +16,7 @@ namespace UI {
         // SIZE: 0x00000034
         typedef struct CreditsRelatedStructure {
 
-            int isValid; // 0x00000000 length: 4
+            int type; // 0x00000000 length: 4
             int xSpace; // 0x00000004 length: 4
             int x; // 0x00000008 length: 4
             int y; // 0x0000000C length: 4

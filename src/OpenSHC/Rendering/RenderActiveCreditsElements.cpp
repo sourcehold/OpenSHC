@@ -49,13 +49,13 @@ void Rendering::RenderActiveCreditsElements()
     for (int layer = 0; layer < 8; ++layer) {
         for (int i = 0; i < 24; ++i) {
             CreditsRelatedStructure& element = DAT_ARRAY_00ec0348::instance[i];
-            if (element.isValid == 0 || element.field7_0x1c != layer) {
+            if (element.type == 0 || element.field7_0x1c != layer) {
                 continue;
             }
 
             // Element types: 1 image, 2 text, 3 hover image, 4 bordered box.
             // Images fade at twice the speed of the other types.
-            if (element.isValid == 1) {
+            if (element.type == 1) {
                 int gfxIndex = element.xSpace;
                 if (element.field11_0x2c != -1
                     && DAT_MouseState::instance.screenSpaceX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
@@ -82,11 +82,11 @@ void Rendering::RenderActiveCreditsElements()
                     if (element.fadeMode == 2) {
                         element.blendStrength += FLOAT_Between1And5::instance * 0.5 * 2.0;
                         if (element.blendStrength > 31.0) {
-                            element.isValid = 0;
+                            element.type = 0;
                         }
                     }
                 }
-            } else if (element.isValid == 4) {
+            } else if (element.type == 4) {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 if (element.fadeMode == 0) {
                     MACRO_CALL_MEMBER(
@@ -110,11 +110,11 @@ void Rendering::RenderActiveCreditsElements()
                 if (element.fadeMode == 2) {
                     element.blendStrength += FLOAT_Between1And5::instance * 0.5;
                     if (element.blendStrength > 31.0) {
-                        element.isValid = 0;
+                        element.type = 0;
                     }
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-            } else if (element.isValid == 2) {
+            } else if (element.type == 2) {
                 uint color;
                 switch (element.field10_0x28) {
                 case 1:
@@ -140,11 +140,11 @@ void Rendering::RenderActiveCreditsElements()
                     if (element.fadeMode == 2) {
                         element.blendStrength += FLOAT_Between1And5::instance * 0.5;
                         if (element.blendStrength > 31.0) {
-                            element.isValid = 0;
+                            element.type = 0;
                         }
                     }
                 }
-            } else if (element.isValid == 3) {
+            } else if (element.type == 3) {
                 if (DAT_MouseState::instance.screenSpaceX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
                         >= element.x
                     && DAT_MouseState::instance.screenSpaceX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth

@@ -95,19 +95,19 @@ namespace Game {
         char** field73_0x124; // 0x00000124 length: 4
         char** field74_0x128; // 0x00000128 length: 4
         char* field75_0x12c[17]; // 0x0000012C length: 68
-        int field92_0x170[5]; // 0x00000170 length: 20
-        char* field93_0x184[33][17]; // 0x00000184 length: 2244
-        int field654_0xa48; // 0x00000A48 length: 4
-        int field655_0xa4c; // 0x00000A4C length: 4
-        int field656_0xa50; // 0x00000A50 length: 4
-        int field657_0xa54; // 0x00000A54 length: 4
-        int field658_0xa58; // 0x00000A58 length: 4
-        int field659_0xa5c; // 0x00000A5C length: 4
-        int field660_0xa60; // 0x00000A60 length: 4
-        char* field661_0xa64[33][17]; // 0x00000A64 length: 2244
-        int field1222_0x1328[7]; // 0x00001328 length: 28
+        int field76_0x170[5]; // 0x00000170 length: 20
+        char* field77_0x184[33][17]; // 0x00000184 length: 2244
+        int field78_0xa48; // 0x00000A48 length: 4
+        int field79_0xa4c; // 0x00000A4C length: 4
+        int field80_0xa50; // 0x00000A50 length: 4
+        int field81_0xa54; // 0x00000A54 length: 4
+        int field82_0xa58; // 0x00000A58 length: 4
+        int field83_0xa5c; // 0x00000A5C length: 4
+        int field84_0xa60; // 0x00000A60 length: 4
+        char* field85_0xa64[33][17]; // 0x00000A64 length: 2244
+        int field86_0x1328[7]; // 0x00001328 length: 28
         int unknown3[914]; // 0x00001344 length: 3656
-        int field1224_0x218c[6]; // 0x0000218C length: 24
+        int field88_0x218c[6]; // 0x0000218C length: 24
         int MissionScoreByDifficulty[4]; // 0x000021A4 length: 16
         int DifficultyEventMultipliers[4]; // 0x000021B4 length: 16
         int EventConditionMinValue[40]; // 0x000021C4 length: 160
@@ -115,20 +115,20 @@ namespace Game {
         int EventConditionValueScale[40]; // 0x00002304 length: 160
         int EventConditionParamKind[40]; // 0x000023A4 length: 160
         byte EventConditionOptionValues[32][100]; // 0x00002444 length: 3200
-        int field1232_0x30c4[25]; // 0x000030C4 length: 100
-        int field1233_0x3128; // 0x00003128 length: 4
+        int field96_0x30c4[25]; // 0x000030C4 length: 100
+        int field97_0x3128; // 0x00003128 length: 4
         int BuildingAvailabilityRowOrder[174]; // 0x0000312C length: 696
         int EventConditionOptionTextOffsets[25]; // 0x000033E4 length: 100
-        int field1236_0x3448[5]; // 0x00003448 length: 20
-        int field1237_0x345c[22]; // 0x0000345C length: 88
-        int field1238_0x34b4[40]; // 0x000034B4 length: 160
-        int field1239_0x3554[30]; // 0x00003554 length: 120
+        int field100_0x3448[5]; // 0x00003448 length: 20
+        int field101_0x345c[22]; // 0x0000345C length: 88
+        int field102_0x34b4[40]; // 0x000034B4 length: 160
+        int field103_0x3554[30]; // 0x00003554 length: 120
         int InvasionUnitLimits[24]; // 0x000035CC length: 96
-        int field1241_0x362c[10]; // 0x0000362C length: 40
+        int field105_0x362c[10]; // 0x0000362C length: 40
         BuildingNameRelatedStruct BuildingNameRelatedStructArray[67]; // 0x00003654 length: 2680
         int BuildingAvailabilityStructIndexForNameArray[69]; // 0x000040CC length: 276
         undefined1 padding_0x41e0[4]; // 0x000041E0 length: 4
-        char field1248_0x41e4[46][3][32]; // 0x000041E4 length: 4416
+        char field112_0x41e4[46][3][32]; // 0x000041E4 length: 4416
         int TutorialStepActionCount[40]; // 0x00005324 length: 160
         int TutorialStepShowsContinueButton[40]; // 0x000053C4 length: 160
         int TutorialStepSpeechTrigger[40]; // 0x00005464 length: 160

@@ -26,8 +26,8 @@ namespace Rendering {
             MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::prepareSFXandVFX, this)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_HOT_KEYS, aiType * 34 + messageType - 33),
-                DAT_MissionAestheticsDefinedData::instance.field661_0xa64[messageType][aiType],
-                DAT_MissionAestheticsDefinedData::instance.field93_0x184[messageType][aiType], -playerIndex);
+                DAT_MissionAestheticsDefinedData::instance.field85_0xa64[messageType][aiType],
+                DAT_MissionAestheticsDefinedData::instance.field77_0x184[messageType][aiType], -playerIndex);
         }
 
     }
