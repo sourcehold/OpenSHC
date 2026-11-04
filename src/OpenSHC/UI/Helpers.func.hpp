@@ -235,7 +235,7 @@ namespace UI {
         BuildIntroLogoSequence;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
         PrepareHistoryBook;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
@@ -243,7 +243,7 @@ namespace UI {
             false, Address::SHC_3BB0A8C1_0x004DB300, &OpenSHC::UI::Helpers::TrimStoredMenuString)
         TrimStoredMenuString;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DC140,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DC140,
             &OpenSHC::UI::Helpers::FindCampaignMapHotspotAtMouse)
         FindCampaignMapHotspotAtMouse;
 

@@ -611,7 +611,7 @@ PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNM@@StructResolv
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A
+PUBLIC ?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
@@ -1469,7 +1469,7 @@ PUBLIC ?instance@?$Extern@M$0OLJLBM@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@H$0OLJLCA@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@M$0OLJLCE@@StructResolver@@2MA
+PUBLIC ?instance@?$Extern@H$0OLJLCE@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0OLJLCI@@StructResolver@@2IA
 
@@ -2298,7 +2298,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33E0h
 
-?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A EQU 00DF33E8h
+?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A EQU 00DF33E8h
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33F0h
 
@@ -3156,7 +3156,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0OLJLCA@@StructResolver@@2HA EQU 00EB9B20h
 
-?instance@?$Extern@M$0OLJLCE@@StructResolver@@2MA EQU 00EB9B24h
+?instance@?$Extern@H$0OLJLCE@@StructResolver@@2HA EQU 00EB9B24h
 
 ?instance@?$Extern@I$0OLJLCI@@StructResolver@@2IA EQU 00EB9B28h
 
