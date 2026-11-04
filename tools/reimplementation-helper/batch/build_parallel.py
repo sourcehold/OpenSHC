@@ -42,7 +42,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import common
-from common import BUILD_DIR, PDB_ERROR_RE, TMP, build_env, kill_pdb_server
+from common import BUILD_DIR, PDB_ERROR_RE, TMP, build_env, kill_pdb_server, win_cmd
 
 HERE = Path(__file__).resolve().parent
 PRESET = "RelWithDebInfo"
@@ -176,7 +176,11 @@ def native_to_win(path):
 
 
 def win_argv(argv):
-    """Run a Windows executable, through wine when we are not on Windows."""
+    """Run a Windows executable directly, through wine when we are not on Windows.
+
+    Unlike common.win_cmd this does not go through cmd: the compiler is invoked as a plain
+    argv, so none of the paths or the /showIncludes filter prefix pass through shell quoting.
+    """
     return list(argv) if WINDOWS else ["wine"] + list(argv)
 
 
@@ -369,7 +373,7 @@ def compile_all(jobs, env, jobcount):
 
 if not args.no_configure:
     print("configuring with preset %s" % PRESET, file=sys.stderr)
-    configure = subprocess.run(win_argv(["cmd", "/c", r".\cmakew", "--preset", PRESET]),
+    configure = subprocess.run(win_cmd(r".\cmakew", "--preset", PRESET),
                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                stdin=subprocess.DEVNULL, env=preset_environment())
     if configure.returncode:
