@@ -41,17 +41,11 @@ namespace UI {
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
         {
             int* piVar4;
-            char* pcVar5;
             int iVar6;
-            int yPos;
-            int maxWidth;
-            BGR24 color;
-            int blendStrength;
-            int modeUnk;
             char fileName[1008];
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber
                 <= DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1)
-                goto LAB_00442f24;
+                return;
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = param_1;
             DWORD _currentTime = timeGetTime();
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
@@ -82,28 +76,16 @@ namespace UI {
             DAT_00b95b74::instance = 0;
             DAT_00b960f4::instance = 0;
             if (DAT_GameCore::instance.mapDescUseStringTable == 0) {
-                modeUnk = 1;
-                blendStrength = 0;
-                color = 0;
-                maxWidth = 413;
-                yPos = 0;
-                iVar6 = 0;
-                pcVar5 = DAT_GameCore::instance.mapDescription;
-            LAB_00442d94:
                 DAT_00b95b74::instance = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
                     &DAT_TextManagerObject::instance.fontSizeClassArray[19])(
-                    pcVar5, iVar6, yPos, maxWidth, color, blendStrength, modeUnk);
+                    DAT_GameCore::instance.mapDescription, 0, 0, 413, 0, 0, 1);
             } else if (DAT_GameCore::instance.mapDescUseStringTableIndex != 0) {
-                modeUnk = 1;
-                blendStrength = 0;
-                color = 0;
-                maxWidth = 413;
-                yPos = 0;
-                iVar6 = 0;
-                pcVar5 = MACRO_CALL_MEMBER(
-                    OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                    OpenSHC::DE::SHCDE::TEXT_MAP_NAMES, DAT_GameCore::instance.mapDescUseStringTableIndex);
-                goto LAB_00442d94;
+                DAT_00b95b74::instance = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
+                    &DAT_TextManagerObject::instance.fontSizeClassArray[19])(
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                        OpenSHC::DE::SHCDE::TEXT_MAP_NAMES, DAT_GameCore::instance.mapDescUseStringTableIndex),
+                    0, 0, 413, 0, 0, 1);
             }
             if (DAT_MapMissionType::instance == 2) {
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::ClearSiegeInformationArray2)();
@@ -111,34 +93,18 @@ namespace UI {
                     DAT_MapDefinedData::instance.MapSectionAddressArray, 1059);
                 piVar4 = DAT_SiegeInformationArray::instance;
                 if (DAT_GameCore::instance.mapU4Int1_2 != 0) {
-                    do {
-                        if (0 < *piVar4)
-                            goto LAB_00442e64;
-                        ++piVar4;
-                    } while ((int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84);
-                    DAT_SiegeInformationArray::instance[0] = 0;
-                    DAT_SiegeInformationArray::instance[1] = 0;
-                    DAT_SiegeInformationArray::instance[2] = 0;
-                    DAT_SiegeInformationArray::instance[3] = 0;
-                    DAT_SiegeInformationArray::instance[4] = 0;
-                    DAT_SiegeInformationArray::instance[5] = 0;
-                    DAT_SiegeInformationArray::instance[6] = 0;
-                    DAT_SiegeInformationArray::instance[7] = 0;
-                    DAT_SiegeInformationArray::instance[8] = 0;
-                    DAT_SiegeInformationArray::instance[9] = 0;
-                    DAT_SiegeInformationArray::instance[10] = 0;
-                    DAT_SiegeInformationArray::instance[11] = 0;
-                    DAT_SiegeInformationArray::instance[12] = 0;
-                    DAT_SiegeInformationArray::instance[13] = 0;
-                    DAT_SiegeInformationArray::instance[14] = 0;
-                    DAT_SiegeInformationArray::instance[15] = 0;
-                    DAT_SiegeInformationArray::instance[16] = 0;
-                    DAT_SiegeInformationArray::instance[17] = 0;
-                    DAT_SiegeInformationArray::instance[18] = 0;
-                    DAT_SiegeInformationArray::instance[19] = 0;
-                    DAT_SiegeInformationArray::instance[20] = 0;
-                    DAT_SiegeRemainingPoints::instance = 2000;
-                LAB_00442e64:
+                    int found = 0;
+                    for (; found < 21; ++found) {
+                        if (DAT_SiegeInformationArray::instance[found] > 0) {
+                            break;
+                        }
+                    }
+                    if (found == 21) {
+                        for (int i = 0; i < 21; ++i) {
+                            DAT_SiegeInformationArray::instance[i] = 0;
+                        }
+                        DAT_SiegeRemainingPoints::instance = 2000;
+                    }
                     DAT_SH1_SiegeAdvancedMode::instance = 1;
                     DAT_GameSynchronyState::instance.currentPlayerSlotID = 2;
                     DAT_GameState::instance.mapAndTime.difficulty = 1;
@@ -146,18 +112,17 @@ namespace UI {
                     iVar6 = 1;
                     return;
                 } else {
-                    do {
-                        if (0 < *piVar4)
-                            goto LAB_00442f24;
-                        ++piVar4;
-                    } while ((int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84);
-                    iVar6 = 0;
-                    do {
-                        *(int*)((int)DAT_SiegeInformationArray::instance + iVar6)
-                            = (*(int*)((int)DAT_MapPropertiesState::instance.SEC_StartingResources + iVar6 + 100) * 7)
-                            / 10;
-                        iVar6 += 4;
-                    } while (iVar6 < 80);
+                    for (; (int)piVar4 < (int)&DAT_SiegeInformationArray::instance + 84; ++piVar4) {
+                        if (*piVar4 > 0) {
+                            return;
+                        }
+                    }
+                    // SEC_SiegeInformation (SiegeUnitCounts) is read as 20 ints
+                    int const* const siegeInformation
+                        = (int const*)&DAT_MapPropertiesState::instance.SEC_SiegeInformation;
+                    for (int i = 0; i < 20; ++i) {
+                        DAT_SiegeInformationArray::instance[i] = siegeInformation[i] * 7 / 10;
+                    }
                     DAT_SiegeInformationArray::instance[10]
                         = (DAT_MapPropertiesState::instance.SEC_Section1067.tunnelersCount * 7) / 10;
                     DAT_SiegeRemainingPoints::instance = 0;
@@ -166,7 +131,6 @@ namespace UI {
                 }
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeRelatedCopying)(iVar6);
             }
-        LAB_00442f24:;
         }
 
     }
