@@ -12,7 +12,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AFA80
     void DisplayElements::RenderSomeMissionNumberUnkDisplayElement9(int posX, int posY, DWORD MissionNumPlus1Unk)
     {
-        int const missionNumber = (int)MissionNumPlus1Unk - 1;
+        int const missionNumber = MissionNumPlus1Unk - 1;
         if (missionNumber == 0) {
             // "Mission : Defaults"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
