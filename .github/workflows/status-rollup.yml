@@ -11,6 +11,9 @@ on:
   pull_request:
     branches: [main]
     types: [opened, reopened, synchronize, ready_for_review]
+  # The merge queue builds the candidate "main + this PR" commit and waits for
+  # the required checks to report on it, so the chain has to run here too.
+  merge_group:
   push:
     branches: [main]
   workflow_dispatch:
