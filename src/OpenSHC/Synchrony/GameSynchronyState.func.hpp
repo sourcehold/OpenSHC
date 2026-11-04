@@ -163,7 +163,7 @@ namespace Synchrony {
             Address::SHC_3BB0A8C1_0x00480210, &GameSynchronyState::scheduleReceivedCommand)
         scheduleReceivedCommand;
 
-        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480440,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480440,
             &GameSynchronyState::getCommandIDFromCommandSelectionStuff)
         getCommandIDFromCommandSelectionStuff;
 

@@ -431,7 +431,7 @@ namespace Synchrony {
 
         void scheduleReceivedCommand(GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address);
 
-        int getCommandIDFromCommandSelectionStuff();
+        BOOLEnum getCommandIDFromCommandSelectionStuff();
 
         int getGameCommandArrayIndex();
 
