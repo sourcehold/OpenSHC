@@ -35997,7 +35997,7 @@ SHC_3BB0A8C1_0x004D8A14 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D8A18 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D8A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D8A20 | 100.0% | Reimplemented, Security Cookie mismatches
 
 SHC_3BB0A8C1_0x004D8AB0 | 100.0% | Reimplemented
 
