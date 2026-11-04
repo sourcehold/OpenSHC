@@ -32,7 +32,7 @@ namespace UI {
         char fileName[1008]; // the size of the original's buffer
         strcpy(fileName,
             MACRO_CALL_MEMBER(IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex, DAT_ResourceManager::ptr)(
-                DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex - 1]));
+                DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex]));
         if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_UNUSED_CREATE_SIEGE) {
             // ".tmp"
             strcat(fileName, S__TMP_005A75A8);

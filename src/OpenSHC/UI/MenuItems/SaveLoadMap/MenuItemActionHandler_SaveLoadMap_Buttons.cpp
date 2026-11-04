@@ -56,7 +56,7 @@ namespace UI {
                         && DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices2
                                 [DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
                                         [DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
-                                            + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset - 1]
+                                            + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset]
                                     - 1]
                             == 0) {
                         break;
@@ -66,7 +66,7 @@ namespace UI {
                     strcpy(fileName,
                         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                             DAT_ResourceManager::ptr)(
-                            DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex - 1]));
+                            DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex]));
                     // One resolve call per arm and != tests with the else arm last: the original lays the chain out
                     // this way.
                     if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_UNUSED_CREATE_SIEGE) {
@@ -104,7 +104,7 @@ namespace UI {
                             strcpy(DAT_GameSynchronyState::instance.shortMapName,
                                 MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                                     DAT_ResourceManager::ptr)(
-                                    DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex - 1]));
+                                    DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[listIndex]));
                             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                                 DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_UNKNOWN_40);
                         } else {
@@ -128,7 +128,7 @@ namespace UI {
                     != 0) {
                     // One resolve call per arm and != tests with the else arm last: the original lays the chain out
                     // this way.
-                    if (DAT_MenuTextInputState::instance.field46_0xac != 0) {
+                    if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2[0] != 0) {
                         strcpy(fileName,
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)());
