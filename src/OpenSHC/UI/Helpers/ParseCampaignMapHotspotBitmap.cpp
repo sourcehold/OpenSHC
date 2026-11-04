@@ -72,8 +72,8 @@ namespace UI {
             byte const* pixels = (byte const*)DAT_TextureRenderCoreObject::instance.gmAndGfxImageDataBuffer;
             for (int row = 0; row < 600; ++row) {
                 int count = 0;
-                int x = 0;
-                do {
+                // The bounds are tested after each pass: with them in the for header the count test moves first.
+                for (int x = 0;;) {
                     byte const colour = pixels[x];
                     if (colour != 0 && colour >= 21 && colour <= 40) {
                         int const start = x;
@@ -98,7 +98,10 @@ namespace UI {
                         ++count;
                     }
                     ++x;
-                } while (x < 800 && count < 12);
+                    if (x >= 800 || count >= 12) {
+                        break;
+                    }
+                }
                 DAT_00ec0840::instance[row].count = count;
                 pixels += 800;
             }
