@@ -10,10 +10,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DABF0
         void AppendCreditsSoundStreamCommand(int command, int value)
         {
-            if ((int)DAT_UnknownBinkCount::instance < 288) {
+            int const maxCommands = sizeof(DAT_ARRAY_00eb9b68::instance) / sizeof(DAT_ARRAY_00eb9b68::instance[0]);
+            if (DAT_UnknownBinkCount::instance < maxCommands) {
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = command;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = value;
-                DAT_UnknownBinkCount::instance += 1;
+                ++DAT_UnknownBinkCount::instance;
             }
         }
 
