@@ -30,8 +30,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004943B0
         void SaveLoadMap::MenuItemActionHandler_SaveLoadMap_Buttons(int action, ...)
         {
-            // The original copies the name and appends the extension inline, so the macros are used here.
-            char fileName[1008]; // the size of the original's buffer
             switch (action) {
             case -1:
                 // scroll up
@@ -48,6 +46,8 @@ namespace UI {
                 }
                 break;
             case 2: {
+                // The original copies the name and appends the extension inline, so the macros are used here.
+                char fileName[1008]; // the size of the original's buffer
                 // load
                 // An if around the body, so the early exit shares the case's resetMouseState2 call as in the original.
                 if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex != -1) {
@@ -116,9 +116,11 @@ namespace UI {
                     }
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
-                return;
+                break;
             }
-            case 3:
+            case 3: {
+                // The original copies the name and appends the extension inline, so the macros are used here.
+                char fileName[1008]; // the size of the original's buffer
                 // save
                 // An if around the body, so the early exit shares the case's resetMouseState2 call as in the original.
                 if (DAT_UserTextHandlerState::instance
@@ -195,7 +197,8 @@ namespace UI {
                     DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
-                return;
+                break;
+            }
             case 17:
                 // back
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
