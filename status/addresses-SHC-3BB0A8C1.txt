@@ -36193,7 +36193,7 @@ SHC_3BB0A8C1_0x004DB180 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DB300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB300 | 71.1% | register scheduling of the parameter stores (the 100.0 is read from a shared constant in the original)
 
 SHC_3BB0A8C1_0x004DB390 | 0.0% | Pending
 
