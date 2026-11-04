@@ -85,7 +85,7 @@ namespace UI {
                     OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buttonID);
                 BOOLEnum BVar2 = MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(1, (int)(BVar1));
-                if (BVar2 == FALSE) {
+                if (!BVar2) {
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                     return;
                 }

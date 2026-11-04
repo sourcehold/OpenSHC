@@ -35,8 +35,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00442C30
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
         {
