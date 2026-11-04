@@ -31,12 +31,10 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
         int i = 0;
-        // the indices run from DAT_MapSelectionPreloadMapIndexMapping on into DAT_ArrayOfMapIndices; the match needs
-        // the counter outside the guard
+        // the match needs the counter outside the guard
         if (0 < DAT_ResourceManager::instance.mapFileCounter) {
-            for (int* mapIndex = (int*)&this->DAT_MapSelectionPreloadMapIndexMapping;
-                i < DAT_ResourceManager::instance.mapFileCounter; ++i, ++mapIndex) {
-                *mapIndex = i;
+            for (; i < DAT_ResourceManager::instance.mapFileCounter; ++i) {
+                this->DAT_ArrayOfMapIndices[i] = i;
             }
         }
         this->fileListSortOrder = 0;
@@ -48,7 +46,7 @@ namespace UI {
         }
         this->lastListClickTime = 0;
         this->lastClickedListIndex = -1;
-        this->field46_0xac = 0;
+        this->DAT_ArrayOfMapU3EndInt2[0] = 0;
         DAT_MouseState::instance.waitCursorToggle = 0;
         this->fileListVisibleRowCount = 16;
         if (loadOrSaveMap == OpenSHC::UI::Enums::MMT_LOAD_MAP) {
