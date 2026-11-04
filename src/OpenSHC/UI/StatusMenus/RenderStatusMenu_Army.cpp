@@ -6,6 +6,7 @@
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -92,8 +93,8 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 162, top + 25, OpenSHC::Text::TTA_LEFT, 65280, 0, 18, TRUE, 0);
-            color = 65280;
+                x + 162, top + 25, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_00FF00, 0, 18, TRUE, 0);
+            color = OpenSHC::Rendering::Colors::COL_00FF00;
             percentX = x + 164;
         } else if (fearFactor < 0) {
             DAT_TextManagerObject::instance.field8_0x20 = 1;

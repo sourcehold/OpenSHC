@@ -10,6 +10,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -58,8 +59,8 @@ namespace Rendering {
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
                     (WCHAR*)this->currentMessageText_0x8, 0, 0, 580, 0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineWideTextUnk, DAT_TextManagerObject::ptr)(
-                    (WCHAR*)this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580, 0xccfaff, 0, 18,
-                    0);
+                    (WCHAR*)this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580,
+                    OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
             } else {
                 textHeight = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
@@ -68,7 +69,8 @@ namespace Rendering {
                     &DAT_TextManagerObject::instance.fontSizeClassArray[18])(
                     this->currentMessageText_0x8, 0, 0, 580, 0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
-                    this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580, 0xccfaff, 0, 18, 0);
+                    this->currentMessageText_0x8, x - textWidth, yOffset - textHeight + y, 580,
+                    OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
             }
             if ((int)this->currentMessageUnknownValue2_0xd4 > 0) {
                 int const nameHeight = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
@@ -81,7 +83,7 @@ namespace Rendering {
                     0, 0, 2);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.DAT_PlayerNames[this->currentMessageUnknownValue2_0xd4],
-                    x - nameWidth, yOffset - nameHeight + y, 580, 0xccfaff, 0, 18, 0);
+                    x - nameWidth, yOffset - nameHeight + y, 580, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
                 int aiCharacter = 0;
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->currentMessageUnknownValue2_0xd4]
                     == -1) {

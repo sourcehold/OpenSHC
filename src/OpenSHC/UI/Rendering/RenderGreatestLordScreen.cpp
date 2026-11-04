@@ -8,6 +8,7 @@
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
@@ -495,10 +496,10 @@ namespace UI {
                                                             .GreatestLordTextEntries[DAT_00eb9af8::instance][0],
                             DAT_MissionDefinedData::instance.GreatestLordTextEntries[DAT_00eb9af8::instance][1]),
                         DAT_MenuHandlerState::instance.x + 457, DAT_MenuHandlerState::instance.y + 545,
-                        OpenSHC::Text::TTA_CENTER, 0xccfaff, 17, FALSE, 0);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         dateText, DAT_MenuHandlerState::instance.x + 457, DAT_MenuHandlerState::instance.y + 575,
-                        OpenSHC::Text::TTA_CENTER, 0xccfaff, 18, FALSE, 0);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -506,10 +507,10 @@ namespace UI {
                                                             .GreatestLordTextEntries[DAT_00eb9af8::instance][0],
                             DAT_MissionDefinedData::instance.GreatestLordTextEntries[DAT_00eb9af8::instance][1]),
                         DAT_MenuHandlerState::instance.x + 412, DAT_MenuHandlerState::instance.y + 602,
-                        OpenSHC::Text::TTA_CENTER, 0xccfaff, 17, FALSE, 0);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         dateText, DAT_MenuHandlerState::instance.x + 412, DAT_MenuHandlerState::instance.y + 632,
-                        OpenSHC::Text::TTA_CENTER, 0xccfaff, 18, FALSE, 0);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                 }
             } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
@@ -518,7 +519,7 @@ namespace UI {
                                                         .GreatestLordTextEntries[DAT_00eb9af8::instance][0],
                         DAT_MissionDefinedData::instance.GreatestLordTextEntries[DAT_00eb9af8::instance][1]),
                     DAT_MenuHandlerState::instance.x + 457, DAT_MenuHandlerState::instance.y + 560,
-                    OpenSHC::Text::TTA_CENTER, 0xccfaff, 17, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -526,7 +527,7 @@ namespace UI {
                                                         .GreatestLordTextEntries[DAT_00eb9af8::instance][0],
                         DAT_MissionDefinedData::instance.GreatestLordTextEntries[DAT_00eb9af8::instance][1]),
                     DAT_MenuHandlerState::instance.x + 412, DAT_MenuHandlerState::instance.y + 617,
-                    OpenSHC::Text::TTA_CENTER, 0xccfaff, 17, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
             }
         }
         DAT_00eb9af8::instance = DAT_FinalResultsOrderByColumn::instance;
@@ -550,26 +551,26 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 27),
                 DAT_MenuHandlerState::instance.x + 50, DAT_MenuHandlerState::instance.y + 553, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, FALSE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 scoreText, DAT_MenuHandlerState::instance.x + 50, DAT_MenuHandlerState::instance.y + 553,
-                OpenSHC::Text::TTA_LEFT, 0xccfaff, 18, TRUE, 0);
+                OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             // "Save File"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 28),
                 DAT_MenuHandlerState::instance.x + 50, DAT_MenuHandlerState::instance.y + 553, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(saveText,
                 DAT_MenuHandlerState::instance.x + 50, DAT_MenuHandlerState::instance.y + 553, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             boxRight = DAT_TextManagerObject::instance.currentXOffset_0x0 + 50 + DAT_MenuHandlerState::instance.x;
             // "To submit this score, visit"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 29),
                 DAT_MenuHandlerState::instance.x + 50, DAT_MenuHandlerState::instance.y + 575, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, FALSE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
             // "www.fireflyworlds.com"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -588,26 +589,26 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 27),
                 DAT_MenuHandlerState::instance.x - 42, DAT_MenuHandlerState::instance.y + 610, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, FALSE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 scoreText, DAT_MenuHandlerState::instance.x - 42, DAT_MenuHandlerState::instance.y + 610,
-                OpenSHC::Text::TTA_LEFT, 0xccfaff, 18, TRUE, 0);
+                OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             // "Save File"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 28),
                 DAT_MenuHandlerState::instance.x - 42, DAT_MenuHandlerState::instance.y + 610, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(saveText,
                 DAT_MenuHandlerState::instance.x - 42, DAT_MenuHandlerState::instance.y + 610, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE, 0);
             boxRight = DAT_TextManagerObject::instance.currentXOffset_0x0 - 42 + DAT_MenuHandlerState::instance.x;
             // "To submit this score, visit"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 29),
                 DAT_MenuHandlerState::instance.x - 42, DAT_MenuHandlerState::instance.y + 632, OpenSHC::Text::TTA_LEFT,
-                0xccfaff, 18, FALSE, 0);
+                OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
             // "www.fireflyworlds.com"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

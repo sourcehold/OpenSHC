@@ -10,6 +10,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -47,12 +48,12 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_OBJECTIVES, 26),
-                headerX, headerY, OpenSHC::Text::TTA_LEFT, 0xccfaff, 17, FALSE, 0);
+                headerX, headerY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
         } else {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_OBJECTIVES, 0),
-                headerX, headerY, OpenSHC::Text::TTA_LEFT, 0xccfaff, 17, FALSE, 0);
+                headerX, headerY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
 
             // first pass: measure the texts for the number column and the tick boxes
             for (int objective = 0; objective < 39; ++objective) {
@@ -447,8 +448,8 @@ namespace UI {
             MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(
                 DAT_GameCore::instance.standaloneFilename, &eventIndex),
             DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
-            DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 10, OpenSHC::Text::TTA_CENTER, 0xccfaff, 17, FALSE,
-            0);
+            DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 10, OpenSHC::Text::TTA_CENTER,
+            OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
         // the visible height, rounded up to whole lines of 23 pixels
         int pageHeight = 377 - offset;
         pageHeight += 22 - (pageHeight + 22) % 23;
