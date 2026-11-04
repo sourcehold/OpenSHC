@@ -19,7 +19,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0) {
+                    && !DAT_UnitsState::instance.units[unitID].dying) {
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(unitID);
                     DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
                     DAT_UnitsState::instance.units[unitID].rabbitMovementSlowdown = 0;

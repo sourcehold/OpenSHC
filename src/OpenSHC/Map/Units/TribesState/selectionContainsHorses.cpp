@@ -23,7 +23,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0) {
+                    && !DAT_UnitsState::instance.units[unitID].dying) {
                     UnitTypeShort const _unitType = DAT_UnitsState::instance.units[unitID].unitType;
                     if (_unitType == Map::Units::UT_A_HARCHER || _unitType == Map::Units::UT_E_KNIGHT) {
                         return TRUE;

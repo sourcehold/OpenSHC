@@ -24,7 +24,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0
+                    && !DAT_UnitsState::instance.units[unitID].dying
                     && DAT_UnitsState::instance.units[unitID].unitType == Map::Units::UT_E_LADDER
                     && DAT_UnitsState::instance.units[unitID].state.generic == 3) {
                     return TRUE;

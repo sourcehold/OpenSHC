@@ -22,7 +22,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0) {
+                    && !DAT_UnitsState::instance.units[unitID].dying) {
                     BOOLEnum const _reachedDestination = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::hasUnitReachedDestination, DAT_UnitsState::ptr)(unitID);
                     if (!_reachedDestination) {

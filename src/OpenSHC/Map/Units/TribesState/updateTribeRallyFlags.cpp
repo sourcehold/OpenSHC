@@ -22,7 +22,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[_unitID].dying == 0) {
+                    && !DAT_UnitsState::instance.units[_unitID].dying) {
                     short const _isRallying = DAT_UnitsState::instance.units[_unitID].goToRallyPoint;
                     DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 0;
                     if (_isRallying != 0 || DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime == 0) {

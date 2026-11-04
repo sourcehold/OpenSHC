@@ -39,7 +39,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0) {
+                    && !DAT_UnitsState::instance.units[unitID].dying) {
                     _searchQueueIndex = _searchQueueIndex + 1 + (DAT_UnitsState::instance.units[unitID].fixedRng & 15);
                     int const _targetTile
                         = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getTileInSearchQueue,

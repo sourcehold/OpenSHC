@@ -23,7 +23,7 @@ namespace Map {
                     tribeID, _unitSelectionIndex);
                 _unitSelectionIndex = _unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[_unitID].dying == 0
+                    && !DAT_UnitsState::instance.units[_unitID].dying
                     && DAT_UnitsState::instance.units[_unitID].unitType != Map::Units::UT_A_ASSASSIN) {
                     return FALSE;
                 }

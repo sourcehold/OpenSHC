@@ -39,7 +39,7 @@ namespace Map {
                     tribeID, _unitSelectionIndex);
                 _unitSelectionIndex = _unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[_unitID].dying == 0
+                    && !DAT_UnitsState::instance.units[_unitID].dying
                     && DAT_UnitsState::instance.units[_unitID].usingTeleport == 0
                     && DAT_UnitsState::instance.units[_unitID].field300_0x413 == 0
                     && DAT_UnitsState::instance.units[_unitID].state.generic != Map::Units::States::US_MELEE_ATTACK

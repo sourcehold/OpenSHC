@@ -27,7 +27,7 @@ namespace Map {
             if (tribeID <= 0) {
                 return FALSE;
             }
-            if (this->tribes[tribeID].predatorNearby != 0) {
+            if (this->tribes[tribeID].predatorNearby) {
                 return FALSE;
             }
             if (DAT_GameCore::instance.missionNumber1to20 == 38 && unitType == Map::Units::UT_CAMELSHBEAR) {

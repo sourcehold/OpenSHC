@@ -21,7 +21,7 @@ namespace Map {
                     selectionID, _unitSelectionIndex);
                 _unitSelectionIndex = _unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[_unitID].dying == 0
+                    && !DAT_UnitsState::instance.units[_unitID].dying
                     && (DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance.units[_unitID].tile]
                         & LogicHelpers::L_MOAT)) {
                     return _unitID;

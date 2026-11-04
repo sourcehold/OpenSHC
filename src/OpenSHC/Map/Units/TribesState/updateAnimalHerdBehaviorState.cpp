@@ -12,7 +12,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523590
         void TribesState::updateAnimalHerdBehaviorState(int tribeID)
         {
-            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby != 0) {
+            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby) {
                 return;
             }
             int unitSelectionIndex = 0;
@@ -21,7 +21,7 @@ namespace Map {
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[unitID].dying == 0
+                    && !DAT_UnitsState::instance.units[unitID].dying
                     && DAT_UnitsState::instance.units[unitID].antelopeBasedRngValue == 2) {
                     int rngBucket = DAT_UnitsState::instance.units[unitID].fixedRng & 7;
                     if (rngBucket <= 1) {
