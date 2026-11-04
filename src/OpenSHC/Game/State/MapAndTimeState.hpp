@@ -34,12 +34,12 @@ namespace Game {
         // SIZE: 0x000401D0
         typedef struct MapAndTimeState {
 
-            int field0_0x0; // 0x00000000 length: 4
+            int field_0x0; // 0x00000000 length: 4
             BOOLEnum singlePlayerHasKeepAndGranary; // 0x00000004 length: 4
-            int field2_0x8[10]; // 0x00000008 length: 40
-            int field3_0x30[10]; // 0x00000030 length: 40
+            int field_0x8[10]; // 0x00000008 length: 40
+            int field_0x30[10]; // 0x00000030 length: 40
             int playerKeepTile[10]; // 0x00000058 length: 40
-            int field5_0x80[10]; // 0x00000080 length: 40
+            int field_0x80[10]; // 0x00000080 length: 40
             int hitsDealtToPlayerArray[9]; // 0x000000A8 length: 36
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4

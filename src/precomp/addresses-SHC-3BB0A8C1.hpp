@@ -95370,7 +95370,7 @@ enum {
     SHC_3BB0A8C1_0x00B95AC4 = 0x00B95AC4,
     // label: DAT_SiegeInformationArray
     // location:
-    // type: /int[21]
+    // type: /int[7][3]
     SHC_3BB0A8C1_0x00B95AC8 = 0x00B95AC8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B95B1C = 0x00B95B1C,
@@ -95422,14 +95422,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960B4 = 0x00B960B4,
-    // type: /int
+    // type: /int[4]
     SHC_3BB0A8C1_0x00B960B8 = 0x00B960B8,
-    // type: /undefined4
-    SHC_3BB0A8C1_0x00B960BC = 0x00B960BC,
-    // type: /int
-    SHC_3BB0A8C1_0x00B960C0 = 0x00B960C0,
-    // type: /int
-    SHC_3BB0A8C1_0x00B960C4 = 0x00B960C4,
     // label: DAT_SH1_SiegeAdvancedMode
     // location:
     // type: /undefined4
@@ -96656,7 +96650,7 @@ enum {
     SHC_3BB0A8C1_0x00DF3878 = 0x00DF3878,
     // label: DPLAY_InterfacePointer
     // location:
-    // type: OpenSHC/DirectPlay/dplay/IDirectPlay4A * *
+    // type: OpenSHC/DirectPlay/dplay/IDirectPlay4A *
     SHC_3BB0A8C1_0x00DF3D18 = 0x00DF3D18,
     // label: DPLAY_CurrentSessionGUID
     // location:
@@ -96732,7 +96726,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4290 = 0x00DF4290,
     // label: DAT_EnemyArrayIndex
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF4294 = 0x00DF4294,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4298 = 0x00DF4298,
@@ -97215,9 +97209,13 @@ enum {
     SHC_3BB0A8C1_0x00DF5550 = 0x00DF5550,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5554 = 0x00DF5554,
-    // type: /undefined4
+    // label: DAT_00df5558
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00DF5558 = 0x00DF5558,
-    // type: /undefined4
+    // label: DAT_00df555c
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00DF555C = 0x00DF555C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5560 = 0x00DF5560,
@@ -97225,7 +97223,9 @@ enum {
     SHC_3BB0A8C1_0x00DF5564 = 0x00DF5564,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF5568 = 0x00DF5568,
-    // type: /undefined4
+    // label: DAT_00df556c
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00DF556C = 0x00DF556C,
     // label: DAT_FileDoesntExist
     // location:
@@ -97415,7 +97415,7 @@ enum {
     SHC_3BB0A8C1_0x00EC02E8 = 0x00EC02E8,
     // label: DAT_NumberOfStoredMenuStrings
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EC02EC = 0x00EC02EC,
     // type: OpenSHC/Game/CampaignInfoSubStructure1
     SHC_3BB0A8C1_0x00EC02F4 = 0x00EC02F4,
