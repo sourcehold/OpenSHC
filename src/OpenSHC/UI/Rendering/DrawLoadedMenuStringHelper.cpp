@@ -1,7 +1,6 @@
 #include "../Rendering.func.hpp"
 
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
