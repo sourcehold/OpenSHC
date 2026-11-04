@@ -22395,7 +22395,7 @@ SHC_3BB0A8C1_0x0047EDE0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047EEB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047EED0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047EED0 | 89.0% | register allocation: y and the column position swap ebx and ebp
 
 SHC_3BB0A8C1_0x0047F6A0 | 100.0% | Reimplemented
 
