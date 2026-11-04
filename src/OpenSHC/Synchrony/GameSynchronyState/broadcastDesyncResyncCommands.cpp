@@ -1,7 +1,5 @@
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Commands/GameCommandType.hpp"
-
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
@@ -10,41 +8,43 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048DC50
     void GameSynchronyState::broadcastDesyncResyncCommands()
     {
-        // The original reads the player slot, and queues the leave and kill commands, through the global instance.
+        // Reading the player slot, and queuing the leave and kill commands, through the global instance is needed
+        // for the match.
         this->receivedSyncStatusByPlayerUnk[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
         // Wait for every player's sync status: 45 seconds after the announcement the missing players are dropped,
         // and without an announcement the game is ended after 60 seconds.
         for (int player = 1; player < 9; ++player) {
-            if (this->currentPlayerFullIDArray[player] != -1 && this->receivedSyncStatusByPlayerUnk[player] == 0) {
-                if (this->announcementReceivedBool) {
-                    if (timeGetTime() - this->announcementReceiveTime <= 45000) {
-                        return;
-                    }
-                    for (int other = 1; other < 9; ++other) {
-                        if (this->currentPlayerFullIDArray[other] != -1
-                            && this->receivedSyncStatusByPlayerUnk[other] == 0) {
-                            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = other;
-                            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 63;
-                            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                                DAT_GameSynchronyState::ptr)(Commands::GCT_LEAVE_GAME);
-                            this->receivedSyncStatusByPlayerUnk[other] = 2;
-                        }
-                    }
-                    break;
-                }
-                if (timeGetTime() - this->announcementReceiveTime <= 60000) {
+            if (this->currentPlayerFullIDArray[player] == -1 || this->receivedSyncStatusByPlayerUnk[player] != 0) {
+                continue;
+            }
+            if (this->announcementReceivedBool) {
+                if (timeGetTime() - this->announcementReceiveTime <= 45000) {
                     return;
                 }
-                DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                    Commands::GCT_KILL_GAME);
+                for (int other = 1; other < 9; ++other) {
+                    if (this->currentPlayerFullIDArray[other] != -1
+                        && this->receivedSyncStatusByPlayerUnk[other] == 0) {
+                        DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = other;
+                        DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 63;
+                        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
+                            DAT_GameSynchronyState::ptr)(Commands::GCT_LEAVE_GAME);
+                        this->receivedSyncStatusByPlayerUnk[other] = 2;
+                    }
+                }
+                break;
+            }
+            if (timeGetTime() - this->announcementReceiveTime <= 60000) {
                 return;
             }
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                Commands::GCT_KILL_GAME);
+            return;
         }
         this->field63_0xb9c = 0;
         this->field64_0xba0 = 0;
         this->field65_0xba4 = 1;
-        // Queue a resync for every entry whose hash differs from another player's, and add up the sizes.
+        // Add up the size of the resync command for every entry whose hash differs from an active player's.
         int resyncSize = 0;
         if (this->sharedDesyncFlags[0]) {
             for (int index = 0; index < 2500; ++index) {
@@ -293,12 +293,10 @@ namespace Synchrony {
         }
         if (worstLag < 2) {
             this->resyncPacketBudget = 40000;
+        } else if (worstLag == 2) {
+            this->resyncPacketBudget = 40000;
         } else {
-            if (worstLag == 2) {
-                this->resyncPacketBudget = 40000;
-            } else {
-                this->resyncPacketBudget = 10000;
-            }
+            this->resyncPacketBudget = 10000;
         }
         this->somePacketSubTypeUnk = 0;
         this->resyncResumeOuterIndex = 0;
