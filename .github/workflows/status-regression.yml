@@ -5,11 +5,14 @@ name: status-regression
 # file cannot reach main unnoticed.
 #
 # It runs twice per change, off the same status-rollup run:
-#   * on a pull request, to comment the report while the PR is being reviewed;
+#   * on a pull request, while the PR is being reviewed;
 #   * on a merge_group, where the commit under test is "main + this PR" as it
 #     will actually land. That second run is the one that closes the race where
 #     main gains a better version of a function while the PR sits open, so it
 #     is the run branch protection should require.
+#
+# Every run posts a commit status; only a regression gets a comment, and the
+# comment is removed again once the regression is gone.
 #
 # Like status-rollup-publish.yml this is the PRIVILEGED half of a pair: it runs
 # on workflow_run, so it never checks out or runs the code under test -- not the
@@ -192,18 +195,35 @@ jobs:
           fi
           echo "count=$n" >> "$GITHUB_OUTPUT"
 
-      # On a pull request the comment is the whole point, so it is always kept
-      # current. From the queue it would only be noise unless something is wrong.
+      # Only a regression is worth a comment. A clean result is reported by the
+      # commit status alone, which is always posted, so silence here means "the
+      # check ran and found nothing" rather than "the check did not run".
       - name: Comment the report on the PR
-        if: ${{ steps.check.outputs.count != '' && (steps.ctx.outputs.mode == 'pr' || steps.check.outputs.count != '0') }}
+        if: ${{ steps.check.outputs.count != '' && steps.check.outputs.count != '0' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR: ${{ steps.ctx.outputs.pr }}
         run: |
           set -euo pipefail
-          gh pr comment "$PR" --repo "$REPO" \
-            --body-file status_regression.md --edit-last --create-if-none
+          gh pr comment "$PR" --repo "$REPO"             --body-file status_regression.md --edit-last --create-if-none
+
+      # ... and once a regression is fixed, take the old report down, so a stale
+      # table cannot outlive the problem it described.
+      - name: Remove a stale report comment
+        if: ${{ steps.check.outputs.count == '0' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.ctx.outputs.pr }}
+        run: |
+          set -euo pipefail
+          ids=$(gh api "repos/$REPO/issues/$PR/comments" --paginate                   --jq '.[] | select(.user.login == "github-actions[bot]")
+                            | select(.body | startswith("<!-- status-regression -->")) | .id')
+          for id in $ids; do
+            echo "Removing resolved report comment $id"
+            gh api -X DELETE "repos/$REPO/issues/comments/$id"
+          done
 
       # A workflow_run job is not attached to the checks of the commit that
       # triggered it, so neither branch protection nor the merge queue can
