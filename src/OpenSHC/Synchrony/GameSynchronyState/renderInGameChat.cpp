@@ -24,7 +24,6 @@ namespace Synchrony {
     {
         // The last four messages, newest at the bottom, each shown for ten seconds.
         this->chatMessageRenderIndex = this->DAT_ChatMessageArrayIndex;
-        int const x = xPos;
         for (int message = 4; message != 0; --message) {
             if (this->DAT_ChatEventArray[this->chatMessageRenderIndex].flag == 1) {
                 int const index = this->chatMessageRenderIndex;
@@ -51,6 +50,7 @@ namespace Synchrony {
                                 != DAT_GameState::instance.playerDataArray[sender].lordUID
                             || DAT_UnitsState::instance.units[lordID].logicalState != Map::Units::ULS_NORMAL)
                         && (int)(DAT_GameCore::instance.mapTimeInTicks - DAT_GameCore::instance.section1127) > 200) {
+                        // "(deceased)"
                         width
                             += MACRO_CALL_MEMBER(Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
                                    MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -60,9 +60,9 @@ namespace Synchrony {
                     }
                     DAT_PencilRenderCore::instance.surfaceTarget = Rendering::Enums::RT_MAP_GAME;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                        DAT_PencilRenderCore::ptr)(x - 5, yPos - 4, width + x, yPos + 9, 16);
+                        DAT_PencilRenderCore::ptr)(xPos - 5, yPos - 4, width + xPos, yPos + 9, 16);
                     DAT_PencilRenderCore::instance.surfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
-                    int textX = x;
+                    int textX = xPos;
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                         this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex], textX, yPos,
                         Text::TTA_LEFT,
@@ -76,6 +76,7 @@ namespace Synchrony {
                             || DAT_UnitsState::instance.units[lordID].logicalState != Map::Units::ULS_NORMAL)
                         && (int)(DAT_GameCore::instance.mapTimeInTicks - DAT_GameCore::instance.section1127) > 200) {
                         textX += 6;
+                        // "(deceased)"
                         MACRO_CALL_MEMBER(
                             Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -98,6 +99,7 @@ namespace Synchrony {
                 }
             }
             --this->chatMessageRenderIndex;
+            // Back to the last of the 20 chat slots.
             if (this->chatMessageRenderIndex < 0) {
                 this->chatMessageRenderIndex = 19;
             }
