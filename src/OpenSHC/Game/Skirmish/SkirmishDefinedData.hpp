@@ -40,30 +40,30 @@ namespace Game {
 
             UnitTypeInt RangedAndArmoredUnits[7]; // 0x00000000 length: 28
             MaxLordHealthMapEntry MaxLordHealthMapping[17]; // 0x0000001C length: 136
-            char** field2_0xa4; // 0x000000A4 length: 4
-            char** field3_0xa8; // 0x000000A8 length: 4
-            char** field4_0xac; // 0x000000AC length: 4
-            char** field5_0xb0; // 0x000000B0 length: 4
-            char** field6_0xb4; // 0x000000B4 length: 4
-            char** field7_0xb8; // 0x000000B8 length: 4
-            char** field8_0xbc; // 0x000000BC length: 4
-            char** field9_0xc0; // 0x000000C0 length: 4
-            char** field10_0xc4; // 0x000000C4 length: 4
-            char** field11_0xc8; // 0x000000C8 length: 4
-            char** field12_0xcc; // 0x000000CC length: 4
-            char** field13_0xd0; // 0x000000D0 length: 4
-            char** field14_0xd4; // 0x000000D4 length: 4
-            char** field15_0xd8; // 0x000000D8 length: 4
-            char** field16_0xdc; // 0x000000DC length: 4
-            char** field17_0xe0; // 0x000000E0 length: 4
-            char** field18_0xe4; // 0x000000E4 length: 4
+            char** field_0xa4; // 0x000000A4 length: 4
+            char** field_0xa8; // 0x000000A8 length: 4
+            char** field_0xac; // 0x000000AC length: 4
+            char** field_0xb0; // 0x000000B0 length: 4
+            char** field_0xb4; // 0x000000B4 length: 4
+            char** field_0xb8; // 0x000000B8 length: 4
+            char** field_0xbc; // 0x000000BC length: 4
+            char** field_0xc0; // 0x000000C0 length: 4
+            char** field_0xc4; // 0x000000C4 length: 4
+            char** field_0xc8; // 0x000000C8 length: 4
+            char** field_0xcc; // 0x000000CC length: 4
+            char** field_0xd0; // 0x000000D0 length: 4
+            char** field_0xd4; // 0x000000D4 length: 4
+            char** field_0xd8; // 0x000000D8 length: 4
+            char** field_0xdc; // 0x000000DC length: 4
+            char** field_0xe0; // 0x000000E0 length: 4
+            char** field_0xe4; // 0x000000E4 length: 4
             int AIUnitBehaviourTypeMapping[11]; // 0x000000E8 length: 44
             CampaignTrailMission SkirmishTrailMissions[50]; // 0x00000114 length: 7200
             CampaignTrailMission WarchestTrailMissions[30]; // 0x00001D34 length: 4320
             CampaignTrailMission ExtremeTrailMissions[20]; // 0x00002E14 length: 2880
             ResourceAICResourceMappingEntry AIResourceTradeAICMapping[20]; // 0x00003954 length: 160
             ResourceTypeInt ResourceAcquisitionPreferenceOrder[20]; // 0x000039F4 length: 80
-            int field25_0x3a44[6]; // 0x00003A44 length: 24
+            int field_0x3a44[6]; // 0x00003A44 length: 24
             AIUnitBehaviourRequiredMapEntry attackUnitRequired[11]; // 0x00003A5C length: 88
             UnitTypeInt SomeAIUnitTypeArray[20]; // 0x00003AB4 length: 80
             int AITribeIDOffsetForAIVUnitType[20]; // 0x00003B04 length: 80
@@ -81,7 +81,7 @@ namespace Game {
             int SiegeEngineUnitType[6]; // 0x00003F0C length: 24
             int SiegeEngineTypeRequiredEngineers[6]; // 0x00003F24 length: 24
             AITribeTypeCountPair MaxBreachTribes[11]; // 0x00003F3C length: 88
-            int field43_0x3f94[34]; // 0x00003F94 length: 136
+            int field_0x3f94[34]; // 0x00003F94 length: 136
 
         } SkirmishDefinedData;
 #pragma pack(pop)

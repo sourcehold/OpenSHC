@@ -8,12 +8,14 @@
 
 #pragma once
 
+#include "guiddef.h"
+
 // GLOBAL: STRONGHOLDCRUSADER 0x005A6E30
-// StructResolver::Instance<GUID,5926448>::instance
+// StructResolver::Instance<_GUID,5926448>::instance
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(GUID, false, Address::SHC_3BB0A8C1_0x005A6E30) GUID_IID_IDirectPlay4A;
+MACRO_STRUCT_RESOLVER(_GUID, false, Address::SHC_3BB0A8C1_0x005A6E30) GUID_IID_IDirectPlay4A;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x005A6E30);

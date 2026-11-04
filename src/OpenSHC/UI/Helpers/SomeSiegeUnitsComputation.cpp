@@ -4,7 +4,7 @@
 #include "OpenSHC/Globals/DAT_SiegeInformationArray.hpp"
 #include "OpenSHC/Globals/DAT_SiegeInformationArray_2.hpp"
 #include "OpenSHC/Globals/DAT_SiegeRemainingPoints.hpp"
-#include "OpenSHC/Globals/INT_00b960b8.hpp"
+#include "OpenSHC/Globals/INT_ARRAY_00b960b8.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -15,7 +15,7 @@ namespace UI {
         // The value table starts at ARCHER (7 entries of 3), the slot percentages at field1003_0x548dc.
         int* const unitValues = &DAT_RenderingDefinedData::instance.ARCHER;
         int* const slotPercentages = &DAT_RenderingDefinedData::instance.field1003_0x548dc;
-        int total = INT_00b960b8::instance[1];
+        int total = INT_ARRAY_00b960b8::instance[1];
         for (int unit = 0; unit < 7; ++unit) {
             for (int value = 0; value < 3; ++value) {
                 total += DAT_SiegeInformationArray_2::instance[1][unit][value] * unitValues[unit * 3 + value];
@@ -25,10 +25,10 @@ namespace UI {
         for (int budget = 0; budget < 4; ++budget) {
             budgets[budget] = slotPercentages[budget] * total / 100;
         }
-        INT_00b960b8::instance[0] = DAT_SiegeRemainingPoints::instance;
-        INT_00b960b8::instance[1] = DAT_SiegeRemainingPoints::instance;
-        INT_00b960b8::instance[2] = DAT_SiegeRemainingPoints::instance;
-        INT_00b960b8::instance[3] = DAT_SiegeRemainingPoints::instance;
+        INT_ARRAY_00b960b8::instance[0] = DAT_SiegeRemainingPoints::instance;
+        INT_ARRAY_00b960b8::instance[1] = DAT_SiegeRemainingPoints::instance;
+        INT_ARRAY_00b960b8::instance[2] = DAT_SiegeRemainingPoints::instance;
+        INT_ARRAY_00b960b8::instance[3] = DAT_SiegeRemainingPoints::instance;
         for (int setup = 0; setup < 4; ++setup) {
             // The 7 units by 3 values are copied as one run of 21.
             for (int value = 0; value < 21; ++value) {
@@ -50,9 +50,9 @@ namespace UI {
                     + DAT_SiegeInformationArray_2::instance[1][unit][1] * unitValues[unit * 3 + 1]
                     + DAT_SiegeInformationArray_2::instance[1][unit][2] * unitValues[unit * 3 + 2];
             }
-            INT_00b960b8::instance[1] = total - cost;
-            if (INT_00b960b8::instance[1] < 0) {
-                INT_00b960b8::instance[1] = 0;
+            INT_ARRAY_00b960b8::instance[1] = total - cost;
+            if (INT_ARRAY_00b960b8::instance[1] < 0) {
+                INT_ARRAY_00b960b8::instance[1] = 0;
             }
         }
         for (int other = 0; other < 4; ++other) {
@@ -68,9 +68,9 @@ namespace UI {
                     cost += DAT_SiegeInformationArray_2::instance[other][unit][value] * unitValues[unit * 3 + value];
                 }
             }
-            INT_00b960b8::instance[other] = budgets[other] - cost;
-            if (INT_00b960b8::instance[other] < 0) {
-                INT_00b960b8::instance[other] = 0;
+            INT_ARRAY_00b960b8::instance[other] = budgets[other] - cost;
+            if (INT_ARRAY_00b960b8::instance[other] < 0) {
+                INT_ARRAY_00b960b8::instance[other] = 0;
             }
         }
     }

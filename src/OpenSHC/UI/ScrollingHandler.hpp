@@ -34,7 +34,7 @@ namespace UI {
         BOOLEnum leftKeyDown_0x1c; // 0x0000001C length: 4
         BOOLEnum downKeyDown_0x20; // 0x00000020 length: 4
         BOOLEnum upKeyDown_0x24; // 0x00000024 length: 4
-        undefined4 field10_0x28; // 0x00000028 length: 4
+        undefined4 field_0x28; // 0x00000028 length: 4
         undefined4 scrollDistanceMin; // 0x0000002C length: 4
         undefined4 scrollAccelerationInterval; // 0x00000030 length: 4
         undefined4 scrollDistanceLimit; // 0x00000034 length: 4

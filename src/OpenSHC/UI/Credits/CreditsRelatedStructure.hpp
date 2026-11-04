@@ -23,11 +23,11 @@ namespace UI {
             int width; // 0x00000010 length: 4
             int height; // 0x00000014 length: 4
             int fadeMode; // 0x00000018 length: 4
-            int field7_0x1c; // 0x0000001C length: 4
-            int field8_0x20; // 0x00000020 length: 4
-            int field9_0x24; // 0x00000024 length: 4
-            int field10_0x28; // 0x00000028 length: 4
-            int field11_0x2c; // 0x0000002C length: 4
+            int field_0x1c; // 0x0000001C length: 4
+            int field_0x20; // 0x00000020 length: 4
+            int field_0x24; // 0x00000024 length: 4
+            int field_0x28; // 0x00000028 length: 4
+            int field_0x2c; // 0x0000002C length: 4
             float blendStrength; // 0x00000030 length: 4
 
         } CreditsRelatedStructure;

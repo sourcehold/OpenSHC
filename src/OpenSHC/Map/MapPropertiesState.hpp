@@ -86,7 +86,7 @@ namespace Map {
         int selectedAbsoluteIndex; // 0x00013584 length: 4
         dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
-        undefined4 field57_0x13590; // 0x00013590 length: 4
+        undefined4 field_0x13590; // 0x00013590 length: 4
         undefined1 padding_0x13594[8]; // 0x00013594 length: 8
         undefined4 total; // 0x0001359C length: 4
         int unknownArray_01[1000]; // 0x000135A0 length: 4000
