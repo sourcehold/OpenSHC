@@ -13,6 +13,7 @@ namespace Map {
     namespace Units {
         typedef enum UnitType {
 
+            UT_NONE = -1, // 0xFFFFFFFF
             UT_PEASANT = 1, // 0x00000001
             UT_BURNINGMAN = 2, // 0x00000002
             UT_WOODCUTTER = 3, // 0x00000003
