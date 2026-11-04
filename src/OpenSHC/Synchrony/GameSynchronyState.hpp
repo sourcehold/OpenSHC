@@ -225,7 +225,7 @@ namespace Synchrony {
         int HASH_HeatMaps[9][80]; // 0x00100F4C length: 2880
         int receivedSyncStatusByPlayerUnk[9]; // 0x00101A8C length: 36
         int syncStatus10Related[9]; // 0x00101AB0 length: 36
-        undefined4 relativeTickTime; // 0x00101AD4 length: 4
+        int relativeTickTime; // 0x00101AD4 length: 4
         char receivedChatMessage[250]; // 0x00101AD8 length: 250
         char DAT_ChatMessageArray[20][250]; // 0x00101BD2 length: 5000
         char DAT_ChatMessageSubjectPlayerNameArray[20][250]; // 0x00102F5A length: 5000
