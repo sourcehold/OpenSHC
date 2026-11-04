@@ -417,8 +417,8 @@ namespace Map {
             respawnDeer;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x005262A0,
-                &TribesState::spawnWildlifeOrMercAtAvailableSlot)
-            spawnWildlifeOrMercAtAvailableSlot;
+                &TribesState::spawnRabbitAtFirstFreeSpawnPoint)
+            spawnRabbitAtFirstFreeSpawnPoint;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00526370, &TribesState::upgradeMapTribesState)

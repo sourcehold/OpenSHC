@@ -8,7 +8,7 @@
 #include "OpenSHC/Globals/DAT_TextInputDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Text {
@@ -29,7 +29,7 @@ namespace Text {
 
         if (this->fontStartImageId_0x8 == -1) {
             this->fontStartImageId_0x8
-                = GMTotalPicturesProcessed::instance[this->fontGmID_0x0] + this->numberOfFontStartInGm_0x4 - 1;
+                = GMFirstPictureIndex::instance[this->fontGmID_0x0] + this->numberOfFontStartInGm_0x4 - 1;
         }
 
         int imageSeqID
