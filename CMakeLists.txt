@@ -61,7 +61,7 @@ set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
 set(CMAKE_STATIC_LINKER_FLAGS "/machine:I386")
 
-set(CMAKE_SHARED_LINKER_FLAGS "/machine:I386")
+set(CMAKE_SHARED_LINKER_FLAGS "/machine:I386 /MANIFEST:NO")
 set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "/incremental:yes /debug")
 set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/incremental:no")
 set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO "/incremental:no /debug")
