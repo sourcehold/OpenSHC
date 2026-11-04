@@ -15,20 +15,17 @@
 
 namespace OpenSHC {
 
-using UI::Rendering::WindowAndDirectDraw;
-
 // Like BlitMapImageWithVerticalClip, but the second image (DAT_00ed316c) starts 160 - DAT_RenderMap_YOffset rows in.
 // The copy loops are handwritten assembly in the original, transcribed here from the binary.
-
-// Inline assembly cannot name a resolver global, so the loops reach the globals they use through these.
-static WindowAndDirectDraw* const s_windowAndDirectDraw = &DAT_WindowAndDirectDraw::instance;
-static uint* const s_drawSomeX = &DAT_RenderMap_DrawSomeX::instance;
-static uint* const s_blitModeUnk = &DAT_00ed317c::instance;
-static int* const s_remainingRowsUnk = &DAT_00ed3170::instance;
 
 // FUNCTION: STRONGHOLDCRUSADER 0x00454080
 void Rendering::BlitMapImageWithVerticalClipAndYOffset()
 {
+    // The asm below names these globals, which inline asm can only do once C++ code has instantiated them;
+    // sizeof does that without generating any code.
+    (void)sizeof(DAT_WindowAndDirectDraw::instance);
+    (void)sizeof(DAT_RenderMap_DrawSomeX::instance);
+    (void)sizeof(DAT_00ed317c::instance);
     char* image = (char*)DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
     char* nextImage = (char*)DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
     int drawY = DAT_RenderMap_DrawSomeY::instance + (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9;
@@ -77,10 +74,8 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
         mov esi, image
         mov eax, skip
         add esi, eax
-        mov ecx, s_windowAndDirectDraw
-        mov edi, dword ptr [ecx]WindowAndDirectDraw.surfacePointer_mapGame
-        mov eax, s_drawSomeX
-        mov eax, dword ptr [eax]
+        mov edi, DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame
+        mov eax, DAT_RenderMap_DrawSomeX::instance
         add eax, eax
         add edi, eax
         mov eax, drawY
@@ -91,8 +86,7 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
         cmp edx, 0
         jle nrm_454359
 nrm_4541d6:
-        mov eax, s_blitModeUnk
-        mov eax, dword ptr [eax]
+        mov eax, DAT_00ed317c::instance
         cmp eax, 1
         je nrm_45428f
         cmp eax, 2
@@ -192,17 +186,15 @@ nrm_45433d:
         jle nrm_454359
         jmp nrm_45433d
 nrm_454359:
-        mov eax, s_remainingRowsUnk
-        cmp dword ptr [eax], 0
+        cmp DAT_00ed3170::instance, 0
         jle nrm_45437f
-        mov edx, dword ptr [eax]
-        mov dword ptr [eax], 0
+        mov edx, DAT_00ed3170::instance
+        mov DAT_00ed3170::instance, 0
         mov esi, dword ptr nextImage
         mov eax, dword ptr nextSkip
         add esi, eax
         jmp nrm_4541d6
 nrm_45437f:
-        pop ebx
         }
         // clang-format on
         return;
@@ -212,10 +204,8 @@ nrm_45437f:
         mov esi, image
         mov eax, skip
         add esi, eax
-        mov ecx, s_windowAndDirectDraw
-        mov edi, dword ptr [ecx]WindowAndDirectDraw.surfacePointer_mapGame
-        mov eax, s_drawSomeX
-        mov eax, dword ptr [eax]
+        mov edi, DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame
+        mov eax, DAT_RenderMap_DrawSomeX::instance
         and eax, 0xfffffffe
         add edi, eax
         mov eax, drawY
@@ -228,8 +218,7 @@ nrm_45437f:
         cmp edx, 0
         jle zm_4545eb
 zm_4543ba:
-        mov eax, s_blitModeUnk
-        mov eax, dword ptr [eax]
+        mov eax, DAT_00ed317c::instance
         cmp eax, 1
         je zm_4544ac
         cmp eax, 2
@@ -374,17 +363,15 @@ zm_4545ca:
         jle zm_4545eb
         jmp zm_4545b3
 zm_4545eb:
-        mov eax, s_remainingRowsUnk
-        cmp dword ptr [eax], 0
+        cmp DAT_00ed3170::instance, 0
         jle zm_454611
-        mov edx, dword ptr [eax]
-        mov dword ptr [eax], 0
+        mov edx, DAT_00ed3170::instance
+        mov DAT_00ed3170::instance, 0
         mov esi, dword ptr nextImage
         mov eax, dword ptr nextSkip
         add esi, eax
         jmp zm_4543ba
 zm_454611:
-        pop ebx
     }
     // clang-format on
 }
