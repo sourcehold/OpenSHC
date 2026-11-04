@@ -63,7 +63,7 @@ namespace UI {
 
         EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
-        int __cdecl GetUnitRecruitPermission(int param_1);
+        EuroRecruitableState __cdecl GetUnitRecruitPermission(int param_1);
 
         BOOLEnum __cdecl HasEnoughGold(int param_1);
 

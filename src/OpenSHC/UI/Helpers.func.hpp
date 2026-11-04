@@ -104,7 +104,7 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x00464DA0, &OpenSHC::UI::Helpers::IsEuroUnitRecruitableUnk)
         IsEuroUnitRecruitableUnk;
 
-        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00464E80,
+        MACRO_FUNCTION_RESOLVER(EuroRecruitableState(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00464E80,
             &OpenSHC::UI::Helpers::GetUnitRecruitPermission)
         GetUnitRecruitPermission;
 
