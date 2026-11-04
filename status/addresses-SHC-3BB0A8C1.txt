@@ -36191,7 +36191,7 @@ SHC_3BB0A8C1_0x004DB0D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DB180 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB210 | 98.3% | only the loop end address differs (the same address under another symbol)
 
 SHC_3BB0A8C1_0x004DB300 | 71.1% | register scheduling of the parameter stores (the 100.0 is read from a shared constant in the original)
 
