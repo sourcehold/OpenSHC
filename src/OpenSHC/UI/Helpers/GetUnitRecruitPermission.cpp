@@ -11,9 +11,10 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::Map::Units::EuroRecruitableState;
+    using OpenSHC::Map::Units::UnitType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00464E80
-    EuroRecruitableState Helpers::GetUnitRecruitPermission(int unitType)
+    EuroRecruitableState Helpers::GetUnitRecruitPermission(UnitType unitType)
     {
         if (!DAT_GameState::instance.mapAndTime.mercRecruitable[unitType - Map::Units::UT_A_ARCHER]) {
             return Map::Units::ERS_NOT_ALLOWED_TO_RECRUIT;
