@@ -96134,11 +96134,17 @@ enum {
     SHC_3BB0A8C1_0x00B98420 = 0x00B98420,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98424 = 0x00B98424,
-    // type: /undefined4
+    // label: DAT_00b98428
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B98428 = 0x00B98428,
-    // type: /undefined4
+    // label: DAT_00b9842c
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B9842C = 0x00B9842C,
-    // type: /undefined4
+    // label: DAT_00b98430
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B98430 = 0x00B98430,
     // label: DAT_WifeUnitType
     // location:
@@ -96170,7 +96176,9 @@ enum {
     SHC_3BB0A8C1_0x00B98454 = 0x00B98454,
     // type: /int
     SHC_3BB0A8C1_0x00B98458 = 0x00B98458,
-    // type: /undefined4
+    // label: DAT_00b9845c
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B9845C = 0x00B9845C,
     // label: DAT_UnitValueLossesPerEnemyPlayer
     // location:
@@ -97439,7 +97447,9 @@ enum {
     SHC_3BB0A8C1_0x00ED277C = 0x00ED277C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2780 = 0x00ED2780,
-    // type: /undefined4
+    // label: DAT_00ed2784
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00ED2784 = 0x00ED2784,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2788 = 0x00ED2788,
@@ -97551,7 +97561,9 @@ enum {
     SHC_3BB0A8C1_0x00ED3168 = 0x00ED3168,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED316C = 0x00ED316C,
-    // type: /undefined4
+    // label: DAT_00ed3170
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00ED3170 = 0x00ED3170,
     // label: DAT_GmImageAddressToBeRendered
     // label: DAT_RenderMap_ResImageID
@@ -97608,7 +97620,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31BC = 0x00ED31BC,
     // label: DAT_CurrentButtonPictureInGm
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31C0 = 0x00ED31C0,
     // label: DAT_ButtonBlendStrength
     // location:
