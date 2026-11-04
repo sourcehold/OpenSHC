@@ -30,6 +30,9 @@ Environment:
                    PR that proposes it. A merge group may hold several PRs, hence
                    the list.
     REIMPL_FILTER  regex of remote-tracking branches to include (default '/reimpl/')
+    TOUCHED_LIST   file of one changed path per line; when set it is used instead
+                   of asking git, so the list can be worked out before anything
+                   shallow is fetched into the repository
     OUT            markdown report path (default status_regression.md)
     FAIL_ON_REGRESSION  '1' to exit 2 when something regressed
 
@@ -55,9 +58,20 @@ def touched_files(base_ref, pr_ref):
     every one of those as something this change did.
 
     None means the question could not be answered -- no merge base, because one
-    of the refs was fetched shallow -- and the caller then falls back to
-    comparing the status files alone.
+    of the refs is shallow.
+
+    TOUCHED_LIST short-circuits all of it: a file of one path per line, worked
+    out earlier by the caller. CI needs that, because fetching the fork reimpl/
+    branches shallow grafts the commit under test as parentless whenever the
+    pull request comes FROM one of those branches, which is the normal case --
+    the history has to be read before that happens.
     """
+    listed = os.environ.get('TOUCHED_LIST')
+    if listed:
+        with open(listed, encoding='utf-8') as f:
+            paths = set(l.strip() for l in f if l.strip())
+        return paths, '(from %s)' % listed
+
     rc, out = run(['git', 'merge-base', base_ref, pr_ref])
     mb = out.strip()
     if rc != 0 or not mb:
@@ -125,7 +139,7 @@ def main():
     cpp_of = dict(cpp_of)
     cpp_of.update(resolvers_at(pr_ref, sorted(p for p in touched if p.endswith('.func.hpp'))))
     cpp_touched = set(p for p in touched if p.endswith('.cpp'))
-    print('merge base: %s' % mb[:12])
+    print('merge base: %s' % (mb if mb.startswith('(') else mb[:12]))
     print('files changed since the merge base: %d (%d .cpp)' % (len(touched), len(cpp_touched)))
 
     # Every entry behind a touched file, whatever its percentage says. What the

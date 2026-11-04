@@ -144,6 +144,26 @@ jobs:
             exit 0
           fi
 
+      # Before the fork fetch, and that order is load-bearing: a pull request
+      # normally comes FROM a fork's reimpl/ branch, so the shallow fetch below
+      # grafts the very commit under test as parentless and destroys its
+      # history. Read the diff while the history is still intact.
+      - name: List the files the change touches
+        id: touched
+        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          PR_REF: refs/remotes/under-test
+          BASE_REF: HEAD
+        run: |
+          set -euo pipefail
+          mb=$(git merge-base "$BASE_REF" "$PR_REF") || {
+            echo "No merge base between $BASE_REF and $PR_REF; both need real history." >&2
+            exit 1
+          }
+          echo "merge base: $mb"
+          git diff --name-only --diff-filter=d "$mb" "$PR_REF" > touched.txt
+          echo "files changed since the merge base: $(wc -l < touched.txt)"
+
       - name: Fetch fork reimpl/ branches
         if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
         env:
@@ -181,6 +201,8 @@ jobs:
         env:
           PR_REF: refs/remotes/under-test
           BASE_REF: HEAD
+          # Worked out above, while the commit under test still had its history.
+          TOUCHED_LIST: touched.txt
           PR_HEAD_SHA: ${{ steps.heads.outputs.shas }}
           LABEL: ${{ steps.ctx.outputs.mode == 'queue' && 'this merge group' || 'this PR' }}
           OUT: status_regression.md
