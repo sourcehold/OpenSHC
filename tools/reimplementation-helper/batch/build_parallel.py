@@ -54,12 +54,30 @@ RSP_DIR = TMP / "rsp"
 WINDOWS = os.name == "nt"
 
 # one object rule of build.make: the dep-file wrapper, then nmake's inline response file
+# A value with a space in it is quoted in the makefile, so accept either form. Matching
+# only \S+ made every rule unmatchable when a path contained a space, which silently left
+# the objects out of the job list instead of failing.
+_VALUE = r'(?:"[^"]*"|\S+)'
 RULE_RE = re.compile(
     r"^\t\$\(CMAKE_COMMAND\) -E cmake_cl_compile_depends "
-    r"--dep-file=(?P<dep>\S+) --working-dir=(?P<wd>\S+) "
-    r"--filter-prefix=\"(?P<prefix>[^\"]*)\" -- (?P<cl>\S+) @<<\n"
-    r"(?P<body>.*?)\n<<$",
+    r"--dep-file=(?P<dep>%s) --working-dir=(?P<wd>%s) "
+    r"--filter-prefix=\"(?P<prefix>[^\"]*)\" -- (?P<cl>%s) @<<\n"
+    r"(?P<body>.*?)\n<<$" % (_VALUE, _VALUE, _VALUE),
     re.M | re.S)
+
+
+def unquote(value):
+    """Drop the quoting a makefile puts around a value, which is not part of the path.
+
+    CMAKE_COMMAND is quoted whenever CMake lives somewhere with a space in the path, e.g.
+    "C:\\Program Files\\CMake\\bin\\cmake.exe". nmake strips those quotes before running the
+    recipe; passing them on to CreateProcess does not name a file, and when the remainder
+    resolves to the containing directory the spawn fails with "WinError 5 Access is denied".
+    """
+    value = value.strip()
+    if len(value) >= 2 and value[0] == '"' and value[-1] == '"':
+        value = value[1:-1]
+    return value
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-j", "--jobs", type=int, default=0,
@@ -254,7 +272,15 @@ def read_jobs():
     m = re.search(r"^CMAKE_COMMAND = (.+)$", text, re.M)
     if not m:
         sys.exit("no CMAKE_COMMAND in %s" % build_make)
-    cmake = m.group(1).strip()
+    cmake = unquote(m.group(1))
+    # CMAKE_COMMAND is a Windows path, so off Windows it has to be mapped through the wine
+    # drives before it can be checked - Path("C:\\...") is simply a relative path here.
+    located = win_to_native(cmake) if not WINDOWS else Path(cmake)
+    if located is None or not located.is_file():
+        sys.exit("CMAKE_COMMAND in %s is %r, which does not name a file%s.\n"
+                 "Reconfigure the build so it records a usable cmake."
+                 % (build_make, cmake,
+                    "" if WINDOWS else " (resolved to %s)" % located))
 
     # "<obj>: <prerequisite>", one per line above each recipe. Taking them from the rule
     # instead of hard-coding a list is what keeps the PCH right: every ordinary object
@@ -269,7 +295,7 @@ def read_jobs():
     RSP_DIR.mkdir(parents=True, exist_ok=True)
     pch, jobs = None, []
     for rule in RULE_RE.finditer(text):
-        dep = rule.group("dep")
+        dep = unquote(rule.group("dep"))
         if "OpenSHC.dll.dir" not in dep:
             continue
         obj = dep[:-2]  # the rule names the .obj.d, we want the .obj
@@ -283,9 +309,9 @@ def read_jobs():
         rsp.write_text(body + "\n", encoding="ascii", newline="\r\n")
         argv = win_argv([cmake, "-E", "cmake_cl_compile_depends",
                          "--dep-file=" + dep,
-                         "--working-dir=" + rule.group("wd"),
+                         "--working-dir=" + unquote(rule.group("wd")),
                          "--filter-prefix=" + rule.group("prefix"),
-                         "--", rule.group("cl"), "@" + native_to_win(rsp)])
+                         "--", unquote(rule.group("cl")), "@" + native_to_win(rsp)])
         # derive the source from the object path: no drive-letter mapping needed, and it is
         # the path the rest of the tooling (the sources list, git) uses
         rel = obj.replace("\\", "/")
@@ -359,9 +385,11 @@ def run_job(job, env):
             out.seek(0)
             job.output = out.read().decode("utf-8", "replace")
     except OSError as error:
-        # Could not even start the compiler (no wine, bad path); report it as this object's
-        # failure rather than letting it unwind the whole pool.
-        job.output, job.ok = "%s: %s" % (job.name, error), False
+        # Could not even start the program (no wine, an unusable path); report it as this
+        # object's failure rather than letting it unwind the whole pool, and name the
+        # program, because the job's own name says nothing about why the spawn failed.
+        job.output = "%s: cannot run %r: %s" % (job.name, job.argv[0], error)
+        job.ok = False
         return job
     finally:
         try:
