@@ -1,7 +1,5 @@
 #include "../GameSynchronyState.func.hpp"
 
-#include "OpenSHC/Commands/GameCommandType.hpp"
-
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
@@ -11,33 +9,35 @@ namespace Synchrony {
     void GameSynchronyState::sendPendingResyncCommandsInBudget()
     {
         int index = this->resyncResumeOuterIndex;
-        int inner = this->resyncResumeInnerIndex;
-        int sent = 0;
+        int entry = this->resyncResumeInnerIndex;
+        int sentSize = 0;
+        // 45 seconds after the announcement, players whose sync status is still 0 are dropped.
+        for (int player = 1; player < 9; ++player) {
+            if (this->syncRelatedStatusArray[player] != 0) {
+                continue;
+            }
+            if (!this->announcementReceivedBool) {
+                return;
+            }
+            if (timeGetTime() - this->announcementReceiveTime <= 45000) {
+                return;
+            }
+            for (int other = 1; other < 9; ++other) {
+                if (this->syncRelatedStatusArray[other] == 0) {
+                    // Queuing the leave command through the global instance is needed for the match.
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = other;
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 63;
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_LEAVE_GAME);
+                    this->syncRelatedStatusArray[other] = 1;
+                }
+            }
+            break;
+        }
+        // Resume where the last call ran out of budget; each category falls through to the next. Reading the slot
+        // through the global instance is needed for the match.
         // One row counter for both tile map loops: a counter per loop changes the stack slots.
         int row;
-        // A player who has not answered the resync announcement after 45 seconds is dropped.
-        for (int player = 1; player < 9; ++player) {
-            if (this->syncRelatedStatusArray[player] == 0) {
-                if (!this->announcementReceivedBool) {
-                    return;
-                }
-                if (timeGetTime() - this->announcementReceiveTime <= 45000) {
-                    return;
-                }
-                for (int other = 1; other < 9; ++other) {
-                    if (this->syncRelatedStatusArray[other] == 0) {
-                        DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = other;
-                        DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 63;
-                        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                            DAT_GameSynchronyState::ptr)(Commands::GCT_LEAVE_GAME);
-                        this->syncRelatedStatusArray[other] = 1;
-                    }
-                }
-                break;
-            }
-        }
-        // Resume where the last call ran out of budget; each category falls through to the next. As in the original,
-        // this player's slot is read through the global instance.
         switch (this->somePacketSubTypeUnk) {
         default:
             index = 0;
@@ -52,8 +52,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_UNIT);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 0;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -77,8 +77,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_BUILDING);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 1;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -102,8 +102,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_TREE);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 2;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -127,8 +127,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_UNITSELECTION);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 3;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -152,8 +152,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_PLAYERDATA);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 4;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -177,8 +177,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_UNKNOWN);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 5;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -202,8 +202,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_ENTITY);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 6;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -227,8 +227,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_MOAT);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 7;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -252,8 +252,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_CLIMB_DATA);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 8;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -277,8 +277,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_PITCH_DITCH);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 9;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -302,8 +302,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_UNKNOWN2);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 10;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -330,8 +330,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_SEND_RESYNC_LOGICALTILEMAP);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 11;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -343,27 +343,27 @@ namespace Synchrony {
                     }
                 }
                 index = 1;
-                inner = 0;
-            // Cases 12 and 13 resume inside the tile map block, as in the original.
+                entry = 0;
+            // Cases 12 and 13 resume inside the tile map block.
             case 12:
                 for (row = index; row < 10; ++row) {
-                    for (; inner < 64; ++inner) {
+                    for (; entry < 64; ++entry) {
                         for (int player = 1; player < 9; ++player) {
                             if (this->currentPlayerFullIDArray[player] != -1
                                 && this->HASH_LogicalTileMap[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .hashDataArray[row]
-                                        .componentArray[inner]
-                                    != this->HASH_LogicalTileMap[player].hashDataArray[row].componentArray[inner]) {
+                                        .componentArray[entry]
+                                    != this->HASH_LogicalTileMap[player].hashDataArray[row].componentArray[entry]) {
                                 this->DAT_GameCommandParam0 = row;
-                                this->DAT_GameCommandParam1 = inner;
+                                this->DAT_GameCommandParam1 = entry;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                     Commands::GCT_SEND_RESYNC_TILEMAPDATA2);
                                 this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                                sent += this->DAT_CurrentTransmitCommandPacketSize;
-                                if (sent > this->resyncPacketBudget) {
+                                sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                                if (sentSize > this->resyncPacketBudget) {
                                     this->somePacketSubTypeUnk = 12;
                                     this->resyncResumeOuterIndex = row;
-                                    this->resyncResumeInnerIndex = inner + 1;
+                                    this->resyncResumeInnerIndex = entry + 1;
                                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                         Commands::GCT_QUIT_MULTIPLAYERGAME);
                                     return;
@@ -372,29 +372,29 @@ namespace Synchrony {
                             }
                         }
                     }
-                    inner = 0;
+                    entry = 0;
                 }
                 index = 10;
-                inner = 0;
+                entry = 0;
             case 13:
                 for (row = index; row < 30; ++row) {
-                    for (; inner < 32; ++inner) {
+                    for (; entry < 32; ++entry) {
                         for (int player = 1; player < 9; ++player) {
                             if (this->currentPlayerFullIDArray[player] != -1
                                 && this->HASH_LogicalTileMap[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .hashDataArray[row]
-                                        .componentArray[inner]
-                                    != this->HASH_LogicalTileMap[player].hashDataArray[row].componentArray[inner]) {
+                                        .componentArray[entry]
+                                    != this->HASH_LogicalTileMap[player].hashDataArray[row].componentArray[entry]) {
                                 this->DAT_GameCommandParam0 = row;
-                                this->DAT_GameCommandParam1 = inner;
+                                this->DAT_GameCommandParam1 = entry;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                     Commands::GCT_SEND_RESYNC_TILEMAPDATA1);
                                 this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                                sent += this->DAT_CurrentTransmitCommandPacketSize;
-                                if (sent > this->resyncPacketBudget) {
+                                sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                                if (sentSize > this->resyncPacketBudget) {
                                     this->somePacketSubTypeUnk = 13;
                                     this->resyncResumeOuterIndex = row;
-                                    this->resyncResumeInnerIndex = inner + 1;
+                                    this->resyncResumeInnerIndex = entry + 1;
                                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                         Commands::GCT_QUIT_MULTIPLAYERGAME);
                                     return;
@@ -403,7 +403,7 @@ namespace Synchrony {
                             }
                         }
                     }
-                    inner = 0;
+                    entry = 0;
                 }
             }
             index = 0;
@@ -418,8 +418,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_HOST_SHARE_AIV);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 14;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -443,8 +443,8 @@ namespace Synchrony {
                             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                                 Commands::GCT_HOST_SHARE_HEATMAP);
                             this->currentPacketTotalSize += this->DAT_CurrentTransmitCommandPacketSize;
-                            sent += this->DAT_CurrentTransmitCommandPacketSize;
-                            if (sent > this->resyncPacketBudget) {
+                            sentSize += this->DAT_CurrentTransmitCommandPacketSize;
+                            if (sentSize > this->resyncPacketBudget) {
                                 this->somePacketSubTypeUnk = 15;
                                 this->resyncResumeOuterIndex = index + 1;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -458,6 +458,7 @@ namespace Synchrony {
             }
         }
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_CHECK_GAME_SYNCUnk);
+        // Setting the status through the global instance is needed for the match.
         DAT_GameSynchronyState::instance.syncStatus = 3;
     }
 
