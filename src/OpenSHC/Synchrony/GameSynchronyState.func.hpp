@@ -159,7 +159,7 @@ namespace Synchrony {
             &GameSynchronyState::sendLongerDataSuchAsResync)
         sendLongerDataSuchAsResync;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandType, DWORD, dword, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(char, DWORD, dword, void*), false,
             Address::SHC_3BB0A8C1_0x00480210, &GameSynchronyState::scheduleReceivedCommand)
         scheduleReceivedCommand;
 

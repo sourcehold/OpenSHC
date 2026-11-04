@@ -429,7 +429,7 @@ namespace Synchrony {
 
         int sendLongerDataSuchAsResync(GameCommandType commandCategory);
 
-        void scheduleReceivedCommand(GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address);
+        void scheduleReceivedCommand(char commandCategory, DWORD dxPlayerHandle, dword time, void* address);
 
         int getCommandIDFromCommandSelectionStuff();
 
