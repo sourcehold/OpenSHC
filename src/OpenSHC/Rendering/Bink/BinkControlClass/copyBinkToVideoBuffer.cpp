@@ -6,7 +6,6 @@
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlag.hpp"
 #include "OpenSHC/UI/Menu.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"

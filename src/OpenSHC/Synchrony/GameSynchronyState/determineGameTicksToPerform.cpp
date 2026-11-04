@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameLoopStopwatch.hpp"

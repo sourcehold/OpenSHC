@@ -1,7 +1,6 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
