@@ -47,7 +47,7 @@ namespace Synchrony {
         this->laggingPlayerIDUnk = 0;
         this->DAT_SomeTime = 0;
         this->flag_0x7aad8 = FALSE;
-        // The original reads isHost through the global instance.
+        // Reading isHost through the global instance is needed for the match.
         if (DAT_GameSynchronyState::instance.isHost) {
             this->DAT_TwoIfNotHost = 2;
         }
@@ -69,6 +69,7 @@ namespace Synchrony {
             this->isIncludedPlayer[player] = FALSE;
             this->DAT_MultiplayerGameVersions[player] = 0;
             this->slotActionPending[player] = 0;
+            // Six stores rather than a loop over the domains, which would move the loop's base pointer.
             this->HASH_PartialHashPerPlayer.player[player].domain[0] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[1] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[2] = 0;
@@ -159,6 +160,7 @@ namespace Synchrony {
             DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[slot]
                 = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[slot];
         }
+        // Setting this field and queuing the slot request through the global instance is needed for the match.
         DAT_GameSynchronyState::instance.field222_0x106ee4 = 1;
         MACRO_CALL(Synchrony_Func::InitSkirmishLobbyData)();
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setDirectPlaySessionDescription, this)();

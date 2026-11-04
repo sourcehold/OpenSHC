@@ -68,6 +68,7 @@ namespace Synchrony {
             this->isIncludedPlayer[player] = FALSE;
             this->DAT_MultiplayerGameVersions[player] = 0;
             this->slotActionPending[player] = 0;
+            // Six stores rather than a loop over the domains, which would move the loop's base pointer.
             this->HASH_PartialHashPerPlayer.player[player].domain[0] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[1] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[2] = 0;
@@ -113,6 +114,7 @@ namespace Synchrony {
         this->skirmishCurrentAdvantageBalance = 3;
         this->field232_0x1072e8 = -1;
         this->field233_0x1072ec = -1;
+        // The faces of player slots 1 to 8 (slot + 19).
         for (int face = 20; face < 28; ++face) {
             DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[face] = 0;
         }
