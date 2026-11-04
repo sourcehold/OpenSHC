@@ -10,7 +10,6 @@
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -28,7 +27,8 @@ namespace UI {
             if (action != 3) {
                 if (action == 68 && DAT_GameSynchronyState::instance.DAT_MapFileReceivingState == 0) {
                     DAT_GameSynchronyState::instance.DAT_MapFileReceivingState = 1;
-                    char fileName[1008];
+                    // The original copies the name and appends the extension inline, so the macro is used here.
+                    char fileName[1008]; // the size of the original's buffer
                     strcpy(fileName,
                         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                             DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
@@ -41,7 +41,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance.mapSendingFileSize = MACRO_CALL_MEMBER(
                         OpenSHC::IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
                     DAT_GameSynchronyState::instance.FILEPTR_ReceivedMapFile = NULL;
-                    // Open the same file 8 times, for each lobby player once
+                    // Open the map file once for each player waiting for it (transfer state 1).
                     for (int player = 1; player < 9; ++player) {
                         DAT_GameSynchronyState::instance.mapSendRequestStatePerPlayer[player] = 0;
                         DAT_GameSynchronyState::instance.mapSendingByteBufferAddress[player] = 0;
@@ -52,7 +52,6 @@ namespace UI {
                                 DAT_ResourceManager::ptr)();
                             // "rb"
                             DAT_GameSynchronyState::instance.mapSendingFileHandles[player]
-                                // "rb"
                                 = MACRO_CALL(OpenSHC::OS_Func::_fopen)(resourceFileName, S_RB_005A4E18);
                             DAT_GameSynchronyState::instance.DAT_GameCommandParam0
                                 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
@@ -82,10 +81,8 @@ namespace UI {
                     MACRO_CALL(OpenSHC::OS_Func::_fclose)(DAT_GameSynchronyState::instance.FILEPTR_ReceivedMapFile);
                     DAT_GameSynchronyState::instance.FILEPTR_ReceivedMapFile = NULL;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 1;
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                        (OpenSHC::Commands::GameCommandType)(OpenSHC::Commands::GCT_START_OR_STOP_SEND_MAP_FILEUnk
-                            | OpenSHC::Commands::GCT_MULTIPLAYER_ANNOUNCE_HOST));
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                        DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_UNKNOWN_107);
                 }
                 DAT_GameSynchronyState::instance.DAT_MapFileReceivingState = 0;
             }
