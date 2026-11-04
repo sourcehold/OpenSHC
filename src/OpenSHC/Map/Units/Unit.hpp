@@ -239,12 +239,12 @@ namespace Map {
             short jugglerCount; // 0x0000038A length: 2
             short tunnelerFrame; // 0x0000038C length: 2
             short peasantAlwaysZero; // 0x0000038E length: 2
-            undefined1 padding_0x390[2]; // 0x00000390 length: 2
+            short peasantSeatingRelated; // 0x00000390 length: 2
             short seated; // 0x00000392 length: 2
             short resourcesGatheredCount; // 0x00000394 length: 2
             short workerIndex; // 0x00000396 length: 2
             short buildingID; // 0x00000398 length: 2
-            short field233_0x39a; // 0x0000039A length: 2
+            short field232_0x39a; // 0x0000039A length: 2
             UnitInstructionTypeShort targetingType; // 0x0000039C length: 2
             short targetedUnitID__OR__engineerMannedSiegeEngineRef; // 0x0000039E length: 2
             int targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID; // 0x000003A0
@@ -254,29 +254,29 @@ namespace Map {
             uint targetedBuildingTile; // 0x000003A8 length: 4
             short lookForEnemy; // 0x000003AC length: 2
             short attackedBy; // 0x000003AE length: 2
-            short field243_0x3b0; // 0x000003B0 length: 2
+            short field242_0x3b0; // 0x000003B0 length: 2
             short huntedBy; // 0x000003B2 length: 2
             short digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300; // 0x000003B4 length: 2
             short digTileY__OR__countLifeCycleEngineersSentToManSiegeEngine; // 0x000003B6 length: 2
             int digTileTarget; // 0x000003B8 length: 4
-            int field248_0x3bc; // 0x000003BC length: 4
-            short field249_0x3c0; // 0x000003C0 length: 2
-            char field250_0x3c2; // 0x000003C2 length: 1
+            int field247_0x3bc; // 0x000003BC length: 4
+            short field248_0x3c0; // 0x000003C0 length: 2
+            char field249_0x3c2; // 0x000003C2 length: 1
             char rabbitMovementSlowdown; // 0x000003C3 length: 1
-            byte field252_0x3c4; // 0x000003C4 length: 1
-            byte field253_0x3c5; // 0x000003C5 length: 1
-            short field254_0x3c6; // 0x000003C6 length: 2
+            byte field251_0x3c4; // 0x000003C4 length: 1
+            byte field252_0x3c5; // 0x000003C5 length: 1
+            short field253_0x3c6; // 0x000003C6 length: 2
             int health; // 0x000003C8 length: 4
             int maxHealth; // 0x000003CC length: 4
             byte occupancyOrFlag; // 0x000003D0 length: 1
-            byte field258_0x3d1; // 0x000003D1 length: 1
-            short field259_0x3d2; // 0x000003D2 length: 2
+            byte field257_0x3d1; // 0x000003D1 length: 1
+            short field258_0x3d2; // 0x000003D2 length: 2
             short unknownBool01; // 0x000003D4 length: 2
             short horseOriginStablesBuildingIndexUnk; // 0x000003D6 length: 2
             short shootBeforeStop; // 0x000003D8 length: 2
             undefined1 padding_0x3da[2]; // 0x000003DA length: 2
-            short field265_0x3dc; // 0x000003DC length: 2
-            short field266_0x3de; // 0x000003DE length: 2
+            short field264_0x3dc; // 0x000003DC length: 2
+            short field265_0x3de; // 0x000003DE length: 2
             int horseOriginStableIDUnk; // 0x000003E0 length: 4
             int blessedAmount; // 0x000003E4 length: 4
             short attackAtTileX; // 0x000003E8 length: 2
@@ -286,50 +286,50 @@ namespace Map {
             char nextAttackHurtsWall; // 0x000003EE length: 1
             undefined1 poleturner_spearOrPike; // 0x000003EF length: 1
             short killedFlagUnk; // 0x000003F0 length: 2
-            short field276_0x3f2; // 0x000003F2 length: 2
-            short field277_0x3f4; // 0x000003F4 length: 2
+            short field275_0x3f2; // 0x000003F2 length: 2
+            short field276_0x3f4; // 0x000003F4 length: 2
             undefined1 padding_0x3f6[2]; // 0x000003F6 length: 2
-            byte field280_0x3f8; // 0x000003F8 length: 1
+            byte field279_0x3f8; // 0x000003F8 length: 1
             undefined1 laddermanIsInPosition; // 0x000003F9 length: 1
             byte fadeCounter; // 0x000003FA length: 1
             byte fadeType; // 0x000003FB length: 1
             short SA; // 0x000003FC length: 2
             byte unknownSiegeTentRelated02; // 0x000003FE length: 1
-            byte field286_0x3ff; // 0x000003FF length: 1
+            byte field285_0x3ff; // 0x000003FF length: 1
             short lastEncounteredEnemyPlayerID; // 0x00000400 length: 2
             byte unknownCountdown_0x402; // 0x00000402 length: 1
             byte wasOnStoneGate; // 0x00000403 length: 1
             int currentTilePosition_2Unk; // 0x00000404 length: 4
             short counter; // 0x00000408 length: 2
-            short field292_0x40a; // 0x0000040A length: 2
+            short field291_0x40a; // 0x0000040A length: 2
             bool isMatchingSpeed; // 0x0000040C length: 1
-            bool field294_0x40d; // 0x0000040D length: 1
-            bool field295_0x40e; // 0x0000040E length: 1
+            bool field293_0x40d; // 0x0000040D length: 1
+            bool field294_0x40e; // 0x0000040E length: 1
             char attackFacingDirection; // 0x0000040F length: 1
-            byte field297_0x410; // 0x00000410 length: 1
+            byte field296_0x410; // 0x00000410 length: 1
             byte lordDeathProcessedStatus; // 0x00000411 length: 1
             byte ownerOfAssassinScaledObject; // 0x00000412 length: 1
-            byte field300_0x413; // 0x00000413 length: 1
+            byte field299_0x413; // 0x00000413 length: 1
             short assassinHeightDifference; // 0x00000414 length: 2
             short assassinClimbingUpUnk_OR_previousFacingDirection; // 0x00000416 length: 2
-            short field303_0x418; // 0x00000418 length: 2
-            undefined2 field304_0x41a; // 0x0000041A length: 2
-            int field305_0x41c; // 0x0000041C length: 4
-            int field306_0x420; // 0x00000420 length: 4
+            short field302_0x418; // 0x00000418 length: 2
+            undefined2 field303_0x41a; // 0x0000041A length: 2
+            int field304_0x41c; // 0x0000041C length: 4
+            int field305_0x420; // 0x00000420 length: 4
             short horseArcherShootingVariation; // 0x00000424 length: 2
             short horseArcherShootCheckInterval; // 0x00000426 length: 2
-            short field309_0x428; // 0x00000428 length: 2
+            short field308_0x428; // 0x00000428 length: 2
             short aiUnitBehaviourType; // 0x0000042A length: 2
             short rallyRelatedFlag; // 0x0000042C length: 2
             short engineerRelatedUnk; // 0x0000042E length: 2
-            short field313_0x430; // 0x00000430 length: 2
+            short field312_0x430; // 0x00000430 length: 2
             short siegeTargetPlayerID; // 0x00000432 length: 2
             short unknownLordTypeBasedMissionSpecificValue_01; // 0x00000434 length: 2
             short lastEncounteredEnemyUnitIDUnk; // 0x00000436 length: 2
             int assassinsMicroDistanceToEnemyUnk; // 0x00000438 length: 4
             int enemyNoticeFrequencyUnk; // 0x0000043C length: 4
-            ushort field319_0x440; // 0x00000440 length: 2
-            short field320_0x442; // 0x00000442 length: 2
+            ushort field318_0x440; // 0x00000440 length: 2
+            short field319_0x442; // 0x00000442 length: 2
             short idleCounterUnk; // 0x00000444 length: 2
             short moveableUnk; // 0x00000446 length: 2
             short friendlyFireCounterUnk; // 0x00000448 length: 2

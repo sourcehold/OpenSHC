@@ -266,9 +266,15 @@ widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, 
   `mov [field], ebx`) is a **result variable** initialised at the top and stored once at the end, not two literal
   stores: `int isNotNervous = 1; ... if (cond) isNotNervous = 0; else {...} field = isNotNervous;`
   (`computeNervousness` 77% -> 100%).
-- `add reg, -N` where we emit `sub reg, N` or `cmp reg, N` means two constants were merged: the source compared a
-  derived value, `aicIndex == 7` with `aicIndex = aiType - 1`, not `aiType == 8`
-  (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- The original's `add reg, -N` against our `sub reg, N` or `cmp reg, N` has two causes, told apart by whether a
+  second constant is in sight. **With one**, they were merged: the source compared a derived value, `aicIndex == 7`
+  with `aicIndex = aiType - 1`, not `aiType == 8` (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- **With none**, the value is a separate derived local rather than a self-decrement: the typical case leads to the reimplementation
+  writing `sub` whereas the original had `add` (e.g. `int value -= N`). A solution is to write `int y = x - N;`
+  with `x` becoming a dead local right after. However, this creates another local variable which can cause register and stack
+  allocation changes elsewhere. The solution is to drop a local variable: the one to delete is
+  usually a global that is cached instead of re-read, so reading the global again instead of using the cached value in
+  a local drops the local's importance to allocation and causes a match.
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
