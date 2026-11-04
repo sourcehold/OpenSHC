@@ -16,9 +16,12 @@ object - the same cl.exe, the same response file contents taken from build.make 
 flags.make, and the same `cmake -E cmake_cl_compile_depends` wrapper, so each .obj and its
 .obj.d land exactly where nmake expects them. Step 4 is then an ordinary incremental build:
 it recompiles anything this script skipped or failed on, so the final DLL and the
-BUILD_OK/BUILD_FAIL verdict still come from build.bat and build_quiet.py. Measured on a
-four-core container under wine, a full 1138-object build went from about 7.5 hours to 35
-minutes.
+BUILD_OK/BUILD_FAIL verdict still come from build.bat and build_quiet.py.
+
+Measured on a four-core container under wine: the 1138 object compiles take about 38
+minutes at -j 4, against a serial rate of about 2.4 objects a minute, i.e. some 7.5 hours
+for the same set. A full run including the LTCG link is about 50 minutes. The DLL it
+produces gives reccmp the same figures as a serial build, to the decimal.
 
 Every object of a target shares one vcNN.pdb through /Fd, so parallel compiles only work
 because mspdbsrv.exe serialises the writers, and mspdbsrv is a singleton keyed on
