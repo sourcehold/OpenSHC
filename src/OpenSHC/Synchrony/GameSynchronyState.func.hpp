@@ -119,7 +119,7 @@ namespace Synchrony {
             &GameSynchronyState::handleUnexpectedDPlayXResult)
         handleUnexpectedDPlayXResult;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EDE0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EDE0,
             &GameSynchronyState::checkAllPlayersReadyAndCleanupSlots)
         checkAllPlayersReadyAndCleanupSlots;
 
@@ -159,7 +159,7 @@ namespace Synchrony {
             &GameSynchronyState::sendLongerDataSuchAsResync)
         sendLongerDataSuchAsResync;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandType, DWORD, dword, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(char, DWORD, dword, void*), false,
             Address::SHC_3BB0A8C1_0x00480210, &GameSynchronyState::scheduleReceivedCommand)
         scheduleReceivedCommand;
 
@@ -167,7 +167,7 @@ namespace Synchrony {
             &GameSynchronyState::getCommandIDFromCommandSelectionStuff)
         getCommandIDFromCommandSelectionStuff;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480570,
             &GameSynchronyState::getGameCommandArrayIndex)
         getGameCommandArrayIndex;
 
@@ -212,7 +212,7 @@ namespace Synchrony {
             &GameSynchronyState::determineGameTicksToPerform)
         determineGameTicksToPerform;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, size_t, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00487C50, &GameSynchronyState::transmitCommand)
         transmitCommand;
 
@@ -264,7 +264,7 @@ namespace Synchrony {
             &GameSynchronyState::sendPeriodicSyncMessages)
         sendPeriodicSyncMessages;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C7B0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C7B0,
             &GameSynchronyState::reorderTeamsAndPositions)
         reorderTeamsAndPositions;
 

@@ -32,8 +32,8 @@ namespace UI {
             RenderTargetInt surfaceTarget; // 0x0000000C length: 4
             dword currentX; // 0x00000010 length: 4
             dword currentY; // 0x00000014 length: 4
-            dword field8_0x18; // 0x00000018 length: 4
-            dword field9_0x1c; // 0x0000001C length: 4
+            dword field_0x18; // 0x00000018 length: 4
+            dword field_0x1c; // 0x0000001C length: 4
             dword moveDirectionXUnk_0x20; // 0x00000020 length: 4
             dword moveDirectionYUnk_0x24; // 0x00000024 length: 4
             int currentWidth_0x28; // 0x00000028 length: 4

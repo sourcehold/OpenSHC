@@ -63,12 +63,27 @@ def build_env(endpoint=None):
     return env
 
 
+def win_cmd(*args):
+    """Argv for running a Windows command, through wine when we are not on Windows.
+
+    The toolchain, build.bat and cmakew are Windows programs, so a Linux checkout drives them
+    under wine; `cmd` does not exist there as a bare executable. Set WINEPREFIX, and see
+    build_parallel.py for what else a wine run needs.
+    """
+    return (["cmd", "/c"] if os.name == "nt" else ["wine", "cmd", "/c"]) + list(args)
+
+
 def kill_pdb_server():
     """Stop this worktree's mspdbsrv.exe only.
 
     Killing every instance by image name takes down the PDB server of any other worktree that is
     building at the same time and fails their build with the same C1090.
     """
+    if os.name != "nt":
+        # The equivalent under wine would be killing by image name, which is exactly what this
+        # avoids: it would take down every prefix's server, not this worktree's.
+        sys.stderr.write("note: not stopping mspdbsrv.exe; only implemented on Windows\n")
+        return
     subprocess.run(["powershell", "-NoProfile", "-Command",
                     "Get-Process mspdbsrv -ErrorAction SilentlyContinue | "
                     "Where-Object { $_.Path -like '%s*' } | "

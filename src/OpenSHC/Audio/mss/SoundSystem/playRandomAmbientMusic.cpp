@@ -4,6 +4,7 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -27,7 +28,8 @@ namespace Audio {
                 && MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .campground.id
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                            .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .lordID
@@ -234,7 +236,7 @@ namespace Audio {
                 }
 
                 int const battleLevelTemp = DAT_GameCore::instance.battleLevel2 + 2500;
-                int const iVar7 = DAT_GameCore::instance.battleLevel2;
+                int const previousBattleLevel2 = DAT_GameCore::instance.battleLevel2;
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState != 5) {
                     if (0 < DAT_GameCore::instance.battleLevel2) {
                         --DAT_GameCore::instance.battleLevel2;
@@ -249,7 +251,7 @@ namespace Audio {
                     }
                 }
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState == 5) {
-                    if (DAT_GameCore::instance.battleLevel < iVar7) {
+                    if (DAT_GameCore::instance.battleLevel < previousBattleLevel2) {
                         MACRO_CALL_MEMBER(
                             SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     }

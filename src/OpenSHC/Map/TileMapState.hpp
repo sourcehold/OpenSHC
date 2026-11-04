@@ -46,16 +46,16 @@ namespace Map {
         ushort PillarGFXLayer[80400]; // 0x000C80E0 length: 160800
         ushort WallGFXLayer[80400]; // 0x000EF500 length: 160800
         ushort FloatingLayer[80400]; // 0x00116920 length: 160800
-        ushort RandomLayer[80400]; // 0x0013DD40 length: 160800
+        short RandomLayer[80400]; // 0x0013DD40 length: 160800
         int LogicLayer[80400]; // 0x00165160 length: 321600
         byte unknownData1[1600]; // 0x001B39A0 length: 1600
-        byte Logic2Layer[80400]; // 0x001B3FE0 length: 80400
+        char Logic2Layer[80400]; // 0x001B3FE0 length: 80400
         byte unknownData2[400]; // 0x001C79F0 length: 400
         byte ChangedLayer[80400]; // 0x001C7B80 length: 80400
         short OrganismLayer[80400]; // 0x001DB590 length: 160800
         short BuildingLayer[80400]; // 0x002029B0 length: 160800
         uchar BuildingWasLayer[80400]; // 0x00229DD0 length: 80400
-        ushort UnitLayer[80400]; // 0x0023D7E0 length: 160800
+        short UnitLayer[80400]; // 0x0023D7E0 length: 160800
         short EntityLayer[80400]; // 0x00264C00 length: 160800
         char EntityLayerLT25[80400]; // 0x0028C020 length: 80400
         byte HeightLayer[80400]; // 0x0029FA30 length: 80400
@@ -64,7 +64,7 @@ namespace Map {
         uchar LuminesenceLayer[80400]; // 0x002DA860 length: 80400
         uchar ShowHiLayer[80400]; // 0x002EE270 length: 80400
         short MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
-        byte DamageLayer[80400]; // 0x003290A0 length: 80400
+        char DamageLayer[80400]; // 0x003290A0 length: 80400
         ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
         ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
@@ -101,7 +101,7 @@ namespace Map {
         undefined4 forceUpdateTextureTilemap; // 0x00554870 length: 4
         undefined4 forceUpdateGFXLayers; // 0x00554874 length: 4
         undefined4 forceUpdateMacroLayerFlag; // 0x00554878 length: 4
-        undefined4 field68_0x55487c; // 0x0055487C length: 4
+        undefined4 field_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
         undefined4 gateOrientationVariant; // 0x0055488C length: 4
@@ -136,12 +136,12 @@ namespace Map {
         undefined4 unknownZero_0x554900; // 0x00554900 length: 4
         undefined4 editorAffectType; // 0x00554904 length: 4
         undefined4 wallCornerRotation; // 0x00554908 length: 4
-        undefined4 dragStartX; // 0x0055490C length: 4
-        undefined4 dragStartY; // 0x00554910 length: 4
-        undefined4 dragEndX; // 0x00554914 length: 4
-        undefined4 dragEndY; // 0x00554918 length: 4
+        int dragStartX; // 0x0055490C length: 4
+        int dragStartY; // 0x00554910 length: 4
+        int dragEndX; // 0x00554914 length: 4
+        int dragEndY; // 0x00554918 length: 4
         BOOLEnum illegalBuild; // 0x0055491C length: 4
-        undefined4 field118_0x554920; // 0x00554920 length: 4
+        undefined4 field_0x554920; // 0x00554920 length: 4
         undefined4 maxWallHeightInPath; // 0x00554924 length: 4
         undefined4 DAT_ClickedTileX; // 0x00554928 length: 4
         undefined4 DAT_ClickedTileY; // 0x0055492C length: 4
@@ -150,7 +150,7 @@ namespace Map {
         BuildingFailReasonEnumInt buildingPlacementFailReason; // 0x00554938 length: 4
         undefined4 placementWarning; // 0x0055493C length: 4
         undefined4 uiBuildingRotation; // 0x00554940 length: 4
-        undefined4 field127_0x554944; // 0x00554944 length: 4
+        undefined4 field_0x554944; // 0x00554944 length: 4
         undefined4 buildingSpriteSheetID_1; // 0x00554948 length: 4
         undefined4 buildingSpriteID1; // 0x0055494C length: 4
         undefined4 buildingSpriteID2; // 0x00554950 length: 4
@@ -175,11 +175,11 @@ namespace Map {
         undefined4 placementOnMoat; // 0x0055499C length: 4
         undefined4 savedCursorTile; // 0x005549A0 length: 4
         int showNoRubbleWhenDestroyingBuilding; // 0x005549A4 length: 4
-        undefined4 field155_0x5549a8; // 0x005549A8 length: 4
-        undefined4 field156_0x5549ac; // 0x005549AC length: 4
+        undefined4 field_0x5549a8; // 0x005549A8 length: 4
+        undefined4 field_0x5549ac; // 0x005549AC length: 4
         int wallPlacementCost; // 0x005549B0 length: 4
         int DAT_TempBuildingRotation; // 0x005549B4 length: 4
-        int field159_0x5549b8; // 0x005549B8 length: 4
+        int field_0x5549b8; // 0x005549B8 length: 4
         undefined4 cursorAnimationTime; // 0x005549BC length: 4
         undefined4 cursorOverlayAnimationFrame; // 0x005549C0 length: 4
         undefined4 cursorOverlayImageBase; // 0x005549C4 length: 4
@@ -196,25 +196,25 @@ namespace Map {
         undefined4 instructionTargetY; // 0x005549F4 length: 4
         undefined4 uiSelectedUnitIDUnk; // 0x005549F8 length: 4
         undefined4 DAT_SomeUNitUIDUIRelated; // 0x005549FC length: 4
-        undefined4 field183_0x554a00; // 0x00554A00 length: 4
-        undefined4 field184_0x554a04; // 0x00554A04 length: 4
-        undefined4 field185_0x554a08; // 0x00554A08 length: 4
+        undefined4 field_0x554a00; // 0x00554A00 length: 4
+        undefined4 field_0x554a04; // 0x00554A04 length: 4
+        undefined4 field_0x554a08; // 0x00554A08 length: 4
         int mapSize; // 0x00554A0C length: 4
-        undefined4 field187_0x554a10; // 0x00554A10 length: 4
+        undefined4 field_0x554a10; // 0x00554A10 length: 4
         undefined4 skipPlacementFailChecks; // 0x00554A14 length: 4
         undefined1 padding_0x554a18[4]; // 0x00554A18 length: 4
         undefined4 decorationVariantIndex; // 0x00554A1C length: 4
         undefined4 demolishBlocked; // 0x00554A20 length: 4
         undefined4 clearKeepFootprintOnPlace; // 0x00554A24 length: 4
         undefined1 padding_0x554a28[8]; // 0x00554A28 length: 8
-        int field204_0x554a30; // 0x00554A30 length: 4
+        int field_0x554a30; // 0x00554A30 length: 4
         int DAT_SomeX; // 0x00554A34 length: 4
         int DAT_SomeY; // 0x00554A38 length: 4
         int DAT_SomeTile; // 0x00554A3C length: 4
         undefined1 bitFlag; // 0x00554A40 length: 1
         undefined1 padding_0x554a41[3]; // 0x00554A41 length: 3
         undefined4 DAT_CardinalTilesAroundTile; // 0x00554A44 length: 4
-        undefined4 field213_0x554a48; // 0x00554A48 length: 4
+        undefined4 field_0x554a48; // 0x00554A48 length: 4
         undefined1 padding_0x554a4c[4]; // 0x00554A4C length: 4
         undefined2 gfxTileHeight; // 0x00554A50 length: 2
         undefined1 padding_0x554a52[6]; // 0x00554A52 length: 6
@@ -286,7 +286,7 @@ namespace Map {
 
         BOOLEnum isTileEnclosedByWallsOrGates(int param_1, int param_2);
 
-        undefined4 isTileEnclosedByWalls(int param_1, int param_2);
+        BOOLEnum isTileEnclosedByWalls(int param_1, int param_2);
 
         BOOLEnum isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
@@ -296,7 +296,7 @@ namespace Map {
 
         BOOLEnum hasOnlyTowerNeighborsNoWalls(int tile, int y);
 
-        uint getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
+        BOOLEnum getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
 
         BOOLEnum hasHigherNeighborWithStairs(int tile, int y, int direction);
 
@@ -431,7 +431,7 @@ namespace Map {
 
         int setXYBasedOnMoatID(int tile, int param_2, uint x, uint y);
 
-        undefined4 advanceMoatDigProgress(int moatID);
+        BOOLEnum advanceMoatDigProgress(int moatID);
 
         void clearMoat(int tile);
 
@@ -457,7 +457,7 @@ namespace Map {
 
         void swapPitchOwnership(int param_1, int param_2);
 
-        undefined4 findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
+        BOOLEnum findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
 
         int computeTileAlongAxisOffset(int param_1, int param_2, uint param_3);
 

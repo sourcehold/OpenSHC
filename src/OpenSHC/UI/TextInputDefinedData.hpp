@@ -19,30 +19,30 @@ namespace UI {
     // SIZE: 0x00000734
     typedef struct TextInputDefinedData {
 
-        int field0_0x0[11]; // 0x00000000 length: 44
-        int field1_0x2c[22]; // 0x0000002C length: 88
+        int field_0x0[11]; // 0x00000000 length: 44
+        int field_0x2c[22]; // 0x0000002C length: 88
         byte UserTextHandler_CharacterFilter_B_1_8_9[256]; // 0x00000084 length: 256
         byte UserTextHandler_CharacterFilter_A_2_3[256]; // 0x00000184 length: 256
         short CharToImageSeqIDMapping[2][256]; // 0x00000284 length: 1024
         NumberOfDigitsThreshold numberOfDigitsThresholds[8]; // 0x00000684 length: 64
-        int field6_0x6c4[10]; // 0x000006C4 length: 40
-        char field7_0x6ec[4]; // 0x000006EC length: 4
-        char field8_0x6f0[6]; // 0x000006F0 length: 6
+        int field_0x6c4[10]; // 0x000006C4 length: 40
+        char field_0x6ec[4]; // 0x000006EC length: 4
+        char field_0x6f0[6]; // 0x000006F0 length: 6
         undefined1 padding_0x6f6[2]; // 0x000006F6 length: 2
-        char field11_0x6f8[4]; // 0x000006F8 length: 4
-        char field12_0x6fc[6]; // 0x000006FC length: 6
+        char field_0x6f8[4]; // 0x000006F8 length: 4
+        char field_0x6fc[6]; // 0x000006FC length: 6
         undefined1 padding_0x702[2]; // 0x00000702 length: 2
-        char field15_0x704[4]; // 0x00000704 length: 4
-        char field16_0x708[6]; // 0x00000708 length: 6
+        char field_0x704[4]; // 0x00000704 length: 4
+        char field_0x708[6]; // 0x00000708 length: 6
         undefined1 padding_0x70e[2]; // 0x0000070E length: 2
-        char field19_0x710[4]; // 0x00000710 length: 4
-        char field20_0x714[6]; // 0x00000714 length: 6
+        char field_0x710[4]; // 0x00000710 length: 4
+        char field_0x714[6]; // 0x00000714 length: 6
         undefined1 padding_0x71a[2]; // 0x0000071A length: 2
-        char field23_0x71c[4]; // 0x0000071C length: 4
-        char field24_0x720[6]; // 0x00000720 length: 6
+        char field_0x71c[4]; // 0x0000071C length: 4
+        char field_0x720[6]; // 0x00000720 length: 6
         undefined1 padding_0x726[2]; // 0x00000726 length: 2
-        char field27_0x728[4]; // 0x00000728 length: 4
-        char field28_0x72c[6]; // 0x0000072C length: 6
+        char field_0x728[4]; // 0x00000728 length: 4
+        char field_0x72c[6]; // 0x0000072C length: 6
         undefined1 padding_0x732[2]; // 0x00000732 length: 2
 
     } TextInputDefinedData;

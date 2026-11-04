@@ -63,7 +63,7 @@ namespace Game {
             MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 UI::Enums::MVT_HISTORIC_CAMPAIGN_INTRO, 0);
         }
-        DAT_GameCore::instance.field22_0x64 = 0;
+        DAT_GameCore::instance.gameSuspended = 0;
         DAT_GameCore::instance.field26_0x74 = 0;
         DAT_GameCore::instance.unknownAlwaysZero = 0;
     }
