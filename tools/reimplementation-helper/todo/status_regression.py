@@ -128,14 +128,22 @@ def main():
     print('merge base: %s' % mb[:12])
     print('files changed since the merge base: %d (%d .cpp)' % (len(touched), len(cpp_touched)))
 
-    changed = [sid for sid, (pct, st) in pr_rows.items() if base_rows.get(sid, (None,))[0] != pct]
-    print('status entries with a changed percentage: %d' % len(changed))
-    changed = [sid for sid in changed if cpp_of.get(sid, '') in cpp_touched]
-    print('... of which belong to a .cpp this change edits: %d' % len(changed))
+    # Every entry behind a touched file, whatever its percentage says. What the
+    # entry reads on the base branch is NOT a filter: a file left at the same
+    # percentage as main, while a fork already has it higher, is exactly the
+    # case this check exists for.
+    changed = sorted(sid for sid, cpp in cpp_of.items() if cpp in cpp_touched)
+    print('status entries behind those files: %d' % len(changed))
+    unlisted = [sid for sid in changed if sid not in pr_rows]
+    if unlisted:
+        print('   (%d of them have no status line at %s)' % (len(unlisted), pr_ref))
 
     worse = []
     for sid in changed:
-        pr_pct, pr_st = pr_rows[sid]
+        # A file under the change with no status line of its own counts as 0%:
+        # if it is known higher elsewhere, dropping the line is the same
+        # regression as lowering the number in it.
+        pr_pct, pr_st = pr_rows.get(sid, (0.0, '(no status line)'))
         known_pct, known_st, known_src = best.get(sid, (0.0, 'Pending', ''))
         if pr_pct < known_pct - EPS:
             worse.append((cpp_of.get(sid, ''), sid, pr_pct, pr_st, known_pct, known_st, known_src))
