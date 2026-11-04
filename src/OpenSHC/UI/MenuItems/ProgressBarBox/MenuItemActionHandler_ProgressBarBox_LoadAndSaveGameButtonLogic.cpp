@@ -138,8 +138,8 @@ namespace UI {
                 break;
             case 31: {
                 // load
-                int const index = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
-                    + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
+                int const index = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
+                    + DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex;
                 DAT_VideoBikQueue::instance.storedMessages_0x924 = 0;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                     DAT_MenuModalComposition2::ptr)(OpenSHC::UI::Enums::MMT_NONE, FALSE);
