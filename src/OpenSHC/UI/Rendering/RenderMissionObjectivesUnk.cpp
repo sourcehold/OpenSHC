@@ -43,7 +43,7 @@ namespace UI {
         int column = 200;
         int const headerX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30;
         int const headerY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 50;
-        DAT_TextManagerObject::instance.field9_0x24 = 1;
+        DAT_TextManagerObject::instance.field_0x24 = 1;
         if (DAT_GameCore::instance.section1095 == 2) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

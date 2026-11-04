@@ -357,7 +357,7 @@ namespace UI {
                 continue;
             }
             char* const name = DAT_GameSynchronyState::instance.finalResults.names[player];
-            DAT_TextManagerObject::instance.field12_0x30 = 1;
+            DAT_TextManagerObject::instance.field_0x30 = 1;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                 name, x, y, 260,
                 DAT_RenderingDefinedData::instance

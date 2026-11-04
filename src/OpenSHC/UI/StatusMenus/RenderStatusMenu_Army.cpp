@@ -81,7 +81,7 @@ namespace UI {
         uint color;
         int percentX;
         if (0 < fearFactor) {
-            DAT_TextManagerObject::instance.field8_0x20 = 1;
+            DAT_TextManagerObject::instance.field_0x20 = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 177, x + 116, top + 27);
             // "Troop combat bonus:"
@@ -97,7 +97,7 @@ namespace UI {
             color = OpenSHC::Rendering::Colors::COL_00FF00;
             percentX = x + 164;
         } else if (fearFactor < 0) {
-            DAT_TextManagerObject::instance.field8_0x20 = 1;
+            DAT_TextManagerObject::instance.field_0x20 = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 178, x + 116, top + 17);
             // "Troop combat bonus:"
@@ -124,7 +124,7 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             s_percentage_005a2770, percentX, top + 25, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        DAT_TextManagerObject::instance.field8_0x20 = 0;
+        DAT_TextManagerObject::instance.field_0x20 = 0;
     }
 
 }

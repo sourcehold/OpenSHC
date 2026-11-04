@@ -78,12 +78,12 @@ namespace UI {
                         int const luminescence = DAT_TileMapState::instance.LuminesenceLayer[tile];
                         uint color = 0;
                         if ((logic & 0x40000000) != 0) {
-                            color = DAT_MiniMapDefinedData::instance.field6_0x74[isRGB565 + (random & 3) * 2];
+                            color = DAT_MiniMapDefinedData::instance.field_0x74[isRGB565 + (random & 3) * 2];
                         } else if ((logic & 0x3000) != 0) {
-                            color = DAT_MiniMapDefinedData::instance.field16_0x144[isRGB565 + (random & 3) * 2];
+                            color = DAT_MiniMapDefinedData::instance.field_0x144[isRGB565 + (random & 3) * 2];
                         } else if ((logic & 8) != 0) {
                             if ((DAT_TileMapState::instance.MiscDisplayLayer[tile] & 0x2000) != 0) {
-                                color = DAT_MiniMapDefinedData::instance.field1_0x20[isRGB565];
+                                color = DAT_MiniMapDefinedData::instance.field_0x20[isRGB565];
                             } else {
                                 color = 0;
                             }
@@ -145,7 +145,7 @@ namespace UI {
                                         if ((short)color == 0) {
                                             color = this->minimapPixelBuffer[(y + dy) * 400 / 2 + x + dx];
                                         }
-                                        this->field17_0x44[(y + dy) * 200 + x + dx] = (ushort)color;
+                                        this->field_0x44[(y + dy) * 200 + x + dx] = (ushort)color;
                                     }
                                 }
                             }
@@ -159,7 +159,7 @@ namespace UI {
                                         if ((short)color == 0) {
                                             color = this->minimapPixelBuffer[pixelY * 400 / 2 + pixelX];
                                         }
-                                        this->field17_0x44[pixelY * 200 + pixelX] = (ushort)color;
+                                        this->field_0x44[pixelY * 200 + pixelX] = (ushort)color;
                                     }
                                 }
                             }

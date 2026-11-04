@@ -294,7 +294,7 @@ namespace UI {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
             case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
             case OpenSHC::Map::Buildings::BT_WOODGATE1:
-                if (DAT_BuildingsState::instance.buildings[buildingID].field202_0x2c6 != 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].field_0x2c6 != 0) {
                     return FALSE;
                 }
                 menuTab = 36;
@@ -315,7 +315,7 @@ namespace UI {
                         (int)(DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight),
                         OpenSHC::Map::Buildings::BT_GATEHOUSESMALL, 0);
                 }
-                if (gatehouse != 0 && DAT_BuildingsState::instance.buildings[gatehouse].field202_0x2c6 != 0) {
+                if (gatehouse != 0 && DAT_BuildingsState::instance.buildings[gatehouse].field_0x2c6 != 0) {
                     return FALSE;
                 }
                 menuTab = 37;
