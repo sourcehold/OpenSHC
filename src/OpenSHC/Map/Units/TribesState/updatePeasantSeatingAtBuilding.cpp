@@ -14,10 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::UnitType;
-        using Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00522210
         void TribesState::updatePeasantSeatingAtBuilding(int buildingID, int peasantCountUnk, int resetAlwaysZeroUnk)
         {
@@ -42,7 +38,7 @@ namespace Map {
                     && DAT_UnitsState::instance.units[unitID].state.generic == Map::Units::States::US_STAND_UPUnk
                     && DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1 == buildingID) {
                     ++_matchingPeasantCount;
-                    *(short*)DAT_UnitsState::instance.units[unitID].padding_0x390 = 0;
+                    DAT_UnitsState::instance.units[unitID].peasantSeatingRelated = 0;
                     if (resetAlwaysZeroUnk == 1) {
                         DAT_UnitsState::instance.units[unitID].peasantAlwaysZero = 0;
                     }
@@ -50,7 +46,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[unitID].peasantAlwaysZero = 1;
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(unitID);
                     } else if (DAT_UnitsState::instance.units[unitID].peasantAlwaysZero == 0) {
-                        *(short*)DAT_UnitsState::instance.units[unitID].padding_0x390 = 1;
+                        DAT_UnitsState::instance.units[unitID].peasantSeatingRelated = 1;
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::sitDownIfStanding, DAT_UnitsState::ptr)(unitID);
                     }
                 }

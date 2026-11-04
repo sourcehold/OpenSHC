@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using Map::Units::UnitLogicState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00524000
         void TribesState::unsetRallyRelatedFlagOnUnits(int tribeID)

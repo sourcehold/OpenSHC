@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005237F0
         void TribesState::aiAssignNewUnitToTribe(int playerID, int unitType, int unitID)

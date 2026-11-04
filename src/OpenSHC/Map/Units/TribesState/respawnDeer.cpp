@@ -1,7 +1,7 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
@@ -22,10 +22,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Commands::MappersEnum;
-        using Game::GameMode;
-        using Game::GameMode2;
-        using Map::MapType2;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005261B0

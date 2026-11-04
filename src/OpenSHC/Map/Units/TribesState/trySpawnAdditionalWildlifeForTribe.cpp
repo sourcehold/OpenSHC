@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -16,11 +16,6 @@ namespace Map {
     namespace Units {
 
         using WindowsHelper::Enums::BOOLEnum;
-
-        using Commands::MappersEnum;
-        using UI::Enums::MenuViewType;
-
-        using Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005260B0
         BOOLEnum TribesState::trySpawnAdditionalWildlifeForTribe(

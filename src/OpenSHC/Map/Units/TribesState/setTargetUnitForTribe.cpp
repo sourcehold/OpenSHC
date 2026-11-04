@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -9,13 +9,10 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00525280
         void TribesState::setTargetUnitForTribe(int tribeID)
         {
             int _unitSelectionIndex = 0;
-            short _tribeSize = this->tribes[tribeID].size;
             this->tribes[tribeID].selectionTargetUnitID = 0;
             while (_unitSelectionIndex < this->tribes[tribeID].size) {
                 int const _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

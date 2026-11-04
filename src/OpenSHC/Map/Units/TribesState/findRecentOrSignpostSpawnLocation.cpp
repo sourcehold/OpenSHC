@@ -1,6 +1,7 @@
 #include "../../../Map.func.hpp"
 #include "../TribesState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -26,8 +27,11 @@ namespace Map {
                     uint const _spawnY = DAT_GameState::instance.mapAndTime.lionLocationsXY[_slot].y;
                     *_outY = _spawnY;
                     uint const _candidateX = *_outX;
-                    if (_candidateX <= 399 && _spawnY <= 399
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_spawnY * 400 + _candidateX] != 0
+                    if (_candidateX <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+                        && _spawnY <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+                        && DAT_ViewportRenderState::instance
+                                .DAT_BinaryTileMap400x400[_spawnY * OpenSHC::Map::MC_MAP_XY_LIMIT + _candidateX]
+                            != 0
                         && !(DAT_TileMapState::instance
                                  .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[_spawnY].addXgetTile
                                      + _candidateX]
@@ -43,7 +47,9 @@ namespace Map {
                 }
                 ++_slotOffset;
                 if (4 <= _slotOffset) {
-                    for (int _signpostSlot = 0; _signpostSlot < 8; ++_signpostSlot) {
+                    for (int _signpostSlot = 0;
+                        _signpostSlot < (int)_countof(DAT_GameState::instance.mapAndTime.signpostsMapEdge);
+                        ++_signpostSlot) {
                         if (DAT_GameState::instance.mapAndTime.signpostIDs[_signpostSlot] != 0) {
                             *_outX = DAT_GameState::instance.mapAndTime.signpostsMapEdge[_signpostSlot][0].x;
                             *_outY = DAT_GameState::instance.mapAndTime.signpostsMapEdge[_signpostSlot][0].y;

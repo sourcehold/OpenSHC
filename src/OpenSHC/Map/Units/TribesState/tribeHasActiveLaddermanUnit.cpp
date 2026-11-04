@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -13,10 +13,6 @@ namespace Map {
     namespace Units {
 
         using WindowsHelper::Enums::BOOLEnum;
-
-        using Map::Units::UnitLogicState;
-        using Map::Units::UnitType;
-        using Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00524140
         BOOLEnum TribesState::tribeHasActiveLaddermanUnit(int tribeID)

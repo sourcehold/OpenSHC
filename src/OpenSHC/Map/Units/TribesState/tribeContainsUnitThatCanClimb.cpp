@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -11,8 +11,6 @@ namespace Map {
     namespace Units {
 
         using WindowsHelper::Enums::BOOLEnum;
-
-        using Map::Units::UnitLogicState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005241C0
         BOOLEnum TribesState::tribeContainsUnitThatCanClimb(int tribeID)

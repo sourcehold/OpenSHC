@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
@@ -10,8 +10,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using Map::Units::UnitLogicState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005240D0
         int TribesState::getFirstUnitInTribeThatIsOnXTerrain(int selectionID)

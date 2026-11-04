@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using Map::Units::UnitLogicState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00525370
         void TribesState::standUpAllTribeUnits(int tribeID)
@@ -24,7 +22,7 @@ namespace Map {
                     && DAT_UnitsState::instance.units[unitID].dying == 0) {
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(unitID);
                     DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
-                    DAT_UnitsState::instance.units[unitID].rabbitMovementSlowdown = '\0';
+                    DAT_UnitsState::instance.units[unitID].rabbitMovementSlowdown = 0;
                 }
             }
         }

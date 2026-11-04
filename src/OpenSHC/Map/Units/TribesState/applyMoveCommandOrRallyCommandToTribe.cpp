@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -14,14 +14,11 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitInstructionType;
-        using Map::Units::UnitLogicState;
-        using Map::Units::States::UnitState;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00524340
         BOOLEnum TribesState::applyMoveCommandOrRallyCommandToTribe(
-            int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint)
+            int tribeID, int x1, int y1, int isRallying, int storeAsRallyPoint)
         {
             int _unitSelectionIndex = 0;
             BOOLEnum _allAssassins
@@ -60,7 +57,7 @@ namespace Map {
                         DAT_PathFindingState::instance.allAssassinsUnk = 1;
                     }
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                        _unitID, (uint)((short)x1), (uint)((short)y1), 0);
+                        _unitID, (short)x1, (short)y1, 0);
                 }
             }
             return TRUE;

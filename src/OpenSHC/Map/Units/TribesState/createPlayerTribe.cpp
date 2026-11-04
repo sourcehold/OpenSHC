@@ -12,9 +12,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using AI::Tribes::AITribeType;
-        using Map::Units::SomeTribeBehaviorType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00522950
         int TribesState::createPlayerTribe(int playerID, undefined4 one, int tribeID)
         {

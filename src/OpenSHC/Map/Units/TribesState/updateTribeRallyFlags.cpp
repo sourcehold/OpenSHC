@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -10,16 +10,14 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00523F70
-        undefined4 TribesState::updateTribeRallyFlags(int tribeID)
+        BOOLEnum TribesState::updateTribeRallyFlags(int tribeID)
         {
             int unitSelectionIndex = 0;
             BOOLEnum _anyRallying = FALSE;
-            short* const _size = &this->tribes[tribeID].size;
-            while (unitSelectionIndex < *_size) {
+            while (unitSelectionIndex < this->tribes[tribeID].size) {
                 int const _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                     tribeID, unitSelectionIndex);
                 unitSelectionIndex = unitSelectionIndex + 1;

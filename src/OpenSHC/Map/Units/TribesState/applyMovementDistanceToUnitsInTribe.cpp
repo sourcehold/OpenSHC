@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using Map::Units::UnitLogicState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00525130
         void TribesState::applyMovementDistanceToUnitsInTribe(int tribeID)

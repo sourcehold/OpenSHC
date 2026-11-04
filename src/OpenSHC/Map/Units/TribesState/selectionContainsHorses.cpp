@@ -1,6 +1,6 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -11,8 +11,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::UnitType;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00524230

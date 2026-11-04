@@ -1,7 +1,8 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
@@ -10,15 +11,17 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using AI::Tribes::AITribeType;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x00523190
-        dword TribesState::createTribeWithSpawnedUnit(
-            short someIndex, undefined4 tribeType, int x, int y, int playerID, UnitType unitType, int count)
+        int TribesState::createTribeWithSpawnedUnit(
+            short someIndex, AITribeType tribeType, int x, int y, int playerID, UnitType unitType, int count)
         {
             if (x <= 0 && y <= 0) {
                 return 0;
             }
-            dword _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
-            if ((int)_tribeID <= 0) {
+            int const _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
+            if (_tribeID <= 0) {
                 return 0;
             }
             this->tribes[_tribeID].tribeType = tribeType;

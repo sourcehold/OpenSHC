@@ -1,9 +1,10 @@
 #include "../../../Map.func.hpp"
+#include "../TribesState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -13,14 +14,13 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::States::UnitState;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00523920
-        int TribesState::scatterTribeUnitsRandomly(int tribeID)
+        BOOLEnum TribesState::scatterTribeUnitsRandomly(int tribeID)
         {
             if (tribeID == 0) {
-                return 0;
+                return FALSE;
             }
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
             int unitSelectionIndex = 0;
@@ -32,7 +32,7 @@ namespace Map {
                 Map::Navigation::PathFindingState_Func::getComputationalTileIndex, DAT_PathFindingState::ptr)();
             int _size = this->tribes[tribeID].size;
             if (_queueTileCount < _size * 16 + 200) {
-                return 0;
+                return FALSE;
             }
             while (unitSelectionIndex < this->tribes[tribeID].size) {
                 int const unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -53,7 +53,7 @@ namespace Map {
                     DAT_UnitsState::instance.units[unitID].state.generic = 209;
                 }
             }
-            return 1;
+            return TRUE;
         }
 
     }
