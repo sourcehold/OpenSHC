@@ -4499,6 +4499,9 @@ char const* const s__Link_005a55d0 = S__LINK_005A55D0;
 // 0x005a55d8
 char const* const s_Link_005a55d8 = S_LINK_005A55D8;
 
+// 0x005a55e0
+char const* const s_Pic_005a55e0 = S_PIC_005A55E0;
+
 // 0x005a55e4
 char const* const s_ScrSize_005a55e4 = S_SCRSIZE_005A55E4;
 
