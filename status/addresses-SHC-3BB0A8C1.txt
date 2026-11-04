@@ -539,7 +539,7 @@ SHC_3BB0A8C1_0x00403900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00403980 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004039B0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004039B0 | 45.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004039F0 | 100.0% | Reimplemented
 
@@ -6129,7 +6129,7 @@ SHC_3BB0A8C1_0x0041C570 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041C6F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041C810 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0041C810 | 99.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0041C9D0 | 0.0% | Pending
 
@@ -6181,7 +6181,7 @@ SHC_3BB0A8C1_0x0041CC70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041D510 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0041E240 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0041E240 | 99.6% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0041E3F0 | 0.0% | Pending
 
@@ -13357,7 +13357,7 @@ SHC_3BB0A8C1_0x0043937C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00439380 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00439390 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00439390 | 87.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004393C0 | 0.0% | Pending
 
@@ -16611,7 +16611,7 @@ SHC_3BB0A8C1_0x00449CC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00449D50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00449DC0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00449DC0 | 98.1% | Reimplemented
 
 SHC_3BB0A8C1_0x00449F10 | 100.0% | Reimplemented
 
@@ -16629,17 +16629,17 @@ SHC_3BB0A8C1_0x0044A1B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044A240 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044A290 | 100.0% | Reimplemented, security cookie and function present, but uses dlls version
+SHC_3BB0A8C1_0x0044A290 | 97.4% | Reimplemented, security cookie and function present, but uses dlls version
 
 SHC_3BB0A8C1_0x0044A360 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044A3A0 | 100.0% | Reimplemented, Security Cookie of DLL
+SHC_3BB0A8C1_0x0044A3A0 | 96.4% | Reimplemented, Security Cookie of DLL
 
-SHC_3BB0A8C1_0x0044A460 | 100.0% | Reimplemented, Security Cookie of DLL
+SHC_3BB0A8C1_0x0044A460 | 96.2% | Reimplemented, Security Cookie of DLL
 
-SHC_3BB0A8C1_0x0044A500 | 100.0% | Reimplemented, Security Cookie of DLL
+SHC_3BB0A8C1_0x0044A500 | 96.2% | Reimplemented, Security Cookie of DLL
 
-SHC_3BB0A8C1_0x0044A5A0 | 100.0% | Reimplemented, security cookie and function present, but uses dlls version
+SHC_3BB0A8C1_0x0044A5A0 | 95.1% | Reimplemented, security cookie and function present, but uses dlls version
 
 SHC_3BB0A8C1_0x0044A620 | 100.0% | Reimplemented
 
@@ -16659,11 +16659,11 @@ SHC_3BB0A8C1_0x0044AAB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044AB70 | 100.0% | Reimplemented, requires SHC_3BB0A8C1_0x0044A050 to be active
 
-SHC_3BB0A8C1_0x0044ABB0 | 100.0% | Reimplemented, mismatches in float constants and functions 
+SHC_3BB0A8C1_0x0044ABB0 | 94.2% | Reimplemented, mismatches in float constants and functions
 
 SHC_3BB0A8C1_0x0044AE90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044B210 | 100.0% | Reimplemented, Security Cookie mismatches
+SHC_3BB0A8C1_0x0044B210 | 95.3% | Reimplemented, Security Cookie mismatches
 
 SHC_3BB0A8C1_0x0044B5C4 | 0.0% | Pending
 
@@ -16871,7 +16871,7 @@ SHC_3BB0A8C1_0x0044B7D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044B800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044B840 | 84.0% | Reimplemented, but heavy register mismatch. Logic seems sound, though.
+SHC_3BB0A8C1_0x0044B840 | 84.4% | Reimplemented, but heavy register mismatch. Logic seems sound, though.
 
 SHC_3BB0A8C1_0x0044B890 | 0.0% | Pending
 
@@ -18041,7 +18041,7 @@ SHC_3BB0A8C1_0x0045B4A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045B6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045B7F0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0045B7F0 | 68.4% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0045B830 | 0.0% | Pending
 
@@ -18753,13 +18753,13 @@ SHC_3BB0A8C1_0x0045F130 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045F240 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045F470 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0045F470 | 97.6% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0045F580 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045F5B0 | 99.0% | Reimplemented, two cases where an "edx + ecx" is flipped to "ecx + edx"
+SHC_3BB0A8C1_0x0045F5B0 | 99.7% | Reimplemented, two cases where an "edx + ecx" is flipped to "ecx + edx"
 
-SHC_3BB0A8C1_0x0045FDC0 | 70.1% | Reimplemented, but heavy structural mismatch, seems functional
+SHC_3BB0A8C1_0x0045FDC0 | 70.2% | Reimplemented, but heavy structural mismatch, seems functional
 
 SHC_3BB0A8C1_0x0045FEC0 | 0.0% | Pending
 
@@ -20151,7 +20151,7 @@ SHC_3BB0A8C1_0x004699E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00469A30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00469A70 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00469A70 | 98.9% | Reimplemented
 
 SHC_3BB0A8C1_0x00469AD0 | 0.0% | Pending
 
@@ -20159,7 +20159,7 @@ SHC_3BB0A8C1_0x00469B90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00469BE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00469C40 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00469C40 | 97.2% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00469E10 | 100.0% | Reimplemented
 
@@ -20729,17 +20729,17 @@ SHC_3BB0A8C1_0x0046AE80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046AEC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B080 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B080 | 96.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B0D0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B0D0 | 95.5% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B110 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B110 | 94.7% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B140 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B140 | 94.1% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B170 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B170 | 87.5% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x0046B1B0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046B1B0 | 87.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0046B1F0 | 100.0% | Reimplemented
 
@@ -20907,7 +20907,7 @@ SHC_3BB0A8C1_0x0046C2E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046C300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046C320 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046C320 | 97.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0046C420 | 100.0% | Reimplemented
 
@@ -20917,7 +20917,7 @@ SHC_3BB0A8C1_0x0046C480 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046C4B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046C4E0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046C4E0 | 95.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0046C520 | 0.0% | Pending
 
@@ -20987,9 +20987,9 @@ SHC_3BB0A8C1_0x0046D150 | 100.0% | Reimplemented, assembly, but showed signs of 
 
 SHC_3BB0A8C1_0x0046D200 | 100.0% | Reimplemented, assembly, but showed signs of older compiler pattern
 
-SHC_3BB0A8C1_0x0046D270 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046D270 | 98.2% | Reimplemented
 
-SHC_3BB0A8C1_0x0046D300 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046D300 | 98.2% | Reimplemented
 
 SHC_3BB0A8C1_0x0046D390 | 0.0% | Pending
 
@@ -21293,7 +21293,7 @@ SHC_3BB0A8C1_0x00471570 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004715A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00471610 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00471610 | 92.6% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00471670 | 100.0% | Reimplemented
 
@@ -21365,7 +21365,7 @@ SHC_3BB0A8C1_0x00472100 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00472140 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00472180 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00472180 | 94.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004721D0 | 0.0% | Pending
 
@@ -21377,9 +21377,9 @@ SHC_3BB0A8C1_0x00472270 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004723E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004724C0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004724C0 | 98.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004725A0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004725A0 | 98.6% | Reimplemented
 
 SHC_3BB0A8C1_0x00472680 | 0.0% | Pending
 
@@ -21433,15 +21433,15 @@ SHC_3BB0A8C1_0x00472D60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00472DD0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00472EF0 | 58.7% | Severe Register Issues, seem functional, but can not be considered done
+SHC_3BB0A8C1_0x00472EF0 | 58.7% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00473300 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00473300 | 95.6% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x004733A0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004733A0 | 99.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00473640 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004737B0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004737B0 | 94.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00473830 | 100.0% | Reimplemented
 
@@ -21487,7 +21487,7 @@ SHC_3BB0A8C1_0x00474390 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00474430 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00474480 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00474480 | 99.7% | Reimplemented
 
 SHC_3BB0A8C1_0x00474934 | 0.0% | Pending
 
@@ -21907,9 +21907,9 @@ SHC_3BB0A8C1_0x00474F30 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004750E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004752D0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004752D0 | 99.3% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00475690 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00475690 | 98.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00475880 | 0.0% | Pending
 
@@ -22009,13 +22009,13 @@ SHC_3BB0A8C1_0x00477670 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00477690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00477710 | 100.0% | Reimplemented; static helper, not resolver due to optimized call convention
+SHC_3BB0A8C1_0x00477710 | 90.4% | Reimplemented; static helper, not resolver due to optimized call convention
 
-SHC_3BB0A8C1_0x004778E0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004778E0 | 90.2% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x004779F0 | 100.0% | Reimplemented; Return value optimization, always needs SHC_3BB0A8C1_0x004778E0 active
+SHC_3BB0A8C1_0x004779F0 | 90.4% | Reimplemented; Return value optimization, always needs SHC_3BB0A8C1_0x004778E0 active
 
-SHC_3BB0A8C1_0x00477B00 | 100.0% | Reimplemented; Return value optimization, always needs SHC_3BB0A8C1_0x004778E0 active
+SHC_3BB0A8C1_0x00477B00 | 90.4% | Reimplemented; Return value optimization, always needs SHC_3BB0A8C1_0x004778E0 active
 
 SHC_3BB0A8C1_0x00477C10 | 0.0% | Pending
 
@@ -22033,11 +22033,11 @@ SHC_3BB0A8C1_0x00477EA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00477EC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00477EE0 | 87.5% | Reimplemented, heavy stack reorder mismatch, logic should be sound; Return value optimization, always needs SHC_3BB0A8C1_0x00477B00 active
+SHC_3BB0A8C1_0x00477EE0 | 89.7% | Reimplemented, heavy stack reorder mismatch, logic should be sound; Return value optimization, always needs SHC_3BB0A8C1_0x00477B00 active
 
 SHC_3BB0A8C1_0x00478010 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00478360 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00478360 | 98.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00478500 | 0.0% | Pending
 
@@ -22093,9 +22093,9 @@ SHC_3BB0A8C1_0x00478A50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00478AC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00478AE0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00478AE0 | 98.0% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00478C60 | 100.0% | Reimplemented, needs SHC_3BB0A8C1_0x0046C2E0 active
+SHC_3BB0A8C1_0x00478C60 | 96.9% | Reimplemented, needs SHC_3BB0A8C1_0x0046C2E0 active
 
 SHC_3BB0A8C1_0x00478D30 | 0.0% | Pending
 
@@ -23087,7 +23087,7 @@ SHC_3BB0A8C1_0x00488480 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00488540 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00489100 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00489100 | 99.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004892F0 | 100.0% | Reimplemented
 
@@ -24229,9 +24229,9 @@ SHC_3BB0A8C1_0x00495A20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00495A24 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00495A30 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00495A30 | 99.6% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x00496400 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00496400 | 99.2% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004968A0 | 0.0% | Pending
 
@@ -26001,7 +26001,7 @@ SHC_3BB0A8C1_0x004B1E60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B1EB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B20B0 | 83.1% | shared arm fold direction
+SHC_3BB0A8C1_0x004B20B0 | 88.5% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004B2280 | 0.0% | Pending
 
@@ -35363,7 +35363,7 @@ SHC_3BB0A8C1_0x004CF470 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF4F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF560 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004CF560 | 96.7% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented
 
@@ -35385,7 +35385,7 @@ SHC_3BB0A8C1_0x004CFA10 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CFB20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CFBC0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004CFBC0 | 53.8% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004CFCD0 | 100.0% | Reimplemented
 
@@ -35397,7 +35397,7 @@ SHC_3BB0A8C1_0x004D00A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0190 | 100.0% | Reimplemented, compiler didn't optimize one tail
+SHC_3BB0A8C1_0x004D0190 | 87.3% | Reimplemented, compiler didn't optimize one tail
 
 SHC_3BB0A8C1_0x004D0280 | 100.0% | Reimplemented
 
@@ -35457,7 +35457,7 @@ SHC_3BB0A8C1_0x004D1050 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D1090 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D10B0 | 100.0% | Reimplemented, one reordered push edi
+SHC_3BB0A8C1_0x004D10B0 | 99.2% | Reimplemented, one reordered push edi
 
 SHC_3BB0A8C1_0x004D11C0 | 0.0% | Pending
 
@@ -35561,9 +35561,9 @@ SHC_3BB0A8C1_0x004D4940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D49E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D5010 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D5010 | 94.1% | Reimplemented, asm differs
 
-SHC_3BB0A8C1_0x004D5180 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D5180 | 96.3% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x004D52A0 | 0.0% | Pending
 
@@ -41507,7 +41507,7 @@ SHC_3BB0A8C1_0x005010C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005010D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005010E0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x005010E0 | 92.9% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00501110 | 0.0% | Pending
 
@@ -41523,7 +41523,7 @@ SHC_3BB0A8C1_0x00501350 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00501440 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00501490 | 100.0% | Reimplemented, identical code; only the _chkstk and /GS cookie symbols differ (CRT)
+SHC_3BB0A8C1_0x00501490 | 87.5% | Reimplemented, identical code; only the _chkstk and /GS cookie symbols differ (CRT)
 
 SHC_3BB0A8C1_0x005014F0 | 100.0% | Reimplemented
 
@@ -42067,7 +42067,7 @@ SHC_3BB0A8C1_0x00504ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504EE0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00504EE0 | 46.2% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00504F10 | 0.0% | Pending
 
@@ -46633,7 +46633,7 @@ SHC_3BB0A8C1_0x00521EA5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00521EA6 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00521EB0 | 82.4% | pop esi scheduling
+SHC_3BB0A8C1_0x00521EB0 | 94.1% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x00521EF0 | 0.0% | Pending
 
@@ -67547,7 +67547,7 @@ SHC_3BB0A8C1_0x0057B9BE | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057B9C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0057BE10 | 0.0% | Pending
+SHC_3BB0A8C1_0x0057BE10 | 96.9% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0057C815 | 0.0% | Pending
 
@@ -67647,7 +67647,7 @@ SHC_3BB0A8C1_0x0057E120 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057E158 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0057E160 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0057E160 | 80.0% | Reimplemented, asm differs
 
 SHC_3BB0A8C1_0x0057E170 | 0.0% | Pending
 
