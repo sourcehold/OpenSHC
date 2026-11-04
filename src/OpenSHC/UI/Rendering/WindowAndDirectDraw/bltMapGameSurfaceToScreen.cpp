@@ -1,6 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {

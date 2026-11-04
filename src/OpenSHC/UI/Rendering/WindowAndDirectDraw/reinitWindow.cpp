@@ -1,6 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 
 namespace OpenSHC {
