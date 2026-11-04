@@ -116,7 +116,7 @@ namespace Synchrony {
         undefined4 field63_0xb9c; // 0x00000B9C length: 4
         undefined4 field64_0xba0; // 0x00000BA0 length: 4
         undefined4 field65_0xba4; // 0x00000BA4 length: 4
-        undefined4 resyncPacketBudget; // 0x00000BA8 length: 4
+        int resyncPacketBudget; // 0x00000BA8 length: 4
         undefined4 somePacketSubTypeUnk; // 0x00000BAC length: 4
         undefined4 resyncResumeOuterIndex; // 0x00000BB0 length: 4
         undefined4 resyncResumeInnerIndex; // 0x00000BB4 length: 4
