@@ -44,6 +44,10 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
           persist-credentials: false
+          # The check reads the diff against the MERGE BASE of the commit under
+          # test, so both sides need real history; with a shallow one there is
+          # no merge base and the check refuses to run. The pack is ~54 MiB.
+          fetch-depth: 0
 
       - name: Identify the commit under test
         id: ctx
@@ -129,7 +133,9 @@ jobs:
             echo "gone=yes" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git fetch --no-tags --depth=1 origin "+$DATA_REF:refs/remotes/under-test"
+          # Not --depth=1: a shallow ref has no merge base with the base branch,
+          # and the file list the check narrows by comes from that diff.
+          git fetch --no-tags origin "+$DATA_REF:refs/remotes/under-test"
           got=$(git rev-parse refs/remotes/under-test)
           if [ "$got" != "$HEAD_SHA" ]; then
             # The ref moved on between the rollup and now, so this run is stale.
@@ -230,8 +236,10 @@ jobs:
       # require this job directly. Post a commit status on the commit under test
       # instead: that IS requirable, under the context "status-regression", and
       # on a merge_group commit it is what lets the queue merge or reject.
+      # !cancelled(), not success(): if the check itself broke, the queue must
+      # see a red required status rather than wait for one that never arrives.
       - name: Post the commit status on the commit under test
-        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        if: ${{ !cancelled() && steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -240,7 +248,10 @@ jobs:
           RUN_URL: ${{ github.event.workflow_run.html_url }}
         run: |
           set -euo pipefail
-          if [ "$COUNT" = '0' ]; then
+          if [ -z "$COUNT" ]; then
+            state=error
+            desc='The regression check did not complete; see the run log.'
+          elif [ "$COUNT" = '0' ]; then
             state=success
             desc='No match regression against main or any fork.'
           else

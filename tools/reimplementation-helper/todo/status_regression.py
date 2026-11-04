@@ -7,6 +7,14 @@ known anywhere -- the base branch plus every fork's reimpl/ branches -- and the
 ones that come out lower are reported, grouped by the cpp file the resolver in
 the base branch's headers points at.
 
+Only the .cpp files the change actually edits are considered: the file list is
+the diff against the MERGE BASE of PR_REF and BASE_REF, so a branch that is
+merely out of date is not blamed for the older status lines it carries along.
+That needs both refs fetched with enough history for `git merge-base`; a
+depth-1 fetch of either one is a hard error rather than a fallback, because
+without the file list an out-of-date branch reports hundreds of regressions it
+did not cause.
+
 Run from the repo root of a checkout of the BASE branch, with the PR head
 fetched as data under some ref:
 
@@ -14,7 +22,8 @@ fetched as data under some ref:
 
 Environment:
     PR_REF         ref holding the PR head (required)
-    BASE_REF       ref to compare against for "what the PR changed" (default HEAD)
+    BASE_REF       ref the merge base is taken against, and the baseline for
+                   "what the PR changed" (default HEAD)
     PR_HEAD_SHA    if set, any remote branch at one of these commits (whitespace
                    or comma separated) is left out of the baseline, so a fork's
                    own reimpl/ branch cannot be counted as prior art against the
@@ -30,12 +39,43 @@ Output: the markdown report, and a summary on stdout.
 import os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from status_rollup import rows_at, header_cpp_map, reimpl_refs, best_per_id
+from status_rollup import rows_at, header_cpp_map, reimpl_refs, best_per_id, run, parse_resolvers
 
 # status files carry one decimal, so compare with a tolerance below that
 EPS = 0.05
 # a comment with hundreds of rows is unreadable; the full list stays in the job log
 MAX_ROWS = 50
+
+
+def touched_files(base_ref, pr_ref):
+    """-> (set of paths changed since the merge base, merge base sha) or (None, '').
+
+    The merge base, not the base ref's tip: a branch that is simply behind main
+    carries main's older status lines, and diffing against the tip would read
+    every one of those as something this change did.
+
+    None means the question could not be answered -- no merge base, because one
+    of the refs was fetched shallow -- and the caller then falls back to
+    comparing the status files alone.
+    """
+    rc, out = run(['git', 'merge-base', base_ref, pr_ref])
+    mb = out.strip()
+    if rc != 0 or not mb:
+        return None, ''
+    rc, out = run(['git', 'diff', '--name-only', '--diff-filter=d', mb, pr_ref])
+    if rc != 0:
+        return None, ''
+    return set(p.strip() for p in out.splitlines() if p.strip()), mb
+
+
+def resolvers_at(ref, paths):
+    """-> {shc id: cpp path} for the .func.hpp files `paths` as they are at `ref`."""
+    cpp_of = {}
+    for p in paths:
+        rc, txt = run(['git', 'show', '%s:%s' % (ref, p)])
+        if rc == 0:
+            cpp_of.update(parse_resolvers(txt, p))
+    return cpp_of
 
 
 def main():
@@ -64,8 +104,34 @@ def main():
 
     cpp_of = header_cpp_map()
 
+    # Which .cpp files does the change actually touch? A status line can differ
+    # for reasons that are not this change's doing -- most often a branch that
+    # has not been updated since main improved the same function -- so an entry
+    # only counts when the change also edits the file behind it.
+    touched, mb = touched_files(base_ref, pr_ref)
+    if touched is None:
+        # Not something to work around: without the file list this would compare
+        # every status line, and an out-of-date branch then reports hundreds of
+        # regressions it did not cause. Fail visibly instead of gating on noise.
+        print(
+            'ERROR: no merge base between %s and %s. Both refs need real history here; a '
+            'depth-1 fetch of either one produces exactly this.' % (base_ref, pr_ref),
+            file=sys.stderr,
+        )
+        return 1
+
+    # A resolver the change itself adds or moves is not in the base headers, so
+    # re-read the .func.hpp files it touches at the PR's own ref.
+    cpp_of = dict(cpp_of)
+    cpp_of.update(resolvers_at(pr_ref, sorted(p for p in touched if p.endswith('.func.hpp'))))
+    cpp_touched = set(p for p in touched if p.endswith('.cpp'))
+    print('merge base: %s' % mb[:12])
+    print('files changed since the merge base: %d (%d .cpp)' % (len(touched), len(cpp_touched)))
+
     changed = [sid for sid, (pct, st) in pr_rows.items() if base_rows.get(sid, (None,))[0] != pct]
-    print('status entries changed by %s: %d' % (pr_ref, len(changed)))
+    print('status entries with a changed percentage: %d' % len(changed))
+    changed = [sid for sid in changed if cpp_of.get(sid, '') in cpp_touched]
+    print('... of which belong to a .cpp this change edits: %d' % len(changed))
 
     worse = []
     for sid in changed:
@@ -79,12 +145,12 @@ def main():
     lines = ['<!-- status-regression -->', '**Match regression check**', '']
     if not worse:
         lines.append(
-            'No regression: none of the %d status entries %s changes is below the best match '
+            'No regression: none of the %d status entries behind the files %s changes is below the best match '
             "already known on `%s` or on any fork's `reimpl/` branch." % (len(changed), label, base_ref)
         )
     else:
         lines.append(
-            '%d of the %d status entries %s changes are **below the best match already known** '
+            '%d of the %d status entries behind the files %s changes are **below the best match already known** '
             "on `%s` or on a fork's `reimpl/` branch:" % (len(worse), len(changed), label, base_ref)
         )
         lines.append('')
