@@ -14,9 +14,10 @@ namespace Synchrony {
             // A ping: answer it with 127 and the ping's counter.
             this->syncPacketType = 127;
             this->syncRelatedCounter = this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol;
-            this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle,
-                this->DPLAYX_ReceivedPlayerID, DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG,
-                &this->syncPacketType, 2, 65000, 0, NULL, NULL);
+            this->DPLAYX_SendAndReceiveREsult
+                = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, this->DPLAYX_ReceivedPlayerID,
+                    DPSEND_GUARANTEED | DPSEND_ASYNC | DPSEND_NOSENDCOMPLETEMSG, &this->syncPacketType,
+                    sizeof(this->syncPacketType) + sizeof(this->syncRelatedCounter), 65000, 0, NULL, NULL);
             if (this->DPLAYX_SendAndReceiveREsult != DP_OK && this->DPLAYX_SendAndReceiveREsult != DPERR_PENDING) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
             }
@@ -31,7 +32,7 @@ namespace Synchrony {
             return;
         }
         this->connectionLagInfoArray[player].subtractedMapTicks
-            = (DAT_GameCore::instance.mapTimeInTicks - this->connectionLagInfoArray[player].mapTimeInTicks) / 2;
+            = (int)(DAT_GameCore::instance.mapTimeInTicks - this->connectionLagInfoArray[player].mapTimeInTicks) / 2;
         this->connectionLagInfoArray[player].subtractedTime
             = (timeGetTime() - this->connectionLagInfoArray[player].now) / 2;
         if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
@@ -59,17 +60,18 @@ namespace Synchrony {
                 this->counter = 0;
             }
         }
-        int const limit = this->limit;
-        if (limit == 0) {
+        int const historyLength = this->limit;
+        if (historyLength == 0) {
             return;
         }
-        // The original adds up the times from two entries further on than the map ticks.
+        // fixme: the time is read two entries ahead of the map ticks; with limit > 98 this reads past the player's
+        // history.
         for (int entry = 0; entry < this->limit; ++entry) {
             mapTicksSum += this->historicalLagInfoPerPlayer[player][entry][0];
             timeSum += this->historicalLagInfoPerPlayer[player][entry + 2][1];
         }
-        this->connectionLagInfoArray[player].average2 = timeSum / limit;
-        this->connectionLagInfoArray[player].average1 = mapTicksSum / limit;
+        this->connectionLagInfoArray[player].average2 = timeSum / historyLength;
+        this->connectionLagInfoArray[player].average1 = mapTicksSum / historyLength;
     }
 
 }
