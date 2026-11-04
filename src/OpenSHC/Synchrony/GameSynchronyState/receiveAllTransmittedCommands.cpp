@@ -7,7 +7,6 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -43,12 +42,14 @@ namespace Synchrony {
                 return;
             }
             if (this->DPLAYX_ReceivedPlayerID == DPID_SYSMSG) {
-                DPMSG_GENERIC const* const systemMessage = (DPMSG_GENERIC*)&this->DPLAY_ReceiveData;
+                DPMSG_GENERIC const* const systemMessage = (DPMSG_GENERIC const*)&this->DPLAY_ReceiveData;
                 DWORD const messageType = systemMessage->dwType;
                 if (messageType == DPSYS_CREATEPLAYERORGROUP) {
                     continue;
                 }
                 if (messageType == DPSYS_DESTROYPLAYERORGROUP) {
+                    // The leave reason removePlayerFromLobby sends on: 61, the player left (62 is a lag kick, 63 a
+                    // missed resync).
                     this->kickDueToLagStatusUnk = 61;
                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::removePlayerFromLobby, this)(
                         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
@@ -59,7 +60,8 @@ namespace Synchrony {
                     continue;
                 }
                 if (messageType == DPSYS_HOST) {
-                    // The host left and this player takes over. The original reaches the session through the global.
+                    // The host left and this player takes over. Setting isHost and the message through the global
+                    // instance is needed for the match.
                     DAT_GameSynchronyState::instance.isHost = TRUE;
                     this->DAT_HashCountdown = 2;
                     this->timeSkirmishGameStart = timeGetTime();
@@ -67,6 +69,7 @@ namespace Synchrony {
                         this->HASH_HashTotal[player] = 0;
                         this->DAT_PlayerMatchTimes[player] = 0;
                     }
+                    // "You are now Host"
                     strcpy(DAT_GameSynchronyState::instance.receivedChatMessage,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 60));
@@ -80,6 +83,7 @@ namespace Synchrony {
                             DAT_GameSynchronyState::ptr)();
                     }
                 } else {
+                    // Any other system message is formatted into a debug text that nothing reads.
                     char text[100];
                     // "DP SYS Message: %x"
                     MACRO_CALL(OS_Func::_sprintf)(text, s_DP_SYS_Message___x_005a74c0, messageType);
@@ -95,7 +99,7 @@ namespace Synchrony {
                     ((byte*)&this->DPLAY_ReceiveData.packet)[i] = ((byte*)&this->DPLAY_ReceiveData.packet)[i + 1];
                 }
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::decompressTooLongPacketData, this)(
-                    this->DPLAY_ReceiveData.packet.payload + 1, this->DPLAY_ReceiveData.packet.payload);
+                    this->DPLAY_ReceiveData.prefixedPacket.packet.payload, this->DPLAY_ReceiveData.packet.payload);
             }
             this->receivedCommandMapTimeInTicks = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2, DAT_LowLevelMemory::ptr)(
