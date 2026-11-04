@@ -34,7 +34,7 @@ void Rendering::ApplyBlending(int blendLevel)
     short* sourceTable;
     char* source = (char*)DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
     if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
-        offsets = DAT_BlendingDefinedData::instance.field164_0x27fc;
+        offsets = DAT_BlendingDefinedData::instance.field_0x27fc;
         int const drawY
             = DAT_RenderMap_DrawSomeY::instance + (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance);
         if (drawY < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start
@@ -190,8 +190,8 @@ void Rendering::ApplyBlending(int blendLevel)
         return;
     }
 
-    offsets = DAT_BlendingDefinedData::instance.field166_0x2dfc;
-    int* evenRowOffsets = DAT_BlendingDefinedData::instance.field165_0x2bfc;
+    offsets = DAT_BlendingDefinedData::instance.field_0x2dfc;
+    int* evenRowOffsets = DAT_BlendingDefinedData::instance.field_0x2bfc;
     int const drawY = DAT_RenderMap_DrawSomeY::instance + (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance);
     if (drawY < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start
         || drawY >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
