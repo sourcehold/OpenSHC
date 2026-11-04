@@ -36013,7 +36013,7 @@ SHC_3BB0A8C1_0x004D8DC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D8DF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D8EC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D8EC0 | 35.2% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004D91D0 | 0.0% | Pending
 
