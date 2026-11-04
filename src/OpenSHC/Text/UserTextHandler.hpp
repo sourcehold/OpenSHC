@@ -80,7 +80,7 @@ namespace Text {
 
         void clearEntry(int param_1);
 
-        void copyIntoTextArray(char* param_1);
+        void copyIntoTextArray(char const* text);
 
         int isTextInputAtCapacity();
 
