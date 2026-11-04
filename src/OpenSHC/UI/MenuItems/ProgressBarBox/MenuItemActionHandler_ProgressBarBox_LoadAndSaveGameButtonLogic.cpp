@@ -25,11 +25,11 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
@@ -65,14 +65,15 @@ namespace UI {
                 && DAT_GameSynchronyState::instance.saveRelated) {
                 return;
             }
-            char fileName[1008];
+            // The original copies the name and appends the extension inline, so the macros are used here.
+            char fileName[1008]; // the size of the original's buffer
             switch (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter) {
             case 32:
             case 46:
                 // save
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    2);
+                    OpenSHC::Text::TAIT_TWO__FILTER_A);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 if (DAT_MenuTextInputState::instance.field46_0xac) {
                     strcpy(fileName,
@@ -115,7 +116,7 @@ namespace UI {
                 }
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    9);
+                    OpenSHC::Text::TAIT_NINE__FILTER_B);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
                     OpenSHC::Audio::SFX::SEID_GENERAL_SAVING);
@@ -149,7 +150,7 @@ namespace UI {
                             DAT_ResourceManager::ptr)(
                             DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
                     MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                        DAT_UserTextHandlerState::ptr)(2, fileName);
+                        DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_TWO__FILTER_A, fileName);
                     // ".tmp"
                     strcat(fileName, S__TMP_005A75A8);
                     MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
@@ -161,7 +162,7 @@ namespace UI {
                         if (DAT_GameSynchronyState::instance.isHost) {
                             strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
                             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                                DAT_UserTextHandlerState::ptr)(2, fileName);
+                                DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_TWO__FILTER_A, fileName);
                             // ".msv"
                             strcat(fileName, S__MSV_005A7498);
                             MACRO_CALL_MEMBER(
@@ -171,7 +172,7 @@ namespace UI {
                         } else {
                             strcpy(fileName, DAT_GameSynchronyState::instance.shortMapName);
                             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                                DAT_UserTextHandlerState::ptr)(2, fileName);
+                                DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_TWO__FILTER_A, fileName);
                             // ".msv"
                             strcat(fileName, S__MSV_005A7498);
                             MACRO_CALL_MEMBER(
@@ -185,7 +186,7 @@ namespace UI {
                                 DAT_ResourceManager::ptr)(
                                 DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
                         MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                            DAT_UserTextHandlerState::ptr)(2, fileName);
+                            DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_TWO__FILTER_A, fileName);
                         // ".sav"
                         strcat(fileName, S__SAV_005A75A0);
                         MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,
@@ -197,7 +198,7 @@ namespace UI {
                             DAT_ResourceManager::ptr)(
                             DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[index - 1]));
                     MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                        DAT_UserTextHandlerState::ptr)(2, fileName);
+                        DAT_UserTextHandlerState::ptr)(OpenSHC::Text::TAIT_TWO__FILTER_A, fileName);
                     // ".map"
                     strcat(fileName, S__MAP_005A2294);
                     MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName,

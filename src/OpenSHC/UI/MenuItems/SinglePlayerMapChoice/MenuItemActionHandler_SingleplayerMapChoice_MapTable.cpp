@@ -11,7 +11,6 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_00b95b74.hpp"
@@ -39,7 +38,8 @@ namespace UI {
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
         {
             int* piVar4;
-            char fileName[1008];
+            // The original copies the name and appends the extension inline, so the macros are used here.
+            char fileName[1008]; // the size of the original's buffer
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1
                 >= DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber) {
                 return;
