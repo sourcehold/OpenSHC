@@ -92,7 +92,7 @@ namespace Synchrony {
         void* DPLAYX_Connection; // 0x00000698 length: 4
         DPID DPLAYX_ReceivedPlayerID; // 0x0000069C length: 4
         DPID DPLAY_ToID; // 0x000006A0 length: 4
-        undefined4 DPLAYX_PlayerHandle; // 0x000006A4 length: 4
+        DPID DPLAYX_PlayerHandle; // 0x000006A4 length: 4
         int currentPlayerFullIDArray[9]; // 0x000006A8 length: 36
         int DAT_CurrentPlayerFullIDArray2[9]; // 0x000006CC length: 36
         int somePlayerRelatedArray[9]; // 0x000006F0 length: 36
