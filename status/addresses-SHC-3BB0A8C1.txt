@@ -67545,7 +67545,7 @@ SHC_3BB0A8C1_0x0057B9BD | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057B9BE | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0057B9C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0057B9C0 | 91.3% | the original's joke-flag addresses carry no symbol (they are FLAG_JokeAIMessageArray[i])
 
 SHC_3BB0A8C1_0x0057BE10 | 0.0% | Pending
 
