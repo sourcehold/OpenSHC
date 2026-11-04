@@ -5,7 +5,6 @@
 
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/GlobalAllocFlag.hpp"
 
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 #include "OpenSHC/Globals/GUID_DPAID_INet.hpp"
@@ -33,7 +32,7 @@ namespace Synchrony {
         char texts[3][200];
         DWORD port;
         DWORD elementCount;
-        if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, (GUID*)GUID_DPSPGUID_MODEM::ptr)) {
+        if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_MODEM::ptr)) {
             // Modem: the selected modem, if any, and the phone number.
             elements[0].guidDataType = GUID_DPAID_ServiceProvider::instance;
             elements[0].dwDataSize = sizeof(GUID);
@@ -54,7 +53,7 @@ namespace Synchrony {
             elements[elementCount].dwDataSize = strlen(texts[1]) + 1;
             elements[elementCount].lpData = texts[1];
             ++elementCount;
-        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, (GUID*)GUID_DPSPGUID_TCPIP::ptr)) {
+        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_TCPIP::ptr)) {
             // TCP/IP: the address and, when one is given, the port.
             elements[0].guidDataType = GUID_DPAID_ServiceProvider::instance;
             elements[0].dwDataSize = sizeof(GUID);
@@ -68,11 +67,12 @@ namespace Synchrony {
             port = (WORD)atol(
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(6));
             if ((WORD)port > 0) {
+                // fixme: the original never sets the port element's GUID (DPAID_INetPort).
                 elements[2].dwDataSize = sizeof(WORD);
                 elements[2].lpData = &port;
                 elementCount = 3;
             }
-        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, (GUID*)GUID_DPSPGUID_IPX::ptr)) {
+        } else if (MACRO_CALL(OS_Func::isEqualGUID)(&provider, GUID_DPSPGUID_IPX::ptr)) {
             elements[0].guidDataType = GUID_DPAID_ServiceProvider::instance;
             elements[0].dwDataSize = sizeof(GUID);
             elements[0].lpData = GUID_DPSPGUID_IPX::ptr;
@@ -87,7 +87,7 @@ namespace Synchrony {
         if (result != DPERR_BUFFERTOOSMALL) {
             return result;
         }
-        void* const address = GlobalLock(GlobalAlloc(WindowsHelper::Enums::GAF_GHND, size));
+        void* const address = GlobalLock(GlobalAlloc(GHND, size));
         if (address == NULL) {
             return DPERR_NOMEMORY;
         }
