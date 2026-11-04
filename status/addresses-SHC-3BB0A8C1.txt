@@ -22401,7 +22401,7 @@ SHC_3BB0A8C1_0x0047F6A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047F7E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047F860 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047F860 | 83.7% | register allocation: the original keeps a copy of x in its own stack slot
 
 SHC_3BB0A8C1_0x0047FB50 | 0.0% | Pending
 
