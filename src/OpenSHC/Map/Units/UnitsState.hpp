@@ -53,7 +53,7 @@ namespace Map {
             short selectedUnitsBitFlags[200]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
-            int field14_0x55c; // 0x0000055C length: 4
+            int field_0x55c; // 0x0000055C length: 4
             int unitIDSelectedCatapultOrTrebuchet; // 0x00000560 length: 4
             int selectionUnitType[27]; // 0x00000564 length: 108
             int selectionSlots[8]; // 0x000005D0 length: 32

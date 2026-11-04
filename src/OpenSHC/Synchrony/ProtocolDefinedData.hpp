@@ -20,13 +20,13 @@ namespace Synchrony {
     typedef struct ProtocolDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        int field4_0x4[12][2]; // 0x00000004 length: 96
-        int field5_0x64[39][3]; // 0x00000064 length: 468
+        int field_0x4[12][2]; // 0x00000004 length: 96
+        int field_0x64[39][3]; // 0x00000064 length: 468
         undefined1 padding_0x238[8]; // 0x00000238 length: 8
         char** insultWavFiles[21]; // 0x00000240 length: 84
         NoArgCallback* commandFunctions[120]; // 0x00000294 length: 480
-        int field16_0x474[32]; // 0x00000474 length: 128
-        char* field17_0x4f4; // 0x000004F4 length: 4
+        int field_0x474[32]; // 0x00000474 length: 128
+        char* field_0x4f4; // 0x000004F4 length: 4
 
     } ProtocolDefinedData;
 #pragma pack(pop)
