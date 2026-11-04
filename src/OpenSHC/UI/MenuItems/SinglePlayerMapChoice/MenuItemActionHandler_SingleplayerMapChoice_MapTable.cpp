@@ -65,7 +65,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                     DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
                         .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
-                            + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset - 1]));
+                            + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset]));
             // ".map"
             strcat(fileName, S__MAP_005A2294);
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
