@@ -39,7 +39,7 @@ namespace UI {
                 DAT_MenuHandlerState::instance.x + 316, top + 70, OpenSHC::Text::TTA_CENTER, 0, 18, FALSE, 0);
         }
         // the stock of the four foods
-        for (int food = 0; food < 4; food++) {
+        for (int food = 0; food < 4; ++food) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .currentResources[DAT_ARRAY_0061818c::instance[food]],

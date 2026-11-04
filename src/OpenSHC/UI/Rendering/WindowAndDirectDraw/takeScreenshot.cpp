@@ -49,7 +49,7 @@ namespace UI {
             fileHeader.bfSize
                 = this->numPixel_GameX_x_3_x_GameY_0x4c + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
             fileHeader.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-            for (uint i = 0; i < sizeof(fileHeader); i++) {
+            for (uint i = 0; i < sizeof(fileHeader); ++i) {
                 file << ((char*)&fileHeader)[i];
             }
 
@@ -63,15 +63,15 @@ namespace UI {
             infoHeader.biHeight = this->resolutionY;
             infoHeader.biCompression = BI_RGB;
             infoHeader.biSizeImage = this->numPixel_GameX_x_3_x_GameY_0x4c;
-            for (uint i = 0; i < sizeof(infoHeader); i++) {
+            for (uint i = 0; i < sizeof(infoHeader); ++i) {
                 file << ((char*)&infoHeader)[i];
             }
 
             // RGB565 rows, bottom-up, written as BGR24. The walking pointer and the named char locals are both
             // load-bearing: row[x] cost 10 points and passing the expressions directly cost 6 (quick_diff).
-            for (int y = this->resolutionY - 1; y >= 0; y--) {
+            for (int y = this->resolutionY - 1; y >= 0; --y) {
                 ushort* pixelPtr = this->surfacePointer_screenMenu + this->resolutionX * y;
-                for (int x = 0; x < this->resolutionX; x++) {
+                for (int x = 0; x < this->resolutionX; ++x) {
                     int const pixel = *pixelPtr++;
                     char const blue = (char)pixel << 3;
                     file << blue;

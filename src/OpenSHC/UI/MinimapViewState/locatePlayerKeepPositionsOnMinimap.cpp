@@ -14,7 +14,7 @@ namespace UI {
         int firstRow = 0;
         int orientationOffset = 8;
         int divisor = 2;
-        for (int player = 0; player < 8; player++) {
+        for (int player = 0; player < 8; ++player) {
             this->DAT_MapU4B64.keepPositions[player].x = -1;
             this->DAT_MapU4B64.keepPositions[player].y = -1;
         }
@@ -40,7 +40,7 @@ namespace UI {
         }
         int const firstColumn = firstRow / 2;
         int rowBase = firstColumn * 401 + orientationOffset + 1;
-        for (int row = firstRow; row < lastRow - firstRow; row++) {
+        for (int row = firstRow; row < lastRow - firstRow; ++row) {
             // the screen tile rows are staggered: every other row is half a tile in and one tile longer
             int rowX;
             int rowLength;
@@ -59,7 +59,7 @@ namespace UI {
                 }
                 if (scale != 2 || (row * heightFactor & 1) == 0) {
                     int const lastColumn = columns / divisor - firstColumn;
-                    for (int column = firstColumn; column < lastColumn; column++) {
+                    for (int column = firstColumn; column < lastColumn; ++column) {
                         int const x = (column - firstColumn) * widthFactor + rowX;
                         int const buildingID
                             = DAT_TileMapState::instance.BuildingLayer[DAT_ViewportRenderState::instance

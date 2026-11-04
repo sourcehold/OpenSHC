@@ -21,7 +21,7 @@ namespace Synchrony {
         // perPlayer stays a walker. Naming the fields it reaches - finalGold, finalBuildingsBurned and the rest, all at
         // [player] - is measured at 88.5% -> 38.3%, and the last three alone at 88.5% -> 70.4%, so do not retry it.
         int* perPlayer = this->currentPlayerFullIDArray + 1;
-        for (int player = 1; player < 9; player++, perPlayer++) {
+        for (int player = 1; player < 9; ++player, ++perPlayer) {
             // perPlayer[27] is currentAIArray[player].
             if ((*perPlayer == -1) && (perPlayer[27] == 0)) {
                 this->finalResults.active[player] = 0;
@@ -55,8 +55,8 @@ namespace Synchrony {
                 perPlayer[271772] = 0;
             }
         }
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
+        for (int row = 0; row < 9; ++row) {
+            for (int column = 0; column < 9; ++column) {
                 this->finalResults.finalKillMatrix[row][column] = 0;
             }
         }

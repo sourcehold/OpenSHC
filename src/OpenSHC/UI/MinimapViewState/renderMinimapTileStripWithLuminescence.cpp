@@ -49,7 +49,7 @@ namespace UI {
         }
         int const firstColumn = firstRow / 2;
         int rowBase = firstColumn * 401 + orientationOffset + 1;
-        for (int row = firstRow; row < lastRow - firstRow; row++) {
+        for (int row = firstRow; row < lastRow - firstRow; ++row) {
             // the screen tile rows are staggered: every other row is half a tile in and one tile longer
             int rowX;
             int rowLength;
@@ -69,7 +69,7 @@ namespace UI {
                 if (scale != 2 || (row * heightFactor & 1) == 0) {
                     int const y = (row - firstRow) * heightFactor;
                     int const lastColumn = columns / divisor - firstColumn;
-                    for (int column = firstColumn - 2; column < lastColumn; column++) {
+                    for (int column = firstColumn - 2; column < lastColumn; ++column) {
                         int const x = (column - firstColumn) * widthFactor + rowX;
                         int const tile
                             = DAT_ViewportRenderState::instance.screenPointToTileNumber[column + rowBase - 8];
@@ -139,9 +139,9 @@ namespace UI {
                             color = (ushort)(blue & 0x1f | green | red);
                         }
                         if (scale == 1) {
-                            for (int dx = 0; dx < widthFactor; dx++) {
+                            for (int dx = 0; dx < widthFactor; ++dx) {
                                 if (0 <= x + dx && x + dx < columns * widthFactor) {
-                                    for (int dy = 0; dy < heightFactor; dy++) {
+                                    for (int dy = 0; dy < heightFactor; ++dy) {
                                         if ((short)color == 0) {
                                             color = this->minimapPixelBuffer[(y + dy) * 400 / 2 + x + dx];
                                         }
@@ -154,7 +154,7 @@ namespace UI {
                             for (int dx = x & 1; dx < widthFactor; dx += 2) {
                                 if (0 <= x + dx && x + dx < columns * widthFactor) {
                                     int const pixelX = (x + dx) / scale;
-                                    for (int dy = 0; dy < heightFactor; dy++) {
+                                    for (int dy = 0; dy < heightFactor; ++dy) {
                                         int const pixelY = (y + dy) / scale;
                                         if ((short)color == 0) {
                                             color = this->minimapPixelBuffer[pixelY * 400 / 2 + pixelX];

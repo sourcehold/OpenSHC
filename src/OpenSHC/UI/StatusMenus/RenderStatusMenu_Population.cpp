@@ -70,7 +70,7 @@ namespace UI {
             x + 340, top + 142, OpenSHC::Text::TTA_CENTER, 0, 19, FALSE, 0);
         // the vertical scale: 50 people per 75 pixels, doubled until the highest population fits
         int highest = 0;
-        for (int month = 0; month < months; month++) {
+        for (int month = 0; month < months; ++month) {
             if (DAT_GameState::instance.mapAndTime.playerPopulationStatistics[player][month] > highest) {
                 highest = DAT_GameState::instance.mapAndTime.playerPopulationStatistics[player][month];
             }
@@ -103,7 +103,7 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             0, x + 180, top + 120, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
         // a year label every five years
-        for (int label = 0; label <= 5; label++) {
+        for (int label = 0; label <= 5; ++label) {
             int firstYear = (DAT_GameState::instance.mapAndTime.populationIndex - 300) / 12;
             if (firstYear < 0) {
                 firstYear = 0;
@@ -114,7 +114,7 @@ namespace UI {
         }
         // one bar per month
         if (months <= 300) {
-            for (int month = 0; month < months; month++) {
+            for (int month = 0; month < months; ++month) {
                 short const population = DAT_GameState::instance.mapAndTime.playerPopulationStatistics[player][month];
                 if (population > 0) {
                     int const height = population * 75 / (scale * 50);

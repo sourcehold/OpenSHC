@@ -125,7 +125,7 @@ namespace Rendering {
         // FUNCTION: STRONGHOLDCRUSADER 0x00408FC0
         void BinkControlClass::copyBinkToVideoBuffer(dword videoTarget)
         {
-            for (int binkObjIndex = 0; binkObjIndex < 2; binkObjIndex++) {
+            for (int binkObjIndex = 0; binkObjIndex < 2; ++binkObjIndex) {
                 copyBinkToVideoBuffer_copyFrame(this, binkObjIndex, videoTarget);
             }
         }

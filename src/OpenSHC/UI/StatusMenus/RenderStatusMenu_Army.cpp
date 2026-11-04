@@ -53,7 +53,7 @@ namespace UI {
             groupSize = 9;
         }
         // an icon and the head count of each unit type in the group
-        for (int i = 0; i < groupSize; i++) {
+        for (int i = 0; i < groupSize; ++i) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
                 DAT_TextureRenderCoreObject::ptr)(firstGroupIcon + i + 4, x + 85 + i * 46, top + 40);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(

@@ -17,7 +17,7 @@ namespace Synchrony {
         this->someIndex = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->selectedGameCommands), 0, this->selectedGameCommands);
-        for (int command = this->gameCommandID; command < 200; command++) {
+        for (int command = this->gameCommandID; command < 200; ++command) {
             // The command has not been processed yet, should be processed, and its time has come.
             if (this->DAT_GameCommandArray[command].stateUnk != 0
                 && (char)this->DAT_GameCommandArray[command].stateUnk < 10
@@ -43,7 +43,7 @@ namespace Synchrony {
                 }
                 pass++;
                 swapped = 0;
-                for (int i = 1; i < this->someIndex; i++) {
+                for (int i = 1; i < this->someIndex; ++i) {
                     int const nextPlayerID = this->selectedGameCommands[i][1];
                     int const commandID = this->selectedGameCommands[i - 1][0];
                     int const playerID = this->selectedGameCommands[i - 1][1];
