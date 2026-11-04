@@ -68,18 +68,17 @@ namespace UI {
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
             void* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
             void* bitmapsFaces_0x94; // 0x00000094 length: 4
-            int bitmapFaceSizes[20]; // 0x00000098 length: 80
-            int unknownPlayerDependentRenderValue[8]; // 0x000000E8 length: 32
-            int field71_0x108; // 0x00000108 length: 4
-            int field72_0x10c; // 0x0000010C length: 4
-            int field73_0x110; // 0x00000110 length: 4
-            int field74_0x114; // 0x00000114 length: 4
-            int field75_0x118; // 0x00000118 length: 4
-            int field76_0x11c; // 0x0000011C length: 4
-            int field77_0x120; // 0x00000120 length: 4
-            int field78_0x124; // 0x00000124 length: 4
-            int field79_0x128; // 0x00000128 length: 4
-            int field80_0x12c; // 0x0000012C length: 4
+            int bitmapFaceSizes[28]; // 0x00000098 length: 112
+            int field70_0x108; // 0x00000108 length: 4
+            int field71_0x10c; // 0x0000010C length: 4
+            int field72_0x110; // 0x00000110 length: 4
+            int field73_0x114; // 0x00000114 length: 4
+            int field74_0x118; // 0x00000118 length: 4
+            int field75_0x11c; // 0x0000011C length: 4
+            int field76_0x120; // 0x00000120 length: 4
+            int field77_0x124; // 0x00000124 length: 4
+            int field78_0x128; // 0x00000128 length: 4
+            int field79_0x12c; // 0x0000012C length: 4
             undefined1 padding_0x130[1004]; // 0x00000130 length: 1004
             GMFileHeaderColorpalette gmFileHeaderColorpaletteArray[240]; // 0x0000051C length: 1249920
             char gmFileNameArray_UNUSEDUnk_0x13179c[240][1001]; // 0x0013179C length: 240240
