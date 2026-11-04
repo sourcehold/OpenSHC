@@ -11,7 +11,7 @@
 #include "guiddef.h"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF3D1C
-// StructResolver::Instance<GUID,14630172>::instance
+// StructResolver::Instance<_GUID,14630172>::instance
 
 namespace OpenSHC {
 
