@@ -29,8 +29,6 @@ namespace UI {
             int iVar6;
             BOOLEnum BVar7;
             int iVar9;
-            undefined4 uVar10;
-            HelpTextToken token;
             switch (param_1) {
             case -1:
                 iVar4 = DAT_TextEditorState::instance.helpContentScrollOffsetY;
@@ -158,8 +156,11 @@ namespace UI {
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 3]
                             = L'\x01';
-                        token = OpenSHC::Text::Enums::HTT_PIC;
-                        goto LAB_0046264e;
+                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                            DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_PIC);
+                        DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                        return;
                     }
                 }
                 break;
@@ -191,8 +192,11 @@ namespace UI {
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
                             = L'\x04';
-                        token = OpenSHC::Text::Enums::HTT_LINK;
-                        goto LAB_0046264e;
+                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                            DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_LINK);
+                        DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                        return;
                     }
                 }
                 break;
@@ -208,8 +212,11 @@ namespace UI {
                     DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_ENDLINK);
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex] = L'\x05';
-                token = OpenSHC::Text::Enums::HTT_ENDLINK;
-                goto LAB_0046264e;
+                iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                    DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_ENDLINK);
+                DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                return;
             case 8:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
                     iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
@@ -244,8 +251,11 @@ namespace UI {
                     DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_CENTRE);
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex] = L'\a';
-                token = OpenSHC::Text::Enums::HTT_CENTRE;
-                goto LAB_0046264e;
+                iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                    DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_CENTRE);
+                DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                return;
             case 10:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
                     iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
@@ -258,13 +268,10 @@ namespace UI {
                     DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_ENDCENTRE);
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex] = L'\b';
-                token = OpenSHC::Text::Enums::HTT_ENDCENTRE;
-            LAB_0046264e:
                 iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                    DAT_TextEditorState::ptr)(token);
+                    DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_ENDCENTRE);
                 DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
                 return;
             case 11:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
@@ -274,7 +281,6 @@ namespace UI {
                     DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
                     DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_NONE;
                 }
-                uVar10 = 3;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_insertSpaceForHelpTextToken,
                     DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_COLOUR);
                 DAT_TextEditorState::instance
@@ -282,7 +288,11 @@ namespace UI {
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 1]
                     = L'\x01';
-                goto LAB_004628ba;
+                DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
+                    = (WCHAR)OpenSHC::Text::Enums::HTT_COLOUR;
+                DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_COLOUR;
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                return;
             case 12:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
                     iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
@@ -291,14 +301,17 @@ namespace UI {
                     DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
                     DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_NONE;
                 }
-                uVar10 = 10;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_insertSpaceForHelpTextToken,
                     DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_SOUND);
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex] = L'\n';
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 1] = L'\v';
-                goto LAB_004628ba;
+                DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
+                    = (WCHAR)OpenSHC::Text::Enums::HTT_LINKCOLOUR;
+                DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_LINKCOLOUR;
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                return;
             case 13:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
                     iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
@@ -326,8 +339,11 @@ namespace UI {
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
                             = L'\v';
-                        token = OpenSHC::Text::Enums::HTT_STRING;
-                        goto LAB_0046264e;
+                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                            DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_STRING);
+                        DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                        return;
                     }
                 }
                 break;
@@ -339,21 +355,16 @@ namespace UI {
                     DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
                     DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_NONE;
                 }
-                uVar10 = 12;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_insertSpaceForHelpTextToken,
-                    DAT_TextEditorState::ptr)((OpenSHC::Text::Enums::HelpTextToken)(OpenSHC::Text::Enums::HTT_ENDCENTRE
-                    | OpenSHC::Text::Enums::HTT_LINK));
+                    DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_STRING);
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex] = L'\f';
                 DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 1] = L'\0';
-            LAB_004628ba:
-                DAT_TextEditorState::instance
-                    .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
-                    = (WCHAR)uVar10;
-                DAT_TextEditorState::instance.pendingTokenTypeToSkip = uVar10;
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
+                    = (WCHAR)OpenSHC::Text::Enums::HTT_STRING;
+                DAT_TextEditorState::instance.pendingTokenTypeToSkip = OpenSHC::Text::Enums::HTT_STRING;
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
                 return;
             case 15:
                 if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != OpenSHC::Text::Enums::HTT_NONE) {
@@ -374,20 +385,21 @@ namespace UI {
                             DAT_TextEditorState::ptr)(DAT_ResourceManager::instance.strFileTitle);
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_insertSpaceForHelpTextToken,
                             DAT_TextEditorState::ptr)(
-                            (OpenSHC::Text::Enums::HelpTextToken)(OpenSHC::Text::Enums::HTT_ENDCENTRE
-                                | OpenSHC::Text::Enums::HTT_NEWPARAGRAPH));
+                            OpenSHC::Text::Enums::HTT_INCLUDE);
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex]
                             = L'\x0e';
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 1]
                             = (WCHAR)iVar6;
-                        token = (OpenSHC::Text::Enums::HelpTextToken)(OpenSHC::Text::Enums::HTT_ENDCENTRE
-                            | OpenSHC::Text::Enums::HTT_NEWPARAGRAPH);
                         DAT_TextEditorState::instance
                             .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex + 2]
                             = L'\x0e';
-                        goto LAB_0046264e;
+                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                            DAT_TextEditorState::ptr)(OpenSHC::Text::Enums::HTT_INCLUDE);
+                        DAT_TextEditorState::instance.activeHelpHotspotIndex += iVar6;
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                        return;
                     }
                 }
                 break;
