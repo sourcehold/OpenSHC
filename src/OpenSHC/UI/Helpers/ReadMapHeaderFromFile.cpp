@@ -6,7 +6,6 @@
 #include "OpenSHC/IO/FilePackager.func.hpp"
 #include "OpenSHC/IO/ResourceManager.func.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"

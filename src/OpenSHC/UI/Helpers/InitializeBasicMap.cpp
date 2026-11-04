@@ -9,7 +9,6 @@
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"

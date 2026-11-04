@@ -8,7 +8,6 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-macros.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"

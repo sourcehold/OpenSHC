@@ -10,7 +10,6 @@
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00df5540.hpp"
@@ -45,7 +44,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    // Runs the tutorial box once per frame: speech, the fades between steps, and whether the step is done.
     // FUNCTION: STRONGHOLDCRUSADER 0x004BD1B0
     void Helpers::UpdateTutorialStepAndProgress()
     {
