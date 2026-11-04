@@ -20975,7 +20975,7 @@ SHC_3BB0A8C1_0x0046CEF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046CF10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046CF90 | 88.7% | the float constants live at other addresses; LARGE_INTEGER is spelled _LARGE_INTEGER on our side
+SHC_3BB0A8C1_0x0046CF90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046D070 | 100.0% | Reimplemented
 
@@ -36183,7 +36183,7 @@ SHC_3BB0A8C1_0x004DAE00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DAE90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DAF50 | 96.9% | only the loop end address differs (the same address under another symbol)
+SHC_3BB0A8C1_0x004DAF50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DAFB0 | 0.0% | Pending
 
@@ -36191,7 +36191,7 @@ SHC_3BB0A8C1_0x004DB0D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DB180 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DB210 | 98.3% | only the loop end address differs (the same address under another symbol)
+SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DB300 | 71.1% | register scheduling of the parameter stores (the 100.0 is read from a shared constant in the original)
 
@@ -36249,7 +36249,7 @@ SHC_3BB0A8C1_0x004DC134 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DC138 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DC140 | 97.9% | only the loop end address differs (the same address under another symbol)
+SHC_3BB0A8C1_0x004DC140 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DC1C0 | 0.0% | Pending
 
@@ -67545,7 +67545,7 @@ SHC_3BB0A8C1_0x0057B9BD | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057B9BE | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0057B9C0 | 91.3% | the original's joke-flag addresses carry no symbol (they are FLAG_JokeAIMessageArray[i])
+SHC_3BB0A8C1_0x0057B9C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057BE10 | 0.0% | Pending
 
