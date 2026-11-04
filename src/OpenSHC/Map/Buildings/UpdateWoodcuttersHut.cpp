@@ -37,7 +37,7 @@ namespace Map {
             return;
         }
         int const buildingID = DAT_CurrentBuildingID::instance;
-        if (DAT_BuildingsState::instance.buildings[buildingID].field204_0x2c8 != 0) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].field203_0x2c8 != 0) {
             DAT_BuildingsState::instance.buildings[buildingID].field208_0x2d4 = 0;
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].field208_0x2d4
