@@ -12,6 +12,7 @@ namespace UI {
         RGB15 TextureRenderCore::transformBGR24ToScreenColor(BGR24 color)
         {
             // The input is 0x00BBGGRR like a COLORREF; screen colors keep red in the top bits, so red moves up.
+            // 0x3e0 and 0x7e0 are the green bits of a 555 and a 565 screen color.
             // One exit: returning from each branch loses the match.
             RGB15 screenColor;
             if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_555) {

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
@@ -25,7 +26,8 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
             0, 0, 600, 800, COL_BLACK::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
-            DAT_ArrayOfStoredMenuStrings::instance[stringIndex], 15, 205, 525, 0xccfaff, 17, 0);
+            DAT_ArrayOfStoredMenuStrings::instance[stringIndex], 15, 205, 525, OpenSHC::Rendering::Colors::COL_CCFAFF,
+            17, 0);
         DAT_TextManagerObject::instance.textSurfaceTarget = previousTextTarget;
         DAT_PencilRenderCore::instance.surfaceTarget = previousPencilTarget;
         INT_00eb0e28::instance = DAT_TextManagerObject::instance.field1_0x4 + 215;

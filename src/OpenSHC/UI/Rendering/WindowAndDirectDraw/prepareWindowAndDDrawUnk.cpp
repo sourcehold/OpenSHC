@@ -21,7 +21,7 @@ namespace UI {
                 = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::initializeDirectDraw, this)();
             // I think it tries again with the default resolution of 800x600 (assuming the DAT_CurrentResolution is
             // right). If it fails again, it sets another flag and also returns. -TheRedDaemon
-            while (!this->drawingReady_0x0) {
+            for (; !this->drawingReady_0x0;) {
                 if (this->currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                     this->postWindowCloseMessage = 1;
                     break;

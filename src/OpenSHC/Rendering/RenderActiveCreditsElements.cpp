@@ -4,6 +4,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
@@ -121,7 +122,7 @@ void Rendering::RenderActiveCreditsElements()
                     color = 0;
                     break;
                 default:
-                    color = 0xccfaff;
+                    color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                     break;
                 }
                 if (element.fadeMode == 0) {

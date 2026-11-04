@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -38,11 +39,11 @@ namespace UI {
         }
         int color;
         if (displayedValue > 0) {
-            color = 0xff00;
+            color = OpenSHC::Rendering::Colors::COL_00FF00;
         } else if (displayedValue != 0) {
-            color = 0xff;
+            color = OpenSHC::Rendering::Colors::COL_0000FF;
         } else {
-            color = 0xb8eefb;
+            color = OpenSHC::Rendering::Colors::COL_B8EEFB;
         }
         DAT_TextManagerObject::instance.field8_0x20 = 1;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
