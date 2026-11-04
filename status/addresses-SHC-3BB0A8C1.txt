@@ -23081,7 +23081,7 @@ SHC_3BB0A8C1_0x00488010 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004880E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004882A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004882A0 | 91.9% | register allocation: the original computes both averages before storing them
 
 SHC_3BB0A8C1_0x00488480 | 0.0% | Pending
 
