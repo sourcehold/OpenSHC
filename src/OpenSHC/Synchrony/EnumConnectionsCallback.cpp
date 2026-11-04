@@ -17,10 +17,11 @@ namespace Synchrony {
     BOOLEnum __stdcall EnumConnectionsCallback(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
         LPCDPNAME lpName, DWORD dwFlags, LPVOID lpContext)
     {
-        // TCP/IP, IPX and modem keep the first three slots; any other provider is added after them.
+        // 10 is the length of guids and providerNames.
         if (DAT_GameSynchronyState::instance.scrollBarItemCount >= 10) {
             return FALSE;
         }
+        // TCP/IP, IPX and modem keep the first three slots; any other provider is added after them.
         int slot = DAT_GameSynchronyState::instance.scrollBarItemCount;
         if (MACRO_CALL(OS_Func::isEqualGUID)((GUID*)lpguidSP, GUID_DPSPGUID_TCPIP::ptr)) {
             slot = 0;
