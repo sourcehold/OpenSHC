@@ -212,7 +212,7 @@ namespace Synchrony {
             &GameSynchronyState::determineGameTicksToPerform)
         determineGameTicksToPerform;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, size_t, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00487C50, &GameSynchronyState::transmitCommand)
         transmitCommand;
 

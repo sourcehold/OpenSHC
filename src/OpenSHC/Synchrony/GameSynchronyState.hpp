@@ -457,7 +457,7 @@ namespace Synchrony {
         int determineGameTicksToPerform(int currentPlayerSlotID);
 
         void transmitCommand(byte commandCategory, undefined4 time, char* addressOfFullCommandObjectOrCommandParameters,
-            size_t size, undefined4 idTo);
+            int size, undefined4 idTo);
 
         void sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2);
 
