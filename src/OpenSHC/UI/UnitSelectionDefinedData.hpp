@@ -24,7 +24,7 @@ namespace UI {
         short BitMaskHelper2[16]; // 0x00000664 length: 32
         int UnitInstructionMoveDelay[200]; // 0x00000684 length: 800
         int UnitMoveDelay[200]; // 0x000009A4 length: 800
-        XYPair field1608_0xcc4[40]; // 0x00000CC4 length: 320
+        XYPair field_0xcc4[40]; // 0x00000CC4 length: 320
 
     } UnitSelectionDefinedData;
 #pragma pack(pop)

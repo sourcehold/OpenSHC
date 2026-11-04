@@ -60,32 +60,45 @@ def rows_at(ref):
     return rows
 
 
+RESOLVER = re.compile(r'MACRO_FUNCTION_RESOLVER\s*\(')
+RESOLVER_ADDR = re.compile(r'Address::(SHC_[0-9A-Fa-f]+_0x([0-9A-Fa-f]{8}))')
+
+
+def parse_resolvers(txt, path):
+    """-> {shc id: expected cpp path} for the resolvers in one .func.hpp text.
+
+    `path` is the header's repo-relative path; the cpp is expected in the folder
+    named after it. Kept separate from the walk below so status_regression.py
+    can run it on a header read out of a ref instead of the working tree.
+    """
+    base = path[: -len('.func.hpp')]
+    cpp_of = {}
+    for m in RESOLVER.finditer(txt):
+        i, depth = m.end() - 1, 0
+        while i < len(txt):
+            if txt[i] == '(':
+                depth += 1
+            elif txt[i] == ')':
+                depth -= 1
+                if depth == 0:
+                    break
+            i += 1
+        nm = re.match(r'\s*([A-Za-z_~][A-Za-z0-9_]*)\s*;', txt[i + 1 : i + 400])
+        a = RESOLVER_ADDR.search(txt[m.end() - 1 : i + 1])
+        if a and nm:
+            cpp_of[a.group(1)] = base + '/' + nm.group(1) + '.cpp'
+    return cpp_of
+
+
 def header_cpp_map():
     """-> {shc id: expected cpp path} from the resolvers in the working tree's headers."""
-    res_pat = re.compile(r'MACRO_FUNCTION_RESOLVER\s*\(')
-    addr_pat = re.compile(r'Address::(SHC_[0-9A-Fa-f]+_0x([0-9A-Fa-f]{8}))')
     cpp_of = {}
     for dirpath, dirs, files in os.walk(ROOT):
         for fn in files:
             if not fn.endswith('.func.hpp'):
                 continue
             p = os.path.join(dirpath, fn).replace(os.sep, '/')
-            base = p[: -len('.func.hpp')]
-            txt = open(p, encoding='utf-8', errors='replace').read()
-            for m in res_pat.finditer(txt):
-                i, depth = m.end() - 1, 0
-                while i < len(txt):
-                    if txt[i] == '(':
-                        depth += 1
-                    elif txt[i] == ')':
-                        depth -= 1
-                        if depth == 0:
-                            break
-                    i += 1
-                nm = re.match(r'\s*([A-Za-z_~][A-Za-z0-9_]*)\s*;', txt[i + 1 : i + 400])
-                a = addr_pat.search(txt[m.end() - 1 : i + 1])
-                if a and nm:
-                    cpp_of[a.group(1)] = base + '/' + nm.group(1) + '.cpp'
+            cpp_of.update(parse_resolvers(open(p, encoding='utf-8', errors='replace').read(), p))
     return cpp_of
 
 

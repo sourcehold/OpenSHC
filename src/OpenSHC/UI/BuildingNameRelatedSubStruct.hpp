@@ -17,7 +17,7 @@ namespace UI {
 
         int identifier1; // 0x00000000 length: 4
         int identifier2; // 0x00000004 length: 4
-        int field2_0x8; // 0x00000008 length: 4
+        int field_0x8; // 0x00000008 length: 4
 
     } BuildingNameRelatedSubStruct;
 #pragma pack(pop)

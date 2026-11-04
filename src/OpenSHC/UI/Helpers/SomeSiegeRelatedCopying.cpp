@@ -3,7 +3,7 @@
 #include "OpenSHC/Globals/DAT_SiegeInformationArray.hpp"
 #include "OpenSHC/Globals/DAT_SiegeInformationArray_2.hpp"
 #include "OpenSHC/Globals/DAT_SiegeRemainingPoints.hpp"
-#include "OpenSHC/Globals/INT_00b960b8.hpp"
+#include "OpenSHC/Globals/INT_ARRAY_00b960b8.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -17,7 +17,7 @@ namespace UI {
                 DAT_SiegeInformationArray::instance[unit][value] = setup[unit][value];
             }
         }
-        DAT_SiegeRemainingPoints::instance = INT_00b960b8::instance[slot];
+        DAT_SiegeRemainingPoints::instance = INT_ARRAY_00b960b8::instance[slot];
     }
 
 }

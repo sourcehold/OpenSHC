@@ -57,7 +57,7 @@ namespace UI {
         short clicked; // 0x00000034 length: 2
         ushort iconDeactivatedUnk_0x36; // 0x00000036 length: 2
         short unknownZero; // 0x00000038 length: 2
-        short field16_0x3a; // 0x0000003A length: 2
+        short field_0x3a; // 0x0000003A length: 2
         MenuItemSecondItemTypeData secondItemTypeData; // 0x0000003C length: 16
         Menu* menuPointer; // 0x0000004C length: 4
 

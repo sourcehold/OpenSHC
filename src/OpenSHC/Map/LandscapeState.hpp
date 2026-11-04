@@ -32,10 +32,10 @@ namespace Map {
     // SIZE: 0x0006B700
     class LandscapeState {
     public:
-        undefined4 field0_0x0; // 0x00000000 length: 4
-        undefined4 field1_0x4; // 0x00000004 length: 4
+        undefined4 field_0x0; // 0x00000000 length: 4
+        undefined4 field_0x4; // 0x00000004 length: 4
         undefined4 DAT_TotalOrganisms; // 0x00000008 length: 4
-        int field3_0xc; // 0x0000000C length: 4
+        int field_0xc; // 0x0000000C length: 4
         int maxTreeCount; // 0x00000010 length: 4
         undefined4 x; // 0x00000014 length: 4
         undefined4 y; // 0x00000018 length: 4

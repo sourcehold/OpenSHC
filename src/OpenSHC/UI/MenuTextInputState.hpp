@@ -62,9 +62,9 @@ namespace UI {
         undefined4 lastListClickTime; // 0x00000090 length: 4
         undefined4 progressBarX; // 0x00000094 length: 4
         undefined4 progressBarY; // 0x00000098 length: 4
-        undefined4 field42_0x9c; // 0x0000009C length: 4
+        undefined4 field_0x9c; // 0x0000009C length: 4
         int previewedListIndex; // 0x000000A0 length: 4
-        int field44_0xa4; // 0x000000A4 length: 4
+        int field_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
         int DAT_ArrayOfMapU3EndInt2[501]; // 0x000000AC length: 2004
         int DAT_ArrayOfMapIndices[501]; // 0x00000880 length: 2004

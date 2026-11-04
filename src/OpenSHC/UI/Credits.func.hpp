@@ -84,8 +84,8 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004DAB80, &OpenSHC::UI::Credits::AppendCreditsBinkVideoWithAudioCommand)
         AppendCreditsBinkVideoWithAudioCommand;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false,
-            Address::SHC_3BB0A8C1_0x004DABF0, &OpenSHC::UI::Credits::AppendCreditsSoundStreamCommand)
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DABF0,
+            &OpenSHC::UI::Credits::AppendCreditsSoundStreamCommand)
         AppendCreditsSoundStreamCommand;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2, int param_3, int param_4, int param_5,

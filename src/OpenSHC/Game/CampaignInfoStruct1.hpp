@@ -20,7 +20,7 @@ namespace Game {
     typedef struct CampaignInfoStruct1 {
 
         CampaignInfoSubStructure1 sub; // 0x00000000 length: 84
-        undefined4 field1_0x54; // 0x00000054 length: 4
+        undefined4 field_0x54; // 0x00000054 length: 4
 
     } CampaignInfoStruct1;
 #pragma pack(pop)
