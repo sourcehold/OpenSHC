@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Units/Pathfinding/DestinationNeededEnum.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -19,8 +20,8 @@ namespace Game {
     {
         uint const entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
         uint const entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        if (entryX > 399 || entryY > 399
-            || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[entryY * 400 + entryX] == 0) {
+        if (entryX > Map::MC_MAP_XY_LIMIT_INCLUSIVE || entryY > Map::MC_MAP_XY_LIMIT_INCLUSIVE
+            || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[entryY * Map::MC_MAP_XY_LIMIT + entryX] == 0) {
             return;
         }
         int const playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;

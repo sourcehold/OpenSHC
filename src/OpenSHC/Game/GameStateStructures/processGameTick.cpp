@@ -2,7 +2,6 @@
 
 #include "OpenSHC/AI/AIVState.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
@@ -80,7 +79,7 @@ namespace Game {
                 }
             } else {
                 if (DAT_GameSynchronyState::instance.syncStatus == 10) {
-                    DAT_GameSynchronyState::instance.syncStatus = 0xb;
+                    DAT_GameSynchronyState::instance.syncStatus = 11;
                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                         Commands::GCT_SHARE_GAME_STATE_PARTIAL_HASHES);
                     return;

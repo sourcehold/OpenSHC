@@ -1,6 +1,5 @@
 #include "../GameStateStructures.func.hpp"
 
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"

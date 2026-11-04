@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"

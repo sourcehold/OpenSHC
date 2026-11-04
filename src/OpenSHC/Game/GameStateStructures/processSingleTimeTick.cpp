@@ -1,7 +1,6 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Audio/SFX.func.hpp"
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"

@@ -1,6 +1,5 @@
 #include "../GameStateStructures.func.hpp"
 
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"

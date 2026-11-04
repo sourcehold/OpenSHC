@@ -1,6 +1,5 @@
 #include "../GameStateStructures.func.hpp"
 
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
@@ -35,27 +34,27 @@ namespace Game {
         }
         MACRO_CALL(Map::Version_Func::ValidateLadyAndJesterUnitRefs)();
         MACRO_CALL_MEMBER(GameStateStructures_Func::recountStablesAndHorses, this)();
-        if ((int)receivedMapVersion >= 0x9a) {
+        if (receivedMapVersion >= 154) {
             MACRO_CALL_MEMBER(
                 Map::MapPropertiesState_Func::pruneInvalidEventTriggerLinks, DAT_MapPropertiesState::ptr)();
         }
         if (receivedMapVersion != packagerMapVersion) {
-            if ((int)receivedMapVersion < 0x90) {
+            if (receivedMapVersion < 144) {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::clearActiveClimbDataOfType6And7,
                     DAT_PathFindingState::ptr)();
             }
-            if ((int)receivedMapVersion < 0x7a) {
+            if (receivedMapVersion < 122) {
                 MACRO_CALL(Map::Version_Func::InitPopularityAndRecruitableDefaults)();
             }
-            if ((int)receivedMapVersion < 0x7b) {
+            if (receivedMapVersion < 123) {
                 MACRO_CALL(Map::Version_Func::ResetTeams)();
             }
-            if ((int)receivedMapVersion < 0x7f) {
+            if (receivedMapVersion < 127) {
                 for (int buildingType = 0; buildingType < 100; ++buildingType) {
                     DAT_MapPropertiesState::instance.buildingAvailability[buildingType] = 1;
                 }
             }
-            if ((int)receivedMapVersion < 0x82) {
+            if (receivedMapVersion < 130) {
                 DAT_GameState::instance.mapAndTime.populationIndex = 0;
                 memset(DAT_GameState::instance.mapAndTime.lionLocationsXY, 0,
                     sizeof(DAT_GameState::instance.mapAndTime.lionLocationsXY));
@@ -63,7 +62,7 @@ namespace Game {
                 DAT_GameState::instance.mapAndTime.unitLadyRelated = 0;
                 DAT_GameState::instance.mapAndTime.unitJesterRelated = 0;
             }
-            if ((int)receivedMapVersion < 0x85) {
+            if (receivedMapVersion < 133) {
                 for (int unitID = 1; unitID < 2500; ++unitID) {
                     if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_INVISIBLE
                         && DAT_UnitsState::instance.units[unitID].unitType != (UnitType)0) {
@@ -74,7 +73,7 @@ namespace Game {
                     DAT_GameState::instance.mapAndTime.scenarioEventTimers[index] = 0;
                 }
             }
-            if ((int)receivedMapVersion < 0x87) {
+            if (receivedMapVersion < 135) {
                 // the four ten-entry arrays are reset together, exactly as the original binary does
                 for (int index = 0; index < 10; ++index) {
                     DAT_GameState::instance.mapAndTime.field2_0x8[index] = 0;
@@ -83,16 +82,16 @@ namespace Game {
                     DAT_GameState::instance.mapAndTime.field5_0x80[index] = -1;
                 }
             }
-            if ((int)receivedMapVersion < 0x88) {
+            if (receivedMapVersion < 136) {
                 DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown = 0;
                 DAT_GameState::instance.mapAndTime.unk_signpostDistance = 30;
             }
-            if ((int)receivedMapVersion < 0x8a) {
+            if (receivedMapVersion < 138) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     DAT_GameState::instance.playerDataArray[playerID].aiControlStatusRelated = -1000;
                 }
             }
-            if ((int)receivedMapVersion < 0x8b) {
+            if (receivedMapVersion < 139) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     int cowCount = 0;
                     DAT_GameState::instance.playerDataArray[playerID].counter = 0;
@@ -120,7 +119,7 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0x8d) {
+            if (receivedMapVersion < 141) {
                 for (int index = 0; index < 10; ++index) {
                     DAT_GameState::instance.mapAndTime.field2_0x8[index]
                         = DAT_GameState::instance.mapAndTime.field3124_0x26d4[index];
@@ -132,7 +131,7 @@ namespace Game {
                         = DAT_GameState::instance.mapAndTime.field3154_0x274c[index];
                 }
             }
-            if ((int)receivedMapVersion < 0x8f && DAT_GameCore::instance.gameMode_2 == GM_CAMPAIGN_MISSION) {
+            if (receivedMapVersion < 143 && DAT_GameCore::instance.gameMode_2 == GM_CAMPAIGN_MISSION) {
                 for (int unitID = 1; unitID < 2500; ++unitID) {
                     if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_INVISIBLE
                         && ((DAT_UnitsState::instance.units[unitID].unitType == Map::Units::UT_JESTER
@@ -143,22 +142,22 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0x94) {
+            if (receivedMapVersion < 148) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     for (int foodType = 0; foodType < 4; ++foodType) {
                         DAT_GameState::instance.playerDataArray[playerID].isFoodTypeBanned[foodType] = 0;
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0x99) {
+            if (receivedMapVersion < 153) {
                 MACRO_CALL_MEMBER(
                     Map::MapPropertiesState_Func::resetEuroUnitRestrictions, DAT_MapPropertiesState::ptr)();
             }
-            if ((int)receivedMapVersion < 0x9a) {
+            if (receivedMapVersion < 154) {
                 MACRO_CALL_MEMBER(
                     Map::MapPropertiesState_Func::removeProcessedInvasionEvents, DAT_MapPropertiesState::ptr)();
             }
-            if ((int)receivedMapVersion < 0x9c) {
+            if (receivedMapVersion < 156) {
                 for (int playerID = 0; playerID < 9; ++playerID) {
                     DAT_GameState::instance.playerDataArray[playerID].sumOfTotalEnemyUnitsCount
                         = DAT_GameState::instance.playerDataArray[playerID].enemies;
@@ -166,7 +165,7 @@ namespace Game {
                 DAT_GameState::instance.mapAndTime.skirmishStrongWalls = 0;
                 DAT_GameState::instance.mapAndTime.skirmishAlliances = 0;
             }
-            if ((int)receivedMapVersion < 0x9e) {
+            if (receivedMapVersion < 158) {
                 for (int playerID = 0; playerID < 9; ++playerID) {
                     for (int assemblyPoint = 0; assemblyPoint < 7; ++assemblyPoint) {
                         DAT_GameState::instance.playerDataArray[playerID].barracksAssemblyPoints[assemblyPoint].x = 0;
@@ -174,7 +173,7 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0xa2) {
+            if (receivedMapVersion < 162) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     DAT_GameState::instance.mapAndTime.playerBuildingInfoIndex[playerID] = 0;
                     for (int buildingSlot = 0; buildingSlot < 2000; ++buildingSlot) {
@@ -182,7 +181,7 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0xa3) {
+            if (receivedMapVersion < 163) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     for (int enemySlot = 0; enemySlot < DAT_GameState::instance.playerDataArray[playerID].enemies;
                         ++enemySlot) {
@@ -193,18 +192,18 @@ namespace Game {
                     }
                 }
             }
-            if ((int)receivedMapVersion < 0xa4) {
+            if (receivedMapVersion < 164) {
                 this->mapAndTime.dayTicks = 100;
                 this->mapAndTime.weekTicks = 100;
                 this->mapAndTime.monthTicks = 100;
             }
-            if ((int)receivedMapVersion < 0xa6) {
+            if (receivedMapVersion < 166) {
                 this->mapAndTime.skirmishNoCowThrowing = 0;
                 this->mapAndTime.skirmishNoDogs = 0;
                 this->mapAndTime.skirmishNoRushTicks = 0;
                 this->mapAndTime.skirmishNoRushTicksLeft = 0;
             }
-            if ((int)receivedMapVersion < 0xa8) {
+            if (receivedMapVersion < 168) {
                 for (int playerID = 0; playerID < 9; ++playerID) {
                     for (int assemblyPoint = 0; assemblyPoint < 7; ++assemblyPoint) {
                         DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[assemblyPoint][0] = 0;

@@ -23,13 +23,14 @@ namespace Game {
             if (this->playerDataArray[playerID].playerDeathRelated != 0) {
                 continue;
             }
-            // currentPlayerFullIDArray and currentAIArray are two of four parallel int[9] arrays laid out
-            // back to back, so the AI flag for this player sits a constant number of ints past its slot. The
-            // original walks one pointer over currentPlayerFullIDArray and reaches the AI flag off it: MSVC
-            // anchors the loop pointer on whichever array is compared last, so naming currentAIArray in the
-            // comparison moves the anchor onto it and costs the match (measured: quick_diff 0.9773 -> 0.9318).
-            // The distance between the two arrays is constant-folded, so spelling it out this way is free and
-            // cannot go stale if the layout changes.
+            // This function is at 100%, and this is what keeps it there. currentPlayerFullIDArray and
+            // currentAIArray are two of four parallel int[9] arrays laid out back to back, so the AI flag for
+            // this player sits a constant number of ints past its slot, and the original reaches it off the one
+            // pointer it walks over currentPlayerFullIDArray. MSVC anchors the loop pointer on whichever array
+            // is compared last, so naming currentAIArray in the comparison moves the anchor onto it: the plain
+            // `currentAIArray[playerID] == 0` form was re-measured and costs 11 points (reccmp 100.0 -> 88.9,
+            // normalized 100.0 -> 87.2). The distance between the two arrays is constant-folded, so spelling it
+            // out this way is free and cannot go stale if the layout changes.
             int const* const playerSlot = &DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID];
             int const* const playerIsAISlot = playerSlot
                 + (DAT_GameSynchronyState::instance.currentAIArray

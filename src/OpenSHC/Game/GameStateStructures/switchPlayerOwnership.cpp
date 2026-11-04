@@ -1,7 +1,6 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/AI/AICState.func.hpp"
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 
