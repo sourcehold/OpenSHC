@@ -96158,7 +96158,9 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98444 = 0x00B98444,
-    // type: /undefined4
+    // label: DAT_00b98448
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B98448 = 0x00B98448,
     // type: /int
     SHC_3BB0A8C1_0x00B9844C = 0x00B9844C,
