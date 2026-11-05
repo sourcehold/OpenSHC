@@ -23,11 +23,11 @@ namespace UI {
             void MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose(int openOrClose, ...)
             {
                 // The button shows its second picture while the player's gate click is on this button.
-                int pressed = 0;
+                int pictureOffset = 0;
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .gateOpenOrCloseClick
                     == openOrClose) {
-                    pressed = 1;
+                    pictureOffset = 1;
                 }
                 Rendering::ButtonGmData* const buttonGmData
                     = &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];
@@ -36,12 +36,12 @@ namespace UI {
                     (DE::SHCDE::eGM)buttonGmData->gmId_0x0,
                     MACRO_CALL_MEMBER(Rendering::ButtonGmData_Func::getPictureNumberInGm, buttonGmData)(
                         DAT_ButtonCurrentlyInteracting::instance)
-                        + pressed,
+                        + pictureOffset,
                     DAT_ButtonX::instance, DAT_ButtonY::instance);
                 DAT_CurrentButtonPictureInGm::instance
                     = DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                           .pictureInGm_0x4
-                    + pressed;
+                    + pictureOffset;
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
 

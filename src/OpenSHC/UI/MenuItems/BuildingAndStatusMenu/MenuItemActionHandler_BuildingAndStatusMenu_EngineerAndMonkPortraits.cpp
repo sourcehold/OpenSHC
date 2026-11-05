@@ -38,14 +38,13 @@ namespace UI {
                     >= DAT_GameState::instance.mapAndTime.armySizeLimit) {
                     return;
                 }
-                // The last argument (1) only checks that a recruit is free; it converts nobody.
+                // The last argument (TRUE) only checks that a recruit is free; it converts nobody.
                 if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::nonEuroRecruit, DAT_UnitsState::ptr)(
                         (Map::Units::UnitType)unitType,
                         DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .buildingEntryInfos[Game::Player::Enums::BEIE_ENGINEERSGUILD]
                             .id,
-                        DAT_GameSynchronyState::instance.currentPlayerSlotID, 1)
-                    != 0) {
+                        DAT_GameSynchronyState::instance.currentPlayerSlotID, TRUE)) {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam1
                         = DAT_BuildingsState::instance.menuSelectedBuildingID;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = unitType;
@@ -72,6 +71,7 @@ namespace UI {
                     return;
                 }
                 // Laddermen cost 4 gold, engineers 30, monks 10.
+                // One arm per unit: a single condition would go on to test the other units.
                 if (unitType == Map::Units::UT_E_LADDER) {
                     if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .currentResources[Game::Resources::RT_GOLD]

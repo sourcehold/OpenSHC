@@ -3,7 +3,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/DE/SHCDE/eInBuildingModes.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
@@ -27,16 +26,16 @@ namespace UI {
                                                  .buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                                                  .buildingType,
                     1, DAT_GameSynchronyState::instance.currentPlayerSlotID);
-                if (DAT_MouseState::instance.rightClickStart != 0) {
+                if (DAT_MouseState::instance.rightClickStart) {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         Enums::MVT_BUILD_MENU, 0);
                     return;
                 }
-                if (DAT_ViewportRenderState::instance.viewportState.field_0x0 == 0) {
+                if (!DAT_ViewportRenderState::instance.viewportState.field_0x0) {
                     return;
                 }
                 // The menu stays while the building's assembly point is being placed.
-                if (DAT_GameCore::instance.activeMenuTab.inBuildingTab == DE::SHCDE::IBM_INSIDE_BARRACKS) {
+                if (DAT_GameCore::instance.activeMenuTab.tabType == Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM) {
                     if (DAT_TileMapState::instance.currentMapperCommand >= Commands::M_MAPPER_PLACE_ASSEMBLY_POINT1
                         && DAT_TileMapState::instance.currentMapperCommand
                             <= Commands::M_MAPPER_PLACE_ASSEMBLY_POINT7) {
@@ -63,7 +62,7 @@ namespace UI {
                         return;
                     }
                 }
-                if (DAT_MouseState::instance.leftClickStart != 0) {
+                if (DAT_MouseState::instance.leftClickStart) {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         Enums::MVT_BUILD_MENU, 100);
                 }

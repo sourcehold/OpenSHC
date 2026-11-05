@@ -2,7 +2,6 @@
 
 #include "OpenSHC/UI/Rendering/ButtonGmData.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
@@ -22,12 +21,10 @@ namespace UI {
     namespace MenuItems {
         namespace BuildingAndStatusMenu {
 
-            using Game::Resources::ResourceType;
-
             // FUNCTION: STRONGHOLDCRUSADER 0x00465110
             void MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType weapon, ...)
             {
-                int selected = 0;
+                int pictureOffset = 0;
                 // A weapon the map doesn't let the player make gets no button.
                 if (weapon == Game::Resources::RT_CROSSBOW) {
                     if (DAT_GameCore::instance.xbowProducible_logic == 0) {
@@ -65,21 +62,21 @@ namespace UI {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .weaponRelated
                     == weapon) {
-                    selected = 1;
+                    pictureOffset = 1;
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                ButtonGmData* const button
+                ButtonGmData* const buttonGmData
                     = &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    (DE::SHCDE::eGM)button->gmId_0x0,
-                    MACRO_CALL_MEMBER(Rendering::ButtonGmData_Func::getPictureNumberInGm, button)(
+                    (DE::SHCDE::eGM)buttonGmData->gmId_0x0,
+                    MACRO_CALL_MEMBER(Rendering::ButtonGmData_Func::getPictureNumberInGm, buttonGmData)(
                         DAT_ButtonCurrentlyInteracting::instance)
-                        + selected,
+                        + pictureOffset,
                     DAT_ButtonX::instance, DAT_ButtonY::instance);
                 DAT_CurrentButtonPictureInGm::instance
                     = DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                           .pictureInGm_0x4
-                    + selected;
+                    + pictureOffset;
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
 
