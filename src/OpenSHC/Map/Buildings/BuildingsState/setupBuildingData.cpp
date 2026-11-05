@@ -330,7 +330,7 @@ namespace Map {
             case BT_UNKNOWN4:
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
-                        this->DAT_DraggedTileCountVerified, (UnitInstructionType)0x15, buildingID,
+                        this->DAT_DraggedTileCountVerified, (UnitInstructionType)21, buildingID,
                         this->buildings[buildingID].uid, 0);
                 }
                 break;
@@ -393,7 +393,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)210;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 0;
                         this->buildings[buildingID].insideUnitID[0] = dogID;
                         this->buildings[buildingID].insideUnitUID[0] = DAT_UnitsState::instance.units[dogID].uid;
@@ -410,7 +410,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)210;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 1;
                         this->buildings[buildingID].insideUnitID[1] = dogID;
                         this->buildings[buildingID].insideUnitUID[1] = DAT_UnitsState::instance.units[dogID].uid;
@@ -427,7 +427,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)210;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 2;
                         this->buildings[buildingID].insideUnitID[2] = dogID;
                         this->buildings[buildingID].insideUnitUID[2] = DAT_UnitsState::instance.units[dogID].uid;
@@ -443,7 +443,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)210;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 3;
                         this->buildings[buildingID].insideUnitID[3] = dogID;
                         this->buildings[buildingID].insideUnitUID[3] = DAT_UnitsState::instance.units[dogID].uid;
@@ -454,7 +454,7 @@ namespace Map {
                 break;
             case BT_OUTPOST_EUROPEAN:
             case BT_OUTPOST_ARABIAN:
-                this->buildings[buildingID].outpostRelatedUnk1 = 0xff;
+                this->buildings[buildingID].outpostRelatedUnk1 = 255;
                 this->buildings[buildingID].outpostRelatedUnk2 = 1;
                 this->buildings[buildingID].outpostRelatedUnk3 = 0;
                 this->buildings[buildingID].randomOutpostField = SEC_RNG::instance.currentNumber2 % 2 + 6;

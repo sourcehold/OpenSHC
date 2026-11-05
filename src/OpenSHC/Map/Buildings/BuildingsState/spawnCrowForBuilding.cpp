@@ -49,7 +49,7 @@ namespace Map {
                     microX + 1, microY + 1,
                     DAT_TileMapState::instance
                         .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                    (EntityType)0x1e, 0);
+                    (EntityType)30, 0);
 
                 // The original does not check the tile count before the first iteration
                 int t = 0;
@@ -74,7 +74,7 @@ namespace Map {
                             ((short)this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY) * 8 + 1,
                             DAT_TileMapState::instance
                                 .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                            (EntityType)0x1e, -((random >> 4) % 20));
+                            (EntityType)30, -((random >> 4) % 20));
                     }
                     ++t;
                 } while (t < DAT_TileMapState::instance.constructionTileCount);
