@@ -11,9 +11,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E740
         void BuildingsState::setTileRefsForOilSmelter(int buildingID)
         {
-            for (int i = 0; i < 16; ++i) {
-                uint x = DAT_BuildingDefinedData::instance.field412_0xa00c[i].x + (short)this->buildings[buildingID].x;
-                uint y = DAT_BuildingDefinedData::instance.field412_0xa00c[i].y + (short)this->buildings[buildingID].y;
+            for (int i = 0; i < countof(DAT_BuildingDefinedData::instance.field_0xa00c); ++i) {
+                uint x = DAT_BuildingDefinedData::instance.field_0xa00c[i].x + (short)this->buildings[buildingID].x;
+                uint y = DAT_BuildingDefinedData::instance.field_0xa00c[i].y + (short)this->buildings[buildingID].y;
                 if (x <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 && y <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[x + y * OpenSHC::Map::MC_MAP_XY_LIMIT]
                         != 0) {

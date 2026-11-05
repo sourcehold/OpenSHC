@@ -50,7 +50,7 @@ void Rendering::RenderActiveCreditsElements()
     for (int layer = 0; layer < 8; ++layer) {
         for (int i = 0; i < 24; ++i) {
             CreditsRelatedStructure& element = DAT_ARRAY_00ec0348::instance[i];
-            if (element.type == 0 || element.field7_0x1c != layer) {
+            if (element.type == 0 || element.field_0x1c != layer) {
                 continue;
             }
 
@@ -58,7 +58,7 @@ void Rendering::RenderActiveCreditsElements()
             // Images fade at twice the speed of the other types.
             if (element.type == 1) {
                 int gfxIndex = element.xSpace;
-                if (element.field11_0x2c != -1
+                if (element.field_0x2c != -1
                     && DAT_MouseState::instance.screenSpaceX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
                         >= element.x
                     && DAT_MouseState::instance.screenSpaceX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
@@ -67,7 +67,7 @@ void Rendering::RenderActiveCreditsElements()
                         >= element.y
                     && DAT_MouseState::instance.screenSpaceY - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight
                         < element.height + element.y) {
-                    gfxIndex = element.field11_0x2c;
+                    gfxIndex = element.field_0x2c;
                 }
                 if (element.fadeMode == 0) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderGfxHelperUnk)(gfxIndex, element.x, element.y);
@@ -117,7 +117,7 @@ void Rendering::RenderActiveCreditsElements()
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             } else if (element.type == 2) {
                 uint color;
-                switch (element.field10_0x28) {
+                switch (element.field_0x28) {
                 case 1:
                     color = 0;
                     break;
@@ -127,10 +127,10 @@ void Rendering::RenderActiveCreditsElements()
                 }
                 if (element.fadeMode == 0) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::DrawLoadedMenuStringHelper)(element.xSpace, element.x,
-                        element.y, element.width, color, element.field8_0x20, element.field9_0x24);
+                        element.y, element.width, color, element.field_0x20, element.field_0x24);
                 } else {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::DrawLoadedMenuStringHelperWithBlending)(element.xSpace,
-                        element.x, element.y, element.width, color, element.field8_0x20, element.field9_0x24,
+                        element.x, element.y, element.width, color, element.field_0x20, element.field_0x24,
                         (int)element.blendStrength);
                     if (element.fadeMode == 1) {
                         element.blendStrength -= FLOAT_Between1And5::instance * 0.5;

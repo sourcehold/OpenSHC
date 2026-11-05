@@ -32,7 +32,7 @@ namespace Map {
                     DAT_DirectionAlgorithmState::ptr)(
                     x, y, this->buildings[buildingID].x, this->buildings[buildingID].y);
                 int score = 400 - DAT_DirectionAlgorithmState::instance.distanceHigh;
-                if (DAT_UnitsState::instance.units[unitID].field297_0x410 != 0 && stone >= 8) {
+                if (DAT_UnitsState::instance.units[unitID].field_0x410 != 0 && stone >= 8) {
                     if (stone > 40) {
                         score += stone;
                     } else {

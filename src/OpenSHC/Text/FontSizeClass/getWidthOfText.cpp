@@ -14,9 +14,9 @@ namespace Text {
         int _currentLineWidthUnk = 0;
         int _maxSingleLineWidth = -1;
 
-        int pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field9_0x24;
-        if (DAT_TextManagerObject::instance.field9_0x24 <= DAT_TextManagerObject::instance.field10_0x28) {
-            pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field10_0x28;
+        int pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field_0x24;
+        if (DAT_TextManagerObject::instance.field_0x24 <= DAT_TextManagerObject::instance.field_0x28) {
+            pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field_0x28;
         }
 
         int firstGlyphAdjustImageIdUnk = 0;

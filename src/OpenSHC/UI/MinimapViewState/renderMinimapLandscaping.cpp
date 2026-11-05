@@ -26,7 +26,7 @@ namespace UI {
         this->lastRenderedXOffset = xOffset;
         this->lastRenderedYOffset = yOffset;
         this->needsRedraw = 0;
-        this->field3_0xc = 0;
+        this->field_0xc = 0;
     }
 
 }

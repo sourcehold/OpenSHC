@@ -108,7 +108,7 @@ namespace Map {
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 3) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 4;
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 4) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 1) {
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 5;
                     }
                 } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 5) {
@@ -232,19 +232,19 @@ namespace Map {
 
         // The smelter, in field119_0x11a and extraAnimationFrame1, with its glow in field172_0x292
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] == 0) {
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 0;
         } else {
             int wrapped = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 if ((char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames9
                         [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1]
                     <= 0) {
                     wrapped = 1;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 1) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1
                     == 20) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
@@ -284,7 +284,7 @@ namespace Map {
                     <= 0) {
                     wrapped = 1;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 2) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
                 if ((char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames11
                         [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1]
@@ -294,87 +294,87 @@ namespace Map {
             }
             if (wrapped != 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 0) {
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 0) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 4) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 1;
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 1;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a
                     == 1) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 2;
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 2;
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a
                     == 2) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
                 }
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames9
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1]
                     + 126;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 1) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames10
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1]
                     + 134;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 2) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames11
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1]
                     + 134;
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 1) {
                 char const heat
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames10[DAT_BuildingsState::instance
                             .buildings[DAT_CurrentBuildingID::instance]
                             .extraAnimationFrame1];
                 if (heat < 4) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 24;
                 } else if (heat < 8) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 20;
                 } else if (heat < 12) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 16;
                 } else if (heat < 16) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 12;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 12;
                 } else if (heat < 20) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 16;
                 } else if (heat < 24) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 20;
                 } else {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 24;
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 2) {
                 char const heat
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames11[DAT_BuildingsState::instance
                             .buildings[DAT_CurrentBuildingID::instance]
                             .extraAnimationFrame1];
                 if (heat < 4) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 24;
                 } else if (heat < 8) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 20;
                 } else if (heat < 12) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 16;
                 } else if (heat < 16) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 12;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 12;
                 } else if (heat < 20) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 16;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 16;
                 } else if (heat < 24) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 20;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 20;
                 } else {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field172_0x292 = 24;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x292 = 24;
                 }
             }
         }
 
         // The pour, in field121_0x11e and extraAnimationFrame3; finishing it deposits the iron
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] == 0) {
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 0;
         } else {
             int wrapped = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e == 0) {
                 wrapped = 1;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e == 1) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 == 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
@@ -390,22 +390,22 @@ namespace Map {
             }
             if (wrapped != 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3 = 0;
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 2) {
-                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e == 0) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 2) {
+                        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e = 1;
                     }
-                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e
+                } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e
                     == 1) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e = 0;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
                         DAT_BuildingsState::ptr)(DAT_CurrentBuildingID::instance,
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].uid,
                         OpenSHC::Game::Resources::RT_IRON, 1, 8, 1);
                 }
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 0;
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field121_0x11e == 1) {
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11e == 1) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4
                     = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames12
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3]

@@ -30,7 +30,7 @@ namespace Text {
             this->savedMenuViewType = DAT_GameCore::instance.currentMenuViewType;
             this->savedActiveMenuTab = DAT_GameCore::instance.activeMenuTab.tabType;
             this->savedMenuFlag = DAT_GameCore::instance.unknownAlwaysZero01;
-            this->field48_0x23960 = 1;
+            this->field_0x23960 = 1;
             this->isDialogStateInitialized = TRUE;
             this->useInGameHelpHandler = FALSE;
             this->helpDialogVariant = 0;

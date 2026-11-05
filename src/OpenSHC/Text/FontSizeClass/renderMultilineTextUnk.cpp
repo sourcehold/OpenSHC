@@ -27,22 +27,22 @@ namespace Text {
         int yLineOffset = singleLineHeight;
         int whiteSpaceWidth = this->whiteSpaceWidth_0x1c;
 
-        int alternateLineHeight = DAT_TextManagerObject::instance.field13_0x34;
+        int alternateLineHeight = DAT_TextManagerObject::instance.field_0x34;
         if (alternateLineHeight) {
             singleLineHeight = alternateLineHeight;
         }
 
-        if (DAT_TextManagerObject::instance.field12_0x30) {
+        if (DAT_TextManagerObject::instance.field_0x30) {
             whiteSpaceWidth = 0;
         }
 
-        DAT_TextManagerObject::instance.field1_0x4 = 0;
+        DAT_TextManagerObject::instance.field_0x4 = 0;
         if (_textLength <= 0) {
             return 0;
         }
 
         if (_widthOfWholeText <= maxWidth) {
-            DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
+            DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
             if (modeUnk == 0) {
                 MACRO_CALL_MEMBER(FontSizeClass_Func::renderText, this)(
                     text, _textLength, _runXPos, _runYPos, color, blendStrength);
@@ -124,7 +124,7 @@ namespace Text {
                     yLineOffset += singleLineHeight;
                     writtenWords = 0;
 
-                    if (DAT_TextManagerObject::instance.field12_0x30) {
+                    if (DAT_TextManagerObject::instance.field_0x30) {
                         stopRenderingUnk = TRUE;
                     }
                 } while (renderedChars < wordLength && !stopRenderingUnk);
@@ -144,8 +144,8 @@ namespace Text {
                 yLineOffset += singleLineHeight;
                 writtenWords = 0;
 
-                DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
-                if (DAT_TextManagerObject::instance.field12_0x30) {
+                DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
+                if (DAT_TextManagerObject::instance.field_0x30) {
                     break;
                 }
             }
@@ -165,7 +165,7 @@ namespace Text {
         }
 
         if (writtenWords != 0) {
-            DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
+            DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
         }
 
         if (modeUnk == 1) {

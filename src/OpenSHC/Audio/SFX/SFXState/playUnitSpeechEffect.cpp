@@ -26,15 +26,15 @@ namespace Audio {
                 return;
             }
 
-            int soundVariantCount = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field0_0x0;
+            int soundVariantCount = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0x0;
             if (!soundVariantCount) {
                 return;
             }
             if (1 < soundVariantCount) {
-                soundVariantIndex = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc++;
-                if (DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc
+                soundVariantIndex = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc++;
+                if (DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc
                     >= soundVariantCount) {
-                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc = 0;
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc = 0;
                 }
             }
 
