@@ -32,7 +32,7 @@ namespace UI {
         }
         int goldColor;
         if (gold > 0) {
-            goldColor = 32062;
+            goldColor = OpenSHC::Rendering::Colors::COL_007D3E;
         } else {
             gold = 0;
             goldColor = OpenSHC::Rendering::Colors::COL_0000FF;
@@ -67,12 +67,12 @@ namespace UI {
         int populationDigitSetUnk = 0;
         int populationColor;
         if (DAT_GameState::instance.playerDataArray[playerID].crowding <= 100) {
-            populationColor = 32062;
+            populationColor = OpenSHC::Rendering::Colors::COL_007D3E;
         } else {
             populationColor = OpenSHC::Rendering::Colors::COL_0000FF;
         }
         if (populationCap == 0) {
-            populationColor = 32062;
+            populationColor = OpenSHC::Rendering::Colors::COL_007D3E;
             population = 0;
         } else {
             if (populationCap >= 100) {
@@ -115,7 +115,7 @@ namespace UI {
         if (popularity < 50) {
             popularityColor = OpenSHC::Rendering::Colors::COL_0000FF;
         } else {
-            popularityColor = 32062;
+            popularityColor = OpenSHC::Rendering::Colors::COL_007D3E;
         }
         int const popularityHalfWidth = MACRO_CALL_MEMBER(Text::TextManager_Func::calcRenderedNumberWidth,
                                             DAT_TextManagerObject::ptr)(popularity, 0)

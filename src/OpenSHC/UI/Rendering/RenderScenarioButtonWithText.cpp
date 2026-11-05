@@ -29,7 +29,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, textNumInGroup),
-                x, y, OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE, 0);
+                x, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
         } else {
             int const x = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
             int const y = DAT_ButtonY::instance + 6;
