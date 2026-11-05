@@ -20,6 +20,7 @@ namespace UI {
     {
         // Wait until at least TIME_QueryMargin ticks have passed since the last call.
         DWORD now = DAT_00df33ac::instance;
+        // The exit test stays at the end: a while loop would test before reading the counter, and loses the match.
         for (;;) {
             if (!DAT_HasNoQueryPerformanceFrequency::instance) {
                 QueryPerformanceCounter(DAT_PerformanceCounterFrequency::ptr);
