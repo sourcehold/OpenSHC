@@ -29,7 +29,7 @@ namespace UI {
                     == openOrClose) {
                     pictureOffset = 1;
                 }
-                Rendering::ButtonGmData* const buttonGmData
+                ButtonGmData* const buttonGmData
                     = &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(

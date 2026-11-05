@@ -24,35 +24,38 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x00465110
             void MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType weapon, ...)
             {
+                // Declared here: the original zeroes it on entry, before the producible checks.
                 int pictureOffset = 0;
                 // A weapon the map doesn't let the player make gets no button.
+                // One arm per weapon: a single combined condition goes on testing the other weapons and loses the
+                // match.
                 if (weapon == Game::Resources::RT_CROSSBOW) {
-                    if (DAT_GameCore::instance.xbowProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.xbowProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
                 } else if (weapon == Game::Resources::RT_PIKE) {
-                    if (DAT_GameCore::instance.pikeProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.pikeProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
                 } else if (weapon == Game::Resources::RT_SWORD) {
-                    if (DAT_GameCore::instance.swordProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.swordProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
                 } else if (weapon == Game::Resources::RT_BOW) {
-                    if (DAT_GameCore::instance.bowProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.bowProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
                 } else if (weapon == Game::Resources::RT_SPEAR) {
-                    if (DAT_GameCore::instance.spearProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.spearProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
                 } else if (weapon == Game::Resources::RT_MACE) {
-                    if (DAT_GameCore::instance.maceProducible_logic == 0) {
+                    if (!DAT_GameCore::instance.maceProducible_logic) {
                         DAT_ButtonUnknownZero::instance = 1;
                         return;
                     }
