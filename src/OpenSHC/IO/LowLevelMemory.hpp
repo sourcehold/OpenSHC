@@ -26,7 +26,7 @@ namespace IO {
         void* destination; // 0x00000004 length: 4
         int size; // 0x00000008 length: 4
         int value; // 0x0000000C length: 4
-        int field4_0x10; // 0x00000010 length: 4
+        int field_0x10; // 0x00000010 length: 4
 
     private:
         LowLevelMemory(LowLevelMemory const&);

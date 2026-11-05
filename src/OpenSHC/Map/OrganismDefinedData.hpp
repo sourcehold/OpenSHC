@@ -30,23 +30,23 @@ namespace Map {
         int TreeTypeBasedValueMapping[20]; // 0x00000734 length: 80
         int Rock_field0xe[20]; // 0x00000784 length: 80
         int RandomRockImageGMImageOffsets[16]; // 0x000007D4 length: 64
-        int field12_0x814; // 0x00000814 length: 4
-        int field13_0x818; // 0x00000818 length: 4
-        int field14_0x81c; // 0x0000081C length: 4
-        int field15_0x820; // 0x00000820 length: 4
-        int field16_0x824; // 0x00000824 length: 4
-        int field17_0x828; // 0x00000828 length: 4
-        int field18_0x82c; // 0x0000082C length: 4
-        int field19_0x830; // 0x00000830 length: 4
-        int field20_0x834; // 0x00000834 length: 4
-        int field21_0x838; // 0x00000838 length: 4
-        int field22_0x83c; // 0x0000083C length: 4
-        int field23_0x840; // 0x00000840 length: 4
-        int field24_0x844; // 0x00000844 length: 4
-        int field25_0x848; // 0x00000848 length: 4
-        int field26_0x84c; // 0x0000084C length: 4
-        int field27_0x850; // 0x00000850 length: 4
-        int field28_0x854[20]; // 0x00000854 length: 80
+        int field_0x814; // 0x00000814 length: 4
+        int field_0x818; // 0x00000818 length: 4
+        int field_0x81c; // 0x0000081C length: 4
+        int field_0x820; // 0x00000820 length: 4
+        int field_0x824; // 0x00000824 length: 4
+        int field_0x828; // 0x00000828 length: 4
+        int field_0x82c; // 0x0000082C length: 4
+        int field_0x830; // 0x00000830 length: 4
+        int field_0x834; // 0x00000834 length: 4
+        int field_0x838; // 0x00000838 length: 4
+        int field_0x83c; // 0x0000083C length: 4
+        int field_0x840; // 0x00000840 length: 4
+        int field_0x844; // 0x00000844 length: 4
+        int field_0x848; // 0x00000848 length: 4
+        int field_0x84c; // 0x0000084C length: 4
+        int field_0x850; // 0x00000850 length: 4
+        int field_0x854[20]; // 0x00000854 length: 80
         int Tree_2_B[124]; // 0x000008A4 length: 496
         int Tree_2_A[120]; // 0x00000A94 length: 480
         byte Tree_1_A[168]; // 0x00000C74 length: 168

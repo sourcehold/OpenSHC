@@ -58,20 +58,17 @@ namespace UI {
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
         int fileListVisibleRowCount; // 0x00000084 length: 4
         undefined4 DAT_SomeTextArrayIndex; // 0x00000088 length: 4
-        undefined4 lastClickedListIndex; // 0x0000008C length: 4
+        int lastClickedListIndex; // 0x0000008C length: 4
         undefined4 lastListClickTime; // 0x00000090 length: 4
         undefined4 progressBarX; // 0x00000094 length: 4
         undefined4 progressBarY; // 0x00000098 length: 4
-        undefined4 field42_0x9c; // 0x0000009C length: 4
-        undefined4 previewedListIndex; // 0x000000A0 length: 4
-        int field44_0xa4; // 0x000000A4 length: 4
+        undefined4 field_0x9c; // 0x0000009C length: 4
+        int previewedListIndex; // 0x000000A0 length: 4
+        int field_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
-        undefined4 field46_0xac; // 0x000000AC length: 4
-        int DAT_ArrayOfMapU3EndInt2[500]; // 0x000000B0 length: 2000
-        undefined4 DAT_MapSelectionPreloadMapIndexMapping; // 0x00000880 length: 4
-        int DAT_ArrayOfMapIndices[500]; // 0x00000884 length: 2000
-        undefined4 DAT_ArrayOfMapIndices2[500]; // 0x00001054 length: 2000
-        undefined1 padding_0x1824[4]; // 0x00001824 length: 4
+        int DAT_ArrayOfMapU3EndInt2[501]; // 0x000000AC length: 2004
+        int DAT_ArrayOfMapIndices[501]; // 0x00000880 length: 2004
+        int DAT_ArrayOfMapIndices2[501]; // 0x00001054 length: 2004
 
     private:
         MenuTextInputState(MenuTextInputState const&);

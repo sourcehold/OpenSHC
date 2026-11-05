@@ -145,28 +145,28 @@ namespace Game {
         MenuItem MenuItems_TriggerEventSlider[5]; // 0x0005081C length: 400
         MenuIDMenuElementAddressPair MenuViewIDMenuMapping[51]; // 0x000509AC length: 408
         TextMessageBLLookupStruct TextMessageLookupTable[422]; // 0x00050B44 length: 6752
-        int field114_0x525a4[27]; // 0x000525A4 length: 108
+        int field_0x525a4[27]; // 0x000525A4 length: 108
         uint ColorTable1[9]; // 0x00052610 length: 36
         undefined1 padding_0x52634[100]; // 0x00052634 length: 100
         BGR24 ColorArray[9]; // 0x00052698 length: 36
         undefined1 padding_0x526bc[208]; // 0x000526BC length: 208
         StartingResourceStructureInt StartGoods[3]; // 0x0005278C length: 300
         int HumanAdvantageArray; // 0x000528B8 length: 4
-        int field427_0x528bc; // 0x000528BC length: 4
-        int field428_0x528c0; // 0x000528C0 length: 4
-        int field429_0x528c4; // 0x000528C4 length: 4
-        int field430_0x528c8; // 0x000528C8 length: 4
-        int field431_0x528cc; // 0x000528CC length: 4
+        int field_0x528bc; // 0x000528BC length: 4
+        int field_0x528c0; // 0x000528C0 length: 4
+        int field_0x528c4; // 0x000528C4 length: 4
+        int field_0x528c8; // 0x000528C8 length: 4
+        int field_0x528cc; // 0x000528CC length: 4
         int AIAdvantageArray; // 0x000528D0 length: 4
-        int field433_0x528d4; // 0x000528D4 length: 4
-        int field434_0x528d8; // 0x000528D8 length: 4
-        int field435_0x528dc; // 0x000528DC length: 4
-        int field436_0x528e0; // 0x000528E0 length: 4
-        int field437_0x528e4; // 0x000528E4 length: 4
+        int field_0x528d4; // 0x000528D4 length: 4
+        int field_0x528d8; // 0x000528D8 length: 4
+        int field_0x528dc; // 0x000528DC length: 4
+        int field_0x528e0; // 0x000528E0 length: 4
+        int field_0x528e4; // 0x000528E4 length: 4
         undefined1 padding_0x528e8[4]; // 0x000528E8 length: 4
         int StartingTroops[20][3][20]; // 0x000528EC length: 4800
         undefined1 padding_0x53bac[8]; // 0x00053BAC length: 8
-        int field451_0x53bb4[24]; // 0x00053BB4 length: 96
+        int field_0x53bb4[24]; // 0x00053BB4 length: 96
         int StartGoldPerFairnessLevel[3][5][2]; // 0x00053C14 length: 120
         int SkirmishIntensityRelatedArray[4][5][20]; // 0x00053C8C length: 1600
         undefined1 padding_0x542cc[440]; // 0x000542CC length: 440
@@ -196,30 +196,30 @@ namespace Game {
         int FIRETHROWER; // 0x000548D0 length: 4
         int S_FBALLISTA; // 0x000548D4 length: 4
         int CATAPULT; // 0x000548D8 length: 4
-        int field1003_0x548dc; // 0x000548DC length: 4
-        int field1004_0x548e0; // 0x000548E0 length: 4
-        int field1005_0x548e4; // 0x000548E4 length: 4
-        int field1006_0x548e8; // 0x000548E8 length: 4
-        int field1007_0x548ec; // 0x000548EC length: 4
-        int field1008_0x548f0; // 0x000548F0 length: 4
-        int field1009_0x548f4; // 0x000548F4 length: 4
-        int field1010_0x548f8; // 0x000548F8 length: 4
-        int field1011_0x548fc; // 0x000548FC length: 4
-        int field1012_0x54900; // 0x00054900 length: 4
-        int field1013_0x54904; // 0x00054904 length: 4
-        int field1014_0x54908; // 0x00054908 length: 4
-        int field1015_0x5490c; // 0x0005490C length: 4
-        int field1016_0x54910; // 0x00054910 length: 4
-        int field1017_0x54914; // 0x00054914 length: 4
-        int field1018_0x54918; // 0x00054918 length: 4
-        int field1019_0x5491c; // 0x0005491C length: 4
-        int field1020_0x54920; // 0x00054920 length: 4
-        int field1021_0x54924; // 0x00054924 length: 4
-        int field1022_0x54928; // 0x00054928 length: 4
-        int field1023_0x5492c; // 0x0005492C length: 4
-        int field1024_0x54930; // 0x00054930 length: 4
-        int field1025_0x54934; // 0x00054934 length: 4
-        int field1026_0x54938; // 0x00054938 length: 4
+        int field_0x548dc; // 0x000548DC length: 4
+        int field_0x548e0; // 0x000548E0 length: 4
+        int field_0x548e4; // 0x000548E4 length: 4
+        int field_0x548e8; // 0x000548E8 length: 4
+        int field_0x548ec; // 0x000548EC length: 4
+        int field_0x548f0; // 0x000548F0 length: 4
+        int field_0x548f4; // 0x000548F4 length: 4
+        int field_0x548f8; // 0x000548F8 length: 4
+        int field_0x548fc; // 0x000548FC length: 4
+        int field_0x54900; // 0x00054900 length: 4
+        int field_0x54904; // 0x00054904 length: 4
+        int field_0x54908; // 0x00054908 length: 4
+        int field_0x5490c; // 0x0005490C length: 4
+        int field_0x54910; // 0x00054910 length: 4
+        int field_0x54914; // 0x00054914 length: 4
+        int field_0x54918; // 0x00054918 length: 4
+        int field_0x5491c; // 0x0005491C length: 4
+        int field_0x54920; // 0x00054920 length: 4
+        int field_0x54924; // 0x00054924 length: 4
+        int field_0x54928; // 0x00054928 length: 4
+        int field_0x5492c; // 0x0005492C length: 4
+        int field_0x54930; // 0x00054930 length: 4
+        int field_0x54934; // 0x00054934 length: 4
+        int field_0x54938; // 0x00054938 length: 4
         int ScribeAnimationFrames1[24]; // 0x0005493C length: 96
         int ScribeAnimationFrames2[24]; // 0x0005499C length: 96
         int ScribeAnimationFrames3[24]; // 0x000549FC length: 96
