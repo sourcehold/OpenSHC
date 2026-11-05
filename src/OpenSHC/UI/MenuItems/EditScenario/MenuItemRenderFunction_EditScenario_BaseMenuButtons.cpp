@@ -48,11 +48,13 @@ namespace UI {
                             // added by script: "Gold"
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                                 OpenSHC::DE::SHCDE::TEXT_SCENARIO, 61, (int)(DAT_ButtonX::instance + 10),
-                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                                OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                                 DAT_TextManagerObject::ptr)(DAT_CopyOfScenarioGold::instance,
                                 (int)(DAT_ButtonW::instance - 10 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_RIGHT, 12775659, 18, FALSE, 0);
+                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                             return;
                         }
                         // added by script: "Gold"
@@ -75,7 +77,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                                 OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar1,
                                 (int)(DAT_ButtonW::instance / 2 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE);
+                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_CENTER,
+                                OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                             return;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
@@ -89,7 +92,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                             AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                         if (!DAT_ButtonCurrentlyInteracting::instance) {
-                            color = 12775659;
+                            color = OpenSHC::Rendering::Colors::COL_C2F0EB;
                         } else {
                             color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                         }
@@ -107,13 +110,15 @@ namespace UI {
                         // added by script: "Starting Gold"
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                             OpenSHC::DE::SHCDE::TEXT_SCENARIO, 168, (int)(DAT_ButtonX::instance + 10),
-                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                            OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                         iVar1 = DAT_ButtonW::instance - 10 + DAT_ButtonX::instance;
                     } else {
                         // added by script: "Starting Gold"
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                             OpenSHC::DE::SHCDE::TEXT_SCENARIO, 168, (int)(DAT_ButtonX::instance + 10),
-                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                            OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                         iVar1 = DAT_ButtonW::instance - 10 + DAT_ButtonX::instance;
                     }
                     MACRO_CALL_MEMBER(
@@ -133,14 +138,16 @@ namespace UI {
                         // added by script: "Starting Pitch"
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                             OpenSHC::DE::SHCDE::TEXT_SCENARIO, 169, (int)(DAT_ButtonX::instance + 10),
-                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                            OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                         iVar1 = DAT_ButtonW::instance - 10 + DAT_ButtonX::instance;
                         return;
                     } else {
                         // added by script: "Starting Pitch"
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                             OpenSHC::DE::SHCDE::TEXT_SCENARIO, 169, (int)(DAT_ButtonX::instance + 10),
-                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                            (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                            OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                         iVar1 = DAT_ButtonW::instance - 10 + DAT_ButtonX::instance;
                     }
                     MACRO_CALL_MEMBER(
@@ -184,11 +191,13 @@ namespace UI {
                             // added by script: "Popularity"
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                                 OpenSHC::DE::SHCDE::TEXT_SCENARIO, 79, (int)(DAT_ButtonX::instance + 10),
-                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT,
+                                OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                                 DAT_TextManagerObject::ptr)(DAT_MapPropertiesState::instance.SEC_StartingPopularity,
                                 (int)(DAT_ButtonW::instance - 10 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_RIGHT, 12775659, 18, FALSE, 0);
+                                (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                             return;
                         }
                         MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(param_1);

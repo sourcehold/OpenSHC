@@ -99,7 +99,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderNonInteractingButtonBackground,
                         AlphaAndButtonSurfaceObj::ptr)(DAT_ButtonBackgroundBlendStrength::instance);
-                    _color = 12775659;
+                    _color = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 } else {
                     _color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
@@ -120,7 +120,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar2 + 79,
                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 7),
-                    OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
             }
             if (param_1 == 36) {
@@ -149,7 +149,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar1,
                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 7),
-                    OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                     ((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) + 32);
             }
             if (param_1 == 109) {
@@ -170,7 +170,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar1,
                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 7),
-                    OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                     ((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) + 32);
                 return;
             }
@@ -252,7 +252,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 1) {
@@ -260,7 +261,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 2) {
@@ -268,7 +270,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 3) {
@@ -276,7 +279,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 98,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 4) {
@@ -284,7 +288,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 8,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishNoRushSetting != 5) {
@@ -295,7 +300,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 9,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                 ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                         }
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextFromTextGroup,
@@ -307,7 +313,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2,
                                 DAT_TextManagerObject::ptr)(DAT_GameSynchronyState::instance.skirmishStartGold,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                 ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                         }
                         if (param_1 == 15) {
@@ -315,7 +322,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2,
                                 DAT_TextManagerObject::ptr)(DAT_GameSynchronyState::instance.skirmishDefaultPopularity,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                 ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                         }
                         if (param_1 == 82) {
@@ -323,7 +331,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2,
                                 DAT_TextManagerObject::ptr)(DAT_GameSynchronyState::instance.skirmishGameSpeedLevel,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                 ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                         }
                         if (param_1 == 94) {
@@ -332,7 +341,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 5) {
@@ -340,7 +350,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 10) {
@@ -348,7 +359,8 @@ namespace UI {
                                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97,
                                     (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                    OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                     ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                             }
                             if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes != 20) {
@@ -358,7 +370,8 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 98,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE,
                                 ((int)(iVar1 + (iVar1 >> 0x1f & 0x1fU)) >> 5) + 32);
                         }
                         if (param_1 != 100) {
@@ -372,14 +385,14 @@ namespace UI {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 101,
                                 (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance),
-                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                                iVar1);
+                                (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_RIGHT,
+                                OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE, iVar1);
                         }
                         // "Start only"
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameText2,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 102,
                             (int)(DAT_ButtonW::instance - 20 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 7),
-                            OpenSHC::Text::TTA_RIGHT, 12117749, 0, 18, FALSE, iVar1);
+                            OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18, FALSE, iVar1);
                         return;
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextFromTextGroup,

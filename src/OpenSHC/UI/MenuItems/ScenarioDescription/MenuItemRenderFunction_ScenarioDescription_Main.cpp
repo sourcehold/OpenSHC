@@ -79,7 +79,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                     AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    uVar2 = 12775659;
+                    uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 } else {
                     uVar2 = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }
@@ -112,7 +112,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                     AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    uVar2 = 12775659;
+                    uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 } else {
                     uVar2 = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }
@@ -137,7 +137,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                     AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    uVar2 = 12775659;
+                    uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 } else {
                     uVar2 = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }
@@ -162,7 +162,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                     AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    uVar2 = 12775659;
+                    uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 } else {
                     uVar2 = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }

@@ -51,7 +51,7 @@ namespace UI {
                 iVar4 = (iVar3 / 32) + 32;
                 BVar2 = FALSE;
                 int iVar10 = 19;
-                BGR24 BVar9 = 12775659;
+                BGR24 BVar9 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 TextAlignment TVar7 = OpenSHC::Text::TTA_LEFT;
                 iVar3 = DAT_ButtonX::instance;
                 iVar6 = DAT_ButtonY::instance;
@@ -65,7 +65,7 @@ namespace UI {
                     iVar6 = (iVar3 / 32) + 32;
                     BVar2 = FALSE;
                     iVar10 = 19;
-                    BVar9 = 12775659;
+                    BVar9 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                     TVar7 = OpenSHC::Text::TTA_CENTER;
                     iVar4 = DAT_ButtonX::instance + 335;
                     iVar3 = DAT_ButtonY::instance;
@@ -82,7 +82,7 @@ namespace UI {
                 iVar6 = (iVar3 / 32) + 32;
                 BVar2 = FALSE;
                 iVar10 = 19;
-                BVar9 = 12775659;
+                BVar9 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 TVar7 = OpenSHC::Text::TTA_CENTER;
                 iVar4 = DAT_ButtonX::instance + 370;
                 iVar3 = DAT_ButtonY::instance;
@@ -159,13 +159,13 @@ namespace UI {
                     if (iVar3 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText4Unk,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 402,
-                            (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 60, 12775659, 19,
-                            (iVar6 / 32) + 32);
+                            (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 60,
+                            OpenSHC::Rendering::Colors::COL_C2F0EB, 19, (iVar6 / 32) + 32);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText4Unk,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 402,
-                            (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 60, 8170159, 19,
-                            (iVar6 / 32) + 32);
+                            (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 60,
+                            OpenSHC::Rendering::Colors::COL_7CAAAF, 19, (iVar6 / 32) + 32);
                     }
                 }
                 if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == 0) {
@@ -175,8 +175,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText4Unk, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM,
                     (int)(DAT_GameSynchronyState::instance.currentAIArray[iVar3] * 9 + 230),
-                    (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 70, 8170159, 19,
-                    (iVar6 / 32) + 32);
+                    (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 5), 70,
+                    OpenSHC::Rendering::Colors::COL_7CAAAF, 19, (iVar6 / 32) + 32);
                 return;
             }
             if (0 < param_1) {
@@ -212,21 +212,21 @@ namespace UI {
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM,
                         (int)(DAT_GameSynchronyState::instance.aiVariationArray[iVar3] + 231
                             + DAT_GameSynchronyState::instance.currentAIArray[iVar3] * 9),
-                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280, 8170159, 19,
-                        (iVar6 / 32) + 32);
+                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280,
+                        OpenSHC::Rendering::Colors::COL_7CAAAF, 19, (iVar6 / 32) + 32);
                 }
                 iVar6 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
                 DAT_TextManagerObject::instance.field_0x30 = 1;
                 if (iVar3 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk,
                         DAT_TextManagerObject::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerNames[iVar3],
-                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280, 12775659, 19,
-                        (iVar6 / 32) + 32);
+                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280,
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 19, (iVar6 / 32) + 32);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk,
                         DAT_TextManagerObject::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerNames[iVar3],
-                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280, 8170159, 19,
-                        (iVar6 / 32) + 32);
+                        (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 5), 280,
+                        OpenSHC::Rendering::Colors::COL_7CAAAF, 19, (iVar6 / 32) + 32);
                 }
             }
             if (-10 < param_1) {

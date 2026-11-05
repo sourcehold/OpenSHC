@@ -6,6 +6,7 @@
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/Text/TextArrayIndexType.hpp"
@@ -161,39 +162,42 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 16,
                     (int)(DAT_ButtonW::instance / 2 - 20 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 6),
-                    OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                 iVar1 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::MapPropertiesState_Func::sumUnitPoints, DAT_MapPropertiesState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     iVar1, (int)(DAT_ButtonW::instance / 2 - 10 + DAT_ButtonX::instance),
-                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, TRUE, 0);
+                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                    18, TRUE, 0);
                 return;
             case 101:
                 // added by script: "Total Troops"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 16, (int)(DAT_ButtonX::instance + 20),
-                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                    18, FALSE);
                 MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::sumUnitCounts, DAT_MapPropertiesState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     number, (int)(DAT_ButtonW::instance - 10 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 6),
-                    OpenSHC::Text::TTA_RIGHT, 12775659, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 return;
             case 102:
                 // added by script: "Total Troops"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 16, (int)(DAT_ButtonX::instance + 20),
-                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                    (int)(DAT_ButtonY::instance + 6), OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                    18, FALSE);
                 iVar1 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::MapPropertiesState_Func::sumInvasionEventUnitCount, DAT_MapPropertiesState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     iVar1, (int)(DAT_ButtonW::instance - 10 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 6),
-                    OpenSHC::Text::TTA_RIGHT, 12775659, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 return;
             }
             pcVar2 = MACRO_CALL_MEMBER(
                 OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(iVar4);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                pcVar2, xParam, iVar1, OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE, 0);
+                pcVar2, xParam, iVar1, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
         }
 
     }

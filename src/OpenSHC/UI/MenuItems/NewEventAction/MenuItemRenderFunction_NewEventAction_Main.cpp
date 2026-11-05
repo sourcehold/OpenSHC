@@ -187,14 +187,15 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_SCENARIO, textNumInGroup, (int)(DAT_ButtonX::instance + 14),
-                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_LEFT, 12775659, 18, FALSE);
+                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                    18, FALSE);
                 if (iVar2 < 0) {
                     return;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     // " - "
                     S___005A2304, (int)(DAT_ButtonX::instance + 20), (int)(DAT_ButtonY::instance + 7),
-                    OpenSHC::Text::TTA_LEFT, 12775659, 18, TRUE, 0);
+                    OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, iVar2 + 128,

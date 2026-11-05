@@ -46,7 +46,7 @@ namespace UI {
                 return;
             }
             if ((param_1 == DAT_MapPropertiesState::instance.eventListSelection)
-                || (color = 12775659, DAT_ButtonCurrentlyInteracting::instance)) {
+                || (color = OpenSHC::Rendering::Colors::COL_C2F0EB, DAT_ButtonCurrentlyInteracting::instance)) {
                 color = OpenSHC::Rendering::Colors::COL_CCFAFF;
             }
             int iVar10 = 0;

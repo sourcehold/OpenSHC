@@ -70,7 +70,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[actionParam + 1],
                     (int)(DAT_ButtonX::instance + 21), (int)(DAT_ButtonY::instance + 40), OpenSHC::Text::TTA_CENTER,
-                    12775659, 0, 19, FALSE, 0);
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 19, FALSE, 0);
             } else if (actionParam == 21) {
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
                     iVar1 = 645;
@@ -84,7 +84,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[OpenSHC::Game::Resources::RT_GOLD],
                     (int)(DAT_ButtonX::instance + 21), (int)(DAT_ButtonY::instance + 20), OpenSHC::Text::TTA_CENTER,
-                    12775659, 0, 19, FALSE, 0);
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 19, FALSE, 0);
                 return;
             }
             iVar1 = DAT_ButtonX::instance;

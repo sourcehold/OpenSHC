@@ -49,7 +49,7 @@ namespace UI {
                                 .header.month
                             + 12,
                         (int)((int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 6),
-                        OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_MONTHS,
@@ -202,7 +202,7 @@ namespace UI {
             switchD_004c01f4_caseD_6a:
                 DAT_ButtonCurrentlyInteracting::instance
                     = (BOOLEnum)(DAT_MapPropertiesState::instance.invasionTroopIndex == iVar1 - 106);
-                uint uVar2 = 12775659;
+                uint uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 if (DAT_ButtonCurrentlyInteracting::instance) {
                     uVar2 = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }
@@ -249,7 +249,8 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_SCENARIO, param_1, (int)(DAT_ButtonX::instance + 5),
-                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_LEFT, 8355711, 18, FALSE);
+                    (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_7F7F7F,
+                    18, FALSE);
                 return;
             }
             case 1001: {
@@ -331,7 +332,7 @@ namespace UI {
                                        .data
                             + DAT_MapPropertiesState::instance.invasionTroopIndex * 4 + 14)]),
                         (int)((int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 8),
-                        OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                 }
                 if (DAT_MissionAestheticsDefinedData::instance
                         .EventConditionParamKind[DAT_MapPropertiesState::instance.invasionTroopIndex]
@@ -348,7 +349,7 @@ namespace UI {
                                                       .data
                                 + DAT_MapPropertiesState::instance.invasionTroopIndex * 4 + 14)]),
                     (int)((int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 8),
-                    OpenSHC::Text::TTA_CENTER, 12775659, 18, FALSE);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                 return;
                 return;
             }

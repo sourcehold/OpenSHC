@@ -59,7 +59,7 @@ namespace UI {
                 iVar1 = (int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 yParam = DAT_ButtonY::instance + 7;
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    color = 12775659;
+                    color = OpenSHC::Rendering::Colors::COL_C2F0EB;
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1),

@@ -89,7 +89,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextFromTextGroup,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAINOPTIONS, 24,
                         (int)(DAT_ButtonX::instance + 10), (int)(DAT_ButtonY::instance + 8), OpenSHC::Text::TTA_LEFT,
-                        12775659, 18, FALSE, (iVar1 / 32) + 32);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, (iVar1 / 32) + 32);
                 }
                 iVar1 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
                 // "easy, normal, hard, very hard"
@@ -146,7 +146,7 @@ namespace UI {
                     DAT_ButtonBackgroundBlendStrength::instance, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 iVar1 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
                 iVar1 += (iVar1 >> 0x1f & 0x1fU);
-                uVar2 = 12775659;
+                uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                 goto LAB_0042d4c2;
             case 77:
                 if (DAT_MapMissionType::instance != 2) {
@@ -168,7 +168,7 @@ namespace UI {
                         DAT_ButtonBackgroundBlendStrength::instance, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                     iVar1 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
                     iVar1 = (iVar1 / 32) + 32;
-                    uVar2 = 12775659;
+                    uVar2 = OpenSHC::Rendering::Colors::COL_C2F0EB;
                     yParam = DAT_ButtonY::instance + 7;
                     goto LAB_0042d4cd;
                 }
