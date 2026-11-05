@@ -28,25 +28,25 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043D070
     void BuildingMenus::RenderBuildingMenu_Marketplace_Food()
     {
-        int titleY = DAT_MenuHandlerState::instance.y + 0x1d4;
-        int titleX = DAT_MenuHandlerState::instance.x + 0x19;
+        int titleY = DAT_MenuHandlerState::instance.y + 468;
+        int titleX = DAT_MenuHandlerState::instance.x + 25;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 2),
-            titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         int offset = 0;
         for (int i = 0; i < 8; ++i) {
             ResourceType resourceType = (ResourceType)DAT_FoodTypes::instance[i];
-            int x = DAT_MenuHandlerState::instance.x + offset + 0x78;
+            int x = DAT_MenuHandlerState::instance.x + offset + 120;
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::isResourceTypeTradeable, DAT_GameState::ptr)(
                     resourceType)
                 != FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[resourceType],
-                    x, DAT_MenuHandlerState::instance.y + 0x232, OpenSHC::Text::TTA_CENTER, 0, 0x11, FALSE, 0);
+                    x, DAT_MenuHandlerState::instance.y + 562, OpenSHC::Text::TTA_CENTER, 0, 17, FALSE, 0);
             }
-            offset += 0x34;
+            offset += 52;
         }
     }
 

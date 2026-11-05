@@ -48,15 +48,15 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043C6A0
     void BuildingMenus::RenderBuildingMenu_Stockpile()
     {
-        int x = DAT_MenuHandlerState::instance.x + 0x1e;
-        int iconsY = DAT_MenuHandlerState::instance.y + 0x200;
+        int x = DAT_MenuHandlerState::instance.x + 30;
+        int iconsY = DAT_MenuHandlerState::instance.y + 512;
         // Render stockpile title
-        int titleY = DAT_MenuHandlerState::instance.y + 0x1d3;
-        int titleX = DAT_MenuHandlerState::instance.x + 0x19;
+        int titleY = DAT_MenuHandlerState::instance.y + 467;
+        int titleX = DAT_MenuHandlerState::instance.x + 25;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GOODS_YARD, 0),
-            titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 0x10, FALSE, 0);
+            titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 16, FALSE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         for (int i = 0; i < 8; ++i) {
             int amount = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -67,7 +67,7 @@ namespace UI {
                 DAT_StockpileMenuResourceIcons::instance[i], DAT_StockpileIconsPositionNudges::instance[i].x + x,
                 DAT_StockpileIconsPositionNudges::instance[i].y + iconsY);
             if (DAT_MouseState::instance.leftClickStart != 0) {
-                int image = DAT_StockpileMenuResourceIcons::instance[i] + GMFirstPictureIndex::instance[0x2e] - 1;
+                int image = DAT_StockpileMenuResourceIcons::instance[i] + GMFirstPictureIndex::instance[46] - 1;
                 BOOLEnum inside = MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox,
                     DAT_MouseState::ptr)(DAT_StockpileIconsPositionNudges::instance[i].x + x,
                     DAT_StockpileIconsPositionNudges::instance[i].y + iconsY,
@@ -84,7 +84,7 @@ namespace UI {
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .buildingEntryInfos[BEIE_MARKETPLACE]
                               .id;
-                    DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 0x39;
+                    DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 57;
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -93,8 +93,8 @@ namespace UI {
             }
             // Render textfields for resources
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                amount, x + 0xc, DAT_MenuHandlerState::instance.y + 0x22f, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
-            x += 0x3c;
+                amount, x + 12, DAT_MenuHandlerState::instance.y + 559, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
+            x += 60;
         }
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
