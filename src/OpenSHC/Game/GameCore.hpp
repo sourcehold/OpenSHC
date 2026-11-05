@@ -123,7 +123,7 @@ namespace Game {
         byte unused_0x140[4]; // 0x00000140 length: 4
         int popularityMessagePage; // 0x00000144 length: 4
         int popularityMessagePageCount; // 0x00000148 length: 4
-        dword isBinkVideoPlaying; // 0x0000014C length: 4
+        BOOLEnum isBinkVideoPlaying; // 0x0000014C length: 4
         dword section1095; // 0x00000150 length: 4
         dword newPlayerID; // 0x00000154 length: 4
         dword hasMenuRenderedUnk; // 0x00000158 length: 4
