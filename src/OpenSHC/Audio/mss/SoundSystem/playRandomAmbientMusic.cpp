@@ -116,7 +116,7 @@ namespace Audio {
                 if (DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount != 0
                     && 0 < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .totalEnemyUnitsCount) {
-                    if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field7_0x1c) {
+                    if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field_0x1c) {
                         MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(2);
                     } else {
                         MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(1);
@@ -127,7 +127,7 @@ namespace Audio {
                     if ((DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                 .totalEnemyUnitsCount
                             == 0)
-                        && (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field7_0x1c == 0)) {
+                        && (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field_0x1c == 0)) {
                         MACRO_CALL_MEMBER(
                             SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     }
@@ -184,7 +184,7 @@ namespace Audio {
                         return;
                     }
                 }
-                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field7_0x1c != 0) {
+                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field_0x1c != 0) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(2);
                 } else if (0
                         < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]

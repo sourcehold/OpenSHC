@@ -58,16 +58,16 @@ namespace Map {
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock / 40 - 50;
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock < 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1
-                = DAT_BuildingDefinedData::instance.field416_0xa46c
+                = DAT_BuildingDefinedData::instance.field_0xa46c
                       [-DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock]
                 + 51;
         } else {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1
-                = DAT_BuildingDefinedData::instance.field415_0xa39c
+                = DAT_BuildingDefinedData::instance.field_0xa39c
                       [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock];
         }
 
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270 != 0) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270 != 0) {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation == 0) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraOverlayImage10 >= 40) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
@@ -80,7 +80,7 @@ namespace Map {
                 = (char)DAT_BuildingDefinedData::instance.CampGroundAnimationFrames
                       [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex]
                 + 11;
-        } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field158_0x272 != 0) {
+        } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x272 != 0) {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation == 0) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraOverlayImage10 >= 40) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
@@ -106,10 +106,10 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraOverlayImage10 = 0;
         }
 
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270 <= 1) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270 <= 1) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStage = 1;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStagePrevious = 1;
-        } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270 <= 4) {
+        } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270 <= 4) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStage = 3;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStagePrevious = 3;
         } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStage == 3) {
@@ -140,7 +140,7 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::updatePeasantSeatingAtBuilding,
                     DAT_TribesState::ptr)(DAT_CurrentBuildingID::instance,
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270, 1);
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270, 1);
             } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive > 300) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingProgress += 1;
@@ -159,7 +159,7 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::updatePeasantSeatingAtBuilding,
                     DAT_TribesState::ptr)(DAT_CurrentBuildingID::instance,
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270, 100);
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270, 100);
             } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive > 80) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].timeAlive = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingProgress += 1;
@@ -175,8 +175,8 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campStage = nextStage;
             }
         }
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field157_0x270 = 0;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field158_0x272 = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x270 = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x272 = 0;
     }
 
 }

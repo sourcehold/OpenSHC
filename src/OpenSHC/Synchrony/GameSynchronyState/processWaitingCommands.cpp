@@ -34,8 +34,8 @@ namespace Synchrony {
                 this->DAT_GameCommandParam0 = 0;
                 this->DAT_CommandActionPlan = Commands::GCS_EXECUTE;
                 this->DAT_CommandParameterOffset = 0;
-                (&DAT_ProtocolDefinedData::instance
-                        .commandFunctions)[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
+                DAT_ProtocolDefinedData::instance
+                        .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
                 ++_gameCommandID;
                 this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_PROCESSED;
                 ++_selected;

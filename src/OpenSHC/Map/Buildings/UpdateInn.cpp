@@ -35,7 +35,7 @@ namespace Map {
         } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                        .flagonsOfAleOrCheeseOrReleaseDogs
                 != 0
-            || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field168_0x28a != 0) {
+            || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 1;
         } else {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 0;
@@ -64,7 +64,7 @@ namespace Map {
             }
             // The original clears the sprite it just animated
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field168_0x28a != 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance
                           .InnAnimationFrames3[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
@@ -98,9 +98,9 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame2 += 1;
                 }
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field168_0x28a != 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field168_0x28a -= 1;
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field168_0x28a == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a -= 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a == 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::spawnDrunkard, DAT_GameState::ptr)(
                         DAT_CurrentBuildingID::instance);
                 }
