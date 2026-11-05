@@ -66,7 +66,8 @@ namespace UI {
         int previewedListIndex; // 0x000000A0 length: 4
         int field_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
-        int DAT_ArrayOfMapU3EndInt2[501]; // 0x000000AC length: 2004
+        int DAT_ArrayOfMapU3EndInt2; // 0x000000AC length: 4
+        int arrayOfMapEndInt2[500]; // 0x000000B0 length: 2000
         int DAT_ArrayOfMapIndices[501]; // 0x00000880 length: 2004
         int DAT_ArrayOfMapIndices2[501]; // 0x00001054 length: 2004
 
@@ -91,7 +92,7 @@ namespace UI {
 
         void popModalDialog();
 
-        void activateLoadOrSaveMapUI(int loadOrSaveMap);
+        void activateLoadOrSaveMapUI(MenuModalType loadOrSaveMap);
 
         void loadOrSaveMap(MenuModalType param_1);
 

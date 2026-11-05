@@ -15,9 +15,6 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95960.hpp"
-#include "OpenSHC/Globals/DAT_00b95b74.hpp"
-#include "OpenSHC/Globals/DAT_00b95f64.hpp"
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -29,6 +26,9 @@
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+#include "OpenSHC/Globals/INT_00b95960.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
+#include "OpenSHC/Globals/INT_00b95f64.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
 namespace OpenSHC {
@@ -205,7 +205,7 @@ namespace UI {
                 break;
             case -101: {
                 // map description scroll down
-                int const limit = DAT_00b95b74::instance - 114;
+                int const limit = INT_00b95b74::instance - 114;
                 if (DAT_00b960f4::instance < limit) {
                     DAT_00b960f4::instance += 14;
                     if (DAT_00b960f4::instance > limit) {
@@ -234,8 +234,8 @@ namespace UI {
                         || DAT_MouseState::instance.screenSpaceY > y + 35) {
                         continue;
                     }
-                    DAT_00b95960::instance = DAT_GameSynchronyState::instance.playerPositionsArray[position];
-                    DAT_00b95f64::instance = position;
+                    INT_00b95960::instance = DAT_GameSynchronyState::instance.playerPositionsArray[position];
+                    INT_00b95f64::instance = position;
                     return;
                 }
                 break;
@@ -244,7 +244,7 @@ namespace UI {
                 if (!DAT_GameSynchronyState::instance.isHost) {
                     break;
                 }
-                if (DAT_00b95960::instance >= 0) {
+                if (INT_00b95960::instance >= 0) {
                     for (int position = 0; position < countof(DAT_GameCore::instance.keepPositions); ++position) {
                         int const x = DAT_GameCore::instance.keepPositions[position].x;
                         if (x < 0
@@ -261,8 +261,8 @@ namespace UI {
                             continue;
                         }
                         int const dragged
-                            = DAT_GameSynchronyState::instance.playerPositionsArray[DAT_00b95f64::instance];
-                        DAT_GameSynchronyState::instance.playerPositionsArray[DAT_00b95f64::instance]
+                            = DAT_GameSynchronyState::instance.playerPositionsArray[INT_00b95f64::instance];
+                        DAT_GameSynchronyState::instance.playerPositionsArray[INT_00b95f64::instance]
                             = DAT_GameSynchronyState::instance.playerPositionsArray[position];
                         DAT_GameSynchronyState::instance.playerPositionsArray[position] = dragged;
                         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
@@ -270,7 +270,7 @@ namespace UI {
                         break;
                     }
                 }
-                DAT_00b95960::instance = -1;
+                INT_00b95960::instance = -1;
                 break;
             case 105:
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0

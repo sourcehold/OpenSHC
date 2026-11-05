@@ -144,7 +144,7 @@ namespace UI {
                 DAT_TribesState::instance.rallyCount = 1;
                 if (DAT_TileMapState::instance.shiftRelated0or3 == 3) {
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::createTribeFromSelectedUnits, DAT_UnitsState::ptr)();
-                    DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                    DAT_UnitsState::instance.pendingUnitControlMode = 1;
                     DAT_UnitsState::instance.unitControlsRelated = 1;
                     DAT_TileMapState::instance.pendingUnitCommand = 0;
                     DAT_TileMapState::instance.cursorOverlayImageBase = 0;
@@ -219,7 +219,7 @@ namespace UI {
                             MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                                 UI::Enums::MVT_BUILD_MENU, 0);
                         }
-                        DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                        DAT_UnitsState::instance.pendingUnitControlMode = 1;
                         DAT_UnitsState::instance.unitControlsRelated = 1;
                         DAT_TileMapState::instance.shiftRelated0or3 = 1;
                         DAT_TileMapState::instance.pendingUnitCommand = 0;
@@ -1939,7 +1939,7 @@ namespace UI {
                             }
                             DAT_MouseState::instance.selectionBoxState = 1;
                             MACRO_CALL_MEMBER(Input::MouseState_Func::extendSelectionBoxToMouse, DAT_MouseState::ptr)();
-                            DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                            DAT_UnitsState::instance.pendingUnitControlMode = 1;
                             DAT_UnitsState::instance.unitControlsRelated = 1;
                             DAT_TileMapState::instance.pendingUnitCommand = 0;
                             DAT_TileMapState::instance.cursorOverlayImageBase = 0;
@@ -1967,7 +1967,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueEscapeCommand, DAT_UnitsState::ptr)();
                     }
                     DAT_TileMapState::instance.shiftRelated0or3 = DAT_ModifierKeyState::instance.shift ? 3 : 0;
-                    DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                    DAT_UnitsState::instance.pendingUnitControlMode = 1;
                     DAT_UnitsState::instance.unitControlsRelated = 1;
                     DAT_TileMapState::instance.pendingUnitCommand = 0;
                     DAT_TileMapState::instance.cursorOverlayImageBase = 0;
@@ -2197,7 +2197,7 @@ namespace UI {
                         DAT_TribesState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
                         (int)(DAT_TileMapState::instance.uiSelectedUnitIDUnk));
                 }
-                DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                DAT_UnitsState::instance.pendingUnitControlMode = 1;
                 DAT_UnitsState::instance.unitControlsRelated = 1;
                 DAT_TileMapState::instance.cursorOverlayImageBase = 0;
                 DAT_TileMapState::instance.cursorOverlayGmID = 107;
@@ -2227,7 +2227,7 @@ namespace UI {
                             DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
                             Map::Units::UIT_ATTACK_LAND, DAT_TileMapState::instance.instructionTargetX,
                             DAT_TileMapState::instance.instructionTargetY, DAT_TileMapState::instance.field_0x554a08);
-                        DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                        DAT_UnitsState::instance.pendingUnitControlMode = 1;
                         DAT_UnitsState::instance.unitControlsRelated = 1;
                         DAT_TileMapState::instance.cursorOverlayImageBase = 0;
                         DAT_TileMapState::instance.cursorOverlayGmID = 107;
@@ -2280,7 +2280,7 @@ namespace UI {
                         DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, Map::Units::UIT_THROW_COW,
                         DAT_TileMapState::instance.instructionTargetX, DAT_TileMapState::instance.instructionTargetY,
                         DAT_TileMapState::instance.field_0x554a08);
-                    DAT_UnitsState::instance.pendingUnitControlMode = TRUE;
+                    DAT_UnitsState::instance.pendingUnitControlMode = 1;
                     DAT_UnitsState::instance.unitControlsRelated = 1;
                     DAT_TileMapState::instance.cursorOverlayImageBase = 0;
                     DAT_TileMapState::instance.cursorOverlayGmID = 107;

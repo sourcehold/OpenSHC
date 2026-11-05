@@ -20,6 +20,7 @@
 #include "OpenSHC/Synchrony/Networking/ChatEvent.hpp"
 #include "OpenSHC/Synchrony/Networking/ConnectionLagInfo.hpp"
 #include "OpenSHC/Synchrony/Networking/PacketUnion.hpp"
+#include "OpenSHC/Synchrony/Sync/SplinterTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -48,6 +49,7 @@ namespace Synchrony {
     using OpenSHC::Synchrony::Networking::ChatEvent;
     using OpenSHC::Synchrony::Networking::ConnectionLagInfo;
     using OpenSHC::Synchrony::Networking::PacketUnion;
+    using OpenSHC::Synchrony::Sync::SplinterTypeInt;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -127,33 +129,33 @@ namespace Synchrony {
         undefined4 field_0xbe8; // 0x00000BE8 length: 4
         undefined4 flag_0xbec; // 0x00000BEC length: 4
         undefined4 field_0xbf0; // 0x00000BF0 length: 4
-        undefined4 splinterType; // 0x00000BF4 length: 4
-        undefined4 totalSplitDataItems; // 0x00000BF8 length: 4
-        undefined4 totalSplitChimps; // 0x00000BFC length: 4
-        undefined4 totalSplitStructures; // 0x00000C00 length: 4
-        undefined4 totalSplitVeg; // 0x00000C04 length: 4
-        undefined4 totalSplitTribes; // 0x00000C08 length: 4
-        undefined4 totalSplitPlayers; // 0x00000C0C length: 4
-        undefined4 totalSplitElements; // 0x00000C10 length: 4
-        undefined4 totalSplitLayers; // 0x00000C14 length: 4
-        undefined4 totalSplitFlies; // 0x00000C18 length: 4
-        undefined4 totalSplitMoats; // 0x00000C1C length: 4
-        undefined4 totalSplitTeleports; // 0x00000C20 length: 4
-        undefined4 totalSplitPitchDitches; // 0x00000C24 length: 4
-        undefined4 totalSplitZones; // 0x00000C28 length: 4
+        SplinterTypeInt splinterType; // 0x00000BF4 length: 4
+        int totalSplitDataItems; // 0x00000BF8 length: 4
+        int totalSplitChimps; // 0x00000BFC length: 4
+        int totalSplitStructures; // 0x00000C00 length: 4
+        int totalSplitVeg; // 0x00000C04 length: 4
+        int totalSplitTribes; // 0x00000C08 length: 4
+        int totalSplitPlayers; // 0x00000C0C length: 4
+        int totalSplitElements; // 0x00000C10 length: 4
+        int totalSplitLayers; // 0x00000C14 length: 4
+        int totalSplitFlies; // 0x00000C18 length: 4
+        int totalSplitMoats; // 0x00000C1C length: 4
+        int totalSplitTeleports; // 0x00000C20 length: 4
+        int totalSplitPitchDitches; // 0x00000C24 length: 4
+        int totalSplitZones; // 0x00000C28 length: 4
         undefined1 padding_0xc2c[8]; // 0x00000C2C length: 8
-        undefined4 firstSplitChimps; // 0x00000C34 length: 4
-        undefined4 firstSplitStructures; // 0x00000C38 length: 4
-        undefined4 firstSplitVeg; // 0x00000C3C length: 4
-        undefined4 firstSplitTribe; // 0x00000C40 length: 4
-        undefined4 firstSplitPlayer; // 0x00000C44 length: 4
-        undefined4 firstSplitElement; // 0x00000C48 length: 4
-        undefined4 firstSplitLayer; // 0x00000C4C length: 4
-        undefined4 firstSplitFly; // 0x00000C50 length: 4
-        undefined4 firstSplitMoat; // 0x00000C54 length: 4
-        undefined4 firstSplitTeleports; // 0x00000C58 length: 4
-        undefined4 firstSplitPitchDitch; // 0x00000C5C length: 4
-        undefined4 firstSplitZone; // 0x00000C60 length: 4
+        int firstSplitChimps; // 0x00000C34 length: 4
+        int firstSplitStructures; // 0x00000C38 length: 4
+        int firstSplitVeg; // 0x00000C3C length: 4
+        int firstSplitTribe; // 0x00000C40 length: 4
+        int firstSplitPlayer; // 0x00000C44 length: 4
+        int firstSplitElement; // 0x00000C48 length: 4
+        int firstSplitLayer; // 0x00000C4C length: 4
+        int firstSplitFly; // 0x00000C50 length: 4
+        int firstSplitMoat; // 0x00000C54 length: 4
+        int firstSplitTeleports; // 0x00000C58 length: 4
+        int firstSplitPitchDitch; // 0x00000C5C length: 4
+        int firstSplitZone; // 0x00000C60 length: 4
         undefined1 padding_0xc64[8]; // 0x00000C64 length: 8
         undefined4 quitGameVoteRelated; // 0x00000C6C length: 4
         int quitGameVoteArray[9]; // 0x00000C70 length: 36
@@ -207,8 +209,8 @@ namespace Synchrony {
         undefined1 syncRelated2; // 0x0007AC32 length: 1
         undefined1 padding_0x7ac33[1]; // 0x0007AC33 length: 1
         int historicalLagInfoPerPlayer[9][100][2]; // 0x0007AC34 length: 7200
-        undefined4 counter; // 0x0007C854 length: 4
-        undefined4 limit; // 0x0007C858 length: 4
+        int counter; // 0x0007C854 length: 4
+        int limit; // 0x0007C858 length: 4
         int HASH_Units[9][2500]; // 0x0007C85C length: 90000
         int HASH_Buildings[9][2000]; // 0x000927EC length: 72000
         int HASH_Trees[9][2000]; // 0x000A412C length: 72000
@@ -348,7 +350,7 @@ namespace Synchrony {
         undefined4 DAT_CommandParameterOffset; // 0x00109EE4 length: 4
         int commandDelay; // 0x00109EE8 length: 4
         int selectedGameCommands[100][2]; // 0x00109EEC length: 800
-        int someIndex; // 0x0010A20C length: 4
+        int selectedCommandsCount; // 0x0010A20C length: 4
         int DPLAYX_SendAndReceiveREsult; // 0x0010A210 length: 4
         undefined4 DAT_TickCount; // 0x0010A214 length: 4
 
