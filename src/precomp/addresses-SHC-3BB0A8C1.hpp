@@ -82653,6 +82653,8 @@ enum {
     // type: /string
     SHC_3BB0A8C1_0x005A22C4 = 0x005A22C4,
     // type: /string
+    SHC_3BB0A8C1_0x005A22D0 = 0x005A22D0,
+    // type: /string
     SHC_3BB0A8C1_0x005A22D8 = 0x005A22D8,
     // type: /string
     SHC_3BB0A8C1_0x005A22E4 = 0x005A22E4,
@@ -95346,7 +95348,7 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00B9595C = 0x00B9595C,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B95960 = 0x00B95960,
     // label: DAT_MainMenuSwingSwordBool
     // location:
@@ -95400,13 +95402,13 @@ enum {
     SHC_3BB0A8C1_0x00B95B6C = 0x00B95B6C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95B70 = 0x00B95B70,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B95B74 = 0x00B95B74,
     // label: DAT_MapNameCache
     // location:
     // type: /char[1004]
     SHC_3BB0A8C1_0x00B95B78 = 0x00B95B78,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B95F64 = 0x00B95F64,
     // type: /int
     SHC_3BB0A8C1_0x00B95F68 = 0x00B95F68,
@@ -95446,7 +95448,7 @@ enum {
     SHC_3BB0A8C1_0x00B960E4 = 0x00B960E4,
     // label: DAT_ButtonBackgroundBlendStrength
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B960E8 = 0x00B960E8,
     // type: /int
     SHC_3BB0A8C1_0x00B960EC = 0x00B960EC,
@@ -96392,6 +96394,8 @@ enum {
     SHC_3BB0A8C1_0x00B98790 = 0x00B98790,
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00C9A490 = 0x00C9A490,
+    // label: TGX_RepeatRunHandlers
+    // location:
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00C9A510 = 0x00C9A510,
     // label: DAT_GMImageSizes
@@ -96406,6 +96410,8 @@ enum {
     // location:
     // type: /int[240]
     SHC_3BB0A8C1_0x00D7CE90 = 0x00D7CE90,
+    // label: TGX_StreamRunHandlers
+    // location:
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00D7D250 = 0x00D7D250,
     // label: DAT_LoadingBarProgress
@@ -96450,7 +96456,7 @@ enum {
     SHC_3BB0A8C1_0x00DF3348 = 0x00DF3348,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF334C = 0x00DF334C,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF3350 = 0x00DF3350,
     // label: DAT_DisableMercPostPortraits
     // location:
@@ -96732,7 +96738,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4298 = 0x00DF4298,
     // label: DAT_AlliesCount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF429C = 0x00DF429C,
     // label: BOOL_RelatedToInitialGranaryAndKeepPlacement
     // location:
@@ -97199,15 +97205,15 @@ enum {
     SHC_3BB0A8C1_0x00DF5544 = 0x00DF5544,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF5548 = 0x00DF5548,
-    // label: INT_DisableTutorialRestrictions
+    // label: DAT_DisableTutorialRestrictions
     // location:
-    // type: /int
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00DF554C = 0x00DF554C,
     // label: DAT_TutorialCurrentStep
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF5550 = 0x00DF5550,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF5554 = 0x00DF5554,
     // label: DAT_00df5558
     // location:
@@ -97331,7 +97337,7 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB0E40 = 0x00EB0E40,
-    // type: /int
+    // type: /char
     SHC_3BB0A8C1_0x00EB0E44 = 0x00EB0E44,
     // type: /int[250]
     SHC_3BB0A8C1_0x00EB0E48 = 0x00EB0E48,
@@ -97423,7 +97429,7 @@ enum {
     SHC_3BB0A8C1_0x00EC0348 = 0x00EC0348,
     // type: /int
     SHC_3BB0A8C1_0x00EC0828 = 0x00EC0828,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EC082C = 0x00EC082C,
     // label: DAT_CurrentMenuID_3
     // location:
@@ -97559,9 +97565,11 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3168 = 0x00ED3168,
+    // label: DAT_RenderMap_SecondBlitImageIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED316C = 0x00ED316C,
-    // label: DAT_00ed3170
+    // label: DAT_RenderMap_RowsLeft
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00ED3170 = 0x00ED3170,
@@ -97574,6 +97582,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3178 = 0x00ED3178,
+    // label: DAT_RenderMap_WhatToDraw
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED317C = 0x00ED317C,
     // label: DAT_CurrentlyRenderedSpriteID
@@ -97596,11 +97606,11 @@ enum {
     SHC_3BB0A8C1_0x00ED31A4 = 0x00ED31A4,
     // label: DAT_ButtonX
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31A8 = 0x00ED31A8,
     // label: DAT_ButtonY
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31AC = 0x00ED31AC,
     // label: DAT_ButtonW
     // location:
@@ -97632,7 +97642,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31C8 = 0x00ED31C8,
     // label: DAT_ButtonUnknownZero
     // location:
-    // type: /int
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00ED31CC = 0x00ED31CC,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED31D0 = 0x00ED31D0,

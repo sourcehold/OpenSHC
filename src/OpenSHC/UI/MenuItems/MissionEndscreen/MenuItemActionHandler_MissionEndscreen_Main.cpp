@@ -4,13 +4,13 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 
+#include "OpenSHC/Globals/CHAR_00eb0e44.hpp"
 #include "OpenSHC/Globals/COL_BLACK.hpp"
-#include "OpenSHC/Globals/DAT_00ec082c.hpp"
 #include "OpenSHC/Globals/DAT_FinalResultsOrderByColumn.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/INT_00eb0e44.hpp"
+#include "OpenSHC/Globals/INT_00ec082c.hpp"
 #include "OpenSHC/Globals/INT_00ed279c.hpp"
 
 namespace OpenSHC {
@@ -25,37 +25,37 @@ namespace UI {
             }
             switch (buttonID) {
             case -1:
-                if (INT_00eb0e44::instance != 0) {
+                if (CHAR_00eb0e44::instance != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox,
                         DAT_PencilRenderCore::ptr)(0, 0, DAT_WindowAndDirectDraw::instance.resolutionX,
                         DAT_WindowAndDirectDraw::instance.resolutionY, COL_BLACK::instance.shortValue);
-                    INT_00eb0e44::instance = 0;
+                    CHAR_00eb0e44::instance = 0;
                     break;
                 }
                 INT_00ed279c::instance = 1;
                 break;
             case -100:
-                if (INT_00eb0e44::instance != 0) {
+                if (CHAR_00eb0e44::instance != 0) {
                     break;
                 }
-                if (DAT_00ec082c::instance >= 2) {
-                    DAT_00ec082c::instance = 2;
+                if (INT_00ec082c::instance >= 2) {
+                    INT_00ec082c::instance = 2;
                     DAT_GameCore::instance.activeMenuTab.tabType = OpenSHC::UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX;
                     break;
                 }
-                DAT_00ec082c::instance = 0;
+                INT_00ec082c::instance = 0;
                 DAT_GameCore::instance.activeMenuTab.tabType = OpenSHC::UI::Enums::BASMTT_NONE;
                 break;
             case -101:
-                if (INT_00eb0e44::instance != 0) {
+                if (CHAR_00eb0e44::instance != 0) {
                     break;
                 }
-                if (DAT_00ec082c::instance < 2) {
-                    DAT_00ec082c::instance = 1;
+                if (INT_00ec082c::instance < 2) {
+                    INT_00ec082c::instance = 1;
                     DAT_GameCore::instance.activeMenuTab.tabType = OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM;
                     break;
                 }
-                DAT_00ec082c::instance = 3;
+                INT_00ec082c::instance = 3;
                 DAT_GameCore::instance.activeMenuTab.tabType = OpenSHC::UI::Enums::BASMTT_INN_OR_MPMMENU_UNK;
                 break;
             case -10:
@@ -65,7 +65,7 @@ namespace UI {
                 buttonID = 0;
             default:
                 DAT_FinalResultsOrderByColumn::instance = buttonID;
-                INT_00eb0e44::instance = 0;
+                CHAR_00eb0e44::instance = 0;
                 break;
             }
         }

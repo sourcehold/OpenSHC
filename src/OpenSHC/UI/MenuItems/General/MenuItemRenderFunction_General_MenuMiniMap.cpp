@@ -9,7 +9,6 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
-#include "OpenSHC/Globals/DAT_00b95960.hpp"
 #include "OpenSHC/Globals/DAT_ButtonBackgroundBlendStrength.hpp"
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
 #include "OpenSHC/Globals/DAT_ButtonY.hpp"
@@ -20,6 +19,7 @@
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/INT_00b95950.hpp"
+#include "OpenSHC/Globals/INT_00b95960.hpp"
 #include "OpenSHC/Globals/INT_00b95f6c.hpp"
 
 namespace OpenSHC {
@@ -52,7 +52,7 @@ namespace UI {
                         continue;
                     }
                     char const player = DAT_GameSynchronyState::instance.playerPositionsArray[position];
-                    if (player == DAT_00b95960::instance) {
+                    if (player == INT_00b95960::instance) {
                         continue;
                     }
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
@@ -124,17 +124,17 @@ namespace UI {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 }
-                if (DAT_00b95960::instance >= 0) {
+                if (INT_00b95960::instance >= 0) {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2,
-                        DAT_00b95960::instance + 470, DAT_MouseState::instance.screenSpaceX - 5,
+                        INT_00b95960::instance + 470, DAT_MouseState::instance.screenSpaceX - 5,
                         DAT_MouseState::instance.screenSpaceY - 7);
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     if (!DAT_MouseState::instance.leftClickState && !DAT_MouseState::instance.draggingStopped) {
-                        DAT_00b95960::instance = -1;
+                        INT_00b95960::instance = -1;
                     }
                 }
             }

@@ -299,19 +299,19 @@ namespace UI {
                             break;
                         case OpenSHC::UI::Enums::BMTT_INDUSTRY:
                             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7C);
+                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7c);
                             break;
                         case OpenSHC::UI::Enums::BMTT_TOWN:
                             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7D);
+                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7d);
                             break;
                         case OpenSHC::UI::Enums::BMTT_FARMS:
                             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7E);
+                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7e);
                             break;
                         case OpenSHC::UI::Enums::BMTT_FOOD:
                             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7F);
+                                OpenSHC::Audio::SFX::SEID_UNKNOWN_0x7f);
                             break;
                         case OpenSHC::UI::Enums::BMTT_WEAPONS:
                             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
