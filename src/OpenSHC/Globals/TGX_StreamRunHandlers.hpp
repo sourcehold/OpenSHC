@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Globals/PTR_ARRAY_00d7d250.hpp'
+  path: 'OpenSHC/Globals/TGX_StreamRunHandlers.hpp'
 */
 
 #pragma once
@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(pointer[32], false, Address::SHC_3BB0A8C1_0x00D7D250) PTR_ARRAY_00d7d250;
+MACRO_STRUCT_RESOLVER(pointer[32], false, Address::SHC_3BB0A8C1_0x00D7D250) TGX_StreamRunHandlers;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00D7D250);

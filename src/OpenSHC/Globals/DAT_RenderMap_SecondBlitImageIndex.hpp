@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Globals/DAT_00ed316c.hpp'
+  path: 'OpenSHC/Globals/DAT_RenderMap_SecondBlitImageIndex.hpp'
 */
 
 #pragma once
@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00ED316C) DAT_00ed316c;
+MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00ED316C) DAT_RenderMap_SecondBlitImageIndex;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00ED316C);
