@@ -24,7 +24,7 @@ namespace Map {
                 int i;
                 for (i = 0; i < 8; ++i) {
                     int neighbour = ((int*)DAT_TileMapState::instance.directionTranslationMatrix)
-                                        [DAT_UnitPropertiesDefinedData::instance.field84_0x11cb4[i] + y * 8]
+                                        [DAT_UnitPropertiesDefinedData::instance.field_0x11cb4[i] + y * 8]
                         + i;
                     int neighbourLogic = DAT_TileMapState::instance.LogicLayer[neighbour];
                     if ((neighbourLogic & 0x800) == 0) {

@@ -44,7 +44,7 @@ namespace Synchrony {
         }
         int _hash = 0;
         DAT_GameSynchronyState::instance.syncStatus = 1;
-        DAT_GameSynchronyState::instance.field76_0xbe8 = DAT_GameSynchronyState::instance.resyncStartTime;
+        DAT_GameSynchronyState::instance.field_0xbe8 = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceiveTime = DAT_GameSynchronyState::instance.resyncStartTime;
         DAT_GameSynchronyState::instance.announcementReceivedBool = FALSE;
         // A bug in the original, reproduced on purpose: HashContainerElement is 12 ints wide, so
