@@ -445,6 +445,13 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
 
+- When a loop reads two **parallel arrays** at the same index, MSVC strength-reduces the index into one pointer and
+  anchors it on whichever of the arrays is compared **last**, reaching the other one off that pointer. If the
+  original anchors on the other array, try swapping the comparisons; where the comparison order is itself fixed by
+  the original's asm, the second array has to be reached as an offset from the first
+  (`createStatsPopUpEntities`, `showPopAndGoldPopup`: 0.9211 -> 1.0000). Derive that offset from the two array
+  names so no literal index past an array's end is needed.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
