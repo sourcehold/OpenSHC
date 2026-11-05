@@ -1,8 +1,8 @@
 #include "../MapEditorProperties.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95b74.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -21,7 +21,7 @@ namespace UI {
                 switch (scrollbarEvent) {
                 case 1:
                     *minValue = 0;
-                    *maxValue = DAT_00b95b74::instance - 231;
+                    *maxValue = INT_00b95b74::instance - 231;
                     *currentValue = 0;
                     return;
                 case 2:
@@ -30,7 +30,7 @@ namespace UI {
                     return;
                 case 4:
                     *minValue = 0;
-                    *maxValue = DAT_00b95b74::instance - 231;
+                    *maxValue = INT_00b95b74::instance - 231;
                     *currentValue = DAT_00b960f4::instance;
                     return;
                 case 7:
@@ -47,10 +47,10 @@ namespace UI {
                     *currentValue = DAT_00b960f4::instance;
                     return;
                 case 6:
-                    if (DAT_00b960f4::instance < DAT_00b95b74::instance - 231) {
+                    if (DAT_00b960f4::instance < INT_00b95b74::instance - 231) {
                         DAT_00b960f4::instance += 14;
-                        if (DAT_00b960f4::instance > DAT_00b95b74::instance - 231) {
-                            DAT_00b960f4::instance = DAT_00b95b74::instance - 231;
+                        if (DAT_00b960f4::instance > INT_00b95b74::instance - 231) {
+                            DAT_00b960f4::instance = INT_00b95b74::instance - 231;
                         }
                     }
                     *currentValue = DAT_00b960f4::instance;

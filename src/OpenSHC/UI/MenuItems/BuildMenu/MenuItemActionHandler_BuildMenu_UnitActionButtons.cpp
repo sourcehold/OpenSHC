@@ -119,7 +119,7 @@ namespace UI {
                 }
                 case 22: {
                     // Throw a cow: needs a cow and a manned catapult or trebuchet.
-                    if (DAT_GameState::instance.playerDataArray[player].counter <= 0) {
+                    if (DAT_GameState::instance.playerDataArray[player].availableCows <= 0) {
                         return;
                     }
                     UnitType const unitType = MACRO_CALL_MEMBER(
@@ -148,10 +148,10 @@ namespace UI {
                     DAT_TileMapState::instance.cursorOverlayGmID = DE::SHCDE::GM_CURSORS;
                     return;
                 case 30:
-                    // Patrol, only when the first selected unit is the player's (UT_NONE means another player's).
+                    // Patrol, only when the first selected unit is the player's (UT_INVALID means another player's).
                     if (MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)()
-                        != Map::Units::UT_NONE) {
+                        != Map::Units::UT_INVALID) {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand2Params,
                             DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, 30);
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::playPatrolCommandSpeech, DAT_TribesState::ptr)(
