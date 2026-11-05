@@ -42,7 +42,7 @@ namespace Map {
                 DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[p] = 0;
                 DAT_GameState::instance.playerDataArray[p].dogCageCount = 0;
             }
-            this->field1_0x4 = 0;
+            this->field_0x4 = 0;
 
             // The update functions of the building types use DAT_CurrentBuildingID
             for (DAT_CurrentBuildingID::instance = 1; DAT_CurrentBuildingID::instance < this->maxBuildingsCount;
