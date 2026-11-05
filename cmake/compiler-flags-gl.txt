@@ -99,4 +99,6 @@ src/OpenSHC/Map/Buildings/UpdateBadBuildingGallows.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingBurningStake.cpp
 src/OpenSHC/UI/Rendering/ButtonGmData/getPictureNumberInGm.cpp
 src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
+src/OpenSHC/UI/Helpers/SetTribesPatrolButtonPressed.cpp
+src/OpenSHC/UI/MenuItems/BuildMenu/MenuItemActionHandler_BuildMenu_UnitActionButtons.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
