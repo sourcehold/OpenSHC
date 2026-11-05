@@ -73,7 +73,7 @@ namespace UI {
 
         void __cdecl CheckIfEnoughGoldForMonk();
 
-        BOOLEnum __cdecl CheckGoldResource(int param_1);
+        BOOLEnum __cdecl CheckGoldResource(UnitType param_1);
 
         void __cdecl CheckIfEnoughGoldForTunneler();
 

@@ -122,7 +122,7 @@ namespace UI {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004650A0, &OpenSHC::UI::Helpers::CheckIfEnoughGoldForMonk)
         CheckIfEnoughGoldForMonk;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004650C0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(UnitType param_1), false, Address::SHC_3BB0A8C1_0x004650C0,
             &OpenSHC::UI::Helpers::CheckGoldResource)
         CheckGoldResource;
 

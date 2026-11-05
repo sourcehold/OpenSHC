@@ -204,7 +204,7 @@ namespace Game {
             short freshUnitTribeIDs[4]; // 0x0000225C length: 8
             int freshUnitTribeUIDs[4]; // 0x00002264 length: 16
             int aiControlStatusRelated; // 0x00002274 length: 4
-            int counter; // 0x00002278 length: 4
+            int availableCows; // 0x00002278 length: 4
             short pitchDitchCounterTo4; // 0x0000227C length: 2
             short previousBlessedPeoplePercentage; // 0x0000227E length: 2
             short isFoodTypeBanned[4]; // 0x00002280 length: 8
