@@ -26,39 +26,30 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00447D30
     void BuildingMenus::RenderBuildingMenu_Tower()
     {
-        int selectedType;
-        int x;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSizeOrWidth;
-        uint color2;
-        BOOLEnum keepOffsetX;
-        int blendStrengthOrFontSize;
-        int blendStrength;
-        selectedType
+        int selectedType
             = (short)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                   .buildingType;
-        blendStrengthOrFontSize = 0;
-        keepOffsetX = FALSE;
-        fontSizeOrWidth = 0x10;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int y = DAT_MenuHandlerState::instance.y + 0x1d3;
-        x = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrengthOrFontSize = 0;
+        BOOLEnum keepOffsetX = FALSE;
+        int fontSizeOrWidth = 16;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int y = DAT_MenuHandlerState::instance.y + 467;
+        int x = DAT_MenuHandlerState::instance.x + 25;
         // "Tower"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TOWER, 0),
             x, y, alignment, color, fontSizeOrWidth, keepOffsetX, blendStrengthOrFontSize);
-        blendStrength = 0;
-        blendStrengthOrFontSize = 0x12;
-        color2 = 0;
-        fontSizeOrWidth = 0x136;
-        y = DAT_MenuHandlerState::instance.y + 0x1fb;
-        x = DAT_MenuHandlerState::instance.x + 0xaf;
+        int blendStrength = 0;
+        blendStrengthOrFontSize = 18;
+        uint color2 = 0;
+        fontSizeOrWidth = 310;
+        y = DAT_MenuHandlerState::instance.y + 507;
+        x = DAT_MenuHandlerState::instance.x + 175;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TOWER, selectedType - 0x49),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TOWER, selectedType - 73),
             x, y, fontSizeOrWidth, color2, blendStrengthOrFontSize, blendStrength);
         MACRO_CALL(OpenSHC::UI::BuildingMenus_Func::RenderBuildingMenu_RenderTowerAndGateHealth)();
     }

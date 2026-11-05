@@ -36,15 +36,15 @@ namespace UI {
         } else {
             percent = health * 100 / DAT_BuildingsState::instance.buildings[id].maxHealth;
         }
-        int left = DAT_MenuHandlerState::instance.x + 0x1d6;
-        int top = DAT_MenuHandlerState::instance.y + 0x1d3;
+        int left = DAT_MenuHandlerState::instance.x + 470;
+        int top = DAT_MenuHandlerState::instance.y + 467;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-            left, top, left + 0x33, top + 0xb, COL_BLACK::instance.shortValue);
-        int innerBottom = top + 0xa;
+            left, top, left + 51, top + 11, COL_BLACK::instance.shortValue);
+        int innerBottom = top + 10;
         int innerTop = top + 1;
         int innerLeft = left + 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-            innerLeft, innerTop, left + 0x32, innerBottom, COL_RED::instance.shortValue);
+            innerLeft, innerTop, left + 50, innerBottom, COL_RED::instance.shortValue);
         if (percent >= 2) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 innerLeft, innerTop, (percent >> 1) + left, innerBottom, healthColor.shortValue);
@@ -54,8 +54,8 @@ namespace UI {
             (int)DAT_BuildingsState::instance.buildings[id].currentHealth,
             (int)DAT_BuildingsState::instance.buildings[id].maxHealth);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(text,
-            DAT_MenuHandlerState::instance.x + 0x1ef, DAT_MenuHandlerState::instance.y + 0x1e2,
-            OpenSHC::Text::TTA_CENTER, 0, 0x12, FALSE, 0);
+            DAT_MenuHandlerState::instance.x + 495, DAT_MenuHandlerState::instance.y + 482, OpenSHC::Text::TTA_CENTER,
+            0, 18, FALSE, 0);
     }
 
 }

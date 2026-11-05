@@ -27,19 +27,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043B9D0
     void BuildingMenus::RenderBuildingMenu_Armourer()
     {
-        int x;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSize;
-        BOOLEnum paused;
-        int blendStrength;
-        blendStrength = 0;
-        paused = FALSE;
-        fontSize = 0x10;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int yOrWorkerID = DAT_MenuHandlerState::instance.y + 0x1d3;
-        x = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrength = 0;
+        BOOLEnum paused = FALSE;
+        int fontSize = 16;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int yOrWorkerID = DAT_MenuHandlerState::instance.y + 467;
+        int x = DAT_MenuHandlerState::instance.x + 25;
         // "Armourer’s Workshop"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -54,15 +48,15 @@ namespace UI {
             if (paused == FALSE) {
                 blendStrength = 0;
                 paused = FALSE;
-                fontSize = 0x12;
+                fontSize = 18;
                 color = 0;
                 alignment = OpenSHC::Text::TTA_LEFT;
-                yOrWorkerID = DAT_MenuHandlerState::instance.y + 0x1fe;
-                x = DAT_MenuHandlerState::instance.x + 0xaf;
+                yOrWorkerID = DAT_MenuHandlerState::instance.y + 510;
+                x = DAT_MenuHandlerState::instance.x + 175;
                 // "Not producing - No Iron"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xc),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 12),
                     x, yOrWorkerID, alignment, color, fontSize, paused, blendStrength);
             }
         }

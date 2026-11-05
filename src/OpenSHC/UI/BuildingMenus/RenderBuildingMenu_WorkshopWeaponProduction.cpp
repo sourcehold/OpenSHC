@@ -31,14 +31,13 @@ namespace UI {
     {
         int workerIDOrPosition;
         BOOLEnum paused;
-        int buildingIDOrY;
         int _textNumInGroup;
         int xOrFontSize;
         TextAlignment alignment;
         BGR24 color;
         int fontSizeOrBlendStrength;
         int blendStrength;
-        buildingIDOrY = DAT_BuildingsState::instance.menuSelectedBuildingID;
+        int buildingIDOrY = DAT_BuildingsState::instance.menuSelectedBuildingID;
         if ((((DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType
                   == OpenSHC::Map::Buildings::BT_FLETCHER)
                  && (workerIDOrPosition
@@ -51,8 +50,8 @@ namespace UI {
                 paused == FALSE)) {
             // "Not producing - No Wood"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xb, DAT_MenuHandlerState::instance.x + 0xaf,
-                DAT_MenuHandlerState::instance.y + 0x1f9, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE);
+                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 11, DAT_MenuHandlerState::instance.x + 175,
+                DAT_MenuHandlerState::instance.y + 505, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE);
         } else if (((DAT_BuildingsState::instance.buildings[buildingIDOrY].buildingType
                         == OpenSHC::Map::Buildings::BT_POLETURNER)
                        && (workerIDOrPosition = (int)DAT_BuildingsState::instance.buildings[buildingIDOrY].workerID[0],
@@ -63,8 +62,8 @@ namespace UI {
                     paused == FALSE)))) {
             // "Not producing - No Wood"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xb, DAT_MenuHandlerState::instance.x + 0xaf,
-                DAT_MenuHandlerState::instance.y + 0x1f9, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE);
+                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 11, DAT_MenuHandlerState::instance.x + 175,
+                DAT_MenuHandlerState::instance.y + 505, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE);
         } else if (((DAT_BuildingsState::instance.buildings[buildingIDOrY].buildingType
                         == OpenSHC::Map::Buildings::BT_BLACKSMITH)
                        && (workerIDOrPosition = (int)DAT_BuildingsState::instance.buildings[buildingIDOrY].workerID[0],
@@ -75,16 +74,16 @@ namespace UI {
                     paused == FALSE)))) {
             // "Not producing - No Iron"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xc, DAT_MenuHandlerState::instance.x + 0xaf,
-                DAT_MenuHandlerState::instance.y + 0x1f9, OpenSHC::Text::TTA_LEFT, 0, 0x12, FALSE);
+                OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 12, DAT_MenuHandlerState::instance.x + 175,
+                DAT_MenuHandlerState::instance.y + 505, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE);
         } else {
             blendStrength = 0;
             paused = FALSE;
-            fontSizeOrBlendStrength = 0x12;
+            fontSizeOrBlendStrength = 18;
             color = 0;
             alignment = OpenSHC::Text::TTA_LEFT;
-            workerIDOrPosition = DAT_MenuHandlerState::instance.y + 0x1f9;
-            xOrFontSize = DAT_MenuHandlerState::instance.x + 0xaf;
+            workerIDOrPosition = DAT_MenuHandlerState::instance.y + 505;
+            xOrFontSize = DAT_MenuHandlerState::instance.x + 175;
             // "Producing:"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -111,11 +110,11 @@ namespace UI {
             }
             blendStrength = 0;
             paused = TRUE;
-            fontSizeOrBlendStrength = 0x12;
+            fontSizeOrBlendStrength = 18;
             color = 0;
             alignment = OpenSHC::Text::TTA_LEFT;
-            workerIDOrPosition = DAT_MenuHandlerState::instance.y + 0x1f9;
-            xOrFontSize = DAT_MenuHandlerState::instance.x + 0xb4;
+            workerIDOrPosition = DAT_MenuHandlerState::instance.y + 505;
+            xOrFontSize = DAT_MenuHandlerState::instance.x + 180;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup),
@@ -123,11 +122,11 @@ namespace UI {
         }
         blendStrength = 0;
         paused = FALSE;
-        fontSizeOrBlendStrength = 0x12;
+        fontSizeOrBlendStrength = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        workerIDOrPosition = DAT_MenuHandlerState::instance.y + 0x212;
-        xOrFontSize = DAT_MenuHandlerState::instance.x + 0xaf;
+        workerIDOrPosition = DAT_MenuHandlerState::instance.y + 530;
+        xOrFontSize = DAT_MenuHandlerState::instance.x + 175;
         // "Next:"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -154,11 +153,11 @@ namespace UI {
         }
         fontSizeOrBlendStrength = 0;
         paused = TRUE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        buildingIDOrY = DAT_MenuHandlerState::instance.y + 0x212;
-        workerIDOrPosition = DAT_MenuHandlerState::instance.x + 0xb4;
+        buildingIDOrY = DAT_MenuHandlerState::instance.y + 530;
+        workerIDOrPosition = DAT_MenuHandlerState::instance.x + 180;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup),

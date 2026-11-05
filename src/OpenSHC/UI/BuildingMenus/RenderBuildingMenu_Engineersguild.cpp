@@ -26,21 +26,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043CA70
     void BuildingMenus::RenderBuildingMenu_Engineersguild()
     {
-        int x;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSizeOrWidth;
-        uint color2;
-        BOOLEnum keepOffsetX;
-        int blendStrengthOrFontSize;
-        int blendStrength;
-        blendStrengthOrFontSize = 0;
-        keepOffsetX = FALSE;
-        fontSizeOrWidth = 0x10;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int y = DAT_MenuHandlerState::instance.y + 0x1d3;
-        x = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrengthOrFontSize = 0;
+        BOOLEnum keepOffsetX = FALSE;
+        int fontSizeOrWidth = 16;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int y = DAT_MenuHandlerState::instance.y + 467;
+        int x = DAT_MenuHandlerState::instance.x + 25;
         // "Engineer's Guild"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -48,12 +40,12 @@ namespace UI {
             x, y, alignment, color, fontSizeOrWidth, keepOffsetX, blendStrengthOrFontSize);
         MACRO_CALL(OpenSHC::UI::Helpers_Func::CheckIfEnoughGoldForLadderman)();
         if (DAT_EnoughGoldForRequestedUnit::instance == FALSE) {
-            blendStrength = 0;
-            blendStrengthOrFontSize = 0x11;
-            color2 = 0;
+            int blendStrength = 0;
+            blendStrengthOrFontSize = 17;
+            uint color2 = 0;
             fontSizeOrWidth = 400;
-            y = DAT_MenuHandlerState::instance.y + 0x1fc;
-            x = DAT_MenuHandlerState::instance.x + 0x5a;
+            y = DAT_MenuHandlerState::instance.y + 508;
+            x = DAT_MenuHandlerState::instance.x + 90;
             // "You do not have enough gold for apprentices"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

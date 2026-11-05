@@ -25,100 +25,93 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043BBB0
     void BuildingMenus::RenderBuildingMenu_Outpost()
     {
-        int xOrFontSize;
-        int titleIndexOrY;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSizeOrBlendStrength;
-        BOOLEnum keepOffsetX;
-        int blendStrength;
-        titleIndexOrY = 0;
+        int titleIndexOrY = 0;
         if (DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType
             == OpenSHC::Map::Buildings::BT_OUTPOST_ARABIAN) {
             titleIndexOrY = 9;
         }
-        blendStrength = 0;
-        keepOffsetX = FALSE;
-        fontSizeOrBlendStrength = 0x10;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int yOrX = DAT_MenuHandlerState::instance.y + 0x1cf;
-        xOrFontSize = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrength = 0;
+        BOOLEnum keepOffsetX = FALSE;
+        int fontSizeOrBlendStrength = 16;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int yOrX = DAT_MenuHandlerState::instance.y + 463;
+        int xOrFontSize = DAT_MenuHandlerState::instance.x + 25;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, titleIndexOrY),
             xOrFontSize, yOrX, alignment, color, fontSizeOrBlendStrength, keepOffsetX, blendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x205;
-        yOrX = DAT_MenuHandlerState::instance.x + 0x19;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 517;
+        yOrX = DAT_MenuHandlerState::instance.x + 25;
         // "Size"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x12),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 18),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x1e9;
-        yOrX = DAT_MenuHandlerState::instance.x + 0x73;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 489;
+        yOrX = DAT_MenuHandlerState::instance.x + 115;
         // "Small"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x13),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 19),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x1e9;
-        yOrX = DAT_MenuHandlerState::instance.x + 0xcb;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 489;
+        yOrX = DAT_MenuHandlerState::instance.x + 203;
         // "Large"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x14),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 20),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x23f;
-        yOrX = DAT_MenuHandlerState::instance.x + 0x19;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 575;
+        yOrX = DAT_MenuHandlerState::instance.x + 25;
         alignment = OpenSHC::Text::TTA_LEFT;
         // "Start Delay"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x15),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 21),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x223;
-        yOrX = DAT_MenuHandlerState::instance.x + 0x73;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 547;
+        yOrX = DAT_MenuHandlerState::instance.x + 115;
         // "None"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x16),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 22),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
         fontSizeOrBlendStrength = 0;
         keepOffsetX = FALSE;
-        xOrFontSize = 0x12;
+        xOrFontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        titleIndexOrY = DAT_MenuHandlerState::instance.y + 0x223;
-        yOrX = DAT_MenuHandlerState::instance.x + 0xcb;
+        titleIndexOrY = DAT_MenuHandlerState::instance.y + 547;
+        yOrX = DAT_MenuHandlerState::instance.x + 203;
         // "10 Mins"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 0x17),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_OUTPOST, 23),
             yOrX, titleIndexOrY, alignment, color, xOrFontSize, keepOffsetX, fontSizeOrBlendStrength);
     }
 

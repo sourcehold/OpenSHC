@@ -24,19 +24,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043BFA0
     void BuildingMenus::RenderBuildingMenu_Apothecary()
     {
-        int x;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSize;
-        BOOLEnum keepOffsetX;
-        int blendStrength;
-        blendStrength = 0;
-        keepOffsetX = FALSE;
-        fontSize = 0x10;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int yOrHealerCount = DAT_MenuHandlerState::instance.y + 0x1d3;
-        x = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrength = 0;
+        BOOLEnum keepOffsetX = FALSE;
+        int fontSize = 16;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int yOrHealerCount = DAT_MenuHandlerState::instance.y + 467;
+        int x = DAT_MenuHandlerState::instance.x + 25;
         // "Apothecary"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -44,11 +38,11 @@ namespace UI {
             x, yOrHealerCount, alignment, color, fontSize, keepOffsetX, blendStrength);
         blendStrength = 0;
         keepOffsetX = FALSE;
-        fontSize = 0x12;
+        fontSize = 18;
         color = 0;
         alignment = OpenSHC::Text::TTA_LEFT;
-        yOrHealerCount = DAT_MenuHandlerState::instance.y + 0x203;
-        x = DAT_MenuHandlerState::instance.x + 0xb1;
+        yOrHealerCount = DAT_MenuHandlerState::instance.y + 515;
+        x = DAT_MenuHandlerState::instance.x + 177;
         // "Immunity From Disease"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -60,11 +54,11 @@ namespace UI {
             yOrHealerCount = 3;
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            yOrHealerCount * 0x14, DAT_MenuHandlerState::instance.x + 0xb7, DAT_MenuHandlerState::instance.y + 0x203,
-            OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+            yOrHealerCount * 20, DAT_MenuHandlerState::instance.x + 183, DAT_MenuHandlerState::instance.y + 515,
+            OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)("%",
-            DAT_MenuHandlerState::instance.x + 0xb7, DAT_MenuHandlerState::instance.y + 0x203, OpenSHC::Text::TTA_LEFT,
-            0, 0x12, TRUE, 0);
+            DAT_MenuHandlerState::instance.x + 183, DAT_MenuHandlerState::instance.y + 515, OpenSHC::Text::TTA_LEFT, 0,
+            18, TRUE, 0);
     }
 
 }

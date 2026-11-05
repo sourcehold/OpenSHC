@@ -24,19 +24,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043DBD0
     void BuildingMenus::RenderBuildingMenu_DogCage()
     {
-        int x;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSize;
-        BOOLEnum keepOffsetX;
-        int blendStrength;
-        blendStrength = 0;
-        keepOffsetX = FALSE;
-        fontSize = 0x11;
-        color = 0;
-        alignment = OpenSHC::Text::TTA_LEFT;
-        int y = DAT_MenuHandlerState::instance.y + 0x1d3;
-        x = DAT_MenuHandlerState::instance.x + 0x19;
+        int blendStrength = 0;
+        BOOLEnum keepOffsetX = FALSE;
+        int fontSize = 17;
+        BGR24 color = 0;
+        TextAlignment alignment = OpenSHC::Text::TTA_LEFT;
+        int y = DAT_MenuHandlerState::instance.y + 467;
+        int x = DAT_MenuHandlerState::instance.x + 25;
         // "Caged war dogs"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -47,10 +41,10 @@ namespace UI {
             == 1) {
             blendStrength = 0;
             keepOffsetX = FALSE;
-            fontSize = 0x11;
+            fontSize = 17;
             color = 0;
             alignment = OpenSHC::Text::TTA_LEFT;
-            y = DAT_MenuHandlerState::instance.y + 0x205;
+            y = DAT_MenuHandlerState::instance.y + 517;
             x = DAT_MenuHandlerState::instance.x + 200;
             // "The dogs are loose!"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

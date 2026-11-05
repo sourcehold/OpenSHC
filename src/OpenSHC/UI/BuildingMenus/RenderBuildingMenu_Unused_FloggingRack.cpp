@@ -24,8 +24,8 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_FLOGGING_RACK, 0),
-            DAT_MenuHandlerState::instance.x + 0x19, DAT_MenuHandlerState::instance.y + 0x1d3, OpenSHC::Text::TTA_LEFT,
-            0, 0x11, FALSE, 0);
+            DAT_MenuHandlerState::instance.x + 25, DAT_MenuHandlerState::instance.y + 467, OpenSHC::Text::TTA_LEFT, 0,
+            17, FALSE, 0);
     }
 
 }
