@@ -44,7 +44,7 @@ namespace Map {
             int unknownInitially0_01; // 0x00000008 length: 4
             int lastSelectedUnitID; // 0x0000000C length: 4
             int unitControlsRelated; // 0x00000010 length: 4
-            BOOLEnum pendingUnitControlMode; // 0x00000014 length: 4
+            int pendingUnitControlMode; // 0x00000014 length: 4
             int lostChimps; // 0x00000018 length: 4
             int unitDistanceComputationResultUnk; // 0x0000001C length: 4
             int totalUnitsInSelection; // 0x00000020 length: 4

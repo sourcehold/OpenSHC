@@ -13,6 +13,7 @@ namespace UI {
     namespace Enums {
         typedef enum BuildingsAndStatusMenuTabType {
 
+            BASMTT_NONE = 0, // 0x00000000
             BASMTT_BARRACKS_OR_MPMENU_MODEM = 1, // 0x00000001
             BASMTT_KEEP_OR_MPMENU_IPX = 2, // 0x00000002
             BASMTT_INN_OR_MPMMENU_UNK = 3, // 0x00000003

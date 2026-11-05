@@ -124,7 +124,7 @@ namespace Map {
         undefined1 padding_0x5548d0[4]; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
-        undefined4 savedEditorActiveBrush; // 0x005548DC length: 4
+        int savedEditorActiveBrush; // 0x005548DC length: 4
         int editorActiveBrush; // 0x005548E0 length: 4
         MappersEnum currentMapperCommand; // 0x005548E4 length: 4
         undefined4 DAT_BuildingSize; // 0x005548E8 length: 4
