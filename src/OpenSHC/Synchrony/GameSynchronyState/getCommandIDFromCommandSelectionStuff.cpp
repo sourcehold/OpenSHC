@@ -18,7 +18,7 @@ namespace Synchrony {
         this->someIndex = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->selectedGameCommands), 0, this->selectedGameCommands);
-        for (int command = this->gameCommandID; command < 200; ++command) {
+        for (int command = this->gameCommandID; command < countof(this->DAT_GameCommandArray); ++command) {
             // The command is not processed yet, is to be processed, and its time has come.
             if (this->DAT_GameCommandArray[command].stateUnk != 0
                 && this->DAT_GameCommandArray[command].stateUnk < Commands::GCS_PROCESSED
