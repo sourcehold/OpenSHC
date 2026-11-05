@@ -14,9 +14,9 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/string-literals.hpp"
 
+#include "OpenSHC/Globals/CHAR_00eb0e44.hpp"
 #include "OpenSHC/Globals/COL_WHITE.hpp"
 #include "OpenSHC/Globals/DAT_00eb9af8.hpp"
-#include "OpenSHC/Globals/DAT_00ec082c.hpp"
 #include "OpenSHC/Globals/DAT_00ed3118.hpp"
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_FinalResultsOrderByColumn.hpp"
@@ -30,7 +30,7 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/INT_00eb0e44.hpp"
+#include "OpenSHC/Globals/INT_00ec082c.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -407,7 +407,7 @@ namespace UI {
                     OpenSHC::Rendering::Colors::COL_C2F0EB, 19, TRUE, 0);
             }
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-            if (DAT_00ec082c::instance == 0 || DAT_00ec082c::instance == 2) {
+            if (INT_00ec082c::instance == 0 || INT_00ec082c::instance == 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     tables.kills[player], x + 279, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
                     18, FALSE, 0);
@@ -436,7 +436,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[player], x + 743, y,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             }
-            if (DAT_00ec082c::instance == 1 || DAT_00ec082c::instance == 2) {
+            if (INT_00ec082c::instance == 1 || INT_00ec082c::instance == 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[player], columnOffset + 279 + x, y,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
@@ -454,7 +454,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[player],
                     columnOffset + 453 + x, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
                     FALSE, 0);
-                if (DAT_00ec082c::instance == 1) {
+                if (INT_00ec082c::instance == 1) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                         DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[player],
@@ -471,7 +471,7 @@ namespace UI {
                         OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 }
             }
-            if (DAT_00ec082c::instance == 3) {
+            if (INT_00ec082c::instance == 3) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[player], x + 511, y,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
@@ -486,7 +486,7 @@ namespace UI {
             iconY += 45;
         }
 
-        if ((char)INT_00eb0e44::instance == '\0') {
+        if (CHAR_00eb0e44::instance == '\0') {
             if (DAT_00eb9af8::instance == 0 && DAT_GameSynchronyState::instance.finalResults.yearStart != 0) {
                 // fixme: the original writes the date into the (no longer needed) statistic orders
                 char* const dateText = (char*)tables.statOrder[0];
@@ -541,7 +541,7 @@ namespace UI {
             }
         }
         DAT_00eb9af8::instance = DAT_FinalResultsOrderByColumn::instance;
-        if ((char)INT_00eb0e44::instance == '\0') {
+        if (CHAR_00eb0e44::instance == '\0') {
             return;
         }
 
