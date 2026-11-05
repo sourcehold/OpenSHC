@@ -75,7 +75,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
                     OpenSHC::Text::TAIT_TWO__FILTER_A);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
-                if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2[0]) {
+                if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2) {
                     strcpy(fileName,
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)());

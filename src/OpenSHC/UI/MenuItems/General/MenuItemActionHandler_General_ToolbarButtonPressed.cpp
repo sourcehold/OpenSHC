@@ -131,7 +131,7 @@ namespace UI {
             case OpenSHC::Commands::M_MAPPER_PATROL:
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     return;
                 }
                 if (DAT_TribesState::instance.patrolButtonPressed) {
