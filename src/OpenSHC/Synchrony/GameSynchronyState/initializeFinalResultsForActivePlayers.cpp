@@ -17,7 +17,7 @@ namespace Synchrony {
     {
         strcpy(this->DAT_PlayerNames[1],
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0));
-        for (int player = 1; player < 9; ++player) {
+        for (int player = 1; player < countof(this->currentAIArray); ++player) {
             if (this->currentAIArray[player] == 0 && this->currentPlayerFullIDArray[player] == -1) {
                 this->finalResults.active[player] = 0;
             } else {
@@ -50,8 +50,8 @@ namespace Synchrony {
                 this->finalResults.unknownIntArray3[player] = 0;
             }
         }
-        for (int row = 0; row < 9; ++row) {
-            for (int column = 0; column < 9; ++column) {
+        for (int row = 0; row < countof(this->finalResults.finalKillMatrix); ++row) {
+            for (int column = 0; column < countof(this->finalResults.finalKillMatrix[0]); ++column) {
                 this->finalResults.finalKillMatrix[row][column] = 0;
             }
         }

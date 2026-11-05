@@ -51,7 +51,7 @@ namespace Synchrony {
         if (DAT_GameSynchronyState::instance.isHost) {
             this->DAT_TwoIfNotHost = 2;
         }
-        for (int player = 0; player < 9; ++player) {
+        for (int player = 0; player < countof(this->unknownPlayerInfo_03); ++player) {
             this->unknownPlayerInfo_03[player] = 0;
             this->matchTimes[player] = -1;
             this->field_0x109e80[player] = 0;
@@ -76,7 +76,7 @@ namespace Synchrony {
             this->HASH_PartialHashPerPlayer.player[player].domain[3] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[4] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[5] = 0;
-            for (int entry = 0; entry < 100; ++entry) {
+            for (int entry = 0; entry < countof(this->historicalLagInfoPerPlayer[0]); ++entry) {
                 this->historicalLagInfoPerPlayer[player][entry][0] = 0;
             }
             this->connectionLagInfoArray[player].average1 = 0;
@@ -106,7 +106,7 @@ namespace Synchrony {
             this->finalResults.unknownIntArray3[player] = 0;
             this->mapSendingFileHandles[player] = NULL;
         }
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < countof(this->skirmishUnknownSetting1); ++i) {
             this->skirmishUnknownSetting1[i] = 1;
         }
         this->skirmishStartGold = 0;
@@ -156,7 +156,7 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::stopAllActiveSounds, DAT_SoundSystemState::ptr)();
         DAT_GameCore::instance.currentlyInGameUnk_0xa4 = FALSE;
         // The players' colours go back to the defaults.
-        for (int slot = 0; slot < 9; ++slot) {
+        for (int slot = 0; slot < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++slot) {
             DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[slot]
                 = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[slot];
         }

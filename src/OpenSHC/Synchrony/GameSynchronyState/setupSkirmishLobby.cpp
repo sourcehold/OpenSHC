@@ -48,7 +48,7 @@ namespace Synchrony {
         this->flag_0x7aad8 = FALSE;
         this->DAT_TwoIfNotHost = 2;
         MACRO_CALL_MEMBER(IO::BitMapState_Func::setBMPFacesToMagenta, DAT_BitMapState::ptr)();
-        for (int player = 0; player < 9; ++player) {
+        for (int player = 0; player < countof(this->currentPlayerFullIDArray); ++player) {
             this->currentPlayerFullIDArray[player] = -1;
             this->currentAIArray[player] = 0;
             this->matchTimes[player] = -1;
@@ -75,7 +75,7 @@ namespace Synchrony {
             this->HASH_PartialHashPerPlayer.player[player].domain[3] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[4] = 0;
             this->HASH_PartialHashPerPlayer.player[player].domain[5] = 0;
-            for (int entry = 0; entry < 100; ++entry) {
+            for (int entry = 0; entry < countof(this->historicalLagInfoPerPlayer[0]); ++entry) {
                 this->historicalLagInfoPerPlayer[player][entry][0] = 0;
             }
             this->connectionLagInfoArray[player].average1 = 0;
@@ -105,7 +105,7 @@ namespace Synchrony {
             this->finalResults.unknownIntArray3[player] = 0;
             this->mapSendingFileHandles[player] = NULL;
         }
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < countof(this->skirmishUnknownSetting1); ++i) {
             this->skirmishUnknownSetting1[i] = 1;
         }
         this->skirmishStartGold = 0;
@@ -115,7 +115,7 @@ namespace Synchrony {
         this->field_0x1072e8 = -1;
         this->field_0x1072ec = -1;
         // The faces of player slots 1 to 8 (slot + 19).
-        for (int face = 20; face < 28; ++face) {
+        for (int face = 20; face < countof(DAT_TextureRenderCoreObject::instance.bitmapFaceSizes); ++face) {
             DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[face] = 0;
         }
         this->skirmishTechLevel = 4;
