@@ -4,7 +4,6 @@
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
@@ -32,6 +31,7 @@ namespace UI {
             // text slot 11 is the year box: it gets the event's year
             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(11);
             char yearText[12];
+            // the game reads the year through currentEventID, not eventID
             // "%d"
             MACRO_CALL(OpenSHC::OS_Func::_sprintf)(yearText, s__d_005aa7f0,
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
@@ -39,13 +39,9 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                 yearText);
             switch (DAT_MapPropertiesState::instance.editedEventType) {
-            case 3:
-                // an event
-                MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_NEW_EVENT, FALSE);
-                break;
             case 1:
                 // an invasion
+                // the year box
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
                     11);
                 DAT_MapPropertiesState::instance.field_0x1356c = 0;
@@ -53,6 +49,11 @@ namespace UI {
                 DAT_MapPropertiesState::instance.indexStored = 0;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                     DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_NEW_INVASION, FALSE);
+                break;
+            case 3:
+                // an event
+                MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
+                    DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_NEW_EVENT, FALSE);
                 break;
             }
         }

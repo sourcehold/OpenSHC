@@ -36,21 +36,22 @@ namespace UI {
                 = DAT_MenuTextInputState::instance
                       .DAT_ArrayOfMapIndices[DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                           + row];
+            // the file's DOS time stamp: day, month, two-digit year, hour, minute
+            // the game reads it here, before the calls below
             int const fileTime = DAT_ResourceManager::instance.mapFileTimes[mapIndex];
             uint color;
-            if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
-                || DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER
-                || DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices2[mapIndex - 1] != 0) {
-                if (row == DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
-                    || DAT_ButtonCurrentlyInteracting::instance) {
-                    color = OpenSHC::Rendering::Colors::COL_CCFAFF;
-                } else {
-                    color = OpenSHC::Rendering::Colors::COL_C2F0EB;
-                }
-            } else {
-                // a saved game from a mode that cannot load it here is greyed out
+            if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                && DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER
+                && DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices2[mapIndex - 1] == 0) {
+                // outside solitary and skirmish, a file with flag 0 is greyed out (SaveLoadMap_Buttons won't load it)
                 color = OpenSHC::Rendering::Colors::COL_7F7F7F;
+            } else if (row == DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex
+                || DAT_ButtonCurrentlyInteracting::instance) {
+                color = OpenSHC::Rendering::Colors::COL_CCFAFF;
+            } else {
+                color = OpenSHC::Rendering::Colors::COL_C2F0EB;
             }
+            // the game reads the position and the name before it sets field_0x30
             int const textY = DAT_ButtonY::instance + 3;
             int const textX = DAT_ButtonX::instance + 8;
             char* const mapName
@@ -59,7 +60,6 @@ namespace UI {
             DAT_TextManagerObject::instance.field_0x30 = 1;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 mapName, textX, textY, 195, color, 18, 0);
-            // the file's DOS time stamp: day, month, two-digit year, hour, minute
             char dateText[32];
             // "%02d/%02d/%02d %02d:%02d"
             MACRO_CALL(OpenSHC::OS_Func::_sprintf)(dateText, s__02d_02d_02d__02d_02d_005a229c, (fileTime >> 16) & 31,
