@@ -30,7 +30,7 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field140_0x1c2 = 1;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x1c2 = 1;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] != 0;
         DAT_GameState::instance.playerDataArray[owner].countArmorersAndBlacksmiths += 1;

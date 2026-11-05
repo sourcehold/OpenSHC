@@ -23,7 +23,7 @@ namespace Map {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].facingDirection = 4;
                 }
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unitType != Units::UT_A_ASSASSIN) {
-                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field303_0x418 = 0;
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x418 = 0;
                 }
             }
         }
