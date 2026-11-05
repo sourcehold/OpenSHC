@@ -27,7 +27,7 @@ namespace Game {
         }
         int const playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
         int const tile = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile + entryX;
-        this->playerDataArray[playerID].field348_0x2178 = buildingID;
+        this->playerDataArray[playerID].field_0x2178 = buildingID;
         int drunkardLimit;
         if (this->playerDataArray[playerID].populationRelatedCrowdingCountUnk < 20) {
             drunkardLimit = 1;

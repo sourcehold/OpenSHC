@@ -35,7 +35,7 @@ namespace Game {
                 && DAT_UnitsState::instance.units[unitID].dying == 0
                 && DAT_UnitsState::instance.units[unitID].owner == playerID
                 && DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0
-                && DAT_UnitsState::instance.units[unitID].field64_0x90 == 0
+                && DAT_UnitsState::instance.units[unitID].field_0x90 == 0
                 && DAT_UnitsState::instance.units[unitID].isStalked == 0) {
                 int despawnPriority;
                 switch (DAT_UnitsState::instance.units[unitID].unitType) {
