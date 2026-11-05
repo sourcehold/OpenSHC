@@ -42,13 +42,13 @@ namespace Game {
                 == this->playerDataArray[playerID].currentGoldDelayed) {
                 continue;
             }
-            this->playerDataArray[playerID].field198_0x450 += 1;
-            if (this->playerDataArray[playerID].field198_0x450 < 2) {
+            this->playerDataArray[playerID].field_0x450 += 1;
+            if (this->playerDataArray[playerID].field_0x450 < 2) {
                 continue;
             }
             this->playerDataArray[playerID].currentGoldDelayed
                 = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
-            this->playerDataArray[playerID].field198_0x450 = 0;
+            this->playerDataArray[playerID].field_0x450 = 0;
             if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id != 0) {
                 MACRO_CALL_MEMBER(
                     Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups, DAT_BuildingsState::ptr)(

@@ -20,7 +20,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].buildMonthOrBuildOrder = buildOrder;
                 buildOrder += 1;
                 DAT_BuildingsState::instance.buildings[buildingID].hovelVisualStyle = 0;
-                *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x286 = 0;
+                DAT_BuildingsState::instance.buildings[buildingID].field_0x286 = 0;
             }
         }
     }

@@ -23,6 +23,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `enable_local_functions.py [--disable]` | Set the `MACRO_FUNCTION_RESOLVER` flag to `true` for exactly the .cpp files in the build list, so calls between them land in our own code. `/GL` buys nothing without this - LTCG cannot see a callee it does not compile (`getSalesPrice` 68.4% -> 100%). The repository-wide `Enable-Reimplemented-Functions.ps1` flips every resolver that has a .cpp anywhere in the tree, which does not link while the list is a subset. Never committed, like the `Globals` flags. |
 | `fix_func_refs.py [--drop-include H]` | After a header refactor: rewrite `X_Func::name` references whose resolver moved to another namespace. |
 | `move_to_resolver_namespace.py FILE...` | After a header refactor: re-wrap a definition in its resolver's new namespace and `git mv` it to the matching folder. |
+| `refactor_struct_fields.py ERRORS.txt [--dry-run] [--window N]` | After a Ghidra sync renamed struct fields: read a `syntax_check.py` log and rename every `C2039` field to whatever now sits at that offset. The offset comes from the old name (`field10_0x49d4b4`), or, for a named field, from `git rev-list --all` over the header. One pass fixed 483 uses in 119 files after the November 2026 sync. Re-run it until `syntax_check.py` is clean: cl stops a file at `C1903`, so later uses in the same file are only reported on the next pass. |
 
 Analysis helpers, for deciding *what* to change when a function is stuck below 100%:
 
