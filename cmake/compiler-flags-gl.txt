@@ -101,3 +101,4 @@ src/OpenSHC/UI/Rendering/ButtonGmData/getPictureNumberInGm.cpp
 src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose.cpp
+src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose.cpp
