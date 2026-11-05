@@ -33,7 +33,7 @@ namespace Map {
                 _boxTop = DAT_MouseState::instance.selectionBox.top;
                 _boxBottom = DAT_MouseState::instance.selectionBox.bottom;
             }
-            this->field14_0x55c = 0;
+            this->field_0x55c = 0;
             this->totalUnitsInSelection = 0;
             for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
@@ -101,7 +101,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner == 0) {
                     return;
                 }
-                this->field14_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                this->field_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
                 return;
             }
         }

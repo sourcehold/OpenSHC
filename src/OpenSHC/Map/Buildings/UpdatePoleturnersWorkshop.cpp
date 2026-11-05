@@ -31,7 +31,7 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field140_0x1c2 = 1;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x1c2 = 1;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] != 0;
         DAT_GameState::instance.playerDataArray[owner].countFletchersPoleturners += 1;
@@ -66,7 +66,7 @@ namespace Map {
                 char frame;
                 if (DAT_GameSynchronyState::instance.currentGameMode == 0) {
                     frame = (char)DAT_BuildingDefinedData::instance
-                                .field78_0x54cc[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                .field_0x54cc[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .animationIndex];
                 } else {
                     frame
@@ -146,7 +146,7 @@ namespace Map {
                 char frame;
                 if (DAT_GameSynchronyState::instance.currentGameMode == 0) {
                     frame = (char)DAT_BuildingDefinedData::instance
-                                .field75_0x53bc[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                .field_0x53bc[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .animationIndex];
                 } else {
                     frame

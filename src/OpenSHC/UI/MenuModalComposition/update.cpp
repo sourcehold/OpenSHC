@@ -98,7 +98,7 @@ namespace UI {
             this->minus1 = 0;
         }
         if ((this->modalMenu.borderStyle & 0x800) != 0) {
-            this->minus1 = DAT_MenuHandlerState::instance.field18_0x3c != 0;
+            this->minus1 = DAT_MenuHandlerState::instance.field_0x3c != 0;
         }
         if ((this->modalMenu.borderStyle & 0x1000) != 0) {
             if (this->minus1 != 0 && this->activeModalDialogID != OpenSHC::UI::Enums::MMT_DISPLAY_SCENARIO_HELP_TEXT) {
