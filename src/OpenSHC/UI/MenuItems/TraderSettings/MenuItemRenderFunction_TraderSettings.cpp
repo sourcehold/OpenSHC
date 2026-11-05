@@ -8,6 +8,7 @@
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
@@ -59,7 +60,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, 172),
                         DAT_ButtonW::instance - 10 + DAT_ButtonX::instance, DAT_ButtonY::instance + 7,
-                        OpenSHC::Text::TTA_RIGHT, 12775659, 18, FALSE, 0);
+                        OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     return;
@@ -73,7 +74,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, 173),
                     DAT_ButtonW::instance - 10 + DAT_ButtonX::instance, DAT_ButtonY::instance + 7,
-                    OpenSHC::Text::TTA_RIGHT, 8170159, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_7CAAAF, 18, FALSE, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 return;
             }
@@ -91,7 +92,8 @@ namespace UI {
                     // "Trader 1"
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_TRADER_NAMES, 1, DAT_ButtonW::instance / 2 + DAT_ButtonX::instance,
-                        DAT_ButtonY::instance + 7, OpenSHC::Text::TTA_CENTER, 41727, 15974, 18, FALSE);
+                        DAT_ButtonY::instance + 7, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_00A2FF,
+                        15974, 18, FALSE);
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     return;
@@ -103,7 +105,8 @@ namespace UI {
                 // "Trader 1"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_TRADER_NAMES, 1, DAT_ButtonW::instance / 2 + DAT_ButtonX::instance,
-                    DAT_ButtonY::instance + 7, OpenSHC::Text::TTA_CENTER, 16777215, 0, 18, FALSE);
+                    DAT_ButtonY::instance + 7, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_FFFFFF, 0, 18,
+                    FALSE);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 return;
             }
