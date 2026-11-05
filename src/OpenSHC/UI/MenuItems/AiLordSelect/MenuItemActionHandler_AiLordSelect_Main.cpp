@@ -30,6 +30,7 @@ namespace UI {
             }
             DAT_LobbyAddAICurrentlyHoveredAI::instance = DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[buttonID - 1];
             int slot = 0;
+            // player slots 1 to 8 (0 is unused): the original compares with <= 8, which countof() would change
             for (int candidate = 1; candidate <= 8; ++candidate) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[candidate] == -1
                     && DAT_GameSynchronyState::instance.currentAIArray[candidate] == 0) {
@@ -54,6 +55,7 @@ namespace UI {
             MACRO_CALL_MEMBER(
                 OpenSHC::Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
             int occupied = 0;
+            // slots 1 to 8 again, compared with <= 8 as above
             for (int candidate = 1; candidate <= 8; ++candidate) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[candidate] != -1
                     || DAT_GameSynchronyState::instance.currentAIArray[candidate] != 0) {

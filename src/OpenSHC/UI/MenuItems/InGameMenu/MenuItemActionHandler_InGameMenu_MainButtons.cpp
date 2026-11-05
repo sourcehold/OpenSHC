@@ -178,7 +178,8 @@ namespace UI {
                             return;
                         }
                         if (buttonID > -100) {
-                            for (int player = 0; player < 9; ++player) {
+                            for (int player = 0;
+                                player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); ++player) {
                                 DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] = -1;
                             }
                             // buttons -10 to -17 pick editor player 1 to 8

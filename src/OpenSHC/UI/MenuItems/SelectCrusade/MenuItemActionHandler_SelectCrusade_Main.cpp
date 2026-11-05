@@ -59,7 +59,8 @@ namespace UI {
                 DAT_GameSynchronyState::instance.currentPlayerSlotID = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                     DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
-                for (int slot = 0; slot < 9; ++slot) {
+                for (int slot = 0; slot < countof(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue);
+                    ++slot) {
                     DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[slot] = 1;
                 }
                 return;

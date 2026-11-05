@@ -46,7 +46,7 @@ namespace UI {
             if (DAT_ButtonBackgroundBlendStrength::instance == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapPreview, DAT_MinimapViewState::ptr)(
                     buttonX - 100, buttonY - 100);
-                for (int position = 0; position < 8; ++position) {
+                for (int position = 0; position < countof(DAT_GameCore::instance.keepPositions); ++position) {
                     int const keepX = DAT_GameCore::instance.keepPositions[position].x;
                     if (keepX < 0) {
                         continue;
