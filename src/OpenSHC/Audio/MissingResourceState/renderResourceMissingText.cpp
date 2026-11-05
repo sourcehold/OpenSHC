@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
@@ -17,7 +18,7 @@ namespace Audio {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_FEEDBACK, textGroup),
-                posX, posY + 148, Text::TTA_LEFT, 0x00c2f0eb, 0, 17, FALSE, 0);
+                posX, posY + 148, Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 17, FALSE, 0);
             return;
         }
 
@@ -40,7 +41,7 @@ namespace Audio {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                 DE::SHCDE::TEXT_FEEDBACK, textGroup),
-            posX, (posY - textHeight) + 32, 520, 0x00c2f0eb, 0, 17, 0);
+            posX, (posY - textHeight) + 32, 520, OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 17, 0);
     }
 
 }

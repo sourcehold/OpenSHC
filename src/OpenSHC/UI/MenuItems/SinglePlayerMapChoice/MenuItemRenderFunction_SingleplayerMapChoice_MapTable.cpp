@@ -41,7 +41,7 @@ namespace UI {
                 if (row == DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected) {
                     color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 } else {
-                    color = 12775659;
+                    color = OpenSHC::Rendering::Colors::COL_C2F0EB;
                     if (DAT_ButtonCurrentlyInteracting::instance) {
                         color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                     }
