@@ -18,8 +18,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B9C00
         void NewEventAction::MenuItemActionHandler_NewEventAction_Main(int param_1, ...)
         {
-            DAT_StopHandlingMenuItems::instance = 0;
             int const pressed = param_1;
+            DAT_StopHandlingMenuItems::instance = 0;
             switch (param_1) {
             case 37:
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
