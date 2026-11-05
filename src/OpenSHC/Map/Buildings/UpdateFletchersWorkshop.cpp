@@ -31,7 +31,7 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field140_0x1c2 = 1;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x1c2 = 1;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] != 0;
         DAT_GameState::instance.playerDataArray[owner].countFletchersPoleturners += 1;
@@ -70,7 +70,7 @@ namespace Map {
                               [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
                 } else {
                     frame = (char)DAT_BuildingDefinedData::instance
-                                .field43_0x430c[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                .field_0x430c[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .animationIndex];
                 }
                 if (frame <= 0) {
@@ -100,11 +100,11 @@ namespace Map {
                 char frame;
                 if (DAT_GameSynchronyState::instance.currentGameMode != 0) {
                     frame = (char)DAT_BuildingDefinedData::instance
-                                .field46_0x4674[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                .field_0x4674[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .animationIndex];
                 } else {
                     frame = (char)DAT_BuildingDefinedData::instance
-                                .field45_0x44e4[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                .field_0x44e4[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .animationIndex];
                 }
                 if (frame <= 0) {

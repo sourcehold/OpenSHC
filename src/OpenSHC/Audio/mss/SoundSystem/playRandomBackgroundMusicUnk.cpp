@@ -137,9 +137,9 @@ namespace Audio {
                                 MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                                     DAT_SFXDefinedData::instance.Pointers[34].musicFile);
                             }
-                            DAT_SoundEffectsHelperData1::instance.field21_0x70 = 34;
+                            DAT_SoundEffectsHelperData1::instance.field_0x70 = 34;
                         } else {
-                            int musicSetIndex = DAT_SoundEffectsHelperData1::instance.field21_0x70 - 34;
+                            int musicSetIndex = DAT_SoundEffectsHelperData1::instance.field_0x70 - 34;
                             int candidateCount = 0;
                             if (musicSetIndex < 0 || 7 < musicSetIndex) {
                                 musicSetIndex = 0;
@@ -148,7 +148,7 @@ namespace Audio {
                             int candidateTrackIndices[20];
                             for (int i = 0; i < 8; ++i) {
                                 if (musicSetIndex == i
-                                    || DAT_SFXDefinedData::instance.field2_0x3a4[musicSetIndex][i] == 0) {
+                                    || DAT_SFXDefinedData::instance.field_0x3a4[musicSetIndex][i] == 0) {
                                     continue;
                                 }
                                 if (i == 4) {
@@ -160,7 +160,7 @@ namespace Audio {
                                     candidateTrackIndices[candidateCount++] = i;
                                     continue;
                                 }
-                                int trackMoodUnk = DAT_SFXDefinedData::instance.field3_0x4a4[i];
+                                int trackMoodUnk = DAT_SFXDefinedData::instance.field_0x4a4[i];
                                 int battleMoodState = DAT_SoundEffectsHelperData1::instance.battleMoodState;
                                 if ((trackMoodUnk == 1 && trackMoodUnk == battleMoodState)
                                     || (trackMoodUnk == 2 && trackMoodUnk == battleMoodState)) {
@@ -184,7 +184,7 @@ namespace Audio {
                             }
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                                 DAT_SFXDefinedData::instance.Pointers[sfxIndex].musicFile);
-                            DAT_SoundEffectsHelperData1::instance.field21_0x70 = sfxIndex;
+                            DAT_SoundEffectsHelperData1::instance.field_0x70 = sfxIndex;
                         }
                         if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 0) {
                             ++this->streamFlagsUnkAndLoopCount_0x34[0];
@@ -197,10 +197,10 @@ namespace Audio {
                 }
             }
             if (this->musicFileHandle_0x178 != -1) {
-                DAT_SoundEffectsHelperData1::instance.field14_0x54 = TRUE;
+                DAT_SoundEffectsHelperData1::instance.field_0x54 = TRUE;
                 MACRO_CALL(OS_Func::_ucrt_close)(this->musicFileHandle_0x178);
                 this->musicFileHandle_0x178 = -1;
-                DAT_SoundEffectsHelperData1::instance.field14_0x54 = FALSE;
+                DAT_SoundEffectsHelperData1::instance.field_0x54 = FALSE;
             }
             if (shouldStartNewTrackUnk) {
                 if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 1) {

@@ -42,7 +42,7 @@ namespace Game {
             this->playerDataArray[playerID].currentSiegeWeaponCount = 0;
             this->playerDataArray[playerID].workingInnsCount = 0;
             this->playerDataArray[playerID].countInns = 0;
-            this->playerDataArray[playerID].field347_0x2174 = 0;
+            this->playerDataArray[playerID].field_0x2174 = 0;
             this->playerDataArray[playerID].blessedPeopleCountUnk = 0;
             this->playerDataArray[playerID].unblessedPeopleCountUnk = 0;
             this->playerDataArray[playerID].priestCountUnk = 0;

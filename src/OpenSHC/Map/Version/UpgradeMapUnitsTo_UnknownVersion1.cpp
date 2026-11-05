@@ -28,7 +28,7 @@ namespace Map {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].someUnitStat4
                     = (short)DAT_UnitPropertiesDefinedData::instance.SomeUnitStatMatrix4
                           [DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unitType];
-                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field22_0x2a
+                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x2a
                     = (short)DAT_TextureRenderCoreObject::instance
                           .gmFileHeaderColorpaletteArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                   .spriteID]
@@ -40,7 +40,7 @@ namespace Map {
                                   .spriteID]
                           .originY;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].drawXOffset
-                    = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field22_0x2a
+                    = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x2a
                     - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].spriteWidthUnk / 2;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].someDrawYOffset
                     = *(short*)&DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].unknownV
