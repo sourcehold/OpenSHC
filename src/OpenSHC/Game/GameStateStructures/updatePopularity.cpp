@@ -1,0 +1,311 @@
+#include "../GameStateStructures.func.hpp"
+
+#include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
+#include "OpenSHC/Audio/SFX/SFXState.func.hpp"
+#include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
+#include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/MapType2.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+#include "OpenSHC/Globals/DAT_SFXState.hpp"
+#include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
+
+namespace OpenSHC {
+namespace Game {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x0045B830
+    void GameStateStructures::updatePopularity()
+    {
+        // the change of the category currently being applied, reused for every category
+        int popularityChange = 0;
+        if (this->mapAndTime.weekChanged == 0) {
+            return;
+        }
+        MACRO_CALL_MEMBER(GameStateStructures_Func::recomputeReligionBonuses, this)();
+        for (int playerID = 1; playerID < 9; ++playerID) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id <= 0
+                || this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id <= 0) {
+                continue;
+            }
+            if (DAT_GameCore::instance.gameMode_2 == GM_BUILDERUnk
+                && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
+                this->playerDataArray[playerID].popularity
+                    = DAT_GameSynchronyState::instance.currentPlayerSlotID != 2 ? 10000 : 0;
+                continue;
+            }
+            if (this->playerDataArray[playerID].currentPopulation <= 3
+                && this->playerDataArray[playerID].popularity < 5000) {
+                // 75(00)
+                this->playerDataArray[playerID].popularity = 7500;
+                continue;
+            }
+            int currentGold = this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
+            int worstChange = 0;
+            int worstChangeReason = 0;
+            this->playerDataArray[playerID].storedPopularityPercent = this->playerDataArray[playerID].popularity;
+            if (this->playerDataArray[playerID].foodTypesInStock <= 0) {
+                ++this->playerDataArray[playerID].weeksWithoutFood;
+            } else {
+                this->playerDataArray[playerID].weeksWithoutFood = 0;
+            }
+            if (this->playerDataArray[playerID].currentPopulation <= 0) {
+                popularityChange = 200;
+            } else if (this->playerDataArray[playerID].foodTypesInStock <= 0) {
+                popularityChange = -200;
+            } else if (this->playerDataArray[playerID].rationsSetting == 0) {
+                popularityChange = -200;
+            } else if (this->playerDataArray[playerID].rationsSetting == 1) {
+                popularityChange = -100;
+            } else if (this->playerDataArray[playerID].rationsSetting == 2) {
+                popularityChange = 0;
+            } else if (this->playerDataArray[playerID].rationsSetting == 4) {
+                popularityChange = 200;
+            } else if (this->playerDataArray[playerID].rationsSetting == 3) {
+                popularityChange = 100;
+            }
+            if (this->playerDataArray[playerID].foodTypesCurrentlyEaten == 2) {
+                popularityChange = popularityChange + 25;
+            } else if (this->playerDataArray[playerID].foodTypesCurrentlyEaten == 3) {
+                popularityChange = popularityChange + 50;
+            } else if (this->playerDataArray[playerID].foodTypesCurrentlyEaten == 4) {
+                popularityChange = popularityChange + 75;
+            }
+            // sets popularity
+            this->playerDataArray[playerID].popularity += popularityChange;
+            this->playerDataArray[playerID].popularityChangeBasedOnFood = popularityChange;
+            if (popularityChange < 0) {
+                worstChange = popularityChange;
+                worstChangeReason = 1;
+            }
+            if (this->playerDataArray[playerID].crowding <= 100) {
+                popularityChange = 0;
+            } else if (this->playerDataArray[playerID].crowding <= 120) {
+                popularityChange = -50;
+            } else if (this->playerDataArray[playerID].crowding <= 140) {
+                popularityChange = -100;
+            } else if (this->playerDataArray[playerID].crowding <= 160) {
+                popularityChange = -150;
+            } else if (this->playerDataArray[playerID].crowding <= 180) {
+                popularityChange = -200;
+            } else {
+                popularityChange = -250;
+            }
+            this->playerDataArray[playerID].popularity += popularityChange;
+            this->playerDataArray[playerID].popularityChangeBasedOnCrowding = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChange = popularityChange;
+                worstChangeReason = 2;
+            }
+            if (this->playerDataArray[playerID].taxesSetting < 3 && currentGold <= 0) {
+                popularityChange = 25;
+            } else if (this->playerDataArray[playerID].taxesSetting == 0) {
+                popularityChange = 175;
+            } else if (this->playerDataArray[playerID].taxesSetting == 1) {
+                popularityChange = 125;
+            } else if (this->playerDataArray[playerID].taxesSetting == 2) {
+                popularityChange = 75;
+            } else if (this->playerDataArray[playerID].taxesSetting == 3) {
+                popularityChange = 25;
+            } else if (this->playerDataArray[playerID].taxesSetting == 4) {
+                popularityChange = -50;
+            } else if (this->playerDataArray[playerID].taxesSetting == 5) {
+                popularityChange = -100;
+            } else if (this->playerDataArray[playerID].taxesSetting == 6) {
+                popularityChange = -150;
+            } else if (this->playerDataArray[playerID].taxesSetting == 7) {
+                popularityChange = -200;
+            } else if (this->playerDataArray[playerID].taxesSetting == 8) {
+                popularityChange = -300;
+            } else if (this->playerDataArray[playerID].taxesSetting == 9) {
+                popularityChange = -400;
+            } else if (this->playerDataArray[playerID].taxesSetting == 10) {
+                popularityChange = -500;
+            } else {
+                popularityChange = -600;
+            }
+            this->playerDataArray[playerID].popularity += popularityChange;
+            int const popularityAfterTax = this->playerDataArray[playerID].popularity;
+            this->playerDataArray[playerID].popularityChangeBasedOnTax = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChange = popularityChange;
+                worstChangeReason = 4;
+            }
+            this->playerDataArray[playerID].field344_0x2168 = 0;
+            if (worstChange > 0) {
+                worstChange = 0;
+                worstChangeReason = 3;
+            }
+            popularityChange = this->playerDataArray[playerID].areCarnivalUnitsPresent ? 400 : 0;
+            this->playerDataArray[playerID].popularity = popularityAfterTax + popularityChange;
+            this->playerDataArray[playerID].popularityChangeBasedOnFair = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChange = popularityChange;
+                worstChangeReason = 5;
+            }
+            if (this->playerDataArray[playerID].blessedPeoplePercentage <= 24) {
+                popularityChange = 0;
+            } else if (this->playerDataArray[playerID].blessedPeoplePercentage <= 49) {
+                popularityChange = 50;
+            } else if (this->playerDataArray[playerID].blessedPeoplePercentage <= 74) {
+                popularityChange = 100;
+            } else if (this->playerDataArray[playerID].blessedPeoplePercentage <= 94) {
+                popularityChange = 150;
+            } else {
+                popularityChange = 200;
+            }
+            if (DAT_GameState::instance.playerDataArray[playerID].ownsChurchUnk != 0) {
+                popularityChange += 25;
+            }
+            if (DAT_GameState::instance.playerDataArray[playerID].ownsCathedralUnk != 0) {
+                popularityChange += 50;
+            }
+            if (popularityChange < 0) {
+                popularityChange = 0;
+            }
+            this->playerDataArray[playerID].popularity += popularityChange;
+            this->playerDataArray[playerID].popularityReligionBasedDiv25 += popularityChange / 25;
+            this->playerDataArray[playerID].popularityChangeBasedOnReligion = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChange = popularityChange;
+                worstChangeReason = 6;
+            }
+            this->playerDataArray[playerID].beerPercentage
+                = MACRO_CALL_MEMBER(GameStateStructures_Func::computeAleCoverage, this)(playerID);
+            if (this->playerDataArray[playerID].beerPercentage < 25) {
+                popularityChange = 0;
+            } else if (this->playerDataArray[playerID].beerPercentage < 50) {
+                popularityChange = 50;
+            } else if (this->playerDataArray[playerID].beerPercentage < 75) {
+                popularityChange = 100;
+            } else if (this->playerDataArray[playerID].beerPercentage < 100) {
+                popularityChange = 150;
+            } else {
+                popularityChange = 200;
+            }
+            this->playerDataArray[playerID].popularity += popularityChange;
+            this->playerDataArray[playerID].popularityChangeAleBased = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChange = popularityChange;
+                worstChangeReason = 7;
+            }
+            if ((int)this->playerDataArray[playerID].fearFactorLevel >= 1) {
+                popularityChange = this->playerDataArray[playerID].fearFactorLevel * 25;
+            } else if ((int)this->playerDataArray[playerID].fearFactorLevel <= -1) {
+                popularityChange = this->playerDataArray[playerID].fearFactorLevel * 25;
+            } else {
+                popularityChange = 0;
+            }
+            this->playerDataArray[playerID].popularity += popularityChange;
+            this->playerDataArray[playerID].popularityChangeFearFactorBased = popularityChange;
+            if (popularityChange < worstChange) {
+                worstChangeReason = 8;
+            }
+            if (this->playerDataArray[playerID].eventPlagueCountdown != 0) {
+                --this->playerDataArray[playerID].eventPlagueCountdown;
+                if (this->playerDataArray[playerID].eventPlagueHealerActivity != 0) {
+                    ++this->playerDataArray[playerID].eventPlagueHealerActivity;
+                }
+                int plaguePenalty;
+                if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 0) {
+                    plaguePenalty = -150;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 5) {
+                    plaguePenalty = -125;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 10) {
+                    plaguePenalty = -100;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 15) {
+                    plaguePenalty = -75;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 20) {
+                    plaguePenalty = -50;
+                } else if (this->playerDataArray[playerID].eventPlagueHealerActivity <= 25) {
+                    plaguePenalty = -25;
+                } else {
+                    plaguePenalty = 0;
+                }
+                this->playerDataArray[playerID].popularity += plaguePenalty;
+                this->playerDataArray[playerID].currentPlaguePenalty = plaguePenalty;
+            } else {
+                this->playerDataArray[playerID].currentPlaguePenalty = 0;
+                this->playerDataArray[playerID].eventPlagueHealerActivity = 0;
+            }
+            if (this->playerDataArray[playerID].eventLionsCountdown != 0) {
+                --this->playerDataArray[playerID].eventLionsCountdown;
+                this->playerDataArray[playerID].popularity -= 75;
+                this->playerDataArray[playerID].currentLionsPenalty = -75;
+            } else {
+                this->playerDataArray[playerID].currentLionsPenalty = 0;
+            }
+            if (this->playerDataArray[playerID].eventBanditsCountdown != 0) {
+                --this->playerDataArray[playerID].eventBanditsCountdown;
+                this->playerDataArray[playerID].popularity -= 125;
+                this->playerDataArray[playerID].currentBanditsPenalty = -125;
+            } else {
+                this->playerDataArray[playerID].currentBanditsPenalty = 0;
+            }
+            if (this->playerDataArray[playerID].eventFireCountdown != 0) {
+                --this->playerDataArray[playerID].eventFireCountdown;
+                this->playerDataArray[playerID].popularity -= 50;
+                this->playerDataArray[playerID].currentFirePenalty = -50;
+            } else {
+                this->playerDataArray[playerID].currentFirePenalty = 0;
+            }
+            if (this->playerDataArray[playerID].eventMarriageCountdown != 0) {
+                --this->playerDataArray[playerID].eventMarriageCountdown;
+                this->playerDataArray[playerID].popularity += 200;
+                this->playerDataArray[playerID].currentMarriageBoost = 200;
+            } else {
+                this->playerDataArray[playerID].currentMarriageBoost = 0;
+            }
+            if (this->playerDataArray[playerID].eventJesterCountdown != 0) {
+                --this->playerDataArray[playerID].eventJesterCountdown;
+                this->playerDataArray[playerID].popularity += 50;
+                this->playerDataArray[playerID].currentJesterBoost = 50;
+            } else {
+                this->playerDataArray[playerID].currentJesterBoost = 0;
+            }
+            this->playerDataArray[playerID].largestPopularityChangeReason = worstChangeReason;
+            if (this->playerDataArray[playerID].popularity < 0) {
+                this->playerDataArray[playerID].popularity = 0;
+            }
+            if (this->playerDataArray[playerID].popularity > 10000) {
+                this->playerDataArray[playerID].popularity = 10000;
+            }
+            if (this->playerDataArray[playerID].storedPopularityPercent > this->playerDataArray[playerID].popularity) {
+                if ((int)this->playerDataArray[playerID].someCount44 > this->playerDataArray[playerID].popularity + 500
+                    && this->playerDataArray[playerID].currentPopulation >= 4
+                    && this->playerDataArray[playerID].field25_0x40 == 0) {
+                    this->playerDataArray[playerID].field25_0x40 = 1;
+                    this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
+                    if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                        && MACRO_CALL_MEMBER(
+                               Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
+                            == 0) {
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
+                            Audio::SFX::SEID_POP_FALLING);
+                    }
+                }
+            } else if (this->playerDataArray[playerID].storedPopularityPercent
+                    < this->playerDataArray[playerID].popularity
+                && (int)this->playerDataArray[playerID].someCount44 < this->playerDataArray[playerID].popularity - 500
+                && this->playerDataArray[playerID].currentPopulation >= 4
+                && this->playerDataArray[playerID].field25_0x40 == 1) {
+                this->playerDataArray[playerID].field25_0x40 = 0;
+                this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
+                if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                    && MACRO_CALL_MEMBER(
+                           Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
+                        == 0) {
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
+                        Audio::SFX::SEID_POP_RISING);
+                }
+            }
+        }
+    }
+
+}
+}

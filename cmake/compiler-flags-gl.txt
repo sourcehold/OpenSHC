@@ -17,6 +17,12 @@ src/OpenSHC/Game/GameStateStructures/getSellResourceAmount.cpp
 src/OpenSHC/Map/TileMapState/determineBuildingPlacementRotation.cpp
 src/OpenSHC/Map/Navigation/DirectionAlgorithmState/getMouseVectorLengthBasedOnDirection.cpp
 src/OpenSHC/Input/MouseState/updateRightDragCameraControl.cpp
+src/OpenSHC/Game/GameStateStructures/updateFoodTypesInStockForAllPlayers.cpp
+src/OpenSHC/Game/GameStateStructures/clearEnemyRelatedStructures.cpp
+src/OpenSHC/Game/GameStateStructures/fillWith0xFF.cpp
+src/OpenSHC/Game/GameStateStructures/computeSignPostEntryData.cpp
+src/OpenSHC/Game/GameStateStructures/resetSomethingBuildingRelatedForAllPlayers.cpp
+src/OpenSHC/Game/GameStateStructures/setVariousGameStateToInitialValues.cpp
 src/OpenSHC/AI/AIVState/executeDefaultCastleAIV.cpp
 src/OpenSHC/AI/AIVState/findAppropriateGridLocationForBuilding.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getStorageBuildingForResourceTypeAndAmount.cpp
@@ -58,6 +64,7 @@ src/OpenSHC/Map/Buildings/BuildingsState/buildingHasSpaceForResource.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getBuildingResourceAmountByUid.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/processResourceLoss.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/canUnitReachBuildingPerimeter.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/receiveAllTransmittedCommands.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/processSyncPacket.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/translateMultiplayerIDsIntoPlayerIDs.cpp
 src/OpenSHC/Map/Buildings/UpdateStables.cpp
@@ -68,7 +75,6 @@ src/OpenSHC/Map/Buildings/UpdateBlacksmithsWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
 src/OpenSHC/Map/Buildings/UpdateIronMine.cpp
-
 src/OpenSHC/Map/Buildings/BuildingsState/destroyBuilding.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/growHops.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/growWheat.cpp
@@ -117,3 +123,6 @@ src/OpenSHC/Map/Buildings/UpdateTower2.cpp
 src/OpenSHC/Map/Buildings/UpdateTower3.cpp
 src/OpenSHC/Map/Buildings/UpdateTower4.cpp
 src/OpenSHC/Map/Buildings/UpdateTower5.cpp
+src/OpenSHC/UI/Rendering/ButtonGmData/getPictureNumberInGm.cpp
+src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
+src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp

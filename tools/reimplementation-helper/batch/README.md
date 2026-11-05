@@ -13,7 +13,8 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | Script | Purpose |
 |---|---|
 | `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
-| `syntax_check.py [substr...]` | `cl /Zs` every (matching) list file serially; finds all compile errors in one pass without linking. |
+| `build_parallel.py [-j N] [--no-link] [--dry-run] [filter...]` | The same build with the object compiles run `-j` at a time, then `build_quiet.py` for the link and the verdict. nmake has no `-j`, so a whole-list build otherwise compiles one file on one core: the 1138 object compiles take ~38 minutes at `-j 4` on four cores, against ~2.4 objects a minute serially (~7.5 hours for the same set); ~50 minutes for a full run including the LTCG link. Replays nmake's own command per object, so it is the same compiler, flags and response file; see the note below before changing it. |
+| `syntax_check.py [-j N] [substr...]` | `cl /Zs` every (matching) list file, `-j` at a time; finds all compile errors in one pass without linking, and far cheaper than compiling (20 files of `AI/AICState`: 47s at `-j 4`, 134s serially, 676s to actually compile at `-j 4`). |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
 | `orig_asm.py NAME [--both\|--stats]` | The **original** instruction stream of one function (not the interleaved diff), in address order; `--stats` reports the tells that decide how to reimplement it: `mov reg, 0` (handwritten asm), frame pointer, frame size, jump tables. |
 | `show_functions.py PREFIX [--skip-100]` | Print function bodies under `src/OpenSHC/PREFIX` with their percentages, in the block format `splice_functions.py` reads. |
@@ -74,14 +75,48 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `docount.py [filter] [--apply]` | Counted `i = 0; do { ... i = i + 1; } while (i < N);` -> `for (int i = 0; i < N; i = i + 1)`. Only when the counter is stepped by the last statement, written nowhere else, and not read after the loop. |
 | `early_return.py [filter] [--apply]` | Turn a function whose body is one big `if (bounds guard) { ... } return X;` into `if (!guard) { return X; } ...`. Inverts a top-level `&&` chain of simple comparisons by De Morgan and bails on anything else. Measured code-generation neutral across 20 functions; it is a readability change. |
 
+## Building in parallel (`build_parallel.py`)
+
+Use it wherever `build_quiet.py` is used; it ends with the same `BUILD_OK`/`BUILD_FAIL`
+line and the same exit code, because it finishes by calling it. It pays off on a whole-list
+build or a wide batch and is pointless for one or two files, where the serial build is
+already only as slow as those files.
+
+It is **not** a second build system, and the reason it can be trusted is that it does not
+try to be one:
+
+- every object is compiled by the command `build.make` holds for it - the same `cl.exe`,
+  the same response-file body expanded from `flags.make`, and the same
+  `cmake -E cmake_cl_compile_depends` wrapper, so the `.obj` *and* its `.obj.d` land where
+  nmake expects them;
+- the precompiled header is built first and on its own, since every other object reads it;
+- `build_quiet.py` then runs a normal incremental build, which picks up anything the script
+  skipped or could not do (the `.asm`, the link) and has the last word on success.
+
+Two things to keep in mind when touching it:
+
+- **The PDB is shared.** Every object of a target writes one `vcNN.pdb` through `/Fd`, and
+  that is only safe because `mspdbsrv.exe` serialises the writers. It is a singleton keyed
+  on `_MSPDBSRV_ENDPOINT_`, so all jobs run on this worktree's endpoint from
+  `common.build_env` - the same one `build.bat` derives. This is how `cl /MP` works. Giving
+  the jobs separate endpoints would make them race on the PDB.
+- **Staleness is decided per object** from the source, `flags.make`, the `.pch` and the
+  headers recorded in the `.obj.d`, and anything unresolvable counts as out of date. Being
+  wrong in that direction only costs a recompile nmake would have skipped; being wrong the
+  other way would ship a stale object, which the handover in step 4 is there to catch.
+
+Under wine, set `WINEPREFIX` and put a Windows `cmake.exe` on `WINEPATH` - `cmakew` needs
+it to configure, exactly as it does for `build.bat`. The compiler is invoked directly rather
+than through `cmd`, so no shell quoting is involved.
+
 ## Typical loop
 
 ```sh
-python build_quiet.py && python reccmp_report.py --run save base.json   # baseline
+python build_parallel.py -j 8 && python reccmp_report.py --run save base.json   # baseline
 python show_functions.py Map/Units > work.txt                            # edit the bodies in work.txt
 python splice_functions.py work.txt
 python syntax_check.py Map/Units
-python build_quiet.py && python reccmp_report.py --run cmp base.json Map/Units
+python build_parallel.py -j 8 && python reccmp_report.py --run cmp base.json Map/Units
 python reccmp_report.py diff someFunction                                # inspect what still differs
 python commit_progress_batch.py Map/Units "someFunction=LTCG ecx reuse"
 ```

@@ -52,11 +52,11 @@ namespace Game {
         dword unknownAlwaysZero01; // 0x00000014 length: 4
         MenuViewTypeInt menuViewToSwitchTo; // 0x00000018 length: 4
         ActiveMenuTab menuTabToSwitchTo; // 0x0000001C length: 4
-        dword field8_0x20; // 0x00000020 length: 4
+        dword field_0x20; // 0x00000020 length: 4
         ActiveMenuTab buildmenuMenuTabToSwitchTo; // 0x00000024 length: 4
         dword buildingandstatusmenuMenuTabToSwitchTo; // 0x00000028 length: 4
         ActiveMenuTab landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
-        dword field12_0x30; // 0x00000030 length: 4
+        dword field_0x30; // 0x00000030 length: 4
         ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
         BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
@@ -68,20 +68,20 @@ namespace Game {
         dword section1066; // 0x00000060 length: 4
         dword gameSuspended; // 0x00000064 length: 4
         GameMode2Int gameMode_2; // 0x00000068 length: 4
-        int field24_0x6c; // 0x0000006C length: 4
+        int field_0x6c; // 0x0000006C length: 4
         dword specialMultiplayerState; // 0x00000070 length: 4
-        dword field26_0x74; // 0x00000074 length: 4
+        dword field_0x74; // 0x00000074 length: 4
         int mapU4Int1; // 0x00000078 length: 4
         int mapU4Int1_2; // 0x0000007C length: 4
         dword viewedKeepIndex; // 0x00000080 length: 4
         int battleLevel; // 0x00000084 length: 4
         dword cowPoisonTrackerUnk; // 0x00000088 length: 4
         int someSoundMatchTime_1; // 0x0000008C length: 4
-        dword field33_0x90; // 0x00000090 length: 4
+        dword field_0x90; // 0x00000090 length: 4
         int battleLevel2; // 0x00000094 length: 4
-        int mapTimeInTicks; // 0x00000098 length: 4
+        uint mapTimeInTicks; // 0x00000098 length: 4
         dword section1127; // 0x0000009C length: 4
-        dword field37_0xa0; // 0x000000A0 length: 4
+        dword field_0xa0; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4
         int gameSpeedMultiplicator; // 0x000000A8 length: 4
         dword performedGameTicksThisLoop; // 0x000000AC length: 4
@@ -96,18 +96,18 @@ namespace Game {
         BOOLEnum isTimeHalted; // 0x000000D0 length: 4
         dword section1076; // 0x000000D4 length: 4
         dword isTimeHalted2; // 0x000000D8 length: 4
-        dword field52_0xdc; // 0x000000DC length: 4
+        dword field_0xdc; // 0x000000DC length: 4
         int missionDifficulty; // 0x000000E0 length: 4
         int missionDifficulty2; // 0x000000E4 length: 4
         int missionDifficulty_2; // 0x000000E8 length: 4
         int missionDifficulty_3; // 0x000000EC length: 4
         int missionDifficulty_1; // 0x000000F0 length: 4
         int missionDifficulty_0; // 0x000000F4 length: 4
-        dword field59_0xf8; // 0x000000F8 length: 4
+        dword field_0xf8; // 0x000000F8 length: 4
         BOOLEnum solitaryAllBuildingsAreFree; // 0x000000FC length: 4
-        int field61_0x100; // 0x00000100 length: 4
-        dword field62_0x104; // 0x00000104 length: 4
-        dword field63_0x108; // 0x00000108 length: 4
+        int field_0x100; // 0x00000100 length: 4
+        dword field_0x104; // 0x00000104 length: 4
+        dword field_0x108; // 0x00000108 length: 4
         dword unknownAlwaysZero; // 0x0000010C length: 4
         dword jokeChickenSpam; // 0x00000110 length: 4
         int showTextMessageInsteadOfEdit; // 0x00000114 length: 4
@@ -127,7 +127,7 @@ namespace Game {
         dword section1095; // 0x00000150 length: 4
         dword newPlayerID; // 0x00000154 length: 4
         dword hasMenuRenderedUnk; // 0x00000158 length: 4
-        dword field83_0x15c; // 0x0000015C length: 4
+        dword field_0x15c; // 0x0000015C length: 4
         int xbowProducible_logic; // 0x00000160 length: 4
         int pikeProducible_logic; // 0x00000164 length: 4
         int swordProducible_logic; // 0x00000168 length: 4
@@ -181,14 +181,14 @@ namespace Game {
         int warchestTrailStartDatesInMonths[50]; // 0x0000206C length: 200
         dword warchestTrailYearReached; // 0x00002134 length: 4
         dword warchestTrailStartDateMonths; // 0x00002138 length: 4
-        dword field137_0x213c; // 0x0000213C length: 4
+        dword field_0x213c; // 0x0000213C length: 4
         int warchestTrailProgress; // 0x00002140 length: 4
         int furthestExtremeTrailMission; // 0x00002144 length: 4
         int extremeTrailMonthsTakenOrChicken[50]; // 0x00002148 length: 200
         int extremeTrailStartDatesInMonths[50]; // 0x00002210 length: 200
         dword extremeTrailYearReached; // 0x000022D8 length: 4
         dword extremeTrailStartDateMonths; // 0x000022DC length: 4
-        dword field144_0x22e0; // 0x000022E0 length: 4
+        dword field_0x22e0; // 0x000022E0 length: 4
         int extremeTrailProgress; // 0x000022E4 length: 4
         int lordIconUnk; // 0x000022E8 length: 4
         int lordIcons[9]; // 0x000022EC length: 36
@@ -196,7 +196,7 @@ namespace Game {
         int selectedLordTypeUnk; // 0x00002314 length: 4
         int selectedLordType_2Unk; // 0x00002318 length: 4
         int selectedLordTypes[9]; // 0x0000231C length: 36
-        dword field152_0x2340; // 0x00002340 length: 4
+        dword field_0x2340; // 0x00002340 length: 4
         dword gamePausedLogical; // 0x00002344 length: 4
         int viewportFocusBeforeBarracksHotkey; // 0x00002348 length: 4
         int viewportFocusBeforeMercenaryHotkey; // 0x0000234C length: 4
@@ -205,7 +205,7 @@ namespace Game {
         int viewportFocusBeforeKeepHotkey; // 0x00002358 length: 4
         int viewportFocusBeforeArmoryHotkey; // 0x0000235C length: 4
         int viewportFocusBeforeEngineersGuildHotkey; // 0x00002360 length: 4
-        int field161_0x2364; // 0x00002364 length: 4
+        int field_0x2364; // 0x00002364 length: 4
         BOOLEnum genieVoiceActive; // 0x00002368 length: 4
         uint timeSum_2; // 0x0000236C length: 4
         dword gameDuration; // 0x00002370 length: 4
