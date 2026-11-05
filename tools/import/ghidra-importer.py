@@ -127,7 +127,7 @@ exporter = Exporter(binary_context=bc,
                       ('/_HoldStrong/DirectPlay/dplay', 'IDirectPlay4A * *'): ("/dplay.h", "IDirectPlay4 * *"),
                       ('/', 'GUID'): ("/guiddef.h", "_GUID"),
                       ('/guiddef.h', 'GUID'): ("/guiddef.h", "_GUID"),
-                      ('/winnt', "LARGE_INTEGER"): ('/winnt', "_LARGE_INTEGER")
+                      ('/winnt.h', "LARGE_INTEGER"): ('/winnt.h', "_LARGE_INTEGER")
                       
                     },
                     inject_forwards_in_files={
