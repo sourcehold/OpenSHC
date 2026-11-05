@@ -5,7 +5,6 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/UI/Enums/UserControlID.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
@@ -29,9 +28,10 @@ namespace UI {
                     }
                     return;
                 }
-                // On a multiplayer map, category 237 opens tab 239.
-                if (category == Enums::UCID_TTS_ENGINEERS && DAT_GameCore::instance.U2_mapType_singleOrMulti >= 1) {
-                    category = Enums::UCID_TTS_MACEMEN;
+                // On a multiplayer map the feature tab opens its multiplayer version.
+                if (category == Commands::M_MAPPER_SUB_MODE_FEATURE
+                    && DAT_GameCore::instance.U2_mapType_singleOrMulti >= 1) {
+                    category = Commands::M_MAPPER_SUB_MODE_FEATURE_MP;
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == Enums::MVT_MAP_EDITOR_LANDSCAPING
                     && category == DAT_GameCore::instance.activeMenuTab.buildMenuTab) {
