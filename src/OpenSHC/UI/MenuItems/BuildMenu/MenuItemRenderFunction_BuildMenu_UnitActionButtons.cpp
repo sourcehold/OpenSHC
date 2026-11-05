@@ -52,14 +52,13 @@ namespace UI {
             DAT_ButtonUnknownZero::instance = 0;
             switch ((int)DAT_CurrentButtonGmDataIndex::instance) {
             case 376:
-                // the original tail-jumps to the render here (`pop edi; pop esi; jmp` after
-                // the `cmp [hasEngineerSelected], esi`), so this arm returns rather than
-                // falling into `case 0x176` and rendering the button a second time
+                // Without an engineer selected the button hides, as in the original (jne to the shared hide).
                 if (DAT_UnitsState::instance.hasEngineerSelected == TRUE) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                     return;
                 }
+                break;
             case 374:
                 DAT_00ee1094::instance = 291;
                 if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)
