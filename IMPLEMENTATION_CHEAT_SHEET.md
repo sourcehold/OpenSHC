@@ -266,9 +266,15 @@ widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, 
   `mov [field], ebx`) is a **result variable** initialised at the top and stored once at the end, not two literal
   stores: `int isNotNervous = 1; ... if (cond) isNotNervous = 0; else {...} field = isNotNervous;`
   (`computeNervousness` 77% -> 100%).
-- `add reg, -N` where we emit `sub reg, N` or `cmp reg, N` means two constants were merged: the source compared a
-  derived value, `aicIndex == 7` with `aicIndex = aiType - 1`, not `aiType == 8`
-  (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- The original's `add reg, -N` against our `sub reg, N` or `cmp reg, N` has two causes, told apart by whether a
+  second constant is in sight. **With one**, they were merged: the source compared a derived value, `aicIndex == 7`
+  with `aicIndex = aiType - 1`, not `aiType == 8` (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- **With none**, the value is a separate derived local rather than a self-decrement: the typical case leads to the reimplementation
+  writing `sub` whereas the original had `add` (e.g. `int value -= N`). A solution is to write `int y = x - N;`
+  with `x` becoming a dead local right after. However, this creates another local variable which can cause register and stack
+  allocation changes elsewhere. The solution is to drop a local variable: the one to delete is
+  usually a global that is cached instead of re-read, so reading the global again instead of using the cached value in
+  a local drops the local's importance to allocation and causes a match.
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
@@ -438,6 +444,13 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
+- When a loop reads two **parallel arrays** at the same index, MSVC strength-reduces the index into one pointer and
+  anchors it on whichever of the arrays is compared **last**, reaching the other one off that pointer. If the
+  original anchors on the other array, try swapping the comparisons; where the comparison order is itself fixed by
+  the original's asm, the second array has to be reached as an offset from the first
+  (`createStatsPopUpEntities`, `showPopAndGoldPopup`: 0.9211 -> 1.0000). Derive that offset from the two array
+  names so no literal index past an array's end is needed.
 
 ### GOTO
 

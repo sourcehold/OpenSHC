@@ -25,7 +25,7 @@ namespace UI {
         undefined4 needsRedraw; // 0x00000000 length: 4
         undefined4 lastRenderedXOffset; // 0x00000004 length: 4
         undefined4 lastRenderedYOffset; // 0x00000008 length: 4
-        undefined4 field3_0xc; // 0x0000000C length: 4
+        undefined4 field_0xc; // 0x0000000C length: 4
         int tileOffsetY; // 0x00000010 length: 4
         int tileOffsetX; // 0x00000014 length: 4
         uint width; // 0x00000018 length: 4
@@ -35,11 +35,11 @@ namespace UI {
         int x; // 0x00000028 length: 4
         int y; // 0x0000002C length: 4
         int oneOrTwo; // 0x00000030 length: 4
-        undefined4 field13_0x34; // 0x00000034 length: 4
-        undefined4 field14_0x38; // 0x00000038 length: 4
+        undefined4 field_0x34; // 0x00000034 length: 4
+        undefined4 field_0x38; // 0x00000038 length: 4
         undefined4 minimapClickEnabled; // 0x0000003C length: 4
         int someMiniMapCounterTill4; // 0x00000040 length: 4
-        ushort field17_0x44[80000]; // 0x00000044 length: 160000
+        ushort field_0x44[80000]; // 0x00000044 length: 160000
         ushort minimapPixelBuffer[80000]; // 0x00027144 length: 160000
         short loadedMiniMap[200][200]; // 0x0004E244 length: 80000
         MapHeaderSection4IntStruct DAT_MapU4B64; // 0x00061AC4 length: 64
