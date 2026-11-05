@@ -43,14 +43,14 @@ namespace Map {
         public:
             undefined4 DAT_CurrentTribeID; // 0x00000000 length: 4
             int clans; // 0x00000004 length: 4
-            undefined4 field2_0x8; // 0x00000008 length: 4
+            undefined4 field_0x8; // 0x00000008 length: 4
             undefined4 ALG_ResultX; // 0x0000000C length: 4
             undefined4 ALG_ResultY; // 0x00000010 length: 4
             undefined4 ALG_ResultTileIndex; // 0x00000014 length: 4
-            undefined4 field6_0x18; // 0x00000018 length: 4
+            undefined4 field_0x18; // 0x00000018 length: 4
             BOOLEnum patrolButtonPressed; // 0x0000001C length: 4
             undefined4 rallyCount; // 0x00000020 length: 4
-            undefined4 field9_0x24; // 0x00000024 length: 4
+            undefined4 field_0x24; // 0x00000024 length: 4
             Tribe tribes[1250]; // 0x00000028 length: 1025000
             UnitIDMovementDistancePair someUnitIDMovementDistancePair[1001]; // 0x000FA410 length: 4004
             int someUnitIDArrayCount; // 0x000FB3B4 length: 4
@@ -213,7 +213,7 @@ namespace Map {
             UnitType getMajorityArcherTypeEuropeanOrArabian(int selectionID);
 
             BOOLEnum applyMoveCommandOrRallyCommandToTribe(
-                int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint);
+                int tribeID, int x1, int y1, int isRallying, int storeAsRallyPoint);
 
             BOOLEnum assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType);
 
@@ -271,7 +271,7 @@ namespace Map {
 
             void respawnDeer();
 
-            void spawnWildlifeOrMercAtAvailableSlot();
+            void spawnRabbitAtFirstFreeSpawnPoint();
 
             void upgradeMapTribesState(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);

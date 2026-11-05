@@ -29,23 +29,23 @@ namespace Map {
             int lionCount; // 0x00000028 length: 4
             int deerCount; // 0x0000002C length: 4
             int unstalkedUnitCount; // 0x00000030 length: 4
-            int field13_0x34; // 0x00000034 length: 4
+            int field_0x34; // 0x00000034 length: 4
             int casDisRelated2; // 0x00000038 length: 4
-            int field15_0x3c; // 0x0000003C length: 4
+            int field_0x3c; // 0x0000003C length: 4
             int marshTiles; // 0x00000040 length: 4
             int rockyTiles; // 0x00000044 length: 4
-            int field18_0x48; // 0x00000048 length: 4
+            int field_0x48; // 0x00000048 length: 4
             int farmFieldTiles; // 0x0000004C length: 4
-            int field20_0x50; // 0x00000050 length: 4
+            int field_0x50; // 0x00000050 length: 4
             int rabbitCount; // 0x00000054 length: 4
             int chimps; // 0x00000058 length: 4
             int castlebuildings; // 0x0000005C length: 4
-            int field24_0x60; // 0x00000060 length: 4
-            int field25_0x64; // 0x00000064 length: 4
+            int field_0x60; // 0x00000060 length: 4
+            int field_0x64; // 0x00000064 length: 4
             int unknownNonZero01; // 0x00000068 length: 4
-            int field27_0x6c; // 0x0000006C length: 4
-            int field28_0x70; // 0x00000070 length: 4
-            int field29_0x74; // 0x00000074 length: 4
+            int field_0x6c; // 0x0000006C length: 4
+            int field_0x70; // 0x00000070 length: 4
+            int field_0x74; // 0x00000074 length: 4
             undefined1 padding_0x78[40]; // 0x00000078 length: 40
 
         } WildlifeGridElement;

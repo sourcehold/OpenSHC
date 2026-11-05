@@ -1,12 +1,9 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerData.hpp"
 
 namespace OpenSHC {
 namespace Game {
-
-    using OpenSHC::Game::Player::PlayerData;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00458700
     int GameStateStructures::findNextPlayerWithMarketplace(int playerID)
