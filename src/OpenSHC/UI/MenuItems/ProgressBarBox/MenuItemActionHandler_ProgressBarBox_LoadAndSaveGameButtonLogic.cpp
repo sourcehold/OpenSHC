@@ -268,7 +268,8 @@ namespace UI {
                             if (soundID > 0) {
                                 DAT_SoundSystemState::instance.currentSoundID_0x3278 = soundID;
                             }
-                            for (int i = 0; i < 9; ++i) {
+                            for (int i = 0; i < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                                ++i) {
                                 DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] = -1;
                             }
                             if (!DAT_GameSynchronyState::instance.currentPlayerSlotID) {
@@ -288,7 +289,7 @@ namespace UI {
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                             OpenSHC::UI::Enums::MVT_MAP_EDITOR_PROPERTIES, 0);
-                        for (int i = 0; i < 9; ++i) {
+                        for (int i = 0; i < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); ++i) {
                             DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] = -1;
                         }
                         if (!DAT_GameSynchronyState::instance.currentPlayerSlotID) {
@@ -298,7 +299,7 @@ namespace UI {
                             .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.currentPlayerSlotID] = 1;
                         INT_00b960e4::instance = 1;
                         DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_EDITOR;
-                        for (int i = 1; i < 9; ++i) {
+                        for (int i = 1; i < countof(DAT_GameState::instance.playerDataArray); ++i) {
                             DAT_GameState::instance.playerDataArray[i].playerDeathRelated = 0;
                         }
                     }
