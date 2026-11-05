@@ -62,7 +62,8 @@ namespace UI {
                 if (!DAT_GameSynchronyState::instance.isHost) {
                     break;
                 }
-                for (int player = 1; player < 9; ++player) {
+                for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                    ++player) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] != -1
                         && DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[player] == 0) {
                         return;
@@ -135,7 +136,8 @@ namespace UI {
                 if (!DAT_GameSynchronyState::instance.isHost) {
                     break;
                 }
-                for (int player = 1; player < 9; ++player) {
+                for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                    ++player) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] != -1
                         && DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[player] == 0) {
                         return;
@@ -217,7 +219,7 @@ namespace UI {
                 if (!DAT_GameSynchronyState::instance.isHost) {
                     break;
                 }
-                for (int position = 0; position < 8; ++position) {
+                for (int position = 0; position < countof(DAT_GameCore::instance.keepPositions); ++position) {
                     int const x = DAT_GameCore::instance.keepPositions[position].x;
                     if (x < 0
                         || DAT_MouseState::instance.screenSpaceX
@@ -243,7 +245,7 @@ namespace UI {
                     break;
                 }
                 if (DAT_00b95960::instance >= 0) {
-                    for (int position = 0; position < 8; ++position) {
+                    for (int position = 0; position < countof(DAT_GameCore::instance.keepPositions); ++position) {
                         int const x = DAT_GameCore::instance.keepPositions[position].x;
                         if (x < 0
                             || DAT_MouseState::instance.screenSpaceX
