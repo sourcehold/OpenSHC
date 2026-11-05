@@ -283,7 +283,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame2 = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite3 = 0;
         }
-        if (DAT_BuildingsState::instance.field4_0x10 != 0) {
+        if (DAT_BuildingsState::instance.field_0x10 != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingAreaTileGraphics,
                 DAT_BuildingsState::ptr)(DAT_CurrentBuildingID::instance);
         }

@@ -247,8 +247,8 @@ namespace Map {
             } else if (delay < 100) {
                 delay = 100;
             }
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308 += 1;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308 < delay) {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308 += 1;
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308 < delay) {
                 return;
             }
             int const mask
@@ -350,10 +350,10 @@ namespace Map {
                       + DAT_BuildingDefinedData::instance.SpawnUnitProperties[index][2])
                 * (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk2 + 1);
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field229_0x312 = 1;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x312 = 1;
             DAT_TribesState::instance.tribes[tribeID].tribeSubtype1
                 = DAT_BuildingDefinedData::instance.SpawnUnitProperties[index][12];
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308 = 2000;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308 = 2000;
         }
 
         // Grow the tribe one batch at a time, then send it off once it is full
@@ -366,13 +366,13 @@ namespace Map {
             && DAT_GameSynchronyState::instance.currentGameMode != 99 && interval < 50) {
             interval = 50;
         }
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308 += 1;
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308 += 1;
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308
             < (100 - DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk2 * 15)
                 * interval / 100) {
             return;
         }
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field224_0x308
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x308
             = SEC_RNG::instance.currentNumber2 % 40;
         MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3 > 0
@@ -408,7 +408,7 @@ namespace Map {
         if (index == 7 || index == 6) {
             if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3 == 0
                     && DAT_TribesState::instance.tribes[tribeID].size == 0)
-                || (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field229_0x312 != 0
+                || (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x312 != 0
                     && DAT_TribesState::instance.tribes[tribeID].size > 0)) {
                 choices = 1;
             }
@@ -446,7 +446,7 @@ namespace Map {
                 return;
             }
             if (unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field229_0x312 = 0;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x312 = 0;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                 unitID, tribeID);

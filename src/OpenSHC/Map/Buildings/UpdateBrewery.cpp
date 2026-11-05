@@ -29,7 +29,7 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field140_0x1c2 = 1;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x1c2 = 1;
         int const workerID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[0];
         if (workerID != 0) {
             if (DAT_UnitsState::instance.units[workerID].state.generic

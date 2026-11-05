@@ -30,7 +30,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
             {
                 int const frame
-                    = DAT_BuildingDefinedData::instance.field417_0xa53c
+                    = DAT_BuildingDefinedData::instance.field_0xa53c
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
                 if (frame == -1) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 0;
@@ -52,7 +52,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID
                 = (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 & 7) + 1;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = -2;
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame
                 = (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 & 7) * 4 + 4;
@@ -63,7 +63,7 @@ namespace Map {
         case 0:
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID
                 = (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 & 7) + 9;
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].killingPitField == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
@@ -77,11 +77,11 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
             {
                 int const frame
-                    = DAT_BuildingDefinedData::instance.field418_0xa5a4
+                    = DAT_BuildingDefinedData::instance.field_0xa5a4
                           [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
                 if (frame == -1) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 2;
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer,
                         DAT_TileMapState::ptr)(DAT_CurrentBuildingID::instance);
                     return;
@@ -98,8 +98,8 @@ namespace Map {
             return;
         case 2:
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
-            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a += 1;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a < 2000) {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a += 1;
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a < 2000) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
                     DAT_CurrentBuildingID::instance);
                 return;

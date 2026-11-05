@@ -83,7 +83,7 @@ namespace Map {
             }
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 28
                 && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 1;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 1;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                     .resources[OpenSHC::Game::Resources::RT_PITCH] += 1;
@@ -203,7 +203,7 @@ namespace Map {
         }
 
         // The pot shows one of nine fill levels, or the flare-up after a refill
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a == 1) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 1) {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
@@ -216,7 +216,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 += 1;
             if (frame <= 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field119_0x11a = 0;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a = 0;
             } else {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = frame + 122;

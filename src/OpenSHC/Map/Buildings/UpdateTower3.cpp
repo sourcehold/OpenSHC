@@ -83,7 +83,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = damage[6];
             DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10 = damage[7];
         }
-        if (DAT_BuildingsState::instance.field34_0x18e074 == 0) {
+        if (DAT_BuildingsState::instance.field_0x18e074 == 0) {
             return;
         }
         // Mark the tiles listed for the current map orientation, clear the rest
@@ -101,7 +101,7 @@ namespace Map {
             DAT_TileMapState::instance.MiscDisplayLayer[tile] &= ~0x10;
             for (int j = 0; j < 6; ++j) {
                 if (DAT_BuildingDefinedData::instance
-                        .field420_0xa77c[DAT_TileMapState::instance.mapOrientation / 2 * 6 + j]
+                        .field_0xa77c[DAT_TileMapState::instance.mapOrientation / 2 * 6 + j]
                     == i) {
                     DAT_TileMapState::instance.MiscDisplayLayer[tile] |= 0x10;
                     break;
