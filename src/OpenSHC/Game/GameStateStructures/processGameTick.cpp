@@ -158,7 +158,7 @@ namespace Game {
         MACRO_CALL_MEMBER(GameStateStructures_Func::resetCountsAndStatistics, this)();
         MACRO_CALL_MEMBER(GameStateStructures_Func::resetBuildingsCurrentIndexCounter, this)();
         MACRO_CALL_MEMBER(Map::LandscapeState_Func::updateWind, DAT_LandscapeState::ptr)();
-        DAT_PathFindingState::instance.field48_0x90 = 0;
+        DAT_PathFindingState::instance.field_0x90 = 0;
         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateClimbData, DAT_PathFindingState::ptr)();
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildings, DAT_BuildingsState::ptr)();
         MACRO_CALL_MEMBER(Map::TileMapState_Func::updatePitchDitches, DAT_TileMapState::ptr)();

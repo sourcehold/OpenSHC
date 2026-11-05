@@ -39,11 +39,11 @@ namespace Input {
         int previousScreenSpaceX; // 0x00000020 length: 4
         int previousScreenSpaceY; // 0x00000024 length: 4
         BOOLEnum draggingStopped; // 0x00000028 length: 4
-        undefined4 midClickStop; // 0x0000002C length: 4
-        undefined4 rightClickStop; // 0x00000030 length: 4
-        undefined4 leftClickStart; // 0x00000034 length: 4
-        undefined4 midClickStart; // 0x00000038 length: 4
-        undefined4 rightClickStart; // 0x0000003C length: 4
+        BOOLEnum midClickStop; // 0x0000002C length: 4
+        BOOLEnum rightClickStop; // 0x00000030 length: 4
+        BOOLEnum leftClickStart; // 0x00000034 length: 4
+        BOOLEnum midClickStart; // 0x00000038 length: 4
+        BOOLEnum rightClickStart; // 0x0000003C length: 4
         BOOLEnum leftClickState; // 0x00000040 length: 4
         BOOLEnum midClickState; // 0x00000044 length: 4
         BOOLEnum rightClickState; // 0x00000048 length: 4
