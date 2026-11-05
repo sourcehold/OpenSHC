@@ -20,12 +20,12 @@ namespace Audio {
 
             strcpy(this->currIdSoundFilenameUnk_0x84, filePath);
             if (!this->mbr_0x188) {
-                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = TRUE;
+                DAT_SoundEffectsHelperData1::ptr->field_0x54 = TRUE;
                 if (this->musicFileHandle_0x178 != -1) {
                     MACRO_CALL(OS_Func::_ucrt_close)(this->musicFileHandle_0x178);
                 }
                 this->musicFileHandle_0x178 = MACRO_CALL(OS_Func::_ucrt_open)(filePath, _O_BINARY, 0);
-                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = FALSE;
+                DAT_SoundEffectsHelperData1::ptr->field_0x54 = FALSE;
                 return;
             }
 

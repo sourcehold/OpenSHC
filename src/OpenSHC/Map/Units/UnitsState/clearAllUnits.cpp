@@ -15,7 +15,7 @@ namespace Map {
             this->unitCount = 0;
             this->unknownInitially0_01 = 0;
             this->totalUnitsInSelection = 0;
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < countof(this->unitCountOfSelection); i++) {
                 this->unitCountOfSelection[i] = 0;
             }
             for (int unitID = 0; unitID < 2500; ++unitID) {

@@ -22,7 +22,7 @@ namespace UI {
             if (messageIndex <= 16 && speakerIndex - 1U <= 32) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     (char const*)DAT_MissionAestheticsDefinedData::instance
-                        .field92_0x170[speakerIndex * 17 + messageIndex - 12]);
+                        .field_0x170[speakerIndex * 17 + messageIndex - 12]);
             }
         }
 
