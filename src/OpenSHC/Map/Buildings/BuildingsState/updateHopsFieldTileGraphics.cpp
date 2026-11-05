@@ -11,11 +11,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040EDF0
         void BuildingsState::updateHopsFieldTileGraphics(int buildingID)
         {
-            // Unless all tiles are refreshed (field14_0x18e024), only one tile is updated per call and the position to
+            // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
             int start = 0;
             int unchangedLeft = 3;
-            if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+            if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                 start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
             }
             for (int i = 0; i < 24; ++i) {
@@ -55,7 +55,7 @@ namespace Map {
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                 }
-                if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+                if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                     // Note: wraps at 36 instead of 24 like the tile index above
                     *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
                     return;

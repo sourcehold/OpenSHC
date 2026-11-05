@@ -96,8 +96,8 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateNeededEmployeeCount, this)(
                     DAT_CurrentBuildingID::instance);
-                if (this->buildings[DAT_CurrentBuildingID::instance].field129_0x194 > 0) {
-                    --this->buildings[DAT_CurrentBuildingID::instance].field129_0x194;
+                if (this->buildings[DAT_CurrentBuildingID::instance].field_0x194 > 0) {
+                    --this->buildings[DAT_CurrentBuildingID::instance].field_0x194;
                 }
                 DAT_GameState::instance.playerDataArray[owner].populationCap
                     += this->buildings[DAT_CurrentBuildingID::instance].numberOfPopulationProvided;
@@ -173,11 +173,11 @@ namespace Map {
                 }
             }
 
-            this->field14_0x18e024 = 0;
-            this->field34_0x18e074 = 0;
+            this->field_0x18e024 = 0;
+            this->field_0x18e074 = 0;
             this->unknownCountdown01 = 2000 - this->structCount;
-            if ((int)this->field4_0x10 > 0) {
-                --this->field4_0x10;
+            if ((int)this->field_0x10 > 0) {
+                --this->field_0x10;
             }
         }
 

@@ -192,7 +192,7 @@ namespace Map {
             this->buildings[buildingID].buildingTypeBasedEmployeeCount
                 = DAT_BuildingDefinedData::instance.EmployeeCountPerBuildingType[buildingType].shortValue;
             this->buildings[buildingID].unknownFlag3
-                = DAT_BuildingDefinedData::instance.field15_0x1404[buildingType].shortValue;
+                = DAT_BuildingDefinedData::instance.field_0x1404[buildingType].shortValue;
             this->buildings[buildingID].flag1
                 = DAT_BuildingDefinedData::instance.BuildingFlag1Defaults[buildingType].shortValue;
             this->buildings[buildingID].unknownFlag4
@@ -211,7 +211,7 @@ namespace Map {
             // Building type specific setup
             switch (buildingType) {
             case BT_DAIRYFARM:
-                this->field4_0x10 = 3;
+                this->field_0x10 = 3;
                 // fallthrough
             case BT_WHEATFARM:
             case BT_HOPFARM:
@@ -463,7 +463,7 @@ namespace Map {
                 break;
             }
 
-            DAT_BuildingsState::instance.field34_0x18e074 = 1;
+            DAT_BuildingsState::instance.field_0x18e074 = 1;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(buildingID)
                 != 0) {
                 MACRO_CALL_MEMBER(

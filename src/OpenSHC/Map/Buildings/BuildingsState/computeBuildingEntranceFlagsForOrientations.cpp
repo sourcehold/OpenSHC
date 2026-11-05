@@ -31,7 +31,7 @@ namespace Map {
                 try_ = tileCount - 2;
             }
             // The four per-orientation entrance flags are cleared with a single dword store.
-            *(undefined4*)this->buildings[buildingID].field163_0x280 = 0;
+            *(undefined4*)this->buildings[buildingID].field_0x280 = 0;
             for (int i = 0; i < tileCount; ++i) {
                 MACRO_CALL_MEMBER(BuildingsState_Func::setupBuildingEntrancesOffset, this)(size, 1, try_, 0);
                 ++try_;
@@ -46,7 +46,7 @@ namespace Map {
                               + this->buildings[buildingID].x + this->DAT_TempXOffset];
                 if ((logic & LogicHelpers::L_WALL_OR_GATEHOUSE) != 0 && (logic & LogicHelpers::L_STOCKPILEUnk) == 0
                     && (logic & LogicHelpers::L_CRENEL) == 0) {
-                    this->buildings[buildingID].field163_0x280[i / tilesPerSide] = true;
+                    this->buildings[buildingID].field_0x280[i / tilesPerSide] = true;
                 }
             }
         }

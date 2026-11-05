@@ -12,12 +12,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040CF20
         void BuildingsState::updateWheatFieldTileGraphics(int buildingID)
         {
-            // Unless all tiles are refreshed (field14_0x18e024), only one tile is updated per call and the position to
+            // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
-            if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+            if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                 start = *(short*)this->buildings[buildingID].padding_0x2fc;
             }
             for (int i = 0; i < 36; ++i) {
@@ -65,7 +65,7 @@ namespace Map {
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                 }
-                if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+                if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                     *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
                     return;
                 }
