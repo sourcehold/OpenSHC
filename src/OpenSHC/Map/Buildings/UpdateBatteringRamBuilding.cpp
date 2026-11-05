@@ -95,7 +95,7 @@ namespace Map {
                     + DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
                 DAT_UnitsState::instance.units[workerID].state.generic = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
                 DAT_UnitsState::instance.units[workerID].disappearFadeAlphaCountdown = 32;
-                DAT_UnitsState::instance.units[workerID].engineerManningSiegeStateRef_checkType = 0xfe;
+                DAT_UnitsState::instance.units[workerID].engineerManningSiegeStateRef_checkType = 254;
                 DAT_UnitsState::instance.units[workerID].cachedState = 0;
                 position = (position + 1) % 16;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,

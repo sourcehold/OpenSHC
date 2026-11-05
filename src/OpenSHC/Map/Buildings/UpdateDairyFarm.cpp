@@ -166,7 +166,7 @@ namespace Map {
                         DAT_GameState::instance.playerDataArray[owner].counter += 1;
                         DAT_UnitsState::instance.units[cowID].workplaceBuildingUID
                             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].uid;
-                        DAT_UnitsState::instance.units[cowID].engineerManningSiegeStateRef_checkType = 0xff;
+                        DAT_UnitsState::instance.units[cowID].engineerManningSiegeStateRef_checkType = 255;
                         DAT_UnitsState::instance.units[cowID].substate = -1;
                         DAT_UnitsState::instance.units[cowID].workplaceBuildingID_1 = DAT_CurrentBuildingID::instance;
                         DAT_UnitsState::instance.units[cowID].idInTribe = slot;
