@@ -73,16 +73,19 @@ namespace UI {
         for (int player = 1; player < 9; ++player) {
             tables.points[player] = 0;
         }
-        for (int player = 1; player < 9; ++player) {
+        for (int player = 1; player < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix);
+            ++player) {
             int kills = 0;
-            for (int victim = 1; victim < 9; ++victim) {
+            for (int victim = 1; victim < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[0]);
+                ++victim) {
                 if (victim != player) {
                     kills += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[player][victim];
                 }
             }
             tables.kills[player] = kills;
             int losses = 0;
-            for (int killer = 0; killer < 9; ++killer) {
+            for (int killer = 0; killer < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix);
+                ++killer) {
                 if (killer != player) {
                     losses += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[killer][player];
                 }

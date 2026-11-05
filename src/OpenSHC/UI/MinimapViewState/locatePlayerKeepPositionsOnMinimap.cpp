@@ -14,7 +14,7 @@ namespace UI {
         int firstRow = 0;
         int orientationOffset = 8;
         int divisor = 2;
-        for (int player = 0; player < 8; ++player) {
+        for (int player = 0; player < countof(this->DAT_MapU4B64.keepPositions); ++player) {
             this->DAT_MapU4B64.keepPositions[player].x = -1;
             this->DAT_MapU4B64.keepPositions[player].y = -1;
         }
