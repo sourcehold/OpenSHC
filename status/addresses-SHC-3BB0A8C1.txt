@@ -36193,7 +36193,7 @@ SHC_3BB0A8C1_0x004DB180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DB300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB300 | 100.0% | Reimplemented, only the float constant's address differs (same value)
 
 SHC_3BB0A8C1_0x004DB390 | 0.0% | Pending
 
