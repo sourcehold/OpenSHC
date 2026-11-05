@@ -56,7 +56,7 @@ namespace UI {
             if (param_1 == 100) {
                 return;
             }
-            if ((int)DAT_AlliesCount::instance < 1 && param_1 != -1) {
+            if (DAT_AlliesCount::instance < 1 && param_1 != -1) {
                 DAT_ButtonUnknownZero::instance = 1;
                 DAT_ButtonCurrentlyInteracting::instance = FALSE;
             }
@@ -118,7 +118,7 @@ namespace UI {
                     DAT_00df51f4::instance = 0;
                 }
                 iVar3 = param_1 - 1;
-                if ((int)DAT_AlliesCount::instance <= iVar3) {
+                if (DAT_AlliesCount::instance <= iVar3) {
                     DAT_ButtonUnknownZero::instance = 0;
                 }
                 iVar6 = 0;
