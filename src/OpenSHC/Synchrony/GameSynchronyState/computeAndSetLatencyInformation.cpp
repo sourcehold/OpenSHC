@@ -43,7 +43,7 @@ namespace Synchrony {
         int timeSum = 0;
         // The first answer fills the whole history; later ones go in turn.
         if (this->counter == -1) {
-            for (int entry = 0; entry < this->limit; ++entry) {
+            for (int entry = 0; entry < (int)this->limit; ++entry) {
                 this->historicalLagInfoPerPlayer[player][entry][0]
                     = this->connectionLagInfoArray[player].subtractedMapTicks;
                 this->historicalLagInfoPerPlayer[player][entry][1]
@@ -56,7 +56,7 @@ namespace Synchrony {
             this->historicalLagInfoPerPlayer[player][this->counter][0]
                 = this->connectionLagInfoArray[player].subtractedMapTicks;
             ++this->counter;
-            if (this->counter >= this->limit) {
+            if ((int)this->counter >= (int)this->limit) {
                 this->counter = 0;
             }
         }
@@ -66,7 +66,7 @@ namespace Synchrony {
         }
         // fixme: the time is read two entries ahead of the map ticks; with limit > 98 this reads past the player's
         // history.
-        for (int entry = 0; entry < this->limit; ++entry) {
+        for (int entry = 0; entry < (int)this->limit; ++entry) {
             mapTicksSum += this->historicalLagInfoPerPlayer[player][entry][0];
             timeSum += this->historicalLagInfoPerPlayer[player][entry + 2][1];
         }
