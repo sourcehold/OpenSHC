@@ -15,7 +15,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00480440
     BOOLEnum GameSynchronyState::getCommandIDFromCommandSelectionStuff()
     {
-        this->someIndex = 0;
+        this->selectedCommandsCount = 0;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->selectedGameCommands), 0, this->selectedGameCommands);
         for (int command = this->gameCommandID; command < countof(this->DAT_GameCommandArray); ++command) {
@@ -26,15 +26,15 @@ namespace Synchrony {
                 this->protocolInvokerPlayerID
                     = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
                         this->DAT_GameCommandArray[command].playerUnk);
-                this->selectedGameCommands[this->someIndex][0] = command;
-                this->selectedGameCommands[this->someIndex][1] = this->protocolInvokerPlayerID;
-                ++this->someIndex;
-                if (this->someIndex >= 100) {
+                this->selectedGameCommands[this->selectedCommandsCount][0] = command;
+                this->selectedGameCommands[this->selectedCommandsCount][1] = this->protocolInvokerPlayerID;
+                ++this->selectedCommandsCount;
+                if (this->selectedCommandsCount >= 100) {
                     break;
                 }
             }
         }
-        if (this->someIndex <= 0) {
+        if (this->selectedCommandsCount <= 0) {
             return FALSE;
         }
         // Sort the selected commands so that lower player IDs are processed first (at most 100 passes).
@@ -43,7 +43,7 @@ namespace Synchrony {
         for (int pass = 0; pass < 100 && swapped;) {
             ++pass;
             swapped = FALSE;
-            for (int i = 1; i < this->someIndex; ++i) {
+            for (int i = 1; i < this->selectedCommandsCount; ++i) {
                 int const nextPlayerID = this->selectedGameCommands[i][1];
                 int const commandID = this->selectedGameCommands[i - 1][0];
                 int const playerID = this->selectedGameCommands[i - 1][1];

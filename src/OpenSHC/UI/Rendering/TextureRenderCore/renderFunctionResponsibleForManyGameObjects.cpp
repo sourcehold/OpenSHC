@@ -5,8 +5,8 @@
 #include "OpenSHC/Globals/AlphaAndButtonSurfaceObj.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/PTR_ARRAY_00c9a510.hpp"
-#include "OpenSHC/Globals/PTR_ARRAY_00d7d250.hpp"
+#include "OpenSHC/Globals/TGX_RepeatRunHandlers.hpp"
+#include "OpenSHC/Globals/TGX_StreamRunHandlers.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -36,8 +36,8 @@ namespace UI {
             int heightMax;
             int heightStart;
             int lineTail;
-            void** repeatedPixelHandlers = PTR_ARRAY_00c9a510::instance;
-            void** streamRunHandlers = PTR_ARRAY_00d7d250::instance;
+            void** repeatedPixelHandlers = TGX_RepeatRunHandlers::instance;
+            void** streamRunHandlers = TGX_StreamRunHandlers::instance;
             if (imageHeight <= 0) {
                 return;
             }
@@ -155,9 +155,9 @@ namespace UI {
                         shl ebx, 16
                         add eax, ebx
                         add esi, 2
-                        jmp PTR_ARRAY_00c9a510::instance[ecx*4]
+                        jmp TGX_RepeatRunHandlers::instance[ecx*4]
                 token_stream:
-                        jmp PTR_ARRAY_00d7d250::instance[ecx*4]
+                        jmp TGX_StreamRunHandlers::instance[ecx*4]
                 stream_run_1:
                         mov ax, word ptr [esi]
                         mov word ptr [edi], ax

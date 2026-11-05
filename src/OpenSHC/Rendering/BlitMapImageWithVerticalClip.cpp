@@ -1,14 +1,14 @@
 #include "../Rendering.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00ed3154.hpp"
-#include "OpenSHC/Globals/DAT_00ed316c.hpp"
-#include "OpenSHC/Globals/DAT_00ed3170.hpp"
-#include "OpenSHC/Globals/DAT_00ed317c.hpp"
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/DAT_GMImageOffsets.hpp"
 #include "OpenSHC/Globals/DAT_GmImageAddressToBeRendered.hpp"
 #include "OpenSHC/Globals/DAT_RenderMap_DrawSomeX.hpp"
 #include "OpenSHC/Globals/DAT_RenderMap_DrawSomeY.hpp"
+#include "OpenSHC/Globals/DAT_RenderMap_RowsLeft.hpp"
+#include "OpenSHC/Globals/DAT_RenderMap_SecondBlitImageIndex.hpp"
+#include "OpenSHC/Globals/DAT_RenderMap_WhatToDraw.hpp"
 #include "OpenSHC/Globals/DAT_RenderMap_YOffset.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -16,9 +16,9 @@
 namespace OpenSHC {
 
 // Copies a 30-pixel-wide map image column (tile objects are stored as 15 dwords per row) onto the map surface,
-// clipped to the visible rows. When DAT_00ed3170 asks for more rows than the image has, the rest comes from a
-// second image (DAT_00ed316c). DAT_00ed317c picks which half of the column is drawn (0 both, 1 right, 2 left,
-// 3 only the middle column). Zoomed out, every other row and pixel is used.
+// clipped to the visible rows. When DAT_RenderMap_RowsLeft asks for more rows than the image has, the rest comes
+// from a second image (DAT_RenderMap_SecondBlitImageIndex). DAT_RenderMap_WhatToDraw picks which half of the column
+// is drawn (0 both, 1 right, 2 left, 3 only the middle column). Zoomed out, every other row and pixel is used.
 // The copy loops are handwritten assembly in the original, transcribed here from the binary.
 
 // One row of the 4056-pixel map surface, in bytes.
@@ -34,43 +34,45 @@ void Rendering::BlitMapImageWithVerticalClip()
     // sizeof does that without generating any code.
     (void)sizeof(DAT_WindowAndDirectDraw::instance);
     (void)sizeof(DAT_RenderMap_DrawSomeX::instance);
-    (void)sizeof(DAT_00ed317c::instance);
+    (void)sizeof(DAT_RenderMap_WhatToDraw::instance);
     char* image = (char*)DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
     char* nextImage = (char*)DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
     int drawY = DAT_RenderMap_DrawSomeY::instance + (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9;
     int height = DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height - 7;
     int skip = 0;
     int nextSkip = 0;
-    if (DAT_00ed3170::instance <= 0) {
+    if (DAT_RenderMap_RowsLeft::instance <= 0) {
         return;
     }
     if (drawY < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start) {
         int const clippedRows = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start - drawY;
         nextSkip = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start - height - drawY;
         drawY = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start;
-        DAT_00ed3170::instance -= clippedRows;
+        DAT_RenderMap_RowsLeft::instance -= clippedRows;
         height -= clippedRows;
         skip = clippedRows * IMAGE_ROW;
     }
-    if (DAT_00ed3170::instance + drawY >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
-        DAT_00ed3170::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
+    if (DAT_RenderMap_RowsLeft::instance + drawY
+        >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
+        DAT_RenderMap_RowsLeft::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
         // fixme: always adds 0, the original subtracts the already shortened row count
-        height += DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - DAT_00ed3170::instance - drawY;
+        height += DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - DAT_RenderMap_RowsLeft::instance
+            - drawY;
     }
     int firstRows;
     if (height <= 0) {
         firstRows = 0;
         nextSkip *= IMAGE_ROW;
-    } else if (height < DAT_00ed3170::instance) {
+    } else if (height < DAT_RenderMap_RowsLeft::instance) {
         firstRows = height;
-        DAT_00ed3170::instance -= height;
+        DAT_RenderMap_RowsLeft::instance -= height;
         nextSkip = 0;
     } else {
-        firstRows = DAT_00ed3170::instance;
-        DAT_00ed3170::instance = 0;
+        firstRows = DAT_RenderMap_RowsLeft::instance;
+        DAT_RenderMap_RowsLeft::instance = 0;
     }
     image += DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
-    nextImage += DAT_GMImageOffsets::instance[DAT_00ed316c::instance];
+    nextImage += DAT_GMImageOffsets::instance[DAT_RenderMap_SecondBlitImageIndex::instance];
     if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
         // clang-format off
         __asm {
@@ -89,7 +91,7 @@ void Rendering::BlitMapImageWithVerticalClip()
             cmp edx, 0
             jle next_image
         row_start:
-            mov eax, DAT_00ed317c::instance
+            mov eax, DAT_RenderMap_WhatToDraw::instance
             cmp eax, 1
             je copy_right_half
             cmp eax, 2
@@ -189,10 +191,10 @@ void Rendering::BlitMapImageWithVerticalClip()
             jle next_image
             jmp copy_middle
         next_image:
-            cmp DAT_00ed3170::instance, 0
+            cmp DAT_RenderMap_RowsLeft::instance, 0
             jle done
-            mov edx, DAT_00ed3170::instance
-            mov DAT_00ed3170::instance, 0
+            mov edx, DAT_RenderMap_RowsLeft::instance
+            mov DAT_RenderMap_RowsLeft::instance, 0
             mov esi, dword ptr nextImage
             mov eax, dword ptr nextSkip
             add esi, eax
@@ -221,7 +223,7 @@ void Rendering::BlitMapImageWithVerticalClip()
         cmp edx, 0
         jle zoom_next_image
     zoom_row_start:
-        mov eax, DAT_00ed317c::instance
+        mov eax, DAT_RenderMap_WhatToDraw::instance
         cmp eax, 1
         je zoom_right_half
         cmp eax, 2
@@ -366,10 +368,10 @@ void Rendering::BlitMapImageWithVerticalClip()
         jle zoom_next_image
         jmp zoom_middle
     zoom_next_image:
-        cmp DAT_00ed3170::instance, 0
+        cmp DAT_RenderMap_RowsLeft::instance, 0
         jle zoom_done
-        mov edx, DAT_00ed3170::instance
-        mov DAT_00ed3170::instance, 0
+        mov edx, DAT_RenderMap_RowsLeft::instance
+        mov DAT_RenderMap_RowsLeft::instance, 0
         mov esi, dword ptr nextImage
         mov eax, dword ptr nextSkip
         add esi, eax
