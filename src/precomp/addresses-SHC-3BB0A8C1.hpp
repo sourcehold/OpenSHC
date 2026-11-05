@@ -97373,7 +97373,7 @@ enum {
     SHC_3BB0A8C1_0x00EB9B1C = 0x00EB9B1C,
     // type: /int
     SHC_3BB0A8C1_0x00EB9B20 = 0x00EB9B20,
-    // type: /float
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B24 = 0x00EB9B24,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B28 = 0x00EB9B28,
