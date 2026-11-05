@@ -384,7 +384,8 @@ namespace UI {
             if (DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] != 0) {
                 // "("
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, iconX + 8, iconY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, FALSE, 0);
+                    s_brace_close_005a2778, iconX + 8, iconY, OpenSHC::Text::TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 19, FALSE, 0);
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 665, iconX + 14, iconY - 5);
@@ -392,47 +393,50 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
                         DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] % 12),
-                    iconX + 28, iconY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, FALSE, 0);
+                    iconX + 28, iconY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 19, FALSE, 0);
                 iconX += 32;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalDateOfDeathInMonths[player] / 12, iconX, iconY,
-                    OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, TRUE, 0);
+                    OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 19, TRUE, 0);
                 // ")"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, iconX, iconY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 19, TRUE, 0);
+                    s_brace_open_005a2774, iconX, iconY, OpenSHC::Text::TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 19, TRUE, 0);
             }
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             if (DAT_00ec082c::instance == 0 || DAT_00ec082c::instance == 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    tables.kills[player], x + 279, y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    tables.kills[player], x + 279, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                    18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    tables.losses[player], x + 337, y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    tables.losses[player], x + 337, y, OpenSHC::Text::TTA_CENTER,
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalGold[player], x + 395, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[player], x + 453, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[player], x + 511, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[player], x + 569, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalIronProduced[player], x + 627, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[player], x + 685, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[player], x + 743, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             }
             if (DAT_00ec082c::instance == 1 || DAT_00ec082c::instance == 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[player], columnOffset + 279 + x, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
@@ -442,35 +446,38 @@ namespace UI {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[player], columnOffset + 395 + x,
-                    y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[player],
-                    columnOffset + 453 + x, y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    columnOffset + 453 + x, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
+                    FALSE, 0);
                 if (DAT_00ec082c::instance == 1) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                         DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[player],
-                        columnOffset + 511 + x, y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                        columnOffset + 511 + x, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                        18, FALSE, 0);
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                         DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[player],
-                        columnOffset + 569 + x, y, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                        columnOffset + 569 + x, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                        18, FALSE, 0);
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                         DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[player], columnOffset + 627 + x, y,
-                        OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 }
             }
             if (DAT_00ec082c::instance == 3) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[player], x + 511, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[player], x + 569, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[player], x + 627, y,
-                    OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             }
             y += 45;
             iconY += 45;
@@ -576,7 +583,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 30),
                 DAT_MenuHandlerState::instance.x + 56, DAT_MenuHandlerState::instance.y + 575, OpenSHC::Text::TTA_LEFT,
-                0xffffff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_FFFFFF, 18, TRUE, 0);
             if (boxRight < DAT_TextManagerObject::instance.currentXOffset_0x0 + 56 + DAT_MenuHandlerState::instance.x) {
                 boxRight = DAT_TextManagerObject::instance.currentXOffset_0x0 + 56 + DAT_MenuHandlerState::instance.x;
             }
@@ -614,7 +621,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 30),
                 DAT_MenuHandlerState::instance.x - 36, DAT_MenuHandlerState::instance.y + 632, OpenSHC::Text::TTA_LEFT,
-                0xffffff, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_FFFFFF, 18, TRUE, 0);
             if (boxRight < DAT_TextManagerObject::instance.currentXOffset_0x0 - 36 + DAT_MenuHandlerState::instance.x) {
                 boxRight = DAT_TextManagerObject::instance.currentXOffset_0x0 - 36 + DAT_MenuHandlerState::instance.x;
             }

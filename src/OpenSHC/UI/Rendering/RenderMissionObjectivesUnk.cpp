@@ -208,8 +208,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_OBJECTIVES, textIndex),
-                    DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT, 0xc2f0eb,
-                    18, FALSE, 0);
+                    DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 switch (objective) {
                 case 1:
                 case 4:
@@ -220,14 +220,14 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                         DAT_TextManagerObject::ptr)(INT_ARRAY_00ed2fc8::instance[objective],
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, FALSE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                     if (DAT_GameCore::instance.gameSuspended != 1) {
                         break;
                     }
                     // " ("
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         (char*)s___005aaf74, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y,
-                        OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     switch (objective) {
                     case 1:
                         value = DAT_GameState::instance
@@ -262,11 +262,11 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(value,
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     // ")"
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         (char*)s_brace_open_005a2774, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y,
-                        OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     break;
                 case 5:
                 case 6:
@@ -275,7 +275,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                         DAT_TextManagerObject::ptr)(INT_ARRAY_00ed2fc8::instance[objective],
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, FALSE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                     if (INT_ARRAY_00eb1238::instance[objective] > 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
@@ -283,7 +283,7 @@ namespace UI {
                                 DAT_TextManagerObject::ptr)(
                                 OpenSHC::DE::SHCDE::TEXT_GOODS, INT_ARRAY_00eb1238::instance[objective]),
                             DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column + 6, y,
-                            OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, TRUE, 0);
+                            OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     }
                     if (DAT_GameCore::instance.gameSuspended != 1) {
                         break;
@@ -291,7 +291,7 @@ namespace UI {
                     // " ("
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         (char*)s___005aaf74, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column + 6, y,
-                        OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     {
                         int resource = INT_ARRAY_00eb1238::instance[objective];
                         if (resource == Game::Resources::RT_PARTIALPITCH) {
@@ -304,12 +304,12 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(value,
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column + 6, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     // ")"
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         (char*)s_brace_open_005a2774,
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column + 6, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, TRUE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     break;
                 }
                 // tick box: done or not
@@ -335,8 +335,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_OBJECTIVES, 25),
-                    DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT, 0xc2f0eb,
-                    18, FALSE, 0);
+                    DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 int barX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 301;
                 if (DAT_TextManagerObject::instance.currentXOffset_0x0
                         + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40
@@ -402,7 +402,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_OBJECTIVES, timerText),
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT,
-                        0xc2f0eb, 18, FALSE, 0);
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                     int barX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 301;
                     if (DAT_TextManagerObject::instance.currentXOffset_0x0
                             + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40
@@ -468,7 +468,7 @@ namespace UI {
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - DAT_00eb0b24::instance * pageHeight + offset
                     + 50,
-                720, 0xc2f0eb, 18, 0);
+                720, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, 0);
         } else if (DAT_GameCore::instance.descriptionStringTableIndex) {
             INT_00ed27c4::instance
                 = (MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
@@ -487,7 +487,7 @@ namespace UI {
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - DAT_00eb0b24::instance * pageHeight + offset
                     + 50,
-                720, 0xc2f0eb, 18, 0);
+                720, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, 0);
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRangeToResolution,
             DAT_TextureRenderCoreObject::ptr)();

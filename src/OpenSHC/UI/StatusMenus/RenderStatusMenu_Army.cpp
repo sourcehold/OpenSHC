@@ -109,8 +109,8 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 152, top + 25, OpenSHC::Text::TTA_LEFT, 255, 0, 18, TRUE, 0);
-            color = 255;
+                x + 152, top + 25, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0000FF, 0, 18, TRUE, 0);
+            color = OpenSHC::Rendering::Colors::COL_0000FF;
             percentX = x + 154;
         } else {
             // "No 'fear factor' bonus."
