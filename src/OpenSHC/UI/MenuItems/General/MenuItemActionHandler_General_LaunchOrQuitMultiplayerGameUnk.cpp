@@ -133,7 +133,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                     return;
                 case -7:
-                    for (int i = 0; i < 9; ++i) {
+                    for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                         DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                             = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                     }
@@ -338,7 +338,7 @@ namespace UI {
                     DAT_GameCore::instance.maceProducible_logic = 1;
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         UI::Enums::MVT_MP_CONNECTION, 0);
-                    for (int i = 0; i < 9; ++i) {
+                    for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                         DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                             = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                     }

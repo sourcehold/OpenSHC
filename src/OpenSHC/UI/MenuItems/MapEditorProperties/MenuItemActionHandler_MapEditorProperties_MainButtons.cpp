@@ -104,7 +104,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::deselectAllUnitsOneByOne, DAT_UnitsState::ptr)();
                         MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::clearSelectionCountsAndPlayerIDs, DAT_UnitsState::ptr)();
-                        for (int i = 0; i < 9; ++i) {
+                        for (int i = 0; i < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); ++i) {
                             DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] = -1;
                         }
                         DAT_GameSynchronyState::instance.currentPlayerFullIDArray[1] = 1;

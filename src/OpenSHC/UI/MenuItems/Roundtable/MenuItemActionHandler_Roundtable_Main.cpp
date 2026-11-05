@@ -59,7 +59,9 @@ namespace UI {
                                 DAT_GameSynchronyState::ptr)(playerID),
                             BVar3))) {
                     int iVar4 = 0;
-                    for (int playerID_00 = 1; playerID_00 < 9; ++playerID_00) {
+                    for (int playerID_00 = 1;
+                        playerID_00 < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                        ++playerID_00) {
                         if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID_00] != -1)
                             || (BVar3 = MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
                                     DAT_GameSynchronyState::ptr)(playerID_00),
@@ -94,7 +96,7 @@ namespace UI {
                         || (DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[playerID_01] == 0)) {
                         if (bVar1 == 0) {
                             bVar1 = 0;
-                            for (int i = 1; i < 9; ++i) {
+                            for (int i = 1; i < countof(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray); ++i) {
                                 if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[i]
                                     && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[i]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[i];
@@ -188,7 +190,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,
                     DAT_GameSynchronyState::ptr)();
                 int cVar2 = 0;
-                for (int i = 1; i < 9; ++i) {
+                for (int i = 1; i < countof(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray); ++i) {
                     if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[i]) {
                         cVar2 += '\x01';
                     }

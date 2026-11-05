@@ -314,7 +314,8 @@ namespace UI {
                 DAT_ButtonUnknownZero::instance = 1;
                 if ((DAT_GameSynchronyState::instance.isHost)
                     && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
-                    for (int iVar3 = 1; iVar3 < 9; ++iVar3) {
+                    for (int iVar3 = 1; iVar3 < countof(DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray);
+                        ++iVar3) {
                         if ((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar3] < '\x01')
                             goto LAB_00427f46;
                     }

@@ -102,7 +102,7 @@ namespace UI {
                             DAT_MapMissionType::instance = 0;
                         }
                         if (DAT_GameCore::instance.gameSuspended == 0) {
-                            for (int i = 0; i < 9; ++i) {
+                            for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                                 DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                                     = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                             }
