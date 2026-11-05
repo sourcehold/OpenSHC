@@ -74,6 +74,7 @@ src/OpenSHC/Map/Buildings/UpdateArmorersWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateFletchersWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdatePoleturnersWorkshop.cpp
 src/OpenSHC/UI/MenuItems/ChooseRandomNumberOfEnemies/MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main.cpp
+src/OpenSHC/UI/MenuItems/MapEditorLandscaping/MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons.cpp
 src/OpenSHC/Map/Buildings/UpdateBlacksmithsWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
