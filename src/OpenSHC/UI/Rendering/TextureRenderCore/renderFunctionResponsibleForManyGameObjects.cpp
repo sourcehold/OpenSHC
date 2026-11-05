@@ -23,6 +23,9 @@ namespace UI {
         // them with its own label addresses on first use. The zoomed-out path (isZoom2) draws the image at half size:
         // every other row and every other column.
 
+        // A TGX token byte's run type (top three bits) and run length minus one (low five bits).
+        enum { TGX_STREAM = 0x00, TGX_SKIP = 0x20, TGX_REPEAT = 0x40, TGX_TYPE_MASK = 0xe0, TGX_LENGTH_MASK = 0x1f };
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0044D3D0
         void TextureRenderCore::renderFunctionResponsibleForManyGameObjects(
             int drawX, int drawY, int imageWidth, int imageHeight, ushort* imageAddress)
@@ -98,25 +101,25 @@ namespace UI {
                 skip_rows_above_top:
                         mov bl, byte ptr [esi]
                         movzx ecx, bl
-                        and bl, 0xe0
-                        and cl, 0x1f
+                        and bl, TGX_TYPE_MASK
+                        and cl, TGX_LENGTH_MASK
                         add esi, 1
-                        cmp bl, 0x20
+                        cmp bl, TGX_SKIP
                         je skip_rows_above_top
-                        cmp bl, 0
-                        je L_44d548
-                        cmp bl, 0x40
-                        je L_44d551
-                        jmp L_44d556
-                L_44d548:
+                        cmp bl, TGX_STREAM
+                        je skip_rows_stream
+                        cmp bl, TGX_REPEAT
+                        je skip_rows_repeat
+                        jmp skip_rows_new_line
+                skip_rows_stream:
                         add ecx, 1
                         add ecx, ecx
                         add esi, ecx
                         jmp skip_rows_above_top
-                L_44d551:
+                skip_rows_repeat:
                         add esi, 2
                         jmp skip_rows_above_top
-                L_44d556:
+                skip_rows_new_line:
                         sub eax, 1
                         jg skip_rows_above_top
                         mov eax, heightStart
@@ -128,46 +131,46 @@ namespace UI {
                 token_loop:
                         mov al, byte ptr [esi]
                         movzx ecx, al
-                        and al, 0xe0
-                        and cl, 0x1f
+                        and al, TGX_TYPE_MASK
+                        and cl, TGX_LENGTH_MASK
                         add esi, 1
-                        cmp al, 0x20
-                        je L_44d58e
-                        cmp al, 0
-                        je L_44d5ab
-                        cmp al, 0x40
-                        je L_44d597
+                        cmp al, TGX_SKIP
+                        je token_skip
+                        cmp al, TGX_STREAM
+                        je token_stream
+                        cmp al, TGX_REPEAT
+                        je token_repeat
                         add edi, lineTail
                         sub edx, 1
                         jg token_loop
                         jmp done
-                L_44d58e:
+                token_skip:
                         add ecx, 1
                         add ecx, ecx
                         add edi, ecx
                         jmp token_loop
-                L_44d597:
+                token_repeat:
                         movzx eax, word ptr [esi]
                         mov ebx, eax
-                        shl ebx, 0x10
+                        shl ebx, 16
                         add eax, ebx
                         add esi, 2
                         jmp PTR_ARRAY_00c9a510::instance[ecx*4]
-                L_44d5ab:
+                token_stream:
                         jmp PTR_ARRAY_00d7d250::instance[ecx*4]
-                L_44d5b2:
+                stream_run_1:
                         mov ax, word ptr [esi]
                         mov word ptr [edi], ax
                         add esi, 2
                         add edi, 2
                         jmp token_loop
-                L_44d5c0:
+                stream_run_2:
                         mov eax, dword ptr [esi]
                         mov dword ptr [edi], eax
                         add esi, 4
                         add edi, 4
                         jmp token_loop
-                L_44d5cc:
+                stream_run_3:
                         mov eax, dword ptr [esi]
                         mov bx, word ptr [esi + 4]
                         mov dword ptr [edi], eax
@@ -175,7 +178,7 @@ namespace UI {
                         add esi, 6
                         add edi, 6
                         jmp token_loop
-                L_44d5e0:
+                stream_run_4:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov dword ptr [edi], eax
@@ -183,1149 +186,1149 @@ namespace UI {
                         add esi, 8
                         add edi, 8
                         jmp token_loop
-                L_44d5f5:
+                stream_run_5:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov cx, word ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov word ptr [edi + 8], cx
-                        add esi, 0xa
-                        add edi, 0xa
+                        add esi, 10
+                        add edi, 10
                         jmp token_loop
-                L_44d612:
+                stream_run_6:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        add esi, 0xc
-                        add edi, 0xc
+                        add esi, 12
+                        add edi, 12
                         jmp token_loop
-                L_44d62d:
+                stream_run_7:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov ax, word ptr [esi + 0xc]
-                        mov word ptr [edi + 0xc], ax
-                        add esi, 0xe
-                        add edi, 0xe
+                        mov ax, word ptr [esi + 12]
+                        mov word ptr [edi + 12], ax
+                        add esi, 14
+                        add edi, 14
                         jmp token_loop
-                L_44d650:
+                stream_run_8:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov dword ptr [edi + 0xc], eax
-                        add esi, 0x10
-                        add edi, 0x10
+                        mov eax, dword ptr [esi + 12]
+                        mov dword ptr [edi + 12], eax
+                        add esi, 16
+                        add edi, 16
                         jmp token_loop
-                L_44d671:
+                stream_run_9:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov bx, word ptr [esi + 0x10]
-                        mov dword ptr [edi + 0xc], eax
-                        mov word ptr [edi + 0x10], bx
-                        add esi, 0x12
-                        add edi, 0x12
+                        mov eax, dword ptr [esi + 12]
+                        mov bx, word ptr [esi + 16]
+                        mov dword ptr [edi + 12], eax
+                        mov word ptr [edi + 16], bx
+                        add esi, 18
+                        add edi, 18
                         jmp token_loop
-                L_44d69a:
+                stream_run_10:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        add esi, 0x14
-                        add edi, 0x14
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        add esi, 20
+                        add edi, 20
                         jmp token_loop
-                L_44d6c1:
+                stream_run_11:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov cx, word ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov word ptr [edi + 0x14], cx
-                        add esi, 0x16
-                        add edi, 0x16
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov cx, word ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov word ptr [edi + 20], cx
+                        add esi, 22
+                        add edi, 22
                         jmp token_loop
-                L_44d6f0:
+                stream_run_12:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        add esi, 0x18
-                        add edi, 0x18
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        add esi, 24
+                        add edi, 24
                         jmp token_loop
-                L_44d71d:
+                stream_run_13:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov ax, word ptr [esi + 0x18]
-                        mov word ptr [edi + 0x18], ax
-                        add esi, 0x1a
-                        add edi, 0x1a
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov ax, word ptr [esi + 24]
+                        mov word ptr [edi + 24], ax
+                        add esi, 26
+                        add edi, 26
                         jmp token_loop
-                L_44d752:
+                stream_run_14:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov dword ptr [edi + 0x18], eax
-                        add esi, 0x1c
-                        add edi, 0x1c
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov dword ptr [edi + 24], eax
+                        add esi, 28
+                        add edi, 28
                         jmp token_loop
-                L_44d785:
+                stream_run_15:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov bx, word ptr [esi + 0x1c]
-                        mov dword ptr [edi + 0x18], eax
-                        mov word ptr [edi + 0x1c], bx
-                        add esi, 0x1e
-                        add edi, 0x1e
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov bx, word ptr [esi + 28]
+                        mov dword ptr [edi + 24], eax
+                        mov word ptr [edi + 28], bx
+                        add esi, 30
+                        add edi, 30
                         jmp token_loop
-                L_44d7c0:
+                stream_run_16:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        add esi, 0x20
-                        add edi, 0x20
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        add esi, 32
+                        add edi, 32
                         jmp token_loop
-                L_44d7f9:
+                stream_run_17:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov cx, word ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov word ptr [edi + 0x20], cx
-                        add esi, 0x22
-                        add edi, 0x22
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov cx, word ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov word ptr [edi + 32], cx
+                        add esi, 34
+                        add edi, 34
                         jmp token_loop
-                L_44d83a:
+                stream_run_18:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        add esi, 0x24
-                        add edi, 0x24
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        add esi, 36
+                        add edi, 36
                         jmp token_loop
-                L_44d879:
+                stream_run_19:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov ax, word ptr [esi + 0x24]
-                        mov word ptr [edi + 0x24], ax
-                        add esi, 0x26
-                        add edi, 0x26
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov ax, word ptr [esi + 36]
+                        mov word ptr [edi + 36], ax
+                        add esi, 38
+                        add edi, 38
                         jmp token_loop
-                L_44d8c0:
+                stream_run_20:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov dword ptr [edi + 0x24], eax
-                        add esi, 0x28
-                        add edi, 0x28
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov dword ptr [edi + 36], eax
+                        add esi, 40
+                        add edi, 40
                         jmp token_loop
-                L_44d905:
+                stream_run_21:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov bx, word ptr [esi + 0x28]
-                        mov dword ptr [edi + 0x24], eax
-                        mov word ptr [edi + 0x28], bx
-                        add esi, 0x2a
-                        add edi, 0x2a
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov bx, word ptr [esi + 40]
+                        mov dword ptr [edi + 36], eax
+                        mov word ptr [edi + 40], bx
+                        add esi, 42
+                        add edi, 42
                         jmp token_loop
-                L_44d952:
+                stream_run_22:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        add esi, 0x2c
-                        add edi, 0x2c
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        add esi, 44
+                        add edi, 44
                         jmp token_loop
-                L_44d99d:
+                stream_run_23:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov cx, word ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov word ptr [edi + 0x2c], cx
-                        add esi, 0x2e
-                        add edi, 0x2e
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov cx, word ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov word ptr [edi + 44], cx
+                        add esi, 46
+                        add edi, 46
                         jmp token_loop
-                L_44d9f0:
+                stream_run_24:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        add esi, 0x30
-                        add edi, 0x30
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        add esi, 48
+                        add edi, 48
                         jmp token_loop
-                L_44da41:
+                stream_run_25:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov ax, word ptr [esi + 0x30]
-                        mov word ptr [edi + 0x30], ax
-                        add esi, 0x32
-                        add edi, 0x32
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov ax, word ptr [esi + 48]
+                        mov word ptr [edi + 48], ax
+                        add esi, 50
+                        add edi, 50
                         jmp token_loop
-                L_44da9a:
+                stream_run_26:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov dword ptr [edi + 0x30], eax
-                        add esi, 0x34
-                        add edi, 0x34
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov dword ptr [edi + 48], eax
+                        add esi, 52
+                        add edi, 52
                         jmp token_loop
-                L_44daf1:
+                stream_run_27:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov bx, word ptr [esi + 0x34]
-                        mov dword ptr [edi + 0x30], eax
-                        mov word ptr [edi + 0x34], bx
-                        add esi, 0x36
-                        add edi, 0x36
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov bx, word ptr [esi + 52]
+                        mov dword ptr [edi + 48], eax
+                        mov word ptr [edi + 52], bx
+                        add esi, 54
+                        add edi, 54
                         jmp token_loop
-                L_44db50:
+                stream_run_28:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov ebx, dword ptr [esi + 0x34]
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], ebx
-                        add esi, 0x38
-                        add edi, 0x38
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov ebx, dword ptr [esi + 52]
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], ebx
+                        add esi, 56
+                        add edi, 56
                         jmp token_loop
-                L_44dbad:
+                stream_run_29:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov ebx, dword ptr [esi + 0x34]
-                        mov cx, word ptr [esi + 0x38]
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], ebx
-                        mov word ptr [edi + 0x38], cx
-                        add esi, 0x3a
-                        add edi, 0x3a
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov ebx, dword ptr [esi + 52]
+                        mov cx, word ptr [esi + 56]
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], ebx
+                        mov word ptr [edi + 56], cx
+                        add esi, 58
+                        add edi, 58
                         jmp token_loop
-                L_44dc12:
+                stream_run_30:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov ebx, dword ptr [esi + 0x34]
-                        mov ecx, dword ptr [esi + 0x38]
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], ebx
-                        mov dword ptr [edi + 0x38], ecx
-                        add esi, 0x3c
-                        add edi, 0x3c
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov ebx, dword ptr [esi + 52]
+                        mov ecx, dword ptr [esi + 56]
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], ebx
+                        mov dword ptr [edi + 56], ecx
+                        add esi, 60
+                        add edi, 60
                         jmp token_loop
-                L_44dc75:
+                stream_run_31:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov ebx, dword ptr [esi + 0x34]
-                        mov ecx, dword ptr [esi + 0x38]
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], ebx
-                        mov dword ptr [edi + 0x38], ecx
-                        mov ax, word ptr [esi + 0x3c]
-                        mov word ptr [edi + 0x3c], ax
-                        add esi, 0x3e
-                        add edi, 0x3e
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov ebx, dword ptr [esi + 52]
+                        mov ecx, dword ptr [esi + 56]
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], ebx
+                        mov dword ptr [edi + 56], ecx
+                        mov ax, word ptr [esi + 60]
+                        mov word ptr [edi + 60], ax
+                        add esi, 62
+                        add edi, 62
                         jmp token_loop
-                L_44dce0:
+                stream_run_32:
                         mov eax, dword ptr [esi]
                         mov ebx, dword ptr [esi + 4]
                         mov ecx, dword ptr [esi + 8]
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], ebx
                         mov dword ptr [edi + 8], ecx
-                        mov eax, dword ptr [esi + 0xc]
-                        mov ebx, dword ptr [esi + 0x10]
-                        mov ecx, dword ptr [esi + 0x14]
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], ebx
-                        mov dword ptr [edi + 0x14], ecx
-                        mov eax, dword ptr [esi + 0x18]
-                        mov ebx, dword ptr [esi + 0x1c]
-                        mov ecx, dword ptr [esi + 0x20]
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], ebx
-                        mov dword ptr [edi + 0x20], ecx
-                        mov eax, dword ptr [esi + 0x24]
-                        mov ebx, dword ptr [esi + 0x28]
-                        mov ecx, dword ptr [esi + 0x2c]
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], ebx
-                        mov dword ptr [edi + 0x2c], ecx
-                        mov eax, dword ptr [esi + 0x30]
-                        mov ebx, dword ptr [esi + 0x34]
-                        mov ecx, dword ptr [esi + 0x38]
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], ebx
-                        mov dword ptr [edi + 0x38], ecx
-                        mov eax, dword ptr [esi + 0x3c]
-                        mov dword ptr [edi + 0x3c], eax
-                        add esi, 0x40
-                        add edi, 0x40
+                        mov eax, dword ptr [esi + 12]
+                        mov ebx, dword ptr [esi + 16]
+                        mov ecx, dword ptr [esi + 20]
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], ebx
+                        mov dword ptr [edi + 20], ecx
+                        mov eax, dword ptr [esi + 24]
+                        mov ebx, dword ptr [esi + 28]
+                        mov ecx, dword ptr [esi + 32]
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], ebx
+                        mov dword ptr [edi + 32], ecx
+                        mov eax, dword ptr [esi + 36]
+                        mov ebx, dword ptr [esi + 40]
+                        mov ecx, dword ptr [esi + 44]
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], ebx
+                        mov dword ptr [edi + 44], ecx
+                        mov eax, dword ptr [esi + 48]
+                        mov ebx, dword ptr [esi + 52]
+                        mov ecx, dword ptr [esi + 56]
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], ebx
+                        mov dword ptr [edi + 56], ecx
+                        mov eax, dword ptr [esi + 60]
+                        mov dword ptr [edi + 60], eax
+                        add esi, 64
+                        add edi, 64
                         jmp token_loop
-                L_44dd49:
+                repeat_run_1:
                         mov word ptr [edi], ax
                         add edi, 2
                         jmp token_loop
-                L_44dd54:
+                repeat_run_2:
                         mov dword ptr [edi], eax
                         add edi, 4
                         jmp token_loop
-                L_44dd5e:
+                repeat_run_3:
                         mov dword ptr [edi], eax
                         mov word ptr [edi + 4], ax
                         add edi, 6
                         jmp token_loop
-                L_44dd6c:
+                repeat_run_4:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         add edi, 8
                         jmp token_loop
-                L_44dd79:
+                repeat_run_5:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov word ptr [edi + 8], ax
-                        add edi, 0xa
+                        add edi, 10
                         jmp token_loop
-                L_44dd8a:
+                repeat_run_6:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        add edi, 0xc
+                        add edi, 12
                         jmp token_loop
-                L_44dd9a:
+                repeat_run_7:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov word ptr [edi + 0xc], ax
-                        add edi, 0xe
+                        mov word ptr [edi + 12], ax
+                        add edi, 14
                         jmp token_loop
-                L_44ddae:
+                repeat_run_8:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        add edi, 0x10
+                        mov dword ptr [edi + 12], eax
+                        add edi, 16
                         jmp token_loop
-                L_44ddc1:
+                repeat_run_9:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov word ptr [edi + 0x10], ax
-                        add edi, 0x12
+                        mov dword ptr [edi + 12], eax
+                        mov word ptr [edi + 16], ax
+                        add edi, 18
                         jmp token_loop
-                L_44ddd8:
+                repeat_run_10:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        add edi, 0x14
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        add edi, 20
                         jmp token_loop
-                L_44ddee:
+                repeat_run_11:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov word ptr [edi + 0x14], ax
-                        add edi, 0x16
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov word ptr [edi + 20], ax
+                        add edi, 22
                         jmp token_loop
-                L_44de08:
+                repeat_run_12:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        add edi, 0x18
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        add edi, 24
                         jmp token_loop
-                L_44de21:
+                repeat_run_13:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov word ptr [edi + 0x18], ax
-                        add edi, 0x1a
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov word ptr [edi + 24], ax
+                        add edi, 26
                         jmp token_loop
-                L_44de3e:
+                repeat_run_14:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        add edi, 0x1c
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        add edi, 28
                         jmp token_loop
-                L_44de5a:
+                repeat_run_15:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov word ptr [edi + 0x1c], ax
-                        add edi, 0x1e
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov word ptr [edi + 28], ax
+                        add edi, 30
                         jmp token_loop
-                L_44de7a:
+                repeat_run_16:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        add edi, 0x20
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        add edi, 32
                         jmp token_loop
-                L_44de99:
+                repeat_run_17:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov word ptr [edi + 0x20], ax
-                        add edi, 0x22
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov word ptr [edi + 32], ax
+                        add edi, 34
                         jmp token_loop
-                L_44debc:
+                repeat_run_18:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        add edi, 0x24
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        add edi, 36
                         jmp token_loop
-                L_44dede:
+                repeat_run_19:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov word ptr [edi + 0x24], ax
-                        add edi, 0x26
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov word ptr [edi + 36], ax
+                        add edi, 38
                         jmp token_loop
-                L_44df04:
+                repeat_run_20:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        add edi, 0x28
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        add edi, 40
                         jmp token_loop
-                L_44df29:
+                repeat_run_21:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov word ptr [edi + 0x28], ax
-                        add edi, 0x2a
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov word ptr [edi + 40], ax
+                        add edi, 42
                         jmp token_loop
-                L_44df52:
+                repeat_run_22:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        add edi, 0x2c
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        add edi, 44
                         jmp token_loop
-                L_44df7a:
+                repeat_run_23:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov word ptr [edi + 0x2c], ax
-                        add edi, 0x2e
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov word ptr [edi + 44], ax
+                        add edi, 46
                         jmp token_loop
-                L_44dfa6:
+                repeat_run_24:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        add edi, 0x30
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        add edi, 48
                         jmp token_loop
-                L_44dfd1:
+                repeat_run_25:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov word ptr [edi + 0x30], ax
-                        add edi, 0x32
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov word ptr [edi + 48], ax
+                        add edi, 50
                         jmp token_loop
-                L_44e000:
+                repeat_run_26:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        add edi, 0x34
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        add edi, 52
                         jmp token_loop
-                L_44e02e:
+                repeat_run_27:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov word ptr [edi + 0x34], ax
-                        add edi, 0x36
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov word ptr [edi + 52], ax
+                        add edi, 54
                         jmp token_loop
-                L_44e060:
+                repeat_run_28:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], eax
-                        add edi, 0x38
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], eax
+                        add edi, 56
                         jmp token_loop
-                L_44e091:
+                repeat_run_29:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], eax
-                        mov word ptr [edi + 0x38], ax
-                        add edi, 0x3a
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], eax
+                        mov word ptr [edi + 56], ax
+                        add edi, 58
                         jmp token_loop
-                L_44e0c6:
+                repeat_run_30:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], eax
-                        mov dword ptr [edi + 0x38], eax
-                        add edi, 0x3c
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], eax
+                        mov dword ptr [edi + 56], eax
+                        add edi, 60
                         jmp token_loop
-                L_44e0fa:
+                repeat_run_31:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], eax
-                        mov dword ptr [edi + 0x38], eax
-                        mov word ptr [edi + 0x3c], ax
-                        add edi, 0x3e
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], eax
+                        mov dword ptr [edi + 56], eax
+                        mov word ptr [edi + 60], ax
+                        add edi, 62
                         jmp token_loop
-                L_44e132:
+                repeat_run_32:
                         mov dword ptr [edi], eax
                         mov dword ptr [edi + 4], eax
                         mov dword ptr [edi + 8], eax
-                        mov dword ptr [edi + 0xc], eax
-                        mov dword ptr [edi + 0x10], eax
-                        mov dword ptr [edi + 0x14], eax
-                        mov dword ptr [edi + 0x18], eax
-                        mov dword ptr [edi + 0x1c], eax
-                        mov dword ptr [edi + 0x20], eax
-                        mov dword ptr [edi + 0x24], eax
-                        mov dword ptr [edi + 0x28], eax
-                        mov dword ptr [edi + 0x2c], eax
-                        mov dword ptr [edi + 0x30], eax
-                        mov dword ptr [edi + 0x34], eax
-                        mov dword ptr [edi + 0x38], eax
-                        mov dword ptr [edi + 0x3c], eax
-                        add edi, 0x40
+                        mov dword ptr [edi + 12], eax
+                        mov dword ptr [edi + 16], eax
+                        mov dword ptr [edi + 20], eax
+                        mov dword ptr [edi + 24], eax
+                        mov dword ptr [edi + 28], eax
+                        mov dword ptr [edi + 32], eax
+                        mov dword ptr [edi + 36], eax
+                        mov dword ptr [edi + 40], eax
+                        mov dword ptr [edi + 44], eax
+                        mov dword ptr [edi + 48], eax
+                        mov dword ptr [edi + 52], eax
+                        mov dword ptr [edi + 56], eax
+                        mov dword ptr [edi + 60], eax
+                        add edi, 64
                         jmp token_loop
                 fill_tables:
                         mov edi, repeatedPixelHandlers
-                        mov eax, offset L_44dd49
+                        mov eax, offset repeat_run_1
                         mov dword ptr [edi], eax
-                        mov eax, offset L_44dd54
+                        mov eax, offset repeat_run_2
                         mov dword ptr [edi + 4], eax
-                        mov eax, offset L_44dd5e
+                        mov eax, offset repeat_run_3
                         mov dword ptr [edi + 8], eax
-                        mov eax, offset L_44dd6c
-                        mov dword ptr [edi + 0xc], eax
-                        mov eax, offset L_44dd79
-                        mov dword ptr [edi + 0x10], eax
-                        mov eax, offset L_44dd8a
-                        mov dword ptr [edi + 0x14], eax
-                        mov eax, offset L_44dd9a
-                        mov dword ptr [edi + 0x18], eax
-                        mov eax, offset L_44ddae
-                        mov dword ptr [edi + 0x1c], eax
-                        mov eax, offset L_44ddc1
-                        mov dword ptr [edi + 0x20], eax
-                        mov eax, offset L_44ddd8
-                        mov dword ptr [edi + 0x24], eax
-                        mov eax, offset L_44ddee
-                        mov dword ptr [edi + 0x28], eax
-                        mov eax, offset L_44de08
-                        mov dword ptr [edi + 0x2c], eax
-                        mov eax, offset L_44de21
-                        mov dword ptr [edi + 0x30], eax
-                        mov eax, offset L_44de3e
-                        mov dword ptr [edi + 0x34], eax
-                        mov eax, offset L_44de5a
-                        mov dword ptr [edi + 0x38], eax
-                        mov eax, offset L_44de7a
-                        mov dword ptr [edi + 0x3c], eax
-                        mov eax, offset L_44de99
-                        mov dword ptr [edi + 0x40], eax
-                        mov eax, offset L_44debc
-                        mov dword ptr [edi + 0x44], eax
-                        mov eax, offset L_44dede
-                        mov dword ptr [edi + 0x48], eax
-                        mov eax, offset L_44df04
-                        mov dword ptr [edi + 0x4c], eax
-                        mov eax, offset L_44df29
-                        mov dword ptr [edi + 0x50], eax
-                        mov eax, offset L_44df52
-                        mov dword ptr [edi + 0x54], eax
-                        mov eax, offset L_44df7a
-                        mov dword ptr [edi + 0x58], eax
-                        mov eax, offset L_44dfa6
-                        mov dword ptr [edi + 0x5c], eax
-                        mov eax, offset L_44dfd1
-                        mov dword ptr [edi + 0x60], eax
-                        mov eax, offset L_44e000
-                        mov dword ptr [edi + 0x64], eax
-                        mov eax, offset L_44e02e
-                        mov dword ptr [edi + 0x68], eax
-                        mov eax, offset L_44e060
-                        mov dword ptr [edi + 0x6c], eax
-                        mov eax, offset L_44e091
-                        mov dword ptr [edi + 0x70], eax
-                        mov eax, offset L_44e0c6
-                        mov dword ptr [edi + 0x74], eax
-                        mov eax, offset L_44e0fa
-                        mov dword ptr [edi + 0x78], eax
-                        mov eax, offset L_44e132
-                        mov dword ptr [edi + 0x7c], eax
+                        mov eax, offset repeat_run_4
+                        mov dword ptr [edi + 12], eax
+                        mov eax, offset repeat_run_5
+                        mov dword ptr [edi + 16], eax
+                        mov eax, offset repeat_run_6
+                        mov dword ptr [edi + 20], eax
+                        mov eax, offset repeat_run_7
+                        mov dword ptr [edi + 24], eax
+                        mov eax, offset repeat_run_8
+                        mov dword ptr [edi + 28], eax
+                        mov eax, offset repeat_run_9
+                        mov dword ptr [edi + 32], eax
+                        mov eax, offset repeat_run_10
+                        mov dword ptr [edi + 36], eax
+                        mov eax, offset repeat_run_11
+                        mov dword ptr [edi + 40], eax
+                        mov eax, offset repeat_run_12
+                        mov dword ptr [edi + 44], eax
+                        mov eax, offset repeat_run_13
+                        mov dword ptr [edi + 48], eax
+                        mov eax, offset repeat_run_14
+                        mov dword ptr [edi + 52], eax
+                        mov eax, offset repeat_run_15
+                        mov dword ptr [edi + 56], eax
+                        mov eax, offset repeat_run_16
+                        mov dword ptr [edi + 60], eax
+                        mov eax, offset repeat_run_17
+                        mov dword ptr [edi + 64], eax
+                        mov eax, offset repeat_run_18
+                        mov dword ptr [edi + 68], eax
+                        mov eax, offset repeat_run_19
+                        mov dword ptr [edi + 72], eax
+                        mov eax, offset repeat_run_20
+                        mov dword ptr [edi + 76], eax
+                        mov eax, offset repeat_run_21
+                        mov dword ptr [edi + 80], eax
+                        mov eax, offset repeat_run_22
+                        mov dword ptr [edi + 84], eax
+                        mov eax, offset repeat_run_23
+                        mov dword ptr [edi + 88], eax
+                        mov eax, offset repeat_run_24
+                        mov dword ptr [edi + 92], eax
+                        mov eax, offset repeat_run_25
+                        mov dword ptr [edi + 96], eax
+                        mov eax, offset repeat_run_26
+                        mov dword ptr [edi + 100], eax
+                        mov eax, offset repeat_run_27
+                        mov dword ptr [edi + 104], eax
+                        mov eax, offset repeat_run_28
+                        mov dword ptr [edi + 108], eax
+                        mov eax, offset repeat_run_29
+                        mov dword ptr [edi + 112], eax
+                        mov eax, offset repeat_run_30
+                        mov dword ptr [edi + 116], eax
+                        mov eax, offset repeat_run_31
+                        mov dword ptr [edi + 120], eax
+                        mov eax, offset repeat_run_32
+                        mov dword ptr [edi + 124], eax
                         mov edi, streamRunHandlers
-                        mov eax, offset L_44d5b2
+                        mov eax, offset stream_run_1
                         mov dword ptr [edi], eax
-                        mov eax, offset L_44d5c0
+                        mov eax, offset stream_run_2
                         mov dword ptr [edi + 4], eax
-                        mov eax, offset L_44d5cc
+                        mov eax, offset stream_run_3
                         mov dword ptr [edi + 8], eax
-                        mov eax, offset L_44d5e0
-                        mov dword ptr [edi + 0xc], eax
-                        mov eax, offset L_44d5f5
-                        mov dword ptr [edi + 0x10], eax
-                        mov eax, offset L_44d612
-                        mov dword ptr [edi + 0x14], eax
-                        mov eax, offset L_44d62d
-                        mov dword ptr [edi + 0x18], eax
-                        mov eax, offset L_44d650
-                        mov dword ptr [edi + 0x1c], eax
-                        mov eax, offset L_44d671
-                        mov dword ptr [edi + 0x20], eax
-                        mov eax, offset L_44d69a
-                        mov dword ptr [edi + 0x24], eax
-                        mov eax, offset L_44d6c1
-                        mov dword ptr [edi + 0x28], eax
-                        mov eax, offset L_44d6f0
-                        mov dword ptr [edi + 0x2c], eax
-                        mov eax, offset L_44d71d
-                        mov dword ptr [edi + 0x30], eax
-                        mov eax, offset L_44d752
-                        mov dword ptr [edi + 0x34], eax
-                        mov eax, offset L_44d785
-                        mov dword ptr [edi + 0x38], eax
-                        mov eax, offset L_44d7c0
-                        mov dword ptr [edi + 0x3c], eax
-                        mov eax, offset L_44d7f9
-                        mov dword ptr [edi + 0x40], eax
-                        mov eax, offset L_44d83a
-                        mov dword ptr [edi + 0x44], eax
-                        mov eax, offset L_44d879
-                        mov dword ptr [edi + 0x48], eax
-                        mov eax, offset L_44d8c0
-                        mov dword ptr [edi + 0x4c], eax
-                        mov eax, offset L_44d905
-                        mov dword ptr [edi + 0x50], eax
-                        mov eax, offset L_44d952
-                        mov dword ptr [edi + 0x54], eax
-                        mov eax, offset L_44d99d
-                        mov dword ptr [edi + 0x58], eax
-                        mov eax, offset L_44d9f0
-                        mov dword ptr [edi + 0x5c], eax
-                        mov eax, offset L_44da41
-                        mov dword ptr [edi + 0x60], eax
-                        mov eax, offset L_44da9a
-                        mov dword ptr [edi + 0x64], eax
-                        mov eax, offset L_44daf1
-                        mov dword ptr [edi + 0x68], eax
-                        mov eax, offset L_44db50
-                        mov dword ptr [edi + 0x6c], eax
-                        mov eax, offset L_44dbad
-                        mov dword ptr [edi + 0x70], eax
-                        mov eax, offset L_44dc12
-                        mov dword ptr [edi + 0x74], eax
-                        mov eax, offset L_44dc75
-                        mov dword ptr [edi + 0x78], eax
-                        mov eax, offset L_44dce0
-                        mov dword ptr [edi + 0x7c], eax
+                        mov eax, offset stream_run_4
+                        mov dword ptr [edi + 12], eax
+                        mov eax, offset stream_run_5
+                        mov dword ptr [edi + 16], eax
+                        mov eax, offset stream_run_6
+                        mov dword ptr [edi + 20], eax
+                        mov eax, offset stream_run_7
+                        mov dword ptr [edi + 24], eax
+                        mov eax, offset stream_run_8
+                        mov dword ptr [edi + 28], eax
+                        mov eax, offset stream_run_9
+                        mov dword ptr [edi + 32], eax
+                        mov eax, offset stream_run_10
+                        mov dword ptr [edi + 36], eax
+                        mov eax, offset stream_run_11
+                        mov dword ptr [edi + 40], eax
+                        mov eax, offset stream_run_12
+                        mov dword ptr [edi + 44], eax
+                        mov eax, offset stream_run_13
+                        mov dword ptr [edi + 48], eax
+                        mov eax, offset stream_run_14
+                        mov dword ptr [edi + 52], eax
+                        mov eax, offset stream_run_15
+                        mov dword ptr [edi + 56], eax
+                        mov eax, offset stream_run_16
+                        mov dword ptr [edi + 60], eax
+                        mov eax, offset stream_run_17
+                        mov dword ptr [edi + 64], eax
+                        mov eax, offset stream_run_18
+                        mov dword ptr [edi + 68], eax
+                        mov eax, offset stream_run_19
+                        mov dword ptr [edi + 72], eax
+                        mov eax, offset stream_run_20
+                        mov dword ptr [edi + 76], eax
+                        mov eax, offset stream_run_21
+                        mov dword ptr [edi + 80], eax
+                        mov eax, offset stream_run_22
+                        mov dword ptr [edi + 84], eax
+                        mov eax, offset stream_run_23
+                        mov dword ptr [edi + 88], eax
+                        mov eax, offset stream_run_24
+                        mov dword ptr [edi + 92], eax
+                        mov eax, offset stream_run_25
+                        mov dword ptr [edi + 96], eax
+                        mov eax, offset stream_run_26
+                        mov dword ptr [edi + 100], eax
+                        mov eax, offset stream_run_27
+                        mov dword ptr [edi + 104], eax
+                        mov eax, offset stream_run_28
+                        mov dword ptr [edi + 108], eax
+                        mov eax, offset stream_run_29
+                        mov dword ptr [edi + 112], eax
+                        mov eax, offset stream_run_30
+                        mov dword ptr [edi + 116], eax
+                        mov eax, offset stream_run_31
+                        mov dword ptr [edi + 120], eax
+                        mov eax, offset stream_run_32
+                        mov dword ptr [edi + 124], eax
                         jmp draw_start
                 done:
                 }
@@ -1363,25 +1366,25 @@ namespace UI {
                 zoom_skip_rows_above_top:
                         mov bl, byte ptr [esi]
                         movzx ecx, bl
-                        and bl, 0xe0
-                        and cl, 0x1f
+                        and bl, TGX_TYPE_MASK
+                        and cl, TGX_LENGTH_MASK
                         add esi, 1
-                        cmp bl, 0x20
+                        cmp bl, TGX_SKIP
                         je zoom_skip_rows_above_top
-                        cmp bl, 0
-                        je L_44e41a
-                        cmp bl, 0x40
-                        je L_44e423
-                        jmp L_44e428
-                L_44e41a:
+                        cmp bl, TGX_STREAM
+                        je zoom_skip_rows_stream
+                        cmp bl, TGX_REPEAT
+                        je zoom_skip_rows_repeat
+                        jmp zoom_skip_rows_new_line
+                zoom_skip_rows_stream:
                         add ecx, 1
                         add ecx, ecx
                         add esi, ecx
                         jmp zoom_skip_rows_above_top
-                L_44e423:
+                zoom_skip_rows_repeat:
                         add esi, 2
                         jmp zoom_skip_rows_above_top
-                L_44e428:
+                zoom_skip_rows_new_line:
                         sub eax, 1
                         jg zoom_skip_rows_above_top
                         mov eax, heightStart
@@ -1398,79 +1401,79 @@ namespace UI {
                 zoom_token_loop:
                         mov al, byte ptr [esi]
                         movzx ecx, al
-                        and al, 0xe0
-                        and cl, 0x1f
+                        and al, TGX_TYPE_MASK
+                        and cl, TGX_LENGTH_MASK
                         add esi, 1
-                        cmp al, 0x20
-                        je L_44e4a5
-                        cmp al, 0
-                        je L_44e4d5
-                        cmp al, 0x40
-                        je L_44e4ad
+                        cmp al, TGX_SKIP
+                        je zoom_token_skip
+                        cmp al, TGX_STREAM
+                        je zoom_token_stream
+                        cmp al, TGX_REPEAT
+                        je zoom_token_repeat
                         add edi, lineTail
                         sub edx, 1
                         jle zoom_done
                 zoom_skip_odd_row:
                         mov bl, byte ptr [esi]
                         movzx ecx, bl
-                        and bl, 0xe0
-                        and cl, 0x1f
+                        and bl, TGX_TYPE_MASK
+                        and cl, TGX_LENGTH_MASK
                         add esi, 1
-                        cmp bl, 0x20
+                        cmp bl, TGX_SKIP
                         je zoom_skip_odd_row
-                        cmp bl, 0
-                        je L_44e489
-                        cmp bl, 0x40
-                        je L_44e492
-                        jmp L_44e497
-                L_44e489:
+                        cmp bl, TGX_STREAM
+                        je zoom_odd_row_stream
+                        cmp bl, TGX_REPEAT
+                        je zoom_odd_row_repeat
+                        jmp zoom_odd_row_new_line
+                zoom_odd_row_stream:
                         add ecx, 1
                         add ecx, ecx
                         add esi, ecx
                         jmp zoom_skip_odd_row
-                L_44e492:
+                zoom_odd_row_repeat:
                         add esi, 2
                         jmp zoom_skip_odd_row
-                L_44e497:
+                zoom_odd_row_new_line:
                         xor eax, eax
                         xor ebx, ebx
                         mov oddColumn, ebx
                         sub edx, 1
                         jg zoom_token_loop
                         jmp zoom_done
-                L_44e4a5:
+                zoom_token_skip:
                         add ecx, 1
                         add oddColumn, ecx
                         jmp zoom_token_loop
-                L_44e4ad:
+                zoom_token_repeat:
                         movzx eax, word ptr [esi]
                         add esi, 2
                         add ecx, 1
                         mov ebx, oddColumn
                         add oddColumn, ecx
-                L_44e4bc:
+                zoom_repeat_pixel:
                         test ebx, 1
-                        jne L_44e4c8
+                        jne zoom_repeat_next
                         mov word ptr [edi + ebx], ax
-                L_44e4c8:
+                zoom_repeat_next:
                         add ebx, 1
                         sub ecx, 1
-                        jne L_44e4bc
+                        jne zoom_repeat_pixel
                         jmp zoom_token_loop
-                L_44e4d5:
+                zoom_token_stream:
                         add ecx, 1
                         mov ebx, oddColumn
                         add oddColumn, ecx
-                L_44e4de:
+                zoom_stream_pixel:
                         test ebx, 1
-                        jne L_44e4ed
+                        jne zoom_stream_next
                         mov ax, word ptr [esi]
                         mov word ptr [edi + ebx], ax
-                L_44e4ed:
+                zoom_stream_next:
                         add ebx, 1
                         add esi, 2
                         sub ecx, 1
-                        jne L_44e4de
+                        jne zoom_stream_pixel
                         jmp zoom_token_loop
                 zoom_done:
                 }

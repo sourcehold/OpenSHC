@@ -21,6 +21,12 @@ namespace OpenSHC {
 // 3 only the middle column). Zoomed out, every other row and pixel is used.
 // The copy loops are handwritten assembly in the original, transcribed here from the binary.
 
+// One row of the 4056-pixel map surface, in bytes.
+enum { MAP_ROW = 4056 * 2 };
+
+// One row of a map image: 15 dwords.
+enum { IMAGE_ROW = 60 };
+
 // FUNCTION: STRONGHOLDCRUSADER 0x00453B00
 void Rendering::BlitMapImageWithVerticalClip()
 {
@@ -44,8 +50,7 @@ void Rendering::BlitMapImageWithVerticalClip()
         drawY = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start;
         DAT_00ed3170::instance -= clippedRows;
         height -= clippedRows;
-        // An image row is 60 bytes (15 dwords).
-        skip = clippedRows * 60;
+        skip = clippedRows * IMAGE_ROW;
     }
     if (DAT_00ed3170::instance + drawY >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
         DAT_00ed3170::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
@@ -55,7 +60,7 @@ void Rendering::BlitMapImageWithVerticalClip()
     int firstRows;
     if (height <= 0) {
         firstRows = 0;
-        nextSkip *= 60;
+        nextSkip *= IMAGE_ROW;
     } else if (height < DAT_00ed3170::instance) {
         firstRows = height;
         DAT_00ed3170::instance -= height;
@@ -77,7 +82,7 @@ void Rendering::BlitMapImageWithVerticalClip()
             add eax, eax
             add edi, eax
             mov eax, drawY
-            mov edx, 0x1fb0
+            mov edx, MAP_ROW
             mul edx
             add edi, eax
             mov edx, firstRows
@@ -96,57 +101,57 @@ void Rendering::BlitMapImageWithVerticalClip()
             mov ebx, dword ptr [esi + 4]
             mov ecx, dword ptr [esi + 8]
             mov dword ptr [edi], eax
-            mov dword ptr [edi + 0x1fb4], ebx
-            mov dword ptr [edi + 0x3f68], ecx
-            mov eax, dword ptr [esi + 0xc]
-            mov ebx, dword ptr [esi + 0x10]
-            mov ecx, dword ptr [esi + 0x14]
-            mov dword ptr [edi + 0x5f1c], eax
-            mov dword ptr [edi + 0x7ed0], ebx
-            mov dword ptr [edi + 0x9e84], ecx
-            mov eax, dword ptr [esi + 0x18]
-            mov ebx, dword ptr [esi + 0x1c]
-            mov ecx, dword ptr [esi + 0x20]
-            mov dword ptr [edi + 0xbe38], eax
-            mov dword ptr [edi + 0xddec], ebx
-            mov dword ptr [edi + 0xbe40], ecx
-            mov eax, dword ptr [esi + 0x24]
-            mov ebx, dword ptr [esi + 0x28]
-            mov ecx, dword ptr [esi + 0x2c]
-            mov dword ptr [edi + 0x9e94], eax
-            mov dword ptr [edi + 0x7ee8], ebx
-            mov dword ptr [edi + 0x5f3c], ecx
-            mov eax, dword ptr [esi + 0x30]
-            mov ebx, dword ptr [esi + 0x34]
-            mov ecx, dword ptr [esi + 0x38]
-            mov dword ptr [edi + 0x3f90], eax
-            mov dword ptr [edi + 0x1fe4], ebx
-            mov dword ptr [edi + 0x38], ecx
-            add esi, 0x3c
-            add edi, 0x1fb0
+            mov dword ptr [edi + MAP_ROW + 4], ebx
+            mov dword ptr [edi + 2 * MAP_ROW + 8], ecx
+            mov eax, dword ptr [esi + 12]
+            mov ebx, dword ptr [esi + 16]
+            mov ecx, dword ptr [esi + 20]
+            mov dword ptr [edi + 3 * MAP_ROW + 12], eax
+            mov dword ptr [edi + 4 * MAP_ROW + 16], ebx
+            mov dword ptr [edi + 5 * MAP_ROW + 20], ecx
+            mov eax, dword ptr [esi + 24]
+            mov ebx, dword ptr [esi + 28]
+            mov ecx, dword ptr [esi + 32]
+            mov dword ptr [edi + 6 * MAP_ROW + 24], eax
+            mov dword ptr [edi + 7 * MAP_ROW + 28], ebx
+            mov dword ptr [edi + 6 * MAP_ROW + 32], ecx
+            mov eax, dword ptr [esi + 36]
+            mov ebx, dword ptr [esi + 40]
+            mov ecx, dword ptr [esi + 44]
+            mov dword ptr [edi + 5 * MAP_ROW + 36], eax
+            mov dword ptr [edi + 4 * MAP_ROW + 40], ebx
+            mov dword ptr [edi + 3 * MAP_ROW + 44], ecx
+            mov eax, dword ptr [esi + 48]
+            mov ebx, dword ptr [esi + 52]
+            mov ecx, dword ptr [esi + 56]
+            mov dword ptr [edi + 2 * MAP_ROW + 48], eax
+            mov dword ptr [edi + MAP_ROW + 52], ebx
+            mov dword ptr [edi + 56], ecx
+            add esi, IMAGE_ROW
+            add edi, MAP_ROW
             sub edx, 1
             cmp edx, 0
             jle next_image
             jmp copy_whole_row
         copy_right_half:
-            mov ebx, dword ptr [esi + 0x1c]
-            mov ecx, dword ptr [esi + 0x20]
-            mov dword ptr [edi + 0xddec], ebx
-            mov dword ptr [edi + 0xbe40], ecx
-            mov eax, dword ptr [esi + 0x24]
-            mov ebx, dword ptr [esi + 0x28]
-            mov ecx, dword ptr [esi + 0x2c]
-            mov dword ptr [edi + 0x9e94], eax
-            mov dword ptr [edi + 0x7ee8], ebx
-            mov dword ptr [edi + 0x5f3c], ecx
-            mov eax, dword ptr [esi + 0x30]
-            mov ebx, dword ptr [esi + 0x34]
-            mov ecx, dword ptr [esi + 0x38]
-            mov dword ptr [edi + 0x3f90], eax
-            mov dword ptr [edi + 0x1fe4], ebx
-            mov dword ptr [edi + 0x38], ecx
-            add esi, 0x3c
-            add edi, 0x1fb0
+            mov ebx, dword ptr [esi + 28]
+            mov ecx, dword ptr [esi + 32]
+            mov dword ptr [edi + 7 * MAP_ROW + 28], ebx
+            mov dword ptr [edi + 6 * MAP_ROW + 32], ecx
+            mov eax, dword ptr [esi + 36]
+            mov ebx, dword ptr [esi + 40]
+            mov ecx, dword ptr [esi + 44]
+            mov dword ptr [edi + 5 * MAP_ROW + 36], eax
+            mov dword ptr [edi + 4 * MAP_ROW + 40], ebx
+            mov dword ptr [edi + 3 * MAP_ROW + 44], ecx
+            mov eax, dword ptr [esi + 48]
+            mov ebx, dword ptr [esi + 52]
+            mov ecx, dword ptr [esi + 56]
+            mov dword ptr [edi + 2 * MAP_ROW + 48], eax
+            mov dword ptr [edi + MAP_ROW + 52], ebx
+            mov dword ptr [edi + 56], ecx
+            add esi, IMAGE_ROW
+            add edi, MAP_ROW
             sub edx, 1
             cmp edx, 0
             jle next_image
@@ -156,29 +161,29 @@ void Rendering::BlitMapImageWithVerticalClip()
             mov ebx, dword ptr [esi + 4]
             mov ecx, dword ptr [esi + 8]
             mov dword ptr [edi], eax
-            mov dword ptr [edi + 0x1fb4], ebx
-            mov dword ptr [edi + 0x3f68], ecx
-            mov eax, dword ptr [esi + 0xc]
-            mov ebx, dword ptr [esi + 0x10]
-            mov ecx, dword ptr [esi + 0x14]
-            mov dword ptr [edi + 0x5f1c], eax
-            mov dword ptr [edi + 0x7ed0], ebx
-            mov dword ptr [edi + 0x9e84], ecx
-            mov eax, dword ptr [esi + 0x18]
-            mov ebx, dword ptr [esi + 0x1c]
-            mov dword ptr [edi + 0xbe38], eax
-            mov dword ptr [edi + 0xddec], ebx
-            add esi, 0x3c
-            add edi, 0x1fb0
+            mov dword ptr [edi + MAP_ROW + 4], ebx
+            mov dword ptr [edi + 2 * MAP_ROW + 8], ecx
+            mov eax, dword ptr [esi + 12]
+            mov ebx, dword ptr [esi + 16]
+            mov ecx, dword ptr [esi + 20]
+            mov dword ptr [edi + 3 * MAP_ROW + 12], eax
+            mov dword ptr [edi + 4 * MAP_ROW + 16], ebx
+            mov dword ptr [edi + 5 * MAP_ROW + 20], ecx
+            mov eax, dword ptr [esi + 24]
+            mov ebx, dword ptr [esi + 28]
+            mov dword ptr [edi + 6 * MAP_ROW + 24], eax
+            mov dword ptr [edi + 7 * MAP_ROW + 28], ebx
+            add esi, IMAGE_ROW
+            add edi, MAP_ROW
             sub edx, 1
             cmp edx, 0
             jle next_image
             jmp copy_left_half
         copy_middle:
-            mov ebx, dword ptr [esi + 0x1c]
-            mov dword ptr [edi + 0xddec], ebx
-            add esi, 0x3c
-            add edi, 0x1fb0
+            mov ebx, dword ptr [esi + 28]
+            mov dword ptr [edi + 7 * MAP_ROW + 28], ebx
+            add esi, IMAGE_ROW
+            add edi, MAP_ROW
             sub edx, 1
             cmp edx, 0
             jle next_image
@@ -209,7 +214,7 @@ void Rendering::BlitMapImageWithVerticalClip()
         mov eax, drawY
         mov ecx, eax
         shr eax, 1
-        mov edx, 0x1fb0
+        mov edx, MAP_ROW
         mul edx
         add edi, eax
         mov edx, firstRows
@@ -231,42 +236,42 @@ void Rendering::BlitMapImageWithVerticalClip()
         mov ax, word ptr [esi]
         mov bx, word ptr [esi + 8]
         mov word ptr [edi], ax
-        mov word ptr [edi + 0x1fb4], bx
-        mov ax, word ptr [esi + 0x10]
-        mov bx, word ptr [esi + 0x18]
-        mov word ptr [edi + 0x3f68], ax
-        mov word ptr [edi + 0x5f1c], bx
-        mov ax, word ptr [esi + 0x20]
-        mov bx, word ptr [esi + 0x28]
-        mov word ptr [edi + 0x5f20], ax
-        mov word ptr [edi + 0x3f74], bx
-        mov ax, word ptr [esi + 0x30]
-        mov bx, word ptr [esi + 0x38]
-        mov word ptr [edi + 0x1fc8], ax
-        mov word ptr [edi + 0x1c], bx
-        add esi, 0x3c
+        mov word ptr [edi + MAP_ROW + 4], bx
+        mov ax, word ptr [esi + 16]
+        mov bx, word ptr [esi + 24]
+        mov word ptr [edi + 2 * MAP_ROW + 8], ax
+        mov word ptr [edi + 3 * MAP_ROW + 12], bx
+        mov ax, word ptr [esi + 32]
+        mov bx, word ptr [esi + 40]
+        mov word ptr [edi + 3 * MAP_ROW + 16], ax
+        mov word ptr [edi + 2 * MAP_ROW + 20], bx
+        mov ax, word ptr [esi + 48]
+        mov bx, word ptr [esi + 56]
+        mov word ptr [edi + MAP_ROW + 24], ax
+        mov word ptr [edi + 28], bx
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
         jle zoom_next_image
         jmp zoom_whole_row
     zoom_whole_row_odd:
-        add edi, 0x1fb0
+        add edi, MAP_ROW
         mov ax, word ptr [esi + 4]
-        mov bx, word ptr [esi + 0xc]
+        mov bx, word ptr [esi + 12]
         mov word ptr [edi + 2], ax
-        mov word ptr [edi + 0x1fb6], bx
-        mov ax, word ptr [esi + 0x14]
-        mov bx, word ptr [esi + 0x1c]
-        mov word ptr [edi + 0x3f6a], ax
-        mov word ptr [edi + 0x5f1e], bx
-        mov ax, word ptr [esi + 0x24]
-        mov bx, word ptr [esi + 0x2c]
-        mov word ptr [edi + 0x3f72], ax
-        mov word ptr [edi + 0x1fc6], bx
-        mov ax, word ptr [esi + 0x34]
-        mov word ptr [edi + 0x1a], ax
-        add esi, 0x3c
+        mov word ptr [edi + MAP_ROW + 6], bx
+        mov ax, word ptr [esi + 20]
+        mov bx, word ptr [esi + 28]
+        mov word ptr [edi + 2 * MAP_ROW + 10], ax
+        mov word ptr [edi + 3 * MAP_ROW + 14], bx
+        mov ax, word ptr [esi + 36]
+        mov bx, word ptr [esi + 44]
+        mov word ptr [edi + 2 * MAP_ROW + 18], ax
+        mov word ptr [edi + MAP_ROW + 22], bx
+        mov ax, word ptr [esi + 52]
+        mov word ptr [edi + 26], ax
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
@@ -276,31 +281,31 @@ void Rendering::BlitMapImageWithVerticalClip()
         mov eax, ecx
         and eax, 1
         jne zoom_right_half_odd
-        mov ax, word ptr [esi + 0x20]
-        mov bx, word ptr [esi + 0x28]
-        mov word ptr [edi + 0x5f20], ax
-        mov word ptr [edi + 0x3f74], bx
-        mov ax, word ptr [esi + 0x30]
-        mov bx, word ptr [esi + 0x38]
-        mov word ptr [edi + 0x1fc8], ax
-        mov word ptr [edi + 0x1c], bx
-        add esi, 0x3c
+        mov ax, word ptr [esi + 32]
+        mov bx, word ptr [esi + 40]
+        mov word ptr [edi + 3 * MAP_ROW + 16], ax
+        mov word ptr [edi + 2 * MAP_ROW + 20], bx
+        mov ax, word ptr [esi + 48]
+        mov bx, word ptr [esi + 56]
+        mov word ptr [edi + MAP_ROW + 24], ax
+        mov word ptr [edi + 28], bx
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
         jle zoom_next_image
         jmp zoom_right_half
     zoom_right_half_odd:
-        add edi, 0x1fb0
-        mov ax, word ptr [esi + 0x1c]
-        mov bx, word ptr [esi + 0x24]
-        mov word ptr [edi + 0x5f1e], ax
-        mov word ptr [edi + 0x3f72], bx
-        mov ax, word ptr [esi + 0x2c]
-        mov bx, word ptr [esi + 0x34]
-        mov word ptr [edi + 0x1fc6], ax
-        mov word ptr [edi + 0x1a], bx
-        add esi, 0x3c
+        add edi, MAP_ROW
+        mov ax, word ptr [esi + 28]
+        mov bx, word ptr [esi + 36]
+        mov word ptr [edi + 3 * MAP_ROW + 14], ax
+        mov word ptr [edi + 2 * MAP_ROW + 18], bx
+        mov ax, word ptr [esi + 44]
+        mov bx, word ptr [esi + 52]
+        mov word ptr [edi + MAP_ROW + 22], ax
+        mov word ptr [edi + 26], bx
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
@@ -313,28 +318,28 @@ void Rendering::BlitMapImageWithVerticalClip()
         mov ax, word ptr [esi]
         mov bx, word ptr [esi + 8]
         mov word ptr [edi], ax
-        mov word ptr [edi + 0x1fb4], bx
-        mov ax, word ptr [esi + 0x10]
-        mov bx, word ptr [esi + 0x18]
-        mov word ptr [edi + 0x3f68], ax
-        mov word ptr [edi + 0x5f1c], bx
-        add esi, 0x3c
+        mov word ptr [edi + MAP_ROW + 4], bx
+        mov ax, word ptr [esi + 16]
+        mov bx, word ptr [esi + 24]
+        mov word ptr [edi + 2 * MAP_ROW + 8], ax
+        mov word ptr [edi + 3 * MAP_ROW + 12], bx
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
         jle zoom_next_image
         jmp zoom_left_half
     zoom_left_half_odd:
-        add edi, 0x1fb0
+        add edi, MAP_ROW
         mov ax, word ptr [esi + 4]
-        mov bx, word ptr [esi + 0xc]
+        mov bx, word ptr [esi + 12]
         mov word ptr [edi + 2], ax
-        mov word ptr [edi + 0x1fb6], bx
-        mov ax, word ptr [esi + 0x14]
-        mov bx, word ptr [esi + 0x1c]
-        mov word ptr [edi + 0x3f6a], ax
-        mov word ptr [edi + 0x5f1e], bx
-        add esi, 0x3c
+        mov word ptr [edi + MAP_ROW + 6], bx
+        mov ax, word ptr [esi + 20]
+        mov bx, word ptr [esi + 28]
+        mov word ptr [edi + 2 * MAP_ROW + 10], ax
+        mov word ptr [edi + 3 * MAP_ROW + 14], bx
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
@@ -344,17 +349,17 @@ void Rendering::BlitMapImageWithVerticalClip()
         mov eax, ecx
         and eax, 1
         jne zoom_middle_odd
-        add esi, 0x3c
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0
         jle zoom_next_image
         jmp zoom_middle
     zoom_middle_odd:
-        add edi, 0x1fb0
-        mov ax, word ptr [esi + 0x1c]
-        mov word ptr [edi + 0x5f1e], ax
-        add esi, 0x3c
+        add edi, MAP_ROW
+        mov ax, word ptr [esi + 28]
+        mov word ptr [edi + 3 * MAP_ROW + 14], ax
+        add esi, IMAGE_ROW
         add ecx, 1
         sub edx, 1
         cmp edx, 0

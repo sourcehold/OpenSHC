@@ -22,6 +22,9 @@ namespace OpenSHC {
 // 4056-pixel-wide map surface; zoomed out, every other row and column is used.
 // The pixel loops are handwritten assembly in the original, transcribed here from the binary.
 
+// One row of the 4056-pixel map surface, in bytes.
+enum { MAP_ROW = 4056 * 2 };
+
 // FUNCTION: STRONGHOLDCRUSADER 0x00453600
 void Rendering::ApplyBlending(int blendLevel)
 {
@@ -57,11 +60,11 @@ void Rendering::ApplyBlending(int blendLevel)
                 add eax, eax
                 add edi, eax
                 mov eax, drawY
-                mov edx, 0x1fb0
+                mov edx, MAP_ROW
                 mul edx
                 add edi, eax
                 mov DAT_WindowAndDirectDraw::instance.unknownSpecificPointer, edi
-                mov ecx, 0x100
+                mov ecx, 256
             pixel_555:
                 mov ax, word ptr [esi]
                 mov edx, dword ptr sourceTable
@@ -78,7 +81,7 @@ void Rendering::ApplyBlending(int blendLevel)
                 and ax, 0xfc1f
                 or ax, bx
                 mov bx, ax
-                shr bx, 0xa
+                shr bx, 10
                 and bx, 0x1f
                 mov bx, word ptr [edx + ebx*8 + 4]
                 and ax, 0x3ff
@@ -101,7 +104,7 @@ void Rendering::ApplyBlending(int blendLevel)
                 and ax, 0xfc1f
                 or ax, bx
                 mov bx, ax
-                shr bx, 0xa
+                shr bx, 10
                 and bx, 0x1f
                 mov bx, word ptr [edx + ebx*8 + 4]
                 and ax, 0x83ff
@@ -127,11 +130,11 @@ void Rendering::ApplyBlending(int blendLevel)
             add eax, eax
             add edi, eax
             mov eax, drawY
-            mov edx, 0x1fb0
+            mov edx, MAP_ROW
             mul edx
             add edi, eax
             mov DAT_WindowAndDirectDraw::instance.unknownSpecificPointer, edi
-            mov ecx, 0x100
+            mov ecx, 256
         pixel_565:
             mov ax, word ptr [esi]
             mov edx, dword ptr sourceTable
@@ -148,7 +151,7 @@ void Rendering::ApplyBlending(int blendLevel)
             and ax, 0xf81f
             or ax, bx
             mov bx, ax
-            shr bx, 0xb
+            shr bx, 11
             and bx, 0x1f
             mov bx, word ptr [edx + ebx*8 + 4]
             and ax, 0x7ff
@@ -171,7 +174,7 @@ void Rendering::ApplyBlending(int blendLevel)
             and ax, 0xf81f
             or ax, bx
             mov bx, ax
-            shr bx, 0xb
+            shr bx, 11
             and bx, 0x1f
             mov bx, word ptr [edx + ebx*8 + 4]
             and ax, 0x7ff
@@ -215,7 +218,7 @@ void Rendering::ApplyBlending(int blendLevel)
             mov eax, drawY
             mov ebx, eax
             shr eax, 1
-            mov edx, 0x1fb0
+            mov edx, MAP_ROW
             mul edx
             add edi, eax
             mov DAT_WindowAndDirectDraw::instance.unknownSpecificPointer, edi
@@ -225,7 +228,7 @@ void Rendering::ApplyBlending(int blendLevel)
             mov eax, dword ptr evenRowOffsets
             mov dword ptr offsets, eax
         zoom_rows_chosen_555:
-            mov ecx, 0x40
+            mov ecx, 64
         zoom_pixel_555:
             mov edx, dword ptr offsets
             add dword ptr offsets, 4
@@ -245,7 +248,7 @@ void Rendering::ApplyBlending(int blendLevel)
             and ax, 0xfc1f
             or ax, bx
             mov bx, ax
-            shr bx, 0xa
+            shr bx, 10
             and bx, 0x1f
             mov bx, word ptr [edx + ebx*8 + 4]
             and ax, 0x3ff
@@ -268,7 +271,7 @@ void Rendering::ApplyBlending(int blendLevel)
             and ax, 0xfc1f
             or ax, bx
             mov bx, ax
-            shr bx, 0xa
+            shr bx, 10
             and bx, 0x1f
             mov bx, word ptr [edx + ebx*8 + 4]
             and ax, 0x83ff
@@ -295,7 +298,7 @@ void Rendering::ApplyBlending(int blendLevel)
         mov eax, drawY
         mov ebx, eax
         shr eax, 1
-        mov edx, 0x1fb0
+        mov edx, MAP_ROW
         mul edx
         add edi, eax
         mov DAT_WindowAndDirectDraw::instance.unknownSpecificPointer, edi
@@ -305,7 +308,7 @@ void Rendering::ApplyBlending(int blendLevel)
         mov eax, dword ptr evenRowOffsets
         mov dword ptr offsets, eax
     zoom_rows_chosen_565:
-        mov ecx, 0x40
+        mov ecx, 64
     zoom_pixel_565:
         mov edx, dword ptr offsets
         add dword ptr offsets, 4
@@ -325,7 +328,7 @@ void Rendering::ApplyBlending(int blendLevel)
         and ax, 0xf81f
         or ax, bx
         mov bx, ax
-        shr bx, 0xb
+        shr bx, 11
         and bx, 0x1f
         mov bx, word ptr [edx + ebx*8 + 4]
         and ax, 0x7ff
@@ -348,7 +351,7 @@ void Rendering::ApplyBlending(int blendLevel)
         and ax, 0xf81f
         or ax, bx
         mov bx, ax
-        shr bx, 0xb
+        shr bx, 11
         and bx, 0x1f
         mov bx, word ptr [edx + ebx*8 + 4]
         and ax, 0x7ff

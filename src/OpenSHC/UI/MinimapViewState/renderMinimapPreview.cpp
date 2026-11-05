@@ -7,6 +7,9 @@
 namespace OpenSHC {
 namespace UI {
 
+    // The minimap is 200 by 200 pixels.
+    enum { MINIMAP_SIZE = 200 };
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5280
     void MinimapViewState::renderMinimapPreview(int screenX, int screenY)
     {
@@ -25,11 +28,11 @@ namespace UI {
             mul edx
             add edi, eax
             mov esi, source
-            mov edx, 200
-        nextRow:
-            mov ecx, 200
+            mov edx, MINIMAP_SIZE
+        next_row:
+            mov ecx, MINIMAP_SIZE
             mov ebx, 0
-        nextPixel:
+        next_pixel:
             mov ax, word ptr [esi + ebx]
             cmp ax, 0
             je transparent
@@ -37,11 +40,11 @@ namespace UI {
         transparent:
             add ebx, 2
             dec ecx
-            jne nextPixel
-            add esi, 400
+            jne next_pixel
+            add esi, MINIMAP_SIZE * 2
             add edi, DAT_PencilRenderCore::instance.horizontalByteSize
             dec edx
-            jne nextRow
+            jne next_row
         }
     }
 
