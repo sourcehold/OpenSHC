@@ -96,6 +96,7 @@ namespace Audio {
             SEID_UNIT_KILLED_BY_ARROW = 117, // 0x00000075
             SEID_UNIT_KILLED_BY_ARROW2 = 118, // 0x00000076
             SEID_New_Name = 119, // 0x00000077
+            SEID_UNKNOWN_0x79 = 121, // 0x00000079
             SEID_FIRE_IGNITE = 122, // 0x0000007A
             SEID_UNKNOWN_0x87 = 135, // 0x00000087
             SEID_CHICKEN1 = 137, // 0x00000089
