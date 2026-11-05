@@ -7,7 +7,6 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95b74.hpp"
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -19,6 +18,7 @@
 #include "OpenSHC/Globals/DAT_SH1_SiegeAdvancedMode.hpp"
 #include "OpenSHC/Globals/DAT_StopHandlingMenuItems.hpp"
 #include "OpenSHC/Globals/DWORD_00b95b1c.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -33,7 +33,7 @@ namespace UI {
             DAT_StopHandlingMenuItems::instance = 0;
             if (param_1 < -100) {
                 if (param_1 == -101) {
-                    int iVar1 = DAT_00b95b74::instance - 204;
+                    int iVar1 = INT_00b95b74::instance - 204;
                     if ((int)DAT_00b960f4::instance >= iVar1) {
                         DAT_StopHandlingMenuItems::instance = 0;
                     }

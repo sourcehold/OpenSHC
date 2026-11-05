@@ -107,7 +107,7 @@ namespace UI {
                         uVar3 != 0
                             && (0 < DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                    .counter))) {
+                                    .availableCows))) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                     BVar1 = FALSE;
@@ -118,7 +118,7 @@ namespace UI {
                     uVar3 = 16777215;
                     iVar2
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .counter;
+                              .availableCows;
                 LAB_00438e95:
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber, DAT_TextManagerObject::ptr)(
                         iVar2, xPosition, yPosition, uVar3, color2, fontSize, BVar1);
@@ -199,7 +199,7 @@ namespace UI {
             case 370:
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
@@ -216,7 +216,7 @@ namespace UI {
             case 371:
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
@@ -233,7 +233,7 @@ namespace UI {
             case 372:
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
@@ -259,7 +259,7 @@ namespace UI {
                 }
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
@@ -295,7 +295,7 @@ namespace UI {
                 }
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == OpenSHC::Map::Units::UT_NONE) {
+                if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }

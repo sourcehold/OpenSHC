@@ -21,7 +21,6 @@
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95b74.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -39,6 +38,7 @@
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 #include "OpenSHC/Globals/FilePackagerObj.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
 #include "OpenSHC/Globals/INT_00b95f68.hpp"
 #include "OpenSHC/Globals/INT_00b960e4.hpp"
 
@@ -63,8 +63,8 @@ namespace UI {
                 switch (param_1) {
                 case 2:
                     DAT_MenuTextInputState::instance.field_0x9c = 1;
-                    MACRO_CALL_MEMBER(
-                        UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(9);
+                    MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateLoadOrSaveMapUI,
+                        DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_LOAD_MAP);
                     return;
                 case 3:
                     if ((!DAT_GameCore::instance.U2_mapType_singleOrMulti)
@@ -73,8 +73,8 @@ namespace UI {
                             DAT_MapPropertiesState::ptr)();
                         DAT_MenuTextInputState::instance.field_0x9c = 1;
                         DAT_MenuTextInputState::instance.field_0xa4 = 0;
-                        MACRO_CALL_MEMBER(
-                            UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(10);
+                        MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateLoadOrSaveMapUI,
+                            DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_SAVE_MAP);
                         INT_00b960e4::instance = 1;
                         return;
                     }
@@ -358,7 +358,7 @@ namespace UI {
                     DAT_GameCore::instance.mapU4Int3_balanced = 0;
                     return;
                 case -2:
-                    iVar6 = DAT_00b95b74::instance - 231;
+                    iVar6 = INT_00b95b74::instance - 231;
                     if ((DAT_00b960f4::instance < iVar6)
                         && (DAT_00b960f4::instance = DAT_00b960f4::instance + 14, iVar6 < DAT_00b960f4::instance)) {
                         DAT_00b960f4::instance = iVar6;

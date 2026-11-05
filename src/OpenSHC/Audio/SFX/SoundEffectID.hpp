@@ -96,13 +96,21 @@ namespace Audio {
             SEID_UNIT_KILLED_BY_ARROW = 117, // 0x00000075
             SEID_UNIT_KILLED_BY_ARROW2 = 118, // 0x00000076
             SEID_New_Name = 119, // 0x00000077
+            SEID_UNKNOWN_0x79 = 121, // 0x00000079
             SEID_FIRE_IGNITE = 122, // 0x0000007A
+            SEID_UNKNOWN_0x7B = 123, // 0x0000007B
+            SEID_UNKNOWN_0x7c = 124, // 0x0000007C
+            SEID_UNKNOWN_0x7d = 125, // 0x0000007D
+            SEID_UNKNOWN_0x7e = 126, // 0x0000007E
+            SEID_UNKNOWN_0x7f = 127, // 0x0000007F
+            SEID_UNKNOWN_0x80 = 128, // 0x00000080
             SEID_UNKNOWN_0x87 = 135, // 0x00000087
             SEID_CHICKEN1 = 137, // 0x00000089
             SEID_GATEHOUSE_CLOSE = 141, // 0x0000008D
             SEID_GATEHOUSE_OPEN = 143, // 0x0000008F
             SEID_CHILDREN_PLAY_MAYPOLE = 144, // 0x00000090
             SEID_SWORDSMAN_SWORD_SWING = 145, // 0x00000091
+            SEID_UNKNOWN_0x92 = 146, // 0x00000092
             SEID_GATEHOUSE_CLOSED = 147, // 0x00000093
             SEID_UNIT_MACE_KILL2 = 151, // 0x00000097
             SEID_UNIT_PENETRATION_DAMAGE = 153, // 0x00000099
@@ -196,7 +204,9 @@ namespace Audio {
             SEID_UNIT_DAMAGE2 = 247, // 0x000000F7
             SEID_UNIT_DAMAGE3 = 248, // 0x000000F8
             SEID_UNIT_DAMAGE4 = 249, // 0x000000F9
-            SEID_UNKNOWN_0xFD = 253 // 0x000000FD
+            SEID_UNKNOWN_0xFB = 251, // 0x000000FB
+            SEID_UNKNOWN_0xFD = 253, // 0x000000FD
+            SEID_UNKNOWN_0x101 = 257 // 0x00000101
 
         } SoundEffectID;
 
