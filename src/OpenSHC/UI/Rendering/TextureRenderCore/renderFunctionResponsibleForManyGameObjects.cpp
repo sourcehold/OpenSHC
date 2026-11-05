@@ -24,7 +24,7 @@ namespace UI {
         // every other row and every other column.
 
         // A TGX token byte's run type (top three bits) and run length minus one (low five bits).
-        enum { TGX_STREAM = 0x00, TGX_SKIP = 0x20, TGX_REPEAT = 0x40, TGX_TYPE_MASK = 0xe0, TGX_LENGTH_MASK = 0x1f };
+        enum { TGX_STREAM = 0, TGX_SKIP = 32, TGX_REPEAT = 64, TGX_TYPE_MASK = 224, TGX_LENGTH_MASK = 31 };
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044D3D0
         void TextureRenderCore::renderFunctionResponsibleForManyGameObjects(
