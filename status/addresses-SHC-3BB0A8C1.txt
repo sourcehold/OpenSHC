@@ -13403,9 +13403,9 @@ SHC_3BB0A8C1_0x0043A8C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043A8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043A8E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043A8E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043A960 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043A960 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043A9F0 | 0.0% | Pending
 
@@ -19933,7 +19933,7 @@ SHC_3BB0A8C1_0x004660B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004660F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00466160 | 0.0% | Pending
+SHC_3BB0A8C1_0x00466160 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00466260 | 0.0% | Pending
 
@@ -19993,7 +19993,7 @@ SHC_3BB0A8C1_0x00466E10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00466E20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00466F60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00466F60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00467040 | 0.0% | Pending
 
@@ -22359,7 +22359,7 @@ SHC_3BB0A8C1_0x0047E160 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047E1A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047E240 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047E240 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047E3A0 | 0.0% | Pending
 
@@ -22395,7 +22395,7 @@ SHC_3BB0A8C1_0x0047EDE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047EEB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047EED0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047EED0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047F6A0 | 100.0% | Reimplemented
 
@@ -29273,7 +29273,7 @@ SHC_3BB0A8C1_0x004BB3D9 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BB3E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BB480 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BB480 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004BB51C | 0.0% | Pending
 
@@ -36193,7 +36193,7 @@ SHC_3BB0A8C1_0x004DB180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DB300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB300 | 100.0% | Reimplemented, only the float constant's address differs (same value)
 
 SHC_3BB0A8C1_0x004DB390 | 0.0% | Pending
 
@@ -36373,7 +36373,7 @@ SHC_3BB0A8C1_0x004E12B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E12C0 | 100.0% | Reimplemented, mismatches in float constants, __ftol2 calls and the array end address
 
-SHC_3BB0A8C1_0x004E1810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E1810 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E1A20 | 100.0% | Reimplemented
 
