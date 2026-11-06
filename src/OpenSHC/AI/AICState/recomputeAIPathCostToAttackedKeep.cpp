@@ -3,6 +3,8 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -21,16 +23,17 @@ namespace AI {
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         int const keepArea
-            = (short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+            = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                    .tileEntry];
 
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {
             borderDistance = 98;
+        } else if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 90) {
+            borderDistance = 70;
         } else {
-            borderDistance
-                = DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 90 ? 70
-                                                                                                                  : 50;
+            borderDistance = 50;
         }
         if (useBorderDistance == 0) {
             borderDistance = 0;
@@ -40,7 +43,7 @@ namespace AI {
             = attackedPlayerID;
 
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\0', DAT_TileMapState::instance.AIZoneLayer);
+            sizeof(DAT_TileMapState::instance.AIZoneLayer), 0, DAT_TileMapState::instance.AIZoneLayer);
 
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
                 playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)

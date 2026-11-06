@@ -45,7 +45,7 @@ namespace UI {
         int buildMenuTransitionStartTime_0x30; // 0x00000030 length: 4
         int buildMenuTransitionDuration_0x34; // 0x00000034 length: 4
         int buildMenuTransitionProgress_0x38; // 0x00000038 length: 4
-        dword field18_0x3c; // 0x0000003C length: 4
+        dword field_0x3c; // 0x0000003C length: 4
 
     private:
         MenuHandlerState(MenuHandlerState const&);

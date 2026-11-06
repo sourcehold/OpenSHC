@@ -70,7 +70,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00497740, &PathFindingState::findLinkageBasedPathOrWalkRadius)
             findLinkageBasedPathOrWalkRadius;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00497B80, &PathFindingState::findSuitableSpawnLocationUnk)
             findSuitableSpawnLocationUnk;
 
@@ -82,7 +82,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00498400, &PathFindingState::pathFindingWithBuildingsIncluded)
             pathFindingWithBuildingsIncluded;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00498A40, &PathFindingState::calculatePathKeepAndWallsGatesNotAllowed)
             calculatePathKeepAndWallsGatesNotAllowed;
 
@@ -158,7 +158,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0049BE60, &PathFindingState::getTileInSquareBrush)
             getTileInSquareBrush;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, uint, uint), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x0049C020, &PathFindingState::setupBabyTreeLocationInfo)
             setupBabyTreeLocationInfo;
 
@@ -194,11 +194,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0049D340, &PathFindingState::findWalkableTileThatDoesNotContainUnit)
             findWalkableTileThatDoesNotContainUnit;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049D640,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049D640,
                 &PathFindingState::someBinaryAlgFunctionPathFinding)
             someBinaryAlgFunctionPathFinding;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int*, int*), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0049D880, &PathFindingState::findClosestFreeTileNearUnitOnBuilding)
             findClosestFreeTileNearUnitOnBuilding;
 
@@ -291,11 +291,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A19B0, &PathFindingState::findOwnedGatehouse)
             findOwnedGatehouse;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, int), false,
                 Address::SHC_3BB0A8C1_0x004A1C40, &PathFindingState::isTileInRangeOfKeepRange)
             isTileInRangeOfKeepRange;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, int), false,
                 Address::SHC_3BB0A8C1_0x004A1D30, &PathFindingState::findSomeSuitableLocationUnk)
             findSomeSuitableLocationUnk;
 
@@ -307,11 +307,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A2650, &PathFindingState::isSignPostWithinDistance)
             isSignPostWithinDistance;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A2A90, &PathFindingState::spreadAlgorithmForFlagsAndBraziersUnk)
             spreadAlgorithmForFlagsAndBraziersUnk;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A2DD0, &PathFindingState::igniteFireAtTilesDistanceAway)
             igniteFireAtTilesDistanceAway;
 
@@ -319,11 +319,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A3220, &PathFindingState::findAccessibleWallAndNearbyFreeTile)
             findAccessibleWallAndNearbyFreeTile;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A36B0, &PathFindingState::healUnitsOfPlayerWithinRadius)
             healUnitsOfPlayerWithinRadius;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int, undefined4), false,
                 Address::SHC_3BB0A8C1_0x004A3B20, &PathFindingState::certainDamageToUnitsUnk)
             certainDamageToUnitsUnk;
 
@@ -411,7 +411,7 @@ namespace Map {
                 &PathFindingState::computeAttackVectorsBasedOnXAndY)
             computeAttackVectorsBasedOnXAndY;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x004A6AB0, &PathFindingState::findCrossAreaBridgeTileToTarget)
             findCrossAreaBridgeTileToTarget;
 
@@ -453,7 +453,7 @@ namespace Map {
                 &PathFindingState::pathfindingUpdate_0x4a8ab0)
             pathfindingUpdate_0x4a8ab0;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int, int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A9200, &PathFindingState::isOpponentBuildingInRange)
             isOpponentBuildingInRange;
 

@@ -53,7 +53,7 @@ namespace Map {
         AttackInfoSubArrayElement1 moatValuesArray[562]; // 0x0000FA90 length: 8992
         int createTribeAmount; // 0x00011DB0 length: 4
         EngineerBuildingAndCountPair engineerBuildingAssignments[250]; // 0x00011DB4 length: 2000
-        int field37_0x12584; // 0x00012584 length: 4
+        int field_0x12584; // 0x00012584 length: 4
         int people1; // 0x00012588 length: 4
         int people2; // 0x0001258C length: 4
         int people3; // 0x00012590 length: 4
@@ -69,12 +69,12 @@ namespace Map {
         int tribeIDArray[50]; // 0x0001642C length: 200
         int unknownIntArray_0x164f4[50]; // 0x000164F4 length: 200
         int tribeRelatedArrayValue0UpTo12[50]; // 0x000165BC length: 200
-        int field71_0x16684[50]; // 0x00016684 length: 200
+        int field_0x16684[50]; // 0x00016684 length: 200
         int unknownSignpostRelatedArray[50]; // 0x0001674C length: 200
-        int field73_0x16814; // 0x00016814 length: 4
+        int field_0x16814; // 0x00016814 length: 4
         int delayedWaveAssignmentCount; // 0x00016818 length: 4
-        int field75_0x1681c; // 0x0001681C length: 4
-        int field76_0x16820; // 0x00016820 length: 4
+        int field_0x1681c; // 0x0001681C length: 4
+        int field_0x16820; // 0x00016820 length: 4
         int knights; // 0x00016824 length: 4
         int ranged; // 0x00016828 length: 4
         undefined1 padding_0x1682c[8]; // 0x0001682C length: 8

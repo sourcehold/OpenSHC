@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -19,7 +20,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D44E0
     void AICState::sendOilMenForOilPickupOrToAIVLocations(int playerID)
     {
-        int const oilSmelterID = DAT_GameState::instance.playerDataArray[playerID].oilSmelter.id;
+        int const oilSmelterID = DAT_GameState::instance.playerDataArray[playerID]
+                                     .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_OILSMELTER]
+                                     .id;
         int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[1];
         if (count < 1) {
             return;

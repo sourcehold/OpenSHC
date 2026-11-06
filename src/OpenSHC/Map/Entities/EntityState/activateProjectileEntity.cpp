@@ -14,7 +14,7 @@ namespace Map {
         void EntityState::activateProjectileEntity(int entityID)
         {
             this->entityArray[entityID].logicalState = 2;
-            this->entityArray[entityID].field72_0xa8 = 1;
+            this->entityArray[entityID].field_0xa8 = 1;
             MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::setProjectileEntityValues2, this)(
                 entityID, (EntityType)this->entityArray[entityID].entityType2);
         }

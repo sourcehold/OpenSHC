@@ -61,7 +61,7 @@ namespace AI {
             return FALSE;
         }
 
-        return (BOOLEnum)(notReallyMoving * 100 / tribeTotal >= this->aics[aicIndex].AttForceRallyPercentage);
+        return notReallyMoving * 100 / tribeTotal >= this->aics[aicIndex].AttForceRallyPercentage;
     }
 
 }
