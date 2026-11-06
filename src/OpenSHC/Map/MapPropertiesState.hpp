@@ -138,7 +138,7 @@ namespace Map {
 
         int sumUnitPoints();
 
-        void sumUnitCounts();
+        int sumUnitCounts();
 
         void sortEventsByDate();
 
