@@ -49,7 +49,7 @@ namespace UI {
         DAT_MouseState::instance.waitCursorToggle = 0;
         this->lastListClickTime = 0;
         this->lastClickedListIndex = -1;
-        this->DAT_ArrayOfMapU3EndInt2[0] = 1;
+        this->DAT_ArrayOfMapU3EndInt2 = 1;
         this->fileListVisibleRowCount = 16;
         if (dialogType == OpenSHC::UI::Enums::MMT_LOAD_MAP) {
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText, this)(

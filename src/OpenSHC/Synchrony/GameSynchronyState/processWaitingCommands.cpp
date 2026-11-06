@@ -16,9 +16,9 @@ namespace Synchrony {
     {
         int _gameCommandID
             = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getCommandIDFromCommandSelectionStuff, this)();
-        if ((_gameCommandID) && (_gameCommandID = 0, 0 < this->someIndex)) {
+        if ((_gameCommandID) && (_gameCommandID = 0, 0 < this->selectedCommandsCount)) {
             int (*_selected)[2] = this->selectedGameCommands;
-            while (_gameCommandID < this->someIndex) {
+            while (_gameCommandID < this->selectedCommandsCount) {
                 // process all commands that should have been executed by now.
                 // Measured: indexing selectedGameCommands per iteration instead of walking
                 // _selected costs the match, so the pointer stays.
@@ -35,7 +35,7 @@ namespace Synchrony {
                 this->DAT_CommandActionPlan = Commands::GCS_EXECUTE;
                 this->DAT_CommandParameterOffset = 0;
                 DAT_ProtocolDefinedData::instance
-                        .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
+                    .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
                 ++_gameCommandID;
                 this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_PROCESSED;
                 ++_selected;
