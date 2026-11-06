@@ -204,7 +204,7 @@ namespace UI {
                                 // delete character in memory
                                 *(WCHAR*)(iVar6 + (int)pWVar7) = pWVar7[iVar3];
                                 pWVar7 = DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory;
-                                if (pWVar7[iVar3] == L' ')
+                                if (pWVar7[iVar3] == L'\0')
                                     break;
                                 ++iVar3;
                                 iVar6 += 2;
