@@ -1,0 +1,205 @@
+name: status-rollup-publish
+
+# Privileged companion to status-rollup.yml. It attaches the rollup TSV to the
+# latest-sarif release, for pushes to main and for pull requests alike,
+# including pull requests from forks.
+#
+# Safety model — this job holds a writable token, so:
+#   * It NEVER checks out or runs code from the pull request. It checks out the
+#     base repository's default branch and runs that trusted copy of the rollup
+#     script. The PR's own commit is fetched only as DATA, through the base
+#     repo's refs/pull/N/head, and only its status/*.txt is ever read.
+#   * It does NOT trust the artifact produced by the unprivileged run, which on
+#     a fork PR is attacker-controlled output. It recomputes the TSV itself.
+#   * Untrusted values (SHAs, branch names) are passed through env and quoted,
+#     never interpolated into a shell command, and the PR number is re-derived
+#     from the API and validated before it reaches a filename.
+#   * A PR publishes to its own clearly-named preview asset. The authoritative
+#     status_rollup.tsv is only ever written by a push to main.
+on:
+  workflow_run:
+    workflows: [status-rollup]
+    types: [completed]
+
+concurrency:
+  group: status-rollup-publish
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # release asset upload
+      pull-requests: write # preview link comment
+    steps:
+      # Trusted code only: the base repo's default branch, never the PR's ref.
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - name: Identify the triggering run
+        id: ctx
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_EVENT: ${{ github.event.workflow_run.event }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+        run: |
+          set -euo pipefail
+
+          # A SHA is the only untrusted value we act on; require it to look like one.
+          if ! printf '%s' "$HEAD_SHA" | grep -qE '^[0-9a-f]{40}$'; then
+            echo "Refusing to continue: head_sha is not a 40-hex SHA" >&2
+            exit 1
+          fi
+          echo "event=$RUN_EVENT head_sha=$HEAD_SHA head_repo=$HEAD_REPO"
+
+          pr=''
+          if [ "$RUN_EVENT" = 'pull_request' ]; then
+            # workflow_run.pull_requests is empty for forks, so re-derive the PR
+            # from the API: an open PR in THIS repo whose head is this SHA.
+            # (commits/$SHA/pulls is no use here — it returns nothing for a
+            # cross-repository PR, which is the case this path exists for.)
+            # HEAD_SHA was validated as 40 hex digits above, so it is safe to
+            # place inside the jq program (gh api --jq takes no --arg).
+            pr=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --paginate \
+                   --jq "[.[] | select(.head.sha == \"$HEAD_SHA\") | .number] | first // empty")
+            if ! printf '%s' "$pr" | grep -qE '^[0-9]+$'; then
+              echo "No open PR in $REPO has head $HEAD_SHA; nothing to publish."
+              echo "mode=skip" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            # Confirm the PR's head really is this commit (guards a stale run).
+            actual=$(gh api "repos/$REPO/pulls/$pr" --jq '.head.sha')
+            if [ "$actual" != "$HEAD_SHA" ]; then
+              echo "PR #$pr has moved on ($actual != $HEAD_SHA); nothing to publish."
+              echo "mode=skip" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "mode=pr" >> "$GITHUB_OUTPUT"
+            echo "pr=$pr" >> "$GITHUB_OUTPUT"
+            echo "asset=status_rollup-pr-$pr.tsv" >> "$GITHUB_OUTPUT"
+          elif [ "$RUN_EVENT" = 'push' ] || [ "$RUN_EVENT" = 'workflow_dispatch' ]; then
+            echo "mode=main" >> "$GITHUB_OUTPUT"
+            echo "asset=status_rollup.tsv" >> "$GITHUB_OUTPUT"
+          else
+            echo "Unhandled triggering event '$RUN_EVENT'; nothing to publish."
+            echo "mode=skip" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch fork reimpl/ branches
+        if: ${{ steps.ctx.outputs.mode != 'skip' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          chmod +x tools/reimplementation-helper/todo/fetch_fork_branches.sh
+          tools/reimplementation-helper/todo/fetch_fork_branches.sh "$REPO"
+
+      # Data, not code: the PR head arrives through the base repo's own
+      # refs/pull/N/head, and the rollup only ever reads status/*.txt from it.
+      - name: Fetch the PR head as data
+        if: ${{ steps.ctx.outputs.mode == 'pr' }}
+        env:
+          PR: ${{ steps.ctx.outputs.pr }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "+refs/pull/$PR/head:refs/remotes/pr/$PR"
+          got=$(git rev-parse "refs/remotes/pr/$PR")
+          if [ "$got" != "$HEAD_SHA" ]; then
+            echo "refs/pull/$PR/head is $got, expected $HEAD_SHA" >&2
+            exit 1
+          fi
+          echo "Included PR #$PR head $got as data."
+
+      - name: Roll up status files
+        if: ${{ steps.ctx.outputs.mode != 'skip' }}
+        env:
+          # include the one fetched PR head alongside the reimpl/ branches.
+          # Anchored on the exact number: a bare ^pr/ would also pick up every
+          # other refs/pull ref that happens to be present in the clone.
+          REIMPL_FILTER: ${{ steps.ctx.outputs.mode == 'pr' && format('/reimpl/|^pr/{0}$', steps.ctx.outputs.pr) || '/reimpl/' }}
+        run: python -I tools/reimplementation-helper/todo/status_rollup.py | tee rollup.log
+
+      - name: Check the output before publishing it
+        if: ${{ steps.ctx.outputs.mode != 'skip' }}
+        env:
+          ASSET: ${{ steps.ctx.outputs.asset }}
+        run: |
+          set -euo pipefail
+          # A truncated or empty rollup should not replace a good asset.
+          rows=$(( $(wc -l < status_rollup.tsv) - 1 ))
+          echo "rows: $rows"
+          if [ "$rows" -lt 1000 ]; then
+            echo "Refusing to publish: only $rows rows, expected thousands" >&2
+            exit 1
+          fi
+          head -1 status_rollup.tsv | grep -q '^shc_id	address	done	' \
+            || { echo "Refusing to publish: unexpected header" >&2; exit 1; }
+          # On a push to main the asset already has this name.
+          if [ "$ASSET" != 'status_rollup.tsv' ]; then
+            mv status_rollup.tsv "$ASSET"
+          fi
+
+      - name: Publish to the latest-sarif release
+        if: ${{ steps.ctx.outputs.mode != 'skip' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ASSET: ${{ steps.ctx.outputs.asset }}
+        run: |
+          set -euo pipefail
+          gh release upload latest-sarif "$ASSET" --repo "$REPO" --clobber
+          echo "Uploaded $ASSET to the latest-sarif release."
+
+      # Housekeeping on the trusted path only: drop preview assets whose PR is
+      # no longer open, so the release does not accumulate them.
+      - name: Prune preview assets of closed PRs
+        if: ${{ steps.ctx.outputs.mode == 'main' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          open=$(gh pr list --repo "$REPO" --state open --limit 200 --json number --jq '.[].number' | sort -u)
+          gh release view latest-sarif --repo "$REPO" --json assets --jq '.assets[].name' \
+            | grep -E '^status_rollup-pr-[0-9]+\.tsv$' > previews.txt || true
+          while read -r asset; do
+            [ -n "$asset" ] || continue
+            n=$(printf '%s' "$asset" | sed -E 's/^status_rollup-pr-([0-9]+)\.tsv$/\1/')
+            if ! printf '%s\n' "$open" | grep -qx "$n"; then
+              echo "Pruning $asset (PR #$n is not open)"
+              gh release delete-asset latest-sarif "$asset" --repo "$REPO" --yes
+            fi
+          done < previews.txt
+
+      - name: Comment the preview link on the PR
+        #if: ${{ steps.ctx.outputs.mode == 'pr' }}
+        if: false
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.ctx.outputs.pr }}
+          ASSET: ${{ steps.ctx.outputs.asset }}
+        run: |
+          set -euo pipefail
+          url="https://github.com/$REPO/releases/download/latest-sarif/$ASSET"
+          {
+            echo '<!-- status-rollup-preview -->'
+            echo '**Reimplementation status rollup** (preview for this PR)'
+            echo
+            echo "Download: [\`$ASSET\`]($url)"
+            echo
+            echo '```'
+            cat rollup.log
+            echo '```'
+            echo
+            echo '_Recomputed from the base branch'"'"'s tooling; this PR'"'"'s status file is included as data. The preview asset is removed once the PR closes._'
+          } > comment.md
+          gh pr comment "$PR" --repo "$REPO" --body-file comment.md --edit-last --create-if-none

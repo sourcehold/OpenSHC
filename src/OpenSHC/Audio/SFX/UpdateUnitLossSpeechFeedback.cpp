@@ -56,12 +56,12 @@ namespace Audio {
                 Dat_UnitValueLossesHistoryPerEnemyPlayer::instance[i][0]
                     = DAT_UnitValueLossesPerEnemyPlayer::instance[i];
             }
-            int iVar1
+            int currentRoundLossesSum
                 = DAT_CurrentPlayerUnitLossesHistory::instance[0] + DAT_TotalUnitValueLossesEnemyHistory::instance[0];
-            int iVar2 = DAT_CurrentPlayerUnitLossesHistory::instance[1]
+            int previousRoundsLossesSum = DAT_CurrentPlayerUnitLossesHistory::instance[1]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[2];
-            if (DAT_GL_Counter::instance >= 2 && 50 > iVar1 && iVar2 > 150) {
+            if (DAT_GL_Counter::instance >= 2 && 50 > currentRoundLossesSum && previousRoundsLossesSum > 150) {
 
                 int smallPlayerUnitLossesSum
                     = DAT_CurrentPlayerUnitLossesHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2];
@@ -115,17 +115,17 @@ namespace Audio {
                     DAT_GL_Counter::instance = 0;
                 }
                 if (_relative1 < 0 && _relative2 < 0) {
-                    int iVar3 = (_relative2 + _relative1) / 2;
+                    int averageRelativeValue = (_relative2 + _relative1) / 2;
                     if (DAT_GameCore::instance.genieVoiceActive) {
-                        if (iVar3 == -1) {
+                        if (averageRelativeValue == -1) {
                             /* "Vanquished" */
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_42_wav_005a4e4c);
-                        } else if (iVar3 == -2) {
+                        } else if (averageRelativeValue == -2) {
                             /* "Crest falling" */
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_43_wav_005a4e3c);
                         }
                     }
-                    if (iVar3 <= -3) {
+                    if (averageRelativeValue <= -3) {
                         if (DAT_GameCore::instance.genieVoiceActive) {
                             /* "Humiliated" */
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_44_wav_005a4e2c);
@@ -189,38 +189,38 @@ namespace Audio {
                 smaller = 1;
             }
             if (larger > smaller) {
-                int iVar1 = (larger * 100) / smaller;
-                if (iVar1 < 150) {
+                int ratioPercent = (larger * 100) / smaller;
+                if (ratioPercent < 150) {
                     return 0;
                 }
-                if (iVar1 < 170) {
+                if (ratioPercent < 170) {
                     return 1;
                 }
-                if (iVar1 < 190) {
+                if (ratioPercent < 190) {
                     return 2;
                 }
-                if (iVar1 < 210) {
+                if (ratioPercent < 210) {
                     return 3;
                 }
-                if (iVar1 < 230) {
+                if (ratioPercent < 230) {
                     return 4;
                 }
-                if (iVar1 < 250) {
+                if (ratioPercent < 250) {
                     return 5;
                 }
-                if (iVar1 < 270) {
+                if (ratioPercent < 270) {
                     return 6;
                 }
                 return 7;
             } else {
-                int iVar1 = (smaller * 100) / larger;
-                if (iVar1 < 150) {
+                int ratioPercent = (smaller * 100) / larger;
+                if (ratioPercent < 150) {
                     return 0;
                 }
-                if (iVar1 < 190) {
+                if (ratioPercent < 190) {
                     return -1;
                 }
-                if (iVar1 < 240) {
+                if (ratioPercent < 240) {
                     return -2;
                 }
                 return -3;

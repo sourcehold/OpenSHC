@@ -17,8 +17,8 @@ namespace Game {
         typedef struct ScenarioEventCondition {
 
             short value; // 0x00000000 length: 2
-            byte subType; // 0x00000002 length: 1
-            byte enabled; // 0x00000003 length: 1
+            char subType; // 0x00000002 length: 1
+            char enabled; // 0x00000003 length: 1
 
         } ScenarioEventCondition;
 #pragma pack(pop)

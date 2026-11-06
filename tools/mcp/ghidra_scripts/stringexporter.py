@@ -24,15 +24,19 @@ mdump = pragma_once + """#define S_GM "gm\\\\"
 
 """
 
-cur = l.getCodeUnitAt(roRange.getMinAddress())
-while cur.getAddress() < roRange.getMaxAddress():
+def browse_to_string(cur):
 	while True:
-		if cur.getDataType().toString() == "string":
+		if cur.getDataType().toString() in ["string", "TerminatedCString"]:
 			break;
 		if isinstance(cur.getDataType(), Array):
 			if cur.getDataType().getDataType().toString() == "char":
 				break;
 		cur = l.getCodeUnitAfter(cur.getAddress())
+	return cur
+
+cur = l.getCodeUnitAt(roRange.getMinAddress())
+while cur.getAddress() < roRange.getMaxAddress():
+	cur = browse_to_string(cur)
 	try:
 		if cur.getLabel():
 			s_label = PATTERN.sub("_", cur.getLabel())
@@ -44,7 +48,8 @@ while cur.getAddress() < roRange.getMaxAddress():
 			mdump += "#define "+ m_label + ' "' + v + '"' + "\n\n"
 	except Exception as e:
 		print("failed at: " + cur.getAddress().toString())
-	cur = l.getCodeUnitAfter(cur.getAddress())
+	finally:
+		cur = l.getCodeUnitAfter(cur.getAddress())
 
 dir = askDirectory("Select output dir", "Choose")
 with open(str(dir) + "/string-literals.hpp", "wb") as f:

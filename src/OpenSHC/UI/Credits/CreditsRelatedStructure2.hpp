@@ -28,15 +28,15 @@ namespace UI {
             int y; // 0x0000000C length: 4
             int width; // 0x00000010 length: 4
             int height; // 0x00000014 length: 4
-            int field6_0x18; // 0x00000018 length: 4
+            int field_0x18; // 0x00000018 length: 4
             int field_0x1c; // 0x0000001C length: 4
             SoundFlagsAndLoopCount flagLoopCount; // 0x00000020 length: 4
             int binkObjIndex; // 0x00000024 length: 4
-            int field10_0x28; // 0x00000028 length: 4
+            int field_0x28; // 0x00000028 length: 4
             int volume; // 0x0000002C length: 4
-            int field12_0x30; // 0x00000030 length: 4
-            int field13_0x34; // 0x00000034 length: 4
-            int field14_0x38; // 0x00000038 length: 4
+            int field_0x30; // 0x00000030 length: 4
+            int field_0x34; // 0x00000034 length: 4
+            int field_0x38; // 0x00000038 length: 4
             char* binkFileName; // 0x0000003C length: 4
             undefined1 padding_0x40[28]; // 0x00000040 length: 28
 
