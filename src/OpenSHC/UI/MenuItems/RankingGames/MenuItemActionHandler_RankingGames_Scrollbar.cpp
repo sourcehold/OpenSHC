@@ -1,7 +1,7 @@
 #include "../RankingGames.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00eb9b60.hpp"
-#include "OpenSHC/Globals/DAT_00ed3120.hpp"
+#include "OpenSHC/Globals/INT_00eb9b60.hpp"
+#include "OpenSHC/Globals/INT_00ed3120.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -21,21 +21,21 @@ namespace UI {
             case 2:
             case 3:
                 // stores only on a change, as the original does (plain store: quick_diff 0.8679 -> 0.7308)
-                if (*currentValue != DAT_00ed3120::instance) {
-                    DAT_00ed3120::instance = *currentValue;
+                if (*currentValue != INT_00ed3120::instance) {
+                    INT_00ed3120::instance = *currentValue;
                 }
                 return;
             case 4: {
                 *minValue = 0;
                 // one read of the count (reading it again for the test: quick_diff 0.8679 -> 0.7593)
-                int const lastOffset = DAT_00eb9b60::instance - 8;
+                int const lastOffset = INT_00eb9b60::instance - 8;
                 *maxValue = lastOffset;
                 if (lastOffset < 0) {
                     *maxValue = 0;
                 }
                 // stores only on a change, as the original does (plain store: quick_diff 0.8679 -> 0.6538)
-                if (*currentValue != DAT_00ed3120::instance) {
-                    *currentValue = DAT_00ed3120::instance;
+                if (*currentValue != INT_00ed3120::instance) {
+                    *currentValue = INT_00ed3120::instance;
                 }
                 return;
             }
@@ -44,16 +44,16 @@ namespace UI {
                 *currentValue = 6;
                 return;
             case 5:
-                if (DAT_00ed3120::instance > 0) {
-                    --DAT_00ed3120::instance;
+                if (INT_00ed3120::instance > 0) {
+                    --INT_00ed3120::instance;
                 }
-                *currentValue = DAT_00ed3120::instance;
+                *currentValue = INT_00ed3120::instance;
                 return;
             case 6:
-                if (DAT_00ed3120::instance < DAT_00eb9b60::instance - 8) {
-                    ++DAT_00ed3120::instance;
+                if (INT_00ed3120::instance < INT_00eb9b60::instance - 8) {
+                    ++INT_00ed3120::instance;
                 }
-                *currentValue = DAT_00ed3120::instance;
+                *currentValue = INT_00ed3120::instance;
                 return;
             }
         }

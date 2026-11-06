@@ -131,7 +131,7 @@ namespace Map {
                     .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
                     .id
                 == 0) {
-                DAT_GameState::instance.playerDataArray[owner].counter += 2;
+                DAT_GameState::instance.playerDataArray[owner].availableCows += 2;
             }
         }
         // AI tribe type 24 and unit logic state 5 have no constants.

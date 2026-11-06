@@ -8,7 +8,7 @@
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 #include "OpenSHC/Map/Units/TribesState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -26,7 +26,7 @@ namespace Map {
             using OpenSHC::Map::Units::UnitType;
             using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
             using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
-            using OpenSHC::Map::Units::States::UnitState;
+            using OpenSHC::Map::Units::States::UnitStateShort;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             // Constructor
@@ -364,7 +364,7 @@ namespace Map {
                 &TribesState::setTargetUnitForTribe)
             setTargetUnitForTribe;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, UnitState), false, Address::SHC_3BB0A8C1_0x00525300,
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, UnitStateShort), false, Address::SHC_3BB0A8C1_0x00525300,
                 &TribesState::setStateForAllTribeUnits)
             setStateForAllTribeUnits;
 

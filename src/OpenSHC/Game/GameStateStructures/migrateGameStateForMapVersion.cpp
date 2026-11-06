@@ -94,7 +94,7 @@ namespace Game {
             if (receivedMapVersion < 139) {
                 for (int playerID = 1; playerID < 9; ++playerID) {
                     int cowCount = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].counter = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].availableCows = 0;
                     int siegeEngineCount = 0;
                     for (int unitID = 1; unitID < 2500; ++unitID) {
                         if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_INVISIBLE
@@ -113,9 +113,9 @@ namespace Game {
                             .buildingEntryInfos[Player::Enums::BEIE_KEEP]
                             .id
                         != 0) {
-                        DAT_GameState::instance.playerDataArray[playerID].counter = cowCount;
+                        DAT_GameState::instance.playerDataArray[playerID].availableCows = cowCount;
                     } else {
-                        DAT_GameState::instance.playerDataArray[playerID].counter = siegeEngineCount;
+                        DAT_GameState::instance.playerDataArray[playerID].availableCows = siegeEngineCount;
                     }
                 }
             }

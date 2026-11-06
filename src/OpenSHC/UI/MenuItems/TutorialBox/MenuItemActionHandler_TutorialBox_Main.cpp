@@ -15,12 +15,12 @@
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00df5540.hpp"
-#include "OpenSHC/Globals/DAT_00df5554.hpp"
 #include "OpenSHC/Globals/DAT_00df5558.hpp"
 #include "OpenSHC/Globals/DAT_00df555c.hpp"
 #include "OpenSHC/Globals/DAT_00df5560.hpp"
 #include "OpenSHC/Globals/DAT_00df556c.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -32,7 +32,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TutorialCurrentStep.hpp"
 #include "OpenSHC/Globals/DAT_VideoBikQueue.hpp"
-#include "OpenSHC/Globals/INT_DisableTutorialRestrictions.hpp"
+#include "OpenSHC/Globals/INT_00df5554.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -82,8 +82,8 @@ namespace UI {
             MACRO_CALL(OpenSHC::UI::Helpers_Func::InitTutorialStepTransition)(2);
             DAT_00df5560::instance = FALSE;
             // the original compares the step counters signed
-            if ((int)DAT_TutorialCurrentStep::instance >= (int)DAT_00df5554::instance - 1) {
-                INT_DisableTutorialRestrictions::instance = TRUE;
+            if ((int)DAT_TutorialCurrentStep::instance >= (int)INT_00df5554::instance - 1) {
+                DAT_DisableTutorialRestrictions::instance = TRUE;
             }
             if (DAT_MissionAestheticsDefinedData::instance.TutorialStepSpeechTrigger[DAT_TutorialCurrentStep::instance]
                 == 1) {
