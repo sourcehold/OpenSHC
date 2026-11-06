@@ -82,7 +82,7 @@ namespace Map {
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
         undefined4 flag; // 0x00013578 length: 4
         undefined4 offset; // 0x0001357C length: 4
-        undefined4 indexStored; // 0x00013580 length: 4
+        int indexStored; // 0x00013580 length: 4
         int selectedAbsoluteIndex; // 0x00013584 length: 4
         dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
