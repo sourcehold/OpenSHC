@@ -22,34 +22,31 @@
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
-        namespace SoundOptions {
 
-            using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-            // FUNCTION: STRONGHOLDCRUSADER 0x004929C0
-            void MenuItemRenderFunction_SoundOptions_VolumeSlider(
-                int unused, int thumbXPos, int volume, int thumbWidth, BOOLEnum isDragged)
-            {
-                DAT_ButtonCurrentlyInteracting::instance = FALSE;
-                // -1: the plain tiled button (the slider's track)
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
-                    AlphaAndButtonSurfaceObj::ptr)(-1, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
-                // the thumb: x and y before its colour; in the call they lose the match
-                int const thumbX = thumbXPos + DAT_ButtonX::instance;
-                int const buttonY = DAT_ButtonY::instance;
-                ushort color = COL_GREYISH_YELLOW::instance.shortValue;
-                if (isDragged) {
-                    color = COL_DARK_LIME::instance.shortValue;
-                }
-                MACRO_CALL_MEMBER(
-                    OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                    thumbX + 1, buttonY + 2, thumbX + thumbWidth - 2, buttonY + DAT_ButtonH::instance - 4, color);
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(volume,
-                    DAT_ButtonW::instance + DAT_ButtonX::instance + 20, DAT_ButtonY::instance + 7,
-                    OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, FALSE, 0);
+        // FUNCTION: STRONGHOLDCRUSADER 0x004929C0
+        void SoundOptions::MenuItemRenderFunction_SoundOptions_VolumeSlider(
+            int unused, int thumbXPos, int volume, int thumbWidth, BOOLEnum isDragged)
+        {
+            DAT_ButtonCurrentlyInteracting::instance = FALSE;
+            // -1: the plain tiled button (the slider's track)
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
+                AlphaAndButtonSurfaceObj::ptr)(-1, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
+            // the thumb: x and y before its colour; in the call they lose the match
+            int const thumbX = thumbXPos + DAT_ButtonX::instance;
+            int const buttonY = DAT_ButtonY::instance;
+            ushort color = COL_GREYISH_YELLOW::instance.shortValue;
+            if (isDragged) {
+                color = COL_DARK_LIME::instance.shortValue;
             }
-
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
+                thumbX + 1, buttonY + 2, thumbX + thumbWidth - 2, buttonY + DAT_ButtonH::instance - 4, color);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(volume,
+                DAT_ButtonW::instance + DAT_ButtonX::instance + 20, DAT_ButtonY::instance + 7,
+                OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, FALSE, 0);
         }
+
     }
 }
 }
