@@ -11105,7 +11105,7 @@ SHC_3BB0A8C1_0x004335A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00433630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00433780 | 0.0% | Pending
+SHC_3BB0A8C1_0x00433780 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00433BC0 | 0.0% | Pending
 
@@ -16947,7 +16947,7 @@ SHC_3BB0A8C1_0x0044D330 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044D340 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044D3D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044D3D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044E510 | 100.0% | Reimplemented
 
@@ -16965,11 +16965,11 @@ SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00452900 | 0.0% | Pending
+SHC_3BB0A8C1_0x00452900 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00453600 | 0.0% | Pending
+SHC_3BB0A8C1_0x00453600 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00453B00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00453B00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00454080 | 0.0% | Pending
 
@@ -20975,7 +20975,7 @@ SHC_3BB0A8C1_0x0046CEF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046CF10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046CF90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046CF90 | 100.0% | Reimplemented, only the float constants' addresses differ (same values)
 
 SHC_3BB0A8C1_0x0046D070 | 100.0% | Reimplemented
 
@@ -22423,7 +22423,7 @@ SHC_3BB0A8C1_0x004800E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00480210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00480440 | 0.0% | Pending
+SHC_3BB0A8C1_0x00480440 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00480570 | 100.0% | Reimplemented
 
@@ -26879,7 +26879,7 @@ SHC_3BB0A8C1_0x004B5110 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B51A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B5280 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B5280 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B5300 | 100.0% | Reimplemented
 
@@ -29089,7 +29089,7 @@ SHC_3BB0A8C1_0x004BA7D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BA8B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BA910 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BA910 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004BA980 | 0.0% | Pending
 
@@ -36183,7 +36183,7 @@ SHC_3BB0A8C1_0x004DAE00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DAE90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DAF50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAF50 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 
 SHC_3BB0A8C1_0x004DAFB0 | 0.0% | Pending
 
@@ -36191,7 +36191,7 @@ SHC_3BB0A8C1_0x004DB0D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DB180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DB210 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB210 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 
 SHC_3BB0A8C1_0x004DB300 | 100.0% | Reimplemented, only the float constant's address differs (same value)
 
@@ -36249,7 +36249,7 @@ SHC_3BB0A8C1_0x004DC134 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DC138 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DC140 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DC140 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 
 SHC_3BB0A8C1_0x004DC1C0 | 100.0% | Reimplemented
 
@@ -67545,7 +67545,7 @@ SHC_3BB0A8C1_0x0057B9BD | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0057B9BE | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0057B9C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0057B9C0 | 100.0% | Reimplemented, only names differ: the original's FLAG_JokeAIMessageArray element addresses carry no symbol
 
 SHC_3BB0A8C1_0x0057BE10 | 0.0% | Pending
 
