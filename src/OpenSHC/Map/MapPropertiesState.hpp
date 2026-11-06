@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include "OpenSHC/AI/Siege/SiegeUnitCounts.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Scenario/BarracksRecruitabilityShort.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventExtra.hpp"
@@ -23,7 +22,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::AI::Siege::SiegeUnitCounts;
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::TradeableResourcesSection;
     using OpenSHC::Game::Scenario::BarracksRecruitabilityShort;
@@ -44,7 +42,7 @@ namespace Map {
         int SEC_StartingYear; // 0x00000080 length: 4
         int SEC_StartingMonth; // 0x00000084 length: 4
         int SEC_StartingResources[25]; // 0x00000088 length: 100
-        SiegeUnitCounts SEC_SiegeInformation; // 0x000000EC length: 80
+        int SEC_SiegeInformation[20]; // 0x000000EC length: 80
         SiegeGameModeRelatedSection SEC_Section1067; // 0x0000013C length: 28
         int SEC_StartingPopularity; // 0x00000158 length: 4
         short buildingAvailability[100]; // 0x0000015C length: 200
