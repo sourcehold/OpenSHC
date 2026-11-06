@@ -12,8 +12,7 @@ namespace Map {
     namespace Navigation {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00497B80
-        BOOLEnum PathFindingState::findSuitableSpawnLocationUnk(
-            int x, int y, int x2, int y2, int param_5, int param_6)
+        BOOLEnum PathFindingState::findSuitableSpawnLocationUnk(int x, int y, int x2, int y2, int param_5, int param_6)
         {
             if (399 < (uint)x || 399 < (uint)y) {
                 return (undefined4)(0);

@@ -27,7 +27,7 @@ namespace Map {
             this->searchGeneration = this->searchGeneration + 1;
             this->ALGO_TotalTroopValue = 0;
             this->ALGO_TotalTroopCount = 0;
-            this->field34_0x64 = 0;
+            this->field_0x64 = 0;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -60,8 +60,8 @@ namespace Map {
                                             .unitType);
                                     this->ALGO_TotalTroopValue = this->ALGO_TotalTroopValue + iVar5;
                                     this->ALGO_TotalTroopCount = this->ALGO_TotalTroopCount + 1;
-                                    if (this->field34_0x64 == 0) {
-                                        this->field34_0x64 = iVar6;
+                                    if (this->field_0x64 == 0) {
+                                        this->field_0x64 = iVar6;
                                     }
                                 }
                             }

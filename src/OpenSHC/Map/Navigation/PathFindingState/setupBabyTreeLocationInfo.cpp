@@ -21,9 +21,10 @@ namespace Map {
         using OpenSHC::Map::Trees::TreeTypeShort;
 
         /* inlined copy of ViewportRenderState::xyAreValid */
-        static inline int xyAreValid(uint ySpace, uint y)
+        inline static int xyAreValid(uint ySpace, uint y)
         {
-            return ySpace <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0;
+            return ySpace <= 399 && y <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0;
         }
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -55,7 +56,8 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
@@ -109,13 +111,11 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .short_.xOffset
                                     + sVar2;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .short_.yOffset
                                     + sVar1;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;

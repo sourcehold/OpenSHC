@@ -32,9 +32,9 @@ namespace Map {
         /*
           BFS from (param_2, param_3) up to distance param_1, scoring enemy buildings and walls owned by   player
           param_7. Buildings score higher for defensive structures (0x400 flag), distance, and fire   state. Walls are
-          scored by high difference from base terrain. The best-scoring tileUnk coordinates   are written to ALG_TargetX,
-          ALG_TargetY, and ALG_TargetTile. Height traversal cost is weighted in   3 tiers based on param_5.      renamed
-          by: Claude Sonnet 4.6
+          scored by high difference from base terrain. The best-scoring tileUnk coordinates   are written to
+          ALG_TargetX, ALG_TargetY, and ALG_TargetTile. Height traversal cost is weighted in   3 tiers based on param_5.
+          renamed by: Claude Sonnet 4.6
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A6010
         void PathFindingState::findBestAttackTargetTileWithHeightAndOwner(int param_1, uint param_2, uint param_3,
@@ -86,8 +86,7 @@ namespace Map {
             _tile = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
             this->searchQueue.tilesQueue[0] = _tile;
             DAT_TileMapState::instance.CertainPathLayer[_tile] = (short)this->searchQueue.currentDistance;
-            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]
-                = (short)this->searchGeneration;
+            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             _startHeight = (int)DAT_TileMapState::instance.HeightLayer[_tile];
             if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
                 return;
@@ -170,7 +169,7 @@ namespace Map {
                   expand along the arc: 1 direction on even distances, 3 on odd ones
                  */
                 _count = ((int)(char)this->searchQueue.currentDistance & 1) * 2 | 1;
-                _pArc = DAT_ClimbLogicDefinedData::instance.field13_0x13c[param_4];
+                _pArc = DAT_ClimbLogicDefinedData::instance.field_0x13c[param_4];
                 do {
                     _direction = *_pArc;
                     _next = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
@@ -179,7 +178,8 @@ namespace Map {
                         && (_logic & 0x30) == 0) {
                         if ((_logic & 0x10000400) != 0) {
                             _buildingID = (int)DAT_TileMapState::instance.BuildingLayer[_next];
-                            if (_buildingID == 0 || DAT_BuildingsState::instance.buildings[_buildingID].owner != param_7)
+                            if (_buildingID == 0
+                                || DAT_BuildingsState::instance.buildings[_buildingID].owner != param_7)
                                 goto LAB_next;
                             _height = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
@@ -202,10 +202,12 @@ namespace Map {
                             = (short)this->searchQueue.currentDistance + _cost;
                         DAT_TileMapState::instance.WalkLayer[_next] = (short)this->searchGeneration;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.xOffset
                             + (short)_x;
                         this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.yOffset
                             + (short)_y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _next;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;

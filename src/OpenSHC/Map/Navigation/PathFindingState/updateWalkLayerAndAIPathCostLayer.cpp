@@ -279,7 +279,7 @@ namespace Map {
                         /*
                           Process all 8 directions
                          */
-                    } while ((int)psVar3 < (int)&DAT_TerrainDefinedData::instance.field61_0x138);
+                    } while ((int)psVar3 < (int)&DAT_TerrainDefinedData::instance.field_0x138);
                 }
                 /*
                   === ADVANCE TO NEXT TILE IN QUEUE ===

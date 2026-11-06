@@ -124,7 +124,7 @@ namespace Map {
                                 bVar7 = bVar7
                                     + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
                             }
-                        } else if (DAT_BuildingDefinedData::instance.field17_0x1774[(short)DAT_BuildingsState::instance
+                        } else if (DAT_BuildingDefinedData::instance.field_0x1774[(short)DAT_BuildingsState::instance
                                            .buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
                                            .buildingType]
                             != FALSE) {

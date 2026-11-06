@@ -22,7 +22,8 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x004974D0
-        BOOL PathFindingState::findNeighbourTileThatCanServeAsClimbPointClosestToXY(uint ySpace, uint y, uint x2, uint y2)
+        BOOL PathFindingState::findNeighbourTileThatCanServeAsClimbPointClosestToXY(
+            uint ySpace, uint y, uint x2, uint y2)
         {
             if (399 < ySpace || 399 < y) {
                 return 0;
@@ -37,8 +38,9 @@ namespace Map {
                 return 0;
             }
             int _tile2 = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
-            int _area1 = (short)DAT_TileMapState::instance
-                             .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace];
+            int _area1
+                = (short)DAT_TileMapState::instance
+                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace];
             /*
               high 2
              */
@@ -49,9 +51,9 @@ namespace Map {
                 /*
                   add building high to height2
                  */
-                _height2 += MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                    DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_tile2]);
+                _height2
+                    += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                        DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_tile2]);
             }
             for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                 /*
@@ -77,18 +79,22 @@ namespace Map {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(ySpace, (int)(y),
-                            (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset
+                            (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.xOffset
                                 + x2),
-                            (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset
+                            (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.yOffset
                                 + y2));
                         int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                         if (_distance < _minDistance) {
                             this->climbX
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.xOffset
                                 + x2;
                             _minDistance = _distance;
                             this->climbY
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.yOffset
                                 + y2;
                             _status = 1;
                         }

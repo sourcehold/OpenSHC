@@ -79,10 +79,8 @@ namespace Map {
                                 && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || (((iVar5 = (int)DAT_TileMapState::instance.BuildingLayer[iVar6]) != 0
-                                        && (DAT_BuildingDefinedData::instance
-                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                        .buildings[iVar5]
-                                                        .buildingType]
+                                        && (DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray
+                                                [(short)DAT_BuildingsState::instance.buildings[iVar5].buildingType]
                                             != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -109,10 +107,8 @@ namespace Map {
                                 && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || (((iVar5 = (int)DAT_TileMapState::instance.BuildingLayer[iVar6]) != 0
-                                        && (DAT_BuildingDefinedData::instance
-                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                        .buildings[iVar5]
-                                                        .buildingType]
+                                        && (DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray
+                                                [(short)DAT_BuildingsState::instance.buildings[iVar5].buildingType]
                                             != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -139,10 +135,8 @@ namespace Map {
                                 && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || (((iVar5 = (int)DAT_TileMapState::instance.BuildingLayer[iVar6]) != 0
-                                        && (DAT_BuildingDefinedData::instance
-                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                        .buildings[iVar5]
-                                                        .buildingType]
+                                        && (DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray
+                                                [(short)DAT_BuildingsState::instance.buildings[iVar5].buildingType]
                                             != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -169,10 +163,8 @@ namespace Map {
                                 && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || (((iVar5 = (int)DAT_TileMapState::instance.BuildingLayer[iVar6]) != 0
-                                        && (DAT_BuildingDefinedData::instance
-                                                .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
-                                                        .buildings[iVar5]
-                                                        .buildingType]
+                                        && (DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray
+                                                [(short)DAT_BuildingsState::instance.buildings[iVar5].buildingType]
                                             != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;

@@ -123,7 +123,7 @@ namespace Map {
                         break;
                 }
             }
-            this->field51_0x9c = bVar1 - local_1c;
+            this->field_0x9c = bVar1 - local_1c;
             dVar6 = local_14;
             return (dword)(dVar6);
         }

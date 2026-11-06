@@ -89,7 +89,7 @@ namespace Map {
                     }
                     paiVar3 = (int (*)[8])(*paiVar3 + 1);
                     piVar7 = piVar7 + 2;
-                } while ((int)piVar7 < (int)&DAT_TerrainDefinedData::instance.field61_0x138);
+                } while ((int)piVar7 < (int)&DAT_TerrainDefinedData::instance.field_0x138);
                 return (undefined4)(local_8);
             }
             return (undefined4)(0);

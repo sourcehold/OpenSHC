@@ -17,7 +17,7 @@ namespace Map {
         {
             int iVar1;
             int* piVar2;
-            if (this->field63_0xc0 == 0) {
+            if (this->field_0xc0 == 0) {
                 return (undefined4)(0);
             }
             if ((this->climbData[param_1].canBeUsed != 0)

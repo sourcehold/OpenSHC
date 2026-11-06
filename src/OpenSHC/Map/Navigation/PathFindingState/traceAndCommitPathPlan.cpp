@@ -24,16 +24,16 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A97D0
         void PathFindingState::traceAndCommitPathPlan(uint ySpace, uint y, uint x2, uint y2, int param_5)
         {
-            if (ySpace <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0'
-                && x2 <= 399 && y2 <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0') {
+            if (ySpace <= 399 && y <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0' && x2 <= 399
+                && y2 <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0') {
                 int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
                 int distance = DAT_TileMapState::instance.CertainPathLayer[tileUnk];
                 int generation = DAT_TileMapState::instance.WalkLayer[tileUnk];
                 int start = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
                 int next = 0;
                 int curY = y2;
-                DAT_PathFindingState::instance.field49_0x94 = 0;
+                DAT_PathFindingState::instance.field_0x94 = 0;
                 if (tileUnk != start) {
                     do {
                         uint logic = DAT_TileMapState::instance.LogicLayer[tileUnk];
@@ -113,7 +113,8 @@ namespace Map {
                             return;
                         }
                         tileUnk = next;
-                        curY = curY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[best].int_.yOffset;
+                        curY = curY
+                            + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[best].int_.yOffset;
                         if ((DAT_TileMapState::instance.LogicLayer[tileUnk] & 0x10000100) != 0
                             && (DAT_TileMapState::instance.LogicLayer[tileUnk] & 2) == 0
                             && (DAT_TileMapState::instance.BuildingLayer[tileUnk] == 0
@@ -122,8 +123,7 @@ namespace Map {
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[tileUnk]]
                                                 .buildingType]
                                     == 0)) {
-                            DAT_PathFindingState::instance.field49_0x94
-                                = DAT_PathFindingState::instance.field49_0x94 + 1;
+                            DAT_PathFindingState::instance.field_0x94 = DAT_PathFindingState::instance.field_0x94 + 1;
                         }
                         best = best + 4;
                         if (best > 7) {

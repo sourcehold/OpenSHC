@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Game/Player/BuildingEntryInfo.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -27,16 +28,25 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].keep.id != 0
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                        .id
+                    != 0
                 && (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(x, (int)(y),
-                        DAT_GameState::instance.playerDataArray[playerID].keep.xEntry,
-                        DAT_GameState::instance.playerDataArray[playerID].keep.yEntry),
+                        DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                            .xEntry,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                            .yEntry),
                     DAT_DirectionAlgorithmState::instance.distanceHigh <= range)) {
                 return (undefined4)(0);
             }
-            piVar1 = &DAT_GameState::instance.playerDataArray[1].keep.tileEntry;
+            piVar1 = &DAT_GameState::instance.playerDataArray[1]
+                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                          .tileEntry;
             piVar2 = DAT_GameState::instance.mapAndTime.playerTeams + 1;
             while (*piVar2 != DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                 || ((BuildingEntryInfo*)(piVar1 + -3))->id == 0

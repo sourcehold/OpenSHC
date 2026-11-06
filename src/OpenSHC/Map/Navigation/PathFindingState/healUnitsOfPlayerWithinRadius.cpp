@@ -18,10 +18,10 @@ namespace Map {
           WARNING: Enum "MappersEnum": Some values do not have unique names
          */
         /*
-          BFS from tileUnk param_1 up to distance param_2. For every unit owned by player param_3 found on   visited tiles,
-          adds param_4 health, clamped to the unit's maxHealth. Also updates   healthPercentage and healthbar fields
-          accordingly. Used for area healing effects such as from   buildings or abilities.      renamed by: Claude
-          Sonnet 4.6
+          BFS from tileUnk param_1 up to distance param_2. For every unit owned by player param_3 found on   visited
+          tiles, adds param_4 health, clamped to the unit's maxHealth. Also updates   healthPercentage and healthbar
+          fields accordingly. Used for area healing effects such as from   buildings or abilities.      renamed by:
+          Claude Sonnet 4.6
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A36B0
         BOOLEnum PathFindingState::healUnitsOfPlayerWithinRadius(int param_1, int param_2, int param_3, int param_4)
@@ -58,7 +58,7 @@ namespace Map {
                         || (int)this->searchQueue.currentDistance > param_2)
                         break;
                     for (iVar8 = (int)(short)DAT_TileMapState::instance.UnitLayer[uVar4]; iVar8 != 0;
-                         iVar8 = (int)(short)DAT_UnitsState::instance.units[iVar8].nextUnitOnTheSameTile) {
+                        iVar8 = (int)(short)DAT_UnitsState::instance.units[iVar8].nextUnitOnTheSameTile) {
                         if (DAT_UnitsState::instance.units[iVar8].owner == param_3) {
                             DAT_UnitsState::instance.units[iVar8].health
                                 = DAT_UnitsState::instance.units[iVar8].health + param_4;

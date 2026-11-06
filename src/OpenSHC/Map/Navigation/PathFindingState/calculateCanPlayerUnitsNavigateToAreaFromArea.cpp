@@ -47,7 +47,7 @@ namespace Map {
                         if (playerID == 0
                             || DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
                                 == DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                            || DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID].field199_0x2c6
+                            || DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID].field_0x2c6
                                 != 0) {
                             aiStack_640[local_96c * 2 + 1] = 0;
                             aiStack_640[local_96c * 2] = iVar7;
@@ -56,7 +56,7 @@ namespace Map {
                     }
                 }
                 int iVar6 = 0;
-                this->field63_0xc0 = 0;
+                this->field_0xc0 = 0;
                 if (0 < local_96c) {
                     do {
                         iVar1 = aiStack_640[iVar6 * 2];
@@ -175,8 +175,8 @@ namespace Map {
                     }
                 }
                 iVar6 = 0;
-                this->field63_0xc0 = 1;
-                DAT_PathFindingState::instance.field50_0x98 = 1;
+                this->field_0xc0 = 1;
+                DAT_PathFindingState::instance.field_0x98 = 1;
                 if (0 < local_96c) {
                     do {
                         iVar1 = aiStack_640[iVar6 * 2];
@@ -287,7 +287,7 @@ namespace Map {
                         } while (iVar6 < local_96c);
                     }
                 }
-                DAT_PathFindingState::instance.field50_0x98 = 0;
+                DAT_PathFindingState::instance.field_0x98 = 0;
                 fromArea = 0;
             }
         LAB_ret:

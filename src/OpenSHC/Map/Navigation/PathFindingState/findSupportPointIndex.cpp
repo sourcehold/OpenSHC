@@ -27,7 +27,8 @@ namespace Map {
             int iVar4;
             int iVar5;
             int tileUnk;
-            if (399 < ySpace || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (399 < ySpace || 399 < y
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return 0;
             }
             this->calculations = this->calculations + 1;
@@ -42,8 +43,10 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchQueue.currentDistance;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
@@ -77,13 +80,12 @@ namespace Map {
                         }
                         DAT_TileMapState::instance.CertainPathLayer[tileUnk]
                             = (short)this->searchQueue.currentDistance + 1;
-                        short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
-                                          .short_.xOffset;
+                        short sVar3
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6].short_.xOffset;
                         DAT_TileMapState::instance.WalkLayer[tileUnk] = (short)this->searchGeneration;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
                         this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
-                                  .short_.yOffset
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6].short_.yOffset
                             + sVar2;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = tileUnk;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;

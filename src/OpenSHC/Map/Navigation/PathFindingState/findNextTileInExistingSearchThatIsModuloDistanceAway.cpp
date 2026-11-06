@@ -42,8 +42,7 @@ namespace Map {
             } while (DAT_TileMapState::instance.WalkLayer[tileUnk] == generation);
             tileUnk = this->searchQueue.tilesQueue[result];
             DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[result];
-            DAT_TribesState::instance.ALG_ResultX
-                = tileUnk
+            DAT_TribesState::instance.ALG_ResultX = tileUnk
                 - DAT_ViewportRenderState::instance.translationMatrix[DAT_TribesState::instance.ALG_ResultY]
                       .addXgetTile;
             DAT_TribesState::instance.ALG_ResultTileIndex = result;

@@ -65,9 +65,10 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
-                    = (short)this->searchQueue.currentDistance;
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
@@ -88,8 +89,7 @@ namespace Map {
                 }
                 int _building = (short)DAT_TileMapState::instance.BuildingLayer[iVar3];
                 if ((_building != 0)
-                    && (DAT_BuildingsState::instance.buildings[_building]
-                            .buildingType
+                    && (DAT_BuildingsState::instance.buildings[_building].buildingType
                         == OpenSHC::Map::Buildings::BT_SIGNPOST)) {
                     return TRUE;
                 }

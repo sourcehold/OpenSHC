@@ -33,8 +33,8 @@ namespace Map {
             if (_area2 == 0) {
                 return FALSE;
             }
-            if (this->field48_0x90 == 0) {
-                this->field48_0x90 = 1;
+            if (this->field_0x90 == 0) {
+                this->field_0x90 = 1;
                 for (int _index = 0; _index < 10; ++_index) {
                     this->searchQueue.acceptAreaPairArray1[_index].area1 = -1;
                     this->searchQueue.acceptAreaPairArray1[_index].area2 = -1;

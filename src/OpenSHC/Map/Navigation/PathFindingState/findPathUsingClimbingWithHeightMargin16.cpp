@@ -23,9 +23,10 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         /* inlined copy of ViewportRenderState::xyAreValid */
-        static inline BOOLEnum xyAreValid(uint ySpace, uint y)
+        inline static BOOLEnum xyAreValid(uint ySpace, uint y)
         {
-            if (ySpace <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0) {
+            if (ySpace <= 399 && y <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0) {
                 return TRUE;
             }
             return FALSE;
@@ -71,7 +72,8 @@ namespace Map {
             }
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
@@ -136,7 +138,8 @@ namespace Map {
                                      */
                                     _keepHeight = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                                        DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
+                                        DAT_BuildingsState::ptr)(
+                                        (int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
                                     _cHeight = _cHeight + _keepHeight;
                                 }
                                 /*
@@ -172,11 +175,13 @@ namespace Map {
                             DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
                             short sVar3
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset;
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + (short)sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
                                 + (short)sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;

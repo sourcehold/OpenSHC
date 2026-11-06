@@ -72,15 +72,16 @@ namespace Map {
                         != 0) {
                         dVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + iVar3;
                         if (DAT_TileMapState::instance.WalkLayer[dVar4] != this->searchGeneration) {
-                            int _hackValue = (int)*(byte*)(*(int*)(((int)&DAT_TroopValueState::instance.attackInfo + 0x301d0 /* old hackValuesArray: AttackInfoSubElement of player p at +0x301C0 + p*0x177BC */)
-                                                                  + param_3 * 0x177bc + -0x10)
-                                    * 0x13a10
-                                + 0x1ee2998 + dVar4);
+                            int _hackValue
+                                = (int)*(byte*)(*(int*)((
+                                                            (int)&DAT_TroopValueState::instance.attackInfo + 0x301d0 /* old hackValuesArray: AttackInfoSubElement of player p at +0x301C0 + p*0x177BC */)
+                                                    + param_3 * 0x177bc + -0x10)
+                                        * 0x13a10
+                                    + 0x1ee2998 + dVar4);
                             int _cost = (int)DAT_TileMapState::instance.SEC_TileMap1104[dVar4];
                             int _entity = (int)DAT_TileMapState::instance.EntityLayer[dVar4];
                             if (((_entity == 0)
-                                    || (DAT_EntityState::instance.entityArray[_entity]
-                                            .entityType
+                                    || (DAT_EntityState::instance.entityArray[_entity].entityType
                                         != OpenSHC::Map::Entities::ET_FIRE))
                                 && _hackValue == (int)param_4) {
                                 if ((10 < (int)this->searchQueue.currentDistance) && (local_8 != 0)) {
@@ -98,7 +99,8 @@ namespace Map {
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[dVar4] = (short)this->searchGeneration;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5].short_.yOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5]
+                                      .short_.yOffset
                                 + (short)sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = dVar4;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;

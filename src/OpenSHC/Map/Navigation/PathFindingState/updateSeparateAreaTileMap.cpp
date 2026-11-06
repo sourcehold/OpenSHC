@@ -42,7 +42,7 @@ namespace Map {
             if (this->toggleUpdateSeparateAreaTileMap == 0) {
                 return FALSE;
             }
-            this->field41_0x74 = this->field41_0x74 + 1;
+            this->field_0x74 = this->field_0x74 + 1;
             /*
               The flood fill of one area (the dequeue loop with its eight-neighbour expansion) is
               handwritten assembly in the original; it reaches the area layer, the zone sizes and the

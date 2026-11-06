@@ -1,6 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
@@ -43,7 +44,10 @@ namespace Map {
             /*
                  === VALIDATE PLAYER HAS A KEEP ===   Only compute AI zones if the player has a keep (main castle)
              */
-            if (DAT_GameState::instance.playerDataArray[attackedPlayerID].keep.id != 0) {
+            if (DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                    .id
+                != 0) {
                 /*
                      === INITIALIZE BFS STARTING FROM KEEP ===
                  */
@@ -53,13 +57,16 @@ namespace Map {
                 /*
                      Get the keep's position (specifically the campfire tile inside the keep)
                  */
-                this->searchQueue.yQueue[0]
-                    = (short)DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.yEntry;
-                this->searchQueue.tilesQueue[0]
-                    = DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.xEntry
+                this->searchQueue.yQueue[0] = (short)DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                                                  .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                                  .yEntry;
+                this->searchQueue.tilesQueue[0] = DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                                                      .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                                      .xEntry
                     + DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_GameState::instance.playerDataArray[attackedPlayerID]
-                                  .campground.yEntry]
+                                  .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                  .yEntry]
                           .addXgetTile;
                 /*
                      Mark the keep tile as AI Zone with value 1 (the starting point)

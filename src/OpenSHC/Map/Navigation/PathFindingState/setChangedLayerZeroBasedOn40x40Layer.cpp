@@ -10,7 +10,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049AF50
         void PathFindingState::setChangedLayerZeroBasedOn40x40Layer(uint flag_and_offset)
         {
-            if ((this->field10_0x28 == 0) && (flag_and_offset == 0)) {
+            if ((this->field_0x28 == 0) && (flag_and_offset == 0)) {
                 int _row = DAT_TileMapState::instance.someIndex;
                 if (_row <= (int)DAT_TileMapState::instance.someLimit) {
                     int _index10 = _row * 10;
@@ -128,7 +128,7 @@ namespace Map {
                 DAT_TileMapState::instance.someYLikeLimit = 0;
                 return;
             }
-            this->field10_0x28 = 0;
+            this->field_0x28 = 0;
             this->mappingYRelated = 0;
             this->yLimit = 399;
             DAT_TileMapState::instance.someIndex = 0;

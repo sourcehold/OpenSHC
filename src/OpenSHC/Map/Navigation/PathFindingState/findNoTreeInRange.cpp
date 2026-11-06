@@ -35,7 +35,8 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (399 < ySpace || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (399 < ySpace || 399 < y
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return FALSE;
             }
             this->calculations = this->calculations + 1;
@@ -49,8 +50,10 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchQueue.currentDistance;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
+                = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
@@ -82,8 +85,7 @@ namespace Map {
                                  */
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[_candidate]
-                                    = (short)this->searchGeneration;
+                                DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .short_.yOffset

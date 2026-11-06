@@ -15,7 +15,8 @@ namespace Map {
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497180
-        dword PathFindingState::findNextTileByModuloAmongPreviousSearchNotOnDefensiveStructure(int modulo, int ySpace, int y)
+        dword PathFindingState::findNextTileByModuloAmongPreviousSearchNotOnDefensiveStructure(
+            int modulo, int ySpace, int y)
         {
             int _generation = DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]];
             int iVar1 = DAT_TribesState::instance.ALG_ResultTileIndex;
@@ -28,7 +29,8 @@ namespace Map {
                   manhatten distance
                  */
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0 && 0 < _distance) {
-                    int _absX = abs(_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile - ySpace);
+                    int _absX
+                        = abs(_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile - ySpace);
                     if ((_absX + abs(_tileY - y)) % modulo == 0 && _distance < 4000)
                         break;
                 }

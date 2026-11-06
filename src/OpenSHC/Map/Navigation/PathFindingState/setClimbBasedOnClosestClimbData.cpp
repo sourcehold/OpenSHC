@@ -29,7 +29,7 @@ namespace Map {
             _minDistance = 1000;
             _climbData2 = 0;
             _downOrUp = 0;
-            if (this->field63_0xc0 == 0) {
+            if (this->field_0xc0 == 0) {
                 return 200;
             }
             int _climbDataCounter = 1;

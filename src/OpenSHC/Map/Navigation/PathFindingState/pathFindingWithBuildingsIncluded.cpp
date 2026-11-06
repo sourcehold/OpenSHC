@@ -76,11 +76,13 @@ namespace Map {
             int _currentY;
             uint _logical;
             int _direction;
-            if (399 < ySpace || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (399 < ySpace || 399 < y
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return FALSE;
             }
             if (x2 != 0xffffffff
-                && (399 < x2 || 399 < y2 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0')) {
+                && (399 < x2 || 399 < y2
+                    || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0')) {
                 return FALSE;
             }
             if (zeroMeansResetAlgorithm == 0) {
@@ -97,11 +99,11 @@ namespace Map {
             this->DAT_Ass = this->DAT_Ass + 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)ySpace;
-            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = (short)this->searchQueue.currentDistance;
-            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]]
-                = (short)this->searchGeneration;
+            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (x2 == 0xffffffff) {
                 _tile2 = 0;
             } else {
@@ -124,8 +126,8 @@ namespace Map {
                     _buildingID = (int)DAT_TileMapState::instance.BuildingLayer[_currentTile];
                     _logical = DAT_TileMapState::instance.LogicLayer[_currentTile];
                     for (_direction = 0; _direction < 8; _direction++) {
-                        _nextTileOption
-                            = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction] + _currentTile;
+                        _nextTileOption = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction]
+                            + _currentTile;
                         /*
                           0x4a5014b1 == check against walkable tiles including keep, walls, and gatehouses; only the
                           cardinal (even) directions may enter a tileUnk without a path linkage bit
@@ -137,18 +139,20 @@ namespace Map {
                                 || ((_direction & 1) == 0
                                     && (_nextLogical = DAT_TileMapState::instance.LogicLayer[_nextTileOption],
                                         (_nextLogical & 0x4a5014b1) == 0)
-                                    && _buildingID == 0 && DAT_TileMapState::instance.BuildingLayer[_nextTileOption] == 0
+                                    && _buildingID == 0
+                                    && DAT_TileMapState::instance.BuildingLayer[_nextTileOption] == 0
                                     && ((_logical & 0x100) == 0 || (_nextLogical & 0x100) == 0)
                                     && ((_logical & 0x100) != 0 || (_nextLogical & 0x100) != 0)))) {
                             DAT_TileMapState::instance.CertainPathLayer[_nextTileOption]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[_nextTileOption]
-                                = (short)this->searchGeneration;
+                            DAT_TileMapState::instance.WalkLayer[_nextTileOption] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.xOffset
                                 + (short)_currentX;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
                                 + (short)_currentY;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _nextTileOption;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;

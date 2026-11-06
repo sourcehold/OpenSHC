@@ -41,7 +41,7 @@ namespace Map {
                 }
             }
             this->searchQueue.pathPlanIndex = 0;
-            this->field43_0x7c = 1;
+            this->field_0x7c = 1;
             if (this->climbIsIllegal == 0 && this->allAssassinsUnk == 0
                 && (BVar3 = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::tracePathPlanToDestinationViaUnoccupiedTiles,
@@ -51,7 +51,7 @@ namespace Map {
                 return (dword)(this->searchQueue.pathPlanIndex);
             }
             this->DAT_Hard = this->DAT_Hard + 1;
-            this->field43_0x7c = 0;
+            this->field_0x7c = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                 DAT_DirectionAlgorithmState::ptr)(this->unitX, this->unitY, this->destinationX, this->destinationY);
             int iVar4 = (DAT_DirectionAlgorithmState::instance.distanceHigh + 4)
@@ -103,7 +103,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::traceAndCommitPathPlan, this)(
                 this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY), iVar4);
-            if ((param_2 == 0) && (this->field49_0x94 != 0)) {
+            if ((param_2 == 0) && (this->field_0x94 != 0)) {
                 this->searchQueue.pathPlanIndex = 0;
                 iVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed, this)(

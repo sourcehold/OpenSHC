@@ -221,7 +221,7 @@ namespace Map {
                                     = DAT_TileMapState::instance.DefaultHeightLayer[iVar9];
                                 DAT_TileMapState::instance.DamageLayer[iVar9] = 0;
                                 DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-                                DAT_TileMapState::instance.field204_0x554a30 = 1;
+                                DAT_TileMapState::instance.field_0x554a30 = 1;
                                 *local_18 = iVar8 + sVar3;
                                 *local_14 = (short)DAT_TerrainDefinedData::instance
                                                 .clockwiseCardinalTranslationMatrix[_direction]

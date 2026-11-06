@@ -29,7 +29,8 @@ namespace Map {
                     if (_distance > extraDistance + 0xc) {
                         return (dword)(0);
                     }
-                    int _absX = abs(_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile - ySpace);
+                    int _absX
+                        = abs(_tile - DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile - ySpace);
                     if ((_absX + abs(_tileY - y)) % param_1 == 0 && _distance < 4000) {
                         dword dVar1 = this->searchQueue.tilesQueue[_index];
                         DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[_index];
