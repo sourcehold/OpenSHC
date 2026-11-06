@@ -263,7 +263,7 @@ namespace Synchrony {
         undefined4 skirmishCurrentAdvantageBalance; // 0x001072E4 length: 4
         int field_0x1072e8; // 0x001072E8 length: 4
         int field_0x1072ec; // 0x001072EC length: 4
-        undefined4 chatScrollOffset; // 0x001072F0 length: 4
+        int chatScrollOffset; // 0x001072F0 length: 4
         BOOLEnum reparseMaps; // 0x001072F4 length: 4
         int mapExistenceAckCountdown; // 0x001072F8 length: 4
         int DAT_MapSelectionScrollOffset; // 0x001072FC length: 4

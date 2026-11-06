@@ -3,7 +3,7 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/string-literals.hpp"
 
-#include "OpenSHC/Globals/DAT_00ec0840.hpp"
+#include "OpenSHC/Globals/DAT_ARRAY_00ec0840.hpp"
 #include "OpenSHC/Globals/DAT_ARRAY_00ed26d0.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/INT_00ed3110.hpp"
@@ -19,7 +19,7 @@ namespace UI {
         BOOLEnum topDown = FALSE;
         INT_00ed3110::instance = 1;
         for (int line = 0; line < 600; ++line) {
-            DAT_00ec0840::instance[line].count = 0;
+            DAT_ARRAY_00ec0840::instance[line].count = 0;
         }
         for (int marker = 1; marker < 21; ++marker) {
             DAT_ARRAY_00ed26d0::instance[marker].x = 64;
@@ -92,9 +92,9 @@ namespace UI {
                                 DAT_ARRAY_00ed26d0::instance[pixel].x = x;
                             }
                         }
-                        DAT_00ec0840::instance[row].type[count] = 40 - color;
-                        DAT_00ec0840::instance[row].x[count] = start;
-                        DAT_00ec0840::instance[row].width[count] = runWidth;
+                        DAT_ARRAY_00ec0840::instance[row].type[count] = 40 - color;
+                        DAT_ARRAY_00ec0840::instance[row].x[count] = start;
+                        DAT_ARRAY_00ec0840::instance[row].width[count] = runWidth;
                         ++count;
                     }
                     ++x;
@@ -102,7 +102,7 @@ namespace UI {
                         break;
                     }
                 }
-                DAT_00ec0840::instance[row].count = count;
+                DAT_ARRAY_00ec0840::instance[row].count = count;
                 pixels += 800;
             }
         }

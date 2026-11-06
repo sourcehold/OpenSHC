@@ -73,6 +73,8 @@ src/OpenSHC/Map/Buildings/UpdateStables.cpp
 src/OpenSHC/Map/Buildings/UpdateArmorersWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateFletchersWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdatePoleturnersWorkshop.cpp
+src/OpenSHC/UI/MenuItems/ChooseRandomNumberOfEnemies/MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main.cpp
+src/OpenSHC/UI/MenuItems/MapEditorLandscaping/MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons.cpp
 src/OpenSHC/Map/Buildings/UpdateBlacksmithsWorkshop.cpp
 src/OpenSHC/Map/Buildings/UpdateBakery.cpp
 src/OpenSHC/Map/Buildings/UpdateInn.cpp
@@ -97,6 +99,8 @@ src/OpenSHC/Map/Buildings/UpdateGoodBuildingMaypole.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingDungeon.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingGallows.cpp
 src/OpenSHC/Map/Buildings/UpdateBadBuildingBurningStake.cpp
+src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_MercenaryPostPortraits.cpp
+src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemActionHandler_BuildingAndStatusMenu_BarrackUnitPortraits.cpp
 src/OpenSHC/UI/Rendering/ButtonGmData/getPictureNumberInGm.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_EngineerAndMonkPortraits.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_TunnelerPortrait.cpp
@@ -104,6 +108,8 @@ src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAn
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_BarracksWeaponAvailability.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GeneralButtonRender.cpp
 src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
+src/OpenSHC/UI/Helpers/SetTribesPatrolButtonPressed.cpp
+src/OpenSHC/UI/MenuItems/BuildMenu/MenuItemActionHandler_BuildMenu_UnitActionButtons.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose.cpp

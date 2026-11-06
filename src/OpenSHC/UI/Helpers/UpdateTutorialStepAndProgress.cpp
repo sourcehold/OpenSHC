@@ -22,6 +22,7 @@
 #include "OpenSHC/Globals/DAT_00df5588.hpp"
 #include "OpenSHC/Globals/DAT_00df558c.hpp"
 #include "OpenSHC/Globals/DAT_00df5590.hpp"
+#include "OpenSHC/Globals/DAT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/DAT_FileDoesntExist.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
@@ -38,7 +39,6 @@
 #include "OpenSHC/Globals/INT_00df5584.hpp"
 #include "OpenSHC/Globals/INT_00df5650.hpp"
 #include "OpenSHC/Globals/INT_00df5654.hpp"
-#include "OpenSHC/Globals/INT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/TUT_RotateMapHappened.hpp"
 
 namespace OpenSHC {
@@ -48,7 +48,7 @@ namespace UI {
     void Helpers::UpdateTutorialStepAndProgress()
     {
         int const wasComplete = DAT_00df5560::instance;
-        if (INT_DisableTutorialRestrictions::instance
+        if (DAT_DisableTutorialRestrictions::instance
             && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX
             && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE) {
             return;
@@ -122,7 +122,7 @@ namespace UI {
             }
             if (fade >= 32) {
                 ++DAT_TutorialCurrentStep::instance;
-                if (INT_DisableTutorialRestrictions::instance) {
+                if (DAT_DisableTutorialRestrictions::instance) {
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
                         DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
                 } else {
@@ -146,7 +146,7 @@ namespace UI {
         if (DAT_00df5560::instance) {
             return;
         }
-        if (INT_DisableTutorialRestrictions::instance || DAT_00df5540::instance == 2) {
+        if (DAT_DisableTutorialRestrictions::instance || DAT_00df5540::instance == 2) {
             return;
         }
 
