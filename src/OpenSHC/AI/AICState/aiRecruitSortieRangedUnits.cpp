@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -38,9 +39,13 @@ namespace AI {
 
         int buildingID;
         if (unitType < 70)
-            buildingID = DAT_GameState::instance.playerDataArray[playerID].barracks.id;
+            buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                             .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
+                             .id;
         else
-            buildingID = DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id;
+            buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                             .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                             .id;
         if (buildingID == 0)
             return;
 

@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -23,7 +24,9 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        int guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int guildID = DAT_GameState::instance.playerDataArray[playerID]
+                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                          .id;
         if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
             return;
         if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] < 30)
@@ -32,7 +35,9 @@ namespace AI {
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != Map::Buildings::BT_ENGINEERSGUILD)
             return;
-        int smelterID = DAT_GameState::instance.playerDataArray[playerID].oilSmelter.id;
+        int smelterID = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_OILSMELTER]
+                            .id;
         if (smelterID <= 0)
             return;
         if (DAT_BuildingsState::instance.buildings[smelterID].buildingType != Map::Buildings::BT_OILSMELTER)
@@ -54,8 +59,11 @@ namespace AI {
         int tribeID = MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(
             playerID, amount, FALSE);
         int unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::nonEuroRecruit, DAT_UnitsState::ptr)(
-            Map::Units::UT_E_ENGINEER, DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id, playerID,
-            0);
+            Map::Units::UT_E_ENGINEER,
+            DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                .id,
+            playerID, 0);
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
         if (unitID == 0)
             return;

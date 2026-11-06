@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -94,8 +95,12 @@ namespace AI {
             }
 
             DAT_TribesState::instance.tribes[tribeID].targetBuildingID = 0;
-            int destinationX = DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
-            int destinationY = DAT_GameState::instance.playerDataArray[targetPlayer].campground.yEntry;
+            int destinationX = DAT_GameState::instance.playerDataArray[targetPlayer]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .xEntry;
+            int destinationY = DAT_GameState::instance.playerDataArray[targetPlayer]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .yEntry;
             if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID,
                     DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX)
                 == FALSE)
@@ -121,9 +126,12 @@ namespace AI {
                 if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0)
                     destinationTile = DAT_ViewportRenderState::instance
                                           .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer]
-                                                  .campground.yEntry]
+                                                  .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                                  .yEntry]
                                           .addXgetTile
-                        + DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
+                        + DAT_GameState::instance.playerDataArray[targetPlayer]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .xEntry;
             } else {
                 destinationTile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
                     + DAT_ViewportRenderState::instance
@@ -131,11 +139,14 @@ namespace AI {
                           .addXgetTile;
             }
         } else {
-            destinationTile
-                = DAT_ViewportRenderState::instance
-                      .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer].campground.yEntry]
-                      .addXgetTile
-                + DAT_GameState::instance.playerDataArray[targetPlayer].campground.xEntry;
+            destinationTile = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer]
+                                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                          .yEntry]
+                                  .addXgetTile
+                + DAT_GameState::instance.playerDataArray[targetPlayer]
+                      .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                      .xEntry;
         }
 
         if (destinationTile == 0)

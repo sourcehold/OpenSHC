@@ -8,6 +8,7 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -35,7 +36,9 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
         int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
-        int guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int guildID = DAT_GameState::instance.playerDataArray[playerID]
+                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                          .id;
         if (guildID <= 0)
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != OpenSHC::Map::Buildings::BT_ENGINEERSGUILD)

@@ -7,6 +7,7 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -97,9 +98,15 @@ namespace AI {
                 recruitDiggingUnit = 0;
 
             if (recruitDiggingUnit) {
-                if (DAT_GameState::instance.playerDataArray[playerID].barracks.id != 0)
+                if (DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
+                        .id
+                    != 0)
                     unitType = (UnitType)this->aics[aicIndex].DefDiggingUnit;
-                else if (DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id != 0)
+                else if (DAT_GameState::instance.playerDataArray[playerID]
+                             .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                             .id
+                    != 0)
                     unitType = (UnitType)this->aics[aicIndex].DefDiggingUnit;
                 else
                     return;
@@ -139,19 +146,29 @@ namespace AI {
 
             int buildingID;
             if (unitType == OpenSHC::Map::Units::UT_E_ENGINEER)
-                buildingID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+                buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                 .id;
             else if (unitType == OpenSHC::Map::Units::UT_E_LADDER)
-                buildingID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+                buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                 .id;
             else if (unitType == OpenSHC::Map::Units::UT_TUNNELER)
-                buildingID = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuild.id;
+                buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_TUNNELERSGUILD]
+                                 .id;
             else if (unitType == OpenSHC::Map::Units::UT_E_MONK)
                 buildingID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
                     DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_CATHEDRAL);
             else if (unitType < 70)
-                buildingID = DAT_GameState::instance.playerDataArray[playerID].barracks.id;
+                buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
+                                 .id;
             else
-                buildingID = DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id;
+                buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                                 .id;
             if (buildingID == 0)
                 return;
 

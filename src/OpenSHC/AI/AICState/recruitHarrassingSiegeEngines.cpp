@@ -7,6 +7,7 @@
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -40,7 +41,9 @@ namespace AI {
     void AICState::recruitHarrassingSiegeEngines(int playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        int engineersGuild = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int engineersGuild = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                 .id;
 
         if (aiType == 0) {
             return;

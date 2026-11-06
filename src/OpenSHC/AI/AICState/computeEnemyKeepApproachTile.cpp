@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -20,8 +21,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE200
     void AICState::computeEnemyKeepApproachTile(int playerID)
     {
-        int keepX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
-        int keepY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
+        int keepX = DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .xEntry;
+        int keepY = DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .yEntry;
         this->aiBorderTilesIndex = 0;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             8000, '\0', this->aiBorderTiles);

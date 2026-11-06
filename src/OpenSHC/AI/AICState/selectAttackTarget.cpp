@@ -6,6 +6,7 @@
 #include "OpenSHC/AI/AIC/AITargetChoiceInt.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -32,11 +33,15 @@ namespace AI {
         int selectedPlayerID = 0;
 
         int aicIndex = aiType - 1;
-        int fromX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
+        int fromX = DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .xEntry;
         int lowestDistance = 10000;
         int highestGold = 0;
         int lowestPoints = 1000000;
-        int fromY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
+        int fromY = DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .yEntry;
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::computeNervousness, this)(playerID);
 
@@ -76,8 +81,13 @@ namespace AI {
             }
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[i].campground.xEntry,
-                DAT_GameState::instance.playerDataArray[i].campground.yEntry, fromX, fromY);
+                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[i]
+                                                      .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                                      .xEntry,
+                DAT_GameState::instance.playerDataArray[i]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                    .yEntry,
+                fromX, fromY);
 
             int targetChoice = this->aics[aicIndex].TargetChoice;
             if (targetChoice == OpenSHC::AI::AIC::AITC_PLAYER) {
@@ -124,8 +134,14 @@ namespace AI {
                 }
 
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                    DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[i].campground.xEntry,
-                    DAT_GameState::instance.playerDataArray[i].campground.yEntry, fromX, fromY);
+                    DAT_DirectionAlgorithmState::ptr)(
+                    DAT_GameState::instance.playerDataArray[i]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .xEntry,
+                    DAT_GameState::instance.playerDataArray[i]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .yEntry,
+                    fromX, fromY);
                 if (DAT_DirectionAlgorithmState::instance.distanceHigh <= lowestDistance) {
                     lowestDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                     selectedPlayerID = i;

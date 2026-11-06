@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -102,31 +103,46 @@ namespace AI {
             allowWells = 0;
         }
 
-        if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                .id
+            == 0) {
             allowFletchers = 0;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noWoodTracker > 36) {
             allowFletchers = 0;
         }
-        if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                .id
+            == 0) {
             allowPoleturners = 0;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noWoodTracker > 36) {
             allowPoleturners = 0;
         }
-        if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                .id
+            == 0) {
             allowBlacksmiths = 0;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noIronTracker > 36) {
             allowBlacksmiths = 0;
         }
-        if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                .id
+            == 0) {
             allowArmourers = 0;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noIronTracker > 36) {
             allowArmourers = 0;
         }
-        if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                .id
+            == 0) {
             allowTanners = 0;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].someResourceCounter > 36) {
