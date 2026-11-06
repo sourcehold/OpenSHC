@@ -22,8 +22,9 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0043F6A0
     void StatusMenus::RenderStatusMenu_Population()
     {
-        int const player = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        // top first, then the player and x (player first: quick_diff 0.9638 -> 0.8913)
         int const top = DAT_MenuHandlerState::instance.y + 447;
+        int const player = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         int const x = DAT_MenuHandlerState::instance.x;
         // the graph shows the last 300 months
         int months = DAT_GameState::instance.mapAndTime.populationIndex;
@@ -33,12 +34,14 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
             DAT_TextureRenderCoreObject::ptr)(1, x + 14, DAT_MenuHandlerState::instance.y + 489);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+        // y then x for the title (in the call: quick_diff 0.9638 -> 0.8693; x first: 0.9512)
+        int const titleY = DAT_MenuHandlerState::instance.y + 467;
+        int const titleX = DAT_MenuHandlerState::instance.x + 25;
         // "Population"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 3),
-            DAT_MenuHandlerState::instance.x + 25, DAT_MenuHandlerState::instance.y + 467, OpenSHC::Text::TTA_LEFT, 0,
-            17, FALSE, 0);
+            titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
         // the axes, three pixels thick
         int const bottom = top + 126;
         int const right = x + 493;
@@ -102,13 +105,10 @@ namespace UI {
             0, x + 180, top + 120, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
         // a year label every five years
         for (int label = 0; label <= 5; ++label) {
-            int firstYear = (DAT_GameState::instance.mapAndTime.populationIndex - 300) / 12;
-            if (firstYear < 0) {
-                firstYear = 0;
-            }
+            // the first year shown, at least 0, through max() (an if: quick_diff 0.9638 -> 0.9384)
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                firstYear + label * 5, label * 1475 / 25 + 190 + x, top + 130, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE,
-                0);
+                max(0, (DAT_GameState::instance.mapAndTime.populationIndex - 300) / 12) + label * 5,
+                label * 1475 / 25 + 190 + x, top + 130, OpenSHC::Text::TTA_LEFT, 0, 19, FALSE, 0);
         }
         // one bar per month
         if (months <= 300) {

@@ -13601,7 +13601,7 @@ SHC_3BB0A8C1_0x0043F2C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043F2F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043F6A0 | 82.4% | Register naming differs
+SHC_3BB0A8C1_0x0043F6A0 | 93.8% | Bar loop: three scratch registers rotate; the year sum is an lea
 
 SHC_3BB0A8C1_0x0043F930 | 0.0% | Pending
 
