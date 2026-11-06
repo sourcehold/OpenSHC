@@ -27521,7 +27521,7 @@ SHC_3BB0A8C1_0x004B8B0C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B8B10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B8BF0 | 79.5% | gynt's draft, mechanical pass; structure
+SHC_3BB0A8C1_0x004B8BF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B9020 | 100.0% | Reimplemented
 
@@ -30495,7 +30495,7 @@ SHC_3BB0A8C1_0x004BEC10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004BEC40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004BF1D0 | 81.2% | gynt's draft, mechanical pass; structure
+SHC_3BB0A8C1_0x004BF1D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BF684 | 0.0% | Pending
 
@@ -35929,7 +35929,7 @@ SHC_3BB0A8C1_0x004D8250 | 42.4% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004D839E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D8570 | 64.5% | gynt's draft, mechanical pass; structure
+SHC_3BB0A8C1_0x004D8570 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D89CC | 0.0% | Pending
 
