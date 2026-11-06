@@ -9,7 +9,7 @@ namespace Map {
         void TribesState::importStoredInfoFromSlot0(undefined4 param_1, int tribeID)
         {
             if (this->tribeCopiedToSlot0) {
-                this->tribes[tribeID].field162_0x2be = this->tribes[0].field162_0x2be;
+                this->tribes[tribeID].field_0x2be = this->tribes[0].field_0x2be;
                 this->tribes[tribeID].someUnitID = this->tribes[0].someUnitID;
                 this->tribes[tribeID].someUnitUID = this->tribes[0].someUnitUID;
                 this->tribes[tribeID].someTile = this->tribes[0].someTile;

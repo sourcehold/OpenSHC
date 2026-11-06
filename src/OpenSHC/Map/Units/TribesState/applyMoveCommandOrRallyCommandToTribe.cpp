@@ -41,7 +41,7 @@ namespace Map {
                 if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
                     && !DAT_UnitsState::instance.units[_unitID].dying
                     && DAT_UnitsState::instance.units[_unitID].usingTeleport == 0
-                    && DAT_UnitsState::instance.units[_unitID].field300_0x413 == 0
+                    && DAT_UnitsState::instance.units[_unitID].field_0x413 == 0
                     && DAT_UnitsState::instance.units[_unitID].state.generic != Map::Units::States::US_MELEE_ATTACK
                     && DAT_UnitsState::instance.units[_unitID].moveableUnk != 0
                     && DAT_UnitsState::instance.units[_unitID].moveRelatedFlag != 1) {

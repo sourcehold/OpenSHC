@@ -22,10 +22,10 @@ namespace Map {
             this->tribes[tribeID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
             DAT_GameCore::instance.uniqueGameObjectTracker = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
             this->tribes[tribeID].tribeType = 0;
-            this->tribes[tribeID].field18_0x1c = 0;
-            this->tribes[tribeID].field19_0x1e = 0;
+            this->tribes[tribeID].field_0x1c = 0;
+            this->tribes[tribeID].field_0x1e = 0;
             this->tribes[tribeID].tribeBehaviorType = 0;
-            this->tribes[tribeID].field29_0x30 = 0;
+            this->tribes[tribeID].field_0x30 = 0;
             this->tribes[tribeID].selectionTargetUnitID = 0;
             this->tribes[tribeID].size = 0;
             return tribeID;

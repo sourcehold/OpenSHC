@@ -19,10 +19,10 @@ namespace Map {
             int const _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
             uint const x0 = DAT_UnitsState::instance.units[_targetUnitID].x;
             uint const y0 = DAT_UnitsState::instance.units[_targetUnitID].y;
-            for (int candidate = 0; candidate < (int)_countof(DAT_UnitSelectionDefinedData::instance.field1608_0xcc4);
+            for (int candidate = 0; candidate < (int)_countof(DAT_UnitSelectionDefinedData::instance.field_0xcc4);
                 ++candidate) {
-                uint const x1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[candidate].x + x0;
-                uint const y1 = DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[candidate].y + y0;
+                uint const x1 = DAT_UnitSelectionDefinedData::instance.field_0xcc4[candidate].x + x0;
+                uint const y1 = DAT_UnitSelectionDefinedData::instance.field_0xcc4[candidate].y + y0;
                 if (x1 <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 && y1 <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
                     && DAT_ViewportRenderState::instance
                             .DAT_BinaryTileMap400x400[y1 * OpenSHC::Map::MC_MAP_XY_LIMIT + x1]

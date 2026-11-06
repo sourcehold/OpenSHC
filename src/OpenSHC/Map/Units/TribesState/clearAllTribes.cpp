@@ -14,8 +14,8 @@ namespace Map {
         void TribesState::clearAllTribes()
         {
             this->clans = 0;
-            this->field2_0x8 = 1;
-            this->field9_0x24 = 0;
+            this->field_0x8 = 1;
+            this->field_0x24 = 0;
             for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < (int)_countof(this->tribes);
                 ++DAT_CurrentTribeID::instance) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
