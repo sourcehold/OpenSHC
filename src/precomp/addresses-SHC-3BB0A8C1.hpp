@@ -97409,7 +97409,7 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B58 = 0x00EB9B58,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B60 = 0x00EB9B60,
     // label: DAT_FinalResultsOrderByColumn
     // location:
@@ -97441,7 +97441,7 @@ enum {
     SHC_3BB0A8C1_0x00EC0838 = 0x00EC0838,
     // type: /int
     SHC_3BB0A8C1_0x00EC083C = 0x00EC083C,
-    // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1
+    // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1[600]
     SHC_3BB0A8C1_0x00EC0840 = 0x00EC0840,
     // type: /int[40]
     SHC_3BB0A8C1_0x00ED2630 = 0x00ED2630,
@@ -97519,7 +97519,7 @@ enum {
     SHC_3BB0A8C1_0x00ED3118 = 0x00ED3118,
     // type: /dword
     SHC_3BB0A8C1_0x00ED311C = 0x00ED311C,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3120 = 0x00ED3120,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3124 = 0x00ED3124,
@@ -97664,7 +97664,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31E0 = 0x00ED31E0,
     // label: DAT_CurrentTribeID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EE0FB0 = 0x00EE0FB0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE0FB4 = 0x00EE0FB4,

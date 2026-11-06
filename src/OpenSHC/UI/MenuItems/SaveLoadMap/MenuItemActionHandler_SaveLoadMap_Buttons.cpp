@@ -128,7 +128,7 @@ namespace UI {
                     != 0) {
                     // One resolve call per arm and != tests with the else arm last: the original lays the chain out
                     // this way.
-                    if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2[0] != 0) {
+                    if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2 != 0) {
                         strcpy(fileName,
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)());

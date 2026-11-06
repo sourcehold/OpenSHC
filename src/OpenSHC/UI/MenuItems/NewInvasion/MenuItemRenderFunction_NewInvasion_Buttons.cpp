@@ -90,7 +90,7 @@ namespace UI {
                                 .header.month
                             + 12,
                         DAT_ButtonW::instance / 2 + DAT_ButtonX::instance, DAT_ButtonY::instance + 6,
-                        OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 18, FALSE);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
                     return;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(

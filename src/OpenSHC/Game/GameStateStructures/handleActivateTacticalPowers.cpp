@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Audio/SFX/SoundEffectID.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -64,7 +65,7 @@ namespace Game {
             int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             dword const tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
-                DAT_TribesState::ptr)(1, x, y, playerID, unitType, unitCount);
+                DAT_TribesState::ptr)((AI::Tribes::AITribeType)1, x, y, playerID, unitType, unitCount);
             if ((int)tribeID > 0) {
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
             }

@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
@@ -39,7 +40,7 @@ namespace UI {
                 if (DAT_EnoughGoldForRequestedUnit::instance) {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                    if (MACRO_CALL(Helpers_Func::CheckGoldResource)(unitType)) {
+                    if (MACRO_CALL(Helpers_Func::CheckGoldResource)((Map::Units::UnitType)unitType)) {
                         ButtonGmData* const buttonGmData
                             = &DAT_UIButtonDefinedData::instance
                                    .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance];

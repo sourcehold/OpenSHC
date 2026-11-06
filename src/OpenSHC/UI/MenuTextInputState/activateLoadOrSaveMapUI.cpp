@@ -18,7 +18,7 @@ namespace OpenSHC {
 namespace UI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00493980
-    void MenuTextInputState::activateLoadOrSaveMapUI(int loadOrSaveMap)
+    void MenuTextInputState::activateLoadOrSaveMapUI(MenuModalType loadOrSaveMap)
     {
         DAT_MouseState::instance.waitCursorToggle = 1;
         MACRO_CALL(OpenSHC::UI::Helpers_Func::SetCursorDependingOnProgramState)();
@@ -46,7 +46,7 @@ namespace UI {
         }
         this->lastListClickTime = 0;
         this->lastClickedListIndex = -1;
-        this->DAT_ArrayOfMapU3EndInt2[0] = 0;
+        this->DAT_ArrayOfMapU3EndInt2 = 0;
         DAT_MouseState::instance.waitCursorToggle = 0;
         this->fileListVisibleRowCount = 16;
         if (loadOrSaveMap == OpenSHC::UI::Enums::MMT_LOAD_MAP) {
