@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
@@ -539,29 +540,59 @@ namespace AI {
             if (mapper == Commands::M_MAPPER_STORES) {
                 // stockpiles are placed next to each other at the campground
                 if (stockpiles == 0) {
-                    y = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry - 11;
-                    x = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry + 9;
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 11;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 9;
                 } else if (stockpiles == 1) {
-                    y = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry - 11;
-                    x = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry + 4;
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 11;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 4;
                 } else if (stockpiles == 2) {
-                    y = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry - 6;
-                    x = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry + 9;
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 6;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 9;
                 }
             } else {
                 if (mapper == Commands::M_MAPPER_BARRACKS_ARAB || mapper == Commands::M_MAPPER_BARRACKS_EURO
                     || mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD
                     || mapper == Commands::M_MAPPER_CHURCH3) {
                     MACRO_CALL_MEMBER(AIVState_Func::findAppropriateGridLocationForBuilding, this)(
-                        DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5,
-                        DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5);
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .xEntry
+                            / 5,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .yEntry
+                            / 5);
                     if (this->buildingApproriateGridXPosition == -1) {
                         continue;
                     }
                 } else {
                     MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
-                        DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5,
-                        DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5);
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .xEntry
+                            / 5,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .yEntry
+                            / 5);
                     if (this->buildingApproriateGridXPosition == -1) {
                         continue;
                     }
@@ -611,9 +642,8 @@ namespace AI {
                     mapper, buildingSize);
             } else if (mapper == Commands::M_MAPPER_OIL_SMELTER) {
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                    playerID,
-                    DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
-                    DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
+                    playerID, DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
+                    DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
                     buildingSize);
             }
 
@@ -623,7 +653,7 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[placedID].field202_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[placedID].field_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
                 this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
