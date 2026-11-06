@@ -97319,7 +97319,7 @@ enum {
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0B20 = 0x00EB0B20,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB0B24 = 0x00EB0B24,
     // type: /int[48][4]
     SHC_3BB0A8C1_0x00EB0B28 = 0x00EB0B28,

@@ -47,11 +47,7 @@ namespace UI {
         undefined4 DAT_GenieVoiceActiveMenuVar; // 0x00000054 length: 4
         undefined4 DAT_MenuOptionsActionParameter; // 0x00000058 length: 4
         MenuModalTypeInt currentModalDialog; // 0x0000005C length: 4
-        MenuModalTypeInt modalDialog_2; // 0x00000060 length: 4
-        MenuModalTypeInt modalDialog_3; // 0x00000064 length: 4
-        MenuModalTypeInt modalDialog_4; // 0x00000068 length: 4
-        MenuModalTypeInt modalDialog_5; // 0x0000006C length: 4
-        MenuModalTypeInt modalDialog_6; // 0x00000070 length: 4
+        MenuModalTypeInt previousModalDialogs[5]; // 0x00000060 length: 20
         int fileListEntryCount; // 0x00000074 length: 4
         undefined4 fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
