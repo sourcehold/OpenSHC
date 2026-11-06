@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include "OpenSHC/AI/Siege/SiegeUnitCounts.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Scenario/BarracksRecruitabilityShort.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventExtra.hpp"
@@ -23,7 +22,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::AI::Siege::SiegeUnitCounts;
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::TradeableResourcesSection;
     using OpenSHC::Game::Scenario::BarracksRecruitabilityShort;
@@ -44,11 +42,11 @@ namespace Map {
         int SEC_StartingYear; // 0x00000080 length: 4
         int SEC_StartingMonth; // 0x00000084 length: 4
         int SEC_StartingResources[25]; // 0x00000088 length: 100
-        SiegeUnitCounts SEC_SiegeInformation; // 0x000000EC length: 80
+        int SEC_SiegeInformation[20]; // 0x000000EC length: 80
         SiegeGameModeRelatedSection SEC_Section1067; // 0x0000013C length: 28
         int SEC_StartingPopularity; // 0x00000158 length: 4
         short buildingAvailability[100]; // 0x0000015C length: 200
-        undefined4 buildingAvailabilityRowCount; // 0x00000224 length: 4
+        int buildingAvailabilityRowCount; // 0x00000224 length: 4
         short buildingAvailabilityRelatedFlags[380]; // 0x00000228 length: 760
         short buildingAvailabilityArray2[49]; // 0x00000520 length: 98
         BarracksRecruitabilityShort barracksRecruitability; // 0x00000582 length: 14
@@ -81,12 +79,12 @@ namespace Map {
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
         undefined4 flag; // 0x00013578 length: 4
-        undefined4 offset; // 0x0001357C length: 4
-        undefined4 indexStored; // 0x00013580 length: 4
+        int offset; // 0x0001357C length: 4
+        int indexStored; // 0x00013580 length: 4
         int selectedAbsoluteIndex; // 0x00013584 length: 4
         dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
-        undefined4 field57_0x13590; // 0x00013590 length: 4
+        undefined4 field_0x13590; // 0x00013590 length: 4
         undefined1 padding_0x13594[8]; // 0x00013594 length: 8
         undefined4 total; // 0x0001359C length: 4
         int unknownArray_01[1000]; // 0x000135A0 length: 4000
@@ -138,7 +136,7 @@ namespace Map {
 
         int sumUnitPoints();
 
-        void sumUnitCounts();
+        int sumUnitCounts();
 
         void sortEventsByDate();
 

@@ -69,9 +69,9 @@ namespace Text {
         if (!this->isTextHelpDialogMode) {
             return 1;
         }
-        this->field49_0x23964 = -1;
+        this->field_0x23964 = -1;
         this->currentLinkId = -1;
-        if (this->field51_0x2396c) {
+        if (this->field_0x2396c) {
             DAT_00df334c::instance = 1;
         }
         if (this->activeHelpHotspotIndex < 0) {
@@ -115,12 +115,12 @@ namespace Text {
                         xModify = this->lineLayoutTable[lineY].widthForCentering / 2;
                     }
                     hotspotIndexOffset = tokenStartIndex - currentHotspotIndex;
-                    if (this->field51_0x2396c < 0) {
+                    if (this->field_0x2396c < 0) {
                         this->activeHelpHotspotIndex = previousHotspotIndex + DAT_00df3348::instance;
                         if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                             this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
                     hotspotStepCountUnk = 0;
                     int xPos = this->dialogContentX + xModify;
@@ -245,13 +245,13 @@ namespace Text {
                                 previousHotspotIndex = currentHotspotIndex;
                                 currentHotspotIndex = tokenStartIndex;
                                 ++hotspotStepCountUnk;
-                                if (0 < this->field51_0x2396c && 2 <= hotspotStepCountUnk) {
+                                if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
                                     hotspotStepCountUnk = -10000;
                                     this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
                                     if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                         this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                     }
-                                    this->field51_0x2396c = 0;
+                                    this->field_0x2396c = 0;
                                 }
                             }
                             currentFontLineHeight = currentFontClass->lineHeight_0x14;
@@ -307,7 +307,7 @@ namespace Text {
                     isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__COLOUR__S__005a5824,
                         DAT_UserHelpDefinedData::instance
-                            .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
+                            .field_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
                     textMemIndex += 2;
                     textToRender.text = wideTextBuffer;
@@ -324,9 +324,9 @@ namespace Text {
                         colorGreen = 0xd2;
                         colorBlue = 0xa4;
                     } else {
-                        colorRed = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].r_0x4;
-                        colorGreen = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].g_0x8;
-                        colorBlue = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].b_0xc;
+                        colorRed = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].r_0x4;
+                        colorGreen = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].g_0x8;
+                        colorBlue = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].b_0xc;
                     }
                     textMemIndex += 2;
                     color = RGB(colorRed, colorGreen, colorBlue);
@@ -341,7 +341,7 @@ namespace Text {
                     isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__LINKCOLOUR__S__005a5804,
                         DAT_UserHelpDefinedData::instance
-                            .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
+                            .field_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
                     textMemIndex += 2;
                     textToRender.text = wideTextBuffer;
@@ -350,9 +350,9 @@ namespace Text {
                 if (interactionModeUnk == 1) {
                     int const colorIndex = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
                     textMemIndex += 2;
-                    linkColor = RGB(DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].r_0x4,
-                        DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].g_0x8,
-                        DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].b_0xc);
+                    linkColor = RGB(DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].r_0x4,
+                        DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].g_0x8,
+                        DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].b_0xc);
                 } else {
                     textMemIndex += 2;
                 }
@@ -499,23 +499,23 @@ namespace Text {
                     currentHotspotIndex = tokenStartIndex;
                     if (interactionModeUnk == 1) {
                         ++hotspotStepCountUnk;
-                        if (0 < this->field51_0x2396c && 2 <= hotspotStepCountUnk) {
+                        if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
                             hotspotStepCountUnk = -10000;
                             this->activeHelpHotspotIndex = hotspotIndexOffset + previousHotspotIndex;
                             if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                 this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
                     if (currentHotspotIndex == this->activeHelpHotspotIndex && interactionModeUnk == 1) {
                         hotspotIndexOffset = 0;
-                        if (this->field51_0x2396c < 0) {
+                        if (this->field_0x2396c < 0) {
                             this->activeHelpHotspotIndex = DAT_00df3348::instance + previousHotspotIndex;
                             if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                 this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                         hotspotStepCountUnk = 0;
                     }
@@ -555,13 +555,13 @@ namespace Text {
                         previousHotspotIndex = currentHotspotIndex;
                         currentHotspotIndex = tokenStartIndex;
                         ++hotspotStepCountUnk;
-                        if (0 < this->field51_0x2396c && 2 <= hotspotStepCountUnk) {
+                        if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
                             hotspotStepCountUnk = -10000;
                             this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
                             if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                 this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
                     currentFontLineHeight = currentFontClass->lineHeight_0x14;
@@ -593,16 +593,16 @@ namespace Text {
                     }
                 } else if (this->useAlternateHelpTab) {
                     DAT_00df3348::instance = hotspotIndexOffset;
-                    if (0 < this->field51_0x2396c && hotspotStepCountUnk == 1) {
+                    if (0 < this->field_0x2396c && hotspotStepCountUnk == 1) {
                         this->activeHelpHotspotIndex = hotspotIndexOffset + currentHotspotIndex;
                         if (this->activeHelpHotspotIndex > this->customHelpTextLength) {
                             this->activeHelpHotspotIndex = this->customHelpTextLength;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
                     if (!hotspotHandled && this->activeHelpHotspotIndex && DAT_00df334c::instance) {
                         --this->activeHelpHotspotIndex;
-                        this->field52_0x23970 = 0;
+                        this->field_0x23970 = 0;
                         DAT_TextManagerObject::instance.helpTextLinkActive = FALSE;
                         return TRUE;
                     }
@@ -634,13 +634,13 @@ namespace Text {
                     ++hotspotStepCountUnk;
                     previousHotspotIndex = currentHotspotIndex;
                     currentHotspotIndex = tokenStartIndex;
-                    if (0 < this->field51_0x2396c && 2 <= hotspotStepCountUnk) {
+                    if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
                         hotspotStepCountUnk = -10000;
                         this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
                         if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                             this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
                 }
                 if (leftPosition + textWidth > this->lineLayoutTable[lineY].rightBorder) {
@@ -664,13 +664,13 @@ namespace Text {
                                 previousHotspotIndex = currentHotspotIndex;
                                 currentHotspotIndex = tokenStartIndex + i;
                                 ++hotspotStepCountUnk;
-                                if (0 < this->field51_0x2396c && 2 <= hotspotStepCountUnk) {
+                                if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
                                     hotspotStepCountUnk = -10000;
                                     this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
                                     if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                         this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                     }
-                                    this->field51_0x2396c = 0;
+                                    this->field_0x2396c = 0;
                                 }
                             }
                             do {
@@ -686,12 +686,12 @@ namespace Text {
                             if (interactionModeUnk == 1) {
                                 if (isPlainTextTokenUnk) {
                                     hotspotIndexOffset = (i - currentHotspotIndex) + tokenStartIndex;
-                                    if (this->field51_0x2396c < 0) {
+                                    if (this->field_0x2396c < 0) {
                                         this->activeHelpHotspotIndex = DAT_00df3348::instance + previousHotspotIndex;
                                         if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                             this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                         }
-                                        this->field51_0x2396c = 0;
+                                        this->field_0x2396c = 0;
                                     }
                                     hotspotStepCountUnk = 0;
                                     int xPos = this->dialogContentX + centeringXOffset;
@@ -721,10 +721,10 @@ namespace Text {
                                     charXPos - this->helpContentScrollX, charYPos - this->helpContentScrollY,
                                     newCharXPos - charXPos, currentFontLineHeight + 2)) {
                                 if (isPlainTextTokenUnk) {
-                                    this->field49_0x23964 = tokenStartIndex + i;
+                                    this->field_0x23964 = tokenStartIndex + i;
                                     this->currentLinkId = currentLinkId;
                                 } else {
-                                    this->field49_0x23964 = tokenStartIndex;
+                                    this->field_0x23964 = tokenStartIndex;
                                 }
                             }
                         }
@@ -756,12 +756,12 @@ namespace Text {
                     if (interactionModeUnk == 1) {
                         hotspotStepCountUnk = 0;
                         hotspotIndexOffset = tokenStartIndex - currentHotspotIndex + i;
-                        if (this->field51_0x2396c < 0 && isPlainTextTokenUnk) {
+                        if (this->field_0x2396c < 0 && isPlainTextTokenUnk) {
                             this->activeHelpHotspotIndex = previousHotspotIndex + DAT_00df3348::instance;
                             if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
                                 this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
                 }
@@ -776,10 +776,10 @@ namespace Text {
                             oldCharPos - this->helpContentScrollX, charYPos - this->helpContentScrollY,
                             charXPos - oldCharPos, currentFontLineHeight + 2)) {
                         if (isPlainTextTokenUnk) {
-                            this->field49_0x23964 = i + tokenStartIndex;
+                            this->field_0x23964 = i + tokenStartIndex;
                             this->currentLinkId = currentLinkId;
                         } else {
-                            this->field49_0x23964 = tokenStartIndex;
+                            this->field_0x23964 = tokenStartIndex;
                         }
                     }
                 } else {

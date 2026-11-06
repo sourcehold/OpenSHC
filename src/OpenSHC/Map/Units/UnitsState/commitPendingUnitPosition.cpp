@@ -7,7 +7,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053BB10
         void UnitsState::commitPendingUnitPosition(int unitID)
         {
-            if (this->units[unitID].field105_0xe8) {
+            if (this->units[unitID].field_0xe8) {
                 this->units[unitID].tile = this->units[unitID].nextTileUnk;
                 this->units[unitID].x = this->units[unitID].mimicCurrentXPosition;
                 this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;

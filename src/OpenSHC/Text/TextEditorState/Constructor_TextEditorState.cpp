@@ -12,7 +12,7 @@ namespace Text {
     {
         this->isDialogStateInitialized = 0;
         this->helpDialogVariant = 0;
-        this->field48_0x23960 = 0;
+        this->field_0x23960 = 0;
         this->helpDialogSubMode = 0;
         this->useAlternateHelpTab = 0;
         this->customHelpTextLength = 0;

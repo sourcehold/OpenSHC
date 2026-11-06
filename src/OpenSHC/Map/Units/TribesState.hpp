@@ -8,11 +8,13 @@
 
 #pragma once
 
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 #include "OpenSHC/Map/Units/Tribe.hpp"
 #include "OpenSHC/Map/Units/UnitIDMovementDistancePair.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -25,6 +27,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using OpenSHC::AI::Tribes::AITribeType;
         using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Units::SomeTribeBehaviorType;
@@ -34,6 +37,7 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
         using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
+        using OpenSHC::Map::Units::States::UnitStateShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -43,14 +47,14 @@ namespace Map {
         public:
             undefined4 DAT_CurrentTribeID; // 0x00000000 length: 4
             int clans; // 0x00000004 length: 4
-            undefined4 field2_0x8; // 0x00000008 length: 4
+            undefined4 field_0x8; // 0x00000008 length: 4
             undefined4 ALG_ResultX; // 0x0000000C length: 4
             undefined4 ALG_ResultY; // 0x00000010 length: 4
             undefined4 ALG_ResultTileIndex; // 0x00000014 length: 4
-            undefined4 field6_0x18; // 0x00000018 length: 4
+            undefined4 field_0x18; // 0x00000018 length: 4
             BOOLEnum patrolButtonPressed; // 0x0000001C length: 4
             undefined4 rallyCount; // 0x00000020 length: 4
-            undefined4 field9_0x24; // 0x00000024 length: 4
+            undefined4 field_0x24; // 0x00000024 length: 4
             Tribe tribes[1250]; // 0x00000028 length: 1025000
             UnitIDMovementDistancePair someUnitIDMovementDistancePair[1001]; // 0x000FA410 length: 4004
             int someUnitIDArrayCount; // 0x000FB3B4 length: 4
@@ -79,7 +83,7 @@ namespace Map {
 
             void reassignOwnerForTribesOfBehaviorType2(int param_1, int param_2);
 
-            void swapTribeOwnership(int param_1, int param_2);
+            void swapTribeOwnership(int playerA, int playerB);
 
             BOOLEnum moveUnitToBehaviorTarget(int unitID, int param_2);
 
@@ -105,7 +109,7 @@ namespace Map {
 
             void applyTribeBehaviorType(int attackWave, SomeTribeBehaviorType tribeBehaviorType);
 
-            void updatePeasantSeatingAtBuilding(int param_1, int param_2, int param_3);
+            void updatePeasantSeatingAtBuilding(int buildingID, int peasantCountUnk, int resetAlwaysZeroUnk);
 
             BOOLEnum tribeCorrespondsWithUID(int tribeID, uint tribeUID);
 
@@ -117,7 +121,7 @@ namespace Map {
 
             void addUnitToSelected(int unitID);
 
-            BOOLEnum unitIsSelectedByPlayer(uint tribeID);
+            BOOLEnum unitIsSelectedByPlayer(uint unitID);
 
             void addUnitToTribe(uint unitID, int tribeID);
 
@@ -141,7 +145,7 @@ namespace Map {
 
             void setUnitStance(int tribeID, UnitStanceEnum unitStance);
 
-            void addRallyPoint(int section1016ID, short destinationX, short destinationY, int step);
+            void addRallyPoint(int tribeID, short destinationX, short destinationY, int step);
 
             void snapshotSelectionTribeAndComputeStance(int playerID);
 
@@ -149,17 +153,17 @@ namespace Map {
 
             void trimTribeToSize(undefined4 tribeID, int smallerSize);
 
-            void spawnUnitsForAITribe(
-                undefined4 param_1, int param_2, int param_3, int param_4, UnitType param_5, int param_6, int param_7);
+            void spawnUnitsForAITribe(AITribeType tribeType, int tileX, int tileY, int spawnOwnerUnk, UnitType unitType,
+                int unitCount, int ownerPlayerIndex);
 
             dword spawnUnitsIntoNewTribe(undefined4 counter, int tribeType, int x, int y, int playerID,
                 UnitType unitType, UnitType unitType2, int unitType1Count, int unitType2Count);
 
-            dword createTribeWithSpawnedUnit(
-                short someIndex, undefined4 tribeType, int x, int y, int playerID, UnitType unitType, int count);
+            int createTribeWithSpawnedUnit(
+                short someIndex, AITribeType tribeType, int x, int y, int playerID, UnitType unitType, int count);
 
-            dword spawnUnitsAroundLocation(
-                undefined4 param_1, int aroundX, int aroundY, int playerID, UnitType unitType, int count);
+            int spawnUnitsAroundLocation(
+                AITribeType tribeType, int aroundX, int aroundY, int playerID, UnitType unitType, int count);
 
             void clearAnimalSpawnLocationsUnk();
 
@@ -167,11 +171,11 @@ namespace Map {
 
             void storeLionXAndYInMapInfo(undefined4 x, undefined4 y);
 
-            void setRabbitSpawnXY(undefined4 x, undefined4 y);
+            void setRabbitSpawnXY(int x, int y);
 
             void setCamelSpawnXY(undefined4 x, undefined4 y);
 
-            BOOLEnum findRecentOrSignpostSpawnLocation(uint* param_1, uint* param_2);
+            BOOLEnum findRecentOrSignpostSpawnLocation(uint* _outX, uint* _outY);
 
             BOOLEnum hasAvailableSpawnSlotForWildlifeOrMercs();
 
@@ -183,20 +187,20 @@ namespace Map {
 
             void markTribeAsAnimalTribe(int param_1);
 
-            void flagTribesOfType(int param_1);
+            void flagTribesOfType(int tribeType);
 
-            void consumeFlaggedTribesOfType(int param_1, int param_2);
+            void consumeFlaggedTribesOfType(int tribeType, int maxTribesToConsume);
 
             void aiAssignNewUnitToTribe(int playerID, int unitType, int unitID);
 
-            BOOLEnum scatterTribeUnitsRandomly(int param_1);
+            BOOLEnum scatterTribeUnitsRandomly(int tribeID);
 
             void drawFlagsAndUnitDestinations(int tribeID);
 
             void upgradeTribeArrayLayoutForMapVersion(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            undefined4 updateTribeRallyFlags(int param_1);
+            BOOLEnum updateTribeRallyFlags(int tribeID);
 
             void unsetRallyRelatedFlagOnUnits(int tribeID);
 
@@ -204,16 +208,16 @@ namespace Map {
 
             int getFirstUnitInTribeThatIsOnXTerrain(int selectionID);
 
-            BOOLEnum tribeHasActiveLaddermanUnit(int param_1);
+            BOOLEnum tribeHasActiveLaddermanUnit(int tribeID);
 
-            BOOLEnum tribeContainsUnitThatCanClimb(int param_1);
+            BOOLEnum tribeContainsUnitThatCanClimb(int tribeID);
 
-            BOOLEnum selectionContainsHorses(int param_1);
+            BOOLEnum selectionContainsHorses(int tribeID);
 
             UnitType getMajorityArcherTypeEuropeanOrArabian(int selectionID);
 
             BOOLEnum applyMoveCommandOrRallyCommandToTribe(
-                int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint);
+                int tribeID, int x1, int y1, int isRallying, int storeAsRallyPoint);
 
             BOOLEnum assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType);
 
@@ -235,21 +239,21 @@ namespace Map {
 
             BOOLEnum anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg(int tribeID, int algTileFlag);
 
-            void applyMovementDistanceToUnitsInTribe(int param_1);
+            void applyMovementDistanceToUnitsInTribe(int tribeID);
 
-            void applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe(int param_1);
+            void applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe(int tribeID);
 
-            BOOLEnum isTribeFreeOfTunnelingUnits(int param_1, int param_2);
+            BOOLEnum isTribeFreeOfTunnelingUnits(int tribeID, int param_2);
 
             void setTargetUnitForTribe(int tribeID);
 
-            void setStateForAllTribeUnits(int param_1, undefined4 param_2);
+            void setStateForAllTribeUnits(int tribeID, UnitStateShort unitState);
 
-            void standUpAllTribeUnits(int param_1);
+            void standUpAllTribeUnits(int tribeID);
 
             BOOLEnum allUnitsReachedTheirDestination(int tribeID);
 
-            void removeAllTribeUnits(int param_1);
+            void removeAllTribeUnits(int tribeID);
 
             BOOLEnum addUnitToNewTribe(uint unitID);
 
@@ -267,11 +271,12 @@ namespace Map {
 
             BOOLEnum spawnDeerLionOrRabbit(int tribeID, int param_2, UnitType unitType);
 
-            BOOLEnum trySpawnAdditionalWildlifeForTribe(int param_1, int param_2, int param_3, int param_4);
+            BOOLEnum trySpawnAdditionalWildlifeForTribe(
+                int tribeID, int spawnIntervalTicks, int maxUnitsOfType, int unitType);
 
             void respawnDeer();
 
-            void spawnWildlifeOrMercAtAvailableSlot();
+            void spawnRabbitAtFirstFreeSpawnPoint();
 
             void upgradeMapTribesState(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
@@ -291,7 +296,7 @@ namespace Map {
             BOOLEnum giveTribeAnInstruction(
                 int tribeID, UnitInstructionType unitInstructionType, int id__x__tile, int unitUID__Y, int param_5);
 
-            void moveTribeToNearbyClearTile(int param_1);
+            void moveTribeToNearbyClearTile(int tribeID);
 
             int moveTribeToIndexedNearbyTile(int param_1);
 

@@ -15,7 +15,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -37,13 +37,13 @@ namespace Map {
             return;
         }
         int const buildingID = DAT_CurrentBuildingID::instance;
-        if (DAT_BuildingsState::instance.buildings[buildingID].field200_0x2c8 != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].field204_0x2d4 = 0;
+        if (DAT_BuildingsState::instance.buildings[buildingID].field_0x2c8 != 0) {
+            DAT_BuildingsState::instance.buildings[buildingID].field_0x2d4 = 0;
         }
-        if (DAT_BuildingsState::instance.buildings[buildingID].field204_0x2d4
+        if (DAT_BuildingsState::instance.buildings[buildingID].field_0x2d4
             > DAT_GameState::instance.playerDataArray[owner].someCount10) {
             DAT_GameState::instance.playerDataArray[owner].someCount10
-                = DAT_BuildingsState::instance.buildings[buildingID].field204_0x2d4;
+                = DAT_BuildingsState::instance.buildings[buildingID].field_0x2d4;
             DAT_GameState::instance.playerDataArray[owner].someCount11 = buildingID;
         }
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(buildingID);
@@ -66,18 +66,18 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y, OpenSHC::DE::SHCDE::FX_SAW);
         }
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
-        // GMTotalPicturesProcessed[67] is the first picture of the woodcutter's log piles.
+        // GMFirstPictureIndex[67] is the first picture of the woodcutter's log piles.
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resources[1] != 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resources[1]
-                + GMTotalPicturesProcessed::instance[67] + 18;
+                + GMFirstPictureIndex::instance[67] + 18;
         } else {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0;
         }
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resources[2] != 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].resources[2]
-                + GMTotalPicturesProcessed::instance[67] + 21;
+                + GMFirstPictureIndex::instance[67] + 21;
         } else {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 0;
         }

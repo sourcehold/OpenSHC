@@ -1,4 +1,5 @@
 param(
+    [bool]$IncludeCpp = $true,
     [bool]$ClearCppFiles = $false
 )
 
@@ -10,13 +11,24 @@ $CppDir = "tmp\ghidra-cpp"
 
 Write-Host "Using SHA: $SHA"
 
-if ($ClearCppFiles) {
-    rm -R $CppDir
+if($IncludeCpp) {
+    if ($ClearCppFiles) {
+        rm -R $CppDir
+    }
+
+    # Generate cpp files, assuming SARIF file already exists
+    & "tools\import\cpp\generatecppfiles.ps1" -SHA $SHA -CppDir $CppDir
 }
 
-# Generate cpp files, assuming SARIF file already exists
-& "tools\import\cpp\generateassetfiles.ps1" -SHA $SHA -CppDir $CppDir
+# Create SARIF ZIP
+Write-Host "Writing 'Stronghold Crusader.exe.sarif' to 'sarif-$SHA.zip'"
 
+7z a `
+    -tzip `
+    -mm=LZMA `
+    -mx=9 `
+    "sarif-$SHA.zip" `
+    "Stronghold Crusader.exe.sarif"
 
 # Remove all existing release assets
 $assets = gh release view $TAG `
@@ -26,22 +38,29 @@ $assets = gh release view $TAG `
 
 foreach ($asset in $assets) {
     if ($asset) {
-        gh release delete-asset $TAG $asset `
-            --repo sourcehold/OpenSHC `
-            --yes
+        if ((-not $asset.StartsWith("cpp-")) -or $IncludeCpp) {
+            gh release delete-asset $TAG $asset `
+                        --repo sourcehold/OpenSHC `
+                        --yes
+        }
     }
 }
-
 
 # Upload the two new assets
 gh release upload $TAG `
     --repo sourcehold/OpenSHC `
-    "cpp-$SHA.zip" `
     "sarif-$SHA.zip" `
     --clobber
 
+if ($InludeCpp) {
+    gh release upload $TAG `
+        --repo sourcehold/OpenSHC `
+        "cpp-$SHA.zip" `
+        --clobber
+}
+
 $FullSHA = git rev-parse --verify HEAD
-$SHA = git rev-parse --short --verify HEAD
+#$SHA = git rev-parse --short --verify HEAD
 $Date = Get-Date -Format "yyyy-MM-dd"
 
 # Get the release message/body
