@@ -2276,6 +2276,9 @@ char const* const s_Crusader_005a22b8 = S_CRUSADER_005A22B8;
 // 0x005a22c4
 char const* const s_FireFly_s_005a22c4 = S_FIREFLY_S_005A22C4;
 
+// 0x005a22d0
+char const* const s_Exit_005a22d0 = S_EXIT_005A22D0;
+
 // 0x005a22d8
 char const* const s_Continue_005a22d8 = S_CONTINUE_005A22D8;
 

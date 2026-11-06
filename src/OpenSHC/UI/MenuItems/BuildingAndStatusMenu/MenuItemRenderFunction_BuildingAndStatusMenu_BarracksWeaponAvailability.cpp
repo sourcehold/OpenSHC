@@ -7,7 +7,6 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_00df3350.hpp"
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
 #include "OpenSHC/Globals/DAT_ButtonY.hpp"
@@ -20,6 +19,7 @@
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_UIButtonDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/INT_00df3350.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -40,12 +40,12 @@ namespace UI {
                     } else {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                        if ((int)DAT_00df3350::instance >= 0) {
+                        if ((int)INT_00df3350::instance >= 0) {
                             for (int i = 0; i < countof(DAT_UnitPropertiesDefinedData::instance
-                                                    .EuroUnitResourceCosts[DAT_00df3350::instance]);
+                                                    .EuroUnitResourceCosts[INT_00df3350::instance]);
                                 ++i) {
                                 if (DAT_UnitPropertiesDefinedData::instance
-                                        .EuroUnitResourceCosts[DAT_00df3350::instance][i]
+                                        .EuroUnitResourceCosts[INT_00df3350::instance][i]
                                     == -1) {
                                     neededByHoveredUnit = TRUE;
                                 }
@@ -116,10 +116,10 @@ namespace UI {
                     return;
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                if ((int)DAT_00df3350::instance >= 0) {
+                if ((int)INT_00df3350::instance >= 0) {
                     // The item part tests only the first three cost slots, as the original does.
                     for (int i = 0; i < 3; ++i) {
-                        if (DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[DAT_00df3350::instance][i]
+                        if (DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[INT_00df3350::instance][i]
                             == resourceType) {
                             neededByHoveredUnit = TRUE;
                         }

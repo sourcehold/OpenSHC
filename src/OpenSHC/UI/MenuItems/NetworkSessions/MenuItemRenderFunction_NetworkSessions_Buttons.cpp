@@ -48,7 +48,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 8),
-                        textX, textY, OpenSHC::Text::TTA_CENTER, 8355711, 17, FALSE, 0);
+                        textX, textY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_7F7F7F, 17, FALSE, 0);
                     return;
                 }
             } else {
@@ -83,7 +83,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, button,
                         DAT_ButtonW::instance / 2 + DAT_ButtonX::instance, DAT_ButtonY::instance + 6,
-                        OpenSHC::Text::TTA_CENTER, 8355711, 17, FALSE);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_7F7F7F, 17, FALSE);
                     return;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
@@ -92,7 +92,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, button,
                         DAT_ButtonW::instance / 2 + DAT_ButtonX::instance, DAT_ButtonY::instance + 6,
-                        OpenSHC::Text::TTA_CENTER, 12775659, 17, FALSE);
+                        OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE);
                     return;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
