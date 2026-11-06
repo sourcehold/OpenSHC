@@ -1001,7 +1001,7 @@ PUBLIC ?instance@?$Extern@K$0ONDBNM@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA
 
-PUBLIC ?instance@?$Extern@I$0OOAPLA@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0OOAPLI@@StructResolver@@2IA
 
@@ -2688,7 +2688,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA EQU 00ED31E0h
 
-?instance@?$Extern@I$0OOAPLA@@StructResolver@@2IA EQU 00EE0FB0h
+?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA EQU 00EE0FB0h
 
 ?instance@?$Extern@I$0OOAPLI@@StructResolver@@2IA EQU 00EE0FB8h
 
