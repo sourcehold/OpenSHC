@@ -14,7 +14,7 @@
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 #include "OpenSHC/Map/Units/Tribe.hpp"
 #include "OpenSHC/Map/Units/UnitIDMovementDistancePair.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
@@ -37,7 +37,7 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
         using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
-        using OpenSHC::Map::Units::States::UnitState;
+        using OpenSHC::Map::Units::States::UnitStateShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -200,7 +200,7 @@ namespace Map {
             void upgradeTribeArrayLayoutForMapVersion(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            BOOLEnum updateTribeRallyFlags(int param_1);
+            BOOLEnum updateTribeRallyFlags(int tribeID);
 
             void unsetRallyRelatedFlagOnUnits(int tribeID);
 
@@ -247,7 +247,7 @@ namespace Map {
 
             void setTargetUnitForTribe(int tribeID);
 
-            void setStateForAllTribeUnits(int tribeID, UnitState unitState);
+            void setStateForAllTribeUnits(int tribeID, UnitStateShort unitState);
 
             void standUpAllTribeUnits(int tribeID);
 

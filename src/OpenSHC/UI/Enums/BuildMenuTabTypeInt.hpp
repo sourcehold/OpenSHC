@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp'
+  path: 'OpenSHC/UI/Enums/BuildMenuTabTypeInt.hpp'
 */
 
 #pragma once
@@ -13,9 +13,9 @@
 namespace OpenSHC {
 namespace UI {
     namespace Enums {
-        typedef int BuildMenuTabTypeShort;
+        typedef int BuildMenuTabTypeInt;
 
-        static_assert_cpp98_obj(sizeof(BuildMenuTabTypeShort) == 4, BuildMenuTabTypeShort);
+        static_assert_cpp98_obj(sizeof(BuildMenuTabTypeInt) == 4, BuildMenuTabTypeInt);
     } // namespace Enums
 } // namespace UI
 } // namespace OpenSHC
