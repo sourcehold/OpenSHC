@@ -19,7 +19,7 @@ namespace UI {
 
             void __cdecl MenuItemActionHandler_InGameMenu_ViewToKeeps(int param_1, ...);
 
-            void __cdecl MenuItemActionHandler_InGameMenu_Scrolling(int param_1, ...);
+            void __cdecl MenuItemActionHandler_InGameMenu_Scrolling();
 
             void __cdecl MenuItemActionHandler_InGameMenu_MiniMapInteraction(int param_1, ...);
 

@@ -10,9 +10,9 @@ namespace IO {
     // FUNCTION: STRONGHOLDCRUSADER 0x0046C450
     void ResourceManager::setGfxFileFilter()
     {
-        this->openFileNameA.lpstrFilter = DAT_TextInputDefinedData::instance.field19_0x710;
+        this->openFileNameA.lpstrFilter = DAT_TextInputDefinedData::instance.field_0x710;
         this->openFileNameA.nFilterIndex = 1;
-        this->openFileNameA.lpstrDefExt = DAT_TextInputDefinedData::instance.field19_0x710;
+        this->openFileNameA.lpstrDefExt = DAT_TextInputDefinedData::instance.field_0x710;
         this->openFileNameA.lpstrInitialDir = s_gfx__005a5a1c;
     }
 

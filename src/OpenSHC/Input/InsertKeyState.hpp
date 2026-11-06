@@ -17,7 +17,7 @@ namespace Input {
     class InsertKeyState {
     public:
         int insert; // 0x00000000 length: 4
-        int field1_0x4; // 0x00000004 length: 4
+        int field_0x4; // 0x00000004 length: 4
 
     private:
         InsertKeyState(InsertKeyState const&);

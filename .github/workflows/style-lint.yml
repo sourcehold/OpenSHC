@@ -1,0 +1,149 @@
+name: style-lint
+
+# Reads the reimplemented .cpp files a pull request adds or changes against
+# REIMPLEMENTATION_STYLE_GUIDE.md and posts what it finds, ONCE.
+#
+# Advisory on purpose, and deliberately not a gate:
+#   * the guide's own overriding rule is that the match comes first, so a
+#     deviation is frequently the form that reached 100% and must stay;
+#   * it therefore posts no commit status and never fails the job.
+#
+# "Once" is enforced two ways, because a style note that reappears on every
+# push would train people to ignore it:
+#   * it triggers only on opened / reopened / ready_for_review -- never on
+#     synchronize, so pushes to the branch do not re-run it;
+#   * before commenting it looks for its own marker comment and stops if one is
+#     already there, so a reopen or a re-run cannot produce a second one.
+#
+# Safety model, as in status-rollup-publish.yml: pull_request_target holds a
+# writable token, so the PR's code is never checked out or run. The trusted
+# base-branch copy of the linter runs, and the PR's commit is read only as DATA
+# through the base repository's own refs/pull/N/head -- its .cpp files are
+# extracted as text and parsed, never compiled or executed.
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, ready_for_review]
+
+concurrency:
+  group: style-lint-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # the one report comment
+    steps:
+      # Trusted code only: the base repo's default branch, never the PR's ref.
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - name: Has this PR already been read?
+        id: once
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          existing=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+                       --jq '[.[] | select(.body | startswith("<!-- style-lint -->"))] | length')
+          if [ "$existing" != '0' ]; then
+            echo "A style report is already on PR #$PR; not posting another."
+            echo "done=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Which reimplemented sources does it touch?
+        id: files
+        if: ${{ steps.once.outputs.done != 'yes' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          # The API, not git: the base checkout is shallow and has no PR history.
+          # Deleted files are left out, and the path shape is checked here so
+          # that nothing surprising can reach `git show` below.
+          gh api "repos/$REPO/pulls/$PR/files" --paginate \
+            --jq '.[] | select(.status != "removed") | .filename' \
+            | grep -E '^src/OpenSHC/[A-Za-z0-9._/-]+\.cpp$' > changed.txt || true
+          n=$(wc -l < changed.txt)
+          echo "reimplemented .cpp files in this PR: $n"
+          echo "count=$n" >> "$GITHUB_OUTPUT"
+
+      # Data, not code: the PR's commit arrives through a ref of the base
+      # repository, and only the text of the .cpp files above is ever read.
+      - name: Fetch the PR head as data
+        id: fetch
+        if: ${{ steps.once.outputs.done != 'yes' && steps.files.outputs.count != '0' }}
+        env:
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          if ! git ls-remote --exit-code origin "refs/pull/$PR/head" >/dev/null 2>&1; then
+            echo "refs/pull/$PR/head no longer exists; nothing to read."
+            echo "gone=yes" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch --no-tags --depth=1 origin "+refs/pull/$PR/head:refs/remotes/under-test"
+          got=$(git rev-parse refs/remotes/under-test)
+          if [ "$got" != "$HEAD_SHA" ]; then
+            echo "refs/pull/$PR/head is now $got, not the $HEAD_SHA this run describes."
+            echo "gone=yes" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+      - name: Read them against the style guide
+        id: lint
+        if: ${{ steps.once.outputs.done != 'yes' && steps.files.outputs.count != '0' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          GUIDE_URL: https://github.com/${{ github.repository }}/blob/${{ github.event.repository.default_branch }}/REIMPLEMENTATION_STYLE_GUIDE.md
+        run: |
+          set -euo pipefail
+          # Lay the PR's own version of each file out under a scratch root, so
+          # the report quotes the paths the author knows.
+          mkdir -p under-test
+          while read -r f; do
+            [ -n "$f" ] || continue
+            mkdir -p "under-test/$(dirname "$f")"
+            git show "refs/remotes/under-test:$f" > "under-test/$f"
+          done < changed.txt
+
+          script="$PWD/tools/reimplementation-helper/style_lint.py"
+          cd under-test
+          python -I "$script" --from-stdin --markdown ../style_lint.md < ../changed.txt \
+            | tee ../lint.log
+          cd ..
+          {
+            echo '## Style guide reading'
+            echo
+            echo '```'
+            cat lint.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          n=$(sed -n 's/^findings=\([0-9]*\)$/\1/p' lint.log | tail -1)
+          if ! printf '%s' "$n" | grep -qE '^[0-9]+$'; then
+            echo "The linter produced no findings= line" >&2
+            exit 1
+          fi
+          echo "findings=$n" >> "$GITHUB_OUTPUT"
+
+      # A clean read needs no comment: the job summary records that it ran.
+      - name: Post the report
+        if: ${{ steps.lint.outputs.findings != '' && steps.lint.outputs.findings != '0' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          # Plain create, no --edit-last: this comment is written once and then
+          # belongs to the conversation, not to the latest push.
+          gh pr comment "$PR" --repo "$REPO" --body-file style_lint.md

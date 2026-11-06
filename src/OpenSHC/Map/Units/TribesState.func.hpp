@@ -2,11 +2,13 @@
   path: 'OpenSHC/Map/Units/TribesState.func.hpp'
 */
 
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 #include "OpenSHC/Map/Units/TribesState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -16,6 +18,7 @@ namespace Map {
     namespace Units {
         namespace TribesState_Func {
 
+            using OpenSHC::AI::Tribes::AITribeType;
             using OpenSHC::Commands::MappersEnum;
             using OpenSHC::IO::PackagedFileMagicNum;
             using OpenSHC::Map::Units::SomeTribeBehaviorType;
@@ -23,6 +26,7 @@ namespace Map {
             using OpenSHC::Map::Units::UnitType;
             using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
             using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
+            using OpenSHC::Map::Units::States::UnitStateShort;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             // Constructor
@@ -47,7 +51,7 @@ namespace Map {
                 &TribesState::swapTribeOwnership)
             swapTribeOwnership;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00521280,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00521280,
                 &TribesState::moveUnitToBehaviorTarget)
             moveUnitToBehaviorTarget;
 
@@ -183,7 +187,7 @@ namespace Map {
                 &TribesState::trimTribeToSize)
             trimTribeToSize;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, int, int, int, UnitType, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(AITribeType, int, int, int, UnitType, int, int), false,
                 Address::SHC_3BB0A8C1_0x00522F70, &TribesState::spawnUnitsForAITribe)
             spawnUnitsForAITribe;
 
@@ -192,11 +196,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00523030, &TribesState::spawnUnitsIntoNewTribe)
             spawnUnitsIntoNewTribe;
 
-            MACRO_FUNCTION_RESOLVER(dword (TribesState::*)(short, undefined4, int, int, int, UnitType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (TribesState::*)(short, AITribeType, int, int, int, UnitType, int), false,
                 Address::SHC_3BB0A8C1_0x00523190, &TribesState::createTribeWithSpawnedUnit)
             createTribeWithSpawnedUnit;
 
-            MACRO_FUNCTION_RESOLVER(dword (TribesState::*)(undefined4, int, int, int, UnitType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (TribesState::*)(AITribeType, int, int, int, UnitType, int), false,
                 Address::SHC_3BB0A8C1_0x00523240, &TribesState::spawnUnitsAroundLocation)
             spawnUnitsAroundLocation;
 
@@ -212,19 +216,19 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00523370, &TribesState::storeLionXAndYInMapInfo)
             storeLionXAndYInMapInfo;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x005233A0, &TribesState::setRabbitSpawnXY)
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005233A0,
+                &TribesState::setRabbitSpawnXY)
             setRabbitSpawnXY;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, undefined4), false,
                 Address::SHC_3BB0A8C1_0x005233E0, &TribesState::setCamelSpawnXY)
             setCamelSpawnXY;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(uint*, uint*), false, Address::SHC_3BB0A8C1_0x00523410,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(uint*, uint*), false, Address::SHC_3BB0A8C1_0x00523410,
                 &TribesState::findRecentOrSignpostSpawnLocation)
             findRecentOrSignpostSpawnLocation;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x00523520,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x00523520,
                 &TribesState::hasAvailableSpawnSlotForWildlifeOrMercs)
             hasAvailableSpawnSlotForWildlifeOrMercs;
 
@@ -256,7 +260,7 @@ namespace Map {
                 &TribesState::aiAssignNewUnitToTribe)
             aiAssignNewUnitToTribe;
 
-            MACRO_FUNCTION_RESOLVER(int (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00523920,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00523920,
                 &TribesState::scatterTribeUnitsRandomly)
             scatterTribeUnitsRandomly;
 
@@ -268,7 +272,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00523EF0, &TribesState::upgradeTribeArrayLayoutForMapVersion)
             upgradeTribeArrayLayoutForMapVersion;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00523F70,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00523F70,
                 &TribesState::updateTribeRallyFlags)
             updateTribeRallyFlags;
 
@@ -284,11 +288,11 @@ namespace Map {
                 &TribesState::getFirstUnitInTribeThatIsOnXTerrain)
             getFirstUnitInTribeThatIsOnXTerrain;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524140,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524140,
                 &TribesState::tribeHasActiveLaddermanUnit)
             tribeHasActiveLaddermanUnit;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x005241C0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x005241C0,
                 &TribesState::tribeContainsUnitThatCanClimb)
             tribeContainsUnitThatCanClimb;
 
@@ -300,15 +304,15 @@ namespace Map {
                 &TribesState::getMajorityArcherTypeEuropeanOrArabian)
             getMajorityArcherTypeEuropeanOrArabian;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, undefined4, undefined4, undefined4, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00524340, &TribesState::applyMoveCommandOrRallyCommandToTribe)
             applyMoveCommandOrRallyCommandToTribe;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, SomeTribeBehaviorType), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, SomeTribeBehaviorType), false,
                 Address::SHC_3BB0A8C1_0x005244D0, &TribesState::assignAttackTargetsForTribe)
             assignAttackTargetsForTribe;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524890,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524890,
                 &TribesState::stopTribeMovementAndCheckIdle)
             stopTribeMovementAndCheckIdle;
 
@@ -316,7 +320,7 @@ namespace Map {
                 &TribesState::sortTribePathDestinationsByCost)
             sortTribePathDestinationsByCost;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524B30,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524B30,
                 &TribesState::isTribeUnitBlockedByOtherUnit)
             isTribeUnitBlockedByOtherUnit;
 
@@ -324,7 +328,7 @@ namespace Map {
                 int (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524BF0, &TribesState::getTribeAliveStatus)
             getTribeAliveStatus;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, uint, uint, uint, uint), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, uint, uint, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x00524CA0, &TribesState::isTribePathToDestinationClear)
             isTribePathToDestinationClear;
 
@@ -360,7 +364,7 @@ namespace Map {
                 &TribesState::setTargetUnitForTribe)
             setTargetUnitForTribe;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, undefined4), false, Address::SHC_3BB0A8C1_0x00525300,
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, UnitStateShort), false, Address::SHC_3BB0A8C1_0x00525300,
                 &TribesState::setStateForAllTribeUnits)
             setStateForAllTribeUnits;
 
@@ -408,7 +412,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00525F20, &TribesState::spawnDeerLionOrRabbit)
             spawnDeerLionOrRabbit;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x005260B0, &TribesState::trySpawnAdditionalWildlifeForTribe)
             trySpawnAdditionalWildlifeForTribe;
 
@@ -417,8 +421,8 @@ namespace Map {
             respawnDeer;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x005262A0,
-                &TribesState::spawnWildlifeOrMercAtAvailableSlot)
-            spawnWildlifeOrMercAtAvailableSlot;
+                &TribesState::spawnRabbitAtFirstFreeSpawnPoint)
+            spawnRabbitAtFirstFreeSpawnPoint;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00526370, &TribesState::upgradeMapTribesState)
@@ -428,7 +432,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x005263A0, &TribesState::giveTribeMoveInstruction)
             giveTribeMoveInstruction;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, uint, uint, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, uint, uint, undefined4), false,
                 Address::SHC_3BB0A8C1_0x00526F00, &TribesState::commandUnitsToLocation)
             commandUnitsToLocation;
 
@@ -444,7 +448,7 @@ namespace Map {
                 &TribesState::spawnQueuedReinforcementWaves)
             spawnQueuedReinforcementWaves;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, UnitInstructionType, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, UnitInstructionType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00527C80, &TribesState::giveTribeAnInstruction)
             giveTribeAnInstruction;
 

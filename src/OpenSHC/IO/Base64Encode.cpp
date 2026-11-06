@@ -10,7 +10,7 @@ char IO::Base64Encode_CharacterLookup(char param_1)
     if ('?' < param_1) {
         return '=';
     }
-    return DAT_ProtocolDefinedData::instance.field136_0x4f4[param_1];
+    return DAT_ProtocolDefinedData::instance.field_0x4f4[param_1];
 }
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004870B0

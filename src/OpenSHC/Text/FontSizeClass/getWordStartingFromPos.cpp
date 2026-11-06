@@ -13,7 +13,7 @@ namespace Text {
             return 0;
         }
 
-        if (DAT_TextManagerObject::instance.field12_0x30) {
+        if (DAT_TextManagerObject::instance.field_0x30) {
             *wordReceiver = text[startAndRunIndex];
             wordReceiver[1] = '\0';
             *wordStartIndexOutPtr = 0;

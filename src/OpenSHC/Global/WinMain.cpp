@@ -35,6 +35,7 @@
 #include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
@@ -209,7 +210,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
     if (!DAT_GameSynchronyState::instance.useTCPIP) {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
     }
-    DAT_TileMapState::instance.mapSize = 400;
+    DAT_TileMapState::instance.mapSize = OpenSHC::Map::MC_MAP_XY_LIMIT;
     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetHeightAndMapBorders, DAT_TileMapState::ptr)(400);
     DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
@@ -247,9 +248,9 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
             } else {
                 if ((!DAT_WindowAndDirectDraw::instance.isNotProcessingInputEvents
                         && DAT_WindowAndDirectDraw::instance.gameFocused)
-                    || ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                    || (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                         && (DAT_GameSynchronyState::instance.currentGameMode
-                            != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)))) {
+                            != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER))) {
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::PlayJokeVideoBasedOnCurrentTimeAndPlayTime)();
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::someChatMessageSelection, DAT_AICState::ptr)();
                     MACRO_CALL_MEMBER(OpenSHC::Util::Timing::Stopwatch_Func::start, DAT_GameLoopStopwatch::ptr)();
@@ -360,15 +361,14 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::processBinkFrames,
                             DAT_BinkControlState::ptr)();
                         DAT_GameCore::instance.hasMenuRenderedUnk = 0;
-                        if (((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL)
-                                || DAT_GameCore::instance.countdown)
-                            || (((DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial
-                                     || (((!MACRO_CALL_MEMBER(
-                                               OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
-                                              || DAT_MenuHandlerState::instance.isBuildMenuTransitioning_0x18)
-                                         || DAT_GameState::instance.mapAndTime.weekChanged)))
-                                || (MACRO_CALL_MEMBER(
-                                    OpenSHC::Game::GameCore_Func::isInBuildingTab, DAT_GameCore::ptr)())))) {
+                        if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL
+                            || DAT_GameCore::instance.countdown
+                            || DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial
+                            || !MACRO_CALL_MEMBER(
+                                OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
+                            || DAT_MenuHandlerState::instance.isBuildMenuTransitioning_0x18
+                            || DAT_GameState::instance.mapAndTime.weekChanged
+                            || MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isInBuildingTab, DAT_GameCore::ptr)()) {
                             if (MACRO_CALL_MEMBER(
                                     OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                                 DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
@@ -394,8 +394,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                            != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER)
                                        && (DAT_GameCore::instance.activeMenuTab.tabType
                                            != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD))
-                            || (DAT_GameCore::instance.currentMenuViewType
-                                == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU)) {
+                            || DAT_GameCore::instance.currentMenuViewType
+                                == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
                             if (!DAT_BinkControlState::instance.binkObjPtrArray[0]
                                 && (!DAT_BinkControlState::instance.binkObjPtrArray[1]
                                     && !DAT_GameCore::instance.isBinkVideoPlaying)) {
@@ -437,11 +437,10 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                             DAT_WindowAndDirectDraw::ptr)(0);
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Util::Timing::Stopwatch_Func::stop, DAT_GameLoopStopwatch::ptr)();
-                    if ((!DAT_GameCore::instance.gamePausedLogical
-                            && !MACRO_CALL_MEMBER(
-                                OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)())
-                        && (MACRO_CALL_MEMBER(
-                            OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)())) {
+                    if (!DAT_GameCore::instance.gamePausedLogical
+                        && !MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()
+                        && MACRO_CALL_MEMBER(
+                            OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                         if (TIME_ReceivedMessage_2::instance) {
                             int pausedDuration = timeGetTime() - TIME_ReceivedMessage_2::instance;
                             TIME_ReceivedMessage_2::instance = 0;
