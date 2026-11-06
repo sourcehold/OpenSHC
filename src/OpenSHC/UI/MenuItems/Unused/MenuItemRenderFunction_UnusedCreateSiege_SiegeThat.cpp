@@ -42,7 +42,8 @@ namespace UI {
                     AlphaAndButtonSurfaceObj::ptr)(0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_MAPEDIT, button, DAT_ButtonW::instance / 2 + DAT_ButtonX::instance,
-                    DAT_ButtonY::instance + 10, OpenSHC::Text::TTA_CENTER, 8355711, 17, FALSE);
+                    DAT_ButtonY::instance + 10, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_7F7F7F, 17,
+                    FALSE);
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
@@ -56,7 +57,8 @@ namespace UI {
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                 OpenSHC::DE::SHCDE::TEXT_MAPEDIT, button, DAT_ButtonW::instance / 2 + DAT_ButtonX::instance,
-                DAT_ButtonY::instance + 10, OpenSHC::Text::TTA_CENTER, 12775659, 17, FALSE);
+                DAT_ButtonY::instance + 10, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17,
+                FALSE);
         }
 
     }
