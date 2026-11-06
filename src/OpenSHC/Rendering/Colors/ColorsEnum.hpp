@@ -15,6 +15,7 @@ namespace Rendering {
 
             COL_000000 = 0, // 0x00000000
             COL_0000FF = 255, // 0x000000FF
+            COL_003E66 = 15974, // 0x00003E66
             COL_007D3E = 32062, // 0x00007D3E
             COL_0080FF = 33023, // 0x000080FF
             COL_00A2FF = 41727, // 0x0000A2FF

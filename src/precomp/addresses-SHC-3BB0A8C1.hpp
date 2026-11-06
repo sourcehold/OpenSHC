@@ -97664,7 +97664,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31E0 = 0x00ED31E0,
     // label: DAT_CurrentTribeID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EE0FB0 = 0x00EE0FB0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE0FB4 = 0x00EE0FB4,
