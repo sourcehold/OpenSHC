@@ -736,7 +736,7 @@ namespace Map {
             false, Address::SHC_3BB0A8C1_0x005154D0, &TileMapState::placeDairyfarm)
         placeDairyfarm;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, undefined4, int, int*), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, undefined4, int, int), false,
             Address::SHC_3BB0A8C1_0x00515740, &TileMapState::placeApplefarm)
         placeApplefarm;
 

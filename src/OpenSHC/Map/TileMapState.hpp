@@ -621,7 +621,7 @@ namespace Map {
             int* param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int* param_7);
+            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 

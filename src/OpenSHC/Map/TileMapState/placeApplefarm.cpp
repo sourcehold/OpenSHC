@@ -19,19 +19,19 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
     using OpenSHC::Map::LogicHelpers::L_NONE;
-    using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00515740
     void TileMapState::placeApplefarm(
-        int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int variation, int* averageHeight)
+        int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int variation, int averageHeight)
     {
         int index = 0;
-        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, x, y, (undefined4)averageHeight, (BuildingType)(short)buildingType, 3,
-            playerID, variation);
+        int buildingID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID, variation);
         this->placedBuildingID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, y, 10);
 
@@ -49,7 +49,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 3);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
-            this->HeightLayer[tileUnk] = (byte)(int)averageHeight;
+            this->HeightLayer[tileUnk] = (byte)averageHeight;
             this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
