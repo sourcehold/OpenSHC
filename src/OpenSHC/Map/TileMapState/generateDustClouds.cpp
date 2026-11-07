@@ -39,29 +39,26 @@ namespace Map {
             if ((short)(this->RandomLayer[tile] ^ seed) % 64 != this->SEC_Section1052 % 64) {
                 continue;
             }
+            int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int tileX = tile - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile;
             int stage = this->temporaryTerrainTypeBinaryArray[i];
             if (stage == 0) {
-                if (this->SEC_Section1054 != 0) {
-                    continue;
+                if (this->SEC_Section1054 == 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
+                        DAT_EntityState::ptr)(0, 0, 0, tileX * 8 + 4, tileY * 8 + 4, this->HeightLayer[tile], 0, 0, 0,
+                        OpenSHC::Map::Entities::ET_DUST_CLOUD, stage);
                 }
-            } else {
-                if (this->SEC_Section1053 != 0) {
-                    continue;
-                }
-                if (stage != 1) {
-                    stage = 2;
+            } else if (this->SEC_Section1053 == 0) {
+                if (stage == 1) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
+                        DAT_EntityState::ptr)(0, 0, 0, tileX * 8 + 4, tileY * 8 + 4, this->HeightLayer[tile], 0, 0, 0,
+                        OpenSHC::Map::Entities::ET_DUST_CLOUD, stage);
+                } else {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
+                        DAT_EntityState::ptr)(0, 0, 0, tileX * 8 + 4, tileY * 8 + 4, this->HeightLayer[tile], 0, 0, 0,
+                        OpenSHC::Map::Entities::ET_DUST_CLOUD, 2);
                 }
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
-                0, 0,
-                (tile
-                    - DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                        .addXgetTile)
-                        * 8
-                    + 4,
-                DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8 + 4,
-                this->HeightLayer[tile], 0, 0, 0, OpenSHC::Map::Entities::ET_DUST_CLOUD, stage);
         }
     }
 
