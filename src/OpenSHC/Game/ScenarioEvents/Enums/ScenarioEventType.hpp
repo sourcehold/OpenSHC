@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace Game {
     namespace ScenarioEvents {
         namespace Enums {
-            // IngameScenarioEventItemContent::ScenarioEventType; the names are cr.tex scenario texts 128-155 and
-            // 177-187
             typedef enum ScenarioEventType {
 
                 SET_WIN = 0, // 0x00000000

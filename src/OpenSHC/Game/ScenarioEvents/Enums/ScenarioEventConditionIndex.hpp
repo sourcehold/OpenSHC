@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace Game {
     namespace ScenarioEvents {
         namespace Enums {
-            // Index into IngameScenarioEventItemContent::conditions and the EventCondition* tables; the names are
-            // cr.tex scenario texts 106-125 and 190-209
             typedef enum ScenarioEventConditionIndex {
 
                 SECI_AUTO_STOP = 0, // 0x00000000
