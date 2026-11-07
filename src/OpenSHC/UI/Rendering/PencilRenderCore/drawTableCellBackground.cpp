@@ -16,58 +16,71 @@ namespace UI {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Pictures in GID_INTERFACE_ICONS_3, 20 pixels wide: a highlighted cell's ends and middles (the right end
+        // uses the middle's mask), or a run of stripe 69 or 71 by the row; each picture is followed by its mask.
+        enum {
+            TABLE_CELL_LEFT_PICTURE = 73,
+            TABLE_CELL_MIDDLE_PICTURE = 74,
+            TABLE_CELL_RIGHT_PICTURE = 75,
+            TABLE_CELL_LEFT_MASK = 76,
+            TABLE_CELL_MIDDLE_MASK = 77,
+            TABLE_CELL_STRIPE_PICTURES = 69,
+            TABLE_CELL_PIECE_WIDTH = 20
+        };
+
         // FUNCTION: STRONGHOLDCRUSADER 0x004692E0
         void PencilRenderCore::drawTableCellBackground(BOOLEnum isSelected, int indexToGetStripes, int blendStrength)
         {
-            int iVar1 = DAT_ButtonX::instance;
-            uint imageID = ((int)(char)indexToGetStripes & 1U) * 2 | 0x45;
+            int x = DAT_ButtonX::instance;
+            int const stripePicture = (indexToGetStripes & 1) * 2 | TABLE_CELL_STRIPE_PICTURES;
             if (isSelected) {
-                if (DAT_ButtonW::instance < 21) {
-                    ++DAT_ButtonW::instance;
+                if (DAT_ButtonW::instance > TABLE_CELL_PIECE_WIDTH) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_LEFT_PICTURE, x, DAT_ButtonY::instance, OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_LEFT_MASK, blendStrength);
+                    x += TABLE_CELL_PIECE_WIDTH;
                 } else {
-                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 73,
-                        (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance),
-                        OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 76, blendStrength);
-                    iVar1 += 20;
+                    ++DAT_ButtonW::instance;
                 }
-                while (iVar1 < DAT_ButtonW::instance - 20 + DAT_ButtonX::instance) {
+                for (; x < DAT_ButtonW::instance + DAT_ButtonX::instance - TABLE_CELL_PIECE_WIDTH;
+                    x += TABLE_CELL_PIECE_WIDTH) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 74, iVar1,
-                        (int)(DAT_ButtonY::instance), OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 77, blendStrength);
-                    iVar1 += 20;
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_MIDDLE_PICTURE, x, DAT_ButtonY::instance,
+                        OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, TABLE_CELL_MIDDLE_MASK, blendStrength);
                 }
             } else if (DAT_ButtonCurrentlyInteracting::instance) {
-                if (DAT_ButtonW::instance < 21) {
-                    ++DAT_ButtonW::instance;
+                if (DAT_ButtonW::instance > TABLE_CELL_PIECE_WIDTH) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_LEFT_PICTURE, x, DAT_ButtonY::instance, OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_LEFT_MASK, blendStrength);
+                    x += TABLE_CELL_PIECE_WIDTH;
                 } else {
-                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 73,
-                        (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance),
-                        OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 76, blendStrength);
-                    iVar1 += 20;
+                    ++DAT_ButtonW::instance;
                 }
-                while (iVar1 < DAT_ButtonW::instance - 20 + DAT_ButtonX::instance) {
+                for (; x < DAT_ButtonW::instance + DAT_ButtonX::instance - TABLE_CELL_PIECE_WIDTH;
+                    x += TABLE_CELL_PIECE_WIDTH) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 74, iVar1,
-                        (int)(DAT_ButtonY::instance), OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 77, blendStrength);
-                    iVar1 += 20;
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_MIDDLE_PICTURE, x, DAT_ButtonY::instance,
+                        OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, TABLE_CELL_MIDDLE_MASK, blendStrength);
                 }
             } else {
-                // The unselected, untouched cell is drawn as a run of stripes rather than end-cap plus middles
-                while (iVar1 < DAT_ButtonW::instance + DAT_ButtonX::instance) {
+                for (; x < DAT_ButtonW::instance + DAT_ButtonX::instance; x += TABLE_CELL_PIECE_WIDTH) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, (int)(imageID),
-                        iVar1, (int)(DAT_ButtonY::instance), OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
-                        (int)(imageID + 1), blendStrength);
-                    iVar1 += 20;
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, stripePicture,
+                        x, DAT_ButtonY::instance, OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, stripePicture + 1,
+                        blendStrength);
                 }
                 return;
             }
-            if (21 < DAT_ButtonW::instance) {
+            if (DAT_ButtonW::instance > TABLE_CELL_PIECE_WIDTH + 1) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 75, iVar1,
-                    (int)(DAT_ButtonY::instance), OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, 77, blendStrength);
+                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                    TABLE_CELL_RIGHT_PICTURE, x, DAT_ButtonY::instance, OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                    TABLE_CELL_MIDDLE_MASK, blendStrength);
             }
         }
 

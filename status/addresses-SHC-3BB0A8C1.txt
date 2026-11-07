@@ -20117,7 +20117,7 @@ SHC_3BB0A8C1_0x004690E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00469290 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004692E0 | 78.4% | Asm differs: stripe row zero-extended, width test inverted
+SHC_3BB0A8C1_0x004692E0 | 89.7% | Asm differs: the stripe index is read as a dword where the original sign-extends its low byte, and the second branch keeps other registers
 
 SHC_3BB0A8C1_0x004694A0 | 0.0% | Pending
 
