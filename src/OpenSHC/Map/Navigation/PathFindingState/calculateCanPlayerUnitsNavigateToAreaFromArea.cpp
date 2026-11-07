@@ -290,7 +290,6 @@ namespace Map {
                 DAT_PathFindingState::instance.field_0x98 = 0;
                 fromArea = 0;
             }
-        LAB_ret:
             return (int)(fromArea);
         }
 
