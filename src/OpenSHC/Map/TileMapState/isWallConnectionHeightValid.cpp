@@ -25,6 +25,7 @@ namespace Map {
             firstDirection = 2;
             secondDirection = 6;
         } else if (param_3 == 4) {
+            firstDirection = 0;
             secondDirection = param_3;
         } else if (param_3 == 6) {
             firstDirection = 2;
