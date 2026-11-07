@@ -66,21 +66,22 @@ namespace Map {
         }
 
         this->refreshRelatedTwo = 1;
-        if (importHeight != 0) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::rebuildShowHiLayerFromHeights, this)();
+        // nested form: the original keeps the rebuild tail call as the trailing block
+        if (importHeight == 0) {
+            if (this->refreshCertainTileMap == 4 || this->refreshCertainTileMap == 2) {
+                this->refreshRelatedOne = 1;
+            } else {
+                this->refreshRelatedOne = 0;
+                this->refreshRelatedTwo = 2;
+            }
+            this->refreshCertainTileMap = 0;
+            this->forceUpdateLogicalAndMiscDisplayLayers = 1;
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
+            this->counter1 = 0;
+            DAT_RotateMapOrPullDownTerrain::instance = 1;
             return;
         }
-        if (this->refreshCertainTileMap == 4 || this->refreshCertainTileMap == 2) {
-            this->refreshRelatedOne = 1;
-        } else {
-            this->refreshRelatedOne = 0;
-            this->refreshRelatedTwo = 2;
-        }
-        this->refreshCertainTileMap = 0;
-        this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
-        this->counter1 = 0;
-        DAT_RotateMapOrPullDownTerrain::instance = 1;
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::rebuildShowHiLayerFromHeights, this)();
     }
 
 }
