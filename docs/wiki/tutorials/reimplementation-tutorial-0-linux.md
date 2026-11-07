@@ -7,6 +7,13 @@ Before you begin, install the following:
 * **wine**
 
   For example, on ARCH Linux use: `pacman -S wine`.
+
+* **ntlm_auth (winbind)**
+
+  The compiler talks to `mspdbsrv.exe` over RPC with NTLM authentication, which wine implements through Samba's `ntlm_auth`.
+  Without it, every compile with debug information fails with `fatal error C1902: Program database manager mismatch; please check your installation`.
+
+  On ARCH Linux it is part of `samba` (`pacman -S samba`), on Debian/Ubuntu install `winbind` (`apt install winbind`).
   
 * **CMake 3.24 or later**
 
@@ -66,7 +73,7 @@ cd OpenSHC
 Apply the custom `mt.exe` and other patches:
 
 ```bash
-cp -r MSVC1400-SP1/patches/ MSVC1400-SP1/
+cp -r MSVC1400-SP1/patches/wine/VC MSVC1400-SP1/
 ``` 
 
 Without this patch, `mt.exe` may crash even though the compilation finishes fine.
@@ -87,7 +94,13 @@ After the link is created, a folder named `_original` will appear in the reposit
 
 > This script may require administrator privileges to be able to create the symbolic link
 
-Alternatively, copy the game folder as `_original` into the project root.
+Alternatively, create the link from bash, for example for a Steam installation (Steam installs Stronghold Crusader HD into the `Stronghold Crusader Extreme` folder):
+
+```bash
+ln -s "$HOME/.local/share/Steam/steamapps/common/Stronghold Crusader Extreme" _original
+```
+
+Or copy the game folder as `_original` into the project root.
 
 ---
 
@@ -102,6 +115,8 @@ python -m pip install -r reccmp/dll/requirements.txt
 ```
 
 Exit and launch a new bash shell to have `reccmp-reccmp` in your PATH.
+
+> On Debian/Ubuntu, `python -m venv` needs the `python3-venv` package. Alternatively, use [uv](https://docs.astral.sh/uv/): `uv venv --prompt reccmp reccmp/dll/.venv` and `uv pip install --python reccmp/dll/.venv/bin/python -r reccmp/dll/requirements.txt`.
 
 > In the future, if you want to setup comparison of the reimplemented executable refer to `reccmp/exe` 
 
@@ -118,6 +133,14 @@ From the `OpenSHC` directory, run in a wine cmd prompt (`wine cmd`):
 ```bash
 build.bat RelWithDebInfo OpenSHC.dll
 ```
+
+> The presets use NMake, which compiles one file at a time. With many files in `cmake/openshc-sources.txt.local` the first build can take more than an hour under wine. `tools/reimplementation-helper/batch/build_parallel.py` compiles the objects in parallel and then links through `build.bat`. Run it from bash (not `wine cmd`), with `WINEPREFIX` set if you do not use the default prefix:
+>
+> ```bash
+> python3 tools/reimplementation-helper/batch/build_parallel.py -j 8
+> ```
+>
+> When redirecting the build output of wine, write it to a file instead of a pipe (e.g. `| tail`): `mspdbsrv.exe` keeps running in the background and holds the pipe open, so the command never returns.
 
 ---
 

@@ -63,7 +63,7 @@ namespace Game {
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         int furthestMission; // 0x00000054 length: 4
-        dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
+        BOOLEnum unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
         dword gameSuspended; // 0x00000064 length: 4
