@@ -15,7 +15,7 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/ActiveMenuTab.hpp"
-#include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
+#include "OpenSHC/UI/Enums/BuildMenuTabTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/MenuItemActionHandler.hpp"
@@ -34,7 +34,7 @@ namespace Game {
     using OpenSHC::Rendering::Enums::DirectDrawStatusInt;
     using OpenSHC::UI::ActiveMenuTab;
     using OpenSHC::UI::MenuItemActionHandler;
-    using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
+    using OpenSHC::UI::Enums::BuildMenuTabTypeInt;
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -58,12 +58,12 @@ namespace Game {
         ActiveMenuTab landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
         dword field_0x30; // 0x00000030 length: 4
         ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
-        BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
+        BuildMenuTabTypeInt tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         int furthestMission; // 0x00000054 length: 4
-        dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
+        BOOLEnum unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
         dword gameSuspended; // 0x00000064 length: 4

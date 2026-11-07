@@ -95428,7 +95428,7 @@ enum {
     SHC_3BB0A8C1_0x00B960B8 = 0x00B960B8,
     // label: DAT_SH1_SiegeAdvancedMode
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B960C8 = 0x00B960C8,
     // type: /int
     SHC_3BB0A8C1_0x00B960CC = 0x00B960CC,
@@ -95476,11 +95476,11 @@ enum {
     SHC_3BB0A8C1_0x00B96114 = 0x00B96114,
     // label: DAT_IntroBlendStrength
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B96118 = 0x00B96118,
     // label: DAT_IntroStep
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B9611C = 0x00B9611C,
     // type: /int
     SHC_3BB0A8C1_0x00B96120 = 0x00B96120,
@@ -97225,7 +97225,7 @@ enum {
     SHC_3BB0A8C1_0x00DF555C = 0x00DF555C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5560 = 0x00DF5560,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF5564 = 0x00DF5564,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF5568 = 0x00DF5568,
@@ -97269,7 +97269,7 @@ enum {
     SHC_3BB0A8C1_0x00DF563C = 0x00DF563C,
     // type: /int
     SHC_3BB0A8C1_0x00DF5640 = 0x00DF5640,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF5644 = 0x00DF5644,
     // type: /int
     SHC_3BB0A8C1_0x00DF5648 = 0x00DF5648,
@@ -97319,7 +97319,7 @@ enum {
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0B20 = 0x00EB0B20,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB0B24 = 0x00EB0B24,
     // type: /int[48][4]
     SHC_3BB0A8C1_0x00EB0B28 = 0x00EB0B28,
@@ -97407,9 +97407,9 @@ enum {
     SHC_3BB0A8C1_0x00EB9B50 = 0x00EB9B50,
     // label: DAT_StoredGameMode
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B58 = 0x00EB9B58,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EB9B60 = 0x00EB9B60,
     // label: DAT_FinalResultsOrderByColumn
     // location:
@@ -97441,7 +97441,7 @@ enum {
     SHC_3BB0A8C1_0x00EC0838 = 0x00EC0838,
     // type: /int
     SHC_3BB0A8C1_0x00EC083C = 0x00EC083C,
-    // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1
+    // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1[600]
     SHC_3BB0A8C1_0x00EC0840 = 0x00EC0840,
     // type: /int[40]
     SHC_3BB0A8C1_0x00ED2630 = 0x00ED2630,
@@ -97467,7 +97467,7 @@ enum {
     SHC_3BB0A8C1_0x00ED2794 = 0x00ED2794,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2798 = 0x00ED2798,
-    // type: /int
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00ED279C = 0x00ED279C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27A0 = 0x00ED27A0,
@@ -97481,11 +97481,11 @@ enum {
     SHC_3BB0A8C1_0x00ED27B4 = 0x00ED27B4,
     // type: /int
     SHC_3BB0A8C1_0x00ED27B8 = 0x00ED27B8,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED27BC = 0x00ED27BC,
     // label: DAT_SkirmishTrailRelated1
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED27C0 = 0x00ED27C0,
     // type: /int
     SHC_3BB0A8C1_0x00ED27C4 = 0x00ED27C4,
@@ -97519,7 +97519,7 @@ enum {
     SHC_3BB0A8C1_0x00ED3118 = 0x00ED3118,
     // type: /dword
     SHC_3BB0A8C1_0x00ED311C = 0x00ED311C,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3120 = 0x00ED3120,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3124 = 0x00ED3124,
@@ -97664,7 +97664,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31E0 = 0x00ED31E0,
     // label: DAT_CurrentTribeID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00EE0FB0 = 0x00EE0FB0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE0FB4 = 0x00EE0FB4,

@@ -100,8 +100,7 @@ namespace Synchrony {
         int somePlayerRelatedArray[9]; // 0x000006F0 length: 36
         int currentAIArray[9]; // 0x00000714 length: 36
         int aiVariationArray[9]; // 0x00000738 length: 36
-        byte field_0x75c[9]; // 0x0000075C length: 9
-        byte field_0x765[3][9]; // 0x00000765 length: 27
+        int field_0x75c[9]; // 0x0000075C length: 36
         BOOLEnum hasHostAddress[2]; // 0x00000780 length: 8
         IN_ADDR hostAddress[2]; // 0x00000788 length: 8
         BOOLEnum isHost; // 0x00000790 length: 4
@@ -264,7 +263,7 @@ namespace Synchrony {
         undefined4 skirmishCurrentAdvantageBalance; // 0x001072E4 length: 4
         int field_0x1072e8; // 0x001072E8 length: 4
         int field_0x1072ec; // 0x001072EC length: 4
-        undefined4 chatScrollOffset; // 0x001072F0 length: 4
+        int chatScrollOffset; // 0x001072F0 length: 4
         BOOLEnum reparseMaps; // 0x001072F4 length: 4
         int mapExistenceAckCountdown; // 0x001072F8 length: 4
         int DAT_MapSelectionScrollOffset; // 0x001072FC length: 4

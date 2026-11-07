@@ -155,8 +155,13 @@ def function_body_span(text, start=0):
 
 
 def run_reccmp():
+    # --ignore-security-cookie is not cosmetic: src/OpenSHC/Globals/MSVC_SecurityCookie.hpp declares a
+    # resolver on 0x00B94220, which is the game's own __security_cookie. With the data resolvers enabled
+    # reccmp therefore names the original's prologue read through that resolver and ours as
+    # __security_cookie, and reports the pair as a mismatch although it is the same address. Every /GS
+    # function then reads 1-3 points low - six functions looked like regressions this way.
     result = subprocess.run(
-        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--resolve-wrapped-calls", "--quiet", "--cache", "--json", "diff.json"],
+        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--resolve-wrapped-calls", "--ignore-security-cookie", "--quiet", "--cache", "--json", "diff.json"],
         capture_output=True, text=True, stdin=subprocess.DEVNULL)
     if result.returncode:
         sys.exit("reccmp failed:\n" + result.stdout[-800:] + result.stderr[-800:])

@@ -41,7 +41,7 @@ namespace UI {
                 if (row == DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected) {
                     color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 } else {
-                    color = 12775659;
+                    color = OpenSHC::Rendering::Colors::COL_C2F0EB;
                     if (DAT_ButtonCurrentlyInteracting::instance) {
                         color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                     }
@@ -55,10 +55,9 @@ namespace UI {
                 int textShift;
                 if (DAT_MapMissionType::instance != 0) {
                     textShift = 5;
-                    if (DAT_MenuTextInputState::instance.DAT_ArrayOfMapU3EndInt2
-                            [DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
-                                    [DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + row]
-                                + 1]
+                    if (DAT_MenuTextInputState::instance.arrayOfMapEndInt2[DAT_MenuTextInputState::instance
+                                .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
+                                    + row]]
                         == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 727,
