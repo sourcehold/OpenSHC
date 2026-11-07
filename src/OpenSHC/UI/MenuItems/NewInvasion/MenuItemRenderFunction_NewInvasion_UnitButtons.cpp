@@ -109,9 +109,10 @@ namespace UI {
                       .data.invasion.unitCountsPerUnitType[unitType];
             if (unitCount != 0) {
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
-                        DAT_TextManagerObject::ptr)(unitCount, DAT_ButtonX::instance + DAT_ButtonW::instance - 10,
-                        DAT_ButtonY::instance + 7, OpenSHC::Text::TTA_RIGHT, 0xc2f0eb, 18, FALSE, 0);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(unitCount,
+                        DAT_ButtonX::instance + DAT_ButtonW::instance - 10, DAT_ButtonY::instance + 7,
+                        OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 } else {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(unitCount,
