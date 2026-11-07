@@ -312,7 +312,7 @@ namespace Map {
 
         void destroyWallsOfPlayer(int playerID);
 
-        void validateWallPlacementAtTile(int playerID, uint x, uint y, MappersEnum param_4);
+        void validateWallPlacementAtTile(int playerID, uint x, uint y, short param_4);
 
         void setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize);
 
