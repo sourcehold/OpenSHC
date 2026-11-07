@@ -20,10 +20,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
 
-    using OpenSHC::Map::LogicHelpers::L_BORDER;
-    using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
-    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
-
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -67,7 +63,6 @@ namespace Map {
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             int buildingID = DAT_TileMapState::instance.BuildingLayer[tile];
-            bool cleared = false;
             if (buildingID != 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                         == OpenSHC::Map::Buildings::BT_WOODCUTTERSHUT
@@ -88,11 +83,14 @@ namespace Map {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
                         DAT_BuildingsState::ptr)(buildingID, playerID, 50);
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFromTerrain, this)(buildingID);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFromTerrain, DAT_TileMapState::ptr)(
+                        buildingID);
                     MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
-                    cleared = true;
+                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        0x32c, '\0', DAT_BuildingsState::instance.buildings + buildingID);
+                    result = TRUE;
                 }
             } else if ((DAT_TileMapState::instance.LogicLayer[tile] & L_FARM_FIELD_APPLE) != 0) {
                 buildingID = MACRO_CALL_MEMBER(
@@ -101,17 +99,15 @@ namespace Map {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
                         DAT_BuildingsState::ptr)(buildingID, playerID, 0x32);
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFromTerrain, this)(buildingID);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFromTerrain, DAT_TileMapState::ptr)(
+                        buildingID);
                     MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
-                    cleared = true;
+                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        0x32c, '\0', DAT_BuildingsState::instance.buildings + buildingID);
+                    result = TRUE;
                 }
-            }
-            if (cleared) {
-                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    0x32c, '\0', DAT_BuildingsState::instance.buildings + buildingID);
-                result = TRUE;
             }
             commandBuildingType = (MappersEnum)(commandBuildingType + OpenSHC::Commands::M_MAPPER_AREA);
         } while ((int)commandBuildingType < this->constructionTileCount);
