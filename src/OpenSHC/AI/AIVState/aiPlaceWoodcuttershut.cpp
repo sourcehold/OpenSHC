@@ -22,9 +22,11 @@ namespace AI {
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
-        // the (uint) on the row index is load-bearing: it is the one the row stride multiplies, and dropping it
-        // costs 1.0000 -> 0.9661 (quick_diff) because the signed form sign-extends before the multiply. The
-        // same cast on the column index was redundant and has been removed.
+        // the (uint) here is not about signedness - it is a common-subexpression barrier, and dropping it costs
+        // 1.0000 -> 0.9661 (quick_diff). The original compares this field against -1 in memory and then re-loads
+        // it to index with; without the cast the index is the same expression as the compared one, so MSVC
+        // shares a single load. Retyping the field uint would not help: both sides would then match and CSE
+        // again. The column index needs no such cast because it is never compared, and it has been removed.
         this->heatMaps[(uint)this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition]
             .woodRelatedCountdownTo0 = 4;
         // search around the result of the woodcutter search
