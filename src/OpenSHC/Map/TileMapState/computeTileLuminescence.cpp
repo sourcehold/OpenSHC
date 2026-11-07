@@ -7,6 +7,9 @@
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 
+/* the original takes the larger of the building height and 0x10 with a max macro, which calls the getter twice */
+#define MAX_OF(A, B) ((A) < (B) ? (B) : (A))
+
 namespace OpenSHC {
 namespace Map {
 
@@ -27,9 +30,9 @@ namespace Map {
         int acrossShade = 2;
         int diagonal = 0;
         int opposite = 0;
-        int along = 0;
         int across = 0;
-        uint high = 0;
+        int along = 0;
+        int high = 0;
         int slope = 0;
         if ((logic & (L_BORDER | L_BORDER_EDGE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
             return;
@@ -62,10 +65,10 @@ namespace Map {
             across = 4;
         }
 
-        uint ownHeight = this->HeightLayer[tileUnk];
+        int ownHeight = this->HeightLayer[tileUnk];
         if ((logic & L_TREE) != 0) {
-            int stage = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage, DAT_LandscapeState::ptr)(
-                this->OrganismLayer[tileUnk]);
+            int stage = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                &DAT_LandscapeState::instance)(this->OrganismLayer[tileUnk]);
             if (stage > 2) {
                 shade = stage;
             }
@@ -73,41 +76,39 @@ namespace Map {
             shade = 5;
         }
 
-        /* first ray: along the light's diagonal, shading hardest close to the tileUnk */
+        /* first ray: along the light's diagonal, shading hardest close to the tile */
         int rayTile = tileUnk;
         int rayY = y;
-        uint step = 6;
-        do {
+        for (int step = 6; step > 1; step = step - 1) {
             rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
             rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
             if ((this->LogicLayer[rayTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 break;
             }
-            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
-                high = this->HeightLayer[rayTile];
-            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3, DAT_BuildingsState::ptr)(
-                           this->BuildingLayer[rayTile])
-                == 0) {
-                if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                        this->BuildingLayer[rayTile])
-                    < 0x10) {
-                    high = this->HeightLayer[rayTile] + 0x10;
-                } else {
-                    high = (uint)this->HeightLayer[rayTile]
-                        + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                              this->BuildingLayer[rayTile]);
+            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+                int building = this->BuildingLayer[rayTile];
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                        &DAT_BuildingsState::instance)(building)
+                    == 0) {
+                    high = this->HeightLayer[rayTile]
+                        + MAX_OF(MACRO_CALL_MEMBER(
+                                     OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                     &DAT_BuildingsState::instance)(building),
+                            0x10);
                 }
+            } else {
+                high = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
                 high = high
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage, DAT_LandscapeState::ptr)(
-                          this->OrganismLayer[rayTile])
+                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
                         * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
                 high = high + 0x28;
             }
             int rise = high - ownHeight;
-            uint lit;
+            int lit;
             if (rise <= 0) {
                 lit = 2;
             } else if (rise > 0x12) {
@@ -115,71 +116,69 @@ namespace Map {
             } else if (rise > 0xe) {
                 lit = step;
             } else if (rise > 0xa) {
-                lit = step + -1;
+                lit = step - 1;
             } else if (rise > 6) {
-                lit = step + -2;
+                lit = step - 2;
             } else if (rise > 2) {
-                lit = step + -3;
+                lit = step - 3;
             } else {
                 lit = 0;
             }
-            if (shade < (int)lit) {
+            if (lit > shade) {
                 shade = lit;
             }
-            step = step - 1;
-        } while ((int)step > 1);
+        }
 
         /* second ray: one cardinal step off the diagonal */
         rayTile = this->directionTranslationMatrix[y][along] + tileUnk;
         rayY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[along].int_.yOffset + y;
         along = 4;
-        uint sampled = high;
+        int sampled = high;
         do {
             if ((this->LogicLayer[rayTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 break;
             }
-            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
-                sampled = this->HeightLayer[rayTile];
-            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
-                           DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile])
-                == 0) {
-                if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                        this->BuildingLayer[rayTile])
-                    < 0x10) {
-                    sampled = this->HeightLayer[rayTile] + 0x10;
-                } else {
-                    sampled = (uint)this->HeightLayer[rayTile]
-                        + MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                            DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile]);
+            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+                int building = this->BuildingLayer[rayTile];
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                        &DAT_BuildingsState::instance)(building)
+                    == 0) {
+                    sampled = this->HeightLayer[rayTile]
+                        + MAX_OF(MACRO_CALL_MEMBER(
+                                     OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                     &DAT_BuildingsState::instance)(building),
+                            0x10);
                 }
+            } else {
+                sampled = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
                 sampled = sampled
                     + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
-                          DAT_LandscapeState::ptr)(this->OrganismLayer[rayTile])
+                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
                         * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
                 sampled = sampled + 0x28;
             }
             int rise = sampled - ownHeight;
+            int lit;
             if (rise <= 0) {
-                high = 2;
+                lit = 2;
             } else if (rise > 0x12) {
-                high = along + 1;
+                lit = along + 1;
             } else if (rise > 0xc) {
-                high = along;
+                lit = along;
             } else if (rise > 6) {
-                high = along - 1;
+                lit = along - 1;
             } else {
-                high = 0;
+                lit = 0;
             }
-            if (alongShade < (int)high) {
-                alongShade = high;
+            if (lit > alongShade) {
+                alongShade = lit;
             }
             rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
-            along = along - 1;
             rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
+            along = along - 1;
         } while (along > -1);
 
         /* third ray: the same, one cardinal step the other way */
@@ -190,89 +189,89 @@ namespace Map {
             if ((this->LogicLayer[rayTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 break;
             }
-            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
-                sampled = this->HeightLayer[rayTile];
-            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
-                           DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile])
-                == 0) {
-                if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                        this->BuildingLayer[rayTile])
-                    < 0x10) {
-                    sampled = this->HeightLayer[rayTile] + 0x10;
-                } else {
-                    sampled = (uint)this->HeightLayer[rayTile]
-                        + MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                            DAT_BuildingsState::ptr)(this->BuildingLayer[rayTile]);
+            if ((this->LogicLayer[rayTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+                int building = this->BuildingLayer[rayTile];
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
+                        &DAT_BuildingsState::instance)(building)
+                    == 0) {
+                    sampled = this->HeightLayer[rayTile]
+                        + MAX_OF(MACRO_CALL_MEMBER(
+                                     OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                     &DAT_BuildingsState::instance)(building),
+                            0x10);
                 }
+            } else {
+                sampled = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
                 sampled = sampled
                     + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
-                          DAT_LandscapeState::ptr)(this->OrganismLayer[rayTile])
+                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
                         * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
                 sampled = sampled + 0x28;
             }
             int rise = sampled - ownHeight;
+            int lit;
             if (rise <= 0) {
-                high = 2;
+                lit = 2;
             } else if (rise > 0x12) {
-                high = across + 1;
+                lit = across + 1;
             } else if (rise > 0xc) {
-                high = across;
+                lit = across;
             } else if (rise > 6) {
-                high = across - 1;
+                lit = across - 1;
             } else {
-                high = 0;
+                lit = 0;
             }
-            if (acrossShade < (int)high) {
-                acrossShade = high;
+            if (lit > acrossShade) {
+                acrossShade = lit;
             }
             rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
-            across = across - 1;
             rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
+            across = across - 1;
         } while (across > -1);
 
-        if (shade + -2 < (int)((acrossShade - 4) + alongShade)) {
-            shade = (acrossShade - 2) + alongShade;
-            if (shade > 6) {
+        if (acrossShade + alongShade - 4 > shade - 2) {
+            shade = acrossShade + alongShade - 2;
+            if (shade >= 7) {
                 shade = 7;
             }
-        } else if (shade == 2) {
-            /* nothing casts onto the tileUnk, so shade it by the slope it sits on */
+        }
+        if (shade == 2) {
+            /* nothing casts onto the tile, so shade it by the slope it sits on */
             int diagonalTile = this->directionTranslationMatrix[y][diagonal] + tileUnk;
-            uint lightSide = ownHeight;
-            if ((this->LogicLayer[diagonalTile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
-                if ((this->LogicLayer[diagonalTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0) {
-                    lightSide = this->HeightLayer[diagonalTile];
-                } else {
-                    lightSide = sampled;
+            int lightSide;
+            if ((this->LogicLayer[diagonalTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                lightSide = ownHeight;
+            } else {
+                if ((this->LogicLayer[diagonalTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+                    int building = this->BuildingLayer[diagonalTile];
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag3,
-                            DAT_BuildingsState::ptr)(this->BuildingLayer[diagonalTile])
+                            &DAT_BuildingsState::instance)(building)
                         == 0) {
-                        if ((int)MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID, DAT_BuildingsState::ptr)(
-                                this->BuildingLayer[diagonalTile])
-                            < 0x10) {
-                            lightSide = this->HeightLayer[diagonalTile] + 0x10;
-                        } else {
-                            lightSide = (uint)this->HeightLayer[diagonalTile]
-                                + MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                                    DAT_BuildingsState::ptr)(this->BuildingLayer[diagonalTile]);
-                        }
+                        sampled = this->HeightLayer[diagonalTile]
+                            + MAX_OF(MACRO_CALL_MEMBER(
+                                         OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                         &DAT_BuildingsState::instance)(building),
+                                0x10);
                     }
+                } else {
+                    sampled = this->HeightLayer[diagonalTile];
                 }
+                lightSide = sampled;
             }
             int oppositeTile = this->directionTranslationMatrix[y][opposite] + tileUnk;
-            uint darkSide = ownHeight;
-            if ((this->LogicLayer[oppositeTile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
+            int darkSide;
+            if ((this->LogicLayer[oppositeTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                darkSide = ownHeight;
+            } else {
                 darkSide = this->HeightLayer[oppositeTile];
             }
-            if ((int)lightSide < (int)(ownHeight - 4)) {
+            if (lightSide < ownHeight - 4) {
                 slope = 1;
             }
-            if (ownHeight + 4 < darkSide) {
+            if (darkSide > ownHeight + 4) {
                 slope = slope + 1;
             }
             if ((this->LogicLayer[tileUnk] & L_MOAT) == 0) {
