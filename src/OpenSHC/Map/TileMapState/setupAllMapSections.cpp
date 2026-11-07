@@ -92,7 +92,11 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::clearBuildings, DAT_BuildingsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::clearRocksAndTrees, DAT_LandscapeState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::resetWind, DAT_LandscapeState::ptr)();
-        MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
+        // the original calls this empty function as a member (object in ecx), of UnitsState here and of UnitsState
+        // and LandscapeState below; the generated header has it as a global, so pass the object through a one-argument
+        // __fastcall pointer
+        ((void(__fastcall*)(OpenSHC::Map::Units::UnitsState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
+            DAT_UnitsState::ptr);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearAllUnits, DAT_UnitsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearAllTribes, DAT_TribesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::clearMapAndTimeAndPlayerData, DAT_GameState::ptr)();
@@ -110,8 +114,10 @@ namespace Map {
             DAT_AICState::instance.tribeIDArray[tribe] = 0;
             DAT_AICState::instance.tribeUIDArray[tribe] = 0;
         }
-        MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
-        MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
+        ((void(__fastcall*)(OpenSHC::Map::Units::UnitsState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
+            DAT_UnitsState::ptr);
+        ((void(__fastcall*)(OpenSHC::Map::LandscapeState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
+            DAT_LandscapeState::ptr);
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Entities::EntityState_Func::clearEntityArrayAndSeagullArray, DAT_EntityState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
