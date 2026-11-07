@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00500980
-    undefined4 TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
+    BOOLEnum TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
     {
         if (x1 > 399 || y1 > 399) {
             return 0;
@@ -41,8 +41,8 @@ namespace Map {
         }
 
         for (int index = 0; index < 4; index++) {
-            int fromXPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].x + x2;
-            int fromYPosition = DAT_TerrainDefinedData::instance.field2347_0x378c[index].y + y2;
+            int fromXPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].x + x2;
+            int fromYPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
             if ((short)this->PathConnectionLayer[tile] != area) {
                 continue;
@@ -66,12 +66,12 @@ namespace Map {
         }
 
         if (bestIndex >= 0) {
-            this->field155_0x5549a8 = DAT_TerrainDefinedData::instance.field2347_0x378c[bestIndex].x + x2;
-            this->field156_0x5549ac = DAT_TerrainDefinedData::instance.field2347_0x378c[bestIndex].y + y2;
+            this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
+            this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
             return 1;
         }
-        this->field155_0x5549a8 = x2;
-        this->field156_0x5549ac = y2;
+        this->field_0x5549a8 = x2;
+        this->field_0x5549ac = y2;
         return 0;
     }
 

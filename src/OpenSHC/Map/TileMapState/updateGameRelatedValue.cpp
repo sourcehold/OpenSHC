@@ -16,7 +16,7 @@ namespace Map {
         }
 
         if (DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown == 0x28) {
-            this->field187_0x554a10 = -1;
+            this->field_0x554a10 = -1;
         }
         DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown
             = DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown - 1;
@@ -24,11 +24,11 @@ namespace Map {
         int signpostDistance = ((0x28 - DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown)
                                    * DAT_GameState::instance.mapAndTime.unk_signpostDistance)
             / 0x28;
-        if (signpostDistance == this->field187_0x554a10) {
+        if (signpostDistance == this->field_0x554a10) {
             return;
         }
 
-        this->field187_0x554a10 = signpostDistance;
+        this->field_0x554a10 = signpostDistance;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathfindingUpdate_0x4a8ab0,
             DAT_PathFindingState::ptr)(signpostDistance);
     }

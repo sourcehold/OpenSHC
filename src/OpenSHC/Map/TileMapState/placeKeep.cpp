@@ -96,8 +96,8 @@ namespace Map {
         /* the three keep doors and the two outbuildings are laid out per keep type and orientation */
         int group = orientation / 2 + -0xa0 + (short)type * 4;
         {
-            int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 0].x + baseX;
-            uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 0].y + baseY;
+            int doorX = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 0].x + baseX;
+            uint doorY = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 0].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
             int doorID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
@@ -114,8 +114,8 @@ namespace Map {
         }
 
         {
-            int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 1].x + baseX;
-            uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 1].y + baseY;
+            int doorX = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 1].x + baseX;
+            uint doorY = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 1].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
             int doorID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
@@ -132,8 +132,8 @@ namespace Map {
         }
 
         {
-            int doorX = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 2].x + baseX;
-            uint doorY = DAT_TerrainDefinedData::instance.field130_0x264[0][group * 3 + 2].y + baseY;
+            int doorX = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 2].x + baseX;
+            uint doorY = DAT_TerrainDefinedData::instance.field_0x264[0][group * 3 + 2].y + baseY;
             int doorTile = DAT_ViewportRenderState::instance.translationMatrix[doorY].addXgetTile + doorX;
             int doorID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
@@ -180,10 +180,10 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[campID].tileRefs[index]
                     = DAT_ViewportRenderState::instance
                           .translationMatrix[(short)DAT_BuildingsState::instance.buildings[campID].y
-                              + DAT_TerrainDefinedData::instance.field197_0x444[index].y]
+                              + DAT_TerrainDefinedData::instance.field_0x444[index].y]
                           .addXgetTile
                     + (short)DAT_BuildingsState::instance.buildings[campID].x
-                    + DAT_TerrainDefinedData::instance.field197_0x444[index].x;
+                    + DAT_TerrainDefinedData::instance.field_0x444[index].x;
             }
             this->HeightLayer[tile] = (byte)xyValue;
             /* only the campground's cross of five middle tiles blocks movement */

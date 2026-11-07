@@ -103,7 +103,7 @@ namespace Map {
                             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                             DAT_PathFindingState::ptr)(y, tile);
                         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-                        this->field204_0x554a30 = 1;
+                        this->field_0x554a30 = 1;
                         break;
                     }
                     this->HeightLayer[tile] = this->HeightLayer[tile] - 1;

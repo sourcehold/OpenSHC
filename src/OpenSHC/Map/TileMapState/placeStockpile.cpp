@@ -35,7 +35,7 @@ namespace Map {
                 DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y + y, averageHeight + 10,
                 (BuildingType)type, 2, playerID, variation);
             DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uid;
-            DAT_BuildingsState::instance.buildings[buildingID].field125_0x190 = part + 1;
+            DAT_BuildingsState::instance.buildings[buildingID].field_0x190 = part + 1;
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 2);

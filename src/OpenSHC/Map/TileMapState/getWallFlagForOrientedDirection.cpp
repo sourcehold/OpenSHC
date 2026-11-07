@@ -4,7 +4,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F89C0
-    uint TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int twoOrFour)
+    BOOLEnum TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int twoOrFour)
     {
         int direction = 0;
         if (twoOrFour == 2) {

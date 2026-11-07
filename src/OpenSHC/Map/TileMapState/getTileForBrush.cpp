@@ -24,7 +24,7 @@ namespace Map {
         if (index >= 37) {
             index = 0;
         }
-        int brushStep = DAT_TerrainDefinedData::instance.field12_0xc[index];
+        int brushStep = DAT_TerrainDefinedData::instance.field_0xc[index];
         if (brushStep == 0xf) {
             return;
         }
@@ -38,22 +38,22 @@ namespace Map {
         if (brushStep < 28) {
             brushStep = brushStep - 20;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer
-                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer
-                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
         } else if (brushStep < 48) {
             brushStep = brushStep - 40;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer
-                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer
-                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer
-                = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
         }
     }
 

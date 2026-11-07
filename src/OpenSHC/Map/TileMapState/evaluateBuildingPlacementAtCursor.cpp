@@ -40,7 +40,7 @@ namespace Map {
             return;
         }
         this->buildingPlacementFail = FALSE;
-        if (DAT_ViewportRenderState::instance.viewportState.field15_0x3c != 0) {
+        if (DAT_ViewportRenderState::instance.viewportState.field_0x3c != 0) {
             moatTile = DAT_ViewportRenderState::instance.viewportState.cursorTile;
             this->savedCursorTile = DAT_ViewportRenderState::instance.viewportState.cursorTile;
         }

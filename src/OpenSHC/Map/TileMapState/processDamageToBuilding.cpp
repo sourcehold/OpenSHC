@@ -123,7 +123,7 @@ namespace Map {
                         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
                         this->DamageLayer[tile] = 0;
                         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-                        this->field204_0x554a30 = 1;
+                        this->field_0x554a30 = 1;
                         destroyed = TRUE;
                         break;
                     }

@@ -59,8 +59,7 @@ namespace Map {
             pXVar3 = pXVar3 + 6;
             piVar5 = piVar5 + 6;
         } while (param_2 != 0);
-        *(ushort*)&DAT_BuildingsState::instance.buildings[buildingID].padding_0x26e
-            = (-(ushort)(iVar4 != 0) & 0xffb6) + 0x51;
+        DAT_BuildingsState::instance.buildings[buildingID].someFarmRelatedState = iVar4 != 0 ? 7 : 81;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 3);

@@ -5,7 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -30,9 +30,9 @@ namespace Map {
         int overshoot = 2;
         if ((short)command == 0x1b) {
             budget = this->maxWallHeightInPath;
-            if (this->field118_0x554920 == 0) {
+            if (this->field_0x554920 == 0) {
                 this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1]
-                    = (short)GMTotalPicturesProcessed::instance[6] + 0x13;
+                    = (short)GMFirstPictureIndex::instance[6] + 0x13;
                 return;
             }
         }
@@ -69,11 +69,11 @@ namespace Map {
                 }
                 if (this->illegalBuild == FALSE) {
                     if ((short)command == 0x19) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6];
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
                     } else if ((short)command == 0x2e) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 1;
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
                     } else if ((short)command == 0x1a) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 4;
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
                     } else if ((short)command == 0x1b) {
                         /* a stair climbs one graphic per eight units of height below the wall top */
                         int steps = (budget - (int)(uint)this->HeightLayer[tile]) / 8 - 1;
@@ -82,19 +82,19 @@ namespace Map {
                                 steps = 10;
                             }
                             this->ConstructionGFXLayer[tile]
-                                = (short)steps + 8 + (ushort)GMTotalPicturesProcessed::instance[6];
+                                = (short)steps + 8 + (ushort)GMFirstPictureIndex::instance[6];
                         } else {
                             this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
                         }
                     }
                 } else if ((short)command == 0x19) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 0x13;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                 } else if ((short)command == 0x2e) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 0x13;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                 } else if ((short)command == 0x1a) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 0x14;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x14;
                 } else if ((short)command == 0x1b) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMTotalPicturesProcessed::instance[6] + 0x13;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                 }
             }
 

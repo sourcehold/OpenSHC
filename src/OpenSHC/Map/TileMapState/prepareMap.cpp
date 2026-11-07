@@ -98,14 +98,14 @@ namespace Map {
         this->maxPitchDitchCount = 4000;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetHeightAndMapBorders, this)(this->mapSize);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::toggleFlatView, this)(0);
-        DAT_TileMapState::instance.field95_0x5548d0 = 0;
+        DAT_TileMapState::instance.field_0x5548d0 = 0;
         DAT_TileMapState::instance.flatViewToggleValue2 = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
         this->forceUpdateLogicalAndMiscDisplayLayers = 1;
         this->forceUpdateTextureTilemap = 1;
         this->forceUpdateGFXLayers = 1;
         this->forceUpdateMacroLayerFlag = 1;
-        this->field68_0x55487c = 500;
+        this->field_0x55487c = 500;
 
         /* every subsystem gets a chance to migrate what it loaded from an older map format */
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::upgradeTribeArrayLayoutForMapVersion,

@@ -9,7 +9,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -42,7 +42,7 @@ namespace Map {
                 this->GfxLayer[tile]
                     = ((short)DAT_TerrainDefinedData::instance
                               .BrushSizeArray[DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight + 7]
-                          + (short)this->buildingRotationRelatedValue + (short)GMTotalPicturesProcessed::instance[0x9d])
+                          + (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x9d])
                     - 1;
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_STOCKPILE
@@ -50,17 +50,17 @@ namespace Map {
                     == OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE) {
                 /* a stockpile's pile grows with what is stored on it */
                 if (stored < 1) {
-                    this->GfxLayer[tile] = (short)this->buildingRotationRelatedValue
-                        + (short)GMTotalPicturesProcessed::instance[0xf] + 4;
+                    this->GfxLayer[tile]
+                        = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0xf] + 4;
                 } else {
                     short resource = DAT_BuildingsState::instance.buildings[buildingID].currentStoredResourceType;
                     short pile;
-                    if (DAT_TerrainDefinedData::instance.field870_0x8b4[resource] == 2) {
+                    if (DAT_TerrainDefinedData::instance.field_0x8b4[resource] == 2) {
                         int remaining
                             = DAT_BuildingsState::instance.buildings[buildingID].currentLimitOfResource - stored;
                         pile = (short)this->buildingRotationRelatedValue
                             + ((short)(remaining / 4) + ((ushort)remaining & 3) * 0xc) * 4;
-                    } else if (DAT_TerrainDefinedData::instance.field870_0x8b4[resource] == 0) {
+                    } else if (DAT_TerrainDefinedData::instance.field_0x8b4[resource] == 0) {
                         pile = (short)this->buildingRotationRelatedValue + -4 + (short)stored * 4;
                     } else {
                         pile = (short)this->buildingRotationRelatedValue
@@ -68,8 +68,8 @@ namespace Map {
                                   - (short)stored)
                                 * 4;
                     }
-                    this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance[0xf]
-                        + (short)DAT_TerrainDefinedData::instance.field865_0x84c[resource] - 1 + pile;
+                    this->GfxLayer[tile] = (short)GMFirstPictureIndex::instance[0xf]
+                        + (short)DAT_TerrainDefinedData::instance.field_0x84c[resource] - 1 + pile;
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_MERCENARYPOST
@@ -77,10 +77,11 @@ namespace Map {
                     == OpenSHC::Map::Buildings::BT_BARRACKS
                 || DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_OUTPOST_EUROPEAN) {
-                this->GfxLayer[tile] = ((short)GMTotalPicturesProcessed::instance
-                                               [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
-                                           + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID
-                                           + (short)this->buildingRotationRelatedValue)
+                this->GfxLayer[tile]
+                    = ((short)GMFirstPictureIndex::instance[(short)DAT_BuildingsState::instance.buildings[buildingID]
+                               .spriteSheetID]
+                          + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID
+                          + (short)this->buildingRotationRelatedValue)
                     - 1;
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == OpenSHC::Map::Buildings::BT_KEEPDOOR_LEFT
@@ -95,14 +96,14 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (facing == 2 || facing == 6) {
                         this->GfxLayer[tile]
-                            = (short)GMTotalPicturesProcessed::instance
+                            = (short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                             + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                   .unknownManorHouseOrStoneKeepRelated
                             + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID;
                     } else {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                       .unknownManorHouseOrStoneKeepRelated
@@ -110,12 +111,13 @@ namespace Map {
                             - 1;
                     }
                 } else if (facing == 2 || facing == 6) {
-                    this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance
-                                               [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
+                    this->GfxLayer[tile]
+                        = (short)GMFirstPictureIndex::instance[(short)DAT_BuildingsState::instance.buildings[buildingID]
+                                  .spriteSheetID]
                         + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset;
                 } else {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset)
                         - 1;
@@ -125,7 +127,7 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (this->mapOrientation != 2 && this->mapOrientation != 6) {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                       .unknownManorHouseOrStoneKeepRelated
@@ -133,7 +135,7 @@ namespace Map {
                             - 1;
                     } else {
                         this->GfxLayer[tile]
-                            = (short)GMTotalPicturesProcessed::instance
+                            = (short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                             + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                   .unknownManorHouseOrStoneKeepRelated
@@ -141,7 +143,7 @@ namespace Map {
                     }
                 } else {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                   .unknownManorHouseOrStoneKeepRelated
@@ -163,14 +165,14 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
                     if (variation == 0x50) {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID
                                   + (short)this->buildingRotationRelatedValue)
                             - 1;
                     } else {
                         this->GfxLayer[tile]
-                            = (((short)GMTotalPicturesProcessed::instance
+                            = (((short)GMFirstPictureIndex::instance
                                        [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                    + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset2)
                                   + (short)this->buildingRotationRelatedValue)
@@ -178,14 +180,14 @@ namespace Map {
                     }
                 } else if (variation != 0x50) {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset3
                               + (short)this->buildingRotationRelatedValue)
                         - 1;
                 } else {
                     this->GfxLayer[tile]
-                        = (((short)GMTotalPicturesProcessed::instance
+                        = (((short)GMFirstPictureIndex::instance
                                    [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset)
                               + (short)this->buildingRotationRelatedValue)
@@ -200,45 +202,46 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics != 0) {
                     if (variation == 0x50) {
                         this->GfxLayer[tile]
-                            = (((short)GMTotalPicturesProcessed::instance
+                            = (((short)GMFirstPictureIndex::instance
                                        [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                    + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset)
                                   + (short)this->buildingRotationRelatedValue)
                             - 1;
                     } else {
                         this->GfxLayer[tile]
-                            = (short)GMTotalPicturesProcessed::instance
+                            = (short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                             + (short)this->buildingRotationRelatedValue + 0x298;
                     }
                 } else if (variation == 0x50) {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID
                               + (short)this->buildingRotationRelatedValue)
                         - 1;
                 } else {
-                    this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance
-                                               [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
+                    this->GfxLayer[tile]
+                        = (short)GMFirstPictureIndex::instance[(short)DAT_BuildingsState::instance.buildings[buildingID]
+                                  .spriteSheetID]
                         + (short)this->buildingRotationRelatedValue + 0x236;
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                 == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
-                int plank
-                    = DAT_TerrainDefinedData::instance
-                          .field2336_0x1fec[(int)DAT_BuildingsState::instance.buildings[buildingID].buildingVariation
-                              / 2][index];
+                int plank = DAT_TerrainDefinedData::instance
+                                .field_0x1fec[(int)DAT_BuildingsState::instance.buildings[buildingID].buildingVariation
+                                    / 2][index];
                 if (plank != 0) {
-                    this->GfxLayer[tile] = (short)GMTotalPicturesProcessed::instance
-                                               [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
+                    this->GfxLayer[tile]
+                        = (short)GMFirstPictureIndex::instance[(short)DAT_BuildingsState::instance.buildings[buildingID]
+                                  .spriteSheetID]
                         + (short)plank + 0x61e;
                 } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(tile) == 0) {
                     this->GfxLayer[tile] = ((byte)this->RandomLayer[tile] & 3)
-                        + (ushort)this->LuminesenceLayer[tile] * 4 + (short)GMTotalPicturesProcessed::instance[2];
+                        + (ushort)this->LuminesenceLayer[tile] * 4 + (short)GMFirstPictureIndex::instance[2];
                 } else {
                     this->GfxLayer[tile] = ((byte)this->RandomLayer[tile] & 3)
-                        + (this->LuminesenceLayer[tile] + 0x33) * 4 + (short)GMTotalPicturesProcessed::instance[5];
+                        + (this->LuminesenceLayer[tile] + 0x33) * 4 + (short)GMFirstPictureIndex::instance[5];
                 }
             } else if ((DAT_BuildingsState::instance.buildings[buildingID].buildingType
                                != OpenSHC::Map::Buildings::BT_KILLINGPIT
@@ -254,14 +257,14 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingVariation == 0xf) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics != 0) {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset
                                   + (short)this->buildingRotationRelatedValue)
                             - 1;
                     } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive == 0) {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                       .unknownManorHouseOrStoneKeepRelated
@@ -270,14 +273,14 @@ namespace Map {
                             - 1;
                     } else {
                         this->GfxLayer[tile]
-                            = ((short)GMTotalPicturesProcessed::instance
+                            = ((short)GMFirstPictureIndex::instance
                                       [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID].visuallyActiveSpriteID
                                   + (short)this->buildingRotationRelatedValue)
                             - 1;
                     }
                     this->AlphaGFXLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID]
                                   .unknownManorHouseOrStoneKeepRelated
@@ -306,12 +309,12 @@ namespace Map {
                         sprite = (short)DAT_BuildingsState::instance.buildings[buildingID].visuallyActiveSpriteID;
                     }
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + sprite + (short)this->buildingRotationRelatedValue + span * rotation)
                         - 1;
                     this->AlphaGFXLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance
+                        = ((short)GMFirstPictureIndex::instance
                                   [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
                               + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID
                               + (short)this->buildingRotationRelatedValue + span * rotation)

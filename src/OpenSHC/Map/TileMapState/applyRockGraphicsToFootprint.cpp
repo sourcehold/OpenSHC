@@ -4,7 +4,7 @@
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -32,15 +32,13 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 if (this->disableElevationRendering == 0) {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance[DAT_LandscapeState::instance.rocks[rockID]
-                                   .unknownGMID]
+                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                               + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
                               + (short)this->buildingRotationRelatedValue + surface)
                         - 1;
                 } else if (DAT_LandscapeState::instance.rocks[rockID].size == 1) {
                     this->GfxLayer[tile]
-                        = ((short)GMTotalPicturesProcessed::instance[DAT_LandscapeState::instance.rocks[rockID]
-                                   .unknownGMID]
+                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                               + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
                               + (short)this->buildingRotationRelatedValue + surface)
                         - 1;
@@ -48,8 +46,7 @@ namespace Map {
                     this->GfxLayer[tile]
                         = (short)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
                               DAT_LandscapeState::ptr)(((byte)this->RandomLayer[tile] & 3) + 1)
-                        + (short)
-                            GMTotalPicturesProcessed::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        + (short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                         + surface - 1;
                 }
             }

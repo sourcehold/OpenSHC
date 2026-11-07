@@ -266,7 +266,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
             DAT_BuildingsState::ptr)(playerID, stoneCount, woodCount, 0);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        this->field204_0x554a30 = 1;
+        this->field_0x554a30 = 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
     }
 

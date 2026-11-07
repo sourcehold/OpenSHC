@@ -21,7 +21,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::forceFullTileMapRedraw, this)();
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::refreshAllBuildingTileDisplays, DAT_BuildingsState::ptr)();
-        DAT_BuildingsState::instance.field4_0x10 = 5;
+        DAT_BuildingsState::instance.field_0x10 = 5;
         switch (this->mapOrientation) {
         case 0:
             this->screenSouthEastDirection = 3;

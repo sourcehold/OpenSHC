@@ -34,20 +34,20 @@ namespace Map {
             } else if (this->pitchDitches[id].state == 0) {
                 /* the original increments the state rather than storing the literal */
                 this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
-                this->pitchDitches[id].field7_0x12 = 0;
+                this->pitchDitches[id].field_0x12 = 0;
             } else if (this->pitchDitches[id].state == 2) {
-                this->pitchDitches[id].field7_0x12 = this->pitchDitches[id].field7_0x12 + 1;
-                if (this->pitchDitches[id].field7_0x12 == 20) {
+                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                if (this->pitchDitches[id].field_0x12 == 20) {
                     this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
-                    this->pitchDitches[id].field7_0x12 = 0;
+                    this->pitchDitches[id].field_0x12 = 0;
                     uint height = DAT_TileMapState::instance.HeightLayer[tile];
                     /* the fire spreads to the four adjacent ditches that are still unlit */
                     for (int i = 0; i < 4; i++) {
                         int neighbour = DAT_ViewportRenderState::instance
                                             .translationMatrix[this->pitchDitches[id].y
-                                                + DAT_TerrainDefinedData::instance.field2346_0x376c[i].y]
+                                                + DAT_TerrainDefinedData::instance.field_0x376c[i].y]
                                             .addXgetTile
-                            + this->pitchDitches[id].x + DAT_TerrainDefinedData::instance.field2346_0x376c[i].x;
+                            + this->pitchDitches[id].x + DAT_TerrainDefinedData::instance.field_0x376c[i].x;
                         if ((this->LogicLayer[neighbour] & L_PLAIN2_AND_PITCH) == 0) {
                             continue;
                         }
@@ -65,8 +65,8 @@ namespace Map {
                     }
                 }
             } else if (this->pitchDitches[id].state == 3) {
-                this->pitchDitches[id].field7_0x12 = this->pitchDitches[id].field7_0x12 + 1;
-                if (this->pitchDitches[id].field7_0x12 == 200) {
+                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                if (this->pitchDitches[id].field_0x12 == 200) {
                     DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
                     this->pitchDitches[id].state = -1;
                 }

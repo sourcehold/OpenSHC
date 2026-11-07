@@ -7,7 +7,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8640
-    undefined4 TileMapState::isTileEnclosedByWalls(int tile, int y)
+    BOOLEnum TileMapState::isTileEnclosedByWalls(int tile, int y)
     {
         int offset = this->directionTranslationMatrix[y][0] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {

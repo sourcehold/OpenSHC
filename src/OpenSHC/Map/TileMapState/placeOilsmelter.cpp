@@ -53,8 +53,8 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
         /* the campfire sits at a fixed offset from the smelter, chosen by the smelter's size */
-        x = x + DAT_TerrainDefinedData::instance.field63_0x19c[buildingTypeLike].x;
-        y = y + DAT_TerrainDefinedData::instance.field63_0x19c[buildingTypeLike].y;
+        x = x + DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].x;
+        y = y + DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].y;
         ushort campfire = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
             DAT_BuildingsState::ptr)(playerID, x, y, param_7, OpenSHC::Map::Buildings::BT_CAMPFIRE, 4, playerID, 0xf);
         int campfireID = (short)campfire;

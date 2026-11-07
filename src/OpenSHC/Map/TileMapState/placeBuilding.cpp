@@ -150,7 +150,7 @@ namespace Map {
             this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;
             index++;
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-            DAT_TileMapState::instance.field204_0x554a30 = 1;
+            DAT_TileMapState::instance.field_0x554a30 = 1;
         } while (index < this->constructionTileCount);
 
         /* the building sits at the middle of the heights it covers */
@@ -333,10 +333,10 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(radius, x, y);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        DAT_TileMapState::instance.field204_0x554a30 = 1;
+        DAT_TileMapState::instance.field_0x554a30 = 1;
         if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
             this->forceUpdateMacroLayerFlag = 1;
-            this->field68_0x55487c = 200;
+            this->field_0x55487c = 200;
         }
     }
 

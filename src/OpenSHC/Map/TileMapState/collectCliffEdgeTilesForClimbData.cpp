@@ -31,7 +31,7 @@ namespace Map {
                     int neighbour
                         = this->directionTranslationMatrix[DAT_ViewportRenderState::instance
                                   .tileTranslationMatrix_YComponent[tile]]
-                                                          [DAT_ClimbLogicDefinedData::instance.field5_0x2c[index]]
+                                                          [DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
                         + tile;
                     if ((this->LogicLayer[neighbour] & L_RIVER) != 0
                         && this->HeightLayer[tile] + 0x50 < (uint)this->HeightLayer[neighbour]) {

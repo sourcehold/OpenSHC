@@ -29,7 +29,7 @@
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WallAndPitchState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -60,46 +60,46 @@ namespace Map {
         /* the border tiles get their own graphic, everything else the plain one */
         for (int tile = 0; tile < 80400; tile += 6) {
             if (this->LogicLayer[tile + 0] == L_BORDER) {
-                this->GfxLayer[tile + 0] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 0] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 0] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 0] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
             if (this->LogicLayer[tile + 1] == L_BORDER) {
-                this->GfxLayer[tile + 1] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 1] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 1] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 1] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
             if (this->LogicLayer[tile + 2] == L_BORDER) {
-                this->GfxLayer[tile + 2] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 2] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 2] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 2] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
             if (this->LogicLayer[tile + 3] == L_BORDER) {
-                this->GfxLayer[tile + 3] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 3] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 3] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 3] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
             if (this->LogicLayer[tile + 4] == L_BORDER) {
-                this->GfxLayer[tile + 4] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 4] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 4] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 4] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
             if (this->LogicLayer[tile + 5] == L_BORDER) {
-                this->GfxLayer[tile + 5] = (ushort)GMTotalPicturesProcessed::instance[2];
+                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile + 5] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 5] = (ushort)GMTotalPicturesProcessed::instance[2] + 1;
+                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile + 5] = (ushort)GMTotalPicturesProcessed::instance[2] + 2;
+                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
         }
 
@@ -120,7 +120,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetMoatArray, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetPitchDitchArray, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::toggleFlatView, this)(0);
-        DAT_TileMapState::instance.field95_0x5548d0 = 0;
+        DAT_TileMapState::instance.field_0x5548d0 = 0;
         DAT_TileMapState::instance.flatViewToggleValue2 = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::clearBuildings, DAT_BuildingsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::clearRocksAndTrees, DAT_LandscapeState::ptr)();
@@ -152,14 +152,14 @@ namespace Map {
         this->forceUpdateTextureTilemap = 1;
         this->forceUpdateGFXLayers = 1;
         this->forceUpdateMacroLayerFlag = 1;
-        this->field68_0x55487c = 200;
+        this->field_0x55487c = 200;
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
             DAT_PathFindingState::ptr)();
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updateSeparateAreaTileMap, DAT_PathFindingState::ptr)(1);
         this->forceUpdateMacroLayerFlag = 1;
-        this->field68_0x55487c = 500;
+        this->field_0x55487c = 500;
         MACRO_CALL_MEMBER(
             OpenSHC::UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, DAT_MinimapViewState::ptr)(0, 100);
         MACRO_CALL_MEMBER(

@@ -3,7 +3,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -115,7 +115,7 @@ namespace Map {
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
                 + this->buildingX + x] = (short)this->buildingRotationRelatedValue
-                + (short)GMTotalPicturesProcessed::instance[0x38] + (short)variationStep + (short)base - 1;
+                + (short)GMFirstPictureIndex::instance[0x38] + (short)variationStep + (short)base - 1;
             index++;
         } while (index < this->constructionTileCount);
     }

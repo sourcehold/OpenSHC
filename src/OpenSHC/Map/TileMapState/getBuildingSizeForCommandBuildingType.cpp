@@ -134,7 +134,7 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_DUGMOAT:
         case OpenSHC::Commands::M_MAPPER_MOAT:
         case OpenSHC::Commands::M_MAPPER_ANTIMOAT:
-            DAT_TileMapState::instance.field159_0x5549b8 = 1;
+            DAT_TileMapState::instance.field_0x5549b8 = 1;
             return 2;
         case OpenSHC::Commands::M_MAPPER_OXENBASE:
         case OpenSHC::Commands::M_MAPPER_SIGNPOST:

@@ -92,7 +92,7 @@ namespace Map {
         return;
     found:
         this->uiBuildingRotation = rotation * 2;
-        this->field127_0x554944 = this->uiBuildingRotation * 25;
+        this->field_0x554944 = this->uiBuildingRotation * 25;
         this->buildingPlacementFail = FALSE;
     }
 

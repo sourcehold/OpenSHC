@@ -41,7 +41,7 @@ namespace Map {
             this->pitchDitches[pitchDitchID].y = (short)y;
             this->pitchDitches[pitchDitchID].x = (short)x;
             this->pitchDitches[pitchDitchID].state = 0;
-            this->pitchDitches[pitchDitchID].field7_0x12 = 0;
+            this->pitchDitches[pitchDitchID].field_0x12 = 0;
             this->pitchDitches[pitchDitchID].tile
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->pitchDitches[pitchDitchID].rng = SEC_RNG::instance.currentNumber2;

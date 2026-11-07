@@ -19,19 +19,19 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_DAIRY;
     using OpenSHC::Map::LogicHelpers::L_NONE;
-    using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005154D0
     void TileMapState::placeDairyfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5,
         int* variation, undefined4 averageHeight)
     {
         int index = 0;
-        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID,
-            (int)variation);
+        int buildingID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID, (int)variation);
         this->placedBuildingID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, y, 10);
 
@@ -40,13 +40,13 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]
                 = DAT_ViewportRenderState::instance
                       .translationMatrix[DAT_TerrainDefinedData::instance
-                                             .field878_0xf5c[DAT_GameState::instance.playerDataArray[playerID]
-                                                                     .dairyFarmVariationMod4][i]
+                                             .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID]
+                                                     .dairyFarmVariationMod4][i]
                                              .offset.y
                           + y]
                       .addXgetTile
                 + DAT_TerrainDefinedData::instance
-                      .field878_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4][i]
+                      .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4][i]
                       .offset.x
                 + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(
@@ -54,8 +54,7 @@ namespace Map {
             if (i >= 4) {
                 this->DamageLayer[DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]]
                     = (byte)DAT_TerrainDefinedData::instance
-                          .field878_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4]
-                                             [i]
+                          .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4][i]
                           .property;
             }
         }
@@ -84,7 +83,8 @@ namespace Map {
             this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_FARM_FIELD_DAIRY;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                DAT_PathFindingState::ptr)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
+                DAT_PathFindingState::ptr)(
+                DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
             this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
             this->ChangedLayer[tileUnk] = 2;
         }

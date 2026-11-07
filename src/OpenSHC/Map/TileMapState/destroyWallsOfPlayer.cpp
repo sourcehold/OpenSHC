@@ -1,8 +1,8 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -43,7 +43,7 @@ namespace Map {
             this->DamageLayer[tile] = 0;
             uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-            DAT_TileMapState::instance.field204_0x554a30 = 1;
+            DAT_TileMapState::instance.field_0x554a30 = 1;
             int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(y, tile);

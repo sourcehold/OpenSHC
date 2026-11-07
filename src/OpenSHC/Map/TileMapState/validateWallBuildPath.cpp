@@ -53,7 +53,7 @@ namespace Map {
         }
         this->buildingPlacementFail = FALSE;
         this->illegalBuild = TRUE;
-        this->field118_0x554920 = 0;
+        this->field_0x554920 = 0;
         if (x1 > 399 || y1 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
             this->buildingPlacementFail = TRUE;
             return;
@@ -88,7 +88,7 @@ namespace Map {
         int upY = y1 - y2;
         int downY = y2 - y1;
         int rightX = x2 - x1;
-        this->field118_0x554920 = 1;
+        this->field_0x554920 = 1;
         uint y = y1;
         uint x = x1;
         int leftX = x1 - x2;

@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -77,20 +78,33 @@ namespace Map {
                     } else if (this->cursorTargetID != 0xffffffff) {
                         /* razing a keep takes the stockpile with it, and the other way round */
                         short owner = DAT_BuildingsState::instance.buildings[this->cursorTargetID].owner;
-                        if (this->cursorTargetID == DAT_GameState::instance.playerDataArray[owner].keep.id
-                            && DAT_GameState::instance.playerDataArray[owner].stockpile.id != 0) {
+                        if (this->cursorTargetID
+                                == DAT_GameState::instance.playerDataArray[owner]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                    .id
+                            && DAT_GameState::instance.playerDataArray[owner]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                                    .id
+                                != 0) {
                             this->showNoRubbleWhenDestroyingBuilding = 1;
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
-                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner].stockpile.id);
+                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                                    .id);
                         }
                         if (DAT_BuildingsState::instance.buildings[this->cursorTargetID].buildingType
                                 == OpenSHC::Map::Buildings::BT_STOCKPILE
-                            && DAT_GameState::instance.playerDataArray[owner].keep.id != 0) {
+                            && DAT_GameState::instance.playerDataArray[owner]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                    .id
+                                != 0) {
                             this->showNoRubbleWhenDestroyingBuilding = 1;
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
-                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner].keep.id);
+                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                    .id);
                         }
                         this->showNoRubbleWhenDestroyingBuilding = 1;
                         MACRO_CALL_MEMBER(

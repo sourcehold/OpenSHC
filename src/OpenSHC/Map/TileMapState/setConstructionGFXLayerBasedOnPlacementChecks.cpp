@@ -11,7 +11,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -325,7 +325,7 @@ namespace Map {
                 OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                 DAT_BuildingsState::ptr)(MVar10);
             if (BVar2 == OpenSHC::Map::Buildings::BT_UNKNOWN1) {
-                sprite = sprite + (short)(&DAT_BuildingDefinedData::instance.field209_0x976c[9].y)[MVar10];
+                sprite = sprite + (short)(&DAT_BuildingDefinedData::instance.field_0x976c[9].y)[MVar10];
             } else {
                 BVar2 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
@@ -337,14 +337,13 @@ namespace Map {
                 }
             }
             if (this->uiBuildingRotation == 0xf) {
-                this->ConstructionGFXLayer[iVar3]
-                    = ((short)GMTotalPicturesProcessed::instance[this->buildingSpriteSheetID_1] + sprite
-                          + (short)this->buildingRotationRelatedValue)
+                this->ConstructionGFXLayer[iVar3] = ((short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1]
+                                                        + sprite + (short)this->buildingRotationRelatedValue)
                     - 1;
             } else {
                 this->ConstructionGFXLayer[iVar3]
                     = ((short)(iVar15 * size * size)
-                          + (short)GMTotalPicturesProcessed::instance[this->buildingSpriteSheetID_1] + sprite
+                          + (short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1] + sprite
                           + (short)this->buildingRotationRelatedValue)
                     - 1;
             }
@@ -376,28 +375,28 @@ namespace Map {
                         iVar6 = DAT_ViewportRenderState::instance.translationMatrix[iVar3 + y + this->buildingY]
                                     .addXgetTile
                             + this->buildingX + iVar15 + iVar1;
-                        this->ConstructionGFXLayer[iVar6] = (short)this->buildingRotationRelatedValue
-                            + (short)GMTotalPicturesProcessed::instance[0x34];
+                        this->ConstructionGFXLayer[iVar6]
+                            = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar6] = this->MiscDisplayLayer[iVar6] | 0x8000;
                         }
                         iVar5 = iVar5 + 1;
                     } while (iVar5 < this->constructionTileCount);
-                    pXVar11 = &DAT_TerrainDefinedData::instance.field555_0x68c + iVar13 * 5;
+                    pXVar11 = &DAT_TerrainDefinedData::instance.field_0x68c + iVar13 * 5;
                     iVar5 = 0;
                     do {
                         iVar6 = DAT_ViewportRenderState::instance.translationMatrix[pXVar11->y + iVar3 + y].addXgetTile
                             + pXVar11->x + iVar15 + iVar1;
                         if (iVar5 < 1) {
                             this->ConstructionGFXLayer[iVar6]
-                                = (short)GMTotalPicturesProcessed::instance[0x34] + 0x60e + (short)iVar5;
+                                = (short)GMFirstPictureIndex::instance[0x34] + 0x60e + (short)iVar5;
                         } else {
                             iVar7 = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[iVar5 + iVar13 * 4]
                                 - this->mapOrientation;
                             if (iVar7 < 0) {
                                 iVar7 = iVar7 + 8;
                             }
-                            this->ConstructionGFXLayer[iVar6] = (short)GMTotalPicturesProcessed::instance[0x34]
+                            this->ConstructionGFXLayer[iVar6] = (short)GMFirstPictureIndex::instance[0x34]
                                 + (short)(iVar7 / 2) * 4 + 0x60e + (short)iVar5;
                         }
                         if (iVar14 != 0) {
@@ -416,28 +415,28 @@ namespace Map {
                         iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar3 + y + this->buildingY]
                                     .addXgetTile
                             + this->buildingX + iVar15 + iVar1;
-                        this->ConstructionGFXLayer[iVar5] = (short)this->buildingRotationRelatedValue
-                            + (short)GMTotalPicturesProcessed::instance[0x34];
+                        this->ConstructionGFXLayer[iVar5]
+                            = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar5] = this->MiscDisplayLayer[iVar5] | 0x8000;
                         }
                         iVar4 = iVar4 + 1;
                     } while (iVar4 < this->constructionTileCount);
-                    pXVar11 = &DAT_TerrainDefinedData::instance.field555_0x68c + iVar13 * 5;
+                    pXVar11 = &DAT_TerrainDefinedData::instance.field_0x68c + iVar13 * 5;
                     iVar4 = 0;
                     do {
                         iVar5 = DAT_ViewportRenderState::instance.translationMatrix[pXVar11->y + iVar3 + y].addXgetTile
                             + pXVar11->x + iVar15 + iVar1;
                         if (iVar4 < 1) {
                             this->ConstructionGFXLayer[iVar5]
-                                = (short)GMTotalPicturesProcessed::instance[0x34] + 0x60e + (short)iVar4;
+                                = (short)GMFirstPictureIndex::instance[0x34] + 0x60e + (short)iVar4;
                         } else {
                             iVar6 = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[iVar4 + iVar13 * 4]
                                 - this->mapOrientation;
                             if (iVar6 < 0) {
                                 iVar6 = iVar6 + 8;
                             }
-                            this->ConstructionGFXLayer[iVar5] = (short)GMTotalPicturesProcessed::instance[0x34]
+                            this->ConstructionGFXLayer[iVar5] = (short)GMFirstPictureIndex::instance[0x34]
                                 + (short)(iVar6 / 2) * 4 + 0x60e + (short)iVar4;
                         }
                         if (iVar14 != 0) {
@@ -451,8 +450,8 @@ namespace Map {
                     do {
                         iVar15 = DAT_ViewportRenderState::instance.translationMatrix[piVar12[1] + y].addXgetTile + iVar1
                             + *piVar12;
-                        this->ConstructionGFXLayer[iVar15] = ((byte)this->RandomLayer[iVar15] & 3) + 0x138
-                            + (short)GMTotalPicturesProcessed::instance[6];
+                        this->ConstructionGFXLayer[iVar15]
+                            = ((byte)this->RandomLayer[iVar15] & 3) + 0x138 + (short)GMFirstPictureIndex::instance[6];
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                         }
@@ -472,7 +471,7 @@ namespace Map {
                                         .addXgetTile
                                 + DAT_TerrainDefinedData::instance.WheatFarmTiles[iVar3][iVar15].x + iVar1;
                             this->ConstructionGFXLayer[iVar3]
-                                = ((byte)this->RandomLayer[iVar3] & 3) + (short)GMTotalPicturesProcessed::instance[0xe];
+                                = ((byte)this->RandomLayer[iVar3] & 3) + (short)GMFirstPictureIndex::instance[0xe];
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -492,7 +491,7 @@ namespace Map {
                                         .addXgetTile
                                 + DAT_TerrainDefinedData::instance.HopFarmProperty1[iVar3][iVar15].x + iVar1;
                             this->ConstructionGFXLayer[iVar3] = ((byte)this->RandomLayer[iVar3] & 1) * 9 + 0x25
-                                + (short)GMTotalPicturesProcessed::instance[0xe];
+                                + (short)GMFirstPictureIndex::instance[0xe];
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -509,14 +508,13 @@ namespace Map {
                             iVar13
                                 = DAT_ViewportRenderState::instance
                                       .translationMatrix
-                                          [DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].offset.y
-                                              + y]
+                                          [DAT_TerrainDefinedData::instance.field_0xf5c[iVar3][iVar15 + 4].offset.y + y]
                                       .addXgetTile
-                                + DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].offset.x + iVar1;
+                                + DAT_TerrainDefinedData::instance.field_0xf5c[iVar3][iVar15 + 4].offset.x + iVar1;
                             iVar3 = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::TileMapState_Func::getRubbleGraphicStageForDamageLevel, this)(
-                                DAT_TerrainDefinedData::instance.field878_0xf5c[iVar3][iVar15 + 4].property);
-                            iVar3 = iVar3 + 0x37 + GMTotalPicturesProcessed::instance[0xe];
+                                DAT_TerrainDefinedData::instance.field_0xf5c[iVar3][iVar15 + 4].property);
+                            iVar3 = iVar3 + 0x37 + GMFirstPictureIndex::instance[0xe];
                             this->ConstructionGFXLayer[iVar13] = (ushort)iVar3;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar13] = this->MiscDisplayLayer[iVar13] | 0x8000;
@@ -530,7 +528,7 @@ namespace Map {
                         do {
                             iVar15 = DAT_ViewportRenderState::instance.translationMatrix[pXVar11->y + y].addXgetTile
                                 + pXVar11->x + iVar1;
-                            this->ConstructionGFXLayer[iVar15] = (short)GMTotalPicturesProcessed::instance[0xe] + 0x3d;
+                            this->ConstructionGFXLayer[iVar15] = (short)GMFirstPictureIndex::instance[0xe] + 0x3d;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                             }
@@ -548,8 +546,8 @@ namespace Map {
                             iVar3
                                 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile;
                             this->ConstructionGFXLayer[iVar1 + this->buildingX + iVar3 + 5]
-                                = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x48;
+                                = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6]
+                                + 0x48;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar1 + iVar13 + iVar3 + 5]
                                     = this->MiscDisplayLayer[iVar1 + iVar13 + iVar3 + 5] | 0x8000;
@@ -564,7 +562,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar1;
                             this->ConstructionGFXLayer[iVar3] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x7a;
+                                + (short)GMFirstPictureIndex::instance[6] + 0x7a;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -579,8 +577,8 @@ namespace Map {
                                         .addXgetTile;
                             iVar4 = iVar3 + this->buildingX;
                             this->ConstructionGFXLayer[iVar1 + this->buildingX + iVar3 + 5]
-                                = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x61;
+                                = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6]
+                                + 0x61;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar1 + iVar13 + iVar3 + 5]
                                     = this->MiscDisplayLayer[iVar1 + iVar13 + iVar3 + 5] | 0x8000;
@@ -598,7 +596,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar1;
                             this->ConstructionGFXLayer[iVar3] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x93;
+                                + (short)GMFirstPictureIndex::instance[6] + 0x93;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -615,7 +613,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar1;
                             this->ConstructionGFXLayer[iVar3] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0xac;
+                                + (short)GMFirstPictureIndex::instance[6] + 0xac;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -632,7 +630,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar1;
                             this->ConstructionGFXLayer[iVar3] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x128;
+                                + (short)GMFirstPictureIndex::instance[6] + 0x128;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                             }
@@ -643,29 +641,26 @@ namespace Map {
                     if (command == OpenSHC::Commands::M_MAPPER_KEEP1) {
                         uVar9 = (ushort)(this->mapOrientation == 2);
                         iVar15 = DAT_ViewportRenderState::instance
-                                     .translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[0][0].y + y]
+                                     .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][0].y + y]
                                      .addXgetTile
-                            + DAT_TerrainDefinedData::instance.field130_0x264[0][0].x + iVar1;
-                        this->ConstructionGFXLayer[iVar15]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x523 + uVar9;
+                            + DAT_TerrainDefinedData::instance.field_0x264[0][0].x + iVar1;
+                        this->ConstructionGFXLayer[iVar15] = (short)GMFirstPictureIndex::instance[0x34] + 0x523 + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                         }
                         iVar15 = DAT_ViewportRenderState::instance
-                                     .translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[0][1].y + y]
+                                     .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][1].y + y]
                                      .addXgetTile
-                            + DAT_TerrainDefinedData::instance.field130_0x264[0][1].x + iVar1;
-                        this->ConstructionGFXLayer[iVar15]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x52e + uVar9;
+                            + DAT_TerrainDefinedData::instance.field_0x264[0][1].x + iVar1;
+                        this->ConstructionGFXLayer[iVar15] = (short)GMFirstPictureIndex::instance[0x34] + 0x52e + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                         }
                         iVar15 = DAT_ViewportRenderState::instance
-                                     .translationMatrix[DAT_TerrainDefinedData::instance.field130_0x264[0][2].y + y]
+                                     .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][2].y + y]
                                      .addXgetTile
-                            + DAT_TerrainDefinedData::instance.field130_0x264[0][2].x + iVar1;
-                        this->ConstructionGFXLayer[iVar15]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x527 + uVar9;
+                            + DAT_TerrainDefinedData::instance.field_0x264[0][2].x + iVar1;
+                        this->ConstructionGFXLayer[iVar15] = (short)GMFirstPictureIndex::instance[0x34] + 0x527 + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                         }
@@ -679,7 +674,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar3;
                             this->ConstructionGFXLayer[iVar4] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x17;
+                                + (short)GMFirstPictureIndex::instance[6] + 0x17;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar4] = this->MiscDisplayLayer[iVar4] | 0x8000;
                             }
@@ -695,7 +690,7 @@ namespace Map {
                                          .addXgetTile
                                 + this->buildingX + iVar1;
                             this->ConstructionGFXLayer[iVar13] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[7] + 0x19;
+                                + (short)GMFirstPictureIndex::instance[7] + 0x19;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar13] = this->MiscDisplayLayer[iVar13] | 0x8000;
                             }
@@ -711,8 +706,7 @@ namespace Map {
                                     .translationMatrix[*(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x268) + y]
                                     .addXgetTile
                             + *(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x264) + iVar1;
-                        this->ConstructionGFXLayer[iVar3]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x521 + uVar9;
+                        this->ConstructionGFXLayer[iVar3] = (short)GMFirstPictureIndex::instance[0x34] + 0x521 + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                         }
@@ -720,8 +714,7 @@ namespace Map {
                                     .translationMatrix[*(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x270) + y]
                                     .addXgetTile
                             + *(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x26c) + iVar1;
-                        this->ConstructionGFXLayer[iVar3]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x529 + uVar9;
+                        this->ConstructionGFXLayer[iVar3] = (short)GMFirstPictureIndex::instance[0x34] + 0x529 + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar3] = this->MiscDisplayLayer[iVar3] | 0x8000;
                         }
@@ -729,8 +722,7 @@ namespace Map {
                                      .translationMatrix[*(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x278) + y]
                                      .addXgetTile
                             + *(int*)((int)DAT_TerrainDefinedData::ptr + iVar15 + 0x274) + iVar1;
-                        this->ConstructionGFXLayer[iVar15]
-                            = (short)GMTotalPicturesProcessed::instance[0x34] + 0x525 + uVar9;
+                        this->ConstructionGFXLayer[iVar15] = (short)GMFirstPictureIndex::instance[0x34] + 0x525 + uVar9;
                         if (iVar14 != 0) {
                             this->MiscDisplayLayer[iVar15] = this->MiscDisplayLayer[iVar15] | 0x8000;
                         }
@@ -745,7 +737,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar1 + iVar15;
                             this->ConstructionGFXLayer[iVar5] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[6] + 0x17;
+                                + (short)GMFirstPictureIndex::instance[6] + 0x17;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar5] = this->MiscDisplayLayer[iVar5] | 0x8000;
                             }
@@ -761,7 +753,7 @@ namespace Map {
                                         .addXgetTile
                                 + this->buildingX + iVar15 + iVar1;
                             this->ConstructionGFXLayer[iVar4] = (short)this->buildingRotationRelatedValue
-                                + (short)GMTotalPicturesProcessed::instance[7] + 0x19;
+                                + (short)GMFirstPictureIndex::instance[7] + 0x19;
                             if (iVar14 != 0) {
                                 this->MiscDisplayLayer[iVar4] = this->MiscDisplayLayer[iVar4] | 0x8000;
                             }

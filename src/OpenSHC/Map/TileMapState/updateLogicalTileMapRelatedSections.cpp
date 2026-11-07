@@ -44,7 +44,7 @@ namespace Map {
         this->forceUpdateLogicalAndMiscDisplayLayers = 0;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_PathFindingState::instance.mappingYRelated]
                        .firstTileOfRow;
-        DAT_BuildingsState::instance.field34_0x18e074 = 1;
+        DAT_BuildingsState::instance.field_0x18e074 = 1;
         for (int row = DAT_PathFindingState::instance.mappingYRelated;
             row < 400 && row <= DAT_PathFindingState::instance.yLimit; row++) {
             for (int column = 0; column < this->yArray1[row]; column++, tile++) {

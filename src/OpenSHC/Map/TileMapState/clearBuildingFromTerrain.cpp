@@ -30,7 +30,7 @@ namespace Map {
         }
 
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_STOCKPILE) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].field125_0x190 == 1) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].field_0x190 == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearStockpileFootprintTiles, this)(x, y);
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearFixedSizeTwoBuildingFootprint, this)(x, y);
@@ -110,7 +110,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(size + 6, x, y);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        this->field204_0x554a30 = 1;
+        this->field_0x554a30 = 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
     }
 

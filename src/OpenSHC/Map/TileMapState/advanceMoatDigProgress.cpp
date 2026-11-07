@@ -18,7 +18,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00500500
-    undefined4 TileMapState::advanceMoatDigProgress(int moatID)
+    BOOLEnum TileMapState::advanceMoatDigProgress(int moatID)
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress + 1;
         if ((char)this->moats[moatID].fillProgress <= 3) {

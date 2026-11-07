@@ -56,7 +56,7 @@ namespace Map {
             DAT_PathFindingState::ptr)(9, tile - rowTile, y);
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        DAT_TileMapState::instance.field204_0x554a30 = 1;
+        DAT_TileMapState::instance.field_0x554a30 = 1;
     }
 
 }

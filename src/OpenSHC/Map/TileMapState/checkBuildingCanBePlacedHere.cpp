@@ -7,6 +7,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -69,7 +70,7 @@ namespace Map {
         _commandBuildingType = (MappersEnum)(short)(undefined2)commandBuildingType;
         this->buildingPlacementFail = FALSE;
         this->placementWarning = 0;
-        this->field127_0x554944 = 0;
+        this->field_0x554944 = 0;
         this->uiBuildingRotation = 0xf;
         _buildingType
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
@@ -531,7 +532,10 @@ namespace Map {
                             return;
                         }
                         if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_STORES) {
-                            if (DAT_GameState::instance.playerDataArray[playerID].stockpile.id == 0) {
+                            if (DAT_GameState::instance.playerDataArray[playerID]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                                    .id
+                                == 0) {
                                 return;
                             }
                             iVar8
@@ -553,7 +557,10 @@ namespace Map {
                             return;
                         }
                         if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_GRANARY) {
-                            if (DAT_GameState::instance.playerDataArray[playerID].granary.id == 0) {
+                            if (DAT_GameState::instance.playerDataArray[playerID]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_GRANARY]
+                                    .id
+                                == 0) {
                                 return;
                             }
                             iVar8
@@ -575,7 +582,10 @@ namespace Map {
                             return;
                         }
                         if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_ARMOURY) {
-                            if (DAT_GameState::instance.playerDataArray[playerID].armory.id == 0) {
+                            if (DAT_GameState::instance.playerDataArray[playerID]
+                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                                    .id
+                                == 0) {
                                 return;
                             }
                             iVar8
@@ -748,9 +758,8 @@ namespace Map {
                             return;
                         }
                         if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
-                            iVar4
-                                = _x + DAT_TerrainDefinedData::instance.field63_0x19c[this->DAT_TempBuildingRotation].x;
-                            iVar8 = DAT_TerrainDefinedData::instance.field63_0x19c[this->DAT_TempBuildingRotation].y;
+                            iVar4 = _x + DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].x;
+                            iVar8 = DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].y;
                             x = 0;
                             while (true) {
                                 MACRO_CALL_MEMBER(

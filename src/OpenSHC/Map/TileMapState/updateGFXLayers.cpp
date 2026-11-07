@@ -10,7 +10,7 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 // masks for the handwritten neighbour-flag macro; MASM has no "|", so these must be literals
 #define NEIGHBOUR_FLAGS_MASK_MARSH 0x20000000 // L_MARSH
@@ -116,7 +116,7 @@ namespace Map {
                                         macroHigh = macroHigh & 3;
                                         rotation = (short)this->MacroLayer[this->DAT_SomeTile];
                                         this->PillarGFXLayer[this->DAT_SomeTile]
-                                            = (ushort)GMTotalPicturesProcessed::instance[9];
+                                            = (ushort)GMFirstPictureIndex::instance[9];
 
                                         if ((this->LogicLayer[this->DAT_SomeTile] & L_MARSH) != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
@@ -250,100 +250,90 @@ namespace Map {
                                             if (gfxMode == 1) {
                                                 this->GfxLayer[this->DAT_SomeTile] = 0;
                                                 for (index = 0; index < 4; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field2165_0x1d54[index][0]
+                                                    if (DAT_TerrainDefinedData::instance.field_0x1d54[index][0]
                                                         == this->bitFlag) {
                                                         this->GfxLayer[this->DAT_SomeTile]
-                                                            = GMTotalPicturesProcessed::instance[55] + gfxBaseA
+                                                            = GMFirstPictureIndex::instance[55] + gfxBaseA
                                                             + (luminescence - 2) * gfxStride - 1
                                                             + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
-                                                            + DAT_TerrainDefinedData::instance
-                                                                  .field2165_0x1d54[index][1];
+                                                            + DAT_TerrainDefinedData::instance.field_0x1d54[index][1];
                                                     }
                                                 }
                                                 for (index = 4; index < 8; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field2165_0x1d54[index][0]
+                                                    if (DAT_TerrainDefinedData::instance.field_0x1d54[index][0]
                                                         == this->bitFlag) {
                                                         this->GfxLayer[this->DAT_SomeTile]
-                                                            = GMTotalPicturesProcessed::instance[55] + gfxBaseB
+                                                            = GMFirstPictureIndex::instance[55] + gfxBaseB
                                                             + (luminescence - 2) * gfxStride - 1
-                                                            + DAT_TerrainDefinedData::instance
-                                                                  .field2165_0x1d54[index][1];
+                                                            + DAT_TerrainDefinedData::instance.field_0x1d54[index][1];
                                                     }
                                                 }
                                                 if (this->GfxLayer[this->DAT_SomeTile] == 0) {
                                                     this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMTotalPicturesProcessed::instance[55] + gfxBaseC
+                                                        = GMFirstPictureIndex::instance[55] + gfxBaseC
                                                         + (luminescence - 2) * gfxStride - 1
                                                         + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                                 }
                                             } else if (luminescence == 2) {
                                                 if (this->bitFlag != 0) {
                                                     this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMTotalPicturesProcessed::instance[55] + gfxBaseC
+                                                        = GMFirstPictureIndex::instance[55] + gfxBaseC
                                                         + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                                 } else {
                                                     this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMTotalPicturesProcessed::instance[55] + gfxBaseD
+                                                        = GMFirstPictureIndex::instance[55] + gfxBaseD
                                                         + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                                 }
                                             } else if (gfxMode == 2) {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseA
-                                                    + (luminescence - 3) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else if (this->bitFlag != 0) {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseA
-                                                    + (luminescence - 3) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             } else {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseB
-                                                    + (luminescence - 3) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseB + (luminescence - 3) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             }
                                         } else if (luminescence > 2) {
                                             if (gfxMode == 0) {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseB
-                                                    + (luminescence - 3) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseB + (luminescence - 3) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             } else if (gfxMode == 2) {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseA
-                                                    + (luminescence - 3) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                    + (luminescence - 2) * gfxStride - 1
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseD + (luminescence - 2) * gfxStride - 1
                                                     + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             }
                                         } else if (macroLow == 2) {
                                             if (gfxMode == 0) {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseD + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                             } else {
-                                                this->GfxLayer[this->DAT_SomeTile]
-                                                    = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
+                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                    + gfxBaseD + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
                                             }
                                         } else if (macroLow == 4) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2162_0x1a54[this->mapOrientation / 2][macroMid];
-                                            this->GfxLayer[this->DAT_SomeTile] = GMTotalPicturesProcessed::instance[55]
+                                                           .field_0x1a54[this->mapOrientation / 2][macroMid];
+                                            this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
                                                 + gfxBaseE + macroMid + macroHigh * 4 - 1;
                                         } else if (macroLow == 8) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2163_0x1b54[this->mapOrientation / 2][macroMid];
+                                                           .field_0x1b54[this->mapOrientation / 2][macroMid];
                                             this->GfxLayer[this->DAT_SomeTile] = macroHigh * 9
-                                                + (GMTotalPicturesProcessed::instance[55] + gfxBaseE + macroMid) + 0xf;
+                                                + (GMFirstPictureIndex::instance[55] + gfxBaseE + macroMid) + 0xf;
                                         } else if (macroLow == 0x10) {
                                             macroMid = DAT_TerrainDefinedData::instance
-                                                           .field2164_0x1c54[this->mapOrientation / 2][macroMid];
+                                                           .field_0x1c54[this->mapOrientation / 2][macroMid];
                                             this->GfxLayer[this->DAT_SomeTile] = macroHigh * 16
-                                                + (GMTotalPicturesProcessed::instance[55] + gfxBaseE + macroMid) + 0x33;
+                                                + (GMFirstPictureIndex::instance[55] + gfxBaseE + macroMid) + 0x33;
                                         }
                                     }
                                 }
