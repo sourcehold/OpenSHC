@@ -20,7 +20,6 @@
 
 #include "OpenSHC/Globals/DAT_00ed2794.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"
-#include "OpenSHC/Globals/DAT_00ed27bc.hpp"
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -32,6 +31,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"
 #include "OpenSHC/Globals/INT_00eb0b24.hpp"
+#include "OpenSHC/Globals/INT_00ed27bc.hpp"
 #include "OpenSHC/Globals/INT_00ed27c4.hpp"
 
 namespace OpenSHC {
@@ -116,8 +116,8 @@ namespace UI {
                 }
                 // otherwise as 11
             case 11:
-                if (DAT_00ed27bc::instance == 1) {
-                    DAT_00ed27bc::instance = FALSE;
+                if (INT_00ed27bc::instance == 1) {
+                    INT_00ed27bc::instance = 0;
                     return;
                 }
                 MACRO_CALL_MEMBER(
@@ -189,7 +189,7 @@ namespace UI {
                 }
                 return;
             case -2: // "View Briefing"
-                DAT_00ed27bc::instance = TRUE;
+                INT_00ed27bc::instance = 1;
                 return;
             case -3: // "Restart Mission", asked first
                 DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 44;
