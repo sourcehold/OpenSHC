@@ -42,36 +42,40 @@ namespace Map {
                             OpenSHC::Map::Units::UnitsState_Func::checkUnitHasPropertyBasedOnUnitType,
                             DAT_UnitsState::ptr)(unitID, _pClimbData->type);
                         if ((iVar1 != 0) && (_pClimbData->type == 1)) {
+                            // a ladder from the wall group down to the ladder area, or the reverse
+                            BOOLEnum candidate = FALSE;
                             if (_pClimbData->area == ladderWallGroup) {
                                 _downOrUp1 = 0;
                                 if (_pClimbData->wallGroupAreaID == ladderArea) {
                                     iVar1 = _pClimbData->bottomYPosition;
                                     fromXPosition = _pClimbData->bottomXPosition;
-                                LAB_004a49e1:
-                                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
-                                                          setAxisBasedDistanceResult,
-                                        DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                                        (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, iVar1);
-                                    _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
-                                        + _pClimbData->numberOfUnitsUsing * 8;
-                                    if (_distance < _minDistance) {
-                                        _downOrUp = _downOrUp1;
-                                        _minDistance = _distance;
-                                        _climbData2 = _climbDataCounter;
-                                        if (_downOrUp1 == 0) {
-                                            this->climbX = _pClimbData->bottomXPosition;
-                                            this->climbY = _pClimbData->bottomYPosition;
-                                        } else {
-                                            this->climbX = _pClimbData->topXPosition;
-                                            this->climbY = _pClimbData->topYPosition;
-                                        }
-                                    }
+                                    candidate = TRUE;
                                 }
-                            } else if ((_pClimbData->area == ladderArea)
+                            } else if (_pClimbData->area == ladderArea
                                 && (_downOrUp1 = 1, _pClimbData->wallGroupAreaID == ladderWallGroup)) {
                                 iVar1 = _pClimbData->topYPosition;
                                 fromXPosition = _pClimbData->topXPosition;
-                                goto LAB_004a49e1;
+                                candidate = TRUE;
+                            }
+                            if (candidate) {
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                                    DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
+                                    (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, iVar1);
+                                _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
+                                    + _pClimbData->numberOfUnitsUsing * 8;
+                                if (_distance < _minDistance) {
+                                    _downOrUp = _downOrUp1;
+                                    _minDistance = _distance;
+                                    _climbData2 = _climbDataCounter;
+                                    if (_downOrUp1 == 0) {
+                                        this->climbX = _pClimbData->bottomXPosition;
+                                        this->climbY = _pClimbData->bottomYPosition;
+                                    } else {
+                                        this->climbX = _pClimbData->topXPosition;
+                                        this->climbY = _pClimbData->topYPosition;
+                                    }
+                                }
                             }
                         }
                     }
