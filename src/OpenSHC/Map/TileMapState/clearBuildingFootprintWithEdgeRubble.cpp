@@ -33,16 +33,16 @@ namespace Map {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffdf;
                 this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             }
-            short buildingID = this->BuildingLayer[tile];
+            int buildingID = this->BuildingLayer[tile];
             this->BuildingLayer[tile] = 0;
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isFootprintIndexOnEdge, this)(
                            buildingSizeTileIndex, size)
-                == FALSE) {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
-            } else {
+                != FALSE) {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x2000;
+            } else {
+                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
             }
             buildingSizeTileIndex++;
             this->ChangedLayer[tile] = 2;

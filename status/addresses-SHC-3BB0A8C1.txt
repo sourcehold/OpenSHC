@@ -40361,7 +40361,7 @@ SHC_3BB0A8C1_0x004FAC70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAD20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FAD70 | 85.4% | ecx not kept across callee
+SHC_3BB0A8C1_0x004FAD70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAE50 | 100.0% | Reimplemented
 
