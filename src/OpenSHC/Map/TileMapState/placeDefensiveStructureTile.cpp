@@ -56,47 +56,51 @@ namespace Map {
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 0x5a;
         } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 0x3c;
-        } else {
-            bool crenellated = true;
-            if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-                this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
-            } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-                this->HeightLayer[tile] = this->HeightLayer[tile] + 0x44;
-            } else {
-                crenellated = false;
-                if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x50;
-                } else if (command == OpenSHC::Commands::M_MAPPER_STAIR2) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x40;
-                } else if (command == OpenSHC::Commands::M_MAPPER_STAIR3) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x30;
-                } else if (command == OpenSHC::Commands::M_MAPPER_STAIR4) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x20;
-                }
-            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
             /* a crenel on an odd tile of one axis carries the alternate variation */
-            if (crenellated && ((x & 1) == 0) != ((y & 1) == 0)) {
+            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
             }
+        } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x44;
+            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x50;
+        } else if (command == OpenSHC::Commands::M_MAPPER_STAIR2) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x40;
+        } else if (command == OpenSHC::Commands::M_MAPPER_STAIR3) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x30;
+        } else if (command == OpenSHC::Commands::M_MAPPER_STAIR4) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x20;
+        } else if (command == OpenSHC::Commands::M_MAPPER_STAIR5) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
+            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x10;
         }
 
-        uint logic = this->LogicLayer[tile];
-        this->LogicLayer[tile]
-            = logic & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON) | L_WALL_OR_GATEHOUSE;
-        if ((logic & L_PLAIN2_AND_PITCH) != 0) {
-            this->LogicLayer[tile]
-                = logic & ~(L_PLAIN2_AND_PITCH | L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
-                | L_WALL_OR_GATEHOUSE;
+        this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
+            | L_WALL_OR_GATEHOUSE;
+        if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) != 0) {
+            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
             this->HeightLayer[tile] = this->HeightLayer[tile] + 4;
         }
-        if ((this->LogicLayer[tile] & L_TREE) != 0 && this->OrganismLayer[tile] < 2000) {
-            DAT_LandscapeState::instance.trees[this->OrganismLayer[tile]].state = 3;
+        if ((this->LogicLayer[tile] & L_TREE) != 0) {
+            int organism = this->OrganismLayer[tile];
+            if (organism < 2000) {
+                DAT_LandscapeState::instance.trees[organism].state = 3;
+            }
         }
         if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
