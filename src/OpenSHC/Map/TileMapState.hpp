@@ -65,7 +65,7 @@ namespace Map {
         uchar ShowHiLayer[80400]; // 0x002EE270 length: 80400
         short MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
         char DamageLayer[80400]; // 0x003290A0 length: 80400
-        ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
+        short MacroLayer[80400]; // 0x0033CAB0 length: 160800
         ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
         uchar OccupancyLayer[80400]; // 0x0039ED00 length: 80400
