@@ -17,16 +17,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9510
         int PathFindingState::createClimbData(int size, int buildingID, int unitID, int direction, int param_5)
         {
-            ClimbData* pCVar1;
             int _climbID;
-            _climbID = 1;
-            pCVar1 = this->climbData + 1;
-            while (pCVar1->canBeUsed != 0) {
-                _climbID = _climbID + 1;
-                pCVar1 = pCVar1 + 1;
-                if (200 <= _climbID) {
-                    return 0;
+            for (_climbID = 1; _climbID < 200; ++_climbID) {
+                if (this->climbData[_climbID].canBeUsed == 0) {
+                    break;
                 }
+            }
+            if (_climbID == 200) {
+                return 0;
             }
             this->climbData[_climbID].canBeUsed = 1;
             this->climbData[_climbID].type = size;
@@ -47,28 +45,28 @@ namespace Map {
                     = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
                 this->climbData[_climbID].bottomTilePosition
                     = DAT_BuildingsState::instance.buildings[buildingID].currentTilePositionAdjusted;
-                if (size == 6 || size == 4) {
+                if (size == 6) {
                     this->climbData[_climbID].ladderDirection = direction;
-                    return _climbID;
-                }
-                if (size == 5 || size == 3) {
+                } else if (size == 5) {
+                    this->climbData[_climbID].ladderDirection = direction;
+                } else if (size == 4) {
+                    this->climbData[_climbID].ladderDirection = direction;
+                } else if (size == 3) {
                     this->climbData[_climbID].ladderDirection = direction;
                 }
                 return _climbID;
             }
-            if (unitID == 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(_climbID);
+            if (unitID != 0) {
+                this->climbData[_climbID].sourceUID = DAT_UnitsState::instance.units[unitID].uid;
+                this->climbData[_climbID].owner = DAT_UnitsState::instance.units[unitID].owner;
+                this->climbData[_climbID].bottomXPosition = DAT_UnitsState::instance.units[unitID].x;
+                this->climbData[_climbID].bottomYPosition = DAT_UnitsState::instance.units[unitID].y;
+                this->climbData[_climbID].bottomTilePosition = DAT_UnitsState::instance.units[unitID].tile;
+                DAT_UnitsState::instance.units[unitID].wallDataID = (short)_climbID;
                 return _climbID;
             }
-            /*
-              unitID != 0
-             */
-            this->climbData[_climbID].sourceUID = DAT_UnitsState::instance.units[unitID].uid;
-            this->climbData[_climbID].owner = (int)DAT_UnitsState::instance.units[unitID].owner;
-            this->climbData[_climbID].bottomXPosition = (int)DAT_UnitsState::instance.units[unitID].x;
-            this->climbData[_climbID].bottomYPosition = (int)DAT_UnitsState::instance.units[unitID].y;
-            this->climbData[_climbID].bottomTilePosition = DAT_UnitsState::instance.units[unitID].tile;
-            DAT_UnitsState::instance.units[unitID].wallDataID = (short)_climbID;
+            // neither a building nor a unit: nothing to climb
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(_climbID);
             return _climbID;
         }
 
