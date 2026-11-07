@@ -1,3 +1,6 @@
+// disable deprecation warnings for strcpy
+#pragma warning(disable : 4996)
+
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/AI/AIVState.func.hpp"
@@ -61,12 +64,8 @@ namespace Map {
             DAT_GameSynchronyState::instance.isHost = TRUE;
             char* name = MACRO_CALL_MEMBER(
                 OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
-            /* the human player's name goes into slot 1, terminator included */
-            int i = 0;
-            do {
-                DAT_GameSynchronyState::instance.DAT_PlayerNames[1][i] = name[i];
-                i++;
-            } while (name[i - 1] != '\0');
+            /* the human player's name goes into slot 1 */
+            strcpy(DAT_GameSynchronyState::instance.DAT_PlayerNames[1], name);
             MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::syncAIPlayerNamesAndBuildIntervals, DAT_AIVState::ptr)();
             DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
         } else if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION) {
@@ -81,8 +80,8 @@ namespace Map {
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             0x27420, '\0', DAT_TileMapState::instance.WalkLayer);
-        DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
         DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
+        DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
         MACRO_CALL_MEMBER(
             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, DAT_ViewportRenderState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setTileSystemMemoryLookupArrays,
@@ -117,7 +116,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::upgradeMapFormatForUnits, DAT_UnitsState::ptr)(
             (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
             (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::upgradeMapFormatLogicLayer, this)(
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::upgradeMapFormatLogicLayer, DAT_TileMapState::ptr)(
             (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
             (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(
