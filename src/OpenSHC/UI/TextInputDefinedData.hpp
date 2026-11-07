@@ -19,7 +19,8 @@ namespace UI {
     // SIZE: 0x00000734
     typedef struct TextInputDefinedData {
 
-        int field_0x0[11]; // 0x00000000 length: 44
+        int field_0x0[5]; // 0x00000000 length: 20
+        int field_0x14[6]; // 0x00000014 length: 24
         int field_0x2c[22]; // 0x0000002C length: 88
         byte UserTextHandler_CharacterFilter_B_1_8_9[256]; // 0x00000084 length: 256
         byte UserTextHandler_CharacterFilter_A_2_3[256]; // 0x00000184 length: 256
