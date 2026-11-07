@@ -65,8 +65,8 @@ namespace Map {
         int scenarionMissionType; // 0x00013534 length: 4
         MapType2Int SEC_U3_MapType2_1; // 0x00013538 length: 4
         MapType2Int scenarioMissionSiegeOrInvasion; // 0x0001353C length: 4
-        undefined4 SEC_Section1090; // 0x00013540 length: 4
-        undefined4 SEC_Section1080; // 0x00013544 length: 4
+        int SEC_Section1090; // 0x00013540 length: 4
+        int SEC_Section1080; // 0x00013544 length: 4
         undefined4 SEC_Section1081; // 0x00013548 length: 4
         undefined1 padding_0x1354c[4]; // 0x0001354C length: 4
         int visibleRowCount; // 0x00013550 length: 4
