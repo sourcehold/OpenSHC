@@ -41573,7 +41573,7 @@ SHC_3BB0A8C1_0x00502110 | 43.3% | asm macro, regalloc differs
 
 SHC_3BB0A8C1_0x00502390 | 30.3% | brush loop regalloc
 
-SHC_3BB0A8C1_0x005024F0 | 55.3% | 47.37% index spill regalloc
+SHC_3BB0A8C1_0x005024F0 | 55.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00502680 | 50.0% | asm macro, cold arms inline
 

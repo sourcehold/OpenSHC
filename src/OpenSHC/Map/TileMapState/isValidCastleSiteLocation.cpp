@@ -35,6 +35,7 @@ namespace Map {
     BOOLEnum TileMapState::isValidCastleSiteLocation(int x, uint y, int cbt)
     {
         int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int tile = baseTile;
         uint baseY = y;
         /* x is reused as the count of tiles that qualified */
         x = 0;
@@ -49,36 +50,35 @@ namespace Map {
             searchRange = 30;
         }
 
-        int tile = baseTile;
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 0, index, &tile, (int*)&y, baseTile, baseY);
             /* the brush call may move both, so the original keeps its own copies for later use */
             int brushTile = tile;
             uint brushY = y;
-            if (this->OrganismLayer[tile] != 0) {
+            if (this->OrganismLayer[brushTile] != 0) {
                 continue;
             }
-            if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+            if ((this->LogicLayer[brushTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                 continue;
             }
-            if (this->BuildingLayer[tile] != 0) {
+            if (this->BuildingLayer[brushTile] != 0) {
                 continue;
             }
-            if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BOULDERS | L_IRON | L_RIVER | L_FORD | L_MARSH))
+            if ((this->LogicLayer[brushTile] & (L_WALL_OR_GATEHOUSE | L_BOULDERS | L_IRON | L_RIVER | L_FORD | L_MARSH))
                 != 0) {
                 continue;
             }
-            if ((this->LogicLayer[tile] & (L_SEA | L_PLAIN1_AND_FARM | L_ROCKY)) != 0) {
+            if ((this->LogicLayer[brushTile] & (L_SEA | L_PLAIN1_AND_FARM | L_ROCKY)) != 0) {
                 continue;
             }
 
-            uint brushX = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            uint brushX = brushTile - DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile;
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
                 && MACRO_CALL_MEMBER(
                        OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
-                       DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, y, enemyRange)
+                       DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, brushY, enemyRange)
                     != FALSE) {
                 continue;
             }
