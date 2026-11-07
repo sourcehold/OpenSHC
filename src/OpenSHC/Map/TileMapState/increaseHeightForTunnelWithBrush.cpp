@@ -27,6 +27,8 @@ namespace Map {
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 0, index, &tile, (int*)&y, baseTile, baseY);
+            /* a copy the height store cannot alias: the original pushes it without reloading tile */
+            int const brushTile = tile;
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                 continue;
             }
@@ -45,7 +47,7 @@ namespace Map {
                 this->HeightLayer[tile] = this->HeightLayer[tile] + (char)increment;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                DAT_PathFindingState::ptr)(y, tile);
+                DAT_PathFindingState::ptr)(y, brushTile);
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(5, x, y);
