@@ -19,6 +19,7 @@ namespace UI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     using OpenSHC::Map::MapHeaderSection4IntStruct;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
