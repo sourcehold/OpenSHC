@@ -510,7 +510,7 @@ namespace Map {
             &TileMapState::isValidCastleSiteLocation)
         isValidCastleSiteLocation;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false,
             Address::SHC_3BB0A8C1_0x00502680, &TileMapState::useTerrainHeightBrush)
         useTerrainHeightBrush;
 

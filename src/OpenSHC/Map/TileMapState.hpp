@@ -487,7 +487,7 @@ namespace Map {
 
         BOOLEnum isValidCastleSiteLocation(int x, uint y, int cbt);
 
-        void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, undefined4 param_4);
+        void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, short param_4);
 
         int getMaxWallHeightInBrushArea(int param_1, uint param_2);
 

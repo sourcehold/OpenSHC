@@ -24,7 +24,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00502680
-    void TileMapState::useTerrainHeightBrush(int tile, uint y, uint brush, undefined4 mapper)
+    void TileMapState::useTerrainHeightBrush(int tile, uint y, uint brush, short mapper)
     {
         int baseTile = tile;
         uint baseY = y;
@@ -70,17 +70,17 @@ namespace Map {
             }
 
             this->HeightLayer[brushTile] = this->HeightLayer[brushTile] + 1;
-            if ((short)mapper == 0) {
+            if (mapper == 0) {
                 /* mapper min */
                 this->HeightLayer[brushTile] = 8;
                 this->Logic2Layer[brushTile] = this->Logic2Layer[brushTile] & 0xf3;
-            } else if ((short)mapper == 1) {
+            } else if (mapper == 1) {
                 /* mapper max, bug:fixme: is 156 really the maximum height? */
                 this->HeightLayer[brushTile] = 156;
                 this->LogicLayer[brushTile] = this->LogicLayer[brushTile] | 0x8000;
-            } else if ((short)mapper == 5) {
+            } else if (mapper == 5) {
                 this->HeightLayer[brushTile] = 100;
-            } else if ((short)mapper == 2) {
+            } else if (mapper == 2) {
                 /* scale towards the brush average, in eighths of the ratio to it */
                 int ratio;
                 if (average == 0) {
