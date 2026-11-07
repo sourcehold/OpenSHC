@@ -44747,7 +44747,7 @@ SHC_3BB0A8C1_0x00514480 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00514520 | 82.1% | 75.63% spill order
 
-SHC_3BB0A8C1_0x005146D0 | 48.2% | 47.46% regalloc
+SHC_3BB0A8C1_0x005146D0 | 87.9% | GL ecx reloads
 
 SHC_3BB0A8C1_0x00514BC0 | 0.0% | Pending
 
