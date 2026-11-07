@@ -39413,7 +39413,7 @@ SHC_3BB0A8C1_0x004F9980 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F99D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9A60 | 50.4% | 49.70% global instance base
+SHC_3BB0A8C1_0x004F9A60 | 78.6% | fix signed height limit
 
 SHC_3BB0A8C1_0x004F9D64 | 0.0% | Pending
 

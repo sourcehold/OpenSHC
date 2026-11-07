@@ -41,9 +41,13 @@ namespace Map {
     int TileMapState::isBuildingPlacementAllowedAtTile(
         int tile, int playerID, MappersEnum commandBuildingType, int param_4)
     {
-        uint logic = this->LogicLayer[tile];
-        uint wallOrGate = logic & L_WALL_OR_GATEHOUSE;
+        uint const logic = this->LogicLayer[tile];
+        int const building = this->BuildingLayer[tile];
+        int onRock = 0;
+        int onMoat = 0;
+        int onMarsh = 0;
         uint height = this->HeightLayer[tile];
+        uint const wallOrGate = logic & L_WALL_OR_GATEHOUSE;
         if (wallOrGate != 0 && (this->WallOwnerLayer[tile] & 7) + 1 == playerID) {
             /* a gate or tower on our own wall is measured against the ground, not the wall top */
             switch (commandBuildingType) {
@@ -69,36 +73,35 @@ namespace Map {
             }
         }
 
-        if (this->buildingHeightLimit < 0) {
-            if ((int)height < -this->buildingHeightLimit) {
+        if ((int)this->buildingHeightLimit >= 0) {
+            if ((int)height > (int)this->buildingHeightLimit) {
+                if (commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
+                    this->placementWarning = 1;
+                    return 1;
+                }
+                if (commandBuildingType == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
+                    this->placementWarning = 2;
+                    return 1;
+                }
+                if (commandBuildingType == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
+                    this->placementWarning = 3;
+                    return 1;
+                }
+                if (commandBuildingType == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
+                    this->placementWarning = 4;
+                }
                 return 1;
             }
-        } else if (this->buildingHeightLimit < (int)height) {
-            if (commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
-                this->placementWarning = 1;
-                return 1;
-            }
-            if (commandBuildingType == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
-                this->placementWarning = 2;
-                return 1;
-            }
-            if (commandBuildingType == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
-                this->placementWarning = 3;
-                return 1;
-            }
-            if (commandBuildingType != OpenSHC::Commands::M_MAPPER_WHEATFARM) {
-                return 1;
-            }
-            this->placementWarning = 4;
+        } else if ((int)height < -(int)this->buildingHeightLimit) {
             return 1;
         }
-        if (this->buildingMaxHeightDifference + this->buildingMinHeight < (int)height) {
+        if ((int)height > (int)this->buildingMaxHeightDifference + this->buildingMinHeight) {
             return 1;
         }
         if ((logic & L_PLAIN2_AND_PITCH) != 0 && commandBuildingType == OpenSHC::Commands::M_MAPPER_PITCH_DITCH) {
             return 1;
         }
-        if (this->BuildingLayer[tile] != 0) {
+        if (building != 0) {
             return 2;
         }
 
@@ -106,11 +109,7 @@ namespace Map {
             int unitID = (short)this->UnitLayer[tile];
             if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(
                     playerID)
-                == FALSE) {
-                if (DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_CHICKEN) {
-                    return 1;
-                }
-            } else {
+                != FALSE) {
                 if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
                     return 1;
                 }
@@ -118,6 +117,8 @@ namespace Map {
                     && DAT_UnitsState::instance.units[unitID].owner != playerID) {
                     return 1;
                 }
+            } else if (DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_CHICKEN) {
+                return 1;
             }
         }
 
@@ -166,33 +167,35 @@ namespace Map {
             return 1;
         }
 
-        if ((logic & (L_TREE | L_TREE_VARIATION)) != 0 && this->OrganismLayer[tile] != 0
-            && this->OrganismLayer[tile] < 2000) {
-            /* scrub can be built over, a real tree cannot, except by the AI outside solitary */
-            switch (DAT_LandscapeState::instance.trees[this->OrganismLayer[tile]].treeType) {
-            case (TreeType)5:
-            case (TreeType)6:
-            case (TreeType)7:
-            case (TreeType)8:
-            case (TreeType)9:
-            case (TreeType)0xa:
-            case (TreeType)0xb:
-            case (TreeType)0xc:
-            case (TreeType)0xd:
-            case (TreeType)0xe:
-            case (TreeType)0x10:
-            case (TreeType)0x11:
-            case (TreeType)0x12:
-            case (TreeType)0x13:
-                break;
-            default:
-                if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                    return 1;
-                }
-                if (MACRO_CALL_MEMBER(
-                        OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID)
-                    == 0) {
-                    return 1;
+        if ((logic & (L_TREE | L_TREE_VARIATION)) != 0) {
+            int const organism = this->OrganismLayer[tile];
+            if (organism != 0 && organism < 2000) {
+                /* scrub can be built over, a real tree cannot, except by the AI outside solitary */
+                switch (DAT_LandscapeState::instance.trees[organism].treeType) {
+                case (TreeType)5:
+                case (TreeType)6:
+                case (TreeType)7:
+                case (TreeType)8:
+                case (TreeType)9:
+                case (TreeType)0xa:
+                case (TreeType)0xb:
+                case (TreeType)0xc:
+                case (TreeType)0xd:
+                case (TreeType)0xe:
+                case (TreeType)0x10:
+                case (TreeType)0x11:
+                case (TreeType)0x12:
+                case (TreeType)0x13:
+                    break;
+                default:
+                    if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
+                        return 1;
+                    }
+                    if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                            DAT_GameSynchronyState::ptr)(playerID)
+                        == 0) {
+                        return 1;
+                    }
                 }
             }
         }
@@ -205,17 +208,25 @@ namespace Map {
             return 1;
         }
 
-        bool onRock = false;
-        if ((char)logic < 0 && wallOrGate == 0) {
-            onRock = true;
+        if ((logic & 0x80) != 0 && wallOrGate == 0) {
+            onRock = 1;
         }
-        if ((!onRock || this->buildingPlacementProperty_4 != 0)
-            && ((logic & L_MOAT) == 0 || this->buildingPlacementProperty_7 != 0)
-            && (this->buildingPlacementProperty_6 == 2 || (logic & L_MARSH) == 0
-                || this->buildingPlacementProperty_6 != 0)) {
-            return 0;
+        if ((logic & L_MARSH) != 0) {
+            onMarsh = 1;
         }
-        return 1;
+        if ((logic & L_MOAT) != 0) {
+            onMoat = 1;
+        }
+        if (onRock != 0 && this->buildingPlacementProperty_4 == 0) {
+            return 1;
+        }
+        if (onMoat != 0 && this->buildingPlacementProperty_7 == 0) {
+            return 1;
+        }
+        if (this->buildingPlacementProperty_6 != 2 && onMarsh != 0 && this->buildingPlacementProperty_6 == 0) {
+            return 1;
+        }
+        return 0;
     }
 
 }
