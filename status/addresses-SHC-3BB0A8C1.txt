@@ -41083,7 +41083,7 @@ SHC_3BB0A8C1_0x004FBE70 | 91.0% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FC0B0 | 95.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004FC280 | 85.2% | XYPair base regalloc
+SHC_3BB0A8C1_0x004FC280 | 90.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FC340 | 100.0% | Reimplemented
 
