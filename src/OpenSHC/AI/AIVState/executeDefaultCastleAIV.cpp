@@ -494,7 +494,11 @@ namespace AI {
                 continue;
             }
             if (mapper == Commands::M_MAPPER_WOODSMAN) {
-                if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0) {
+                if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable > 0) {
+                    // enough wood. Written as a positive test with an empty arm on purpose: the original
+                    // branches on `> 0` and falls through into the continue; `<= 0` lays the blocks out the
+                    // other way round
+                } else {
                     continue;
                 }
             } else if (mapper == Commands::M_MAPPER_GRANARY
