@@ -25921,7 +25921,7 @@ SHC_3BB0A8C1_0x004AF820 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AF840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AF860 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AF860 | 78.7% | Reimplemented, register mismatch: durationSum stays in a register where the original keeps elementState
 
 SHC_3BB0A8C1_0x004AFA50 | 100.0% | Reimplemented
 
