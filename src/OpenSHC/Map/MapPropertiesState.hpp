@@ -79,7 +79,7 @@ namespace Map {
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
         undefined4 flag; // 0x00013578 length: 4
-        undefined4 offset; // 0x0001357C length: 4
+        int offset; // 0x0001357C length: 4
         int indexStored; // 0x00013580 length: 4
         int selectedAbsoluteIndex; // 0x00013584 length: 4
         dword selectionTime; // 0x00013588 length: 4
