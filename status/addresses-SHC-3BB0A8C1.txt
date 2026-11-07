@@ -44187,7 +44187,7 @@ SHC_3BB0A8C1_0x005114C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005115C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005116E0 | 74.6% | pitch field reload/regalloc
+SHC_3BB0A8C1_0x005116E0 | 98.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00511850 | 100.0% | Reimplemented
 
