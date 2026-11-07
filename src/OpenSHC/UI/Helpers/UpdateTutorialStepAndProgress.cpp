@@ -17,7 +17,6 @@
 #include "OpenSHC/Globals/DAT_00df5558.hpp"
 #include "OpenSHC/Globals/DAT_00df555c.hpp"
 #include "OpenSHC/Globals/DAT_00df5560.hpp"
-#include "OpenSHC/Globals/DAT_00df5564.hpp"
 #include "OpenSHC/Globals/DAT_00df556c.hpp"
 #include "OpenSHC/Globals/DAT_00df5588.hpp"
 #include "OpenSHC/Globals/DAT_00df558c.hpp"
@@ -33,6 +32,7 @@
 #include "OpenSHC/Globals/DWORD_00df5548.hpp"
 #include "OpenSHC/Globals/DWORD_00df5568.hpp"
 #include "OpenSHC/Globals/DWORD_00df564c.hpp"
+#include "OpenSHC/Globals/INT_00df5564.hpp"
 #include "OpenSHC/Globals/INT_00df5574.hpp"
 #include "OpenSHC/Globals/INT_00df557c.hpp"
 #include "OpenSHC/Globals/INT_00df5580.hpp"
@@ -84,8 +84,8 @@ namespace UI {
                     speechPath);
             }
         }
-        if (DAT_00df5564::instance && now - DWORD_00df5568::instance > 1000) {
-            DAT_00df5564::instance = 0;
+        if (INT_00df5564::instance && now - DWORD_00df5568::instance > 1000) {
+            INT_00df5564::instance = 0;
         }
         if (!DAT_FileDoesntExist::instance && (DAT_00df5558::instance == 0 || INT_00df5650::instance)
             && DAT_00df5540::instance == 0 && DAT_00df5558::instance < DAT_00df555c::instance - 1) {
