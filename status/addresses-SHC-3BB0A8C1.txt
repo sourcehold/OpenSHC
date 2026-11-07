@@ -16963,7 +16963,7 @@ SHC_3BB0A8C1_0x0044F850 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00451E00 | 92.5% | gynt's asm with the zoomed path's surface pointer fixed; stack slots of the asm-only column offset and the C locals
 
 SHC_3BB0A8C1_0x00452900 | 100.0% | Reimplemented
 
@@ -17003,7 +17003,7 @@ SHC_3BB0A8C1_0x00454EE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00454EF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00454F00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00454F00 | 84.8% | gynt's asm without his two extra locals; the record offset folded into the addresses
 
 SHC_3BB0A8C1_0x00455050 | 0.0% | Pending
 
