@@ -13,24 +13,18 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E9E0
         void PathFindingState::updateAIZoneWithFloodFill0x20(int max, uint ySpace, uint y)
         {
-            if (ySpace > 399 || y > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
                 return;
             }
             this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0,
                     (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
@@ -77,12 +71,12 @@ namespace Map {
                         + _y;
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                     this->searchQueue.writeIndex += 1;
-                    if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                    if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
                 this->searchQueue.readIndex += 1;
-                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

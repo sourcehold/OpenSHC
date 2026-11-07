@@ -16,17 +16,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        using OpenSHC::Map::Entities::EntityType;
-
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          BFS from (param_1, param_2), scores reachable tiles against a hack values array (indexed by   param_3) and a
-          target zone value (param_4). Returns the tileUnk index with the lowest combined path   cost and terrain cost
-          weighting. Used to select the optimal attack position for a unit   approaching a target zone.      renamed by:
-          Claude Sonnet 4.6
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A01D0
         dword PathFindingState::findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4)
         {
@@ -37,8 +26,9 @@ namespace Map {
             dword _candidate = 1000;
             int _bestScore = 1000;
             dword _bestTile = 0;
-            if (param_1 > 399 || param_2 > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_2 * 400 + param_1] == '\0') {
+            if (param_1 > MC_MAP_XY_LIMIT_MIN_1 || param_2 > MC_MAP_XY_LIMIT_MIN_1
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_2 * MC_MAP_XY_LIMIT + param_1]
+                    == '\0') {
                 return _candidate;
             }
             this->calculations += 1;
@@ -46,7 +36,7 @@ namespace Map {
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0,
                     (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
@@ -63,12 +53,12 @@ namespace Map {
                 if (_queuedTile < 0) {
                     return _bestTile;
                 }
-                if (_queuedTile >= Map::MC_MAP_TILES_COUNT) {
+                if (_queuedTile >= MC_MAP_TILES_COUNT) {
                     return _bestTile;
                 }
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_queuedTile];
-                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
+                if (MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                     return _bestTile;
                 }
                 for (int _direction = 0; _direction < 8; ++_direction) {
@@ -88,7 +78,7 @@ namespace Map {
                             int _hackValue
                                 = (int)*(byte*)(DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
                                                     .currentPlayerID_OR_attackedPlayerID_OR_one
-                                        * Map::MC_MAP_TILES_COUNT
+                                        * MC_MAP_TILES_COUNT
                                     + 0x1ee2998 + _candidate);
                             int _cost = (int)DAT_TileMapState::instance.SEC_TileMap1104[_candidate];
                             int _entity = (int)DAT_TileMapState::instance.EntityLayer[_candidate];
@@ -116,14 +106,14 @@ namespace Map {
                                 + (short)_y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex += 1;
-                            if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                            if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
                 }
                 this->searchQueue.readIndex += 1;
-                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
