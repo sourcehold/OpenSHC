@@ -20,8 +20,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00506370
     void TileMapState::updateBuildingGraphicsLayer(int buildingID)
     {
-        ushort buildingXPos = DAT_BuildingsState::instance.buildings[buildingID].x;
-        ushort buildingYPos = DAT_BuildingsState::instance.buildings[buildingID].y;
+        int const buildingXPos = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+        int const buildingYPos = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
         DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics = 0;
         if (this->refreshRelatedOne == 0 && DAT_BuildingsState::instance.buildings[buildingID].gfxOffset != 0) {
             DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics = 1;
@@ -33,9 +33,8 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
-            int tile
-                = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + (short)buildingYPos].addXgetTile
-                + (short)buildingXPos + this->buildingX;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + buildingYPos].addXgetTile
+                + buildingXPos + this->buildingX;
             if (this->disableElevationRendering != 0) {
                 /* the placement overlay replaces every building graphic with its outline */
                 this->AlphaGFXLayer[tile] = 0;
@@ -93,7 +92,20 @@ namespace Map {
                     || DAT_BuildingsState::instance.buildings[buildingID].orientation == 2) {
                     facing = (this->mapOrientation + 2) % 8;
                 }
-                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics != 0) {
+                    if (facing == 2 || facing == 6) {
+                        this->GfxLayer[tile]
+                            = (short)GMFirstPictureIndex::instance
+                                  [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
+                            + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset;
+                    } else {
+                        this->GfxLayer[tile]
+                            = ((short)GMFirstPictureIndex::instance
+                                      [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
+                                  + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset)
+                            - 1;
+                    }
+                } else {
                     if (facing == 2 || facing == 6) {
                         this->GfxLayer[tile]
                             = (short)GMFirstPictureIndex::instance
@@ -110,17 +122,6 @@ namespace Map {
                                   + (short)DAT_BuildingsState::instance.buildings[buildingID].spriteID)
                             - 1;
                     }
-                } else if (facing == 2 || facing == 6) {
-                    this->GfxLayer[tile]
-                        = (short)GMFirstPictureIndex::instance[(short)DAT_BuildingsState::instance.buildings[buildingID]
-                                  .spriteSheetID]
-                        + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset;
-                } else {
-                    this->GfxLayer[tile]
-                        = ((short)GMFirstPictureIndex::instance
-                                  [(short)DAT_BuildingsState::instance.buildings[buildingID].spriteSheetID]
-                              + (short)DAT_BuildingsState::instance.buildings[buildingID].gfxOffset)
-                        - 1;
                 }
             } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                 == OpenSHC::Map::Buildings::BT_KEEPDOOR) {
