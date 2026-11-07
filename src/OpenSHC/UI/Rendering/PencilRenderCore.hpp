@@ -38,10 +38,10 @@ namespace UI {
             int moveDirectionYUnk_0x24; // 0x00000024 length: 4
             int currentWidth_0x28; // 0x00000028 length: 4
             int currentHeight_0x2c; // 0x0000002C length: 4
-            dword drawStartX; // 0x00000030 length: 4
-            dword drawStartY; // 0x00000034 length: 4
-            dword drawEndX; // 0x00000038 length: 4
-            dword drawEndY; // 0x0000003C length: 4
+            int drawStartX; // 0x00000030 length: 4
+            int drawStartY; // 0x00000034 length: 4
+            int drawEndX; // 0x00000038 length: 4
+            int drawEndY; // 0x0000003C length: 4
             ushort drawColor; // 0x00000040 length: 2
 
         private:
