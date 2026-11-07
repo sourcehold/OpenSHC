@@ -115,7 +115,10 @@ namespace AI {
             DAT_GameState::ptr)(targetPlayer);
         int destinationTile;
         if (buildingID != 0) {
-            if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID != 0) {
+            // fixme: the original reads this once with movsx into an int; an int copy does that but lets MSVC fold
+            // both campground arms into one, which the original keeps apart. The reference keeps the arms apart.
+            short const& targetUnitIDRef = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            if (targetUnitIDRef != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathfindingForAttacksUnk,
                     DAT_PathFindingState::ptr)(tribeID, buildingID, 1,
                     (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
