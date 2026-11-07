@@ -16,7 +16,7 @@ namespace AI {
     void AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet(int playerID)
     {
         int tribeIndex = 17;
-        if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 <= 0) {
+        if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat3 <= 0) {
             return;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
