@@ -17,10 +17,10 @@ namespace Map {
         DAT_GameState::instance.playerDataArray[7].moatsOwned = 0;
         DAT_GameState::instance.playerDataArray[8].moatsOwned = 0;
         for (int moatID = 1; moatID < 16000; moatID++) {
-            char owner = this->moats[moatID].owner;
+            char const owner = this->moats[moatID].owner;
             if (owner != 0) {
-                DAT_GameState::instance.playerDataArray[owner].moatsOwned
-                    = DAT_GameState::instance.playerDataArray[owner].moatsOwned + 1;
+                int const ownerIndex = owner;
+                DAT_GameState::instance.playerDataArray[ownerIndex].moatsOwned++;
             }
         }
     }
