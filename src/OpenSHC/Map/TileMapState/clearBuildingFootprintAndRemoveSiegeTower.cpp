@@ -18,13 +18,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_BUILDING;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-    using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
-    using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Map::Units::States::UnitState;
 
@@ -44,7 +37,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
                 DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile], tile);
-            short unitID = this->UnitLayer[tile];
+            int unitID = this->UnitLayer[tile];
             if (unitID != 0 && DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_TOWER) {
                 DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             }
