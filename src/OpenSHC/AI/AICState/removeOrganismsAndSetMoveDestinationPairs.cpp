@@ -36,7 +36,12 @@ namespace AI {
 
         // Hardcoded exception: the Sultan keeps a smaller distance than all other AIs
         int const aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
-        int const extraDistance = aicIndex == OpenSHC::AI::AIT_SULTAN - 1 ? 8 : 20;
+        int extraDistance;
+        if (aicIndex == OpenSHC::AI::AIT_SULTAN - 1) {
+            extraDistance = 8;
+        } else {
+            extraDistance = 20;
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
             DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
             DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, -1, -1, 10000, FALSE);
