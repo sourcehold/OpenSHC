@@ -67,16 +67,17 @@ namespace Map {
                     result = 0x11 - (y & 0xf);
                 }
             }
-        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(tileUnk, y, 2)
+        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
+                       tileUnk, y, 2)
             != 0) {
             result = 48;
         } else {
             /* 0x3f when the other direction carries a wall too, 0x21 when it does not */
-            result = (-(uint)(MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                                  tileUnk, y, 4)
-                          != 0)
-                         & 0x1e)
-                + 0x21;
+            result = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
+                         tileUnk, y, 4)
+                    != 0
+                ? 0x3f
+                : 0x21;
         }
         return result;
     }
