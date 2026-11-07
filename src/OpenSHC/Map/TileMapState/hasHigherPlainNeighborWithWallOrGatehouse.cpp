@@ -28,7 +28,7 @@ namespace Map {
         }
 
         int neighbour = this->directionTranslationMatrix[y][rotatedDirection] + tile;
-        if (this->HeightLayer[tile] >= this->HeightLayer[neighbour]) {
+        if (this->HeightLayer[neighbour] <= this->HeightLayer[tile]) {
             return FALSE;
         }
         if ((this->LogicLayer[neighbour] & L_CRENEL) != 0) {
@@ -37,7 +37,7 @@ namespace Map {
         if ((this->LogicLayer[neighbour] & L_STOCKPILEUnk) != 0) {
             return FALSE;
         }
-        return this->LogicLayer[neighbour] >> 8 & TRUE;
+        return (uint)this->LogicLayer[neighbour] >> 8 & TRUE;
     }
 
 }
