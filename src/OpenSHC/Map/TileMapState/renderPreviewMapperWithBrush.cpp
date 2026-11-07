@@ -36,10 +36,10 @@ namespace Map {
 
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[this->editorActiveBrush];
         int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        this->buildingPlacementFail = FALSE;
         if (mapper == OpenSHC::Commands::M_MAPPER_POND1 || mapper == OpenSHC::Commands::M_MAPPER_POND2_SMALL
             || mapper == OpenSHC::Commands::M_MAPPER_POND3_LARGE1
             || mapper == OpenSHC::Commands::M_MAPPER_POND4_LARGE2) {
-            this->buildingPlacementFail = FALSE;
             return;
         }
         this->buildingPlacementFail = TRUE;
@@ -49,76 +49,71 @@ namespace Map {
 
         /* every mapper draws its own preview colour */
         ushort gfx;
-        if ((int)mapper > OpenSHC::Commands::M_MAPPER_DUNES) {
-            gfx = 0x38;
-        } else if (mapper == OpenSHC::Commands::M_MAPPER_DUNES) {
+        switch (mapper) {
+        case OpenSHC::Commands::M_MAPPER_SEA:
+        case OpenSHC::Commands::M_MAPPER_SHALLOWS:
+        case OpenSHC::Commands::M_MAPPER_RIVER:
+        case OpenSHC::Commands::M_MAPPER_MARSH:
+        case OpenSHC::Commands::M_MAPPER_DUGMOAT:
+        case OpenSHC::Commands::M_MAPPER_MOAT:
+            gfx = 0x39;
+            break;
+        case OpenSHC::Commands::M_MAPPER_BEACH:
+        case OpenSHC::Commands::M_MAPPER_FORD:
+            gfx = 0x3a;
+            break;
+        case OpenSHC::Commands::M_MAPPER_ROCKY:
+        case OpenSHC::Commands::M_MAPPER_STONES:
+        case OpenSHC::Commands::M_MAPPER_BOULDERS:
+        case OpenSHC::Commands::M_MAPPER_PEBBLES:
+        case OpenSHC::Commands::M_MAPPER_IRON:
+            gfx = 0x3b;
+            break;
+        case OpenSHC::Commands::M_MAPPER_UNDUGMOAT:
+        case OpenSHC::Commands::M_MAPPER_OIL:
+            gfx = 0x3d;
+            break;
+        case OpenSHC::Commands::M_MAPPER_CHESTNUT:
+        case OpenSHC::Commands::M_MAPPER_OAK:
+        case OpenSHC::Commands::M_MAPPER_PINE:
+        case OpenSHC::Commands::M_MAPPER_BIRCH:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1D:
+        case OpenSHC::Commands::M_MAPPER_SHRUB1E:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2D:
+        case OpenSHC::Commands::M_MAPPER_SHRUB2E:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB3D:
+        case OpenSHC::Commands::M_MAPPER_DEER:
+        case OpenSHC::Commands::M_MAPPER_LION:
+        case OpenSHC::Commands::M_MAPPER_RABBIT:
+        case OpenSHC::Commands::M_MAPPER_CAMEL:
+        case OpenSHC::Commands::M_MAPPER_CROW_SEAGULL:
+        case OpenSHC::Commands::M_MAPPER_SEAGULL:
+            /* a single organism is placed on one tile, whatever the brush size */
+            brushSize = 1;
+        case OpenSHC::Commands::M_MAPPER_RAISE:
+        case OpenSHC::Commands::M_MAPPER_LOWER:
+        case OpenSHC::Commands::M_MAPPER_EQUALISE:
+        case OpenSHC::Commands::M_MAPPER_MOUNTAIN:
+        case OpenSHC::Commands::M_MAPPER_HILL:
+        case OpenSHC::Commands::M_MAPPER_DELETE:
+            gfx = 0x3e;
+            break;
+        case OpenSHC::Commands::M_MAPPER_SCRUB:
+        case OpenSHC::Commands::M_MAPPER_DIRT:
+        case OpenSHC::Commands::M_MAPPER_DUNES:
             gfx = 0x3c;
-        } else {
-            switch (mapper) {
-            case OpenSHC::Commands::M_MAPPER_SEA:
-            case OpenSHC::Commands::M_MAPPER_SHALLOWS:
-            case OpenSHC::Commands::M_MAPPER_RIVER:
-            case OpenSHC::Commands::M_MAPPER_MARSH:
-            case OpenSHC::Commands::M_MAPPER_DUGMOAT:
-            case OpenSHC::Commands::M_MAPPER_MOAT:
-                gfx = 0x39;
-                break;
-            case OpenSHC::Commands::M_MAPPER_SCRUB:
-            case OpenSHC::Commands::M_MAPPER_DIRT:
-                gfx = 0x3c;
-                break;
-            case OpenSHC::Commands::M_MAPPER_BEACH:
-            case OpenSHC::Commands::M_MAPPER_FORD:
-                gfx = 0x3a;
-                break;
-            case OpenSHC::Commands::M_MAPPER_ROCKY:
-            case OpenSHC::Commands::M_MAPPER_STONES:
-            case OpenSHC::Commands::M_MAPPER_BOULDERS:
-            case OpenSHC::Commands::M_MAPPER_PEBBLES:
-            case OpenSHC::Commands::M_MAPPER_IRON:
-                gfx = 0x3b;
-                break;
-            case OpenSHC::Commands::M_MAPPER_CHESTNUT:
-            case OpenSHC::Commands::M_MAPPER_OAK:
-            case OpenSHC::Commands::M_MAPPER_PINE:
-            case OpenSHC::Commands::M_MAPPER_BIRCH:
-            case OpenSHC::Commands::M_MAPPER_SHRUB1A:
-            case OpenSHC::Commands::M_MAPPER_SHRUB1B:
-            case OpenSHC::Commands::M_MAPPER_SHRUB1C:
-            case OpenSHC::Commands::M_MAPPER_SHRUB1D:
-            case OpenSHC::Commands::M_MAPPER_SHRUB1E:
-            case OpenSHC::Commands::M_MAPPER_SHRUB2A:
-            case OpenSHC::Commands::M_MAPPER_SHRUB2B:
-            case OpenSHC::Commands::M_MAPPER_SHRUB2C:
-            case OpenSHC::Commands::M_MAPPER_SHRUB2D:
-            case OpenSHC::Commands::M_MAPPER_SHRUB2E:
-            case OpenSHC::Commands::M_MAPPER_SHRUB3A:
-            case OpenSHC::Commands::M_MAPPER_SHRUB3B:
-            case OpenSHC::Commands::M_MAPPER_SHRUB3C:
-            case OpenSHC::Commands::M_MAPPER_SHRUB3D:
-            case OpenSHC::Commands::M_MAPPER_DEER:
-            case OpenSHC::Commands::M_MAPPER_LION:
-            case OpenSHC::Commands::M_MAPPER_RABBIT:
-            case OpenSHC::Commands::M_MAPPER_CAMEL:
-            case OpenSHC::Commands::M_MAPPER_CROW_SEAGULL:
-            case OpenSHC::Commands::M_MAPPER_SEAGULL:
-                /* a single organism is placed on one tile, whatever the brush size */
-                brushSize = 1;
-            case OpenSHC::Commands::M_MAPPER_RAISE:
-            case OpenSHC::Commands::M_MAPPER_LOWER:
-            case OpenSHC::Commands::M_MAPPER_EQUALISE:
-            case OpenSHC::Commands::M_MAPPER_MOUNTAIN:
-            case OpenSHC::Commands::M_MAPPER_HILL:
-            case OpenSHC::Commands::M_MAPPER_DELETE:
-                gfx = 0x3e;
-                break;
-            case OpenSHC::Commands::M_MAPPER_UNDUGMOAT:
-            case OpenSHC::Commands::M_MAPPER_OIL:
-                gfx = 0x3d;
-                break;
-            default:
-                gfx = 0x38;
-            }
+            break;
+        default:
+            gfx = 0x38;
         }
 
         switch (mapper) {
@@ -131,12 +126,12 @@ namespace Map {
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
                 int enemyRange;
                 int searchRange;
-                if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                    enemyRange = 0x1e;
-                    searchRange = 30;
-                } else {
+                if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                     enemyRange = 0xf;
                     searchRange = 7;
+                } else {
+                    enemyRange = 0x1e;
+                    searchRange = 0x1e;
                 }
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
@@ -162,30 +157,25 @@ namespace Map {
             }
         }
 
-        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        uint brushY = y;
+        /* the brush walk reuses x as the tile it writes back */
+        x = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         if (mapper == OpenSHC::Commands::M_MAPPER_DUGMOAT || mapper == OpenSHC::Commands::M_MAPPER_UNDUGMOAT
             || mapper == OpenSHC::Commands::M_MAPPER_MOAT || mapper == OpenSHC::Commands::M_MAPPER_ANTIMOAT) {
             /* a moat preview always covers the nine tiles around the cursor */
-            int index = 0;
-            do {
+            uint brushY = y;
+            for (int index = 0; index < 9; index++) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    0, index, &tile, (int*)&brushY, baseTile, y);
-                index++;
-                this->ConstructionGFXLayer[tile] = gfx;
-            } while (index < 9);
-            return;
+                    0, index, (int*)&x, (int*)&brushY, baseTile, y);
+                this->ConstructionGFXLayer[x] = gfx;
+            }
+        } else {
+            uint brushY = y;
+            for (int index = 0; index < brushSize; index++) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                    1, index, (int*)&x, (int*)&brushY, baseTile, y);
+                this->ConstructionGFXLayer[x] = gfx;
+            }
         }
-        if (brushSize < 1) {
-            return;
-        }
-        int index = 0;
-        do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, &tile, (int*)&brushY, baseTile, y);
-            index++;
-            this->ConstructionGFXLayer[tile] = gfx;
-        } while (index < brushSize);
     }
 
 }
