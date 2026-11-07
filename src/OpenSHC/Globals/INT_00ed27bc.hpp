@@ -3,17 +3,17 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Globals/DAT_00ed27bc.hpp'
+  path: 'OpenSHC/Globals/INT_00ed27bc.hpp'
 */
 
 #pragma once
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00ED27BC
-// StructResolver::Instance<unsigned int,15542204>::instance
+// StructResolver::Instance<int,15542204>::instance
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00ED27BC) DAT_00ed27bc;
+MACRO_STRUCT_RESOLVER(int, false, Address::SHC_3BB0A8C1_0x00ED27BC) INT_00ed27bc;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00ED27BC);

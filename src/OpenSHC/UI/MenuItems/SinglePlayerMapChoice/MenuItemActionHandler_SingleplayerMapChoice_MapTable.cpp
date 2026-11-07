@@ -113,7 +113,7 @@ namespace UI {
                     DAT_SiegeRemainingPoints::instance = 2000;
                 }
                 // advanced mode, player slot 2, difficulty 1
-                DAT_SH1_SiegeAdvancedMode::instance = TRUE;
+                DAT_SH1_SiegeAdvancedMode::instance = 1;
                 DAT_GameSynchronyState::instance.currentPlayerSlotID = 2;
                 DAT_GameState::instance.mapAndTime.difficulty = 1;
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeSiegeUnitsComputation)(1);
