@@ -9,7 +9,6 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuHandlerState.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95954.hpp"
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentMenuID_3.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -20,6 +19,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
+#include "OpenSHC/Globals/INT_00b95954.hpp"
 
 namespace OpenSHC {
 namespace Game {
@@ -36,9 +36,9 @@ namespace Game {
 
         switch (menuID) {
         case UI::Enums::MVT_MAP_EDITOR_LANDSCAPING:
-            this->menuTabToSwitchTo.tabType = this->landscapingmenuMenuTabToSwitchTo;
+            this->menuTabToSwitchTo = this->landscapingmenuMenuTabToSwitchTo;
             DAT_TileMapState::instance.unknownBrushRelated = (int)DAT_TileMapState::instance.editorActiveBrush >> 1;
-            if (this->landscapingmenuMenuTabToSwitchTo != UI::Enums::BMTT_MENU_HIDDEN
+            if (this->landscapingmenuMenuTabToSwitchTo.buildMenuTab != UI::Enums::BMTT_MENU_HIDDEN
                 && this->activeMenuTab.buildMenuTab != UI::Enums::BMTT_MENU_HIDDEN) {
                 DAT_TileMapState::instance.currentMapperCommand = Commands::M_MAPPER_NULL;
             }
@@ -161,7 +161,7 @@ namespace Game {
             if (this->currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU
                 || this->currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING
                 || (this->currentMenuViewType == UI::Enums::MVT_SCENARIO_DESCRIPTION
-                    && DAT_GameCore::instance.field22_0x64 != 0)) {
+                    && DAT_GameCore::instance.gameSuspended != 0)) {
                 return;
             }
             if (this->gameMode_2 == GM_CRUSADER_TUTORIAL) {
@@ -174,7 +174,7 @@ namespace Game {
                 return;
             }
             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
-            DAT_SoundSystemState::instance.mbr_0x3288 = timeGetTime() >> 1;
+            DAT_SoundSystemState::instance.lastMusicChangeTime = timeGetTime() >> 1;
             DAT_SoundSystemState::instance.currentSoundID_0x3278 = -1;
             return;
         case UI::Enums::MVT_CRUSADE_MAP:
@@ -215,7 +215,7 @@ namespace Game {
                     DAT_SoundSystemState::ptr)(DE::SHCDE::MUSIC_TUNE_CHOIR, 100);
                 return;
             }
-            if (DAT_SoundSystemState::instance.currentSoundID_0x3278 == 4 || DAT_GameCore::instance.field22_0x64 != 0
+            if (DAT_SoundSystemState::instance.currentSoundID_0x3278 == 4 || DAT_GameCore::instance.gameSuspended != 0
                 || DAT_GameCore::instance.currentlyInGameUnk_0xa4 == TRUE) {
                 return;
             }
@@ -235,11 +235,11 @@ namespace Game {
             return;
         case UI::Enums::MVT_CREDITS:
             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
-            if (DAT_00b95954::instance == 0) {
+            if (INT_00b95954::instance == 0) {
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier,
                     DAT_SoundSystemState::ptr)((DE::SHCDE::eMusicIDs)15, 100);
             }
-            if (DAT_00b95954::instance == 1) {
+            if (INT_00b95954::instance == 1) {
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier,
                     DAT_SoundSystemState::ptr)((DE::SHCDE::eMusicIDs)38, 100);
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::markMusicChangePending, DAT_SoundSystemState::ptr)();
@@ -263,7 +263,7 @@ namespace Game {
         case UI::Enums::MVT_CUSTOM_SCENARIOS:
         case UI::Enums::MVT_UNUSED_SELECT_RANDOM_NUMBER_OF_ENEMIES:
             if (DAT_SoundSystemState::instance.currentSoundID_0x3278 == 3
-                && DAT_SoundSystemState::instance.mbr_0x154 == 0) {
+                && DAT_SoundSystemState::instance.musicFadeState == 0) {
                 return;
             }
             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();

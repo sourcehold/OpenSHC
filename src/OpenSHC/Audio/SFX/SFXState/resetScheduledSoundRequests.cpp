@@ -15,7 +15,6 @@ namespace Audio {
                 this->DAT_SoundStructures[i].samplePan = 64;
             }
             this->DAT_SFXCounter1 = 0;
-            return;
         }
 
     }

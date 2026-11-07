@@ -28,8 +28,8 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044BCE0
         void SFXState::updateAmbientSoundStream()
         {
-            int local_54 = -1;
-            int iVar8 = 0;
+            int forcedAmbientEventUnk = -1;
+            int sortedCount = 0;
             FLOAT_00b98708::instance = (float)timeGetTime();
             if (FLOAT_00b98708::instance == FLOAT_00b98704::instance) {
                 FLOAT_00b98704::instance = FLOAT_00b98708::instance - 1.0f;
@@ -157,7 +157,7 @@ namespace Audio {
                     }
                     if (FLOAT_00b986f8::instance <= 1.0) {
                         DAT_SFXFadeState::instance = SFXFS_IDLE;
-                        local_54 = DAT_SpeechDefinedData::instance.field11_0x49d4b8;
+                        forcedAmbientEventUnk = DAT_SpeechDefinedData::instance.field_0x49d4b8;
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                             MSS::enums::SND_STR_SFX_1Unk);
                         DAT_SpeechDefinedData::instance.currentStreamID = -1;
@@ -178,56 +178,57 @@ namespace Audio {
             }
 
             PriorityListEntry _prioritySortedList[10];
-            for (int iVar9 = 0; iVar9 < 7; ++iVar9) {
-                if (DAT_SFXAmbientEventCountersRescaled::instance[iVar9] == 0) {
+            for (int ambientEventIndex = 0; ambientEventIndex < 7; ++ambientEventIndex) {
+                if (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex] == 0) {
                     continue;
                 }
-                if (iVar8 == 0) {
-                    _prioritySortedList[iVar8].index = iVar9;
-                    _prioritySortedList[iVar8].ambientEventCounterRescaled
-                        = DAT_SFXAmbientEventCountersRescaled::instance[iVar9];
-                    ++iVar8;
+                if (sortedCount == 0) {
+                    _prioritySortedList[sortedCount].index = ambientEventIndex;
+                    _prioritySortedList[sortedCount].ambientEventCounterRescaled
+                        = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
+                    ++sortedCount;
                     continue;
                 }
 
                 // This structure may have been one loop. I was unable to create it.
-                // The closets I managed to do was running the loop as long as iVar7 < iVar8 and having the condition
-                // after be iVar7 >= iVar8. This created almost the required structure, but the condition was wrong,
-                // since it would require and equals. So the most likely thing is that the original was able to proof
-                // that iVar7 could never be bigger then iVar8. I have no idea how they managed to do that.
-                int iVar7 = 0;
-                if (iVar8 > 0) {
-                    while (DAT_SFXAmbientEventCountersRescaled::instance[iVar9]
-                        <= _prioritySortedList[iVar7].ambientEventCounterRescaled) {
-                        ++iVar7;
-                        if (iVar7 < iVar8) {
+                // The closets I managed to do was running the loop as long as insertIndex < sortedCount and having the
+                // condition after be insertIndex >= sortedCount. This created almost the required structure, but the
+                // condition was wrong, since it would require and equals. So the most likely thing is that the original
+                // was able to proof that insertIndex could never be bigger then sortedCount. I have no idea how they
+                // managed to do that.
+                int insertIndex = 0;
+                if (sortedCount > 0) {
+                    while (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex]
+                        <= _prioritySortedList[insertIndex].ambientEventCounterRescaled) {
+                        ++insertIndex;
+                        if (insertIndex < sortedCount) {
                             continue;
                         }
-                        _prioritySortedList[iVar8].index = iVar9;
-                        _prioritySortedList[iVar8].ambientEventCounterRescaled
-                            = DAT_SFXAmbientEventCountersRescaled::instance[iVar9];
-                        ++iVar8;
+                        _prioritySortedList[sortedCount].index = ambientEventIndex;
+                        _prioritySortedList[sortedCount].ambientEventCounterRescaled
+                            = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
+                        ++sortedCount;
                         goto outerLoopEnd; // found no solution so far for this
                     }
                 }
 
-                if (iVar7 == iVar8) {
-                    _prioritySortedList[iVar8].index = iVar9;
-                    _prioritySortedList[iVar8].ambientEventCounterRescaled
-                        = DAT_SFXAmbientEventCountersRescaled::instance[iVar9];
-                    ++iVar8;
+                if (insertIndex == sortedCount) {
+                    _prioritySortedList[sortedCount].index = ambientEventIndex;
+                    _prioritySortedList[sortedCount].ambientEventCounterRescaled
+                        = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
+                    ++sortedCount;
                     continue;
                 }
 
-                for (int iVar3 = iVar8 - 1; iVar3 >= iVar7; --iVar3) {
-                    _prioritySortedList[iVar3 + 1].index = _prioritySortedList[iVar3].index;
-                    _prioritySortedList[iVar3 + 1].ambientEventCounterRescaled
-                        = _prioritySortedList[iVar3].ambientEventCounterRescaled;
+                for (int shiftIndex = sortedCount - 1; shiftIndex >= insertIndex; --shiftIndex) {
+                    _prioritySortedList[shiftIndex + 1].index = _prioritySortedList[shiftIndex].index;
+                    _prioritySortedList[shiftIndex + 1].ambientEventCounterRescaled
+                        = _prioritySortedList[shiftIndex].ambientEventCounterRescaled;
                 }
-                _prioritySortedList[iVar7].index = iVar9;
-                _prioritySortedList[iVar7].ambientEventCounterRescaled
-                    = DAT_SFXAmbientEventCountersRescaled::instance[iVar9];
-                ++iVar8;
+                _prioritySortedList[insertIndex].index = ambientEventIndex;
+                _prioritySortedList[insertIndex].ambientEventCounterRescaled
+                    = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
+                ++sortedCount;
             outerLoopEnd:;
             }
 
@@ -240,10 +241,10 @@ namespace Audio {
                 }
                 FLOAT_00b986f8::instance = 100.0;
                 DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
-                DAT_SpeechDefinedData::instance.field11_0x49d4b8 = 0xffffffff;
+                DAT_SpeechDefinedData::instance.field_0x49d4b8 = 0xffffffff;
                 return;
             }
-            if (iVar8 == 0) {
+            if (sortedCount == 0) {
                 return;
             }
             if (DAT_SpeechDefinedData::instance.currentStreamID == 5
@@ -252,15 +253,15 @@ namespace Audio {
             }
             int _pick = _prioritySortedList[0].index;
             if (_pick != 6) {
-                if (local_54 > -1) {
-                    if (0 < DAT_SFXAmbientEventCountersRescaled::instance[local_54]
+                if (forcedAmbientEventUnk > -1) {
+                    if (0 < DAT_SFXAmbientEventCountersRescaled::instance[forcedAmbientEventUnk]
                         && (_prioritySortedList[0].ambientEventCounterRescaled
-                               - DAT_SFXAmbientEventCountersRescaled::instance[local_54])
+                               - DAT_SFXAmbientEventCountersRescaled::instance[forcedAmbientEventUnk])
                             < 40) {
-                        _pick = local_54;
+                        _pick = forcedAmbientEventUnk;
                     }
                 } else {
-                    for (int i = 1; i < iVar8; ++i) {
+                    for (int i = 1; i < sortedCount; ++i) {
                         if (_prioritySortedList[0].ambientEventCounterRescaled
                                 - _prioritySortedList[i].ambientEventCounterRescaled
                             >= 20) {
@@ -326,7 +327,7 @@ namespace Audio {
                 return;
             }
             FLOAT_00b986f8::instance = 100.0;
-            DAT_SpeechDefinedData::instance.field11_0x49d4b8 = _pick;
+            DAT_SpeechDefinedData::instance.field_0x49d4b8 = _pick;
             DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
         }
 

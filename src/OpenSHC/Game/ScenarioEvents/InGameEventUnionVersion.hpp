@@ -11,6 +11,7 @@
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnion.hpp"
 #include "OpenSHC/Game/ScenarioEvents/IngameEventHeader.hpp"
 #include "OpenSHC/Game/ScenarioEvents/ScenarioEventCondition.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Game {
@@ -19,6 +20,7 @@ namespace Game {
         using OpenSHC::Game::ScenarioEvents::IngameEventHeader;
         using OpenSHC::Game::ScenarioEvents::InGameEventUnion;
         using OpenSHC::Game::ScenarioEvents::ScenarioEventCondition;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
@@ -36,7 +38,7 @@ namespace Game {
             InGameEventUnionVersion() {};
             ~InGameEventUnionVersion() {};
 
-            undefined4 resetEvent();
+            BOOLEnum resetEvent();
 
             ScenarioEventCondition* initializeScenarioEvent();
         };

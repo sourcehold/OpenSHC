@@ -110,7 +110,7 @@ namespace Map {
             &TileMapState::isTileEnclosedByWallsOrGates)
         isTileEnclosedByWallsOrGates;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F8640,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F8640,
             &TileMapState::isTileEnclosedByWalls)
         isTileEnclosedByWalls;
 
@@ -130,7 +130,7 @@ namespace Map {
             &TileMapState::hasOnlyTowerNeighborsNoWalls)
         hasOnlyTowerNeighborsNoWalls;
 
-        MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F89C0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F89C0,
             &TileMapState::getWallFlagForOrientedDirection)
         getWallFlagForOrientedDirection;
 
@@ -162,8 +162,8 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F93E0, &TileMapState::destroyWallsOfPlayer)
         destroyWallsOfPlayer;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, MappersEnum), false,
-            Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::validateWallPlacementAtTile)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false, Address::SHC_3BB0A8C1_0x004F94A0,
+            &TileMapState::validateWallPlacementAtTile)
         validateWallPlacementAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F9590,
@@ -398,7 +398,7 @@ namespace Map {
             &TileMapState::setXYBasedOnMoatID)
         setXYBasedOnMoatID;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500500,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500500,
             &TileMapState::advanceMoatDigProgress)
         advanceMoatDigProgress;
 
@@ -450,7 +450,7 @@ namespace Map {
             &TileMapState::swapPitchOwnership)
         swapPitchOwnership;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(uint, uint, uint, uint), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(uint, uint, uint, uint), false,
             Address::SHC_3BB0A8C1_0x00500980, &TileMapState::findNearestValidDigTileNearTarget)
         findNearestValidDigTileNearTarget;
 

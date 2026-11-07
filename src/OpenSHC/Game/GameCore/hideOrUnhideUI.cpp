@@ -24,7 +24,7 @@ namespace Game {
                     }
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
-                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo = UI::Enums::BMTT_MENU_HIDDEN;
+                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_MENU_HIDDEN;
                 }
                 MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     (MenuViewType)DAT_GameCore::instance.currentMenuViewType, 0);
@@ -41,14 +41,14 @@ namespace Game {
             }
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo
-                    = DAT_GameCore::instance.secondaryActiveMenuTabToSwitchTo.tabType;
+                    = DAT_GameCore::instance.secondaryActiveMenuTabToSwitchTo;
             }
             if (DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab == UI::Enums::BMTT_MENU_HIDDEN) {
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU) {
                     DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_CASTLE;
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
-                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo = 231;
+                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo.buildMenuTab = 231;
                 }
             }
             MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

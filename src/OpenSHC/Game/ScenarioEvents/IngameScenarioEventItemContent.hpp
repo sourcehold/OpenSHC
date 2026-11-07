@@ -22,8 +22,7 @@ namespace Game {
 
             int actionData; // 0x00000000 length: 4
             int ScenarioEventType; // 0x00000004 length: 4
-            byte allOrAnyCondition; // 0x00000008 length: 1
-            byte magic; // 0x00000009 length: 1
+            short allOrAnyCondition; // 0x00000008 length: 2
             byte repeat; // 0x0000000A length: 1
             byte repeatMonths; // 0x0000000B length: 1
             ScenarioEventCondition conditions[40]; // 0x0000000C length: 160

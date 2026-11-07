@@ -32,10 +32,10 @@ namespace Map {
     // SIZE: 0x0006B700
     class LandscapeState {
     public:
-        undefined4 field0_0x0; // 0x00000000 length: 4
-        undefined4 field1_0x4; // 0x00000004 length: 4
+        undefined4 field_0x0; // 0x00000000 length: 4
+        undefined4 field_0x4; // 0x00000004 length: 4
         undefined4 DAT_TotalOrganisms; // 0x00000008 length: 4
-        int field3_0xc; // 0x0000000C length: 4
+        int field_0xc; // 0x0000000C length: 4
         int maxTreeCount; // 0x00000010 length: 4
         undefined4 x; // 0x00000014 length: 4
         undefined4 y; // 0x00000018 length: 4
@@ -85,13 +85,13 @@ namespace Map {
 
         void killEveryFifthTree();
 
-        undefined4 setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
+        BOOLEnum setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 
         BOOLEnum isTreeAliveAndMatchingUID(int treeID, int param_2);
 
         BOOLEnum isTreeAdult(int treeID, int treeUID);
 
-        undefined4 damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
+        BOOLEnum damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
 
         void advanceTreeDecayState(int treeID, int param_2);
 

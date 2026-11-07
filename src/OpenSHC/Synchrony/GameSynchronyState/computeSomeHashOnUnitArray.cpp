@@ -1,5 +1,6 @@
+#include "../GameSynchronyState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"

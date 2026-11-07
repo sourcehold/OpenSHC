@@ -9,9 +9,9 @@
 #pragma once
 
 #include "OpenSHC/Rendering/ColorModeInt.hpp"
-#include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
+#include "OpenSHC/Rendering/ScreenResolutionUnion.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -23,9 +23,9 @@ namespace UI {
     namespace Rendering {
 
         using OpenSHC::Rendering::ColorModeInt;
-        using OpenSHC::Rendering::ScreenResolutionArrayStruct;
         using OpenSHC::Rendering::ScreenResolutionEnum;
         using OpenSHC::Rendering::ScreenResolutionEnumInt;
+        using OpenSHC::Rendering::ScreenResolutionUnion;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -59,7 +59,7 @@ namespace UI {
             ScreenResolutionEnumInt currentGameResolution; // 0x0000005C length: 4
             dword windowMoveEventBlitCountdown; // 0x00000060 length: 4
             dword postWindowCloseMessage; // 0x00000064 length: 4
-            ScreenResolutionArrayStruct resolutionSupported_0x68; // 0x00000068 length: 64
+            ScreenResolutionUnion resolutionSupported_0x68; // 0x00000068 length: 64
             HINSTANCE hInstanceUnk_0xa8; // 0x000000A8 length: 4
             HWND windowHandle; // 0x000000AC length: 4
             RECT clientOnScreenCoords; // 0x000000B0 length: 16
@@ -70,7 +70,7 @@ namespace UI {
             dword pendingBltMode; // 0x000000D0 length: 4
             ushort* surfacePointer_screenMenu; // 0x000000D4 length: 4
             ushort* surfacePointer_mapGame; // 0x000000D8 length: 4
-            dword pendingMenuRedraw; // 0x000000DC length: 4
+            BOOLEnum pendingMenuRedraw; // 0x000000DC length: 4
             BOOLEnum not_DDCAPS2_CANBOBHARDWARE_0xe0; // 0x000000E0 length: 4
             undefined1 padding_0xe4[8]; // 0x000000E4 length: 8
             IDirectDraw* pointerToIDirectDrawInterface; // 0x000000EC length: 4
