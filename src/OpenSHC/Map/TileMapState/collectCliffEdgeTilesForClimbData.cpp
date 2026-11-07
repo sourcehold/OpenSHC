@@ -27,20 +27,19 @@ namespace Map {
                 && (this->Logic2Layer[tile] & L2_STONES_OR_DRIVEN_SANDUnk) != 0) {
                 this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 1;
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
+                int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const height = this->HeightLayer[tile];
                 for (int index = 0; index < 8; index++) {
                     int neighbour
-                        = this->directionTranslationMatrix[DAT_ViewportRenderState::instance
-                                  .tileTranslationMatrix_YComponent[tile]]
-                                                          [DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
+                        = this->directionTranslationMatrix[row][DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
                         + tile;
-                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0
-                        && this->HeightLayer[tile] + 0x50 < (uint)this->HeightLayer[neighbour]) {
+                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 0x50) {
                         this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 0;
                         break;
                     }
                 }
                 this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
-                if ((int)this->temporaryTerrainTypeIndex > 999) {
+                if ((int)this->temporaryTerrainTypeIndex >= 1000) {
                     return;
                 }
             }
@@ -50,7 +49,7 @@ namespace Map {
                 this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 1;
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
                 this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
-                if ((int)this->temporaryTerrainTypeIndex > 999) {
+                if ((int)this->temporaryTerrainTypeIndex >= 1000) {
                     return;
                 }
             }
