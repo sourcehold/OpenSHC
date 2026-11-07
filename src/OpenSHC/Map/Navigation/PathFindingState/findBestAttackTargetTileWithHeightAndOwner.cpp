@@ -110,6 +110,7 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY && param_6 >= 8) {
                     _zoneDistance = 1;
                 }
+                BOOLEnum scored = FALSE;
                 if ((_logic & 2) == 0) {
                     if ((_logic & 0x10100) != 0 && _zoneDistance != 0 && (int)_zoneDistance < param_8) {
                         /*
@@ -125,7 +126,7 @@ namespace Map {
                             } else {
                                 _score = (int)this->searchQueue.currentDistance * 100 + _heightDiff;
                             }
-                            goto LAB_004a62e3;
+                            scored = TRUE;
                         }
                     } else if ((_logic & 0x10000400) != 0 && _zoneDistance != 0 && (int)_zoneDistance < param_8
                         && (_buildingID = (int)DAT_TileMapState::instance.BuildingLayer[_tile], _buildingID != 0)
@@ -153,7 +154,9 @@ namespace Map {
                         } else {
                             _score = (int)this->searchQueue.currentDistance * _base;
                         }
-                    LAB_004a62e3:
+                        scored = TRUE;
+                    }
+                    if (scored) {
                         if (_score < _bestScore
                             && MACRO_CALL(OpenSHC::Map::Navigation_Func::CalcApproxEuclideanDistance)(
                                    param_2, _x, param_3, _y)
@@ -180,18 +183,18 @@ namespace Map {
                             _buildingID = (int)DAT_TileMapState::instance.BuildingLayer[_next];
                             if (_buildingID == 0
                                 || DAT_BuildingsState::instance.buildings[_buildingID].owner != param_7)
-                                goto LAB_next;
+                                continue;
                             _height = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                                 DAT_BuildingsState::ptr)(_buildingID);
                         } else if ((_logic & 0x100) != 0) {
                             if ((DAT_TileMapState::instance.WallOwnerLayer[_next] & 7) + 1 != param_7)
-                                goto LAB_next;
+                                continue;
                             _height = (int)DAT_TileMapState::instance.HeightLayer[_next];
                         } else {
                             _height = (int)DAT_TileMapState::instance.HeightLayer[_next];
                             if (_height > _startHeight + param_5)
-                                goto LAB_next;
+                                continue;
                         }
                         if (_height > (param_5 * 2) / 3 + _startHeight) {
                             _cost = 3;
@@ -215,10 +218,9 @@ namespace Map {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
-                LAB_next:
-                    _pArc = _pArc + 1;
-                    _count = _count - 1;
-                } while (_count != 0);
+                    // the step sits in the condition so `continue` takes it; stepping at the top of the body measured
+                    // worse
+                } while (_pArc = _pArc + 1, _count = _count - 1, _count != 0);
                 this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                 if (0x13a10 <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
