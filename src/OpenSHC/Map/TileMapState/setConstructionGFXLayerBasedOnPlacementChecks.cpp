@@ -18,40 +18,8 @@ namespace Map {
 
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Location::GateTowerPlacement;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    namespace {
-        // TerrainDefinedData + 0x50C, one entry per gate command (M_MAPPER_GATE_WOOD1A..D); not typed in the header
-        struct GateTowerPlacement {
-            int x1;
-            int y1;
-            int rotationIndex1;
-            int x2;
-            int y2;
-            int rotationIndex2;
-        };
-
-        // TerrainDefinedData + 0x56C, the placement-check origin of both gate towers
-        struct GateTowerCheck {
-            int x1;
-            int y1;
-            int unused1;
-            int x2;
-            int y2;
-            int unused2;
-        };
-
-        GateTowerPlacement* gateTowerPlacements()
-        {
-            return (GateTowerPlacement*)((char*)&DAT_TerrainDefinedData::instance + 0x50c);
-        }
-
-        GateTowerCheck* gateTowerChecks()
-        {
-            return (GateTowerCheck*)((char*)&DAT_TerrainDefinedData::instance + 0x56c);
-        }
-
-    }
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504F10
     void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
@@ -156,8 +124,9 @@ namespace Map {
                     || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
                     || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
                     MappersEnum const gateCommand = (MappersEnum)command;
-                    GateTowerCheck const& check
-                        = gateTowerChecks()[gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A];
+                    GateTowerPlacement const& check
+                        = DAT_TerrainDefinedData::instance
+                              .gateTowerChecks[gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A];
                     int const tower1X = check.x1 + x;
                     int const tower1Y = check.y1 + y;
                     int j = 0;
@@ -189,16 +158,15 @@ namespace Map {
                         j = j + 1;
                     } while (j < this->constructionTileCount);
                     for (int j = 0; j != 6; j++) {
-                        int const tile
-                            = DAT_ViewportRenderState::instance
-                                  .translationMatrix[(&DAT_TerrainDefinedData::instance.field_0x5cc)
-                                                         [(gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6
-                                                             + j]
-                                                             .y
-                                      + y]
-                                  .addXgetTile
-                            + (&DAT_TerrainDefinedData::instance
-                                    .field_0x5cc)[(gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + j]
+                        int const tile = DAT_ViewportRenderState::instance
+                                             .translationMatrix[DAT_TerrainDefinedData::instance
+                                                                    .gateHouseTiles[gateCommand
+                                                                        - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                                                                    .y
+                                                 + y]
+                                             .addXgetTile
+                            + DAT_TerrainDefinedData::instance
+                                  .gateHouseTiles[gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
                                   .x
                             + x;
                         this->ConstructionGFXLayer[tile]
@@ -376,7 +344,7 @@ namespace Map {
             || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
             || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
             int const gateIndex = buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A;
-            GateTowerPlacement const& gate = gateTowerPlacements()[gateIndex];
+            GateTowerPlacement const& gate = DAT_TerrainDefinedData::instance.gateTowerPlacements[gateIndex];
             int j = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 2);
@@ -391,14 +359,14 @@ namespace Map {
                 j = j + 1;
             } while (j < this->constructionTileCount);
             for (int j = 0; j != 5; j++) {
-                XYPair const& offset = (&DAT_TerrainDefinedData::instance.field_0x68c)[gate.rotationIndex1 * 5 + j];
+                XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate.rotationIndex1][j];
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[offset.y + gate.y1 + y].addXgetTile
                     + offset.x + gate.x1 + x;
                 if (j <= 0) {
                     this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
                 } else {
                     int towerRotation
-                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[j + gate.rotationIndex1 * 4]
+                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate.rotationIndex1][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
                         towerRotation = towerRotation + 8;
@@ -410,7 +378,7 @@ namespace Map {
                     this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
                 }
             }
-            GateTowerPlacement const& gate2 = gateTowerPlacements()[gateIndex];
+            GateTowerPlacement const& gate2 = DAT_TerrainDefinedData::instance.gateTowerPlacements[gateIndex];
             j = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 2);
@@ -425,7 +393,7 @@ namespace Map {
                 j = j + 1;
             } while (j < this->constructionTileCount);
             for (int j = 0; j != 5; j++) {
-                XYPair const& offset = (&DAT_TerrainDefinedData::instance.field_0x68c)[gate2.rotationIndex2 * 5 + j];
+                XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate2.rotationIndex2][j];
                 int const tile
                     = DAT_ViewportRenderState::instance.translationMatrix[offset.y + gate2.y2 + y].addXgetTile
                     + offset.x + gate2.x2 + x;
@@ -433,7 +401,7 @@ namespace Map {
                     this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
                 } else {
                     int towerRotation
-                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[j + gate2.rotationIndex2 * 4]
+                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate2.rotationIndex2][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
                         towerRotation = towerRotation + 8;
@@ -446,16 +414,16 @@ namespace Map {
                 }
             }
             for (int j = 0; j != 6; j++) {
-                int const tile
-                    = DAT_ViewportRenderState::instance
-                          .translationMatrix[(&DAT_TerrainDefinedData::instance.field_0x5cc)
-                                                 [(buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + j]
-                                                     .y
-                              + y]
-                          .addXgetTile
+                int const tile = DAT_ViewportRenderState::instance
+                                     .translationMatrix[DAT_TerrainDefinedData::instance
+                                                            .gateHouseTiles[buildingCommand
+                                                                - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                                                            .y
+                                         + y]
+                                     .addXgetTile
                     + x
-                    + (&DAT_TerrainDefinedData::instance
-                            .field_0x5cc)[(buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + j]
+                    + DAT_TerrainDefinedData::instance
+                          .gateHouseTiles[buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
                           .x;
                 this->ConstructionGFXLayer[tile]
                     = (this->RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[6] + 0x138;

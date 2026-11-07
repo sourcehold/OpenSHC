@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Map/Buildings/WheatFarm/WheatFarmFieldSpec.hpp"
 #include "OpenSHC/Map/GFX/UnkBytePair.hpp"
+#include "OpenSHC/Map/Location/GateTowerPlacement.hpp"
 #include "OpenSHC/Map/Location/Point8.hpp"
 #include "OpenSHC/Map/Location/Point8IntXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
@@ -19,6 +20,7 @@ namespace Map {
 
     using OpenSHC::Map::Buildings::WheatFarm::WheatFarmFieldSpec;
     using OpenSHC::Map::GFX::UnkBytePair;
+    using OpenSHC::Map::Location::GateTowerPlacement;
     using OpenSHC::Map::Location::Point8;
     using OpenSHC::Map::Location::Point8IntXY;
     using OpenSHC::Map::Navigation::Algorithms::XYPair;
@@ -47,19 +49,11 @@ namespace Map {
         Point8IntXY keepOutbuildingOffsets_0x3e4[3][4]; // 0x000003E4 length: 96
         XYPair field_0x444[24]; // 0x00000444 length: 192
         undefined1 padding_0x504[8]; // 0x00000504 length: 8
-        XYPair field_0x50c; // 0x0000050C length: 8
-        undefined1 padding_0x514[4]; // 0x00000514 length: 4
-        XYPair field_0x518; // 0x00000518 length: 8
-        undefined1 padding_0x520[76]; // 0x00000520 length: 76
-        XYPair field_0x56c; // 0x0000056C length: 8
-        undefined1 padding_0x574[4]; // 0x00000574 length: 4
-        XYPair field_0x578; // 0x00000578 length: 8
-        undefined1 padding_0x580[76]; // 0x00000580 length: 76
-        XYPair field_0x5cc; // 0x000005CC length: 8
-        undefined1 padding_0x5d4[184]; // 0x000005D4 length: 184
-        XYPair field_0x68c; // 0x0000068C length: 8
-        undefined1 padding_0x694[308]; // 0x00000694 length: 308
-        int ConstructionSpriteRotationTable[33]; // 0x000007C8 length: 132
+        GateTowerPlacement gateTowerPlacements[4]; // 0x0000050C length: 96
+        GateTowerPlacement gateTowerChecks[4]; // 0x0000056C length: 96
+        XYPair gateHouseTiles[4][6]; // 0x000005CC length: 192
+        XYPair gateTowerTileOffsets[8][5]; // 0x0000068C length: 320
+        int ConstructionSpriteRotationTable[8][4]; // 0x000007CC length: 128
         int field_0x84c[25]; // 0x0000084C length: 100
         undefined1 padding_0x8b0[4]; // 0x000008B0 length: 4
         int field_0x8b4[25]; // 0x000008B4 length: 100

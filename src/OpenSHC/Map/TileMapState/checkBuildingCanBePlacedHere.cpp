@@ -548,18 +548,16 @@ namespace Map {
                 }
                 x = x + 1;
             } while ((int)x < this->constructionTileCount);
-            // field_0x5cc holds the six gate-house tiles of each gate command (the header types it as a single pair)
             for (int part = 0; part < 6; part++) {
                 uint const partY
-                    = (&DAT_TerrainDefinedData::instance
-                              .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + part]
+                    = DAT_TerrainDefinedData::instance
+                          .gateHouseTiles[_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
                           .y
                     + _y;
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(_x
-                            + (&DAT_TerrainDefinedData::instance
-                                    .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6
-                                + part]
+                            + DAT_TerrainDefinedData::instance
+                                .gateHouseTiles[_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
                                 .x,
                         partY)
                     == FALSE) {
@@ -567,8 +565,8 @@ namespace Map {
                     return;
                 }
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[partY].addXgetTile
-                    + (&DAT_TerrainDefinedData::instance
-                            .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + part]
+                    + DAT_TerrainDefinedData::instance
+                          .gateHouseTiles[_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
                           .x
                     + _x;
                 if ((this->LogicLayer[tile] & 0x30) != 0) {
