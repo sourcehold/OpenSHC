@@ -27111,7 +27111,7 @@ SHC_3BB0A8C1_0x004B8200 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B8210 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B8220 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B8220 | 100.0% | Reimplemented, only the atol call target and the slider callbacks' resolver addresses differ
 
 SHC_3BB0A8C1_0x004B88A4 | 0.0% | Pending
 
