@@ -206,6 +206,9 @@ namespace Audio {
             SEID_UNIT_DAMAGE4 = 249, // 0x000000F9
             SEID_UNKNOWN_0xFB = 251, // 0x000000FB
             SEID_UNKNOWN_0xFD = 253, // 0x000000FD
+            SEID_UNKNOWN_0xFE = 254, // 0x000000FE
+            SEID_UNKNOWN_0xFF = 255, // 0x000000FF
+            SEID_UNKNOWN_0x100 = 256, // 0x00000100
             SEID_UNKNOWN_0x101 = 257 // 0x00000101
 
         } SoundEffectID;
