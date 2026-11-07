@@ -1,0 +1,684 @@
+#include "../AIVState.func.hpp"
+
+#include "OpenSHC/AI/AICState.func.hpp"
+#include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_AICState.hpp"
+#include "OpenSHC/Globals/DAT_AIVState.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+
+namespace OpenSHC {
+namespace AI {
+
+    // builds a generic castle for AIs without an AIV, the number of each building depends on the AI character
+    // FUNCTION: STRONGHOLDCRUSADER 0x004F0060
+    BOOLEnum AIVState::executeDefaultCastleAIV(int playerID, int isPausing)
+    {
+        // The remaining gap is one register permutation, not wrong code: canonicalising register names in the
+        // diff collapses it from 439/445 differing instructions to 187/193. The original keeps ebp = 1 and ebx
+        // as the per-arm scratch and leaves the playerDataArray[playerID] base and this spilled; we hold those
+        // two in ebx/esi, so 1 lands in edx and the scratch in ebp. reg_scores.py --invocation 2016 shows why:
+        // the top candidate of all is the unnamed temporary holding that base, at key 628 against mapper's 510,
+        // so it takes ebx first and no source expression can outbid it. Declaration order and the first arm's
+        // statement order already match the original store for store, and the arms' `= 0` assignments are not
+        // redundant - the original emits them too. Measured worse (quick_diff, baseline 0.7033): sinking the
+        // aivID read to the loop 0.5445, an AIVSpec& reference 0.5238, a PlayerData& 0.7023, dropping the
+        // AIVBuildingStep& below 0.6387, binding it after the goal test 0.6625.
+        int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+        int stockpiles = 0;
+        int hovels = 0;
+        int granaries = 1;
+        int marketplaces = 1;
+        int armories = 0;
+        int barracks = 0;
+        int mercenaryPosts = 0;
+        int cathedrals = 0;
+        int chapels = 0;
+        int inns = 0;
+        int breweries = 0;
+        int bakeries = 0;
+        int mills = 0;
+        int poleturners = 0;
+        int fletchers = 0;
+        int tanners = 0;
+        int blacksmiths = 0;
+        int armourers = 0;
+        int engineersGuilds = 0;
+        int tunnelersGuilds = 0;
+        int stables = 0;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        if (aiType == AITA_RAT) {
+            stockpiles = 0;
+            hovels = 3;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 1;
+            fletchers = 1;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 0;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_SNAKE) {
+            stockpiles = 2;
+            hovels = 4;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 2;
+            fletchers = 2;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_PIG) {
+            stockpiles = 2;
+            hovels = 4;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 2;
+            tanners = 2;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_WOLF) {
+            stockpiles = 3;
+            hovels = 5;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 2;
+            inns = 2;
+            breweries = 3;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 2;
+            fletchers = 2;
+            tanners = 1;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 1;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_SALADIN) {
+            stockpiles = 3;
+            hovels = 8;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 4;
+            mills = 2;
+            poleturners = 0;
+            fletchers = 0;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_CALIPH) {
+            stockpiles = 2;
+            hovels = 6;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 2;
+            breweries = 5;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 0;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_SULTAN) {
+            stockpiles = 0;
+            hovels = 3;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 0;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_RICHARD) {
+            stockpiles = 2;
+            hovels = 6;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 2;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 2;
+            fletchers = 2;
+            tanners = 0;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 2;
+            stables = 0;
+            tunnelersGuilds = 1;
+        } else if (aiType == AITA_FREDERICK) {
+            stockpiles = 3;
+            hovels = 7;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 1;
+            chapels = 0;
+            inns = 2;
+            breweries = 2;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 2;
+            tanners = 2;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 2;
+            stables = 2;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_PHILIPP) {
+            stockpiles = 2;
+            hovels = 5;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 2;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 3;
+            fletchers = 2;
+            tanners = 0;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 2;
+            stables = 5;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_WAZIR) {
+            stockpiles = 2;
+            hovels = 6;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 3;
+            mills = 1;
+            poleturners = 0;
+            fletchers = 0;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_EMIR) {
+            stockpiles = 3;
+            hovels = 7;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 1;
+            breweries = 2;
+            bakeries = 2;
+            mills = 1;
+            poleturners = 0;
+            fletchers = 1;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_NIZAR) {
+            stockpiles = 2;
+            hovels = 8;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 1;
+            breweries = 3;
+            bakeries = 4;
+            mills = 1;
+            poleturners = 0;
+            fletchers = 0;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_SHERIFF) {
+            stockpiles = 3;
+            hovels = 6;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 1;
+            cathedrals = 1;
+            chapels = 2;
+            inns = 2;
+            breweries = 2;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 2;
+            tanners = 2;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_MARSHAL) {
+            stockpiles = 2;
+            hovels = 5;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 2;
+            breweries = 3;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 0;
+            fletchers = 2;
+            tanners = 0;
+            blacksmiths = 2;
+            engineersGuilds = 1;
+            armourers = 2;
+            stables = 4;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_ABBOT) {
+            stockpiles = 2;
+            hovels = 6;
+            armories = 1;
+            barracks = 1;
+            mercenaryPosts = 0;
+            cathedrals = 1;
+            chapels = 5;
+            inns = 3;
+            breweries = 6;
+            bakeries = 4;
+            mills = 2;
+            poleturners = 0;
+            fletchers = 3;
+            tanners = 0;
+            blacksmiths = 0;
+            engineersGuilds = 1;
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        }
+
+        for (int step = 0; step < 50; ++step) {
+            // taken before the step goal test on purpose: binding it after the test (or not at all) measured worse
+            AIVBuildingStep& buildingStep = this->aivs[aivID].aivBuildingSteps[step];
+            if (step > this->aivs[aivID].currentStepGoal) {
+                return FALSE;
+            }
+            if (buildingStep.buildStatus == AIVBSS_disabled) {
+                // use the step for the next building that is still missing
+                if (stockpiles > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_STORES;
+                } else if (hovels > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_HOVEL;
+                } else if (granaries > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_GRANARY;
+                } else if (marketplaces > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_TRADEPOST;
+                } else if (barracks > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_BARRACKS_ARAB;
+                } else if (mercenaryPosts > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_BARRACKS_EURO;
+                } else if (armories > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_ARMOURY;
+                } else if (breweries > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_BREWER;
+                } else if (bakeries > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_BAKER;
+                } else if (mills > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_MILL;
+                } else if (poleturners > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_POLETURNER;
+                } else if (fletchers > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_FLETCHER;
+                } else if (tanners > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_TANNER;
+                } else if (blacksmiths > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_BLACKSMITH;
+                } else if (armourers > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_ARMOURER;
+                } else if (chapels > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_CHURCH1;
+                } else if (inns > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_INN;
+                } else if (engineersGuilds > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_ENGINEERS_GUILD;
+                } else if (tunnelersGuilds > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_TUNNELERS_GUILD;
+                } else if (stables > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_STABLES;
+                } else if (cathedrals > 0) {
+                    buildingStep.buildingType = Commands::M_MAPPER_CHURCH3;
+                } else {
+                    continue;
+                }
+                buildingStep.buildStatus = AIVBSS_unbuilt;
+            }
+
+            if (buildingStep.buildStatus != AIVBSS_disabled) {
+                if (buildingStep.buildingType == Commands::M_MAPPER_HOVEL) {
+                    --hovels;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_STORES) {
+                    --stockpiles;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_GRANARY) {
+                    --granaries;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TRADEPOST) {
+                    --marketplaces;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BARRACKS_ARAB) {
+                    --barracks;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BARRACKS_EURO) {
+                    --mercenaryPosts;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ARMOURY) {
+                    --armories;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BREWER) {
+                    --breweries;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BAKER) {
+                    --bakeries;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_MILL) {
+                    --mills;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_POLETURNER) {
+                    --poleturners;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_FLETCHER) {
+                    --fletchers;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TANNER) {
+                    --tanners;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BLACKSMITH) {
+                    --blacksmiths;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ARMOURER) {
+                    --armourers;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_CHURCH1) {
+                    --chapels;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_INN) {
+                    --inns;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ENGINEERS_GUILD) {
+                    --engineersGuilds;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TUNNELERS_GUILD) {
+                    --tunnelersGuilds;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_STABLES) {
+                    --stables;
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_CHURCH3) {
+                    --cathedrals;
+                }
+            }
+
+            MappersEnum const mapper = (MappersEnum)buildingStep.buildingType;
+            if (isPausing && mapper != Commands::M_MAPPER_HOVEL) {
+                continue;
+            }
+            if (buildingStep.buildStatus == AIVBSS_built) {
+                // only rebuild buildings that were destroyed
+                int const buildingID = (short)DAT_TileMapState::instance.BuildingLayer[buildingStep.location.tile.tile];
+                if (buildingID != 0
+                    && (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                        == MACRO_CALL_MEMBER(
+                            Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                            DAT_BuildingsState::ptr)(mapper)) {
+                    continue;
+                }
+            }
+            if (DAT_GameState::instance.playerDataArray[playerID].closestEnemyDistanceToTheLord < 120) {
+                continue;
+            }
+            if (!MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
+                    DAT_GameState::ptr)(mapper, playerID, FALSE)
+                || DAT_BuildingsState::instance.unknownCountdown01 < 20) {
+                continue;
+            }
+            if (mapper == Commands::M_MAPPER_WOODSMAN) {
+                if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable > 0) {
+                    // enough wood. Written as a positive test with an empty arm on purpose: the original
+                    // branches on `> 0` and falls through into the continue; `<= 0` lays the blocks out the
+                    // other way round
+                } else {
+                    continue;
+                }
+            } else if (mapper == Commands::M_MAPPER_GRANARY
+                && !DAT_GameState::instance.playerDataArray[playerID].granaryIsAlmostFilledUp) {
+                continue;
+            }
+            if (MACRO_CALL_MEMBER(AICState_Func::shouldNotBeBuildingArmoury, DAT_AICState::ptr)(playerID, mapper)
+                || MACRO_CALL_MEMBER(AICState_Func::shouldNotBeBuildingHovel, DAT_AICState::ptr)(playerID, mapper)
+                || MACRO_CALL_MEMBER(AICState_Func::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost,
+                    DAT_AICState::ptr)(playerID, mapper)) {
+                continue;
+            }
+
+            int orientation = 15;
+            if (mapper == Commands::M_MAPPER_BARRACKS_ARAB || mapper == Commands::M_MAPPER_BARRACKS_EURO
+                || mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD
+                || mapper == Commands::M_MAPPER_OIL_SMELTER) {
+                orientation = this->aivs[aivID].keepOrientation;
+            } else if (mapper == Commands::M_MAPPER_POLETURNER || mapper == Commands::M_MAPPER_BLACKSMITH
+                || mapper == Commands::M_MAPPER_ARMOURER || mapper == Commands::M_MAPPER_TANNER
+                || mapper == Commands::M_MAPPER_FLETCHER || mapper == Commands::M_MAPPER_BAKER
+                || mapper == Commands::M_MAPPER_BREWER) {
+                orientation = 8;
+            }
+            if (MACRO_CALL_MEMBER(AICState_Func::shouldWaitWithBuildingAPositiveFearFactor, DAT_AICState::ptr)(
+                    playerID, mapper)
+                || MACRO_CALL_MEMBER(AICState_Func::shouldWaitWithBuildingNegativeFearFactor, DAT_AICState::ptr)(
+                    playerID, mapper)) {
+                continue;
+            }
+            if (orientation == 15) {
+                DAT_TileMapState::instance.DAT_TempBuildingRotation = 0;
+            } else {
+                DAT_TileMapState::instance.DAT_TempBuildingRotation = orientation / 2;
+            }
+            uint const buildingSize = MACRO_CALL_MEMBER(
+                Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(mapper);
+
+            uint x;
+            uint y;
+            if (mapper == Commands::M_MAPPER_STORES) {
+                // stockpiles are placed next to each other at the campground
+                if (stockpiles == 0) {
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 11;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 9;
+                } else if (stockpiles == 1) {
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 11;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 4;
+                } else if (stockpiles == 2) {
+                    y = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .yEntry
+                        - 6;
+                    x = DAT_GameState::instance.playerDataArray[playerID]
+                            .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                            .xEntry
+                        + 9;
+                }
+            } else {
+                if (mapper == Commands::M_MAPPER_BARRACKS_ARAB || mapper == Commands::M_MAPPER_BARRACKS_EURO
+                    || mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD
+                    || mapper == Commands::M_MAPPER_CHURCH3) {
+                    MACRO_CALL_MEMBER(AIVState_Func::findAppropriateGridLocationForBuilding, this)(
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .xEntry
+                            / 5,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .yEntry
+                            / 5);
+                    if (this->buildingApproriateGridXPosition == -1) {
+                        continue;
+                    }
+                } else {
+                    MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .xEntry
+                            / 5,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                .yEntry
+                            / 5);
+                    if (this->buildingApproriateGridXPosition == -1) {
+                        continue;
+                    }
+                }
+                if (this->buildingAppropriateGridYPosition == -1) {
+                    continue;
+                }
+                x = this->buildingApproriateGridXPosition * 5;
+                y = this->buildingAppropriateGridYPosition * 5;
+            }
+
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                playerID, x, y, mapper, buildingSize);
+            // keep orientation is 0, 2, 4 or 6, halving it gives the index of the part offsets
+            if (mapper == Commands::M_MAPPER_BARRACKS_EURO || mapper == Commands::M_MAPPER_BARRACKS_ARAB) {
+                // the three fields in front of the barracks
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                    playerID,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][0].x
+                        + x,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][0].y
+                        + y,
+                    mapper, buildingSize);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                    playerID,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].x
+                        + x,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].y
+                        + y,
+                    mapper, buildingSize);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                    playerID,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][2].x
+                        + x,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][2].y
+                        + y,
+                    mapper, buildingSize);
+            } else if (mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD) {
+                // the guild field
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                    playerID,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].x
+                        + x,
+                    DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].y
+                        + y,
+                    mapper, buildingSize);
+            } else if (mapper == Commands::M_MAPPER_OIL_SMELTER) {
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
+                    playerID, DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
+                    DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
+                    buildingSize);
+            }
+
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID, x, y, mapper,
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
+                    mapper),
+                orientation);
+            int const placedID = DAT_TileMapState::instance.placedBuildingID;
+            if (!DAT_TileMapState::instance.buildingPlacementFail) {
+                DAT_BuildingsState::instance.buildings[placedID].field_0x2c8 = 1;
+                MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
+                buildingStep.location.tile.tile = tile;
+                if (!DAT_TileMapState::instance.buildingPlacementFail) {
+                    buildingStep.buildStatus = AIVBSS_built;
+                }
+            }
+            buildingStep.wait = buildingStep.buildStatus == AIVBSS_built ? 10 : 16;
+            if (!DAT_TileMapState::instance.buildingPlacementFail) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
+}
+}
