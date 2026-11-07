@@ -22,10 +22,10 @@ namespace Map {
     void TileMapState::placeStockpile(
         int playerID, int x, int y, undefined4 buildingType, undefined4 param_5, int variation, int averageHeight)
     {
-        int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
-        byte height = (char)averageHeight + 10;
         byte wallOwner = (char)playerID - 1;
+        int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
         int type = (short)buildingType;
+        byte height = (char)averageHeight + 10;
 
         int buildingID;
         for (int part = 0; part < 4; part++) {
@@ -59,7 +59,7 @@ namespace Map {
 
         this->placedBuildingID = buildingID;
         /* the surrounding tiles carry the stockpile graphic but stay walkable */
-        for (int slot = 0; slot < 9; slot++) {
+        for (int slot = 0; slot != 9; slot++) {
             int tile = DAT_ViewportRenderState::instance
                            .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y]
                            .addXgetTile
@@ -73,8 +73,8 @@ namespace Map {
         }
 
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
-            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                < DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
             && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
