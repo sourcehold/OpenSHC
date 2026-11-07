@@ -58,10 +58,11 @@ namespace AI {
 
         if (initialize) {
             for (int tile = 0; tile < 80400; ++tile) {
-                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                int const gridY = y / 5;
-                int const gridX = x / 5;
+                // the tile coordinates are reduced to heat map cells in place; separate locals reorder the code
+                int gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int gridX = tile - DAT_ViewportRenderState::instance.translationMatrix[gridY].addXgetTile;
+                gridY /= 5;
+                gridX /= 5;
                 if (gridX >= 1 && gridX <= 78 && gridY >= 1 && gridY <= 78) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
@@ -120,10 +121,14 @@ namespace AI {
                     ++this->heatMaps[gridX][gridY].impassableCount;
                 }
                 if (!(DAT_TileMapState::instance.LogicLayer[tile] & L_RIVER)) {
-                    if (DAT_TileMapState::instance.Logic2Layer[tile] & (L2_SCRUB | L2_OASIS_GRASS | L2_THICK_SCRUB)) {
+                    // separate flag tests rather than one mask: a written mask is what MSVC keeps in a register
+                    if ((DAT_TileMapState::instance.Logic2Layer[tile] & L2_SCRUB)
+                        || (DAT_TileMapState::instance.Logic2Layer[tile] & L2_OASIS_GRASS)
+                        || (DAT_TileMapState::instance.Logic2Layer[tile] & L2_THICK_SCRUB)) {
                         ++this->heatMaps[gridX][gridY].oasisScrubCount;
                     }
-                    if (DAT_TileMapState::instance.Logic2Layer[tile] & (L2_OASIS_GRASS | L2_THICK_SCRUB)) {
+                    if ((DAT_TileMapState::instance.Logic2Layer[tile] & L2_OASIS_GRASS)
+                        || (DAT_TileMapState::instance.Logic2Layer[tile] & L2_THICK_SCRUB)) {
                         ++this->heatMaps[gridX][gridY].oasisThickScrubCount;
                     }
                 }
