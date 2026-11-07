@@ -25631,7 +25631,7 @@ SHC_3BB0A8C1_0x004ABE50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ABE80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ABEB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ABEB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AC008 | 0.0% | Pending
 
@@ -27521,7 +27521,7 @@ SHC_3BB0A8C1_0x004B8B0C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B8B10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B8BF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B8BF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B9020 | 100.0% | Reimplemented
 
@@ -30495,7 +30495,7 @@ SHC_3BB0A8C1_0x004BEC10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004BEC40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004BF1D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BF1D0 | 100.0% | Reimplemented, only the atol call target differs
 
 SHC_3BB0A8C1_0x004BF684 | 0.0% | Pending
 
@@ -33187,7 +33187,7 @@ SHC_3BB0A8C1_0x004C0CE7 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C0CF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C1070 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C1070 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C1320 | 0.0% | Pending
 
@@ -35929,7 +35929,7 @@ SHC_3BB0A8C1_0x004D8250 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D839E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D8570 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D8570 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D89CC | 0.0% | Pending
 
