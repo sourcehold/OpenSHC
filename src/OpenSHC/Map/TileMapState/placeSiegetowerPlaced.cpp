@@ -16,11 +16,12 @@ namespace Map {
     void TileMapState::placeSiegetowerPlaced(
         int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7)
     {
+        short const buildingType = (short)param_4;
+        int buildingSizeTileIndex = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            param_1, param_2, param_3, param_7, (BuildingType)(short)param_4, param_5, param_1, param_6);
+            param_1, param_2, param_3, param_7, (BuildingType)buildingType, param_5, param_1, param_6);
         this->placedBuildingID = buildingID;
-        int buildingSizeTileIndex = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, param_5);
@@ -33,7 +34,7 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_KEEP_NON_MANOR_HOUSE;
             this->BuildingLayer[tile] = (short)buildingID;
             buildingSizeTileIndex++;
-            this->BuildingWasLayer[tile] = (uchar)(short)param_4;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
             this->ChangedLayer[tile] = 2;
         } while (buildingSizeTileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
