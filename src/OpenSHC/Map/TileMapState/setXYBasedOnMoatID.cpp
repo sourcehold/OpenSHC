@@ -9,14 +9,13 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005003D0
     int TileMapState::setXYBasedOnMoatID(int moatID, int param_2, uint x, uint y)
     {
-        if (x > 399 || y > 399) {
-            return 0;
-        }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
             return 0;
         }
 
-        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const tilePathConnection = (short)this->PathConnectionLayer[tile];
+        int const tileHeight = this->HeightLayer[tile];
         if (param_2 == 1) {
             this->ALG_MoatXResult = this->moats[moatID].x;
             this->ALG_MoatYResult = this->moats[moatID].y;
@@ -28,12 +27,12 @@ namespace Map {
         }
 
         for (int direction = 0; direction < 8; direction++) {
-            int neighbour
+            int const neighbour
                 = this->directionTranslationMatrix[this->moats[moatID].y][direction] + this->moats[moatID].tile;
-            if ((uint)(this->HeightLayer[tile] + 0x10) < (uint)this->HeightLayer[neighbour]) {
+            if (this->HeightLayer[neighbour] > tileHeight + 16) {
                 continue;
             }
-            if (this->PathConnectionLayer[neighbour] != this->PathConnectionLayer[tile]) {
+            if ((short)this->PathConnectionLayer[neighbour] != tilePathConnection) {
                 continue;
             }
 
