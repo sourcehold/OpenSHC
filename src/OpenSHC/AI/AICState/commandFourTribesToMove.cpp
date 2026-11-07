@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 
@@ -19,11 +20,13 @@ namespace AI {
 
         int destIndex = 0;
         for (int i = 0; i < 3; i++) {
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[186 + i];
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                              .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_08_01 + i];
             if (tribeID == 0)
                 continue;
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 186])
+                != DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeUIDs[i + OpenSHC::AI::Tribes::AITI_BREACH_08_01])
                 continue;
 
             DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_STAND_GROUND;

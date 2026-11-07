@@ -46,9 +46,8 @@ namespace AI {
                     otherPlayerID)
                 == 0)
                 continue;
-            if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(
-                    otherPlayerID)
-                == FALSE)
+            if (!MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                    DAT_GameSynchronyState::ptr)(otherPlayerID))
                 continue;
             if (DAT_GameState::instance.mapAndTime.playerTeams[otherPlayerID]
                 != DAT_GameState::instance.mapAndTime.playerTeams[playerID])

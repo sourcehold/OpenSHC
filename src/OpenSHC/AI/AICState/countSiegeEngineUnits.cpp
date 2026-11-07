@@ -19,7 +19,7 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unknownSiegeTentRelated02 != 3)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == 21)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == OpenSHC::AI::AIUBT_SIEGE_01)
                 continue;
 
             if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT

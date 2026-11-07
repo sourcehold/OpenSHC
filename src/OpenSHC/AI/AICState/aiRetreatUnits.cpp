@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -29,13 +30,12 @@ namespace AI {
                     continue;
 
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-                if (tribeType == 190)
+                if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_10_01)
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
-                else if (tribeType == 13)
+                else if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_03_01)
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
                 else if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
-                             DAT_TribesState::ptr)(tribeID)
-                    != FALSE)
+                             DAT_TribesState::ptr)(tribeID))
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
                 else
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);

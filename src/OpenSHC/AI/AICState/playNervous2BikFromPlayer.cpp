@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"

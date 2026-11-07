@@ -1,6 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -30,12 +31,13 @@ namespace AI {
         DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker = 0;
 
         for (; i < groupsCount; i++) {
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[170 + i];
+            int tribeID
+                = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[OpenSHC::AI::Tribes::AITI_PAT_Unk + i];
             DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
             if (tribeID == 0)
                 continue;
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 170])
+                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + OpenSHC::AI::Tribes::AITI_PAT_Unk])
                 continue;
             if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk > 10)
                 continue;
@@ -77,7 +79,7 @@ namespace AI {
 
             int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-            if (MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile) != FALSE)
+            if (MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile))
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
                     tribeID, x, y, 0);
             else

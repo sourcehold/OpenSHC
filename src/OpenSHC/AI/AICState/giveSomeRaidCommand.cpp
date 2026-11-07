@@ -1,6 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -16,7 +17,10 @@ namespace AI {
     {
         int owner = DAT_TribesState::instance.tribes[tribeIndex].owner;
         int targetBuildingID = DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID;
-        if (tribeType == 186 || tribeType == 18 || tribeType == 14 || tribeType == 13)
+        if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_08_01
+            || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01
+            || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_04_01
+            || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_03_01)
             return 0;
 
         if (targetBuildingID != 0

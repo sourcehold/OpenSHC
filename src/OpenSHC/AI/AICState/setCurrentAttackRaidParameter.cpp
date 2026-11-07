@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"

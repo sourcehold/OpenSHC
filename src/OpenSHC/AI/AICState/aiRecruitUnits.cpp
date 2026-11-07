@@ -24,6 +24,7 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::Map::Units::UnitType;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D3AE0
     void AICState::aiRecruitUnits(int playerID)
@@ -32,7 +33,7 @@ namespace AI {
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
         int aicIndex = aiType - 1;
-        int recruitDiggingUnit = 0;
+        BOOLEnum recruitDiggingUnit = FALSE;
         bool isExtremeTrail = false;
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER
             && DAT_GameCore::instance.isSkirmishTrail == TRUE
@@ -88,14 +89,14 @@ namespace AI {
                 || DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[10]
                     != DAT_TribesState::instance.tribes[diggerTribeID].uid
                 || DAT_TribesState::instance.tribes[diggerTribeID].size < this->aics[aicIndex].DefDiggingUnitMax)
-                recruitDiggingUnit = 1;
+                recruitDiggingUnit = TRUE;
         }
 
-        UnitType unitType = (UnitType)0;
+        UnitType unitType = OpenSHC::Map::Units::UT_NONE;
         int behaviourType = 0;
         for (int i = 0; i < recruitCount; i++) {
             if (recruitDiggingUnit && (SEC_RNG::instance.currentNumber2 & 1) != 0)
-                recruitDiggingUnit = 0;
+                recruitDiggingUnit = FALSE;
 
             if (recruitDiggingUnit) {
                 if (DAT_GameState::instance.playerDataArray[playerID]
@@ -141,7 +142,7 @@ namespace AI {
                 unitType = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::getUnitTypeForUnitBehaviourType, this)(
                     playerID, (AIUnitBehaviourType)behaviourType);
             }
-            if (unitType == (UnitType)0)
+            if (unitType == OpenSHC::Map::Units::UT_NONE)
                 return;
 
             int buildingID;
@@ -161,7 +162,7 @@ namespace AI {
                 buildingID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
                     DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_CATHEDRAL);
-            else if (unitType < 70)
+            else if (unitType < OpenSHC::Map::Units::UT_A_ARCHER)
                 buildingID = DAT_GameState::instance.playerDataArray[playerID]
                                  .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
                                  .id;
@@ -185,7 +186,7 @@ namespace AI {
             else if (unitType == OpenSHC::Map::Units::UT_E_MONK)
                 unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::nonEuroRecruit, DAT_UnitsState::ptr)(
                     unitType, buildingID, playerID, 0);
-            else if (unitType < 70)
+            else if (unitType < OpenSHC::Map::Units::UT_A_ARCHER)
                 unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::euroRecruit, DAT_UnitsState::ptr)(
                     unitType, buildingID, playerID, 0);
             else

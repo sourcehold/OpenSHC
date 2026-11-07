@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
@@ -72,13 +73,15 @@ namespace AI {
             return;
         }
 
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[165];
-        int hasEngineers = 0;
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                          .aiTribeIDs[OpenSHC::AI::Tribes::AITI_HARASS_SIEGE_ENGINES];
+        BOOLEnum hasEngineers = FALSE;
         if (tribeID != 0
             && DAT_TribesState::instance.tribes[tribeID].uid
-                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
+                == DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_HARASS_SIEGE_ENGINES]
             && DAT_TribesState::instance.tribes[tribeID].size >= 2)
-            hasEngineers = 1;
+            hasEngineers = TRUE;
         if (!hasEngineers) {
             // Not enough engineers yet: recruit one at the engineers guild
             if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0
@@ -98,15 +101,18 @@ namespace AI {
 
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
-                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]) {
+                    != DAT_GameState::instance.playerDataArray[playerID]
+                        .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_HARASS_SIEGE_ENGINES]) {
                 tribeID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
             }
 
-            DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[165] = (short)tribeID;
+            DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[OpenSHC::AI::Tribes::AITI_HARASS_SIEGE_ENGINES]
+                = tribeID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                 unitID, tribeID);
-            DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[165]
+            DAT_GameState::instance.playerDataArray[playerID]
+                .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_HARASS_SIEGE_ENGINES]
                 = DAT_TribesState::instance.tribes[tribeID].uid;
             DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = OpenSHC::AI::AIUBT_HARASS_SIEGE;
         } else {
@@ -137,7 +143,7 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
                 DAT_AIVState::instance.buildingApproriateGridXPosition * 5,
                 DAT_AIVState::instance.buildingAppropriateGridYPosition * 5, siegeEngineToBuild, 3, 15);
-            if (DAT_TileMapState::instance.buildingPlacementFail != FALSE) {
+            if (DAT_TileMapState::instance.buildingPlacementFail) {
                 return;
             }
 
@@ -150,14 +156,14 @@ namespace AI {
         }
 
         // Point all harassing siege engines at the currently attacked player
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE
                 && DAT_UnitsState::instance.units[unitID].dying == 0
                 && (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                     || DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_FBALLISTA)
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == OpenSHC::AI::AIUBT_SIEGE_01) {
                 DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID
-                    = (short)DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
+                    = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
             }
         }
 

@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 

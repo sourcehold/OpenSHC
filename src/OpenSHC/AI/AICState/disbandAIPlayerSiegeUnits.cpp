@@ -29,7 +29,7 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unknownSiegeTentRelated02 != 3)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == 21)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == OpenSHC::AI::AIUBT_SIEGE_01)
                 continue;
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(

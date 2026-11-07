@@ -56,6 +56,8 @@ namespace AI {
             else if (locationCount <= 0)
                 continue;
 
+            // Measured: the for-loop form of rule 9, `for (; i < locationCount; i++)` with the `i++` moved to
+            // the step, costs quick_diff 0.988 -> 0.696. The while stays, as in generateSiegeCreationInformation.
             while (i < locationCount) {
                 int index = i;
                 i++;
@@ -64,7 +66,7 @@ namespace AI {
                 if (location <= 0)
                     continue;
 
-                int building = (short)DAT_TileMapState::instance.BuildingLayer[location];
+                int building = DAT_TileMapState::instance.BuildingLayer[location];
                 int unitID = DAT_GameState::instance.playerDataArray[playerID]
                                  .aiSiegeCreationInformation[siegeIndex][index]
                                  .unitID;
@@ -169,7 +171,7 @@ namespace AI {
                             (MappersEnum)(ushort)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex]
                                 .commandBuildingType,
                             3, 15);
-                        if (DAT_TileMapState::instance.buildingPlacementFail == FALSE) {
+                        if (!DAT_TileMapState::instance.buildingPlacementFail) {
                             DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
                                 -= requiredGold;
                             int placedBuildingID = DAT_TileMapState::instance.placedBuildingID;

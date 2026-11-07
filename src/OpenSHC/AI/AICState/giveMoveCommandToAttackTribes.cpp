@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -22,7 +23,9 @@ namespace AI {
         for (int i = 0; i < 11; i++) {
             int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
             int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
-            if (tribeType == 18 || tribeType == 190 || tribeType == 15)
+            if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01
+                || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_10_01
+                || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_05_01)
                 continue;
 
             for (int j = 0; j < tribeCount; j++) {
@@ -33,6 +36,7 @@ namespace AI {
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
                     continue;
 
+                // Measured: the (char) cast is load-bearing, dropping it costs 100% -> 85.4%
                 DAT_TribesState::instance.tribes[tribeID].unitStance = (char)(SEC_RNG::instance.currentNumber2 & 1);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,

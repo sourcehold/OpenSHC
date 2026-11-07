@@ -39,7 +39,7 @@ namespace AI {
             < DAT_GameState::instance.playerDataArray[playerID].totalTroopsType6 - 5)
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addUnitsToTribe166, this)(playerID);
 
-        if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && keepEnclosed == FALSE) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && !keepEnclosed) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
         } else if (DAT_TribesState::instance.tribes[tribeID].size >= this->aics[aicIndex].SortieUnitRangedMin) {
             if (DAT_GameState::instance.playerDataArray[playerID].someXPosition <= 0

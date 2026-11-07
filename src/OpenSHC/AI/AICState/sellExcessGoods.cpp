@@ -32,6 +32,9 @@ namespace AI {
         }
 
         int aicIndex = aiType - 1;
+        // Measured: indexing currentResources and resourcesToAcquireArray through playerDataArray[playerID]
+        // instead of one flat offset from playerDataArray[0] costs quick_diff 0.659 -> 0.644. The original
+        // computes the offset once and reuses it for both arrays.
         int playerResourceBase = playerID * (sizeof(PlayerData) / sizeof(int));
         for (int i = 0; i < 20; i++) {
             ResourceType resourceType
@@ -61,7 +64,7 @@ namespace AI {
             amount += variance;
 
             if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
-                && DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf] < 500) {
+                && DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] < 500) {
                 // Nervous and low on gold: keep a quarter of the food and up to 10000 weapons, sell everything else
                 if (DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].aic
                     == OpenSHC::AI::Trading::AIRTC_FOOD) {

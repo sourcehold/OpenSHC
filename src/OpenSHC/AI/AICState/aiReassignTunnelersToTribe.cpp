@@ -13,7 +13,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D40B0
     void AICState::aiReassignTunnelersToTribe(int playerID)
     {
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)
@@ -22,7 +22,7 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_TUNNELER)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 15)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != OpenSHC::AI::AIUBT_TUNNELING)
                 continue;
 
             if (DAT_UnitsState::instance.units[unitID].tribeID != 0)

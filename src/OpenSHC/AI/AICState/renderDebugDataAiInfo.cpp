@@ -9,6 +9,7 @@
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -56,34 +57,43 @@ namespace AI {
             // Player number and name
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 playerID, x + 6, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
+            // "-"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "-", x + 16, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
+                s___005a2280, x + 16, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 DAT_GameSynchronyState::instance.DAT_PlayerNames[playerID], x + 26, y + 1, OpenSHC::Text::TTA_LEFT,
                 color, 0, 18, FALSE, 0);
 
             // Strength feeling
             if (DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling == OpenSHC::AI::AIST_WEAK) {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)("Weak", x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                // "Weak"
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    s_Weak_005aad78, x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
             } else if (DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling
                 == OpenSHC::AI::AIST_DEFAULT) {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)("Normal", x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                // "Normal"
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    s_Normal_005aad70, x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
             } else {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)("Strong", x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                // "Strong"
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    s_Strong_005aad68, x + 202, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
             }
 
             // Current AIV pause
+            // "P:"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                "P:", x + 262, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                s_P__005aad64, x + 262, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause, x + 264, y, OpenSHC::Text::TTA_LEFT,
                 color, 0, 18, TRUE, 0);
 
             // Attack target and coordination level
-            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Atk:%d W:%d",
+            // "Atk:%d W:%d"
+            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_Atk_d_W_d_005aad58,
                 DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID,
                 DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
@@ -92,17 +102,20 @@ namespace AI {
             // fixme: Castle (AIV); the castle ID is passed even for human players, whose format ignores it
             int aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
             if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL) {
+                // "AIV:n/a"
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(
-                    text, "AIV:n/a", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+                    text, s_AIV_n_a_005aad50, DAT_AIVState::instance.aivs[aivID].castleID + 1);
             } else {
+                // "AIV: %d"
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(
-                    text, "AIV: %d", DAT_AIVState::instance.aivs[aivID].castleID + 1);
+                    text, s_AIV___d_005aad48, DAT_AIVState::instance.aivs[aivID].castleID + 1);
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 382, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
 
             // Engineers
-            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "E:%d/%d",
+            // "E:%d/%d"
+            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_E_d_d_005aad40,
                 DAT_GameState::instance.playerDataArray[playerID].totalTroopsType6,
                 DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01
                     + this->aics[aiIndex].SortieUnitRangedMin);
@@ -112,7 +125,8 @@ namespace AI {
             // Siege troops (attack troops without engineers): attack ticker in white when not attacking,
             // otherwise the attack force target
             if (DAT_GameState::instance.playerDataArray[playerID].aiPlayerState != 0) {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "%d/%d",
+                // "%d/%d"
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_perc_d_slash_perc_d_005a2780,
                     DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
                         - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops,
                     DAT_GameState::instance.playerDataArray[playerID].attackTicker);
@@ -120,7 +134,8 @@ namespace AI {
                     OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                     text, x + 512, y, OpenSHC::Text::TTA_LEFT, RGB(255, 255, 255), 0, 18, FALSE, 0);
             } else {
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Sg:%d/%d",
+                // "Sg:%d/%d"
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_Sg_d_d_005aad34,
                     DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
                         - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops,
                     DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength
@@ -130,7 +145,8 @@ namespace AI {
             }
 
             // Raiding/harassing troops
-            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Hr:%d/%d",
+            // "Hr:%d/%d"
+            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_Hr_d_d_005aad28,
                 DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk,
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::getCurrentDesiredAttackRaidUnitCount, this)(
                     aiIndex, playerID));
@@ -138,7 +154,8 @@ namespace AI {
                 text, x + 592, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
 
             // Defensive troops
-            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Df:%d/%d",
+            // "Df:%d/%d"
+            MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_Df_d_d_005aad1c,
                 DAT_GameState::instance.playerDataArray[playerID].totalDefensiveTroopsUnk,
                 this->aics[aiIndex].DefWalls);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(

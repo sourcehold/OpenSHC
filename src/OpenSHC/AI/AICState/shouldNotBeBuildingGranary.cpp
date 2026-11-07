@@ -13,7 +13,7 @@ namespace AI {
         if (commandBuildingType != Commands::M_MAPPER_GRANARY) {
             return FALSE;
         }
-        return DAT_GameState::instance.playerDataArray[playerID].granaryIsAlmostFilledUp == FALSE;
+        return !DAT_GameState::instance.playerDataArray[playerID].granaryIsAlmostFilledUp;
     }
 }
 }

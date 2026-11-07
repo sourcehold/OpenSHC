@@ -22,8 +22,7 @@ namespace AI {
             if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE)
                 continue;
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::getTeamsDifferent, DAT_GameState::ptr)(
-                    DAT_TribesState::instance.tribes[tribeID].owner, DAT_UnitsState::instance.units[unitID].owner)
-                != FALSE)
+                    DAT_TribesState::instance.tribes[tribeID].owner, DAT_UnitsState::instance.units[unitID].owner))
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_S_CATAPULT
                 && DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_S_TREBUCHET

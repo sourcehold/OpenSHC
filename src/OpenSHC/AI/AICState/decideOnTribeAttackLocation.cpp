@@ -25,7 +25,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D1A00
     void AICState::decideOnTribeAttackLocation(uint tribeID)
     {
-        if (MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, TRUE) != FALSE) {
+        if (MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, TRUE)) {
             DAT_TribesState::instance.tribes[tribeID].counter = 0;
             return;
         }
@@ -66,7 +66,7 @@ namespace AI {
 
         if (DAT_TribesState::instance.tribes[tribeID].tribeSubtype1 != 182
             && DAT_TribesState::instance.tribes[tribeID].tribeSubtype1 != 185) {
-            if (MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, FALSE) != FALSE)
+            if (MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, FALSE))
                 return;
 
             int targetBuildingID = DAT_TribesState::instance.tribes[tribeID].targetBuildingID;
@@ -74,8 +74,7 @@ namespace AI {
                 && DAT_BuildingsState::instance.buildings[targetBuildingID].uid
                     == DAT_TribesState::instance.tribes[tribeID].targetBuildingUID
                 && DAT_BuildingsState::instance.buildings[targetBuildingID].fireDuration == 0
-                && MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, TRUE)
-                    != FALSE) {
+                && MACRO_CALL_MEMBER(AICState_Func::checkTribeActivityPercentages, this)(tribeID, FALSE, TRUE)) {
                 if (DAT_GameState::instance.mapAndTime.yearChanged != 0)
                     DAT_TribesState::instance.tribes[tribeID].targetBuildingID = 0;
                 return;
@@ -101,9 +100,8 @@ namespace AI {
             int destinationY = DAT_GameState::instance.playerDataArray[targetPlayer]
                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                                    .yEntry;
-            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID,
-                    DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX)
-                == FALSE)
+            if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID,
+                    DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX))
                 return;
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
@@ -159,9 +157,8 @@ namespace AI {
         int destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[destinationTile];
         int destinationX
             = destinationTile - DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile;
-        if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
-                tribeID, destinationTile)
-            == FALSE) {
+        if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
+                tribeID, destinationTile)) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, targetPlayer);
             return;
         }

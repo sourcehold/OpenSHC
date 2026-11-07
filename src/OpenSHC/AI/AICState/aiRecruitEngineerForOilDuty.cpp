@@ -51,9 +51,8 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_PITCH] = 4;
             return;
         }
-        if (MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(
-                playerID, amount, TRUE)
-            == FALSE)
+        if (!MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(
+                playerID, amount, TRUE))
             return;
 
         int tribeID = MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(

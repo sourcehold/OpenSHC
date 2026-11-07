@@ -15,6 +15,7 @@ namespace AI {
     using OpenSHC::AI::AIType;
     using namespace OpenSHC::Game::Resources;
     using namespace OpenSHC::Map::Buildings;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CBA50
     void AICState::planToBuyWhenLowOnResourceAndSnoozeBuildings(int playerID)
@@ -23,20 +24,20 @@ namespace AI {
             return;
         }
 
-        int allowFletchers = 1;
-        int allowFarms = 1;
-        int allowIronMines = 1;
-        int allowQuarries = 1;
-        int allowPitchRigs = 1;
-        int allowWoodcutters = 1;
-        int allowPoleturners = 1;
-        int allowBlacksmiths = 1;
-        int allowArmourers = 1;
-        int allowTanners = 1;
-        int allowBakeries = 1;
-        int allowBreweries = 1;
-        int allowInns = 1;
-        int allowWells = 1;
+        BOOLEnum allowFletchers = TRUE;
+        BOOLEnum allowFarms = TRUE;
+        BOOLEnum allowIronMines = TRUE;
+        BOOLEnum allowQuarries = TRUE;
+        BOOLEnum allowPitchRigs = TRUE;
+        BOOLEnum allowWoodcutters = TRUE;
+        BOOLEnum allowPoleturners = TRUE;
+        BOOLEnum allowBlacksmiths = TRUE;
+        BOOLEnum allowArmourers = TRUE;
+        BOOLEnum allowTanners = TRUE;
+        BOOLEnum allowBakeries = TRUE;
+        BOOLEnum allowBreweries = TRUE;
+        BOOLEnum allowInns = TRUE;
+        BOOLEnum allowWells = TRUE;
 
         int buildingBurning = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::playerHasBurningBuilding, DAT_BuildingsState::ptr)(playerID);
@@ -85,93 +86,93 @@ namespace AI {
         int population = DAT_GameState::instance.playerDataArray[playerID].currentPopulation;
         if (population < 10) {
             if (DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers != 0) {
-                allowQuarries = 0;
+                allowQuarries = FALSE;
             } else if (DAT_GameState::instance.playerDataArray[playerID].countWoodcutters > 2) {
-                allowQuarries = 0;
+                allowQuarries = FALSE;
             }
         }
 
         if (wood >= 20 && population < 10 && DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers != 0
             && DAT_GameState::instance.playerDataArray[playerID].totalFood < 8) {
-            allowWoodcutters = 0;
+            allowWoodcutters = FALSE;
         }
 
         if (buildingBurning == 0
             && DAT_GameState::instance.playerDataArray[playerID].farmsWithoutWorkers
                 >= DAT_GameState::instance.playerDataArray[playerID].countFarms
             && DAT_GameState::instance.playerDataArray[playerID].currentResources[RT_GOLD] < 500) {
-            allowWells = 0;
+            allowWells = FALSE;
         }
 
         if (DAT_GameState::instance.playerDataArray[playerID]
                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
                 .id
             == 0) {
-            allowFletchers = 0;
+            allowFletchers = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noWoodTracker > 36) {
-            allowFletchers = 0;
+            allowFletchers = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID]
                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
                 .id
             == 0) {
-            allowPoleturners = 0;
+            allowPoleturners = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noWoodTracker > 36) {
-            allowPoleturners = 0;
+            allowPoleturners = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID]
                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
                 .id
             == 0) {
-            allowBlacksmiths = 0;
+            allowBlacksmiths = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noIronTracker > 36) {
-            allowBlacksmiths = 0;
+            allowBlacksmiths = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID]
                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
                 .id
             == 0) {
-            allowArmourers = 0;
+            allowArmourers = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noIronTracker > 36) {
-            allowArmourers = 0;
+            allowArmourers = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID]
                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
                 .id
             == 0) {
-            allowTanners = 0;
+            allowTanners = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].someResourceCounter > 36) {
-            allowTanners = 0;
+            allowTanners = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noFlourTracker > 36) {
-            allowBakeries = 0;
+            allowBakeries = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noHopsTracker > 72) {
-            allowBreweries = 0;
+            allowBreweries = FALSE;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].noBeerCounterUnk > 72) {
-            allowInns = 0;
+            allowInns = FALSE;
         }
 
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
-            allowFletchers = 1;
-            allowFarms = 0;
-            allowQuarries = 0;
-            allowIronMines = 0;
-            allowPitchRigs = 0;
-            allowWoodcutters = 0;
-            allowPoleturners = 1;
-            allowBlacksmiths = 1;
-            allowArmourers = 1;
-            allowTanners = 1;
-            allowBakeries = 0;
-            allowBreweries = 0;
-            allowInns = 0;
+            allowFletchers = TRUE;
+            allowFarms = FALSE;
+            allowQuarries = FALSE;
+            allowIronMines = FALSE;
+            allowPitchRigs = FALSE;
+            allowWoodcutters = FALSE;
+            allowPoleturners = TRUE;
+            allowBlacksmiths = TRUE;
+            allowArmourers = TRUE;
+            allowTanners = TRUE;
+            allowBakeries = FALSE;
+            allowBreweries = FALSE;
+            allowInns = FALSE;
         }
 
         if (allowWells) {

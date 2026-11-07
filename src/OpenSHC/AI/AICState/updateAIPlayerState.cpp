@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -156,7 +157,8 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::computeAttackPossibilities, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                 DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
-                DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, 0x14);
+                DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY,
+                OpenSHC::DE::SHCDE::FX_ARMY_CHARGE);
             if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
                     DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)) {
                 // castle is closed: attack the walls

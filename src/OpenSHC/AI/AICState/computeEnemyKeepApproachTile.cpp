@@ -68,7 +68,7 @@ namespace AI {
         DAT_GameState::instance.mapAndTime.signpostEntryData[playerID - 1].y
             = DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY;
 
-        int treeID = (short)DAT_TileMapState::instance.OrganismLayer
+        int treeID = DAT_TileMapState::instance.OrganismLayer
                          [DAT_ViewportRenderState::instance
                                  .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
                                  .addXgetTile

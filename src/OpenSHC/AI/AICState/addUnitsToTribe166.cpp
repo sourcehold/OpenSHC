@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -13,7 +13,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC720
     void AICState::addUnitsToTribe166(int playerID)
     {
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL)

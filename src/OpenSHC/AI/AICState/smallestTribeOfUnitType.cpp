@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
@@ -51,7 +51,7 @@ namespace AI {
             }
         }
 
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[offset + smallestIndex] = (short)smallestTribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[offset + smallestIndex] = smallestTribeID;
         DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[offset + smallestIndex]
             = DAT_TribesState::instance.tribes[smallestTribeID].uid;
         return smallestTribeID;

@@ -1,6 +1,7 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_SkirmishDefinedData.hpp"
@@ -13,8 +14,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CCBE0
     int AICState::getDefensiveTribeForUnit(int playerID, int unitID)
     {
-        int index;
-        for (index = 0; index < 20; index++) {
+        int index = 0;
+        for (; index < 20; index++) {
             if (DAT_UnitsState::instance.units[unitID].unitType
                     == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[index]
                 || DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto
@@ -24,17 +25,17 @@ namespace AI {
 
         int tribeIndex;
         if (index < 1)
-            tribeIndex = 180;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_KNIGHTS;
         else if (index < 2)
-            tribeIndex = 181;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_HORSE_ARCHERS;
         else if (index < 7)
-            tribeIndex = 182;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_WALKING_RANGED;
         else if (index < 12)
-            tribeIndex = 183;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_ASSASSIN_MACE_MONK_SLAVE_SPEAR;
         else if (index < 15)
-            tribeIndex = 184;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_ARAB_SWORDSMAN_SWORDSMAN_PIKEMAN;
         else if (index < 20)
-            tribeIndex = 185;
+            tribeIndex = OpenSHC::AI::Tribes::AITI_DEF_SIEGE;
         else
             return 0;
 

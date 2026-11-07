@@ -37,7 +37,7 @@ namespace AI {
             return;
 
         int buildingID;
-        if (unitType < 70)
+        if (unitType < OpenSHC::Map::Units::UT_A_ARCHER)
             buildingID = DAT_GameState::instance.playerDataArray[playerID]
                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
                              .id;
@@ -49,7 +49,7 @@ namespace AI {
             return;
 
         int unitID;
-        if (unitType < 70)
+        if (unitType < OpenSHC::Map::Units::UT_A_ARCHER)
             unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::euroRecruit, DAT_UnitsState::ptr)(
                 unitType, buildingID, playerID, 0);
         else

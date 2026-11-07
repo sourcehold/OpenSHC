@@ -17,7 +17,7 @@ namespace AI {
     void AICState::setNextMoveLocationForUnits(int playerID)
     {
         int const organismID
-            = (short)DAT_TileMapState::instance.OrganismLayer
+            = DAT_TileMapState::instance.OrganismLayer
                   [DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
                           .addXgetTile

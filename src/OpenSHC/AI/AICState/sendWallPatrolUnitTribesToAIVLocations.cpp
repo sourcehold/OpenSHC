@@ -73,8 +73,7 @@ namespace AI {
                 int slot
                     = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + patrolGroupIndex)
                     % count;
-                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
-                    && enclosed == FALSE) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && !enclosed) {
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
@@ -82,8 +81,7 @@ namespace AI {
                         slot);
                 }
 
-                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
-                    && enclosed == FALSE) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && !enclosed) {
                     DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
                 } else {
                     DAT_TribesState::instance.tribes[tribeID].unitStance
