@@ -157,48 +157,49 @@ namespace Map {
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                 } while (this->searchQueue.readIndex < this->searchQueue.writeIndex);
-                if (4 < _destIndex)
-                    goto LAB_004a7e8c;
             }
-            this->searchQueue.readIndex = 0;
-            if (0 < (int)this->searchQueue.writeIndex) {
-                _pDest2
-                    = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_destIndex].tile2OrAHelper;
-                do {
-                    tribeID = (uint)DAT_TileMapState::instance.HeightLayer[iVar4];
-                    if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x10000000U) != 0) {
-                        iVar12 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                            DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar4]);
-                        tribeID = tribeID + iVar12;
-                    }
-                    iVar12 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    uVar11 = (uint)DAT_TileMapState::instance.HeightLayer[iVar12];
-                    if ((DAT_TileMapState::instance.LogicLayer[iVar12] & 0x10000000U) != 0) {
-                        iVar12 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                            DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar12]);
-                        uVar11 = uVar11 + iVar12;
-                    }
-                    iVar5 = abs(y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex]);
-                    iVar12 = abs(x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex]);
-                    if (iVar12 <= iVar5) {
-                        iVar12 = iVar5;
-                    }
-                    if (iVar12 == 1 && (abs(tribeID - uVar11) < 0x20)) {
-                        _destIndex = _destIndex + 1;
-                        ((PathHelper12*)(_pDest2 - 1))->tile1
-                            = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                        *_pDest2 = 1;
-                        _pDest2 = _pDest2 + 3;
-                        if (_destIndex >= unitCount) {
-                            return;
+            // the adjacent ring only when the first one found too few destinations
+            if (_destIndex <= 4) {
+                this->searchQueue.readIndex = 0;
+                if (0 < (int)this->searchQueue.writeIndex) {
+                    _pDest2 = &((PathFindingStatePartB*)(this->climbData + 200))
+                                   ->destinationsArray[_destIndex]
+                                   .tile2OrAHelper;
+                    do {
+                        tribeID = (uint)DAT_TileMapState::instance.HeightLayer[iVar4];
+                        if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x10000000U) != 0) {
+                            iVar12 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar4]);
+                            tribeID = tribeID + iVar12;
                         }
-                    }
-                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                } while (this->searchQueue.readIndex < this->searchQueue.writeIndex);
+                        iVar12 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        uVar11 = (uint)DAT_TileMapState::instance.HeightLayer[iVar12];
+                        if ((DAT_TileMapState::instance.LogicLayer[iVar12] & 0x10000000U) != 0) {
+                            iVar12 = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar12]);
+                            uVar11 = uVar11 + iVar12;
+                        }
+                        iVar5 = abs(y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex]);
+                        iVar12 = abs(x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex]);
+                        if (iVar12 <= iVar5) {
+                            iVar12 = iVar5;
+                        }
+                        if (iVar12 == 1 && (abs(tribeID - uVar11) < 0x20)) {
+                            _destIndex = _destIndex + 1;
+                            ((PathHelper12*)(_pDest2 - 1))->tile1
+                                = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                            *_pDest2 = 1;
+                            _pDest2 = _pDest2 + 3;
+                            if (_destIndex >= unitCount) {
+                                return;
+                            }
+                        }
+                        this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                    } while (this->searchQueue.readIndex < this->searchQueue.writeIndex);
+                }
             }
-        LAB_004a7e8c:
             this->searchQueue.readIndex = 0;
             if (0 < (int)this->searchQueue.writeIndex) {
                 _pDest3
