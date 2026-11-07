@@ -30,8 +30,8 @@ namespace UI {
             ushort* surfacePtr; // 0x00000004 length: 4
             dword horizontalByteSize; // 0x00000008 length: 4
             RenderTargetInt surfaceTarget; // 0x0000000C length: 4
-            dword currentX; // 0x00000010 length: 4
-            dword currentY; // 0x00000014 length: 4
+            int currentX; // 0x00000010 length: 4
+            int currentY; // 0x00000014 length: 4
             dword field_0x18; // 0x00000018 length: 4
             dword field_0x1c; // 0x0000001C length: 4
             dword moveDirectionXUnk_0x20; // 0x00000020 length: 4
