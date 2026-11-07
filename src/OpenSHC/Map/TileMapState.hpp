@@ -304,7 +304,7 @@ namespace Map {
 
         int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
-        void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
         void reassignWallOwnershipForPlayer(int param_1, int param_2);
 

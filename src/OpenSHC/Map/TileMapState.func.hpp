@@ -146,7 +146,7 @@ namespace Map {
             &TileMapState::getOrientationThatIsWallTowerOrGatehouse)
         getOrientationThatIsWallTowerOrGatehouse;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, short), false,
             Address::SHC_3BB0A8C1_0x004F8BD0, &TileMapState::renderWallDragPreview)
         renderWallDragPreview;
 

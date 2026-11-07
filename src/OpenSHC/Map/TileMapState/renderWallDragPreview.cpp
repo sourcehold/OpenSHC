@@ -16,7 +16,7 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8BD0
-    void TileMapState::renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
+    void TileMapState::renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command)
     {
         int budget = 0;
         if (x1 > 399 || y1 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
@@ -28,7 +28,7 @@ namespace Map {
 
         this->DAT_WallTileCountCurrentDrag = 0;
         int overshoot = 2;
-        if ((short)command == 0x1b) {
+        if (command == 0x1b) {
             budget = this->maxWallHeightInPath;
             if (this->field_0x554920 == 0) {
                 this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1]
@@ -46,11 +46,11 @@ namespace Map {
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
         uint y = y1;
         do {
-            if ((short)command == 0x1b && budget < 0x18) {
+            if (command == 0x1b && budget < 0x18) {
                 break;
             }
             int const tile = *translation + x;
-            if ((short)command == 0x1b && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
+            if (command == 0x1b && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
                 break;
             }
             if (this->DAT_WallTileCountCurrentDrag >= this->constructionTileCount) {
@@ -60,7 +60,7 @@ namespace Map {
 
             /* a crenel dragged over an existing one does not count against the tile budget */
             int onCrenel = 0;
-            if ((short)command == 0x19 && (this->LogicLayer[tile] & L_CRENEL) != 0) {
+            if (command == 0x19 && (this->LogicLayer[tile] & L_CRENEL) != 0) {
                 onCrenel = 1;
             }
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || onCrenel != 0) {
@@ -68,22 +68,22 @@ namespace Map {
                     this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
                 }
                 if (this->illegalBuild != FALSE) {
-                    if ((short)command == 0x19) {
+                    if (command == 0x19) {
                         this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
-                    } else if ((short)command == 0x2e) {
+                    } else if (command == 0x2e) {
                         this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
-                    } else if ((short)command == 0x1a) {
+                    } else if (command == 0x1a) {
                         this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x14;
-                    } else if ((short)command == 0x1b) {
+                    } else if (command == 0x1b) {
                         this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                     }
-                } else if ((short)command == 0x19) {
+                } else if (command == 0x19) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
-                } else if ((short)command == 0x2e) {
+                } else if (command == 0x2e) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
-                } else if ((short)command == 0x1a) {
+                } else if (command == 0x1a) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
-                } else if ((short)command == 0x1b) {
+                } else if (command == 0x1b) {
                     /* a stair climbs one graphic per eight units of height below the wall top */
                     int steps = (budget - this->HeightLayer[tile]) / 8 - 1;
                     if (steps <= 0) {
@@ -107,7 +107,7 @@ namespace Map {
             if ((int)y < (int)y2) {
                 stepY = downY;
             }
-            if ((short)command == 0x1b) {
+            if (command == 0x1b) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
@@ -173,7 +173,7 @@ namespace Map {
         if (this->wallDragButtonUp != 0) {
             return;
         }
-        if ((short)command == 0x2e) {
+        if (command == 0x2e) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
                 DAT_BuildingsState::ptr)(playerID, 0, this->DAT_WallTileCountCurrentDrag, 1);
             return;
