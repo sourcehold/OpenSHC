@@ -33,6 +33,8 @@ namespace AI {
             } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 100) {
                 return FALSE;
             }
+            // redundant, but it is what lets this arm share the other branch's tail, as in the original
+            return TRUE;
         } else {
             // without enemy ranged troops there is no reason to become nervous
             if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100)
