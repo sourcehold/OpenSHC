@@ -22,6 +22,7 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
+#include "OpenSHC/Globals/BOOLEnum_00ed279c.hpp"
 #include "OpenSHC/Globals/CHAR_00eb0e44.hpp"
 #include "OpenSHC/Globals/CHAR_ARRAY_00eb9ac8.hpp"
 #include "OpenSHC/Globals/COL_BLACK.hpp"
@@ -48,7 +49,6 @@
 #include "OpenSHC/Globals/DWORD_00ed27b4.hpp"
 #include "OpenSHC/Globals/INT_00ec0828.hpp"
 #include "OpenSHC/Globals/INT_00ec082c.hpp"
-#include "OpenSHC/Globals/INT_00ed279c.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
 namespace OpenSHC {
@@ -59,7 +59,7 @@ namespace UI {
         void MissionFinishedTransition::MenuView_MissionFinishedTransition_Prepare()
         {
             DAT_GameCore::instance.gameDuration = timeGetTime() - DAT_GameCore::instance.timeSum_2;
-            INT_00ed279c::instance = 0;
+            BOOLEnum_00ed279c::instance = FALSE;
             DAT_FinalResultsOrderByColumn::instance = 0;
             DAT_00eb9af8::instance = 0;
             DAT_GameCore::instance.currentlyInGameUnk_0xa4 = FALSE;
