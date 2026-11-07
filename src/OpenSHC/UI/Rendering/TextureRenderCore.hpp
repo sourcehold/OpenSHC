@@ -60,7 +60,7 @@ namespace UI {
             dword mbr_0x6c; // 0x0000006C length: 4
             dword colorPaletteOverride; // 0x00000070 length: 4
             int gmProcessedImageDataBufferSize_0x74; // 0x00000074 length: 4
-            void* gmProcessedImageData; // 0x00000078 length: 4
+            byte* gmProcessedImageData; // 0x00000078 length: 4
             int unknownMemSize_1_0x7c; // 0x0000007C length: 4
             void* unknownMemPtr_1_0x80; // 0x00000080 length: 4
             int unknownMemSize_2_0x84; // 0x00000084 length: 4
