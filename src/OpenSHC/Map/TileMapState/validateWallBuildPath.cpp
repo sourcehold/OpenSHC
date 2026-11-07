@@ -64,36 +64,39 @@ namespace Map {
         }
 
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        int tile = *translation + x1;
+        this->DAT_SomeTile = *translation + x1;
         this->DAT_SomeY = y1;
-        this->DAT_SomeTile = tile;
         if ((short)command == 0x1b) {
             /* a stair needs an enclosed wall to lean against, and enough height on it */
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(tile, y1)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(
+                    this->DAT_SomeTile, y1)
                 == FALSE) {
                 return;
             }
-            this->maxWallHeightInPath
-                = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getMaxWallHeightInBrushArea, this)(tile, y1);
-            if (this->maxWallHeightInPath < 0x11) {
+            int const height = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getMaxWallHeightInBrushArea, this)(
+                this->DAT_SomeTile, y1);
+            this->maxWallHeightInPath = height;
+            if (height <= 0x10) {
                 return;
             }
-            budget = this->maxWallHeightInPath;
+            budget = height;
+            overshoot = 2;
         } else if ((short)command == 0x1a
-            && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y1) == 0) {
+            && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(this->DAT_SomeTile, y1)
+                == 0) {
             this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
             return;
         }
 
         int upY = y1 - y2;
+        int leftX = x1 - x2;
         int downY = y2 - y1;
         int rightX = x2 - x1;
         this->field_0x554920 = 1;
         uint y = y1;
         uint x = x1;
-        int leftX = x1 - x2;
         do {
-            tile = *translation + x;
+            int const tile = *translation + x;
             uint logic = this->LogicLayer[tile];
             if ((logic & (L_PLAIN1_AND_FARM | L_BORDER)) != 0) {
                 return;
@@ -104,33 +107,35 @@ namespace Map {
             if (this->BuildingLayer[tile] != 0) {
                 return;
             }
-            if ((logic & (L_TREE | L_TREE_VARIATION)) != 0 && this->OrganismLayer[tile] != 0
-                && this->OrganismLayer[tile] < 2000) {
-                /* scrub can be built through, a real tree cannot */
-                switch (DAT_LandscapeState::instance.trees[this->OrganismLayer[tile]].treeType) {
-                case (TreeType)5:
-                case (TreeType)6:
-                case (TreeType)7:
-                case (TreeType)8:
-                case (TreeType)9:
-                case (TreeType)0xa:
-                case (TreeType)0xb:
-                case (TreeType)0xc:
-                case (TreeType)0xd:
-                case (TreeType)0xe:
-                case (TreeType)0x10:
-                case (TreeType)0x11:
-                case (TreeType)0x12:
-                case (TreeType)0x13:
-                    break;
-                default:
-                    return;
+            if ((logic & (L_TREE | L_TREE_VARIATION)) != 0) {
+                int const organism = this->OrganismLayer[tile];
+                if (organism != 0 && organism < 2000) {
+                    /* scrub can be built through, a real tree cannot */
+                    switch (DAT_LandscapeState::instance.trees[organism].treeType) {
+                    case (TreeType)5:
+                    case (TreeType)6:
+                    case (TreeType)7:
+                    case (TreeType)8:
+                    case (TreeType)9:
+                    case (TreeType)0xa:
+                    case (TreeType)0xb:
+                    case (TreeType)0xc:
+                    case (TreeType)0xd:
+                    case (TreeType)0xe:
+                    case (TreeType)0x10:
+                    case (TreeType)0x11:
+                    case (TreeType)0x12:
+                    case (TreeType)0x13:
+                        break;
+                    default:
+                        return;
+                    }
                 }
             }
             if ((logic & (L_RIVER | L_FORD)) != 0) {
                 return;
             }
-            if ((char)logic < 0) {
+            if ((logic & 0x80) != 0) {
                 return;
             }
             if (this->UnitLayer[tile] != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0
@@ -195,7 +200,7 @@ namespace Map {
                     return;
                 }
             } else if ((short)command == 0x1b
-                && (budget < 0x11 || (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0)) {
+                && (budget <= 0x10 || (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0)) {
                 break;
             }
 
@@ -208,54 +213,54 @@ namespace Map {
                 stepY = downY;
             }
             if ((short)command == 0x1b) {
-                if (stepY < stepX) {
-                    if ((int)x < (int)x2) {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
-                    } else {
+                if (stepX > stepY) {
+                    if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
                         x = x - 1;
                         rightX = rightX + 1;
+                    } else {
+                        leftX = leftX + 1;
+                        x = x + 1;
+                        rightX = rightX - 1;
                     }
                 } else if (stepY > 0) {
-                    if ((int)y < (int)y2) {
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        y = y + 1;
-                        downY = downY - 1;
-                    } else {
+                    if ((int)y >= (int)y2) {
                         translation = translation - 3;
                         upY = upY - 1;
                         y = y - 1;
                         downY = downY + 1;
+                    } else {
+                        translation = translation + 3;
+                        upY = upY + 1;
+                        y = y + 1;
+                        downY = downY - 1;
                     }
                 } else {
                     overshoot = overshoot - 1;
                 }
             } else {
                 if (stepX != 0) {
-                    if ((int)x < (int)x2) {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
-                    } else {
+                    if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
                         x = x - 1;
                         rightX = rightX + 1;
+                    } else {
+                        leftX = leftX + 1;
+                        x = x + 1;
+                        rightX = rightX - 1;
                     }
                 }
                 if (stepY != 0) {
-                    if ((int)y < (int)y2) {
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        y = y + 1;
-                        downY = downY - 1;
-                    } else {
+                    if ((int)y >= (int)y2) {
                         translation = translation - 3;
                         upY = upY - 1;
                         y = y - 1;
                         downY = downY + 1;
+                    } else {
+                        translation = translation + 3;
+                        upY = upY + 1;
+                        y = y + 1;
+                        downY = downY - 1;
                     }
                 }
                 if (x == x2 && y == y2) {
