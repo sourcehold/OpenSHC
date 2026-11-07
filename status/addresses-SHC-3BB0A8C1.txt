@@ -40355,7 +40355,7 @@ SHC_3BB0A8C1_0x004FAAB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAAE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FAB70 | 81.0% | int local for short field read
+SHC_3BB0A8C1_0x004FAB70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAC70 | 100.0% | Reimplemented
 

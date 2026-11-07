@@ -40,12 +40,12 @@ namespace Map {
                 this->BuildingWasLayer[tile] = 0;
             } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isFootprintIndexOnEdge, this)(
                            buildingSizeTileIndex, size)
-                == FALSE) {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
-            } else {
+                != FALSE) {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x2000;
+            } else {
+                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
             }
-            for (short unitID = this->UnitLayer[tile]; unitID != 0;
+            for (int unitID = this->UnitLayer[tile]; unitID != 0;
                 unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                 DAT_UnitsState::instance.units[unitID].vanish = 0;
                 DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 = 0;
