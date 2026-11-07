@@ -1,4 +1,4 @@
-#include "../AICState.hpp"
+#include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
@@ -52,9 +52,10 @@ namespace AI {
                 return tribeID;
             selectedTribeID
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-            selectedSlot = firstSlot;
         } else {
-            for (int slot = firstSlot; slot < firstSlot + groupsCount; slot++) {
+            // groupsCount becomes the end slot: the original keeps the bound in the register of groupsCount
+            groupsCount = groupsCount + firstSlot;
+            for (int slot = firstSlot; slot < groupsCount; slot++) {
                 int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[slot];
                 if (tribeID == 0
                     || DAT_TribesState::instance.tribes[tribeID].uid
@@ -70,11 +71,14 @@ namespace AI {
                     selectedSlot = slot;
                 }
             }
+            // the store below indexes by firstSlot; copying here (rather than setting selectedSlot in the
+            // single-tribe path) keeps the empty-loop edge on the shared exit, as in the original
+            firstSlot = selectedSlot;
         }
         if (selectedTribeID <= 0)
             return 0;
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[selectedSlot] = selectedTribeID;
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[selectedSlot]
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[firstSlot] = selectedTribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[firstSlot]
             = DAT_TribesState::instance.tribes[selectedTribeID].uid;
         return selectedTribeID;
     }
