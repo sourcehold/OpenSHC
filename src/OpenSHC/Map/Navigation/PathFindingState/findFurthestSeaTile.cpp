@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -22,9 +23,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BBF0
         void PathFindingState::findFurthestSeaTile(int budget, uint ySpace, uint y)
         {
-            int _tile;
-            int _x;
-            int _y;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
@@ -32,12 +30,13 @@ namespace Map {
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
-            this->calculations = this->calculations + 1;
-            this->searchGeneration = this->searchGeneration + 1;
+            this->calculations += 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -50,12 +49,12 @@ namespace Map {
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (_tile < 0 || _tile >= 0x13a10) {
+                int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                if (_tile < 0 || _tile >= Map::MC_MAP_TILES_COUNT) {
                     break;
                 }
-                _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_tile];
                 if ((int)this->searchQueue.writeIndex > budget) {
                     this->ALG_ResultTile = _tile;
@@ -85,22 +84,21 @@ namespace Map {
                                   .short_.yOffset
                             + (short)_y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                        this->searchQueue.writeIndex += 1;
+                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
             this->ALG_ResultX = this->searchQueue.xQueue[this->searchQueue.readIndex - 1];
             this->ALG_ResultY = this->searchQueue.yQueue[this->searchQueue.readIndex - 1];
             this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex - 1];
-            return;
         }
 
     }

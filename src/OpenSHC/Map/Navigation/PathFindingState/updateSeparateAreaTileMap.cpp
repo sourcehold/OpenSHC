@@ -2,6 +2,8 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState/LinkageNeighbourAsm.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -42,7 +44,7 @@ namespace Map {
             if (this->toggleUpdateSeparateAreaTileMap == 0) {
                 return FALSE;
             }
-            this->field_0x74 = this->field_0x74 + 1;
+            this->field_0x74 += 1;
             /*
               The flood fill of one area (the dequeue loop with its eight-neighbour expansion) is
               handwritten assembly in the original; it reaches the area layer, the zone sizes and the
@@ -56,7 +58,6 @@ namespace Map {
             uchar* _linkage;
             int* _dirMatrix;
             int _readIndex;
-            int _areaID;
             int _tile;
             int _cY;
             this->toggleUpdateSeparateAreaTileMap = 0;
@@ -70,9 +71,10 @@ namespace Map {
             _tilesQueue = this->searchQueue.tilesQueue;
             _zoneSizes = this->zoneSizesArray;
             forceUpdate = 1;
-            _areaID = 1;
+            int _areaID = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                160800, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
+                sizeof(DAT_TileMapState::instance.PathConnectionLayer), '\0',
+                (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 4000, '\0', (void*)((int)(this->zoneSizesArray)));
             MACRO_CALL_MEMBER(
@@ -81,13 +83,19 @@ namespace Map {
             int* _rowEnd;
             int _first = 0;
             _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
-            for (; _first < 80400; _first = _first + 1) {
+            for (; _first < Map::MC_MAP_TILES_COUNT; _first = _first + 1) {
                 if (_first >= *_rowEnd) {
-                    _row = _row + 1;
-                    _rowEnd = _rowEnd + 3;
+                    _row += 1;
+                    _rowEnd += 3;
                 }
                 if ((char)DAT_TileMapState::instance.PathConnectionLayer[_first] != '\0'
-                    || (DAT_TileMapState::instance.LogicLayer[_first] & 0x4a5014b1) != 0) {
+                    || (DAT_TileMapState::instance.LogicLayer[_first]
+                           & (LogicHelpers::L_SEA | LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE
+                               | LogicHelpers::L_ROCKY | LogicHelpers::L_BUILDING | LogicHelpers::L_TREE
+                               | LogicHelpers::L_RIVER | LogicHelpers::L_CRENEL_VARIATIONUnk
+                               | LogicHelpers::L_FARM_FIELD_HOP | LogicHelpers::L_FARM_FIELD_DAIRY
+                               | LogicHelpers::L_MOAT))
+                        != 0) {
                     continue;
                 }
                 this->searchQueue.yQueue[0] = (short)_row;
@@ -143,7 +151,7 @@ namespace Map {
                 area_done:
                 } // clang-format on
 
-                _areaID = _areaID + 1;
+                _areaID += 1;
                 if (1000 <= (short)_areaID) {
                     break;
                 }

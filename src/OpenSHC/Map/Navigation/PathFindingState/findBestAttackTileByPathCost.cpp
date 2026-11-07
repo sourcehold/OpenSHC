@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -29,20 +30,24 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A01D0
         dword PathFindingState::findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4)
         {
-            int iVar1;
-            dword dVar4 = 1000;
-            int local_4 = 1000;
-            dword local_8 = 0;
+            /*
+              one slot holds two things, as in the original: the 1000 returned when the search
+              cannot start, and then each neighbour tile the search steps onto
+             */
+            dword _candidate = 1000;
+            int _bestScore = 1000;
+            dword _bestTile = 0;
             if (param_1 > 399 || param_2 > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_2 * 400 + param_1] == '\0') {
-                return (dword)(dVar4);
+                return _candidate;
             }
-            this->calculations = this->calculations + 1;
-            this->searchGeneration = this->searchGeneration + 1;
+            this->calculations += 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -54,68 +59,75 @@ namespace Map {
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                int iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (iVar3 < 0) {
-                    return (dword)(local_8);
+                int _queuedTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                if (_queuedTile < 0) {
+                    return _bestTile;
                 }
-                if (iVar3 >= 0x13a10) {
-                    return (dword)(local_8);
+                if (_queuedTile >= Map::MC_MAP_TILES_COUNT) {
+                    return _bestTile;
                 }
-                int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
-                if (0x13a10 < (int)this->searchQueue.currentDistance) {
-                    return (dword)(local_8);
+                int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_queuedTile];
+                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
+                    return _bestTile;
                 }
-                for (int iVar5 = 0; iVar5 < 8; iVar5 = iVar5 + 1) {
-                    if ((DAT_TileMapState::instance.PathLinkageLayer[iVar3]
-                            & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
+                for (int _direction = 0; _direction < 8; ++_direction) {
+                    if ((DAT_TileMapState::instance.PathLinkageLayer[_queuedTile]
+                            & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                         != 0) {
-                        dVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + iVar3;
-                        if (DAT_TileMapState::instance.WalkLayer[dVar4] != this->searchGeneration) {
+                        _candidate
+                            = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _queuedTile;
+                        if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
+                            /*
+                              attackInfo + 0x301C0 + playerID * sizeof(AttackInfoSubElement) is
+                              playerInfo[playerID - 1], whose first field selects one of the
+                              per-player AI info planes.
+                              fixme: the plane array at 0x01EE2998 has no named global yet, so its
+                              base still has to be written as an address
+                             */
                             int _hackValue
-                                = (int)*(byte*)(*(int*)((
-                                                            (int)&DAT_TroopValueState::instance.attackInfo + 0x301d0 /* old hackValuesArray: AttackInfoSubElement of player p at +0x301C0 + p*0x177BC */)
-                                                    + param_3 * 0x177bc + -0x10)
-                                        * 0x13a10
-                                    + 0x1ee2998 + dVar4);
-                            int _cost = (int)DAT_TileMapState::instance.SEC_TileMap1104[dVar4];
-                            int _entity = (int)DAT_TileMapState::instance.EntityLayer[dVar4];
+                                = (int)*(byte*)(DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
+                                                    .currentPlayerID_OR_attackedPlayerID_OR_one
+                                        * Map::MC_MAP_TILES_COUNT
+                                    + 0x1ee2998 + _candidate);
+                            int _cost = (int)DAT_TileMapState::instance.SEC_TileMap1104[_candidate];
+                            int _entity = (int)DAT_TileMapState::instance.EntityLayer[_candidate];
                             if (((_entity == 0)
                                     || (DAT_EntityState::instance.entityArray[_entity].entityType
                                         != OpenSHC::Map::Entities::ET_FIRE))
                                 && _hackValue == (int)param_4) {
-                                if ((10 < (int)this->searchQueue.currentDistance) && (local_8 != 0)) {
-                                    return (dword)(local_8);
+                                if ((10 < (int)this->searchQueue.currentDistance) && (_bestTile != 0)) {
+                                    return _bestTile;
                                 }
                                 if (6 < (int)this->searchQueue.currentDistance) {
-                                    iVar1 = this->searchQueue.currentDistance + _cost * 3;
-                                    if (iVar1 < local_4) {
-                                        local_4 = iVar1;
-                                        local_8 = dVar4;
+                                    int _score = this->searchQueue.currentDistance + _cost * 3;
+                                    if (_score < _bestScore) {
+                                        _bestScore = _score;
+                                        _bestTile = _candidate;
                                     }
                                 }
                             }
-                            DAT_TileMapState::instance.CertainPathLayer[dVar4]
+                            DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[dVar4] = (short)this->searchGeneration;
+                            DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
-                                + (short)sVar2;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = dVar4;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                + (short)_y;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                            this->searchQueue.writeIndex += 1;
+                            if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
                 }
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (0x13a10 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
-            return (dword)(local_8);
+            return _bestTile;
         }
 
     }

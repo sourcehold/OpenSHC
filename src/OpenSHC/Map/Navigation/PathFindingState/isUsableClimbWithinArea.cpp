@@ -23,7 +23,7 @@ namespace Map {
             if (this->climbData[wallDataID].area == area) {
                 return TRUE;
             }
-            return (uint)(this->climbData[wallDataID].wallGroupAreaID == area);
+            return this->climbData[wallDataID].wallGroupAreaID == area;
         }
 
     }

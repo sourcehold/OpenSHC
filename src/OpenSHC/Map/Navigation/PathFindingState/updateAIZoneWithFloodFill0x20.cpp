@@ -1,6 +1,8 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -24,11 +26,12 @@ namespace Map {
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
-            this->searchGeneration = this->searchGeneration + 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -53,7 +56,9 @@ namespace Map {
                     /*
                       fixme: the edge test is done on the current tile, not on the candidate
                      */
-                    if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) != 0) {
+                    if ((DAT_TileMapState::instance.LogicLayer[_tile]
+                            & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
+                        != 0) {
                         continue;
                     }
                     int const _candidate
@@ -71,13 +76,13 @@ namespace Map {
                         = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
                         + _y;
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                    this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 <= (int)this->searchQueue.writeIndex) {
+                    this->searchQueue.writeIndex += 1;
+                    if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

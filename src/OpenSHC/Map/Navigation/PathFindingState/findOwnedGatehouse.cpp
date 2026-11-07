@@ -1,6 +1,8 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
@@ -29,19 +31,16 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A19B0
         dword PathFindingState::findOwnedGatehouse(int playerID, uint ySpace, uint y)
         {
-            int (*paiVar3)[8];
-            short _building;
-            char _link;
-            dword _tile;
             if (!xyAreValid(ySpace, y)) {
-                return (dword)(0);
+                return 0;
             }
-            this->calculations = this->calculations + 1;
-            this->searchGeneration = this->searchGeneration + 1;
+            this->calculations += 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -54,29 +53,29 @@ namespace Map {
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                dword _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if ((int)_tile < 0) {
-                    return (dword)(0);
+                    return 0;
                 }
-                if ((int)_tile >= 80400) {
-                    return (dword)(0);
+                if ((int)_tile >= Map::MC_MAP_TILES_COUNT) {
+                    return 0;
                 }
-                int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (80400 < (int)this->searchQueue.currentDistance) {
-                    return (dword)(0);
+                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
+                    return 0;
                 }
-                _link = DAT_TileMapState::instance.PathLinkageLayer[_tile];
-                int _direction = 0;
-                paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
-                do {
-                    int _candidate = (*paiVar3)[0] + _tile;
+                char _link = DAT_TileMapState::instance.PathLinkageLayer[_tile];
+                for (int _direction = 0; _direction < 8; ++_direction) {
+                    int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate]
+                               & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
+                            == 0) {
                         if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction] & _link)
                             == 0) {
-                            _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
+                            short _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
                             if (_building != 0) {
                                 switch (DAT_BuildingsState::instance.buildings[_building].buildingType) {
                                 case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
@@ -85,7 +84,7 @@ namespace Map {
                                         /*
                                           if gate house from player
                                          */
-                                        return (dword)(_tile);
+                                        return _tile;
                                     }
                                 }
                             }
@@ -99,27 +98,25 @@ namespace Map {
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
-                                + (short)sVar1;
+                                + (short)_x;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
-                                + (short)sVar2;
+                                + (short)_y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 <= (int)this->searchQueue.writeIndex) {
+                            this->searchQueue.writeIndex += 1;
+                            if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
-                    _direction = _direction + 1;
-                    paiVar3 = (int (*)[8])(*paiVar3 + 1);
-                } while (_direction < 8);
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                }
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
-            return (dword)(0);
+            return 0;
         }
 
     }

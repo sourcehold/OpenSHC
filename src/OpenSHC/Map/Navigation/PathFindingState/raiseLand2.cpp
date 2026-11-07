@@ -3,6 +3,8 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -23,15 +25,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A6D0
         void PathFindingState::raiseLand2(uint ySpace, uint y, int maxDistance)
         {
-            short* psVar4;
-            int _candidate;
-            int* piVar6;
             if (ySpace > 399 || y > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                160800, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
+                sizeof(DAT_TileMapState::instance.CertainPathLayer), '\0',
+                (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
@@ -44,7 +44,7 @@ namespace Map {
             ushort _startArea = DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 uint tileUnk = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (80399 < tileUnk)
+                if (Map::MC_MAP_TILES_COUNT - 1 < tileUnk)
                     break;
                 int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
@@ -54,10 +54,12 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(
                     tileUnk, (uint)(_y), 4, 1);
                 for (int _direction = 0; _direction < 8; ++_direction) {
-                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
+                    int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
                     if (DAT_TileMapState::instance.CertainPathLayer[_candidate] <= 0
                         && DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _startArea
-                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate]
+                               & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
+                            == 0) {
                         DAT_TileMapState::instance.CertainPathLayer[_candidate]
                             = (short)this->searchQueue.currentDistance + 1;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]
@@ -69,22 +71,21 @@ namespace Map {
                                   .short_.yOffset
                             + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                        this->searchQueue.writeIndex += 1;
+                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
             DAT_TileMapState::instance.forceUpdateLogicalAndMiscDisplayLayers = 1;
             DAT_TileMapState::instance.forceUpdateTextureTilemap = 1;
             DAT_TileMapState::instance.forceUpdateGFXLayers = 1;
-            return;
         }
 
     }
