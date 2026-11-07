@@ -9,6 +9,7 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventConditionIndex.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -109,8 +110,8 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::setSliderParameters,
                     DAT_MenuModalComposition2::ptr)(0, 100, DAT_MapPropertiesState::instance.SEC_StartingPopularity,
-                    (undefined*)&DAT_MapPropertiesState::instance.SEC_StartingPopularity,
-                    (void*)MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
+                    &DAT_MapPropertiesState::instance.SEC_StartingPopularity,
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Popularity"
                 DAT_MenuModalComposition2::instance.textIndex = 79;
@@ -179,26 +180,26 @@ namespace UI {
                     &DAT_MapPropertiesState::instance
                         .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID])();
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[0]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_AUTO_STOP]
                     .enabled = 1;
                 // Written out (a for loop over 5 to 7: quick_diff 0.9573 -> 0.9001)
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[5]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_FOOD_ACQUIRED]
                     .subType = 10;
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[6]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED]
                     .subType = 10;
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[7]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_GOODS_ACQUIRED]
                     .subType = 10;
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[17]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED_17]
                     .subType = 10;
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[22]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY]
                     .value = 5;
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                    .data.scenario.conditions[23]
+                    .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS]
                     .value = 5;
                 DAT_MapPropertiesState::instance.SEC_StartingYear
                     = atol(MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer,
@@ -208,7 +209,7 @@ namespace UI {
                 DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                     .header.month = DAT_MapPropertiesState::instance.SEC_StartingMonth;
                 DAT_MapPropertiesState::instance.invasionTroopIndex = 0;
-                DAT_MapPropertiesState::instance.flag = 1;
+                DAT_MapPropertiesState::instance.flag = TRUE;
                 // fixme: the formatted year is not used (the original does the same, 0x004B86E5)
                 // "%d"
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s__d_005aa7f0,
@@ -227,9 +228,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
                     10000, DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
-                    (undefined*)&DAT_MapPropertiesState::instance
-                        .SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
-                    (void*)MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
+                    &DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Starting Gold"
                 DAT_MenuModalComposition2::instance.textIndex = 168;
@@ -245,9 +245,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0, 100,
                     DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
-                    (undefined*)&DAT_MapPropertiesState::instance
-                        .SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
-                    (void*)MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
+                    &DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Starting Pitch"
                 DAT_MenuModalComposition2::instance.textIndex = 169;
@@ -267,10 +266,9 @@ namespace UI {
                     return;
                 }
                 DAT_CopyOfScenarioGold::instance = DAT_GameState::instance.mapAndTime.scenarioGold;
-                MACRO_CALL_MEMBER(
-                    OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
-                    10000, DAT_CopyOfScenarioGold::instance, (undefined*)DAT_CopyOfScenarioGold::ptr,
-                    (void*)MACRO_CALL(OpenSHC::UI::Helpers_Func::RestoreScenarioGold));
+                MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::setSliderParameters,
+                    DAT_MenuModalComposition2::ptr)(0, 10000, DAT_CopyOfScenarioGold::instance,
+                    DAT_CopyOfScenarioGold::ptr, MACRO_CALL(OpenSHC::UI::Helpers_Func::RestoreScenarioGold));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Gold"
                 DAT_MenuModalComposition2::instance.textIndex = 61;

@@ -7,6 +7,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventType.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
@@ -42,30 +43,27 @@ namespace UI {
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(button);
                 return;
             case 38:
-                // Lose & Message (27)
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data.scenario.ScenarioEventType
-                    == 27) {
+                    == OpenSHC::Game::ScenarioEvents::Enums::SET_LOSE_AND_MESSAGE) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(button + 2);
                     return;
                 }
                 DAT_ButtonUnknownZero::instance = TRUE;
                 return;
             case 39:
-                // Win & Message (26)
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data.scenario.ScenarioEventType
-                    == 26) {
+                    == OpenSHC::Game::ScenarioEvents::Enums::SET_WIN_AND_MESSAGE) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(button + 1);
                     return;
                 }
                 DAT_ButtonUnknownZero::instance = TRUE;
                 return;
             case 40:
-                // Message (2)
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data.scenario.ScenarioEventType
-                    == 2) {
+                    == OpenSHC::Game::ScenarioEvents::Enums::SET_MESSAGE) {
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(button);
                     return;
                 }

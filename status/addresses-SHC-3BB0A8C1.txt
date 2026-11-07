@@ -27111,7 +27111,7 @@ SHC_3BB0A8C1_0x004B8200 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B8210 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B8220 | 100.0% | Reimplemented, only the atol call target and the slider callbacks' resolver addresses differ
+SHC_3BB0A8C1_0x004B8220 | 100.0% | Reimplemented, only the atol call target differs (and the slider callbacks while the SumUnitPoints and RestoreScenarioGold resolvers are off)
 
 SHC_3BB0A8C1_0x004B88A4 | 0.0% | Pending
 
@@ -32329,7 +32329,7 @@ SHC_3BB0A8C1_0x004C01A5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C01A6 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C01B0 | 100.0% | Reimplemented, only the RenderScenarioButtonWithText tail call targets differ
+SHC_3BB0A8C1_0x004C01B0 | 100.0% | Reimplemented, only the RenderScenarioButtonWithText tail call targets differ, while its resolver is off
 
 SHC_3BB0A8C1_0x004C0770 | 0.0% | Pending
 
@@ -32765,7 +32765,7 @@ SHC_3BB0A8C1_0x004C085C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C085D | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C0860 | 100.0% | Reimplemented, only the RenderScenarioButtonWithText tail call targets differ
+SHC_3BB0A8C1_0x004C0860 | 100.0% | Reimplemented, only the RenderScenarioButtonWithText tail call targets differ, while its resolver is off
 
 SHC_3BB0A8C1_0x004C0BF8 | 0.0% | Pending
 

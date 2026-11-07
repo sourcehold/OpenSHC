@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventConditionIndex.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
@@ -86,52 +87,52 @@ namespace UI {
                 // "Win Timer" (row 39) only while one of these conditions is on: else DAT_ButtonUnknownZero
                 BOOLEnum anyEnabled = FALSE;
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[1]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[4]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_GOLD_ACQUIRED]
                         .enabled) {
                     anyEnabled = TRUE; // Written out (a loop over 4 to 7: quick_diff 0.9440 -> 0.8543)
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[5]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_FOOD_ACQUIRED]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[6]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[7]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_GOODS_ACQUIRED]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[17]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED_17]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[20]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED]
                         .enabled) {
                     anyEnabled = TRUE; // Written out (a loop over 20 to 22: quick_diff 0.9440 -> 0.8708)
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[21]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_DRINKING_ALE]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[22]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY]
                         .enabled) {
                     anyEnabled = TRUE;
                 }
                 if (!DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                        .data.scenario.conditions[23]
+                        .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS]
                         .enabled
                     && !anyEnabled) {
                     DAT_ButtonUnknownZero::instance = TRUE;
