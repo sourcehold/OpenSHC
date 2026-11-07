@@ -16963,7 +16963,7 @@ SHC_3BB0A8C1_0x0044F850 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00451E00 | 92.5% | gynt's asm with the zoomed path's surface pointer fixed; stack slots of the asm-only column offset and the C locals
 
 SHC_3BB0A8C1_0x00452900 | 100.0% | Reimplemented
 
