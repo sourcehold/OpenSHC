@@ -6,6 +6,7 @@
 #include "OpenSHC/AI/AIRecruitUnitChoice.hpp"
 #include "OpenSHC/AI/AIStrengthType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -42,7 +43,8 @@ namespace AI {
 
         int _aicIndex = _aiType - 1;
 
-        int _currentGold = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf];
+        int _currentGold
+            = DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD];
         DAT_GameState::instance.playerDataArray[playerID].aiStrengthState = 0;
         if (_currentGold < 200)
             DAT_GameState::instance.playerDataArray[playerID].aiStrengthState = 0;
@@ -139,7 +141,8 @@ namespace AI {
                 return;
             }
 
-            int _gold = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf];
+            int _gold
+                = DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD];
             DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling = OpenSHC::AI::AIST_WEAK;
             DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState = OpenSHC::AI::AIRUC_DEFENSIVE;
 
