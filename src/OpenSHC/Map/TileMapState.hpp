@@ -155,10 +155,10 @@ namespace Map {
         undefined4 buildingSpriteID1; // 0x0055494C length: 4
         undefined4 buildingSpriteID2; // 0x00554950 length: 4
         undefined4 cursorTargetID; // 0x00554954 length: 4
-        undefined4 buildingHeightLimit; // 0x00554958 length: 4
+        int buildingHeightLimit; // 0x00554958 length: 4
         int buildingMinHeight; // 0x0055495C length: 4
         int buildingMaxHeight; // 0x00554960 length: 4
-        undefined4 buildingMaxHeightDifference; // 0x00554964 length: 4
+        int buildingMaxHeightDifference; // 0x00554964 length: 4
         undefined4 buildingPlacementProperty_3; // 0x00554968 length: 4
         undefined4 buildingPlacementProperty_4; // 0x0055496C length: 4
         undefined4 buildingPlacementProperty_5; // 0x00554970 length: 4
