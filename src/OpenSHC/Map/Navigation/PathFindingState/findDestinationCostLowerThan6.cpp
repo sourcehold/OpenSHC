@@ -23,7 +23,7 @@ namespace Map {
                     int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     int _x = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                     if (DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration
-                        && (_cost = (uint)_pCost[_tile], _cost != 0) && _cost - 0x28 < 6
+                        && (_cost = _pCost[_tile], _cost != 0) && 40 <= _cost && _cost <= 45
                         && DAT_TileMapState::instance.CertainPathLayer[_tile] >= maxDistance) {
                         this->ALG_ResultX = _x;
                         this->ALG_ResultY = _y;
