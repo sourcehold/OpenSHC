@@ -122,7 +122,6 @@ namespace AI {
                             .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
                             .tile],
                     targetPlayer);
-                destinationTile = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1;
                 if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0)
                     destinationTile = DAT_ViewportRenderState::instance
                                           .translationMatrix[DAT_GameState::instance.playerDataArray[targetPlayer]
@@ -132,6 +131,8 @@ namespace AI {
                         + DAT_GameState::instance.playerDataArray[targetPlayer]
                               .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                               .xEntry;
+                else
+                    destinationTile = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1;
             } else {
                 destinationTile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
                     + DAT_ViewportRenderState::instance
