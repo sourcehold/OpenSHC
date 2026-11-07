@@ -117,7 +117,7 @@ namespace UI {
                 // otherwise as 11
             case 11:
                 if (DAT_00ed27bc::instance == 1) {
-                    DAT_00ed27bc::instance = 0;
+                    DAT_00ed27bc::instance = FALSE;
                     return;
                 }
                 MACRO_CALL_MEMBER(
@@ -189,7 +189,7 @@ namespace UI {
                 }
                 return;
             case -2: // "View Briefing"
-                DAT_00ed27bc::instance = 1;
+                DAT_00ed27bc::instance = TRUE;
                 return;
             case -3: // "Restart Mission", asked first
                 DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 44;
