@@ -108,14 +108,29 @@ Naturally, the logic flow needs to be kept, so the update of a variable can not 
 The order in which **initialised** declarations appear decides which register each one gets. `countPlayersInSameTeam`
 matched instruction for instruction except that the parameter was loaded into `eax` instead of `edx`; moving
 `int iVar2 = 0;` in front of `int iVar1 = DAT_GameState::instance.mapAndTime.playerTeams[playerID];` freed `edx`
-for the parameter load and took it from 95.7% to 100%. Uninitialised declarations do not have this effect - a
-sweep of `quick_reorder.py -s` over the declaration block of 27 functions found no win at all.
+for the parameter load. Uninitialised declarations do not have this effect.
 
-Stack *slot* assignment for spilled locals is a different matter and is not reachable from the source. Where the
-original lays its locals out in Ghidra order (`local_1c` at the lowest `esp` offset through `local_4` at the
-highest) and our build permutes them, neither declaration order, initialisation order, nor renaming changes
-anything; this was tried on `setupSkirmishLobby`, `initMultiplayerLobbyState`, `initializeFinalResultsForActivePlayers`
-and `createCompoundAddressBasedOnSelectedProvider`. Spend the effort elsewhere.
+Stack *slot* assignment for spilled locals is a different matter: it follows the **reference weight** of each
+local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
+slot. Examples are `setupSkirmishLobby`, `initMultiplayerLobbyState`,
+`initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and some reverse engineering work on the
+compiler says why: its stack "colorer" sorts the elements by weight per byte and hands out offsets in that order. The
+mechanism, the evidence and the debugger recipe are in
+[tools/compiler-internals/msvc-backend.md](tools/compiler-internals/msvc-backend.md); what matters here is how to
+read a diff:
+
+* A slot-order mismatch means the reimplemented locals carry **different reference counts** from the original's, so look for a
+  read the original might have had and we do not. It is not a declaration-order problem.
+* Weight **ties** are left to the order the symbols arrive in. Permuting declarations can only decide ties.
+* Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
+  is already dead (e.g., `writeMapOrSaveFile` puts eight locals on the first parameter's slot).
+* Renaming locals doesn't affect anything; the comparator never looks at a name.
+
+`slot_weight.py` prints the slot table for one function with each local's weight beside it (read out of MSVC's own
+intermediate assembly symbol table rather than inferred from the diff for sake of speed).
+
+For **registers** there is no decoded rule yet. Treat a register-only mismatch as an interference difference - a
+different set of values was live at that point - which is a working hypothesis, not an established mechanism.
 
 ### Statement Order
 

@@ -1,9 +1,12 @@
 """Permute a short run of declarations and keep the order that matches best.
 
-MSVC assigns stack slots in declaration order, so two locals declared the wrong way round sit in
-each other's slots and usually end up in each other's registers too - a mismatch that spreads over
-every instruction touching either of them while `diff_triage.py` still reports the function as
-register-naming only. `assignSelectionToKey` had the original's slot *set* exactly
+Declaration order does not decide stack slots: the colorer sorts its elements by reference weight
+per byte (`StkColorCmp`, see the cheat sheet) and leaves only the *ties* to the order the symbols
+arrive in. So this pays exactly when two locals of equal weight are declared the wrong way round -
+they then sit in each other's slots and usually in each other's registers too, a mismatch that
+spreads over every instruction touching either of them while `diff_triage.py` still reports the
+function as register-naming only. Run `slot_weight.py` first: if the weights differ, no permutation
+of the declarations will move those slots. `assignSelectionToKey` had the original's slot *set* exactly
 (`0x18`, `0x1c`, `0x20`) with `tribeIndex` and `slotID` swapped between `0x18` and `0x20`;
 declaring `tribeIndex` first took it from 95.9% to 100%.
 
