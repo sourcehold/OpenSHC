@@ -41,10 +41,10 @@ namespace AI {
                     this->heatMaps[x][y].impassableCount = 0;
                     this->heatMaps[x][y].structureCount = 0;
                     this->heatMaps[x][y].tileOwnership = 0;
-                    if ((char)this->heatMaps[x][y].woodRelatedCountdownTo0 > 0) {
+                    if (this->heatMaps[x][y].woodRelatedCountdownTo0 > 0) {
                         --this->heatMaps[x][y].woodRelatedCountdownTo0;
                     }
-                    if ((char)this->heatMaps[x][y].destructionBasedPlacementCooldown > 0) {
+                    if (this->heatMaps[x][y].destructionBasedPlacementCooldown > 0) {
                         --this->heatMaps[x][y].destructionBasedPlacementCooldown;
                     }
                 }
@@ -77,19 +77,19 @@ namespace AI {
 
                 int const height = DAT_TileMapState::instance.DefaultHeightLayer[tile];
                 if (height < this->heatMaps[gridX][gridY].lowestTerrainHeight) {
-                    this->heatMaps[gridX][gridY].lowestTerrainHeight = (byte)height;
+                    this->heatMaps[gridX][gridY].lowestTerrainHeight = height;
                 }
                 if (height > this->heatMaps[gridX][gridY].highestTerrainHeight) {
-                    this->heatMaps[gridX][gridY].highestTerrainHeight = (byte)height;
+                    this->heatMaps[gridX][gridY].highestTerrainHeight = height;
                 }
-                if ((int)this->heatMaps[gridX][gridY].highestTerrainHeight
-                    > (int)this->heatMaps[gridX][gridY].lowestTerrainHeight + 12) {
+                if (this->heatMaps[gridX][gridY].highestTerrainHeight
+                    > this->heatMaps[gridX][gridY].lowestTerrainHeight + 12) {
                     this->heatMaps[gridX][gridY].terrainDiffHigherThan12 = 1;
                 }
 
                 int const logic = DAT_TileMapState::instance.LogicLayer[tile];
                 if (logic & L_TREE) {
-                    int const treeID = (short)DAT_TileMapState::instance.OrganismLayer[tile];
+                    int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                     // tree types 1 to 4 give wood
                     if (treeID != 0
                         && (DAT_LandscapeState::instance.trees[treeID].treeType == 1
@@ -152,7 +152,7 @@ namespace AI {
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
                 int const gridY = y / 5;
-                int const treeID = (short)DAT_TileMapState::instance.OrganismLayer[tile];
+                int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                 // tree types 1 to 4 give wood
                 if (treeID != 0
                     && (DAT_LandscapeState::instance.trees[treeID].treeType == 1
@@ -172,9 +172,7 @@ namespace AI {
                 int const gridY = y / 5;
                 ++this->heatMaps[gridX][gridY].structureCount;
                 this->heatMaps[gridX][gridY].tileOwnership
-                    = (byte)DAT_BuildingsState::instance
-                          .buildings[(short)DAT_TileMapState::instance.BuildingLayer[tile]]
-                          .owner;
+                    = DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[tile]].owner;
             } else if (DAT_TileMapState::instance.LogicLayer[tile] & L_WALL_OR_GATEHOUSE) {
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
