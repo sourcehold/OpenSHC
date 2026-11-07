@@ -78,11 +78,15 @@ namespace Rendering {
         }
 
         if (this->viewportState.isZoomedOutUnk == 0) {
-            this->viewportState.currentCameraOffsetX = (DAT_ViewportRenderState::instance.viewportState.viewportX & 0x1f) + 150;
-            this->viewportState.currentCameraOffsetY = (DAT_ViewportRenderState::instance.viewportState.viewportY & 0xf) + 8;
+            this->viewportState.currentCameraOffsetX
+                = (DAT_ViewportRenderState::instance.viewportState.viewportX & 0x1f) + 150;
+            this->viewportState.currentCameraOffsetY
+                = (DAT_ViewportRenderState::instance.viewportState.viewportY & 0xf) + 8;
         } else {
-            this->viewportState.currentCameraOffsetX = (DAT_ViewportRenderState::instance.viewportState.viewportX >> 1 & 0xf) + 150;
-            this->viewportState.currentCameraOffsetY = (DAT_ViewportRenderState::instance.viewportState.viewportY >> 1 & 7) + 8;
+            this->viewportState.currentCameraOffsetX
+                = (DAT_ViewportRenderState::instance.viewportState.viewportX >> 1 & 0xf) + 150;
+            this->viewportState.currentCameraOffsetY
+                = (DAT_ViewportRenderState::instance.viewportState.viewportY >> 1 & 7) + 8;
         }
         this->viewportState.currentCameraOffsetY = this->viewportState.currentCameraOffsetY + 8;
     }
