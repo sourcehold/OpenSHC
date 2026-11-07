@@ -7,6 +7,9 @@
 
 #define NEIGHBOUR_FLAGS_MASK_WALL_OR_KEEP 0x10000100 // L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE
 
+/* the original was built without optimisation: this spilled to [ebp - 4] and reloaded for every access */
+#pragma optimize("", off)
+
 namespace OpenSHC {
 namespace Map {
 
@@ -26,7 +29,7 @@ namespace Map {
         */
         this->DAT_SomeY = y;
         this->DAT_SomeTile = MACRO_CALL_MEMBER(
-            OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile, DAT_ViewportRenderState::ptr)(x, y);
+            OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile, &DAT_ViewportRenderState::instance)(x, y);
 
         MACRO_NEIGHBOUR_FLAGS_LOGIC_8(1, NEIGHBOUR_FLAGS_MASK_WALL_OR_KEEP)
 
@@ -35,3 +38,5 @@ namespace Map {
 
 }
 }
+
+#pragma optimize("", on)
