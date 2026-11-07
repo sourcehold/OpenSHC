@@ -42,7 +42,6 @@ namespace Map {
         BOOLEnum PathFindingState::findPathUsingClimbingWithHeightMargin16(
             uint ySpace, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch)
         {
-            int (*paiVar4)[8];
             int _keepHeight;
             int _tDiff;
             int _direction;
@@ -102,13 +101,11 @@ namespace Map {
                         break;
                     int _tHeight = (int)DAT_TileMapState::instance.HeightLayer[_tile];
                     _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
-                    _direction = 0;
-                    paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
-                    do {
+                    for (_direction = 0; _direction < 8; ++_direction) {
                         /*
                           for each direction, do:
                          */
-                        _candidate = (*paiVar4)[0] + _tile;
+                        _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + _tile;
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                             if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
@@ -117,16 +114,16 @@ namespace Map {
                                   tileUnk is not wall or gatehouse
                                  */
                                 if ((_tLogic & 0x100) != 0)
-                                    goto LAB_0049838d;
+                                    continue;
                                 /*
                                   tileUnk is not moat
                                  */
                                 _cLogic = DAT_TileMapState::instance.LogicLayer[_candidate];
                                 if ((_tLogic & 0x40000000) != 0) {
                                     if ((_cLogic & 0x40000800) == 0 && (_cLogic & 0x4a5015b1) != 0)
-                                        goto LAB_0049838d;
+                                        continue;
                                 } else if ((_cLogic & 0x40000000) == 0)
-                                    goto LAB_0049838d;
+                                    continue;
                                 /*
                                   candidate is moat or stairs OR not sea, border (edge), rocky, wall or
                                   gatehouse, building, tree, rivere, crenel, farm field, moat
@@ -159,14 +156,14 @@ namespace Map {
                                     } else {
                                         if ((_tType != OpenSHC::Map::Buildings::BT_GATEHOUSELARGE)
                                             && (_tType != OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))
-                                            goto LAB_0049838d;
+                                            continue;
                                         _tDiff = -90;
                                     }
                                     /*
                                       test if high difference is within margin
                                      */
                                     if (_tHeight + _tDiff > _cHeight + 0x10 || _tHeight + _tDiff < _cHeight - 0x10)
-                                        goto LAB_0049838d;
+                                        continue;
                                 }
                             }
                             /*
@@ -189,10 +186,7 @@ namespace Map {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
-                    LAB_0049838d:
-                        _direction = _direction + 1;
-                        paiVar4 = (int (*)[8])(*paiVar4 + 1);
-                    } while (_direction < 8);
+                    }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a10 <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
