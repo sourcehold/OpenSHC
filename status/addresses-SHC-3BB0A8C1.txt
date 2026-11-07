@@ -39385,7 +39385,7 @@ SHC_3BB0A8C1_0x004F9220 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F93E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F94A0 | 81.0% | Style pass, asm differs
+SHC_3BB0A8C1_0x004F94A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F9590 | 62.5% | natural x/y, regalloc differs
 
@@ -41095,15 +41095,15 @@ SHC_3BB0A8C1_0x004FC7C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FC810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FC9E0 | 87.5% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FC9E0 | 92.9% | asm macro via this, resolvers
 
-SHC_3BB0A8C1_0x004FDB00 | 85.3% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FDB00 | 89.2% | asm macro via this, resolvers
 
 SHC_3BB0A8C1_0x004FF080 | 85.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FF870 | 85.2% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FF870 | 90.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FF990 | 77.2% | Style pass, asm differs
 
@@ -41565,7 +41565,7 @@ SHC_3BB0A8C1_0x00501CD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00501D90 | 53.2% | const 1 not pooled in ebx
 
-SHC_3BB0A8C1_0x00501F50 | 35.6% | asm macro, regalloc differs
+SHC_3BB0A8C1_0x00501F50 | 43.7% | asm macro, regalloc differs
 
 SHC_3BB0A8C1_0x00501FE0 | 0.0% | Pending
 
@@ -42087,9 +42087,9 @@ SHC_3BB0A8C1_0x00506AD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00506BD0 | 99.5% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00506D40 | 97.6% | word load of type; GL
+SHC_3BB0A8C1_0x00506D40 | 99.2% | word load of type; GL
 
-SHC_3BB0A8C1_0x00506E10 | 98.2% | word load of type; GL
+SHC_3BB0A8C1_0x00506E10 | 99.4% | word load of type; GL
 
 SHC_3BB0A8C1_0x00506F40 | 99.4% | setupBuildingData arg regalloc
 
@@ -44729,7 +44729,7 @@ SHC_3BB0A8C1_0x00511DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005120C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00512100 | 89.5% | Style pass, asm differs
+SHC_3BB0A8C1_0x00512100 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00512180 | 0.0% | Pending
 
@@ -44741,7 +44741,7 @@ SHC_3BB0A8C1_0x005127D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00512920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00512940 | 92.5% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x00512940 | 92.8% | asm macro via this, resolvers
 
 SHC_3BB0A8C1_0x00514480 | 100.0% | Reimplemented
 
