@@ -34,11 +34,12 @@ namespace Map {
         if (buildingID == 0) {
             return 0;
         }
-        if (playerID != 0 && DAT_BuildingsState::instance.buildings[buildingID].owner != playerID) {
+        int const building = buildingID;
+        if (playerID != 0 && DAT_BuildingsState::instance.buildings[building].owner != playerID) {
             return 0;
         }
 
-        switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
+        switch (DAT_BuildingsState::instance.buildings[building].buildingType) {
         case OpenSHC::Map::Buildings::BT_STONEKEEP:
         case OpenSHC::Map::Buildings::BT_STRONGHOLD:
         case OpenSHC::Map::Buildings::BT_KEEPFOUR:
@@ -49,31 +50,39 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_TOWER4:
         case OpenSHC::Map::Buildings::BT_TOWER5:
             for (int direction = 0; direction < 8; direction++) {
-                if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::
-                                                instance.tileTranslationMatrix_YComponent[tile]][direction]
+                if ((short)this->BuildingLayer[DAT_TileMapState::instance
+                                                   .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                           .tileTranslationMatrix_YComponent[tile]][direction]
                         + tile]
-                    != buildingID) {
+                    != building) {
                     return 0;
                 }
             }
             return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
         case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
         case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL: {
-            int firstDirection = 0;
-            if (DAT_BuildingsState::instance.buildings[buildingID].buildingVariation == 0x50) {
+            /* the second direction is set in each arm, as in the original */
+            int firstDirection;
+            int secondDirection;
+            if (DAT_BuildingsState::instance.buildings[building].buildingVariation == 0x50) {
                 firstDirection = 2;
+                secondDirection = firstDirection + 4;
+            } else {
+                firstDirection = 0;
+                secondDirection = firstDirection + 4;
             }
-            int secondDirection = firstDirection + 4;
-            if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::
-                                            instance.tileTranslationMatrix_YComponent[tile]][firstDirection]
+            if ((short)this->BuildingLayer[DAT_TileMapState::instance
+                                               .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                       .tileTranslationMatrix_YComponent[tile]][firstDirection]
                     + tile]
-                != buildingID) {
+                != building) {
                 return 0;
             }
-            if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::
-                                            instance.tileTranslationMatrix_YComponent[tile]][secondDirection]
+            if ((short)this->BuildingLayer[DAT_TileMapState::instance
+                                               .directionTranslationMatrix[DAT_ViewportRenderState::instance
+                                                       .tileTranslationMatrix_YComponent[tile]][secondDirection]
                     + tile]
-                != buildingID) {
+                != building) {
                 return 0;
             }
             return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
