@@ -44,7 +44,7 @@ namespace UI {
         void GameLost::MenuView_GameLost_Prepare()
         {
             DAT_GameCore::instance.gameDuration = timeGetTime() - DAT_GameCore::instance.timeSum_2;
-            INT_00ed279c::instance = 0;
+            INT_00ed279c::instance = FALSE;
             DAT_FinalResultsOrderByColumn::instance = 0;
             DAT_00eb9af8::instance = 0;
             CHAR_00eb0e44::instance = 0;
@@ -85,12 +85,12 @@ namespace UI {
                         && DAT_GameCore::instance.missionNumber1to20 <= 10) {
                         // "arabian_lose.bik"
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                            DAT_BinkControlState::ptr)(0, (char*)s_arabian_lose_bik_005aaf04, 0, 0,
+                            DAT_BinkControlState::ptr)(0, s_arabian_lose_bik_005aaf04, 0, 0,
                             DAT_MenuHandlerState::instance.x + 80, DAT_MenuHandlerState::instance.y + 60, 2);
                     } else {
                         // "crusader_lose.bik"
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                            DAT_BinkControlState::ptr)(0, (char*)s_crusader_lose_bik_005aaef0, 0, 0,
+                            DAT_BinkControlState::ptr)(0, s_crusader_lose_bik_005aaef0, 0, 0,
                             DAT_MenuHandlerState::instance.x + 80, DAT_MenuHandlerState::instance.y + 60, 2);
                     }
                 } else if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::getLordTypeForPlayer,
@@ -98,12 +98,12 @@ namespace UI {
                     == 1) {
                     // "arabian_lose.bik"
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                        DAT_BinkControlState::ptr)(0, (char*)s_arabian_lose_bik_005aaf04, 0, 0,
+                        DAT_BinkControlState::ptr)(0, s_arabian_lose_bik_005aaf04, 0, 0,
                         DAT_MenuHandlerState::instance.x + 80, DAT_MenuHandlerState::instance.y + 60, 2);
                 } else {
                     // "crusader_lose.bik"
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                        DAT_BinkControlState::ptr)(0, (char*)s_crusader_lose_bik_005aaef0, 0, 0,
+                        DAT_BinkControlState::ptr)(0, s_crusader_lose_bik_005aaef0, 0, 0,
                         DAT_MenuHandlerState::instance.x + 80, DAT_MenuHandlerState::instance.y + 60, 2);
                 }
             }

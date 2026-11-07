@@ -46,14 +46,14 @@ namespace UI {
                     if (!DAT_MainMenuSwingSwordBool::instance) {
                         // "richard_ambient.bik"
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                            DAT_BinkControlState::ptr)(0, (char*)s_richard_ambient_bik_005a1fe4, 0, 0,
+                            DAT_BinkControlState::ptr)(0, s_richard_ambient_bik_005a1fe4, 0, 0,
                             DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 508,
                             DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 22, 0);
                     }
                     if (DAT_MainMenuSwingSwordBool::instance == 1) {
                         // "richard_swordswing.bik"
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK,
-                            DAT_BinkControlState::ptr)(0, (char*)s_richard_swordswing_bik_005a1fc4, 0, 0,
+                            DAT_BinkControlState::ptr)(0, s_richard_swordswing_bik_005a1fc4, 0, 0,
                             DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 508,
                             DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 22, 0);
                     }
