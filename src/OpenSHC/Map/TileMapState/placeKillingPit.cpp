@@ -48,14 +48,15 @@ namespace Map {
             this->BuildingWasLayer[tile] = (uchar)(short)buildingType;
             if ((short)buildingType != 0x43) {
                 /* bug:fixme: a pit dug in grass comes back as thick scrub, not as the terrain it replaced */
-                Logic2 terrain;
-                if (grassOrScrub == 0) {
-                    terrain = OpenSHC::Map::LogicHelpers::L2_EARTH_AND_STONES;
+                if (grassOrScrub != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(playerID, tile,
+                        this->buildingY + y, 3, OpenSHC::Map::LogicHelpers::L_NONE,
+                        OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB);
                 } else {
-                    terrain = OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(playerID, tile,
+                        this->buildingY + y, 3, OpenSHC::Map::LogicHelpers::L_NONE,
+                        OpenSHC::Map::LogicHelpers::L2_EARTH_AND_STONES);
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(
-                    playerID, tile, this->buildingY + y, 3, OpenSHC::Map::LogicHelpers::L_NONE, terrain);
             }
             index++;
             this->ChangedLayer[tile] = 2;
@@ -64,8 +65,8 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
-            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                < DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
             && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
