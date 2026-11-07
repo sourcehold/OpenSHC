@@ -8,12 +8,16 @@
 
 #pragma once
 
+#include "OpenSHC/Game/GameModeInt.hpp"
+
 // GLOBAL: STRONGHOLDCRUSADER 0x00EB9B58
-// StructResolver::Instance<unsigned int,15440728>::instance
+// StructResolver::Instance<int,15440728>::instance
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00EB9B58) DAT_StoredGameMode;
+using OpenSHC::Game::GameModeInt;
+
+MACRO_STRUCT_RESOLVER(GameModeInt, false, Address::SHC_3BB0A8C1_0x00EB9B58) DAT_StoredGameMode;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EB9B58);
