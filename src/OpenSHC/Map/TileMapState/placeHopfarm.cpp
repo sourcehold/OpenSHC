@@ -24,14 +24,13 @@ namespace Map {
     void TileMapState::placeHopfarm(
         int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7)
     {
-        /* unkHopFarmVariation is typed as a byte in the header but read and written as an int */
         int index = 0;
         int const buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             param_1, param_2, param_3, param_7, (BuildingType)(short)param_4, 3, param_1, param_6);
         this->placedBuildingID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(param_2, param_3, 9);
-        int const variation = *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation;
+        int const variation = DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation;
         for (int i = 0; i < 24; i++) {
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]
                 = DAT_ViewportRenderState::instance
@@ -64,7 +63,7 @@ namespace Map {
                           + param_3]
                       .addXgetTile
                 + DAT_TerrainDefinedData::instance
-                      .HopFarmProperty1[*(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation][i]
+                      .HopFarmProperty1[DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation][i]
                       .x
                 + param_2;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
@@ -73,8 +72,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
                 DAT_TerrainDefinedData::instance
-                        .HopFarmProperty1[*(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation]
-                                         [i]
+                        .HopFarmProperty1[DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation][i]
                         .y
                     + param_3,
                 tile);
@@ -83,10 +81,10 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
-        *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation
-            = *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation + 1;
-        if (*(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation > 1) {
-            *(int*)&DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation = 0;
+        DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation
+            = DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation + 1;
+        if (DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation > 1) {
+            DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation = 0;
         }
         if (param_1 == DAT_GameSynchronyState::instance.currentPlayerSlotID
             && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount

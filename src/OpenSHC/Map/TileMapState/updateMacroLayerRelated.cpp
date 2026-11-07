@@ -80,7 +80,7 @@ namespace Map {
                             if ((char)this->ChangedLayer[this->DAT_SomeTile] == 0) {
                                 continue;
                             }
-                            oldMacro = (short)this->MacroLayer[this->DAT_SomeTile];
+                            oldMacro = this->MacroLayer[this->DAT_SomeTile];
                             if (clearMacroFirst != 0) {
                                 this->MacroLayer[this->DAT_SomeTile] = 0;
                             }
@@ -128,7 +128,7 @@ namespace Map {
                             } else {
                                 this->MacroLayer[this->DAT_SomeTile] = 0x800;
                             }
-                            if (oldMacro != (short)this->MacroLayer[this->DAT_SomeTile]) {
+                            if (oldMacro != this->MacroLayer[this->DAT_SomeTile]) {
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                                     &DAT_PathFindingState::instance)(1, this->DAT_SomeX, this->DAT_SomeY);
@@ -156,7 +156,7 @@ namespace Map {
                             this->DAT_SomeTile
                                 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                     &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY);
-                            if ((short)this->MacroLayer[this->DAT_SomeTile] != 0x800) {
+                            if (this->MacroLayer[this->DAT_SomeTile] != 0x800) {
                                 continue;
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
@@ -168,7 +168,7 @@ namespace Map {
                                 offsetTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
-                                if ((short)this->MacroLayer[offsetTile] != 0x800) {
+                                if (this->MacroLayer[offsetTile] != 0x800) {
                                     break;
                                 }
                             }
@@ -183,8 +183,8 @@ namespace Map {
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
                                 this->MacroLayer[offsetTile] = 0x10;
                                 /* the original reads MacroLayer signed here (movsx); the header declares it ushort */
-                                (short&)this->MacroLayer[offsetTile] += scanIndex << 6;
-                                (short&)this->MacroLayer[offsetTile] += randomVal * 0x1000;
+                                this->MacroLayer[offsetTile] += scanIndex << 6;
+                                this->MacroLayer[offsetTile] += randomVal * 0x1000;
                             }
                         }
                     }
@@ -209,7 +209,7 @@ namespace Map {
                             this->DAT_SomeTile
                                 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                     &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY);
-                            if ((short)this->MacroLayer[this->DAT_SomeTile] != 0x800) {
+                            if (this->MacroLayer[this->DAT_SomeTile] != 0x800) {
                                 continue;
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
@@ -221,7 +221,7 @@ namespace Map {
                                 offsetTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
-                                if ((short)this->MacroLayer[offsetTile] != 0x800) {
+                                if (this->MacroLayer[offsetTile] != 0x800) {
                                     break;
                                 }
                             }
@@ -236,8 +236,8 @@ namespace Map {
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
                                 this->MacroLayer[offsetTile] = 8;
                                 /* the original reads MacroLayer signed here (movsx); the header declares it ushort */
-                                (short&)this->MacroLayer[offsetTile] += scanIndex << 6;
-                                (short&)this->MacroLayer[offsetTile] += randomVal * 0x1000;
+                                this->MacroLayer[offsetTile] += scanIndex << 6;
+                                this->MacroLayer[offsetTile] += randomVal * 0x1000;
                             }
                         }
                     }
@@ -262,7 +262,7 @@ namespace Map {
                             this->DAT_SomeTile
                                 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                     &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY);
-                            if ((short)this->MacroLayer[this->DAT_SomeTile] != 0x800) {
+                            if (this->MacroLayer[this->DAT_SomeTile] != 0x800) {
                                 continue;
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
@@ -274,7 +274,7 @@ namespace Map {
                                 offsetTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
-                                if ((short)this->MacroLayer[offsetTile] != 0x800) {
+                                if (this->MacroLayer[offsetTile] != 0x800) {
                                     break;
                                 }
                             }
@@ -289,8 +289,8 @@ namespace Map {
                                         &DAT_ViewportRenderState::instance)(tileX + offsetX, this->DAT_SomeY + tableY);
                                 this->MacroLayer[offsetTile] = 4;
                                 /* the original reads MacroLayer signed here (movsx); the header declares it ushort */
-                                (short&)this->MacroLayer[offsetTile] += scanIndex << 6;
-                                (short&)this->MacroLayer[offsetTile] += randomVal * 0x1000;
+                                this->MacroLayer[offsetTile] += scanIndex << 6;
+                                this->MacroLayer[offsetTile] += randomVal * 0x1000;
                             }
                         }
                     }
@@ -315,7 +315,7 @@ namespace Map {
                             this->DAT_SomeTile
                                 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                     &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY);
-                            if ((short)this->MacroLayer[this->DAT_SomeTile] != 0x800) {
+                            if (this->MacroLayer[this->DAT_SomeTile] != 0x800) {
                                 continue;
                             }
                             this->MacroLayer[this->DAT_SomeTile] = 2;

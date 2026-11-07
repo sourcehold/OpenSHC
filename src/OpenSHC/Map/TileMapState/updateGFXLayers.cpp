@@ -119,9 +119,9 @@ namespace Map {
                             if (luminescence < 2) {
                                 luminescence = 2;
                             }
-                            macroSizeType = (short)this->MacroLayer[this->DAT_SomeTile] & 0x3f;
-                            macroMid = ((short)this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
-                            macroTop = ((short)this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
+                            macroSizeType = this->MacroLayer[this->DAT_SomeTile] & 0x3f;
+                            macroMid = (this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
+                            macroTop = (this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
                             macroTop = macroTop & 3;
                             /* the mask makes MSVC load the dword before the address, as the original does */
                             this->PillarGFXLayer[this->DAT_SomeTile]

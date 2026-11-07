@@ -73,8 +73,8 @@ namespace Map {
             }
         }
 
-        if ((int)this->buildingHeightLimit >= 0) {
-            if ((int)height > (int)this->buildingHeightLimit) {
+        if (this->buildingHeightLimit >= 0) {
+            if ((int)height > this->buildingHeightLimit) {
                 if (commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
                     this->placementWarning = 1;
                     return 1;
@@ -92,10 +92,10 @@ namespace Map {
                 }
                 return 1;
             }
-        } else if ((int)height < -(int)this->buildingHeightLimit) {
+        } else if ((int)height < -this->buildingHeightLimit) {
             return 1;
         }
-        if ((int)height > (int)this->buildingMaxHeightDifference + this->buildingMinHeight) {
+        if ((int)height > this->buildingMaxHeightDifference + this->buildingMinHeight) {
             return 1;
         }
         if ((logic & L_PLAIN2_AND_PITCH) != 0 && commandBuildingType == OpenSHC::Commands::M_MAPPER_PITCH_DITCH) {

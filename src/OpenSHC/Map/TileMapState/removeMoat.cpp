@@ -19,7 +19,7 @@ namespace Map {
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress - 1;
         // nested form: the original keeps the FALSE return as the trailing block
-        if ((char)this->moats[moatID].fillProgress <= 0) {
+        if (this->moats[moatID].fillProgress <= 0) {
             this->HeightLayer[this->moats[moatID].tile] = 8;
             this->LogicLayer[this->moats[moatID].tile] = this->LogicLayer[this->moats[moatID].tile] & ~L_MOAT;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,

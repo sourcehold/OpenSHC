@@ -18,7 +18,7 @@ namespace Map {
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress + 1;
         // nested form: the original keeps the FALSE return as the trailing block
-        if ((char)this->moats[moatID].fillProgress >= 4) {
+        if (this->moats[moatID].fillProgress >= 4) {
             int tile = this->moats[moatID].tile;
             this->moats[moatID].someCountDown = 0;
             this->moats[moatID].fillProgress = 4;
