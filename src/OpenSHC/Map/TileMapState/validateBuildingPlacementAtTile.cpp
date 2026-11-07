@@ -22,7 +22,8 @@ namespace Map {
         this->buildingPlacementFail = FALSE;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         int buildingID = this->BuildingLayer[tile];
-        if (buildingID < 1 || (DAT_BuildingsState::instance.buildings[buildingID].owner != playerID && playerID != 0)) {
+        if (buildingID <= 0
+            || (DAT_BuildingsState::instance.buildings[buildingID].owner != playerID && playerID != 0)) {
             this->buildingPlacementFail = TRUE;
         }
         if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0 && this->BuildingLayer[tile] == 0) {
