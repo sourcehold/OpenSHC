@@ -1,10 +1,10 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -25,8 +25,8 @@ namespace Map {
     void TileMapState::useLevelBrush(int tile, uint y, uint brush, int param_4)
     {
         int baseTile = tile;
-        uint baseY = y;
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
+        uint baseY = y;
 
         int highest = 0;
         /* the original reuses the brush parameter to hold the lowest height seen */
@@ -104,8 +104,35 @@ namespace Map {
             this->DAT_SomeTile = brushTile;
             this->DAT_SomeY = brushY;
 
-            /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
-            MACRO_MARK_CHANGED_NEIGHBOURS()
+            /* handwritten assembly in the original: mark this tile and its eight neighbours changed,
+               reading the global instance rather than this (MACRO_MARK_CHANGED_NEIGHBOURS without mov ecx, this) */
+            (void)&DAT_TileMapState::instance; /* instantiates the resolver instance the asm names */
+            // clang-format off
+            __asm {
+                mov esi, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_ChangedLayer
+                mov eax, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeTile
+                add esi, eax
+                push esi
+                mov edx, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix
+                mov eax, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeY
+                shl eax, 0x5
+                add edx, eax
+                mov byte ptr [esi + 0x1], 0x2
+                mov byte ptr [esi - 0x1], 0x2
+                mov byte ptr [esi], 0x2
+                mov ecx, dword ptr [edx]
+                add esi, ecx
+                mov byte ptr [esi - 0x1], 0x2
+                mov byte ptr [esi + 0x1], 0x2
+                mov byte ptr [esi], 0x2
+                mov ecx, dword ptr [edx + 0x10]
+                pop esi
+                add esi, ecx
+                mov byte ptr [esi - 0x1], 0x2
+                mov byte ptr [esi + 0x1], 0x2
+                mov byte ptr [esi], 0x2
+            }
+            // clang-format on
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(brushY, brushTile);
         }
