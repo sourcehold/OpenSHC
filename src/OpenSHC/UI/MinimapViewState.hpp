@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Map/MapHeaderSection4IntStruct.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
 
@@ -16,6 +17,7 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::Map::MapHeaderSection4IntStruct;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
@@ -37,7 +39,7 @@ namespace UI {
         int oneOrTwo; // 0x00000030 length: 4
         undefined4 field_0x34; // 0x00000034 length: 4
         undefined4 field_0x38; // 0x00000038 length: 4
-        undefined4 minimapClickEnabled; // 0x0000003C length: 4
+        BOOLEnum minimapClickEnabled; // 0x0000003C length: 4
         int someMiniMapCounterTill4; // 0x00000040 length: 4
         ushort field_0x44[80000]; // 0x00000044 length: 160000
         ushort minimapPixelBuffer[80000]; // 0x00027144 length: 160000
