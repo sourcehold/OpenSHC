@@ -1,5 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
+
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -9,17 +11,11 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00497690
         void PathFindingState::findPositionForGivenClimbArea(int area, uint ySpace, uint y)
         {
-            if (ySpace > 399 || y > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
                 return;
             }
             int _baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;

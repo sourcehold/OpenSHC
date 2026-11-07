@@ -19,10 +19,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A16C0
         int PathFindingState::tracePathToFriendlyDefensesAndReturnTileUnk(int playerID, uint x, uint y)
         {
-            if (399 < x || 399 < y) {
+            if (MC_MAP_XY_LIMIT_MIN_1 < x || MC_MAP_XY_LIMIT_MIN_1 < y) {
                 return 0;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == '\0') {
                 return 0;
             }
             this->calculations += 1;
@@ -30,7 +30,7 @@ namespace Map {
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0,
                     (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
@@ -47,13 +47,13 @@ namespace Map {
                 if (_candidateTile < 0) {
                     return 0;
                 }
-                if (Map::MC_MAP_TILES_COUNT <= _candidateTile) {
+                if (MC_MAP_TILES_COUNT <= _candidateTile) {
                     return 0;
                 }
                 int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_candidateTile];
-                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
+                if (MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                     return 0;
                 }
                 byte _link = DAT_TileMapState::instance.PathLinkageLayer[_candidateTile];
@@ -104,14 +104,14 @@ namespace Map {
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex += 1;
-                            if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                            if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
                 }
                 this->searchQueue.readIndex += 1;
-                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

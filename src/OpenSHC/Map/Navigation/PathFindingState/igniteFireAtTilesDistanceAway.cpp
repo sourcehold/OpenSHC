@@ -16,12 +16,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A2DD0
         BOOLEnum PathFindingState::igniteFireAtTilesDistanceAway(int tileUnk, int maxDistance, int playerID)
         {
@@ -32,7 +26,7 @@ namespace Map {
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0,
                     (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             int _y = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
@@ -47,12 +41,12 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 tileUnk = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (Map::MC_MAP_TILES_COUNT - 1 < (uint)tileUnk)
+                if (MC_MAP_TILES_COUNT - 1 < (uint)tileUnk)
                     break;
                 int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tileUnk];
-                if ((Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance)
+                if ((MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance)
                     || ((int)this->searchQueue.currentDistance > maxDistance))
                     break;
                 _tiles[_index] = tileUnk;
@@ -77,14 +71,14 @@ namespace Map {
                             + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                         this->searchQueue.writeIndex += 1;
-                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                        if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
                 this->searchQueue.readIndex += 1;
-                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

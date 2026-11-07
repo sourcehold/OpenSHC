@@ -15,10 +15,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          Executes a flood file with logic layer 0x10 to indicate impenetrable land   decompilerscript: committed:
-          2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A0E50
         void PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes()
         {
@@ -29,7 +25,7 @@ namespace Map {
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0,
                     (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
@@ -43,7 +39,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 uint _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (Map::MC_MAP_TILES_COUNT - 1 < _tile) {
+                if (MC_MAP_TILES_COUNT - 1 < _tile) {
                     return;
                 }
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
@@ -68,14 +64,14 @@ namespace Map {
                             + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidateTile;
                         this->searchQueue.writeIndex += 1;
-                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                        if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
                 this->searchQueue.readIndex += 1;
-                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

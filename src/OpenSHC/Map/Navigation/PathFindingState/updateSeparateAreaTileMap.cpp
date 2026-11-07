@@ -19,15 +19,6 @@ namespace Map {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Restarted to delay deadcode elimination for space: ram
-         */
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004995E0
         BOOLEnum PathFindingState::updateSeparateAreaTileMap(int forceUpdate)
         {
@@ -73,7 +64,7 @@ namespace Map {
             forceUpdate = 1;
             int _areaID = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TileMapState::instance.PathConnectionLayer), '\0',
+                sizeof(DAT_TileMapState::instance.PathConnectionLayer), 0,
                 (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 4000, '\0', (void*)((int)(this->zoneSizesArray)));
@@ -83,7 +74,7 @@ namespace Map {
             int* _rowEnd;
             int _first = 0;
             _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
-            for (; _first < Map::MC_MAP_TILES_COUNT; _first = _first + 1) {
+            for (; _first < MC_MAP_TILES_COUNT; _first = _first + 1) {
                 if (_first >= *_rowEnd) {
                     _row += 1;
                     _rowEnd += 3;
