@@ -67,7 +67,7 @@ namespace UI {
             void* address2; // 0x00000088 length: 4
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
             byte* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
-            void* bitmapsFaces_0x94; // 0x00000094 length: 4
+            ushort (*bitmapsFaces_0x94)[66][64]; // 0x00000094 length: 4
             int bitmapFaceSizes[36]; // 0x00000098 length: 144
             int field_0x128; // 0x00000128 length: 4
             int field_0x12c; // 0x0000012C length: 4
