@@ -35,33 +35,23 @@ namespace Map {
     void TileMapState::checkBuildingCanBePlacedHere(
         int playerID, uint x, uint y__fertileLandCount, MappersEnum commandBuildingType, int buildingSize)
     {
-        uint uVar1;
-        byte bVar2;
         BuildingType _buildingType;
-        int _buildRange;
-        BOOLEnum BVar3;
-        int iVar4;
-        uint uVar5;
-        int iVar6;
-        int iVar7;
         MappersEnum _commandBuildingType;
-        int iVar8;
-        int* piVar9;
-        int bVar10;
-        int bVar11;
+        int noEnemyNearby;
+        int siteClear;
         int _grassCount;
         int _distance;
         int _range;
         int _boulderCount;
         int _ironCount;
         int _oilCount;
-        int local_4;
+        int keepRangeBonus;
         uint _x;
         uint _y;
         /* the parameter carries the y position in, then is reused as a tile counter */
         _y = y__fertileLandCount;
         _x = x;
-        local_4 = 0;
+        keepRangeBonus = 0;
         int sizeDefaulted = 0;
         if (buildingSize < 0) {
             buildingSize = 2;
@@ -129,128 +119,7 @@ namespace Map {
         y__fertileLandCount = 0;
         _grassCount = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::storeMinAndMaxHeightOfArea, this)(x, _y, buildingSize);
-        if (sizeDefaulted != 0)
-            goto switchD_0050397c_caseD_33;
-        if (0x138 < (int)_commandBuildingType) {
-            if (325 < (int)_commandBuildingType) {
-                if ((int)_commandBuildingType < 328)
-                    goto switchD_0050397c_caseD_33;
-                if (_commandBuildingType == 358)
-                    goto switchD_0050397c_caseD_be;
-            }
-        switchD_0050397c_caseD_35:
-            if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)
-                && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT)) {
-                bVar10 = DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY;
-                bVar11 = true;
-                x = 0;
-                do {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                        x, buildingSize);
-                    BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                        DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y,
-                        (int)((-(uint)bVar10 & 0xfffffff1) + 0x1e));
-                    if (BVar3 != FALSE) {
-                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
-                        bVar11 = false;
-                        break;
-                    }
-                    x = x + 1;
-                } while ((int)x < this->constructionTileCount);
-                BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
-                    DAT_PathFindingState::ptr)(_x, _y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5);
-                if (BVar3 == FALSE) {
-                    if (bVar11)
-                        goto LAB_00503d46;
-                } else {
-                    this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x15);
-                }
-            LAB_00503d3c:
-                this->buildingPlacementFail = TRUE;
-            }
-            goto LAB_00503d46;
-        }
-        if (_commandBuildingType == OpenSHC::Commands::M_MAPPER_DOG_CAGE) {
-            if (9 < DAT_GameState::instance.playerDataArray[playerID].dogCageCount) {
-                this->buildingPlacementFail = TRUE;
-                this->buildingPlacementFailReason = ((BuildingFailReasonEnum)1000);
-                return;
-            }
-        switchD_0050397c_caseD_62:
-            local_4 = 5;
-        switchD_0050397c_caseD_64:
-            if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
-                iVar8 = 0;
-                do {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                        iVar8, buildingSize);
-                    iVar4
-                        = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
-                            DAT_PathFindingState::ptr)(
-                            playerID, (int)(this->buildingX + x), (int)(this->buildingY + _y), 7, -1, -1, -1);
-                    if (iVar4 != 0)
-                        goto LAB_005039d6;
-                    iVar8 = iVar8 + 1;
-                } while (iVar8 < this->constructionTileCount);
-            } else if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
-                if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                    _distance = 30;
-                    _range = 30;
-                } else {
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID);
-                    _distance = 15;
-                    _range = 7;
-                }
-                x = 0;
-                do {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                        x, buildingSize);
-                    BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                        DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y, _distance);
-                    if (BVar3 != FALSE) {
-                    LAB_00503b32:
-                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
-                    LAB_00503b48:
-                        bVar11 = false;
-                        break;
-                    }
-                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                        iVar8 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
-                            DAT_PathFindingState::ptr)(
-                            playerID, (int)(this->buildingX + _x), (int)(this->buildingY + _y), _range, -1, -1, -1);
-                        if (iVar8 != 0)
-                            goto LAB_00503b32;
-                        _buildRange
-                            = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
-                        iVar8 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
-                            DAT_PathFindingState::ptr)(
-                            playerID, this->buildingX + _x, this->buildingY + _y, _buildRange + local_4);
-                        if (iVar8 == 0)
-                            goto LAB_00503b11;
-                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
-                        goto LAB_00503b48;
-                    }
-                LAB_00503b11:
-                    x = x + 1;
-                    bVar11 = true;
-                } while ((int)x < this->constructionTileCount);
-                BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
-                    DAT_PathFindingState::ptr)(_x, _y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5);
-                if (BVar3 == FALSE) {
-                    if (bVar11)
-                        goto LAB_00503d46;
-                } else {
-                    this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x15);
-                }
-                this->buildingPlacementFail = TRUE;
-                if (this->buildingPlacementFailReason == OpenSHC::Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
-                    this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
-                }
-            }
-        } else {
+        if (sizeDefaulted == 0) {
             switch (_commandBuildingType) {
             case OpenSHC::Commands::M_MAPPER_WOODSMAN:
             case OpenSHC::Commands::M_MAPPER_OXENBASE:
@@ -264,29 +133,43 @@ namespace Map {
             case OpenSHC::Commands::M_MAPPER_IRON_MINE:
             case OpenSHC::Commands::M_MAPPER_PITCH_WORKINGS:
             case OpenSHC::Commands::M_MAPPER_QUARRYPILE:
-                goto switchD_0050397c_caseD_33;
+            case OpenSHC::Commands::M_MAPPER_POND1:
+            case OpenSHC::Commands::M_MAPPER_POND2_SMALL:
+            case OpenSHC::Commands::M_MAPPER_POND3_LARGE1:
+            case OpenSHC::Commands::M_MAPPER_POND4_LARGE2:
+                // resource buildings and ponds skip the enemy and suitability checks
+                goto tileChecks;
             case OpenSHC::Commands::M_MAPPER_STORES:
             case OpenSHC::Commands::M_MAPPER_GRANARY:
             case OpenSHC::Commands::M_MAPPER_ARMOURY:
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                    iVar8 = 0;
+                    int i = 0;
                     do {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                            iVar8, buildingSize);
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                            DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + _y, 3);
-                        if (BVar3 != FALSE)
-                            goto LAB_005039d6;
-                        iVar8 = iVar8 + 1;
-                    } while (iVar8 < this->constructionTileCount);
+                            i, buildingSize);
+                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
+                                DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + _y, 3)
+                            != FALSE) {
+                            this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                            this->buildingPlacementFail = TRUE;
+                            break;
+                        }
+                        i = i + 1;
+                    } while (i < this->constructionTileCount);
                 }
                 break;
-            default:
-                goto switchD_0050397c_caseD_35;
+            case OpenSHC::Commands::M_MAPPER_DOG_CAGE:
+                if (DAT_GameState::instance.playerDataArray[playerID].dogCageCount >= 10) {
+                    this->buildingPlacementFail = TRUE;
+                    this->buildingPlacementFailReason = ((BuildingFailReasonEnum)1000);
+                    return;
+                }
+                // fall through
             case OpenSHC::Commands::M_MAPPER_KILLING_PIT:
             case OpenSHC::Commands::M_MAPPER_PITCH_DITCH:
             case OpenSHC::Commands::M_MAPPER_DRAWBRIDGE:
-                goto switchD_0050397c_caseD_62;
+                keepRangeBonus = 5;
+                // fall through
             case OpenSHC::Commands::M_MAPPER_GATEHOUSE:
             case OpenSHC::Commands::M_MAPPER_GATE_MAIN:
             case OpenSHC::Commands::M_MAPPER_GATE_INNER:
@@ -307,114 +190,212 @@ namespace Map {
             case OpenSHC::Commands::M_MAPPER_GATE_STONE1B:
             case OpenSHC::Commands::M_MAPPER_GATE_STONE2A:
             case OpenSHC::Commands::M_MAPPER_GATE_STONE2B:
-                goto switchD_0050397c_caseD_64;
+                if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
+                    int i = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                            i, buildingSize);
+                        if (MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
+                                DAT_PathFindingState::ptr)(
+                                playerID, (int)(this->buildingX + x), (int)(this->buildingY + _y), 7, -1, -1, -1)
+                            != 0) {
+                            this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                            this->buildingPlacementFail = TRUE;
+                            break;
+                        }
+                        i = i + 1;
+                    } while (i < this->constructionTileCount);
+                } else if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
+                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
+                        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                            DAT_GameSynchronyState::ptr)(playerID);
+                        _distance = 15;
+                        _range = 7;
+                    } else {
+                        _distance = 30;
+                        _range = 30;
+                    }
+                    x = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                            x, buildingSize);
+                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
+                                DAT_PathFindingState::ptr)(
+                                playerID, this->buildingX + _x, this->buildingY + _y, _distance)
+                            != FALSE) {
+                            this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                            siteClear = false;
+                            break;
+                        }
+                        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
+                            if (MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
+                                    DAT_PathFindingState::ptr)(playerID, (int)(this->buildingX + _x),
+                                    (int)(this->buildingY + _y), _range, -1, -1, -1)
+                                != 0) {
+                                this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                                siteClear = false;
+                                break;
+                            }
+                            if (MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
+                                    DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y,
+                                    MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)()
+                                        + keepRangeBonus)
+                                != 0) {
+                                this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
+                                siteClear = false;
+                                break;
+                            }
+                        }
+                        x = x + 1;
+                        siteClear = true;
+                    } while ((int)x < this->constructionTileCount);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
+                            DAT_PathFindingState::ptr)(
+                            _x, _y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
+                        != FALSE) {
+                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x15);
+                    } else if (siteClear) {
+                        break;
+                    }
+                    this->buildingPlacementFail = TRUE;
+                    if (this->buildingPlacementFailReason
+                        == OpenSHC::Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
+                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
+                    }
+                }
+                break;
             case OpenSHC::Commands::M_MAPPER_CATAPULT:
             case OpenSHC::Commands::M_MAPPER_TREBUCHET:
             case OpenSHC::Commands::M_MAPPER_SIEGE_TOWER:
             case OpenSHC::Commands::M_MAPPER_BATTERING_RAM:
             case OpenSHC::Commands::M_MAPPER_PORTABLE_SHIELD:
-            switchD_0050397c_caseD_be:
-                if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)
-                    && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT)) {
-                    iVar8 = 0;
+            case OpenSHC::Commands::M_MAPPER_ARAB_BALLISTA:
+                if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
+                    && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
+                    int i = 0;
                     do {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                            iVar8, buildingSize);
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                            DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + _y, 3);
-                        if (BVar3 != FALSE)
-                            goto LAB_005039d6;
-                        iVar8 = iVar8 + 1;
-                    } while (iVar8 < this->constructionTileCount);
+                            i, buildingSize);
+                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
+                                DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + _y, 3)
+                            != FALSE) {
+                            this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                            this->buildingPlacementFail = TRUE;
+                            break;
+                        }
+                        i = i + 1;
+                    } while (i < this->constructionTileCount);
                 }
+                break;
+            default:
+                if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
+                    && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
+                    int const distance
+                        = DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY ? 15 : 30;
+                    noEnemyNearby = true;
+                    x = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                            x, buildingSize);
+                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
+                                DAT_PathFindingState::ptr)(
+                                playerID, this->buildingX + _x, this->buildingY + _y, distance)
+                            != FALSE) {
+                            this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                            noEnemyNearby = false;
+                            break;
+                        }
+                        x = x + 1;
+                    } while ((int)x < this->constructionTileCount);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
+                            DAT_PathFindingState::ptr)(
+                            _x, _y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
+                        != FALSE) {
+                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x15);
+                        this->buildingPlacementFail = TRUE;
+                    } else if (!noEnemyNearby) {
+                        this->buildingPlacementFail = TRUE;
+                    }
+                }
+                break;
+            }
+            if (this->buildingPlacementFail == FALSE) {
+                int i = 0;
+                do {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                        i, buildingSize);
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
+                            DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y, 2)
+                        != 0) {
+                        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
+                        this->buildingPlacementFail = TRUE;
+                        break;
+                    }
+                    i = i + 1;
+                } while (i < this->constructionTileCount);
             }
         }
-    LAB_00503d46:
-        if (this->buildingPlacementFail == FALSE) {
-            iVar8 = 0;
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                    iVar8, buildingSize);
-                iVar4 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
-                    DAT_PathFindingState::ptr)(playerID, this->buildingX + _x, this->buildingY + _y, 2);
-                if (iVar4 != 0) {
-                    this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
-                    this->buildingPlacementFail = TRUE;
-                    break;
-                }
-                iVar8 = iVar8 + 1;
-            } while (iVar8 < this->constructionTileCount);
-        }
-    switchD_0050397c_caseD_33:
-        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_DRAWBRIDGE
-            && 0xc < this->buildingMaxHeight) {
+    tileChecks:
+        if ((short)commandBuildingType == OpenSHC::Commands::M_MAPPER_DRAWBRIDGE && this->buildingMaxHeight > 0xc) {
             this->buildingPlacementFail = TRUE;
         }
         x = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, buildingSize);
-            uVar5 = this->buildingY + _y;
-            if (399 < this->buildingX + _x) {
+            uint const tileX = this->buildingX + _x;
+            uint const tileY = this->buildingY + _y;
+            if (tileX > 399 || tileY > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
                 this->buildingPlacementFail = 2;
                 return;
             }
-            if (399 < uVar5) {
+            int const tile
+                = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + _x;
+            uint const logic = this->LogicLayer[tile];
+            if ((logic & 0x30) != 0) {
                 this->buildingPlacementFail = 2;
                 return;
             }
-            if (*(char*)(uVar5 * 400 + 0x21aec98 + this->buildingX + _x) == '\0') {
-                this->buildingPlacementFail = 2;
-                return;
-            }
-            iVar8 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile + this->buildingX + _x;
-            uVar5 = this->LogicLayer[iVar8];
-            if ((uVar5 & 0x30) != 0) {
-                this->buildingPlacementFail = 2;
-                return;
-            }
-            if ((uVar5 & 0x20000) != 0) {
+            if ((logic & 0x20000) != 0) {
                 _boulderCount = _boulderCount + 1;
             }
-            if ((uVar5 & 0x80000) != 0) {
+            if ((logic & 0x80000) != 0) {
                 _ironCount = _ironCount + 1;
             }
-            if ((int)uVar5 < 0) {
+            if ((int)logic < 0) {
                 _oilCount = _oilCount + 1;
             }
-            if ((uVar5 & 0x100000) == 0) {
-                bVar2 = this->Logic2Layer[iVar8];
-                if ((bVar2 & 0x10) != 0) {
-                    /*
-                      grass
-                     */
+            if ((logic & 0x100000) == 0) {
+                char const logic2 = this->Logic2Layer[tile];
+                if ((logic2 & 0x10) != 0) {
+                    // grass
                     y__fertileLandCount = y__fertileLandCount + 1;
                     _grassCount = _grassCount + 1;
                 }
-                if ((char)bVar2 < '\0') {
-                    /*
-                      thick scrub
-                     */
+                if (logic2 < 0) {
+                    // thick scrub
                     y__fertileLandCount = y__fertileLandCount + 1;
                     _grassCount = _grassCount + 1;
                 }
-                if ((bVar2 & 1) != 0) {
-                    /*
-                      scrub
-                     */
+                if ((logic2 & 1) != 0) {
+                    // scrub
                     y__fertileLandCount = y__fertileLandCount + 1;
                 }
             }
-            iVar8 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                iVar8, playerID, _commandBuildingType, 0);
-            if (iVar8 != 0) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                    tile, playerID, _commandBuildingType, 0)
+                != 0) {
                 this->buildingPlacementFail = TRUE;
             }
             x = x + 1;
         } while ((int)x < this->constructionTileCount);
-        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_CATTLEFARM
-            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_WHEATFARM
-            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_HOPSFARM
-            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
+        short const command = (short)commandBuildingType;
+        if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM || command == OpenSHC::Commands::M_MAPPER_WHEATFARM
+            || command == OpenSHC::Commands::M_MAPPER_HOPSFARM || command == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
             if ((int)y__fertileLandCount < this->constructionTileCount) {
                 this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x16);
                 this->buildingPlacementFail = TRUE;
@@ -424,471 +405,418 @@ namespace Map {
                 this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x17);
                 this->buildingPlacementFail = TRUE;
             }
-        } else {
-            if ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_QUARRY) {
-                if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP1
-                    || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP2
-                    || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_KEEP3) {
-                    buildingSize = (_commandBuildingType - OpenSHC::Commands::M_MAPPER_KEEP1) * 0x60 + 0xb491b8;
-                    commandBuildingType = OpenSHC::Commands::M_MAPPER_NULL;
-                    do {
-                        uVar5 = *(int*)(buildingSize + 4) + _y;
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(*(int*)buildingSize + _x, uVar5);
-                        if (BVar3 == FALSE) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar8 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile
-                            + *(int*)buildingSize + _x;
-                        if ((this->LogicLayer[iVar8] & 0x30) != 0) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar8 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar8, playerID, _commandBuildingType, 0);
-                        if (iVar8 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        buildingSize = buildingSize + 8;
-                        commandBuildingType = (MappersEnum)(commandBuildingType + OpenSHC::Commands::M_MAPPER_AREA);
-                    } while ((int)commandBuildingType < 3);
-                    iVar4 = (_commandBuildingType - OpenSHC::Commands::M_MAPPER_KEEP1) * 0x20;
-                    iVar6 = _x + *(int*)((int)DAT_TerrainDefinedData::ptr + iVar4 + 900);
-                    iVar8 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar4 + 904);
-                    x = 0;
-                    do {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 7);
-                        uVar5 = this->buildingY + _y + iVar8;
-                        uVar1 = this->buildingX + iVar6;
-                        if (399 < uVar1) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        if (399 < uVar5) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        if (*(char*)(uVar5 * 400 + 0x21aec98 + uVar1) == '\0') {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar7 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile + this->buildingX
-                            + iVar6;
-                        if ((this->LogicLayer[iVar7] & 0x30) != 0) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar7 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar7, playerID, _commandBuildingType, 0);
-                        if (iVar7 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        x = x + 1;
-                    } while ((int)x < this->constructionTileCount);
-                    iVar8 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar4 + 1000);
-                    iVar4 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar4 + 0x3e4) + _x;
-                    x = 0;
-                    while (true) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
-                        iVar6 = this->buildingX;
-                        uVar5 = this->buildingY + iVar8 + _y;
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(iVar4 + this->buildingX, uVar5);
-                        if ((BVar3 == FALSE)
-                            || (iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile + iVar6
-                                    + iVar4,
-                                (this->LogicLayer[iVar6] & 0x30) != 0))
-                            break;
-                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar6, playerID, _commandBuildingType, 0);
-                        if (iVar6 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        x = x + 1;
-                        if (this->constructionTileCount <= (int)x) {
-                            return;
-                        }
-                    }
-                } else {
-                    if ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
-                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
-                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
-                        && (undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_IRON_MINE) {
-                            if (3 < _ironCount) {
-                                return;
-                            }
-                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_IRON_ORE;
-                            this->buildingPlacementFail = TRUE;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_PITCH_WORKINGS) {
-                            if (0 < _oilCount) {
-                                return;
-                            }
-                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_OIL_MARSH;
-                            this->buildingPlacementFail = TRUE;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_STORES) {
-                            if (DAT_GameState::instance.playerDataArray[playerID]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
-                                    .id
-                                == 0) {
-                                return;
-                            }
-                            iVar8
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
-                                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_STOCKPILE);
-                            if (iVar8 < 0x20) {
-                                BVar3 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(playerID, (int)(_x), (int)(_y), buildingSize,
-                                    OpenSHC::Map::Buildings::BT_STOCKPILE);
-                                if (BVar3 != FALSE) {
-                                    return;
-                                }
-                                this->buildingPlacementFail = TRUE;
-                                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_STOCKPILE;
-                                return;
-                            }
-                            this->buildingPlacementFail = TRUE;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_GRANARY) {
-                            if (DAT_GameState::instance.playerDataArray[playerID]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_GRANARY]
-                                    .id
-                                == 0) {
-                                return;
-                            }
-                            iVar8
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
-                                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_GRANARY);
-                            if (iVar8 < 8) {
-                                BVar3 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(
-                                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_GRANARY);
-                                if (BVar3 != FALSE) {
-                                    return;
-                                }
-                                this->buildingPlacementFail = TRUE;
-                                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_GRANARY;
-                                return;
-                            }
-                            this->buildingPlacementFail = TRUE;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_ARMOURY) {
-                            if (DAT_GameState::instance.playerDataArray[playerID]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
-                                    .id
-                                == 0) {
-                                return;
-                            }
-                            iVar8
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
-                                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_ARMORY);
-                            if (iVar8 < 8) {
-                                BVar3 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour,
-                                    DAT_BuildingsState::ptr)(
-                                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_ARMORY);
-                                if (BVar3 != FALSE) {
-                                    return;
-                                }
-                                this->buildingPlacementFail = TRUE;
-                                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_ARMORY;
-                                return;
-                            }
-                            this->buildingPlacementFail = TRUE;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
-                            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
-                            iVar4 = _x
-                                + DAT_TerrainDefinedData::instance
-                                      .BuildingPartsOffsets[this->DAT_TempBuildingRotation][0]
-                                      .x;
-                            iVar8 = DAT_TerrainDefinedData::instance
-                                        .BuildingPartsOffsets[this->DAT_TempBuildingRotation][0]
-                                        .y;
-                            x = 0;
-                            while (true) {
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
-                                uVar5 = this->buildingY + _y + iVar8;
-                                BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->buildingX + iVar4, uVar5);
-                                if (BVar3 == FALSE) {
-                                    this->buildingPlacementFail = 2;
-                                    return;
-                                }
-                                iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile
-                                    + this->buildingX + iVar4;
-                                if ((this->LogicLayer[iVar6] & 0x30) != 0)
-                                    break;
-                                iVar6 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                                    iVar6, playerID, _commandBuildingType, 0);
-                                if (iVar6 != 0) {
-                                    this->buildingPlacementFail = TRUE;
-                                }
-                                x = x + 1;
-                                if (this->constructionTileCount <= (int)x) {
-                                    iVar4 = DAT_TerrainDefinedData::instance
-                                                .BuildingPartsOffsets[this->DAT_TempBuildingRotation][1]
-                                                .x
-                                        + _x;
-                                    iVar8 = DAT_TerrainDefinedData::instance
-                                                .BuildingPartsOffsets[this->DAT_TempBuildingRotation][1]
-                                                .y;
-                                    x = 0;
-                                    while (true) {
-                                        MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                                            x, 5);
-                                        iVar6 = this->buildingX;
-                                        uVar5 = this->buildingY + iVar8 + _y;
-                                        BVar3 = MACRO_CALL_MEMBER(
-                                            OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                            DAT_ViewportRenderState::ptr)(this->buildingX + iVar4, uVar5);
-                                        if (BVar3 == FALSE) {
-                                            this->buildingPlacementFail = 2;
-                                            return;
-                                        }
-                                        iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile
-                                            + iVar6 + iVar4;
-                                        if ((this->LogicLayer[iVar6] & 0x30) != 0)
-                                            break;
-                                        iVar6 = MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                                            iVar6, playerID, _commandBuildingType, 0);
-                                        if (iVar6 != 0) {
-                                            this->buildingPlacementFail = TRUE;
-                                        }
-                                        x = x + 1;
-                                        if (this->constructionTileCount <= (int)x) {
-                                            iVar4 = DAT_TerrainDefinedData::instance
-                                                        .BuildingPartsOffsets[this->DAT_TempBuildingRotation][2]
-                                                        .x
-                                                + _x;
-                                            iVar8 = DAT_TerrainDefinedData::instance
-                                                        .BuildingPartsOffsets[this->DAT_TempBuildingRotation][2]
-                                                        .y;
-                                            x = 0;
-                                            while (true) {
-                                                MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
-                                                    this)(x, 5);
-                                                iVar6 = this->buildingX;
-                                                uVar5 = this->buildingY + iVar8 + _y;
-                                                BVar3 = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                                    DAT_ViewportRenderState::ptr)(this->buildingX + iVar4, uVar5);
-                                                if (BVar3 == FALSE) {
-                                                    this->buildingPlacementFail = 2;
-                                                    return;
-                                                }
-                                                iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5]
-                                                            .addXgetTile
-                                                    + iVar6 + iVar4;
-                                                if ((this->LogicLayer[iVar6] & 0x30) != 0)
-                                                    break;
-                                                iVar6 = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                                                    this)(iVar6, playerID, _commandBuildingType, 0);
-                                                if (iVar6 != 0) {
-                                                    this->buildingPlacementFail = TRUE;
-                                                }
-                                                x = x + 1;
-                                                if (this->constructionTileCount <= (int)x) {
-                                                    return;
-                                                }
-                                            }
-                                            this->buildingPlacementFail = 2;
-                                            return;
-                                        }
-                                    }
-                                    this->buildingPlacementFail = 2;
-                                    return;
-                                }
-                            }
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD
-                            || (undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
-                            iVar4 = _x
-                                + DAT_TerrainDefinedData::instance
-                                      .BuildingPartsOffsets[this->DAT_TempBuildingRotation][1]
-                                      .x;
-                            iVar8 = DAT_TerrainDefinedData::instance
-                                        .BuildingPartsOffsets[this->DAT_TempBuildingRotation][1]
-                                        .y;
-                            x = 0;
-                            while (true) {
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
-                                uVar5 = this->buildingY + _y + iVar8;
-                                BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->buildingX + iVar4, uVar5);
-                                if (BVar3 == FALSE) {
-                                    this->buildingPlacementFail = 2;
-                                    return;
-                                }
-                                iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile
-                                    + this->buildingX + iVar4;
-                                if ((this->LogicLayer[iVar6] & 0x30) != 0)
-                                    break;
-                                iVar6 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                                    iVar6, playerID, _commandBuildingType, 0);
-                                if (iVar6 != 0) {
-                                    this->buildingPlacementFail = TRUE;
-                                }
-                                x = x + 1;
-                                if (this->constructionTileCount <= (int)x) {
-                                    return;
-                                }
-                            }
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
-                            iVar4 = _x + DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].x;
-                            iVar8 = DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].y;
-                            x = 0;
-                            while (true) {
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 4);
-                                uVar5 = this->buildingY + _y + iVar8;
-                                BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->buildingX + iVar4, uVar5);
-                                if (BVar3 == FALSE) {
-                                    this->buildingPlacementFail = 2;
-                                    return;
-                                }
-                                iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile
-                                    + this->buildingX + iVar4;
-                                if ((this->LogicLayer[iVar6] & 0x30) != 0)
-                                    break;
-                                iVar6 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
-                                    iVar6, playerID, OpenSHC::Commands::M_MAPPER_OIL_SMELTER, 0);
-                                if (iVar6 != 0) {
-                                    this->buildingPlacementFail = TRUE;
-                                }
-                                x = x + 1;
-                                if (this->constructionTileCount <= (int)x) {
-                                    return;
-                                }
-                            }
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        if ((undefined2)commandBuildingType != OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION) {
-                            return;
-                        }
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::algTunnelerFindTarget,
-                            DAT_PathFindingState::ptr)(playerID, 0, (int)(76), (int)(_x), (int)(_y));
-                        if (DAT_PathFindingState::instance.ALG_TargetTile != 0) {
-                            return;
-                        }
-                        this->buildingPlacementFail = TRUE;
-                        return;
-                    }
-                    iVar8 = _commandBuildingType * 3 + -0x1a4;
-                    iVar6 = _x + *(int*)((int)DAT_TerrainDefinedData::ptr + iVar8 * 8 + 0x56c);
-                    iVar8 = iVar8 * 8;
-                    iVar4 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar8 + 0x570);
-                    x = 0;
-                    do {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 3);
-                        uVar5 = this->buildingY + _y + iVar4;
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(this->buildingX + iVar6, uVar5);
-                        if (BVar3 == FALSE) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar7 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile + this->buildingX
-                            + iVar6;
-                        if ((this->LogicLayer[iVar7] & 0x30) != 0) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar7 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar7, playerID, _commandBuildingType, 0);
-                        if (iVar7 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        x = x + 1;
-                    } while ((int)x < this->constructionTileCount);
-                    iVar4 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar8 + 0x57c);
-                    iVar8 = *(int*)((int)DAT_TerrainDefinedData::ptr + iVar8 + 0x578) + _x;
-                    x = 0;
-                    do {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 3);
-                        iVar6 = this->buildingX;
-                        uVar5 = this->buildingY + iVar4 + _y;
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(iVar8 + this->buildingX, uVar5);
-                        if (BVar3 == FALSE) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar6 = DAT_ViewportRenderState::instance.translationMatrix[uVar5].addXgetTile + iVar6 + iVar8;
-                        if ((this->LogicLayer[iVar6] & 0x30) != 0) {
-                            this->buildingPlacementFail = 2;
-                            return;
-                        }
-                        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar6, playerID, _commandBuildingType, 0);
-                        if (iVar6 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        x = x + 1;
-                    } while ((int)x < this->constructionTileCount);
-                    commandBuildingType = OpenSHC::Commands::M_MAPPER_NULL;
-                    piVar9
-                        = (int*)((int)DAT_TerrainDefinedData::ptr + (_commandBuildingType * 3 + -0x1a4) * 0x10 + 0x5cc);
-                    while (true) {
-                        iVar8 = piVar9[1];
-                        iVar4 = *piVar9;
-                        BVar3 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(_x + iVar4, iVar8 + _y);
-                        if ((BVar3 == FALSE)
-                            || (iVar8 = DAT_ViewportRenderState::instance.translationMatrix[iVar8 + _y].addXgetTile
-                                    + iVar4 + _x,
-                                (this->LogicLayer[iVar8] & 0x30) != 0))
-                            break;
-                        iVar8 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
-                            this)(iVar8, playerID, _commandBuildingType, 0);
-                        if (iVar8 != 0) {
-                            this->buildingPlacementFail = TRUE;
-                        }
-                        commandBuildingType = (MappersEnum)(commandBuildingType + OpenSHC::Commands::M_MAPPER_AREA);
-                        piVar9 = piVar9 + 2;
-                        if (5 < (int)commandBuildingType) {
-                            return;
-                        }
-                    }
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_QUARRY) {
+            if (_boulderCount < 8) {
+                this->buildingPlacementFail = TRUE;
+            }
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_KEEP1 || command == OpenSHC::Commands::M_MAPPER_KEEP2
+            || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
+            int const keepIndex = _commandBuildingType - OpenSHC::Commands::M_MAPPER_KEEP1;
+            for (int part = 0; part < 3; part++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part];
+                uint const partY = offset.y + _y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(offset.x + _x, partY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
                 }
-                this->buildingPlacementFail = 2;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[partY].addXgetTile + offset.x + _x;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+            }
+            int const outbuildingX
+                = _x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].xOffset;
+            int const outbuildingY
+                = _y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].yOffset;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 7);
+                uint const tileY = this->buildingY + outbuildingY;
+                uint const tileX = this->buildingX + outbuildingX;
+                if (tileX > 399 || tileY > 399
+                    || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                    + this->buildingX + outbuildingX;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            int const outbuilding2X
+                = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + _x;
+            int const outbuilding2Y
+                = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].yOffset + _y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
+                uint const tileY = this->buildingY + outbuilding2Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(outbuilding2X + this->buildingX, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                    + this->buildingX + outbuilding2X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
+            // TerrainDefinedData + 0x56C: the two tower origins of each gate command, 24 bytes apart
+            int const* const gateTowers = (int const*)((char const*)&DAT_TerrainDefinedData::instance + 0x56c
+                + (_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 0x18);
+            int const tower1X = _x + gateTowers[0];
+            int const tower1Y = _y + gateTowers[1];
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 3);
+                uint const tileY = this->buildingY + tower1Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + tower1X, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                    + this->buildingX + tower1X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            int const tower2X = gateTowers[3] + _x;
+            int const tower2Y = gateTowers[4] + _y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 3);
+                uint const tileY = this->buildingY + tower2Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(tower2X + this->buildingX, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                    + this->buildingX + tower2X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            // field_0x5cc holds the six gate-house tiles of each gate command (the header types it as a single pair)
+            for (int part = 0; part < 6; part++) {
+                uint const partY
+                    = (&DAT_TerrainDefinedData::instance
+                              .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + part]
+                          .y
+                    + _y;
+                if (MACRO_CALL_MEMBER(
+                        OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(_x
+                            + (&DAT_TerrainDefinedData::instance
+                                    .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6
+                                + part]
+                                .x,
+                        partY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[partY].addXgetTile
+                    + (&DAT_TerrainDefinedData::instance
+                            .field_0x5cc)[(_commandBuildingType - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A) * 6 + part]
+                          .x
+                    + _x;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+            }
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_IRON_MINE) {
+            if (_ironCount < 4) {
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_IRON_ORE;
+                this->buildingPlacementFail = TRUE;
+            }
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_PITCH_WORKINGS) {
+            if (_oilCount < 1) {
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_OIL_MARSH;
+                this->buildingPlacementFail = TRUE;
+            }
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_STORES) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                    .id
+                == 0) {
                 return;
             }
-            if (_boulderCount < 8) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
+                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_STOCKPILE)
+                >= 0x20) {
                 this->buildingPlacementFail = TRUE;
                 return;
             }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour, DAT_BuildingsState::ptr)(
+                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_STOCKPILE)
+                != FALSE) {
+                return;
+            }
+            this->buildingPlacementFail = TRUE;
+            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_STOCKPILE;
+            return;
         }
-        return;
-    LAB_005039d6:
-        this->buildingPlacementFailReason = ((BuildingFailReasonEnum)0x11);
-        goto LAB_00503d3c;
+        if (command == OpenSHC::Commands::M_MAPPER_GRANARY) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_GRANARY]
+                    .id
+                == 0) {
+                return;
+            }
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
+                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_GRANARY)
+                >= 8) {
+                this->buildingPlacementFail = TRUE;
+                return;
+            }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour, DAT_BuildingsState::ptr)(
+                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_GRANARY)
+                != FALSE) {
+                return;
+            }
+            this->buildingPlacementFail = TRUE;
+            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_GRANARY;
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_ARMOURY) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ARMORY]
+                    .id
+                == 0) {
+                return;
+            }
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getEmptyBuildingCount,
+                    DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_ARMORY)
+                >= 8) {
+                this->buildingPlacementFail = TRUE;
+                return;
+            }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::hasBuildingAsNeighbour, DAT_BuildingsState::ptr)(
+                    playerID, (int)(_x), (int)(_y), buildingSize, OpenSHC::Map::Buildings::BT_ARMORY)
+                != FALSE) {
+                return;
+            }
+            this->buildingPlacementFail = TRUE;
+            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_NOT_ADJ_ARMORY;
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
+            || command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
+            int const part0X
+                = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][0].x;
+            int const part0Y
+                = _y + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][0].y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
+                uint const tileY = this->buildingY + part0Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + part0X, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + part0X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            int const part1X
+                = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][1].x;
+            int const part1Y
+                = _y + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][1].y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
+                uint const tileY = this->buildingY + part1Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + part1X, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + part1X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            int const part2X
+                = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][2].x;
+            int const part2Y
+                = _y + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][2].y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
+                uint const tileY = this->buildingY + part2Y;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + part2X, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + part2X;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD
+            || command == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
+            int const partX
+                = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][1].x;
+            int const partY
+                = _y + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][1].y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 5);
+                uint const tileY = this->buildingY + partY;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + partX, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + partX;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, _commandBuildingType, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
+            int const partX = _x + DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].x;
+            int const partY = _y + DAT_TerrainDefinedData::instance.field_0x19c[this->DAT_TempBuildingRotation].y;
+            x = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(x, 4);
+                uint const tileY = this->buildingY + partY;
+                if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
+                        DAT_ViewportRenderState::ptr)(this->buildingX + partX, tileY)
+                    == FALSE) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + partX;
+                if ((this->LogicLayer[tile] & 0x30) != 0) {
+                    this->buildingPlacementFail = 2;
+                    return;
+                }
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                        tile, playerID, OpenSHC::Commands::M_MAPPER_OIL_SMELTER, 0)
+                    != 0) {
+                    this->buildingPlacementFail = TRUE;
+                }
+                x = x + 1;
+            } while ((int)x < this->constructionTileCount);
+            return;
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::algTunnelerFindTarget,
+                DAT_PathFindingState::ptr)(playerID, 0, 76, (int)(_x), (int)(_y));
+            if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
+                this->buildingPlacementFail = TRUE;
+            }
+        }
     }
 
 }
