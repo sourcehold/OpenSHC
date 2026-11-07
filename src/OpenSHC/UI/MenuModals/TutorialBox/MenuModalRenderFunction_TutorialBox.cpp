@@ -16,13 +16,13 @@
 #include "OpenSHC/Globals/DAT_00df5540.hpp"
 #include "OpenSHC/Globals/DAT_00df5544.hpp"
 #include "OpenSHC/Globals/DAT_00df5558.hpp"
-#include "OpenSHC/Globals/DAT_00df5564.hpp"
-#include "OpenSHC/Globals/DAT_00df5644.hpp"
 #include "OpenSHC/Globals/DAT_MissionAestheticsDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TutorialCurrentStep.hpp"
+#include "OpenSHC/Globals/INT_00df5564.hpp"
+#include "OpenSHC/Globals/INT_00df5644.hpp"
 #include "OpenSHC/Globals/INT_00df5648.hpp"
 #include "OpenSHC/Globals/INT_ARRAY_00df5598.hpp"
 
@@ -80,10 +80,10 @@ namespace UI {
                 }
             }
             // Speaks the button hint once when it comes up, the two recordings taking turns
-            if (DAT_00df5564::instance && !INT_00df5648::instance) {
-                ++DAT_00df5644::instance;
-                if (DAT_00df5644::instance > 1) {
-                    DAT_00df5644::instance = 0;
+            if (INT_00df5564::instance && !INT_00df5648::instance) {
+                ++INT_00df5644::instance;
+                if (INT_00df5644::instance > 1) {
+                    INT_00df5644::instance = 0;
                 }
                 if (!MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
                         DAT_SoundSystemState::ptr)(OpenSHC::Audio::MSS::enums::SND_STR_SPEECH_1)
@@ -92,12 +92,12 @@ namespace UI {
                     char speechFileName[32];
                     // "%s%s", "fx\\speech\\"
                     MACRO_CALL(OpenSHC::OS_Func::_sprintf)(speechFileName, s__s_s_005aa800, s_fx_speech__005a64cc,
-                        DAT_MissionAestheticsDefinedData::instance.field_0x41e4[DAT_00df5644::instance + 34][0]);
+                        DAT_MissionAestheticsDefinedData::instance.field_0x41e4[INT_00df5644::instance + 34][0]);
                     MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop,
                         DAT_SoundSystemState::ptr)(speechFileName);
                 }
             }
-            INT_00df5648::instance = DAT_00df5564::instance;
+            INT_00df5648::instance = INT_00df5564::instance;
             // >> 1 for the centre, as the original has no rounding fix (/ 2: quick_diff 0.9764 -> 0.8745)
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -105,7 +105,7 @@ namespace UI {
                 (width >> 1) + x, y + 15, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE,
                 blendStrength);
             int bodyY = y + 38;
-            if (!DAT_00df5564::instance) {
+            if (!INT_00df5564::instance) {
                 // The text's offset is worked out before the call (in the call: quick_diff 0.9764 -> 0.9291)
                 int const bodyTextOffset = DAT_00df5558::instance + 1 + tutorialTextOffset;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
@@ -115,9 +115,9 @@ namespace UI {
                 bodyY += DAT_TextManagerObject::instance.field_0x4;
             }
             // A second test, not an else (else: quick_diff 0.9764 -> 0.9261)
-            if (DAT_00df5564::instance) {
+            if (INT_00df5564::instance) {
                 // Read for measuring and again in each arm (in the calls: quick_diff 0.9764 -> 0.9333)
-                int const measuredText = DAT_00df5644::instance + 3;
+                int const measuredText = INT_00df5644::instance + 3;
                 // "That's not a valid option at this time." or "You can't do that at this point in the tutorial.":
                 // wrapped when taller than 35 pixels (more than one line), centred on one line otherwise
                 if (MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
@@ -126,14 +126,14 @@ namespace UI {
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TUTORIAL_BUTTONS, measuredText),
                         0, 0, textWidth, 0, 0, 1)
                     > 35) {
-                    int const hintText = DAT_00df5644::instance + 3;
+                    int const hintText = INT_00df5644::instance + 3;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TUTORIAL_BUTTONS, hintText),
                         textX, bodyY, textWidth, OpenSHC::Rendering::Colors::COL_0000FF, 18, blendStrength);
                 } else {
-                    int const hintText = DAT_00df5644::instance + 3;
+                    int const hintText = INT_00df5644::instance + 3;
                     // fixme: the original passes the blend as keepOffsetX here, and 0 as the blend
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
