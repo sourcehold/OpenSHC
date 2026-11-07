@@ -44,7 +44,7 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004AA3E0, &MenuModalComposition::fillWithMenuModalDimensions)
         fillWithMenuModalDimensions;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, int, undefined*, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, int, int*, void(__cdecl*)()), false,
             Address::SHC_3BB0A8C1_0x004AA480, &MenuModalComposition::setSliderParameters)
         setSliderParameters;
 
