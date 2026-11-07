@@ -71,15 +71,13 @@ namespace Map {
 
         if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(
                 neighbourX, y - 1)
-            == FALSE) {
-            return FALSE;
+                != FALSE
+            && (int)(height
+                   - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x - 1])
+                > 0) {
+            return TRUE;
         }
-        if ((int)(height
-                - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x - 1])
-            < 1) {
-            return FALSE;
-        }
-        return TRUE;
+        return FALSE;
     }
 
 }
