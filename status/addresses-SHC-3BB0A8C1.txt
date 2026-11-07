@@ -25221,7 +25221,7 @@ SHC_3BB0A8C1_0x004A3E80 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A4140 | 85.5% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004A4470 | 68.8% | plain loops, hoisted y, alloc
+SHC_3BB0A8C1_0x004A4470 | 68.8% | goto removed via full flag
 
 SHC_3BB0A8C1_0x004A4500 | 0.0% | Pending
 

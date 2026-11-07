@@ -52,6 +52,7 @@ namespace Map {
             DAT_TileMapState::instance.AIZoneLayer[this->searchQueue.tilesQueue[0]]
                 = (byte)this->searchQueue.currentDistance;
             int parity = 0;
+            BOOLEnum full = FALSE;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -91,8 +92,12 @@ namespace Map {
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = neighbour;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                         if (this->searchQueue.writeIndex >= 80400) {
-                            goto done;
+                            full = TRUE;
+                            break;
                         }
+                    }
+                    if (full) {
+                        break;
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (this->searchQueue.readIndex >= 80400) {
@@ -100,8 +105,12 @@ namespace Map {
                     }
                     if ((canReachKeep != 0 && this->searchQueue.writeIndex >= 2000)
                         || this->searchQueue.writeIndex >= 6000) {
-                        goto done;
+                        full = TRUE;
+                        break;
                     }
+                }
+                if (full) {
+                    break;
                 }
                 this->searchQueue.readIndex = this->searchQueue.previousReadIndex;
                 this->searchQueue.nextWriteIndex = this->searchQueue.writeIndex;
@@ -148,7 +157,6 @@ namespace Map {
                     parity = 0;
                 }
             }
-        done:
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
         }
