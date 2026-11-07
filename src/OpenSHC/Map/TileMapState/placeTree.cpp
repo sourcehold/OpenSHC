@@ -78,10 +78,11 @@ namespace Map {
             } while (index < brushSize);
         }
 
-        int treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(x, y,
-            (TreeType)(short)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
-                DAT_LandscapeState::ptr)((short)treeType),
-            stage, 0, 0, 3);
+        ushort logicalType
+            = (ushort)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
+                DAT_LandscapeState::ptr)((short)treeType);
+        int treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
+            x, y, (TreeType)(short)logicalType, stage, 0, 0, 3);
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile]
             = this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] & ~L_ROCKY;
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile]

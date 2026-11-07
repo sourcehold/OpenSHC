@@ -44771,7 +44771,7 @@ SHC_3BB0A8C1_0x00515A20 | 95.6% | GL ecx
 
 SHC_3BB0A8C1_0x00515C80 | 62.8% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00515DA0 | 43.9% | brush loop regalloc
+SHC_3BB0A8C1_0x00515DA0 | 64.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00515F40 | 100.0% | Reimplemented
 
