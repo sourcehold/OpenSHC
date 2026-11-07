@@ -20,19 +20,16 @@ namespace Map {
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
             return 0;
         }
-        if (x2 > 399 || y2 > 399) {
-            return 0;
-        }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == 0) {
+        if (x2 > 399 || y2 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == 0) {
             return 0;
         }
 
         int area = (short)this
                        ->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1];
         int targetTile = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
-        uint targetHeight = this->HeightLayer[targetTile];
         int bestDistance = 10000;
         int bestIndex = -1;
+        uint targetHeight = this->HeightLayer[targetTile];
         int targetBuildingID = this->BuildingLayer[targetTile];
         if (targetBuildingID != 0) {
             targetHeight = targetHeight
@@ -54,7 +51,7 @@ namespace Map {
                     + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(buildingID);
             }
-            if ((int)height >= (int)(targetHeight + 0x10) || (int)(targetHeight - 0x10) >= (int)height) {
+            if ((int)height >= (int)(targetHeight + 0x10) || (int)height <= (int)(targetHeight - 0x10)) {
                 continue;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
@@ -65,14 +62,14 @@ namespace Map {
             }
         }
 
-        if (bestIndex >= 0) {
-            this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
-            this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
-            return 1;
+        if (bestIndex <= -1) {
+            this->field_0x5549a8 = x2;
+            this->field_0x5549ac = y2;
+            return 0;
         }
-        this->field_0x5549a8 = x2;
-        this->field_0x5549ac = y2;
-        return 0;
+        this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
+        this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
+        return 1;
     }
 
 }
