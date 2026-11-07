@@ -74,46 +74,45 @@ namespace Map {
                     if ((int)this->searchQueue.currentDistance > param_2) {
                         return (undefined4)(0);
                     }
-                    int uVar4 = (short)DAT_TileMapState::instance.UnitLayer[uVar1];
-                    while (iVar9 = uVar4, iVar9 != 0) {
+                    for (int unitID = DAT_TileMapState::instance.UnitLayer[uVar1]; unitID != 0;
+                        unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                         if (param_3 != 0
                             && DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_UnitsState::instance.units[iVar9].owner]
+                                    .playerTeams[DAT_UnitsState::instance.units[unitID].owner]
                                 != DAT_GameState::instance.mapAndTime.playerTeams[param_3]
-                            && DAT_UnitsState::instance.units[iVar9].unitType != OpenSHC::Map::Units::UT_LORD) {
-                            DAT_UnitsState::instance.units[iVar9].health
-                                = DAT_UnitsState::instance.units[iVar9].health - param_4;
-                            if ((DAT_UnitsState::instance.units[iVar9].health <= 0)
-                                && (DAT_UnitsState::instance.units[iVar9].dying == 0)) {
-                                DAT_UnitsState::instance.units[iVar9].health = 0;
-                                DAT_UnitsState::instance.units[iVar9].dying = 1;
-                                DAT_UnitsState::instance.units[iVar9].animationCycleNumber = 0;
+                            && DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) {
+                            DAT_UnitsState::instance.units[unitID].health
+                                = DAT_UnitsState::instance.units[unitID].health - param_4;
+                            if ((DAT_UnitsState::instance.units[unitID].health <= 0)
+                                && (DAT_UnitsState::instance.units[unitID].dying == 0)) {
+                                DAT_UnitsState::instance.units[unitID].health = 0;
+                                DAT_UnitsState::instance.units[unitID].dying = 1;
+                                DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
                                 if ((char)param_5 != '\0') {
-                                    DAT_UnitsState::instance.units[iVar9].state.generic
+                                    DAT_UnitsState::instance.units[unitID].state.generic
                                         = OpenSHC::Map::Units::States::US_DEATH_01;
                                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
-                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[iVar9].x,
-                                        (short)DAT_UnitsState::instance.units[iVar9].y,
+                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[unitID].x,
+                                        (short)DAT_UnitsState::instance.units[unitID].y,
                                         OpenSHC::DE::SHCDE::FX_DEATH_ARROW);
                                 } else {
-                                    DAT_UnitsState::instance.units[iVar9].state.generic
+                                    DAT_UnitsState::instance.units[unitID].state.generic
                                         = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
-                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[iVar9].x,
-                                        (short)DAT_UnitsState::instance.units[iVar9].y, OpenSHC::DE::SHCDE::FX_SPLAT);
+                                        DAT_SFXState::ptr)((short)DAT_UnitsState::instance.units[unitID].x,
+                                        (short)DAT_UnitsState::instance.units[unitID].y, OpenSHC::DE::SHCDE::FX_SPLAT);
                                 }
-                                DAT_UnitsState::instance.units[iVar9].tunnelerFinishedDigging = 1;
+                                DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging = 1;
                             }
-                            iVar11 = DAT_UnitsState::instance.units[iVar9].maxHealth;
-                            if (iVar11 == 0) {
+                            int const maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
+                            if (maxHealth == 0) {
                                 sVar6 = 100;
                             } else {
-                                sVar6 = (short)((DAT_UnitsState::instance.units[iVar9].health * 100) / iVar11);
+                                sVar6 = (short)((DAT_UnitsState::instance.units[unitID].health * 100) / maxHealth);
                             }
-                            DAT_UnitsState::instance.units[iVar9].healthPercentage = sVar6;
-                            DAT_UnitsState::instance.units[iVar9].healthbar = sVar6 / 10;
+                            DAT_UnitsState::instance.units[unitID].healthPercentage = sVar6;
+                            DAT_UnitsState::instance.units[unitID].healthbar = sVar6 / 10;
                         }
-                        uVar4 = DAT_UnitsState::instance.units[iVar9].nextUnitOnTheSameTile;
                     }
                     int _random = (int)SEC_RNG::instance.currentNumber2;
                     MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
@@ -128,7 +127,7 @@ namespace Map {
                             (int)(sVar2 * 8 + 4), iVar9 + 4, (int)(DAT_TileMapState::instance.HeightLayer[uVar1]),
                             local_8, 0);
                     }
-                    for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
+                    for (int _direction = 0; _direction < 8; ++_direction) {
                         iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction] + uVar1;
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
@@ -141,66 +140,6 @@ namespace Map {
                                 + sVar2;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                      .short_.yOffset
-                                + sVar3;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
-                        }
-                        iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction + 1] + uVar1;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
-                            && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (ushort)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
-                                      .short_.yOffset
-                                + sVar3;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
-                        }
-                        iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction + 2] + uVar1;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
-                            && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (ushort)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
-                                      .short_.yOffset
-                                + sVar3;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
-                        }
-                        iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][_direction + 3] + uVar1;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
-                            && (DAT_TileMapState::instance.LogicLayer[iVar9] & 0x30) == 0) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar9]
-                                = (ushort)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar9] = (ushort)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
-                                      .short_.xOffset
-                                + sVar2;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
                                       .short_.yOffset
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
