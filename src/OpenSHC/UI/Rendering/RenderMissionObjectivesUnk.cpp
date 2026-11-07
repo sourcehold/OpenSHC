@@ -9,6 +9,7 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventConditionIndex.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
@@ -56,16 +57,17 @@ namespace UI {
                 headerX, headerY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
 
             // first pass: measure the texts for the number column and the tick boxes
-            for (int objective = 0; objective < 39; ++objective) {
+            for (int objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
                 if (INT_ARRAY_00ed2630::instance[objective] == 0) {
                     continue;
                 }
-                if ((objective == 18 || objective == 19)
+                if ((objective == OpenSHC::Game::ScenarioEvents::Enums::SECI_4_CATTLE_FARMS
+                        || objective == OpenSHC::Game::ScenarioEvents::Enums::SECI_2_INNS)
                     && DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk) {
                     continue;
                 }
                 int textIndex = objective;
-                if (objective >= 20) {
+                if (objective >= OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED) {
                     textIndex = objective + 1;
                 }
                 if (textIndex == 17) {
@@ -84,12 +86,12 @@ namespace UI {
                 }
                 int numberWidth;
                 switch (objective) {
-                case 1:
-                case 4:
-                case 20:
-                case 21:
-                case 22:
-                case 23:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOLD_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_DRINKING_ALE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS:
                     if (textEnd > column - 5) {
                         column = textWidth + 35;
                     }
@@ -100,31 +102,31 @@ namespace UI {
                             + MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth,
                                 DAT_TextManagerObject::ptr)((char*)s___005aaf78, 18);
                         switch (objective) {
-                        case 1:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION:
                             value = DAT_GameState::instance
                                         .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .currentPopulation;
                             break;
-                        case 4:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOLD_ACQUIRED:
                             value = DAT_GameState::instance
                                         .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .currentResources[Game::Resources::RT_GOLD];
                             break;
-                        case 20:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED:
                             value = DAT_GameState::instance
                                         .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .previousBlessedPeoplePercentage;
                             break;
-                        case 21:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_DRINKING_ALE:
                             value = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeAleCoverage,
                                 DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
                             break;
-                        case 22:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY:
                             value = -DAT_GameState::instance
                                          .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                          .fearFactorLevel;
                             break;
-                        case 23:
+                        case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS:
                             value = DAT_GameState::instance
                                         .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                         .fearFactorLevel;
@@ -138,10 +140,10 @@ namespace UI {
                         boxX = numberWidth + column + 5;
                     }
                     break;
-                case 5:
-                case 6:
-                case 7:
-                case 17:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_FOOD_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOODS_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED_17:
                     if (textEnd > column - 5) {
                         column = textWidth + 35;
                     }
@@ -180,16 +182,17 @@ namespace UI {
             }
 
             // second pass: draw them
-            for (int objective = 0; objective < 39; ++objective) {
+            for (int objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
                 if (INT_ARRAY_00ed2630::instance[objective] == 0) {
                     continue;
                 }
-                if ((objective == 18 || objective == 19)
+                if ((objective == OpenSHC::Game::ScenarioEvents::Enums::SECI_4_CATTLE_FARMS
+                        || objective == OpenSHC::Game::ScenarioEvents::Enums::SECI_2_INNS)
                     && DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk) {
                     continue;
                 }
                 int textIndex = objective;
-                if (objective >= 20) {
+                if (objective >= OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED) {
                     textIndex = objective + 1;
                 }
                 if (textIndex == 17 || textIndex == 5 || textIndex == 6) {
@@ -211,12 +214,12 @@ namespace UI {
                     DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30, y, OpenSHC::Text::TTA_LEFT,
                     OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
                 switch (objective) {
-                case 1:
-                case 4:
-                case 20:
-                case 21:
-                case 22:
-                case 23:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOLD_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_DRINKING_ALE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS:
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                         DAT_TextManagerObject::ptr)(INT_ARRAY_00ed2fc8::instance[objective],
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y, OpenSHC::Text::TTA_LEFT,
@@ -229,31 +232,31 @@ namespace UI {
                         (char*)s___005aaf74, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y,
                         OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     switch (objective) {
-                    case 1:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION:
                         value = DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                     .currentPopulation;
                         break;
-                    case 4:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOLD_ACQUIRED:
                         value = DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                     .currentResources[Game::Resources::RT_GOLD];
                         break;
-                    case 20:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_BLESSED:
                         value = DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                     .previousBlessedPeoplePercentage;
                         break;
-                    case 21:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_PERCENT_DRINKING_ALE:
                         value = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeAleCoverage,
                             DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
                         break;
-                    case 22:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_CRUELTY:
                         value = -DAT_GameState::instance
                                      .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                      .fearFactorLevel;
                         break;
-                    case 23:
+                    case OpenSHC::Game::ScenarioEvents::Enums::SECI_MAXIMUM_PLEASANTNESS:
                         value = DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                     .fearFactorLevel;
@@ -268,10 +271,10 @@ namespace UI {
                         (char*)s_brace_open_005a2774, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y,
                         OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
                     break;
-                case 5:
-                case 6:
-                case 7:
-                case 17:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_FOOD_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_GOODS_ACQUIRED:
+                case OpenSHC::Game::ScenarioEvents::Enums::SECI_WEAPONS_ACQUIRED_17:
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
                         DAT_TextManagerObject::ptr)(INT_ARRAY_00ed2fc8::instance[objective],
                         DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + column, y, OpenSHC::Text::TTA_LEFT,
@@ -327,8 +330,9 @@ namespace UI {
                 y += 30;
             }
 
-            // objective 39: a progress bar
-            if (INT_ARRAY_00ed2630::instance[39] != 0 && DAT_MapPropertiesState::instance.SEC_Section1081) {
+            // The win timer: a progress bar
+            if (INT_ARRAY_00ed2630::instance[OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER] != 0
+                && DAT_MapPropertiesState::instance.SEC_Section1081) {
                 int const total = DAT_MapPropertiesState::instance.SEC_Section1090;
                 int done = DAT_MapPropertiesState::instance.SEC_Section1090
                     - DAT_MapPropertiesState::instance.SEC_Section1080;
@@ -370,14 +374,18 @@ namespace UI {
 
             // time until the next one-off invasion or the deadline of the mission, as a progress bar
             int timerText = 15;
-            if (INT_ARRAY_00ed2630::instance[8] != 0 || INT_ARRAY_00ed2630::instance[15] != 0
+            if (INT_ARRAY_00ed2630::instance[OpenSHC::Game::ScenarioEvents::Enums::SECI_NO_ENEMY_AND_INVASIONS_LEFT]
+                    != 0
+                || INT_ARRAY_00ed2630::instance[OpenSHC::Game::ScenarioEvents::Enums::SECI_NO_ENEMY_ON_MAP] != 0
                 || INT_00ec02e8::instance) {
                 for (int i = 0; i < DAT_MapPropertiesState::instance.eventsCount; ++i) {
                     if (DAT_MapPropertiesState::instance.scenarioEvents[i].header.tl_type == 1
                         && DAT_MapPropertiesState::instance.scenarioEvents[i].data.invasion.repeatMonths == 0) {
                         eventIndex = i;
                     } else if (DAT_MapPropertiesState::instance.scenarioEvents[i].header.tl_type == 3
-                        && DAT_MapPropertiesState::instance.scenarioEvents[i].data.scenario.conditions[0].enabled
+                        && DAT_MapPropertiesState::instance.scenarioEvents[i]
+                            .data.scenario.conditions[OpenSHC::Game::ScenarioEvents::Enums::SECI_AUTO_STOP]
+                            .enabled
                         && (DAT_MapPropertiesState::instance.scenarioEvents[i].data.scenario.ScenarioEventType == 1
                             || DAT_MapPropertiesState::instance.scenarioEvents[i].data.scenario.ScenarioEventType
                                 == 27)) {
