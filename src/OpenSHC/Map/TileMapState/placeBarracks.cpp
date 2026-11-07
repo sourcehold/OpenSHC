@@ -20,10 +20,9 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005076A0
-    void TileMapState::placeBarracks(int playerID, uint xPosition, int* yPosition_param, undefined4 buildingType,
+    void TileMapState::placeBarracks(int playerID, uint xPosition, uint yPosition, undefined4 buildingType,
         uint buildingSize, int buildingOrientation, undefined4 param_7)
     {
-        int* piVar1;
         int _buildingID;
         int iVar2;
         int iVar3;
@@ -32,7 +31,7 @@ namespace Map {
         uint uVar6;
         int iVar7;
         int local_c;
-        piVar1 = yPosition_param;
+        uint const y = yPosition;
         iVar7 = DAT_GameCore::instance.uniqueGameObjectTracker;
         iVar5 = 0;
         if (buildingOrientation == 0xf) {
@@ -41,29 +40,31 @@ namespace Map {
             local_c = buildingOrientation / 2;
         }
         _buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, xPosition, (uint)(yPosition_param), (undefined4)((int)(param_7)),
+            DAT_BuildingsState::ptr)(playerID, xPosition, y, (undefined4)((int)(param_7)),
             (BuildingType)((int)((short)buildingType)), buildingSize, playerID, 0xf);
         iVar2 = (int)(short)_buildingID;
         this->placedBuildingID = iVar2;
         DAT_BuildingsState::instance.buildings[iVar2].uidWhenPlaced = iVar7;
-        yPosition_param = &DAT_BuildingsState::instance.buildings[iVar2].tileRefs[0];
+        // fixme: the original walks the tile references with a pointer held in the dead y parameter, and
+        // only reusing the parameter reproduces that slot (a separate int* local costs 10 points)
+        yPosition = (uint)&DAT_BuildingsState::instance.buildings[iVar2].tileRefs[0];
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 iVar5, (int)(buildingSize));
-            iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + (int)piVar1].addXgetTile
+            iVar3 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + xPosition;
-            *yPosition_param = iVar3;
+            *(int*)yPosition = iVar3;
             this->HeightLayer[iVar3] = (byte)param_7;
             this->LogicLayer[iVar3] = this->LogicLayer[iVar3] | 0x400;
             this->BuildingLayer[iVar3] = (short)_buildingID;
             iVar5 = iVar5 + 1;
-            yPosition_param = yPosition_param + 1;
+            yPosition = yPosition + sizeof(int);
             this->BuildingWasLayer[iVar3] = (uchar)buildingType;
             this->ChangedLayer[iVar3] = 2;
         } while (iVar5 < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(iVar2);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(iVar2);
-        uVar6 = (int)piVar1 + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][0].y;
+        uVar6 = y + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][0].y;
         uVar4 = xPosition + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][0].x;
         iVar5 = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, uVar4,
@@ -91,7 +92,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(_buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(8, uVar4, uVar6);
-        uVar6 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][1].y + (int)piVar1;
+        uVar6 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][1].y + y;
         uVar4 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][1].x + xPosition;
         iVar5 = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, uVar4,
@@ -119,7 +120,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(_buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(8, uVar4, uVar6);
-        uVar6 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][2].y + (int)piVar1;
+        uVar6 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][2].y + y;
         uVar4 = DAT_TerrainDefinedData::instance.BuildingPartsOffsets[local_c][2].x + xPosition;
         iVar5 = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(playerID, uVar4,

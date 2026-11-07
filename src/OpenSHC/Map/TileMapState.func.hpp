@@ -600,7 +600,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00507560, &TileMapState::placeGatehouseLarge)
         placeGatehouseLarge;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, int*, undefined4, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x005076A0, &TileMapState::placeBarracks)
         placeBarracks;
 

@@ -265,7 +265,7 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_MERCENARYPOST:
         case OpenSHC::Map::Buildings::BT_BARRACKS:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBarracks, this)(
-                playerID, x, (int*)y, buildingType, buildingSize, buildingOrientation, averageHeight);
+                playerID, x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
             break;
         case OpenSHC::Map::Buildings::BT_ENGINEERSGUILD:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeEngineersguild, this)(

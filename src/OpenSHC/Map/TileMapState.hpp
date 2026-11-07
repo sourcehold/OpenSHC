@@ -540,7 +540,7 @@ namespace Map {
         void placeGatehouseLarge(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
-        void placeBarracks(int playerID, uint xPosition, int* yPosition_param, undefined4 buildingType,
+        void placeBarracks(int playerID, uint xPosition, uint yPosition, undefined4 buildingType,
             uint buildingSize, int buildingOrientation, undefined4 param_7);
 
         void placeEngineersguild(
