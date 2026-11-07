@@ -269,11 +269,11 @@ namespace Map {
             break;
         case OpenSHC::Map::Buildings::BT_ENGINEERSGUILD:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeEngineersguild, this)(
-                playerID, (int*)x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
+                playerID, x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
             break;
         case OpenSHC::Map::Buildings::BT_TUNNELERSGUILD:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeTunnelersguild, this)(
-                playerID, (int*)x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
+                playerID, x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
             break;
         case OpenSHC::Map::Buildings::BT_OILSMELTER:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeOilsmelter, this)(

@@ -544,10 +544,10 @@ namespace Map {
             uint buildingSize, int buildingOrientation, undefined4 param_7);
 
         void placeEngineersguild(
-            int param_1, int* param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeTunnelersguild(
-            int param_1, int* param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeOilsmelter(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);

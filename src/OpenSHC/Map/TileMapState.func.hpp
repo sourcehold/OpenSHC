@@ -604,11 +604,11 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005076A0, &TileMapState::placeBarracks)
         placeBarracks;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int*, uint, undefined4, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00507BD0, &TileMapState::placeEngineersguild)
         placeEngineersguild;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int*, uint, undefined4, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00507E00, &TileMapState::placeTunnelersguild)
         placeTunnelersguild;
 
