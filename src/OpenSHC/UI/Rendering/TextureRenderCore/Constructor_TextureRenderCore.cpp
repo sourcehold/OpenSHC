@@ -60,8 +60,9 @@ namespace UI {
             }
             this->totalLoadedGfx = 0;
             this->colorPaletteOverride = 0;
-            // room for 36 faces of 8448 bytes (readBitmapFace's FACE_SIZE), and their sizes, none loaded yet
-            this->bitmapsFaces_0x94 = (ushort(*)[66][64])MACRO_CALL(OpenSHC::OS_Func::_malloc)(36 * 8448);
+            // room for one 64 x 66 RGB565 face bitmap per entry of bitmapFaceSizes, and their sizes, none loaded yet
+            this->bitmapsFaces_0x94 = (ushort*)MACRO_CALL(OpenSHC::OS_Func::_malloc)(
+                countof(this->bitmapFaceSizes) * 66 * 64 * sizeof(ushort));
             for (int i = 0; i < countof(this->bitmapFaceSizes); ++i) {
                 this->bitmapFaceSizes[i] = 0;
             }

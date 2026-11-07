@@ -15,7 +15,7 @@ namespace UI {
         void TextureRenderCore::renderFacesSmallUnk(int facesIndex, int drawX, int drawY)
         {
             // A face bitmap is 64 x 66 pixels; the small face draws every other pixel of every other row
-            ushort* face = this->bitmapsFaces_0x94[facesIndex][0];
+            ushort* face = this->bitmapsFaces_0x94 + facesIndex * 66 * 64;
             ushort* surface;
             int lineByteWidth;
             switch (this->drawBufferChoiceValue) {
