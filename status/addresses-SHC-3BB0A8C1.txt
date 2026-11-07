@@ -23623,7 +23623,7 @@ SHC_3BB0A8C1_0x004934E5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004934F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00493560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00493560 | 96.3% | Reimplemented, only the spill slot of the bar's x differs (the original uses y's home)
 
 SHC_3BB0A8C1_0x00493690 | 0.0% | Pending
 
