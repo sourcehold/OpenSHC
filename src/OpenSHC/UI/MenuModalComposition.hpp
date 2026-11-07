@@ -80,7 +80,7 @@ namespace UI {
             dword minimum, dword maximum, dword value, short* destination, NoArgCallback* callbackFunction);
 
         void setModalSliderParameters(
-            int param_1, int param_2, dword param_3, dword param_4, undefined* param_5, NoArgCallback* param_6);
+            int param_1, int param_2, dword param_3, dword param_4, int* param_5, NoArgCallback* param_6);
 
         void renderMenuModal();
 
