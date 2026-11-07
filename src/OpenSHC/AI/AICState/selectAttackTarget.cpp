@@ -104,14 +104,15 @@ namespace AI {
                     selectedPlayerID = i;
                 }
             } else if (targetChoice == OpenSHC::AI::AIC::AITC_GOLD) {
-                if (DAT_GameState::instance.playerDataArray[i].currentResources[0xf] >= highestGold) {
-                    highestGold = DAT_GameState::instance.playerDataArray[i].currentResources[0xf];
+                if (DAT_GameState::instance.playerDataArray[i].currentResources[Game::Resources::RT_GOLD]
+                    >= highestGold) {
+                    highestGold = DAT_GameState::instance.playerDataArray[i].currentResources[Game::Resources::RT_GOLD];
                     selectedPlayerID = i;
                 }
             } else if (targetChoice == OpenSHC::AI::AIC::AITC_BALANCED) {
                 int points = DAT_GameState::instance.playerDataArray[i].currentPopulation * 5
                     + DAT_GameState::instance.playerDataArray[i].totalTroopValue
-                    + DAT_GameState::instance.playerDataArray[i].currentResources[0xf] / 100
+                    + DAT_GameState::instance.playerDataArray[i].currentResources[Game::Resources::RT_GOLD] / 100
                     + DAT_DirectionAlgorithmState::instance.distanceHigh * 2;
                 if (points <= lowestPoints) {
                     lowestPoints = points;
