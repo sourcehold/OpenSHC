@@ -9,9 +9,9 @@
 #pragma once
 
 #include "OpenSHC/Map/MapHeaderSection4IntStruct.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace UI {
