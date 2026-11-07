@@ -114,9 +114,9 @@ namespace Synchrony {
         this->skirmishCurrentAdvantageBalance = 3;
         this->field_0x1072e8 = -1;
         this->field_0x1072ec = -1;
-        // The faces of player slots 1 to 8 (slot + 19).
-        for (int face = 20; face < countof(DAT_TextureRenderCoreObject::instance.bitmapFaceSizes); ++face) {
-            DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[face] = 0;
+        // The faces of player slots 1 to 8
+        for (int slot = 1; slot <= 8; ++slot) {
+            DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[slot + 19] = 0;
         }
         this->skirmishTechLevel = 4;
         this->skirmishGameIntensityType = 1;
