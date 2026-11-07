@@ -48,295 +48,286 @@ namespace Map {
           is why the surrounding code is unoptimised: MSVC disables optimisation in a function holding
           inline asm, so every field access reloads this from the frame.
 
-          Two stores below are dead in this function but present in the original, because the body is
-          shared with updateMacroLayerRelated where they are read: "rotation" is reassigned from
-          MacroLayer at the end of the tile setup, and "height" is never read at all.
+          One store below is dead in this function but present in the original, because the body is
+          shared with updateMacroLayerRelated: "elevation" is read from HeightLayer and never used.
         */
         /*
-          The locals are declared here, in this order, because the original was built without
-          optimisation: its stack slots are observable and MSVC assigns them per function, not per
-          scope. Declaring them at first use instead costs ~12 points of match (52.6% vs 64.5%).
+          The locals are declared here because the original was built without optimisation: its
+          stack slots are observable and MSVC assigns them per function, not per scope. Declaring
+          them at first use instead costs ~12 points of match (52.6% vs 64.5%).
+          At /Od MSVC lays the locals out by a hash of their NAME (16 buckets, walked in order;
+          inside one bucket the later declaration gets the higher slot), not by declaration order.
+          The names and their order below were chosen so the slots land where the original has them
+          (rotation at ebp-4 down to the gfx bases at ebp-0x4c); renaming any of them moves the slots.
         */
         int rotation;
-        int blockColumn;
-        int gfxMode;
-        int index;
-        int macroHigh;
-        int blockRow;
-        int gfxBaseD;
+        int sectorColumn;
+        int partIndex;
+        int drawMode;
+        int tileRow;
+        int perLevel;
         int luminescence;
-        int gfxStride;
-        int subRow;
-        int subColumn;
-        int gfxBaseA;
-        int macroLow;
-        int gfxBaseE;
-        int height;
-        int gfxBaseB;
-        int gfxBaseC;
+        int lowGfx;
+        int sectorRow;
+        int macroTop;
+        int macroSizeType;
+        int edgeBase;
+        int tileColumn;
+        int elevation;
+        int macroBase;
+        int priorBitFlag;
         int macroMid;
-        int savedBitFlag;
+        int flatFrame;
+        int cornerFrame;
 
         if (this->forceUpdateGFXLayers <= 0) {
             return;
         }
         this->forceUpdateGFXLayers = this->forceUpdateGFXLayers - 1;
 
-        if (MACRO_CALL_MEMBER(
-                OpenSHC::Map::Navigation::PathFindingState_Func::getYSmallerThanYLimit, DAT_PathFindingState::ptr)()
+        if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::getYSmallerThanYLimit,
+                &DAT_PathFindingState::instance)()
             == FALSE) {
             return;
         }
 
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
-        for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
-            for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
-                    subRow = rotation;
+        for (sectorRow = this->someIndex; sectorRow <= this->someLimit; sectorRow++) {
+            for (sectorColumn = this->someYLike; sectorColumn <= this->someYLikeLimit; sectorColumn++) {
+                if (DAT_TileMapState::instance.mapping40x40[sectorRow][sectorColumn] != 0) {
+                    tileRow = rotation;
                     rotation = 0;
-                    for (; subRow < 10; subRow++) {
-                        this->DAT_SomeY = blockRow * 10 + subRow;
-                        this->DAT_SomeX = blockColumn * 10;
-                        for (subColumn = 0; subColumn < 10; subColumn++, this->DAT_SomeX++) {
+                    for (; tileRow < 10; tileRow++) {
+                        for (tileColumn = 0, this->DAT_SomeY = sectorRow * 10 + tileRow,
+                            this->DAT_SomeX = sectorColumn * 10;
+                            tileColumn < 10; tileColumn++, this->DAT_SomeX++) {
                             if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                                    DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY)
-                                != FALSE) {
-                                this->DAT_SomeTile
-                                    = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
-                                        DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if ((this->LogicLayer[this->DAT_SomeTile] & L_DEFAULT_EARTH_OR_TEXTURE) != 0) {
-                                    if (this->GfxLayer[this->DAT_SomeTile] == 0) {
-                                        luminescence = this->LuminesenceLayer[this->DAT_SomeTile];
-                                        if (luminescence < 2) {
-                                            luminescence = 2;
-                                        }
-                                        macroLow = (short)this->MacroLayer[this->DAT_SomeTile] & 0x3f;
-                                        macroMid = ((short)this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
-                                        macroHigh = ((short)this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
-                                        macroHigh = macroHigh & 3;
-                                        rotation = (short)this->MacroLayer[this->DAT_SomeTile];
-                                        this->PillarGFXLayer[this->DAT_SomeTile]
-                                            = (ushort)GMFirstPictureIndex::instance[9];
+                                    &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY)
+                                == FALSE) {
+                                continue;
+                            }
+                            this->DAT_SomeTile
+                                = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
+                                    &DAT_ViewportRenderState::instance)(this->DAT_SomeX, this->DAT_SomeY);
+                            if ((this->LogicLayer[this->DAT_SomeTile] & L_DEFAULT_EARTH_OR_TEXTURE) == 0) {
+                                continue;
+                            }
+                            if (this->GfxLayer[this->DAT_SomeTile] != 0) {
+                                continue;
+                            }
+                            luminescence = this->LuminesenceLayer[this->DAT_SomeTile];
+                            if (luminescence < 2) {
+                                luminescence = 2;
+                            }
+                            macroSizeType = (short)this->MacroLayer[this->DAT_SomeTile] & 0x3f;
+                            macroMid = ((short)this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
+                            macroTop = ((short)this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
+                            macroTop = macroTop & 3;
+                            /* the mask makes MSVC load the dword before the address, as the original does */
+                            this->PillarGFXLayer[this->DAT_SomeTile]
+                                = (ushort)(GMFirstPictureIndex::instance[9] & 0xffff);
 
-                                        if ((this->LogicLayer[this->DAT_SomeTile] & L_MARSH) != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
-                                            gfxBaseA = 1;
-                                            gfxBaseB = 3;
-                                            gfxBaseC = 0x15;
-                                            gfxBaseD = 0x21;
-                                            gfxBaseE = 0x25;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES)
-                                            != 0) {
-                                            height = this->HeightLayer[this->DAT_SomeTile];
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
-                                            gfxBaseA = 0x99;
-                                            gfxBaseB = 0x9b;
-                                            gfxBaseC = 0xad;
-                                            gfxBaseD = 0xb9;
-                                            gfxBaseE = 0xbd;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS)
-                                            != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
-                                            gfxBaseA = 0x1c9;
-                                            gfxBaseB = 0x1cb;
-                                            gfxBaseC = 0x1dd;
-                                            gfxBaseD = 0x1e9;
-                                            gfxBaseE = 0x1ed;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile]
-                                                       & L2_STONES_OR_DRIVEN_SANDUnk)
-                                            != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
-                                            gfxBaseA = 0x261;
-                                            gfxBaseB = 0x263;
-                                            gfxBaseC = 0x275;
-                                            gfxBaseD = 0x281;
-                                            gfxBaseE = 0x285;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
-                                            gfxBaseA = 0x2f9;
-                                            gfxBaseB = 0x2fb;
-                                            gfxBaseC = 0x30d;
-                                            gfxBaseD = 0x319;
-                                            gfxBaseE = 0x31d;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB)
-                                            != 0) {
-                                            /* the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is */
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
-                                            gfxBaseA = 0x4a9;
-                                            gfxBaseB = 0x4ab;
-                                            gfxBaseC = 0x4bd;
-                                            gfxBaseD = 0x4c9;
-                                            gfxBaseE = 0x4cd;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM)
-                                            != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
-                                            gfxBaseA = 0x131;
-                                            gfxBaseB = 0x133;
-                                            gfxBaseC = 0x145;
-                                            gfxBaseD = 0x151;
-                                            gfxBaseE = 0x155;
-                                            gfxStride = 4;
-                                            gfxMode = 2;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH)
-                                            != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
-                                            gfxBaseA = 0x131;
-                                            gfxBaseB = 0x133;
-                                            gfxBaseC = 0x145;
-                                            gfxBaseD = 0x151;
-                                            gfxBaseE = 0x155;
-                                            gfxStride = 4;
-                                            gfxMode = 2;
-                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
-                                            MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
-                                            savedBitFlag = this->bitFlag;
-                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
-                                            this->bitFlag = this->bitFlag | savedBitFlag;
-                                            gfxBaseA = 0x391;
-                                            gfxBaseB = 0x393;
-                                            gfxBaseC = 0x3a5;
-                                            gfxBaseD = 0x3b1;
-                                            gfxBaseE = 0x3b5;
-                                            gfxStride = 4;
-                                            gfxMode = 0;
-                                        } else {
-                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(11, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
-                                            gfxBaseA = 0x131;
-                                            gfxBaseB = 0x133;
-                                            gfxBaseC = 0x145;
-                                            gfxBaseD = 0x151;
-                                            gfxBaseE = 0x155;
-                                            gfxStride = 4;
-                                            gfxMode = 2;
-                                        }
+                            if ((this->LogicLayer[this->DAT_SomeTile] & L_MARSH) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
+                                edgeBase = 1;
+                                cornerFrame = 3;
+                                flatFrame = 0x15;
+                                lowGfx = 0x21;
+                                macroBase = 0x25;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
+                                elevation = this->HeightLayer[this->DAT_SomeTile];
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
+                                edgeBase = 0x99;
+                                cornerFrame = 0x9b;
+                                flatFrame = 0xad;
+                                lowGfx = 0xb9;
+                                macroBase = 0xbd;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
+                                edgeBase = 0x1c9;
+                                cornerFrame = 0x1cb;
+                                flatFrame = 0x1dd;
+                                lowGfx = 0x1e9;
+                                macroBase = 0x1ed;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk)
+                                != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
+                                edgeBase = 0x261;
+                                cornerFrame = 0x263;
+                                flatFrame = 0x275;
+                                lowGfx = 0x281;
+                                macroBase = 0x285;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
+                                edgeBase = 0x2f9;
+                                cornerFrame = 0x2fb;
+                                flatFrame = 0x30d;
+                                lowGfx = 0x319;
+                                macroBase = 0x31d;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
+                                /* the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is */
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
+                                edgeBase = 0x4a9;
+                                cornerFrame = 0x4ab;
+                                flatFrame = 0x4bd;
+                                lowGfx = 0x4c9;
+                                macroBase = 0x4cd;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
+                                edgeBase = 0x131;
+                                cornerFrame = 0x133;
+                                flatFrame = 0x145;
+                                lowGfx = 0x151;
+                                macroBase = 0x155;
+                                perLevel = 4;
+                                drawMode = 2;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
+                                edgeBase = 0x131;
+                                cornerFrame = 0x133;
+                                flatFrame = 0x145;
+                                lowGfx = 0x151;
+                                macroBase = 0x155;
+                                perLevel = 4;
+                                drawMode = 2;
+                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
+                                priorBitFlag = this->bitFlag;
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
+                                this->bitFlag = this->bitFlag | priorBitFlag;
+                                edgeBase = 0x391;
+                                cornerFrame = 0x393;
+                                flatFrame = 0x3a5;
+                                lowGfx = 0x3b1;
+                                macroBase = 0x3b5;
+                                perLevel = 4;
+                                drawMode = 0;
+                            } else {
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(11, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
+                                edgeBase = 0x131;
+                                cornerFrame = 0x133;
+                                flatFrame = 0x145;
+                                lowGfx = 0x151;
+                                macroBase = 0x155;
+                                perLevel = 4;
+                                drawMode = 2;
+                            }
 
-                                        if (macroLow == 1) {
-                                            this->bitFlag = ~this->bitFlag;
-                                            this->bitFlag = this->bitFlag & 0xaa;
-                                            if (this->mapOrientation == 0) {
-                                                this->bitFlag = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
-                                                        rotateByteLeft,
-                                                    DAT_DirectionAlgorithmState::ptr)(this->bitFlag, 0);
-                                            } else if (this->mapOrientation == 2) {
-                                                this->bitFlag = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
-                                                        rotateByteLeft,
-                                                    DAT_DirectionAlgorithmState::ptr)(this->bitFlag, 2);
-                                            } else if (this->mapOrientation == 4) {
-                                                this->bitFlag = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
-                                                        rotateByteLeft,
-                                                    DAT_DirectionAlgorithmState::ptr)(this->bitFlag, 4);
-                                            } else if (this->mapOrientation == 6) {
-                                                this->bitFlag = MACRO_CALL_MEMBER(
-                                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
-                                                        rotateByteLeft,
-                                                    DAT_DirectionAlgorithmState::ptr)(this->bitFlag, 6);
-                                            }
+                            if (macroSizeType == 1) {
+                                this->bitFlag = ~this->bitFlag;
+                                this->bitFlag = this->bitFlag & 0xaa;
+                                if (this->mapOrientation == 0) {
+                                    this->bitFlag = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 0);
+                                } else if (this->mapOrientation == 2) {
+                                    this->bitFlag = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 2);
+                                } else if (this->mapOrientation == 4) {
+                                    this->bitFlag = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 4);
+                                } else if (this->mapOrientation == 6) {
+                                    this->bitFlag = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 6);
+                                }
 
-                                            if (gfxMode == 1) {
-                                                this->GfxLayer[this->DAT_SomeTile] = 0;
-                                                for (index = 0; index < 4; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field_0x1d54[index][0]
-                                                        == this->bitFlag) {
-                                                        this->GfxLayer[this->DAT_SomeTile]
-                                                            = GMFirstPictureIndex::instance[55] + gfxBaseA
-                                                            + (luminescence - 2) * gfxStride - 1
-                                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
-                                                            + DAT_TerrainDefinedData::instance.field_0x1d54[index][1];
-                                                    }
-                                                }
-                                                for (index = 4; index < 8; index++) {
-                                                    if (DAT_TerrainDefinedData::instance.field_0x1d54[index][0]
-                                                        == this->bitFlag) {
-                                                        this->GfxLayer[this->DAT_SomeTile]
-                                                            = GMFirstPictureIndex::instance[55] + gfxBaseB
-                                                            + (luminescence - 2) * gfxStride - 1
-                                                            + DAT_TerrainDefinedData::instance.field_0x1d54[index][1];
-                                                    }
-                                                }
-                                                if (this->GfxLayer[this->DAT_SomeTile] == 0) {
-                                                    this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMFirstPictureIndex::instance[55] + gfxBaseC
-                                                        + (luminescence - 2) * gfxStride - 1
-                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
-                                                }
-                                            } else if (luminescence == 2) {
-                                                if (this->bitFlag != 0) {
-                                                    this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMFirstPictureIndex::instance[55] + gfxBaseC
-                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
-                                                } else {
-                                                    this->GfxLayer[this->DAT_SomeTile]
-                                                        = GMFirstPictureIndex::instance[55] + gfxBaseD
-                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
-                                                }
-                                            } else if (gfxMode == 2) {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
-                                            } else if (this->bitFlag != 0) {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
-                                            } else {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseB + (luminescence - 3) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
-                                            }
-                                        } else if (luminescence > 2) {
-                                            if (gfxMode == 0) {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseB + (luminescence - 3) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
-                                            } else if (gfxMode == 2) {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseA + (luminescence - 3) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
-                                            } else {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseD + (luminescence - 2) * gfxStride - 1
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
-                                            }
-                                        } else if (macroLow == 2) {
-                                            if (gfxMode == 0) {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseD + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
-                                            } else {
-                                                this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                    + gfxBaseD + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
-                                            }
-                                        } else if (macroLow == 4) {
-                                            macroMid = DAT_TerrainDefinedData::instance
-                                                           .field_0x1a54[this->mapOrientation / 2][macroMid];
+                                if (drawMode == 1) {
+                                    this->GfxLayer[this->DAT_SomeTile] = 0;
+                                    for (partIndex = 0; partIndex < 4; partIndex++) {
+                                        if (DAT_TerrainDefinedData::instance.field_0x1d54[partIndex][0]
+                                            == this->bitFlag) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                                + gfxBaseE + macroMid + macroHigh * 4 - 1;
-                                        } else if (macroLow == 8) {
-                                            macroMid = DAT_TerrainDefinedData::instance
-                                                           .field_0x1b54[this->mapOrientation / 2][macroMid];
-                                            this->GfxLayer[this->DAT_SomeTile] = macroHigh * 9
-                                                + (GMFirstPictureIndex::instance[55] + gfxBaseE + macroMid) + 0xf;
-                                        } else if (macroLow == 0x10) {
-                                            macroMid = DAT_TerrainDefinedData::instance
-                                                           .field_0x1c54[this->mapOrientation / 2][macroMid];
-                                            this->GfxLayer[this->DAT_SomeTile] = macroHigh * 16
-                                                + (GMFirstPictureIndex::instance[55] + gfxBaseE + macroMid) + 0x33;
+                                                + edgeBase + ((luminescence - 2) * perLevel - 1)
+                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
+                                                + DAT_TerrainDefinedData::instance.field_0x1d54[partIndex][1];
                                         }
                                     }
+                                    for (partIndex = 4; partIndex < 8; partIndex++) {
+                                        if (DAT_TerrainDefinedData::instance.field_0x1d54[partIndex][0]
+                                            == this->bitFlag) {
+                                            this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                                + cornerFrame + ((luminescence - 2) * perLevel - 1)
+                                                + DAT_TerrainDefinedData::instance.field_0x1d54[partIndex][1];
+                                        }
+                                    }
+                                    if (this->GfxLayer[this->DAT_SomeTile] == 0) {
+                                        this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                            + flatFrame + ((luminescence - 2) * perLevel - 1)
+                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                    }
+                                } else if (luminescence == 2) {
+                                    if (this->bitFlag != 0) {
+                                        this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
+                                            + flatFrame + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                    } else {
+                                        this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
+                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                    }
+                                } else if (drawMode == 2) {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
+                                        + ((luminescence - 3) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                } else if (this->bitFlag != 0) {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
+                                        + ((luminescence - 3) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
+                                } else {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + cornerFrame
+                                        + ((luminescence - 3) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                 }
+                            } else if (luminescence > 2) {
+                                if (drawMode == 0) {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + cornerFrame
+                                        + ((luminescence - 3) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
+                                } else if (drawMode == 2) {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
+                                        + ((luminescence - 3) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                } else {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
+                                        + ((luminescence - 2) * perLevel - 1)
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                }
+                            } else if (macroSizeType == 2) {
+                                if (drawMode == 0) {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                } else {
+                                    this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
+                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
+                                }
+                            } else if (macroSizeType == 4) {
+                                macroMid
+                                    = DAT_TerrainDefinedData::instance.field_0x1a54[this->mapOrientation / 2][macroMid];
+                                this->GfxLayer[this->DAT_SomeTile]
+                                    = GMFirstPictureIndex::instance[55] + macroBase + macroMid + macroTop * 4 - 1;
+                            } else if (macroSizeType == 8) {
+                                macroMid
+                                    = DAT_TerrainDefinedData::instance.field_0x1b54[this->mapOrientation / 2][macroMid];
+                                this->GfxLayer[this->DAT_SomeTile]
+                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 9 + macroMid + 0xf;
+                            } else if (macroSizeType == 0x10) {
+                                macroMid
+                                    = DAT_TerrainDefinedData::instance.field_0x1c54[this->mapOrientation / 2][macroMid];
+                                this->GfxLayer[this->DAT_SomeTile]
+                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 16 + macroMid + 0x33;
                             }
                         }
                     }

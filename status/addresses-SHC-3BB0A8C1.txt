@@ -41095,7 +41095,7 @@ SHC_3BB0A8C1_0x004FC7C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FC810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FC9E0 | 66.7% | signed layer reads
+SHC_3BB0A8C1_0x004FC9E0 | 87.5% | asm macro via this, resolvers
 
 SHC_3BB0A8C1_0x004FDB00 | 63.1% | signed layer reads
 
