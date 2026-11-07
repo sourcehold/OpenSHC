@@ -15,10 +15,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00515C80
     void TileMapState::createWaterForDrawBridge(int buildingID)
     {
+        int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         uint xPosition = DAT_BuildingsState::instance.buildings[buildingID].x;
         uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
         uint yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
-        int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         int buildingSizeTileIndex = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
