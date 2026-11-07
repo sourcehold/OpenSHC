@@ -30,14 +30,9 @@ namespace Map {
             int playerID, uint x, uint y, int param_4, int param_5)
         {
             int* piVar1;
-            int sVar2;
             int tile;
             uint uVar3;
-            int iVar4;
-            int iVar5;
-            int (*paiVar7)[8];
             int local_8;
-            int local_4;
             uVar3 = y;
             if (399 < x || 399 < y) {
                 return (undefined4)(0);
@@ -64,8 +59,8 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (
                     (tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], -1 < tile && (tile < 0x13a10))) {
-                    local_4 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int const curX = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int const curY = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tile];
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return (undefined4)(0);
@@ -73,62 +68,69 @@ namespace Map {
                     if ((int)this->searchQueue.currentDistance > param_4) {
                         return (undefined4)(0);
                     }
-                    iVar5 = (int)DAT_TileMapState::instance.EntityLayer[tile];
-                    if (DAT_TileMapState::instance.EntityLayer[tile] != 0) {
-                        for (int _step = 1; _step < 10; _step = _step + 1) {
-                            if (DAT_EntityState::instance.entityArray[iVar5].owner == playerID) {
-                                switch (DAT_EntityState::instance.entityArray[iVar5].entityType) {
-                                case OpenSHC::Map::Entities::ET_BRAZIER:
-                                    if ((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT)
-                                        && (DAT_EntityState::instance.entityArray[iVar5].logicalState != 3)) {
-                                        if (param_5 == 0) {
-                                            return (undefined4)(1);
-                                        }
-                                        local_8 = 0;
-                                        y = 0;
-                                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingCost,
-                                            DAT_BuildingsState::ptr)(
-                                            OpenSHC::Commands::M_MAPPER_BRAZIER, &local_8, (int*)&y);
-                                        piVar1
-                                            = DAT_GameState::instance
-                                                  .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                                  .startResources
-                                            + 0xf;
-                                        *piVar1 = *piVar1 + y;
-                                    }
-                                case OpenSHC::Map::Entities::ET_FLAG_1:
-                                case OpenSHC::Map::Entities::ET_FLAG_4:
-                                case OpenSHC::Map::Entities::ET_FLAG_2:
-                                case OpenSHC::Map::Entities::ET_FLAG_3:
-                                case OpenSHC::Map::Entities::ET_HEADS_ON_SPIKES:
+                    int entityID = DAT_TileMapState::instance.EntityLayer[tile];
+                    // at most nine entities per tile, and a self-linked entity ends the list
+                    int count = 0;
+                    while (entityID != 0) {
+                        count = count + 1;
+                        if (count >= 10) {
+                            break;
+                        }
+                        if (DAT_EntityState::instance.entityArray[entityID].owner == playerID) {
+                            switch (DAT_EntityState::instance.entityArray[entityID].entityType) {
+                            case OpenSHC::Map::Entities::ET_BRAZIER:
+                                if ((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT)
+                                    && (DAT_EntityState::instance.entityArray[entityID].logicalState != 3)) {
                                     if (param_5 == 0) {
                                         return (undefined4)(1);
                                     }
-                                    MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
-                                        DAT_EntityState::ptr)(tile);
+                                    local_8 = 0;
+                                    y = 0;
+                                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingCost,
+                                        DAT_BuildingsState::ptr)(
+                                        OpenSHC::Commands::M_MAPPER_BRAZIER, &local_8, (int*)&y);
+                                    piVar1 = DAT_GameState::instance
+                                                 .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                                 .startResources
+                                        + 0xf;
+                                    *piVar1 = *piVar1 + y;
                                 }
+                            case OpenSHC::Map::Entities::ET_FLAG_1:
+                            case OpenSHC::Map::Entities::ET_FLAG_4:
+                            case OpenSHC::Map::Entities::ET_FLAG_2:
+                            case OpenSHC::Map::Entities::ET_FLAG_3:
+                            case OpenSHC::Map::Entities::ET_HEADS_ON_SPIKES:
+                                if (param_5 == 0) {
+                                    return (undefined4)(1);
+                                }
+                                MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
+                                    DAT_EntityState::ptr)(tile);
                             }
-                            iVar4 = (int)DAT_EntityState::instance.entityArray[iVar5].nextEntityOnThisTileByID;
-                            if ((iVar5 == iVar4) || (iVar5 = iVar4, iVar4 == 0))
-                                break;
                         }
+                        int const nextEntityID
+                            = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
+                        if (entityID == nextEntityID) {
+                            break;
+                        }
+                        entityID = nextEntityID;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + tile;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration
-                            && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
-                            DAT_TileMapState::instance.CertainPathLayer[iVar5]
+                        int const neighbour
+                            = DAT_TileMapState::instance.directionTranslationMatrix[curY][_direction] + tile;
+                        if (DAT_TileMapState::instance.WalkLayer[neighbour] != this->searchGeneration
+                            && (DAT_TileMapState::instance.LogicLayer[neighbour] & 0x30) == 0) {
+                            DAT_TileMapState::instance.CertainPathLayer[neighbour]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
+                            DAT_TileMapState::instance.WalkLayer[neighbour] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
-                                + local_4;
+                                + curX;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
-                                + sVar2;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
+                                + curY;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = neighbour;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a0f < this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
