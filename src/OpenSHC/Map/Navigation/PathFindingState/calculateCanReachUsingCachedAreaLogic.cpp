@@ -21,9 +21,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5B00
         BOOLEnum PathFindingState::calculateCanReachUsingCachedAreaLogic(int tile1, int tile2)
         {
-            int _area2;
             int const _area1 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile1];
-            _area2 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
+            int _area2 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
             if (_area1 == _area2) {
                 return TRUE;
             }

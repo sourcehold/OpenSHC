@@ -1,6 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -13,32 +14,29 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A6520
         void PathFindingState::storeDestinationOptionsUnk(int signpostID)
         {
-            this->calculations = this->calculations + 1;
-            int iVar2 = 0;
+            this->calculations += 1;
+            int _destinationCount = 0;
             this->searchQueue.readIndex = 0;
-            if (this->searchQueue.writeIndex != 0) {
-                do {
-                    uint y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    int iVar1 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    uint x = iVar1 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                    if (DAT_TileMapState::instance.CertainPathLayer[iVar1] != 100) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
-                            x, y, 100, (int)(30));
-                        DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][iVar2].x = x;
-                        DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][iVar2].y = y;
-                        iVar2 = iVar2 + 1;
-                    }
-                    if (iVar2 >= 40) {
-                        return;
-                    }
-                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (80400 <= (int)this->searchQueue.readIndex) {
-                        this->searchQueue.readIndex = 0;
-                    }
-                } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
+            while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                uint y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                uint x = _tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                if (DAT_TileMapState::instance.CertainPathLayer[_tile] != 100) {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
+                        x, y, 100, (int)(30));
+                    DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][_destinationCount].x = x;
+                    DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][_destinationCount].y = y;
+                    _destinationCount += 1;
+                }
+                if (_destinationCount >= 40) {
+                    return;
+                }
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                    this->searchQueue.readIndex = 0;
+                }
             }
-            return;
         }
 
     }

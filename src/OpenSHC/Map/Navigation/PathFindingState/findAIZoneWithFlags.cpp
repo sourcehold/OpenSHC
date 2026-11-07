@@ -1,6 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
@@ -25,17 +26,17 @@ namespace Map {
         BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint ySpace, uint y, undefined4 aiInfoFlags)
         {
             int _candidate;
-            int _tile;
-            this->calculations = this->calculations + 1;
+            this->calculations += 1;
             if (ySpace > 399 || y > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return FALSE;
             }
-            this->searchGeneration = this->searchGeneration + 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -48,32 +49,31 @@ namespace Map {
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if (_tile < 0) {
                     return FALSE;
                 }
-                if (_tile >= 80400) {
+                if (_tile >= Map::MC_MAP_TILES_COUNT) {
                     return FALSE;
                 }
-                int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (80400 < (int)this->searchQueue.currentDistance) {
+                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                     return FALSE;
                 }
                 if ((int)this->searchQueue.currentDistance > maxDistance) {
                     return FALSE;
                 }
-                for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
+                for (int _direction = 0; _direction < 8; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                             != 0
-                        && (_candidate
-                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + _tile,
+                        && (_candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile,
                             DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
                         if ((DAT_TileMapState::instance.AIInfoLayer[_candidate] & (byte)aiInfoFlags) != 0) {
-                            this->ALG_ResultY = (int)sVar2;
-                            this->ALG_ResultX = (int)sVar1;
+                            this->ALG_ResultY = (int)_y;
+                            this->ALG_ResultX = (int)_x;
                             return TRUE;
                         }
                         DAT_TileMapState::instance.CertainPathLayer[_candidate]
@@ -82,20 +82,20 @@ namespace Map {
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                   .short_.xOffset
-                            + sVar1;
+                            + _x;
                         this->searchQueue.yQueue[this->searchQueue.writeIndex]
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                   .short_.yOffset
-                            + sVar2;
+                            + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                        this->searchQueue.writeIndex += 1;
+                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

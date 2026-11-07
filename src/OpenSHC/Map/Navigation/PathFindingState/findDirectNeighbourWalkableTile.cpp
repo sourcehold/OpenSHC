@@ -1,5 +1,6 @@
 #include "../PathFindingState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -39,7 +40,14 @@ namespace Map {
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
                     int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex] + _rowTile;
                     uint _logic = DAT_TileMapState::instance.LogicLayer[_tile];
-                    if ((_logic & 0xb1U) == 0 && (_logic & 0x50101400U) == 0) {
+                    if ((_logic
+                            & (LogicHelpers::L_SEA | LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE
+                                | LogicHelpers::L_ROCKY))
+                            == 0
+                        && (_logic
+                               & (LogicHelpers::L_BUILDING | LogicHelpers::L_TREE | LogicHelpers::L_RIVER
+                                   | LogicHelpers::L_KEEP_NON_MANOR_HOUSE | LogicHelpers::L_MOAT))
+                            == 0) {
                         /*
                           No sea, borders, rocky, building, tree, river, keep, moat
                          */

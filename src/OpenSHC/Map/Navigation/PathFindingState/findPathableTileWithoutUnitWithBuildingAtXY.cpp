@@ -2,6 +2,8 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -22,21 +24,18 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CE40
         void PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int ySpace, int y)
         {
-            int _buildingAtStart;
-            int _tile;
-            int _x;
-            int _y;
-            this->calculations = this->calculations + 1;
+            this->calculations += 1;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
             if ((uint)ySpace <= 399 && (uint)y <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0') {
-                this->searchGeneration = this->searchGeneration + 1;
+                this->searchGeneration += 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                        sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                        (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
                 }
                 this->searchQueue.readIndex = 0;
                 this->searchQueue.writeIndex = 1;
@@ -48,14 +47,14 @@ namespace Map {
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                     = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-                _buildingAtStart = DAT_TileMapState::instance.BuildingLayer[this->searchQueue.tilesQueue[0]];
+                int _buildingAtStart = DAT_TileMapState::instance.BuildingLayer[this->searchQueue.tilesQueue[0]];
                 while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (_tile < 0 || _tile >= 0x13a10) {
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (_tile < 0 || _tile >= Map::MC_MAP_TILES_COUNT) {
                         return;
                     }
-                    _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _unitID = (short)DAT_TileMapState::instance.UnitLayer[_tile];
                     /*
                       the unit itself, or building space without a unit
@@ -69,7 +68,7 @@ namespace Map {
                         return;
                     }
                     this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (80400 < (int)this->searchQueue.currentDistance) {
+                    if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                         return;
                     }
                     if (25 < (int)this->searchQueue.currentDistance) {
@@ -82,7 +81,11 @@ namespace Map {
                         int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                         uint _logic = DAT_TileMapState::instance.LogicLayer[_candidate];
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                            && (_logic & 0xb1U) == 0 && (_logic & 0x1000U) == 0
+                            && (_logic
+                                   & (LogicHelpers::L_SEA | LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE
+                                       | LogicHelpers::L_ROCKY))
+                                == 0
+                            && (_logic & LogicHelpers::L_TREE) == 0
                             && (short)DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
                             /*
                               queue pathable tiles that aren't see nor tree
@@ -99,20 +102,19 @@ namespace Map {
                                       .short_.yOffset
                                 + (short)_y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 <= (int)this->searchQueue.writeIndex) {
+                            this->searchQueue.writeIndex += 1;
+                            if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
-                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (80400 <= (int)this->searchQueue.readIndex) {
+                    this->searchQueue.readIndex += 1;
+                    if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 }
             }
-            return;
         }
 
     }

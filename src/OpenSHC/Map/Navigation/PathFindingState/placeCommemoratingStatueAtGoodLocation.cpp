@@ -5,6 +5,8 @@
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -35,23 +37,19 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A21B0
         void PathFindingState::placeCommemoratingStatueAtGoodLocation(int playerID)
         {
-            int _tile;
-            short* psVar4;
-            int* piVar5;
-            int _candidate;
-            MappersEnum commandBuildingType;
             int _startX = (int)DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
             int _startY = (int)DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
             if ((uint)_startX > 399 || (uint)_startY > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_startY * 400 + _startX] == '\0') {
                 return;
             }
-            this->calculations = this->calculations + 1;
-            this->searchGeneration = this->searchGeneration + 1;
+            this->calculations += 1;
+            this->searchGeneration += 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), '\0',
+                    (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             this->searchQueue.currentDistance = 1;
             this->searchQueue.readIndex = 0;
@@ -63,21 +61,21 @@ namespace Map {
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-            commandBuildingType = (OpenSHC::Commands::MappersEnum)((int)SEC_RNG::instance.currentNumber2 % 5
+            MappersEnum commandBuildingType = (OpenSHC::Commands::MappersEnum)((int)SEC_RNG::instance.currentNumber2 % 5
                 + OpenSHC::Commands::M_MAPPER_STATUE1);
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if (_tile < 0) {
                     return;
                 }
-                if (_tile >= 80400) {
+                if (_tile >= Map::MC_MAP_TILES_COUNT) {
                     return;
                 }
                 _startX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 _startY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (80400 < (int)this->searchQueue.currentDistance) {
+                if (Map::MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                     return;
                 }
                 if (20 < (int)this->searchQueue.currentDistance) {
@@ -95,9 +93,11 @@ namespace Map {
                     return;
                 }
                 for (int _direction = 0; _direction < 8; ++_direction) {
-                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_startY][_direction] + _tile;
+                    int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_startY][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate]
+                               & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
+                            == 0) {
                         DAT_TileMapState::instance.CertainPathLayer[_candidate]
                             = (short)this->searchQueue.currentDistance + 1;
                         DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
@@ -110,19 +110,18 @@ namespace Map {
                                   .short_.yOffset
                             + (short)_startY;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                        this->searchQueue.writeIndex += 1;
+                        if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
-                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                this->searchQueue.readIndex += 1;
+                if (Map::MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
-            return;
         }
 
     }

@@ -18,8 +18,8 @@ namespace Map {
             this->numberOfClimbTeleports = 0;
             this->debugGreatestClimbLoading = 0;
             this->maxClimbDataCount = 0;
-            DAT_CurrentClimbDataID::instance = 1;
-            do {
+            for (DAT_CurrentClimbDataID::instance = 1; (int)DAT_CurrentClimbDataID::instance < 200;
+                DAT_CurrentClimbDataID::instance += 1) {
                 if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed != 0) {
                     this->maxClimbDataCount = DAT_CurrentClimbDataID::instance + 1;
                     (*DAT_ClimbLogicDefinedData::instance
@@ -30,15 +30,14 @@ namespace Map {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
                             DAT_CurrentClimbDataID::instance);
                     } else {
-                        this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
+                        this->numberOfClimbTeleports += 1;
                         int numberOfUnitsUsing = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
                         if (numberOfUnitsUsing > this->debugGreatestClimbLoading) {
                             this->debugGreatestClimbLoading = numberOfUnitsUsing;
                         }
                     }
                 }
-                DAT_CurrentClimbDataID::instance = DAT_CurrentClimbDataID::instance + 1;
-            } while ((int)DAT_CurrentClimbDataID::instance < 200);
+            }
         }
 
     }
