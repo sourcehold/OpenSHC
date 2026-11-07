@@ -6,11 +6,11 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95954.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkIndex.hpp"
+#include "OpenSHC/Globals/INT_00b95954.hpp"
 #include "OpenSHC/Globals/INT_00ed3114.hpp"
 #include "OpenSHC/Globals/INT_00ed3144.hpp"
 
@@ -56,7 +56,7 @@ namespace UI {
                             return;
                         }
                         // the end credits (switchToMenuView then plays music 38 instead of 15)
-                        DAT_00b95954::instance = TRUE;
+                        INT_00b95954::instance = 1;
                         MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                             OpenSHC::UI::Enums::MVT_CREDITS, 0);
                         return;
