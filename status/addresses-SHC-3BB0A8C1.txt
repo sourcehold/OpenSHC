@@ -41467,7 +41467,7 @@ SHC_3BB0A8C1_0x00500940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00500980 | 81.8% | signed layer read + int locals
 
-SHC_3BB0A8C1_0x00500B50 | 92.3% | loop guard/regalloc differs
+SHC_3BB0A8C1_0x00500B50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00500BB0 | 100.0% | Reimplemented
 

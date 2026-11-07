@@ -10,12 +10,12 @@ namespace Map {
     {
         int yStep = 1;
         int direction = 4;
+        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
         if ((int)offset < 0) {
             yStep = -1;
             direction = 0;
         }
 
-        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
         int count = abs((int)offset);
         for (int i = 0; i < count; i++) {
             tileUnk = tileUnk + this->directionTranslationMatrix[y][direction];
