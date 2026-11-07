@@ -22,7 +22,10 @@ namespace AI {
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
-        this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition]
+        // the (uint) on the row index is load-bearing: it is the one the row stride multiplies, and dropping it
+        // costs 1.0000 -> 0.9661 (quick_diff) because the signed form sign-extends before the multiply. The
+        // same cast on the column index was redundant and has been removed.
+        this->heatMaps[(uint)this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition]
             .woodRelatedCountdownTo0 = 4;
         // search around the result of the woodcutter search
         MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
@@ -30,13 +33,15 @@ namespace AI {
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
-        ++this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition]
+        ++this->heatMaps[(uint)this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition]
               .structureCount;
         MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
             this->buildingApproriateGridXPosition * 5, this->buildingAppropriateGridYPosition * 5,
             Commands::M_MAPPER_WOODSMAN,
             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                 Commands::M_MAPPER_WOODSMAN),
+            // rotation 15 is a magic value: the building ends up with rotation 0
+            // unless DAT_TileMapState::skipPlacementCheck is set
             15);
     }
 
