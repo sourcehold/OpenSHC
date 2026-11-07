@@ -28,6 +28,7 @@ element list head `symStackElements` (poi(0x10d0fab0)); an element's symbol is a
 all of these. name_rank.cpp is a ready-made input for ranking candidate local names.
 """
 
+import c2base
 import json
 import os
 import re
@@ -38,7 +39,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 '..', 'reimplementation-helper', 'batch'))
 import common
 
-CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
+CDB = os.environ.get("OPENSHC_CDB") or r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 GLOBAL_REG_ALLOC = '0x10c07350'
 BEFORE_SORT = '0x10beb34f'
 AFTER_SORT = '0x10beb354'
@@ -70,7 +71,7 @@ def compile_command(src, tag='r'):
 
 def run(lines, src, tag):
     path = out / (tag + '.cdb')
-    common.write_text(path, '\r\n'.join(lines) + '\r\n')
+    common.write_text(path, c2base.rebase('\r\n'.join(lines) + '\r\n'))
     cmd, cwd = compile_command(src, tag)
     env = common.build_env()
     env['PATH'] = str(common.ROOT / 'MSVC1400-SP1' / 'Common7' / 'IDE') + os.pathsep + env['PATH']

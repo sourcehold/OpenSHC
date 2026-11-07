@@ -49,6 +49,7 @@ sees it), so it works for free functions too. Each run is one compile of FILE.cp
 about 20-60 s.
 """
 
+import c2base
 import json
 import os
 import re
@@ -207,7 +208,7 @@ def tables_script():
 def refresh_tables(src):
     """One compile under cdb that reads c2's name tables and writes c2_tables.json."""
     path = out / 'tables.cdb'
-    slot_probe.common.write_text(path, '\r\n'.join(['sxe ld:c2', 'g'] + tables_script() + ['q', '']))
+    slot_probe.common.write_text(path, c2base.rebase('\r\n'.join(['sxe ld:c2', 'g'] + tables_script() + ['q', ''])))
     cmd, cwd = slot_probe.compile_command(src, 'tables')
     import subprocess
     env = slot_probe.common.build_env()
@@ -250,7 +251,7 @@ def load_tables():
 
 def probe(src, name, phases):
     script = out / 'tupdump.cdb'
-    slot_probe.common.write_text(script, '\r\n'.join(dump_script()) + '\r\n')
+    slot_probe.common.write_text(script, c2base.rebase('\r\n'.join(dump_script()) + '\r\n'))
     n = len(phases)
     # the gate: at the first phase of every function, compare the mangled name (poi(poi(eax)+4)
     # is "?name@Class@...") and arm or disarm the phase breakpoints. $t9 remembers the Function.

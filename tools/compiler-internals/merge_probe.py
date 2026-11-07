@@ -51,6 +51,7 @@ means blocks were folded together after allocation and the polarity may be a dow
 confirm with a two-variant difference before spending time on the arms.
 """
 
+import c2base
 import json
 import os
 import re
@@ -61,7 +62,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 '..', 'reimplementation-helper', 'batch'))
 import common
 
-CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
+CDB = os.environ.get("OPENSHC_CDB") or r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 GLOBAL_REG_ALLOC = '0x10c07350'   # @dop2_GlobalRegAlloc@4
 POGO_FLAG = '0x10d0ffdc'          # _PogoFlag
 
@@ -100,7 +101,7 @@ def compile_command(src):
 
 def run(lines, src, tag):
     path = out / (tag + '.cdb')
-    common.write_text(path, '\r\n'.join(lines) + '\r\n')
+    common.write_text(path, c2base.rebase('\r\n'.join(lines) + '\r\n'))
     cmd, cwd = compile_command(src)
     env = common.build_env()
     env['PATH'] = str(common.ROOT / 'MSVC1400-SP1' / 'Common7' / 'IDE') + os.pathsep + env['PATH']

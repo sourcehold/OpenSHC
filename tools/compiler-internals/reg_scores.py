@@ -67,6 +67,7 @@ about up or down the list, which is otherwise only visible as an unexplained reg
 permutation in the reccmp diff.
 """
 
+import c2base
 import json
 import os
 import re
@@ -77,7 +78,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 '..', 'reimplementation-helper', 'batch'))
 import common
 
-CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
+CDB = os.environ.get("OPENSHC_CDB") or r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 GLOBAL_REG_ALLOC = '0x10c07350'      # @dop2_GlobalRegAlloc@4
 INSERT_IN_LIST = '0x10b11970'        # @InsertInList@8, the candidate priority insert
 ASSIGN_REG = '0x10b14e2a'            # in ChoosePhysReg: mov [cand+0x10], rec; ebx = register number
@@ -126,7 +127,7 @@ def compile_command():
 
 def run(script_lines, tag):
     path = out / (tag + '.cdb')
-    common.write_text(path, '\r\n'.join(script_lines) + '\r\n')
+    common.write_text(path, c2base.rebase('\r\n'.join(script_lines) + '\r\n'))
     cmd, cwd = compile_command()
     env = common.build_env()
     env['PATH'] = str(common.ROOT / 'MSVC1400-SP1' / 'Common7' / 'IDE') + os.pathsep + env['PATH']

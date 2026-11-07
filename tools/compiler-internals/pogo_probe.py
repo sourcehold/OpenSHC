@@ -19,6 +19,7 @@ note below). E.g. `--around 0x10c53e80 0x10c54065` is MdmInsertEntryExit, whose
 `PogoMdOptSuperBlock` (shrink-wrapping) only runs with the flag at 2.
 """
 
+import c2base
 import os
 import re
 import subprocess
@@ -28,7 +29,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'reimplementation-helper', 'batch'))
 import common   # noqa: E402
 
-CDB = r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
+CDB = os.environ.get("OPENSHC_CDB") or r"C:\Program Files (x86)\Windows Kits\10\Debuggers\x86\cdb.exe"
 SPILLCOSTS = 0x10b10420
 POGOFLAG = 0x10d0ffdc
 BS = chr(92)
@@ -64,7 +65,7 @@ def compile_once(src, out, patch_to=None, around=None):
         'g', 'q', '',
     ]
     script = out / 'pogo.cdb'
-    common.write_text(script, '\r\n'.join(lines) + '\r\n')
+    common.write_text(script, c2base.rebase('\r\n'.join(lines) + '\r\n'))
     full = '"%s" -cf "%s" %s' % (CDB, script, cmd)
     r = subprocess.run(full, cwd=base['directory'], env=env, capture_output=True, text=True,
                        timeout=3600)
