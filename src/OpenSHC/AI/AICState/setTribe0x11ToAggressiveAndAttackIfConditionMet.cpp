@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
@@ -15,8 +16,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF560
     void AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet(int playerID)
     {
-        int tribeIndex = 17;
-        if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 <= 0) {
+        int tribeIndex = OpenSHC::AI::Tribes::AITI_BREACH_BASIC_06_01;
+        if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat3 <= 0) {
             return;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {

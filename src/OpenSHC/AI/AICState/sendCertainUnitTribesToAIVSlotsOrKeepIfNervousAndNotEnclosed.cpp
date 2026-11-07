@@ -38,8 +38,7 @@ namespace AI {
                     && DAT_TribesState::instance.tribes[tribeID].uid
                         == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].tribeArrayOffset + j]) {
-                    if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
-                        || enclosed != FALSE) {
+                    if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0 || enclosed) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
                             (AIVUnitType)DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType,
                             j);
@@ -49,8 +48,7 @@ namespace AI {
                 }
 
                 // NOTE: the original sets the stance even when the tribe is invalid (tribeID may be 0)
-                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
-                    || enclosed != FALSE) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0 || enclosed) {
                     DAT_TribesState::instance.tribes[tribeID].unitStance
                         = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
                 } else {

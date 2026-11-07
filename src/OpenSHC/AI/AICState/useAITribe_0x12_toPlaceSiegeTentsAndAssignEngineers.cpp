@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -31,11 +32,13 @@ namespace AI {
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
         int const aicIndex = aiType - 1;
-        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                  .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01];
         if (aiTribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[aiTribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12])
+            != DAT_GameState::instance.playerDataArray[playerID]
+                .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01])
             return;
 
         int availableEngineers = DAT_TribesState::instance.tribes[aiTribeID].size;
@@ -95,7 +98,8 @@ namespace AI {
 
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
-                DAT_TroopValueState::ptr)(tribeID, siegeEngineType, 60, (UnitInstructionType)15);
+                DAT_TroopValueState::ptr)(tribeID, siegeEngineType, 60,
+                OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED);
         }
     }
 

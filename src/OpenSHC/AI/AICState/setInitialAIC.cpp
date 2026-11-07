@@ -28,17 +28,17 @@ namespace AI {
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_10, this)(10);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_11, this)(0xb);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_11, this)(11);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_12, this)(0xc);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_12, this)(12);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_13, this)(0xd);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_13, this)(13);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_14, this)(0xe);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_14, this)(14);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_15, this)(0xf);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_15, this)(15);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_16, this)(0x10);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_16, this)(16);
     }
 
 }

@@ -30,7 +30,7 @@ namespace AI {
                 }
                 int const newTribeID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-                DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[baseOffset + offset] = (short)newTribeID;
+                DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[baseOffset + offset] = newTribeID;
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[baseOffset + offset]
                     = DAT_TribesState::instance.tribes[newTribeID].uid;
                 return newTribeID;

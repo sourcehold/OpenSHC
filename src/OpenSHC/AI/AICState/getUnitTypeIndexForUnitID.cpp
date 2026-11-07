@@ -33,7 +33,8 @@ namespace AI {
         // The Caliph fields slaves rather than the ranged units listed below
         if (DAT_GameState::instance.playerDataArray[owner].aiType - 1 != OpenSHC::AI::AITA_CALIPH
             && allowSlaveSlotForRanged != 0
-            && DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[0xd] > 0) {
+            && DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[OpenSHC::AI::AIVUT_SLAVE]
+                > 0) {
             if (effectiveUnitType == OpenSHC::Map::Units::UT_E_ARCHER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }

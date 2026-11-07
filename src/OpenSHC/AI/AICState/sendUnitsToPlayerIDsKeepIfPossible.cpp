@@ -3,6 +3,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -30,9 +31,8 @@ namespace AI {
 
         uint gatehouseX;
         uint gatehouseY;
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                playerID1, playerID2)
-            == FALSE) {
+        if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
+                playerID1, playerID2)) {
             uint const gatehouseTile
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
                     DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
@@ -62,13 +62,11 @@ namespace AI {
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
 
                 if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
-                        DAT_GameState::ptr)(playerID1, playerID2)
-                    != FALSE) {
-                    if (tribeTypeStart == 0xbe) {
+                        DAT_GameState::ptr)(playerID1, playerID2)) {
+                    if (tribeTypeStart == OpenSHC::AI::Tribes::AITI_BREACH_10_01) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID2);
                     } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
-                                   DAT_TribesState::ptr)(tribeID)
-                        != FALSE) {
+                                   DAT_TribesState::ptr)(tribeID)) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID2);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID2);

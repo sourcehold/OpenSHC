@@ -115,7 +115,7 @@ namespace AI {
             }
         }
 
-        DAT_TribesState::instance.tribes[tribe].targetPlayer_outpost = (short)targetPlayer;
+        DAT_TribesState::instance.tribes[tribe].targetPlayer_outpost = targetPlayer;
     }
 
 }

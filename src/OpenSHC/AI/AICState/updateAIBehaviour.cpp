@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/AI/AIRecruitUnitChoice.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -83,7 +84,7 @@ namespace AI {
                 } else {
                     // only spend on recruiting while gold is above the AIC's threshold
                     DAT_GameState::instance.playerDataArray[playerID].canStartSpending
-                        = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf]
+                        = DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
                         > this->aics[aicIndex].recruitGoldThreshold;
                 }
             }
