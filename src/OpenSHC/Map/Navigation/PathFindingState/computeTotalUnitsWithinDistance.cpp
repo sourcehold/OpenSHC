@@ -21,8 +21,6 @@ namespace Map {
             int playerID, int sameTeamUnits, int someLogicalTileProperty, int tile, int distance)
         {
             uint uVar4;
-            int iVar5;
-            int iVar6;
             this->calculations = this->calculations + 1;
             this->searchGeneration = this->searchGeneration + 1;
             this->ALGO_TotalTroopValue = 0;
@@ -43,34 +41,34 @@ namespace Map {
             DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar4 <= 0x13a0f) {
-                    int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    int uVar2 = (short)DAT_TileMapState::instance.UnitLayer[uVar4];
-                    while (iVar6 = (int)(short)uVar2, iVar6 != 0) {
+                    int y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    for (int unitID = DAT_TileMapState::instance.UnitLayer[uVar4]; unitID != 0;
+                        unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
+                        // sameTeamUnits 1 counts the player's team, 0 every other team, anything else all units
                         if (sameTeamUnits == 1) {
                             if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                                == DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_UnitsState::instance.units[iVar6].owner]) {
-                            LAB_0049c7ba:
-                                if ((DAT_UnitsState::instance.units[iVar6].owner != 0)
-                                    && (DAT_UnitsState::instance.units[iVar6].dying == 0)) {
-                                    iVar5 = MACRO_CALL_MEMBER(
-                                        OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                        DAT_TroopValueState::ptr)(
-                                        (OpenSHC::Map::Units::UnitType)(int)(short)DAT_UnitsState::instance.units[iVar6]
-                                            .unitType);
-                                    this->ALGO_TotalTroopValue = this->ALGO_TotalTroopValue + iVar5;
-                                    this->ALGO_TotalTroopCount = this->ALGO_TotalTroopCount + 1;
-                                    if (this->field_0x64 == 0) {
-                                        this->field_0x64 = iVar6;
-                                    }
-                                }
-                            }
-                        } else if ((sameTeamUnits != 0)
-                            || (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                                 != DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_UnitsState::instance.units[iVar6].owner]))
-                            goto LAB_0049c7ba;
-                        uVar2 = DAT_UnitsState::instance.units[iVar6].nextUnitOnTheSameTile;
+                                    .playerTeams[DAT_UnitsState::instance.units[unitID].owner]) {
+                                continue;
+                            }
+                        } else if (sameTeamUnits == 0
+                            && DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                                == DAT_GameState::instance.mapAndTime
+                                    .playerTeams[DAT_UnitsState::instance.units[unitID].owner]) {
+                            continue;
+                        }
+                        if (DAT_UnitsState::instance.units[unitID].owner == 0
+                            || DAT_UnitsState::instance.units[unitID].dying != 0) {
+                            continue;
+                        }
+                        int const troopValue = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType, DAT_TroopValueState::ptr)(
+                            (OpenSHC::Map::Units::UnitType)(int)(short)DAT_UnitsState::instance.units[unitID].unitType);
+                        this->ALGO_TotalTroopValue = this->ALGO_TotalTroopValue + troopValue;
+                        this->ALGO_TotalTroopCount = this->ALGO_TotalTroopCount + 1;
+                        if (this->field_0x64 == 0) {
+                            this->field_0x64 = unitID;
+                        }
                     }
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
@@ -79,89 +77,25 @@ namespace Map {
                     if ((int)this->searchQueue.currentDistance > distance) {
                         return;
                     }
-                    byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
-                    for (int iVar6 = 0; iVar6 < 8; iVar6 = iVar6 + 4) {
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6] + uVar4;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
+                    byte const pathLinkage = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
+                    for (int direction = 0; direction < 8; ++direction) {
+                        int const neighbour
+                            = DAT_TileMapState::instance.directionTranslationMatrix[y][direction] + uVar4;
+                        if (DAT_TileMapState::instance.WalkLayer[neighbour] != this->searchGeneration) {
                             if ((someLogicalTileProperty == 0
-                                    && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
+                                    && (DAT_TileMapState::instance.LogicLayer[neighbour] & 0x30) == 0)
                                 || (someLogicalTileProperty != 0
-                                    && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6] & bVar1)
+                                    && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[direction]
+                                           & pathLinkage)
                                         != 0)) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar5]
+                                DAT_TileMapState::instance.CertainPathLayer[neighbour]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
+                                DAT_TileMapState::instance.WalkLayer[neighbour] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                           .short_.yOffset
-                                    + sVar3;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (80400 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                        }
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 1] + uVar4;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                            if ((someLogicalTileProperty == 0
-                                    && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                || (someLogicalTileProperty != 0
-                                    && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 1]
-                                           & bVar1)
-                                        != 0)) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar5]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 1]
-                                          .short_.yOffset
-                                    + sVar3;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                        }
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 2] + uVar4;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                            if ((someLogicalTileProperty == 0
-                                    && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                || (someLogicalTileProperty != 0
-                                    && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 2]
-                                           & bVar1)
-                                        != 0)) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar5]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 2]
-                                          .short_.yOffset
-                                    + sVar3;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                        }
-                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 3] + uVar4;
-                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                            if ((someLogicalTileProperty == 0
-                                    && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                || (someLogicalTileProperty != 0
-                                    && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 3]
-                                           & bVar1)
-                                        != 0)) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar5]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 3]
-                                          .short_.yOffset
-                                    + sVar3;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
+                                    + y;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = neighbour;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
