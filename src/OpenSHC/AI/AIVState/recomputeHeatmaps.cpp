@@ -15,7 +15,6 @@ namespace AI {
 
     using namespace Map::LogicHelpers;
 
-    // recomputes the 5x5 tile heat map cells the AI uses to place buildings
     // FUNCTION: STRONGHOLDCRUSADER 0x004F0E80
     void AIVState::recomputeHeatmaps(int initialize)
     {

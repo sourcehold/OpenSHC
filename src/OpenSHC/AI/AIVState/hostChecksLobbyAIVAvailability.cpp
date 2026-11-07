@@ -13,7 +13,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    // lists the AIs with an AIV that every player has, and removes other AIs from the lobby
     // FUNCTION: STRONGHOLDCRUSADER 0x004ECBC0
     void AIVState::hostChecksLobbyAIVAvailability()
     {
