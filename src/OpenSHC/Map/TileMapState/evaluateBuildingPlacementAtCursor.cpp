@@ -33,24 +33,23 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00504A30
     void TileMapState::evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y)
     {
-        uint anchorX = x;
         int moatTile = 0;
-        if (y > 399 || x > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        uint anchorX = x;
+        uint anchorY = y;
+        if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
             this->buildingPlacementFail = TRUE;
             return;
         }
         this->buildingPlacementFail = FALSE;
+        int wallTile = DAT_ViewportRenderState::instance.viewportState.cursorWallTile;
         if (DAT_ViewportRenderState::instance.viewportState.field_0x3c != 0) {
             moatTile = DAT_ViewportRenderState::instance.viewportState.cursorTile;
             this->savedCursorTile = DAT_ViewportRenderState::instance.viewportState.cursorTile;
         }
 
         /* the flat view has no ray hit, so the tile under the mouse is used directly */
-        uint buildingID;
-        int wallTile = DAT_ViewportRenderState::instance.viewportState.cursorWallTile;
-        if (this->flatViewToggleValue1 == 0) {
-            buildingID = DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID;
-        } else {
+        int buildingID;
+        if (this->flatViewToggleValue1 != 0) {
             buildingID = this->BuildingLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile];
             wallTile = 0;
             if ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile]
@@ -60,32 +59,29 @@ namespace Map {
                         & L_STOCKPILEUnk)
                         == 0
                     || buildingID == 0)) {
-                DAT_ViewportRenderState::instance.viewportState.cursorWallTile
-                    = DAT_ViewportRenderState::instance.viewportState.mouseTile;
                 wallTile = DAT_ViewportRenderState::instance.viewportState.mouseTile;
+                DAT_ViewportRenderState::instance.viewportState.cursorWallTile = wallTile;
             }
+        } else {
+            buildingID = DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID;
         }
         if (buildingID != 0) {
-            anchorX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            y = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+            anchorX = DAT_BuildingsState::instance.buildings[buildingID].x;
+            anchorY = DAT_BuildingsState::instance.buildings[buildingID].y;
         }
 
+        int const enemyDistance
+            = DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY ? 15 : 30;
         if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
             && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
             && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                   DAT_PathFindingState::ptr)(playerID, anchorX, y,
-                   (-(uint)(DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-                       & 0xfffffff1)
-                       + 0x1e)
+                   DAT_PathFindingState::ptr)(playerID, anchorX, anchorY, enemyDistance)
                 != FALSE) {
             this->demolishBlocked = 1;
             this->buildingPlacementFail = TRUE;
             this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x14;
             if (buildingID != 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].owner == playerID || playerID == 0) {
-                    this->buildingPlacementFail = TRUE;
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x14;
-                    this->demolishBlocked = 1;
                     return;
                 }
                 this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE;
@@ -94,16 +90,14 @@ namespace Map {
             if (wallTile > 0) {
                 if ((this->LogicLayer[wallTile] & L_WALL_OR_GATEHOUSE) == 0
                     || (this->WallOwnerLayer[wallTile] & 7) + 1 == playerID) {
-                    this->buildingPlacementFail = TRUE;
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x14;
-                    this->demolishBlocked = 1;
                     return;
                 }
                 this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE;
                 return;
             }
             if (moatTile > 0 && (this->LogicLayer[moatTile] & L_MOAT) != 0) {
-                int moatID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(moatTile);
+                int const moatID
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(moatTile);
                 if (moatID == 0) {
                     return;
                 }
@@ -118,15 +112,15 @@ namespace Map {
 
         if (DAT_ViewportRenderState::instance.viewportState.somePitchDitchID != 0) {
             if (this->pitchDitches[DAT_ViewportRenderState::instance.viewportState.somePitchDitchID].owner
-                != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                this->buildingPlacementFail = TRUE;
+                == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                this->cursorTargetID = -DAT_ViewportRenderState::instance.viewportState.somePitchDitchID;
                 return;
             }
-            this->cursorTargetID = -DAT_ViewportRenderState::instance.viewportState.somePitchDitchID;
+            this->buildingPlacementFail = TRUE;
             return;
         }
 
-        if ((int)buildingID < 1
+        if (buildingID <= 0
             || (DAT_BuildingsState::instance.buildings[buildingID].owner != playerID && playerID != 0)) {
             this->buildingPlacementFail = TRUE;
         }
@@ -153,23 +147,27 @@ namespace Map {
             }
         }
         if (checkMoat) {
-            if (moatTile < 1 || (this->LogicLayer[moatTile] & L_MOAT) == 0 || buildingID != 0) {
-                if (this->placementOnWall != 0 || this->placementOnMoat != 0) {
+            if (moatTile > 0 && (this->LogicLayer[moatTile] & L_MOAT) != 0 && buildingID == 0) {
+                if (this->placementOnWall != 0) {
                     this->buildingPlacementFail = TRUE;
+                } else {
+                    int const moatID
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(moatTile);
+                    if (moatID == 0) {
+                        return;
+                    }
+                    if (DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
+                        != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
+                        return;
+                    }
+                    this->buildingPlacementFail = FALSE;
+                    this->placementOnMoat = 1;
+                    if ((this->MiscDisplayLayer[moatTile] & 0x400) != 0) {
+                        this->buildingPlacementFail = TRUE;
+                    }
+                    wallTile = moatTile;
                 }
-            } else if (this->placementOnWall == 0) {
-                int moatID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(moatTile);
-                if (moatID == 0) {
-                    return;
-                }
-                if (DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
-                    != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                    return;
-                }
-                this->placementOnMoat = 1;
-                this->buildingPlacementFail = (BOOLEnum)((this->MiscDisplayLayer[moatTile] & 0x400) != 0);
-                wallTile = moatTile;
-            } else {
+            } else if (this->placementOnWall != 0 || this->placementOnMoat != 0) {
                 this->buildingPlacementFail = TRUE;
             }
         }
@@ -178,29 +176,28 @@ namespace Map {
             this->buildingPlacementFail = TRUE;
         }
         if (buildingID != 0) {
-            if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR) {
-                if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
-                    if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                        == OpenSHC::Map::Buildings::BT_SIGNPOST) {
-                        this->buildingPlacementFail = TRUE;
-                    }
-                } else {
-                    switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
-                    case OpenSHC::Map::Buildings::BT_UNKNOWN1:
-                    case OpenSHC::Map::Buildings::BT_MANORHOUSE:
-                    case OpenSHC::Map::Buildings::BT_STONEKEEP:
-                    case OpenSHC::Map::Buildings::BT_STRONGHOLD:
-                    case OpenSHC::Map::Buildings::BT_SIGNPOST:
-                    case OpenSHC::Map::Buildings::BT_CAMPGROUND:
-                    case OpenSHC::Map::Buildings::BT_KEEPDOOR_LEFT:
-                    case OpenSHC::Map::Buildings::BT_KEEPDOOR_RIGHT:
-                    case OpenSHC::Map::Buildings::BT_KEEPDOOR:
-                    case OpenSHC::Map::Buildings::BT_POND:
-                        this->buildingPlacementFail = TRUE;
-                    }
+            if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
+                switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
+                case OpenSHC::Map::Buildings::BT_UNKNOWN1:
+                case OpenSHC::Map::Buildings::BT_MANORHOUSE:
+                case OpenSHC::Map::Buildings::BT_STONEKEEP:
+                case OpenSHC::Map::Buildings::BT_STRONGHOLD:
+                case OpenSHC::Map::Buildings::BT_SIGNPOST:
+                case OpenSHC::Map::Buildings::BT_CAMPGROUND:
+                case OpenSHC::Map::Buildings::BT_KEEPDOOR_LEFT:
+                case OpenSHC::Map::Buildings::BT_KEEPDOOR_RIGHT:
+                case OpenSHC::Map::Buildings::BT_KEEPDOOR:
+                case OpenSHC::Map::Buildings::BT_POND:
+                    this->buildingPlacementFail = TRUE;
+                }
+            } else if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                    == OpenSHC::Map::Buildings::BT_SIGNPOST) {
+                    this->buildingPlacementFail = TRUE;
                 }
             }
-            if ((int)buildingID < 0) {
+            if (buildingID < 0) {
                 this->cursorTargetID = buildingID;
                 return;
             }
