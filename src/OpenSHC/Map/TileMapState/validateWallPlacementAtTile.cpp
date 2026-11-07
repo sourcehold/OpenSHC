@@ -31,13 +31,14 @@ namespace Map {
         this->illegalBuild = TRUE;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         uint logic = this->LogicLayer[tile];
-        if ((logic & L_WALL_OR_GATEHOUSE) != 0 && (char)this->DamageLayer[tile] <= 11) {
+        int const building = this->BuildingLayer[tile];
+        if ((logic & L_WALL_OR_GATEHOUSE) != 0 && (char)this->DamageLayer[tile] < 12) {
             return;
         }
         if ((logic & L_BUILDING) != 0) {
             return;
         }
-        if (this->BuildingLayer[tile] != 0) {
+        if (building != 0) {
             return;
         }
         if ((logic & (L_PLAIN1_AND_FARM | L_BORDER)) != 0) {
@@ -57,10 +58,12 @@ namespace Map {
             return;
         }
 
-        if (this->UnitLayer[tile] != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0
-            && ((undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL
-                || (undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL2)) {
-            DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
+        if (this->UnitLayer[tile] != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
+            int const unitID = (short)this->UnitLayer[tile];
+            if ((undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL
+                || (undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL2) {
+                DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
+            }
         }
         this->illegalBuild = FALSE;
     }
