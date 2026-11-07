@@ -618,7 +618,7 @@ namespace Map {
             int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7);
 
         void placeDairyfarm(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
-            int* param_6, undefined4 param_7);
+            int param_6, undefined4 param_7);
 
         void placeApplefarm(
             int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);

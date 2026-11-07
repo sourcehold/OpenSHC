@@ -256,7 +256,7 @@ namespace Map {
             break;
         case OpenSHC::Map::Buildings::BT_DAIRYFARM:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeDairyfarm, this)(
-                playerID, x, y, buildingType, buildingSize, (int*)buildingOrientation, averageHeight);
+                playerID, x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
             break;
         case OpenSHC::Map::Buildings::BT_APPLEFARM:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeApplefarm, this)(

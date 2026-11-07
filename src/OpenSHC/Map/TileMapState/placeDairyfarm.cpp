@@ -26,12 +26,12 @@ namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005154D0
     void TileMapState::placeDairyfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5,
-        int* variation, undefined4 averageHeight)
+        int variation, undefined4 averageHeight)
     {
         int index = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID, (int)variation);
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID, variation);
         this->placedBuildingID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, y, 10);
 
