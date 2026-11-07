@@ -62,14 +62,16 @@ namespace Map {
           OrganismLayer holds tree ids below 2000 and rock ids biased by 2000; Ghidra rendered the
           rock lookup as an out-of-bounds index into trees[0x636].
         */
-        if ((this->LogicLayer[tile] & L_ROCKY) != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0
-            && this->OrganismLayer[tile] >= 2000) {
-            short rockType = DAT_LandscapeState::instance.rocks[this->OrganismLayer[tile] - 2000].type;
-            if (rockType >= 0xd) {
-                return this->HeightLayer[tile] + 0x46;
-            }
-            if (rockType >= 9) {
-                extraHeight = 0x32;
+        if ((this->LogicLayer[tile] & L_ROCKY) != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
+            int const organism = this->OrganismLayer[tile];
+            if (organism >= 2000) {
+                short rockType = DAT_LandscapeState::instance.rocks[organism - 2000].type;
+                if (rockType >= 0xd) {
+                    return this->HeightLayer[tile] + 0x46;
+                }
+                if (rockType >= 9) {
+                    extraHeight = 0x32;
+                }
             }
         }
         return this->HeightLayer[tile] + extraHeight;
