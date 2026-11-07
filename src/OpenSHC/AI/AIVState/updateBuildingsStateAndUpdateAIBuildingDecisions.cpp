@@ -44,7 +44,7 @@ namespace AI {
                     DAT_GameState::instance.playerDataArray[player].keepEnclosementRelatedCountdown = 5;
                     continue;
                 }
-                // warn the local player when he broke into an enemy castle
+                // warn the local player when they have broken into an enemy castle
                 if (DAT_GameState::instance.playerDataArray[player].keepEnclosementRelatedCountdown > 0
                     && --DAT_GameState::instance.playerDataArray[player].keepEnclosementRelatedCountdown == 0
                     && DAT_GameState::instance.playerDataArray[player].defensesDamagedByPlayer
