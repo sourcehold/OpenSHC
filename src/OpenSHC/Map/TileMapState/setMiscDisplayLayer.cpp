@@ -26,8 +26,8 @@ namespace Map {
             = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         int typeInt = (short)type;
         int offsetIndex = rotation + size * 4;
-        int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
         int displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[offsetIndex];
+        int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
         int extraTile = -1;
         switch (typeInt) {
         case OpenSHC::Map::Buildings::BT_IRONMINE:
@@ -50,9 +50,12 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_SHIELD:
         case OpenSHC::Map::Buildings::BT_UNKNOWN4:
             /* these carry the worker on the display tile and the display on the worker tile */
-            workerTile = displayTile;
-            displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
-            break;
+            {
+                int const swap = workerTile;
+                workerTile = displayTile;
+                displayTile = swap;
+                break;
+            }
         case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:
             switch (rotation) {
             case 0:
@@ -77,7 +80,7 @@ namespace Map {
             workerTile = -1;
         }
 
-        if ((int)size < 3 && type != OpenSHC::Map::Buildings::BT_GIBBET
+        if ((int)size <= 2 && type != OpenSHC::Map::Buildings::BT_GIBBET
             && type != OpenSHC::Map::Buildings::BT_GALLOWS) {
             this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
                 = this->MiscDisplayLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x] | 4;

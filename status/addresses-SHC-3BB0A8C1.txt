@@ -40369,7 +40369,7 @@ SHC_3BB0A8C1_0x004FAEE0 | 74.2% | LTCG, regalloc differs
 
 SHC_3BB0A8C1_0x004FAF70 | 98.5% | offset walk regalloc
 
-SHC_3BB0A8C1_0x004FB0C0 | 62.4% | LTCG, rotation hoisted
+SHC_3BB0A8C1_0x004FB0C0 | 70.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FB2E0 | 0.0% | Pending
 
