@@ -22,6 +22,7 @@ namespace Map {
         int playerID, uint x, uint y, undefined4 height, uint sizeIndex, int buildingTypeLike, undefined4 param_7)
     {
         int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
+        int index = 0;
 
         if (buildingTypeLike == 0xf) {
             buildingTypeLike = 0;
@@ -37,7 +38,6 @@ namespace Map {
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uid;
 
-        int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -60,7 +60,7 @@ namespace Map {
         int campfireID = (short)campfire;
         DAT_BuildingsState::instance.buildings[campfireID].uidWhenPlaced = uid;
         DAT_BuildingsState::instance.buildings[campfireID].quarryStockpileID = (short)this->placedBuildingID;
-        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = smelterID;
+        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = campfire;
 
         index = 0;
         do {
