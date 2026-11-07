@@ -506,7 +506,7 @@ namespace Map {
 
         void updateBuildingPlacementRotationPreview(int param_1, int param_2);
 
-        int setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
+        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 

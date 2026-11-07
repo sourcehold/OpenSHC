@@ -54,7 +54,7 @@ namespace Map {
     }
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504F10
-    int TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
+    void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
     {
         short const command = (short)type;
         int const skipPlacementFailChecks = this->skipPlacementFailChecks;
@@ -73,7 +73,7 @@ namespace Map {
                 DAT_BuildingsState::ptr)((MappersEnum)command);
         } else {
             if (this->buildingPlacementFail == 2) {
-                return 2;
+                return;
             }
             if (this->buildingPlacementFail != FALSE) {
                 // colour every tile of the footprint by whether it can be built on
@@ -293,7 +293,7 @@ namespace Map {
                         j = j + 1;
                     } while (j < this->constructionTileCount);
                 }
-                return 0;
+                return;
             }
         }
         if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
@@ -724,8 +724,6 @@ namespace Map {
                 j = j + 1;
             } while (j < this->constructionTileCount);
         }
-        // the original returns nothing here (it is void in practice, eax is left over); falling off the end matches
-        // its shared epilogue, an explicit return value would add an instruction to every exit
     }
 
 }

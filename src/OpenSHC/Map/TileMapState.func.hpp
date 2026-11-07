@@ -546,7 +546,7 @@ namespace Map {
             &TileMapState::updateBuildingPlacementRotationPreview)
         updateBuildingPlacementRotationPreview;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, MappersEnum, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, MappersEnum, int), false,
             Address::SHC_3BB0A8C1_0x00504F10, &TileMapState::setConstructionGFXLayerBasedOnPlacementChecks)
         setConstructionGFXLayerBasedOnPlacementChecks;
 
