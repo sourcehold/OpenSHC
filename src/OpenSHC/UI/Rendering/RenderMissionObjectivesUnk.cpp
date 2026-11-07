@@ -15,7 +15,6 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/string-literals.hpp"
 
-#include "OpenSHC/Globals/DAT_00eb0b24.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -23,6 +22,7 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+#include "OpenSHC/Globals/INT_00eb0b24.hpp"
 #include "OpenSHC/Globals/INT_00ec02e8.hpp"
 #include "OpenSHC/Globals/INT_00ed27c4.hpp"
 #include "OpenSHC/Globals/INT_ARRAY_00eb1238.hpp"
@@ -466,7 +466,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 DAT_GameCore::instance.temporaryTextBufferOfSize1000,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - DAT_00eb0b24::instance * pageHeight + offset
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - INT_00eb0b24::instance * pageHeight + offset
                     + 50,
                 720, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, 0);
         } else if (DAT_GameCore::instance.descriptionStringTableIndex) {
@@ -485,7 +485,7 @@ namespace UI {
                     OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_MAP_NAMES, DAT_GameCore::instance.descriptionStringTableIndex),
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 40,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - DAT_00eb0b24::instance * pageHeight + offset
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - INT_00eb0b24::instance * pageHeight + offset
                     + 50,
                 720, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, 0);
         }
