@@ -11,46 +11,43 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A1C0
         void PathFindingState::updatePathLinkageTileMapRelatedToKeeps(int buildingID)
         {
-            int iVar3;
-            int iVar4;
-            short _orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
-            if (_orientation == 4) {
-                iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y - 1;
-                iVar3 = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
-                    + (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
-                int _tile = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + iVar3;
-                DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                    = DAT_TileMapState::instance.PathLinkageLayer[_tile] | 0x10;
-                int _tileBelow = DAT_ViewportRenderState::instance.translationMatrix[iVar4 + 1].addXgetTile + iVar3;
-                DAT_TileMapState::instance.PathLinkageLayer[_tileBelow]
-                    = DAT_TileMapState::instance.PathLinkageLayer[_tileBelow] | 1;
+            // links the tile in front of the keep's entrance with the entrance tile, on the side it faces
+            short const orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
+            if (orientation == 4) {
+                int const row = DAT_BuildingsState::instance.buildings[buildingID].y - 1;
+                int const x = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
+                    + DAT_BuildingsState::instance.buildings[buildingID].x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[row].addXgetTile + x;
+                DAT_TileMapState::instance.PathLinkageLayer[tile] |= 0x10;
+                int const tileBelow = DAT_ViewportRenderState::instance.translationMatrix[row + 1].addXgetTile + x;
+                DAT_TileMapState::instance.PathLinkageLayer[tileBelow] |= 1;
                 return;
             }
-            if (_orientation == 6) {
-                iVar3 = (short)DAT_BuildingsState::instance.buildings[buildingID].x - 1;
-                iVar4 = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
-                    + (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
+            int x;
+            int row;
+            if (orientation == 6) {
+                x = DAT_BuildingsState::instance.buildings[buildingID].x - 1;
+                row = (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2
+                    + DAT_BuildingsState::instance.buildings[buildingID].y;
+            } else if (orientation == 2) {
+                x = DAT_BuildingsState::instance.buildings[buildingID].x
+                    + DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight - 1;
+                row = DAT_BuildingsState::instance.buildings[buildingID].y
+                    + (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2;
             } else {
-                uint uVar2 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-                if (_orientation != 2) {
-                    iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y + (int)uVar2 - 1;
-                    iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x + (int)uVar2 / 2;
-                    int _tile = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + iVar3;
-                    DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                        = DAT_TileMapState::instance.PathLinkageLayer[_tile] | 0x10;
-                    int _tileBelow = DAT_ViewportRenderState::instance.translationMatrix[iVar4 + 1].addXgetTile + iVar3;
-                    DAT_TileMapState::instance.PathLinkageLayer[_tileBelow]
-                        = DAT_TileMapState::instance.PathLinkageLayer[_tileBelow] | 1;
-                    return;
-                }
-                iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y + (int)uVar2 / 2;
-                iVar3 = (short)DAT_BuildingsState::instance.buildings[buildingID].x - 1 + uVar2;
+                row = DAT_BuildingsState::instance.buildings[buildingID].y
+                    + DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight - 1;
+                x = DAT_BuildingsState::instance.buildings[buildingID].x
+                    + (int)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight / 2;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[row].addXgetTile + x;
+                DAT_TileMapState::instance.PathLinkageLayer[tile] |= 0x10;
+                int const tileBelow = DAT_ViewportRenderState::instance.translationMatrix[row + 1].addXgetTile + x;
+                DAT_TileMapState::instance.PathLinkageLayer[tileBelow] |= 1;
+                return;
             }
-            iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar4].addXgetTile + iVar3;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3] = DAT_TileMapState::instance.PathLinkageLayer[iVar3] | 4;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 1]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 1] | 0x40;
-            return;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[row].addXgetTile + x;
+            DAT_TileMapState::instance.PathLinkageLayer[tile] |= 4;
+            DAT_TileMapState::instance.PathLinkageLayer[tile + 1] |= 0x40;
         }
 
     }
