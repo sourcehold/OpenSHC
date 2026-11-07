@@ -26,13 +26,14 @@ namespace Map {
         /* the high of each of the eight neighbours, or the own high where there is no river */
         int heights[8];
         for (int i = 0; i < 8; i++) {
+            int const offsetX = DAT_TerrainDefinedData::instance.field_0x372c[i].x;
             uint neighbourY = y + DAT_TerrainDefinedData::instance.field_0x372c[i].y;
-            uint neighbourX = x + DAT_TerrainDefinedData::instance.field_0x372c[i].x;
+            uint neighbourX = x + offsetX;
             heights[i] = high;
             if (neighbourX <= 399 && neighbourY <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] != 0) {
-                int neighbour = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile
-                    + DAT_TerrainDefinedData::instance.field_0x372c[i].x + x;
+                int neighbour
+                    = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile + offsetX + x;
                 if ((this->LogicLayer[neighbour] & L_RIVER) != 0) {
                     heights[i] = this->HeightLayer[neighbour];
                     if (heights[i] < lowest) {
