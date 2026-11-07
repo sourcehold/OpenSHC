@@ -18,9 +18,9 @@ namespace Map {
     void TileMapState::spawnFloatingNumberAroundTile(int x, int y, int type)
     {
         int radius = type / 2;
+        int index = 0;
         int xBase = x - radius;
         int yBase = y - radius;
-        int index = 0;
         int xOffset = DAT_TerrainDefinedData::instance.field_0x2764[radius * 60].x;
         if (xOffset == -1) {
             return;
