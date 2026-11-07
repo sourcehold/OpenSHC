@@ -22,8 +22,8 @@ namespace Map {
         if (this->refreshCertainTileMap_old == view) {
             return;
         }
-        this->counter1 = 0;
         this->refreshCertainTileMap = view;
+        this->counter1 = 0;
         if (view != 3) {
             return;
         }
