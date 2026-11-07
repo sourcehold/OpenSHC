@@ -15,6 +15,7 @@
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WallAndPitchState.hpp"
@@ -62,128 +63,133 @@ namespace Map {
         }
 
         int upY = y1 - y2;
+        int leftX = x1 - x2;
         int downY = y2 - y1;
         int rightX = x2 - x1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
         uint x = x1;
-        int leftX = x1 - x2;
-        bool stairAborted = false;
+        uint y = y1;
         do {
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR && budget < 0x18) {
-                stairAborted = true;
                 break;
             }
-            if (tileCountUnk <= placed || this->constructionTileCount < wallCount) {
+            if (placed >= tileCountUnk || wallCount > (int)this->constructionTileCount) {
                 break;
             }
             placed++;
-            int tile = *translation + x;
-            bool towerNeighbours = false;
+            int const tile = *translation + x;
+            int towerNeighbours = 0;
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR
                 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
-                stairAborted = true;
                 break;
             }
+            int applyWall = 0;
             /* a wall dragged over a crenel replaces it without counting against the tally */
-            bool overCrenel = false;
+            int overCrenel = 0;
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_WALL && (this->LogicLayer[tile] & L_CRENEL) != 0) {
-                overCrenel = true;
+                overCrenel = 1;
             }
-            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || overCrenel) {
+            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0
+                || overCrenel != 0) {
                 if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::addWallPlacementInfoForTile,
                         DAT_WallAndPitchState::ptr)(tile);
                 }
-                if (this->DamageLayer[tile] != 0 || overCrenel) {
+                if (overCrenel == 0) {
+                    applyWall = 1;
+                }
+                if (this->DamageLayer[tile] != 0 || overCrenel != 0) {
                     this->DamageLayer[tile] = 0;
                     this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
-                    if (overCrenel) {
+                    if (overCrenel != 0) {
                         this->LogicLayer[tile]
                             = this->LogicLayer[tile] & ~(L_CRENEL | L_CRENEL_VARIATIONUnk) | L_WALL_OR_GATEHOUSE;
                     }
                 }
 
-                bool applyWall = true;
-                bool updateLinkages = true;
                 if ((short)wallType == OpenSHC::Commands::M_MAPPER_WALL) {
                     this->HeightLayer[tile] = this->HeightLayer[tile] + 0x5a;
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL) {
                     this->HeightLayer[tile] = this->HeightLayer[tile] + 0x3c;
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_CRENAL) {
                     this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-                    BOOLEnum onlyTowers = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::TileMapState_Func::hasOnlyTowerNeighborsNoWalls, this)(tile, y1);
-                    if (onlyTowers == FALSE) {
-                        this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
-                    } else {
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::hasOnlyTowerNeighborsNoWalls, this)(tile, y)
+                        != FALSE) {
                         this->HeightLayer[tile] = this->HeightLayer[tile] + 0x44;
+                        towerNeighbours = 1;
+                    } else {
+                        this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
                     }
-                    towerNeighbours = onlyTowers != FALSE;
                     /* a crenel on an odd tile of one axis carries the alternate variation */
-                    if (((x & 1) == 0) != ((y1 & 1) == 0)) {
+                    if ((x & 1) != 0 && (y & 1) == 0) {
+                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                    }
+                    if ((x & 1) == 0 && (y & 1) != 0) {
                         this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
                     }
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR) {
-                    int steps = (budget - (int)(uint)this->HeightLayer[tile]) + -0x10;
+                    int const steps = budget - this->HeightLayer[tile] - 0x10;
                     if (steps > 0) {
                         this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
                         this->HeightLayer[tile] = this->HeightLayer[tile] + (char)steps;
                     } else {
-                        applyWall = false;
-                        updateLinkages = overCrenel;
+                        applyWall = 0;
                     }
                 }
 
-                if (applyWall && !overCrenel) {
-                    wallCount++;
-                    this->LogicLayer[tile]
-                        = this->LogicLayer[tile] & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
-                        | L_WALL_OR_GATEHOUSE;
-                    if (this->UnitLayer[tile] != 0
-                        && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType
-                            == OpenSHC::Map::Units::UT_CHICKEN) {
-                        int unitID = (short)this->UnitLayer[tile];
-                        DAT_UnitsState::instance.units[unitID].state.generic
-                            = OpenSHC::Map::Units::States::US_DISAPPEAR;
-                        DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
-                        DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-                    }
-                    if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) != 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
-                        this->HeightLayer[tile] = this->HeightLayer[tile] + 4;
-                    }
-                    if ((this->LogicLayer[tile] & L_TREE) != 0 && this->OrganismLayer[tile] < 2000) {
-                        /* scrub is flattened by the wall, a real tree is left standing */
-                        switch (DAT_LandscapeState::instance.trees[this->OrganismLayer[tile]].treeType) {
-                        case (TreeType)5:
-                        case (TreeType)6:
-                        case (TreeType)7:
-                        case (TreeType)8:
-                        case (TreeType)9:
-                        case (TreeType)0xa:
-                        case (TreeType)0xb:
-                        case (TreeType)0xc:
-                        case (TreeType)0xd:
-                        case (TreeType)0xe:
-                        case (TreeType)0x10:
-                        case (TreeType)0x11:
-                        case (TreeType)0x12:
-                        case (TreeType)0x13:
-                            DAT_LandscapeState::instance.trees[this->OrganismLayer[tile]].state = 3;
+                if (applyWall != 0 || overCrenel != 0) {
+                    if (applyWall != 0 && overCrenel == 0) {
+                        wallCount++;
+                        this->LogicLayer[tile]
+                            = this->LogicLayer[tile] & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
+                            | L_WALL_OR_GATEHOUSE;
+                        ushort const unit = this->UnitLayer[tile];
+                        if (unit != 0
+                            && DAT_UnitsState::instance.units[(short)unit].unitType
+                                == OpenSHC::Map::Units::UT_CHICKEN) {
+                            DAT_UnitsState::instance.units[(short)unit].state.generic
+                                = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                            DAT_UnitsState::instance.units[(short)unit].updateTickTracker = 0;
+                            DAT_UnitsState::instance.units[(short)unit].disappearFadeAlphaCountdown = 0;
                         }
+                        if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) != 0) {
+                            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                            this->HeightLayer[tile] = this->HeightLayer[tile] + 4;
+                        }
+                        if ((this->LogicLayer[tile] & L_TREE) != 0) {
+                            int const organism = this->OrganismLayer[tile];
+                            if (organism < 2000) {
+                                /* scrub is flattened by the wall, a real tree is left standing */
+                                switch (DAT_LandscapeState::instance.trees[organism].treeType) {
+                                case (TreeType)5:
+                                case (TreeType)6:
+                                case (TreeType)7:
+                                case (TreeType)8:
+                                case (TreeType)9:
+                                case (TreeType)0xa:
+                                case (TreeType)0xb:
+                                case (TreeType)0xc:
+                                case (TreeType)0xd:
+                                case (TreeType)0xe:
+                                case (TreeType)0x10:
+                                case (TreeType)0x11:
+                                case (TreeType)0x12:
+                                case (TreeType)0x13:
+                                    DAT_LandscapeState::instance.trees[organism].state = 3;
+                                }
+                            }
+                        }
+                        if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL || towerNeighbours != 0) {
+                            this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
+                        }
+                        this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
                     }
-                    if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL || towerNeighbours) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
-                    }
-                    this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
-                }
-                if (updateLinkages) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                        DAT_PathFindingState::ptr)(y1, tile);
+                        DAT_PathFindingState::ptr)(y, tile);
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                        DAT_PathFindingState::ptr)(7, x, y1);
+                        DAT_PathFindingState::ptr)(7, x, y);
                 }
             }
 
@@ -192,81 +198,79 @@ namespace Map {
                 stepX = rightX;
             }
             int stepY = upY;
-            if ((int)y1 < (int)y2) {
+            if ((int)y < (int)y2) {
                 stepY = downY;
             }
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR) {
-                if (stepY < stepX) {
-                    if ((int)x < (int)x2) {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
-                    } else {
+                if (stepX > stepY) {
+                    if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
                         x = x - 1;
                         rightX = rightX + 1;
-                    }
-                } else if (stepY < 1) {
-                    overshoot = overshoot - 1;
-                } else if ((int)y1 < (int)y2) {
-                    y1 = y1 + 1;
-                    translation = translation + 3;
-                    upY = upY + 1;
-                    downY = downY - 1;
-                } else {
-                    y1 = y1 - 1;
-                    translation = translation - 3;
-                    upY = upY - 1;
-                    downY = downY + 1;
-                }
-            } else {
-                if (stepX != 0) {
-                    int advance = 1;
-                    if ((int)x < (int)x2) {
+                    } else {
                         leftX = leftX + 1;
+                        x = x + 1;
                         rightX = rightX - 1;
-                    } else {
-                        leftX = leftX - 1;
-                        advance = -1;
-                        rightX = rightX + 1;
                     }
-                    x = x + advance;
-                }
-                if (stepY != 0) {
-                    if ((int)y1 < (int)y2) {
-                        y1 = y1 + 1;
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        downY = downY - 1;
-                    } else {
-                        y1 = y1 - 1;
+                } else if (stepY > 0) {
+                    if ((int)y >= (int)y2) {
+                        y = y - 1;
                         translation = translation - 3;
                         upY = upY - 1;
                         downY = downY + 1;
+                    } else {
+                        y = y + 1;
+                        translation = translation + 3;
+                        upY = upY + 1;
+                        downY = downY - 1;
+                    }
+                } else {
+                    overshoot = overshoot - 1;
+                }
+            } else {
+                if (stepX != 0) {
+                    if ((int)x >= (int)x2) {
+                        leftX = leftX - 1;
+                        x = x - 1;
+                        rightX = rightX + 1;
+                    } else {
+                        leftX = leftX + 1;
+                        x = x + 1;
+                        rightX = rightX - 1;
                     }
                 }
-                if (x == x2 && y1 == y2) {
+                if (stepY != 0) {
+                    if ((int)y >= (int)y2) {
+                        y = y - 1;
+                        translation = translation - 3;
+                        upY = upY - 1;
+                        downY = downY + 1;
+                    } else {
+                        y = y + 1;
+                        translation = translation + 3;
+                        upY = upY + 1;
+                        downY = downY - 1;
+                    }
+                }
+                if (x == x2 && y == y2) {
                     overshoot = overshoot - 1;
                 }
             }
-            if (budget > 0xf) {
+            if (budget >= 0x10) {
                 budget = budget - 0x10;
             }
-        } while (x != x2 || y1 != y2 || overshoot != 0);
+        } while (x != x2 || y != y2 || overshoot != 0);
 
-        int woodCount;
-        int stoneCount;
-        if (!stairAborted && (short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-            stoneCount = 0;
-            woodCount = wallCount;
+        /* a stair aborts with wallType still M_MAPPER_STAIR, so it always charges stone */
+        if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+                DAT_BuildingsState::ptr)(playerID, 0, wallCount, 0);
         } else {
-            woodCount = 0;
-            stoneCount = wallCount;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
+                DAT_BuildingsState::ptr)(playerID, wallCount, 0, 0);
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
-            DAT_BuildingsState::ptr)(playerID, stoneCount, woodCount, 0);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        this->field_0x554a30 = 1;
+        DAT_TileMapState::instance.field_0x554a30 = 1;
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
     }
 
