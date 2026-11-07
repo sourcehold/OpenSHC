@@ -21,7 +21,10 @@ namespace AI {
             return;
         }
 
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        // read through a reference so the load and the decrement stay above the countdown store, as in the
+        // original; a plain copy is forward-substituted into the call and sunk past the team check
+        int const& aiTypeRef = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int aicIndex = aiTypeRef - 1;
         int currentPlayerID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         DAT_GameState::instance.playerDataArray[playerID].nervousBikCountdown = 48;
         if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
@@ -30,7 +33,7 @@ namespace AI {
         }
 
         MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-            playerID, aiType - 1, 9);
+            playerID, aicIndex, 9);
     }
 }
 }
