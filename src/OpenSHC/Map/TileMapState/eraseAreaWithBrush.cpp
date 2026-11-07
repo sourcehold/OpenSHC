@@ -30,7 +30,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00508EC0
     void TileMapState::eraseAreaWithBrush(uint x, uint y, uint brush)
     {
-        uint baseX = x;
         if (x > 399) {
             return;
         }
@@ -42,32 +41,31 @@ namespace Map {
         }
 
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        uint baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        /* the original reuses the brush parameter as the saved y and x as the walking tile */
-        brush = y;
-        x = baseTile;
+        uint const savedY = y;
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int tile = baseTile;
 
         if (brushSize > 0) {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, (int*)&x, (int*)&y, baseTile, brush);
-                if ((this->LogicLayer[x] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                    1, index, &tile, (int*)&y, baseTile, savedY);
+                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     break;
                 }
-                int organism = (short)this->OrganismLayer[x];
+                int organism = (short)this->OrganismLayer[tile];
                 if (organism != 0) {
                     /* tree ids come first, rock ids are biased by 2000 */
                     if (organism >= 2000) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
                             organism - 2000);
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                            DAT_PathFindingState::ptr)(8, baseX, y);
+                            DAT_PathFindingState::ptr)(8, x, y);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
                             organism);
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                            DAT_PathFindingState::ptr)(3, baseX, y);
+                            DAT_PathFindingState::ptr)(3, x, y);
                     }
                     DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
                     DAT_TileMapState::instance.field_0x554a30 = 1;
@@ -76,72 +74,75 @@ namespace Map {
             } while (index < brushSize);
         }
 
-        y = brush;
+        y = savedY;
         if (brushSize > 0) {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, (int*)&x, (int*)&y, baseTile, brush);
-                if ((this->LogicLayer[x] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                    1, index, &tile, (int*)&y, baseTile, savedY);
+                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     break;
                 }
                 this->placementOnWall = 0;
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, baseX, y);
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, x, y);
                 if (this->buildingPlacementFail == FALSE) {
-                    if (this->placementOnWall != 0) {
+                    if (this->placementOnWall == 0) {
+                        int const targetID = this->cursorTargetID;
+                        if (targetID != -1) {
+                            /* razing a keep takes the stockpile with it, and the other way round */
+                            int owner = DAT_BuildingsState::instance.buildings[targetID].owner;
+                            if (targetID
+                                    == DAT_GameState::instance.playerDataArray[owner]
+                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                        .id
+                                && DAT_GameState::instance.playerDataArray[owner]
+                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                                        .id
+                                    != 0) {
+                                this->showNoRubbleWhenDestroyingBuilding = 1;
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
+                                    DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
+                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
+                                        .id);
+                            }
+                            if (DAT_BuildingsState::instance.buildings[targetID].buildingType
+                                    == OpenSHC::Map::Buildings::BT_STOCKPILE
+                                && DAT_GameState::instance.playerDataArray[owner]
+                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                        .id
+                                    != 0) {
+                                this->showNoRubbleWhenDestroyingBuilding = 1;
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
+                                    DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
+                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                        .id);
+                            }
+                            this->showNoRubbleWhenDestroyingBuilding = 1;
+                            MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
+                                DAT_BuildingsState::ptr)(this->cursorTargetID);
+                        }
+                    } else {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::spawnEraserTileEffect, this)(
-                            0, DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + baseX);
-                    } else if (this->cursorTargetID != 0xffffffff) {
-                        /* razing a keep takes the stockpile with it, and the other way round */
-                        int owner = DAT_BuildingsState::instance.buildings[this->cursorTargetID].owner;
-                        if (this->cursorTargetID
-                                == DAT_GameState::instance.playerDataArray[owner]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
-                                    .id
-                            && DAT_GameState::instance.playerDataArray[owner]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
-                                    .id
-                                != 0) {
-                            this->showNoRubbleWhenDestroyingBuilding = 1;
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
-                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_STOCKPILE]
-                                    .id);
-                        }
-                        if (DAT_BuildingsState::instance.buildings[this->cursorTargetID].buildingType
-                                == OpenSHC::Map::Buildings::BT_STOCKPILE
-                            && DAT_GameState::instance.playerDataArray[owner]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
-                                    .id
-                                != 0) {
-                            this->showNoRubbleWhenDestroyingBuilding = 1;
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
-                                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[owner]
-                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
-                                    .id);
-                        }
-                        this->showNoRubbleWhenDestroyingBuilding = 1;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildingAndLinkedDuplicates,
-                            DAT_BuildingsState::ptr)(this->cursorTargetID);
+                            0, DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x);
                     }
                 }
                 index++;
             } while (index < brushSize);
         }
 
-        y = brush;
+        y = savedY;
         if (brushSize > 0) {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, (int*)&x, (int*)&y, baseTile, brush);
-                if ((this->LogicLayer[x] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                    1, index, &tile, (int*)&y, baseTile, savedY);
+                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     return;
                 }
-                for (int unit = (short)DAT_TileMapState::instance.UnitLayer[x]; unit != 0;
+                for (int unit = (short)DAT_TileMapState::instance.UnitLayer[tile]; unit != 0;
                     unit = DAT_UnitsState::instance.units[unit].nextUnitOnTheSameTile) {
                     DAT_UnitsState::instance.units[unit].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                 }
