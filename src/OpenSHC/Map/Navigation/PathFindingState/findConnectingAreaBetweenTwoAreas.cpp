@@ -8,163 +8,152 @@ namespace Map {
     namespace Navigation {
 
         /*
-          Graph search over active, recognised climb data entries to determine whether two path-connection   areas
-          (param_2 and param_3) are reachable from each other via intermediate wall or building   areas. Returns the
-          connecting intermediate area ID if a path exists, param_2 if they are directly   adjacent, or 0 if no
-          connection is found. Used to decide if units can navigate between   disconnected areas via climbing
-          structures.      renamed by: Claude Sonnet 4.6
+          Breadth-first search over the usable climb data, joining the areas each one connects (its own area, its wall
+          group and its building's area). Returns the area through which toArea is reached from fromArea, fromArea
+          itself when both are the same area, or 0 when no chain of climb data joins them. With a playerID only the
+          climb data of that player's team, or on buildings with field_0x2c6 set, take part.
          */
         // FUNCTION: STRONGHOLDCRUSADER 0x004A58A0
         dword PathFindingState::findConnectingAreaBetweenTwoAreas(int param_1, dword param_2, dword param_3)
         {
-            undefined4 dVar2;
-            int iVar1;
-            int* piVar5;
-            int iVar6;
-            dword dVar7;
-            dword dVar8;
-            int local_96c;
-            int local_968;
-            dword adStack_960[200];
-            int aiStack_640[400];
             if (param_2 == param_3) {
-                return (dword)(param_2);
+                return param_2;
             }
+            dword const fromArea = param_2;
+            dword const toArea = param_3;
             this->DAT_Test_gatehouse = this->DAT_Test_gatehouse + 1;
-            local_96c = 0;
-            local_968 = 0;
-            iVar6 = 1;
-            if (1 < this->maxClimbDataCount) {
-                piVar5 = &this->climbData[1].isRecognizedByPathfinding;
-                do {
-                    if (((ClimbData*)(piVar5 + -6))->canBeUsed == 1 && *piVar5 != 0 && piVar5[-5] != 1
-                        && ((param_1 == 0
-                                || (DAT_GameState::instance.mapAndTime.playerTeams[piVar5[0x73]]
-                                    == DAT_GameState::instance.mapAndTime.playerTeams[param_1]))
-                            || (DAT_BuildingsState::instance.buildings[piVar5[-3]].field_0x2c6 != 0))) {
-                        aiStack_640[local_96c * 2 + 1] = 0;
-                        aiStack_640[local_96c * 2] = iVar6;
-                        local_96c = local_96c + 1;
-                    }
-                    iVar6 = iVar6 + 1;
-                    piVar5 = piVar5 + 0x81;
-                } while (iVar6 < this->maxClimbDataCount);
+            int candidateCount = 0;
+            int readIndex = 0;
+            dword reachedAreas[200];
+            struct {
+                int climbIndex;
+                int visited;
+            } candidates[200];
+            for (int i = 1; i < this->maxClimbDataCount; ++i) {
+                if (this->climbData[i].canBeUsed != 1 || this->climbData[i].isRecognizedByPathfinding == 0
+                    || this->climbData[i].type == 1) {
+                    continue;
+                }
+                if (param_1 != 0
+                    && DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[i].owner]
+                        != DAT_GameState::instance.mapAndTime.playerTeams[param_1]
+                    && DAT_BuildingsState::instance.buildings[this->climbData[i].buildingID].field_0x2c6 == 0) {
+                    continue;
+                }
+                candidates[candidateCount].visited = 0;
+                candidates[candidateCount].climbIndex = i;
+                candidateCount = candidateCount + 1;
             }
-            int iVar4 = 0;
-            iVar6 = 0;
-            if (0 < local_96c) {
-                do {
-                    iVar1 = aiStack_640[iVar4 * 2];
-                    dVar7 = this->climbData[iVar1].area;
-                    if (dVar7 == param_3) {
-                        dVar7 = this->climbData[iVar1].wallGroupAreaID;
-                        if (dVar7 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        dVar8 = this->climbData[iVar1].buildingArea;
-                        if (dVar8 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        adStack_960[iVar6] = dVar7;
-                        iVar6 = iVar6 + 1;
-                        aiStack_640[iVar4 * 2 + 1] = 1;
-                        if (0 < (int)dVar8) {
-                            adStack_960[iVar6] = dVar8;
-                            iVar6 = iVar6 + 1;
-                        }
-                    } else if (this->climbData[iVar1].wallGroupAreaID == param_3) {
-                        if (dVar7 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        dVar8 = this->climbData[iVar1].buildingArea;
-                        if (dVar8 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        adStack_960[iVar6] = dVar7;
-                        iVar6 = iVar6 + 1;
-                        aiStack_640[iVar4 * 2 + 1] = 1;
-                        if (0 < (int)dVar8) {
-                            adStack_960[iVar6] = dVar8;
-                            iVar6 = iVar6 + 1;
-                        }
-                    } else if (this->climbData[iVar1].buildingArea == param_3) {
-                        dVar8 = this->climbData[iVar1].wallGroupAreaID;
-                        if (dVar7 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        if (dVar8 == param_2) {
-                            return (dword)(param_3);
-                        }
-                        adStack_960[iVar6] = dVar7;
-                        iVar6 = iVar6 + 1;
-                        aiStack_640[iVar4 * 2 + 1] = 1;
-                        adStack_960[iVar6] = dVar8;
-                        iVar6 = iVar6 + 1;
+            int reachedCount = 0;
+            for (int candidate = 0; candidate < candidateCount; ++candidate) {
+                int const climbIndex = candidates[candidate].climbIndex;
+                dword other = this->climbData[climbIndex].area;
+                if (other == toArea) {
+                    other = this->climbData[climbIndex].wallGroupAreaID;
+                    if (other == fromArea) {
+                        return toArea;
                     }
-                    iVar4 = iVar4 + 1;
-                } while (iVar4 < local_96c);
-                if (0 < iVar6) {
-                    do {
-                        dVar7 = adStack_960[local_968];
-                        local_968 = local_968 + 1;
-                        for (iVar4 = 0; iVar4 < local_96c; iVar4 = iVar4 + 1) {
-                            if (aiStack_640[iVar4 * 2 + 1] == 1) {
-                                continue;
-                            }
-                            iVar1 = aiStack_640[iVar4 * 2];
-                            dVar8 = this->climbData[iVar1].area;
-                            if (dVar8 == dVar7) {
-                                dVar8 = this->climbData[iVar1].wallGroupAreaID;
-                                if (dVar8 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                dVar2 = this->climbData[iVar1].buildingArea;
-                                if (dVar2 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                adStack_960[iVar6] = dVar8;
-                                iVar6 = iVar6 + 1;
-                                aiStack_640[iVar4 * 2 + 1] = 1;
-                                if ((int)dVar2 <= 0) {
-                                    continue;
-                                }
-                                adStack_960[iVar6] = dVar2;
-                                iVar6 = iVar6 + 1;
-                            } else if (this->climbData[iVar1].wallGroupAreaID == dVar7) {
-                                if (dVar8 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                dVar2 = this->climbData[iVar1].buildingArea;
-                                if (dVar2 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                adStack_960[iVar6] = dVar8;
-                                iVar6 = iVar6 + 1;
-                                aiStack_640[iVar4 * 2 + 1] = 1;
-                                if ((int)dVar2 <= 0) {
-                                    continue;
-                                }
-                                adStack_960[iVar6] = dVar2;
-                                iVar6 = iVar6 + 1;
-                            } else if (this->climbData[iVar1].buildingArea == dVar7) {
-                                dVar2 = this->climbData[iVar1].wallGroupAreaID;
-                                if (dVar8 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                if (dVar2 == param_2) {
-                                    return (dword)(dVar7);
-                                }
-                                adStack_960[iVar6] = dVar8;
-                                iVar6 = iVar6 + 1;
-                                aiStack_640[iVar4 * 2 + 1] = 1;
-                                adStack_960[iVar6] = dVar2;
-                                iVar6 = iVar6 + 1;
-                            }
-                        }
-                    } while (local_968 < iVar6);
+                    int const buildingArea = this->climbData[climbIndex].buildingArea;
+                    if (buildingArea == fromArea) {
+                        return toArea;
+                    }
+                    reachedAreas[reachedCount] = other;
+                    reachedCount = reachedCount + 1;
+                    candidates[candidate].visited = 1;
+                    if (buildingArea > 0) {
+                        reachedAreas[reachedCount] = buildingArea;
+                        reachedCount = reachedCount + 1;
+                    }
+                } else if (this->climbData[climbIndex].wallGroupAreaID == toArea) {
+                    if (other == fromArea) {
+                        return toArea;
+                    }
+                    int const buildingArea = this->climbData[climbIndex].buildingArea;
+                    if (buildingArea == fromArea) {
+                        return toArea;
+                    }
+                    reachedAreas[reachedCount] = other;
+                    reachedCount = reachedCount + 1;
+                    candidates[candidate].visited = 1;
+                    if (buildingArea > 0) {
+                        reachedAreas[reachedCount] = buildingArea;
+                        reachedCount = reachedCount + 1;
+                    }
+                } else if (this->climbData[climbIndex].buildingArea == toArea) {
+                    int const wallGroupAreaID = this->climbData[climbIndex].wallGroupAreaID;
+                    if (other == fromArea) {
+                        return toArea;
+                    }
+                    if (wallGroupAreaID == fromArea) {
+                        return toArea;
+                    }
+                    reachedAreas[reachedCount] = other;
+                    reachedCount = reachedCount + 1;
+                    candidates[candidate].visited = 1;
+                    reachedAreas[reachedCount] = wallGroupAreaID;
+                    reachedCount = reachedCount + 1;
                 }
             }
-            return (dword)(0);
+            if (reachedCount <= 0) {
+                return 0;
+            }
+            do {
+                dword const area = reachedAreas[readIndex];
+                readIndex = readIndex + 1;
+                for (int candidate = 0; candidate < candidateCount; ++candidate) {
+                    if (candidates[candidate].visited == 1) {
+                        continue;
+                    }
+                    int const climbIndex = candidates[candidate].climbIndex;
+                    dword other = this->climbData[climbIndex].area;
+                    if (other == area) {
+                        other = this->climbData[climbIndex].wallGroupAreaID;
+                        if (other == fromArea) {
+                            return area;
+                        }
+                        int const buildingArea = this->climbData[climbIndex].buildingArea;
+                        if (buildingArea == fromArea) {
+                            return area;
+                        }
+                        reachedAreas[reachedCount] = other;
+                        reachedCount = reachedCount + 1;
+                        candidates[candidate].visited = 1;
+                        if (buildingArea > 0) {
+                            reachedAreas[reachedCount] = buildingArea;
+                            reachedCount = reachedCount + 1;
+                        }
+                    } else if (this->climbData[climbIndex].wallGroupAreaID == area) {
+                        if (other == fromArea) {
+                            return area;
+                        }
+                        int const buildingArea = this->climbData[climbIndex].buildingArea;
+                        if (buildingArea == fromArea) {
+                            return area;
+                        }
+                        reachedAreas[reachedCount] = other;
+                        reachedCount = reachedCount + 1;
+                        candidates[candidate].visited = 1;
+                        if (buildingArea > 0) {
+                            reachedAreas[reachedCount] = buildingArea;
+                            reachedCount = reachedCount + 1;
+                        }
+                    } else if (this->climbData[climbIndex].buildingArea == area) {
+                        int const wallGroupAreaID = this->climbData[climbIndex].wallGroupAreaID;
+                        if (other == fromArea) {
+                            return area;
+                        }
+                        if (wallGroupAreaID == fromArea) {
+                            return area;
+                        }
+                        reachedAreas[reachedCount] = other;
+                        reachedCount = reachedCount + 1;
+                        candidates[candidate].visited = 1;
+                        reachedAreas[reachedCount] = wallGroupAreaID;
+                        reachedCount = reachedCount + 1;
+                    }
+                }
+            } while (readIndex < reachedCount);
+            return 0;
         }
 
     }
