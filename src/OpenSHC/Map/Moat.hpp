@@ -15,10 +15,9 @@ namespace Map {
     // SIZE: 0x00000010
     typedef struct Moat {
 
-        ushort tile; // 0x00000000 length: 2
-        undefined1 padding_0x2[2]; // 0x00000002 length: 2
-        undefined2 x; // 0x00000004 length: 2
-        undefined2 y; // 0x00000006 length: 2
+        int tile; // 0x00000000 length: 4
+        short x; // 0x00000004 length: 2
+        short y; // 0x00000006 length: 2
         short zeroOrTwo; // 0x00000008 length: 2
         undefined1 padding_0xa[2]; // 0x0000000A length: 2
         char owner; // 0x0000000C length: 1
