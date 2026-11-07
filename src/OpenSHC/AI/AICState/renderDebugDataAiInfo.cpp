@@ -55,9 +55,9 @@ namespace AI {
 
             // Player number and name
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                playerID, x + 6, y, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, FALSE, 0);
+                playerID, x + 6, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                "-", x + 16, y, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, FALSE, 0);
+                "-", x + 16, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 DAT_GameSynchronyState::instance.DAT_PlayerNames[playerID], x + 26, y + 1, OpenSHC::Text::TTA_LEFT,
                 color, 0, 18, FALSE, 0);
@@ -116,8 +116,9 @@ namespace AI {
                     DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
                         - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops,
                     DAT_GameState::instance.playerDataArray[playerID].attackTicker);
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)(text, x + 512, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0, 18, FALSE, 0);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    text, x + 512, y, OpenSHC::Text::TTA_LEFT, RGB(255, 255, 255), 0, 18, FALSE, 0);
             } else {
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Sg:%d/%d",
                     DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
