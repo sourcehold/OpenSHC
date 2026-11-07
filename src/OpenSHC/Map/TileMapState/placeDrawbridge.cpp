@@ -1,8 +1,8 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -11,23 +11,22 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_MOAT;
-    using OpenSHC::Map::Buildings::BuildingType;
-  
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00514DE0
     void TileMapState::placeDrawbridge(
-        int playerID, uint x, uint y, undefined4 buildingType, uint total, int* orientation, undefined4 averageHeight)
+        int playerID, uint x, uint y, undefined4 buildingType, uint total, int orientation, undefined4 averageHeight)
     {
         int tileIndex = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, averageHeight, (BuildingType)(int)(short)buildingType, total, playerID, (int)orientation);
-        int rot = (int)orientation / 2;
+            playerID, x, y, averageHeight, (BuildingType)(int)(short)buildingType, total, playerID, orientation);
+        int rot = orientation / 2;
         this->placedBuildingID = buildingID;
         do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                tileIndex, total);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, total);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[tileIndex] = tileUnk;

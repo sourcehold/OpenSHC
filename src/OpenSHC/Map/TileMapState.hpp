@@ -608,7 +608,7 @@ namespace Map {
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
-        void placeDrawbridge(int playerID, uint x, uint y, undefined4 buildingType, uint width, int* orientation,
+        void placeDrawbridge(int playerID, uint x, uint y, undefined4 buildingType, uint width, int orientation,
             undefined4 averageHeight);
 
         void placeWheatfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5, int variation,

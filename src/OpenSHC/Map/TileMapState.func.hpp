@@ -720,7 +720,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005146D0, &TileMapState::placeKeep)
         placeKeep;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int*, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00514DE0, &TileMapState::placeDrawbridge)
         placeDrawbridge;
 

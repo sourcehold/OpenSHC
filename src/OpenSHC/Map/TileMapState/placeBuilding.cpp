@@ -305,7 +305,7 @@ namespace Map {
             break;
         case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeDrawbridge, this)(
-                playerID, x, y, buildingType, buildingSize, (int*)buildingOrientation, averageHeight);
+                playerID, x, y, buildingType, buildingSize, buildingOrientation, averageHeight);
             break;
         case OpenSHC::Map::Buildings::BT_FIREBALLISTA:
         case OpenSHC::Map::Buildings::BT_CATAPULT:
