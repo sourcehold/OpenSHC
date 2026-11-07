@@ -16,14 +16,13 @@ namespace Rendering {
             if (5 < batch) {
                 batch = batch - 5;
             }
+        } else if (param_7 == 2) {
+            batch = this->unitBatchedRenderCounterUntil6 + 3;
+            if (5 < batch) {
+                batch = batch - 5;
+            }
         } else {
             batch = this->unitBatchedRenderCounterUntil6;
-            if (param_7 == 2) {
-                batch = this->unitBatchedRenderCounterUntil6 + 3;
-                if (5 < batch) {
-                    batch = batch - 5;
-                }
-            }
         }
 
         switch (batch) {
