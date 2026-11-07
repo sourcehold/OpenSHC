@@ -39,63 +39,64 @@ namespace Map {
 
         /* the drag walks one tile at a time towards (x2, y2), on whichever axis is further away */
         int upY = y1 - y2;
+        int leftX = x1 - x2;
         int downY = y2 - y1;
         uint x = x1;
-        uint y = y1;
-        int leftX = x1 - x2;
         int rightX = x2 - x1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        int tile;
+        uint y = y1;
         do {
             if ((short)command == 0x1b && budget < 0x18) {
                 break;
             }
-            tile = *translation + x;
+            int const tile = *translation + x;
             if ((short)command == 0x1b && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
                 break;
             }
-            if (this->constructionTileCount <= this->DAT_WallTileCountCurrentDrag) {
+            if (this->DAT_WallTileCountCurrentDrag >= this->constructionTileCount) {
                 break;
             }
+            this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag + 1;
 
             /* a crenel dragged over an existing one does not count against the tile budget */
-            bool onCrenel = false;
+            int onCrenel = 0;
             if ((short)command == 0x19 && (this->LogicLayer[tile] & L_CRENEL) != 0) {
-                onCrenel = true;
+                onCrenel = 1;
             }
-            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || onCrenel) {
-                if (!onCrenel) {
-                    this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag + 1;
+            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || onCrenel != 0) {
+                if (onCrenel != 0) {
+                    this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
                 }
-                if (this->illegalBuild == FALSE) {
+                if (this->illegalBuild != FALSE) {
                     if ((short)command == 0x19) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                     } else if ((short)command == 0x2e) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                     } else if ((short)command == 0x1a) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x14;
                     } else if ((short)command == 0x1b) {
-                        /* a stair climbs one graphic per eight units of height below the wall top */
-                        int steps = (budget - (int)(uint)this->HeightLayer[tile]) / 8 - 1;
-                        if (steps > 0) {
-                            if (steps > 10) {
-                                steps = 10;
-                            }
-                            this->ConstructionGFXLayer[tile]
-                                = (short)steps + 8 + (ushort)GMFirstPictureIndex::instance[6];
-                        } else {
-                            this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
-                        }
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
                     }
                 } else if ((short)command == 0x19) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
                 } else if ((short)command == 0x2e) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
                 } else if ((short)command == 0x1a) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x14;
+                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
                 } else if ((short)command == 0x1b) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
+                    /* a stair climbs one graphic per eight units of height below the wall top */
+                    int steps = (budget - this->HeightLayer[tile]) / 8 - 1;
+                    if (steps <= 0) {
+                        this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
+                    } else {
+                        if (steps > 10) {
+                            steps = 10;
+                        }
+                        this->ConstructionGFXLayer[tile] = steps + GMFirstPictureIndex::instance[6] + 8;
+                    }
                 }
+            } else {
+                this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
             }
 
             int stepX = leftX;
@@ -107,54 +108,54 @@ namespace Map {
                 stepY = downY;
             }
             if ((short)command == 0x1b) {
-                if (stepY < stepX) {
-                    if ((int)x < (int)x2) {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
-                    } else {
+                if (stepX > stepY) {
+                    if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
                         x = x - 1;
                         rightX = rightX + 1;
+                    } else {
+                        leftX = leftX + 1;
+                        x = x + 1;
+                        rightX = rightX - 1;
                     }
                 } else if (stepY > 0) {
-                    if ((int)y < (int)y2) {
-                        translation = translation + 3;
-                        y = y + 1;
-                        upY = upY + 1;
-                        downY = downY - 1;
-                    } else {
+                    if ((int)y >= (int)y2) {
                         translation = translation - 3;
                         y = y - 1;
                         upY = upY - 1;
                         downY = downY + 1;
+                    } else {
+                        translation = translation + 3;
+                        y = y + 1;
+                        upY = upY + 1;
+                        downY = downY - 1;
                     }
                 } else {
                     overshoot = overshoot - 1;
                 }
             } else {
                 if (stepX != 0) {
-                    if ((int)x < (int)x2) {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
-                    } else {
+                    if ((int)x >= (int)x2) {
                         leftX = leftX - 1;
                         x = x - 1;
                         rightX = rightX + 1;
+                    } else {
+                        leftX = leftX + 1;
+                        x = x + 1;
+                        rightX = rightX - 1;
                     }
                 }
                 if (stepY != 0) {
-                    if ((int)y < (int)y2) {
-                        translation = translation + 3;
-                        y = y + 1;
-                        upY = upY + 1;
-                        downY = downY - 1;
-                    } else {
+                    if ((int)y >= (int)y2) {
                         translation = translation - 3;
                         y = y - 1;
                         upY = upY - 1;
                         downY = downY + 1;
+                    } else {
+                        translation = translation + 3;
+                        y = y + 1;
+                        upY = upY + 1;
+                        downY = downY - 1;
                     }
                 }
                 if (x == x2 && y == y2) {
