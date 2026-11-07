@@ -5,7 +5,7 @@
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -20,6 +20,9 @@
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
+// The original's macro expansions read the global instance (NeighbourFlagsGlobalAsm.hpp), but here that
+// measured 90.5% -> 89.8% (reccmp realigns the jump displacements of the now shorter body), so the this-based
+// NeighbourFlagsAsm.hpp stays.
 // masks for the handwritten neighbour-flag macro; MASM has no "|", so these must be literals
 #define NEIGHBOUR_FLAGS_MASK_RIVER 0x100000 // L_RIVER
 #define NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD 0x300000 // L_RIVER | L_FORD
@@ -556,9 +559,9 @@ namespace Map {
                                 cornerMain = 0;
                                 this->WallOwnerLayer[this->DAT_SomeTile]
                                     = this->WallOwnerLayer[this->DAT_SomeTile] & ~8;
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(wall, NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(wall, NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE)
                                 wallNeighboursIndex = this->bitFlag;
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(m1, 2)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m1, 2)
                                 wallNeighboursIndex = ~this->bitFlag & wallNeighboursIndex;
                                 if (wallNeighboursIndex != 0) {
                                     cornerBitsVal = wallNeighboursIndex & 0xaa;
@@ -590,7 +593,7 @@ namespace Map {
                                         }
                                     }
                                     if (cornerMain != 0) {
-                                        MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(r1, 0x800)
+                                        MACRO_NEIGHBOUR_FLAGS_LOGIC_8(r1, 0x800)
                                         if (this->bitFlag != 0) {
                                             cornerMain = 0;
                                         }
@@ -856,9 +859,9 @@ namespace Map {
                             }
                             if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) != 0) {
                             } else {
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(m2, 0x80)
+                                MACRO_NEIGHBOUR_FLAGS_MISC_8(m2, 0x80)
                                 wallMaskId = this->bitFlag;
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(m3, 0x40)
+                                MACRO_NEIGHBOUR_FLAGS_MISC_8(m3, 0x40)
                                 this->bitFlag &= ~wallMaskId;
                                 this->bitFlag &= 0xe3;
                                 if (this->bitFlag != 0) {
@@ -901,7 +904,7 @@ namespace Map {
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
                                 this->Logic2Layer[this->DAT_SomeTile]
                                     = (char)this->Logic2Layer[this->DAT_SomeTile] & ~8;
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(sea1, NEIGHBOUR_FLAGS_MASK_RIVER)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(sea1, NEIGHBOUR_FLAGS_MASK_RIVER)
                                 if (this->bitFlag != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 0x2fc;
                                     this->Logic2Layer[this->DAT_SomeTile]
@@ -910,9 +913,9 @@ namespace Map {
                                 }
                                 if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) != 0) {
                                 } else {
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(sea2, 0x40)
+                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(sea2, 0x40)
                                     seaMask_ = this->bitFlag;
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(sea3, 0x80)
+                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(sea3, 0x80)
                                     this->bitFlag &= ~seaMask_;
                                     this->bitFlag &= 0xe3;
                                     if (this->bitFlag != 0) {
@@ -954,7 +957,7 @@ namespace Map {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[0xa6]
                                         + (pathOffsetVal + 0x2b) + shadeLevelRef * 0xf6 - 1;
                                 } else {
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(sea4, 0x100)
+                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(sea4, 0x100)
                                     if (this->bitFlag != 0) {
                                         edgeModulusWork = 2;
                                         edgeMaskD = this->bitFlag;
@@ -980,7 +983,7 @@ namespace Map {
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_RIVER) != 0) {
                                 this->Logic2Layer[this->DAT_SomeTile]
                                     = (char)this->Logic2Layer[this->DAT_SomeTile] & ~8;
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(riv1, 1)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(riv1, 1)
                                 if (this->bitFlag != 0) {
                                     this->Logic2Layer[this->DAT_SomeTile]
                                         = (char)this->Logic2Layer[this->DAT_SomeTile] | 8;
@@ -991,11 +994,11 @@ namespace Map {
                                             = (short)this->RandomLayer[this->DAT_SomeTile] & 7;
                                     }
                                 }
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(riv2, 0x100031)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(riv2, 0x100031)
                                 this->bitFlag = ~this->bitFlag;
                                 this->bitFlag = this->bitFlag & 0xaa;
                                 if (this->bitFlag == 0) {
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(riv3, 0x100031)
+                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(riv3, 0x100031)
                                     this->bitFlag = ~this->bitFlag;
                                     this->bitFlag = this->bitFlag & 0x55;
                                 }
@@ -1009,7 +1012,7 @@ namespace Map {
                                     for (local_14_f = 0; local_14_f < 7; local_14_f = local_14_f + 1) {
                                         if (DAT_TerrainDefinedData::instance.TerrainFlagGraphicLookup[local_14_f].unk1
                                             == this->bitFlag) {
-                                            MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(riv4, 0x200000)
+                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(riv4, 0x200000)
                                             if (local_14_f < 4) {
                                                 if (this->bitFlag == 0) {
                                                     this->GfxLayer[this->DAT_SomeTile]
@@ -1070,9 +1073,9 @@ namespace Map {
                                 if (((char)this->Logic2Layer[this->DAT_SomeTile] & 0x50) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 0x2fc;
                                 } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & 0x88) != 0) {
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(riv5, 1)
+                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(riv5, 1)
                                     riverMaskA = this->bitFlag;
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(riv6, 0x50)
+                                    MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(riv6, 0x50)
                                     this->bitFlag = this->bitFlag | riverMaskA;
                                     bankDirection = -1;
                                     if (this->bitFlag != 0) {
@@ -1145,7 +1148,7 @@ namespace Map {
                                                 = GMFirstPictureIndex::instance[5] + bankDirection * 16 + 0x30c;
                                         }
                                     } else {
-                                        MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(riv7, NEIGHBOUR_FLAGS_MASK_RIVER)
+                                        MACRO_NEIGHBOUR_FLAGS_LOGIC_8(riv7, NEIGHBOUR_FLAGS_MASK_RIVER)
                                         if (this->bitFlag != 0) {
                                             tileHeightAt = this->HeightLayer[this->DAT_SomeTile];
                                             for (local_14_f = 0; local_14_f < 8; local_14_f = local_14_f + 1) {
@@ -1237,11 +1240,11 @@ namespace Map {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 0x41c;
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_FORD) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(ford1, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
+                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(ford1, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                 this->bitFlag = ~this->bitFlag;
                                 this->bitFlag = this->bitFlag & 0xaa;
                                 if (this->bitFlag == 0) {
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(ford2, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
+                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(ford2, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                     this->bitFlag = ~this->bitFlag;
                                     this->bitFlag = this->bitFlag & 0x55;
                                 }
@@ -1597,7 +1600,7 @@ namespace Map {
                                     } else {
                                         this->AlphaGFXLayer[this->DAT_SomeTile] += (tileXTmp ^ this->DAT_SomeY) & 1;
                                     }
-                                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(alpha, 0x200)
+                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(alpha, 0x200)
                                     if (this->bitFlag != 0) {
                                         switch (this->mapOrientation) {
                                         case 0:
