@@ -136,7 +136,6 @@ namespace AI {
         this->aics[aicIndex].AttMaxDefault = 200;
         this->aics[aicIndex].AttMainGroupsCount = 2;
         this->aics[aicIndex].TargetChoice = OpenSHC::AI::AIC::AITC_BALANCED;
-        return;
     }
 }
 }

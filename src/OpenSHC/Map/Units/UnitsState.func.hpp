@@ -79,7 +79,7 @@ namespace Map {
                 &UnitsState::setupUnitSharingTileIDs)
             setupUnitSharingTileIDs;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F4E0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F4E0,
                 &UnitsState::isUnitRegisteredOnItsOwnTile)
             isUnitRegisteredOnItsOwnTile;
 
@@ -87,7 +87,7 @@ namespace Map {
                 &UnitsState::ifAnyUnitOnSameTileIsLadder)
             ifAnyUnitOnSameTileIsLadder;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052F5B0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052F5B0,
                 &UnitsState::ifAnyUnitOnSameTileIsLadderInRightDirection)
             ifAnyUnitOnSameTileIsLadderInRightDirection;
 
@@ -119,7 +119,7 @@ namespace Map {
                 &UnitsState::setFacingDirectionTowardCoords)
             setFacingDirectionTowardCoords;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FD00,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FD00,
                 &UnitsState::setUnitFacingDirectionTowardsTarget)
             setUnitFacingDirectionTowardsTarget;
 
@@ -195,7 +195,7 @@ namespace Map {
                 &UnitsState::computeDamageFearFactorBonus)
             computeDamageFearFactorBonus;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531220,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531220,
                 &UnitsState::processUnitAttackOtherUnit)
             processUnitAttackOtherUnit;
 
@@ -203,7 +203,7 @@ namespace Map {
                 &UnitsState::processEntityDamageToUnit)
             processEntityDamageToUnit;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00532460,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00532460,
                 &UnitsState::processFireDamageToUnit)
             processFireDamageToUnit;
 
@@ -307,11 +307,11 @@ namespace Map {
                 int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534240, &UnitsState::stopUnitIfNextToTarget)
             stopUnitIfNextToTarget;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534380,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534380,
                 &UnitsState::isWorkplaceBuildingOnAdjacentTile)
             isWorkplaceBuildingOnAdjacentTile;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005343F0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005343F0,
                 &UnitsState::setWorkplaceBuildingEntryAsTarget)
             setWorkplaceBuildingEntryAsTarget;
 
@@ -383,11 +383,11 @@ namespace Map {
                 BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535560, &UnitsState::selectionHasArchers)
             selectionHasArchers;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535580,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535580,
                 &UnitsState::selectionHasMobileAssaultUnits)
             selectionHasMobileAssaultUnits;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005355E0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005355E0,
                 &UnitsState::selectionHasMixedAssaultAndInfantry)
             selectionHasMixedAssaultAndInfantry;
 
@@ -403,7 +403,7 @@ namespace Map {
                 &UnitsState::selectionContainsRangedOnlyUnits)
             selectionContainsRangedOnlyUnits;
 
-            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005357E0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005357E0,
                 &UnitsState::selectionContainsLaddermenOnly)
             selectionContainsLaddermenOnly;
 
@@ -415,19 +415,19 @@ namespace Map {
                 &UnitsState::selectionContainsShieldmenOnly)
             selectionContainsShieldmenOnly;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535870,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535870,
                 &UnitsState::selectionHasShieldOrSiegeMobileUnits)
             selectionHasShieldOrSiegeMobileUnits;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005358C0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005358C0,
                 &UnitsState::selectionHasShieldOrSiegeTower)
             selectionHasShieldOrSiegeTower;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535910,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535910,
                 &UnitsState::selectionHasNoRangedUnits)
             selectionHasNoRangedUnits;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535980,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535980,
                 &UnitsState::selectionHasFootSoldiers)
             selectionHasFootSoldiers;
 
@@ -471,7 +471,7 @@ namespace Map {
                 &UnitsState::getUnitTypeOfFirstSelectedUnit)
             getUnitTypeOfFirstSelectedUnit;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536260,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536260,
                 &UnitsState::selectionHasMovableNonSiegeUnit)
             selectionHasMovableNonSiegeUnit;
 
@@ -500,7 +500,7 @@ namespace Map {
             getFirstSelectedLadderUnitID;
 
             MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536610, &UnitsState::canAUnitClimb)
+                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536610, &UnitsState::canAUnitClimb)
             canAUnitClimb;
 
             MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536690,
@@ -515,7 +515,7 @@ namespace Map {
                 &UnitsState::isTowerTileOvercrowdedByCurrentPlayer)
             isTowerTileOvercrowdedByCurrentPlayer;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536970,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536970,
                 &UnitsState::checkAnySelectedUnitCannotClimb)
             checkAnySelectedUnitCannotClimb;
 
@@ -612,7 +612,7 @@ namespace Map {
                 &UnitsState::findClosestEnemyByAreaAndRange)
             findClosestEnemyByAreaAndRange;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00537D60,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00537D60,
                 &UnitsState::tryAttackUnitID)
             tryAttackUnitID;
 
@@ -632,11 +632,11 @@ namespace Map {
                 GmID (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00539BE0, &UnitsState::getPeasantGmID)
             getPeasantGmID;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int*, int*), false, Address::SHC_3BB0A8C1_0x00539DF0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int*, int*), false, Address::SHC_3BB0A8C1_0x00539DF0,
                 &UnitsState::chooseHusbandAndWife)
             chooseHusbandAndWife;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A070,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A070,
                 &UnitsState::isWorkerAtProductionIdleState)
             isWorkerAtProductionIdleState;
 
@@ -680,7 +680,7 @@ namespace Map {
                 &UnitsState::prepareProjectileTarget)
             prepareProjectileTarget;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D030,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D030,
                 &UnitsState::harassBuildingsWithSiegeAI)
             harassBuildingsWithSiegeAI;
 
@@ -700,7 +700,7 @@ namespace Map {
                 uint (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0053D9C0, &UnitsState::getUnitInHitBox)
             getUnitInHitBox;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0053DCC0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0053DCC0,
                 &UnitsState::setDestinationNearTargetedBuilding)
             setDestinationNearTargetedBuilding;
 
@@ -780,7 +780,7 @@ namespace Map {
                 &UnitsState::moveToFreeTileNearby)
             moveToFreeTileNearby;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00578C40,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00578C40,
                 &UnitsState::processUnitMove)
             processUnitMove;
 

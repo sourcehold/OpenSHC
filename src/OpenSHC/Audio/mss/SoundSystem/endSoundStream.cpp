@@ -18,7 +18,7 @@ namespace Audio {
 
             if (sndStreamIndex == enums::SND_STR_MUSIC) {
                 this->streamActiveUnk_0x20[0] = 0;
-                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = true;
+                DAT_SoundEffectsHelperData1::ptr->field_0x54 = true;
                 if (this->musicSampleFileHandleUnk_0x174 != -1) {
                     AIL_end_sample(this->musicSampleUnk_0x170);
                     MACRO_CALL(OS_Func::_ucrt_close)(this->musicSampleFileHandleUnk_0x174);
@@ -29,7 +29,7 @@ namespace Audio {
                 this->musicFileHandle_0x178 = -1;
                 this->musicSampleFileHandleUnk_0x174 = -1;
                 this->mbr_0x188 = 1;
-                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = false;
+                DAT_SoundEffectsHelperData1::ptr->field_0x54 = false;
                 this->sec_Section1055_0x3274 = 0;
                 return;
             }

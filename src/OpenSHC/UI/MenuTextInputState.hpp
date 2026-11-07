@@ -47,31 +47,25 @@ namespace UI {
         undefined4 DAT_GenieVoiceActiveMenuVar; // 0x00000054 length: 4
         undefined4 DAT_MenuOptionsActionParameter; // 0x00000058 length: 4
         MenuModalTypeInt currentModalDialog; // 0x0000005C length: 4
-        MenuModalTypeInt modalDialog_2; // 0x00000060 length: 4
-        MenuModalTypeInt modalDialog_3; // 0x00000064 length: 4
-        MenuModalTypeInt modalDialog_4; // 0x00000068 length: 4
-        MenuModalTypeInt modalDialog_5; // 0x0000006C length: 4
-        MenuModalTypeInt modalDialog_6; // 0x00000070 length: 4
+        MenuModalTypeInt previousModalDialogs[5]; // 0x00000060 length: 20
         int fileListEntryCount; // 0x00000074 length: 4
         undefined4 fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
-        undefined4 fileListVisibleRowCount; // 0x00000084 length: 4
+        int fileListVisibleRowCount; // 0x00000084 length: 4
         undefined4 DAT_SomeTextArrayIndex; // 0x00000088 length: 4
-        undefined4 lastClickedListIndex; // 0x0000008C length: 4
+        int lastClickedListIndex; // 0x0000008C length: 4
         undefined4 lastListClickTime; // 0x00000090 length: 4
         undefined4 progressBarX; // 0x00000094 length: 4
         undefined4 progressBarY; // 0x00000098 length: 4
-        undefined4 field42_0x9c; // 0x0000009C length: 4
-        undefined4 previewedListIndex; // 0x000000A0 length: 4
-        int field44_0xa4; // 0x000000A4 length: 4
+        undefined4 field_0x9c; // 0x0000009C length: 4
+        int previewedListIndex; // 0x000000A0 length: 4
+        int field_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
-        undefined4 field46_0xac; // 0x000000AC length: 4
-        int DAT_ArrayOfMapU3EndInt2[500]; // 0x000000B0 length: 2000
-        undefined4 DAT_MapSelectionPreloadMapIndexMapping; // 0x00000880 length: 4
-        int DAT_ArrayOfMapIndices[500]; // 0x00000884 length: 2000
-        undefined4 DAT_ArrayOfMapIndices2[500]; // 0x00001054 length: 2000
-        undefined1 padding_0x1824[4]; // 0x00001824 length: 4
+        int DAT_ArrayOfMapU3EndInt2; // 0x000000AC length: 4
+        int arrayOfMapEndInt2[500]; // 0x000000B0 length: 2000
+        int DAT_ArrayOfMapIndices[501]; // 0x00000880 length: 2004
+        int DAT_ArrayOfMapIndices2[501]; // 0x00001054 length: 2004
 
     private:
         MenuTextInputState(MenuTextInputState const&);
@@ -94,7 +88,7 @@ namespace UI {
 
         void popModalDialog();
 
-        void activateLoadOrSaveMapUI(int loadOrSaveMap);
+        void activateLoadOrSaveMapUI(MenuModalType loadOrSaveMap);
 
         void loadOrSaveMap(MenuModalType param_1);
 

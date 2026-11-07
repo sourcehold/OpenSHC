@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -43,8 +44,9 @@ namespace AI {
                 ++this->buildingCounter;
                 uint const realX = this->aivs[playerID].keepXOffset + x;
                 uint const realY = this->aivs[playerID].keepYOffset + y;
-                if (realX > 399 || realY > 399
-                    || !DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
+                if (realX > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 || realY > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+                    || !DAT_ViewportRenderState::instance
+                        .DAT_BinaryTileMap400x400[realY * OpenSHC::Map::MC_MAP_XY_LIMIT + realX]) {
                     continue;
                 }
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile + realX;

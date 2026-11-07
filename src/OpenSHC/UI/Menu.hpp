@@ -39,7 +39,7 @@ namespace UI {
         int someTimestampUnk; // 0x00000034 length: 4
         MenuItem* hoveredItem; // 0x00000038 length: 4
         MenuItem* someMenuItemPtr_0x3c; // 0x0000003C length: 4
-        int field16_0x40; // 0x00000040 length: 4
+        int field_0x40; // 0x00000040 length: 4
 
     private:
         Menu(Menu const&);
