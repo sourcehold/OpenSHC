@@ -11,7 +11,6 @@
 
 #include "OpenSHC/Globals/AlphaAndButtonSurfaceObj.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"
-#include "OpenSHC/Globals/DAT_00ed27bc.hpp"
 #include "OpenSHC/Globals/DAT_ARRAY_00ed26d0.hpp"
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
@@ -22,6 +21,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_StopHandlingMenuItems.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
+#include "OpenSHC/Globals/INT_00ed27bc.hpp"
 #include "OpenSHC/Globals/INT_00ed27c4.hpp"
 
 namespace OpenSHC {
@@ -41,7 +41,7 @@ namespace UI {
                 DAT_ButtonUnknownZero::instance = 1;
                 return;
             }
-            if ((DAT_00ed27bc::instance == 1) && (param_1 != 12)) {
+            if ((INT_00ed27bc::instance == 1) && (param_1 != 12)) {
                 DAT_StopHandlingMenuItems::instance = 0;
                 DAT_ButtonUnknownZero::instance = 1;
                 return;
@@ -103,7 +103,7 @@ namespace UI {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
-                if (DAT_00ed27bc::instance) {
+                if (INT_00ed27bc::instance) {
                     DAT_StopHandlingMenuItems::instance = 0;
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
@@ -173,7 +173,7 @@ namespace UI {
             }
             if (((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION)
                     || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1))
-                && DAT_00ed27bc::instance != 1) {
+                && INT_00ed27bc::instance != 1) {
                 if (param_1 == 12) {
                     DAT_StopHandlingMenuItems::instance = 0;
                     DAT_ButtonUnknownZero::instance = 1;
