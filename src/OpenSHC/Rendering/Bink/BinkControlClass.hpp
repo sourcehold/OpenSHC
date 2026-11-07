@@ -62,7 +62,7 @@ namespace Rendering {
             void stopAllBinkPlayback();
 
             void playBINK(
-                int binkObjIndex, char* binkFileName, DWORD param_3, DWORD param_4, int xPos, int yPos, DWORD param_7);
+                int binkObjIndex, char const* binkFileName, DWORD param_3, DWORD param_4, int xPos, int yPos, DWORD param_7);
 
             void copyBinkToVideoBuffer(dword param_1);
 
