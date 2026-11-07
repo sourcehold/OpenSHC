@@ -18,10 +18,9 @@ namespace Map {
     void TileMapState::clearFixedSizeTwoBuildingFootprint(int x, int y)
     {
         int buildingSizeTileIndex = 0;
-        // do-while, not a for loop: the bound is this->constructionTileCount, which the
-        // getBuildingSizeIndexMappingData call in the body sets. Testing it before the first
-        // iteration would read the count of the previous footprint.
-        do {
+        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
+        // so it can only be tested at the end of it
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 2);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -38,7 +37,10 @@ namespace Map {
             }
             buildingSizeTileIndex++;
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

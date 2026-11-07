@@ -16,10 +16,9 @@ namespace Map {
         int buildingX = DAT_BuildingsState::instance.buildings[buildingID].x;
         int buildingY = DAT_BuildingsState::instance.buildings[buildingID].y;
         uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-        // do-while, not a for loop: the bound is this->constructionTileCount, which the
-        // getBuildingSizeIndexMappingData call in the body sets. Testing it before the first
-        // iteration would read the count of the previous footprint.
-        do {
+        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
+        // so it can only be tested at the end of it
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, widthOrHeight);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + buildingY].addXgetTile
@@ -30,7 +29,10 @@ namespace Map {
                     OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tileUnk);
             }
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }
