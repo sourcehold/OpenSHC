@@ -27,19 +27,19 @@ namespace Map {
             if (ySpace <= 399 && y <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0' && x2 <= 399
                 && y2 <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0') {
+                int curY = y2;
+                int next = 0;
                 int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
-                int distance = DAT_TileMapState::instance.CertainPathLayer[tileUnk];
                 int generation = DAT_TileMapState::instance.WalkLayer[tileUnk];
                 int start = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
-                int next = 0;
-                int curY = y2;
+                int distance = DAT_TileMapState::instance.CertainPathLayer[tileUnk];
                 DAT_PathFindingState::instance.field_0x94 = 0;
                 if (tileUnk != start) {
                     do {
                         uint logic = DAT_TileMapState::instance.LogicLayer[tileUnk];
                         uint isWalkableArea = logic & 0x100;
-                        uint isClimbable = logic & 0x40000000;
                         int best = 8;
+                        uint isClimbable = logic & 0x40000000;
                         for (int dir = 0; dir < 8; dir++) {
                             if (param_5 == 1) {
                                 if ((DAT_TileMapState::instance.PathLinkageLayer[tileUnk]
