@@ -16,12 +16,12 @@ namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00506E10
     void TileMapState::placeSiegeTent(
-        int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize, int param_6, undefined4 height)
+        int playerID, uint x, uint y, short buildingType, uint buildingSize, int param_6, undefined4 height)
     {
-        short const type = (short)buildingType;
         int buildingSizeTileIndex = 0;
-        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, x, y, height, (BuildingType)type, buildingSize, playerID, param_6);
+        int buildingID = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            playerID, x, y, height, (BuildingType)buildingType, buildingSize, playerID, param_6);
         this->placedBuildingID = buildingID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
@@ -35,7 +35,7 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
             this->BuildingLayer[tile] = (short)buildingID;
             buildingSizeTileIndex++;
-            this->BuildingWasLayer[tile] = (uchar)type;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
             this->ChangedLayer[tile] = 2;
         } while (buildingSizeTileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);

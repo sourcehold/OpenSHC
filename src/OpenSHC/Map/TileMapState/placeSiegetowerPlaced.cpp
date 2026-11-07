@@ -14,9 +14,8 @@ namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00506D40
     void TileMapState::placeSiegetowerPlaced(
-        int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7)
+        int param_1, uint param_2, uint param_3, short buildingType, uint param_5, int param_6, undefined4 param_7)
     {
-        short const buildingType = (short)param_4;
         int buildingSizeTileIndex = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(

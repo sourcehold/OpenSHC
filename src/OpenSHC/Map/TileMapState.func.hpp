@@ -562,11 +562,11 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00506BD0, &TileMapState::placeWorkshopOrHovel)
         placeWorkshopOrHovel;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00506D40, &TileMapState::placeSiegetowerPlaced)
         placeSiegetowerPlaced;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00506E10, &TileMapState::placeSiegeTent)
         placeSiegeTent;
 

@@ -516,10 +516,10 @@ namespace Map {
             int playerID, uint x, uint y, BuildingType type, uint size, int orientation, undefined4 averageHeight);
 
         void placeSiegetowerPlaced(
-            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, short param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeSiegeTent(
-            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, short param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placePositiveFearfactor(int playerID, uint x, uint y, undefined4 buildingType, undefined4 variation,
             uint buildingSize, undefined4 param_7, undefined4 height);
