@@ -14,7 +14,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
     using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
@@ -27,7 +26,7 @@ namespace Map {
     void TileMapState::spawnEraserTileEffect(undefined4 param_1, int tile)
     {
         uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-        int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+        int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
         this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfbff;
         if (this->UnitLayer[tile] != 0) {
             return;
@@ -36,15 +35,14 @@ namespace Map {
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tile);
         this->LogicLayer[tile] = this->LogicLayer[tile]
-            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_BUILDING | L_STAIRS | L_UNKNOWN_WALL_RELATED
-                | L_CRENEL_VARIATIONUnk);
-        int microY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8;
+            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
         int microX
             = (tile
                   - DAT_ViewportRenderState::instance
                       .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
                       .addXgetTile)
             * 8;
+        int microY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8;
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0,
             0, microX, microY, DAT_TileMapState::instance.DefaultHeightLayer[tile], microX + 1, microY + 1,
             DAT_TileMapState::instance.DefaultHeightLayer[tile], (EntityType)0x1e, 0);
@@ -53,7 +51,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
             DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-            DAT_PathFindingState::ptr)(9, tile - rowTile, y);
+            DAT_PathFindingState::ptr)(9, x, y);
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
         DAT_TileMapState::instance.field_0x554a30 = 1;
