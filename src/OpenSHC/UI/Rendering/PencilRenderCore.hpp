@@ -34,8 +34,8 @@ namespace UI {
             int currentY; // 0x00000014 length: 4
             dword field_0x18; // 0x00000018 length: 4
             dword field_0x1c; // 0x0000001C length: 4
-            dword moveDirectionXUnk_0x20; // 0x00000020 length: 4
-            dword moveDirectionYUnk_0x24; // 0x00000024 length: 4
+            int moveDirectionXUnk_0x20; // 0x00000020 length: 4
+            int moveDirectionYUnk_0x24; // 0x00000024 length: 4
             int currentWidth_0x28; // 0x00000028 length: 4
             int currentHeight_0x2c; // 0x0000002C length: 4
             dword drawStartX; // 0x00000030 length: 4
