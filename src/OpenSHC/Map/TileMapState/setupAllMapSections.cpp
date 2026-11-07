@@ -59,47 +59,14 @@ namespace Map {
 
         /* the border tiles get their own graphic, everything else the plain one */
         for (int tile = 0; tile < 80400; tile += 6) {
-            if (this->LogicLayer[tile + 0] == L_BORDER) {
-                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 0] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 0] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-            }
-            if (this->LogicLayer[tile + 1] == L_BORDER) {
-                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 1] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 1] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-            }
-            if (this->LogicLayer[tile + 2] == L_BORDER) {
-                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 2] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 2] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-            }
-            if (this->LogicLayer[tile + 3] == L_BORDER) {
-                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 3] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 3] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-            }
-            if (this->LogicLayer[tile + 4] == L_BORDER) {
-                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 4] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 4] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-            }
-            if (this->LogicLayer[tile + 5] == L_BORDER) {
-                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2];
-            } else if (this->LogicLayer[tile + 5] == L_BORDER_EDGE) {
-                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-            } else {
-                this->GfxLayer[tile + 5] = (ushort)GMFirstPictureIndex::instance[2] + 2;
+            for (int i = 0; i < 6; i++) {
+                if (this->LogicLayer[tile + i] == L_BORDER) {
+                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2];
+                } else if (this->LogicLayer[tile + i] == L_BORDER_EDGE) {
+                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 1;
+                } else {
+                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 2;
+                }
             }
         }
 
