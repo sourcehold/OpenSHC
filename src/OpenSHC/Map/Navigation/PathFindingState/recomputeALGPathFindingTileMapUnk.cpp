@@ -50,7 +50,7 @@ namespace Map {
                         if ((int)this->searchQueue.currentDistance > someMax) {
                             return;
                         }
-                        for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
+                        for (int _direction = 0; _direction < 8; ++_direction) {
                             if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
                                 && ((byte)param_4 != 8
                                     || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
@@ -67,85 +67,6 @@ namespace Map {
                                     + sVar1;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                          .short_.yOffset
-                                    + sVar2;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                            if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
-                                && ((byte)param_4 != 8
-                                    || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
-                                && (iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 1]
-                                        + uVar3,
-                                    DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)
-                                && ((byte)param_4 == 0x80 || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar4]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 1]
-                                          .short_.xOffset
-                                    + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 1]
-                                          .short_.yOffset
-                                    + sVar2;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                            if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
-                                && ((byte)param_4 != 8
-                                    || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
-                                && (iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 2]
-                                        + uVar3,
-                                    DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration
-                                        && (((byte)param_4 == 0x80
-                                            || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))))) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar4]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 2]
-                                          .short_.xOffset
-                                    + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 2]
-                                          .short_.yOffset
-                                    + sVar2;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
-                            }
-                            if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
-                                && ((byte)param_4 != 8
-                                    || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
-                                && (iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 3]
-                                        + uVar3,
-                                    DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)
-                                && ((byte)param_4 == 0x80 || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))) {
-                                DAT_TileMapState::instance.CertainPathLayer[iVar4]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 3]
-                                          .short_.xOffset
-                                    + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance
-                                          .clockwiseCardinalTranslationMatrix[_direction + 3]
                                           .short_.yOffset
                                     + sVar2;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
