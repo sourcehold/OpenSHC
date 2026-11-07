@@ -32,7 +32,7 @@ namespace UI {
             this->unknownSfxAndGmRelatedFlag = FALSE;
             // bufferAllocStateUnk_0x0 records a failed allocation: 1 for an image buffer, 2 and 3 for the other two
             this->gmProcessedImageData
-                = MACRO_CALL(OpenSHC::OS_Func::_malloc)(this->gmProcessedImageDataBufferSize_0x74);
+                = (byte*)MACRO_CALL(OpenSHC::OS_Func::_malloc)(this->gmProcessedImageDataBufferSize_0x74);
             if (!this->gmProcessedImageData) {
                 this->bufferAllocStateUnk_0x0 = 1;
                 return this;
@@ -61,7 +61,7 @@ namespace UI {
             this->totalLoadedGfx = 0;
             this->colorPaletteOverride = 0;
             // room for 36 faces of 8448 bytes (readBitmapFace's FACE_SIZE), and their sizes, none loaded yet
-            this->bitmapsFaces_0x94 = MACRO_CALL(OpenSHC::OS_Func::_malloc)(36 * 8448);
+            this->bitmapsFaces_0x94 = (ushort(*)[66][64])MACRO_CALL(OpenSHC::OS_Func::_malloc)(36 * 8448);
             for (int i = 0; i < countof(this->bitmapFaceSizes); ++i) {
                 this->bitmapFaceSizes[i] = 0;
             }
