@@ -1,0 +1,698 @@
+#include "../TileMapState.func.hpp"
+
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    using OpenSHC::Commands::MappersEnum;
+    using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Location::GateTowerPlacement;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x00504F10
+    void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
+    {
+        short const command = (short)type;
+        int const skipPlacementFailChecks = this->skipPlacementFailChecks;
+        int keepSpriteVariant = 0;
+        int i = 0;
+        this->skipPlacementFailChecks = 0;
+        if (skipPlacementFailChecks != 0) {
+            BuildingType const buildingType = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+            this->buildingSpriteSheetID_1
+                = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[buildingType].intValue;
+            this->buildingSpriteID1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+            this->buildingSpriteID2 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID2,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+        } else {
+            if (this->buildingPlacementFail == 2) {
+                return;
+            }
+            if (this->buildingPlacementFail != FALSE) {
+                // colour every tile of the footprint by whether it can be built on
+                do {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(i, size);
+                    int const tile
+                        = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                        + this->buildingX + x;
+                    if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                        this->ConstructionGFXLayer[tile]
+                            = MACRO_CALL_MEMBER(
+                                  OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(
+                                  tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                            ? 0x37
+                            : 0x3e;
+                    }
+                    i = i + 1;
+                } while (i < this->constructionTileCount);
+                if (command == OpenSHC::Commands::M_MAPPER_KEEP1 || command == OpenSHC::Commands::M_MAPPER_KEEP2
+                    || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
+                    int const keepIndex = command - OpenSHC::Commands::M_MAPPER_KEEP1;
+                    for (int part = 0; part != 3; part++) {
+                        XYPair const& offset = DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part];
+                        int const tile = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile
+                            + offset.x + x;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                    }
+                    int const outbuildingX
+                        = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].xOffset;
+                    int const outbuildingY
+                        = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].yOffset;
+                    i = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(i, 7);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuildingY]
+                                  .addXgetTile
+                            + this->buildingX + outbuildingX;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        i = i + 1;
+                    } while (i < this->constructionTileCount);
+                    int const outbuilding2X
+                        = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + x;
+                    int const outbuilding2Y
+                        = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].yOffset + y;
+                    int j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuilding2Y]
+                                  .addXgetTile
+                            + this->buildingX + outbuilding2X;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                }
+                if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+                    || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
+                    MappersEnum const gateCommand = (MappersEnum)command;
+                    GateTowerPlacement const& check
+                        = DAT_TerrainDefinedData::instance
+                              .gateTowerChecks[gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A];
+                    int const tower1X = check.x1 + x;
+                    int const tower1Y = check.y1 + y;
+                    int j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 3);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + tower1Y].addXgetTile
+                            + this->buildingX + tower1X;
+                        this->ConstructionGFXLayer[tile]
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
+                                  this)(tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, gateCommand, 0)
+                            ? 0x37
+                            : 0x3e;
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                    int const tower2X = check.x2 + x;
+                    int const tower2Y = check.y2 + y;
+                    j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 3);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + tower2Y].addXgetTile
+                            + this->buildingX + tower2X;
+                        this->ConstructionGFXLayer[tile]
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
+                                  this)(tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, gateCommand, 0)
+                            ? 0x37
+                            : 0x3e;
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                    for (int j = 0; j != 6; j++) {
+                        int const tile = DAT_ViewportRenderState::instance
+                                             .translationMatrix[DAT_TerrainDefinedData::instance
+                                                                    .gateHouseTiles[gateCommand
+                                                                        - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                                                                    .y
+                                                 + y]
+                                             .addXgetTile
+                            + DAT_TerrainDefinedData::instance
+                                  .gateHouseTiles[gateCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                                  .x
+                            + x;
+                        this->ConstructionGFXLayer[tile]
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile,
+                                  this)(tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, gateCommand, 0)
+                            ? 0x37
+                            : 0x3e;
+                    }
+                } else if (command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
+                    || command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
+                    int j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                            + this->buildingX + x + 5;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                    j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + 5].addXgetTile
+                            + this->buildingX + x;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                    j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + 5].addXgetTile
+                            + this->buildingX + x + 5;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                } else if (command == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD
+                    || command == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
+                    int j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + 5].addXgetTile
+                            + this->buildingX + x;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                } else if (command == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
+                    int j = 0;
+                    do {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 4);
+                        int const tile
+                            = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + 4].addXgetTile
+                            + this->buildingX + x;
+                        if ((this->LogicLayer[tile] & 0x10000500U) == 0) {
+                            this->ConstructionGFXLayer[tile]
+                                = MACRO_CALL_MEMBER(
+                                      OpenSHC::Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, this)(tile,
+                                      DAT_GameSynchronyState::instance.currentPlayerSlotID, (MappersEnum)command, 0)
+                                ? 0x37
+                                : 0x3e;
+                        }
+                        j = j + 1;
+                    } while (j < this->constructionTileCount);
+                }
+                return;
+            }
+        }
+        if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
+            size = 3;
+        } else if (command == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
+            size = 3;
+        } else if (command == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
+            size = 3;
+        } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
+            size = 3;
+        } else if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C || command == OpenSHC::Commands::M_MAPPER_GATE_STONE1A
+            || command == OpenSHC::Commands::M_MAPPER_GATE_STONE2A) {
+            this->gateOrientationVariant = 0x51;
+        } else if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D || command == OpenSHC::Commands::M_MAPPER_GATE_STONE1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_STONE2B) {
+            this->gateOrientationVariant = 0x50;
+        }
+        MappersEnum const buildingCommand = (MappersEnum)command;
+        do {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(i, size);
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
+            int rotation = this->uiBuildingRotation;
+            if (rotation != 0xf && rotation != 8) {
+                rotation = rotation - this->mapOrientation;
+                if (rotation < 0) {
+                    rotation = rotation + 8;
+                }
+            }
+            int sprite;
+            if (this->mapOrientation == 2 || this->mapOrientation == 6) {
+                if (this->gateOrientationVariant == 0x51) {
+                    sprite = this->buildingSpriteID1;
+                } else {
+                    sprite = this->buildingSpriteID2;
+                }
+            } else if (this->gateOrientationVariant == 0x51) {
+                sprite = this->buildingSpriteID2;
+            } else {
+                sprite = this->buildingSpriteID1;
+            }
+            if (command == OpenSHC::Commands::M_MAPPER_DRAWBRIDGE && rotation != 0) {
+                if (rotation == 2) {
+                    rotation = 3;
+                } else if (rotation == 4) {
+                    rotation = 2;
+                } else if (rotation == 6) {
+                    rotation = 1;
+                }
+            }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                    DAT_BuildingsState::ptr)(buildingCommand)
+                == OpenSHC::Map::Buildings::BT_UNKNOWN1) {
+                sprite = sprite + (&DAT_BuildingDefinedData::instance.field_0x976c[9].y)[buildingCommand];
+            } else if (MACRO_CALL_MEMBER(
+                           OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                           DAT_BuildingsState::ptr)(buildingCommand)
+                == OpenSHC::Map::Buildings::BT_HOVEL) {
+                sprite = DAT_BuildingDefinedData::instance.SomeSpriteArray1[DAT_GameState::instance
+                        .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .hovelCountUpToEight];
+            }
+            if (this->uiBuildingRotation != 0xf) {
+                this->ConstructionGFXLayer[tile] = (short)(rotation * size * size)
+                    + (short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1] + (short)sprite
+                    + (short)this->buildingRotationRelatedValue - 1;
+            } else {
+                this->ConstructionGFXLayer[tile] = (short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1]
+                    + (short)sprite + (short)this->buildingRotationRelatedValue - 1;
+            }
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+            }
+            i = i + 1;
+        } while (i < this->constructionTileCount);
+        if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
+            || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1D) {
+            int const gateIndex = buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A;
+            GateTowerPlacement const& gate = DAT_TerrainDefinedData::instance.gateTowerPlacements[gateIndex];
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 2);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[gate.y1 + y + this->buildingY].addXgetTile
+                    + this->buildingX + gate.x1 + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            for (int j = 0; j != 5; j++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate.rotationIndex1][j];
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[offset.y + gate.y1 + y].addXgetTile
+                    + offset.x + gate.x1 + x;
+                if (j <= 0) {
+                    this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
+                } else {
+                    int towerRotation
+                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate.rotationIndex1][j - 1]
+                        - this->mapOrientation;
+                    if (towerRotation < 0) {
+                        towerRotation = towerRotation + 8;
+                    }
+                    this->ConstructionGFXLayer[tile]
+                        = GMFirstPictureIndex::instance[0x34] + (towerRotation / 2) * 4 + j + 0x60e;
+                }
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+            GateTowerPlacement const& gate2 = DAT_TerrainDefinedData::instance.gateTowerPlacements[gateIndex];
+            j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 2);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[gate2.y2 + y + this->buildingY].addXgetTile
+                    + this->buildingX + gate2.x2 + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            for (int j = 0; j != 5; j++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate2.rotationIndex2][j];
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[offset.y + gate2.y2 + y].addXgetTile
+                    + offset.x + gate2.x2 + x;
+                if (j <= 0) {
+                    this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
+                } else {
+                    int towerRotation
+                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate2.rotationIndex2][j - 1]
+                        - this->mapOrientation;
+                    if (towerRotation < 0) {
+                        towerRotation = towerRotation + 8;
+                    }
+                    this->ConstructionGFXLayer[tile]
+                        = GMFirstPictureIndex::instance[0x34] + (towerRotation / 2) * 4 + j + 0x60e;
+                }
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+            for (int j = 0; j != 6; j++) {
+                int const tile = DAT_ViewportRenderState::instance
+                                     .translationMatrix[DAT_TerrainDefinedData::instance
+                                                            .gateHouseTiles[buildingCommand
+                                                                - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                                                            .y
+                                         + y]
+                                     .addXgetTile
+                    + x
+                    + DAT_TerrainDefinedData::instance
+                          .gateHouseTiles[buildingCommand - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][j]
+                          .x;
+                this->ConstructionGFXLayer[tile]
+                    = (this->RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[6] + 0x138;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
+            for (int j = 0; j != 36; j++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.WheatFarmTiles[DAT_GameState::instance
+                        .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .unkWheatFarmOrientation][j];
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
+                this->ConstructionGFXLayer[tile]
+                    = ((byte)this->RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[0xe];
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
+            for (int j = 0; j != 24; j++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.HopFarmProperty1[*(
+                    int*)&DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .unkHopFarmVariation][j];
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
+                this->ConstructionGFXLayer[tile]
+                    = ((byte)this->RandomLayer[tile] & 1) * 9 + 0x25 + GMFirstPictureIndex::instance[0xe];
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
+            for (int j = 0; j != 23; j++) {
+                OpenSHC::Map::Buildings::WheatFarm::WheatFarmFieldSpec const& field
+                    = DAT_TerrainDefinedData::instance.field_0xf5c[DAT_GameState::instance
+                            .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .dairyFarmVariationMod4][j + 4];
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[field.offset.y + y].addXgetTile
+                    + field.offset.x + x;
+                this->ConstructionGFXLayer[tile]
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getRubbleGraphicStageForDamageLevel, this)(
+                          field.property)
+                    + 0x37 + GMFirstPictureIndex::instance[0xe];
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
+            for (int j = 0; j != 8; j++) {
+                XYPair const& offset = DAT_TerrainDefinedData::instance.AppleFarmOffsets[j];
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
+                this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0xe] + 0x3d;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+            }
+        } else if (command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
+            || command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
+            int const rightX = x + 5;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + rightX;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x48;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            int const lowerY = y + 5;
+            j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + lowerY].addXgetTile
+                    + this->buildingX + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x7a;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + lowerY].addXgetTile
+                    + this->buildingX + rightX;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x61;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        } else if (command == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD) {
+            int const lowerY = y + 5;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + lowerY].addXgetTile
+                    + this->buildingX + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x93;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        } else if (command == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
+            int const lowerY = y + 5;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + lowerY].addXgetTile
+                    + this->buildingX + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0xac;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        } else if (command == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
+            int const lowerY = y + 4;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 4);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + lowerY].addXgetTile
+                    + this->buildingX + x;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x128;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        } else if (command == OpenSHC::Commands::M_MAPPER_KEEP1) {
+            if (this->mapOrientation == 2) {
+                keepSpriteVariant = 1;
+            }
+            int const tile1 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][0].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[0][0].x + x;
+            this->ConstructionGFXLayer[tile1] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x523;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile1] = this->MiscDisplayLayer[tile1] | 0x8000;
+            }
+            int const tile2 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][1].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[0][1].x + x;
+            this->ConstructionGFXLayer[tile2] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x52e;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile2] = this->MiscDisplayLayer[tile2] | 0x8000;
+            }
+            int const tile3 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][2].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[0][2].x + x;
+            this->ConstructionGFXLayer[tile3] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x527;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile3] = this->MiscDisplayLayer[tile3] | 0x8000;
+            }
+            int const outbuildingX = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][0].xOffset;
+            int const outbuildingY = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][0].yOffset;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 7);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuildingY].addXgetTile
+                    + this->buildingX + outbuildingX;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x17;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            int const outbuilding2X = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][0].xOffset + x;
+            int const outbuilding2Y = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][0].yOffset + y;
+            j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuilding2Y].addXgetTile
+                    + this->buildingX + outbuilding2X;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 0x19;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        } else if (command == OpenSHC::Commands::M_MAPPER_KEEP2 || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
+            if (this->mapOrientation == 2) {
+                keepSpriteVariant = 1;
+            }
+            int const keepIndex = buildingCommand - OpenSHC::Commands::M_MAPPER_KEEP1;
+            int const tile1 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][0].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][0].x + x;
+            this->ConstructionGFXLayer[tile1] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x521;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile1] = this->MiscDisplayLayer[tile1] | 0x8000;
+            }
+            int const tile2 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][1].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][1].x + x;
+            this->ConstructionGFXLayer[tile2] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x529;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile2] = this->MiscDisplayLayer[tile2] | 0x8000;
+            }
+            int const tile3 = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][2].y + y]
+                                  .addXgetTile
+                + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][2].x + x;
+            this->ConstructionGFXLayer[tile3] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x525;
+            if (skipPlacementFailChecks != 0) {
+                this->MiscDisplayLayer[tile3] = this->MiscDisplayLayer[tile3] | 0x8000;
+            }
+            int const outbuildingX
+                = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].xOffset;
+            int const outbuildingY
+                = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].yOffset;
+            int j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 7);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuildingY].addXgetTile
+                    + this->buildingX + outbuildingX;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x17;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+            int const outbuilding2X
+                = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + x;
+            int const outbuilding2Y
+                = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].yOffset + y;
+            j = 0;
+            do {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(j, 5);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuilding2Y].addXgetTile
+                    + this->buildingX + outbuilding2X;
+                this->ConstructionGFXLayer[tile]
+                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 0x19;
+                if (skipPlacementFailChecks != 0) {
+                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                }
+                j = j + 1;
+            } while (j < this->constructionTileCount);
+        }
+    }
+
+}
+}
