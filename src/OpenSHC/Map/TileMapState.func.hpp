@@ -162,8 +162,8 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F93E0, &TileMapState::destroyWallsOfPlayer)
         destroyWallsOfPlayer;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false,
-            Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::validateWallPlacementAtTile)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false, Address::SHC_3BB0A8C1_0x004F94A0,
+            &TileMapState::validateWallPlacementAtTile)
         validateWallPlacementAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F9590,

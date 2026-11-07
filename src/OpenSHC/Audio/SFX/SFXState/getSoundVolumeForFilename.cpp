@@ -7,7 +7,7 @@ namespace Audio {
     namespace SFX {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044A240
-        int SFXState::getSoundVolumeForFilename(char* soundFileName)
+        int SFXState::getSoundVolumeForFilename(char const* soundFileName)
         {
             for (int _runCounter = 0; _runCounter < this->DAT_SoundTotalCount; ++_runCounter) {
                 if (!MACRO_CALL(OpenSHC::OS_Func::__stricmp)(
