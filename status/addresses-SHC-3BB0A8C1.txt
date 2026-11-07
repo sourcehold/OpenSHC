@@ -20107,17 +20107,17 @@ SHC_3BB0A8C1_0x00468E40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00468EA0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00468F20 | 4.5% | Reimplemented, heavy structural mismatch
+SHC_3BB0A8C1_0x00468F20 | 4.5% | Heavy structural mismatch
 
-SHC_3BB0A8C1_0x00468F70 | 9.3% | Reimplemented, heavy structural mismatch
+SHC_3BB0A8C1_0x00468F70 | 9.3% | Heavy structural mismatch
 
-SHC_3BB0A8C1_0x00468FE0 | 52.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00468FE0 | 52.0% | Asm differs
 
-SHC_3BB0A8C1_0x004690E0 | 60.1% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x004690E0 | 60.1% | Asm differs
 
 SHC_3BB0A8C1_0x00469290 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004692E0 | 78.4% | Reimplemented, asm differs: stripe row zero-extended, width test inverted
+SHC_3BB0A8C1_0x004692E0 | 78.4% | Asm differs: stripe row zero-extended, width test inverted
 
 SHC_3BB0A8C1_0x004694A0 | 0.0% | Pending
 
@@ -21275,7 +21275,7 @@ SHC_3BB0A8C1_0x00471000 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00471050 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004710A0 | 38.9% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x004710A0 | 38.9% | Asm differs
 
 SHC_3BB0A8C1_0x004711B0 | 0.0% | Pending
 
@@ -21285,7 +21285,7 @@ SHC_3BB0A8C1_0x00471280 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004712E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00471340 | 32.8% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00471340 | 32.8% | Asm differs
 
 SHC_3BB0A8C1_0x00471440 | 0.0% | Pending
 
@@ -21417,7 +21417,7 @@ SHC_3BB0A8C1_0x004729B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00472A90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00472B20 | 56.3% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00472B20 | 56.3% | Asm differs
 
 SHC_3BB0A8C1_0x00472B90 | 0.0% | Pending
 
@@ -21933,7 +21933,7 @@ SHC_3BB0A8C1_0x00475B90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00475BE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00475CC0 | 52.4% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x00475CC0 | 52.4% | Asm differs
 
 SHC_3BB0A8C1_0x00475E00 | 0.0% | Pending
 
@@ -22253,7 +22253,7 @@ SHC_3BB0A8C1_0x0047C5D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047C670 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047C860 | 65.3% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x0047C860 | 65.3% | Asm differs
 
 SHC_3BB0A8C1_0x0047CA80 | 0.0% | Pending
 
@@ -22311,7 +22311,7 @@ SHC_3BB0A8C1_0x0047D0E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D100 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047D190 | 66.9% | Reimplemented, register mismatch: the original keeps the right column in ebp and reloads x
+SHC_3BB0A8C1_0x0047D190 | 66.9% | Register mismatch: the original keeps the right column in ebp and reloads x
 
 SHC_3BB0A8C1_0x0047D330 | 100.0% | Reimplemented
 
@@ -23623,7 +23623,7 @@ SHC_3BB0A8C1_0x004934E5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004934F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00493560 | 96.3% | Reimplemented, only the spill slot of the bar's x differs (the original uses y's home)
+SHC_3BB0A8C1_0x00493560 | 96.3% | Only the spill slot of the bar's x differs (the original uses y's home)
 
 SHC_3BB0A8C1_0x00493690 | 0.0% | Pending
 
@@ -25537,7 +25537,7 @@ SHC_3BB0A8C1_0x004AAB20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AAB40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AAB50 | 41.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x004AAB50 | 41.0% | Asm differs
 
 SHC_3BB0A8C1_0x004AB440 | 100.0% | Reimplemented
 
@@ -25921,7 +25921,7 @@ SHC_3BB0A8C1_0x004AF820 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AF840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AF860 | 78.7% | Reimplemented, register mismatch: durationSum stays in a register where the original keeps elementState
+SHC_3BB0A8C1_0x004AF860 | 78.7% | Register mismatch: durationSum stays in a register where the original keeps elementState
 
 SHC_3BB0A8C1_0x004AFA50 | 100.0% | Reimplemented
 
@@ -25929,13 +25929,13 @@ SHC_3BB0A8C1_0x004AFA80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AFB00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AFB30 | 82.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x004AFB30 | 82.0% | Asm differs
 
 SHC_3BB0A8C1_0x004AFDA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AFE10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B0390 | 62.0% | Reimplemented, asm differs
+SHC_3BB0A8C1_0x004B0390 | 62.0% | Asm differs
 
 SHC_3BB0A8C1_0x004B07C0 | 0.0% | Pending
 
@@ -25989,7 +25989,7 @@ SHC_3BB0A8C1_0x004B1990 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B19E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B1AC0 | 76.1% | Reimplemented, register mismatch: the original keeps y in ebp and the group counter in y's home
+SHC_3BB0A8C1_0x004B1AC0 | 76.1% | Register mismatch: the original keeps y in ebp and the group counter in y's home
 
 SHC_3BB0A8C1_0x004B1C30 | 0.0% | Pending
 
