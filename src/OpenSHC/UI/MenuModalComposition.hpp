@@ -77,7 +77,7 @@ namespace UI {
             int minimum, int maximum, int value, int* destination, NoArgCallback* callbackFunction);
 
         void setSliderParameters2(
-            dword minimum, dword maximum, dword value, dword destination, undefined* callbackFunction);
+            dword minimum, dword maximum, dword value, dword destination, NoArgCallback* callbackFunction);
 
         void setModalSliderParameters(
             int param_1, int param_2, dword param_3, dword param_4, undefined* param_5, undefined* param_6);
