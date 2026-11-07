@@ -22,20 +22,18 @@ namespace Rendering {
         int rowLength = 201;
         int tileX = 0;
         int tileY = 0;
+        bool found = false;
         do {
             rowLength = (rowLength != 201) + 200;
-            tileX = 0;
-            if (0 < rowLength) {
-                do {
-                    if (this->screenPointToTileNumber[screenPointIndex - 8] == tile) {
-                        break;
-                    }
-                    tileX = tileX + 1;
-                    screenPointIndex = screenPointIndex + 1;
-                } while (tileX < rowLength);
-                if (tileX < rowLength) {
+            for (tileX = 0; tileX < rowLength; ++tileX) {
+                if (this->screenPointToTileNumber[screenPointIndex - 8] == tile) {
+                    found = true;
                     break;
                 }
+                screenPointIndex = screenPointIndex + 1;
+            }
+            if (found) {
+                break;
             }
             tileY = tileY + 1;
         } while (tileY < 400);
