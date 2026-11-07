@@ -12,19 +12,13 @@ namespace Map {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CD60
         BOOLEnum PathFindingState::findDirectNeighbourWalkableTile(uint ySpace, uint y)
         {
-            if (ySpace > 399 || y > 399) {
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1) {
                 return FALSE;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
                 return FALSE;
             }
             int _rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
@@ -35,8 +29,8 @@ namespace Map {
                 uint _y
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.yOffset
                     + y;
-                if (_x <= 399 && _y <= 399
-                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
+                if (_x <= MC_MAP_XY_LIMIT_MIN_1 && _y <= MC_MAP_XY_LIMIT_MIN_1
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * MC_MAP_XY_LIMIT + _x] != '\0') {
                     int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex] + _rowTile;
                     uint _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                     if ((_logic & 0xb1U) == 0 && (_logic & 0x50101400U) == 0) {

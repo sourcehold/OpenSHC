@@ -26,12 +26,7 @@ namespace Map {
             return ySpace <= 399 && y <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != 0;
         }
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020
         BOOLEnum PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint ySpace, uint y)
         {

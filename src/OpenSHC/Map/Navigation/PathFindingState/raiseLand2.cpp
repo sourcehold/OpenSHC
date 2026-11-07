@@ -14,24 +14,18 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A6D0
         void PathFindingState::raiseLand2(uint ySpace, uint y, int maxDistance)
         {
             short* psVar4;
             int _candidate;
             int* piVar6;
-            if (ySpace > 399 || y > 399
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] == '\0') {
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                160800, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
+                sizeof(DAT_TileMapState::instance.CertainPathLayer), 0, (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
@@ -44,7 +38,7 @@ namespace Map {
             ushort _startArea = DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 uint tileUnk = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if (80399 < tileUnk)
+                if (MC_MAP_TILES_COUNT_MIN_1 < tileUnk)
                     break;
                 int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
@@ -70,14 +64,14 @@ namespace Map {
                             + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 <= (int)this->searchQueue.writeIndex) {
+                        if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
                 this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (80400 <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

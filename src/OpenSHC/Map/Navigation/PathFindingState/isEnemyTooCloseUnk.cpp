@@ -15,10 +15,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A15B0
         BOOLEnum PathFindingState::isEnemyTooCloseUnk(int playerID, uint x, uint y, int requiredDistance)
         {
-            if (399 < x || 399 < y) {
+            if (MC_MAP_XY_LIMIT_MIN_1 < x || MC_MAP_XY_LIMIT_MIN_1 < y) {
                 return FALSE;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
                 return FALSE;
             }
             int const requiredDistanceSquared = requiredDistance * requiredDistance;

@@ -13,12 +13,6 @@ namespace Map {
     namespace Navigation {
         using OpenSHC::Map::Location::Point8ShortXY;
 
-        /*
-          WARNING: Enum "MappersEnum": Some values do not have unique names
-         */
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D0E0
         void PathFindingState::findFreeTileOnDefensiveStructure(int unitID, int ySpace, int y)
         {
@@ -29,13 +23,13 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((uint)ySpace <= 399 && (uint)y <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + ySpace] != '\0') {
+            if ((uint)ySpace <= MC_MAP_XY_LIMIT_MIN_1 && (uint)y <= MC_MAP_XY_LIMIT_MIN_1
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        160800, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                        sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
                 }
                 this->searchQueue.readIndex = 0;
                 this->searchQueue.writeIndex = 1;
@@ -49,7 +43,7 @@ namespace Map {
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (_tile < 0 || _tile >= 0x13a10) {
+                    if (_tile < 0 || _tile >= MC_MAP_TILES_COUNT) {
                         return;
                     }
                     _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
@@ -62,7 +56,7 @@ namespace Map {
                         return;
                     }
                     this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (80400 < (int)this->searchQueue.currentDistance) {
+                    if (MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
                         return;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
@@ -86,14 +80,14 @@ namespace Map {
                                 + (short)_y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 <= (int)this->searchQueue.writeIndex) {
+                            if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (80400 <= (int)this->searchQueue.readIndex) {
+                    if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 }
