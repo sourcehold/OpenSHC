@@ -24,9 +24,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFBA0
     int TileMapState::getTotalHeightAt(int tile, int playerID)
     {
-        uint logic = this->LogicLayer[tile];
         int extra = 0;
         int exposed = 0;
+        uint logic = this->LogicLayer[tile];
         if ((logic & L_KEEP_NON_MANOR_HOUSE) != 0) {
             int buildingID = this->BuildingLayer[tile];
             extra = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
