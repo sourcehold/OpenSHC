@@ -18,11 +18,11 @@ namespace Map {
     void TileMapState::placeSiegeTent(
         int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize, int param_6, undefined4 height)
     {
-        int buildingID = MACRO_CALL_MEMBER(
-            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, height, (BuildingType)(short)buildingType, buildingSize, playerID, param_6);
-        this->placedBuildingID = buildingID;
+        short const type = (short)buildingType;
         int buildingSizeTileIndex = 0;
+        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
+            DAT_BuildingsState::ptr)(playerID, x, y, height, (BuildingType)type, buildingSize, playerID, param_6);
+        this->placedBuildingID = buildingID;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingSize);
@@ -35,14 +35,14 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
             this->BuildingLayer[tile] = (short)buildingID;
             buildingSizeTileIndex++;
-            this->BuildingWasLayer[tile] = (uchar)(short)buildingType;
+            this->BuildingWasLayer[tile] = (uchar)type;
             this->ChangedLayer[tile] = 2;
         } while (buildingSizeTileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
-            && DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-                < (int)DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+            && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
+                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
             && (DAT_GameState::instance.playerDataArray[playerID].populationCap
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {

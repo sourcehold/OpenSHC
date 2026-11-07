@@ -42089,7 +42089,7 @@ SHC_3BB0A8C1_0x00506BD0 | 99.5% | setupBuildingData arg regalloc
 
 SHC_3BB0A8C1_0x00506D40 | 96.0% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00506E10 | 94.6% | setupBuildingData arg regalloc
+SHC_3BB0A8C1_0x00506E10 | 98.2% | word load of type; GL
 
 SHC_3BB0A8C1_0x00506F40 | 99.4% | setupBuildingData arg regalloc
 
