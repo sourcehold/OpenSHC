@@ -76,7 +76,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
                 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
                 COL_BLACK::instance.shortValue);
-            // the defeat video, outside skirmish: Arabian for campaign missions 6 to 10 or an Arabian lord
+            // the defeat video unless at the skirmish end screen: Arabian for missions 6 to 10 or an Arabian lord
             // four calls (one call after picking the file: quick_diff 0.9909 -> 0.7282)
             if (DAT_GameSynchronyState::instance.currentGameMode
                 != OpenSHC::Game::GM_SKIRMISH_END_OF_GAME_SINGLE_PLAYER) {
