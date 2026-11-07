@@ -12,7 +12,7 @@ namespace AI {
     void AIVState::aiDecideOnNewBuildings(int playerID)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
-        int isPausing = 0;
+        BOOLEnum isPausing = FALSE;
 
         if (aivID <= 0) {
             return;
@@ -82,7 +82,7 @@ namespace AI {
             } else {
                 --DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause;
             }
-            isPausing = 1;
+            isPausing = TRUE;
         } else {
             int const pauseStep
                 = DAT_GameState::instance.playerDataArray[playerID]
