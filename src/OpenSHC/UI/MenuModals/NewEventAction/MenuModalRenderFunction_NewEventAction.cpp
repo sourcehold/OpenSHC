@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventType.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 
@@ -23,19 +24,19 @@ namespace UI {
             // the actions that repeat label their two fields
             switch (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                     .data.scenario.ScenarioEventType) {
-            case 5:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-            case 29:
-            case 30:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_TRAVELING_FAIR:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_PLAGUE:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_WHEAT_DISEASE:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_HOPS_WEEVIL:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_APPLE_BLIGHT:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_TREE_FUNGUS:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_RABBIT_EXPLOSION:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_LION_ATTACK:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_BANDITS:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_MAD_COWS:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_ARCHERS:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_THEFT_FROM_GRANARY:
+            case OpenSHC::Game::ScenarioEvents::Enums::SET_FIRE:
                 // "Repeat (months)"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
