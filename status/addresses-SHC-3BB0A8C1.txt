@@ -44773,7 +44773,7 @@ SHC_3BB0A8C1_0x00515C80 | 60.3% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x00515DA0 | 43.9% | brush loop regalloc
 
-SHC_3BB0A8C1_0x00515F40 | 75.3% | Style pass, asm differs
+SHC_3BB0A8C1_0x00515F40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005160C0 | 49.5% | global instance access
 
