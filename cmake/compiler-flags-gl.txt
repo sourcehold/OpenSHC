@@ -111,6 +111,8 @@ src/OpenSHC/UI/Rendering/RenderButtonImageWithBlending.cpp
 src/OpenSHC/UI/Helpers/SetTribesPatrolButtonPressed.cpp
 src/OpenSHC/UI/MenuItems/BuildMenu/MenuItemActionHandler_BuildMenu_UnitActionButtons.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
+src/OpenSHC/UI/Rendering/TextureRenderCore/transformTilesetToRGB565.cpp
+src/OpenSHC/UI/Rendering/TextureRenderCore/transformTileObjectToRGB565.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection.cpp
@@ -147,3 +149,6 @@ src/OpenSHC/Map/TileMapState/validateWallBuildPath.cpp
 src/OpenSHC/Map/TileMapState/isTileEnclosedByWalls.cpp
 src/OpenSHC/Map/TileMapState/isTileEnclosedByWallsOrGates.cpp
 src/OpenSHC/Map/TileMapState/getMaxWallHeightInBrushArea.cpp
+src/OpenSHC/UI/DisplayElements/RenderTimeUntilDefeatDisplayElement.cpp
+src/OpenSHC/UI/DisplayElements/GetIfDisplayElementStateNotZero.cpp
+src/OpenSHC/UI/DisplayElements/FindDisplayElementWithID.cpp

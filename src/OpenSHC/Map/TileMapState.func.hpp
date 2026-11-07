@@ -162,8 +162,8 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F93E0, &TileMapState::destroyWallsOfPlayer)
         destroyWallsOfPlayer;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false,
-            Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::validateWallPlacementAtTile)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false, Address::SHC_3BB0A8C1_0x004F94A0,
+            &TileMapState::validateWallPlacementAtTile)
         validateWallPlacementAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F9590,
@@ -510,8 +510,8 @@ namespace Map {
             &TileMapState::isValidCastleSiteLocation)
         isValidCastleSiteLocation;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false,
-            Address::SHC_3BB0A8C1_0x00502680, &TileMapState::useTerrainHeightBrush)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short), false, Address::SHC_3BB0A8C1_0x00502680,
+            &TileMapState::useTerrainHeightBrush)
         useTerrainHeightBrush;
 
         MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00502950,
@@ -732,8 +732,8 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005151C0, &TileMapState::placeHopfarm)
         placeHopfarm;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, undefined4, int, undefined4),
-            false, Address::SHC_3BB0A8C1_0x005154D0, &TileMapState::placeDairyfarm)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, undefined4, int, undefined4), false,
+            Address::SHC_3BB0A8C1_0x005154D0, &TileMapState::placeDairyfarm)
         placeDairyfarm;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, undefined4, int, int), false,

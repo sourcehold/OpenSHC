@@ -97,7 +97,7 @@ namespace Map {
         int SEC_Section1054; // 0x00552928 length: 4
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
-        undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
+        int forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
         int forceUpdateTextureTilemap; // 0x00554870 length: 4
         int forceUpdateGFXLayers; // 0x00554874 length: 4
         int forceUpdateMacroLayerFlag; // 0x00554878 length: 4
@@ -165,7 +165,7 @@ namespace Map {
         undefined4 buildingPlacementProperty_6; // 0x00554974 length: 4
         undefined4 buildingPlacementProperty_7; // 0x00554978 length: 4
         undefined1 padding_0x55497c[4]; // 0x0055497C length: 4
-        undefined4 wallDragButtonUp; // 0x00554980 length: 4
+        BOOLEnum wallDragButtonUp; // 0x00554980 length: 4
         int constructionTileCount; // 0x00554984 length: 4
         int DAT_WallTileCountCurrentDrag; // 0x00554988 length: 4
         undefined4 buildingX; // 0x0055498C length: 4
