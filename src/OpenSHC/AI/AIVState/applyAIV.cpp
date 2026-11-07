@@ -16,6 +16,15 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004EF0D0
     void AIVState::applyAIV(int aivID, int playerID)
     {
+        // What is left is the stack slot assignment: the frame is 0x24 on both sides and the slots are
+        // permuted rather than shifted, so the set of locals is right and only their order is wrong. Score this
+        // function with `quick_diff -s`; without it the baseline reads 0.9842 against reccmp's 93.0, because
+        // the whole gap sits in the displacements -s is what keeps. Measured against that 0.9402 baseline:
+        // declaring keepDefined after index 0.9376, selected before startY 0.9402, mapper before step 0.9402,
+        // declaring realX before realY 0.9315, passing realY to xyAreValid instead of recomputing the
+        // expression 0.8677, building the tile from realX/realY 0.6964. slot_weight.py reports the weights as
+        // non-monotone here, so this is not a declaration-order tie-break; slot_map.py cannot aim it either -
+        // its depth tracking drifts across this function's call-argument pushes and it says so.
         BOOLEnum keepDefined = FALSE;
         MACRO_CALL_MEMBER(IO::FilePackager_Func::unpackAIVFile, FilePackagerObj::ptr)(
             DAT_AIVDefinedData::instance.AIVSectionAddressArray,

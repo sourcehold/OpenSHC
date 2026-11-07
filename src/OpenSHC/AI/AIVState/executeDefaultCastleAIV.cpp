@@ -23,6 +23,16 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F0060
     BOOLEnum AIVState::executeDefaultCastleAIV(int playerID, int isPausing)
     {
+        // The remaining gap is one register permutation, not wrong code: canonicalising register names in the
+        // diff collapses it from 439/445 differing instructions to 187/193. The original keeps ebp = 1 and ebx
+        // as the per-arm scratch and leaves the playerDataArray[playerID] base and this spilled; we hold those
+        // two in ebx/esi, so 1 lands in edx and the scratch in ebp. reg_scores.py --invocation 2016 shows why:
+        // the top candidate of all is the unnamed temporary holding that base, at key 628 against mapper's 510,
+        // so it takes ebx first and no source expression can outbid it. Declaration order and the first arm's
+        // statement order already match the original store for store, and the arms' `= 0` assignments are not
+        // redundant - the original emits them too. Measured worse (quick_diff, baseline 0.7033): sinking the
+        // aivID read to the loop 0.5445, an AIVSpec& reference 0.5238, a PlayerData& 0.7023, dropping the
+        // AIVBuildingStep& below 0.6387, binding it after the goal test 0.6625.
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
         int stockpiles = 0;
         int hovels = 0;
