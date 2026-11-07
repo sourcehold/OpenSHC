@@ -6767,7 +6767,7 @@ SHC_3BB0A8C1_0x00426340 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00426570 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00426600 | 0.0% | Pending
+SHC_3BB0A8C1_0x00426600 | 83.7% | style pass, x before y; height and width in swapped registers
 
 SHC_3BB0A8C1_0x004266A0 | 100.0% | Reimplemented
 
@@ -11079,7 +11079,7 @@ SHC_3BB0A8C1_0x00431990 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00431A90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00431B60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00431B60 | 99.9% | the 640x480 y store restored, s_ pointers, style pass; one add/xor order
 
 SHC_3BB0A8C1_0x00433030 | 0.0% | Pending
 
@@ -13391,7 +13391,7 @@ SHC_3BB0A8C1_0x00439730 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00439890 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004398B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004398B0 | 96.3% | the 640x480 y store restored, s_ pointers, style pass; 99 held in ecx through every block
 
 SHC_3BB0A8C1_0x0043A850 | 100.0% | Reimplemented
 
@@ -13641,7 +13641,7 @@ SHC_3BB0A8C1_0x00440420 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00440430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00440560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00440560 | 98.2% | the early return restored, style pass; stack slots of the name buffer and the cookie
 
 SHC_3BB0A8C1_0x00440600 | 0.0% | Pending
 
