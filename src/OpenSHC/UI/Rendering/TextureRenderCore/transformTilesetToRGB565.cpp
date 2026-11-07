@@ -16,7 +16,7 @@ namespace UI {
                 DAT_GMImageOffsets::instance[imageIndex]);
             if (DAT_GMImageHeaders::instance.imh[imageIndex].direction != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
-                    (ushort*)((byte*)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex] + 512),
+                    (ushort*)(this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex] + 512),
                     DAT_GMImageSizes::instance[imageIndex] - 512);
             }
         }

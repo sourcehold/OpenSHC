@@ -17,7 +17,7 @@ namespace UI {
             // A face bitmap is 64 x 66 pixels; rowSkip is the surface's gap between two face rows
             int rowSkip;
             int lineByteWidth;
-            ushort* face = (ushort*)((byte*)this->bitmapsFaces_0x94 + bitmapFaceIndex * (66 * 64 * 2));
+            ushort* face = this->bitmapsFaces_0x94[bitmapFaceIndex][0];
             // Stored through the global in each arm (a surface local: quick_diff 0.9804 -> 0.7255; this->: 0.5524)
             switch (this->drawBufferChoiceValue) {
             case OpenSHC::Rendering::Enums::RT_MAP_GAME:

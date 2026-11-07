@@ -15,8 +15,7 @@ namespace UI {
         {
             // imageID counts from 1 within the gm file
             int const imageIndex = GMFirstPictureIndex::instance[gmID] + imageID - 1;
-            ushort* const source
-                = (ushort*)((byte*)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
+            ushort* const source = (ushort*)(this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
             OpenSHC::IO::Graphics::GmImageTypeInt const imageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
             // One call per arm, as the original (one test with ||: quick_diff 1.0000 -> 0.6585)
             if (imageType == OpenSHC::IO::Graphics::GIT_InterfaceElement) {

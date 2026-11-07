@@ -15,8 +15,7 @@ namespace UI {
         {
             // picture imageID of the gm file, counted from 1; a blend strength of 32 draws nothing, 0 draws unblended
             int const imageIndex = GMFirstPictureIndex::instance[GmID] + imageID - 1;
-            ushort* const source
-                = (ushort*)((byte*)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
+            ushort* const source = (ushort*)(this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
             if (blendStrengthUnk == 32) {
                 return;
             }

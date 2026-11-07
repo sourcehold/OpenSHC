@@ -19,7 +19,7 @@ namespace UI {
         void TextureRenderCore::renderGMWithAlphaMask(
             GmID gmID, int imageID, int xPos, int yPos, GmID maskGmID, int alphaImageID, int blendStrength)
         {
-            byte* const imageData = (byte*)this->gmProcessedImageData;
+            byte* const imageData = this->gmProcessedImageData;
             // Read before the zoom test (read at its use: quick_diff 1.0000 -> 0.9091)
             ushort* const alphaSurface = AlphaAndButtonSurfaceObj::instance.surfacePtr;
             // With isZoom2 set the image is drawn blended, without the mask

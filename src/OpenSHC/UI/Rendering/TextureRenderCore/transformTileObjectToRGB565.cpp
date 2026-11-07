@@ -10,7 +10,7 @@ namespace UI {
         void TextureRenderCore::transformTileObjectToRGB565(int imageOffset)
         {
             // The conversion loop is handwritten assembly in the original, see RGB555To565Asm.hpp.
-            ushort* _colorPtr = (ushort*)((byte*)this->gmProcessedImageData + imageOffset);
+            ushort* _colorPtr = (ushort*)(this->gmProcessedImageData + imageOffset);
             // written by the asm below
             ushort _blue;
             ushort _green;

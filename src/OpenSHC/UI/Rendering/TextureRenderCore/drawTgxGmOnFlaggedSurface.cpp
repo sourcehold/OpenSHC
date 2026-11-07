@@ -15,8 +15,7 @@ namespace UI {
         {
             // picture imageIndexInGm of the gm file, counted from 1
             int const imageIndex = GMFirstPictureIndex::instance[gmId] + imageIndexInGm - 1;
-            ushort* const source
-                = (ushort*)((byte*)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
+            ushort* const source = (ushort*)(this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]);
             // interface elements and compressed images draw the same way
             // two tests as in the original (one test with ||: quick_diff 1.0000 -> 0.3014)
             if (this->gmFileHeaderColorpaletteArray[gmId].ImageType == OpenSHC::IO::Graphics::GIT_InterfaceElement) {
