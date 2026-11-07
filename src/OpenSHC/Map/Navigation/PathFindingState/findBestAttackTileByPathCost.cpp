@@ -70,16 +70,13 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                             /*
                               attackInfo + 0x301C0 + playerID * sizeof(AttackInfoSubElement) is
-                              playerInfo[playerID - 1], whose first field selects one of the
-                              per-player AI info planes.
-                              fixme: the plane array at 0x01EE2998 has no named global yet, so its
-                              base still has to be written as an address
+                              playerInfo[playerID - 1], whose first field selects which of the nine
+                              pathfinding cost planes this search reads
                              */
+                            int _plane = DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
+                                             .currentPlayerID_OR_attackedPlayerID_OR_one;
                             int _hackValue
-                                = (int)*(byte*)(DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
-                                                    .currentPlayerID_OR_attackedPlayerID_OR_one
-                                        * MC_MAP_TILES_COUNT
-                                    + 0x1ee2998 + _candidate);
+                                = (int)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[_plane][_candidate];
                             int _cost = (int)DAT_TileMapState::instance.SEC_TileMap1104[_candidate];
                             int _entity = (int)DAT_TileMapState::instance.EntityLayer[_candidate];
                             if (((_entity == 0)
