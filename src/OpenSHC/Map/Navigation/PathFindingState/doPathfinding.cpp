@@ -19,25 +19,23 @@ namespace Map {
         dword PathFindingState::doPathfinding(int param_1, int param_2)
         {
             BOOLEnum BVar3;
-            ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer
-                               [DAT_ViewportRenderState::instance.translationMatrix[this->destinationY].addXgetTile
-                                   + this->destinationX];
-            if (DAT_TileMapState::instance.PathConnectionLayer
-                        [DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile + this->unitX]
-                    != uVar1
-                && this->climbIsIllegal == 0 && this->allAssassinsUnk == 0) {
-                if (uVar1 == 0) {
-                    return (dword)(0);
+            ushort const unitArea
+                = DAT_TileMapState::instance
+                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile
+                          + this->unitX];
+            ushort const destinationArea
+                = DAT_TileMapState::instance.PathConnectionLayer
+                      [DAT_ViewportRenderState::instance.translationMatrix[this->destinationY].addXgetTile
+                          + this->destinationX];
+            if (unitArea != destinationArea && this->climbIsIllegal == 0 && this->allAssassinsUnk == 0) {
+                if (destinationArea == 0) {
+                    return 0;
                 }
-                dword dVar2 = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Navigation::PathFindingState_Func::findConnectingAreaBetweenTwoAreas,
-                    DAT_PathFindingState::ptr)(param_1,
-                    (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer
-                            [DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile
-                                + this->unitX])),
-                    (dword)((int)((short)uVar1)));
-                if (dVar2 == 0) {
-                    return (dword)(0);
+                if (MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::findConnectingAreaBetweenTwoAreas,
+                        DAT_PathFindingState::ptr)(param_1, (short)unitArea, (short)destinationArea)
+                    == 0) {
+                    return 0;
                 }
             }
             this->searchQueue.pathPlanIndex = 0;
