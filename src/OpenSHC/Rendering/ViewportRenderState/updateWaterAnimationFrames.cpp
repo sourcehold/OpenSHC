@@ -8,10 +8,10 @@ namespace Rendering {
     {
         DWORD now = timeGetTime();
 
-        this->field55_0x18b764 = 0;
+        this->field_0x18b764 = 0;
         if ((int)(now - this->previousIntervalTime_04) >= (int)this->interval_04_180) {
             this->previousIntervalTime_04 = now;
-            this->field55_0x18b764 = 1;
+            this->field_0x18b764 = 1;
             for (int i = 0; i < 45; i++) {
                 this->landscapeSeaWhiteCapsAnimationFrames[i] = this->landscapeSeaWhiteCapsAnimationFrames[i] + 1;
             }

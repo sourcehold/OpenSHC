@@ -23,7 +23,7 @@
 #include "OpenSHC/Globals/DAT_RenderedUnitOwner.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
@@ -127,7 +127,7 @@ namespace Rendering {
                     DAT_RenderedUnitOwner::instance = 0;
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_IRON_MINER;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field117_0x11a;
+                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a;
                         if (sVar1 == 0) {
                             local_18 = -0x1f;
                             local_14 = -0x58;
@@ -143,7 +143,7 @@ namespace Rendering {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_IRON_MINER, frame,
                                 local_18 + xUnk, local_14 + yUnk,
-                                (int)(DAT_BuildingsState::instance.buildings[tileIndex].field169_0x292));
+                                (int)(DAT_BuildingsState::instance.buildings[tileIndex].field_0x292));
                         }
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite4;
@@ -365,13 +365,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage1,
                             (xUnk
                                 - (int)DAT_GMImageHeaders::instance
-                                        .imh[blendFrame + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                        .imh[blendFrame + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                         .width
                                     / 2)
                                 + 0xf + local_8,
                             (yUnk
                                 - DAT_GMImageHeaders::instance
-                                    .imh[blendFrame + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                    .imh[blendFrame + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                     .height)
                                 + -0xf + iVar10,
                             frame);
@@ -383,13 +383,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage3,
                             (xUnk
                                 - (int)DAT_GMImageHeaders::instance
-                                        .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                        .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                         .width
                                     / 2)
                                 + 0xf + local_8,
                             (yUnk
                                 - DAT_GMImageHeaders::instance
-                                    .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                    .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                     .height)
                                 + -0xf + iVar10,
                             frame);
@@ -401,13 +401,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage9,
                             (xUnk
                                 - (int)DAT_GMImageHeaders::instance
-                                        .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                        .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                         .width
                                     / 2)
                                 + 0xf + local_8,
                             (yUnk
                                 - DAT_GMImageHeaders::instance
-                                    .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                    .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                     .height)
                                 + -0xf + iVar10,
                             frame);
@@ -418,13 +418,13 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(overlayGmID, iVar9,
                             (xUnk
                                 - (int)DAT_GMImageHeaders::instance
-                                        .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                        .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                         .width
                                     / 2)
                                 + 0xf + local_8,
                             (yUnk
                                 - DAT_GMImageHeaders::instance
-                                    .imh[iVar9 + GMTotalPicturesProcessed::instance[overlayGmID] + -1]
+                                    .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] + -1]
                                     .height)
                                 + -0xf + iVar10,
                             frame);
@@ -590,13 +590,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite1,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -608,13 +608,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -626,13 +626,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage2,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -644,13 +644,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage6,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -662,13 +662,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -680,13 +680,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite4,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -698,13 +698,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage4,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -716,13 +716,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage9,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -734,13 +734,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage1,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -752,13 +752,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage3,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -770,13 +770,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage7,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -788,13 +788,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].overlayImageID,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -806,13 +806,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage5,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -824,13 +824,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage8,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -842,13 +842,13 @@ namespace Rendering {
                             DAT_BuildingsState::instance.buildings[tileIndex].flagSlot.overlayImage,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -859,13 +859,13 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS, iVar9,
                             (int)((xUnk
                                       - DAT_GMImageHeaders::instance
-                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                               .width
                                           / 2)
                                 + 0xf),
                             (int)((yUnk
                                       - DAT_GMImageHeaders::instance
-                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .imh[GMFirstPictureIndex::instance[0x1c] + iVar9 + -1]
                                           .height)
                                 + -5),
                             frame);
@@ -1741,7 +1741,7 @@ namespace Rendering {
                     DAT_TextureRenderCoreObject::ptr)(
                     overlayGmID, iVar6, xUnk + -0x23, iVar9 + -0x2a, maskGmID, frame, 0);
             } else if ((DAT_BuildingsState::instance.buildings[tileIndex].currentlyNeededEmployeeCount != 0)
-                && (DAT_GameCore::instance.field63_0x108 != 0)) {
+                && (DAT_GameCore::instance.field_0x108 != 0)) {
                 frame = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x128;
                 maskGmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
                 iVar9 = (yUnk
@@ -1755,7 +1755,7 @@ namespace Rendering {
                     overlayGmID, iVar6, xUnk + -0x23, iVar9 + -0x2a, maskGmID, frame, 0);
             }
         }
-        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field68_0xc2;
+        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field_0xc2;
         if (sVar1 == 1) {
             frame = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x10;
             iVar6 = DAT_TileMapState::instance.cursorOverlayAnimationFrame;
@@ -1774,7 +1774,7 @@ namespace Rendering {
                 - barXOffset)
                 + -0x2a,
             OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame, 0);
-        DAT_BuildingsState::instance.buildings[tileIndex].field68_0xc2 = 0;
+        DAT_BuildingsState::instance.buildings[tileIndex].field_0xc2 = 0;
     }
 
 }

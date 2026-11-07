@@ -37,18 +37,18 @@ namespace Rendering {
     {
         int orientationBase = 8;
 
-        this->viewportState.field0_0x0 = 1;
+        this->viewportState.field_0x0 = 1;
         if (mouseYScreenSpace - (int)this->windowY < 0) {
-            this->viewportState.field0_0x0 = 0;
+            this->viewportState.field_0x0 = 0;
         }
         if (mouseYScreenSpace - (int)this->windowY >= (int)this->screenPixelHeight) {
-            this->viewportState.field0_0x0 = 0;
+            this->viewportState.field_0x0 = 0;
         }
         if (mouseXScreenSpace - (int)this->windowX < 0) {
-            this->viewportState.field0_0x0 = 0;
+            this->viewportState.field_0x0 = 0;
         }
         if (mouseXScreenSpace - (int)this->windowX >= (int)this->screenPixelWidth) {
-            this->viewportState.field0_0x0 = 0;
+            this->viewportState.field_0x0 = 0;
         }
 
         if (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex != 0) {
@@ -66,7 +66,7 @@ namespace Rendering {
                     && mouseYScreenSpace
                         <= DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][1].y
                             + hitBoxAnchor + DAT_MenuHandlerState::instance.y) {
-                    this->viewportState.field0_0x0 = 0;
+                    this->viewportState.field_0x0 = 0;
                     return;
                 }
                 hitBoxAnchor
@@ -76,7 +76,7 @@ namespace Rendering {
             }
         }
 
-        if (this->viewportState.field0_0x0 == 0) {
+        if (this->viewportState.field_0x0 == 0) {
             if (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_BUILD_MENU) {
                 return;
             }
@@ -94,9 +94,9 @@ namespace Rendering {
             }
 
             int minimapTile = this->translationMatrix[mouseYScreenSpace].addXgetTile + mouseXScreenSpace;
-            this->viewportState.field18_0x48 = 0;
-            this->viewportState.field6_0x18 = DAT_TileMapState::instance.BuildingLayer[minimapTile];
-            this->viewportState.field8_0x20 = (short)DAT_TileMapState::instance.UnitLayer[minimapTile];
+            this->viewportState.field_0x48 = 0;
+            this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[minimapTile];
+            this->viewportState.field_0x20 = (short)DAT_TileMapState::instance.UnitLayer[minimapTile];
             this->viewportState.mouseRayEntityID = DAT_TileMapState::instance.EntityLayer[minimapTile];
 
             int minimapGateTile = 0;
@@ -105,7 +105,7 @@ namespace Rendering {
                 if ((DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x100U) != 0) {
                     minimapGateTile = minimapTile;
                 } else if ((short)minimapBuildingID <= 0) {
-                    this->viewportState.field18_0x48 = DAT_TileMapState::instance.BuildingWasLayer[minimapTile];
+                    this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[minimapTile];
                 }
             }
             if (0 <= minimapGateTile) {
@@ -117,16 +117,16 @@ namespace Rendering {
             this->viewportState.mouseTileX = mouseXScreenSpace;
             this->viewportState.mouseY = mouseYScreenSpace;
             this->viewportState.mouseTileY = mouseYScreenSpace;
-            this->viewportState.field14_0x38 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x40000000;
+            this->viewportState.field_0x38 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x40000000;
             this->viewportState.mouseTile = minimapTile;
             this->viewportState.cursorTile = minimapTile;
             this->viewportState.mouseAtomRefFloorTile = minimapTile;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(
                     minimapTile)
                 == 0) {
-                this->viewportState.field14_0x38 = 0;
+                this->viewportState.field_0x38 = 0;
             }
-            this->viewportState.field16_0x40 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x4000;
+            this->viewportState.field_0x40 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x4000;
             return;
         }
 
@@ -172,7 +172,7 @@ namespace Rendering {
             unclampedX = ((mouseXScreenSpace * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
         }
 
-        int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[quadrantY][quadrantX];
+        int quadrant = DAT_MapRenderDefinedData::instance.field_0xc24[quadrantY][quadrantX];
         int lookupIndex = (unclampedX / 32) + orientationBase + (unclampedY >> 4) * 0x191;
         if (quadrant == 1) {
             lookupIndex = lookupIndex + 200;
@@ -183,14 +183,14 @@ namespace Rendering {
         }
 
         this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex + -8];
-        this->viewportState.field6_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
-        this->viewportState.field8_0x20 = (short)DAT_TileMapState::instance.UnitLayer[this->viewportState.mouseTile];
-        this->viewportState.field18_0x48 = 0;
-        this->viewportState.field5_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
+        this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
+        this->viewportState.field_0x20 = (short)DAT_TileMapState::instance.UnitLayer[this->viewportState.mouseTile];
+        this->viewportState.field_0x48 = 0;
+        this->viewportState.field_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
 
         if (this->viewportState.mouseRayUnitID != 0) {
             this->viewportState.mouseRayLastUnitID = this->viewportState.mouseRayUnitID;
-            this->viewportState.field13_0x34 = timeGetTime();
+            this->viewportState.field_0x34 = timeGetTime();
             if (DAT_UnitsState::instance.units[this->viewportState.mouseRayUnitID].unitType
                     == OpenSHC::Map::Units::UT_S_TOWER
                 && DAT_UnitsState::instance.units[this->viewportState.mouseRayUnitID].state.generic
@@ -201,14 +201,14 @@ namespace Rendering {
             }
         }
 
-        this->viewportState.field19_0x4c = DAT_MapRenderDefinedData::instance.field619_0x1024[quadrantY][quadrantX];
-        this->viewportState.field20_0x50 = DAT_MapRenderDefinedData::instance.field620_0x1424[quadrantY][quadrantX];
-        this->viewportState.field22_0x58
+        this->viewportState.field_0x4c = DAT_MapRenderDefinedData::instance.field_0x1024[quadrantY][quadrantX];
+        this->viewportState.field_0x50 = DAT_MapRenderDefinedData::instance.field_0x1424[quadrantY][quadrantX];
+        this->viewportState.field_0x58
             = DAT_UnitPropertiesDefinedData::instance
-                  .field77_0x10f4c[this->viewportState.field19_0x4c + this->viewportState.field20_0x50 * 8][0];
-        this->viewportState.field23_0x5c
+                  .field_0x10f4c[this->viewportState.field_0x4c + this->viewportState.field_0x50 * 8][0];
+        this->viewportState.field_0x5c
             = DAT_UnitPropertiesDefinedData::instance
-                  .field77_0x10f4c[this->viewportState.field19_0x4c + this->viewportState.field20_0x50 * 8][1];
+                  .field_0x10f4c[this->viewportState.field_0x4c + this->viewportState.field_0x50 * 8][1];
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setupMouseTileXY2, this)();
 
         int lastBuildingID = -1;
@@ -219,7 +219,7 @@ namespace Rendering {
             if ((DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile] & 0x100U) != 0) {
                 hoveredGateTile = this->viewportState.mouseTile;
             } else if ((short)hoveredBuildingLayer <= 0) {
-                this->viewportState.field18_0x48
+                this->viewportState.field_0x48
                     = DAT_TileMapState::instance.BuildingWasLayer[this->viewportState.mouseTile];
             }
         }
@@ -264,7 +264,7 @@ namespace Rendering {
                 probeIndex = (probeY / 16) * 0x191 + (probeX / 32) + orientationBase;
             }
 
-            int probeQuadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[probeRowY & 0xf][quadrantX];
+            int probeQuadrant = DAT_MapRenderDefinedData::instance.field_0xc24[probeRowY & 0xf][quadrantX];
             if (probeQuadrant == 1) {
                 probeIndex = probeIndex + 200;
             } else if (probeQuadrant == 2) {
@@ -288,7 +288,7 @@ namespace Rendering {
                             <= mouseYScreenSpace
                         || DAT_TileMapState::instance.disableElevationRendering != 0
                         || DAT_TileMapState::instance.flatViewToggleValue2 != 0) {
-                        this->viewportState.field18_0x48 = DAT_TileMapState::instance.BuildingWasLayer[probeTile];
+                        this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[probeTile];
                         hoveredBuildingID = -1;
                     }
                 } else if (probeScreenY
@@ -301,7 +301,7 @@ namespace Rendering {
                     hoveredBuildingID = -1;
                     hoveredGateTile = probeTile;
                 }
-            } else if (probeBuildingID != this->viewportState.field6_0x18 && probeBuildingID != hoveredBuildingID
+            } else if (probeBuildingID != this->viewportState.field_0x18 && probeBuildingID != hoveredBuildingID
                 && probeBuildingID != lastBuildingID
                 && (lastBuildingID = probeBuildingID,
                     (probeScreenY
@@ -338,9 +338,9 @@ namespace Rendering {
             }
         }
 
-        if (this->viewportState.field18_0x48 != 0) {
-            uint textNumInGroup = this->viewportState.field18_0x48;
-            switch (this->viewportState.field18_0x48) {
+        if (this->viewportState.field_0x48 != 0) {
+            uint textNumInGroup = this->viewportState.field_0x48;
+            switch (this->viewportState.field_0x48) {
             case 0x29:
                 textNumInGroup = 0x2a;
                 break;

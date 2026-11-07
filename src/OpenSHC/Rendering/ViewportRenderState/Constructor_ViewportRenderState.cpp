@@ -21,9 +21,9 @@ namespace Rendering {
         this->unknownCounterUntil_0x20 = 0;
         this->unknownCounterUntil_0x200 = 0;
         this->unknownCounterUntil_0x24 = 0;
-        this->field55_0x18b764 = 0;
+        this->field_0x18b764 = 0;
         this->unknownCounterUntil_0x10 = 0;
-        this->viewportState.field37_0x94 = 0;
+        this->viewportState.field_0x94 = 0;
 
         this->interval_03_160 = 160;
         this->interval_04_180 = 180;

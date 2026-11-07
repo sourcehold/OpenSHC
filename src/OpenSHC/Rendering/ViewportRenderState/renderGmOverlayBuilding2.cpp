@@ -103,7 +103,7 @@ namespace Rendering {
                         gmID, renderX, screenX + -0x23, renderBaseY + -0x2a, maskGmID, renderY, 0);
                 } else {
                     if ((DAT_BuildingsState::instance.buildings[buildingID].currentlyNeededEmployeeCount != 0)
-                        && (DAT_GameCore::instance.field63_0x108 != 0)) {
+                        && (DAT_GameCore::instance.field_0x108 != 0)) {
                         gmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
                         renderX = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x118;
                         renderBaseY
@@ -119,7 +119,7 @@ namespace Rendering {
                     }
                 }
             }
-            short bannerState = DAT_BuildingsState::instance.buildings[buildingID].field68_0xc2;
+            short bannerState = DAT_BuildingsState::instance.buildings[buildingID].field_0xc2;
             if (bannerState == 1) {
                 renderY = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x10;
                 renderX = DAT_TileMapState::instance.cursorOverlayAnimationFrame;
@@ -131,7 +131,7 @@ namespace Rendering {
                         - heightOffset)
                         + -0x2a,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, renderY, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].field68_0xc2 = 0;
+                DAT_BuildingsState::instance.buildings[buildingID].field_0xc2 = 0;
             } else if (bannerState == 2) {
                 renderY = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x84;
                 renderX = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x74;
@@ -143,7 +143,7 @@ namespace Rendering {
                         - heightOffset)
                         + -0x2a,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, renderY, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].field68_0xc2 = 0;
+                DAT_BuildingsState::instance.buildings[buildingID].field_0xc2 = 0;
             }
         }
         int frame;

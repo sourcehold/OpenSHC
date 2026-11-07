@@ -19,11 +19,11 @@ namespace Rendering {
         int foundTile = 0;
         int orientationBase = 8;
 
-        this->viewportState.field27_0x6c = 0;
+        this->viewportState.field_0x6c = 0;
         this->viewportState.cursorTile = 0;
         this->viewportState.mouseX = 0;
         this->viewportState.mouseY = 0;
-        if (this->viewportState.field0_0x0 != 0) {
+        if (this->viewportState.field_0x0 != 0) {
 
             uint quadrantX;
             if (this->viewportState.isZoomedOutUnk == 0) {
@@ -74,7 +74,7 @@ namespace Rendering {
                     lookupIndex = (unclampedY / 16) * 0x191 + (unclampedX / 32) + orientationBase;
                 }
 
-                int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[tileRowY & 0xf][quadrantX];
+                int quadrant = DAT_MapRenderDefinedData::instance.field_0xc24[tileRowY & 0xf][quadrantX];
                 if (quadrant == 1) {
                     lookupIndex = lookupIndex + 200;
                 } else if (quadrant == 2) {
@@ -156,7 +156,7 @@ namespace Rendering {
 
             if ((DAT_TileMapState::instance.LogicLayer[this->viewportState.cursorTile] & 0x10000300U) != 0
                 && (DAT_TileMapState::instance.LogicLayer[this->viewportState.cursorTile] & 2U) == 0) {
-                this->viewportState.field27_0x6c = 1;
+                this->viewportState.field_0x6c = 1;
             }
             this->viewportState.somePitchDitchID = 0;
             this->viewportState.mouseAtomRefFloorTile = foundTile;
@@ -171,23 +171,23 @@ namespace Rendering {
                 if (DAT_TileMapState::instance.flatViewToggleValue1 != 0) {
                     hoveredTile = this->viewportState.mouseTile;
                 }
-                this->viewportState.field14_0x38 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x40000000;
-                this->viewportState.field16_0x40 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x4000;
+                this->viewportState.field_0x38 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x40000000;
+                this->viewportState.field_0x40 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x4000;
 
                 int moatID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(hoveredTile);
                 if (moatID == 0) {
-                    this->viewportState.field14_0x38 = 0;
-                    this->viewportState.field16_0x40 = 0;
+                    this->viewportState.field_0x38 = 0;
+                    this->viewportState.field_0x40 = 0;
                 }
-                this->viewportState.field15_0x3c = this->viewportState.field14_0x38;
+                this->viewportState.field_0x3c = this->viewportState.field_0x38;
                 if (DAT_GameState::instance.mapAndTime.playerTeams[DAT_TileMapState::instance.moats[moatID].owner]
                     == DAT_GameState::instance.mapAndTime
                         .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
-                    this->viewportState.field14_0x38 = 0;
+                    this->viewportState.field_0x38 = 0;
                 } else {
-                    this->viewportState.field16_0x40 = 0;
-                    this->viewportState.field15_0x3c = 0;
+                    this->viewportState.field_0x40 = 0;
+                    this->viewportState.field_0x3c = 0;
                 }
 
                 if ((DAT_TileMapState::instance.LogicLayer[hoveredTile] & 8) != 0) {
@@ -197,16 +197,16 @@ namespace Rendering {
             } else {
                 this->viewportState.mouseY = 0;
                 this->viewportState.mouseX = 0;
-                this->viewportState.field27_0x6c = 0;
-                this->viewportState.field14_0x38 = 0;
-                this->viewportState.field16_0x40 = 0;
-                this->viewportState.field15_0x3c = 0;
+                this->viewportState.field_0x6c = 0;
+                this->viewportState.field_0x38 = 0;
+                this->viewportState.field_0x40 = 0;
+                this->viewportState.field_0x3c = 0;
             }
         } else {
             this->viewportState.cursorTile = 0;
             this->viewportState.mouseX = 0;
             this->viewportState.mouseY = 0;
-            this->viewportState.field27_0x6c = 0;
+            this->viewportState.field_0x6c = 0;
         }
     }
 

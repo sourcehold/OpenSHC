@@ -18,7 +18,7 @@
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
@@ -182,7 +182,7 @@ namespace Rendering {
                                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                                 DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
                                 (byte*)((
-                                    int)((DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
+                                    int)((DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
                                                                          int)DAT_CurrentlyRenderedSpriteID::instance]
                                               + overlayX + 0x1c51f]
                                     + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
@@ -193,7 +193,7 @@ namespace Rendering {
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
                                     (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
+                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
                                                                        int)DAT_CurrentlyRenderedSpriteID::instance]
                                             + (int)graphicSize + 0x1c51f]
                                         + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
@@ -207,7 +207,7 @@ namespace Rendering {
                                 OpenSHC::Rendering::ViewportRenderState_Func::renderAssassinClimbingOverlay, this)(
                                 _unitID);
                         }
-                        graphicSize = DAT_UnitsState::instance.units[_unitID].field59_0x86;
+                        graphicSize = DAT_UnitsState::instance.units[_unitID].field_0x86;
                         if (graphicSize < 0) {
                             overlayX = 0;
                         } else {
@@ -224,7 +224,7 @@ namespace Rendering {
                                 = (int)DAT_UnitsState::instance.units[_unitID].gmIDUnk;
                             overlayX = DAT_UnitsState::instance.units[_unitID].imageIDUnk;
                             if (0 < overlayX) {
-                                graphicSize = DAT_UnitsState::instance.units[_unitID].field60_0x88;
+                                graphicSize = DAT_UnitsState::instance.units[_unitID].field_0x88;
                                 if (graphicSize < 0) {
                                     overlayY = 0;
                                 } else {
@@ -235,7 +235,7 @@ namespace Rendering {
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, graphicSize + _drawY, _imageID,
                                     _blendStrength - overlayY,
                                     (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
+                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
                                                                        int)DAT_CurrentlyRenderedSpriteID::instance]
                                             + overlayX + 0x1c51f]
                                         + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
@@ -255,7 +255,7 @@ namespace Rendering {
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, graphicSize + _drawY, _imageID,
                                     _blendStrength - overlayY,
                                     (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
+                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
                                                                        int)DAT_CurrentlyRenderedSpriteID::instance]
                                             + overlayX + 0x1c51f]
                                         + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
@@ -412,7 +412,7 @@ namespace Rendering {
                                     DAT_UnitsState::instance.units[_unitID].someDrawYOffset + -0x1b + _drawY, 0x10);
                             }
                         }
-                        savedPixelColor = DAT_UnitsState::instance.units[_unitID].field46_0x6e;
+                        savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6e;
                         if (savedPixelColor != 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
@@ -420,9 +420,9 @@ namespace Rendering {
                                 (int)(DAT_UnitsState::instance.units[_unitID].drawY + -0x36
                                     + DAT_UnitsState::instance.units[_unitID].someDrawYOffset),
                                 OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(savedPixelColor + 0xdc), 0);
-                            DAT_UnitsState::instance.units[_unitID].field46_0x6e = 0;
+                            DAT_UnitsState::instance.units[_unitID].field_0x6e = 0;
                         }
-                        savedPixelColor = DAT_UnitsState::instance.units[_unitID].field45_0x6c;
+                        savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6c;
                         if (savedPixelColor != 0) {
                             overlayY = 0;
                             overlayX = 0;
@@ -430,7 +430,7 @@ namespace Rendering {
                                 maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x30;
                                 overlayX = DAT_UnitsState::instance.units[_unitID].drawY + -0x46
                                     + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].field22_0x2a + -0x35
+                                overlayY = DAT_UnitsState::instance.units[_unitID].field_0x2a + -0x35
                                     + (int)DAT_UnitsState::instance.units[_unitID].drawX;
                                 int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x20;
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -519,7 +519,7 @@ namespace Rendering {
                                         maskImageID, 0);
                                 }
                             }
-                            DAT_UnitsState::instance.units[_unitID].field45_0x6c = 0;
+                            DAT_UnitsState::instance.units[_unitID].field_0x6c = 0;
                         }
                     }
                 }
