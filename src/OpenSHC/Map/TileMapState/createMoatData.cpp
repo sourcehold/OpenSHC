@@ -39,7 +39,7 @@ namespace Map {
                 continue;
             }
 
-            if (this->currentMoatCount <= moatID) {
+            if (moatID >= this->currentMoatCount) {
                 this->currentMoatCount = moatID + 1;
             }
             this->moats[moatID].owner = (char)playerID;
@@ -47,14 +47,13 @@ namespace Map {
             this->moats[moatID].y = (short)y;
             this->moats[moatID].tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->moats[moatID].zeroOrTwo = 2;
-            if (filled == 0) {
+            if (filled != 0) {
+                this->moats[moatID].stage = 2;
+                this->moats[moatID].fillProgress = 4;
+            } else {
                 this->moats[moatID].stage = 1;
                 this->moats[moatID].fillProgress = 0;
-                this->moatTileCount = this->moatTileCount + 1;
-                return moatID;
             }
-            this->moats[moatID].stage = 2;
-            this->moats[moatID].fillProgress = 4;
             this->moatTileCount = this->moatTileCount + 1;
             return moatID;
         }
