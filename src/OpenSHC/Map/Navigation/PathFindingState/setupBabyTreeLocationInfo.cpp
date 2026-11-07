@@ -96,7 +96,8 @@ namespace Map {
                                 case OpenSHC::Map::Buildings::BT_POND:
                                     break;
                                 default:
-                                    goto switchD_0049c1f0_caseD_4;
+                                    // any other building on the way ends the search
+                                    return (undefined4)(0);
                                 }
                             }
                             int iVar8 = (int)DAT_TileMapState::instance.Logic2Layer[iVar5];
@@ -147,7 +148,6 @@ namespace Map {
                     this->searchQueue.readIndex = 0;
                 }
             }
-        switchD_0049c1f0_caseD_4:
             return (undefined4)(0);
         }
 
