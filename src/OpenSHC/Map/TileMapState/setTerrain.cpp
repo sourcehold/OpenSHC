@@ -3,7 +3,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -52,7 +52,7 @@ namespace Map {
     void TileMapState::setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1 flags1, Logic2 flags2)
     {
         /*
-          Holds one expansion of the handwritten neighbour-flag macro (see NeighbourFlagsAsm.hpp),
+          Holds one expansion of the handwritten neighbour-flag macro (see NeighbourFlagsGlobalAsm.hpp),
           so the original was built without optimisation and the pragma above is needed to reproduce
           its frame-pointer, reload-per-access shape. The locals are declared together because at
           /Od the stack slots are observable and MSVC assigns them per function, not per scope.
@@ -463,7 +463,7 @@ namespace Map {
                     if ((this->Logic2Layer[tile] & L2_BEACH) != 0) {
                         continue;
                     }
-                    MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(1, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
+                    MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(1, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
                     if (this->bitFlag != 0) {
                         continue;
                     }

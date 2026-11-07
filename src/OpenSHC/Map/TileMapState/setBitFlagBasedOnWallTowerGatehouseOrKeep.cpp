@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -17,7 +17,7 @@ namespace Map {
     byte TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y)
     {
         /*
-          The body is the handwritten neighbour-flag macro; see NeighbourFlagsAsm.hpp. Written as C++
+          The body is the handwritten neighbour-flag macro; see NeighbourFlagsGlobalAsm.hpp. Written as C++
           it would be:
 
           this->bitFlag = 0;
@@ -31,7 +31,7 @@ namespace Map {
         this->DAT_SomeTile = MACRO_CALL_MEMBER(
             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile, &DAT_ViewportRenderState::instance)(x, y);
 
-        MACRO_NEIGHBOUR_FLAGS_LOGIC_8(1, NEIGHBOUR_FLAGS_MASK_WALL_OR_KEEP)
+        MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(1, NEIGHBOUR_FLAGS_MASK_WALL_OR_KEEP)
 
         return this->bitFlag;
     }

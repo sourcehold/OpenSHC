@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -68,7 +68,7 @@ namespace Map {
                 this->DAT_SomeY = brushY;
 
                 /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
-                MACRO_MARK_CHANGED_NEIGHBOURS()
+                MACRO_MARK_CHANGED_NEIGHBOURS_GLOBAL()
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                     DAT_PathFindingState::ptr)(brushY, brushTile);

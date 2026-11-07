@@ -3,7 +3,7 @@
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -44,7 +44,7 @@ namespace Map {
     void TileMapState::updateGFXLayers()
     {
         /*
-          Contains the handwritten neighbour-flag macro nine times (see NeighbourFlagsAsm.hpp), which
+          Contains the handwritten neighbour-flag macro nine times (see NeighbourFlagsGlobalAsm.hpp), which
           is why the surrounding code is unoptimised: MSVC disables optimisation in a function holding
           inline asm, so every field access reloads this from the frame.
 
@@ -128,7 +128,7 @@ namespace Map {
                                 = (ushort)(GMFirstPictureIndex::instance[9] & 0xffff);
 
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_MARSH) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
                                 edgeBase = 1;
                                 cornerFrame = 3;
                                 flatFrame = 0x15;
@@ -138,7 +138,7 @@ namespace Map {
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
                                 elevation = this->HeightLayer[this->DAT_SomeTile];
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
                                 edgeBase = 0x99;
                                 cornerFrame = 0x9b;
                                 flatFrame = 0xad;
@@ -147,7 +147,7 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
                                 edgeBase = 0x1c9;
                                 cornerFrame = 0x1cb;
                                 flatFrame = 0x1dd;
@@ -157,7 +157,7 @@ namespace Map {
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk)
                                 != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
                                 edgeBase = 0x261;
                                 cornerFrame = 0x263;
                                 flatFrame = 0x275;
@@ -166,7 +166,7 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                 edgeBase = 0x2f9;
                                 cornerFrame = 0x2fb;
                                 flatFrame = 0x30d;
@@ -176,7 +176,7 @@ namespace Map {
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
                                 /* the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is */
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                 edgeBase = 0x4a9;
                                 cornerFrame = 0x4ab;
                                 flatFrame = 0x4bd;
@@ -185,7 +185,7 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
                                 edgeBase = 0x131;
                                 cornerFrame = 0x133;
                                 flatFrame = 0x145;
@@ -194,7 +194,7 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 2;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
                                 edgeBase = 0x131;
                                 cornerFrame = 0x133;
                                 flatFrame = 0x145;
@@ -203,9 +203,9 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 2;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
                                 priorBitFlag = this->bitFlag;
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
                                 this->bitFlag = this->bitFlag | priorBitFlag;
                                 edgeBase = 0x391;
                                 cornerFrame = 0x393;
@@ -215,7 +215,7 @@ namespace Map {
                                 perLevel = 4;
                                 drawMode = 0;
                             } else {
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(11, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(11, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
                                 edgeBase = 0x131;
                                 cornerFrame = 0x133;
                                 flatFrame = 0x145;

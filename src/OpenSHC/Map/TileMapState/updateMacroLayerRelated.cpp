@@ -2,7 +2,7 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
-#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -36,7 +36,7 @@ namespace Map {
     {
         /*
           Five copies of the same block/sub-tile loop skeleton, and eleven expansions of the
-          handwritten neighbour-flag macro (see NeighbourFlagsAsm.hpp). The original was built
+          handwritten neighbour-flag macro (see NeighbourFlagsGlobalAsm.hpp). The original was built
           without optimisation, so the pragma above is needed to reproduce its frame-pointer,
           reload-per-access code shape.
 
@@ -93,31 +93,31 @@ namespace Map {
                             if ((this->LogicLayer[this->DAT_SomeTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                                 this->bitFlag = 0;
                             } else if (logic1 == 0x8000) {
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(1, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(1, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
                             } else if (logic1 == 0x20000000) {
                                 if ((this->LogicLayer[this->DAT_SomeTile] & L_OIL) != 0) {
                                     continue;
                                 }
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(2, NEIGHBOUR_FLAGS_MASK_MARSH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(2, NEIGHBOUR_FLAGS_MASK_MARSH)
                             } else if (logic2 == 0x2) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(3, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(3, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
                             } else if (logic2 == 0x10) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(4, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(4, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
                             } else if (logic2 == 0x1) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                             } else if (logic2 == 0x80) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(6, NEIGHBOUR_FLAGS_MASK_L2_THICK_SCRUB)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(6, NEIGHBOUR_FLAGS_MASK_L2_THICK_SCRUB)
                             } else if (logic2 == 0x40) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(7, NEIGHBOUR_FLAGS_MASK_L2_STONES)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(7, NEIGHBOUR_FLAGS_MASK_L2_STONES)
                             } else if (logic2 == 0x20) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(8, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(8, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
                                 savedBitFlag = this->bitFlag;
-                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(9, NEIGHBOUR_FLAGS_MASK_SEA)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(9, NEIGHBOUR_FLAGS_MASK_SEA)
                                 this->bitFlag = this->bitFlag | savedBitFlag;
                             } else if (logic2 == 0x4) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(10, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(10, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
                             } else if (logic2 == 0x8) {
-                                MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(11, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
+                                MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(11, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
                             } else {
                                 this->bitFlag = 0;
                             }
