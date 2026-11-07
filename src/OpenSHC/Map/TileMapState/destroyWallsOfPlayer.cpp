@@ -18,12 +18,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_CRENEL;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-    using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F93E0
     void TileMapState::destroyWallsOfPlayer(int playerID)
     {

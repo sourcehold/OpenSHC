@@ -15,7 +15,7 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005113F0
-    BOOLEnum TileMapState::removeMoat(uint moatID, int param_2)
+    BOOLEnum TileMapState::removeMoat(uint moatID, int unused)
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress - 1;
         // nested form: the original keeps the FALSE return as the trailing block

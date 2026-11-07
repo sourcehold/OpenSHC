@@ -28,7 +28,6 @@ namespace Map {
             this->buildingRotationRelatedValue
                 = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][5];
         }
-        return;
     }
 
 }

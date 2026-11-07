@@ -1,8 +1,8 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"

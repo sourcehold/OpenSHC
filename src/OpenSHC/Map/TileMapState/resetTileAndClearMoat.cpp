@@ -53,7 +53,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, y);
             this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
         }
-        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;
+        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & ~0x3c0;
     }
 
 }

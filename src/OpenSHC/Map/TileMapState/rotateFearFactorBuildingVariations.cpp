@@ -12,11 +12,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8300
     void TileMapState::rotateFearFactorBuildingVariations()
     {
-        /*
-          currentMapperCommand is reached through the global instance's absolute address, and the
-          switch below is the original's byte table at 0x004F847C into the jump table at 0x004F8454,
-          biased by M_MAPPER_GARDEN1. The "- 1 & 6" forms are the original's setcc/dec/and idiom.
-        */
+        // currentMapperCommand is reached through the global instance's absolute address, and the
+        // switch below is the original's byte table at 0x004F847C into the jump table at 0x004F8454,
+        // biased by M_MAPPER_GARDEN1. The "- 1 & 6" forms are the original's setcc/dec/and idiom.
         DWORD now = timeGetTime();
         if (this->editorRockType == 5) {
             if (this->rockOrientation == 0) {
@@ -32,7 +30,7 @@ namespace Map {
         }
 
         this->lastTime = now;
-        this->gateOrientationVariant = (this->gateOrientationVariant == 0x50) + 0x50;
+        this->gateOrientationVariant = (this->gateOrientationVariant == 80) + 80;
         if (this->editorRockType == 0) {
             if (this->rockOrientation == 0) {
                 this->rockOrientation = 2;
@@ -63,7 +61,8 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_SHRINE1:
         case OpenSHC::Commands::M_MAPPER_POND1:
         case OpenSHC::Commands::M_MAPPER_POND3_LARGE1:
-            DAT_TileMapState::instance.currentMapperCommand = (MappersEnum)(DAT_TileMapState::instance.currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
+            DAT_TileMapState::instance.currentMapperCommand
+                = (MappersEnum)(DAT_TileMapState::instance.currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
             return;
         case OpenSHC::Commands::M_MAPPER_GARDEN6:
             DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN1;

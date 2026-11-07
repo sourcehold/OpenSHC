@@ -40,9 +40,9 @@ namespace Map {
         }
 
         uint rotation;
-        if (high > heightAt86 + 0x14 && heightAt86 < 0x88) {
-            if (high > heightAt85 + 0x14 && heightAt85 < 0x88) {
-                if (high > heightAt84 + 0x14 && heightAt84 < 0x88) {
+        if (high > heightAt86 + 20 && heightAt86 < 136) {
+            if (high > heightAt85 + 20 && heightAt85 < 136) {
+                if (high > heightAt84 + 20 && heightAt84 < 136) {
                     rotation = 5;
                 } else {
                     rotation = 3;
@@ -50,24 +50,29 @@ namespace Map {
             } else {
                 rotation = 1;
             }
-        } else if (high > heightAt85 + 0x14 && heightAt85 < 0x88) {
-            if (high > heightAt86 + 0x14 && heightAt86 < 0x88) {
+        } else if (high > heightAt85 + 20 && heightAt85 < 136) {
+            if (high > heightAt86 + 20 && heightAt86 < 136) {
                 rotation = 3;
             } else {
                 rotation = 2;
             }
-        } else if (heightAt86 < 0x88 || heightAt85 < 0x88) {
-            /* 0 when the tileUnk is not high enough above its neighbour, 5 when it is */
-            rotation = (high <= heightAt84 + 0x14) - 1 & 5;
+        } else if (heightAt86 < 136 || heightAt85 < 136) {
+            // the original reaches this with a setcc/dec/and, which is how MSVC compiles the
+            // conditional below
+            if (high > heightAt84 + 20) {
+                rotation = 5;
+            } else {
+                rotation = 0;
+            }
         } else {
             rotation = 4;
         }
 
         if (this->mapOrientation == 0) {
             if (rotation == 1) {
-                this->wallCornerRotation = 0x20 - (x & 0x1f);
+                this->wallCornerRotation = 32 - (x & 0x1f);
             } else {
-                this->wallCornerRotation = 0x20 - (y & 0x1f);
+                this->wallCornerRotation = 32 - (y & 0x1f);
             }
         } else if (this->mapOrientation == 4) {
             if (rotation == 1) {
@@ -78,9 +83,9 @@ namespace Map {
         } else if (this->mapOrientation == 2) {
             this->wallCornerRotation = (y & 0x1f) + 1;
         } else {
-            this->wallCornerRotation = 0x20 - (y & 0x1f);
+            this->wallCornerRotation = 32 - (y & 0x1f);
         }
-        if ((int)this->wallCornerRotation > 0x1f) {
+        if ((int)this->wallCornerRotation > 31) {
             this->wallCornerRotation = 1;
         }
         return rotation;

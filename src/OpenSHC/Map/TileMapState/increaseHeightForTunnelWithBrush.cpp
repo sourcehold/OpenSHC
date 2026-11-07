@@ -27,7 +27,7 @@ namespace Map {
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 0, index, &tile, (int*)&y, baseTile, baseY);
-            /* a copy the height store cannot alias: the original pushes it without reloading tile */
+            // a copy the height store cannot alias: the original pushes it without reloading tile
             int const brushTile = tile;
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                 continue;
@@ -42,7 +42,7 @@ namespace Map {
                 continue;
             }
 
-            if ((this->HeightLayer[tile] < 0x10 || this->DefaultHeightLayer[tile] < 0x10)
+            if ((this->HeightLayer[tile] < 16 || this->DefaultHeightLayer[tile] < 16)
                 && (int)((uint)this->HeightLayer[tile] + increment) >= 0) {
                 this->HeightLayer[tile] = this->HeightLayer[tile] + (char)increment;
             }

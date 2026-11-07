@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Version.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 namespace OpenSHC {
 namespace Map {

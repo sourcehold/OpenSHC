@@ -22,6 +22,9 @@ namespace Map {
     void TileMapState::clearBuildingFootprintAndResetUnits(int x, int y, int size)
     {
         int buildingSizeTileIndex = 0;
+        // do-while, not a for loop: the bound is this->constructionTileCount, which the
+        // getBuildingSizeIndexMappingData call in the body sets. Testing it before the first
+        // iteration would read the count of the previous footprint.
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, size);
@@ -31,7 +34,7 @@ namespace Map {
                 & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_BUILDING | L_STAIRS | L_CRENEL_VARIATIONUnk
                     | L_KEEP_NON_MANOR_HOUSE);
             if ((this->MiscDisplayLayer[tile] & 0x20) != 0) {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffdf;
+                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & ~0x20;
                 this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             }
             int buildingID = this->BuildingLayer[tile];

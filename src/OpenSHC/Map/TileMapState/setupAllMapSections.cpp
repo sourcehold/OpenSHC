@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -57,8 +58,8 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupLogicalMapBorders, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateShowHiLayerOrResetChangedLayer, this)();
 
-        /* the border tiles get their own graphic, everything else the plain one */
-        for (int tile = 0; tile < 80400; tile += 6) {
+        // the border tiles get their own graphic, everything else the plain one
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile += 6) {
             for (int i = 0; i < 6; i++) {
                 if (this->LogicLayer[tile + i] == L_BORDER) {
                     this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2];
@@ -71,14 +72,14 @@ namespace Map {
         }
 
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ShortValue, DAT_LowLevelMemory::ptr)(
-            80400, 1, this->PillarGFXLayer);
+            MC_MAP_TILES_COUNT, 1, this->PillarGFXLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\b', this->HeightLayer);
+            sizeof(this->HeightLayer), '\b', this->HeightLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\b', this->DefaultHeightLayer);
+            sizeof(this->DefaultHeightLayer), '\b', this->DefaultHeightLayer);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            160800, '\0', DAT_TileMapState::instance.WalkLayer);
+            sizeof(DAT_TileMapState::instance.WalkLayer), '\0', DAT_TileMapState::instance.WalkLayer);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setChangedLayerZeroBasedOn40x40Layer,
             DAT_PathFindingState::ptr)(0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateLogicalTileMapRelatedSections, this)();

@@ -12,15 +12,13 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA550
     int TileMapState::getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType)
     {
-        /*
-          The original dispatches through a byte index table at 0x004FA614 (0x147 entries, biased by
-          M_MAPPER_UNDUGMOAT) into a jump table at 0x004FA5DC, which is what MSVC emits for a dense
-          switch; Ghidra could not normalise it and rendered the dispatch as a read through an
-          unnamed pointer array. The case groups below are that byte table, decoded.
-
-          field159_0x5549b8 is written through the global instance, not through this, which is how
-          the original addresses it.
-        */
+        // The original dispatches through a byte index table at 0x004FA614 (0x147 entries, biased by
+        // M_MAPPER_UNDUGMOAT) into a jump table at 0x004FA5DC, which is what MSVC emits for a dense
+        // switch; Ghidra could not normalise it and rendered the dispatch as a read through an
+        // unnamed pointer array. The case groups below are that byte table, decoded.
+        //
+        // field159_0x5549b8 is written through the global instance, not through this, which is how
+        // the original addresses it.
         switch (commandBuildingType) {
         case OpenSHC::Commands::M_MAPPER_FLETCHER:
         case OpenSHC::Commands::M_MAPPER_HOVEL:
@@ -121,15 +119,15 @@ namespace Map {
             return 1;
         case OpenSHC::Commands::M_MAPPER_KEEP3:
         case OpenSHC::Commands::M_MAPPER_APPLEFARM:
-            return 0xb;
+            return 11;
         case OpenSHC::Commands::M_MAPPER_WHEATFARM:
         case OpenSHC::Commands::M_MAPPER_HOPSFARM:
         case OpenSHC::Commands::M_MAPPER_CHURCH2:
             return 9;
         case OpenSHC::Commands::M_MAPPER_CHURCH3:
-            return 0xd;
+            return 13;
         case OpenSHC::Commands::M_MAPPER_CATTLEFARM:
-            return 0xa;
+            return 10;
         case OpenSHC::Commands::M_MAPPER_UNDUGMOAT:
         case OpenSHC::Commands::M_MAPPER_DUGMOAT:
         case OpenSHC::Commands::M_MAPPER_MOAT:

@@ -25,7 +25,7 @@ namespace Map {
             index = 0;
         }
         int brushStep = DAT_TerrainDefinedData::instance.field_0xc[index];
-        if (brushStep == 0xf) {
+        if (brushStep == 15) {
             return;
         }
         if (brushStep < 8) {

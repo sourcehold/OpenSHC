@@ -13,11 +13,11 @@ namespace Map {
     using OpenSHC::Map::Units::UnitType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
-    void TileMapState::triggerLoweredView(int param_1)
+    void TileMapState::triggerLoweredView(int requestedView)
     {
         int view = 2;
         if (this->flatViewToggleValue2 == 0) {
-            view = param_1;
+            view = requestedView;
         }
         if (this->refreshCertainTileMap_old == view) {
             return;

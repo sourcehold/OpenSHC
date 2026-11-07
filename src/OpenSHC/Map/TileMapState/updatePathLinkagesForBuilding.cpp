@@ -16,15 +16,19 @@ namespace Map {
     void TileMapState::updatePathLinkagesForBuilding(int buildingID)
     {
         int buildingSizeTileIndex = 0;
+        // do-while, not a for loop: the bound is this->constructionTileCount, which the
+        // getBuildingSizeIndexMappingData call in the body sets. Testing it before the first
+        // iteration would read the count of the previous footprint.
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int tileUnk = DAT_ViewportRenderState::instance
-                           .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY]
-                           .addXgetTile
+                              .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY]
+                              .addXgetTile
                 + DAT_BuildingsState::instance.buildings[buildingID].x + this->buildingX;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                DAT_PathFindingState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
+                DAT_PathFindingState::ptr)(
+                DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tileUnk);
             buildingSizeTileIndex++;
         } while (buildingSizeTileIndex < this->constructionTileCount);

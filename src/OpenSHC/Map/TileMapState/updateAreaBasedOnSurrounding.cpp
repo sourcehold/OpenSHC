@@ -15,6 +15,9 @@ namespace Map {
         int area
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findAccessibleAreaNearBuildingLocation,
                 DAT_BuildingsState::ptr)(x, y, buildingSize);
+        // do-while, not a for loop: the bound is this->constructionTileCount, which the
+        // getBuildingSizeIndexMappingData call in the body sets. Testing it before the first
+        // iteration would read the count of the previous footprint.
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingSize);

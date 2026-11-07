@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
+
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -18,7 +20,7 @@ namespace Map {
     void TileMapState::collectCliffEdgeTilesForClimbData()
     {
         this->temporaryTerrainTypeIndex = 0;
-        for (int tile = 0; tile < 80400; tile++) {
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -33,7 +35,7 @@ namespace Map {
                     int neighbour
                         = this->directionTranslationMatrix[row][DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
                         + tile;
-                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 0x50) {
+                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 80) {
                         this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 0;
                         break;
                     }

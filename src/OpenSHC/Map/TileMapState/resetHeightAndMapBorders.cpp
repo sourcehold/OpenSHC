@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 
@@ -23,10 +23,10 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_BORDER | L_BORDER_EDGE);
         }
 
-        /* the two outer diagonals of the diamond carry the border flags */
+        // the two outer diagonals of the diamond carry the border flags
         int rowLength = 0;
         int tile = 0;
-        do {
+        for (; rowLength < MC_MAP_XY_LIMIT; rowLength = rowLength + 2) {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BORDER;
             tile++;
             if (rowLength > 0) {
@@ -37,11 +37,10 @@ namespace Map {
                 this->LogicLayer[tile - 1] = L_BORDER_EDGE;
             }
             this->LogicLayer[tile] = L_BORDER;
-            rowLength = rowLength + 2;
             tile++;
-        } while (rowLength < MC_MAP_XY_LIMIT);
+        }
 
-        for (rowLength = 398; rowLength >= 0; rowLength = rowLength - 2) {
+        for (rowLength = MC_MAP_XY_LIMIT - 2; rowLength >= 0; rowLength = rowLength - 2) {
             this->LogicLayer[tile] = L_BORDER;
             tile++;
             if (rowLength > 0) {
@@ -55,7 +54,7 @@ namespace Map {
             tile++;
         }
 
-        /* and again inset by (400 - mapSize) / 2 for a map smaller than the full diamond */
+        // and again inset by (400 - mapSize) / 2 for a map smaller than the full diamond
         int row = 0;
         tile = 0;
         for (int skipped = 0; skipped < inset; skipped++) {
@@ -95,7 +94,7 @@ namespace Map {
                 DAT_PathFindingState::ptr)();
         }
 
-        /* every border tile ends up at the minimum height */
+        // every border tile ends up at the minimum height
         for (int borderTile = 0; borderTile < MC_MAP_TILES_COUNT; borderTile++) {
             if ((this->LogicLayer[borderTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 this->HeightLayer[borderTile] = 8;

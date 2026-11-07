@@ -17,7 +17,8 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == 0) {
                 return 0;
             }
-            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == OpenSHC::Map::Buildings::BLS_REMOVE) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState
+                == OpenSHC::Map::Buildings::BLS_REMOVE) {
                 return 0;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth == 0) {

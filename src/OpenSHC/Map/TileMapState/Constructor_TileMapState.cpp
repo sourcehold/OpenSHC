@@ -36,7 +36,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
         this->moatTileCount = 0;
         this->skipPlacementCheck = 0;
-        this->gateOrientationVariant = 0x50;
+        this->gateOrientationVariant = 80;
         this->lastTime = timeGetTime();
         this->rockOrientation = 0;
         this->editorRockType = 0;

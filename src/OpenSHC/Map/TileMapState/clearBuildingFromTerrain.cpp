@@ -59,7 +59,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFootprintAndResetUnits, this)(x, y, size);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingDisplayFlagsAndEntities, this)(
                 buildingID, 1);
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingTilesAndTrees, this)(buildingID, 0x1b);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingTilesAndTrees, this)(buildingID, 27);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::unmarkBuildingFootprintFlag, this)(x, y, 10);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateAreaBasedOnSurrounding, this)(x, y, 10);
             size = 6;
@@ -69,8 +69,8 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingDisplayFlagsAndEntities, this)(
                 buildingID, 1);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingTilesAndTrees, this)(buildingID, 8);
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::unmarkBuildingFootprintFlag, this)(x, y, 0xb);
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateAreaBasedOnSurrounding, this)(x, y, 0xb);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::unmarkBuildingFootprintFlag, this)(x, y, 11);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateAreaBasedOnSurrounding, this)(x, y, 11);
             size = 6;
         } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
             == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
