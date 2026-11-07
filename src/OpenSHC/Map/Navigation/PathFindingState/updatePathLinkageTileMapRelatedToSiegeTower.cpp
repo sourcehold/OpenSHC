@@ -14,26 +14,18 @@ namespace Map {
             int iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].x;
             int iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].y;
             int iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 - 1].addXgetTile + iVar4 + 1;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x10;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5] |= 0x10;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2].addXgetTile + iVar4 + 1;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x11;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5] |= 0x11;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 2].addXgetTile + iVar4 + 1;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x11;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5] |= 0x11;
             iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 3].addXgetTile + iVar4 + 1;
             int iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 1].addXgetTile + iVar4;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar5] = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 1;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3 - 1]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar3 - 1] | 4;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar3] | 0x44;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 2]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 2] | 0x44;
-            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 3]
-                = DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 3] | 0x40;
-            return;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5] |= 1;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar3 - 1] |= 4;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar3] |= 0x44;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 2] |= 0x44;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 3] |= 0x40;
         }
 
     }
