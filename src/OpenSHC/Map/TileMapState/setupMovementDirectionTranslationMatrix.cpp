@@ -13,18 +13,16 @@ namespace Map {
           back down again.
         */
         int step = 2;
-        int counter = 0;
         for (int row = 0; row < 199; row++) {
-            this->directionTranslationMatrix[row][0] = counter - 1;
+            this->directionTranslationMatrix[row][0] = 1 - step;
             this->directionTranslationMatrix[row][3] = step + 2;
             this->directionTranslationMatrix[row][4] = step + 1;
-            this->directionTranslationMatrix[row][1] = counter;
+            this->directionTranslationMatrix[row][1] = 2 - step;
             this->directionTranslationMatrix[row][5] = step;
             this->directionTranslationMatrix[row][2] = 1;
             this->directionTranslationMatrix[row][6] = -1;
-            this->directionTranslationMatrix[row][7] = counter - 2;
+            this->directionTranslationMatrix[row][7] = -step;
             this->yArray1[row] = step;
-            counter = counter - 2;
             step = step + 2;
         }
 
