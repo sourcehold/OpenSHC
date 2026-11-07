@@ -369,116 +369,114 @@ namespace AI {
         }
 
         for (int step = 0; step < 50; ++step) {
+            // taken before the step goal test on purpose: binding it after the test (or not at all) measured worse
+            AIVBuildingStep& buildingStep = this->aivs[aivID].aivBuildingSteps[step];
             if (step > this->aivs[aivID].currentStepGoal) {
                 return FALSE;
             }
-            if (this->aivs[aivID].aivBuildingSteps[step].buildStatus == AIVBSS_disabled) {
+            if (buildingStep.buildStatus == AIVBSS_disabled) {
                 // use the step for the next building that is still missing
                 if (stockpiles > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_STORES;
+                    buildingStep.buildingType = Commands::M_MAPPER_STORES;
                 } else if (hovels > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_HOVEL;
+                    buildingStep.buildingType = Commands::M_MAPPER_HOVEL;
                 } else if (granaries > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_GRANARY;
+                    buildingStep.buildingType = Commands::M_MAPPER_GRANARY;
                 } else if (marketplaces > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_TRADEPOST;
+                    buildingStep.buildingType = Commands::M_MAPPER_TRADEPOST;
                 } else if (barracks > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_BARRACKS_ARAB;
+                    buildingStep.buildingType = Commands::M_MAPPER_BARRACKS_ARAB;
                 } else if (mercenaryPosts > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_BARRACKS_EURO;
+                    buildingStep.buildingType = Commands::M_MAPPER_BARRACKS_EURO;
                 } else if (armories > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_ARMOURY;
+                    buildingStep.buildingType = Commands::M_MAPPER_ARMOURY;
                 } else if (breweries > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_BREWER;
+                    buildingStep.buildingType = Commands::M_MAPPER_BREWER;
                 } else if (bakeries > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_BAKER;
+                    buildingStep.buildingType = Commands::M_MAPPER_BAKER;
                 } else if (mills > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_MILL;
+                    buildingStep.buildingType = Commands::M_MAPPER_MILL;
                 } else if (poleturners > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_POLETURNER;
+                    buildingStep.buildingType = Commands::M_MAPPER_POLETURNER;
                 } else if (fletchers > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_FLETCHER;
+                    buildingStep.buildingType = Commands::M_MAPPER_FLETCHER;
                 } else if (tanners > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_TANNER;
+                    buildingStep.buildingType = Commands::M_MAPPER_TANNER;
                 } else if (blacksmiths > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_BLACKSMITH;
+                    buildingStep.buildingType = Commands::M_MAPPER_BLACKSMITH;
                 } else if (armourers > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_ARMOURER;
+                    buildingStep.buildingType = Commands::M_MAPPER_ARMOURER;
                 } else if (chapels > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_CHURCH1;
+                    buildingStep.buildingType = Commands::M_MAPPER_CHURCH1;
                 } else if (inns > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_INN;
+                    buildingStep.buildingType = Commands::M_MAPPER_INN;
                 } else if (engineersGuilds > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_ENGINEERS_GUILD;
+                    buildingStep.buildingType = Commands::M_MAPPER_ENGINEERS_GUILD;
                 } else if (tunnelersGuilds > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_TUNNELERS_GUILD;
+                    buildingStep.buildingType = Commands::M_MAPPER_TUNNELERS_GUILD;
                 } else if (stables > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_STABLES;
+                    buildingStep.buildingType = Commands::M_MAPPER_STABLES;
                 } else if (cathedrals > 0) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildingType = Commands::M_MAPPER_CHURCH3;
+                    buildingStep.buildingType = Commands::M_MAPPER_CHURCH3;
                 } else {
                     continue;
                 }
-                this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
+                buildingStep.buildStatus = AIVBSS_unbuilt;
             }
 
-            AIVBuildingStepStatusByte const status = this->aivs[aivID].aivBuildingSteps[step].buildStatus;
-            if (status != AIVBSS_disabled) {
-                if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_HOVEL) {
+            if (buildingStep.buildStatus != AIVBSS_disabled) {
+                if (buildingStep.buildingType == Commands::M_MAPPER_HOVEL) {
                     --hovels;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_STORES) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_STORES) {
                     --stockpiles;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_GRANARY) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_GRANARY) {
                     --granaries;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_TRADEPOST) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TRADEPOST) {
                     --marketplaces;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_BARRACKS_ARAB) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BARRACKS_ARAB) {
                     --barracks;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_BARRACKS_EURO) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BARRACKS_EURO) {
                     --mercenaryPosts;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_ARMOURY) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ARMOURY) {
                     --armories;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_BREWER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BREWER) {
                     --breweries;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_BAKER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BAKER) {
                     --bakeries;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_MILL) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_MILL) {
                     --mills;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_POLETURNER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_POLETURNER) {
                     --poleturners;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_FLETCHER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_FLETCHER) {
                     --fletchers;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_TANNER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TANNER) {
                     --tanners;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_BLACKSMITH) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_BLACKSMITH) {
                     --blacksmiths;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_ARMOURER) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ARMOURER) {
                     --armourers;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_CHURCH1) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_CHURCH1) {
                     --chapels;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_INN) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_INN) {
                     --inns;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType
-                    == Commands::M_MAPPER_ENGINEERS_GUILD) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_ENGINEERS_GUILD) {
                     --engineersGuilds;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType
-                    == Commands::M_MAPPER_TUNNELERS_GUILD) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_TUNNELERS_GUILD) {
                     --tunnelersGuilds;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_STABLES) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_STABLES) {
                     --stables;
-                } else if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_CHURCH3) {
+                } else if (buildingStep.buildingType == Commands::M_MAPPER_CHURCH3) {
                     --cathedrals;
                 }
             }
 
-            MappersEnum const mapper = (MappersEnum)this->aivs[aivID].aivBuildingSteps[step].buildingType;
+            MappersEnum const mapper = (MappersEnum)buildingStep.buildingType;
             if (isPausing && mapper != Commands::M_MAPPER_HOVEL) {
                 continue;
             }
-            if (status == AIVBSS_built) {
+            if (buildingStep.buildStatus == AIVBSS_built) {
                 // only rebuild buildings that were destroyed
-                int const buildingID = (short)DAT_TileMapState::instance
-                                           .BuildingLayer[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
+                int const buildingID = (short)DAT_TileMapState::instance.BuildingLayer[buildingStep.location.tile.tile];
                 if (buildingID != 0
                     && (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType
                         == MACRO_CALL_MEMBER(
@@ -655,13 +653,12 @@ namespace AI {
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
                 DAT_BuildingsState::instance.buildings[placedID].field_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
-                this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
+                buildingStep.location.tile.tile = tile;
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                    this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_built;
+                    buildingStep.buildStatus = AIVBSS_built;
                 }
             }
-            this->aivs[aivID].aivBuildingSteps[step].wait
-                = this->aivs[aivID].aivBuildingSteps[step].buildStatus == AIVBSS_built ? 10 : 16;
+            buildingStep.wait = buildingStep.buildStatus == AIVBSS_built ? 10 : 16;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
                 return TRUE;
             }
