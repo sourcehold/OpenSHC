@@ -25,28 +25,27 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TileMapState::instance.CertainPathLayer), 0,
-                (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
+                (void*)(DAT_TileMapState::instance.CertainPathLayer));
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
-            this->searchQueue.yQueue[0] = (short)y;
-            this->searchQueue.xQueue[0] = (short)ySpace;
+            this->searchQueue.yQueue[0] = y;
+            this->searchQueue.xQueue[0] = ySpace;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
-                = (short)this->searchQueue.currentDistance;
+                = this->searchQueue.currentDistance;
             ushort _startArea = DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 uint tileUnk = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if (MC_MAP_TILES_COUNT - 1 < tileUnk)
                     break;
-                int _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tileUnk];
-                if ((int)this->searchQueue.currentDistance > maxDistance)
+                int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[tileUnk];
+                if (this->searchQueue.currentDistance > maxDistance)
                     break;
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(
-                    tileUnk, (uint)(_y), 4, 1);
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(tileUnk, _y, 4, 1);
                 for (int _direction = 0; _direction < 8; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
                     if (DAT_TileMapState::instance.CertainPathLayer[_candidate] <= 0
@@ -54,8 +53,7 @@ namespace Map {
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]
                                & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
                             == 0) {
-                        DAT_TileMapState::instance.CertainPathLayer[_candidate]
-                            = (short)this->searchQueue.currentDistance + 1;
+                        DAT_TileMapState::instance.CertainPathLayer[_candidate] = this->searchQueue.currentDistance + 1;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                   .short_.xOffset
@@ -66,14 +64,14 @@ namespace Map {
                             + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                         this->searchQueue.writeIndex += 1;
-                        if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                        if (MC_MAP_TILES_COUNT <= this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
 
                 this->searchQueue.readIndex += 1;
-                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }

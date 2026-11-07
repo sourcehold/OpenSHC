@@ -28,19 +28,18 @@ namespace Map {
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        sizeof(DAT_TileMapState::instance.WalkLayer), 0,
-                        (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                        sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
                 }
                 this->searchQueue.readIndex = 0;
                 this->searchQueue.writeIndex = 1;
                 this->searchQueue.currentDistance = 1;
-                this->searchQueue.yQueue[0] = (short)yPos;
-                this->searchQueue.xQueue[0] = (short)xPos;
+                this->searchQueue.yQueue[0] = yPos;
+                this->searchQueue.xQueue[0] = xPos;
                 this->searchQueue.tilesQueue[0]
                     = DAT_ViewportRenderState::instance.translationMatrix[yPos].addXgetTile + xPos;
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
-                    = (short)this->searchQueue.currentDistance;
-                DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+                    = this->searchQueue.currentDistance;
+                DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = this->searchGeneration;
                 while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     int _cTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (_cTile < 0 || _cTile >= MC_MAP_TILES_COUNT) {
@@ -48,7 +47,7 @@ namespace Map {
                     }
                     int _cX = this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int _cY = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    int _unitID = (short)DAT_TileMapState::instance.UnitLayer[_cTile];
+                    int _unitID = DAT_TileMapState::instance.UnitLayer[_cTile];
                     if (_unitID == unitID
                         || (DAT_TileMapState::instance.OccupancyLayer[_cTile] == '\0' && _unitID == 0)) {
                         this->ALG_ResultTile = _cTile;
@@ -57,7 +56,7 @@ namespace Map {
                         return;
                     }
                     this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_cTile];
-                    if (MC_MAP_TILES_COUNT < (int)this->searchQueue.currentDistance) {
+                    if (MC_MAP_TILES_COUNT < this->searchQueue.currentDistance) {
                         return;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
@@ -79,26 +78,26 @@ namespace Map {
                                        | LogicHelpers::L_KEEP_NON_MANOR_HOUSE))
                                 == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[_cTile2]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[_cTile2] = (short)this->searchGeneration;
+                                = this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[_cTile2] = this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset
-                                + (short)_cX;
+                                + _cX;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
-                                + (short)_cY;
+                                + _cY;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _cTile2;
                             this->searchQueue.writeIndex += 1;
-                            if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.writeIndex) {
+                            if (MC_MAP_TILES_COUNT <= this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex += 1;
-                    if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                    if (MC_MAP_TILES_COUNT <= this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 }
