@@ -26,7 +26,7 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F94A0
-    void TileMapState::validateWallPlacementAtTile(int playerID, uint x, uint y, MappersEnum param_4)
+    void TileMapState::validateWallPlacementAtTile(int playerID, uint x, uint y, short param_4)
     {
         this->illegalBuild = TRUE;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -60,8 +60,7 @@ namespace Map {
 
         if (this->UnitLayer[tile] != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
             int const unitID = (short)this->UnitLayer[tile];
-            if ((undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL
-                || (undefined2)param_4 == OpenSHC::Commands::M_MAPPER_CRENAL2) {
+            if (param_4 == OpenSHC::Commands::M_MAPPER_CRENAL || param_4 == OpenSHC::Commands::M_MAPPER_CRENAL2) {
                 DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
             }
         }
