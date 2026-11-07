@@ -17,21 +17,11 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_CRENEL;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-    using OpenSHC::Map::LogicHelpers::L_MOAT;
-    using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
-    using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
-    using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_TREE;
-    using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00507350
     void TileMapState::resetTileAndClearMoat(int tile)
     {
-        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-        int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+        int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
         this->LogicLayer[tile] = this->LogicLayer[tile]
             & ~(L_PLAIN2_AND_PITCH | L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED
                 | L_CRENEL_VARIATIONUnk);
@@ -60,7 +50,7 @@ namespace Map {
             }
         }
         if ((this->LogicLayer[tile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(tile - rowTile, y);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, y);
             this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
         }
         this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;

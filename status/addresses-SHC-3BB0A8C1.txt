@@ -42099,7 +42099,7 @@ SHC_3BB0A8C1_0x00507130 | 99.4% | setupBuildingData arg regalloc
 
 SHC_3BB0A8C1_0x00507280 | 56.6% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00507350 | 75.9% | tree switch jump table
+SHC_3BB0A8C1_0x00507350 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00507408 | 0.0% | Pending
 
