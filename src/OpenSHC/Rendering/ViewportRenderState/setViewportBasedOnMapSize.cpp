@@ -3,6 +3,7 @@
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 
 namespace OpenSHC {
@@ -21,12 +22,11 @@ namespace Rendering {
 
         int maxViewportX = (((400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4) * 0x20;
         int maxViewportY = ((401 - this->viewportState.viewportWidth) - mapBorder) * 8;
-        int minViewportX = mapBorder / 2 + 1;
+        int minViewportX = (mapBorder / 2 + 1) * 0x20;
         int minViewportY = mapBorder * 8 + 0x10;
         if (this->viewportState.isZoomedOutUnk != 0) {
-            minViewportX = mapBorder / 2 + -4;
+            minViewportX = (mapBorder / 2 - 4) * 0x20;
         }
-        minViewportX = minViewportX * 0x20;
 
         if (this->viewportState.viewportX < minViewportX) {
             this->viewportState.viewportX = minViewportX;
@@ -70,20 +70,21 @@ namespace Rendering {
             maxViewportY = maxViewportY + -10;
         }
 
-        if (maxViewportX < minViewportX) {
+        if (minViewportX > maxViewportX) {
             this->viewportState.viewportX = (minViewportX - maxViewportX) / 2 + maxViewportX;
         }
-        if (maxViewportY < minViewportY) {
+        if (minViewportY > maxViewportY) {
             this->viewportState.viewportY = (minViewportY - maxViewportY) / 2 + maxViewportY;
         }
 
         if (this->viewportState.isZoomedOutUnk == 0) {
-            this->viewportState.currentCameraOffsetX = (this->viewportState.viewportX & 0x1fU) + 150;
-            this->viewportState.currentCameraOffsetY = (this->viewportState.viewportY & 0xfU) + 0x10;
-            return;
+            this->viewportState.currentCameraOffsetX = (DAT_ViewportRenderState::instance.viewportState.viewportX & 0x1f) + 150;
+            this->viewportState.currentCameraOffsetY = (DAT_ViewportRenderState::instance.viewportState.viewportY & 0xf) + 8;
+        } else {
+            this->viewportState.currentCameraOffsetX = (DAT_ViewportRenderState::instance.viewportState.viewportX >> 1 & 0xf) + 150;
+            this->viewportState.currentCameraOffsetY = (DAT_ViewportRenderState::instance.viewportState.viewportY >> 1 & 7) + 8;
         }
-        this->viewportState.currentCameraOffsetX = (this->viewportState.viewportX >> 1 & 0xfU) + 150;
-        this->viewportState.currentCameraOffsetY = (this->viewportState.viewportY >> 1 & 7U) + 0x10;
+        this->viewportState.currentCameraOffsetY = this->viewportState.currentCameraOffsetY + 8;
     }
 
 }
