@@ -67,6 +67,7 @@ namespace Map {
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _unitAtTile = (short)DAT_TileMapState::instance.UnitLayer[_tile];
+                    // the hand-expanded abs() below matches better than abs() itself (measured twice)
                     if (((_unitAtTile == 0) || (considerUnits == 0)) && _unitAtTile != unitID
                         && _area == (short)DAT_TileMapState::instance.PathConnectionLayer[_tile]
                         && (_tHeight = MACRO_CALL_MEMBER(
