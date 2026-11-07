@@ -6759,7 +6759,7 @@ SHC_3BB0A8C1_0x00425FF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00426060 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004261E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004261E0 | 82.1% | gynt's draft in main's style; the original keeps 0 in edi
 
 SHC_3BB0A8C1_0x004262B0 | 0.0% | Pending
 
