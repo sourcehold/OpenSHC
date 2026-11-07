@@ -12,9 +12,8 @@ namespace Rendering {
     {
         for (int i = 0; i < 45; i++) {
             if (this->landscapeAnimationRandomTileArray[i] == 0) {
-                int randomHighBits = MACRO_CALL(OpenSHC::OS_Func::_rand)() << 0xf;
-                uint randomLowBits = MACRO_CALL(OpenSHC::OS_Func::_rand)();
-                int randomTile = (int)(randomLowBits | randomHighBits) % 80400;
+                int randomTile
+                    = (MACRO_CALL(OpenSHC::OS_Func::_rand)() << 15 | MACRO_CALL(OpenSHC::OS_Func::_rand)()) % 80400;
                 if ((DAT_TileMapState::instance.LogicLayer[randomTile] & 1) != 0
                     && (DAT_TileMapState::instance.MiscDisplayLayer[randomTile] & 0x3c0) == 0
                     && (DAT_TileMapState::instance.Logic2Layer[randomTile] & 8) == 0) {
