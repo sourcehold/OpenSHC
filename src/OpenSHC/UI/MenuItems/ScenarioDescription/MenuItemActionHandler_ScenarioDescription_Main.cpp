@@ -18,7 +18,6 @@
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
-#include "OpenSHC/Globals/DAT_00eb0b24.hpp"
 #include "OpenSHC/Globals/DAT_00ed2794.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"
 #include "OpenSHC/Globals/DAT_00ed27bc.hpp"
@@ -32,6 +31,7 @@
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"
+#include "OpenSHC/Globals/INT_00eb0b24.hpp"
 #include "OpenSHC/Globals/INT_00ed27c4.hpp"
 
 namespace OpenSHC {
@@ -197,9 +197,9 @@ namespace UI {
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_YES_NO_DIALOG);
                 return;
             case -4: // "Next": the next description page
-                ++DAT_00eb0b24::instance;
-                if (DAT_00eb0b24::instance >= INT_00ed27c4::instance) {
-                    DAT_00eb0b24::instance = 0;
+                ++INT_00eb0b24::instance;
+                if (INT_00eb0b24::instance >= INT_00ed27c4::instance) {
+                    INT_00eb0b24::instance = 0;
                 }
                 return;
             }
