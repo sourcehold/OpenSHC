@@ -62,12 +62,14 @@ namespace Map {
                                 != 0
                             && (dVar6 = DAT_TileMapState::instance.directionTranslationMatrix[iVar7][iVar10] + uVar5,
                                 DAT_TileMapState::instance.WalkLayer[dVar6] != this->searchGeneration)) {
+                            // costs below 4 count as 0; take a cheaper cost, or the same cost when it is nearer
                             uint uVar9
                                 = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_4][dVar6];
-                            if (uVar9 < 4) {
+                            if (uVar9 <= 3) {
                                 uVar9 = 0;
-                            LAB_0049fdba:
-                                if (uVar9 == local_1c
+                            }
+                            if (uVar9 == 0 || (int)local_1c <= uVar9) {
+                                if (uVar9 == (int)local_1c
                                     && (iVar8
                                         = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
                                                                 setAxisBasedDistanceResult,
@@ -79,11 +81,12 @@ namespace Map {
                                             DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
                                                     .int_.yOffset
                                                 + iVar7),
-                                        iVar8 < local_18))
-                                    goto LAB_0049fdee;
+                                        iVar8 < local_18)) {
+                                    local_1c = uVar9;
+                                    local_18 = iVar8;
+                                    local_14 = dVar6;
+                                }
                             } else {
-                                if (uVar9 == 0 || (int)local_1c <= (int)uVar9)
-                                    goto LAB_0049fdba;
                                 iVar8 = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                                     DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
@@ -93,7 +96,6 @@ namespace Map {
                                     DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
                                             .int_.yOffset
                                         + iVar7);
-                            LAB_0049fdee:
                                 local_1c = uVar9;
                                 local_18 = iVar8;
                                 local_14 = dVar6;
