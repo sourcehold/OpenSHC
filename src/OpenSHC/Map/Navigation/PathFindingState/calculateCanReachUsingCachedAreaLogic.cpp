@@ -15,8 +15,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5B00
         BOOLEnum PathFindingState::calculateCanReachUsingCachedAreaLogic(int tile1, int tile2)
         {
-            int const _area1 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile1];
-            int _area2 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
+            // the original sign-extends this layer (movsx word ptr), but the generated header
+            // declares it ushort, so the signed read has to be spelled out at every site
+            int const _area1 = (short)DAT_TileMapState::instance.PathConnectionLayer[tile1];
+            int _area2 = (short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
             if (_area1 == _area2) {
                 return TRUE;
             }
@@ -58,13 +60,13 @@ namespace Map {
                     }
                 }
             }
-            int _y1 = (int)(short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1];
+            int _y1 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1];
             int _x1 = tile1 - DAT_ViewportRenderState::instance.translationMatrix[_y1].addXgetTile;
-            int _y2 = (int)(short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2];
+            int _y2 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2];
             int _x2 = tile2 - DAT_ViewportRenderState::instance.translationMatrix[_y2].addXgetTile;
             BOOLEnum const _canReach
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
-                    this)(_x1, (uint)_y1, (uint)_x2, (uint)_y2, 100000, 0);
+                    this)(_x1, _y1, _x2, _y2, 100000, 0);
             if (_canReach) {
                 for (int _index = 0; _index < 10; ++_index) {
                     if (this->searchQueue.acceptAreaPairArray1[_index].area1 == -1) {

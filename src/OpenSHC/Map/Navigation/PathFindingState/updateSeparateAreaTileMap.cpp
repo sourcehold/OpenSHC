@@ -65,9 +65,9 @@ namespace Map {
             int _areaID = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TileMapState::instance.PathConnectionLayer), 0,
-                (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
+                (void*)(DAT_TileMapState::instance.PathConnectionLayer));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                4000, '\0', (void*)((int)(this->zoneSizesArray)));
+                4000, '\0', (void*)(this->zoneSizesArray));
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
             int _row = 0;
@@ -79,6 +79,11 @@ namespace Map {
                     _row += 1;
                     _rowEnd += 3;
                 }
+                /*
+                  the original tests only the low byte of this 2-byte element
+                  (cmp byte ptr [eax*2 + ..], 0), so an area ID that is a multiple of 256
+                  reads as unassigned here. Kept as the original has it.
+                 */
                 if ((char)DAT_TileMapState::instance.PathConnectionLayer[_first] != '\0'
                     || (DAT_TileMapState::instance.LogicLayer[_first]
                            & (LogicHelpers::L_SEA | LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE
@@ -89,11 +94,11 @@ namespace Map {
                         != 0) {
                     continue;
                 }
-                this->searchQueue.yQueue[0] = (short)_row;
+                this->searchQueue.yQueue[0] = _row;
                 this->searchQueue.tilesQueue[0] = _first;
                 forceUpdate = 1;
                 _readIndex = 0;
-                DAT_TileMapState::instance.PathConnectionLayer[_first] = (ushort)_areaID;
+                DAT_TileMapState::instance.PathConnectionLayer[_first] = _areaID;
 
                 // clang-format off
                 __asm {
@@ -143,6 +148,8 @@ namespace Map {
                 } // clang-format on
 
                 _areaID += 1;
+                // both (short) here and on the store below are load-bearing: dropping them
+                // costs an instruction, so the original kept this value 16 bits wide
                 if (1000 <= (short)_areaID) {
                     break;
                 }

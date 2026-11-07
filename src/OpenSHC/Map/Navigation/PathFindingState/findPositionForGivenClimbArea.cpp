@@ -20,7 +20,9 @@ namespace Map {
             }
             int _baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             for (int _directionIndex = 0; _directionIndex < 8; _directionIndex++) {
-                int _direction = (int)(char)DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex];
+                // DirectionArray holds signed offsets and the original loads it with movsx,
+                // but the generated header declares it byte
+                int _direction = (char)DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex];
                 if ((short)DAT_TileMapState::instance
                         .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction]
                             + _baseTile]

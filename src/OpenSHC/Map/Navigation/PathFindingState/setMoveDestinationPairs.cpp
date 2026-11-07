@@ -20,11 +20,11 @@ namespace Map {
             }
             this->searchQueue.readIndex = 0;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                uint _y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                uint _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 int _tileCandidate = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 uint _x = _tileCandidate - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
-                uint _cost = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[playerID][_tileCandidate];
-                if (_cost != 0 && (int)_cost >= maxCost && (int)_cost <= maxCost + 10
+                int _cost = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[playerID][_tileCandidate];
+                if (_cost != 0 && _cost >= maxCost && _cost <= maxCost + 10
                     && DAT_TileMapState::instance.CertainPathLayer[_tileCandidate] != 100) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
@@ -39,7 +39,7 @@ namespace Map {
                     return;
                 }
                 this->searchQueue.readIndex += 1;
-                if (MC_MAP_TILES_COUNT <= (int)this->searchQueue.readIndex) {
+                if (MC_MAP_TILES_COUNT <= this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
