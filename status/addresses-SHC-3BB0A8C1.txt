@@ -44177,7 +44177,7 @@ SHC_3BB0A8C1_0x00511020 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005110B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005111D0 | 48.8% | global instance access
+SHC_3BB0A8C1_0x005111D0 | 50.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00511240 | 0.0% | Pending
 

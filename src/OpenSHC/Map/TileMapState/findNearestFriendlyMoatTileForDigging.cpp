@@ -16,9 +16,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_MOAT;
     using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
 
-    using OpenSHC::Map::LogicHelpers::L_MOAT;
-    using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
-
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005111D0
@@ -26,22 +23,24 @@ namespace Map {
     {
         int unitX = DAT_UnitsState::instance.units[unitID].x;
         int unitY = DAT_UnitsState::instance.units[unitID].y;
-        ushort area
-            = this->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[unitY].addXgetTile + unitX];
+        int area
+            = (short)this
+                  ->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[unitY].addXgetTile + unitX];
         int best = 1000;
         BOOLEnum bestMoatID = ~FALSE;
         if (0 < this->currentMoatCount) {
             for (int moatID = 0; moatID < this->currentMoatCount; moatID++) {
                 /* digging works on own moat, filling in works on anyone else's */
-                if (number == 1
-                    && DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
+                if (number == 1) {
+                    if (DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
                         != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                    continue;
-                }
-                if (number == 2
-                    && DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
+                        continue;
+                    }
+                } else if (number == 2) {
+                    if (DAT_GameState::instance.mapAndTime.playerTeams[this->moats[moatID].owner]
                         == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                    continue;
+                        continue;
+                    }
                 }
                 if (this->moats[moatID].stage != number) {
                     continue;
@@ -67,19 +66,19 @@ namespace Map {
                     continue;
                 }
 
-                byte pathCost
+                int pathCost
                     = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[this->moats[moatID].owner][tile];
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(unitX, unitY, this->moats[moatID].x, this->moats[moatID].y);
                 int score = DAT_DirectionAlgorithmState::instance.distanceHigh;
                 int fromTarget;
-                if (DAT_UnitsState::instance.units[unitID].targetX < 1) {
-                    fromTarget = 0;
-                } else {
+                if (DAT_UnitsState::instance.units[unitID].targetX > 0) {
                     fromTarget = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].targetX,
                         DAT_UnitsState::instance.units[unitID].targetY, this->moats[moatID].x, this->moats[moatID].y);
+                } else {
+                    fromTarget = 0;
                 }
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
                     score = score + pathCost * 10;
