@@ -7,7 +7,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00471220
         void PencilRenderCore::drawDiagonalHeigherThanWideUnk()
         {
-            // Bresenham, the major axis moved in each arm (moved once after the if: quick_diff 0.9722 -> 0.8857)
+            // Bresenham, the major axis moved in each arm, as the original does (once after the if does not match)
             int const straightStep = this->currentWidth_0x28 * 2;
             int const diagonalStep = straightStep - this->currentHeight_0x2c * 2;
             int error = straightStep - this->currentHeight_0x2c;
