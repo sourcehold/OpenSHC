@@ -47,7 +47,7 @@ namespace Map {
         if ((this->LogicLayer[this->directionTranslationMatrix[y][third] + tile] & L_CRENEL) != 0) {
             return FALSE;
         }
-        return ~(this->LogicLayer[this->directionTranslationMatrix[y][fourth] + tile] >> 9) & TRUE;
+        return ~((uint)this->LogicLayer[this->directionTranslationMatrix[y][fourth] + tile] >> 9) & TRUE;
     }
 
 }
