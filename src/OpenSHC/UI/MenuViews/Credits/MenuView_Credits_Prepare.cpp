@@ -7,7 +7,6 @@
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
-#include "OpenSHC/Globals/DAT_00b95954.hpp"
 #include "OpenSHC/Globals/DAT_00b95b3c.hpp"
 #include "OpenSHC/Globals/DAT_00b95b70.hpp"
 #include "OpenSHC/Globals/DAT_00b9610c.hpp"
@@ -15,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+#include "OpenSHC/Globals/INT_00b95954.hpp"
 #include "OpenSHC/Globals/INT_00b960d0.hpp"
 #include "OpenSHC/Globals/INT_00b960d4.hpp"
 
@@ -27,7 +27,7 @@ namespace UI {
             void MenuView_Credits_Prepare()
             {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
-                if (DAT_00b95954::instance == 0) {
+                if (INT_00b95954::instance == 0) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                         DAT_TextureRenderCoreObject::ptr)(s_credits_1_tgx_005a20e8);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
