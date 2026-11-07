@@ -7,6 +7,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
@@ -100,7 +101,7 @@ namespace UI {
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     int mapSize = DAT_TileMapState::instance.mapSize;
                     if (mapSize == 0) {
-                        mapSize = 400;
+                        mapSize = OpenSHC::Map::MC_MAP_SIZE_400;
                     }
                     int const centerX = x;
                     int const centerY = y;
@@ -118,21 +119,21 @@ namespace UI {
                             DAT_MinimapViewState::ptr)(x, y, mapSize, mapSize);
                         previewSize = 100;
                         break;
-                    case 160:
+                    case OpenSHC::Map::MC_MAP_SIZE_160:
                         x -= 80;
                         y -= 80;
                         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapEditor,
                             DAT_MinimapViewState::ptr)(x, y, mapSize, mapSize);
                         previewSize = 160;
                         break;
-                    case 200:
+                    case OpenSHC::Map::MC_MAP_SIZE_200:
                         x -= 100;
                         y -= 100;
                         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapEditor,
                             DAT_MinimapViewState::ptr)(x, y, mapSize, mapSize);
                         previewSize = 200;
                         break;
-                    case 300:
+                    case OpenSHC::Map::MC_MAP_SIZE_300:
                         // drawn at half size
                         x -= 75;
                         y -= 75;
@@ -161,7 +162,7 @@ namespace UI {
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 101, centerY - 101, centerX + 100, centerY + 101, COL_BLACK::instance.shortValue);
                         break;
-                    case 300:
+                    case OpenSHC::Map::MC_MAP_SIZE_300:
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 75, centerY - 75, centerX + 73, centerY + 74, COL_BLACK::instance.shortValue);
@@ -169,7 +170,7 @@ namespace UI {
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 76, centerY - 76, centerX + 74, centerY + 75, COL_BLACK::instance.shortValue);
                         break;
-                    case 200:
+                    case OpenSHC::Map::MC_MAP_SIZE_200:
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 98, centerY - 99, centerX + 99, centerY + 99, COL_BLACK::instance.shortValue);
@@ -177,7 +178,7 @@ namespace UI {
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 99, centerY - 100, centerX + 100, centerY + 100, COL_BLACK::instance.shortValue);
                         break;
-                    case 160:
+                    case OpenSHC::Map::MC_MAP_SIZE_160:
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                             centerX - 78, centerY - 79, centerX + 78, centerY + 77, COL_BLACK::instance.shortValue);
