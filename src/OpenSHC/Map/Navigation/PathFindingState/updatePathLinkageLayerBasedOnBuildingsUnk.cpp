@@ -24,8 +24,6 @@ namespace Map {
             uint _height;
             int _directionIndex;
             int _building;
-            bool bVar9;
-            bool _skip;
             byte _linkageResult;
             BOOLEnum _result;
             int local_28;
@@ -59,115 +57,105 @@ namespace Map {
             byte bVar7 = 0;
             iVar6 = 0;
             _linkageResult = 0;
-            DAT_TileMapState::instance.PathLinkageLayer[tile] = '\0';
+            DAT_TileMapState::instance.PathLinkageLayer[tile] = 0;
+            // classify the tile itself
             if ((_logic & 0x800000) == 0) {
-                if ((_logic & 0x10000000) == 0) {
-                    if ((_logic & 2) == 0 && (_logic & 0x200000) == 0) {
-                        if ((_logic & 0x800) != 0) {
-                            bVar4 = 1;
-                            goto LAB_00499ada;
-                        }
-                        if ((_logic & 0x400000) != 0) {
-                            return _result;
-                        }
-                        if ((_logic & 0x100) != 0) {
-                            bVar3 = 1;
-                            if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
-                                iVar6 = 2;
-                            }
-                            goto LAB_00499ada;
-                        }
-                        if ((_logic & 0x4a5014b1) != 0) {
-                            return _result;
-                        }
-                    }
-                    bVar5 = 1;
-                } else {
+                if ((_logic & 0x10000000) != 0) {
                     bVar2 = 1;
                     iVar6 = 1;
+                } else if ((_logic & 2) != 0 || (_logic & 0x200000) != 0) {
+                    bVar5 = 1;
+                } else if ((_logic & 0x800) != 0) {
+                    bVar4 = 1;
+                } else if ((_logic & 0x400000) != 0) {
+                    return _result;
+                } else if ((_logic & 0x100) != 0) {
+                    bVar3 = 1;
+                    if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
+                        iVar6 = 2;
+                    }
+                } else if ((_logic & 0x4a5014b1) != 0) {
+                    return _result;
+                } else {
+                    bVar5 = 1;
                 }
             }
-        LAB_00499ada:
             paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + yUnk;
             for (_directionIndex = 0; _directionIndex < 8;
                 _directionIndex = _directionIndex + 1, paiVar8 = (int (*)[8])(*paiVar8 + 1)) {
                 int _tile = (*paiVar8)[0] + tile;
                 _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                 local_20[_directionIndex] = _logic;
+                // which neighbours can be linked at all; structures count into bVar7 for the corner checks below
                 if ((_logic & 0x200000) == 0) {
                     if ((_logic & 0x800) != 0) {
-                        if ((iVar6 == 1) || ('\x14' < (char)DAT_TileMapState::instance.DamageLayer[_tile]))
+                        if (iVar6 == 1 || (char)DAT_TileMapState::instance.DamageLayer[_tile] > 0x14) {
                             continue;
-                        goto LAB_00499bce;
-                    }
-                    if ((_logic & 2) == 0) {
-                        if ((_logic & 0x400) == 0) {
-                            if ((_logic & 0x10000000) != 0) {
-                                bVar7 = bVar7
-                                    + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
-                                goto LAB_00499bce;
-                            }
-                            if ((_logic & 0x400000) == 0) {
-                                if ((_logic & 0x100) != 0) {
-                                    bVar7 = bVar7
-                                        + DAT_ClimbLogicDefinedData::instance
-                                              .BitFlagHelperForPathLinkage[_directionIndex];
-                                    goto LAB_00499bce;
-                                }
-                                if ((_logic & 0x30) == 0) {
-                                    bVar9 = (_logic & 0x4a5014b1) == 0;
-                                    goto LAB_00499bcc;
-                                }
-                                bVar7 = bVar7
-                                    + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
-                            } else {
-                                bVar7 = bVar7
-                                    + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
-                            }
-                        } else if (DAT_BuildingDefinedData::instance.field_0x1774[(short)DAT_BuildingsState::instance
-                                           .buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
-                                           .buildingType]
+                        }
+                    } else if ((_logic & 2) != 0) {
+                        if (bVar2) {
+                            continue;
+                        }
+                        if ((_logic & 0x400) != 0 && DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
+                            continue;
+                        }
+                    } else if ((_logic & 0x400) != 0) {
+                        if (DAT_BuildingDefinedData::instance.field_0x1774[(short)DAT_BuildingsState::instance
+                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
+                                    .buildingType]
                             != FALSE) {
                             bVar7 = bVar7
                                 + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
                         }
-                    } else if (!bVar2) {
-                        if ((_logic & 0x400) != 0) {
-                            bVar9 = DAT_TileMapState::instance.BuildingLayer[_tile] == 0;
-                        LAB_00499bcc:
-                            if (!bVar9)
-                                continue;
+                        continue;
+                    } else if ((_logic & 0x10000000) != 0) {
+                        bVar7
+                            = bVar7 + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
+                    } else if ((_logic & 0x400000) != 0) {
+                        bVar7
+                            = bVar7 + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
+                        continue;
+                    } else if ((_logic & 0x100) != 0) {
+                        bVar7
+                            = bVar7 + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
+                    } else if ((_logic & 0x30) != 0) {
+                        bVar7
+                            = bVar7 + DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
+                        continue;
+                    } else if ((_logic & 0x4a5014b1) != 0) {
+                        continue;
+                    }
+                }
+                // damaged gates and walls do not link, and neither do heights more than 16 apart
+                if ((_logic & 0x10000000) != 0) {
+                    if (!bVar2) {
+                        if (!bVar3) {
+                            continue;
                         }
-                        goto LAB_00499bce;
+                        if ((char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14) {
+                            continue;
+                        }
+                    }
+                } else if ((_logic & 0x100) != 0 && iVar6 != 0) {
+                    if ((char)DAT_TileMapState::instance.DamageLayer[_tile] > 0x14) {
+                        continue;
+                    }
+                } else if ((bVar3 || bVar4) && (_logic & 0x100) != 0
+                    && DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
+                    if ((char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14) {
+                        continue;
                     }
                 } else {
-                LAB_00499bce:
-                    if ((_logic & 0x10000000) == 0) {
-                        if ((_logic & 0x100) == 0 || iVar6 == 0) {
-                            if (((bVar3) || (bVar4)) && (_logic & 0x100) != 0
-                                && DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
-                                _skip = (char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14;
-                            } else {
-                                _logic = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
-                                if ((int)_logic < local_28)
-                                    continue;
-                                _skip = (int)_logic > (int)local_24;
-                            }
-                        } else {
-                            _skip = (char)DAT_TileMapState::instance.DamageLayer[_tile] > 0x14;
-                        }
-                    LAB_00499c3f:
-                        if (_skip)
-                            continue;
-                    } else if (!bVar2) {
-                        if (!bVar3)
-                            continue;
-                        _skip = (char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14;
-                        goto LAB_00499c3f;
+                    _logic = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
+                    if ((int)_logic < local_28) {
+                        continue;
                     }
-                    _linkageResult = _linkageResult
-                        | DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
+                    if ((int)_logic > (int)local_24) {
+                        continue;
+                    }
                 }
+                _linkageResult
+                    = _linkageResult | DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
             }
             if (bVar5) {
                 if ((_linkageResult & 1) == 0 && (bVar7 & 1) != 0) {
