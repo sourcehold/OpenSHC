@@ -21,42 +21,44 @@ namespace Map {
         undefined4 BuildingsState::determineBuildingEntranceFromCustomArea(
             int buildingID, int param_2, int param_3, int x, int y)
         {
-            // Matching note: the original keeps the tile index in edx across getBuildingHeightForBuildingID (so it was
-            // built with /GL and knows the callee leaves edx alone); without that our allocator is one register short,
-            // spills the building offset and param_3, and every loop body differs in register and slot naming.
+            // Matching note: the original adds the tile row as ((row - param_3) + x) + DAT_TempXOffset, ours as
+            // ((row + x) - param_3) + DAT_TempXOffset; MSVC reassociates the sum, so every operand order and grouping
+            // of the expression compiles the same (all 24 orders tried). Computing tileX apart from the row is what
+            // gives the entry stores the original's DAT_TempXOffset - param_3 + x order.
             // Finds an entrance tile of the building that can be reached from the tile (x, y).
             // param_3 enlarges the area around the building by one tile, param_2 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
             // otherwise.
             int playerID = this->buildings[buildingID].owner;
-            int index = 0;
+            int found = 0;
             int areaFrom
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
-            int found = 0;
             int heightStep = 16;
             if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_QUARRY) {
                 heightStep = 32;
             }
             int size = this->buildings[buildingID].widthOrHeight + param_3 * 2;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
+            int index;
             if (tileCount > 0) {
                 index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
+            } else {
+                index = 0;
             }
-            int height = this->buildings[buildingID].terrainHeightUnk;
             this->buildings[buildingID].buildingEntryX = 0;
             this->buildings[buildingID].buildingEntryY = 0;
+            int height = this->buildings[buildingID].terrainHeightUnk;
 
-            // Tiles next to the building
-            for (int tries = 0; tries < tileCount; ++tries) {
+            // Tiles next to the building (all three searches share one counter)
+            int tries;
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
                     size, 1, index, 0);
-                int tile
-                    = DAT_ViewportRenderState::instance
-                          .translationMatrix[(short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset]
-                          .addXgetTile
-                    + (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int const tileY = (short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset;
+                int const tileX = (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + tileX;
                 int tileHeight = DAT_TileMapState::instance.HeightLayer[tile];
                 if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                     tileHeight += MACRO_CALL_MEMBER(
@@ -84,17 +86,15 @@ namespace Map {
                 }
             }
 
-            // Tiles one step further away
-            int largerTileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
-            for (int tries = 0; tries < largerTileCount; ++tries) {
+            // Tiles one step further away (the original reuses the tile count variable)
+            tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(
                     size, 1, index, 0);
-                int tile
-                    = DAT_ViewportRenderState::instance
-                          .translationMatrix[(short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset]
-                          .addXgetTile
-                    + (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int const tileY = (short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset;
+                int const tileX = (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + tileX;
                 int tileHeight = DAT_TileMapState::instance.HeightLayer[tile];
                 if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                     tileHeight += MACRO_CALL_MEMBER(
@@ -120,7 +120,7 @@ namespace Map {
                     return 1;
                 }
                 ++index;
-                if (index >= largerTileCount) {
+                if (index >= tileCount) {
                     index = 0;
                 }
             }
@@ -133,14 +133,12 @@ namespace Map {
             } else {
                 index = 0;
             }
-            for (int tries = 0; tries < tileCount; ++tries) {
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
                     size, 1, index, 0);
-                int tile
-                    = DAT_ViewportRenderState::instance
-                          .translationMatrix[(short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset]
-                          .addXgetTile
-                    + (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int const tileY = (short)this->buildings[buildingID].y - param_3 + this->DAT_TempYOffset;
+                int const tileX = (short)this->buildings[buildingID].x - param_3 + this->DAT_TempXOffset;
+                int tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + tileX;
                 int tileHeight = DAT_TileMapState::instance.HeightLayer[tile];
                 if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                     tileHeight += MACRO_CALL_MEMBER(
