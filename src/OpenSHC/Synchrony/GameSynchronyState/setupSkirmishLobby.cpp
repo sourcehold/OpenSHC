@@ -100,9 +100,9 @@ namespace Synchrony {
             this->finalResults.unknownShortArray1[player] = 0;
             this->finalResults.unknownShortArray2[player] = 0;
             this->finalResults.finalDateOfDeathInMonths[player] = 0;
-            this->finalResults.unknownIntArray1[player] = 0;
-            this->finalResults.unknownIntArray2[player] = 0;
-            this->finalResults.unknownIntArray3[player] = 0;
+            this->finalResults.tail.tail2.field_0x0[player] = 0;
+            this->finalResults.tail.tail2.field_0x24[player] = 0;
+            this->finalResults.tail.tail2.field_0x48[player] = 0;
             this->mapSendingFileHandles[player] = NULL;
         }
         for (int i = 0; i < countof(this->skirmishUnknownSetting1); ++i) {

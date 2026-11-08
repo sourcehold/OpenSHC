@@ -203,7 +203,7 @@ namespace Map {
 
             void updateAIZoneWithFloodFill0x20(int max, uint x, uint y);
 
-            BOOLEnum findAIZoneWithFlags(int maxDistance, uint x, uint y, undefined4 aiInfoFlags);
+            BOOLEnum findAIZoneWithFlags(int maxDistance, uint x, uint y, byte aiInfoFlags);
 
             int findArcherRelatedAttackInfoIndex(int max, uint x, uint y, int tribeID);
 

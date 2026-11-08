@@ -45,9 +45,9 @@ namespace Synchrony {
                 this->finalResults.unknownShortArray1[player] = 0;
                 this->finalResults.unknownShortArray2[player] = 0;
                 this->finalResults.finalDateOfDeathInMonths[player] = 0;
-                this->finalResults.unknownIntArray1[player] = 0;
-                this->finalResults.unknownIntArray2[player] = 0;
-                this->finalResults.unknownIntArray3[player] = 0;
+                this->finalResults.tail.tail2.field_0x0[player] = 0;
+                this->finalResults.tail.tail2.field_0x24[player] = 0;
+                this->finalResults.tail.tail2.field_0x48[player] = 0;
             }
         }
         for (int row = 0; row < countof(this->finalResults.finalKillMatrix); ++row) {
