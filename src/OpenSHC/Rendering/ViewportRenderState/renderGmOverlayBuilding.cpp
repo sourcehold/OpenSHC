@@ -61,8 +61,15 @@ namespace Rendering {
         local_14 = 0;
         if (DAT_BuildingsState::instance.buildings[tileIndex].displayOwnerFlag != 0) {
             sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].tickRelatedVisuallyActiveIndicator;
-            if (sVar1 < 1 || 4 < sVar1 || (frame = 32 - (sVar1 << 5) / 5, frame == 32)) {
+            if (sVar1 <= 0) {
                 frame = 0;
+            } else if (sVar1 >= 5) {
+                frame = 0;
+            } else {
+                frame = 32 - sVar1 * 32 / 5;
+                if (frame == 32) {
+                    frame = 0;
+                }
             }
             buildingType = DAT_BuildingsState::instance.buildings[tileIndex].buildingType;
             if (buildingType == OpenSHC::Map::Buildings::BT_CAMPGROUND) {
