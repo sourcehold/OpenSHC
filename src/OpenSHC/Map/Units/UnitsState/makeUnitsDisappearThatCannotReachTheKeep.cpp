@@ -42,7 +42,7 @@ namespace Map {
                 }
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                        DAT_PathFindingState::ptr)(playerID, (short)_areaOfKeep,
+                        DAT_PathFindingState::ptr)(playerID, _areaOfKeep,
                         (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile], 0)
                     != 0) {
                     continue;
