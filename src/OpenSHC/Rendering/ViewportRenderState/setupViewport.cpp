@@ -18,776 +18,688 @@ namespace Rendering {
     // FUNCTION: STRONGHOLDCRUSADER 0x004E66F0
     void ViewportRenderState::setupViewport(
         undefined4 windowX, undefined4 windowY, undefined4 screenPixelWidth, undefined4 screenPixelHeight)
-
     {
         this->windowX = windowX;
+        // fixme: the original stores windowX into windowY as well
         this->windowY = windowX;
         this->screenPixelHeight = screenPixelHeight;
         this->screenPixelWidth = screenPixelWidth;
-        undefined4 someXOffsetDefault = 0xe;
-        if (((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU)
-                || (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING))
-            && ((DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
-                || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)))) {
+        if ((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
+                || DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)
+            && (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
+                || DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)) {
             if (this->viewportState.isZoomedOutUnk == 0) {
                 if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                     this->viewportState.viewportHeight = 30;
                     this->viewportState.viewportWidth = 79;
-                    this->viewportState.mbr_0xac = 0xc;
+                    this->viewportState.mbr_0xac = 12;
                     this->viewportState.mbr_0xb0 = 40;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 20;
                     DAT_ScrollingHandler::instance.scrollDistanceLimit = 40;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                     this->viewportState.someYOffset = 30;
                     this->viewportState.someXOffset = 8;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-                    this->viewportState.viewportHeight = 0x25;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1024x768) {
+                    this->viewportState.viewportHeight = 37;
                     this->viewportState.viewportWidth = 100;
-                    this->viewportState.mbr_0xac = 0xf;
-                    this->viewportState.mbr_0xb0 = 0x2e;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
-                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x23;
-                    this->viewportState.someXOffset = 10;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == 15) {
-                    this->viewportState.viewportHeight = 0x25;
-                    this->viewportState.viewportWidth = 0x4f;
                     this->viewportState.mbr_0xac = 15;
-                    this->viewportState.mbr_0xb0 = 0x28;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+                    this->viewportState.mbr_0xb0 = 46;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 17;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 52;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x23;
+                    this->viewportState.someYOffset = 35;
                     this->viewportState.someXOffset = 10;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
-                    this->viewportState.viewportHeight = 0x2d;
-                    this->viewportState.viewportWidth = 0x84;
-                    this->viewportState.mbr_0xac = 0x13;
-                    this->viewportState.mbr_0xb0 = 0x34;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1024x600) {
+                    this->viewportState.viewportHeight = 37;
+                    this->viewportState.viewportWidth = 79;
+                    this->viewportState.mbr_0xac = 15;
+                    this->viewportState.mbr_0xb0 = 40;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 17;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 52;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 35;
+                    this->viewportState.someXOffset = 10;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1280x1024) {
+                    this->viewportState.viewportHeight = 45;
+                    this->viewportState.viewportWidth = 132;
+                    this->viewportState.mbr_0xac = 19;
+                    this->viewportState.mbr_0xb0 = 52;
                     DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x28;
-                    this->viewportState.someXOffset = 0xc;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == 20) {
-                    this->viewportState.viewportWidth = 0x40;
-                    this->viewportState.viewportHeight = 0x19;
+                    this->viewportState.someYOffset = 40;
+                    this->viewportState.someXOffset = 12;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
+                    this->viewportState.viewportWidth = 64;
+                    this->viewportState.viewportHeight = 25;
                     this->viewportState.mbr_0xac = 10;
-                    this->viewportState.mbr_0xb0 = 0x1e;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x28;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x14;
+                    this->viewportState.mbr_0xb0 = 30;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 40;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 20;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x1e;
+                    this->viewportState.someYOffset = 30;
                     this->viewportState.someXOffset = 7;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1600x1200) {
+                    this->viewportState.viewportWidth = 154;
+                    this->viewportState.mbr_0xb0 = 80;
+                    this->viewportState.viewportHeight = 55;
+                    this->viewportState.mbr_0xac = 24;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 14;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1280x720) {
+                    this->viewportState.viewportHeight = 45;
+                    this->viewportState.viewportWidth = 94;
+                    this->viewportState.mbr_0xac = 19;
+                    this->viewportState.mbr_0xb0 = 48;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 52;
+                    this->viewportState.someXOffset = 17;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1440x900) {
+                    this->viewportState.viewportWidth = 116;
+                    this->viewportState.viewportHeight = 50;
+                    this->viewportState.mbr_0xac = 22;
+                    this->viewportState.mbr_0xb0 = 60;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 10;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1920x1080) {
+                    this->viewportState.viewportWidth = 139;
+                    this->viewportState.viewportHeight = 65;
+                    this->viewportState.mbr_0xac = 29;
+                    this->viewportState.mbr_0xb0 = 72;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 13;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1920x1200) {
+                    this->viewportState.viewportWidth = 154;
+                    this->viewportState.mbr_0xac = 29;
+                    this->viewportState.viewportHeight = 65;
+                    this->viewportState.mbr_0xb0 = 80;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 76;
+                    this->viewportState.someXOffset = 14;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_2560x1440) {
+                    this->viewportState.viewportWidth = 184;
+                    this->viewportState.mbr_0xb0 = 96;
+                    this->viewportState.viewportHeight = 85;
+                    this->viewportState.mbr_0xac = 39;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 100;
+                    this->viewportState.someXOffset = 16;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_2560x1600) {
+                    this->viewportState.viewportWidth = 204;
+                    this->viewportState.mbr_0xb0 = 112;
+                    this->viewportState.viewportHeight = 85;
+                    this->viewportState.mbr_0xac = 39;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 100;
+                    this->viewportState.someXOffset = 16;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1366x768) {
+                    this->viewportState.viewportHeight = 48;
+                    this->viewportState.viewportWidth = 100;
+                    this->viewportState.mbr_0xac = 22;
+                    this->viewportState.mbr_0xb0 = 46;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 10;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1360x768) {
+                    this->viewportState.viewportHeight = 48;
+                    this->viewportState.viewportWidth = 100;
+                    this->viewportState.mbr_0xac = 22;
+                    this->viewportState.mbr_0xb0 = 46;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 10;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1680x1050) {
+                    this->viewportState.viewportHeight = 58;
+                    this->viewportState.viewportWidth = 135;
+                    this->viewportState.mbr_0xac = 24;
+                    this->viewportState.mbr_0xb0 = 72;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 13;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1600x900) {
+                    this->viewportState.viewportWidth = 116;
+                    this->viewportState.mbr_0xb0 = 60;
+                    this->viewportState.viewportHeight = 55;
+                    this->viewportState.mbr_0xac = 24;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 10;
+                    this->viewportState.someYOffset = 64;
                 }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
-                    this->viewportState.viewportWidth = 0x9a;
-                    this->viewportState.mbr_0xb0 = 0x50;
-                } else {
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
-                        this->viewportState.viewportHeight = 45;
-                        this->viewportState.viewportWidth = 94;
-                        this->viewportState.mbr_0xac = 19;
-                        this->viewportState.mbr_0xb0 = 48;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x34;
-                        this->viewportState.someXOffset = 0x11;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
-                        this->viewportState.viewportWidth = 0x74;
-                        this->viewportState.viewportHeight = 0x32;
-                        this->viewportState.mbr_0xac = 0x16;
-                        this->viewportState.mbr_0xb0 = 0x3c;
-                        this->viewportState.someXOffset = 10;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    someXOffsetDefault = 10;
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
-                        this->viewportState.viewportWidth = 0x8b;
-                        this->viewportState.viewportHeight = 0x41;
-                        this->viewportState.mbr_0xac = 0x1d;
-                        this->viewportState.mbr_0xb0 = 0x48;
-                        this->viewportState.someXOffset = 0xd;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
-                        this->viewportState.viewportWidth = 0x9a;
-                        this->viewportState.mbr_0xac = 0x1d;
-                        this->viewportState.viewportHeight = 0x41;
-                        this->viewportState.mbr_0xb0 = 0x50;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x4c;
-                        this->viewportState.someXOffset = 0xe;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
-                        this->viewportState.viewportWidth = 184;
-                        this->viewportState.mbr_0xb0 = 96;
-                        this->viewportState.viewportHeight = 85;
-                        this->viewportState.mbr_0xac = 39;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 16;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
-                        this->viewportState.viewportWidth = 0xcc;
-                        this->viewportState.mbr_0xb0 = 0x70;
-                        this->viewportState.viewportHeight = 85;
-                        this->viewportState.mbr_0xac = 39;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 16;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768)
-                        || (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_1360x768)) {
-                        this->viewportState.viewportHeight = 0x30;
-                        this->viewportState.viewportWidth = 100;
-                        this->viewportState.mbr_0xac = 0x16;
-                        this->viewportState.mbr_0xb0 = 0x2e;
-                        this->viewportState.someXOffset = someXOffsetDefault;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
-                        this->viewportState.viewportHeight = 0x3a;
-                        this->viewportState.viewportWidth = 0x87;
-                        this->viewportState.mbr_0xac = 0x18;
-                        this->viewportState.mbr_0xb0 = 0x48;
-                        this->viewportState.someXOffset = 0xd;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x900) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    this->viewportState.viewportWidth = 0x74;
-                    this->viewportState.mbr_0xb0 = 0x3c;
-                }
-                this->viewportState.viewportHeight = 0x37;
-                this->viewportState.mbr_0xac = 0x18;
-                this->viewportState.someXOffset = someXOffsetDefault;
             } else {
                 if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
-                    this->viewportState.viewportHeight = 0x3c;
-                    this->viewportState.viewportWidth = 0x9e;
-                    this->viewportState.mbr_0xac = 0x1f;
-                    this->viewportState.mbr_0xb0 = 0x44;
+                    this->viewportState.viewportHeight = 60;
+                    this->viewportState.viewportWidth = 158;
+                    this->viewportState.mbr_0xac = 31;
+                    this->viewportState.mbr_0xb0 = 68;
                     DAT_ScrollingHandler::instance.scrollAccelerationInterval = 10;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x50;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 80;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 2;
-                    this->viewportState.someYOffset = 0x41;
+                    this->viewportState.someYOffset = 65;
                     this->viewportState.someXOffset = 6;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-                    this->viewportState.viewportHeight = 0x4a;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1024x768) {
+                    this->viewportState.viewportHeight = 74;
                     this->viewportState.viewportWidth = 200;
-                    this->viewportState.mbr_0xac = 0x24;
-                    this->viewportState.mbr_0xb0 = 0x54;
+                    this->viewportState.mbr_0xac = 36;
+                    this->viewportState.mbr_0xb0 = 84;
                     DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
                     DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
-                    this->viewportState.viewportHeight = 0x4a;
-                    this->viewportState.viewportWidth = 0x9e;
-                    this->viewportState.mbr_0xac = 0x24;
-                    this->viewportState.mbr_0xb0 = 0x44;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1024x600) {
+                    this->viewportState.viewportHeight = 74;
+                    this->viewportState.viewportWidth = 158;
+                    this->viewportState.mbr_0xac = 36;
+                    this->viewportState.mbr_0xb0 = 68;
                     DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
                     DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
-                    this->viewportState.viewportHeight = 0x5a;
-                    this->viewportState.viewportWidth = 0x108;
-                    this->viewportState.mbr_0xac = 0x29;
-                    this->viewportState.mbr_0xb0 = 0x5e;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1280x1024) {
+                    this->viewportState.viewportHeight = 90;
+                    this->viewportState.viewportWidth = 264;
+                    this->viewportState.mbr_0xac = 41;
+                    this->viewportState.mbr_0xb0 = 94;
                     DAT_ScrollingHandler::instance.scrollAccelerationInterval = 5;
                     DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
-                    this->viewportState.viewportWidth = 0x80;
-                    this->viewportState.viewportHeight = 0x32;
-                    this->viewportState.mbr_0xac = 0x19;
-                    this->viewportState.mbr_0xb0 = 0x32;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
+                    this->viewportState.viewportWidth = 128;
+                    this->viewportState.viewportHeight = 50;
+                    this->viewportState.mbr_0xac = 25;
+                    this->viewportState.mbr_0xb0 = 50;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 20;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 40;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x1e;
+                    this->viewportState.someYOffset = 30;
                     this->viewportState.someXOffset = 7;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
-                    this->viewportState.viewportWidth = 0x134;
-                    this->viewportState.viewportHeight = 0x6e;
-                    this->viewportState.mbr_0xac = 0x32;
-                    this->viewportState.mbr_0xb0 = 0x6e;
-                    this->viewportState.someXOffset = 6;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1600x1200) {
+                    this->viewportState.viewportWidth = 308;
+                    this->viewportState.viewportHeight = 110;
+                    this->viewportState.mbr_0xac = 50;
+                    this->viewportState.mbr_0xb0 = 110;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                     DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x40;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
-                    this->viewportState.viewportHeight = 0x5a;
-                    this->viewportState.viewportWidth = 0xbc;
-                    this->viewportState.mbr_0xac = 0x29;
-                    this->viewportState.mbr_0xb0 = 0x50;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x34;
                     this->viewportState.someXOffset = 6;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1280x720) {
+                    this->viewportState.viewportHeight = 90;
+                    this->viewportState.viewportWidth = 188;
+                    this->viewportState.mbr_0xac = 41;
+                    this->viewportState.mbr_0xb0 = 80;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 52;
+                    this->viewportState.someXOffset = 6;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1440x900) {
                     this->viewportState.viewportHeight = 100;
-                    this->viewportState.viewportWidth = 0xe8;
-                    this->viewportState.mbr_0xac = 0x2f;
-                    this->viewportState.mbr_0xb0 = 0x5a;
+                    this->viewportState.viewportWidth = 232;
+                    this->viewportState.mbr_0xac = 47;
+                    this->viewportState.mbr_0xb0 = 90;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 6;
+                    this->viewportState.someYOffset = 64;
                 } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
                     == OpenSHC::Rendering::SRE_1920x1080) {
-                    this->viewportState.viewportHeight = 0x82;
-                    this->viewportState.viewportWidth = 0x116;
-                    this->viewportState.mbr_0xac = 0x38;
+                    this->viewportState.viewportHeight = 130;
+                    this->viewportState.viewportWidth = 278;
+                    this->viewportState.mbr_0xac = 56;
                     this->viewportState.mbr_0xb0 = 100;
-                } else {
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
-                        this->viewportState.viewportHeight = 0x82;
-                        this->viewportState.viewportWidth = 0x134;
-                        this->viewportState.mbr_0xac = 0x38;
-                        this->viewportState.mbr_0xb0 = 0x6e;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x4c;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
-                        this->viewportState.viewportWidth = 0x170;
-                        this->viewportState.mbr_0xb0 = 0x78;
-                        this->viewportState.viewportHeight = 0xaa;
-                        this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
-                        this->viewportState.viewportWidth = 0x198;
-                        this->viewportState.mbr_0xb0 = 0x82;
-                        this->viewportState.viewportHeight = 0xaa;
-                        this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768)
-                        || (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_1360x768)) {
-                        this->viewportState.viewportHeight = 0x60;
-                        this->viewportState.viewportWidth = 200;
-                        this->viewportState.mbr_0xac = 0x2f;
-                        this->viewportState.mbr_0xb0 = 0x54;
-                        this->viewportState.someXOffset = 3;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
-                        this->viewportState.viewportHeight = 0x74;
-                        this->viewportState.viewportWidth = 0x10e;
-                        this->viewportState.mbr_0xb0 = 100;
-                    } else {
-                        if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            != OpenSHC::Rendering::SRE_1600x900) {
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                            return;
-                        }
-                        this->viewportState.viewportWidth = 0xe8;
-                        this->viewportState.mbr_0xb0 = 0x55;
-                        this->viewportState.viewportHeight = 0x6e;
-                    }
-                    this->viewportState.mbr_0xac = 0x32;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 6;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1920x1200) {
+                    this->viewportState.viewportHeight = 130;
+                    this->viewportState.viewportWidth = 308;
+                    this->viewportState.mbr_0xac = 56;
+                    this->viewportState.mbr_0xb0 = 110;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 76;
+                    this->viewportState.someXOffset = 6;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_2560x1440) {
+                    this->viewportState.viewportWidth = 368;
+                    this->viewportState.mbr_0xb0 = 120;
+                    this->viewportState.viewportHeight = 170;
+                    this->viewportState.mbr_0xac = 71;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 100;
+                    this->viewportState.someXOffset = 6;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_2560x1600) {
+                    this->viewportState.viewportWidth = 408;
+                    this->viewportState.mbr_0xb0 = 130;
+                    this->viewportState.viewportHeight = 170;
+                    this->viewportState.mbr_0xac = 71;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someYOffset = 100;
+                    this->viewportState.someXOffset = 6;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1366x768) {
+                    this->viewportState.viewportHeight = 96;
+                    this->viewportState.viewportWidth = 200;
+                    this->viewportState.mbr_0xac = 47;
+                    this->viewportState.mbr_0xb0 = 84;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 3;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1360x768) {
+                    this->viewportState.viewportHeight = 96;
+                    this->viewportState.viewportWidth = 200;
+                    this->viewportState.mbr_0xac = 47;
+                    this->viewportState.mbr_0xb0 = 84;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 3;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1680x1050) {
+                    this->viewportState.viewportHeight = 116;
+                    this->viewportState.viewportWidth = 270;
+                    this->viewportState.mbr_0xb0 = 100;
+                    this->viewportState.mbr_0xac = 50;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 6;
+                    this->viewportState.someYOffset = 64;
+                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
+                    == OpenSHC::Rendering::SRE_1600x900) {
+                    this->viewportState.viewportWidth = 232;
+                    this->viewportState.mbr_0xb0 = 85;
+                    this->viewportState.viewportHeight = 110;
+                    this->viewportState.mbr_0xac = 50;
+                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                    this->viewportState.someXOffset = 6;
+                    this->viewportState.someYOffset = 64;
                 }
-                this->viewportState.someXOffset = 6;
             }
         } else if (this->viewportState.isZoomedOutUnk == 0) {
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
-                this->viewportState.viewportHeight = 0x1e;
-                this->viewportState.viewportWidth = 0x3f;
-                this->viewportState.mbr_0xac = 0xc;
-                this->viewportState.mbr_0xb0 = 0x28;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+                this->viewportState.viewportHeight = 30;
+                this->viewportState.viewportWidth = 63;
+                this->viewportState.mbr_0xac = 12;
+                this->viewportState.mbr_0xb0 = 40;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 20;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 40;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x1e;
+                this->viewportState.someYOffset = 30;
                 this->viewportState.someXOffset = 7;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-                this->viewportState.viewportHeight = 0x25;
-                this->viewportState.viewportWidth = 0x54;
-                this->viewportState.mbr_0xac = 0xf;
-                this->viewportState.mbr_0xb0 = 0x2e;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
+                this->viewportState.viewportHeight = 37;
+                this->viewportState.viewportWidth = 84;
+                this->viewportState.mbr_0xac = 15;
+                this->viewportState.mbr_0xb0 = 46;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 17;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 52;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x28;
+                this->viewportState.someYOffset = 40;
                 this->viewportState.someXOffset = 8;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
-                this->viewportState.viewportHeight = 0x25;
-                this->viewportState.viewportWidth = 0x3f;
-                this->viewportState.mbr_0xac = 0xf;
-                this->viewportState.mbr_0xb0 = 0x28;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x11;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
+                this->viewportState.viewportHeight = 37;
+                this->viewportState.viewportWidth = 63;
+                this->viewportState.mbr_0xac = 15;
+                this->viewportState.mbr_0xb0 = 40;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 17;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 52;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x28;
+                this->viewportState.someYOffset = 40;
                 this->viewportState.someXOffset = 8;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
-                this->viewportState.viewportHeight = 0x2d;
-                this->viewportState.viewportWidth = 0x74;
-                this->viewportState.mbr_0xac = 0x13;
-                this->viewportState.mbr_0xb0 = 0x34;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x34;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
+                this->viewportState.viewportHeight = 45;
+                this->viewportState.viewportWidth = 116;
+                this->viewportState.mbr_0xac = 19;
+                this->viewportState.mbr_0xb0 = 52;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 52;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x32;
+                this->viewportState.someYOffset = 50;
                 this->viewportState.someXOffset = 8;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
-                this->viewportState.viewportWidth = 0x30;
-                this->viewportState.viewportHeight = 0x19;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
+                this->viewportState.viewportWidth = 48;
+                this->viewportState.viewportHeight = 25;
                 this->viewportState.mbr_0xac = 10;
-                this->viewportState.mbr_0xb0 = 0x1e;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x28;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x14;
+                this->viewportState.mbr_0xb0 = 30;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 40;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 20;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x1e;
+                this->viewportState.someYOffset = 30;
                 this->viewportState.someXOffset = 7;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
-                this->viewportState.viewportWidth = 0x8a;
-                this->viewportState.mbr_0xb0 = 0x50;
-                this->viewportState.viewportHeight = 0x37;
-                this->viewportState.mbr_0xac = 0x18;
-                this->viewportState.someXOffset = someXOffsetDefault;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
+                this->viewportState.viewportWidth = 138;
+                this->viewportState.mbr_0xb0 = 80;
+                this->viewportState.viewportHeight = 55;
+                this->viewportState.mbr_0xac = 24;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
-                this->viewportState.viewportHeight = 0x2d;
-                this->viewportState.viewportWidth = 0x4e;
-                this->viewportState.mbr_0xac = 0x13;
-                this->viewportState.mbr_0xb0 = 0x30;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                this->viewportState.someXOffset = 14;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
+                this->viewportState.viewportHeight = 45;
+                this->viewportState.viewportWidth = 78;
+                this->viewportState.mbr_0xac = 19;
+                this->viewportState.mbr_0xb0 = 48;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x34;
-                this->viewportState.someXOffset = 0x11;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
+                this->viewportState.someYOffset = 52;
+                this->viewportState.someXOffset = 17;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
                 this->viewportState.viewportWidth = 100;
-                this->viewportState.viewportHeight = 0x32;
-                this->viewportState.mbr_0xac = 0x16;
-                this->viewportState.mbr_0xb0 = 0x3c;
+                this->viewportState.viewportHeight = 50;
+                this->viewportState.mbr_0xac = 22;
+                this->viewportState.mbr_0xb0 = 60;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someXOffset = 10;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
+                this->viewportState.viewportWidth = 123;
+                this->viewportState.viewportHeight = 65;
+                this->viewportState.mbr_0xac = 29;
+                this->viewportState.mbr_0xb0 = 72;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            someXOffsetDefault = 10;
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
-                this->viewportState.viewportWidth = 0x7b;
-                this->viewportState.viewportHeight = 0x41;
-                this->viewportState.mbr_0xac = 0x1d;
-                this->viewportState.mbr_0xb0 = 0x48;
-                this->viewportState.someXOffset = 0xd;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                this->viewportState.someXOffset = 13;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
+                this->viewportState.viewportWidth = 138;
+                this->viewportState.mbr_0xac = 39;
+                this->viewportState.viewportHeight = 65;
+                this->viewportState.mbr_0xb0 = 80;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
-                this->viewportState.viewportWidth = 0x8a;
-                this->viewportState.mbr_0xac = 0x27;
-                this->viewportState.viewportHeight = 0x41;
-                this->viewportState.mbr_0xb0 = 0x50;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x4c;
-                this->viewportState.someXOffset = 0xe;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
-                this->viewportState.viewportWidth = 0xa8;
-                this->viewportState.mbr_0xb0 = 0x5a;
+                this->viewportState.someYOffset = 76;
+                this->viewportState.someXOffset = 14;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
+                this->viewportState.viewportWidth = 168;
+                this->viewportState.mbr_0xb0 = 90;
                 this->viewportState.viewportHeight = 85;
                 this->viewportState.mbr_0xac = 39;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 100;
                 this->viewportState.someXOffset = 16;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
-                this->viewportState.viewportHeight = 0x55;
-                this->viewportState.viewportWidth = 0xbc;
-                this->viewportState.mbr_0xac = 0x1d;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
+                this->viewportState.viewportHeight = 85;
+                this->viewportState.viewportWidth = 188;
+                this->viewportState.mbr_0xac = 29;
                 this->viewportState.mbr_0xb0 = 100;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someYOffset = 100;
-                this->viewportState.someXOffset = 0x12;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768)
-                || (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768)) {
-                this->viewportState.viewportHeight = 0x30;
-                this->viewportState.viewportWidth = 0x54;
-                this->viewportState.mbr_0xac = 0x16;
-                this->viewportState.mbr_0xb0 = 0x2e;
+                this->viewportState.someXOffset = 18;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
+                this->viewportState.viewportHeight = 48;
+                this->viewportState.viewportWidth = 84;
+                this->viewportState.mbr_0xac = 22;
+                this->viewportState.mbr_0xb0 = 46;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
                 this->viewportState.someXOffset = 8;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
+                this->viewportState.viewportHeight = 48;
+                this->viewportState.viewportWidth = 84;
+                this->viewportState.mbr_0xac = 22;
+                this->viewportState.mbr_0xb0 = 46;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1680x1050) {
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x900) {
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
+                this->viewportState.someXOffset = 8;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
+                this->viewportState.viewportHeight = 58;
+                this->viewportState.viewportWidth = 119;
+                this->viewportState.mbr_0xac = 24;
+                this->viewportState.mbr_0xb0 = 72;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 13;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
                 this->viewportState.viewportWidth = 100;
-                this->viewportState.mbr_0xb0 = 0x3c;
-                this->viewportState.viewportHeight = 0x37;
-                this->viewportState.mbr_0xac = 0x18;
-                this->viewportState.someXOffset = someXOffsetDefault;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+                this->viewportState.mbr_0xb0 = 60;
+                this->viewportState.viewportHeight = 55;
+                this->viewportState.mbr_0xac = 24;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
+                this->viewportState.someXOffset = 10;
+                this->viewportState.someYOffset = 64;
             }
-            this->viewportState.viewportHeight = 0x3a;
-            this->viewportState.viewportWidth = 0x77;
-            this->viewportState.mbr_0xac = 0x18;
-            this->viewportState.mbr_0xb0 = 0x48;
-            this->viewportState.someXOffset = 0xd;
         } else {
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
-                this->viewportState.viewportHeight = 0x3c;
-                this->viewportState.viewportWidth = 0x7e;
-                this->viewportState.mbr_0xac = 0x1f;
-                this->viewportState.mbr_0xb0 = 0x44;
+                this->viewportState.viewportHeight = 60;
+                this->viewportState.viewportWidth = 126;
+                this->viewportState.mbr_0xac = 31;
+                this->viewportState.mbr_0xb0 = 68;
                 DAT_ScrollingHandler::instance.scrollAccelerationInterval = 10;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x50;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 80;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 2;
-                this->viewportState.someYOffset = 0x41;
+                this->viewportState.someYOffset = 65;
                 this->viewportState.someXOffset = 6;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-                this->viewportState.viewportHeight = 0x4a;
-                this->viewportState.viewportWidth = 0xa8;
-                this->viewportState.mbr_0xac = 0x24;
-                this->viewportState.mbr_0xb0 = 0x54;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
+                this->viewportState.viewportHeight = 74;
+                this->viewportState.viewportWidth = 168;
+                this->viewportState.mbr_0xac = 36;
+                this->viewportState.mbr_0xb0 = 84;
                 DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
                 DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                this->viewportState.someYOffset = 0x4e;
+                this->viewportState.someYOffset = 78;
                 this->viewportState.someXOffset = 6;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
-                this->viewportState.viewportHeight = 0x4a;
-                this->viewportState.viewportWidth = 0x7e;
-                this->viewportState.mbr_0xac = 0x24;
-                this->viewportState.mbr_0xb0 = 0x44;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
+                this->viewportState.viewportHeight = 74;
+                this->viewportState.viewportWidth = 126;
+                this->viewportState.mbr_0xac = 36;
+                this->viewportState.mbr_0xb0 = 68;
                 DAT_ScrollingHandler::instance.scrollAccelerationInterval = 7;
                 DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                this->viewportState.someYOffset = 0x4e;
+                this->viewportState.someYOffset = 78;
                 this->viewportState.someXOffset = 6;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
-                this->viewportState.viewportHeight = 0x5a;
-                this->viewportState.viewportWidth = 0xe8;
-                this->viewportState.mbr_0xac = 0x29;
-                this->viewportState.mbr_0xb0 = 0x5e;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
+                this->viewportState.viewportHeight = 90;
+                this->viewportState.viewportWidth = 232;
+                this->viewportState.mbr_0xac = 41;
+                this->viewportState.mbr_0xb0 = 94;
                 DAT_ScrollingHandler::instance.scrollAccelerationInterval = 5;
                 DAT_ScrollingHandler::instance.scrollDistanceLimit = 100;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 3;
-                this->viewportState.someYOffset = 0x5b;
+                this->viewportState.someYOffset = 91;
                 this->viewportState.someXOffset = 6;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
-                this->viewportState.viewportWidth = 0x60;
-                this->viewportState.viewportHeight = 0x32;
-                this->viewportState.mbr_0xac = 0x19;
-                this->viewportState.mbr_0xb0 = 0x32;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0x14;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x28;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
+                this->viewportState.viewportWidth = 96;
+                this->viewportState.viewportHeight = 50;
+                this->viewportState.mbr_0xac = 25;
+                this->viewportState.mbr_0xb0 = 50;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 20;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 40;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x1e;
+                this->viewportState.someYOffset = 30;
                 this->viewportState.someXOffset = 7;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x1200) {
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
-                    this->viewportState.viewportHeight = 0x5a;
-                    this->viewportState.viewportWidth = 0x9c;
-                    this->viewportState.mbr_0xac = 0x29;
-                    this->viewportState.mbr_0xb0 = 0x50;
-                    DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                    DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                    DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                    this->viewportState.someYOffset = 0x34;
-                    this->viewportState.someXOffset = 6;
-                    MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                    return;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
-                    this->viewportState.viewportHeight = 100;
-                    this->viewportState.viewportWidth = 200;
-                    this->viewportState.mbr_0xac = 0x2f;
-                    this->viewportState.mbr_0xb0 = 0x5a;
-                } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                    == OpenSHC::Rendering::SRE_1920x1080) {
-                    this->viewportState.viewportHeight = 0x82;
-                    this->viewportState.viewportWidth = 0xf6;
-                    this->viewportState.mbr_0xac = 0x38;
-                    this->viewportState.mbr_0xb0 = 100;
-                } else {
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
-                        this->viewportState.viewportHeight = 0x82;
-                        this->viewportState.viewportWidth = 0x114;
-                        this->viewportState.mbr_0xac = 0x38;
-                        this->viewportState.mbr_0xb0 = 0x6e;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x4c;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
-                        this->viewportState.viewportWidth = 0x150;
-                        this->viewportState.mbr_0xb0 = 0x78;
-                        this->viewportState.viewportHeight = 0xaa;
-                        this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
-                        this->viewportState.viewportWidth = 0x178;
-                        this->viewportState.mbr_0xb0 = 0x82;
-                        this->viewportState.viewportHeight = 0xaa;
-                        this->viewportState.mbr_0xac = 0x47;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 100;
-                        this->viewportState.someXOffset = 6;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    if ((DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1366x768)
-                        && (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            != OpenSHC::Rendering::SRE_1360x768)) {
-                        if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            != OpenSHC::Rendering::SRE_1680x1050) {
-                            if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                                != OpenSHC::Rendering::SRE_1600x900) {
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                                return;
-                            }
-                            this->viewportState.viewportWidth = 200;
-                            this->viewportState.mbr_0xb0 = 0x55;
-                            this->viewportState.viewportHeight = 0x6e;
-                            this->viewportState.mbr_0xac = 0x32;
-                            this->viewportState.someXOffset = 6;
-                            DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                            DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                            DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                            this->viewportState.someYOffset = 0x40;
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                            return;
-                        }
-                        this->viewportState.viewportHeight = 0x74;
-                        this->viewportState.viewportWidth = 0xee;
-                        this->viewportState.mbr_0xb0 = 100;
-                        this->viewportState.mbr_0xac = 0x32;
-                        this->viewportState.someXOffset = 6;
-                        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-                        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                        this->viewportState.someYOffset = 0x40;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                        return;
-                    }
-                    this->viewportState.viewportHeight = 0x60;
-                    this->viewportState.viewportWidth = 0xa8;
-                    this->viewportState.mbr_0xac = 0x2f;
-                    this->viewportState.mbr_0xb0 = 0x54;
-                }
-                this->viewportState.someXOffset = 6;
-                DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
+                this->viewportState.viewportWidth = 276;
+                this->viewportState.viewportHeight = 110;
+                this->viewportState.mbr_0xac = 50;
+                this->viewportState.mbr_0xb0 = 110;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
                 DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-                this->viewportState.someYOffset = 0x40;
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-                return;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
+                this->viewportState.viewportHeight = 90;
+                this->viewportState.viewportWidth = 156;
+                this->viewportState.mbr_0xac = 41;
+                this->viewportState.mbr_0xb0 = 80;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someYOffset = 52;
+                this->viewportState.someXOffset = 6;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
+                this->viewportState.viewportHeight = 100;
+                this->viewportState.viewportWidth = 200;
+                this->viewportState.mbr_0xac = 47;
+                this->viewportState.mbr_0xb0 = 90;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
+                this->viewportState.viewportHeight = 130;
+                this->viewportState.viewportWidth = 246;
+                this->viewportState.mbr_0xac = 56;
+                this->viewportState.mbr_0xb0 = 100;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
+                this->viewportState.viewportHeight = 130;
+                this->viewportState.viewportWidth = 276;
+                this->viewportState.mbr_0xac = 56;
+                this->viewportState.mbr_0xb0 = 110;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someYOffset = 76;
+                this->viewportState.someXOffset = 6;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
+                this->viewportState.viewportWidth = 336;
+                this->viewportState.mbr_0xb0 = 120;
+                this->viewportState.viewportHeight = 170;
+                this->viewportState.mbr_0xac = 71;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someYOffset = 100;
+                this->viewportState.someXOffset = 6;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
+                this->viewportState.viewportWidth = 376;
+                this->viewportState.mbr_0xb0 = 130;
+                this->viewportState.viewportHeight = 170;
+                this->viewportState.mbr_0xac = 71;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someYOffset = 100;
+                this->viewportState.someXOffset = 6;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
+                this->viewportState.viewportHeight = 96;
+                this->viewportState.viewportWidth = 168;
+                this->viewportState.mbr_0xac = 47;
+                this->viewportState.mbr_0xb0 = 84;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
+                this->viewportState.viewportHeight = 96;
+                this->viewportState.viewportWidth = 168;
+                this->viewportState.mbr_0xac = 47;
+                this->viewportState.mbr_0xb0 = 84;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
+                this->viewportState.viewportHeight = 116;
+                this->viewportState.viewportWidth = 238;
+                this->viewportState.mbr_0xb0 = 100;
+                this->viewportState.mbr_0xac = 50;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
+                this->viewportState.viewportWidth = 200;
+                this->viewportState.mbr_0xb0 = 85;
+                this->viewportState.viewportHeight = 110;
+                this->viewportState.mbr_0xac = 50;
+                DAT_ScrollingHandler::instance.scrollAccelerationInterval = 15;
+                DAT_ScrollingHandler::instance.scrollDistanceLimit = 60;
+                DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
+                this->viewportState.someXOffset = 6;
+                this->viewportState.someYOffset = 64;
             }
-            this->viewportState.viewportWidth = 0x114;
-            this->viewportState.viewportHeight = 0x6e;
-            this->viewportState.mbr_0xac = 0x32;
-            this->viewportState.mbr_0xb0 = 0x6e;
-            this->viewportState.someXOffset = 6;
         }
-        DAT_ScrollingHandler::instance.scrollDistanceLimit = 0x3c;
-        DAT_ScrollingHandler::instance.scrollAccelerationInterval = 0xf;
-        DAT_ScrollingHandler::instance.scrollDistanceMin = 1;
-        this->viewportState.someYOffset = 0x40;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
     }
 
