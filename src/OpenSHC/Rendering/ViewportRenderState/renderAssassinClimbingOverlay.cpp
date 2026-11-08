@@ -38,7 +38,7 @@ namespace Rendering {
         ((OpenSHC::IO::Graphics::GmID)DAT_UnitsState::instance.units[unitID].gmIDUnk, imageID,
             DAT_UnitsState::instance.units[unitID].field_0x41c,
             DAT_UnitsState::instance.units[unitID].field_0x420 - assassinHeightDifference,
-            (short)DAT_UnitsState::instance.units[unitID].field_0x41a);
+            DAT_UnitsState::instance.units[unitID].field_0x41a);
     }
 
 }
