@@ -31,10 +31,10 @@ namespace Map {
         BOOLEnum UnitsState::processUnitAttackOtherUnit(int unitID, int unit2ID)
         {
             int _tribeID = this->units[unit2ID].tribeID;
-            UnitTypeShort _unit2Type = this->units[unit2ID].unitType;
+            int const _unit2Type = this->units[unit2ID].unitType;
             /* get the damage from the array based: row is unit1ID type, column is unit2ID type */
-            int _damage = DAT_UnitPropertiesDefinedData::instance
-                              .MELEE_DAMAGE[(short)this->units[unitID].unitType][(short)_unit2Type];
+            int _damage
+                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[(short)this->units[unitID].unitType][_unit2Type];
             /* if unit 1 is not a lord */
             if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) {
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
@@ -42,8 +42,8 @@ namespace Map {
             }
             if (this->units[unitID].owner != 0 && this->units[unit2ID].owner != this->units[unitID].owner) {
                 /* let unit 2 know we attacked them? */
-                this->units[unit2ID].lastEncounteredEnemyUnitIDUnk = (short)unitID;
                 this->units[unit2ID].lastEncounteredEnemyPlayerID = this->units[unitID].owner;
+                this->units[unit2ID].lastEncounteredEnemyUnitIDUnk = (short)unitID;
             }
             /* decrement the health of unit 2 by damage */
             this->units[unit2ID].health = this->units[unit2ID].health - _damage;
@@ -51,14 +51,14 @@ namespace Map {
                 this->units[unit2ID].health = 0;
             }
             /* compute the health bar in percentages */
-            short _healthPercentage;
+            int _healthPercentage;
             if (this->units[unit2ID].maxHealth == 0) {
                 _healthPercentage = 100;
             } else {
-                _healthPercentage = (short)((this->units[unit2ID].health * 100) / this->units[unit2ID].maxHealth);
+                _healthPercentage = (this->units[unit2ID].health * 100) / this->units[unit2ID].maxHealth;
             }
-            this->units[unit2ID].healthPercentage = _healthPercentage;
-            this->units[unit2ID].healthbar = _healthPercentage / 10;
+            this->units[unit2ID].healthPercentage = (short)_healthPercentage;
+            this->units[unit2ID].healthbar = (short)_healthPercentage / 10;
             if (this->units[unit2ID].health <= 0 && this->units[unit2ID].isStalked != 0) {
                 switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_WOODCUTTER:
@@ -93,7 +93,8 @@ namespace Map {
             }
             if (this->units[unit2ID].health > 0) {
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                    && this->units[unit2ID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                    && DAT_UnitsState::instance.units[unit2ID].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXWeAreUnderAttack, DAT_SFXState::ptr)();
                 }
                 return FALSE;
