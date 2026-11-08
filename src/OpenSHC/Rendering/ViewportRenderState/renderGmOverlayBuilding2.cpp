@@ -150,9 +150,10 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
             switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -204,9 +205,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -258,9 +260,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER1:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -312,9 +315,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER2:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -366,9 +370,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER3:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -420,9 +425,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER4:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
@@ -474,9 +480,10 @@ namespace Rendering {
                 }
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER5:
-                if ((DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth
-                    != 5) {
+                if (5
+                        - (DAT_BuildingsState::instance.buildings[buildingID].currentHealth * 5)
+                            / DAT_BuildingsState::instance.buildings[buildingID].maxHealth
+                    != 0) {
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage5;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
