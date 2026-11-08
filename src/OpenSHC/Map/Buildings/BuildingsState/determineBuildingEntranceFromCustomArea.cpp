@@ -21,9 +21,9 @@ namespace Map {
         undefined4 BuildingsState::determineBuildingEntranceFromCustomArea(
             int buildingID, int param_2, int param_3, int x, int y)
         {
-            // Matching note: The original keeps pointers to the building fields (x, y, entry) in stack
-            // slots and keeps this and the building offset in separate registers; our compiler folds them into one
-            // base register. The loop bodies are otherwise the same.
+            // Matching note: the original keeps the tile index in edx across getBuildingHeightForBuildingID (so it was
+            // built with /GL and knows the callee leaves edx alone); without that our allocator is one register short,
+            // spills the building offset and param_3, and every loop body differs in register and slot naming.
             // Finds an entrance tile of the building that can be reached from the tile (x, y).
             // param_3 enlarges the area around the building by one tile, param_2 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
@@ -64,7 +64,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + heightStep
-                    && tileHeight - heightStep <= height
+                    && height >= tileHeight - heightStep
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -102,7 +102,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height
+                    && height >= tileHeight - 16
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -127,11 +127,11 @@ namespace Map {
 
             // Accept any walkable tile next to the building
             tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            if (tileCount <= 0) {
-                index = 0;
-            } else {
+            if (tileCount > 0) {
                 index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
+            } else {
+                index = 0;
             }
             for (int tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
@@ -148,7 +148,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
+                    && height >= tileHeight - 16 && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
                     && ++found >= param_2) {
                     this->buildings[buildingID].buildingEntryX
                         = this->DAT_TempXOffset - param_3 + this->buildings[buildingID].x;
