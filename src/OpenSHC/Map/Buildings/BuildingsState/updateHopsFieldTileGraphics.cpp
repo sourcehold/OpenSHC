@@ -13,6 +13,9 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
+            // Matching note: start and buildingID * 0xcb swap ebx/ebp. MSVC ranks start (key -70) just below that
+            // temporary (-66) and no source form tried (declaration order, ternary, if/else, loop forms, references,
+            // this vs global) moves the gap, so the remaining difference is register naming only
             int start = 0;
             int unchangedLeft = 3;
             if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
