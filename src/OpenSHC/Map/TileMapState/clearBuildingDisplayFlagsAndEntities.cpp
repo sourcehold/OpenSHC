@@ -16,8 +16,7 @@ namespace Map {
         int buildingX = DAT_BuildingsState::instance.buildings[buildingID].x;
         int buildingY = DAT_BuildingsState::instance.buildings[buildingID].y;
         uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
-        // so it can only be tested at the end of it
+
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, widthOrHeight);

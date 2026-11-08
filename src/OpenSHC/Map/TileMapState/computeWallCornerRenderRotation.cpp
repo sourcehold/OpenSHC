@@ -74,7 +74,6 @@ namespace Map {
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
                        tileUnk, y, 4)
             != 0) {
-            // the other direction carries a wall too
             result = 63;
         } else {
             result = 33;

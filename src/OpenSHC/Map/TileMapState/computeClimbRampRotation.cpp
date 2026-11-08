@@ -57,8 +57,6 @@ namespace Map {
                 rotation = 2;
             }
         } else if (heightAt86 < 136 || heightAt85 < 136) {
-            // the original reaches this with a setcc/dec/and, which is how MSVC compiles the
-            // conditional below
             if (high > heightAt84 + 20) {
                 rotation = 5;
             } else {

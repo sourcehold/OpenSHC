@@ -11,8 +11,7 @@ namespace Map {
     void TileMapState::clearDrawBridgeWater(int x, int y)
     {
         int buildingSizeTileIndex = 0;
-        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
-        // so it can only be tested at the end of it
+
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);

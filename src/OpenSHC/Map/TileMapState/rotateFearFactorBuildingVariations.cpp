@@ -12,9 +12,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8300
     void TileMapState::rotateFearFactorBuildingVariations()
     {
-        // currentMapperCommand is reached through the global instance's absolute address, and the
-        // switch below is the original's byte table at 0x004F847C into the jump table at 0x004F8454,
-        // biased by M_MAPPER_GARDEN1. The "- 1 & 6" forms are the original's setcc/dec/and idiom.
         DWORD now = timeGetTime();
         if (this->editorRockType == 5) {
             if (this->rockOrientation == 0) {

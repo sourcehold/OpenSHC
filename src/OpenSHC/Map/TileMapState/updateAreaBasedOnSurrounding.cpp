@@ -15,8 +15,7 @@ namespace Map {
         int area
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findAccessibleAreaNearBuildingLocation,
                 DAT_BuildingsState::ptr)(x, y, buildingSize);
-        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
-        // so it can only be tested at the end of it
+
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingSize);

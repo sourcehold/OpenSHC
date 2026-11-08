@@ -19,7 +19,6 @@ namespace Map {
         this->refreshRelatedOne = 0;
         for (int row = 0; row < 256; row++) {
             int target = ((uint)row >> 2) + 1;
-            // the pull-down eases towards the target in steps that shrink as it gets closer
             int step;
             if (this->refreshCertainTileMap == 3) {
                 step = this->heightBasedScreenYOffset[row] - target;
@@ -66,7 +65,6 @@ namespace Map {
         }
 
         this->refreshRelatedTwo = 1;
-        // nested form: the original keeps the rebuild tail call as the trailing block
         if (importHeight == 0) {
             if (this->refreshCertainTileMap == 4 || this->refreshCertainTileMap == 2) {
                 this->refreshRelatedOne = 1;

@@ -17,7 +17,6 @@ namespace Map {
     BOOLEnum TileMapState::advanceMoatDigProgress(int moatID)
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress + 1;
-        // nested form: the original keeps the FALSE return as the trailing block
         if (this->moats[moatID].fillProgress >= 4) {
             int tile = this->moats[moatID].tile;
             this->moats[moatID].someCountDown = 0;
@@ -36,9 +35,9 @@ namespace Map {
                 DAT_PathFindingState::ptr)(this->moats[moatID].y, this->moats[moatID].tile);
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
-            return 1;
+            return TRUE;
         }
-        return 0;
+        return FALSE;
     }
 
 }

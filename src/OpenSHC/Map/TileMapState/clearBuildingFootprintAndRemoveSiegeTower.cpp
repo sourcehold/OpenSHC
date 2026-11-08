@@ -25,8 +25,7 @@ namespace Map {
     void TileMapState::clearBuildingFootprintAndRemoveSiegeTower(int x, int y, int size)
     {
         int tileIndex = 0;
-        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
-        // so it can only be tested at the end of it
+
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile

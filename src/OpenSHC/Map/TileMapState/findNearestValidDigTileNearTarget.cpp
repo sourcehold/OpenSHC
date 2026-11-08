@@ -16,14 +16,14 @@ namespace Map {
     BOOLEnum TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
     {
         if (x1 > MC_MAP_XY_LIMIT_INCLUSIVE || y1 > MC_MAP_XY_LIMIT_INCLUSIVE) {
-            return 0;
+            return FALSE;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * MC_MAP_XY_LIMIT + x1] == 0) {
-            return 0;
+            return FALSE;
         }
         if (x2 > MC_MAP_XY_LIMIT_INCLUSIVE || y2 > MC_MAP_XY_LIMIT_INCLUSIVE
             || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * MC_MAP_XY_LIMIT + x2] == 0) {
-            return 0;
+            return FALSE;
         }
 
         int area = (short)this
@@ -67,11 +67,11 @@ namespace Map {
         if (bestIndex <= -1) {
             this->field_0x5549a8 = x2;
             this->field_0x5549ac = y2;
-            return 0;
+            return FALSE;
         }
         this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
         this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
-        return 1;
+        return TRUE;
     }
 
 }

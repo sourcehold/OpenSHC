@@ -18,7 +18,6 @@ namespace Map {
     BOOLEnum TileMapState::removeMoat(uint moatID, int unused)
     {
         this->moats[moatID].fillProgress = this->moats[moatID].fillProgress - 1;
-        // nested form: the original keeps the FALSE return as the trailing block
         if (this->moats[moatID].fillProgress <= 0) {
             this->HeightLayer[this->moats[moatID].tile] = 8;
             this->LogicLayer[this->moats[moatID].tile] = this->LogicLayer[this->moats[moatID].tile] & ~L_MOAT;

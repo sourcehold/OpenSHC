@@ -48,7 +48,6 @@ namespace Map {
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
             this->HeightLayer[tile] = this->HeightLayer[tile] + 98;
-            // a crenel on an odd tile of one axis carries the alternate variation
             if ((int)(x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
             } else if ((int)(x & 1) == 0 && (y & 1) == 1) {

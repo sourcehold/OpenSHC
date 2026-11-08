@@ -6,7 +6,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA460
     undefined4 TileMapState::getRubbleGraphicStageForDamageLevel(int rotation)
     {
-        // the result lives in eax from the start (xor eax, eax), every comparison goes through ecx
         int result = 0;
         int orientation = this->mapOrientation;
         if (orientation == 0) {

@@ -16,8 +16,7 @@ namespace Map {
     void TileMapState::updatePathLinkagesForBuilding(int buildingID)
     {
         int buildingSizeTileIndex = 0;
-        // the bound is set by the getBuildingSizeIndexMappingData call in the body,
-        // so it can only be tested at the end of it
+        
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);

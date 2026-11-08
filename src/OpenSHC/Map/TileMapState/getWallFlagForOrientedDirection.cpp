@@ -28,9 +28,9 @@ namespace Map {
                 direction = 2;
             }
         } else {
-            return 0;
+            return FALSE;
         }
-        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & 1;
+        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & TRUE;
     }
 
 }

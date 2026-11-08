@@ -12,13 +12,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA550
     int TileMapState::getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType)
     {
-        // The original dispatches through a byte index table at 0x004FA614 (0x147 entries, biased by
-        // M_MAPPER_UNDUGMOAT) into a jump table at 0x004FA5DC, which is what MSVC emits for a dense
-        // switch; Ghidra could not normalise it and rendered the dispatch as a read through an
-        // unnamed pointer array. The case groups below are that byte table, decoded.
-        //
-        // field159_0x5549b8 is written through the global instance, not through this, which is how
-        // the original addresses it.
         switch (commandBuildingType) {
         case OpenSHC::Commands::M_MAPPER_FLETCHER:
         case OpenSHC::Commands::M_MAPPER_HOVEL:
