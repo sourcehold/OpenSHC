@@ -115,13 +115,32 @@ namespace Map {
                     continue;
                 }
                 switch (param_1) {
-                case 0:
-                    return DAT_CurrentUnitSlotID::instance;
                 case 1:
                     if (DAT_GameState::instance.mapAndTime
                             .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]
                         != DAT_GameState::instance.mapAndTime
                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case 0:
+                    return DAT_CurrentUnitSlotID::instance;
+                case 3:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case 4:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0
+                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case 5:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                            == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
@@ -146,31 +165,13 @@ namespace Map {
                         }
                     }
                     break;
-                case 3:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                        return DAT_CurrentUnitSlotID::instance;
-                    }
-                    break;
-                case 4:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0
-                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
-                        return DAT_CurrentUnitSlotID::instance;
-                    }
-                    break;
-                case 5:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                            == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
-                        return DAT_CurrentUnitSlotID::instance;
-                    }
-                    break;
                 case 6:
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_LADDER
                         && this->units[DAT_CurrentUnitSlotID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
+                    break;
                 }
             }
             return 0;
