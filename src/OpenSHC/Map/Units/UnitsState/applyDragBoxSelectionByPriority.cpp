@@ -20,24 +20,6 @@ namespace Map {
         void UnitsState::applyDragBoxSelectionByPriority()
         {
             this->field_0x55c = 0;
-            LONG _boxLeft;
-            LONG _boxRight;
-            if (DAT_MouseState::instance.selectionBox.right < DAT_MouseState::instance.selectionBox.left) {
-                _boxLeft = DAT_MouseState::instance.selectionBox.right;
-                _boxRight = DAT_MouseState::instance.selectionBox.left;
-            } else {
-                _boxLeft = DAT_MouseState::instance.selectionBox.left;
-                _boxRight = DAT_MouseState::instance.selectionBox.right;
-            }
-            LONG _boxTop;
-            LONG _boxBottom;
-            if (DAT_MouseState::instance.selectionBox.bottom < DAT_MouseState::instance.selectionBox.top) {
-                _boxTop = DAT_MouseState::instance.selectionBox.bottom;
-                _boxBottom = DAT_MouseState::instance.selectionBox.top;
-            } else {
-                _boxTop = DAT_MouseState::instance.selectionBox.top;
-                _boxBottom = DAT_MouseState::instance.selectionBox.bottom;
-            }
             int _otherOwnUnits = 0;
             int _catapults = 0;
             int _trebuchets = 0;
@@ -46,9 +28,28 @@ namespace Map {
             int _shields = 0;
             int _mangonels = 0;
             int _ballistas = 0;
+            // counts the fire ballistas first, and is then reused for the selection priority
             int _priority = 0;
             uint _lordUnitID = 0;
-            int _siegeEngineUnits = 0;
+            int _nonLordOwnUnits = 0;
+            LONG _boxLeft;
+            LONG _boxRight;
+            if (DAT_MouseState::instance.selectionBox.left > DAT_MouseState::instance.selectionBox.right) {
+                _boxLeft = DAT_MouseState::instance.selectionBox.right;
+                _boxRight = DAT_MouseState::instance.selectionBox.left;
+            } else {
+                _boxLeft = DAT_MouseState::instance.selectionBox.left;
+                _boxRight = DAT_MouseState::instance.selectionBox.right;
+            }
+            LONG _boxTop;
+            LONG _boxBottom;
+            if (DAT_MouseState::instance.selectionBox.top > DAT_MouseState::instance.selectionBox.bottom) {
+                _boxTop = DAT_MouseState::instance.selectionBox.bottom;
+                _boxBottom = DAT_MouseState::instance.selectionBox.top;
+            } else {
+                _boxTop = DAT_MouseState::instance.selectionBox.top;
+                _boxBottom = DAT_MouseState::instance.selectionBox.bottom;
+            }
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL
@@ -81,44 +82,45 @@ namespace Map {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0) {
-                        this->field_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                    == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_LORD) {
+                        _lordUnitID = DAT_CurrentUnitSlotID::instance;
+                        _otherOwnUnits = _otherOwnUnits + 1;
+                    } else {
+                        _nonLordOwnUnits = _nonLordOwnUnits + 1;
+                        if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_CATAPULT) {
+                            _catapults = _catapults + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_TREBUCHET) {
+                            _trebuchets = _trebuchets + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_TOWER) {
+                            _siegeTowers = _siegeTowers + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
+                            _batteringRams = _batteringRams + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_SHIELD) {
+                            _shields = _shields + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_MANGONEL) {
+                            _mangonels = _mangonels + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_BALLISTA) {
+                            _ballistas = _ballistas + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            == OpenSHC::Map::Units::UT_S_FBALLISTA) {
+                            _priority = _priority + 1;
+                        } else {
+                            _otherOwnUnits = _otherOwnUnits + 1;
+                        }
                     }
-                    continue;
-                }
-                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_LORD) {
-                    _lordUnitID = DAT_CurrentUnitSlotID::instance;
-                    _otherOwnUnits = _otherOwnUnits + 1;
-                    continue;
-                }
-                _siegeEngineUnits = _siegeEngineUnits + 1;
-                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
-                    _catapults = _catapults + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                    == OpenSHC::Map::Units::UT_S_TREBUCHET) {
-                    _trebuchets = _trebuchets + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_TOWER) {
-                    _siegeTowers = _siegeTowers + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                    == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
-                    _batteringRams = _batteringRams + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
-                    _shields = _shields + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                    == OpenSHC::Map::Units::UT_S_MANGONEL) {
-                    _mangonels = _mangonels + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                    == OpenSHC::Map::Units::UT_S_BALLISTA) {
-                    _ballistas = _ballistas + 1;
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                    == OpenSHC::Map::Units::UT_S_FBALLISTA) {
-                    _priority = _priority + 1;
-                } else {
-                    _otherOwnUnits = _otherOwnUnits + 1;
+                } else if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0) {
+                    this->field_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
                 }
             }
-            if (_lordUnitID != 0 && _siegeEngineUnits != 0) {
+            if (_lordUnitID != 0 && _nonLordOwnUnits != 0) {
                 _otherOwnUnits = _otherOwnUnits - 1;
                 _lordUnitID = 0;
             }
