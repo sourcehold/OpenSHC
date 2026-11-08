@@ -22,17 +22,17 @@ namespace Map {
             this->units[unitID].unitType_3 = _previousUnitType;
             this->units[unitID].substate = -1;
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                /* < E_ARCHER (basic worker?) */
-                if ((short)this->units[unitID].unitTypeToChangeInto < 0x16) {
+                if (this->units[unitID].unitTypeToChangeInto < UT_E_ARCHER) {
+                    /* civilians */
                     this->units[unitID].calculatedOwnerPlayerIndex = 0;
-                } else if ((short)this->units[unitID].unitTypeToChangeInto < 0x1f
-                    || (short)this->units[unitID].unitTypeToChangeInto > 0x45) {
+                } else if (this->units[unitID].unitTypeToChangeInto <= UT_E_ENGINEER
+                    || this->units[unitID].unitTypeToChangeInto >= UT_A_ARCHER) {
                     /* is army member */
                     this->units[unitID].calculatedOwnerPlayerIndex = this->units[unitID].owner;
                 } else {
                     this->units[unitID].calculatedOwnerPlayerIndex = 0;
                 }
-                if (this->units[unitID].calculatedOwnerPlayerIndex == 0 && this->units[unitID].owner >= 2) {
+                if (this->units[unitID].calculatedOwnerPlayerIndex == 0 && this->units[unitID].owner > 1) {
                     this->units[unitID].calculatedOwnerPlayerIndex = this->units[unitID].owner;
                 }
             } else {
