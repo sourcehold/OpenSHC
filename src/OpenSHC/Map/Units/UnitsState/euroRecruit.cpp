@@ -29,17 +29,18 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052E960
         int UnitsState::euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int param_4)
         {
-            /* archer is unittype 0x16 */
             this->euroUnitAcquisitionFailReason = 0;
-            int _unitCost = DAT_TroopDefinedData::instance.MarketResourceCycleArray[unitType - 1];
-            int _armourResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x49];
+            int _unitCost = DAT_TroopDefinedData::instance.BarracksUnitCost[unitType - UT_E_ARCHER];
+            int _armourResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][1];
             /* fixme: always 0 strange */
-            int _unknownResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4a];
-            /* bug: if unitType was 0, then it became -0x16, which results in requiring wood
-               for creating this unit. This is nonsensical. It is wood because it will
-               access memory DAT_MELEE_DAMAGE_MATRIX[78][72], which happens to be 2 */
-            int _weaponResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x48];
-            int _horseResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4b];
+            int _unknownResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][2];
+            /* bug: a unitType below UT_E_ARCHER reads in front of the table, unitType 0 requires wood */
+            int _weaponResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][0];
+            int _horseResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][3];
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                 _unitCost = 0;
@@ -49,21 +50,21 @@ namespace Map {
                 /* if we do not have the gold resources */
                 return 0;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_weaponResource] < 1
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_weaponResource] <= 0
                 && _weaponResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
                 this->euroUnitRequiredResource = (ResourceType)_weaponResource;
                 /* we don't own the weapon required */
                 return 0;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_armourResource] < 1
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_armourResource] <= 0
                 && _armourResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
                 this->euroUnitRequiredResource = (ResourceType)_armourResource;
                 /* if we do not own the required armor */
                 return 0;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_unknownResource] < 1
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_unknownResource] <= 0
                 && _unknownResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
                 this->euroUnitRequiredResource = (ResourceType)_unknownResource;
