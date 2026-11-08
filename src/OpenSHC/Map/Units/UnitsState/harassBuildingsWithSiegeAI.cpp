@@ -55,7 +55,7 @@ namespace Map {
                 _siegeKind = 0x25;
                 _isFireBallista = 1;
             }
-            if (_needsStoneAmmunition != 0 && this->units[unitID].stoneAmmunition < 1) {
+            if (_needsStoneAmmunition != 0 && this->units[unitID].stoneAmmunition <= 0) {
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                     && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
                            DAT_GameSynchronyState::ptr)(_playerID)
@@ -76,27 +76,32 @@ namespace Map {
             int _shootAtZ;
             if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
                 if (DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].uid
-                    != this->units[unitID]
+                    == this->units[unitID]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID) {
+                    int _halfBuildingSize
+                        = (DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
+                                  .widthOrHeight
+                              * 8)
+                        / 2;
+                    _shootAtMicroX = _halfBuildingSize
+                        + (short)DAT_BuildingsState::instance
+                                .buildings[this->units[unitID].targetID_OR_targetBuildingID]
+                                .x
+                            * 8;
+                    _shootAtMicroY = _halfBuildingSize
+                        + (short)DAT_BuildingsState::instance
+                                .buildings[this->units[unitID].targetID_OR_targetBuildingID]
+                                .y
+                            * 8;
+                    _shootAtZ = DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
+                                    .terrainHeightUnk;
+                } else {
                     this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     return FALSE;
                 }
-                int _halfBuildingSize
-                    = (DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
-                              .widthOrHeight
-                          * 8)
-                    / 2;
-                _shootAtMicroX = _halfBuildingSize
-                    + (short)DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].x
-                        * 8;
-                _shootAtMicroY = _halfBuildingSize
-                    + (short)DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].y
-                        * 8;
-                _shootAtZ = DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
-                                .terrainHeightUnk;
             } else if (this->units[unitID].field_0x3bc > 0
                 && (DAT_TileMapState::instance.LogicLayer[this->units[unitID].field_0x3bc] & 0x100U) != 0
-                && (int)(_heightAtTarget - _defaultHeightAtTarget) >= 0x1f && _siegeKind != 0x25
+                && (int)(_heightAtTarget - _defaultHeightAtTarget) > 0x1e && _siegeKind != 0x25
                 && DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
                     != DAT_GameState::instance.mapAndTime
                         .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[this->units[unitID].field_0x3bc] & 7)
@@ -121,10 +126,8 @@ namespace Map {
                 int _searchFlags;
                 if (_siegeKind == 0x25) {
                     _searchFlags = 0x34;
-                } else if (_siegeKind == 3) {
-                    _searchFlags = 83;
                 } else {
-                    _searchFlags = 73;
+                    _searchFlags = _siegeKind == 3 ? 83 : 73;
                 }
                 int _attackFacingDirection = this->units[unitID].attackFacingDirection;
                 if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
@@ -140,7 +143,7 @@ namespace Map {
                     _isFireBallista);
                 if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
                     this->units[unitID].attackFacingDirection = this->units[unitID].attackFacingDirection + '\x01';
-                    if (this->units[unitID].attackFacingDirection > '\x0f'
+                    if (this->units[unitID].attackFacingDirection >= 0x10
                         && (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                             || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_FBALLISTA)
                         && (this->units[unitID].aiUnitBehaviourType == 0x15
