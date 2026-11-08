@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BF50
         void BuildingsState::subtractResourcesStoredInBuilding(int buildingID)
         {
@@ -18,18 +16,17 @@ namespace Map {
                 && this->buildings[buildingID].buildingType != BT_ARMORY) {
                 return;
             }
-
-            int playerID = this->buildings[buildingID].owner;
-            for (int i = 1; i < 25; ++i) {
-                if (this->buildings[buildingID].resources[i] != 0) {
-                    DAT_GameState::instance.playerDataArray[playerID].currentResources[i]
-                        -= this->buildings[buildingID].resources[i];
-                    if (DAT_GameState::instance.playerDataArray[playerID].currentResources[i] < 0) {
-                        DAT_GameState::instance.playerDataArray[playerID].currentResources[i] = 0;
+            int const owner = this->buildings[buildingID].owner;
+            for (int resourceType = 1; resourceType < 25; ++resourceType) {
+                int const amount = this->buildings[buildingID].resources[resourceType];
+                if (amount != 0) {
+                    DAT_GameState::instance.playerDataArray[owner].currentResources[resourceType] -= amount;
+                    if (DAT_GameState::instance.playerDataArray[owner].currentResources[resourceType] < 0) {
+                        DAT_GameState::instance.playerDataArray[owner].currentResources[resourceType] = 0;
                     }
                 }
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countPlayerResources, this)(playerID);
+            MACRO_CALL_MEMBER(BuildingsState_Func::countPlayerResources, this)(owner);
         }
 
     }

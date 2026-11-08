@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -23,7 +24,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C810
         BOOLEnum BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
         {
-            switch (this->buildings[buildingID].buildingType) {
+            int const type = this->buildings[buildingID].buildingType;
+            switch (type) {
             case BT_CAMPFIRE:
             case BT_PARADEGROUND:
             case BT_CAMPGROUND:
@@ -31,32 +33,25 @@ namespace Map {
             case BT_PARADEGROUND3:
             case BT_PARADEGROUND4:
             case BT_PARADEGROUND5:
-                // Grounds ignore the cooldown
                 break;
             default:
                 if (this->buildings[buildingID].cooldownTimer != 0) {
-                    return 0;
+                    return FALSE;
                 }
                 break;
             }
             if (this->buildings[buildingID].fireDuration != 0) {
-                return 1;
+                return TRUE;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(
-                    buildingID)
-                == 0) {
-                return 0;
+            if (MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingFlammabilityFactor, this)(buildingID) == 0) {
+                return FALSE;
             }
-            // A player can only burn his own buildings with fire ballistae (flammability factor 4)
-            int owner = this->buildings[buildingID].owner;
-            if (owner == burnerPlayerID
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(
-                       buildingID)
-                    != 4) {
-                return 0;
+            if (this->buildings[buildingID].owner == burnerPlayerID
+                && MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingFlammabilityFactor, this)(buildingID) != 4) {
+                return FALSE;
             }
             if (spareGrounds != 0) {
-                switch (this->buildings[buildingID].buildingType) {
+                switch (type) {
                 case BT_CAMPFIRE:
                 case BT_PARADEGROUND:
                 case BT_CAMPGROUND:
@@ -64,47 +59,43 @@ namespace Map {
                 case BT_PARADEGROUND3:
                 case BT_PARADEGROUND4:
                 case BT_PARADEGROUND5:
-                    return 1;
+                    return TRUE;
                 }
             }
             this->buildings[buildingID].fireDuration = 1;
             this->buildings[buildingID].ifFireThenResponsiblePlayer = burnerPlayerID;
-            if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && (int)DAT_GameCore::instance.mapTimeInTicks
-                        - DAT_GameState::instance.playerDataArray[owner].ignitionTime
+            if (this->buildings[buildingID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                && DAT_GameCore::instance.mapTimeInTicks
+                        - DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
                     > 800) {
-                DAT_GameState::instance.playerDataArray[owner].ignitionTime = DAT_GameCore::instance.mapTimeInTicks;
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                    (char*)SFX_BuildingsAreOnFireSire);
+                DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
+                    = DAT_GameCore::instance.mapTimeInTicks;
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(SFX_BuildingsAreOnFireSire);
             }
-
-            // Set all tiles of the building on fire. The original does not check the tile count before the
-            // first iteration.
-            int x = (short)this->buildings[buildingID].x;
-            int y = (short)this->buildings[buildingID].y;
-            int t = 0;
+            int const x = this->buildings[buildingID].x;
+            int const y = this->buildings[buildingID].y;
+            int i = 0;
             do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
-                    DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
-                int tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TileMapState::instance.buildingY + y]
-                               .addXgetTile
+                MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
+                    i, this->buildings[buildingID].widthOrHeight);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[DAT_TileMapState::instance.buildingY + y]
+                          .addXgetTile
                     + DAT_TileMapState::instance.buildingX + x;
-                if (MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Entities::EntityState_Func::getFireEntityIDAtTile, DAT_EntityState::ptr)(tile)
+                if (MACRO_CALL_MEMBER(Entities::EntityState_Func::getFireEntityIDAtTile, DAT_EntityState::ptr)(tile)
                     == 0) {
-                    uint entityID = MACRO_CALL(OpenSHC::Map::Entities_Func::IgniteFireAtMiniTile_Convenience)(
-                        burnerPlayerID, (DAT_TileMapState::instance.buildingX + x) * 8,
-                        (DAT_TileMapState::instance.buildingY + y) * 8,
+                    int const entityID = MACRO_CALL(Entities_Func::IgniteFireAtMiniTile_Convenience)(burnerPlayerID,
+                        (DAT_TileMapState::instance.buildingX + x) * 8, (DAT_TileMapState::instance.buildingY + y) * 8,
                         DAT_TileMapState::instance.HeightLayer[tile] - 8, 2);
                     if (entityID != 0) {
                         DAT_EntityState::instance.entityArray[entityID].someTracker
                             = -(SEC_RNG::instance.currentNumber2 % 120);
-                        MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+                        MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                     }
                 }
-                ++t;
-            } while (t < DAT_TileMapState::instance.constructionTileCount);
-            return 1;
+                ++i;
+            } while (i < DAT_TileMapState::instance.constructionTileCount);
+            return TRUE;
         }
 
     }

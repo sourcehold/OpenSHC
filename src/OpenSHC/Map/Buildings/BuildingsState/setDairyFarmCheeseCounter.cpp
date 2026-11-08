@@ -7,16 +7,13 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F040
-        void BuildingsState::setDairyFarmCheeseCounter(int param_1)
+        void BuildingsState::setDairyFarmCheeseCounter(int playerID)
         {
-            for (int i = 0; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].owner == param_1
-                    && this->buildings[i].buildingType == BT_DAIRYFARM) {
-                    this->buildings[i].flagonsOfAleOrCheeseOrReleaseDogs = 1600;
+            for (int buildingID = 0; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != 0 && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].buildingType == BT_DAIRYFARM) {
+                    this->buildings[buildingID].flagonsOfAleOrCheeseOrReleaseDogs = 1600;
                 }
             }
         }

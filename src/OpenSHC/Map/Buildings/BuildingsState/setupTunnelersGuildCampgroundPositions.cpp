@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -12,38 +13,38 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E330
-        void BuildingsState::setupTunnelersGuildCampgroundPositions(int param_1)
+        void BuildingsState::setupTunnelersGuildCampgroundPositions(int playerID)
         {
-            int paradeGround = 0;
+            int paradeGroundID = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations), 0,
-                DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations);
-            DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocationsTotal = 0;
-            if (DAT_GameState::instance.playerDataArray[param_1].tunnelersGuild.id <= 0) {
+                sizeof(DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations), 0,
+                DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations);
+            DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocationsTotal = 0;
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_TUNNELERSGUILD]
+                    .id
+                <= 0) {
                 return;
             }
-
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
-                    && this->buildings[i].owner == param_1 && this->buildings[i].buildingType == BT_PARADEGROUND5) {
-                    paradeGround = i;
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != 0
+                    && this->buildings[buildingID].logicalState != BLS_REMOVE
+                    && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].buildingType == BT_PARADEGROUND5) {
+                    paradeGroundID = buildingID;
                 }
             }
-            if (paradeGround == 0) {
+            if (paradeGroundID == 0) {
                 return;
             }
-
-            DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocationsTotal = 25;
-            int x = (short)this->buildings[paradeGround].x;
-            int y = (short)this->buildings[paradeGround].y;
+            DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocationsTotal = 25;
+            int const x = this->buildings[paradeGroundID].x;
+            int const y = this->buildings[paradeGroundID].y;
             for (int i = 0; i < 25; ++i) {
-                DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].x
+                DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].x
                     = DAT_BuildingDefinedData::instance.TunnelersGuildParadegroundLocationOffsets[i].x + x;
-                DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].y
+                DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].y
                     = DAT_BuildingDefinedData::instance.TunnelersGuildParadegroundLocationOffsets[i].y + y;
             }
         }

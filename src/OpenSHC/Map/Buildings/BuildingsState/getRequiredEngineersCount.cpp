@@ -6,8 +6,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00418EC0
         int BuildingsState::getRequiredEngineersCount(int buildingID)
         {

@@ -6,18 +6,17 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00410C40
         BOOLEnum BuildingsState::playerHasBurningBuilding(int playerID)
         {
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].fireDuration != 0 && this->buildings[i].owner == playerID
-                    && this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE) {
-                    return 1;
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].fireDuration != 0 && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].logicalState != 0
+                    && this->buildings[buildingID].logicalState != BLS_REMOVE) {
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

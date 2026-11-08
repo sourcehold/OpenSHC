@@ -1,5 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {

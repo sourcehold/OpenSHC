@@ -11,35 +11,28 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004106D0
-        void BuildingsState::processDamageToUnitsOnBuilding(int buildingID, int damageBonus)
+        void BuildingsState::processDamageToUnitsOnBuilding(int buildingID, int damagePercentage)
         {
-            // Changes the health of all units standing on the building by damageBonus percent of their maximum health
-            // (damageBonus is positive for damage: the original divides by -100, magic 0xAE147AE1 at 0x410761). The
-            // original does not check the tileUnk count before the first iteration.
-            int t = 0;
-            uint size = this->buildings[buildingID].widthOrHeight;
-            int x = (short)this->buildings[buildingID].x;
-            int y = (short)this->buildings[buildingID].y;
+            int i = 0;
+            int const size = this->buildings[buildingID].widthOrHeight;
+            int const x = this->buildings[buildingID].x;
+            int const y = this->buildings[buildingID].y;
             do {
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(t, size);
-                for (int unitID = (short)DAT_TileMapState::instance
+                MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(i, size);
+                for (int unitID = DAT_TileMapState::instance
                          .UnitLayer[DAT_ViewportRenderState::instance
                                         .translationMatrix[y + DAT_TileMapState::instance.buildingY]
                                         .addXgetTile
                              + DAT_TileMapState::instance.buildingX + x];
-                    unitID != 0; unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
-                    int maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
-                    DAT_UnitsState::instance.units[unitID].health += maxHealth * damageBonus / -100;
+                    unitID != 0; unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
+                    int const maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
+                    DAT_UnitsState::instance.units[unitID].health += maxHealth * damagePercentage / -100;
                     if (DAT_UnitsState::instance.units[unitID].health <= 0) {
                         DAT_UnitsState::instance.units[unitID].health = 0;
                         DAT_UnitsState::instance.units[unitID].dying = 1;
                         DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
-                        DAT_UnitsState::instance.units[unitID].state.generic
-                            = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
+                        DAT_UnitsState::instance.units[unitID].state.generic = Units::States::US_STONE_DEATH_01;
                     }
                     int healthPercentage;
                     if (maxHealth == 0) {
@@ -50,8 +43,8 @@ namespace Map {
                     DAT_UnitsState::instance.units[unitID].healthPercentage = healthPercentage;
                     DAT_UnitsState::instance.units[unitID].healthbar = (short)healthPercentage / 10;
                 }
-                ++t;
-            } while (t < DAT_TileMapState::instance.constructionTileCount);
+                ++i;
+            } while (i < DAT_TileMapState::instance.constructionTileCount);
         }
 
     }

@@ -1,5 +1,7 @@
 #include "../AIVState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
@@ -9,7 +11,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004EFB90
     BOOLEnum AIVState::findSpotNearEngineersGuild(int playerID)
     {
-        int const guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int const guildID = DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                .id;
         if (guildID <= 0) {
             return FALSE;
         }

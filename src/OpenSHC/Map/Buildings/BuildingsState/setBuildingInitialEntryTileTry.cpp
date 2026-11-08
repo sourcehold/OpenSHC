@@ -6,29 +6,27 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B5D0
         void BuildingsState::setBuildingInitialEntryTileTry(int buildingID, undefined4 param_2)
         {
-            int sideLength = this->buildings[buildingID].widthOrHeight + param_2 * 2;
-            int direction;
+            uint const rowStride = this->buildings[buildingID].widthOrHeight + param_2 * 2;
+            int entrySide;
             if (this->buildings[buildingID].buildingVariation == 15) {
-                direction = 4;
+                entrySide = 4;
                 if (this->buildings[buildingID].buildingType == BT_TUNNEL
                     || this->buildings[buildingID].buildingType == BT_UNKNOWN4) {
-                    direction = 2;
+                    entrySide = 2;
                 }
                 if (this->buildings[buildingID].buildingType == BT_OXTETHER) {
-                    direction = 4;
+                    entrySide = 4;
                 }
             } else {
-                direction = this->buildings[buildingID].buildingVariation + 4;
-                if (direction >= 8) {
-                    direction -= 8;
-                }
+                entrySide = this->buildings[buildingID].buildingVariation + 4;
             }
-            this->buildings[buildingID].entranceAttemptTileIndex = direction / 2 * sideLength;
+            if (entrySide >= 8) {
+                entrySide -= 8;
+            }
+            this->buildings[buildingID].entranceAttemptTileIndex = entrySide / 2 * rowStride;
             if (this->buildings[buildingID].buildingType == BT_OXTETHER) {
                 this->buildings[buildingID].entranceAttemptTileIndex = 9;
             }

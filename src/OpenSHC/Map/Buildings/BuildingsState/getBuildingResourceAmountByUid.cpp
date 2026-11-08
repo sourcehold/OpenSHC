@@ -5,12 +5,12 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00409330
-        int BuildingsState::getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3)
+        int BuildingsState::getBuildingResourceAmountByUid(int buildingID, int buildingUID, ResourceType resourceType)
         {
-            if (this->buildings[buildingID].uid != param_2) {
+            if (this->buildings[buildingID].uid != buildingUID) {
                 return 0;
             }
-            return this->buildings[buildingID].resources[param_3];
+            return this->buildings[buildingID].resources[resourceType];
         }
 
     }

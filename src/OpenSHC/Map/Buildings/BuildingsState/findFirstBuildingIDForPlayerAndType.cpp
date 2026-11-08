@@ -6,15 +6,15 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040AAD0
         int BuildingsState::findFirstBuildingIDForPlayerAndType(int playerID, BuildingType buildingType)
         {
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
-                    && this->buildings[i].owner == playerID && this->buildings[i].buildingType == buildingType) {
-                    return i;
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != 0
+                    && this->buildings[buildingID].logicalState != BLS_REMOVE
+                    && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].buildingType == buildingType) {
+                    return buildingID;
                 }
             }
             return 0;

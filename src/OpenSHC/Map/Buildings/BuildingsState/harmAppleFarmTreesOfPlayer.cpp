@@ -1,5 +1,4 @@
-#include "../BuildingsState.func.hpp"
-
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -22,7 +21,7 @@ namespace Map {
                     continue;
                 }
                 for (int t = 0; t < 8; ++t) {
-                    int tree = (short)DAT_TileMapState::instance.OrganismLayer[(&this->buildings[i].tileRefs[0])[t]];
+                    int tree = DAT_TileMapState::instance.OrganismLayer[this->buildings[i].tileRefs[t]];
                     DAT_LandscapeState::instance.trees[tree].stage = 4;
                     DAT_LandscapeState::instance.trees[tree].stageTracker = -1200;
                 }

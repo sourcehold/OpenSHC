@@ -6,8 +6,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040C9B0
         void BuildingsState::resourceGainForKillingPitAndPitchDitch(
             BuildingType buildingType, int* ptrRequiredStone, int* ptrRequiredGold)

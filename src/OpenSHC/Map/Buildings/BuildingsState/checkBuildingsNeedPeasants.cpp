@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -14,35 +15,35 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00422B80
         void BuildingsState::checkBuildingsNeedPeasants(int playerID)
         {
-            // Collects the buildings of the player that need workers and can be reached from the campground
-            int campgroundArea
-                = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+            int const campgroundArea
+                = (short)
+                      DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .tileEntry];
             this->DAT_CountOfBuildingsNeedPeasants = 0;
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState == BLS_NORMAL && this->buildings[i].owner == playerID
-                    && this->buildings[i].currentlyNeededEmployeeCount > 0
-                    && this->buildings[i].buildingType != BT_MERCENARYPOST
-                    && this->buildings[i].buildingType != BT_BARRACKS) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingIsAccessible,
-                        DAT_BuildingsState::ptr)(i, 0);
-                    int area = (short)DAT_TileMapState::instance
-                                   .PathConnectionLayer[DAT_ViewportRenderState::instance
-                                                            .translationMatrix[this->buildings[i].buildingEntryY]
-                                                            .addXgetTile
-                                       + this->buildings[i].buildingEntryX];
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState == BLS_NORMAL
+                    && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].currentlyNeededEmployeeCount > 0
+                    && this->buildings[buildingID].buildingType != BT_MERCENARYPOST
+                    && this->buildings[buildingID].buildingType != BT_BARRACKS) {
+                    MACRO_CALL_MEMBER(BuildingsState_Func::buildingIsAccessible, DAT_BuildingsState::ptr)(
+                        buildingID, 0);
+                    int const entryArea
+                        = (short)DAT_TileMapState::instance
+                              .PathConnectionLayer[DAT_ViewportRenderState::instance
+                                                       .translationMatrix[this->buildings[buildingID].buildingEntryY]
+                                                       .addXgetTile
+                                  + this->buildings[buildingID].buildingEntryX];
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
-                            DAT_PathFindingState::ptr)(this->buildings[i].owner, area, campgroundArea, 0)
+                            DAT_PathFindingState::ptr)(this->buildings[buildingID].owner, entryArea, campgroundArea, 0)
                         != 0) {
-                        this->DAT_BuildingIDsNeedPeasantsQueue[this->DAT_CountOfBuildingsNeedPeasants] = i;
-                        ++this->DAT_CountOfBuildingsNeedPeasants;
+                        this->DAT_BuildingIDsNeedPeasantsQueue[this->DAT_CountOfBuildingsNeedPeasants] = buildingID;
+                        this->DAT_CountOfBuildingsNeedPeasants += 1;
                     }
                 }
             }

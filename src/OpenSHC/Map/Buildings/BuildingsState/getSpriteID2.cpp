@@ -9,14 +9,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00409FF0
         int BuildingsState::getSpriteID2(MappersEnum commandBuildingType)
         {
-            BuildingType buildingType = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType, this)(
-                commandBuildingType);
-            if (DAT_BuildingDefinedData::instance.Building_Sprite_ID_Array_2[buildingType] == 0) {
-                return MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID, this)(
-                    commandBuildingType);
+            int const spriteID = DAT_BuildingDefinedData::instance.Building_Sprite_ID_Array_2[MACRO_CALL_MEMBER(
+                BuildingsState_Func::convertCommandBuildingTypeToBuildingType, this)(commandBuildingType)];
+            if (spriteID != 0) {
+                return spriteID;
             }
-            return DAT_BuildingDefinedData::instance.Building_Sprite_ID_Array_2[buildingType];
+            return MACRO_CALL_MEMBER(BuildingsState_Func::getSpriteID, this)(commandBuildingType);
         }
 
     }

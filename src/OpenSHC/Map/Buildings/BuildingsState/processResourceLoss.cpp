@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -14,76 +13,68 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::GameMode2;
-        using OpenSHC::Game::Resources::ResourceType;
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BD70
         void BuildingsState::processResourceLoss(int playerID, ResourceType resourceType, int amount, int param_4)
         {
-            // param_4 != 0 only marks the amount to take (someResourceNumber) without removing it
-            int found = 0;
+            int foundStorage = 0;
             if (resourceType == 0) {
                 return;
             }
-            if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
-                if (param_4 != 0) {
-                    return;
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {
+                if (param_4 == 0) {
+                    DAT_GameState::instance.playerDataArray[playerID].startResources[resourceType] -= amount;
                 }
-                DAT_GameState::instance.playerDataArray[playerID].startResources[resourceType] -= amount;
                 return;
             }
-            BuildingType storageType
-                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingStorageTypeForResourceType,
-                    this)(resourceType);
+            BuildingType const storageType
+                = MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingStorageTypeForResourceType, this)(resourceType);
             if (storageType == BT_MANORHOUSE) {
-                if (param_4 != 0) {
-                    return;
+                if (param_4 == 0) {
+                    DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= amount;
                 }
-                DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= amount;
                 return;
             }
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].buildingType != storageType
-                    || this->buildings[i].owner != playerID || this->buildings[i].resources[resourceType] <= 0) {
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != BLS_NORMAL) {
+                    continue;
+                }
+                if (this->buildings[buildingID].buildingType != storageType
+                    || this->buildings[buildingID].owner != playerID
+                    || this->buildings[buildingID].resources[resourceType] <= 0) {
                     continue;
                 }
                 if (param_4 == 0) {
-                    this->buildings[i].someResourceNumber = 0;
+                    this->buildings[buildingID].someResourceNumber = 0;
                 }
-                int stored = this->buildings[i].resources[resourceType];
-                found = 1;
-                if (stored >= amount) {
+                foundStorage = 1;
+                if (this->buildings[buildingID].resources[resourceType] >= amount) {
                     if (param_4 != 0) {
-                        this->buildings[i].someResourceNumber = amount;
+                        this->buildings[buildingID].someResourceNumber = amount;
                     } else {
-                        this->buildings[i].resources[resourceType] = stored - amount;
+                        this->buildings[buildingID].resources[resourceType] -= amount;
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= amount;
                     }
                     amount = 0;
                 } else {
-                    amount -= stored;
+                    amount -= this->buildings[buildingID].resources[resourceType];
                     if (param_4 != 0) {
-                        this->buildings[i].someResourceNumber = stored;
+                        this->buildings[buildingID].someResourceNumber
+                            = this->buildings[buildingID].resources[resourceType];
                     } else {
-                        this->buildings[i].resources[resourceType] = 0;
-                        DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= stored;
+                        int const left = this->buildings[buildingID].resources[resourceType];
+                        this->buildings[buildingID].resources[resourceType] = 0;
+                        DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] -= left;
                     }
                 }
                 if (param_4 == 0) {
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Buildings::BuildingsState_Func::computeResourceSumForBuilding, this)(i);
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countPlayerResources, this)(
-                        playerID);
+                    MACRO_CALL_MEMBER(BuildingsState_Func::computeResourceSumForBuilding, this)(buildingID);
+                    MACRO_CALL_MEMBER(BuildingsState_Func::countPlayerResources, this)(playerID);
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                    i);
+                MACRO_CALL_MEMBER(TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(buildingID);
             }
-            if (found != 0) {
-                return;
+            if (foundStorage == 0) {
+                DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] = 0;
             }
-            DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] = 0;
         }
 
     }

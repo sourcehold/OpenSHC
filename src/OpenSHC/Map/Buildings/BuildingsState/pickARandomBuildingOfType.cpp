@@ -9,26 +9,30 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040AEF0
         int BuildingsState::pickARandomBuildingOfType(int playerID, BuildingType buildingType)
         {
             int count = 0;
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
-                    && this->buildings[i].buildingType == buildingType && this->buildings[i].owner == playerID) {
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != 0
+                    && this->buildings[buildingID].logicalState != BLS_REMOVE
+                    && this->buildings[buildingID].buildingType == buildingType
+                    && this->buildings[buildingID].owner == playerID) {
                     ++count;
                 }
             }
             if (count > 0) {
-                int pick = SEC_RNG::instance.currentNumber2 % count;
-                MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                    if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
-                        && this->buildings[i].buildingType == buildingType && this->buildings[i].owner == playerID
-                        && --pick < 0) {
-                        return i;
+                int selection = SEC_RNG::instance.currentNumber2 % count;
+                MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+                for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                    if (this->buildings[buildingID].logicalState != 0
+                        && this->buildings[buildingID].logicalState != BLS_REMOVE
+                        && this->buildings[buildingID].buildingType == buildingType
+                        && this->buildings[buildingID].owner == playerID) {
+                        --selection;
+                        if (selection < 0) {
+                            return buildingID;
+                        }
                     }
                 }
             }

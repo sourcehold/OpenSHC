@@ -1,7 +1,6 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -11,30 +10,24 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0041B940
         BOOLEnum BuildingsState::hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type)
         {
-            // Checks whether a building of the player and type touches the given building location
-            int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            int index = 0;
-            for (int tries = 0; tries < tileCount; ++tries) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
-                    size, 1, index, 0);
-                int buildingID
-                    = (short)DAT_TileMapState::instance.BuildingLayer
-                          [DAT_ViewportRenderState::instance.translationMatrix[this->DAT_TempYOffset + y].addXgetTile
-                              + this->DAT_TempXOffset + x];
-                if (buildingID > 0 && this->buildings[buildingID].logicalState == BLS_NORMAL
-                    && this->buildings[buildingID].owner == playerID
-                    && this->buildings[buildingID].buildingType == type) {
+            int const tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
+            int try_ = 0;
+            for (int i = 0; i < tileCount; ++i) {
+                MACRO_CALL_MEMBER(BuildingsState_Func::setupBuildingEntrancesOffset, this)(size, 1, try_, 0);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_TempYOffset + y].addXgetTile
+                    + this->DAT_TempXOffset + x;
+                int const foundID = DAT_TileMapState::instance.BuildingLayer[tile];
+                if (foundID > 0 && this->buildings[foundID].logicalState == BLS_NORMAL
+                    && this->buildings[foundID].owner == playerID && this->buildings[foundID].buildingType == type) {
                     return TRUE;
                 }
-                ++index;
-                if (index >= tileCount) {
-                    index = 0;
+                ++try_;
+                if (try_ >= tileCount) {
+                    try_ = 0;
                 }
             }
             return FALSE;

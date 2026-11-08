@@ -1,5 +1,4 @@
-#include "../BuildingsState.func.hpp"
-
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -20,13 +19,13 @@ namespace Map {
         void BuildingsState::processBuildingIDsNeedPeasantsQueue(undefined4 playerID)
         {
             // Assigns peasants to the free worker slots of the queued buildings
-            for (int i = 0; i < (int)this->DAT_CountOfBuildingsNeedPeasants; ++i) {
-                int buildingID = (short)this->DAT_BuildingIDsNeedPeasantsQueue[i];
+            for (int i = 0; i < this->DAT_CountOfBuildingsNeedPeasants; ++i) {
+                int buildingID = this->DAT_BuildingIDsNeedPeasantsQueue[i];
                 if (this->buildings[buildingID].buildingTypeBasedEmployeeCount == 1) {
+                    UnitType workerType = (UnitType)DAT_BuildingDefinedData::instance
+                                              .WorkerTypeForBuildingType[this->buildings[buildingID].buildingType];
                     int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
-                        DAT_UnitsState::ptr)((UnitType)DAT_BuildingDefinedData::instance
-                                                 .WorkerTypeForBuildingType[this->buildings[buildingID].buildingType],
-                        buildingID, playerID, 0);
+                        DAT_UnitsState::ptr)(workerType, buildingID, playerID, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
                         buildingID, unitID, 0);
                     continue;

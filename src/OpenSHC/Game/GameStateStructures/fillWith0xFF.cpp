@@ -1,11 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
-#include "OpenSHC/Game/GameStateStructures.hpp"
-
 namespace OpenSHC {
 namespace Game {
-
-    using OpenSHC::Game::GameStateStructures;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00459BE0
     void GameStateStructures::fillWith0xFF()

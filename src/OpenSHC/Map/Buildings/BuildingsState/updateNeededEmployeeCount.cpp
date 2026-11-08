@@ -1,7 +1,6 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
@@ -9,32 +8,29 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F620
         void BuildingsState::updateNeededEmployeeCount(int buildingID)
         {
-            short employeeCount = this->buildings[buildingID].buildingTypeBasedEmployeeCount;
-            if (employeeCount <= 0) {
+            if (this->buildings[buildingID].buildingTypeBasedEmployeeCount <= 0) {
                 return;
             }
-            bool sleeping = this->buildings[buildingID].sleeping;
             this->buildings[buildingID].currentlyNeededEmployeeCount = 0;
-            if (sleeping || this->buildings[buildingID].buildingType == BT_MERCENARYPOST
+            if (this->buildings[buildingID].sleeping) {
+                return;
+            }
+            if (this->buildings[buildingID].buildingType == BT_MERCENARYPOST
                 || this->buildings[buildingID].buildingType == BT_BARRACKS) {
                 return;
             }
-
-            int owner = this->buildings[buildingID].owner;
+            int const owner = this->buildings[buildingID].owner;
             this->buildings[buildingID].currentEmployeeCount = 0;
-            for (int i = 0; i < this->buildings[buildingID].buildingTypeBasedEmployeeCount; ++i) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, i)
-                    == FALSE) {
-                    this->buildings[buildingID].workerUID[i] = 0;
-                    this->buildings[buildingID].workerID[i] = 0;
+            for (int workerSlot = 0; workerSlot < this->buildings[buildingID].buildingTypeBasedEmployeeCount;
+                ++workerSlot) {
+                if (MACRO_CALL_MEMBER(BuildingsState_Func::hasWorker, this)(buildingID, workerSlot) == FALSE) {
+                    this->buildings[buildingID].workerUID[workerSlot] = 0;
+                    this->buildings[buildingID].workerID[workerSlot] = 0;
                 } else {
-                    ++this->buildings[buildingID].currentEmployeeCount;
+                    this->buildings[buildingID].currentEmployeeCount += 1;
                 }
             }
             this->buildings[buildingID].currentlyNeededEmployeeCount

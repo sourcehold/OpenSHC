@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,66 +10,61 @@
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
+#include <stdlib.h>
+
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00410440
-        undefined4 BuildingsState::canUnitReachBuildingPerimeter(int param_1, int param_2)
+        BOOLEnum BuildingsState::canUnitReachBuildingPerimeter(int buildingID, int unitID)
         {
-            // param_1 is the building, param_2 the unit
-            if (param_1 == 0 || param_1 >= 2000) {
-                return 0;
+            if (buildingID == 0 || buildingID >= 2000) {
+                return FALSE;
             }
-            int unitArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
-            int buildingHeight
-                = DAT_TileMapState::instance
-                      .DefaultHeightLayer[DAT_BuildingsState::instance.buildings[param_1].currentTilePositionAdjusted];
-            uint size = this->buildings[param_1].widthOrHeight;
-            int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
+            int const unitArea
+                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            int const size = this->buildings[buildingID].widthOrHeight;
+            int const buildingHeight
+                = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
+                        .currentTilePositionAdjusted];
+            int const tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int onlyAssassins = 0;
-            if (MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
+            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
                 != FALSE) {
                 onlyAssassins = 1;
             }
             for (int i = 0; i < tileCount; ++i) {
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Buildings::BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(
-                    size, 1, i, 0);
-                int tile = DAT_ViewportRenderState::instance
-                               .translationMatrix[(short)this->buildings[param_1].y + this->DAT_TempYOffset]
-                               .addXgetTile
-                    + (short)this->buildings[param_1].x + this->DAT_TempXOffset;
-                int tileArea = (short)DAT_TileMapState::instance.PathConnectionLayer[tile];
+                MACRO_CALL_MEMBER(BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(size, 1, i, 0);
+                int const tile = DAT_ViewportRenderState::instance
+                                     .translationMatrix[this->buildings[buildingID].y + this->DAT_TempYOffset]
+                                     .addXgetTile
+                    + this->buildings[buildingID].x + this->DAT_TempXOffset;
+                int const area = (short)DAT_TileMapState::instance.PathConnectionLayer[tile];
                 int tileHeight = DAT_TileMapState::instance.HeightLayer[tile];
                 if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
-                    tileHeight += MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                        DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
+                    tileHeight += MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingHeightForBuildingID,
+                        DAT_BuildingsState::ptr)(DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
-                if (abs(buildingHeight - tileHeight) >= 16 || tileArea == 0) {
+                if (abs(buildingHeight - tileHeight) >= 16 || area == 0) {
                     continue;
                 }
-                BOOLEnum reachable;
+                int reachable;
                 if (onlyAssassins == 1) {
-                    reachable = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanReachUsingCachedAreaLogic,
-                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[param_2].tile, tile);
+                    reachable
+                        = MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::calculateCanReachUsingCachedAreaLogic,
+                            DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].tile, tile);
                 } else {
                     reachable = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[param_2].owner, unitArea, tileArea,
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::canAUnitClimb, DAT_UnitsState::ptr)());
+                        Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, unitArea, area,
+                        MACRO_CALL_MEMBER(Units::UnitsState_Func::canAUnitClimb, DAT_UnitsState::ptr)());
                 }
-                if (reachable != FALSE) {
-                    return 1;
+                if (reachable != 0) {
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

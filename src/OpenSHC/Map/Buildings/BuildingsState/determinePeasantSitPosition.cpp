@@ -11,26 +11,23 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F460
-        undefined4 BuildingsState::determinePeasantSitPosition(int campfireID, int availablePeasants)
+        BOOLEnum BuildingsState::determinePeasantSitPosition(int campfireID, int availablePeasants)
         {
-            // Matching note: The remaining difference is the register choice for this and the building
-            // coordinates.
             if (availablePeasants >= 24) {
                 availablePeasants = 23;
             }
-
-            int buildingX = (short)DAT_BuildingsState::instance.buildings[campfireID].x + 3;
-            int buildingY = (short)DAT_BuildingsState::instance.buildings[campfireID].y + 3;
-            int tileUnk = DAT_BuildingsState::instance.buildings[campfireID].tileRefs[availablePeasants];
-            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
-            int x = tileUnk - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            int const centerX = DAT_BuildingsState::instance.buildings[campfireID].x + 3;
+            int const centerY = DAT_BuildingsState::instance.buildings[campfireID].y + 3;
+            int const tile = DAT_BuildingsState::instance.buildings[campfireID].tileRefs[availablePeasants];
+            int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             this->campfireSpotY = y;
             this->campfireSpotX = x;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
-                DAT_DirectionAlgorithmState::ptr)(x, y, buildingX, buildingY);
+                DAT_DirectionAlgorithmState::ptr)(x, y, centerX, centerY);
             this->campfireSpotOrientation = DAT_DirectionAlgorithmState::instance.orientation;
-            return 1;
+            return TRUE;
         }
 
     }

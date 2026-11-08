@@ -7,25 +7,24 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B540
         void BuildingsState::removeSiegeBuildings(int attackWave, int playerID)
         {
-            // Removes the tunnels and the siege engines of the given attack wave
-            for (int i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].owner == playerID
-                    && this->buildings[i].logicalState != BLS_REMOVE
-                    && (this->buildings[i].buildingType == BT_TUNNEL
-                        || (this->buildings[i].attackWave > 0 && this->buildings[i].attackWave == attackWave
-                            && (this->buildings[i].buildingType == BT_CATAPULT
-                                || this->buildings[i].buildingType == BT_FIREBALLISTA
-                                || this->buildings[i].buildingType == BT_TREBUCHET
-                                || this->buildings[i].buildingType == BT_BATTERINGRAM
-                                || this->buildings[i].buildingType == BT_SIEGETOWER
-                                || this->buildings[i].buildingType == BT_SHIELD)))) {
-                    this->buildings[i].logicalState = BLS_REMOVE;
+            for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState != 0 && this->buildings[buildingID].owner == playerID
+                    && this->buildings[buildingID].logicalState != BLS_REMOVE) {
+                    if (this->buildings[buildingID].buildingType == BT_TUNNEL) {
+                        this->buildings[buildingID].logicalState = BLS_REMOVE;
+                    } else if (this->buildings[buildingID].attackWave > 0
+                        && this->buildings[buildingID].attackWave == attackWave
+                        && (this->buildings[buildingID].buildingType == BT_CATAPULT
+                            || this->buildings[buildingID].buildingType == BT_FIREBALLISTA
+                            || this->buildings[buildingID].buildingType == BT_TREBUCHET
+                            || this->buildings[buildingID].buildingType == BT_BATTERINGRAM
+                            || this->buildings[buildingID].buildingType == BT_SIEGETOWER
+                            || this->buildings[buildingID].buildingType == BT_SHIELD)) {
+                        this->buildings[buildingID].logicalState = BLS_REMOVE;
+                    }
                 }
             }
         }

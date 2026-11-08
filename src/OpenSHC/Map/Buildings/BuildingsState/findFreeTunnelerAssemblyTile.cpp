@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -14,62 +15,66 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E410
-        BOOLEnum BuildingsState::findFreeTunnelerAssemblyTile(int param_1, int param_2)
+        BOOLEnum BuildingsState::findFreeTunnelerAssemblyTile(int playerID, int unitID)
         {
-            // param_1 is the player, param_2 the unit
-            short pointX = DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[2].x;
-            int start = DAT_GameState::instance.playerDataArray[param_1].someCount29;
-            if (pointX != 0) {
-                // Search around the assembly point
-                short pointY = DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[2].y;
-                for (int i = start; i < 49; ++i) {
-                    int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].y + pointY;
-                    int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].x + pointX;
-                    int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int unitOnTile = (short)DAT_TileMapState::instance.UnitLayer[tile];
-                    if ((unitOnTile == 0 || unitOnTile == param_2
-                            || DAT_UnitsState::instance.units[param_2].movementRelated != 8)
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                 calculateCanPlayerUnitsNavigateToAreaFromArea,
-                               DAT_PathFindingState::ptr)(param_1,
-                               (short)DAT_TileMapState::instance
-                                   .PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile],
-                               (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
-                            != 0) {
+            int const index = (int)DAT_GameState::instance.playerDataArray[playerID].someCount29;
+            if (DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[2].x != 0) {
+                int const assemblyX
+                    = DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[2].x;
+                int const assemblyY
+                    = DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[2].y;
+                for (int i = index; i < 49; ++i) {
+                    int const x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].x + assemblyX;
+                    int const y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].y + assemblyY;
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+                    int const occupantID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+                    if (occupantID != 0 && occupantID != unitID
+                        && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
+                        continue;
+                    }
+                    if (MACRO_CALL_MEMBER(
+                            Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                            DAT_PathFindingState::ptr)(playerID,
+                            (short)DAT_TileMapState::instance
+                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                        != 0) {
                         this->DAT_TempXOffset = x;
                         this->DAT_TempYOffset = y;
-                        if (x == DAT_UnitsState::instance.units[param_2].x
-                            && y == DAT_UnitsState::instance.units[param_2].y) {
-                            return 0;
+                        if (x == DAT_UnitsState::instance.units[unitID].x
+                            && y == DAT_UnitsState::instance.units[unitID].y) {
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
-                return 0;
+                return FALSE;
             }
-
-            // Otherwise use the parade ground of the tunnelers guild
-            for (int i = start; i < 25; ++i) {
-                uint x = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].x;
-                uint y = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].y;
-                if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0
-                    && ((short)DAT_TileMapState::instance
-                                .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
-                            == 0
-                        || (short)DAT_TileMapState::instance
-                                .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
-                            == param_2
-                        || DAT_UnitsState::instance.units[param_2].movementRelated != 8)) {
-                    this->DAT_TempXOffset = x;
-                    this->DAT_TempYOffset = y;
-                    if (x == DAT_UnitsState::instance.units[param_2].x
-                        && y == DAT_UnitsState::instance.units[param_2].y) {
-                        return 0;
-                    }
-                    return 1;
+            for (int i = index; i < 25; ++i) {
+                int const x
+                    = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].x;
+                int const y
+                    = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations[i].y;
+                if ((uint)x > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 || (uint)y > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+                    || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * OpenSHC::Map::MC_MAP_XY_LIMIT + x]
+                        == 0) {
+                    continue;
                 }
+                int const occupantID
+                    = (short)DAT_TileMapState::instance
+                          .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
+                if (occupantID != 0 && occupantID != unitID
+                    && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
+                    continue;
+                }
+                this->DAT_TempXOffset = x;
+                this->DAT_TempYOffset = y;
+                if (x == DAT_UnitsState::instance.units[unitID].x && y == DAT_UnitsState::instance.units[unitID].y) {
+                    return FALSE;
+                }
+                return TRUE;
             }
-            return 0;
+            return FALSE;
         }
 
     }

@@ -1,27 +1,22 @@
 #include "../BuildingsState.func.hpp"
 
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
-
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Resources::ResourceType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040BF40
         int BuildingsState::canBuildingStoreTheAmount(int buildingID, ResourceType resourceType, int storageLimit)
         {
-            int stored = this->buildings[buildingID].resources[resourceType];
-            // The building may not store any other resource type
-            for (int i = OpenSHC::Game::Resources::RT_LOGS; i < 25; ++i) {
-                if (this->buildings[buildingID].resources[i] != 0 && i != resourceType) {
+            int const storedAmount = this->buildings[buildingID].resources[resourceType];
+            for (int otherType = 1; otherType < 25; ++otherType) {
+                if (this->buildings[buildingID].resources[otherType] != 0 && otherType != resourceType) {
                     return 0;
                 }
             }
-            if (stored >= storageLimit) {
+            if (storedAmount >= storageLimit) {
                 return 0;
             }
-            return storageLimit - stored;
+            return storageLimit - storedAmount;
         }
 
     }

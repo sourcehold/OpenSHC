@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -13,133 +14,118 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-        using OpenSHC::Map::Buildings::BuildingType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D400
         void BuildingsState::setupMercenaryPostCampgroundPositions(int playerID)
         {
-            // Matching note: The original writes out the three formation parts, reproduced here. The inner loops end on
-            // != 24, which keeps MSVC from unrolling them.
+            int paradeGround1 = 0;
             int paradeGround2 = 0;
             int paradeGround3 = 0;
-            int paradeGround4 = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_GameState::instance.playerDataArray[playerID].structure), 0,
                 &DAT_GameState::instance.playerDataArray[playerID].structure);
             DAT_GameState::instance.playerDataArray[playerID].structureRelated1 = 0;
-            if (DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                    .id
+                <= 0) {
                 return;
             }
-
-            // Find the three parade grounds of the mercenary post
-            int i;
-            for (i = 1; i < this->maxBuildingsCount; ++i) {
-                if (this->buildings[i].logicalState != 0 && this->buildings[i].logicalState != BLS_REMOVE
-                    && this->buildings[i].owner == playerID
-                    && (this->buildings[i].buildingType == BT_PARADEGROUND2
-                        || this->buildings[i].buildingType == BT_PARADEGROUND3
-                        || this->buildings[i].buildingType == BT_PARADEGROUND4)
-                    && DAT_BuildingsState::instance
-                            .buildings[(short)DAT_BuildingsState::instance.buildings[i].quarryStockpileID]
-                            .buildingType
-                        == BT_MERCENARYPOST) {
-                    if (this->buildings[i].buildingType == BT_PARADEGROUND2) {
-                        paradeGround2 = i;
-                    } else if (this->buildings[i].buildingType == BT_PARADEGROUND3) {
-                        paradeGround3 = i;
-                    } else if (this->buildings[i].buildingType == BT_PARADEGROUND4) {
-                        paradeGround4 = i;
-                    }
+            int buildingID;
+            for (buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
+                if (this->buildings[buildingID].logicalState == 0
+                    || this->buildings[buildingID].logicalState == BLS_REMOVE
+                    || this->buildings[buildingID].owner != playerID) {
+                    continue;
+                }
+                if (this->buildings[buildingID].buildingType != BT_PARADEGROUND2
+                    && this->buildings[buildingID].buildingType != BT_PARADEGROUND3
+                    && this->buildings[buildingID].buildingType != BT_PARADEGROUND4) {
+                    continue;
+                }
+                // quarryStockpileID holds the linked building here.
+                if (DAT_BuildingsState::instance
+                        .buildings[DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID]
+                        .buildingType
+                    != BT_MERCENARYPOST) {
+                    continue;
+                }
+                if (this->buildings[buildingID].buildingType == BT_PARADEGROUND2) {
+                    paradeGround1 = buildingID;
+                } else if (this->buildings[buildingID].buildingType == BT_PARADEGROUND3) {
+                    paradeGround2 = buildingID;
+                } else if (this->buildings[buildingID].buildingType == BT_PARADEGROUND4) {
+                    paradeGround3 = buildingID;
                 }
             }
-            if (paradeGround2 == 0 || paradeGround3 == 0 || paradeGround4 == 0) {
+            if (paradeGround1 == 0 || paradeGround2 == 0 || paradeGround3 == 0) {
                 return;
             }
-
-            // Every formation uses 24 positions on each of the three parade grounds. The structure holds 6 formations
-            // of 72 positions each, accessed as a flat array.
             DAT_GameState::instance.playerDataArray[playerID].structureRelated1 = 72;
-            // The original reuses the loop index as the parade ground: an unknown part type keeps the previous value
-            int x;
-            int y;
             for (int formation = 0; formation < 6; ++formation) {
-                int layoutRow = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_1[formation];
-                // The three parts of the formation are written out in the original
-                if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0] == 0) {
-                    i = paradeGround2;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0]
-                    == 1) {
-                    i = paradeGround3;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0]
-                    == 2) {
-                    i = paradeGround4;
+                int const shape = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_1[formation];
+                // The loop index above is reused, so an unknown selector keeps the previous building.
+                int const selector0
+                    = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][0];
+                if (selector0 == 0) {
+                    buildingID = paradeGround1;
+                } else if (selector0 == 1) {
+                    buildingID = paradeGround2;
+                } else if (selector0 == 2) {
+                    buildingID = paradeGround3;
                 }
-                x = (short)this->buildings[i].x;
-                y = (short)this->buildings[i].y;
-                for (int k = 0; k != 24; ++k) {
+                int const x0 = this->buildings[buildingID].x;
+                int const y0 = this->buildings[buildingID].y;
+                for (int i = 0; i < 24; ++i) {
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 0 + k]
-                        .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .x
-                        + x;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][0][i]
+                        .x
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x0;
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 0 + k]
-                        .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .y
-                        + y;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][0][i]
+                        .y
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y0;
                 }
-                if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1] == 0) {
-                    i = paradeGround2;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1]
-                    == 1) {
-                    i = paradeGround3;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1]
-                    == 2) {
-                    i = paradeGround4;
+                int const selector1
+                    = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][1];
+                if (selector1 == 0) {
+                    buildingID = paradeGround1;
+                } else if (selector1 == 1) {
+                    buildingID = paradeGround2;
+                } else if (selector1 == 2) {
+                    buildingID = paradeGround3;
                 }
-                x = (short)this->buildings[i].x;
-                y = (short)this->buildings[i].y;
-                for (int k = 0; k != 24; ++k) {
+                int const x1 = this->buildings[buildingID].x;
+                int const y1 = this->buildings[buildingID].y;
+                for (int i = 0; i < 24; ++i) {
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 24 + k]
-                        .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .x
-                        + x;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][1][i]
+                        .x
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x1;
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 24 + k]
-                        .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .y
-                        + y;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][1][i]
+                        .y
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y1;
                 }
-                if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2] == 0) {
-                    i = paradeGround2;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2]
-                    == 1) {
-                    i = paradeGround3;
-                } else if (DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2]
-                    == 2) {
-                    i = paradeGround4;
+                int const selector2
+                    = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_2[formation][2];
+                if (selector2 == 0) {
+                    buildingID = paradeGround1;
+                } else if (selector2 == 1) {
+                    buildingID = paradeGround2;
+                } else if (selector2 == 2) {
+                    buildingID = paradeGround3;
                 }
-                x = (short)this->buildings[i].x;
-                y = (short)this->buildings[i].y;
-                for (int k = 0; k != 24; ++k) {
+                int const x2 = this->buildings[buildingID].x;
+                int const y2 = this->buildings[buildingID].y;
+                for (int i = 0; i < 24; ++i) {
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 48 + k]
-                        .x = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .x
-                        + x;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][2][i]
+                        .x
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].x + x2;
                     DAT_GameState::instance.playerDataArray[playerID]
-                        .structure.mercenaryOutpostCampgroundLocations[formation * 72 + 48 + k]
-                        .y = DAT_BuildingDefinedData::instance
-                                 .PlayerDataUnknownStructureRelatedArray_3[layoutRow][k]
-                                 .y
-                        + y;
+                        .structure.mercenaryOutpostCampgroundLocations[formation][2][i]
+                        .y
+                        = DAT_BuildingDefinedData::instance.PlayerDataUnknownStructureRelatedArray_3[shape][i].y + y2;
                 }
             }
         }

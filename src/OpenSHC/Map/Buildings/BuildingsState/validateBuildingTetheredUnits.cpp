@@ -9,17 +9,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004173D0
         void BuildingsState::validateBuildingTetheredUnits(int buildingID)
         {
-            // Counts the valid tethered units and clears the slots of units that do not exist anymore
             this->buildings[buildingID].randomOutpostField = 0;
-            for (int i = 0; i < 4; ++i) {
-                int unitID = (&this->buildings[buildingID].insideUnitID[0])[i];
+            for (int slot = 0; slot < 4; ++slot) {
+                int const unitID = this->buildings[buildingID].insideUnitID[slot];
                 if (unitID != 0) {
-                    if ((&this->buildings[buildingID].insideUnitUID[0])[i]
-                        == DAT_UnitsState::instance.units[unitID].uid) {
+                    if (this->buildings[buildingID].insideUnitUID[slot] == DAT_UnitsState::instance.units[unitID].uid) {
                         ++this->buildings[buildingID].randomOutpostField;
                     } else {
-                        (&this->buildings[buildingID].insideUnitID[0])[i] = 0;
-                        (&this->buildings[buildingID].insideUnitUID[0])[i] = 0;
+                        this->buildings[buildingID].insideUnitID[slot] = 0;
+                        this->buildings[buildingID].insideUnitUID[slot] = 0;
                     }
                 }
             }

@@ -15,49 +15,47 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::DE::SHCDE::eSFX;
-        using OpenSHC::Map::Entities::EntityType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00410800
         void BuildingsState::spawnRandomFireEffectOnBuilding(int buildingID, undefined4 playerID)
         {
             if (this->buildings[buildingID].fireDuration < 400) {
                 return;
             }
-
-            // Smaller buildings spawn fire effects more often
-            int tick;
-            int interval;
-            if ((int)this->buildings[buildingID].widthOrHeight <= 3) {
-                interval = 24 - this->buildings[buildingID].widthOrHeight * 5;
-                tick = this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration;
-            } else {
-                tick = this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration;
-                int base = 8;
-                if ((int)this->buildings[buildingID].widthOrHeight > 6) {
-                    base = 16;
+            int const size = this->buildings[buildingID].widthOrHeight;
+            if (size <= 3) {
+                if ((this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration)
+                        % (24 - size * 5)
+                    != 0) {
+                    return;
                 }
-                interval = (base - this->buildings[buildingID].widthOrHeight) * 5;
+            } else if (size <= 6) {
+                if ((this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration)
+                        % ((8 - size) * 5)
+                    != 0) {
+                    return;
+                }
+            } else {
+                if ((this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration)
+                        % ((16 - size) * 5)
+                    != 0) {
+                    return;
+                }
             }
-            if (tick % interval != 0) {
-                return;
-            }
-
-            int microX = (SEC_RNG::instance.currentNumber2 % (int)this->buildings[buildingID].widthOrHeight
-                             + (short)this->buildings[buildingID].x)
+            int const height
+                = DAT_TileMapState::instance.HeightLayer[this->buildings[buildingID].currentTilePositionAdjusted];
+            int const x = (SEC_RNG::instance.currentNumber2 % (int)this->buildings[buildingID].widthOrHeight
+                              + this->buildings[buildingID].x)
                 * 8;
-            int microY = ((SEC_RNG::instance.currentNumber2 >> 8) % (int)this->buildings[buildingID].widthOrHeight
-                             + (short)this->buildings[buildingID].y)
+            int const y = ((SEC_RNG::instance.currentNumber2 >> 8) % (int)this->buildings[buildingID].widthOrHeight
+                              + this->buildings[buildingID].y)
                 * 8;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(5,
-                playerID, 0, microX, microY,
-                DAT_TileMapState::instance.HeightLayer[this->buildings[buildingID].currentTilePositionAdjusted], microX,
-                microY, DAT_TileMapState::instance.HeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                (EntityType)0x20, 0);
-            MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
+            // EntityType has no constant for 32.
+            MACRO_CALL_MEMBER(Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(
+                5, playerID, 0, x, y, height, x, y, height, (Entities::EntityType)32, 0);
+            MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
             if ((SEC_RNG::instance.currentNumber1 & 1) != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    microX / 8, microY / 8, OpenSHC::DE::SHCDE::FX_FIRE_POP);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    x / 8, y / 8, DE::SHCDE::FX_FIRE_POP);
             }
         }
 

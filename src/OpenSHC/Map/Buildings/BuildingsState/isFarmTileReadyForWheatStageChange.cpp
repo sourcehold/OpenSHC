@@ -8,32 +8,36 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040CB90
-        BOOLEnum BuildingsState::isFarmTileReadyForWheatStageChange(int param_1)
+        BOOLEnum BuildingsState::isFarmTileReadyForWheatStageChange(int buildingID)
         {
-            // The damage layer holds the growth stage of the wheat on the field tiles
-            for (int i = 0; i < 36; ++i) {
-                int tile = (&this->buildings[param_1].tileRefs[0])[i];
-                int stage = (char)DAT_TileMapState::instance.DamageLayer[tile];
+            for (int tileIndex = 0; tileIndex < 36; ++tileIndex) {
+                int const tile = this->buildings[buildingID].tileRefs[tileIndex];
+                int const damage = (char)DAT_TileMapState::instance.DamageLayer[tile];
                 DAT_BuildingsState::instance.farmerDestinationTile = tile;
-                if (*(short*)&this->buildings[param_1].farmGrowState == 6) {
-                    if (stage >= 11 && stage < 101) {
-                        return 1;
+                if (this->buildings[buildingID].farmGrowState == 6) {
+                    if (damage >= 11 && damage < 101) {
+                        return TRUE;
                     }
-                } else if (*(short*)&this->buildings[param_1].farmGrowState == 8) {
-                    if (stage == 121) {
-                        return 1;
+                } else if (this->buildings[buildingID].farmGrowState == 8) {
+                    if (damage == 121) {
+                        return TRUE;
                     }
-                } else if (*(short*)&this->buildings[param_1].farmGrowState == 3) {
-                    if (stage == 0 || stage == 120 || (stage >= 101 && stage < 120)) {
-                        return 1;
+                } else if (this->buildings[buildingID].farmGrowState == 3) {
+                    if (damage == 0 || damage == 120) {
+                        return TRUE;
                     }
-                } else if (*(short*)&this->buildings[param_1].farmGrowState == 5) {
-                    if (stage >= 1 && stage < 2) {
-                        return 1;
+                    if (damage >= 101 && damage < 120) {
+                        return TRUE;
                     }
+                } else if (this->buildings[buildingID].farmGrowState == 5) {
+                    if (damage >= 1 && damage < 2) {
+                        return TRUE;
+                    }
+                } else {
+                    return FALSE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

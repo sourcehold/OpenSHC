@@ -12,9 +12,9 @@ namespace Map {
         void BuildingsState::clearBuildings()
         {
             this->structCount = 0;
-            for (int i = 0; i < 2000; ++i) {
+            for (int buildingID = 0; buildingID < 2000; ++buildingID) {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(Building), 0, &this->buildings[i]);
+                    sizeof(Building), 0, &this->buildings[buildingID]);
             }
             this->maxBuildingsCount = 2000;
         }

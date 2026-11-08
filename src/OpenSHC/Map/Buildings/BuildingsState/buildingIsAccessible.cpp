@@ -1,7 +1,8 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -14,36 +15,32 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00421A40
         int BuildingsState::buildingIsAccessible(int buildingID, int amountUnk)
         {
-            // Returns 2 if a gate is locked, 1 if accessible and 0 otherwise
             if (buildingID <= 0) {
                 return 0;
             }
-
-            int playerID = this->buildings[buildingID].owner;
-            int campgroundArea
+            int const campgroundArea
                 = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
-            int buildingHeight
-                = DAT_TileMapState::instance.HeightLayer[DAT_ViewportRenderState::instance
-                                                             .translationMatrix[(short)this->buildings[buildingID].y]
-                                                             .addXgetTile
-                    + (short)this->buildings[buildingID].x];
+                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner]
+                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                              .tileEntry];
+            int const buildingHeight
+                = DAT_TileMapState::instance.HeightLayer
+                      [DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y].addXgetTile
+                          + this->buildings[buildingID].x];
             int blocked = 0;
             if (this->buildings[buildingID].buildingEntryX == 0 && this->buildings[buildingID].buildingEntryY == 0) {
                 blocked = 1;
             } else {
-                int entryTile = this->buildings[buildingID].buildingEntryX
-                    + DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].buildingEntryY]
-                          .addXgetTile;
+                int const entryTile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].buildingEntryY]
+                          .addXgetTile
+                    + this->buildings[buildingID].buildingEntryX;
                 int entryHeight = DAT_TileMapState::instance.HeightLayer[entryTile];
                 if (DAT_TileMapState::instance.BuildingLayer[entryTile] != 0) {
-                    entryHeight += MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                    entryHeight += MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[entryTile]);
                 }
                 if (buildingHeight > entryHeight + 16) {
@@ -52,38 +49,40 @@ namespace Map {
                 if (entryHeight > buildingHeight + 16) {
                     blocked = 1;
                 }
-                if ((DAT_TileMapState::instance.LogicLayer[entryTile] & 0x50501481) != 0) {
+                if ((DAT_TileMapState::instance.LogicLayer[entryTile]
+                        & (LogicHelpers::L_SEA | LogicHelpers::L_ROCKY | LogicHelpers::L_BUILDING | LogicHelpers::L_TREE
+                            | LogicHelpers::L_RIVER | LogicHelpers::L_CRENEL_VARIATIONUnk
+                            | LogicHelpers::L_KEEP_NON_MANOR_HOUSE | LogicHelpers::L_MOAT))
+                    != 0) {
                     blocked = 1;
                 }
-                if (campgroundArea != 0
-                    && (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile] != campgroundArea
-                    && DAT_BuildingDefinedData::instance
-                            .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
-                        == FALSE
-                    && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                             calculateCanPlayerUnitsNavigateToAreaFromArea,
-                           DAT_PathFindingState::ptr)(playerID, campgroundArea,
-                           (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile], 0)
-                        == 0) {
-                    blocked = 1;
+                if (campgroundArea != 0) {
+                    int const entryArea = (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile];
+                    if (entryArea != campgroundArea
+                        && DAT_BuildingDefinedData::instance
+                                .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
+                            == 0
+                        && MACRO_CALL_MEMBER(
+                               Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                               DAT_PathFindingState::ptr)(
+                               this->buildings[buildingID].owner, campgroundArea, entryArea, 0)
+                            == 0) {
+                        blocked = 1;
+                    }
                 }
             }
-
-            int result = 1;
             this->buildings[buildingID].hasAccessToKeep = 1;
-            if (blocked != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
-                    buildingID, 0);
-                int found = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea, this)(
-                    buildingID, amountUnk, FALSE);
-                if (found == 0) {
-                    this->buildings[buildingID].hasAccessToKeep = 0;
-                    return 0;
-                }
-                result = found == 2 ? 2 : 1;
+            if (blocked == 0) {
+                return 1;
             }
-            return result;
+            MACRO_CALL_MEMBER(BuildingsState_Func::setBuildingInitialEntryTileTry, this)(buildingID, 0);
+            int const result = MACRO_CALL_MEMBER(BuildingsState_Func::determineBuildingEntranceFromKeepArea, this)(
+                buildingID, amountUnk, FALSE);
+            if (result == 0) {
+                this->buildings[buildingID].hasAccessToKeep = 0;
+                return 0;
+            }
+            return result == 2 ? 2 : 1;
         }
 
     }

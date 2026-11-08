@@ -11,6 +11,7 @@
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/UI/Helpers.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -22,6 +23,7 @@ namespace UI {
         using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::Units::EuroRecruitableState;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
@@ -64,7 +66,7 @@ namespace UI {
             &OpenSHC::UI::Helpers::SetTribesPatrolButtonPressed)
         SetTribesPatrolButtonPressed;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x004347F0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x004347F0,
             &OpenSHC::UI::Helpers::SomeUnitAndViewportCheck)
         SomeUnitAndViewportCheck;
 
@@ -104,8 +106,8 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x00464DA0, &OpenSHC::UI::Helpers::IsEuroUnitRecruitableUnk)
         IsEuroUnitRecruitableUnk;
 
-        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00464E80,
-            &OpenSHC::UI::Helpers::GetUnitRecruitPermission)
+        MACRO_FUNCTION_RESOLVER(EuroRecruitableState(__cdecl*)(UnitType unitType), false,
+            Address::SHC_3BB0A8C1_0x00464E80, &OpenSHC::UI::Helpers::GetUnitRecruitPermission)
         GetUnitRecruitPermission;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00465040,
@@ -120,7 +122,7 @@ namespace UI {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004650A0, &OpenSHC::UI::Helpers::CheckIfEnoughGoldForMonk)
         CheckIfEnoughGoldForMonk;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004650C0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(UnitType param_1), false, Address::SHC_3BB0A8C1_0x004650C0,
             &OpenSHC::UI::Helpers::CheckGoldResource)
         CheckGoldResource;
 
@@ -136,7 +138,7 @@ namespace UI {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00466E10, &OpenSHC::UI::Helpers::DisableMercPostPortraits)
         DisableMercPostPortraits;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90,
             &OpenSHC::UI::Helpers::TicksSinceCounterStart)
         TicksSinceCounterStart;
 
@@ -233,7 +235,7 @@ namespace UI {
         BuildIntroLogoSequence;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::Helpers::PrepareHistoryBook)
         PrepareHistoryBook;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
@@ -241,7 +243,7 @@ namespace UI {
             false, Address::SHC_3BB0A8C1_0x004DB300, &OpenSHC::UI::Helpers::TrimStoredMenuString)
         TrimStoredMenuString;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DC140,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DC140,
             &OpenSHC::UI::Helpers::FindCampaignMapHotspotAtMouse)
         FindCampaignMapHotspotAtMouse;
 

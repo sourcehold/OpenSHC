@@ -10,25 +10,24 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B720
         BOOLEnum BuildingsState::hasBuildingEntranceFlagForOrientation(int buildingID)
         {
-            // field162_0x280 holds one entrance flag per map orientation
             if (DAT_TileMapState::instance.mapOrientation == 0) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[1] != 0) {
-                    return 1;
+                if (DAT_BuildingsState::instance.buildings[buildingID].field_0x280[1]) {
+                    return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[2] != 0) {
-                    return 1;
+                if (DAT_BuildingsState::instance.buildings[buildingID].field_0x280[2]) {
+                    return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[3] != 0) {
-                    return 1;
+                if (DAT_BuildingsState::instance.buildings[buildingID].field_0x280[3]) {
+                    return TRUE;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].field162_0x280[0] != 0) {
-                    return 1;
+                if (DAT_BuildingsState::instance.buildings[buildingID].field_0x280[0]) {
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

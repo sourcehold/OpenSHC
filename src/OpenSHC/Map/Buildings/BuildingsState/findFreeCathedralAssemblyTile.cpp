@@ -14,38 +14,42 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E610
-        undefined4 BuildingsState::findFreeCathedralAssemblyTile(int param_1, int param_2)
+        BOOLEnum BuildingsState::findFreeCathedralAssemblyTile(int playerID, int unitID)
         {
-            // param_1 is the player, param_2 the unit
-            if (DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].x != 0) {
-                int pointX = (short)DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].x;
-                int pointY = (short)DAT_GameState::instance.playerDataArray[param_1].specialBuildingAssemblyPoints[3].y;
-                for (int i = (short)DAT_GameState::instance.playerDataArray[param_1].someCount30; i < 49; ++i) {
-                    // Note: the original always uses the same search offset instead of the i-th one
-                    int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].y + pointY;
-                    int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].x + pointX;
-                    int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int unitOnTile = (short)DAT_TileMapState::instance.UnitLayer[tile];
-                    if ((unitOnTile == 0 || unitOnTile == param_2
-                            || DAT_UnitsState::instance.units[param_2].movementRelated != 8)
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                 calculateCanPlayerUnitsNavigateToAreaFromArea,
-                               DAT_PathFindingState::ptr)(param_1,
-                               (short)DAT_TileMapState::instance
-                                   .PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile],
-                               (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
-                            != 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[3].x != 0) {
+                int const assemblyX
+                    = DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[3].x;
+                int const assemblyY
+                    = DAT_GameState::instance.playerDataArray[playerID].specialBuildingAssemblyPoints[3].y;
+                for (int i = (short)DAT_GameState::instance.playerDataArray[playerID].someCount30; i < 49; ++i) {
+                    // The original reads the fixed offset [3] on every iteration instead of offset [i].
+                    int const x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].x + assemblyX;
+                    int const y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[3].y + assemblyY;
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+                    int const occupantID = DAT_TileMapState::instance.UnitLayer[tile];
+                    if (occupantID != 0 && occupantID != unitID
+                        && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
+                        continue;
+                    }
+                    if (MACRO_CALL_MEMBER(
+                            Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                            DAT_PathFindingState::ptr)(playerID,
+                            (short)DAT_TileMapState::instance
+                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                        != 0) {
                         this->DAT_TempXOffset = x;
                         this->DAT_TempYOffset = y;
-                        if (x == DAT_UnitsState::instance.units[param_2].x
-                            && y == DAT_UnitsState::instance.units[param_2].y) {
-                            return 0;
+                        if (x == DAT_UnitsState::instance.units[unitID].x
+                            && y == DAT_UnitsState::instance.units[unitID].y) {
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
+                return FALSE;
             }
-            return 0;
+            return FALSE;
         }
 
     }

@@ -10,30 +10,25 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Map::Buildings::BuildingLogicalState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BA00
         int BuildingsState::findParticularBuilding(
-            int param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID)
+            int playerID, int x, int y, int buildingSize, BuildingType buildingType, int buildingID)
         {
-            // Finds another building of the type that touches the given building location
-            int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[buildingSize];
-            int index = 0;
-            for (int tries = 0; tries < tileCount; ++tries) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
-                    buildingSize, 1, index, 0);
-                int neighbourID
-                    = (short)DAT_TileMapState::instance.BuildingLayer
-                          [DAT_ViewportRenderState::instance.translationMatrix[this->DAT_TempYOffset + y].addXgetTile
-                              + this->DAT_TempXOffset + x];
-                if (neighbourID > 0 && buildingID != neighbourID
-                    && this->buildings[neighbourID].logicalState == BLS_NORMAL
-                    && this->buildings[neighbourID].buildingType == buildingType) {
-                    return neighbourID;
+            int const tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[buildingSize];
+            int try_ = 0;
+            for (int i = 0; i < tileCount; ++i) {
+                MACRO_CALL_MEMBER(BuildingsState_Func::setupBuildingEntrancesOffset, this)(buildingSize, 1, try_, 0);
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_TempYOffset + y].addXgetTile
+                    + this->DAT_TempXOffset + x;
+                int const foundID = DAT_TileMapState::instance.BuildingLayer[tile];
+                if (foundID > 0 && buildingID != foundID && this->buildings[foundID].logicalState == BLS_NORMAL
+                    && this->buildings[foundID].buildingType == buildingType) {
+                    return foundID;
                 }
-                ++index;
-                if (index >= tileCount) {
-                    index = 0;
+                ++try_;
+                if (try_ >= tileCount) {
+                    try_ = 0;
                 }
             }
             return 0;

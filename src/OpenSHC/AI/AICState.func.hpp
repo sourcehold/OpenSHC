@@ -460,7 +460,7 @@ namespace AI {
         clearOutdatedAITribes;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CF920, &AICState::giveSomeRaidCommand)
+            BOOLEnum (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CF920, &AICState::giveSomeRaidCommand)
         giveSomeRaidCommand;
 
         MACRO_FUNCTION_RESOLVER(

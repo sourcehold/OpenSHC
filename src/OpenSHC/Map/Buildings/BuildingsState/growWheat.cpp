@@ -1,4 +1,4 @@
-#include "../BuildingsState.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -23,7 +23,7 @@ namespace Map {
             int stage120 = 0;
             int stage121 = 0;
             for (int i = 0; i < 36; ++i) {
-                int tile = (&this->buildings[buildingID].tileRefs[0])[i];
+                int tile = this->buildings[buildingID].tileRefs[i];
                 if ((char)DAT_TileMapState::instance.DamageLayer[tile] >= 2
                     && (char)DAT_TileMapState::instance.DamageLayer[tile] < 103) {
                     ++DAT_TileMapState::instance.DamageLayer[tile];
@@ -55,34 +55,28 @@ namespace Map {
             }
 
             if (stage121 >= 4) {
-                *(short*)&this->buildings[buildingID].farmGrowState = 8;
+                this->buildings[buildingID].farmGrowState = 8;
                 return;
             }
             if (growing >= 12 || (growing != 0 && stage120 != 0)) {
-                *(short*)&this->buildings[buildingID].farmGrowState = 6;
+                this->buildings[buildingID].farmGrowState = 6;
                 return;
             }
             if (stage121 != 0) {
-                *(short*)&this->buildings[buildingID].farmGrowState = 8;
+                this->buildings[buildingID].farmGrowState = 8;
                 return;
             }
-            if (empty == 0) {
-                if (stage120 != 0) {
-                    *(short*)&this->buildings[buildingID].farmGrowState = 3;
-                    return;
-                }
-                if (stage102 != 0) {
-                    *(short*)&this->buildings[buildingID].farmGrowState = 3;
-                    return;
-                }
-                if (stage103To119 != 0) {
-                    *(short*)&this->buildings[buildingID].farmGrowState = 3;
-                    return;
-                }
-                *(short*)&this->buildings[buildingID].farmGrowState = seeded != 0 ? 5 : 2;
-                return;
+            if (empty != 0) {
+                this->buildings[buildingID].farmGrowState = 3;
+            } else if (stage120 != 0) {
+                this->buildings[buildingID].farmGrowState = 3;
+            } else if (stage102 != 0) {
+                this->buildings[buildingID].farmGrowState = 3;
+            } else if (stage103To119 != 0) {
+                this->buildings[buildingID].farmGrowState = 3;
+            } else {
+                this->buildings[buildingID].farmGrowState = seeded != 0 ? 5 : 2;
             }
-            *(short*)&this->buildings[buildingID].farmGrowState = 3;
         }
 
     }

@@ -15,17 +15,17 @@ namespace Map {
                     this->buildings[buildingID].tickRelatedVisuallyActiveIndicator = 1;
                     return;
                 }
-                this->buildings[buildingID].tickRelatedVisuallyActiveIndicator += this->isFirstTickInLoop;
+                this->buildings[buildingID].tickRelatedVisuallyActiveIndicator
+                    = this->buildings[buildingID].tickRelatedVisuallyActiveIndicator + this->isFirstTickInLoop;
                 return;
             }
-
-            if (this->buildings[buildingID].tickRelatedVisuallyActiveIndicator <= 0) {
-                return;
-            }
-            if (this->buildings[buildingID].tickRelatedVisuallyActiveIndicator == 5) {
-                this->buildings[buildingID].tickRelatedVisuallyActiveIndicator = 4;
-            } else {
-                this->buildings[buildingID].tickRelatedVisuallyActiveIndicator -= this->isFirstTickInLoop;
+            if (this->buildings[buildingID].tickRelatedVisuallyActiveIndicator > 0) {
+                if (this->buildings[buildingID].tickRelatedVisuallyActiveIndicator == 5) {
+                    this->buildings[buildingID].tickRelatedVisuallyActiveIndicator = 4;
+                } else {
+                    this->buildings[buildingID].tickRelatedVisuallyActiveIndicator
+                        = this->buildings[buildingID].tickRelatedVisuallyActiveIndicator - this->isFirstTickInLoop;
+                }
             }
             this->buildings[buildingID].buildingIsVisuallyActive
                 = this->buildings[buildingID].tickRelatedVisuallyActiveIndicator != 0;

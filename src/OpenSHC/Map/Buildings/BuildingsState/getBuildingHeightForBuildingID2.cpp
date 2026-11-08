@@ -1,5 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
@@ -29,8 +31,9 @@ namespace Map {
             case BT_GATEHOUSELARGE:
             case BT_GATEHOUSESMALL:
                 return 108;
+            default:
+                return 0;
             }
-            return 0;
         }
 
     }
