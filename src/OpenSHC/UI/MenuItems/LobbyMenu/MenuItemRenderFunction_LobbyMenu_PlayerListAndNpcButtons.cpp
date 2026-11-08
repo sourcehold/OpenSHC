@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
@@ -255,16 +256,16 @@ namespace UI {
                 }
                 DAT_CurrentButtonGmDataIndex::instance = 627;
                 switch (DAT_GameSynchronyState::instance.currentAIArray[iVar3]) {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 8:
-                case 9:
-                case 10:
-                case 14:
-                case 15:
-                case 16:
+                case OpenSHC::AI::AITA_RAT:
+                case OpenSHC::AI::AITA_SNAKE:
+                case OpenSHC::AI::AITA_PIG:
+                case OpenSHC::AI::AITA_WOLF:
+                case OpenSHC::AI::AITA_RICHARD:
+                case OpenSHC::AI::AITA_FREDERICK:
+                case OpenSHC::AI::AITA_PHILIPP:
+                case OpenSHC::AI::AITA_SHERIFF:
+                case OpenSHC::AI::AITA_MARSHAL:
+                case OpenSHC::AI::AITA_ABBOT:
                     DAT_CurrentButtonGmDataIndex::instance = 626;
                 }
                 DAT_ButtonX::instance -= 6;

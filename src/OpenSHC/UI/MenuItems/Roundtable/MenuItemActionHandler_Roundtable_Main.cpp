@@ -5,6 +5,7 @@
 #include "OpenSHC/Input/MouseState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -70,7 +71,7 @@ namespace UI {
                         }
                     }
                     if (2 < iVar4) {
-                        if ((DAT_GameSynchronyState::instance.currentAIArray[playerID_01] == 1)
+                        if ((DAT_GameSynchronyState::instance.currentAIArray[playerID_01] == OpenSHC::AI::AITA_RAT)
                             && (DAT_00df4240::instance == 0)) {
                             if (DAT_GameCore::instance.genieVoiceActive) {
                                 // "Not the rodent"
@@ -80,7 +81,7 @@ namespace UI {
                             }
                             DAT_00df4240::instance = 1;
                         }
-                        if ((DAT_GameSynchronyState::instance.currentAIArray[playerID_01] == 7)
+                        if ((DAT_GameSynchronyState::instance.currentAIArray[playerID_01] == OpenSHC::AI::AITA_SULTAN)
                             && (DAT_00df4298::instance == 0)) {
                             if (DAT_GameCore::instance.genieVoiceActive) {
                                 // "Oh no"

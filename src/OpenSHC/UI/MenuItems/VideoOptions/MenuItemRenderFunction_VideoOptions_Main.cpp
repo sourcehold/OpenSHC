@@ -8,6 +8,7 @@
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
+#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/string-macros.hpp"
 
@@ -74,7 +75,7 @@ namespace UI {
                             return;
                         }
                         switch (DAT_MenuTextInputState::instance.menuCurrentlySelectedResolution) {
-                        case 1:
+                        case OpenSHC::Rendering::SRE_800x600:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "800x600"
                                 DAT_TextManagerObject::ptr)(S_800X600_005A7598,
@@ -82,7 +83,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 2:
+                        case OpenSHC::Rendering::SRE_1024x768:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1024x768"
                                 DAT_TextManagerObject::ptr)(S_1024X768_005A7580,
@@ -90,7 +91,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 3:
+                        case OpenSHC::Rendering::SRE_1280x720:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1280x720"
                                 DAT_TextManagerObject::ptr)(S_1280X720_005A755C,
@@ -98,7 +99,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 4:
+                        case OpenSHC::Rendering::SRE_1280x1024:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1280x1024"
                                 DAT_TextManagerObject::ptr)(S_1280X1024_005A7574,
@@ -106,7 +107,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 5:
+                        case OpenSHC::Rendering::SRE_1366x768:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1366x768"
                                 DAT_TextManagerObject::ptr)(S_1366X768_005A7514,
@@ -114,7 +115,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 6:
+                        case OpenSHC::Rendering::SRE_1440x900:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1440x900"
                                 DAT_TextManagerObject::ptr)(S_1440X900_005A7550,
@@ -122,7 +123,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 7:
+                        case OpenSHC::Rendering::SRE_1600x900:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1600x900"
                                 DAT_TextManagerObject::ptr)(S_1600X900_005A74F0,
@@ -130,7 +131,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 8:
+                        case OpenSHC::Rendering::SRE_1600x1200:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1600x1200"
                                 DAT_TextManagerObject::ptr)(S_1600X1200_005A7568,
@@ -138,7 +139,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 9:
+                        case OpenSHC::Rendering::SRE_1680x1050:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1680x1050"
                                 DAT_TextManagerObject::ptr)(S_1680X1050_005A74FC,
@@ -146,7 +147,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 10:
+                        case OpenSHC::Rendering::SRE_1920x1080:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1920x1080"
                                 DAT_TextManagerObject::ptr)(S_1920X1080_005A7544,
@@ -154,7 +155,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 11:
+                        case OpenSHC::Rendering::SRE_1920x1200:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1920x1200"
                                 DAT_TextManagerObject::ptr)(S_1920X1200_005A7538,
@@ -162,7 +163,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 12:
+                        case OpenSHC::Rendering::SRE_2560x1440:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "2560x1440"
                                 DAT_TextManagerObject::ptr)(S_2560X1440_005A752C,
@@ -170,7 +171,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 13:
+                        case OpenSHC::Rendering::SRE_2560x1600:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "2560x1600"
                                 DAT_TextManagerObject::ptr)(S_2560X1600_005A7520,
@@ -178,7 +179,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 14:
+                        case OpenSHC::Rendering::SRE_1360x768:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1360x768"
                                 DAT_TextManagerObject::ptr)(S_1360X768_005A7508,
@@ -186,7 +187,7 @@ namespace UI {
                                 (int)(DAT_ButtonY::instance + 7), OpenSHC::Text::TTA_CENTER,
                                 OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
                             return;
-                        case 15:
+                        case OpenSHC::Rendering::SRE_1024x600:
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
                                 // "1024x600"
                                 DAT_TextManagerObject::ptr)(S_1024X600_005A758C,
