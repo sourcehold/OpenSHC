@@ -9,9 +9,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C6F0
         void BuildingsState::sortBuildingIDsNeedPeasantsQueue(int playerID)
         {
-            // Matching note: The remaining difference is register and stack slot allocation of the IDs and
-            // idle times. The count is kept in a register over the first call through /GL (see
-            // cmake/compiler-flags-gl.txt).
+            // Matching note: The original keeps the count in ebx across playerHasBurningBuilding, which needs /GL
+            // (the callees are in cmake/compiler-flags-gl.txt, this file is not). That shifts the register
+            // allocation of the IDs and building pointers in the loop.
             // Bubble sorts the queue by idle time and building priority
             if ((int)this->DAT_CountOfBuildingsNeedPeasants <= 1) {
                 return;
