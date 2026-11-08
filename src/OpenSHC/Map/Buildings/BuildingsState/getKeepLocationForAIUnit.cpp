@@ -24,8 +24,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D9C0
         BOOLEnum BuildingsState::getKeepLocationForAIUnit(int playerID, int group, int unitID)
         {
-            // Matching note: the original shares the final unit position test of the rally branch with the
-            // parade ground branch (cross-jumped tail); we emit it twice.
             // group is the mercenary group (10 to 16); it is remapped while mercenaryType keeps the original value.
             int const mercenaryType = group;
             // AI units in multiplayer gather at the keep
@@ -84,6 +82,8 @@ namespace Map {
                         return TRUE;
                     }
                 }
+                // An explicit return here lets MSVC cross-jump the position test into the parade ground branch
+                return FALSE;
             } else {
                 // No rally point, use the parade ground of the mercenary post
                 if (DAT_GameState::instance.playerDataArray[playerID]
