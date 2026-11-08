@@ -63,9 +63,9 @@ namespace Map {
         int BuildingsState::setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight,
             BuildingType buildingType, uint width, int playerID_dup, int variationIndex)
         {
-            // Matching note: The original places the outpost case after the final return and keeps the address of
-            // x in a stack slot for the cesspit case only; we emit the outpost case in source order and share the
-            // x/y addresses with the initialisation block, which also shifts some registers in the cesspit case.
+            // Matching note: the original places the outpost case after the final return (and so uses eax/ecx the
+            // other way round there and at the end of the dog cage case); we emit it in source order. Moving the
+            // case, a default label, an early break in the dog cage case and a duplicated tail did not change that.
             // Places a new building of the type at (x, y) and returns its ID
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
@@ -106,8 +106,9 @@ namespace Map {
             this->buildings[buildingID].owner = playerID;
             this->buildings[buildingID].logicalState = BLS_INITIAL;
             this->buildings[buildingID].widthOrHeight = width;
-            this->buildings[buildingID].x = x;
+            // y before x: the other order makes MSVC keep the field addresses for the cesspit case from here
             this->buildings[buildingID].y = y;
+            this->buildings[buildingID].x = x;
             this->buildings[buildingID].buildingType = buildingType;
             this->buildings[buildingID].currentTilePositionAdjusted
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -360,13 +361,16 @@ namespace Map {
                 }
                 break;
             case BT_CESSPIT: {
-                // Flies and a poison cloud in the middle of the cesspit
+                // Flies and a poison cloud in the middle of the cesspit. The position is read from the fields, not
+                // through locals, as in the original
                 int halfSize = (int)width / 2;
-                int middleY = this->buildings[buildingID].y + halfSize;
-                MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                    DAT_EntityState::ptr)(0, 0, 0, (this->buildings[buildingID].x + halfSize) * 8, middleY * 8,
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0, 0,
+                    (this->buildings[buildingID].x + halfSize) * 8, (this->buildings[buildingID].y + halfSize) * 8,
                     DAT_TileMapState::instance
-                        .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[middleY].addXgetTile
+                        .HeightLayer[DAT_ViewportRenderState::instance
+                                         .translationMatrix[this->buildings[buildingID].y + halfSize]
+                                         .addXgetTile
                             + this->buildings[buildingID].x + halfSize],
                     0, 0, 0, OpenSHC::Map::Entities::ET_COW_POISON_CLOUD, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
