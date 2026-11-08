@@ -20,7 +20,7 @@ namespace Map {
             int const buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             int _gateFadeType = 0;
-            int _isOnDefensiveStructure = 0;
+            BOOLEnum _isOnDefensiveStructure = FALSE;
             int _towerFadeType = 0;
             int _fadeType = 0;
             if (DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 != 0) {
@@ -47,11 +47,11 @@ namespace Map {
                     break;
                 case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
                 case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
-                    _gateFadeType = 0xb;
+                    _gateFadeType = 11;
                     break;
                 }
             } else if ((_logicFlags & 0x100) != 0) {
-                _isOnDefensiveStructure = 1;
+                _isOnDefensiveStructure = TRUE;
             }
             if (DAT_UnitsState::instance.units[unitID].field_0x308 == 2 && _isOnDefensiveStructure) {
                 _fadeType = 1;
@@ -106,7 +106,7 @@ namespace Map {
                                .MiscDisplayLayer[DAT_UnitsState::instance.units[unitID].currentTilePosition_2Unk]
                            & 0x10)
                 != 0) {
-                DAT_UnitsState::instance.units[unitID].vanish = 0xf;
+                DAT_UnitsState::instance.units[unitID].vanish = 15;
             } else if (DAT_UnitsState::instance.units[unitID].vanish <= 0) {
                 DAT_UnitsState::instance.units[unitID].vanish = 1;
             }

@@ -34,7 +34,7 @@ namespace Map {
                 return;
             }
             this->unitCountOfSelection[playerID] = 0;
-            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner == playerID) {
                     this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID = 0;

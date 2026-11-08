@@ -27,14 +27,14 @@ namespace Map {
             int _tile = this->units[unitID].tile;
             int _bestEnemyUnitID = 0;
             int _minDistance = 1000;
-            dword _areaOfUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
+            dword _areaOfUnit = DAT_TileMapState::instance.PathConnectionLayer[_tile];
             if ((DAT_TileMapState::instance.LogicLayer[_tile] & LogicHelpers::L_WALL_OR_GATEHOUSE) != 0) {
                 for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {
                     int _enemyUnitID = DAT_GameState::instance.playerDataArray[_owner].enemyIDArray[i];
                     if (this->units[_enemyUnitID].unitType != OpenSHC::Map::Units::UT_E_LADDER) {
                         continue;
                     }
-                    if (this->units[_enemyUnitID].state.generic != (UnitState)3) {
+                    if (this->units[_enemyUnitID].state.generic != OpenSHC::Map::Units::States::US_STATE_3Unk) {
                         continue;
                     }
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isUsableClimbWithinArea,
@@ -72,10 +72,10 @@ namespace Map {
                     }
                 }
                 if (_bestEnemyUnitID != 0) {
-                    this->units[unitID].shootTargetedUnit = (short)_bestEnemyUnitID;
+                    this->units[unitID].shootTargetedUnit = _bestEnemyUnitID;
                     this->units[unitID].targetUID = this->units[_bestEnemyUnitID].uid;
-                    this->units[unitID].distanceToEnemyUnitLadders = (short)_minDistance;
-                    this->units[_bestEnemyUnitID].targetShootRelated = 0x19;
+                    this->units[unitID].distanceToEnemyUnitLadders = _minDistance;
+                    this->units[_bestEnemyUnitID].targetShootRelated = 25;
                     return TRUE;
                 }
             }

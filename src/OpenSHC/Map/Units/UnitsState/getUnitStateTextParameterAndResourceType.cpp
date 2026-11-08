@@ -23,20 +23,20 @@ namespace Map {
 
         {
             *pResourceType = (ResourceType)0;
-            int _state = (short)this->units[unitIndex].state.generic;
+            int _state = this->units[unitIndex].state.generic;
             if (this->units[unitIndex].dying != 0) {
                 /*
                   "Dying"
                  */
 
-                return 0xc;
+                return 12;
             }
-            if (_state == 0x79 || MACRO_CALL(OpenSHC::Map::Units_Func::CheckUnitProductionPaused)(unitIndex) != FALSE) {
+            if (_state == 121 || MACRO_CALL(OpenSHC::Map::Units_Func::CheckUnitProductionPaused)(unitIndex) != FALSE) {
                 /*
                   This is an optimized % 4, producing -3 to 3
                  */
 
-                uint _rng_0x79 = this->units[unitIndex].fixedRng % 4;
+                int const _breakTextVariant = this->units[unitIndex].fixedRng % 4;
                 /*
                   "Wandering around
                    Eating fire
@@ -47,14 +47,14 @@ namespace Map {
                    Wandering randomly"
                  */
 
-                return (int)(_rng_0x79 + 0x5f);
+                return _breakTextVariant + 95;
             }
-            if (_state == 0x6a) {
+            if (_state == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                 /*
                   "Fighting"
                  */
 
-                return 0x73;
+                return 115;
             }
             switch (this->units[unitIndex].unitType) {
             case OpenSHC::Map::Units::UT_PEASANT:
@@ -76,35 +76,35 @@ namespace Map {
                          */
 
                         switch (this->units[unitIndex].substate) {
-                        case 0x6a:
-                            return 0x1e;
-                        case 0x6b:
-                            return 0x1f;
-                        case 0x6e:
-                            return 0x20;
-                        case 0x6f:
-                            return 0x21;
-                        case 0x72:
-                            return 0x22;
-                        case 0x73:
-                            return 0x23;
-                        case 0x74:
-                            return 0x24;
-                        case 0x75:
-                            return 0x25;
+                        case 106:
+                            return 30;
+                        case 107:
+                            return 31;
+                        case 110:
+                            return 32;
+                        case 111:
+                            return 33;
+                        case 114:
+                            return 34;
+                        case 115:
+                            return 35;
+                        case 116:
+                            return 36;
+                        case 117:
+                            return 37;
                         }
                     }
                     /*
                       "Waiting for job"
                      */
 
-                    return 0x1d;
+                    return 29;
                 }
                 /*
                   "Swearing loyalty"
                  */
 
-                return 0x26;
+                return 38;
             case OpenSHC::Map::Units::UT_BURNINGMAN:
                 /*
                   "Burning"
@@ -130,7 +130,7 @@ namespace Map {
                  */
 
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -139,25 +139,25 @@ namespace Map {
                       "Going to chop wood"
                      */
 
-                    return 0x6b;
+                    return 107;
                 case 2:
                     /*
                       "Felling a tree"
                      */
 
-                    return 0x6c;
+                    return 108;
                 case 3:
                     /*
                       "Chopping a tree"
                      */
 
-                    return 0x6d;
+                    return 109;
                 case 4:
                     /*
                       "Returning with log"
                      */
 
-                    return 0x6e;
+                    return 110;
                 case 5:
                 case 6:
                     return 7;
@@ -174,7 +174,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_FLETCHER:
                 *pResourceType = OpenSHC::Game::Resources::RT_WOOD;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -204,7 +204,7 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_TUNNELER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -218,7 +218,7 @@ namespace Map {
                 case 9:
                     return 7;
                 case 7:
-                    return 0xb;
+                    return 11;
                 }
                 break;
             case OpenSHC::Map::Units::UT_HUNTER:
@@ -241,13 +241,13 @@ namespace Map {
                  */
 
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 8:
                     return 1;
                 case 2:
-                    return 0x72;
+                    return 114;
                 case 3:
                     return 7;
                 case 4:
@@ -264,35 +264,35 @@ namespace Map {
                      */
 
                     return this->units[DAT_UnitsState::instance.units[unitIndex].shootTargetedUnit].isStalked != 0
-                        ? 0x70
-                        : 0x73;
+                        ? 112
+                        : 115;
                 case 10:
-                    return (uint)(this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 0x71;
+                    return (this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 113;
                 case 1:
-                case 0xb:
-                    return 0x71;
+                case 11:
+                    return 113;
                 }
                 break;
             case OpenSHC::Map::Units::UT_FIREFIGHTER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 2:
                     return 4;
                 case 1:
-                    return 0x97;
+                    return 151;
                 case 3:
-                    return 0x96;
+                    return 150;
                 case 4:
-                    return 0x98;
+                    return 152;
                 }
                 break;
             case OpenSHC::Map::Units::UT_GHOST:
-                return (DAT_GameState::instance.mapAndTime.drunkenManStatus & 3U) + 0x99;
+                return (DAT_GameState::instance.mapAndTime.drunkenManStatus & 3U) + 153;
             case OpenSHC::Map::Units::UT_QUARRYMASON:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -304,7 +304,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 default:
                     return 7;
@@ -323,7 +323,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_QUARRYOX:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 1:
                     return 10;
@@ -332,13 +332,13 @@ namespace Map {
                 case 3:
                     return 5;
                 case 4:
-                    return 0x28;
+                    return 40;
                 }
                 break;
             case OpenSHC::Map::Units::UT_PITCHMAN:
                 *pResourceType = OpenSHC::Game::Resources::RT_PARTIALPITCH;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -355,7 +355,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_WHEATFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_WHEAT;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -378,7 +378,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_HOPSFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_HOPS;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -399,7 +399,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_APPLEFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_APPLE;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -420,7 +420,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_DAIRYFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_CHEESE;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -437,7 +437,7 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_MILLER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -462,7 +462,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_BAKER:
                 *pResourceType = OpenSHC::Game::Resources::RT_BREAD;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -484,7 +484,7 @@ namespace Map {
                 }
             case OpenSHC::Map::Units::UT_BREWER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -509,7 +509,7 @@ namespace Map {
                 }
             case OpenSHC::Map::Units::UT_POLETURNER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -536,7 +536,7 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_SMITH:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -571,7 +571,7 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_ARMORER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -604,15 +604,15 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_TANNER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
                     return 1;
                 case 2:
-                    return 0x68;
+                    return 104;
                 case 3:
-                    return 0x69;
+                    return 105;
                 case 4:
                     return 5;
                 default:
@@ -629,7 +629,7 @@ namespace Map {
                 }
             case OpenSHC::Map::Units::UT_TRANSPORTMINER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -646,7 +646,7 @@ namespace Map {
                 }
             case OpenSHC::Map::Units::UT_PRIEST:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -658,19 +658,19 @@ namespace Map {
                 case 7:
                 case 8:
                 case 10:
-                case 0xb:
+                case 11:
                     return 7;
                 case 3:
-                    return 0x2b;
+                    return 43;
                 case 5:
-                    return 0x2a;
+                    return 42;
                 case 9:
-                    return this->units[unitIndex].substate + 0x18;
+                    return this->units[unitIndex].substate + 24;
                 }
                 break;
             case OpenSHC::Map::Units::UT_HEALER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
@@ -679,20 +679,20 @@ namespace Map {
                 default:
                     return 7;
                 case 3:
-                    return 0x2d;
+                    return 45;
                 case 4:
-                    return 0x2e;
+                    return 46;
                 case 5:
-                    return 0x2f;
+                    return 47;
                 case 6:
-                    return 0x30;
+                    return 48;
                 }
             case OpenSHC::Map::Units::UT_DRUNK:
-                return DAT_GameState::instance.mapAndTime.drunkenManStatus + 0x75;
+                return DAT_GameState::instance.mapAndTime.drunkenManStatus + 117;
             case OpenSHC::Map::Units::UT_INNKEEPER:
                 *pResourceType = OpenSHC::Game::Resources::RT_ALE;
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
@@ -709,25 +709,25 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_TRADER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
                 case 1:
-                    return 0x37;
+                    return 55;
                 case 2:
                     return 7;
                 case 3:
-                    return 0x38;
+                    return 56;
                 }
                 break;
             case OpenSHC::Map::Units::UT_TRADERHORSE:
                 switch (_state) {
                 case 1:
-                    return 0x37;
+                    return 55;
                 case 3:
-                    return 0x38;
-                case 0x6a:
+                    return 56;
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 }
                 return 1;
@@ -736,86 +736,86 @@ namespace Map {
                 case 2:
                 case 4:
                 case 5:
-                    return 0x3a;
+                    return 58;
                 case 3:
-                    return 0x3b;
+                    return 59;
                 case 0:
-                    if (this->units[unitIndex].substate != 0x66 && this->units[unitIndex].substate != 0x67) {
-                        return 0x3d;
+                    if (this->units[unitIndex].substate != 102 && this->units[unitIndex].substate != 103) {
+                        return 61;
                     }
-                    return 0x3c;
+                    return 60;
                 default:
-                    return 0x3d;
+                    return 61;
                 case 6:
-                case 0x6e:
-                    return 0xc;
+                case 110:
+                    return 12;
                 }
             case OpenSHC::Map::Units::UT_HUNTERDOG:
                 switch (_state) {
-                case 0x78:
-                    return 0x43;
+                case 120:
+                    return 67;
                 case 3:
-                    return 0x3f;
+                    return 63;
                 case 4:
                 case 5:
-                    return 0x40;
+                    return 64;
                 case 7:
                 case 8:
-                    return 0x41;
+                    return 65;
                 case 9:
-                    return 0x42;
+                    return 66;
                 }
                 return 1;
             case OpenSHC::Map::Units::UT_LADY:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 6:
-                    return this->units[unitIndex].substate + 0xe;
+                    return this->units[unitIndex].substate + 14;
                 case 1:
                 case 9:
-                    return 0x12;
+                    return 18;
                 case 3:
-                    return 0x13;
+                    return 19;
                 case 4:
                 case 8:
-                    return 0x14;
+                    return 20;
                 case 5:
-                    return 0x15;
+                    return 21;
                 case 7:
-                    return 0x16;
+                    return 22;
                 case 10:
                     return 0;
                 }
                 return 4;
             case OpenSHC::Map::Units::UT_JESTER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 1:
-                    return 0x45;
+                    return 69;
                 default:
-                    return 0x49;
+                    return 73;
                 case 3:
                 case 4:
-                    return 0x46;
+                    return 70;
                 case 5:
-                    return 0x47;
+                    return 71;
                 case 7:
                 case 8:
-                    return 0x48;
+                    return 72;
                 }
             case OpenSHC::Map::Units::UT_CHICKEN:
                 switch (_state) {
                 case 2:
-                    return 0x4c;
+                    return 76;
                 }
-                return 0x4b;
+                return 75;
             case OpenSHC::Map::Units::UT_MOTHER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
-                case 0x65:
+                case 101:
                     if (DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
                                 .buildingType
                             != OpenSHC::Map::Buildings::BT_CHAPEL
@@ -825,70 +825,70 @@ namespace Map {
                         && DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
                                 .buildingType
                             != OpenSHC::Map::Buildings::BT_CATHEDRAL) {
-                        return 0x4f;
+                        return 79;
                     }
-                    return 0x4e;
+                    return 78;
                 case 3:
                 case 5:
                 case 6:
                 case 7:
-                    return 0x4f;
+                    return 79;
                 case 4:
-                    return 0x50;
+                    return 80;
                 default:
-                    return 0x51;
+                    return 81;
                 }
             case OpenSHC::Map::Units::UT_CHILD:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                 case 1:
                     return 1;
                 default:
-                    return 0x57;
+                    return 87;
                 case 3:
-                    return 0x53;
+                    return 83;
                 case 4:
                 case 5:
-                    return 0x54;
+                    return 84;
                 case 6:
                 case 9:
-                    return 0x55;
+                    return 85;
                 case 10:
-                case 0xb:
-                case 0xc:
-                case 0xd:
-                    return 0x56;
+                case 11:
+                case 12:
+                case 13:
+                    return 86;
                 }
             case OpenSHC::Map::Units::UT_JUGGLER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
                 case 1:
-                    return 0x59;
+                    return 89;
                 case 2:
                 case 3:
                 case 4:
                 case 5:
                 case 6:
-                    return 0x5a;
+                    return 90;
                 }
                 break;
             case OpenSHC::Map::Units::UT_FIREEATER:
                 switch (_state) {
-                case 0x6a:
+                case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
                 case 0:
                     return 1;
                 case 1:
-                    return 0x5c;
+                    return 92;
                 case 2:
                 case 3:
                 case 4:
-                    return 0x5d;
+                    return 93;
                 }
                 break;
             }

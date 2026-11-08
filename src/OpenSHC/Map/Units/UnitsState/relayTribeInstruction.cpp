@@ -13,10 +13,10 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005371E0
         void UnitsState::relayTribeInstruction(
-            int tribeID, UnitInstructionType instructionType, int targetID_1, int targetID_2, int param_5)
+            int tribeID, UnitInstructionType instructionType, int targetID_1, int targetID_2, int instructionParamUnk)
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
-                tribeID, instructionType, targetID_1, targetID_2, param_5);
+                tribeID, instructionType, targetID_1, targetID_2, instructionParamUnk);
         }
     }
 }

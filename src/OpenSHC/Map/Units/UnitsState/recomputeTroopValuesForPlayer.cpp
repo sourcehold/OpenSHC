@@ -50,7 +50,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 5000, '\0', DAT_GameState::instance.playerDataArray[playerID].enemyIDArray);
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
@@ -150,7 +150,7 @@ namespace Map {
                         continue;
                     }
                 }
-                DAT_GameState::instance.playerDataArray[playerID].enemyIDArray[_enemySlot] = (short)unitID;
+                DAT_GameState::instance.playerDataArray[playerID].enemyIDArray[_enemySlot] = unitID;
                 DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[playerID][_enemySlot]
                     = DAT_UnitsState::instance.units[unitID].uid;
             }

@@ -30,7 +30,7 @@ namespace Map {
                     if (DAT_GameState::instance.mapAndTime.playerTeams[owner]
                             != DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner]
                         && owner != 0 && this->units[_otherUnitID].unitType == OpenSHC::Map::Units::UT_E_LADDER
-                        && this->units[_otherUnitID].state.generic == (UnitState)3) {
+                        && this->units[_otherUnitID].state.generic == OpenSHC::Map::Units::States::US_STATE_3Unk) {
                         if (checkOnly != 0) {
                             return direction;
                         }
@@ -40,7 +40,7 @@ namespace Map {
                         this->units[_otherUnitID].tunnelerFinishedDigging = 1;
                         return 1;
                     }
-                    _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile;
+                    _otherUnitID = this->units[_otherUnitID].nextUnitOnTheSameTile;
                 } while (_otherUnitID > 0);
             }
             return -1;

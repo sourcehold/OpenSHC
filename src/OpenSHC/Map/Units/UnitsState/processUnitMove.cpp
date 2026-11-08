@@ -75,12 +75,12 @@ namespace Map {
             }
             speedCategory = speedCategory + this->units[unitID].field_0x3d2;
             for (int _step = 0; _step <= speedCategory; ++_step) {
-                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x01') {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == 1) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e <= 3
                         || this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 12) {
                         continue;
                     }
-                } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x02') {
+                } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == 2) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e <= 4) {
                         continue;
                     }
@@ -110,7 +110,7 @@ namespace Map {
                     } else {
                         _direction = _direction & 0xf;
                     }
-                    this->units[unitID].facingDirection = (short)_direction;
+                    this->units[unitID].facingDirection = _direction;
                     if (this->units[unitID].field_0x3f4 == 0) {
                         this->units[unitID].currentIndexInPathPlan = _pathIndex + 1;
                     }
@@ -156,7 +156,7 @@ namespace Map {
                                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                           calculateCanPlayerUnitsNavigateToAreaFromArea,
                                         DAT_PathFindingState::ptr)(this->units[unitID].owner,
-                                        (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile],
+                                        DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile],
                                         (short)DAT_TileMapState::instance
                                             .PathConnectionLayer[DAT_ViewportRenderState::instance
                                                                      .translationMatrix[_destinationY]
@@ -191,7 +191,7 @@ namespace Map {
                                     this->units[unitID].destinationXPosition, this->units[unitID].destinationYPosition,
                                     0)
                                 == FALSE) {
-                                this->units[unitID].field_0x3f4 = 0x28;
+                                this->units[unitID].field_0x3f4 = 40;
                                 return FALSE;
                             }
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(

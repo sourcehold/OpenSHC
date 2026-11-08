@@ -1,5 +1,7 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -11,7 +13,7 @@ namespace Map {
         int UnitsState::stopUnitIfNextToTarget(int unitID)
         {
             uint _targetTile = this->units[unitID].targetedBuildingTile;
-            int _isNear = 0;
+            BOOLEnum _isNear = FALSE;
             if (_targetTile == 0) {
                 return 0;
             }
@@ -43,12 +45,12 @@ namespace Map {
                                         + _y][secondDirection]
                                 + _tile
                             == _targetTile) {
-                            _isNear = 1;
+                            _isNear = TRUE;
                             break;
                         }
                     }
                 }
-                if (_isNear == 0) {
+                if (!_isNear) {
                     return 0;
                 }
             }

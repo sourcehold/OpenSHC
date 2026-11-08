@@ -27,7 +27,7 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052E960
-        int UnitsState::euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int param_4)
+        int UnitsState::euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int onlyCheckAvailability)
         {
             this->euroUnitAcquisitionFailReason = 0;
             int const troopIndex = unitType - UT_E_ARCHER;
@@ -42,7 +42,7 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                 _unitCost = 0;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf] < _unitCost) {
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[15] < _unitCost) {
                 this->euroUnitAcquisitionFailReason = 1;
                 /* if we do not have the gold resources */
                 return 0;
@@ -75,7 +75,7 @@ namespace Map {
                     return 0;
                 }
             }
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_PEASANT) {
                     continue;
                 }
@@ -104,17 +104,17 @@ namespace Map {
                     && this->units[unitID].isDisappearingUnk != 0) {
                     continue;
                 }
-                if (param_4 != 0) {
+                if (onlyCheckAvailability != 0) {
                     return 1;
                 }
-                this->units[unitID].unitTypeToChangeInto = (UnitTypeShort)unitType;
+                this->units[unitID].unitTypeToChangeInto = unitType;
                 this->units[unitID].engineerManningSiegeStateRef_checkType = 1;
                 this->units[unitID].isDisappearingUnk = 1;
                 this->units[unitID].state_2 = 0;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
                 this->units[unitID].disappearFadeAlphaCountdown = 0;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
-                DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf] -= _unitCost;
+                DAT_GameState::instance.playerDataArray[playerID].currentResources[15] -= _unitCost;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
                     DAT_BuildingsState::ptr)(playerID, (ResourceType)_weaponResource, 1, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
@@ -125,8 +125,8 @@ namespace Map {
                     int _stableBuildingID = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::linkageBetweenHorseUnitAndStableUnk,
                         DAT_GameState::ptr)(playerID, unitID);
-                    this->units[unitID].horseOriginStablesBuildingIndexUnk = (short)_stableBuildingID;
-                    *(int*)&this->units[unitID].horseOriginStableIDUnk
+                    this->units[unitID].horseOriginStablesBuildingIndexUnk = _stableBuildingID;
+                    this->units[unitID].horseOriginStableIDUnk
                         = DAT_BuildingsState::instance.buildings[_stableBuildingID].uid;
                 }
                 DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[playerID] += 1;

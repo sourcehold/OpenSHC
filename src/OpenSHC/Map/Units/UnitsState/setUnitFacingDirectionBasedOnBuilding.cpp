@@ -20,8 +20,8 @@ namespace Map {
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y,
-                (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (short)DAT_BuildingsState::instance.buildings[buildingID].y);
+                DAT_BuildingsState::instance.buildings[buildingID].x,
+                DAT_BuildingsState::instance.buildings[buildingID].y);
             if (DAT_DirectionAlgorithmState::instance.orientation == 15) {
                 return 0;
             }
@@ -57,7 +57,7 @@ namespace Map {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;
             }
-            return (uint)(previousFacingDirection != this->units[unitID].facingDirection);
+            return previousFacingDirection != this->units[unitID].facingDirection;
         }
 
     }

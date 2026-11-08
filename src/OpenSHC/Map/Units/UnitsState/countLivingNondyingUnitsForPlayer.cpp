@@ -13,7 +13,7 @@ namespace Map {
         {
             // the original counts units of one type; the name says "for player" but the parameter is a unit type
             int _count = 0;
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
                     && this->units[unitID].dying == 0 && this->units[unitID].unitType == unitType) {
                     _count = _count + 1;

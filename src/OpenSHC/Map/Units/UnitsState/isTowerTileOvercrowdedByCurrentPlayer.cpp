@@ -22,7 +22,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00536780
         BOOLEnum UnitsState::isTowerTileOvercrowdedByCurrentPlayer(int tile)
         {
-            int _buildingID = (short)DAT_TileMapState::instance.BuildingLayer[tile];
+            int _buildingID = DAT_TileMapState::instance.BuildingLayer[tile];
             if (_buildingID != 0) {
                 BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
                 if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1
@@ -39,11 +39,12 @@ namespace Map {
                     if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1) {
                         _tileCapacity = 5;
                     }
-                    int _buildingY = (short)DAT_BuildingsState::instance.buildings[_buildingID].y;
-                    int _buildingX = (short)DAT_BuildingsState::instance.buildings[_buildingID].x;
+                    int _buildingY = DAT_BuildingsState::instance.buildings[_buildingID].y;
+                    int _buildingX = DAT_BuildingsState::instance.buildings[_buildingID].x;
                     /* The original counts the own units in the parameter's stack slot. */
                     tile = 0;
                     int _constructionTile = 0;
+                    /* a do-while: the original runs the body once even when there is no construction tile */
                     do {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
@@ -54,7 +55,7 @@ namespace Map {
                                                 .addXgetTile
                                      + DAT_TileMapState::instance.buildingX + _buildingX];
                             _otherUnitID != 0;
-                            _otherUnitID = (short)DAT_UnitsState::instance.units[_otherUnitID].nextUnitOnTheSameTile) {
+                            _otherUnitID = DAT_UnitsState::instance.units[_otherUnitID].nextUnitOnTheSameTile) {
                             if (DAT_UnitsState::instance.units[_otherUnitID].owner
                                 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                                 tile = tile + 1;
@@ -75,7 +76,7 @@ namespace Map {
                                 _selectedUnitCount = _selectedUnitCount + this->selectionUnitType[i];
                             }
                         }
-                        return (BOOLEnum)(_selectedUnitCount > _freeCapacity * 2);
+                        return _selectedUnitCount > _freeCapacity * 2;
                     }
                 }
             }

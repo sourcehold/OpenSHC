@@ -27,7 +27,7 @@ namespace Map {
         void UnitsState::playerMakeUnitSelection(int playerID, int tribeID)
         {
             this->unitCountOfSelection[playerID] = 0;
-            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_NORMAL
                     && this->units[DAT_CurrentUnitSlotID::instance].dying == 0
@@ -35,7 +35,7 @@ namespace Map {
                     && MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unitIsSelectedByPlayer,
                            DAT_TribesState::ptr)(DAT_CurrentUnitSlotID::instance)
                         != FALSE) {
-                    this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID = (short)playerID;
+                    this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID = playerID;
                     this->units[DAT_CurrentUnitSlotID::instance].selectionRelatedFlag = 1;
                     this->unitCountOfSelection[playerID] = this->unitCountOfSelection[playerID] + 1;
                 }

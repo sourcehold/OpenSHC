@@ -38,14 +38,14 @@ namespace Map {
                 OpenSHC::Commands::GCT_UNITS_MOVE);
             UnitType _mostFrequentUnitType
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                    DAT_TribesState::ptr)(tribeID, (int*)0x0);
+                    DAT_TribesState::ptr)(tribeID, (int*)0);
             dword _areaAtDestination
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.viewportState.cursorTile];
             uint _blockedAtDestination
                 = DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.cursorTile]
                 & 0x10000100;
-            int _canReachDestination = 0;
+            BOOLEnum _canReachDestination = FALSE;
             int _combatUnitID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, this)(1);
             dword _areaAtUnit = (short)DAT_TileMapState::instance
@@ -61,7 +61,7 @@ namespace Map {
                     _areaAtUnit,
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::canAUnitClimb, DAT_UnitsState::ptr)())
                 != 0) {
-                _canReachDestination = 1;
+                _canReachDestination = TRUE;
             }
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::selectionHasMobileAssaultUnits, DAT_UnitsState::ptr)()
@@ -77,7 +77,7 @@ namespace Map {
                            DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[_combatUnitID].x,
                            DAT_UnitsState::instance.units[_combatUnitID].y, _destinationX, _destinationY, 100000)
                         == 0) {
-                    _canReachDestination = 0;
+                    _canReachDestination = FALSE;
                 }
             }
             if (matchUnitSpeeds == 0
@@ -99,7 +99,7 @@ namespace Map {
             if (_mostFrequentUnitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                 return;
             }
-            if (_canReachDestination != 0) {
+            if (_canReachDestination) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::playUnitSelectionSound, DAT_TribesState::ptr)(
                     tribeID);
                 if (MACRO_CALL_MEMBER(
@@ -114,7 +114,7 @@ namespace Map {
                 int _leaderUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
                 int _distanceX = this->units[_leaderUnitID].x - x;
                 int _distanceY = this->units[_leaderUnitID].y - y;
-                if (_distanceX >= -0x48 && _distanceX <= 0x48 && _distanceY >= -0x48 && _distanceY <= 0x48) {
+                if (_distanceX >= -72 && _distanceX <= 72 && _distanceY >= -72 && _distanceY <= 72) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                         _mostFrequentUnitType, 6);
                 } else {

@@ -27,7 +27,7 @@ namespace Map {
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_WOODCUTTER:
                 if (_state == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
-                    return 0x2f;
+                    return 47;
                 }
                 if (_state == (UnitState)10) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::findTree, DAT_LandscapeState::ptr)(
@@ -35,13 +35,13 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x32;
+                    return 50;
                 }
                 break;
             case OpenSHC::Map::Units::UT_FLETCHER:
                 switch (_state) {
                 case OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk:
-                    return 0x31;
+                    return 49;
                 case OpenSHC::Map::Units::States::US_STAND_UPUnk:
                     if (MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getStorageBuildingForResourceTypeAndAmount,
@@ -49,46 +49,46 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x33;
+                    return 51;
                 }
                 break;
             case OpenSHC::Map::Units::UT_HUNTER:
                 if (_state == OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk) {
-                    return 0x30;
+                    return 48;
                 }
                 if (_state == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::findNearestShootableDeer, this)(unitID)
                         != 0) {
                         return 0;
                     }
-                    return 0x34;
+                    return 52;
                 }
                 break;
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
             case OpenSHC::Map::Units::UT_PITCHMAN:
                 switch (_state) {
                 case OpenSHC::Map::Units::States::US_STATE_2Unk:
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_WHEATFARMER:
                 if (_state == OpenSHC::Map::Units::States::US_STATE_9Unk) {
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_HOPSFARMER:
                 if (_state == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_APPLEFARMER:
                 if (_state == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk) {
-                    return 0x30;
+                    return 48;
                 }
                 break;
             case OpenSHC::Map::Units::UT_DAIRYFARMER:
                 if (_state == OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk) {
-                    return 0x30;
+                    return 48;
                 }
                 break;
             case OpenSHC::Map::Units::UT_MILLER:
@@ -100,9 +100,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x35;
+                    return 53;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_BAKER:
@@ -120,9 +120,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x36;
+                    return 54;
                 case OpenSHC::Map::Units::States::US_AIM_WEAPONUnk:
-                    return 0x30;
+                    return 48;
                 }
                 break;
             case OpenSHC::Map::Units::UT_BREWER:
@@ -135,9 +135,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x37;
+                    return 55;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_POLETURNER:
@@ -149,9 +149,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x33;
+                    return 51;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x31;
+                    return 49;
                 }
                 break;
             case OpenSHC::Map::Units::UT_SMITH:
@@ -164,9 +164,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x38;
+                    return 56;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x31;
+                    return 49;
                 }
                 break;
             case OpenSHC::Map::Units::UT_ARMORER:
@@ -179,9 +179,9 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x38;
+                    return 56;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x31;
+                    return 49;
                 }
                 break;
             case OpenSHC::Map::Units::UT_TANNER:
@@ -192,14 +192,14 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x39;
+                    return 57;
                 case OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk:
-                    return 0x31;
+                    return 49;
                 }
                 break;
             case OpenSHC::Map::Units::UT_TRANSPORTMINER:
                 if (_state == OpenSHC::Map::Units::States::US_STATE_3Unk) {
-                    return 0x2f;
+                    return 47;
                 }
                 break;
             case OpenSHC::Map::Units::UT_INNKEEPER:
@@ -211,7 +211,7 @@ namespace Map {
                         != 0) {
                         return 0;
                     }
-                    return 0x3a;
+                    return 58;
                 }
                 break;
             }

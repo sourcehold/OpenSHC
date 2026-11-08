@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -29,7 +30,6 @@ namespace Map {
 
         {
             int _neighbourHeights[8];
-            int _totalHeight;
             int _adjacentTiles[24];
             int _otherUnitID;
             if (this->units[unitID].someUnitStat2_meleeDamageUnk != 0 && this->units[unitID].unknownTestAgainst0_2 == 0
@@ -48,18 +48,17 @@ namespace Map {
                     || this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
                     || (this->units[unitID].isStalked != 0
                         && (((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                                 || (100 < (int)this->unitCount))
+                                 || (100 < this->unitCount))
                             && (((this->units[unitID].fixedRng ^ DAT_GameState::instance.mapAndTime.totalGameTicksUnk)
                                     & 0xf)
                                 == 0))))) {
-                    _totalHeight
-                        = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
-                    int _playerID = (int)this->units[unitID].owner;
+                    int _totalHeight = this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight;
+                    int _playerID = this->units[unitID].owner;
                     DAT_TileMapState::instance.DAT_SomeTile = this->units[unitID].tile;
                     DAT_TileMapState::instance.DAT_SomeY
                         = (int)DAT_ViewportRenderState::instance
                               .tileTranslationMatrix_YComponent[DAT_TileMapState::instance.DAT_SomeTile];
-                    int _hasEnemyOnOwnTile = 0;
+                    BOOLEnum _hasEnemyOnOwnTile = FALSE;
                     uint _teamBitFlags = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::teamToBitFlagsUnk, DAT_GameState::ptr)(unitID);
                     /* Handwritten assembly in the original: gathers a 24-bit mask of the surrounding tiles
@@ -221,24 +220,23 @@ namespace Map {
                     skip_0x20000:
                         mov dword ptr [DAT_TileMapState::instance]TileMapState.field_0x554a48, edx
                     }
-                    for (_otherUnitID
-                        = (short)DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
-                        _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile)
+                    for (_otherUnitID = DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
+                        _otherUnitID > 0; _otherUnitID = this->units[_otherUnitID].nextUnitOnTheSameTile)
                     {
                         if (_otherUnitID != unitID) {
                             if (this->units[unitID].owner == 0) {
                                 if (this->units[unitID].unitType != this->units[_otherUnitID].unitType) {
-                                    _hasEnemyOnOwnTile = 1;
+                                    _hasEnemyOnOwnTile = TRUE;
                                     break;
                                 }
                             } else if (DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
                                 != DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner]) {
-                                _hasEnemyOnOwnTile = 1;
+                                _hasEnemyOnOwnTile = TRUE;
                                 break;
                             }
                         }
                     }
-                    if ((DAT_TileMapState::instance.field_0x554a48 != 0) || (_hasEnemyOnOwnTile != 0)) {
+                    if ((DAT_TileMapState::instance.field_0x554a48 != 0) || (_hasEnemyOnOwnTile)) {
                         for (int i = 0; i < 24; ++i) {
                             _adjacentTiles[i] = 0;
                         }
@@ -277,7 +275,7 @@ namespace Map {
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][1]
                                 + this->units[unitID].tile;
                         }
-                        if ((char)DAT_TileMapState::instance.field_0x554a48 < '\0') {
+                        if ((char)DAT_TileMapState::instance.field_0x554a48 < 0) {
                             _adjacentTiles[7] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                                 + this->units[unitID].tile;
@@ -349,13 +347,13 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x800) != 0) {
-                            _adjacentTiles[0xb] = this->units[unitID].tile
+                            _adjacentTiles[11] = this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                         .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][6]
                                     * 2;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x1000) != 0) {
-                            _adjacentTiles[0xc]
+                            _adjacentTiles[12]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][5]
                                 + DAT_TileMapState::instance
@@ -363,7 +361,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x2000) != 0) {
-                            _adjacentTiles[0xd]
+                            _adjacentTiles[13]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][6]
                                 + DAT_TileMapState::instance
@@ -373,7 +371,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x4000) != 0) {
-                            _adjacentTiles[0xe]
+                            _adjacentTiles[14]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][5]
                                 + DAT_TileMapState::instance
@@ -381,7 +379,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x8000) != 0) {
-                            _adjacentTiles[0xf]
+                            _adjacentTiles[15]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][4]
                                 + DAT_TileMapState::instance
@@ -389,7 +387,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x10000) != 0) {
-                            _adjacentTiles[0x10]
+                            _adjacentTiles[16]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][3]
                                 + DAT_TileMapState::instance
@@ -397,7 +395,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x20000) != 0) {
-                            _adjacentTiles[0x11]
+                            _adjacentTiles[17]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][2]
                                 + DAT_TileMapState::instance
@@ -407,7 +405,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x40000) != 0) {
-                            _adjacentTiles[0x12]
+                            _adjacentTiles[18]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
                                 + DAT_TileMapState::instance
@@ -415,13 +413,13 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x80000) != 0) {
-                            _adjacentTiles[0x13] = this->units[unitID].tile
+                            _adjacentTiles[19] = this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                         .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
                                     * 2;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x100000) != 0) {
-                            _adjacentTiles[0x14]
+                            _adjacentTiles[20]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][1]
                                 + DAT_TileMapState::instance
@@ -429,7 +427,7 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x200000) != 0) {
-                            _adjacentTiles[0x15]
+                            _adjacentTiles[21]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
                                 + DAT_TileMapState::instance
@@ -439,7 +437,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x400000) != 0) {
-                            _adjacentTiles[0x16]
+                            _adjacentTiles[22]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
                                 + this->units[unitID].tile
@@ -447,7 +445,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x800000) != 0) {
-                            _adjacentTiles[0x17]
+                            _adjacentTiles[23]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][0]
                                 + this->units[unitID].tile
@@ -464,7 +462,7 @@ namespace Map {
                                 for (int _slot = -1; _slot < 24; ++_slot) {
                                     int _candidateTile;
                                     if (_slot == -1) {
-                                        if (_hasEnemyOnOwnTile == 0) {
+                                        if (!_hasEnemyOnOwnTile) {
                                             continue;
                                         }
                                         _candidateTile = this->units[unitID].tile;
@@ -478,7 +476,7 @@ namespace Map {
                                     if (abs(_totalHeight
                                             - MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
                                                 DAT_TileMapState::ptr)(_candidateTile))
-                                        >= 0x20) {
+                                        >= 32) {
                                         continue;
                                     }
                                     if (_otherUnitID
@@ -505,7 +503,7 @@ namespace Map {
                                 int _candidateTile;
                                 int _tileSlot;
                                 if (_slot == -1) {
-                                    if (_hasEnemyOnOwnTile == 0) {
+                                    if (!_hasEnemyOnOwnTile) {
                                         continue;
                                     }
                                     _tileSlot = this->units[unitID].facingDirection;
@@ -522,13 +520,13 @@ namespace Map {
                                     if (abs(_totalHeight
                                             - _neighbourHeights
                                                 [DAT_UnitPropertiesDefinedData::instance.field_0x12054[_tileSlot].x])
-                                        > 0x20) {
+                                        > 32) {
                                         continue;
                                     }
                                     int _secondHeightIndex
                                         = DAT_UnitPropertiesDefinedData::instance.field_0x12054[_tileSlot].y;
                                     if (_secondHeightIndex != -1) {
-                                        if (abs(_totalHeight - _neighbourHeights[_secondHeightIndex]) > 0x20) {
+                                        if (abs(_totalHeight - _neighbourHeights[_secondHeightIndex]) > 32) {
                                             continue;
                                         }
                                     }
@@ -547,7 +545,7 @@ namespace Map {
                                 }
                                 if (abs((_totalHeight - this->units[_otherUnitID].buildingHeight)
                                         - this->units[_otherUnitID].terrainOrClimbHeight)
-                                    > 0x20) {
+                                    > 32) {
                                     continue;
                                 }
                                 if ((this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
@@ -555,7 +553,7 @@ namespace Map {
                                     && this->units[_otherUnitID].isStalked != 0 && _slot >= 8) {
                                     continue;
                                 }
-                                this->units[unitID].attackedUnitID = (short)_otherUnitID;
+                                this->units[unitID].attackedUnitID = _otherUnitID;
                                 this->units[unitID].field_0x340 = this->units[_otherUnitID].uid;
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
@@ -566,7 +564,7 @@ namespace Map {
                                 if (this->units[_otherUnitID].someUnitStat2_meleeDamageUnk != 0
                                     && this->units[_otherUnitID].attackedUnitID == 0
                                     && this->units[_otherUnitID].movementCooldown == 0) {
-                                    this->units[_otherUnitID].attackedUnitID = (short)unitID;
+                                    this->units[_otherUnitID].attackedUnitID = unitID;
                                     this->units[_otherUnitID].field_0x340 = this->units[unitID].uid;
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,

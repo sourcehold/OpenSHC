@@ -20,11 +20,10 @@ namespace Map {
         void UnitsState::makeUnitsDisappearThatCannotReachTheKeep(int playerID)
         {
             dword _areaOfKeep
-                = (short)
-                      DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
-                              .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
-                              .tileEntry];
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].owner != playerID) {
                     continue;
                 }
@@ -43,7 +42,7 @@ namespace Map {
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                         DAT_PathFindingState::ptr)(playerID, _areaOfKeep,
-                        (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile], 0)
+                        DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile], 0)
                     != 0) {
                     continue;
                 }

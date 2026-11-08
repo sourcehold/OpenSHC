@@ -23,7 +23,7 @@ namespace Map {
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 return 10000;
             }
-            if ((int)this->unitCount > 100) {
+            if (this->unitCount > 100) {
                 return 10000;
             }
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {

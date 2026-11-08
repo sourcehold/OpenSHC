@@ -28,7 +28,7 @@ namespace Map {
         {
             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_E_KNIGHT
                 && this->units[unitID].horseOriginStablesBuildingIndexUnk != 0) {
-                if (*(int*)&this->units[unitID].horseOriginStableIDUnk
+                if (this->units[unitID].horseOriginStableIDUnk
                     == DAT_BuildingsState::instance.buildings[this->units[unitID].horseOriginStablesBuildingIndexUnk]
                         .uid) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::removeTetheredUnitFromBuilding,
@@ -43,10 +43,10 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getPriceForDisbandedUnitType,
                     DAT_BuildingsState::ptr)((UnitType)(short)_unitType, &refund);
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .startResources[0xf] += refund;
+                    .startResources[15] += refund;
                 return (
                     int)&DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .startResources[0xf];
+                    .startResources[15];
             }
             BOOLEnum _hasCampground = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playerHasACampground,
                 DAT_GameState::ptr)(this->units[unitID].owner);

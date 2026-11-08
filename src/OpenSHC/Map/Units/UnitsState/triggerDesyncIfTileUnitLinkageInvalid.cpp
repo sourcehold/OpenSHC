@@ -26,14 +26,14 @@ namespace Map {
             if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow != 0) {
                 return;
             }
-            int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+            int unitID = DAT_TileMapState::instance.UnitLayer[tile];
             if ((uint)unitID <= 2499) {
-                for (; unitID != 0; unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
+                for (; unitID != 0; unitID = this->units[unitID].nextUnitOnTheSameTile) {
                     if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
                         && this->units[unitID].field_0x413 == 0) {
                         DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
                         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                            DAT_GameSynchronyState::ptr)((GameCommandType)0x4f);
+                            DAT_GameSynchronyState::ptr)((GameCommandType)79);
                         return;
                     }
                 }
@@ -41,7 +41,7 @@ namespace Map {
             }
             DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                (GameCommandType)0x4f);
+                (GameCommandType)79);
         }
 
     }

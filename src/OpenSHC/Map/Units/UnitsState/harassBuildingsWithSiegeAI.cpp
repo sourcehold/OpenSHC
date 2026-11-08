@@ -35,27 +35,27 @@ namespace Map {
             int _playerID = this->units[unitID].owner;
             int _siegeKind = 0;
             int _searchRange = 200;
-            int _isFireBallista = 0;
-            int _needsStoneAmmunition = 0;
+            BOOLEnum _isFireBallista = FALSE;
+            BOOLEnum _needsStoneAmmunition = FALSE;
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_S_CATAPULT:
                 _siegeKind = 2;
-                _searchRange = 0x50;
-                _needsStoneAmmunition = 1;
+                _searchRange = 80;
+                _needsStoneAmmunition = TRUE;
                 break;
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
                 _siegeKind = 3;
-                _needsStoneAmmunition = 1;
+                _needsStoneAmmunition = TRUE;
                 break;
             case OpenSHC::Map::Units::UT_S_MANGONEL:
             case OpenSHC::Map::Units::UT_S_BALLISTA:
                 _siegeKind = 4;
                 break;
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                _siegeKind = 0x25;
-                _isFireBallista = 1;
+                _siegeKind = 37;
+                _isFireBallista = TRUE;
             }
-            if (_needsStoneAmmunition != 0 && this->units[unitID].stoneAmmunition <= 0) {
+            if (_needsStoneAmmunition && this->units[unitID].stoneAmmunition <= 0) {
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                     && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
                            DAT_GameSynchronyState::ptr)(_playerID)
@@ -101,7 +101,7 @@ namespace Map {
                 }
             } else if (this->units[unitID].field_0x3bc > 0
                 && (DAT_TileMapState::instance.LogicLayer[this->units[unitID].field_0x3bc] & 0x100U) != 0
-                && (int)(_heightAtTarget - _defaultHeightAtTarget) > 0x1e && _siegeKind != 0x25
+                && (int)(_heightAtTarget - _defaultHeightAtTarget) > 30 && _siegeKind != 37
                 && DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
                     != DAT_GameState::instance.mapAndTime
                         .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[this->units[unitID].field_0x3bc] & 7)
@@ -119,21 +119,23 @@ namespace Map {
             } else {
                 DAT_PathFindingState::instance.ALG_TargetTile = 0;
                 int _maxTargetDistance = 200;
-                if (this->units[unitID].aiUnitBehaviourType == 0x15
+                if (this->units[unitID].aiUnitBehaviourType == 21
                     || this->units[unitID].unknownSiegeTentRelated02 == 3) {
-                    _maxTargetDistance = 0x14;
+                    _maxTargetDistance = 20;
                 }
                 int _searchFlags;
-                if (_siegeKind == 0x25) {
-                    _searchFlags = 0x34;
+                if (_siegeKind == 37) {
+                    _searchFlags = 52;
                 } else {
                     _searchFlags = _siegeKind == 3 ? 83 : 73;
                 }
                 int _attackFacingDirection = this->units[unitID].attackFacingDirection;
                 if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
+                    /* fixme: a per-player table (stride 0x177bc) inside attackInfo that the header does not describe
+                     * yet */
                     _maxTargetDistance = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray
-                                             + _playerID * 0x177bc + -0x1c)
-                        + 0xf;
+                                             + _playerID * 0x177bc - 28)
+                        + 15;
                 }
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::findBestAttackTargetTileWithHeightAndOwner,
@@ -142,11 +144,11 @@ namespace Map {
                     _attackFacingDirection, this->units[unitID].siegeTargetPlayerID, _maxTargetDistance,
                     _isFireBallista);
                 if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
-                    this->units[unitID].attackFacingDirection = this->units[unitID].attackFacingDirection + '\x01';
-                    if (this->units[unitID].attackFacingDirection >= 0x10
+                    this->units[unitID].attackFacingDirection = this->units[unitID].attackFacingDirection + 1;
+                    if (this->units[unitID].attackFacingDirection >= 16
                         && (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                             || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_FBALLISTA)
-                        && (this->units[unitID].aiUnitBehaviourType == 0x15
+                        && (this->units[unitID].aiUnitBehaviourType == 21
                             || DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
                             || this->units[unitID].unknownSiegeTentRelated02 == 3)) {
                         this->units[unitID].state.generic
@@ -157,7 +159,7 @@ namespace Map {
                 } else {
                     this->units[unitID].facingDirection
                         = this->units[unitID].facingDirection + (short)this->units[unitID].attackFacingDirection;
-                    this->units[unitID].attackFacingDirection = '\0';
+                    this->units[unitID].attackFacingDirection = 0;
                     this->units[unitID].facingDirection = this->units[unitID].facingDirection & 7;
                     this->units[unitID].shootTargetedUnit = 0;
                     this->units[unitID].facingDirectionMapOrientationCorrected
@@ -169,11 +171,10 @@ namespace Map {
                 }
                 _shootAtMicroX = DAT_PathFindingState::instance.ALG_TargetX * 8;
                 _shootAtMicroY = DAT_PathFindingState::instance.ALG_TargetY * 8;
-                _shootAtZ
-                    = DAT_TileMapState::instance.HeightLayer[DAT_PathFindingState::instance.ALG_TargetTile] - 0x2d;
+                _shootAtZ = DAT_TileMapState::instance.HeightLayer[DAT_PathFindingState::instance.ALG_TargetTile] - 45;
                 this->units[unitID].field_0x3bc = DAT_PathFindingState::instance.ALG_TargetTile;
                 if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
-                    this->units[unitID].field_0x3bc = -0x32;
+                    this->units[unitID].field_0x3bc = -50;
                     return FALSE;
                 }
             }

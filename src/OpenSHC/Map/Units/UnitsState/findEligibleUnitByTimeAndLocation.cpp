@@ -19,7 +19,7 @@ namespace Map {
         {
             int _bestUnitID = 0;
             int _bestScore = 0;
-            for (int _candidateUnitID = 1; _candidateUnitID < (int)this->maxUnitCount; ++_candidateUnitID) {
+            for (int _candidateUnitID = 1; _candidateUnitID < this->maxUnitCount; ++_candidateUnitID) {
                 if (this->units[_candidateUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }

@@ -44,9 +44,9 @@ namespace Map {
              */
 
             int const _tribeID = this->units[unitID].tribeID;
-            int _unitIsSiegeEngine = 0;
-            int _siegeProjectile = 0;
-            int _usesFemaleDeathScream = 0;
+            BOOLEnum _unitIsSiegeEngine = FALSE;
+            BOOLEnum _siegeProjectile = FALSE;
+            BOOLEnum _usesFemaleDeathScream = FALSE;
             UnitTypeShort const _unitType = this->units[unitID].unitType;
             int const _victimType = _unitType;
             int const _shooterID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
@@ -108,7 +108,7 @@ namespace Map {
                  */
 
                 if (DAT_UnitPropertiesDefinedData::instance
-                        .UnitClimbStateFlags[0][(short)DAT_UnitsState::instance.units[unitID].unitType]
+                        .UnitClimbStateFlags[0][DAT_UnitsState::instance.units[unitID].unitType]
                     == 0) {
                     return FALSE;
                 }
@@ -121,13 +121,13 @@ namespace Map {
                 int const _healerCount = DAT_GameState::instance.playerDataArray[this->units[unitID].owner].healerCount;
                 if (_healerCount >= 3) {
                     /* * 40 */
-                    _cowDiseaseDamage = (_cowDiseaseDamage * 0x28) / 100;
+                    _cowDiseaseDamage = (_cowDiseaseDamage * 40) / 100;
                 } else if (_healerCount == 2) {
                     /* * 60 */
-                    _cowDiseaseDamage = (_cowDiseaseDamage * 0x3c) / 100;
+                    _cowDiseaseDamage = (_cowDiseaseDamage * 60) / 100;
                 } else if (_healerCount == 1) {
                     /* * 80 */
-                    _cowDiseaseDamage = (_cowDiseaseDamage * 0x50) / 100;
+                    _cowDiseaseDamage = (_cowDiseaseDamage * 80) / 100;
                 }
                 this->units[unitID].health = this->units[unitID].health - _cowDiseaseDamage;
                 if (this->units[unitID].health <= 0) {
@@ -140,33 +140,33 @@ namespace Map {
                 int const _healthPercentage
                     = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                         DAT_DirectionAlgorithmState::ptr)(this->units[unitID].health, this->units[unitID].maxHealth);
-                this->units[unitID].healthPercentage = (short)_healthPercentage;
+                this->units[unitID].healthPercentage = _healthPercentage;
                 this->units[unitID].healthbar = (short)_healthPercentage / 10;
                 return FALSE;
             }
             int _unitHeight;
             if (_unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
-                _unitHeight = tileDistance == 0 ? 0x50 : 0x28;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = tileDistance == 0 ? 80 : 40;
+                _unitIsSiegeEngine = TRUE;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_TOWER) {
-                _unitHeight = 0x50;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = 80;
+                _unitIsSiegeEngine = TRUE;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
-                _unitHeight = 0x32;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = 50;
+                _unitIsSiegeEngine = TRUE;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
-                _unitHeight = 0x5a;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = 90;
+                _unitIsSiegeEngine = TRUE;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
-                _unitHeight = 0x28;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = 40;
+                _unitIsSiegeEngine = TRUE;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_MANGONEL) {
-                _unitHeight = 0x46;
-                _unitIsSiegeEngine = 1;
+                _unitHeight = 70;
+                _unitIsSiegeEngine = TRUE;
             } else {
                 if (_unitType == OpenSHC::Map::Units::UT_S_BALLISTA
                     || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA) {
-                    _unitIsSiegeEngine = 1;
+                    _unitIsSiegeEngine = TRUE;
                 }
                 _unitHeight = 42;
             }
@@ -175,7 +175,7 @@ namespace Map {
                 || _entityType == OpenSHC::Map::Entities::ET_MANGONEL
                 || _entityType == OpenSHC::Map::Entities::ET_BALLISTA
                 || _entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
-                _siegeProjectile = 1;
+                _siegeProjectile = TRUE;
             }
             int const _unitPlayerID = this->units[unitID].owner;
             short const _entityPlayerID = DAT_EntityState::instance.entityArray[entityID].owner;
@@ -185,7 +185,7 @@ namespace Map {
                   friendly fire only hurts from siege projectiles, and not from every kind
                  */
 
-                if (_siegeProjectile == 0) {
+                if (!_siegeProjectile) {
                     return FALSE;
                 }
                 EntityTypeShort const _projectileType = DAT_EntityState::instance.entityArray[entityID].entityType;
@@ -231,39 +231,39 @@ namespace Map {
             }
             EntityTypeShort const _projectileType = DAT_EntityState::instance.entityArray[entityID].entityType;
             int _damage;
-            if (_siegeProjectile == 0) {
+            if (!_siegeProjectile) {
                 if (_projectileType == OpenSHC::Map::Entities::ET_ARROW_AND_DEFAULT) {
                     UnitTypeShort const _targetUnitType = this->units[unitID].unitType;
-                    _damage = DAT_UnitPropertiesDefinedData::instance.ARROW_DAMAGE[(short)_targetUnitType];
+                    _damage = DAT_UnitPropertiesDefinedData::instance.ARROW_DAMAGE[_targetUnitType];
                     if (_targetUnitType == OpenSHC::Map::Units::UT_E_LADDER
-                        && this->units[unitID].state.generic == (UnitState)3) {
+                        && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_STATE_3Unk) {
                         _damage = _damage / 4;
                     }
                 } else if (_projectileType == OpenSHC::Map::Entities::ET_SLINGER) {
-                    _damage = DAT_UnitPropertiesDefinedData::instance.STONE_DAMAGE[(short)this->units[unitID].unitType];
+                    _damage = DAT_UnitPropertiesDefinedData::instance.STONE_DAMAGE[this->units[unitID].unitType];
                 } else {
-                    _damage = DAT_UnitPropertiesDefinedData::instance.BOLT_DAMAGE[(short)this->units[unitID].unitType];
+                    _damage = DAT_UnitPropertiesDefinedData::instance.BOLT_DAMAGE[this->units[unitID].unitType];
                 }
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
                     _damage, DAT_EntityState::instance.entityArray[entityID].owner);
-                if (_unitIsSiegeEngine != 0) {
+                if (_unitIsSiegeEngine) {
                     _damage = _damage / 2;
                 }
                 if (this->units[unitID].isStalked == 0) {
-                    DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + 0x32;
+                    DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + 50;
                 }
             } else {
                 if (_projectileType == OpenSHC::Map::Entities::ET_COW_FLYING) {
                     if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
-                        _damage = 0x32;
+                        _damage = 50;
                     } else {
                         /* flying cow: 50 against a shield, 500 against anything else */
-                        _damage = this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_SHIELD ? 0x32 : 0x1f4;
+                        _damage = this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_SHIELD ? 50 : 500;
                     }
                 } else if (_projectileType == OpenSHC::Map::Entities::ET_MANGONEL) {
                     UnitTypeShort const _targetUnitType = this->units[unitID].unitType;
                     if (_targetUnitType == OpenSHC::Map::Units::UT_LORD) {
-                        _damage = 0x32;
+                        _damage = 50;
                     } else if (_targetUnitType == OpenSHC::Map::Units::UT_S_SHIELD) {
                         _damage = 1500;
                     } else if (_targetUnitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
@@ -288,7 +288,7 @@ namespace Map {
 
                     UnitTypeShort const _targetUnitType = this->units[unitID].unitType;
                     if (_targetUnitType == OpenSHC::Map::Units::UT_LORD) {
-                        _damage = 0x32;
+                        _damage = 50;
                     } else if (_targetUnitType == OpenSHC::Map::Units::UT_S_SHIELD) {
                         _damage = 500;
                     } else if (_targetUnitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
@@ -315,9 +315,9 @@ namespace Map {
                     }
                 } else {
                     /* every other siege projectile: 50 against the lord, 30000 otherwise */
-                    _damage = this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD ? 0x32 : 30000;
+                    _damage = this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD ? 50 : 30000;
                 }
-                DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + 0x32;
+                DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + 50;
                 if (_damage > 20000) {
                     this->units[unitID].dying = 1;
                     if (_tribeID > 0) {
@@ -369,16 +369,16 @@ namespace Map {
             int const _healthPercentage
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                     DAT_DirectionAlgorithmState::ptr)(_unitHealth, this->units[unitID].maxHealth);
-            this->units[unitID].healthPercentage = (short)_healthPercentage;
+            this->units[unitID].healthPercentage = _healthPercentage;
             this->units[unitID].healthbar = (short)_healthPercentage / 10;
             if (_victimType == OpenSHC::Map::Units::UT_BREWER || _victimType == OpenSHC::Map::Units::UT_TANNER
                 || _victimType == OpenSHC::Map::Units::UT_LADY || _victimType == OpenSHC::Map::Units::UT_MOTHER
-                || (_victimType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
-                _usesFemaleDeathScream = 1;
+                || (_victimType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 129)) {
+                _usesFemaleDeathScream = TRUE;
             }
-            int _shotBySlinger = 0;
+            BOOLEnum _shotBySlinger = FALSE;
             if (this->units[_shooterID].unitType == OpenSHC::Map::Units::UT_A_SLINGER) {
-                _shotBySlinger = 1;
+                _shotBySlinger = TRUE;
             }
             if (_unitHealth <= 0 && this->units[unitID].dying == 0) {
                 this->units[unitID].dying = 1;
@@ -396,10 +396,10 @@ namespace Map {
                 }
                 this->units[unitID].tunnelerFinishedDigging = 1;
                 if (this->units[unitID].isStalked != 0) {
-                    if (_shotBySlinger == 0) {
+                    if (!_shotBySlinger) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_ARROW_HIT_ANIMAL);
-                    } else if (_shotBySlinger == 1) {
+                    } else if (_shotBySlinger == TRUE) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_HIT_SLINGSTONE);
                     }
@@ -408,7 +408,7 @@ namespace Map {
                 switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_S_SHIELD:
                     if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 != 0
-                        && _shotBySlinger == 0) {
+                        && !_shotBySlinger) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_DEATH_ARROW);
                         return TRUE;
@@ -431,30 +431,30 @@ namespace Map {
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_TR_DIE);
                     break;
                 }
-                if (_usesFemaleDeathScream != 0) {
+                if (_usesFemaleDeathScream) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_GIRL_DIE);
-                    if (_shotBySlinger == 0) {
+                    if (!_shotBySlinger) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_ARROW_HIT);
-                    } else if (_shotBySlinger == 1) {
+                    } else if (_shotBySlinger == TRUE) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_HIT_SLINGSTONE);
                     }
-                } else if (_shotBySlinger == 0) {
+                } else if (!_shotBySlinger) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_DEATH_ARROW);
-                } else if (_shotBySlinger == 1) {
+                } else if (_shotBySlinger == TRUE) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_DEATH_SLINGSTONE);
                 }
                 return TRUE;
             }
             if (this->units[unitID].isStalked != 0) {
-                if (_shotBySlinger == 0) {
+                if (!_shotBySlinger) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_ARROW_HIT_ANIMAL);
-                } else if (_shotBySlinger == 1) {
+                } else if (_shotBySlinger == TRUE) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_HIT_SLINGSTONE);
                 }

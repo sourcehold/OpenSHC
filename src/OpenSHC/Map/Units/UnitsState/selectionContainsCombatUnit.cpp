@@ -23,8 +23,7 @@ namespace Map {
             }
             BOOLEnum hasMatch = FALSE;
             int const currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-            for (DAT_CurrentUnitSlotID::instance = unitID;
-                (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = unitID; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == ULS_NORMAL
                     && this->units[DAT_CurrentUnitSlotID::instance].dying == 0

@@ -23,7 +23,7 @@ namespace Map {
         {
             this->units[unitID].field_0x440 = this->units[unitID].field_0x440 + 1;
             int _tile = this->units[unitID].tile;
-            int _buildingID = (short)DAT_TileMapState::instance.BuildingLayer[_tile];
+            int _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             if (this->units[unitID].unknownCountdown_0x402 == 0) {
                 if (_buildingID == 0 && (_logicFlags & 0x10000500) == 0) {
@@ -35,7 +35,7 @@ namespace Map {
                 }
             }
             this->units[unitID].isMatchingSpeed = false;
-            int _organismID = (short)DAT_TileMapState::instance.OrganismLayer[_tile];
+            int _organismID = DAT_TileMapState::instance.OrganismLayer[_tile];
             uint _isOnRoad = _logicFlags & 0x800000;
             uint _isInMoat = _logicFlags & 0x20000000;
             uint _isFord = _logicFlags & 0x200000;
@@ -56,7 +56,7 @@ namespace Map {
                 if (_tileHeight > _unitHeight) {
                     int _heightDifference = _tileHeight - _unitHeight;
                     if (_heightDifference > 16) {
-                        this->units[unitID].terrainOrClimbHeight = (short)_tileHeight;
+                        this->units[unitID].terrainOrClimbHeight = _tileHeight;
                         this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                     } else if (_heightDifference >= 12) {
                         this->units[unitID].terrainOrClimbHeight = _unitHeight + 4;
@@ -79,7 +79,7 @@ namespace Map {
                 } else if (_tileHeight < _unitHeight) {
                     int _heightDifference = _unitHeight - _tileHeight;
                     if (_heightDifference > 16) {
-                        this->units[unitID].terrainOrClimbHeight = (short)_tileHeight;
+                        this->units[unitID].terrainOrClimbHeight = _tileHeight;
                         this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                     } else if (_heightDifference >= 12) {
                         this->units[unitID].terrainOrClimbHeight = _unitHeight - 4;
@@ -101,7 +101,7 @@ namespace Map {
                     /* The original stores the own speed again in every branch that does not match the tribe. */
                     if (_tribeID <= 0) {
                         this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
-                    } else if (DAT_TribesState::instance.tribes[_tribeID].unitType != (UnitType)0) {
+                    } else if (DAT_TribesState::instance.tribes[_tribeID].unitType != OpenSHC::Map::Units::UT_NONE) {
                         this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                     } else if (DAT_TribesState::instance.tribes[_tribeID].freeUnitSpeeds != 0) {
                         this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
@@ -116,7 +116,7 @@ namespace Map {
                 }
             }
             if (_isInMoat != 0) {
-                if ((char)this->units[unitID].negativeHeight < 0x18) {
+                if ((char)this->units[unitID].negativeHeight < 24) {
                     this->units[unitID].negativeHeight = this->units[unitID].negativeHeight + 4;
                 }
                 if ((char)this->units[unitID].negativeHeight < 5) {
@@ -127,7 +127,7 @@ namespace Map {
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 6;
                 }
             } else if (_isFord != 0) {
-                if ((char)this->units[unitID].negativeHeight < 0x10) {
+                if ((char)this->units[unitID].negativeHeight < 16) {
                     this->units[unitID].negativeHeight = this->units[unitID].negativeHeight + 4;
                 }
                 this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 2;
@@ -146,10 +146,10 @@ namespace Map {
             if (_buildingID == 0) {
                 return;
             }
-            if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType < 0x29) {
+            if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType < 41) {
                 return;
             }
-            if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType > 0x2c) {
+            if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType > 44) {
                 return;
             }
             int _owner = this->units[unitID].owner;

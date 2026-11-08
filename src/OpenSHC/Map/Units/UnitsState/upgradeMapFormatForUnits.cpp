@@ -22,34 +22,34 @@ namespace Map {
             if (receivedMapVersion == (PackagedFileMagicNum)100) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_100)();
             }
-            if (receivedMapVersion == (PackagedFileMagicNum)100 || (int)receivedMapVersion < 0x71) {
+            if (receivedMapVersion == (PackagedFileMagicNum)100 || (int)receivedMapVersion < 113) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_112)();
             }
-            if ((int)receivedMapVersion < 0x72) {
+            if ((int)receivedMapVersion < 114) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_114)();
             }
-            if ((int)receivedMapVersion < 0x75) {
+            if ((int)receivedMapVersion < 117) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_117)();
             }
-            if ((int)receivedMapVersion < 0x7a) {
+            if ((int)receivedMapVersion < 122) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsAttackTileLogicTo_122)();
             }
-            if ((int)receivedMapVersion < 0x82) {
+            if ((int)receivedMapVersion < 130) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_130)();
             }
-            if ((int)receivedMapVersion < 0x95) {
+            if ((int)receivedMapVersion < 149) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_149)();
             }
-            if ((int)receivedMapVersion < 0x9a) {
+            if ((int)receivedMapVersion < 154) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_154)();
             }
-            if ((int)receivedMapVersion < 0x9b) {
+            if ((int)receivedMapVersion < 155) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_155)();
             }
-            if ((int)receivedMapVersion < 0xa9) {
+            if ((int)receivedMapVersion < 169) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsLordHealthTo_169)();
             }
-            if ((int)receivedMapVersion < 0xaa) {
+            if ((int)receivedMapVersion < 170) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_170)();
             }
         }

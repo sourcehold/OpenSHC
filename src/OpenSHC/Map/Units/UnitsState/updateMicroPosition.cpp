@@ -32,9 +32,9 @@ namespace Map {
             }
             _microPartX += _microPartY;
             this->units[unitID].orientationRelatedPositionX
-                = (short)DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX];
+                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX];
             this->units[unitID].orientationRelatedPositionY
-                = (short)DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX + 1];
+                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX + 1];
         }
 
     }

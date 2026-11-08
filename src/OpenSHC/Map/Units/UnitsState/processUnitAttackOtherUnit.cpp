@@ -34,7 +34,7 @@ namespace Map {
             int const _unit2Type = this->units[unit2ID].unitType;
             /* get the damage from the array based: row is unit1ID type, column is unit2ID type */
             int _damage
-                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[(short)this->units[unitID].unitType][_unit2Type];
+                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[this->units[unitID].unitType][_unit2Type];
             /* if unit 1 is not a lord */
             if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) {
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
@@ -43,7 +43,7 @@ namespace Map {
             if (this->units[unitID].owner != 0 && this->units[unit2ID].owner != this->units[unitID].owner) {
                 /* let unit 2 know we attacked them? */
                 this->units[unit2ID].lastEncounteredEnemyPlayerID = this->units[unitID].owner;
-                this->units[unit2ID].lastEncounteredEnemyUnitIDUnk = (short)unitID;
+                this->units[unit2ID].lastEncounteredEnemyUnitIDUnk = unitID;
             }
             /* decrement the health of unit 2 by damage */
             this->units[unit2ID].health = this->units[unit2ID].health - _damage;
@@ -57,7 +57,7 @@ namespace Map {
             } else {
                 _healthPercentage = (this->units[unit2ID].health * 100) / this->units[unit2ID].maxHealth;
             }
-            this->units[unit2ID].healthPercentage = (short)_healthPercentage;
+            this->units[unit2ID].healthPercentage = _healthPercentage;
             this->units[unit2ID].healthbar = (short)_healthPercentage / 10;
             if (this->units[unit2ID].health <= 0 && this->units[unit2ID].isStalked != 0) {
                 switch (this->units[unitID].unitType) {
@@ -161,7 +161,7 @@ namespace Map {
             bool _hasSpecialDeathSound = false;
             if (_unit2Type == OpenSHC::Map::Units::UT_BREWER || _unit2Type == OpenSHC::Map::Units::UT_TANNER
                 || _unit2Type == OpenSHC::Map::Units::UT_LADY || _unit2Type == OpenSHC::Map::Units::UT_MOTHER
-                || (_unit2Type == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
+                || (_unit2Type == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 129)) {
                 _hasSpecialDeathSound = true;
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_GIRL_DIE);

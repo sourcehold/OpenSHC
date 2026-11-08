@@ -17,7 +17,7 @@ namespace Map {
             for (int i = 0; i <= 26; ++i) {
                 this->selectionUnitType[i] = 0;
             }
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }

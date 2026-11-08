@@ -24,7 +24,7 @@ namespace Map {
         {
             int _bestUnitID = 0;
             int _bestScore = 10000;
-            if (x > 0x18f || y > 0x18f) {
+            if (x > 399 || y > 399) {
                 return 0;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
@@ -34,7 +34,7 @@ namespace Map {
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             this->unusedUnitIDArrayIndex = 0;
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
@@ -62,10 +62,10 @@ namespace Map {
                 if (_distance > maxDistance) {
                     continue;
                 }
-                if ((short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
+                if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
                     continue;
                 }
-                this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = (short)unitID;
+                this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = unitID;
                 this->unusedUnitIDArrayIndex = this->unusedUnitIDArrayIndex + 1;
                 int _score = _distance + this->units[unitID].huntedBy * 3;
                 if (_score < _bestScore) {

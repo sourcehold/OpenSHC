@@ -28,11 +28,11 @@ namespace Map {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
-                    return (UnitType)-1;
+                    return OpenSHC::Map::Units::UT_INVALID;
                 }
                 return (UnitType)(short)this->units[DAT_CurrentUnitSlotID::instance].unitType;
             }
-            return (UnitType)0;
+            return OpenSHC::Map::Units::UT_NONE;
         }
 
     }

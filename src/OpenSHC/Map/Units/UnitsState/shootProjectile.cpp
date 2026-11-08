@@ -26,14 +26,14 @@ namespace Map {
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,
                         this->units[unitID].microXPosition, this->units[unitID].microYPosition,
-                        this->units[unitID].buildingHeight + 0x82 + this->units[unitID].terrainOrClimbHeight, targetX,
+                        this->units[unitID].buildingHeight + 130 + this->units[unitID].terrainOrClimbHeight, targetX,
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_COW_FLYING, 0);
                 } else {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,
                         this->units[unitID].microXPosition, this->units[unitID].microYPosition,
-                        this->units[unitID].buildingHeight + 0x82 + this->units[unitID].terrainOrClimbHeight, targetX,
+                        this->units[unitID].buildingHeight + 130 + this->units[unitID].terrainOrClimbHeight, targetX,
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_TREBUCHET, 0);
                 }
             } else if (projectileType == OpenSHC::Map::Entities::ET_CATAPULT) {
@@ -74,14 +74,14 @@ namespace Map {
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,
                         this->units[unitID].microXPosition + _offsetX, this->units[unitID].microYPosition + _offsetY,
-                        this->units[unitID].buildingHeight + 0x38 + this->units[unitID].terrainOrClimbHeight, targetX,
+                        this->units[unitID].buildingHeight + 56 + this->units[unitID].terrainOrClimbHeight, targetX,
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_COW_FLYING, 0);
                 } else {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,
                         this->units[unitID].microXPosition + _offsetX, this->units[unitID].microYPosition + _offsetY,
-                        this->units[unitID].buildingHeight + 0x38 + this->units[unitID].terrainOrClimbHeight, targetX,
+                        this->units[unitID].buildingHeight + 56 + this->units[unitID].terrainOrClimbHeight, targetX,
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_CATAPULT, 0);
                 }
             } else if (projectileType == OpenSHC::Map::Entities::ET_MANGONEL) {

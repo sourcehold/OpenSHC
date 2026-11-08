@@ -49,7 +49,7 @@ namespace Map {
                 _boxTop = DAT_MouseState::instance.selectionBox.top;
                 _boxBottom = DAT_MouseState::instance.selectionBox.bottom;
             }
-            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL
                     || this->units[DAT_CurrentUnitSlotID::instance].dying != 0
@@ -131,7 +131,7 @@ namespace Map {
                 _priority = 9;
             }
             this->totalUnitsInSelection = 0;
-            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 this->units[DAT_CurrentUnitSlotID::instance].isSelected = 0;
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL

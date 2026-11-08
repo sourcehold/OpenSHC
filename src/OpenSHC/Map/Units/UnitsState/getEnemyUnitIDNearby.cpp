@@ -15,7 +15,7 @@ namespace Map {
         int UnitsState::getEnemyUnitIDNearby(int unitID, int tileUnk, int unitHeight)
         {
             int _ownerPlayerID = this->units[unitID].owner;
-            int _otherUnitID = (short)DAT_TileMapState::instance.UnitLayer[tileUnk];
+            int _otherUnitID = DAT_TileMapState::instance.UnitLayer[tileUnk];
             if (_otherUnitID == 0) {
                 return 0;
             }
@@ -23,9 +23,9 @@ namespace Map {
                 if (this->units[_otherUnitID].dying == 0 && this->units[_otherUnitID].unknownTestAgainst0_2 == 0
                     && this->units[_otherUnitID].moveRelatedFlag != 1) {
                     if (this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight
-                            <= unitHeight + 0x20
+                            <= unitHeight + 32
                         && this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight
-                            >= unitHeight - 0x20
+                            >= unitHeight - 32
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::shouldUnitsEngageInMelee, this)(
                                unitID, _otherUnitID)
                             == FALSE
@@ -35,7 +35,7 @@ namespace Map {
                         return _otherUnitID;
                     }
                 }
-                _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile;
+                _otherUnitID = this->units[_otherUnitID].nextUnitOnTheSameTile;
                 if (_otherUnitID <= 0) {
                     return 0;
                 }

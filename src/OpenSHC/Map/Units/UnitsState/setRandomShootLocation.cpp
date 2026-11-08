@@ -114,9 +114,9 @@ namespace Map {
                 microY = microY + (-((_spreadAcross * 3) / 4) - (_spreadAlong * 3) / 4);
                 break;
             }
-            this->units[unitID].shootTargetZ = (short)z;
-            this->units[unitID].shootTargetMicroY = (short)microY;
-            this->units[unitID].shootTargetMicroX = (short)microX;
+            this->units[unitID].shootTargetZ = z;
+            this->units[unitID].shootTargetMicroY = microY;
+            this->units[unitID].shootTargetMicroX = microX;
         }
 
     }

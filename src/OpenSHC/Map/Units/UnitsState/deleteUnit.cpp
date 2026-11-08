@@ -26,7 +26,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x490, '\0', &this->units[unitID]);
+                1168, '\0', &this->units[unitID]);
         }
 
     }

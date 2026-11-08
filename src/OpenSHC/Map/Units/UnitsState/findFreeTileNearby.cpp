@@ -24,14 +24,14 @@ namespace Map {
             int _ownerPlayerID = DAT_UnitsState::instance.units[unitID].owner;
             int _originY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             dword _areaAtUnit
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             int _originX = tile - DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile;
             /* original_y-2 */
-            uint _northTile = DAT_ViewportRenderState::instance.translationMatrix[_originY + -2].addXgetTile + _originX;
+            uint _northTile = DAT_ViewportRenderState::instance.translationMatrix[_originY - 2].addXgetTile + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
+                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
                 == 0) {
                 _northTile = 0;
             }
@@ -40,7 +40,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
+                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
                 == 0) {
                 _eastTile = 0;
             }
@@ -49,16 +49,16 @@ namespace Map {
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
+                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
                 == 0) {
                 _southTile = 0;
             }
             /* original_x-2 */
-            uint _westTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile + -2 + _originX;
+            uint _westTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile - 2 + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
+                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
                 == 0) {
                 _westTile = 0;
             }

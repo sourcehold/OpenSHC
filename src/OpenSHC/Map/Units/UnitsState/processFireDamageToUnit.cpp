@@ -45,7 +45,7 @@ namespace Map {
                 damage = damage / 2;
             }
             if (playerID != 0 && playerID != this->units[unitID].owner) {
-                this->units[unitID].lastEncounteredEnemyPlayerID = (short)playerID;
+                this->units[unitID].lastEncounteredEnemyPlayerID = playerID;
                 this->units[unitID].lastEncounteredEnemyUnitIDUnk = 0;
             }
             this->units[unitID].health -= damage;
@@ -105,7 +105,7 @@ namespace Map {
             /* if a male */
             if (unitTypeID != OpenSHC::Map::Units::UT_BREWER && unitTypeID != OpenSHC::Map::Units::UT_TANNER
                 && unitTypeID != OpenSHC::Map::Units::UT_LADY && unitTypeID != OpenSHC::Map::Units::UT_MOTHER
-                && (unitTypeID != OpenSHC::Map::Units::UT_CHILD || this->units[unitID].spriteID != 0x81)) {
+                && (unitTypeID != OpenSHC::Map::Units::UT_CHILD || this->units[unitID].spriteID != 129)) {
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                 if ((SEC_RNG::instance.currentNumber1 & 1) != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(

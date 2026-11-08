@@ -24,8 +24,8 @@ namespace Map {
             for (int _stepIndex = 0; _stepIndex < this->units[unitID].totalSizeOfPathPlan; ++_stepIndex) {
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x20000081U) == 0) {
                     if (DAT_TileMapState::instance.BuildingLayer[_tile] == 0
-                        && (DAT_TileMapState::instance.HeightLayer[_tile] < 0x10
-                            || DAT_TileMapState::instance.DefaultHeightLayer[_tile] < 0x10)) {
+                        && (DAT_TileMapState::instance.HeightLayer[_tile] < 16
+                            || DAT_TileMapState::instance.DefaultHeightLayer[_tile] < 16)) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::increaseHeightForTunnelWithBrush,
                             DAT_TileMapState::ptr)(_tile, _xPosition, _yPosition, -2);
                         DAT_TileMapState::instance.HeightLayer[_tile] = 0;

@@ -23,8 +23,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsEngineersOnly, this)()
                 != FALSE) {
                 int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-                for (DAT_CurrentUnitSlotID::instance = 1;
-                    (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+                for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                     DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;

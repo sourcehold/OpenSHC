@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
@@ -9,7 +10,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0053CBD0
-        int UnitsState::prepareProjectileTarget(int shooterID, int targetID, int param_3)
+        int UnitsState::prepareProjectileTarget(int shooterID, int targetID, int leadDistanceUnk)
         {
             uint _targetFixedRng = 0;
             if (targetID == -1) {
@@ -24,7 +25,7 @@ namespace Map {
                     this->units[shooterID].shootTargetZ
                         = this->units[targetID].buildingHeight + this->units[targetID].terrainOrClimbHeight;
                 } else {
-                    int _lead = (param_3 * 133) / 100;
+                    int _lead = (leadDistanceUnk * 133) / 100;
                     int _adjustment;
                     /* todo:fixme:ucp: this if-else should be improved to also trigger when the
                        targetID has negative height (walking in pitch or moat) */
@@ -81,57 +82,57 @@ namespace Map {
             int _scatter;
             /* The original's jump tables carry entries for the archers that end up in the same place as
                every other unhandled type, so their arms did something that was optimised away. */
-            int _archerScatter;
+            BOOLEnum _archerScatter;
             if (this->units[shooterID].terrainOrClimbHeight > this->units[shooterID].shootTargetZ) {
                 switch (this->units[shooterID].unitType) {
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
                 case OpenSHC::Map::Units::UT_S_BALLISTA:
-                    _scatter = 0x14;
+                    _scatter = 20;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
                     _scatter = 10;
                     break;
                 case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                    _scatter = 0x32;
+                    _scatter = 50;
                     break;
                 case OpenSHC::Map::Units::UT_S_MANGONEL:
-                    _scatter = 0x3c;
+                    _scatter = 60;
                     break;
                 case OpenSHC::Map::Units::UT_E_ARCHER:
                 case OpenSHC::Map::Units::UT_E_ARCHER_DEBUG:
-                    _archerScatter = 0;
-                    return this->units[shooterID].unitType - 0x16;
+                    _archerScatter = FALSE;
+                    return this->units[shooterID].unitType - 22;
                 default:
-                    return this->units[shooterID].unitType - 0x16;
+                    return this->units[shooterID].unitType - 22;
                 }
             } else {
                 _scatter = this->units[shooterID].shootTargetZ - this->units[shooterID].terrainOrClimbHeight;
-                if (_scatter > 0x4b) {
+                if (_scatter > 75) {
                     _scatter = _scatter + _scatter / 2;
                 }
                 switch (this->units[shooterID].unitType) {
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
                 case OpenSHC::Map::Units::UT_S_BALLISTA:
-                    _scatter = _scatter + 0x28;
+                    _scatter = _scatter + 40;
                     break;
                 case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                    _scatter = _scatter + 0x3c;
+                    _scatter = _scatter + 60;
                     break;
                 case OpenSHC::Map::Units::UT_S_MANGONEL:
-                    _scatter = _scatter + 0x46;
+                    _scatter = _scatter + 70;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    return this->units[shooterID].unitType - 0x16;
+                    return this->units[shooterID].unitType - 22;
                 case OpenSHC::Map::Units::UT_E_ARCHER:
                 case OpenSHC::Map::Units::UT_E_ARCHER_DEBUG:
-                    _archerScatter = 0;
+                    _archerScatter = FALSE;
                     break;
                 }
                 if (_scatter <= 0) {
-                    return this->units[shooterID].unitType - 0x16;
+                    return this->units[shooterID].unitType - 22;
                 }
-                if (_scatter > 0x118) {
-                    _scatter = 0x118;
+                if (_scatter > 280) {
+                    _scatter = 280;
                 }
             }
             int _rng = SEC_RNG::instance.currentNumber2;
@@ -159,14 +160,14 @@ namespace Map {
                     _scatter = 1;
                 }
                 int _heightRng = abs(this->units[shooterID].fixedRng + _rng);
-                int _heightOffset = _heightRng % _scatter + 0x14;
+                int _heightOffset = _heightRng % _scatter + 20;
                 if (this->units[shooterID].shootTargetZ < _heightOffset + 8) {
                     _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ + _heightOffset;
-                    this->units[shooterID].shootTargetZ = (short)_unhandledTypeResult;
+                    this->units[shooterID].shootTargetZ = _unhandledTypeResult;
                     return _unhandledTypeResult;
                 }
                 _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
-                this->units[shooterID].shootTargetZ = (short)_unhandledTypeResult;
+                this->units[shooterID].shootTargetZ = _unhandledTypeResult;
                 return _unhandledTypeResult;
             }
             _scatter = _scatter / 6;
@@ -175,7 +176,7 @@ namespace Map {
             }
             int _heightRng = abs(_rng + _targetFixedRng);
             this->units[shooterID].shootTargetZ
-                = this->units[shooterID].shootTargetZ + (short)(_heightRng % _scatter) + 0x28;
+                = this->units[shooterID].shootTargetZ + (short)(_heightRng % _scatter) + 40;
             return _heightRng / _scatter;
         }
 

@@ -29,7 +29,7 @@ namespace Map {
                 }
                 return FALSE;
             }
-            if ((short)DAT_TileMapState::instance.UnitLayer[this->units[unitID].tile] == unitID) {
+            if (DAT_TileMapState::instance.UnitLayer[this->units[unitID].tile] == unitID) {
                 return FALSE;
             }
             if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x100U) != 0) {

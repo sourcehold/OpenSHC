@@ -15,21 +15,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537700
         BOOLEnum UnitsState::findTunnelTarget(int originBuildingID, int targetPlayer)
         {
-            if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 0) {
+            if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 0) {
                 return FALSE;
             }
             int _distance;
-            if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 0) {
+            if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 0) {
                 _distance = 20;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 1) {
+            } else if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 1) {
                 _distance = 20;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 2) {
+            } else if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 2) {
                 _distance = 40;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 3) {
+            } else if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 3) {
                 _distance = 40;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 4) {
+            } else if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 4) {
                 _distance = 80;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 5) {
+            } else if (DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 5) {
                 _distance = 80;
             } else {
                 DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter = -1;

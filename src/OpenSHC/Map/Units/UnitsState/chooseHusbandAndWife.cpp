@@ -25,11 +25,11 @@ namespace Map {
             int _womenIDs[100];
             int _menCount = 0;
             int _womenCount = 0;
-            for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
                     continue;
                 }
-                if (this->units[unitID].unitType == (UnitType)0) {
+                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_NONE) {
                     continue;
                 }
                 if (unitID == DAT_00ee102c::instance || unitID == DAT_00ee1028::instance) {
@@ -39,7 +39,7 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_BREWER:
                 case OpenSHC::Map::Units::UT_TANNER:
                 case OpenSHC::Map::Units::UT_MOTHER:
-                    if ((char)this->units[unitID].firstNameIndex >= 52 && _womenCount < 100) {
+                    if (this->units[unitID].firstNameIndex >= 52 && _womenCount < 100) {
                         _womenIDs[_womenCount] = unitID;
                         _womenCount = _womenCount + 1;
                     }
@@ -68,7 +68,7 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_INNKEEPER:
                 case OpenSHC::Map::Units::UT_TRADER:
                 case OpenSHC::Map::Units::UT_JESTER:
-                    if ((char)this->units[unitID].firstNameIndex < 51 && _menCount < 100) {
+                    if (this->units[unitID].firstNameIndex < 51 && _menCount < 100) {
                         _menIDs[_menCount] = unitID;
                         _menCount = _menCount + 1;
                     }

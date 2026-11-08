@@ -26,17 +26,17 @@ namespace Map {
             this->units[unitID].field_0x84 = 0;
             if (_logicFlags != 0) {
                 if ((_logicFlags & 0x800) != 0) {
-                    this->units[unitID].buildingHeight = 0xc;
+                    this->units[unitID].buildingHeight = 12;
                 } else if ((_logicFlags & 0x100) != 0) {
                     if (_buildingID != 0) {
                         if (this->units[unitID].unknownCountdown_0x402 != 0) {
-                            this->units[unitID].buildingHeight = -0x5a;
-                            if (this->units[unitID].terrainOrClimbHeight - 0x5a < 8) {
+                            this->units[unitID].buildingHeight = -90;
+                            if (this->units[unitID].terrainOrClimbHeight - 90 < 8) {
                                 this->units[unitID].buildingHeight = 0;
                             }
                             this->units[unitID].wasOnStoneGate = 1;
                         } else {
-                            this->units[unitID].buildingHeight = 0x28;
+                            this->units[unitID].buildingHeight = 40;
                         }
                     } else {
                         this->units[unitID].buildingHeight = 4;
@@ -46,11 +46,11 @@ namespace Map {
                 } else if ((_logicFlags & 0x10000000) != 0) {
                     if (this->units[unitID].unknownCountdown_0x402 == 0
                         && this->units[unitID].unitType != OpenSHC::Map::Units::UT_S_TOWER) {
-                        this->units[unitID].buildingHeight = (short)MACRO_CALL_MEMBER(
+                        this->units[unitID].buildingHeight = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                             DAT_BuildingsState::ptr)(_buildingID);
                     }
-                    this->units[unitID].field_0x84 = (short)MACRO_CALL_MEMBER(
+                    this->units[unitID].field_0x84 = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID2,
                         DAT_BuildingsState::ptr)(_buildingID);
                     this->units[unitID].terrainOrClimbHeight

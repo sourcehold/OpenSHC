@@ -11,7 +11,7 @@ namespace Map {
         void UnitsState::changeDestinationByAmount(int unitID, int leftover)
         {
             if (this->units[unitID].climbDataID != 0) {
-                this->units[unitID].leftover = (short)leftover;
+                this->units[unitID].leftover = leftover;
                 return;
             }
             this->units[unitID].leftover = 0;
@@ -32,10 +32,10 @@ namespace Map {
                     _destinationY = _destinationY
                         + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
                 }
-                this->units[unitID].destinationXPosition = (short)_destinationX;
-                this->units[unitID].destinationYPosition = (short)_destinationY;
-                this->units[unitID].destinationX_2Unk = (short)_destinationX;
-                this->units[unitID].destinationY_2Unk = (short)_destinationY;
+                this->units[unitID].destinationXPosition = _destinationX;
+                this->units[unitID].destinationYPosition = _destinationY;
+                this->units[unitID].destinationX_2Unk = _destinationX;
+                this->units[unitID].destinationY_2Unk = _destinationY;
                 this->units[unitID].destinationTilePosition = (short)_destinationX
                     + DAT_ViewportRenderState::instance.translationMatrix[(short)_destinationY].addXgetTile;
             } else {

@@ -20,7 +20,7 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0053D9C0
-        uint UnitsState::getUnitInHitBox(undefined4 param_1)
+        uint UnitsState::getUnitInHitBox(undefined4 filterMode)
         {
             int _hitboxXStart;
             int _hitboxXEnd;
@@ -40,7 +40,7 @@ namespace Map {
                 _hitboxYStart = DAT_MouseState::instance.hitboxYStart;
                 _hitboxYEnd = DAT_MouseState::instance.hitboxYEnd;
             }
-            for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
@@ -114,7 +114,7 @@ namespace Map {
                         != 0) {
                     continue;
                 }
-                switch (param_1) {
+                switch (filterMode) {
                 case 1:
                     if (DAT_GameState::instance.mapAndTime
                             .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]

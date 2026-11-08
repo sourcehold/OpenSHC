@@ -54,7 +54,7 @@ namespace Map {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;
             }
-            return (BOOLEnum)(_previousFacingDirection != this->units[unitID].facingDirection);
+            return _previousFacingDirection != this->units[unitID].facingDirection;
         }
 
     }

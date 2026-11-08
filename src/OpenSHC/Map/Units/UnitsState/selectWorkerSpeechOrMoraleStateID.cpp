@@ -32,23 +32,23 @@ namespace Map {
             int _rngMod4 = _rng % 4;
             if (unitID != INT_00ee1038::instance) {
                 INT_00ee1038::instance = unitID;
-                if (DAT_UnitPropertiesDefinedData::instance.field_0x12260 == 0x19) {
+                if (DAT_UnitPropertiesDefinedData::instance.field_0x12260 == 25) {
                     DAT_UnitPropertiesDefinedData::instance.field_0x12260 = 0;
-                    DAT_UnitPropertiesDefinedData::instance.field_0x12264 = 0x19;
+                    DAT_UnitPropertiesDefinedData::instance.field_0x12264 = 25;
                     DAT_UnitPropertiesDefinedData::instance.field_0x12268 = 10;
-                } else if (DAT_UnitPropertiesDefinedData::instance.field_0x12264 == 0x19) {
+                } else if (DAT_UnitPropertiesDefinedData::instance.field_0x12264 == 25) {
                     DAT_UnitPropertiesDefinedData::instance.field_0x12260 = 10;
                     DAT_UnitPropertiesDefinedData::instance.field_0x12264 = 0;
-                    DAT_UnitPropertiesDefinedData::instance.field_0x12268 = 0x19;
-                } else if (DAT_UnitPropertiesDefinedData::instance.field_0x12268 == 0x19) {
-                    DAT_UnitPropertiesDefinedData::instance.field_0x12260 = 0x19;
+                    DAT_UnitPropertiesDefinedData::instance.field_0x12268 = 25;
+                } else if (DAT_UnitPropertiesDefinedData::instance.field_0x12268 == 25) {
+                    DAT_UnitPropertiesDefinedData::instance.field_0x12260 = 25;
                     DAT_UnitPropertiesDefinedData::instance.field_0x12264 = 10;
                     DAT_UnitPropertiesDefinedData::instance.field_0x12268 = 0;
                 }
             }
             int _worstPopularityReason = -1;
             int _worstPopularityValue = 0;
-            for (int i = 0; i < 0x20; ++i) {
+            for (int i = 0; i < 32; ++i) {
                 if (i < 5) {
                     continue;
                 }
@@ -76,29 +76,29 @@ namespace Map {
                 }
                 switch (_worstPopularityReason) {
                 case 5:
-                    return _rngMod4 + 0x74;
-                case 0xb:
-                    return (MACRO_CALL(OpenSHC::Map::Units_Func::CurrentUnitHasHealer)() != FALSE) + 0x67;
-                case 0xc:
-                    return 0x79;
-                case 0xd:
-                    return 0x7a;
-                case 0xe:
-                    return 0x7c;
-                case 0xf:
-                    return 0x78;
-                case 0x10:
-                    return (_rng & 1) + 0x6c;
-                case 0x11:
-                    return (_rng & 1) + 0x6a;
-                case 0x12:
-                    return 0x69;
-                case 0x13:
-                    return 0x7b;
-                case 0x15:
-                    return _rngMod4 + 0x6e;
-                case 0x16:
-                    return (_rng & 1) + 0x72;
+                    return _rngMod4 + 116;
+                case 11:
+                    return (MACRO_CALL(OpenSHC::Map::Units_Func::CurrentUnitHasHealer)() != FALSE) + 103;
+                case 12:
+                    return 121;
+                case 13:
+                    return 122;
+                case 14:
+                    return 124;
+                case 15:
+                    return 120;
+                case 16:
+                    return (_rng & 1) + 108;
+                case 17:
+                    return (_rng & 1) + 106;
+                case 18:
+                    return 105;
+                case 19:
+                    return 123;
+                case 21:
+                    return _rngMod4 + 110;
+                case 22:
+                    return (_rng & 1) + 114;
                 }
             }
             int _bestSpeechID = -1;
@@ -114,12 +114,12 @@ namespace Map {
                 DAT_00ee1030::instance = 0;
             } else {
                 DAT_00ee1030::instance = DAT_00ee1030::instance + 1;
-                _candidateSpeechID = _rngMod4 + 0x62;
-                _bestWeight = 0x50;
+                _candidateSpeechID = _rngMod4 + 98;
+                _bestWeight = 80;
                 if ((int)DAT_00ee1030::instance > 2) {
-                    _bestWeight = (4 - DAT_00ee1030::instance) * 0x14;
-                    if (_bestWeight < 0x14) {
-                        _bestWeight = 0x14;
+                    _bestWeight = (4 - DAT_00ee1030::instance) * 20;
+                    if (_bestWeight < 20) {
+                        _bestWeight = 20;
                     }
                 }
                 _candidateCount = 100;
@@ -130,17 +130,17 @@ namespace Map {
                     .rationsSetting
                 == 0) {
                 _weight = 10;
-                _candidateSpeechID = _rngMod4 + 0x3c;
+                _candidateSpeechID = _rngMod4 + 60;
             } else if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                            .rationsSetting
                 == 1) {
-                _weight = 0x14;
-                _candidateSpeechID = _rngMod4 + 0x40;
+                _weight = 20;
+                _candidateSpeechID = _rngMod4 + 64;
             } else if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                            .rationsSetting
                 == 4) {
-                _weight = 0x14;
-                _candidateSpeechID = _rngMod4 + 0x44;
+                _weight = 20;
+                _candidateSpeechID = _rngMod4 + 68;
             }
             if (_weight != 0) {
                 _candidateCount = _candidateCount + 1;
@@ -156,23 +156,23 @@ namespace Map {
             if (_taxesSetting <= 3 || _taxesSetting >= 8) {
                 _weight = 0;
                 if (_taxesSetting == 0) {
-                    _candidateSpeechID = _rngMod4 + 0x49;
-                    _weight = 0x14;
+                    _candidateSpeechID = _rngMod4 + 73;
+                    _weight = 20;
                 } else if (_taxesSetting == 1) {
-                    _weight = 0xf;
-                    _candidateSpeechID = _rngMod4 + 0x4d;
+                    _weight = 15;
+                    _candidateSpeechID = _rngMod4 + 77;
                 } else if (_taxesSetting == 2) {
                     _weight = 10;
-                    _candidateSpeechID = _rngMod4 + 0x51;
+                    _candidateSpeechID = _rngMod4 + 81;
                 } else if (_taxesSetting == 3) {
                     _weight = 5;
-                    _candidateSpeechID = _rngMod4 + 0x55;
+                    _candidateSpeechID = _rngMod4 + 85;
                 } else if (_taxesSetting == 8) {
-                    _weight = 0xf;
-                    _candidateSpeechID = _rngMod4 + 0x59;
-                } else if (_taxesSetting == 9 || _taxesSetting == 10 || _taxesSetting == 0xb) {
-                    _candidateSpeechID = _rngMod4 + 0x5d;
-                    _weight = 0x14;
+                    _weight = 15;
+                    _candidateSpeechID = _rngMod4 + 89;
+                } else if (_taxesSetting == 9 || _taxesSetting == 10 || _taxesSetting == 11) {
+                    _candidateSpeechID = _rngMod4 + 93;
+                    _weight = 20;
                 }
                 if (_weight != 0) {
                     _candidateCount = _candidateCount + 1;
@@ -189,16 +189,16 @@ namespace Map {
             _weight = 0;
             if (_productivity < 100) {
                 _candidateCount = _candidateCount + 1;
-                if (_productivity < 0x3c) {
-                    _weight = 0x19;
-                    _candidateSpeechID = _rngMod4 + 0x12;
-                } else if (_productivity < 0x46) {
-                    _weight = 0x14;
-                    _candidateSpeechID = _rngMod4 + 0xe;
-                } else if (_productivity < 0x50) {
-                    _weight = 0xf;
+                if (_productivity < 60) {
+                    _weight = 25;
+                    _candidateSpeechID = _rngMod4 + 18;
+                } else if (_productivity < 70) {
+                    _weight = 20;
+                    _candidateSpeechID = _rngMod4 + 14;
+                } else if (_productivity < 80) {
+                    _weight = 15;
                     _candidateSpeechID = _rngMod4 + 10;
-                } else if (_productivity < 0x5a) {
+                } else if (_productivity < 90) {
                     _weight = 10;
                     _candidateSpeechID = _rngMod4 + 6;
                 } else {
@@ -212,43 +212,43 @@ namespace Map {
                     || MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isWorkerAtProductionIdleState, this)(
                            unitID)
                         == 0) {
-                    if (_productivity < 0x6e) {
+                    if (_productivity < 110) {
                         _weight = 5;
-                        _candidateSpeechID = _rngMod4 + 0x1b;
-                    } else if (_productivity < 0x78) {
+                        _candidateSpeechID = _rngMod4 + 27;
+                    } else if (_productivity < 120) {
                         _weight = 10;
-                        _candidateSpeechID = _rngMod4 + 0x1f;
-                    } else if (_productivity < 0x82) {
-                        _weight = 0xf;
-                        _candidateSpeechID = _rngMod4 + 0x23;
-                    } else if (_productivity < 0x8c) {
-                        _weight = 0x14;
-                        _candidateSpeechID = _rngMod4 + 0x27;
+                        _candidateSpeechID = _rngMod4 + 31;
+                    } else if (_productivity < 130) {
+                        _weight = 15;
+                        _candidateSpeechID = _rngMod4 + 35;
+                    } else if (_productivity < 140) {
+                        _weight = 20;
+                        _candidateSpeechID = _rngMod4 + 39;
                     } else {
-                        _weight = 0x19;
-                        _candidateSpeechID = _rngMod4 + 0x2b;
+                        _weight = 25;
+                        _candidateSpeechID = _rngMod4 + 43;
                     }
                 } else {
                     switch (this->units[unitID].productivityDiv100) {
                     case 1:
                         _weight = 10;
-                        _candidateSpeechID = 0x16;
+                        _candidateSpeechID = 22;
                         break;
                     case 2:
-                        _weight = 0xf;
-                        _candidateSpeechID = 0x17;
+                        _weight = 15;
+                        _candidateSpeechID = 23;
                         break;
                     case 3:
-                        _weight = 0x14;
-                        _candidateSpeechID = 0x18;
+                        _weight = 20;
+                        _candidateSpeechID = 24;
                         break;
                     case 4:
-                        _weight = 0x19;
-                        _candidateSpeechID = 0x19;
+                        _weight = 25;
+                        _candidateSpeechID = 25;
                         break;
                     default:
-                        _weight = 0x19;
-                        _candidateSpeechID = 0x1a;
+                        _weight = 25;
+                        _candidateSpeechID = 26;
                     }
                 }
             }
@@ -263,7 +263,7 @@ namespace Map {
             } else if (_bestSpeechID == -1) {
                 return 1;
             }
-            if (_candidateSpeechID < 0x62) {
+            if (_candidateSpeechID < 98) {
                 DAT_00ee1030::instance = 0;
             }
             return _bestSpeechID;

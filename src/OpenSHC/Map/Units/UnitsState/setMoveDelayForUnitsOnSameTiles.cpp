@@ -25,16 +25,17 @@ namespace Map {
             }
             /* if current tile position is occupied */
             int _isInserted = 0;
-            int _unitIDOfAUnitOnSameTile = (short)DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition];
+            int _unitIDOfAUnitOnSameTile = DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition];
             int _index = 0;
+            /* do-while loops: as for loops MSVC unrolls them and the match drops from 100% to 31% */
             do {
                 if (unitID < _unitIDOfAUnitOnSameTile && _isInserted == 0) {
-                    _unitIDArray[_index] = (short)unitID;
+                    _unitIDArray[_index] = unitID;
                     _index++;
                     _isInserted = 1;
                 }
-                _unitIDArray[_index] = (short)_unitIDOfAUnitOnSameTile;
-                _unitIDOfAUnitOnSameTile = (short)this->units[_unitIDOfAUnitOnSameTile].nextUnitOnTheSameTile;
+                _unitIDArray[_index] = _unitIDOfAUnitOnSameTile;
+                _unitIDOfAUnitOnSameTile = this->units[_unitIDOfAUnitOnSameTile].nextUnitOnTheSameTile;
                 if (_unitIDOfAUnitOnSameTile <= 0) {
                     break;
                 }
@@ -42,7 +43,7 @@ namespace Map {
             } while (_index < 2000);
             _index++;
             if (_isInserted == 0) {
-                _unitIDArray[_index] = (short)unitID;
+                _unitIDArray[_index] = unitID;
                 _index++;
             }
             _unitIDArray[_index] = 0;
@@ -51,12 +52,12 @@ namespace Map {
             this->units[_previousUnitID].unitOrderWhenOnSameTile = 0;
             for (int _order = 1; _order < 2001; ++_order) {
                 int _nextUnitID = _unitIDArray[_order];
-                this->units[_previousUnitID].nextUnitOnTheSameTile = (short)_nextUnitID;
+                this->units[_previousUnitID].nextUnitOnTheSameTile = _nextUnitID;
                 _previousUnitID = _nextUnitID;
                 if (_nextUnitID <= 0) {
                     break;
                 }
-                this->units[_nextUnitID].unitOrderWhenOnSameTile = (short)_order;
+                this->units[_nextUnitID].unitOrderWhenOnSameTile = _order;
             }
             int _speedIndex = 0;
             do {

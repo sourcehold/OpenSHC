@@ -23,7 +23,7 @@ namespace Map {
             if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
                 && (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
                     || DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)) {
-                for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
+                for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                     if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
                     }
@@ -39,14 +39,14 @@ namespace Map {
                         }
                         continue;
                     }
-                    int _isListed = 0;
+                    BOOLEnum _isListed = FALSE;
                     for (int i = 0; i < 2500; ++i) {
                         if (DAT_GameState::instance.hotkeyTribes[unitHotKeyNumber].units[i].id == unitID) {
-                            _isListed = 1;
+                            _isListed = TRUE;
                         }
                     }
                     /* unitID is listed in this hotkey unit list and is selected */
-                    if (_isListed == 0) {
+                    if (!_isListed) {
                         return FALSE;
                     }
                 }

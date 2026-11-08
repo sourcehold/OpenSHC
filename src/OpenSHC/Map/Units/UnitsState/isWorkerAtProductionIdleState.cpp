@@ -40,7 +40,7 @@ namespace Map {
                 break;
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
             case OpenSHC::Map::Units::UT_PITCHMAN:
-                if (this->units[unitID].state.generic == (UnitState)3) {
+                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_STATE_3Unk) {
                     return TRUE;
                 }
                 break;
