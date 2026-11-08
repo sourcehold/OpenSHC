@@ -182,7 +182,7 @@ namespace Map {
                 }
                 _score = _score
                     + DAT_UnitPropertiesDefinedData::instance
-                            .UnitVisionBonus[((int)this->units[unitID].fixedRng + _enemyUnitID) % 10]
+                            .UnitVisionBonus[(this->units[unitID].fixedRng + _enemyUnitID) % 10]
                         / _visionDivisor;
                 if (this->units[_enemyUnitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                     _score = (this->units[_enemyUnitID].attackedBy * 50 + _score) * 2;

@@ -175,10 +175,7 @@ namespace Map {
             short topSpeedDelayIndex; // 0x000002E0 length: 2
             short movementDistance; // 0x000002E2 length: 2
             int tribeUID; // 0x000002E4 length: 4
-            int workTimer; // 0x000002E8 length: 4
-            int workRelatedA; // 0x000002EC length: 4
-            int workRelatedB; // 0x000002F0 length: 4
-            int workRelatedC; // 0x000002F4 length: 4
+            int workTimer[4]; // 0x000002E8 length: 16
             int av; // 0x000002F8 length: 4
             short working; // 0x000002FC length: 2
             short field_0x2fe; // 0x000002FE length: 2
@@ -234,7 +231,7 @@ namespace Map {
             short field_0x37e; // 0x0000037E length: 2
             short substate; // 0x00000380 length: 2
             undefined1 padding_0x382[2]; // 0x00000382 length: 2
-            uint fixedRng; // 0x00000384 length: 4
+            int fixedRng; // 0x00000384 length: 4
             short resourceToDeposit; // 0x00000388 length: 2
             short jugglerCount; // 0x0000038A length: 2
             short tunnelerFrame; // 0x0000038C length: 2

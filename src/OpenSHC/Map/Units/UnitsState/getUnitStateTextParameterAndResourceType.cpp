@@ -36,7 +36,7 @@ namespace Map {
                   This is an optimized % 4, producing -3 to 3
                  */
 
-                uint _rng_0x79 = (int)this->units[unitIndex].fixedRng % 4;
+                uint _rng_0x79 = this->units[unitIndex].fixedRng % 4;
                 /*
                   "Wandering around
                    Eating fire
