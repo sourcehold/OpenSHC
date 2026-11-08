@@ -23,7 +23,8 @@ namespace Map {
         {
             // Matching note: the original adds the tile row as ((row - param_3) + x) + DAT_TempXOffset, ours as
             // ((row + x) - param_3) + DAT_TempXOffset; MSVC reassociates the sum, so every operand order and grouping
-            // of the expression compiles the same (all 24 orders tried). Computing tileX apart from the row is what
+            // of the expression compiles the same (all 24 orders, split compound statements, casts and unsigned types
+            // tried, also under /GL). Computing tileX apart from the row is what
             // gives the entry stores the original's DAT_TempXOffset - param_3 + x order.
             // Finds an entrance tile of the building that can be reached from the tile (x, y).
             // param_3 enlarges the area around the building by one tile, param_2 - 1 matching tiles are skipped.
