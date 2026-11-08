@@ -209,7 +209,7 @@ namespace UI {
                             + 8;
                         *pbVar2 += cVar3;
                         DAT_GameState::instance.mapAndTime.siegeInformation.archers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.archers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[0];
                         piVar7 = DAT_MapPropertiesState::instance.SEC_StartingResources;
                         piVar8 = DAT_GameState::instance.mapAndTime.startGoods;
                         for (iVar6 = 25; iVar6 != 0; --iVar6) {
@@ -220,44 +220,44 @@ namespace UI {
                         DAT_GameState::instance.mapAndTime.startGoods[7]
                             = DAT_GameState::instance.mapAndTime.startGoods[8];
                         DAT_GameState::instance.mapAndTime.siegeInformation.pikemen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.pikemen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[3];
                         DAT_GameState::instance.mapAndTime.siegeInformation.spearmen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.spearmen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[2];
                         DAT_GameState::instance.mapAndTime.siegeInformation.crossbowmen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.crossbowmen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[1];
                         DAT_GameState::instance.mapAndTime.siegeInformation.knights
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.knights;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[6];
                         DAT_GameState::instance.mapAndTime.siegeInformation.swordsmen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.swordsmen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[5];
                         DAT_GameState::instance.mapAndTime.siegeInformation.macemen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.macemen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[4];
                         DAT_GameState::instance.mapAndTime.siegeInformation.monks
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.monks;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[9];
                         DAT_GameState::instance.mapAndTime.siegeInformation.engineers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.engineers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[8];
                         DAT_GameState::instance.mapAndTime.siegeInformation.laddermen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.laddermen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[7];
                         DAT_GameState::instance.mapAndTime.siegeInformation.slingers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.slingers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[12];
                         DAT_GameState::instance.mapAndTime.siegeInformation.slaves
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.slaves;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[11];
                         DAT_GameState::instance.mapAndTime.siegeInformation.arabianArchers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.arabianArchers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[10];
                         DAT_GameState::instance.mapAndTime.siegeInformation.arabianSwordsmen
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.arabianSwordsmen;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[15];
                         DAT_GameState::instance.mapAndTime.siegeInformation.horseArchers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.horseArchers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[14];
                         DAT_GameState::instance.mapAndTime.siegeInformation.assassins
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.assassins;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[13];
                         DAT_GameState::instance.mapAndTime.siegeInformation.field_0x48
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.field_0x48;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[18];
                         DAT_GameState::instance.mapAndTime.siegeInformation.fireBallistas
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.fireBallistas;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[17];
                         DAT_GameState::instance.mapAndTime.siegeInformation.fireThrowers
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.fireThrowers;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[16];
                         DAT_GameState::instance.mapAndTime.startGoods[8] = 0;
                         DAT_GameState::instance.mapAndTime.siegeInformation.field_0x4c
-                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation.field_0x4c;
+                            = DAT_MapPropertiesState::instance.SEC_SiegeInformation[19];
                         DAT_GameState::instance.mapAndTime.startingPopularity
                             = DAT_MapPropertiesState::instance.SEC_StartingPopularity * 10;
                         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::setMonthAndYear, DAT_GameState::ptr)(

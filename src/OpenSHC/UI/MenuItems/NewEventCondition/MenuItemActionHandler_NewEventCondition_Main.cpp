@@ -159,7 +159,7 @@ namespace UI {
                                 (dword)((int)(DAT_MissionAestheticsDefinedData::instance
                                         .EventConditionMaxValue[DAT_MapPropertiesState::instance.invasionTroopIndex])),
                                 (dword)((int)((int)*destination)), (dword)((int)(destination)),
-                                (undefined*)MACRO_CALL(UI::Helpers_Func::CaptureCurrentTimeToUnknownTime01));
+                                MACRO_CALL(UI::Helpers_Func::CaptureCurrentTimeToUnknownTime01));
                             MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
                                 DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
                                 (int)((int)(DAT_ButtonX::instance + 58)), (int)((int)(DAT_ButtonY::instance + 28)));
