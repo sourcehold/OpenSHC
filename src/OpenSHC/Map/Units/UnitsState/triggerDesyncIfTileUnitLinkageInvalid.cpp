@@ -26,22 +26,22 @@ namespace Map {
             if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow != 0) {
                 return;
             }
-            if ((uint)(short)DAT_TileMapState::instance.UnitLayer[tile] > 2499) {
-                DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)((GameCommandType)0x4f);
+            int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+            if ((uint)unitID <= 2499) {
+                for (; unitID != 0; unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
+                    if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
+                        && this->units[unitID].field_0x413 == 0) {
+                        DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
+                        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                            DAT_GameSynchronyState::ptr)((GameCommandType)0x4f);
+                        return;
+                    }
+                }
                 return;
             }
-            for (uint unitID = (short)DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
-                unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
-                if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
-                    && this->units[unitID].field_0x413 == 0) {
-                    DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
-                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)((GameCommandType)0x4f);
-                    return;
-                }
-            }
+            DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                (GameCommandType)0x4f);
         }
 
     }
