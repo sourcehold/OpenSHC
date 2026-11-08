@@ -28,12 +28,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00532BA0
         void UnitsState::recomputeTroopValuesForPlayer(int playerID)
         {
-            int _campfireY = DAT_GameState::instance.playerDataArray[playerID]
-                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
-                                 .yEntry;
-            int _campfireX = DAT_GameState::instance.playerDataArray[playerID]
-                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
-                                 .xEntry;
+            int const _campfireX = DAT_GameState::instance.playerDataArray[playerID]
+                                       .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                       .xEntry;
+            int const _campfireY = DAT_GameState::instance.playerDataArray[playerID]
+                                       .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                       .yEntry;
             DAT_GameState::instance.playerDataArray[playerID].enemies = 0;
             DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount = 0;
             DAT_GameState::instance.playerDataArray[playerID].sumOfTotalEnemyUnitsCount = 0;
