@@ -55,14 +55,17 @@ namespace Map {
                 != FALSE) {
                 return;
             }
-            // The tile index is a local of its own: inline, MSVC folds the last addition into the load address
-            // Matching note: y + halfSize and the tile index sit in each other's registers (ecx/edx)
+            // The tile index is a local of its own: inline, MSVC folds the last addition into the load address.
+            // x and y are read from the fields rather than through locals, which keeps x in ebx and the
+            // entity type in edi as in the original
             int halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
-            int y = (short)this->buildings[buildingID].y + halfSize;
-            int x = (short)this->buildings[buildingID].x;
-            int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x + halfSize;
-            uint entityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                DAT_EntityState::ptr)(0, owner, 0, (x + halfSize) * 8, y * 8,
+            int const tile
+                = DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y + halfSize]
+                      .addXgetTile
+                + this->buildings[buildingID].x + halfSize;
+            uint entityID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, owner, 0,
+                (this->buildings[buildingID].x + halfSize) * 8, (this->buildings[buildingID].y + halfSize) * 8,
                 DAT_TileMapState::instance.HeightLayer[tile] + heightOffset, 0, 0, 0, entityType, 0);
             if (entityID == 0) {
                 return;
