@@ -17,29 +17,18 @@ namespace Map {
         void UnitsState::updateUnitFadeAndVisibilityNearStructures(int unitID)
         {
             int _tile = DAT_UnitsState::instance.units[unitID].tile;
+            int const buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             int _gateFadeType = 0;
+            int _isOnDefensiveStructure = 0;
             int _towerFadeType = 0;
             int _fadeType = 0;
-            int _isOnDefensiveStructure = 0;
             if (DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 != 0) {
                 DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402
                     = DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 - 1;
             }
-            if (DAT_TileMapState::instance.BuildingLayer[_tile] == 0) {
-                if ((_logicFlags & 0x100) != 0) {
-                    _isOnDefensiveStructure = 1;
-                }
-            } else {
-                switch (DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
-                        .buildingType) {
-                case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
-                case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
-                    _gateFadeType = 0xb;
-                    break;
-                case OpenSHC::Map::Buildings::BT_WOODGATE1:
-                    _gateFadeType = 10;
-                    break;
+            if (buildingID != 0) {
+                switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
                 case OpenSHC::Map::Buildings::BT_TOWER1:
                     _towerFadeType = 1;
                     break;
@@ -52,7 +41,17 @@ namespace Map {
                 case OpenSHC::Map::Buildings::BT_TOWER4:
                 case OpenSHC::Map::Buildings::BT_TOWER5:
                     _towerFadeType = 4;
+                    break;
+                case OpenSHC::Map::Buildings::BT_WOODGATE1:
+                    _gateFadeType = 10;
+                    break;
+                case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
+                case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
+                    _gateFadeType = 0xb;
+                    break;
                 }
+            } else if ((_logicFlags & 0x100) != 0) {
+                _isOnDefensiveStructure = 1;
             }
             if (DAT_UnitsState::instance.units[unitID].field_0x308 == 2 && _isOnDefensiveStructure) {
                 _fadeType = 1;
@@ -65,7 +64,7 @@ namespace Map {
                             .LogicLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition]
                         & 0x100U)
                         != 0
-                    || DAT_BuildingDefinedData::instance.IsGateOrTowerArray[(short)DAT_BuildingsState::instance
+                    || DAT_BuildingDefinedData::instance.IsGateOrTowerArray[DAT_BuildingsState::instance
                                .buildings[DAT_TileMapState::instance
                                        .BuildingLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition]]
                                .buildingType]
@@ -74,32 +73,29 @@ namespace Map {
                 }
             }
             if (_gateFadeType != 0) {
-                if ((DAT_TileMapState::instance
-                            .LogicLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition]
-                        & 0x100U)
-                        == 0
-                    || (DAT_TileMapState::instance
-                               .LogicLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition]
-                           & 2U)
-                        != 0) {
+                uint const destinationFlags
+                    = DAT_TileMapState::instance
+                          .LogicLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition];
+                int const destinationBuildingID
+                    = DAT_TileMapState::instance
+                          .BuildingLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition];
+                if ((destinationFlags & 0x100U) != 0 && (destinationFlags & 2U) == 0) {
+                    DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 = 0;
+                } else {
                     DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402
-                        = (DAT_BuildingDefinedData::instance.IsGateOrTowerArray[(short)DAT_BuildingsState::instance
-                                   .buildings[DAT_TileMapState::instance.BuildingLayer
-                                           [DAT_UnitsState::instance.units[unitID].destinationTilePosition]]
-                                   .buildingType]
+                        = (DAT_BuildingDefinedData::instance.IsGateOrTowerArray
+                                  [DAT_BuildingsState::instance.buildings[destinationBuildingID].buildingType]
                               != FALSE)
                             - 1U
                         & 10;
-                } else {
-                    DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 = 0;
                 }
             }
             if (_isOnDefensiveStructure) {
                 DAT_UnitsState::instance.units[unitID].field_0x308 = 1;
-            } else if (_towerFadeType == 0) {
-                DAT_UnitsState::instance.units[unitID].field_0x308 = _gateFadeType != 0 ? 3 : 0;
-            } else {
+            } else if (_towerFadeType != 0) {
                 DAT_UnitsState::instance.units[unitID].field_0x308 = 2;
+            } else {
+                DAT_UnitsState::instance.units[unitID].field_0x308 = _gateFadeType != 0 ? 3 : 0;
             }
             if (DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 == 0
                 || (DAT_TileMapState::instance.MiscDisplayLayer[DAT_UnitsState::instance.units[unitID].nextTileUnk]
@@ -109,12 +105,10 @@ namespace Map {
             } else if ((DAT_TileMapState::instance
                                .MiscDisplayLayer[DAT_UnitsState::instance.units[unitID].currentTilePosition_2Unk]
                            & 0x10)
-                == 0) {
-                if (DAT_UnitsState::instance.units[unitID].vanish < 1) {
-                    DAT_UnitsState::instance.units[unitID].vanish = 1;
-                }
-            } else {
+                != 0) {
                 DAT_UnitsState::instance.units[unitID].vanish = 0xf;
+            } else if (DAT_UnitsState::instance.units[unitID].vanish <= 0) {
+                DAT_UnitsState::instance.units[unitID].vanish = 1;
             }
             if (_fadeType != 0) {
                 DAT_UnitsState::instance.units[unitID].fadeType = _fadeType;
