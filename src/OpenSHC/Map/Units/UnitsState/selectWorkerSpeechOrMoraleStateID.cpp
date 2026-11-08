@@ -28,8 +28,8 @@ namespace Map {
             if (_blockingState != 0) {
                 return _blockingState;
             }
-            uint _rng = this->units[unitID].fixedRng;
-            uint _rngMod4 = _rng % 4;
+            int _rng = this->units[unitID].fixedRng;
+            int _rngMod4 = _rng % 4;
             if (unitID != INT_00ee1038::instance) {
                 INT_00ee1038::instance = unitID;
                 if (DAT_UnitPropertiesDefinedData::instance.field_0x12260 == 0x19) {
@@ -49,10 +49,13 @@ namespace Map {
             int _worstPopularityReason = -1;
             int _worstPopularityValue = 0;
             for (int i = 0; i < 0x20; ++i) {
-                if (i <= 4 || (i >= 6 && i <= 10) || i == 0x14 || i >= 0x17) {
+                if (i < 5) {
                     continue;
                 }
-                if (DAT_GameState::instance.mapAndTime.scenarioEventTimers[i] <= 0x27) {
+                if (i > 5 && (i < 11 || i == 20 || i > 22)) {
+                    continue;
+                }
+                if (DAT_GameState::instance.mapAndTime.scenarioEventTimers[i] < 40) {
                     continue;
                 }
                 if (_worstPopularityReason == -1
@@ -107,13 +110,13 @@ namespace Map {
                     < 10
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER
                 || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION
-                    && DAT_GameCore::instance.missionNumber1to20 > 0xf)) {
+                    && DAT_GameCore::instance.missionNumber1to20 >= 16)) {
                 DAT_00ee1030::instance = 0;
             } else {
                 DAT_00ee1030::instance = DAT_00ee1030::instance + 1;
                 _candidateSpeechID = _rngMod4 + 0x62;
                 _bestWeight = 0x50;
-                if (DAT_00ee1030::instance > 2) {
+                if ((int)DAT_00ee1030::instance > 2) {
                     _bestWeight = (4 - DAT_00ee1030::instance) * 0x14;
                     if (_bestWeight < 0x14) {
                         _bestWeight = 0x14;
@@ -142,7 +145,7 @@ namespace Map {
             if (_weight != 0) {
                 _candidateCount = _candidateCount + 1;
                 if (_bestSpeechID == -1
-                    || _bestWeight < _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260) {
+                    || _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260 > _bestWeight) {
                     _bestWeight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260;
                     _bestSpeechID = _candidateSpeechID;
                 }
@@ -150,7 +153,7 @@ namespace Map {
             int _taxesSetting
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                       .taxesSetting;
-            if (_taxesSetting < 4 || _taxesSetting > 7) {
+            if (_taxesSetting <= 3 || _taxesSetting >= 8) {
                 _weight = 0;
                 if (_taxesSetting == 0) {
                     _candidateSpeechID = _rngMod4 + 0x49;
@@ -174,7 +177,7 @@ namespace Map {
                 if (_weight != 0) {
                     _candidateCount = _candidateCount + 1;
                     if (_bestSpeechID == -1
-                        || _bestWeight < _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264) {
+                        || _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264 > _bestWeight) {
                         _bestWeight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
                         _bestSpeechID = _candidateSpeechID;
                     }
@@ -203,7 +206,7 @@ namespace Map {
                     _candidateSpeechID = _rngMod4 + 2;
                 }
             }
-            if (_productivity >= 0x65) {
+            if (_productivity > 100) {
                 _candidateCount = _candidateCount + 1;
                 if (this->units[unitID].productivityDiv100 == 0
                     || MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isWorkerAtProductionIdleState, this)(
@@ -249,9 +252,9 @@ namespace Map {
                     }
                 }
             }
-            if (_productivity >= 0x65 || _weight != 0) {
+            if (_productivity > 100 || _weight != 0) {
                 if (_bestSpeechID == -1
-                    || _bestWeight < DAT_UnitPropertiesDefinedData::instance.field_0x12268 + _weight) {
+                    || DAT_UnitPropertiesDefinedData::instance.field_0x12268 + _weight > _bestWeight) {
                     _bestSpeechID = _candidateSpeechID;
                 }
             }
