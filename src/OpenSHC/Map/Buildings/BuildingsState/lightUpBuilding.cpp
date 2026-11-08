@@ -65,7 +65,7 @@ namespace Map {
             this->buildings[buildingID].fireDuration = 1;
             this->buildings[buildingID].ifFireThenResponsiblePlayer = burnerPlayerID;
             if (this->buildings[buildingID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && DAT_GameCore::instance.mapTimeInTicks
+                && (int)DAT_GameCore::instance.mapTimeInTicks
                         - DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
                     > 800) {
                 DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
