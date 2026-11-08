@@ -182,17 +182,17 @@ namespace Map {
                 }
                 _score = _score
                     + DAT_UnitPropertiesDefinedData::instance
-                            .UnitVisionBonus[(this->units[unitID].fixedRng + _enemyUnitID) % 10]
+                            .UnitVisionBonus[((int)this->units[unitID].fixedRng + _enemyUnitID) % 10]
                         / _visionDivisor;
                 if (this->units[_enemyUnitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                    _score = (DAT_UnitsState::instance.units[_enemyUnitID].attackedBy * 50 + _score) * 2;
-                    if (DAT_UnitsState::instance.units[_enemyUnitID].attackedBy >= 3) {
+                    _score = (this->units[_enemyUnitID].attackedBy * 50 + _score) * 2;
+                    if (this->units[_enemyUnitID].attackedBy > 2) {
                         continue;
                     }
                 }
-                if (DAT_UnitsState::instance.units[_enemyUnitID].huntedBy >= 2) {
-                    _score = _score + DAT_UnitsState::instance.units[_enemyUnitID].huntedBy * 0x32;
-                    if (DAT_UnitsState::instance.units[_enemyUnitID].huntedBy >= 3
+                if (this->units[_enemyUnitID].huntedBy > 1) {
+                    _score = _score + this->units[_enemyUnitID].huntedBy * 0x32;
+                    if (this->units[_enemyUnitID].huntedBy >= 3
                         && this->units[unitID].movementType_OR_targetUnitID != _enemyUnitID) {
                         continue;
                     }
@@ -203,14 +203,19 @@ namespace Map {
                     continue;
                 }
                 switch (this->units[_enemyUnitID].unitType) {
-                case OpenSHC::Map::Units::UT_PEASANT:
-                    _score = _score * 8 + 200;
+                case OpenSHC::Map::Units::UT_LORD:
+                    _score = _score / 4;
                     break;
-                case OpenSHC::Map::Units::UT_E_ARCHER:
-                case OpenSHC::Map::Units::UT_E_XBOW:
-                case OpenSHC::Map::Units::UT_A_ARCHER:
-                case OpenSHC::Map::Units::UT_A_HARCHER:
-                case OpenSHC::Map::Units::UT_A_FIRETHROWER:
+                case OpenSHC::Map::Units::UT_E_ENGINEER:
+                case OpenSHC::Map::Units::UT_S_CATAPULT:
+                case OpenSHC::Map::Units::UT_S_TREBUCHET:
+                case OpenSHC::Map::Units::UT_S_MANGONEL:
+                case OpenSHC::Map::Units::UT_S_TOWER:
+                case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
+                case OpenSHC::Map::Units::UT_S_SHIELD:
+                case OpenSHC::Map::Units::UT_S_BALLISTA:
+                case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                    _score = _score + 0x19;
                     break;
                 case OpenSHC::Map::Units::UT_E_SPEAR:
                 case OpenSHC::Map::Units::UT_E_PIKE:
@@ -225,22 +230,18 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_A_SWORDSMAN:
                     _score = _score * 2 + 100;
                     break;
-                case OpenSHC::Map::Units::UT_E_ENGINEER:
-                case OpenSHC::Map::Units::UT_S_CATAPULT:
-                case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                case OpenSHC::Map::Units::UT_S_MANGONEL:
-                case OpenSHC::Map::Units::UT_S_TOWER:
-                case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                case OpenSHC::Map::Units::UT_S_SHIELD:
-                case OpenSHC::Map::Units::UT_S_BALLISTA:
-                case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    _score = _score + 0x19;
+                case OpenSHC::Map::Units::UT_E_ARCHER:
+                case OpenSHC::Map::Units::UT_E_XBOW:
+                case OpenSHC::Map::Units::UT_A_ARCHER:
+                case OpenSHC::Map::Units::UT_A_HARCHER:
+                case OpenSHC::Map::Units::UT_A_FIRETHROWER:
                     break;
-                case OpenSHC::Map::Units::UT_LORD:
-                    _score = _score / 4;
+                case OpenSHC::Map::Units::UT_PEASANT:
+                    _score = _score * 8 + 200;
                     break;
                 default:
                     _score = _score * 4 + 200;
+                    break;
                 }
                 if (this->units[unitID].movementType_OR_targetUnitID == _enemyUnitID) {
                     _score = _score / 2;
