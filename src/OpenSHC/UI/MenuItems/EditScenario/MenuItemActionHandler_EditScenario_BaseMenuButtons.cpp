@@ -110,7 +110,7 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::setSliderParameters,
                     DAT_MenuModalComposition2::ptr)(0, 100, DAT_MapPropertiesState::instance.SEC_StartingPopularity,
-                    &DAT_MapPropertiesState::instance.SEC_StartingPopularity,
+                    (undefined*)&DAT_MapPropertiesState::instance.SEC_StartingPopularity,
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Popularity"
@@ -228,7 +228,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
                     10000, DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
-                    &DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
+                    (undefined*)&DAT_MapPropertiesState::instance
+                        .SEC_StartingResources[OpenSHC::Game::Resources::RT_GOLD],
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Starting Gold"
@@ -245,7 +246,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0, 100,
                     DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
-                    &DAT_MapPropertiesState::instance.SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
+                    (undefined*)&DAT_MapPropertiesState::instance
+                        .SEC_StartingResources[OpenSHC::Game::Resources::RT_PARTIALPITCH],
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SumUnitPoints));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Starting Pitch"
@@ -266,9 +268,10 @@ namespace UI {
                     return;
                 }
                 DAT_CopyOfScenarioGold::instance = DAT_GameState::instance.mapAndTime.scenarioGold;
-                MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::setSliderParameters,
-                    DAT_MenuModalComposition2::ptr)(0, 10000, DAT_CopyOfScenarioGold::instance,
-                    DAT_CopyOfScenarioGold::ptr, MACRO_CALL(OpenSHC::UI::Helpers_Func::RestoreScenarioGold));
+                MACRO_CALL_MEMBER(
+                    OpenSHC::UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
+                    10000, DAT_CopyOfScenarioGold::instance, (undefined*)DAT_CopyOfScenarioGold::ptr,
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::RestoreScenarioGold));
                 DAT_MenuModalComposition2::instance.textGroup = OpenSHC::DE::SHCDE::TEXT_SCENARIO;
                 // "Gold"
                 DAT_MenuModalComposition2::instance.textIndex = 61;

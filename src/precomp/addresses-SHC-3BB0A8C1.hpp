@@ -96696,7 +96696,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4234 = 0x00DF4234,
     // label: DAT_CurrentClimbDataID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF4238 = 0x00DF4238,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF423C = 0x00DF423C,

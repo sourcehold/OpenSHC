@@ -74,10 +74,10 @@ namespace UI {
         void fillWithMenuModalDimensions(int* xPtr, int* yPtr, int* widthPtr, int* heigthPtr);
 
         void setSliderParameters(
-            int minimum, int maximum, int value, int* destination, NoArgCallback* callbackFunction);
+            int minimum, int maximum, int value, undefined* destination, NoArgCallback* callbackFunction);
 
         void setSliderParameters2(
-            dword minimum, dword maximum, dword value, short* destination, NoArgCallback* callbackFunction);
+            dword minimum, dword maximum, dword value, dword destination, NoArgCallback* callbackFunction);
 
         void setModalSliderParameters(
             int param_1, int param_2, dword param_3, dword param_4, int* param_5, NoArgCallback* param_6);
