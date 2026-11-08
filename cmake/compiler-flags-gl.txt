@@ -134,3 +134,4 @@ src/OpenSHC/Map/Buildings/BuildingsState/countPlayerResources.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/processPlacementResourceLossForBuildingType.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/updateGateDrawBridgeOpenCloseLogic.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/processResourceGain.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/findFirstBuildingOfType.cpp
