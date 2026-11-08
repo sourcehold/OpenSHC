@@ -13,13 +13,12 @@ namespace Map {
             this->units[unitID].movementRelated = 8;
             this->units[unitID].field_0xe8 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
-            this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
-            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].x = this->units[unitID].mimicCurrentXPosition;
+            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
+            this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
             this->units[unitID].microYPosition = this->units[unitID].mimicCurrentYPosition * 8 + 4;
-            this->units[unitID].tile = this->units[unitID].mimicCurrentXPosition
-                + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].mimicCurrentYPosition]
-                      .addXgetTile;
+            this->units[unitID].tile = this->units[unitID].x
+                + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
             this->units[unitID].terrainOrClimbHeight = DAT_TileMapState::instance.HeightLayer[this->units[unitID].tile];
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
