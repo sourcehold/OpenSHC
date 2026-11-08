@@ -22,6 +22,8 @@ namespace Map {
         BOOLEnum UnitsState::ifOnADefensiveStructureSetDestinationInDirectionOfTarget(int unitID)
         {
             int _buildingID = DAT_TileMapState::instance.BuildingLayer[DAT_UnitsState::instance.units[unitID].tile];
+            int _freeTileX = -1;
+            int _freeTileY = -1;
             if (_buildingID == 0) {
                 return FALSE;
             }
@@ -68,8 +70,6 @@ namespace Map {
                 _targetX = DAT_UnitsState::instance.units[DAT_UnitsState::instance.units[unitID].shootTargetedUnit].x;
                 _targetY = DAT_UnitsState::instance.units[DAT_UnitsState::instance.units[unitID].shootTargetedUnit].y;
             }
-            int _freeTileX = -1;
-            int _freeTileY = -1;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findClosestFreeTileNearUnitOnBuilding,
                 DAT_PathFindingState::ptr)(_buildingID, unitID, _targetX, _targetY, &_freeTileX, &_freeTileY);
             if (DAT_UnitsState::instance.units[unitID].x == _freeTileX
