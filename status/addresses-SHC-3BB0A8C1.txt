@@ -20099,7 +20099,7 @@ SHC_3BB0A8C1_0x00468C40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00468C50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00468C80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00468C80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00468DE0 | 100.0% | Reimplemented
 
@@ -20111,9 +20111,9 @@ SHC_3BB0A8C1_0x00468F20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00468F70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00468FE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00468FE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004690E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004690E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00469290 | 0.0% | Pending
 
@@ -21933,7 +21933,7 @@ SHC_3BB0A8C1_0x00475B90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00475BE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00475CC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00475CC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00475E00 | 0.0% | Pending
 
@@ -26001,7 +26001,7 @@ SHC_3BB0A8C1_0x004B1E60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B1EB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B20B0 | 83.1% | shared arm fold direction
+SHC_3BB0A8C1_0x004B20B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B2280 | 100.0% | Reimplemented
 
