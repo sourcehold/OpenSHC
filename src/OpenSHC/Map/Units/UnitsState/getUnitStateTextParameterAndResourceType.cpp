@@ -58,53 +58,53 @@ namespace Map {
             }
             switch (this->units[unitIndex].unitType) {
             case OpenSHC::Map::Units::UT_PEASANT:
-                if (_state == 5) {
-                    /*
-                      "Swearing loyalty"
-                     */
+                if (_state != 5) {
+                    if (_state == 8) {
+                        /*
+                          "Listening
+                           Waiting for job
+                           Hanging around
+                           Waiting
+                           Talking
+                           Making a speech
+                           Telling a joke
+                           Recounting a story"
+                         */
 
-                    return 0x26;
-                }
-                if (_state == 8) {
-                    /*
-                      "Listening
-                       Waiting for job
-                       Hanging around
-                       Waiting
-                       Talking
-                       Making a speech
-                       Telling a joke
-                       Recounting a story"
-                     */
+                        /*
+                          Waiting at campfire
+                         */
 
-                    /*
-                      Waiting at campfire
-                     */
-
-                    switch (this->units[unitIndex].substate) {
-                    case 0x6a:
-                        return 0x1e;
-                    case 0x6b:
-                        return 0x1f;
-                    case 0x6e:
-                        return 0x20;
-                    case 0x6f:
-                        return 0x21;
-                    case 0x72:
-                        return 0x22;
-                    case 0x73:
-                        return 0x23;
-                    case 0x74:
-                        return 0x24;
-                    case 0x75:
-                        return 0x25;
+                        switch (this->units[unitIndex].substate) {
+                        case 0x6a:
+                            return 0x1e;
+                        case 0x6b:
+                            return 0x1f;
+                        case 0x6e:
+                            return 0x20;
+                        case 0x6f:
+                            return 0x21;
+                        case 0x72:
+                            return 0x22;
+                        case 0x73:
+                            return 0x23;
+                        case 0x74:
+                            return 0x24;
+                        case 0x75:
+                            return 0x25;
+                        }
                     }
+                    /*
+                      "Waiting for job"
+                     */
+
+                    return 0x1d;
                 }
                 /*
-                  "Waiting for job"
+                  "Swearing loyalty"
                  */
 
-                return 0x1d;
+                return 0x26;
             case OpenSHC::Map::Units::UT_BURNINGMAN:
                 /*
                   "Burning"
@@ -130,6 +130,8 @@ namespace Map {
                  */
 
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -167,14 +169,13 @@ namespace Map {
                     return 5;
                 case 10:
                     return 4;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_FLETCHER:
                 *pResourceType = OpenSHC::Game::Resources::RT_WOOD;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -199,13 +200,12 @@ namespace Map {
                         return 4;
                     }
                     return 1;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_TUNNELER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                 case 4:
@@ -219,11 +219,8 @@ namespace Map {
                     return 7;
                 case 7:
                     return 0xb;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_HUNTER:
                 *pResourceType = OpenSHC::Game::Resources::RT_MEAT;
                 /*
@@ -244,12 +241,11 @@ namespace Map {
                  */
 
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 8:
                     return 1;
-                case 1:
-                case 0xb:
-                    return 0x71;
                 case 2:
                     return 0x72;
                 case 3:
@@ -272,25 +268,44 @@ namespace Map {
                         : 0x73;
                 case 10:
                     return (uint)(this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 0x71;
-                default:
-                    return 0;
+                case 1:
+                case 0xb:
+                    return 0x71;
+                }
+                break;
+            case OpenSHC::Map::Units::UT_FIREFIGHTER:
+                switch (_state) {
                 case 0x6a:
                     return 8;
+                case 0:
+                case 2:
+                    return 4;
+                case 1:
+                    return 0x97;
+                case 3:
+                    return 0x96;
+                case 4:
+                    return 0x98;
                 }
+                break;
+            case OpenSHC::Map::Units::UT_GHOST:
+                return (DAT_GameState::instance.mapAndTime.drunkenManStatus & 3U) + 0x99;
             case OpenSHC::Map::Units::UT_QUARRYMASON:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 default:
                     return 7;
                 case 2:
                     return 5;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 default:
                     return 7;
                 case 1:
@@ -304,12 +319,12 @@ namespace Map {
                     return 5;
                 case 5:
                     return 4;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_QUARRYOX:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 1:
                     return 10;
                 case 2:
@@ -318,14 +333,13 @@ namespace Map {
                     return 5;
                 case 4:
                     return 0x28;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_PITCHMAN:
                 *pResourceType = OpenSHC::Game::Resources::RT_PARTIALPITCH;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -336,14 +350,13 @@ namespace Map {
                     return 10;
                 case 4:
                     return 5;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_WHEATFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_WHEAT;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -360,14 +373,13 @@ namespace Map {
                     return 2;
                 case 10:
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_HOPSFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_HOPS;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -382,14 +394,13 @@ namespace Map {
                     return 2;
                 case 8:
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_APPLEFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_APPLE;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -404,14 +415,13 @@ namespace Map {
                     return 2;
                 case 7:
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_DAIRYFARMER:
                 *pResourceType = OpenSHC::Game::Resources::RT_CHEESE;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -423,13 +433,12 @@ namespace Map {
                     return 2;
                 case 5:
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_MILLER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                 case 6:
@@ -448,14 +457,13 @@ namespace Map {
                 case 8:
                     *pResourceType = OpenSHC::Game::Resources::RT_FLOUR;
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_BAKER:
                 *pResourceType = OpenSHC::Game::Resources::RT_BREAD;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -473,11 +481,11 @@ namespace Map {
                 case 8:
                     *pResourceType = OpenSHC::Game::Resources::RT_FLOUR;
                     return 6;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_BREWER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -498,11 +506,11 @@ namespace Map {
                     return 10;
                 case 9:
                     return 4;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_POLETURNER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -524,13 +532,12 @@ namespace Map {
                                          .buildings[DAT_UnitsState::instance.units[unitIndex].workplaceBuildingID_1]
                                          .producedItemTypeNext;
                     return 10;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_SMITH:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -549,7 +556,7 @@ namespace Map {
                     return 2;
                 case 8:
                     *pResourceType = (ResourceType)(short)DAT_BuildingsState::instance
-                                         .buildings[this->units[unitIndex].workplaceBuildingID_1]
+                                         .buildings[DAT_UnitsState::instance.units[unitIndex].workplaceBuildingID_1]
                                          .producedItemTypeNext;
                     return 10;
                 case 9:
@@ -560,13 +567,12 @@ namespace Map {
                         return 4;
                     }
                     return 1;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_ARMORER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -594,13 +600,12 @@ namespace Map {
                         return 4;
                     }
                     return 1;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_TANNER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -617,17 +622,15 @@ namespace Map {
                 case 8:
                     *pResourceType = OpenSHC::Game::Resources::RT_LEATHERARMOR;
                     return 10;
-                case 0x6a:
-                    return 8;
                 }
-            default:
-                return 0;
             case OpenSHC::Map::Units::UT_MINER:
                 if (_state == 1) {
                     return 7;
                 }
             case OpenSHC::Map::Units::UT_TRANSPORTMINER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                 case 5:
@@ -640,11 +643,11 @@ namespace Map {
                     return 10;
                 default:
                     return 7;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_PRIEST:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -663,13 +666,12 @@ namespace Map {
                     return 0x2a;
                 case 9:
                     return this->units[unitIndex].substate + 0x18;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_HEALER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -684,14 +686,14 @@ namespace Map {
                     return 0x2f;
                 case 6:
                     return 0x30;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_DRUNK:
                 return DAT_GameState::instance.mapAndTime.drunkenManStatus + 0x75;
             case OpenSHC::Map::Units::UT_INNKEEPER:
                 *pResourceType = OpenSHC::Game::Resources::RT_ALE;
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -703,13 +705,12 @@ namespace Map {
                     return 5;
                 case 5:
                     return 7;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_TRADER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -718,42 +719,41 @@ namespace Map {
                     return 7;
                 case 3:
                     return 0x38;
-                default:
-                    return 0;
+                }
+                break;
+            case OpenSHC::Map::Units::UT_TRADERHORSE:
+                switch (_state) {
+                case 1:
+                    return 0x37;
+                case 3:
+                    return 0x38;
                 case 0x6a:
                     return 8;
                 }
-            case OpenSHC::Map::Units::UT_TRADERHORSE:
-                if (_state == 1) {
-                    return 0x37;
-                }
-                if (_state != 3) {
-                    if (_state == 0x6a) {
-                        return 8;
-                    }
-                    return 1;
-                }
-                return 0x38;
+                return 1;
             case OpenSHC::Map::Units::UT_COW:
                 switch (_state) {
-                case 0:
-                    if (this->units[unitIndex].substate == 0x66 || this->units[unitIndex].substate == 0x67) {
-                        return 0x3c;
-                    }
-                default:
-                    return 0x3d;
                 case 2:
                 case 4:
                 case 5:
                     return 0x3a;
                 case 3:
                     return 0x3b;
+                case 0:
+                    if (this->units[unitIndex].substate != 0x66 && this->units[unitIndex].substate != 0x67) {
+                        return 0x3d;
+                    }
+                    return 0x3c;
+                default:
+                    return 0x3d;
                 case 6:
                 case 0x6e:
                     return 0xc;
                 }
             case OpenSHC::Map::Units::UT_HUNTERDOG:
                 switch (_state) {
+                case 0x78:
+                    return 0x43;
                 case 3:
                     return 0x3f;
                 case 4:
@@ -764,30 +764,14 @@ namespace Map {
                     return 0x41;
                 case 9:
                     return 0x42;
-                case 0x78:
-                    return 0x43;
                 }
                 return 1;
-            case OpenSHC::Map::Units::UT_FIREFIGHTER:
-                switch (_state) {
-                case 0:
-                case 2:
-                    return 4;
-                case 1:
-                    return 0x97;
-                case 3:
-                    return 0x96;
-                case 4:
-                    return 0x98;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
-                }
-            case OpenSHC::Map::Units::UT_GHOST:
-                return (DAT_GameState::instance.mapAndTime.drunkenManStatus & 3U) + 0x99;
             case OpenSHC::Map::Units::UT_LADY:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
+                case 6:
+                    return this->units[unitIndex].substate + 0xe;
                 case 1:
                 case 9:
                     return 0x12;
@@ -798,18 +782,16 @@ namespace Map {
                     return 0x14;
                 case 5:
                     return 0x15;
-                case 6:
-                    return this->units[unitIndex].substate + 0xe;
                 case 7:
                     return 0x16;
-                case ((UnitType)10):
+                case 10:
                     return 0;
-                case 0x6a:
-                    return 8;
                 }
                 return 4;
             case OpenSHC::Map::Units::UT_JESTER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 1:
                     return 0x45;
                 default:
@@ -822,25 +804,17 @@ namespace Map {
                 case 7:
                 case 8:
                     return 0x48;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_CHICKEN:
-                if (_state == 2) {
+                switch (_state) {
+                case 2:
                     return 0x4c;
                 }
                 return 0x4b;
             case OpenSHC::Map::Units::UT_MOTHER:
                 switch (_state) {
-                case 3:
-                case 5:
-                case 6:
-                case 7:
-                    return 0x4f;
-                case 4:
-                    return 0x50;
-                default:
-                    return 0x51;
+                case 0x6a:
+                    return 8;
                 case 0x65:
                     if (DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
                                 .buildingType
@@ -854,11 +828,20 @@ namespace Map {
                         return 0x4f;
                     }
                     return 0x4e;
-                case 0x6a:
-                    return 8;
+                case 3:
+                case 5:
+                case 6:
+                case 7:
+                    return 0x4f;
+                case 4:
+                    return 0x50;
+                default:
+                    return 0x51;
                 }
             case OpenSHC::Map::Units::UT_CHILD:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                 case 1:
                     return 1;
@@ -877,11 +860,11 @@ namespace Map {
                 case 0xc:
                 case 0xd:
                     return 0x56;
-                case 0x6a:
-                    return 8;
                 }
             case OpenSHC::Map::Units::UT_JUGGLER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -892,13 +875,12 @@ namespace Map {
                 case 5:
                 case 6:
                     return 0x5a;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             case OpenSHC::Map::Units::UT_FIREEATER:
                 switch (_state) {
+                case 0x6a:
+                    return 8;
                 case 0:
                     return 1;
                 case 1:
@@ -907,12 +889,10 @@ namespace Map {
                 case 3:
                 case 4:
                     return 0x5d;
-                default:
-                    return 0;
-                case 0x6a:
-                    return 8;
                 }
+                break;
             }
+            return 0;
         }
 
     }
