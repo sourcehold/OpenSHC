@@ -78,10 +78,10 @@ namespace Map {
                     = DAT_GameState::instance.playerDataArray[playerID].popularity / 100;
             } else if (entityType == (EntityType)0x2a) {
                 DAT_EntityState::instance.entityArray[entityID].displayValue = param_3;
-                DAT_EntityState::instance.entityArray[entityID].field83_0xc0 = (short)param_4 * 2 + 141;
+                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)param_4 * 2 + 141;
             } else if (entityType == (EntityType)0x2b) {
                 DAT_EntityState::instance.entityArray[entityID].displayValue = param_3;
-                DAT_EntityState::instance.entityArray[entityID].field83_0xc0 = (short)param_4 * 2 + 141;
+                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)param_4 * 2 + 141;
             }
         }
 

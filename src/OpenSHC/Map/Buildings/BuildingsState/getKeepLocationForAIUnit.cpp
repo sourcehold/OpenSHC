@@ -2,6 +2,8 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -17,9 +19,10 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Game::GameMode;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040D9C0
-        undefined4 BuildingsState::getKeepLocationForAIUnit(int playerID, int param_2, int unitID)
+        BOOLEnum BuildingsState::getKeepLocationForAIUnit(int playerID, int param_2, int unitID)
         {
             // Matching note: The remaining differences are register allocation; the original also does not
             // constant propagate group = 16 in the rally branch.
@@ -29,13 +32,15 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
-                int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
+                int keepID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                 .id;
                 if (keepID == 0) {
-                    return 0;
+                    return FALSE;
                 }
                 this->DAT_TempXOffset = DAT_BuildingsState::instance.buildings[keepID].someX;
                 this->DAT_TempYOffset = DAT_BuildingsState::instance.buildings[keepID].someY;
-                return 1;
+                return TRUE;
             }
 
             // param_2 is the mercenary group (10 to 16)
@@ -74,14 +79,17 @@ namespace Map {
                         this->DAT_TempYOffset = y;
                         if (x == DAT_UnitsState::instance.units[unitID].x
                             && y == DAT_UnitsState::instance.units[unitID].y) {
-                            return 0;
+                            return FALSE;
                         }
-                        return 1;
+                        return TRUE;
                     }
                 }
             } else {
                 // No rally point, use the parade ground of the mercenary post
-                if (DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id > 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                        .id
+                    > 0) {
                     if (param_2 == 16) {
                         if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[3][0] != 0) {
                             searchOffset = DAT_GameState::instance.playerDataArray[playerID].someCount23;
@@ -93,15 +101,16 @@ namespace Map {
                     }
                     int x;
                     int y;
+                    // The 3 x 24 locations of one group are read as one run of 72
                     for (;; ++searchOffset) {
                         if (searchOffset >= 72) {
-                            return 0;
+                            return FALSE;
                         }
                         y = DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[(group - 10) * 72 + searchOffset]
+                                .structure.mercenaryOutpostCampgroundLocations[group - 10][0][searchOffset]
                                 .y;
                         x = DAT_GameState::instance.playerDataArray[playerID]
-                                .structure.mercenaryOutpostCampgroundLocations[(group - 10) * 72 + searchOffset]
+                                .structure.mercenaryOutpostCampgroundLocations[group - 10][0][searchOffset]
                                 .x;
                         if ((short)DAT_TileMapState::instance
                                     .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
@@ -117,12 +126,12 @@ namespace Map {
                     this->DAT_TempYOffset = y;
                     if (x == DAT_UnitsState::instance.units[unitID].x
                         && y == DAT_UnitsState::instance.units[unitID].y) {
-                        return 0;
+                        return FALSE;
                     }
-                    return 1;
+                    return TRUE;
                 }
             }
-            return 0;
+            return FALSE;
         }
 
     }

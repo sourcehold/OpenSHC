@@ -15,7 +15,7 @@ namespace Map {
         using OpenSHC::Map::Entities::EntityType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A260
-        int BuildingsState::spawnCrowForBuilding(int buildingID)
+        void BuildingsState::spawnCrowForBuilding(int buildingID)
         {
             switch (this->buildings[buildingID].buildingType) {
             case BT_DRAWBRIDGE:
@@ -82,8 +82,6 @@ namespace Map {
                 break;
             }
             }
-            // The original has no meaningful return value
-            return 0;
         }
 
     }

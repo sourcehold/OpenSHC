@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -18,7 +19,11 @@ namespace Map {
         void BuildingsState::spreadFireRandomlyToBuildings(int param_1, int param_2)
         {
             // Sets param_2 random buildings of player param_1 on fire. Very flammable buildings are 5 times as likely.
-            if (param_2 < 1 || DAT_GameState::instance.playerDataArray[param_1].campground.id <= 0) {
+            if (param_2 < 1
+                || DAT_GameState::instance.playerDataArray[param_1]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .id
+                    <= 0) {
                 return;
             }
 

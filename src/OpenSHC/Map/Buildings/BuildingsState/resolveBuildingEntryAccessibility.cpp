@@ -12,7 +12,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00421BE0
-        char BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
+        int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise
             if (buildingID <= 0) {
@@ -59,7 +59,7 @@ namespace Map {
                 }
             }
 
-            char result = 1;
+            int result = 1;
             this->buildings[buildingID].hasAccessToKeep = 1;
             if (blocked != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(

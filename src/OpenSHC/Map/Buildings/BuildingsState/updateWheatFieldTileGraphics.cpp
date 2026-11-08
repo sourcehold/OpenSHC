@@ -3,7 +3,7 @@
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -12,12 +12,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040CF20
         void BuildingsState::updateWheatFieldTileGraphics(int buildingID)
         {
-            // Unless all tiles are refreshed (field14_0x18e024), only one tile is updated per call and the position to
+            // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
-            if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+            if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                 start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
             }
             for (int i = 0; i < 36; ++i) {
@@ -52,10 +52,10 @@ namespace Map {
 
                 int gfx;
                 if (frame < 36) {
-                    gfx = (DAT_TileMapState::instance.RandomLayer[tile] & 3) + GMTotalPicturesProcessed::instance[14]
+                    gfx = (DAT_TileMapState::instance.RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[14]
                         + frame;
                 } else {
-                    gfx = GMTotalPicturesProcessed::instance[14] + frame;
+                    gfx = GMFirstPictureIndex::instance[14] + frame;
                 }
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft == 0) {
@@ -64,7 +64,7 @@ namespace Map {
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                 }
-                if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
+                if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                     *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
                     return;
                 }
