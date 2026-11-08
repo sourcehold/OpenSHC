@@ -21,9 +21,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C310
         BOOLEnum BuildingsState::processResourceGain(int playerID, ResourceType resourceType, int amount)
         {
-            // Matching note: The remaining differences are register and stack slot allocation. The original
-            // keeps the storage type in eax and loads currentNumberOfResource once for both of its checks, where our
-            // compiler folds the duplicated check differently.
+            // Matching note: The original relies on /GL (the callees are in cmake/compiler-flags-gl.txt, this file
+            // is not): ecx still holds this after getBuildingStorageTypeForResourceType, so the armory and granary
+            // calls and the first stockpile loop do not reload it. It also loads currentNumberOfResource once and
+            // tests it twice, where our compiler drops the duplicated test.
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getResourceSpace, this)(
                     playerID, resourceType)
                 < amount) {
