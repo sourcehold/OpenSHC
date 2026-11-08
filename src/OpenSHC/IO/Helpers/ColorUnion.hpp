@@ -17,6 +17,7 @@ namespace IO {
         typedef union ColorUnion {
 
             short shortValue; // 0x00000000 length: 2
+            ushort ushortValue; // 0x00000000 length: 2
             int intValue; // 0x00000000 length: 4
 
         } ColorUnion;
