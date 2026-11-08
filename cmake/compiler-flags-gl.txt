@@ -127,3 +127,10 @@ src/OpenSHC/Map/Buildings/BuildingsState/determineBuildingEntranceFromKeepArea.c
 src/OpenSHC/Map/Buildings/BuildingsState/resolveBuildingEntryAccessibility.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/sortBuildingIDsNeedPeasantsQueue.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/spreadFireRandomlyToBuildings.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/applyGateOrDrawbridgeOpenCloseChange.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/resourceGainForKillingPitAndPitchDitch.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/countPlayerResources.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/processPlacementResourceLossForBuildingType.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/updateGateDrawBridgeOpenCloseLogic.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/processResourceGain.cpp
