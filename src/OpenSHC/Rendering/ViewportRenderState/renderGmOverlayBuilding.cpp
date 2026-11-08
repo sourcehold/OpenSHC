@@ -258,15 +258,15 @@ namespace Rendering {
                     DAT_RenderedUnitOwner::instance = 0;
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_IRON_MINER;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a;
-                        if (sVar1 == 0) {
+                        short const minerPose = DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a;
+                        if (minerPose == 0) {
                             local_18 = -31;
                             local_14 = -88;
-                        } else if ((sVar1 == 1) || (sVar1 == 2)) {
+                        } else if (minerPose == 1 || minerPose == 2) {
                             local_14 = -157;
                             local_18 = -26;
                         }
-                        if (sVar1 == 0) {
+                        if (DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a == 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(
                                 OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, local_18 + xUnk, local_14 + yUnk);
@@ -541,7 +541,7 @@ namespace Rendering {
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_FARMER;
                     if (frame != 0) {
                         sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
-                        if (sVar1 == 0) {
+                        if (DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a == 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(
                                 OpenSHC::DE::SHCDE::GM_FARMER_ANIMS, frame, xUnk - 35, yUnk - 81);
@@ -554,7 +554,7 @@ namespace Rendering {
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2;
                     if (frame != 0) {
                         sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
-                        if (sVar1 == 0) {
+                        if (DAT_BuildingsState::instance.buildings[tileIndex].field_0x11a == 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(
                                 OpenSHC::DE::SHCDE::GM_FARMER_ANIMS, frame, xUnk - 35, yUnk - 81);
@@ -592,129 +592,113 @@ namespace Rendering {
                     DAT_RenderedUnitOwner::instance = 0;
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_STABLES;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
+                        short const blend = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
                         if (frame < 38) {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 107;
-                                iVar9 = xUnk - 80;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 80, yUnk - 107, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 80, yUnk - 107, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 80, yUnk - 107);
                             }
                         } else {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 100;
-                                iVar9 = xUnk - 103;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 80, yUnk - 107, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 80, yUnk - 107, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 103, yUnk - 100);
                             }
                         }
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
+                        short const blend = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
                         if (frame < 38) {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 96;
-                                iVar9 = xUnk - 58;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 58, yUnk - 96, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 58, yUnk - 96, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 58, yUnk - 96);
                             }
                         } else {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 83;
-                                iVar9 = xUnk - 81;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 58, yUnk - 96, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 58, yUnk - 96, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 81, yUnk - 83);
                             }
                         }
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
+                        short const blend = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
                         if (frame < 38) {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 85;
-                                iVar9 = xUnk - 36;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 36, yUnk - 85, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 36, yUnk - 85, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 36, yUnk - 85);
                             }
                         } else {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 74;
-                                iVar9 = xUnk - 55;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, iVar9, iVar6);
-                            } else {
+                            if (blend != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 36, yUnk - 85, sVar1);
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 36, yUnk - 85, blend);
+                            } else {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 55, yUnk - 74);
                             }
                         }
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite1;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
+                        short const blend = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
                         if (frame < 38) {
-                            if (sVar1 == 0) {
+                            if (blend != 0) {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 14, yUnk - 74, blend);
+                            } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                     DAT_TextureRenderCoreObject::ptr)(
                                     OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 14, yUnk - 74);
-                            } else {
+                            }
+                            // the second image of the pair
+                            short const blend2 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
+                            if (blend2 != 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 14, yUnk - 74, sVar1);
-                            }
-                            sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].renderBlendStrength;
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 73;
-                                iVar9 = xUnk - 2;
-                                frame = 38;
-                                gmID = OpenSHC::DE::SHCDE::GM_STABLE_ANIMS;
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, 38, xUnk - 13, yUnk - 73, blend2);
+                            } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                                break;
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, 38, xUnk - 2, yUnk - 73);
                             }
-                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)(
-                                OpenSHC::IO::Graphics::GID_ANIM_STABLES, 38, xUnk - 13, yUnk - 73, sVar1);
                         } else {
-                            if (sVar1 == 0) {
-                                iVar6 = yUnk - 63;
-                                iVar9 = xUnk - 33;
-                                gmID = OpenSHC::DE::SHCDE::GM_STABLE_ANIMS;
+                            if (blend != 0) {
+                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 14, yUnk - 74, blend);
+                            } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                                break;
+                                    DAT_TextureRenderCoreObject::ptr)(
+                                    OpenSHC::DE::SHCDE::GM_STABLE_ANIMS, frame, xUnk - 33, yUnk - 63);
                             }
-                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)(
-                                OpenSHC::IO::Graphics::GID_ANIM_STABLES, frame, xUnk - 14, yUnk - 74, sVar1);
                         }
                     }
                     break;
