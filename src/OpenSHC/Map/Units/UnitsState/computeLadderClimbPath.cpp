@@ -39,9 +39,9 @@ namespace Map {
                 this->units[unitID].currentIndexInPathPlan = 0;
                 this->units[unitID].ladderExitXPosition = this->units[unitID].x;
                 this->units[unitID].tunnelerFinishedDigging = 2;
-                this->units[unitID].cannotClimb = 0;
                 this->units[unitID].previousTilePosition = this->units[unitID].x
                     + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
+                this->units[unitID].cannotClimb = 0;
                 return TRUE;
             }
             return FALSE;
