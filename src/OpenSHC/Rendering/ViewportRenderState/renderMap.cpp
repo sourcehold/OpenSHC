@@ -319,7 +319,11 @@ namespace Rendering {
             for (; iVar31 < _vpWidthPlus1; iVar31 = iVar31 + 1) {
                 layerTileIndex = this->screenPointToTileNumber[iVar31 + iVar2];
                 DAT_00ed3148::instance = DAT_TileMapState::instance.LogicLayer[layerTileIndex];
-                if ((DAT_00ed3148::instance & 0x30) == 0) {
+                if ((DAT_00ed3148::instance & 0x30) != 0) {
+                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[38] + 320;
+                    DAT_RenderMap_YOffset::instance = 0;
+                    MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTerrainTilesCenterPiece)();
+                } else {
                     /*
                       draw every tile
                      */
@@ -374,25 +378,180 @@ namespace Rendering {
                     iVar23 = DAT_TileMapState::instance.OrganismLayer[layerTileIndex];
                     local_2c = 0;
                     DAT_00ed3154::instance = 0;
-                    if ((DAT_00ed3148::instance & 0xa0108001) == 0) {
-                    LAB_004e97e2:
-                        uVar32 = (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex];
-                        if ((DAT_00ed3148::instance & 0x200) != 0
-                            && (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x3c0) != 0) {
-                            uVar32 = uVar32 - 8;
-                        }
-                        DAT_RenderMap_YOffset::instance = DAT_TileMapState::instance.heightBasedScreenYOffset[uVar32];
-                        if ((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) == 0
-                            || DAT_TileMapState::instance.disableElevationRendering != 0) {
-                            DAT_00ed3154::instance = 0;
-                        } else {
-                            DAT_00ed3154::instance = 90;
-                        }
-                        DAT_RenderMap_RowsLeft::instance = (uint)DAT_TileMapState::instance.ShowHiLayer[layerTileIndex];
-                    } else if ((DAT_00ed3148::instance & 1) == 0) {
-                        if ((DAT_00ed3148::instance & 0x100000) == 0) {
-                            if (DAT_00ed3148::instance != 2684387328)
-                                goto LAB_004e97e2;
+                    if ((DAT_00ed3148::instance & 0xa0108001) != 0) {
+                        if ((DAT_00ed3148::instance & 1) != 0) {
+                            uVar32 = (uint)(short)DAT_TileMapState::instance.RandomLayer[layerTileIndex];
+                            INT_00ed315c::instance = uVar32 & 0x7f;
+                            DAT_00ed314c::instance = uVar32 & 0xf;
+                            DAT_RenderMap_YOffset::instance = 0;
+                            DAT_RenderMap_RowsLeft::instance = 8;
+                            if ((DAT_TileMapState::instance.Logic2Layer[layerTileIndex] & 8) != 0) {
+                                DAT_00ed3154::instance
+                                    = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
+                                    & 0x5a;
+                                DAT_00ed314c::instance = this->unknownCounterUntil_0x10 + DAT_00ed314c::instance;
+                                if (15 < DAT_00ed314c::instance) {
+                                    DAT_00ed314c::instance = DAT_00ed314c::instance - 16;
+                                }
+                                DAT_GmImageAddressToBeRendered::instance
+                                    = DAT_TileMapState::instance.GfxLayer[layerTileIndex] + DAT_00ed314c::instance;
+                            } else {
+                                uVar10 = DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
+                                if ((char)uVar10 < '\0') {
+                                    DAT_GmImageAddressToBeRendered::instance
+                                        = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
+                                        + DAT_MapRenderDefinedData::instance
+                                              .field_0x4dc[(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2)
+                                                  % 12];
+                                } else if ((uVar10 & 0x40) != 0) {
+                                    uVar32 = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                                    if (uVar32 == GMFirstPictureIndex::instance[166] + 1500U) {
+                                        uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
+                                        if ((int)uVar29 < 0) {
+                                            uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
+                                        }
+                                        _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
+                                        if ((int)uVar29 < 18) {
+                                            DAT_GmImageAddressToBeRendered::instance
+                                                = uVar32 + (_yOffset_01 - ((int)uVar29 >> 0x1f)) * -6 + uVar29;
+                                        } else {
+                                        LAB_004e941f:
+                                            _yOffset_01 = (_yOffset_01 >> 1) - (_yOffset_01 >> 0x1f);
+                                        LAB_004e9428:
+                                            DAT_GmImageAddressToBeRendered::instance
+                                                = *(int*)((int)DAT_MapRenderDefinedData::ptr
+                                                      + (uVar29 + _yOffset_01 * -12) * 4 + 1244)
+                                                + 1488 + GMFirstPictureIndex::instance[166];
+                                        }
+                                    } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1506U) {
+                                        uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
+                                        if ((int)uVar29 < 0) {
+                                            uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
+                                        }
+                                        _yOffset_01 = (int)uVar29 / 12;
+                                        if (17 < (int)uVar29)
+                                            goto LAB_004e9428;
+                                        DAT_GmImageAddressToBeRendered::instance = uVar32 + _yOffset_01 * -12 + uVar29;
+                                    } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1518U) {
+                                        uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
+                                        if ((int)uVar29 < 0) {
+                                            uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
+                                        }
+                                        if (17 < (int)uVar29) {
+                                            _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
+                                            goto LAB_004e941f;
+                                        }
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = uVar32 + ((int)uVar29 / 18) * -18 + uVar29;
+                                    }
+                                } else {
+                                    if ((uVar10 & 0x100) != 0) {
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
+                                            + DAT_MapRenderDefinedData::instance
+                                                    .field_0x6a4[this->unknownCounterUntil_0x20]
+                                                * 34;
+                                    } else {
+                                        if ((uVar10 & 0x200) == 0) {
+                                            DAT_00ed314c::instance = uVar32 & 7;
+                                            piVar21 = this->landscapeSeaWhiteCapsAnimationFrames;
+                                            _yOffset_01 = 9;
+                                            do {
+                                                if (layerTileIndex == piVar21[-60]) {
+                                                    local_2c = *piVar21 + 1 + (uVar32 & 3) * 8;
+                                                }
+                                                if (layerTileIndex == piVar21[-59]) {
+                                                    local_2c = piVar21[1] + 1 + (uVar32 & 3) * 8;
+                                                }
+                                                if (layerTileIndex == piVar21[-58]) {
+                                                    local_2c = piVar21[2] + 1 + (uVar32 & 3) * 8;
+                                                }
+                                                if (layerTileIndex == piVar21[-57]) {
+                                                    local_2c = piVar21[3] + 1 + (uVar32 & 3) * 8;
+                                                }
+                                                if (layerTileIndex == piVar21[-56]) {
+                                                    local_2c = piVar21[4] + 1 + (uVar32 & 3) * 8;
+                                                }
+                                                piVar21 = piVar21 + 5;
+                                                _yOffset_01 = _yOffset_01 - 1;
+                                            } while (_yOffset_01 != 0);
+                                        }
+                                    }
+                                }
+                            }
+                            MACRO_CALL_MEMBER(
+                                OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(2);
+                            _yOffset_01 = GMFirstPictureIndex::instance[157];
+                        } else if ((DAT_00ed3148::instance & 0x100000) != 0) {
+                            DAT_RenderMap_RowsLeft::instance
+                                = (uint)DAT_TileMapState::instance.ShowHiLayer[layerTileIndex];
+                            DAT_RenderMap_YOffset::instance
+                                = DAT_TileMapState::instance
+                                      .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[layerTileIndex]];
+                            bVar15 = DAT_TileMapState::instance.Logic2Layer[layerTileIndex];
+                            if ((bVar15 & 200) != 0) {
+                                DAT_00ed3154::instance
+                                    = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
+                                    & 0x5a;
+                                DAT_00ed314c::instance = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
+                                    + this->unknownCounterUntil_0x10;
+                                uVar32 = DAT_00ed314c::instance & 0x8000000f;
+                                if ((int)uVar32 < 0) {
+                                    uVar32 = (uVar32 - 1 | 0xfffffff0) + 1;
+                                }
+                                DAT_GmImageAddressToBeRendered::instance
+                                    = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                            } else {
+                                if ((bVar15 & 7) != 0) {
+                                    bVar15 = (byte)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
+                                    DAT_00ed314c::instance
+                                        = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
+                                        + this->unknownCounterUntil_0x10 / 2;
+                                    uVar32 = DAT_00ed314c::instance & 0x80000007;
+                                    if ((int)uVar32 < 0) {
+                                        uVar32 = (uVar32 - 1 | 0xfffffff8) + 1;
+                                    }
+                                    DAT_GmImageAddressToBeRendered::instance
+                                        = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                                LAB_004e96a7:
+                                    DAT_00ed3154::instance = -(uint)((bVar15 & 0x20) != 0) & 0x5a;
+                                } else {
+                                    if ((bVar15 & 0x10) != 0) {
+                                        DAT_00ed3154::instance
+                                            = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex]
+                                                          & 0x20)
+                                                  != 0)
+                                            & 0x5a;
+                                        DAT_00ed314c::instance
+                                            = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
+                                            + this->unknownCounterUntil_0x10;
+                                        uVar32 = DAT_00ed314c::instance & 0x8000000f;
+                                        if ((int)uVar32 < 0) {
+                                            uVar32 = (uVar32 - 1 | 0xfffffff0) + 1;
+                                        }
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                                    } else {
+                                        if ((bVar15 & 0x20) != 0) {
+                                            bVar15 = (byte)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
+                                            DAT_00ed314c::instance
+                                                = (uint)(DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] >> 10)
+                                                + this->unknownCounterUntil_0x10 / 2;
+                                            uVar32 = DAT_00ed314c::instance & 0x80000007;
+                                            if ((int)uVar32 < 0) {
+                                                uVar32 = (uVar32 - 1 | 0xfffffff8) + 1;
+                                            }
+                                            DAT_GmImageAddressToBeRendered::instance
+                                                = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                                            goto LAB_004e96a7;
+                                        }
+                                    }
+                                }
+                            }
+                            MACRO_CALL_MEMBER(
+                                OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(7);
+                            _yOffset_01 = GMFirstPictureIndex::instance[157];
+                        } else if (DAT_00ed3148::instance == 0xa0008000) {
                             DAT_RenderMap_YOffset::instance
                                 = DAT_TileMapState::instance
                                       .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[layerTileIndex]];
@@ -405,15 +564,7 @@ namespace Rendering {
                                     = DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] + 1;
                             }
                             DAT_00ed314c::instance = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex];
-                            if ((bVar15 & 7) == 0) {
-                                if (511 < DAT_00ed314c::instance) {
-                                    DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
-                                    DAT_00ed314c::instance = 0;
-                                }
-                                DAT_GmImageAddressToBeRendered::instance
-                                    = (int)(char)DAT_MapRenderDefinedData::instance.field_0x724[DAT_00ed314c::instance]
-                                    + (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                            } else {
+                            if ((bVar15 & 7) != 0) {
                                 if (bVar19 == 1) {
                                     if (510 < DAT_00ed314c::instance) {
                                         DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
@@ -440,179 +591,46 @@ namespace Rendering {
                                 }
                                 DAT_GmImageAddressToBeRendered::instance
                                     = (int)(char)bVar15 + (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
+                            } else {
+                                if (511 < DAT_00ed314c::instance) {
+                                    DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
+                                    DAT_00ed314c::instance = 0;
+                                }
+                                DAT_GmImageAddressToBeRendered::instance
+                                    = (int)(char)DAT_MapRenderDefinedData::instance.field_0x724[DAT_00ed314c::instance]
+                                    + (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
                             }
                         } else {
+                            uVar32 = (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex];
+                            if ((DAT_00ed3148::instance & 0x200) != 0
+                                && (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x3c0) != 0) {
+                                uVar32 = uVar32 - 8;
+                            }
+                            DAT_RenderMap_YOffset::instance
+                                = DAT_TileMapState::instance.heightBasedScreenYOffset[uVar32];
+                            if ((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) == 0
+                                || DAT_TileMapState::instance.disableElevationRendering != 0) {
+                                DAT_00ed3154::instance = 0;
+                            } else {
+                                DAT_00ed3154::instance = 90;
+                            }
                             DAT_RenderMap_RowsLeft::instance
                                 = (uint)DAT_TileMapState::instance.ShowHiLayer[layerTileIndex];
-                            DAT_RenderMap_YOffset::instance
-                                = DAT_TileMapState::instance
-                                      .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[layerTileIndex]];
-                            bVar15 = DAT_TileMapState::instance.Logic2Layer[layerTileIndex];
-                            if ((bVar15 & 200) == 0) {
-                                if ((bVar15 & 7) == 0) {
-                                    if ((bVar15 & 0x10) == 0) {
-                                        if ((bVar15 & 0x20) != 0) {
-                                            bVar15 = (byte)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
-                                            DAT_00ed314c::instance
-                                                = (uint)(DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] >> 10)
-                                                + this->unknownCounterUntil_0x10 / 2;
-                                            uVar32 = DAT_00ed314c::instance & 0x80000007;
-                                            if ((int)uVar32 < 0) {
-                                                uVar32 = (uVar32 - 1 | 0xfffffff8) + 1;
-                                            }
-                                            DAT_GmImageAddressToBeRendered::instance
-                                                = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                                            goto LAB_004e96a7;
-                                        }
-                                    } else {
-                                        DAT_00ed3154::instance
-                                            = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex]
-                                                          & 0x20)
-                                                  != 0)
-                                            & 0x5a;
-                                        DAT_00ed314c::instance
-                                            = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
-                                            + this->unknownCounterUntil_0x10;
-                                        uVar32 = DAT_00ed314c::instance & 0x8000000f;
-                                        if ((int)uVar32 < 0) {
-                                            uVar32 = (uVar32 - 1 | 0xfffffff0) + 1;
-                                        }
-                                        DAT_GmImageAddressToBeRendered::instance
-                                            = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                                    }
-                                } else {
-                                    bVar15 = (byte)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
-                                    DAT_00ed314c::instance
-                                        = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
-                                        + this->unknownCounterUntil_0x10 / 2;
-                                    uVar32 = DAT_00ed314c::instance & 0x80000007;
-                                    if ((int)uVar32 < 0) {
-                                        uVar32 = (uVar32 - 1 | 0xfffffff8) + 1;
-                                    }
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                                LAB_004e96a7:
-                                    DAT_00ed3154::instance = -(uint)((bVar15 & 0x20) != 0) & 0x5a;
-                                }
-                            } else {
-                                DAT_00ed3154::instance
-                                    = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
-                                    & 0x5a;
-                                DAT_00ed314c::instance = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex]
-                                    + this->unknownCounterUntil_0x10;
-                                uVar32 = DAT_00ed314c::instance & 0x8000000f;
-                                if ((int)uVar32 < 0) {
-                                    uVar32 = (uVar32 - 1 | 0xfffffff0) + 1;
-                                }
-                                DAT_GmImageAddressToBeRendered::instance
-                                    = uVar32 + DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                            }
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(7);
-                            _yOffset_01 = GMFirstPictureIndex::instance[157];
                         }
                     } else {
-                        uVar32 = (uint)(short)DAT_TileMapState::instance.RandomLayer[layerTileIndex];
-                        INT_00ed315c::instance = uVar32 & 0x7f;
-                        DAT_00ed314c::instance = uVar32 & 0xf;
-                        DAT_RenderMap_YOffset::instance = 0;
-                        DAT_RenderMap_RowsLeft::instance = 8;
-                        if ((DAT_TileMapState::instance.Logic2Layer[layerTileIndex] & 8) == 0) {
-                            uVar10 = DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
-                            if ((char)uVar10 < '\0') {
-                                DAT_GmImageAddressToBeRendered::instance
-                                    = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
-                                    + DAT_MapRenderDefinedData::instance
-                                          .field_0x4dc[(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2)
-                                              % 12];
-                            } else if ((uVar10 & 0x40) == 0) {
-                                if ((uVar10 & 0x100) == 0) {
-                                    if ((uVar10 & 0x200) == 0) {
-                                        DAT_00ed314c::instance = uVar32 & 7;
-                                        piVar21 = this->landscapeSeaWhiteCapsAnimationFrames;
-                                        _yOffset_01 = 9;
-                                        do {
-                                            if (layerTileIndex == piVar21[-60]) {
-                                                local_2c = *piVar21 + 1 + (uVar32 & 3) * 8;
-                                            }
-                                            if (layerTileIndex == piVar21[-59]) {
-                                                local_2c = piVar21[1] + 1 + (uVar32 & 3) * 8;
-                                            }
-                                            if (layerTileIndex == piVar21[-58]) {
-                                                local_2c = piVar21[2] + 1 + (uVar32 & 3) * 8;
-                                            }
-                                            if (layerTileIndex == piVar21[-57]) {
-                                                local_2c = piVar21[3] + 1 + (uVar32 & 3) * 8;
-                                            }
-                                            if (layerTileIndex == piVar21[-56]) {
-                                                local_2c = piVar21[4] + 1 + (uVar32 & 3) * 8;
-                                            }
-                                            piVar21 = piVar21 + 5;
-                                            _yOffset_01 = _yOffset_01 - 1;
-                                        } while (_yOffset_01 != 0);
-                                    }
-                                } else {
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
-                                        + DAT_MapRenderDefinedData::instance.field_0x6a4[this->unknownCounterUntil_0x20]
-                                            * 34;
-                                }
-                            } else {
-                                uVar32 = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                                if (uVar32 == GMFirstPictureIndex::instance[166] + 1500U) {
-                                    uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
-                                    if ((int)uVar29 < 0) {
-                                        uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
-                                    }
-                                    _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
-                                    if ((int)uVar29 < 18) {
-                                        DAT_GmImageAddressToBeRendered::instance
-                                            = uVar32 + (_yOffset_01 - ((int)uVar29 >> 0x1f)) * -6 + uVar29;
-                                    } else {
-                                    LAB_004e941f:
-                                        _yOffset_01 = (_yOffset_01 >> 1) - (_yOffset_01 >> 0x1f);
-                                    LAB_004e9428:
-                                        DAT_GmImageAddressToBeRendered::instance
-                                            = *(int*)((int)DAT_MapRenderDefinedData::ptr
-                                                  + (uVar29 + _yOffset_01 * -12) * 4 + 1244)
-                                            + 1488 + GMFirstPictureIndex::instance[166];
-                                    }
-                                } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1506U) {
-                                    uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
-                                    if ((int)uVar29 < 0) {
-                                        uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
-                                    }
-                                    _yOffset_01 = (int)uVar29 / 12;
-                                    if (17 < (int)uVar29)
-                                        goto LAB_004e9428;
-                                    DAT_GmImageAddressToBeRendered::instance = uVar32 + _yOffset_01 * -12 + uVar29;
-                                } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1518U) {
-                                    uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
-                                    if ((int)uVar29 < 0) {
-                                        uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
-                                    }
-                                    if (17 < (int)uVar29) {
-                                        _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
-                                        goto LAB_004e941f;
-                                    }
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = uVar32 + ((int)uVar29 / 18) * -18 + uVar29;
-                                }
-                            }
-                        } else {
-                            DAT_00ed3154::instance
-                                = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
-                                & 0x5a;
-                            DAT_00ed314c::instance = this->unknownCounterUntil_0x10 + DAT_00ed314c::instance;
-                            if (15 < DAT_00ed314c::instance) {
-                                DAT_00ed314c::instance = DAT_00ed314c::instance - 16;
-                            }
-                            DAT_GmImageAddressToBeRendered::instance
-                                = DAT_TileMapState::instance.GfxLayer[layerTileIndex] + DAT_00ed314c::instance;
+                        uVar32 = (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex];
+                        if ((DAT_00ed3148::instance & 0x200) != 0
+                            && (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x3c0) != 0) {
+                            uVar32 = uVar32 - 8;
                         }
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(2);
-                        _yOffset_01 = GMFirstPictureIndex::instance[157];
+                        DAT_RenderMap_YOffset::instance = DAT_TileMapState::instance.heightBasedScreenYOffset[uVar32];
+                        if ((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) == 0
+                            || DAT_TileMapState::instance.disableElevationRendering != 0) {
+                            DAT_00ed3154::instance = 0;
+                        } else {
+                            DAT_00ed3154::instance = 90;
+                        }
+                        DAT_RenderMap_RowsLeft::instance = (uint)DAT_TileMapState::instance.ShowHiLayer[layerTileIndex];
                     }
                 LAB_004e9845:
                     local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
@@ -649,21 +667,7 @@ namespace Rendering {
                                             }
                                         }
                                     }
-                                } else if ((DAT_00ed3148::instance & 0x800) == 0) {
-                                    if ((DAT_00ed3148::instance & 0x200) == 0) {
-                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
-                                            DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
-                                        }
-                                    } else {
-                                        DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] == 0) {
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 3) + 36 + _yOffset_01;
-                                        } else {
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
-                                        }
-                                    }
-                                } else {
+                                } else if ((DAT_00ed3148::instance & 0x800) != 0) {
                                     DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                     if ((DAT_GmImageAddressToBeRendered::instance
                                             == GMFirstPictureIndex::instance[12] + 134U)
@@ -672,6 +676,20 @@ namespace Rendering {
                                         DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 42;
                                     } else {
                                         DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 40;
+                                    }
+                                } else {
+                                    if ((DAT_00ed3148::instance & 0x200) != 0) {
+                                        DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] == 0) {
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 3) + 36 + _yOffset_01;
+                                        } else {
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
+                                        }
+                                    } else {
+                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
+                                            DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
+                                        }
                                     }
                                 }
                             } else {
@@ -811,7 +829,9 @@ namespace Rendering {
                                 = (uint)DAT_TileMapState::instance.AlphaGFXLayer[layerTileIndex];
                             iVar26 = uVar32 - DAT_TileMapState::instance.heightBasedScreenYOffset[uVar32];
                             _yOffset_01 = DAT_RenderMap_DrawSomeX::instance;
-                            if ((uVar10 & 0x40) == 0) {
+                            if ((uVar10 & 0x40) != 0) {
+                                iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance + 7;
+                            } else {
                                 if ((char)uVar10 < '\0') {
                                     _yOffset_01 = (int)DAT_GMImageHeaders::instance
                                                       .imh[DAT_GmImageAddressToBeRendered::instance
@@ -838,16 +858,14 @@ namespace Rendering {
                                                 + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                                     goto LAB_004e9e36;
                                 }
-                                if ((uVar10 & 0x100) == 0) {
+                                if ((uVar10 & 0x100) != 0) {
+                                    iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance;
+                                    _yOffset_01 = DAT_RenderMap_DrawSomeX::instance + 16;
+                                } else {
                                     if ((uVar10 & 0x200) == 0)
                                         goto LAB_004e9e36;
                                     iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance - 1;
-                                } else {
-                                    iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance;
-                                    _yOffset_01 = DAT_RenderMap_DrawSomeX::instance + 16;
                                 }
-                            } else {
-                                iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance + 7;
                             }
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_CASTLE_ANIMS,
@@ -862,7 +880,13 @@ namespace Rendering {
                         if ((DAT_TileMapState::instance.refreshRelatedOne != 0) && (_flatView == 0)) {
                             if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
                                     & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
-                                == 0) {
+                                != 0) {
+                                local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
+                                iVar26 = MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                    DAT_BuildingsState::ptr)(local_54);
+                                _yOffset_01 = _yOffset_01 + iVar26;
+                            } else {
                                 if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
                                         & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
                                     != 0) {
@@ -876,44 +900,28 @@ namespace Rendering {
                                         _yOffset_01 = DAT_RenderMap_YOffset::instance + 20;
                                     }
                                 }
-                            } else {
-                                local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
-                                iVar26 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                                    DAT_BuildingsState::ptr)(local_54);
-                                _yOffset_01 = _yOffset_01 + iVar26;
                             }
                         }
                         do {
                             uVar29 = this->floatersArray[uVar32].variation;
                             if ((uVar29 & 2) != 0) {
-                                if ((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x10) == 0) {
+                                if ((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x10) != 0) {
+                                    MACRO_CALL_MEMBER(
+                                        OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
+                                        this)(0,
+                                        this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                        (this->floatersArray[uVar32].originY - _yOffset_01)
+                                            + DAT_RenderMap_DrawSomeY::instance,
+                                        (undefined4)(this->floatersArray[uVar32].imageID), (undefined4)((int)(uVar29)),
+                                        (undefined4)((int)(this->floatersArray[uVar32].gmID)), 0);
+                                } else {
                                     if ((uVar29 & 4) != 0) {
                                         DAT_RenderedUnitOwner::instance = ~-(uint)((uVar29 & 0x10) != 0)
                                             & DAT_GameSynchronyState::instance.currentPlayerSlotID;
                                         DAT_CurrentlyRenderedSpriteID::instance = this->floatersArray[uVar32].gmID;
                                         uVar29 = this->floatersArray[uVar32].variation;
                                     }
-                                    if ((uVar29 & 0x20) == 0) {
-                                        if ((uVar29 & 0xffff0000) == 0) {
-                                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                                DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
-                                                this->floatersArray[uVar32].imageID,
-                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                                (int)((this->floatersArray[uVar32].originY - _yOffset_01)
-                                                    + DAT_RenderMap_DrawSomeY::instance));
-                                        } else {
-                                            MACRO_CALL_MEMBER(
-                                                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                                DAT_TextureRenderCoreObject::ptr)(
-                                                (GmID)this->floatersArray[uVar32].gmID,
-                                                this->floatersArray[uVar32].imageID,
-                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                                (int)((this->floatersArray[uVar32].originY - _yOffset_01)
-                                                    + DAT_RenderMap_DrawSomeY::instance),
-                                                (int)(uVar29 >> 0x10));
-                                        }
-                                    } else {
+                                    if ((uVar29 & 0x20) != 0) {
                                         iVar26 = this->floatersArray[uVar32].imageID;
                                         GVar11 = (GmID)this->floatersArray[uVar32].gmID;
                                         MACRO_CALL_MEMBER(
@@ -923,16 +931,26 @@ namespace Rendering {
                                             (int)((this->floatersArray[uVar32].originY - _yOffset_01)
                                                 + DAT_RenderMap_DrawSomeY::instance),
                                             GVar11, ((int)uVar29 >> 0x10) + iVar26, 0);
+                                    } else {
+                                        if ((uVar29 & 0xffff0000) != 0) {
+                                            MACRO_CALL_MEMBER(
+                                                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                                DAT_TextureRenderCoreObject::ptr)(
+                                                (GmID)this->floatersArray[uVar32].gmID,
+                                                this->floatersArray[uVar32].imageID,
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((this->floatersArray[uVar32].originY - _yOffset_01)
+                                                    + DAT_RenderMap_DrawSomeY::instance),
+                                                (int)(uVar29 >> 0x10));
+                                        } else {
+                                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                                DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
+                                                this->floatersArray[uVar32].imageID,
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((this->floatersArray[uVar32].originY - _yOffset_01)
+                                                    + DAT_RenderMap_DrawSomeY::instance));
+                                        }
                                     }
-                                } else {
-                                    MACRO_CALL_MEMBER(
-                                        OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
-                                        this)(0,
-                                        this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                        (this->floatersArray[uVar32].originY - _yOffset_01)
-                                            + DAT_RenderMap_DrawSomeY::instance,
-                                        (undefined4)(this->floatersArray[uVar32].imageID), (undefined4)((int)(uVar29)),
-                                        (undefined4)((int)(this->floatersArray[uVar32].gmID)), 0);
                                 }
                             }
                             uVar32 = this->floatersArray[uVar32].id;
@@ -954,7 +972,13 @@ namespace Rendering {
                                     = (GmIDInt)DAT_EntityState::instance.entityArray[entityID].gmID;
                                 if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
                                         & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
-                                    == 0) {
+                                    != 0) {
+                                    local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
+                                    iVar18 = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                        DAT_BuildingsState::ptr)(local_54);
+                                    iVar26 = iVar26 + iVar18;
+                                } else {
                                     if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
                                             & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
                                         != 0) {
@@ -965,12 +989,6 @@ namespace Rendering {
                                             iVar26 = DAT_RenderMap_YOffset::instance + 20;
                                         }
                                     }
-                                } else {
-                                    local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
-                                    iVar18 = MACRO_CALL_MEMBER(
-                                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                                        DAT_BuildingsState::ptr)(local_54);
-                                    iVar26 = iVar26 + iVar18;
                                 }
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
@@ -2170,26 +2188,20 @@ namespace Rendering {
                         && bVar13 != 0) {
                         uVar32 = (uint)(short)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
                         DAT_RenderMap_WhatToDraw::instance = uVar32 & 3;
-                        if ((DAT_00ed3148::instance & 0x100) == 0) {
+                        if ((DAT_00ed3148::instance & 0x100) != 0) {
+                            DAT_GmImageAddressToBeRendered::instance
+                                = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex];
+                            DAT_RenderMap_SecondBlitImageIndex::instance = DAT_GmImageAddressToBeRendered::instance;
+                            if (local_54 != 0) {
+                                DAT_RenderMap_SecondBlitImageIndex::instance
+                                    = (uint)DAT_TileMapState::instance.PillarGFXLayer[layerTileIndex];
+                            }
+                        LAB_004eb9a4:
+                            MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClip)();
+                        } else {
                             DAT_GmImageAddressToBeRendered::instance
                                 = (uint)DAT_TileMapState::instance.PillarGFXLayer[layerTileIndex];
-                            if ((DAT_00ed3148::instance & 0x100000) == 0) {
-                                DAT_RenderMap_SecondBlitImageIndex::instance = DAT_GmImageAddressToBeRendered::instance;
-                                if ((uVar32 & 0x800) == 0) {
-                                    MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClip)();
-                                } else {
-                                    MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClipAndYOffset)();
-                                }
-                                if (bVar14 != 0) {
-                                    MACRO_CALL_MEMBER(
-                                        OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS,
-                                        DAT_RenderMap_ImageID::instance + 8, DAT_RenderMap_DrawSomeX::instance,
-                                        (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9
-                                            + DAT_RenderMap_DrawSomeY::instance,
-                                        24);
-                                }
-                            } else {
+                            if ((DAT_00ed3148::instance & 0x100000) != 0) {
                                 if (DAT_GmImageAddressToBeRendered::instance == 32) {
                                     DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[9] + 31;
                                 } else {
@@ -2211,23 +2223,25 @@ namespace Rendering {
                                 if ((uVar32 & 0x800) == 0)
                                     goto LAB_004eb9a4;
                                 MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClipAndYOffset)();
+                            } else {
+                                DAT_RenderMap_SecondBlitImageIndex::instance = DAT_GmImageAddressToBeRendered::instance;
+                                if ((uVar32 & 0x800) != 0) {
+                                    MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClipAndYOffset)();
+                                } else {
+                                    MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClip)();
+                                }
+                                if (bVar14 != 0) {
+                                    MACRO_CALL_MEMBER(
+                                        OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS,
+                                        DAT_RenderMap_ImageID::instance + 8, DAT_RenderMap_DrawSomeX::instance,
+                                        (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9
+                                            + DAT_RenderMap_DrawSomeY::instance,
+                                        24);
+                                }
                             }
-                        } else {
-                            DAT_GmImageAddressToBeRendered::instance
-                                = (uint)DAT_TileMapState::instance.WallGFXLayer[layerTileIndex];
-                            DAT_RenderMap_SecondBlitImageIndex::instance = DAT_GmImageAddressToBeRendered::instance;
-                            if (local_54 != 0) {
-                                DAT_RenderMap_SecondBlitImageIndex::instance
-                                    = (uint)DAT_TileMapState::instance.PillarGFXLayer[layerTileIndex];
-                            }
-                        LAB_004eb9a4:
-                            MACRO_CALL(OpenSHC::Rendering_Func::BlitMapImageWithVerticalClip)();
                         }
                     }
-                } else {
-                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[38] + 320;
-                    DAT_RenderMap_YOffset::instance = 0;
-                    MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTerrainTilesCenterPiece)();
                 }
                 DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 32;
             }
@@ -2277,13 +2291,7 @@ namespace Rendering {
                                             short*)((int)&DAT_LandscapeState::instance.trees[1590].animationFrameUnk
                                             + iVar23 + 2)];
                                 }
-                            } else if ((DAT_00ed3148::instance & 0x800) == 0) {
-                                if ((DAT_00ed3148::instance & 0x200) != 0) {
-                                    DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = (DAT_00ed314c::instance & 3) + 36 + GMFirstPictureIndex::instance[157];
-                                }
-                            } else {
+                            } else if ((DAT_00ed3148::instance & 0x800) != 0) {
                                 DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                 if ((DAT_GmImageAddressToBeRendered::instance
                                         == GMFirstPictureIndex::instance[12] + 134U)
@@ -2292,6 +2300,12 @@ namespace Rendering {
                                     DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 42;
                                 } else {
                                     DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 40;
+                                }
+                            } else {
+                                if ((DAT_00ed3148::instance & 0x200) != 0) {
+                                    DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                    DAT_GmImageAddressToBeRendered::instance
+                                        = (DAT_00ed314c::instance & 3) + 36 + GMFirstPictureIndex::instance[157];
                                 }
                             }
                         } else {
@@ -2390,13 +2404,13 @@ namespace Rendering {
                                 } else {
                                     iVar23 = (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
                                         + DAT_RenderMap_DrawSomeY::instance;
-                                    if ((uVar10 & 8) == 0) {
+                                    if ((uVar10 & 8) != 0) {
                                         MACRO_CALL_MEMBER(
-                                            OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding2,
+                                            OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding,
                                             this)(uVar29, DAT_RenderMap_DrawSomeX::instance, iVar23, _yOffset_01);
                                     } else {
                                         MACRO_CALL_MEMBER(
-                                            OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding,
+                                            OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding2,
                                             this)(uVar29, DAT_RenderMap_DrawSomeX::instance, iVar23, _yOffset_01);
                                     }
                                 }
@@ -2425,7 +2439,12 @@ namespace Rendering {
                         if ((DAT_TileMapState::instance.refreshRelatedOne != 0) && (_flatView == 0)) {
                             if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01]
                                     & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
-                                == 0) {
+                                != 0) {
+                                iVar26 = MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                                    DAT_BuildingsState::ptr)(DAT_TileMapState::instance.BuildingLayer[_yOffset_01]);
+                                iVar23 = iVar23 + iVar26;
+                            } else {
                                 if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01]
                                         & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
                                     != 0) {
@@ -2440,11 +2459,6 @@ namespace Rendering {
                                         iVar23 = DAT_RenderMap_YOffset::instance + 20;
                                     }
                                 }
-                            } else {
-                                iVar26 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                                    DAT_BuildingsState::ptr)(DAT_TileMapState::instance.BuildingLayer[_yOffset_01]);
-                                iVar23 = iVar23 + iVar26;
                             }
                         }
                         do {
@@ -2458,45 +2472,7 @@ namespace Rendering {
                                         iVar26 < 0)) {
                                     iVar26 = -1 - iVar26;
                                 }
-                                if ((*puVar1 & 0x10) == 0) {
-                                    uVar29 = this->floatersArray[uVar32].variation;
-                                    if ((uVar29 & 4) != 0) {
-                                        DAT_RenderedUnitOwner::instance = ~-(uint)((uVar29 & 0x10) != 0)
-                                            & DAT_GameSynchronyState::instance.currentPlayerSlotID;
-                                        DAT_CurrentlyRenderedSpriteID::instance = this->floatersArray[uVar32].gmID;
-                                        uVar29 = this->floatersArray[uVar32].variation;
-                                    }
-                                    if ((uVar29 & 0x20) == 0) {
-                                        if ((uVar29 & 0xffff0000) == 0) {
-                                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                                DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
-                                                this->floatersArray[uVar32].imageID,
-                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                                (int)((this->floatersArray[uVar32].originY - iVar26)
-                                                    + DAT_RenderMap_DrawSomeY::instance));
-                                        } else {
-                                            MACRO_CALL_MEMBER(
-                                                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                                DAT_TextureRenderCoreObject::ptr)(
-                                                (GmID)this->floatersArray[uVar32].gmID,
-                                                this->floatersArray[uVar32].imageID,
-                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                                (int)((this->floatersArray[uVar32].originY - iVar26)
-                                                    + DAT_RenderMap_DrawSomeY::instance),
-                                                (int)(uVar29 >> 0x10));
-                                        }
-                                    } else {
-                                        iVar18 = this->floatersArray[uVar32].imageID;
-                                        GVar11 = (GmID)this->floatersArray[uVar32].gmID;
-                                        MACRO_CALL_MEMBER(
-                                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                            DAT_TextureRenderCoreObject::ptr)((GmID)GVar11, iVar18,
-                                            this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
-                                            (int)((this->floatersArray[uVar32].originY - iVar26)
-                                                + DAT_RenderMap_DrawSomeY::instance),
-                                            GVar11, ((int)uVar29 >> 0x10) + iVar18, 0);
-                                    }
-                                } else {
+                                if ((*puVar1 & 0x10) != 0) {
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
                                         this)(0,
@@ -2506,6 +2482,44 @@ namespace Rendering {
                                         (undefined4)(this->floatersArray[uVar32].imageID),
                                         (undefined4)(this->floatersArray[uVar32].variation),
                                         (undefined4)((int)(this->floatersArray[uVar32].gmID)), 0);
+                                } else {
+                                    uVar29 = this->floatersArray[uVar32].variation;
+                                    if ((uVar29 & 4) != 0) {
+                                        DAT_RenderedUnitOwner::instance = ~-(uint)((uVar29 & 0x10) != 0)
+                                            & DAT_GameSynchronyState::instance.currentPlayerSlotID;
+                                        DAT_CurrentlyRenderedSpriteID::instance = this->floatersArray[uVar32].gmID;
+                                        uVar29 = this->floatersArray[uVar32].variation;
+                                    }
+                                    if ((uVar29 & 0x20) != 0) {
+                                        iVar18 = this->floatersArray[uVar32].imageID;
+                                        GVar11 = (GmID)this->floatersArray[uVar32].gmID;
+                                        MACRO_CALL_MEMBER(
+                                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                                            DAT_TextureRenderCoreObject::ptr)((GmID)GVar11, iVar18,
+                                            this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                            (int)((this->floatersArray[uVar32].originY - iVar26)
+                                                + DAT_RenderMap_DrawSomeY::instance),
+                                            GVar11, ((int)uVar29 >> 0x10) + iVar18, 0);
+                                    } else {
+                                        if ((uVar29 & 0xffff0000) != 0) {
+                                            MACRO_CALL_MEMBER(
+                                                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                                DAT_TextureRenderCoreObject::ptr)(
+                                                (GmID)this->floatersArray[uVar32].gmID,
+                                                this->floatersArray[uVar32].imageID,
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((this->floatersArray[uVar32].originY - iVar26)
+                                                    + DAT_RenderMap_DrawSomeY::instance),
+                                                (int)(uVar29 >> 0x10));
+                                        } else {
+                                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                                DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
+                                                this->floatersArray[uVar32].imageID,
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((this->floatersArray[uVar32].originY - iVar26)
+                                                    + DAT_RenderMap_DrawSomeY::instance));
+                                        }
+                                    }
                                 }
                             }
                             uVar32 = this->floatersArray[uVar32].id;
