@@ -21,9 +21,9 @@ namespace Map {
         void BuildingsState::giveBackResourceForDestroyedBuilding(
             int buildingIDORIfNegResourceType, int playerID, int param_3)
         {
-            // Matching note: The original uses one more stack slot (this is spilled), computes all five
-            // shares into registers and shares the pitch and gold tail between the branches. Our compiler allocates
-            // the shares differently; duplicating the tail per branch was not tried.
+            // Matching note: The original keeps playerID out of a register for the tower branches' wood call and
+            // the iron share in ebx, so it does not merge their stone and iron calls with the building branch's;
+            // our allocation differs there and the tails cross-jump (22 fewer instructions).
             // param_3 is the percentage of the costs that is given back
             if (param_3 == 0) {
                 return;
@@ -120,21 +120,25 @@ namespace Map {
                         DAT_GameState::ptr)(playerID);
                 }
             } else {
-                int buildingType = this->buildings[buildingIDORIfNegResourceType].buildingType;
+                int const buildingType = this->buildings[buildingIDORIfNegResourceType].buildingType;
                 int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood * percentage / 100;
                 int stone
                     = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4 * percentage / 100;
                 int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8 * percentage / 100;
                 pitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc * percentage / 100;
                 gold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold * percentage / 100;
+                // The siege mode adjusts copies, which the original stores before testing the mode
+                int siegeStone = stone;
+                int siegeGold = gold;
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::resourceGainForKillingPitAndPitchDitch, this)(
-                        (BuildingType)this->buildings[buildingIDORIfNegResourceType].buildingType, &stone, &gold);
+                        (BuildingType)this->buildings[buildingIDORIfNegResourceType].buildingType, &siegeStone,
+                        &siegeGold);
                     DAT_GameState::instance.playerDataArray[playerID].startResources[OpenSHC::Game::Resources::RT_STONE]
-                        += stone;
+                        += siegeStone;
                     DAT_GameState::instance.playerDataArray[playerID].startResources[OpenSHC::Game::Resources::RT_GOLD]
-                        += gold;
+                        += siegeGold;
                     return;
                 }
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
