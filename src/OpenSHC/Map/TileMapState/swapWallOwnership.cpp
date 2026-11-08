@@ -10,53 +10,14 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9220
     void TileMapState::swapWallOwnership(int playerID, int otherPlayerID)
     {
-        for (int tileUnk = 0; tileUnk < MC_MAP_TILES_COUNT; tileUnk += 6) {
-            if ((this->LogicLayer[tileUnk + 0] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 0] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 0]
-                        = this->WallOwnerLayer[tileUnk + 0] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 0] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 0] = this->WallOwnerLayer[tileUnk + 0] & ~7 | (char)playerID - 1U;
-                }
-            }
-            if ((this->LogicLayer[tileUnk + 1] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 1] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 1]
-                        = this->WallOwnerLayer[tileUnk + 1] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 1] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 1] = this->WallOwnerLayer[tileUnk + 1] & ~7 | (char)playerID - 1U;
-                }
-            }
-            if ((this->LogicLayer[tileUnk + 2] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 2] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 2]
-                        = this->WallOwnerLayer[tileUnk + 2] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 2] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 2] = this->WallOwnerLayer[tileUnk + 2] & ~7 | (char)playerID - 1U;
-                }
-            }
-            if ((this->LogicLayer[tileUnk + 3] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 3] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 3]
-                        = this->WallOwnerLayer[tileUnk + 3] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 3] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 3] = this->WallOwnerLayer[tileUnk + 3] & ~7 | (char)playerID - 1U;
-                }
-            }
-            if ((this->LogicLayer[tileUnk + 4] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 4] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 4]
-                        = this->WallOwnerLayer[tileUnk + 4] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 4] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 4] = this->WallOwnerLayer[tileUnk + 4] & ~7 | (char)playerID - 1U;
-                }
-            }
-            if ((this->LogicLayer[tileUnk + 5] & L_WALL_OR_GATEHOUSE) != 0) {
-                if ((this->WallOwnerLayer[tileUnk + 5] & 7) + 1 == playerID) {
-                    this->WallOwnerLayer[tileUnk + 5]
-                        = this->WallOwnerLayer[tileUnk + 5] & ~7 | (char)otherPlayerID - 1U;
-                } else if ((this->WallOwnerLayer[tileUnk + 5] & 7) + 1 == otherPlayerID) {
-                    this->WallOwnerLayer[tileUnk + 5] = this->WallOwnerLayer[tileUnk + 5] & ~7 | (char)playerID - 1U;
+        // MSVC unrolls this loop six-fold, as in the original. The (char)playerID - 1U the decompiler
+        // shows makes the body look bigger to it, and it then unrolls five-fold instead.
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
+                if ((this->WallOwnerLayer[tile] & 7) + 1 == playerID) {
+                    this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (otherPlayerID - 1);
+                } else if ((this->WallOwnerLayer[tile] & 7) + 1 == otherPlayerID) {
+                    this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (playerID - 1);
                 }
             }
         }
