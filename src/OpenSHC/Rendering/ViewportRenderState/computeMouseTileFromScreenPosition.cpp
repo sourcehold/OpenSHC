@@ -79,7 +79,7 @@ namespace Rendering {
                 lookupIndex = lookupIndex + 401;
             }
 
-            int tile = this->screenPointToTileNumber[lookupIndex - 8];
+            int tile = this->screenPointToTileNumber[lookupIndex];
             if ((DAT_TileMapState::instance.LogicLayer[tile]
                     & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
                 != 0) {

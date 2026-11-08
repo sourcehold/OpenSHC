@@ -26,7 +26,7 @@ namespace Rendering {
         for (tileY = 0; tileY < 400; tileY++) {
             rowLength = (rowLength != 201) + 200;
             for (tileX = 0; tileX < rowLength; ++tileX) {
-                if (this->screenPointToTileNumber[screenPointIndex - 8] == tile) {
+                if (this->screenPointToTileNumber[screenPointIndex] == tile) {
                     found = true;
                     break;
                 }

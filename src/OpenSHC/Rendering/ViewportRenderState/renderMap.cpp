@@ -259,14 +259,13 @@ namespace Rendering {
             }
         }
         this->viewportState.tileCenterX = iVar23
-            + (this->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]
+            + (this->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex]
                 - this
                     ->translationMatrix[this->tileTranslationMatrix_YComponent[this
-                            ->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]]]
+                            ->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex]]]
                     .addXgetTile);
         this->viewportState.tileCenterY = iVar26
-            + this->tileTranslationMatrix_YComponent[this
-                    ->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]];
+            + this->tileTranslationMatrix_YComponent[this->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex]];
         DAT_TextureRenderCoreObject::instance.isZoom2 = this->viewportState.isZoomedOutUnk;
         if (this->viewportState.isZoomedOutUnk == 0) {
             layerTileIndex = DAT_WindowAndDirectDraw::instance.resolutionY + 24;
@@ -307,7 +306,7 @@ namespace Rendering {
         while (local_1c < iVar28
             && (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderUnits, this)(),
                 local_1c < viewportWidth
-                    || ((DAT_TileMapState::instance.LogicLayer[this->screenPointToTileNumber[_zoomOffset + iVar2]]
+                    || ((DAT_TileMapState::instance.LogicLayer[this->screenPointToTileNumber[_zoomOffset + iVar2 + 8]]
                             & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
                         == 0))) {
             _vpWidthPlus1 = _viewportHeight + 1;
@@ -318,7 +317,7 @@ namespace Rendering {
                 _vpWidthPlus1 = _viewportHeight;
             }
             for (; iVar31 < _vpWidthPlus1; iVar31 = iVar31 + 1) {
-                layerTileIndex = this->screenPointToTileNumber[iVar31 + iVar2 - 8];
+                layerTileIndex = this->screenPointToTileNumber[iVar31 + iVar2];
                 DAT_00ed3148::instance = DAT_TileMapState::instance.LogicLayer[layerTileIndex];
                 if ((DAT_00ed3148::instance & 0x30) == 0) {
                     /*
@@ -2257,7 +2256,7 @@ namespace Rendering {
                 DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated;
             }
             for (; iVar31 < layerTileIndex; iVar31 = iVar31 + 1) {
-                _yOffset_01 = this->screenPointToTileNumber[iVar31 + iVar2 - 8];
+                _yOffset_01 = this->screenPointToTileNumber[iVar31 + iVar2];
                 DAT_00ed3148::instance = DAT_TileMapState::instance.LogicLayer[_yOffset_01];
                 if ((DAT_00ed3148::instance & 0x30) == 0) {
                     if ((iVar31 < 2) || (bVar13 = 1, layerTileIndex - 2 <= iVar31)) {
@@ -2549,7 +2548,7 @@ namespace Rendering {
                 DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated;
             }
             if ((_flatView == 0) && (local_48 = _zoomOffset, _zoomOffset < _vpWidthPlus1_1)) {
-                local_20 = this->screenPointToTileNumber + _zoomOffset + iVar2 - 8;
+                local_20 = this->screenPointToTileNumber + _zoomOffset + iVar2;
                 do {
                     iVar31 = *local_20;
                     DAT_GmImageAddressToBeRendered::instance = (uint)DAT_TileMapState::instance.AlphaGFXLayer[iVar31];

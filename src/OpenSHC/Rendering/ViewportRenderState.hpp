@@ -36,24 +36,13 @@ namespace Rendering {
         undefined4 DAT_MapEditorDisplayLayer; // 0x000000BC length: 4
         uchar DAT_BinaryTileMap400x400[160000]; // 0x000000C0 length: 160000
         short tileTranslationMatrix_YComponent[80400]; // 0x000271C0 length: 160800
-        int field_0x4e5e0; // 0x0004E5E0 length: 4
-        undefined4 field_0x4e5e4; // 0x0004E5E4 length: 4
-        undefined4 field_0x4e5e8; // 0x0004E5E8 length: 4
-        undefined4 field_0x4e5ec; // 0x0004E5EC length: 4
-        undefined4 field_0x4e5f0; // 0x0004E5F0 length: 4
-        undefined4 field_0x4e5f4; // 0x0004E5F4 length: 4
-        undefined4 field_0x4e5f8; // 0x0004E5F8 length: 4
-        undefined4 field_0x4e5fc; // 0x0004E5FC length: 4
-        int screenPointToTileNumber[321602]; // 0x0004E600 length: 1286408
+        int screenPointToTileNumber[321610]; // 0x0004E5E0 length: 1286440
         undefined1 padding_0x188708[8]; // 0x00188708 length: 8
         int DAT_TileTranslationMatrix_X_offset_min_24; // 0x00188710 length: 4
         int field_0x188714; // 0x00188714 length: 4
         int field_0x188718; // 0x00188718 length: 4
         int DAT_TileTranslationMatrix_X_offset_min_12; // 0x0018871C length: 4
-        TranslationMatrixTriplet translationMatrix[400]; // 0x00188720 length: 4800
-        undefined4 translationResult1; // 0x001899E0 length: 4
-        undefined4 translationTracker1; // 0x001899E4 length: 4
-        undefined4 translationResult2; // 0x001899E8 length: 4
+        TranslationMatrixTriplet translationMatrix[401]; // 0x00188720 length: 4812
         Floater floatersArray[250]; // 0x001899EC length: 7000
         int availableFloaterIndex; // 0x0018B544 length: 4
         int landscapeAnimationRandomTileArray[45]; // 0x0018B548 length: 180

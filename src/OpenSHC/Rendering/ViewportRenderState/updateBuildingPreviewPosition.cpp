@@ -170,7 +170,7 @@ namespace Rendering {
             lookupIndex = lookupIndex + 401;
         }
 
-        this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex - 8];
+        this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex];
         this->viewportState.field_0x14 = DAT_TileMapState::instance.EntityLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
@@ -261,7 +261,7 @@ namespace Rendering {
                 probeIndex = probeIndex + 401;
             }
 
-            int probeTile = this->screenPointToTileNumber[probeIndex - 8];
+            int probeTile = this->screenPointToTileNumber[probeIndex];
             if ((DAT_TileMapState::instance.LogicLayer[probeTile]
                     & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
                 != 0) {
