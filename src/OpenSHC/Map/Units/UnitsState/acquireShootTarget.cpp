@@ -32,7 +32,6 @@ namespace Map {
         BOOLEnum UnitsState::acquireShootTarget(int unitID)
 
         {
-            int _xDifferenceToTarget;
             int _entityType;
             int _unitPlayerID = (int)this->units[unitID].owner;
             int _microXUnit = (int)this->units[unitID].microXPosition;
@@ -95,85 +94,79 @@ namespace Map {
                    fetch the targetedUnitID
                  */
 
-                int _mannedEngineTargetID = this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef;
-                int _0x04_targetUnitID = (int)_mannedEngineTargetID;
-                if (this->units[_0x04_targetUnitID].uid
+                int const _targetID = this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef;
+                if (this->units[_targetID].uid
                         == this->units[unitID]
                             .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
-                    && this->units[_0x04_targetUnitID].dying == 0
-                    && this->units[_0x04_targetUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
-                    BOOLEnum _targetIsAliveCitizen
-                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::checkIfCitizenUnitIsAliveBasedOnState,
-                            DAT_UnitsState::ptr)(_0x04_targetUnitID);
-                    if (_targetIsAliveCitizen == FALSE
-                        && this->units[_0x04_targetUnitID].state.generic
-                            != (OpenSHC::Map::Units::States::US_STONE_DEATH_03
-                                | OpenSHC::Map::Units::States::US_IDLEUnk)
-                        && DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
-                            != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID]) {
-                        int _0x04_yDifference
-                            = ((int)_microYUnit / 8) - ((int)this->units[_0x04_targetUnitID].microYPosition / 8);
-                        _xDifferenceToTarget
-                            = ((int)_microXUnit / 8) - ((int)this->units[_0x04_targetUnitID].microXPosition / 8);
-                        if (_xDifferenceToTarget * _xDifferenceToTarget + _0x04_yDifference * _0x04_yDifference
-                            <= _rangeSquared) {
-                            int _shootDistanceScore
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
-                                    DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                                    (int)(this->units[_0x04_targetUnitID].microXPosition),
-                                    (int)(this->units[_0x04_targetUnitID].microYPosition),
-                                    (int)(DAT_UnitsState::instance.units[_0x04_targetUnitID].buildingHeight + 0x1a
-                                        + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
-                            if (_shootDistanceScore <= 0
-                                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_MANGONEL
-                                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
-                                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
-                                    return FALSE;
-                                }
-                                this->units[unitID].shootTargetedUnit = -2;
-                                this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
-                                this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
-                                this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
-                                return TRUE;
-                            }
-                            this->units[unitID].shootTargetedUnit = _mannedEngineTargetID;
-                            this->units[unitID].targetUID = this->units[_0x04_targetUnitID].uid;
-                            this->units[unitID].distanceToEnemyUnitLadders = (short)_shootDistanceScore;
-                            this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
-                            this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
-                            this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
-                            if (100 < _shootDistanceScore) {
-                                this->units[unitID].jugglerCount = 0;
-                                this->units[_0x04_targetUnitID].field_0x39a = 1;
-                                return TRUE;
-                            }
-                            int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
-                                + (int)DAT_UnitsState::instance.units[_0x04_targetUnitID].buildingHeight;
-                            _unitPlayerID = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
-                                + (int)this->units[unitID].terrainOrClimbHeight;
-                            if (_targetTotalHeight + 0x46 < _unitPlayerID) {
-                                this->units[unitID].jugglerCount = 1;
-                                this->units[_0x04_targetUnitID].field_0x39a = 1;
-                                return TRUE;
-                            }
-                            this->units[unitID].jugglerCount = (_targetTotalHeight + -0x46 <= _unitPlayerID) - 1;
-                            this->units[_0x04_targetUnitID].field_0x39a = 1;
-                            return TRUE;
-                        }
-                        if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner]
+                    && this->units[_targetID].dying == 0
+                    && this->units[_targetID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
+                    && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::checkIfCitizenUnitIsAliveBasedOnState,
+                           DAT_UnitsState::ptr)(_targetID)
+                        == FALSE
+                    && DAT_UnitsState::instance.units[_targetID].state.generic != (UnitState)0x75
+                    && DAT_GameState::instance.mapAndTime.playerTeams[this->units[_targetID].owner]
+                        != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID]) {
+                    int const _yDifference = _microYUnit / 8 - this->units[_targetID].microYPosition / 8;
+                    int const _xDifference = _microXUnit / 8 - this->units[_targetID].microXPosition / 8;
+                    if (_xDifference * _xDifference + _yDifference * _yDifference > _rangeSquared) {
+                        if (DAT_GameSynchronyState::instance
+                                .currentPlayerFullIDArray[DAT_UnitsState::instance.units[unitID].owner]
                             != -1) {
                             return FALSE;
                         }
+                    } else {
+                        int const _shootDistanceScore = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated, DAT_EntityState::ptr)(
+                            _microXUnit, _microYUnit, _unitTotalHeight + 0x1e, this->units[_targetID].microXPosition,
+                            this->units[_targetID].microYPosition,
+                            this->units[_targetID].buildingHeight + this->units[_targetID].terrainOrClimbHeight + 0x1a);
+                        if (_shootDistanceScore > 0
+                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_S_MANGONEL
+                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_S_BALLISTA) {
+                            this->units[unitID].shootTargetedUnit = _targetID;
+                            this->units[unitID].targetUID = this->units[_targetID].uid;
+                            this->units[unitID].distanceToEnemyUnitLadders = _shootDistanceScore;
+                            this->units[unitID].shootTargetMicroX = this->units[_targetID].microXPosition;
+                            this->units[unitID].shootTargetMicroY = this->units[_targetID].microYPosition;
+                            this->units[unitID].shootTargetZ = this->units[_targetID].terrainOrClimbHeight;
+                            if (_shootDistanceScore > 100) {
+                                this->units[unitID].jugglerCount = 0;
+                                this->units[_targetID].field_0x39a = 1;
+                                return TRUE;
+                            }
+                            int const _targetTotalHeight
+                                = this->units[_targetID].terrainOrClimbHeight + this->units[_targetID].buildingHeight;
+                            int const _shooterTotalHeight
+                                = this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight;
+                            if (_shooterTotalHeight > _targetTotalHeight + 0x46) {
+                                this->units[unitID].jugglerCount = 1;
+                                this->units[_targetID].field_0x39a = 1;
+                                return TRUE;
+                            }
+                            /* -1 when shooting up at the target, 0 when level with it */
+                            this->units[unitID].jugglerCount = (_shooterTotalHeight >= _targetTotalHeight - 0x46) - 1;
+                            this->units[_targetID].field_0x39a = 1;
+                            return TRUE;
+                        }
+                        if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
+                            return FALSE;
+                        }
+                        /* no clear shot: aim at where the target stands */
+                        this->units[unitID].shootTargetedUnit = -2;
+                        this->units[unitID].shootTargetMicroX = this->units[_targetID].microXPosition;
+                        this->units[unitID].shootTargetMicroY = this->units[_targetID].microYPosition;
+                        this->units[unitID].shootTargetZ = this->units[_targetID].terrainOrClimbHeight;
+                        return TRUE;
                     }
                 }
-                int _savedDestinationX = DAT_UnitsState::instance.units[unitID]._someX_2;
+                int const _savedDestinationX = this->units[unitID]._someX_2;
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                 if (_savedDestinationX != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
-                        unitID, (uint)(_savedDestinationX), (uint)((int)this->units[unitID]._someY_2), 0);
-                    DAT_UnitsState::instance.units[unitID]._someX_2 = 0;
+                        unitID, _savedDestinationX, this->units[unitID]._someY_2, 0);
+                    this->units[unitID]._someX_2 = 0;
                     this->units[unitID]._someY_2 = 0;
                     this->units[unitID].moveDelay = 0;
                     this->units[unitID].targetedBuildingTile = 0;
@@ -247,70 +240,91 @@ namespace Map {
                     for (int _enemyIndex = 0;
                         _enemyIndex < DAT_GameState::instance.playerDataArray[_unitPlayerID].enemies;
                         _enemyIndex = _enemyIndex + 1) {
-                        int _enemy = DAT_GameState::instance.playerDataArray[_unitPlayerID].enemyIDArray[_enemyIndex];
-                        if ((this->units[_enemy].dying != 0)
-                            || (this->units[_enemy].uid
-                                != DAT_GameState::instance.mapAndTime
-                                    .playerEnemenyUnitUIDShortList[_unitPlayerID][_enemyIndex]))
+                        int const _enemy
+                            = DAT_GameState::instance.playerDataArray[_unitPlayerID].enemyIDArray[_enemyIndex];
+                        if (this->units[_enemy].dying != 0) {
                             continue;
+                        }
+                        if (this->units[_enemy].uid
+                            != DAT_GameState::instance.mapAndTime
+                                .playerEnemenyUnitUIDShortList[_unitPlayerID][_enemyIndex]) {
+                            continue;
+                        }
                         switch (this->units[_enemy].unitType) {
                         case OpenSHC::Map::Units::UT_ANTELOPESHDEER:
-                            if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_HUNTER)
+                            /* only hunters shoot deer */
+                            if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_HUNTER) {
                                 continue;
+                            }
                             break;
-                        case OpenSHC::Map::Units::UT_LIONSHWOLF: {
-                            int _enemyTribeID = this->units[_enemy].tribeID;
-                            if (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool02 != 0
-                                || (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool01 == 0
-                                    && ((this->units[_enemy].state.generic != 0xcf
-                                        || (this->units[this->units[_enemy]
-                                                            .targetedUnitID__OR__engineerMannedSiegeEngineRef]
-                                                .isStalked
-                                            != 0)))))
+                        case OpenSHC::Map::Units::UT_RABBIT: {
+                            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
                                 continue;
+                            }
+                            int const _tribeID = this->units[unitID].tribeID;
+                            if (_tribeID <= 0) {
+                                continue;
+                            }
+                            if (DAT_TribesState::instance.tribes[_tribeID].containsRabbit == 0) {
+                                continue;
+                            }
                             break;
                         }
-                        case OpenSHC::Map::Units::UT_RABBIT:
-                            _xDifferenceToTarget = (int)this->units[unitID].tribeID;
-                            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER
-                                || _xDifferenceToTarget <= 0
-                                || DAT_TribesState::instance.tribes[_xDifferenceToTarget].containsRabbit == 0)
+                        case OpenSHC::Map::Units::UT_LIONSHWOLF: {
+                            int const _enemyTribeID = this->units[_enemy].tribeID;
+                            if (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool02 != 0) {
                                 continue;
+                            }
+                            if (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool01 == 0) {
+                                if (this->units[_enemy].state.generic != 0xcf) {
+                                    continue;
+                                }
+                                if (this->units[this->units[_enemy].targetedUnitID__OR__engineerMannedSiegeEngineRef]
+                                        .isStalked
+                                    != 0) {
+                                    continue;
+                                }
+                            }
                             break;
+                        }
                         case OpenSHC::Map::Units::UT_CAGEDOG:
                             if (DAT_GameState::instance.mapAndTime.playerTeams[this->units[_enemy].displayColorPlayerID]
-                                == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID].owner])
+                                == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID].owner]) {
                                 continue;
+                            }
                             break;
                         case OpenSHC::Map::Units::UT_A_ASSASSIN:
-                            if (160 < DAT_UnitsState::instance.units[_enemy].assassinsMicroDistanceToEnemyUnk)
+                            if (DAT_UnitsState::instance.units[_enemy].assassinsMicroDistanceToEnemyUnk > 160) {
                                 continue;
+                            }
+                            break;
                         }
-                        _xDifferenceToTarget = (int)this->units[_enemy].microYPosition;
-                        int _enemyMicroX = (int)this->units[_enemy].microXPosition;
-                        int _yDifferenceToTarget = ((int)_microYUnit / 8) - ((int)_xDifferenceToTarget / 8);
-                        _xDifferenceToTarget = (_microXUnit / 8) - (_enemyMicroX / 8);
-                        if (_rangeSquared
-                            < _xDifferenceToTarget * _xDifferenceToTarget + _yDifferenceToTarget * _yDifferenceToTarget)
+                        int const _yTileDifference = _microYUnit / 8 - this->units[_enemy].microYPosition / 8;
+                        int const _xTileDifference = _microXUnit / 8 - this->units[_enemy].microXPosition / 8;
+                        if (_xTileDifference * _xTileDifference + _yTileDifference * _yTileDifference > _rangeSquared) {
                             continue;
-                        _xDifferenceToTarget = (int)this->units[_enemy].microXPosition;
-                        if (_xDifferenceToTarget < _microXUnit) {
-                            _xDifferenceToTarget = _microXUnit - _xDifferenceToTarget;
+                        }
+                        int const _enemyMicroX = this->units[_enemy].microXPosition;
+                        int _score;
+                        if (_microXUnit > _enemyMicroX) {
+                            _score = _microXUnit - _enemyMicroX;
                         } else {
-                            _xDifferenceToTarget = _xDifferenceToTarget - _microXUnit;
+                            _score = _enemyMicroX - _microXUnit;
                         }
-                        int _enemyMicroY = (int)this->units[_enemy].microYPosition;
-                        if (_enemyMicroY < _microYUnit) {
-                            _yDifferenceToTarget = _microYUnit - _enemyMicroY;
+                        int const _enemyMicroY = this->units[_enemy].microYPosition;
+                        int _yDistance;
+                        if (_microYUnit > _enemyMicroY) {
+                            _yDistance = _microYUnit - _enemyMicroY;
                         } else {
-                            _yDifferenceToTarget = _enemyMicroY - _microYUnit;
+                            _yDistance = _enemyMicroY - _microYUnit;
                         }
-                        if (_xDifferenceToTarget < _yDifferenceToTarget) {
-                            _xDifferenceToTarget = _yDifferenceToTarget;
+                        if (_score < _yDistance) {
+                            _score = _yDistance;
                         }
-                        _xDifferenceToTarget = _xDifferenceToTarget + this->units[_enemy].field_0x3dc * 0x32;
-                        bool _scoreNeedsValidityCheck;
+                        /* targets that others already aim at score worse */
+                        _score = _score + this->units[_enemy].field_0x3dc * 0x32;
                         if (_entityType == 4) {
+                            /* mangonels prefer siege engines, other targets only for a human player */
                             switch (this->units[_enemy].unitType) {
                             case OpenSHC::Map::Units::UT_E_ENGINEER:
                             case OpenSHC::Map::Units::UT_S_CATAPULT:
@@ -324,34 +338,20 @@ namespace Map {
                                 break;
                             default:
                                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner]
-                                    != -1)
+                                    != -1) {
                                     continue;
-                                if (this->units[_enemy].isSelectable_OR_matchTime == 0) {
-                                    _xDifferenceToTarget = (_xDifferenceToTarget * 5 + 0x32) * 2;
+                                }
+                                if (this->units[_enemy].isSelectable_OR_matchTime != 0) {
+                                    _score = _score * 3 + 100;
                                 } else {
-                                    _xDifferenceToTarget = _xDifferenceToTarget * 3 + 100;
+                                    _score = (_score * 5 + 0x32) * 2;
                                 }
                             }
-                            _scoreNeedsValidityCheck = true;
+                            if (_score == -1) {
+                                continue;
+                            }
                         } else if (_entityType == 0x14) {
                             switch (this->units[_enemy].unitType) {
-                            case OpenSHC::Map::Units::UT_E_ARCHER:
-                            case OpenSHC::Map::Units::UT_E_XBOW:
-                            case OpenSHC::Map::Units::UT_E_SPEAR:
-                            case OpenSHC::Map::Units::UT_E_MACE:
-                            case OpenSHC::Map::Units::UT_E_LADDER:
-                            case OpenSHC::Map::Units::UT_A_ARCHER:
-                            case OpenSHC::Map::Units::UT_A_SLAVE:
-                            case OpenSHC::Map::Units::UT_A_SLINGER:
-                            case OpenSHC::Map::Units::UT_A_ASSASSIN:
-                            case OpenSHC::Map::Units::UT_A_HARCHER:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 5 + 200;
-                                break;
-                            case OpenSHC::Map::Units::UT_E_PIKE:
-                            case OpenSHC::Map::Units::UT_E_SWORD:
-                            case OpenSHC::Map::Units::UT_E_KNIGHT:
-                            case OpenSHC::Map::Units::UT_A_SWORDSMAN:
-                                break;
                             case OpenSHC::Map::Units::UT_E_ENGINEER:
                             case OpenSHC::Map::Units::UT_S_CATAPULT:
                             case OpenSHC::Map::Units::UT_S_TREBUCHET:
@@ -363,57 +363,8 @@ namespace Map {
                             case OpenSHC::Map::Units::UT_S_BALLISTA:
                             case OpenSHC::Map::Units::UT_A_FIRETHROWER:
                             case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 2 + 100;
+                                _score = _score * 2 + 100;
                                 break;
-                            default:
-                                _xDifferenceToTarget = (_xDifferenceToTarget * 5 + 200) * 2;
-                            }
-                            _scoreNeedsValidityCheck = false;
-                        } else if (_entityType != 0x25) {
-                            if ((this->units[_enemy].field_0x3ff != 0)
-                                && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[_enemy].owner]
-                                    == -1)) {
-                                _xDifferenceToTarget = _xDifferenceToTarget / 3;
-                            }
-                            switch (this->units[_enemy].unitType) {
-                            case OpenSHC::Map::Units::UT_E_ARCHER:
-                            case OpenSHC::Map::Units::UT_E_XBOW:
-                            case OpenSHC::Map::Units::UT_A_ARCHER:
-                            case OpenSHC::Map::Units::UT_A_HARCHER:
-                                _xDifferenceToTarget = _xDifferenceToTarget + 0x4b;
-                                break;
-                            case OpenSHC::Map::Units::UT_E_SPEAR:
-                            case OpenSHC::Map::Units::UT_E_PIKE:
-                            case OpenSHC::Map::Units::UT_E_MACE:
-                            case OpenSHC::Map::Units::UT_E_SWORD:
-                            case OpenSHC::Map::Units::UT_E_KNIGHT:
-                            case OpenSHC::Map::Units::UT_A_SLAVE:
-                            case OpenSHC::Map::Units::UT_A_SLINGER:
-                            case OpenSHC::Map::Units::UT_A_ASSASSIN:
-                            case OpenSHC::Map::Units::UT_A_SWORDSMAN:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 5 + 200;
-                                break;
-                            case OpenSHC::Map::Units::UT_E_LADDER:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 7 + 300;
-                                break;
-                            case OpenSHC::Map::Units::UT_E_ENGINEER:
-                            case OpenSHC::Map::Units::UT_S_CATAPULT:
-                            case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                            case OpenSHC::Map::Units::UT_LORD:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 2 + 100;
-                                break;
-                            default:
-                                _xDifferenceToTarget = (_xDifferenceToTarget * 5 + 200) * 2;
-                                break;
-                            case OpenSHC::Map::Units::UT_S_MANGONEL:
-                            case OpenSHC::Map::Units::UT_S_BALLISTA:
-                            case OpenSHC::Map::Units::UT_A_FIRETHROWER:
-                            case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                break;
-                            }
-                            _scoreNeedsValidityCheck = false;
-                        } else {
-                            switch (this->units[_enemy].unitType) {
                             case OpenSHC::Map::Units::UT_E_ARCHER:
                             case OpenSHC::Map::Units::UT_E_XBOW:
                             case OpenSHC::Map::Units::UT_E_SPEAR:
@@ -424,13 +375,18 @@ namespace Map {
                             case OpenSHC::Map::Units::UT_A_SLINGER:
                             case OpenSHC::Map::Units::UT_A_ASSASSIN:
                             case OpenSHC::Map::Units::UT_A_HARCHER:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 5 + 200;
+                                _score = _score * 5 + 200;
                                 break;
                             case OpenSHC::Map::Units::UT_E_PIKE:
                             case OpenSHC::Map::Units::UT_E_SWORD:
                             case OpenSHC::Map::Units::UT_E_KNIGHT:
                             case OpenSHC::Map::Units::UT_A_SWORDSMAN:
                                 break;
+                            default:
+                                _score = (_score * 5 + 200) * 2;
+                            }
+                        } else if (_entityType == 0x25) {
+                            switch (this->units[_enemy].unitType) {
                             case OpenSHC::Map::Units::UT_E_ENGINEER:
                             case OpenSHC::Map::Units::UT_S_CATAPULT:
                             case OpenSHC::Map::Units::UT_S_TREBUCHET:
@@ -441,37 +397,97 @@ namespace Map {
                             case OpenSHC::Map::Units::UT_S_BALLISTA:
                             case OpenSHC::Map::Units::UT_A_FIRETHROWER:
                             case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                _xDifferenceToTarget = _xDifferenceToTarget * 2 + 100;
+                                _score = _score * 2 + 100;
+                                break;
+                            case OpenSHC::Map::Units::UT_LORD:
+                                /* a human player's fire ballista leaves the lord alone */
+                                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_unitPlayerID] == -1) {
+                                    continue;
+                                }
+                                _score = _score * 5 + 200;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_ARCHER:
+                            case OpenSHC::Map::Units::UT_E_XBOW:
+                            case OpenSHC::Map::Units::UT_E_SPEAR:
+                            case OpenSHC::Map::Units::UT_E_MACE:
+                            case OpenSHC::Map::Units::UT_E_LADDER:
+                            case OpenSHC::Map::Units::UT_A_ARCHER:
+                            case OpenSHC::Map::Units::UT_A_SLAVE:
+                            case OpenSHC::Map::Units::UT_A_SLINGER:
+                            case OpenSHC::Map::Units::UT_A_ASSASSIN:
+                            case OpenSHC::Map::Units::UT_A_HARCHER:
+                                _score = _score * 5 + 200;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_PIKE:
+                            case OpenSHC::Map::Units::UT_E_SWORD:
+                            case OpenSHC::Map::Units::UT_E_KNIGHT:
+                            case OpenSHC::Map::Units::UT_A_SWORDSMAN:
                                 break;
                             default:
                                 continue;
+                            }
+                            if (_score == -1) {
+                                continue;
+                            }
+                        } else {
+                            if (this->units[_enemy].field_0x3ff != 0
+                                && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[_enemy].owner]
+                                    == -1) {
+                                _score = _score / 3;
+                            }
+                            switch (this->units[_enemy].unitType) {
+                            case OpenSHC::Map::Units::UT_E_ENGINEER:
+                            case OpenSHC::Map::Units::UT_S_CATAPULT:
+                            case OpenSHC::Map::Units::UT_S_TREBUCHET:
                             case OpenSHC::Map::Units::UT_LORD:
-                                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_unitPlayerID] != -1)
-                                    _xDifferenceToTarget = _xDifferenceToTarget * 5 + 200;
+                                _score = _score * 2 + 100;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_ARCHER:
+                            case OpenSHC::Map::Units::UT_E_XBOW:
+                            case OpenSHC::Map::Units::UT_A_ARCHER:
+                            case OpenSHC::Map::Units::UT_A_HARCHER:
+                                _score = _score + 0x4b;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_SPEAR:
+                            case OpenSHC::Map::Units::UT_E_PIKE:
+                            case OpenSHC::Map::Units::UT_E_MACE:
+                            case OpenSHC::Map::Units::UT_E_SWORD:
+                            case OpenSHC::Map::Units::UT_E_KNIGHT:
+                            case OpenSHC::Map::Units::UT_A_SLAVE:
+                            case OpenSHC::Map::Units::UT_A_SLINGER:
+                            case OpenSHC::Map::Units::UT_A_ASSASSIN:
+                            case OpenSHC::Map::Units::UT_A_SWORDSMAN:
+                                _score = _score * 5 + 200;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_LADDER:
+                                _score = _score * 7 + 300;
+                                break;
+                            case OpenSHC::Map::Units::UT_S_MANGONEL:
+                            case OpenSHC::Map::Units::UT_S_BALLISTA:
+                            case OpenSHC::Map::Units::UT_A_FIRETHROWER:
+                            case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                                break;
+                            default:
+                                _score = (_score * 5 + 200) * 2;
                                 break;
                             }
-                            _scoreNeedsValidityCheck = true;
                         }
-                        if (!_scoreNeedsValidityCheck || _xDifferenceToTarget != -1) {
-                            if (_xDifferenceToTarget < _bestScore || _xDifferenceToTarget < _bestUntargetedScore) {
-                                int _shotFlightDistance
-                                    = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
-                                        DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                                        (int)(this->units[_enemy].microXPosition), _enemyMicroY,
-                                        (int)(DAT_UnitsState::instance.units[_enemy].buildingHeight + 0x1a
-                                            + this->units[_enemy].terrainOrClimbHeight));
-                                if (_shotFlightDistance > 0) {
-                                    if (_xDifferenceToTarget < _bestScore) {
-                                        _bestScore = _xDifferenceToTarget;
-                                        _shotDistance = _shotFlightDistance;
-                                        _validTargetID = _enemy;
-                                    }
-                                    if (this->units[_enemy].field_0x39a == 0
-                                        && _xDifferenceToTarget < _bestUntargetedScore) {
-                                        _bestUntargetedScore = _xDifferenceToTarget;
-                                        _untargetedShotDistance = _shotFlightDistance;
-                                        _untargetedTargetID = _enemy;
-                                    }
+                        if (_score < _bestScore || _score < _bestUntargetedScore) {
+                            int const _shotFlightDistance = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated, DAT_EntityState::ptr)(
+                                _microXUnit, _microYUnit, _unitTotalHeight + 0x1e, this->units[_enemy].microXPosition,
+                                _enemyMicroY,
+                                this->units[_enemy].terrainOrClimbHeight + this->units[_enemy].buildingHeight + 0x1a);
+                            if (_shotFlightDistance > 0) {
+                                if (_score < _bestScore) {
+                                    _bestScore = _score;
+                                    _shotDistance = _shotFlightDistance;
+                                    _validTargetID = _enemy;
+                                }
+                                if (this->units[_enemy].field_0x39a == 0 && _score < _bestUntargetedScore) {
+                                    _bestUntargetedScore = _score;
+                                    _untargetedShotDistance = _shotFlightDistance;
+                                    _untargetedTargetID = _enemy;
                                 }
                             }
                         }
@@ -479,7 +495,7 @@ namespace Map {
                     if (_validTargetID == 0) {
                         return FALSE;
                     }
-                    if ((_untargetedTargetID != 0) && (_bestUntargetedScore < (_bestScore * 3) / 2)) {
+                    if (_untargetedTargetID != 0 && _bestUntargetedScore < (_bestScore * 3) / 2) {
                         _validTargetID = _untargetedTargetID;
                         _shotDistance = _untargetedShotDistance;
                     }
@@ -490,36 +506,36 @@ namespace Map {
                         this->units[unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
                         return TRUE;
                     }
-                    short _chosenTargetID = (short)_validTargetID;
-                    if ((_entityType == 0x25) || (_entityType == 0x14)) {
-                        this->units[unitID].shootTargetedUnit = _chosenTargetID;
+                    if (_entityType == 0x25 || _entityType == 0x14) {
+                        this->units[unitID].shootTargetedUnit = _validTargetID;
                         this->units[unitID].targetUID = this->units[_validTargetID].uid;
-                        this->units[unitID].distanceToEnemyUnitLadders = (short)_shotDistance;
+                        this->units[unitID].distanceToEnemyUnitLadders = _shotDistance;
                         this->units[unitID].shootTargetMicroX = this->units[_validTargetID].microXPosition;
                         this->units[unitID].shootTargetMicroY = this->units[_validTargetID].microYPosition;
                         this->units[unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
                         return TRUE;
                     }
                     this->units[_validTargetID].field_0x3dc = this->units[_validTargetID].field_0x3dc + 1;
-                    this->units[unitID].shootTargetedUnit = _chosenTargetID;
-                    this->units[unitID].field_0x3de = _chosenTargetID;
+                    this->units[unitID].shootTargetedUnit = _validTargetID;
+                    this->units[unitID].field_0x3de = _validTargetID;
                     this->units[unitID].targetUID = this->units[_validTargetID].uid;
-                    this->units[unitID].distanceToEnemyUnitLadders = (short)_shotDistance;
-                    if (100 < _shotDistance) {
+                    this->units[unitID].distanceToEnemyUnitLadders = _shotDistance;
+                    if (_shotDistance > 100) {
                         this->units[unitID].jugglerCount = 0;
                         this->units[_validTargetID].field_0x39a = 1;
                         return TRUE;
                     }
-                    _unitPlayerID = (int)this->units[_validTargetID].terrainOrClimbHeight
-                        + (int)DAT_UnitsState::instance.units[_validTargetID].buildingHeight;
-                    _microXUnit = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
-                        + (int)this->units[unitID].terrainOrClimbHeight;
-                    if (_unitPlayerID + 0x46 < _microXUnit) {
+                    int const _targetTotalHeight
+                        = this->units[_validTargetID].terrainOrClimbHeight + this->units[_validTargetID].buildingHeight;
+                    int const _shooterTotalHeight
+                        = this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight;
+                    if (_shooterTotalHeight > _targetTotalHeight + 0x46) {
                         this->units[unitID].jugglerCount = 1;
                         this->units[_validTargetID].field_0x39a = 1;
                         return TRUE;
                     }
-                    this->units[unitID].jugglerCount = (_unitPlayerID + -0x46 <= _microXUnit) - 1;
+                    /* -1 when shooting up at the target, 0 when level with it */
+                    this->units[unitID].jugglerCount = (_shooterTotalHeight >= _targetTotalHeight - 0x46) - 1;
                     this->units[_validTargetID].field_0x39a = 1;
                     return TRUE;
                 }
