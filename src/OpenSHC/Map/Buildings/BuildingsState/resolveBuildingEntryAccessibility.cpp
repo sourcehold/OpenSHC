@@ -15,30 +15,24 @@ namespace Map {
         int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise
-            // Matching note: the original computes the building pointer before the (x, y) lookup and loads the
-            // call arguments in a different register order; declaring buildingHeight first comes closest. Under /GL
-            // only the order of the two lookups moves the schedule (operand order, locals for the building x/y, a
-            // Building& and type changes do not); a short fromArea fixes the register rotation after the call but
-            // adds two movsx, and an owner local fixes it but swaps ebx/edi.
             if (buildingID <= 0) {
                 return 0;
             }
-
-            int buildingHeight
-                = DAT_TileMapState::instance.HeightLayer[DAT_ViewportRenderState::instance
-                                                             .translationMatrix[(short)this->buildings[buildingID].y]
-                                                             .addXgetTile
-                    + (short)this->buildings[buildingID].x];
-            int fromArea
+            Building& b = this->buildings[buildingID];
+            int const playerID = b.owner;
+            int const fromArea
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
+            int const buildingHeight
+                = DAT_TileMapState::instance
+                      .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[(short)b.y].addXgetTile
+                          + (short)b.x];
             int blocked = 0;
-            if (this->buildings[buildingID].buildingEntryX == 0 && this->buildings[buildingID].buildingEntryY == 0) {
+            if (b.buildingEntryX == 0 && b.buildingEntryY == 0) {
                 blocked = 1;
             } else {
-                int entryTile = this->buildings[buildingID].buildingEntryX
-                    + DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].buildingEntryY]
-                          .addXgetTile;
+                int const entryTile = b.buildingEntryX
+                    + DAT_ViewportRenderState::instance.translationMatrix[b.buildingEntryY].addXgetTile;
                 int entryHeight = DAT_TileMapState::instance.HeightLayer[entryTile];
                 if (DAT_TileMapState::instance.BuildingLayer[entryTile] != 0) {
                     entryHeight += MACRO_CALL_MEMBER(
@@ -57,8 +51,8 @@ namespace Map {
                 if (fromArea != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile] != fromArea
                     && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                              calculateCanPlayerUnitsNavigateToAreaFromArea,
-                           DAT_PathFindingState::ptr)(this->buildings[buildingID].owner, fromArea,
-                           (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile], 0)
+                           DAT_PathFindingState::ptr)(
+                           playerID, fromArea, (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile], 0)
                         == 0) {
                     blocked = 1;
                 }
