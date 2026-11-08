@@ -611,7 +611,36 @@ namespace Rendering {
                             DAT_RenderMap_RowsLeft::instance = 0;
                             DAT_00ed3154::instance = 0;
                             if (local_54 == 0 || (DAT_00ed3148::instance & 0x40000000) != 0) {
-                                if ((DAT_00ed3148::instance & 0x100) == 0) {
+                                if ((DAT_00ed3148::instance & 0x100) != 0) {
+                                    if ((DAT_00ed3148::instance & 0x800) != 0) {
+                                        DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                        if ((DAT_GmImageAddressToBeRendered::instance
+                                                == GMFirstPictureIndex::instance[12] + 134U)
+                                            || (DAT_GmImageAddressToBeRendered::instance
+                                                == GMFirstPictureIndex::instance[12] + 136U)) {
+                                            DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 42;
+                                        } else {
+                                            DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 40;
+                                        }
+                                    } else {
+                                        if ((DAT_00ed3148::instance & 0x200) != 0) {
+                                            DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                            if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
+                                                DAT_GmImageAddressToBeRendered::instance
+                                                    = (uVar32 & 1) + 44 + _yOffset_01;
+                                            } else {
+                                                DAT_GmImageAddressToBeRendered::instance
+                                                    = (uVar32 & 3) + 36 + _yOffset_01;
+                                            }
+                                        } else {
+                                            if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
+                                                DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                                DAT_GmImageAddressToBeRendered::instance
+                                                    = (uVar32 & 1) + 44 + _yOffset_01;
+                                            }
+                                        }
+                                    }
+                                } else {
                                     if ((DAT_00ed3148::instance & 0x80) != 0) {
                                         _yOffset_01 = DAT_TileMapState::instance.OrganismLayer[layerTileIndex];
                                         if (_yOffset_01 < 2000) {
@@ -634,30 +663,6 @@ namespace Rendering {
                                                                     .animationFrameUnk
                                                         + _yOffset_01 + 2)];
                                             }
-                                        }
-                                    }
-                                } else if ((DAT_00ed3148::instance & 0x800) != 0) {
-                                    DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                    if ((DAT_GmImageAddressToBeRendered::instance
-                                            == GMFirstPictureIndex::instance[12] + 134U)
-                                        || (DAT_GmImageAddressToBeRendered::instance
-                                            == GMFirstPictureIndex::instance[12] + 136U)) {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 42;
-                                    } else {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 40;
-                                    }
-                                } else {
-                                    if ((DAT_00ed3148::instance & 0x200) != 0) {
-                                        DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
-                                        } else {
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 3) + 36 + _yOffset_01;
-                                        }
-                                    } else {
-                                        if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
-                                            DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
                                         }
                                     }
                                 }
@@ -2234,7 +2239,27 @@ namespace Rendering {
                                     + GMFirstPictureIndex::instance[157] + ((uVar29 & 1) + iVar23 * 2) * 4;
                             }
                         } else {
-                            if ((DAT_00ed3148::instance & 0x100) == 0) {
+                            if ((DAT_00ed3148::instance & 0x100) != 0) {
+                                if ((DAT_00ed3148::instance & 0x800) != 0) {
+                                    DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                    if ((DAT_GmImageAddressToBeRendered::instance
+                                            == GMFirstPictureIndex::instance[12] + 134U)
+                                        || (DAT_GmImageAddressToBeRendered::instance
+                                            == GMFirstPictureIndex::instance[12] + 136U)) {
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = GMFirstPictureIndex::instance[157] + 42;
+                                    } else {
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = GMFirstPictureIndex::instance[157] + 40;
+                                    }
+                                } else {
+                                    if ((DAT_00ed3148::instance & 0x200) != 0) {
+                                        DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
+                                        DAT_GmImageAddressToBeRendered::instance
+                                            = (DAT_00ed314c::instance & 3) + 36 + GMFirstPictureIndex::instance[157];
+                                    }
+                                }
+                            } else {
                                 if ((char)DAT_00ed3148::instance < '\0'
                                     && 1999 < DAT_TileMapState::instance.OrganismLayer[_yOffset_01]
                                     && (iVar23 = DAT_TileMapState::instance.OrganismLayer[_yOffset_01] * 32,
@@ -2249,22 +2274,6 @@ namespace Rendering {
                                         + GMFirstPictureIndex::instance[*(
                                             short*)((int)&DAT_LandscapeState::instance.trees[1590].animationFrameUnk
                                             + iVar23 + 2)];
-                                }
-                            } else if ((DAT_00ed3148::instance & 0x800) != 0) {
-                                DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                if ((DAT_GmImageAddressToBeRendered::instance
-                                        == GMFirstPictureIndex::instance[12] + 134U)
-                                    || (DAT_GmImageAddressToBeRendered::instance
-                                        == GMFirstPictureIndex::instance[12] + 136U)) {
-                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 42;
-                                } else {
-                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 40;
-                                }
-                            } else {
-                                if ((DAT_00ed3148::instance & 0x200) != 0) {
-                                    DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = (DAT_00ed314c::instance & 3) + 36 + GMFirstPictureIndex::instance[157];
                                 }
                             }
                         }
