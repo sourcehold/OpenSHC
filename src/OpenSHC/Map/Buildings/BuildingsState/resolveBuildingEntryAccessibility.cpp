@@ -15,21 +15,20 @@ namespace Map {
         int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise
-            // Matching note: the original keeps the entry tile in edx across getBuildingHeightForBuildingID, so it
-            // was built with /GL and sees that the callee leaves edx alone; without that the allocator is short one
-            // register, spills the building height and every register from there on differs.
+            // Matching note: the original computes the building pointer before the (x, y) lookup and loads the
+            // call arguments in a different register order; declaring buildingHeight first comes closest.
             if (buildingID <= 0) {
                 return 0;
             }
 
-            int fromArea
-                = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             int buildingHeight
                 = DAT_TileMapState::instance.HeightLayer[DAT_ViewportRenderState::instance
                                                              .translationMatrix[(short)this->buildings[buildingID].y]
                                                              .addXgetTile
                     + (short)this->buildings[buildingID].x];
+            int fromArea
+                = (short)DAT_TileMapState::instance
+                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             int blocked = 0;
             if (this->buildings[buildingID].buildingEntryX == 0 && this->buildings[buildingID].buildingEntryY == 0) {
                 blocked = 1;
@@ -62,20 +61,21 @@ namespace Map {
                 }
             }
 
+            int result = 1;
             this->buildings[buildingID].hasAccessToKeep = 1;
-            if (blocked == 0) {
-                return 1;
+            if (blocked != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
+                    buildingID, 0);
+                int const found = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
+                    buildingID, param_2, 0, x, y);
+                if (found == 0) {
+                    this->buildings[buildingID].hasAccessToKeep = 0;
+                    return 0;
+                }
+                result = found == 2 ? 2 : 1;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
-                buildingID, 0);
-            int const found = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
-                buildingID, param_2, 0, x, y);
-            if (found == 0) {
-                this->buildings[buildingID].hasAccessToKeep = 0;
-                return 0;
-            }
-            return found == 2 ? 2 : 1;
+            return result;
         }
 
     }
