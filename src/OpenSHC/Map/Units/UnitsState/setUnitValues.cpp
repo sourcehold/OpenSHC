@@ -14,27 +14,27 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053B8E0
         void UnitsState::setUnitValues(int unitID, UnitType unitType)
         {
-            this->units[unitID].unitType = (UnitTypeShort)unitType;
-            this->units[unitID].field_0x90 = (short)DAT_UnitPropertiesDefinedData::instance.field_0x7634[unitType];
-            this->units[unitID].isStalked = (byte)DAT_UnitPropertiesDefinedData::instance.field_0x7774[unitType];
-            this->units[unitID].gmIDUnk = (short)DAT_UnitPropertiesDefinedData::instance.SPRITE_ID[unitType];
+            this->units[unitID].unitType = unitType;
+            this->units[unitID].field_0x90 = DAT_UnitPropertiesDefinedData::instance.field_0x7634[unitType];
+            this->units[unitID].isStalked = DAT_UnitPropertiesDefinedData::instance.field_0x7774[unitType];
+            this->units[unitID].gmIDUnk = DAT_UnitPropertiesDefinedData::instance.SPRITE_ID[unitType];
             this->units[unitID].spriteID = this->units[unitID].gmIDUnk;
             this->units[unitID].gfxNumber = 1;
             this->units[unitID].field_0x2a = (short)DAT_TextureRenderCoreObject::instance
                                                  .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
                                                  .originX;
-            *(short*)&this->units[unitID].unknownV = (short)DAT_TextureRenderCoreObject::instance
-                                                         .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
-                                                         .originY;
+            this->units[unitID].unknownV = (short)DAT_TextureRenderCoreObject::instance
+                                               .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
+                                               .originY;
             this->units[unitID].spriteWidthUnk
-                = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_SPRITE_DIMENSIONS[unitType][0];
+                = DAT_UnitPropertiesDefinedData::instance.UNIT_SPRITE_DIMENSIONS[unitType][0];
             this->units[unitID].spriteHeightUnk
-                = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_SPRITE_DIMENSIONS[unitType][1];
+                = DAT_UnitPropertiesDefinedData::instance.UNIT_SPRITE_DIMENSIONS[unitType][1];
             this->units[unitID].drawXOffset = this->units[unitID].field_0x2a - this->units[unitID].spriteWidthUnk / 2;
             this->units[unitID].someDrawYOffset
-                = ((short)this->units[unitID].unknownV - this->units[unitID].spriteHeightUnk) + 3;
+                = (this->units[unitID].unknownV - this->units[unitID].spriteHeightUnk) + 3;
             this->units[unitID].movementSpeed
-                = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_MOVEMENT_SPEED_ARRAY[unitType];
+                = DAT_UnitPropertiesDefinedData::instance.UNIT_MOVEMENT_SPEED_ARRAY[unitType];
             this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
             this->units[unitID].field_0x354 = 0;
             this->units[unitID].field_0x350 = 0;
@@ -44,16 +44,15 @@ namespace Map {
                 ? 100
                 : this->units[unitID].health * 100 / this->units[unitID].maxHealth;
             this->units[unitID].healthbar = this->units[unitID].healthPercentage / 10;
-            this->units[unitID].unitCanClimb = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_CLIMB[unitType];
-            this->units[unitID].someUnitStat4
-                = (short)DAT_UnitPropertiesDefinedData::instance.SomeUnitStatMatrix4[unitType];
-            this->units[unitID].graphicSize = (short)DAT_UnitPropertiesDefinedData::instance.GRAPHIC_SIZE[unitType];
+            this->units[unitID].unitCanClimb = DAT_UnitPropertiesDefinedData::instance.UNIT_CLIMB[unitType];
+            this->units[unitID].someUnitStat4 = DAT_UnitPropertiesDefinedData::instance.SomeUnitStatMatrix4[unitType];
+            this->units[unitID].graphicSize = DAT_UnitPropertiesDefinedData::instance.GRAPHIC_SIZE[unitType];
             this->units[unitID].someUnitStat2_meleeDamageUnk
-                = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_CAN_MELEE[unitType];
+                = DAT_UnitPropertiesDefinedData::instance.UNIT_CAN_MELEE[unitType];
             this->units[unitID].enemyNoticeFrequencyUnk
                 = DAT_UnitPropertiesDefinedData::instance.UNIT_ENEMY_NOTICE_RANGE[unitType];
-            this->units[unitID].moveableUnk = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_MOVABLE[unitType];
-            if ((char)this->units[unitID].firstNameIndex <= 0 || unitType == OpenSHC::Map::Units::UT_BREWER
+            this->units[unitID].moveableUnk = DAT_UnitPropertiesDefinedData::instance.UNIT_MOVABLE[unitType];
+            if (this->units[unitID].firstNameIndex <= 0 || unitType == OpenSHC::Map::Units::UT_BREWER
                 || unitType == OpenSHC::Map::Units::UT_TANNER || unitType == OpenSHC::Map::Units::UT_LADY
                 || unitType == OpenSHC::Map::Units::UT_MOTHER || unitType == OpenSHC::Map::Units::UT_JUGGLER
                 || unitType == OpenSHC::Map::Units::UT_FIREEATER || unitType == OpenSHC::Map::Units::UT_PRIEST) {
@@ -64,8 +63,8 @@ namespace Map {
                 this->units[unitID].occupancyOrFlag = 1 << (_owner - 1);
                 this->units[unitID].field_0x3d1 = ~this->units[unitID].occupancyOrFlag;
             } else {
-                this->units[unitID].occupancyOrFlag = 0xff;
-                this->units[unitID].field_0x3d1 = 0xff;
+                this->units[unitID].occupancyOrFlag = 255;
+                this->units[unitID].field_0x3d1 = 255;
             }
             this->units[unitID].isSelectable_OR_matchTime = 0;
             this->units[unitID].field_0x430 = 0;

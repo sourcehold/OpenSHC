@@ -29,7 +29,7 @@ namespace Map {
                 if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 1) {
                     this->units[unitID].field_0x35c = this->units[unitID].field_0x35c + 1;
                     if (this->units[unitID].field_0x35c >= 96) {
-                        *(short*)&this->units[unitID].climbingState += 1;
+                        this->units[unitID].climbingState += 1;
                         this->units[unitID].field_0x35c = 0;
                         if (this->units[unitID].climbingDirection == 1) {
                             /* Climbing up */
@@ -43,30 +43,30 @@ namespace Map {
                                                  .translationMatrix[this->units[unitID].mimicCurrentYPosition]
                                                  .addXgetTile
                                     + this->units[unitID].mimicCurrentXPosition]) {
-                            *(undefined2*)&this->units[unitID].climbingState = 5;
+                            this->units[unitID].climbingState = 5;
                         }
                     }
                     if (this->units[unitID].climbingDirection == 1) {
                         /* Climbing up */
                         if (this->units[unitID].facingDirectionMapOrientationCorrected == 0) {
-                            this->units[unitID].field_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (-4 - this->units[unitID].climbingState) * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 2) {
-                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * -2;
+                            this->units[unitID].field_0x5c = this->units[unitID].climbingState * -2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 4) {
-                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2;
+                            this->units[unitID].field_0x5c = this->units[unitID].climbingState * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
-                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 + 8;
+                            this->units[unitID].field_0x5c = this->units[unitID].climbingState * 2 + 8;
                         }
                     } else {
                         /* Climbing down */
                         if (this->units[unitID].facingDirectionMapOrientationCorrected == 0) {
-                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 - 3;
+                            this->units[unitID].field_0x5c = this->units[unitID].climbingState * 2 - 3;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 2) {
-                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 - 8;
+                            this->units[unitID].field_0x5c = this->units[unitID].climbingState * 2 - 8;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 4) {
-                            this->units[unitID].field_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (-4 - this->units[unitID].climbingState) * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
-                            this->units[unitID].field_0x5c = (2 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (2 - this->units[unitID].climbingState) * 2;
                         }
                     }
                     if (this->units[unitID].climbingDirection == 1) {
@@ -91,7 +91,7 @@ namespace Map {
                         this->units[unitID].vanish = 1;
                     }
                     /* Stop climbing at climbingState = 5 */
-                    if ((short)this->units[unitID].climbingState < 5) {
+                    if (this->units[unitID].climbingState < 5) {
                         return;
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
@@ -121,11 +121,11 @@ namespace Map {
                 return;
             }
             if (this->units[unitID].usingTeleport == 1) {
-                int _climbingState = this->units[unitID].climbingState;
+                short const _climbingState = this->units[unitID].climbingState;
                 this->units[unitID].animationCycleNumber = 0;
                 this->units[unitID].tunnelerFinishedDigging = 1;
                 this->units[unitID].usingTeleport = 0;
-                if ((short)_climbingState >= 0) {
+                if (_climbingState >= 0) {
                     this->units[unitID].dying = 1;
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DEATH_02;
                     return;
@@ -137,7 +137,6 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                 unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
-            return;
         }
 
     }
