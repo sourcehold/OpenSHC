@@ -19,9 +19,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B260
         void BuildingsState::recomputeAllFearFactors()
         {
-            // Matching note: The original keeps each 'goodOrBad = -1' as its own block that jumps to a shared
-            // compare of goodOrBad; our compiler jump-threads the constants straight into the counters. An inlined
-            // helper returning -1/0/1 was tried and made it worse (31% -> 15%).
             for (int p = 1; p < 9; ++p) {
                 DAT_GameState::instance.playerDataArray[p].badStuffCount = 0;
                 DAT_GameState::instance.playerDataArray[p].goodStuffCount = 0;
@@ -97,19 +94,23 @@ namespace Map {
                     DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel = 0;
                 }
 
-                // Track the extremes for the final statistics while the lord is alive
+                // Track the extremes for the final statistics while the lord is alive. Reading the level from the
+                // field rather than a local keeps the loop pointer on fearFactorLevel, as in the original
                 int lordID = DAT_GameState::instance.playerDataArray[p].lordID;
                 if (lordID != 0
                     && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].uid
                     && DAT_UnitsState::instance.units[lordID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
-                    int level = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
-                    if (level > 0) {
-                        if (level > (char)DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]) {
-                            DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p] = level;
+                    if (DAT_GameState::instance.playerDataArray[p].fearFactorLevel > 0) {
+                        if (DAT_GameState::instance.playerDataArray[p].fearFactorLevel
+                            > (char)DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]) {
+                            DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]
+                                = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
                         }
-                    } else if (level < 0) {
-                        if (level < (char)DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
-                            DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p] = level;
+                    } else if (DAT_GameState::instance.playerDataArray[p].fearFactorLevel < 0) {
+                        if (DAT_GameState::instance.playerDataArray[p].fearFactorLevel
+                            < (char)DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
+                            DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]
+                                = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
                         }
                     }
                 }
