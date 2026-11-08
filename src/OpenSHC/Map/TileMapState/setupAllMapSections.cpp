@@ -59,15 +59,13 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateShowHiLayerOrResetChangedLayer, this)();
 
         // the border tiles get their own graphic, everything else the plain one
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile += 6) {
-            for (int i = 0; i < 6; i++) {
-                if (this->LogicLayer[tile + i] == L_BORDER) {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2];
-                } else if (this->LogicLayer[tile + i] == L_BORDER_EDGE) {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-                } else {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-                }
+        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+            if (this->LogicLayer[tile] == L_BORDER) {
+                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2];
+            } else if (this->LogicLayer[tile] == L_BORDER_EDGE) {
+                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2] + 1;
+            } else {
+                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2] + 2;
             }
         }
 
