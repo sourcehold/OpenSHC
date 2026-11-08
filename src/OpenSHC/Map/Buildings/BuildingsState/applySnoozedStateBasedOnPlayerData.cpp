@@ -18,18 +18,20 @@ namespace Map {
                 if (this->buildings[i].logicalState != BLS_NORMAL) {
                     continue;
                 }
-                if (this->buildings[i].buildingType >= 91) {
+                // type is a reference so the test and the index share one load (a value moves the loop
+                // anchor to sleeping), and owner is an int local read twice so its row offset is live across the
+                // sleeping test, which is what puts it in esi and type in edi as in the original
+                BuildingTypeShort const& type = this->buildings[i].buildingType;
+                if (type >= 91) {
                     this->buildings[i].sleeping = false;
                     continue;
                 }
-                // Matching note: the original loads the type once for the test above and the index here, but with that
-                // register in edi where an indexed read gets esi; the reference costs that one load and fixes the names
-                BuildingTypeShort const& type = this->buildings[i].buildingType;
-                bool snoozed = DAT_GameState::instance.playerDataArray[this->buildings[i].owner].snoozedBuildings[type];
-                if (this->buildings[i].sleeping == snoozed) {
+                int const owner = this->buildings[i].owner;
+                if (this->buildings[i].sleeping
+                    == DAT_GameState::instance.playerDataArray[owner].snoozedBuildings[type]) {
                     continue;
                 }
-                this->buildings[i].sleeping = snoozed;
+                this->buildings[i].sleeping = DAT_GameState::instance.playerDataArray[owner].snoozedBuildings[type];
                 this->buildings[i].currentEmployeeCount = 0;
                 this->buildings[i].animationIndex = 0;
                 this->buildings[i].renderAnimation = 0;
