@@ -17003,7 +17003,7 @@ SHC_3BB0A8C1_0x00454EE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00454EF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00454F00 | 84.8% | gynt's asm without his two extra locals; the record offset folded into the addresses
+SHC_3BB0A8C1_0x00454F00 | 96.5% | the record index as a local, the pointers in the original's order; the test's index folded into its address
 
 SHC_3BB0A8C1_0x00455050 | 100.0% | Reimplemented
 

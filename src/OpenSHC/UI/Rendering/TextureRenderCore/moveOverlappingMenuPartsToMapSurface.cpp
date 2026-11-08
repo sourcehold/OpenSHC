@@ -29,10 +29,12 @@ namespace UI {
             }
             // the asm below names COL_MAGENTA, which inline asm can only do once C++ code has instantiated it
             (void)sizeof(COL_MAGENTA::instance);
-            int* width = &DAT_BlendingDefinedData::instance.field_0x3014[(tab - 1) * 5][2];
-            int* y = &DAT_BlendingDefinedData::instance.field_0x3014[(tab - 1) * 5][1];
-            int* x = &DAT_BlendingDefinedData::instance.field_0x3014[(tab - 1) * 5][0];
-            int* height = &DAT_BlendingDefinedData::instance.field_0x3014[(tab - 1) * 5][3];
+            // the index in a local: the original computes it again here (inline: 98 instructions to its 100)
+            int const record = (tab - 1) * 5;
+            int* width = &DAT_BlendingDefinedData::instance.field_0x3014[record][2];
+            int* x = &DAT_BlendingDefinedData::instance.field_0x3014[record][0];
+            int* height = &DAT_BlendingDefinedData::instance.field_0x3014[record][3];
+            int* y = &DAT_BlendingDefinedData::instance.field_0x3014[record][1];
             do {
                 if (*x == -2) {
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
