@@ -36,10 +36,8 @@ namespace Rendering {
     {
         short graphicSize;
         UnitTypeShort unitType;
-        UnitStateShort unitState;
         int overlayX;
         int overlayY;
-        int maskImageID;
 
         this->unitBatchedRenderCounterUntil6 = this->unitBatchedRenderCounterUntil6 + 1;
         int _drawX = 0;
@@ -322,183 +320,179 @@ namespace Rendering {
                         *this->viewportState.ptrColor = savedPixelColor;
                     }
                 }
-                if (0 < _unitID) {
-                    if ((DAT_UnitsState::instance.units[_unitID].isSelected != 0)
-                        && (DAT_UnitsState::instance.units[_unitID].usingTeleport == 0)) {
-                        if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
-                            savedPixelColor = DAT_UnitsState::instance.units[_unitID].maxHealthRatingLord;
-                            overlayX = DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
-                            if (savedPixelColor == 0) {
-                                overlayX = overlayX - 6 + _drawY;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].healthbar + 17;
-                            } else {
-                                overlayX = overlayX - 8 + _drawY;
-                                overlayY
-                                    = DAT_UnitsState::instance.units[_unitID].healthbar + 228 + savedPixelColor * 11;
-                            }
-                        } else {
-                            overlayX
-                                = DAT_GameState::instance.playerDataArray[DAT_UnitsState::instance.units[_unitID].owner]
-                                      .fearFactorLevel;
-                            if (overlayX == 0) {
-                                overlayX = DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 6;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].healthbar + 17;
-                            } else {
-                                if (overlayX < 1) {
-                                    overlayY = overlayX * -11 + 173;
-                                } else {
-                                    overlayY = overlayX * 11 + 118;
-                                }
-                                overlayX = DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 8;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].healthbar + overlayY;
-                            }
-                            overlayX = overlayX + _drawY;
-                        }
-                        maskImageID = (_imageID - 22) / 2 + _drawX;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_FLOATS, overlayY, maskImageID, overlayX);
-                        if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
-                            && DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
-                                == DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            && (DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk <= 160
-                                || ((unitState = DAT_UnitsState::instance.units[_unitID].state.generic,
-                                    unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK
-                                        || (unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL))))) {
-                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 447,
-                                maskImageID + 2, DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 27 + _drawY,
-                                16);
-                        }
-                    }
-                    savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6e;
-                    if (savedPixelColor != 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                            savedPixelColor + 212, DAT_UnitsState::instance.units[_unitID].drawX,
-                            DAT_UnitsState::instance.units[_unitID].drawY - 54
-                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset,
-                            OpenSHC::IO::Graphics::GID_FLOATS_NEW, savedPixelColor + 220, 0);
-                        DAT_UnitsState::instance.units[_unitID].field_0x6e = 0;
-                    }
-                    savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6c;
-                    if (savedPixelColor != 0) {
-                        overlayY = 0;
-                        overlayX = 0;
-                        if (savedPixelColor == 1) {
-                            maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 48;
-                            overlayX = DAT_UnitsState::instance.units[_unitID].drawY - 70
-                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
-                            overlayY = DAT_UnitsState::instance.units[_unitID].field_0x2a - 53
-                                + DAT_UnitsState::instance.units[_unitID].drawX;
-                            int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 32;
-                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, overlayImageID,
-                                overlayY, overlayX, OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImageID, 0);
-                        } else {
-                            if (savedPixelColor == 2) {
-                                switch (DAT_UnitsState::instance.units[_unitID].unitType) {
-                                case OpenSHC::Map::Units::UT_S_CATAPULT:
-                                    overlayY = 41;
-                                    overlayX = 58;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                                case OpenSHC::Map::Units::UT_S_TOWER:
-                                    overlayY = 79;
-                                    overlayX = 56;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                    overlayY = 43;
-                                    overlayX = 35;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                                    overlayY = 36;
-                                    overlayX = 61;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_SHIELD:
-                                    overlayY = -3;
-                                    overlayX = 60;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_BALLISTA:
-                                case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                    overlayY = 19;
-                                    overlayX = 36;
-                                }
-                                maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
-                                overlayX = (DAT_UnitsState::instance.units[_unitID].drawY
-                                               + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
-                                    - overlayX;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
-                                int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                    overlayImageID, overlayY, overlayX, OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                    maskImageID, 0);
-                            }
-                            if (savedPixelColor == 3) {
-                                switch (DAT_UnitsState::instance.units[_unitID].unitType) {
-                                case OpenSHC::Map::Units::UT_S_CATAPULT:
-                                    overlayY = 41;
-                                    overlayX = 58;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                                case OpenSHC::Map::Units::UT_S_TOWER:
-                                    overlayY = 79;
-                                    overlayX = 56;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                    overlayY = 43;
-                                    overlayX = 35;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                                    overlayY = 36;
-                                    overlayX = 61;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_SHIELD:
-                                    overlayY = -3;
-                                    overlayX = 60;
-                                    break;
-                                case OpenSHC::Map::Units::UT_S_BALLISTA:
-                                case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                    overlayY = 19;
-                                    overlayX = 36;
-                                }
-                                maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 164;
-                                overlayX = (DAT_UnitsState::instance.units[_unitID].drawY
-                                               + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
-                                    - overlayX;
-                                overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
-                                int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 148;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                    overlayImageID, overlayY, overlayX, OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                    maskImageID, 0);
-                            }
-                        }
-                        DAT_UnitsState::instance.units[_unitID].field_0x6c = 0;
-                    }
-                }
             } else {
                 if ((_blendStrength & 4) != 0) {
                     DAT_RenderedUnitOwner::instance
                         = (_blendStrength & 0x10) != 0 ? 0 : DAT_GameSynchronyState::instance.currentPlayerSlotID;
                     DAT_CurrentlyRenderedSpriteID::instance = _gmID;
                 }
-                if ((_blendStrength & 0x20) == 0) {
-                    if ((_blendStrength & 0xffff0000) == 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                            DAT_TextureRenderCoreObject::ptr)((eGM)_gmID, _imageID, _drawX, _drawY);
-                    } else {
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                            DAT_TextureRenderCoreObject::ptr)(
-                            (GmID)_gmID, _imageID, _drawX, _drawY, _blendStrength >> 16);
-                    }
-                } else {
+                if ((_blendStrength & 0x20) != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                         DAT_TextureRenderCoreObject::ptr)(
-                        (GmID)_gmID, _imageID, _drawX, _drawY, (GmID)(_gmID), (_blendStrength >> 16) + _imageID, 0);
+                        (GmID)_gmID, _imageID, _drawX, _drawY, (GmID)_gmID, (_blendStrength >> 16) + _imageID, 0);
+                } else if ((_blendStrength & 0xffff0000) != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                        DAT_TextureRenderCoreObject::ptr)((GmID)_gmID, _imageID, _drawX, _drawY, _blendStrength >> 16);
+                } else {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                        DAT_TextureRenderCoreObject::ptr)((eGM)_gmID, _imageID, _drawX, _drawY);
+                }
+            }
+            if (0 < _unitID) {
+                if (DAT_UnitsState::instance.units[_unitID].isSelected != 0
+                    && DAT_UnitsState::instance.units[_unitID].usingTeleport == 0) {
+                    int const barX = (_imageID - 22) / 2 + _drawX;
+                    int barY;
+                    int barImage;
+                    if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
+                        short const lordRating = DAT_UnitsState::instance.units[_unitID].maxHealthRatingLord;
+                        barY = DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
+                        if (lordRating == 0) {
+                            barY = barY - 6 + _drawY;
+                            barImage = DAT_UnitsState::instance.units[_unitID].healthbar + 17;
+                        } else {
+                            barY = barY - 8 + _drawY;
+                            barImage = DAT_UnitsState::instance.units[_unitID].healthbar + 228 + lordRating * 11;
+                        }
+                    } else {
+                        int const fearFactor
+                            = DAT_GameState::instance.playerDataArray[DAT_UnitsState::instance.units[_unitID].owner]
+                                  .fearFactorLevel;
+                        if (fearFactor != 0) {
+                            int fearImage;
+                            if (fearFactor > 0) {
+                                fearImage = fearFactor * 11 + 118;
+                            } else {
+                                fearImage = 173 - fearFactor * 11;
+                            }
+                            barY = DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 8;
+                            barImage = DAT_UnitsState::instance.units[_unitID].healthbar + fearImage;
+                        } else {
+                            barY = DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 6;
+                            barImage = DAT_UnitsState::instance.units[_unitID].healthbar + 17;
+                        }
+                        barY = barY + _drawY;
+                    }
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_FLOATS, barImage, barX, barY);
+                    if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
+                        && DAT_GameState::instance.mapAndTime.playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
+                            == DAT_GameState::instance.mapAndTime
+                                .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        && (DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk <= 160
+                            || DAT_UnitsState::instance.units[_unitID].state.generic
+                                == OpenSHC::Map::Units::States::US_MELEE_ATTACK
+                            || DAT_UnitsState::instance.units[_unitID].state.generic
+                                == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL)) {
+                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 447,
+                            barX + 2, DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 27 + _drawY, 16);
+                    }
+                }
+                short const floaterImage = DAT_UnitsState::instance.units[_unitID].field_0x6e;
+                if (floaterImage != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, floaterImage + 212,
+                        DAT_UnitsState::instance.units[_unitID].drawX,
+                        DAT_UnitsState::instance.units[_unitID].drawY - 54
+                            + DAT_UnitsState::instance.units[_unitID].someDrawYOffset,
+                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, floaterImage + 220, 0);
+                    DAT_UnitsState::instance.units[_unitID].field_0x6e = 0;
+                }
+                short const siegeOverlay = DAT_UnitsState::instance.units[_unitID].field_0x6c;
+                if (siegeOverlay != 0) {
+                    int offsetX = 0;
+                    int offsetY = 0;
+                    switch (siegeOverlay) {
+                    case 1:
+                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 32,
+                            DAT_UnitsState::instance.units[_unitID].field_0x2a - 53
+                                + DAT_UnitsState::instance.units[_unitID].drawX,
+                            DAT_UnitsState::instance.units[_unitID].drawY - 70
+                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset,
+                            OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 48, 0);
+                        break;
+                    case 2:
+                        switch (DAT_UnitsState::instance.units[_unitID].unitType) {
+                        case OpenSHC::Map::Units::UT_S_CATAPULT:
+                            offsetX = 41;
+                            offsetY = 58;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_TREBUCHET:
+                        case OpenSHC::Map::Units::UT_S_TOWER:
+                            offsetX = 79;
+                            offsetY = 56;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_MANGONEL:
+                            offsetX = 43;
+                            offsetY = 35;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
+                            offsetX = 36;
+                            offsetY = 61;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_SHIELD:
+                            offsetX = -3;
+                            offsetY = 60;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_BALLISTA:
+                        case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                            offsetX = 19;
+                            offsetY = 36;
+                        }
+                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116,
+                            DAT_UnitsState::instance.units[_unitID].drawX + offsetX,
+                            (DAT_UnitsState::instance.units[_unitID].drawY
+                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
+                                - offsetY,
+                            OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132, 0);
+                        break;
+                    case 3:
+                        switch (DAT_UnitsState::instance.units[_unitID].unitType) {
+                        case OpenSHC::Map::Units::UT_S_CATAPULT:
+                            offsetX = 41;
+                            offsetY = 58;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_TREBUCHET:
+                        case OpenSHC::Map::Units::UT_S_TOWER:
+                            offsetX = 79;
+                            offsetY = 56;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_MANGONEL:
+                            offsetX = 43;
+                            offsetY = 35;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
+                            offsetX = 36;
+                            offsetY = 61;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_SHIELD:
+                            offsetX = -3;
+                            offsetY = 60;
+                            break;
+                        case OpenSHC::Map::Units::UT_S_BALLISTA:
+                        case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                            offsetX = 19;
+                            offsetY = 36;
+                        }
+                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 148,
+                            DAT_UnitsState::instance.units[_unitID].drawX + offsetX,
+                            (DAT_UnitsState::instance.units[_unitID].drawY
+                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
+                                - offsetY,
+                            OpenSHC::IO::Graphics::GID_FLOATS_NEW,
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 164, 0);
+                        break;
+                    }
+                    DAT_UnitsState::instance.units[_unitID].field_0x6c = 0;
                 }
             }
         }
