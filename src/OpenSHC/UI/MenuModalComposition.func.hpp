@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/MenuModal.hpp"
 #include "OpenSHC/UI/MenuModalComposition.hpp"
+#include "OpenSHC/Util/FunctionTypes/NoArgCallback.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace UI {
@@ -12,6 +13,7 @@ namespace UI {
 
         using OpenSHC::UI::MenuModal;
         using OpenSHC::UI::Enums::MenuModalType;
+        using OpenSHC::Util::FunctionTypes::NoArgCallback;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor
@@ -44,15 +46,15 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004AA3E0, &MenuModalComposition::fillWithMenuModalDimensions)
         fillWithMenuModalDimensions;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, int, undefined*, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, int, undefined*, NoArgCallback*), false,
             Address::SHC_3BB0A8C1_0x004AA480, &MenuModalComposition::setSliderParameters)
         setSliderParameters;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(dword, dword, dword, dword, undefined*), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(dword, dword, dword, dword, NoArgCallback*), false,
             Address::SHC_3BB0A8C1_0x004AA540, &MenuModalComposition::setSliderParameters2)
         setSliderParameters2;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, dword, dword, undefined*, undefined*), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, dword, dword, int*, NoArgCallback*), false,
             Address::SHC_3BB0A8C1_0x004AA930, &MenuModalComposition::setModalSliderParameters)
         setModalSliderParameters;
 
