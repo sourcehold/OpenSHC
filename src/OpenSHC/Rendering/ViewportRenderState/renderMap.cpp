@@ -1813,156 +1813,180 @@ namespace Rendering {
                             local_24 = local_24 + 1;
                             if ((9 < local_24) || (DAT_EntityState::instance.entityArray[entityID].logicalState == 0))
                                 break;
-                            if (DAT_EntityState::instance.entityArray[entityID].graphicType2 == 0)
-                                goto LAB_004eb439;
-                            DAT_CurrentlyRenderedSpriteID::instance
-                                = (GmIDInt)DAT_EntityState::instance.entityArray[entityID].gmID;
-                            if ((DAT_CurrentlyRenderedSpriteID::instance == OpenSHC::IO::Graphics::GID_BODY_FIRE)
-                                || (DAT_CurrentlyRenderedSpriteID::instance
-                                    == OpenSHC::IO::Graphics::GID_BODY_FIRE_2)) {
-                                local_8 = local_8 + 1;
-                                if ((DAT_EntityState::instance.entityArray[entityID].fireIntensity == 0)
-                                    && (79 < local_8)) {
-                                    if (local_8 < 200) {
-                                        bVar15 = (byte)DAT_EntityState::instance.entityArray[entityID].rng_1 & 1;
-                                    } else {
-                                        bVar15 = (byte)DAT_EntityState::instance.entityArray[entityID].rng_1 & 3;
+                            if (DAT_EntityState::instance.entityArray[entityID].graphicType2 != 0) {
+                                DAT_CurrentlyRenderedSpriteID::instance
+                                    = (GmIDInt)DAT_EntityState::instance.entityArray[entityID].gmID;
+                                if ((DAT_CurrentlyRenderedSpriteID::instance == OpenSHC::IO::Graphics::GID_BODY_FIRE)
+                                    || (DAT_CurrentlyRenderedSpriteID::instance
+                                        == OpenSHC::IO::Graphics::GID_BODY_FIRE_2)) {
+                                    local_8 = local_8 + 1;
+                                    if ((DAT_EntityState::instance.entityArray[entityID].fireIntensity == 0)
+                                        && (79 < local_8)) {
+                                        if (local_8 < 200) {
+                                            bVar15 = (byte)DAT_EntityState::instance.entityArray[entityID].rng_1 & 1;
+                                        } else {
+                                            bVar15 = (byte)DAT_EntityState::instance.entityArray[entityID].rng_1 & 3;
+                                        }
+                                        if (bVar15 != 0)
+                                            break;
                                     }
-                                    if (bVar15 != 0)
+                                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent,
+                                        DAT_SFXState::ptr)(5);
+                                    _yOffset_01 = DAT_RenderMap_YOffset::instance;
+                                }
+                                DAT_RenderedUnitOwner::instance
+                                    = DAT_EntityState::instance.entityArray[entityID].colorUnk;
+                                bVar12 = 0;
+                                iVar26 = DAT_EntityState::instance.entityArray[entityID].height;
+
+                                int skipEntity = 0;
+                                switch (DAT_CurrentlyRenderedSpriteID::instance) {
+                                case OpenSHC::IO::Graphics::GID_ANIM_FLAGS:
+                                case OpenSHC::IO::Graphics::GID_ANIM_CRUSADER_FLAG:
+                                    if (_flatView != 0) {
+                                        skipEntity = 1;
                                         break;
-                                }
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(5);
-                                _yOffset_01 = DAT_RenderMap_YOffset::instance;
-                            }
-                            DAT_RenderedUnitOwner::instance = DAT_EntityState::instance.entityArray[entityID].colorUnk;
-                            bVar12 = 0;
-                            iVar26 = DAT_EntityState::instance.entityArray[entityID].height;
-                            switch (DAT_CurrentlyRenderedSpriteID::instance) {
-                            case OpenSHC::IO::Graphics::GID_ANIM_FLAGS:
-                            case OpenSHC::IO::Graphics::GID_ANIM_CRUSADER_FLAG:
-                                if (_flatView != 0)
-                                    goto LAB_004eb439;
-                            case OpenSHC::IO::Graphics::GID_BODY_INFO:
-                                bVar12 = 1;
-                            switchD_004eb2c9_caseD_76:
-                                if ((DAT_TileMapState::instance.refreshRelatedOne == 0) || (_flatView != 0)) {
-                                    iVar26 = _yOffset_01;
-                                }
-                                if (bVar12 == 0)
-                                    goto switchD_004eb2c9_caseD_4d;
-                                break;
-                            default:
-                                goto switchD_004eb2c9_caseD_4d;
-                            case OpenSHC::IO::Graphics::GID_BODY_FIRE:
-                            case OpenSHC::IO::Graphics::GID_BODY_DISEASE:
-                            case OpenSHC::IO::Graphics::GID_BLAST_3:
-                            case OpenSHC::IO::Graphics::GID_BODY_FIRE_2:
-                                goto switchD_004eb2c9_caseD_76;
-                            case OpenSHC::IO::Graphics::GID_BODY_MISSILE_COW:
-                                if (DAT_EntityState::instance.entityArray[entityID].someCounter_OR_hitGround != 0
-                                    && (DAT_TileMapState::instance.refreshRelatedOne == 0 || (_flatView != 0))) {
-                                    iVar26 = _yOffset_01;
-                                }
-                                goto switchD_004eb2c9_caseD_4d;
-                            case OpenSHC::IO::Graphics::GID_BODY_BRAZIER:
-                                iVar18 = iVar26 + 4
-                                    + (_yOffset_01 - (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex]);
-                                if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
-                                    iVar26 = _yOffset_01;
-                                    if ((_flatView == 0)
-                                        && (iVar26 = iVar18,
-                                            DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0)) {
-                                        iVar26 = iVar18 - 10;
                                     }
-                                } else {
-                                    iVar26 = _yOffset_01;
-                                    if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0) {
-                                        iVar26 = _yOffset_01 + 20;
-                                    }
-                                }
-                                break;
-                            case OpenSHC::IO::Graphics::GID_ANIM_HEADS:
-                                iVar26 = iVar26 + 7
-                                    + (_yOffset_01 - (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex]);
-                                uVar32 = DAT_TileMapState::instance.LogicLayer[layerTileIndex]
-                                    & Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-                                if (uVar32 != 0) {
-                                    iVar26 = iVar26 + 18;
-                                }
-                                if (DAT_TileMapState::instance.refreshRelatedOne == 0) {
-                                    iVar26 = _yOffset_01 + 20;
-                                    if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] == 0) {
+                                case OpenSHC::IO::Graphics::GID_BODY_INFO:
+                                    bVar12 = 1;
+                                case OpenSHC::IO::Graphics::GID_BODY_FIRE:
+                                case OpenSHC::IO::Graphics::GID_BODY_DISEASE:
+                                case OpenSHC::IO::Graphics::GID_BLAST_3:
+                                case OpenSHC::IO::Graphics::GID_BODY_FIRE_2:
+                                    if (DAT_TileMapState::instance.refreshRelatedOne == 0 || _flatView != 0) {
                                         iVar26 = _yOffset_01;
                                     }
+                                    if (bVar12 == 0) {
+                                        goto scheduleEntityForBatching;
+                                    }
+                                    break;
+                                case OpenSHC::IO::Graphics::GID_BODY_BRAZIER:
+                                    iVar18 = iVar26 + 4
+                                        + (_yOffset_01 - (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex]);
+                                    if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
+                                        iVar26 = _yOffset_01;
+                                        if ((_flatView == 0)
+                                            && (iVar26 = iVar18,
+                                                DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0)) {
+                                            iVar26 = iVar18 - 10;
+                                        }
+                                    } else {
+                                        iVar26 = _yOffset_01;
+                                        if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0) {
+                                            iVar26 = _yOffset_01 + 20;
+                                        }
+                                    }
+                                    break;
+                                case OpenSHC::IO::Graphics::GID_ANIM_HEADS:
+                                    iVar26 = iVar26 + 7
+                                        + (_yOffset_01 - (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex]);
+                                    uVar32 = DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                        & Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
                                     if (uVar32 != 0) {
                                         iVar26 = iVar26 + 18;
                                     }
-                                } else if (_flatView != 0)
-                                    goto LAB_004eb439;
-                            }
-                            if ((DAT_EntityState::instance.entityArray[entityID].field_0xc0 == 0)
-                                || (DAT_TextureRenderCoreObject::instance.isZoom2 == 0)) {
-                                sVar30 = DAT_EntityState::instance.entityArray[entityID].unkMinusOne;
-                                if (sVar30 < 0) {
+                                    if (DAT_TileMapState::instance.refreshRelatedOne == 0) {
+                                        iVar26 = _yOffset_01 + 20;
+                                        if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] == 0) {
+                                            iVar26 = _yOffset_01;
+                                        }
+                                        if (uVar32 != 0) {
+                                            iVar26 = iVar26 + 18;
+                                        }
+                                    } else if (_flatView != 0) {
+                                        skipEntity = 1;
+                                    }
+
+                                    break;
+                                case OpenSHC::IO::Graphics::GID_BODY_MISSILE_COW:
+                                    if (DAT_EntityState::instance.entityArray[entityID].someCounter_OR_hitGround != 0
+                                        && (DAT_TileMapState::instance.refreshRelatedOne == 0 || (_flatView != 0))) {
+                                        iVar26 = _yOffset_01;
+                                    }
+                                default:
+                                scheduleEntityForBatching:
                                     MACRO_CALL_MEMBER(
-                                        OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                        DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance,
-                                        DAT_EntityState::instance.entityArray[entityID].graphicType2,
+                                        OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
+                                        this)(4294967295,
                                         (DAT_EntityState::instance.entityArray[entityID].x1
                                             - DAT_EntityState::instance.entityArray[entityID].originX)
                                             + DAT_RenderMap_DrawSomeX::instance,
-                                        (int)(((DAT_EntityState::instance.entityArray[entityID].y1
-                                                   - DAT_EntityState::instance.entityArray[entityID].originY)
-                                                  - iVar26)
-                                            + DAT_RenderMap_DrawSomeY::instance),
-                                        (GmID)(DAT_CurrentlyRenderedSpriteID::instance),
-                                        DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
+                                        ((DAT_EntityState::instance.entityArray[entityID].y1
+                                             - DAT_EntityState::instance.entityArray[entityID].originY)
+                                            - iVar26)
+                                            + DAT_RenderMap_DrawSomeY::instance,
+                                        (undefined4)(DAT_EntityState::instance.entityArray[entityID].graphicType2),
+                                        (undefined4)(DAT_EntityState::instance.entityArray[entityID].unkMinusOne),
+                                        (undefined4)(DAT_EntityState::instance.entityArray[entityID].imageID), 0);
                                     _yOffset_01 = DAT_RenderMap_YOffset::instance;
-                                } else {
-                                    _yOffset_01 = DAT_EntityState::instance.entityArray[entityID].originY;
-                                    if (sVar30 != 0) {
+                                    skipEntity = 1;
+                                }
+                                if (skipEntity == 0) {
+                                    if ((DAT_EntityState::instance.entityArray[entityID].field_0xc0 != 0)
+                                        && (DAT_TextureRenderCoreObject::instance.isZoom2 != 0)) {
+                                        entityID
+                                            = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
+                                        continue;
+                                    }
+
+                                    sVar30 = DAT_EntityState::instance.entityArray[entityID].unkMinusOne;
+                                    if (sVar30 < 0) {
                                         MACRO_CALL_MEMBER(
-                                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                             DAT_TextureRenderCoreObject::ptr)(
                                             (GmID)DAT_CurrentlyRenderedSpriteID::instance,
                                             DAT_EntityState::instance.entityArray[entityID].graphicType2,
                                             (DAT_EntityState::instance.entityArray[entityID].x1
                                                 - DAT_EntityState::instance.entityArray[entityID].originX)
                                                 + DAT_RenderMap_DrawSomeX::instance,
-                                            (int)((
-                                                int)(((DAT_EntityState::instance.entityArray[entityID].y1 - _yOffset_01)
-                                                         - iVar26)
-                                                + DAT_RenderMap_DrawSomeY::instance)),
-                                            sVar30);
+                                            (int)(((DAT_EntityState::instance.entityArray[entityID].y1
+                                                       - DAT_EntityState::instance.entityArray[entityID].originY)
+                                                      - iVar26)
+                                                + DAT_RenderMap_DrawSomeY::instance),
+                                            (GmID)(DAT_CurrentlyRenderedSpriteID::instance),
+                                            DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
                                         _yOffset_01 = DAT_RenderMap_YOffset::instance;
                                     } else {
-                                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                            DAT_TextureRenderCoreObject::ptr)(
-                                            (eGM)DAT_CurrentlyRenderedSpriteID::instance,
-                                            DAT_EntityState::instance.entityArray[entityID].graphicType2,
-                                            (DAT_EntityState::instance.entityArray[entityID].x1
-                                                - DAT_EntityState::instance.entityArray[entityID].originX)
-                                                + DAT_RenderMap_DrawSomeX::instance,
-                                            (int)((
-                                                int)(((DAT_EntityState::instance.entityArray[entityID].y1 - _yOffset_01)
-                                                         - iVar26)
-                                                + DAT_RenderMap_DrawSomeY::instance)));
-                                        _yOffset_01 = DAT_RenderMap_YOffset::instance;
+                                        _yOffset_01 = DAT_EntityState::instance.entityArray[entityID].originY;
+                                        if (sVar30 != 0) {
+                                            MACRO_CALL_MEMBER(
+                                                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
+                                                DAT_TextureRenderCoreObject::ptr)(
+                                                (GmID)DAT_CurrentlyRenderedSpriteID::instance,
+                                                DAT_EntityState::instance.entityArray[entityID].graphicType2,
+                                                (DAT_EntityState::instance.entityArray[entityID].x1
+                                                    - DAT_EntityState::instance.entityArray[entityID].originX)
+                                                    + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((int)(((DAT_EntityState::instance.entityArray[entityID].y1
+                                                                 - _yOffset_01)
+                                                                - iVar26)
+                                                    + DAT_RenderMap_DrawSomeY::instance)),
+                                                sVar30);
+                                            _yOffset_01 = DAT_RenderMap_YOffset::instance;
+                                        } else {
+                                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                                DAT_TextureRenderCoreObject::ptr)(
+                                                (eGM)DAT_CurrentlyRenderedSpriteID::instance,
+                                                DAT_EntityState::instance.entityArray[entityID].graphicType2,
+                                                (DAT_EntityState::instance.entityArray[entityID].x1
+                                                    - DAT_EntityState::instance.entityArray[entityID].originX)
+                                                    + DAT_RenderMap_DrawSomeX::instance,
+                                                (int)((int)(((DAT_EntityState::instance.entityArray[entityID].y1
+                                                                 - _yOffset_01)
+                                                                - iVar26)
+                                                    + DAT_RenderMap_DrawSomeY::instance)));
+                                            _yOffset_01 = DAT_RenderMap_YOffset::instance;
+                                        }
                                     }
                                 }
-                            LAB_004eb439:
-                                iVar26 = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
-                                if ((entityID == iVar26)
-                                    || (entityID = iVar26, DAT_GameSynchronyState::instance.syncStatus != 0))
-                                    break;
-                            } else {
-                                entityID
-                                    = (uint)DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                             }
-                            if (entityID == 0)
+
+                            iVar26 = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
+                            if ((entityID == iVar26)
+                                || (entityID = iVar26, DAT_GameSynchronyState::instance.syncStatus != 0))
                                 break;
-                        } while (true);
+
+                        } while (entityID != 0);
                     }
                     entityID = (uint)(byte)DAT_TileMapState::instance.EntityLayerLT25[layerTileIndex];
                     _yOffset_01 = 0;
@@ -2701,21 +2725,6 @@ namespace Rendering {
         DAT_TextureRenderCoreObject::instance.isZoom2 = 0;
         DAT_TileMapState::instance.field_0x5549b8 = 0;
         return;
-    switchD_004eb2c9_caseD_4d:
-        MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering, this)(
-            4294967295,
-            (DAT_EntityState::instance.entityArray[entityID].x1
-                - DAT_EntityState::instance.entityArray[entityID].originX)
-                + DAT_RenderMap_DrawSomeX::instance,
-            ((DAT_EntityState::instance.entityArray[entityID].y1
-                 - DAT_EntityState::instance.entityArray[entityID].originY)
-                - iVar26)
-                + DAT_RenderMap_DrawSomeY::instance,
-            (undefined4)(DAT_EntityState::instance.entityArray[entityID].graphicType2),
-            (undefined4)(DAT_EntityState::instance.entityArray[entityID].unkMinusOne),
-            (undefined4)(DAT_EntityState::instance.entityArray[entityID].imageID), 0);
-        _yOffset_01 = DAT_RenderMap_YOffset::instance;
-        goto LAB_004eb439;
     }
 
 }
