@@ -43,7 +43,6 @@
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/DAT_GMImageOffsets.hpp"
-#include "OpenSHC/Globals/DAT_GMImageSizes.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -1199,11 +1198,11 @@ namespace Rendering {
                                                                 DAT_UnitsState::instance.units[unitID].drawHeight1
                                                                     - iVar26,
                                                                 (byte*)((
-                                                                    int)((DAT_GMImageSizes::instance
+                                                                    int)((DAT_GMImageOffsets::instance
                                                                               [GMFirstPictureIndex::instance
                                                                                       [DAT_CurrentlyRenderedSpriteID::
                                                                                               instance]
-                                                                                  + _yOffset_01 + 0x1c51f]
+                                                                                  + _yOffset_01 - 1]
                                                                     + (int)DAT_TextureRenderCoreObject::instance
                                                                         .gmProcessedImageData))));
                                                         }
@@ -1228,11 +1227,11 @@ namespace Rendering {
                                                                 DAT_UnitsState::instance.units[unitID].drawHeight1
                                                                     - iVar26,
                                                                 (byte*)((
-                                                                    int)((DAT_GMImageSizes::instance
+                                                                    int)((DAT_GMImageOffsets::instance
                                                                               [GMFirstPictureIndex::instance
                                                                                       [DAT_CurrentlyRenderedSpriteID::
                                                                                               instance]
-                                                                                  + _yOffset_01 + 0x1c51f]
+                                                                                  + _yOffset_01 - 1]
                                                                     + (int)DAT_TextureRenderCoreObject::instance
                                                                         .gmProcessedImageData))));
                                                         }
@@ -1681,10 +1680,10 @@ namespace Rendering {
                                                         (int)((int)(DAT_UnitsState::instance.units[unitID].drawWidth)),
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1 - iVar26,
                                                         (byte*)((
-                                                            int)((DAT_GMImageSizes::instance
+                                                            int)((DAT_GMImageOffsets::instance
                                                                       [GMFirstPictureIndex::instance
                                                                               [DAT_CurrentlyRenderedSpriteID::instance]
-                                                                          + _yOffset_01 + 0x1c51f]
+                                                                          + _yOffset_01 - 1]
                                                             + (int)DAT_TextureRenderCoreObject::instance
                                                                 .gmProcessedImageData))));
                                                 }
@@ -1706,10 +1705,10 @@ namespace Rendering {
                                                         (int)((int)(DAT_UnitsState::instance.units[unitID].drawWidth)),
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1 - iVar26,
                                                         (byte*)((
-                                                            int)((DAT_GMImageSizes::instance
+                                                            int)((DAT_GMImageOffsets::instance
                                                                       [GMFirstPictureIndex::instance
                                                                               [DAT_CurrentlyRenderedSpriteID::instance]
-                                                                          + _yOffset_01 + 0x1c51f]
+                                                                          + _yOffset_01 - 1]
                                                             + (int)DAT_TextureRenderCoreObject::instance
                                                                 .gmProcessedImageData))));
                                                 }
