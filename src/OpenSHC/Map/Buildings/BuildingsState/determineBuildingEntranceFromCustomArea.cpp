@@ -25,7 +25,11 @@ namespace Map {
             // ((row + x) - param_3) + DAT_TempXOffset; MSVC reassociates the sum, so every operand order and grouping
             // of the expression compiles the same (all 24 orders, split compound statements, casts and unsigned types
             // tried, also under /GL). Computing tileX apart from the row is what
-            // gives the entry stores the original's DAT_TempXOffset - param_3 + x order.
+            // gives the entry stores the original's DAT_TempXOffset - param_3 + x order. The operand order is not
+            // a property of the expression: one extra stored expression anywhere before the first tile computation
+            // (e.g. this->campfireSpotX = param_2 + 50) gives the original order in all three loops, two to four
+            // do not and five does again, so it follows the compiler's internal symbol numbering. No neutral
+            // rewrite of the setup code (~100 tried: declaration order, Building&, ternaries, casts) shifts it.
             // Finds an entrance tile of the building that can be reached from the tile (x, y).
             // param_3 enlarges the area around the building by one tile, param_2 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
