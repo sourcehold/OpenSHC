@@ -281,7 +281,7 @@ namespace Rendering {
         this->viewportState.mouseRayUnitID = 0;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         iVar31 = 1;
-        if (1 < (int)DAT_UnitsState::instance.maxUnitCount) {
+        if (1 < DAT_UnitsState::instance.maxUnitCount) {
             psVar17 = &DAT_UnitsState::instance.units[1].drawX;
             do {
                 if (psVar17[60] != OpenSHC::Map::Units::ULS_INVISIBLE) {
@@ -292,7 +292,7 @@ namespace Rendering {
                 }
                 iVar31 = iVar31 + 1;
                 psVar17 = psVar17 + 584;
-            } while (iVar31 < (int)DAT_UnitsState::instance.maxUnitCount);
+            } while (iVar31 < DAT_UnitsState::instance.maxUnitCount);
         }
         iVar31 = 1;
         if (1 < DAT_BuildingsState::instance.maxBuildingsCount) {
@@ -522,8 +522,9 @@ namespace Rendering {
                             if ((char)uVar10 < '\0') {
                                 DAT_GmImageAddressToBeRendered::instance
                                     = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
-                                    + DAT_MapRenderDefinedData::instance.field_0x4dc
-                                          [(int)(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2) % 12];
+                                    + DAT_MapRenderDefinedData::instance
+                                          .field_0x4dc[(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2)
+                                              % 12];
                             } else if ((uVar10 & 0x40) == 0) {
                                 if ((uVar10 & 0x100) == 0) {
                                     if ((uVar10 & 0x200) == 0) {
@@ -603,7 +604,7 @@ namespace Rendering {
                                 = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
                                 & 0x5a;
                             DAT_00ed314c::instance = this->unknownCounterUntil_0x10 + DAT_00ed314c::instance;
-                            if (15 < (int)DAT_00ed314c::instance) {
+                            if (15 < DAT_00ed314c::instance) {
                                 DAT_00ed314c::instance = DAT_00ed314c::instance - 16;
                             }
                             DAT_GmImageAddressToBeRendered::instance
@@ -751,9 +752,9 @@ namespace Rendering {
                         && (MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTerrainTilesCenterPiece)(), bVar12 != 0)) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS,
-                            (int)(DAT_RenderMap_ImageID::instance), (int)(DAT_RenderMap_DrawSomeX::instance),
-                            (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
-                                + DAT_RenderMap_DrawSomeY::instance),
+                            DAT_RenderMap_ImageID::instance, DAT_RenderMap_DrawSomeX::instance,
+                            (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
+                                + DAT_RenderMap_DrawSomeY::instance,
                             24);
                     }
                     if (DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].direction != 0
@@ -850,7 +851,7 @@ namespace Rendering {
                             }
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_CASTLE_ANIMS,
-                                (int)(DAT_GmImageAddressToBeRendered::instance), _yOffset_01,
+                                DAT_GmImageAddressToBeRendered::instance, _yOffset_01,
                                 (int)(iVar26 + DAT_RenderMap_DrawSomeY::instance));
                         }
                     }
@@ -898,8 +899,7 @@ namespace Rendering {
                                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                                 DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
                                                 this->floatersArray[uVar32].imageID,
-                                                (int)(this->floatersArray[uVar32].originX
-                                                    + DAT_RenderMap_DrawSomeX::instance),
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                                 (int)((this->floatersArray[uVar32].originY - _yOffset_01)
                                                     + DAT_RenderMap_DrawSomeY::instance));
                                         } else {
@@ -908,8 +908,7 @@ namespace Rendering {
                                                 DAT_TextureRenderCoreObject::ptr)(
                                                 (GmID)this->floatersArray[uVar32].gmID,
                                                 this->floatersArray[uVar32].imageID,
-                                                (int)(this->floatersArray[uVar32].originX
-                                                    + DAT_RenderMap_DrawSomeX::instance),
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                                 (int)((this->floatersArray[uVar32].originY - _yOffset_01)
                                                     + DAT_RenderMap_DrawSomeY::instance),
                                                 (int)(uVar29 >> 0x10));
@@ -920,8 +919,7 @@ namespace Rendering {
                                         MACRO_CALL_MEMBER(
                                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                             DAT_TextureRenderCoreObject::ptr)((GmID)GVar11, iVar26,
-                                            (int)(this->floatersArray[uVar32].originX
-                                                + DAT_RenderMap_DrawSomeX::instance),
+                                            this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                             (int)((this->floatersArray[uVar32].originY - _yOffset_01)
                                                 + DAT_RenderMap_DrawSomeY::instance),
                                             GVar11, ((int)uVar29 >> 0x10) + iVar26, 0);
@@ -933,8 +931,7 @@ namespace Rendering {
                                         this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                         (this->floatersArray[uVar32].originY - _yOffset_01)
                                             + DAT_RenderMap_DrawSomeY::instance,
-                                        (undefined4)((int)(this->floatersArray[uVar32].imageID)),
-                                        (undefined4)((int)(uVar29)),
+                                        (undefined4)(this->floatersArray[uVar32].imageID), (undefined4)((int)(uVar29)),
                                         (undefined4)((int)(this->floatersArray[uVar32].gmID)), 0);
                                 }
                             }
@@ -1000,8 +997,8 @@ namespace Rendering {
                         && _flatView == 0 && DAT_TileMapState::instance.refreshRelatedOne != 0
                         && (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0xc) == 4) {
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding2, this)(
-                            local_54, (int)(DAT_RenderMap_DrawSomeX::instance),
-                            (int)(DAT_00ed3154::instance + DAT_RenderMap_DrawSomeY::instance), layerTileIndex);
+                            local_54, DAT_RenderMap_DrawSomeX::instance,
+                            DAT_00ed3154::instance + DAT_RenderMap_DrawSomeY::instance, layerTileIndex);
                     }
                     /*
                       ------ BEGIN RENDER UNITS ------
@@ -1111,8 +1108,7 @@ namespace Rendering {
                                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                           renderUnitAnimationWithBlendingUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(sVar30,
-                                                        (int)(DAT_UnitsState::instance.units[unitID].field_0x86
-                                                            + sVar20),
+                                                        DAT_UnitsState::instance.units[unitID].field_0x86 + sVar20,
                                                         sVar5,
                                                         (int)(DAT_UnitsState::instance.units[unitID].drawHeight1
                                                             - local_c),
@@ -1627,7 +1623,7 @@ namespace Rendering {
                                                                       renderUnitAnimationUnk,
                                                     DAT_TextureRenderCoreObject::ptr)(
                                                     DAT_UnitsState::instance.units[unitID].drawX,
-                                                    (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
+                                                    sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
                                                     DAT_UnitsState::instance.units[unitID].drawWidth,
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - _yOffset_01,
                                                     (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1643,7 +1639,7 @@ namespace Rendering {
                                                                       renderUnitAnimationWithBlendingUnk,
                                                     DAT_TextureRenderCoreObject::ptr)(
                                                     DAT_UnitsState::instance.units[unitID].drawX,
-                                                    (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
+                                                    sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
                                                     DAT_UnitsState::instance.units[unitID].drawWidth,
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - _yOffset_01,
                                                     (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1951,14 +1947,14 @@ namespace Rendering {
                                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                         DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance,
                                         DAT_EntityState::instance.entityArray[entityID].graphicType2,
-                                        (int)((DAT_EntityState::instance.entityArray[entityID].x1
-                                                  - DAT_EntityState::instance.entityArray[entityID].originX)
-                                            + DAT_RenderMap_DrawSomeX::instance),
+                                        (DAT_EntityState::instance.entityArray[entityID].x1
+                                            - DAT_EntityState::instance.entityArray[entityID].originX)
+                                            + DAT_RenderMap_DrawSomeX::instance,
                                         (int)(((DAT_EntityState::instance.entityArray[entityID].y1
                                                    - DAT_EntityState::instance.entityArray[entityID].originY)
                                                   - iVar26)
                                             + DAT_RenderMap_DrawSomeY::instance),
-                                        (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)),
+                                        (GmID)(DAT_CurrentlyRenderedSpriteID::instance),
                                         DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
                                     _yOffset_01 = DAT_RenderMap_YOffset::instance;
                                 } else {
@@ -1968,9 +1964,9 @@ namespace Rendering {
                                             DAT_TextureRenderCoreObject::ptr)(
                                             (eGM)DAT_CurrentlyRenderedSpriteID::instance,
                                             DAT_EntityState::instance.entityArray[entityID].graphicType2,
-                                            (int)((DAT_EntityState::instance.entityArray[entityID].x1
-                                                      - DAT_EntityState::instance.entityArray[entityID].originX)
-                                                + DAT_RenderMap_DrawSomeX::instance),
+                                            (DAT_EntityState::instance.entityArray[entityID].x1
+                                                - DAT_EntityState::instance.entityArray[entityID].originX)
+                                                + DAT_RenderMap_DrawSomeX::instance,
                                             (int)((
                                                 int)(((DAT_EntityState::instance.entityArray[entityID].y1 - _yOffset_01)
                                                          - iVar26)
@@ -1982,9 +1978,9 @@ namespace Rendering {
                                             DAT_TextureRenderCoreObject::ptr)(
                                             (GmID)DAT_CurrentlyRenderedSpriteID::instance,
                                             DAT_EntityState::instance.entityArray[entityID].graphicType2,
-                                            (int)((DAT_EntityState::instance.entityArray[entityID].x1
-                                                      - DAT_EntityState::instance.entityArray[entityID].originX)
-                                                + DAT_RenderMap_DrawSomeX::instance),
+                                            (DAT_EntityState::instance.entityArray[entityID].x1
+                                                - DAT_EntityState::instance.entityArray[entityID].originX)
+                                                + DAT_RenderMap_DrawSomeX::instance,
                                             (int)((
                                                 int)(((DAT_EntityState::instance.entityArray[entityID].y1 - _yOffset_01)
                                                          - iVar26)
@@ -2036,14 +2032,14 @@ namespace Rendering {
                                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                             DAT_TextureRenderCoreObject::ptr)(
                                             (GmID)DAT_CurrentlyRenderedSpriteID::instance, iVar26,
-                                            (int)((DAT_EntityState::instance.entityArray[entityID].x1
-                                                      - DAT_EntityState::instance.entityArray[entityID].originX)
-                                                + DAT_RenderMap_DrawSomeX::instance),
+                                            (DAT_EntityState::instance.entityArray[entityID].x1
+                                                - DAT_EntityState::instance.entityArray[entityID].originX)
+                                                + DAT_RenderMap_DrawSomeX::instance,
                                             (int)(((DAT_EntityState::instance.entityArray[entityID].y1
                                                        - DAT_EntityState::instance.entityArray[entityID].originY)
                                                       - iVar18)
                                                 + DAT_RenderMap_DrawSomeY::instance),
-                                            (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)),
+                                            (GmID)(DAT_CurrentlyRenderedSpriteID::instance),
                                             DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
                                     } else {
                                         iVar27 = DAT_EntityState::instance.entityArray[entityID].originY;
@@ -2135,7 +2131,7 @@ namespace Rendering {
                         iVar26 = DAT_LandscapeState::instance.trees[iVar23].animationFrameUnk;
                         iVar18 = GMFirstPictureIndex::instance[DAT_CurrentlyRenderedSpriteID::instance];
                         _yOffset_01 = iVar18 - 1 + iVar26;
-                        if (0 < (int)DAT_CurrentlyRenderedSpriteID::instance && _yOffset_01 != 0 && iVar26 != 0) {
+                        if (0 < DAT_CurrentlyRenderedSpriteID::instance && _yOffset_01 != 0 && iVar26 != 0) {
                             DAT_RenderedUnitOwner::instance
                                 = DAT_LandscapeState::instance.trees[iVar23].appleTreeColorVariation;
                             DAT_TextureRenderCoreObject::instance.mbr_0x10 = 1;
@@ -2148,10 +2144,10 @@ namespace Rendering {
                                 (DAT_RenderMap_DrawSomeX::instance
                                     - DAT_LandscapeState::instance.trees[iVar23].gmOriginX)
                                     + 14,
-                                (int)(((DAT_RenderMap_DrawSomeY::instance
-                                           - DAT_LandscapeState::instance.trees[iVar23].gmOriginY)
-                                          - DAT_RenderMap_YOffset::instance)
-                                    + 6),
+                                ((DAT_RenderMap_DrawSomeY::instance
+                                     - DAT_LandscapeState::instance.trees[iVar23].gmOriginY)
+                                    - DAT_RenderMap_YOffset::instance)
+                                    + 6,
                                 DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 - 1].width,
                                 DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 - 1].height,
                                 (byte*)((int)((DAT_GMImageOffsets::instance[_yOffset_01]
@@ -2161,9 +2157,8 @@ namespace Rendering {
                                 && (DAT_LandscapeState::instance.trees[iVar23].unknownDistanceRelatedToCrow != 0)) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_BODY_CROW,
-                                    this->unknownCounterUntil_0x24 % 12 + 73,
-                                    (int)(DAT_RenderMap_DrawSomeX::instance - 30),
-                                    (int)((DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_YOffset::instance) - 220));
+                                    this->unknownCounterUntil_0x24 % 12 + 73, DAT_RenderMap_DrawSomeX::instance - 30,
+                                    (DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_YOffset::instance) - 220);
                             }
                         }
                         MACRO_CALL_MEMBER(
@@ -2171,7 +2166,7 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(8);
                     }
-                    if (DAT_RenderMap_RowsLeft::instance != 0 && (int)DAT_RenderMap_RowsLeft::instance < 255
+                    if (DAT_RenderMap_RowsLeft::instance != 0 && DAT_RenderMap_RowsLeft::instance < 255
                         && bVar13 != 0) {
                         uVar32 = (uint)(short)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
                         DAT_RenderMap_WhatToDraw::instance = uVar32 & 3;
@@ -2189,10 +2184,9 @@ namespace Rendering {
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS,
-                                        (int)(DAT_RenderMap_ImageID::instance + 8),
-                                        (int)(DAT_RenderMap_DrawSomeX::instance),
-                                        (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9
-                                            + DAT_RenderMap_DrawSomeY::instance),
+                                        DAT_RenderMap_ImageID::instance + 8, DAT_RenderMap_DrawSomeX::instance,
+                                        (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9
+                                            + DAT_RenderMap_DrawSomeY::instance,
                                         24);
                                 }
                             } else {
@@ -2206,8 +2200,8 @@ namespace Rendering {
                                     }
                                     DAT_GmImageAddressToBeRendered::instance
                                         = layerTileIndex - 1 + GMFirstPictureIndex::instance[9];
-                                    if (32 < (int)DAT_RenderMap_RowsLeft::instance
-                                        && (int)(DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_RowsLeft::instance)
+                                    if (32 < DAT_RenderMap_RowsLeft::instance
+                                        && (DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_RowsLeft::instance)
                                             < local_5c - 160) {
                                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent,
                                             DAT_SFXState::ptr)(6);
@@ -2346,8 +2340,8 @@ namespace Rendering {
                                 (char)DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance]
                                         .horizontalOffsetImage
                                     + DAT_RenderMap_DrawSomeX::instance,
-                                (int)(((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - iVar23)
-                                    + DAT_RenderMap_DrawSomeY::instance),
+                                ((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - iVar23)
+                                    + DAT_RenderMap_DrawSomeY::instance,
                                 (int)((char)DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance]
                                         .buildingWidth),
                                 iVar23 + 7,
@@ -2369,8 +2363,8 @@ namespace Rendering {
                                             .addXgetTile
                                         + 2 + (int)(short)DAT_BuildingsState::instance.buildings[uVar29].x) {
                                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderBuildingAnimation,
-                                    this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 16),
-                                    (int)(DAT_00ed3154::instance + 24 + DAT_RenderMap_DrawSomeY::instance),
+                                    this)(uVar29, DAT_RenderMap_DrawSomeX::instance + 16,
+                                    DAT_00ed3154::instance + 24 + DAT_RenderMap_DrawSomeY::instance,
                                     (undefined4)((int)(_yOffset_01)), 1);
                             }
                             uVar10 = *puVar1;
@@ -2381,15 +2375,15 @@ namespace Rendering {
                                         if ((uVar10 & 0xc) == 12) {
                                             MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::renderBuildingAnimation,
-                                                this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 16),
-                                                (int)(DAT_00ed3154::instance + 40 + DAT_RenderMap_DrawSomeY::instance),
+                                                this)(uVar29, DAT_RenderMap_DrawSomeX::instance + 16,
+                                                DAT_00ed3154::instance + 40 + DAT_RenderMap_DrawSomeY::instance,
                                                 (undefined4)((int)(_yOffset_01)), 0);
                                         } else if ((uVar10 & 8) != 0) {
                                             MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding,
-                                                this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance),
-                                                (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
-                                                    + DAT_RenderMap_DrawSomeY::instance),
+                                                this)(uVar29, DAT_RenderMap_DrawSomeX::instance,
+                                                (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
+                                                    + DAT_RenderMap_DrawSomeY::instance,
                                                 _yOffset_01);
                                         }
                                     }
@@ -2399,13 +2393,11 @@ namespace Rendering {
                                     if ((uVar10 & 8) == 0) {
                                         MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding2,
-                                            this)(
-                                            uVar29, (int)(DAT_RenderMap_DrawSomeX::instance), iVar23, _yOffset_01);
+                                            this)(uVar29, DAT_RenderMap_DrawSomeX::instance, iVar23, _yOffset_01);
                                     } else {
                                         MACRO_CALL_MEMBER(
                                             OpenSHC::Rendering::ViewportRenderState_Func::renderGmOverlayBuilding,
-                                            this)(
-                                            uVar29, (int)(DAT_RenderMap_DrawSomeX::instance), iVar23, _yOffset_01);
+                                            this)(uVar29, DAT_RenderMap_DrawSomeX::instance, iVar23, _yOffset_01);
                                     }
                                 }
                             }
@@ -2420,10 +2412,10 @@ namespace Rendering {
                     if ((DAT_00ed3148::instance & 8) != 0 && (*puVar1 & 0x4000) != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                            (int)(DAT_TileMapState::instance.cursorOverlayAnimationFrame),
-                            (int)(DAT_RenderMap_DrawSomeX::instance - 35),
-                            (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - 74
-                                + DAT_RenderMap_DrawSomeY::instance),
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame,
+                            DAT_RenderMap_DrawSomeX::instance - 35,
+                            (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - 74
+                                + DAT_RenderMap_DrawSomeY::instance,
                             OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                             DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16, 0);
                         *puVar1 = *puVar1 & 0xbfff;
@@ -2479,8 +2471,7 @@ namespace Rendering {
                                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                                 DAT_TextureRenderCoreObject::ptr)((eGM)this->floatersArray[uVar32].gmID,
                                                 this->floatersArray[uVar32].imageID,
-                                                (int)(this->floatersArray[uVar32].originX
-                                                    + DAT_RenderMap_DrawSomeX::instance),
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                                 (int)((this->floatersArray[uVar32].originY - iVar26)
                                                     + DAT_RenderMap_DrawSomeY::instance));
                                         } else {
@@ -2489,8 +2480,7 @@ namespace Rendering {
                                                 DAT_TextureRenderCoreObject::ptr)(
                                                 (GmID)this->floatersArray[uVar32].gmID,
                                                 this->floatersArray[uVar32].imageID,
-                                                (int)(this->floatersArray[uVar32].originX
-                                                    + DAT_RenderMap_DrawSomeX::instance),
+                                                this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                                 (int)((this->floatersArray[uVar32].originY - iVar26)
                                                     + DAT_RenderMap_DrawSomeY::instance),
                                                 (int)(uVar29 >> 0x10));
@@ -2501,8 +2491,7 @@ namespace Rendering {
                                         MACRO_CALL_MEMBER(
                                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                             DAT_TextureRenderCoreObject::ptr)((GmID)GVar11, iVar18,
-                                            (int)(this->floatersArray[uVar32].originX
-                                                + DAT_RenderMap_DrawSomeX::instance),
+                                            this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                             (int)((this->floatersArray[uVar32].originY - iVar26)
                                                 + DAT_RenderMap_DrawSomeY::instance),
                                             GVar11, ((int)uVar29 >> 0x10) + iVar18, 0);
@@ -2514,8 +2503,8 @@ namespace Rendering {
                                         this->floatersArray[uVar32].originX + DAT_RenderMap_DrawSomeX::instance,
                                         (this->floatersArray[uVar32].originY - iVar26)
                                             + DAT_RenderMap_DrawSomeY::instance,
-                                        (undefined4)((int)(this->floatersArray[uVar32].imageID)),
-                                        (undefined4)((int)(this->floatersArray[uVar32].variation)),
+                                        (undefined4)(this->floatersArray[uVar32].imageID),
+                                        (undefined4)(this->floatersArray[uVar32].variation),
                                         (undefined4)((int)(this->floatersArray[uVar32].gmID)), 0);
                                 }
                             }
@@ -2760,7 +2749,7 @@ namespace Rendering {
                  - DAT_EntityState::instance.entityArray[entityID].originY)
                 - iVar26)
                 + DAT_RenderMap_DrawSomeY::instance,
-            (undefined4)((int)(DAT_EntityState::instance.entityArray[entityID].graphicType2)),
+            (undefined4)(DAT_EntityState::instance.entityArray[entityID].graphicType2),
             (undefined4)(DAT_EntityState::instance.entityArray[entityID].unkMinusOne),
             (undefined4)(DAT_EntityState::instance.entityArray[entityID].imageID), 0);
         _yOffset_01 = DAT_RenderMap_YOffset::instance;

@@ -124,8 +124,7 @@ namespace Rendering {
                 if (_blendStrength < 0) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                         DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance, _imageID,
-                        _drawX, _drawY, (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)), (int)(_gmID),
-                        -1 - _blendStrength);
+                        _drawX, _drawY, (GmID)(DAT_CurrentlyRenderedSpriteID::instance), _gmID, -1 - _blendStrength);
                 } else if (_blendStrength == 0) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
@@ -498,8 +497,8 @@ namespace Rendering {
                     }
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)((GmID)_gmID, _imageID, _drawX, _drawY, (GmID)((int)(_gmID)),
-                        (_blendStrength >> 16) + _imageID, 0);
+                        DAT_TextureRenderCoreObject::ptr)(
+                        (GmID)_gmID, _imageID, _drawX, _drawY, (GmID)(_gmID), (_blendStrength >> 16) + _imageID, 0);
                 }
             }
         }

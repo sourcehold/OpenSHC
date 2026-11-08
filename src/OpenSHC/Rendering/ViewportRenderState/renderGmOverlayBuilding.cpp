@@ -96,22 +96,20 @@ namespace Rendering {
                     if (DAT_GmImageAddressToBeRendered::instance != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
                             DAT_TextureRenderCoreObject::ptr)(xUnk - 35, yUnk - 57,
-                            (int)((
-                                int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width)),
+                            DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width,
                             DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height,
-                            (byte*)((int)((DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]
-                                + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
+                            DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                + DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]);
                     }
                     DAT_GmImageAddressToBeRendered::instance
                         = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2;
                     if (DAT_GmImageAddressToBeRendered::instance != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
                             DAT_TextureRenderCoreObject::ptr)(xUnk - 56, yUnk - 70,
-                            (int)((
-                                int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width)),
+                            DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width,
                             DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height,
-                            (byte*)((int)((DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]
-                                + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
+                            DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                + DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]);
                     }
                     break;
                 case OpenSHC::Map::Buildings::BT_IRONMINE:
@@ -363,7 +361,7 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(overlayGmID,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage1,
                             (xUnk
-                                - (int)DAT_GMImageHeaders::instance
+                                - DAT_GMImageHeaders::instance
                                         .imh[blendFrame + GMFirstPictureIndex::instance[overlayGmID] - 1]
                                         .width
                                     / 2)
@@ -381,7 +379,7 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(overlayGmID,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage3,
                             (xUnk
-                                - (int)DAT_GMImageHeaders::instance
+                                - DAT_GMImageHeaders::instance
                                         .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] - 1]
                                         .width
                                     / 2)
@@ -399,7 +397,7 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(overlayGmID,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage9,
                             (xUnk
-                                - (int)DAT_GMImageHeaders::instance
+                                - DAT_GMImageHeaders::instance
                                         .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] - 1]
                                         .width
                                     / 2)
@@ -416,7 +414,7 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(overlayGmID, iVar9,
                             (xUnk
-                                - (int)DAT_GMImageHeaders::instance
+                                - DAT_GMImageHeaders::instance
                                         .imh[iVar9 + GMFirstPictureIndex::instance[overlayGmID] - 1]
                                         .width
                                     / 2)
@@ -428,8 +426,7 @@ namespace Rendering {
                                 - 15 + iVar10,
                             frame);
                     }
-                    if (param_4
-                        == *(int*)(DAT_BuildingsState::instance.buildings[tileIndex].workers + local_4 * 2 + 8)) {
+                    if (param_4 == DAT_BuildingsState::instance.buildings[tileIndex].tileRefs[local_4]) {
                         DAT_RenderedUnitOwner::instance
                             = DAT_BuildingsState::instance.buildings[tileIndex].playerColorUnk;
                         frame = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage8;
@@ -1585,7 +1582,7 @@ namespace Rendering {
             }
         }
         frame = DAT_BuildingDefinedData::instance
-                    .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType];
+                    .BuildingHeights[DAT_BuildingsState::instance.buildings[tileIndex].buildingType];
         int barXOffset = 0;
         int barYOffset = 0;
         if (frame == 0) {
@@ -1631,7 +1628,8 @@ namespace Rendering {
             case OpenSHC::Map::Buildings::BT_TOWER5:
                 barYOffset = barYOffset + 100;
             }
-            if ((uint)(iVar6 / 10) <= 10) {
+            int const healthImage = iVar6 / 10;
+            if (healthImage >= 0 && healthImage <= 10) {
                 buildingType = DAT_BuildingsState::instance.buildings[tileIndex].buildingType;
                 if ((buildingType == OpenSHC::Map::Buildings::BT_GRANARY)
                     || (buildingType == OpenSHC::Map::Buildings::BT_ARMORY)) {
@@ -1662,13 +1660,13 @@ namespace Rendering {
                         frame = (yUnk - frame) - barYOffset;
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 17, xUnk + 4, frame - 12);
+                            OpenSHC::DE::SHCDE::GM_FLOATS, healthImage + 17, xUnk + 4, frame - 12);
                     }
                 } else {
                     frame = (yUnk - frame) - barYOffset;
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                        OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 17, xUnk + 4, frame - 12);
+                        OpenSHC::DE::SHCDE::GM_FLOATS, healthImage + 17, xUnk + 4, frame - 12);
                 }
             }
         }
@@ -1681,7 +1679,7 @@ namespace Rendering {
                     xUnk - 35,
                     yUnk
                         - DAT_BuildingDefinedData::instance
-                            .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
+                            .BuildingHeights[DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
                         - barYOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOAT_POP_CIRC, animationTick + 211, 0);
             } else if (DAT_BuildingsState::instance.buildings[tileIndex].currentlyNeededEmployeeCount != 0
@@ -1691,7 +1689,7 @@ namespace Rendering {
                     DAT_TileMapState::instance.cursorOverlayAnimationFrame + 280, xUnk - 35,
                     yUnk
                         - DAT_BuildingDefinedData::instance
-                            .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
+                            .BuildingHeights[DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
                         - barYOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, DAT_TileMapState::instance.cursorOverlayAnimationFrame + 296,
                     0);
@@ -1705,7 +1703,7 @@ namespace Rendering {
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, overlayImage, xUnk - 35,
                 yUnk
                     - DAT_BuildingDefinedData::instance
-                        .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
+                        .BuildingHeights[DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
                     - barXOffset - 42,
                 OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
             DAT_BuildingsState::instance.buildings[tileIndex].field_0xc2 = 0;
@@ -1716,7 +1714,7 @@ namespace Rendering {
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, overlayImage, xUnk - 35,
                 yUnk
                     - DAT_BuildingDefinedData::instance
-                        .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
+                        .BuildingHeights[DAT_BuildingsState::instance.buildings[tileIndex].buildingType]
                     - barXOffset - 42,
                 OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
             DAT_BuildingsState::instance.buildings[tileIndex].field_0xc2 = 0;
