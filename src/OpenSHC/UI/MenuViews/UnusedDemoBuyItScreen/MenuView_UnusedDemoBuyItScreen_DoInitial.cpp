@@ -38,16 +38,17 @@ namespace UI {
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].height)
                     / 2);
             int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
             Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
             menu->yPosition = borderHeight;
+            // x apart from borderWidth puts the height in eax (one local for both: quick_diff 0.9535 -> 0.8605)
+            int x = borderWidth;
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
-                borderWidth += 24;
+                x = borderWidth + 24;
             }
-            menu->xPosition = borderWidth;
-            // x before y (y before x: quick_diff 0.8605 -> 0.8372); the original holds the height in eax, ours in ecx
-            DAT_MenuHandlerState::instance.x = borderWidth;
+            menu->xPosition = x;
             DAT_MenuHandlerState::instance.y = borderHeight;
+            DAT_MenuHandlerState::instance.x = x;
         }
 
     }

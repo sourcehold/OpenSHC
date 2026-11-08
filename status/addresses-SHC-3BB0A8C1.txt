@@ -6767,7 +6767,7 @@ SHC_3BB0A8C1_0x00426340 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00426570 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00426600 | 83.7% | style pass, x before y; height and width in swapped registers
+SHC_3BB0A8C1_0x00426600 | 97.7% | x in its own local; the menu y store placed before the resolution test
 
 SHC_3BB0A8C1_0x004266A0 | 100.0% | Reimplemented
 
