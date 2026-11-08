@@ -91,7 +91,7 @@ namespace Rendering {
             if ((DAT_TileMapState::instance.LogicLayer[tile] & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE) != 0) {
                 tileHeightOffset = tileHeightOffset
                     + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                        DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[tile]);
+                        DAT_BuildingsState::ptr)(DAT_TileMapState::instance.BuildingLayer[tile]);
             }
             if (this->viewportState.isZoomedOutUnk != 0) {
                 tileHeightOffset = tileHeightOffset / 2;

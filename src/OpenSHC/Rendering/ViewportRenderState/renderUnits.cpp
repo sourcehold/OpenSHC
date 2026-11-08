@@ -194,7 +194,7 @@ namespace Rendering {
                                     DAT_TextureRenderCoreObject::instance.gmProcessedImageData
                                         + DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[(
                                                                            int)DAT_CurrentlyRenderedSpriteID::instance]
-                                            + (int)graphicSize - 1],
+                                            + graphicSize - 1],
                                     32 - overlayY);
                             }
                         }
@@ -220,7 +220,7 @@ namespace Rendering {
                         if (graphicSize < 0) {
                             overlayX = 0;
                         } else {
-                            overlayX = (int)graphicSize;
+                            overlayX = graphicSize;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
                             DAT_TextureRenderCoreObject::ptr)(
@@ -229,15 +229,14 @@ namespace Rendering {
                         if ((graphicSize != 4) && (1 < graphicSize)) {
                             DAT_RenderedUnitOwner::instance
                                 = (uint)DAT_UnitsState::instance.units[_unitID].displayColorPlayerID;
-                            DAT_CurrentlyRenderedSpriteID::instance
-                                = (int)DAT_UnitsState::instance.units[_unitID].gmIDUnk;
+                            DAT_CurrentlyRenderedSpriteID::instance = DAT_UnitsState::instance.units[_unitID].gmIDUnk;
                             overlayX = DAT_UnitsState::instance.units[_unitID].imageIDUnk;
                             if (0 < overlayX) {
                                 graphicSize = DAT_UnitsState::instance.units[_unitID].field_0x88;
                                 if (graphicSize < 0) {
                                     overlayY = 0;
                                 } else {
-                                    overlayY = (int)graphicSize;
+                                    overlayY = graphicSize;
                                 }
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
@@ -256,7 +255,7 @@ namespace Rendering {
                                 if (graphicSize < 0) {
                                     overlayY = 0;
                                 } else {
-                                    overlayY = (int)graphicSize;
+                                    overlayY = graphicSize;
                                 }
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
@@ -359,7 +358,7 @@ namespace Rendering {
                             && (DAT_UnitsState::instance.units[_unitID].usingTeleport == 0)) {
                             if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
                                 savedPixelColor = DAT_UnitsState::instance.units[_unitID].maxHealthRatingLord;
-                                overlayX = (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
+                                overlayX = DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
                                 if (savedPixelColor == 0) {
                                     overlayX = overlayX - 6 + _drawY;
                                     overlayY = DAT_UnitsState::instance.units[_unitID].healthbar + 17;
@@ -409,7 +408,7 @@ namespace Rendering {
                         if (savedPixelColor != 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                (int)(savedPixelColor + 212), (int)(DAT_UnitsState::instance.units[_unitID].drawX),
+                                (int)(savedPixelColor + 212), DAT_UnitsState::instance.units[_unitID].drawX,
                                 (int)(DAT_UnitsState::instance.units[_unitID].drawY - 54
                                     + DAT_UnitsState::instance.units[_unitID].someDrawYOffset),
                                 OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(savedPixelColor + 220), 0);
@@ -422,9 +421,9 @@ namespace Rendering {
                             if (savedPixelColor == 1) {
                                 maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 48;
                                 overlayX = DAT_UnitsState::instance.units[_unitID].drawY - 70
-                                    + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
+                                    + DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
                                 overlayY = DAT_UnitsState::instance.units[_unitID].field_0x2a - 53
-                                    + (int)DAT_UnitsState::instance.units[_unitID].drawX;
+                                    + DAT_UnitsState::instance.units[_unitID].drawX;
                                 int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 32;
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
@@ -460,8 +459,8 @@ namespace Rendering {
                                         overlayX = 36;
                                     }
                                     maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
-                                    overlayX = ((int)DAT_UnitsState::instance.units[_unitID].drawY
-                                                   + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
+                                    overlayX = (DAT_UnitsState::instance.units[_unitID].drawY
+                                                   + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
                                         - overlayX;
                                     overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
                                     int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116;
@@ -500,8 +499,8 @@ namespace Rendering {
                                         overlayX = 36;
                                     }
                                     maskImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 164;
-                                    overlayX = ((int)DAT_UnitsState::instance.units[_unitID].drawY
-                                                   + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
+                                    overlayX = (DAT_UnitsState::instance.units[_unitID].drawY
+                                                   + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
                                         - overlayX;
                                     overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
                                     int overlayImageID = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 148;

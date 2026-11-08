@@ -627,8 +627,7 @@ namespace Rendering {
                     DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance,
                     DAT_BuildingsState::instance.buildings[buildingID].animationFrame,
                     DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
-                    DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY,
-                    (int)((int)(blendStrength)));
+                    DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY, (int)(blendStrength));
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)((eGM)DAT_CurrentlyRenderedSpriteID::instance,
