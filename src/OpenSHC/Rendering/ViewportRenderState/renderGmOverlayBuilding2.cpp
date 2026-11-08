@@ -541,13 +541,13 @@ namespace Rendering {
         DAT_CurrentlyRenderedSpriteID::instance = (GmID)DAT_BuildingsState::instance.buildings[buildingID].spriteID2;
         buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         DAT_RenderedUnitOwner::instance = 0;
-        // the field, not buildingType: testing the local lets MSVC jump the killing-pit paths past this check
         if (buildingType == OpenSHC::Map::Buildings::BT_KILLINGPIT
             && DAT_BuildingsState::instance.buildings[buildingID].owner
                 != DAT_GameSynchronyState::instance.currentPlayerSlotID
             && DAT_BuildingsState::instance.buildings[buildingID].state < 1) {
             return;
         }
+        // the field, not buildingType: testing the local lets MSVC jump the killing-pit paths past this check
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::temporarySaveMapSurfaceHeightRangeUnk,
                 DAT_TextureRenderCoreObject::ptr)();
