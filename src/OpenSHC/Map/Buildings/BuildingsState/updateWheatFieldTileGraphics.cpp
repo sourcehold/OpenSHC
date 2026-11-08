@@ -14,10 +14,6 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
-            // Matching note: start and buildingID * 0xcb swap ebx/ebp. Both key -97 and the temporary wins the tie.
-            // Setting i in both arms of the if (the updateHopsFieldTileGraphics fix) gives start ebx here too, but
-            // drops the temporary below a hoisted GMFirstPictureIndex load, which then takes ebp and the gfx tail is
-            // duplicated into every frame arm (112 -> 157 instructions), so only register naming differs
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
@@ -61,16 +57,21 @@ namespace Map {
                 } else {
                     gfx = GMFirstPictureIndex::instance[14] + frame;
                 }
+                // The two stores of the position are merged by the compiler; writing them out separately gives start
+                // the extra weight that puts it in ebx ahead of the buildingID * 0xcb temporary, as in the original
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
-                    if (--unchangedLeft == 0) {
-                        continue;
+                    if (--unchangedLeft != 0 && DAT_BuildingsState::instance.field_0x18e024 == 0) {
+                        *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc
+                            = (i + 1 + start) % 36;
+                        return;
                     }
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
-                }
-                if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                    *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
-                    return;
+                    if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
+                        *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc
+                            = (i + 1 + start) % 36;
+                        return;
+                    }
                 }
             }
         }

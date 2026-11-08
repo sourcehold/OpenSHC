@@ -4963,7 +4963,7 @@ SHC_3BB0A8C1_0x0040CBB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0040CC30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040CF20 | 92.0% | ebx/ebp swapped
+SHC_3BB0A8C1_0x0040CF20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040D090 | 100.0% | Reimplemented
 
