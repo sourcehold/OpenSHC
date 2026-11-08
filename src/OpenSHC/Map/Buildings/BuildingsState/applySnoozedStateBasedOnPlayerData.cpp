@@ -22,8 +22,10 @@ namespace Map {
                     this->buildings[i].sleeping = false;
                     continue;
                 }
-                bool snoozed = DAT_GameState::instance.playerDataArray[this->buildings[i].owner]
-                                   .snoozedBuildings[this->buildings[i].buildingType];
+                // Matching note: the original loads the type once for the test above and the index here, but with that
+                // register in edi where an indexed read gets esi; the reference costs that one load and fixes the names
+                BuildingTypeShort const& type = this->buildings[i].buildingType;
+                bool snoozed = DAT_GameState::instance.playerDataArray[this->buildings[i].owner].snoozedBuildings[type];
                 if (this->buildings[i].sleeping == snoozed) {
                     continue;
                 }
