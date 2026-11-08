@@ -11,19 +11,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041B7C0
         void BuildingsState::computeBuildingEntranceFlagsForOrientations(int param_1)
         {
+            // Matching note: the original keeps this in ecx across setupBuildingEntrancesOffset (built with /GL, which
+            // this file is not), so it has one more free callee-saved register and allocates every local differently.
             // Marks the sides of a keep-like building that have an entrance (field_0x280 holds one flag per side)
             uint size = this->buildings[param_1].widthOrHeight;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int try_;
-            switch (size) {
-            case 4:
+            if (size == 4) {
                 try_ = tileCount - 1;
-                break;
-            case 5:
-            case 6:
+            } else if (size == 5 || size == 6) {
                 try_ = tileCount - 2;
-                break;
-            default:
+            } else {
                 return;
             }
             *(int*)this->buildings[param_1].field_0x280 = 0;
