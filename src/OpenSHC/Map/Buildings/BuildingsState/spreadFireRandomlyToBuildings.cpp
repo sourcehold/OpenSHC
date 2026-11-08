@@ -18,6 +18,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00422C60
         void BuildingsState::spreadFireRandomlyToBuildings(int param_1, int param_2)
         {
+            // Matching note: the original keeps the building pointer in edx across getBuildingFlammabilityFactor and
+            // does not reload maxBuildingsCount after it (built with /GL, which this file is not); the rest is
+            // register naming that follows from that.
             // Sets param_2 random buildings of player param_1 on fire. Very flammable buildings are 5 times as likely.
             if (param_2 < 1
                 || DAT_GameState::instance.playerDataArray[param_1]
