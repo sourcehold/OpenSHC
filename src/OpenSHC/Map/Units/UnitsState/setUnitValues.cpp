@@ -18,7 +18,7 @@ namespace Map {
             this->units[unitID].field_0x90 = (short)DAT_UnitPropertiesDefinedData::instance.field_0x7634[unitType];
             this->units[unitID].isStalked = (byte)DAT_UnitPropertiesDefinedData::instance.field_0x7774[unitType];
             this->units[unitID].gmIDUnk = (short)DAT_UnitPropertiesDefinedData::instance.SPRITE_ID[unitType];
-            this->units[unitID].spriteID = (short)DAT_UnitPropertiesDefinedData::instance.SPRITE_ID[unitType];
+            this->units[unitID].spriteID = this->units[unitID].gmIDUnk;
             this->units[unitID].gfxNumber = 1;
             this->units[unitID].field_0x2a = (short)DAT_TextureRenderCoreObject::instance
                                                  .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
@@ -40,13 +40,9 @@ namespace Map {
             this->units[unitID].field_0x350 = 0;
             this->units[unitID].maxHealth = DAT_UnitPropertiesDefinedData::instance.BASE_HP[unitType];
             this->units[unitID].health = this->units[unitID].maxHealth;
-            if (this->units[unitID].maxHealth == 0) {
-                this->units[unitID].healthPercentage = 100;
-            } else {
-                this->units[unitID].healthPercentage
-                    = (short)((this->units[unitID].health * 100) / this->units[unitID].maxHealth);
-            }
-            byte _firstNameIndex = this->units[unitID].firstNameIndex;
+            this->units[unitID].healthPercentage = this->units[unitID].maxHealth == 0
+                ? 100
+                : this->units[unitID].health * 100 / this->units[unitID].maxHealth;
             this->units[unitID].healthbar = this->units[unitID].healthPercentage / 10;
             this->units[unitID].unitCanClimb = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_CLIMB[unitType];
             this->units[unitID].someUnitStat4
@@ -57,19 +53,19 @@ namespace Map {
             this->units[unitID].enemyNoticeFrequencyUnk
                 = DAT_UnitPropertiesDefinedData::instance.UNIT_ENEMY_NOTICE_RANGE[unitType];
             this->units[unitID].moveableUnk = (short)DAT_UnitPropertiesDefinedData::instance.UNIT_MOVABLE[unitType];
-            if ((char)_firstNameIndex < '\x01' || unitType == OpenSHC::Map::Units::UT_BREWER
+            if ((char)this->units[unitID].firstNameIndex <= 0 || unitType == OpenSHC::Map::Units::UT_BREWER
                 || unitType == OpenSHC::Map::Units::UT_TANNER || unitType == OpenSHC::Map::Units::UT_LADY
                 || unitType == OpenSHC::Map::Units::UT_MOTHER || unitType == OpenSHC::Map::Units::UT_JUGGLER
                 || unitType == OpenSHC::Map::Units::UT_FIREEATER || unitType == OpenSHC::Map::Units::UT_PRIEST) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignNameToUnit, this)(unitID);
             }
             short _owner = this->units[unitID].owner;
-            if (_owner <= 0) {
+            if (_owner > 0) {
+                this->units[unitID].occupancyOrFlag = 1 << (_owner - 1);
+                this->units[unitID].field_0x3d1 = ~this->units[unitID].occupancyOrFlag;
+            } else {
                 this->units[unitID].occupancyOrFlag = 0xff;
                 this->units[unitID].field_0x3d1 = 0xff;
-            } else {
-                this->units[unitID].occupancyOrFlag = 1 << (_owner - 1 & 0x1f);
-                this->units[unitID].field_0x3d1 = ~this->units[unitID].occupancyOrFlag;
             }
             this->units[unitID].isSelectable_OR_matchTime = 0;
             this->units[unitID].field_0x430 = 0;
