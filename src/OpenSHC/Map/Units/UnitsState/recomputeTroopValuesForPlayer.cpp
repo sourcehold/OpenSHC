@@ -37,14 +37,9 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[playerID].enemies = 0;
             DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount = 0;
             DAT_GameState::instance.playerDataArray[playerID].sumOfTotalEnemyUnitsCount = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[1] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[2] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[3] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[4] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[5] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[6] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[7] = 0;
-            DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[8] = 0;
+            for (int i = 1; i < 9; ++i) {
+                DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValueByPlayerID[i] = 0;
+            }
             DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue = 0;
             DAT_GameState::instance.playerDataArray[playerID].totalTeamTroopValue = 0;
             DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue = 0;
@@ -103,17 +98,12 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_S_BALLISTA:
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
                     /* count of currently manning engineers */
-                    if (DAT_UnitsState::instance.units[unitID]
-                            .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                    if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                         == 0) {
                         continue;
                     }
                 }
-                if (this->units[unitID].isSelectable_OR_matchTime == 0) {
-                    if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
-                        DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
-                    }
-                } else {
+                if (this->units[unitID].isSelectable_OR_matchTime != 0) {
                     DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
@@ -126,7 +116,7 @@ namespace Map {
                             || DAT_GameSynchronyState::instance
                                     .currentAIArray[DAT_UnitsState::instance.units[unitID].owner]
                                 == 0
-                            || this->units[unitID].siegeTargetPlayerID == playerID)) {
+                            || DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID == playerID)) {
                         DAT_GameState::instance.playerDataArray[playerID]
                             .totalEnemyTroopValueByPlayerID[DAT_UnitsState::instance.units[unitID].owner]
                             += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
@@ -147,6 +137,8 @@ namespace Map {
                                     DAT_TroopValueState::ptr)((UnitType)(short)_enemyUnitType);
                         }
                     }
+                } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
+                    DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
                 }
                 int _enemySlot = DAT_GameState::instance.playerDataArray[playerID].enemies;
                 if (_enemySlot < 2499) {
@@ -154,8 +146,8 @@ namespace Map {
                 } else {
                     _enemySlot = SEC_RNG::instance.currentNumber2 % 2500;
                     MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                    if (_enemySlot > 2499) {
-                        break;
+                    if (_enemySlot >= 2499) {
+                        continue;
                     }
                 }
                 DAT_GameState::instance.playerDataArray[playerID].enemyIDArray[_enemySlot] = (short)unitID;
