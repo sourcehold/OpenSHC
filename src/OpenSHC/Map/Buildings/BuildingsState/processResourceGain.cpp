@@ -21,10 +21,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C310
         BOOLEnum BuildingsState::processResourceGain(int playerID, ResourceType resourceType, int amount)
         {
-            // Matching note: The original relies on /GL (the callees are in cmake/compiler-flags-gl.txt, this file
-            // is not): ecx still holds this after getBuildingStorageTypeForResourceType, so the armory and granary
-            // calls and the first stockpile loop do not reload it. It also loads currentNumberOfResource once and
-            // tests it twice, where our compiler drops the duplicated test.
+            // Matching note: the original loads currentNumberOfResource once and tests it twice (before and after
+            // the resources test) and tests resources >= limit before the inner loop's own space > 0 test; our
+            // compiler drops the repeated test however it is spelled. Testing the space instead of resources >= limit
+            // is equivalent and keeps the storage type in eax as the original does (the >= form moves it to edx).
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getResourceSpace, this)(
                     playerID, resourceType)
                 < amount) {
@@ -53,15 +53,14 @@ namespace Map {
                 return TRUE;
             }
 
-            // Fill up the stockpiles that already store this resource first. Note: the original checks
-            // currentNumberOfResource twice.
+            // Fill up the stockpiles that already store this resource first
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID
                     || this->buildings[i].buildingType != storageType || this->buildings[i].currentNumberOfResource == 0
                     || this->buildings[i].resources[resourceType] == 0
-                    || this->buildings[i].currentNumberOfResource == 0
-                    || this->buildings[i].resources[resourceType]
-                        >= DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]) {
+                    || DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
+                            - this->buildings[i].resources[resourceType]
+                        <= 0) {
                     continue;
                 }
                 int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
