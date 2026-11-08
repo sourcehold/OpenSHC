@@ -32,13 +32,13 @@ namespace Map {
             if ((short)DAT_TileMapState::instance.UnitLayer[this->units[unitID].tile] == unitID) {
                 return FALSE;
             }
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x100U) == 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x100U) != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findFreeTileOnDefensiveStructure,
+                    DAT_PathFindingState::ptr)(-1, this->units[unitID].x, this->units[unitID].y);
+            } else {
                 /* not a wall tower or gatehouse */
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::findPathableTileWithoutUnitWithBuildingAtXY,
-                    DAT_PathFindingState::ptr)(-1, this->units[unitID].x, this->units[unitID].y);
-            } else {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findFreeTileOnDefensiveStructure,
                     DAT_PathFindingState::ptr)(-1, this->units[unitID].x, this->units[unitID].y);
             }
             if (DAT_PathFindingState::instance.ALG_ResultTile == 0) {
