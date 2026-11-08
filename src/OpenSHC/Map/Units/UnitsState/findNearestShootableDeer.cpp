@@ -19,10 +19,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537880
         int UnitsState::findNearestShootableDeer(int unitID)
         {
+            int _bestDistance = 100000;
             int _bestUnitID = 0;
             int _shooterX = this->units[unitID].x;
             int _shooterY = this->units[unitID].y;
-            int _bestDistance = 100000;
             int _minimumDistance = 20;
             while (true) {
                 for (int _deerUnitID = 1; _deerUnitID < (int)this->maxUnitCount; ++_deerUnitID) {
