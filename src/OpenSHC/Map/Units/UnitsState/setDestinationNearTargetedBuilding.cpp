@@ -28,7 +28,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                   findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance,
                 DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].targetedBuildingTile, 1,
-                (int*)(short)_areaAtUnitTile, DAT_UnitsState::instance.units[unitID].owner, param_2,
+                (int*)_areaAtUnitTile, DAT_UnitsState::instance.units[unitID].owner, param_2,
                 DAT_UnitsState::instance.units[unitID].facingDirection);
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 == 0) {
                 return FALSE;
@@ -36,14 +36,14 @@ namespace Map {
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0) {
                 return FALSE;
             }
-            short _destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                                      [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1];
+            int _destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                                    [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1];
             int _destinationX = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1
                 - DAT_ViewportRenderState::instance.translationMatrix[_destinationY].addXgetTile;
             DAT_UnitsState::instance.units[unitID].plannedDestinationX = (short)_destinationX;
             DAT_UnitsState::instance.units[unitID].targetingType = (UnitInstructionType)0;
             DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
-            DAT_UnitsState::instance.units[unitID].plannedDestinationY = _destinationY;
+            DAT_UnitsState::instance.units[unitID].plannedDestinationY = (short)_destinationY;
             DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                 unitID, _destinationX, _destinationY, 0);
@@ -51,14 +51,16 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByAmount, DAT_UnitsState::ptr)(
                     unitID, 2);
             }
-            short _attackTileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                                     [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper];
+            DAT_UnitsState::instance.units[unitID].attackAtTileY
+                = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                      [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper];
             DAT_UnitsState::instance.units[unitID].targetedBuildingTile
                 = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper;
             DAT_UnitsState::instance.units[unitID].attackAtTileX
-                = (short)DAT_UnitsState::instance.units[unitID].targetedBuildingTile
-                - (short)DAT_ViewportRenderState::instance.translationMatrix[_attackTileY].addXgetTile;
-            DAT_UnitsState::instance.units[unitID].attackAtTileY = _attackTileY;
+                = (short)(DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper
+                    - DAT_ViewportRenderState::instance
+                        .translationMatrix[DAT_UnitsState::instance.units[unitID].attackAtTileY]
+                        .addXgetTile);
             return TRUE;
         }
 
