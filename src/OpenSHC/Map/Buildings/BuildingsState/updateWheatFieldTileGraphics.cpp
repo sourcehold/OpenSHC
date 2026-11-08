@@ -14,6 +14,8 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
+            // Matching note: start and buildingID * 0xcb swap ebx/ebp, as in updateHopsFieldTileGraphics. MSVC ranks
+            // start just below that temporary, and no declaration order moves it, so only register naming differs
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
