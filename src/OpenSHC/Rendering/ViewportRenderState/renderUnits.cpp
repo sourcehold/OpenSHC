@@ -143,8 +143,8 @@ namespace Rendering {
                     }
                 } else if (_unitID == 0) {
                     if ((_blendStrength & 4) != 0) {
-                        DAT_RenderedUnitOwner::instance = ~-(uint)((_blendStrength & 0x10) != 0)
-                            & DAT_GameSynchronyState::instance.currentPlayerSlotID;
+                        DAT_RenderedUnitOwner::instance
+                            = (_blendStrength & 0x10) != 0 ? 0 : DAT_GameSynchronyState::instance.currentPlayerSlotID;
                         DAT_CurrentlyRenderedSpriteID::instance = _gmID;
                     }
                     if ((_blendStrength & 0x20) == 0) {
@@ -199,7 +199,18 @@ namespace Rendering {
                             }
                         }
                     }
-                    if (_alpha == 0) {
+                    if (_alpha != 0) {
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
+                            DAT_TextureRenderCoreObject::ptr)(
+                            _drawX, _drawY, _imageID, (int)(_blendStrength), (byte*)_gmID, _alpha);
+                        if (*this->viewportState.ptrColor != COL_MAGENTA::instance.shortValue) {
+                            this->viewportState.mouseRayUnitID = _unitID;
+                            this->viewportState.mouseRayBuildingID = 0;
+                        } else {
+                            *this->viewportState.ptrColor = savedPixelColor;
+                        }
+                    } else {
                         if (DAT_UnitsState::instance.units[_unitID].graphicSize == 4) {
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Rendering::ViewportRenderState_Func::renderAssassinClimbingOverlay, this)(
@@ -328,33 +339,19 @@ namespace Rendering {
                                 }
                                 DAT_RenderedUnitOwner::instance = (uint)DAT_UnitsState::instance.units[_unitID].owner;
                                 DAT_CurrentlyRenderedSpriteID::instance = 189;
-                                uint animationTick = DAT_UnitsState::instance.units[_unitID].fixedRng
-                                        + DAT_GameState::instance.mapAndTime.totalGameTicksUnk
-                                    & 0x8000003f;
-                                if ((int)animationTick < 0) {
-                                    animationTick = (animationTick - 1 | 0xffffffc0) + 1;
-                                }
+                                int const animationTick = (DAT_UnitsState::instance.units[_unitID].fixedRng
+                                                              + DAT_GameState::instance.mapAndTime.totalGameTicksUnk)
+                                    % 64;
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL,
                                     (int)(animationTick / 2 + 1), overlayX, overlayY);
                             }
                         }
-                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *this->viewportState.ptrColor = savedPixelColor;
-                        } else {
+                        if (*this->viewportState.ptrColor != COL_MAGENTA::instance.shortValue) {
                             this->viewportState.mouseRayUnitID = _unitID;
                             this->viewportState.mouseRayBuildingID = 0;
-                        }
-                    } else {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
-                            DAT_TextureRenderCoreObject::ptr)(
-                            _drawX, _drawY, _imageID, (int)(_blendStrength), (byte*)_gmID, _alpha);
-                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *this->viewportState.ptrColor = savedPixelColor;
                         } else {
-                            this->viewportState.mouseRayUnitID = _unitID;
-                            this->viewportState.mouseRayBuildingID = 0;
+                            *this->viewportState.ptrColor = savedPixelColor;
                         }
                     }
                     if (0 < _unitID) {

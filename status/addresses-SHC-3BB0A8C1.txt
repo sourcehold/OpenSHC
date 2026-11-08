@@ -36987,7 +36987,7 @@ SHC_3BB0A8C1_0x004E7770 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E7800 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E7810 | 36.0% | GMImageOffsets fix, reg alloc
+SHC_3BB0A8C1_0x004E7810 | 36.2% | alpha arms ordered, prologue d
 
 SHC_3BB0A8C1_0x004E78D0 | 0.0% | Pending
 
