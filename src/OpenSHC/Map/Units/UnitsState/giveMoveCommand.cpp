@@ -114,7 +114,7 @@ namespace Map {
                 int _leaderUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
                 int _distanceX = this->units[_leaderUnitID].x - x;
                 int _distanceY = this->units[_leaderUnitID].y - y;
-                if (_distanceX + 0x48U <= 0x90 && _distanceY + 0x48U <= 0x90) {
+                if (_distanceX >= -0x48 && _distanceX <= 0x48 && _distanceY >= -0x48 && _distanceY <= 0x48) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                         _mostFrequentUnitType, 6);
                 } else {
