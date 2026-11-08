@@ -23,37 +23,37 @@ namespace Map {
         undefined4 BuildingsState::determineBuildingEntranceFromKeepArea(
             int buildingID, int workerIndexPlus1, BOOLEnum flag)
         {
-            // Matching note: the original keeps the tile index in edx across getBuildingHeightForBuildingID, so it
-            // was built with /GL (the callee is in cmake/compiler-flags-gl.txt, this file is not). Without that the
-            // tile needs a callee-saved register and the register and stack slot assignment differs throughout.
             // Finds an entrance tile of the building that can be reached from the campground of the owner.
             // flag enlarges the area around the building by one tile, workerIndexPlus1 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
             // otherwise.
             int playerID = this->buildings[buildingID].owner;
-            int index = 0;
+            int found = 0;
             int areaFrom
                 = (short)
                       DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
                               .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                               .tileEntry];
-            int found = 0;
             int heightStep = 16;
             if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_QUARRY) {
                 heightStep = 32;
             }
             int size = this->buildings[buildingID].widthOrHeight + flag * 2;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
+            int index;
             if (tileCount > 0) {
                 index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
+            } else {
+                index = 0;
             }
-            int height = this->buildings[buildingID].terrainHeightUnk;
             this->buildings[buildingID].buildingEntryX = 0;
             this->buildings[buildingID].buildingEntryY = 0;
+            int height = this->buildings[buildingID].terrainHeightUnk;
 
-            // Tiles next to the building
-            for (int tries = 0; tries < tileCount; ++tries) {
+            // Tiles next to the building (all three searches share one counter)
+            int tries;
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
                     size, 1, index, 0);
                 int tile = DAT_ViewportRenderState::instance
@@ -78,7 +78,11 @@ namespace Map {
                                 .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                             != FALSE)
                     && ++found >= workerIndexPlus1) {
-                    goto foundEntrance;
+                    this->buildings[buildingID].buildingEntryX
+                        = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
+                    this->buildings[buildingID].buildingEntryY
+                        = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
+                    return 1;
                 }
                 ++index;
                 if (index >= tileCount) {
@@ -88,7 +92,7 @@ namespace Map {
 
             // Tiles one step further away (the original reuses the tile count variable)
             tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
-            for (int tries = 0; tries < tileCount; ++tries) {
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(
                     size, 1, index, 0);
@@ -114,7 +118,11 @@ namespace Map {
                                 .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                             != FALSE)
                     && ++found >= workerIndexPlus1) {
-                    goto foundEntrance;
+                    this->buildings[buildingID].buildingEntryX
+                        = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
+                    this->buildings[buildingID].buildingEntryY
+                        = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
+                    return 1;
                 }
                 ++index;
                 if (index >= tileCount) {
@@ -130,7 +138,7 @@ namespace Map {
             } else {
                 index = 0;
             }
-            for (int tries = 0; tries < tileCount; ++tries) {
+            for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
                     size, 1, index, 0);
                 int tile = DAT_ViewportRenderState::instance
@@ -158,12 +166,6 @@ namespace Map {
                 }
             }
             return 0;
-
-        // The first two searches share one exit block in the original
-        foundEntrance:
-            this->buildings[buildingID].buildingEntryX = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
-            this->buildings[buildingID].buildingEntryY = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-            return 1;
         }
 
     }
