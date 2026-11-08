@@ -40,9 +40,9 @@ namespace Map {
                 break;
             default: {
                 // One crow in the middle of the building and some more on random tiles of it
-                int halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
-                int microX = ((short)this->buildings[buildingID].x + halfSize) * 8;
-                int microY = ((short)this->buildings[buildingID].y + halfSize) * 8;
+                int const halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
+                int const microX = (this->buildings[buildingID].x + halfSize) * 8;
+                int const microY = (this->buildings[buildingID].y + halfSize) * 8;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
                     DAT_EntityState::ptr)(0, 0, 0, microX, microY,
                     DAT_TileMapState::instance
@@ -50,18 +50,18 @@ namespace Map {
                     microX + 1, microY + 1,
                     DAT_TileMapState::instance
                         .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                    (EntityType)0x1e, 0);
+                    (EntityType)30, 0);
 
-                // The original does not check the tile count before the first iteration
+                // do/while: the original skips the tile count test before the first pass (a for loop measured 0.95)
                 int t = 0;
                 do {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                         DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
-                    int const tile = DAT_ViewportRenderState::instance
-                                         .translationMatrix[(short)this->buildings[buildingID].y
-                                             + DAT_TileMapState::instance.buildingY]
-                                         .addXgetTile
-                        + (short)this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX;
+                    int const tile
+                        = DAT_ViewportRenderState::instance
+                              .translationMatrix[this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY]
+                              .addXgetTile
+                        + this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX;
                     // Reading the random value twice instead of keeping a local makes both remainders an idiv
                     if (DAT_TileMapState::instance.RandomLayer[tile] % 5 == 0) {
                         MACRO_CALL_MEMBER(
@@ -74,7 +74,7 @@ namespace Map {
                             (this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY) * 8 + 1,
                             DAT_TileMapState::instance
                                 .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                            (EntityType)0x1e, -((DAT_TileMapState::instance.RandomLayer[tile] >> 4) % 20));
+                            (EntityType)30, -((DAT_TileMapState::instance.RandomLayer[tile] >> 4) % 20));
                     }
                     ++t;
                 } while (t < DAT_TileMapState::instance.constructionTileCount);

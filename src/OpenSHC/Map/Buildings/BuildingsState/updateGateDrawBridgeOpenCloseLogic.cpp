@@ -35,15 +35,17 @@ namespace Map {
             // DAT_CurrentBuildingID is not reloaded after applyGateOrDrawbridgeOpenCloseChange, which needs /GL
             // (cmake/compiler-flags-gl.txt) together with the callee chain findParticularBuilding and
             // setupBuildingEntrancesOffset.
-            int gateX = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x;
-            int gateMicroX = gateX * 8;
-            int gateY = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
-            int gateMicroY = gateY * 8;
+            // Matching note: these stay declared up front; moving the zeroed ones (0.97) or gateMicroX/Y (0.89) to
+            // their first use loses the match, as the original stores them all before the tick test.
+            int const gateX = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x;
+            int const gateMicroX = gateX * 8;
+            int const gateY = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
+            int const gateMicroY = gateY * 8;
             int t = 0;
             int defender = 0;
             int attacker = 0;
             int flagEntityID = 0;
-            int gateOwner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+            int const gateOwner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
 
             if (DAT_GameState::instance.gameTicksLoadBalancer % 10
                 == (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 + 5) % 10) {
@@ -57,19 +59,19 @@ namespace Map {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                         t, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].widthOrHeight);
-                    int tile = DAT_ViewportRenderState::instance
-                                   .translationMatrix[DAT_TileMapState::instance.buildingY + gateY]
-                                   .addXgetTile
+                    int const tile = DAT_ViewportRenderState::instance
+                                         .translationMatrix[DAT_TileMapState::instance.buildingY + gateY]
+                                         .addXgetTile
                         + DAT_TileMapState::instance.buildingX + gateX;
-                    for (int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
-                        unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
+                    for (int unitID = DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
+                        unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                         if (DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0) {
                             continue;
                         }
-                        int unitOwner = DAT_UnitsState::instance.units[unitID].owner;
-                        strength[unitOwner] += MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType, DAT_TroopValueState::ptr)(
-                            (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
+                        int const unitOwner = DAT_UnitsState::instance.units[unitID].owner;
+                        strength[unitOwner]
+                            += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                DAT_TroopValueState::ptr)((UnitType)DAT_UnitsState::instance.units[unitID].unitType);
                         if (DAT_GameState::instance.mapAndTime.playerTeams
                                 [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner]
                             == DAT_GameState::instance.mapAndTime.playerTeams[unitOwner]) {
@@ -79,6 +81,7 @@ namespace Map {
                         }
                     }
                     int entityID = DAT_TileMapState::instance.EntityLayer[tile];
+                    // Matching note: written as for (int n = 1; entityID != 0 && n < 10; ++n) this drops to 0.83
                     int n = 0;
                     while (entityID != 0 && ++n < 10) {
                         if (DAT_EntityState::instance.entityArray[entityID].entityType
@@ -116,14 +119,14 @@ namespace Map {
                             OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
                             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner,
                             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner,
-                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
-                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
                             DAT_TileMapState::instance
                                     .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                             .currentTilePositionAdjusted]
                                 + 30,
-                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
-                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
                             DAT_TileMapState::instance
                                     .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                             .currentTilePositionAdjusted]
@@ -182,9 +185,10 @@ namespace Map {
                         && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                            (char*)SFX_WeLostControlOfAGatehouse);
+                            SFX_WeLostControlOfAGatehouse);
                     }
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2c6 = newController;
+                    // gateState 11 requests opening, 10 closing
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 11;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange, this)(
@@ -230,7 +234,8 @@ namespace Map {
                 return;
             }
 
-            // Close the gate when enemies come near, open it again when they are gone
+            // Close the gate when enemies come near, open it again when they are gone. pathLinkageRelated2 is 0 for an
+            // open gate and 2 for a closed one.
             bool enemyNear = false;
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[gateOwner].enemies; ++i) {
                 int const enemyID = DAT_GameState::instance.playerDataArray[gateOwner].enemyIDArray[i];

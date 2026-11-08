@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
@@ -9,6 +10,7 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Map::Buildings::BuildingLogicalState;
+        using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040F8A0
         void BuildingsState::applySnoozedStateBasedOnPlayerData()
@@ -18,11 +20,11 @@ namespace Map {
                 if (this->buildings[i].logicalState != BLS_NORMAL) {
                     continue;
                 }
-                // type is a reference so the test and the index share one load (a value moves the loop
-                // anchor to sleeping), and owner is an int local read twice so its row offset is live across the
-                // sleeping test, which is what puts it in esi and type in edi as in the original
+                // Matching note: type is a reference so the test and the index share one load (a value moves the loop
+                // anchor to sleeping); owner is an int local read twice, which puts it in esi and type in edi
                 BuildingTypeShort const& type = this->buildings[i].buildingType;
-                if (type >= 91) {
+                // The cesspit and all later types (fear factor buildings and decorations) never sleep
+                if (type >= BT_CESSPIT) {
                     this->buildings[i].sleeping = false;
                     continue;
                 }
@@ -38,10 +40,10 @@ namespace Map {
                 // state/field117_0x11a and killingPitField/field119_0x11e are cleared as ints
                 *(int*)&this->buildings[i].state = 0;
                 *(int*)&this->buildings[i].killingPitField = 0;
-                for (int r = 0; r < 25; ++r) {
+                for (int r = 0; r < countof(this->buildings[i].resources); ++r) {
                     this->buildings[i].resources[r] = 0;
                 }
-                for (int w = 0; w < 4; ++w) {
+                for (int w = 0; w < countof(this->buildings[i].workerUID); ++w) {
                     this->buildings[i].workerUID[w] = 0;
                     this->buildings[i].workerID[w] = 0;
                 }

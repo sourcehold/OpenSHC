@@ -24,8 +24,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C810
         BOOLEnum BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
         {
-            int const type = this->buildings[buildingID].buildingType;
-            switch (type) {
+            int const buildingType = this->buildings[buildingID].buildingType;
+            switch (buildingType) {
             case BT_CAMPFIRE:
             case BT_PARADEGROUND:
             case BT_CAMPGROUND:
@@ -51,7 +51,7 @@ namespace Map {
                 return FALSE;
             }
             if (spareGrounds != 0) {
-                switch (type) {
+                switch (buildingType) {
                 case BT_CAMPFIRE:
                 case BT_PARADEGROUND:
                 case BT_CAMPGROUND:
@@ -74,6 +74,7 @@ namespace Map {
             }
             int const x = this->buildings[buildingID].x;
             int const y = this->buildings[buildingID].y;
+            // do/while: the original skips the tile count test before the first pass (a for loop measured 0.976)
             int i = 0;
             do {
                 MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(

@@ -31,9 +31,9 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
-                int keepID = DAT_GameState::instance.playerDataArray[playerID]
-                                 .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
-                                 .id;
+                int const keepID = DAT_GameState::instance.playerDataArray[playerID]
+                                       .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                       .id;
                 if (keepID == 0) {
                     return FALSE;
                 }
@@ -55,73 +55,78 @@ namespace Map {
                 } else if (mercenaryType == 13) {
                     searchOffset -= DAT_GameState::instance.playerDataArray[playerID].someCount23;
                 }
-                int pointX
-                    = (short)DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[group - 10][0];
-                int pointY
-                    = (short)DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[group - 10][1];
-                for (; searchOffset < 49; ++searchOffset) {
-                    int x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].x + pointX;
-                    int y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].y + pointY;
-                    int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int const unitOnTile = (short)DAT_TileMapState::instance.UnitLayer[tile];
-                    if ((unitOnTile == 0 || unitOnTile == unitID
-                            || DAT_UnitsState::instance.units[unitID].movementRelated != 8)
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                 calculateCanPlayerUnitsNavigateToAreaFromArea,
-                               DAT_PathFindingState::ptr)(playerID,
-                               (short)DAT_TileMapState::instance
-                                   .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                               (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
-                            != 0) {
-                        this->DAT_TempXOffset = x;
-                        this->DAT_TempYOffset = y;
-                        if (x == DAT_UnitsState::instance.units[unitID].x
-                            && y == DAT_UnitsState::instance.units[unitID].y) {
-                            return FALSE;
-                        }
-                        return TRUE;
+                int const pointX
+                    = DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[group - 10][0];
+                int const pointY
+                    = DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[group - 10][1];
+                for (; searchOffset < countof(DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1);
+                    ++searchOffset) {
+                    int const x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].x + pointX;
+                    int const y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[searchOffset].y + pointY;
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+                    int const unitOnTile = DAT_TileMapState::instance.UnitLayer[tile];
+                    if (unitOnTile != 0 && unitOnTile != unitID
+                        && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
+                        continue;
                     }
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                              calculateCanPlayerUnitsNavigateToAreaFromArea,
+                            DAT_PathFindingState::ptr)(playerID,
+                            DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                        == 0) {
+                        continue;
+                    }
+                    this->DAT_TempXOffset = x;
+                    this->DAT_TempYOffset = y;
+                    if (x == DAT_UnitsState::instance.units[unitID].x
+                        && y == DAT_UnitsState::instance.units[unitID].y) {
+                        return FALSE;
+                    }
+                    return TRUE;
                 }
-                // An explicit return here lets MSVC cross-jump the position test into the parade ground branch
+                // Matching note: this explicit return lets MSVC cross-jump the position test into the parade ground
+                // loop
                 return FALSE;
-            } else {
-                // No rally point, use the parade ground of the mercenary post
-                if (DAT_GameState::instance.playerDataArray[playerID]
-                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
-                        .id
-                    > 0) {
-                    if (mercenaryType == 16) {
-                        if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[3][0] != 0) {
-                            searchOffset = DAT_GameState::instance.playerDataArray[playerID].someCount23;
-                        }
-                    } else if (mercenaryType == 13
-                        // Note: the original reads index 16 instead of 16 - 10
-                        && DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[16][0] != 0) {
-                        searchOffset -= DAT_GameState::instance.playerDataArray[playerID].someCount23;
-                    }
-                    // The 3 x 24 locations of one group are read as one run of 72
-                    for (int i = searchOffset; i < 72; ++i) {
-                        int x = DAT_GameState::instance.playerDataArray[playerID]
-                                    .structure.mercenaryOutpostCampgroundLocations[group - 10][0][i]
-                                    .x;
-                        int y = DAT_GameState::instance.playerDataArray[playerID]
-                                    .structure.mercenaryOutpostCampgroundLocations[group - 10][0][i]
-                                    .y;
-                        int const unitOnTile
-                            = (short)DAT_TileMapState::instance
-                                  .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
-                        if (unitOnTile == 0 || unitOnTile == unitID
-                            || DAT_UnitsState::instance.units[unitID].movementRelated != 8) {
-                            this->DAT_TempXOffset = x;
-                            this->DAT_TempYOffset = y;
-                            if (x == DAT_UnitsState::instance.units[unitID].x
-                                && y == DAT_UnitsState::instance.units[unitID].y) {
-                                return FALSE;
-                            }
-                            return TRUE;
-                        }
-                    }
+            }
+
+            // No rally point, use the parade ground of the mercenary post
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MERCENARYPOST]
+                    .id
+                <= 0) {
+                return FALSE;
+            }
+            if (mercenaryType == 16) {
+                if (DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[3][0] != 0) {
+                    searchOffset = DAT_GameState::instance.playerDataArray[playerID].someCount23;
                 }
+            } else if (mercenaryType == 13
+                // Note: the original reads index 16 instead of 16 - 10
+                && DAT_GameState::instance.playerDataArray[playerID].mercenaryAssemblyPoints[16][0] != 0) {
+                searchOffset -= DAT_GameState::instance.playerDataArray[playerID].someCount23;
+            }
+            // The 3 x 24 locations of one group are read as one run of 72
+            for (int i = searchOffset; i < 72; ++i) {
+                int const x = DAT_GameState::instance.playerDataArray[playerID]
+                                  .structure.mercenaryOutpostCampgroundLocations[group - 10][0][i]
+                                  .x;
+                int const y = DAT_GameState::instance.playerDataArray[playerID]
+                                  .structure.mercenaryOutpostCampgroundLocations[group - 10][0][i]
+                                  .y;
+                int const unitOnTile
+                    = DAT_TileMapState::instance
+                          .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
+                if (unitOnTile != 0 && unitOnTile != unitID
+                    && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
+                    continue;
+                }
+                this->DAT_TempXOffset = x;
+                this->DAT_TempYOffset = y;
+                if (x == DAT_UnitsState::instance.units[unitID].x && y == DAT_UnitsState::instance.units[unitID].y) {
+                    return FALSE;
+                }
+                return TRUE;
             }
             return FALSE;
         }

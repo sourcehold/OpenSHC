@@ -25,12 +25,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00422E20
         void BuildingsState::updateBuildings()
         {
-            this->isFirstTickInLoop = (BOOLEnum)(DAT_GameCore::instance.performedGameTicksThisLoop == 0);
+            this->isFirstTickInLoop = DAT_GameCore::instance.performedGameTicksThisLoop == 0;
 
             // Every 10 ticks the number of used building slots is recomputed
             if (DAT_GameState::instance.gameTicksLoadBalancer % 10 == 5) {
                 this->maxBuildingsCount = 0;
-                for (DAT_CurrentBuildingID::instance = 1; DAT_CurrentBuildingID::instance < 2000;
+                for (DAT_CurrentBuildingID::instance = 1; DAT_CurrentBuildingID::instance < countof(this->buildings);
                     ++DAT_CurrentBuildingID::instance) {
                     if (this->buildings[DAT_CurrentBuildingID::instance].logicalState != 0) {
                         this->maxBuildingsCount = DAT_CurrentBuildingID::instance + 1;
@@ -39,10 +39,11 @@ namespace Map {
             }
 
             this->structCount = 0;
-            // One loop clears both per-player counters; MSVC unrolls the first store into nine
-            for (int i = 0; i < 9; ++i) {
-                DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[i] = 0;
-                DAT_GameState::instance.playerDataArray[i].dogCageCount = 0;
+            // Matching note: one loop clears both per-player counters; MSVC unrolls the first store into nine
+            for (int playerID = 0; playerID < countof(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits);
+                ++playerID) {
+                DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[playerID] = 0;
+                DAT_GameState::instance.playerDataArray[playerID].dogCageCount = 0;
             }
             this->field_0x4 = 0;
 
@@ -87,7 +88,7 @@ namespace Map {
                     this->buildings[DAT_CurrentBuildingID::instance].recruitTimer = 0;
                 }
                 ++this->buildings[DAT_CurrentBuildingID::instance].timeAlive;
-                int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+                int const owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
                 if (this->buildings[DAT_CurrentBuildingID::instance].idleTimerUnk != 0) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] == -1
                         && DAT_GameSynchronyState::instance.currentAIArray[owner] != 0) {
@@ -135,11 +136,11 @@ namespace Map {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::TileMapState_Func::processDamageToBuilding, DAT_TileMapState::ptr)(
                             this->buildings[DAT_CurrentBuildingID::instance].currentTilePositionAdjusted,
-                            (short)this->buildings[DAT_CurrentBuildingID::instance].x,
-                            (short)this->buildings[DAT_CurrentBuildingID::instance].y, damage, 0,
+                            this->buildings[DAT_CurrentBuildingID::instance].x,
+                            this->buildings[DAT_CurrentBuildingID::instance].y, damage, 0,
                             (short)this->buildings[DAT_CurrentBuildingID::instance].ifFireThenResponsiblePlayer, FALSE,
                             0);
-                        int buildingType = this->buildings[DAT_CurrentBuildingID::instance].buildingType;
+                        int const buildingType = this->buildings[DAT_CurrentBuildingID::instance].buildingType;
                         if (buildingType == BT_PARADEGROUND
                             || (buildingType >= BT_CAMPGROUND && buildingType <= BT_PARADEGROUND5)) {
                             --this->buildings[DAT_CurrentBuildingID::instance].currentHealth;
@@ -164,20 +165,20 @@ namespace Map {
                         || this->buildings[DAT_CurrentBuildingID::instance].buildingType == BT_CATAPULT)
                     && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] == -1
                     && DAT_GameSynchronyState::instance.currentAIArray[owner] != 0
-                    && (int)this->buildings[DAT_CurrentBuildingID::instance].timeAlive > 2400) {
+                    && this->buildings[DAT_CurrentBuildingID::instance].timeAlive > 2400) {
                     this->buildings[DAT_CurrentBuildingID::instance].logicalState = BLS_REMOVE;
                 }
                 if (this->buildings[DAT_CurrentBuildingID::instance].cooldownTimer != 0) {
                     --this->buildings[DAT_CurrentBuildingID::instance].cooldownTimer;
                 }
-                for (int i = 0; i < 4; ++i) {
+                for (int i = 0; i < countof(this->buildings[DAT_CurrentBuildingID::instance].workers); ++i) {
                     this->buildings[DAT_CurrentBuildingID::instance].workers[i] = 0;
                 }
             }
 
             this->field_0x18e024 = 0;
             this->field_0x18e074 = 0;
-            this->unknownCountdown01 = 2000 - this->structCount;
+            this->unknownCountdown01 = countof(this->buildings) - this->structCount;
             if ((int)this->field_0x10 > 0) {
                 --this->field_0x10;
             }

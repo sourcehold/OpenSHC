@@ -1,5 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
+#include "OpenSHC/DE/SHCDE/eGM.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
@@ -13,9 +15,8 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
-            // Matching note: i is set in both arms rather than in the for. With i = 0 in the loop preheader, the
-            // buildingID * 0xcb temporary (key -66) outranks start (-70) and takes ebx; out of the preheader the
-            // temporary drops to -78, start rises to -66 and both land in the original's registers
+            // Matching note: i is set in both arms rather than in the for. In the loop preheader it lets the
+            // buildingID * 0xcb temporary take ebx ahead of start, unlike the original
             int start = 0;
             int unchangedLeft = 3;
             int i;
@@ -26,8 +27,9 @@ namespace Map {
                 i = 0;
             }
             for (; i < 24; ++i) {
-                int tile = (&this->buildings[buildingID].tileRefs[0])[(i + start) % 24];
-                char stage = DAT_TileMapState::instance.DamageLayer[tile];
+                int const tile = this->buildings[buildingID].tileRefs[(i + start) % 24];
+                char const stage = DAT_TileMapState::instance.DamageLayer[tile];
+                // Matching note: the separate stage == 0 test is in the original; folding it into stage < 2 costs 2%
                 int frame;
                 if (stage == 0) {
                     frame = 0;
@@ -53,8 +55,8 @@ namespace Map {
                     frame = 0;
                 }
 
-                int gfx = GMFirstPictureIndex::instance[14] + (DAT_TileMapState::instance.RandomLayer[tile] & 1) * 9
-                    + 37 + frame;
+                int const gfx = GMFirstPictureIndex::instance[OpenSHC::DE::SHCDE::GM_FARMLAND]
+                    + (DAT_TileMapState::instance.RandomLayer[tile] & 1) * 9 + 37 + frame;
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft == 0) {
                         continue;

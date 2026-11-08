@@ -18,10 +18,12 @@ namespace Map {
             }
 
             // The repair costs are the share of the building costs matching the missing health, at least 1
-            int stone = DAT_BuildingsState::instance.buildingCosts[this->buildings[buildingIndex].buildingType]
-                            .requiredStone_0x4;
-            int wood
+            int const stone = DAT_BuildingsState::instance.buildingCosts[this->buildings[buildingIndex].buildingType]
+                                  .requiredStone_0x4;
+            int const wood
                 = DAT_BuildingsState::instance.buildingCosts[this->buildings[buildingIndex].buildingType].requiredWood;
+            // Matching note: the ternary evaluates the share twice, as a max() macro would; a cost local (41%) and an
+            // if/else (68%) both lose the match
             if (wood != 0) {
                 this->INT_SelectedBuildingStoneWoodCost
                     = (this->buildings[buildingIndex].maxHealth - this->buildings[buildingIndex].currentHealth) * wood

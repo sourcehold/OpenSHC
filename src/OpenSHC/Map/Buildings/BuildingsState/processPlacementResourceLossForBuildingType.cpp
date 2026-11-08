@@ -29,7 +29,7 @@ namespace Map {
             // woodcutter call, which needs LTCG to know the callee (and its callee findFirstBuildingOfType) leaves the
             // global alone. With findFirstBuildingOfType.cpp in cmake/compiler-flags-gl.txt this source matches
             // exactly; without it the compare reloads the global. A gameMode local instead swaps ebx and ebp.
-            if (DAT_GameCore::instance.solitaryAllBuildingsAreFree != FALSE
+            if (DAT_GameCore::instance.solitaryAllBuildingsAreFree
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
                 return;
             }
@@ -42,8 +42,7 @@ namespace Map {
             // A woodcutter's hut is free if the player cannot afford one
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
                                       hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters,
-                    this)(playerID, buildingType)
-                != 0) {
+                    this)(playerID, buildingType)) {
                 return;
             }
 
@@ -72,7 +71,7 @@ namespace Map {
                 return;
             }
 
-            int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
+            int const wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
             int stone = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4;
             int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8;
             int pitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc;

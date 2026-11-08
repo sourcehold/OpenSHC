@@ -30,7 +30,7 @@ namespace Map {
             if (amount <= 0) {
                 return TRUE;
             }
-            BuildingType storageType
+            BuildingType const storageType
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingStorageTypeForResourceType,
                     this)(resourceType);
             if (storageType == BT_MANORHOUSE) {
@@ -64,9 +64,10 @@ namespace Map {
                     if (this->buildings[i].currentNumberOfResource == 0) {
                         continue;
                     }
+                    // Matching note: inverting this test into a continue drops to 0.91
                     if (this->buildings[i].resources[resourceType]
                         < DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]) {
-                        int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
+                        int const space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
                             - this->buildings[i].resources[resourceType];
                         for (n = 0; n < space; ++n) {
                             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
@@ -87,7 +88,7 @@ namespace Map {
                     || this->buildings[i].currentNumberOfResource != 0) {
                     continue;
                 }
-                int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
+                int const space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
                     - this->buildings[i].resources[resourceType];
                 for (n = 0; n < space; ++n) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,

@@ -1,5 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
+#include "OpenSHC/DE/SHCDE/eGM.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -21,9 +23,12 @@ namespace Map {
                 start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
             }
             for (int i = 0; i < 36; ++i) {
-                int tile = (&this->buildings[buildingID]
-                        .tileRefs[0])[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
-                char stage = DAT_TileMapState::instance.DamageLayer[tile];
+                int const tile
+                    = this->buildings[buildingID]
+                          .tileRefs[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
+                char const stage = DAT_TileMapState::instance.DamageLayer[tile];
+                // Matching note: the separate stage == 0 test is in the original; folding it into stage < 1 costs 2%.
+                // Stages above 121 keep the frame of the previous tile
                 if (stage == 0) {
                     frame = 0;
                 } else if (stage < 1) {
@@ -52,13 +57,13 @@ namespace Map {
 
                 int gfx;
                 if (frame < 36) {
-                    gfx = (DAT_TileMapState::instance.RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[14]
-                        + frame;
+                    gfx = (DAT_TileMapState::instance.RandomLayer[tile] & 3)
+                        + GMFirstPictureIndex::instance[OpenSHC::DE::SHCDE::GM_FARMLAND] + frame;
                 } else {
-                    gfx = GMFirstPictureIndex::instance[14] + frame;
+                    gfx = GMFirstPictureIndex::instance[OpenSHC::DE::SHCDE::GM_FARMLAND] + frame;
                 }
-                // The two stores of the position are merged by the compiler; writing them out separately gives start
-                // the extra weight that puts it in ebx ahead of the buildingID * 0xcb temporary, as in the original
+                // Matching note: the position store is written in both arms; merged, the buildingID * 0xcb temporary
+                // takes ebx ahead of start, unlike the original
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft != 0 && DAT_BuildingsState::instance.field_0x18e024 == 0) {
                         *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc

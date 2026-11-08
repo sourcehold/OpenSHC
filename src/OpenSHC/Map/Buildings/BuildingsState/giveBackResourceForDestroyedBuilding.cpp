@@ -42,11 +42,10 @@ namespace Map {
                     return;
                 }
                 DAT_GameState::instance.playerDataArray[playerID].stoneGainedFraction += percentage * 2 / 100;
-                int stone = DAT_GameState::instance.playerDataArray[playerID].stoneGainedFraction / 4;
+                int const stone = DAT_GameState::instance.playerDataArray[playerID].stoneGainedFraction / 4;
                 DAT_GameState::instance.playerDataArray[playerID].stoneGainedFraction -= stone * 4;
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
@@ -55,11 +54,10 @@ namespace Map {
             if (buildingIDORIfNegResourceType == -2) {
                 // Wood
                 DAT_GameState::instance.playerDataArray[playerID].woodGainedFraction += percentage * 2 / 100;
-                int wood = DAT_GameState::instance.playerDataArray[playerID].woodGainedFraction / 4;
+                int const wood = DAT_GameState::instance.playerDataArray[playerID].woodGainedFraction / 4;
                 DAT_GameState::instance.playerDataArray[playerID].woodGainedFraction -= wood * 4;
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
@@ -68,132 +66,125 @@ namespace Map {
 
             if (buildingIDORIfNegResourceType == -3) {
                 // Mangonel on a tower
-                int wood = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredWood * percentage / 100;
-                int stone
+                int const wood
+                    = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredWood * percentage / 100;
+                int const stone
                     = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredStone_0x4 * percentage / 100;
-                int iron = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredIron_0x8 * percentage / 100;
-                int pitch
+                int const iron
+                    = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredIron_0x8 * percentage / 100;
+                int const pitch
                     = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredPitch_0xc * percentage / 100;
-                int gold = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredGold * percentage / 100;
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
-                    == FALSE) {
+                int const gold
+                    = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredGold * percentage / 100;
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
             } else if (buildingIDORIfNegResourceType == -4) {
                 // Ballista on a tower
-                int wood = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredWood * percentage / 100;
-                int stone
+                int const wood
+                    = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredWood * percentage / 100;
+                int const stone
                     = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredStone_0x4 * percentage / 100;
-                int iron = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredIron_0x8 * percentage / 100;
-                int pitch
+                int const iron
+                    = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredIron_0x8 * percentage / 100;
+                int const pitch
                     = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredPitch_0xc * percentage / 100;
-                int gold = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredGold * percentage / 100;
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
-                    == FALSE) {
+                int const gold
+                    = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredGold * percentage / 100;
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
             } else {
                 int const buildingType = this->buildings[buildingIDORIfNegResourceType].buildingType;
-                int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood * percentage / 100;
-                int stone
+                int const wood
+                    = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood * percentage / 100;
+                int const stone
                     = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4 * percentage / 100;
-                int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8 * percentage / 100;
-                int pitch
+                int const iron
+                    = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8 * percentage / 100;
+                int const pitch
                     = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc * percentage / 100;
-                int gold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold * percentage / 100;
+                int const gold
+                    = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold * percentage / 100;
                 // The siege mode adjusts copies, which the original stores before testing the mode
                 int siegeStone = stone;
                 int siegeGold = gold;
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::resourceGainForKillingPitAndPitchDitch, this)(
-                        (BuildingType)this->buildings[buildingIDORIfNegResourceType].buildingType, &siegeStone,
-                        &siegeGold);
+                        (BuildingType)buildingType, &siegeStone, &siegeGold);
                     DAT_GameState::instance.playerDataArray[playerID].startResources[OpenSHC::Game::Resources::RT_STONE]
                         += siegeStone;
                     DAT_GameState::instance.playerDataArray[playerID].startResources[OpenSHC::Game::Resources::RT_GOLD]
                         += siegeGold;
                     return;
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_STONE, stone)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_IRON, iron)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_PITCH, pitch)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
-                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)
-                    == FALSE) {
+                if (!MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
+                        DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_GOLD, gold)) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playSFXNoSpaceInTheStockPile,
                         DAT_GameState::ptr)(playerID);
                 }

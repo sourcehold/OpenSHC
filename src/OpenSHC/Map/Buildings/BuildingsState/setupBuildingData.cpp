@@ -17,7 +17,7 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitState_DogUnit.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
@@ -54,7 +54,6 @@ namespace Map {
         using OpenSHC::Map::Entities::EntityType;
         using OpenSHC::Map::Units::UnitInstructionType;
         using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
         using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -63,13 +62,14 @@ namespace Map {
         int BuildingsState::setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight,
             BuildingType buildingType, uint width, int playerID_dup, int variationIndex)
         {
+            // Places a new building of the type at (x, y) and returns its ID, or 0 if it cannot be placed.
+            //
             // Matching note: the original places the outpost case after the final return and jumps back to the
             // tail; we emit it in source order. Moving the case, a default label, an early break in the dog cage
             // case, wrapping it in a block, do/while or inner switch, splitting its two labels, a goto to a copy
             // after the return and a loop over the dogs all keep it inline. Ending only the outpost case with its
-            // own copy of the tail and return does outline it, but then the tail is merged into the category
-            // cases as well (much worse). The original also stores the last dog's unitRefID before its UID.
-            // Places a new building of the type at (x, y) and returns its ID
+            // own copy of the tail and return does outline it, but also merges the tail into the category cases
+            // (much worse).
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
             }
@@ -80,7 +80,8 @@ namespace Map {
                 return 0;
             }
 
-            // Find a free building slot
+            // Find a free building slot (logicalState 0). The bounds stay literal: countof(this->buildings) in the
+            // loop condition changes the allocation in the cesspit case, measured 0.98 -> 0.90
             int buildingID;
             for (buildingID = 1; buildingID < 2000; ++buildingID) {
                 if (this->buildings[buildingID].logicalState == 0) {
@@ -97,7 +98,7 @@ namespace Map {
                 sizeof(Building), 0, &this->buildings[buildingID]);
 
             // New buildings are snoozed if the other buildings of the type are
-            int sameTypeID
+            int const sameTypeID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
                     this)(playerID, buildingType);
             if (sameTypeID != 0 && this->buildings[sameTypeID].sleeping) {
@@ -155,7 +156,8 @@ namespace Map {
             this->buildings[buildingID].fireRelatedRNG1 = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
-            // Rendering data. Only the lower half of spriteSheetID is written.
+            // Rendering data. The store through a short pointer is load-bearing: the plain field store (the
+            // field is a short) changes register allocation, measured 0.98 -> 0.80
             *(short*)&this->buildings[buildingID].spriteSheetID
                 = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[buildingType].shortValue;
             this->buildings[buildingID].spriteID
@@ -337,7 +339,7 @@ namespace Map {
             case BT_UNKNOWN4:
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
-                        this->DAT_DraggedTileCountVerified, (UnitInstructionType)0x15, buildingID,
+                        this->DAT_DraggedTileCountVerified, (UnitInstructionType)21, buildingID,
                         this->buildings[buildingID].uid, 0);
                 }
                 break;
@@ -366,7 +368,7 @@ namespace Map {
             case BT_CESSPIT: {
                 // Flies and a poison cloud in the middle of the cesspit. The position is read from the fields, not
                 // through locals, as in the original
-                int halfSize = (int)width / 2;
+                int const halfSize = (int)width / 2;
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0, 0,
                     (this->buildings[buildingID].x + halfSize) * 8, (this->buildings[buildingID].y + halfSize) * 8,
@@ -387,46 +389,49 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
                     this)(buildingID, 1, FALSE);
                 for (int i = 0; i < 4; ++i) {
-                    (&this->buildings[buildingID].insideUnitID[0])[i] = 0;
-                    (&this->buildings[buildingID].insideUnitUID[0])[i] = 0;
+                    this->buildings[buildingID].insideUnitID[i] = 0;
+                    this->buildings[buildingID].insideUnitUID[i] = 0;
                 }
-                // Every cage holds four dogs
+                // Every cage holds four dogs. Written out because the copies differ (dogs 3 and 4 read the height
+                // through the global instance, only the last sets unitRef); a loop measured 0.98 -> 0.45
                 {
-                    int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
-                        OpenSHC::Map::Units::UT_CAGEDOG);
+                    int const dogID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, playerID,
+                        this->buildings[buildingID].buildingEntryX * 8, this->buildings[buildingID].buildingEntryY * 8,
+                        this->buildings[buildingID].terrainHeightUnk, OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.dog
+                            = OpenSHC::Map::Units::States::USDU_WAITING_IN_CAGE;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 0;
                         this->buildings[buildingID].insideUnitID[0] = dogID;
                         this->buildings[buildingID].insideUnitUID[0] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
-                    int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
-                        OpenSHC::Map::Units::UT_CAGEDOG);
+                    int const dogID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, playerID,
+                        this->buildings[buildingID].buildingEntryX * 8, this->buildings[buildingID].buildingEntryY * 8,
+                        this->buildings[buildingID].terrainHeightUnk, OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.dog
+                            = OpenSHC::Map::Units::States::USDU_WAITING_IN_CAGE;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 1;
                         this->buildings[buildingID].insideUnitID[1] = dogID;
                         this->buildings[buildingID].insideUnitUID[1] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
-                    int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8,
+                    int const dogID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, playerID,
+                        this->buildings[buildingID].buildingEntryX * 8, this->buildings[buildingID].buildingEntryY * 8,
                         DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
@@ -434,16 +439,17 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.dog
+                            = OpenSHC::Map::Units::States::USDU_WAITING_IN_CAGE;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 2;
                         this->buildings[buildingID].insideUnitID[2] = dogID;
                         this->buildings[buildingID].insideUnitUID[2] = DAT_UnitsState::instance.units[dogID].uid;
                     }
                 }
                 {
-                    int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8,
+                    int const dogID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, playerID,
+                        this->buildings[buildingID].buildingEntryX * 8, this->buildings[buildingID].buildingEntryY * 8,
                         DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
@@ -451,11 +457,13 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingUID = this->buildings[buildingID].uid;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(dogID);
-                        DAT_UnitsState::instance.units[dogID].state.generic = (UnitState)0xd2;
+                        DAT_UnitsState::instance.units[dogID].state.dog
+                            = OpenSHC::Map::Units::States::USDU_WAITING_IN_CAGE;
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 3;
                         this->buildings[buildingID].insideUnitID[3] = dogID;
                         this->buildings[buildingID].insideUnitUID[3] = DAT_UnitsState::instance.units[dogID].uid;
-                        // UID first: the other order gives the UID copy eax instead of the original's ecx
+                        // UID first: the original stores the ID first, but that order gives the UID copy eax instead of
+                        // ecx
                         this->buildings[buildingID].unitRefUID = DAT_UnitsState::instance.units[dogID].uid;
                         this->buildings[buildingID].unitRefID = dogID;
                     }
@@ -463,7 +471,7 @@ namespace Map {
                 break;
             case BT_OUTPOST_EUROPEAN:
             case BT_OUTPOST_ARABIAN:
-                this->buildings[buildingID].outpostRelatedUnk1 = 0xff;
+                this->buildings[buildingID].outpostRelatedUnk1 = 255;
                 this->buildings[buildingID].outpostRelatedUnk2 = 1;
                 this->buildings[buildingID].outpostRelatedUnk3 = 0;
                 this->buildings[buildingID].randomOutpostField = SEC_RNG::instance.currentNumber2 % 2 + 6;
@@ -473,13 +481,13 @@ namespace Map {
             }
 
             DAT_BuildingsState::instance.field_0x18e074 = 1;
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(buildingID)
-                != 0) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(
+                    buildingID)) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::recomputeAllFearFactors, DAT_BuildingsState::ptr)();
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isReligiousBuilding, this)(buildingID)
-                != 0) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isReligiousBuilding, this)(
+                    buildingID)) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Game::GameStateStructures_Func::recomputeReligionBonuses, DAT_GameState::ptr)();
             }

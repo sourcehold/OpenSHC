@@ -29,13 +29,14 @@ namespace Map {
                 return;
             }
 
+            // logicalState 0 is an unused building slot
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
                     || this->buildings[i].owner != param_1 || this->buildings[i].fireDuration != 0
                     || this->buildings[i].cooldownTimer != 0) {
                     continue;
                 }
-                int flammability = MACRO_CALL_MEMBER(
+                int const flammability = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i);
                 if (flammability != 0 && flammability != 4) {
                     ++weight;
@@ -48,7 +49,7 @@ namespace Map {
                 return;
             }
 
-            while (param_2 > 0 && weight > 0) {
+            for (; param_2 > 0 && weight > 0; --param_2) {
                 int pick = SEC_RNG::instance.currentNumber2 % weight;
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                 for (int i = 1; i < this->maxBuildingsCount; ++i) {
@@ -57,32 +58,33 @@ namespace Map {
                         || this->buildings[i].cooldownTimer != 0) {
                         continue;
                     }
-                    int flammability = MACRO_CALL_MEMBER(
+                    int const flammability = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i);
                     if (flammability == 0 || flammability == 4) {
                         continue;
                     }
                     --pick;
+                    // The original asks for the flammability a second time instead of reusing it
                     if (MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i)
                         == 5) {
                         pick -= 4;
                     }
-                    if (pick < 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::lightUpBuilding, this)(i, 0, 0);
-                        MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::setSpawnMoment,
-                            DAT_MinimapViewState::ptr)((short)this->buildings[i].x, (short)this->buildings[i].y);
-                        --weight;
-                        // Note: the original checks building 2000 instead of the building set on fire
-                        if (MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(2000)
-                            == 5) {
-                            weight -= 4;
-                        }
-                        break;
+                    if (pick >= 0) {
+                        continue;
                     }
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::lightUpBuilding, this)(i, 0, 0);
+                    MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
+                        this->buildings[i].x, this->buildings[i].y);
+                    --weight;
+                    // Note: the original checks building 2000 instead of the building set on fire
+                    if (MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(2000)
+                        == 5) {
+                        weight -= 4;
+                    }
+                    break;
                 }
-                --param_2;
             }
         }
 
