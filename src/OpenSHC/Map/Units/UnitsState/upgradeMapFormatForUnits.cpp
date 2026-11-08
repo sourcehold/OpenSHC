@@ -21,8 +21,8 @@ namespace Map {
             }
             if (receivedMapVersion == (PackagedFileMagicNum)100) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_100)();
-                MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_112)();
-            } else if ((int)receivedMapVersion <= 0x70) {
+            }
+            if (receivedMapVersion == (PackagedFileMagicNum)100 || (int)receivedMapVersion < 0x71) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapUnitsTo_112)();
             }
             if ((int)receivedMapVersion < 0x72) {
