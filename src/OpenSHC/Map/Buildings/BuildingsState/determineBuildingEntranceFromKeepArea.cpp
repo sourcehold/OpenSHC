@@ -23,9 +23,9 @@ namespace Map {
         undefined4 BuildingsState::determineBuildingEntranceFromKeepArea(
             int buildingID, int workerIndexPlus1, BOOLEnum flag)
         {
-            // Matching note: The original keeps pointers to the building fields (x, y, entry) in stack
-            // slots and keeps this and the building offset in separate registers; our compiler folds them into one
-            // base register. The loop bodies are otherwise the same.
+            // Matching note: the original keeps the tile index in edx across getBuildingHeightForBuildingID, so it
+            // was built with /GL (the callee is in cmake/compiler-flags-gl.txt, this file is not). Without that the
+            // tile needs a callee-saved register and the register and stack slot assignment differs throughout.
             // Finds an entrance tile of the building that can be reached from the campground of the owner.
             // flag enlarges the area around the building by one tile, workerIndexPlus1 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
@@ -67,7 +67,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + heightStep
-                    && tileHeight - heightStep <= height
+                    && height >= tileHeight - heightStep
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -78,11 +78,7 @@ namespace Map {
                                 .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                             != FALSE)
                     && ++found >= workerIndexPlus1) {
-                    this->buildings[buildingID].buildingEntryX
-                        = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
-                    this->buildings[buildingID].buildingEntryY
-                        = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-                    return 1;
+                    goto foundEntrance;
                 }
                 ++index;
                 if (index >= tileCount) {
@@ -90,9 +86,9 @@ namespace Map {
                 }
             }
 
-            // Tiles one step further away
-            int largerTileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
-            for (int tries = 0; tries < largerTileCount; ++tries) {
+            // Tiles one step further away (the original reuses the tile count variable)
+            tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
+            for (int tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(
                     size, 1, index, 0);
@@ -107,7 +103,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height
+                    && height >= tileHeight - 16
                     && (areaFrom == 0 || (short)DAT_TileMapState::instance.PathConnectionLayer[tile] == areaFrom
                         || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -118,25 +114,21 @@ namespace Map {
                                 .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                             != FALSE)
                     && ++found >= workerIndexPlus1) {
-                    this->buildings[buildingID].buildingEntryX
-                        = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
-                    this->buildings[buildingID].buildingEntryY
-                        = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-                    return 1;
+                    goto foundEntrance;
                 }
                 ++index;
-                if (index >= largerTileCount) {
+                if (index >= tileCount) {
                     index = 0;
                 }
             }
 
             // Accept any walkable tile next to the building
             tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            if (tileCount <= 0) {
-                index = 0;
-            } else {
+            if (tileCount > 0) {
                 index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
+            } else {
+                index = 0;
             }
             for (int tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
@@ -152,7 +144,7 @@ namespace Map {
                         DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[tile]);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x50501481) == 0 && height <= tileHeight + 16
-                    && tileHeight - 16 <= height && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
+                    && height >= tileHeight - 16 && DAT_TileMapState::instance.PathConnectionLayer[tile] != 0
                     && ++found >= workerIndexPlus1) {
                     this->buildings[buildingID].buildingEntryX
                         = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
@@ -166,6 +158,12 @@ namespace Map {
                 }
             }
             return 0;
+
+        // The first two searches share one exit block in the original
+        foundEntrance:
+            this->buildings[buildingID].buildingEntryX = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
+            this->buildings[buildingID].buildingEntryY = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
+            return 1;
         }
 
     }
