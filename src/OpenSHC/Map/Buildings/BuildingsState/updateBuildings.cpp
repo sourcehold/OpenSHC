@@ -18,7 +18,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Game::Player::PlayerData;
         using OpenSHC::Map::Buildings::BuildingLogicalState;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -40,13 +39,10 @@ namespace Map {
             }
 
             this->structCount = 0;
-            // Matching note: the original walks a pointer over the player data, set up before the memset; an indexed
-            // loop gets the pointer register only after the memset's zero register is free
-            PlayerData* playerData = DAT_GameState::instance.playerDataArray;
-            memset(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits, 0,
-                sizeof(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits));
-            for (; playerData < DAT_GameState::instance.playerDataArray + 9; ++playerData) {
-                playerData->dogCageCount = 0;
+            // One loop clears both per-player counters; MSVC unrolls the first store into nine
+            for (int i = 0; i < 9; ++i) {
+                DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[i] = 0;
+                DAT_GameState::instance.playerDataArray[i].dogCageCount = 0;
             }
             this->field_0x4 = 0;
 
