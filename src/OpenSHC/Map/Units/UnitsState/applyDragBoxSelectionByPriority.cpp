@@ -28,8 +28,7 @@ namespace Map {
             int _shields = 0;
             int _mangonels = 0;
             int _ballistas = 0;
-            // counts the fire ballistas first, and is then reused for the selection priority
-            int _priority = 0;
+            int _fireBallistas = 0;
             uint _lordUnitID = 0;
             int _nonLordOwnUnits = 0;
             LONG _boxLeft;
@@ -111,7 +110,7 @@ namespace Map {
                             _ballistas = _ballistas + 1;
                         } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_FBALLISTA) {
-                            _priority = _priority + 1;
+                            _fireBallistas = _fireBallistas + 1;
                         } else {
                             _otherOwnUnits = _otherOwnUnits + 1;
                         }
@@ -124,8 +123,9 @@ namespace Map {
                 _otherOwnUnits = _otherOwnUnits - 1;
                 _lordUnitID = 0;
             }
+            int _priority;
             if (_otherOwnUnits != 0 || _catapults != 0 || _trebuchets != 0 || _siegeTowers != 0 || _batteringRams != 0
-                || _shields != 0 || _mangonels != 0 || _ballistas != 0 || _priority != 0) {
+                || _shields != 0 || _mangonels != 0 || _ballistas != 0 || _fireBallistas != 0) {
                 _priority = 0;
             } else {
                 _priority = 9;
