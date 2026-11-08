@@ -42,7 +42,7 @@ namespace Map {
                     } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_JESTER) {
                         this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
                     } else {
-                        this->units[unitID].owner = (short)secondPlayerID;
+                        this->units[unitID].owner = secondPlayerID;
                         if (this->units[unitID].isStalked == 0 || this->units[unitID].calculatedOwnerPlayerIndex != 0) {
                             this->units[unitID].calculatedOwnerPlayerIndex = secondPlayerID;
                         }
@@ -55,7 +55,7 @@ namespace Map {
                     } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_JESTER) {
                         this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
                     } else {
-                        this->units[unitID].owner = (short)firstPlayerID;
+                        this->units[unitID].owner = firstPlayerID;
                         if (this->units[unitID].isStalked == 0 || this->units[unitID].calculatedOwnerPlayerIndex != 0) {
                             this->units[unitID].calculatedOwnerPlayerIndex = firstPlayerID;
                         }

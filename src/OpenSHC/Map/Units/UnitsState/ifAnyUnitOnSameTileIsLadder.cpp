@@ -16,10 +16,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F550
         BOOLEnum UnitsState::ifAnyUnitOnSameTileIsLadder(int tile)
         {
-            for (int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
-                unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
+            for (int unitID = DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
+                unitID = this->units[unitID].nextUnitOnTheSameTile) {
                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_E_LADDER
-                    && this->units[unitID].state.generic == (UnitState)3) {
+                    && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_STATE_3Unk) {
                     return TRUE;
                 }
             }

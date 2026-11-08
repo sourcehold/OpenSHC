@@ -20,7 +20,7 @@ namespace Map {
             if (this->units[unitID].facingDirection == DAT_DirectionAlgorithmState::instance.orientation) {
                 return;
             }
-            this->units[unitID].facingDirection = (short)DAT_DirectionAlgorithmState::instance.orientation;
+            this->units[unitID].facingDirection = DAT_DirectionAlgorithmState::instance.orientation;
         }
 
     }

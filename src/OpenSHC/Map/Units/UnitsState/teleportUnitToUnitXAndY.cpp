@@ -18,12 +18,12 @@ namespace Map {
                 && _tileX == DAT_UnitsState::instance.units[unitID].x) {
                 return;
             }
-            this->units[unitID].microXPosition = (short)(_tileX * 8 + 4);
-            this->units[unitID].microYPosition = (short)(_tileY * 8 + 4);
-            this->units[unitID].mimicCurrentXPosition = (short)_tileX;
-            this->units[unitID].x = (short)_tileX;
-            this->units[unitID].mimicCurrentYPosition = (short)_tileY;
-            this->units[unitID].y = (short)_tileY;
+            this->units[unitID].microXPosition = _tileX * 8 + 4;
+            this->units[unitID].microYPosition = _tileY * 8 + 4;
+            this->units[unitID].mimicCurrentXPosition = _tileX;
+            this->units[unitID].x = _tileX;
+            this->units[unitID].mimicCurrentYPosition = _tileY;
+            this->units[unitID].y = _tileY;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
         }
 
