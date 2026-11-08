@@ -2,8 +2,6 @@
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/Helpers.func.hpp"
-#include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
@@ -25,13 +23,6 @@
 namespace OpenSHC {
 namespace UI {
     namespace DisplayElements {
-
-        using OpenSHC::DE::SHCDE::eTextSections;
-        using OpenSHC::Rendering::ScreenResolutionEnum;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::UI::Enums::DisplayElementID;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B20B0
         void RenderNoRushDisplayElementUnk(int posX, int posY, DWORD elementState)
@@ -95,7 +86,7 @@ namespace UI {
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
                 x -= 280;
             }
-            x += -18 - (barWidth / 2);
+            x -= 18 + barWidth / 2;
             int const left = x - (barWidth / 2);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
                 DAT_PencilRenderCore::ptr)(left - 7, posY - 5, (barWidth / 2) + 5 + x, posY + 30, 16);
