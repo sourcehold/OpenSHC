@@ -1,5 +1,7 @@
-#include "OpenSHC/UI/MenuModals/SkirmishPlayOptions.func.hpp"
+#include "../SkirmishPlayOptions.func.hpp"
+
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 
@@ -12,7 +14,7 @@ namespace UI {
             void MenuModalRenderFunction_SkirmishPlayOptions(int x, int y, int width, int height)
             {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(0x4f, 0x67, x, y, width, height);
+                    DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 103, x, y, width, height);
             }
 
         }
