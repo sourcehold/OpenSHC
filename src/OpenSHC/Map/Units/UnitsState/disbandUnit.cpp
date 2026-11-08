@@ -38,12 +38,12 @@ namespace Map {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                 UnitTypeShort _unitType = this->units[unitID].unitType;
                 this->units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
-                /* note &unitID ! */
-                int _refund = unitID;
+                // MSVC gives the refund the stack slot of unitID, which is dead by then
+                int refund;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getPriceForDisbandedUnitType,
-                    DAT_BuildingsState::ptr)((UnitType)(short)_unitType, &_refund);
+                    DAT_BuildingsState::ptr)((UnitType)(short)_unitType, &refund);
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .startResources[0xf] += _refund;
+                    .startResources[0xf] += refund;
                 return (
                     int)&DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .startResources[0xf];
