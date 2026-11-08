@@ -53,7 +53,7 @@ namespace Map {
                             this->units[_deerUnitID].microXPosition, this->units[_deerUnitID].microYPosition,
                             this->units[_deerUnitID].terrainOrClimbHeight + 0x1a
                                 + this->units[_deerUnitID].buildingHeight);
-                        if ((uint)(_shotResult + -1) > 0x1af) {
+                        if ((uint)(_shotResult - 1) > 0x1af) {
                             continue;
                         }
                     }
