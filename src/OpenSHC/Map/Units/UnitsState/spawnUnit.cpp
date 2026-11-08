@@ -32,11 +32,11 @@ namespace Map {
                 if (this->units[_unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
                     break;
                 }
-                if (_unitID > 0x9c2) {
+                if (_unitID >= 0x9c3) {
                     return 0;
                 }
             }
-            if ((int)this->maxUnitCount <= _unitID) {
+            if (_unitID >= (int)this->maxUnitCount) {
                 this->maxUnitCount = _unitID + 1;
             }
             this->units[_unitID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
@@ -58,41 +58,44 @@ namespace Map {
             } else if (unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
                 this->units[_unitID].calculatedOwnerPlayerIndex = 0;
             }
-            short _y = (short)(this->units[_unitID].microYPosition / 8);
-            this->units[_unitID].mimicCurrentYPosition = _y;
-            this->units[_unitID].y = _y;
-            this->units[_unitID].destinationY_2Unk = _y;
-            short _x = (short)(this->units[_unitID].microXPosition / 8);
-            this->units[_unitID].mimicCurrentXPosition = _x;
-            this->units[_unitID].x = _x;
-            this->units[_unitID].destinationX_2Unk = _x;
+            int _x = this->units[_unitID].microXPosition / 8;
+            int _y = this->units[_unitID].microYPosition / 8;
+            this->units[_unitID].mimicCurrentYPosition = (short)_y;
+            this->units[_unitID].y = (short)_y;
+            this->units[_unitID].destinationY_2Unk = (short)_y;
+            this->units[_unitID].mimicCurrentXPosition = (short)_x;
+            this->units[_unitID].x = (short)_x;
+            this->units[_unitID].destinationX_2Unk = (short)_x;
             this->units[_unitID].movementRelated = 8;
             this->units[_unitID].field_0xe8 = 0;
             this->units[_unitID].targetingType = (UnitInstructionType)0;
-            this->units[_unitID].tile = _x + DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
+            this->units[_unitID].tile = this->units[_unitID].x
+                + DAT_ViewportRenderState::instance.translationMatrix[this->units[_unitID].y].addXgetTile;
             this->units[_unitID].fixedRng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            if (unitType == OpenSHC::Map::Units::UT_S_CATAPULT || unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
-                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
-                    if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                        this->units[_unitID].stoneAmmunition = 0x28;
-                    } else {
-                        this->units[_unitID].stoneAmmunition = 0x14;
-                    }
-                } else {
+            if (unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
+                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     this->units[_unitID].stoneAmmunition = 0x14;
+                } else {
+                    this->units[_unitID].stoneAmmunition
+                        = DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY ? 0x28 : 0x14;
+                }
+            } else if (unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
+                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
+                    this->units[_unitID].stoneAmmunition = 0x14;
+                } else {
+                    this->units[_unitID].stoneAmmunition
+                        = DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY ? 0x28 : 0x14;
                 }
             } else if (unitType == OpenSHC::Map::Units::UT_S_MANGONEL) {
-                if (DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile] != 0) {
-                    DAT_BuildingsState::instance
-                        .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile]]
-                        .defensiveTowerEngineType = 1;
+                int const buildingID = DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile];
+                if (buildingID != 0) {
+                    DAT_BuildingsState::instance.buildings[buildingID].defensiveTowerEngineType = 1;
                 }
             } else if (unitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
-                if (DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile] != 0) {
-                    DAT_BuildingsState::instance
-                        .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile]]
-                        .defensiveTowerEngineType = 2;
+                int const buildingID = DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile];
+                if (buildingID != 0) {
+                    DAT_BuildingsState::instance.buildings[buildingID].defensiveTowerEngineType = 2;
                 }
             } else if (unitType == OpenSHC::Map::Units::UT_CHILD) {
                 if ((this->units[_unitID].fixedRng & 0x80) != 0) {
