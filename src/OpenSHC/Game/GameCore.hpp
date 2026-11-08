@@ -15,7 +15,7 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/ActiveMenuTab.hpp"
-#include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
+#include "OpenSHC/UI/Enums/BuildMenuTabTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/MenuItemActionHandler.hpp"
@@ -34,7 +34,7 @@ namespace Game {
     using OpenSHC::Rendering::Enums::DirectDrawStatusInt;
     using OpenSHC::UI::ActiveMenuTab;
     using OpenSHC::UI::MenuItemActionHandler;
-    using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
+    using OpenSHC::UI::Enums::BuildMenuTabTypeInt;
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -58,12 +58,12 @@ namespace Game {
         ActiveMenuTab landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
         dword field_0x30; // 0x00000030 length: 4
         ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
-        BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
+        BuildMenuTabTypeInt tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         int furthestMission; // 0x00000054 length: 4
-        dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
+        BOOLEnum unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
         dword gameSuspended; // 0x00000064 length: 4
@@ -123,7 +123,7 @@ namespace Game {
         byte unused_0x140[4]; // 0x00000140 length: 4
         int popularityMessagePage; // 0x00000144 length: 4
         int popularityMessagePageCount; // 0x00000148 length: 4
-        dword isBinkVideoPlaying; // 0x0000014C length: 4
+        BOOLEnum isBinkVideoPlaying; // 0x0000014C length: 4
         dword section1095; // 0x00000150 length: 4
         dword newPlayerID; // 0x00000154 length: 4
         dword hasMenuRenderedUnk; // 0x00000158 length: 4
@@ -137,7 +137,7 @@ namespace Game {
         byte unused_0x178[2024]; // 0x00000178 length: 2024
         BOOLEnum cheatModeFlag; // 0x00000960 length: 4
         BOOLEnum solitaryAltUDungeon; // 0x00000964 length: 4
-        dword descriptionUseStringTable; // 0x00000968 length: 4
+        BOOLEnum descriptionUseStringTable; // 0x00000968 length: 4
         dword descriptionStringTableIndex; // 0x0000096C length: 4
         char temporaryTextBufferOfSize1000[1000]; // 0x00000970 length: 1000
         char standaloneFilename[1001]; // 0x00000D58 length: 1001
@@ -159,7 +159,7 @@ namespace Game {
         int savedMapBalance; // 0x00001D8C length: 4
         MapLockStateInt U3_mapLockedState; // 0x00001D90 length: 4
         MapLockStateInt savedMapLocked; // 0x00001D94 length: 4
-        dword mapLoadedForEditor; // 0x00001D98 length: 4
+        BOOLEnum mapLoadedForEditor; // 0x00001D98 length: 4
         int mapU3EndInt; // 0x00001D9C length: 4
         int savedMapEndInt2; // 0x00001DA0 length: 4
         int canBeginMainLoop; // 0x00001DA4 length: 4

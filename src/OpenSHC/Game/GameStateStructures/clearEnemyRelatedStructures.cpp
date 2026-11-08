@@ -28,10 +28,10 @@ namespace Game {
         DAT_GameCore::instance.section1076 = 0;
         // the four ten-entry arrays are reset together, exactly as the original binary does
         for (int index = 0; index < 10; ++index) {
-            this->mapAndTime.field2_0x8[index] = 0;
-            this->mapAndTime.field3_0x30[index] = 0;
+            this->mapAndTime.field_0x8[index] = 0;
+            this->mapAndTime.field_0x30[index] = 0;
             this->mapAndTime.playerKeepTile[index] = -1;
-            this->mapAndTime.field5_0x80[index] = -1;
+            this->mapAndTime.field_0x80[index] = -1;
         }
         for (int index = 0; index < 9; ++index) {
             this->mapAndTime.hitsDealtToPlayerArray[index] = 0;

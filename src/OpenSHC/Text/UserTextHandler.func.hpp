@@ -83,7 +83,7 @@ namespace Text {
             void (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x00472BE0, &UserTextHandler::clearEntry)
         clearEntry;
 
-        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(char*), false, Address::SHC_3BB0A8C1_0x00472C30,
+        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(char const*), false, Address::SHC_3BB0A8C1_0x00472C30,
             &UserTextHandler::copyIntoTextArray)
         copyIntoTextArray;
 

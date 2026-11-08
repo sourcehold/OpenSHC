@@ -136,7 +136,7 @@ namespace Game {
                 worstChange = popularityChange;
                 worstChangeReason = 4;
             }
-            this->playerDataArray[playerID].field344_0x2168 = 0;
+            this->playerDataArray[playerID].field_0x2168 = 0;
             if (worstChange > 0) {
                 worstChange = 0;
                 worstChangeReason = 3;
@@ -278,8 +278,8 @@ namespace Game {
             if (this->playerDataArray[playerID].storedPopularityPercent > this->playerDataArray[playerID].popularity) {
                 if ((int)this->playerDataArray[playerID].someCount44 > this->playerDataArray[playerID].popularity + 500
                     && this->playerDataArray[playerID].currentPopulation >= 4
-                    && this->playerDataArray[playerID].field25_0x40 == 0) {
-                    this->playerDataArray[playerID].field25_0x40 = 1;
+                    && this->playerDataArray[playerID].field_0x40 == 0) {
+                    this->playerDataArray[playerID].field_0x40 = 1;
                     this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
                     if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && MACRO_CALL_MEMBER(
@@ -293,8 +293,8 @@ namespace Game {
                     < this->playerDataArray[playerID].popularity
                 && (int)this->playerDataArray[playerID].someCount44 < this->playerDataArray[playerID].popularity - 500
                 && this->playerDataArray[playerID].currentPopulation >= 4
-                && this->playerDataArray[playerID].field25_0x40 == 1) {
-                this->playerDataArray[playerID].field25_0x40 = 0;
+                && this->playerDataArray[playerID].field_0x40 == 1) {
+                this->playerDataArray[playerID].field_0x40 = 0;
                 this->playerDataArray[playerID].someCount44 = this->playerDataArray[playerID].popularity;
                 if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                     && MACRO_CALL_MEMBER(

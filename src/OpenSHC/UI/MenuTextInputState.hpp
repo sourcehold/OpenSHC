@@ -47,11 +47,7 @@ namespace UI {
         undefined4 DAT_GenieVoiceActiveMenuVar; // 0x00000054 length: 4
         undefined4 DAT_MenuOptionsActionParameter; // 0x00000058 length: 4
         MenuModalTypeInt currentModalDialog; // 0x0000005C length: 4
-        MenuModalTypeInt modalDialog_2; // 0x00000060 length: 4
-        MenuModalTypeInt modalDialog_3; // 0x00000064 length: 4
-        MenuModalTypeInt modalDialog_4; // 0x00000068 length: 4
-        MenuModalTypeInt modalDialog_5; // 0x0000006C length: 4
-        MenuModalTypeInt modalDialog_6; // 0x00000070 length: 4
+        MenuModalTypeInt previousModalDialogs[5]; // 0x00000060 length: 20
         int fileListEntryCount; // 0x00000074 length: 4
         undefined4 fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
@@ -66,7 +62,8 @@ namespace UI {
         int previewedListIndex; // 0x000000A0 length: 4
         int field_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
-        int DAT_ArrayOfMapU3EndInt2[501]; // 0x000000AC length: 2004
+        int DAT_ArrayOfMapU3EndInt2; // 0x000000AC length: 4
+        int arrayOfMapEndInt2[500]; // 0x000000B0 length: 2000
         int DAT_ArrayOfMapIndices[501]; // 0x00000880 length: 2004
         int DAT_ArrayOfMapIndices2[501]; // 0x00001054 length: 2004
 
@@ -91,7 +88,7 @@ namespace UI {
 
         void popModalDialog();
 
-        void activateLoadOrSaveMapUI(int loadOrSaveMap);
+        void activateLoadOrSaveMapUI(MenuModalType loadOrSaveMap);
 
         void loadOrSaveMap(MenuModalType param_1);
 

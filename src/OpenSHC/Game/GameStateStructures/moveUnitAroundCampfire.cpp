@@ -25,7 +25,7 @@ namespace Game {
                     DAT_BuildingsState::ptr)(campfireID, availablePeasants - 1);
                 DAT_UnitsState::instance.units[unitID].targetX_2 = DAT_BuildingsState::instance.campfireSpotX;
                 DAT_UnitsState::instance.units[unitID].targetY_2 = DAT_BuildingsState::instance.campfireSpotY;
-                DAT_UnitsState::instance.units[unitID].field38_0x56
+                DAT_UnitsState::instance.units[unitID].field_0x56
                     = DAT_BuildingsState::instance.campfireSpotOrientation;
                 if (DAT_UnitsState::instance.units[unitID].x == DAT_UnitsState::instance.units[unitID].targetX_2
                     && DAT_UnitsState::instance.units[unitID].y == DAT_UnitsState::instance.units[unitID].targetY_2) {

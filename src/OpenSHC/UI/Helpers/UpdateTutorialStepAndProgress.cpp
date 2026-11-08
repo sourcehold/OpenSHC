@@ -17,11 +17,11 @@
 #include "OpenSHC/Globals/DAT_00df5558.hpp"
 #include "OpenSHC/Globals/DAT_00df555c.hpp"
 #include "OpenSHC/Globals/DAT_00df5560.hpp"
-#include "OpenSHC/Globals/DAT_00df5564.hpp"
 #include "OpenSHC/Globals/DAT_00df556c.hpp"
 #include "OpenSHC/Globals/DAT_00df5588.hpp"
 #include "OpenSHC/Globals/DAT_00df558c.hpp"
 #include "OpenSHC/Globals/DAT_00df5590.hpp"
+#include "OpenSHC/Globals/DAT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/DAT_FileDoesntExist.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
@@ -32,13 +32,13 @@
 #include "OpenSHC/Globals/DWORD_00df5548.hpp"
 #include "OpenSHC/Globals/DWORD_00df5568.hpp"
 #include "OpenSHC/Globals/DWORD_00df564c.hpp"
+#include "OpenSHC/Globals/INT_00df5564.hpp"
 #include "OpenSHC/Globals/INT_00df5574.hpp"
 #include "OpenSHC/Globals/INT_00df557c.hpp"
 #include "OpenSHC/Globals/INT_00df5580.hpp"
 #include "OpenSHC/Globals/INT_00df5584.hpp"
 #include "OpenSHC/Globals/INT_00df5650.hpp"
 #include "OpenSHC/Globals/INT_00df5654.hpp"
-#include "OpenSHC/Globals/INT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/TUT_RotateMapHappened.hpp"
 
 namespace OpenSHC {
@@ -48,7 +48,7 @@ namespace UI {
     void Helpers::UpdateTutorialStepAndProgress()
     {
         int const wasComplete = DAT_00df5560::instance;
-        if (INT_DisableTutorialRestrictions::instance
+        if (DAT_DisableTutorialRestrictions::instance
             && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX
             && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE) {
             return;
@@ -84,8 +84,8 @@ namespace UI {
                     speechPath);
             }
         }
-        if (DAT_00df5564::instance && now - DWORD_00df5568::instance > 1000) {
-            DAT_00df5564::instance = 0;
+        if (INT_00df5564::instance && now - DWORD_00df5568::instance > 1000) {
+            INT_00df5564::instance = 0;
         }
         if (!DAT_FileDoesntExist::instance && (DAT_00df5558::instance == 0 || INT_00df5650::instance)
             && DAT_00df5540::instance == 0 && DAT_00df5558::instance < DAT_00df555c::instance - 1) {
@@ -122,7 +122,7 @@ namespace UI {
             }
             if (fade >= 32) {
                 ++DAT_TutorialCurrentStep::instance;
-                if (INT_DisableTutorialRestrictions::instance) {
+                if (DAT_DisableTutorialRestrictions::instance) {
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
                         DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
                 } else {
@@ -146,7 +146,7 @@ namespace UI {
         if (DAT_00df5560::instance) {
             return;
         }
-        if (INT_DisableTutorialRestrictions::instance || DAT_00df5540::instance == 2) {
+        if (DAT_DisableTutorialRestrictions::instance || DAT_00df5540::instance == 2) {
             return;
         }
 

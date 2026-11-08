@@ -126,7 +126,7 @@ namespace Map {
         } else {
             DAT_UnitsState::instance.units[unitID].facingDirection = 0;
             if (DAT_GameState::instance.playerDataArray[owner].buildingEntryInfos[BEIE_KEEP].id == 0) {
-                DAT_GameState::instance.playerDataArray[owner].counter += 2;
+                DAT_GameState::instance.playerDataArray[owner].availableCows += 2;
             }
         }
         // AI tribe type 22 and unit logic state 5 have no constants.

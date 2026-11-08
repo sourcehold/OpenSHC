@@ -30,7 +30,7 @@ namespace UI {
             17, 0);
         DAT_TextManagerObject::instance.textSurfaceTarget = previousTextTarget;
         DAT_PencilRenderCore::instance.surfaceTarget = previousPencilTarget;
-        INT_00eb0e28::instance = DAT_TextManagerObject::instance.field1_0x4 + 215;
+        INT_00eb0e28::instance = DAT_TextManagerObject::instance.field_0x4 + 215;
         if (INT_00eb0e28::instance < 220) {
             INT_00eb0e28::instance = 220;
         }

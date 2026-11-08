@@ -8,9 +8,13 @@
 
 #pragma once
 
+#include "OpenSHC/Game/Skirmish/SkirmishStatisticsTailUnion.hpp"
+
 namespace OpenSHC {
 namespace Game {
     namespace Skirmish {
+
+        using OpenSHC::Game::Skirmish::SkirmishStatisticsTailUnion;
 
 #pragma pack(push, 1)
         // SIZE: 0x00000778
@@ -44,11 +48,7 @@ namespace Game {
             short unknownShortArray1[9]; // 0x000006C4 length: 18
             short unknownShortArray2[9]; // 0x000006D6 length: 18
             int finalDateOfDeathInMonths[9]; // 0x000006E8 length: 36
-            int yearStart; // 0x0000070C length: 4
-            int monthStart; // 0x00000710 length: 4
-            int yearEnd; // 0x00000714 length: 4
-            int monthEnd; // 0x00000718 length: 4
-            byte padding3[92]; // 0x0000071C length: 92
+            SkirmishStatisticsTailUnion tail; // 0x0000070C length: 108
 
         } SkirmishStatistics;
 #pragma pack(pop)

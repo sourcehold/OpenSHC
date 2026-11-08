@@ -87,8 +87,8 @@ namespace Game {
             int hasInitialResourceRecievingStarted; // 0x00000454 length: 4
             undefined1 padding_0x458[4]; // 0x00000458 length: 4
             int unkWheatFarmOrientation; // 0x0000045C length: 4
-            undefined1 unkHopFarmVariation; // 0x00000460 length: 1
-            undefined1 padding_0x461[7]; // 0x00000461 length: 7
+            int unkHopFarmVariation; // 0x00000460 length: 4
+            undefined1 padding_0x464[4]; // 0x00000464 length: 4
             int dairyFarmVariationMod4; // 0x00000468 length: 4
             int startResources[25]; // 0x0000046C length: 100
             int currentResources[25]; // 0x000004D0 length: 100
@@ -204,7 +204,7 @@ namespace Game {
             short freshUnitTribeIDs[4]; // 0x0000225C length: 8
             int freshUnitTribeUIDs[4]; // 0x00002264 length: 16
             int aiControlStatusRelated; // 0x00002274 length: 4
-            int counter; // 0x00002278 length: 4
+            int availableCows; // 0x00002278 length: 4
             short pitchDitchCounterTo4; // 0x0000227C length: 2
             short previousBlessedPeoplePercentage; // 0x0000227E length: 2
             short isFoodTypeBanned[4]; // 0x00002280 length: 8

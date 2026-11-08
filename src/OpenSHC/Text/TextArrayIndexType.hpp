@@ -20,7 +20,12 @@ namespace Text {
         TAIT_SIX__NUMERIC_ONLY = 6, // 0x00000006
         TAIT_SEVEN__NUMERIC_ONLY = 7, // 0x00000007
         TAIT_EIGHT__FILTER_B = 8, // 0x00000008
-        TAIT_NINE__FILTER_B = 9 // 0x00000009
+        TAIT_NINE__FILTER_B = 9, // 0x00000009
+        TAIT_UNKNOWN_10 = 10, // 0x0000000A
+        TAIT_UNKNOWN_11 = 11, // 0x0000000B
+        TAIT_UNKNOWN_12 = 12, // 0x0000000C
+        TAIT_UNKNOWN_14 = 14, // 0x0000000E
+        TAIT_UNKNOWN_15 = 15 // 0x0000000F
 
     } TextArrayIndexType;
 

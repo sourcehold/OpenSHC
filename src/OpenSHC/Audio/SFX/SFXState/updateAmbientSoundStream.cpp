@@ -157,7 +157,7 @@ namespace Audio {
                     }
                     if (FLOAT_00b986f8::instance <= 1.0) {
                         DAT_SFXFadeState::instance = SFXFS_IDLE;
-                        forcedAmbientEventUnk = DAT_SpeechDefinedData::instance.field11_0x49d4b8;
+                        forcedAmbientEventUnk = DAT_SpeechDefinedData::instance.field_0x49d4b8;
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                             MSS::enums::SND_STR_SFX_1Unk);
                         DAT_SpeechDefinedData::instance.currentStreamID = -1;
@@ -241,7 +241,7 @@ namespace Audio {
                 }
                 FLOAT_00b986f8::instance = 100.0;
                 DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
-                DAT_SpeechDefinedData::instance.field11_0x49d4b8 = 0xffffffff;
+                DAT_SpeechDefinedData::instance.field_0x49d4b8 = 0xffffffff;
                 return;
             }
             if (sortedCount == 0) {
@@ -327,7 +327,7 @@ namespace Audio {
                 return;
             }
             FLOAT_00b986f8::instance = 100.0;
-            DAT_SpeechDefinedData::instance.field11_0x49d4b8 = _pick;
+            DAT_SpeechDefinedData::instance.field_0x49d4b8 = _pick;
             DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
         }
 

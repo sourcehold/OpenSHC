@@ -163,7 +163,7 @@ namespace Map {
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_COW);
                     if (cowID != 0) {
-                        DAT_GameState::instance.playerDataArray[owner].counter += 1;
+                        DAT_GameState::instance.playerDataArray[owner].availableCows += 1;
                         DAT_UnitsState::instance.units[cowID].workplaceBuildingUID
                             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].uid;
                         DAT_UnitsState::instance.units[cowID].engineerManningSiegeStateRef_checkType = 255;
