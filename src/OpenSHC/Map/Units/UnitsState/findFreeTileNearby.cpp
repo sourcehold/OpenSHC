@@ -62,7 +62,7 @@ namespace Map {
                 == 0) {
                 _westTile = 0;
             }
-            if (_westTile == 0 && _southTile == 0 && _eastTile == 0 && _northTile == 0) {
+            if ((_westTile | _southTile | _eastTile | _northTile) == 0) {
                 return 0;
             }
             if ((_northTile != 0 || _southTile != 0)
