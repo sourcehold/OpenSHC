@@ -15,6 +15,9 @@ namespace Map {
         int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise
+            // Matching note: the original keeps the entry tile in edx across getBuildingHeightForBuildingID, so it
+            // was built with /GL and sees that the callee leaves edx alone; without that the allocator is short one
+            // register, spills the building height and every register from there on differs.
             if (buildingID <= 0) {
                 return 0;
             }
@@ -59,21 +62,20 @@ namespace Map {
                 }
             }
 
-            int result = 1;
             this->buildings[buildingID].hasAccessToKeep = 1;
-            if (blocked != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
-                    buildingID, 0);
-                int found = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
-                    buildingID, param_2, 0, x, y);
-                if (found == 0) {
-                    this->buildings[buildingID].hasAccessToKeep = 0;
-                    return 0;
-                }
-                result = found == 2 ? 2 : 1;
+            if (blocked == 0) {
+                return 1;
             }
-            return result;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
+                buildingID, 0);
+            int const found = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
+                buildingID, param_2, 0, x, y);
+            if (found == 0) {
+                this->buildings[buildingID].hasAccessToKeep = 0;
+                return 0;
+            }
+            return found == 2 ? 2 : 1;
         }
 
     }
