@@ -8,9 +8,11 @@ command line of the build, links it with /LTCG into a throw-away DLL (/NOENTRY /
 the already-built /GL objects of its callees, and diffs the function's code in that DLL against the original with
 quick_diff's normalizer. About a minute per run; QD_OUT picks the output folder as for quick_diff.
 
-Callees are found automatically: every `X_Func::name` the file calls whose `.../X/name.cpp` is both in the build
-list and in cmake/compiler-flags-gl.txt (and so has a /GL object in the build directory). Extra CALLEE.cpp
-arguments are added to that set. The callee's MACRO_FUNCTION_RESOLVER must be enabled (enable_local_functions.py),
+Callees are found automatically and transitively: every `X_Func::name` the file (or one of its callees) calls
+whose `.../X/name.cpp` is both in the build list and in cmake/compiler-flags-gl.txt (and so has a /GL object in
+the build directory). Without the callee's own callees LTCG has to assume a global may change across the call
+(updateGateDrawBridgeOpenCloseLogic read 0.91 with only its direct callee, 1.00 with the chain). Extra
+CALLEE.cpp arguments are added to that set. The callee's MACRO_FUNCTION_RESOLVER must be enabled (enable_local_functions.py),
 otherwise the call goes through the original binary and LTCG sees nothing. Run a full build first so the callee
 objects exist, and do not run this while a build is running.
 """
@@ -49,12 +51,24 @@ src = open(target, encoding='utf-8').read()
 va = int(re.search(r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)', src).group(1), 16)
 cls, name = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', src).groups()
 
+def direct_callees(text):
+    found = []
+    for c, n in sorted(set(re.findall(r'(\w+)_Func::\s*(\w+)', text))):
+        for f in build_list:
+            if f.endswith('/%s/%s.cpp' % (c, n)) and f in gl and os.path.exists(obj_of(ROOT + '/' + f)):
+                found.append(ROOT + '/' + f)
+    return found
+
+
+# transitively: LTCG only knows a callee leaves a register or a global alone if it also sees what that callee calls
 callees = []
-for c, n in sorted(set(re.findall(r'(\w+)_Func::\s*(\w+)', src))):
-    for f in build_list:
-        if f.endswith('/%s/%s.cpp' % (c, n)) and f in gl and os.path.exists(obj_of(ROOT + '/' + f)):
-            callees.append(ROOT + '/' + f)
-callees += extra
+todo = direct_callees(src) + extra
+while todo:
+    c = todo.pop(0)
+    if c in callees or os.path.abspath(c) == target:
+        continue
+    callees.append(c)
+    todo += direct_callees(open(c, encoding='utf-8').read())
 objs = [obj_of(c) for c in callees if os.path.abspath(c) != target]
 
 # the mangled name comes from a plain /FA compile of the same file
