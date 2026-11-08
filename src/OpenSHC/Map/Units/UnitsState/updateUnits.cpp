@@ -51,18 +51,8 @@ namespace Map {
         void UnitsState::updateUnits()
 
         {
-            int* _intFieldPtr;
-            short* _shortFieldPtr;
-            UnitTypeShort UVar6;
-            uint _unitIDBased8value;
-            int _troopValue;
-            uint _rngNumber8;
-            uint _currentUnitID;
-            UnitTypeShort _unitType;
-            int _buildingID;
-            BuildingTypeShort _buildingType;
-
-            _rngNumber8 = (int)SEC_RNG::instance.currentNumber2 % 16;
+            /* the 16th of the units checked for being stuck this tick */
+            int const _checkedSlotRemainder = (int)SEC_RNG::instance.currentNumber2 % 16;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 80400, '\0', (void*)((int)(DAT_TileMapState::instance.OccupancyLayer)));
             DAT_GameState::instance.playerDataArray[0].healerCount = 0;
@@ -123,7 +113,7 @@ namespace Map {
                         = DAT_GameState::instance.playerDataArray[_owner].unblessedPeopleCountUnk + 1;
                 }
                 // every 16th unit per tick is checked for being stuck somewhere it cannot be
-                if ((int)DAT_CurrentUnitSlotID::instance % 16 == _rngNumber8) {
+                if ((int)DAT_CurrentUnitSlotID::instance % 16 == _checkedSlotRemainder) {
                     int const _unitTile = this->units[DAT_CurrentUnitSlotID::instance].tile;
                     if (DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0
                         && (DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x40000000U) == 0
@@ -427,15 +417,15 @@ namespace Map {
                             = this->unitDistanceComputationResultUnk;
                     }
                 }
-                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy;
+                short* const _lookForEnemy = &this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy;
                 if (this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy < 0) {
-                    *_shortFieldPtr = *_shortFieldPtr + 1;
+                    *_lookForEnemy = *_lookForEnemy + 1;
                 } else {
-                    *_shortFieldPtr = 0;
+                    *_lookForEnemy = 0;
                 }
-                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementCooldown;
+                short* const _movementCooldown = &this->units[DAT_CurrentUnitSlotID::instance].movementCooldown;
                 if (this->units[DAT_CurrentUnitSlotID::instance].movementCooldown < 0) {
-                    *_shortFieldPtr = *_shortFieldPtr + 1;
+                    *_movementCooldown = *_movementCooldown + 1;
                 }
                 this->units[DAT_CurrentUnitSlotID::instance].SA = 0;
                 if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
@@ -526,10 +516,10 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0
                     && this->units[DAT_CurrentUnitSlotID::instance].state.generic
                         != OpenSHC::Map::Units::States::US_DISAPPEAR) {
-                    UVar6 = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                    if (UVar6 != OpenSHC::Map::Units::UT_BURNINGMAN
-                        && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
-                        && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL
+                    UnitTypeShort const _dyingType = this->units[DAT_CurrentUnitSlotID::instance].unitType;
+                    if (_dyingType != OpenSHC::Map::Units::UT_BURNINGMAN
+                        && _dyingType != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
+                        && _dyingType != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL
                         && ((short)this->units[DAT_CurrentUnitSlotID::instance].state.generic < 0x6f
                             || 0x75 < (short)this->units[DAT_CurrentUnitSlotID::instance].state.generic)) {
                         this->units[DAT_CurrentUnitSlotID::instance].state.generic
@@ -607,28 +597,29 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::unitClimbing, this)(
                         DAT_CurrentUnitSlotID::instance);
                 } else {
-                    _intFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
+                    int* const _moveTicker = &this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
                     /*
                       Not climbing
                      */
 
-                    *_intFieldPtr = *_intFieldPtr + 1;
-                    _troopValue = this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
-                    if (_troopValue - this->units[DAT_CurrentUnitSlotID::instance].field_0x350
+                    *_moveTicker = *_moveTicker + 1;
+                    int const _moveTicks = this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
+                    if (_moveTicks - this->units[DAT_CurrentUnitSlotID::instance].field_0x350
                         > (int)this->units[DAT_CurrentUnitSlotID::instance].calculatedMovementSpeed
                             + (int)this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
                             + (int)this->units[DAT_CurrentUnitSlotID::instance].moveDelay) {
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
-                        this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _troopValue;
+                        short* const _movementRunUpTime
+                            = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _moveTicks;
                         if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime > 0) {
-                            *_shortFieldPtr = *_shortFieldPtr - 1;
+                            *_movementRunUpTime = *_movementRunUpTime - 1;
                         } else {
-                            *_shortFieldPtr = 0;
+                            *_movementRunUpTime = 0;
                         }
-                        _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove, this)(
-                            DAT_CurrentUnitSlotID::instance,
+                        int const _moved = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove,
+                            this)(DAT_CurrentUnitSlotID::instance,
                             (int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed));
-                        if (_troopValue != 0) {
+                        if (_moved != 0) {
                             if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
                                     == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION
                                 && this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown != 0
@@ -687,19 +678,18 @@ namespace Map {
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_KNIGHT) {
                         this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                             = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                        if ((DAT_CurrentUnitSlotID::instance & 1) == 0) {
-                            if (this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0
-                                && (this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID != 0
-                                    || (this->units[DAT_CurrentUnitSlotID::instance].targetingType
-                                        == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT))
-                                && this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
-                                    <= (int)this->units[DAT_CurrentUnitSlotID::instance].currentIndexInPathPlan) {
-                                this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                    = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x80;
-                            }
-                        } else {
+                        if ((DAT_CurrentUnitSlotID::instance & 1) != 0) {
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                 = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x270;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0
+                            && (this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID != 0
+                                || this->units[DAT_CurrentUnitSlotID::instance].targetingType
+                                    == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT)
+                            && this->units[DAT_CurrentUnitSlotID::instance].currentIndexInPathPlan
+                                >= this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan - 0x10) {
+                            /* a charging knight */
+                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x80;
                         }
                     }
                     break;
@@ -735,9 +725,9 @@ namespace Map {
                         = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                         + this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8;
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_A_HARCHER
-                        && (_buildingID = this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation,
-                            _buildingID != 4)
-                        && _buildingID != 5 && _buildingID != 6) {
+                        && this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation != 4
+                        && this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation != 5
+                        && this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation != 6) {
                         this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                             = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
                     }
@@ -773,9 +763,9 @@ namespace Map {
                     this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                         = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                         + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
-                    _troopValue = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                        + 0x80 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected + 0x80
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                     this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                         = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                         + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
@@ -791,8 +781,7 @@ namespace Map {
                     _correctedDirection
                         = ((int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected + 4)
                         % 8;
-                    _troopValue = _correctedDirection + 0x1d1;
-                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _correctedDirection + 0x1d1;
                     this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                         = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                         + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
@@ -823,28 +812,29 @@ namespace Map {
                         + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
                     break;
                 }
-                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
+                short* const _speedMatching = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
                 if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {
-                    *_shortFieldPtr = *_shortFieldPtr - 1;
+                    *_speedMatching = *_speedMatching - 1;
                 }
-                byte _fadeAlpha = this->units[DAT_CurrentUnitSlotID::instance].fadeType;
-                if (_fadeAlpha != 0) {
-                    if (_fadeAlpha == 1) {
+                byte const _fadeType = this->units[DAT_CurrentUnitSlotID::instance].fadeType;
+                if (_fadeType != 0) {
+                    if (_fadeType == 1) {
                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
-                            = (byte)DAT_UnitPropertiesDefinedData::instance
+                            = DAT_UnitPropertiesDefinedData::instance
                                   .FadeAlpha_Values_1_2[(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
                     } else {
-                        if (_fadeAlpha == 2) {
-                            _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
+                        byte _fadeAlpha;
+                        if (_fadeType == 2) {
+                            _fadeAlpha = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
                                              [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
                         } else {
-                            byte _fadeCounter = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
-                            if (_fadeAlpha == 3) {
-                                _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
-                                                 .FadeAlpha_Values_3[(char)_fadeCounter];
+                            byte const _fadeCounter = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
+                            if (_fadeType == 3) {
+                                _fadeAlpha
+                                    = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_3[(char)_fadeCounter];
                             } else {
-                                _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
-                                                 .FadeAlpha_Values_4[(char)_fadeCounter];
+                                _fadeAlpha
+                                    = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_4[(char)_fadeCounter];
                             }
                         }
                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = _fadeAlpha;
