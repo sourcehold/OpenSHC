@@ -39,10 +39,10 @@ namespace Map {
             if (_selectedCount == 0) {
                 return 0;
             }
-            DAT_TribesState::instance.DAT_CurrentTribeID
-                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getAvailableTribeID, DAT_TribesState::ptr)(
-                    DAT_GameSynchronyState::instance.currentPlayerSlotID);
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = DAT_TribesState::instance.DAT_CurrentTribeID;
+            int const tribeID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getAvailableTribeID,
+                DAT_TribesState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = tribeID;
+            DAT_TribesState::instance.DAT_CurrentTribeID = tribeID;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_UNITS_SELECT);
             return _selectedCount;
