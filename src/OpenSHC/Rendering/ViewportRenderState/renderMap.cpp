@@ -692,7 +692,20 @@ namespace Rendering {
                         = (uint)DAT_TileMapState::instance.ConstructionGFXLayer[layerTileIndex];
                     bVar12 = 0;
                     bVar14 = 0;
-                    if (DAT_RenderMap_ImageID::instance == 0) {
+                    if (DAT_RenderMap_ImageID::instance != 0) {
+                        if (DAT_TileMapState::instance.buildingPlacementFail == FALSE
+                            || (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x8000) != 0) {
+                            DAT_GmImageAddressToBeRendered::instance = DAT_RenderMap_ImageID::instance;
+                            if ((DAT_00ed3148::instance & 0x100) != 0 && _flatView == 0) {
+                                DAT_RenderMap_YOffset::instance
+                                    = DAT_TileMapState::instance.heightBasedScreenYOffset[DAT_TileMapState::instance
+                                            .DefaultHeightLayer[layerTileIndex]];
+                            }
+                        } else {
+                            bVar12 = 1;
+                            bVar14 = 1;
+                        }
+                    } else {
                         if ((DAT_00ed3148::instance & 0x4000) != 0 && DAT_TileMapState::instance.field_0x5549b8 != 0
                             && (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
                                 || (_yOffset_01
@@ -703,20 +716,9 @@ namespace Rendering {
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]))) {
                             DAT_RenderMap_ImageID::instance = 57;
-                            goto LAB_004e9b3c;
+                            bVar12 = 1;
+                            bVar14 = 1;
                         }
-                    } else if (DAT_TileMapState::instance.buildingPlacementFail == FALSE
-                        || (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x8000) != 0) {
-                        DAT_GmImageAddressToBeRendered::instance = DAT_RenderMap_ImageID::instance;
-                        if ((DAT_00ed3148::instance & 0x100) != 0 && _flatView == 0) {
-                            DAT_RenderMap_YOffset::instance
-                                = DAT_TileMapState::instance.heightBasedScreenYOffset[DAT_TileMapState::instance
-                                        .DefaultHeightLayer[layerTileIndex]];
-                        }
-                    } else {
-                    LAB_004e9b3c:
-                        bVar12 = 1;
-                        bVar14 = 1;
                     }
                     unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[layerTileIndex];
                     if (unitID != 0 && unitID == DAT_UnitsState::instance.lastSelectedUnitID
