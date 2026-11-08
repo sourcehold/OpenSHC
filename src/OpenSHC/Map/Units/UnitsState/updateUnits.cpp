@@ -27,6 +27,7 @@
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitHasBecomeIdle.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_UpdateUnitsTracker.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
@@ -74,160 +75,156 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[7].healerCount = 0;
             DAT_GameState::instance.playerDataArray[8].healerCount = 0;
             this->unitCount = 0;
-            DAT_CurrentUnitSlotID::instance = 1;
             this->maxUnitCount = 0;
-            do {
-                _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                if (this->units[_currentUnitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE) {
-                    this->maxUnitCount = _currentUnitID + 1;
-                    this->units[_currentUnitID].field_0x39a = 0;
-                    this->units[_currentUnitID].attackedBy = 0;
-                    this->units[_currentUnitID].huntedBy = 0;
-                    this->units[_currentUnitID].field_0x3dc = 0;
-                    this->units[_currentUnitID].field_0x64 = 0;
-                    /*
-                      This literally does nothing, this variable is not used elsewhere, what the
-                       hell?
-                     */
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < 2500;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
+                    continue;
+                }
+                this->maxUnitCount = DAT_CurrentUnitSlotID::instance + 1;
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x39a = 0;
+                this->units[DAT_CurrentUnitSlotID::instance].attackedBy = 0;
+                this->units[DAT_CurrentUnitSlotID::instance].huntedBy = 0;
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x3dc = 0;
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x64 = 0;
+                /*
+                  This literally does nothing, this variable is not used elsewhere, what the
+                   hell?
+                 */
 
-                    _shortFieldPtr = &this->units[_currentUnitID].targetShootRelated;
-                    if (this->units[_currentUnitID].targetShootRelated != 0) {
-                        *_shortFieldPtr = *_shortFieldPtr - 1;
-                    }
-                    if ((this->units[_currentUnitID].state.generic
-                            == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk)
-                        && (_troopValue
-                            = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isUnitRegisteredOnItsOwnTile,
-                                this)(DAT_CurrentUnitSlotID::instance),
-                            _troopValue == 0)) {
-                        this->lostChimps = this->lostChimps + 1;
-                        this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
-                    }
-                    _buildingID = this->units[DAT_CurrentUnitSlotID::instance].owner;
-                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_buildingID] == -1) {
-                        this->units[DAT_CurrentUnitSlotID::instance].siegeTargetPlayerID
-                            = (short)DAT_GameState::instance.playerDataArray[_buildingID].attackedPlayerID;
-                    } else {
-                        this->units[DAT_CurrentUnitSlotID::instance].siegeTargetPlayerID = 0;
-                    }
-                    if (this->units[DAT_CurrentUnitSlotID::instance].blessedAmount != 0) {
-                        this->units[DAT_CurrentUnitSlotID::instance].blessedAmount
-                            = this->units[DAT_CurrentUnitSlotID::instance].blessedAmount - 1;
-                        DAT_GameState::instance.playerDataArray[_buildingID].blessedPeopleCountUnk
-                            = DAT_GameState::instance.playerDataArray[_buildingID].blessedPeopleCountUnk + 1;
-                    } else if (DAT_UnitPropertiesDefinedData::instance
-                                   .NotBlessableUnits[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
-                        == 0) {
-                        DAT_GameState::instance.playerDataArray[_buildingID].unblessedPeopleCountUnk
-                            = DAT_GameState::instance.playerDataArray[_buildingID].unblessedPeopleCountUnk + 1;
-                    }
-                    _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                    _unitIDBased8value = (int)_currentUnitID % 16;
-                    if (_unitIDBased8value == _rngNumber8) {
-                        int _unitTile = this->units[_currentUnitID].tile;
-                        if (DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0
-                            && (DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x40000000U) == 0
-                            && this->units[_currentUnitID].moveRelatedFlag != 1) {
-                            _buildingID = DAT_TileMapState::instance.BuildingLayer[_unitTile];
-                            if ((_buildingID == 0
-                                    || (DAT_BuildingsState::instance.buildings[_buildingID].logicalState
-                                            == OpenSHC::Map::Buildings::BLS_NORMAL
-                                        && (_buildingType
-                                            = DAT_BuildingsState::instance.buildings[_buildingID].buildingType,
-                                            DAT_BuildingDefinedData::instance
-                                                    .BuildingIsGateHouseArray[(short)_buildingType]
-                                                == 0)
-                                        && _buildingType != OpenSHC::Map::Buildings::BT_DRAWBRIDGE))
-                                && this->units[_currentUnitID].state.generic
-                                    != OpenSHC::Map::Units::States::US_DISAPPEAR) {
-                                if (this->units[_currentUnitID].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
-                                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
-                                        DAT_SFXState::ptr)((int)this->units[_currentUnitID].x,
-                                        (int)(this->units[_currentUnitID].y), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
-                                    _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                                }
-                                if (999 < (int)(DAT_GameCore::instance.mapTimeInTicks
-                                        - this->units[_currentUnitID].time)
-                                    && (_unitType = this->units[_currentUnitID].unitType,
-                                        _unitType != OpenSHC::Map::Units::UT_S_TOWER)) {
-                                    if (_unitType == OpenSHC::Map::Units::UT_LORD) {
-                                        uint _targetY = (uint)this->units[_currentUnitID].targetY_2;
-                                        uint _targetX = (uint)this->units[_currentUnitID].targetX_2;
-                                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit,
-                                            this)(_currentUnitID, _targetX, _targetY,
-                                            (undefined4)((int)(DAT_TileMapState::instance
-                                                    .HeightLayer[DAT_ViewportRenderState::instance
-                                                                     .translationMatrix[_targetY]
-                                                                     .addXgetTile
-                                                        + _targetX])));
-                                        this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
-                                            = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
-                                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                            = OpenSHC::Map::Units::States::US_IDLEUnk;
-                                        _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                                    } else {
-                                        this->units[_currentUnitID].state.generic
-                                            = OpenSHC::Map::Units::States::US_DISAPPEAR;
-                                        this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
-                                        _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                                    }
+                if (this->units[DAT_CurrentUnitSlotID::instance].targetShootRelated != 0) {
+                    this->units[DAT_CurrentUnitSlotID::instance].targetShootRelated
+                        = this->units[DAT_CurrentUnitSlotID::instance].targetShootRelated - 1;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                        == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk
+                    && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isUnitRegisteredOnItsOwnTile, this)(
+                           DAT_CurrentUnitSlotID::instance)
+                        == FALSE) {
+                    this->lostChimps = this->lostChimps + 1;
+                    this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
+                }
+                int const _owner = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_owner] != -1) {
+                    this->units[DAT_CurrentUnitSlotID::instance].siegeTargetPlayerID = 0;
+                } else {
+                    this->units[DAT_CurrentUnitSlotID::instance].siegeTargetPlayerID
+                        = (short)DAT_GameState::instance.playerDataArray[_owner].attackedPlayerID;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].blessedAmount != 0) {
+                    this->units[DAT_CurrentUnitSlotID::instance].blessedAmount
+                        = this->units[DAT_CurrentUnitSlotID::instance].blessedAmount - 1;
+                    DAT_GameState::instance.playerDataArray[_owner].blessedPeopleCountUnk
+                        = DAT_GameState::instance.playerDataArray[_owner].blessedPeopleCountUnk + 1;
+                } else if (DAT_UnitPropertiesDefinedData::instance
+                               .NotBlessableUnits[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
+                    == 0) {
+                    DAT_GameState::instance.playerDataArray[_owner].unblessedPeopleCountUnk
+                        = DAT_GameState::instance.playerDataArray[_owner].unblessedPeopleCountUnk + 1;
+                }
+                // every 16th unit per tick is checked for being stuck somewhere it cannot be
+                if ((int)DAT_CurrentUnitSlotID::instance % 16 == _rngNumber8) {
+                    int const _unitTile = this->units[DAT_CurrentUnitSlotID::instance].tile;
+                    if (DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0
+                        && (DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x40000000U) == 0
+                        && this->units[DAT_CurrentUnitSlotID::instance].moveRelatedFlag != 1) {
+                        short const _tileBuildingID = DAT_TileMapState::instance.BuildingLayer[_unitTile];
+                        if ((_tileBuildingID == 0
+                                || (DAT_BuildingsState::instance.buildings[_tileBuildingID].logicalState
+                                        == OpenSHC::Map::Buildings::BLS_NORMAL
+                                    && DAT_BuildingDefinedData::instance.BuildingIsGateHouseArray[(
+                                           short)DAT_BuildingsState::instance.buildings[_tileBuildingID]
+                                               .buildingType]
+                                        == 0
+                                    && DAT_BuildingsState::instance.buildings[_tileBuildingID].buildingType
+                                        != OpenSHC::Map::Buildings::BT_DRAWBRIDGE))
+                            && this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                != OpenSHC::Map::Units::States::US_DISAPPEAR) {
+                            if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_CHICKEN) {
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                                    (int)DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x,
+                                    (int)DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y,
+                                    OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
+                            }
+                            if ((int)(DAT_GameCore::instance.mapTimeInTicks
+                                    - this->units[DAT_CurrentUnitSlotID::instance].time)
+                                    >= 1000
+                                && this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                    != OpenSHC::Map::Units::UT_S_TOWER) {
+                                if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                    == OpenSHC::Map::Units::UT_LORD) {
+                                    int const _targetY
+                                        = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetY_2;
+                                    int const _targetX
+                                        = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetX_2;
+                                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit, this)(
+                                        DAT_CurrentUnitSlotID::instance, _targetX, _targetY,
+                                        DAT_TileMapState::instance.HeightLayer
+                                            [DAT_ViewportRenderState::instance.translationMatrix[_targetY].addXgetTile
+                                                + _targetX]);
+                                    this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                        = OpenSHC::Map::Units::States::US_IDLEUnk;
+                                    this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
+                                        = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
+                                } else {
+                                    this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                        = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                                    this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
                                 }
                             }
                         }
-                        UVar6 = this->units[_currentUnitID].unitType;
-                        if (((UVar6 == OpenSHC::Map::Units::UT_S_CATAPULT)
-                                || (UVar6 == OpenSHC::Map::Units::UT_S_FBALLISTA))
-                            && (DAT_TileMapState::instance.LogicLayer[this->units[_currentUnitID].tile] & 0x50000000U)
-                                != 0) {
-                            this->units[_currentUnitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
-                            _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                            this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
-                        }
                     }
-                    if (this->units[_currentUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
-                        && ((this->units[_currentUnitID].x == 0 || (this->units[_currentUnitID].y == 0))
-                            || (this->units[_currentUnitID].tile < 0))) {
-                        this->units[_currentUnitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                    if ((this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_FBALLISTA)
+                        && (DAT_TileMapState::instance.LogicLayer[this->units[DAT_CurrentUnitSlotID::instance].tile]
+                               & 0x50000000U)
+                            != 0) {
+                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            = OpenSHC::Map::Units::States::US_DISAPPEAR;
                         this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
-                        _currentUnitID = DAT_CurrentUnitSlotID::instance;
                     }
                 }
-                DAT_CurrentUnitSlotID::instance = _currentUnitID + 1;
-            } while ((int)DAT_CurrentUnitSlotID::instance < 2500);
-            DAT_CurrentUnitSlotID::instance = 1;
-            if (1 < (int)this->maxUnitCount) {
-                do {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                        != OpenSHC::Map::Units::ULS_INVISIBLE) {
-                        if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                            == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                            _buildingID = this->units[DAT_CurrentUnitSlotID::instance].attackedUnitID;
-                            this->units[_buildingID].attackedBy = this->units[_buildingID].attackedBy + 1;
-                            if ((int)this->units[_buildingID].attackedUnitID != DAT_CurrentUnitSlotID::instance) {
-                                this->units[DAT_CurrentUnitSlotID::instance].attackedBy
-                                    = this->units[DAT_CurrentUnitSlotID::instance].attackedBy + 1;
-                            }
-                            if ((this->units[_buildingID].attackedBy == 1)
-                                && (this->units[_buildingID].isStalked == 0)) {
-                                DAT_GameCore::instance.cowPoisonTrackerUnk
-                                    = DAT_GameCore::instance.cowPoisonTrackerUnk + 1;
-                            }
-                        }
-                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID;
-                        if (_buildingID != 0) {
-                            this->units[_buildingID].huntedBy = this->units[_buildingID].huntedBy + 1;
-                        }
-                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].field_0x3de;
-                        if (_buildingID != 0) {
-                            this->units[_buildingID].field_0x3dc = this->units[_buildingID].field_0x3dc + 1;
-                        }
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0xd0;
-                        if (0 < this->units[DAT_CurrentUnitSlotID::instance].field_0xd0) {
-                            *_shortFieldPtr = *_shortFieldPtr - 1;
-                        }
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_NORMAL
+                    && (this->units[DAT_CurrentUnitSlotID::instance].x == 0
+                        || this->units[DAT_CurrentUnitSlotID::instance].y == 0
+                        || this->units[DAT_CurrentUnitSlotID::instance].tile < 0)) {
+                    this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                        = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                    this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
+                }
+            }
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                    == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
+                    int const _attackedUnitID = this->units[DAT_CurrentUnitSlotID::instance].attackedUnitID;
+                    this->units[_attackedUnitID].attackedBy = this->units[_attackedUnitID].attackedBy + 1;
+                    if (this->units[_attackedUnitID].attackedUnitID != DAT_CurrentUnitSlotID::instance) {
+                        this->units[DAT_CurrentUnitSlotID::instance].attackedBy
+                            = this->units[DAT_CurrentUnitSlotID::instance].attackedBy + 1;
                     }
-                    DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1;
-                } while ((int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount);
+                    if (this->units[_attackedUnitID].attackedBy == 1 && this->units[_attackedUnitID].isStalked == 0) {
+                        DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + 1;
+                    }
+                }
+                short const _huntedUnitID = this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID;
+                if (_huntedUnitID != 0) {
+                    this->units[_huntedUnitID].huntedBy = this->units[_huntedUnitID].huntedBy + 1;
+                }
+                short const _unknownUnitID = this->units[DAT_CurrentUnitSlotID::instance].field_0x3de;
+                if (_unknownUnitID != 0) {
+                    this->units[_unknownUnitID].field_0x3dc = this->units[_unknownUnitID].field_0x3dc + 1;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].field_0xd0 > 0) {
+                    this->units[DAT_CurrentUnitSlotID::instance].field_0xd0
+                        = this->units[DAT_CurrentUnitSlotID::instance].field_0xd0 - 1;
+                }
             }
             uint _tick0To64 = DAT_GameCore::instance.mapTimeInTicks & 0x3f;
             for (int _playerID = 1; _playerID < 9; _playerID = _playerID + 1) {
@@ -257,679 +254,608 @@ namespace Map {
                     DAT_GameState::instance.playerDataArray[_playerID].totalTroopValue = 0;
                 }
             }
-            DAT_CurrentUnitSlotID::instance = 1;
-            if (1 < (int)this->maxUnitCount) {
-                do {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                        != OpenSHC::Map::Units::ULS_INVISIBLE) {
-                        this->unitCount = this->unitCount + 1;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x90 != 0) {
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::UnitsState_Func::stampOccupancyFlagOnSurroundingTiles, this)(
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
+                    continue;
+                }
+                this->unitCount = this->unitCount + 1;
+                if (this->units[DAT_CurrentUnitSlotID::instance].field_0x90 != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::stampOccupancyFlagOnSurroundingTiles, this)(
+                        DAT_CurrentUnitSlotID::instance);
+                }
+                DAT_TileMapState::instance.OccupancyLayer[this->units[DAT_CurrentUnitSlotID::instance].tile]
+                    = DAT_TileMapState::instance.OccupancyLayer[this->units[DAT_CurrentUnitSlotID::instance].tile]
+                    | this->units[DAT_CurrentUnitSlotID::instance].occupancyOrFlag;
+                if (this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
+                    int const _ownerID = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                    if ((DAT_GameCore::instance.mapTimeInTicks & 0x3f) == 0) {
+                        DAT_GameState::instance.playerDataArray[_ownerID].totalTroopValue += MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType, DAT_TroopValueState::ptr)(
+                            (UnitType)(short)this->units[DAT_CurrentUnitSlotID::instance].unitType);
+                        if ((char)this->units[DAT_CurrentUnitSlotID::instance].firstNameIndex <= 0) {
+                            /*
+                              Every 0x3f ticks, assign names to citizen units
+                             */
+
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignNameToUnit, this)(
                                 DAT_CurrentUnitSlotID::instance);
                         }
-                        DAT_TileMapState::instance.OccupancyLayer[this->units[DAT_CurrentUnitSlotID::instance].tile]
-                            = DAT_TileMapState::instance
-                                  .OccupancyLayer[this->units[DAT_CurrentUnitSlotID::instance].tile]
-                            | this->units[DAT_CurrentUnitSlotID::instance].occupancyOrFlag;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
-                            _buildingID = this->units[DAT_CurrentUnitSlotID::instance].owner;
-                            if ((DAT_GameCore::instance.mapTimeInTicks & 0x3f) == 0) {
-                                _intFieldPtr = &DAT_GameState::instance.playerDataArray[_buildingID].totalTroopValue;
-                                _troopValue
-                                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                        DAT_TroopValueState::ptr)(
-                                        (UnitType)(short)this->units[DAT_CurrentUnitSlotID::instance].unitType);
-                                *_intFieldPtr = *_intFieldPtr + _troopValue;
-                                if ((char)this->units[DAT_CurrentUnitSlotID::instance].firstNameIndex < '\x01') {
-                                    /*
-                                      Every 0x3f ticks, assign names to citizen units
-                                     */
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_A_HARCHER) {
+                        DAT_TileMapState::instance.SEC_TileMap1104[this->units[DAT_CurrentUnitSlotID::instance].tile]
+                            = '\x06';
+                    } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                        == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::writeSixToTileMap1104InAllDirections,
+                            this)(DAT_CurrentUnitSlotID::instance, 6);
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_LORD) {
+                        short _aiBehaviour = this->units[DAT_CurrentUnitSlotID::instance].aiUnitBehaviourType;
+                        if (_aiBehaviour == 10) {
+                            DAT_GameState::instance.playerDataArray[_ownerID].totalAttackingEngineerTroops
+                                = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackingEngineerTroops + 1;
+                            DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                            != OpenSHC::Map::Units::UT_E_ENGINEER) {
+                            /*
+                              fixme: TODO, review this bit, cannot be true!
+                             */
 
-                                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignNameToUnit, this)(
-                                        DAT_CurrentUnitSlotID::instance);
-                                }
-                            }
-                            UVar6 = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                            if (UVar6 == OpenSHC::Map::Units::UT_A_HARCHER) {
-                                DAT_TileMapState::instance
-                                    .SEC_TileMap1104[this->units[DAT_CurrentUnitSlotID::instance].tile] = '\x06';
-                            } else if (UVar6 == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Units::UnitsState_Func::writeSixToTileMap1104InAllDirections, this)(
-                                    DAT_CurrentUnitSlotID::instance, 6);
-                            }
-                            UVar6 = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                            if (UVar6 != OpenSHC::Map::Units::UT_LORD) {
-                                short _aiBehaviour = this->units[DAT_CurrentUnitSlotID::instance].aiUnitBehaviourType;
-                                if (_aiBehaviour == 10) {
-                                    DAT_GameState::instance.playerDataArray[_buildingID].totalAttackingEngineerTroops
-                                        = DAT_GameState::instance.playerDataArray[_buildingID]
-                                              .totalAttackingEngineerTroops
-                                        + 1;
-                                    DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                        = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops + 1;
-                                } else if (UVar6 != OpenSHC::Map::Units::UT_E_ENGINEER) {
-                                    /*
-                                      fixme: TODO, review this bit, cannot be true!
-                                     */
-
-                                    switch (_aiBehaviour) {
-                                    case 0:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType0
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType0 + 1;
-                                        break;
-                                    case 1:
-                                    case 4:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalDefensiveTroopsUnk
-                                            = DAT_GameState::instance.playerDataArray[_buildingID]
-                                                  .totalDefensiveTroopsUnk
-                                            + 1;
-                                        break;
-                                    case 2:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalRaidingTroopsUnk
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalRaidingTroopsUnk
-                                            + 1;
-                                        break;
-                                    default:
-                                        break;
-                                    case 6:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType6
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType6 + 1;
-                                        break;
-                                    case 7:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType7
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType7 + 1;
-                                        break;
-                                    case 0xb:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalDiggingUnitTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID]
-                                                  .totalDiggingUnitTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0xc:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAssassinTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAssassinTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0xd:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnit2Troops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnit2Troops + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0xe:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalLaddermenTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalLaddermenTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0xf:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTunnelerTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTunnelerTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x10:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitPatrolTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitPatrolTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x11:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitBackupTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitBackupTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x12:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitEngageTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitEngageTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x13:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitSiegeDefTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID]
-                                                  .totalUnitSiegeDefTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x14:
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalMaxDefaultTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalMaxDefaultTroops
-                                            + 1;
-                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
-                                            + 1;
-                                        break;
-                                    case 0x15:
-                                        DAT_GameState::instance.playerDataArray[_buildingID]
-                                            .harassingSiegeEnginesCountUnk
-                                            = DAT_GameState::instance.playerDataArray[_buildingID]
-                                                  .harassingSiegeEnginesCountUnk
-                                            + 1;
-                                    }
-                                }
-                            }
-                        }
-                        if ((this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_ARCHER
-                                || this->units[DAT_CurrentUnitSlotID::instance].unitType
-                                    == OpenSHC::Map::Units::UT_A_ARCHER)
-                            && (this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                    == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
-                                || this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                    == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk)) {
-                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].shootTargetedUnit;
-                            if (0 < _troopValue
-                                && this->units[_troopValue].uid
-                                    == this->units[DAT_CurrentUnitSlotID::instance].targetUID) {
-                                this->units[_troopValue].field_0x39a = 1;
-                            }
-                        }
-                        if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
-                            && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
-                                   & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)
-                                == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng
-                                    & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)) {
-                            if (this->units[DAT_CurrentUnitSlotID::instance].owner == 0) {
-                                _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
-                                                                    computeDistanceToNearestEnemyForLegacyMissions,
-                                    this)(DAT_CurrentUnitSlotID::instance);
-                                this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance
-                                    = (short)_troopValue;
-                            } else {
-                                dword _closestEnemyDistance = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Units::UnitsState_Func::findNearestEnemyAndHeadTowardsIt, this)(
-                                    DAT_CurrentUnitSlotID::instance);
-                                this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance
-                                    = (short)_closestEnemyDistance;
-                                this->units[DAT_CurrentUnitSlotID::instance].assassinsMicroDistanceToEnemyUnk
-                                    = this->unitDistanceComputationResultUnk;
-                            }
-                        }
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy < 0) {
-                            *_shortFieldPtr = *_shortFieldPtr + 1;
-                        } else {
-                            *_shortFieldPtr = 0;
-                        }
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementCooldown;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].movementCooldown < 0) {
-                            *_shortFieldPtr = *_shortFieldPtr + 1;
-                        }
-                        this->units[DAT_CurrentUnitSlotID::instance].SA = 0;
-                        if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
-                            byte _heightDiv10 = this->units[DAT_CurrentUnitSlotID::instance].heightDiv10;
-                            if (_heightDiv10 != 0) {
-                                this->units[DAT_CurrentUnitSlotID::instance].field_0x83
-                                    = this->units[DAT_CurrentUnitSlotID::instance].field_0x83
-                                    - *(char*)((int)DAT_UnitPropertiesDefinedData::ptr
-                                        + (DAT_UpdateUnitsTracker::instance - (uint)_heightDiv10) * 4 + 0x11a24);
-                                if (100 < (byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x83) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
-                                }
-                                if ((int)((byte)this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 + 0xd)
-                                    <= (int)DAT_UpdateUnitsTracker::instance) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 = 0;
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
-                                }
+                            switch (_aiBehaviour) {
+                            case 0:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType0
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType0 + 1;
+                                break;
+                            case 1:
+                            case 4:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalDefensiveTroopsUnk
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalDefensiveTroopsUnk + 1;
+                                break;
+                            case 2:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalRaidingTroopsUnk
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalRaidingTroopsUnk + 1;
+                                break;
+                            default:
+                                break;
+                            case 6:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType6
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType6 + 1;
+                                break;
+                            case 7:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType7
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalTroopsType7 + 1;
+                                break;
+                            case 0xb:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalDiggingUnitTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalDiggingUnitTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0xc:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAssassinTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAssassinTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0xd:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalUnit2Troops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalUnit2Troops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0xe:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalLaddermenTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalLaddermenTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0xf:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalTunnelerTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalTunnelerTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x10:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalUnitPatrolTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalUnitPatrolTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x11:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalUnitBackupTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalUnitBackupTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x12:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalUnitEngageTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalUnitEngageTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x13:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalUnitSiegeDefTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalUnitSiegeDefTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x14:
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalMaxDefaultTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalMaxDefaultTroops + 1;
+                                DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].totalAttackTroops + 1;
+                                break;
+                            case 0x15:
+                                DAT_GameState::instance.playerDataArray[_ownerID].harassingSiegeEnginesCountUnk
+                                    = DAT_GameState::instance.playerDataArray[_ownerID].harassingSiegeEnginesCountUnk
+                                    + 1;
                             }
                         }
                     }
-                    DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1;
-                } while ((int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount);
+                }
+                if ((this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_ARCHER
+                        || this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_A_ARCHER)
+                    && (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
+                        || this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk)) {
+                    int const _targetID = this->units[DAT_CurrentUnitSlotID::instance].shootTargetedUnit;
+                    if (_targetID > 0
+                        && this->units[_targetID].uid == this->units[DAT_CurrentUnitSlotID::instance].targetUID) {
+                        this->units[_targetID].field_0x39a = 1;
+                    }
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
+                    && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
+                           & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)
+                        == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng
+                            & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)) {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner == 0) {
+                        this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance
+                            = (short)MACRO_CALL_MEMBER(
+                                OpenSHC::Map::Units::UnitsState_Func::computeDistanceToNearestEnemyForLegacyMissions,
+                                this)(DAT_CurrentUnitSlotID::instance);
+                    } else {
+                        dword _closestEnemyDistance
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::findNearestEnemyAndHeadTowardsIt,
+                                this)(DAT_CurrentUnitSlotID::instance);
+                        this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance
+                            = (short)_closestEnemyDistance;
+                        this->units[DAT_CurrentUnitSlotID::instance].assassinsMicroDistanceToEnemyUnk
+                            = this->unitDistanceComputationResultUnk;
+                    }
+                }
+                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy;
+                if (this->units[DAT_CurrentUnitSlotID::instance].lookForEnemy < 0) {
+                    *_shortFieldPtr = *_shortFieldPtr + 1;
+                } else {
+                    *_shortFieldPtr = 0;
+                }
+                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementCooldown;
+                if (this->units[DAT_CurrentUnitSlotID::instance].movementCooldown < 0) {
+                    *_shortFieldPtr = *_shortFieldPtr + 1;
+                }
+                this->units[DAT_CurrentUnitSlotID::instance].SA = 0;
+                if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
+                    byte _heightDiv10 = this->units[DAT_CurrentUnitSlotID::instance].heightDiv10;
+                    if (_heightDiv10 != 0) {
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x83
+                            = this->units[DAT_CurrentUnitSlotID::instance].field_0x83
+                            - (char)DAT_UnitPropertiesDefinedData::instance
+                                  .field_0x11a24[DAT_UpdateUnitsTracker::instance - _heightDiv10];
+                        if ((byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x83 > 100) {
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
+                        }
+                        if ((int)DAT_UpdateUnitsTracker::instance
+                            >= this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 + 0xd) {
+                            this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 = 0;
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
+                        }
+                    }
+                }
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::recountActiveFires, DAT_EntityState::ptr)();
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Entities::EntityState_Func::flagUnitsWithActiveEntity, DAT_EntityState::ptr)();
-            DAT_CurrentUnitSlotID::instance = 1;
-            if (1 < (int)this->maxUnitCount) {
-                do {
-                    bool _updateAnimation = false;
-                    switch (this->units[DAT_CurrentUnitSlotID::instance].logicalState) {
-                    case OpenSHC::Map::Units::ULS_INVISIBLE:
-                        break;
-                    case ((UnitLogicState)1):
-                        this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_NORMAL;
-                        _updateAnimation = true;
-                        break;
-                    case OpenSHC::Map::Units::ULS_REMOVE:
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deleteUnit, this)(
-                            DAT_CurrentUnitSlotID::instance);
-                        break;
-                    case OpenSHC::Map::Units::ULS_TRANSITIONING:
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeUnitType, this)(
-                            DAT_CurrentUnitSlotID::instance);
-                        _updateAnimation = true;
-                        break;
-                    case ((UnitLogicState)5):
-                        this->units[DAT_CurrentUnitSlotID::instance].logicalState = ((UnitLogicState)1);
-                        break;
-                    default:
-                        _updateAnimation = true;
-                        break;
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                switch (this->units[DAT_CurrentUnitSlotID::instance].logicalState) {
+                case OpenSHC::Map::Units::ULS_INVISIBLE:
+                    continue;
+                case ((UnitLogicState)5):
+                    this->units[DAT_CurrentUnitSlotID::instance].logicalState = ((UnitLogicState)1);
+                    continue;
+                case ((UnitLogicState)1):
+                    this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_NORMAL;
+                    break;
+                case OpenSHC::Map::Units::ULS_REMOVE:
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deleteUnit, this)(
+                        DAT_CurrentUnitSlotID::instance);
+                    continue;
+                case OpenSHC::Map::Units::ULS_TRANSITIONING:
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeUnitType, this)(
+                        DAT_CurrentUnitSlotID::instance);
+                    break;
+                }
+                this->units[DAT_CurrentUnitSlotID::instance].animationTicker
+                    = this->units[DAT_CurrentUnitSlotID::instance].animationTicker + 1;
+                if (this->units[DAT_CurrentUnitSlotID::instance].animationTicker
+                    > this->units[DAT_CurrentUnitSlotID::instance].animationSpeed
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal) {
+                    this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal
+                        = this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
+                    this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber + 1;
+                    this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = TRUE;
+                    if (this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber >= 1000) {
+                        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
                     }
-                    if (_updateAnimation) {
-                        int* _ptr_animationTicker = &this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
-                        *_ptr_animationTicker = *_ptr_animationTicker + 1;
-                        int _animationTicker = this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].animationSpeed
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal
-                            < _animationTicker) {
-                            this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal = _animationTicker;
-                            this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber + 1;
-                            this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = TRUE;
-                            if (999 < this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber) {
-                                this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
-                            }
-                        } else {
-                            this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = FALSE;
-                        }
-                        _buildingID = (short)DAT_TileMapState::instance.mapOrientation;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x58 == 0) {
-                            if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                                this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                                    = this->units[DAT_CurrentUnitSlotID::instance].facingDirection - _buildingID;
-                            } else {
-                                this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                                    = this->units[DAT_CurrentUnitSlotID::instance].orientation - _buildingID;
-                            }
-                        } else {
-                            this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                                = (short)DAT_TileMapState::instance.screenSouthEastDirection - _buildingID;
-                        }
-                        _shortFieldPtr
-                            = &this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected < 0) {
-                            *_shortFieldPtr = *_shortFieldPtr + 8;
-                        }
-                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].owner;
-                        DAT_GameState::instance.playerDataArray[_buildingID].countEntities
-                            = DAT_GameState::instance.playerDataArray[_buildingID].countEntities + 1;
-                        if (DAT_UnitPropertiesDefinedData::instance
-                                .COMPUTER_MANAGED[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
-                            != 0) {
-                            DAT_GameState::instance.playerDataArray[_buildingID].currentPopulation_2
-                                = DAT_GameState::instance.playerDataArray[_buildingID].currentPopulation_2 + 1;
-                        }
-                        DAT_UnitHasBecomeIdle::instance = 0;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0
-                            && this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                != OpenSHC::Map::Units::States::US_DISAPPEAR) {
-                            UVar6 = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                            if (UVar6 != OpenSHC::Map::Units::UT_BURNINGMAN
-                                && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
-                                && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL
-                                && ((short)this->units[DAT_CurrentUnitSlotID::instance].state.generic < 0x6f
-                                    || 0x75 < (short)this->units[DAT_CurrentUnitSlotID::instance].state.generic)) {
-                                this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                    = OpenSHC::Map::Units::States::US_DEATH_01;
-                                this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
-                            }
-                        }
-                        if (DAT_UnitPropertiesDefinedData::instance
-                                .COMPUTER_CONTROLLED[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
-                            != 0) {
-                            _buildingID = this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
-                            if (DAT_BuildingsState::instance.buildings[_buildingID].uid
-                                == this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingUID) {
-                                if (DAT_BuildingsState::instance.buildings[_buildingID].sleeping != false) {
-                                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
-                                                          makeUnitStopWalkingByClearingPathProgressState,
-                                        this)(DAT_CurrentUnitSlotID::instance);
-                                    if (7 < this->units[DAT_CurrentUnitSlotID::instance].movementRelated) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                                            = OpenSHC::Map::Units::ULS_TRANSITIONING;
-                                        this->units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
-                                            = OpenSHC::Map::Units::UT_PEASANT;
-                                        this->units[DAT_CurrentUnitSlotID::instance].state_2 = 0;
-                                        this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
-                                        MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::Units::UnitsState_Func::clearHiddenFlagAndUpdatePosition,
-                                            this)(DAT_CurrentUnitSlotID::instance);
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
-                                }
-                            } else {
-                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
-                                                      makeUnitStopWalkingByClearingPathProgressState,
-                                    this)(DAT_CurrentUnitSlotID::instance);
-                                if (7 < this->units[DAT_CurrentUnitSlotID::instance].movementRelated) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                                        = OpenSHC::Map::Units::ULS_TRANSITIONING;
-                                    this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
-                                    this->units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
-                                        = OpenSHC::Map::Units::UT_PEASANT;
-                                    this->units[DAT_CurrentUnitSlotID::instance].state_2 = 0;
-                                    MACRO_CALL_MEMBER(
-                                        OpenSHC::Map::Units::UnitsState_Func::clearHiddenFlagAndUpdatePosition, this)(
-                                        DAT_CurrentUnitSlotID::instance);
-                                }
-                            }
-                        }
-                        this->units[DAT_CurrentUnitSlotID::instance].field_0x2ac = 0;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processMeleeInitiation, this)(
+                } else {
+                    this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = FALSE;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].field_0x58 != 0) {
+                    this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        = DAT_TileMapState::instance.screenSouthEastDirection
+                        - DAT_TileMapState::instance.mapOrientation;
+                } else if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                    == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
+                    this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        = this->units[DAT_CurrentUnitSlotID::instance].orientation
+                        - DAT_TileMapState::instance.mapOrientation;
+                } else {
+                    this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        = this->units[DAT_CurrentUnitSlotID::instance].facingDirection
+                        - DAT_TileMapState::instance.mapOrientation;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected < 0) {
+                    this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected + 8;
+                }
+                int const _ownerID = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                DAT_GameState::instance.playerDataArray[_ownerID].countEntities
+                    = DAT_GameState::instance.playerDataArray[_ownerID].countEntities + 1;
+                if (DAT_UnitPropertiesDefinedData::instance
+                        .COMPUTER_MANAGED[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
+                    != 0) {
+                    DAT_GameState::instance.playerDataArray[_ownerID].currentPopulation_2
+                        = DAT_GameState::instance.playerDataArray[_ownerID].currentPopulation_2 + 1;
+                }
+                DAT_UnitHasBecomeIdle::instance = 0;
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0
+                    && this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                        != OpenSHC::Map::Units::States::US_DISAPPEAR) {
+                    UVar6 = this->units[DAT_CurrentUnitSlotID::instance].unitType;
+                    if (UVar6 != OpenSHC::Map::Units::UT_BURNINGMAN
+                        && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
+                        && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL
+                        && ((short)this->units[DAT_CurrentUnitSlotID::instance].state.generic < 0x6f
+                            || 0x75 < (short)this->units[DAT_CurrentUnitSlotID::instance].state.generic)) {
+                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            = OpenSHC::Map::Units::States::US_DEATH_01;
+                        this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
+                    }
+                }
+                if (DAT_UnitPropertiesDefinedData::instance
+                        .COMPUTER_CONTROLLED[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
+                    != 0) {
+                    int const _workplaceID
+                        = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
+                    if (DAT_BuildingsState::instance.buildings[_workplaceID].uid
+                        != this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingUID) {
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(
                             DAT_CurrentUnitSlotID::instance);
-                        this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4
-                            = this->units[DAT_CurrentUnitSlotID::instance].state.generic;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                            != OpenSHC::Map::Units::ULS_TRANSITIONING) {
-                            /*
-                              Update unit state
-                             */
-
-                            (*DAT_UnitPropertiesDefinedData::instance.UpdateUnitFunctions
-                                    [(short)this->units[DAT_CurrentUnitSlotID::instance].unitType])();
+                        if (this->units[DAT_CurrentUnitSlotID::instance].movementRelated >= 8) {
+                            this->units[DAT_CurrentUnitSlotID::instance].logicalState
+                                = OpenSHC::Map::Units::ULS_TRANSITIONING;
+                            this->units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
+                                = OpenSHC::Map::Units::UT_PEASANT;
+                            this->units[DAT_CurrentUnitSlotID::instance].state_2 = 0;
+                            this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearHiddenFlagAndUpdatePosition,
+                                this)(DAT_CurrentUnitSlotID::instance);
                         }
-                        UnitStateShort UVar8 = this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4;
-                        if (UVar8 != this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                            && (UVar8
-                                    == (OpenSHC::Map::Units::States::US_DEATH_02
-                                        | OpenSHC::Map::Units::States::US_STAND_UPUnk
-                                        | OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk)
-                                || (UVar8 == OpenSHC::Map::Units::States::US_DIG))) {
-                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget;
-                            if (DAT_TileMapState::instance.moats[_troopValue].owner != '\0') {
-                                DAT_TileMapState::instance.moats[_troopValue].someCountDown
-                                    = DAT_TileMapState::instance.moats[_troopValue].someCountDown + -0x14;
-                            }
-                        }
-                        this->units[DAT_CurrentUnitSlotID::instance].field_0x5c = 0;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].usingTeleport == 0) {
-                            _intFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
-                            /*
-                              Not climbing
-                             */
-
-                            *_intFieldPtr = *_intFieldPtr + 1;
-                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
-                            if ((int)this->units[DAT_CurrentUnitSlotID::instance].calculatedMovementSpeed
-                                    + (int)this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
-                                    + (int)this->units[DAT_CurrentUnitSlotID::instance].moveDelay
-                                < _troopValue - this->units[DAT_CurrentUnitSlotID::instance].field_0x350) {
-                                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
-                                this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _troopValue;
-                                if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime <= 0) {
-                                    *_shortFieldPtr = 0;
-                                } else {
-                                    *_shortFieldPtr = *_shortFieldPtr - 1;
-                                }
-                                _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove,
-                                    this)(DAT_CurrentUnitSlotID::instance,
-                                    (int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed));
-                                if (_troopValue != 0) {
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                            == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION
-                                        && this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown != 0
-                                        && this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37e
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x37e + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 0x10) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x37e = 0;
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37c
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x37c + 2;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37c >= 0xe) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x37c = 0;
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x378
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x378 + 2;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 >= 0x10) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x378 = 0;
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 >= 0x12) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 = 0;
-                                    }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x428
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x428 + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x428 >= 0x18) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x428 = 0;
-                                    }
-                                }
-                                this->units[DAT_CurrentUnitSlotID::instance].field_0x37a
-                                    = this->units[DAT_CurrentUnitSlotID::instance].field_0x37a + 1;
-                                if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37a >= 0xc) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37a = 0;
-                                }
-                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::calculateUnitMovementSpeed,
-                                    this)(DAT_CurrentUnitSlotID::instance);
-                            }
-                        } else {
-                            /*
-                              Climbing
-                             */
-
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::unitClimbing, this)(
-                                DAT_CurrentUnitSlotID::instance);
-                        }
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeUnitStandingHeight, this)(
+                    } else if (DAT_BuildingsState::instance.buildings[_workplaceID].sleeping != false) {
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(
                             DAT_CurrentUnitSlotID::instance);
-                        switch (this->units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated) {
-                        case 8:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8;
-                            if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                                    == OpenSHC::Map::Units::UT_A_HARCHER
-                                && (_buildingID
-                                    = this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation,
-                                    _buildingID != 4)
-                                && _buildingID != 5 && _buildingID != 6) {
-                                this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                    = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            }
-                            break;
-                        case 9:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8) / 2;
-                            break;
-                        case 0xc:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37a * 8;
-                            break;
-                        case 0xe:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37c * 8;
-                            break;
-                        case 0x10:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
-                            if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                                == OpenSHC::Map::Units::UT_A_HARCHER) {
-                                this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                    = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            }
-                            if (this->units[DAT_CurrentUnitSlotID::instance].unitType
-                                == OpenSHC::Map::Units::UT_E_KNIGHT) {
-                                this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                    = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                                if ((DAT_CurrentUnitSlotID::instance & 1) == 0) {
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0
-                                        && (this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID
-                                                != 0
-                                            || (this->units[DAT_CurrentUnitSlotID::instance].targetingType
-                                                == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT))
-                                        && this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
-                                            <= (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                                .currentIndexInPathPlan) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                            = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x80;
-                                    }
-                                } else {
-                                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x270;
-                                }
-                            }
-                            break;
-                        case 0x11:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                                    * 0x10
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + (int)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e;
-                            break;
-                        case 0x12:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 * 8;
-                            break;
-                        case 0x13:
-                        case 0x14:
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
-                            break;
-                        case 0x15:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
-                            _troopValue
-                                = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
-                                + 0x80 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
-                            break;
-                        case 0x16: {
-                            uint _correctedDirection = ((int)this->units[DAT_CurrentUnitSlotID::instance]
-                                                               .facingDirectionMapOrientationCorrected
-                                                           + 4)
-                                % 8;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber = _correctedDirection + 0x151;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e & 3) * 8;
-                            _correctedDirection = ((int)this->units[DAT_CurrentUnitSlotID::instance]
-                                                          .facingDirectionMapOrientationCorrected
-                                                      + 4)
-                                % 8;
-                            _troopValue = _correctedDirection + 0x1d1;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
-                            break;
+                        if (this->units[DAT_CurrentUnitSlotID::instance].movementRelated >= 8) {
+                            this->units[DAT_CurrentUnitSlotID::instance].logicalState
+                                = OpenSHC::Map::Units::ULS_TRANSITIONING;
+                            this->units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
+                                = OpenSHC::Map::Units::UT_PEASANT;
+                            this->units[DAT_CurrentUnitSlotID::instance].state_2 = 0;
+                            this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearHiddenFlagAndUpdatePosition,
+                                this)(DAT_CurrentUnitSlotID::instance);
                         }
-                        case 0x18:
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x428 * 8;
-                            break;
-                        case 99:
-                            this->units[DAT_CurrentUnitSlotID::instance].imageID2
-                                = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                      .facingDirectionMapOrientationCorrected
-                                + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            this->units[DAT_CurrentUnitSlotID::instance].imageID2
-                                = this->units[DAT_CurrentUnitSlotID::instance].imageID2
-                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
-                        }
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {
+                        this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
+                    }
+                }
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x2ac = 0;
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processMeleeInitiation, this)(
+                    DAT_CurrentUnitSlotID::instance);
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4
+                    = this->units[DAT_CurrentUnitSlotID::instance].state.generic;
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
+                    != OpenSHC::Map::Units::ULS_TRANSITIONING) {
+                    /*
+                      Update unit state
+                     */
+
+                    (*DAT_UnitPropertiesDefinedData::instance
+                            .UpdateUnitFunctions[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType])();
+                }
+                UnitStateShort const _previousState = this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4;
+                // a digger that just left one of its two digging states (0x7c has no name yet)
+                if (_previousState != this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                    && (_previousState == (UnitState)0x7c || _previousState == OpenSHC::Map::Units::States::US_DIG)) {
+                    int const _digTile = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget;
+                    if (DAT_TileMapState::instance.moats[_digTile].owner != '\0') {
+                        DAT_TileMapState::instance.moats[_digTile].someCountDown
+                            = DAT_TileMapState::instance.moats[_digTile].someCountDown - 20;
+                    }
+                }
+                this->units[DAT_CurrentUnitSlotID::instance].field_0x5c = 0;
+                if (this->units[DAT_CurrentUnitSlotID::instance].usingTeleport != 0) {
+                    /*
+                      Climbing
+                     */
+
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::unitClimbing, this)(
+                        DAT_CurrentUnitSlotID::instance);
+                } else {
+                    _intFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
+                    /*
+                      Not climbing
+                     */
+
+                    *_intFieldPtr = *_intFieldPtr + 1;
+                    _troopValue = this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
+                    if (_troopValue - this->units[DAT_CurrentUnitSlotID::instance].field_0x350
+                        > (int)this->units[DAT_CurrentUnitSlotID::instance].calculatedMovementSpeed
+                            + (int)this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
+                            + (int)this->units[DAT_CurrentUnitSlotID::instance].moveDelay) {
+                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _troopValue;
+                        if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime > 0) {
                             *_shortFieldPtr = *_shortFieldPtr - 1;
+                        } else {
+                            *_shortFieldPtr = 0;
                         }
-                        byte _fadeAlpha = this->units[DAT_CurrentUnitSlotID::instance].fadeType;
-                        if (_fadeAlpha != 0) {
-                            if (_fadeAlpha == 1) {
-                                this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
-                                    = (byte)DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
-                                          [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
-                            } else {
-                                if (_fadeAlpha == 2) {
-                                    _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
-                                                     [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
-                                } else {
-                                    byte _fadeCounter = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
-                                    if (_fadeAlpha == 3) {
-                                        _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
-                                                         .FadeAlpha_Values_3[(char)_fadeCounter];
-                                    } else {
-                                        _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
-                                                         .FadeAlpha_Values_4[(char)_fadeCounter];
-                                    }
-                                }
-                                this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = _fadeAlpha;
+                        _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove, this)(
+                            DAT_CurrentUnitSlotID::instance,
+                            (int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed));
+                        if (_troopValue != 0) {
+                            if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                    == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION
+                                && this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown != 0
+                                && this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0) {
+                                this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
                             }
-                            this->units[DAT_CurrentUnitSlotID::instance].fadeCounter
-                                = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter + 1;
-                            if ((char)this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
-                                < '\x01') {
-                                this->units[DAT_CurrentUnitSlotID::instance].fadeType = 0;
-                                this->units[DAT_CurrentUnitSlotID::instance].fadeCounter = 0;
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x37e
+                                = this->units[DAT_CurrentUnitSlotID::instance].field_0x37e + 1;
+                            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 0x10) {
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x37e = 0;
                             }
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x37c
+                                = this->units[DAT_CurrentUnitSlotID::instance].field_0x37c + 2;
+                            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37c >= 0xe) {
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x37c = 0;
+                            }
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x378
+                                = this->units[DAT_CurrentUnitSlotID::instance].field_0x378 + 2;
+                            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 >= 0x10) {
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x378 = 0;
+                            }
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6
+                                = this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 + 1;
+                            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 >= 0x12) {
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 = 0;
+                            }
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x428
+                                = this->units[DAT_CurrentUnitSlotID::instance].field_0x428 + 1;
+                            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x428 >= 0x18) {
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x428 = 0;
+                            }
+                        }
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x37a
+                            = this->units[DAT_CurrentUnitSlotID::instance].field_0x37a + 1;
+                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37a >= 0xc) {
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x37a = 0;
+                        }
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::calculateUnitMovementSpeed, this)(
+                            DAT_CurrentUnitSlotID::instance);
+                    }
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeUnitStandingHeight, this)(
+                    DAT_CurrentUnitSlotID::instance);
+                switch (this->units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated) {
+                case 0x10:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_A_HARCHER) {
+                        this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                            = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_KNIGHT) {
+                        this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                            = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
+                        if ((DAT_CurrentUnitSlotID::instance & 1) == 0) {
+                            if (this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0
+                                && (this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID != 0
+                                    || (this->units[DAT_CurrentUnitSlotID::instance].targetingType
+                                        == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT))
+                                && this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
+                                    <= (int)this->units[DAT_CurrentUnitSlotID::instance].currentIndexInPathPlan) {
+                                this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                    = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x80;
+                            }
+                        } else {
+                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x270;
                         }
                     }
-                    DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1;
-                } while ((int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount);
+                    break;
+                case 0xe:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37c * 8;
+                    break;
+                case 0x12:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 * 8;
+                    break;
+                case 0x18:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x428 * 8;
+                    break;
+                case 8:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8;
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_A_HARCHER
+                        && (_buildingID = this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation,
+                            _buildingID != 4)
+                        && _buildingID != 5 && _buildingID != 6) {
+                        this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                            = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
+                    }
+                    break;
+                case 9:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8) / 2;
+                    break;
+                case 0x11:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected * 0x10
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + (int)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e;
+                    break;
+                case 0xc:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37a * 8;
+                    break;
+                case 0x15:
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
+                    _troopValue = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + 0x80 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
+                    break;
+                case 0x16: {
+                    uint _correctedDirection
+                        = ((int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected + 4)
+                        % 8;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber = _correctedDirection + 0x151;
+                    this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                        + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e & 3) * 8;
+                    _correctedDirection
+                        = ((int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected + 4)
+                        % 8;
+                    _troopValue = _correctedDirection + 0x1d1;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
+                    break;
+                }
+                case 0x13:
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
+                    break;
+                case 99:
+                    this->units[DAT_CurrentUnitSlotID::instance].imageID2
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageID2
+                        = this->units[DAT_CurrentUnitSlotID::instance].imageID2
+                        + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
+                    break;
+                case 0x14:
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = (int)this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
+                        + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
+                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                        + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
+                    break;
+                }
+                _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {
+                    *_shortFieldPtr = *_shortFieldPtr - 1;
+                }
+                byte _fadeAlpha = this->units[DAT_CurrentUnitSlotID::instance].fadeType;
+                if (_fadeAlpha != 0) {
+                    if (_fadeAlpha == 1) {
+                        this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
+                            = (byte)DAT_UnitPropertiesDefinedData::instance
+                                  .FadeAlpha_Values_1_2[(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
+                    } else {
+                        if (_fadeAlpha == 2) {
+                            _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
+                                             [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
+                        } else {
+                            byte _fadeCounter = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
+                            if (_fadeAlpha == 3) {
+                                _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
+                                                 .FadeAlpha_Values_3[(char)_fadeCounter];
+                            } else {
+                                _fadeAlpha = (byte)DAT_UnitPropertiesDefinedData::instance
+                                                 .FadeAlpha_Values_4[(char)_fadeCounter];
+                            }
+                        }
+                        this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = _fadeAlpha;
+                    }
+                    this->units[DAT_CurrentUnitSlotID::instance].fadeCounter
+                        = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter + 1;
+                    if ((char)this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown <= 0) {
+                        this->units[DAT_CurrentUnitSlotID::instance].fadeType = 0;
+                        this->units[DAT_CurrentUnitSlotID::instance].fadeCounter = 0;
+                    }
+                }
             }
             if (DAT_TileMapState::instance.refreshRelatedOne == 0) {
                 DAT_UpdateUnitsTracker::instance = 0;
