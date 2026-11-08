@@ -16,8 +16,8 @@ namespace Map {
         void UnitsState::deleteUnit(uint unitID)
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deselectUnit, DAT_UnitsState::ptr)(unitID);
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearOrDeselectUnitFromSelection, this)(
-                DAT_UnitsState::instance.units[unitID].owner, unitID, 0);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearOrDeselectUnitFromSelection,
+                DAT_UnitsState::ptr)(DAT_UnitsState::instance.units[unitID].owner, unitID, 0);
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner] == -1
                 && this->units[unitID].isStalked == 0) {
                 MACRO_CALL_MEMBER(
