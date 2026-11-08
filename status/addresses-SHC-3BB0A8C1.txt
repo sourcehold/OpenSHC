@@ -3873,7 +3873,7 @@ SHC_3BB0A8C1_0x00409FF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040A020 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040A060 | 86.6% | index add folded into address
+SHC_3BB0A8C1_0x0040A060 | 88.4% | register allocation differs
 
 SHC_3BB0A8C1_0x0040A228 | 0.0% | Pending
 
