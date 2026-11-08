@@ -16,8 +16,7 @@ namespace Rendering {
     using OpenSHC::UI::Enums::MenuViewType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004E66F0
-    void ViewportRenderState::setupViewport(
-        undefined4 windowX, undefined4 windowY, undefined4 screenPixelWidth, undefined4 screenPixelHeight)
+    void ViewportRenderState::setupViewport(int windowX, int windowY, int screenPixelWidth, int screenPixelHeight)
     {
         this->windowX = windowX;
         // fixme: the original stores windowX into windowY as well

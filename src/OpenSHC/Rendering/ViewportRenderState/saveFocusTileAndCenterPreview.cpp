@@ -7,7 +7,7 @@ namespace Rendering {
     void ViewportRenderState::saveFocusTileAndCenterPreview()
     {
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::updateBuildingPreviewPosition, this)
-        ((int)this->screenPixelWidth / 2 + (int)this->windowX, (int)this->screenPixelHeight / 2 + (int)this->windowY);
+        (this->screenPixelWidth / 2 + this->windowX, this->screenPixelHeight / 2 + this->windowY);
         this->field_0x18b738 = this->viewportState.mouseTile;
     }
 

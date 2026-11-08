@@ -31,9 +31,9 @@ namespace Rendering {
         int const& isZoomedOut = this->viewportState.isZoomedOutUnk;
         int quadrantX;
         if (isZoomedOut == 0) {
-            quadrantX = ((this->viewportState.viewportX % 32 - (int)this->windowX) + screenX) >> 1 & 0xf;
+            quadrantX = ((this->viewportState.viewportX % 32 - this->windowX) + screenX) >> 1 & 0xf;
         } else {
-            quadrantX = ((this->viewportState.viewportX % 32 + screenX * 2) - (int)this->windowX) >> 1 & 0xf;
+            quadrantX = ((this->viewportState.viewportX % 32 + screenX * 2) - this->windowX) >> 1 & 0xf;
         }
 
         if (DAT_TileMapState::instance.mapOrientation == 0) {

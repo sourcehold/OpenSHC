@@ -60,10 +60,10 @@ namespace Rendering {
         byte landscapeAnimationValueArray[60]; // 0x0018B5FC length: 60
         int landscapeSeaWhiteCapsAnimationFrames[45]; // 0x0018B638 length: 180
         byte unused02[60]; // 0x0018B6EC length: 60
-        undefined4 windowX; // 0x0018B728 length: 4
-        undefined4 windowY; // 0x0018B72C length: 4
-        undefined4 screenPixelWidth; // 0x0018B730 length: 4
-        undefined4 screenPixelHeight; // 0x0018B734 length: 4
+        int windowX; // 0x0018B728 length: 4
+        int windowY; // 0x0018B72C length: 4
+        int screenPixelWidth; // 0x0018B730 length: 4
+        int screenPixelHeight; // 0x0018B734 length: 4
         undefined4 field_0x18b738; // 0x0018B738 length: 4
         undefined4 interval_03_160; // 0x0018B73C length: 4
         undefined4 previousIntervalTime_03; // 0x0018B740 length: 4
@@ -144,8 +144,7 @@ namespace Rendering {
 
         void renderDebugDataMousePointing(int x, int y, int width, int height);
 
-        void setupViewport(
-            undefined4 windowX, undefined4 windowY, undefined4 screenPixelWidth, undefined4 screenPixelHeight);
+        void setupViewport(int windowX, int windowY, int screenPixelWidth, int screenPixelHeight);
 
         void resetupViewport(int zoomUnk);
 
