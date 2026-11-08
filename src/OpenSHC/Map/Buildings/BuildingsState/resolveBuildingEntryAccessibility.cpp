@@ -16,7 +16,10 @@ namespace Map {
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise
             // Matching note: the original computes the building pointer before the (x, y) lookup and loads the
-            // call arguments in a different register order; declaring buildingHeight first comes closest.
+            // call arguments in a different register order; declaring buildingHeight first comes closest. Under /GL
+            // only the order of the two lookups moves the schedule (operand order, locals for the building x/y, a
+            // Building& and type changes do not); a short fromArea fixes the register rotation after the call but
+            // adds two movsx, and an owner local fixes it but swaps ebx/edi.
             if (buildingID <= 0) {
                 return 0;
             }
