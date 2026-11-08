@@ -345,21 +345,17 @@ namespace Rendering {
                             if (this->DAT_MapEditorDisplayLayer == 2) {
                                 _displayLayerLogicalValue = 255 - (_displayLayerLogicalValue & 0xff);
                                 if (DAT_TileMapState::instance.mapOrientation == 2) {
-                                    _yOffset_01 = 6;
-                                LAB_004e91cc:
-                                    bVar15 = MACRO_CALL_MEMBER(
+                                    _displayLayerLogicalValue = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
-                                        DAT_DirectionAlgorithmState::ptr)((byte)_displayLayerLogicalValue, _yOffset_01);
-                                    _displayLayerLogicalValue = (uint)bVar15;
-                                } else {
-                                    if (DAT_TileMapState::instance.mapOrientation == 4) {
-                                        _yOffset_01 = 4;
-                                        goto LAB_004e91cc;
-                                    }
-                                    if (DAT_TileMapState::instance.mapOrientation == 6) {
-                                        _yOffset_01 = 2;
-                                        goto LAB_004e91cc;
-                                    }
+                                        DAT_DirectionAlgorithmState::ptr)((byte)_displayLayerLogicalValue, 6);
+                                } else if (DAT_TileMapState::instance.mapOrientation == 4) {
+                                    _displayLayerLogicalValue = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        DAT_DirectionAlgorithmState::ptr)((byte)_displayLayerLogicalValue, 4);
+                                } else if (DAT_TileMapState::instance.mapOrientation == 6) {
+                                    _displayLayerLogicalValue = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
+                                        DAT_DirectionAlgorithmState::ptr)((byte)_displayLayerLogicalValue, 2);
                                 }
                                 if (255 < (int)_displayLayerLogicalValue) {
                                     _displayLayerLogicalValue = _displayLayerLogicalValue - 256;
