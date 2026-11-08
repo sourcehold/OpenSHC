@@ -36,6 +36,14 @@ namespace Map {
                     continue;
                 }
                 switch (this->units[unitID].unitType) {
+                case OpenSHC::Map::Units::UT_BREWER:
+                case OpenSHC::Map::Units::UT_TANNER:
+                case OpenSHC::Map::Units::UT_MOTHER:
+                    if ((char)this->units[unitID].firstNameIndex >= 52 && _womenCount < 100) {
+                        _womenIDs[_womenCount] = unitID;
+                        _womenCount = _womenCount + 1;
+                    }
+                    break;
                 case OpenSHC::Map::Units::UT_WOODCUTTER:
                 case OpenSHC::Map::Units::UT_FLETCHER:
                 case OpenSHC::Map::Units::UT_TUNNELER:
@@ -63,14 +71,6 @@ namespace Map {
                     if ((char)this->units[unitID].firstNameIndex < 51 && _menCount < 100) {
                         _menIDs[_menCount] = unitID;
                         _menCount = _menCount + 1;
-                    }
-                    break;
-                case OpenSHC::Map::Units::UT_BREWER:
-                case OpenSHC::Map::Units::UT_TANNER:
-                case OpenSHC::Map::Units::UT_MOTHER:
-                    if ((char)this->units[unitID].firstNameIndex >= 52 && _womenCount < 100) {
-                        _womenIDs[_womenCount] = unitID;
-                        _womenCount = _womenCount + 1;
                     }
                 }
             }
