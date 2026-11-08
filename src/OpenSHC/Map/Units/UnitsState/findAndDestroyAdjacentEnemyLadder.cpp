@@ -17,14 +17,19 @@ namespace Map {
         int UnitsState::findAndDestroyAdjacentEnemyLadder(int unitID, int checkOnly)
         {
             for (int direction = 0; direction < 8; ++direction) {
-                for (int _otherUnitID = (short)DAT_TileMapState::instance.UnitLayer
-                         [DAT_TileMapState::instance.directionTranslationMatrix[this->units[unitID].y][direction]
-                             + this->units[unitID].tile];
-                    _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile) {
-                    if (DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID].owner]
+                int _otherUnitID = (short)DAT_TileMapState::instance
+                                       .UnitLayer[DAT_TileMapState::instance
+                                                      .directionTranslationMatrix[this->units[unitID].y][direction]
+                                           + this->units[unitID].tile];
+                // the original tests the head of the tile list against 0, and the following links against > 0
+                if (_otherUnitID == 0) {
+                    continue;
+                }
+                int const owner = this->units[unitID].owner;
+                do {
+                    if (DAT_GameState::instance.mapAndTime.playerTeams[owner]
                             != DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner]
-                        && this->units[unitID].owner != 0
-                        && this->units[_otherUnitID].unitType == OpenSHC::Map::Units::UT_E_LADDER
+                        && owner != 0 && this->units[_otherUnitID].unitType == OpenSHC::Map::Units::UT_E_LADDER
                         && this->units[_otherUnitID].state.generic == (UnitState)3) {
                         if (checkOnly != 0) {
                             return direction;
@@ -35,7 +40,8 @@ namespace Map {
                         this->units[_otherUnitID].tunnelerFinishedDigging = 1;
                         return 1;
                     }
-                }
+                    _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile;
+                } while (_otherUnitID > 0);
             }
             return -1;
         }
