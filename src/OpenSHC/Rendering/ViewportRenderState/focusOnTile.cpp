@@ -38,7 +38,7 @@ namespace Rendering {
             tileY = tileY + 1;
         } while (tileY < 400);
 
-        this->viewportState.viewportX = (tileX - this->viewportState.mbr_0xac) * 0x20;
+        this->viewportState.viewportX = (tileX - this->viewportState.mbr_0xac) * 32;
         this->viewportState.viewportY = (tileY - this->viewportState.mbr_0xb0) * 8;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
     }

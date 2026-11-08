@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -15,7 +16,7 @@ namespace Rendering {
     // FUNCTION: STRONGHOLDCRUSADER 0x004E5ED0
     void ViewportRenderState::computeMouseTileFromScreenPosition(int screenX, int screenY)
     {
-        int probeScreenY = screenY + -8;
+        int probeScreenY = screenY - 8;
         int foundTile = 0;
         int orientationBase = 8;
 
@@ -38,11 +39,11 @@ namespace Rendering {
         if (DAT_TileMapState::instance.mapOrientation == 0) {
             orientationBase = 8;
         } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-            orientationBase = 0x13a18;
+            orientationBase = 80408;
         } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-            orientationBase = 0x27428;
+            orientationBase = 160808;
         } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-            orientationBase = 0x3ae38;
+            orientationBase = 241208;
         }
         int probeDoubledY = probeScreenY * 2 + 8;
         int probeOffset = probeScreenY - screenY;
@@ -60,31 +61,33 @@ namespace Rendering {
                 int unclampedY = (this->viewportState.viewportY - this->windowY) + 8 + probeScreenY;
                 tileRowY = ((this->viewportState.viewportY % 16 - this->windowY) + probeScreenY - 8) & 0xf;
                 int unclampedX = (screenX - this->windowX) + this->viewportState.viewportX;
-                lookupIndex = (unclampedX / 32) + (unclampedY / 16) * 0x191 + orientationBase;
+                lookupIndex = (unclampedX / 32) + (unclampedY / 16) * 401 + orientationBase;
             } else {
-                int unclampedX = ((screenX * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
+                int unclampedX = ((screenX * 2 + 160) - this->windowX) + this->viewportState.viewportX;
                 tileRowY = ((this->viewportState.viewportY % 16 - this->windowY) + probeDoubledY) & 0xf;
                 int unclampedY = (probeDoubledY - this->windowY) + this->viewportState.viewportY;
-                lookupIndex = (unclampedY / 16) * 0x191 + (unclampedX / 32) + orientationBase;
+                lookupIndex = (unclampedY / 16) * 401 + (unclampedX / 32) + orientationBase;
             }
 
             int quadrant = DAT_MapRenderDefinedData::instance.field_0xc24[tileRowY][quadrantX];
             if (quadrant == 1) {
                 lookupIndex = lookupIndex + 200;
             } else if (quadrant == 2) {
-                lookupIndex = lookupIndex + 0xc9;
+                lookupIndex = lookupIndex + 201;
             } else if (quadrant == 3) {
-                lookupIndex = lookupIndex + 0x191;
+                lookupIndex = lookupIndex + 401;
             }
 
-            int tile = this->screenPointToTileNumber[lookupIndex + -8];
-            if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x30U) != 0) {
+            int tile = this->screenPointToTileNumber[lookupIndex - 8];
+            if ((DAT_TileMapState::instance.LogicLayer[tile]
+                    & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
+                != 0) {
                 break;
             }
 
             int tileHeightOffset
                 = DAT_TileMapState::instance.heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[tile]];
-            if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x10000000U) != 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[tile] & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE) != 0) {
                 tileHeightOffset = tileHeightOffset
                     + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[tile]);
@@ -102,23 +105,24 @@ namespace Rendering {
             probeScreenY = probeScreenY + 1;
             probeDoubledY = probeDoubledY + 2;
             probeOffset = probeOffset + 1;
-        } while (probeOffset < 0xff);
+        } while (probeOffset < 255);
 
         this->viewportState.mouseAtomRefFloorTile = foundTile;
         if (DAT_TileMapState::instance.PathConnectionLayer[foundTile] == 0
-            || (DAT_TileMapState::instance.LogicLayer[foundTile] & 0x200) != 0) {
+            || (DAT_TileMapState::instance.LogicLayer[foundTile] & Map::LogicHelpers::L_CRENEL) != 0) {
             int neighbourTile
                 = DAT_TileMapState::instance
                       .directionTranslationMatrix[this->tileTranslationMatrix_YComponent[foundTile]]
                                                  [(DAT_TileMapState::instance.screenSouthEastDirection + 4) % 8]
                 + foundTile;
             uint tileFlags = DAT_TileMapState::instance.LogicLayer[foundTile];
-            if ((tileFlags & 0x40000000) == 0) {
-                if ((tileFlags & 0x200) != 0) {
-                    if ((DAT_TileMapState::instance.LogicLayer[neighbourTile] & 0x100) != 0) {
+            if ((tileFlags & Map::LogicHelpers::L_MOAT) == 0) {
+                if ((tileFlags & Map::LogicHelpers::L_CRENEL) != 0) {
+                    if ((DAT_TileMapState::instance.LogicLayer[neighbourTile] & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
+                        != 0) {
                         foundTile = neighbourTile;
                     }
-                } else if ((tileFlags & 0x400) != 0) {
+                } else if ((tileFlags & Map::LogicHelpers::L_BUILDING) != 0) {
                     switch (DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[foundTile]]
                             .buildingType) {
                     case OpenSHC::Map::Buildings::BT_MANORHOUSE:
@@ -132,7 +136,9 @@ namespace Rendering {
                     case OpenSHC::Map::Buildings::BT_TOWER3:
                     case OpenSHC::Map::Buildings::BT_TOWER4:
                     case OpenSHC::Map::Buildings::BT_TOWER5:
-                        if ((DAT_TileMapState::instance.LogicLayer[neighbourTile] & 0x10000000) != 0) {
+                        if ((DAT_TileMapState::instance.LogicLayer[neighbourTile]
+                                & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
+                            != 0) {
                             foundTile = neighbourTile;
                         }
                         break;
@@ -146,7 +152,10 @@ namespace Rendering {
             }
         }
 
-        if ((DAT_TileMapState::instance.LogicLayer[foundTile] & 0x10000300) != 0
+        if ((DAT_TileMapState::instance.LogicLayer[foundTile]
+                & (Map::LogicHelpers::L_WALL_OR_GATEHOUSE | Map::LogicHelpers::L_CRENEL
+                    | Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE))
+                != 0
             && (DAT_TileMapState::instance.LogicLayer[foundTile] & 2) == 0) {
             this->viewportState.field_0x6c = 1;
         }
@@ -167,8 +176,9 @@ namespace Rendering {
         if (DAT_TileMapState::instance.flatViewToggleValue1 != 0) {
             foundTile = this->viewportState.mouseTile;
         }
-        this->viewportState.field_0x38 = DAT_TileMapState::instance.LogicLayer[foundTile] & 0x40000000;
-        this->viewportState.field_0x40 = DAT_TileMapState::instance.LogicLayer[foundTile] & 0x4000;
+        this->viewportState.field_0x38 = DAT_TileMapState::instance.LogicLayer[foundTile] & Map::LogicHelpers::L_MOAT;
+        this->viewportState.field_0x40
+            = DAT_TileMapState::instance.LogicLayer[foundTile] & Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
         int moatID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(
             foundTile);
         if (moatID == 0) {

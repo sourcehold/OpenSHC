@@ -20,12 +20,12 @@ namespace Rendering {
         }
         mapBorder = mapBorder / 2;
 
-        int maxViewportX = (((400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4) * 0x20;
+        int maxViewportX = (((400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4) * 32;
         int maxViewportY = ((401 - this->viewportState.viewportWidth) - mapBorder) * 8;
-        int minViewportX = (mapBorder / 2 + 1) * 0x20;
-        int minViewportY = mapBorder * 8 + 0x10;
+        int minViewportX = (mapBorder / 2 + 1) * 32;
+        int minViewportY = mapBorder * 8 + 16;
         if (this->viewportState.isZoomedOutUnk != 0) {
-            minViewportX = (mapBorder / 2 - 4) * 0x20;
+            minViewportX = (mapBorder / 2 - 4) * 32;
         }
 
         if (this->viewportState.viewportX < minViewportX) {
@@ -43,22 +43,22 @@ namespace Rendering {
 
         if (DAT_TileMapState::instance.mapOrientation != 0) {
             if (DAT_TileMapState::instance.mapOrientation == 6) {
-                if (this->viewportState.viewportX > maxViewportX + -0x20) {
-                    this->viewportState.viewportX = maxViewportX + -0x20;
+                if (this->viewportState.viewportX > maxViewportX - 32) {
+                    this->viewportState.viewportX = maxViewportX - 32;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
                 if (this->viewportState.viewportY < minViewportY + 8) {
                     this->viewportState.viewportY = minViewportY + 8;
                 }
-                if (this->viewportState.viewportY > maxViewportY + -8) {
-                    this->viewportState.viewportY = maxViewportY + -8;
+                if (this->viewportState.viewportY > maxViewportY - 8) {
+                    this->viewportState.viewportY = maxViewportY - 8;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-                if (this->viewportState.viewportX < minViewportX + 0x10) {
-                    this->viewportState.viewportX = minViewportX + 0x10;
+                if (this->viewportState.viewportX < minViewportX + 16) {
+                    this->viewportState.viewportX = minViewportX + 16;
                 }
-                if (this->viewportState.viewportY > maxViewportY + -8) {
-                    this->viewportState.viewportY = maxViewportY + -8;
+                if (this->viewportState.viewportY > maxViewportY - 8) {
+                    this->viewportState.viewportY = maxViewportY - 8;
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace Rendering {
             && DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768
             && this->viewportState.isZoomedOutUnk != 0) {
             minViewportY = minViewportY - 10;
-            maxViewportY = maxViewportY + -10;
+            maxViewportY = maxViewportY - 10;
         }
 
         if (minViewportX > maxViewportX) {

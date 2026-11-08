@@ -20,6 +20,7 @@
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Entities/EntityTypeShort.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -205,7 +206,7 @@ namespace Rendering {
         }
         _vpWidthPlus1_1 = this->viewportState.viewportHeight + 1;
         this->viewportState.unknownScreenXRelated = iVar28 * 32 + 70;
-        iVar28 = this->viewportState.viewportWidth + 0x2a;
+        iVar28 = this->viewportState.viewportWidth + 42;
         DAT_RenderMap_DrawSomeY::instance = 8;
         if (DAT_TileMapState::instance.mapOrientation == 0) {
         LAB_004e8e99:
@@ -225,7 +226,7 @@ namespace Rendering {
                 local_1c = 8;
             } else {
                 iVar31 = 128;
-                local_1c = 0x10;
+                local_1c = 16;
             }
             DAT_RenderMap_DrawSomeY::instance = iVar31 + 8;
         }
@@ -241,7 +242,7 @@ namespace Rendering {
            ***
          */
 
-        iVar2 = layerTileIndex + -2 + _yOffset_01 * 401;
+        iVar2 = layerTileIndex - 2 + _yOffset_01 * 401;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::resetBatchedRender, this)();
         if (DAT_TileMapState::instance.mapOrientation == 6) {
             iVar26 = -this->viewportState.someYOffset;
@@ -258,25 +259,25 @@ namespace Rendering {
             }
         }
         this->viewportState.tileCenterX = iVar23
-            + (this->screenPointToTileNumber[_yOffset_01 * 0x191 + layerTileIndex + -8]
+            + (this->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]
                 - this
                     ->translationMatrix[this->tileTranslationMatrix_YComponent[this
-                            ->screenPointToTileNumber[_yOffset_01 * 0x191 + layerTileIndex + -8]]]
+                            ->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]]]
                     .addXgetTile);
         this->viewportState.tileCenterY = iVar26
             + this->tileTranslationMatrix_YComponent[this
-                    ->screenPointToTileNumber[_yOffset_01 * 0x191 + layerTileIndex + -8]];
+                    ->screenPointToTileNumber[_yOffset_01 * 401 + layerTileIndex - 8]];
         DAT_TextureRenderCoreObject::instance.isZoom2 = this->viewportState.isZoomedOutUnk;
         if (this->viewportState.isZoomedOutUnk == 0) {
-            layerTileIndex = DAT_WindowAndDirectDraw::instance.resolutionY + 0x18;
+            layerTileIndex = DAT_WindowAndDirectDraw::instance.resolutionY + 24;
         } else {
-            layerTileIndex = DAT_WindowAndDirectDraw::instance.resolutionY * 2 + 0x20;
+            layerTileIndex = DAT_WindowAndDirectDraw::instance.resolutionY * 2 + 32;
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
             DAT_TextureRenderCoreObject::ptr)(iVar31, layerTileIndex);
         this->viewportState.ptrColor = (DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame
             + this->viewportState.currentCameraOffsetX + DAT_MouseState::instance.screenSpaceX
-            + (this->viewportState.currentCameraOffsetY + DAT_MouseState::instance.screenSpaceY) * 0xfd8);
+            + (this->viewportState.currentCameraOffsetY + DAT_MouseState::instance.screenSpaceY) * 4056);
         this->viewportState.mouseRayBuildingID = 0;
         this->viewportState.mouseRayUnitID = 0;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
@@ -284,14 +285,14 @@ namespace Rendering {
         if (1 < (int)DAT_UnitsState::instance.maxUnitCount) {
             psVar17 = &DAT_UnitsState::instance.units[1].drawX;
             do {
-                if (psVar17[0x3c] != OpenSHC::Map::Units::ULS_INVISIBLE) {
+                if (psVar17[60] != OpenSHC::Map::Units::ULS_INVISIBLE) {
                     *psVar17 = 0;
                     psVar17[1] = 0;
                     psVar17[2] = 0;
                     psVar17[3] = 0;
                 }
                 iVar31 = iVar31 + 1;
-                psVar17 = psVar17 + 0x248;
+                psVar17 = psVar17 + 584;
             } while (iVar31 < (int)DAT_UnitsState::instance.maxUnitCount);
         }
         iVar31 = 1;
@@ -300,24 +301,24 @@ namespace Rendering {
             do {
                 *psVar17 = 0;
                 iVar31 = iVar31 + 1;
-                psVar17 = psVar17 + 0x196;
+                psVar17 = psVar17 + 406;
             } while (iVar31 < DAT_BuildingsState::instance.maxBuildingsCount);
         }
         while (local_1c < iVar28
             && (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderUnits, this)(),
                 local_1c < viewportWidth
                     || ((DAT_TileMapState::instance.LogicLayer[this->screenPointToTileNumber[_zoomOffset + iVar2]]
-                            & 0x30)
+                            & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
                         == 0))) {
             _vpWidthPlus1 = _viewportHeight + 1;
             DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated;
             iVar31 = _zoomOffset;
             if (_vpWidthPlus1_1 == _vpWidthPlus1) {
-                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 0x10;
+                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 16;
                 _vpWidthPlus1 = _viewportHeight;
             }
             for (; iVar31 < _vpWidthPlus1; iVar31 = iVar31 + 1) {
-                layerTileIndex = this->screenPointToTileNumber[iVar31 + iVar2 + -8];
+                layerTileIndex = this->screenPointToTileNumber[iVar31 + iVar2 - 8];
                 DAT_00ed3148::instance = DAT_TileMapState::instance.LogicLayer[layerTileIndex];
                 if ((DAT_00ed3148::instance & 0x30) == 0) {
                     /*
@@ -326,7 +327,7 @@ namespace Rendering {
 
                     DAT_GmImageAddressToBeRendered::instance
                         = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                    if ((iVar31 < 2) || (bVar13 = 1, _vpWidthPlus1 + -2 <= iVar31)) {
+                    if ((iVar31 < 2) || (bVar13 = 1, _vpWidthPlus1 - 2 <= iVar31)) {
                         bVar13 = 0;
                     }
                     if (this->DAT_MapEditorDisplayLayer != 0) {
@@ -339,7 +340,7 @@ namespace Rendering {
                         }
                         if (_displayLayerLogicalValue != 0) {
                             if (this->DAT_MapEditorDisplayLayer == 2) {
-                                _displayLayerLogicalValue = 0xff - (_displayLayerLogicalValue & 0xff);
+                                _displayLayerLogicalValue = 255 - (_displayLayerLogicalValue & 0xff);
                                 if (DAT_TileMapState::instance.mapOrientation == 2) {
                                     _yOffset_01 = 6;
                                 LAB_004e91cc:
@@ -357,19 +358,19 @@ namespace Rendering {
                                         goto LAB_004e91cc;
                                     }
                                 }
-                                if (0xff < (int)_displayLayerLogicalValue) {
-                                    _displayLayerLogicalValue = _displayLayerLogicalValue - 0x100;
+                                if (255 < (int)_displayLayerLogicalValue) {
+                                    _displayLayerLogicalValue = _displayLayerLogicalValue - 256;
                                 }
                                 DAT_GmImageAddressToBeRendered::instance
-                                    = GMFirstPictureIndex::instance[0x26] + 0x40 + _displayLayerLogicalValue;
+                                    = GMFirstPictureIndex::instance[38] + 64 + _displayLayerLogicalValue;
                             } else {
                                 _displayLayerLogicalValue = _displayLayerLogicalValue & 0x3f;
                                 DAT_GmImageAddressToBeRendered::instance
-                                    = GMFirstPictureIndex::instance[0x26] + _displayLayerLogicalValue;
+                                    = GMFirstPictureIndex::instance[38] + _displayLayerLogicalValue;
                             }
                         }
                     }
-                    _yOffset_01 = GMFirstPictureIndex::instance[0x9d];
+                    _yOffset_01 = GMFirstPictureIndex::instance[157];
                     entityID = (uint)DAT_TileMapState::instance.EntityLayer[layerTileIndex];
                     iVar23 = (int)DAT_TileMapState::instance.OrganismLayer[layerTileIndex];
                     local_2c = 0;
@@ -386,12 +387,12 @@ namespace Rendering {
                             || DAT_TileMapState::instance.disableElevationRendering != 0) {
                             DAT_00ed3154::instance = 0;
                         } else {
-                            DAT_00ed3154::instance = 0x5a;
+                            DAT_00ed3154::instance = 90;
                         }
                         DAT_RenderMap_RowsLeft::instance = (uint)DAT_TileMapState::instance.ShowHiLayer[layerTileIndex];
                     } else if ((DAT_00ed3148::instance & 1) == 0) {
                         if ((DAT_00ed3148::instance & 0x100000) == 0) {
-                            if (DAT_00ed3148::instance != 0xa0008000)
+                            if (DAT_00ed3148::instance != 2684387328)
                                 goto LAB_004e97e2;
                             DAT_RenderMap_YOffset::instance
                                 = DAT_TileMapState::instance
@@ -415,14 +416,14 @@ namespace Rendering {
                                     + (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
                             } else {
                                 if (bVar19 == 1) {
-                                    if (0x1fe < DAT_00ed314c::instance) {
+                                    if (510 < DAT_00ed314c::instance) {
                                         DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
                                         DAT_00ed314c::instance = 0;
                                     }
                                     bVar15 = DAT_MapRenderDefinedData::instance.field_0x924[DAT_00ed314c::instance];
                                 } else {
                                     if ((bVar19 != 4) && (bVar19 != 5)) {
-                                        if (0x7e < DAT_00ed314c::instance) {
+                                        if (126 < DAT_00ed314c::instance) {
                                             DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
                                             DAT_00ed314c::instance = 0;
                                         }
@@ -432,7 +433,7 @@ namespace Rendering {
                                             + (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
                                         goto LAB_004e9845;
                                     }
-                                    if (0xfe < DAT_00ed314c::instance) {
+                                    if (254 < DAT_00ed314c::instance) {
                                         DAT_TileMapState::instance.WallGFXLayer[layerTileIndex] = 0;
                                         DAT_00ed314c::instance = 0;
                                     }
@@ -509,7 +510,7 @@ namespace Rendering {
                             }
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(7);
-                            _yOffset_01 = GMFirstPictureIndex::instance[0x9d];
+                            _yOffset_01 = GMFirstPictureIndex::instance[157];
                         }
                     } else {
                         uVar32 = (uint)(short)DAT_TileMapState::instance.RandomLayer[layerTileIndex];
@@ -523,7 +524,7 @@ namespace Rendering {
                                 DAT_GmImageAddressToBeRendered::instance
                                     = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
                                     + DAT_MapRenderDefinedData::instance.field_0x4dc
-                                          [(int)(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2) % 0xc];
+                                          [(int)(this->unknownCounterUntil_0x24 + DAT_00ed314c::instance / 2) % 12];
                             } else if ((uVar10 & 0x40) == 0) {
                                 if ((uVar10 & 0x100) == 0) {
                                     if ((uVar10 & 0x200) == 0) {
@@ -534,37 +535,37 @@ namespace Rendering {
                                             if (layerTileIndex == piVar21[-60]) {
                                                 local_2c = *piVar21 + 1 + (uVar32 & 3) * 8;
                                             }
-                                            if (layerTileIndex == piVar21[-0x3b]) {
+                                            if (layerTileIndex == piVar21[-59]) {
                                                 local_2c = piVar21[1] + 1 + (uVar32 & 3) * 8;
                                             }
-                                            if (layerTileIndex == piVar21[-0x3a]) {
+                                            if (layerTileIndex == piVar21[-58]) {
                                                 local_2c = piVar21[2] + 1 + (uVar32 & 3) * 8;
                                             }
-                                            if (layerTileIndex == piVar21[-0x39]) {
+                                            if (layerTileIndex == piVar21[-57]) {
                                                 local_2c = piVar21[3] + 1 + (uVar32 & 3) * 8;
                                             }
-                                            if (layerTileIndex == piVar21[-0x38]) {
+                                            if (layerTileIndex == piVar21[-56]) {
                                                 local_2c = piVar21[4] + 1 + (uVar32 & 3) * 8;
                                             }
                                             piVar21 = piVar21 + 5;
-                                            _yOffset_01 = _yOffset_01 + -1;
+                                            _yOffset_01 = _yOffset_01 - 1;
                                         } while (_yOffset_01 != 0);
                                     }
                                 } else {
                                     DAT_GmImageAddressToBeRendered::instance
                                         = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex]
                                         + DAT_MapRenderDefinedData::instance.field_0x6a4[this->unknownCounterUntil_0x20]
-                                            * 0x22;
+                                            * 34;
                                 }
                             } else {
                                 uVar32 = (uint)DAT_TileMapState::instance.GfxLayer[layerTileIndex];
-                                if (uVar32 == GMFirstPictureIndex::instance[0xa6] + 0x5dcU) {
+                                if (uVar32 == GMFirstPictureIndex::instance[166] + 1500U) {
                                     uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
                                     if ((int)uVar29 < 0) {
                                         uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
                                     }
                                     _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
-                                    if ((int)uVar29 < 0x12) {
+                                    if ((int)uVar29 < 18) {
                                         DAT_GmImageAddressToBeRendered::instance
                                             = uVar32 + (_yOffset_01 - ((int)uVar29 >> 0x1f)) * -6 + uVar29;
                                     } else {
@@ -573,29 +574,29 @@ namespace Rendering {
                                     LAB_004e9428:
                                         DAT_GmImageAddressToBeRendered::instance
                                             = *(int*)((int)DAT_MapRenderDefinedData::ptr
-                                                  + (uVar29 + _yOffset_01 * -0xc) * 4 + 0x4dc)
-                                            + 0x5d0 + GMFirstPictureIndex::instance[0xa6];
+                                                  + (uVar29 + _yOffset_01 * -12) * 4 + 1244)
+                                            + 1488 + GMFirstPictureIndex::instance[166];
                                     }
-                                } else if (uVar32 == GMFirstPictureIndex::instance[0xa6] + 0x5e2U) {
+                                } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1506U) {
                                     uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
                                     if ((int)uVar29 < 0) {
                                         uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
                                     }
-                                    _yOffset_01 = (int)uVar29 / 0xc;
-                                    if (0x11 < (int)uVar29)
+                                    _yOffset_01 = (int)uVar29 / 12;
+                                    if (17 < (int)uVar29)
                                         goto LAB_004e9428;
-                                    DAT_GmImageAddressToBeRendered::instance = uVar32 + _yOffset_01 * -0xc + uVar29;
-                                } else if (uVar32 == GMFirstPictureIndex::instance[0xa6] + 0x5eeU) {
+                                    DAT_GmImageAddressToBeRendered::instance = uVar32 + _yOffset_01 * -12 + uVar29;
+                                } else if (uVar32 == GMFirstPictureIndex::instance[166] + 1518U) {
                                     uVar29 = this->unknownCounterUntil_0x24 + INT_00ed315c::instance & 0x8000001f;
                                     if ((int)uVar29 < 0) {
                                         uVar29 = (uVar29 - 1 | 0xffffffe0) + 1;
                                     }
-                                    if (0x11 < (int)uVar29) {
+                                    if (17 < (int)uVar29) {
                                         _yOffset_01 = (int)uVar29 / 6 + ((int)uVar29 >> 0x1f);
                                         goto LAB_004e941f;
                                     }
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = uVar32 + ((int)uVar29 / 0x12) * -0x12 + uVar29;
+                                        = uVar32 + ((int)uVar29 / 18) * -18 + uVar29;
                                 }
                             }
                         } else {
@@ -603,15 +604,15 @@ namespace Rendering {
                                 = -(uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x20) != 0)
                                 & 0x5a;
                             DAT_00ed314c::instance = this->unknownCounterUntil_0x10 + DAT_00ed314c::instance;
-                            if (0xf < (int)DAT_00ed314c::instance) {
-                                DAT_00ed314c::instance = DAT_00ed314c::instance - 0x10;
+                            if (15 < (int)DAT_00ed314c::instance) {
+                                DAT_00ed314c::instance = DAT_00ed314c::instance - 16;
                             }
                             DAT_GmImageAddressToBeRendered::instance
                                 = DAT_TileMapState::instance.GfxLayer[layerTileIndex] + DAT_00ed314c::instance;
                         }
                         MACRO_CALL_MEMBER(
                             OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(2);
-                        _yOffset_01 = GMFirstPictureIndex::instance[0x9d];
+                        _yOffset_01 = GMFirstPictureIndex::instance[157];
                     }
                 LAB_004e9845:
                     local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
@@ -631,18 +632,18 @@ namespace Rendering {
                                                 OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
                                                 DAT_LandscapeState::ptr)((uVar32 & 3) + 1);
                                             DAT_GmImageAddressToBeRendered::instance
-                                                = _yOffset_01 + -1 + GMFirstPictureIndex::instance[0x38];
+                                                = _yOffset_01 - 1 + GMFirstPictureIndex::instance[56];
                                         } else {
-                                            _yOffset_01 = _yOffset_01 * 0x20;
-                                            if (1 < *(short*)((int)&DAT_LandscapeState::instance.trees[0x636]
+                                            _yOffset_01 = _yOffset_01 * 32;
+                                            if (1 < *(short*)((int)&DAT_LandscapeState::instance.trees[1590]
                                                                   .appleTreeColorVariation
                                                     + _yOffset_01 + 2)) {
                                                 iVar26 = MACRO_CALL_MEMBER(
                                                     OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
                                                     DAT_LandscapeState::ptr)((uVar32 & 3) + 1);
-                                                DAT_GmImageAddressToBeRendered::instance = iVar26 + -1
+                                                DAT_GmImageAddressToBeRendered::instance = iVar26 - 1
                                                     + GMFirstPictureIndex::instance[*(
-                                                        short*)((int)&DAT_LandscapeState::instance.trees[0x636]
+                                                        short*)((int)&DAT_LandscapeState::instance.trees[1590]
                                                                     .animationFrameUnk
                                                         + _yOffset_01 + 2)];
                                             }
@@ -652,28 +653,25 @@ namespace Rendering {
                                     if ((DAT_00ed3148::instance & 0x200) == 0) {
                                         if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] != 0) {
                                             DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
-                                            DAT_GmImageAddressToBeRendered::instance
-                                                = (uVar32 & 1) + 0x2c + _yOffset_01;
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
                                         }
                                     } else {
                                         DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                         if (DAT_TileMapState::instance.DamageLayer[layerTileIndex] == 0) {
-                                            DAT_GmImageAddressToBeRendered::instance
-                                                = (uVar32 & 3) + 0x24 + _yOffset_01;
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 3) + 36 + _yOffset_01;
                                         } else {
-                                            DAT_GmImageAddressToBeRendered::instance
-                                                = (uVar32 & 1) + 0x2c + _yOffset_01;
+                                            DAT_GmImageAddressToBeRendered::instance = (uVar32 & 1) + 44 + _yOffset_01;
                                         }
                                     }
                                 } else {
                                     DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                     if ((DAT_GmImageAddressToBeRendered::instance
-                                            == GMFirstPictureIndex::instance[0xc] + 0x86U)
+                                            == GMFirstPictureIndex::instance[12] + 134U)
                                         || (DAT_GmImageAddressToBeRendered::instance
-                                            == GMFirstPictureIndex::instance[0xc] + 0x88U)) {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x2a;
+                                            == GMFirstPictureIndex::instance[12] + 136U)) {
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 42;
                                     } else {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x28;
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 40;
                                     }
                                 }
                             } else {
@@ -683,13 +681,13 @@ namespace Rendering {
                                     uVar32 = (uint)((DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 4)
                                         != 0);
                                     if (BVar8 == OpenSHC::Map::Buildings::BT_WOODCUTTERSHUT) {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x18 + uVar32;
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 24 + uVar32;
                                     } else if (BVar8 == OpenSHC::Map::Buildings::BT_HUNTERSHUT) {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x1a + uVar32;
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 26 + uVar32;
                                     } else if (BVar8 == OpenSHC::Map::Buildings::BT_DAIRYFARM) {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x1c + uVar32;
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 28 + uVar32;
                                     } else {
-                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 0x1e + uVar32;
+                                        DAT_GmImageAddressToBeRendered::instance = _yOffset_01 + 30 + uVar32;
                                     }
                                 } else if (-1 < iVar26) {
                                     DAT_GmImageAddressToBeRendered::instance
@@ -715,7 +713,7 @@ namespace Rendering {
                                             .playerTeams[DAT_TileMapState::instance.moats[_yOffset_01].owner]
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]))) {
-                            DAT_RenderMap_ImageID::instance = 0x39;
+                            DAT_RenderMap_ImageID::instance = 57;
                             goto LAB_004e9b3c;
                         }
                     } else if (DAT_TileMapState::instance.buildingPlacementFail == FALSE
@@ -737,7 +735,7 @@ namespace Rendering {
                             == OpenSHC::UI::Enums::MMT_DEBUG_DATA_UNIT_DATA) {
                         DAT_GmImageAddressToBeRendered::instance
                             = ((byte)DAT_UnitsState::instance.units[unitID].moveDelay & 0x3f)
-                            + GMFirstPictureIndex::instance[0x26];
+                            + GMFirstPictureIndex::instance[38];
                     }
                     if ((DAT_00ed3148::instance & 8) != 0
                         && (DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex] & 0x2000) == 0
@@ -757,7 +755,7 @@ namespace Rendering {
                             (int)(DAT_RenderMap_ImageID::instance), (int)(DAT_RenderMap_DrawSomeX::instance),
                             (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance)
                                 + DAT_RenderMap_DrawSomeY::instance),
-                            0x18);
+                            24);
                     }
                     if (DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].direction != 0
                         && local_54 == 0 && bVar13 != 0 && bVar12 == 0) {
@@ -780,17 +778,17 @@ namespace Rendering {
                             _yOffset_01 + 7,
                             (ushort*)((int)(
 
-                                (DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance] + 0x200
+                                (DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance] + 512
                                     + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                     }
                     if (local_2c != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_ANIM_WHITECAPS, local_2c,
                             (DAT_RenderMap_DrawSomeX::instance
-                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[0xad].originX)
-                                + 0xf,
+                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[173].originX)
+                                + 15,
                             (DAT_RenderMap_DrawSomeY::instance
-                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[0xad].originY)
+                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[173].originY)
                                 + 7);
                     }
                     if (local_54 != 0) {
@@ -817,7 +815,7 @@ namespace Rendering {
                                 if ((char)uVar10 < '\0') {
                                     _yOffset_01 = (int)DAT_GMImageHeaders::instance
                                                       .imh[DAT_GmImageAddressToBeRendered::instance
-                                                          + GMFirstPictureIndex::instance[0x36] + -1]
+                                                          + GMFirstPictureIndex::instance[54] - 1]
                                                       .height;
                                     /*
                                       renders wall connections
@@ -826,16 +824,16 @@ namespace Rendering {
                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                           renderFunctionResponsibleForManyGameObjects,
                                         DAT_TextureRenderCoreObject::ptr)(DAT_RenderMap_DrawSomeX::instance,
-                                        (int)(((iVar26 - uVar32) - _yOffset_01) + DAT_00ed3154::instance + 0x62
+                                        (int)(((iVar26 - uVar32) - _yOffset_01) + DAT_00ed3154::instance + 98
                                             + DAT_RenderMap_DrawSomeY::instance),
                                         (int)(DAT_GMImageHeaders::instance
                                                 .imh[DAT_GmImageAddressToBeRendered::instance
-                                                    + GMFirstPictureIndex::instance[0x36] + -1]
+                                                    + GMFirstPictureIndex::instance[54] - 1]
                                                 .width),
                                         _yOffset_01 - iVar26,
                                         (ushort*)((int)(
 
-                                            (DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[0x36] + -1
+                                            (DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[54] - 1
                                                  + DAT_GmImageAddressToBeRendered::instance]
                                                 + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                                     goto LAB_004e9e36;
@@ -843,10 +841,10 @@ namespace Rendering {
                                 if ((uVar10 & 0x100) == 0) {
                                     if ((uVar10 & 0x200) == 0)
                                         goto LAB_004e9e36;
-                                    iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance + -1;
+                                    iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance - 1;
                                 } else {
                                     iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance;
-                                    _yOffset_01 = DAT_RenderMap_DrawSomeX::instance + 0x10;
+                                    _yOffset_01 = DAT_RenderMap_DrawSomeX::instance + 16;
                                 }
                             } else {
                                 iVar26 = (iVar26 - uVar32) + DAT_00ed3154::instance + 7;
@@ -862,8 +860,12 @@ namespace Rendering {
                     uVar32 = (uint)DAT_TileMapState::instance.FloatingLayer[layerTileIndex];
                     if (uVar32 != 0) {
                         if ((DAT_TileMapState::instance.refreshRelatedOne != 0) && (_flatView == 0)) {
-                            if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex] & 0x10000000U) == 0) {
-                                if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex] & 0x100U) != 0) {
+                            if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                    & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
+                                == 0) {
+                                if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                        & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
+                                    != 0) {
                                     local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
                                     if (local_54 == 0) {
                                         _yOffset_01 = DAT_RenderMap_YOffset::instance + 4;
@@ -871,7 +873,7 @@ namespace Rendering {
                                         == OpenSHC::Map::Buildings::BT_WOODGATE1) {
                                         _yOffset_01 = DAT_RenderMap_YOffset::instance + 6;
                                     } else {
-                                        _yOffset_01 = DAT_RenderMap_YOffset::instance + 0x14;
+                                        _yOffset_01 = DAT_RenderMap_YOffset::instance + 20;
                                     }
                                 }
                             } else {
@@ -954,13 +956,17 @@ namespace Rendering {
                                     = DAT_EntityState::instance.entityArray[entityID].colorUnk;
                                 DAT_CurrentlyRenderedSpriteID::instance
                                     = (GmIDInt)DAT_EntityState::instance.entityArray[entityID].gmID;
-                                if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex] & 0x10000000U) == 0) {
-                                    if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex] & 0x100U) != 0) {
+                                if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                        & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
+                                    == 0) {
+                                    if ((DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                            & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
+                                        != 0) {
                                         local_54 = (uint)DAT_TileMapState::instance.BuildingLayer[layerTileIndex];
                                         if (local_54 == 0) {
                                             iVar26 = DAT_RenderMap_YOffset::instance + 4;
                                         } else {
-                                            iVar26 = DAT_RenderMap_YOffset::instance + 0x14;
+                                            iVar26 = DAT_RenderMap_YOffset::instance + 20;
                                         }
                                     }
                                 } else {
@@ -972,7 +978,7 @@ namespace Rendering {
                                 }
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering,
-                                    this)(0xffffffff,
+                                    this)(4294967295,
                                     ((int)DAT_EntityState::instance.entityArray[entityID].x1
                                         - (int)DAT_EntityState::instance.entityArray[entityID].originX)
                                         + DAT_RenderMap_DrawSomeX::instance,
@@ -980,8 +986,8 @@ namespace Rendering {
                                          - (int)DAT_EntityState::instance.entityArray[entityID].originY)
                                         - iVar26)
                                         + DAT_RenderMap_DrawSomeY::instance,
-                                    (undefined4)((int)(DAT_EntityState::instance.entityArray[entityID].imageID)), 0x14,
-                                    0, 0);
+                                    (undefined4)((int)(DAT_EntityState::instance.entityArray[entityID].imageID)), 20, 0,
+                                    0);
                             }
                             iVar26 = (int)DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                             if (entityID == iVar26 || DAT_GameSynchronyState::instance.syncStatus != 0
@@ -1026,13 +1032,13 @@ namespace Rendering {
                                     if (120 < iVar26
                                         && (DAT_GameSynchronyState::instance.currentGameMode
                                                 != OpenSHC::Game::GM_SOLITARY
-                                            || (DAT_UnitsState::instance.units[unitID].idleCounterUnk < 0x961))) {
-                                        local_2c = 0x10;
+                                            || (DAT_UnitsState::instance.units[unitID].idleCounterUnk < 2401))) {
+                                        local_2c = 16;
                                     }
                                     goto LAB_004ea2c6;
                                 }
                                 if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
-                                    && (0x960 < DAT_UnitsState::instance.units[unitID].idleCounterUnk))
+                                    && (2400 < DAT_UnitsState::instance.units[unitID].idleCounterUnk))
                                     goto LAB_004ea2c6;
                             } else {
                             LAB_004ea2c6:
@@ -1044,7 +1050,7 @@ namespace Rendering {
                                 }
                                 iVar18 = GMFirstPictureIndex::instance[DAT_CurrentlyRenderedSpriteID::instance];
                                 iVar27 = DAT_UnitsState::instance.units[unitID].gfxNumber;
-                                iVar26 = iVar27 + -1 + iVar18;
+                                iVar26 = iVar27 - 1 + iVar18;
                                 iVar25 = DAT_RenderMap_YOffset::instance;
                                 if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
                                     if (_flatView != 0) {
@@ -1059,24 +1065,24 @@ namespace Rendering {
                                 sVar30 = DAT_UnitsState::instance.units[unitID].orientationRelatedPositionX;
                                 sVar20 = DAT_UnitsState::instance.units[unitID].orientationRelatedPositionY;
                                 DAT_UnitsState::instance.units[unitID].field_0x41c
-                                    = sVar30 + -6 + DAT_RenderMap_DrawSomeX::instance;
+                                    = sVar30 - 6 + DAT_RenderMap_DrawSomeX::instance;
                                 sVar30 = ((short)DAT_UnitsState::instance.units[unitID].field_0x5c
                                              - DAT_UnitsState::instance.units[unitID].field_0x2a)
                                     + (short)_yOffset_01 + sVar30;
                                 bVar15 = DAT_UnitsState::instance.units[unitID].negativeHeight;
                                 DAT_UnitsState::instance.units[unitID].field_0x420
-                                    = (sVar20 - iVar25) + -0xc + DAT_RenderMap_DrawSomeY::instance;
+                                    = (sVar20 - iVar25) - 12 + DAT_RenderMap_DrawSomeY::instance;
                                 sVar24 = (short)DAT_UnitsState::instance.units[unitID].unknownV;
                                 sVar5 = DAT_UnitsState::instance.units[unitID].field_0x84;
                                 sVar6 = DAT_UnitsState::instance.units[unitID].buildingHeight;
                                 DAT_UnitsState::instance.units[unitID].drawX = sVar30;
                                 sVar20 = (((sVar5 - sVar6) - (short)iVar25) - sVar24)
                                     + (short)DAT_RenderMap_DrawSomeY::instance + (short)(char)bVar15 + sVar20;
-                                sVar5 = DAT_GMImageHeaders::instance.imh[iVar18 + iVar27 + -1].width;
+                                sVar5 = DAT_GMImageHeaders::instance.imh[iVar18 + iVar27 - 1].width;
                                 DAT_UnitsState::instance.units[unitID].drawY = sVar20;
                                 DAT_UnitsState::instance.units[unitID].drawWidth = sVar5;
                                 if (bVar15 == 0) {
-                                    sVar24 = DAT_GMImageHeaders::instance.imh[iVar18 + iVar27 + -1].height;
+                                    sVar24 = DAT_GMImageHeaders::instance.imh[iVar18 + iVar27 - 1].height;
                                 } else {
                                     sVar24 = (sVar24 - (char)bVar15) + 8;
                                 }
@@ -1103,7 +1109,7 @@ namespace Rendering {
                                                     } else {
                                                         local_c = (uint)sVar24;
                                                     }
-                                                    iVar27 = (0x20 - local_2c) / 3;
+                                                    iVar27 = (32 - local_2c) / 3;
                                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                           renderUnitAnimationWithBlendingUnk,
                                                         DAT_TextureRenderCoreObject::ptr)((int)sVar30,
@@ -1112,11 +1118,11 @@ namespace Rendering {
                                                         (int)(sVar5),
                                                         (int)(DAT_UnitsState::instance.units[unitID].drawHeight1
                                                             - local_c),
-                                                        (byte*)((int)((
-                                                            DAT_GMImageOffsets::instance[_yOffset_01 + -1 + iVar18]
+                                                        (byte*)((
+                                                            int)((DAT_GMImageOffsets::instance[_yOffset_01 - 1 + iVar18]
                                                             + (int)DAT_TextureRenderCoreObject::instance
                                                                 .gmProcessedImageData))),
-                                                        (0x10 - iVar27) * 2);
+                                                        (16 - iVar27) * 2);
                                                     sVar30 = DAT_UnitsState::instance.units[unitID].drawYOffset;
                                                     if (sVar30 != 0) {
                                                         sVar20 = DAT_UnitsState::instance.units[unitID].field_0x86;
@@ -1139,10 +1145,10 @@ namespace Rendering {
                                                                 DAT_GMImageOffsets::instance
                                                                     [GMFirstPictureIndex::instance
                                                                             [DAT_CurrentlyRenderedSpriteID::instance]
-                                                                        + -1 + (int)sVar30]
+                                                                        - 1 + (int)sVar30]
                                                                 + (int)DAT_TextureRenderCoreObject::instance
                                                                     .gmProcessedImageData))),
-                                                            0x20 - iVar27);
+                                                            32 - iVar27);
                                                     }
                                                 }
                                                 uVar9 = *this->viewportState.ptrColor;
@@ -1248,35 +1254,35 @@ namespace Rendering {
                                                                 switch (DAT_UnitsState::instance.units[unitID]
                                                                         .facingDirectionMapOrientationCorrected) {
                                                                 case 0:
-                                                                    _yOffset_01 = _yOffset_01 + 0x22;
+                                                                    _yOffset_01 = _yOffset_01 + 34;
                                                                     break;
                                                                 case 1:
-                                                                    _yOffset_01 = _yOffset_01 + 0x2f;
-                                                                    iVar26 = iVar26 + -0xc;
+                                                                    _yOffset_01 = _yOffset_01 + 47;
+                                                                    iVar26 = iVar26 - 12;
                                                                     break;
                                                                 case 2:
-                                                                    _yOffset_01 = _yOffset_01 + 0x4b;
-                                                                    iVar26 = iVar26 + -0x13;
+                                                                    _yOffset_01 = _yOffset_01 + 75;
+                                                                    iVar26 = iVar26 - 19;
                                                                     break;
                                                                 case 3:
-                                                                    _yOffset_01 = _yOffset_01 + 0x65;
-                                                                    iVar26 = iVar26 + -10;
+                                                                    _yOffset_01 = _yOffset_01 + 101;
+                                                                    iVar26 = iVar26 - 10;
                                                                     break;
                                                                 case 4:
-                                                                    _yOffset_01 = _yOffset_01 + 0x70;
+                                                                    _yOffset_01 = _yOffset_01 + 112;
                                                                     iVar26 = iVar26 + 2;
                                                                     break;
                                                                 case 5:
                                                                     _yOffset_01 = _yOffset_01 + 100;
-                                                                    iVar26 = iVar26 + 0x14;
+                                                                    iVar26 = iVar26 + 20;
                                                                     break;
                                                                 case 6:
-                                                                    _yOffset_01 = _yOffset_01 + 0x46;
-                                                                    iVar26 = iVar26 + 0x13;
+                                                                    _yOffset_01 = _yOffset_01 + 70;
+                                                                    iVar26 = iVar26 + 19;
                                                                     break;
                                                                 case 7:
-                                                                    _yOffset_01 = _yOffset_01 + 0x2c;
-                                                                    iVar26 = iVar26 + 0x17;
+                                                                    _yOffset_01 = _yOffset_01 + 44;
+                                                                    iVar26 = iVar26 + 23;
                                                                 }
                                                             } else {
                                                                 if ((UVar7 != OpenSHC::Map::Units::UT_S_BATTERINGRAM)
@@ -1291,29 +1297,29 @@ namespace Rendering {
                                                                         .facingDirectionMapOrientationCorrected) {
                                                                 case 0:
                                                                 case 1:
-                                                                    _yOffset_01 = _yOffset_01 + 0x2c;
-                                                                    iVar26 = iVar26 + -0x14;
+                                                                    _yOffset_01 = _yOffset_01 + 44;
+                                                                    iVar26 = iVar26 - 20;
                                                                     break;
                                                                 case 2:
-                                                                    _yOffset_01 = _yOffset_01 + 0x31;
-                                                                    iVar26 = iVar26 + -0x11;
+                                                                    _yOffset_01 = _yOffset_01 + 49;
+                                                                    iVar26 = iVar26 - 17;
                                                                     break;
                                                                 case 3:
-                                                                    _yOffset_01 = _yOffset_01 + 0x29;
-                                                                    iVar26 = iVar26 + -0xf;
+                                                                    _yOffset_01 = _yOffset_01 + 41;
+                                                                    iVar26 = iVar26 - 15;
                                                                     break;
                                                                 case 4:
-                                                                    _yOffset_01 = _yOffset_01 + 0x22;
-                                                                    iVar26 = iVar26 + -0x11;
+                                                                    _yOffset_01 = _yOffset_01 + 34;
+                                                                    iVar26 = iVar26 - 17;
                                                                     break;
                                                                 case 5:
                                                                 case 6:
-                                                                    _yOffset_01 = _yOffset_01 + 0x20;
-                                                                    iVar26 = iVar26 + -0x14;
+                                                                    _yOffset_01 = _yOffset_01 + 32;
+                                                                    iVar26 = iVar26 - 20;
                                                                     break;
                                                                 case 7:
-                                                                    _yOffset_01 = _yOffset_01 + 0x28;
-                                                                    iVar26 = iVar26 + -0x17;
+                                                                    _yOffset_01 = _yOffset_01 + 40;
+                                                                    iVar26 = iVar26 - 23;
                                                                 }
                                                             }
                                                             DAT_RenderedUnitOwner::instance
@@ -1369,8 +1375,7 @@ namespace Rendering {
                                                             .disappearFadeAlphaCountdown
                                                         == 0) {
                                                     _yOffset_01
-                                                        = (DAT_UnitsState::instance.units[unitID].drawWidth + -0x16)
-                                                        / 2;
+                                                        = (DAT_UnitsState::instance.units[unitID].drawWidth - 22) / 2;
                                                     if (DAT_UnitsState::instance.units[unitID].unitType
                                                         == OpenSHC::Map::Units::UT_LORD) {
                                                         sVar30 = DAT_UnitsState::instance.units[unitID]
@@ -1378,21 +1383,19 @@ namespace Rendering {
                                                         if (sVar30 == 0) {
                                                             iVar26
                                                                 = DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                + -6
-                                                                + (int)DAT_UnitsState::instance.units[unitID].drawY;
+                                                                - 6 + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                             iVar27 = DAT_UnitsState::instance.units[unitID].drawX
                                                                 + _yOffset_01;
-                                                            iVar18 = DAT_UnitsState::instance.units[unitID].healthbar
-                                                                + 0x11;
+                                                            iVar18
+                                                                = DAT_UnitsState::instance.units[unitID].healthbar + 17;
                                                         } else {
                                                             iVar26
                                                                 = DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                + -8
-                                                                + (int)DAT_UnitsState::instance.units[unitID].drawY;
+                                                                - 8 + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                             iVar27 = DAT_UnitsState::instance.units[unitID].drawX
                                                                 + _yOffset_01;
                                                             iVar18 = DAT_UnitsState::instance.units[unitID].healthbar
-                                                                + 0xe4 + sVar30 * 0xb;
+                                                                + 228 + sVar30 * 11;
                                                         }
                                                     } else {
                                                         iVar26 = DAT_GameState::instance
@@ -1402,22 +1405,20 @@ namespace Rendering {
                                                         if (iVar26 == 0) {
                                                             iVar26
                                                                 = DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                + -6
-                                                                + (int)DAT_UnitsState::instance.units[unitID].drawY;
+                                                                - 6 + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                             iVar27 = DAT_UnitsState::instance.units[unitID].drawX
                                                                 + _yOffset_01;
-                                                            iVar18 = DAT_UnitsState::instance.units[unitID].healthbar
-                                                                + 0x11;
+                                                            iVar18
+                                                                = DAT_UnitsState::instance.units[unitID].healthbar + 17;
                                                         } else {
                                                             if (iVar26 < 1) {
-                                                                iVar18 = iVar26 * -0xb + 0xad;
+                                                                iVar18 = iVar26 * -11 + 173;
                                                             } else {
-                                                                iVar18 = iVar26 * 0xb + 0x76;
+                                                                iVar18 = iVar26 * 11 + 118;
                                                             }
                                                             iVar26
                                                                 = DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                + -8
-                                                                + (int)DAT_UnitsState::instance.units[unitID].drawY;
+                                                                - 8 + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                             iVar27 = DAT_UnitsState::instance.units[unitID].drawX
                                                                 + _yOffset_01;
                                                             iVar18 = DAT_UnitsState::instance.units[unitID].healthbar
@@ -1436,7 +1437,7 @@ namespace Rendering {
                                                                 [DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                                         && (DAT_UnitsState::instance.units[unitID]
                                                                     .assassinsMicroDistanceToEnemyUnk
-                                                                < 0xa1
+                                                                < 161
                                                             || ((UVar4
                                                                 = DAT_UnitsState::instance.units[unitID].state.generic,
                                                                 UVar4 == OpenSHC::Map::Units::States::US_MELEE_ATTACK
@@ -1447,12 +1448,12 @@ namespace Rendering {
                                                             OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                 renderGMWithBlending,
                                                             DAT_TextureRenderCoreObject::ptr)(
-                                                            OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 0x1bf,
+                                                            OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 447,
                                                             DAT_UnitsState::instance.units[unitID].drawX + 2
                                                                 + _yOffset_01,
                                                             (int)(DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                + -0x1b + DAT_UnitsState::instance.units[unitID].drawY),
-                                                            0x10);
+                                                                - 27 + DAT_UnitsState::instance.units[unitID].drawY),
+                                                            16);
                                                     }
                                                 }
                                                 if ((unitID != 0)
@@ -1461,62 +1462,62 @@ namespace Rendering {
                                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                           renderGMWithAlphaMask,
                                                         DAT_TextureRenderCoreObject::ptr)(
-                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 0xd4),
+                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 212),
                                                         (int)(DAT_UnitsState::instance.units[unitID].drawX),
                                                         (int)(DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                            + -0x36 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 0xdc), 0);
+                                                            - 54 + DAT_UnitsState::instance.units[unitID].drawY),
+                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 220), 0);
                                                     DAT_UnitsState::instance.units[unitID].field_0x6e = 0;
                                                 }
                                                 sVar30 = DAT_UnitsState::instance.units[unitID].field_0x6c;
                                                 if (sVar30 == 1) {
                                                     iVar26
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x30;
-                                                    iVar18 = DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                        + -0x46 + (int)DAT_UnitsState::instance.units[unitID].drawY;
-                                                    _yOffset_01 = DAT_UnitsState::instance.units[unitID].field_0x2a
-                                                        + -0x35 + (int)DAT_UnitsState::instance.units[unitID].drawX;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 48;
+                                                    iVar18 = DAT_UnitsState::instance.units[unitID].someDrawYOffset - 70
+                                                        + (int)DAT_UnitsState::instance.units[unitID].drawY;
+                                                    _yOffset_01 = DAT_UnitsState::instance.units[unitID].field_0x2a - 53
+                                                        + (int)DAT_UnitsState::instance.units[unitID].drawX;
                                                     iVar27
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x20;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 32;
                                                 } else if (sVar30 == 2) {
                                                     _yOffset_01 = 0;
                                                     iVar18 = 0;
                                                     switch (DAT_UnitsState::instance.units[unitID].unitType) {
                                                     case OpenSHC::Map::Units::UT_S_CATAPULT:
-                                                        _yOffset_01 = 0x29;
-                                                        iVar18 = 0x3a;
+                                                        _yOffset_01 = 41;
+                                                        iVar18 = 58;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_TREBUCHET:
                                                     case OpenSHC::Map::Units::UT_S_TOWER:
-                                                        _yOffset_01 = 0x4f;
-                                                        iVar18 = 0x38;
+                                                        _yOffset_01 = 79;
+                                                        iVar18 = 56;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                                        _yOffset_01 = 0x2b;
-                                                        iVar18 = 0x23;
+                                                        _yOffset_01 = 43;
+                                                        iVar18 = 35;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                                                        _yOffset_01 = 0x24;
-                                                        iVar18 = 0x3d;
+                                                        _yOffset_01 = 36;
+                                                        iVar18 = 61;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_SHIELD:
                                                         _yOffset_01 = -3;
-                                                        iVar18 = 0x3c;
+                                                        iVar18 = 60;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_BALLISTA:
                                                     case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                                        iVar18 = 0x24;
-                                                        _yOffset_01 = 0x13;
+                                                        iVar18 = 36;
+                                                        _yOffset_01 = 19;
                                                     }
                                                     iVar26
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x84;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
                                                     iVar18 = (DAT_UnitsState::instance.units[unitID].someDrawYOffset
                                                                  - iVar18)
                                                         + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                     _yOffset_01
                                                         = DAT_UnitsState::instance.units[unitID].drawX + _yOffset_01;
                                                     iVar27
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x74;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116;
                                                 } else {
                                                     if (sVar30 != 3)
                                                         goto LAB_004eb1be;
@@ -1524,40 +1525,40 @@ namespace Rendering {
                                                     _yOffset_01 = 0;
                                                     switch (DAT_UnitsState::instance.units[unitID].unitType) {
                                                     case OpenSHC::Map::Units::UT_S_CATAPULT:
-                                                        _yOffset_01 = 0x29;
-                                                        iVar18 = 0x3a;
+                                                        _yOffset_01 = 41;
+                                                        iVar18 = 58;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_TREBUCHET:
                                                     case OpenSHC::Map::Units::UT_S_TOWER:
-                                                        _yOffset_01 = 0x4f;
-                                                        iVar18 = 0x38;
+                                                        _yOffset_01 = 79;
+                                                        iVar18 = 56;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                                        _yOffset_01 = 0x2b;
-                                                        iVar18 = 0x23;
+                                                        _yOffset_01 = 43;
+                                                        iVar18 = 35;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                                                        _yOffset_01 = 0x24;
-                                                        iVar18 = 0x3d;
+                                                        _yOffset_01 = 36;
+                                                        iVar18 = 61;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_SHIELD:
                                                         _yOffset_01 = -3;
-                                                        iVar18 = 0x3c;
+                                                        iVar18 = 60;
                                                         break;
                                                     case OpenSHC::Map::Units::UT_S_BALLISTA:
                                                     case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                                                        iVar18 = 0x24;
-                                                        _yOffset_01 = 0x13;
+                                                        iVar18 = 36;
+                                                        _yOffset_01 = 19;
                                                     }
                                                     iVar26
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0xa4;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 164;
                                                     iVar18 = (DAT_UnitsState::instance.units[unitID].someDrawYOffset
                                                                  - iVar18)
                                                         + (int)DAT_UnitsState::instance.units[unitID].drawY;
                                                     _yOffset_01
                                                         = DAT_UnitsState::instance.units[unitID].drawX + _yOffset_01;
                                                     iVar27
-                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x94;
+                                                        = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 148;
                                                 }
                                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                       renderGMWithAlphaMask,
@@ -1583,7 +1584,7 @@ namespace Rendering {
                                                 } else {
                                                     local_14 = (int)sVar24;
                                                 }
-                                                iVar27 = (0x20 - local_2c) / 3;
+                                                iVar27 = (32 - local_2c) / 3;
                                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                       renderUnitAnimationWithBlendingUnk,
                                                     DAT_TextureRenderCoreObject::ptr)((int)sVar30,
@@ -1591,10 +1592,10 @@ namespace Rendering {
                                                     (int)(sVar5),
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - local_14,
                                                     (byte*)((
-                                                        int)((DAT_GMImageOffsets::instance[_yOffset_01 + -1 + iVar18]
+                                                        int)((DAT_GMImageOffsets::instance[_yOffset_01 - 1 + iVar18]
                                                         + (int)DAT_TextureRenderCoreObject::instance
                                                             .gmProcessedImageData))),
-                                                    (0x10 - iVar27) * 2);
+                                                    (16 - iVar27) * 2);
                                                 sVar30 = DAT_UnitsState::instance.units[unitID].drawYOffset;
                                                 if (sVar30 != 0) {
                                                     sVar20 = DAT_UnitsState::instance.units[unitID].field_0x86;
@@ -1615,10 +1616,10 @@ namespace Rendering {
                                                             int)((DAT_GMImageOffsets::instance
                                                                       [GMFirstPictureIndex::instance
                                                                               [DAT_CurrentlyRenderedSpriteID::instance]
-                                                                          + -1 + (int)sVar30]
+                                                                          - 1 + (int)sVar30]
                                                             + (int)DAT_TextureRenderCoreObject::instance
                                                                 .gmProcessedImageData))),
-                                                        0x20 - iVar27);
+                                                        32 - iVar27);
                                                 }
                                             }
                                             uVar9 = *this->viewportState.ptrColor;
@@ -1722,35 +1723,35 @@ namespace Rendering {
                                                         switch (DAT_UnitsState::instance.units[unitID]
                                                                 .facingDirectionMapOrientationCorrected) {
                                                         case 0:
-                                                            _yOffset_01 = _yOffset_01 + 0x22;
+                                                            _yOffset_01 = _yOffset_01 + 34;
                                                             break;
                                                         case 1:
-                                                            _yOffset_01 = _yOffset_01 + 0x2f;
-                                                            iVar26 = iVar26 + -0xc;
+                                                            _yOffset_01 = _yOffset_01 + 47;
+                                                            iVar26 = iVar26 - 12;
                                                             break;
                                                         case 2:
-                                                            _yOffset_01 = _yOffset_01 + 0x4b;
-                                                            iVar26 = iVar26 + -0x13;
+                                                            _yOffset_01 = _yOffset_01 + 75;
+                                                            iVar26 = iVar26 - 19;
                                                             break;
                                                         case 3:
-                                                            _yOffset_01 = _yOffset_01 + 0x65;
-                                                            iVar26 = iVar26 + -10;
+                                                            _yOffset_01 = _yOffset_01 + 101;
+                                                            iVar26 = iVar26 - 10;
                                                             break;
                                                         case 4:
-                                                            _yOffset_01 = _yOffset_01 + 0x70;
+                                                            _yOffset_01 = _yOffset_01 + 112;
                                                             iVar26 = iVar26 + 2;
                                                             break;
                                                         case 5:
                                                             _yOffset_01 = _yOffset_01 + 100;
-                                                            iVar26 = iVar26 + 0x14;
+                                                            iVar26 = iVar26 + 20;
                                                             break;
                                                         case 6:
-                                                            _yOffset_01 = _yOffset_01 + 0x46;
-                                                            iVar26 = iVar26 + 0x13;
+                                                            _yOffset_01 = _yOffset_01 + 70;
+                                                            iVar26 = iVar26 + 19;
                                                             break;
                                                         case 7:
-                                                            _yOffset_01 = _yOffset_01 + 0x2c;
-                                                            iVar26 = iVar26 + 0x17;
+                                                            _yOffset_01 = _yOffset_01 + 44;
+                                                            iVar26 = iVar26 + 23;
                                                         }
                                                     } else {
                                                         if ((UVar7 != OpenSHC::Map::Units::UT_S_BATTERINGRAM)
@@ -1762,29 +1763,29 @@ namespace Rendering {
                                                                 .facingDirectionMapOrientationCorrected) {
                                                         case 0:
                                                         case 1:
-                                                            _yOffset_01 = _yOffset_01 + 0x2c;
-                                                            iVar26 = iVar26 + -0x14;
+                                                            _yOffset_01 = _yOffset_01 + 44;
+                                                            iVar26 = iVar26 - 20;
                                                             break;
                                                         case 2:
-                                                            _yOffset_01 = _yOffset_01 + 0x31;
-                                                            iVar26 = iVar26 + -0x11;
+                                                            _yOffset_01 = _yOffset_01 + 49;
+                                                            iVar26 = iVar26 - 17;
                                                             break;
                                                         case 3:
-                                                            _yOffset_01 = _yOffset_01 + 0x29;
-                                                            iVar26 = iVar26 + -0xf;
+                                                            _yOffset_01 = _yOffset_01 + 41;
+                                                            iVar26 = iVar26 - 15;
                                                             break;
                                                         case 4:
-                                                            _yOffset_01 = _yOffset_01 + 0x22;
-                                                            iVar26 = iVar26 + -0x11;
+                                                            _yOffset_01 = _yOffset_01 + 34;
+                                                            iVar26 = iVar26 - 17;
                                                             break;
                                                         case 5:
                                                         case 6:
-                                                            _yOffset_01 = _yOffset_01 + 0x20;
-                                                            iVar26 = iVar26 + -0x14;
+                                                            _yOffset_01 = _yOffset_01 + 32;
+                                                            iVar26 = iVar26 - 20;
                                                             break;
                                                         case 7:
-                                                            _yOffset_01 = _yOffset_01 + 0x28;
-                                                            iVar26 = iVar26 + -0x17;
+                                                            _yOffset_01 = _yOffset_01 + 40;
+                                                            iVar26 = iVar26 - 23;
                                                         }
                                                     }
                                                     DAT_RenderedUnitOwner::instance
@@ -1842,7 +1843,7 @@ namespace Rendering {
                                     }
                                     _yOffset_01 = DAT_UnitsState::instance.units[unitID].vanish;
                                     if (1 < _yOffset_01) {
-                                        DAT_UnitsState::instance.units[unitID].vanish = _yOffset_01 + -1;
+                                        DAT_UnitsState::instance.units[unitID].vanish = _yOffset_01 - 1;
                                     }
                                 }
                             }
@@ -1872,7 +1873,7 @@ namespace Rendering {
                                     == OpenSHC::IO::Graphics::GID_BODY_FIRE_2)) {
                                 local_8 = local_8 + 1;
                                 if ((DAT_EntityState::instance.entityArray[entityID].fireIntensity == 0)
-                                    && (0x4f < local_8)) {
+                                    && (79 < local_8)) {
                                     if (local_8 < 200) {
                                         bVar15 = (byte)DAT_EntityState::instance.entityArray[entityID].rng_1 & 1;
                                     } else {
@@ -1921,31 +1922,32 @@ namespace Rendering {
                                 if (DAT_TileMapState::instance.refreshRelatedOne == 0) {
                                     iVar26 = _yOffset_01;
                                     if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0) {
-                                        iVar26 = _yOffset_01 + 0x14;
+                                        iVar26 = _yOffset_01 + 20;
                                     }
                                 } else {
                                     iVar26 = _yOffset_01;
                                     if ((_flatView == 0)
                                         && (iVar26 = iVar18,
                                             DAT_TileMapState::instance.BuildingLayer[layerTileIndex] != 0)) {
-                                        iVar26 = iVar18 + -10;
+                                        iVar26 = iVar18 - 10;
                                     }
                                 }
                                 break;
                             case OpenSHC::IO::Graphics::GID_ANIM_HEADS:
                                 iVar26 = iVar26 + 7
                                     + (_yOffset_01 - (uint)DAT_TileMapState::instance.HeightLayer[layerTileIndex]);
-                                uVar32 = DAT_TileMapState::instance.LogicLayer[layerTileIndex] & 0x400000;
+                                uVar32 = DAT_TileMapState::instance.LogicLayer[layerTileIndex]
+                                    & Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
                                 if (uVar32 != 0) {
-                                    iVar26 = iVar26 + 0x12;
+                                    iVar26 = iVar26 + 18;
                                 }
                                 if (DAT_TileMapState::instance.refreshRelatedOne == 0) {
-                                    iVar26 = _yOffset_01 + 0x14;
+                                    iVar26 = _yOffset_01 + 20;
                                     if (DAT_TileMapState::instance.BuildingLayer[layerTileIndex] == 0) {
                                         iVar26 = _yOffset_01;
                                     }
                                     if (uVar32 != 0) {
-                                        iVar26 = iVar26 + 0x12;
+                                        iVar26 = iVar26 + 18;
                                     }
                                 } else if (_flatView != 0)
                                     goto LAB_004eb439;
@@ -2099,12 +2101,12 @@ namespace Rendering {
                                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                                         iVar26 = (int)sVar20;
                                         local_c = 0;
-                                        if ((EVar3 == (OpenSHC::Map::Entities::EntityType)0x2a)
-                                            || (EVar3 == (OpenSHC::Map::Entities::EntityType)0x2b)) {
-                                            DAT_EntityState::instance.entityArray[entityID].unkMinusOne = sVar20 + -2;
+                                        if ((EVar3 == (OpenSHC::Map::Entities::EntityType)42)
+                                            || (EVar3 == (OpenSHC::Map::Entities::EntityType)43)) {
+                                            DAT_EntityState::instance.entityArray[entityID].unkMinusOne = sVar20 - 2;
                                             DAT_TextManagerObject::instance.field_0x20 = 1;
-                                            if (EVar3 == (OpenSHC::Map::Entities::EntityType)0x2b) {
-                                                local_c = 0xff;
+                                            if (EVar3 == (OpenSHC::Map::Entities::EntityType)43) {
+                                                local_c = 255;
                                             }
                                         }
                                         if (iVar26 < 0) {
@@ -2124,7 +2126,7 @@ namespace Rendering {
                                             DAT_EntityState::instance.entityArray[entityID].displayValue,
                                             DAT_EntityState::instance.entityArray[entityID].field_0xcc + iVar27,
                                             DAT_EntityState::instance.entityArray[entityID].field_0xce + iVar18,
-                                            OpenSHC::Text::TTA_LEFT, local_c, 0x12, FALSE, iVar26);
+                                            OpenSHC::Text::TTA_LEFT, local_c, 18, FALSE, iVar26);
                                         DAT_TextManagerObject::instance.textSurfaceTarget
                                             = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                                         DAT_TextManagerObject::instance.field_0x20 = 0;
@@ -2143,7 +2145,7 @@ namespace Rendering {
                             = (GmIDInt)DAT_LandscapeState::instance.trees[iVar23].treeTypeBasedValue1;
                         iVar26 = DAT_LandscapeState::instance.trees[iVar23].animationFrameUnk;
                         iVar18 = GMFirstPictureIndex::instance[DAT_CurrentlyRenderedSpriteID::instance];
-                        _yOffset_01 = iVar18 + -1 + iVar26;
+                        _yOffset_01 = iVar18 - 1 + iVar26;
                         if (0 < (int)DAT_CurrentlyRenderedSpriteID::instance && _yOffset_01 != 0 && iVar26 != 0) {
                             DAT_RenderedUnitOwner::instance
                                 = DAT_LandscapeState::instance.trees[iVar23].appleTreeColorVariation;
@@ -2156,13 +2158,13 @@ namespace Rendering {
                                 DAT_TextureRenderCoreObject::ptr)(
                                 (DAT_RenderMap_DrawSomeX::instance
                                     - DAT_LandscapeState::instance.trees[iVar23].gmOriginX)
-                                    + 0xe,
+                                    + 14,
                                 (int)(((DAT_RenderMap_DrawSomeY::instance
                                            - DAT_LandscapeState::instance.trees[iVar23].gmOriginY)
                                           - DAT_RenderMap_YOffset::instance)
                                     + 6),
-                                (int)(DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 + -1].width),
-                                (int)(DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 + -1].height),
+                                (int)(DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 - 1].width),
+                                (int)(DAT_GMImageHeaders::instance.imh[iVar26 + iVar18 - 1].height),
                                 (byte*)((int)((DAT_GMImageOffsets::instance[_yOffset_01]
                                     + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                             DAT_TextureRenderCoreObject::instance.mbr_0x10 = 0;
@@ -2170,10 +2172,9 @@ namespace Rendering {
                                 && (DAT_LandscapeState::instance.trees[iVar23].unknownDistanceRelatedToCrow != 0)) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_BODY_CROW,
-                                    this->unknownCounterUntil_0x24 % 0xc + 0x49,
-                                    (int)(DAT_RenderMap_DrawSomeX::instance + -0x1e),
-                                    (int)((DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_YOffset::instance)
-                                        + -0xdc));
+                                    this->unknownCounterUntil_0x24 % 12 + 73,
+                                    (int)(DAT_RenderMap_DrawSomeX::instance - 30),
+                                    (int)((DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_YOffset::instance) - 220));
                             }
                         }
                         MACRO_CALL_MEMBER(
@@ -2181,7 +2182,7 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent, DAT_SFXState::ptr)(8);
                     }
-                    if (DAT_RenderMap_RowsLeft::instance != 0 && (int)DAT_RenderMap_RowsLeft::instance < 0xff
+                    if (DAT_RenderMap_RowsLeft::instance != 0 && (int)DAT_RenderMap_RowsLeft::instance < 255
                         && bVar13 != 0) {
                         uVar32 = (uint)(short)DAT_TileMapState::instance.MiscDisplayLayer[layerTileIndex];
                         DAT_RenderMap_WhatToDraw::instance = uVar32 & 3;
@@ -2203,22 +2204,22 @@ namespace Rendering {
                                         (int)(DAT_RenderMap_DrawSomeX::instance),
                                         (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + 9
                                             + DAT_RenderMap_DrawSomeY::instance),
-                                        0x18);
+                                        24);
                                 }
                             } else {
-                                if (DAT_GmImageAddressToBeRendered::instance == 0x20) {
-                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[9] + 0x1f;
+                                if (DAT_GmImageAddressToBeRendered::instance == 32) {
+                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[9] + 31;
                                 } else {
                                     layerTileIndex
                                         = DAT_GmImageAddressToBeRendered::instance + this->unknownCounterUntil_0x10;
-                                    if (0x32 < layerTileIndex) {
-                                        layerTileIndex = layerTileIndex + -0x10;
+                                    if (50 < layerTileIndex) {
+                                        layerTileIndex = layerTileIndex - 16;
                                     }
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = layerTileIndex + -1 + GMFirstPictureIndex::instance[9];
-                                    if (0x20 < (int)DAT_RenderMap_RowsLeft::instance
+                                        = layerTileIndex - 1 + GMFirstPictureIndex::instance[9];
+                                    if (32 < (int)DAT_RenderMap_RowsLeft::instance
                                         && (int)(DAT_RenderMap_DrawSomeY::instance - DAT_RenderMap_RowsLeft::instance)
-                                            < local_5c + -0xa0) {
+                                            < local_5c - 160) {
                                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::notifyAmbientSoundEvent,
                                             DAT_SFXState::ptr)(6);
                                     }
@@ -2241,25 +2242,25 @@ namespace Rendering {
                         }
                     }
                 } else {
-                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[0x26] + 0x140;
+                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[38] + 320;
                     DAT_RenderMap_YOffset::instance = 0;
                     MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTerrainTilesCenterPiece)();
                 }
-                DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 0x20;
+                DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 32;
             }
             iVar31 = _zoomOffset;
             if (_vpWidthPlus1 == _viewportHeight) {
-                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 0x10;
+                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 16;
                 layerTileIndex = _viewportHeight;
             } else {
                 layerTileIndex = _viewportHeight + 1;
                 DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated;
             }
             for (; iVar31 < layerTileIndex; iVar31 = iVar31 + 1) {
-                _yOffset_01 = this->screenPointToTileNumber[iVar31 + iVar2 + -8];
+                _yOffset_01 = this->screenPointToTileNumber[iVar31 + iVar2 - 8];
                 DAT_00ed3148::instance = DAT_TileMapState::instance.LogicLayer[_yOffset_01];
                 if ((DAT_00ed3148::instance & 0x30) == 0) {
-                    if ((iVar31 < 2) || (bVar13 = 1, layerTileIndex + -2 <= iVar31)) {
+                    if ((iVar31 < 2) || (bVar13 = 1, layerTileIndex - 2 <= iVar31)) {
                         bVar13 = 0;
                     }
                     uVar32 = (uint)DAT_TileMapState::instance.FloatingLayer[_yOffset_01];
@@ -2280,36 +2281,34 @@ namespace Rendering {
                             if ((DAT_00ed3148::instance & 0x100) == 0) {
                                 if ((char)DAT_00ed3148::instance < '\0'
                                     && 1999 < DAT_TileMapState::instance.OrganismLayer[_yOffset_01]
-                                    && (iVar23 = DAT_TileMapState::instance.OrganismLayer[_yOffset_01] * 0x20,
-                                        1 < *(short*)((int)&DAT_LandscapeState::instance.trees[0x636]
+                                    && (iVar23 = DAT_TileMapState::instance.OrganismLayer[_yOffset_01] * 32,
+                                        1 < *(short*)((int)&DAT_LandscapeState::instance.trees[1590]
                                                           .appleTreeColorVariation
                                             + iVar23 + 2))) {
                                     iVar26
                                         = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
                                             DAT_LandscapeState::ptr)(
                                             ((byte)DAT_TileMapState::instance.RandomLayer[_yOffset_01] & 3) + 1);
-                                    DAT_GmImageAddressToBeRendered::instance = iVar26 + -1
+                                    DAT_GmImageAddressToBeRendered::instance = iVar26 - 1
                                         + GMFirstPictureIndex::instance[*(
-                                            short*)((int)&DAT_LandscapeState::instance.trees[0x636].animationFrameUnk
+                                            short*)((int)&DAT_LandscapeState::instance.trees[1590].animationFrameUnk
                                             + iVar23 + 2)];
                                 }
                             } else if ((DAT_00ed3148::instance & 0x800) == 0) {
                                 if ((DAT_00ed3148::instance & 0x200) != 0) {
                                     DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = (DAT_00ed314c::instance & 3) + 0x24 + GMFirstPictureIndex::instance[0x9d];
+                                        = (DAT_00ed314c::instance & 3) + 36 + GMFirstPictureIndex::instance[157];
                                 }
                             } else {
                                 DAT_00ed3148::instance = DAT_00ed3148::instance & 1;
                                 if ((DAT_GmImageAddressToBeRendered::instance
-                                        == GMFirstPictureIndex::instance[0xc] + 0x86U)
+                                        == GMFirstPictureIndex::instance[12] + 134U)
                                     || (DAT_GmImageAddressToBeRendered::instance
-                                        == GMFirstPictureIndex::instance[0xc] + 0x88U)) {
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = GMFirstPictureIndex::instance[0x9d] + 0x2a;
+                                        == GMFirstPictureIndex::instance[12] + 136U)) {
+                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 42;
                                 } else {
-                                    DAT_GmImageAddressToBeRendered::instance
-                                        = GMFirstPictureIndex::instance[0x9d] + 0x28;
+                                    DAT_GmImageAddressToBeRendered::instance = GMFirstPictureIndex::instance[157] + 40;
                                 }
                             }
                         } else {
@@ -2319,20 +2318,20 @@ namespace Rendering {
                                 uVar22 = (uint)((*puVar1 & 4) != 0);
                                 if (BVar8 == OpenSHC::Map::Buildings::BT_WOODCUTTERSHUT) {
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = uVar22 + 0x18 + GMFirstPictureIndex::instance[0x9d];
+                                        = uVar22 + 24 + GMFirstPictureIndex::instance[157];
                                 } else if (BVar8 == OpenSHC::Map::Buildings::BT_HUNTERSHUT) {
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = uVar22 + 0x1a + GMFirstPictureIndex::instance[0x9d];
+                                        = uVar22 + 26 + GMFirstPictureIndex::instance[157];
                                 } else if (BVar8 == OpenSHC::Map::Buildings::BT_DAIRYFARM) {
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = uVar22 + 0x1c + GMFirstPictureIndex::instance[0x9d];
+                                        = uVar22 + 28 + GMFirstPictureIndex::instance[157];
                                 } else {
                                     DAT_GmImageAddressToBeRendered::instance
-                                        = uVar22 + 0x1e + GMFirstPictureIndex::instance[0x9d];
+                                        = uVar22 + 30 + GMFirstPictureIndex::instance[157];
                                 }
                             } else if (-1 < iVar23) {
                                 DAT_GmImageAddressToBeRendered::instance = (DAT_00ed314c::instance & 3)
-                                    + GMFirstPictureIndex::instance[0x9d] + ((uVar29 & 1) + iVar23 * 2) * 4;
+                                    + GMFirstPictureIndex::instance[157] + ((uVar29 & 1) + iVar23 * 2) * 4;
                             }
                         }
                         DAT_RenderMap_YOffset::instance = 8;
@@ -2365,7 +2364,7 @@ namespace Rendering {
                                 iVar23 + 7,
                                 (ushort*)((int)(
 
-                                    (DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance] + 0x200
+                                    (DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance] + 512
                                         + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                         }
                         if ((_flatView == 0)
@@ -2381,8 +2380,8 @@ namespace Rendering {
                                             .addXgetTile
                                         + 2 + (int)(short)DAT_BuildingsState::instance.buildings[uVar29].x) {
                                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderBuildingAnimation,
-                                    this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 0x10),
-                                    (int)(DAT_00ed3154::instance + 0x18 + DAT_RenderMap_DrawSomeY::instance),
+                                    this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 16),
+                                    (int)(DAT_00ed3154::instance + 24 + DAT_RenderMap_DrawSomeY::instance),
                                     (undefined4)((int)(_yOffset_01)), 1);
                             }
                             uVar10 = *puVar1;
@@ -2390,12 +2389,11 @@ namespace Rendering {
                                 if (DAT_BuildingsState::instance.buildings[uVar29].buildingType
                                     == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
                                     if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
-                                        if ((uVar10 & 0xc) == 0xc) {
+                                        if ((uVar10 & 0xc) == 12) {
                                             MACRO_CALL_MEMBER(
                                                 OpenSHC::Rendering::ViewportRenderState_Func::renderBuildingAnimation,
-                                                this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 0x10),
-                                                (int)(DAT_00ed3154::instance + 0x28
-                                                    + DAT_RenderMap_DrawSomeY::instance),
+                                                this)(uVar29, (int)(DAT_RenderMap_DrawSomeX::instance + 16),
+                                                (int)(DAT_00ed3154::instance + 40 + DAT_RenderMap_DrawSomeY::instance),
                                                 (undefined4)((int)(_yOffset_01)), 0);
                                         } else if ((uVar10 & 8) != 0) {
                                             MACRO_CALL_MEMBER(
@@ -2434,18 +2432,22 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                             (int)(DAT_TileMapState::instance.cursorOverlayAnimationFrame),
-                            (int)(DAT_RenderMap_DrawSomeX::instance + -0x23),
-                            (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + -0x4a
+                            (int)(DAT_RenderMap_DrawSomeX::instance - 35),
+                            (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - 74
                                 + DAT_RenderMap_DrawSomeY::instance),
                             OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                            (int)(DAT_TileMapState::instance.cursorOverlayAnimationFrame + 0x10), 0);
+                            (int)(DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16), 0);
                         *puVar1 = *puVar1 & 0xbfff;
                     }
                     iVar23 = DAT_RenderMap_YOffset::instance;
                     if (uVar32 != 0) {
                         if ((DAT_TileMapState::instance.refreshRelatedOne != 0) && (_flatView == 0)) {
-                            if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01] & 0x10000000U) == 0) {
-                                if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01] & 0x100U) != 0) {
+                            if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01]
+                                    & Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE)
+                                == 0) {
+                                if ((DAT_TileMapState::instance.LogicLayer[_yOffset_01]
+                                        & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
+                                    != 0) {
                                     if (DAT_TileMapState::instance.BuildingLayer[_yOffset_01] == 0) {
                                         iVar23 = DAT_RenderMap_YOffset::instance + 4;
                                     } else if (DAT_BuildingsState::instance
@@ -2454,7 +2456,7 @@ namespace Rendering {
                                         == OpenSHC::Map::Buildings::BT_WOODGATE1) {
                                         iVar23 = DAT_RenderMap_YOffset::instance + 6;
                                     } else {
-                                        iVar23 = DAT_RenderMap_YOffset::instance + 0x14;
+                                        iVar23 = DAT_RenderMap_YOffset::instance + 20;
                                     }
                                 }
                             } else {
@@ -2535,25 +2537,25 @@ namespace Rendering {
                     DAT_TileMapState::instance.ConstructionGFXLayer[_yOffset_01] = 0;
                     *puVar1 = *puVar1 & 0x7fff;
                 }
-                DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 0x20;
+                DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 32;
             }
             if (layerTileIndex == _viewportHeight) {
                 _vpWidthPlus1_1 = _viewportHeight;
                 local_c = 200;
-                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 0x10;
+                DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated + 16;
             } else {
                 _vpWidthPlus1_1 = _viewportHeight + 1;
-                local_c = 0xc9;
+                local_c = 201;
                 DAT_RenderMap_DrawSomeX::instance = this->viewportState.unknownScreenXRelated;
             }
             if ((_flatView == 0) && (local_48 = _zoomOffset, _zoomOffset < _vpWidthPlus1_1)) {
-                local_20 = this->screenPointToTileNumber + _zoomOffset + iVar2 + -8;
+                local_20 = this->screenPointToTileNumber + _zoomOffset + iVar2 - 8;
                 do {
                     iVar31 = *local_20;
                     DAT_GmImageAddressToBeRendered::instance = (uint)DAT_TileMapState::instance.AlphaGFXLayer[iVar31];
                     if (DAT_GmImageAddressToBeRendered::instance != 0
                         && (DAT_TileMapState::instance.MiscDisplayLayer[iVar31] & 0x3c0) == 0) {
-                        if ((local_48 < 2) || (_vpWidthPlus1_1 + -2 <= local_48)) {
+                        if ((local_48 < 2) || (_vpWidthPlus1_1 - 2 <= local_48)) {
                             bVar13 = 0;
                         } else {
                             bVar13 = 1;
@@ -2589,7 +2591,7 @@ namespace Rendering {
                                         (ushort*)((int)(
 
                                             (DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]
-                                                + 0x200
+                                                + 512
                                                 + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
                                         (int)((*psVar17 << 5) / 5));
                                 }
@@ -2597,7 +2599,7 @@ namespace Rendering {
                         }
                     }
                     local_20 = local_20 + 1;
-                    DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 0x20;
+                    DAT_RenderMap_DrawSomeX::instance = DAT_RenderMap_DrawSomeX::instance + 32;
                     local_48 = local_48 + 1;
                 } while (local_48 < _vpWidthPlus1_1);
             }
@@ -2610,22 +2612,22 @@ namespace Rendering {
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderUnits, this)();
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderUnits, this)();
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderUnits, this)();
-        if ((DAT_TileMapState::instance.mapSize == 0xa0)
+        if ((DAT_TileMapState::instance.mapSize == 160)
             && (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768)) {
             if (this->viewportState.isZoomedOutUnk != 0) {
                 if ((DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER)
                     || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)) {
                     DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                        DAT_PencilRenderCore::ptr)(0, 0x2cc, 0xfd8, 0x2cc, 0x1a);
+                        DAT_PencilRenderCore::ptr)(0, 716, 4056, 716, 26);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                        DAT_PencilRenderCore::ptr)(0, 0x2cd, 0xfd8, 0x2cd, 0x14);
+                        DAT_PencilRenderCore::ptr)(0, 717, 4056, 717, 20);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                        DAT_PencilRenderCore::ptr)(0, 0x2ce, 0xfd8, 0x2ce, 0xe);
+                        DAT_PencilRenderCore::ptr)(0, 718, 4056, 718, 14);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                        DAT_PencilRenderCore::ptr)(0, 0x2cf, 0xfd8, 0x2cf, 8);
+                        DAT_PencilRenderCore::ptr)(0, 719, 4056, 719, 8);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox,
-                        DAT_PencilRenderCore::ptr)(0, 0x2d0, 0xfd8, 0x7f1, (ushort)(COL_BLACK::instance.shortValue));
+                        DAT_PencilRenderCore::ptr)(0, 720, 4056, 2033, (ushort)(COL_BLACK::instance.shortValue));
                     DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 }
                 goto LAB_004ec57a;
@@ -2642,25 +2644,25 @@ namespace Rendering {
             iVar28 = this->viewportState.currentCameraOffsetY + DAT_MouseState::instance.screenSpaceY;
             iVar31 = this->viewportState.currentCameraOffsetX + DAT_MouseState::instance.screenSpaceX;
             _viewportHeight = this->viewportState.currentCameraOffsetY + DAT_MouseState::instance.screenSpaceY * 2;
-            viewportWidth = this->viewportState.currentCameraOffsetX + 0xa0 + DAT_MouseState::instance.screenSpaceX * 2;
+            viewportWidth = this->viewportState.currentCameraOffsetX + 160 + DAT_MouseState::instance.screenSpaceX * 2;
         }
         if (this->viewportState.field_0x0 != 0) {
-            if (DAT_MouseState::instance.field_0x1dc < 0x3e9) {
+            if (DAT_MouseState::instance.field_0x1dc < 1001) {
                 if (DAT_MouseState::instance.field_0x1dc != 1000) {
                     switch (DAT_MouseState::instance.field_0x1dc) {
                     case 1:
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_CURSORS, 0x51,
+                            DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_CURSORS, 81,
                             viewportWidth
-                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[0x6b].originX,
+                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[107].originX,
                             (_viewportHeight
-                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[0x6b].originY)
-                                + 0x2d);
+                                - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[107].originY)
+                                + 45);
                         break;
                     case 3:
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)((GmID)DAT_TileMapState::instance.cursorOverlayGmID,
-                            (int)(DAT_TileMapState::instance.cursorOverlayImageBase + 0x10
+                            (int)(DAT_TileMapState::instance.cursorOverlayImageBase + 16
                                 + DAT_TileMapState::instance.cursorOverlayAnimationFrame),
                             viewportWidth
                                 - DAT_TextureRenderCoreObject::instance
@@ -2670,7 +2672,7 @@ namespace Rendering {
                                 - DAT_TextureRenderCoreObject::instance
                                     .gmFileHeaderColorpaletteArray[DAT_TileMapState::instance.cursorOverlayGmID]
                                     .originY,
-                            0x15);
+                            21);
                     case 2:
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                             DAT_TextureRenderCoreObject::ptr)((eGM)DAT_TileMapState::instance.cursorOverlayGmID,
@@ -2688,8 +2690,8 @@ namespace Rendering {
                     case 4:
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                             DAT_TextureRenderCoreObject::ptr)((eGM)DAT_TileMapState::instance.cursorOverlayGmID,
-                            (int)(DAT_TileMapState::instance.cursorOverlayImageBase), viewportWidth + -8,
-                            _viewportHeight + -8);
+                            (int)(DAT_TileMapState::instance.cursorOverlayImageBase), viewportWidth - 8,
+                            _viewportHeight - 8);
                         break;
                     case 5:
                         iVar28 = DAT_TileMapState::instance.flagAnimationFrame
@@ -2714,11 +2716,11 @@ namespace Rendering {
                 DAT_TextureRenderCoreObject::instance.isZoom2 = 0;
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0x7b, iVar31 + 0x1c, iVar28 + 4);
+                    OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 123, iVar31 + 28, iVar28 + 4);
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    "(", iVar31 + 0x3c, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 0x12, FALSE, 0);
+                    "(", iVar31 + 60, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, FALSE, 0);
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                     _numberToDisplay
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -2731,25 +2733,25 @@ namespace Rendering {
                         - DAT_TileMapState::instance.wallPlacementCost;
                 }
             } else {
-                if (DAT_MouseState::instance.field_0x1dc != 0x3e9)
+                if (DAT_MouseState::instance.field_0x1dc != 1001)
                     goto switchD_004ec5fa_default;
                 DAT_TextureRenderCoreObject::instance.isZoom2 = 0;
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0x7e, iVar31 + 0x1c, iVar28 + 4);
+                    OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 126, iVar31 + 28, iVar28 + 4);
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    "(", iVar31 + 0x3c, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 0x12, FALSE, 0);
+                    "(", iVar31 + 60, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, FALSE, 0);
                 _numberToDisplay
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                           .currentResources[2]
                     - DAT_TileMapState::instance.wallPlacementCost;
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                _numberToDisplay, iVar31 + 0x3c, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 0x12, TRUE, 0);
+                _numberToDisplay, iVar31 + 60, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                ")", iVar31 + 0x3c, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 0x12, TRUE, 0);
+                ")", iVar31 + 60, iVar28 + 7, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, TRUE, 0);
             DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         }
     switchD_004ec5fa_default:
@@ -2762,7 +2764,7 @@ namespace Rendering {
         return;
     switchD_004eb2c9_caseD_4d:
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::scheduleUnitForBatchedRendering, this)(
-            0xffffffff,
+            4294967295,
             ((int)DAT_EntityState::instance.entityArray[entityID].x1
                 - (int)DAT_EntityState::instance.entityArray[entityID].originX)
                 + DAT_RenderMap_DrawSomeX::instance,

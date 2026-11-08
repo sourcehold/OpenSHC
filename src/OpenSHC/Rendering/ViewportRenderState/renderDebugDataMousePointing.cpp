@@ -27,46 +27,46 @@ namespace Rendering {
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Mouse Atom Ref: %d", this->viewportState.mouseAtomRefFloorTile);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Mouse: x%d, y%d, off%d", DAT_ViewportRenderState::instance.viewportState.mouseX,
             DAT_ViewportRenderState::instance.viewportState.mouseY,
             DAT_ViewportRenderState::instance.viewportState.mouseTile);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y + 0x10, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y + 16, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Tile centre: x%d,y%d", DAT_ViewportRenderState::instance.viewportState.tileCenterX,
             DAT_ViewportRenderState::instance.viewportState.tileCenterY);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y + 0x20, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y + 32, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Chimp: %d  Struct: %d Fly: %d", this->viewportState.mouseRayUnitID,
             this->viewportState.mouseRayBuildingID, this->viewportState.mouseRayEntityID);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y + 0x40, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y + 64, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Logic Layer: %x  %x", DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseAtomRefFloorTile],
             DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile]);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y + 0x50, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y + 80, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Logic2 Layer: %x  %x",
             (char)DAT_TileMapState::instance.Logic2Layer[this->viewportState.mouseAtomRefFloorTile],
             (char)DAT_TileMapState::instance.Logic2Layer[this->viewportState.mouseTile]);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX + 0x14, y + 0x50, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
+        (text, textX + 20, y + 80, OpenSHC::Text::TTA_LEFT, 16777215, 18, TRUE, 0);
 
         MACRO_CALL(OpenSHC::OS_Func::_sprintf)
         (text, "Damage Layer: %d  %d",
             (char)DAT_TileMapState::instance.DamageLayer[this->viewportState.mouseAtomRefFloorTile],
             (char)DAT_TileMapState::instance.DamageLayer[this->viewportState.mouseTile]);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)
-        (text, textX, y + 0x60, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
+        (text, textX, y + 96, OpenSHC::Text::TTA_LEFT, 16777215, 18, FALSE, 0);
     }
 
 }

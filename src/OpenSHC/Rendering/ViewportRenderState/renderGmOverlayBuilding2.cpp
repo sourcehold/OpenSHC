@@ -140,49 +140,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x4f, screenY + -0x4c);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 79, screenY - 76);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x24, screenY + -0x66);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 36, screenY - 102);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x2b, screenY + -0x29);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 43, screenY - 41);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x40, screenY + -0x76);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 64, screenY - 118);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x24, screenY + -0x66);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 36, screenY - 102);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x35, screenY + -0x3b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 53, screenY - 59);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x48, screenY + -0x57);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 72, screenY - 87);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x4f, screenY + -0x73);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 79, screenY - 115);
                     }
                 }
                 break;
@@ -195,49 +195,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x14, screenY + -0x58);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 20, screenY - 88);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x2f, screenY + -0x54);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 47, screenY - 84);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x11, screenY + -0x20);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 17, screenY - 32);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x17, screenY + -0x67);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 23, screenY - 103);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0xf, screenY + -0x27);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 15, screenY - 39);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x38, screenY + -0x2d);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 56, screenY - 45);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x19, screenY + -0x4c);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 25, screenY - 76);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x3a, screenY + -0x7c);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 58, screenY - 124);
                     }
                 }
                 break;
@@ -250,49 +250,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0xf, screenY + -0x42);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 15, screenY - 66);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0xd, screenY + -0xb2);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 13, screenY - 178);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -9, screenY + -0xfc);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 9, screenY - 252);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX, screenY + -0x6c);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX, screenY - 108);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0xd, screenY + -0xbd);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 13, screenY - 189);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0xf, screenY + -0xd9);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 15, screenY - 217);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 8, screenY + -0x31);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 8, screenY - 49);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0xb, screenY + -0x5a);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 11, screenY - 90);
                     }
                 }
                 break;
@@ -305,49 +305,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -9, screenY + -0x3b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 9, screenY - 59);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x31, screenY + -0x2d);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 49, screenY - 45);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x2b, screenY + -0x24);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 43, screenY - 36);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x19, screenY + -0x45);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 25, screenY - 69);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x26, screenY + -0x55);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 38, screenY - 85);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x16, screenY + -0x24);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 22, screenY - 36);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x10, screenY + -0x16);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 16, screenY - 22);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x32, screenY + -0x5e);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 50, screenY - 94);
                     }
                 }
                 break;
@@ -360,49 +360,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x39, screenY + -0x60);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 57, screenY - 96);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x13, screenY + -0x16);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 19, screenY - 22);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x23, screenY + -0x83);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 35, screenY - 131);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x19, screenY + -0x81);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 25, screenY - 129);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x31, screenY + -0x2f);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 49, screenY - 47);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x2e, screenY + -0x60);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 46, screenY - 96);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x10, screenY + -0x6a);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 16, screenY - 106);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x20, screenY + -0x5b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 32, screenY - 91);
                     }
                 }
                 break;
@@ -415,49 +415,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x41, screenY + -0x9f);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 65, screenY - 159);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x25, screenY + -0x61);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 37, screenY - 97);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x4b, screenY + -0x41);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 75, screenY - 65);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x41, screenY + -0x45);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 65, screenY - 69);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x26, screenY + -0x73);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 38, screenY - 115);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x13, screenY + -0x3b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 19, screenY - 59);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x36, screenY + -0x8b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 54, screenY - 139);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x42, screenY + -0x6e);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 66, screenY - 110);
                     }
                 }
                 break;
@@ -470,49 +470,49 @@ namespace Rendering {
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x33, screenY + -0x7f);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 51, screenY - 127);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage6;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 4, screenY + -0x5b);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 4, screenY - 91);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage7;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x29, screenY + -0x7a);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 41, screenY - 122);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage8;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x21, screenY + -0x45);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 33, screenY - 69);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x28, screenY + -0x59);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 40, screenY - 89);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x16, screenY + -0x37);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 22, screenY - 55);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + -0x16, screenY + -0x84);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX - 22, screenY - 132);
                     }
                     frame = DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
                     if (frame != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 0x3a, screenY + -0x42);
+                            OpenSHC::DE::SHCDE::GM_CRACKS, frame, screenX + 58, screenY - 66);
                     }
                 }
             }
@@ -522,11 +522,11 @@ namespace Rendering {
                 == OpenSHC::Map::Buildings::BT_OXTETHER)) {
             DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
             frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
-            DAT_CurrentlyRenderedSpriteID::instance = 0xbd;
+            DAT_CurrentlyRenderedSpriteID::instance = 189;
             if (frame != 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL, frame, screenX + -0x1e, screenY + -0x43);
+                    OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL, frame, screenX - 30, screenY - 67);
             }
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].renderAnimation == 0) {

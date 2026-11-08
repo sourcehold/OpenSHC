@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
@@ -120,7 +121,8 @@ namespace Rendering {
 
             int minimapGateTile = 0;
             ushort minimapBuildingID = DAT_TileMapState::instance.BuildingLayer[minimapTile];
-            if ((short)minimapBuildingID <= 0 && (DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x100) != 0) {
+            if ((short)minimapBuildingID <= 0
+                && (DAT_TileMapState::instance.LogicLayer[minimapTile] & Map::LogicHelpers::L_WALL_OR_GATEHOUSE) != 0) {
                 minimapGateTile = minimapTile;
             } else if ((short)minimapBuildingID <= 0) {
                 this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[minimapTile];
@@ -137,13 +139,15 @@ namespace Rendering {
             this->viewportState.mouseTile = minimapTile;
             this->viewportState.mouseY = mouseYScreenSpace;
             this->viewportState.mouseTileY = mouseYScreenSpace;
-            this->viewportState.field_0x38 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x40000000;
+            this->viewportState.field_0x38
+                = DAT_TileMapState::instance.LogicLayer[minimapTile] & Map::LogicHelpers::L_MOAT;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(
                     minimapTile)
                 == 0) {
                 this->viewportState.field_0x38 = 0;
             }
-            this->viewportState.field_0x40 = DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x4000;
+            this->viewportState.field_0x40
+                = DAT_TileMapState::instance.LogicLayer[minimapTile] & Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
             return;
         }
 
@@ -161,11 +165,11 @@ namespace Rendering {
         if (DAT_TileMapState::instance.mapOrientation == 0) {
             orientationBase = 8;
         } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-            orientationBase = 0x13a18;
+            orientationBase = 80408;
         } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-            orientationBase = 0x27428;
+            orientationBase = 160808;
         } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-            orientationBase = 0x3ae38;
+            orientationBase = 241208;
         }
 
         int unclampedY;
@@ -175,20 +179,20 @@ namespace Rendering {
             unclampedX = (this->viewportState.viewportX - (int)this->windowX) + mouseXScreenSpace;
         } else {
             unclampedY = ((mouseYScreenSpace * 2 + 8) - (int)this->windowY) + this->viewportState.viewportY;
-            unclampedX = ((mouseXScreenSpace * 2 + 0xa0) - (int)this->windowX) + this->viewportState.viewportX;
+            unclampedX = ((mouseXScreenSpace * 2 + 160) - (int)this->windowX) + this->viewportState.viewportX;
         }
 
-        int lookupIndex = unclampedX / 32 + orientationBase + unclampedY / 16 * 0x191;
+        int lookupIndex = unclampedX / 32 + orientationBase + unclampedY / 16 * 401;
         int quadrant = DAT_MapRenderDefinedData::instance.field_0xc24[quadrantY][quadrantX];
         if (quadrant == 1) {
             lookupIndex = lookupIndex + 200;
         } else if (quadrant == 2) {
-            lookupIndex = lookupIndex + 0xc9;
+            lookupIndex = lookupIndex + 201;
         } else if (quadrant == 3) {
-            lookupIndex = lookupIndex + 0x191;
+            lookupIndex = lookupIndex + 401;
         }
 
-        this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex + -8];
+        this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex - 8];
         this->viewportState.field_0x14 = DAT_TileMapState::instance.EntityLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
@@ -223,7 +227,9 @@ namespace Rendering {
         int hoveredGateTile = -1;
         ushort hoveredBuildingLayer = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
         if ((short)hoveredBuildingLayer <= 0
-            && (DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile] & 0x100) != 0) {
+            && (DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile]
+                   & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
+                != 0) {
             hoveredGateTile = this->viewportState.mouseTile;
         } else if ((short)hoveredBuildingLayer <= 0) {
             this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[this->viewportState.mouseTile];
@@ -233,11 +239,11 @@ namespace Rendering {
         if (DAT_TileMapState::instance.mapOrientation == 0) {
             orientationBase = 8;
         } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-            orientationBase = 0x13a18;
+            orientationBase = 80408;
         } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-            orientationBase = 0x27428;
+            orientationBase = 160808;
         } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-            orientationBase = 0x3ae38;
+            orientationBase = 241208;
         }
 
         int zoomDivisor = 1;
@@ -246,8 +252,8 @@ namespace Rendering {
         }
 
         int probeDoubledY = mouseYScreenSpace * 2 + 8;
-        int probeScreenY = mouseYScreenSpace + -8;
-        for (int probeOffset = -8; probeOffset < 0xff; probeOffset++) {
+        int probeScreenY = mouseYScreenSpace - 8;
+        for (int probeOffset = -8; probeOffset < 255; probeOffset++) {
             if ((DAT_TileMapState::instance.disableElevationRendering != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0)
                 && probeOffset != -8) {
@@ -257,34 +263,36 @@ namespace Rendering {
             int probeIndex;
             uint probeRowY;
             if (this->viewportState.isZoomedOutUnk == 0) {
-                int probeY = (this->viewportState.viewportY - this->windowY) + 0x10 + probeScreenY;
+                int probeY = (this->viewportState.viewportY - this->windowY) + 16 + probeScreenY;
                 int probeX = (this->viewportState.viewportX - this->windowX) + mouseXScreenSpace;
                 probeRowY = (this->viewportState.viewportY % 16 - this->windowY) + probeScreenY;
-                probeIndex = (probeX / 32) + (probeY / 16) * 0x191 + orientationBase;
+                probeIndex = (probeX / 32) + (probeY / 16) * 401 + orientationBase;
             } else {
-                int probeX = ((mouseXScreenSpace * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
+                int probeX = ((mouseXScreenSpace * 2 + 160) - this->windowX) + this->viewportState.viewportX;
                 probeRowY = (this->viewportState.viewportY % 16 - this->windowY) + probeDoubledY;
                 int probeY = (this->viewportState.viewportY - this->windowY) + probeDoubledY;
-                probeIndex = (probeY / 16) * 0x191 + (probeX / 32) + orientationBase;
+                probeIndex = (probeY / 16) * 401 + (probeX / 32) + orientationBase;
             }
 
             int probeQuadrant = DAT_MapRenderDefinedData::instance.field_0xc24[probeRowY & 0xf][quadrantX];
             if (probeQuadrant == 1) {
                 probeIndex = probeIndex + 200;
             } else if (probeQuadrant == 2) {
-                probeIndex = probeIndex + 0xc9;
+                probeIndex = probeIndex + 201;
             } else if (probeQuadrant == 3) {
-                probeIndex = probeIndex + 0x191;
+                probeIndex = probeIndex + 401;
             }
 
-            int probeTile = this->screenPointToTileNumber[probeIndex + -8];
-            if ((DAT_TileMapState::instance.LogicLayer[probeTile] & 0x30U) != 0) {
+            int probeTile = this->screenPointToTileNumber[probeIndex - 8];
+            if ((DAT_TileMapState::instance.LogicLayer[probeTile]
+                    & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
+                != 0) {
                 break;
             }
 
             int probeBuildingID = DAT_TileMapState::instance.BuildingLayer[probeTile];
             if (probeBuildingID <= 0) {
-                if ((DAT_TileMapState::instance.LogicLayer[probeTile] & 0x100) != 0) {
+                if ((DAT_TileMapState::instance.LogicLayer[probeTile] & Map::LogicHelpers::L_WALL_OR_GATEHOUSE) != 0) {
                     if (probeScreenY
                                 - DAT_TileMapState::instance
                                         .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[probeTile]]
@@ -342,31 +350,31 @@ namespace Rendering {
         if (this->viewportState.field_0x48 != 0) {
             uint textNumInGroup = this->viewportState.field_0x48;
             switch (this->viewportState.field_0x48) {
-            case 0x56:
-                textNumInGroup = 0x4a;
+            case 86:
+                textNumInGroup = 74;
                 break;
-            case 0x57:
-                textNumInGroup = 0x4b;
+            case 87:
+                textNumInGroup = 75;
                 break;
-            case 0x58:
-                textNumInGroup = 0x4c;
+            case 88:
+                textNumInGroup = 76;
                 break;
-            case 0x59:
-                textNumInGroup = 0x4d;
+            case 89:
+                textNumInGroup = 77;
                 break;
-            case 0x4f:
-                textNumInGroup = 0x4e;
+            case 79:
+                textNumInGroup = 78;
                 break;
-            case 0x29:
-                textNumInGroup = 0x2a;
+            case 41:
+                textNumInGroup = 42;
                 break;
-            case 0x2a:
-                textNumInGroup = 0x2c;
+            case 42:
+                textNumInGroup = 44;
                 break;
             }
             // set the text also for ruins tooltip: "This was a Round Tower"
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(5, 0x4e, textNumInGroup, 0, 0x28, -1);
+                DAT_BottomLeftTextDisplayState::ptr)(5, 78, textNumInGroup, 0, 40, -1);
         }
 
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeMouseTileFromScreenPosition, this)(

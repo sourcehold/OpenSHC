@@ -16,7 +16,7 @@ namespace Rendering {
     void ViewportRenderState::resetupViewport(int zoomUnk)
     {
         int savedViewportY = this->viewportState.viewportY + this->viewportState.mbr_0xb0 * 8;
-        int savedViewportX = this->viewportState.mbr_0xac * 0x20 + this->viewportState.viewportX;
+        int savedViewportX = this->viewportState.mbr_0xac * 32 + this->viewportState.viewportX;
         this->viewportState.isZoomedOutUnk = zoomUnk;
 
         if ((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
@@ -27,9 +27,9 @@ namespace Rendering {
             (0, 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY);
         } else {
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setupViewport, this)
-            (0, 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY - 0x80);
+            (0, 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY - 128);
         }
-        this->viewportState.viewportX = savedViewportX - this->viewportState.mbr_0xac * 0x20;
+        this->viewportState.viewportX = savedViewportX - this->viewportState.mbr_0xac * 32;
         this->viewportState.viewportY = savedViewportY - this->viewportState.mbr_0xb0 * 8;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
     }
