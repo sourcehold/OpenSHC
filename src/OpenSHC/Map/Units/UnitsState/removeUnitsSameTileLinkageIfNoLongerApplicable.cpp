@@ -24,13 +24,12 @@ namespace Map {
             }
             DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 0;
             for (int tile = 0; tile < 0x13a10; ++tile) {
-                if ((short)DAT_TileMapState::instance.UnitLayer[tile] < 0
-                    || (short)DAT_TileMapState::instance.UnitLayer[tile] > 2500) {
+                int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+                if (unitID < 0 || unitID >= 2500) {
                     DAT_TileMapState::instance.UnitLayer[tile] = 0;
                     continue;
                 }
-                for (int unitID = (short)DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
-                    unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
+                for (; unitID != 0; unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
                     if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
                         && this->units[unitID].field_0x413 == 0) {
                         DAT_TileMapState::instance.UnitLayer[tile] = this->units[unitID].nextUnitOnTheSameTile;
