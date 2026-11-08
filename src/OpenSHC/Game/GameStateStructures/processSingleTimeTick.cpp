@@ -119,8 +119,9 @@ namespace Game {
             MACRO_CALL_MEMBER(GameStateStructures_Func::updateDateAndTime, this)(FALSE, this->gameTicksLoadBalancer);
         }
         if (this->mapAndTime.weekChanged != 0) {
-            DAT_GameSynchronyState::instance.finalResults.yearEnd = DAT_GameState::instance.mapAndTime.year;
-            DAT_GameSynchronyState::instance.finalResults.monthEnd = DAT_GameState::instance.mapAndTime.month;
+            DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearEnd = DAT_GameState::instance.mapAndTime.year;
+            DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthEnd
+                = DAT_GameState::instance.mapAndTime.month;
             MACRO_CALL_MEMBER(GameStateStructures_Func::updateCrowding, this)();
             MACRO_CALL_MEMBER(GameStateStructures_Func::updateTrader, this)();
             MACRO_CALL_MEMBER(GameStateStructures_Func::updateTaxing, this)();
