@@ -454,6 +454,7 @@ namespace Map {
             int crew = 0;
             switch (unitType) {
             case OpenSHC::Map::Units::UT_S_CATAPULT:
+            case OpenSHC::Map::Units::UT_S_FBALLISTA:
                 crew = 2;
                 break;
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
