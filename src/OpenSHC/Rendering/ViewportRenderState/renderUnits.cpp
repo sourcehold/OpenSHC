@@ -195,7 +195,7 @@ namespace Rendering {
                         DAT_TextureRenderCoreObject::ptr)(
                         _drawX, graphicSize + _drawY, _imageID, _blendStrength - overlayX, (byte*)_gmID);
                     graphicSize = DAT_UnitsState::instance.units[_unitID].graphicSize;
-                    if ((graphicSize != 4) && (1 < graphicSize)) {
+                    if (graphicSize != 4 && graphicSize >= 2) {
                         DAT_RenderedUnitOwner::instance
                             = (uint)DAT_UnitsState::instance.units[_unitID].displayColorPlayerID;
                         DAT_CurrentlyRenderedSpriteID::instance = DAT_UnitsState::instance.units[_unitID].gmIDUnk;
@@ -216,7 +216,7 @@ namespace Rendering {
                                         + overlayX - 1]);
                         }
                     }
-                    if (2 < DAT_UnitsState::instance.units[_unitID].graphicSize) {
+                    if (DAT_UnitsState::instance.units[_unitID].graphicSize >= 3) {
                         overlayX = DAT_UnitsState::instance.units[_unitID].imageID2;
                         if (0 < overlayX) {
                             graphicSize = DAT_UnitsState::instance.units[_unitID].drawYOffset;
