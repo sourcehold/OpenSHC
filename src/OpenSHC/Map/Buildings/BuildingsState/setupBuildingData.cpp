@@ -63,9 +63,12 @@ namespace Map {
         int BuildingsState::setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight,
             BuildingType buildingType, uint width, int playerID_dup, int variationIndex)
         {
-            // Matching note: the original places the outpost case after the final return (and so uses eax/ecx the
-            // other way round there and at the end of the dog cage case); we emit it in source order. Moving the
-            // case, a default label, an early break in the dog cage case and a duplicated tail did not change that.
+            // Matching note: the original places the outpost case after the final return and jumps back to the
+            // tail; we emit it in source order. Moving the case, a default label, an early break in the dog cage
+            // case, wrapping it in a block, do/while or inner switch, splitting its two labels, a goto to a copy
+            // after the return and a loop over the dogs all keep it inline. Ending only the outpost case with its
+            // own copy of the tail and return does outline it, but then the tail is merged into the category
+            // cases as well (much worse). The original also stores the last dog's unitRefID before its UID.
             // Places a new building of the type at (x, y) and returns its ID
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
@@ -452,8 +455,9 @@ namespace Map {
                         DAT_UnitsState::instance.units[dogID].cagedogReleaseCheckMoment = 3;
                         this->buildings[buildingID].insideUnitID[3] = dogID;
                         this->buildings[buildingID].insideUnitUID[3] = DAT_UnitsState::instance.units[dogID].uid;
-                        this->buildings[buildingID].unitRefID = dogID;
+                        // UID first: the other order gives the UID copy eax instead of the original's ecx
                         this->buildings[buildingID].unitRefUID = DAT_UnitsState::instance.units[dogID].uid;
+                        this->buildings[buildingID].unitRefID = dogID;
                     }
                 }
                 break;
