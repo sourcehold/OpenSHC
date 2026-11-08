@@ -426,10 +426,6 @@ namespace Rendering {
                             offsetX = 79;
                             offsetY = 56;
                             break;
-                        case OpenSHC::Map::Units::UT_S_MANGONEL:
-                            offsetX = 43;
-                            offsetY = 35;
-                            break;
                         case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
                             offsetX = 36;
                             offsetY = 61;
@@ -438,10 +434,15 @@ namespace Rendering {
                             offsetX = -3;
                             offsetY = 60;
                             break;
+                        case OpenSHC::Map::Units::UT_S_MANGONEL:
+                            offsetX = 43;
+                            offsetY = 35;
+                            break;
                         case OpenSHC::Map::Units::UT_S_BALLISTA:
                         case OpenSHC::Map::Units::UT_S_FBALLISTA:
                             offsetX = 19;
                             offsetY = 36;
+                            break;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
@@ -464,10 +465,6 @@ namespace Rendering {
                             offsetX = 79;
                             offsetY = 56;
                             break;
-                        case OpenSHC::Map::Units::UT_S_MANGONEL:
-                            offsetX = 43;
-                            offsetY = 35;
-                            break;
                         case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
                             offsetX = 36;
                             offsetY = 61;
@@ -476,10 +473,15 @@ namespace Rendering {
                             offsetX = -3;
                             offsetY = 60;
                             break;
+                        case OpenSHC::Map::Units::UT_S_MANGONEL:
+                            offsetX = 43;
+                            offsetY = 35;
+                            break;
                         case OpenSHC::Map::Units::UT_S_BALLISTA:
                         case OpenSHC::Map::Units::UT_S_FBALLISTA:
                             offsetX = 19;
                             offsetY = 36;
+                            break;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
