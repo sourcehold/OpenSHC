@@ -37,11 +37,11 @@ namespace Map {
                     continue;
                 }
                 if (zero2 == 1) {
-                    if (this->units[_candidateUnitID].field131_0x2ac != 1) {
+                    if (this->units[_candidateUnitID].field_0x2ac != 1) {
                         continue;
                     }
                 } else if (zero2 == 10) {
-                    if (this->units[_candidateUnitID].field131_0x2ac != 10) {
+                    if (this->units[_candidateUnitID].field_0x2ac != 10) {
                         continue;
                     }
                 }

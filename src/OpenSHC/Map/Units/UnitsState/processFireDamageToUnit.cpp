@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
@@ -18,15 +19,16 @@ namespace Map {
         using OpenSHC::Map::Units::UnitLogicState;
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::States::UnitState;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00532460
-        undefined4 UnitsState::processFireDamageToUnit(int unitID, int playerID, int halfTheDamage)
+        BOOLEnum UnitsState::processFireDamageToUnit(int unitID, int playerID, int halfTheDamage)
         {
             if (unitID <= 0) {
-                return 0;
+                return FALSE;
             }
             if (this->units[unitID].dying != 0) {
-                return 0;
+                return FALSE;
             }
             UnitTypeShort unitType = this->units[unitID].unitType;
             int damage;
@@ -55,17 +57,17 @@ namespace Map {
                 : this->units[unitID].health * 100 / this->units[unitID].maxHealth;
             this->units[unitID].healthbar = this->units[unitID].healthPercentage / 10;
             if (this->units[unitID].health > 0) {
-                return 1;
+                return TRUE;
             }
             this->units[unitID].animationCycleNumber = 0;
-            this->units[unitID].field323_0x442 = 1;
+            this->units[unitID].field_0x442 = 1;
             if (unitType == OpenSHC::Map::Units::UT_LORD) {
                 this->units[unitID].dying = 1;
                 this->units[unitID].tunnelerFinishedDigging = 1;
                 this->units[unitID].health = 0;
                 this->units[unitID].animationCycleNumber = 0;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
-                return 1;
+                return TRUE;
             }
             this->units[unitID].logicalState = OpenSHC::Map::Units::ULS_TRANSITIONING;
             this->units[unitID].state_2 = 0;
@@ -98,7 +100,7 @@ namespace Map {
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNINGMAN;
             }
             if (this->units[unitID].isStalked != 0) {
-                return 1;
+                return TRUE;
             }
             /* if a male */
             if (unitTypeID != OpenSHC::Map::Units::UT_BREWER && unitTypeID != OpenSHC::Map::Units::UT_TANNER
@@ -112,12 +114,12 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_MAN_BURN2);
                 }
-                return 1;
+                return TRUE;
             }
             /* if female */
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_GIRL_SCREAM);
-            return 1;
+            return TRUE;
         }
 
     }

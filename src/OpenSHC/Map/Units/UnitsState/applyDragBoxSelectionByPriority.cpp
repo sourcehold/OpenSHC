@@ -19,7 +19,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005347E0
         void UnitsState::applyDragBoxSelectionByPriority()
         {
-            this->field14_0x55c = 0;
+            this->field_0x55c = 0;
             LONG _boxLeft;
             LONG _boxRight;
             if (DAT_MouseState::instance.selectionBox.right < DAT_MouseState::instance.selectionBox.left) {
@@ -83,7 +83,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner
                     != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0) {
-                        this->field14_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
+                        this->field_0x55c = this->units[DAT_CurrentUnitSlotID::instance].owner;
                     }
                     continue;
                 }

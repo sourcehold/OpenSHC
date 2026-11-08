@@ -67,7 +67,7 @@ namespace Map {
             this->units[_unitID].x = _x;
             this->units[_unitID].destinationX_2Unk = _x;
             this->units[_unitID].movementRelated = 8;
-            this->units[_unitID].field105_0xe8 = 0;
+            this->units[_unitID].field_0xe8 = 0;
             this->units[_unitID].targetingType = (UnitInstructionType)0;
             this->units[_unitID].tile = _x + DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
             this->units[_unitID].fixedRng = SEC_RNG::instance.currentNumber2;
@@ -86,13 +86,13 @@ namespace Map {
                 if (DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile] != 0) {
                     DAT_BuildingsState::instance
                         .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile]]
-                        .containsSiegeMangonel1OrBallista2 = 1;
+                        .defensiveTowerEngineType = 1;
                 }
             } else if (unitType == OpenSHC::Map::Units::UT_S_BALLISTA) {
                 if (DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile] != 0) {
                     DAT_BuildingsState::instance
                         .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[_unitID].tile]]
-                        .containsSiegeMangonel1OrBallista2 = 2;
+                        .defensiveTowerEngineType = 2;
                 }
             } else if (unitType == OpenSHC::Map::Units::UT_CHILD) {
                 if ((this->units[_unitID].fixedRng & 0x80) != 0) {

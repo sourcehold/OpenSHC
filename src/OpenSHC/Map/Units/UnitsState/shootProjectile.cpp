@@ -20,7 +20,7 @@ namespace Map {
             int unitID, EntityType projectileType, int targetX, int targetY, int targetZUnk)
         {
             if (projectileType == OpenSHC::Map::Entities::ET_TREBUCHET) {
-                if (DAT_UnitsState::instance.units[unitID].field243_0x3b0 == 0) {
+                if (DAT_UnitsState::instance.units[unitID].field_0x3b0 == 0) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,
@@ -67,7 +67,7 @@ namespace Map {
                     _offsetX = -4;
                     _offsetY = -4;
                 }
-                if (DAT_UnitsState::instance.units[unitID].field243_0x3b0 == 0) {
+                if (DAT_UnitsState::instance.units[unitID].field_0x3b0 == 0) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                         this->units[unitID].owner, this->units[unitID].calculatedOwnerPlayerIndex,

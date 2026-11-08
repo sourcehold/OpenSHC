@@ -3,6 +3,7 @@
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_00ee0fe8.hpp"
 #include "OpenSHC/Globals/DAT_00ee1028.hpp"
@@ -15,9 +16,10 @@ namespace Map {
 
         using OpenSHC::Map::Units::UnitLogicState;
         using OpenSHC::Map::Units::UnitType;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00539DF0
-        undefined4 UnitsState::chooseHusbandAndWife(int* husbandID, int* wifeID)
+        BOOLEnum UnitsState::chooseHusbandAndWife(int* husbandID, int* wifeID)
         {
             int _menIDs[100];
             int _womenIDs[100];
@@ -73,7 +75,7 @@ namespace Map {
                 }
             }
             if (_womenCount < 1 || _menCount < 1) {
-                return 0;
+                return FALSE;
             }
             int _husband = _menIDs[SEC_RNG::instance.currentNumber1 % _menCount];
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
@@ -82,7 +84,7 @@ namespace Map {
             /* the eight most recent couples live in the pair array at 0x00EE0FE8 */
             for (int i = 0; i < 8; ++i) {
                 if (_husband == (&DAT_00ee0fe8::instance)[i * 2] && _wife == (&DAT_00ee0fe8::instance)[i * 2 + 1]) {
-                    return 0;
+                    return FALSE;
                 }
             }
             *husbandID = _husband;
@@ -95,7 +97,7 @@ namespace Map {
             (&DAT_00ee0fe8::instance)[1] = _wife;
             DAT_00ee102c::instance = _husband;
             DAT_00ee1028::instance = _wife;
-            return 1;
+            return TRUE;
         }
 
     }

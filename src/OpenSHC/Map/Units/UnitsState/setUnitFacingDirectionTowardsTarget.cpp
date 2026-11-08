@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -9,21 +10,23 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using WindowsHelper::Enums::BOOLEnum;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FD00
-        undefined4 UnitsState::setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID)
+        BOOLEnum UnitsState::setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID)
         {
             if (targetUnitID <= 0) {
-                return 0;
+                return FALSE;
             }
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(
                 this->units[unitID].x, this->units[unitID].y, this->units[targetUnitID].x, this->units[targetUnitID].y);
             if (DAT_DirectionAlgorithmState::instance.orientation == 15) {
-                return 0;
+                return FALSE;
             }
             if (this->units[unitID].facingDirection == DAT_DirectionAlgorithmState::instance.orientation) {
-                return 0;
+                return FALSE;
             }
             int _clockwiseSteps
                 = DAT_DirectionAlgorithmState::instance.orientation - this->units[unitID].facingDirection;
@@ -54,7 +57,7 @@ namespace Map {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;
             }
-            return 1;
+            return TRUE;
         }
 
     }

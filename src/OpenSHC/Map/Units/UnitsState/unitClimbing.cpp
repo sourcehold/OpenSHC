@@ -27,10 +27,10 @@ namespace Map {
                 && DAT_PathFindingState::instance.climbData[_climbDataID].climbDataRelated
                     == this->units[unitID].climbDataRelated) {
                 if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 1) {
-                    this->units[unitID].field203_0x35c = this->units[unitID].field203_0x35c + 1;
-                    if (this->units[unitID].field203_0x35c >= 96) {
+                    this->units[unitID].field_0x35c = this->units[unitID].field_0x35c + 1;
+                    if (this->units[unitID].field_0x35c >= 96) {
                         *(short*)&this->units[unitID].climbingState += 1;
-                        this->units[unitID].field203_0x35c = 0;
+                        this->units[unitID].field_0x35c = 0;
                         if (this->units[unitID].climbingDirection == 1) {
                             /* Climbing up */
                             this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 15;
@@ -49,36 +49,36 @@ namespace Map {
                     if (this->units[unitID].climbingDirection == 1) {
                         /* Climbing up */
                         if (this->units[unitID].facingDirectionMapOrientationCorrected == 0) {
-                            this->units[unitID].field41_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 2) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * -2;
+                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * -2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 4) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2;
+                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 + 8;
+                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 + 8;
                         }
                     } else {
                         /* Climbing down */
                         if (this->units[unitID].facingDirectionMapOrientationCorrected == 0) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 - 3;
+                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 - 3;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 2) {
-                            this->units[unitID].field41_0x5c = (short)this->units[unitID].climbingState * 2 - 8;
+                            this->units[unitID].field_0x5c = (short)this->units[unitID].climbingState * 2 - 8;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 4) {
-                            this->units[unitID].field41_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (-4 - (short)this->units[unitID].climbingState) * 2;
                         } else if (this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
-                            this->units[unitID].field41_0x5c = (2 - (short)this->units[unitID].climbingState) * 2;
+                            this->units[unitID].field_0x5c = (2 - (short)this->units[unitID].climbingState) * 2;
                         }
                     }
                     if (this->units[unitID].climbingDirection == 1) {
                         /* Climbing up */
                         this->units[unitID].animationFrame
                             = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
-                                  .ANIM_Frames_Shared_UnitClimbingUp[this->units[unitID].field203_0x35c / 8];
+                                  .ANIM_Frames_Shared_UnitClimbingUp[this->units[unitID].field_0x35c / 8];
                     } else {
                         /* Climbing down */
                         this->units[unitID].animationFrame
                             = (char)DAT_UnitPropertiesDefinedData::instance
-                                  .Frames_Shared_UnitClimbingDown[this->units[unitID].field203_0x35c / 8];
+                                  .Frames_Shared_UnitClimbingDown[this->units[unitID].field_0x35c / 8];
                     }
                     this->units[unitID].gfxNumber = this->units[unitID].animationSheetFrameOffset
                         + this->units[unitID].animationFrame * 8 - 8
@@ -86,7 +86,7 @@ namespace Map {
                     this->units[unitID].vanish = 0;
                     if (this->units[unitID].facingDirectionMapOrientationCorrected == 0
                         || this->units[unitID].facingDirectionMapOrientationCorrected == 6) {
-                        this->units[unitID].field43_0x64 = 2;
+                        this->units[unitID].field_0x64 = 2;
                     } else {
                         this->units[unitID].vanish = 1;
                     }

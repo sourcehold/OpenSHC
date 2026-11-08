@@ -44,7 +44,7 @@ namespace Map {
                 short _climbDirection = this->units[unitID].climbDirection;
                 this->units[unitID].facingDirection = this->units[_ladderUnitID].facingDirection;
                 this->units[unitID].usingTeleport = (short)DAT_PathFindingState::instance.climbData[_climbDataID].type;
-                this->units[unitID].field203_0x35c = 0;
+                this->units[unitID].field_0x35c = 0;
                 *(undefined2*)&this->units[unitID].climbingState = 0;
                 if (_climbDirection == 0) {
                     this->units[unitID].climbingDirection = 0;

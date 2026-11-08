@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -14,7 +15,7 @@ namespace Map {
         void UnitsState::recountUnitsInSelection()
         {
             for (int i = 0; i <= 26; ++i) {
-                (&this->selectionEuropeanArchers)[i] = 0;
+                this->selectionUnitType[i] = 0;
             }
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
@@ -31,107 +32,133 @@ namespace Map {
                 }
                 switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_E_ARCHER:
-                    this->selectionEuropeanArchers = this->selectionEuropeanArchers + 1;
+                    this->selectionUnitType[Selection::USE_E_ARCHERS]
+                        = this->selectionUnitType[Selection::USE_E_ARCHERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_XBOW:
-                    this->selectionCrossbowmen = this->selectionCrossbowmen + 1;
+                    this->selectionUnitType[Selection::USE_E_CROSSBOWMEN]
+                        = this->selectionUnitType[Selection::USE_E_CROSSBOWMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_SPEAR:
-                    this->selectionSpearmen = this->selectionSpearmen + 1;
+                    this->selectionUnitType[Selection::USE_E_SPEARMEN]
+                        = this->selectionUnitType[Selection::USE_E_SPEARMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_PIKE:
-                    this->selectionPikemen = this->selectionPikemen + 1;
+                    this->selectionUnitType[Selection::USE_E_PIKEMEN]
+                        = this->selectionUnitType[Selection::USE_E_PIKEMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_MACE:
-                    this->selectionMacemen = this->selectionMacemen + 1;
+                    this->selectionUnitType[Selection::USE_E_MACEMEN]
+                        = this->selectionUnitType[Selection::USE_E_MACEMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_SWORD:
-                    this->selectionSwordsmen = this->selectionSwordsmen + 1;
+                    this->selectionUnitType[Selection::USE_E_SWORDSMEN]
+                        = this->selectionUnitType[Selection::USE_E_SWORDSMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_KNIGHT:
-                    this->selectionKnights = this->selectionKnights + 1;
+                    this->selectionUnitType[Selection::USE_E_KNIGHTS]
+                        = this->selectionUnitType[Selection::USE_E_KNIGHTS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_LADDER:
-                    this->selectionLaddermen = this->selectionLaddermen + 1;
+                    this->selectionUnitType[Selection::USE_E_LADDERMEN]
+                        = this->selectionUnitType[Selection::USE_E_LADDERMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_ENGINEER:
-                    this->selectionEngineers = this->selectionEngineers + 1;
+                    this->selectionUnitType[Selection::USE_E_ENGINEERS]
+                        = this->selectionUnitType[Selection::USE_E_ENGINEERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_E_MONK:
-                    this->selectionMonks = this->selectionMonks + 1;
+                    this->selectionUnitType[Selection::USE_E_MONKS]
+                        = this->selectionUnitType[Selection::USE_E_MONKS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_TUNNELER:
-                    this->selectionTunnelers = this->selectionTunnelers + 1;
+                    this->selectionUnitType[Selection::USE_E_TUNNELERS]
+                        = this->selectionUnitType[Selection::USE_E_TUNNELERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
-                    this->selectionCatapults = this->selectionCatapults + 1;
+                    this->selectionUnitType[Selection::USE_E_CATAPULTS]
+                        = this->selectionUnitType[Selection::USE_E_CATAPULTS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                    this->selectionTrebuchets = this->selectionTrebuchets + 1;
+                    this->selectionUnitType[Selection::USE_E_TREBUCHETS]
+                        = this->selectionUnitType[Selection::USE_E_TREBUCHETS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_MANGONEL:
-                    this->selectionMangonel = this->selectionMangonel + 1;
+                    this->selectionUnitType[Selection::USE_E_MANGONELS]
+                        = this->selectionUnitType[Selection::USE_E_MANGONELS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_TOWER:
-                    this->selectionSiegeTower = this->selectionSiegeTower + 1;
+                    this->selectionUnitType[Selection::USE_E_SIEGETOWERS]
+                        = this->selectionUnitType[Selection::USE_E_SIEGETOWERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
-                    this->selectionBatteringRam = this->selectionBatteringRam + 1;
+                    this->selectionUnitType[Selection::USE_E_BATTERING_RAMS]
+                        = this->selectionUnitType[Selection::USE_E_BATTERING_RAMS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_SHIELD:
-                    this->selectionShield = this->selectionShield + 1;
+                    this->selectionUnitType[Selection::USE_E_SHIELDS]
+                        = this->selectionUnitType[Selection::USE_E_SHIELDS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_BALLISTA:
-                    this->selectionBallista = this->selectionBallista + 1;
+                    this->selectionUnitType[Selection::USE_E_BALLISTAS]
+                        = this->selectionUnitType[Selection::USE_E_BALLISTAS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_ARCHER:
-                    this->selectionArabArcher = this->selectionArabArcher + 1;
+                    this->selectionUnitType[Selection::USE_A_ARAB_ARCHERS]
+                        = this->selectionUnitType[Selection::USE_A_ARAB_ARCHERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_SLAVE:
-                    this->selectionArabSlave = this->selectionArabSlave + 1;
+                    this->selectionUnitType[Selection::USE_A_SLAVES]
+                        = this->selectionUnitType[Selection::USE_A_SLAVES] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_SLINGER:
-                    this->selectionArabSlinger = this->selectionArabSlinger + 1;
+                    this->selectionUnitType[Selection::USE_A_SLINGERS]
+                        = this->selectionUnitType[Selection::USE_A_SLINGERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_ASSASSIN:
-                    this->selectionArabAssassin = this->selectionArabAssassin + 1;
+                    this->selectionUnitType[Selection::USE_A_ASSASSINS]
+                        = this->selectionUnitType[Selection::USE_A_ASSASSINS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_HARCHER:
-                    this->selectionArabHorseArchers = this->selectionArabHorseArchers + 1;
+                    this->selectionUnitType[Selection::USE_A_HORSE_ARCHERS]
+                        = this->selectionUnitType[Selection::USE_A_HORSE_ARCHERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_SWORDSMAN:
-                    this->selectionArabSwordsman = this->selectionArabSwordsman + 1;
+                    this->selectionUnitType[Selection::USE_A_SWORDSMEN]
+                        = this->selectionUnitType[Selection::USE_A_SWORDSMEN] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_A_FIRETHROWER:
-                    this->selectionArabFireThrower = this->selectionArabFireThrower + 1;
+                    this->selectionUnitType[Selection::USE_A_FIRETHROWERS]
+                        = this->selectionUnitType[Selection::USE_A_FIRETHROWERS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    this->selectionFireBallista = this->selectionFireBallista + 1;
+                    this->selectionUnitType[Selection::USE_A_FIRE_BALLISTAS]
+                        = this->selectionUnitType[Selection::USE_A_FIRE_BALLISTAS] + 1;
                     this->nHasOwnedUnitInSelection = 1;
                     break;
                 default:
@@ -143,7 +170,7 @@ namespace Map {
                 this->selectionSlots[k] = -1;
             }
             for (int i = 0; i <= 26; ++i) {
-                if ((&this->selectionEuropeanArchers)[i] != 0) {
+                if (this->selectionUnitType[i] != 0) {
                     this->selectionSlots[_slot] = i;
                     _slot = _slot + 1;
                     if (_slot >= 8) {

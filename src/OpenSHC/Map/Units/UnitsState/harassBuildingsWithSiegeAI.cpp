@@ -30,7 +30,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0053D030
-        undefined4 UnitsState::harassBuildingsWithSiegeAI(int unitID)
+        BOOLEnum UnitsState::harassBuildingsWithSiegeAI(int unitID)
         {
             int _playerID = this->units[unitID].owner;
             int _siegeKind = 0;
@@ -63,14 +63,13 @@ namespace Map {
                     MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
                         _playerID, unitID);
                 }
-                return 0;
+                return FALSE;
             }
             uint _defaultHeightAtTarget = 0;
             uint _heightAtTarget = 0;
-            if (this->units[unitID].field248_0x3bc > 0) {
-                _defaultHeightAtTarget
-                    = DAT_TileMapState::instance.DefaultHeightLayer[this->units[unitID].field248_0x3bc];
-                _heightAtTarget = DAT_TileMapState::instance.HeightLayer[this->units[unitID].field248_0x3bc];
+            if (this->units[unitID].field_0x3bc > 0) {
+                _defaultHeightAtTarget = DAT_TileMapState::instance.DefaultHeightLayer[this->units[unitID].field_0x3bc];
+                _heightAtTarget = DAT_TileMapState::instance.HeightLayer[this->units[unitID].field_0x3bc];
             }
             int _shootAtMicroX;
             int _shootAtMicroY;
@@ -80,7 +79,7 @@ namespace Map {
                     != this->units[unitID]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID) {
                     this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
-                    return 0;
+                    return FALSE;
                 }
                 int _halfBuildingSize
                     = (DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
@@ -95,21 +94,21 @@ namespace Map {
                         * 8;
                 _shootAtZ = DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
                                 .terrainHeightUnk;
-            } else if (this->units[unitID].field248_0x3bc > 0
-                && (DAT_TileMapState::instance.LogicLayer[this->units[unitID].field248_0x3bc] & 0x100U) != 0
+            } else if (this->units[unitID].field_0x3bc > 0
+                && (DAT_TileMapState::instance.LogicLayer[this->units[unitID].field_0x3bc] & 0x100U) != 0
                 && (int)(_heightAtTarget - _defaultHeightAtTarget) >= 0x1f && _siegeKind != 0x25
                 && DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
                     != DAT_GameState::instance.mapAndTime
-                        .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[this->units[unitID].field248_0x3bc] & 7)
+                        .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[this->units[unitID].field_0x3bc] & 7)
                             + 1]) {
                 _shootAtZ = (int)(_heightAtTarget - _defaultHeightAtTarget) / 2 + _defaultHeightAtTarget;
                 _shootAtMicroY = DAT_ViewportRenderState::instance
-                                     .tileTranslationMatrix_YComponent[this->units[unitID].field248_0x3bc]
+                                     .tileTranslationMatrix_YComponent[this->units[unitID].field_0x3bc]
                     * 8;
-                _shootAtMicroX = (this->units[unitID].field248_0x3bc
+                _shootAtMicroX = (this->units[unitID].field_0x3bc
                                      - DAT_ViewportRenderState::instance
                                          .translationMatrix[DAT_ViewportRenderState::instance
-                                                 .tileTranslationMatrix_YComponent[this->units[unitID].field248_0x3bc]]
+                                                 .tileTranslationMatrix_YComponent[this->units[unitID].field_0x3bc]]
                                          .addXgetTile)
                     * 8;
             } else {
@@ -169,15 +168,15 @@ namespace Map {
                 _shootAtMicroY = DAT_PathFindingState::instance.ALG_TargetY * 8;
                 _shootAtZ
                     = DAT_TileMapState::instance.HeightLayer[DAT_PathFindingState::instance.ALG_TargetTile] - 0x2d;
-                this->units[unitID].field248_0x3bc = DAT_PathFindingState::instance.ALG_TargetTile;
+                this->units[unitID].field_0x3bc = DAT_PathFindingState::instance.ALG_TargetTile;
                 if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
-                    this->units[unitID].field248_0x3bc = -0x32;
-                    return 0;
+                    this->units[unitID].field_0x3bc = -0x32;
+                    return FALSE;
                 }
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setRandomShootLocation, this)(
                 unitID, _shootAtMicroX, _shootAtMicroY, _shootAtZ);
-            return 1;
+            return TRUE;
         }
 
     }

@@ -35,7 +35,7 @@ namespace Map {
             for (uint unitID = (short)DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
                 unitID = (short)this->units[unitID].nextUnitOnTheSameTile) {
                 if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
-                    && this->units[unitID].field303_0x413 == 0) {
+                    && this->units[unitID].field_0x413 == 0) {
                     DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)((GameCommandType)0x4f);

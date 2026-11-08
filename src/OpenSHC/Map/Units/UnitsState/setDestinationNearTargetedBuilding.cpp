@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -15,9 +16,10 @@ namespace Map {
 
         using OpenSHC::Map::Units::UnitInstructionType;
         using OpenSHC::Map::Units::States::UnitState;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0053DCC0
-        undefined4 UnitsState::setDestinationNearTargetedBuilding(int unitID, int param_2)
+        BOOLEnum UnitsState::setDestinationNearTargetedBuilding(int unitID, int param_2)
         {
             dword _areaAtUnitTile
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
@@ -29,10 +31,10 @@ namespace Map {
                 (int*)(short)_areaAtUnitTile, DAT_UnitsState::instance.units[unitID].owner, param_2,
                 DAT_UnitsState::instance.units[unitID].facingDirection);
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 == 0) {
-                return 0;
+                return FALSE;
             }
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0) {
-                return 0;
+                return FALSE;
             }
             short _destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
                                       [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1];
@@ -45,7 +47,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                 unitID, _destinationX, _destinationY, 0);
-            if (DAT_UnitsState::instance.units[unitID].field64_0x90 != 0) {
+            if (DAT_UnitsState::instance.units[unitID].field_0x90 != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByAmount, DAT_UnitsState::ptr)(
                     unitID, 2);
             }
@@ -57,7 +59,7 @@ namespace Map {
                 = (short)DAT_UnitsState::instance.units[unitID].targetedBuildingTile
                 - (short)DAT_ViewportRenderState::instance.translationMatrix[_attackTileY].addXgetTile;
             DAT_UnitsState::instance.units[unitID].attackAtTileY = _attackTileY;
-            return 1;
+            return TRUE;
         }
 
     }

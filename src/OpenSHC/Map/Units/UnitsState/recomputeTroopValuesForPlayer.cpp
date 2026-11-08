@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -27,8 +28,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00532BA0
         void UnitsState::recomputeTroopValuesForPlayer(int playerID)
         {
-            int _campfireY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
-            int _campfireX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
+            int _campfireY = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                 .yEntry;
+            int _campfireX = DAT_GameState::instance.playerDataArray[playerID]
+                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                 .xEntry;
             DAT_GameState::instance.playerDataArray[playerID].enemies = 0;
             DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount = 0;
             DAT_GameState::instance.playerDataArray[playerID].sumOfTotalEnemyUnitsCount = 0;

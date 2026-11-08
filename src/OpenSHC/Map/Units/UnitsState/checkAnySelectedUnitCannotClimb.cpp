@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -10,9 +11,10 @@ namespace Map {
     namespace Units {
 
         using OpenSHC::Map::Units::UnitLogicState;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536970
-        undefined4 UnitsState::checkAnySelectedUnitCannotClimb()
+        BOOLEnum UnitsState::checkAnySelectedUnitCannotClimb()
         {
             int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
@@ -27,15 +29,15 @@ namespace Map {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
-                    return 0;
+                    return FALSE;
                 }
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::checkUnitHasPropertyBasedOnUnitType, this)(
                         DAT_CurrentUnitSlotID::instance, 1)
                     == 0) {
-                    return 0;
+                    return FALSE;
                 }
             }
-            return 1;
+            return TRUE;
         }
 
     }

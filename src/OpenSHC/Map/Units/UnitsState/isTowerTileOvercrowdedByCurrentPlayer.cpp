@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -68,8 +69,10 @@ namespace Map {
                         int _freeCapacity = _tileCapacity - tile;
                         int _selectedUnitCount = 0;
                         for (int i = 0; i <= 26; ++i) {
-                            if (i != 6 && i != 8 && i != 13 && i != 12 && i != 11 && i != 14) {
-                                _selectedUnitCount = _selectedUnitCount + (&this->selectionEuropeanArchers)[i];
+                            if (i != Selection::USE_E_KNIGHTS && i != Selection::USE_E_LADDERMEN
+                                && i != Selection::USE_E_BATTERING_RAMS && i != Selection::USE_E_TREBUCHETS
+                                && i != Selection::USE_E_CATAPULTS && i != Selection::USE_E_SIEGETOWERS) {
+                                _selectedUnitCount = _selectedUnitCount + this->selectionUnitType[i];
                             }
                         }
                         return (BOOLEnum)(_selectedUnitCount > _freeCapacity * 2);

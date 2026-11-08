@@ -144,7 +144,7 @@ namespace Map {
                             this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
                             if (100 < _shootDistanceScore) {
                                 this->units[unitID].jugglerCount = 0;
-                                this->units[_0x04_targetUnitID].field233_0x39a = 1;
+                                this->units[_0x04_targetUnitID].field_0x39a = 1;
                                 return TRUE;
                             }
                             int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
@@ -153,11 +153,11 @@ namespace Map {
                                 + (int)this->units[unitID].terrainOrClimbHeight;
                             if (_targetTotalHeight + 0x46 < _unitPlayerID) {
                                 this->units[unitID].jugglerCount = 1;
-                                this->units[_0x04_targetUnitID].field233_0x39a = 1;
+                                this->units[_0x04_targetUnitID].field_0x39a = 1;
                                 return TRUE;
                             }
                             this->units[unitID].jugglerCount = (_targetTotalHeight + -0x46 <= _unitPlayerID) - 1;
-                            this->units[_0x04_targetUnitID].field233_0x39a = 1;
+                            this->units[_0x04_targetUnitID].field_0x39a = 1;
                             return TRUE;
                         }
                         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner]
@@ -308,7 +308,7 @@ namespace Map {
                         if (_xDifferenceToTarget < _yDifferenceToTarget) {
                             _xDifferenceToTarget = _yDifferenceToTarget;
                         }
-                        _xDifferenceToTarget = _xDifferenceToTarget + this->units[_enemy].field265_0x3dc * 0x32;
+                        _xDifferenceToTarget = _xDifferenceToTarget + this->units[_enemy].field_0x3dc * 0x32;
                         bool _scoreNeedsValidityCheck;
                         if (_entityType == 4) {
                             switch (this->units[_enemy].unitType) {
@@ -370,7 +370,7 @@ namespace Map {
                             }
                             _scoreNeedsValidityCheck = false;
                         } else if (_entityType != 0x25) {
-                            if ((this->units[_enemy].field289_0x3ff != 0)
+                            if ((this->units[_enemy].field_0x3ff != 0)
                                 && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[_enemy].owner]
                                     == -1)) {
                                 _xDifferenceToTarget = _xDifferenceToTarget / 3;
@@ -466,7 +466,7 @@ namespace Map {
                                         _shotDistance = _shotFlightDistance;
                                         _validTargetID = _enemy;
                                     }
-                                    if (this->units[_enemy].field233_0x39a == 0
+                                    if (this->units[_enemy].field_0x39a == 0
                                         && _xDifferenceToTarget < _bestUntargetedScore) {
                                         _bestUntargetedScore = _xDifferenceToTarget;
                                         _untargetedShotDistance = _shotFlightDistance;
@@ -500,14 +500,14 @@ namespace Map {
                         this->units[unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
                         return TRUE;
                     }
-                    this->units[_validTargetID].field265_0x3dc = this->units[_validTargetID].field265_0x3dc + 1;
+                    this->units[_validTargetID].field_0x3dc = this->units[_validTargetID].field_0x3dc + 1;
                     this->units[unitID].shootTargetedUnit = _chosenTargetID;
-                    this->units[unitID].field266_0x3de = _chosenTargetID;
+                    this->units[unitID].field_0x3de = _chosenTargetID;
                     this->units[unitID].targetUID = this->units[_validTargetID].uid;
                     this->units[unitID].distanceToEnemyUnitLadders = (short)_shotDistance;
                     if (100 < _shotDistance) {
                         this->units[unitID].jugglerCount = 0;
-                        this->units[_validTargetID].field233_0x39a = 1;
+                        this->units[_validTargetID].field_0x39a = 1;
                         return TRUE;
                     }
                     _unitPlayerID = (int)this->units[_validTargetID].terrainOrClimbHeight
@@ -516,11 +516,11 @@ namespace Map {
                         + (int)this->units[unitID].terrainOrClimbHeight;
                     if (_unitPlayerID + 0x46 < _microXUnit) {
                         this->units[unitID].jugglerCount = 1;
-                        this->units[_validTargetID].field233_0x39a = 1;
+                        this->units[_validTargetID].field_0x39a = 1;
                         return TRUE;
                     }
                     this->units[unitID].jugglerCount = (_unitPlayerID + -0x46 <= _microXUnit) - 1;
-                    this->units[_validTargetID].field233_0x39a = 1;
+                    this->units[_validTargetID].field_0x39a = 1;
                     return TRUE;
                 }
                 int _attackTileY = this->units[unitID].attackAtTileY;

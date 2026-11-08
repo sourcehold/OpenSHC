@@ -95,8 +95,8 @@ namespace Map {
             }
             if (_northTile != 0) {
                 for (int i = 0; i < 9; ++i) {
-                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field120_0x1213c[i].x + _originX;
-                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field120_0x1213c[i].y + _originY;
+                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].x + _originX;
+                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].y + _originY;
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
@@ -104,7 +104,7 @@ namespace Map {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
-                        + DAT_UnitPropertiesDefinedData::instance.field120_0x1213c[i].x + _originX;
+                        + DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].x + _originX;
                     if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
                         || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
@@ -119,8 +119,8 @@ namespace Map {
             }
             if (_eastTile != 0) {
                 for (int i = 0; i < 9; ++i) {
-                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field121_0x12184[i].x + _originX;
-                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field121_0x12184[i].y + _originY;
+                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].x + _originX;
+                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].y + _originY;
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
@@ -128,7 +128,7 @@ namespace Map {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
-                        + DAT_UnitPropertiesDefinedData::instance.field121_0x12184[i].x + _originX;
+                        + DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].x + _originX;
                     if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
                         || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
@@ -143,8 +143,8 @@ namespace Map {
             }
             if (_southTile != 0) {
                 for (int i = 0; i < 9; ++i) {
-                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field122_0x121cc[i].x + _originX;
-                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field122_0x121cc[i].y + _originY;
+                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].x + _originX;
+                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].y + _originY;
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
@@ -152,7 +152,7 @@ namespace Map {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
-                        + DAT_UnitPropertiesDefinedData::instance.field122_0x121cc[i].x + _originX;
+                        + DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].x + _originX;
                     if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
                         || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
@@ -167,8 +167,8 @@ namespace Map {
             }
             if (_westTile != 0) {
                 for (int i = 0; i < 9; ++i) {
-                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field123_0x12214[i].x + _originX;
-                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field123_0x12214[i].y + _originY;
+                    uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].x + _originX;
+                    uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].y + _originY;
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
@@ -176,7 +176,7 @@ namespace Map {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
-                        + DAT_UnitPropertiesDefinedData::instance.field123_0x12214[i].x + _originX;
+                        + DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].x + _originX;
                     if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
                         || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0

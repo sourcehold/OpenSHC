@@ -34,7 +34,7 @@ namespace Map {
             this->units[unitID].climbDataID = 0;
             this->units[unitID].destinationX_2Unk = (short)x;
             this->units[unitID].destinationY_2Unk = (short)y;
-            this->units[unitID].field280_0x3f4 = 0;
+            this->units[unitID].field_0x3f4 = 0;
             if (_unitX == x && this->units[unitID].y == y) {
                 this->units[unitID].destinationYPosition = (short)y;
                 this->units[unitID].totalSizeOfPathPlan = 0;
@@ -60,7 +60,7 @@ namespace Map {
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return FALSE;
             }
-            this->units[unitID].field129_0x2a8 = DAT_TileMapState::instance.PathConnectionLayer[_destinationTile];
+            this->units[unitID].field_0x2a8 = DAT_TileMapState::instance.PathConnectionLayer[_destinationTile];
             if (_ableToClimbTowers == 0
                 && (DAT_TileMapState::instance.LogicLayer[_destinationTile] & 0x10000100U) != 0) {
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
@@ -71,12 +71,12 @@ namespace Map {
             if (_fromArea != _toArea) {
                 if (DAT_PathFindingState::instance.climbIsIllegal == 0) {
                     if (DAT_PathFindingState::instance.allAssassinsUnk == 0 && reusePathingInfo == 0) {
-                        this->units[unitID].field129_0x2a8
+                        this->units[unitID].field_0x2a8
                             = (short)MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                            calculateCanPlayerUnitsNavigateToAreaFromArea,
                                 DAT_PathFindingState::ptr)(
                                 this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
-                        if (this->units[unitID].field129_0x2a8 == 0) {
+                        if (this->units[unitID].field_0x2a8 == 0) {
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             DAT_PathFindingState::instance.allAssassinsUnk = 0;
                             this->units[unitID].movementCooldown = 0;
@@ -86,7 +86,7 @@ namespace Map {
                         }
                         this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
-                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
+                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field_0x2a8);
                         if (this->units[unitID].climbDataID == 0) {
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             DAT_PathFindingState::instance.allAssassinsUnk = 0;
@@ -119,12 +119,12 @@ namespace Map {
                         DAT_PathFindingState::ptr)(
                         this->units[unitID].owner, _toArea, this->units[unitID].x, this->units[unitID].y);
                     if (_fromArea != _toArea) {
-                        this->units[unitID].field129_0x2a8
+                        this->units[unitID].field_0x2a8
                             = (short)MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                            calculateCanPlayerUnitsNavigateToAreaFromArea,
                                 DAT_PathFindingState::ptr)(
                                 this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
-                        if (this->units[unitID].field129_0x2a8 == 0) {
+                        if (this->units[unitID].field_0x2a8 == 0) {
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             DAT_PathFindingState::instance.allAssassinsUnk = 0;
                             this->units[unitID].movementCooldown = 0;
@@ -134,7 +134,7 @@ namespace Map {
                         }
                         this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
-                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
+                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field_0x2a8);
                         if (this->units[unitID].climbDataID == 0) {
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             DAT_PathFindingState::instance.allAssassinsUnk = 0;
@@ -174,7 +174,7 @@ namespace Map {
             if (this->units[unitID].isSelectable_OR_matchTime == 0) {
                 DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
             }
-            if (this->units[unitID].field64_0x90 != 0) {
+            if (this->units[unitID].field_0x90 != 0) {
                 DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
             }
             DAT_PathFindingState::instance.destinationX = _pathTargetX;

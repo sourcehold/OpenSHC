@@ -11,7 +11,7 @@ namespace Map {
         void UnitsState::commitMimmicLocation(int unitID)
         {
             this->units[unitID].movementRelated = 8;
-            this->units[unitID].field105_0xe8 = 0;
+            this->units[unitID].field_0xe8 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
             this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
             this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;

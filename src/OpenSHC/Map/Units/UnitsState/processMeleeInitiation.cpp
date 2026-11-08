@@ -219,7 +219,7 @@ namespace Map {
                         je skip_0x20000
                         or edx, 0x20000
                     skip_0x20000:
-                        mov dword ptr [DAT_TileMapState::instance]TileMapState.field213_0x554a48, edx
+                        mov dword ptr [DAT_TileMapState::instance]TileMapState.field_0x554a48, edx
                     }
                     for (_otherUnitID
                         = (short)DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
@@ -238,46 +238,46 @@ namespace Map {
                             }
                         }
                     }
-                    if ((DAT_TileMapState::instance.field213_0x554a48 != 0) || (_hasEnemyOnOwnTile != 0)) {
+                    if ((DAT_TileMapState::instance.field_0x554a48 != 0) || (_hasEnemyOnOwnTile != 0)) {
                         for (int i = 0; i < 24; ++i) {
                             _adjacentTiles[i] = 0;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 1) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 1) != 0) {
                             _adjacentTiles[0] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][7]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 2) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 2) != 0) {
                             _adjacentTiles[1] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][6]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 4) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 4) != 0) {
                             _adjacentTiles[2] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][5]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 8) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 8) != 0) {
                             _adjacentTiles[3] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x10) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x10) != 0) {
                             _adjacentTiles[4] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][3]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x20) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x20) != 0) {
                             _adjacentTiles[5] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x40) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x40) != 0) {
                             _adjacentTiles[6] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][1]
                                 + this->units[unitID].tile;
                         }
-                        if ((char)DAT_TileMapState::instance.field213_0x554a48 < '\0') {
+                        if ((char)DAT_TileMapState::instance.field_0x554a48 < '\0') {
                             _adjacentTiles[7] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                                 + this->units[unitID].tile;
@@ -322,7 +322,7 @@ namespace Map {
                             DAT_TileMapState::instance
                                 .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                             + this->units[unitID].tile);
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x100) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x100) != 0) {
                             _adjacentTiles[8]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][7]
@@ -330,7 +330,7 @@ namespace Map {
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x200) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x200) != 0) {
                             _adjacentTiles[9]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][6]
@@ -340,7 +340,7 @@ namespace Map {
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x400) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x400) != 0) {
                             _adjacentTiles[10]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][6]
@@ -348,13 +348,13 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][7]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x800) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x800) != 0) {
                             _adjacentTiles[0xb] = this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                         .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][6]
                                     * 2;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x1000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x1000) != 0) {
                             _adjacentTiles[0xc]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][5]
@@ -362,7 +362,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][6]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x2000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x2000) != 0) {
                             _adjacentTiles[0xd]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][6]
@@ -372,7 +372,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x4000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x4000) != 0) {
                             _adjacentTiles[0xe]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][5]
@@ -380,7 +380,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x8000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x8000) != 0) {
                             _adjacentTiles[0xf]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][4]
@@ -388,7 +388,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x10000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x10000) != 0) {
                             _adjacentTiles[0x10]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][3]
@@ -396,7 +396,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x20000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x20000) != 0) {
                             _adjacentTiles[0x11]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY + 1][2]
@@ -406,7 +406,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][4]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x40000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x40000) != 0) {
                             _adjacentTiles[0x12]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
@@ -414,13 +414,13 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][3]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x80000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x80000) != 0) {
                             _adjacentTiles[0x13] = this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                         .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
                                     * 2;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x100000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x100000) != 0) {
                             _adjacentTiles[0x14]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][1]
@@ -428,7 +428,7 @@ namespace Map {
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][2]
                                 + this->units[unitID].tile;
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x200000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x200000) != 0) {
                             _adjacentTiles[0x15]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
@@ -438,7 +438,7 @@ namespace Map {
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x400000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x400000) != 0) {
                             _adjacentTiles[0x16]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
@@ -446,7 +446,7 @@ namespace Map {
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
-                        if ((DAT_TileMapState::instance.field213_0x554a48 & 0x800000) != 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x800000) != 0) {
                             _adjacentTiles[0x17]
                                 = DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][0]
@@ -457,7 +457,7 @@ namespace Map {
                         int _keepsTarget = 0;
                         if (this->units[unitID].attackedUnitID != 0) {
                             _otherUnitID = this->units[unitID].attackedUnitID;
-                            if (this->units[_otherUnitID].uid == this->units[unitID].field191_0x340
+                            if (this->units[_otherUnitID].uid == this->units[unitID].field_0x340
                                 && this->units[_otherUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
                                 && this->units[_otherUnitID].dying == 0) {
                                 /* -- CHECK 24 TILES AROUND UNIT -- is the unit we already fight still in reach? */
@@ -470,7 +470,7 @@ namespace Map {
                                         _candidateTile = this->units[unitID].tile;
                                     } else {
                                         _candidateTile = _adjacentTiles[DAT_UnitPropertiesDefinedData::instance
-                                                .field117_0x11cf4[this->units[unitID].facingDirection][_slot]];
+                                                .field_0x11cf4[this->units[unitID].facingDirection][_slot]];
                                     }
                                     if (_candidateTile == 0) {
                                         continue;
@@ -491,8 +491,8 @@ namespace Map {
                             }
                             if (!_keepsTarget) {
                                 this->units[unitID].attackedUnitID = 0;
-                                this->units[unitID].field191_0x340 = 0;
-                                this->units[unitID].field259_0x3d2 = 0;
+                                this->units[unitID].field_0x340 = 0;
+                                this->units[unitID].field_0x3d2 = 0;
                             }
                         }
                         int _engage = _keepsTarget;
@@ -512,7 +512,7 @@ namespace Map {
                                     _candidateTile = this->units[unitID].tile;
                                 } else {
                                     _tileSlot = DAT_UnitPropertiesDefinedData::instance
-                                                    .field117_0x11cf4[this->units[unitID].facingDirection][_slot];
+                                                    .field_0x11cf4[this->units[unitID].facingDirection][_slot];
                                     _candidateTile = _adjacentTiles[_tileSlot];
                                 }
                                 if (_candidateTile == 0) {
@@ -521,12 +521,12 @@ namespace Map {
                                 if (_tileSlot >= 8) {
                                     if (abs(_totalHeight
                                             - _neighbourHeights
-                                                [DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].x])
+                                                [DAT_UnitPropertiesDefinedData::instance.field_0x12054[_tileSlot].x])
                                         > 0x20) {
                                         continue;
                                     }
                                     int _secondHeightIndex
-                                        = DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].y;
+                                        = DAT_UnitPropertiesDefinedData::instance.field_0x12054[_tileSlot].y;
                                     if (_secondHeightIndex != -1) {
                                         if (abs(_totalHeight - _neighbourHeights[_secondHeightIndex]) > 0x20) {
                                             continue;
@@ -556,7 +556,7 @@ namespace Map {
                                     continue;
                                 }
                                 this->units[unitID].attackedUnitID = (short)_otherUnitID;
-                                this->units[unitID].field191_0x340 = this->units[_otherUnitID].uid;
+                                this->units[unitID].field_0x340 = this->units[_otherUnitID].uid;
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
                                     DAT_UnitsState::ptr)(unitID, _otherUnitID);
@@ -567,7 +567,7 @@ namespace Map {
                                     && this->units[_otherUnitID].attackedUnitID == 0
                                     && this->units[_otherUnitID].movementCooldown == 0) {
                                     this->units[_otherUnitID].attackedUnitID = (short)unitID;
-                                    this->units[_otherUnitID].field191_0x340 = this->units[unitID].uid;
+                                    this->units[_otherUnitID].field_0x340 = this->units[unitID].uid;
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
                                         DAT_UnitsState::ptr)(_otherUnitID, unitID);
@@ -587,7 +587,7 @@ namespace Map {
                                     this->units[unitID].animationCycleNumber = 0;
                                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0;
                                 } else {
-                                    this->units[unitID].field259_0x3d2 = 1;
+                                    this->units[unitID].field_0x3d2 = 1;
                                 }
                             }
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitAttackOtherUnit, this)(
@@ -595,16 +595,16 @@ namespace Map {
                             return;
                         }
                     }
-                    this->units[unitID].field259_0x3d2 = 0;
+                    this->units[unitID].field_0x3d2 = 0;
                     this->units[unitID].attackedUnitID = 0;
-                    this->units[unitID].field191_0x340 = 0;
+                    this->units[unitID].field_0x340 = 0;
                     return;
                 }
             }
             /* Not able to fight at all, or no reason to look for a fight this tick. */
-            this->units[unitID].field191_0x340 = 0;
+            this->units[unitID].field_0x340 = 0;
             this->units[unitID].attackedUnitID = 0;
-            this->units[unitID].field259_0x3d2 = 0;
+            this->units[unitID].field_0x3d2 = 0;
         }
 
     }

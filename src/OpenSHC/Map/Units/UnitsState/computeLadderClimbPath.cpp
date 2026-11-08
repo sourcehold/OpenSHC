@@ -21,7 +21,7 @@ namespace Map {
             this->units[unitID].climbDataID = 0;
             DAT_PathFindingState::instance.climbIsIllegal = 0;
             DAT_PathFindingState::instance.allAssassinsUnk = 0;
-            this->units[unitID].field280_0x3f4 = 0;
+            this->units[unitID].field_0x3f4 = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
                 0x490, &this->units[unitID], this->units);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(

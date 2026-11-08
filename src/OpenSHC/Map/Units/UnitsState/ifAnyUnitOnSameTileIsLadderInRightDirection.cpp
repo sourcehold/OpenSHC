@@ -11,7 +11,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F5B0
-        undefined4 UnitsState::ifAnyUnitOnSameTileIsLadderInRightDirection(int tile, int y)
+        BOOLEnum UnitsState::ifAnyUnitOnSameTileIsLadderInRightDirection(int tile, int y)
         {
             /* the original is written out per direction rather than looped */
             int _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[y][0] + tile;
@@ -20,7 +20,7 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
                        _neighbourTile)
                     != FALSE) {
-                return 1;
+                return TRUE;
             }
             _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[y][2] + tile;
             if ((DAT_TileMapState::instance.LogicLayer[_neighbourTile] & 0x4a5015b1U) == 0
@@ -28,7 +28,7 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
                        _neighbourTile)
                     != FALSE) {
-                return 1;
+                return TRUE;
             }
             _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[y][4] + tile;
             if ((DAT_TileMapState::instance.LogicLayer[_neighbourTile] & 0x4a5015b1U) == 0
@@ -36,7 +36,7 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
                        _neighbourTile)
                     != FALSE) {
-                return 1;
+                return TRUE;
             }
             _neighbourTile = DAT_TileMapState::instance.directionTranslationMatrix[y][6] + tile;
             if ((DAT_TileMapState::instance.LogicLayer[_neighbourTile] & 0x4a5015b1U) == 0
@@ -44,9 +44,9 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
                        _neighbourTile)
                     != FALSE) {
-                return 1;
+                return TRUE;
             }
-            return 0;
+            return FALSE;
         }
 
     }

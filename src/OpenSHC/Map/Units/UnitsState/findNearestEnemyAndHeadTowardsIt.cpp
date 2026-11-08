@@ -254,7 +254,7 @@ namespace Map {
                 int _bestApproachDistance = 10000;
                 for (int _direction = 0; _direction < 8; ++_direction) {
                     int _approachTile = DAT_TileMapState::instance.directionTranslationMatrix[this->units[_enemyUnitID]
-                                                .y][DAT_UnitPropertiesDefinedData::instance.field84_0x11cb4[_direction]]
+                                                .y][DAT_UnitPropertiesDefinedData::instance.field_0x11cb4[_direction]]
                         + this->units[_enemyUnitID].tile;
                     if (DAT_TileMapState::instance.UnitLayer[_approachTile] != 0) {
                         continue;
@@ -331,8 +331,7 @@ namespace Map {
                             DAT_TileMapState::ptr)(this->units[unitID].x, this->units[unitID].y,
                             this->units[_foundEnemyID].x, this->units[_foundEnemyID].y);
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(unitID,
-                            DAT_TileMapState::instance.field155_0x5549a8, DAT_TileMapState::instance.field156_0x5549ac,
-                            0);
+                            DAT_TileMapState::instance.field_0x5549a8, DAT_TileMapState::instance.field_0x5549ac, 0);
                         int _lookAhead = -0x1e - _chosenRawDistance;
                         this->units[unitID].moveDelay = 0;
                         if (_lookAhead > -0x33) {

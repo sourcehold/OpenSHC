@@ -22,7 +22,7 @@ namespace Map {
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             int _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             this->units[unitID].buildingHeight = 0;
-            this->units[unitID].field58_0x84 = 0;
+            this->units[unitID].field_0x84 = 0;
             if ((_logicFlags & 0x10010d00) == 0) {
                 if (_buildingID == 0) {
                     if (this->units[unitID].wasOnStoneGate != 0) {
@@ -56,15 +56,15 @@ namespace Map {
                         OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(_buildingID);
                 }
-                this->units[unitID].field58_0x84 = (short)MACRO_CALL_MEMBER(
+                this->units[unitID].field_0x84 = (short)MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID2,
                     DAT_BuildingsState::ptr)(_buildingID);
                 this->units[unitID].terrainOrClimbHeight
                     = DAT_BuildingsState::instance.buildings[_buildingID].terrainHeightUnk;
             }
-            if (this->units[DAT_CurrentUnitSlotID::instance].field306_0x418 != 0) {
+            if (this->units[DAT_CurrentUnitSlotID::instance].field_0x418 != 0) {
                 this->units[unitID].buildingHeight
-                    = this->units[unitID].buildingHeight + this->units[DAT_CurrentUnitSlotID::instance].field306_0x418;
+                    = this->units[unitID].buildingHeight + this->units[DAT_CurrentUnitSlotID::instance].field_0x418;
             }
         }
 

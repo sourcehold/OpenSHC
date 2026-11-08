@@ -21,8 +21,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F7E0
         void UnitsState::calculateUnitMovementSpeed(int unitID)
         {
-            this->units[unitID].field322_0x440 = this->units[unitID].field322_0x440 + 1;
-            ushort _tick = this->units[unitID].field322_0x440;
+            this->units[unitID].field_0x440 = this->units[unitID].field_0x440 + 1;
+            ushort _tick = this->units[unitID].field_0x440;
             int _tile = this->units[unitID].tile;
             int _buildingID = (short)DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
@@ -139,7 +139,7 @@ namespace Map {
                 }
                 this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 3;
             }
-            this->units[unitID].field289_0x3ff = 0;
+            this->units[unitID].field_0x3ff = 0;
             if ((DAT_TileMapState::instance.LogicLayer[_tile] & 8) != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::registerSpottedEnemyTile,
                     DAT_TroopValueState::ptr)(_tile);
@@ -154,7 +154,7 @@ namespace Map {
                 return;
             }
             int _owner = this->units[unitID].owner;
-            this->units[unitID].field289_0x3ff = 1;
+            this->units[unitID].field_0x3ff = 1;
             if (DAT_BuildingsState::instance.buildings[_buildingID].owner == _owner) {
                 return;
             }

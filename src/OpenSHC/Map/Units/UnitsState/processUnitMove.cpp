@@ -29,7 +29,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00578C40
-        undefined4 UnitsState::processUnitMove(int unitID, int speedCategory)
+        BOOLEnum UnitsState::processUnitMove(int unitID, int speedCategory)
         {
             if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_BURNINGMAN) {
                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
@@ -39,18 +39,18 @@ namespace Map {
                         || this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_ASSASSIN_CLIMBING_UP
                         || this->units[unitID].state.generic
                             == OpenSHC::Map::Units::States::US_ASSASSIN_CLIMBING_DOWN)) {
-                    return 0;
+                    return FALSE;
                 }
                 if (this->units[unitID].dying != 0) {
-                    return 0;
+                    return FALSE;
                 }
             }
             if (this->units[unitID].tunnelerFinishedDigging == 5) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(
                     unitID);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
-                this->units[unitID].field39_0x58 = 0;
-                return 0;
+                this->units[unitID].field_0x58 = 0;
+                return FALSE;
             }
             if (this->units[unitID].tunnelerFinishedDigging != 4 && this->units[unitID].tunnelerFinishedDigging != 2) {
                 this->units[unitID].movementRelated = 8;
@@ -61,9 +61,9 @@ namespace Map {
                         unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
                 }
-                return 0;
+                return FALSE;
             }
-            this->units[unitID].field39_0x58 = 0;
+            this->units[unitID].field_0x58 = 0;
             if (this->units[unitID].moveInstructionSpeedDelayTracker != 0) {
                 this->units[unitID].moveInstructionSpeedDelayTracker
                     = this->units[unitID].moveInstructionSpeedDelayTracker - 1;
@@ -73,41 +73,41 @@ namespace Map {
             } else {
                 this->units[unitID].moveDelay = this->units[unitID].moveDelay - 2;
             }
-            int _steps = speedCategory + this->units[unitID].field259_0x3d2;
+            int _steps = speedCategory + this->units[unitID].field_0x3d2;
             for (int _step = 0; _step <= _steps; ++_step) {
-                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x01') {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e < 4
-                        || this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e > 0xb) {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x01') {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e < 4
+                        || this->units[DAT_CurrentUnitSlotID::instance].field_0x37e > 0xb) {
                         continue;
                     }
-                } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x02') {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e <= 4) {
+                } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x02') {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e <= 4) {
                         continue;
                     }
-                    if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e >= 10) {
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e > 0xb) {
-                            this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e = 3;
+                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 10) {
+                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e > 0xb) {
+                            this->units[DAT_CurrentUnitSlotID::instance].field_0x37e = 3;
                         }
                         continue;
                     }
                 }
-                this->units[unitID].field105_0xe8 = 0;
+                this->units[unitID].field_0xe8 = 0;
                 this->units[unitID].movementRelated = this->units[unitID].movementRelated + 1;
                 if (this->units[unitID].movementRelated < 8) {
-                    if (DAT_UnitPropertiesDefinedData::instance.field79_0x119cc[this->units[unitID].facingDirection]
+                    if (DAT_UnitPropertiesDefinedData::instance.field_0x119cc[this->units[unitID].facingDirection]
                         <= this->units[unitID].movementRelated) {
-                        this->units[unitID].field105_0xe8 = 1;
+                        this->units[unitID].field_0xe8 = 1;
                     }
                 } else {
                     int _pathIndex = this->units[unitID].currentIndexInPathPlan;
                     if (this->units[unitID].totalSizeOfPathPlan <= (short)_pathIndex
-                        && this->units[unitID].field280_0x3f4 == 0) {
+                        && this->units[unitID].field_0x3f4 == 0) {
                         this->units[unitID].movementCooldown = 0;
                         this->units[unitID].tunnelerFinishedDigging = 0;
                         this->units[unitID].movementRelated = 8;
                         this->units[unitID].destinationY_2Unk = this->units[unitID].y;
                         this->units[unitID].destinationX_2Unk = this->units[unitID].x;
-                        return 0;
+                        return FALSE;
                     }
                     this->units[unitID].movementRelated = 0;
                     uint _direction = (char)this->units[unitID].pathPlanStart[(short)_pathIndex / 2];
@@ -117,10 +117,10 @@ namespace Map {
                         _direction = (int)_direction >> 4;
                     }
                     this->units[unitID].facingDirection = (short)_direction;
-                    if (this->units[unitID].field280_0x3f4 == 0) {
+                    if (this->units[unitID].field_0x3f4 == 0) {
                         this->units[unitID].currentIndexInPathPlan = _pathIndex + 1;
                     }
-                    if (this->units[unitID].field259_0x3d2 != 0) {
+                    if (this->units[unitID].field_0x3d2 != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::saveUnitStateBeforeInterruption, this)(
                             unitID);
                         this->units[unitID].movementRelated = 8;
@@ -128,19 +128,19 @@ namespace Map {
                         this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MELEE_ATTACK;
                         this->units[unitID].SA = 0;
                         this->units[unitID].animationCycleNumber = 0;
-                        return 0;
+                        return FALSE;
                     }
                     if (this->units[unitID].moveRelatedFlag != 1) {
-                        if (this->units[unitID].field280_0x3f4 != 0
+                        if (this->units[unitID].field_0x3f4 != 0
                             || MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::doMoveFromTileToTile,
                                    DAT_PathFindingState::ptr)(unitID, this->units[unitID].tile, this->units[unitID].y,
                                    _direction, this->units[unitID].moveRelatedFlag, this->units[unitID].cannotClimb)
                                 == FALSE) {
                             this->units[unitID].movementRelated = 8;
-                            if (this->units[unitID].field280_0x3f4 > 0) {
-                                this->units[unitID].field280_0x3f4 = this->units[unitID].field280_0x3f4 - 1;
-                                if (this->units[unitID].field280_0x3f4 > 0) {
-                                    return 0;
+                            if (this->units[unitID].field_0x3f4 > 0) {
+                                this->units[unitID].field_0x3f4 = this->units[unitID].field_0x3f4 - 1;
+                                if (this->units[unitID].field_0x3f4 > 0) {
+                                    return FALSE;
                                 }
                             }
                             this->unknownInitially0_01 = this->unknownInitially0_01 + 1;
@@ -175,21 +175,21 @@ namespace Map {
                             }
                             if (!_destinationReachable) {
                                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
-                                    return 0;
+                                    return FALSE;
                                 }
                                 if (this->units[unitID].isSelectable_OR_matchTime != 0) {
-                                    return 0;
+                                    return FALSE;
                                 }
                                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
                                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
                                                           makeUnitStopWalkingByClearingPathProgressState,
                                         this)(unitID);
-                                    return 0;
+                                    return FALSE;
                                 }
                                 if (this->units[unitID].state.generic != OpenSHC::Map::Units::States::US_DISAPPEAR) {
                                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
                                     this->units[unitID].updateTickTracker = 0;
-                                    return 0;
+                                    return FALSE;
                                 }
                             }
                             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit,
@@ -197,12 +197,12 @@ namespace Map {
                                     this->units[unitID].destinationXPosition, this->units[unitID].destinationYPosition,
                                     0)
                                 == FALSE) {
-                                this->units[unitID].field280_0x3f4 = 0x28;
-                                return 0;
+                                this->units[unitID].field_0x3f4 = 0x28;
+                                return FALSE;
                             }
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(
                                 unitID);
-                            return 0;
+                            return FALSE;
                         }
                         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::spawnCrowFromNearbyTree,
                             DAT_LandscapeState::ptr)(unitID);
@@ -248,7 +248,7 @@ namespace Map {
                     this->units[unitID].microXPosition = this->units[unitID].microXPosition - 1;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
-                if (this->units[unitID].field105_0xe8 == 0) {
+                if (this->units[unitID].field_0xe8 == 0) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Units::UnitsState_Func::
                             adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection,
@@ -273,11 +273,11 @@ namespace Map {
                         }
                     }
                 }
-                this->units[unitID].field105_0xe8 = 0;
+                this->units[unitID].field_0xe8 = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateUnitFadeAndVisibilityNearStructures,
                     DAT_UnitsState::ptr)(unitID);
             }
-            return 1;
+            return TRUE;
         }
 
     }

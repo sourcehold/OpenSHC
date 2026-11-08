@@ -16,7 +16,7 @@ namespace Map {
             if (this->units[unitID].unknownTestAgainst0_2 != 0) {
                 return;
             }
-            this->units[unitID].field40_0x5a = 0;
+            this->units[unitID].field_0x5a = 0;
             /* if current tile position is not occupied */
             if (DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] == 0) {
                 DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)unitID;

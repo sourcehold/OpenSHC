@@ -80,11 +80,11 @@ namespace Map {
                 _currentUnitID = DAT_CurrentUnitSlotID::instance;
                 if (this->units[_currentUnitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE) {
                     this->maxUnitCount = _currentUnitID + 1;
-                    this->units[_currentUnitID].field233_0x39a = 0;
+                    this->units[_currentUnitID].field_0x39a = 0;
                     this->units[_currentUnitID].attackedBy = 0;
                     this->units[_currentUnitID].huntedBy = 0;
-                    this->units[_currentUnitID].field265_0x3dc = 0;
-                    this->units[_currentUnitID].field43_0x64 = 0;
+                    this->units[_currentUnitID].field_0x3dc = 0;
+                    this->units[_currentUnitID].field_0x64 = 0;
                     /*
                       This literally does nothing, this variable is not used elsewhere, what the
                        hell?
@@ -217,12 +217,12 @@ namespace Map {
                         if (_buildingID != 0) {
                             this->units[_buildingID].huntedBy = this->units[_buildingID].huntedBy + 1;
                         }
-                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].field266_0x3de;
+                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].field_0x3de;
                         if (_buildingID != 0) {
-                            this->units[_buildingID].field265_0x3dc = this->units[_buildingID].field265_0x3dc + 1;
+                            this->units[_buildingID].field_0x3dc = this->units[_buildingID].field_0x3dc + 1;
                         }
-                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0;
-                        if (0 < this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0) {
+                        _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0xd0;
+                        if (0 < this->units[DAT_CurrentUnitSlotID::instance].field_0xd0) {
                             *_shortFieldPtr = *_shortFieldPtr - 1;
                         }
                     }
@@ -238,7 +238,7 @@ namespace Map {
                 DAT_GameState::instance.playerDataArray[_playerID].totalAttackTroops = 0;
                 DAT_GameState::instance.playerDataArray[_playerID].totalTroopsType6 = 0;
                 DAT_GameState::instance.playerDataArray[_playerID].totalTroopsType7 = 0;
-                DAT_GameState::instance.playerDataArray[_playerID].field843_0x2b58 = 0;
+                DAT_GameState::instance.playerDataArray[_playerID].field_0x2b58 = 0;
                 DAT_GameState::instance.playerDataArray[_playerID].engineerCountRelated = 0;
                 DAT_GameState::instance.playerDataArray[_playerID].totalAttackingEngineerTroops = 0;
                 DAT_GameState::instance.playerDataArray[_playerID].unknownHarrassingSiegeRelated = 0;
@@ -263,7 +263,7 @@ namespace Map {
                     if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
                         != OpenSHC::Map::Units::ULS_INVISIBLE) {
                         this->unitCount = this->unitCount + 1;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field64_0x90 != 0) {
+                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x90 != 0) {
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Units::UnitsState_Func::stampOccupancyFlagOnSurroundingTiles, this)(
                                 DAT_CurrentUnitSlotID::instance);
@@ -443,7 +443,7 @@ namespace Map {
                             if (0 < _troopValue
                                 && this->units[_troopValue].uid
                                     == this->units[DAT_CurrentUnitSlotID::instance].targetUID) {
-                                this->units[_troopValue].field233_0x39a = 1;
+                                this->units[_troopValue].field_0x39a = 1;
                             }
                         }
                         if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
@@ -481,17 +481,17 @@ namespace Map {
                         if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
                             byte _heightDiv10 = this->units[DAT_CurrentUnitSlotID::instance].heightDiv10;
                             if (_heightDiv10 != 0) {
-                                this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]
-                                    = this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x83
+                                    = this->units[DAT_CurrentUnitSlotID::instance].field_0x83
                                     - *(char*)((int)DAT_UnitPropertiesDefinedData::ptr
                                         + (DAT_UpdateUnitsTracker::instance - (uint)_heightDiv10) * 4 + 0x11a24);
-                                if (100 < (byte)this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0] = 0;
+                                if (100 < (byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x83) {
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
                                 }
                                 if ((int)((byte)this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 + 0xd)
                                     <= (int)DAT_UpdateUnitsTracker::instance) {
                                     this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 = 0;
-                                    this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0] = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x83 = 0;
                                 }
                             }
                         }
@@ -547,7 +547,7 @@ namespace Map {
                             this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = FALSE;
                         }
                         _buildingID = (short)DAT_TileMapState::instance.mapOrientation;
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field39_0x58 == 0) {
+                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x58 == 0) {
                             if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
                                 != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                                 this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
@@ -629,10 +629,10 @@ namespace Map {
                                 }
                             }
                         }
-                        this->units[DAT_CurrentUnitSlotID::instance].field131_0x2ac = 0;
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x2ac = 0;
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processMeleeInitiation, this)(
                             DAT_CurrentUnitSlotID::instance);
-                        this->units[DAT_CurrentUnitSlotID::instance].field143_0x2c4
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4
                             = this->units[DAT_CurrentUnitSlotID::instance].state.generic;
                         if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
                             != OpenSHC::Map::Units::ULS_TRANSITIONING) {
@@ -643,7 +643,7 @@ namespace Map {
                             (*DAT_UnitPropertiesDefinedData::instance.UpdateUnitFunctions
                                     [(short)this->units[DAT_CurrentUnitSlotID::instance].unitType])();
                         }
-                        UnitStateShort UVar8 = this->units[DAT_CurrentUnitSlotID::instance].field143_0x2c4;
+                        UnitStateShort UVar8 = this->units[DAT_CurrentUnitSlotID::instance].field_0x2c4;
                         if (UVar8 != this->units[DAT_CurrentUnitSlotID::instance].state.generic
                             && (UVar8
                                     == (OpenSHC::Map::Units::States::US_DEATH_02
@@ -656,21 +656,21 @@ namespace Map {
                                     = DAT_TileMapState::instance.moats[_troopValue].someCountDown + -0x14;
                             }
                         }
-                        this->units[DAT_CurrentUnitSlotID::instance].field41_0x5c = 0;
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x5c = 0;
                         if (this->units[DAT_CurrentUnitSlotID::instance].usingTeleport == 0) {
-                            _intFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field200_0x354;
+                            _intFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
                             /*
                               Not climbing
                              */
 
                             *_intFieldPtr = *_intFieldPtr + 1;
-                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].field200_0x354;
+                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].field_0x354;
                             if ((int)this->units[DAT_CurrentUnitSlotID::instance].calculatedMovementSpeed
                                     + (int)this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
                                     + (int)this->units[DAT_CurrentUnitSlotID::instance].moveDelay
-                                < _troopValue - this->units[DAT_CurrentUnitSlotID::instance].field199_0x350) {
+                                < _troopValue - this->units[DAT_CurrentUnitSlotID::instance].field_0x350) {
                                 _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
-                                this->units[DAT_CurrentUnitSlotID::instance].field199_0x350 = _troopValue;
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _troopValue;
                                 if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime <= 0) {
                                     *_shortFieldPtr = 0;
                                 } else {
@@ -686,36 +686,36 @@ namespace Map {
                                         && this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0) {
                                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
                                     }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e >= 0x10) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37e
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x37e + 1;
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 0x10) {
+                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x37e = 0;
                                     }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c + 2;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c >= 0xe) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37c
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x37c + 2;
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37c >= 0xe) {
+                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x37c = 0;
                                     }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field215_0x378
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 + 2;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 >= 0x10) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x378
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x378 + 2;
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 >= 0x10) {
+                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x378 = 0;
                                     }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 >= 0x12) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 + 1;
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 >= 0x12) {
+                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 = 0;
                                     }
-                                    this->units[DAT_CurrentUnitSlotID::instance].field312_0x428
-                                        = this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 + 1;
-                                    if (this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 >= 0x18) {
-                                        this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 = 0;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x428
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field_0x428 + 1;
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x428 >= 0x18) {
+                                        this->units[DAT_CurrentUnitSlotID::instance].field_0x428 = 0;
                                     }
                                 }
-                                this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a
-                                    = this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a + 1;
-                                if (this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a >= 0xc) {
-                                    this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a = 0;
+                                this->units[DAT_CurrentUnitSlotID::instance].field_0x37a
+                                    = this->units[DAT_CurrentUnitSlotID::instance].field_0x37a + 1;
+                                if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37a >= 0xc) {
+                                    this->units[DAT_CurrentUnitSlotID::instance].field_0x37a = 0;
                                 }
                                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::calculateUnitMovementSpeed,
                                     this)(DAT_CurrentUnitSlotID::instance);
@@ -738,7 +738,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8;
                             if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                                     == OpenSHC::Map::Units::UT_A_HARCHER
                                 && (_buildingID
@@ -756,7 +756,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + (this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8) / 2;
+                                + (this->units[DAT_CurrentUnitSlotID::instance].field_0x378 * 8) / 2;
                             break;
                         case 0xc:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
@@ -765,7 +765,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37a * 8;
                             break;
                         case 0xe:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
@@ -774,7 +774,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37c * 8;
                             break;
                         case 0x10:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
@@ -783,7 +783,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
                             if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                                 == OpenSHC::Map::Units::UT_A_HARCHER) {
                                 this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
@@ -818,7 +818,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + (int)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e;
+                                + (int)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e;
                             break;
                         case 0x12:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
@@ -827,7 +827,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x3c6 * 8;
                             break;
                         case 0x13:
                         case 0x14:
@@ -837,7 +837,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                 = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
+                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
                             break;
                         case 0x15:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
@@ -846,14 +846,14 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
                             _troopValue
                                 = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
                                 + 0x80 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                 = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
                             break;
                         case 0x16: {
                             uint _correctedDirection = ((int)this->units[DAT_CurrentUnitSlotID::instance]
@@ -863,7 +863,7 @@ namespace Map {
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber = _correctedDirection + 0x151;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e & 3) * 8;
+                                + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field_0x37e & 3) * 8;
                             _correctedDirection = ((int)this->units[DAT_CurrentUnitSlotID::instance]
                                                           .facingDirectionMapOrientationCorrected
                                                       + 4)
@@ -872,7 +872,7 @@ namespace Map {
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                 = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
-                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x37e * 8;
                             break;
                         }
                         case 0x18:
@@ -882,7 +882,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
-                                + this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 * 8;
+                                + this->units[DAT_CurrentUnitSlotID::instance].field_0x428 * 8;
                             break;
                         case 99:
                             this->units[DAT_CurrentUnitSlotID::instance].imageID2
@@ -891,7 +891,7 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].imageID2
                                 = this->units[DAT_CurrentUnitSlotID::instance].imageID2
-                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
+                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field_0x378 / 2) * 8;
                         }
                         _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {

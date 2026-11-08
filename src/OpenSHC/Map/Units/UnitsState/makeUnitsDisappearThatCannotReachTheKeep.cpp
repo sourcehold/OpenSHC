@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
@@ -19,8 +20,10 @@ namespace Map {
         void UnitsState::makeUnitsDisappearThatCannotReachTheKeep(int playerID)
         {
             dword _areaOfKeep
-                = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
+                = (short)
+                      DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+                              .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                              .tileEntry];
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].owner != playerID) {
                     continue;

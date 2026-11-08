@@ -283,7 +283,7 @@ namespace Map {
 
                         _damage = _targetUnitType == OpenSHC::Map::Units::UT_S_TOWER ? 20000 : 10000;
                     }
-                    if (DAT_EntityState::instance.entityArray[entityID].field90_0xd0 != 0) {
+                    if (DAT_EntityState::instance.entityArray[entityID].field_0xd0 != 0) {
                         /*
                           if is fire ballista
                          */
@@ -346,8 +346,8 @@ namespace Map {
                 this->units[unitID].health = 0;
             }
             if (_entityShootingUnitID_2 != 0) {
-                if (this->units[unitID].field97_0xd0 < 1000) {
-                    this->units[unitID].field97_0xd0 = this->units[unitID].field97_0xd0 + 200;
+                if (this->units[unitID].field_0xd0 < 1000) {
+                    this->units[unitID].field_0xd0 = this->units[unitID].field_0xd0 + 200;
                 }
                 DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex
                     = DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex + 1;

@@ -15,7 +15,7 @@ namespace Map {
             if (_targetTile == 0) {
                 return 0;
             }
-            if (this->units[unitID].field64_0x90 == 0) {
+            if (this->units[unitID].field_0x90 == 0) {
                 return 0;
             }
             int _unitTile = this->units[unitID].tile;

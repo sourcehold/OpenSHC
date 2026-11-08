@@ -54,13 +54,13 @@ namespace Map {
                     _towerFadeType = 4;
                 }
             }
-            if (DAT_UnitsState::instance.units[unitID].field171_0x308 == 2 && _isOnDefensiveStructure) {
+            if (DAT_UnitsState::instance.units[unitID].field_0x308 == 2 && _isOnDefensiveStructure) {
                 _fadeType = 1;
             }
-            if (DAT_UnitsState::instance.units[unitID].field171_0x308 == 1 && _towerFadeType != 0) {
+            if (DAT_UnitsState::instance.units[unitID].field_0x308 == 1 && _towerFadeType != 0) {
                 _fadeType = _towerFadeType;
             }
-            if (DAT_UnitsState::instance.units[unitID].field171_0x308 == 0 && _gateFadeType != 0) {
+            if (DAT_UnitsState::instance.units[unitID].field_0x308 == 0 && _gateFadeType != 0) {
                 if ((DAT_TileMapState::instance
                             .LogicLayer[DAT_UnitsState::instance.units[unitID].destinationTilePosition]
                         & 0x100U)
@@ -95,11 +95,11 @@ namespace Map {
                 }
             }
             if (_isOnDefensiveStructure) {
-                DAT_UnitsState::instance.units[unitID].field171_0x308 = 1;
+                DAT_UnitsState::instance.units[unitID].field_0x308 = 1;
             } else if (_towerFadeType == 0) {
-                DAT_UnitsState::instance.units[unitID].field171_0x308 = _gateFadeType != 0 ? 3 : 0;
+                DAT_UnitsState::instance.units[unitID].field_0x308 = _gateFadeType != 0 ? 3 : 0;
             } else {
-                DAT_UnitsState::instance.units[unitID].field171_0x308 = 2;
+                DAT_UnitsState::instance.units[unitID].field_0x308 = 2;
             }
             if (DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 == 0
                 || (DAT_TileMapState::instance.MiscDisplayLayer[DAT_UnitsState::instance.units[unitID].nextTileUnk]
