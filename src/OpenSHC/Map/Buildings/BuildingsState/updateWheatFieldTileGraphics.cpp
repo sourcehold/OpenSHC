@@ -14,8 +14,10 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
-            // Matching note: start and buildingID * 0xcb swap ebx/ebp, as in updateHopsFieldTileGraphics. MSVC ranks
-            // start just below that temporary, and no declaration order moves it, so only register naming differs
+            // Matching note: start and buildingID * 0xcb swap ebx/ebp. Both key -97 and the temporary wins the tie.
+            // Setting i in both arms of the if (the updateHopsFieldTileGraphics fix) gives start ebx here too, but
+            // drops the temporary below a hoisted GMFirstPictureIndex load, which then takes ebp and the gfx tail is
+            // duplicated into every frame arm (112 -> 157 instructions), so only register naming differs
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
