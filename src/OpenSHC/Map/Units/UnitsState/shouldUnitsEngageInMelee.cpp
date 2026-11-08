@@ -53,7 +53,12 @@ namespace Map {
                     if (_type2 == OpenSHC::Map::Units::UT_HUNTERDOG) {
                         return FALSE;
                     }
-                } else if (_type1 == OpenSHC::Map::Units::UT_CAGEDOG) {
+                    if (this->units[unitID_2].isStalked != 0) {
+                        return TRUE;
+                    }
+                    return FALSE;
+                }
+                if (_type1 == OpenSHC::Map::Units::UT_CAGEDOG) {
                     if (_type2 == OpenSHC::Map::Units::UT_ANTELOPESHDEER) {
                         return FALSE;
                     }
@@ -71,7 +76,8 @@ namespace Map {
                     }
                     return DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID_1].displayColorPlayerID]
                         == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID_2].owner];
-                } else if (_type1 == OpenSHC::Map::Units::UT_HUNTERDOG) {
+                }
+                if (_type1 == OpenSHC::Map::Units::UT_HUNTERDOG) {
                     if (_type2 == OpenSHC::Map::Units::UT_RABBIT) {
                         return FALSE;
                     }
@@ -81,10 +87,9 @@ namespace Map {
                     if (_type2 == OpenSHC::Map::Units::UT_CAGEDOG) {
                         return FALSE;
                     }
-                } else {
-                    return TRUE;
-                }
-                if (this->units[unitID_2].isStalked == 0) {
+                    if (this->units[unitID_2].isStalked != 0) {
+                        return TRUE;
+                    }
                     return FALSE;
                 }
                 return TRUE;
