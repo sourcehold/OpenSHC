@@ -11,24 +11,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041B7C0
         void BuildingsState::computeBuildingEntranceFlagsForOrientations(int param_1)
         {
-            // Matching note: the original tests 5 and 6 in separate arms that each store the side length (the
-            // instruction-exact nested form, with try_ shared after an inner if/else-if, scores lower because the
-            // original places the size == 6 arm after the loop entry jump, which no shape tried reproduces).
             // Marks the sides of a keep-like building that have an entrance (field_0x280 holds one flag per side)
             uint size = this->buildings[param_1].widthOrHeight;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            int try_;
-            // the side length is kept apart from size, the original stores it once per arm
+            // the side length is kept apart from size; the original stores it in a separate arm per size
             int sideLength;
             if (size == 4) {
-                sideLength = 4;
-                try_ = tileCount - 1;
-            } else if (size == 5 || size == 6) {
                 sideLength = size;
-                try_ = tileCount - 2;
+            } else if (size == 5) {
+                sideLength = size;
+            } else if (size == 6) {
+                sideLength = size;
             } else {
                 return;
             }
+            int try_ = size == 4 ? tileCount - 1 : tileCount - 2;
             *(int*)this->buildings[param_1].field_0x280 = 0;
             for (int i = 0; i < tileCount; ++i) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
