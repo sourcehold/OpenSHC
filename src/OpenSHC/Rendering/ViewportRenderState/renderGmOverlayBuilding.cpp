@@ -157,13 +157,11 @@ namespace Rendering {
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_CHOPPING_BLOCK;
                     DAT_RenderedUnitOwner::instance = 0;
                     if (frame != 0) {
-                        iVar6 = yUnk - 76;
-                        iVar9 = xUnk - 35;
-                        gmID = OpenSHC::DE::SHCDE::GM_ANIM_CHOPPING_BLOCK;
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                            DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                        break;
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                            OpenSHC::DE::SHCDE::GM_ANIM_CHOPPING_BLOCK, frame, xUnk - 35, yUnk - 76);
                     }
+                    break;
                 case OpenSHC::Map::Buildings::BT_OILSMELTER:
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].overlayImageID;
                     DAT_CurrentlyRenderedSpriteID::instance = 189;
@@ -182,17 +180,15 @@ namespace Rendering {
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2;
                     if (frame != 0) {
-                        iVar9 = xUnk - 35;
-                        if (frame < 123) {
-                            iVar6 = yUnk - 100;
-                            gmID = OpenSHC::DE::SHCDE::GM_OIL_ANIMS;
+                        if (frame > 122) {
+                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                DAT_TextureRenderCoreObject::ptr)(
+                                OpenSHC::DE::SHCDE::GM_OIL_ANIMS, frame, xUnk - 35, yUnk - 102);
                         } else {
-                            iVar6 = yUnk - 102;
-                            gmID = OpenSHC::DE::SHCDE::GM_OIL_ANIMS;
+                            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                                DAT_TextureRenderCoreObject::ptr)(
+                                OpenSHC::DE::SHCDE::GM_OIL_ANIMS, frame, xUnk - 35, yUnk - 100);
                         }
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                            DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                        break;
                     }
                     break;
                 case OpenSHC::Map::Buildings::BT_QUARRY:
@@ -295,68 +291,40 @@ namespace Rendering {
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite1;
                     if (frame != 0) {
-                        sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].state;
-                        if (sVar1 == 0) {
-                            iVar6 = -35;
-                            iVar9 = -70;
-                        } else if (sVar1 == 1) {
-                            iVar6 = -35;
-                            iVar9 = -56;
+                        short const minerState = DAT_BuildingsState::instance.buildings[tileIndex].state;
+                        int offsetX;
+                        int offsetY;
+                        if (minerState == 0) {
+                            offsetX = -35;
+                            offsetY = -70;
+                        } else if (minerState == 1) {
+                            offsetX = -35;
+                            offsetY = -56;
+                        } else if (minerState == 2) {
+                            offsetX = -35;
+                            offsetY = -70;
+                        } else if (minerState == 3) {
+                            offsetX = -35;
+                            offsetY = -78;
+                        } else if (minerState == 4) {
+                            offsetX = -35;
+                            offsetY = -89;
+                        } else if (minerState == 5) {
+                            offsetX = -35;
+                            offsetY = -89;
                         } else {
-                            if (sVar1 == 2) {
-                                iVar6 = -35;
-                                iVar9 = -70;
-                                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                    DAT_TextureRenderCoreObject::ptr)(
-                                    OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, iVar6 + xUnk, iVar9 + yUnk);
-                                frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3;
-                                if (frame != 0) {
-                                    iVar6 = yUnk - 84;
-                                    iVar9 = xUnk - 51;
-                                    gmID = OpenSHC::DE::SHCDE::GM_MINE_ANIMS;
-                                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                        DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                                }
-                                break;
-                            }
-                            if (sVar1 == 3) {
-                                iVar6 = -35;
-                                iVar9 = -78;
-                            } else if (sVar1 == 4) {
-                                iVar6 = -35;
-                                iVar9 = -89;
-                            } else {
-                                if (sVar1 != 5) {
-                                    iVar6 = -51;
-                                    iVar9 = -70;
-                                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                        DAT_TextureRenderCoreObject::ptr)(
-                                        OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, iVar6 + xUnk, iVar9 + yUnk);
-                                    frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3;
-                                    if (frame != 0) {
-                                        iVar6 = yUnk - 84;
-                                        iVar9 = xUnk - 51;
-                                        gmID = OpenSHC::DE::SHCDE::GM_MINE_ANIMS;
-                                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                            DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
-                                    }
-                                    break;
-                                }
-                                iVar6 = -35;
-                                iVar9 = -89;
-                            }
+                            offsetX = -51;
+                            offsetY = -70;
                         }
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, iVar6 + xUnk, iVar9 + yUnk);
+                            OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, offsetX + xUnk, offsetY + yUnk);
                     }
                     frame = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3;
                     if (frame != 0) {
-                        iVar6 = yUnk - 84;
-                        iVar9 = xUnk - 51;
-                        gmID = OpenSHC::DE::SHCDE::GM_MINE_ANIMS;
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                            DAT_TextureRenderCoreObject::ptr)(gmID, frame, iVar9, iVar6);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                            OpenSHC::DE::SHCDE::GM_MINE_ANIMS, frame, xUnk - 51, yUnk - 84);
                     }
                     break;
                 case OpenSHC::Map::Buildings::BT_PITCHRIG:
