@@ -234,7 +234,7 @@ namespace Map {
             short field_0x37e; // 0x0000037E length: 2
             short substate; // 0x00000380 length: 2
             undefined1 padding_0x382[2]; // 0x00000382 length: 2
-            uint fixedRng; // 0x00000384 length: 4
+            int fixedRng; // 0x00000384 length: 4
             short resourceToDeposit; // 0x00000388 length: 2
             short jugglerCount; // 0x0000038A length: 2
             short tunnelerFrame; // 0x0000038C length: 2
