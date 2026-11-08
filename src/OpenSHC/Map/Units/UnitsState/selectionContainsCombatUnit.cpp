@@ -1,6 +1,8 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -9,151 +11,118 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536A60
         int UnitsState::selectionContainsCombatUnit(uint unitID)
         {
-            /* create a unittype array of length 80 and initialize it with 0's */
+            // the first selected unit of the current player per unit type
             uint selectedUnitsMap[80];
             for (int i = 0; i < 80; ++i) {
                 selectedUnitsMap[i] = 0;
             }
-            /* for every unit in the game, we check whether it is owned by the current
-               player, whether the unit has 3 properties, and whether it has not been
-               mentioned in the size 80 array. Then, we put that ID at that location.
-
-               map<unit_type, unit_id> */
-            int _hasMatch = 0;
+            BOOLEnum hasMatch = FALSE;
+            int const currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             for (DAT_CurrentUnitSlotID::instance = unitID;
                 (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
-                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_NORMAL
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == ULS_NORMAL
                     && this->units[DAT_CurrentUnitSlotID::instance].dying == 0
-                    && this->units[DAT_CurrentUnitSlotID::instance].owner
-                        == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                    && this->units[DAT_CurrentUnitSlotID::instance].owner == currentPlayerSlotID
                     && this->units[DAT_CurrentUnitSlotID::instance].isSelected != 0
-                    && selectedUnitsMap[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType] == 0) {
-                    selectedUnitsMap[(short)this->units[DAT_CurrentUnitSlotID::instance].unitType]
+                    && selectedUnitsMap[this->units[DAT_CurrentUnitSlotID::instance].unitType] == 0) {
+                    selectedUnitsMap[this->units[DAT_CurrentUnitSlotID::instance].unitType]
                         = DAT_CurrentUnitSlotID::instance;
-                    _hasMatch = 1;
+                    hasMatch = TRUE;
                 }
             }
-            /* if we have at least 1 match, return it. the order of returning seems really
-               arbitrary, but maybe it means something */
-            if (!_hasMatch) {
+            if (!hasMatch) {
                 return -1;
             }
-            /* E_ARCHER */
-            if (selectedUnitsMap[0x16] != 0) {
-                return selectedUnitsMap[0x16];
+            // ranged units first, then siege engines, infantry and the rest
+            if (selectedUnitsMap[UT_E_ARCHER] != 0) {
+                return selectedUnitsMap[UT_E_ARCHER];
             }
-            if (selectedUnitsMap[0x26] != 0) {
-                return selectedUnitsMap[0x26];
+            if (selectedUnitsMap[UT_E_ARCHER_DEBUG] != 0) {
+                return selectedUnitsMap[UT_E_ARCHER_DEBUG];
             }
-            /* E_XBOW */
-            if (selectedUnitsMap[0x17] != 0) {
-                return selectedUnitsMap[0x17];
+            if (selectedUnitsMap[UT_E_XBOW] != 0) {
+                return selectedUnitsMap[UT_E_XBOW];
             }
-            /* A_ARCHER */
-            if (selectedUnitsMap[0x46] != 0) {
-                return selectedUnitsMap[0x46];
+            if (selectedUnitsMap[UT_A_ARCHER] != 0) {
+                return selectedUnitsMap[UT_A_ARCHER];
             }
-            /* A_HARCHER */
-            if (selectedUnitsMap[0x4a] != 0) {
-                return selectedUnitsMap[0x4a];
+            if (selectedUnitsMap[UT_A_HARCHER] != 0) {
+                return selectedUnitsMap[UT_A_HARCHER];
             }
-            /* A_SLINGER */
-            if (selectedUnitsMap[0x48] != 0) {
-                return selectedUnitsMap[0x48];
+            if (selectedUnitsMap[UT_A_SLINGER] != 0) {
+                return selectedUnitsMap[UT_A_SLINGER];
             }
-            /* A_FIRETHROWER */
-            if (selectedUnitsMap[0x4c] != 0) {
-                return selectedUnitsMap[0x4c];
+            if (selectedUnitsMap[UT_A_FIRETHROWER] != 0) {
+                return selectedUnitsMap[UT_A_FIRETHROWER];
             }
-            /* S_FBALLISTA */
-            if (selectedUnitsMap[0x4d] != 0) {
-                return selectedUnitsMap[0x4d];
+            if (selectedUnitsMap[UT_S_FBALLISTA] != 0) {
+                return selectedUnitsMap[UT_S_FBALLISTA];
             }
-            /* S_CATAPULT */
-            if (selectedUnitsMap[0x27] != 0) {
-                return selectedUnitsMap[0x27];
+            if (selectedUnitsMap[UT_S_CATAPULT] != 0) {
+                return selectedUnitsMap[UT_S_CATAPULT];
             }
-            /* S_TREBUCHET */
-            if (selectedUnitsMap[0x28] != 0) {
-                return selectedUnitsMap[0x28];
+            if (selectedUnitsMap[UT_S_TREBUCHET] != 0) {
+                return selectedUnitsMap[UT_S_TREBUCHET];
             }
-            /* S_MANGONEL */
-            if (selectedUnitsMap[0x29] != 0) {
-                return selectedUnitsMap[0x29];
+            if (selectedUnitsMap[UT_S_MANGONEL] != 0) {
+                return selectedUnitsMap[UT_S_MANGONEL];
             }
-            /* S_BALLISTA */
-            if (selectedUnitsMap[0x3d] != 0) {
-                return selectedUnitsMap[0x3d];
+            if (selectedUnitsMap[UT_S_BALLISTA] != 0) {
+                return selectedUnitsMap[UT_S_BALLISTA];
             }
-            /* E_SPEARMAN */
-            if (selectedUnitsMap[0x18] != 0) {
-                return selectedUnitsMap[0x18];
+            if (selectedUnitsMap[UT_E_SPEAR] != 0) {
+                return selectedUnitsMap[UT_E_SPEAR];
             }
-            /* E_PIKEMAN */
-            if (selectedUnitsMap[0x19] != 0) {
-                return selectedUnitsMap[0x19];
+            if (selectedUnitsMap[UT_E_PIKE] != 0) {
+                return selectedUnitsMap[UT_E_PIKE];
             }
-            /* E_MACEMAN */
-            if (selectedUnitsMap[0x1a] != 0) {
-                return selectedUnitsMap[0x1a];
+            if (selectedUnitsMap[UT_E_MACE] != 0) {
+                return selectedUnitsMap[UT_E_MACE];
             }
-            /* E_SWORDSMAN */
-            if (selectedUnitsMap[0x1b] != 0) {
-                return selectedUnitsMap[0x1b];
+            if (selectedUnitsMap[UT_E_SWORD] != 0) {
+                return selectedUnitsMap[UT_E_SWORD];
             }
-            /* E_KNIGHT */
-            if (selectedUnitsMap[0x1c] != 0) {
-                return selectedUnitsMap[0x1c];
+            if (selectedUnitsMap[UT_E_KNIGHT] != 0) {
+                return selectedUnitsMap[UT_E_KNIGHT];
             }
-            /* TUNNELER */
-            if (selectedUnitsMap[5] != 0) {
-                return selectedUnitsMap[5];
+            if (selectedUnitsMap[UT_TUNNELER] != 0) {
+                return selectedUnitsMap[UT_TUNNELER];
             }
-            /* E_LADDERMAN */
-            if (selectedUnitsMap[0x1d] != 0) {
-                return selectedUnitsMap[0x1d];
+            if (selectedUnitsMap[UT_E_LADDER] != 0) {
+                return selectedUnitsMap[UT_E_LADDER];
             }
-            /* E_ENGINEER */
-            if (selectedUnitsMap[0x1e] != 0) {
-                return selectedUnitsMap[0x1e];
+            if (selectedUnitsMap[UT_E_ENGINEER] != 0) {
+                return selectedUnitsMap[UT_E_ENGINEER];
             }
-            /* E_MONK */
-            if (selectedUnitsMap[0x25] != 0) {
-                return selectedUnitsMap[0x25];
+            if (selectedUnitsMap[UT_E_MONK] != 0) {
+                return selectedUnitsMap[UT_E_MONK];
             }
-            /* A_SLAVE */
-            if (selectedUnitsMap[0x47] != 0) {
-                return selectedUnitsMap[0x47];
+            if (selectedUnitsMap[UT_A_SLAVE] != 0) {
+                return selectedUnitsMap[UT_A_SLAVE];
             }
-            /* A_ASSASSIN */
-            if (selectedUnitsMap[0x49] != 0) {
-                return selectedUnitsMap[0x49];
+            if (selectedUnitsMap[UT_A_ASSASSIN] != 0) {
+                return selectedUnitsMap[UT_A_ASSASSIN];
             }
-            /* A_SWORDSMAN */
-            if (selectedUnitsMap[0x4b] != 0) {
-                return selectedUnitsMap[0x4b];
+            if (selectedUnitsMap[UT_A_SWORDSMAN] != 0) {
+                return selectedUnitsMap[UT_A_SWORDSMAN];
             }
-            /* LORD */
-            if (selectedUnitsMap[0x37] != 0) {
-                return selectedUnitsMap[0x37];
+            if (selectedUnitsMap[UT_LORD] != 0) {
+                return selectedUnitsMap[UT_LORD];
             }
-            /* S_TOWER */
-            if (selectedUnitsMap[0x3a] != 0) {
-                return selectedUnitsMap[0x3a];
+            if (selectedUnitsMap[UT_S_TOWER] != 0) {
+                return selectedUnitsMap[UT_S_TOWER];
             }
-            /* S_BATTERINGRAM */
-            if (selectedUnitsMap[0x3b] != 0) {
-                return selectedUnitsMap[0x3b];
+            if (selectedUnitsMap[UT_S_BATTERINGRAM] != 0) {
+                return selectedUnitsMap[UT_S_BATTERINGRAM];
             }
-            /* S_SHIELD */
-            if (selectedUnitsMap[0x3c] != 0) {
-                return selectedUnitsMap[0x3c];
+            if (selectedUnitsMap[UT_S_SHIELD] != 0) {
+                return selectedUnitsMap[UT_S_SHIELD];
             }
             return -1;
         }
