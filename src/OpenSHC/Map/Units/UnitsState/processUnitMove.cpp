@@ -68,16 +68,16 @@ namespace Map {
                 this->units[unitID].moveInstructionSpeedDelayTracker
                     = this->units[unitID].moveInstructionSpeedDelayTracker - 1;
             }
-            if (this->units[unitID].moveDelay < 2) {
-                this->units[unitID].moveDelay = 0;
-            } else {
+            if (this->units[unitID].moveDelay > 1) {
                 this->units[unitID].moveDelay = this->units[unitID].moveDelay - 2;
+            } else {
+                this->units[unitID].moveDelay = 0;
             }
-            int _steps = speedCategory + this->units[unitID].field_0x3d2;
-            for (int _step = 0; _step <= _steps; ++_step) {
+            speedCategory = speedCategory + this->units[unitID].field_0x3d2;
+            for (int _step = 0; _step <= speedCategory; ++_step) {
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x01') {
-                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e < 4
-                        || this->units[DAT_CurrentUnitSlotID::instance].field_0x37e > 0xb) {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e <= 3
+                        || this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 12) {
                         continue;
                     }
                 } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x32d == '\x02') {
@@ -85,7 +85,7 @@ namespace Map {
                         continue;
                     }
                     if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 10) {
-                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e > 0xb) {
+                        if (this->units[DAT_CurrentUnitSlotID::instance].field_0x37e >= 12) {
                             this->units[DAT_CurrentUnitSlotID::instance].field_0x37e = 3;
                         }
                         continue;
@@ -93,15 +93,9 @@ namespace Map {
                 }
                 this->units[unitID].field_0xe8 = 0;
                 this->units[unitID].movementRelated = this->units[unitID].movementRelated + 1;
-                if (this->units[unitID].movementRelated < 8) {
-                    if (DAT_UnitPropertiesDefinedData::instance.field_0x119cc[this->units[unitID].facingDirection]
-                        <= this->units[unitID].movementRelated) {
-                        this->units[unitID].field_0xe8 = 1;
-                    }
-                } else {
-                    int _pathIndex = this->units[unitID].currentIndexInPathPlan;
-                    if (this->units[unitID].totalSizeOfPathPlan <= (short)_pathIndex
-                        && this->units[unitID].field_0x3f4 == 0) {
+                if (this->units[unitID].movementRelated >= 8) {
+                    short _pathIndex = this->units[unitID].currentIndexInPathPlan;
+                    if (_pathIndex >= this->units[unitID].totalSizeOfPathPlan && this->units[unitID].field_0x3f4 == 0) {
                         this->units[unitID].movementCooldown = 0;
                         this->units[unitID].tunnelerFinishedDigging = 0;
                         this->units[unitID].movementRelated = 8;
@@ -110,11 +104,11 @@ namespace Map {
                         return FALSE;
                     }
                     this->units[unitID].movementRelated = 0;
-                    uint _direction = (char)this->units[unitID].pathPlanStart[(short)_pathIndex / 2];
-                    if ((_pathIndex & 1) == 0) {
-                        _direction = _direction & 0xf;
-                    } else {
+                    uint _direction = (char)this->units[unitID].pathPlanStart[_pathIndex / 2];
+                    if ((_pathIndex & 1) != 0) {
                         _direction = (int)_direction >> 4;
+                    } else {
+                        _direction = _direction & 0xf;
                     }
                     this->units[unitID].facingDirection = (short)_direction;
                     if (this->units[unitID].field_0x3f4 == 0) {
@@ -219,6 +213,9 @@ namespace Map {
                         + this->units[unitID].y;
                     this->units[unitID].microXPosition = this->units[unitID].x * 8 + 4;
                     this->units[unitID].microYPosition = this->units[unitID].y * 8 + 4;
+                } else if (this->units[unitID].movementRelated
+                    >= DAT_UnitPropertiesDefinedData::instance.field_0x119cc[this->units[unitID].facingDirection]) {
+                    this->units[unitID].field_0xe8 = 1;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(
                     unitID);
@@ -248,12 +245,7 @@ namespace Map {
                     this->units[unitID].microXPosition = this->units[unitID].microXPosition - 1;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
-                if (this->units[unitID].field_0xe8 == 0) {
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Units::UnitsState_Func::
-                            adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection,
-                        this)(unitID);
-                } else {
+                if (this->units[unitID].field_0xe8 != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageFromKillingPit,
                         DAT_BuildingsState::ptr)(unitID);
@@ -272,6 +264,11 @@ namespace Map {
                                 .tileScanCountdown = 100;
                         }
                     }
+                } else {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::
+                            adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection,
+                        this)(unitID);
                 }
                 this->units[unitID].field_0xe8 = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateUnitFadeAndVisibilityNearStructures,
