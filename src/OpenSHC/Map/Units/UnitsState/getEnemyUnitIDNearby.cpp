@@ -22,9 +22,10 @@ namespace Map {
             for (int _visited = 0; _visited < 2000; ++_visited) {
                 if (this->units[_otherUnitID].dying == 0 && this->units[_otherUnitID].unknownTestAgainst0_2 == 0
                     && this->units[_otherUnitID].moveRelatedFlag != 1) {
-                    int _otherHeight
-                        = this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight;
-                    if (_otherHeight <= unitHeight + 0x20 && _otherHeight >= unitHeight + -0x20
+                    if (this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight
+                            <= unitHeight + 0x20
+                        && this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight
+                            >= unitHeight - 0x20
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::shouldUnitsEngageInMelee, this)(
                                unitID, _otherUnitID)
                             == FALSE
