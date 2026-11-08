@@ -63,13 +63,17 @@ namespace Map {
         int BuildingsState::setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight,
             BuildingType buildingType, uint width, int playerID_dup, int variationIndex)
         {
-            // Matching note: The remaining differences are mostly register and stack slot allocation in the
-            // large initialisation block and the building type switch.
+            // Matching note: The original places the outpost case after the final return and keeps the address of
+            // x in a stack slot for the cesspit case only; we emit the outpost case in source order and share the
+            // x/y addresses with the initialisation block, which also shifts some registers in the cesspit case.
             // Places a new building of the type at (x, y) and returns its ID
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
             }
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (x > 399 || y > 399) {
+                return 0;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
 
@@ -112,7 +116,7 @@ namespace Map {
             this->buildings[buildingID].terrainHeightUnk = averageHeight;
 
             // Decorations use their own sprite variations
-            short variation;
+            int variation;
             if (buildingType == BT_GARDEN) {
                 this->buildings[buildingID].ffBuildingVariation
                     = DAT_BuildingDefinedData::instance.GardenVariations[variationIndex];
@@ -198,9 +202,7 @@ namespace Map {
                 = DAT_BuildingDefinedData::instance.BuildingFlag4Defaults[buildingType].byteValue;
             this->buildings[buildingID].flag2
                 = DAT_BuildingDefinedData::instance.BuildingFlag2Defaults[buildingType].shortValue;
-            this->buildings[buildingID].maxHealth
-                = DAT_BuildingDefinedData::instance.BuildingHP[buildingType].shortValue;
-            this->buildings[buildingID].currentHealth
+            this->buildings[buildingID].currentHealth = this->buildings[buildingID].maxHealth
                 = DAT_BuildingDefinedData::instance.BuildingHP[buildingType].shortValue;
             this->buildings[buildingID].buildMonthOrBuildOrder
                 = DAT_GameState::instance.mapAndTime.month + DAT_GameState::instance.mapAndTime.year * 12;
@@ -360,16 +362,15 @@ namespace Map {
             case BT_CESSPIT: {
                 // Flies and a poison cloud in the middle of the cesspit
                 int halfSize = (int)width / 2;
-                int middleY = (short)this->buildings[buildingID].y + halfSize;
-                int buildingX = (short)this->buildings[buildingID].x;
+                int middleY = this->buildings[buildingID].y + halfSize;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                    DAT_EntityState::ptr)(0, 0, 0, (buildingX + halfSize) * 8, middleY * 8,
+                    DAT_EntityState::ptr)(0, 0, 0, (this->buildings[buildingID].x + halfSize) * 8, middleY * 8,
                     DAT_TileMapState::instance
                         .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[middleY].addXgetTile
-                            + buildingX + halfSize],
+                            + this->buildings[buildingID].x + halfSize],
                     0, 0, 0, OpenSHC::Map::Entities::ET_COW_POISON_CLOUD, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    (short)this->buildings[buildingID].x + halfSize, (short)this->buildings[buildingID].y + halfSize,
+                    this->buildings[buildingID].x + halfSize, this->buildings[buildingID].y + halfSize,
                     OpenSHC::DE::SHCDE::FX_FLIES);
                 break;
             }
@@ -402,8 +403,7 @@ namespace Map {
                 {
                     int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8,
-                        DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
+                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
@@ -436,7 +436,8 @@ namespace Map {
                 {
                     int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
+                        this->buildings[buildingID].buildingEntryY * 8,
+                        DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
@@ -463,7 +464,7 @@ namespace Map {
                 break;
             }
 
-            this->field_0x18e074 = 1;
+            DAT_BuildingsState::instance.field_0x18e074 = 1;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(buildingID)
                 != 0) {
                 MACRO_CALL_MEMBER(
