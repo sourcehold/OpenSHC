@@ -22,6 +22,8 @@ namespace Map {
             int buildingID, int param_2, int param_3, undefined4 param_4)
         {
             // Shows the gold, popularity or trade popup above keeps, campgrounds and marketplaces of other players
+            // The calls read the owner again through this alias; the original does not reuse playerID for them
+            short const& owner = this->buildings[buildingID].owner;
             int playerID = this->buildings[buildingID].owner;
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 return;
@@ -49,17 +51,20 @@ namespace Map {
             }
 
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::playerHasEntityOfType,
-                    DAT_EntityState::ptr)(this->buildings[buildingID].owner, entityType)
+                    DAT_EntityState::ptr)(owner, entityType)
                 != FALSE) {
                 return;
             }
-            int x = (short)this->buildings[buildingID].x;
+            // Matching note: the original sums the height tile index into one register before the load, where we
+            // fold the last addition into the address; the short local for x is the closest allocation found
+            short x = this->buildings[buildingID].x;
             int halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
-            int y = (short)this->buildings[buildingID].y + halfSize;
+            int y = (short)this->buildings[buildingID].y;
             uint entityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                DAT_EntityState::ptr)(0, this->buildings[buildingID].owner, 0, (x + halfSize) * 8, y * 8,
+                DAT_EntityState::ptr)(0, owner, 0, (x + halfSize) * 8, (y + halfSize) * 8,
                 DAT_TileMapState::instance
-                        .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x + halfSize]
+                        .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y + halfSize].addXgetTile + x
+                            + halfSize]
                     + heightOffset,
                 0, 0, 0, entityType, 0);
             if (entityID == 0) {
