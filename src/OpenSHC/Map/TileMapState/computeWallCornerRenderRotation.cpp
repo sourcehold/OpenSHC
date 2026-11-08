@@ -13,8 +13,7 @@ namespace Map {
         int tileUnk = this->DAT_SomeTile;
         int y = this->DAT_SomeY;
         int result = 0;
-        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 2)
-            != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 2)) {
             if (this->mapOrientation == 0) {
                 if ((x & 0xf) == 0xf) {
                     result = 2;
@@ -40,8 +39,8 @@ namespace Map {
                     result = 32 - (x & 0xf);
                 }
             }
-        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 0)
-            != FALSE) {
+        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(
+                       tileUnk, y, 0)) {
             if (this->mapOrientation == 0) {
                 if ((y & 0xf) == 0xf) {
                     result = 1;
@@ -68,12 +67,10 @@ namespace Map {
                 }
             }
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                       tileUnk, y, 2)
-            != 0) {
+                       tileUnk, y, 2)) {
             result = 48;
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                       tileUnk, y, 4)
-            != 0) {
+                       tileUnk, y, 4)) {
             result = 63;
         } else {
             result = 33;

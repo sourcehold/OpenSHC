@@ -11,9 +11,9 @@ namespace Map {
                 continue;
             }
             if (this->moats[moatID].owner == playerID) {
-                this->moats[moatID].owner = (char)otherPlayerID;
+                this->moats[moatID].owner = otherPlayerID;
             } else if (this->moats[moatID].owner == otherPlayerID) {
-                this->moats[moatID].owner = (char)playerID;
+                this->moats[moatID].owner = playerID;
             }
         }
     }

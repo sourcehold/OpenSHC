@@ -22,7 +22,7 @@ namespace Map {
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             if (this->PathConnectionLayer[tileUnk] == 0) {
-                this->PathConnectionLayer[tileUnk] = (ushort)area;
+                this->PathConnectionLayer[tileUnk] = area;
             }
             buildingSizeTileIndex++;
             if (buildingSizeTileIndex >= this->constructionTileCount) {

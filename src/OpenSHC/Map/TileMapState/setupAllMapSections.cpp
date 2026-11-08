@@ -58,7 +58,6 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupLogicalMapBorders, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateShowHiLayerOrResetChangedLayer, this)();
 
-        // the border tiles get their own graphic, everything else the plain one
         for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
             if (this->LogicLayer[tile] == L_BORDER) {
                 this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2];
@@ -91,9 +90,6 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::clearBuildings, DAT_BuildingsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::clearRocksAndTrees, DAT_LandscapeState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::resetWind, DAT_LandscapeState::ptr)();
-        // the original calls this empty function as a member (object in ecx), of UnitsState here and of UnitsState
-        // and LandscapeState below; the generated header has it as a global, so pass the object through a one-argument
-        // __fastcall pointer
         ((void(__fastcall*)(OpenSHC::Map::Units::UnitsState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
             DAT_UnitsState::ptr);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearAllUnits, DAT_UnitsState::ptr)();

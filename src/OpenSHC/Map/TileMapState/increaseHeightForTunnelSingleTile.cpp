@@ -35,8 +35,8 @@ namespace Map {
         }
 
         if ((this->HeightLayer[tile] < 16 || this->DefaultHeightLayer[tile] < 16)
-            && (int)((uint)this->HeightLayer[tile] + increment) >= 0) {
-            this->HeightLayer[tile] = this->HeightLayer[tile] + (char)increment;
+            && this->HeightLayer[tile] + increment >= 0) {
+            this->HeightLayer[tile] = this->HeightLayer[tile] + increment;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(4, x, y);

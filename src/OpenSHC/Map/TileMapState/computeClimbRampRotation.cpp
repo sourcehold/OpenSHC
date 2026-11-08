@@ -8,41 +8,41 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC810
     int TileMapState::computeClimbRampRotation(int tileUnk, uint x, uint y)
     {
-        int high;
+        int height;
         if ((this->LogicLayer[tileUnk] & L_WALL_OR_GATEHOUSE) != 0) {
-            high = this->DefaultHeightLayer[tileUnk];
+            height = this->DefaultHeightLayer[tileUnk];
         } else {
-            high = this->HeightLayer[tileUnk];
+            height = this->HeightLayer[tileUnk];
         }
 
         int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tileUnk;
-        int heightAt86;
+        int southHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            heightAt86 = this->DefaultHeightLayer[neighbour];
+            southHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            heightAt86 = this->HeightLayer[neighbour];
+            southHeight = this->HeightLayer[neighbour];
         }
 
         neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tileUnk;
-        int heightAt85;
+        int eastHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            heightAt85 = this->DefaultHeightLayer[neighbour];
+            eastHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            heightAt85 = this->HeightLayer[neighbour];
+            eastHeight = this->HeightLayer[neighbour];
         }
 
         neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tileUnk;
-        int heightAt84;
+        int southEastHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            heightAt84 = this->DefaultHeightLayer[neighbour];
+            southEastHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            heightAt84 = this->HeightLayer[neighbour];
+            southEastHeight = this->HeightLayer[neighbour];
         }
 
         uint rotation;
-        if (high > heightAt86 + 20 && heightAt86 < 136) {
-            if (high > heightAt85 + 20 && heightAt85 < 136) {
-                if (high > heightAt84 + 20 && heightAt84 < 136) {
+        if (height > southHeight + 20 && southHeight < 136) {
+            if (height > eastHeight + 20 && eastHeight < 136) {
+                if (height > southEastHeight + 20 && southEastHeight < 136) {
                     rotation = 5;
                 } else {
                     rotation = 3;
@@ -50,14 +50,14 @@ namespace Map {
             } else {
                 rotation = 1;
             }
-        } else if (high > heightAt85 + 20 && heightAt85 < 136) {
-            if (high > heightAt86 + 20 && heightAt86 < 136) {
+        } else if (height > eastHeight + 20 && eastHeight < 136) {
+            if (height > southHeight + 20 && southHeight < 136) {
                 rotation = 3;
             } else {
                 rotation = 2;
             }
-        } else if (heightAt86 < 136 || heightAt85 < 136) {
-            if (high > heightAt84 + 20) {
+        } else if (southHeight < 136 || eastHeight < 136) {
+            if (height > southEastHeight + 20) {
                 rotation = 5;
             } else {
                 rotation = 0;

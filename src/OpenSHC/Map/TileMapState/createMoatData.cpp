@@ -43,9 +43,9 @@ namespace Map {
             if (moatID >= this->currentMoatCount) {
                 this->currentMoatCount = moatID + 1;
             }
-            this->moats[moatID].owner = (char)playerID;
-            this->moats[moatID].x = (short)x;
-            this->moats[moatID].y = (short)y;
+            this->moats[moatID].owner = playerID;
+            this->moats[moatID].x = x;
+            this->moats[moatID].y = y;
             this->moats[moatID].tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->moats[moatID].zeroOrTwo = 2;
             if (filled != 0) {

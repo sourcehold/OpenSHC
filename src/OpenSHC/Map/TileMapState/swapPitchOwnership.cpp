@@ -11,9 +11,9 @@ namespace Map {
                 continue;
             }
             if (this->pitchDitches[pitchDitchID].owner == playerID) {
-                this->pitchDitches[pitchDitchID].owner = (short)otherPlayerID;
+                this->pitchDitches[pitchDitchID].owner = otherPlayerID;
             } else if (this->pitchDitches[pitchDitchID].owner == otherPlayerID) {
-                this->pitchDitches[pitchDitchID].owner = (short)playerID;
+                this->pitchDitches[pitchDitchID].owner = playerID;
             }
         }
     }

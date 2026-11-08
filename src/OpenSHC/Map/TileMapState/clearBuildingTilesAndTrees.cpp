@@ -41,7 +41,7 @@ namespace Map {
             this->ChangedLayer[tileUnk] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
-                (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
+                DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
         }
     }
 

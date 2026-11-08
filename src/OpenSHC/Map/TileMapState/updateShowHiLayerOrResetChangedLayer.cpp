@@ -8,7 +8,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00501A20
     void TileMapState::updateShowHiLayerOrResetChangedLayer()
     {
-        int importHeight = 0;
+        BOOLEnum importHeight = FALSE;
         this->refreshRelatedTwo = 0;
         if (this->refreshCertainTileMap == 0) {
             return;
@@ -54,18 +54,18 @@ namespace Map {
             } else if (this->refreshCertainTileMap == 3) {
                 this->heightBasedScreenYOffset[row] = this->heightBasedScreenYOffset[row] - step;
                 if (this->heightBasedScreenYOffset[row] > target) {
-                    importHeight = 1;
+                    importHeight = TRUE;
                 }
             } else if (this->refreshCertainTileMap == 4) {
                 this->heightBasedScreenYOffset[row] = this->heightBasedScreenYOffset[row] + step;
                 if (this->heightBasedScreenYOffset[row] != row) {
-                    importHeight = 1;
+                    importHeight = TRUE;
                 }
             }
         }
 
         this->refreshRelatedTwo = 1;
-        if (importHeight == 0) {
+        if (!importHeight) {
             if (this->refreshCertainTileMap == 4 || this->refreshCertainTileMap == 2) {
                 this->refreshRelatedOne = 1;
             } else {

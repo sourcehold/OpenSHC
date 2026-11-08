@@ -28,7 +28,7 @@ namespace Map {
         if (this->HeightLayer[neighbour] <= this->HeightLayer[tileUnk]) {
             return FALSE;
         }
-        return (uint)this->LogicLayer[neighbour] >> 0xb & TRUE;
+        return (uint)this->LogicLayer[neighbour] >> 11 & TRUE;
     }
 
 }

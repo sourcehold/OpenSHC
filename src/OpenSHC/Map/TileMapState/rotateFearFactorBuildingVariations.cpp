@@ -18,8 +18,10 @@ namespace Map {
                 this->rockOrientation = 2;
             } else if (this->rockOrientation == 2) {
                 this->rockOrientation = 4;
+            } else if (this->rockOrientation == 4) {
+                this->rockOrientation = 6;
             } else {
-                this->rockOrientation = (this->rockOrientation != 4) - 1 & 6;
+                this->rockOrientation = 0;
             }
         }
         if ((int)now < (int)(this->lastTime + 1000)) {
@@ -27,14 +29,20 @@ namespace Map {
         }
 
         this->lastTime = now;
-        this->gateOrientationVariant = (this->gateOrientationVariant == 80) + 80;
+        if (this->gateOrientationVariant == 80) {
+            this->gateOrientationVariant = 81;
+        } else {
+            this->gateOrientationVariant = 80;
+        }
         if (this->editorRockType == 0) {
             if (this->rockOrientation == 0) {
                 this->rockOrientation = 2;
             } else if (this->rockOrientation == 2) {
                 this->rockOrientation = 4;
+            } else if (this->rockOrientation == 4) {
+                this->rockOrientation = 6;
             } else {
-                this->rockOrientation = (this->rockOrientation != 4) - 1 & 6;
+                this->rockOrientation = 0;
             }
         }
 

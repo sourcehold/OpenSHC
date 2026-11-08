@@ -48,18 +48,16 @@ namespace Map {
             return;
         }
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                DAT_PathFindingState::ptr)(playerID, x, y, 5)
-            != FALSE) {
+                DAT_PathFindingState::ptr)(playerID, x, y, 5)) {
             return;
         }
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
-                DAT_PathFindingState::ptr)(playerID, x, y, 2)
-            != 0) {
+                DAT_PathFindingState::ptr)(playerID, x, y, 2)) {
             return;
         }
 
         if (this->UnitLayer[tile] != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
-            int const unitID = (short)this->UnitLayer[tile];
+            int const unitID = this->UnitLayer[tile];
             if (mapperCommand == OpenSHC::Commands::M_MAPPER_CRENAL
                 || mapperCommand == OpenSHC::Commands::M_MAPPER_CRENAL2) {
                 DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;

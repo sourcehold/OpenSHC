@@ -25,7 +25,7 @@ namespace Map {
 
         int rowLength = 0;
         int tile = 0;
-        for (; rowLength < MC_MAP_XY_LIMIT; rowLength = rowLength + 2) {
+        for (; rowLength < MC_MAP_XY_LIMIT; rowLength += 2) {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_BORDER;
             tile++;
             if (rowLength > 0) {
@@ -39,7 +39,7 @@ namespace Map {
             tile++;
         }
 
-        for (rowLength = MC_MAP_XY_LIMIT - 2; rowLength >= 0; rowLength = rowLength - 2) {
+        for (rowLength = MC_MAP_XY_LIMIT - 2; rowLength >= 0; rowLength -= 2) {
             this->LogicLayer[tile] = L_BORDER;
             tile++;
             if (rowLength > 0) {
@@ -57,10 +57,10 @@ namespace Map {
         tile = 0;
         for (int skipped = 0; skipped < inset; skipped++) {
             tile = tile + 2 + row;
-            row = row + 2;
+            row += 2;
         }
         int firstRow = row;
-        for (; row < MC_MAP_XY_LIMIT; row = row + 2) {
+        for (; row < MC_MAP_XY_LIMIT; row += 2) {
             this->LogicLayer[tile + inset] = this->LogicLayer[tile + inset] | L_BORDER;
             tile++;
             if (row - inset > 0) {
@@ -73,7 +73,7 @@ namespace Map {
             this->LogicLayer[tile - inset] = this->LogicLayer[tile - inset] | L_BORDER;
             tile++;
         }
-        for (row = 398; row >= firstRow; row = row - 2) {
+        for (row = MC_MAP_XY_LIMIT - 2; row >= firstRow; row -= 2) {
             this->LogicLayer[tile + inset] = this->LogicLayer[tile + inset] | L_BORDER;
             tile++;
             if (row - inset > 0) {

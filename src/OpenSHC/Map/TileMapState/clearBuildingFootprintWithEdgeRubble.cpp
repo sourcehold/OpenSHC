@@ -39,8 +39,7 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isFootprintIndexOnEdge, this)(
-                           buildingSizeTileIndex, size)
-                != FALSE) {
+                           buildingSizeTileIndex, size)) {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x2000;
             } else {
                 this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;

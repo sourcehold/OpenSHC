@@ -52,7 +52,7 @@ namespace Map {
             if (height > 14) {
                 height = 14;
             }
-            DAT_UnitsState::instance.units[unitID].heightDiv10 = (char)height;
+            DAT_UnitsState::instance.units[unitID].heightDiv10 = height;
             DAT_UnitsState::instance.units[unitID].field_0x83 = 0;
         }
     }

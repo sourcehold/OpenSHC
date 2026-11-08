@@ -33,7 +33,7 @@ namespace Map {
     void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
     {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallPlacementAtTile, this)(playerID, x, y, mapper);
-        if (this->illegalBuild != FALSE) {
+        if (this->illegalBuild) {
             return;
         }
 
@@ -93,7 +93,7 @@ namespace Map {
         if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
         }
-        this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & ~7 | (char)playerID - 1U;
+        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (playerID - 1);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
             DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);

@@ -37,23 +37,18 @@ namespace Map {
 
         if (brushStep < 28) {
             brushStep = brushStep - 20;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            for (int i = 0; i < 2; i++) {
+                *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+                *yPointer = *yPointer
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            }
         } else if (brushStep < 48) {
             brushStep = brushStep - 40;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            for (int i = 0; i < 3; i++) {
+                *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+                *yPointer = *yPointer
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            }
         }
     }
 
