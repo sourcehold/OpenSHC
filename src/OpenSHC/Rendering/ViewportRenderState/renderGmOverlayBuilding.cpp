@@ -587,15 +587,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite1,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3;
@@ -603,15 +602,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite3,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage2;
@@ -619,15 +617,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage2,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage6;
@@ -635,15 +632,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage6,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2;
@@ -651,15 +647,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite2,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite4;
@@ -667,15 +662,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraAnimationSprite4,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage4;
@@ -683,15 +677,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage4,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage9;
@@ -699,15 +692,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage9,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage1;
@@ -715,15 +707,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage1,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage3;
@@ -731,15 +722,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage3,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage7;
@@ -747,15 +737,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage7,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].overlayImageID;
@@ -763,15 +752,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].overlayImageID,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage5;
@@ -779,15 +767,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage5,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage8;
@@ -795,15 +782,14 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage8,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].flagSlot.overlayImage;
@@ -811,30 +797,28 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].flagSlot.overlayImage,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].extraOverlayImage10;
                     if ((iVar9 != 0) && (iVar6 == 15)) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS, iVar9,
-                            (int)((xUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                              .width
-                                          / 2)
-                                + 15),
-                            (int)((yUnk
-                                      - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
-                                          .height)
-                                - 5),
+                            (xUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1].width
+                                    / 2)
+                                + 15,
+                            (yUnk
+                                - DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[28] + iVar9 - 1]
+                                    .height)
+                                - 5,
                             frame);
                     }
                     break;

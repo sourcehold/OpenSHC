@@ -312,8 +312,8 @@ namespace Rendering {
                                                           + DAT_GameState::instance.mapAndTime.totalGameTicksUnk)
                                 % 64;
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL,
-                                (int)(animationTick / 2 + 1), overlayX, overlayY);
+                                DAT_TextureRenderCoreObject::ptr)(
+                                OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL, animationTick / 2 + 1, overlayX, overlayY);
                         }
                     }
                     if (*this->viewportState.ptrColor != COL_MAGENTA::instance.ushortValue) {
@@ -369,19 +369,19 @@ namespace Rendering {
                                     unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK
                                         || (unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL))))) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2,
-                                (int)(447), maskImageID + 2,
-                                DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 27 + _drawY, 16);
+                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 447,
+                                maskImageID + 2, DAT_UnitsState::instance.units[_unitID].someDrawYOffset - 27 + _drawY,
+                                16);
                         }
                     }
                     savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6e;
                     if (savedPixelColor != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                            (int)(savedPixelColor + 212), DAT_UnitsState::instance.units[_unitID].drawX,
-                            (int)(DAT_UnitsState::instance.units[_unitID].drawY - 54
-                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset),
-                            OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(savedPixelColor + 220), 0);
+                            savedPixelColor + 212, DAT_UnitsState::instance.units[_unitID].drawX,
+                            DAT_UnitsState::instance.units[_unitID].drawY - 54
+                                + DAT_UnitsState::instance.units[_unitID].someDrawYOffset,
+                            OpenSHC::IO::Graphics::GID_FLOATS_NEW, savedPixelColor + 220, 0);
                         DAT_UnitsState::instance.units[_unitID].field_0x6e = 0;
                     }
                     savedPixelColor = DAT_UnitsState::instance.units[_unitID].field_0x6c;

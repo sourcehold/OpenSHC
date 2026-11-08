@@ -825,10 +825,10 @@ namespace Rendering {
                                         DAT_TextureRenderCoreObject::ptr)(DAT_RenderMap_DrawSomeX::instance,
                                         (int)(((iVar26 - uVar32) - _yOffset_01) + DAT_00ed3154::instance + 98
                                             + DAT_RenderMap_DrawSomeY::instance),
-                                        (int)(DAT_GMImageHeaders::instance
-                                                .imh[DAT_GmImageAddressToBeRendered::instance
-                                                    + GMFirstPictureIndex::instance[54] - 1]
-                                                .width),
+                                        DAT_GMImageHeaders::instance
+                                            .imh[DAT_GmImageAddressToBeRendered::instance
+                                                + GMFirstPictureIndex::instance[54] - 1]
+                                            .width,
                                         _yOffset_01 - iVar26,
                                         (ushort*)((int)(
 
@@ -1111,8 +1111,8 @@ namespace Rendering {
                                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                           renderUnitAnimationWithBlendingUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(sVar30,
-                                                        (int)((int)(DAT_UnitsState::instance.units[unitID].field_0x86
-                                                            + sVar20)),
+                                                        (int)(DAT_UnitsState::instance.units[unitID].field_0x86
+                                                            + sVar20),
                                                         sVar5,
                                                         (int)(DAT_UnitsState::instance.units[unitID].drawHeight1
                                                             - local_c),
@@ -1134,8 +1134,7 @@ namespace Rendering {
                                                                 renderUnitAnimationWithBlendingUnk,
                                                             DAT_TextureRenderCoreObject::ptr)(
                                                             DAT_UnitsState::instance.units[unitID].drawX,
-                                                            (int)(sVar20
-                                                                + DAT_UnitsState::instance.units[unitID].drawY),
+                                                            sVar20 + DAT_UnitsState::instance.units[unitID].drawY,
                                                             DAT_UnitsState::instance.units[unitID].drawWidth,
                                                             DAT_UnitsState::instance.units[unitID].drawHeight1
                                                                 - _yOffset_01,
@@ -1169,8 +1168,8 @@ namespace Rendering {
                                                                           renderUnitAnimationUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(
                                                         DAT_UnitsState::instance.units[unitID].drawX,
-                                                        (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        (int)(DAT_UnitsState::instance.units[unitID].drawWidth),
+                                                        sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
+                                                        DAT_UnitsState::instance.units[unitID].drawWidth,
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1
                                                             - _yOffset_01,
                                                         (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1196,8 +1195,7 @@ namespace Rendering {
                                                                     renderUnitAnimationUnk,
                                                                 DAT_TextureRenderCoreObject::ptr)(
                                                                 DAT_UnitsState::instance.units[unitID].drawX,
-                                                                (int)(sVar30
-                                                                    + DAT_UnitsState::instance.units[unitID].drawY),
+                                                                sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
                                                                 DAT_UnitsState::instance.units[unitID].drawWidth,
                                                                 DAT_UnitsState::instance.units[unitID].drawHeight1
                                                                     - iVar26,
@@ -1225,8 +1223,7 @@ namespace Rendering {
                                                                     renderUnitAnimationUnk,
                                                                 DAT_TextureRenderCoreObject::ptr)(
                                                                 DAT_UnitsState::instance.units[unitID].drawX,
-                                                                (int)(sVar30
-                                                                    + DAT_UnitsState::instance.units[unitID].drawY),
+                                                                sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
                                                                 DAT_UnitsState::instance.units[unitID].drawWidth,
                                                                 DAT_UnitsState::instance.units[unitID].drawHeight1
                                                                     - iVar26,
@@ -1350,7 +1347,7 @@ namespace Rendering {
                                                         DAT_TextureRenderCoreObject::ptr)(
                                                         DAT_UnitsState::instance.units[unitID].drawX,
                                                         DAT_UnitsState::instance.units[unitID].drawY,
-                                                        (int)(DAT_UnitsState::instance.units[unitID].drawWidth),
+                                                        DAT_UnitsState::instance.units[unitID].drawWidth,
                                                         (int)((
                                                             int)(DAT_UnitsState::instance.units[unitID].drawHeight1)),
                                                         (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1447,8 +1444,8 @@ namespace Rendering {
                                                             OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 447,
                                                             DAT_UnitsState::instance.units[unitID].drawX + 2
                                                                 + _yOffset_01,
-                                                            (int)(DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                                - 27 + DAT_UnitsState::instance.units[unitID].drawY),
+                                                            DAT_UnitsState::instance.units[unitID].someDrawYOffset - 27
+                                                                + DAT_UnitsState::instance.units[unitID].drawY,
                                                             16);
                                                     }
                                                 }
@@ -1458,11 +1455,11 @@ namespace Rendering {
                                                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                           renderGMWithAlphaMask,
                                                         DAT_TextureRenderCoreObject::ptr)(
-                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 212),
+                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, sVar30 + 212,
                                                         DAT_UnitsState::instance.units[unitID].drawX,
-                                                        (int)(DAT_UnitsState::instance.units[unitID].someDrawYOffset
-                                                            - 54 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(sVar30 + 220), 0);
+                                                        DAT_UnitsState::instance.units[unitID].someDrawYOffset - 54
+                                                            + DAT_UnitsState::instance.units[unitID].drawY,
+                                                        OpenSHC::IO::Graphics::GID_FLOATS_NEW, sVar30 + 220, 0);
                                                     DAT_UnitsState::instance.units[unitID].field_0x6e = 0;
                                                 }
                                                 sVar30 = DAT_UnitsState::instance.units[unitID].field_0x6c;
@@ -1584,8 +1581,7 @@ namespace Rendering {
                                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
                                                                       renderUnitAnimationWithBlendingUnk,
                                                     DAT_TextureRenderCoreObject::ptr)(sVar30,
-                                                    (int)(DAT_UnitsState::instance.units[unitID].field_0x86 + sVar20),
-                                                    sVar5,
+                                                    DAT_UnitsState::instance.units[unitID].field_0x86 + sVar20, sVar5,
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - local_14,
                                                     (byte*)((
                                                         int)((DAT_GMImageOffsets::instance[_yOffset_01 - 1 + iVar18]
@@ -1604,8 +1600,8 @@ namespace Rendering {
                                                                           renderUnitAnimationWithBlendingUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(
                                                         DAT_UnitsState::instance.units[unitID].drawX,
-                                                        (int)(sVar20 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        (int)(DAT_UnitsState::instance.units[unitID].drawWidth),
+                                                        sVar20 + DAT_UnitsState::instance.units[unitID].drawY,
+                                                        DAT_UnitsState::instance.units[unitID].drawWidth,
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1
                                                             - _yOffset_01,
                                                         (byte*)((
@@ -1631,7 +1627,7 @@ namespace Rendering {
                                                                       renderUnitAnimationUnk,
                                                     DAT_TextureRenderCoreObject::ptr)(
                                                     DAT_UnitsState::instance.units[unitID].drawX,
-                                                    (int)((int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY)),
+                                                    (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
                                                     DAT_UnitsState::instance.units[unitID].drawWidth,
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - _yOffset_01,
                                                     (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1647,7 +1643,7 @@ namespace Rendering {
                                                                       renderUnitAnimationWithBlendingUnk,
                                                     DAT_TextureRenderCoreObject::ptr)(
                                                     DAT_UnitsState::instance.units[unitID].drawX,
-                                                    (int)((int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY)),
+                                                    (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
                                                     DAT_UnitsState::instance.units[unitID].drawWidth,
                                                     DAT_UnitsState::instance.units[unitID].drawHeight1 - _yOffset_01,
                                                     (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
@@ -1673,8 +1669,8 @@ namespace Rendering {
                                                                           renderUnitAnimationUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(
                                                         DAT_UnitsState::instance.units[unitID].drawX,
-                                                        (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        (int)(DAT_UnitsState::instance.units[unitID].drawWidth),
+                                                        sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
+                                                        DAT_UnitsState::instance.units[unitID].drawWidth,
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1 - iVar26,
                                                         (byte*)((
                                                             int)((DAT_GMImageOffsets::instance
@@ -1698,8 +1694,8 @@ namespace Rendering {
                                                                           renderUnitAnimationUnk,
                                                         DAT_TextureRenderCoreObject::ptr)(
                                                         DAT_UnitsState::instance.units[unitID].drawX,
-                                                        (int)(sVar30 + DAT_UnitsState::instance.units[unitID].drawY),
-                                                        (int)(DAT_UnitsState::instance.units[unitID].drawWidth),
+                                                        sVar30 + DAT_UnitsState::instance.units[unitID].drawY,
+                                                        DAT_UnitsState::instance.units[unitID].drawWidth,
                                                         DAT_UnitsState::instance.units[unitID].drawHeight1 - iVar26,
                                                         (byte*)((
                                                             int)((DAT_GMImageOffsets::instance
@@ -1963,7 +1959,7 @@ namespace Rendering {
                                                   - iVar26)
                                             + DAT_RenderMap_DrawSomeY::instance),
                                         (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)),
-                                        DAT_EntityState::instance.entityArray[entityID].imageID, (int)(-1 - sVar30));
+                                        DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
                                     _yOffset_01 = DAT_RenderMap_YOffset::instance;
                                 } else {
                                     _yOffset_01 = DAT_EntityState::instance.entityArray[entityID].originY;
@@ -2048,8 +2044,7 @@ namespace Rendering {
                                                       - iVar18)
                                                 + DAT_RenderMap_DrawSomeY::instance),
                                             (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)),
-                                            DAT_EntityState::instance.entityArray[entityID].imageID,
-                                            (int)(-1 - sVar30));
+                                            DAT_EntityState::instance.entityArray[entityID].imageID, -1 - sVar30);
                                     } else {
                                         iVar27 = DAT_EntityState::instance.entityArray[entityID].originY;
                                         if (sVar30 == 0) {
@@ -2430,7 +2425,7 @@ namespace Rendering {
                             (int)((DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) - 74
                                 + DAT_RenderMap_DrawSomeY::instance),
                             OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                            (int)(DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16), 0);
+                            DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16, 0);
                         *puVar1 = *puVar1 & 0xbfff;
                     }
                     iVar23 = DAT_RenderMap_YOffset::instance;
