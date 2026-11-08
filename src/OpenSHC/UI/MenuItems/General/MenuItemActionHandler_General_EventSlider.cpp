@@ -1,5 +1,7 @@
 #include "../General.func.hpp"
 
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventType.hpp"
+
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 
 namespace OpenSHC {
@@ -60,19 +62,19 @@ namespace UI {
             case -1:
                 switch (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data.scenario.ScenarioEventType) {
-                case 5:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                case 29:
-                case 30:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_TRAVELING_FAIR:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_PLAGUE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_WHEAT_DISEASE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_HOPS_WEEVIL:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_APPLE_BLIGHT:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_TREE_FUNGUS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_RABBIT_EXPLOSION:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_LION_ATTACK:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_BANDITS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_MAD_COWS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_ARCHERS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_THEFT_FROM_GRANARY:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_FIRE:
                     switch (param_2) {
                     case 1:
                         *minValue = 0;
@@ -115,19 +117,19 @@ namespace UI {
             case -2:
                 switch (DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data.scenario.ScenarioEventType) {
-                case 5:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                case 29:
-                case 30:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_TRAVELING_FAIR:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_PLAGUE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_WHEAT_DISEASE:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_HOPS_WEEVIL:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_APPLE_BLIGHT:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_TREE_FUNGUS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_RABBIT_EXPLOSION:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_LION_ATTACK:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_BANDITS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_MAD_COWS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_ARCHERS:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_THEFT_FROM_GRANARY:
+                case OpenSHC::Game::ScenarioEvents::Enums::SET_FIRE:
                     switch (param_2) {
                     case 1:
                         *minValue = 1;

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
@@ -81,7 +82,9 @@ namespace UI {
                     int const newType = DAT_MapPropertiesState::instance
                                             .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                                             .data.scenario.ScenarioEventType;
-                    if (newType == 2 || newType == 26 || newType == 27) {
+                    if (newType == OpenSHC::Game::ScenarioEvents::Enums::SET_MESSAGE
+                        || newType == OpenSHC::Game::ScenarioEvents::Enums::SET_WIN_AND_MESSAGE
+                        || newType == OpenSHC::Game::ScenarioEvents::Enums::SET_LOSE_AND_MESSAGE) {
                         DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                             .data.scenario.actionData = -1;
                     }
