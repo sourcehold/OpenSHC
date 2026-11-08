@@ -13,15 +13,19 @@ namespace Map {
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
             // continue from is stored in padding_0x2fc
-            // Matching note: start and buildingID * 0xcb swap ebx/ebp. MSVC ranks start (key -70) just below that
-            // temporary (-66) and no source form tried (declaration order, ternary, if/else, loop forms, references,
-            // this vs global) moves the gap, so the remaining difference is register naming only
+            // Matching note: i is set in both arms rather than in the for. With i = 0 in the loop preheader, the
+            // buildingID * 0xcb temporary (key -66) outranks start (-70) and takes ebx; out of the preheader the
+            // temporary drops to -78, start rises to -66 and both land in the original's registers
             int start = 0;
             int unchangedLeft = 3;
+            int i;
             if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                 start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
+                i = 0;
+            } else {
+                i = 0;
             }
-            for (int i = 0; i < 24; ++i) {
+            for (; i < 24; ++i) {
                 int tile = (&this->buildings[buildingID].tileRefs[0])[(i + start) % 24];
                 char stage = DAT_TileMapState::instance.DamageLayer[tile];
                 int frame;
