@@ -31,12 +31,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004224F0
         void BuildingsState::updateGateDrawBridgeOpenCloseLogic()
         {
-            // Updates the gatehouse DAT_CurrentBuildingID: capturing by enemy troops and opening/closing for its owner
-            //
-            // Matching note: the original does not reload DAT_CurrentBuildingID after
-            // applyGateOrDrawbridgeOpenCloseChange (presumably /GL knowledge of the callee), it packs the new
-            // controller into the defender's stack slot rather than t's, and a few registers inside the flag loops and
-            // the distance test are named differently.
+            // Updates the gatehouse DAT_CurrentBuildingID: capturing by enemy troops and opening/closing for its owner.
+            // DAT_CurrentBuildingID is not reloaded after applyGateOrDrawbridgeOpenCloseChange, which needs /GL
+            // (cmake/compiler-flags-gl.txt) together with the callee chain findParticularBuilding and
+            // setupBuildingEntrancesOffset.
             int gateX = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x;
             int gateMicroX = gateX * 8;
             int gateY = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
@@ -93,11 +91,10 @@ namespace Map {
                                 == OpenSHC::Map::Entities::ET_FLAG_3) {
                             flagEntityID = entityID;
                         }
-                        int const next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
-                        if (entityID == next) {
+                        if (entityID == DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID) {
                             break;
                         }
-                        entityID = next;
+                        entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                     }
                     ++t;
                 } while (t < DAT_TileMapState::instance.constructionTileCount);
@@ -110,22 +107,27 @@ namespace Map {
                         // Defended, the owner keeps or regains control
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2c6 = 0;
                         flagColor = defender;
+                        newController = 0;
                     }
                 } else if (attacker != 0) {
                     // Undefended and attacked, the strongest player captures the gatehouse
                     if (flagEntityID == 0) {
-                        int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
-                        int height
-                            = DAT_TileMapState::instance
-                                  .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                          .currentTilePositionAdjusted]
-                            + 30;
-                        int microY
-                            = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8;
-                        int microX
-                            = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                            DAT_EntityState::ptr)(0, owner, owner, microX, microY, height, microX, microY, height,
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner,
+                            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner,
+                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
+                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
+                            DAT_TileMapState::instance
+                                    .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                            .currentTilePositionAdjusted]
+                                + 30,
+                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x * 8,
+                            (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y * 8,
+                            DAT_TileMapState::instance
+                                    .HeightLayer[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                            .currentTilePositionAdjusted]
+                                + 30,
                             OpenSHC::Map::Entities::ET_FLAG_1, 0);
                     }
                     int strongest = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
@@ -166,11 +168,10 @@ namespace Map {
                                     == OpenSHC::Map::Entities::ET_FLAG_3) {
                                 DAT_EntityState::instance.entityArray[entityID].colorUnk = flagColor;
                             }
-                            int const next = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
-                            if (entityID == next) {
+                            if (entityID == DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID) {
                                 break;
                             }
-                            entityID = next;
+                            entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                         }
                         ++t2;
                     } while (t2 < DAT_TileMapState::instance.constructionTileCount);
@@ -245,15 +246,13 @@ namespace Map {
                 } else {
                     distanceX = DAT_UnitsState::instance.units[enemyID].microXPosition - gateMicroX;
                 }
-                int distance;
+                int distanceY;
                 if (gateMicroY > DAT_UnitsState::instance.units[enemyID].microYPosition) {
-                    distance = gateMicroY - DAT_UnitsState::instance.units[enemyID].microYPosition;
+                    distanceY = gateMicroY - DAT_UnitsState::instance.units[enemyID].microYPosition;
                 } else {
-                    distance = DAT_UnitsState::instance.units[enemyID].microYPosition - gateMicroY;
+                    distanceY = DAT_UnitsState::instance.units[enemyID].microYPosition - gateMicroY;
                 }
-                if (distanceX >= distance) {
-                    distance = distanceX;
-                }
+                int const distance = distanceX >= distanceY ? distanceX : distanceY;
                 if (distance < 200) {
                     enemyNear = true;
                     break;
