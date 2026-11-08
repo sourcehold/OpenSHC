@@ -1691,7 +1691,7 @@ namespace Rendering {
         if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_BUILDERUnk)
             || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != OpenSHC::Map::MT_SIEGE)) {
             if (DAT_BuildingsState::instance.buildings[tileIndex].sleeping) {
-                int const animationTick = ((int)DAT_TileMapState::instance.cursorOverlayAnimationFrame - 1) % 8;
+                int const animationTick = (DAT_TileMapState::instance.cursorOverlayAnimationFrame - 1) % 8;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOAT_POP_CIRC, animationTick + 203,
                     xUnk - 35,

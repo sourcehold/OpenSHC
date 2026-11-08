@@ -69,7 +69,7 @@ namespace Rendering {
                     healthBarYOffset = 30;
                     break;
                 }
-                if ((uint)healthImage <= 10) {
+                if (healthImage >= 0 && healthImage <= 10) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_FLOATS, healthImage + 17, screenX + 4,
                         screenY
@@ -81,7 +81,7 @@ namespace Rendering {
             if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_BUILDERUnk)
                 || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != OpenSHC::Map::MT_SIEGE)) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].sleeping) {
-                    int const animationTick = ((int)DAT_TileMapState::instance.cursorOverlayAnimationFrame - 1) % 8;
+                    int const animationTick = (DAT_TileMapState::instance.cursorOverlayAnimationFrame - 1) % 8;
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOAT_POP_CIRC,
                         animationTick + 203, screenX - 35,
@@ -627,7 +627,7 @@ namespace Rendering {
                     DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance,
                     DAT_BuildingsState::instance.buildings[buildingID].animationFrame,
                     DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
-                    DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY, (int)(blendStrength));
+                    DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY, blendStrength);
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)((eGM)DAT_CurrentlyRenderedSpriteID::instance,

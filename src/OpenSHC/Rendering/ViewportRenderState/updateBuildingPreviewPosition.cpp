@@ -95,7 +95,7 @@ namespace Rendering {
             int minimapTile = this->translationMatrix[mouseYScreenSpace].addXgetTile + mouseXScreenSpace;
             this->viewportState.field_0x48 = 0;
             this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[minimapTile];
-            this->viewportState.field_0x20 = (short)DAT_TileMapState::instance.UnitLayer[minimapTile];
+            this->viewportState.field_0x20 = DAT_TileMapState::instance.UnitLayer[minimapTile];
             this->viewportState.mouseRayEntityID = DAT_TileMapState::instance.EntityLayer[minimapTile];
 
             int minimapGateTile = 0;
@@ -103,7 +103,7 @@ namespace Rendering {
             if (minimapBuildingID <= 0
                 && (DAT_TileMapState::instance.LogicLayer[minimapTile] & Map::LogicHelpers::L_WALL_OR_GATEHOUSE) != 0) {
                 minimapGateTile = minimapTile;
-            } else if ((short)DAT_TileMapState::instance.BuildingLayer[minimapTile] <= 0) {
+            } else if (DAT_TileMapState::instance.BuildingLayer[minimapTile] <= 0) {
                 this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[minimapTile];
             }
             if (0 <= minimapGateTile) {
@@ -174,7 +174,7 @@ namespace Rendering {
         this->viewportState.field_0x14 = DAT_TileMapState::instance.EntityLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
-        this->viewportState.field_0x20 = (short)DAT_TileMapState::instance.UnitLayer[this->viewportState.mouseTile];
+        this->viewportState.field_0x20 = DAT_TileMapState::instance.UnitLayer[this->viewportState.mouseTile];
         this->viewportState.field_0x48 = 0;
 
         if (this->viewportState.mouseRayUnitID != 0) {
@@ -209,7 +209,7 @@ namespace Rendering {
                    & Map::LogicHelpers::L_WALL_OR_GATEHOUSE)
                 != 0) {
             hoveredGateTile = this->viewportState.mouseTile;
-        } else if ((short)DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile] <= 0) {
+        } else if (DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile] <= 0) {
             this->viewportState.field_0x48 = DAT_TileMapState::instance.BuildingWasLayer[this->viewportState.mouseTile];
         }
 

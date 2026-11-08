@@ -9,7 +9,7 @@ namespace Rendering {
         DWORD now = timeGetTime();
 
         this->field_0x18b764 = 0;
-        if ((int)(now - this->previousIntervalTime_04) >= (int)this->interval_04_180) {
+        if ((int)(now - this->previousIntervalTime_04) >= this->interval_04_180) {
             this->previousIntervalTime_04 = now;
             this->field_0x18b764 = 1;
             for (int i = 0; i < 45; i++) {
@@ -17,7 +17,7 @@ namespace Rendering {
             }
         }
 
-        if ((int)(now - this->previousIntervalTime_01) >= (int)this->interval_01_80) {
+        if ((int)(now - this->previousIntervalTime_01) >= this->interval_01_80) {
             this->previousIntervalTime_01 = now;
             this->unknownCounterUntil_0x10 = this->unknownCounterUntil_0x10 + 1;
             if (this->unknownCounterUntil_0x10 >= 16) {
@@ -25,7 +25,7 @@ namespace Rendering {
             }
         }
 
-        if ((int)(now - this->previousIntervalTime_02) >= (int)this->interval_02_100) {
+        if ((int)(now - this->previousIntervalTime_02) >= this->interval_02_100) {
             this->previousIntervalTime_02 = now;
             this->unknownCounterUntil_0x20 = this->unknownCounterUntil_0x20 + 1;
             if (this->unknownCounterUntil_0x20 >= 32) {
@@ -33,7 +33,7 @@ namespace Rendering {
             }
         }
 
-        if ((int)(now - this->previousIntervalTime_03) >= (int)this->interval_03_160) {
+        if ((int)(now - this->previousIntervalTime_03) >= this->interval_03_160) {
             this->previousIntervalTime_03 = now;
             this->unknownCounterUntil_0x24 = this->unknownCounterUntil_0x24 + 1;
             if (this->unknownCounterUntil_0x24 >= 36) {

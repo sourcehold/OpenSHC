@@ -54,13 +54,13 @@ namespace Rendering {
         int screenPixelWidth; // 0x0018B730 length: 4
         int screenPixelHeight; // 0x0018B734 length: 4
         undefined4 field_0x18b738; // 0x0018B738 length: 4
-        undefined4 interval_03_160; // 0x0018B73C length: 4
+        int interval_03_160; // 0x0018B73C length: 4
         undefined4 previousIntervalTime_03; // 0x0018B740 length: 4
-        undefined4 interval_04_180; // 0x0018B744 length: 4
+        int interval_04_180; // 0x0018B744 length: 4
         undefined4 previousIntervalTime_04; // 0x0018B748 length: 4
-        undefined4 interval_01_80; // 0x0018B74C length: 4
+        int interval_01_80; // 0x0018B74C length: 4
         undefined4 previousIntervalTime_01; // 0x0018B750 length: 4
-        undefined4 interval_02_100; // 0x0018B754 length: 4
+        int interval_02_100; // 0x0018B754 length: 4
         undefined4 previousIntervalTime_02; // 0x0018B758 length: 4
         int unknownCounterUntil_0x20; // 0x0018B75C length: 4
         int unknownCounterUntil_0x24; // 0x0018B760 length: 4
