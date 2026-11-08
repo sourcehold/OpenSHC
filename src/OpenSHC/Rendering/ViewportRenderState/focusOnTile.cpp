@@ -21,9 +21,9 @@ namespace Rendering {
 
         int rowLength = 201;
         int tileX = 0;
-        int tileY = 0;
+        int tileY;
         bool found = false;
-        do {
+        for (tileY = 0; tileY < 400; tileY++) {
             rowLength = (rowLength != 201) + 200;
             for (tileX = 0; tileX < rowLength; ++tileX) {
                 if (this->screenPointToTileNumber[screenPointIndex - 8] == tile) {
@@ -35,8 +35,7 @@ namespace Rendering {
             if (found) {
                 break;
             }
-            tileY = tileY + 1;
-        } while (tileY < 400);
+        }
 
         this->viewportState.viewportX = (tileX - this->viewportState.mbr_0xac) * 32;
         this->viewportState.viewportY = (tileY - this->viewportState.mbr_0xb0) * 8;

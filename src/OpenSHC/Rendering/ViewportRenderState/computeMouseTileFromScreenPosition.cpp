@@ -48,6 +48,7 @@ namespace Rendering {
         int probeDoubledY = probeScreenY * 2 + 8;
         int probeOffset = probeScreenY - screenY;
 
+        // a do-while on purpose: the same loop as a for adds an entry test the original does not have (0.88 -> 0.59)
         do {
             if ((DAT_TileMapState::instance.disableElevationRendering != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0)
