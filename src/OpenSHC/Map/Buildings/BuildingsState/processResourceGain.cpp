@@ -21,10 +21,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C310
         BOOLEnum BuildingsState::processResourceGain(int playerID, ResourceType resourceType, int amount)
         {
-            // Matching note: the original loads currentNumberOfResource once and tests it twice (before and after
-            // the resources test) and tests resources >= limit before the inner loop's own space > 0 test; our
-            // compiler drops the repeated test however it is spelled. Testing the space instead of resources >= limit
-            // is equivalent and keeps the storage type in eax as the original does (the >= form moves it to edx).
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getResourceSpace, this)(
                     playerID, resourceType)
                 < amount) {
@@ -53,25 +49,34 @@ namespace Map {
                 return TRUE;
             }
 
-            // Fill up the stockpiles that already store this resource first
+            // One counter for both fill loops: the original keeps them in the same stack slot.
+            int n;
+            // Fill up the stockpiles that already store this resource first. The test is written the way
+            // getResourceSpace tests "can store this resource" (empty, or already holding it), and then skips the
+            // empty ones, which is why the original tests currentNumberOfResource twice.
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID
-                    || this->buildings[i].buildingType != storageType || this->buildings[i].currentNumberOfResource == 0
-                    || this->buildings[i].resources[resourceType] == 0
-                    || DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
-                            - this->buildings[i].resources[resourceType]
-                        <= 0) {
+                    || this->buildings[i].buildingType != storageType) {
                     continue;
                 }
-                int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
-                    - this->buildings[i].resources[resourceType];
-                for (int n = 0; n < space; ++n) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
-                        DAT_BuildingsState::ptr)(i, this->buildings[i].uid, resourceType, 1,
-                        DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType], 1);
-                    --amount;
-                    if (amount <= 0) {
-                        return TRUE;
+                if (this->buildings[i].currentNumberOfResource == 0
+                    || this->buildings[i].resources[resourceType] != 0) {
+                    if (this->buildings[i].currentNumberOfResource == 0) {
+                        continue;
+                    }
+                    if (this->buildings[i].resources[resourceType]
+                        < DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]) {
+                        int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
+                            - this->buildings[i].resources[resourceType];
+                        for (n = 0; n < space; ++n) {
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
+                                DAT_BuildingsState::ptr)(i, this->buildings[i].uid, resourceType, 1,
+                                DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType], 1);
+                            --amount;
+                            if (amount <= 0) {
+                                return TRUE;
+                            }
+                        }
                     }
                 }
             }
@@ -84,7 +89,7 @@ namespace Map {
                 }
                 int space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]
                     - this->buildings[i].resources[resourceType];
-                for (int n = 0; n < space; ++n) {
+                for (n = 0; n < space; ++n) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::addResourceToStockpile,
                         DAT_BuildingsState::ptr)(i, this->buildings[i].uid, resourceType, 1,
                         DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType], 1);
