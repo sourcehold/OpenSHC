@@ -99,7 +99,9 @@ def orig(va):
 
 
 def ours(f, cls, name):
-    cmd = base['command']
+    # /GL defers code generation to the link, which leaves /FA with no code, so the base command
+    # must not carry it (it does whenever the first list file is in cmake/compiler-flags-gl.txt)
+    cmd = re.sub(r' /GL(?=\s)', '', base['command'])
     cmd = re.sub(r'/Fo\S+', lambda m: '/Fo' + out + '/x.obj /FA /Fa' + out + '/x.asm', cmd)
     cmd = re.sub(r'-c \S+$', lambda m: '-c ' + f, cmd)
     r = subprocess.run(cmd, cwd=base['directory'], env=ENV, capture_output=True, text=True)
