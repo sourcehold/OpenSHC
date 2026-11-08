@@ -120,7 +120,7 @@ namespace UI {
                     (undefined*)&DAT_MapPropertiesState::instance
                         .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                         .data,
-                    (void*)MACRO_CALL(UI::Helpers_Func::CaptureCurrentTimeToUnknownTime01));
+                    MACRO_CALL(UI::Helpers_Func::CaptureCurrentTimeToUnknownTime01));
                 DAT_MapPropertiesState::instance.sliderPopupDelay = 2;
                 DAT_MapPropertiesState::instance.sliderPopupX = DAT_ButtonX::instance + 58;
                 DAT_MapPropertiesState::instance.sliderPopupY = DAT_ButtonY::instance + 28;
