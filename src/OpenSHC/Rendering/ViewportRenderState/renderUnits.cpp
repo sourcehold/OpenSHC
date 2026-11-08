@@ -11,7 +11,7 @@
 
 #include "OpenSHC/Globals/COL_MAGENTA.hpp"
 #include "OpenSHC/Globals/DAT_CurrentlyRenderedSpriteID.hpp"
-#include "OpenSHC/Globals/DAT_GMImageSizes.hpp"
+#include "OpenSHC/Globals/DAT_GMImageOffsets.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_RenderedUnitOwner.hpp"
@@ -181,22 +181,20 @@ namespace Rendering {
                             MACRO_CALL_MEMBER(
                                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                                 DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
-                                (byte*)((
-                                    int)((DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
-                                                                         int)DAT_CurrentlyRenderedSpriteID::instance]
-                                              + overlayX + 0x1c51f]
-                                    + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
+                                DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                    + DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[(
+                                                                       int)DAT_CurrentlyRenderedSpriteID::instance]
+                                        + overlayX - 1],
                                 (0x10 - overlayY) * 2);
                             graphicSize = DAT_UnitsState::instance.units[_unitID].drawYOffset;
                             if (graphicSize != 0) {
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
-                                    (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
-                                                                       int)DAT_CurrentlyRenderedSpriteID::instance]
-                                            + (int)graphicSize + 0x1c51f]
-                                        + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
+                                    DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                        + DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[(
+                                                                           int)DAT_CurrentlyRenderedSpriteID::instance]
+                                            + (int)graphicSize - 1],
                                     0x20 - overlayY);
                             }
                         }
@@ -234,11 +232,10 @@ namespace Rendering {
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, graphicSize + _drawY, _imageID,
                                     _blendStrength - overlayY,
-                                    (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
-                                                                       int)DAT_CurrentlyRenderedSpriteID::instance]
-                                            + overlayX + 0x1c51f]
-                                        + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
+                                    DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                        + DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[(
+                                                                           int)DAT_CurrentlyRenderedSpriteID::instance]
+                                            + overlayX - 1]);
                             }
                         }
                         if (2 < DAT_UnitsState::instance.units[_unitID].graphicSize) {
@@ -254,11 +251,10 @@ namespace Rendering {
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk,
                                     DAT_TextureRenderCoreObject::ptr)(_drawX, graphicSize + _drawY, _imageID,
                                     _blendStrength - overlayY,
-                                    (byte*)((int)((
-                                        DAT_GMImageSizes::instance[GMFirstPictureIndex::instance[(
-                                                                       int)DAT_CurrentlyRenderedSpriteID::instance]
-                                            + overlayX + 0x1c51f]
-                                        + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
+                                    DAT_TextureRenderCoreObject::instance.gmProcessedImageData
+                                        + DAT_GMImageOffsets::instance[GMFirstPictureIndex::instance[(
+                                                                           int)DAT_CurrentlyRenderedSpriteID::instance]
+                                            + overlayX - 1]);
                             }
                             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                                 unitType = DAT_UnitsState::instance.units[_unitID].unitType;
