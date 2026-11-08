@@ -18,10 +18,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00422C60
         void BuildingsState::spreadFireRandomlyToBuildings(int param_1, int param_2)
         {
-            // Matching note: the original keeps the building pointer in edx across getBuildingFlammabilityFactor and
-            // does not reload maxBuildingsCount after it (built with /GL, which this file is not); the rest is
-            // register naming that follows from that.
             // Sets param_2 random buildings of player param_1 on fire. Very flammable buildings are 5 times as likely.
+            // weight is zeroed before the guard: the original compares the campground id against its register
+            int weight = 0;
             if (param_2 < 1
                 || DAT_GameState::instance.playerDataArray[param_1]
                         .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
@@ -30,7 +29,6 @@ namespace Map {
                 return;
             }
 
-            int weight = 0;
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
                     || this->buildings[i].owner != param_1 || this->buildings[i].fireDuration != 0
