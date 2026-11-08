@@ -30,17 +30,14 @@ namespace Map {
         int UnitsState::euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int param_4)
         {
             this->euroUnitAcquisitionFailReason = 0;
-            int _unitCost = DAT_TroopDefinedData::instance.BarracksUnitCost[unitType - UT_E_ARCHER];
-            int _armourResource
-                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][1];
-            /* fixme: always 0 strange */
-            int _unknownResource
-                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][2];
+            int const troopIndex = unitType - UT_E_ARCHER;
+            int _unitCost = DAT_TroopDefinedData::instance.BarracksUnitCost[troopIndex];
             /* bug: a unitType below UT_E_ARCHER reads in front of the table, unitType 0 requires wood */
-            int _weaponResource
-                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][0];
-            int _horseResource
-                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[unitType - UT_E_ARCHER][3];
+            int _weaponResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][0];
+            int _armourResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][1];
+            /* fixme: always 0 strange */
+            int _unknownResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][2];
+            int _horseResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][3];
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                 _unitCost = 0;
