@@ -25,6 +25,8 @@ namespace Map {
         void BuildingsState::processPlacementResourceLossForBuildingType(
             int playerID, BuildingType buildingType, int param_3)
         {
+            // Matching note: the original reads gameMode_2 once into ebx and compares that register again after the
+            // woodcutter call, which needs LTCG to know the callee leaves it alone; without it ebx and ebp swap roles
             if (DAT_GameCore::instance.solitaryAllBuildingsAreFree != FALSE
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
                 return;
@@ -68,8 +70,8 @@ namespace Map {
                 return;
             }
 
-            int stone = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4;
             int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
+            int stone = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4;
             int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8;
             int pitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc;
             int gold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold;
