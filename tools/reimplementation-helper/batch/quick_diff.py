@@ -103,6 +103,11 @@ def ours(f, cls, name):
     # must not carry it (it does whenever the first list file is in cmake/compiler-flags-gl.txt)
     cmd = re.sub(r' /GL(?=\s)', '', base['command'])
     cmd = re.sub(r'/Fo\S+', lambda m: '/Fo' + out + '/x.obj /FA /Fa' + out + '/x.asm', cmd)
+    # QD_OWN_PDB: compile without the precompiled header and into a PDB of our own, so that a run can
+    # overlap a build (both would otherwise write the target's vc80.pdb, C1033). Slower by the pch.
+    if os.environ.get('QD_OWN_PDB'):
+        cmd = re.sub(r' /Y[uc]\S+| /Fp\S+', '', cmd)
+        cmd = re.sub(r'/Fd\S+', lambda m: '/Fd' + out + '/x.pdb', cmd)
     cmd = re.sub(r'-c \S+$', lambda m: '-c ' + f, cmd)
     r = subprocess.run(cmd, cwd=base['directory'], env=ENV, capture_output=True, text=True)
     if r.returncode:
