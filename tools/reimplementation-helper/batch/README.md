@@ -13,7 +13,8 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | Script | Purpose |
 |---|---|
 | `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
-| `syntax_check.py [substr...]` | `cl /Zs` every (matching) list file serially; finds all compile errors in one pass without linking. |
+| `build_parallel.py [-j N] [--no-link] [--dry-run] [filter...]` | The same build with the object compiles run `-j` at a time, then `build_quiet.py` for the link and the verdict. nmake has no `-j`, so a whole-list build otherwise compiles one file on one core: the 1138 object compiles take ~38 minutes at `-j 4` on four cores, against ~2.4 objects a minute serially (~7.5 hours for the same set); ~50 minutes for a full run including the LTCG link. Replays nmake's own command per object, so it is the same compiler, flags and response file; see the note below before changing it. |
+| `syntax_check.py [-j N] [substr...]` | `cl /Zs` every (matching) list file, `-j` at a time; finds all compile errors in one pass without linking, and far cheaper than compiling (20 files of `AI/AICState`: 47s at `-j 4`, 134s serially, 676s to actually compile at `-j 4`). |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
 | `orig_asm.py NAME [--both\|--stats]` | The **original** instruction stream of one function (not the interleaved diff), in address order; `--stats` reports the tells that decide how to reimplement it: `mov reg, 0` (handwritten asm), frame pointer, frame size, jump tables. |
 | `show_functions.py PREFIX [--skip-100]` | Print function bodies under `src/OpenSHC/PREFIX` with their percentages, in the block format `splice_functions.py` reads. |
@@ -22,6 +23,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `enable_local_functions.py [--disable]` | Set the `MACRO_FUNCTION_RESOLVER` flag to `true` for exactly the .cpp files in the build list, so calls between them land in our own code. `/GL` buys nothing without this - LTCG cannot see a callee it does not compile (`getSalesPrice` 68.4% -> 100%). The repository-wide `Enable-Reimplemented-Functions.ps1` flips every resolver that has a .cpp anywhere in the tree, which does not link while the list is a subset. Never committed, like the `Globals` flags. |
 | `fix_func_refs.py [--drop-include H]` | After a header refactor: rewrite `X_Func::name` references whose resolver moved to another namespace. |
 | `move_to_resolver_namespace.py FILE...` | After a header refactor: re-wrap a definition in its resolver's new namespace and `git mv` it to the matching folder. |
+| `refactor_struct_fields.py ERRORS.txt [--dry-run] [--window N]` | After a Ghidra sync renamed struct fields: read a `syntax_check.py` log and rename every `C2039` field to whatever now sits at that offset. The offset comes from the old name (`field10_0x49d4b4`), or, for a named field, from `git rev-list --all` over the header. One pass fixed 483 uses in 119 files after the November 2026 sync. Re-run it until `syntax_check.py` is clean: cl stops a file at `C1903`, so later uses in the same file are only reported on the next pass. |
 
 Analysis helpers, for deciding *what* to change when a function is stuck below 100%:
 
@@ -36,6 +38,7 @@ functions and the traps - is in [../../compiler-internals/finding-mismatches.md]
 | `slot_map.py FILE.cpp [--orig-only] [--refs]` | Compares the function's **stack frame** against the original's, with no reccmp run. Ours is read from MSVC's `/FA` slot table; the original's is inferred from its disassembly by propagating `esp` depth over the control-flow graph, which needs each callee's `ret N` since a `__thiscall` callee pops its own arguments invisibly. Prints both layouts side by side with each slot's offset, size, reference count and the `weight * 1000 / size` key `StkColorCmp` sorts on, and pads the shorter column at the front so a missing local shows up as one `?` row rather than shifting everything. Validated on the AICState build list: 55 of 60 frames exact, including every function already at 100%. A frame that is too small is strong evidence of a missing local - this is what found the two locals `renderDebugDataAiInfo` was missing. Warns instead of guessing when depth tracking cannot be trusted (indirect call, unreached block, conflicting join). |
 | `structural_diff.py [NAME] [--all] [--score]` | Scores a function by **structure** instead of match percentage, in three tiers: `kind` (bare mnemonic sequence, every operand stripped), `shape` (operands with registers and constants anonymised) and `skel` (only register NAMES anonymised) and `raw` (reccmp). It also reports WHERE each kind of difference starts: when the first register difference sits at or after the first structural one, the register names are an effect of that mix defect and will follow once it is fixed, and a substitution set that closes into a cycle (`eax -> edx -> ecx -> eax`) is the signature - the allocation is right and the scratch registers were handed out in a different order. It **detects hoisted duplicates**: when MSVC lifts an expression out of both arms of an `if`/`else` and the original did not, the mix delta reads as one missing copy of each mnemonic in the run (`add -1, mov -1, push -1`), which looks like three unrelated missing instructions and is really one missing duplicate of `mov reg, [reg + G]; add reg, 1; push reg`. Counting occurrences with registers anonymised names it outright and says which way to fix it - that signal was worth 67.5% -> 83.6% on `renderDebugDataAiInfo`. It fires on 4 of 60 AICState functions and is silent once fixed. `delta` counts the per-mnemonic mismatches, so it names defects rather than giving a ratio - "we emit two `xor` the original does not". `--all` ranks the build list into three verdicts: `mix` (wrong instruction mix, where source work pays), `order` (right mix, wrong order - statement order, which is what took the sixteen `setAICParameters_NN` to 100%) and `allocation` (same instructions in the same order; the gap is register naming, so leave it alone). Use it before picking a target: the percentage is dominated by allocation and can rank a structurally wrong function above a structurally perfect one. |
 | `diff_slots.py NAME` | Every `[esp + N]` slot with its access count on each side, and the slots only we use. Run after `diff_triage.py` reports `FRAME`. |
+| `slotpair.py FILE.cpp` | The original-to-ours stack-slot permutation, for when `diff_slots.py` shows the same slot *count* on both sides but a different access count per slot - the locals are then right and only their order is wrong. Tracking `esp` from the entry drifts wherever a `__stdcall` or `__thiscall` callee pops its arguments; this instead uses the fact that at an aligned `-`/`+` pair the depth is equal on both sides, so the difference of the two `[esp + N]` displacements is the difference of the slot offsets. `+4` on one pair and `-4` on another is two adjacent slots exchanged. A displacement only names a slot relative to a depth, so one displacement can appear in two pairs with different deltas; each is correct at its own site. Fix a tie with `perm_decls.py` - and note that the colorer sorts by reference weight per byte and leaves only *ties* to declaration order, so where the weights differ no permutation will move those slots (`applyAIV` is the negative case: slots permuted by +-4 and +-8, thirteen variants all tie-or-worse). |
 | `diff_jcc.py [NAME]` | Comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`, `ja`/`jae`) or whose `cmp` operands are the other way round, with context. |
 | `diff_types.py [--run] [NAME]` | The non-comparison counterpart of `diff_jcc.py`: `movsx` against `movzx` for the same field (its signedness is wrong in the generated header), `add` against `sub` with the same magnitude (a sign error in a formula - how `2400/n + 40` was caught being `- 40`). It pairs only equal-length runs inside one reccmp block, so it stays quiet once the streams drift: it reports nothing across the 101 functions of `Game::GameStateStructures` and fires on both bugs when they are reintroduced. |
 | `diff_anchor.py [--run] [NAME]` | Functions whose struct/loop base anchor differs from the original's (`lea esi, [ecx + 0x367e4]` against a different constant). Every displacement in the function then differs while the opcodes still line up, which reads as allocator noise - it is the whole gap between 83.7% and 61.7% on `processFoodConsumption`. The delta is the distance between the two fields MSVC chose; the decompilation names the original's as the pointer it starts the loop with. |
@@ -81,14 +84,48 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `docount.py [filter] [--apply]` | Counted `i = 0; do { ... i = i + 1; } while (i < N);` -> `for (int i = 0; i < N; i = i + 1)`. Only when the counter is stepped by the last statement, written nowhere else, and not read after the loop. |
 | `early_return.py [filter] [--apply]` | Turn a function whose body is one big `if (bounds guard) { ... } return X;` into `if (!guard) { return X; } ...`. Inverts a top-level `&&` chain of simple comparisons by De Morgan and bails on anything else. Measured code-generation neutral across 20 functions; it is a readability change. |
 
+## Building in parallel (`build_parallel.py`)
+
+Use it wherever `build_quiet.py` is used; it ends with the same `BUILD_OK`/`BUILD_FAIL`
+line and the same exit code, because it finishes by calling it. It pays off on a whole-list
+build or a wide batch and is pointless for one or two files, where the serial build is
+already only as slow as those files.
+
+It is **not** a second build system, and the reason it can be trusted is that it does not
+try to be one:
+
+- every object is compiled by the command `build.make` holds for it - the same `cl.exe`,
+  the same response-file body expanded from `flags.make`, and the same
+  `cmake -E cmake_cl_compile_depends` wrapper, so the `.obj` *and* its `.obj.d` land where
+  nmake expects them;
+- the precompiled header is built first and on its own, since every other object reads it;
+- `build_quiet.py` then runs a normal incremental build, which picks up anything the script
+  skipped or could not do (the `.asm`, the link) and has the last word on success.
+
+Two things to keep in mind when touching it:
+
+- **The PDB is shared.** Every object of a target writes one `vcNN.pdb` through `/Fd`, and
+  that is only safe because `mspdbsrv.exe` serialises the writers. It is a singleton keyed
+  on `_MSPDBSRV_ENDPOINT_`, so all jobs run on this worktree's endpoint from
+  `common.build_env` - the same one `build.bat` derives. This is how `cl /MP` works. Giving
+  the jobs separate endpoints would make them race on the PDB.
+- **Staleness is decided per object** from the source, `flags.make`, the `.pch` and the
+  headers recorded in the `.obj.d`, and anything unresolvable counts as out of date. Being
+  wrong in that direction only costs a recompile nmake would have skipped; being wrong the
+  other way would ship a stale object, which the handover in step 4 is there to catch.
+
+Under wine, set `WINEPREFIX` and put a Windows `cmake.exe` on `WINEPATH` - `cmakew` needs
+it to configure, exactly as it does for `build.bat`. The compiler is invoked directly rather
+than through `cmd`, so no shell quoting is involved.
+
 ## Typical loop
 
 ```sh
-python build_quiet.py && python reccmp_report.py --run save base.json   # baseline
+python build_parallel.py -j 8 && python reccmp_report.py --run save base.json   # baseline
 python show_functions.py Map/Units > work.txt                            # edit the bodies in work.txt
 python splice_functions.py work.txt
 python syntax_check.py Map/Units
-python build_quiet.py && python reccmp_report.py --run cmp base.json Map/Units
+python build_parallel.py -j 8 && python reccmp_report.py --run cmp base.json Map/Units
 python reccmp_report.py diff someFunction                                # inspect what still differs
 python commit_progress_batch.py Map/Units "someFunction=LTCG ecx reuse"
 ```

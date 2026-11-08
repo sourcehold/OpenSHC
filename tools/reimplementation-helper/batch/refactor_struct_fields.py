@@ -17,7 +17,21 @@ quick_field_re = re.compile("field[0-9A-Za-z]+_0x([0-9A-Za-z]+)")
 
 target_structure_re = re.compile(".*is not a member of '([^' ]+)'")
 
+cast_before_field_re = lambda field_name: re.compile(f"[*][(][^)]*[*][)][^;]*[.>]{field_name}")
+
 field_offset_extractor_re_factory = lambda field_name: re.compile(f"{field_name}(?:\\[[^; ]+)*; // 0x([0-9A-Za-z]+) length: [0-9]+")
+
+# How far from the line cl reports to look for the field name; see Error2039Line.solve.
+WINDOW = 6
+
+
+def offsets(window):
+  """0, -1, +1, -2, +2, ... up to +-window: nearest the reported line first."""
+  yield 0
+  for distance in range(1, window + 1):
+    yield -distance
+    yield distance
+
 
 directory_variants = {"src/OpenSHC/Audio/MSS/": "src/OpenSHC/Audio/mss/"}
 directory_variants_alternative = {}
@@ -31,7 +45,7 @@ class LookupQuery:
   target_structure: str
   target_path: str  
 
-database: Dict[LookupQuery, str] = {}
+database: Dict[LookupQuery, tuple] = {}  # query -> (new name, is array)
 
 @dataclass(frozen=True)
 class Error2039Line:
@@ -41,26 +55,42 @@ class Error2039Line:
   target_structure: str
   target_path: str
   new_field_name: str
+  new_field_is_array: bool = True
 
-  def solve(self, dry_run = False):
-    noop = True
+  def solve(self, dry_run = False, window = WINDOW):
+    # cl reports a field at the line the *statement* ends on, which for a call argument
+    # wrapped by clang-format is several lines below the line that names the field. A
+    # window of the reported line and its two neighbours left those behind
+    # (processHelpRichTextTokens: reported at 355, named at 353), so scan further, and
+    # nearest-first so a name occurring twice is taken from the line cl pointed at.
+    replaced = 0
+    found_new = False
     content = pathlib.Path(self.occurrence_path).read_text(newline="\n").splitlines(keepends=True)
     needles = [f"->{self.missing_field}", f".{self.missing_field}"]
     needles_new = [f"->{self.new_field_name}", f".{self.new_field_name}"]
-    for offset in (0, -1, 1):
+    for offset in offsets(window):
       index = offset + self.occurrence_line - 1
+      if not 0 <= index < len(content):
+        continue
       line = content[index]
-      detections = [needle in line for needle in needles]
-      if not any(detections):
-        detections_new = [needle in line for needle in needles_new]
-        if any(detections_new):
-          noop = False
-          logging.warning(f"did not find faulty field ({self.missing_field}) but did find new field ({self.new_field_name}), skipping this entry in {self.occurrence_path} line {index+1}")
+      if not any(needle in line for needle in needles):
+        found_new = found_new or any(needle in line for needle in needles_new)
         continue
       content[index] = line.replace(self.missing_field, self.new_field_name)
-      noop = False
-    if noop:
-      raise Exception(f"did not find faulty field {self.missing_field} nor new field {self.new_field_name} in {self.occurrence_path} line {self.occurrence_line}\n\t{line}")
+      replaced += 1
+      if not self.new_field_is_array and cast_before_field_re(self.missing_field).search(line):
+        # A Ghidra sync that turns undefined1 padding_0xNN[2] into short field_0xNN also
+        # invalidates the `*(short*)field` the old array needed: renaming alone leaves a
+        # cast of the field's *value* to a pointer, which compiles and stores nowhere
+        # near the field (SetHovelBuildOrder, 0x286). Assign the field directly instead.
+        logging.warning(f"{self.occurrence_path} line {index+1}: {self.new_field_name} is no longer an array but the line still casts it - drop the cast by hand:\n\t{line.strip()}")
+    if replaced == 0:
+      if found_new:
+        # An earlier entry of this run already renamed it: cl reports the field once per
+        # line, so one rename can answer several error lines.
+        logging.debug(f"already renamed to {self.new_field_name} near {self.occurrence_path} line {self.occurrence_line}")
+        return
+      raise Exception(f"did not find faulty field {self.missing_field} nor new field {self.new_field_name} in {self.occurrence_path} line {self.occurrence_line} (window +-{window})")
     if not dry_run:
       pathlib.Path(self.occurrence_path).write_text("".join(content), newline="")
 
@@ -89,8 +119,8 @@ def parse_missing_field_line(line: str):
     raise Exception(f"target structure does not exist on disk: {target_structure_path}")
   query = LookupQuery(missing_field=missing_field, target_structure=target_structure, target_path=target_structure_path)
   if query in database:
-    lookupresult = database[query]
-    return Error2039Line(occurrence_path=occurrence_path, occurrence_line=occurrence_line, target_structure=target_structure, missing_field=missing_field, new_field_name=lookupresult, target_path=target_structure_path)
+    lookupresult, is_array = database[query]
+    return Error2039Line(occurrence_path=occurrence_path, occurrence_line=occurrence_line, target_structure=target_structure, missing_field=missing_field, new_field_name=lookupresult, target_path=target_structure_path, new_field_is_array=is_array)
   
   quick_field = quick_field_re.match(missing_field)
   offset = None
@@ -117,8 +147,9 @@ def parse_missing_field_line(line: str):
   if len(matches) > 1:
     raise Exception(f"found multiple new fields: {line} {offset:08X}")
   new_field_name = matches[0][0]
-  database[query] = new_field_name
-  return Error2039Line(occurrence_path=occurrence_path, occurrence_line=occurrence_line, target_structure=target_structure, missing_field=missing_field, new_field_name=new_field_name, target_path=target_structure_path)
+  new_field_is_array = bool(matches[0][1])
+  database[query] = (new_field_name, new_field_is_array)
+  return Error2039Line(occurrence_path=occurrence_path, occurrence_line=occurrence_line, target_structure=target_structure, missing_field=missing_field, new_field_name=new_field_name, target_path=target_structure_path, new_field_is_array=new_field_is_array)
 
 def git_lookup_old_field_offset(field_name: str, path: str):
   args = ["git", "rev-list", "--all", "--", path]
@@ -149,6 +180,7 @@ if __name__ == "__main__":
   parser.add_argument("error_log", help="path to the error log file from syntax_check.py")
   parser.add_argument("--dry-run", help="Set whether to do a dry run or modify cpp files", action="store_true", default=False, required=False)
   parser.add_argument("--verbose", help="Set verbosity to DEBUG", action="store_true", default=False, required=False)
+  parser.add_argument("--window", help=f"lines either side of the reported one to search (default {WINDOW})", type=int, default=WINDOW, required=False)
   args = parser.parse_args()
   if args.verbose:
     logging.getLogger().setLevel(logging.DEBUG)
@@ -157,4 +189,4 @@ if __name__ == "__main__":
   solutions_raw: List[None | Error2039Line] = [parse_missing_field_line(line) for line in lines]
   solutions: List[Error2039Line] = [sol for sol in solutions_raw if sol]
   for sol in solutions:
-    sol.solve(dry_run=args.dry_run)
+    sol.solve(dry_run=args.dry_run, window=args.window)

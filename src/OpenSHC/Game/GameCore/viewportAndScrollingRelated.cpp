@@ -12,7 +12,7 @@ namespace Game {
         if (this->countdown > 0) {
             --this->countdown;
         }
-        if (DAT_ViewportRenderState::instance.viewportState.field0_0x0 == 0
+        if (DAT_ViewportRenderState::instance.viewportState.field_0x0 == 0
             && !DAT_ScrollingHandler::instance.isScrolling_0x0) {
             this->countdown = 1;
             this->forty = 0;

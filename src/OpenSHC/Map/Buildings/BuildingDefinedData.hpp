@@ -49,22 +49,22 @@ namespace Map {
             int BuildingPlacement_Property_7[110]; // 0x0000102C length: 440
             TruncatedInt EmployeeCountPerBuildingType[110]; // 0x000011E4 length: 440
             int StorageLimitResourceTypeArray[26]; // 0x0000139C length: 104
-            TruncatedInt field15_0x1404[110]; // 0x00001404 length: 440
+            TruncatedInt field_0x1404[110]; // 0x00001404 length: 440
             TruncatedInt BuildingFlag1Defaults[110]; // 0x000015BC length: 440
-            BOOLEnum field17_0x1774[110]; // 0x00001774 length: 440
+            BOOLEnum field_0x1774[110]; // 0x00001774 length: 440
             TruncatedInt BuildingFlag4Defaults[110]; // 0x0000192C length: 440
             int BuildingTypeHasHealth[110]; // 0x00001AE4 length: 440
             int BuildingIsGateHouseArray[110]; // 0x00001C9C length: 440
             int BuildingIsKeepArray[110]; // 0x00001E54 length: 440
             BOOLEnum IsGateOrTowerArray[110]; // 0x0000200C length: 440
-            BOOLEnum field23_0x21c4[110]; // 0x000021C4 length: 440
+            BOOLEnum field_0x21c4[110]; // 0x000021C4 length: 440
             TruncatedInt BuildingFlag2Defaults[110]; // 0x0000237C length: 440
             int BuildingShowRubbleWhenDestroyed[110]; // 0x00002534 length: 440
             int BuildingTypeOwnable[110]; // 0x000026EC length: 440
             TruncatedInt BuildingHP[110]; // 0x000028A4 length: 440
             BuildingTypeInt StorageBuildingTypeArray[26]; // 0x00002A5C length: 104
             TruncatedInt BuildingNumberOfPopulationProvided[110]; // 0x00002AC4 length: 440
-            int field30_0x2c7c[88]; // 0x00002C7C length: 352
+            int field_0x2c7c[88]; // 0x00002C7C length: 352
             int WheatFieldTile_Unknown[36]; // 0x00002DDC length: 144
             TruncatedInt Building_SpriteSheet_ID_Array_1[110]; // 0x00002E6C length: 440
             int Building_Sprite_ID_Array_1[110]; // 0x00003024 length: 440
@@ -77,10 +77,10 @@ namespace Map {
             int AnimAdvanceThrottles[110]; // 0x00003DE4 length: 440
             int BuildingHeights[110]; // 0x00003F9C length: 440
             int BuildingDestroyedScoreWeight[110]; // 0x00004154 length: 440
-            byte field43_0x430c[312]; // 0x0000430C length: 312
+            byte field_0x430c[312]; // 0x0000430C length: 312
             char FletcherWorkshopAnimationCycle[160]; // 0x00004444 length: 160
-            byte field45_0x44e4[400]; // 0x000044E4 length: 400
-            byte field46_0x4674[608]; // 0x00004674 length: 608
+            byte field_0x44e4[400]; // 0x000044E4 length: 400
+            byte field_0x4674[608]; // 0x00004674 length: 608
             char FletchersWorkshopAnimationFrames2[56]; // 0x000048D4 length: 56
             char ArmorersWorkshopAnimationFrames1[448]; // 0x0000490C length: 448
             char ArmorersWorkshopAnimationFrames2[112]; // 0x00004ACC length: 112
@@ -109,10 +109,10 @@ namespace Map {
             char BlacksmithsWorkshopAnimationFrames11[36]; // 0x000052D0 length: 36
             char BlacksmithsWorkshopAnimationFrames12[112]; // 0x000052F4 length: 112
             char PoleturnersWorkshopAnimationFrames1[88]; // 0x00005364 length: 88
-            byte field75_0x53bc[200]; // 0x000053BC length: 200
+            byte field_0x53bc[200]; // 0x000053BC length: 200
             char PoleturnersWorkshopAnimationFrames2[36]; // 0x00005484 length: 36
             char PoleturnersWorkshopAnimationFrames3[36]; // 0x000054A8 length: 36
-            byte field78_0x54cc[144]; // 0x000054CC length: 144
+            byte field_0x54cc[144]; // 0x000054CC length: 144
             char PoleturnersWorkshopAnimationFrames4[72]; // 0x0000555C length: 72
             char PoleturnersWorkshopAnimationFrames5[28]; // 0x000055A4 length: 28
             char SecondaryOverlayAnimationFrames[20]; // 0x000055C0 length: 20
@@ -213,35 +213,35 @@ namespace Map {
             char InnAnimationFrames5[80]; // 0x00007DCC length: 80
             char SharedOverlayAnimationFrames[52]; // 0x00007E1C length: 52
             int BuildingAccessibleTilesCountForOneLarger[15]; // 0x00007E50 length: 60
-            XYPair field179_0x7e8c[8]; // 0x00007E8C length: 64
-            XYPair field180_0x7ecc[12]; // 0x00007ECC length: 96
-            XYPair field181_0x7f2c[16]; // 0x00007F2C length: 128
-            XYPair field182_0x7fac[20]; // 0x00007FAC length: 160
-            XYPair field183_0x804c[24]; // 0x0000804C length: 192
-            XYPair field184_0x810c[28]; // 0x0000810C length: 224
-            XYPair field185_0x81ec[32]; // 0x000081EC length: 256
-            XYPair field186_0x82ec[36]; // 0x000082EC length: 288
-            XYPair field187_0x840c[40]; // 0x0000840C length: 320
-            XYPair field188_0x854c[44]; // 0x0000854C length: 352
-            XYPair field189_0x86ac[48]; // 0x000086AC length: 384
-            XYPair field190_0x882c[52]; // 0x0000882C length: 416
-            XYPair field191_0x89cc[116]; // 0x000089CC length: 928
+            XYPair field_0x7e8c[8]; // 0x00007E8C length: 64
+            XYPair field_0x7ecc[12]; // 0x00007ECC length: 96
+            XYPair field_0x7f2c[16]; // 0x00007F2C length: 128
+            XYPair field_0x7fac[20]; // 0x00007FAC length: 160
+            XYPair field_0x804c[24]; // 0x0000804C length: 192
+            XYPair field_0x810c[28]; // 0x0000810C length: 224
+            XYPair field_0x81ec[32]; // 0x000081EC length: 256
+            XYPair field_0x82ec[36]; // 0x000082EC length: 288
+            XYPair field_0x840c[40]; // 0x0000840C length: 320
+            XYPair field_0x854c[44]; // 0x0000854C length: 352
+            XYPair field_0x86ac[48]; // 0x000086AC length: 384
+            XYPair field_0x882c[52]; // 0x0000882C length: 416
+            XYPair field_0x89cc[116]; // 0x000089CC length: 928
             int BuildingAccessibleTilesCount[15]; // 0x00008D6C length: 60
-            XYPair field193_0x8da8[4]; // 0x00008DA8 length: 32
+            XYPair field_0x8da8[4]; // 0x00008DA8 length: 32
             undefined1 padding_0x8dc8[4]; // 0x00008DC8 length: 4
-            XYPair field198_0x8dcc[8]; // 0x00008DCC length: 64
-            XYPair field199_0x8e0c[12]; // 0x00008E0C length: 96
-            XYPair field200_0x8e6c[16]; // 0x00008E6C length: 128
-            XYPair field201_0x8eec[20]; // 0x00008EEC length: 160
-            XYPair field202_0x8f8c[24]; // 0x00008F8C length: 192
-            XYPair field203_0x904c[28]; // 0x0000904C length: 224
-            XYPair field204_0x912c[32]; // 0x0000912C length: 256
-            XYPair field205_0x922c[36]; // 0x0000922C length: 288
-            XYPair field206_0x934c[40]; // 0x0000934C length: 320
-            XYPair field207_0x948c[44]; // 0x0000948C length: 352
-            XYPair field208_0x95ec[48]; // 0x000095EC length: 384
-            XYPair field209_0x976c[52]; // 0x0000976C length: 416
-            XYPair field210_0x990c[56]; // 0x0000990C length: 448
+            XYPair field_0x8dcc[8]; // 0x00008DCC length: 64
+            XYPair field_0x8e0c[12]; // 0x00008E0C length: 96
+            XYPair field_0x8e6c[16]; // 0x00008E6C length: 128
+            XYPair field_0x8eec[20]; // 0x00008EEC length: 160
+            XYPair field_0x8f8c[24]; // 0x00008F8C length: 192
+            XYPair field_0x904c[28]; // 0x0000904C length: 224
+            XYPair field_0x912c[32]; // 0x0000912C length: 256
+            XYPair field_0x922c[36]; // 0x0000922C length: 288
+            XYPair field_0x934c[40]; // 0x0000934C length: 320
+            XYPair field_0x948c[44]; // 0x0000948C length: 352
+            XYPair field_0x95ec[48]; // 0x000095EC length: 384
+            XYPair field_0x976c[52]; // 0x0000976C length: 416
+            XYPair field_0x990c[56]; // 0x0000990C length: 448
             undefined1 padding_0x9acc[156]; // 0x00009ACC length: 156
             int GardenVariations[12]; // 0x00009B68 length: 48
             int UnknownVariations[13]; // 0x00009B98 length: 52
@@ -255,25 +255,25 @@ namespace Map {
             int PlayerDataUnknownStructureRelatedArray_2[6][3]; // 0x00009D0C length: 72
             XYPairShort SearchRelatedXYOffsets_1[49]; // 0x00009D54 length: 196
             undefined1 padding_0x9e18[4]; // 0x00009E18 length: 4
-            int field382_0x9e1c[7][4]; // 0x00009E1C length: 112
-            int field383_0x9e8c[4]; // 0x00009E8C length: 16
-            int field384_0x9e9c[7][4]; // 0x00009E9C length: 112
+            int field_0x9e1c[7][4]; // 0x00009E1C length: 112
+            int field_0x9e8c[4]; // 0x00009E8C length: 16
+            int field_0x9e9c[7][4]; // 0x00009E9C length: 112
             undefined1 padding_0x9f0c[16]; // 0x00009F0C length: 16
-            int field401_0x9f1c[2][4]; // 0x00009F1C length: 32
+            int field_0x9f1c[2][4]; // 0x00009F1C length: 32
             XYPairShort TunnelersGuildParadegroundLocationOffsets[25]; // 0x00009F3C length: 100
             undefined1 padding_0x9fa0[4]; // 0x00009FA0 length: 4
             XYPairShort EngineersParagroundOffsets[25]; // 0x00009FA4 length: 100
             undefined1 padding_0xa008[4]; // 0x0000A008 length: 4
-            XYPairShort field412_0xa00c[16]; // 0x0000A00C length: 64
+            XYPairShort field_0xa00c[16]; // 0x0000A00C length: 64
             int SpawnUnitProperties[16][13]; // 0x0000A04C length: 832
             int DrawBridgeAnimationFrames[4]; // 0x0000A38C length: 16
-            int field415_0xa39c[52]; // 0x0000A39C length: 208
-            int field416_0xa46c[52]; // 0x0000A46C length: 208
-            int field417_0xa53c[26]; // 0x0000A53C length: 104
-            int field418_0xa5a4[102]; // 0x0000A5A4 length: 408
-            int field419_0xa73c[16]; // 0x0000A73C length: 64
-            int field420_0xa77c[24]; // 0x0000A77C length: 96
-            int field421_0xa7dc[32]; // 0x0000A7DC length: 128
+            int field_0xa39c[52]; // 0x0000A39C length: 208
+            int field_0xa46c[52]; // 0x0000A46C length: 208
+            int field_0xa53c[26]; // 0x0000A53C length: 104
+            int field_0xa5a4[102]; // 0x0000A5A4 length: 408
+            int field_0xa73c[16]; // 0x0000A73C length: 64
+            int field_0xa77c[24]; // 0x0000A77C length: 96
+            int field_0xa7dc[32]; // 0x0000A7DC length: 128
             int BuildingCost[110][5]; // 0x0000A85C length: 2200
 
         } BuildingDefinedData;

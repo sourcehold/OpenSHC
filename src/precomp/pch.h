@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "ArrayUtility.h"
 #include "CompileMacros.h"
 #include "FunctionResolver.h"
 #include "StructResolver.h"

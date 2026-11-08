@@ -223,7 +223,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0049E9E0, &PathFindingState::updateAIZoneWithFloodFill0x20)
             updateAIZoneWithFloodFill0x20;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, byte), false,
                 Address::SHC_3BB0A8C1_0x0049EDF0, &PathFindingState::findAIZoneWithFlags)
             findAIZoneWithFlags;
 

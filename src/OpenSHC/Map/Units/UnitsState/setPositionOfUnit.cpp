@@ -17,7 +17,7 @@ namespace Map {
             }
             this->units[unitID].currentIndexInPathPlan = 0;
             this->units[unitID].tunnelerFinishedDigging = 0;
-            this->units[unitID].field105_0xe8 = FALSE;
+            this->units[unitID].field_0xe8 = FALSE;
             this->units[unitID].movementRelated = 8;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
             this->units[unitID].microXPosition = (short)x * 8 + 4;

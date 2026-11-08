@@ -457,6 +457,42 @@ if (DAT_GameState::instance.playerDataArray[playerID].fearFactorLevel == 0) {
 
 **neutral**
 
+## 24. Declare stack variables upon first usage
+```cpp
+// no
+int intValue;
+
+if (someCondition) {
+  intValue = 10;
+}
+
+// yes
+if (someCondition) {
+  int intValue = 10;
+}
+```
+
+## 25. Favor for-loops over unrolls
+```cpp
+    // FUNCTION: STRONGHOLDCRUSADER 0x00491730
+    void MenuTextInputState::clearModalDialog2to6()
+    {
+// no
+        this->previousModalDialogs[0] = 0;
+        this->previousModalDialogs[1] = 0;
+        this->previousModalDialogs[2] = 0;
+        this->previousModalDialogs[3] = 0;
+        this->previousModalDialogs[4] = 0;
+
+// yes
+        for (int i = 0; i < countof(this->previousModalDialogs); ++i) {
+            this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+        }
+    }
+```
+
+**measure**. Also needs interpretation of the code to understand what for-loop could replace it.
+
 ---
 
 ## Measuring
