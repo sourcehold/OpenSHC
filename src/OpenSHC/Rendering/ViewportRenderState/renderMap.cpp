@@ -233,8 +233,7 @@ namespace Rendering {
         _yOffset_01
             = (int)(this->viewportState.viewportY + iVar31 + (this->viewportState.viewportY + iVar31 >> 0x1f & 0xfU))
             >> 4;
-        layerTileIndex = ((int)(this->viewportState.viewportX + (this->viewportState.viewportX >> 0x1f & 0x1fU)) >> 5)
-            + _visualTileOffset;
+        layerTileIndex = (this->viewportState.viewportX / 32) + _visualTileOffset;
         /*
           ***
            This piece of logic together with the huge array in the ViewportState gets
@@ -2341,8 +2340,8 @@ namespace Rendering {
                     }
                     if (uVar29 != 0) {
                         if (local_1c < viewportWidth && bVar13 != 0 && 4 < iVar31) {
-                            psVar17 = &DAT_BuildingsState::instance.buildings[uVar29].surfaceAreaUnk;
-                            *psVar17 = *psVar17 + 1;
+                            DAT_BuildingsState::instance.buildings[uVar29].surfaceAreaUnk
+                                = DAT_BuildingsState::instance.buildings[uVar29].surfaceAreaUnk + 1;
                         }
                         uVar9 = *this->viewportState.ptrColor;
                         *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
