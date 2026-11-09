@@ -86,6 +86,7 @@ namespace UI {
             if (DAT_MapPropertiesState::instance.field_0x13590 < 4 && button >= 13) {
                 return;
             }
+            // the remap again, as the original does it once for the hover test and once for the drawing
             if (DAT_MapPropertiesState::instance.field_0x13590 == 3 && button >= 9) {
                 if (button == 9) {
                     button = 24;
@@ -108,6 +109,7 @@ namespace UI {
                 DAT_ButtonY::instance += 72;
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
+            // An if/else, not an early return (early return: quick_diff 0.9718 -> 0.8870)
             if (!DAT_ButtonCurrentlyInteracting::instance) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_SCENARIO, button, DAT_ButtonW::instance / 2 + DAT_ButtonX::instance,

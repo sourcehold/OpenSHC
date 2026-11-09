@@ -51,7 +51,7 @@ namespace UI {
                 } else {
                     requiredDistance = 30;
                 }
-                // tested twice through a flag, so MSVC lays the disabled arm out first as the original does
+                // The flag is tested twice (one if/else holding the texts: quick_diff 0.9481 -> 0.6994)
                 BOOLEnum const disabled
                     = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                           DAT_PathFindingState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].owner,
@@ -66,7 +66,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                         AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_SCREEN_MENU);
                 }
-                // "Repair", with the position read in each arm as the original does
+                // "Repair"; the position in each arm (once before them: quick_diff 0.9481 -> 0.6623)
                 if (disabled) {
                     int const textX = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                     int const textY = DAT_ButtonY::instance + 7;

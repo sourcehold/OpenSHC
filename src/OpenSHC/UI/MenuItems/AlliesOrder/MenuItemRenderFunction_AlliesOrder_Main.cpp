@@ -47,19 +47,20 @@ namespace UI {
                     OpenSHC::UI::Rendering_Func::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk)();
                 if (DAT_ButtonCurrentlyInteracting::instance) {
                     if (button == 10) {
+                        // "Clear Orders"
                         DAT_00df5200::instance = OpenSHC::DE::SHCDE::TEXT_ALLIES;
                         DAT_00df51fc::instance = 8;
                         return;
                     }
                     if (button == 11) {
+                        // "Defend Me"
                         DAT_00df5200::instance = OpenSHC::DE::SHCDE::TEXT_ALLIES;
                         DAT_00df51fc::instance = 9;
                         return;
                     }
                 }
             }
-            // buttons 1 to 6 are the enemies' portraits; the original reuses button for the row and then the player,
-            // and draws the tooltip when it ends up -1, which button 0 also gives
+            // buttons 1 to 6 are the enemies' portraits; button turns into the row, then the player (one register)
             if (button <= 6 && button != -1) {
                 --button;
                 if (button >= DAT_EnemyArrayIndex::instance) {
@@ -107,6 +108,7 @@ namespace UI {
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 574,
                             DAT_ButtonX::instance - 10, DAT_ButtonY::instance - 8,
                             OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 575, 0);
+                        // "Attack"
                         DAT_00df5200::instance = OpenSHC::DE::SHCDE::TEXT_ALLIES;
                         DAT_00df51fc::instance = 10;
                         DAT_00df51f8::instance = button;
@@ -137,6 +139,7 @@ namespace UI {
                     DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                     return;
                 }
+                // the AI's name
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM,
                     DAT_GameSynchronyState::instance.currentAIArray[DAT_00df51f8::instance] * 8

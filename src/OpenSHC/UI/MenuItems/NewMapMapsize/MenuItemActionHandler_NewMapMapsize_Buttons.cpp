@@ -37,7 +37,7 @@ namespace UI {
             if (DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE) {
                 return;
             }
-            // buttons 1 to 4 make a new map of that size
+            // buttons 1 to 4 make a map of that size (set after the returns: quick_diff 0.9704 -> 0.9586)
             int mapSize = OpenSHC::Map::MC_MAP_SIZE_400;
             if (button <= 0) {
                 return;
@@ -71,9 +71,8 @@ namespace UI {
             DAT_TileMapState::instance.field_0x55487c = 200;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::forceFullTileMapRedraw, DAT_TileMapState::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processGameTick, DAT_GameState::ptr)();
-            for (int section = 0; section < 40; ++section) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateWildlifeGrid, DAT_WildlifeState::ptr)(
-                    section);
+            for (int row = 0; row < 40; ++row) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateWildlifeGrid, DAT_WildlifeState::ptr)(row);
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateWildlife, DAT_WildlifeState::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateSection1034Info, DAT_WildlifeState::ptr)();
@@ -84,10 +83,10 @@ namespace UI {
                 DAT_MinimapViewState::ptr)(0, 100);
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize,
                 DAT_ViewportRenderState::ptr)();
-            DAT_GameCore::instance.descriptionUseStringTable = 0;
+            DAT_GameCore::instance.descriptionUseStringTable = FALSE;
             DAT_GameCore::instance.U3_mapLockedState = OpenSHC::Map::MLS_EDITABLE;
             DAT_GameCore::instance.temporaryTextBufferOfSize1000[0] = '\0';
-            // both arms are the same; the original still compares U2_mapType_singleOrMulti here
+            // both arms the same; the original still compares (one call: quick_diff 0.9704 -> 0.7636)
             if (DAT_GameCore::instance.U2_mapType_singleOrMulti == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_MAP_EDITOR_PROPERTIES, 0);
@@ -95,7 +94,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_MAP_EDITOR_PROPERTIES, 0);
             }
-            DAT_GameCore::instance.mapLoadedForEditor = 1;
+            DAT_GameCore::instance.mapLoadedForEditor = TRUE;
         }
 
     }

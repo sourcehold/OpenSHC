@@ -65,7 +65,7 @@ namespace UI {
                     }
                     return;
                 case 4:
-                    // the stored volume, as event 1 reads it
+                    // read back again here (one read-back after the switch: quick_diff 0.9222 -> 0.7797)
                     switch (slider) {
                     case 0:
                         *currentValue = DAT_MenuTextInputState::instance.pendingStreamVolume0;
@@ -77,7 +77,6 @@ namespace UI {
                         *currentValue = DAT_MenuTextInputState::instance.pendingStreamVolume3;
                         break;
                     }
-                    return;
                 }
             }
 

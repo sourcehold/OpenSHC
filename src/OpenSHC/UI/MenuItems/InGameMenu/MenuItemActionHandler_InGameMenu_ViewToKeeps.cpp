@@ -19,12 +19,12 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004335A0
-        void InGameMenu::MenuItemActionHandler_InGameMenu_ViewToKeeps(int param_1, ...)
+        void InGameMenu::MenuItemActionHandler_InGameMenu_ViewToKeeps(int unused, ...)
         {
             if (DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE) {
                 return;
             }
-            // two wheel steps within a second count as one move: up views the next keep, down the own keep
+            // two wheel steps within a second count as one move: down views the next keep, up the own keep
             DWORD const now = timeGetTime();
             if (now - DWORD_00b98410::instance > 1000) {
                 DWORD_00b98410::instance = now;
@@ -69,24 +69,26 @@ namespace UI {
                     }
                 }
             }
-            if (DAT_MouseState::instance.scrollEventData == 8) {
-                if (DAT_00b9840c::instance > 0) {
-                    DAT_00b9840c::instance = 0;
-                }
-                --DAT_00b9840c::instance;
-                if (DAT_00b9840c::instance == -2) {
-                    DWORD_00b98410::instance = now;
-                    int const keep
-                        = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
-                              .id;
-                    DAT_00b9840c::instance = 0;
-                    if (keep != 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::focusOnCoordinate,
-                            DAT_ViewportRenderState::ptr)(DAT_BuildingsState::instance.buildings[keep].x + 2,
-                            DAT_BuildingsState::instance.buildings[keep].y + 2);
-                    }
-                }
+            if (DAT_MouseState::instance.scrollEventData != 8) {
+                return;
+            }
+            if (DAT_00b9840c::instance > 0) {
+                DAT_00b9840c::instance = 0;
+            }
+            --DAT_00b9840c::instance;
+            if (DAT_00b9840c::instance != -2) {
+                return;
+            }
+            DWORD_00b98410::instance = now;
+            int const keep
+                = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                      .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                      .id;
+            DAT_00b9840c::instance = 0;
+            if (keep != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::focusOnCoordinate,
+                    DAT_ViewportRenderState::ptr)(DAT_BuildingsState::instance.buildings[keep].x + 2,
+                    DAT_BuildingsState::instance.buildings[keep].y + 2);
             }
         }
 
