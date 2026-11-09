@@ -120,3 +120,5 @@ src/OpenSHC/UI/MenuItems/General/MenuItemRenderFunction_General_RenderCurrentBut
 src/OpenSHC/UI/DisplayElements/RenderTimeUntilDefeatDisplayElement.cpp
 src/OpenSHC/UI/DisplayElements/GetIfDisplayElementStateNotZero.cpp
 src/OpenSHC/UI/DisplayElements/FindDisplayElementWithID.cpp
+src/OpenSHC/UI/HoveredState/clearHoveredState.cpp
+src/OpenSHC/UI/HoveredState/Constructor_HoveredState.cpp
