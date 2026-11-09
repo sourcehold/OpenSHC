@@ -21,12 +21,12 @@ namespace Map {
                 || 160 <= DAT_GameState::instance.mapAndTime.wildlifeCount) {
                 return;
             }
-            for (int _slot = 0; _slot < (int)_countof(DAT_GameState::instance.mapAndTime.rabbitSpawnXY)
-                    + (int)_countof(DAT_GameState::instance.mapAndTime.signpostsMapEdge);
+            for (int _slot = 0; _slot < countof(DAT_GameState::instance.mapAndTime.rabbitSpawnXY)
+                    + countof(DAT_GameState::instance.mapAndTime.signpostsMapEdge);
                 ++_slot) {
                 uint x;
                 uint y;
-                if (_slot < (int)_countof(DAT_GameState::instance.mapAndTime.rabbitSpawnXY)) {
+                if (_slot < countof(DAT_GameState::instance.mapAndTime.rabbitSpawnXY)) {
                     x = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][0];
                     y = DAT_GameState::instance.mapAndTime.rabbitSpawnXY[_slot][1];
                 } else {

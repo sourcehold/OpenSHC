@@ -47,7 +47,7 @@ namespace Map {
                 ++_slotOffset;
                 if (4 <= _slotOffset) {
                     for (int _signpostSlot = 0;
-                        _signpostSlot < (int)_countof(DAT_GameState::instance.mapAndTime.signpostsMapEdge);
+                        _signpostSlot < countof(DAT_GameState::instance.mapAndTime.signpostsMapEdge);
                         ++_signpostSlot) {
                         if (DAT_GameState::instance.mapAndTime.signpostIDs[_signpostSlot] != 0) {
                             *_outX = DAT_GameState::instance.mapAndTime.signpostsMapEdge[_signpostSlot][0].x;

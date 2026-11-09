@@ -11,7 +11,7 @@ namespace Map {
         void TribesState::applyTribeBehaviorType(int attackWave, SomeTribeBehaviorType tribeBehaviorType)
         {
             int const attackInfoCounter1 = DAT_TroopValueState::instance.attackInfo.someCounter1;
-            for (int _tribeID = 1; _tribeID < (int)_countof(DAT_TribesState::instance.tribes); ++_tribeID) {
+            for (int _tribeID = 1; _tribeID < countof(DAT_TribesState::instance.tribes); ++_tribeID) {
                 Tribe& _tribe = DAT_TribesState::instance.tribes[_tribeID];
                 if (_tribe.tribeState && _tribe.attackWave == attackWave
                     && _tribe.tribeBehaviorType != tribeBehaviorType

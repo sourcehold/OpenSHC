@@ -9,7 +9,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00521240
         void TribesState::swapTribeOwnership(int playerA, int playerB)
         {
-            for (int _tribeID = 1; _tribeID < (int)_countof(DAT_TribesState::instance.tribes); ++_tribeID) {
+            for (int _tribeID = 1; _tribeID < countof(DAT_TribesState::instance.tribes); ++_tribeID) {
                 Tribe& _tribe = DAT_TribesState::instance.tribes[_tribeID];
                 if (_tribe.tribeState == 2) {
                     if (_tribe.owner == playerA) {
