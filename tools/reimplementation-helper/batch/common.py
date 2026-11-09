@@ -27,6 +27,52 @@ TMP.mkdir(parents=True, exist_ok=True)
 DIFF_JSON = Path("reccmp/dll/diff.json")
 
 FUNCTION_RE = re.compile(r"//\s*FUNCTION:\s*STRONGHOLDCRUSADER\s+(0x[0-9A-Fa-f]+)")
+ORIGINAL_EXE = Path("_original/Stronghold Crusader.exe")
+# ---------------------------------------------------------------- original image
+
+
+class OriginalImage(object):
+    """The original executable's bytes, addressable by virtual address."""
+
+    def __init__(self, path=ORIGINAL_EXE):
+        import struct
+        self.data = d = Path(path).read_bytes()
+        pe = struct.unpack_from("<I", d, 0x3c)[0]
+        nsec = struct.unpack_from("<H", d, pe + 6)[0]
+        opt = struct.unpack_from("<H", d, pe + 20)[0]
+        self.image_base = struct.unpack_from("<I", d, pe + 24 + 28)[0]
+        # (virtual size, rva, raw size, raw offset) per section
+        self.sections = [struct.unpack_from("<IIII", d, pe + 24 + opt + 40 * i + 8) for i in range(nsec)]
+
+    def off(self, va):
+        """File offset of a virtual address, or None outside every section."""
+        rva = va - self.image_base
+        for vsize, vaddr, rsize, raw in self.sections:
+            if vaddr <= rva < vaddr + max(vsize, rsize):
+                return rva - vaddr + raw
+        return None
+
+    def read(self, va, size):
+        o = self.off(va)
+        if o is None:
+            raise ValueError("address %#x is outside the image" % va)
+        return self.data[o:o + size]
+
+
+_original_image = None
+
+
+def original_image():
+    global _original_image
+    if _original_image is None:
+        _original_image = OriginalImage()
+    return _original_image
+
+
+def function_address(text):
+    """The `// FUNCTION:` address of a source file's text."""
+    m = FUNCTION_RE.search(text)
+    return int(m.group(1), 16) if m else None
 # ---------------------------------------------------------------- pdb server
 
 # mspdbsrv.exe is a per-user singleton keyed on _MSPDBSRV_ENDPOINT_, and every worktree carries its
