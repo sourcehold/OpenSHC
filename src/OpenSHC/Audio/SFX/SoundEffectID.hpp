@@ -209,7 +209,9 @@ namespace Audio {
             SEID_UNKNOWN_0xFE = 254, // 0x000000FE
             SEID_UNKNOWN_0xFF = 255, // 0x000000FF
             SEID_UNKNOWN_0x100 = 256, // 0x00000100
-            SEID_UNKNOWN_0x101 = 257 // 0x00000101
+            SEID_UNKNOWN_0x101 = 257, // 0x00000101
+            SEID_UNKNOWN_0x104 = 260, // 0x00000104
+            SEID_UNKNOWN_0x105 = 261 // 0x00000105
 
         } SoundEffectID;
 
