@@ -13,9 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::DE::SHCDE::eGM;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
@@ -28,14 +25,14 @@ namespace UI {
             if (0 < (int)DAT_ButtonW::instance) {
                 do {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0x119,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 281,
                         DAT_ButtonX::instance + iVar1, (int)(DAT_ButtonY::instance));
-                    iVar1 = iVar1 + 0x1a;
+                    iVar1 += 26;
                 } while (iVar1 < (int)DAT_ButtonW::instance);
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0x118,
-                DAT_ButtonX::instance + thumbYPos, (int)(DAT_ButtonY::instance + -5));
+                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 280,
+                DAT_ButtonX::instance + thumbYPos, (int)(DAT_ButtonY::instance - 5));
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         }
 

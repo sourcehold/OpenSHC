@@ -20,9 +20,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Game::GameMode2;
-        using OpenSHC::Map::MapType2;
-        using OpenSHC::UI::Enums::DisplayElementID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         /*

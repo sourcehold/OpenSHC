@@ -13,7 +13,7 @@ namespace UI {
             switch (param_2) {
             case 1:
                 *minValue = 0;
-                *maxValue = DAT_GameSynchronyState::instance.modemScrollbarCount + -4;
+                *maxValue = DAT_GameSynchronyState::instance.modemScrollbarCount - 4;
                 *currentValue = DAT_GameSynchronyState::instance.modemScrollBarOffset;
                 return;
             case 2:
@@ -22,7 +22,7 @@ namespace UI {
                 return;
             case 4:
                 *currentValue = DAT_GameSynchronyState::instance.modemScrollBarOffset;
-                *maxValue = DAT_GameSynchronyState::instance.modemScrollbarCount + -4;
+                *maxValue = DAT_GameSynchronyState::instance.modemScrollbarCount - 4;
             }
         }
 

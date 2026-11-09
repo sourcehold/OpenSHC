@@ -18,11 +18,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Game::GameMode;
-        using OpenSHC::IO::Graphics::GmID;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0043FBF0
         void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_DisableFoodType(int foodType, ...)
         {
@@ -42,8 +37,8 @@ namespace UI {
                     _yOffset = 0;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 0x2d,
-                    DAT_ButtonX::instance + -4 + _xOffset, DAT_ButtonY::instance + -0x2d + _yOffset, 6);
+                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 45,
+                    DAT_ButtonX::instance - 4 + _xOffset, DAT_ButtonY::instance - 45 + _yOffset, 6);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
         }

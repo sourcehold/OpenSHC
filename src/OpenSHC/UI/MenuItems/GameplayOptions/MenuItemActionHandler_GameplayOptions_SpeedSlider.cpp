@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Game::GameMode;
-
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
          */
@@ -26,15 +24,15 @@ namespace UI {
         {
             if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
                 && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
-                *minValue = 0x14;
-                *maxValue = 0x5a;
+                *minValue = 20;
+                *maxValue = 90;
                 *currentValue = DAT_GameSynchronyState::instance.skirmishGameSpeedLevel;
                 return;
             }
             switch (param_2) {
             case 1:
-                *minValue = 0x14;
-                *maxValue = 0x5a;
+                *minValue = 20;
+                *maxValue = 90;
                 *currentValue = DAT_MenuTextInputState::instance.pendingGameSpeedLevel;
                 return;
             case 2:
@@ -42,11 +40,11 @@ namespace UI {
                 DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
                 return;
             case 5:
-                *currentValue = *currentValue + -1;
+                --*currentValue;
                 DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
                 return;
             case 6:
-                *currentValue = *currentValue + 1;
+                ++*currentValue;
                 DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
             }
         }

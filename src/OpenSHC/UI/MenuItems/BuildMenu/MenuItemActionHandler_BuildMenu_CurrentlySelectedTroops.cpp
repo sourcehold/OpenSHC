@@ -23,7 +23,7 @@ namespace UI {
             UnitTypeInt unitType;
             int _unitType;
             DAT_UnitsState::instance.unitControlsRelated = 1;
-            if (slotID < 0x14) {
+            if (slotID < 20) {
                 _unitType = DAT_RenderingDefinedData::instance
                                 .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID]];
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueClickNavigateMenuOrEscape,
@@ -34,7 +34,7 @@ namespace UI {
                 return;
             }
             unitType = DAT_RenderingDefinedData::instance
-                           .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID + -0x14]];
+                           .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID - 20]];
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueUnitTypeCommand, DAT_UnitsState::ptr)(
                 unitType);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::filterUnitSelectionExcludeUnitType,

@@ -29,7 +29,7 @@ namespace UI {
                 return;
             case 5:
                 if (0 < (int)DAT_MapPropertiesState::instance.offset) {
-                    DAT_MapPropertiesState::instance.offset = DAT_MapPropertiesState::instance.offset + -1;
+                    --DAT_MapPropertiesState::instance.offset;
                     *currentValue = DAT_MapPropertiesState::instance.offset;
                     return;
                 }
@@ -37,7 +37,7 @@ namespace UI {
             case 6:
                 if ((int)DAT_MapPropertiesState::instance.offset
                     < (int)DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount) {
-                    DAT_MapPropertiesState::instance.offset = DAT_MapPropertiesState::instance.offset + 1;
+                    ++DAT_MapPropertiesState::instance.offset;
                 }
                 break;
             default:

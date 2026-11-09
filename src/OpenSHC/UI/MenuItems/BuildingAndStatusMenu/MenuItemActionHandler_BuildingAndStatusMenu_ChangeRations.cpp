@@ -16,8 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::Game::GameMode2;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -35,12 +33,12 @@ namespace UI {
         {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL) {
                 BOOLEnum BVar1 = MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(3, param_1);
-                if (BVar1 == FALSE) {
+                if (!BVar1) {
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                     return;
                 }
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialBuildingActionState)(
-                    0xc, (BuildingType)((int)(param_1)));
+                    12, (BuildingType)((int)(param_1)));
             }
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = param_1;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(

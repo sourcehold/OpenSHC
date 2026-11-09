@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
          */

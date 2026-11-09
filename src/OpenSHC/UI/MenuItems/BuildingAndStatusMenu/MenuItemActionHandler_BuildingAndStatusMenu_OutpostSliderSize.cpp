@@ -36,7 +36,7 @@ namespace UI {
                 psVar1 = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                               .outpostRelatedUnk2;
                 if (0 < sVar2) {
-                    *psVar1 = sVar2 + -1;
+                    *psVar1 = sVar2 - 1;
                 }
                 *currentValue = (int)*psVar1;
                 return;

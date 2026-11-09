@@ -15,7 +15,6 @@ namespace UI {
     namespace MenuItems {
 
         using OpenSHC::Audio::SFX::SoundEffectID;
-        using OpenSHC::Commands::GameCommandType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00465480
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_GatehouseOpenClose(int param_1, ...)
@@ -31,11 +30,11 @@ namespace UI {
                 .openOrCloseGateClick = param_1;
             if (param_1 == 10) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    (OpenSHC::Audio::SFX::SoundEffectID)0x8c);
+                    (OpenSHC::Audio::SFX::SoundEffectID)140);
             }
-            if (param_1 == 0xb) {
+            if (param_1 == 11) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    (OpenSHC::Audio::SFX::SoundEffectID)0x8e);
+                    (OpenSHC::Audio::SFX::SoundEffectID)142);
             }
         }
 

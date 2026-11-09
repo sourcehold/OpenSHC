@@ -13,7 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using UI::Enums::MenuViewType;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004659E0
@@ -24,7 +23,7 @@ namespace UI {
             if (BVar1) {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .marketSelectedResourceType = param_1;
-                DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 0x39;
+                DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 57;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
             }

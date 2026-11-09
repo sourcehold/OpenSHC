@@ -13,8 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004BAE30
         void General::MenuItemRenderFunction_General_Scrollbar(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)

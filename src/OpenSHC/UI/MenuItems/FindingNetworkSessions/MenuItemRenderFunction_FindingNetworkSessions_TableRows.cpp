@@ -18,10 +18,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0047D410
         void FindingNetworkSessions::MenuItemRenderFunction_FindingNetworkSessions_TableRows(int param_1, ...)
         {
@@ -41,7 +37,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance
                         .DPLAY_SessionNames[DAT_GameSynchronyState::instance.scrollBarItemOffset + param_1],
                     (int)((int)(DAT_ButtonX::instance + 8)), (int)((int)(DAT_ButtonY::instance + 4)),
-                    OpenSHC::Text::TTA_LEFT, color, 0x12, 0, 0);
+                    OpenSHC::Text::TTA_LEFT, color, 18, 0, 0);
             }
         }
 

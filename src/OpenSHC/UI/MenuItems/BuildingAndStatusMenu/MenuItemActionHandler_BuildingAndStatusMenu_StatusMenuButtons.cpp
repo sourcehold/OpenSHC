@@ -13,14 +13,12 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Game::GameMode2;
         using Map::Buildings::BuildingType;
-        using UI::Enums::MenuViewType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0043E490
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_StatusMenuButtons(int param_1, ...)
         {
-            if (param_1 == 0x47 && DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo == 0x4b
+            if (param_1 == 71 && DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo == 75
                 && INT_00b96120::instance == 4) {
                 param_1 = Map::Buildings::BT_OXTETHER;
             }

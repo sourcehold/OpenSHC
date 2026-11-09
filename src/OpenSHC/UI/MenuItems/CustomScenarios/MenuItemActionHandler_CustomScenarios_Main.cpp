@@ -19,10 +19,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Game::GameMode2;
-        using UI::Enums::BuildingsAndStatusMenuTabType;
-        using UI::Enums::MenuViewType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00440770
         void CustomScenarios::MenuItemActionHandler_CustomScenarios_Main(int param_1, ...)
         {
@@ -30,8 +26,8 @@ namespace UI {
             case 1:
                 DAT_MenuTextInputState::instance.dialogResult = 0;
                 DAT_MenuTextInputState::instance.field_0x9c = 1;
-                MACRO_CALL_MEMBER(
-                    UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(UI::Enums::MMT_LOAD_MAP);
+                MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(
+                    UI::Enums::MMT_LOAD_MAP);
                 return;
             case 2:
                 MACRO_CALL(UI::Helpers_Func::InitializeBasicMap)();

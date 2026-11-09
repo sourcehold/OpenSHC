@@ -18,10 +18,8 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignment;
-        using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         /*
@@ -42,14 +40,14 @@ namespace UI {
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 blendStrength = 0;
                 keepOffsetX = FALSE;
-                fontSize = 0x13;
+                fontSize = 19;
                 color = 0;
                 int xParam = (int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 alignment = OpenSHC::Text::TTA_CENTER;
                 yParam = DAT_ButtonY::instance + 10;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, param_1 + -0x47),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, param_1 - 71),
                     xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
             }
         }

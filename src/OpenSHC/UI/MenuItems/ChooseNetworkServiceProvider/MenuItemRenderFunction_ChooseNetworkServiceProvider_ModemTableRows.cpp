@@ -20,9 +20,6 @@ namespace UI {
     namespace MenuItems {
 
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047D100
         void ChooseNetworkServiceProvider::MenuItemRenderFunction_ChooseNetworkServiceProvider_ModemTableRows(
@@ -44,7 +41,7 @@ namespace UI {
                     DAT_GameSynchronyState::instance
                         .stringPointerArray[DAT_GameSynchronyState::instance.modemScrollBarOffset + param_1],
                     (int)((int)(DAT_ButtonX::instance + 8)), (int)((int)(DAT_ButtonY::instance + 4)),
-                    OpenSHC::Text::TTA_LEFT, color, 0x12, FALSE, 0);
+                    OpenSHC::Text::TTA_LEFT, color, 18, FALSE, 0);
             }
         }
 

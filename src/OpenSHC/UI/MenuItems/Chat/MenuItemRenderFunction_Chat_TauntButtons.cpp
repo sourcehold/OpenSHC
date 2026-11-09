@@ -17,10 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
          */
@@ -37,14 +33,14 @@ namespace UI {
                 AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
             if (param_1 < 10) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    param_1, DAT_ButtonX::instance + 0xc, (int)((int)(DAT_ButtonY::instance + 9)),
-                    OpenSHC::Text::TTA_LEFT, 0xccfaff, 0x13, FALSE, 0);
+                    param_1, DAT_ButtonX::instance + 12, (int)((int)(DAT_ButtonY::instance + 9)),
+                    OpenSHC::Text::TTA_LEFT, 0xccfaff, 19, FALSE, 0);
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     param_1, DAT_ButtonX::instance + 9, (int)((int)(DAT_ButtonY::instance + 9)),
-                    OpenSHC::Text::TTA_LEFT, 0xccfaff, 0x13, FALSE, 0);
+                    OpenSHC::Text::TTA_LEFT, 0xccfaff, 19, FALSE, 0);
             }
-            if (DAT_ButtonCurrentlyInteracting::instance != FALSE) {
+            if (DAT_ButtonCurrentlyInteracting::instance) {
                 DAT_GameSynchronyState::instance.DAT_InsultTextIndex = param_1;
             }
         }

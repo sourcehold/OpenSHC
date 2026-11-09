@@ -11,23 +11,20 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using UI::Enums::MenuModalType;
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004B1990
         void GreatestLord::MenuItemActionHandler_GreatestLord_Main(int param_1, ...)
         {
             if ((param_1 == 1) || (param_1 == 100)) {
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
             }
             if (param_1 == 10) {
                 DAT_GreatestLordDefinedData::instance.tableSortBy = -1;
             }
-            if (param_1 == 0xb) {
+            if (param_1 == 11) {
                 DAT_GreatestLordDefinedData::instance.tableSortBy = 1;
             }
-            if (param_1 == 0xc) {
+            if (param_1 == 12) {
                 DAT_GreatestLordDefinedData::instance.tableSortBy = 0;
             }
         }

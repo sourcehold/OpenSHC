@@ -10,8 +10,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004BAE80
         void General::MenuItemRenderFunction_General_MessageScrollbarUpDown(int param_1, ...)
         {

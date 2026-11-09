@@ -10,7 +10,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Game::TrailType;
         using Game::TrailTypeInt;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9230
