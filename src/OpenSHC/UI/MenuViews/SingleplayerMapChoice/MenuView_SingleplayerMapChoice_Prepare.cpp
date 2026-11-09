@@ -83,7 +83,7 @@ namespace UI {
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                Text::TAIT_UNKNOWN_4);
+                Text::TAIT_UNKNOWN);
             MACRO_CALL_MEMBER(Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
             INT_00b95b64::instance = 0;
             DAT_GameCore::instance.activeMenuTab.tabType = DAT_MapMissionType::instance != 0;

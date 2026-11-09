@@ -27,7 +27,7 @@ namespace UI {
         void BuildMenu::MenuView_BuildMenu_Prepare()
         {
             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                OpenSHC::Text::TAIT_UNKNOWN_4);
+                OpenSHC::Text::TAIT_UNKNOWN);
             if (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
                 && DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD
                 && DAT_GameCore::instance.menuTabToSwitchTo.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM

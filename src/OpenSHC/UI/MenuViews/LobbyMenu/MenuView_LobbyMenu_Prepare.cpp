@@ -108,7 +108,7 @@ namespace UI {
             DAT_MenuHandlerState::instance.y = borderHeight;
             DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                Text::TAIT_UNKNOWN_4);
+                Text::TAIT_UNKNOWN);
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::clearTextAndCursor, DAT_UserTextHandlerState::ptr)();
             INT_00b960fc::instance = timeGetTime();
             INT_00b95f6c::instance = 0;
