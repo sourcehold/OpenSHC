@@ -39,7 +39,7 @@ namespace UI {
                 }
                 case 20:
                     ++DAT_GameState::instance.mapAndTime.difficulty;
-                    // >= 4, not > 3: they compile differently
+                    // >= 4, not > 3 (> 3: quick_diff 0.9111 -> 0.8667)
                     if (DAT_GameState::instance.mapAndTime.difficulty >= 4) {
                         DAT_GameState::instance.mapAndTime.difficulty = 0;
                     }
