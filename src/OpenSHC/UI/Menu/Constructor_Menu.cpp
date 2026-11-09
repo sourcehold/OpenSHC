@@ -2,7 +2,6 @@
 
 #include "OpenSHC/UI/Enums/MenuItemType.hpp"
 #include "OpenSHC/UI/Enums/MenuItemUCMarker.hpp"
-#include "OpenSHC/UI/Enums/UserControlID.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -62,7 +61,7 @@ namespace UI {
                     ++count;
                 }
                 item->firstItemTypeData.itemsToSkip = count;
-                // options follow, each with members of its own
+                // options follow, each with members of its own (a while: a for over the options loses the match)
                 while (member->menuItemType == optionType) {
                     item->menuItemType |= optionGroupFlag;
                     actionHandler = member->menuItemActionHandler;
@@ -81,10 +80,10 @@ namespace UI {
                     option->firstItemTypeData.itemsToSkip = count;
                 }
             } else if (item->menuItemType & alternativeFlag) {
-                // the first of a run of alternatives is marked
-                MenuItem* first;
-                for (first = item; first->menuItemType & alternativeFlag && first != menuItemArrayAddress; --first) {}
-                first->menuItemType |= alternativesFlag;
+                // the item before a run of alternatives is marked as its head
+                MenuItem* head;
+                for (head = item; head->menuItemType & alternativeFlag && head != menuItemArrayAddress; --head) {}
+                head->menuItemType |= alternativesFlag;
             }
         }
         return this;

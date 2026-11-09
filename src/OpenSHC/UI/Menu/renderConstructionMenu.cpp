@@ -29,8 +29,7 @@ namespace UI {
     {
         DWORD const now = timeGetTime();
         MenuItem* const item = this->hoveredItem;
-        // the text's index is the low word of textMessageLookupIndex, read as a dword and masked
-        // (the ushort field_0x0: quick_diff 0.9559 -> 0.9227)
+        // the text's index is the low word of textMessageLookupIndex, read as a dword and masked, as the original does
         int const indexMask = 0xffff;
         if (item != NULL && (*(int*)&item->textMessageLookupIndex & indexMask) != 0) {
             // in the building menus, only these tabs show texts
@@ -43,8 +42,9 @@ namespace UI {
                 || DAT_GameCore::instance.activeMenuTab.tabType == BASMTT_TUNNELERSGUILD
                 || DAT_GameCore::instance.activeMenuTab.tabType == BASMTT_CATHEDRAL) {
                 int const index = *(int*)&item->textMessageLookupIndex & indexMask;
+                // each case stores and returns on its own: a shared store after a break loses the match
                 switch (DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].messageType) {
-                case 0:
+                case TMBLLSTE_UNKNOWN_0:
                     return;
                 case TMBLLSTE_BUTTON_TEXT:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
@@ -52,13 +52,12 @@ namespace UI {
                             DAT_BottomLeftTextDisplayState::ptr)(1,
                             DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textGroupIndex,
                             DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textIndexInGroup,
-                            DAT_RenderingDefinedData::instance.TextMessageLookupTable[index]
-                                .associatedType.buildingType,
+                            DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].associatedType.buttonText,
                             50, -1);
                     }
                     this->zero = 0;
                     return;
-                case 13:
+                case TMBLLSTE_UNKNOWN_13:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(13,
@@ -70,7 +69,7 @@ namespace UI {
                     }
                     this->zero = 0;
                     return;
-                case 7:
+                case TMBLLSTE_UNKNOWN_7:
                     MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                         DAT_BottomLeftTextDisplayState::ptr)(7,
                         DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textGroupIndex,
@@ -103,7 +102,7 @@ namespace UI {
                     }
                     this->zero = 0;
                     return;
-                case 9:
+                case TMBLLSTE_UNKNOWN_9:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(9,
@@ -132,11 +131,12 @@ namespace UI {
                         DAT_BottomLeftTextDisplayState::ptr)(6,
                         DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textGroupIndex,
                         DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textIndexInGroup,
-                        DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].associatedType.buildingType,
+                        DAT_RenderingDefinedData::instance.TextMessageLookupTable[index]
+                            .associatedType.unitsAndWeaponsType,
                         50, -1);
                     this->zero = 0;
                     return;
-                case 12:
+                case TMBLLSTE_UNKNOWN_12:
                     MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                         DAT_BottomLeftTextDisplayState::ptr)(12,
                         DAT_RenderingDefinedData::instance.TextMessageLookupTable[index].textGroupIndex,
@@ -145,7 +145,7 @@ namespace UI {
                         50, -1);
                     this->zero = 0;
                     return;
-                case 8:
+                case TMBLLSTE_UNKNOWN_8:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(8,
@@ -157,7 +157,7 @@ namespace UI {
                     }
                     this->zero = 0;
                     return;
-                case 10:
+                case TMBLLSTE_UNKNOWN_10:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(10,
@@ -169,7 +169,7 @@ namespace UI {
                     }
                     this->zero = 0;
                     return;
-                case 11:
+                case TMBLLSTE_UNKNOWN_11:
                     if (DAT_GameCore::instance.settingBubbleHelp) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(11,
@@ -200,6 +200,7 @@ namespace UI {
                             return;
                         }
                         this->zero = 2;
+                        // the index is masked again for these two, as the original does: reusing index loses the match
                         this->textIndexInGroup
                             = DAT_RenderingDefinedData::instance
                                   .TextMessageLookupTable[(*(int*)&item->textMessageLookupIndex & indexMask)]
@@ -209,9 +210,10 @@ namespace UI {
                                   .TextMessageLookupTable[(*(int*)&item->textMessageLookupIndex & indexMask)]
                                   .textGroupIndex;
                         // "Resume Game" while the game is paused
-                        if (this->textIndexInGroup == 302 && this->textGroupIndex == 8
+                        if (this->textIndexInGroup == 302
+                            && this->textGroupIndex == OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT
                             && DAT_GameCore::instance.gameSuspended == 1) {
-                            this->textGroupIndex = 74;
+                            this->textGroupIndex = OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS;
                             this->textIndexInGroup = 10;
                         }
                         this->someMenuItemPtr_0x3c = item;
@@ -223,6 +225,8 @@ namespace UI {
                             (OpenSHC::DE::SHCDE::eTextSections)this->textGroupIndex, this->textIndexInGroup);
                         int const width = MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(text, 17);
+                        // hoverTextX is set in both branches, as the original does: one store before the test loses the
+                        // match
                         if (DAT_GameCore::instance.currentMenuViewType != MVT_MISSION_FINISHED_TRANSITION
                             && DAT_GameCore::instance.currentMenuViewType != MVT_GAME_LOSTUnk) {
                             this->hoverTextX = DAT_MouseState::instance.screenSpaceX - width / 2 + 8;

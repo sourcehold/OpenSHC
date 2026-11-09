@@ -42,10 +42,10 @@ namespace UI {
         DAT_ButtonY::instance = this->menuPointer->yPosition + this->position.position.y;
         DAT_ButtonW::instance = this->itemWidth;
         DAT_ButtonH::instance = this->itemHeight;
-        // the index is the low 23 bits, as MIT_MENU_ITEM_TYPE_ID_PARTUnk is of an item type
+        // the low 23 bits are the index (the same mask as MIT_MENU_ITEM_TYPE_ID_PARTUnk)
         int const gmDataIndexMask = 0x7fffff;
         DAT_CurrentButtonGmDataIndex::instance = this->firstItemTypeData.gmDataIndex & gmDataIndexMask;
-        DAT_ButtonCurrentlyInteracting::instance = (BOOLEnum)(this->clicked | this->hovering);
+        DAT_ButtonCurrentlyInteracting::instance = this->clicked | this->hovering;
         DAT_ButtonBlendStrength::instance = 0;
         DAT_ButtonUnknownZero::instance = this->unknownZero;
         if (DAT_GameCore::instance.hasMenuRenderedUnk) {
@@ -72,52 +72,54 @@ namespace UI {
         }
         if (this->menuItemRenderFunctionType == OpenSHC::UI::Enums::MIRFT_SLIDER_OR_SCROLLBAR) {
             if (this->menuPointer->one) {
+                // 1: set-up: range and position
                 (*this->menuItemActionHandler.slider)(this->callbackParameter.parameter, 1,
-                    &this->secondItemTypeData.buttonState.someTimestamp_1_0x0,
-                    &this->secondItemTypeData.buttonState.clickTimestamp_0x4,
-                    &this->secondItemTypeData.buttonState.countTo100);
-                this->secondItemTypeData.buttonState.currentButtonPictureInGm_0xc = -1000;
-                if (this->secondItemTypeData.buttonState.countTo100
-                    < this->secondItemTypeData.buttonState.someTimestamp_1_0x0) {
-                    this->secondItemTypeData.buttonState.countTo100
-                        = this->secondItemTypeData.buttonState.someTimestamp_1_0x0;
+                    &this->secondItemTypeData.scrollbarOrSliderState.minValue,
+                    &this->secondItemTypeData.scrollbarOrSliderState.maxValue,
+                    &this->secondItemTypeData.scrollbarOrSliderState.currentValue);
+                this->secondItemTypeData.scrollbarOrSliderState.dragTiming = -1000;
+                if (this->secondItemTypeData.scrollbarOrSliderState.currentValue
+                    < this->secondItemTypeData.scrollbarOrSliderState.minValue) {
+                    this->secondItemTypeData.scrollbarOrSliderState.currentValue
+                        = this->secondItemTypeData.scrollbarOrSliderState.minValue;
                 }
-                if (this->secondItemTypeData.buttonState.countTo100
-                    > this->secondItemTypeData.buttonState.clickTimestamp_0x4) {
-                    this->secondItemTypeData.buttonState.countTo100
-                        = this->secondItemTypeData.buttonState.clickTimestamp_0x4;
+                if (this->secondItemTypeData.scrollbarOrSliderState.currentValue
+                    > this->secondItemTypeData.scrollbarOrSliderState.maxValue) {
+                    this->secondItemTypeData.scrollbarOrSliderState.currentValue
+                        = this->secondItemTypeData.scrollbarOrSliderState.maxValue;
                 }
             }
-            BOOLEnum isActive = FALSE;
-            int knobOffset = 0;
+            // declared here, before thumbPos and thumbLength: at its first use it loses the match
+            BOOLEnum isDragged = FALSE;
+            int thumbPos = 0;
             int length = this->itemWidth;
             if ((this->menuItemType & OpenSHC::UI::Enums::MIT_MENU_ITEM_TYPE_ID_PARTUnk)
                 == OpenSHC::UI::Enums::MIT_SCROLLBARUnk) {
                 length = this->itemHeight;
             }
-            int knobLength = length;
-            // the range is written out at each use, not kept in a local (a local: quick_diff 0.9645 -> 0.8832)
-            if ((this->secondItemTypeData.buttonState.clickTimestamp_0x4
-                    - this->secondItemTypeData.buttonState.someTimestamp_1_0x0)
+            int thumbLength = length;
+            // the range is written out at each use: a local loses the match
+            if ((this->secondItemTypeData.scrollbarOrSliderState.maxValue
+                    - this->secondItemTypeData.scrollbarOrSliderState.minValue)
                 > 0) {
-                knobLength = length
-                    / ((this->secondItemTypeData.buttonState.clickTimestamp_0x4
-                           - this->secondItemTypeData.buttonState.someTimestamp_1_0x0)
+                thumbLength = length
+                    / ((this->secondItemTypeData.scrollbarOrSliderState.maxValue
+                           - this->secondItemTypeData.scrollbarOrSliderState.minValue)
                         + 1);
-                if (knobLength <= this->firstItemTypeData.itemsToSkip) {
-                    knobLength = this->firstItemTypeData.itemsToSkip;
+                if (thumbLength <= this->firstItemTypeData.itemsToSkip) {
+                    thumbLength = this->firstItemTypeData.itemsToSkip;
                 }
-                knobOffset = (this->secondItemTypeData.buttonState.countTo100
-                                 - this->secondItemTypeData.buttonState.someTimestamp_1_0x0)
-                    * (length - knobLength)
-                    / (this->secondItemTypeData.buttonState.clickTimestamp_0x4
-                        - this->secondItemTypeData.buttonState.someTimestamp_1_0x0);
+                thumbPos = (this->secondItemTypeData.scrollbarOrSliderState.currentValue
+                               - this->secondItemTypeData.scrollbarOrSliderState.minValue)
+                    * (length - thumbLength)
+                    / (this->secondItemTypeData.scrollbarOrSliderState.maxValue
+                        - this->secondItemTypeData.scrollbarOrSliderState.minValue);
             }
-            if (this->secondItemTypeData.buttonState.currentButtonPictureInGm_0xc > -1000) {
-                isActive = TRUE;
+            if (this->secondItemTypeData.scrollbarOrSliderState.dragTiming > -1000) {
+                isDragged = TRUE;
             }
-            (*this->menuItemRenderFunction.slider)(this->callbackParameter.parameter, knobOffset,
-                this->secondItemTypeData.buttonState.countTo100, knobLength, isActive);
+            (*this->menuItemRenderFunction.slider)(this->callbackParameter.parameter, thumbPos,
+                this->secondItemTypeData.scrollbarOrSliderState.currentValue, thumbLength, isDragged);
         } else if (this->menuItemRenderFunctionType == OpenSHC::UI::Enums::MIRFT_SIMPLE_RENDERUnk) {
             (*this->menuItemRenderFunction.simple)(this->callbackParameter.parameter);
         } else if (this->menuItemRenderFunctionType == OpenSHC::UI::Enums::MIRFT_GM_DATA_IMAGE) {

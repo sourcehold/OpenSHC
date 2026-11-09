@@ -24,6 +24,7 @@ namespace UI {
         int const alternativeFlag = 1 << 26;
         int const alternativesFlag = 1 << 27;
         int const renderSeparatelyFlag = 1 << 23;
+        int const hiddenFlag = 1 << 31;
         this->currentBuildMenuButtonShiftUnk_0x14 = 0;
         for (MenuItem* item = this->menuItemArray; item->menuItemType != MIT_LAST_ENTRY; ++item) {
             MenuItemTypeInt const type = item->menuItemType;
@@ -65,38 +66,39 @@ namespace UI {
             } else if (type == optionType) {
                 item += item->firstItemTypeData.itemsToSkip;
             } else if (type == clickHandlerType) {
-                DAT_GameCore::instance.menuType7_MenuItemClickHandlerUnk
-                    = (MenuItemActionHandler*)item->menuItemActionHandler.simple;
+                DAT_GameCore::instance.menuType7_MenuItemClickHandlerUnk = item->menuItemActionHandler.simple;
             } else if (type != MIT_START_OF_INTERACTION_GROUPUnk && (type & alternativeFlag) == 0) {
                 if (type & alternativesFlag) {
-                    for (MenuItem* option = item + 1; option->menuItemType & alternativeFlag; ++option) {
-                        if (option->testNotEqualZero == DAT_GameCore::instance.unknownAlwaysZero01) {
-                            item = option;
+                    for (MenuItem* alternative = item + 1; alternative->menuItemType & alternativeFlag; ++alternative) {
+                        if (alternative->testNotEqualZero == DAT_GameCore::instance.unknownAlwaysZero01) {
+                            item = alternative;
                             break;
                         }
                     }
                 }
-                // the sign bit tested, not >= 0 (>= 0: quick_diff 0.9191 -> 0.9118)
-                if ((item->menuItemType & 1 << 31) == 0) {
-                    if ((item->menuItemType & renderSeparatelyFlag) != 0
-                            && funcIndex == MIHS_PREPARE_AND_RENDER_FOR_FLAG_0X800000
-                        || (item->menuItemType & renderSeparatelyFlag) == 0 && funcIndex == MIHS_PREPARE_AND_RENDER
-                        || funcIndex == MIHS_HANDLE_INPUT_CALLBACKSUnk || funcIndex == MIHS_RESET_MENU_ITEM_STATEUnk) {
-                        switch (funcIndex) {
-                        case MIHS_HANDLE_INPUT_CALLBACKSUnk:
-                            if (MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::handleMenuElementsCallbacks, item)()) {
-                                return;
-                            }
-                            break;
-                        case MIHS_PREPARE_AND_RENDER:
-                        case MIHS_PREPARE_AND_RENDER_FOR_FLAG_0X800000:
-                            MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::prepareAndRenderMenuItems, item)();
-                            break;
-                        case MIHS_RESET_MENU_ITEM_STATEUnk:
-                            MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::resetMenuItemStateUnk, item)();
-                            break;
-                        }
+                // the sign bit is tested with &, not as >= 0, as the original does
+                if (item->menuItemType & hiddenFlag) {
+                    continue;
+                }
+                if (!(((item->menuItemType & renderSeparatelyFlag) != 0
+                          && funcIndex == MIHS_PREPARE_AND_RENDER_FOR_FLAG_0X800000)
+                        || ((item->menuItemType & renderSeparatelyFlag) == 0 && funcIndex == MIHS_PREPARE_AND_RENDER)
+                        || funcIndex == MIHS_HANDLE_INPUT_CALLBACKSUnk || funcIndex == MIHS_RESET_MENU_ITEM_STATEUnk)) {
+                    continue;
+                }
+                switch (funcIndex) {
+                case MIHS_HANDLE_INPUT_CALLBACKSUnk:
+                    if (MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::handleMenuElementsCallbacks, item)()) {
+                        return;
                     }
+                    break;
+                case MIHS_PREPARE_AND_RENDER:
+                case MIHS_PREPARE_AND_RENDER_FOR_FLAG_0X800000:
+                    MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::prepareAndRenderMenuItems, item)();
+                    break;
+                case MIHS_RESET_MENU_ITEM_STATEUnk:
+                    MACRO_CALL_MEMBER(OpenSHC::UI::MenuItem_Func::resetMenuItemStateUnk, item)();
+                    break;
                 }
             }
         }
