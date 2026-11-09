@@ -44,7 +44,7 @@ namespace Map {
                 int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = DAT_TileMapState::instance.CertainPathLayer[_tile];
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidateTile = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidateTile] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidateTile]

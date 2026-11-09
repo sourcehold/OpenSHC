@@ -23,7 +23,7 @@ namespace Map {
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
             if ((uint)ySpace <= MC_MAP_XY_LIMIT_MIN_1 && (uint)y <= MC_MAP_XY_LIMIT_MIN_1
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != '\0') {
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != 0) {
                 this->searchGeneration += 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -53,7 +53,7 @@ namespace Map {
                       the unit itself, or building space without a unit
                      */
                     if (_unitID == unitID
-                        || (DAT_TileMapState::instance.OccupancyLayer[_tile] == '\0' && _unitID == 0
+                        || (DAT_TileMapState::instance.OccupancyLayer[_tile] == 0 && _unitID == 0
                             && _buildingAtStart == DAT_TileMapState::instance.BuildingLayer[_tile])) {
                         this->ALG_ResultTile = _tile;
                         this->ALG_ResultY = _y;

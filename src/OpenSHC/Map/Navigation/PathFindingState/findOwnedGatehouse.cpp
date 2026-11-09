@@ -60,7 +60,7 @@ namespace Map {
                     return 0;
                 }
                 char _link = DAT_TileMapState::instance.PathLinkageLayer[_tile];
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]

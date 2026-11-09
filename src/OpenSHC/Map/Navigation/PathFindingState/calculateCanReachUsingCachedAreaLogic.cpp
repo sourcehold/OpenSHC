@@ -28,14 +28,14 @@ namespace Map {
             }
             if (this->field_0x90 == 0) {
                 this->field_0x90 = 1;
-                for (int _index = 0; _index < 10; ++_index) {
+                for (int _index = 0; _index < countof(this->searchQueue.acceptAreaPairArray1); ++_index) {
                     this->searchQueue.acceptAreaPairArray1[_index].area1 = -1;
                     this->searchQueue.acceptAreaPairArray1[_index].area2 = -1;
                     this->searchQueue.rejectionAreaPairArray[_index].area1 = -1;
                     this->searchQueue.rejectionAreaPairArray[_index].area2 = -1;
                 }
             } else {
-                for (int _index = 0; _index < 10; ++_index) {
+                for (int _index = 0; _index < countof(this->searchQueue.acceptAreaPairArray1); ++_index) {
                     AreaPairInt const& _pair = this->searchQueue.acceptAreaPairArray1[_index];
                     if (_pair.area1 != -1) {
                         if (_pair.area1 == _area1 && _pair.area2 == _area2) {
@@ -46,7 +46,7 @@ namespace Map {
                         }
                     }
                 }
-                for (int _index = 0; _index < 10; ++_index) {
+                for (int _index = 0; _index < countof(this->searchQueue.rejectionAreaPairArray); ++_index) {
                     AreaPairInt const& _pair = this->searchQueue.rejectionAreaPairArray[_index];
                     if (_pair.area1 != -1) {
                         if (_pair.area1 == _area1 && _pair.area2 == _area2) {
@@ -66,7 +66,7 @@ namespace Map {
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
                     this)(_x1, _y1, _x2, _y2, 100000, 0);
             if (_canReach) {
-                for (int _index = 0; _index < 10; ++_index) {
+                for (int _index = 0; _index < countof(this->searchQueue.acceptAreaPairArray1); ++_index) {
                     if (this->searchQueue.acceptAreaPairArray1[_index].area1 == -1) {
                         this->searchQueue.acceptAreaPairArray1[_index].area1 = _area1;
                         this->searchQueue.acceptAreaPairArray1[_index].area2 = _area2;
@@ -75,7 +75,7 @@ namespace Map {
                 }
                 return TRUE;
             }
-            for (int _index = 0; _index < 10; ++_index) {
+            for (int _index = 0; _index < countof(this->searchQueue.rejectionAreaPairArray); ++_index) {
                 if (this->searchQueue.rejectionAreaPairArray[_index].area1 == -1) {
                     this->searchQueue.rejectionAreaPairArray[_index].area1 = _area1;
                     this->searchQueue.rejectionAreaPairArray[_index].area2 = _area2;

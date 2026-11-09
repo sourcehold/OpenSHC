@@ -20,7 +20,7 @@ namespace Map {
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                 y, tile);
-            for (int _direction = 0; _direction < 8; ++_direction) {
+            for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                 int _nextTile = DAT_TileMapState::instance.directionTranslationMatrix[y][_direction] + tile;
                 int _nextY
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y;

@@ -28,12 +28,12 @@ namespace Map {
             dword _bestTile = 0;
             if (param_1 > MC_MAP_XY_LIMIT_MIN_1 || param_2 > MC_MAP_XY_LIMIT_MIN_1
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_2 * MC_MAP_XY_LIMIT + param_1]
-                    == '\0') {
+                    == 0) {
                 return _candidate;
             }
             this->calculations += 1;
             this->searchGeneration += 1;
-            if (32000 < this->searchGeneration) {
+            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
@@ -60,18 +60,13 @@ namespace Map {
                 if (MC_MAP_TILES_COUNT < this->searchQueue.currentDistance) {
                     return _bestTile;
                 }
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_queuedTile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                         != 0) {
                         _candidate
                             = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _queuedTile;
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
-                            /*
-                              attackInfo + 0x301C0 + playerID * sizeof(AttackInfoSubElement) is
-                              playerInfo[playerID - 1], whose first field selects which of the nine
-                              pathfinding cost planes this search reads
-                             */
                             int _plane = DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
                                              .currentPlayerID_OR_attackedPlayerID_OR_one;
                             uint _hackValue

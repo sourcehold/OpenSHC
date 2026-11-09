@@ -17,7 +17,7 @@ namespace Map {
         void PathFindingState::updateAIZoneWithFloodFill0x20(int max, uint ySpace, uint y)
         {
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return;
             }
             this->searchGeneration += 1;
@@ -45,7 +45,7 @@ namespace Map {
                 if (this->searchQueue.currentDistance > max) {
                     return;
                 }
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     /*
                       fixme: the edge test is done on the current tile, not on the candidate
                      */

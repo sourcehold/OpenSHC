@@ -19,16 +19,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049EDF0
         BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint ySpace, uint y, undefined4 aiInfoFlags)
         {
-            // rule 24 cannot reach this one: it is assigned inside the comma expression in the
-            // condition below, which C++98 has no declaration form for
             int _candidate;
             this->calculations += 1;
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return FALSE;
             }
             this->searchGeneration += 1;
-            if (32000 < this->searchGeneration) {
+            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
@@ -60,7 +58,7 @@ namespace Map {
                 if (this->searchQueue.currentDistance > maxDistance) {
                     return FALSE;
                 }
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                             != 0

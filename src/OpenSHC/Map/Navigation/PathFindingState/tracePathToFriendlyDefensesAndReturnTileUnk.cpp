@@ -22,7 +22,7 @@ namespace Map {
             if (MC_MAP_XY_LIMIT_MIN_1 < x || MC_MAP_XY_LIMIT_MIN_1 < y) {
                 return 0;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
                 return 0;
             }
             this->calculations += 1;
@@ -56,7 +56,7 @@ namespace Map {
                     return 0;
                 }
                 byte _link = DAT_TileMapState::instance.PathLinkageLayer[_candidateTile];
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidate
                         = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _candidateTile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration

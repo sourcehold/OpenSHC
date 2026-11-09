@@ -20,7 +20,7 @@ namespace Map {
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1) {
                 return FALSE;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return FALSE;
             }
             int _rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
@@ -32,7 +32,7 @@ namespace Map {
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.yOffset
                     + y;
                 if (_x <= MC_MAP_XY_LIMIT_MIN_1 && _y <= MC_MAP_XY_LIMIT_MIN_1
-                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * MC_MAP_XY_LIMIT + _x] != '\0') {
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * MC_MAP_XY_LIMIT + _x] != 0) {
                     int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex] + _rowTile;
                     uint _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                     if ((_logic
@@ -43,9 +43,6 @@ namespace Map {
                                & (LogicHelpers::L_BUILDING | LogicHelpers::L_TREE | LogicHelpers::L_RIVER
                                    | LogicHelpers::L_KEEP_NON_MANOR_HOUSE | LogicHelpers::L_MOAT))
                             == 0) {
-                        /*
-                          No sea, borders, rocky, building, tree, river, keep, moat
-                         */
                         this->ALG_ResultY = _y;
                         this->ALG_ResultTile = _tile;
                         this->ALG_ResultX = _x;

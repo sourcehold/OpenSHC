@@ -20,7 +20,7 @@ namespace Map {
         void PathFindingState::raiseLand2(uint ySpace, uint y, int maxDistance)
         {
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == '\0') {
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -46,7 +46,7 @@ namespace Map {
                 if (this->searchQueue.currentDistance > maxDistance)
                     break;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(tileUnk, _y, 4, 1);
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
                     if (DAT_TileMapState::instance.CertainPathLayer[_candidate] <= 0
                         && DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _startArea

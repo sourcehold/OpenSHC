@@ -32,7 +32,7 @@ namespace Map {
             int _startY = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
             if ((uint)_startX > MC_MAP_XY_LIMIT_MIN_1 || (uint)_startY > MC_MAP_XY_LIMIT_MIN_1
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_startY * MC_MAP_XY_LIMIT + _startX]
-                    == '\0') {
+                    == 0) {
                 return;
             }
             this->calculations += 1;
@@ -83,7 +83,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[_tile].statueCommemoratingPlayerID = playerID;
                     return;
                 }
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_startY][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]

@@ -23,7 +23,7 @@ namespace Map {
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
             if ((uint)ySpace <= MC_MAP_XY_LIMIT_MIN_1 && (uint)y <= MC_MAP_XY_LIMIT_MIN_1
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != '\0') {
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != 0) {
                 this->searchGeneration += 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;

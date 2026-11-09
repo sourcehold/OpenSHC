@@ -71,7 +71,7 @@ namespace Map {
                 }
                 int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                for (int _direction = 0; _direction < 8; ++_direction) {
+                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                         int _organism = DAT_TileMapState::instance.OrganismLayer[_candidate];

@@ -67,7 +67,7 @@ namespace Map {
                 sizeof(DAT_TileMapState::instance.PathConnectionLayer), 0,
                 (void*)(DAT_TileMapState::instance.PathConnectionLayer));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                4000, '\0', (void*)(this->zoneSizesArray));
+                4000, 0, (void*)(this->zoneSizesArray));
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
             int _row = 0;
@@ -84,7 +84,7 @@ namespace Map {
                   (cmp byte ptr [eax*2 + ..], 0), so an area ID that is a multiple of 256
                   reads as unassigned here. Kept as the original has it.
                  */
-                if ((char)DAT_TileMapState::instance.PathConnectionLayer[_first] != '\0'
+                if ((char)DAT_TileMapState::instance.PathConnectionLayer[_first] != 0
                     || (DAT_TileMapState::instance.LogicLayer[_first]
                            & (LogicHelpers::L_SEA | LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE
                                | LogicHelpers::L_ROCKY | LogicHelpers::L_BUILDING | LogicHelpers::L_TREE
