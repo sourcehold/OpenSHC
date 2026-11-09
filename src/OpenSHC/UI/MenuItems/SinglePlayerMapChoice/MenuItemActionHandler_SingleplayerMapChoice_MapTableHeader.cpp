@@ -14,8 +14,7 @@ namespace UI {
             // A click on a column header sorts the map list by that column, and a second click reverses the order
             switch (column) {
             case 0: {
-                // Name: the order kept in DAT_ArrayOfMapIndices2 (read with - 1, as its other users do), backwards
-                // after the first click
+                // Name: the order kept in DAT_ArrayOfMapIndices2, backwards after the first click
                 if (DAT_MenuTextInputState::instance.fileListSortOrder == 0) {
                     for (int i = 0; i < DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber; ++i) {
                         DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[i]
@@ -28,7 +27,7 @@ namespace UI {
                 }
                 int i = 0;
                 if (i < DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber) {
-                    // A guarded do-while: as a for loop MSVC turns the copy into rep movsd
+                    // A guarded do-while (a for or a while loop: quick_diff 0.9738 -> 0.9283)
                     do {
                         DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[i]
                             = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices2[i - 1];

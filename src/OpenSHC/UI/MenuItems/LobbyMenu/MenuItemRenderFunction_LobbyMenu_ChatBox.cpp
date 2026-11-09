@@ -44,7 +44,7 @@ namespace UI {
             }
             int const blend = DAT_ButtonBackgroundBlendStrength::instance - 32;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-            // nested in the original's block order (early returns for -3 and -2 measure lower)
+            // Nested, not early returns (early returns: quick_diff 0.9671 -> 0.6184)
             if (buttonID != -3) {
                 if (buttonID != -2) {
                     // the waiting room's texts, and for -1 the player's own name
@@ -79,7 +79,7 @@ namespace UI {
                         DAT_ButtonX::instance + 7 + cursorX, DAT_ButtonH::instance + DAT_ButtonY::instance - 2,
                         COL_DARK_LIME::instance.shortValue);
                 }
-                // the blend strength is read again after the calls, as the original does
+                // the blend strength read again after the calls (the blend local: quick_diff 0.9671 -> 0.8803)
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
                     DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::getCurrentText,
                                                     DAT_UserTextHandlerState::ptr)(),

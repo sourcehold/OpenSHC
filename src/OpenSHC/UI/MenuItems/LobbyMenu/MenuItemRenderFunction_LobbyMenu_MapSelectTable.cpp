@@ -36,8 +36,8 @@ namespace UI {
             if (MACRO_CALL(OpenSHC::UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)()) {
                 return;
             }
-            // set for the host while the round table or an AI lord select is open; a guest stores TRUE, then FALSE
-            bool const aiSetupOpen
+            // TRUE for the host while an AI setup dialog is open (no flag: quick_diff 0.9781 -> 0.9607)
+            BOOLEnum const aiSetupOpen
                 = DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_ROUNDTABLE
                 || DAT_MenuModalComposition1::instance.activeModalDialogID
                     == OpenSHC::UI::Enums::MMT_BASIC_AI_LORD_SELECT
@@ -108,6 +108,7 @@ namespace UI {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 iconsWidth = 20;
             }
+            // declared once for both calls (at each call: quick_diff 0.9781 -> 0.9649)
             int descriptionGroup;
             if (DAT_GameSynchronyState::instance.mapU4Int0_2Array[DAT_MenuTextInputState::instance
                         .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + row]]
@@ -118,29 +119,29 @@ namespace UI {
                     DAT_ButtonX::instance + 24 + iconsWidth, DAT_ButtonY::instance + 5,
                     DAT_ButtonBackgroundBlendStrength::instance);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                // the file name first: as an argument, &descriptionGroup would be pushed before the call
-                char* const fileName = MACRO_CALL_MEMBER(
+                // The file name in a local (as an argument: quick_diff 0.9781 -> 0.9518)
+                char* const loadedName = MACRO_CALL_MEMBER(
                     OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex, DAT_ResourceManager::ptr)(
                     DAT_MenuTextInputState::instance
                         .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + row]);
-                char* const name
-                    = MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(fileName, &descriptionGroup);
+                char* const mapName
+                    = MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(loadedName, &descriptionGroup);
                 DAT_TextManagerObject::instance.field_0x30 = 1;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
-                    name, DAT_ButtonX::instance + 44 + iconsWidth, DAT_ButtonY::instance + 3, 150 - iconsWidth, color,
-                    18, (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32 / 32 + 32);
+                    mapName, DAT_ButtonX::instance + 44 + iconsWidth, DAT_ButtonY::instance + 3, 150 - iconsWidth,
+                    color, 18, (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32 / 32 + 32);
                 return;
             }
-            char* const fileName
+            char* const loadedName
                 = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                     DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
                         .DAT_ArrayOfMapIndices[DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + row]);
-            char* const name
-                = MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(fileName, &descriptionGroup);
+            char* const mapName
+                = MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(loadedName, &descriptionGroup);
             DAT_TextManagerObject::instance.field_0x30 = 1;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
-                name, DAT_ButtonX::instance + 24 + iconsWidth, DAT_ButtonY::instance + 3, 170 - iconsWidth, color, 18,
-                (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32 / 32 + 32);
+                mapName, DAT_ButtonX::instance + 24 + iconsWidth, DAT_ButtonY::instance + 3, 170 - iconsWidth, color,
+                18, (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32 / 32 + 32);
         }
 
     }

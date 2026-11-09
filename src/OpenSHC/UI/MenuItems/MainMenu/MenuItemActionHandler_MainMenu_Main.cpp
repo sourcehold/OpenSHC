@@ -59,7 +59,7 @@ namespace UI {
                     OpenSHC::UI::Enums::MVT_SELECT_CRUSADE, 0);
                 return;
             case 3:
-                // castle builder (the tail is written out in case 4 too: MSVC jumps from here into that copy)
+                // castle builder; the tail in each case (one copy after the switch: quick_diff 0.9500 -> 0.7756)
                 DAT_GameCore::instance.missionNumber1to20 = 0;
                 DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_BUILDERUnk;
                 DAT_GameCore::instance.xbowProducible_logic = 1;
