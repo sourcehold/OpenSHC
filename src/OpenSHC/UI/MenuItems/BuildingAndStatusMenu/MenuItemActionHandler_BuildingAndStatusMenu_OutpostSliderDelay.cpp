@@ -10,15 +10,12 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderDelay(
             int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
         {
-            short* psVar1;
-            short sVar2;
-            int _selectedBuildingID;
-            _selectedBuildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
+            int const selectedBuildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
             switch (param_2) {
             case 1:
                 *minValue = 0;
                 *maxValue = 24000;
-                *currentValue = (int)DAT_BuildingsState::instance.buildings[_selectedBuildingID].outpostRelatedUnk3;
+                *currentValue = (int)DAT_BuildingsState::instance.buildings[selectedBuildingID].outpostRelatedUnk3;
                 return;
             case 2:
             case 3:
@@ -30,25 +27,31 @@ namespace UI {
                     = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk3;
                 return;
-            case 5:
-                sVar2 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                            .outpostRelatedUnk3;
-                psVar1 = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                              .outpostRelatedUnk3;
-                if (0 < sVar2) {
-                    *psVar1 = sVar2 - 1;
+            case 5: {
+                short const delay
+                    = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                          .outpostRelatedUnk3;
+                short* const delayField
+                    = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                           .outpostRelatedUnk3;
+                if (0 < delay) {
+                    *delayField = delay - 1;
                 }
-                *currentValue = (int)*psVar1;
+                *currentValue = (int)*delayField;
                 return;
-            case 6:
-                sVar2 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                            .outpostRelatedUnk3;
-                psVar1 = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                              .outpostRelatedUnk3;
-                if (sVar2 < 24000) {
-                    *psVar1 = sVar2 + 1;
+            }
+            case 6: {
+                short const delay
+                    = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                          .outpostRelatedUnk3;
+                short* const delayField
+                    = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                           .outpostRelatedUnk3;
+                if (delay < 24000) {
+                    *delayField = delay + 1;
                 }
-                *currentValue = (int)*psVar1;
+                *currentValue = (int)*delayField;
+            }
             }
         }
 

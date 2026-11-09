@@ -21,10 +21,8 @@ namespace UI {
                 DAT_GameSynchronyState::instance.selectedProviderIndex = param_1;
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::setMenuTypeBasedOnDirectPlayGUID,
                     DAT_GameSynchronyState::ptr)();
-                /*
-                  the original dispatches with a `sub eax, K; je` chain (0x487228), MSVC's
-                  sparse switch, and the TCPIP arm sits first
-                 */
+                // the original dispatches with a `sub eax, K; je` chain (0x487228), MSVC's
+                // sparse switch, and the TCPIP arm sits first
                 switch (DAT_GameCore::instance.activeMenuTab.tabType) {
                 case OpenSHC::UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP:
                     MACRO_CALL_MEMBER(

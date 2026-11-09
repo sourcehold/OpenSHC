@@ -10,15 +10,12 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderSize(
             int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
         {
-            short* psVar1;
-            short sVar2;
-            int iVar3;
-            iVar3 = DAT_BuildingsState::instance.menuSelectedBuildingID;
+            int const buildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
             switch (param_2) {
             case 1:
                 *minValue = 0;
                 *maxValue = 5;
-                *currentValue = (int)DAT_BuildingsState::instance.buildings[iVar3].outpostRelatedUnk2;
+                *currentValue = (int)DAT_BuildingsState::instance.buildings[buildingID].outpostRelatedUnk2;
                 return;
             case 2:
             case 3:
@@ -30,25 +27,31 @@ namespace UI {
                     = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk2;
                 return;
-            case 5:
-                sVar2 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                            .outpostRelatedUnk2;
-                psVar1 = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                              .outpostRelatedUnk2;
-                if (0 < sVar2) {
-                    *psVar1 = sVar2 - 1;
+            case 5: {
+                short const oldSize
+                    = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                          .outpostRelatedUnk2;
+                short* const sizeField
+                    = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                           .outpostRelatedUnk2;
+                if (0 < oldSize) {
+                    *sizeField = oldSize - 1;
                 }
-                *currentValue = (int)*psVar1;
+                *currentValue = (int)*sizeField;
                 return;
-            case 6:
-                sVar2 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                            .outpostRelatedUnk2;
-                psVar1 = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                              .outpostRelatedUnk2;
-                if (sVar2 < 5) {
-                    *psVar1 = sVar2 + 1;
+            }
+            case 6: {
+                short const oldSize
+                    = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                          .outpostRelatedUnk2;
+                short* const sizeField
+                    = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                           .outpostRelatedUnk2;
+                if (oldSize < 5) {
+                    *sizeField = oldSize + 1;
                 }
-                *currentValue = (int)*psVar1;
+                *currentValue = (int)*sizeField;
+            }
             }
         }
 

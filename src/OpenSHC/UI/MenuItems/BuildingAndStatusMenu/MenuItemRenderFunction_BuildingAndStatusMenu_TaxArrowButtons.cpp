@@ -19,12 +19,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004657B0
         void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_TaxArrowButtons(int param_1, ...)
         {
-            char* textAddress;
-            int yParam;
             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
             if (0 <= param_1) {
-                yParam = DAT_ButtonY::instance + 4;
+                int yParam = DAT_ButtonY::instance + 4;
                 int xParam = (int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

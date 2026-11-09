@@ -11,8 +11,6 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_TaxSlider(
             int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
         {
-            int* piVar1;
-            int iVar2;
             switch (param_2) {
             case 1:
                 *minValue = 0;
@@ -27,26 +25,32 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .taxesSliderUI = *currentValue;
                 return;
-            case 5:
-                iVar2 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .taxesSliderUI;
-                piVar1 = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .taxesSliderUI;
-                if (0 < iVar2) {
-                    *piVar1 = iVar2 - 1;
+            case 5: {
+                int const taxesSliderValue
+                    = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .taxesSliderUI;
+                int* const taxesSlider
+                    = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                           .taxesSliderUI;
+                if (0 < taxesSliderValue) {
+                    *taxesSlider = taxesSliderValue - 1;
                 }
-                *currentValue = *piVar1;
+                *currentValue = *taxesSlider;
                 return;
-            case 6:
-                iVar2 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .taxesSliderUI;
-                piVar1 = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .taxesSliderUI;
-                if (iVar2 < 11) {
-                    *piVar1 = iVar2 + 1;
+            }
+            case 6: {
+                int const taxesSliderValue
+                    = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .taxesSliderUI;
+                int* const taxesSlider
+                    = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                           .taxesSliderUI;
+                if (taxesSliderValue < 11) {
+                    *taxesSlider = taxesSliderValue + 1;
                 }
-                *currentValue = *piVar1;
+                *currentValue = *taxesSlider;
                 break;
+            }
             default:
                 break;
             }

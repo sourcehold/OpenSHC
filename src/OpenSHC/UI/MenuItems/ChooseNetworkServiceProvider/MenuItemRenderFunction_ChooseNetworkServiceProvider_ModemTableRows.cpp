@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -34,8 +35,8 @@ namespace UI {
             if (DAT_GameSynchronyState::instance.modemScrollBarOffset + param_1
                 < DAT_GameSynchronyState::instance.modemScrollbarCount) {
                 if ((param_1 == DAT_GameSynchronyState::instance.modemScrollbarIndex)
-                    || (color = 0xc2f0eb, DAT_ButtonCurrentlyInteracting::instance)) {
-                    color = 0xccfaff;
+                    || (color = OpenSHC::Rendering::Colors::COL_C2F0EB, DAT_ButtonCurrentlyInteracting::instance)) {
+                    color = OpenSHC::Rendering::Colors::COL_CCFAFF;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance

@@ -17,15 +17,11 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_HorizontalSlider(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOL isDragged)
         {
-            int iVar1 = 0;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-            if (0 < (int)DAT_ButtonW::instance) {
-                do {
-                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 281,
-                        DAT_ButtonX::instance + iVar1, (int)(DAT_ButtonY::instance));
-                    iVar1 += 26;
-                } while (iVar1 < (int)DAT_ButtonW::instance);
+            for (int trackOffset = 0; trackOffset < (int)DAT_ButtonW::instance; trackOffset += 26) {
+                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 281,
+                    DAT_ButtonX::instance + trackOffset, (int)(DAT_ButtonY::instance));
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 280,

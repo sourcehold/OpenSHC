@@ -14,21 +14,21 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004393C0
         void BuildMenu::MenuItemActionHandler_BuildMenu_CurrentlySelectedTroops(int slotID, ...)
         {
-            UnitTypeInt unitType;
-            int _unitType;
             DAT_UnitsState::instance.unitControlsRelated = 1;
             if (slotID < 20) {
-                _unitType = DAT_RenderingDefinedData::instance
-                                .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID]];
+                UnitTypeInt const unitType
+                    = DAT_RenderingDefinedData::instance
+                          .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID]];
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueClickNavigateMenuOrEscape,
-                    DAT_UnitsState::ptr)(_unitType);
+                    DAT_UnitsState::ptr)(unitType);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::filterUnitSelectionForUnitType,
-                    DAT_UnitsState::ptr)(_unitType);
+                    DAT_UnitsState::ptr)(unitType);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recountUnitsInSelection, DAT_UnitsState::ptr)();
                 return;
             }
-            unitType = DAT_RenderingDefinedData::instance
-                           .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID - 20]];
+            UnitTypeInt const unitType
+                = DAT_RenderingDefinedData::instance
+                      .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID - 20]];
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueUnitTypeCommand, DAT_UnitsState::ptr)(
                 unitType);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::filterUnitSelectionExcludeUnitType,

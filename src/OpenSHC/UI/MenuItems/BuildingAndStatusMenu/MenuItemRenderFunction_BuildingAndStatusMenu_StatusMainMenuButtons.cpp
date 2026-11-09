@@ -25,23 +25,16 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0043E4E0
         void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_StatusMainMenuButtons(int param_1, ...)
         {
-            char* textAddress;
-            int yParam;
-            TextAlignment alignment;
-            BGR24 color;
-            int fontSize;
-            BOOLEnum keepOffsetX;
-            int blendStrength;
             if (DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU) {
                 MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                blendStrength = 0;
-                keepOffsetX = FALSE;
-                fontSize = 19;
-                color = 0;
+                int blendStrength = 0;
+                BOOLEnum keepOffsetX = FALSE;
+                int fontSize = 19;
+                BGR24 color = 0;
                 int xParam = (int)DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
-                alignment = OpenSHC::Text::TTA_CENTER;
-                yParam = DAT_ButtonY::instance + 10;
+                TextAlignment alignment = OpenSHC::Text::TTA_CENTER;
+                int yParam = DAT_ButtonY::instance + 10;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, param_1 - 71),
