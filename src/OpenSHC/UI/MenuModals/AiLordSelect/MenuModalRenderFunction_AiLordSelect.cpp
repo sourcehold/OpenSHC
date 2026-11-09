@@ -30,7 +30,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
                     DAT_TextureRenderCoreObject::ptr)(20, x, y);
             }
-            if (8 < DAT_GameCore::instance.numOfAIsWithCastleUnk) {
+            // tested again, as the original does
+            if (DAT_GameCore::instance.numOfAIsWithCastleUnk > 8) {
                 yPos += 76;
             }
             if (DAT_MouseState::instance.rightClickStart) {
@@ -39,6 +40,7 @@ namespace UI {
             }
             int textX = x + 24;
             if (DAT_LobbyAddAICurrentlyHoveredAI::instance == 0) {
+                // "Highlight character for information. Click to use."
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 401),
@@ -57,6 +59,7 @@ namespace UI {
                     textX, yPos, 566, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, 0);
             }
         }
+
     }
 }
 }

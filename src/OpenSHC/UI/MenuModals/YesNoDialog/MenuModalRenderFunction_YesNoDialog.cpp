@@ -26,6 +26,7 @@ namespace UI {
             case -7:
                 bannerTextIndex = -DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
                 break;
+            // the asking button\'s TEXT_GAME_OPTIONS text: 7 "Quit Mission", 9 "Exit Crusader", 44 "Restart Mission"
             case 7:
             case 9:
             case 30:
@@ -52,18 +53,14 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.unknownMapName_01, width / 2 + x, y + 42,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE, 0);
-                DAT_MenuHandlerState::instance.currentMenu->zero = 0;
-                return;
-            }
-            if (bannerTextIndex != -1) {
+            } else if (bannerTextIndex != -1) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, bannerTextIndex, x, y, width, height);
-                DAT_MenuHandlerState::instance.currentMenu->zero = 0;
-                return;
             }
             DAT_MenuHandlerState::instance.currentMenu->zero = 0;
         }
+
     }
 }
 }

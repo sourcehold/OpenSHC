@@ -1,6 +1,7 @@
 #include "../VideoOptions.func.hpp"
 
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 
@@ -13,7 +14,7 @@ namespace UI {
         {
             // "Video Options"
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
-                74, 4, x, y, width, height);
+                OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 4, x, y, width, height);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
                 x + 102, y + 213, x + 178, y + 252, 16);
         }

@@ -34,8 +34,8 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                 x + 40, y - 10, x + 45, y + 302, COL_VERY_SOFT_YELLOW::instance.shortValue);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                x + 42, (y - barFillHeight) + 300, x + 43, y + 300, COL_WHITE::instance.shortValue);
-            if (DAT_TacticalPowersHelpTextDisplayBool::instance != false) {
+                x + 42, y - barFillHeight + 300, x + 43, y + 300, COL_WHITE::instance.shortValue);
+            if (DAT_TacticalPowersHelpTextDisplayBool::instance) {
                 // "Click on an Icon to use Tactical Powers"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -45,6 +45,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 468, x - 27, y + 267);
             }
         }
+
     }
 }
 }

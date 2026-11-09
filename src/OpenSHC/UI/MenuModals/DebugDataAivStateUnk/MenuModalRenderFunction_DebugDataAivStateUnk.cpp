@@ -23,39 +23,42 @@ namespace UI {
             y += 20;
             for (int aivIndex = 1; aivIndex < countof(DAT_AIVPlacementFit::instance); ++aivIndex) {
                 y += 20;
-                if (DAT_AIVPlacementFit::instance[aivIndex] != -10) {
-                    uint color;
-                    if (DAT_AIVPlacementFit::instance[aivIndex] != 100) {
-                        color = OpenSHC::Rendering::Colors::COL_0000FF;
-                    } else {
-                        color = OpenSHC::Rendering::Colors::COL_C2F0EB;
-                    }
+                // -10 marks a slot without a result, which gets no line
+                if (DAT_AIVPlacementFit::instance[aivIndex] == -10) {
+                    continue;
+                }
+                // set in both branches: an initial value with one override measures lower
+                uint color;
+                if (DAT_AIVPlacementFit::instance[aivIndex] != 100) {
+                    color = OpenSHC::Rendering::Colors::COL_0000FF;
+                } else {
+                    color = OpenSHC::Rendering::Colors::COL_C2F0EB;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
+                    aivIndex, x, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                int placementFit = DAT_AIVPlacementFit::instance[aivIndex];
+                if (placementFit == -3) {
+                    // "File missing"
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        s_File_missing_005a7750, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                } else if (placementFit == -2) {
+                    // "Can't place keep"
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        s_Can_t_place_keep_005a773c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                } else if (placementFit == 100) {
+                    // "Total Success"
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        s_Total_Success_005a772c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                        aivIndex, x, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    int placementFit = DAT_AIVPlacementFit::instance[aivIndex];
-                    if (placementFit == -3) {
-                        // "File missing"
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            s_File_missing_005a7750, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    } else if (placementFit == -2) {
-                        // "Can't place keep"
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            s_Can_t_place_keep_005a773c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    } else if (placementFit == 100) {
-                        // "Total Success"
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            s_Total_Success_005a772c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    } else {
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                            placementFit, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                        // "% Success"
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            s___Success_005a7720, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
-                    }
+                        placementFit, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                    // "% Success"
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        s___Success_005a7720, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
                 }
             }
         }

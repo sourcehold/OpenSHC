@@ -41,20 +41,17 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 51),
                 xPos, y + 210, 165, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, 0);
-            int spriteID = 100;
-            DAT_CurrentlyRenderedSpriteID::instance = spriteID;
+            DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::DE::SHCDE::GM_BODY_LORD;
             if (DAT_GameCore::instance.selectedLordTypeUnk != 0) {
-                spriteID = 205;
-                DAT_CurrentlyRenderedSpriteID::instance = spriteID;
+                DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::DE::SHCDE::GM_BODY_ARABIC_LORD;
             }
             DAT_RenderedUnitOwner::instance = 1;
-            if (spriteID == 100) {
+            if (DAT_CurrentlyRenderedSpriteID::instance == OpenSHC::DE::SHCDE::GM_BODY_LORD) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    OpenSHC::DE::SHCDE::GM_BODY_LORD, (int)(animFrame * 8 + 131), x + 115, y + 75);
-                spriteID = DAT_CurrentlyRenderedSpriteID::instance;
+                    OpenSHC::DE::SHCDE::GM_BODY_LORD, animFrame * 8 + 131, x + 115, y + 75);
             }
-            if (spriteID == 205) {
+            if (DAT_CurrentlyRenderedSpriteID::instance == OpenSHC::DE::SHCDE::GM_BODY_ARABIC_LORD) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     OpenSHC::DE::SHCDE::GM_BODY_ARABIC_LORD, animFrame * 8 + 5, x + 120, y + 75);

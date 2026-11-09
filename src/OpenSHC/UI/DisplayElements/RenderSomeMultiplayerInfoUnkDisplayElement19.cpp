@@ -28,193 +28,204 @@
 
 namespace OpenSHC {
 namespace UI {
+    namespace DisplayElements {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004AFE10
-    void DisplayElements::RenderSomeMultiplayerInfoUnkDisplayElement19(int posX, int posY, DWORD elementState)
-    {
-        if (DAT_GameCore::instance.mapU4Int0 != 0) {
-            posY += 65;
-        }
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
-            DAT_PencilRenderCore::ptr)(
-            posX - 204, posY, 408, (int)((DAT_GameSynchronyState::instance.connectionInfoExpanded * 3 + 12) * 16));
-        int const titleY = posY + 15;
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        // "Connection lost"
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 49),
-            posX, titleY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE, 0);
-        // "Receiving game state"
-        if (DAT_GameSynchronyState::instance.isHost) {
+        // FUNCTION: STRONGHOLDCRUSADER 0x004AFE10
+        void RenderSomeMultiplayerInfoUnkDisplayElement19(int posX, int posY, DWORD elementState)
+        {
+            if (DAT_GameCore::instance.mapU4Int0 != 0) {
+                posY += 65;
+            }
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
+                DAT_PencilRenderCore::ptr)(
+                posX - 204, posY, 408, (DAT_GameSynchronyState::instance.connectionInfoExpanded * 3 + 12) * 16);
+            int const titleY = posY + 15;
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+            // "Connection lost"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 50),
-                posX, posY + 45, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
-        } else {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 51),
-                posX, posY + 45, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
-        }
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-            posX - 171, posY + 74, posX + 171, posY + 91, COL_WHITE::instance.shortValue);
-        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
-            posX - 170, posY + 75, posX + 170, posY + 90);
-        if ((DAT_GameSynchronyState::instance.currentPacketTotalSize != 0)
-            && (DAT_GameSynchronyState::instance.resyncTransferTotalSize != 0)) {
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                posX - 170, posY + 75,
-                ((int)(DAT_GameSynchronyState::instance.currentPacketTotalSize) * 340)
-                        / (int)(DAT_GameSynchronyState::instance.resyncTransferTotalSize)
-                    - 170 + posX,
-                posY + 90, COL_VERY_SOFT_YELLOW::instance.shortValue);
-        }
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes != 0) {
-            if (DAT_GameSynchronyState::instance.lastAutoSaveTime == 0
-                || DAT_GameSynchronyState::instance.field_0xbe8 == 0
-                || DAT_GameSynchronyState::instance.field_0xbe8 <= DAT_GameSynchronyState::instance.lastAutoSaveTime) {
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 49),
+                posX, titleY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE, 0);
+            if (DAT_GameSynchronyState::instance.isHost) {
+                // "Sending game state"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 54),
-                    posX, posY + 110, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 50),
+                    posX, posY + 45, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             } else {
-                int const savedY = posY + 110;
-                // "Auto save is on"
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                    OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 54, posX - 3, savedY, OpenSHC::Text::TTA_RIGHT,
-                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
-                // "Last saved:"
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                    OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 55, posX + 3, savedY, OpenSHC::Text::TTA_LEFT,
-                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
-                uint minutes
-                    = (DAT_GameSynchronyState::instance.field_0xbe8 - DAT_GameSynchronyState::instance.lastAutoSaveTime)
-                    / 60000;
-                if (minutes < 1) {
-                    minutes = 1;
-                }
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    minutes, posX + 9, savedY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
-                    TRUE, 0);
-                // "minutes."
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                    OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 56, posX + 10, savedY, OpenSHC::Text::TTA_LEFT,
-                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE);
+                // "Receiving game state"
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 51),
+                    posX, posY + 45, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             }
-        } else {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 53),
-                posX, posY + 110, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
-        }
-        // the cancel button's left edge, which is also where the Yes text is centred
-        int const leftX = posX - 100;
-        DAT_ButtonX::instance = leftX;
-        DAT_ButtonY::instance = posY + 150;
-        DAT_ButtonW::instance = 200;
-        DAT_ButtonH::instance = 28;
-        // "Cancel game"
-        if (DAT_GameSynchronyState::instance.isHost) {
-            if (DAT_GameSynchronyState::instance.connectionInfoExpanded == 0) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
-                        (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) - 100,
-                        (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 150, 200, 28)) {
-                    DAT_ButtonCurrentlyInteracting::instance = TRUE;
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
+                posX - 171, posY + 74, posX + 171, posY + 91, COL_WHITE::instance.shortValue);
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
+                posX - 170, posY + 75, posX + 170, posY + 90);
+            if ((DAT_GameSynchronyState::instance.currentPacketTotalSize != 0)
+                && (DAT_GameSynchronyState::instance.resyncTransferTotalSize != 0)) {
+                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox,
+                    DAT_PencilRenderCore::ptr)(posX - 170, posY + 75,
+                    ((int)(DAT_GameSynchronyState::instance.currentPacketTotalSize) * 340)
+                            / (int)(DAT_GameSynchronyState::instance.resyncTransferTotalSize)
+                        - 170 + posX,
+                    posY + 90, COL_VERY_SOFT_YELLOW::instance.shortValue);
+            }
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+            if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes != 0) {
+                if (DAT_GameSynchronyState::instance.lastAutoSaveTime == 0
+                    || DAT_GameSynchronyState::instance.field_0xbe8 == 0
+                    || DAT_GameSynchronyState::instance.field_0xbe8
+                        <= DAT_GameSynchronyState::instance.lastAutoSaveTime) {
+                    // "Auto save is on"
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 54),
+                        posX, posY + 110, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE,
+                        0);
+                } else {
+                    int const autoSaveY = posY + 110;
+                    // "Auto save is on"
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
+                        OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 54, posX - 3, autoSaveY,
+                        OpenSHC::Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
+                    // "Last saved:"
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
+                        OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 55, posX + 3, autoSaveY,
+                        OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE);
+                    uint minutes = (DAT_GameSynchronyState::instance.field_0xbe8
+                                       - DAT_GameSynchronyState::instance.lastAutoSaveTime)
+                        / 60000;
+                    if (minutes < 1) {
+                        minutes = 1;
+                    }
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2,
+                        DAT_TextManagerObject::ptr)(minutes, posX + 9, autoSaveY, OpenSHC::Text::TTA_LEFT,
+                        OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE, 0);
+                    // "minutes."
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
+                        OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 56, posX + 10, autoSaveY,
+                        OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, TRUE);
+                }
+            } else {
+                // "Auto save is off"
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 53),
+                    posX, posY + 110, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
+            }
+            // the cancel button's left edge, which is also where the Yes text is centred
+            int const leftX = posX - 100;
+            DAT_ButtonX::instance = leftX;
+            DAT_ButtonY::instance = posY + 150;
+            DAT_ButtonW::instance = 200;
+            DAT_ButtonH::instance = 28;
+            // "Cancel game"
+            if (DAT_GameSynchronyState::instance.isHost) {
+                if (!DAT_GameSynchronyState::instance.connectionInfoExpanded) {
+                    if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
+                            (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) - 100,
+                            (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 150, 200,
+                            28)) {
+                        DAT_ButtonCurrentlyInteracting::instance = TRUE;
+                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
+                            AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
+                            posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18,
+                            FALSE, 0);
+                        if (DAT_MouseState::instance.leftClickStart) {
+                            DAT_GameSynchronyState::instance.connectionInfoExpanded = TRUE;
+                        }
+                        return;
+                    }
+                    DAT_ButtonCurrentlyInteracting::instance = FALSE;
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                         AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
-                        posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE,
+                        posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE,
                         0);
-                    if (!DAT_MouseState::instance.leftClickStart) {
-                        return;
-                    }
-                    DAT_GameSynchronyState::instance.connectionInfoExpanded = 1;
                     return;
                 }
-                DAT_ButtonCurrentlyInteracting::instance = FALSE;
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
-                    AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
-                    posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
-                return;
-            }
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
-                posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
-            DAT_ButtonY::instance = posY + 198;
-            DAT_ButtonX::instance = posX - 150;
-            DAT_ButtonW::instance = 100;
-            DAT_ButtonH::instance = 28;
-            // "Yes"
-            if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
-                    (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) - 150,
-                    (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 198, 150, 28)) {
-                DAT_ButtonCurrentlyInteracting::instance = TRUE;
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
-                    AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 22),
-                    leftX, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
-                if (DAT_MouseState::instance.leftClickStart) {
-                    DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
-                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_KILL_GAME);
+                    posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
+                DAT_ButtonY::instance = posY + 198;
+                DAT_ButtonX::instance = posX - 150;
+                DAT_ButtonW::instance = 100;
+                DAT_ButtonH::instance = 28;
+                // "Yes"
+                if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
+                        (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) - 150,
+                        (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 198, 150, 28)) {
+                    DAT_ButtonCurrentlyInteracting::instance = TRUE;
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
+                        AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 22),
+                        leftX, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE,
+                        0);
+                    if (DAT_MouseState::instance.leftClickStart) {
+                        DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
+                        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                            DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_KILL_GAME);
+                    }
+                } else {
+                    DAT_ButtonCurrentlyInteracting::instance = FALSE;
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
+                        AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 22),
+                        leftX, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE,
+                        0);
                 }
-            } else {
+                DAT_ButtonY::instance = posY + 198;
+                DAT_ButtonX::instance = posX + 50;
+                DAT_ButtonW::instance = 100;
+                DAT_ButtonH::instance = 28;
+                // "No"
+                if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
+                        (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) + 50,
+                        (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 198, 150, 28)) {
+                    DAT_ButtonCurrentlyInteracting::instance = TRUE;
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
+                        AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 23),
+                        posX + 100, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18,
+                        FALSE, 0);
+                    if (DAT_MouseState::instance.leftClickStart) {
+                        DAT_GameSynchronyState::instance.connectionInfoExpanded = FALSE;
+                    }
+                    return;
+                }
                 DAT_ButtonCurrentlyInteracting::instance = FALSE;
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
-                    AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 22),
-                    leftX, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
-            }
-            DAT_ButtonY::instance = posY + 198;
-            DAT_ButtonX::instance = posX + 50;
-            DAT_ButtonW::instance = 100;
-            DAT_ButtonH::instance = 28;
-            // "No"
-            if (MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
-                    (posX - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX) + 50,
-                    (posY - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY) + 198, 150, 28)) {
-                DAT_ButtonCurrentlyInteracting::instance = TRUE;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
                     AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 23),
-                    posX + 100, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18,
+                    posX + 100, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
                     FALSE, 0);
-                if (!DAT_MouseState::instance.leftClickStart) {
-                    return;
-                }
-                DAT_GameSynchronyState::instance.connectionInfoExpanded = 0;
-                return;
+            } else {
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
+                    posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_7F7F7F, 18, FALSE, 0);
             }
-            DAT_ButtonCurrentlyInteracting::instance = FALSE;
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::AlphaAndButtonSurface_Func::renderBasicButton,
-                AlphaAndButtonSurfaceObj::ptr)(0, OpenSHC::Rendering::Enums::RT_CONTEXT_BASED);
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 23),
-                posX + 100, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE,
-                0);
-        } else {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
-                posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_7F7F7F, 18, FALSE, 0);
         }
+
     }
 }
 }

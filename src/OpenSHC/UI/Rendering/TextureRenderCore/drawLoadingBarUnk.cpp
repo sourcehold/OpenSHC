@@ -17,17 +17,18 @@ namespace UI {
         void TextureRenderCore::drawLoadingBarUnk(GmID currentGmId, int barLengthUnk)
         {
             DWORD const now = timeGetTime();
-            if ((int)(now - TIME_LastVisualLoadingBarUpdate::instance) > 30) {
-                TIME_LastVisualLoadingBarUpdate::instance = now;
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                    DAT_MenuHandlerState::instance.x + 236, DAT_MenuHandlerState::instance.y + 571,
-                    (int)(currentGmId * 328) / barLengthUnk + 236 + DAT_MenuHandlerState::instance.x,
-                    DAT_MenuHandlerState::instance.y + 579, COL_DARK_RED::instance.shortValue);
-                MACRO_CALL_MEMBER(UI::Rendering::WindowAndDirectDraw_Func::bltScreenMenuSurfaceToScreen,
-                    DAT_WindowAndDirectDraw::ptr)(DAT_MenuHandlerState::instance.x + 235,
-                    DAT_MenuHandlerState::instance.y + 570, DAT_MenuHandlerState::instance.x + 565,
-                    DAT_MenuHandlerState::instance.y + 580);
+            if ((int)(now - TIME_LastVisualLoadingBarUpdate::instance) <= 30) {
+                return;
             }
+            TIME_LastVisualLoadingBarUpdate::instance = now;
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
+                DAT_MenuHandlerState::instance.x + 236, DAT_MenuHandlerState::instance.y + 571,
+                currentGmId * 328 / barLengthUnk + 236 + DAT_MenuHandlerState::instance.x,
+                DAT_MenuHandlerState::instance.y + 579, COL_DARK_RED::instance.shortValue);
+            MACRO_CALL_MEMBER(UI::Rendering::WindowAndDirectDraw_Func::bltScreenMenuSurfaceToScreen,
+                DAT_WindowAndDirectDraw::ptr)(DAT_MenuHandlerState::instance.x + 235,
+                DAT_MenuHandlerState::instance.y + 570, DAT_MenuHandlerState::instance.x + 565,
+                DAT_MenuHandlerState::instance.y + 580);
         }
 
     }

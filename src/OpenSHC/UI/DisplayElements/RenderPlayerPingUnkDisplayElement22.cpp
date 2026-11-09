@@ -16,51 +16,54 @@
 
 namespace OpenSHC {
 namespace UI {
+    namespace DisplayElements {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004B1D30
-    void DisplayElements::RenderPlayerPingUnkDisplayElement22(int posX, int posY, DWORD elementState)
-    {
-        if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
-            || (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
-            MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
-                OpenSHC::UI::Enums::DEID_PLAYER_PING_Unk_19, 0);
-            return;
-        }
-        timeGetTime();
-        int playerID = 1;
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
-            DAT_PencilRenderCore::ptr)(posX, posY, 120, 192);
-        DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        int* average = &DAT_GameSynchronyState::instance.connectionLagInfoArray[1].average2;
-        int yPosition = posY + 18;
-        // a pointer over the lag entries, compared as an address (a for over the player index:
-        // quick_diff 0.9595 -> 0.9364)
-        while ((int)average < (int)&DAT_GameSynchronyState::instance.connectionLagInfoArray[9].average2) {
-            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(playerID,
-                    posX + 24, yPosition, OpenSHC::Text::TTA_LEFT,
-                    DAT_RenderingDefinedData::instance
-                        .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
-                    0, 18, FALSE, 0);
-                if (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                        *average * 2, posX + 76, yPosition, OpenSHC::Text::TTA_RIGHT,
-                        DAT_RenderingDefinedData::instance
-                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
-                        0, 18, FALSE, 0);
-                    // "ms"
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                        DAT_TextManagerObject::ptr)(s_ms_005a77d4, posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
-                        DAT_RenderingDefinedData::instance
-                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
-                        0, 18, FALSE, 0);
-                }
+        // FUNCTION: STRONGHOLDCRUSADER 0x004B1D30
+        void RenderPlayerPingUnkDisplayElement22(int posX, int posY, DWORD elementState)
+        {
+            if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
+                || (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+                MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
+                    OpenSHC::UI::Enums::DEID_PLAYER_PING_Unk_19, 0);
+                return;
             }
-            average += 9;
-            ++playerID;
-            yPosition += 20;
+            // the original calls timeGetTime here and drops the result
+            timeGetTime();
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
+                DAT_PencilRenderCore::ptr)(posX, posY, 120, 192);
+            DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+            int playerID = 1;
+            int* average = &DAT_GameSynchronyState::instance.connectionLagInfoArray[1].average2;
+            int yPosition = posY + 18;
+            // an int* over the lag entries: an indexed for and a ConnectionLagInfo* walk both measure lower
+            while ((int)average < (int)&DAT_GameSynchronyState::instance.connectionLagInfoArray[9].average2) {
+                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
+                        playerID, posX + 24, yPosition, OpenSHC::Text::TTA_LEFT,
+                        DAT_RenderingDefinedData::instance
+                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
+                        0, 18, FALSE, 0);
+                    if (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
+                            *average * 2, posX + 76, yPosition, OpenSHC::Text::TTA_RIGHT,
+                            DAT_RenderingDefinedData::instance
+                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
+                            0, 18, FALSE, 0);
+                        // "ms"
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
+                            DAT_TextManagerObject::ptr)(s_ms_005a77d4, posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
+                            DAT_RenderingDefinedData::instance
+                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
+                            0, 18, FALSE, 0);
+                    }
+                }
+                average += 9;
+                ++playerID;
+                yPosition += 20;
+            }
         }
+
     }
 }
 }

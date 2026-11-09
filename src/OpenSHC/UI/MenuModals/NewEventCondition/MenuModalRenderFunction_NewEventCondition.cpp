@@ -23,21 +23,21 @@ namespace UI {
                 DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, 102, x, y, width, height);
             if (DAT_MissionAestheticsDefinedData::instance
                     .EventConditionParamKind[DAT_MapPropertiesState::instance.invasionTroopIndex]
-                != 0) {
-                int numInGroup = DAT_MapPropertiesState::instance.invasionTroopIndex + 106;
-                if (125 < numInGroup) {
-                    numInGroup += 64;
-                }
-                if (numInGroup == 111 || numInGroup == 112 || numInGroup == 113 || numInGroup == 123) {
-                    numInGroup = 113;
-                }
-                int yParam = y + 463;
-                int xParam = x + 30;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, numInGroup),
-                    xParam, yParam, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
+                == 0) {
+                return;
             }
+            int numInGroup = DAT_MapPropertiesState::instance.invasionTroopIndex + 106;
+            if (numInGroup > 125) {
+                numInGroup += 64;
+            }
+            // "Food/Weapons/Goods Acquired" (111, 112, 113, 123) all show 113, "Goods Acquired"
+            if (numInGroup == 111 || numInGroup == 112 || numInGroup == 113 || numInGroup == 123) {
+                numInGroup = 113;
+            }
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, numInGroup),
+                x + 30, y + 463, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
         }
 
     }

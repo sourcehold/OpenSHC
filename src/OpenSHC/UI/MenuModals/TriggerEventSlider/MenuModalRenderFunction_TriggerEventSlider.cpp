@@ -3,6 +3,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
@@ -16,19 +17,17 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC280
         void TriggerEventSlider::MenuModalRenderFunction_TriggerEventSlider(int x, int y, int width, int height)
         {
-            int textNumInGroup;
+            int textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
             int iconIndex = -1;
-            if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 148) {
+            // 148 shows 146\'s text, and both show the icon
+            if (textNumInGroup == 148) {
                 textNumInGroup = 146;
+            }
+            if (textNumInGroup == 146) {
                 iconIndex = 2;
-            } else {
-                textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
-                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 146) {
-                    iconIndex = 2;
-                }
             }
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
-                199, textNumInGroup, x, y, width, height);
+                OpenSHC::DE::SHCDE::TEXT_SCENARIO, textNumInGroup, x, y, width, height);
             if (iconIndex != -1) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     DE::SHCDE::GM_INTERFACE_ICONS2, iconIndex + 128,

@@ -43,7 +43,7 @@ namespace UI {
                     OpenSHC::Text::TAIT_UNKNOWN_4);
             }
             if (DAT_GameSynchronyState::instance.DAT_InsultTextIndex != 0) {
-                int fontSize = (int)MACRO_CALL_MEMBER(
+                int const fontSize = MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::getCurrentFontSize, DAT_UserTextHandlerState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(
@@ -52,8 +52,9 @@ namespace UI {
                     x + 25, y + 199, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, fontSize, FALSE,
                     0);
             } else {
-                int fontSize = (int)MACRO_CALL_MEMBER(
+                int const fontSize = MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::getCurrentFontSize, DAT_UserTextHandlerState::ptr)();
+                // fetched before the other arguments, as the original does
                 char* const currentText = MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

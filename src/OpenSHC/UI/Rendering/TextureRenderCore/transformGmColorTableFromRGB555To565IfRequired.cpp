@@ -15,15 +15,14 @@ namespace UI {
                 return;
             }
             ushort* color = (ushort*)this->gmFileHeaderColorpaletteArray[gmID].colorPalette;
-            int remaining = 2560;
-            // a pointer over the palette in a do-while, not an indexed for (the for: quick_diff 1.0000 -> 0.6957)
-            do {
-                ushort const value = *color;
+            for (int remaining = countof(this->gmFileHeaderColorpaletteArray[gmID].colorPalette)
+                    * countof(this->gmFileHeaderColorpaletteArray[gmID].colorPalette[0]);
+                remaining != 0; --remaining) {
+                ushort const rgb555 = *color;
                 // red and green move up a bit to make room for green's sixth bit; blue stays
-                *color = (value & 0x1f) + ((value & 0xfc00) + (value & 0x3e0)) * 2;
+                *color = (rgb555 & 0x1f) + ((rgb555 & 0xfc00) + (rgb555 & 0x3e0)) * 2;
                 ++color;
-                --remaining;
-            } while (remaining);
+            }
         }
 
     }
