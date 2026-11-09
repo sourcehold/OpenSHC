@@ -169,7 +169,7 @@ namespace UI {
                             OpenSHC::Rendering::Colors::COL_7CAAAF, 19, (iVar6 / 32) + 32);
                     }
                 }
-                if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == 0) {
+                if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == OpenSHC::AI::AITA_NULL) {
                     return;
                 }
                 iVar6 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
@@ -204,7 +204,7 @@ namespace UI {
                     (iVar6 / 32) + 32);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar3] == -1) {
-                    if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == 0) {
+                    if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == OpenSHC::AI::AITA_NULL) {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     }
@@ -250,7 +250,7 @@ namespace UI {
                         (iVar3 / 32) + 32);
                     return;
                 }
-                if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == 0) {
+                if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == OpenSHC::AI::AITA_NULL) {
                     DAT_ButtonUnknownZero::instance = 0;
                     return;
                 }
