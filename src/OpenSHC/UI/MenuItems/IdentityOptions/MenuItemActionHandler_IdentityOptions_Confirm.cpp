@@ -14,19 +14,17 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Commands::GameCommandType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00493D30
-        void IdentityOptions::MenuItemActionHandler_IdentityOptions_Confirm(int param_1, ...)
+        void IdentityOptions::MenuItemActionHandler_IdentityOptions_Confirm(int button, ...)
         {
-            if (param_1 == 17) {
+            if (button == 17) {
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
                 if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                        ((GameCommandType)96));
+                        Commands::GCT_UNKNOWN_96);
                 }
             }
         }

@@ -7,12 +7,12 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004BF720
-        void Unused::MenuItemActionHandler_UnusedChooseMessageBox_Unknown(int param_1, ...)
+        void Unused::MenuItemActionHandler_UnusedChooseMessageBox_Unknown(int row, ...)
         {
             DWORD const currentTime = timeGetTime();
-            int const absoluteIndex = DAT_MapPropertiesState::instance.offset + param_1;
+            int const absoluteIndex = DAT_MapPropertiesState::instance.offset + row;
             if (absoluteIndex < (int)DAT_MapPropertiesState::instance.total) {
-                DAT_MapPropertiesState::instance.indexStored = param_1;
+                DAT_MapPropertiesState::instance.indexStored = row;
                 DAT_MapPropertiesState::instance.value
                     = DAT_MapPropertiesState::instance.unknownArray_01[absoluteIndex];
                 DAT_MapPropertiesState::instance.selectedAbsoluteIndex = absoluteIndex;

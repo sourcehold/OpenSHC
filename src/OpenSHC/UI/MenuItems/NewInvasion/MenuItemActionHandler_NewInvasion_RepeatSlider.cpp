@@ -8,9 +8,9 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B94A0
         void NewInvasion::MenuItemActionHandler_NewInvasion_RepeatSlider(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = 120;

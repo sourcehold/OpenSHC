@@ -6,7 +6,6 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -18,9 +17,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047E3E0
-        void WaitingForHost::MenuItemActionHandler_WaitingForHost_Button(int param_1, ...)
+        void WaitingForHost::MenuItemActionHandler_WaitingForHost_Button(int button, ...)
         {
-            if (param_1 == 3) {
+            if (button == 3) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::disconnectDPlay, DAT_GameSynchronyState::ptr)();
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
                     UI::Enums::MMT_NONE, FALSE);

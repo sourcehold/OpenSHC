@@ -12,16 +12,16 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004932A0
-        void SaveMap::MenuItemActionHandler_SaveMap_TableContent(int param_1, ...)
+        void SaveMap::MenuItemActionHandler_SaveMap_TableContent(int row, ...)
         {
-            if ((int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + param_1
-                < (int)DAT_MenuTextInputState::instance.fileListEntryCount) {
-                DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex = param_1;
+            if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + row
+                < DAT_MenuTextInputState::instance.fileListEntryCount) {
+                DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex = row;
                 char* const mapName
                     = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                         DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
                             .DAT_ArrayOfMapIndices[DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                                + param_1]);
+                                + row]);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(mapName);
             }

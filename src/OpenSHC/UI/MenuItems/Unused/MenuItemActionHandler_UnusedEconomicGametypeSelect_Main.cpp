@@ -16,9 +16,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00425C20
-        void Unused::MenuItemActionHandler_UnusedEconomicGametypeSelect_Main(int param_1, ...)
+        void Unused::MenuItemActionHandler_UnusedEconomicGametypeSelect_Main(int button, ...)
         {
-            switch (param_1) {
+            switch (button) {
             case 1:
                 DAT_GameCore::instance.gameSuspended = 0;
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty2;

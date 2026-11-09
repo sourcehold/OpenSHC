@@ -4,7 +4,6 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/BOOL_CurrentMenuClickState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -17,16 +16,15 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00426ED0
-        void Unused::MenuItemActionHandler_UnusedEconomicMissionSelect_General(int param_1, ...)
+        void Unused::MenuItemActionHandler_UnusedEconomicMissionSelect_General(int button, ...)
         {
             if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
-                // a chain of `sub`s with a `je` after each (0x426ee9) is MSVC's sparse
-                // switch, and the arm bodies are laid out default, 0x14, 0x12, 0xd
-                switch (param_1) {
+                // a sparse switch; the original lays its arms out default, 20, 18, 13
+                switch (button) {
                 default: {
                     BOOL_CurrentMenuClickState::instance = FALSE;
-                    DAT_GameCore::instance.missionNumber1to20 = -param_1;
+                    DAT_GameCore::instance.missionNumber1to20 = -button;
                     DWORD const clickTime = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             != DAT_MenuTextInputState::instance.lastClickedListIndex
@@ -36,7 +34,7 @@ namespace UI {
                         DAT_MenuTextInputState::instance.lastListClickTime = clickTime;
                         return;
                     }
-                    // the original shares this tail with case 13; writing it out twice changes the code
+                    // the original shares this tail with case 13; writing it out twice adds 7 instructions
                     goto startSelectedMission;
                 }
                 case 20: {

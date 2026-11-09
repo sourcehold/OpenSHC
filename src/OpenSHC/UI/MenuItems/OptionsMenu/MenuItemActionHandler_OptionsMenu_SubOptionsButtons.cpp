@@ -18,9 +18,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00493BD0
-        void OptionsMenu::MenuItemActionHandler_OptionsMenu_SubOptionsButtons(int param_1, ...)
+        void OptionsMenu::MenuItemActionHandler_OptionsMenu_SubOptionsButtons(int button, ...)
         {
-            switch (param_1) {
+            switch (button) {
             case 25:
                 DAT_MenuTextInputState::instance.pendingGameSpeedLevel = DAT_GameCore::instance.gameSpeedLevel;
                 DAT_MenuTextInputState::instance.pendingSettingBubbleHelp = DAT_GameCore::instance.settingBubbleHelp;

@@ -14,7 +14,7 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B65F0
-        void InGameMenu::MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int param_1, ...)
+        void InGameMenu::MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int unused, ...)
         {
             if (DAT_VideoBikQueue::instance.mbr_0x928) {
                 dword shieldIndex = DAT_VideoBikQueue::instance.mbr_0x928;
@@ -23,9 +23,8 @@ namespace UI {
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2,
-                    (int)((int)(shieldIndex + 469)), (int)((int)(DAT_ButtonX::instance)),
-                    (int)((int)(DAT_ButtonY::instance)));
+                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, shieldIndex + 469,
+                    DAT_ButtonX::instance, DAT_ButtonY::instance);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
         }

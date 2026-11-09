@@ -2,6 +2,7 @@
 
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -21,18 +22,18 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00428A60
         void LobbyMenu::MenuItemRenderFunction_LobbyMenu_MapDescScrollbar(
-            int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
+            int unused, int thumbYPos, int sliderValue, int thumbHeight, BOOLEnum isDragged)
         {
             if (DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_ROUNDTABLE
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_BASIC_AI_LORD_SELECT
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
-                BOOLEnum BVar1 = MACRO_CALL(UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)();
-                if (!BVar1) {
-                    DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = BVar1;
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
-                        DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonH::instance), thumbYPos,
-                        isDragged, thumbHeight, (int)(DAT_ButtonBackgroundBlendStrength::instance));
+                if (MACRO_CALL(UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)()) {
+                    return;
                 }
+                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
+                    DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonH::instance, thumbYPos, isDragged,
+                    thumbHeight, DAT_ButtonBackgroundBlendStrength::instance);
             }
         }
 

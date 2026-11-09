@@ -17,11 +17,11 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0042F2B0
-        void NewMapMaptype::MenuItemActionHandler_NewMapMaptype_Buttons(int param_1, ...)
+        void NewMapMaptype::MenuItemActionHandler_NewMapMaptype_Buttons(int button, ...)
         {
             if ((DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE)) {
-                switch (param_1) {
+                switch (button) {
                 case 1:
                     DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 = Map::MT_JUST_BUILD;
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

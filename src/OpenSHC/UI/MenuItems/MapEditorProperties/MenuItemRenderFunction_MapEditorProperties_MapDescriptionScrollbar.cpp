@@ -19,15 +19,15 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0042EF80
         void MapEditorProperties::MenuItemRenderFunction_MapEditorProperties_MapDescriptionScrollbar(
-            int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
+            int unused, int thumbYPos, int sliderValue, int thumbHeight, BOOLEnum isDragged)
         {
             if (((DAT_GameCore::instance.U2_mapType_singleOrMulti)
                     && (DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU))
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar,
-                    DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                    (int)((int)(DAT_ButtonH::instance)), thumbYPos, isDragged, thumbHeight, 0);
+                    DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonH::instance,
+                    thumbYPos, isDragged, thumbHeight, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
         }

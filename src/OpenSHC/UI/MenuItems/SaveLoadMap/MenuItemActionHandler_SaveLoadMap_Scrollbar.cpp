@@ -8,9 +8,9 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00492BA0
         void SaveLoadMap::MenuItemActionHandler_SaveLoadMap_Scrollbar(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = DAT_MenuTextInputState::instance.fileListEntryCount
@@ -28,7 +28,7 @@ namespace UI {
                 *currentValue = DAT_MenuTextInputState::instance.fileListVisibleRowCount - 1;
                 return;
             case 5:
-                if (0 < (int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset) {
+                if (0 < DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset) {
                     DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                         = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset - 1;
                     *currentValue = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
@@ -36,8 +36,8 @@ namespace UI {
                 }
                 break;
             case 6:
-                if ((int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                    < (int)DAT_MenuTextInputState::instance.fileListEntryCount
+                if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
+                    < DAT_MenuTextInputState::instance.fileListEntryCount
                         - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
                     DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                         = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + 1;

@@ -13,19 +13,19 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00428980
         void LobbyMenu::MenuItemActionHandler_LobbyMenu_MapDescScrollbar(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int descBoxIndexUnk, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
             if (!DAT_00b960dc::instance
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_ROUNDTABLE
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_BASIC_AI_LORD_SELECT
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
                 int visibleHeight = 0;
-                if (!param_1) {
+                if (descBoxIndexUnk == 0) {
                     visibleHeight = 204;
-                } else if (param_1 == 1) {
+                } else if (descBoxIndexUnk == 1) {
                     visibleHeight = 110;
                 }
-                switch (param_2) {
+                switch (scrollbarEvent) {
                 case 1:
                     *minValue = -19;
                     *maxValue = INT_00b95b74::instance - visibleHeight;

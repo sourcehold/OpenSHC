@@ -16,12 +16,12 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0042DC60
         void SinglePlayerMapChoice::MenuItemRenderFunction_SingleplayerMapChoice_Scrollbar(
-            int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
+            int unused, int thumbYPos, int sliderValue, int thumbHeight, BOOLEnum isDragged)
         {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)), (int)((int)(DAT_ButtonH::instance)),
-                thumbYPos, isDragged, thumbHeight, (int)((int)(DAT_ButtonBackgroundBlendStrength::instance)));
+                DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonH::instance, thumbYPos, isDragged, thumbHeight,
+                DAT_ButtonBackgroundBlendStrength::instance);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         }
 

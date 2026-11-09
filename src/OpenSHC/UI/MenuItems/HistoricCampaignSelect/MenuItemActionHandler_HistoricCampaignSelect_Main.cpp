@@ -12,9 +12,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00425720
-        void HistoricCampaignSelect::MenuItemActionHandler_HistoricCampaignSelect_Main(int param_1, ...)
+        void HistoricCampaignSelect::MenuItemActionHandler_HistoricCampaignSelect_Main(int button, ...)
         {
-            switch (param_1) {
+            switch (button) {
             case 1:
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty;
                 DAT_GameCore::instance.gameSuspended = 0;

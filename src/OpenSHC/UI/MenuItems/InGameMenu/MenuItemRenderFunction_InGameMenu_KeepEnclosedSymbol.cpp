@@ -17,7 +17,7 @@ namespace UI {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B65A0
-        void InGameMenu::MenuItemRenderFunction_InGameMenu_KeepEnclosedSymbol(int param_1, ...)
+        void InGameMenu::MenuItemRenderFunction_InGameMenu_KeepEnclosedSymbol(int unused, ...)
         {
             BOOLEnum const keepEnclosed = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed,
                 DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
