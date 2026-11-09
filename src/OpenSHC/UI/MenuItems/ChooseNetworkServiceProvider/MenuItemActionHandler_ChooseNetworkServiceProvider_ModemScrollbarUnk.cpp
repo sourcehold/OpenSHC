@@ -10,6 +10,7 @@ namespace UI {
         void ChooseNetworkServiceProvider::MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk(
             int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
+            // four modems fit in the list
             switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;

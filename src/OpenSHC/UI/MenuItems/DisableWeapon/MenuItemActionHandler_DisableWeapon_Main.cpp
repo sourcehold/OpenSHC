@@ -14,28 +14,22 @@ namespace UI {
         void DisableWeapon::MenuItemActionHandler_DisableWeapon_Main(int button, ...)
         {
             if (button == 0) {
-                DAT_MapPropertiesState::instance.SEC_XbowProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_XbowProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_XbowProducible_save ^= 1;
             }
             if (button == 1) {
-                DAT_MapPropertiesState::instance.SEC_PikeProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_PikeProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_PikeProducible_save ^= 1;
             }
             if (button == 2) {
-                DAT_MapPropertiesState::instance.SEC_SwordProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_SwordProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_SwordProducible_save ^= 1;
             }
             if (button == 3) {
-                DAT_MapPropertiesState::instance.SEC_BowProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_BowProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_BowProducible_save ^= 1;
             }
             if (button == 4) {
-                DAT_MapPropertiesState::instance.SEC_SpearProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_SpearProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_SpearProducible_save ^= 1;
             }
             if (button == 5) {
-                DAT_MapPropertiesState::instance.SEC_MaceProducible_save
-                    = DAT_MapPropertiesState::instance.SEC_MaceProducible_save ^ 1;
+                DAT_MapPropertiesState::instance.SEC_MaceProducible_save ^= 1;
             }
             if (button == -3) {
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(

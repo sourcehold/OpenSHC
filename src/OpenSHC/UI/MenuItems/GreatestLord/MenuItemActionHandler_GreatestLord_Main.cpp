@@ -13,7 +13,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B1990
         void GreatestLord::MenuItemActionHandler_GreatestLord_Main(int button, ...)
         {
-            if ((button == 1) || (button == 100)) {
+            if (button == 1 || button == 100) {
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
                     UI::Enums::MMT_NONE, FALSE);
             }

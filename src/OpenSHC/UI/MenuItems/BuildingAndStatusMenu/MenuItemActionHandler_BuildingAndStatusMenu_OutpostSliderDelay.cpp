@@ -10,12 +10,12 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderDelay(
             int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            int const selectedBuildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
+            int const buildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
             switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = 24000;
-                *currentValue = DAT_BuildingsState::instance.buildings[selectedBuildingID].outpostRelatedUnk3;
+                *currentValue = DAT_BuildingsState::instance.buildings[buildingID].outpostRelatedUnk3;
                 return;
             case 2:
             case 3:
@@ -28,13 +28,14 @@ namespace UI {
                           .outpostRelatedUnk3;
                 return;
             case 5: {
+                // through a pointer, as the original does (direct field writes: quick_diff 0.8723 -> 0.4719)
                 short const delay
                     = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk3;
                 short* const delayField
                     = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                            .outpostRelatedUnk3;
-                if (0 < delay) {
+                if (delay > 0) {
                     *delayField = delay - 1;
                 }
                 *currentValue = *delayField;

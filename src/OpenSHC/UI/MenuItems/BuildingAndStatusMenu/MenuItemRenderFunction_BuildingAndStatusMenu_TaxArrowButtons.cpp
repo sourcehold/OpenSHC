@@ -20,13 +20,13 @@ namespace UI {
         {
             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-            if (0 <= action) {
-                int yParam = DAT_ButtonY::instance + 4;
-                int xParam = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
+            if (action >= 0) {
+                int const textY = DAT_ButtonY::instance + 4;
+                int const textX = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, action),
-                    xParam, yParam, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_000000, 17, FALSE, 0);
+                    textX, textY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_000000, 17, FALSE, 0);
             }
         }
 

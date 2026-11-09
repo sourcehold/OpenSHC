@@ -15,6 +15,7 @@ namespace UI {
         void BuildMenu::MenuItemActionHandler_BuildMenu_CurrentlySelectedTroops(int slotID, ...)
         {
             DAT_UnitsState::instance.unitControlsRelated = 1;
+            // 20 selection slots: buttons 0-19 keep only a slot's unit type selected, 20-39 drop it
             if (slotID < 20) {
                 UnitTypeInt const unitType
                     = DAT_RenderingDefinedData::instance

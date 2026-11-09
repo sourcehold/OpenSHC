@@ -16,23 +16,28 @@ namespace UI {
             switch (field) {
             case 0:
                 if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_FIVE__NUMERIC_DOT) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(5);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_FIVE__NUMERIC_DOT);
                 }
                 break;
             case 1:
                 if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_SIX__NUMERIC_ONLY) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(6);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_SIX__NUMERIC_ONLY);
                 }
                 break;
             case 2:
                 if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_SEVEN__NUMERIC_ONLY) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(7);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_SEVEN__NUMERIC_ONLY);
                 }
                 break;
             case 3:
-                if ((DAT_GameCore::instance.isNameEntryActive != TRUE)
-                    && (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_ZERO)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(0);
+                // != TRUE: the original compares with 1
+                if (DAT_GameCore::instance.isNameEntryActive != TRUE
+                    && DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_ZERO) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_ZERO);
                 }
             }
         }

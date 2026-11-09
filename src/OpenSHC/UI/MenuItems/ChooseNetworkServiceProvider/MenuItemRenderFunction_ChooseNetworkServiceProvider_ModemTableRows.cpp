@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
@@ -19,8 +18,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0047D100
         void ChooseNetworkServiceProvider::MenuItemRenderFunction_ChooseNetworkServiceProvider_ModemTableRows(
             int row, ...)
@@ -33,7 +30,8 @@ namespace UI {
                 >= DAT_GameSynchronyState::instance.modemScrollbarCount) {
                 return;
             }
-            BGR24 color;
+            // set in both branches: a preset colour overridden in one costs two instructions
+            uint color;
             if (row == DAT_GameSynchronyState::instance.modemScrollbarIndex
                 || DAT_ButtonCurrentlyInteracting::instance) {
                 color = OpenSHC::Rendering::Colors::COL_CCFAFF;

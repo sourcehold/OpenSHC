@@ -28,27 +28,28 @@ namespace UI {
                           .outpostRelatedUnk2;
                 return;
             case 5: {
-                short const oldSize
+                // through a pointer, as the original does (direct field writes: quick_diff 0.8723 -> 0.4719)
+                short const size
                     = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk2;
                 short* const sizeField
                     = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                            .outpostRelatedUnk2;
-                if (0 < oldSize) {
-                    *sizeField = oldSize - 1;
+                if (size > 0) {
+                    *sizeField = size - 1;
                 }
                 *currentValue = *sizeField;
                 return;
             }
             case 6: {
-                short const oldSize
+                short const size
                     = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk2;
                 short* const sizeField
                     = &DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                            .outpostRelatedUnk2;
-                if (oldSize < 5) {
-                    *sizeField = oldSize + 1;
+                if (size < 5) {
+                    *sizeField = size + 1;
                 }
                 *currentValue = *sizeField;
             }

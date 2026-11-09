@@ -29,6 +29,7 @@ namespace UI {
                 >= DAT_GameSynchronyState::instance.DPLAY_SessionsCount) {
                 return;
             }
+            // set in both branches: a preset colour overridden in one costs two instructions
             uint color;
             if (row == DAT_GameSynchronyState::instance.scrollBarIndex || DAT_ButtonCurrentlyInteracting::instance) {
                 color = OpenSHC::Rendering::Colors::COL_CCFAFF;

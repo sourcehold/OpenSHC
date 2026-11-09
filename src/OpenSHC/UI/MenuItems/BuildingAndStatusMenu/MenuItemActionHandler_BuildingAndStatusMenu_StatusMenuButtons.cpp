@@ -27,8 +27,8 @@ namespace UI {
             DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = tabType;
             MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
-            if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL)
-                && (tabType != UI::Enums::BASMTT_STATUS_OVERVIEW)) {
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL
+                && tabType != UI::Enums::BASMTT_STATUS_OVERVIEW) {
                 MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(15, (BuildingType)tabType);
             }
         }

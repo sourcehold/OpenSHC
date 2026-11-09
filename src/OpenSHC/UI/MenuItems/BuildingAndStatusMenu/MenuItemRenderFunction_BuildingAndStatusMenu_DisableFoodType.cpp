@@ -26,18 +26,17 @@ namespace UI {
             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .isFoodTypeBanned[foodType]
-                != 0) {
-                int _xOffset = 8;
-                int _yOffset = 2;
+                    .isFoodTypeBanned[foodType]) {
+                int iconOffsetX = 8;
+                int iconOffsetY = 2;
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 if (foodType == 1) {
-                    _xOffset = 4;
-                    _yOffset = 0;
+                    iconOffsetX = 4;
+                    iconOffsetY = 0;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, 45,
-                    DAT_ButtonX::instance - 4 + _xOffset, DAT_ButtonY::instance - 45 + _yOffset, 6);
+                    DAT_ButtonX::instance - 4 + iconOffsetX, DAT_ButtonY::instance - 45 + iconOffsetY, 6);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
         }

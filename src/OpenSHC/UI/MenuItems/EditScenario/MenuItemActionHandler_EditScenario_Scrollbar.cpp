@@ -10,6 +10,7 @@ namespace UI {
         void EditScenario::MenuItemActionHandler_EditScenario_Scrollbar(
             int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
+            // twenty events fit in the list
             switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
@@ -28,9 +29,8 @@ namespace UI {
                 *maxValue = DAT_MapPropertiesState::instance.eventsCount - 20;
                 return;
             case 5:
-                if (0 < DAT_MapPropertiesState::instance.eventListScrollOffset) {
-                    DAT_MapPropertiesState::instance.eventListScrollOffset
-                        = DAT_MapPropertiesState::instance.eventListScrollOffset - 1;
+                if (DAT_MapPropertiesState::instance.eventListScrollOffset > 0) {
+                    --DAT_MapPropertiesState::instance.eventListScrollOffset;
                     *currentValue = DAT_MapPropertiesState::instance.eventListScrollOffset;
                     return;
                 }
@@ -38,8 +38,7 @@ namespace UI {
             case 6:
                 if (DAT_MapPropertiesState::instance.eventListScrollOffset
                     < DAT_MapPropertiesState::instance.eventsCount - 20) {
-                    DAT_MapPropertiesState::instance.eventListScrollOffset
-                        = DAT_MapPropertiesState::instance.eventListScrollOffset + 1;
+                    ++DAT_MapPropertiesState::instance.eventListScrollOffset;
                 }
                 break;
             default:

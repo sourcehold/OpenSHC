@@ -18,7 +18,7 @@ namespace UI {
             if (DAT_ButtonCurrentlyInteracting::instance
                 && DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
                 && (DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_SOLDIERS
-                    || (DAT_TileMapState::instance.shiftRelated0or3 == 1))) {
+                    || DAT_TileMapState::instance.shiftRelated0or3 == 1)) {
                 DAT_MinimapViewState::instance.minimapClickEnabled = TRUE;
                 return;
             }

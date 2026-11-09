@@ -3,6 +3,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonW.hpp"
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
@@ -13,9 +14,11 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x00465630
         void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_HorizontalSlider(
-            int unused, int thumbXPos, int sliderValue, int thumbHeight, BOOL isDragged)
+            int unused, int thumbXPos, int sliderValue, int thumbWidth, BOOLEnum isDragged)
         {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             for (int trackOffset = 0; trackOffset < DAT_ButtonW::instance; trackOffset += 26) {

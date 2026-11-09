@@ -5,7 +5,6 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
-#include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -63,7 +62,7 @@ namespace UI {
                 INT_00b95b64::instance = 1;
                 DAT_GameCore::instance.standaloneFilename[0] = '\0';
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty_3;
-                DAT_GameCore::instance.menuTabToSwitchTo.tabType = UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM;
+                DAT_GameCore::instance.menuTabToSwitchTo.tabType = 1;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SINGLEPLAYER_MAP_CHOICE, 0);
                 for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {

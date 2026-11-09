@@ -13,8 +13,8 @@ namespace UI {
         void GameplayOptions::MenuItemActionHandler_GameplayOptions_SpeedSlider(
             int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-                && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+            if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                && DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
                 *minValue = 20;
                 *maxValue = 90;
                 *currentValue = DAT_GameSynchronyState::instance.skirmishGameSpeedLevel;

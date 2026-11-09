@@ -15,6 +15,7 @@ namespace UI {
             case 1:
                 *minValue = 0;
                 *maxValue = 11;
+                // falls through: the first event also reads the current value
             case 4:
                 *currentValue
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -25,34 +26,28 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .taxesSliderUI = *currentValue;
                 return;
-            case 5: {
-                int const taxesSliderValue
+            case 5:
+                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .taxesSliderUI
+                    > 0) {
+                    --DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .taxesSliderUI;
+                }
+                *currentValue
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                           .taxesSliderUI;
-                int* const taxesSlider
-                    = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                           .taxesSliderUI;
-                if (0 < taxesSliderValue) {
-                    *taxesSlider = taxesSliderValue - 1;
-                }
-                *currentValue = *taxesSlider;
                 return;
-            }
-            case 6: {
-                int const taxesSliderValue
+            case 6:
+                if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .taxesSliderUI
+                    < 11) {
+                    ++DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                          .taxesSliderUI;
+                }
+                *currentValue
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                           .taxesSliderUI;
-                int* const taxesSlider
-                    = &DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                           .taxesSliderUI;
-                if (taxesSliderValue < 11) {
-                    *taxesSlider = taxesSliderValue + 1;
-                }
-                *currentValue = *taxesSlider;
-                break;
-            }
-            default:
-                break;
+                return;
             }
         }
 
