@@ -5,7 +5,6 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -26,8 +25,10 @@ namespace UI {
         void MainMenu::MenuView_MainMenu_Prepare()
         {
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+            // "frontend_main.tgx"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)(s_frontend_main_tgx_005a1fb0);
+            // "frontend_main2.tgx"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)(s_frontend_main2_tgx_005a1f9c);
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();

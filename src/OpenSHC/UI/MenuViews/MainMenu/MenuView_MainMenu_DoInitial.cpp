@@ -23,10 +23,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00424CD0
         void MainMenu::MenuView_MainMenu_DoInitial()
         {
-            Menu* _menu;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
                 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+                COL_BLACK::instance.shortValue);
             MACRO_CALL(OpenSHC::UI::Rendering_Func::DrawOuterMenuBorder)();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(DAT_UnknownGFXIndex::instance,
@@ -36,18 +35,18 @@ namespace UI {
                 (DAT_WindowAndDirectDraw::instance.resolutionY
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[DAT_UnknownGFXIndex::instance].height)
                     / 2);
-            int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            _menu = DAT_MenuHandlerState::instance.currentMenu;
-            _menu->xPosition = borderWidth;
-            _menu->yPosition = borderHeight;
+            int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->xPosition = borderWidth;
+            menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
-            INT_00b95f68::instance = 0;
+            INT_00b95f68::instance = FALSE;
+            // "richard_swordswing.bik"
             MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::BinkControlClass_Func::playBINK, DAT_BinkControlState::ptr)(0,
-                s_richard_swordswing_bik_005a1fc4, 0, 0,
-                (int)((int)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 508)),
-                (int)((int)(DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 22)), 0);
+                s_richard_swordswing_bik_005a1fc4, 0, 0, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 508,
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 22, 0);
             DAT_MainMenuSwingSwordBool::instance = 0;
         }
 

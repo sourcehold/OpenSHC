@@ -8,7 +8,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
@@ -66,25 +66,27 @@ namespace UI {
             DWORD_00b95b1c::instance = timeGetTime();
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             if ((int)DAT_MapMissionType::instance < 2) {
+                // "frontend_economics2.tgx"
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                     s_frontend_economics2_tgx_005a203c);
             } else {
+                // "frontend_combat2.tgx"
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                     s_frontend_combat2_tgx_005a2010);
             }
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
-            int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
             Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
             menu->xPosition = borderWidth;
             menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
-            MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(4);
+            MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                Text::TAIT_UNKNOWN_4);
             MACRO_CALL_MEMBER(Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
             INT_00b95b64::instance = 0;
-            DAT_GameCore::instance.activeMenuTab.tabType
-                = (UI::Enums::BuildingsAndStatusMenuTabTypeInt)(DAT_MapMissionType::instance != 0);
+            DAT_GameCore::instance.activeMenuTab.tabType = DAT_MapMissionType::instance != 0;
         }
 
     }

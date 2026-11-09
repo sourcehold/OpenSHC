@@ -18,27 +18,27 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1AA0
         void UnusedExtremeAd::MenuView_UnusedExtremeAd_DoEveryFrame()
         {
-            if (MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)()) {
-                if (DAT_MouseState::instance.rightClickStop) {
-                    MACRO_CALL(UI::Credits_Func::StopCreditsPlaybackAndSounds)();
-                }
-                if (DAT_MouseState::instance.leftClickStart) {
-                    if (MACRO_CALL(UI::Helpers_Func::FindCampaignMapHotspotAtMouse)() == 1) {
-                        MACRO_CALL(UI::Credits_Func::EndCreditsSegmentAndAdvanceToNext)();
-                        ++DAT_00ed278c::instance;
-                        if (DAT_00ed278c::instance == 3) {
-                            DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
-                        }
-                    }
-                }
-                MACRO_CALL(Rendering_Func::ProcessCreditsScriptCommands)();
-                if ((int)DAT_UnknownBinkIndex::instance < (int)DAT_UnknownBinkCount::instance) {
-                    MACRO_CALL(Rendering_Func::RenderActiveCreditsElements)();
-                }
-                ++INT_00ed3140::instance;
-                if ((int)DAT_UnknownBinkIndex::instance >= (int)DAT_UnknownBinkCount::instance) {
+            if (!MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)()) {
+                return;
+            }
+            if (DAT_MouseState::instance.rightClickStop) {
+                MACRO_CALL(UI::Credits_Func::StopCreditsPlaybackAndSounds)();
+            }
+            if (DAT_MouseState::instance.leftClickStart
+                && MACRO_CALL(UI::Helpers_Func::FindCampaignMapHotspotAtMouse)() == 1) {
+                MACRO_CALL(UI::Credits_Func::EndCreditsSegmentAndAdvanceToNext)();
+                ++DAT_00ed278c::instance;
+                if (DAT_00ed278c::instance == 3) {
                     DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
                 }
+            }
+            MACRO_CALL(Rendering_Func::ProcessCreditsScriptCommands)();
+            if (DAT_UnknownBinkIndex::instance < DAT_UnknownBinkCount::instance) {
+                MACRO_CALL(Rendering_Func::RenderActiveCreditsElements)();
+            }
+            ++INT_00ed3140::instance;
+            if (DAT_UnknownBinkIndex::instance >= DAT_UnknownBinkCount::instance) {
+                DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
             }
         }
 

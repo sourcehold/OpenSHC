@@ -16,7 +16,7 @@ namespace UI {
         void HistoricCampaignSelect::MenuView_HistoricCampaignSelect_DoEveryFrame()
         {
             DAT_UnknownGFXIndex::instance
-                = (int)(DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE);
+                = DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(DAT_UnknownGFXIndex::instance,
                 (DAT_WindowAndDirectDraw::instance.resolutionX

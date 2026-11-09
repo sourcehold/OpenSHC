@@ -16,7 +16,7 @@ namespace UI {
         {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
                 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)(COL_BLACK::instance.shortValue));
+                COL_BLACK::instance.shortValue);
             MACRO_CALL(OpenSHC::UI::Rendering_Func::DrawOuterMenuBorder)();
             MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderGfxHelperUnk)(0, 0, 0);
         }

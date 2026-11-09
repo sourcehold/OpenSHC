@@ -18,11 +18,11 @@ namespace UI {
         {
             if (MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)()) {
                 MACRO_CALL(Rendering_Func::ProcessCreditsScriptCommands)();
-                if ((59 <= (int)DAT_UnknownBinkIndex::instance) && (!INT_00ed27b8::instance)) {
+                if (DAT_UnknownBinkIndex::instance >= 59 && !INT_00ed27b8::instance) {
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID, DAT_SoundSystemState::ptr)(
                         DE::SHCDE::MUSIC_GERMAN_EGG);
-                    INT_00ed27b8::instance = 1;
+                    INT_00ed27b8::instance = TRUE;
                 }
                 MACRO_CALL(Rendering_Func::RenderActiveCreditsElements)();
             }

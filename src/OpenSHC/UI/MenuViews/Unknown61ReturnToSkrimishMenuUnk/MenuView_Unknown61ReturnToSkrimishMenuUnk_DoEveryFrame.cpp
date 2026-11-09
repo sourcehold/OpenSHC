@@ -13,11 +13,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004272C0
         void Unknown61ReturnToSkrimishMenuUnk::MenuView_Unknown61ReturnToSkrimishMenuUnk_DoEveryFrame()
         {
-            int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            Menu* _menuPtr = DAT_MenuHandlerState::instance.currentMenu;
-            _menuPtr->yPosition = borderHeight;
-            _menuPtr->xPosition = borderWidth;
+            int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->yPosition = borderHeight;
+            menu->xPosition = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             MACRO_CALL_MEMBER(

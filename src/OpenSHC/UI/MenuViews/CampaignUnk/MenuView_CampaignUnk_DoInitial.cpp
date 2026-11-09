@@ -14,12 +14,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DD0C0
         void CampaignUnk::MenuView_CampaignUnk_DoInitial()
         {
-            Menu* pMVar1;
-            int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-            pMVar1->xPosition = borderWidth;
-            pMVar1->yPosition = borderHeight;
+            int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->xPosition = borderWidth;
+            menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             MACRO_CALL(UI::Helpers_Func::ColorEntireScreen)(COL_BLACK::instance.shortValue);

@@ -11,7 +11,6 @@
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_MAGENTA.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -30,8 +29,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00433030
         void BuildMenu::MenuView_BuildMenu_DoEveryFrame()
         {
-            if ((DAT_GameCore::instance.activeMenuTab.buildMenuTab != OpenSHC::UI::Enums::BMTT_MENU_HIDDEN)
-                && (DAT_GameCore::instance.activeMenuTab.buildMenuTab != 62)) {
+            if (DAT_GameCore::instance.activeMenuTab.buildMenuTab != OpenSHC::UI::Enums::BMTT_MENU_HIDDEN
+                && DAT_GameCore::instance.activeMenuTab.buildMenuTab != OpenSHC::UI::Enums::BMTT_UNKNOWN_62) {
                 if (DAT_MinimapViewState::instance.field_0xc == 0) {
                     DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
                 }
@@ -45,12 +44,12 @@ namespace UI {
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_PANELS, 2,
-                            DAT_MenuHandlerState::instance.x, (int)(DAT_MenuHandlerState::instance.y + 472));
+                            DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 472);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox,
                             DAT_PencilRenderCore::ptr)(DAT_MenuHandlerState::instance.x,
                             DAT_MenuHandlerState::instance.y + 406, DAT_MenuHandlerState::instance.x + 799,
-                            DAT_MenuHandlerState::instance.y + 471, (ushort)(COL_MAGENTA::instance.shortValue));
+                            DAT_MenuHandlerState::instance.y + 471, COL_MAGENTA::instance.shortValue);
                         if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_SOLDIERS) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_PANELS, 5,
@@ -65,9 +64,8 @@ namespace UI {
                                 DAT_MenuHandlerState::instance.y + 576);
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawTgxGmOnFlaggedSurface,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_BUTTONS, 7,
-                                (DAT_MenuHandlerState::instance.x
-                                    - DAT_MenuHandlerState::instance.buildMenuBackgroundLeftShift_0x24)
-                                    + 17,
+                                DAT_MenuHandlerState::instance.x
+                                    - DAT_MenuHandlerState::instance.buildMenuBackgroundLeftShift_0x24 + 17,
                                 DAT_MenuHandlerState::instance.y + 473);
                             MACRO_CALL_MEMBER(
                                 OpenSHC::UI::Rendering::TextureRenderCore_Func::setRenderingRectToGameResolution,
@@ -77,8 +75,8 @@ namespace UI {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 }
-                DAT_MinimapViewState::instance.needsRedraw = 1;
-                if (DAT_GameCore::instance.isBinkVideoPlaying == 0) {
+                DAT_MinimapViewState::instance.needsRedraw = TRUE;
+                if (!DAT_GameCore::instance.isBinkVideoPlaying) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::MinimapViewState_Func::renderMinimapMain, DAT_MinimapViewState::ptr)();
                 }
@@ -86,8 +84,7 @@ namespace UI {
             if (DAT_GameCore::instance.isVictoryOrDefeatUnk != 0) {
                 DAT_GameCore::instance.isVictoryOrDefeatUnk = 0;
                 DAT_GameState::instance.mapAndTime.gameOver = TRUE;
-                DWORD _currentTime = timeGetTime();
-                DAT_GameState::instance.mapAndTime.gameOverTime = _currentTime - 6000;
+                DAT_GameState::instance.mapAndTime.gameOverTime = timeGetTime() - 6000;
                 DAT_GameState::instance.mapAndTime.playerIsAlive[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     = 1;
                 DAT_GameCore::instance.skipStoreSKMasters = 1;

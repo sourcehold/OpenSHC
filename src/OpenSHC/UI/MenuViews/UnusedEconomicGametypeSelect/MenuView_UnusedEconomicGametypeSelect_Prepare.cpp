@@ -17,12 +17,15 @@ namespace UI {
         void UnusedEconomicGametypeSelect::MenuView_UnusedEconomicGametypeSelect_Prepare()
         {
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+            // "frontend_economics.tgx"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)(s_frontend_economics_tgx_005a2054);
+            // "frontend_economics2.tgx"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)(s_frontend_economics2_tgx_005a203c);
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
             DWORD const now = timeGetTime();
+            // this menu's three buttons start their animation 1600 ms apart
             for (int i = 0; i < 3; ++i) {
                 DAT_UIButtonDefinedData::instance.ButtonGmDataArray[360 + i].stateTransitionTimeBaseUnk_0x18
                     = now - (3 - i) * 1600;

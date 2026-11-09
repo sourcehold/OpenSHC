@@ -15,12 +15,14 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00424720
         void IntroLogos::MenuView_IntroLogos_Prepare()
         {
-            if (!DAT_IntroStep::instance) {
+            if (DAT_IntroStep::instance == 0) {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+                // "logo1.tgx"
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                     s_logo1_tgx_005a1f74);
             } else if (DAT_IntroStep::instance == 1) {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+                // "logo2.tgx"
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                     s_logo2_tgx_005a1f68);
             }

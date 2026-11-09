@@ -14,15 +14,14 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00430100
         void General::MenuView_General_DoInitial_ScreenToBlack()
         {
-            Menu* pMVar1;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0, 0,
                 DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)(COL_BLACK::instance.shortValue));
-            int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-            pMVar1->xPosition = borderWidth;
-            pMVar1->yPosition = borderHeight;
+                COL_BLACK::instance.shortValue);
+            int const borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            int const borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->xPosition = borderWidth;
+            menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
         }

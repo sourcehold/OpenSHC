@@ -19,11 +19,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004313C0
         void MapEditorLandscaping::MenuView_MapEditorLandscaping_DoEveryFrame()
         {
-            if ((DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER)
-                || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)) {
+            if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
+                || DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD) {
                 return;
             }
-            if (!DAT_MinimapViewState::instance.field_0xc) {
+            if (DAT_MinimapViewState::instance.field_0xc == 0) {
                 DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
             }
             if (DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated == 2) {
@@ -33,7 +33,7 @@ namespace UI {
                     DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 434);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
-            DAT_MinimapViewState::instance.needsRedraw = 1;
+            DAT_MinimapViewState::instance.needsRedraw = TRUE;
             MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapLandscaping, DAT_MinimapViewState::ptr)(
                 DAT_MenuHandlerState::instance.x + 664, DAT_MenuHandlerState::instance.y + 464, 128, 128);
         }
