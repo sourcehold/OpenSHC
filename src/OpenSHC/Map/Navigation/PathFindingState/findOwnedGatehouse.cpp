@@ -16,17 +16,13 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /* inlined copy of ViewportRenderState::xyAreValid */
-        inline static int xyAreValid(uint ySpace, uint y)
-        {
-            return ySpace <= MC_MAP_XY_LIMIT_MIN_1 && y <= MC_MAP_XY_LIMIT_MIN_1
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != 0;
-        }
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004A19B0
         dword PathFindingState::findOwnedGatehouse(int playerID, uint ySpace, uint y)
         {
-            if (!xyAreValid(ySpace, y)) {
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1) {
+                return 0;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return 0;
             }
             this->calculations += 1;

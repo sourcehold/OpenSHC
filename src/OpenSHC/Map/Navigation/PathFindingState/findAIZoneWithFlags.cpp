@@ -20,7 +20,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049EDF0
         BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint ySpace, uint y, undefined4 aiInfoFlags)
         {
-            int _candidate;
             this->calculations += 1;
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
@@ -62,31 +61,32 @@ namespace Map {
                 for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
-                            != 0
-                        && (_candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile,
-                            DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
-                        // the original ANDs 8 bits (test byte ptr [..], dl), so the undefined4 parameter
-                        // has to be narrowed here
-                        if ((DAT_TileMapState::instance.AIInfoLayer[_candidate] & (byte)aiInfoFlags) != 0) {
-                            this->ALG_ResultY = _y;
-                            this->ALG_ResultX = _x;
-                            return TRUE;
-                        }
-                        DAT_TileMapState::instance.CertainPathLayer[_candidate] = this->searchQueue.currentDistance + 1;
-                        DAT_TileMapState::instance.WalkLayer[_candidate] = this->searchGeneration;
-                        this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                  .short_.xOffset
-                            + _x;
-                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                  .short_.yOffset
-                            + _y;
-                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex += 1;
-                        if (MC_MAP_TILES_COUNT <= this->searchQueue.writeIndex) {
-                            this->searchQueue.writeIndex = 0;
-                        }
+                        == 0) {
+                        continue;
+                    }
+                    int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
+                    if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
+                        continue;
+                    }
+                    // the original ANDs 8 bits (test byte ptr [..], dl), so the undefined4 parameter
+                    // has to be narrowed here
+                    if ((DAT_TileMapState::instance.AIInfoLayer[_candidate] & (byte)aiInfoFlags) != 0) {
+                        this->ALG_ResultY = _y;
+                        this->ALG_ResultX = _x;
+                        return TRUE;
+                    }
+                    DAT_TileMapState::instance.CertainPathLayer[_candidate] = this->searchQueue.currentDistance + 1;
+                    DAT_TileMapState::instance.WalkLayer[_candidate] = this->searchGeneration;
+                    this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset
+                        + _x;
+                    this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset
+                        + _y;
+                    this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                    this->searchQueue.writeIndex += 1;
+                    if (MC_MAP_TILES_COUNT <= this->searchQueue.writeIndex) {
+                        this->searchQueue.writeIndex = 0;
                     }
                 }
                 this->searchQueue.readIndex += 1;

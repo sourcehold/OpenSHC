@@ -29,7 +29,7 @@ namespace Map {
         {
             int _startX = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
             int _startY = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
-            if ((uint)_startX > MC_MAP_XY_LIMIT_MIN_1 || (uint)_startY > MC_MAP_XY_LIMIT_MIN_1
+            if (_startX < 0 || _startX > MC_MAP_XY_LIMIT_MIN_1 || _startY < 0 || _startY > MC_MAP_XY_LIMIT_MIN_1
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_startY * MC_MAP_XY_LIMIT + _startX]
                     == 0) {
                 return;

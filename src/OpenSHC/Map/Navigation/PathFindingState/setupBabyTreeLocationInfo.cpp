@@ -22,19 +22,16 @@ namespace Map {
         using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::Map::Trees::TreeTypeShort;
 
-        /* inlined copy of ViewportRenderState::xyAreValid */
-        inline static int xyAreValid(uint ySpace, uint y)
-        {
-            return ySpace <= MC_MAP_XY_LIMIT_MIN_1 && y <= MC_MAP_XY_LIMIT_MIN_1
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != 0;
-        }
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020
         BOOLEnum PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint ySpace, uint y)
         {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (!xyAreValid(ySpace, y)) {
+            if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1) {
+                return FALSE;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] == 0) {
                 return FALSE;
             }
             this->calculations += 1;
