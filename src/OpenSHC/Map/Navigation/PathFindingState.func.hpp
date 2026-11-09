@@ -90,7 +90,7 @@ namespace Map {
                 &PathFindingState::commitUnitPathPlanUsingWalkLayer)
             commitUnitPathPlanUsingWalkLayer;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004995E0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x004995E0,
                 &PathFindingState::updateSeparateAreaTileMap)
             updateSeparateAreaTileMap;
 

@@ -1,7 +1,6 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -12,7 +11,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-        using OpenSHC::Map::Location::Point8ShortXY;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BBF0
         void PathFindingState::findFurthestSeaTile(int budget, uint ySpace, uint y)
@@ -29,7 +27,7 @@ namespace Map {
             if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;

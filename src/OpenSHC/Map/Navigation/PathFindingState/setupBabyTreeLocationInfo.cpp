@@ -1,7 +1,6 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
@@ -18,7 +17,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::Map::Trees::TreeTypeShort;
 
@@ -42,7 +40,7 @@ namespace Map {
             if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
@@ -104,9 +102,9 @@ namespace Map {
                                         | LogicHelpers::L_MARSH | LogicHelpers::L_MOAT))
                                 == 0) {
                                 if (treeType == 1) {
-                                    if ((_logic2 & 0x90 /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) != 0)
+                                    if ((_logic2 & (L2_OASIS_GRASS|L2_THICK_SCRUB) /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) != 0)
                                         continue;
-                                } else if ((_logic2 & 0x90 /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) == 0) {
+                                } else if ((_logic2 & (L2_OASIS_GRASS|L2_THICK_SCRUB) /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) == 0) {
                                     continue;
                                 }
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]

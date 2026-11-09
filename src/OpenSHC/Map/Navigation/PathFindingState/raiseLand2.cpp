@@ -2,7 +2,6 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 
@@ -14,7 +13,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-        using OpenSHC::Map::Location::Point8ShortXY;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A6D0
         void PathFindingState::raiseLand2(uint ySpace, uint y, int maxDistance)

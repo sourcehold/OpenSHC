@@ -17,13 +17,13 @@ namespace Map {
     namespace Navigation {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004A01D0
-        dword PathFindingState::findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4)
+        dword PathFindingState::findBestAttackTileByPathCost(uint x, uint y, int playerID, uint cost)
         {
             dword _candidate = 1000;
             int _bestScore = 1000;
             dword _bestTile = 0;
-            if (param_1 > MC_MAP_XY_LIMIT_MIN_1 || param_2 > MC_MAP_XY_LIMIT_MIN_1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_2 * MC_MAP_XY_LIMIT + param_1]
+            if (x > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]
                     == 0) {
                 return _candidate;
             }
@@ -32,14 +32,14 @@ namespace Map {
             if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
             }
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
-            this->searchQueue.yQueue[0] = param_2;
+            this->searchQueue.yQueue[0] = y;
             this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[param_2].addXgetTile + param_1;
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = this->searchGeneration;
@@ -63,7 +63,7 @@ namespace Map {
                         _candidate
                             = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _queuedTile;
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
-                            int _plane = DAT_TroopValueState::instance.attackInfo.playerInfo[param_3 - 1]
+                            int _plane = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1]
                                              .currentPlayerID_OR_attackedPlayerID_OR_one;
                             uint _hackValue
                                 = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[_plane][_candidate];
@@ -72,7 +72,7 @@ namespace Map {
                             if (((_entity == 0)
                                     || (DAT_EntityState::instance.entityArray[_entity].entityType
                                         != OpenSHC::Map::Entities::ET_FIRE))
-                                && _hackValue == param_4) {
+                                && _hackValue == cost) {
                                 if ((10 < this->searchQueue.currentDistance) && (_bestTile != 0)) {
                                     return _bestTile;
                                 }

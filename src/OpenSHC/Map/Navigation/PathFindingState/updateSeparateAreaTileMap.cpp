@@ -20,7 +20,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004995E0
-        BOOLEnum PathFindingState::updateSeparateAreaTileMap(int forceUpdate)
+        BOOLEnum PathFindingState::updateSeparateAreaTileMap(BOOLEnum forceUpdate)
         {
             if (forceUpdate != 0) {
                 this->toggleUpdateSeparateAreaTileMap = 1;

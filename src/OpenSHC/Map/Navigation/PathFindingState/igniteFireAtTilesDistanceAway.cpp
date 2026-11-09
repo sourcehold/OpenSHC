@@ -2,7 +2,6 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Entities.func.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 
@@ -14,7 +13,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-        using OpenSHC::Map::Location::Point8ShortXY;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004A2DD0
         BOOLEnum PathFindingState::igniteFireAtTilesDistanceAway(int tileUnk, int maxDistance, int playerID)
@@ -26,7 +24,7 @@ namespace Map {
             if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
+                    sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
             }
             int _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
             int _x = tileUnk - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
@@ -41,7 +39,7 @@ namespace Map {
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 tileUnk = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 // one unsigned compare rejects a negative tile and one past the last tile at once
-                if (MC_MAP_TILES_COUNT - 1 < (uint)tileUnk)
+                if (tileUnk < 1 || tileUnk > MC_MAP_TILES_COUNT)
                     break;
                 int _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
