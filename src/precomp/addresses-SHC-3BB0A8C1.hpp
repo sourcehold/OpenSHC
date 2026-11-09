@@ -96114,7 +96114,7 @@ enum {
     // location:
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00B98408 = 0x00B98408,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B9840C = 0x00B9840C,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B98410 = 0x00B98410,
@@ -96587,7 +96587,7 @@ enum {
     SHC_3BB0A8C1_0x00DF33E0 = 0x00DF33E0,
     // label: DAT_PerformanceCounterFrequency
     // location:
-    // type: winnt/LARGE_INTEGER
+    // type: ntddk_32/_LARGE_INTEGER
     SHC_3BB0A8C1_0x00DF33E8 = 0x00DF33E8,
     // label: COL_LIGHT_GREY
     // location:
