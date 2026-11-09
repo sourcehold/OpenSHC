@@ -15,7 +15,7 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 74, 4, x, y, width, height);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
-                x + 102, y + 213, x + 178, y + 0xfc, 16);
+                x + 102, y + 213, x + 178, y + 252, 16);
         }
 
     }

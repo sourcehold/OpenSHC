@@ -8,7 +8,6 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/BOOL_RelatedToInitialGranaryAndKeepPlacement.hpp"
@@ -45,6 +44,7 @@ namespace UI {
         if (whichBuildingIsMissing == 1) {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
                 // "Place a keep to site your castle my liege"
+                // "other_warning1.wav"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     s_other_warning1_wav_005a77c0);
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;
@@ -54,6 +54,7 @@ namespace UI {
         if (whichBuildingIsMissing == 2) {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
                 // "Site your granary sire"
+                // "other_warning2.wav"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     s_other_warning2_wav_005a77ac);
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;

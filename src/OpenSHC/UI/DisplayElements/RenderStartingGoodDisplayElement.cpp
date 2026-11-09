@@ -91,7 +91,7 @@ namespace UI {
         } else if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].someCount47
                 = 2000;
-            DAT_GameState::instance.playerDataArray[countedPlayerSlotID].textYOffset = 0x1e;
+            DAT_GameState::instance.playerDataArray[countedPlayerSlotID].textYOffset = 30;
         }
         int const goodsPopupState = DAT_GameState::instance.playerDataArray[countedPlayerSlotID].someCount45;
         if (goodsPopupState != 0) {
@@ -114,11 +114,11 @@ namespace UI {
             } else {
                 if (goodsPopupState == 1) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 0, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT,
+                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 0, posX, posY + 30, OpenSHC::Text::TTA_LEFT,
                         OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 17, FALSE);
                 } else if (goodsPopupState == 2) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 2, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT,
+                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 2, posX, posY + 30, OpenSHC::Text::TTA_LEFT,
                         OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 17, FALSE);
                 }
             }
@@ -164,7 +164,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .startResources[goodIndex],
-                    posX + 0x1e,
+                    posX + 30,
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .textYOffset
                         + goodsRowY + 6 + posY,

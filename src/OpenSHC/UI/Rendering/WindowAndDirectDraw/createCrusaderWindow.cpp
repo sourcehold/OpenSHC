@@ -1,7 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {

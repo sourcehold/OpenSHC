@@ -23,13 +23,13 @@ namespace UI {
         void IdentityOptions::MenuModalRenderFunction_IdentityOptions(int x, int y, int width, int height)
         {
             uint animFrame = (timeGetTime() - TIME_IdentityOptions::instance) / 100;
-            if (0xf < animFrame) {
+            if (animFrame > 15) {
                 animFrame = 0;
                 TIME_IdentityOptions::instance = timeGetTime();
             }
             // "Set-up Identity"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(74, 45, x, y, width, height);
+                DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 45, x, y, width, height);
             int const xPos = x + 310;
             // "Crusader or Arabic Lord"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
@@ -57,7 +57,7 @@ namespace UI {
             if (spriteID == 205) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    OpenSHC::DE::SHCDE::GM_BODY_ARABIC_LORD, (int)(animFrame * 8 + 5), x + 0x78, y + 75);
+                    OpenSHC::DE::SHCDE::GM_BODY_ARABIC_LORD, animFrame * 8 + 5, x + 120, y + 75);
             }
         }
 

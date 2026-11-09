@@ -30,11 +30,11 @@ namespace UI {
                       * 308)
                 / 7000;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                x + 40, y - 10, x + 45, y + 302, (ushort)(COL_BLACK::instance.shortValue));
+                x + 40, y - 10, x + 45, y + 302, COL_BLACK::instance.shortValue);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-                x + 40, y - 10, x + 45, y + 302, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                x + 40, y - 10, x + 45, y + 302, COL_VERY_SOFT_YELLOW::instance.shortValue);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                x + 42, (y - barFillHeight) + 300, x + 43, y + 300, (ushort)(COL_WHITE::instance.shortValue));
+                x + 42, (y - barFillHeight) + 300, x + 43, y + 300, COL_WHITE::instance.shortValue);
             if (DAT_TacticalPowersHelpTextDisplayBool::instance != false) {
                 // "Click on an Icon to use Tactical Powers"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(

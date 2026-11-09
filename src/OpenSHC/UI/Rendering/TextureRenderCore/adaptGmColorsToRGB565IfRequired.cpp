@@ -15,33 +15,33 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455930
         void TextureRenderCore::adaptGmColorsToRGB565IfRequired(int gmID, int imageIndex)
         {
-            if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                GmImageTypeInt _gmImageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
-                if ((_gmImageType == OpenSHC::IO::Graphics::GIT_InterfaceElement)
-                    || (_gmImageType == OpenSHC::IO::Graphics::GIT_Font)) {
+            if (DAT_WindowAndDirectDraw::instance.colorBitMode != OpenSHC::Rendering::RGB_565) {
+                return;
+            }
+            GmImageTypeInt const imageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
+            if ((imageType == OpenSHC::IO::Graphics::GIT_InterfaceElement)
+                || (imageType == OpenSHC::IO::Graphics::GIT_Font)) {
+                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxCompressedImageToRGB565,
+                    this)(imageIndex);
+            } else {
+                if (imageType == OpenSHC::IO::Graphics::GIT_UncompressedImageUnk) {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::TextureRenderCore_Func::transformUncompressedImageWithMarkerUnkToRGB565,
+                        this)(imageIndex);
+                }
+                if (imageType == OpenSHC::IO::Graphics::GIT_CompressedImage) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxCompressedImageToRGB565, this)(
                         imageIndex);
-                } else {
-                    if (_gmImageType == OpenSHC::IO::Graphics::GIT_UncompressedImageUnk) {
-                        MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::
-                                              transformUncompressedImageWithMarkerUnkToRGB565,
-                            this)(imageIndex);
-                    }
-                    if (_gmImageType == OpenSHC::IO::Graphics::GIT_CompressedImage) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxCompressedImageToRGB565, this)(
-                            imageIndex);
-                    }
-                    if (_gmImageType == OpenSHC::IO::Graphics::GIT_Tileset) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTilesetToRGB565, this)(imageIndex);
-                    }
-                    if (_gmImageType == OpenSHC::IO::Graphics::GIT_UncompressedImage) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::UI::Rendering::TextureRenderCore_Func::transformUncompressedImageToRGB565, this)(
-                            imageIndex);
-                    }
+                }
+                if (imageType == OpenSHC::IO::Graphics::GIT_Tileset) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTilesetToRGB565, this)(
+                        imageIndex);
+                }
+                if (imageType == OpenSHC::IO::Graphics::GIT_UncompressedImage) {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::TextureRenderCore_Func::transformUncompressedImageToRGB565, this)(
+                        imageIndex);
                 }
             }
         }

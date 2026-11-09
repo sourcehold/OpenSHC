@@ -4,11 +4,9 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_LobbyAddAICurrentlyHoveredAI.hpp"
@@ -35,7 +33,7 @@ namespace UI {
             if (8 < DAT_GameCore::instance.numOfAIsWithCastleUnk) {
                 yPos += 76;
             }
-            if (DAT_MouseState::instance.rightClickStart != 0) {
+            if (DAT_MouseState::instance.rightClickStart) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                     DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_NONE, FALSE);
             }
@@ -51,7 +49,7 @@ namespace UI {
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM,
                         DAT_LobbyAddAICurrentlyHoveredAI::instance * 9 + 230),
                     textX, yPos, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
-                yPos += 0x1e;
+                yPos += 30;
                 int const descOffset = DAT_LobbyAddAICurrentlyHoveredAI::instance + 384;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

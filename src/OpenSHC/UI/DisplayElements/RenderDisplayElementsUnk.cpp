@@ -17,24 +17,19 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AF700
     void DisplayElements::RenderDisplayElementsUnk()
     {
-        DisplayElementPositionModifierInt _positionModifier;
-        DisplayElementPositionModifierInt _xPosModifier;
-        DisplayElement* _displayElementPtr;
-        DWORD _currentTime = timeGetTime();
-        for (_displayElementPtr = DAT_PointerToDisplayElementStackTop::instance; _displayElementPtr != NULL;
-            _displayElementPtr = _displayElementPtr->nextDisplayElement_0x20) {
-            if (_displayElementPtr->elementStateUnk_0xc != 0) {
-                int _xPos
-                    = _displayElementPtr->x_0x0 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
-                int _yPos
-                    = _displayElementPtr->y_0x4 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
-                _positionModifier = _displayElementPtr->positionModifier_0x1c
+        DWORD const now = timeGetTime();
+        for (DisplayElement* displayElement = DAT_PointerToDisplayElementStackTop::instance; displayElement != NULL;
+            displayElement = displayElement->nextDisplayElement_0x20) {
+            if (displayElement->elementStateUnk_0xc != 0) {
+                int xPos = displayElement->x_0x0 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
+                int yPos = displayElement->y_0x4 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
+                DisplayElementPositionModifierInt const yModifier = displayElement->positionModifier_0x1c
                     & (OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y | OpenSHC::UI::Enums::DEPM_RESOLUTION_Y);
-                switch (_positionModifier) {
+                switch (yModifier) {
                 case OpenSHC::UI::Enums::DEPM_RESOLUTION_Y:
                     break;
                 case OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y: {
-                    _yPos = _yPos - 600 + DAT_WindowAndDirectDraw::instance.resolutionY;
+                    yPos = yPos - 600 + DAT_WindowAndDirectDraw::instance.resolutionY;
                     if (((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU)
                             || (DAT_GameCore::instance.currentMenuViewType
                                 == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING))
@@ -42,33 +37,32 @@ namespace UI {
                                 == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
                             || (DAT_GameCore::instance.activeMenuTab.tabType
                                 == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD))) {
-                        _yPos += 128;
+                        yPos += 128;
                     }
                     if (DAT_GameCore::instance.currentMenuViewType
                         == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
-                        _yPos -= 20;
+                        yPos -= 20;
                     }
                     break;
                 }
                 default:
-                    _yPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+                    yPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
                 }
-                _xPosModifier = _displayElementPtr->positionModifier_0x1c
+                DisplayElementPositionModifierInt const xModifier = displayElement->positionModifier_0x1c
                     & (OpenSHC::UI::Enums::DEPM_TOWARDS_MID_X | OpenSHC::UI::Enums::DEPM_RESOLUTION_X);
-                if (_xPosModifier != OpenSHC::UI::Enums::DEPM_RESOLUTION_X) {
-                    if (_xPosModifier != OpenSHC::UI::Enums::DEPM_TOWARDS_MID_X) {
-                        _xPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+                if (xModifier != OpenSHC::UI::Enums::DEPM_RESOLUTION_X) {
+                    if (xModifier != OpenSHC::UI::Enums::DEPM_TOWARDS_MID_X) {
+                        xPos += DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
                     } else {
-                        _xPos = _xPos - 800 + DAT_WindowAndDirectDraw::instance.resolutionX;
+                        xPos = xPos - 800 + DAT_WindowAndDirectDraw::instance.resolutionX;
                     }
                 }
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                (*_displayElementPtr->renderFunction_0x18)(_xPos, _yPos, _displayElementPtr->elementStateUnk_0xc);
+                (*displayElement->renderFunction_0x18)(xPos, yPos, displayElement->elementStateUnk_0xc);
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                if (0 <= _displayElementPtr->displayDuration_0x14
-                    && (int)(_currentTime - _displayElementPtr->activationTime_0x10)
-                        > _displayElementPtr->displayDuration_0x14) {
-                    _displayElementPtr->elementStateUnk_0xc = 0;
+                if (displayElement->displayDuration_0x14 >= 0
+                    && (int)(now - displayElement->activationTime_0x10) > displayElement->displayDuration_0x14) {
+                    displayElement->elementStateUnk_0xc = 0;
                 }
             }
         }

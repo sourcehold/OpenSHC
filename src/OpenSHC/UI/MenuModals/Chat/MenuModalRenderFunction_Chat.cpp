@@ -4,12 +4,10 @@
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_DARK_LIME.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -20,8 +18,6 @@
 namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
-
-        using OpenSHC::Text::TextArrayIndexType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABD20
         void Chat::MenuModalRenderFunction_Chat(int x, int y, int width, int height)
@@ -40,11 +36,11 @@ namespace UI {
             if (DAT_GameSynchronyState::instance.DAT_InsultTextIndex == 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                    x + 25 + cursorX, y + 193, x + 26 + cursorX, y + 213, (ushort)(COL_DARK_LIME::instance.shortValue));
+                    x + 25 + cursorX, y + 193, x + 26 + cursorX, y + 213, COL_DARK_LIME::instance.shortValue);
             }
-            if (DAT_UserTextHandlerState::instance.textArrayIndex != (TextArrayIndexType)4) {
+            if (DAT_UserTextHandlerState::instance.textArrayIndex != OpenSHC::Text::TAIT_UNKNOWN_4) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    4);
+                    OpenSHC::Text::TAIT_UNKNOWN_4);
             }
             if (DAT_GameSynchronyState::instance.DAT_InsultTextIndex != 0) {
                 int fontSize = (int)MACRO_CALL_MEMBER(
@@ -52,7 +48,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_INSULTS, (int)(DAT_GameSynchronyState::instance.DAT_InsultTextIndex)),
+                        OpenSHC::DE::SHCDE::TEXT_INSULTS, DAT_GameSynchronyState::instance.DAT_InsultTextIndex),
                     x + 25, y + 199, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, fontSize, FALSE,
                     0);
             } else {

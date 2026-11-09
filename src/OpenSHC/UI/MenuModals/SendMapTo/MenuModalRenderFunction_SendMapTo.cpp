@@ -2,9 +2,8 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/COL_DARK_LIME.hpp"
@@ -23,7 +22,7 @@ namespace UI {
         {
             // "Send Map To"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(79, 106, x, y, width, height);
+                DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 106, x, y, width, height);
             int rowOffsetY = 0;
             for (int playerID = 1; playerID < countof(DAT_GameSynchronyState::instance.mapTransferStatePerPlayer);
                 ++playerID) {
@@ -38,13 +37,13 @@ namespace UI {
                         int barX = width / 2 + x;
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox,
                             DAT_PencilRenderCore::ptr)(barX - 1, rowOffsetY + 82 + y, width - 19 + x,
-                            rowOffsetY + 99 + y, (ushort)(COL_BLACK::instance.shortValue));
+                            rowOffsetY + 99 + y, COL_BLACK::instance.shortValue);
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox,
                             DAT_PencilRenderCore::ptr)(barX, rowOffsetY + 83 + y,
                             ((width / 2 - 20) * DAT_GameSynchronyState::instance.mapSendingByteBufferAddress[playerID])
                                     / DAT_GameSynchronyState::instance.mapSendingFileSize
                                 + width / 2 + x,
-                            rowOffsetY + 98 + y, (ushort)(COL_DARK_LIME::instance.shortValue));
+                            rowOffsetY + 98 + y, COL_DARK_LIME::instance.shortValue);
                     }
                     rowOffsetY += 30;
                 }

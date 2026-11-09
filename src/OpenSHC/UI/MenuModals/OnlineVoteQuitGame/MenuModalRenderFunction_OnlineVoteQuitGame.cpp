@@ -2,9 +2,9 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
@@ -19,7 +19,7 @@ namespace UI {
         {
             // "End this game?"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(76, 59, x, y, width, height);
+                DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 59, x, y, width, height);
             int number = 10 - (timeGetTime() - DAT_GameSynchronyState::instance.quitGameVoteRequestTime) / 1000;
             if (number < 0) {
                 number = 0;

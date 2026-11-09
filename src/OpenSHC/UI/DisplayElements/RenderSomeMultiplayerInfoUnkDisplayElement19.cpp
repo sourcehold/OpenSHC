@@ -7,11 +7,9 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/AlphaAndButtonSurfaceObj.hpp"
 #include "OpenSHC/Globals/COL_VERY_SOFT_YELLOW.hpp"
@@ -62,7 +60,7 @@ namespace UI {
         }
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-            posX - 171, posY + 74, posX + 171, posY + 91, (ushort)(COL_WHITE::instance.shortValue));
+            posX - 171, posY + 74, posX + 171, posY + 91, COL_WHITE::instance.shortValue);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
             posX - 170, posY + 75, posX + 170, posY + 90);
         if ((DAT_GameSynchronyState::instance.currentPacketTotalSize != 0)
@@ -72,7 +70,7 @@ namespace UI {
                 ((int)(DAT_GameSynchronyState::instance.currentPacketTotalSize) * 340)
                         / (int)(DAT_GameSynchronyState::instance.resyncTransferTotalSize)
                     - 170 + posX,
-                posY + 90, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                posY + 90, COL_VERY_SOFT_YELLOW::instance.shortValue);
         }
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes != 0) {
@@ -133,7 +131,7 @@ namespace UI {
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 52),
                         posX, posY + 156, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE,
                         0);
-                    if (DAT_MouseState::instance.leftClickStart == 0) {
+                    if (!DAT_MouseState::instance.leftClickStart) {
                         return;
                     }
                     DAT_GameSynchronyState::instance.connectionInfoExpanded = 1;
@@ -167,7 +165,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 22),
                     leftX, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, FALSE, 0);
-                if (DAT_MouseState::instance.leftClickStart != 0) {
+                if (DAT_MouseState::instance.leftClickStart) {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_KILL_GAME);
@@ -197,7 +195,7 @@ namespace UI {
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 23),
                     posX + 100, posY + 204, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 18,
                     FALSE, 0);
-                if (DAT_MouseState::instance.leftClickStart == 0) {
+                if (!DAT_MouseState::instance.leftClickStart) {
                     return;
                 }
                 DAT_GameSynchronyState::instance.connectionInfoExpanded = 0;

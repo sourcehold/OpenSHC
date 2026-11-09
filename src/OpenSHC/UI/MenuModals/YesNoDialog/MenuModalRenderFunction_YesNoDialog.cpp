@@ -3,10 +3,8 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
@@ -30,7 +28,7 @@ namespace UI {
                 break;
             case 7:
             case 9:
-            case 0x1e:
+            case 30:
             case 43:
             case 44:
             case 47:
@@ -49,21 +47,22 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 107),
-                    width / 2 + x, y + 0xf, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17,
-                    FALSE, 0);
+                    width / 2 + x, y + 15, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE,
+                    0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.unknownMapName_01, width / 2 + x, y + 42,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE, 0);
-                (DAT_MenuHandlerState::instance.currentMenu)->zero = 0;
+                DAT_MenuHandlerState::instance.currentMenu->zero = 0;
                 return;
             }
             if (bannerTextIndex != -1) {
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(74, bannerTextIndex, x, y, width, height);
-                (DAT_MenuHandlerState::instance.currentMenu)->zero = 0;
+                MACRO_CALL_MEMBER(
+                    OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                    OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, bannerTextIndex, x, y, width, height);
+                DAT_MenuHandlerState::instance.currentMenu->zero = 0;
                 return;
             }
-            (DAT_MenuHandlerState::instance.currentMenu)->zero = 0;
+            DAT_MenuHandlerState::instance.currentMenu->zero = 0;
         }
     }
 }

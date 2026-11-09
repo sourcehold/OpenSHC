@@ -3,11 +3,9 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/GameLanguage.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
@@ -23,7 +21,7 @@ namespace UI {
                 && (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_SPANISH)) {
                 // "Delete Game Record?"
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(0xff, 13, x, y, width, height);
+                    DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_SKMASTERS, 13, x, y, width, height);
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,

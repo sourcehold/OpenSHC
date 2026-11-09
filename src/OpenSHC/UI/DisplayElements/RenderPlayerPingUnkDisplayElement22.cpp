@@ -6,7 +6,6 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -41,19 +40,20 @@ namespace UI {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(playerID,
                     posX + 24, yPosition, OpenSHC::Text::TTA_LEFT,
-                    (uint)(DAT_RenderingDefinedData::instance
-                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
+                    DAT_RenderingDefinedData::instance
+                        .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
                     0, 18, FALSE, 0);
                 if (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                         *average * 2, posX + 76, yPosition, OpenSHC::Text::TTA_RIGHT,
-                        (uint)(DAT_RenderingDefinedData::instance
-                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
+                        DAT_RenderingDefinedData::instance
+                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
                         0, 18, FALSE, 0);
+                    // "ms"
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
                         DAT_TextManagerObject::ptr)(s_ms_005a77d4, posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
-                        (uint)(DAT_RenderingDefinedData::instance
-                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
+                        DAT_RenderingDefinedData::instance
+                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]],
                         0, 18, FALSE, 0);
                 }
             }
