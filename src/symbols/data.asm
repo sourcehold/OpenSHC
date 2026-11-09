@@ -1271,7 +1271,7 @@ PUBLIC ?instance@?$Extern@VMenuView@UI@OpenSHC@@$0LJHELM@@StructResolver@@2VMenu
 
 PUBLIC ?instance@?$Extern@H$0LJIEAE@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0LJIEAM@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0LJIEAM@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@K$0LJIEBA@@StructResolver@@2KA
 
@@ -2958,7 +2958,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0LJIEAE@@StructResolver@@2HA EQU 00B98404h
 
-?instance@?$Extern@I$0LJIEAM@@StructResolver@@2IA EQU 00B9840Ch
+?instance@?$Extern@H$0LJIEAM@@StructResolver@@2HA EQU 00B9840Ch
 
 ?instance@?$Extern@K$0LJIEBA@@StructResolver@@2KA EQU 00B98410h
 
