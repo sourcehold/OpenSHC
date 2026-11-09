@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
@@ -19,7 +20,8 @@ namespace UI {
         {
             if (button == 17) {
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
-                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                    Text::TAIT_NINE__FILTER_B);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
                 if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {

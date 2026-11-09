@@ -3,6 +3,7 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/TextEditorState.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -28,7 +29,8 @@ namespace UI {
             if (DAT_GameCore::instance.showTextMessageInsteadOfEdit) {
                 return;
             }
-            MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
+            MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                Text::TAIT_NINE__FILTER_B);
             DAT_TextEditorState::instance.customTextMaxLength = 1000;
             MACRO_CALL_MEMBER(Text::TextEditorState_Func::openMapDescriptionEditorDialog, DAT_TextEditorState::ptr)(0);
             MACRO_CALL_MEMBER(Text::TextEditorState_Func::setCustomHelpText, DAT_TextEditorState::ptr)(

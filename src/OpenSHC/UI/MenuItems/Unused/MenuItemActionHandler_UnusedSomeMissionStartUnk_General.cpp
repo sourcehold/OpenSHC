@@ -22,8 +22,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00427080
         void Unused::MenuItemActionHandler_UnusedSomeMissionStartUnk_General(int button, ...)
         {
-            if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
-                && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
+            if (DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU
+                && DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
                 // a sparse switch; the original lays out the case 14 arm first
                 switch (button) {
                 case 14:

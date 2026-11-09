@@ -71,8 +71,6 @@ namespace UI {
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
                 return;
-            case 4:
-                return;
             case 5:
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);

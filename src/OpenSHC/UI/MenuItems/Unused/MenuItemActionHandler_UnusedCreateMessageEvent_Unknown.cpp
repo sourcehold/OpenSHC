@@ -24,7 +24,7 @@ namespace UI {
                 return;
             }
             DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
-                .data.scenario.actionData = DAT_MapPropertiesState::instance.value;
+                .data.message.messageID = DAT_MapPropertiesState::instance.value;
         }
 
     }

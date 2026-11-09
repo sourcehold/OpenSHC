@@ -15,9 +15,9 @@ namespace UI {
             if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + row
                 < DAT_MenuTextInputState::instance.fileListEntryCount) {
                 DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex = row;
-                if ((DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + row
-                        == DAT_MenuTextInputState::instance.lastClickedListIndex)
-                    && ((int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime) < 500)) {
+                if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + row
+                        == DAT_MenuTextInputState::instance.lastClickedListIndex
+                    && (int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime) < 500) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::SaveLoadMap_Func::MenuItemActionHandler_SaveLoadMap_Buttons)(2);
                 }
                 DAT_MenuTextInputState::instance.lastClickedListIndex

@@ -18,8 +18,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00426ED0
         void Unused::MenuItemActionHandler_UnusedEconomicMissionSelect_General(int button, ...)
         {
-            if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
-                && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
+            if (DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU
+                && DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
                 // a sparse switch; the original lays its arms out default, 20, 18, 13
                 switch (button) {
                 default: {
@@ -28,7 +28,7 @@ namespace UI {
                     DWORD const clickTime = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             != DAT_MenuTextInputState::instance.lastClickedListIndex
-                        || 500 <= (int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime)) {
+                        || (int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime) >= 500) {
                         DAT_MenuTextInputState::instance.lastClickedListIndex
                             = DAT_GameCore::instance.missionNumber1to20;
                         DAT_MenuTextInputState::instance.lastListClickTime = clickTime;
@@ -37,19 +37,17 @@ namespace UI {
                     // the original shares this tail with case 13; writing it out twice adds 7 instructions
                     goto startSelectedMission;
                 }
-                case 20: {
+                case 20:
                     ++DAT_GameState::instance.mapAndTime.difficulty;
-                    // the original compares against 4 (`cmp eax, 4; jl`), not 3
-                    if (4 <= DAT_GameState::instance.mapAndTime.difficulty) {
+                    // >= 4, not > 3: they compile differently
+                    if (DAT_GameState::instance.mapAndTime.difficulty >= 4) {
                         DAT_GameState::instance.mapAndTime.difficulty = 0;
                     }
                     return;
-                }
-                case 18: {
+                case 18:
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_MAIN_MENU, 0);
                     return;
-                }
                 case 13:
                 startSelectedMission:
                     --DAT_GameCore::instance.missionNumber1to20;

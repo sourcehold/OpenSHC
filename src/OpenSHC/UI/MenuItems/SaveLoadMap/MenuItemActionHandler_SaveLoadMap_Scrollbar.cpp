@@ -28,9 +28,9 @@ namespace UI {
                 *currentValue = DAT_MenuTextInputState::instance.fileListVisibleRowCount - 1;
                 return;
             case 5:
-                if (0 < DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset) {
-                    DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                        = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset - 1;
+                // Stores and returns here rather than through the shared store below, as the original does.
+                if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset > 0) {
+                    --DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                     *currentValue = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                     return;
                 }
@@ -39,8 +39,7 @@ namespace UI {
                 if (DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                     < DAT_MenuTextInputState::instance.fileListEntryCount
                         - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
-                    DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                        = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + 1;
+                    ++DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 }
                 break;
             default:

@@ -25,8 +25,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042DF40
         void Unused::MenuItemRenderFunction_UnusedOldTitleMenu_TestMapButton(int unused, ...)
         {
-            // the original jumps out of line on `== FALSE`, so the interacting
-            // arm is the one the source wrote first
             if (DAT_ButtonCurrentlyInteracting::instance) {
                 DAT_TextManagerObject::instance.textColor = OpenSHC::Rendering::Colors::COL_0000FF;
                 DAT_PencilRenderCore::instance.otherColorUnk_0x0 = COL_BLACK::instance.shortValue;

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -27,7 +28,7 @@ namespace UI {
                 DAT_MenuTextInputState::instance.pendingUnusedOption1 = DAT_GameCore::instance.unusedOption1;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_GAMEPLAY_OPTIONS);
-                break;
+                return;
             case 4:
                 DAT_MenuTextInputState::instance.menuCurrentlySelectedResolution
                     = DAT_WindowAndDirectDraw::instance.currentGameResolution;
@@ -52,13 +53,13 @@ namespace UI {
             case 45:
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    0);
+                    OpenSHC::Text::TAIT_ZERO);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_IDENTITY_OPTIONS);
-                break;
+                return;
             case 6:
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_NETWORK_OPTIONS);
