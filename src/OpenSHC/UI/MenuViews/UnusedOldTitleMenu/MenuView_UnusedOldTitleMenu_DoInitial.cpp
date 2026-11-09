@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/COL_WHITE.hpp"
@@ -43,11 +44,11 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
                 0, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 100,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)("FireFly\'s",
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                s_FireFly_s_005a22c4, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 210, Text::TTA_LEFT, 33023, 0xf, FALSE, 0);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)("Crusader",
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                s_Crusader_005a22b8, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0xf8, Text::TTA_LEFT, 0, 17, FALSE, 0);
         }
 

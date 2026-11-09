@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -25,9 +26,9 @@ namespace UI {
         {
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "frontend_builder.tgx");
+                s_frontend_builder_tgx_005a2084);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "frontend_builder2.tgx");
+                s_frontend_builder2_tgx_005a206c);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             DWORD DVar1 = timeGetTime();
             DAT_UIButtonDefinedData::instance.ButtonGmDataArray[364].stateTransitionTimeBaseUnk_0x18 = DVar1 - 4800;

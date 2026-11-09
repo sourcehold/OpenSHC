@@ -8,6 +8,7 @@
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -36,47 +37,47 @@ namespace UI {
             DAT_GameSynchronyState::instance.field_0x106ee4 = 0;
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "frontend_combat3.tgx");
+                s_frontend_combat3_tgx_005a2134);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "firefly-small.tgx");
+                s_firefly_small_tgx_005a226c);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "table.tgx");
+                s_table_tgx_005a2260);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice1.tgx");
+                s_tslice1_tgx_005a2254);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice2.tgx");
+                s_tslice2_tgx_005a2248);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice3.tgx");
+                s_tslice3_tgx_005a223c);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice4.tgx");
+                s_tslice4_tgx_005a2230);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice5.tgx");
+                s_tslice5_tgx_005a2224);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice6.tgx");
+                s_tslice6_tgx_005a2218);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice7.tgx");
+                s_tslice7_tgx_005a220c);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice8.tgx");
+                s_tslice8_tgx_005a2200);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice1b.tgx");
+                s_tslice1b_tgx_005a21f0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice2b.tgx");
+                s_tslice2b_tgx_005a21e0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice3b.tgx");
+                s_tslice3b_tgx_005a21d0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice4b.tgx");
+                s_tslice4b_tgx_005a21c0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice5b.tgx");
+                s_tslice5b_tgx_005a21b0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice6b.tgx");
+                s_tslice6b_tgx_005a21a0);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice7b.tgx");
+                s_tslice7b_tgx_005a2190);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "tslice8b.tgx");
+                s_tslice8b_tgx_005a2180);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "pick_opponent_normal.tgx");
+                s_pick_opponent_normal_tgx_005a2164);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "pick_opponent_large.tgx");
+                s_pick_opponent_large_tgx_005a214c);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;

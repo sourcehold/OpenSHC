@@ -2,6 +2,7 @@
 
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
@@ -25,7 +26,7 @@ namespace UI {
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "gm_fly.tgx");
+                s_gm_fly_tgx_005a2110);
         }
 
     }

@@ -1,6 +1,7 @@
 #include "../IntroLogos.func.hpp"
 
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_IntroBlendStrength.hpp"
 #include "OpenSHC/Globals/DAT_IntroStep.hpp"
@@ -16,12 +17,12 @@ namespace UI {
         {
             if (!DAT_IntroStep::instance) {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("logo1.tgx");
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+                    s_logo1_tgx_005a1f74);
             } else if (DAT_IntroStep::instance == 1) {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("logo2.tgx");
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+                    s_logo2_tgx_005a1f68);
             }
             DAT_IntroBlendStrength::instance = 0;
             DAT_IntroTimestamp::instance = timeGetTime();

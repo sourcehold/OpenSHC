@@ -6,6 +6,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -26,9 +27,9 @@ namespace UI {
         {
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                DAT_TextureRenderCoreObject::ptr)("frontend_main.tgx");
+                DAT_TextureRenderCoreObject::ptr)(s_frontend_main_tgx_005a1fb0);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                DAT_TextureRenderCoreObject::ptr)("frontend_main2.tgx");
+                DAT_TextureRenderCoreObject::ptr)(s_frontend_main2_tgx_005a1f9c);
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
             INT_00b95abc::instance = -1;
             DAT_UnknownGFXIndex::instance = 0;

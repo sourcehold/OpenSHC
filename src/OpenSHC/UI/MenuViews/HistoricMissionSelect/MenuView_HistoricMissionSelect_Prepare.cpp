@@ -3,6 +3,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00b95b2c.hpp"
 #include "OpenSHC/Globals/DAT_00b96100.hpp"
@@ -20,7 +21,7 @@ namespace UI {
             DAT_GameCore::instance.currentlyInGameUnk_0xa4 = FALSE;
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                "frontend_combat2.tgx");
+                s_frontend_combat2_tgx_005a2010);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             DAT_GameCore::instance.section1066 = 0;
             DAT_MenuTextInputState::instance.lastListClickTime = 0;

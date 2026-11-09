@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00eb0b20.hpp"
 #include "OpenSHC/Globals/DAT_00ed2780.hpp"
@@ -25,20 +26,20 @@ namespace UI {
             MACRO_CALL(UI::Helpers_Func::PrepareHistoryBook)();
             switch (DAT_GameCore::instance.historicCampaignNumber) {
             case 1:
-                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c1pic.tgx");
+                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
+                    DAT_TextureRenderCoreObject::ptr)(s_c1pic_tgx_005ab0ec);
                 break;
             case 2:
-                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c2pic.tgx");
+                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
+                    DAT_TextureRenderCoreObject::ptr)(s_c2pic_tgx_005ab0e0);
                 break;
             case 3:
-                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c3pic.tgx");
+                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
+                    DAT_TextureRenderCoreObject::ptr)(s_c3pic_tgx_005ab0d4);
                 break;
             case 4:
-                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c4pic.tgx");
+                DAT_00eb0b20::instance = MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
+                    DAT_TextureRenderCoreObject::ptr)(s_c4pic_tgx_005ab0c8);
                 break;
             }
             DAT_NumberOfStoredMenuStrings::instance = 0;

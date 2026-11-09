@@ -9,6 +9,7 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_ButtonBackgroundBlendStrength.hpp"
@@ -67,10 +68,10 @@ namespace UI {
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             if ((int)DAT_MapMissionType::instance < 2) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                    "frontend_economics2.tgx");
+                    s_frontend_economics2_tgx_005a203c);
             } else {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-                    "frontend_combat2.tgx");
+                    s_frontend_combat2_tgx_005a2010);
             }
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
