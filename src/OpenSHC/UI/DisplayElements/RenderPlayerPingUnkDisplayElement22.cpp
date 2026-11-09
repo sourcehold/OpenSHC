@@ -28,35 +28,37 @@ namespace UI {
             return;
         }
         timeGetTime();
-        int integer = 1;
+        int playerID = 1;
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
-            DAT_PencilRenderCore::ptr)(posX, posY, 0x78, 192);
+            DAT_PencilRenderCore::ptr)(posX, posY, 120, 192);
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        int* piVar1 = &DAT_GameSynchronyState::instance.connectionLagInfoArray[1].average2;
+        int* average = &DAT_GameSynchronyState::instance.connectionLagInfoArray[1].average2;
         int yPosition = posY + 18;
-        while ((int)piVar1 < (int)&DAT_GameSynchronyState::instance + 0x7ac48) {
-            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[integer] != -1) {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(integer,
+        // a pointer over the lag entries, compared as an address (a for over the player index:
+        // quick_diff 0.9595 -> 0.9364)
+        while ((int)average < (int)&DAT_GameSynchronyState::instance.connectionLagInfoArray[9].average2) {
+            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(playerID,
                     posX + 24, yPosition, OpenSHC::Text::TTA_LEFT,
                     (uint)(DAT_RenderingDefinedData::instance
-                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[integer]]),
+                            .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
                     0, 18, FALSE, 0);
-                if (integer != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                if (playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                        *piVar1 * 2, posX + 76, yPosition, OpenSHC::Text::TTA_RIGHT,
+                        *average * 2, posX + 76, yPosition, OpenSHC::Text::TTA_RIGHT,
                         (uint)(DAT_RenderingDefinedData::instance
-                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[integer]]),
+                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
                         0, 18, FALSE, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
                         DAT_TextManagerObject::ptr)(s_ms_005a77d4, posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
                         (uint)(DAT_RenderingDefinedData::instance
-                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[integer]]),
+                                .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]]),
                         0, 18, FALSE, 0);
                 }
             }
-            piVar1 += 9;
-            ++integer;
+            average += 9;
+            ++playerID;
             yPosition += 20;
         }
     }

@@ -14,26 +14,26 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6210
     void Rendering::RenderCurrentMenuView()
     {
-        MenuView* pMVar1;
-        for (pMVar1 = DAT_MenuViewStackTop::instance; pMVar1 != NULL; pMVar1 = pMVar1->nextMenuViewPtr) {
+        for (MenuView* menuView = DAT_MenuViewStackTop::instance; menuView != NULL;
+            menuView = menuView->nextMenuViewPtr) {
             // menu id
-            if (DAT_GameCore::instance.currentMenuViewType == pMVar1->menuID) {
-                if (pMVar1->menuID == UI::Enums::MVT_NO_VIEW) {
+            if (DAT_GameCore::instance.currentMenuViewType == menuView->menuID) {
+                if (menuView->menuID == UI::Enums::MVT_NO_VIEW) {
                     if (DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial) {
                         MACRO_CALL(UI::Rendering_Func::RenderNoViewsFoundWarning)();
                     }
                 } else {
                     if (DAT_MenuView_TriggerPrepare::instance) {
                         // renderMenuBackground
-                        (*pMVar1->prepare)();
+                        (*menuView->prepare)();
                     }
                     if ((DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial)
                         || (DAT_MenuView_TriggerPrepare::instance)) {
                         // someRenderFunction
-                        (*pMVar1->doInitial)();
+                        (*menuView->doInitial)();
                     }
                     // renderMenuItemsFunction
-                    (*pMVar1->doEveryFrame)();
+                    (*menuView->doEveryFrame)();
                 }
             }
             // move up in the menu linked list

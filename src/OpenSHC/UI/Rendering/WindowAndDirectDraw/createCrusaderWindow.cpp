@@ -11,11 +11,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0046FF50
         void WindowAndDirectDraw::createCrusaderWindow(HINSTANCE hInstance, LPCSTR windowName, uint cursorResource)
         {
-            BOOLEnum _windowCreated;
             this->hInstanceUnk_0xa8 = hInstance;
-            _windowCreated = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::createWindow, this)(
-                windowName, cursorResource);
-            if (_windowCreated) {
+            if (MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::createWindow, this)(
+                    windowName, cursorResource)) {
                 CoInitialize(NULL);
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::getDeviceCapsAndSetup, this)();
                 if (0 <= (int)this->currentGameResolution) {

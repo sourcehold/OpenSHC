@@ -17,15 +17,15 @@ namespace UI {
         void TextureRenderCore::clearSomeMemory()
         {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                128, '\0', (void*)((int)(TGX_RepeatRunHandlers::instance)));
+                sizeof(TGX_RepeatRunHandlers::instance), '\0', TGX_RepeatRunHandlers::instance);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                128, '\0', (void*)((int)(TGX_StreamRunHandlers::instance)));
+                sizeof(TGX_StreamRunHandlers::instance), '\0', TGX_StreamRunHandlers::instance);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                128, '\0', (void*)((int)(PTR_ARRAY_00c9a490::instance)));
+                sizeof(PTR_ARRAY_00c9a490::instance), '\0', PTR_ARRAY_00c9a490::instance);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                128, '\0', (void*)((int)(PTR_ARRAY_Unknown_UnitGMHeights::instance)));
+                sizeof(PTR_ARRAY_Unknown_UnitGMHeights::instance), '\0', PTR_ARRAY_Unknown_UnitGMHeights::instance);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                16896, '\0', (void*)((int)(DAT_BlendFilterArrays::instance)));
+                sizeof(DAT_BlendFilterArrays::instance), '\0', &DAT_BlendFilterArrays::instance);
         }
 
     }

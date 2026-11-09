@@ -17,21 +17,21 @@ namespace UI {
         void TriggerEventSlider::MenuModalRenderFunction_TriggerEventSlider(int x, int y, int width, int height)
         {
             int textNumInGroup;
-            int iVar1 = -1;
+            int iconIndex = -1;
             if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 148) {
                 textNumInGroup = 146;
+                iconIndex = 2;
             } else {
                 textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
-                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 != 146)
-                    goto LAB_004ac2a6;
+                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 146) {
+                    iconIndex = 2;
+                }
             }
-            iVar1 = 2;
-        LAB_004ac2a6:
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 199, textNumInGroup, x, y, width, height);
-            if (iVar1 != -1) {
+            if (iconIndex != -1) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_INTERFACE_ICONS2, iVar1 + 128,
+                    DE::SHCDE::GM_INTERFACE_ICONS2, iconIndex + 128,
                     width / 2 + 8 + DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + x, y + 26);
             }
         }

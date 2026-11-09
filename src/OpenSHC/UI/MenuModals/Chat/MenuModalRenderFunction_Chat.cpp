@@ -29,25 +29,21 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABD20
         void Chat::MenuModalRenderFunction_Chat(int x, int y, int width, int height)
         {
-            int iVar5 = 0;
-            BOOLEnum BVar4 = FALSE;
-            BGR24 BVar3 = 0xccfaff;
-            TextAlignment TVar2 = OpenSHC::Text::TTA_LEFT;
-            int _yOff = y + 25;
-            int _xOff = x + 20;
-            // "Chat"   added by script: "Chat"
+            int const titleY = y + 25;
+            int const titleX = x + 20;
+            // "Chat"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 0x1e),
-                _xOff, _yOff, TVar2, BVar3, (int)(0xf), BVar4, iVar5);
-            iVar5 = MACRO_CALL_MEMBER(
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 30),
+                titleX, titleY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 15, FALSE, 0);
+            int const cursorX = MACRO_CALL_MEMBER(
                 OpenSHC::Text::UserTextHandler_Func::getTextWidthUntilCurrentCursor, DAT_UserTextHandlerState::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBoxWithRoundedEdges,
                 DAT_PencilRenderCore::ptr)(x + 20, y + 191, x - 330 + width, y + 216, OpenSHC::UI::Enums::RBERL_SLIGHT);
             if (DAT_GameSynchronyState::instance.DAT_InsultTextIndex == 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                    x + 25 + iVar5, y + 193, x + 26 + iVar5, y + 213, (ushort)(COL_DARK_LIME::instance.shortValue));
+                    x + 25 + cursorX, y + 193, x + 26 + cursorX, y + 213, (ushort)(COL_DARK_LIME::instance.shortValue));
             }
             if (DAT_UserTextHandlerState::instance.textArrayIndex != (TextArrayIndexType)4) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(

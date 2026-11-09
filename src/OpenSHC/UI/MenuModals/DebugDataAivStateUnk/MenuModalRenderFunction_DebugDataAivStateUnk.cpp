@@ -21,36 +21,39 @@ namespace UI {
                 s_Village_Placement_Success_005a7760, x, y + 10, OpenSHC::Text::TTA_LEFT,
                 OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 18, FALSE, 0);
             y += 20;
-            int aivIndex = 1;
-            do {
+            for (int aivIndex = 1; aivIndex < 9; ++aivIndex) {
                 y += 20;
                 if (DAT_AIVPlacementFit::instance[aivIndex] != -10) {
-                    uint color = DAT_AIVPlacementFit::instance[aivIndex] != 100 ? 0xff : 0xc2f0eb;
+                    uint color;
+                    if (DAT_AIVPlacementFit::instance[aivIndex] != 100) {
+                        color = OpenSHC::Rendering::Colors::COL_0000FF;
+                    } else {
+                        color = OpenSHC::Rendering::Colors::COL_C2F0EB;
+                    }
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                         aivIndex, x, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    int integer = DAT_AIVPlacementFit::instance[aivIndex];
-                    if (integer == -3) {
+                    int placementFit = DAT_AIVPlacementFit::instance[aivIndex];
+                    if (placementFit == -3) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             s_File_missing_005a7750, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    } else if (integer == -2) {
+                    } else if (placementFit == -2) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             s_Can_t_place_keep_005a773c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
-                    } else if (integer == 100) {
+                    } else if (placementFit == 100) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             s_Total_Success_005a772c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                            integer, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                            placementFit, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             s___Success_005a7720, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
                     }
                 }
-                ++aivIndex;
-            } while (aivIndex < 9);
+            }
         }
 
     }
