@@ -4,6 +4,7 @@
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 
@@ -15,11 +16,13 @@ namespace UI {
     {
         if (tileType == 1) {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                "Connect", posX, posY, Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE, 0);
+                s_Connect_005a25e8, posX, posY, Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE,
+                0);
         }
         if (tileType == 2) {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                "Path linkage", posX, posY, Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE, 0);
+                s_Path_linkage_005a25d8, posX, posY, Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0, 17,
+                FALSE, 0);
         }
     }
 

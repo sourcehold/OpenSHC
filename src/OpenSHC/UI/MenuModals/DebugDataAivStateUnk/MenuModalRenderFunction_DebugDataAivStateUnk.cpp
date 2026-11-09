@@ -4,6 +4,7 @@
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_AIVPlacementFit.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
@@ -17,8 +18,8 @@ namespace UI {
         {
             x += 20;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                "Village Placement Success", x, y + 10, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
-                0, 18, FALSE, 0);
+                s_Village_Placement_Success_005a7760, x, y + 10, OpenSHC::Text::TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 18, FALSE, 0);
             y += 20;
             int aivIndex = 1;
             do {
@@ -31,21 +32,21 @@ namespace UI {
                     if (integer == -3) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            "File missing", x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                            s_File_missing_005a7750, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                     } else if (integer == -2) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            "Can\'t place keep", x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                            s_Can_t_place_keep_005a773c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                     } else if (integer == 100) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            "Total Success", x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
+                            s_Total_Success_005a772c, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                             integer, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                            "% Success", x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
+                            s___Success_005a7720, x + 20, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
                     }
                 }
                 ++aivIndex;

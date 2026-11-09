@@ -6,8 +6,10 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/BOOL_RelatedToInitialGranaryAndKeepPlacement.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -23,32 +25,30 @@ namespace UI {
     void DisplayElements::RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement(
         int posX, int posY, DWORD whichBuildingIsMissing)
     {
-        int iVar3;
-        int iVar4;
-        BOOLEnum BVar1 = MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-        if ((!BVar1) || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL)) {
+        if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
+            || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL)) {
             MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                 OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO, 0);
             return;
         }
         int numInGroup = whichBuildingIsMissing + 9;
-        char* pcVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+        char* text = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_FEEDBACK, numInGroup);
-        iVar3 = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
-            &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(pcVar2, 0, 0, 0x244, 0, 0, 1);
-        pcVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+        int const textHeight = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
+            &DAT_TextManagerObject::instance.fontSizeClassArray[18])(text, 0, 0, 580, 0, 0, 1);
+        text = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_FEEDBACK, numInGroup);
-        iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
-            &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(pcVar2, 0, 0, 0x244, 0, 0, 2);
+        int const textWidth = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
+            &DAT_TextManagerObject::instance.fontSizeClassArray[18])(text, 0, 0, 580, 0, 0, 2);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_FEEDBACK, numInGroup),
-            posX - iVar4, posY - iVar3, 580, 0xccfaff, 0, 18, 0);
+            posX - textWidth, posY - textHeight, 580, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
         if (whichBuildingIsMissing == 1) {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
                 // "Place a keep to site your castle my liege"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                    "other_warning1.wav");
+                    s_other_warning1_wav_005a77c0);
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;
             }
         }
@@ -57,7 +57,7 @@ namespace UI {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
                 // "Site your granary sire"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                    "other_warning2.wav");
+                    s_other_warning2_wav_005a77ac);
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;
             }
         }

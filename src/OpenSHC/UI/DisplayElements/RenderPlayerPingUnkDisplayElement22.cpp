@@ -7,6 +7,7 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -48,7 +49,7 @@ namespace UI {
                                 .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[integer]]),
                         0, 18, FALSE, 0);
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                        DAT_TextManagerObject::ptr)("ms", posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
+                        DAT_TextManagerObject::ptr)(s_ms_005a77d4, posX + 76, yPosition, OpenSHC::Text::TTA_LEFT,
                         (uint)(DAT_RenderingDefinedData::instance
                                 .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[integer]]),
                         0, 18, FALSE, 0);
