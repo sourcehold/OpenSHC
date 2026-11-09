@@ -25,7 +25,6 @@ namespace UI {
                 (DAT_WindowAndDirectDraw::instance.resolutionY
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[DAT_UnknownGFXIndex::instance].height)
                     / 2);
-            return;
         }
 
     }

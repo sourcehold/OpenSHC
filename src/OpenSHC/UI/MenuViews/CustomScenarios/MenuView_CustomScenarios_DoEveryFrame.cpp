@@ -38,7 +38,6 @@ namespace UI {
                 MACRO_CALL(OpenSHC::UI::MenuViews::CustomScenarios_Func::MenuView_CustomScenarios_Prepare)();
                 return;
             }
-            return;
         }
 
     }

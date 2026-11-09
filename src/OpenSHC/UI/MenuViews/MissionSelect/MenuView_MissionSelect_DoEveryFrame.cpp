@@ -43,15 +43,12 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                     x2, y1, x2, y2, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-                /*
-                  added by script: "Mission"
-                 */
+                // "Mission"
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                     5, 0xf, DAT_MenuHandlerState::instance.x + 184, DAT_MenuHandlerState::instance.y + 100, 432, 50);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
-            return;
         }
 
     }

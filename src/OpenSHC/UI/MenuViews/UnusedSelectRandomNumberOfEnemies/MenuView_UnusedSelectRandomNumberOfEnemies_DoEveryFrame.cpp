@@ -54,9 +54,7 @@ namespace UI {
             iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 200;
             iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-            /*
-              added by script: "How many opponents can you handle!"
-             */
+            // "How many opponents can you handle!"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_NEW_TEXT, 1),
@@ -67,15 +65,11 @@ namespace UI {
             iVar4 = 400;
             iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
             iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 200;
-            /*
-              added by script: "This will create some random opponents for you. You can   still change opponent types
-              afterwards."
-             */
+            // "This will create some random opponents for you. You can   still change opponent types afterwards."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_NEW_TEXT, 2),
                 iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
-            return;
         }
 
     }

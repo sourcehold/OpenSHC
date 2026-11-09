@@ -20,15 +20,14 @@ namespace UI {
             _menuPtr->xPosition = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
-                DAT_TextureRenderCoreObject::ptr)(0,
+            MACRO_CALL_MEMBER(
+                UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface, DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].width)
                     / 2,
                 (DAT_WindowAndDirectDraw::instance.resolutionY
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].height)
                     / 2);
-            return;
         }
 
     }

@@ -49,7 +49,6 @@ namespace UI {
                 (int)((int)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 508)),
                 (int)((int)(DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 22)), 0);
             DAT_MainMenuSwingSwordBool::instance = 0;
-            return;
         }
 
     }

@@ -49,33 +49,23 @@ namespace UI {
                 s_jesterlast_tgx_005ab6d8);
             MACRO_CALL(UI::Credits_Func::ResetCredits)();
             DAT_NumberOfStoredMenuStrings::instance = 0;
-            /*
-              added by script: "Congratulations!"
-             */
+            // "Congratulations!"
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_SKTRAIL_WIN, 0));
-            /*
-              added by script: "Many have set out..."
-             */
+            // "Many have set out..."
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_SKTRAIL_WIN, 1));
-            /*
-              added by script: "...but few will have survived this journey."
-             */
+            // "...but few will have survived this journey."
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_SKTRAIL_WIN, 2));
-            /*
-              added by script: "You have bested the Crusader Trail!"
-             */
+            // "You have bested the Crusader Trail!"
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_SKTRAIL_WIN, 3));
-            /*
-              added by script: "You have bested the Crusader Extreme Trail!"
-             */
+            // "You have bested the Crusader Extreme Trail!"
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(
                 MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_SKTRAIL_WIN, 4));

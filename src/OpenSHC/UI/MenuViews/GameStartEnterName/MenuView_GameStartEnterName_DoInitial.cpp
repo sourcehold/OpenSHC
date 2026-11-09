@@ -37,7 +37,6 @@ namespace UI {
             pMVar1->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
-            return;
         }
 
     }

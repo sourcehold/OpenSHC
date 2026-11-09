@@ -43,7 +43,6 @@ namespace UI {
             MACRO_CALL(UI::MenuItems::SelectCrusade_Func::MenuItemActionHandler_SelectCrusade_Main)(2);
             MACRO_CALL_MEMBER(Game::Skirmish::SkirmishLobbySetupStructure_Func::restoreSkirmishLobbySetup,
                 SEC_SkirmishLobbySetupStructure::ptr)();
-            return;
         }
 
     }

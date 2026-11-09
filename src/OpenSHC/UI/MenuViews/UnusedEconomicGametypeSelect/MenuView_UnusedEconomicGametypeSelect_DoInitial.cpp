@@ -39,7 +39,6 @@ namespace UI {
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             INT_00b95f68::instance = 0;
-            return;
         }
 
     }

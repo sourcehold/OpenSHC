@@ -94,7 +94,6 @@ namespace UI {
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                     OpenSHC::UI::Enums::DEID_WIN_DEFEAT_WINDOW, 1);
             }
-            return;
         }
 
     }

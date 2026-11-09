@@ -40,7 +40,6 @@ namespace UI {
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             DAT_TextEditorState::instance.pendingCreditsFadeBorder = TRUE;
-            return;
         }
 
     }
