@@ -29,9 +29,9 @@ namespace UI {
             switch (param_1) {
             case 1:
                 DAT_MenuTextInputState::instance.dialogResult = 0;
-                DAT_MenuTextInputState::instance.field42_0x9c = 1;
+                DAT_MenuTextInputState::instance.field_0x9c = 1;
                 MACRO_CALL_MEMBER(
-                    UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(9);
+                    UI::MenuTextInputState_Func::activateLoadOrSaveMapUI, DAT_MenuTextInputState::ptr)(UI::Enums::MMT_LOAD_MAP);
                 return;
             case 2:
                 MACRO_CALL(UI::Helpers_Func::InitializeBasicMap)();

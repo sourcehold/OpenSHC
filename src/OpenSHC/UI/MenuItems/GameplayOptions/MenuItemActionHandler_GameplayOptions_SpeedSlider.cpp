@@ -35,19 +35,19 @@ namespace UI {
             case 1:
                 *minValue = 0x14;
                 *maxValue = 0x5a;
-                *currentValue = DAT_MenuTextInputState::instance.field12_0x30;
+                *currentValue = DAT_MenuTextInputState::instance.pendingGameSpeedLevel;
                 return;
             case 2:
             case 3:
-                DAT_MenuTextInputState::instance.field12_0x30 = *currentValue;
+                DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
                 return;
             case 5:
                 *currentValue = *currentValue + -1;
-                DAT_MenuTextInputState::instance.field12_0x30 = *currentValue;
+                DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
                 return;
             case 6:
                 *currentValue = *currentValue + 1;
-                DAT_MenuTextInputState::instance.field12_0x30 = *currentValue;
+                DAT_MenuTextInputState::instance.pendingGameSpeedLevel = *currentValue;
             }
         }
 

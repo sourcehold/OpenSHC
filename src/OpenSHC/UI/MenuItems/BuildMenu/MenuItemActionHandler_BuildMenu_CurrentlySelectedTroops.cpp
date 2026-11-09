@@ -25,7 +25,7 @@ namespace UI {
             DAT_UnitsState::instance.unitControlsRelated = 1;
             if (slotID < 0x14) {
                 _unitType = DAT_RenderingDefinedData::instance
-                                .field1030_0x54a5c[DAT_UnitsState::instance.selectionSlots[slotID]];
+                                .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID]];
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueClickNavigateMenuOrEscape,
                     DAT_UnitsState::ptr)(_unitType);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::filterUnitSelectionForUnitType,
@@ -34,7 +34,7 @@ namespace UI {
                 return;
             }
             unitType = DAT_RenderingDefinedData::instance
-                           .field1030_0x54a5c[DAT_UnitsState::instance.selectionSlots[slotID + -0x14]];
+                           .SelectionSlotUnitTypes[DAT_UnitsState::instance.selectionSlots[slotID + -0x14]];
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueUnitTypeCommand, DAT_UnitsState::ptr)(
                 unitType);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::filterUnitSelectionExcludeUnitType,
