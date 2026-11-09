@@ -106,8 +106,8 @@ namespace UI {
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes != 0) {
             if (DAT_GameSynchronyState::instance.lastAutoSaveTime == 0
-                || DAT_GameSynchronyState::instance.field76_0xbe8 == 0
-                || DAT_GameSynchronyState::instance.field76_0xbe8
+                || DAT_GameSynchronyState::instance.field_0xbe8 == 0
+                || DAT_GameSynchronyState::instance.field_0xbe8
                     <= DAT_GameSynchronyState::instance.lastAutoSaveTime) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -127,7 +127,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 0x37, posX + 3, iVar6, OpenSHC::Text::TTA_LEFT,
                     0xc2f0eb, 0x12, FALSE);
-                number = (DAT_GameSynchronyState::instance.field76_0xbe8
+                number = (DAT_GameSynchronyState::instance.field_0xbe8
                              - DAT_GameSynchronyState::instance.lastAutoSaveTime)
                     / 60000;
                 if (number < 1) {

@@ -48,25 +48,25 @@ namespace UI {
             (DAT_MenuHandlerState::instance.currentMenu)->zero = 0;
             if (DAT_MenuTextInputState::instance.fileListContext == 1) {
                 DAT_MenuTextInputState::instance.savedListSelection1
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex;
                 DAT_MenuTextInputState::instance.savedListOffset1
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 DAT_MenuTextInputState::instance.savedListSortOrder1
                     = DAT_MenuTextInputState::instance.fileListSortOrder;
             }
             if (DAT_MenuTextInputState::instance.fileListContext == 2) {
                 DAT_MenuTextInputState::instance.savedListSelection3
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex;
                 DAT_MenuTextInputState::instance.savedListOffset3
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 DAT_MenuTextInputState::instance.savedListSortOrder3
                     = DAT_MenuTextInputState::instance.fileListSortOrder;
             }
             if (DAT_MenuTextInputState::instance.fileListContext == 3) {
                 DAT_MenuTextInputState::instance.savedListSelection2
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex;
                 DAT_MenuTextInputState::instance.savedListOffset2
-                    = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset;
+                    = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 DAT_MenuTextInputState::instance.savedListSortOrder2
                     = DAT_MenuTextInputState::instance.fileListSortOrder;
             }

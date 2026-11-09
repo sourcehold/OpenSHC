@@ -23,7 +23,7 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 #include "OpenSHC/Globals/PTR_ARRAY_Unknown_UnitGMHeights.hpp"
 
 namespace OpenSHC {
@@ -186,13 +186,13 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, goodGMFrame,
                     (posX
                         - (int)*(short*)(PTR_ARRAY_Unknown_UnitGMHeights::instance
-                              + (GMTotalPicturesProcessed::instance[0x2e] + goodGMFrame) * 4 + 0x1c)
+                              + (GMFirstPictureIndex::instance[0x2e] + goodGMFrame) * 4 + 0x1c)
                             / 2)
                         + 0xc,
                     (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .textYOffset
                         - (int)*(short*)((int)PTR_ARRAY_Unknown_UnitGMHeights::instance
-                              + (GMTotalPicturesProcessed::instance[0x2e] + goodGMFrame) * 0x10 + 0x72)
+                              + (GMFirstPictureIndex::instance[0x2e] + goodGMFrame) * 0x10 + 0x72)
                             / 2)
                         + goodsRowY + 0xc + posY);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(

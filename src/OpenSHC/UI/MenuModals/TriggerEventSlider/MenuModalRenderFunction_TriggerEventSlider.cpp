@@ -20,11 +20,11 @@ namespace UI {
         {
             int textNumInGroup;
             int iVar1 = -1;
-            if (DAT_MapPropertiesState::instance.invasionEventContent.field44_0xa0 == 0x94) {
+            if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 0x94) {
                 textNumInGroup = 0x92;
             } else {
-                textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field44_0xa0;
-                if (DAT_MapPropertiesState::instance.invasionEventContent.field44_0xa0 != 0x92)
+                textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
+                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 != 0x92)
                     goto LAB_004ac2a6;
             }
             iVar1 = 2;
