@@ -35,9 +35,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 x + 42, (y - barFillHeight) + 300, x + 43, y + 300, (ushort)(COL_WHITE::instance.shortValue));
             if (DAT_TacticalPowersHelpTextDisplayBool::instance != false) {
-                /*
-                  added by script: "Click on an Icon to use Tactical Powers"
-                 */
+                // "Click on an Icon to use Tactical Powers"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_EXTREME_DEMO, 7),

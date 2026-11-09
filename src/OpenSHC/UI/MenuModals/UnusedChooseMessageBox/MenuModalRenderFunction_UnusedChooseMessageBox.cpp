@@ -11,9 +11,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AB460
         void UnusedChooseMessageBox::MenuModalRenderFunction_UnusedChooseMessageBox(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Select Message"
-             */
+            // "Select Message"
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 199, 40, x, y, width, height);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(

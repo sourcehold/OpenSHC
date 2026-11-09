@@ -14,9 +14,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC4C0
         void ReceiveMapFrom::MenuModalRenderFunction_ReceiveMapFrom(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Receiving Map"
-             */
+            // "Receiving Map"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(79, 107, x, y, width, height);
             y += 10;
@@ -29,7 +27,6 @@ namespace UI {
                         / DAT_GameSynchronyState::instance.mapSendingFileSize
                     + width / 4 + x,
                 y + 98, (ushort)(COL_DARK_LIME::instance.shortValue));
-            return;
         }
 
     }

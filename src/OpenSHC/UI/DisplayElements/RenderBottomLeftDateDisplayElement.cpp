@@ -1,7 +1,6 @@
 #include "../DisplayElements.func.hpp"
 
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
@@ -21,9 +20,6 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00433D00
     void DisplayElements::RenderBottomLeftDateDisplayElement(int posX, int posY, DWORD elementState)
     {

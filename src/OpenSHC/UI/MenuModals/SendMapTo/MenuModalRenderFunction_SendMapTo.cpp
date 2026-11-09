@@ -21,9 +21,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC310
         void SendMapTo::MenuModalRenderFunction_SendMapTo(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Send Map To"
-             */
+            // "Send Map To"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(79, 106, x, y, width, height);
             int rowOffsetY = 0;

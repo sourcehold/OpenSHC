@@ -12,9 +12,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABBA0
         void BuildingAvailability::MenuModalRenderFunction_BuildingAvailability(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Building Availability"
-             */
+            // "Building Availability"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(199, 171, x, y, width, height);
             int rightColumnX = x + 598;

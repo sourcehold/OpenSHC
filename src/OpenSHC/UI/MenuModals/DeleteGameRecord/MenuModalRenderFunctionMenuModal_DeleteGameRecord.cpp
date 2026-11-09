@@ -4,6 +4,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/GameLanguage.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -19,9 +20,6 @@ namespace UI {
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9CC0
         void DeleteGameRecord::MenuModalRenderFunctionMenuModal_DeleteGameRecord(int x, int y, int width, int height)
         {
@@ -35,9 +33,7 @@ namespace UI {
             int blendStrength;
             if ((DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_FRENCH)
                 && (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_SPANISH)) {
-                /*
-                  added by script: "Delete Game Record?"
-                 */
+                // "Delete Game Record?"
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                     DAT_PencilRenderCore::ptr)(0xff, 13, x, y, width, height);
                 return;
@@ -47,13 +43,11 @@ namespace UI {
             blendStrength = 0;
             keepOffsetX = FALSE;
             fontSize = 17;
-            color = 0xc2f0eb;
+            color = OpenSHC::Rendering::Colors::COL_C2F0EB;
             alignment = OpenSHC::Text::TTA_CENTER;
             yParam = y + 27;
             xParam = width / 2 + x;
-            /*
-              added by script: "Delete Game Record?"
-             */
+            // "Delete Game Record?"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKMASTERS, 13),

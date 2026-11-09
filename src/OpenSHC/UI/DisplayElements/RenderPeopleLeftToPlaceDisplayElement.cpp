@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -14,9 +15,6 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004B0AC0
     void DisplayElements::RenderPeopleLeftToPlaceDisplayElement(int posX, int posY, DWORD elementState)
     {
@@ -33,21 +31,19 @@ namespace UI {
         keepOffsetX = FALSE;
         fontSize = 17;
         backgroundColor = 0;
-        foregroundColor = 0xc2f0eb;
+        foregroundColor = OpenSHC::Rendering::Colors::COL_C2F0EB;
         alignment = OpenSHC::Text::TTA_CENTER;
         xParam = posX;
         yParam = posY;
-        /*
-          "People available to place:"   added by script: "People Available to Place:"
-         */
+        // "People available to place:"   added by script: "People Available to Place:"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 44),
             xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
             2499 - DAT_UnitsState::instance.unitCount,
-            DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + 6 + posX, posY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb,
-            0, 17, FALSE, 0);
+            DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + 6 + posX, posY, OpenSHC::Text::TTA_LEFT,
+            OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 17, FALSE, 0);
     }
 
 }

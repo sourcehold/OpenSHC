@@ -1,7 +1,5 @@
 #include "../TextureRenderCore.func.hpp"
 
-#include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
-
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {

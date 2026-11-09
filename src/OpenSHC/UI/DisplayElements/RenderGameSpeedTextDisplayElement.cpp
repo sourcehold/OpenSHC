@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -14,9 +15,6 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004B07C0
     void DisplayElements::RenderGameSpeedTextDisplayElement(int posX, int posY, DWORD elementState)
     {
@@ -33,19 +31,18 @@ namespace UI {
         keepOffsetX = FALSE;
         fontSize = 17;
         backgroundColor = 0;
-        foregroundColor = 0xc2f0eb;
+        foregroundColor = OpenSHC::Rendering::Colors::COL_C2F0EB;
         alignment = OpenSHC::Text::TTA_RIGHT;
         xParam = posX - 3;
         yParam = posY;
-        /*
-          added by script: "Game Speed"
-         */
+        // "Game Speed"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_FEEDBACK, 23),
             xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-            DAT_GameCore::instance.gameSpeedLevel, posX, posY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 0, 17, FALSE, 0);
+            DAT_GameCore::instance.gameSpeedLevel, posX, posY, OpenSHC::Text::TTA_LEFT,
+            OpenSHC::Rendering::Colors::COL_C2F0EB, 0, 17, FALSE, 0);
     }
 
 }

@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
@@ -34,9 +35,7 @@ namespace UI {
             TextAlignment TVar2 = OpenSHC::Text::TTA_LEFT;
             int _yOff = y + 25;
             int _xOff = x + 20;
-            /*
-              "Chat"   added by script: "Chat"
-             */
+            // "Chat"   added by script: "Chat"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 0x1e),
@@ -61,14 +60,16 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_INSULTS, (int)(DAT_GameSynchronyState::instance.DAT_InsultTextIndex)),
-                    x + 25, y + 199, OpenSHC::Text::TTA_LEFT, 0xccfaff, fontSize, FALSE, 0);
+                    x + 25, y + 199, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, fontSize, FALSE,
+                    0);
             } else {
                 int fontSize = (int)MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::getCurrentFontSize, DAT_UserTextHandlerState::ptr)();
                 char* const currentText = MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    currentText, x + 25, y + 199, OpenSHC::Text::TTA_LEFT, 0xccfaff, fontSize, FALSE, 0);
+                    currentText, x + 25, y + 199, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF,
+                    fontSize, FALSE, 0);
             }
             DAT_GameSynchronyState::instance.DAT_InsultTextIndex = 0;
         }

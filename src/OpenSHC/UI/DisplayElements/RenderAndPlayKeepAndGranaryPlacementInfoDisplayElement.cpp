@@ -4,7 +4,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
@@ -47,21 +46,16 @@ namespace UI {
             posX - iVar4, posY - iVar3, 580, 0xccfaff, 0, 18, 0);
         if (whichBuildingIsMissing == 1) {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
-                /*
-                  "Place a keep to site your castle my liege"
-                 */
+                // "Place a keep to site your castle my liege"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     "other_warning1.wav");
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;
             }
-            return;
         }
 
         if (whichBuildingIsMissing == 2) {
             if (!BOOL_RelatedToInitialGranaryAndKeepPlacement::instance) {
-                /*
-                  "Site your granary sire"
-                 */
+                // "Site your granary sire"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     "other_warning2.wav");
                 BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = TRUE;

@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
@@ -10,6 +9,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/GameMode2Int.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
@@ -120,13 +120,11 @@ namespace UI {
                 BOOLEnum headingUseShadow = FALSE;
                 int headingFontSize = 17;
                 uint headingShadowColor = 0;
-                uint headingColor = 0xb8eefb;
+                uint headingColor = OpenSHC::Rendering::Colors::COL_B8EEFB;
                 TextAlignmentInt headingAlignment = OpenSHC::Text::TTA_LEFT;
                 int headingY = posY + 5;
                 int headingX = posX;
-                /*
-                  added by script: "Available Goods"
-                 */
+                // "Available Goods"
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -136,12 +134,12 @@ namespace UI {
             } else {
                 if (goodsPopupState == 1) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 0, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0,
-                        17, FALSE);
+                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 0, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT,
+                        OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 17, FALSE);
                 } else if (goodsPopupState == 2) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 2, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0,
-                        17, FALSE);
+                        OpenSHC::DE::SHCDE::TEXT_STARTUP, 2, posX, posY + 0x1e, OpenSHC::Text::TTA_LEFT,
+                        OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 17, FALSE);
                 }
             }
             int const scrolledPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
@@ -194,13 +192,13 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .textYOffset
                         + goodsRowY + 6 + posY,
-                    OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, FALSE, 0);
+                    OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE, 0);
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .someCount45
                     != 0) {
                     BOOLEnum goodsLabelUseShadow = TRUE;
                     uint goodsLabelShadowColor = 0;
-                    uint goodsLabelColor = 0xb8eefb;
+                    uint goodsLabelColor = OpenSHC::Rendering::Colors::COL_B8EEFB;
                     int goodsLabelY
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .textYOffset
@@ -218,7 +216,6 @@ namespace UI {
             goodGMFrame += 2;
             ++goodIndex;
         } while (goodGMFrame < 191);
-        return;
     }
 
 }

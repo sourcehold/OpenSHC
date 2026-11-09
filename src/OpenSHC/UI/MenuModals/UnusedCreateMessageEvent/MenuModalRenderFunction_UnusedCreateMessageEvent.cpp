@@ -13,9 +13,7 @@ namespace UI {
         void UnusedCreateMessageEvent::MenuModalRenderFunction_UnusedCreateMessageEvent(
             int x, int y, int width, int height)
         {
-            /*
-              added by script: "Message"
-             */
+            // "Message"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(199, 47, x, y, width, height);
             int rightColumnX = x + 690;

@@ -1,6 +1,5 @@
 #include "../TextureRenderCore.func.hpp"
 
-#include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/Graphics/GmImageType.hpp"
 #include "OpenSHC/IO/Graphics/GmImageTypeInt.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"

@@ -1,8 +1,8 @@
 #include "../DisplayElements.func.hpp"
 
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -16,9 +16,6 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x004B1E60
     void DisplayElements::RenderGamePausedTextDisplayElement(int posX, int posY, DWORD elementState)
     {
@@ -38,11 +35,9 @@ namespace UI {
         keepOffsetX = FALSE;
         fontSize = 16;
         backgroundColor = 0;
-        foregroundColor = 0xc2f0eb;
+        foregroundColor = OpenSHC::Rendering::Colors::COL_C2F0EB;
         alignment = OpenSHC::Text::TTA_CENTER;
-        /*
-          added by script: "Game Paused"
-         */
+        // "Game Paused"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_FEEDBACK, 22),

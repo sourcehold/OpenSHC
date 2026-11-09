@@ -17,9 +17,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00494210
         void LoadMap::MenuModalRenderFunction_LoadMap(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Load"
-             */
+            // "Load"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(74, 2, x, y, 304, height);
             int rightColumnX = x + 670;

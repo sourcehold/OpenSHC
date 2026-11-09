@@ -23,8 +23,7 @@ namespace UI {
         DisplayElementPositionModifierInt _xPosModifier;
         DisplayElement* _displayElementPtr;
         DWORD _currentTime = timeGetTime();
-        for (_displayElementPtr = DAT_PointerToDisplayElementStackTop::instance;
-            _displayElementPtr != (DisplayElement*)0;
+        for (_displayElementPtr = DAT_PointerToDisplayElementStackTop::instance; _displayElementPtr != NULL;
             _displayElementPtr = _displayElementPtr->nextDisplayElement_0x20) {
             if (_displayElementPtr->elementStateUnk_0xc != 0) {
                 _xPos

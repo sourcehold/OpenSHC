@@ -1,6 +1,7 @@
 #include "../DebugDataAivStateUnk.func.hpp"
 
 #include "OpenSHC/Text/TextManager.func.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -16,7 +17,8 @@ namespace UI {
         {
             x += 20;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                "Village Placement Success", x, y + 10, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 0, 18, FALSE, 0);
+                "Village Placement Success", x, y + 10, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB,
+                0, 18, FALSE, 0);
             y += 20;
             int aivIndex = 1;
             do {

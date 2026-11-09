@@ -26,22 +26,16 @@ namespace UI {
                 animFrame = 0;
                 TIME_IdentityOptions::instance = timeGetTime();
             }
-            /*
-              added by script: "Set-up Identity"
-             */
+            // "Set-up Identity"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(74, 45, x, y, width, height);
             int const xPos = x + 310;
-            /*
-              added by script: "Crusader or Arabic Lord"
-             */
+            // "Crusader or Arabic Lord"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 50),
                 xPos, y + 110, 165, 0xccfaff, 18, 0);
-            /*
-              added by script: "Choose Portrait"
-             */
+            // "Choose Portrait"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 51),

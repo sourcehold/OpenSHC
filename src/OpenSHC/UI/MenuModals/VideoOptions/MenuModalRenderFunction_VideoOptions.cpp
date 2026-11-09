@@ -11,9 +11,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00492120
         void VideoOptions::MenuModalRenderFunction_VideoOptions(int x, int y, int width, int height)
         {
-            /*
-              added by script: "Video Options"
-             */
+            // "Video Options"
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 74, 4, x, y, width, height);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(

@@ -1,6 +1,5 @@
 #include "../Rendering.func.hpp"
 
-#include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -16,10 +15,8 @@ namespace UI {
     void Rendering::RenderCurrentMenuView()
     {
         MenuView* pMVar1;
-        for (pMVar1 = DAT_MenuViewStackTop::instance; pMVar1 != (MenuView*)0; pMVar1 = pMVar1->nextMenuViewPtr) {
-            /*
-              menu id
-             */
+        for (pMVar1 = DAT_MenuViewStackTop::instance; pMVar1 != NULL; pMVar1 = pMVar1->nextMenuViewPtr) {
+            // menu id
             if (DAT_GameCore::instance.currentMenuViewType == pMVar1->menuID) {
                 if (pMVar1->menuID == UI::Enums::MVT_NO_VIEW) {
                     if (DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial) {
@@ -27,27 +24,19 @@ namespace UI {
                     }
                 } else {
                     if (DAT_MenuView_TriggerPrepare::instance) {
-                        /*
-                          renderMenuBackground
-                         */
+                        // renderMenuBackground
                         (*pMVar1->prepare)();
                     }
                     if ((DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial)
                         || (DAT_MenuView_TriggerPrepare::instance)) {
-                        /*
-                          someRenderFunction
-                         */
+                        // someRenderFunction
                         (*pMVar1->doInitial)();
                     }
-                    /*
-                      renderMenuItemsFunction
-                     */
+                    // renderMenuItemsFunction
                     (*pMVar1->doEveryFrame)();
                 }
             }
-            /*
-              move up in the menu linked list
-             */
+            // move up in the menu linked list
         }
         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = FALSE;
         DAT_MenuView_TriggerPrepare::instance = FALSE;

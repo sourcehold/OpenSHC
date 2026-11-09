@@ -46,9 +46,7 @@ namespace UI {
             iVar2 = y + 25;
             xParam = x + 39;
             iVar6 = xParam;
-            /*
-              added by script: "Allies"
-             */
+            // "Allies"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0),
@@ -60,9 +58,7 @@ namespace UI {
                 BVar4 = 0xccfaff;
                 TVar3 = OpenSHC::Text::TTA_LEFT;
                 iVar2 = y + 100;
-                /*
-                  added by script: "You have no Allies!"
-                 */
+                // "You have no Allies!"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 19),

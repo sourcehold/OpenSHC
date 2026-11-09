@@ -1,7 +1,6 @@
 #include "../DisplayElements.func.hpp"
 
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
