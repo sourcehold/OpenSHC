@@ -121,6 +121,14 @@ style question - see the note on unpredictable styles below. `declare_at_use.py`
 `undiv.py` undo decompiler artefacts across a whole selection; run `test_deparen.py` and `test_undiv.py` after
 touching the precedence table or the division patterns those two rely on.
 
+On a large decompiled function most of the gap is usually block *order*, not code, and two tools restore it
+before anything else is worth measuring: `switch_order.py` puts every switch's case bodies in the order of the
+original's jump table (MSVC emits them in source order, Ghidra prints them by value; 37% -> 60% on
+`renderGmOverlayBuilding` alone), and `flip_branches.py --find` lists the if/else statements whose arms the
+original lays out the other way round (Ghidra prints the jump target first, so `if ((x & m) == 0) {A} else {B}`
+was usually `!= 0` with the arms swapped). `quick_diff.py -r --runs N` then lists what still differs with the
+source lines it comes from.
+
 The rewriting scripts take a path filter and default to a dry run. Read the diff before building, then run
 `syntax_check.py` on what you touched: reviewing a diff catches a wrong transformation but not a rewrite that leaves
 the surrounding text unparseable, and `/Zs` finds that in seconds instead of a full build.

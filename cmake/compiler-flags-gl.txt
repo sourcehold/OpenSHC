@@ -120,3 +120,6 @@ src/OpenSHC/UI/MenuItems/General/MenuItemRenderFunction_General_RenderCurrentBut
 src/OpenSHC/UI/DisplayElements/RenderTimeUntilDefeatDisplayElement.cpp
 src/OpenSHC/UI/DisplayElements/GetIfDisplayElementStateNotZero.cpp
 src/OpenSHC/UI/DisplayElements/FindDisplayElementWithID.cpp
+src/OpenSHC/Rendering/ViewportRenderState/resetupViewport.cpp
+src/OpenSHC/Rendering/ViewportRenderState/setupViewport.cpp
+src/OpenSHC/Rendering/ViewportRenderState/setViewportBasedOnMapSize.cpp

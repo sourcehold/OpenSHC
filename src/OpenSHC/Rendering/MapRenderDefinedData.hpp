@@ -230,7 +230,7 @@ namespace Rendering {
         int field_0xc24[16][16]; // 0x00000C24 length: 1024
         int field_0x1024[16][16]; // 0x00001024 length: 1024
         int field_0x1424[16][16]; // 0x00001424 length: 1024
-        XYPair BuildingPreviewPositionRelatedOffsets[110][2]; // 0x00001824 length: 1760
+        XYPair BuildingPreviewPositionRelatedOffsets[11][10][2]; // 0x00001824 length: 1760
 
     } MapRenderDefinedData;
 #pragma pack(pop)

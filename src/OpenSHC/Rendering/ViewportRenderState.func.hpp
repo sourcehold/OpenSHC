@@ -103,7 +103,7 @@ namespace Rendering {
             Address::SHC_3BB0A8C1_0x004E64D0, &ViewportRenderState::renderDebugDataMousePointing)
         renderDebugDataMousePointing;
 
-        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(undefined4, undefined4, undefined4, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004E66F0, &ViewportRenderState::setupViewport)
         setupViewport;
 
