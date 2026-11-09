@@ -61,7 +61,7 @@ namespace UI {
                     ++count;
                 }
                 item->firstItemTypeData.itemsToSkip = count;
-                // options follow, each with members of its own (a while: a for over the options loses the match)
+                // options follow, each with members of its own (a for: quick_diff 0.8787 -> 0.6025)
                 while (member->menuItemType == optionType) {
                     item->menuItemType |= optionGroupFlag;
                     actionHandler = member->menuItemActionHandler;

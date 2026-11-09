@@ -200,7 +200,7 @@ namespace UI {
                             return;
                         }
                         this->zero = 2;
-                        // the index is masked again for these two, as the original does: reusing index loses the match
+                        // masked again here, as the original does (reusing index: quick_diff 0.9559 -> 0.8883)
                         this->textIndexInGroup
                             = DAT_RenderingDefinedData::instance
                                   .TextMessageLookupTable[(*(int*)&item->textMessageLookupIndex & indexMask)]
@@ -225,8 +225,7 @@ namespace UI {
                             (OpenSHC::DE::SHCDE::eTextSections)this->textGroupIndex, this->textIndexInGroup);
                         int const width = MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(text, 17);
-                        // hoverTextX is set in both branches, as the original does: one store before the test loses the
-                        // match
+                        // hoverTextX in both branches (one store before the test: quick_diff 0.9559 -> 0.9046)
                         if (DAT_GameCore::instance.currentMenuViewType != MVT_MISSION_FINISHED_TRANSITION
                             && DAT_GameCore::instance.currentMenuViewType != MVT_GAME_LOSTUnk) {
                             this->hoverTextX = DAT_MouseState::instance.screenSpaceX - width / 2 + 8;

@@ -1,7 +1,6 @@
 #include "../Menu.func.hpp"
 
 #include "OpenSHC/UI/MenuItem.func.hpp"
-#include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
 #include "OpenSHC/UI/Enums/MenuItemType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
