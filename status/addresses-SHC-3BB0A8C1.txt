@@ -11079,7 +11079,7 @@ SHC_3BB0A8C1_0x00431990 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00431A90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00431B60 | 99.9% | the 640x480 y store restored, s_ pointers, style pass; one add/xor order
+SHC_3BB0A8C1_0x00431B60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00433030 | 0.0% | Pending
 
