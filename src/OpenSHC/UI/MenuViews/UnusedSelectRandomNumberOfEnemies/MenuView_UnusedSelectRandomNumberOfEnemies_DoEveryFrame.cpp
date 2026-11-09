@@ -4,10 +4,9 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
@@ -18,22 +17,9 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042B960
         void UnusedSelectRandomNumberOfEnemies::MenuView_UnusedSelectRandomNumberOfEnemies_DoEveryFrame()
         {
-            int iVar1;
-            int iVar3;
-            TextAlignment alignment;
-            BGR24 color;
-            int iVar4;
-            uint color_00;
-            BOOLEnum keepOffsetX;
-            int iVar5;
-            int blendStrength;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
@@ -46,30 +32,21 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
                 DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 100,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 600, 400);
-            iVar5 = 0;
-            keepOffsetX = FALSE;
-            iVar4 = 17;
-            color = 0xccfaff;
-            alignment = OpenSHC::Text::TTA_CENTER;
-            iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 200;
-            iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+            int const titleY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 200;
+            int const titleX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             // "How many opponents can you handle!"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_NEW_TEXT, 1),
-                iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
-            blendStrength = 0;
-            iVar5 = 18;
-            color_00 = 0xccfaff;
-            iVar4 = 400;
-            iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
-            iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 200;
+                titleX, titleY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
+            int const textY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
+            int const textX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 200;
             // "This will create some random opponents for you. You can   still change opponent types afterwards."
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_NEW_TEXT, 2),
-                iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
+                textX, textY, 400, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, 0);
         }
 
     }

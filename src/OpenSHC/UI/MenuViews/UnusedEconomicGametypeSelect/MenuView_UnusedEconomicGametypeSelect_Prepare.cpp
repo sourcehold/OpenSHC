@@ -22,13 +22,11 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)(s_frontend_economics2_tgx_005a203c);
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
-            DWORD _currentTime = timeGetTime();
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[360].stateTransitionTimeBaseUnk_0x18
-                = _currentTime - 4800;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[361].stateTransitionTimeBaseUnk_0x18
-                = _currentTime - 3200;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[362].stateTransitionTimeBaseUnk_0x18
-                = _currentTime - 1600;
+            DWORD const now = timeGetTime();
+            for (int i = 0; i < 3; ++i) {
+                DAT_UIButtonDefinedData::instance.ButtonGmDataArray[360 + i].stateTransitionTimeBaseUnk_0x18
+                    = now - (3 - i) * 1600;
+            }
             INT_00b95abc::instance = -1;
             DAT_GameCore::instance.isTimeHalted2 = 0;
         }

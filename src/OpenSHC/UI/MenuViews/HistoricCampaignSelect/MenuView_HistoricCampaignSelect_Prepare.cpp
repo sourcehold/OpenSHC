@@ -26,11 +26,11 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                 s_frontend_combat2_tgx_005a2010);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
-            DWORD DVar1 = timeGetTime();
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[355].stateTransitionTimeBaseUnk_0x18 = DVar1 - 4800;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[356].stateTransitionTimeBaseUnk_0x18 = DVar1 - 3200;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[357].stateTransitionTimeBaseUnk_0x18 = DVar1 - 1600;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[358].stateTransitionTimeBaseUnk_0x18 = DVar1;
+            DWORD const now = timeGetTime();
+            for (int i = 0; i < 4; ++i) {
+                DAT_UIButtonDefinedData::instance.ButtonGmDataArray[355 + i].stateTransitionTimeBaseUnk_0x18
+                    = now - (3 - i) * 1600;
+            }
             INT_00b95abc::instance = -1;
             DAT_UnknownGFXIndex::instance = 0;
             MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition3::ptr)(

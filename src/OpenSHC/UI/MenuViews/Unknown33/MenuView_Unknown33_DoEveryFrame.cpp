@@ -24,10 +24,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042C090
         void Unknown33::MenuView_Unknown33_DoEveryFrame()
         {
-            int iVar1;
-            iVar1 = MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkAllPlayersReadyAndCleanupSlots,
-                DAT_GameSynchronyState::ptr)();
-            if (iVar1 != 0) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkAllPlayersReadyAndCleanupSlots,
+                    DAT_GameSynchronyState::ptr)()) {
                 if (DAT_GameSynchronyState::instance.isHost) {
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_HOST_SHARE_LOBBY_STATE);
@@ -35,13 +33,14 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_TRIGGER_LOBBY_PLAYER_INFORMATION_REFRESH);
                 }
-                for (int iVar1 = 1; iVar1 < 9; iVar1 = iVar1 + 1) {
-                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] == -1
+                for (int playerID = 1; playerID < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                    ++playerID) {
+                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                         && (DAT_GameCore::instance.mapU4Int0 == 0
-                            || (iVar1 != DAT_GameState::instance.mapAndTime.somePlayerID))
-                        && DAT_GameSynchronyState::instance.currentAIArray[iVar1] == 0) {
+                            || (playerID != DAT_GameState::instance.mapAndTime.somePlayerID))
+                        && DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::destroyPlayerCompletely,
-                            DAT_GameState::ptr)(iVar1);
+                            DAT_GameState::ptr)(playerID);
                     }
                 }
                 MACRO_CALL(OpenSHC::Synchrony_Func::SetAIPlayerNickNames)();
@@ -50,15 +49,9 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
                 DAT_GameSynchronyState::instance.DAT_TwoIfNotHost = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[0] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[1] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[2] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[3] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[4] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[5] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[6] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[7] = 0;
-                DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[8] = 0;
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue); ++i) {
+                    DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[i] = 0;
+                }
                 DAT_00b960f8::instance = 0;
                 INT_00b960f0::instance = 0;
                 DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;

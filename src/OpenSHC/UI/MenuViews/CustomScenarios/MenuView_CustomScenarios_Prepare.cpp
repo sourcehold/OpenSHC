@@ -30,11 +30,11 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
                 s_frontend_builder2_tgx_005a206c);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
-            DWORD DVar1 = timeGetTime();
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[364].stateTransitionTimeBaseUnk_0x18 = DVar1 - 4800;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[365].stateTransitionTimeBaseUnk_0x18 = DVar1 - 3200;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[366].stateTransitionTimeBaseUnk_0x18 = DVar1 - 1600;
-            DAT_UIButtonDefinedData::instance.ButtonGmDataArray[367].stateTransitionTimeBaseUnk_0x18 = DVar1;
+            DWORD const now = timeGetTime();
+            for (int i = 0; i < 4; ++i) {
+                DAT_UIButtonDefinedData::instance.ButtonGmDataArray[364 + i].stateTransitionTimeBaseUnk_0x18
+                    = now - (3 - i) * 1600;
+            }
             INT_00b95abc::instance = -1;
             DAT_MenuTextInputState::instance.dialogResult = 0;
             DAT_GameCore::instance.missionNumber1to20 = 0;
