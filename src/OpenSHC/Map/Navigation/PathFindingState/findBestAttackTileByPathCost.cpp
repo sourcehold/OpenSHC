@@ -19,10 +19,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A01D0
         dword PathFindingState::findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4)
         {
-            /*
-              one slot holds two things, as in the original: the 1000 returned when the search
-              cannot start, and then each neighbour tile the search steps onto
-             */
             dword _candidate = 1000;
             int _bestScore = 1000;
             dword _bestTile = 0;

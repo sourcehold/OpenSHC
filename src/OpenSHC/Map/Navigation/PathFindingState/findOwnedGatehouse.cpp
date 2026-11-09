@@ -30,7 +30,7 @@ namespace Map {
             }
             this->calculations += 1;
             this->searchGeneration += 1;
-            if (32000 < this->searchGeneration) {
+            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, (void*)(DAT_TileMapState::instance.WalkLayer));
