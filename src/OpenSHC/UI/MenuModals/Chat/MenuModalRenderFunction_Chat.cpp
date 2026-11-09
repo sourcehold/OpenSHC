@@ -38,9 +38,9 @@ namespace UI {
                     OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                     x + 25 + cursorX, y + 193, x + 26 + cursorX, y + 213, COL_DARK_LIME::instance.shortValue);
             }
-            if (DAT_UserTextHandlerState::instance.textArrayIndex != OpenSHC::Text::TAIT_UNKNOWN_4) {
+            if (DAT_UserTextHandlerState::instance.textArrayIndex != OpenSHC::Text::TAIT_UNKNOWN) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    OpenSHC::Text::TAIT_UNKNOWN_4);
+                    OpenSHC::Text::TAIT_UNKNOWN);
             }
             if (DAT_GameSynchronyState::instance.DAT_InsultTextIndex != 0) {
                 int const fontSize = MACRO_CALL_MEMBER(
