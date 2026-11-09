@@ -4,7 +4,6 @@
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
-#include "OpenSHC/Globals/DAT_00b9840c.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -13,6 +12,7 @@
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DWORD_00b98410.hpp"
+#include "OpenSHC/Globals/INT_00b9840c.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -28,16 +28,16 @@ namespace UI {
             DWORD const now = timeGetTime();
             if (now - DWORD_00b98410::instance > 1000) {
                 DWORD_00b98410::instance = now;
-                DAT_00b9840c::instance = 0;
+                INT_00b9840c::instance = 0;
             }
             if (DAT_MouseState::instance.scrollEventData == 7) {
-                if (DAT_00b9840c::instance < 0) {
-                    DAT_00b9840c::instance = 0;
+                if (INT_00b9840c::instance < 0) {
+                    INT_00b9840c::instance = 0;
                 }
-                ++DAT_00b9840c::instance;
-                if (DAT_00b9840c::instance == 2) {
+                ++INT_00b9840c::instance;
+                if (INT_00b9840c::instance == 2) {
                     DWORD_00b98410::instance = now;
-                    DAT_00b9840c::instance = 0;
+                    INT_00b9840c::instance = 0;
                     // the keep after the one viewed last, counting the map's keeps from 1
                     int keepNumber = 1;
                     int tileIndex = -1;
@@ -72,11 +72,11 @@ namespace UI {
             if (DAT_MouseState::instance.scrollEventData != 8) {
                 return;
             }
-            if (DAT_00b9840c::instance > 0) {
-                DAT_00b9840c::instance = 0;
+            if (INT_00b9840c::instance > 0) {
+                INT_00b9840c::instance = 0;
             }
-            --DAT_00b9840c::instance;
-            if (DAT_00b9840c::instance != -2) {
+            --INT_00b9840c::instance;
+            if (INT_00b9840c::instance != -2) {
                 return;
             }
             DWORD_00b98410::instance = now;
@@ -84,7 +84,7 @@ namespace UI {
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                       .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
                       .id;
-            DAT_00b9840c::instance = 0;
+            INT_00b9840c::instance = 0;
             if (keep != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::focusOnCoordinate,
                     DAT_ViewportRenderState::ptr)(DAT_BuildingsState::instance.buildings[keep].x + 2,
