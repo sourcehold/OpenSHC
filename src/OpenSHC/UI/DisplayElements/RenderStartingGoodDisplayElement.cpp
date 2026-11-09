@@ -45,61 +45,41 @@ namespace UI {
             && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_SIEGE
             && DAT_GameSynchronyState::instance.currentPlayerSlotID == 2)
             return;
-        BOOLEnum isVictoryOrDefeatTimerShown;
-        if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-        LAB_00433e2b:
-            isVictoryOrDefeatTimerShown
-                = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
-                    OpenSHC::UI::Enums::DEID_TIME_UNTIL_VICTORY);
-            if ((isVictoryOrDefeatTimerShown)
-                || (isVictoryOrDefeatTimerShown
-                    = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
-                        OpenSHC::UI::Enums::DEID_TIME_UNTIL_DEFEAT),
-                    isVictoryOrDefeatTimerShown != FALSE)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
+            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    .lordKilledByPlayerID
+                != 0) {
+                return;
+            }
+            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    .playerDeathRelated
+                != 0) {
+                return;
+            }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::areActivePlayersMostlySameTeam, DAT_GameState::ptr)()) {
+                return;
+            }
+        }
+        if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
+            || DAT_GameCore::instance.mapU4Int0 == 0) {
+            if (MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+                    OpenSHC::UI::Enums::DEID_TIME_UNTIL_VICTORY)
+                || MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+                    OpenSHC::UI::Enums::DEID_TIME_UNTIL_DEFEAT)) {
                 posY += 50;
             }
         } else {
-            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .lordKilledByPlayerID
-                != 0)
-                return;
-            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .playerDeathRelated
-                != 0)
-                return;
-            BOOLEnum const arePlayersMostlySameTeam = MACRO_CALL_MEMBER(
-                OpenSHC::Game::GameStateStructures_Func::areActivePlayersMostlySameTeam, DAT_GameState::ptr)();
-            if (arePlayersMostlySameTeam)
-                return;
-            if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
-                || (DAT_GameCore::instance.mapU4Int0 == 0))
-                goto LAB_00433e2b;
             posY += 70;
         }
         int const countedPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-        int* goodsRow = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .startResources
-            + 1;
-        int goodsRowsRemaining = 5;
-        do {
-            if (goodsRow[-1] != 0) {
+        for (int i = 0; i < countof(DAT_GameState::instance.playerDataArray[0].startResources); ++i) {
+            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    .startResources[i]
+                != 0) {
                 ++startGoodsCount;
             }
-            if (*goodsRow != 0) {
-                ++startGoodsCount;
-            }
-            if (goodsRow[1] != 0) {
-                ++startGoodsCount;
-            }
-            if (goodsRow[2] != 0) {
-                ++startGoodsCount;
-            }
-            if (goodsRow[3] != 0) {
-                ++startGoodsCount;
-            }
-            goodsRow += 5;
-            --goodsRowsRemaining;
-        } while (goodsRowsRemaining != 0);
+        }
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION) {
             if (startGoodsCount == 0)
                 return;
@@ -162,13 +142,9 @@ namespace UI {
             if (remainingTextYOffset != 0) {
                 DAT_GameState::instance.playerDataArray[countedPlayerSlotID].textYOffset = remainingTextYOffset - 1;
             }
-            goto LAB_00433fe5;
         }
-    LAB_00433fe5:
         int goodsRowY = 0;
-        int goodIndex = 0;
-        int goodGMFrame = 141;
-        do {
+        for (int goodIndex = 0, goodGMFrame = 141; goodGMFrame < 191; ++goodIndex, goodGMFrame += 2) {
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .startResources[goodIndex]
                 != 0) {
@@ -213,9 +189,7 @@ namespace UI {
                 }
                 goodsRowY += 30;
             }
-            goodGMFrame += 2;
-            ++goodIndex;
-        } while (goodGMFrame < 191);
+        }
     }
 
 }
