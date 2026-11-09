@@ -987,7 +987,7 @@ PUBLIC ?instance@?$Extern@I$0ONDBLM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA
 
@@ -2674,7 +2674,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA EQU 00ED31C0h
 
-?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA EQU 00ED31C4h
+?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA EQU 00ED31C4h
 
 ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA EQU 00ED31C8h
 
