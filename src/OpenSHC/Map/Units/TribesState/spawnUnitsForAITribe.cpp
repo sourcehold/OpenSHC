@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../TribesState.func.hpp"
 
 #include "OpenSHC/AI/AICState.func.hpp"
