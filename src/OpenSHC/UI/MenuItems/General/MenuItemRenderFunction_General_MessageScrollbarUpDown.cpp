@@ -11,10 +11,10 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004BAE80
-        void General::MenuItemRenderFunction_General_MessageScrollbarUpDown(int param_1, ...)
+        void General::MenuItemRenderFunction_General_MessageScrollbarUpDown(int button, ...)
         {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-            if (param_1 == -1) {
+            if (button == -1) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::renderUpDownButtonUnk,
                     DAT_PencilRenderCore::ptr)(0, 0);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;

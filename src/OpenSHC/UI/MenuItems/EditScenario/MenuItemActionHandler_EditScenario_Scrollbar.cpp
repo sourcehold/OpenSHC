@@ -8,9 +8,9 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B8A50
         void EditScenario::MenuItemActionHandler_EditScenario_Scrollbar(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = DAT_MapPropertiesState::instance.eventsCount - 20;
@@ -28,7 +28,7 @@ namespace UI {
                 *maxValue = DAT_MapPropertiesState::instance.eventsCount - 20;
                 return;
             case 5:
-                if (0 < (int)DAT_MapPropertiesState::instance.eventListScrollOffset) {
+                if (0 < DAT_MapPropertiesState::instance.eventListScrollOffset) {
                     DAT_MapPropertiesState::instance.eventListScrollOffset
                         = DAT_MapPropertiesState::instance.eventListScrollOffset - 1;
                     *currentValue = DAT_MapPropertiesState::instance.eventListScrollOffset;
@@ -36,7 +36,7 @@ namespace UI {
                 }
                 break;
             case 6:
-                if ((int)DAT_MapPropertiesState::instance.eventListScrollOffset
+                if (DAT_MapPropertiesState::instance.eventListScrollOffset
                     < DAT_MapPropertiesState::instance.eventsCount - 20) {
                     DAT_MapPropertiesState::instance.eventListScrollOffset
                         = DAT_MapPropertiesState::instance.eventListScrollOffset + 1;

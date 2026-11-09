@@ -13,9 +13,9 @@ namespace UI {
         using Game::TrailTypeInt;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9230
-        void CrusadeEndscreen::MenuItemActionHandler_CrusadeEndscreen_Main(int param_1, ...)
+        void CrusadeEndscreen::MenuItemActionHandler_CrusadeEndscreen_Main(int button, ...)
         {
-            if (param_1 != 10) {
+            if (button != 10) {
                 return;
             }
 

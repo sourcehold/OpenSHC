@@ -8,9 +8,9 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047D070
         void ChooseNetworkServiceProvider::MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = DAT_GameSynchronyState::instance.modemScrollbarCount - 4;

@@ -8,14 +8,14 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00466810
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderDelay(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
             int const selectedBuildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = 24000;
-                *currentValue = (int)DAT_BuildingsState::instance.buildings[selectedBuildingID].outpostRelatedUnk3;
+                *currentValue = DAT_BuildingsState::instance.buildings[selectedBuildingID].outpostRelatedUnk3;
                 return;
             case 2:
             case 3:
@@ -24,7 +24,7 @@ namespace UI {
                 return;
             case 4:
                 *currentValue
-                    = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                    = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                           .outpostRelatedUnk3;
                 return;
             case 5: {
@@ -37,7 +37,7 @@ namespace UI {
                 if (0 < delay) {
                     *delayField = delay - 1;
                 }
-                *currentValue = (int)*delayField;
+                *currentValue = *delayField;
                 return;
             }
             case 6: {
@@ -50,7 +50,7 @@ namespace UI {
                 if (delay < 24000) {
                     *delayField = delay + 1;
                 }
-                *currentValue = (int)*delayField;
+                *currentValue = *delayField;
             }
             }
         }

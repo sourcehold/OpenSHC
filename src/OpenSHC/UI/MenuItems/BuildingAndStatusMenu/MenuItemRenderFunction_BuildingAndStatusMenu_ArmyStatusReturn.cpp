@@ -20,7 +20,7 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0043FCB0
-        void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_ArmyStatusReturn(int param_1, ...)
+        void BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_ArmyStatusReturn(int unused, ...)
         {
             if (((((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk)
                       || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL))

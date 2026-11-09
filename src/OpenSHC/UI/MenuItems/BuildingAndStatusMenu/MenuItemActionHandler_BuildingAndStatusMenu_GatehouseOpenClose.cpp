@@ -14,27 +14,25 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Audio::SFX::SoundEffectID;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00465480
-        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_GatehouseOpenClose(int param_1, ...)
+        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_GatehouseOpenClose(int openOrClose, ...)
         {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0
                 = DAT_BuildingsState::instance.menuSelectedBuildingID;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = param_1;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = openOrClose;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam2
                 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].uid;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_OPEN_OR_CLOSE_GATE);
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .openOrCloseGateClick = param_1;
-            if (param_1 == 10) {
+                .openOrCloseGateClick = openOrClose;
+            if (openOrClose == 10) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    (OpenSHC::Audio::SFX::SoundEffectID)140);
+                    OpenSHC::Audio::SFX::SEID_UNKNOWN_0x8C);
             }
-            if (param_1 == 11) {
+            if (openOrClose == 11) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    (OpenSHC::Audio::SFX::SoundEffectID)142);
+                    OpenSHC::Audio::SFX::SEID_UNKNOWN_0x8E);
             }
         }
 

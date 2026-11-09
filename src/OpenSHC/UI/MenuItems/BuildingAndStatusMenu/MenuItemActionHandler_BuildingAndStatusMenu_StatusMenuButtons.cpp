@@ -4,6 +4,7 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,18 +17,19 @@ namespace UI {
         using Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0043E490
-        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_StatusMenuButtons(int param_1, ...)
+        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_StatusMenuButtons(int tabType, ...)
         {
-            if (param_1 == 71 && DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo == 75
-                && INT_00b96120::instance == 4) {
-                param_1 = Map::Buildings::BT_OXTETHER;
+            if (tabType == UI::Enums::BASMTT_STATUS_OVERVIEW
+                && DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo == UI::Enums::BASMTT_STATUS_FOOD
+                && INT_00b96120::instance == UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP) {
+                tabType = UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP;
             }
-            DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = param_1;
+            DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = tabType;
             MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL)
-                && (param_1 != Map::Buildings::BT_KEEPDOOR_LEFT)) {
-                MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(0xf, (BuildingType)((int)(param_1)));
+                && (tabType != UI::Enums::BASMTT_STATUS_OVERVIEW)) {
+                MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(15, (BuildingType)tabType);
             }
         }
 

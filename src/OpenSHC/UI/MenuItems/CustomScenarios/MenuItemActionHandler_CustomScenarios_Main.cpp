@@ -20,9 +20,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00440770
-        void CustomScenarios::MenuItemActionHandler_CustomScenarios_Main(int param_1, ...)
+        void CustomScenarios::MenuItemActionHandler_CustomScenarios_Main(int button, ...)
         {
-            switch (param_1) {
+            switch (button) {
             case 1:
                 DAT_MenuTextInputState::instance.dialogResult = 0;
                 DAT_MenuTextInputState::instance.field_0x9c = 1;

@@ -6,7 +6,6 @@
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -17,28 +16,24 @@ namespace UI {
     namespace MenuItems {
 
         using OpenSHC::Map::Buildings::BuildingType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00465820
-        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_ChangeRations(int param_1, ...)
+        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_ChangeRations(int rations, ...)
         {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL) {
-                BOOLEnum BVar1 = MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(3, param_1);
-                if (!BVar1) {
+                if (!MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(3, rations)) {
                     MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                     return;
                 }
-                MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialBuildingActionState)(
-                    12, (BuildingType)((int)(param_1)));
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialBuildingActionState)(12, (BuildingType)rations);
             }
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = param_1;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = rations;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_CHANGE_RATIONS);
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .rationsSetting3 = param_1;
-            DWORD DVar2 = timeGetTime();
+                .rationsSetting3 = rations;
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                .timeTaxesOrRationsChange = DVar2;
+                .timeTaxesOrRationsChange = timeGetTime();
         }
 
     }

@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/Text/TextArrayIndexType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
@@ -12,9 +11,9 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047CC10
-        void General::MenuItemActionHandler_General_TextInputDisplay(int param_1, ...)
+        void General::MenuItemActionHandler_General_TextInputDisplay(int field, ...)
         {
-            switch (param_1) {
+            switch (field) {
             case 0:
                 if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_FIVE__NUMERIC_DOT) {
                     MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(5);

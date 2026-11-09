@@ -11,7 +11,7 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00491FD0
         void GameplayOptions::MenuItemActionHandler_GameplayOptions_SpeedSlider(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
             if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
                 && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
@@ -20,7 +20,7 @@ namespace UI {
                 *currentValue = DAT_GameSynchronyState::instance.skirmishGameSpeedLevel;
                 return;
             }
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 20;
                 *maxValue = 90;

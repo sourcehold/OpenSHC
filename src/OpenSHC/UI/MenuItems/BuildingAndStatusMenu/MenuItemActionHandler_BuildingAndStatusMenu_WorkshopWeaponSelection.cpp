@@ -13,7 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Commands::GameCommandType;
         using OpenSHC::Game::Resources::ResourceType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00465200
@@ -51,7 +50,7 @@ namespace UI {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam2
                 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].uid;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                ((GameCommandType)33));
+                OpenSHC::Commands::GCT_UNKNOWN_33);
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].weaponRelated
                 = weapon;
         }

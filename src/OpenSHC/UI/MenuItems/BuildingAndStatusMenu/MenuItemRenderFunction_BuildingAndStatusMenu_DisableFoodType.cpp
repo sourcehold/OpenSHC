@@ -5,7 +5,6 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"

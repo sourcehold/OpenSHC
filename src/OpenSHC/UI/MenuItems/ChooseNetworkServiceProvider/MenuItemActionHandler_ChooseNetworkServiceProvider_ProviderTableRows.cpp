@@ -14,15 +14,14 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00487200
         void ChooseNetworkServiceProvider::MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderTableRows(
-            int param_1, ...)
+            int row, ...)
         {
-            if (DAT_GameSynchronyState::instance.scrollBarItemOffset + param_1
+            if (DAT_GameSynchronyState::instance.scrollBarItemOffset + row
                 < DAT_GameSynchronyState::instance.scrollBarItemCount) {
-                DAT_GameSynchronyState::instance.selectedProviderIndex = param_1;
+                DAT_GameSynchronyState::instance.selectedProviderIndex = row;
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::setMenuTypeBasedOnDirectPlayGUID,
                     DAT_GameSynchronyState::ptr)();
-                // the original dispatches with a `sub eax, K; je` chain (0x487228), MSVC's
-                // sparse switch, and the TCPIP arm sits first
+                // a sparse switch; the original tests the TCPIP arm first
                 switch (DAT_GameCore::instance.activeMenuTab.tabType) {
                 case OpenSHC::UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP:
                     MACRO_CALL_MEMBER(

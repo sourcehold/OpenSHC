@@ -8,9 +8,9 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004BAD70
         void General::MenuItemActionHandler_General_MessageScrollbar(
-            int param_1, int param_2, int* minValue, int* maxValue, int* currentValue)
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
         {
-            switch (param_2) {
+            switch (scrollbarEvent) {
             case 1:
                 *minValue = 0;
                 *maxValue = DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount;
@@ -25,14 +25,14 @@ namespace UI {
                 *maxValue = DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount;
                 return;
             case 5:
-                if (0 < (int)DAT_MapPropertiesState::instance.offset) {
+                if (0 < DAT_MapPropertiesState::instance.offset) {
                     --DAT_MapPropertiesState::instance.offset;
                     *currentValue = DAT_MapPropertiesState::instance.offset;
                     return;
                 }
                 break;
             case 6:
-                if ((int)DAT_MapPropertiesState::instance.offset
+                if (DAT_MapPropertiesState::instance.offset
                     < (int)DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount) {
                     ++DAT_MapPropertiesState::instance.offset;
                 }

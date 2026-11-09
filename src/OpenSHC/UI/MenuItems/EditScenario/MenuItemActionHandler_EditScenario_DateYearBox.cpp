@@ -10,44 +10,45 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B8990
-        void EditScenario::MenuItemActionHandler_EditScenario_DateYearBox(int param_1, ...)
+        void EditScenario::MenuItemActionHandler_EditScenario_DateYearBox(int box, ...)
         {
-            switch (param_1) {
+            switch (box) {
             case 0:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex
-                    != (Text::TAIT_EIGHT__FILTER_B | Text::TAIT_SEVEN__NUMERIC_ONLY)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(0xf);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_15) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_15);
                 }
                 break;
             case 1:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex
-                    != (Text::TAIT_EIGHT__FILTER_B | Text::TAIT_TWO__FILTER_A)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(10);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_10) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_10);
                 }
                 break;
             case 2:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex
-                    != (Text::TAIT_EIGHT__FILTER_B | Text::TAIT_THREE__FILTER_A)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(11);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_11) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_11);
                 }
                 break;
             case 3:
             case 4:
             case 7:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex != (Text::TextArrayIndexTypeInt)12) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(12);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_12) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_12);
                 }
                 break;
             case 5:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex
-                    != (Text::TAIT_EIGHT__FILTER_B | Text::TAIT_FIVE__NUMERIC_DOT)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(13);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_13) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_13);
                 }
                 break;
             case 6:
-                if (DAT_UserTextHandlerState::instance.textArrayIndex
-                    != (Text::TAIT_EIGHT__FILTER_B | Text::TAIT_SIX__NUMERIC_ONLY)) {
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(14);
+                if (DAT_UserTextHandlerState::instance.textArrayIndex != Text::TAIT_UNKNOWN_14) {
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
+                        Text::TAIT_UNKNOWN_14);
                 }
             }
         }

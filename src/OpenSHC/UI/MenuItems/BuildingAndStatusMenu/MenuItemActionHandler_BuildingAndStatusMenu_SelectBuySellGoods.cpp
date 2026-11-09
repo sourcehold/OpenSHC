@@ -2,8 +2,8 @@
 
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -13,17 +13,15 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004659E0
-        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_SelectBuySellGoods(int param_1, ...)
+        void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_SelectBuySellGoods(
+            int resourceType, ...)
         {
-            BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isResourceTypeTradeable,
-                DAT_GameState::ptr)((Game::Resources::ResourceType)param_1);
-            if (BVar1) {
+            if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isResourceTypeTradeable, DAT_GameState::ptr)(
+                    (Game::Resources::ResourceType)resourceType)) {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .marketSelectedResourceType = param_1;
-                DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 57;
+                    .marketSelectedResourceType = resourceType;
+                DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = UI::Enums::BASMTT_MARKETPLACE_TRADE;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
             }
