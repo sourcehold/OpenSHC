@@ -23,13 +23,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9CC0
         void DeleteGameRecord::MenuModalRenderFunctionMenuModal_DeleteGameRecord(int x, int y, int width, int height)
         {
-            char* textAddress;
-            int yParam;
-            TextAlignment alignment;
-            BGR24 color;
-            int fontSize;
-            BOOLEnum keepOffsetX;
-            int blendStrength;
             if ((DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_FRENCH)
                 && (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_SPANISH)) {
                 // "Delete Game Record?"
@@ -39,18 +32,12 @@ namespace UI {
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,
                 DAT_PencilRenderCore::ptr)(x, y, width, height);
-            blendStrength = 0;
-            keepOffsetX = FALSE;
-            fontSize = 17;
-            color = OpenSHC::Rendering::Colors::COL_C2F0EB;
-            alignment = OpenSHC::Text::TTA_CENTER;
-            yParam = y + 27;
             int xParam = width / 2 + x;
             // "Delete Game Record?"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKMASTERS, 13),
-                xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                xParam, y + 27, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 17, FALSE, 0);
         }
 
     }

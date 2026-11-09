@@ -24,13 +24,6 @@ namespace UI {
     void DisplayElements::RenderBottomLeftDateDisplayElement(int posX, int posY, DWORD elementState)
     {
         BOOLEnum _menuStateNotZero;
-        char* _textAddress;
-        TextAlignment alignment;
-        BGR24 color;
-        int fontSize;
-        int blendStrength;
-        int _xParam;
-        int _yParam;
         if ((!DAT_GameCore::instance.isTimeHalted)
             && (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)) {
             _menuStateNotZero = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
@@ -41,18 +34,12 @@ namespace UI {
                             != OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
                         && (DAT_GameCore::instance.activeMenuTab.tabType
                             != OpenSHC::UI::Enums::BASMTT_MERCENARYPOST)))))) {
-                blendStrength = 0;
                 _menuStateNotZero = FALSE;
-                fontSize = 18;
-                color = 0;
-                alignment = OpenSHC::Text::TTA_LEFT;
-                _xParam = posX;
-                _yParam = posY;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                         OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_GameState::instance.mapAndTime.month),
-                    _xParam, _yParam, alignment, color, fontSize, _menuStateNotZero, blendStrength);
+                    posX, posY, OpenSHC::Text::TTA_LEFT, 0, 18, _menuStateNotZero, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.mapAndTime.year, posX + 4, posY, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
             }

@@ -18,17 +18,15 @@ namespace UI {
     void DisplayElements::RenderDisplayElementsUnk()
     {
         DisplayElementPositionModifierInt _positionModifier;
-        int _yPos;
-        int _xPos;
         DisplayElementPositionModifierInt _xPosModifier;
         DisplayElement* _displayElementPtr;
         DWORD _currentTime = timeGetTime();
         for (_displayElementPtr = DAT_PointerToDisplayElementStackTop::instance; _displayElementPtr != NULL;
             _displayElementPtr = _displayElementPtr->nextDisplayElement_0x20) {
             if (_displayElementPtr->elementStateUnk_0xc != 0) {
-                _xPos
+                int _xPos
                     = _displayElementPtr->x_0x0 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
-                _yPos
+                int _yPos
                     = _displayElementPtr->y_0x4 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
                 _positionModifier = _displayElementPtr->positionModifier_0x1c
                     & (OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y | OpenSHC::UI::Enums::DEPM_RESOLUTION_Y);
