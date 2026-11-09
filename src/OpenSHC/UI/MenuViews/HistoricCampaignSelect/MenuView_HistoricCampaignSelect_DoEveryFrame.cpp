@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::UI::Enums::MenuModalType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00425580
         void HistoricCampaignSelect::MenuView_HistoricCampaignSelect_DoEveryFrame()
         {

@@ -18,8 +18,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using DE::SHCDE::eTextSections;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004DBAF0
         void HistoricCampaignIntro::MenuView_HistoricCampaignIntro_Prepare()
         {
@@ -28,33 +26,29 @@ namespace UI {
             switch (DAT_GameCore::instance.historicCampaignNumber) {
             case 1:
                 DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("c1pic.tgx");
+                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c1pic.tgx");
                 break;
             case 2:
                 DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("c2pic.tgx");
+                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c2pic.tgx");
                 break;
             case 3:
                 DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("c3pic.tgx");
+                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c3pic.tgx");
                 break;
             case 4:
                 DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("c4pic.tgx");
+                    UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("c4pic.tgx");
                 break;
             }
             DAT_NumberOfStoredMenuStrings::instance = 0;
             pcVar1
                 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                    DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -5));
+                    DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 - 5));
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
             pcVar1
                 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                    DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -4));
+                    DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 - 4));
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             FLOAT_00ec0834::instance = 0.0;

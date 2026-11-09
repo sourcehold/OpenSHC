@@ -14,8 +14,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00430690
         void UnusedCreateSiege::MenuView_UnusedCreateSiege_Prepare()
         {

@@ -19,9 +19,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Rendering::ScreenResolutionEnum;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00426570
         void UnusedDemoBuyItScreen::MenuView_UnusedDemoBuyItScreen_Prepare()
         {
@@ -34,10 +31,10 @@ namespace UI {
             INT_00b95b34::instance = timeGetTime();
             INT_00b960e0::instance = 0;
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
-                INT_00b960e0::instance = 0x18;
+                INT_00b960e0::instance = 24;
             }
             MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::shutdownSoundSystem, DAT_SoundSystemState::ptr)();
-            if (DAT_GameSynchronyState::instance.openOnClose != FALSE) {
+            if (DAT_GameSynchronyState::instance.openOnClose) {
                 DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
             }
         }

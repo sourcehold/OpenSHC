@@ -21,11 +21,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-        using OpenSHC::UI::Enums::MenuViewType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042C090
         void Unknown33::MenuView_Unknown33_DoEveryFrame()
         {
@@ -33,7 +28,7 @@ namespace UI {
             iVar1 = MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkAllPlayersReadyAndCleanupSlots,
                 DAT_GameSynchronyState::ptr)();
             if (iVar1 != 0) {
-                if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+                if (DAT_GameSynchronyState::instance.isHost) {
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_HOST_SHARE_LOBBY_STATE);
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
@@ -42,11 +37,11 @@ namespace UI {
                 }
                 for (int iVar1 = 1; iVar1 < 9; iVar1 = iVar1 + 1) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] == -1
-                    && (DAT_GameCore::instance.mapU4Int0 == 0
-                        || (iVar1 != DAT_GameState::instance.mapAndTime.somePlayerID))
-                    && DAT_GameSynchronyState::instance.currentAIArray[iVar1] == 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::destroyPlayerCompletely,
-                        DAT_GameState::ptr)(iVar1);
+                        && (DAT_GameCore::instance.mapU4Int0 == 0
+                            || (iVar1 != DAT_GameState::instance.mapAndTime.somePlayerID))
+                        && DAT_GameSynchronyState::instance.currentAIArray[iVar1] == 0) {
+                        MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::destroyPlayerCompletely,
+                            DAT_GameState::ptr)(iVar1);
                     }
                 }
                 MACRO_CALL(OpenSHC::Synchrony_Func::SetAIPlayerNickNames)();

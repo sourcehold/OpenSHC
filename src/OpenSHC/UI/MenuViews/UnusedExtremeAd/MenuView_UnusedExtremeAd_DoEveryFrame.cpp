@@ -27,7 +27,7 @@ namespace UI {
                     iVar1 = MACRO_CALL(UI::Helpers_Func::FindCampaignMapHotspotAtMouse)();
                     if (iVar1 == 1) {
                         MACRO_CALL(UI::Credits_Func::EndCreditsSegmentAndAdvanceToNext)();
-                        DAT_00ed278c::instance = DAT_00ed278c::instance + 1;
+                        ++DAT_00ed278c::instance;
                         if (DAT_00ed278c::instance == 3) {
                             DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
                         }
@@ -37,7 +37,7 @@ namespace UI {
                 if ((int)DAT_UnknownBinkIndex::instance < (int)DAT_UnknownBinkCount::instance) {
                     MACRO_CALL(Rendering_Func::RenderActiveCreditsElements)();
                 }
-                INT_00ed3140::instance = INT_00ed3140::instance + 1;
+                ++INT_00ed3140::instance;
                 if ((int)DAT_UnknownBinkIndex::instance >= (int)DAT_UnknownBinkCount::instance) {
                     DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
                 }

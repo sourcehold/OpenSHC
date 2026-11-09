@@ -32,10 +32,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using Game::GameMode;
-        using Game::GameMode2;
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00448D40
         void SingleplayerMapChoice::MenuView_SingleplayerMapChoice_Prepare()
         {
@@ -60,21 +56,21 @@ namespace UI {
                 DAT_SH1_SiegeAdvancedMode::instance = 0;
                 DAT_SiegeRemainingPoints::instance = 0;
             } else {
-                MACRO_CALL(UI::MenuItems::SinglePlayerMapChoice_Func::
-                        MenuItemActionHandler_SingleplayerMapChoice_MapTable)(
+                MACRO_CALL(
+                    UI::MenuItems::SinglePlayerMapChoice_Func::MenuItemActionHandler_SingleplayerMapChoice_MapTable)(
                     DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
                 DAT_GameSynchronyState::instance.skirmishRelated1 = 1;
             }
-            DAT_ButtonBackgroundBlendStrength::instance = 0x20;
+            DAT_ButtonBackgroundBlendStrength::instance = 32;
             DAT_00b960dc::instance = 0xfffffffd;
             DWORD_00b95b1c::instance = timeGetTime();
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             if ((int)DAT_MapMissionType::instance < 2) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("frontend_economics2.tgx");
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+                    "frontend_economics2.tgx");
             } else {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("frontend_combat2.tgx");
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+                    "frontend_combat2.tgx");
             }
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;

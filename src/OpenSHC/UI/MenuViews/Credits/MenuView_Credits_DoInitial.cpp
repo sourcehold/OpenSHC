@@ -16,8 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004262B0
         void Credits::MenuView_Credits_DoInitial()
         {

@@ -17,9 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::UI::Enums::MenuModalType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004268C0
         void MissionSelect::MenuView_MissionSelect_DoEveryFrame()
         {
@@ -33,10 +30,10 @@ namespace UI {
                     / 2);
             if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
-                int y1 = DAT_MenuHandlerState::instance.y + 0xbe;
-                int x2 = DAT_MenuHandlerState::instance.x + 0x23a;
-                int x1 = DAT_MenuHandlerState::instance.x + 0xe5;
-                int y2 = DAT_MenuHandlerState::instance.y + 0x121;
+                int y1 = DAT_MenuHandlerState::instance.y + 190;
+                int x2 = DAT_MenuHandlerState::instance.x + 570;
+                int x1 = DAT_MenuHandlerState::instance.x + 229;
+                int y2 = DAT_MenuHandlerState::instance.y + 289;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                     x1, y1 - 1, x2, y1 - 1, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
@@ -50,8 +47,8 @@ namespace UI {
                   added by script: "Mission"
                  */
                 MACRO_CALL_MEMBER(
-                    OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(5,
-                    0xf, DAT_MenuHandlerState::instance.x + 0xb8, DAT_MenuHandlerState::instance.y + 100, 0x1b0, 0x32);
+                    OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                    5, 0xf, DAT_MenuHandlerState::instance.x + 184, DAT_MenuHandlerState::instance.y + 100, 432, 50);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }
             return;

@@ -16,10 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::DE::SHCDE::eGM;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004313C0
         void MapEditorLandscaping::MenuView_MapEditorLandscaping_DoEveryFrame()
         {
@@ -34,12 +30,12 @@ namespace UI {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_PANELS, 3,
-                DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 0x1b2);
+                DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 434);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         LAB_00431429:
             DAT_MinimapViewState::instance.needsRedraw = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapLandscaping, DAT_MinimapViewState::ptr)(
-                DAT_MenuHandlerState::instance.x + 0x298, DAT_MenuHandlerState::instance.y + 0x1d0, 0x80, 0x80);
+                DAT_MenuHandlerState::instance.x + 664, DAT_MenuHandlerState::instance.y + 464, 128, 128);
         }
 
     }

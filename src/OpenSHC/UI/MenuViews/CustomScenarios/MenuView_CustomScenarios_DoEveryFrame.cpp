@@ -17,9 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::UI::Enums::MenuViewType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00425FF0
         void CustomScenarios::MenuView_CustomScenarios_DoEveryFrame()
         {

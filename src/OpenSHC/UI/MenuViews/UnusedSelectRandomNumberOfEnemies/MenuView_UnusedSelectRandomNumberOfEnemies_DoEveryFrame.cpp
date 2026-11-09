@@ -18,9 +18,7 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -50,7 +48,7 @@ namespace UI {
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 600, 400);
             iVar5 = 0;
             keepOffsetX = FALSE;
-            iVar4 = 0x11;
+            iVar4 = 17;
             color = 0xccfaff;
             alignment = OpenSHC::Text::TTA_CENTER;
             iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 200;
@@ -64,7 +62,7 @@ namespace UI {
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_NEW_TEXT, 1),
                 iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
             blendStrength = 0;
-            iVar5 = 0x12;
+            iVar5 = 18;
             color_00 = 0xccfaff;
             iVar4 = 400;
             iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;

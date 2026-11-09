@@ -22,10 +22,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Game::GameMode;
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-        using OpenSHC::UI::Enums::DisplayElementID;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00431A90
         void BuildMenu::MenuView_BuildMenu_Prepare()
         {

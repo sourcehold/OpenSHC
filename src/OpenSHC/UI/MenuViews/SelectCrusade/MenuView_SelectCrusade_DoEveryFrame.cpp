@@ -19,9 +19,7 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -45,17 +43,17 @@ namespace UI {
                     / 2);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
-                DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x58,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 0x270, 400);
+                DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 88,
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 624, 400);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,
-                DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x58,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 0x270, 400);
+                DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 88,
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 624, 400);
             iVar8 = 0;
             BVar7 = FALSE;
-            iVar6 = 0x10;
+            iVar6 = 16;
             BVar5 = 0xccfaff;
             TVar4 = OpenSHC::Text::TTA_CENTER;
-            iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x82;
+            iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 130;
             iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             /*
@@ -68,7 +66,7 @@ namespace UI {
             if (DAT_HighlightedSkirmishType::instance == 1) {
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x10;
+                iVar6 = 16;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
                 iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
@@ -82,10 +80,10 @@ namespace UI {
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x11;
+                iVar6 = 17;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x1b8;
+                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
                 iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
                 /*
                   added by script: "Fight through 50 linked Crusader games"
@@ -98,7 +96,7 @@ namespace UI {
             if (DAT_HighlightedSkirmishType::instance == 2) {
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x10;
+                iVar6 = 16;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
                 iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
@@ -112,10 +110,10 @@ namespace UI {
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x11;
+                iVar6 = 17;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x1b8;
+                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
                 iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
                 /*
                   added by script: "Customize your own Crusader game."
@@ -128,7 +126,7 @@ namespace UI {
             if (DAT_HighlightedSkirmishType::instance == 3) {
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x10;
+                iVar6 = 16;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
                 iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
@@ -138,27 +136,27 @@ namespace UI {
                  */
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 0x15),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 21),
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x11;
+                iVar6 = 17;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x1b8;
+                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
                 iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
                 /*
                   added by script: "Fight through 30 linked Crusader games"
                  */
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 0x16),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 22),
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
             }
             if (DAT_HighlightedSkirmishType::instance == 4) {
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x10;
+                iVar6 = 16;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
                 iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
@@ -168,21 +166,21 @@ namespace UI {
                  */
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 0x17),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 23),
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
                 iVar8 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x11;
+                iVar6 = 17;
                 BVar5 = 0xccfaff;
                 TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x1b8;
+                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
                 iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
                 /*
                   added by script: "Fight through 20 linked Extreme games"
                  */
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 0x18),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 24),
                     iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
             }
             return;

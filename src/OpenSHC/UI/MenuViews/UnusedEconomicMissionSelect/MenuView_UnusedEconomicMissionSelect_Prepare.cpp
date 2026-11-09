@@ -12,8 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00426C50
         void UnusedEconomicMissionSelect::MenuView_UnusedEconomicMissionSelect_Prepare()
         {
@@ -24,7 +22,7 @@ namespace UI {
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
             DAT_GameCore::instance.section1066 = 0;
             DAT_MenuTextInputState::instance.lastListClickTime = 0;
-            DAT_GameCore::instance.missionNumber1to20 = 0x21;
+            DAT_GameCore::instance.missionNumber1to20 = 33;
             DAT_MenuTextInputState::instance.lastClickedListIndex = 0xffffffff;
         }
 
