@@ -220,8 +220,15 @@ asm = exporter.export_symbols_as_assembly(data_addresses,
       typedefs={
         ('/OpenSHC/WindowsHelper/Enums', 'BOOLEnum'): ('/', 'int', ""),
         ('/winnt', 'LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
+        ('/winnt', '_LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
         ('/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
         ('/dplay', 'IDirectPlay4'): ("/", "IDirectPlay4", "struct "),
+        ('/dplay', 'IDirectPlay4A *'): ("/", "IDirectPlay4 *", "struct "),
+        ('/dplay', 'IDirectPlay4 *'): ("/", "IDirectPlay4 *", "struct "),
+        ('/', "GUID"): ('/', "_GUID", "struct "),
+        ('/', "_GUID"): ('/', "_GUID", "struct "),
+        ('/guiddef', "GUID"): ('/', "_GUID", "struct "),
+        ('/guiddef', "_GUID"): ('/', "_GUID", "struct "),
       },
       typedef_func=typedefFunc)
 collection.add(asm)
