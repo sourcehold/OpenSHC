@@ -4,6 +4,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -24,38 +25,28 @@ namespace UI {
         void Allies::MenuModalRenderFunction_Allies(int x, int y, int width, int height)
         {
             MACRO_CALL(OpenSHC::Game::Skirmish_Func::RecalculateAllies)();
-            DWORD _now = timeGetTime();
-            if (500 < _now - DAT_Time_Allies1::instance) {
-                DAT_Time_Allies1::instance = _now;
+            DWORD const now = timeGetTime();
+            if (500 < now - DAT_Time_Allies1::instance) {
+                DAT_Time_Allies1::instance = now;
                 ++DAT_00df42b0::instance;
                 if (1 < DAT_00df42b0::instance) {
                     DAT_00df42b0::instance = 0;
                 }
             }
-            BOOLEnum BVar7 = FALSE;
-            int iVar5 = 0xf;
-            BGR24 BVar4 = 0xccfaff;
-            TextAlignment TVar3 = OpenSHC::Text::TTA_LEFT;
-            int iVar2 = y + 25;
-            int xParam = x + 39;
-            int iVar6 = xParam;
+            int const titleY = y + 25;
+            int const textX = x + 39;
             // "Allies"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0),
-                iVar6, iVar2, TVar3, BVar4, iVar5, BVar7, 0);
+                textX, titleY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 15, FALSE, 0);
             if (DAT_AlliesCount::instance < 1) {
-                iVar5 = 0;
-                BVar7 = FALSE;
-                iVar6 = 17;
-                BVar4 = 0xccfaff;
-                TVar3 = OpenSHC::Text::TTA_LEFT;
-                iVar2 = y + 100;
+                int const messageY = y + 100;
                 // "You have no Allies!"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 19),
-                    xParam, iVar2, TVar3, BVar4, iVar6, BVar7, iVar5);
+                    textX, messageY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
             }
         }
 
