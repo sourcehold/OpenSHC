@@ -22,7 +22,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DBAF0
         void HistoricCampaignIntro::MenuView_HistoricCampaignIntro_Prepare()
         {
-            char* pcVar1;
             MACRO_CALL(UI::Helpers_Func::PrepareHistoryBook)();
             switch (DAT_GameCore::instance.historicCampaignNumber) {
             case 1:
@@ -43,14 +42,13 @@ namespace UI {
                 break;
             }
             DAT_NumberOfStoredMenuStrings::instance = 0;
-            pcVar1
+            char* text
                 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                     DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 - 5));
-            MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
-            pcVar1
-                = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                    DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 - 4));
-            MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
+            MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(text);
+            text = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)(DAT_GameCore::instance.historicCampaignNumber * 6 - 4));
+            MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(text);
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             FLOAT_00ec0834::instance = 0.0;
             DAT_00ed2780::instance = 1;

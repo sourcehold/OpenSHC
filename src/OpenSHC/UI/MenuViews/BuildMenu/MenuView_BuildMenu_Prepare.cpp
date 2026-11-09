@@ -25,7 +25,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00431A90
         void BuildMenu::MenuView_BuildMenu_Prepare()
         {
-            int iVar1;
             MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(4);
             if (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
                 && DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD
@@ -37,9 +36,9 @@ namespace UI {
             MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                 OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO, 0);
             DAT_WindowAndDirectDraw::instance.pendingMenuRedraw = 1;
-            iVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::getEventIDForTimeUntilDefeatEventType,
-                DAT_MapPropertiesState::ptr)();
-            if (0 <= iVar1) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::getEventIDForTimeUntilDefeatEventType,
+                    DAT_MapPropertiesState::ptr)()
+                >= 0) {
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                     OpenSHC::UI::Enums::DEID_TIME_UNTIL_DEFEAT, 1);
             }

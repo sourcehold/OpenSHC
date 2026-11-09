@@ -36,11 +36,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00448D40
         void SingleplayerMapChoice::MenuView_SingleplayerMapChoice_Prepare()
         {
-            Menu* pMVar1;
-            char* tgxFileName;
             Menu_SingleplayerMapChoice::instance.thousand = 0;
             DAT_MenuTextInputState::instance.lastListClickTime = 0;
-            DAT_MenuTextInputState::instance.lastClickedListIndex = 0xffffffff;
+            DAT_MenuTextInputState::instance.lastClickedListIndex = -1;
             DAT_GameSynchronyState::instance.currentGameMode = Game::GM_SOLITARY;
             DAT_GameCore::instance.gameMode_2 = Game::GM_BUILDERUnk;
             if (INT_00b95b64::instance != 0) {
@@ -52,7 +50,8 @@ namespace UI {
                 DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = -1;
                 DAT_GameSynchronyState::instance.mapName[0] = '\0';
                 DAT_GameCore::instance.mapDescription[0] = '\0';
-                MACRO_CALL(OS_Func::_memset)(DAT_MinimapViewState::instance.loadedMiniMap, 0, 80000);
+                MACRO_CALL(OS_Func::_memset)(DAT_MinimapViewState::instance.loadedMiniMap, 0,
+                    sizeof(DAT_MinimapViewState::instance.loadedMiniMap));
                 DAT_GameSynchronyState::instance.reparseMaps = TRUE;
                 DAT_SH1_SiegeAdvancedMode::instance = 0;
                 DAT_SiegeRemainingPoints::instance = 0;
@@ -63,7 +62,7 @@ namespace UI {
                 DAT_GameSynchronyState::instance.skirmishRelated1 = 1;
             }
             DAT_ButtonBackgroundBlendStrength::instance = 32;
-            DAT_00b960dc::instance = 0xfffffffd;
+            DAT_00b960dc::instance = -3;
             DWORD_00b95b1c::instance = timeGetTime();
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             if ((int)DAT_MapMissionType::instance < 2) {
@@ -76,9 +75,9 @@ namespace UI {
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-            pMVar1->xPosition = borderWidth;
-            pMVar1->yPosition = borderHeight;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->xPosition = borderWidth;
+            menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(4);

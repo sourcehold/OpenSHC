@@ -25,19 +25,20 @@ namespace UI {
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             DAT_GameCore::instance.section1066 = 0;
             DAT_MenuTextInputState::instance.lastListClickTime = 0;
-            DAT_MenuTextInputState::instance.lastClickedListIndex = 0xffffffff;
-            int iVar1;
+            DAT_MenuTextInputState::instance.lastClickedListIndex = -1;
+            // the campaign is four chapters of five missions
+            int chapter;
             if (DAT_GameCore::instance.missionNumber1to20 < 6) {
-                iVar1 = 0;
+                chapter = 0;
             } else if (DAT_GameCore::instance.missionNumber1to20 < 11) {
-                iVar1 = 1;
+                chapter = 1;
             } else if (DAT_GameCore::instance.missionNumber1to20 < 16) {
-                iVar1 = 2;
+                chapter = 2;
             } else {
-                iVar1 = 3;
+                chapter = 3;
             }
-            DAT_00b95b2c::instance = iVar1;
-            DAT_00b96100::instance = iVar1 * 5 + 1;
+            DAT_00b95b2c::instance = chapter;
+            DAT_00b96100::instance = chapter * 5 + 1;
         }
 
     }

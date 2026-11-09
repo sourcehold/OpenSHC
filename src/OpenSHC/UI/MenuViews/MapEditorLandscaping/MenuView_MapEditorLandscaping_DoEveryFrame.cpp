@@ -25,14 +25,14 @@ namespace UI {
             }
             if (!DAT_MinimapViewState::instance.field_0xc) {
                 DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
-            } else if (DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated != 2)
-                goto LAB_00431429;
-            DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_PANELS, 3,
-                DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 434);
-            DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-        LAB_00431429:
+            }
+            if (DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated == 2) {
+                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
+                    DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_PANELS, 3,
+                    DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y + 434);
+                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            }
             DAT_MinimapViewState::instance.needsRedraw = 1;
             MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapLandscaping, DAT_MinimapViewState::ptr)(
                 DAT_MenuHandlerState::instance.x + 664, DAT_MenuHandlerState::instance.y + 464, 128, 128);

@@ -24,7 +24,7 @@ namespace UI {
             DAT_GameCore::instance.section1066 = 0;
             DAT_MenuTextInputState::instance.lastListClickTime = 0;
             DAT_GameCore::instance.missionNumber1to20 = 33;
-            DAT_MenuTextInputState::instance.lastClickedListIndex = 0xffffffff;
+            DAT_MenuTextInputState::instance.lastClickedListIndex = -1;
         }
 
     }

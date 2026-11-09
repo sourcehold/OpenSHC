@@ -18,14 +18,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1AA0
         void UnusedExtremeAd::MenuView_UnusedExtremeAd_DoEveryFrame()
         {
-            int iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
-            if (iVar1) {
+            if (MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)()) {
                 if (DAT_MouseState::instance.rightClickStop) {
                     MACRO_CALL(UI::Credits_Func::StopCreditsPlaybackAndSounds)();
                 }
                 if (DAT_MouseState::instance.leftClickStart) {
-                    iVar1 = MACRO_CALL(UI::Helpers_Func::FindCampaignMapHotspotAtMouse)();
-                    if (iVar1 == 1) {
+                    if (MACRO_CALL(UI::Helpers_Func::FindCampaignMapHotspotAtMouse)() == 1) {
                         MACRO_CALL(UI::Credits_Func::EndCreditsSegmentAndAdvanceToNext)();
                         ++DAT_00ed278c::instance;
                         if (DAT_00ed278c::instance == 3) {

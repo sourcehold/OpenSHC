@@ -1,7 +1,6 @@
 #include "../CustomScenarios.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/UI/MenuViews/CustomScenarios.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"

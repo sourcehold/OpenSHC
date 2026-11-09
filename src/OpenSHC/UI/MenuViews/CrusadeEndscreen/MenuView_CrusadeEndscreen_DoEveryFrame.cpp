@@ -16,8 +16,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1F50
         void CrusadeEndscreen::MenuView_CrusadeEndscreen_DoEveryFrame()
         {
-            int iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
-            if (iVar1) {
+            if (MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)()) {
                 MACRO_CALL(Rendering_Func::ProcessCreditsScriptCommands)();
                 if ((59 <= (int)DAT_UnknownBinkIndex::instance) && (!INT_00ed27b8::instance)) {
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();

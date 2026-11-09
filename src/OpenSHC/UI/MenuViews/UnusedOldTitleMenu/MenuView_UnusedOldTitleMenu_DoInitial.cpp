@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -22,23 +23,20 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042DD00
         void UnusedOldTitleMenu::MenuView_UnusedOldTitleMenu_DoInitial()
         {
-            Menu* pMVar1;
-            int left;
-            int top;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0, 0,
                 DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
                 (ushort)(COL_BLACK::instance.shortValue));
             int borderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             int borderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-            pMVar1->xPosition = borderWidth;
-            pMVar1->yPosition = borderHeight;
+            Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+            menu->xPosition = borderWidth;
+            menu->yPosition = borderHeight;
             DAT_MenuHandlerState::instance.x = borderWidth;
             DAT_MenuHandlerState::instance.y = borderHeight;
             MACRO_CALL_MEMBER(
                 UI::Rendering::PencilRenderCore_Func::drawPixelPattern4x4OverWholeScreen, DAT_PencilRenderCore::ptr)();
-            top = (DAT_WindowAndDirectDraw::instance.resolutionY - 400) / 2;
-            left = (DAT_WindowAndDirectDraw::instance.resolutionX - 600) / 2;
+            int const top = (DAT_WindowAndDirectDraw::instance.resolutionY - 400) / 2;
+            int const left = (DAT_WindowAndDirectDraw::instance.resolutionX - 600) / 2;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 left, top, left + 600, top + 400, (ushort)(COL_WHITE::instance.shortValue));
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
@@ -46,10 +44,11 @@ namespace UI {
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 s_FireFly_s_005a22c4, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 210, Text::TTA_LEFT, 33023, 0xf, FALSE, 0);
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 210, Text::TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_0080FF, 15, FALSE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 s_Crusader_005a22b8, DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
-                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0xf8, Text::TTA_LEFT, 0, 17, FALSE, 0);
+                DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 248, Text::TTA_LEFT, 0, 17, FALSE, 0);
         }
 
     }
