@@ -15,7 +15,7 @@ namespace Map {
             this->clans = 0;
             this->field_0x8 = 1;
             this->field_0x24 = 0;
-            for (DAT_CurrentTribeID::instance = 1; (int)DAT_CurrentTribeID::instance < countof(this->tribes);
+            for (DAT_CurrentTribeID::instance = 1; DAT_CurrentTribeID::instance < countof(this->tribes);
                 ++DAT_CurrentTribeID::instance) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(Tribe), '\0', &this->tribes[DAT_CurrentTribeID::instance]);
