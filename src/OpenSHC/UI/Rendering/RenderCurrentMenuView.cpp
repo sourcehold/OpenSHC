@@ -52,8 +52,8 @@ namespace UI {
               move up in the menu linked list
              */
         }
-        DAT_MenuView_TriggerPrepare::instance = FALSE;
         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = FALSE;
+        DAT_MenuView_TriggerPrepare::instance = FALSE;
     }
 
 }

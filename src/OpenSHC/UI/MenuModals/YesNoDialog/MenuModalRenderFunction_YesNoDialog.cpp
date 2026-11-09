@@ -28,7 +28,7 @@ namespace UI {
         {
             int bannerTextIndex = -1;
             UI_MissionModeIntent::instance = FALSE;
-            switch (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter) {
+            switch ((int)DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter) {
             case -7:
                 bannerTextIndex = -DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
                 break;
