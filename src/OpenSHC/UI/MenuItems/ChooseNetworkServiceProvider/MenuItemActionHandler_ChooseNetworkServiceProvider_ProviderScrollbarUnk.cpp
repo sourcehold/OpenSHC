@@ -25,6 +25,7 @@ namespace UI {
                 *currentValue = DAT_GameSynchronyState::instance.scrollBarItemOffset;
                 return;
             case 5:
+                // Stores and returns here rather than through the shared store below, as the original does.
                 if (DAT_GameSynchronyState::instance.scrollBarItemOffset > 0) {
                     --DAT_GameSynchronyState::instance.scrollBarItemOffset;
                     *currentValue = DAT_GameSynchronyState::instance.scrollBarItemOffset;

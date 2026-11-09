@@ -25,6 +25,7 @@ namespace UI {
                 *maxValue = DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount;
                 return;
             case 5:
+                // Stores and returns here rather than through the shared store below, as the original does.
                 if (DAT_MapPropertiesState::instance.offset > 0) {
                     --DAT_MapPropertiesState::instance.offset;
                     *currentValue = DAT_MapPropertiesState::instance.offset;

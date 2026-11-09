@@ -29,6 +29,7 @@ namespace UI {
                 *maxValue = DAT_MapPropertiesState::instance.eventsCount - 20;
                 return;
             case 5:
+                // Stores and returns here rather than through the shared store below, as the original does.
                 if (DAT_MapPropertiesState::instance.eventListScrollOffset > 0) {
                     --DAT_MapPropertiesState::instance.eventListScrollOffset;
                     *currentValue = DAT_MapPropertiesState::instance.eventListScrollOffset;

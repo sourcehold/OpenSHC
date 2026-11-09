@@ -34,8 +34,6 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
                     OpenSHC::Text::TAIT_SEVEN__NUMERIC_ONLY);
                 break;
-            default:
-                break;
             }
         }
 
