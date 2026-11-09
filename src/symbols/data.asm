@@ -615,7 +615,7 @@ PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNM@@StructResolv
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A
+PUBLIC ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
@@ -633,7 +633,7 @@ PUBLIC ?instance@?$Extern@USoundEffectsHelperData1@Audio@OpenSHC@@$0NPDHPA@@Stru
 
 PUBLIC ?instance@?$Extern@USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@$0NPDIHI@@StructResolver@@2USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@PAUIDirectPlay4@dplay@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@dplay@@A
+PUBLIC ?instance@?$Extern@PAUIDirectPlay4@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0NPDNBM@@StructResolver@@2U_GUID@@A
 
@@ -2302,7 +2302,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33E0h
 
-?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A EQU 00DF33E8h
+?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A EQU 00DF33E8h
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33F0h
 
@@ -2320,7 +2320,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@$0NPDIHI@@StructResolver@@2USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@A EQU 00DF3878h
 
-?instance@?$Extern@PAUIDirectPlay4@dplay@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@dplay@@A EQU 00DF3D18h
+?instance@?$Extern@PAUIDirectPlay4@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@@A EQU 00DF3D18h
 
 ?instance@?$Extern@U_GUID@@$0NPDNBM@@StructResolver@@2U_GUID@@A EQU 00DF3D1Ch
 
