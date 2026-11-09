@@ -16,7 +16,7 @@ namespace Text {
         TAIT_ONE__FILTER_B = 1, // 0x00000001
         TAIT_TWO__FILTER_A = 2, // 0x00000002
         TAIT_THREE__FILTER_A = 3, // 0x00000003
-        TAIT_UNKNOWN_4 = 4, // 0x00000004
+        TAIT_UNKNOWN = 4, // 0x00000004
         TAIT_FIVE__NUMERIC_DOT = 5, // 0x00000005
         TAIT_SIX__NUMERIC_ONLY = 6, // 0x00000006
         TAIT_SEVEN__NUMERIC_ONLY = 7, // 0x00000007
@@ -25,6 +25,7 @@ namespace Text {
         TAIT_UNKNOWN_10 = 10, // 0x0000000A
         TAIT_UNKNOWN_11 = 11, // 0x0000000B
         TAIT_UNKNOWN_12 = 12, // 0x0000000C
+        TAIT_UNKNOWN_13 = 13, // 0x0000000D
         TAIT_UNKNOWN_14 = 14, // 0x0000000E
         TAIT_UNKNOWN_15 = 15 // 0x0000000F
 

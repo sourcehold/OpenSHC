@@ -97,10 +97,10 @@ namespace Map {
         int SEC_Section1054; // 0x00552928 length: 4
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
-        int forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
-        int forceUpdateTextureTilemap; // 0x00554870 length: 4
-        int forceUpdateGFXLayers; // 0x00554874 length: 4
-        int forceUpdateMacroLayerFlag; // 0x00554878 length: 4
+        BOOLEnum forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
+        BOOLEnum forceUpdateTextureTilemap; // 0x00554870 length: 4
+        BOOLEnum forceUpdateGFXLayers; // 0x00554874 length: 4
+        BOOLEnum forceUpdateMacroLayerFlag; // 0x00554878 length: 4
         undefined4 field_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
