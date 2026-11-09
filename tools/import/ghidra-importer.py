@@ -205,9 +205,11 @@ def typedefFunc(loc: str, name: str, prefix: str):
       return "/", "short", ""
     if name.endswith("Byte"):
       return "/", "byte", ""
-    if name.startswith("IDirectPlay4A"):
-      return "/", name.replace("IDirectPlay4A", "IDirectPlay4"), "struct "
-
+  if name.startswith("IDirectPlay4A"):
+    return "/", name.replace("IDirectPlay4A", "IDirectPlay4"), "struct "
+  if name.startswith("IDirectPlay4"):
+    return "/", name, "struct "
+    
   return loc, name, prefix
 
 all_addresses = list((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=True))
@@ -218,7 +220,8 @@ asm = exporter.export_symbols_as_assembly(data_addresses,
       typedefs={
         ('/OpenSHC/WindowsHelper/Enums', 'BOOLEnum'): ('/', 'int', ""),
         ('/winnt', 'LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
-        ('/OpenSHC/DirectPlay/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
+        ('/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
+        ('/dplay', 'IDirectPlay4'): ("/", "IDirectPlay4", "struct "),
       },
       typedef_func=typedefFunc)
 collection.add(asm)
