@@ -1,7 +1,5 @@
 #include "../MenuTextInputState.func.hpp"
 
-#include "OpenSHC/UI/Enums/MenuModalType.hpp"
-
 namespace OpenSHC {
 namespace UI {
 

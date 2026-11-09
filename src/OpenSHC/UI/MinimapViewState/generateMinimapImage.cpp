@@ -16,8 +16,7 @@ namespace UI {
         ushort palette[256];
         int colorCount = 0;
         byte* const colorIndices = (byte*)MACRO_CALL(OpenSHC::OS_Func::_malloc)(tileCount);
-        // the lowest bit of each channel (of RGB565's green, the two lowest) is cleared, so close colours share an
-        // entry
+        // the lowest bit of each channel (RGB565's green: the two lowest) is cleared, so close colours share an entry
         ushort colorMask;
         if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
             colorMask = (ushort) ~(1 << 11 | 3 << 5 | 1);
@@ -45,8 +44,8 @@ namespace UI {
         if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
             for (int i = 0; i < colorCount; ++i) {
                 int const color = palette[i];
-                // 0x7fe0, not ~0x1f (~0x1f: quick_diff 0.8636 -> 0.7458)
-                palette[i] = color >> 1 & 0x7fe0 | color & 0x1f;
+                // red and green shifted down, not ~0x1f (~0x1f: quick_diff 0.8636 -> 0.7458)
+                palette[i] = color >> 1 & (31 << 10 | 31 << 5) | color & 0x1f;
             }
         }
         memcpy(this->loadedMiniMap, palette, sizeof(palette));

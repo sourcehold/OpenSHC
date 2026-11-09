@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Audio::SFX::SoundEffectID;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F4C80
     void MenuHandlerState::startBuildMenuTransition(int transitionDuration)
     {
@@ -22,7 +20,8 @@ namespace UI {
         } else {
             this->buildMenuTransitionDirection_0x2c = -1;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)((SoundEffectID)103);
+        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+            OpenSHC::Audio::SFX::SEID_UNKNOWN_0x67);
     }
 
 }

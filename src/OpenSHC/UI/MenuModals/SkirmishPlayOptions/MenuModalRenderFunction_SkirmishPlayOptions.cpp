@@ -13,6 +13,7 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x004ABE80
             void MenuModalRenderFunction_SkirmishPlayOptions(int x, int y, int width, int height)
             {
+                // "Play Options"
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                     DAT_PencilRenderCore::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 103, x, y, width, height);
             }

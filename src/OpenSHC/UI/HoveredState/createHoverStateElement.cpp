@@ -1,6 +1,5 @@
 #include "../HoveredState.func.hpp"
 
-#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -8,8 +7,6 @@
 
 namespace OpenSHC {
 namespace UI {
-
-    using Commands::MappersEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00501110
     void HoveredState::createHoverStateElement(int x, int y, MappersEnum type, int size, int flag)

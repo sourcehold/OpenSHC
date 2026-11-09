@@ -23,7 +23,7 @@ namespace UI {
         void BuildMenu::MenuView_BuildMenu_DoInitial()
         {
             // the build menu sits at the bottom of the screen, at its left edge at 640x480
-            // y is set in each branch, not before the test (before the test: quick_diff 0.9992 -> 0.9984)
+            // y is set in each branch: one assignment before the test measures lower
             int y;
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_640x480) {
                 y = DAT_WindowAndDirectDraw::instance.resolutionY - 600;
@@ -124,6 +124,8 @@ namespace UI {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 }
+                // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1 is
+                // drawn without being loaded
                 if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                     DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                     // "edge_military_1280l.tgx"
@@ -449,11 +451,9 @@ namespace UI {
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 }
             } else {
-                // no picture for a hidden menu or tab 62 (BuildMenuTabType has no name for it)
-                if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_MENU_HIDDEN) {
-                    return;
-                }
-                if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == 62) {
+                // no picture for a hidden menu or tab 62
+                if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_MENU_HIDDEN
+                    || DAT_GameCore::instance.activeMenuTab.buildMenuTab == OpenSHC::UI::Enums::BMTT_UNKNOWN_62) {
                     return;
                 }
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
@@ -516,6 +516,8 @@ namespace UI {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     }
+                    // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1
+                    // is drawn without being loaded
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                         // "edge1280l.tgx"
@@ -783,6 +785,8 @@ namespace UI {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     }
+                    // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1
+                    // is drawn without being loaded
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                         // "edge1280l.tgx"

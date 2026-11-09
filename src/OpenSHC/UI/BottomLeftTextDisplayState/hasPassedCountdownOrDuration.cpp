@@ -17,13 +17,13 @@ namespace UI {
                 this->unknownCountdown01 = 1;
             }
         } else if (this->unknownCountdown01 != 0) {
-            this->unknownCountdown01--;
+            --this->unknownCountdown01;
         }
         DWORD const now = timeGetTime();
         DWORD const previousTime = DAT_TextRelatedTime::instance;
         DAT_TextRelatedTime::instance = now;
         if (previousTime != 0) {
-            this->countdown += previousTime - now;
+            this->countdown -= now - previousTime;
         }
     }
 
