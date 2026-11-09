@@ -13,8 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004AA440
         void OverlaySlider::MenuModalRenderFunction_OverlaySlider(int x, int y, int width, int height)
         {

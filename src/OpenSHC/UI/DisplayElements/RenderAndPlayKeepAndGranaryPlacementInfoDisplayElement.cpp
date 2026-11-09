@@ -19,8 +19,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004B1C30
     void DisplayElements::RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement(
         int posX, int posY, DWORD whichBuildingIsMissing)

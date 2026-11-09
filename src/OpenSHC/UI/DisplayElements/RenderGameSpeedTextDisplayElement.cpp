@@ -12,9 +12,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004B07C0
     void DisplayElements::RenderGameSpeedTextDisplayElement(int posX, int posY, DWORD elementState)
     {

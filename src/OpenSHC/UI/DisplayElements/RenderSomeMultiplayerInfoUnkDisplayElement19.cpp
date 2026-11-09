@@ -31,10 +31,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004AFE10
     void DisplayElements::RenderSomeMultiplayerInfoUnkDisplayElement19(int posX, int posY, DWORD elementState)
     {

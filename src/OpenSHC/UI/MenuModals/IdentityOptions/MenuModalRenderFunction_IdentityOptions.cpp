@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentlyRenderedSpriteID.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -34,12 +35,12 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 50),
-                xPos, y + 110, 165, 0xccfaff, 18, 0);
+                xPos, y + 110, 165, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, 0);
             // "Choose Portrait"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 51),
-                xPos, y + 210, 165, 0xccfaff, 18, 0);
+                xPos, y + 210, 165, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, 0);
             int spriteID = 100;
             DAT_CurrentlyRenderedSpriteID::instance = spriteID;
             if (DAT_GameCore::instance.selectedLordTypeUnk != 0) {

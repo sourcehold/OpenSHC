@@ -16,8 +16,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00433D00

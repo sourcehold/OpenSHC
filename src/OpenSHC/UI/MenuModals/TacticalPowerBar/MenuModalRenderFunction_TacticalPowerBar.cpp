@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/COL_VERY_SOFT_YELLOW.hpp"
@@ -39,7 +40,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_EXTREME_DEMO, 7),
-                    x - 200, y + 250, 195, 0xffffff, 0, 18, 0);
+                    x - 200, y + 250, 195, OpenSHC::Rendering::Colors::COL_FFFFFF, 0, 18, 0);
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 468, x - 27, y + 267);
             }

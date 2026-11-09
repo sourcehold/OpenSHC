@@ -12,9 +12,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004B0AC0
     void DisplayElements::RenderPeopleLeftToPlaceDisplayElement(int posX, int posY, DWORD elementState)
     {

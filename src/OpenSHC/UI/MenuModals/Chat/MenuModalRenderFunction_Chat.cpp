@@ -21,10 +21,7 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
         using OpenSHC::Text::TextArrayIndexType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABD20
         void Chat::MenuModalRenderFunction_Chat(int x, int y, int width, int height)

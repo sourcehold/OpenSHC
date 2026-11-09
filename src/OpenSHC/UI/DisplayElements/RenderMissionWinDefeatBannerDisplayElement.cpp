@@ -20,7 +20,7 @@ namespace UI {
     {
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
-            DAT_PencilRenderCore::ptr)(posX - 0xf0, posY - 19, 0x1e0, 72);
+            DAT_PencilRenderCore::ptr)(posX - 240, posY - 19, 480, 72);
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         // "Defeat"
         if (winDefeatState == 1) {

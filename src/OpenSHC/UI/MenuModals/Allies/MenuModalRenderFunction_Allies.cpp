@@ -17,10 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC6E0
         void Allies::MenuModalRenderFunction_Allies(int x, int y, int width, int height)
         {

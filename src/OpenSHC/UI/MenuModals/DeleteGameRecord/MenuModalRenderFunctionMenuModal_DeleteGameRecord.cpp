@@ -16,10 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9CC0
         void DeleteGameRecord::MenuModalRenderFunctionMenuModal_DeleteGameRecord(int x, int y, int width, int height)
         {
