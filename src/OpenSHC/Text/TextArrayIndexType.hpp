@@ -24,6 +24,7 @@ namespace Text {
         TAIT_UNKNOWN_10 = 10, // 0x0000000A
         TAIT_UNKNOWN_11 = 11, // 0x0000000B
         TAIT_UNKNOWN_12 = 12, // 0x0000000C
+        TAIT_UNKNOWN_13 = 13, // 0x0000000D
         TAIT_UNKNOWN_14 = 14, // 0x0000000E
         TAIT_UNKNOWN_15 = 15 // 0x0000000F
 
