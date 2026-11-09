@@ -40,8 +40,8 @@ namespace UI {
         {
             if ((DAT_GameCore::instance.activeMenuTab.buildMenuTab != OpenSHC::UI::Enums::BMTT_MENU_HIDDEN)
                 && (DAT_GameCore::instance.activeMenuTab.buildMenuTab
-                    != (OpenSHC::UI::Enums::BuildMenuTabTypeShort)0x3e)) {
-                if (DAT_MinimapViewState::instance.field3_0xc == 0) {
+                    != 62)) {
+                if (DAT_MinimapViewState::instance.field_0xc == 0) {
                     DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
                 }
                 if (DAT_MenuHandlerState::instance.isBuildMenuTransitioning_0x18 != FALSE) {

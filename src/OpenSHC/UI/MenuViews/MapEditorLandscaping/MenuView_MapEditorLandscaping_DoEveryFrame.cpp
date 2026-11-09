@@ -27,7 +27,7 @@ namespace UI {
                 || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)) {
                 return;
             }
-            if (!DAT_MinimapViewState::instance.field3_0xc) {
+            if (!DAT_MinimapViewState::instance.field_0xc) {
                 DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
             } else if (DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated != 2)
                 goto LAB_00431429;

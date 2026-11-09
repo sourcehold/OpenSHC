@@ -38,7 +38,7 @@ namespace UI {
             DAT_GameCore::instance.gameMode_2 = Game::GM_SKIRMISH_AND_MULTIPLAYER;
             DAT_GameCore::instance.currentTrailType = Game::TT_FIRST_EDITION;
             DAT_GameCore::instance.currentlyInGameUnk_0xa4 = FALSE;
-            DAT_GameSynchronyState::instance.field225_0x106ee4 = 0;
+            DAT_GameSynchronyState::instance.field_0x106ee4 = 0;
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                 DAT_TextureRenderCoreObject::ptr)("frontend_combat3.tgx");
