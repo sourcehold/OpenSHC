@@ -19,7 +19,7 @@ namespace UI {
         {
             int textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
             int iconIndex = -1;
-            // 148 shows 146\'s text, and both show the icon
+            // 148 shows 146's text, and both show the icon
             if (textNumInGroup == 148) {
                 textNumInGroup = 146;
             }

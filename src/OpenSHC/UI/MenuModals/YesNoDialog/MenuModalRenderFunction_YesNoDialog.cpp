@@ -26,7 +26,7 @@ namespace UI {
             case -7:
                 bannerTextIndex = -DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
                 break;
-            // the asking button\'s TEXT_GAME_OPTIONS text: 7 "Quit Mission", 9 "Exit Crusader", 44 "Restart Mission"
+            // the asking button's TEXT_GAME_OPTIONS text: 7 "Quit Mission", 9 "Exit Crusader", 44 "Restart Mission"
             case 7:
             case 9:
             case 30:

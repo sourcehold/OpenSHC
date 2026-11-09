@@ -34,10 +34,11 @@ namespace UI {
                 DAT_PencilRenderCore::ptr)(posX, posY, 120, 192);
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             int playerID = 1;
+            // an int* over the lag entries, set before yPosition and compared as int (jl), as the original does
             int* average = &DAT_GameSynchronyState::instance.connectionLagInfoArray[1].average2;
             int yPosition = posY + 18;
-            // an int* over the lag entries: an indexed for and a ConnectionLagInfo* walk both measure lower
-            while ((int)average < (int)&DAT_GameSynchronyState::instance.connectionLagInfoArray[9].average2) {
+            for (; (int)average < (int)&DAT_GameSynchronyState::instance.connectionLagInfoArray[9].average2;
+                average += 9) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                         playerID, posX + 24, yPosition, OpenSHC::Text::TTA_LEFT,
@@ -58,7 +59,6 @@ namespace UI {
                             0, 18, FALSE, 0);
                     }
                 }
-                average += 9;
                 ++playerID;
                 yPosition += 20;
             }
