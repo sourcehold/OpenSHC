@@ -155,8 +155,8 @@ namespace Map {
                 }
             }
             this->totalZones = (short)_areaID;
-            for (int _zone = 1; _zone < 1000; _zone = _zone + 1) {
-                this->sum = this->sum + this->zoneSizesArray[_zone];
+            for (int _zone = 1; _zone < countof(this->zoneSizesArray); _zone = _zone + 1) {
+                this->sum += this->zoneSizesArray[_zone];
             }
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
