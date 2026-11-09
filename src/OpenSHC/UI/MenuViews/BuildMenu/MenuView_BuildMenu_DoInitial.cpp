@@ -124,8 +124,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                         = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 }
-                // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1 is
-                // drawn without being loaded
+                // fixme: below, editor and siege games reset the list before the second load, so slot 1 is drawn stale
                 if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                     DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                     // "edge_military_1280l.tgx"
@@ -516,8 +515,6 @@ namespace UI {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     }
-                    // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1
-                    // is drawn without being loaded
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                         // "edge1280l.tgx"
@@ -785,8 +782,6 @@ namespace UI {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                     }
-                    // fixme: from 1280x1024 on, editor and siege games reset the list before the second load, so slot 1
-                    // is drawn without being loaded
                     if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
                         // "edge1280l.tgx"
