@@ -8,14 +8,10 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004948C0
         void LoadMap::MenuItemActionHandler_LoadMap_TableContent(int param_1, ...)
         {
-            DWORD DVar1;
-            DVar1 = timeGetTime();
+            DWORD DVar1 = timeGetTime();
             if ((int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + param_1
                 < (int)DAT_MenuTextInputState::instance.fileListEntryCount) {
                 DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex = param_1;

@@ -9,17 +9,13 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004B6530
         void InGameMenu::MenuItemActionHandler_InGameMenu_MapEventIconUnk(int param_1, ...)
         {
-            int iVar1;
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::focusOnCoordinate,
                 DAT_ViewportRenderState::ptr)(DAT_MinimapViewState::instance.spawnMomentX[0],
                 (int)((int)(DAT_MinimapViewState::instance.spawnMomentY[0])));
-            iVar1 = 1;
+            int iVar1 = 1;
             if (1 < (int)DAT_MinimapViewState::instance.spawnMomentCount) {
                 do {
                     DAT_MinimapViewState::instance.spawnMomentX[iVar1 - 1]
