@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"

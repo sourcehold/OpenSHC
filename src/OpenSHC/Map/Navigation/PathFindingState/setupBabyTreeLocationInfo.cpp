@@ -2,7 +2,9 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
 #include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
 
@@ -102,9 +104,10 @@ namespace Map {
                                         | LogicHelpers::L_MARSH | LogicHelpers::L_MOAT))
                                 == 0) {
                                 if (treeType == 1) {
-                                    if ((_logic2 & (L2_OASIS_GRASS|L2_THICK_SCRUB) /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) != 0)
+                                    if ((_logic2 & (LogicHelpers::L2_OASIS_GRASS | LogicHelpers::L2_THICK_SCRUB)) != 0)
                                         continue;
-                                } else if ((_logic2 & (L2_OASIS_GRASS|L2_THICK_SCRUB) /* fixme: no Logic2 enum for 0x10 | 0x80 yet */) == 0) {
+                                } else if ((_logic2 & (LogicHelpers::L2_OASIS_GRASS | LogicHelpers::L2_THICK_SCRUB))
+                                    == 0) {
                                     continue;
                                 }
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]

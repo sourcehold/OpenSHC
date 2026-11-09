@@ -1,7 +1,9 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -59,7 +61,7 @@ namespace Map {
                      */
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & L_SEA) != 0) {
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & LogicHelpers::L_SEA) != 0) {
                         DAT_TileMapState::instance.CertainPathLayer[_candidate] = this->searchQueue.currentDistance + 1;
                         DAT_TileMapState::instance.WalkLayer[_candidate] = this->searchGeneration;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]

@@ -6,6 +6,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"

@@ -3,6 +3,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -46,8 +47,7 @@ namespace Map {
                     int _cX = this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int _cY = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _unitID = DAT_TileMapState::instance.UnitLayer[_cTile];
-                    if (_unitID == unitID
-                        || (DAT_TileMapState::instance.OccupancyLayer[_cTile] == 0 && _unitID == 0)) {
+                    if (_unitID == unitID || (DAT_TileMapState::instance.OccupancyLayer[_cTile] == 0 && _unitID == 0)) {
                         this->ALG_ResultTile = _cTile;
                         this->ALG_ResultY = _cY;
                         this->ALG_ResultX = _cX;

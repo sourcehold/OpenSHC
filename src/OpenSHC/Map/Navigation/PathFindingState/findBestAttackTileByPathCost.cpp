@@ -3,6 +3,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -23,8 +24,7 @@ namespace Map {
             int _bestScore = 1000;
             dword _bestTile = 0;
             if (x > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]
-                    == 0) {
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
                 return _candidate;
             }
             this->calculations += 1;
@@ -38,8 +38,7 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = y;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]
                 = this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = this->searchGeneration;

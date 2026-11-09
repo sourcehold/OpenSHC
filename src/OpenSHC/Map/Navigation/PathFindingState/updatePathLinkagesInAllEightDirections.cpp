@@ -1,6 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/Navigation/Enums/PathFindingConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
