@@ -122,3 +122,4 @@ src/OpenSHC/UI/DisplayElements/GetIfDisplayElementStateNotZero.cpp
 src/OpenSHC/UI/DisplayElements/FindDisplayElementWithID.cpp
 src/OpenSHC/UI/HoveredState/clearHoveredState.cpp
 src/OpenSHC/UI/HoveredState/Constructor_HoveredState.cpp
+src/OpenSHC/UI/Rendering/RenderCurrentButtonOnScreenMenu.cpp
