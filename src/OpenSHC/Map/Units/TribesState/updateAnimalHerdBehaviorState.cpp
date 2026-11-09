@@ -11,7 +11,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523590
         void TribesState::updateAnimalHerdBehaviorState(int tribeID)
         {
-            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby) {
+            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby > 0) {
                 return;
             }
             int unitSelectionIndex = 0;
