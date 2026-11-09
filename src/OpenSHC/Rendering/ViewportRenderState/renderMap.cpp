@@ -1434,7 +1434,7 @@ namespace Rendering {
                                                 DAT_UnitsState::instance.units[unitID].drawX,
                                                 DAT_UnitsState::instance.units[unitID].drawY,
                                                 DAT_UnitsState::instance.units[unitID].drawWidth,
-                                                (int)((int)(DAT_UnitsState::instance.units[unitID].drawHeight1)),
+                                                DAT_UnitsState::instance.units[unitID].drawHeight1,
                                                 (byte*)((int)((DAT_GMImageOffsets::instance[iVar26]
                                                     + (int)
                                                         DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
@@ -1723,10 +1723,6 @@ namespace Rendering {
                                                 _yOffset_01 = 79;
                                                 iVar18 = 56;
                                                 break;
-                                            case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                                _yOffset_01 = 43;
-                                                iVar18 = 35;
-                                                break;
                                             case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
                                                 _yOffset_01 = 36;
                                                 iVar18 = 61;
@@ -1735,10 +1731,15 @@ namespace Rendering {
                                                 _yOffset_01 = -3;
                                                 iVar18 = 60;
                                                 break;
+                                            case OpenSHC::Map::Units::UT_S_MANGONEL:
+                                                _yOffset_01 = 43;
+                                                iVar18 = 35;
+                                                break;
                                             case OpenSHC::Map::Units::UT_S_BALLISTA:
                                             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                                                 iVar18 = 36;
                                                 _yOffset_01 = 19;
+                                                break;
                                             }
                                             iVar26 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
                                             iVar18 = (DAT_UnitsState::instance.units[unitID].someDrawYOffset - iVar18)
@@ -1760,10 +1761,6 @@ namespace Rendering {
                                                 _yOffset_01 = 79;
                                                 iVar18 = 56;
                                                 break;
-                                            case OpenSHC::Map::Units::UT_S_MANGONEL:
-                                                _yOffset_01 = 43;
-                                                iVar18 = 35;
-                                                break;
                                             case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
                                                 _yOffset_01 = 36;
                                                 iVar18 = 61;
@@ -1772,10 +1769,15 @@ namespace Rendering {
                                                 _yOffset_01 = -3;
                                                 iVar18 = 60;
                                                 break;
+                                            case OpenSHC::Map::Units::UT_S_MANGONEL:
+                                                _yOffset_01 = 43;
+                                                iVar18 = 35;
+                                                break;
                                             case OpenSHC::Map::Units::UT_S_BALLISTA:
                                             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                                                 iVar18 = 36;
                                                 _yOffset_01 = 19;
+                                                break;
                                             }
                                             iVar26 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 164;
                                             iVar18 = (DAT_UnitsState::instance.units[unitID].someDrawYOffset - iVar18)
