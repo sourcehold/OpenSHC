@@ -48,7 +48,7 @@ namespace Map {
                         DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                   .int_.yOffset;
-                        if ((short)DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
+                        if (DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
                             && abs((int)MACRO_CALL_MEMBER(
                                        TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(target)
                                    - height)
@@ -72,7 +72,7 @@ namespace Map {
                         DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                   .int_.yOffset;
-                        if ((short)DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
+                        if (DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
                             && abs((int)MACRO_CALL_MEMBER(
                                        TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(target)
                                    - height)

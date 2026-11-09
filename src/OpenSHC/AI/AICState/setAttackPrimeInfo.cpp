@@ -15,7 +15,7 @@ namespace AI {
     {
         int const tile = DAT_GameState::instance.playerDataArray[playerID].shortestDistanceTile;
         DAT_TroopValueState::instance.attackInfo.startZone = (char)DAT_TileMapState::instance.AIZoneLayer[tile];
-        DAT_TroopValueState::instance.attackInfo.startCon = (short)DAT_TileMapState::instance.PathConnectionLayer[tile];
+        DAT_TroopValueState::instance.attackInfo.startCon = DAT_TileMapState::instance.PathConnectionLayer[tile];
         DAT_TroopValueState::instance.attackInfo.zoneSize
             = DAT_PathFindingState::instance.zoneSizesArray[DAT_TroopValueState::instance.attackInfo.startCon];
         DAT_TroopValueState::instance.attackInfo.unknownOne_0x20f90 = 1;

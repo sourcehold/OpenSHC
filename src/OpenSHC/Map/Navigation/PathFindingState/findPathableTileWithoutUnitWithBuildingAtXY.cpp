@@ -80,7 +80,7 @@ namespace Map {
                                 == 0
                             && (_logic & LogicHelpers::L_TREE) == 0
                             // (short) because the original sign-extends this ushort layer
-                            && (short)DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
+                            && DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
                             /*
                               queue pathable tiles that aren't see nor tree
                              */

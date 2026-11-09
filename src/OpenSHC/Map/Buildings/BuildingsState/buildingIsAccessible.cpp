@@ -57,7 +57,7 @@ namespace Map {
                     blocked = 1;
                 }
                 if (campgroundArea != 0) {
-                    int const entryArea = (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile];
+                    int const entryArea = DAT_TileMapState::instance.PathConnectionLayer[entryTile];
                     if (entryArea != campgroundArea
                         && DAT_BuildingDefinedData::instance
                                 .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]

@@ -23,7 +23,7 @@ namespace AI {
     {
         int const attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         int const keepArea
-            = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
+            = DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID]
                     .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                     .tileEntry];
 

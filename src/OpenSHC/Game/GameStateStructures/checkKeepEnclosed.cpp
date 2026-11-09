@@ -62,7 +62,7 @@ namespace Game {
                 && DAT_GameState::instance.playerDataArray[otherPlayerID].lordKilledByPlayerID == 0
                 && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[otherPlayerID] != -1
                     || DAT_GameSynchronyState::instance.currentAIArray[otherPlayerID] != 0)
-                && keepArea == (short)DAT_TileMapState::instance.PathConnectionLayer[otherTile]) {
+                && keepArea == DAT_TileMapState::instance.PathConnectionLayer[otherTile]) {
                 return FALSE;
             }
         }

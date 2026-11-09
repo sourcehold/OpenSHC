@@ -15,10 +15,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5B00
         BOOLEnum PathFindingState::calculateCanReachUsingCachedAreaLogic(int tile1, int tile2)
         {
-            // the original sign-extends this layer (movsx word ptr), but the generated header
-            // declares it ushort, so the signed read has to be spelled out at every site
-            int const _area1 = (short)DAT_TileMapState::instance.PathConnectionLayer[tile1];
-            int _area2 = (short)DAT_TileMapState::instance.PathConnectionLayer[tile2];
+            int const _area1 = DAT_TileMapState::instance.PathConnectionLayer[tile1];
+            int _area2 = DAT_TileMapState::instance.PathConnectionLayer[tile2];
             if (_area1 == _area2) {
                 return TRUE;
             }

@@ -19,7 +19,7 @@ namespace Map {
         {
             int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[param_1];
             int const unitArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
             int const height = DAT_TileMapState::instance.HeightLayer[param_1];
             if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
                 != FALSE) {

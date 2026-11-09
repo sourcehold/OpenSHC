@@ -23,7 +23,7 @@ namespace Map {
                 return FALSE;
             }
             int const unitArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             int const size = this->buildings[buildingID].widthOrHeight;
             int const buildingHeight
                 = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
@@ -40,7 +40,7 @@ namespace Map {
                                      .translationMatrix[this->buildings[buildingID].y + this->DAT_TempYOffset]
                                      .addXgetTile
                     + this->buildings[buildingID].x + this->DAT_TempXOffset;
-                int const area = (short)DAT_TileMapState::instance.PathConnectionLayer[tile];
+                int const area = DAT_TileMapState::instance.PathConnectionLayer[tile];
                 int tileHeight = DAT_TileMapState::instance.HeightLayer[tile];
                 if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                     tileHeight += MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingHeightForBuildingID,
