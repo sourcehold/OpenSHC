@@ -15,13 +15,13 @@ namespace Map {
     namespace Navigation {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CB00
-        void PathFindingState::computeNextRallyPointDestination(int unitID, int xPos, int yPos)
+        void PathFindingState::computeNextRallyPointDestination(int unitID, uint xPos, uint yPos)
         {
             this->calculations += 1;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((uint)xPos <= MC_MAP_XY_LIMIT_MIN_1 && (uint)yPos <= MC_MAP_XY_LIMIT_MIN_1
+            if (xPos <= MC_MAP_XY_LIMIT_MIN_1 && yPos <= MC_MAP_XY_LIMIT_MIN_1
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPos * MC_MAP_XY_LIMIT + xPos] != 0) {
                 this->searchGeneration += 1;
                 if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {

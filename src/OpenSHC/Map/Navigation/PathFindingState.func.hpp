@@ -174,20 +174,20 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0049C690, &PathFindingState::computeTotalUnitsWithinDistance)
             computeTotalUnitsWithinDistance;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0049CB00,
-                &PathFindingState::computeNextRallyPointDestination)
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint), false,
+                Address::SHC_3BB0A8C1_0x0049CB00, &PathFindingState::computeNextRallyPointDestination)
             computeNextRallyPointDestination;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x0049CD60,
                 &PathFindingState::findDirectNeighbourWalkableTile)
             findDirectNeighbourWalkableTile;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0049CE40,
-                &PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY)
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint), false,
+                Address::SHC_3BB0A8C1_0x0049CE40, &PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY)
             findPathableTileWithoutUnitWithBuildingAtXY;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0049D0E0,
-                &PathFindingState::findFreeTileOnDefensiveStructure)
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint), false,
+                Address::SHC_3BB0A8C1_0x0049D0E0, &PathFindingState::findFreeTileOnDefensiveStructure)
             findFreeTileOnDefensiveStructure;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint, int), false,
