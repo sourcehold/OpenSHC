@@ -17,13 +17,13 @@ namespace UI {
         void TextureRenderCore::clearSomeMemory()
         {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x80, '\0', (void*)((int)(TGX_RepeatRunHandlers::instance)));
+                128, '\0', (void*)((int)(TGX_RepeatRunHandlers::instance)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x80, '\0', (void*)((int)(TGX_StreamRunHandlers::instance)));
+                128, '\0', (void*)((int)(TGX_StreamRunHandlers::instance)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x80, '\0', (void*)((int)(PTR_ARRAY_00c9a490::instance)));
+                128, '\0', (void*)((int)(PTR_ARRAY_00c9a490::instance)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x80, '\0', (void*)((int)(PTR_ARRAY_Unknown_UnitGMHeights::instance)));
+                128, '\0', (void*)((int)(PTR_ARRAY_Unknown_UnitGMHeights::instance)));
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 16896, '\0', (void*)((int)(DAT_BlendFilterArrays::instance)));
         }

@@ -11,9 +11,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::IO::Graphics::GmImageType;
         using OpenSHC::IO::Graphics::GmImageTypeInt;
-        using OpenSHC::Rendering::ColorMode;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00455930
         void TextureRenderCore::adaptGmColorsToRGB565IfRequired(int gmID, int imageIndex)

@@ -13,9 +13,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004937E0
         void OnlineVoteQuitGame::MenuModalRenderFunction_OnlineVoteQuitGame(int x, int y, int width, int height)
         {
@@ -23,14 +20,13 @@ namespace UI {
               added by script: "End this game?"
              */
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(0x4c, 0x3b, x, y, width, height);
-            int number
-                = 10 - (timeGetTime() - DAT_GameSynchronyState::instance.quitGameVoteRequestTime) / 1000;
+                DAT_PencilRenderCore::ptr)(76, 59, x, y, width, height);
+            int number = 10 - (timeGetTime() - DAT_GameSynchronyState::instance.quitGameVoteRequestTime) / 1000;
             if (number < 0) {
                 number = 0;
             }
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                number, x + 0x14, y + 0x7d, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 0x12, FALSE, 0);
+                number, x + 20, y + 125, OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 18, FALSE, 0);
         }
 
     }

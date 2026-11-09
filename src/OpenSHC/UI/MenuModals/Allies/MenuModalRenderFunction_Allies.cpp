@@ -16,7 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -35,7 +34,7 @@ namespace UI {
             DWORD _now = timeGetTime();
             if (500 < _now - DAT_Time_Allies1::instance) {
                 DAT_Time_Allies1::instance = _now;
-                DAT_00df42b0::instance = DAT_00df42b0::instance + 1;
+                ++DAT_00df42b0::instance;
                 if (1 < DAT_00df42b0::instance) {
                     DAT_00df42b0::instance = 0;
                 }
@@ -44,8 +43,8 @@ namespace UI {
             iVar5 = 0xf;
             BVar4 = 0xccfaff;
             TVar3 = OpenSHC::Text::TTA_LEFT;
-            iVar2 = y + 0x19;
-            xParam = x + 0x27;
+            iVar2 = y + 25;
+            xParam = x + 39;
             iVar6 = xParam;
             /*
               added by script: "Allies"
@@ -57,7 +56,7 @@ namespace UI {
             if (DAT_AlliesCount::instance < 1) {
                 iVar5 = 0;
                 BVar7 = FALSE;
-                iVar6 = 0x11;
+                iVar6 = 17;
                 BVar4 = 0xccfaff;
                 TVar3 = OpenSHC::Text::TTA_LEFT;
                 iVar2 = y + 100;
@@ -66,7 +65,7 @@ namespace UI {
                  */
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0x13),
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 19),
                     xParam, iVar2, TVar3, BVar4, iVar6, BVar7, iVar5);
             }
         }

@@ -12,14 +12,11 @@
 namespace OpenSHC {
 namespace UI {
 
-    using UI::Enums::MenuViewType;
-    using WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6210
     void Rendering::RenderCurrentMenuView()
     {
         MenuView* pMVar1;
-        for (pMVar1 = DAT_MenuViewStackTop::instance; pMVar1 != (MenuView*)0x0; pMVar1 = pMVar1->nextMenuViewPtr) {
+        for (pMVar1 = DAT_MenuViewStackTop::instance; pMVar1 != (MenuView*)0; pMVar1 = pMVar1->nextMenuViewPtr) {
             /*
               menu id
              */

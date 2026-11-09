@@ -17,12 +17,8 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eTextSections;
     using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::Text::TextAlignment;
-    using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-    using OpenSHC::UI::Enums::DisplayElementID;
-    using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     /*
@@ -39,11 +35,11 @@ namespace UI {
         int blendStrength;
         int _xParam;
         int _yParam;
-        if ((DAT_GameCore::instance.isTimeHalted == FALSE)
+        if ((!DAT_GameCore::instance.isTimeHalted)
             && (DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)) {
             _menuStateNotZero = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                 OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);
-            if ((_menuStateNotZero == FALSE)
+            if ((!_menuStateNotZero)
                 && ((DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU
                     || ((DAT_GameCore::instance.activeMenuTab.tabType
                             != OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
@@ -51,7 +47,7 @@ namespace UI {
                             != OpenSHC::UI::Enums::BASMTT_MERCENARYPOST)))))) {
                 blendStrength = 0;
                 _menuStateNotZero = FALSE;
-                fontSize = 0x12;
+                fontSize = 18;
                 color = 0;
                 alignment = OpenSHC::Text::TTA_LEFT;
                 _xParam = posX;
@@ -62,7 +58,7 @@ namespace UI {
                         OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_GameState::instance.mapAndTime.month),
                     _xParam, _yParam, alignment, color, fontSize, _menuStateNotZero, blendStrength);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    DAT_GameState::instance.mapAndTime.year, posX + 4, posY, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+                    DAT_GameState::instance.mapAndTime.year, posX + 4, posY, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE, 0);
             }
         }
     }

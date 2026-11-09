@@ -15,9 +15,7 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::GameLanguage;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -41,24 +39,24 @@ namespace UI {
                   added by script: "Delete Game Record?"
                  */
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(0xff, 0xd, x, y, width, height);
+                    DAT_PencilRenderCore::ptr)(0xff, 13, x, y, width, height);
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,
                 DAT_PencilRenderCore::ptr)(x, y, width, height);
             blendStrength = 0;
             keepOffsetX = FALSE;
-            fontSize = 0x11;
+            fontSize = 17;
             color = 0xc2f0eb;
             alignment = OpenSHC::Text::TTA_CENTER;
-            yParam = y + 0x1b;
+            yParam = y + 27;
             xParam = width / 2 + x;
             /*
               added by script: "Delete Game Record?"
              */
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKMASTERS, 0xd),
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKMASTERS, 13),
                 xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
         }
 

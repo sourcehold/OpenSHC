@@ -11,7 +11,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eTextSections;
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -32,7 +31,7 @@ namespace UI {
         int blendStrength;
         blendStrength = 0;
         keepOffsetX = FALSE;
-        fontSize = 0x11;
+        fontSize = 17;
         backgroundColor = 0;
         foregroundColor = 0xc2f0eb;
         alignment = OpenSHC::Text::TTA_CENTER;
@@ -43,12 +42,12 @@ namespace UI {
          */
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x2c),
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 44),
             xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
             2499 - DAT_UnitsState::instance.unitCount,
             DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + 6 + posX, posY, OpenSHC::Text::TTA_LEFT, 0xc2f0eb,
-            0, 0x11, FALSE, 0);
+            0, 17, FALSE, 0);
     }
 
 }

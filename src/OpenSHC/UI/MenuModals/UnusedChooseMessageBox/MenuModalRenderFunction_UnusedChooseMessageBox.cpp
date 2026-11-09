@@ -14,10 +14,10 @@ namespace UI {
             /*
               added by script: "Select Message"
              */
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(199, 0x28, x, y, width, height);
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                199, 40, x, y, width, height);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
-                x + 0x19, y + 100, x + 0x253, y + 0x172);
+                x + 25, y + 100, x + 595, y + 370);
         }
 
     }

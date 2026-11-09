@@ -8,8 +8,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Rendering::ColorMode;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0044C8F0
         void TextureRenderCore::transformGmColorTableFromRGB555To565IfRequired(int gmID)
         {
@@ -22,8 +20,8 @@ namespace UI {
                 do {
                     _color = *_colorTableRunPtr;
                     *_colorTableRunPtr = (_color & 0x1f) + ((_color & 0xfc00) + (_color & 0x3e0)) * 2;
-                    _colorTableRunPtr = _colorTableRunPtr + 1;
-                    _counter = _counter + -1;
+                    ++_colorTableRunPtr;
+                    --_counter;
                 } while (_counter);
             }
         }

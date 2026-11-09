@@ -13,18 +13,16 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
-        using DE::SHCDE::eGM;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC280
         void TriggerEventSlider::MenuModalRenderFunction_TriggerEventSlider(int x, int y, int width, int height)
         {
             int textNumInGroup;
             int iVar1 = -1;
-            if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 0x94) {
-                textNumInGroup = 0x92;
+            if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 == 148) {
+                textNumInGroup = 146;
             } else {
                 textNumInGroup = DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0;
-                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 != 0x92)
+                if (DAT_MapPropertiesState::instance.invasionEventContent.field_0xa0 != 146)
                     goto LAB_004ac2a6;
             }
             iVar1 = 2;
@@ -33,8 +31,8 @@ namespace UI {
                 199, textNumInGroup, x, y, width, height);
             if (iVar1 != -1) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_INTERFACE_ICONS2, iVar1 + 0x80,
-                    width / 2 + 8 + DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + x, y + 0x1a);
+                    DE::SHCDE::GM_INTERFACE_ICONS2, iVar1 + 128,
+                    width / 2 + 8 + DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + x, y + 26);
             }
         }
 
