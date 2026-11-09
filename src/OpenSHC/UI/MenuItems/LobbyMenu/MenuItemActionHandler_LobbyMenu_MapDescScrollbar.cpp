@@ -19,16 +19,16 @@ namespace UI {
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_ROUNDTABLE
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_BASIC_AI_LORD_SELECT
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
-                int iVar1 = 0;
+                int visibleHeight = 0;
                 if (!param_1) {
-                    iVar1 = 204;
+                    visibleHeight = 204;
                 } else if (param_1 == 1) {
-                    iVar1 = 110;
+                    visibleHeight = 110;
                 }
                 switch (param_2) {
                 case 1:
                     *minValue = -19;
-                    *maxValue = INT_00b95b74::instance - iVar1;
+                    *maxValue = INT_00b95b74::instance - visibleHeight;
                     *currentValue = 0;
                     return;
                 case 2:
@@ -37,11 +37,11 @@ namespace UI {
                     return;
                 case 4:
                     *minValue = -19;
-                    *maxValue = INT_00b95b74::instance - iVar1;
+                    *maxValue = INT_00b95b74::instance - visibleHeight;
                     *currentValue = DAT_00b960f4::instance;
                     return;
                 case 7:
-                    *currentValue = iVar1 - 14;
+                    *currentValue = visibleHeight - 14;
                 }
             }
         }

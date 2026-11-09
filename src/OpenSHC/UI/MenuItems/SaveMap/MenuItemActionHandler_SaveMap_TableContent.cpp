@@ -14,16 +14,16 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004932A0
         void SaveMap::MenuItemActionHandler_SaveMap_TableContent(int param_1, ...)
         {
-            char* pcVar1;
             if ((int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + param_1
                 < (int)DAT_MenuTextInputState::instance.fileListEntryCount) {
                 DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionIndex = param_1;
-                pcVar1 = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
-                    DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
-                        .DAT_ArrayOfMapIndices[DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                            + param_1 - 1]);
+                char* const mapName
+                    = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
+                        DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
+                            .DAT_ArrayOfMapIndices[DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
+                                + param_1 - 1]);
                 MACRO_CALL_MEMBER(
-                    OpenSHC::Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(pcVar1);
+                    OpenSHC::Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(mapName);
             }
         }
 

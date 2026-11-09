@@ -37,24 +37,10 @@ namespace UI {
                     DAT_GameCore::instance.U2_mapType_singleOrMulti = 1;
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         UI::Enums::MVT_NEW_MAP_MAPSIZE, 0);
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[0]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[0];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[1]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[1];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[2]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[2];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[3]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[3];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[4]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[4];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[5]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[5];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[6]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[6];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[7]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[7];
-                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[8]
-                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[8];
+                    for (int playerSlot = 0; playerSlot < 9; playerSlot++) {
+                        DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerSlot]
+                            = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[playerSlot];
+                    }
                     return;
                 case 7:
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

@@ -17,14 +17,14 @@ namespace UI {
         void InGameMenu::MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int param_1, ...)
         {
             if (DAT_VideoBikQueue::instance.mbr_0x928) {
-                dword dVar1 = DAT_VideoBikQueue::instance.mbr_0x928;
+                dword shieldIndex = DAT_VideoBikQueue::instance.mbr_0x928;
                 if ((int)DAT_VideoBikQueue::instance.mbr_0x928 < 0) {
-                    dVar1 = -DAT_VideoBikQueue::instance.mbr_0x928;
+                    shieldIndex = -DAT_VideoBikQueue::instance.mbr_0x928;
                 }
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2,
-                    (int)((int)(dVar1 + 469)), (int)((int)(DAT_ButtonX::instance)),
+                    (int)((int)(shieldIndex + 469)), (int)((int)(DAT_ButtonX::instance)),
                     (int)((int)(DAT_ButtonY::instance)));
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             }

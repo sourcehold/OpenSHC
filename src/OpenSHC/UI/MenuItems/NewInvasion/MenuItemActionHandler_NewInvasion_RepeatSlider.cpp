@@ -14,9 +14,6 @@ namespace UI {
             case 1:
                 *minValue = 0;
                 *maxValue = 120;
-                /*
-                  repeatMonths
-                 */
                 *currentValue
                     = DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                           .data.invasion.repeatMonths;

@@ -24,10 +24,8 @@ namespace UI {
         {
             if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
-                /*
-                  the original dispatches with a `sub eax, K; je` chain (0x427096),
-                  MSVC's sparse switch, and the `case 0xe` body sits first
-                 */
+                // the original dispatches with a `sub eax, K; je` chain (0x427096),
+                // MSVC's sparse switch, and the `case 0xe` body sits first
                 switch (param_1) {
                 case 14:
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

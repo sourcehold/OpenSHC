@@ -19,18 +19,17 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B65A0
         void InGameMenu::MenuItemRenderFunction_InGameMenu_KeepEnclosedSymbol(int param_1, ...)
         {
-            BOOLEnum BVar1;
-            BVar1 = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(
-                DAT_GameSynchronyState::instance.currentPlayerSlotID);
-            if (BVar1 != DAT_MiniMapDefinedData::instance.cachedKeepEnclosed) {
+            BOOLEnum const keepEnclosed = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed,
+                DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
+            if (keepEnclosed != DAT_MiniMapDefinedData::instance.cachedKeepEnclosed) {
                 DAT_GameCore::instance.countdown = 2;
             }
-            DAT_MiniMapDefinedData::instance.cachedKeepEnclosed = BVar1;
-            if (!BVar1) {
-                DAT_ButtonUnknownZero::instance = 1;
+            DAT_MiniMapDefinedData::instance.cachedKeepEnclosed = keepEnclosed;
+            if (!keepEnclosed) {
+                DAT_ButtonUnknownZero::instance = TRUE;
                 return;
             }
-            DAT_ButtonUnknownZero::instance = 0;
+            DAT_ButtonUnknownZero::instance = FALSE;
             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
         }

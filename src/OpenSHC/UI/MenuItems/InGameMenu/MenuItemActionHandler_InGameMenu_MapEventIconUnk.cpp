@@ -15,17 +15,13 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::focusOnCoordinate,
                 DAT_ViewportRenderState::ptr)(DAT_MinimapViewState::instance.spawnMomentX[0],
                 (int)((int)(DAT_MinimapViewState::instance.spawnMomentY[0])));
-            int iVar1 = 1;
-            if (1 < (int)DAT_MinimapViewState::instance.spawnMomentCount) {
-                do {
-                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 - 1]
-                        = DAT_MinimapViewState::instance.spawnMomentX[iVar1];
-                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 + 19]
-                        = DAT_MinimapViewState::instance.spawnMomentY[iVar1];
-                    DAT_MinimapViewState::instance.spawnMomentY[iVar1 + 19]
-                        = DAT_MinimapViewState::instance.spawnMoment[iVar1];
-                    ++iVar1;
-                } while (iVar1 < (int)DAT_MinimapViewState::instance.spawnMomentCount);
+            for (int eventIndex = 1; eventIndex < (int)DAT_MinimapViewState::instance.spawnMomentCount; ++eventIndex) {
+                DAT_MinimapViewState::instance.spawnMomentX[eventIndex - 1]
+                    = DAT_MinimapViewState::instance.spawnMomentX[eventIndex];
+                DAT_MinimapViewState::instance.spawnMomentX[eventIndex + 19]
+                    = DAT_MinimapViewState::instance.spawnMomentY[eventIndex];
+                DAT_MinimapViewState::instance.spawnMomentY[eventIndex + 19]
+                    = DAT_MinimapViewState::instance.spawnMoment[eventIndex];
             }
             --DAT_MinimapViewState::instance.spawnMomentCount;
         }

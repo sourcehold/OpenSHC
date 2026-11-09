@@ -29,7 +29,8 @@ namespace UI {
                     0);
                 MACRO_CALL_MEMBER(Text::TextEditorState_Func::setCustomHelpText, DAT_TextEditorState::ptr)(
                     DAT_GameCore::instance.temporaryTextBufferOfSize1000, 999);
-                MACRO_CALL(OS_Func::_memset)(DAT_GameCore::instance.temporaryTextBufferOfSize1000, 0, 1000);
+                MACRO_CALL(OS_Func::_memset)(DAT_GameCore::instance.temporaryTextBufferOfSize1000, 0,
+                    sizeof(DAT_GameCore::instance.temporaryTextBufferOfSize1000));
                 DAT_GameCore::instance.descriptionUseStringTable = 0;
             }
         }

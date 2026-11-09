@@ -24,24 +24,10 @@ namespace UI {
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty2;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_UNUSED_ECONOMIC_MISSION_SELECTUnk, 0);
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[0]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[0];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[1]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[1];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[2]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[2];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[3]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[3];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[4]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[4];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[5]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[5];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[6]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[6];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[7]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[7];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[8]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[8];
+                for (int i = 0; i < 9; i++) {
+                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
+                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
+                }
                 return;
             case 2:
                 DAT_GameCore::instance.missionNumber1to20 = 0;
@@ -59,24 +45,10 @@ namespace UI {
                 DAT_GameCore::instance.standaloneFilename[0] = '\0';
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SINGLEPLAYER_MAP_CHOICE, 0);
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[0]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[0];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[1]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[1];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[2]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[2];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[3]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[3];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[4]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[4];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[5]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[5];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[6]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[6];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[7]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[7];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[8]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[8];
+                for (int i = 0; i < 9; i++) {
+                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
+                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
+                }
                 return;
             case 3:
                 DAT_GameCore::instance.missionNumber1to20 = 0;
@@ -94,34 +66,16 @@ namespace UI {
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty_0;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SINGLEPLAYER_MAP_CHOICE, 0);
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[0]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[0];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[1]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[1];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[2]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[2];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[3]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[3];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[4]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[4];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[5]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[5];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[6]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[6];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[7]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[7];
-                DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[8]
-                    = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[8];
+                for (int i = 0; i < 9; i++) {
+                    DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
+                        = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
+                }
                 return;
             case 4:
-                goto switchD_00425c32_caseD_4;
+                return;
             case 5:
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);
-            switchD_00425c32_caseD_4:
-                return;
-            default:
-                break;
             }
         }
 

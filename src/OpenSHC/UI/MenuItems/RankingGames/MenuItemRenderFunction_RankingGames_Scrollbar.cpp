@@ -20,7 +20,7 @@ namespace UI {
         void RankingGames::MenuItemRenderFunction_RankingGames_Scrollbar(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
         {
-            DAT_ButtonUnknownZero::instance = 0;
+            DAT_ButtonUnknownZero::instance = FALSE;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonX::instance + 19),

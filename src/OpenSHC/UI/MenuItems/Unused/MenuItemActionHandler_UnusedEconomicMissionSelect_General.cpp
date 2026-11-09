@@ -21,28 +21,27 @@ namespace UI {
         {
             if ((DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
-                /*
-                  a chain of `sub`s with a `je` after each (0x426ee9) is MSVC's sparse
-                  switch, and the arm bodies are laid out default, 0x14, 0x12, 0xd
-                 */
+                // a chain of `sub`s with a `je` after each (0x426ee9) is MSVC's sparse
+                // switch, and the arm bodies are laid out default, 0x14, 0x12, 0xd
                 switch (param_1) {
                 default: {
                     BOOL_CurrentMenuClickState::instance = FALSE;
                     DAT_GameCore::instance.missionNumber1to20 = -param_1;
-                    DWORD DVar1 = timeGetTime();
+                    DWORD const clickTime = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             != DAT_MenuTextInputState::instance.lastClickedListIndex
-                        || 500 <= (int)(DVar1 - DAT_MenuTextInputState::instance.lastListClickTime)) {
+                        || 500 <= (int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime)) {
                         DAT_MenuTextInputState::instance.lastClickedListIndex
                             = DAT_GameCore::instance.missionNumber1to20;
-                        DAT_MenuTextInputState::instance.lastListClickTime = DVar1;
+                        DAT_MenuTextInputState::instance.lastListClickTime = clickTime;
                         return;
                     }
-                    goto LAB_00426f5c;
+                    // the original shares this tail with case 13; writing it out twice changes the code
+                    goto startSelectedMission;
                 }
                 case 20: {
                     ++DAT_GameState::instance.mapAndTime.difficulty;
-                    /* the original compares against 4 (`cmp eax, 4; jl`), not 3 */
+                    // the original compares against 4 (`cmp eax, 4; jl`), not 3
                     if (4 <= DAT_GameState::instance.mapAndTime.difficulty) {
                         DAT_GameState::instance.mapAndTime.difficulty = 0;
                     }
@@ -54,7 +53,7 @@ namespace UI {
                     return;
                 }
                 case 13:
-                LAB_00426f5c:
+                startSelectedMission:
                     --DAT_GameCore::instance.missionNumber1to20;
                     DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1;
                     DAT_GameCore::instance.field_0x74 = 1;
