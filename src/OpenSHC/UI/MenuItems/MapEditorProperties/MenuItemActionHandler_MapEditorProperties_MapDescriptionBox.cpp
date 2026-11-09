@@ -24,7 +24,7 @@ namespace UI {
             if (DAT_GameCore::instance.U2_mapType_singleOrMulti && DAT_GameCore::instance.mapLoadedForEditor
                 && DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU
                 && DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE
-                && (INT_00b95f68::instance = 1, !DAT_GameCore::instance.unknownAlwaysZero03)) {
+                && (INT_00b95f68::instance = 1, !DAT_GameCore::instance.showTextMessageInsteadOfEdit)) {
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
                 DAT_TextEditorState::instance.customTextMaxLength = 1000;
                 MACRO_CALL_MEMBER(Text::TextEditorState_Func::openMapDescriptionEditorDialog, DAT_TextEditorState::ptr)(

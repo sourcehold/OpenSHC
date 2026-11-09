@@ -52,7 +52,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
                     DAT_GameCore::instance.section1066 = 1;
-                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo = 0xe7;
+                    DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo.buildMenuTab = 231;
                     MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::loadMissionMapAndSetLord,
                         DAT_MapPropertiesState::ptr)(DAT_GameCore::instance.missionNumber1to20);
                     MACRO_CALL_MEMBER(

@@ -66,7 +66,7 @@ namespace UI {
                         ((SoundEffectID)0x100));
                     return;
                 }
-                DAT_TileMapState::instance.field178_0x5549ec = param_1;
+                DAT_TileMapState::instance.activeTacticalPower = param_1;
                 DAT_TileMapState::instance.shiftRelated0or3 = 5;
                 switch (param_1) {
                 case 2:

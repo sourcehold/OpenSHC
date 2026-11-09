@@ -31,10 +31,10 @@ namespace UI {
             BOOLEnum BVar1;
             BVar1 = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID);
-            if (BVar1 != DAT_MiniMapDefinedData::instance.field91_0x2bc) {
+            if (BVar1 != DAT_MiniMapDefinedData::instance.cachedKeepEnclosed) {
                 DAT_GameCore::instance.countdown = 2;
             }
-            DAT_MiniMapDefinedData::instance.field91_0x2bc = BVar1;
+            DAT_MiniMapDefinedData::instance.cachedKeepEnclosed = BVar1;
             if (BVar1 == FALSE) {
                 DAT_ButtonUnknownZero::instance = 1;
                 return;

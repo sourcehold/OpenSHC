@@ -2,7 +2,7 @@
 
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95b74.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
@@ -30,7 +30,7 @@ namespace UI {
                 switch (param_2) {
                 case 1:
                     *minValue = -0x13;
-                    *maxValue = DAT_00b95b74::instance - iVar1;
+                    *maxValue = INT_00b95b74::instance - iVar1;
                     *currentValue = 0;
                     return;
                 case 2:
@@ -39,7 +39,7 @@ namespace UI {
                     return;
                 case 4:
                     *minValue = -0x13;
-                    *maxValue = DAT_00b95b74::instance - iVar1;
+                    *maxValue = INT_00b95b74::instance - iVar1;
                     *currentValue = DAT_00b960f4::instance;
                     return;
                 case 7:
