@@ -24,7 +24,7 @@ namespace Map {
                 return;
             }
             UnitTypeShort _unitType = this->units[unitID].unitType;
-            this->units[unitID].orientation = (short)DAT_DirectionAlgorithmState::instance.orientation;
+            this->units[unitID].orientation = DAT_DirectionAlgorithmState::instance.orientation;
             if (_unitType != OpenSHC::Map::Units::UT_E_KNIGHT) {
                 return;
             }

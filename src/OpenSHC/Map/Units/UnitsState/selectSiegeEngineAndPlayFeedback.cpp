@@ -25,7 +25,7 @@ namespace Map {
                 unitID, DAT_UnitsState::instance.units[unitID].tribeID);
             this->units[unitID].isSelected = 1;
             this->units[unitID].selectionRelatedFlag = 1;
-            this->units[unitID].ifSelectedThenPlayerID = (short)playerID;
+            this->units[unitID].ifSelectedThenPlayerID = playerID;
             this->unitCountOfSelection[playerID] = this->unitCountOfSelection[playerID] + 1;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribeAndUpdateTribeMovementSpeed,
                 DAT_TribesState::ptr)(playerID, unitID, tribeID);
@@ -48,16 +48,16 @@ namespace Map {
                                 == 0
                             || _remainingEngineers > 3) {
                             MACRO_CALL_MEMBER(
-                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xe);
+                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(14);
                         } else if (_remainingEngineers == 1) {
                             MACRO_CALL_MEMBER(
-                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xb);
+                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(11);
                         } else if (_remainingEngineers == 2) {
                             MACRO_CALL_MEMBER(
-                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xc);
+                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(12);
                         } else if (_remainingEngineers == 3) {
                             MACRO_CALL_MEMBER(
-                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0xd);
+                                OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(13);
                         }
                     } else if ((_unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                                    || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)

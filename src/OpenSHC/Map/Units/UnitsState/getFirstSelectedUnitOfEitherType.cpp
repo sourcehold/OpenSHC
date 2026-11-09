@@ -27,10 +27,10 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
                     return 0;
                 }
-                if ((short)this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType_1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType_1) {
                     return DAT_CurrentUnitSlotID::instance;
                 }
-                if ((short)this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType_2) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType_2) {
                     return DAT_CurrentUnitSlotID::instance;
                 }
             }
