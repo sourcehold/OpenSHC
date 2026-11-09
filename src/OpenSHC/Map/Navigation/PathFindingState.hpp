@@ -136,7 +136,7 @@ namespace Map {
 
             uint commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3);
 
-            BOOLEnum updateSeparateAreaTileMap(int forceUpdate);
+            BOOLEnum updateSeparateAreaTileMap(BOOLEnum forceUpdate);
 
             BOOLEnum updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile);
 
