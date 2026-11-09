@@ -18,9 +18,9 @@ namespace UI {
             for (int eventIndex = 1; eventIndex < (int)DAT_MinimapViewState::instance.spawnMomentCount; ++eventIndex) {
                 DAT_MinimapViewState::instance.spawnMomentX[eventIndex - 1]
                     = DAT_MinimapViewState::instance.spawnMomentX[eventIndex];
-                DAT_MinimapViewState::instance.spawnMomentX[eventIndex + 19]
+                DAT_MinimapViewState::instance.spawnMomentY[eventIndex - 1]
                     = DAT_MinimapViewState::instance.spawnMomentY[eventIndex];
-                DAT_MinimapViewState::instance.spawnMomentY[eventIndex + 19]
+                DAT_MinimapViewState::instance.spawnMoment[eventIndex - 1]
                     = DAT_MinimapViewState::instance.spawnMoment[eventIndex];
             }
             --DAT_MinimapViewState::instance.spawnMomentCount;
