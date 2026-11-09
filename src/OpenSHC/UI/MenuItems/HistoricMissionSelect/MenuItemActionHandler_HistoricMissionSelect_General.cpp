@@ -37,6 +37,7 @@ namespace UI {
                         DAT_MenuTextInputState::instance.lastListClickTime = clickTime;
                         return;
                     }
+                    // the original shares this tail with the case below; writing it out twice changes the code
                     goto startMission;
                 }
                 case 20: {

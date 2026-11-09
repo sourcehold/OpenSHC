@@ -22,7 +22,7 @@ namespace UI {
                 DAT_GameCore::instance.historicCampaignNumber = 1;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_HISTORIC_MISSION_SELECT, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
@@ -34,7 +34,7 @@ namespace UI {
                 DAT_GameCore::instance.historicCampaignNumber = 2;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_HISTORIC_MISSION_SELECT, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
@@ -46,7 +46,7 @@ namespace UI {
                 DAT_GameCore::instance.historicCampaignNumber = 3;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_HISTORIC_MISSION_SELECT, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
@@ -58,7 +58,7 @@ namespace UI {
                 DAT_GameCore::instance.historicCampaignNumber = 4;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_HISTORIC_MISSION_SELECT, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }

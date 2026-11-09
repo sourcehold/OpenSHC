@@ -24,7 +24,7 @@ namespace UI {
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty2;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_UNUSED_ECONOMIC_MISSION_SELECTUnk, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
@@ -45,7 +45,7 @@ namespace UI {
                 DAT_GameCore::instance.standaloneFilename[0] = '\0';
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SINGLEPLAYER_MAP_CHOICE, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }
@@ -66,7 +66,7 @@ namespace UI {
                 DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty_0;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_SINGLEPLAYER_MAP_CHOICE, 0);
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++i) {
                     DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
                         = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
                 }

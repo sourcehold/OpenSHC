@@ -37,7 +37,8 @@ namespace UI {
                     DAT_GameCore::instance.U2_mapType_singleOrMulti = 1;
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         UI::Enums::MVT_NEW_MAP_MAPSIZE, 0);
-                    for (int playerSlot = 0; playerSlot < 9; playerSlot++) {
+                    for (int playerSlot = 0;
+                        playerSlot < countof(DAT_BlendingDefinedData::instance.PlayerSlotUnitColor); ++playerSlot) {
                         DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerSlot]
                             = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[playerSlot];
                     }
