@@ -12,9 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::UI::Enums::MenuViewType;
-
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */

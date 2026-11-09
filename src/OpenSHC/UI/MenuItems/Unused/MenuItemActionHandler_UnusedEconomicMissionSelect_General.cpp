@@ -16,11 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Game::GameMode2;
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::UI::Enums::MenuViewType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00426ED0
         void Unused::MenuItemActionHandler_UnusedEconomicMissionSelect_General(int param_1, ...)
         {
@@ -45,22 +40,22 @@ namespace UI {
                     }
                     goto LAB_00426f5c;
                 }
-                case 0x14: {
-                    DAT_GameState::instance.mapAndTime.difficulty = DAT_GameState::instance.mapAndTime.difficulty + 1;
+                case 20: {
+                    ++DAT_GameState::instance.mapAndTime.difficulty;
                     /* the original compares against 4 (`cmp eax, 4; jl`), not 3 */
                     if (4 <= DAT_GameState::instance.mapAndTime.difficulty) {
                         DAT_GameState::instance.mapAndTime.difficulty = 0;
                     }
                     return;
                 }
-                case 0x12: {
+                case 18: {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_MAIN_MENU, 0);
                     return;
                 }
-                case 0xd:
+                case 13:
                 LAB_00426f5c:
-                    DAT_GameCore::instance.missionNumber1to20 = DAT_GameCore::instance.missionNumber1to20 + -1;
+                    --DAT_GameCore::instance.missionNumber1to20;
                     DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1;
                     DAT_GameCore::instance.field_0x74 = 1;
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::incrementMission, DAT_GameCore::ptr)();

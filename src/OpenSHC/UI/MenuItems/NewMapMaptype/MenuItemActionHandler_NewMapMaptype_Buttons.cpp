@@ -16,10 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Map::MapType2;
-        using UI::Enums::MenuModalType;
-        using UI::Enums::MenuViewType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042F2B0
         void NewMapMaptype::MenuItemActionHandler_NewMapMaptype_Buttons(int param_1, ...)
         {

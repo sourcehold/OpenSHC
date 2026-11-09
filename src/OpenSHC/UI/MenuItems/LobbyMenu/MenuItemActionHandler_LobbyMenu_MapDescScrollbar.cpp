@@ -2,16 +2,14 @@
 
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
-#include "OpenSHC/Globals/INT_00b95b74.hpp"
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_00b960f4.hpp"
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
+#include "OpenSHC/Globals/INT_00b95b74.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
-
-        using UI::Enums::MenuModalType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00428980
         void LobbyMenu::MenuItemActionHandler_LobbyMenu_MapDescScrollbar(
@@ -23,13 +21,13 @@ namespace UI {
                 && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
                 int iVar1 = 0;
                 if (!param_1) {
-                    iVar1 = 0xcc;
+                    iVar1 = 204;
                 } else if (param_1 == 1) {
-                    iVar1 = 0x6e;
+                    iVar1 = 110;
                 }
                 switch (param_2) {
                 case 1:
-                    *minValue = -0x13;
+                    *minValue = -19;
                     *maxValue = INT_00b95b74::instance - iVar1;
                     *currentValue = 0;
                     return;
@@ -38,12 +36,12 @@ namespace UI {
                     DAT_00b960f4::instance = *currentValue;
                     return;
                 case 4:
-                    *minValue = -0x13;
+                    *minValue = -19;
                     *maxValue = INT_00b95b74::instance - iVar1;
                     *currentValue = DAT_00b960f4::instance;
                     return;
                 case 7:
-                    *currentValue = iVar1 + -0xe;
+                    *currentValue = iVar1 - 14;
                 }
             }
         }

@@ -17,11 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Game::GameMode2;
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::UI::Enums::MenuViewType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00426B80
         void HistoricMissionSelect::MenuItemActionHandler_HistoricMissionSelect_General(int param_1, ...)
         {
@@ -34,7 +29,7 @@ namespace UI {
                 switch (param_1) {
                 default: {
                     BOOL_CurrentMenuClickState::instance = FALSE;
-                    DAT_GameCore::instance.missionNumber1to20 = (DAT_00b96100::instance - param_1) + -1;
+                    DAT_GameCore::instance.missionNumber1to20 = (DAT_00b96100::instance - param_1) - 1;
                     DWORD DVar1 = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             != DAT_MenuTextInputState::instance.lastClickedListIndex
@@ -46,22 +41,22 @@ namespace UI {
                     }
                     goto LAB_00426c1c;
                 }
-                case 0x14: {
-                    DAT_GameState::instance.mapAndTime.difficulty = DAT_GameState::instance.mapAndTime.difficulty + 1;
+                case 20: {
+                    ++DAT_GameState::instance.mapAndTime.difficulty;
                     /* the original compares against 4 (`cmp eax, 4; jl`), not 3 */
                     if (4 <= DAT_GameState::instance.mapAndTime.difficulty) {
                         DAT_GameState::instance.mapAndTime.difficulty = 0;
                     }
                     return;
                 }
-                case 0x12: {
+                case 18: {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_HISTORIC_CAMPAIGN_SELECT, 0);
                     return;
                 }
-                case 0xd:
+                case 13:
                 LAB_00426c1c:
-                    DAT_GameCore::instance.missionNumber1to20 = DAT_GameCore::instance.missionNumber1to20 + -1;
+                    --DAT_GameCore::instance.missionNumber1to20;
                     DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_CAMPAIGN_MISSION;
                     DAT_GameCore::instance.field_0x74 = 1;
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::incrementMissionProgress, DAT_GameCore::ptr)();

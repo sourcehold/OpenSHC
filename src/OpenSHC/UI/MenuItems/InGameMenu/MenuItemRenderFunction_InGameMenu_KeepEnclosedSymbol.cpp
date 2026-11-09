@@ -35,7 +35,7 @@ namespace UI {
                 DAT_GameCore::instance.countdown = 2;
             }
             DAT_MiniMapDefinedData::instance.cachedKeepEnclosed = BVar1;
-            if (BVar1 == FALSE) {
+            if (!BVar1) {
                 DAT_ButtonUnknownZero::instance = 1;
                 return;
             }

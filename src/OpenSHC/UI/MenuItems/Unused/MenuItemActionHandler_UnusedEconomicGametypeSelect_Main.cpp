@@ -15,9 +15,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using Game::GameMode2;
-        using UI::Enums::MenuViewType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00425C20
         void Unused::MenuItemActionHandler_UnusedEconomicGametypeSelect_Main(int param_1, ...)
         {

@@ -12,10 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
          */
@@ -39,7 +35,7 @@ namespace UI {
                 == OpenSHC::UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
                 return;
             }
-            if (DAT_GameSynchronyState::instance.isHost == FALSE) {
+            if (!DAT_GameSynchronyState::instance.isHost) {
                 return;
             }
             if ((int)DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1

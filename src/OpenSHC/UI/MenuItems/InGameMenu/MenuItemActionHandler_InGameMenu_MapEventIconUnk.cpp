@@ -22,16 +22,16 @@ namespace UI {
             iVar1 = 1;
             if (1 < (int)DAT_MinimapViewState::instance.spawnMomentCount) {
                 do {
-                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 + -1]
+                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 - 1]
                         = DAT_MinimapViewState::instance.spawnMomentX[iVar1];
-                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 + 0x13]
+                    DAT_MinimapViewState::instance.spawnMomentX[iVar1 + 19]
                         = DAT_MinimapViewState::instance.spawnMomentY[iVar1];
-                    DAT_MinimapViewState::instance.spawnMomentY[iVar1 + 0x13]
+                    DAT_MinimapViewState::instance.spawnMomentY[iVar1 + 19]
                         = DAT_MinimapViewState::instance.spawnMoment[iVar1];
-                    iVar1 = iVar1 + 1;
+                    ++iVar1;
                 } while (iVar1 < (int)DAT_MinimapViewState::instance.spawnMomentCount);
             }
-            DAT_MinimapViewState::instance.spawnMomentCount = DAT_MinimapViewState::instance.spawnMomentCount + -1;
+            --DAT_MinimapViewState::instance.spawnMomentCount;
         }
 
     }

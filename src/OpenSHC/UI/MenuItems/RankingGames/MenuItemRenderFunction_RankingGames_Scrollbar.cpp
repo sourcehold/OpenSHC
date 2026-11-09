@@ -16,8 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9C10
         void RankingGames::MenuItemRenderFunction_RankingGames_Scrollbar(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
@@ -25,13 +23,13 @@ namespace UI {
             DAT_ButtonUnknownZero::instance = 0;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonX::instance + 0x13),
-                (int)(DAT_ButtonY::instance + DAT_ButtonH::instance + -1), (ushort)(COL_BLACK::instance.shortValue));
+                DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonX::instance + 19),
+                (int)(DAT_ButtonY::instance + DAT_ButtonH::instance - 1), (ushort)(COL_BLACK::instance.shortValue));
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
                 DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonH::instance), thumbYPos, isDragged,
                 thumbHeight, 0);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance - 1, (int)(DAT_ButtonY::instance + -1), (int)(DAT_ButtonX::instance + 0x14),
+                DAT_ButtonX::instance - 1, (int)(DAT_ButtonY::instance - 1), (int)(DAT_ButtonX::instance + 20),
                 (int)(DAT_ButtonY::instance + DAT_ButtonH::instance),
                 (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
         }

@@ -16,8 +16,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using UI::Enums::MenuModalType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042EDF0
         void MapEditorProperties::MenuItemActionHandler_MapEditorProperties_MapDescriptionBox()
         {

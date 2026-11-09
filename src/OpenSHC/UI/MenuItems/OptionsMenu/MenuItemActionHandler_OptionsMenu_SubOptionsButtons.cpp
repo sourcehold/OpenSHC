@@ -17,8 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::UI::Enums::MenuModalType;
-
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
@@ -26,7 +24,7 @@ namespace UI {
         void OptionsMenu::MenuItemActionHandler_OptionsMenu_SubOptionsButtons(int param_1, ...)
         {
             switch (param_1) {
-            case 0x19:
+            case 25:
                 DAT_MenuTextInputState::instance.pendingGameSpeedLevel = DAT_GameCore::instance.gameSpeedLevel;
                 DAT_MenuTextInputState::instance.pendingSettingBubbleHelp = DAT_GameCore::instance.settingBubbleHelp;
                 DAT_MenuTextInputState::instance.pendingUnusedOption1 = DAT_GameCore::instance.unusedOption1;
@@ -54,7 +52,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_SOUND_OPTIONS);
                 return;
-            case 0x2d:
+            case 45:
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
                     0);
@@ -63,12 +61,12 @@ namespace UI {
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_IDENTITY_OPTIONS);
-                    break;
+                break;
             case 6:
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_NETWORK_OPTIONS);
                 return;
-            case 0x11:
+            case 17:
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
                 return;
             }

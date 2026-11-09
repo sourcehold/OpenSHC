@@ -20,8 +20,6 @@ namespace UI {
     namespace MenuItems {
 
         using OpenSHC::Audio::SFX::SoundEffectID;
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::Game::GameMode;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -46,7 +44,7 @@ namespace UI {
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .tacticalPowersBarLevel,
                     MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)(),
-                    iVar1 >= (param_1 + 1) * 0x27c
+                    iVar1 >= (param_1 + 1) * 636
                         && (DAT_GameState::instance
                                 .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                 .lordKilledByPlayerID
@@ -63,7 +61,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_ACTIVATE_TACTICAL_POWERS);
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                        ((SoundEffectID)0x100));
+                        ((SoundEffectID)256));
                     return;
                 }
                 DAT_TileMapState::instance.activeTacticalPower = param_1;
@@ -73,10 +71,10 @@ namespace UI {
                 case 3:
                 case 4:
                 case 6:
-                case 0xd:
-                case 0x10:
+                case 13:
+                case 16:
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                        ((SoundEffectID)0x104));
+                        ((SoundEffectID)260));
                     return;
                 case 1:
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
@@ -84,7 +82,7 @@ namespace UI {
                     return;
                 case 7:
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                        ((SoundEffectID)0x105));
+                        ((SoundEffectID)261));
                 }
             }
         }

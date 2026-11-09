@@ -19,11 +19,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::UI::Enums::MenuViewType;
-
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
          */
@@ -43,11 +38,11 @@ namespace UI {
                   MSVC's sparse switch, and the `case 0xe` body sits first
                  */
                 switch (param_1) {
-                case 0xe:
+                case 14:
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_MAIN_MENU, 0);
                     break;
-                case 0xd:
+                case 13:
                     DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = OpenSHC::UI::Enums::BASMTT_HUNTERSHUT;
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);

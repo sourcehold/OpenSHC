@@ -22,7 +22,6 @@ namespace UI {
 
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0042DF40
         void Unused::MenuItemRenderFunction_UnusedOldTitleMenu_TestMapButton(int param_1, ...)
@@ -31,7 +30,7 @@ namespace UI {
               the original jumps out of line on `== FALSE`, so the interacting
               arm is the one the source wrote first
              */
-            if (DAT_ButtonCurrentlyInteracting::instance != FALSE) {
+            if (DAT_ButtonCurrentlyInteracting::instance) {
                 DAT_TextManagerObject::instance.textColor = 0xff;
                 DAT_PencilRenderCore::instance.otherColorUnk_0x0 = COL_BLACK::instance.shortValue;
             } else {
@@ -45,7 +44,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 "Test map", (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 6),
                 (TextAlignment)((int)(DAT_ButtonW::instance)),
-                (BGR24)((int)(DAT_TextManagerObject::instance.textColor)), 0x11, FALSE, 0);
+                (BGR24)((int)(DAT_TextManagerObject::instance.textColor)), 17, FALSE, 0);
         }
 
     }

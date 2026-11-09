@@ -13,8 +13,8 @@ namespace UI {
             switch (param_2) {
             case 1:
                 *minValue = 0;
-                *maxValue
-                    = DAT_MenuTextInputState::instance.fileListEntryCount - DAT_MenuTextInputState::instance.fileListVisibleRowCount;
+                *maxValue = DAT_MenuTextInputState::instance.fileListEntryCount
+                    - DAT_MenuTextInputState::instance.fileListVisibleRowCount;
                 *currentValue = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 return;
             case 2:
@@ -25,19 +25,20 @@ namespace UI {
                 *currentValue = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                 return;
             case 7:
-                *currentValue = DAT_MenuTextInputState::instance.fileListVisibleRowCount + -1;
+                *currentValue = DAT_MenuTextInputState::instance.fileListVisibleRowCount - 1;
                 return;
             case 5:
                 if (0 < (int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset) {
                     DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                        = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + -1;
+                        = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset - 1;
                     *currentValue = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset;
                     return;
                 }
                 break;
             case 6:
                 if ((int)DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                    < (int)DAT_MenuTextInputState::instance.fileListEntryCount - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
+                    < (int)DAT_MenuTextInputState::instance.fileListEntryCount
+                        - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
                     DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
                         = DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset + 1;
                 }

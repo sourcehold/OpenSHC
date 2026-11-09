@@ -17,9 +17,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::UI::Enums::MenuModalType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042EF80
         void MapEditorProperties::MenuItemRenderFunction_MapEditorProperties_MapDescriptionScrollbar(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)

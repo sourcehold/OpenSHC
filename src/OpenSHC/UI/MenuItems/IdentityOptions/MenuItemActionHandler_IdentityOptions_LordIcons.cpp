@@ -9,24 +9,24 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00491CE0
         void IdentityOptions::MenuItemActionHandler_IdentityOptions_LordIcons(int param_1, ...)
         {
-            if (param_1 == 0x15) {
+            if (param_1 == 21) {
                 DAT_GameCore::instance.selectedLordTypeUnk = 0;
-                if (DAT_GameCore::instance.lordIconUnk < 0x14) {
+                if (DAT_GameCore::instance.lordIconUnk < 20) {
                     DAT_GameCore::instance.lordIconUnk = 2;
                 }
-            } else if (param_1 == 0x16) {
+            } else if (param_1 == 22) {
                 DAT_GameCore::instance.selectedLordTypeUnk = 1;
-                if (DAT_GameCore::instance.lordIconUnk < 0x14) {
+                if (DAT_GameCore::instance.lordIconUnk < 20) {
                     DAT_GameCore::instance.lordIconUnk = 3;
                 }
-            } else if (param_1 == 0x28) {
-                DAT_GameCore::instance.lordIconUnk = DAT_GameCore::instance.lordIconUnk + -1;
+            } else if (param_1 == 40) {
+                --DAT_GameCore::instance.lordIconUnk;
                 if (DAT_GameCore::instance.lordIconUnk < 2) {
                     DAT_GameCore::instance.lordIconUnk = 21;
                 }
-            } else if ((param_1 == 0x29)
+            } else if ((param_1 == 41)
                 && (DAT_GameCore::instance.lordIconUnk = DAT_GameCore::instance.lordIconUnk + 1,
-                    0x15 < DAT_GameCore::instance.lordIconUnk)) {
+                    21 < DAT_GameCore::instance.lordIconUnk)) {
                 DAT_GameCore::instance.lordIconUnk = 2;
             }
         }

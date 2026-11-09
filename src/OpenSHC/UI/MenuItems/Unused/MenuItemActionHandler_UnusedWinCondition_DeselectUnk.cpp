@@ -12,9 +12,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        using OpenSHC::UI::Enums::MenuModalType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004B1000
         void Unused::MenuItemActionHandler_UnusedWinCondition_DeselectUnk(int param_1, ...)
         {

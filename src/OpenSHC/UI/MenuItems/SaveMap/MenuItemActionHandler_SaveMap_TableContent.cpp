@@ -24,7 +24,7 @@ namespace UI {
                 pcVar1 = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                     DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
                         .DAT_ArrayOfMapIndices[DAT_MenuTextInputState::instance.menuLoadGameRelativeSelectionOffset
-                            + param_1 + -1]);
+                            + param_1 - 1]);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(pcVar1);
             }
