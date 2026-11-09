@@ -4,10 +4,9 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_HighlightedSkirmishType.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
@@ -19,20 +18,9 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
-        using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0042BBF0
         void SelectCrusade::MenuView_SelectCrusade_DoEveryFrame()
         {
-            int iVar1;
-            int iVar3;
-            TextAlignment TVar4;
-            BGR24 BVar5;
-            int iVar6;
-            BOOLEnum BVar7;
-            int iVar8;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
@@ -48,142 +36,82 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,
                 DAT_PencilRenderCore::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 88,
                 DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100, 624, 400);
-            iVar8 = 0;
-            BVar7 = FALSE;
-            iVar6 = 16;
-            BVar5 = 0xccfaff;
-            TVar4 = OpenSHC::Text::TTA_CENTER;
-            iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 130;
-            iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+            int const titleY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 130;
+            int const titleX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-            /*
-              added by script: "Choose type of Crusader game"
-             */
+            // "Choose type of Crusader game"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 0),
-                iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+                titleX, titleY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 16, FALSE, 0);
             if (DAT_HighlightedSkirmishType::instance == 1) {
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 16;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Crusader 'First Edition' Trail"
-                 */
+                int const nameY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
+                int const nameX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Crusader 'First Edition' Trail"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 1),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 17;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Fight through 50 linked Crusader games"
-                 */
+                    nameX, nameY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 16, FALSE, 0);
+                int const descriptionY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
+                int const descriptionX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Fight through 50 linked Crusader games"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 2),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+                    descriptionX, descriptionY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17,
+                    FALSE, 0);
             }
             if (DAT_HighlightedSkirmishType::instance == 2) {
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 16;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Custom Game"
-                 */
+                int const nameY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
+                int const nameX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Custom Game"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 3),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 17;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Customize your own Crusader game."
-                 */
+                    nameX, nameY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 16, FALSE, 0);
+                int const descriptionY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
+                int const descriptionX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Customize your own Crusader game."
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 4),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+                    descriptionX, descriptionY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17,
+                    FALSE, 0);
             }
             if (DAT_HighlightedSkirmishType::instance == 3) {
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 16;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Crusader 'Warchest' Trail"
-                 */
+                int const nameY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
+                int const nameX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Crusader 'Warchest' Trail"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 21),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 17;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Fight through 30 linked Crusader games"
-                 */
+                    nameX, nameY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 16, FALSE, 0);
+                int const descriptionY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
+                int const descriptionX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Fight through 30 linked Crusader games"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 22),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+                    descriptionX, descriptionY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17,
+                    FALSE, 0);
             }
             if (DAT_HighlightedSkirmishType::instance == 4) {
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 16;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Crusader Extreme Trail"
-                 */
+                int const nameY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 400;
+                int const nameX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Crusader Extreme Trail"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 23),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
-                iVar8 = 0;
-                BVar7 = FALSE;
-                iVar6 = 17;
-                BVar5 = 0xccfaff;
-                TVar4 = OpenSHC::Text::TTA_CENTER;
-                iVar1 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
-                iVar3 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
-                /*
-                  added by script: "Fight through 20 linked Extreme games"
-                 */
+                    nameX, nameY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 16, FALSE, 0);
+                int const descriptionY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 440;
+                int const descriptionX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
+                // "Fight through 20 linked Extreme games"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE2, 24),
-                    iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+                    descriptionX, descriptionY, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 17,
+                    FALSE, 0);
             }
-            return;
         }
 
     }
