@@ -33,6 +33,7 @@ namespace UI {
             BMTT_UNKNOWN_49 = 49, // 0x00000031
             BMTT_MENU_HIDDEN = 60, // 0x0000003C
             BMTT_SOLDIERS = 61, // 0x0000003D
+            BMTT_UNKNOWN_62 = 62, // 0x0000003E
             BMTT_CITIZEN_SELECTED = 70 // 0x00000046
 
         } BuildMenuTabType;
