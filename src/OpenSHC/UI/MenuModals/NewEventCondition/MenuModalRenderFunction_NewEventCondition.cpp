@@ -20,8 +20,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABA20
         void NewEventCondition::MenuModalRenderFunction_NewEventCondition(int x, int y, int width, int height)
         {
-            int yParam;
-            int xParam;
             // "Event Conditions"
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                 DAT_PencilRenderCore::ptr)(199, 102, x, y, width, height);
@@ -35,8 +33,8 @@ namespace UI {
                 if (numInGroup == 111 || numInGroup == 112 || numInGroup == 113 || numInGroup == 123) {
                     numInGroup = 113;
                 }
-                yParam = y + 463;
-                xParam = x + 0x1e;
+                int yParam = y + 463;
+                int xParam = x + 0x1e;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, numInGroup),

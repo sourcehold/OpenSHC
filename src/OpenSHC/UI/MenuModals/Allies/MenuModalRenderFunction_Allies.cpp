@@ -23,13 +23,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AC6E0
         void Allies::MenuModalRenderFunction_Allies(int x, int y, int width, int height)
         {
-            int xParam;
-            int iVar2;
-            TextAlignment TVar3;
-            BGR24 BVar4;
-            int iVar5;
-            int iVar6;
-            BOOLEnum BVar7;
             MACRO_CALL(OpenSHC::Game::Skirmish_Func::RecalculateAllies)();
             DWORD _now = timeGetTime();
             if (500 < _now - DAT_Time_Allies1::instance) {
@@ -39,13 +32,13 @@ namespace UI {
                     DAT_00df42b0::instance = 0;
                 }
             }
-            BVar7 = FALSE;
-            iVar5 = 0xf;
-            BVar4 = 0xccfaff;
-            TVar3 = OpenSHC::Text::TTA_LEFT;
-            iVar2 = y + 25;
-            xParam = x + 39;
-            iVar6 = xParam;
+            BOOLEnum BVar7 = FALSE;
+            int iVar5 = 0xf;
+            BGR24 BVar4 = 0xccfaff;
+            TextAlignment TVar3 = OpenSHC::Text::TTA_LEFT;
+            int iVar2 = y + 25;
+            int xParam = x + 39;
+            int iVar6 = xParam;
             // "Allies"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

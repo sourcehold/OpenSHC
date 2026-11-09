@@ -18,8 +18,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AA440
         void OverlaySlider::MenuModalRenderFunction_OverlaySlider(int x, int y, int width, int height)
         {
-            BOOLEnum BVar1;
-            BVar1 = MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum BVar1
+                = MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (!BVar1) {
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             }

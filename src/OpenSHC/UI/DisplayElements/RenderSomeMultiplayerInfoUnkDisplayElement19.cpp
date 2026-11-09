@@ -39,13 +39,6 @@ namespace UI {
     void DisplayElements::RenderSomeMultiplayerInfoUnkDisplayElement19(int posX, int posY, DWORD elementState)
     {
         uint number;
-        TextAlignment TVar3;
-        BGR24 BVar4;
-        int iVar5;
-        int iVar6;
-        BOOLEnum BVar7;
-        int iVar8;
-        int iVar9;
         if (DAT_GameCore::instance.mapU4Int0 != 0) {
             posY += 65;
         }
@@ -53,14 +46,14 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderedBoxWithBlendedBackground,
             DAT_PencilRenderCore::ptr)(
             posX - 204, posY, 408, (int)((DAT_GameSynchronyState::instance.connectionInfoExpanded * 3 + 12) * 16));
-        iVar8 = 0;
-        BVar7 = FALSE;
-        iVar5 = 17;
-        BVar4 = 0xc2f0eb;
-        TVar3 = OpenSHC::Text::TTA_CENTER;
-        iVar6 = posY + 0xf;
+        int iVar8 = 0;
+        BOOLEnum BVar7 = FALSE;
+        int iVar5 = 17;
+        BGR24 BVar4 = 0xc2f0eb;
+        TextAlignment TVar3 = OpenSHC::Text::TTA_CENTER;
+        int iVar6 = posY + 0xf;
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        iVar9 = posX;
+        int iVar9 = posX;
         // "Connection lost"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

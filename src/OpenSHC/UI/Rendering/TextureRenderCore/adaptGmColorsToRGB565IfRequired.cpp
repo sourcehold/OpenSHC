@@ -15,9 +15,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455930
         void TextureRenderCore::adaptGmColorsToRGB565IfRequired(int gmID, int imageIndex)
         {
-            GmImageTypeInt _gmImageType;
             if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                _gmImageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
+                GmImageTypeInt _gmImageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
                 if ((_gmImageType == OpenSHC::IO::Graphics::GIT_InterfaceElement)
                     || (_gmImageType == OpenSHC::IO::Graphics::GIT_Font)) {
                     MACRO_CALL_MEMBER(
