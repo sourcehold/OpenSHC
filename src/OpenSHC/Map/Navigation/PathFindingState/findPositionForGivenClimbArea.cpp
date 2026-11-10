@@ -21,7 +21,7 @@ namespace Map {
             int _baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + ySpace;
             for (int _directionIndex = 0; _directionIndex < 8; _directionIndex++) {
                 int _direction = DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex];
-                if ((short)DAT_TileMapState::instance
+                if (DAT_TileMapState::instance
                         .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction]
                             + _baseTile]
                     == area) {

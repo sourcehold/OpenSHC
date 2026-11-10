@@ -26,7 +26,7 @@ namespace Map {
             }
             for (int direction = 0; direction < 8; ++direction) {
                 int const area
-                    = (short)DAT_TileMapState::instance
+                    = DAT_TileMapState::instance
                           .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[row][direction]
                               + param_1];
                 // The original compares the height of param_1 with itself, not with the neighbouring tile.

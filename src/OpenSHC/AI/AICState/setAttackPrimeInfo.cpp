@@ -20,10 +20,9 @@ namespace AI {
             = DAT_PathFindingState::instance.zoneSizesArray[DAT_TroopValueState::instance.attackInfo.startCon];
         DAT_TroopValueState::instance.attackInfo.unknownOne_0x20f90 = 1;
         DAT_TroopValueState::instance.attackInfo.keepCon
-            = (short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID]
-                          .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
-                          .tileEntry];
+            = DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                    .tileEntry];
     }
 }
 }

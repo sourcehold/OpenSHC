@@ -19,7 +19,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::Map::Trees::TreeTypeShort;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020

@@ -21,7 +21,7 @@ namespace Game {
             return FALSE;
         }
         int keepArea
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
+            = DAT_TileMapState::instance.PathConnectionLayer
                   [this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].tileEntry];
         int const zoneSize = DAT_PathFindingState::instance.zoneSizesArray[keepArea];
         if (zoneSize < 300) {

@@ -49,8 +49,8 @@ namespace Map {
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                   .int_.yOffset;
                         if (DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
-                            && abs((int)MACRO_CALL_MEMBER(
-                                       TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(target)
+                            && abs(MACRO_CALL_MEMBER(TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(
+                                       target)
                                    - height)
                                 < 16) {
                             return TRUE;
@@ -73,8 +73,8 @@ namespace Map {
                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                   .int_.yOffset;
                         if (DAT_TileMapState::instance.PathConnectionLayer[target] == entryArea
-                            && abs((int)MACRO_CALL_MEMBER(
-                                       TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(target)
+                            && abs(MACRO_CALL_MEMBER(TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(
+                                       target)
                                    - height)
                                 < 16) {
                             return TRUE;
