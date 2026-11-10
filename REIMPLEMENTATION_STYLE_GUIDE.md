@@ -493,10 +493,25 @@ if (someCondition) {
 
 **measure**. Also needs interpretation of the code to understand what for-loop could replace it.
 
-## 26. Only use '\0' if strings and chars are involved
+## 26. Favor `i < countof(this->array)` instead of magic values
+```cpp
+// no
+for (int i = 0; i < 5; ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+
+// yes
+for (int i = 0; i < countof(this->previousModalDialogs); ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+```
+
+**neutral** when our supplied `countof` is used.
+
+## 27. Only use '\0' if strings and chars are involved
 Else write 0 instead of '\0'.
 
-## 27. Remove unused `using` declarations
+## 28. Remove unused `using` declarations
 If the type or namespace is unused, remove the `using` declaration in the cpp file.
 
 ---
