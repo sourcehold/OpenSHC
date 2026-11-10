@@ -36,8 +36,7 @@ namespace Game {
             return TRUE;
         }
         return MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                   DAT_PathFindingState::ptr)(playerID1,
-                   DAT_TileMapState::instance.PathConnectionLayer[keepTile2],
+                   DAT_PathFindingState::ptr)(playerID1, DAT_TileMapState::instance.PathConnectionLayer[keepTile2],
                    DAT_TileMapState::instance.PathConnectionLayer[keepTile1], 0)
             != 0;
     }
