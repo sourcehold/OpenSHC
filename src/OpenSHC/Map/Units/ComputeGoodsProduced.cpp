@@ -26,7 +26,7 @@ namespace Map {
             productivity = 100;
         }
         // Skirmish modes boost productivity by 50.
-        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY && boost != FALSE) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY && boost) {
             productivity += 50;
         }
         // Fractional bonus goods are kept as a percentage and added next time.

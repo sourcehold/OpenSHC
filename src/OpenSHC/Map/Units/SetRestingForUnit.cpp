@@ -43,7 +43,7 @@ namespace Map {
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::hasUnitReachedDestination, DAT_UnitsState::ptr)(
                 unitID)
             != FALSE) {
-            if (restedEnough != FALSE) {
+            if (restedEnough) {
                 if (DAT_UnitsState::instance.units[unitID].idle > DAT_UnitsState::instance.units[unitID].target) {
                     DAT_UnitsState::instance.units[unitID].banked
                         = DAT_UnitsState::instance.units[unitID].idle - DAT_UnitsState::instance.units[unitID].target;

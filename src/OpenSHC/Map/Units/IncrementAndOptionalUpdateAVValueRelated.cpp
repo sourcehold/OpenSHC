@@ -15,7 +15,7 @@ namespace Map {
         // workTimer, workRelatedA, workRelatedB and workRelatedC are four timers, working is the current index
         (&DAT_UnitsState::instance.units[unitID].workTimer)[DAT_UnitsState::instance.units[unitID].working] += 1;
         int count = 0;
-        if (updateAV == FALSE) {
+        if (!updateAV) {
             return;
         }
         DAT_UnitsState::instance.units[unitID].av = 0;
