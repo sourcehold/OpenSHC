@@ -1,5 +1,6 @@
 struct Test {
-    int a;    int b;
+    int a;
+    int b;
     int c;
     int d;
 };
