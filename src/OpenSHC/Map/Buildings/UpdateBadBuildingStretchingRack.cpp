@@ -12,9 +12,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Animated while fearFactorLevel <= -3 (setle at 0x419301); BadBuildingStretchingRackAnimationFrames entries are
-    // signed bytes (movsx, jg at 0x419321).
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00419290
     void Buildings::UpdateBadBuildingStretchingRack()
     {

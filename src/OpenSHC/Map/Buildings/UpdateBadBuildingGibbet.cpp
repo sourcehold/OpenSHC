@@ -12,8 +12,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // fireRelatedRNG1 % 9 is signed (cdq; idiv at 0x4190E6); animated while fearFactorLevel <= -4 (setle at 0x41914F);
-    // BadBuildingGibbetAnimationFrames entries are signed bytes (movsx, jg at 0x41916F).
     // FUNCTION: STRONGHOLDCRUSADER 0x004190D0
     void Buildings::UpdateBadBuildingGibbet()
     {
