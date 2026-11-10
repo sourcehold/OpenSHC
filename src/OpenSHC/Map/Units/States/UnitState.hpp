@@ -37,6 +37,7 @@ namespace Map {
                 US_STONE_DEATH_01 = 114, // 0x00000072
                 US_STONE_DEATH_02 = 115, // 0x00000073
                 US_STONE_DEATH_03 = 116, // 0x00000074
+                US_UNKNOWN_121 = 121, // 0x00000079
                 US_APPEAR = 122, // 0x0000007A
                 US_DIG = 125, // 0x0000007D
                 US_ASSASSIN_THROWING_HOOK = 126, // 0x0000007E
