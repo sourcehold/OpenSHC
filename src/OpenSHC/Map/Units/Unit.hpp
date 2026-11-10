@@ -175,10 +175,7 @@ namespace Map {
             short topSpeedDelayIndex; // 0x000002E0 length: 2
             short movementDistance; // 0x000002E2 length: 2
             int tribeUID; // 0x000002E4 length: 4
-            int workTimer; // 0x000002E8 length: 4
-            int workRelatedA; // 0x000002EC length: 4
-            int workRelatedB; // 0x000002F0 length: 4
-            int workRelatedC; // 0x000002F4 length: 4
+            int workTimers[4]; // 0x000002E8 length: 16
             int av; // 0x000002F8 length: 4
             short working; // 0x000002FC length: 2
             short field_0x2fe; // 0x000002FE length: 2
