@@ -11,7 +11,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A4B30
         BOOLEnum PathFindingState::isUsableClimbWithinArea(int area, int wallDataID)
         {
-            if (this->climbData[wallDataID].canBeUsed != 1) {
+            if (this->climbData[wallDataID].canBeUsed != TRUE) {
                 return FALSE;
             }
             if (this->climbData[wallDataID].isRecognizedByPathfinding == 0) {

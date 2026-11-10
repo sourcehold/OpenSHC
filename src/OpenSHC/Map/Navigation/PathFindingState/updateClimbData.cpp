@@ -19,13 +19,13 @@ namespace Map {
             // resolver declares undefined4
             for (DAT_CurrentClimbDataID::instance = 1; DAT_CurrentClimbDataID::instance < countof(this->climbData);
                 DAT_CurrentClimbDataID::instance += 1) {
-                if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed != 0) {
+                if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed) {
                     this->maxClimbDataCount = DAT_CurrentClimbDataID::instance + 1;
                     (*DAT_ClimbLogicDefinedData::instance
                             .updateFunctions[this->climbData[DAT_CurrentClimbDataID::instance].type])();
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::recountUnitsUsingClimbData,
                         this)(DAT_CurrentClimbDataID::instance);
-                    if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed == 0) {
+                    if (!this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
                             DAT_CurrentClimbDataID::instance);
                     } else {
