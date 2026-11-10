@@ -1,7 +1,6 @@
 #include "../Units.func.hpp"
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/BOOLEnum_00ee0fd8.hpp"
@@ -12,27 +11,21 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00530EB0
-    uint Units::PlayStockpileIsFullWarning()
+    void Units::PlayStockpileIsFullWarning()
     {
         // guard of the function-local static holding the last warning time
-        if ((BOOLEnum_00ee0fd8::instance & 1) == 0) {
-            BOOLEnum_00ee0fd8::instance = (BOOLEnum)(BOOLEnum_00ee0fd8::instance | 1);
+        if (!(BOOLEnum_00ee0fd8::instance & TRUE)) {
+            BOOLEnum_00ee0fd8::instance |= TRUE;
             DWORD_00ee0fd4::instance = timeGetTime() - 60000;
         }
-        uint elapsed = timeGetTime() - DWORD_00ee0fd4::instance;
-        if (elapsed > 60000) {
-            // "The stockpile is full my lord"
-            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                s_placement_warning11_wav_005abbf0);
-            DWORD const now = timeGetTime();
-            // the original returns what its last division leaves in eax
-            elapsed = SEC_RNG::instance.currentNumber2 / 5000;
-            DWORD_00ee0fd4::instance = now - SEC_RNG::instance.currentNumber2 % 5000;
+        if (timeGetTime() - DWORD_00ee0fd4::instance <= 60000) {
+            return;
         }
-        return elapsed;
+        // "The stockpile is full my lord"
+        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+            s_placement_warning11_wav_005abbf0);
+        DWORD_00ee0fd4::instance = timeGetTime() - SEC_RNG::instance.currentNumber2 % 5000;
     }
 
 }

@@ -12,10 +12,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00530B40
     void Units::IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV)
     {
-        // four work timers; working is the current one
         DAT_UnitsState::instance.units[unitID].workTimers[DAT_UnitsState::instance.units[unitID].working] += 1;
         // zeroed before the early return, as the original does (after it: quick_diff 0.9811 -> 0.9057)
-        int count = 0;
+        int activeTimerCount = 0;
         if (!updateAV) {
             return;
         }
@@ -23,11 +22,11 @@ namespace Map {
         for (int i = 0; i < countof(DAT_UnitsState::instance.units[unitID].workTimers); ++i) {
             DAT_UnitsState::instance.units[unitID].av += DAT_UnitsState::instance.units[unitID].workTimers[i];
             if (DAT_UnitsState::instance.units[unitID].workTimers[i] > 0) {
-                ++count;
+                ++activeTimerCount;
             }
         }
-        if (count > 0) {
-            DAT_UnitsState::instance.units[unitID].av /= count;
+        if (activeTimerCount > 0) {
+            DAT_UnitsState::instance.units[unitID].av /= activeTimerCount;
         }
         DAT_UnitsState::instance.units[unitID].working += 1;
         if (DAT_UnitsState::instance.units[unitID].working

@@ -44,5 +44,6 @@ namespace Map {
                 = OpenSHC::Map::Units::ULS_REMOVE;
         }
     }
+
 }
 }

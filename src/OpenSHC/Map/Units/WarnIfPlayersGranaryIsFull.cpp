@@ -3,7 +3,6 @@
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/BOOLEnum_00ee0fd0.hpp"
@@ -16,24 +15,23 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00530E00
     void Units::WarnIfPlayersGranaryIsFull()
     {
         // guard of the function-local static holding the last warning time
-        if ((BOOLEnum_00ee0fd0::instance & 1) == 0) {
-            BOOLEnum_00ee0fd0::instance = (BOOLEnum)(BOOLEnum_00ee0fd0::instance | 1);
+        if (!(BOOLEnum_00ee0fd0::instance & TRUE)) {
+            BOOLEnum_00ee0fd0::instance |= TRUE;
             DWORD_00ee0fcc::instance = timeGetTime() - 60000;
         }
         if (timeGetTime() - DWORD_00ee0fcc::instance <= 60000) {
             return;
         }
         int const currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-        for (int i = 1; i < DAT_BuildingsState::instance.maxBuildingsCount; ++i) {
-            if (DAT_BuildingsState::instance.buildings[i].logicalState == OpenSHC::Map::Buildings::BLS_NORMAL
-                && DAT_BuildingsState::instance.buildings[i].buildingType == OpenSHC::Map::Buildings::BT_GRANARY
-                && DAT_BuildingsState::instance.buildings[i].owner == currentPlayer) {
+        for (int buildingID = 1; buildingID < DAT_BuildingsState::instance.maxBuildingsCount; ++buildingID) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == OpenSHC::Map::Buildings::BLS_NORMAL
+                && DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                    == OpenSHC::Map::Buildings::BT_GRANARY
+                && DAT_BuildingsState::instance.buildings[buildingID].owner == currentPlayer) {
                 // "The granary is full my lord"
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                     s_placement_warning10_wav_005abbd8);

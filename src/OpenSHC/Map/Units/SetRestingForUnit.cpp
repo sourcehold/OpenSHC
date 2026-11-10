@@ -25,13 +25,13 @@ namespace Map {
             != OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET) {
             DAT_UnitsState::instance.units[unitID].destinationNeeded
                 = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
-            int building
+            int const buildingID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::pickARandomPositiveFearFactorBuilding,
                     DAT_BuildingsState::ptr)(DAT_UnitsState::instance.units[unitID].owner);
-            if (building != 0) {
+            if (buildingID != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                    unitID, DAT_BuildingsState::instance.buildings[building].buildingEntryX,
-                    DAT_BuildingsState::instance.buildings[building].buildingEntryY, 0);
+                    unitID, DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX,
+                    DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY, 0);
             } else {
                 // No positive fear factor building available, resume normal state
                 DAT_UnitsState::instance.units[unitID].state.generic
@@ -43,6 +43,7 @@ namespace Map {
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::hasUnitReachedDestination, DAT_UnitsState::ptr)(
                 unitID)) {
             if (restedEnough) {
+                // idle against target again, as the original tests it twice
                 if (DAT_UnitsState::instance.units[unitID].idle > DAT_UnitsState::instance.units[unitID].target) {
                     DAT_UnitsState::instance.units[unitID].banked
                         = DAT_UnitsState::instance.units[unitID].idle - DAT_UnitsState::instance.units[unitID].target;

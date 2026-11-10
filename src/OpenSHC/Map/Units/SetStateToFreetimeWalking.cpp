@@ -17,7 +17,7 @@ namespace Map {
             return FALSE;
         }
         DAT_UnitsState::instance.units[unitID].idle += 1;
-        if (shouldFindNewGoodThing == 0) {
+        if (!shouldFindNewGoodThing) {
             return FALSE;
         }
         DAT_UnitsState::instance.units[unitID].substate += 1;
