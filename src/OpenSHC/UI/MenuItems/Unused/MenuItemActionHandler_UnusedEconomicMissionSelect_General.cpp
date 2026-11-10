@@ -1,0 +1,64 @@
+#include "../Unused.func.hpp"
+
+#include "OpenSHC/Game/GameCore.func.hpp"
+#include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/UI/Enums/MenuModalType.hpp"
+#include "OpenSHC/UI/Enums/MenuViewType.hpp"
+
+#include "OpenSHC/Globals/BOOL_CurrentMenuClickState.hpp"
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
+#include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuItems {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00426ED0
+        void Unused::MenuItemActionHandler_UnusedEconomicMissionSelect_General(int button, ...)
+        {
+            if (DAT_MenuTextInputState::instance.currentModalDialog == OpenSHC::UI::Enums::MMT_NO_MENU
+                && DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
+                // a sparse switch; the original lays its arms out default, 20, 18, 13
+                switch (button) {
+                default: {
+                    BOOL_CurrentMenuClickState::instance = FALSE;
+                    DAT_GameCore::instance.missionNumber1to20 = -button;
+                    DWORD const clickTime = timeGetTime();
+                    if (DAT_GameCore::instance.missionNumber1to20
+                            != DAT_MenuTextInputState::instance.lastClickedListIndex
+                        || (int)(clickTime - DAT_MenuTextInputState::instance.lastListClickTime) >= 500) {
+                        DAT_MenuTextInputState::instance.lastClickedListIndex
+                            = DAT_GameCore::instance.missionNumber1to20;
+                        DAT_MenuTextInputState::instance.lastListClickTime = clickTime;
+                        return;
+                    }
+                    // the original shares this tail with case 13; writing it out twice adds 7 instructions
+                    goto startSelectedMission;
+                }
+                case 20:
+                    ++DAT_GameState::instance.mapAndTime.difficulty;
+                    // >= 4, not > 3 (> 3: quick_diff 0.9111 -> 0.8667)
+                    if (DAT_GameState::instance.mapAndTime.difficulty >= 4) {
+                        DAT_GameState::instance.mapAndTime.difficulty = 0;
+                    }
+                    return;
+                case 18:
+                    MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
+                        OpenSHC::UI::Enums::MVT_MAIN_MENU, 0);
+                    return;
+                case 13:
+                startSelectedMission:
+                    --DAT_GameCore::instance.missionNumber1to20;
+                    DAT_GameCore::instance.gameMode_2 = OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1;
+                    DAT_GameCore::instance.field_0x74 = 1;
+                    MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::incrementMission, DAT_GameCore::ptr)();
+                    return;
+                }
+            }
+        }
+
+    }
+}
+}
