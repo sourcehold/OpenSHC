@@ -947,7 +947,7 @@ PUBLIC ?instance@?$Extern@I$0ONDAGM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA
 
-PUBLIC ?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBFI@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBGA@@StructResolver@@2IA
 
@@ -965,7 +965,7 @@ PUBLIC ?instance@?$Extern@I$0ONDBHI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0ONDBHM@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@I$0ONDBIA@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBIA@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBJI@@StructResolver@@2IA
 
@@ -2634,7 +2634,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA EQU 00ED3128h
 
-?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA EQU 00ED3158h
+?instance@?$Extern@H$0ONDBFI@@StructResolver@@2HA EQU 00ED3158h
 
 ?instance@?$Extern@I$0ONDBGA@@StructResolver@@2IA EQU 00ED3160h
 
@@ -2652,7 +2652,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0ONDBHM@@StructResolver@@2IA EQU 00ED317Ch
 
-?instance@?$Extern@I$0ONDBIA@@StructResolver@@2IA EQU 00ED3180h
+?instance@?$Extern@H$0ONDBIA@@StructResolver@@2HA EQU 00ED3180h
 
 ?instance@?$Extern@I$0ONDBJI@@StructResolver@@2IA EQU 00ED3198h
 

@@ -34446,6 +34446,8 @@ enum {
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
+    // label: InitTutorialState
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
     // label: SetTutorialHintActiveWithTimestamp
@@ -97549,7 +97551,7 @@ enum {
     SHC_3BB0A8C1_0x00ED3154 = 0x00ED3154,
     // label: DAT_RenderedUnitOwner
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3158 = 0x00ED3158,
     // type: /int
     SHC_3BB0A8C1_0x00ED315C = 0x00ED315C,
@@ -97588,7 +97590,7 @@ enum {
     SHC_3BB0A8C1_0x00ED317C = 0x00ED317C,
     // label: DAT_CurrentlyRenderedSpriteID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3180 = 0x00ED3180,
     // label: DAT_CurrentRockID
     // location:
