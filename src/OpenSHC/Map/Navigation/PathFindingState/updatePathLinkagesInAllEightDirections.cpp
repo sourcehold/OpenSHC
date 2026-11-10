@@ -28,7 +28,7 @@ namespace Map {
                 BOOLEnum _tileIsKeepUnk = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                     _nextY, _nextTile);
-                if (_tileIsKeepUnk != FALSE) {
+                if (_tileIsKeepUnk) {
                     _someLinkageResult = TRUE;
                 }
             }
