@@ -10,9 +10,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005309E0
     void Units::UpdateBurningAnimal1()
     {
@@ -28,21 +25,21 @@ namespace Map {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = 1;
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic = 2;
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
+                = OpenSHC::Map::Units::States::US_STATE_2Unk;
             return;
         }
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0;
-        int const _animationCycle
-            = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber;
-        if (21 <= _animationCycle) {
+        int const animationCycle = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber;
+        if (animationCycle >= 21) {
             DAT_UnitHasBecomeIdle::instance = 1;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
                 = OpenSHC::Map::Units::ULS_REMOVE;
             return;
         }
-        bool const _unitHadBecomeIdle = DAT_UnitHasBecomeIdle::instance != 0;
-        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = _animationCycle + 1;
-        if (_unitHadBecomeIdle) {
+        bool const unitHadBecomeIdle = DAT_UnitHasBecomeIdle::instance != 0;
+        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].gfxNumber = animationCycle + 1;
+        if (unitHadBecomeIdle) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
                 = OpenSHC::Map::Units::ULS_REMOVE;
         }

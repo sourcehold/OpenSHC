@@ -12,12 +12,10 @@ namespace Map {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      example: goodsCount = 3, boost = TRUE for apple farm */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00530D70
     int Units::ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost)
     {
+        // an apple farm, for example, passes goodsCount 3 and boost TRUE
         int productivity = DAT_GameState::instance.playerDataArray[DAT_UnitsState::instance.units[unitID].owner]
                                .fearFactorProductivityUnk;
         DAT_UnitsState::instance.units[unitID].productivityDiv100 = 0;
@@ -30,9 +28,10 @@ namespace Map {
             productivity += 50;
         }
         // Fractional bonus goods are kept as a percentage and added next time.
-        int bonusPercentage
+        // the original multiplies by 100 and divides by 100 again (without: quick_diff 0.9737 -> 0.4058)
+        int const bonusPercentage
             = (productivity - 100) * goodsCount * 100 / 100 + DAT_UnitsState::instance.units[unitID].productivityMod100;
-        // held in a variable: the original computes quotient and remainder with one idiv
+        // a variable, so one idiv gives quotient and remainder (a literal 100: quick_diff 0.9737 -> 0.7561)
         int divisor = 100;
         DAT_UnitsState::instance.units[unitID].productivityDiv100 = (short)(bonusPercentage / divisor);
         DAT_UnitsState::instance.units[unitID].productivityMod100 = (short)(bonusPercentage % divisor);

@@ -13,7 +13,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00530760
     void Units::DetachLadderman(int unitID)
     {
-        int tile = DAT_UnitsState::instance.units[unitID].tile;
+        int const tile = DAT_UnitsState::instance.units[unitID].tile;
         DAT_TileMapState::instance.LogicLayer[tile] &= ~OpenSHC::Map::LogicHelpers::L_CLIMBABLE;
         DAT_UnitsState::instance.units[unitID].wallDataID = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

@@ -27,8 +27,8 @@ namespace Map {
             // "The stockpile is full my lord"
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                 s_placement_warning11_wav_005abbf0);
-            DWORD now = timeGetTime();
-            // the original returns whatever is left in eax (a void function in the source)
+            DWORD const now = timeGetTime();
+            // the original returns what its last division leaves in eax
             elapsed = SEC_RNG::instance.currentNumber2 / 5000;
             DWORD_00ee0fd4::instance = now - SEC_RNG::instance.currentNumber2 % 5000;
         }

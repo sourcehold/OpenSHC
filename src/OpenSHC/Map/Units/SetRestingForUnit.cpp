@@ -11,7 +11,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Units::Pathfinding::DestinationNeededEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00549B30
@@ -37,12 +36,12 @@ namespace Map {
                 // No positive fear factor building available, resume normal state
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = DAT_UnitsState::instance.units[unitID].cachedState;
-                DAT_UnitsState::instance.units[unitID].destinationNeeded = (DestinationNeededEnum)2;
+                DAT_UnitsState::instance.units[unitID].destinationNeeded
+                    = OpenSHC::Map::Units::Pathfinding::DNE_UNKNOWN_2;
             }
         }
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::hasUnitReachedDestination, DAT_UnitsState::ptr)(
-                unitID)
-            != FALSE) {
+                unitID)) {
             if (restedEnough) {
                 if (DAT_UnitsState::instance.units[unitID].idle > DAT_UnitsState::instance.units[unitID].target) {
                     DAT_UnitsState::instance.units[unitID].banked
@@ -51,7 +50,8 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].field_0x2fe = 0;
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = DAT_UnitsState::instance.units[unitID].cachedState;
-                DAT_UnitsState::instance.units[unitID].destinationNeeded = (DestinationNeededEnum)2;
+                DAT_UnitsState::instance.units[unitID].destinationNeeded
+                    = OpenSHC::Map::Units::Pathfinding::DNE_UNKNOWN_2;
                 return TRUE;
             }
             if (DAT_UnitsState::instance.units[unitID].unitTypeSpecificRestingState > 0

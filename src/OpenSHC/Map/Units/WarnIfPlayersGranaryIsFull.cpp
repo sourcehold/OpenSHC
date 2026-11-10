@@ -29,7 +29,7 @@ namespace Map {
         if (timeGetTime() - DWORD_00ee0fcc::instance <= 60000) {
             return;
         }
-        int currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        int const currentPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         for (int i = 1; i < DAT_BuildingsState::instance.maxBuildingsCount; ++i) {
             if (DAT_BuildingsState::instance.buildings[i].logicalState == OpenSHC::Map::Buildings::BLS_NORMAL
                 && DAT_BuildingsState::instance.buildings[i].buildingType == OpenSHC::Map::Buildings::BT_GRANARY

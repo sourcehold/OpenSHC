@@ -12,16 +12,17 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00530B40
     void Units::IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV)
     {
-        // workTimer, workRelatedA, workRelatedB and workRelatedC are four timers, working is the current index
-        (&DAT_UnitsState::instance.units[unitID].workTimer)[DAT_UnitsState::instance.units[unitID].working] += 1;
+        // four work timers; working is the current one
+        DAT_UnitsState::instance.units[unitID].workTimers[DAT_UnitsState::instance.units[unitID].working] += 1;
+        // zeroed before the early return, as the original does (after it: quick_diff 0.9811 -> 0.9057)
         int count = 0;
         if (!updateAV) {
             return;
         }
         DAT_UnitsState::instance.units[unitID].av = 0;
-        for (int i = 0; i < 4; ++i) {
-            DAT_UnitsState::instance.units[unitID].av += (&DAT_UnitsState::instance.units[unitID].workTimer)[i];
-            if ((&DAT_UnitsState::instance.units[unitID].workTimer)[i] > 0) {
+        for (int i = 0; i < countof(DAT_UnitsState::instance.units[unitID].workTimers); ++i) {
+            DAT_UnitsState::instance.units[unitID].av += DAT_UnitsState::instance.units[unitID].workTimers[i];
+            if (DAT_UnitsState::instance.units[unitID].workTimers[i] > 0) {
                 ++count;
             }
         }
@@ -29,10 +30,11 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].av /= count;
         }
         DAT_UnitsState::instance.units[unitID].working += 1;
-        if (DAT_UnitsState::instance.units[unitID].working >= 4) {
+        if (DAT_UnitsState::instance.units[unitID].working
+            >= countof(DAT_UnitsState::instance.units[unitID].workTimers)) {
             DAT_UnitsState::instance.units[unitID].working = 0;
         }
-        (&DAT_UnitsState::instance.units[unitID].workTimer)[DAT_UnitsState::instance.units[unitID].working] = 0;
+        DAT_UnitsState::instance.units[unitID].workTimers[DAT_UnitsState::instance.units[unitID].working] = 0;
     }
 
 }
