@@ -8,11 +8,14 @@
 
 #pragma once
 
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace Callbacks {
 
-        typedef void(__cdecl ScrollbarRenderFunction)(int, int, int, int, bool);
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+        typedef void(__cdecl ScrollbarRenderFunction)(int, int, int, int, BOOLEnum);
     } // namespace Callbacks
 } // namespace UI
 } // namespace OpenSHC

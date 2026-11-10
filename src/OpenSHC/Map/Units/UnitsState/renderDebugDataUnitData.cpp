@@ -206,7 +206,7 @@ namespace Map {
                 (char*)s_Working_005abc38, _column0, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_UnitsState::instance.units[_selectedUnitID]
-                    .workTimer[DAT_UnitsState::instance.units[_selectedUnitID].working],
+                    .workTimers[DAT_UnitsState::instance.units[_selectedUnitID].working],
                 _column0, _lineY, OpenSHC::Text::TTA_LEFT, 0x80ff, 18, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_Av_005abc34, _column1, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 18, TRUE, 0);
