@@ -26,12 +26,13 @@ namespace UI {
         void TextureRenderCore::renderGmWithPreparedAlphaMask(
             int x, int y, int width, int height, ushort* imageDataPtr, int blendStrength)
         {
+            // Draws the TGX image through the alpha mask: its blue channel less blendStrength sets each pixel's blend
             // Declared before the if because both arms assign them; lineJump is from one row's end to the next
             int lineJump;
             int lineBytes;
             int heightStart;
             int heightEnd;
-            // The alpha surface prepared earlier, walked in step with the destination
+            // The alpha mask, walked with the destination (read after the test: quick_diff 0.8258 -> 0.8235)
             ushort* maskPtr = AlphaAndButtonSurfaceObj::instance.surfacePtr;
             if (height <= 0) {
                 return;
@@ -40,9 +41,10 @@ namespace UI {
             if (DAT_BlendFilterArrays::instance[32][31][0] == 0) {
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::InitBlendFilterArraysUnk)();
             }
-            // Both start at the table's base: the asm adds the row for the alpha value to each
+            // Both at the table's base; the asm adds each one's row (one pointer: quick_diff 0.8258 -> 0.8231)
             short* const dstFilter = DAT_BlendFilterArrays::instance[0][0];
             short* const srcFilter = DAT_BlendFilterArrays::instance[0][0];
+            // Map arm first (== with the arms swapped: quick_diff 0.8258 -> 0.8077)
             if (this->drawBufferChoiceValue != OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
                 DAT_TextureRenderCoreObject::instance.currentRenderSurface
                     = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
@@ -148,10 +150,10 @@ namespace UI {
                     mov eax, maskPtr
                     add maskPtr, 2
                     mov dx, word ptr [eax]
-                    and edx, 1Fh
+                    and edx, 0x1f
                     sub edx, blendStrength
                     jle repeating_next_555
-                    cmp edx, 1Fh
+                    cmp edx, 31
                     jne repeating_blend_555
                     mov ax, word ptr [esi]
                     mov word ptr [edi], ax
@@ -162,45 +164,45 @@ namespace UI {
                     add edx, srcFilter
                     mov ax, word ptr [esi]
                     movzx ebx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8]
-                    and ax, 0FFE0h
+                    and ax, 0xffe0
                     or ax, bx
                     mov bx, ax
                     shr bx, 5
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 2]
-                    and ax, 0FC1Fh
+                    and ax, 0xfc1f
                     or ax, bx
                     mov bx, ax
-                    shr bx, 0Ah
-                    and bx, 1Fh
+                    shr bx, 10
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 4]
-                    and ax, 3FFh
+                    and ax, 0x3ff
                     or ax, bx
                     pop edx
                     push ax
-                    mov eax, 20h
+                    mov eax, 32
                     sub eax, edx
                     shl eax, 9
                     add eax, dstFilter
                     mov dx, word ptr [edi]
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8]
-                    and dx, 0FFE0h
+                    and dx, 0xffe0
                     or dx, bx
                     mov bx, dx
                     shr bx, 5
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 2]
-                    and dx, 0FC1Fh
+                    and dx, 0xfc1f
                     or dx, bx
                     mov bx, dx
-                    shr bx, 0Ah
-                    and bx, 1Fh
+                    shr bx, 10
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 4]
-                    and dx, 83FFh
+                    and dx, 0x83ff
                     or dx, bx
                     pop ax
                     add dx, ax
@@ -221,10 +223,10 @@ namespace UI {
                     mov eax, maskPtr
                     add maskPtr, 2
                     mov dx, word ptr [eax]
-                    and edx, 1Fh
+                    and edx, 0x1f
                     sub edx, blendStrength
                     jle stream_next_555
-                    cmp edx, 1Fh
+                    cmp edx, 31
                     jne stream_blend_555
                     mov ax, word ptr [esi]
                     mov word ptr [edi], ax
@@ -235,46 +237,46 @@ namespace UI {
                     add edx, srcFilter
                     mov ax, word ptr [esi]
                     mov bx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8]
-                    and ax, 0FFE0h
+                    and ax, 0xffe0
                     or ax, bx
                     mov bx, ax
                     shr bx, 5
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 2]
-                    and ax, 0FC1Fh
+                    and ax, 0xfc1f
                     or ax, bx
                     mov bx, ax
-                    shr bx, 0Ah
-                    and bx, 1Fh
+                    shr bx, 10
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 4]
-                    and ax, 3FFh
+                    and ax, 0x3ff
                     or ax, bx
                     mov bx, word ptr [edi]
                     mov word ptr [edi], ax
                     pop edx
-                    mov eax, 20h
+                    mov eax, 32
                     sub eax, edx
                     shl eax, 9
                     add eax, dstFilter
                     mov dx, bx
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8]
-                    and dx, 0FFE0h
+                    and dx, 0xffe0
                     or dx, bx
                     mov bx, dx
                     shr bx, 5
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 2]
-                    and dx, 0FC1Fh
+                    and dx, 0xfc1f
                     or dx, bx
                     mov bx, dx
-                    shr bx, 0Ah
-                    and bx, 1Fh
+                    shr bx, 10
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 4]
-                    and dx, 83FFh
+                    and dx, 0x83ff
                     or dx, bx
                     add word ptr [edi], dx
                 stream_next_555:
@@ -371,10 +373,10 @@ namespace UI {
                 mov eax, maskPtr
                 add maskPtr, 2
                 mov dx, word ptr [eax]
-                and edx, 1Fh
+                and edx, 0x1f
                 sub edx, blendStrength
                 jle repeating_next_565
-                cmp edx, 1Fh
+                cmp edx, 31
                 jne repeating_blend_565
                 mov ax, word ptr [esi]
                 mov word ptr [edi], ax
@@ -386,32 +388,32 @@ namespace UI {
                 add edx, srcFilter
                 mov ax, word ptr [esi]
                 movzx ebx, ax
-                and bx, 1Fh
+                and bx, 0x1f
                 mov cx, word ptr [edx + ebx*8]
                 mov bx, ax
                 shr bx, 5
-                and bx, 3Fh
+                and bx, 0x3f
                 or cx, word ptr [edx + ebx*8 + 2]
                 mov bx, ax
-                shr bx, 0Bh
-                and bx, 1Fh
+                shr bx, 11
+                and bx, 0x1f
                 or cx, word ptr [edx + ebx*8 + 4]
                 pop edx
-                mov eax, 20h
+                mov eax, 32
                 sub eax, edx
                 shl eax, 9
                 add eax, dstFilter
                 mov dx, word ptr [edi]
                 movzx ebx, dx
-                and bx, 1Fh
+                and bx, 0x1f
                 add cx, word ptr [eax + ebx*8]
                 mov bx, dx
                 shr bx, 5
-                and bx, 3Fh
+                and bx, 0x3f
                 add cx, word ptr [eax + ebx*8 + 2]
                 mov bx, dx
-                shr bx, 0Bh
-                and bx, 1Fh
+                shr bx, 11
+                and bx, 0x1f
                 add cx, word ptr [eax + ebx*8 + 4]
                 mov word ptr [edi], cx
                 pop cx
@@ -431,10 +433,10 @@ namespace UI {
                 mov eax, maskPtr
                 add maskPtr, 2
                 mov dx, word ptr [eax]
-                and edx, 1Fh
+                and edx, 0x1f
                 sub edx, blendStrength
                 jle stream_next_565
-                cmp edx, 1Fh
+                cmp edx, 31
                 jne stream_blend_565
                 mov ax, word ptr [esi]
                 mov word ptr [edi], ax
@@ -446,32 +448,32 @@ namespace UI {
                 add edx, srcFilter
                 mov ax, word ptr [esi]
                 mov bx, ax
-                and bx, 1Fh
+                and bx, 0x1f
                 mov cx, word ptr [edx + ebx*8]
                 mov bx, ax
                 shr bx, 5
-                and bx, 3Fh
+                and bx, 0x3f
                 or cx, word ptr [edx + ebx*8 + 2]
                 mov bx, ax
-                shr bx, 0Bh
-                and bx, 1Fh
+                shr bx, 11
+                and bx, 0x1f
                 or cx, word ptr [edx + ebx*8 + 4]
                 movzx bx, word ptr [edi]
                 pop edx
-                mov eax, 20h
+                mov eax, 32
                 sub eax, edx
                 shl eax, 9
                 add eax, dstFilter
                 mov dx, bx
-                and bx, 1Fh
+                and bx, 0x1f
                 add cx, word ptr [eax + ebx*8]
                 mov bx, dx
                 shr bx, 5
-                and bx, 3Fh
+                and bx, 0x3f
                 add cx, word ptr [eax + ebx*8 + 2]
                 mov bx, dx
-                shr bx, 0Bh
-                and bx, 1Fh
+                shr bx, 11
+                and bx, 0x1f
                 add cx, word ptr [eax + ebx*8 + 4]
                 mov word ptr [edi], cx
                 pop cx

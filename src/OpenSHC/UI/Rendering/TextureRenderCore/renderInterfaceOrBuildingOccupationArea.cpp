@@ -25,6 +25,7 @@ namespace UI {
         void TextureRenderCore::renderInterfaceOrBuildingOccupationArea(
             int x, int y, int width, int height, ushort* imageDataPtr, int blendStrengthUnk)
         {
+            // Blends the TGX image over the destination through the two filter rows blendStrengthUnk picks
             // Declared before the if because all three arms assign them; lineJump is from one row's end to the next
             int lineJump;
             int lineBytes;
@@ -40,6 +41,7 @@ namespace UI {
             short* const dstFilter = DAT_BlendFilterArrays::instance[blendStrengthUnk][0];
             short* const srcFilter = DAT_BlendFilterArrays::instance[32 - blendStrengthUnk][0];
             if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
+                // Map arm first (== with the arms swapped: quick_diff 0.8270 -> 0.8228)
                 if (this->drawBufferChoiceValue != OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
                     DAT_TextureRenderCoreObject::instance.currentRenderSurface
                         = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
@@ -144,21 +146,21 @@ namespace UI {
                         mov edx, srcFilter
                         mov ebx, 0
                         mov bx, ax
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8]
-                        and ax, 0FFE0h
+                        and ax, 0xffe0
                         or ax, bx
                         mov bx, ax
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 2]
-                        and ax, 0FC1Fh
+                        and ax, 0xfc1f
                         or ax, bx
                         mov bx, ax
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 4]
-                        and ax, 3FFh
+                        and ax, 0x3ff
                         or ax, bx
                     repeating_pixel_555:
                         mov dx, word ptr [edi]
@@ -166,21 +168,21 @@ namespace UI {
                         mov eax, dstFilter
                         mov ebx, 0
                         mov bx, dx
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8]
-                        and dx, 0FFE0h
+                        and dx, 0xffe0
                         or dx, bx
                         mov bx, dx
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 2]
-                        and dx, 0FC1Fh
+                        and dx, 0xfc1f
                         or dx, bx
                         mov bx, dx
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 4]
-                        and dx, 83FFh
+                        and dx, 0x83ff
                         or dx, bx
                         pop ax
                         add dx, ax
@@ -198,42 +200,42 @@ namespace UI {
                         mov ax, word ptr [esi]
                         mov edx, srcFilter
                         mov bx, ax
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8]
-                        and ax, 0FFE0h
+                        and ax, 0xffe0
                         or ax, bx
                         mov bx, ax
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 2]
-                        and ax, 0FC1Fh
+                        and ax, 0xfc1f
                         or ax, bx
                         mov bx, ax
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 4]
-                        and ax, 3FFh
+                        and ax, 0x3ff
                         or ax, bx
                         mov dx, word ptr [edi]
                         mov word ptr [edi], ax
                         mov eax, dstFilter
                         mov ebx, 0
                         mov bx, dx
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8]
-                        and dx, 0FFE0h
+                        and dx, 0xffe0
                         or dx, bx
                         mov bx, dx
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 2]
-                        and dx, 0FC1Fh
+                        and dx, 0xfc1f
                         or dx, bx
                         mov bx, dx
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 4]
-                        and dx, 83FFh
+                        and dx, 0x83ff
                         or dx, bx
                         add word ptr [edi], dx
                         add esi, 2
@@ -324,15 +326,15 @@ namespace UI {
                     push edx
                     mov esi, srcFilter
                     movzx ebx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov dx, word ptr [esi + ebx*8]
                     mov bx, ax
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     or dx, word ptr [esi + ebx*8 + 2]
                     mov bx, ax
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     or dx, word ptr [esi + ebx*8 + 4]
                     mov ax, dx
                     mov esi, dstFilter
@@ -340,15 +342,15 @@ namespace UI {
                     mov dx, word ptr [edi]
                     push ax
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov ax, word ptr [esi + ebx*8]
                     mov bx, dx
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     or ax, word ptr [esi + ebx*8 + 2]
                     mov bx, dx
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     or ax, word ptr [esi + ebx*8 + 4]
                     mov dx, ax
                     pop ax
@@ -369,28 +371,28 @@ namespace UI {
                     mov edx, srcFilter
                     push cx
                     mov bx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov cx, word ptr [edx + ebx*8]
                     mov bx, ax
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     or cx, word ptr [edx + ebx*8 + 2]
                     mov bx, ax
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     or cx, word ptr [edx + ebx*8 + 4]
                     mov dx, word ptr [edi]
                     mov eax, dstFilter
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     add cx, word ptr [eax + ebx*8]
                     mov bx, dx
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     add cx, word ptr [eax + ebx*8 + 2]
                     mov bx, dx
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     add cx, word ptr [eax + ebx*8 + 4]
                     mov word ptr [edi], cx
                     add esi, 2
@@ -404,10 +406,11 @@ namespace UI {
                 }
                 // clang-format on
             } else {
-                // Declared in this branch (at function scope: quick_diff 1.0000 -> 0.9702)
+                // Written by the asm only; declared in this branch (at function scope: quick_diff 1.0000 -> 0.9702)
                 int columnOffset;
                 DAT_TextureRenderCoreObject::instance.currentRenderSurface
                     = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
+                // A whole row here: the zoomed-out loops keep edi at the row's start and add columnOffset
                 lineJump = 4056 * 2;
                 lineBytes = 4056 * 2;
                 heightStart = this->mapGameSurfaceHeightRange.start;
@@ -426,7 +429,7 @@ namespace UI {
                         mov eax, x
                         cmp eax, 0
                         jl zoom_done_555
-                        and eax, 0FFFFFFFEh
+                        and eax, 0xfffffffe
                         add edi, eax
                         mov eax, y
                         mov ebx, heightStart
@@ -525,21 +528,21 @@ namespace UI {
                         push edx
                         mov edx, srcFilter
                         movzx ebx, ax
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8]
-                        and ax, 0FFE0h
+                        and ax, 0xffe0
                         or ax, bx
                         mov bx, ax
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 2]
-                        and ax, 0FC1Fh
+                        and ax, 0xfc1f
                         or ax, bx
                         mov bx, ax
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 4]
-                        and ax, 3FFh
+                        and ax, 0x3ff
                         or ax, bx
                         pop edx
                         add ecx, 1
@@ -554,21 +557,21 @@ namespace UI {
                         push ax
                         mov eax, dstFilter
                         movzx ebx, dx
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8]
-                        and dx, 0FFE0h
+                        and dx, 0xffe0
                         or dx, bx
                         mov bx, dx
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 2]
-                        and dx, 0FC1Fh
+                        and dx, 0xfc1f
                         or dx, bx
                         mov bx, dx
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 4]
-                        and dx, 83FFh
+                        and dx, 0x83ff
                         or dx, bx
                         pop ax
                         add dx, ax
@@ -592,21 +595,21 @@ namespace UI {
                         mov ax, word ptr [esi]
                         mov edx, srcFilter
                         mov bx, ax
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8]
-                        and ax, 0FFE0h
+                        and ax, 0xffe0
                         or ax, bx
                         mov bx, ax
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 2]
-                        and ax, 0FC1Fh
+                        and ax, 0xfc1f
                         or ax, bx
                         mov bx, ax
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [edx + ebx*8 + 4]
-                        and ax, 3FFh
+                        and ax, 0x3ff
                         or ax, bx
                         pop ebx
                         mov dx, word ptr [edi + ebx]
@@ -614,21 +617,21 @@ namespace UI {
                         push ebx
                         mov eax, dstFilter
                         movzx ebx, dx
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8]
-                        and dx, 0FFE0h
+                        and dx, 0xffe0
                         or dx, bx
                         mov bx, dx
                         shr bx, 5
-                        and bx, 1Fh
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 2]
-                        and dx, 0FC1Fh
+                        and dx, 0xfc1f
                         or dx, bx
                         mov bx, dx
-                        shr bx, 0Ah
-                        and bx, 1Fh
+                        shr bx, 10
+                        and bx, 0x1f
                         mov bx, word ptr [eax + ebx*8 + 4]
-                        and dx, 83FFh
+                        and dx, 0x83ff
                         or dx, bx
                         pop ebx
                         add word ptr [edi + ebx], dx
@@ -651,7 +654,7 @@ namespace UI {
                     mov eax, x
                     cmp eax, 0
                     jl zoom_done_565
-                    and eax, 0FFFFFFFEh
+                    and eax, 0xfffffffe
                     add edi, eax
                     mov eax, y
                     mov ebx, heightStart
@@ -750,21 +753,21 @@ namespace UI {
                     push edx
                     mov edx, srcFilter
                     movzx ebx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8]
-                    and ax, 0FFE0h
+                    and ax, 0xffe0
                     or ax, bx
                     mov bx, ax
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     mov bx, word ptr [edx + ebx*8 + 2]
-                    and ax, 0F81Fh
+                    and ax, 0xf81f
                     or ax, bx
                     mov bx, ax
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 4]
-                    and ax, 7FFh
+                    and ax, 0x7ff
                     or ax, bx
                     pop edx
                     add ecx, 1
@@ -779,21 +782,21 @@ namespace UI {
                     push ax
                     mov eax, dstFilter
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8]
-                    and dx, 0FFE0h
+                    and dx, 0xffe0
                     or dx, bx
                     mov bx, dx
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     mov bx, word ptr [eax + ebx*8 + 2]
-                    and dx, 0F81Fh
+                    and dx, 0xf81f
                     or dx, bx
                     mov bx, dx
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 4]
-                    and dx, 7FFh
+                    and dx, 0x7ff
                     or dx, bx
                     pop ax
                     add dx, ax
@@ -817,21 +820,21 @@ namespace UI {
                     mov ax, word ptr [esi]
                     mov edx, srcFilter
                     mov bx, ax
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8]
-                    and ax, 0FFE0h
+                    and ax, 0xffe0
                     or ax, bx
                     mov bx, ax
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     mov bx, word ptr [edx + ebx*8 + 2]
-                    and ax, 0F81Fh
+                    and ax, 0xf81f
                     or ax, bx
                     mov bx, ax
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     mov bx, word ptr [edx + ebx*8 + 4]
-                    and ax, 7FFh
+                    and ax, 0x7ff
                     or ax, bx
                     pop ebx
                     mov dx, word ptr [edi + ebx]
@@ -839,21 +842,21 @@ namespace UI {
                     push ebx
                     mov eax, dstFilter
                     movzx ebx, dx
-                    and bx, 1Fh
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8]
-                    and dx, 0FFE0h
+                    and dx, 0xffe0
                     or dx, bx
                     mov bx, dx
                     shr bx, 5
-                    and bx, 3Fh
+                    and bx, 0x3f
                     mov bx, word ptr [eax + ebx*8 + 2]
-                    and dx, 0F81Fh
+                    and dx, 0xf81f
                     or dx, bx
                     mov bx, dx
-                    shr bx, 0Bh
-                    and bx, 1Fh
+                    shr bx, 11
+                    and bx, 0x1f
                     mov bx, word ptr [eax + ebx*8 + 4]
-                    and dx, 7FFh
+                    and dx, 0x7ff
                     or dx, bx
                     pop ebx
                     add word ptr [edi + ebx], dx
