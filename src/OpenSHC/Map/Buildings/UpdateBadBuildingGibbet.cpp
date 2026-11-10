@@ -29,11 +29,10 @@ namespace Map {
             DAT_BuildingsState::ptr)(buildingID, 1);
         short* renderPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
         *renderPtr = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -4;
-        int frame
+        DAT_BuildingsState::instance.buildings[buildingID].animationFrame
             = (char)DAT_BuildingDefinedData::instance
                   .BadBuildingGibbetAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
-        DAT_BuildingsState::instance.buildings[buildingID].animationFrame = frame;
-        if (frame <= 0) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[buildingID].animationFrame = 1;
         }
