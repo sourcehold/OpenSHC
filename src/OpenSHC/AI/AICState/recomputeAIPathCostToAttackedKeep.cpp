@@ -46,8 +46,7 @@ namespace AI {
             sizeof(DAT_TileMapState::instance.AIZoneLayer), 0, DAT_TileMapState::instance.AIZoneLayer);
 
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)
-            != FALSE) {
+                playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
                 DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 1, 1);
         } else {

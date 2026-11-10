@@ -21,8 +21,7 @@ namespace Map {
             int const unitArea
                 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
             int const height = DAT_TileMapState::instance.HeightLayer[param_1];
-            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
-                != FALSE) {
+            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()) {
                 return FALSE;
             }
             for (int direction = 0; direction < 8; ++direction) {

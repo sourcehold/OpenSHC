@@ -30,8 +30,7 @@ namespace Map {
                         .currentTilePositionAdjusted];
             int const tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int onlyAssassins = 0;
-            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
-                != FALSE) {
+            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()) {
                 onlyAssassins = 1;
             }
             for (int i = 0; i < tileCount; ++i) {
