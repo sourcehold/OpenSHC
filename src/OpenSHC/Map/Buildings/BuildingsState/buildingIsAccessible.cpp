@@ -59,9 +59,8 @@ namespace Map {
                 if (campgroundArea != 0) {
                     int const entryArea = DAT_TileMapState::instance.PathConnectionLayer[entryTile];
                     if (entryArea != campgroundArea
-                        && DAT_BuildingDefinedData::instance
-                                .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
-                            == 0
+                        && !DAT_BuildingDefinedData::instance
+                            .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                         && MACRO_CALL_MEMBER(
                                Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                                DAT_PathFindingState::ptr)(

@@ -74,9 +74,9 @@ namespace Map {
                     this->searchQueue.readIndex = 0;
                 }
             }
-            DAT_TileMapState::instance.forceUpdateLogicalAndMiscDisplayLayers = 1;
-            DAT_TileMapState::instance.forceUpdateTextureTilemap = 1;
-            DAT_TileMapState::instance.forceUpdateGFXLayers = 1;
+            DAT_TileMapState::instance.forceUpdateLogicalAndMiscDisplayLayers = TRUE;
+            DAT_TileMapState::instance.forceUpdateTextureTilemap = TRUE;
+            DAT_TileMapState::instance.forceUpdateGFXLayers = TRUE;
         }
 
     }
