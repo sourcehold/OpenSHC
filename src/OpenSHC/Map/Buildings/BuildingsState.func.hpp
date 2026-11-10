@@ -39,7 +39,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
                 &BuildingsState::getBuildingHeightForBuildingID)
             getBuildingHeightForBuildingID;
 
@@ -63,7 +63,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040A060, &BuildingsState::displayPopularityAndGoldPopups)
             displayPopularityAndGoldPopups;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A260,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A260,
                 &BuildingsState::spawnCrowForBuilding)
             spawnCrowForBuilding;
 
@@ -291,7 +291,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040D6E0, &BuildingsState::isSpaceAvailableAtUnitRallyPoint)
             isSpaceAvailableAtUnitRallyPoint;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040D9C0, &BuildingsState::getKeepLocationForAIUnit)
             getKeepLocationForAIUnit;
 
@@ -347,7 +347,7 @@ namespace Map {
                 &BuildingsState::harmHopFarmsOfPlayer)
             harmHopFarmsOfPlayer;
 
-            MACRO_FUNCTION_RESOLVER(ushort* (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EFD0,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040EFD0,
                 &BuildingsState::updateBuildingAreaTileGraphics)
             updateBuildingAreaTileGraphics;
 
@@ -635,7 +635,7 @@ namespace Map {
                 &BuildingsState::buildingIsAccessible)
             buildingIsAccessible;
 
-            MACRO_FUNCTION_RESOLVER(char (BuildingsState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00421BE0, &BuildingsState::resolveBuildingEntryAccessibility)
             resolveBuildingEntryAccessibility;
 

@@ -63,12 +63,27 @@ def build_env(endpoint=None):
     return env
 
 
+def win_cmd(*args):
+    """Argv for running a Windows command, through wine when we are not on Windows.
+
+    The toolchain, build.bat and cmakew are Windows programs, so a Linux checkout drives them
+    under wine; `cmd` does not exist there as a bare executable. Set WINEPREFIX, and see
+    build_parallel.py for what else a wine run needs.
+    """
+    return (["cmd", "/c"] if os.name == "nt" else ["wine", "cmd", "/c"]) + list(args)
+
+
 def kill_pdb_server():
     """Stop this worktree's mspdbsrv.exe only.
 
     Killing every instance by image name takes down the PDB server of any other worktree that is
     building at the same time and fails their build with the same C1090.
     """
+    if os.name != "nt":
+        # The equivalent under wine would be killing by image name, which is exactly what this
+        # avoids: it would take down every prefix's server, not this worktree's.
+        sys.stderr.write("note: not stopping mspdbsrv.exe; only implemented on Windows\n")
+        return
     subprocess.run(["powershell", "-NoProfile", "-Command",
                     "Get-Process mspdbsrv -ErrorAction SilentlyContinue | "
                     "Where-Object { $_.Path -like '%s*' } | "
@@ -140,8 +155,13 @@ def function_body_span(text, start=0):
 
 
 def run_reccmp():
+    # --ignore-security-cookie is not cosmetic: src/OpenSHC/Globals/MSVC_SecurityCookie.hpp declares a
+    # resolver on 0x00B94220, which is the game's own __security_cookie. With the data resolvers enabled
+    # reccmp therefore names the original's prologue read through that resolver and ours as
+    # __security_cookie, and reports the pair as a mismatch although it is the same address. Every /GS
+    # function then reads 1-3 points low - six functions looked like regressions this way.
     result = subprocess.run(
-        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--resolve-wrapped-calls", "--quiet", "--cache", "--json", "diff.json"],
+        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--resolve-wrapped-calls", "--ignore-security-cookie", "--quiet", "--cache", "--json", "diff.json"],
         capture_output=True, text=True, stdin=subprocess.DEVNULL)
     if result.returncode:
         sys.exit("reccmp failed:\n" + result.stdout[-800:] + result.stderr[-800:])

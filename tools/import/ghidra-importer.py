@@ -122,6 +122,12 @@ exporter = Exporter(binary_context=bc,
                       ("/", "VOID_CONST"): ("/", "void const"),
                       ("/", "VOID_CONST*"): ("/", "void const*"),
                       ("/", "VOID_CONST *"): ("/", "void const *"),
+                      ('/_HoldStrong/DirectPlay/dplay', 'IDirectPlay4A'): ("/dplay.h", "IDirectPlay4"),
+                      ('/_HoldStrong/DirectPlay/dplay', 'IDirectPlay4A *'): ("/dplay.h", "IDirectPlay4 *"),
+                      ('/_HoldStrong/DirectPlay/dplay', 'IDirectPlay4A * *'): ("/dplay.h", "IDirectPlay4 * *"),
+                      ('/', 'GUID'): ("/guiddef.h", "_GUID"),
+                      ('/guiddef.h', 'GUID'): ("/guiddef.h", "_GUID"),
+                      ('/winnt.h', "LARGE_INTEGER"): ('/winnt.h', "_LARGE_INTEGER")
                       
                     },
                     inject_forwards_in_files={
@@ -199,9 +205,11 @@ def typedefFunc(loc: str, name: str, prefix: str):
       return "/", "short", ""
     if name.endswith("Byte"):
       return "/", "byte", ""
-    if name.startswith("IDirectPlay4A"):
-      return "/", name.replace("IDirectPlay4A", "IDirectPlay4"), "struct "
-
+  if name.startswith("IDirectPlay4A"):
+    return "/", name.replace("IDirectPlay4A", "IDirectPlay4"), "struct "
+  if name.startswith("IDirectPlay4"):
+    return "/", name, "struct "
+    
   return loc, name, prefix
 
 all_addresses = list((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=True))
@@ -212,7 +220,17 @@ asm = exporter.export_symbols_as_assembly(data_addresses,
       typedefs={
         ('/OpenSHC/WindowsHelper/Enums', 'BOOLEnum'): ('/', 'int', ""),
         ('/winnt', 'LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
-        ('/OpenSHC/DirectPlay/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
+        ('/winnt', '_LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
+        ('/ntddk_32', 'LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
+        ('/ntddk_32', '_LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
+        ('/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
+        ('/dplay', 'IDirectPlay4'): ("/", "IDirectPlay4", "struct "),
+        ('/dplay', 'IDirectPlay4A *'): ("/", "IDirectPlay4 *", "struct "),
+        ('/dplay', 'IDirectPlay4 *'): ("/", "IDirectPlay4 *", "struct "),
+        ('/', "GUID"): ('/', "_GUID", "struct "),
+        ('/', "_GUID"): ('/', "_GUID", "struct "),
+        ('/guiddef', "GUID"): ('/', "_GUID", "struct "),
+        ('/guiddef', "_GUID"): ('/', "_GUID", "struct "),
       },
       typedef_func=typedefFunc)
 collection.add(asm)
@@ -328,6 +346,10 @@ def write_patches(output_dir: pathlib.Path):
 
   (output_dir / "OpenSHC/Map/Navigation/PathFindingState/" / "LinkageNeighbourAsm.hpp").write_bytes(
     (pathlib.Path(__file__).parent / "injected-headers" / "LinkageNeighbourAsm.hpp").read_bytes()
+  )
+
+  (output_dir / "OpenSHC/UI/Rendering/TextureRenderCore/" / "RGB555To565Asm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "RGB555To565Asm.hpp").read_bytes()
   )
   pass # Overwrite hpp files in this function
 

@@ -17,12 +17,12 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        int buildingID = DAT_CurrentBuildingID::instance;
-        OpenSHC::Map::Buildings::Building* shrine = &DAT_BuildingsState::instance.buildings[buildingID];
-        shrine->renderAnimation = 0;
-        shrine->displayOwnerFlag = 0;
-        shrine->someX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-        shrine->someY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
+            = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryX;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
+            = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY;
     }
 
 }

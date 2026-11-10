@@ -21,15 +21,15 @@ namespace Audio {
                 MACRO_CALL_MEMBER(MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                     MSS::enums::SND_STR_SFX_2Unk);
                 DAT_00b986f0::instance = 0;
-                DAT_SpeechDefinedData::instance.field10_0x49d4b4 = -1;
+                DAT_SpeechDefinedData::instance.field_0x49d4b4 = -1;
                 return;
             }
-            if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == -1) {
+            if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == -1) {
                 FLOAT_00b986ec::instance += param_2;
             } else {
                 FLOAT_00b986ec::instance = 0.0f;
             }
-            if (DAT_00b986f0::instance != 0 && DAT_SpeechDefinedData::instance.field10_0x49d4b4 == -1) {
+            if (DAT_00b986f0::instance != 0 && DAT_SpeechDefinedData::instance.field_0x49d4b4 == -1) {
                 DAT_00b986f0::instance = 0;
             } else {
                 if (DAT_00b986f0::instance == 1) {
@@ -37,7 +37,7 @@ namespace Audio {
                     if (100.0 < FLOAT_00b986e8::instance) {
                         DAT_00b986f0::instance = 100;
                     }
-                    if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 7) {
+                    if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == 7) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
                             (int)((DAT_SpeechDefinedData::instance.AmbientSounds[5].volumeUnk_0x28
@@ -45,7 +45,7 @@ namespace Audio {
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }
-                    if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 8) {
+                    if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == 8) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
                             (int)((DAT_SpeechDefinedData::instance.AmbientSounds[6].volumeUnk_0x28
@@ -64,7 +64,7 @@ namespace Audio {
                     if (FLOAT_00b986e8::instance < 1.0) {
                         FLOAT_00b986e8::instance = 1.0;
                     }
-                    if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 7) {
+                    if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == 7) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
                             (int)((DAT_SpeechDefinedData::instance.AmbientSounds[5].volumeUnk_0x28
@@ -72,7 +72,7 @@ namespace Audio {
                                       * FLOAT_00b986e8::instance)
                                 / 100.0));
                     }
-                    if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == 8) {
+                    if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == 8) {
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::setStreamAndSampleVolumeUnk,
                             DAT_SoundSystemState::ptr)(MSS::enums::SND_STR_SFX_2Unk,
                             (int)((DAT_SpeechDefinedData::instance.AmbientSounds[6].volumeUnk_0x28
@@ -84,14 +84,14 @@ namespace Audio {
                         DAT_00b986f0::instance = 0;
                         MACRO_CALL_MEMBER(MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                             MSS::enums::SND_STR_SFX_2Unk);
-                        DAT_SpeechDefinedData::instance.field10_0x49d4b4 = -1;
+                        DAT_SpeechDefinedData::instance.field_0x49d4b4 = -1;
                     }
                 }
-                if (DAT_SpeechDefinedData::instance.field10_0x49d4b4 == -1
+                if (DAT_SpeechDefinedData::instance.field_0x49d4b4 == -1
                     || MACRO_CALL_MEMBER(MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
                         MSS::enums::SND_STR_SFX_2Unk)) {
-                    if (0 < DAT_SpeechDefinedData::instance.field10_0x49d4b4
-                        && DAT_SpeechDefinedData::instance.field10_0x49d4b4 != param_1) {
+                    if (0 < DAT_SpeechDefinedData::instance.field_0x49d4b4
+                        && DAT_SpeechDefinedData::instance.field_0x49d4b4 != param_1) {
                         if (DAT_00b986f0::instance == 2) {
                             return;
                         }
@@ -100,10 +100,10 @@ namespace Audio {
                         return;
                     }
                 } else {
-                    DAT_SpeechDefinedData::instance.field10_0x49d4b4 = -1;
+                    DAT_SpeechDefinedData::instance.field_0x49d4b4 = -1;
                 }
             }
-            if (param_1 <= 0 || DAT_SpeechDefinedData::instance.field10_0x49d4b4 == param_1
+            if (param_1 <= 0 || DAT_SpeechDefinedData::instance.field_0x49d4b4 == param_1
                 || (FLOAT_00b986ec::instance < 900.0 && param_1 == 8)) {
                 return;
             }
@@ -111,13 +111,13 @@ namespace Audio {
             case 7:
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playAmbientSoundStream2Unk, this)(5);
                 FLOAT_00b986e8::instance = 1.0;
-                DAT_SpeechDefinedData::instance.field10_0x49d4b4 = 7;
+                DAT_SpeechDefinedData::instance.field_0x49d4b4 = 7;
                 DAT_00b986f0::instance = 1;
                 DAT_SoundSystemState::instance.streamFileVolumeNextUnk_0x48[2] = 1;
                 break;
             case 8:
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playAmbientSoundStream2Unk, this)(6);
-                DAT_SpeechDefinedData::instance.field10_0x49d4b4 = 8;
+                DAT_SpeechDefinedData::instance.field_0x49d4b4 = 8;
                 break;
             }
         }

@@ -51,8 +51,8 @@ namespace Game {
             int someCount47; // 0x00000034 length: 4
             int someCount45; // 0x00000038 length: 4
             int textYOffset; // 0x0000003C length: 4
-            short field25_0x40; // 0x00000040 length: 2
-            short field26_0x42; // 0x00000042 length: 2
+            short field_0x40; // 0x00000040 length: 2
+            short field_0x42; // 0x00000042 length: 2
             int timeTaxesOrRationsChange; // 0x00000044 length: 4
             short releaseDogsFlag; // 0x00000048 length: 2
             undefined2 someCount32; // 0x0000004A length: 2
@@ -74,20 +74,7 @@ namespace Game {
             int availablePeasantsAtFire; // 0x00000088 length: 4
             int availablePeasantsOrHousedPeasants; // 0x0000008C length: 4
             int count; // 0x00000090 length: 4
-            BuildingEntryInfo keep; // 0x00000094 length: 40
-            BuildingEntryInfo stockpile; // 0x000000BC length: 40
-            BuildingEntryInfo granary; // 0x000000E4 length: 40
-            BuildingEntryInfo armory; // 0x0000010C length: 40
-            BuildingEntryInfo unknown4; // 0x00000134 length: 40
-            BuildingEntryInfo barracks; // 0x0000015C length: 40
-            BuildingEntryInfo unknown6; // 0x00000184 length: 40
-            BuildingEntryInfo marketplace; // 0x000001AC length: 40
-            BuildingEntryInfo campground; // 0x000001D4 length: 40
-            BuildingEntryInfo engineersGuild; // 0x000001FC length: 40
-            BuildingEntryInfo tunnelersGuild; // 0x00000224 length: 40
-            BuildingEntryInfo mercenaryPost; // 0x0000024C length: 40
-            BuildingEntryInfo oilSmelter; // 0x00000274 length: 40
-            undefined1 padding_0x29c[280]; // 0x0000029C length: 280
+            BuildingEntryInfo buildingEntryInfos[20]; // 0x00000094 length: 800
             int storedPopularityPercent; // 0x000003B4 length: 4
             int previousArmySize; // 0x000003B8 length: 4
             int currentSiegeWeaponCount; // 0x000003BC length: 4
@@ -96,12 +83,12 @@ namespace Game {
             int popularityAtWeekTick100; // 0x00000444 length: 4
             int currentGoldDelayed; // 0x00000448 length: 4
             int counterTrackingPopGoldPopup; // 0x0000044C length: 4
-            int field490_0x450; // 0x00000450 length: 4
+            int field_0x450; // 0x00000450 length: 4
             int hasInitialResourceRecievingStarted; // 0x00000454 length: 4
             undefined1 padding_0x458[4]; // 0x00000458 length: 4
             int unkWheatFarmOrientation; // 0x0000045C length: 4
-            undefined1 unkHopFarmVariation; // 0x00000460 length: 1
-            undefined1 padding_0x461[7]; // 0x00000461 length: 7
+            int unkHopFarmVariation; // 0x00000460 length: 4
+            undefined1 padding_0x464[4]; // 0x00000464 length: 4
             int dairyFarmVariationMod4; // 0x00000468 length: 4
             int startResources[25]; // 0x0000046C length: 100
             int currentResources[25]; // 0x000004D0 length: 100
@@ -173,11 +160,11 @@ namespace Game {
             int popularityChangeBasedOnTax; // 0x0000215C length: 4
             uint popularityChangeBasedOnFood; // 0x00002160 length: 4
             int popularityChangeBasedOnCrowding; // 0x00002164 length: 4
-            int field636_0x2168; // 0x00002168 length: 4
-            uint someCount40; // 0x0000216C length: 4
+            int field_0x2168; // 0x00002168 length: 4
+            uint largestPopularityChangeReason; // 0x0000216C length: 4
             int someCount43; // 0x00002170 length: 4
-            int field639_0x2174; // 0x00002174 length: 4
-            int field640_0x2178; // 0x00002178 length: 4
+            int field_0x2174; // 0x00002174 length: 4
+            int field_0x2178; // 0x00002178 length: 4
             int nonInteractiveCitizenCountUnk; // 0x0000217C length: 4
             int currentPopulation; // 0x00002180 length: 4
             int populationRelatedCrowdingCountUnk; // 0x00002184 length: 4
@@ -217,7 +204,7 @@ namespace Game {
             short freshUnitTribeIDs[4]; // 0x0000225C length: 8
             int freshUnitTribeUIDs[4]; // 0x00002264 length: 16
             int aiControlStatusRelated; // 0x00002274 length: 4
-            int counter; // 0x00002278 length: 4
+            int availableCows; // 0x00002278 length: 4
             short pitchDitchCounterTo4; // 0x0000227C length: 2
             short previousBlessedPeoplePercentage; // 0x0000227E length: 2
             short isFoodTypeBanned[4]; // 0x00002280 length: 8
@@ -226,26 +213,26 @@ namespace Game {
             int ownsCathedralUnk; // 0x00002290 length: 4
             int popularityReligionBasedDiv25; // 0x00002294 length: 4
             int priestCountUnk; // 0x00002298 length: 4
-            int field689_0x229c; // 0x0000229C length: 4
+            int field_0x229c; // 0x0000229C length: 4
             int weightedLosses; // 0x000022A0 length: 4
-            uint beerPercentage; // 0x000022A4 length: 4
+            int beerPercentage; // 0x000022A4 length: 4
             short pitchDitchTileCount; // 0x000022A8 length: 2
             short moatTileCount; // 0x000022AA length: 2
-            short someCount48; // 0x000022AC length: 2
-            short someCount49; // 0x000022AE length: 2
-            short someCount50; // 0x000022B0 length: 2
-            short someCount51; // 0x000022B2 length: 2
-            short someCount52; // 0x000022B4 length: 2
-            short someCount53; // 0x000022B6 length: 2
-            short someCount54; // 0x000022B8 length: 2
-            short someCount55; // 0x000022BA length: 2
-            short someCount56; // 0x000022BC length: 2
-            short someCount57; // 0x000022BE length: 2
-            short someCount58; // 0x000022C0 length: 2
-            short someCount59; // 0x000022C2 length: 2
-            int someCount60; // 0x000022C4 length: 4
+            short eventPlagueCountdown; // 0x000022AC length: 2
+            short eventLionsCountdown; // 0x000022AE length: 2
+            short eventBanditsCountdown; // 0x000022B0 length: 2
+            short eventFireCountdown; // 0x000022B2 length: 2
+            short eventMarriageCountdown; // 0x000022B4 length: 2
+            short eventJesterCountdown; // 0x000022B6 length: 2
+            short currentPlaguePenalty; // 0x000022B8 length: 2
+            short currentLionsPenalty; // 0x000022BA length: 2
+            short currentBanditsPenalty; // 0x000022BC length: 2
+            short currentFirePenalty; // 0x000022BE length: 2
+            short currentMarriageBoost; // 0x000022C0 length: 2
+            short currentJesterBoost; // 0x000022C2 length: 2
+            int eventPlagueHealerActivity; // 0x000022C4 length: 4
             int someUnitID01; // 0x000022C8 length: 4
-            int field708_0x22cc; // 0x000022CC length: 4
+            int field_0x22cc; // 0x000022CC length: 4
             int countInns; // 0x000022D0 length: 4
             int lastlastEncounteredEnemyPlayerID; // 0x000022D4 length: 4
             char lostUnitToEnemyPlayerFlags[4]; // 0x000022D8 length: 4
@@ -305,7 +292,7 @@ namespace Game {
             int aivPositiveFearFactorDelay; // 0x00002B4C length: 4
             int defWallPatrolRallyTimeWaitCounter; // 0x00002B50 length: 4
             int defWallPatrolRallyTimeHits; // 0x00002B54 length: 4
-            int field843_0x2b58; // 0x00002B58 length: 4
+            int field_0x2b58; // 0x00002B58 length: 4
             int engineerCountRelated; // 0x00002B5C length: 4
             BOOLEnum isEngineerRequired; // 0x00002B60 length: 4
             int closestEnemyDistanceToTheLord; // 0x00002B64 length: 4

@@ -10,7 +10,7 @@ namespace UI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004650C0
-    BOOLEnum Helpers::CheckGoldResource(int unitIndex)
+    BOOLEnum Helpers::CheckGoldResource(UnitType unitIndex)
     {
         int requiredGold = 0;
         if (unitIndex == 5) {

@@ -7,7 +7,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00409DB0
-        undefined4 BuildingsState::getBuildingHeightForBuildingID(int buildingID)
+        int BuildingsState::getBuildingHeightForBuildingID(int buildingID)
         {
             switch (this->buildings[buildingID].buildingType) {
             case BT_MANORHOUSE:

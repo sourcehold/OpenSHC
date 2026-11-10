@@ -9,34 +9,31 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Same as UpdateKeepDoorLeft with the right-side sprite IDs (0x528 manor house at 0x418AAB, 0x526 keep at
-    // 0x418ACD).
     // FUNCTION: STRONGHOLDCRUSADER 0x00418A60
     void Buildings::UpdateKeepDoorRight()
     {
-        int buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
-        int keepBuildingID = (short)DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID;
-        DAT_BuildingsState::instance.buildings[buildingID].orientation
-            = DAT_BuildingsState::instance.buildings[keepBuildingID].orientation;
-        OpenSHC::Map::Buildings::BuildingTypeShort keepType
-            = DAT_BuildingsState::instance.buildings[keepBuildingID].buildingType;
-        if (keepType == OpenSHC::Map::Buildings::BT_MANORHOUSE) {
-            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 1329;
-            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 1320;
-            DAT_BuildingsState::instance.buildings[buildingID].unknownManorHouseOrStoneKeepRelated = 0;
-        } else if (keepType == OpenSHC::Map::Buildings::BT_STONEKEEP
-            || keepType == OpenSHC::Map::Buildings::BT_STRONGHOLD) {
-            DAT_BuildingsState::instance.buildings[buildingID].gfxOffset = 1324;
-            DAT_BuildingsState::instance.buildings[buildingID].spriteID = 1318;
-            DAT_BuildingsState::instance.buildings[buildingID].unknownManorHouseOrStoneKeepRelated = 0;
+        int const keepID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].quarryStockpileID;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].orientation
+            = DAT_BuildingsState::instance.buildings[keepID].orientation;
+        if (DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_MANORHOUSE) {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gfxOffset = 0x531;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID = 0x528;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unknownManorHouseOrStoneKeepRelated
+                = 0;
+        } else if (DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_STONEKEEP
+            || DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_STRONGHOLD) {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gfxOffset = 0x52c;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID = 0x526;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unknownManorHouseOrStoneKeepRelated
+                = 0;
         }
-        if (DAT_BuildingsState::instance.buildings[buildingID].spriteID
-            != DAT_BuildingsState::instance.buildings[buildingID].oldVisualActiveState) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID
+            != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                buildingID);
+                DAT_CurrentBuildingID::instance);
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
-                = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID;
+                = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID;
         }
     }
 

@@ -1,0 +1,294 @@
+name: status-regression
+
+# Reports every status entry that is below the best match already known -- on
+# main, or on any fork's reimpl/ branches. The point is that a worse-matching
+# file cannot reach main unnoticed.
+#
+# It runs twice per change, off the same status-rollup run:
+#   * on a pull request, while the PR is being reviewed;
+#   * on a merge_group, where the commit under test is "main + this PR" as it
+#     will actually land. That second run is the one that closes the race where
+#     main gains a better version of a function while the PR sits open, so it
+#     is the run branch protection should require.
+#
+# Every run posts a commit status; only a regression gets a comment, and the
+# comment is removed again once the regression is gone.
+#
+# Like status-rollup-publish.yml this is the PRIVILEGED half of a pair: it runs
+# on workflow_run, so it never checks out or runs the code under test -- not the
+# pull request's, and not the merge group's either (a merge group holds fork
+# code that has not landed yet). The commit under test is fetched only as DATA
+# through the base repository's own refs, and only its status/*.txt is read. The
+# percentages in those files are taken for granted; nothing is rebuilt.
+on:
+  workflow_run:
+    workflows: [status-rollup]
+    types: [completed]
+
+concurrency:
+  group: status-regression-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  check:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'merge_group') }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # the report comment
+      statuses: write # the branch-protectable check on the commit under test
+    steps:
+      # Trusted code only: the base repo's default branch, never the ref under test.
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+          # The check reads the diff against the MERGE BASE of the commit under
+          # test, so both sides need real history; with a shallow one there is
+          # no merge base and the check refuses to run. The pack is ~54 MiB.
+          fetch-depth: 0
+
+      - name: Identify the commit under test
+        id: ctx
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_EVENT: ${{ github.event.workflow_run.event }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -euo pipefail
+
+          # The SHA is untrusted input we act on; require it to look like one.
+          if ! printf '%s' "$HEAD_SHA" | grep -qE '^[0-9a-f]{40}$'; then
+            echo "Refusing to continue: head_sha is not a 40-hex SHA" >&2
+            exit 1
+          fi
+          echo "event=$RUN_EVENT head_sha=$HEAD_SHA head_branch=$HEAD_BRANCH"
+
+          if [ "$RUN_EVENT" = 'merge_group' ]; then
+            # The queue branch is gh-readonly-queue/<base>/pr-<n>-<sha>, and a
+            # batched group names every PR it holds. Keep it to that shape
+            # before any of it reaches git.
+            if ! printf '%s' "$HEAD_BRANCH" | grep -qE '^gh-readonly-queue/[A-Za-z0-9._/-]+$'; then
+              echo "Refusing to continue: unexpected merge queue branch" >&2
+              exit 1
+            fi
+            prs=$(printf '%s' "$HEAD_BRANCH" | grep -oE 'pr-[0-9]+' | sed 's/^pr-//' | sort -un | tr '\n' ' ')
+            if [ -z "$prs" ]; then
+              echo "No PR number in '$HEAD_BRANCH'; nothing to check." >&2
+              exit 1
+            fi
+            echo "mode=queue" >> "$GITHUB_OUTPUT"
+            echo "prs=$prs" >> "$GITHUB_OUTPUT"
+            # Comment on the last PR of the group; the status is what gates.
+            echo "pr=$(printf '%s' "$prs" | tr ' ' '\n' | tail -1)" >> "$GITHUB_OUTPUT"
+            echo "data_ref=refs/heads/$HEAD_BRANCH" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # workflow_run.pull_requests is empty for forks, so re-derive the PR
+          # from the API: an open PR in THIS repo whose head is this SHA.
+          # HEAD_SHA was validated as 40 hex digits, so it is safe inside the
+          # jq program (gh api --jq takes no --arg).
+          pr=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --paginate \
+                 --jq "[.[] | select(.head.sha == \"$HEAD_SHA\") | .number] | first // empty")
+          if ! printf '%s' "$pr" | grep -qE '^[0-9]+$'; then
+            echo "No open PR in $REPO has head $HEAD_SHA; nothing to check."
+            echo "mode=skip" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Confirm the PR's head really is this commit (guards a stale run).
+          actual=$(gh api "repos/$REPO/pulls/$pr" --jq '.head.sha')
+          if [ "$actual" != "$HEAD_SHA" ]; then
+            echo "PR #$pr has moved on ($actual != $HEAD_SHA); nothing to check."
+            echo "mode=skip" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "mode=pr" >> "$GITHUB_OUTPUT"
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          echo "prs=$pr" >> "$GITHUB_OUTPUT"
+          echo "data_ref=refs/pull/$pr/head" >> "$GITHUB_OUTPUT"
+
+      # Data, not code: the commit under test arrives through a ref of the base
+      # repository, and the check only ever reads status/*.txt out of its tree.
+      #
+      # The ref can legitimately be gone by the time we look: a merge queue
+      # branch is deleted as soon as its group is dequeued or rebatched, and a
+      # closed PR's refs/pull/N/head goes the same way. That is not a failure --
+      # the commit it named is being discarded anyway -- so distinguish "the ref
+      # no longer exists" (exit quietly, leave no status) from "the fetch broke"
+      # (a real error worth failing on).
+      - name: Fetch the commit under test as data
+        id: fetch
+        if: ${{ steps.ctx.outputs.mode != 'skip' }}
+        env:
+          DATA_REF: ${{ steps.ctx.outputs.data_ref }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if ! git ls-remote --exit-code origin "$DATA_REF" >/dev/null 2>&1; then
+            echo "$DATA_REF no longer exists; the commit under test has been discarded."
+            echo "gone=yes" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Not --depth=1: a shallow ref has no merge base with the base branch,
+          # and the file list the check narrows by comes from that diff.
+          git fetch --no-tags origin "+$DATA_REF:refs/remotes/under-test"
+          got=$(git rev-parse refs/remotes/under-test)
+          if [ "$got" != "$HEAD_SHA" ]; then
+            # The ref moved on between the rollup and now, so this run is stale.
+            echo "$DATA_REF is now $got, not the $HEAD_SHA this run describes; nothing to check."
+            echo "gone=yes" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+      # Before the fork fetch, and that order is load-bearing: a pull request
+      # normally comes FROM a fork's reimpl/ branch, so the shallow fetch below
+      # grafts the very commit under test as parentless and destroys its
+      # history. Read the diff while the history is still intact.
+      - name: List the files the change touches
+        id: touched
+        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          PR_REF: refs/remotes/under-test
+          BASE_REF: HEAD
+        run: |
+          set -euo pipefail
+          mb=$(git merge-base "$BASE_REF" "$PR_REF") || {
+            echo "No merge base between $BASE_REF and $PR_REF; both need real history." >&2
+            exit 1
+          }
+          echo "merge base: $mb"
+          git diff --name-only --diff-filter=d "$mb" "$PR_REF" > touched.txt
+          echo "files changed since the merge base: $(wc -l < touched.txt)"
+
+      - name: Fetch fork reimpl/ branches
+        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          chmod +x tools/reimplementation-helper/todo/fetch_fork_branches.sh
+          tools/reimplementation-helper/todo/fetch_fork_branches.sh "$REPO"
+
+      # A fork's own reimpl/ branch must not count as prior art against the PR
+      # that proposes it, so collect the head SHA of every PR under test.
+      - name: Collect the PR head SHAs to exclude
+        id: heads
+        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PRS: ${{ steps.ctx.outputs.prs }}
+        run: |
+          set -euo pipefail
+          shas=''
+          for n in $PRS; do
+            printf '%s' "$n" | grep -qE '^[0-9]+$' || continue
+            sha=$(gh api "repos/$REPO/pulls/$n" --jq '.head.sha' 2>/dev/null || true)
+            if printf '%s' "$sha" | grep -qE '^[0-9a-f]{40}$'; then
+              shas="$shas $sha"
+            fi
+          done
+          echo "shas=${shas# }" >> "$GITHUB_OUTPUT"
+          echo "excluding: ${shas:-<none>}"
+
+      - name: Compare against the best known match
+        id: check
+        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          PR_REF: refs/remotes/under-test
+          BASE_REF: HEAD
+          # Worked out above, while the commit under test still had its history.
+          TOUCHED_LIST: touched.txt
+          PR_HEAD_SHA: ${{ steps.heads.outputs.shas }}
+          LABEL: ${{ steps.ctx.outputs.mode == 'queue' && 'this merge group' || 'this PR' }}
+          OUT: status_regression.md
+        run: |
+          set -euo pipefail
+          python -I tools/reimplementation-helper/todo/status_regression.py | tee regression.log
+          {
+            echo '## Match regression check'
+            echo
+            echo '```'
+            cat regression.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          n=$(sed -n 's/^regressions=\([0-9]*\)$/\1/p' regression.log | tail -1)
+          if ! printf '%s' "$n" | grep -qE '^[0-9]+$'; then
+            echo "The check produced no regressions= line" >&2
+            exit 1
+          fi
+          echo "count=$n" >> "$GITHUB_OUTPUT"
+
+      # Only a regression is worth a comment. A clean result is reported by the
+      # commit status alone, which is always posted, so silence here means "the
+      # check ran and found nothing" rather than "the check did not run".
+      - name: Comment the report on the PR
+        if: ${{ steps.check.outputs.count != '' && steps.check.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.ctx.outputs.pr }}
+        run: |
+          set -euo pipefail
+          gh pr comment "$PR" --repo "$REPO"             --body-file status_regression.md --edit-last --create-if-none
+
+      # ... and once a regression is fixed, take the old report down, so a stale
+      # table cannot outlive the problem it described.
+      - name: Remove a stale report comment
+        if: ${{ steps.check.outputs.count == '0' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.ctx.outputs.pr }}
+        run: |
+          set -euo pipefail
+          ids=$(gh api "repos/$REPO/issues/$PR/comments" --paginate                   --jq '.[] | select(.user.login == "github-actions[bot]")
+                            | select(.body | startswith("<!-- status-regression -->")) | .id')
+          for id in $ids; do
+            echo "Removing resolved report comment $id"
+            gh api -X DELETE "repos/$REPO/issues/comments/$id"
+          done
+
+      # A workflow_run job is not attached to the checks of the commit that
+      # triggered it, so neither branch protection nor the merge queue can
+      # require this job directly. Post a commit status on the commit under test
+      # instead: that IS requirable, under the context "status-regression", and
+      # on a merge_group commit it is what lets the queue merge or reject.
+      # !cancelled(), not success(): if the check itself broke, the queue must
+      # see a red required status rather than wait for one that never arrives.
+      - name: Post the commit status on the commit under test
+        if: ${{ !cancelled() && steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          COUNT: ${{ steps.check.outputs.count }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+          if [ -z "$COUNT" ]; then
+            state=error
+            desc='The regression check did not complete; see the run log.'
+          elif [ "$COUNT" = '0' ]; then
+            state=success
+            desc='No match regression against main or any fork.'
+          else
+            state=failure
+            desc="$COUNT entry/entries below the best known match."
+          fi
+          gh api -X POST "repos/$REPO/statuses/$HEAD_SHA" \
+            -f state="$state" \
+            -f context='status-regression' \
+            -f description="$desc" \
+            -f target_url="$RUN_URL"
+
+      - name: Fail if a known match is lowered
+        if: ${{ steps.check.outputs.count != '' && steps.check.outputs.count != '0' }}
+        run: |
+          echo "This change lowers the match of at least one function below the best already known." >&2
+          echo "See the comment on the pull request." >&2
+          exit 1

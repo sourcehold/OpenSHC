@@ -37,19 +37,19 @@ namespace Text {
     class TextManager {
     public:
         int currentXOffset_0x0; // 0x00000000 length: 4
-        dword field1_0x4; // 0x00000004 length: 4
+        dword field_0x4; // 0x00000004 length: 4
         int textClipMin; // 0x00000008 length: 4
         int textClipMax; // 0x0000000C length: 4
         CodePageInt codePage; // 0x00000010 length: 4
-        dword field5_0x14; // 0x00000014 length: 4
+        dword field_0x14; // 0x00000014 length: 4
         BOOLEnum helpTextLinkActive; // 0x00000018 length: 4
         RenderTargetInt textSurfaceTarget; // 0x0000001C length: 4
-        dword field8_0x20; // 0x00000020 length: 4
-        int field9_0x24; // 0x00000024 length: 4
-        int field10_0x28; // 0x00000028 length: 4
+        dword field_0x20; // 0x00000020 length: 4
+        int field_0x24; // 0x00000024 length: 4
+        int field_0x28; // 0x00000028 length: 4
         dword drawingTextShadow; // 0x0000002C length: 4
-        dword field12_0x30; // 0x00000030 length: 4
-        dword field13_0x34; // 0x00000034 length: 4
+        dword field_0x30; // 0x00000030 length: 4
+        dword field_0x34; // 0x00000034 length: 4
         dword textColor; // 0x00000038 length: 4
         int sizeOfOneFontSet_0x3c; // 0x0000003C length: 4
         BOOLEnum alternativeCodePageUsedUnk; // 0x00000040 length: 4
@@ -59,8 +59,8 @@ namespace Text {
         int count1; // 0x00001318 length: 4
         undefined1 padding_0x131c[4]; // 0x0000131C length: 4
         char integerTextBuffer[20]; // 0x00001320 length: 20
-        char field26_0x1334[20]; // 0x00001334 length: 20
-        dword field27_0x1348; // 0x00001348 length: 4
+        char field_0x1334[20]; // 0x00001334 length: 20
+        dword field_0x1348; // 0x00001348 length: 4
         int textOffsets[260]; // 0x0000134C length: 1040
         char textStart[351000]; // 0x0000175C length: 351000
 

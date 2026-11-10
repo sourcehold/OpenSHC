@@ -1,0 +1,65 @@
+name: status-rollup
+
+# Rolls up status/addresses-SHC-*.txt from this repo and from the reimpl/
+# branches of every fork, and publishes the result as a workflow artifact.
+#
+# This workflow is deliberately UNPRIVILEGED: on a pull request it checks out
+# and runs code from the PR, so it must never hold a writable token. Publishing
+# to the latest-sarif release is done by status-rollup-publish.yml, which runs
+# on workflow_run with trusted code.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
+  # The merge queue builds the candidate "main + this PR" commit and waits for
+  # the required checks to report on it, so the chain has to run here too.
+  merge_group:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: status-rollup-${{ github.event_name == 'push' && 'main' || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  rollup:
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Fetch fork reimpl/ branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          chmod +x tools/reimplementation-helper/todo/fetch_fork_branches.sh
+          tools/reimplementation-helper/todo/fetch_fork_branches.sh "$REPO"
+
+      - name: Roll up status files
+        run: python -I tools/reimplementation-helper/todo/status_rollup.py | tee rollup.log
+
+      - name: Summary
+        run: |
+          {
+            echo '## Reimplementation status rollup'
+            echo
+            echo '```'
+            cat rollup.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload TSV as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: status-rollup
+          path: status_rollup.tsv
+          if-no-files-found: error

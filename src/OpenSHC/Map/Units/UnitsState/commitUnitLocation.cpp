@@ -9,7 +9,7 @@ namespace Map {
         {
             this->units[unitID].currentIndexInPathPlan = 0;
             this->units[unitID].tunnelerFinishedDigging = 0;
-            this->units[unitID].field105_0xe8 = FALSE;
+            this->units[unitID].field_0xe8 = FALSE;
             this->units[unitID].movementCooldown = 0;
             this->units[unitID].movementRelated = 8;
             this->units[unitID].unknownTestAgainst0_2 = 1;

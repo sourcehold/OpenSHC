@@ -28,10 +28,11 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
         buildingID = DAT_CurrentBuildingID::instance;
+        // assignment via a local stack pointer is required for 100% match
         short* renderPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
         *renderPtr = 0;
         DAT_BuildingsState::instance.buildings[buildingID].growCounter += 1;
-        if (DAT_BuildingsState::instance.buildings[buildingID].growCounter > 150) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].growCounter > 0x96) {
             DAT_BuildingsState::instance.buildings[buildingID].growCounter = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::growWheat, DAT_BuildingsState::ptr)(
                 buildingID);
@@ -39,6 +40,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateWheatFieldTileGraphics,
             DAT_BuildingsState::ptr)(buildingID);
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
+            // assignment via a local stack pointer is required for 100% match
             int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
             *showOverlaysPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;

@@ -17,7 +17,7 @@ namespace UI {
                 DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = tabType;
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);
-                DAT_GameCore::instance.field61_0x100 = tabType;
+                DAT_GameCore::instance.field_0x100 = tabType;
             }
 
         }

@@ -30,7 +30,7 @@ import re
 import subprocess
 import sys
 
-from common import PDB_ERROR_RE, TMP, build_env, fresh_pdb_endpoint, kill_pdb_server
+from common import PDB_ERROR_RE, TMP, build_env, fresh_pdb_endpoint, kill_pdb_server, win_cmd
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--keep-going", action="store_true")
@@ -42,11 +42,11 @@ log = TMP / "build.log"
 
 def run_build(endpoint=None):
     with open(log, "w") as out:
-        subprocess.run(["cmd", "/c", r".\build.bat RelWithDebInfo OpenSHC.dll"],
+        subprocess.run(win_cmd(r".\build.bat RelWithDebInfo OpenSHC.dll"),
                        stdout=out, stderr=subprocess.STDOUT, env=build_env(endpoint))
     if args.keep_going:
         with open(log, "w") as out:
-            subprocess.run(["cmd", "/c", r".\cmakew --build --preset RelWithDebInfo --target OpenSHC.dll -- /K"],
+            subprocess.run(win_cmd(r".\cmakew --build --preset RelWithDebInfo --target OpenSHC.dll -- /K"),
                            stdout=out, stderr=subprocess.STDOUT, env=build_env(endpoint))
     return log.read_text(errors="replace")
 

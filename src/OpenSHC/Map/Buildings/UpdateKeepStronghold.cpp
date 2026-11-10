@@ -19,7 +19,7 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].currentHealth
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].maxHealth;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 27;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0x1b;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + 5;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY

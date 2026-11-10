@@ -3,6 +3,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 
@@ -20,8 +21,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
     {
-        uint const campfireX = DAT_GameState::instance.playerDataArray[playerID1].campground.xEntry;
-        uint const campfireY = DAT_GameState::instance.playerDataArray[playerID1].campground.yEntry;
+        uint const campfireX = DAT_GameState::instance.playerDataArray[playerID1]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .xEntry;
+        uint const campfireY = DAT_GameState::instance.playerDataArray[playerID1]
+                                   .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                                   .yEntry;
 
         uint gatehouseX;
         uint gatehouseY;

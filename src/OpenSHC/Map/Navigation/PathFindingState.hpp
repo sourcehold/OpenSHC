@@ -39,7 +39,7 @@ namespace Map {
             int climbY; // 0x0000001C length: 4
             int mappingYRelated; // 0x00000020 length: 4
             int yLimit; // 0x00000024 length: 4
-            int field10_0x28; // 0x00000028 length: 4
+            int field_0x28; // 0x00000028 length: 4
             int ALG_TargetX; // 0x0000002C length: 4
             int ALG_TargetY; // 0x00000030 length: 4
             int ALG_TargetTile; // 0x00000034 length: 4
@@ -52,21 +52,21 @@ namespace Map {
             undefined1 padding_0x50[12]; // 0x00000050 length: 12
             int ALGO_TotalTroopValue; // 0x0000005C length: 4
             int ALGO_TotalTroopCount; // 0x00000060 length: 4
-            int field34_0x64; // 0x00000064 length: 4
+            int field_0x64; // 0x00000064 length: 4
             undefined1 padding_0x68[4]; // 0x00000068 length: 4
             int toggleUpdateSeparateAreaTileMap; // 0x0000006C length: 4
-            int field40_0x70; // 0x00000070 length: 4
-            int field41_0x74; // 0x00000074 length: 4
+            int field_0x70; // 0x00000070 length: 4
+            int field_0x74; // 0x00000074 length: 4
             int DAT_lWys; // 0x00000078 length: 4
-            int field43_0x7c; // 0x0000007C length: 4
+            int field_0x7c; // 0x0000007C length: 4
             int notAllAssassinsUnk; // 0x00000080 length: 4
             int climbIsIllegal; // 0x00000084 length: 4
             int allAssassinsUnk; // 0x00000088 length: 4
             int distance; // 0x0000008C length: 4
-            int field48_0x90; // 0x00000090 length: 4
-            int field49_0x94; // 0x00000094 length: 4
-            int field50_0x98; // 0x00000098 length: 4
-            int field51_0x9c; // 0x0000009C length: 4
+            int field_0x90; // 0x00000090 length: 4
+            int field_0x94; // 0x00000094 length: 4
+            int field_0x98; // 0x00000098 length: 4
+            int field_0x9c; // 0x0000009C length: 4
             int calculations; // 0x000000A0 length: 4
             int DAT_Mini_spreads; // 0x000000A4 length: 4
             int DAT_Easy; // 0x000000A8 length: 4
@@ -75,7 +75,7 @@ namespace Map {
             int searchMatchCounter; // 0x000000B4 length: 4
             undefined1 padding_0xb8[4]; // 0x000000B8 length: 4
             int DAT_Ass; // 0x000000BC length: 4
-            int field63_0xc0; // 0x000000C0 length: 4
+            int field_0xc0; // 0x000000C0 length: 4
             int DAT_Test_likely; // 0x000000C4 length: 4
             int DAT_Test_gatehouse; // 0x000000C8 length: 4
             int totalZones; // 0x000000CC length: 4
@@ -136,7 +136,7 @@ namespace Map {
 
             uint commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3);
 
-            BOOLEnum updateSeparateAreaTileMap(int forceUpdate);
+            BOOLEnum updateSeparateAreaTileMap(BOOLEnum forceUpdate);
 
             BOOLEnum updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile);
 
@@ -179,13 +179,13 @@ namespace Map {
             void computeTotalUnitsWithinDistance(
                 int playerID, int sameTeamUnits, int someLogicalTileProperty, int tile, int distance);
 
-            void computeNextRallyPointDestination(int unitID, int xPos, int yPos);
+            void computeNextRallyPointDestination(int unitID, uint xPos, uint yPos);
 
             BOOLEnum findDirectNeighbourWalkableTile(uint x, uint y);
 
-            void findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int x, int y);
+            void findPathableTileWithoutUnitWithBuildingAtXY(int unitID, uint x, uint y);
 
-            void findFreeTileOnDefensiveStructure(int unitID, int x, int y);
+            void findFreeTileOnDefensiveStructure(int unitID, uint x, uint y);
 
             void findWalkableTileThatDoesNotContainUnit(int unitID, uint x, uint y, int considerUnits);
 
@@ -203,7 +203,7 @@ namespace Map {
 
             void updateAIZoneWithFloodFill0x20(int max, uint x, uint y);
 
-            BOOLEnum findAIZoneWithFlags(int maxDistance, uint x, uint y, undefined4 aiInfoFlags);
+            BOOLEnum findAIZoneWithFlags(int maxDistance, uint x, uint y, byte aiInfoFlags);
 
             int findArcherRelatedAttackInfoIndex(int max, uint x, uint y, int tribeID);
 

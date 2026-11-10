@@ -15,11 +15,11 @@ namespace Audio {
             if (!this->waveOutOpenUnk_0x8) {
                 return;
             }
-            if (this->streamActiveUnk_0x20[DAT_SFXDefinedData::instance.field7_0x4e4]) {
+            if (this->streamActiveUnk_0x20[DAT_SFXDefinedData::instance.field_0x4e4]) {
                 MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(
-                    (SHC_SoundStream)DAT_SFXDefinedData::instance.field7_0x4e4);
+                    (SHC_SoundStream)DAT_SFXDefinedData::instance.field_0x4e4);
             }
-            SHC_SoundStream const soundStream = (SHC_SoundStream)DAT_SFXDefinedData::instance.field7_0x4e4;
+            SHC_SoundStream const soundStream = (SHC_SoundStream)DAT_SFXDefinedData::instance.field_0x4e4;
             this->streamFileVolumeNextUnk_0x48[3] = 100;
             this->streamFileVolumeNextUnk_0x48[4] = 100;
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_UNUSED_EXTREME_AD) {

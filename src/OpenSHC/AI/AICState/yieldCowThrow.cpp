@@ -15,7 +15,7 @@ namespace AI {
             int const aicIndex = aiType - 1;
             if (DAT_GameState::instance.mapAndTime.skirmishNoCowThrowing == 0
                 && this->aics[aicIndex].CowThrowInterval != 0
-                && DAT_GameState::instance.playerDataArray[playerID].counter > 0) {
+                && DAT_GameState::instance.playerDataArray[playerID].availableCows > 0) {
                 DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter++;
                 if (DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter
                     > this->aics[aicIndex].CowThrowInterval) {

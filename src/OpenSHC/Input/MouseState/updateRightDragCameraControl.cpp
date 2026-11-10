@@ -10,79 +10,80 @@ namespace Input {
     // FUNCTION: STRONGHOLDCRUSADER 0x00470BC0
     void MouseState::updateRightDragCameraControl()
     {
-        int iVar6 = this->mapOrientationCopy3;
+        int newMapOrientation = this->mapOrientationCopy3;
 
         this->mouseBasedEvent = 0;
-        this->field41_0x17c = 0;
-        this->field40_0x178 = 0;
-        this->field56_0x1b8 = 0;
+        this->field_0x17c = 0;
+        this->field_0x178 = 0;
+        this->field_0x1b8 = 0;
 
-        DWORD DVar4 = timeGetTime();
+        DWORD currentTime = timeGetTime();
 
-        this->currentTime3 = DVar4;
-        this->field53_0x1ac = DVar4 - this->currentTime2;
+        this->currentTime3 = currentTime;
+        this->field_0x1ac = currentTime - this->currentTime2;
 
-        ++this->field39_0x174;
-        if (this->field53_0x1ac > this->field54_0x1b0) {
-            this->currentTime2 = DVar4;
-            this->field55_0x1b4 = 0;
-            this->field48_0x198 = 0;
-            this->field49_0x19c = 0;
+        ++this->field_0x174;
+        if (this->field_0x1ac > this->field_0x1b0) {
+            this->currentTime2 = currentTime;
+            this->field_0x1b4 = 0;
+            this->field_0x198 = 0;
+            this->field_0x19c = 0;
         }
 
-        int iVar5
+        int dragDistance
             = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
                 DAT_DirectionAlgorithmState::ptr)(
                 this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 4);
 
-        if (iVar5 < 12 || this->field58_0x1c0) {
-            this->field40_0x178 = 0;
-        } else if (iVar5 < 28) {
-            this->field40_0x178 = iVar5 / 2;
+        if (dragDistance < 12 || this->field_0x1c0) {
+            this->field_0x178 = 0;
+        } else if (dragDistance < 28) {
+            this->field_0x178 = dragDistance / 2;
             this->mouseBasedEvent = 2;
         } else {
-            this->field56_0x1b8 = 1;
-            this->field57_0x1bc = 1;
-            this->field59_0x1c4 = 1;
-            this->field60_0x1c8 = 1;
-            this->field40_0x178 = 40;
+            this->field_0x1b8 = 1;
+            this->field_0x1bc = 1;
+            this->field_0x1c4 = 1;
+            this->field_0x1c8 = 1;
+            this->field_0x178 = 40;
             this->mouseBasedEvent = 1;
         }
 
-        iVar5 = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
-            DAT_DirectionAlgorithmState::ptr)(
-            this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 0);
-        if (iVar5 < 22 || this->field57_0x1bc) {
-            this->field39_0x174 = 0;
-            this->field55_0x1b4 = 0;
+        dragDistance
+            = MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::getMouseVectorLengthBasedOnDirection,
+                DAT_DirectionAlgorithmState::ptr)(
+                this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 0);
+        if (dragDistance < 22 || this->field_0x1bc) {
+            this->field_0x174 = 0;
+            this->field_0x1b4 = 0;
 
-            if (this->field56_0x1b8 == 2 || iVar5 < 22) {
-                this->currentTime2 = DVar4;
+            if (this->field_0x1b8 == 2 || dragDistance < 22) {
+                this->currentTime2 = currentTime;
             }
         } else {
-            this->field58_0x1c0 = 1;
-            this->field59_0x1c4 = 1;
-            this->field60_0x1c8 = 1;
-            this->field56_0x1b8 = 2;
-            this->field54_0x1b0 = 1500;
+            this->field_0x1c0 = 1;
+            this->field_0x1c4 = 1;
+            this->field_0x1c8 = 1;
+            this->field_0x1b8 = 2;
+            this->field_0x1b0 = 1500;
 
-            if (!this->field55_0x1b4) {
-                this->field55_0x1b4 = 1;
+            if (!this->field_0x1b4) {
+                this->field_0x1b4 = 1;
 
-                iVar6 = this->mapOrientationCopy3 + 6;
-                if (iVar6 >= 8) {
-                    iVar6 -= 8;
+                newMapOrientation = this->mapOrientationCopy3 + 6;
+                if (newMapOrientation >= 8) {
+                    newMapOrientation -= 8;
                 }
 
-                this->field44_0x188 = 0;
+                this->field_0x188 = 0;
             } else {
-                this->field44_0x188 = 8;
+                this->field_0x188 = 8;
             }
         }
 
-        if (iVar6 != this->mapOrientationCopy2) {
-            this->mapOrientationCopy2 = iVar6;
-            this->mapOrientationCopy3 = iVar6;
+        if (newMapOrientation != this->mapOrientationCopy2) {
+            this->mapOrientationCopy2 = newMapOrientation;
+            this->mapOrientationCopy3 = newMapOrientation;
             this->mouseBasedEvent = 3;
         }
 
@@ -90,22 +91,22 @@ namespace Input {
                 DAT_DirectionAlgorithmState::ptr)(
                 this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 2)
                 < 55
-            || this->field60_0x1c8) {
+            || this->field_0x1c8) {
 
-            this->field39_0x174 = 0;
-            if (this->field56_0x1b8 == 3) {
-                this->currentTime2 = DVar4;
+            this->field_0x174 = 0;
+            if (this->field_0x1b8 == 3) {
+                this->currentTime2 = currentTime;
             }
         } else {
-            this->field58_0x1c0 = 1;
-            this->field59_0x1c4 = 1;
-            this->field57_0x1bc = 1;
-            this->field54_0x1b0 = 2000;
-            this->field56_0x1b8 = 3;
+            this->field_0x1c0 = 1;
+            this->field_0x1c4 = 1;
+            this->field_0x1bc = 1;
+            this->field_0x1b0 = 2000;
+            this->field_0x1b8 = 3;
 
-            if (this->field48_0x198 != 2) {
+            if (this->field_0x198 != 2) {
                 this->mouseBasedEvent = 4;
-                this->field48_0x198 = 1;
+                this->field_0x198 = 1;
             }
         }
 
@@ -113,22 +114,22 @@ namespace Input {
                 DAT_DirectionAlgorithmState::ptr)(
                 this->storedScreenSpaceX, this->storedScreenSpaceY, this->screenSpaceX, this->screenSpaceY, 6)
                 < 55
-            || this->field59_0x1c4) {
+            || this->field_0x1c4) {
 
-            this->field39_0x174 = 0;
-            if (this->field56_0x1b8 == 4) {
-                this->currentTime2 = DVar4;
+            this->field_0x174 = 0;
+            if (this->field_0x1b8 == 4) {
+                this->currentTime2 = currentTime;
             }
         } else {
-            this->field58_0x1c0 = 1;
-            this->field60_0x1c8 = 1;
-            this->field57_0x1bc = 1;
-            this->field54_0x1b0 = 2000;
-            this->field56_0x1b8 = 4;
+            this->field_0x1c0 = 1;
+            this->field_0x1c8 = 1;
+            this->field_0x1bc = 1;
+            this->field_0x1b0 = 2000;
+            this->field_0x1b8 = 4;
 
-            if (this->field49_0x19c != 2) {
+            if (this->field_0x19c != 2) {
                 this->mouseBasedEvent = 5;
-                this->field49_0x19c = 1;
+                this->field_0x19c = 1;
             }
         }
     }

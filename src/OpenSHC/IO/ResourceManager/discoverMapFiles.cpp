@@ -27,7 +27,7 @@ namespace IO {
 
         BOOLEnum _missionMaps = FALSE;
         BOOLEnum _originalMaps = FALSE;
-        int local_22c = 0;
+        BOOLEnum originalMapsScanned = FALSE;
 
         if (!MACRO_CALL(OS_Func::__stricmp)(param_1, s_maps_map_005a64b0)) {
             _missionMaps = TRUE;
@@ -129,10 +129,10 @@ namespace IO {
             if (FindNextFileA(_handle, &_win32FindData)) {
                 continue;
             }
-            if (!_originalMaps || local_22c) {
+            if (!_originalMaps || originalMapsScanned) {
                 break;
             }
-            local_22c = 1;
+            originalMapsScanned = TRUE;
 
             // required, otherwise copy elision will not work
             std::string path(this->paths_getDocumentsMapsFolderString(TRUE));

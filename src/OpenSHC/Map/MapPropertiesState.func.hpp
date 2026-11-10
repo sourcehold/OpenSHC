@@ -45,7 +45,7 @@ namespace Map {
         sumUnitPoints;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B8000, &MapPropertiesState::sumUnitCounts)
+            int (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B8000, &MapPropertiesState::sumUnitCounts)
         sumUnitCounts;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BA7D0,

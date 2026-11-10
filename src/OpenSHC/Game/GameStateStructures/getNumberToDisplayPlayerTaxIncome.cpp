@@ -8,7 +8,7 @@ namespace Game {
     {
         int taxIncome = 0;
         if (taxStep > 3) {
-            taxIncome = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::calculateTaxIncomeForPlayer, this)(
+            taxIncome = MACRO_CALL_MEMBER(GameStateStructures_Func::calculateTaxIncomeForPlayer, this)(
                             playerIndex, taxStep, currentPopulation)
                 * 4;
         }

@@ -13,6 +13,7 @@ namespace DE {
     namespace SHCDE {
         typedef enum eTextSections {
 
+            TEXT_UNKNOWN_0 = 0, // 0x00000000
             TEXT_MONTHS = 1, // 0x00000001
             TEXT_GOODS = 2, // 0x00000002
             TEXT_POPULARITY_EFFECTS = 3, // 0x00000003

@@ -41,7 +41,7 @@ namespace AI {
         if (aivBuildingType < AIV::AIVBT_TOWER1 || aivBuildingType > AIV::AIVBT_TOWER1 + 79) {
             return Commands::M_MAPPER_GENERIC;
         }
-        return DAT_AIVDefinedData::instance.field21_0xf4[aivBuildingType - AIV::AIVBT_TOWER1];
+        return DAT_AIVDefinedData::instance.field_0xf4[aivBuildingType - AIV::AIVBT_TOWER1];
     }
 
 }

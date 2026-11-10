@@ -36,59 +36,48 @@ namespace Rendering {
         undefined4 DAT_MapEditorDisplayLayer; // 0x000000BC length: 4
         uchar DAT_BinaryTileMap400x400[160000]; // 0x000000C0 length: 160000
         short tileTranslationMatrix_YComponent[80400]; // 0x000271C0 length: 160800
-        int field9_0x4e5e0; // 0x0004E5E0 length: 4
-        undefined4 field10_0x4e5e4; // 0x0004E5E4 length: 4
-        undefined4 field11_0x4e5e8; // 0x0004E5E8 length: 4
-        undefined4 field12_0x4e5ec; // 0x0004E5EC length: 4
-        undefined4 field13_0x4e5f0; // 0x0004E5F0 length: 4
-        undefined4 field14_0x4e5f4; // 0x0004E5F4 length: 4
-        undefined4 field15_0x4e5f8; // 0x0004E5F8 length: 4
-        undefined4 field16_0x4e5fc; // 0x0004E5FC length: 4
-        int screenPointToTileNumber[321602]; // 0x0004E600 length: 1286408
+        int screenPointToTileNumber[321610]; // 0x0004E5E0 length: 1286440
         undefined1 padding_0x188708[8]; // 0x00188708 length: 8
         int DAT_TileTranslationMatrix_X_offset_min_24; // 0x00188710 length: 4
-        int field27_0x188714; // 0x00188714 length: 4
-        int field28_0x188718; // 0x00188718 length: 4
+        int field_0x188714; // 0x00188714 length: 4
+        int field_0x188718; // 0x00188718 length: 4
         int DAT_TileTranslationMatrix_X_offset_min_12; // 0x0018871C length: 4
-        TranslationMatrixTriplet translationMatrix[400]; // 0x00188720 length: 4800
-        undefined4 translationResult1; // 0x001899E0 length: 4
-        undefined4 translationTracker1; // 0x001899E4 length: 4
-        undefined4 translationResult2; // 0x001899E8 length: 4
+        TranslationMatrixTriplet translationMatrix[401]; // 0x00188720 length: 4812
         Floater floatersArray[250]; // 0x001899EC length: 7000
-        undefined4 availableFloaterIndex; // 0x0018B544 length: 4
+        int availableFloaterIndex; // 0x0018B544 length: 4
         int landscapeAnimationRandomTileArray[45]; // 0x0018B548 length: 180
         byte landscapeAnimationValueArray[60]; // 0x0018B5FC length: 60
         int landscapeSeaWhiteCapsAnimationFrames[45]; // 0x0018B638 length: 180
         byte unused02[60]; // 0x0018B6EC length: 60
-        undefined4 windowX; // 0x0018B728 length: 4
-        undefined4 windowY; // 0x0018B72C length: 4
-        undefined4 screenPixelWidth; // 0x0018B730 length: 4
-        undefined4 screenPixelHeight; // 0x0018B734 length: 4
-        undefined4 field44_0x18b738; // 0x0018B738 length: 4
-        undefined4 interval_03_160; // 0x0018B73C length: 4
+        int windowX; // 0x0018B728 length: 4
+        int windowY; // 0x0018B72C length: 4
+        int screenPixelWidth; // 0x0018B730 length: 4
+        int screenPixelHeight; // 0x0018B734 length: 4
+        undefined4 field_0x18b738; // 0x0018B738 length: 4
+        int interval_03_160; // 0x0018B73C length: 4
         undefined4 previousIntervalTime_03; // 0x0018B740 length: 4
-        undefined4 interval_04_180; // 0x0018B744 length: 4
+        int interval_04_180; // 0x0018B744 length: 4
         undefined4 previousIntervalTime_04; // 0x0018B748 length: 4
-        undefined4 interval_01_80; // 0x0018B74C length: 4
+        int interval_01_80; // 0x0018B74C length: 4
         undefined4 previousIntervalTime_01; // 0x0018B750 length: 4
-        undefined4 interval_02_100; // 0x0018B754 length: 4
+        int interval_02_100; // 0x0018B754 length: 4
         undefined4 previousIntervalTime_02; // 0x0018B758 length: 4
         int unknownCounterUntil_0x20; // 0x0018B75C length: 4
         int unknownCounterUntil_0x24; // 0x0018B760 length: 4
-        int field55_0x18b764; // 0x0018B764 length: 4
+        int field_0x18b764; // 0x0018B764 length: 4
         int unknownCounterUntil_0x10; // 0x0018B768 length: 4
         int unknownCounterUntil_0x200; // 0x0018B76C length: 4
-        undefined4 unitBatchedRenderCounterUntil6; // 0x0018B770 length: 4
+        int unitBatchedRenderCounterUntil6; // 0x0018B770 length: 4
         UnitRenderHelpStructure unitBatch1[500]; // 0x0018B774 length: 16000
         UnitRenderHelpStructure unitBatch2[500]; // 0x0018F5F4 length: 16000
         UnitRenderHelpStructure unitBatch3[500]; // 0x00193474 length: 16000
         UnitRenderHelpStructure unitBatch4[500]; // 0x001972F4 length: 16000
         UnitRenderHelpStructure unitBatch5[500]; // 0x0019B174 length: 16000
-        undefined4 unitRender1; // 0x0019EFF4 length: 4
-        undefined4 unitRender2; // 0x0019EFF8 length: 4
-        undefined4 unitRender3; // 0x0019EFFC length: 4
-        undefined4 unitRender4; // 0x0019F000 length: 4
-        undefined4 unitRender5; // 0x0019F004 length: 4
+        int unitRender1; // 0x0019EFF4 length: 4
+        int unitRender2; // 0x0019EFF8 length: 4
+        int unitRender3; // 0x0019EFFC length: 4
+        int unitRender4; // 0x0019F000 length: 4
+        int unitRender5; // 0x0019F004 length: 4
 
     private:
         ViewportRenderState(ViewportRenderState const&);

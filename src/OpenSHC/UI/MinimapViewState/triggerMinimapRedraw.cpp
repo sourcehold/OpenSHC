@@ -6,12 +6,12 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5300
     void MinimapViewState::triggerMinimapRedraw(int unknown)
     {
-        if (this->field14_0x38 == 0) {
-            this->field13_0x34 = 0;
-            this->field14_0x38 = 2;
+        if (this->field_0x38 == 0) {
+            this->field_0x34 = 0;
+            this->field_0x38 = 2;
             return;
         }
-        this->field14_0x38 = 1;
+        this->field_0x38 = 1;
     }
 
 }

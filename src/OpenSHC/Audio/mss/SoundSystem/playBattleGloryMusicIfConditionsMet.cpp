@@ -14,7 +14,7 @@ namespace Audio {
                 && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel != 0
                 && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicTracker == 0
                 && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel != 1
-                && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field7_0x1c == 0) {
+                && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field_0x1c == 0) {
                 DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicTracker = 1;
                 MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
                 MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier, this)(

@@ -9,14 +9,12 @@
 #pragma once
 
 #include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace Credits {
 
         using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
-        using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
         using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
 
         void __cdecl SetActiveCreditsSequenceIndex(undefined4 param_1);
@@ -54,7 +52,7 @@ namespace UI {
 
         void __cdecl AppendCreditsBinkVideoWithAudioCommand(char* param_1, int param_2, int param_3, int param_4);
 
-        void __cdecl AppendCreditsSoundStreamCommand(int param_1, SHC_SoundStream param_2);
+        void __cdecl AppendCreditsSoundStreamCommand(int param_1, int param_2);
 
         void __cdecl AppendCreditsTextCommand(
             int param_1, int param_2, int param_3, int param_4, int param_5, int param_6, int param_7, int param_8);

@@ -43,16 +43,16 @@ namespace Map {
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                         (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field382_0x9e1c[i][0],
-                        DAT_BuildingDefinedData::instance.field382_0x9e1c[i][1],
-                        DAT_BuildingDefinedData::instance.field382_0x9e1c[i][2] + 41,
-                        DAT_BuildingDefinedData::instance.field382_0x9e1c[i][3] - 40, tile, 0xc0006);
+                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field_0x9e1c[i][0],
+                        DAT_BuildingDefinedData::instance.field_0x9e1c[i][1],
+                        DAT_BuildingDefinedData::instance.field_0x9e1c[i][2] + 41,
+                        DAT_BuildingDefinedData::instance.field_0x9e1c[i][3] - 40, tile, 0xc0006);
                     if (i == 6) {
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                            DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field383_0x9e8c[0],
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[1],
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[2] + 41,
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[3] - 40, tile, 0xc0006);
+                            DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field_0x9e8c[0],
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[1],
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[2] + 41,
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[3] - 40, tile, 0xc0006);
                     }
                 }
                 return;
@@ -76,16 +76,16 @@ namespace Map {
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                         (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field384_0x9e9c[i][0],
-                        DAT_BuildingDefinedData::instance.field384_0x9e9c[i][1],
-                        DAT_BuildingDefinedData::instance.field384_0x9e9c[i][2] + 41,
-                        DAT_BuildingDefinedData::instance.field384_0x9e9c[i][3] - 40, tile, 0xc0006);
+                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field_0x9e9c[i][0],
+                        DAT_BuildingDefinedData::instance.field_0x9e9c[i][1],
+                        DAT_BuildingDefinedData::instance.field_0x9e9c[i][2] + 41,
+                        DAT_BuildingDefinedData::instance.field_0x9e9c[i][3] - 40, tile, 0xc0006);
                     if (i == 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                            DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field383_0x9e8c[0],
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[1],
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[2] + 41,
-                            DAT_BuildingDefinedData::instance.field383_0x9e8c[3] - 40, tile, 0xc0006);
+                            DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field_0x9e8c[0],
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[1],
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[2] + 41,
+                            DAT_BuildingDefinedData::instance.field_0x9e8c[3] - 40, tile, 0xc0006);
                     }
                 }
                 return;
@@ -112,10 +112,10 @@ namespace Map {
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                         (int)DAT_TileMapState::instance.flagAnimationFrame % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field401_0x9f1c[i][0],
-                        DAT_BuildingDefinedData::instance.field401_0x9f1c[i][1],
-                        DAT_BuildingDefinedData::instance.field401_0x9f1c[i][2] + 41,
-                        DAT_BuildingDefinedData::instance.field401_0x9f1c[i][3] - 40, tile, 0xc0006);
+                        DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field_0x9f1c[i][0],
+                        DAT_BuildingDefinedData::instance.field_0x9f1c[i][1],
+                        DAT_BuildingDefinedData::instance.field_0x9f1c[i][2] + 41,
+                        DAT_BuildingDefinedData::instance.field_0x9f1c[i][3] - 40, tile, 0xc0006);
                 }
                 return;
             }

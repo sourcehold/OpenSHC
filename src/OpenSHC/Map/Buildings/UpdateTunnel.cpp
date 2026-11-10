@@ -1,6 +1,5 @@
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings.func.hpp"
-#include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -12,21 +11,20 @@
 namespace OpenSHC {
 namespace Map {
 
-    // The dig table is a signed byte table: 0xFF (-1) ends digging (unit state 3, tunnelerFinishedDigging 2).
     // FUNCTION: STRONGHOLDCRUSADER 0x00417FD0
     void Buildings::UpdateTunnel()
     {
-        int unitID = (short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unitRefID;
-        short unitState = DAT_UnitsState::instance.units[unitID].state.generic;
+        int const unitID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unitRefID;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIncrement = 1;
-        if (unitState == OpenSHC::Map::Units::States::US_STATE_3Unk
-            || unitState == OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk
+        // Unit states 3 and 9 have no UnitState constant.
+        if (DAT_UnitsState::instance.units[unitID].state.generic == 3
+            || DAT_UnitsState::instance.units[unitID].state.generic == Units::States::US_RELOAD_WEAPONUnk
             || DAT_UnitsState::instance.units[unitID].dying != 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
             return;
         }
-        if (unitState != OpenSHC::Map::Units::States::US_STATE_9Unk) {
+        if (DAT_UnitsState::instance.units[unitID].state.generic != 9) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame
@@ -35,19 +33,18 @@ namespace Map {
             return;
         }
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
-        if ((char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
-                [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex]
-            == -1) {
+        char const frame = (char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
+                               [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
+        if (frame == -1) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
-            DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_STATE_3Unk;
+            DAT_UnitsState::instance.units[unitID].state.generic = 3;
             DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging = 2;
             return;
         }
-        int frame = (char)DAT_BuildingDefinedData::instance.TunnelAnimationFrames
-                        [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame = frame;
-        if ((frame == 10 || frame == 0x19)
+        if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame == 10
+                || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame == 25)
             && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,

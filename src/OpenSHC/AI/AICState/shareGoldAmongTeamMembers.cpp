@@ -67,7 +67,6 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[targetPlayer].currentResources[Game::Resources::RT_GOLD]
                 += goldPerPlayer;
         }
-        return;
     }
 
 }

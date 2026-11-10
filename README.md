@@ -26,6 +26,11 @@ All developers are welcome to contribute.
 
 Get an overview [here](https://sourcehold.github.io/OpenSHC/wiki.html) or dive straight in [here](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-0.html)!
 
+Get a poorly matching function and improve it! Use: `python tools/pick_work.py`
+
+Note, that you can use the commands `/label-add <label>, <label>, ...` and `/label-remove <label>, <label>, ...` in a PR comment(!) to add or remove the labels `declaration/type change`, `in progress`, `documentation`, `help wanted` and `halted` to inform the maintainers about the progress of the PR.
+The commands need to be alone on a single line.
+
 ### Requirements
 
 Before you begin, install the following:
@@ -145,3 +150,16 @@ When you are set up, follow any of the tutorials such as [this one](https://sour
 ## Help
 
 Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/SKJGEGgPTv) server.
+
+## Additional Contributors
+
+Also thanks to all the people who have contributed code and solutions through other means than direct commits!
+
+- [Wilps](https://github.com/Wilps93)
+
+## Special Thanks
+
+- to [Firefly Studios](https://fireflyworlds.com/) for creating Stronghold Crusader.
+- to the [Ghidra project](https://github.com/NationalSecurityAgency/ghidra)
+- to the people behind [reccmp](https://github.com/isledecomp/reccmp)
+- to the whole [UCP team](https://unofficialcrusaderpatch.com/)

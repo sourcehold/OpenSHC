@@ -10,7 +10,7 @@ namespace IO {
     void BitMapState::blitBitmap24BitToSurface565(int addExtra)
     {
         for (int y = this->high - 1; y >= 0; y -= this->step) {
-            int local_4 = 0;
+            int writtenPixelCount = 0;
             for (int x = 0; x < this->total; x += this->step2) {
 
                 unsigned short blue = ((unsigned char*)(this->address + this->stride24bit * y + x * 3))[0] >> 3;
@@ -30,19 +30,19 @@ namespace IO {
                     red <<= 10;
                 }
 
-                unsigned short uVar3 = red + green + blue;
+                unsigned short pixel565 = red + green + blue;
                 if (DAT_WindowAndDirectDraw::instance.colorBitMode != Rendering::RGB_565 || this->mbr_0x18 != 0) {
-                    uVar3 |= 0x8000;
-                    if (uVar3 == 0xfc1f) {
-                        uVar3 = COL_MAGENTA::instance.shortValue;
+                    pixel565 |= 0x8000;
+                    if (pixel565 == 0xfc1f) {
+                        pixel565 = COL_MAGENTA::instance.shortValue;
                     }
                 }
-                *this->surface = uVar3;
+                *this->surface = pixel565;
                 ++this->surface;
-                ++local_4;
+                ++writtenPixelCount;
             }
             if (addExtra != 0) {
-                this->surface += (this->mbr_0x47c - local_4);
+                this->surface += (this->mbr_0x47c - writtenPixelCount);
             }
         }
         this->mbr_0x18 = 0;

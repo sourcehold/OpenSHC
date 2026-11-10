@@ -44,16 +44,16 @@ namespace Map {
             int unknownInitially0_01; // 0x00000008 length: 4
             int lastSelectedUnitID; // 0x0000000C length: 4
             int unitControlsRelated; // 0x00000010 length: 4
-            BOOLEnum pendingUnitControlMode; // 0x00000014 length: 4
+            int pendingUnitControlMode; // 0x00000014 length: 4
             int lostChimps; // 0x00000018 length: 4
             int unitDistanceComputationResultUnk; // 0x0000001C length: 4
             int totalUnitsInSelection; // 0x00000020 length: 4
             int unitCountOfSelection[9]; // 0x00000024 length: 36
             byte unusedBytes01[44]; // 0x00000048 length: 44
-            byte selectedUnitsBitFlags[400]; // 0x00000074 length: 400
+            short selectedUnitsBitFlags[200]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
-            int field14_0x55c; // 0x0000055C length: 4
+            int field_0x55c; // 0x0000055C length: 4
             int unitIDSelectedCatapultOrTrebuchet; // 0x00000560 length: 4
             int selectionUnitType[27]; // 0x00000564 length: 108
             int selectionSlots[8]; // 0x000005D0 length: 32
@@ -137,7 +137,7 @@ namespace Map {
 
             void playHurtSFXForUnit(int unitID);
 
-            int countLivingNondyingUnitsForPlayer(int param_1);
+            int countLivingNondyingUnitsForPlayer(int unitType);
 
             void triggerStoneTowerDeathForPlayer(int param_1);
 

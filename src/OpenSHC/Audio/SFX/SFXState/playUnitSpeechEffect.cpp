@@ -21,29 +21,32 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044A290
         void SFXState::playUnitSpeechEffect(uint speechEffectID)
         {
-            int iVar4 = 0;
+            int soundVariantIndex = 0;
             if (speechEffectID > 39) {
                 return;
             }
 
-            int iVar2 = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field0_0x0;
-            if (!iVar2) {
+            int soundVariantCount = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0x0;
+            if (!soundVariantCount) {
                 return;
             }
-            if (1 < iVar2) {
-                iVar4 = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc++;
-                if (DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc >= iVar2) {
-                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc = 0;
+            if (1 < soundVariantCount) {
+                soundVariantIndex = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc++;
+                if (DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc
+                    >= soundVariantCount) {
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field_0xc = 0;
                 }
             }
 
             char fullSoundPath[64];
             if (DAT_GameCore::instance.historicCampaignNumber == 2) {
                 MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
-                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[iVar4 + speechEffectID].arabianSound);
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[soundVariantIndex + speechEffectID]
+                        .arabianSound);
             } else {
                 MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
-                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[iVar4 + speechEffectID].europeanSound);
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[soundVariantIndex + speechEffectID]
+                        .europeanSound);
             }
 
             if (!MACRO_CALL(OS_Func::__stricmp)(fullSoundPath, DAT_LastSpeechSFXFilename::instance)) {

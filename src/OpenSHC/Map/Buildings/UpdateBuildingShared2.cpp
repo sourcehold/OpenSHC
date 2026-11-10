@@ -1,7 +1,6 @@
 #include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings.func.hpp"
-#include "OpenSHC/Game/GameMode.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -20,24 +19,22 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        int buildingID = DAT_CurrentBuildingID::instance;
-        bool isNotSolitary = DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY;
-        DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 0;
-        if (isNotSolitary) {
-            int* showOverlaysPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
-            *showOverlaysPtr = 1;
-            DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
-            if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
-                    [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
+        if (DAT_GameSynchronyState::instance.currentGameMode != 0) {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagSlot.overlayImage += 1;
+            if (DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagSlot.overlayImage / 2]
                 <= 0) {
-                DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagSlot.overlayImage = 0;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].overlayImageID
-                = (char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
-                      [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2];
-            return;
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].overlayImageID
+                = DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagSlot.overlayImage
+                          / 2];
+        } else {
+            DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].overlayImageID = 0;
         }
-        DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;
     }
 
 }

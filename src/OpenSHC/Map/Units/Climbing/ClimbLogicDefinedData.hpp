@@ -25,15 +25,15 @@ namespace Map {
 
                 NoArgCallback* updateFunctions[10]; // 0x00000000 length: 40
                 undefined1 padding_0x28[4]; // 0x00000028 length: 4
-                int field5_0x2c[8]; // 0x0000002C length: 32
-                int field6_0x4c[55]; // 0x0000004C length: 220
-                undefined1 field7_0x128; // 0x00000128 length: 1
-                undefined1 field8_0x129; // 0x00000129 length: 1
-                undefined1 field9_0x12a; // 0x0000012A length: 1
-                undefined1 field10_0x12b; // 0x0000012B length: 1
+                int field_0x2c[8]; // 0x0000002C length: 32
+                int field_0x4c[55]; // 0x0000004C length: 220
+                undefined1 field_0x128; // 0x00000128 length: 1
+                undefined1 field_0x129; // 0x00000129 length: 1
+                undefined1 field_0x12a; // 0x0000012A length: 1
+                undefined1 field_0x12b; // 0x0000012B length: 1
                 byte BitFlagHelperForPathLinkage[8]; // 0x0000012C length: 8
-                byte DirectionArray[8]; // 0x00000134 length: 8
-                int field13_0x13c[8][3]; // 0x0000013C length: 96
+                char DirectionArray[8]; // 0x00000134 length: 8
+                int field_0x13c[8][3]; // 0x0000013C length: 96
                 XYPair CardinalHorizontalFirstSearchOrder[4]; // 0x0000019C length: 32
                 XYPair OrderedOrientationBasedCardinalDirectionList[8][4]; // 0x000001BC length: 256
 

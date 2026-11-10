@@ -20,6 +20,7 @@
 #include "OpenSHC/Synchrony/Networking/ChatEvent.hpp"
 #include "OpenSHC/Synchrony/Networking/ConnectionLagInfo.hpp"
 #include "OpenSHC/Synchrony/Networking/PacketUnion.hpp"
+#include "OpenSHC/Synchrony/Sync/SplinterTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -48,6 +49,7 @@ namespace Synchrony {
     using OpenSHC::Synchrony::Networking::ChatEvent;
     using OpenSHC::Synchrony::Networking::ConnectionLagInfo;
     using OpenSHC::Synchrony::Networking::PacketUnion;
+    using OpenSHC::Synchrony::Sync::SplinterTypeInt;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -72,7 +74,7 @@ namespace Synchrony {
         WCHAR* DPLAY_SessionNames[50]; // 0x000001B0 length: 200
         bool unkEnumerationRelatedBool; // 0x00000278 length: 1
         undefined1 padding_0x279[3]; // 0x00000279 length: 3
-        IDirectPlay4A* DPLAYX_4A; // 0x0000027C length: 4
+        IDirectPlay4* DPLAYX_4A; // 0x0000027C length: 4
         IDirectPlayLobby3* DPLAYX_LOBBY; // 0x00000280 length: 4
         MenuModalTypeInt nextModalDialog; // 0x00000284 length: 4
         int multiplayerJoinStep; // 0x00000288 length: 4
@@ -90,24 +92,21 @@ namespace Synchrony {
         byte unused02[104]; // 0x00000620 length: 104
         DPNAME DPLAY_PlayerNameStructure; // 0x00000688 length: 16
         void* DPLAYX_Connection; // 0x00000698 length: 4
-        undefined4 DPLAYX_ReceivedPlayerID; // 0x0000069C length: 4
-        dword DPLAY_ToID; // 0x000006A0 length: 4
-        undefined4 DPLAYX_PlayerHandle; // 0x000006A4 length: 4
+        DPID DPLAYX_ReceivedPlayerID; // 0x0000069C length: 4
+        DPID DPLAY_ToID; // 0x000006A0 length: 4
+        DPID DPLAYX_PlayerHandle; // 0x000006A4 length: 4
         int currentPlayerFullIDArray[9]; // 0x000006A8 length: 36
         int DAT_CurrentPlayerFullIDArray2[9]; // 0x000006CC length: 36
         int somePlayerRelatedArray[9]; // 0x000006F0 length: 36
         int currentAIArray[9]; // 0x00000714 length: 36
         int aiVariationArray[9]; // 0x00000738 length: 36
-        byte field48_0x75c[9]; // 0x0000075C length: 9
-        byte field49_0x765[3][9]; // 0x00000765 length: 27
-        BOOLEnum displayYourIP; // 0x00000780 length: 4
-        BOOLEnum lanOrWan; // 0x00000784 length: 4
-        IN_ADDR lanIP; // 0x00000788 length: 4
-        IN_ADDR wanIP; // 0x0000078C length: 4
+        int field_0x75c[9]; // 0x0000075C length: 36
+        BOOLEnum hasHostAddress[2]; // 0x00000780 length: 8
+        IN_ADDR hostAddress[2]; // 0x00000788 length: 8
         BOOLEnum isHost; // 0x00000790 length: 4
         int DAT_HostPlayerSlotID; // 0x00000794 length: 4
         int DAT_HostAnnounced; // 0x00000798 length: 4
-        byte field57_0x79c[254]; // 0x0000079C length: 254
+        byte field_0x79c[254]; // 0x0000079C length: 254
         WCHAR DPLAYX_SessionName[250]; // 0x0000089A length: 500
         WCHAR DPLAY_PlayerShortName[125]; // 0x00000A8E length: 250
         int packetsReceived; // 0x00000B88 length: 4
@@ -115,10 +114,10 @@ namespace Synchrony {
         undefined4 lateCommandPenalty; // 0x00000B90 length: 4
         undefined4 DAT_GameHalted; // 0x00000B94 length: 4
         int syncStatus; // 0x00000B98 length: 4
-        undefined4 field65_0xb9c; // 0x00000B9C length: 4
-        undefined4 field66_0xba0; // 0x00000BA0 length: 4
-        undefined4 field67_0xba4; // 0x00000BA4 length: 4
-        undefined4 resyncPacketBudget; // 0x00000BA8 length: 4
+        undefined4 field_0xb9c; // 0x00000B9C length: 4
+        undefined4 field_0xba0; // 0x00000BA0 length: 4
+        undefined4 field_0xba4; // 0x00000BA4 length: 4
+        int resyncPacketBudget; // 0x00000BA8 length: 4
         undefined4 somePacketSubTypeUnk; // 0x00000BAC length: 4
         undefined4 resyncResumeOuterIndex; // 0x00000BB0 length: 4
         undefined4 resyncResumeInnerIndex; // 0x00000BB4 length: 4
@@ -126,36 +125,36 @@ namespace Synchrony {
         undefined4 resyncTransferTotalSize; // 0x00000BDC length: 4
         undefined4 currentPacketTotalSize; // 0x00000BE0 length: 4
         undefined4 lastAutoSaveTime; // 0x00000BE4 length: 4
-        undefined4 field76_0xbe8; // 0x00000BE8 length: 4
+        undefined4 field_0xbe8; // 0x00000BE8 length: 4
         undefined4 flag_0xbec; // 0x00000BEC length: 4
-        undefined4 field78_0xbf0; // 0x00000BF0 length: 4
-        undefined4 splinterType; // 0x00000BF4 length: 4
-        undefined4 totalSplitDataItems; // 0x00000BF8 length: 4
-        undefined4 totalSplitChimps; // 0x00000BFC length: 4
-        undefined4 totalSplitStructures; // 0x00000C00 length: 4
-        undefined4 totalSplitVeg; // 0x00000C04 length: 4
-        undefined4 totalSplitTribes; // 0x00000C08 length: 4
-        undefined4 totalSplitPlayers; // 0x00000C0C length: 4
-        undefined4 totalSplitElements; // 0x00000C10 length: 4
-        undefined4 totalSplitLayers; // 0x00000C14 length: 4
-        undefined4 totalSplitFlies; // 0x00000C18 length: 4
-        undefined4 totalSplitMoats; // 0x00000C1C length: 4
-        undefined4 totalSplitTeleports; // 0x00000C20 length: 4
-        undefined4 totalSplitPitchDitches; // 0x00000C24 length: 4
-        undefined4 totalSplitZones; // 0x00000C28 length: 4
+        undefined4 field_0xbf0; // 0x00000BF0 length: 4
+        SplinterTypeInt splinterType; // 0x00000BF4 length: 4
+        int totalSplitDataItems; // 0x00000BF8 length: 4
+        int totalSplitChimps; // 0x00000BFC length: 4
+        int totalSplitStructures; // 0x00000C00 length: 4
+        int totalSplitVeg; // 0x00000C04 length: 4
+        int totalSplitTribes; // 0x00000C08 length: 4
+        int totalSplitPlayers; // 0x00000C0C length: 4
+        int totalSplitElements; // 0x00000C10 length: 4
+        int totalSplitLayers; // 0x00000C14 length: 4
+        int totalSplitFlies; // 0x00000C18 length: 4
+        int totalSplitMoats; // 0x00000C1C length: 4
+        int totalSplitTeleports; // 0x00000C20 length: 4
+        int totalSplitPitchDitches; // 0x00000C24 length: 4
+        int totalSplitZones; // 0x00000C28 length: 4
         undefined1 padding_0xc2c[8]; // 0x00000C2C length: 8
-        undefined4 firstSplitChimps; // 0x00000C34 length: 4
-        undefined4 firstSplitStructures; // 0x00000C38 length: 4
-        undefined4 firstSplitVeg; // 0x00000C3C length: 4
-        undefined4 firstSplitTribe; // 0x00000C40 length: 4
-        undefined4 firstSplitPlayer; // 0x00000C44 length: 4
-        undefined4 firstSplitElement; // 0x00000C48 length: 4
-        undefined4 firstSplitLayer; // 0x00000C4C length: 4
-        undefined4 firstSplitFly; // 0x00000C50 length: 4
-        undefined4 firstSplitMoat; // 0x00000C54 length: 4
-        undefined4 firstSplitTeleports; // 0x00000C58 length: 4
-        undefined4 firstSplitPitchDitch; // 0x00000C5C length: 4
-        undefined4 firstSplitZone; // 0x00000C60 length: 4
+        int firstSplitChimps; // 0x00000C34 length: 4
+        int firstSplitStructures; // 0x00000C38 length: 4
+        int firstSplitVeg; // 0x00000C3C length: 4
+        int firstSplitTribe; // 0x00000C40 length: 4
+        int firstSplitPlayer; // 0x00000C44 length: 4
+        int firstSplitElement; // 0x00000C48 length: 4
+        int firstSplitLayer; // 0x00000C4C length: 4
+        int firstSplitFly; // 0x00000C50 length: 4
+        int firstSplitMoat; // 0x00000C54 length: 4
+        int firstSplitTeleports; // 0x00000C58 length: 4
+        int firstSplitPitchDitch; // 0x00000C5C length: 4
+        int firstSplitZone; // 0x00000C60 length: 4
         undefined1 padding_0xc64[8]; // 0x00000C64 length: 8
         undefined4 quitGameVoteRelated; // 0x00000C6C length: 4
         int quitGameVoteArray[9]; // 0x00000C70 length: 36
@@ -175,7 +174,7 @@ namespace Synchrony {
         undefined3 mapTimeInTicksLower3Bytes; // 0x0002D815 length: 3
         undefined1 syncParamTimeDiff; // 0x0002D818 length: 1
         undefined1 padding_0x2d819[3]; // 0x0002D819 length: 3
-        undefined4 DPLAY_ReceiveDataSize; // 0x0002D81C length: 4
+        DWORD DPLAY_ReceiveDataSize; // 0x0002D81C length: 4
         undefined4 DAT_CurrentTransmitCommandPacketSize; // 0x0002D820 length: 4
         undefined4 DAT_CurrentGameCommandID; // 0x0002D824 length: 4
         GameCommandSchedulingInt DAT_CommandActionPlan; // 0x0002D828 length: 4
@@ -209,8 +208,8 @@ namespace Synchrony {
         undefined1 syncRelated2; // 0x0007AC32 length: 1
         undefined1 padding_0x7ac33[1]; // 0x0007AC33 length: 1
         int historicalLagInfoPerPlayer[9][100][2]; // 0x0007AC34 length: 7200
-        undefined4 counter; // 0x0007C854 length: 4
-        undefined4 limit; // 0x0007C858 length: 4
+        int counter; // 0x0007C854 length: 4
+        int limit; // 0x0007C858 length: 4
         int HASH_Units[9][2500]; // 0x0007C85C length: 90000
         int HASH_Buildings[9][2000]; // 0x000927EC length: 72000
         int HASH_Trees[9][2000]; // 0x000A412C length: 72000
@@ -227,7 +226,7 @@ namespace Synchrony {
         int HASH_HeatMaps[9][80]; // 0x00100F4C length: 2880
         int receivedSyncStatusByPlayerUnk[9]; // 0x00101A8C length: 36
         int syncStatus10Related[9]; // 0x00101AB0 length: 36
-        undefined4 relativeTickTime; // 0x00101AD4 length: 4
+        int relativeTickTime; // 0x00101AD4 length: 4
         char receivedChatMessage[250]; // 0x00101AD8 length: 250
         char DAT_ChatMessageArray[20][250]; // 0x00101BD2 length: 5000
         char DAT_ChatMessageSubjectPlayerNameArray[20][250]; // 0x00102F5A length: 5000
@@ -255,16 +254,16 @@ namespace Synchrony {
         undefined4 skirmishGameIntensityType2; // 0x00106E90 length: 4
         int skirmishBalanceRelatedArrayUnk1[10]; // 0x00106E94 length: 40
         byte unused03[40]; // 0x00106EBC length: 40
-        int field224_0x106ee4; // 0x00106EE4 length: 4
+        int field_0x106ee4; // 0x00106EE4 length: 4
         int skirmishTechLevel; // 0x00106EE8 length: 4
         undefined1 padding_0x106eec[4]; // 0x00106EEC length: 4
         undefined4 skirmishWinCondition; // 0x00106EF0 length: 4
         undefined4 skirmishTroopsCostGold; // 0x00106EF4 length: 4
         char unknownMapName_01[1004]; // 0x00106EF8 length: 1004
         undefined4 skirmishCurrentAdvantageBalance; // 0x001072E4 length: 4
-        int field234_0x1072e8; // 0x001072E8 length: 4
-        int field235_0x1072ec; // 0x001072EC length: 4
-        undefined4 chatScrollOffset; // 0x001072F0 length: 4
+        int field_0x1072e8; // 0x001072E8 length: 4
+        int field_0x1072ec; // 0x001072EC length: 4
+        int chatScrollOffset; // 0x001072F0 length: 4
         BOOLEnum reparseMaps; // 0x001072F4 length: 4
         int mapExistenceAckCountdown; // 0x001072F8 length: 4
         int DAT_MapSelectionScrollOffset; // 0x001072FC length: 4
@@ -291,7 +290,7 @@ namespace Synchrony {
         undefined4 timeSkirmishGameStart; // 0x001092A4 length: 4
         int DAT_MapU4Int2_2; // 0x001092A8 length: 4
         undefined4 DAT_HashCountdown; // 0x001092AC length: 4
-        undefined4 connectionInfoExpanded; // 0x001092B0 length: 4
+        BOOLEnum connectionInfoExpanded; // 0x001092B0 length: 4
         undefined4 skirmishStrongWalls; // 0x001092B4 length: 4
         undefined4 skirmishAlliances; // 0x001092B8 length: 4
         undefined4 skirmishNoCowThrowing; // 0x001092BC length: 4
@@ -323,9 +322,9 @@ namespace Synchrony {
         int currentPlayerSlotID; // 0x00109E74 length: 4
         undefined4 DAT_SomePlayerID; // 0x00109E78 length: 4
         undefined4 editorPlacementPlayerID; // 0x00109E7C length: 4
-        byte field299_0x109e80[9]; // 0x00109E80 length: 9
+        byte field_0x109e80[9]; // 0x00109E80 length: 9
         undefined1 padding_0x109e89[3]; // 0x00109E89 length: 3
-        int field303_0x109e8c; // 0x00109E8C length: 4
+        int field_0x109e8c; // 0x00109E8C length: 4
         undefined1 padding_0x109e90[4]; // 0x00109E90 length: 4
         undefined4 lastCommandReceiveTime; // 0x00109E94 length: 4
         undefined4 minPlayerMapTime; // 0x00109E98 length: 4
@@ -334,23 +333,23 @@ namespace Synchrony {
         undefined4 playerMapTimeSpread; // 0x00109EA4 length: 4
         undefined4 ticksAheadOfSlowestPlayer; // 0x00109EA8 length: 4
         undefined4 ticksBehindFastestPlayer; // 0x00109EAC length: 4
-        undefined4 field315_0x109eb0; // 0x00109EB0 length: 4
-        undefined4 field316_0x109eb4; // 0x00109EB4 length: 4
-        undefined4 field317_0x109eb8; // 0x00109EB8 length: 4
-        int field318_0x109ebc; // 0x00109EBC length: 4
-        int field319_0x109ec0; // 0x00109EC0 length: 4
+        undefined4 field_0x109eb0; // 0x00109EB0 length: 4
+        undefined4 field_0x109eb4; // 0x00109EB4 length: 4
+        undefined4 field_0x109eb8; // 0x00109EB8 length: 4
+        int field_0x109ebc; // 0x00109EBC length: 4
+        int field_0x109ec0; // 0x00109EC0 length: 4
         undefined4 receivedCommandMapTimeInTicks; // 0x00109EC4 length: 4
         undefined1 padding_0x109ec8[4]; // 0x00109EC8 length: 4
-        int field325_0x109ecc; // 0x00109ECC length: 4
+        int field_0x109ecc; // 0x00109ECC length: 4
         undefined4 otherTime1; // 0x00109ED0 length: 4
         undefined4 now2; // 0x00109ED4 length: 4
-        dword field328_0x109ed8; // 0x00109ED8 length: 4
+        dword field_0x109ed8; // 0x00109ED8 length: 4
         undefined4 gameCommandID; // 0x00109EDC length: 4
         int DAT_GameCommandArrayIndex; // 0x00109EE0 length: 4
         undefined4 DAT_CommandParameterOffset; // 0x00109EE4 length: 4
         int commandDelay; // 0x00109EE8 length: 4
         int selectedGameCommands[100][2]; // 0x00109EEC length: 800
-        int someIndex; // 0x0010A20C length: 4
+        int selectedCommandsCount; // 0x0010A20C length: 4
         int DPLAYX_SendAndReceiveREsult; // 0x0010A210 length: 4
         undefined4 DAT_TickCount; // 0x0010A214 length: 4
 
@@ -431,9 +430,9 @@ namespace Synchrony {
 
         int sendLongerDataSuchAsResync(GameCommandType commandCategory);
 
-        void scheduleReceivedCommand(GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address);
+        void scheduleReceivedCommand(char commandCategory, DWORD dxPlayerHandle, dword time, void* address);
 
-        int getCommandIDFromCommandSelectionStuff();
+        BOOLEnum getCommandIDFromCommandSelectionStuff();
 
         int getGameCommandArrayIndex();
 
@@ -459,7 +458,7 @@ namespace Synchrony {
         int determineGameTicksToPerform(int currentPlayerSlotID);
 
         void transmitCommand(byte commandCategory, undefined4 time, char* addressOfFullCommandObjectOrCommandParameters,
-            size_t size, undefined4 idTo);
+            int size, undefined4 idTo);
 
         void sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2);
 

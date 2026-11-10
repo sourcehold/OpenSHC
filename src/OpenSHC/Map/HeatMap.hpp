@@ -36,18 +36,18 @@ namespace Map {
         char tileOwnership; // 0x00000015 length: 1
         char impassableCount; // 0x00000016 length: 1
         char unused_0x17; // 0x00000017 length: 1
-        short field21_0x18; // 0x00000018 length: 2
-        short field22_0x1a; // 0x0000001A length: 2
-        short field23_0x1c; // 0x0000001C length: 2
-        short field24_0x1e; // 0x0000001E length: 2
-        short field25_0x20; // 0x00000020 length: 2
-        short field26_0x22; // 0x00000022 length: 2
-        short field27_0x24; // 0x00000024 length: 2
-        short field28_0x26; // 0x00000026 length: 2
-        short field29_0x28; // 0x00000028 length: 2
-        short field30_0x2a; // 0x0000002A length: 2
-        short field31_0x2c; // 0x0000002C length: 2
-        short field32_0x2e; // 0x0000002E length: 2
+        short field_0x18; // 0x00000018 length: 2
+        short field_0x1a; // 0x0000001A length: 2
+        short field_0x1c; // 0x0000001C length: 2
+        short field_0x1e; // 0x0000001E length: 2
+        short field_0x20; // 0x00000020 length: 2
+        short field_0x22; // 0x00000022 length: 2
+        short field_0x24; // 0x00000024 length: 2
+        short field_0x26; // 0x00000026 length: 2
+        short field_0x28; // 0x00000028 length: 2
+        short field_0x2a; // 0x0000002A length: 2
+        short field_0x2c; // 0x0000002C length: 2
+        short field_0x2e; // 0x0000002E length: 2
 
     } HeatMap;
 #pragma pack(pop)

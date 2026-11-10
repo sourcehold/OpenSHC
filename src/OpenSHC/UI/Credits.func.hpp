@@ -9,7 +9,6 @@
 #pragma once
 
 #include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/UI/Credits.hpp"
 namespace OpenSHC {
@@ -17,7 +16,6 @@ namespace UI {
     namespace Credits_Func {
 
         using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
-        using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
         using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004D9270,
@@ -86,8 +84,8 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004DAB80, &OpenSHC::UI::Credits::AppendCreditsBinkVideoWithAudioCommand)
         AppendCreditsBinkVideoWithAudioCommand;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, SHC_SoundStream param_2), false,
-            Address::SHC_3BB0A8C1_0x004DABF0, &OpenSHC::UI::Credits::AppendCreditsSoundStreamCommand)
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DABF0,
+            &OpenSHC::UI::Credits::AppendCreditsSoundStreamCommand)
         AppendCreditsSoundStreamCommand;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2, int param_3, int param_4, int param_5,

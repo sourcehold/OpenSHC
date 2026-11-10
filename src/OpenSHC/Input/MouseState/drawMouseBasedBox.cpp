@@ -30,7 +30,7 @@ namespace Input {
             left, top, right, bottom, COL_BLACK::instance.shortValue);
 
         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-            left + 1, top + 1, right + -1, bottom + -1, COL_WHITE::instance.shortValue);
+            left + 1, top + 1, right - 1, bottom - 1, COL_WHITE::instance.shortValue);
 
         DAT_PencilRenderCore::instance.surfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
     }

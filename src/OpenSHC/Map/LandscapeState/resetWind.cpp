@@ -9,7 +9,7 @@ namespace Map {
         this->wind.value = 0;
         this->wind.index = 0;
         this->wind.countdown = 0;
-        this->wind.field4_0x10 = 0;
+        this->wind.field_0x10 = 0;
         this->wind.counter = 0;
     }
 

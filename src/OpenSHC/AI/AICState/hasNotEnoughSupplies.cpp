@@ -1,5 +1,6 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,12 +12,18 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D00A0
     BOOLEnum AICState::hasNotEnoughSupplies(int playerID)
     {
-        if (DAT_GameState::instance.playerDataArray[playerID].marketplace.id == 0
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_MARKETPLACE]
+                    .id
+                == 0
             && DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_WOOD]
                 < DAT_BuildingsState::instance.buildingCosts[Map::Buildings::BT_MARKETPLACE].requiredWood
             && DAT_GameState::instance.playerDataArray[playerID].noLabourerBuildingCount < 1)
             return TRUE;
-        if (DAT_GameState::instance.playerDataArray[playerID].granary.id == 0
+        if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_GRANARY]
+                    .id
+                == 0
             && DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_WOOD]
                 < DAT_BuildingsState::instance.buildingCosts[Map::Buildings::BT_GRANARY].requiredWood
             && DAT_GameState::instance.playerDataArray[playerID].noLabourerBuildingCount <= 1)

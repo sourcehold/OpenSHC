@@ -13,7 +13,8 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | Script | Purpose |
 |---|---|
 | `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
-| `syntax_check.py [substr...]` | `cl /Zs` every (matching) list file serially; finds all compile errors in one pass without linking. |
+| `build_parallel.py [-j N] [--no-link] [--dry-run] [filter...]` | The same build with the object compiles run `-j` at a time, then `build_quiet.py` for the link and the verdict. nmake has no `-j`, so a whole-list build otherwise compiles one file on one core: the 1138 object compiles take ~38 minutes at `-j 4` on four cores, against ~2.4 objects a minute serially (~7.5 hours for the same set); ~50 minutes for a full run including the LTCG link. Replays nmake's own command per object, so it is the same compiler, flags and response file; see the note below before changing it. |
+| `syntax_check.py [-j N] [substr...]` | `cl /Zs` every (matching) list file, `-j` at a time; finds all compile errors in one pass without linking, and far cheaper than compiling (20 files of `AI/AICState`: 47s at `-j 4`, 134s serially, 676s to actually compile at `-j 4`). |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
 | `orig_asm.py NAME [--both\|--stats]` | The **original** instruction stream of one function (not the interleaved diff), in address order; `--stats` reports the tells that decide how to reimplement it: `mov reg, 0` (handwritten asm), frame pointer, frame size, jump tables. |
 | `show_functions.py PREFIX [--skip-100]` | Print function bodies under `src/OpenSHC/PREFIX` with their percentages, in the block format `splice_functions.py` reads. |
@@ -22,6 +23,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `enable_local_functions.py [--disable]` | Set the `MACRO_FUNCTION_RESOLVER` flag to `true` for exactly the .cpp files in the build list, so calls between them land in our own code. `/GL` buys nothing without this - LTCG cannot see a callee it does not compile (`getSalesPrice` 68.4% -> 100%). The repository-wide `Enable-Reimplemented-Functions.ps1` flips every resolver that has a .cpp anywhere in the tree, which does not link while the list is a subset. Never committed, like the `Globals` flags. |
 | `fix_func_refs.py [--drop-include H]` | After a header refactor: rewrite `X_Func::name` references whose resolver moved to another namespace. |
 | `move_to_resolver_namespace.py FILE...` | After a header refactor: re-wrap a definition in its resolver's new namespace and `git mv` it to the matching folder. |
+| `refactor_struct_fields.py ERRORS.txt [--dry-run] [--window N]` | After a Ghidra sync renamed struct fields: read a `syntax_check.py` log and rename every `C2039` field to whatever now sits at that offset. The offset comes from the old name (`field10_0x49d4b4`), or, for a named field, from `git rev-list --all` over the header. One pass fixed 483 uses in 119 files after the November 2026 sync. Re-run it until `syntax_check.py` is clean: cl stops a file at `C1903`, so later uses in the same file are only reported on the next pass. |
 
 Analysis helpers, for deciding *what* to change when a function is stuck below 100%:
 
@@ -29,6 +31,7 @@ Analysis helpers, for deciding *what* to change when a function is stuck below 1
 |---|---|
 | `diff_triage.py [--run] [filter]` | One line per function: match %, raw and register/slot-normalized difflib ratios, `sub esp` frame size per side, byte-sized `[esp]` accesses per side, `ret` placement. Flags `FRAME` / `BYTE` / `RET` / `alloc-only`. |
 | `diff_slots.py NAME` | Every `[esp + N]` slot with its access count on each side, and the slots only we use. Run after `diff_triage.py` reports `FRAME`. |
+| `slotpair.py FILE.cpp` | The original-to-ours stack-slot permutation, for when `diff_slots.py` shows the same slot *count* on both sides but a different access count per slot - the locals are then right and only their order is wrong. Tracking `esp` from the entry drifts wherever a `__stdcall` or `__thiscall` callee pops its arguments; this instead uses the fact that at an aligned `-`/`+` pair the depth is equal on both sides, so the difference of the two `[esp + N]` displacements is the difference of the slot offsets. `+4` on one pair and `-4` on another is two adjacent slots exchanged. A displacement only names a slot relative to a depth, so one displacement can appear in two pairs with different deltas; each is correct at its own site. Fix a tie with `perm_decls.py` - and note that the colorer sorts by reference weight per byte and leaves only *ties* to declaration order, so where the weights differ no permutation will move those slots (`applyAIV` is the negative case: slots permuted by +-4 and +-8, thirteen variants all tie-or-worse). |
 | `diff_jcc.py [NAME]` | Comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`, `ja`/`jae`) or whose `cmp` operands are the other way round, with context. |
 | `diff_types.py [--run] [NAME]` | The non-comparison counterpart of `diff_jcc.py`: `movsx` against `movzx` for the same field (its signedness is wrong in the generated header), `add` against `sub` with the same magnitude (a sign error in a formula - how `2400/n + 40` was caught being `- 40`). It pairs only equal-length runs inside one reccmp block, so it stays quiet once the streams drift: it reports nothing across the 101 functions of `Game::GameStateStructures` and fires on both bugs when they are reintroduced. |
 | `diff_anchor.py [--run] [NAME]` | Functions whose struct/loop base anchor differs from the original's (`lea esi, [ecx + 0x367e4]` against a different constant). Every displacement in the function then differs while the opcodes still line up, which reads as allocator noise - it is the whole gap between 83.7% and 61.7% on `processFoodConsumption`. The delta is the distance between the two fields MSVC chose; the decompilation names the original's as the pointer it starts the loop with. |
@@ -36,7 +39,7 @@ Analysis helpers, for deciding *what* to change when a function is stuck below 1
 | `diff_signed.py [NAME-SUBSTRING]` | Comparisons the original makes signed and we make unsigned (or the reverse): `jg/jge/jl/jle` against our `ja/jae/jb/jbe` over the same `cmp`. Fix it by comparing through `(int)` in the source, not by editing the generated header, and re-run the tool to confirm - one instruction barely moves the percentage. |
 | `quick_diff.py FILE.cpp... [-q]` | Compile one file with `/FA` and diff it against the original function disassembled straight from `_original/` - about 6 seconds, no link and no reccmp, so a dozen source variants can be tried in the time of one build. Shows the whole original function, which reccmp's diff does not when ours is shorter. A triage loop: confirm a 1.0 with `reccmp_report.py --run`, and do not trust a *rise* of its ratio below about 0.6 - on a badly matching function difflib rewards a different alignment, and one such "gain" was a 10-point loss in reccmp. |
 | `push_pattern.py FILE.cpp...` | Per call, the argument-push run as `pushes/interleaved` for both sides. A neat run (`0` interleaved) means every argument was already in a register or slot, i.e. the source had a **local**; a mixed run is what writing the expression inline at the call produces. A starred row is a call where the two sides disagree - add the local, or drop it, accordingly. Counts only calls whose set-up it can see, so a differing call *total* means our source has an extra call (a duplicated block), not that the tool failed. |
-| `perm_decls.py FILE FIRST LAST` | Permute one short run of declarations and keep the order that matches best, scored by `quick_diff.py -s`. MSVC assigns stack slots in declaration order, so two locals declared the wrong way round sit in each other's slots and usually in each other's registers - `assignSelectionToKey` 95.9% -> 100% from one swapped line. Find the candidates with `diff_slots.py`: same slot count, different use count per slot. |
+| `perm_decls.py FILE FIRST LAST` | Permute one short run of declarations and keep the order that matches best, scored by `quick_diff.py -s`. Declaration order does not decide stack slots: `StkColorCmp` sorts the stack elements by reference weight per byte and leaves only the **ties** to the order the symbols arrive in, so this pays exactly where two locals of equal weight are declared the wrong way round - they then sit in each other's slots and usually in each other's registers (`assignSelectionToKey` 95.9% -> 100% from one swapped line), and where the weights differ no permutation will move them (which is why the attempts under "Variable Usage" in IMPLEMENTATION_CHEAT_SHEET.md found nothing). Find the candidates with `diff_slots.py`: same slot count, different use count per slot, then `slotpair.py` for which slots traded places. |
 | `reorder_search.py FILE NAME [--pairs] [--dry]` | Hill-climb the match % by reordering independent statements: permute runs of >=3 by default, or swap every adjacent independent pair with `--pairs`. Builds once per move and reverts anything that does not improve. |
 | `quick_reorder.py FILE START END [START END ...] [-s]` | The same hill-climb scored by `quick_diff.py` instead of a build, so a trial takes seconds: every statement of each named block (from the line containing START up to the line containing END) is tried at every other position, and only strict ratio gains are kept. With `-s` stack offsets count, which makes **declaration order** visible - it took `AICState::selectAttackTarget` 68.8% -> 100% and `smallestTribeOfUnitType` 57% -> 96% with two or three moves each. It does not check data dependencies (a use before a declaration fails to compile and is rejected, a store moved across a read is not), so give it blocks of declarations and pure `return` guards and read `git diff` afterwards. Set `QD_OUT` per run to run several in parallel, and let them finish before a full build (shared PDB, C1033). |
 
@@ -74,14 +77,48 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `docount.py [filter] [--apply]` | Counted `i = 0; do { ... i = i + 1; } while (i < N);` -> `for (int i = 0; i < N; i = i + 1)`. Only when the counter is stepped by the last statement, written nowhere else, and not read after the loop. |
 | `early_return.py [filter] [--apply]` | Turn a function whose body is one big `if (bounds guard) { ... } return X;` into `if (!guard) { return X; } ...`. Inverts a top-level `&&` chain of simple comparisons by De Morgan and bails on anything else. Measured code-generation neutral across 20 functions; it is a readability change. |
 
+## Building in parallel (`build_parallel.py`)
+
+Use it wherever `build_quiet.py` is used; it ends with the same `BUILD_OK`/`BUILD_FAIL`
+line and the same exit code, because it finishes by calling it. It pays off on a whole-list
+build or a wide batch and is pointless for one or two files, where the serial build is
+already only as slow as those files.
+
+It is **not** a second build system, and the reason it can be trusted is that it does not
+try to be one:
+
+- every object is compiled by the command `build.make` holds for it - the same `cl.exe`,
+  the same response-file body expanded from `flags.make`, and the same
+  `cmake -E cmake_cl_compile_depends` wrapper, so the `.obj` *and* its `.obj.d` land where
+  nmake expects them;
+- the precompiled header is built first and on its own, since every other object reads it;
+- `build_quiet.py` then runs a normal incremental build, which picks up anything the script
+  skipped or could not do (the `.asm`, the link) and has the last word on success.
+
+Two things to keep in mind when touching it:
+
+- **The PDB is shared.** Every object of a target writes one `vcNN.pdb` through `/Fd`, and
+  that is only safe because `mspdbsrv.exe` serialises the writers. It is a singleton keyed
+  on `_MSPDBSRV_ENDPOINT_`, so all jobs run on this worktree's endpoint from
+  `common.build_env` - the same one `build.bat` derives. This is how `cl /MP` works. Giving
+  the jobs separate endpoints would make them race on the PDB.
+- **Staleness is decided per object** from the source, `flags.make`, the `.pch` and the
+  headers recorded in the `.obj.d`, and anything unresolvable counts as out of date. Being
+  wrong in that direction only costs a recompile nmake would have skipped; being wrong the
+  other way would ship a stale object, which the handover in step 4 is there to catch.
+
+Under wine, set `WINEPREFIX` and put a Windows `cmake.exe` on `WINEPATH` - `cmakew` needs
+it to configure, exactly as it does for `build.bat`. The compiler is invoked directly rather
+than through `cmd`, so no shell quoting is involved.
+
 ## Typical loop
 
 ```sh
-python build_quiet.py && python reccmp_report.py --run save base.json   # baseline
+python build_parallel.py -j 8 && python reccmp_report.py --run save base.json   # baseline
 python show_functions.py Map/Units > work.txt                            # edit the bodies in work.txt
 python splice_functions.py work.txt
 python syntax_check.py Map/Units
-python build_quiet.py && python reccmp_report.py --run cmp base.json Map/Units
+python build_parallel.py -j 8 && python reccmp_report.py --run cmp base.json Map/Units
 python reccmp_report.py diff someFunction                                # inspect what still differs
 python commit_progress_batch.py Map/Units "someFunction=LTCG ecx reuse"
 ```

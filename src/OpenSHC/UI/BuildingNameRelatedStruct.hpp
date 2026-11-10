@@ -20,7 +20,7 @@ namespace UI {
     typedef struct BuildingNameRelatedStruct {
 
         int nameNumberInTextGroup; // 0x00000000 length: 4
-        BuildingNameRelatedSubStruct field1_0x4[3]; // 0x00000004 length: 36
+        BuildingNameRelatedSubStruct field_0x4[3]; // 0x00000004 length: 36
 
     } BuildingNameRelatedStruct;
 #pragma pack(pop)

@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -16,7 +17,10 @@ namespace Map {
         {
             int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             this->unitIDSelectedCatapultOrTrebuchet = 0;
-            if (DAT_GameState::instance.playerDataArray[_currentPlayerSlotID].keep.id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[_currentPlayerSlotID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                    .id
+                <= 0) {
                 return 0;
             }
             int _count = 0;

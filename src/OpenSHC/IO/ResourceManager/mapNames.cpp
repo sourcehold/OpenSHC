@@ -42,10 +42,10 @@ namespace IO {
             char* mapName = MACRO_CALL_MEMBER(
                 ResourceManager_Func::mapNames_getLoadedMapNameForIndex, DAT_ResourceManager::ptr)(id1);
 
-            char local_3f0[1008];
-            strcpy(local_3f0, mapName);
-            strcat(local_3f0, s__map_005a2294);
-            MACRO_CALL_MEMBER(ResourceManager_Func::resolveResourceFileName, this)(FRT_MAPS, local_3f0);
+            char mapFileName[1008];
+            strcpy(mapFileName, mapName);
+            strcat(mapFileName, s__map_005a2294);
+            MACRO_CALL_MEMBER(ResourceManager_Func::resolveResourceFileName, this)(FRT_MAPS, mapFileName);
             MACRO_CALL_MEMBER(FilePackager_Func::readMapHeader, FilePackagerObj::ptr)(FALSE);
             if (DAT_GameCore::instance.savedMapLocked == Map::MLS_EDITABLE) {
                 MACRO_CALL_MEMBER(ResourceManager_Func::replaceMapNameWith, this)(id1, id2);

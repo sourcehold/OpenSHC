@@ -286,8 +286,8 @@ namespace AI {
             } else if (mapper == Commands::M_MAPPER_OIL_SMELTER) {
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
                     playerID,
-                    DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
-                    DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
+                    DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
+                    DAT_TerrainDefinedData::instance.field_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
                     buildingSize);
             }
 
@@ -297,7 +297,7 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[placedID].field202_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[placedID].field_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
             }
             if (!DAT_TileMapState::instance.buildingPlacementFail) {

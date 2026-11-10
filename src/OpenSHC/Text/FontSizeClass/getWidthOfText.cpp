@@ -14,15 +14,15 @@ namespace Text {
         int _currentLineWidthUnk = 0;
         int _maxSingleLineWidth = -1;
 
-        int local_c = DAT_TextManagerObject::instance.field9_0x24;
-        if (DAT_TextManagerObject::instance.field9_0x24 <= DAT_TextManagerObject::instance.field10_0x28) {
-            local_c = DAT_TextManagerObject::instance.field10_0x28;
+        int pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field_0x24;
+        if (DAT_TextManagerObject::instance.field_0x24 <= DAT_TextManagerObject::instance.field_0x28) {
+            pendingFirstGlyphAdjustUnk = DAT_TextManagerObject::instance.field_0x28;
         }
 
-        int iVar1 = 0;
+        int firstGlyphAdjustImageIdUnk = 0;
         if (this->fontStartImageId_0x8 == -1) {
             this->fontStartImageId_0x8
-                = GMFirstPictureIndex::instance[this->fontGmID_0x0] + -1 + this->numberOfFontStartInGm_0x4;
+                = GMFirstPictureIndex::instance[this->fontGmID_0x0] - 1 + this->numberOfFontStartInGm_0x4;
         }
 
         for (int _textIndex = 0; _textIndex < length; ++_textIndex) {
@@ -40,20 +40,21 @@ namespace Text {
                 }
             } else {
                 imageID += this->fontStartImageId_0x8;
-                if (local_c != 0) {
-                    local_c = 0;
+                if (pendingFirstGlyphAdjustUnk != 0) {
+                    pendingFirstGlyphAdjustUnk = 0;
 
                     if (this->lineHeight_0x14 == 27) {
-                        iVar1 = 19;
+                        firstGlyphAdjustImageIdUnk = 19;
                     }
 
                     if (this->lineHeight_0x14 == 20) {
-                        iVar1 = 20;
+                        firstGlyphAdjustImageIdUnk = 20;
                     }
 
-                    if (iVar1 != 0) {
+                    if (firstGlyphAdjustImageIdUnk != 0) {
                         _currentLineWidthUnk += 3
-                            + DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[156] + iVar1 - 1]
+                            + DAT_GMImageHeaders::instance
+                                  .imh[GMFirstPictureIndex::instance[156] + firstGlyphAdjustImageIdUnk - 1]
                                   .width
                             - DAT_GMImageHeaders::instance.imh[imageID].width - this->letterSpacing_0x18;
                     }

@@ -16,12 +16,10 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457B40
     void GameStateStructures::destroyPlayerCompletely(int playerID)
     {
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::killUnits, DAT_UnitsState::ptr)(playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuildings, DAT_BuildingsState::ptr)(
-            playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::destroyWallsOfPlayer, DAT_TileMapState::ptr)(playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesPart2, DAT_EntityState::ptr)(
-            playerID);
+        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::killUnits, DAT_UnitsState::ptr)(playerID);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuildings, DAT_BuildingsState::ptr)(playerID);
+        MACRO_CALL_MEMBER(Map::TileMapState_Func::destroyWallsOfPlayer, DAT_TileMapState::ptr)(playerID);
+        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::destroyEntitiesPart2, DAT_EntityState::ptr)(playerID);
     }
 
 }

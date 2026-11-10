@@ -12,7 +12,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::resumeMovementAfterInterruption, this)(unitID);
             this->units[unitID].attackedUnitID = 0;
-            this->units[unitID].field191_0x340 = 0;
+            this->units[unitID].field_0x340 = 0;
         }
 
     }

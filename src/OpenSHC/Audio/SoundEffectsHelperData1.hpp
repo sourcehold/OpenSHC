@@ -32,20 +32,20 @@ namespace Audio {
         undefined4 SND_SomeTimerResolution; // 0x00000030 length: 4
         undefined4 battleMoodState; // 0x00000034 length: 4
         int DAT_NumberOfUsedSoundSamplePlaces; // 0x00000038 length: 4
-        int field8_0x3c; // 0x0000003C length: 4
+        int field_0x3c; // 0x0000003C length: 4
         int DAT_RandomVariationCurrentPlayingMusic_01; // 0x00000040 length: 4
         int DAT_SomeSoundTime2; // 0x00000044 length: 4
         int DAT_RandomVariationCurrentPlayingMusic_02; // 0x00000048 length: 4
         int playerTroopValueBaseline; // 0x0000004C length: 4
-        int field13_0x50; // 0x00000050 length: 4
-        BOOLEnum field14_0x54; // 0x00000054 length: 4
-        BOOLEnum field15_0x58; // 0x00000058 length: 4
+        int field_0x50; // 0x00000050 length: 4
+        BOOLEnum field_0x54; // 0x00000054 length: 4
+        BOOLEnum field_0x58; // 0x00000058 length: 4
         int musicDelayIndex; // 0x0000005C length: 4
         int DAT_WinMusicVariation; // 0x00000060 length: 4
-        int field18_0x64; // 0x00000064 length: 4
+        int field_0x64; // 0x00000064 length: 4
         int DAT_LossMusicVariation; // 0x00000068 length: 4
         DWORD DAT_enemyInsideCastleSoundWarningCooldownTimer; // 0x0000006C length: 4
-        undefined4 field21_0x70; // 0x00000070 length: 4
+        undefined4 field_0x70; // 0x00000070 length: 4
         WAVEFORMATEX SND_Waveformat; // 0x00000074 length: 18
         undefined1 padding_0x86[2]; // 0x00000086 length: 2
 

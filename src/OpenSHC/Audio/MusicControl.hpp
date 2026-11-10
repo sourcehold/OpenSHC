@@ -16,13 +16,13 @@ namespace Audio {
     typedef struct MusicControl {
 
         int musicState; // 0x00000000 length: 4
-        int field1_0x4; // 0x00000004 length: 4
+        int field_0x4; // 0x00000004 length: 4
         int volumeLevel; // 0x00000008 length: 4
         int musicTracker; // 0x0000000C length: 4
         int troopValueLevel; // 0x00000010 length: 4
         int incrementorUpTo4; // 0x00000014 length: 4
         int battleEndHandled; // 0x00000018 length: 4
-        int field7_0x1c; // 0x0000001C length: 4
+        int field_0x1c; // 0x0000001C length: 4
 
     } MusicControl;
 #pragma pack(pop)

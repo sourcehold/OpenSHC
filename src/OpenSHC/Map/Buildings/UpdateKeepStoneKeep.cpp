@@ -23,7 +23,7 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y + 2;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 24;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0x18;
         if (((byte)DAT_GameCore::instance.mapTimeInTicks & 3) == 0
             && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
             && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {

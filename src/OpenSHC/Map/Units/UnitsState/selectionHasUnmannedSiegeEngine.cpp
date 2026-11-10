@@ -25,7 +25,7 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_TOWER:
             case OpenSHC::Map::Units::UT_S_BATTERINGRAM:
             case OpenSHC::Map::Units::UT_S_SHIELD:
-                return (BOOLEnum)(this->selectionUnitType[Selection::USE_E_ENGINEERS] != 0);
+                return this->selectionUnitType[Selection::USE_E_ENGINEERS] != 0;
             }
             return FALSE;
         }

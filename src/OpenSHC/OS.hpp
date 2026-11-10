@@ -25,7 +25,7 @@ namespace OS {
     using OpenSHC::OS::_atexit_t;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
+    int* __cdecl basic_ofstream_write(void* param_1, uint param_2);
 
     BOOLEnum __cdecl isEqualGUID(GUID* param_1, GUID* param_2);
 

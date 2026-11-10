@@ -29,7 +29,7 @@ namespace Map {
             short gmOriginX; // 0x0000000C length: 2
             short gmOriginY; // 0x0000000E length: 2
             int treeTypeRelated2; // 0x00000010 length: 4
-            dword field8_0x14; // 0x00000014 length: 4
+            dword field_0x14; // 0x00000014 length: 4
             int zero; // 0x00000018 length: 4
             short animationFrameIndex; // 0x0000001C length: 2
             undefined1 padding_0x1e[26]; // 0x0000001E length: 26
@@ -66,7 +66,7 @@ namespace Map {
             int appleFarmUID; // 0x00000090 length: 4
             short unknownDistanceRelatedToCrow; // 0x00000094 length: 2
             short rng200till300; // 0x00000096 length: 2
-            short field92_0x98; // 0x00000098 length: 2
+            short field_0x98; // 0x00000098 length: 2
             short igniterPlayer; // 0x0000009A length: 2
 
         } Tree;

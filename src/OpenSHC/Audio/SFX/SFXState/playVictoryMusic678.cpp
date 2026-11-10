@@ -1,5 +1,6 @@
 #include "../SFXState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -25,7 +26,8 @@ namespace Audio {
             }
             if ((DAT_VictoryMusicVariation::instance == 0 || DAT_VictoryMusicVariation::instance == 2)
                 && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .campground.id
+                            .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                            .id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .lordID

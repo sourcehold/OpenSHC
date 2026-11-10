@@ -13,6 +13,7 @@ namespace Map {
     namespace Buildings {
         typedef enum BuildingType {
 
+            BT_NONE = 0, // 0x00000000
             BT_HOVEL = 1, // 0x00000001
             BT_HOUSE = 2, // 0x00000002
             BT_WOODCUTTERSHUT = 3, // 0x00000003

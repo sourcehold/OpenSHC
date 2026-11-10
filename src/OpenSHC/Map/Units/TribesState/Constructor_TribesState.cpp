@@ -14,7 +14,7 @@ namespace Map {
             this->constructorTime = timeGetTime();
             this->clans = 0;
             this->fcn_mtribe = 0;
-            this->field2_0x8 = 1;
+            this->field_0x8 = 1;
             return this;
         }
 

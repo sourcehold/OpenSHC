@@ -5,6 +5,9 @@ on:
   pull_request:
     branches: [main]
     types: [opened, reopened, synchronize, ready_for_review]
+  # Required checks have to report on the merge queue's own commit as well, or
+  # the queue waits for a cpp-linter that never runs and times the group out.
+  merge_group:
   push:
     branches: [main]
 
@@ -17,12 +20,24 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          # A merge group commit needs its base present to be diffed against,
+          # and a batched group's parent is the previous group rather than main.
+          # The pack is ~54 MiB, so taking the history is cheaper than guessing
+          # a depth.
+          fetch-depth: ${{ github.event_name == 'merge_group' && 0 || 1 }}
 
       # Detect if any relevant files changed
       - name: Detect relevant files
         id: filter
         uses: dorny/paths-filter@v4
+        # Same reasoning as the linter step: in the queue, a filter that cannot
+        # work out a base leaves 'cpp' empty, which skips the lint rather than
+        # failing the group.
+        continue-on-error: ${{ github.event_name == 'merge_group' }}
         with:
+          # pull_request and push carry their own base; merge_group does not.
+          base: ${{ github.event_name == 'merge_group' && github.event.merge_group.base_sha || '' }}
           filters: |
             cpp:
               - '**/*.c'
@@ -43,6 +58,13 @@ jobs:
         id: linter
         uses: cpp-linter/cpp-linter-action@v2
         if: steps.filter.outputs.cpp == 'true'
+        # cpp-linter documents pull_request and push, and says nothing about
+        # merge_group, so in the queue the action itself breaking must not be
+        # able to wedge a group: the pass/fail below is decided by its
+        # checks-failed output, which is empty if it never got that far. The
+        # same files were linted on the pull request, where this check is also
+        # required and does fail the job, so nothing reaches main unlinted.
+        continue-on-error: ${{ github.event_name == 'merge_group' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

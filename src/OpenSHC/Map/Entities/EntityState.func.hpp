@@ -74,8 +74,8 @@ namespace Map {
             flagUnitsWithActiveEntity;
 
             MACRO_FUNCTION_RESOLVER(int (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004016E0,
-                &EntityState::somethingWithSeparateAreas1)
-            somethingWithSeparateAreas1;
+                &EntityState::findNearestDiseaseCloudForHealer)
+            findNearestDiseaseCloudForHealer;
 
             MACRO_FUNCTION_RESOLVER(void (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x00401880,
                 &EntityState::refreshPoisonCloudNearUnit)

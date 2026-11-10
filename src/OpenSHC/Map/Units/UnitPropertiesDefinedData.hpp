@@ -42,8 +42,8 @@ namespace Map {
             undefined1 padding_0x7384[48]; // 0x00007384 length: 48
             int UNIT_CLIMB[80]; // 0x000073B4 length: 320
             int SomeUnitStatMatrix4[80]; // 0x000074F4 length: 320
-            int field65_0x7634[80]; // 0x00007634 length: 320
-            int field66_0x7774[80]; // 0x00007774 length: 320
+            int field_0x7634[80]; // 0x00007634 length: 320
+            int field_0x7774[80]; // 0x00007774 length: 320
             int SomeUnitStatMatrix5[80]; // 0x000078B4 length: 320
             int NotBlessableUnits[80]; // 0x000079F4 length: 320
             int UNIT_CAN_MELEE[80]; // 0x00007B34 length: 320
@@ -54,26 +54,26 @@ namespace Map {
             int FadeAlpha_Values_3[54]; // 0x000089AC length: 216
             int FadeAlpha_Values_4[61]; // 0x00008A84 length: 244
             AnimationFrameData Frames_Shared_UnitClimbingUp; // 0x00008B78 length: 33748
-            int field77_0x10f4c[328][2]; // 0x00010F4C length: 2624
+            int field_0x10f4c[328][2]; // 0x00010F4C length: 2624
             int UnitOrientationRelatedOffset[8][2]; // 0x0001198C length: 64
-            int field79_0x119cc[22]; // 0x000119CC length: 88
-            int field80_0x11a24[18]; // 0x00011A24 length: 72
-            int field81_0x11a6c[110]; // 0x00011A6C length: 440
-            int field82_0x11c24[20]; // 0x00011C24 length: 80
-            XYPair field83_0x11c74[8]; // 0x00011C74 length: 64
-            int field84_0x11cb4[8]; // 0x00011CB4 length: 32
+            int field_0x119cc[22]; // 0x000119CC length: 88
+            int field_0x11a24[18]; // 0x00011A24 length: 72
+            int field_0x11a6c[110]; // 0x00011A6C length: 440
+            int field_0x11c24[20]; // 0x00011C24 length: 80
+            XYPair field_0x11c74[8]; // 0x00011C74 length: 64
+            int field_0x11cb4[8]; // 0x00011CB4 length: 32
             undefined1 padding_0x11cd4[32]; // 0x00011CD4 length: 32
-            int field117_0x11cf4[9][24]; // 0x00011CF4 length: 864
-            XYPair field118_0x12054[24]; // 0x00012054 length: 192
+            int field_0x11cf4[9][24]; // 0x00011CF4 length: 864
+            XYPair field_0x12054[24]; // 0x00012054 length: 192
             int UnitVisionBonus[10]; // 0x00012114 length: 40
-            XYPair field120_0x1213c[9]; // 0x0001213C length: 72
-            XYPair field121_0x12184[9]; // 0x00012184 length: 72
-            XYPair field122_0x121cc[9]; // 0x000121CC length: 72
-            XYPair field123_0x12214[9]; // 0x00012214 length: 72
-            int field124_0x1225c; // 0x0001225C length: 4
-            int field125_0x12260; // 0x00012260 length: 4
-            int field126_0x12264; // 0x00012264 length: 4
-            int field127_0x12268; // 0x00012268 length: 4
+            XYPair field_0x1213c[9]; // 0x0001213C length: 72
+            XYPair field_0x12184[9]; // 0x00012184 length: 72
+            XYPair field_0x121cc[9]; // 0x000121CC length: 72
+            XYPair field_0x12214[9]; // 0x00012214 length: 72
+            int field_0x1225c; // 0x0001225C length: 4
+            int field_0x12260; // 0x00012260 length: 4
+            int field_0x12264; // 0x00012264 length: 4
+            int field_0x12268; // 0x00012268 length: 4
 
         } UnitPropertiesDefinedData;
 #pragma pack(pop)
