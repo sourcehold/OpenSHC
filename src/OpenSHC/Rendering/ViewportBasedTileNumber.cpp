@@ -25,7 +25,7 @@ int Rendering::ViewportBasedTileNumber()
             + (DAT_ViewportRenderState::instance.viewportState.viewportY / 16
                   + DAT_ViewportRenderState::instance.viewportState.mbr_0xb0 / 2)
                 * 401
-            + DAT_ViewportRenderState::instance.viewportState.mbr_0xac + orientationOffset - 8];
+            + DAT_ViewportRenderState::instance.viewportState.mbr_0xac + orientationOffset];
 }
 
 }
