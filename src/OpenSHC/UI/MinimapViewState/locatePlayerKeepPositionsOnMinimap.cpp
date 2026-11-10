@@ -63,7 +63,7 @@ namespace UI {
                         int const x = (column - firstColumn) * widthFactor + rowX;
                         int const buildingID
                             = DAT_TileMapState::instance.BuildingLayer[DAT_ViewportRenderState::instance
-                                    .screenPointToTileNumber[column + rowBase - 8]];
+                                    .screenPointToTileNumber[column + rowBase]];
                         if (buildingID != 0
                             && OpenSHC::Map::Buildings::BT_MANORHOUSE
                                 <= DAT_BuildingsState::instance.buildings[buildingID].buildingType

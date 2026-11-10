@@ -72,7 +72,7 @@ namespace UI {
                     for (int column = firstColumn - 2; column < lastColumn; ++column) {
                         int const x = (column - firstColumn) * widthFactor + rowX;
                         int const tile
-                            = DAT_ViewportRenderState::instance.screenPointToTileNumber[column + rowBase - 8];
+                            = DAT_ViewportRenderState::instance.screenPointToTileNumber[column + rowBase];
                         uint const logic = DAT_TileMapState::instance.LogicLayer[tile];
                         int const random = DAT_TileMapState::instance.RandomLayer[tile];
                         int const luminescence = DAT_TileMapState::instance.LuminesenceLayer[tile];
