@@ -1,4 +1,4 @@
-# Taken from https://cpp-linter.github.io/cpp-linter-action/examples/
+# Taken mostly from https://cpp-linter.github.io/cpp-linter-action/examples/
 
 name: cpp-linter-comment
 on:
@@ -39,33 +39,53 @@ jobs:
           RUN_URL: ${{ github.event.workflow_run.html_url }}
         run: |
           dir="$RUNNER_TEMP/cpp-linter-comment"
-          # The artifact was made while linting the pull request: use it only as data.
-          if [ ! -f "$dir/pr-number.txt" ] || [ ! -f "$dir/comment.md" ]; then
-            echo "::warning::The artifact has no pull request number or no comment"
+
+          # Validate artifact contents.
+          if [ ! -f "$dir/pr-number.txt" ] || [ ! -f "$dir/comment.md" ] || [ ! -f "$dir/checks-failed.txt" ]; then
+            echo "::warning::The artifact is missing required files"
             exit 0
           fi
+
           pr="$(tr -cd '0-9' < "$dir/pr-number.txt" | head -c 10)"
-          if [ -z "$pr" ]; then
-            echo "::warning::The artifact has no pull request number"
+          checks_failed="$(cat "$dir/checks-failed.txt")"
+
+          if [ -z "$pr" ] || ! [[ "$checks_failed" =~ ^[0-9]+$ ]]; then
+            echo "::warning::Invalid PR number or checks-failed value"
             exit 0
           fi
-          # Only comment on the pull request whose head the lint run checked. (4)
+
+          # Only comment on the pull request whose head the lint run checked.
           if [ "$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.head.sha + " " + .head.repo.full_name')" != "$HEAD_SHA $HEAD_REPO" ]; then
             echo "::notice::Pull request #$pr has new commits since this run; not commenting"
             exit 0
           fi
+
           marker='<!-- cpp-linter-action workflow_run comment -->'
+
+          # Find an existing comment from this action.
+          id="$(gh api --paginate "repos/$GH_REPO/issues/$pr/comments" \
+            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" \
+            | head -n 1)"
+
+          # Remove the previous comment if no checks failed.
+          if [ "$checks_failed" -eq 0 ]; then
+            if [ -n "$id" ]; then
+              gh api -X DELETE "repos/$GH_REPO/issues/comments/$id" > /dev/null
+            fi
+            exit 0
+          fi
+
+          # Prepare the comment.
           body="$RUNNER_TEMP/body.md"
+
           if [ "$(wc -c < "$dir/comment.md")" -gt 60000 ]; then
             # A comment holds at most 65536 characters.
             printf '%s\nToo many findings to show here. See the [workflow run](%s).\n' "$marker" "$RUN_URL" > "$body"
           else
             { echo "$marker"; cat "$dir/comment.md"; } > "$body"
           fi
-          # Update the comment from an earlier run instead of adding another one.
-          id="$(gh api --paginate "repos/$GH_REPO/issues/$pr/comments" \
-            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" \
-            | head -n 1)"
+
+          # Update the existing comment or create a new one.
           if [ -n "$id" ]; then
             gh api -X PATCH "repos/$GH_REPO/issues/comments/$id" -F "body=@$body" > /dev/null
           else

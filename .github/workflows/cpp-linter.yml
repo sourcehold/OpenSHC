@@ -86,14 +86,15 @@ jobs:
           # Do not post comments from this unprivileged workflow.
           file-annotations: false
 
-      # Save the pull request number alongside the generated report.
-      - name: Save the pull request number
+      - name: Save the pull request number and check result
         if: github.event_name == 'pull_request' && steps.filter.outputs.cpp == 'true'
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          CHECKS_FAILED: ${{ steps.linter.outputs.checks-failed }}
         run: |
           mkdir -p "$RUNNER_TEMP/cpp-linter-comment"
           echo "$PR_NUMBER" > "$RUNNER_TEMP/cpp-linter-comment/pr-number.txt"
+          echo "${CHECKS_FAILED:-0}" > "$RUNNER_TEMP/cpp-linter-comment/checks-failed.txt"
 
       # Upload the report for the separate privileged workflow.
       - uses: actions/upload-artifact@v7
