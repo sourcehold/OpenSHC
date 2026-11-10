@@ -22,7 +22,7 @@ namespace Map {
             int _index = 0;
             this->calculations += 1;
             this->searchGeneration += 1;
-            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+            if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -51,7 +51,7 @@ namespace Map {
                 _tiles[_index] = tileUnk;
                 _index += 1;
                 // for every direction, queue the tiles that are not a border tile
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]

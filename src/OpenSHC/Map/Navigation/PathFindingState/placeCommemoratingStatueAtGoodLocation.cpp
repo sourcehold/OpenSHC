@@ -36,7 +36,7 @@ namespace Map {
             }
             this->calculations += 1;
             this->searchGeneration += 1;
-            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+            if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -82,7 +82,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[_tile].statueCommemoratingPlayerID = playerID;
                     return;
                 }
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_startY][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]

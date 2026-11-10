@@ -11,6 +11,7 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/UI/MenuModal.hpp"
+#include "OpenSHC/Util/FunctionTypes/NoArgCallback.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -19,6 +20,7 @@ namespace UI {
     using OpenSHC::UI::MenuModal;
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
+    using OpenSHC::Util::FunctionTypes::NoArgCallback;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -40,7 +42,7 @@ namespace UI {
         dword sliderValue; // 0x00000054 length: 4
         int* destination; // 0x00000058 length: 4
         short* destination2; // 0x0000005C length: 4
-        pointer sliderCallbackFunction; // 0x00000060 length: 4
+        NoArgCallback* sliderCallbackFunction; // 0x00000060 length: 4
         dword mbr_0x64; // 0x00000064 length: 4
         int disappearAfter; // 0x00000068 length: 4
         dword mbr_0x6c; // 0x0000006C length: 4
@@ -71,13 +73,14 @@ namespace UI {
 
         void fillWithMenuModalDimensions(int* xPtr, int* yPtr, int* widthPtr, int* heigthPtr);
 
-        void setSliderParameters(int minimum, int maximum, int value, undefined* destination, void* callbackFunction);
+        void setSliderParameters(
+            int minimum, int maximum, int value, undefined* destination, NoArgCallback* callbackFunction);
 
         void setSliderParameters2(
-            dword minimum, dword maximum, dword value, dword destination, undefined* callbackFunction);
+            dword minimum, dword maximum, dword value, dword destination, NoArgCallback* callbackFunction);
 
         void setModalSliderParameters(
-            int param_1, int param_2, dword param_3, dword param_4, undefined* param_5, undefined* param_6);
+            int param_1, int param_2, dword param_3, dword param_4, int* param_5, NoArgCallback* param_6);
 
         void renderMenuModal();
 

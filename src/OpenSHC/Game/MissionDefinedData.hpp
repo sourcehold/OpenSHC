@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Game/CampaignInfoStruct1.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
     using OpenSHC::Game::CampaignInfoStruct1;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
     // SIZE: 0x000016C4
@@ -53,7 +55,7 @@ namespace Game {
         int SkirmishTrailIconOffsets[50]; // 0x00000F2C length: 200
         int SkirmishTrailMissionRenderData[50][4]; // 0x00000FF4 length: 800
         int field37_0x1314[22]; // 0x00001314 length: 88
-        undefined4 descending; // 0x0000136C length: 4
+        BOOLEnum descending; // 0x0000136C length: 4
         int field39_0x1370; // 0x00001370 length: 4
         undefined1 padding_0x1374[8]; // 0x00001374 length: 8
         int HistoryBookEdgeSpriteIDs[50]; // 0x0000137C length: 200

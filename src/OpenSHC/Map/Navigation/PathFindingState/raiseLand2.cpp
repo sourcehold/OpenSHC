@@ -45,10 +45,10 @@ namespace Map {
                 if (this->searchQueue.currentDistance > maxDistance)
                     break;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(tileUnk, _y, 4, 1);
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + tileUnk;
                     if (DAT_TileMapState::instance.CertainPathLayer[_candidate] <= 0
-                        && DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _startArea
+                        && (ushort)DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _startArea
                         && (DAT_TileMapState::instance.LogicLayer[_candidate]
                                & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
                             == 0) {

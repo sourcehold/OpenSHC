@@ -19,6 +19,7 @@ namespace Map {
         MC_MAP_XY_LIMIT_MIN_1 = 399, // 0x0000018F
         MC_MAP_SIZE_400 = 400, // 0x00000190
         MC_MAP_XY_LIMIT = 400, // 0x00000190
+        MC_MAP_TILES_COUNT_MIN_1 = 80399, // 0x00013A0F
         MC_MAP_TILES_COUNT = 80400 // 0x00013A10
 
     } MapConstants;

@@ -29,7 +29,7 @@ namespace Map {
             }
             this->calculations += 1;
             this->searchGeneration += 1;
-            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+            if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -55,7 +55,7 @@ namespace Map {
                 if (MC_MAP_TILES_COUNT < this->searchQueue.currentDistance) {
                     return _bestTile;
                 }
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_queuedTile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                         != 0) {

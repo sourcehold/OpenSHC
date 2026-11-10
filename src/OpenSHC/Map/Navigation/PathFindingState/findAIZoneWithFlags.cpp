@@ -18,7 +18,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0049EDF0
-        BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint ySpace, uint y, undefined4 aiInfoFlags)
+        BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint ySpace, uint y, byte aiInfoFlags)
         {
             this->calculations += 1;
             if (ySpace > MC_MAP_XY_LIMIT_MIN_1 || y > MC_MAP_XY_LIMIT_MIN_1
@@ -26,7 +26,7 @@ namespace Map {
                 return FALSE;
             }
             this->searchGeneration += 1;
-            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+            if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -58,7 +58,7 @@ namespace Map {
                 if (this->searchQueue.currentDistance > maxDistance) {
                     return FALSE;
                 }
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
                             & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                         == 0) {
@@ -68,9 +68,7 @@ namespace Map {
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         continue;
                     }
-                    // the original ANDs 8 bits (test byte ptr [..], dl), so the undefined4 parameter
-                    // has to be narrowed here
-                    if ((DAT_TileMapState::instance.AIInfoLayer[_candidate] & (byte)aiInfoFlags) != 0) {
+                    if ((DAT_TileMapState::instance.AIInfoLayer[_candidate] & aiInfoFlags) != 0) {
                         this->ALG_ResultY = _y;
                         this->ALG_ResultX = _x;
                         return TRUE;

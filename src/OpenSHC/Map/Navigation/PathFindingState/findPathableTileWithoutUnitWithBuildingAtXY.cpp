@@ -24,7 +24,7 @@ namespace Map {
             if (ySpace <= MC_MAP_XY_LIMIT_MIN_1 && y <= MC_MAP_XY_LIMIT_MIN_1
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + ySpace] != 0) {
                 this->searchGeneration += 1;
-                if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+                if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                     this->searchGeneration = 1;
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -66,7 +66,7 @@ namespace Map {
                     if (25 < this->searchQueue.currentDistance) {
                         return;
                     }
-                    for (int _direction = 0; _direction < PFC_DIRECTIONS; _direction = _direction + 2) {
+                    for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; _direction = _direction + 2) {
                         /*
                           for each direction, do:
                          */

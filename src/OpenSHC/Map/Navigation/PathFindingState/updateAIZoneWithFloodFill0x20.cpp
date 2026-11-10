@@ -22,7 +22,7 @@ namespace Map {
                 return;
             }
             this->searchGeneration += 1;
-            if (PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
+            if (Enums::PFC_SEARCH_GENERATION_LIMIT < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TileMapState::instance.WalkLayer), 0, &DAT_TileMapState::instance.WalkLayer[0]);
@@ -46,7 +46,7 @@ namespace Map {
                 if (this->searchQueue.currentDistance > max) {
                     return;
                 }
-                for (int _direction = 0; _direction < PFC_DIRECTIONS; ++_direction) {
+                for (int _direction = 0; _direction < Enums::PFC_DIRECTIONS; ++_direction) {
                     /*
                       fixme: the edge test is done on the current tile, not on the candidate
                      */

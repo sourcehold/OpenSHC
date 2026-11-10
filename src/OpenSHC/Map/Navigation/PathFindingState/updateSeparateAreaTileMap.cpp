@@ -42,7 +42,7 @@ namespace Map {
               queue through these locals; see LinkageNeighbourAsm.hpp. The queue end lives in the forceUpdate
               parameter slot, as it does in the original.
              */
-            ushort* _areaLayer;
+            short* _areaLayer;
             int* _zoneSizes;
             short* _yQueue;
             int* _tilesQueue;
