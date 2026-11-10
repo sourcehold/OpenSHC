@@ -22,7 +22,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004995E0
         BOOLEnum PathFindingState::updateSeparateAreaTileMap(BOOLEnum forceUpdate)
         {
-            if (forceUpdate != 0) {
+            if (forceUpdate) {
                 this->toggleUpdateSeparateAreaTileMap = 1;
                 DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps = 0;
             }
