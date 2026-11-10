@@ -33,8 +33,7 @@ namespace UI {
             if (height <= 0) {
                 return;
             }
-            // The last filter entry is still zero until the filter arrays are built. The original keeps height in edi
-            // across this call, which takes /GL on this file and InitBlendFilterArraysUnk.cpp
+            // The last filter entry is still zero until the filter arrays are built
             if (DAT_BlendFilterArrays::instance[32][31][0] == 0) {
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::InitBlendFilterArraysUnk)();
             }
