@@ -14,7 +14,7 @@ namespace Rendering {
         if (tile < 0) {
             return;
         }
-        if (250 <= this->availableFloaterIndex) {
+        if (countof(this->floatersArray) <= this->availableFloaterIndex) {
             return;
         }
 
@@ -22,7 +22,7 @@ namespace Rendering {
             this->floatersArray[newFloaterIndex].id = 0;
         } else {
             uint floaterID = DAT_TileMapState::instance.FloatingLayer[tile];
-            if (249 < floaterID) {
+            if (countof(this->floatersArray) - 1 < floaterID) {
                 return;
             }
             for (; floaterID != 0; floaterID = this->floatersArray[floaterID].id) {
@@ -42,7 +42,7 @@ namespace Rendering {
             = imageY - DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[gmID].originY;
         this->floatersArray[newFloaterIndex].tile = tile;
         this->floatersArray[newFloaterIndex].variation = variation;
-        this->availableFloaterIndex = this->availableFloaterIndex + 1;
+        this->availableFloaterIndex++;
     }
 
 }

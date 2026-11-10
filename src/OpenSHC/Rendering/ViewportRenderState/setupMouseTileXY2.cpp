@@ -19,8 +19,7 @@ namespace Rendering {
 
         this->viewportState.mouseTileX
             = this->viewportState.mouseTile - this->translationMatrix[this->viewportState.mouseTileY].firstTileOfRow;
-        this->viewportState.mouseTileX
-            = this->translationMatrix[this->viewportState.mouseTileY].distanceToCenter + this->viewportState.mouseTileX;
+        this->viewportState.mouseTileX += this->translationMatrix[this->viewportState.mouseTileY].distanceToCenter;
     }
 
 }

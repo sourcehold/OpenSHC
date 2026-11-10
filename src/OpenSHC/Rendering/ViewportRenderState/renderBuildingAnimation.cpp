@@ -1,6 +1,7 @@
 #include "../ViewportRenderState.func.hpp"
 
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentlyRenderedSpriteID.hpp"
@@ -34,7 +35,7 @@ namespace Rendering {
             ();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
                 DAT_TextureRenderCoreObject::ptr)
-            ((screenY - 39 < 0) ? 0 : screenY - 39, 2076);
+            ((screenY - 39 < 0) ? 0 : screenY - 39, Enums::VC_MAP_SURFACE_HEIGHT);
         }
 
         DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;

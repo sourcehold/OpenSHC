@@ -1,13 +1,15 @@
 #include "../ViewportRenderState.func.hpp"
 
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
+
 namespace OpenSHC {
 namespace Rendering {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004E1FA0
     ViewportRenderState* ViewportRenderState::Constructor_ViewportRenderState()
     {
-        this->viewportState.viewportX = 32;
-        this->viewportState.viewportY = 8;
+        this->viewportState.viewportX = Enums::VC_TILE_PIXEL_WIDTH;
+        this->viewportState.viewportY = Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         this->viewportState.previousMouseTile = -1;
 
         DWORD now = timeGetTime();
@@ -31,7 +33,7 @@ namespace Rendering {
         this->interval_02_100 = 100;
         this->availableFloaterIndex = 1;
 
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < countof(this->landscapeAnimationRandomTileArray); ++i) {
             this->landscapeAnimationRandomTileArray[i] = 0;
         }
         return this;

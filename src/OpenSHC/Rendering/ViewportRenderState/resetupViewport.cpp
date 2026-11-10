@@ -1,5 +1,6 @@
 #include "../ViewportRenderState.func.hpp"
 
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
@@ -15,8 +16,9 @@ namespace Rendering {
     // FUNCTION: STRONGHOLDCRUSADER 0x004E7770
     void ViewportRenderState::resetupViewport(int zoomUnk)
     {
-        int savedViewportY = this->viewportState.viewportY + this->viewportState.mbr_0xb0 * 8;
-        int savedViewportX = this->viewportState.mbr_0xac * 32 + this->viewportState.viewportX;
+        int savedViewportY
+            = this->viewportState.viewportY + this->viewportState.mbr_0xb0 * Enums::VC_TILE_ROW_PIXEL_HEIGHT;
+        int savedViewportX = this->viewportState.mbr_0xac * Enums::VC_TILE_PIXEL_WIDTH + this->viewportState.viewportX;
         this->viewportState.isZoomedOutUnk = zoomUnk;
 
         if ((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
@@ -29,8 +31,8 @@ namespace Rendering {
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setupViewport, this)
             (0, 0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY - 128);
         }
-        this->viewportState.viewportX = savedViewportX - this->viewportState.mbr_0xac * 32;
-        this->viewportState.viewportY = savedViewportY - this->viewportState.mbr_0xb0 * 8;
+        this->viewportState.viewportX = savedViewportX - this->viewportState.mbr_0xac * Enums::VC_TILE_PIXEL_WIDTH;
+        this->viewportState.viewportY = savedViewportY - this->viewportState.mbr_0xb0 * Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
     }
 

@@ -8,6 +8,7 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -522,7 +523,7 @@ namespace Rendering {
                 == OpenSHC::Map::Buildings::BT_OXTETHER)) {
             DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
             frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
-            DAT_CurrentlyRenderedSpriteID::instance = 189;
+            DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_FLAG_SMALL;
             if (frame != 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
@@ -553,7 +554,8 @@ namespace Rendering {
                 DAT_TextureRenderCoreObject::ptr)();
             if (DAT_BuildingsState::instance.buildings[buildingID].drawBridgeState1 == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
-                    DAT_TextureRenderCoreObject::ptr)(screenY - 23 < 0 ? 0 : screenY - 23, 2076);
+                    DAT_TextureRenderCoreObject::ptr)(
+                    screenY - 23 < 0 ? 0 : screenY - 23, Enums::VC_MAP_SURFACE_HEIGHT);
             }
         }
         buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
