@@ -164,9 +164,11 @@ def git_lookup_old_field_offset(field_name: str, path: str):
     status, result = subprocess.getstatusoutput(args)
     if status == 0:
       hits = field_offset_extractor_re_factory(field_name=field_name).findall(result)
-      if len(hits) != 1:
-        raise Exception(f"{field_name} {path} {hits}")
-      return int(hits[0], 16)
+      if len(hits) == 1:
+        return int(hits[0], 16)
+      # The name only occurs as part of another field's name in this revision (`keep` in
+      # `keepInfo`), or more than once: look further back for the revision that declared it.
+      logging.debug(f"{field_name} {path} {o} {hits}")
   raise Exception(f"could not find offset: {field_name} {path}")
 
 def test():

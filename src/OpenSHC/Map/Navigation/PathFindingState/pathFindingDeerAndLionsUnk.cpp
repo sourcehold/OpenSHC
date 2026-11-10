@@ -1,0 +1,102 @@
+#include "../PathFindingState.func.hpp"
+
+#include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
+
+#include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Navigation {
+        using OpenSHC::Map::Location::Point8IntXY;
+
+        /*
+          Computes the distance to reach x and y, has a shortcut to basically return distance 1 if the area   of the
+          destination is the same as the current area was   decompilerscript: committed: 2025-01-30 21:57:43.216000
+         */
+        // FUNCTION: STRONGHOLDCRUSADER 0x0049B1D0
+        void PathFindingState::pathFindingDeerAndLionsUnk(int originArea, uint destinationX, uint destinationY)
+        {
+            int _currentTile;
+            if (destinationX <= 399 && destinationY <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destinationY * 400 + destinationX]
+                    != '\0') {
+                this->calculations = this->calculations + 1;
+                this->searchGeneration = this->searchGeneration + 1;
+                this->climbX = destinationX;
+                this->climbY = destinationY;
+                if (32000 < this->searchGeneration) {
+                    this->searchGeneration = 1;
+                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+                }
+                this->searchQueue.readIndex = 0;
+                this->searchQueue.writeIndex = 1;
+                this->searchQueue.xQueue[0] = (short)destinationX;
+                this->searchQueue.currentDistance = 1;
+                this->searchQueue.yQueue[0] = (short)destinationY;
+                this->searchQueue.tilesQueue[0]
+                    = destinationX + DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile;
+                DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+                DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
+                if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                    while ((_currentTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
+                        -1 < _currentTile && (_currentTile < 80400))) {
+                        int _currentX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int _currentY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        if ((short)DAT_TileMapState::instance.PathConnectionLayer[_currentTile] == originArea) {
+                            this->climbX = (int)_currentX;
+                            this->climbY = (int)_currentY;
+                            return;
+                        }
+                        this->searchQueue.currentDistance
+                            = (int)DAT_TileMapState::instance.CertainPathLayer[_currentTile];
+                        if (6 < (int)this->searchQueue.currentDistance) {
+                            return;
+                        }
+                        for (int _direction = 0; _direction < 8; ++_direction) {
+                            int const _neswTile
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction]
+                                + _currentTile;
+                            if ((DAT_TileMapState::instance.LogicLayer[_neswTile] & 0x30) == 0) {
+                                DAT_TileMapState::instance.CertainPathLayer[_neswTile]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[_neswTile] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.xOffset
+                                    + _currentX;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.yOffset
+                                    + _currentY;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _neswTile;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
+                                }
+                            }
+                        }
+                        this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                        if (80400 <= (int)this->searchQueue.readIndex) {
+                            this->searchQueue.readIndex = 0;
+                        }
+                        /*
+                          the right hand side stops incrementing if no valid tiles are found, so the   left hand side
+                          catches up breaking when finished. Very elegant
+                         */
+                        if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
+                            return;
+                        }
+                    }
+                }
+            }
+            return;
+        }
+
+    }
+}
+}
