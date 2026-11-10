@@ -99,7 +99,7 @@ namespace Map {
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID
                     && this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_LORD) {
                     this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                    this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                    this->totalUnitsInSelection += 1;
                 }
             }
         }

@@ -170,7 +170,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_LORD
                             || _lordUnitID != 0) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -180,7 +180,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_CATAPULT) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -190,7 +190,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -199,7 +199,7 @@ namespace Map {
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_TOWER) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -209,7 +209,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -218,7 +218,7 @@ namespace Map {
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -228,7 +228,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_MANGONEL) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -238,7 +238,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_BALLISTA) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -248,7 +248,7 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                             == OpenSHC::Map::Units::UT_S_FBALLISTA) {
                             this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                            this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                            this->totalUnitsInSelection += 1;
                         }
                     }
                     break;
@@ -256,7 +256,7 @@ namespace Map {
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                        this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                        this->totalUnitsInSelection += 1;
                     }
                 }
             }

@@ -24,7 +24,7 @@ namespace Map {
                     && this->units[DAT_CurrentUnitSlotID::instance].drawX != 0
                     && this->units[DAT_CurrentUnitSlotID::instance].owner == playerID) {
                     this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                    this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                    this->totalUnitsInSelection += 1;
                 }
             }
         }
