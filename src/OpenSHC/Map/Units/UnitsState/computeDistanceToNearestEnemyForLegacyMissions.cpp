@@ -46,7 +46,12 @@ namespace Map {
                 } else {
                     _distanceY = _enemyMicroY - _unitMicroY;
                 }
-                int _distance = _distanceX < _distanceY ? _distanceY : _distanceX;
+                int _distance;
+                if (_distanceX < _distanceY) {
+                    _distance = _distanceY;
+                } else {
+                    _distance = _distanceX;
+                }
                 if (_distance < _closestWithinThousand) {
                     _closestWithinThousand = _distance;
                 }

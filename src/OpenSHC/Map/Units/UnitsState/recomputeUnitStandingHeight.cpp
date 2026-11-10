@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -20,14 +21,16 @@ namespace Map {
         void UnitsState::recomputeUnitStandingHeight(int unitID)
         {
             int _tile = this->units[unitID].tile;
-            uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile] & 0x10010d00;
+            uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile]
+                & (LogicHelpers::L_STAIRS | LogicHelpers::L_WALL_OR_GATEHOUSE | LogicHelpers::L_BUILDING
+                    | LogicHelpers::L_KEEP_NON_MANOR_HOUSE | LogicHelpers::L_UNKNOWN_WALL_RELATED);
             int _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             this->units[unitID].buildingHeight = 0;
             this->units[unitID].field_0x84 = 0;
             if (_logicFlags != 0) {
-                if ((_logicFlags & 0x800) != 0) {
+                if ((_logicFlags & LogicHelpers::L_STAIRS) != 0) {
                     this->units[unitID].buildingHeight = 12;
-                } else if ((_logicFlags & 0x100) != 0) {
+                } else if ((_logicFlags & LogicHelpers::L_WALL_OR_GATEHOUSE) != 0) {
                     if (_buildingID != 0) {
                         if (this->units[unitID].unknownCountdown_0x402 != 0) {
                             this->units[unitID].buildingHeight = -90;
@@ -41,9 +44,9 @@ namespace Map {
                     } else {
                         this->units[unitID].buildingHeight = 4;
                     }
-                } else if ((_logicFlags & 0x400) != 0) {
+                } else if ((_logicFlags & LogicHelpers::L_BUILDING) != 0) {
                     this->units[unitID].buildingHeight = 2;
-                } else if ((_logicFlags & 0x10000000) != 0) {
+                } else if ((_logicFlags & LogicHelpers::L_KEEP_NON_MANOR_HOUSE) != 0) {
                     if (this->units[unitID].unknownCountdown_0x402 == 0
                         && this->units[unitID].unitType != OpenSHC::Map::Units::UT_S_TOWER) {
                         this->units[unitID].buildingHeight = MACRO_CALL_MEMBER(

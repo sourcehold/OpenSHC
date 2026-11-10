@@ -26,7 +26,7 @@ namespace Map {
                     continue;
                 }
                 int const owner = this->units[unitID].owner;
-                do {
+                while (true) {
                     if (DAT_GameState::instance.mapAndTime.playerTeams[owner]
                             != DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner]
                         && owner != 0 && this->units[_otherUnitID].unitType == OpenSHC::Map::Units::UT_E_LADDER
@@ -41,7 +41,10 @@ namespace Map {
                         return 1;
                     }
                     _otherUnitID = this->units[_otherUnitID].nextUnitOnTheSameTile;
-                } while (_otherUnitID > 0);
+                    if (_otherUnitID <= 0) {
+                        break;
+                    }
+                }
             }
             return -1;
         }

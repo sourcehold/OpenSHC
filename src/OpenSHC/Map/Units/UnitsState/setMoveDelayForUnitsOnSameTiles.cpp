@@ -26,9 +26,8 @@ namespace Map {
             /* if current tile position is occupied */
             int _isInserted = 0;
             int _unitIDOfAUnitOnSameTile = DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition];
-            int _index = 0;
-            /* do-while loops: as for loops MSVC unrolls them and the match drops from 100% to 31% */
-            do {
+            int _index;
+            for (_index = 0; _index < 2000; _index++) {
                 if (unitID < _unitIDOfAUnitOnSameTile && _isInserted == 0) {
                     _unitIDArray[_index] = unitID;
                     _index++;
@@ -39,8 +38,7 @@ namespace Map {
                 if (_unitIDOfAUnitOnSameTile <= 0) {
                     break;
                 }
-                _index++;
-            } while (_index < 2000);
+            }
             _index++;
             if (_isInserted == 0) {
                 _unitIDArray[_index] = unitID;

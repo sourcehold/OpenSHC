@@ -28,7 +28,12 @@ namespace Map {
             } else {
                 _distanceY = this->units[unitID].microYPosition - microY;
             }
-            int _distance = _distanceX < _distanceY ? _distanceY : _distanceX;
+            int _distance;
+            if (_distanceX < _distanceY) {
+                _distance = _distanceY;
+            } else {
+                _distance = _distanceX;
+            }
 
             int _rng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
