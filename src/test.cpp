@@ -6,8 +6,7 @@ struct Test {
 };
 
 struct Test2 {
-    int e;
-    int f;
+    int e;    int f;
     int g;
     int h;
 };
