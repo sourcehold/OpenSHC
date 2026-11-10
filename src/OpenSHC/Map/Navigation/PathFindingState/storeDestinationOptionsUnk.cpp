@@ -29,7 +29,8 @@ namespace Map {
                     DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][_destinationCount].y = y;
                     _destinationCount += 1;
                 }
-                if (_destinationCount >= 40) {
+                if (_destinationCount
+                    >= countof(DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID])) {
                     return;
                 }
                 this->searchQueue.readIndex += 1;
