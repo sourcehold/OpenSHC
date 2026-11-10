@@ -100,7 +100,7 @@ namespace Map {
                                         | LogicHelpers::L_FORD | LogicHelpers::L_KEEP_NON_MANOR_HOUSE
                                         | LogicHelpers::L_MARSH | LogicHelpers::L_MOAT))
                                 == 0) {
-                                if (treeType == 1) {
+                                if (treeType == Trees::TT_UNKNOWN_1) {
                                     if ((_logic2 & (LogicHelpers::L2_OASIS_GRASS | LogicHelpers::L2_THICK_SCRUB)) != 0)
                                         continue;
                                 } else if ((_logic2 & (LogicHelpers::L2_OASIS_GRASS | LogicHelpers::L2_THICK_SCRUB))
@@ -126,16 +126,16 @@ namespace Map {
                             }
                         } else {
                             TreeTypeShort _treeType = DAT_LandscapeState::instance.trees[_organism].treeType;
-                            if (_treeType == (TreeType)1) {
+                            if (_treeType == Trees::TT_UNKNOWN_1) {
                                 return FALSE;
                             }
-                            if (_treeType == (TreeType)2) {
+                            if (_treeType == Trees::TT_UNKNOWN_2) {
                                 return FALSE;
                             }
-                            if (_treeType == (TreeType)3) {
+                            if (_treeType == Trees::TT_UNKNOWN_3) {
                                 return FALSE;
                             }
-                            if (_treeType == (TreeType)4) {
+                            if (_treeType == Trees::TT_UNKNOWN_4) {
                                 return FALSE;
                             }
                         }
