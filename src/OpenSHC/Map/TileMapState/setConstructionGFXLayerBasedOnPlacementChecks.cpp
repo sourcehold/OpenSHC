@@ -23,9 +23,8 @@ namespace Map {
     using OpenSHC::Map::Location::GateTowerPlacement;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504F10
-    void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
+    void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, short command, int size)
     {
-        short const command = (short)type;
         int const skipPlacementFailChecks = this->skipPlacementFailChecks;
         int keepSpriteVariant = 0;
         int i = 0;

@@ -41579,7 +41579,7 @@ SHC_3BB0A8C1_0x00502680 | 74.1% | mapper arms block layout
 
 SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005029D0 | 74.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x005029D0 | 78.0% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00502F14 | 0.0% | Pending
 
@@ -42069,7 +42069,7 @@ SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504EE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00504F10 | 37.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x00504F10 | 37.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005050F0 | 0.0% | Pending
 

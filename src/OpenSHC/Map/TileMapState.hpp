@@ -493,7 +493,7 @@ namespace Map {
 
         int getMaxWallHeightInBrushArea(int param_1, uint param_2);
 
-        void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
         void placeWalls(int playerID, uint x1, uint y1, uint x2, uint y2, MappersEnum wallType, int tileCountUnk);
 
@@ -508,7 +508,7 @@ namespace Map {
 
         void updateBuildingPlacementRotationPreview(int param_1, int param_2);
 
-        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
+        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, short type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 

@@ -518,7 +518,7 @@ namespace Map {
             &TileMapState::getMaxWallHeightInBrushArea)
         getMaxWallHeightInBrushArea;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, short), false,
             Address::SHC_3BB0A8C1_0x005029D0, &TileMapState::validateWallBuildPath)
         validateWallBuildPath;
 
@@ -546,7 +546,7 @@ namespace Map {
             &TileMapState::updateBuildingPlacementRotationPreview)
         updateBuildingPlacementRotationPreview;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, MappersEnum, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, short, int), false,
             Address::SHC_3BB0A8C1_0x00504F10, &TileMapState::setConstructionGFXLayerBasedOnPlacementChecks)
         setConstructionGFXLayerBasedOnPlacementChecks;
 

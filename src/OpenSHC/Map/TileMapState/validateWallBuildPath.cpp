@@ -38,7 +38,7 @@ namespace Map {
     using OpenSHC::Map::Units::UnitType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005029D0
-    void TileMapState::validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
+    void TileMapState::validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, short command)
     {
         int budget = 0;
         int overshoot = 2;
@@ -80,7 +80,7 @@ namespace Map {
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
         this->DAT_SomeTile = *translation + x1;
         this->DAT_SomeY = y1;
-        if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR) {
+        if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
             // a stair needs an enclosed wall to lean against, and enough height on it
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(
                     this->DAT_SomeTile, y1)
@@ -95,7 +95,7 @@ namespace Map {
             }
             budget = height;
             overshoot = 2;
-        } else if ((short)command == OpenSHC::Commands::M_MAPPER_CRENAL
+        } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL
             && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(this->DAT_SomeTile, y1)
                 == FALSE) {
             this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
@@ -206,12 +206,12 @@ namespace Map {
                 this->buildingPlacementFailReason = (BuildingFailReasonEnum)21;
                 return;
             }
-            if ((short)command == OpenSHC::Commands::M_MAPPER_CRENAL) {
+            if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y) == FALSE) {
                     this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
                     return;
                 }
-            } else if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR
+            } else if (command == OpenSHC::Commands::M_MAPPER_STAIR
                 && (budget <= 16 || (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0)) {
                 break;
             }
@@ -224,7 +224,7 @@ namespace Map {
             if ((int)y < (int)y2) {
                 stepY = downY;
             }
-            if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR) {
+            if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
                         leftX -= 1;
