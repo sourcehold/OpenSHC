@@ -50,7 +50,6 @@ namespace Map {
         int playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation)
     {
         MappersEnum command = (MappersEnum)(short)cbt;
-        int pitchDitchID = 0;
         if (this->skipPlacementCheck == 0) {
             if (buildingOrientation == 15) {
                 this->DAT_TempBuildingRotation = 0;
@@ -64,6 +63,7 @@ namespace Map {
             }
         }
         this->skipPlacementCheck = 0;
+        int pitchDitchID = 0;
 
         BuildingType buildingType = (BuildingType)(ushort)MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,

@@ -55,8 +55,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00512450
     void TileMapState::prepareMap()
     {
-        int savedY = DAT_ViewportRenderState::instance.viewportState.viewportY;
         int savedX = DAT_ViewportRenderState::instance.viewportState.viewportX;
+        int savedY = DAT_ViewportRenderState::instance.viewportState.viewportY;
         if (DAT_GameSynchronyState::instance.currentGameModeCopy_SEC_Section1106
             == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
             DAT_GameSynchronyState::instance.currentGameMode = OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER;
@@ -79,8 +79,8 @@ namespace Map {
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(DAT_TileMapState::instance.WalkLayer), 0, DAT_TileMapState::instance.WalkLayer);
-        DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
         DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
+        DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
         MACRO_CALL_MEMBER(
             OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, DAT_ViewportRenderState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setTileSystemMemoryLookupArrays,

@@ -132,9 +132,11 @@ namespace Map {
         } else {
 
             int buildingID = this->BuildingLayer[tile];
-            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == (BuildingLogicalState)0
-                || DAT_BuildingsState::instance.buildings[buildingID].logicalState
-                    == OpenSHC::Map::Buildings::BLS_REMOVE) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == (BuildingLogicalState)0) {
+                return TRUE;
+            }
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState
+                == OpenSHC::Map::Buildings::BLS_REMOVE) {
                 return TRUE;
             }
             short health = DAT_BuildingsState::instance.buildings[buildingID].currentHealth;
@@ -446,8 +448,8 @@ namespace Map {
                                 DAT_BuildingsState::ptr)(second);
                         }
                     }
-                    int gateY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
                     int gateX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int gateY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     this->showNoRubbleWhenDestroyingBuilding
@@ -527,7 +529,7 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(7, xPosition, yPosition);
-        return ~-(uint)replaced & destroyed;
+        return replaced != 0 ? FALSE : destroyed;
     }
 
 }

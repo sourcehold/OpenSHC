@@ -44,10 +44,10 @@ namespace Map {
             if ((char)this->moats[moatID].stage != number) {
                 continue;
             }
-            int const tile = this->moats[moatID].tile;
-            if (this->BuildingLayer[tile] != 0 && this->moats[moatID].zeroOrTwo == 0) {
+            if (this->BuildingLayer[this->moats[moatID].tile] != 0 && this->moats[moatID].zeroOrTwo == 0) {
                 continue;
             }
+            int const tile = this->moats[moatID].tile;
             if ((this->LogicLayer[tile] & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0) {
                 continue;
             }

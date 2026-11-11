@@ -97,14 +97,8 @@ namespace Map {
                 }
             }
 
-            int stepX = leftX;
-            if ((int)x < (int)x2) {
-                stepX = rightX;
-            }
-            int stepY = upY;
-            if ((int)y < (int)y2) {
-                stepY = downY;
-            }
+            int const stepX = (int)x >= (int)x2 ? leftX : rightX;
+            int const stepY = (int)y >= (int)y2 ? upY : downY;
             if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {

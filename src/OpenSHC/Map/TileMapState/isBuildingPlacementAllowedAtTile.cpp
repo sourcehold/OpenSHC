@@ -40,8 +40,8 @@ namespace Map {
         uint const logic = this->LogicLayer[tile];
         int const building = this->BuildingLayer[tile];
         BOOLEnum onRock = FALSE;
-        BOOLEnum onMoat = FALSE;
         BOOLEnum onMarsh = FALSE;
+        BOOLEnum onMoat = FALSE;
         int height = this->HeightLayer[tile];
         if ((logic & L_WALL_OR_GATEHOUSE) != 0 && (this->WallOwnerLayer[tile] & 7) + 1 == playerID) {
             // a gate or tower on our own wall is measured against the ground, not the wall top

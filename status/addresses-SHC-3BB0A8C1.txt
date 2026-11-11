@@ -39377,7 +39377,7 @@ SHC_3BB0A8C1_0x004F8AC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F8B50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F8BD0 | 77.6% | Style pass, asm differs
+SHC_3BB0A8C1_0x004F8BD0 | 93.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004F9000 | 100.0% | Reimplemented
 
@@ -39413,7 +39413,7 @@ SHC_3BB0A8C1_0x004F9980 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F99D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9A60 | 99.7% | fix signed height limit
+SHC_3BB0A8C1_0x004F9A60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F9D64 | 0.0% | Pending
 
@@ -39653,7 +39653,7 @@ SHC_3BB0A8C1_0x004F9DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F9F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FA000 | 34.8% | pointer local frame
+SHC_3BB0A8C1_0x004FA000 | 57.6% | corner unroll, slots differ
 
 SHC_3BB0A8C1_0x004FA2D0 | 86.6% | 47.37% cold block layout regal
 
@@ -40343,7 +40343,7 @@ SHC_3BB0A8C1_0x004FA759 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FA75A | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA760 | 98.0% | offset array partition
+SHC_3BB0A8C1_0x004FA760 | 98.6% | offset array partition
 
 SHC_3BB0A8C1_0x004FA8D0 | 0.0% | Pending
 
@@ -40369,7 +40369,7 @@ SHC_3BB0A8C1_0x004FAEE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAF70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FB0C0 | 76.6% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FB0C0 | 79.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FB2E0 | 0.0% | Pending
 
@@ -40569,7 +40569,7 @@ SHC_3BB0A8C1_0x004FB360 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FB3F0 | 87.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004FB4D0 | 87.3% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FB4D0 | 93.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FB770 | 100.0% | Reimplemented
 
@@ -41563,19 +41563,19 @@ SHC_3BB0A8C1_0x00501CC8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00501CD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00501D90 | 53.2% | const 1 not pooled in ebx
+SHC_3BB0A8C1_0x00501D90 | 91.5% | regalloc differs
 
-SHC_3BB0A8C1_0x00501F50 | 87.1% | asm macro, regalloc differs
+SHC_3BB0A8C1_0x00501F50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00501FE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00502110 | 81.2% | Style pass, asm differs
+SHC_3BB0A8C1_0x00502110 | 99.4% | reload order after asm macro
 
 SHC_3BB0A8C1_0x00502390 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005024F0 | 61.6% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00502680 | 62.9% | Style pass, asm differs
+SHC_3BB0A8C1_0x00502680 | 74.1% | mapper arms block layout
 
 SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 
@@ -41615,7 +41615,7 @@ SHC_3BB0A8C1_0x00502F29 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00502F2A | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00502F30 | 87.2% | Style pass, asm differs
+SHC_3BB0A8C1_0x00502F30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0050347C | 0.0% | Pending
 
@@ -41959,7 +41959,7 @@ SHC_3BB0A8C1_0x00504A26 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504A27 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504A30 | 83.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x00504A30 | 89.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00504E88 | 0.0% | Pending
 
@@ -42155,7 +42155,7 @@ SHC_3BB0A8C1_0x00508030 | 90.2% | fix campfire id; GL ecx
 
 SHC_3BB0A8C1_0x00508250 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508540 | 88.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x00508540 | 95.5% | tile index add order
 
 SHC_3BB0A8C1_0x00508590 | 0.0% | Pending
 
@@ -42163,7 +42163,7 @@ SHC_3BB0A8C1_0x00508760 | 78.9% | int locals for short field rea
 
 SHC_3BB0A8C1_0x00508870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508910 | 94.4% | LTCG, regalloc differs
+SHC_3BB0A8C1_0x00508910 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00508A00 | 91.8% | Style pass, asm differs
 
@@ -44177,7 +44177,7 @@ SHC_3BB0A8C1_0x00511020 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005110B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005111D0 | 81.5% | Style pass, asm differs
+SHC_3BB0A8C1_0x005111D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00511240 | 0.0% | Pending
 
@@ -44733,7 +44733,7 @@ SHC_3BB0A8C1_0x00512100 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00512180 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00512450 | 98.1% | GL ecx
+SHC_3BB0A8C1_0x00512450 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005127B0 | 100.0% | Reimplemented
 
@@ -44747,7 +44747,7 @@ SHC_3BB0A8C1_0x00514480 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00514520 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005146D0 | 88.7% | GL ecx reloads
+SHC_3BB0A8C1_0x005146D0 | 90.8% | stack slot rotation
 
 SHC_3BB0A8C1_0x00514BC0 | 0.0% | Pending
 
@@ -44777,7 +44777,7 @@ SHC_3BB0A8C1_0x00515F40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005160C0 | 86.5% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x005162D0 | 95.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x005162D0 | 97.3% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00516A64 | 0.0% | Pending
 
@@ -45133,7 +45133,7 @@ SHC_3BB0A8C1_0x00516B73 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00516B74 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00516B80 | 79.0% | Style pass, asm differs
+SHC_3BB0A8C1_0x00516B80 | 79.3% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005176C8 | 0.0% | Pending
 
@@ -45435,7 +45435,7 @@ SHC_3BB0A8C1_0x00517789 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051778A | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00517790 | 63.5% | fix wall flag mask; regalloc
+SHC_3BB0A8C1_0x00517790 | 63.6% | fix wall flag mask; regalloc
 
 SHC_3BB0A8C1_0x00518068 | 0.0% | Pending
 

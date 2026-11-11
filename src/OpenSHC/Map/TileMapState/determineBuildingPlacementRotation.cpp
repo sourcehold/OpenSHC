@@ -15,6 +15,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA000
     void TileMapState::determineBuildingPlacementRotation(int x, int y)
     {
+        int volatile wallTileCount = 0;
         this->field_0x554944 = 128;
         this->uiBuildingRotation = 8;
         if (this->buildingPlacementFail) {
@@ -25,30 +26,80 @@ namespace Map {
         int walls[4];
         for (int rotation = 0; rotation < 4; rotation++) {
             walls[rotation] = 0;
-            for (int corner = 0; corner < 4; corner++) {
-                if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2] + x) <= 399
-                    && (uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2 + 1] + y) <= 399
-                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400
-                            [(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2 + 1] + y) * 400
-                                + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2] + x]
+            {
+                int const tileY = DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 1] + y;
+                if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 0] + x) <= 399
+                    && (uint)tileY <= 399
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400
+                           + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 0] + x]
                         != 0
-                    && (this->LogicLayer[DAT_ViewportRenderState::instance
-                                             .translationMatrix[DAT_TerrainDefinedData::instance
-                                                                    .field_0x1e4c[rotation * 8 + corner * 2 + 1]
-                                                 + y]
-                                             .addXgetTile
-                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2] + x]
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 0] + x]
                            & L_WALL_OR_GATEHOUSE)
                         != 0
-                    && (this->LogicLayer[DAT_ViewportRenderState::instance
-                                             .translationMatrix[DAT_TerrainDefinedData::instance
-                                                                    .field_0x1e4c[rotation * 8 + corner * 2 + 1]
-                                                 + y]
-                                             .addXgetTile
-                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + corner * 2] + x]
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 0] + x]
+                           & (L_STOCKPILEUnk | L_STAIRS))
+                        == 0) {
+                    wallTileCount++;
+                    walls[rotation] = 1;
+                }
+            }
+            {
+                int const tileY = DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 3] + y;
+                if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x) <= 399
+                    && (uint)tileY <= 399
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400
+                           + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x]
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x]
+                           & L_WALL_OR_GATEHOUSE)
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x]
                            & (L_STOCKPILEUnk | L_STAIRS))
                         == 0) {
                     walls[rotation] += 1;
+                    wallTileCount++;
+                }
+            }
+            {
+                int const tileY = DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 5] + y;
+                if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x) <= 399
+                    && (uint)tileY <= 399
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400
+                           + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x]
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x]
+                           & L_WALL_OR_GATEHOUSE)
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x]
+                           & (L_STOCKPILEUnk | L_STAIRS))
+                        == 0) {
+                    walls[rotation] += 1;
+                    wallTileCount++;
+                }
+            }
+            {
+                int const tileY = DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 7] + y;
+                if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x) <= 399
+                    && (uint)tileY <= 399
+                    && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400
+                           + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x]
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x]
+                           & L_WALL_OR_GATEHOUSE)
+                        != 0
+                    && (this->LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                            + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x]
+                           & (L_STOCKPILEUnk | L_STAIRS))
+                        == 0) {
+                    walls[rotation] += 1;
+                    wallTileCount++;
                 }
             }
         }

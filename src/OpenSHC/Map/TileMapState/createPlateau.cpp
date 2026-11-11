@@ -58,13 +58,13 @@ namespace Map {
                 != 0) {
                 continue;
             }
-            this->LogicLayer[brushTile] &= ~L_ROCKY;
+            *(uint volatile*)&this->LogicLayer[brushTile] &= ~L_ROCKY;
             if (plateauHeightSetting == 4) {
                 this->HeightLayer[brushTile] = 80;
             } else if (plateauHeightSetting == 8) {
                 this->HeightLayer[brushTile] = 130;
             }
-            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }

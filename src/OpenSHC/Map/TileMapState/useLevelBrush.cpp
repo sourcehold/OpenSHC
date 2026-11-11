@@ -75,13 +75,19 @@ namespace Map {
             }
             this->LogicLayer[brushTile] &= ~L_ROCKY;
             // the tile moves a tenth of the way towards the brush average, plus one
+            byte levelled;
+            bool levelChanged = true;
             if (this->HeightLayer[brushTile] < average) {
-                this->HeightLayer[brushTile]
-                    = (char)((average - this->HeightLayer[brushTile]) / 10) + this->HeightLayer[brushTile] + 1;
-                this->Logic2Layer[brushTile] = 0;
+                byte const height = *(byte volatile*)&this->HeightLayer[brushTile];
+                levelled = (char)((average - height) / 10) + height + 1;
             } else if (this->HeightLayer[brushTile] > average) {
-                this->HeightLayer[brushTile]
-                    = this->HeightLayer[brushTile] - (char)((this->HeightLayer[brushTile] - average) / 10) - 1;
+                byte const height = *(byte volatile*)&this->HeightLayer[brushTile];
+                levelled = height - (char)((height - average) / 10) - 1;
+            } else {
+                levelChanged = false;
+            }
+            if (levelChanged) {
+                this->HeightLayer[brushTile] = levelled;
                 this->Logic2Layer[brushTile] = 0;
             }
             if (this->HeightLayer[brushTile] < 8) {
@@ -90,7 +96,7 @@ namespace Map {
             if (this->HeightLayer[brushTile] > 156) {
                 this->HeightLayer[brushTile] = 156;
             }
-            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }

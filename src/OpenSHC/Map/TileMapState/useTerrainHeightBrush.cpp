@@ -52,7 +52,7 @@ namespace Map {
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
-            int const brushTile = tile;
+            int const brushTile = *(int volatile*)&tile;
             if ((this->LogicLayer[brushTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -80,9 +80,9 @@ namespace Map {
                 // scale towards the brush average, in eighths of the ratio to it
                 int ratio = 100;
                 if (average != 0) {
-                    ratio = this->HeightLayer[brushTile] * 100 / average;
+                    ratio = *(byte volatile*)&this->HeightLayer[brushTile] * 100 / average;
                 }
-                ratio = (ratio / 8 + 100) * this->HeightLayer[brushTile] / 100;
+                ratio = (ratio / 8 + 100) * *(byte volatile*)&this->HeightLayer[brushTile] / 100;
                 if (ratio > 156) {
                     ratio = 156;
                 }
@@ -103,11 +103,11 @@ namespace Map {
             if (this->HeightLayer[brushTile] > 156) {
                 this->HeightLayer[brushTile] = 156;
             }
-            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }
-            uint const brushY = y;
+            uint const brushY = *(uint volatile*)&y;
             this->DAT_SomeTile = brushTile;
             this->DAT_SomeY = brushY;
 

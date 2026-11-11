@@ -23,8 +23,8 @@ namespace Map {
         OpenSHC::Map::Buildings::BuildingTypeShort type
             = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         int typeInt = type;
-        int displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[rotation + size * 4];
         int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[rotation + size * 4];
+        int displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[rotation + size * 4];
         int extraTile = -1;
         switch (typeInt) {
         case OpenSHC::Map::Buildings::BT_IRONMINE:
@@ -48,9 +48,9 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_UNKNOWN4:
             // these carry the worker on the display tile and the display on the worker tile
             {
-                int const swap = workerTile;
-                workerTile = displayTile;
-                displayTile = swap;
+                int const swap = displayTile;
+                displayTile = workerTile;
+                workerTile = swap;
                 break;
             }
         case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:

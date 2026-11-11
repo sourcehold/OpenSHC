@@ -306,8 +306,8 @@ namespace Map {
                             DAT_BuildingsState::ptr)(second);
                     }
                 }
-                int gateY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
                 int gateX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                int gateY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                     DAT_BuildingsState::ptr)(buildingID, 50);
                 this->showNoRubbleWhenDestroyingBuilding

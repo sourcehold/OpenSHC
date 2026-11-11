@@ -30,14 +30,14 @@ namespace Map {
     void TileMapState::evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y)
     {
         int moatTile = 0;
-        uint anchorX = x;
-        uint anchorY = y;
         bool const valid
             = x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0;
         if (!valid) {
             this->buildingPlacementFail = TRUE;
             return;
         }
+        uint anchorX = x;
+        uint anchorY = y;
         this->buildingPlacementFail = FALSE;
         int wallTile = DAT_ViewportRenderState::instance.viewportState.cursorWallTile;
         if (DAT_ViewportRenderState::instance.viewportState.field_0x3c != 0) {

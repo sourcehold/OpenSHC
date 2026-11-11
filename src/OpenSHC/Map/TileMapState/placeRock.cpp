@@ -29,8 +29,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB4D0
     void TileMapState::placeRock(uint x, uint y, uint kind)
     {
-        int rockType = 0;
         int size = 1;
+        int rockType = 0;
         if (x > 399 || y > 399) {
             return;
         }
@@ -38,7 +38,7 @@ namespace Map {
             return;
         }
         // every rock kind has its own footprint size and rock type
-        short const rockKind = kind;
+        short const rockKind = *(short volatile*)&kind;
         if (rockKind == 0) {
             rockType = 1;
         } else if (rockKind == 1) {
@@ -111,7 +111,7 @@ namespace Map {
             index++;
         } while (index < this->constructionTileCount);
 
-        int const height = (int)(highest - kind) / 2 + kind;
+        int const height = (int)(highest - *(uint volatile*)&kind) / 2 + kind;
         int const rockID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createRock, DAT_LandscapeState::ptr)(
             x, y, rockType, size, this->rockOrientation);
         // ... and again for the organism id the rock is stamped with

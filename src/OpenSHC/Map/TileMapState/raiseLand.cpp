@@ -30,7 +30,7 @@ namespace Map {
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, brush);
-            int const brushTile = tile;
+            int const brushTile = *(int volatile*)&tile;
             uint const logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
@@ -60,7 +60,7 @@ namespace Map {
                 minHeight = 8;
                 maxHeight = 128;
             }
-            this->LogicLayer[brushTile] &= ~L_ROCKY;
+            *(uint volatile*)&this->LogicLayer[brushTile] &= ~L_ROCKY;
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] += 8;
             }
@@ -68,7 +68,7 @@ namespace Map {
             if (this->HeightLayer[brushTile] <= minHeight) {
                 this->HeightLayer[brushTile] = (byte)minHeight;
             }
-            if (this->HeightLayer[brushTile] > 0 || change >= 0) {
+            if (*(byte volatile*)&this->HeightLayer[brushTile] > 0 || change >= 0) {
                 this->HeightLayer[brushTile] += (char)change;
                 this->Logic2Layer[brushTile] = 0;
             }
@@ -78,7 +78,7 @@ namespace Map {
             if (this->HeightLayer[brushTile] > maxHeight) {
                 this->HeightLayer[brushTile] = (byte)maxHeight;
             }
-            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }

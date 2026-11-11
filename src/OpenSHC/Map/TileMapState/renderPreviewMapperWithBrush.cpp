@@ -154,20 +154,20 @@ namespace Map {
 
         // the brush walk reuses x as the tile it writes back
         x = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        if (mapper == OpenSHC::Commands::M_MAPPER_DUGMOAT || mapper == OpenSHC::Commands::M_MAPPER_UNDUGMOAT
-            || mapper == OpenSHC::Commands::M_MAPPER_MOAT || mapper == OpenSHC::Commands::M_MAPPER_ANTIMOAT) {
+        if (mapper != OpenSHC::Commands::M_MAPPER_DUGMOAT && mapper != OpenSHC::Commands::M_MAPPER_UNDUGMOAT
+            && mapper != OpenSHC::Commands::M_MAPPER_MOAT && mapper != OpenSHC::Commands::M_MAPPER_ANTIMOAT) {
+            uint brushY = y;
+            for (int index = 0; index < brushSize; index++) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                    1, index, (int*)&x, (int*)&brushY, baseTile, y);
+                this->ConstructionGFXLayer[x] = gfx;
+            }
+        } else {
             // a moat preview always covers the nine tiles around the cursor
             uint brushY = y;
             for (int index = 0; index < 9; index++) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                     0, index, (int*)&x, (int*)&brushY, baseTile, y);
-                this->ConstructionGFXLayer[x] = gfx;
-            }
-        } else {
-            uint brushY = y;
-            for (int index = 0; index < brushSize; index++) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, (int*)&x, (int*)&brushY, baseTile, y);
                 this->ConstructionGFXLayer[x] = gfx;
             }
         }

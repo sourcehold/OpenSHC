@@ -17,9 +17,9 @@ namespace Map {
     void TileMapState::demolishBuildingsInKeepsConstructionFootprint(undefined4 unusedPlayerID, int x, int y,
         undefined4 buildingType, int sizeIndex, int unusedOrientation, int unusedAverageHeight)
     {
+        int index = 0;
         int const keepX = x;
         int const keepY = y;
-        int index = 0;
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile

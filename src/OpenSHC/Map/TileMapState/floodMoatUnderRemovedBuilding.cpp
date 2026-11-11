@@ -15,8 +15,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00508910
     void TileMapState::floodMoatUnderRemovedBuilding(int buildingID)
     {
-        int const yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
         int const xPosition = DAT_BuildingsState::instance.buildings[buildingID].x;
+        int const yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
         uint const widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
         int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         int buildingSizeTileIndex = 0;
