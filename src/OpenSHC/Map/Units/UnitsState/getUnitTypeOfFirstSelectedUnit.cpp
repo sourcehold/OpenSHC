@@ -30,7 +30,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
                     return OpenSHC::Map::Units::UT_INVALID;
                 }
-                return (UnitType)(short)this->units[DAT_CurrentUnitSlotID::instance].unitType;
+                return (UnitType)this->units[DAT_CurrentUnitSlotID::instance].unitType;
             }
             return OpenSHC::Map::Units::UT_NONE;
         }

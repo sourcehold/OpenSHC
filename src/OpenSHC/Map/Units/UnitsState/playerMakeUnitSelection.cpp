@@ -56,7 +56,7 @@ namespace Map {
                 return;
             }
             UnitType _unitType = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                DAT_TribesState::ptr)(_newTribeID, (int*)0);
+                DAT_TribesState::ptr)(_newTribeID, NULL);
             if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                 || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM || _unitType == OpenSHC::Map::Units::UT_S_SHIELD
                 || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA

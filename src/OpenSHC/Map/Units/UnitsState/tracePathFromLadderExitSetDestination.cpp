@@ -32,7 +32,7 @@ namespace Map {
                     break;
                 }
             }
-            this->units[unitID].totalSizeOfPathPlan = (short)_stepIndex + 1;
+            this->units[unitID].totalSizeOfPathPlan = _stepIndex + 1;
             this->units[unitID].destinationYPosition = _exitY;
             this->units[unitID].destinationXPosition = _exitX;
             this->units[unitID].destinationTilePosition = _tile;

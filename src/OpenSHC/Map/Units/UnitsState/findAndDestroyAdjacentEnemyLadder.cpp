@@ -17,7 +17,7 @@ namespace Map {
         int UnitsState::findAndDestroyAdjacentEnemyLadder(int unitID, int checkOnly)
         {
             for (int direction = 0; direction < 8; ++direction) {
-                int _otherUnitID = (short)DAT_TileMapState::instance
+                int _otherUnitID = DAT_TileMapState::instance
                                        .UnitLayer[DAT_TileMapState::instance
                                                       .directionTranslationMatrix[this->units[unitID].y][direction]
                                            + this->units[unitID].tile];

@@ -50,21 +50,21 @@ namespace Map {
             if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_weaponResource] <= 0
                 && _weaponResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
-                this->euroUnitRequiredResource = (ResourceType)_weaponResource;
+                this->euroUnitRequiredResource = _weaponResource;
                 /* we don't own the weapon required */
                 return 0;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_armourResource] <= 0
                 && _armourResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
-                this->euroUnitRequiredResource = (ResourceType)_armourResource;
+                this->euroUnitRequiredResource = _armourResource;
                 /* if we do not own the required armor */
                 return 0;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].currentResources[_unknownResource] <= 0
                 && _unknownResource > 0) {
                 this->euroUnitAcquisitionFailReason = 2;
-                this->euroUnitRequiredResource = (ResourceType)_unknownResource;
+                this->euroUnitRequiredResource = _unknownResource;
                 return 0;
             }
             if (_horseResource == -1) {

@@ -49,7 +49,7 @@ namespace Map {
             this->units[unitID].facingDirectionMapOrientationCorrected = this->units[unitID].facingDirection;
             this->units[unitID].facingDirectionMapOrientationCorrected
                 = this->units[unitID].facingDirectionMapOrientationCorrected
-                - (short)DAT_TileMapState::instance.mapOrientation;
+                - DAT_TileMapState::instance.mapOrientation;
             if (this->units[unitID].facingDirectionMapOrientationCorrected < 0) {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;

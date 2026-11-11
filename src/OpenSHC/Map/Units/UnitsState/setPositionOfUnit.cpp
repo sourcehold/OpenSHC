@@ -20,8 +20,8 @@ namespace Map {
             this->units[unitID].field_0xe8 = FALSE;
             this->units[unitID].movementRelated = 8;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
-            this->units[unitID].microXPosition = (short)x * 8 + 4;
-            this->units[unitID].microYPosition = (short)y * 8 + 4;
+            this->units[unitID].microXPosition = x * 8 + 4;
+            this->units[unitID].microYPosition = y * 8 + 4;
             this->units[unitID].terrainOrClimbHeight = height;
             this->units[unitID].mimicCurrentXPosition = x;
             this->units[unitID].x = x;

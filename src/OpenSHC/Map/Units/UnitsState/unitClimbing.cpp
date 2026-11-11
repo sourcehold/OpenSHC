@@ -38,7 +38,7 @@ namespace Map {
                             /* Climbing down */
                             this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 15;
                         }
-                        if (this->units[unitID].terrainOrClimbHeight > (short)(ushort)DAT_TileMapState::instance
+                        if (this->units[unitID].terrainOrClimbHeight > DAT_TileMapState::instance
                                 .HeightLayer[DAT_ViewportRenderState::instance
                                                  .translationMatrix[this->units[unitID].mimicCurrentYPosition]
                                                  .addXgetTile

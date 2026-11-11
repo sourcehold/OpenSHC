@@ -19,7 +19,7 @@ namespace Map {
             this->units[unitID].field_0x5a = 0;
             /* if current tile position is not occupied */
             if (DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] == 0) {
-                DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)unitID;
+                DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = unitID;
                 this->units[unitID].nextUnitOnTheSameTile = 0;
                 return;
             }
@@ -46,7 +46,7 @@ namespace Map {
             }
             _unitIDArray[_index] = 0;
             int _previousUnitID = _unitIDArray[0];
-            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)_previousUnitID;
+            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = _previousUnitID;
             this->units[_previousUnitID].unitOrderWhenOnSameTile = 0;
             for (int _order = 1; _order < 2001; ++_order) {
                 int _nextUnitID = _unitIDArray[_order];

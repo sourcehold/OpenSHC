@@ -31,7 +31,7 @@ namespace Map {
             this->units[unitID].climbingState = -1;
             if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 1) {
                 int _ladderUnitID
-                    = (short)DAT_TileMapState::instance
+                    = DAT_TileMapState::instance
                           .UnitLayer[DAT_PathFindingState::instance.climbData[_climbDataID].bottomTilePosition];
                 for (; _ladderUnitID != 0; _ladderUnitID = this->units[_ladderUnitID].nextUnitOnTheSameTile) {
                     if (DAT_PathFindingState::instance.climbData[_climbDataID].unitID == _ladderUnitID) {
@@ -78,14 +78,14 @@ namespace Map {
             if (this->units[unitID].climbDirection == 0) {
                 /* Climb up */
                 this->units[unitID].mimicCurrentXPosition
-                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].topXPosition;
+                    = DAT_PathFindingState::instance.climbData[_climbDataID].topXPosition;
                 this->units[unitID].mimicCurrentYPosition
                     = DAT_PathFindingState::instance.climbData[_climbDataID].topYPosition;
                 return TRUE;
             }
             /* Climb down */
             this->units[unitID].mimicCurrentXPosition
-                = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomXPosition;
+                = DAT_PathFindingState::instance.climbData[_climbDataID].bottomXPosition;
             this->units[unitID].mimicCurrentYPosition
                 = DAT_PathFindingState::instance.climbData[_climbDataID].bottomYPosition;
             return TRUE;

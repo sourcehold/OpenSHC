@@ -39,7 +39,7 @@ namespace Map {
                 this->units[unitID].calculatedOwnerPlayerIndex = this->units[unitID].owner;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setUnitValues, this)(
-                unitID, (UnitType)(short)this->units[unitID].unitTypeToChangeInto);
+                unitID, (UnitType)this->units[unitID].unitTypeToChangeInto);
             return unitID;
         }
 

@@ -18,7 +18,7 @@ namespace Map {
             if (leftover < this->units[unitID].totalSizeOfPathPlan) {
                 int _destinationX = this->units[unitID].ladderExitXPosition;
                 int _destinationY = this->units[unitID].ladderExitYPosition;
-                this->units[unitID].totalSizeOfPathPlan = this->units[unitID].totalSizeOfPathPlan - (short)leftover;
+                this->units[unitID].totalSizeOfPathPlan = this->units[unitID].totalSizeOfPathPlan - leftover;
                 for (int _stepIndex = 0; _stepIndex < this->units[unitID].totalSizeOfPathPlan; ++_stepIndex) {
                     uint _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
                     uint _direction;

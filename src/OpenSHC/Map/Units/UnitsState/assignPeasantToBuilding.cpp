@@ -50,7 +50,7 @@ namespace Map {
                 this->units[unitID].workplaceBuildingUID = DAT_BuildingsState::instance.buildings[buildingID].uid;
                 this->units[unitID].targetX_2 = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
                 this->units[unitID].targetY_2 = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-                this->units[unitID].unitTypeToChangeInto = (undefined2)unitType;
+                this->units[unitID].unitTypeToChangeInto = unitType;
                 this->units[unitID].state_2 = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
                     DAT_BuildingsState::ptr)(buildingID, 1, FALSE);
