@@ -215,7 +215,7 @@ namespace Map {
             int insideUnitUID[4]; // 0x000002E8 length: 16
             short hasUnitsOntop; // 0x000002F8 length: 2
             short tileScanCountdown; // 0x000002FA length: 2
-            undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
+            short wheatFieldIndexToGrow; // 0x000002FC length: 2
             short statueCommemoratingPlayerID; // 0x000002FE length: 2
             short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2
