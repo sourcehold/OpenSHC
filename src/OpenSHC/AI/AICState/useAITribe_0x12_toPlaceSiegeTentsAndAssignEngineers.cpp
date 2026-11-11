@@ -18,12 +18,7 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::AI::Tribes::AITribeType;
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
-    using OpenSHC::Map::Units::UnitInstructionType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEFD0
     void AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID)
@@ -48,7 +43,7 @@ namespace AI {
         for (int i = 0; i < 8; i++) {
             if ((&this->aics[aicIndex].SiegeEngine1)[i] <= 0)
                 break;
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < countof(DAT_SkirmishDefinedData::instance.SiegeEngineUnitType); j++) {
                 if ((&this->aics[aicIndex].SiegeEngine1)[i]
                     == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
                     requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];
@@ -73,7 +68,7 @@ namespace AI {
         for (int i = 0; i < 8; i++) {
             if ((&this->aics[aicIndex].SiegeEngine1)[i] <= 0)
                 return;
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < countof(DAT_SkirmishDefinedData::instance.SiegeEngineUnitType); j++) {
                 if ((&this->aics[aicIndex].SiegeEngine1)[i]
                     == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
                     requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];

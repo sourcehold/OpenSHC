@@ -16,10 +16,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF180

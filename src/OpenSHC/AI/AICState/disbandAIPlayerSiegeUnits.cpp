@@ -15,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CFB20
     void AICState::disbandAIPlayerSiegeUnits(int playerID)
     {
-        for (int unitID = 1; unitID < 2500; unitID++) {
+        for (int unitID = 1; unitID < countof(DAT_UnitsState::instance.units); unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)

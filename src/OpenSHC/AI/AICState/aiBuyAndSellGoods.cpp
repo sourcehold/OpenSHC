@@ -19,8 +19,7 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].hasMarketUnk == 0)
             return;
 
-        DAT_GameState::instance.playerDataArray[playerID].willBuy
-            = DAT_GameState::instance.playerDataArray[playerID].willBuy ^ TRUE;
+        DAT_GameState::instance.playerDataArray[playerID].willBuy ^= TRUE;
         if (!DAT_GameState::instance.playerDataArray[playerID].willBuy) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sellExcessGoods, this)(playerID);
             return;

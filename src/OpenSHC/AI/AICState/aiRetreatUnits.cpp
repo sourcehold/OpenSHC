@@ -18,7 +18,7 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxAttackTribes1); i++) {
             int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
             int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
             for (int j = 0; j < tribeCount; j++) {

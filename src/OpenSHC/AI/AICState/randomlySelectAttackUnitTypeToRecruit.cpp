@@ -12,7 +12,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
     using OpenSHC::AI::AITypeInt;
     using OpenSHC::AI::AIUnitBehaviourType;
 
@@ -29,7 +28,7 @@ namespace AI {
         int requiredCount = 0;
 
         // clear out flags
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.attackUnitRequired); i++) {
             DAT_SkirmishDefinedData::instance.attackUnitRequired[i].required = 0;
         }
 
@@ -120,7 +119,7 @@ namespace AI {
         int selection = SEC_RNG::instance.currentNumber2 % requiredCount;
         MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.attackUnitRequired); i++) {
             if (DAT_SkirmishDefinedData::instance.attackUnitRequired[i].required == 0) {
                 continue;
             }

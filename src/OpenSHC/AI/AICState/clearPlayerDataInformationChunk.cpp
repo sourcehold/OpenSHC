@@ -11,7 +11,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CAC70
     void AICState::clearPlayerDataInformationChunk()
     {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); i++) {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] != -1
                 || DAT_GameSynchronyState::instance.currentAIArray[i] == 0)
                 MACRO_CALL(OpenSHC::OS_Func::_memset)(&DAT_GameState::instance.playerDataArray[i].aiFarmIndex, 0, 3748);

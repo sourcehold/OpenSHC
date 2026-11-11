@@ -16,8 +16,6 @@
 
 namespace OpenSHC {
 namespace AI {
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
-    using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
@@ -48,7 +46,7 @@ namespace AI {
             }
         }
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxAttackTribes1); i++) {
             int const tribeTypeStart = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
             int const tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
             for (int j = 0; j < tribeCount; j++) {

@@ -12,7 +12,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
     using namespace OpenSHC::Game::Resources;
     using namespace OpenSHC::Map::Buildings;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;

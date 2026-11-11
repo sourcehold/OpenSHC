@@ -7,6 +7,7 @@
 #include "OpenSHC/AI/AIStrengthType.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -22,12 +23,6 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::AICState;
-    using OpenSHC::AI::AIStrengthType;
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AIC::AICSpecification;
-    using OpenSHC::Game::Player::PlayerData;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D1320
     void AICState::renderDebugDataAiInfo(int x, int y, int width, int height)
@@ -56,10 +51,10 @@ namespace AI {
 
             // Player number and name
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                playerID, x + 6, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
+                playerID, x + 6, y, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             // "-"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                s___005a2280, x + 16, y, OpenSHC::Text::TTA_LEFT, RGB(235, 240, 194), 18, FALSE, 0);
+                s___005a2280, x + 16, y, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 DAT_GameSynchronyState::instance.DAT_PlayerNames[playerID], x + 26, y + 1, OpenSHC::Text::TTA_LEFT,
                 color, 0, 18, FALSE, 0);
@@ -132,7 +127,7 @@ namespace AI {
                     DAT_GameState::instance.playerDataArray[playerID].attackTicker);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    text, x + 512, y, OpenSHC::Text::TTA_LEFT, RGB(255, 255, 255), 0, 18, FALSE, 0);
+                    text, x + 512, y, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_FFFFFF, 0, 18, FALSE, 0);
             } else {
                 // "Sg:%d/%d"
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, s_Sg_d_d_005aad34,

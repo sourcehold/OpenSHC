@@ -16,10 +16,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE430
     void AICState::removeOrganismsAndSetMoveDestinationPairs(int playerID)
     {

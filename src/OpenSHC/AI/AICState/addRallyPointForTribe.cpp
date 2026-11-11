@@ -18,7 +18,7 @@ namespace AI {
     void AICState::addRallyPointForTribe(int tribeID)
     {
         DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
-        for (int unitID = 1; unitID < 2500; unitID++) {
+        for (int unitID = 1; unitID < countof(DAT_UnitsState::instance.units); unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE)
                 continue;
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::getTeamsDifferent, DAT_GameState::ptr)(

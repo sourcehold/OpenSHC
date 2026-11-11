@@ -17,12 +17,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::AI::AIC::AITargetChoice;
-    using OpenSHC::AI::AIC::AITargetChoiceInt;
-    using OpenSHC::Game::Player::PlayerData;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4680
     void AICState::selectAttackTarget(int playerID)
     {
@@ -70,7 +64,7 @@ namespace AI {
             }
         }
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < countof(DAT_GameState::instance.mapAndTime.playerTeams); i++) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[i]
                 == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                 continue;
@@ -123,7 +117,7 @@ namespace AI {
 
         // Fall back to the closest enemy
         if (selectedPlayerID == 0) {
-            for (int i = 1; i < 9; i++) {
+            for (int i = 1; i < countof(DAT_GameState::instance.mapAndTime.playerTeams); i++) {
                 if (DAT_GameState::instance.mapAndTime.playerTeams[i]
                     == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                     continue;

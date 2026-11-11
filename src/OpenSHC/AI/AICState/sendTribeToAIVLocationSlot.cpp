@@ -12,7 +12,6 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2E00
     void AICState::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
@@ -21,7 +20,8 @@ namespace AI {
 
         // Find the slotIndex-th non-empty slot
         int tile = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < countof(DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType]);
+            i++) {
             if (DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType][i] == 0) {
                 continue;
             }

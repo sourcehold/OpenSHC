@@ -34,7 +34,7 @@ namespace AI {
         int const ownerKeepY = DAT_GameState::instance.playerDataArray[owner]
                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                                    .yEntry;
-        for (int player = 1; player < 9; player++) {
+        for (int player = 1; player < countof(DAT_GameState::instance.mapAndTime.playerTeams); player++) {
             if (DAT_GameState::instance.mapAndTime.playerTeams[player]
                 == DAT_GameState::instance.mapAndTime.playerTeams[owner]) {
                 continue;
@@ -85,7 +85,7 @@ namespace AI {
 
         if (targetPlayer == 0) {
             // Fallback: pick the closest enemy with a living lord
-            for (int player = 1; player < 9; player++) {
+            for (int player = 1; player < countof(DAT_GameState::instance.mapAndTime.playerTeams); player++) {
                 if (DAT_GameState::instance.mapAndTime.playerTeams[player]
                     == DAT_GameState::instance.mapAndTime.playerTeams[owner]) {
                     continue;

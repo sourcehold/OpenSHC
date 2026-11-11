@@ -39,7 +39,7 @@ namespace AI {
         }
 
         int shieldCount = 0;
-        for (int unitID = 1; unitID < 2500; unitID++) {
+        for (int unitID = 1; unitID < countof(DAT_UnitsState::instance.units); unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == ULS_INVISIBLE)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != UT_S_TOWER

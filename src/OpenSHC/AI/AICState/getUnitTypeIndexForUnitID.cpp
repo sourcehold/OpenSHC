@@ -13,7 +13,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AITypeA;
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::Map::Units::UnitTypeInt;
     using OpenSHC::Map::Units::UnitTypeShort;
@@ -52,7 +51,8 @@ namespace AI {
             }
         }
 
-        for (int someUnitTypeIndex = 0; someUnitTypeIndex < 20; someUnitTypeIndex++) {
+        for (int someUnitTypeIndex = 0;
+            someUnitTypeIndex < countof(DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray); someUnitTypeIndex++) {
             if (DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray[someUnitTypeIndex] == effectiveUnitType) {
                 return (AIVUnitType)someUnitTypeIndex;
             }

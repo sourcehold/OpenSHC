@@ -15,9 +15,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::Map::Units::UnitInstructionType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D44E0
     void AICState::sendOilMenForOilPickupOrToAIVLocations(int playerID)
     {

@@ -16,7 +16,7 @@ namespace AI {
                 == OpenSHC::AI::AIT_NULL)
                 return;
 
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < countof(this->tribeIDArray); i++) {
                 int existingTribeID = this->tribeIDArray[i];
                 if (existingTribeID != 0
                     && DAT_TribesState::instance.tribes[existingTribeID].uid == this->tribeUIDArray[i])

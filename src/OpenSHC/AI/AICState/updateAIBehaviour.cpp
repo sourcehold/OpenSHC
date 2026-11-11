@@ -11,9 +11,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIRecruitUnitChoice;
-    using OpenSHC::AI::AIType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D53E0
     void AICState::updateAIBehaviour()
     {
@@ -21,7 +18,7 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::makeOutpostTribesAttack, this)();
 
         // every AI gets its own tick of the day, week and month, so the work is spread out
-        for (int playerID = 1; playerID < 9; playerID++) {
+        for (int playerID = 1; playerID < countof(DAT_GameState::instance.playerDataArray); playerID++) {
             if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
                 continue;
             if (DAT_GameState::instance.playerDataArray[playerID].playerDeathRelated != 0)

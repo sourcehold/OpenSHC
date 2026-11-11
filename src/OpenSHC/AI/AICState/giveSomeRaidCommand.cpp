@@ -21,20 +21,20 @@ namespace AI {
             || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01
             || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_04_01
             || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_03_01)
-            return 0;
+            return FALSE;
 
         if (targetBuildingID != 0
             && DAT_BuildingsState::instance.buildings[targetBuildingID].uid
                 == DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID
             && DAT_BuildingsState::instance.buildings[targetBuildingID].fireDuration == 0)
-            return 1;
+            return TRUE;
 
         DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = 0;
         int buildingID
             = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings, this)(
                 DAT_GameState::instance.playerDataArray[owner].attackedPlayerID);
         if (buildingID == 0)
-            return 0;
+            return FALSE;
 
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
             DAT_UnitsState::ptr)(tribeIndex, 9, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid);
@@ -42,7 +42,7 @@ namespace AI {
             = DAT_BuildingsState::instance.buildings[buildingID].uid;
         DAT_TribesState::instance.tribes[tribeIndex].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
         DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = buildingID;
-        return 1;
+        return TRUE;
     }
 
 }

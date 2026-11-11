@@ -19,10 +19,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
-    using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D30E0
@@ -37,7 +33,7 @@ namespace AI {
         int const defendingLordID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
             DAT_UnitsState::ptr)(DAT_GameState::instance.playerDataArray[attackingPlayerIndex].attackedPlayerID);
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxBreachTribes); i++) {
             int const tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeType;
             int const tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeCount;
             if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01

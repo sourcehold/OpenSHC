@@ -34,7 +34,7 @@ namespace AI {
                                   .buildings[DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID]
                                   .resources[Game::Resources::RT_STONE];
             int tetherCount = 0;
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < countof(DAT_BuildingsState::instance.buildings[quarryID].quarryLinkedOxTethers); i++) {
                 int const tetherID = DAT_BuildingsState::instance.buildings[quarryID].quarryLinkedOxTethers[i];
                 if (tetherID == 0)
                     continue;

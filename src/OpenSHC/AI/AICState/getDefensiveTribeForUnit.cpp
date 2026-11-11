@@ -15,7 +15,7 @@ namespace AI {
     int AICState::getDefensiveTribeForUnit(int playerID, int unitID)
     {
         int index = 0;
-        for (; index < 20; index++) {
+        for (; index < countof(DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray); index++) {
             if (DAT_UnitsState::instance.units[unitID].unitType
                     == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[index]
                 || DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto
