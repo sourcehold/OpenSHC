@@ -712,7 +712,7 @@ namespace Map {
             &TileMapState::planMoat)
         planMoat;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, short, uint, int, int), false,
             Address::SHC_3BB0A8C1_0x00514520, &TileMapState::placeKillingPit)
         placeKillingPit;
 
