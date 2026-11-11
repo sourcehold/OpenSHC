@@ -15,8 +15,6 @@ namespace Map {
             this->numberOfClimbTeleports = 0;
             this->debugGreatestClimbLoading = 0;
             this->maxClimbDataCount = 0;
-            // the bound is a signed compare in the original (cmp eax, 0xc8; jl), and the global
-            // resolver declares undefined4
             for (DAT_CurrentClimbDataID::instance = 1; DAT_CurrentClimbDataID::instance < countof(this->climbData);
                 DAT_CurrentClimbDataID::instance += 1) {
                 if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed) {
