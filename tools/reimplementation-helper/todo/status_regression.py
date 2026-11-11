@@ -30,6 +30,13 @@ Environment:
                    PR that proposes it. A merge group may hold several PRs, hence
                    the list.
     REIMPL_FILTER  regex of remote-tracking branches to include (default '/reimpl/')
+    REIMPL_FETCH_FORKS  '1' to add every fork as a remote and shallow-fetch its
+                   reimpl/ branches first, so the baseline covers every fork
+                   without a separate fetch step (needs gh, authenticated). The
+                   fetch happens only after the touched-file list is settled,
+                   because it grafts the commit under test as parentless.
+    REIMPL_REPO    repository whose forks are enumerated, as owner/name (default:
+                   the origin remote, else sourcehold/OpenSHC)
     TOUCHED_LIST   file of one changed path per line; when set it is used instead
                    of asking git, so the list can be worked out before anything
                    shallow is fetched into the repository
@@ -42,7 +49,8 @@ Output: the markdown report, and a summary on stdout.
 import os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from status_rollup import rows_at, header_cpp_map, reimpl_refs, best_per_id, run, parse_resolvers
+from status_rollup import (rows_at, header_cpp_map, reimpl_refs, best_per_id, run,
+                           parse_resolvers, fetch_fork_branches)
 
 # status files carry one decimal, so compare with a tolerance below that
 EPS = 0.05
@@ -110,18 +118,14 @@ def main():
         return 0
     base_rows = rows_at(base_ref)
 
-    # The PR's own branch may also be one of the fetched fork reimpl/ branches.
-    exclude = set(os.environ.get('PR_HEAD_SHA', '').replace(',', ' ').split())
-    refs = reimpl_refs(exclude_shas=exclude)
-    best, at100, seen = best_per_id(refs)
-    print('baseline refs with a status file: %d' % len(seen))
-
-    cpp_of = header_cpp_map()
-
     # Which .cpp files does the change actually touch? A status line can differ
     # for reasons that are not this change's doing -- most often a branch that
     # has not been updated since main improved the same function -- so an entry
     # only counts when the change also edits the file behind it.
+    #
+    # This is answered BEFORE any fork branch is fetched: a shallow fetch grafts
+    # the commit under test as parentless whenever the PR comes from one of those
+    # branches, and the merge base is then unanswerable.
     touched, mb = touched_files(base_ref, pr_ref)
     if touched is None:
         # Not something to work around: without the file list this would compare
@@ -133,6 +137,17 @@ def main():
             file=sys.stderr,
         )
         return 1
+
+    if os.environ.get('REIMPL_FETCH_FORKS') == '1':
+        fetch_fork_branches(os.environ.get('REIMPL_REPO'))
+
+    # The PR's own branch may also be one of the fetched fork reimpl/ branches.
+    exclude = set(os.environ.get('PR_HEAD_SHA', '').replace(',', ' ').split())
+    refs = reimpl_refs(exclude_shas=exclude)
+    best, at100, seen = best_per_id(refs)
+    print('baseline refs with a status file: %d' % len(seen))
+
+    cpp_of = header_cpp_map()
 
     # A resolver the change itself adds or moves is not in the base headers, so
     # re-read the .func.hpp files it touches at the PR's own ref.

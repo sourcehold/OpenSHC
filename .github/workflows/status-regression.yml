@@ -164,15 +164,6 @@ jobs:
           git diff --name-only --diff-filter=d "$mb" "$PR_REF" > touched.txt
           echo "files changed since the merge base: $(wc -l < touched.txt)"
 
-      - name: Fetch fork reimpl/ branches
-        if: ${{ steps.ctx.outputs.mode != 'skip' && steps.fetch.outputs.gone != 'yes' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-        run: |
-          chmod +x tools/reimplementation-helper/todo/fetch_fork_branches.sh
-          tools/reimplementation-helper/todo/fetch_fork_branches.sh "$REPO"
-
       # A fork's own reimpl/ branch must not count as prior art against the PR
       # that proposes it, so collect the head SHA of every PR under test.
       - name: Collect the PR head SHAs to exclude
@@ -206,6 +197,14 @@ jobs:
           PR_HEAD_SHA: ${{ steps.heads.outputs.shas }}
           LABEL: ${{ steps.ctx.outputs.mode == 'queue' && 'this merge group' || 'this PR' }}
           OUT: status_regression.md
+          # The script adds every fork as a remote and shallow-fetches its
+          # reimpl/ branches itself, after it has settled the touched-file list
+          # (TOUCHED_LIST above) -- that fetch grafts the commit under test as
+          # parentless when the PR comes from one of those branches, so the
+          # order matters and belongs with the code that depends on it.
+          REIMPL_FETCH_FORKS: '1'
+          REIMPL_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           python -I tools/reimplementation-helper/todo/status_regression.py | tee regression.log
