@@ -3,6 +3,8 @@
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Map/Trees/TreeType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -25,8 +27,8 @@ namespace AI {
         if (initialize) {
             // full reset
             MACRO_CALL_MEMBER(AIVState_Func::clearTheHeatmaps, this)();
-            for (int y = 0; y < 80; ++y) {
-                for (int x = 0; x < 80; ++x) {
+            for (int y = 0; y < countof(this->heatMaps[0]); ++y) {
+                for (int x = 0; x < countof(this->heatMaps); ++x) {
                     this->heatMaps[x][y].lowestTerrainHeight = 250;
                     this->heatMaps[x][y].isNotNearEdgeUnk = 1;
                 }
@@ -34,8 +36,8 @@ namespace AI {
             this->mapExtraInfo.largestSeparateArea
                 = MACRO_CALL_MEMBER(AIVState_Func::computeLargestSeparateArea, this)();
         } else {
-            for (int y = 0; y < 80; ++y) {
-                for (int x = 0; x < 80; ++x) {
+            for (int y = 0; y < countof(this->heatMaps[0]); ++y) {
+                for (int x = 0; x < countof(this->heatMaps); ++x) {
                     this->heatMaps[x][y].treeCount = 0;
                     this->heatMaps[x][y].impassableCount = 0;
                     this->heatMaps[x][y].structureCount = 0;
@@ -56,13 +58,14 @@ namespace AI {
         }
 
         if (initialize) {
-            for (int tile = 0; tile < 80400; ++tile) {
+            for (int tile = 0; tile < Map::MC_MAP_TILES_COUNT; ++tile) {
                 // the tile coordinates are reduced to heat map cells in place; separate locals reorder the code
                 int gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int gridX = tile - DAT_ViewportRenderState::instance.translationMatrix[gridY].addXgetTile;
                 gridY /= 5;
                 gridX /= 5;
-                if (gridX >= 1 && gridX <= 78 && gridY >= 1 && gridY <= 78) {
+                if (gridX >= 1 && gridX <= countof(this->heatMaps) - 2 && gridY >= 1
+                    && gridY <= countof(this->heatMaps[0]) - 2) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
                 if ((short)DAT_TileMapState::instance.PathConnectionLayer[tile]
@@ -91,10 +94,10 @@ namespace AI {
                     int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                     // tree types 1 to 4 give wood
                     if (treeID != 0
-                        && (DAT_LandscapeState::instance.trees[treeID].treeType == 1
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == 2
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == 3
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == 4)
+                        && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_1
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_2
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_3
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_4)
                         && DAT_LandscapeState::instance.trees[treeID].stage < 4
                         && DAT_LandscapeState::instance.trees[treeID].state == 2
                         && MACRO_CALL_MEMBER(Map::LandscapeState_Func::isTreeAdult, DAT_LandscapeState::ptr)(
@@ -136,7 +139,7 @@ namespace AI {
         }
 
         // only update what can change during the game
-        for (int tile = 0; tile < 80400; ++tile) {
+        for (int tile = 0; tile < Map::MC_MAP_TILES_COUNT; ++tile) {
             if (!(DAT_TileMapState::instance.LogicLayer[tile]
                     & (L_ROCKY | L_WALL_OR_GATEHOUSE | L_BUILDING | L_TREE | L_KEEP_NON_MANOR_HOUSE))) {
                 continue;
@@ -154,10 +157,10 @@ namespace AI {
                 int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                 // tree types 1 to 4 give wood
                 if (treeID != 0
-                    && (DAT_LandscapeState::instance.trees[treeID].treeType == 1
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == 2
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == 3
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == 4)
+                    && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_1
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_2
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_3
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_4)
                     && DAT_LandscapeState::instance.trees[treeID].stage < 4
                     && DAT_LandscapeState::instance.trees[treeID].state == 2
                     && MACRO_CALL_MEMBER(Map::LandscapeState_Func::isTreeAdult, DAT_LandscapeState::ptr)(

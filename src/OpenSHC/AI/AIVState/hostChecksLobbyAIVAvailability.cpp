@@ -23,11 +23,12 @@ namespace AI {
             }
             int const localPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             DAT_GameCore::instance.numOfAIsWithCastleUnk = 0;
-            for (int aiIndex = 0; aiIndex < 16; ++aiIndex) {
+            for (int aiIndex = 0; aiIndex < countof(DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk); ++aiIndex) {
                 // the original walks this entry with its own pointer next to the received array
                 int const* const availability = &this->aivFileAvailabilityPerAIArray[aiIndex];
                 BOOLEnum available = TRUE;
-                for (int player = 1; player < 9; ++player) {
+                for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                    ++player) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1) {
                         continue;
                     }
@@ -60,7 +61,8 @@ namespace AI {
             }
 
             BOOLEnum removedPlayer = FALSE;
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                ++player) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] != -1
                     || DAT_GameSynchronyState::instance.currentAIArray[player] == 0) {
                     continue;
@@ -114,7 +116,7 @@ namespace AI {
         // single player
         DAT_GameCore::instance.numOfAIsWithCastleUnk = this->numberOfAIsWithAIV;
         int count = 0;
-        for (int aiIndex = 0; aiIndex < 16; ++aiIndex) {
+        for (int aiIndex = 0; aiIndex < countof(DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk); ++aiIndex) {
             if (this->aivFileAvailabilityPerAIArray[aiIndex] != 0) {
                 DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[count] = aiIndex + 1;
                 ++count;

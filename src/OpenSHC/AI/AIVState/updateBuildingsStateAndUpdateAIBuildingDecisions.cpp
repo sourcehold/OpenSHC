@@ -32,7 +32,8 @@ namespace AI {
             if (this->mapExtraInfo.algBuildingPlacementNudge >= 31) {
                 this->mapExtraInfo.algBuildingPlacementNudge = 0;
             }
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                ++player) {
                 // the original tests the slot ID a third time through an alias of the same element
                 int const& fullID = DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player];
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1
@@ -68,7 +69,8 @@ namespace AI {
         if (DAT_GameState::instance.mapAndTime.weekChanged) {
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 2);
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                ++player) {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1
                     && DAT_GameSynchronyState::instance.currentAIArray[player] != 0
                     && DAT_GameState::instance.playerDataArray[player].playerDeathRelated == 0
@@ -85,7 +87,7 @@ namespace AI {
         }
 
         // each AI player decides on its own tick of the day
-        for (int player = 1; player < 9; ++player) {
+        for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); ++player) {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[player] != 0
                 && DAT_GameState::instance.playerDataArray[player].playerDeathRelated == 0
