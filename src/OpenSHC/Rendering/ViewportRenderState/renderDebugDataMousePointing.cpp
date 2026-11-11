@@ -10,7 +10,6 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
@@ -22,7 +21,6 @@ namespace Rendering {
     void ViewportRenderState::renderDebugDataMousePointing(int x, int y, int width, int height)
     {
         char text[200];
-        uint securityCookie = MSVC_SecurityCookie::instance ^ (uint)text;
 
         int textX = x + 2;
 
