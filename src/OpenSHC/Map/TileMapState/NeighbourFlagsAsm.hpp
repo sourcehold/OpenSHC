@@ -37,6 +37,14 @@
 
 #include "OpenSHC/Map/TileMapState.hpp"
 
+// A "jz" over the "or edx, imm" that follows it (SKIP = 3 for an imm8, 6 for an imm32), in the 6-byte near
+// encoding 0F 84 rel32 that the original's assembler produced. MSVC's inline assembler only emits the 2-byte short
+// form for a jump to a nearby label, even when written "jz near ptr label", so the bytes are emitted directly.
+#ifndef MACRO_ASM_JZ_NEAR
+#define MACRO_ASM_JZ_NEAR(SKIP)                                                                                        \
+    __asm _emit 0x0F __asm _emit 0x84 __asm _emit SKIP __asm _emit 0 __asm _emit 0 __asm _emit 0
+#endif
+
 // clang-format off
 
 #define MACRO_NEIGHBOUR_FLAGS_LOGIC_4(ID, MASK)                                       \
@@ -55,11 +63,11 @@
     __asm mov eax, dword ptr [esi + 0x4]                                              \
     __asm mov ebx, dword ptr [esi - 0x4]                                              \
     __asm and eax, MASK                                                               \
-    __asm jz east_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x20                                                                \
     __asm east_done_##ID:                                                             \
     __asm and ebx, MASK                                                               \
-    __asm jz west_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x2                                                                 \
     __asm west_done_##ID:                                                             \
     __asm mov ecx, dword ptr [edi]                                                    \
@@ -69,7 +77,7 @@
     __asm add esi, ecx                                                                \
     __asm mov eax, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz north_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(6)                                                              \
     __asm or edx, 0x80                                                                \
     __asm north_done_##ID:                                                            \
     __asm mov ecx, dword ptr [edi + 0x10]                                             \
@@ -80,7 +88,7 @@
     __asm add esi, ecx                                                                \
     __asm mov eax, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz south_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x8                                                                 \
     __asm south_done_##ID:                                                            \
     __asm mov eax, this                                                               \
@@ -102,11 +110,11 @@
     __asm mov eax, dword ptr [esi + 0x4]                                              \
     __asm mov ebx, dword ptr [esi - 0x4]                                              \
     __asm and eax, MASK                                                               \
-    __asm jz east_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x20                                                                \
     __asm east_done_##ID:                                                             \
     __asm and ebx, MASK                                                               \
-    __asm jz west_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x2                                                                 \
     __asm west_done_##ID:                                                             \
     __asm mov ecx, dword ptr [edi]                                                    \
@@ -118,15 +126,15 @@
     __asm mov ebx, dword ptr [esi + 0x4]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz north_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x1                                                                 \
     __asm north_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz north_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x40                                                                \
     __asm north_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz north_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(6)                                                              \
     __asm or edx, 0x80                                                                \
     __asm north_done_##ID:                                                            \
     __asm mov ecx, dword ptr [edi + 0x10]                                             \
@@ -139,15 +147,15 @@
     __asm mov ebx, dword ptr [esi + 0x4]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz south_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x4                                                                 \
     __asm south_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz south_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x10                                                                \
     __asm south_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz south_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x8                                                                 \
     __asm south_done_##ID:                                                            \
     __asm mov eax, this                                                               \
@@ -169,11 +177,11 @@
     __asm mov eax, dword ptr [esi + 0x2]                                              \
     __asm mov ebx, dword ptr [esi - 0x2]                                              \
     __asm and eax, MASK                                                               \
-    __asm jz east_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x20                                                                \
     __asm east_done_##ID:                                                             \
     __asm and ebx, MASK                                                               \
-    __asm jz west_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x2                                                                 \
     __asm west_done_##ID:                                                             \
     __asm mov ecx, dword ptr [edi]                                                    \
@@ -183,15 +191,15 @@
     __asm mov ebx, dword ptr [esi + 0x2]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz north_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x1                                                                 \
     __asm north_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz north_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x40                                                                \
     __asm north_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz north_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(6)                                                              \
     __asm or edx, 0x80                                                                \
     __asm north_done_##ID:                                                            \
     __asm mov ecx, dword ptr [edi + 0x10]                                             \
@@ -202,15 +210,15 @@
     __asm mov ebx, dword ptr [esi + 0x2]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz south_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x4                                                                 \
     __asm south_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz south_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x10                                                                \
     __asm south_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz south_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x8                                                                 \
     __asm south_done_##ID:                                                            \
     __asm mov eax, this                                                               \
@@ -231,18 +239,18 @@
     __asm mov eax, dword ptr [esi + 0x1]                                              \
     __asm mov ebx, dword ptr [esi - 0x1]                                              \
     __asm and eax, MASK                                                               \
-    __asm jz east_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x20                                                                \
     __asm east_done_##ID:                                                             \
     __asm and ebx, MASK                                                               \
-    __asm jz west_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x2                                                                 \
     __asm west_done_##ID:                                                             \
     __asm mov ecx, dword ptr [edi]                                                    \
     __asm add esi, ecx                                                                \
     __asm mov eax, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz north_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(6)                                                              \
     __asm or edx, 0x80                                                                \
     __asm north_done_##ID:                                                            \
     __asm mov ecx, dword ptr [edi + 0x10]                                             \
@@ -250,7 +258,7 @@
     __asm add esi, ecx                                                                \
     __asm mov eax, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz south_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x8                                                                 \
     __asm south_done_##ID:                                                            \
     __asm mov eax, this                                                               \
@@ -271,11 +279,11 @@
     __asm mov eax, dword ptr [esi + 0x1]                                              \
     __asm mov ebx, dword ptr [esi - 0x1]                                              \
     __asm and eax, MASK                                                               \
-    __asm jz east_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x20                                                                \
     __asm east_done_##ID:                                                             \
     __asm and ebx, MASK                                                               \
-    __asm jz west_done_##ID                                                           \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x2                                                                 \
     __asm west_done_##ID:                                                             \
     __asm mov ecx, dword ptr [edi]                                                    \
@@ -284,15 +292,15 @@
     __asm mov ebx, dword ptr [esi + 0x1]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz north_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x1                                                                 \
     __asm north_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz north_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x40                                                                \
     __asm north_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz north_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(6)                                                              \
     __asm or edx, 0x80                                                                \
     __asm north_done_##ID:                                                            \
     __asm mov ecx, dword ptr [edi + 0x10]                                             \
@@ -302,15 +310,15 @@
     __asm mov ebx, dword ptr [esi + 0x1]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
-    __asm jz south_west_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x4                                                                 \
     __asm south_west_done_##ID:                                                       \
     __asm and ebx, MASK                                                               \
-    __asm jz south_east_done_##ID                                                     \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x10                                                                \
     __asm south_east_done_##ID:                                                       \
     __asm and ecx, MASK                                                               \
-    __asm jz south_done_##ID                                                          \
+    MACRO_ASM_JZ_NEAR(3)                                                              \
     __asm or edx, 0x8                                                                 \
     __asm south_done_##ID:                                                            \
     __asm mov eax, this                                                               \
