@@ -73,7 +73,7 @@ namespace Map {
                 this->refreshRelatedTwo = 2;
             }
             this->refreshCertainTileMap = 0;
-            this->forceUpdateLogicalAndMiscDisplayLayers = 1;
+            this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
             this->counter1 = 0;
             DAT_RotateMapOrPullDownTerrain::instance = 1;

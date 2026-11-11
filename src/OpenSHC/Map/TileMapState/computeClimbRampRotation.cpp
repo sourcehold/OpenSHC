@@ -66,19 +66,19 @@ namespace Map {
             rotation = 4;
         }
 
-        if (this->mapOrientation == 0) {
+        if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
             if (rotation == 1) {
                 this->wallCornerRotation = 32 - (x & 0x1f);
             } else {
                 this->wallCornerRotation = 32 - (y & 0x1f);
             }
-        } else if (this->mapOrientation == 4) {
+        } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
             if (rotation == 1) {
                 this->wallCornerRotation = (x & 0x1f) + 1;
             } else {
                 this->wallCornerRotation = (y & 0x1f) + 1;
             }
-        } else if (this->mapOrientation == 2) {
+        } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
             this->wallCornerRotation = (y & 0x1f) + 1;
         } else {
             this->wallCornerRotation = 32 - (y & 0x1f);

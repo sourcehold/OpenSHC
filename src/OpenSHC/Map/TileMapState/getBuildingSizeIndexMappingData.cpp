@@ -12,19 +12,19 @@ namespace Map {
         this->buildingX = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][0];
         this->buildingY = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][1];
         switch (this->mapOrientation) {
-        case 0:
+        case OpenSHC::Map::Enums::MO_NORTH:
             this->buildingRotationRelatedValue
                 = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][2];
             return;
-        case 2:
+        case OpenSHC::Map::Enums::MO_EAST:
             this->buildingRotationRelatedValue
                 = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][3];
             return;
-        case 4:
+        case OpenSHC::Map::Enums::MO_SOUTH:
             this->buildingRotationRelatedValue
                 = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][4];
             return;
-        case 6:
+        case OpenSHC::Map::Enums::MO_WEST:
             this->buildingRotationRelatedValue
                 = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][5];
         }

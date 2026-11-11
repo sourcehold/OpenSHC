@@ -43,7 +43,7 @@ namespace Map {
             int fromXPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].x + x2;
             int fromYPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
-            if ((short)this->PathConnectionLayer[tile] != area) {
+            if (this->PathConnectionLayer[tile] != area) {
                 continue;
             }
             uint height = this->HeightLayer[tile];

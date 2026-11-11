@@ -20,7 +20,7 @@ namespace Map {
             return;
         }
 
-        this->forceUpdateMacroLayerFlag = 0;
+        this->forceUpdateMacroLayerFlag = FALSE;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(
             L_DEFAULT_EARTH_OR_TEXTURE, L2_SCRUB, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_MARSH, L_NONE, 0);
@@ -31,7 +31,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_NONE, L2_PLATEAU_MEDIUM, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_NONE, L2_PLATEAU_HIGH, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated2, this)();
-        this->forceUpdateTextureTilemap = 1;
+        this->forceUpdateTextureTilemap = TRUE;
     }
 
 }

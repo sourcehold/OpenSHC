@@ -13,7 +13,7 @@ namespace Map {
             if (this->HeightLayer[neighbour] > this->HeightLayer[tile] + 16) {
                 continue;
             }
-            if ((short)this->PathConnectionLayer[neighbour] != area) {
+            if (this->PathConnectionLayer[neighbour] != area) {
                 continue;
             }
             return TRUE;

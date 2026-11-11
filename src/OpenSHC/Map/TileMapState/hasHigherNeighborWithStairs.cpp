@@ -9,13 +9,13 @@ namespace Map {
     BOOLEnum TileMapState::hasHigherNeighborWithStairs(int tileUnk, int y, int direction)
     {
         int rotatedDirection = 0;
-        if (this->mapOrientation == 0) {
+        if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
             rotatedDirection = direction;
-        } else if (this->mapOrientation == 4) {
+        } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
             rotatedDirection = direction + 4;
-        } else if (this->mapOrientation == 2) {
+        } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
             rotatedDirection = direction + 2;
-        } else if (this->mapOrientation == 6) {
+        } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
             rotatedDirection = direction + 6;
         }
         if (rotatedDirection >= 8) {

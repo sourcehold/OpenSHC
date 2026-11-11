@@ -114,17 +114,17 @@ namespace Map {
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Entities::EntityState_Func::clearEntityArrayAndSeagullArray, DAT_EntityState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
-        this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-        this->forceUpdateTextureTilemap = 1;
-        this->forceUpdateGFXLayers = 1;
-        this->forceUpdateMacroLayerFlag = 1;
+        this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
+        this->forceUpdateTextureTilemap = TRUE;
+        this->forceUpdateGFXLayers = TRUE;
+        this->forceUpdateMacroLayerFlag = TRUE;
         this->field_0x55487c = 200;
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
             DAT_PathFindingState::ptr)();
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updateSeparateAreaTileMap, DAT_PathFindingState::ptr)(1);
-        this->forceUpdateMacroLayerFlag = 1;
+        this->forceUpdateMacroLayerFlag = TRUE;
         this->field_0x55487c = 500;
         MACRO_CALL_MEMBER(
             OpenSHC::UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, DAT_MinimapViewState::ptr)(0, 100);
