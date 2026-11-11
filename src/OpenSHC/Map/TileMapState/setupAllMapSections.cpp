@@ -74,7 +74,7 @@ namespace Map {
             sizeof(this->DefaultHeightLayer), '\b', this->DefaultHeightLayer);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(DAT_TileMapState::instance.WalkLayer), '\0', DAT_TileMapState::instance.WalkLayer);
+            sizeof(DAT_TileMapState::instance.WalkLayer), 0, DAT_TileMapState::instance.WalkLayer);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setChangedLayerZeroBasedOn40x40Layer,
             DAT_PathFindingState::ptr)(0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateLogicalTileMapRelatedSections, this)();
