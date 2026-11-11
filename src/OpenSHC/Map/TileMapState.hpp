@@ -12,6 +12,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
@@ -27,6 +28,7 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -108,7 +110,7 @@ namespace Map {
         undefined4 rockOrientation; // 0x00554890 length: 4
         undefined4 editorRockType; // 0x00554894 length: 4
         undefined4 lastTime; // 0x00554898 length: 4
-        int mapOrientation; // 0x0055489C length: 4
+        MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
         int screenSouthEastDirection; // 0x005548A4 length: 4
         int screenEastDirection; // 0x005548A8 length: 4
