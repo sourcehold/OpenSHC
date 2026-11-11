@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/MapConstants.hpp"
+
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -10,21 +12,22 @@ namespace Map {
     {
         this->buildingMinHeight = 1000;
         this->buildingMaxHeight = 0;
-        if (x > 399 || y > 399) {
+        if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
             return;
         }
 
         int buildingSizeTileIndex = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingWidthAndHeight);
             uint footprintY = this->buildingY + y;
             uint footprintX = this->buildingX + x;
-            if (footprintX <= 399 && footprintY <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[footprintY * 400 + footprintX] != 0) {
+            if (footprintX <= MC_MAP_XY_LIMIT_INCLUSIVE && footprintY <= MC_MAP_XY_LIMIT_INCLUSIVE
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[footprintY * MC_MAP_XY_LIMIT + footprintX]
+                    != 0) {
                 uint height
                     = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[footprintY].addXgetTile
                         + this->buildingX + x];
@@ -36,7 +39,10 @@ namespace Map {
                 }
             }
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

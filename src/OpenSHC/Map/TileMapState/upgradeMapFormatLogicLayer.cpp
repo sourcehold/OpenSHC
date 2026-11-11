@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Version.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -20,22 +20,22 @@ namespace Map {
             return;
         }
 
-        if ((int)receivedMapVersion < 102) {
+        if (receivedMapVersion < 102) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_102)();
         }
-        if ((int)receivedMapVersion < 120) {
+        if (receivedMapVersion < 120) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_120)();
         }
-        if ((int)receivedMapVersion < 125) {
+        if (receivedMapVersion < 125) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_125)();
         }
-        if ((int)receivedMapVersion < 128) {
+        if (receivedMapVersion < 128) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_128)();
         }
-        if ((int)receivedMapVersion < 145) {
+        if (receivedMapVersion < 145) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_145)();
         }
-        if ((int)receivedMapVersion < 147) {
+        if (receivedMapVersion < 147) {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapLogicToVersion_147)();
         }
     }

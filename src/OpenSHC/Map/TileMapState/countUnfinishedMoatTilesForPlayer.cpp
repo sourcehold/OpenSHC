@@ -9,7 +9,7 @@ namespace Map {
     int TileMapState::countUnfinishedMoatTilesForPlayer(int playerID)
     {
         int unfinishedMoatTiles = 0;
-        for (int moatID = 1; moatID < 16000; moatID++) {
+        for (int moatID = 1; moatID < countof(this->moats); moatID++) {
             if (this->moats[moatID].owner != 0 && this->moats[moatID].owner == playerID
                 && (this->LogicLayer[this->moats[moatID].tile] & L_MOAT) == 0) {
                 unfinishedMoatTiles++;

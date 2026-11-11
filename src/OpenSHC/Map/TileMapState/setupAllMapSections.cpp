@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -37,8 +38,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00512100
     void TileMapState::setupAllMapSections()
     {
@@ -57,28 +56,25 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupLogicalMapBorders, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateShowHiLayerOrResetChangedLayer, this)();
 
-        /* the border tiles get their own graphic, everything else the plain one */
-        for (int tile = 0; tile < 80400; tile += 6) {
-            for (int i = 0; i < 6; i++) {
-                if (this->LogicLayer[tile + i] == L_BORDER) {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2];
-                } else if (this->LogicLayer[tile + i] == L_BORDER_EDGE) {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 1;
-                } else {
-                    this->GfxLayer[tile + i] = (ushort)GMFirstPictureIndex::instance[2] + 2;
-                }
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
+            if (this->LogicLayer[tile] == L_BORDER) {
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2];
+            } else if (this->LogicLayer[tile] == L_BORDER_EDGE) {
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2] + 1;
+            } else {
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2] + 2;
             }
         }
 
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ShortValue, DAT_LowLevelMemory::ptr)(
-            80400, 1, this->PillarGFXLayer);
+            MC_MAP_TILES_COUNT, 1, this->PillarGFXLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\b', this->HeightLayer);
+            sizeof(this->HeightLayer), '\b', this->HeightLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\b', this->DefaultHeightLayer);
+            sizeof(this->DefaultHeightLayer), '\b', this->DefaultHeightLayer);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            160800, '\0', DAT_TileMapState::instance.WalkLayer);
+            sizeof(DAT_TileMapState::instance.WalkLayer), 0, DAT_TileMapState::instance.WalkLayer);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setChangedLayerZeroBasedOn40x40Layer,
             DAT_PathFindingState::ptr)(0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateLogicalTileMapRelatedSections, this)();
@@ -92,9 +88,6 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::clearBuildings, DAT_BuildingsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::clearRocksAndTrees, DAT_LandscapeState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::resetWind, DAT_LandscapeState::ptr)();
-        // the original calls this empty function as a member (object in ecx), of UnitsState here and of UnitsState
-        // and LandscapeState below; the generated header has it as a global, so pass the object through a one-argument
-        // __fastcall pointer
         ((void(__fastcall*)(OpenSHC::Map::Units::UnitsState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
             DAT_UnitsState::ptr);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearAllUnits, DAT_UnitsState::ptr)();
@@ -110,7 +103,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::fillWith0xFF, DAT_GameState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearAnimalSpawnLocationsUnk, DAT_TribesState::ptr)();
 
-        for (int tribe = 0; tribe < 1000; tribe++) {
+        for (int tribe = 0; tribe < countof(DAT_AICState::instance.tribeIDArray); tribe++) {
             DAT_AICState::instance.tribeIDArray[tribe] = 0;
             DAT_AICState::instance.tribeUIDArray[tribe] = 0;
         }
@@ -121,17 +114,17 @@ namespace Map {
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Entities::EntityState_Func::clearEntityArrayAndSeagullArray, DAT_EntityState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
-        this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-        this->forceUpdateTextureTilemap = 1;
-        this->forceUpdateGFXLayers = 1;
-        this->forceUpdateMacroLayerFlag = 1;
+        this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
+        this->forceUpdateTextureTilemap = TRUE;
+        this->forceUpdateGFXLayers = TRUE;
+        this->forceUpdateMacroLayerFlag = TRUE;
         this->field_0x55487c = 200;
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
             DAT_PathFindingState::ptr)();
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updateSeparateAreaTileMap, DAT_PathFindingState::ptr)(1);
-        this->forceUpdateMacroLayerFlag = 1;
+        this->forceUpdateMacroLayerFlag = TRUE;
         this->field_0x55487c = 500;
         MACRO_CALL_MEMBER(
             OpenSHC::UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, DAT_MinimapViewState::ptr)(0, 100);

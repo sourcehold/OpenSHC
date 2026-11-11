@@ -18,20 +18,17 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::Units::UnitType;
-    using OpenSHC::Map::Units::States::UnitState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAC70
     void TileMapState::clearBuildingFootprintAndRemoveSiegeTower(int x, int y, int size)
     {
         int tileIndex = 0;
-        do {
+
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->LogicLayer[tile] = this->LogicLayer[tile]
-                & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_BUILDING | L_STAIRS | L_CRENEL_VARIATIONUnk
-                    | L_KEEP_NON_MANOR_HOUSE);
+            this->LogicLayer[tile] &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_BUILDING | L_STAIRS | L_CRENEL_VARIATIONUnk
+                | L_KEEP_NON_MANOR_HOUSE);
             this->BuildingLayer[tile] = 0;
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -42,7 +39,10 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             }
             tileIndex++;
-        } while (tileIndex < this->constructionTileCount);
+            if (tileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

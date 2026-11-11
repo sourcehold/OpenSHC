@@ -8,17 +8,20 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_PLAIN1_AND_FARM;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAD20
-    void TileMapState::unmarkBuildingFootprintFlag(int param_1, int param_2, int param_3)
+    void TileMapState::unmarkBuildingFootprintFlag(int x, int y, int buildingSize)
     {
         int buildingSizeTileIndex = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                buildingSizeTileIndex, param_3);
+                buildingSizeTileIndex, buildingSize);
             buildingSizeTileIndex++;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + param_2].addXgetTile
-                + this->buildingX + param_1;
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN1_AND_FARM;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
+            this->LogicLayer[tile] &= ~L_PLAIN1_AND_FARM;
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

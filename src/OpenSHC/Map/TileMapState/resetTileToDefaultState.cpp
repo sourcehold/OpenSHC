@@ -16,15 +16,14 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F81D0
-    void TileMapState::resetTileToDefaultState(int param_1, uint param_2, uint param_3)
+    void TileMapState::resetTileToDefaultState(int tile, uint x, uint y)
     {
-        this->LogicLayer[param_1] = this->LogicLayer[param_1]
-            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
-        this->HeightLayer[param_1] = this->DefaultHeightLayer[param_1];
-        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(
-            param_1);
+        this->LogicLayer[tile]
+            &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+        this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
+        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-            DAT_PathFindingState::ptr)(5, param_2, param_3);
+            DAT_PathFindingState::ptr)(5, x, y);
     }
 
 }

@@ -35,13 +35,13 @@ namespace Map {
         }
 
         if ((this->LogicLayer[this->directionTranslationMatrix[y][first] + tile] & L_CRENEL) == 0) {
-            return 0;
+            return FALSE;
         }
         if ((this->LogicLayer[this->directionTranslationMatrix[y][second] + tile] & L_CRENEL) == 0) {
-            return 0;
+            return FALSE;
         }
         if ((this->LogicLayer[this->directionTranslationMatrix[y][third] + tile] & L_CRENEL) != 0) {
-            return 0;
+            return FALSE;
         }
         return ~((uint)this->LogicLayer[this->directionTranslationMatrix[y][fourth] + tile] >> 9) & 1;
     }

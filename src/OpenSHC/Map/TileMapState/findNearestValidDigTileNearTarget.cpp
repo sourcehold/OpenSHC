@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -14,14 +15,15 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00500980
     BOOLEnum TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
     {
-        if (x1 > 399 || y1 > 399) {
-            return 0;
+        if (x1 > MC_MAP_XY_LIMIT_INCLUSIVE || y1 > MC_MAP_XY_LIMIT_INCLUSIVE) {
+            return FALSE;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
-            return 0;
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * MC_MAP_XY_LIMIT + x1] == 0) {
+            return FALSE;
         }
-        if (x2 > 399 || y2 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == 0) {
-            return 0;
+        if (x2 > MC_MAP_XY_LIMIT_INCLUSIVE || y2 > MC_MAP_XY_LIMIT_INCLUSIVE
+            || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * MC_MAP_XY_LIMIT + x2] == 0) {
+            return FALSE;
         }
 
         int area = (short)this
@@ -32,26 +34,26 @@ namespace Map {
         uint targetHeight = this->HeightLayer[targetTile];
         int targetBuildingID = this->BuildingLayer[targetTile];
         if (targetBuildingID != 0) {
-            targetHeight = targetHeight
-                + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+            targetHeight
+                += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                     DAT_BuildingsState::ptr)(targetBuildingID);
         }
 
-        for (int index = 0; index < 4; index++) {
+        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.field_0x378c); index++) {
             int fromXPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].x + x2;
             int fromYPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
-            if ((short)this->PathConnectionLayer[tile] != area) {
+            if (this->PathConnectionLayer[tile] != area) {
                 continue;
             }
             uint height = this->HeightLayer[tile];
             int buildingID = this->BuildingLayer[tile];
             if (buildingID != 0) {
-                height = height
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                height
+                    += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(buildingID);
             }
-            if ((int)height >= (int)(targetHeight + 0x10) || (int)height <= (int)(targetHeight - 0x10)) {
+            if ((int)height >= (int)(targetHeight + 16) || (int)height <= (int)(targetHeight - 16)) {
                 continue;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
@@ -65,11 +67,11 @@ namespace Map {
         if (bestIndex <= -1) {
             this->field_0x5549a8 = x2;
             this->field_0x5549ac = y2;
-            return 0;
+            return FALSE;
         }
         this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
         this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
-        return 1;
+        return TRUE;
     }
 
 }

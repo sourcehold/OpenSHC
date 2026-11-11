@@ -12,16 +12,13 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_MOAT;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005113F0
-    BOOLEnum TileMapState::removeMoat(uint moatID, int param_2)
+    BOOLEnum TileMapState::removeMoat(uint moatID, int unused)
     {
-        this->moats[moatID].fillProgress = this->moats[moatID].fillProgress - 1;
-        // nested form: the original keeps the FALSE return as the trailing block
+        this->moats[moatID].fillProgress -= 1;
         if (this->moats[moatID].fillProgress <= 0) {
             this->HeightLayer[this->moats[moatID].tile] = 8;
-            this->LogicLayer[this->moats[moatID].tile] = this->LogicLayer[this->moats[moatID].tile] & ~L_MOAT;
+            this->LogicLayer[this->moats[moatID].tile] &= ~L_MOAT;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                 DAT_PathFindingState::ptr)(2, this->moats[moatID].x, this->moats[moatID].y);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

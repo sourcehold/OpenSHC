@@ -20,12 +20,12 @@ namespace Map {
         int orientation = DAT_LandscapeState::instance.rocks[rockID].orientation + this->mapOrientation;
         int index = 0;
         if (orientation >= 8) {
-            orientation = orientation - 8;
+            orientation -= 8;
         }
         int size = DAT_LandscapeState::instance.rocks[rockID].size;
         int surface = (orientation / 2) * size * size;
 
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_LandscapeState::instance.rocks[rockID].size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
@@ -33,26 +33,27 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 if (this->disableElevationRendering == 0) {
                     this->GfxLayer[tile]
-                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                              + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
-                              + (short)this->buildingRotationRelatedValue + surface)
+                        = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
                         - 1;
                 } else if (DAT_LandscapeState::instance.rocks[rockID].size == 1) {
                     this->GfxLayer[tile]
-                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                              + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
-                              + (short)this->buildingRotationRelatedValue + surface)
+                        = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
                         - 1;
                 } else {
                     this->GfxLayer[tile]
-                        = (short)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
-                              DAT_LandscapeState::ptr)(((byte)DAT_TileMapState::instance.RandomLayer[tile] & 3) + 1)
-                        + (short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
+                              DAT_LandscapeState::ptr)((DAT_TileMapState::instance.RandomLayer[tile] & 3) + 1)
+                        + GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                         + surface - 1;
                 }
             }
             index++;
-        } while (index < this->constructionTileCount);
+            if (index >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

@@ -16,10 +16,10 @@ namespace Map {
             direction = 0;
         }
 
-        int count = abs((int)offset);
+        int count = abs(offset);
         for (int i = 0; i < count; i++) {
-            tileUnk = tileUnk + this->directionTranslationMatrix[y][direction];
-            y = y + yStep;
+            tileUnk += this->directionTranslationMatrix[y][direction];
+            y += yStep;
         }
         return tileUnk + addend;
     }

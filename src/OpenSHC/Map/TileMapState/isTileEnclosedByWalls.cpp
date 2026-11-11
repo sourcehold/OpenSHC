@@ -11,21 +11,21 @@ namespace Map {
     {
         int offset = this->directionTranslationMatrix[y][0] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
-            return 1;
+            return TRUE;
         }
         offset = this->directionTranslationMatrix[y][4] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
-            return 1;
+            return TRUE;
         }
         offset = this->directionTranslationMatrix[y][2] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
-            return 1;
+            return TRUE;
         }
         offset = this->directionTranslationMatrix[y][6] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
-            return 1;
+            return TRUE;
         }
-        return 0;
+        return FALSE;
     }
 
 }

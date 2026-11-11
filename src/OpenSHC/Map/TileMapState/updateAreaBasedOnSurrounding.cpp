@@ -15,16 +15,20 @@ namespace Map {
         int area
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findAccessibleAreaNearBuildingLocation,
                 DAT_BuildingsState::ptr)(x, y, buildingSize);
-        do {
+
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingSize);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             if (this->PathConnectionLayer[tileUnk] == 0) {
-                this->PathConnectionLayer[tileUnk] = (ushort)area;
+                this->PathConnectionLayer[tileUnk] = area;
             }
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

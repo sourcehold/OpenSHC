@@ -9,8 +9,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F85B0
     BOOLEnum TileMapState::isTileEnclosedByWallsOrGates(int tile, int y)
     {

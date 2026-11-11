@@ -7,20 +7,9 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA550
     int TileMapState::getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType)
     {
-        /*
-          The original dispatches through a byte index table at 0x004FA614 (0x147 entries, biased by
-          M_MAPPER_UNDUGMOAT) into a jump table at 0x004FA5DC, which is what MSVC emits for a dense
-          switch; Ghidra could not normalise it and rendered the dispatch as a read through an
-          unnamed pointer array. The case groups below are that byte table, decoded.
-
-          field159_0x5549b8 is written through the global instance, not through this, which is how
-          the original addresses it.
-        */
         switch (commandBuildingType) {
         case OpenSHC::Commands::M_MAPPER_FLETCHER:
         case OpenSHC::Commands::M_MAPPER_HOVEL:
@@ -39,9 +28,9 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_GARDEN11:
         case OpenSHC::Commands::M_MAPPER_GARDEN12:
         case OpenSHC::Commands::M_MAPPER_OIL_SMELTER:
-        case (MappersEnum)258:
-        case (MappersEnum)259:
-        case (MappersEnum)260:
+        case 258:
+        case 259:
+        case 260:
         case OpenSHC::Commands::M_MAPPER_WATERPOT:
             return 4;
         case OpenSHC::Commands::M_MAPPER_STORES:
@@ -113,23 +102,23 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_CAMP_FIRE:
         case OpenSHC::Commands::M_MAPPER_KILLING_PIT:
         case OpenSHC::Commands::M_MAPPER_PITCH_DITCH:
-        case (MappersEnum)248:
-        case (MappersEnum)249:
-        case (MappersEnum)250:
-        case (MappersEnum)251:
+        case 248:
+        case 249:
+        case 250:
+        case 251:
         case OpenSHC::Commands::M_MAPPER_SHRINE5:
             return 1;
         case OpenSHC::Commands::M_MAPPER_KEEP3:
         case OpenSHC::Commands::M_MAPPER_APPLEFARM:
-            return 0xb;
+            return 11;
         case OpenSHC::Commands::M_MAPPER_WHEATFARM:
         case OpenSHC::Commands::M_MAPPER_HOPSFARM:
         case OpenSHC::Commands::M_MAPPER_CHURCH2:
             return 9;
         case OpenSHC::Commands::M_MAPPER_CHURCH3:
-            return 0xd;
+            return 13;
         case OpenSHC::Commands::M_MAPPER_CATTLEFARM:
-            return 0xa;
+            return 10;
         case OpenSHC::Commands::M_MAPPER_UNDUGMOAT:
         case OpenSHC::Commands::M_MAPPER_DUGMOAT:
         case OpenSHC::Commands::M_MAPPER_MOAT:
@@ -146,12 +135,12 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_GARDEN5:
         case OpenSHC::Commands::M_MAPPER_GARDEN6:
         case OpenSHC::Commands::M_MAPPER_GALLOWS:
-        case (MappersEnum)252:
-        case (MappersEnum)253:
-        case (MappersEnum)254:
-        case (MappersEnum)255:
-        case (MappersEnum)256:
-        case (MappersEnum)257:
+        case 252:
+        case 253:
+        case 254:
+        case 255:
+        case 256:
+        case 257:
         case OpenSHC::Commands::M_MAPPER_GIBBET:
         case OpenSHC::Commands::M_MAPPER_STATUE1:
         case OpenSHC::Commands::M_MAPPER_STATUE2:

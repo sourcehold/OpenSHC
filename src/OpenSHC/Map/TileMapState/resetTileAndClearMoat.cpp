@@ -22,38 +22,37 @@ namespace Map {
     {
         int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-        this->LogicLayer[tile] = this->LogicLayer[tile]
-            & ~(L_PLAIN2_AND_PITCH | L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED
-                | L_CRENEL_VARIATIONUnk);
+        this->LogicLayer[tile] &= ~(L_PLAIN2_AND_PITCH | L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS
+            | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
         this->HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
         this->DamageLayer[tile] = 0;
         if ((this->LogicLayer[tile] & L_TREE) != 0) {
             int treeID = this->OrganismLayer[tile];
-            if (treeID < 2000) {
+            if (treeID < countof(DAT_LandscapeState::instance.trees)) {
                 switch (DAT_LandscapeState::instance.trees[treeID].treeType) {
-                case (TreeType)5:
-                case (TreeType)6:
-                case (TreeType)7:
-                case (TreeType)8:
-                case (TreeType)9:
-                case (TreeType)10:
-                case (TreeType)11:
-                case (TreeType)12:
-                case (TreeType)13:
-                case (TreeType)14:
-                case (TreeType)16:
-                case (TreeType)17:
-                case (TreeType)18:
-                case (TreeType)19:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
                     DAT_LandscapeState::instance.trees[treeID].state = 3;
                 }
             }
         }
         if ((this->LogicLayer[tile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, y);
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
+            this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
         }
-        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;
+        this->MiscDisplayLayer[tile] &= ~0x3c0;
     }
 
 }

@@ -26,86 +26,71 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_BOULDERS;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-    using OpenSHC::Map::LogicHelpers::L_IRON;
-    using OpenSHC::Map::LogicHelpers::L_PEBBLES;
-    using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
-    using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_TREE;
-    using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005034A0
     void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
     {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallPlacementAtTile, this)(playerID, x, y, mapper);
-        if (this->illegalBuild != FALSE) {
+        if (this->illegalBuild) {
             return;
         }
 
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        short command = (short)mapper;
+        short command = mapper;
         this->DamageLayer[tile] = 0;
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         if (command == OpenSHC::Commands::M_MAPPER_WALL) {
-            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 0x5a;
+            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 90;
         } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 0x3c;
+            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 60;
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
-            /* a crenel on an odd tile of one axis carries the alternate variation */
+            this->LogicLayer[tile] |= L_CRENEL;
+            this->HeightLayer[tile] += 98;
             if ((int)(x & 1) == 1 && (y & 1) == 0) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x44;
+            this->LogicLayer[tile] |= L_CRENEL;
+            this->HeightLayer[tile] += 68;
             if ((int)(x & 1) == 1 && (y & 1) == 0) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x50;
+            this->LogicLayer[tile] |= L_STAIRS;
+            this->HeightLayer[tile] += 80;
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR2) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x40;
+            this->LogicLayer[tile] |= L_STAIRS;
+            this->HeightLayer[tile] += 64;
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR3) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x30;
+            this->LogicLayer[tile] |= L_STAIRS;
+            this->HeightLayer[tile] += 48;
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR4) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x20;
+            this->LogicLayer[tile] |= L_STAIRS;
+            this->HeightLayer[tile] += 32;
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR5) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 0x10;
+            this->LogicLayer[tile] |= L_STAIRS;
+            this->HeightLayer[tile] += 16;
         }
 
         this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_UNKNOWN_WALL_RELATED | L_BOULDERS | L_PEBBLES | L_IRON)
             | L_WALL_OR_GATEHOUSE;
         if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) != 0) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 4;
+            this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
+            this->HeightLayer[tile] += 4;
         }
         if ((this->LogicLayer[tile] & L_TREE) != 0) {
             int organism = this->OrganismLayer[tile];
-            if (organism < 2000) {
+            if (organism < countof(DAT_LandscapeState::instance.trees)) {
                 DAT_LandscapeState::instance.trees[organism].state = 3;
             }
         }
         if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
+            this->LogicLayer[tile] |= L_UNKNOWN_WALL_RELATED;
         }
-        this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
+        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (playerID - 1);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
             DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);

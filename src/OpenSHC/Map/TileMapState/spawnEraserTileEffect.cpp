@@ -23,19 +23,19 @@ namespace Map {
     using OpenSHC::Map::Entities::EntityType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9F00
-    void TileMapState::spawnEraserTileEffect(undefined4 param_1, int tile)
+    void TileMapState::spawnEraserTileEffect(undefined4 unused, int tile)
     {
         uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfbff;
+        this->MiscDisplayLayer[tile] &= ~0x400;
         if (this->UnitLayer[tile] != 0) {
             return;
         }
 
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tile);
-        this->LogicLayer[tile] = this->LogicLayer[tile]
-            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+        this->LogicLayer[tile]
+            &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
         int microX
             = (tile
                   - DAT_ViewportRenderState::instance
@@ -45,7 +45,7 @@ namespace Map {
         int microY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8;
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0,
             0, microX, microY, DAT_TileMapState::instance.DefaultHeightLayer[tile], microX + 1, microY + 1,
-            DAT_TileMapState::instance.DefaultHeightLayer[tile], (EntityType)0x1e, 0);
+            DAT_TileMapState::instance.DefaultHeightLayer[tile], (EntityType)30, 0); // EntityType 30 has no name yet
         this->BuildingWasLayer[tile] = 0;
         this->DamageLayer[tile] = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

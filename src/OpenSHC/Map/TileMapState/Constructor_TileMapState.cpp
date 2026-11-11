@@ -9,9 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00515F40
     TileMapState* TileMapState::Constructor_TileMapState()
     {
@@ -29,14 +26,14 @@ namespace Map {
         this->refreshRelatedOne = 1;
         this->disableElevationRendering = 0;
         this->refreshRelatedTwo = 0;
-        this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-        this->forceUpdateTextureTilemap = 1;
-        this->forceUpdateGFXLayers = 1;
+        this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
+        this->forceUpdateTextureTilemap = TRUE;
+        this->forceUpdateGFXLayers = TRUE;
         this->refreshCertainTileMap_old = 4;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
         this->moatTileCount = 0;
         this->skipPlacementCheck = 0;
-        this->gateOrientationVariant = 0x50;
+        this->gateOrientationVariant = 80;
         this->lastTime = timeGetTime();
         this->rockOrientation = 0;
         this->editorRockType = 0;

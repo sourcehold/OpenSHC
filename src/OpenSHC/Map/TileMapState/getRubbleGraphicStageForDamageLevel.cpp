@@ -6,13 +6,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA460
     undefined4 TileMapState::getRubbleGraphicStageForDamageLevel(int rotation)
     {
-        /* the result lives in eax from the start (xor eax, eax), every comparison goes through ecx */
         int result = 0;
         int orientation = this->mapOrientation;
         if (orientation == 0) {
-            if (rotation == 0x50) {
+            if (rotation == 80) {
                 result = 1;
-            } else if (rotation == 0x51) {
+            } else if (rotation == 81) {
                 result = 0;
             } else if (rotation == 1) {
                 result = 2;
@@ -24,9 +23,9 @@ namespace Map {
                 result = 4;
             }
         } else if (orientation == 4) {
-            if (rotation == 0x50) {
+            if (rotation == 80) {
                 result = 1;
-            } else if (rotation == 0x51) {
+            } else if (rotation == 81) {
                 result = 0;
             } else if (rotation == 1) {
                 result = 4;
@@ -38,9 +37,9 @@ namespace Map {
                 result = 2;
             }
         } else if (orientation == 2) {
-            if (rotation == 0x50) {
+            if (rotation == 80) {
                 result = 0;
-            } else if (rotation == 0x51) {
+            } else if (rotation == 81) {
                 result = 1;
             } else if (rotation == 1) {
                 result = 5;
@@ -52,9 +51,9 @@ namespace Map {
                 result = 3;
             }
         } else if (orientation == 6) {
-            if (rotation == 0x50) {
+            if (rotation == 80) {
                 result = 0;
-            } else if (rotation == 0x51) {
+            } else if (rotation == 81) {
                 result = 1;
             } else if (rotation == 1) {
                 result = 3;

@@ -5,79 +5,73 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC650
     int TileMapState::computeWallCornerRenderRotation(uint x)
     {
         int tileUnk = this->DAT_SomeTile;
         int y = this->DAT_SomeY;
         int result = 0;
-        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 2)
-            != FALSE) {
-            if (this->mapOrientation == 0) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 2)) {
+            if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 if ((x & 0xf) == 0xf) {
                     result = 2;
                 } else {
-                    result = 0x11 - (x & 0xf);
+                    result = 17 - (x & 0xf);
                 }
-            } else if (this->mapOrientation == 4) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                 if ((x & 0xf) == 0) {
                     result = 2;
                 } else {
                     result = (x & 0xf) + 2;
                 }
-            } else if (this->mapOrientation == 2) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
                 if ((x & 0xf) == 0) {
                     result = 1;
                 } else {
-                    result = (x & 0xf) + 0x11;
+                    result = (x & 0xf) + 17;
                 }
-            } else if (this->mapOrientation == 6) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                 if ((x & 0xf) == 0xf) {
                     result = 1;
                 } else {
-                    result = 0x20 - (x & 0xf);
+                    result = 32 - (x & 0xf);
                 }
             }
-        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 0)
-            != FALSE) {
-            if (this->mapOrientation == 0) {
+        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(
+                       tileUnk, y, 0)) {
+            if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 if ((y & 0xf) == 0xf) {
                     result = 1;
                 } else {
-                    result = 0x20 - (y & 0xf);
+                    result = 32 - (y & 0xf);
                 }
-            } else if (this->mapOrientation == 4) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                 if ((y & 0xf) == 0) {
                     result = 1;
                 } else {
-                    result = (y & 0xf) + 0x11;
+                    result = (y & 0xf) + 17;
                 }
-            } else if (this->mapOrientation == 6) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                 if ((y & 0xf) == 0) {
                     result = 2;
                 } else {
                     result = (y & 0xf) + 2;
                 }
-            } else if (this->mapOrientation == 2) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
                 if ((y & 0xf) == 0xf) {
                     result = 2;
                 } else {
-                    result = 0x11 - (y & 0xf);
+                    result = 17 - (y & 0xf);
                 }
             }
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                       tileUnk, y, 2)
-            != 0) {
+                       tileUnk, y, 2)) {
             result = 48;
+        } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
+                       tileUnk, y, 4)) {
+            result = 63;
         } else {
-            /* 0x3f when the other direction carries a wall too, 0x21 when it does not */
-            result = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                         tileUnk, y, 4)
-                    != 0
-                ? 0x3f
-                : 0x21;
+            result = 33;
         }
         return result;
     }

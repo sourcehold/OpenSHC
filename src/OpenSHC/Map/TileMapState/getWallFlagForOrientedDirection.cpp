@@ -8,29 +8,29 @@ namespace Map {
     {
         int direction = 0;
         if (twoOrFour == 2) {
-            if (this->mapOrientation == 0) {
+            if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 direction = 2;
-            } else if (this->mapOrientation == 2) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
                 direction = 4;
-            } else if (this->mapOrientation == 4) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                 direction = 6;
-            } else if (this->mapOrientation == 6) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                 direction = 0;
             }
         } else if (twoOrFour == 4) {
-            if (this->mapOrientation == 0) {
+            if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 direction = 4;
-            } else if (this->mapOrientation == 2) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
                 direction = 6;
-            } else if (this->mapOrientation == 4) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                 direction = 0;
-            } else if (this->mapOrientation == 6) {
+            } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                 direction = 2;
             }
         } else {
-            return 0;
+            return FALSE;
         }
-        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & 1;
+        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & TRUE;
     }
 
 }

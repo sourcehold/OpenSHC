@@ -7,7 +7,7 @@ namespace Map {
     int TileMapState::countUnownedPitchDitches()
     {
         int unownedPitchDitches = 0;
-        for (int pitchDitchID = 0; pitchDitchID < 4000; pitchDitchID++) {
+        for (int pitchDitchID = 0; pitchDitchID < countof(this->pitchDitches); pitchDitchID++) {
             if (this->pitchDitches[pitchDitchID].owner == 0) {
                 unownedPitchDitches++;
             }

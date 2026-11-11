@@ -10,24 +10,27 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00506AD0
     void TileMapState::updatePathLinkagesForBuilding(int buildingID)
     {
         int buildingSizeTileIndex = 0;
-        do {
+
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int tileUnk = DAT_ViewportRenderState::instance
-                           .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY]
-                           .addXgetTile
+                              .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY]
+                              .addXgetTile
                 + DAT_BuildingsState::instance.buildings[buildingID].x + this->buildingX;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                DAT_PathFindingState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
+                DAT_PathFindingState::ptr)(
+                DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tileUnk);
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
 
         short buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         if (buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE) {

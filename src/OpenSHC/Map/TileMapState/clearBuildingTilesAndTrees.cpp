@@ -11,8 +11,6 @@
 
 namespace OpenSHC {
 namespace Map {
-    using namespace OpenSHC::Map::LogicHelpers; // L_* flags
-    using OpenSHC::Map::Buildings::Building;
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
@@ -27,12 +25,12 @@ namespace Map {
             int tileUnk = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
             if ((this->LogicLayer[tileUnk] & L_FARM_FIELD_APPLE) != 0) {
                 int treeID = this->OrganismLayer[tileUnk];
-                if (treeID != 0 && treeID < 2000) {
+                if (treeID != 0 && treeID < countof(DAT_LandscapeState::instance.trees)) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(treeID);
                 }
             }
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk]
-                & ~(L_BUILDING | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY);
+            this->LogicLayer[tileUnk]
+                &= ~(L_BUILDING | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY);
             this->DamageLayer[tileUnk] = 0;
             this->BuildingLayer[tileUnk] = 0;
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
@@ -41,7 +39,7 @@ namespace Map {
             this->ChangedLayer[tileUnk] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
-                (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
+                DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk], tileUnk);
         }
     }
 

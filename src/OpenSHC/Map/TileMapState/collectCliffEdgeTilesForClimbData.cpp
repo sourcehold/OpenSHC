@@ -18,7 +18,7 @@ namespace Map {
     void TileMapState::collectCliffEdgeTilesForClimbData()
     {
         this->temporaryTerrainTypeIndex = 0;
-        for (int tile = 0; tile < 80400; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -29,17 +29,17 @@ namespace Map {
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
                 int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const height = this->HeightLayer[tile];
-                for (int index = 0; index < 8; index++) {
+                for (int index = 0; index < countof(DAT_ClimbLogicDefinedData::instance.field_0x2c); index++) {
                     int neighbour
                         = this->directionTranslationMatrix[row][DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
                         + tile;
-                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 0x50) {
+                    if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 80) {
                         this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 0;
                         break;
                     }
                 }
-                this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
-                if ((int)this->temporaryTerrainTypeIndex >= 1000) {
+                this->temporaryTerrainTypeIndex += 1;
+                if (this->temporaryTerrainTypeIndex >= countof(this->temporaryTerrainTypeArray)) {
                     return;
                 }
             }
@@ -48,8 +48,8 @@ namespace Map {
                 || ((this->LogicLayer[tile] & L_SEA) != 0 && (this->Logic2Layer[tile] & L2_PLATEAU_HIGH) != 0)) {
                 this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 1;
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
-                this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
-                if ((int)this->temporaryTerrainTypeIndex >= 1000) {
+                this->temporaryTerrainTypeIndex += 1;
+                if (this->temporaryTerrainTypeIndex >= countof(this->temporaryTerrainTypeArray)) {
                     return;
                 }
             }

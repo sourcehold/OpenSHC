@@ -13,8 +13,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_WHEAT;
 
-    using OpenSHC::Map::Buildings::BuildingLogicalState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8160
     int TileMapState::getNonFarmFieldBuildingHealthAtTileOr1000(int tile)
     {

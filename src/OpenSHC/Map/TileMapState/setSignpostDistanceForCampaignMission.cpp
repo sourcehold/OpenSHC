@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Game::GameMode2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00500BB0
     void TileMapState::setSignpostDistanceForCampaignMission()
     {
@@ -32,7 +30,7 @@ namespace Map {
 
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1
             || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk
-                && (int)DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 >= 2)) {
+                && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 >= 2)) {
             DAT_GameState::instance.mapAndTime.unk_signpostDistance = 7;
         }
     }

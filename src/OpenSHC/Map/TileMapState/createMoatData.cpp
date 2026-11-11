@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -10,15 +11,13 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Game::GameMode2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005110B0
     int TileMapState::createMoatData(undefined4 playerID, uint x, uint y, int filled)
     {
-        if (x > 399 || y > 399) {
+        if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return 0;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
             return 0;
         }
 
@@ -34,7 +33,7 @@ namespace Map {
             return 0;
         }
 
-        for (int moatID = 1; moatID < 16000; moatID++) {
+        for (int moatID = 1; moatID < countof(this->moats); moatID++) {
             if (this->moats[moatID].owner != 0) {
                 continue;
             }
@@ -42,9 +41,9 @@ namespace Map {
             if (moatID >= this->currentMoatCount) {
                 this->currentMoatCount = moatID + 1;
             }
-            this->moats[moatID].owner = (char)playerID;
-            this->moats[moatID].x = (short)x;
-            this->moats[moatID].y = (short)y;
+            this->moats[moatID].owner = playerID;
+            this->moats[moatID].x = x;
+            this->moats[moatID].y = y;
             this->moats[moatID].tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->moats[moatID].zeroOrTwo = 2;
             if (filled != 0) {
@@ -54,7 +53,7 @@ namespace Map {
                 this->moats[moatID].stage = 1;
                 this->moats[moatID].fillProgress = 0;
             }
-            this->moatTileCount = this->moatTileCount + 1;
+            this->moatTileCount += 1;
             return moatID;
         }
         return 0;

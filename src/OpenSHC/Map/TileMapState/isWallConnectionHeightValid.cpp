@@ -8,26 +8,21 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8840
-    BOOLEnum TileMapState::isWallConnectionHeightValid(int tile, int y, int param_3)
+    BOOLEnum TileMapState::isWallConnectionHeightValid(int tile, int y, int direction)
     {
         int tileHeight = this->HeightLayer[tile];
         int firstDirection = 0;
         int secondDirection = 0;
-        if (param_3 == 0) {
+        if (direction == 0) {
             secondDirection = 4;
-        } else if (param_3 == 2) {
+        } else if (direction == 2) {
             firstDirection = 2;
             secondDirection = 6;
-        } else if (param_3 == 4) {
+        } else if (direction == 4) {
             firstDirection = 0;
-            secondDirection = param_3;
-        } else if (param_3 == 6) {
+            secondDirection = direction;
+        } else if (direction == 6) {
             firstDirection = 2;
             secondDirection = 6;
         }
@@ -39,7 +34,7 @@ namespace Map {
         if ((this->LogicLayer[first] & L_STOCKPILEUnk) != 0) {
             return FALSE;
         }
-        int minHeight = tileHeight - 0x10;
+        int minHeight = tileHeight - 16;
         if (this->HeightLayer[first] < minHeight && this->DamageLayer[first] == 0) {
             return FALSE;
         }

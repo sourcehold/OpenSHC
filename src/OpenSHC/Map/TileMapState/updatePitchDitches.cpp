@@ -17,7 +17,7 @@ namespace Map {
     {
         if (DAT_GameState::instance.gameTicksLoadBalancer % 10 == 3) {
             this->maxPitchDitchCount = 0;
-            for (int id = 1; id < 4000; id++) {
+            for (int id = 1; id < countof(this->pitchDitches); id++) {
                 if (this->pitchDitches[id].owner != 0) {
                     this->maxPitchDitchCount = id + 1;
                 }
@@ -32,17 +32,15 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) == 0 || this->pitchDitches[id].state == -1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::destroyPitchDitch, this)(id);
             } else if (this->pitchDitches[id].state == 0) {
-                /* the original increments the state rather than storing the literal */
-                this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
+                this->pitchDitches[id].state += 1;
                 this->pitchDitches[id].field_0x12 = 0;
             } else if (this->pitchDitches[id].state == 2) {
-                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                this->pitchDitches[id].field_0x12 += 1;
                 if (this->pitchDitches[id].field_0x12 == 20) {
-                    this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
+                    this->pitchDitches[id].state += 1;
                     this->pitchDitches[id].field_0x12 = 0;
                     uint height = DAT_TileMapState::instance.HeightLayer[tile];
-                    /* the fire spreads to the four adjacent ditches that are still unlit */
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.field_0x376c); i++) {
                         int neighbour = DAT_ViewportRenderState::instance
                                             .translationMatrix[this->pitchDitches[id].y
                                                 + DAT_TerrainDefinedData::instance.field_0x376c[i].y]
@@ -56,7 +54,7 @@ namespace Map {
                         if (other == 0 || this->pitchDitches[other].state != 1) {
                             continue;
                         }
-                        if (abs((int)(height - DAT_TileMapState::instance.HeightLayer[neighbour])) < 25) {
+                        if (abs(height - DAT_TileMapState::instance.HeightLayer[neighbour]) < 25) {
                             MACRO_CALL(OpenSHC::Map::Entities_Func::SetPlaceOnFire)(this->pitchDitches[other].owner,
                                 this->pitchDitches[other].x * 8, this->pitchDitches[other].y * 8,
                                 DAT_TileMapState::instance.HeightLayer[this->pitchDitches[other].tile], 3);
@@ -65,7 +63,7 @@ namespace Map {
                     }
                 }
             } else if (this->pitchDitches[id].state == 3) {
-                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                this->pitchDitches[id].field_0x12 += 1;
                 if (this->pitchDitches[id].field_0x12 == 200) {
                     DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
                     this->pitchDitches[id].state = -1;

@@ -11,24 +11,28 @@ namespace Map {
     void TileMapState::clearDrawBridgeWater(int x, int y)
     {
         int buildingSizeTileIndex = 0;
-        do {
+
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
             int targetedTile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] & ~L_MOAT;
+            this->LogicLayer[targetedTile] &= ~L_MOAT;
             this->HeightLayer[targetedTile] = 8;
             uint moatID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(targetedTile);
             if (moatID != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatData, this)(moatID);
-                this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] & ~L_MOAT;
+                this->LogicLayer[targetedTile] &= ~L_MOAT;
                 this->BuildingWasLayer[targetedTile] = 0;
             }
             this->BuildingLayer[targetedTile] = 0;
             buildingSizeTileIndex++;
             this->BuildingWasLayer[targetedTile] = 0;
             this->ChangedLayer[targetedTile] = 2;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

@@ -9,15 +9,12 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Units::UnitLogicState;
-    using OpenSHC::Map::Units::UnitType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
-    void TileMapState::triggerLoweredView(int param_1)
+    void TileMapState::triggerLoweredView(int requestedView)
     {
         int view = 2;
         if (this->flatViewToggleValue2 == 0) {
-            view = param_1;
+            view = requestedView;
         }
         if (this->refreshCertainTileMap_old == view) {
             return;
@@ -31,7 +28,7 @@ namespace Map {
             return;
         }
 
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
                 continue;
             }
@@ -52,7 +49,7 @@ namespace Map {
             if (height > 14) {
                 height = 14;
             }
-            DAT_UnitsState::instance.units[unitID].heightDiv10 = (char)height;
+            DAT_UnitsState::instance.units[unitID].heightDiv10 = height;
             DAT_UnitsState::instance.units[unitID].field_0x83 = 0;
         }
     }

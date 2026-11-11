@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -18,16 +17,10 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_CRENEL;
-    using OpenSHC::Map::LogicHelpers::L_CRENEL_VARIATIONUnk;
-    using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F93E0
     void TileMapState::destroyWallsOfPlayer(int playerID)
     {
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 continue;
             }
@@ -37,8 +30,8 @@ namespace Map {
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(
                 tile);
-            this->LogicLayer[tile] = this->LogicLayer[tile]
-                & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+            this->LogicLayer[tile]
+                &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             this->DamageLayer[tile] = 0;
             uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];

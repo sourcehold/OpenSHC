@@ -7,8 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingLogicalState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8210
     uint TileMapState::getBuildingHurtSFXID(int tileUnk)
     {
@@ -17,7 +15,8 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == 0) {
                 return 0;
             }
-            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == OpenSHC::Map::Buildings::BLS_REMOVE) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState
+                == OpenSHC::Map::Buildings::BLS_REMOVE) {
                 return 0;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth == 0) {
