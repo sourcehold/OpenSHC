@@ -22,10 +22,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00508A00
     void TileMapState::renderPreviewMapperWithBrush(uint x, uint y, MappersEnum mapper)
     {
-        if (x > 399) {
-            return;
-        }
-        if (y > 399) {
+        if (x > 399 || y > 399) {
             return;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
@@ -33,7 +30,7 @@ namespace Map {
         }
 
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[this->editorActiveBrush];
-        int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         this->buildingPlacementFail = FALSE;
         if (mapper == OpenSHC::Commands::M_MAPPER_POND1 || mapper == OpenSHC::Commands::M_MAPPER_POND2_SMALL
             || mapper == OpenSHC::Commands::M_MAPPER_POND3_LARGE1
@@ -45,7 +42,7 @@ namespace Map {
             return;
         }
 
-        /* every mapper draws its own preview colour */
+        // every mapper draws its own preview colour
         ushort gfx;
         switch (mapper) {
         case OpenSHC::Commands::M_MAPPER_SEA:
@@ -54,22 +51,22 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_MARSH:
         case OpenSHC::Commands::M_MAPPER_DUGMOAT:
         case OpenSHC::Commands::M_MAPPER_MOAT:
-            gfx = 0x39;
+            gfx = 57;
             break;
         case OpenSHC::Commands::M_MAPPER_BEACH:
         case OpenSHC::Commands::M_MAPPER_FORD:
-            gfx = 0x3a;
+            gfx = 58;
             break;
         case OpenSHC::Commands::M_MAPPER_ROCKY:
         case OpenSHC::Commands::M_MAPPER_STONES:
         case OpenSHC::Commands::M_MAPPER_BOULDERS:
         case OpenSHC::Commands::M_MAPPER_PEBBLES:
         case OpenSHC::Commands::M_MAPPER_IRON:
-            gfx = 0x3b;
+            gfx = 59;
             break;
         case OpenSHC::Commands::M_MAPPER_UNDUGMOAT:
         case OpenSHC::Commands::M_MAPPER_OIL:
-            gfx = 0x3d;
+            gfx = 61;
             break;
         case OpenSHC::Commands::M_MAPPER_CHESTNUT:
         case OpenSHC::Commands::M_MAPPER_OAK:
@@ -95,7 +92,7 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_CAMEL:
         case OpenSHC::Commands::M_MAPPER_CROW_SEAGULL:
         case OpenSHC::Commands::M_MAPPER_SEAGULL:
-            /* a single organism is placed on one tile, whatever the brush size */
+            // a single organism is placed on one tile, whatever the brush size
             brushSize = 1;
         case OpenSHC::Commands::M_MAPPER_RAISE:
         case OpenSHC::Commands::M_MAPPER_LOWER:
@@ -103,15 +100,15 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_MOUNTAIN:
         case OpenSHC::Commands::M_MAPPER_HILL:
         case OpenSHC::Commands::M_MAPPER_DELETE:
-            gfx = 0x3e;
+            gfx = 62;
             break;
         case OpenSHC::Commands::M_MAPPER_SCRUB:
         case OpenSHC::Commands::M_MAPPER_DIRT:
         case OpenSHC::Commands::M_MAPPER_DUNES:
-            gfx = 0x3c;
+            gfx = 60;
             break;
         default:
-            gfx = 0x38;
+            gfx = 56;
         }
 
         switch (mapper) {
@@ -119,47 +116,47 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_DUGMOAT:
         case OpenSHC::Commands::M_MAPPER_MOAT:
         case OpenSHC::Commands::M_MAPPER_ANTIMOAT:
-            /* a moat may not be dug too near an enemy, a signpost, or an opponent's buildings */
+            // a moat may not be dug too near an enemy, a signpost, or an opponent's buildings
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
                 int enemyRange;
                 int searchRange;
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                    enemyRange = 0xf;
+                    enemyRange = 15;
                     searchRange = 7;
                 } else {
-                    enemyRange = 0x1e;
-                    searchRange = 0x1e;
+                    enemyRange = 30;
+                    searchRange = 30;
                 }
                 if (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
                         DAT_GameSynchronyState::instance.currentPlayerSlotID, x, y, enemyRange)
                     != FALSE) {
-                    gfx = 0x3e;
+                    gfx = 62;
                 }
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                         DAT_PathFindingState::ptr)(x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
                     != FALSE) {
-                    gfx = 0x3e;
+                    gfx = 62;
                 }
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                    int buildRange
+                    int const buildRange
                         = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                             DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, x, y,
                             searchRange, -1, -1, buildRange + 5)
                         != 0) {
-                        gfx = 0x3e;
+                        gfx = 62;
                     }
                 }
             }
         }
 
-        /* the brush walk reuses x as the tile it writes back */
+        // the brush walk reuses x as the tile it writes back
         x = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         if (mapper == OpenSHC::Commands::M_MAPPER_DUGMOAT || mapper == OpenSHC::Commands::M_MAPPER_UNDUGMOAT
             || mapper == OpenSHC::Commands::M_MAPPER_MOAT || mapper == OpenSHC::Commands::M_MAPPER_ANTIMOAT) {
-            /* a moat preview always covers the nine tiles around the cursor */
+            // a moat preview always covers the nine tiles around the cursor
             uint brushY = y;
             for (int index = 0; index < 9; index++) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(

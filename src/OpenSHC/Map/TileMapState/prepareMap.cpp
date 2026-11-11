@@ -63,7 +63,7 @@ namespace Map {
             DAT_GameSynchronyState::instance.isHost = TRUE;
             char* name = MACRO_CALL_MEMBER(
                 OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
-            /* the human player's name goes into slot 1 */
+            // the human player's name goes into slot 1
             strcpy(DAT_GameSynchronyState::instance.DAT_PlayerNames[1], name);
             MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::syncAIPlayerNamesAndBuildIntervals, DAT_AIVState::ptr)();
             DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
@@ -78,7 +78,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(this->mapOrientation);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x27420, 0, DAT_TileMapState::instance.WalkLayer);
+            sizeof(DAT_TileMapState::instance.WalkLayer), 0, DAT_TileMapState::instance.WalkLayer);
         DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
         DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
         MACRO_CALL_MEMBER(
@@ -105,36 +105,34 @@ namespace Map {
         this->forceUpdateMacroLayerFlag = 1;
         this->field_0x55487c = 500;
 
-        /* every subsystem gets a chance to migrate what it loaded from an older map format */
+        // every subsystem gets a chance to migrate what it loaded from an older map format
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::upgradeTribeArrayLayoutForMapVersion,
-            DAT_TribesState::ptr)((PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            DAT_TribesState::ptr)((PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::uselessFunction, DAT_TroopValueState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::upgradeMapFormatForUnits, DAT_UnitsState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::upgradeMapFormatLogicLayer, DAT_TileMapState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
-        MACRO_CALL_MEMBER(
-            OpenSHC::Map::Buildings::BuildingsState_Func::upgradeBuildingsForMapVersion, DAT_BuildingsState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
-        MACRO_CALL_MEMBER(
-            OpenSHC::Map::LandscapeState_Func::upgradeTreesAndRocksForMapVersion, DAT_LandscapeState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::upgradeBuildingsForMapVersion,
+            DAT_BuildingsState::ptr)((PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
+        MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::upgradeTreesAndRocksForMapVersion,
+            DAT_LandscapeState::ptr)((PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::upgradeMapTribesState, DAT_TribesState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::migrateGameStateForMapVersion, DAT_GameState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::handleMapVersionUpgrade, DAT_EntityState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            (PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::recountTotalOwnedMoats, this)();
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
@@ -155,9 +153,8 @@ namespace Map {
             OpenSHC::Game::GameStateStructures_Func::initializeGameStateAfterMapLoad, DAT_GameState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::sortEventsByDate, DAT_MapPropertiesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::applyVersionUpgradeAccessibilityRecompute,
-            DAT_BuildingsState::ptr)(
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
-            (PackagedFileMagicNum)(int)FilePackagerObj::instance.packagerMapVersionNumUnk);
+            DAT_BuildingsState::ptr)((PackagedFileMagicNum)FilePackagerObj::instance.versionNumOfCurrentFileTypeUnk,
+            (PackagedFileMagicNum)FilePackagerObj::instance.packagerMapVersionNumUnk);
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updateSeparateAreaTileMap, DAT_PathFindingState::ptr)(1);
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageLayerForAllBuildings,

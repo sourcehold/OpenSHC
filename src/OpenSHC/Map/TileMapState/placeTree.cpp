@@ -39,13 +39,13 @@ namespace Map {
             return;
         }
 
-        int stage = MACRO_CALL_MEMBER(
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const stage = MACRO_CALL_MEMBER(
             OpenSHC::Map::LandscapeState_Func::getValueFrom0UpTo3ForTreeTypeAndTreeStage, DAT_LandscapeState::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
                 DAT_LandscapeState::ptr)((short)treeType),
             3);
-        uint baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[stage];
+        int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[stage];
         if ((this->LogicLayer[baseTile]
                 & (L_SEA | L_PLAIN1_AND_FARM | L_BORDER | L_BORDER_EDGE | L_ROCKY | L_WALL_OR_GATEHOUSE | L_BUILDING
                     | L_TREE_VARIATION | L_BOULDERS | L_PEBBLES | L_IRON | L_RIVER | L_FORD | L_KEEP_NON_MANOR_HOUSE
@@ -54,34 +54,29 @@ namespace Map {
             return;
         }
 
-        uint tile = baseTile;
-        uint brushY = y;
-        int index = 0;
-        if (brushSize > 0) {
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, (int*)&tile, (int*)&brushY, baseTile, y);
-                if ((this->LogicLayer[tile] & L_BORDER) != 0) {
-                    break;
-                }
-                if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_RIVER | L_KEEP_NON_MANOR_HOUSE))
-                    != 0) {
-                    return;
-                }
-                if ((this->LogicLayer[tile] & L_ROCKY) != 0) {
-                    return;
-                }
-                if (this->OrganismLayer[tile] != 0) {
-                    return;
-                }
-                index++;
-            } while (index < brushSize);
+        int tile = baseTile;
+        int brushY = y;
+        for (int index = 0; index < brushSize; index++) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, &brushY, baseTile, y);
+            if ((this->LogicLayer[tile] & L_BORDER) != 0) {
+                break;
+            }
+            if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_RIVER | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+                return;
+            }
+            if ((this->LogicLayer[tile] & L_ROCKY) != 0) {
+                return;
+            }
+            if (this->OrganismLayer[tile] != 0) {
+                return;
+            }
         }
 
         ushort logicalType
             = (ushort)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
                 DAT_LandscapeState::ptr)((short)treeType);
-        int treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
+        int const treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
             x, y, (TreeType)(short)logicalType, stage, 0, 0, 3);
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] &= ~L_ROCKY;
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] |= L_TREE;

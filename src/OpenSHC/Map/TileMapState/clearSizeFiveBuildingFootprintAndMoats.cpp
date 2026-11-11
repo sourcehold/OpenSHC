@@ -15,38 +15,41 @@ namespace Map {
     void TileMapState::clearSizeFiveBuildingFootprintAndMoats(int x, int y)
     {
         int buildingSizeTileIndex = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
-            int targetedTile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            int buildingID = this->BuildingLayer[targetedTile];
-            int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
-            this->LogicLayer[targetedTile] &= ~L_BUILDING;
+            int const buildingID = this->BuildingLayer[tile];
+            int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
+            this->LogicLayer[tile] &= ~L_BUILDING;
             if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation / 2][buildingSizeTileIndex]
                 != 0) {
-                uint moatID
-                    = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(targetedTile);
+                uint const moatID
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(tile);
                 if (moatID != 0) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatData, this)(moatID);
-                        this->LogicLayer[targetedTile] &= ~L_MOAT;
-                        this->Logic2Layer[targetedTile] |= L2_EARTH_AND_STONES;
-                        this->BuildingWasLayer[targetedTile] = 0;
-                        this->HeightLayer[targetedTile] = 8;
+                        this->LogicLayer[tile] &= ~L_MOAT;
+                        this->Logic2Layer[tile] |= L2_EARTH_AND_STONES;
+                        this->BuildingWasLayer[tile] = 0;
+                        this->HeightLayer[tile] = 8;
                     } else {
-                        this->LogicLayer[targetedTile] |= L_MOAT;
+                        this->LogicLayer[tile] |= L_MOAT;
                     }
                 }
             }
-            if ((this->LogicLayer[targetedTile] & L_MOAT) == 0) {
-                this->Logic2Layer[targetedTile] |= L2_EARTH_AND_STONES;
-                this->BuildingWasLayer[targetedTile] = 0;
+            if ((this->LogicLayer[tile] & L_MOAT) == 0) {
+                this->Logic2Layer[tile] |= L2_EARTH_AND_STONES;
+                this->BuildingWasLayer[tile] = 0;
             }
-            this->BuildingLayer[targetedTile] = 0;
+            this->BuildingLayer[tile] = 0;
             buildingSizeTileIndex++;
-            this->ChangedLayer[targetedTile] = 2;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            this->ChangedLayer[tile] = 2;
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

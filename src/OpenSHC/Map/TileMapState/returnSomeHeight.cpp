@@ -15,18 +15,18 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FF990
-    uint TileMapState::returnSomeHeight(int tile, int param_2)
+    uint TileMapState::returnSomeHeight(int tile, int ignoreHuntersHut)
     {
+        uint const logic = this->LogicLayer[tile];
         int extraHeight = 0;
-        if ((this->LogicLayer[tile] & L_KEEP_NON_MANOR_HOUSE) != 0) {
-            return this->HeightLayer[tile]
-                + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+        if ((logic & L_KEEP_NON_MANOR_HOUSE) != 0) {
+            extraHeight
+                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                     DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
-        }
-
-        if ((this->LogicLayer[tile] & L_BUILDING) != 0) {
-            short buildingID = this->BuildingLayer[tile];
-            switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
+        } else if ((logic & L_BUILDING) != 0) {
+            int const buildingID = this->BuildingLayer[tile];
+            int const type = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+            switch (type) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
             case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
             case OpenSHC::Map::Buildings::BT_TOWER:
@@ -35,42 +35,37 @@ namespace Map {
             case OpenSHC::Map::Buildings::BT_TOWER3:
             case OpenSHC::Map::Buildings::BT_TOWER4:
             case OpenSHC::Map::Buildings::BT_TOWER5:
-                return this->HeightLayer[tile]
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
-                        DAT_BuildingsState::ptr)(buildingID)
+                extraHeight
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                          DAT_BuildingsState::ptr)(buildingID)
                     + 10;
+                break;
             case OpenSHC::Map::Buildings::BT_HUNTERSHUT:
-                if (param_2 != 0) {
-                    return this->HeightLayer[tile];
+                if (ignoreHuntersHut != 0) {
+                    extraHeight = 0;
+                    break;
                 }
             default:
-                return this->HeightLayer[tile]
-                    + DAT_BuildingDefinedData::instance
-                          .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType];
+                extraHeight = DAT_BuildingDefinedData::instance.BuildingHeights[type];
+                break;
             case OpenSHC::Map::Buildings::BT_MANORHOUSE:
             case OpenSHC::Map::Buildings::BT_STONEKEEP:
             case OpenSHC::Map::Buildings::BT_STRONGHOLD:
             case OpenSHC::Map::Buildings::BT_KEEPFOUR:
             case OpenSHC::Map::Buildings::BT_KEEPFIVE:
-                return this->HeightLayer[tile]
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                extraHeight
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(buildingID);
+                break;
             }
-        }
-
-        /*
-          OrganismLayer holds tree ids below 2000 and rock ids biased by 2000; Ghidra rendered the
-          rock lookup as an out-of-bounds index into trees[0x636].
-        */
-        if ((this->LogicLayer[tile] & L_ROCKY) != 0 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
+        } else if ((logic & L_ROCKY) != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0) {
             int const organism = this->OrganismLayer[tile];
             if (organism >= 2000) {
-                short rockType = DAT_LandscapeState::instance.rocks[organism - 2000].type;
-                if (rockType >= 0xd) {
-                    return this->HeightLayer[tile] + 0x46;
-                }
-                if (rockType >= 9) {
-                    extraHeight = 0x32;
+                short const rockType = DAT_LandscapeState::instance.rocks[organism - 2000].type;
+                if (rockType >= 13) {
+                    extraHeight = 70;
+                } else if (rockType >= 9) {
+                    extraHeight = 50;
                 }
             }
         }

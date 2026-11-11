@@ -19,8 +19,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00508540
-    void TileMapState::placeStockpile(
-        int playerID, int x, int y, undefined4 buildingType, undefined4 param_5, int variation, int averageHeight)
+    void TileMapState::placeStockpile(int playerID, int x, int y, undefined4 buildingType,
+        undefined4 unusedBuildingSize, int variation, int averageHeight)
     {
         byte wallOwner = (char)playerID - 1;
         int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
@@ -47,7 +47,7 @@ namespace Map {
                           .addXgetTile
                     + DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].x + x + this->buildingX;
                 this->HeightLayer[tile] = height;
-                /* the stockpile body itself cannot be walked over */
+                // the stockpile body itself cannot be walked over
                 this->LogicLayer[tile] = this->LogicLayer[tile] | (L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE | L_BUILDING);
                 this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | wallOwner;
                 this->BuildingLayer[tile] = (ushort)buildingID;
@@ -58,7 +58,7 @@ namespace Map {
         }
 
         this->placedBuildingID = buildingID;
-        /* the surrounding tiles carry the stockpile graphic but stay walkable */
+        // the surrounding tiles carry the stockpile graphic but stay walkable
         for (int slot = 0; slot != 9; slot++) {
             int tile = DAT_ViewportRenderState::instance
                            .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y]

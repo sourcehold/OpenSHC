@@ -32,14 +32,16 @@ namespace Map {
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, buildingWidthOrHeight);
-            uint tileY = y + this->buildingY;
-            if (x + this->buildingX > 399 || tileY > 399) {
+            uint const tileY = y + this->buildingY;
+            uint const tileX = x + this->buildingX;
+            if (tileX > 399 || tileY > 399) {
                 return FALSE;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + x + this->buildingX] == 0) {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
                 return FALSE;
             }
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+            int const tile
+                = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return FALSE;
             }
@@ -51,12 +53,12 @@ namespace Map {
             index++;
         } while (index < this->constructionTileCount);
 
-        /* the original walks the footprint again through the command parameter */
+        // the original walks the footprint again through the command parameter
         commandBuildingType = OpenSHC::Commands::M_MAPPER_NULL;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 commandBuildingType, buildingWidthOrHeight);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             int buildingID = DAT_TileMapState::instance.BuildingLayer[tile];
             if (buildingID != 0) {
@@ -85,7 +87,8 @@ namespace Map {
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x32c, 0, DAT_BuildingsState::instance.buildings + buildingID);
+                        sizeof(DAT_BuildingsState::instance.buildings[buildingID]), 0,
+                        &DAT_BuildingsState::instance.buildings[buildingID]);
                     result = TRUE;
                 }
             } else if ((DAT_TileMapState::instance.LogicLayer[tile] & L_FARM_FIELD_APPLE) != 0) {
@@ -94,19 +97,23 @@ namespace Map {
                 if (buildingID != 0) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
-                        DAT_BuildingsState::ptr)(buildingID, playerID, 0x32);
+                        DAT_BuildingsState::ptr)(buildingID, playerID, 50);
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearBuildingFromTerrain, DAT_TileMapState::ptr)(
                         buildingID);
                     MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x32c, 0, DAT_BuildingsState::instance.buildings + buildingID);
+                        sizeof(DAT_BuildingsState::instance.buildings[buildingID]), 0,
+                        &DAT_BuildingsState::instance.buildings[buildingID]);
                     result = TRUE;
                 }
             }
-            commandBuildingType = (MappersEnum)(commandBuildingType + OpenSHC::Commands::M_MAPPER_AREA);
-        } while ((int)commandBuildingType < this->constructionTileCount);
+            commandBuildingType = (MappersEnum)(commandBuildingType + 1);
+            if ((int)commandBuildingType >= this->constructionTileCount) {
+                break;
+            }
+        }
         return result;
     }
 

@@ -26,6 +26,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_MOAT;
     using OpenSHC::Map::LogicHelpers::L_PLAIN1_AND_FARM;
     using OpenSHC::Map::LogicHelpers::L_RIVER;
+    using OpenSHC::Map::LogicHelpers::L_ROCKY;
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
@@ -44,29 +45,43 @@ namespace Map {
         int enemyRange;
         int searchRange;
         if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-            enemyRange = 0xf;
+            enemyRange = 15;
             searchRange = 7;
         } else {
-            enemyRange = 0x1e;
-            searchRange = 0x1e;
+            enemyRange = 30;
+            searchRange = 30;
         }
         this->buildingPlacementFail = FALSE;
         this->illegalBuild = TRUE;
         this->field_0x554920 = 0;
-        if (x1 > 399 || y1 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
+        if (x1 > 399 || y1 > 399) {
             this->buildingPlacementFail = TRUE;
             return;
         }
-        if (x2 > 399 || y2 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == 0) {
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == 0) {
+            this->buildingPlacementFail = TRUE;
+            return;
+        }
+        if (x2 > 399) {
+            this->buildingPlacementFail = TRUE;
+            return;
+        }
+        if (y2 > 399) {
+            this->buildingPlacementFail = TRUE;
+            return;
+        }
+        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == 0) {
             this->buildingPlacementFail = TRUE;
             return;
         }
 
+        uint x = x1;
+        uint y = y1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
         this->DAT_SomeTile = *translation + x1;
         this->DAT_SomeY = y1;
-        if ((short)command == 0x1b) {
-            /* a stair needs an enclosed wall to lean against, and enough height on it */
+        if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR) {
+            // a stair needs an enclosed wall to lean against, and enough height on it
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWallsOrGates, this)(
                     this->DAT_SomeTile, y1)
                 == FALSE) {
@@ -75,15 +90,15 @@ namespace Map {
             int const height = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getMaxWallHeightInBrushArea, this)(
                 this->DAT_SomeTile, y1);
             this->maxWallHeightInPath = height;
-            if (height <= 0x10) {
+            if (height <= 16) {
                 return;
             }
             budget = height;
             overshoot = 2;
-        } else if ((short)command == 0x1a
+        } else if ((short)command == OpenSHC::Commands::M_MAPPER_CRENAL
             && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(this->DAT_SomeTile, y1)
-                == 0) {
-            this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
+                == FALSE) {
+            this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
             return;
         }
 
@@ -92,11 +107,9 @@ namespace Map {
         int downY = y2 - y1;
         int rightX = x2 - x1;
         this->field_0x554920 = 1;
-        uint y = y1;
-        uint x = x1;
         do {
             int const tile = *translation + x;
-            uint logic = this->LogicLayer[tile];
+            uint const logic = this->LogicLayer[tile];
             if ((logic & (L_PLAIN1_AND_FARM | L_BORDER)) != 0) {
                 return;
             }
@@ -109,22 +122,22 @@ namespace Map {
             if ((logic & (L_TREE | L_TREE_VARIATION)) != 0) {
                 int const organism = this->OrganismLayer[tile];
                 if (organism != 0 && organism < 2000) {
-                    /* scrub can be built through, a real tree cannot */
+                    // scrub can be built through, a real tree cannot
                     switch (DAT_LandscapeState::instance.trees[organism].treeType) {
-                    case (TreeType)5:
-                    case (TreeType)6:
-                    case (TreeType)7:
-                    case (TreeType)8:
-                    case (TreeType)9:
-                    case (TreeType)0xa:
-                    case (TreeType)0xb:
-                    case (TreeType)0xc:
-                    case (TreeType)0xd:
-                    case (TreeType)0xe:
-                    case (TreeType)0x10:
-                    case (TreeType)0x11:
-                    case (TreeType)0x12:
-                    case (TreeType)0x13:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_5:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_6:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_7:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_8:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_9:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_10:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_11:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_12:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_13:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_14:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_16:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_17:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_18:
+                    case OpenSHC::Map::Trees::TT_UNKNOWN_19:
                         break;
                     default:
                         return;
@@ -134,7 +147,7 @@ namespace Map {
             if ((logic & (L_RIVER | L_FORD)) != 0) {
                 return;
             }
-            if ((logic & 0x80) != 0) {
+            if ((logic & L_ROCKY) != 0) {
                 return;
             }
             if (this->UnitLayer[tile] != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0
@@ -147,17 +160,17 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                        DAT_PathFindingState::ptr)(playerID, x, y, enemyRange)
                     != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
+                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
                 return;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                         DAT_PathFindingState::ptr)(playerID, x, y, searchRange, -1, -1, -1)
-                    != 0) {
-                    if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)0x12) {
+                    != FALSE) {
+                    if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)18) {
                         return;
                     }
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
+                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
                     return;
                 }
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
@@ -165,11 +178,11 @@ namespace Map {
                         = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
                             DAT_PathFindingState::ptr)(playerID, x, y, buildRange)
-                        != 0) {
-                        if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)0x12) {
+                        != FALSE) {
+                        if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)18) {
                             return;
                         }
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
+                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
                         return;
                     }
                 }
@@ -177,29 +190,29 @@ namespace Map {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                        DAT_PathFindingState::ptr)(playerID, x, y, 7, -1, -1, -1)
-                    != 0) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
+                    != FALSE) {
+                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
                     DAT_PathFindingState::ptr)(playerID, x, y, 2)
-                != 0) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x11;
+                != FALSE) {
+                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                     DAT_PathFindingState::ptr)(x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
                 != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x15;
+                this->buildingPlacementFailReason = (BuildingFailReasonEnum)21;
                 return;
             }
-            if ((short)command == 0x1a) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y) == 0) {
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x13;
+            if ((short)command == OpenSHC::Commands::M_MAPPER_CRENAL) {
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y) == FALSE) {
+                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
                     return;
                 }
-            } else if ((short)command == 0x1b
-                && (budget <= 0x10 || (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0)) {
+            } else if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR
+                && (budget <= 16 || (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0)) {
                 break;
             }
 
@@ -211,7 +224,7 @@ namespace Map {
             if ((int)y < (int)y2) {
                 stepY = downY;
             }
-            if ((short)command == 0x1b) {
+            if ((short)command == OpenSHC::Commands::M_MAPPER_STAIR) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
                         leftX -= 1;
@@ -266,8 +279,8 @@ namespace Map {
                     overshoot -= 1;
                 }
             }
-            if (budget > 0x10) {
-                budget -= 0x10;
+            if (budget > 16) {
+                budget -= 16;
             }
         } while (x != x2 || y != y2 || overshoot != 0);
         this->illegalBuild = FALSE;

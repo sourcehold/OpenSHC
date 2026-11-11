@@ -15,69 +15,62 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB9E0
     void TileMapState::renderWallPlacementPreview(uint x, uint y, short kind)
     {
-        int index = 0;
         int base = 0;
         int size = 0;
-        if (x > 399) {
-            return;
-        }
-        if (y > 399) {
-            return;
-        }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        int index = 0;
+        if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
             return;
         }
         this->buildingPlacementFail = FALSE;
-        /* every wall kind has its own footprint size and first graphic */
+        // every wall kind has its own footprint size and first graphic
         if (kind == 0) {
             size = 1;
-            base = 0x211;
+            base = 529;
         } else if (kind == 1) {
             size = 1;
-            base = 0x215;
+            base = 533;
         } else if (kind == 2) {
             size = 1;
-            base = 0x219;
+            base = 537;
         } else if (kind == 3) {
             size = 1;
-            base = 0x21d;
+            base = 541;
         } else if (kind == 4) {
             size = 2;
-            base = 0x1d1;
+            base = 465;
         } else if (kind == 5) {
             size = 2;
-            base = 0x1e1;
+            base = 481;
         } else if (kind == 6) {
             size = 2;
-            base = 0x1f1;
+            base = 497;
         } else if (kind == 7) {
             size = 2;
-            base = 0x201;
+            base = 513;
         } else if (kind == 8) {
             size = 3;
-            base = 0x141;
+            base = 321;
         } else if (kind == 9) {
             size = 3;
-            base = 0x165;
-        } else if (kind == 0xa) {
+            base = 357;
+        } else if (kind == 10) {
             size = 3;
-            base = 0x189;
-        } else if (kind == 0xb) {
+            base = 393;
+        } else if (kind == 11) {
             size = 3;
-            base = 0x1ad;
-        } else {
-            if (kind == 0xc) {
-                base = 0x41;
-            } else if (kind == 0xd) {
-                base = 0x81;
-            } else if (kind == 0xe) {
-                base = 0xc1;
-            } else if (kind == 0xf) {
-                base = 0x101;
-            }
-            if (base != 0) {
-                size = 4;
-            }
+            base = 429;
+        } else if (kind == 12) {
+            base = 65;
+            size = 4;
+        } else if (kind == 13) {
+            base = 129;
+            size = 4;
+        } else if (kind == 14) {
+            base = 193;
+            size = 4;
+        } else if (kind == 15) {
+            base = 257;
+            size = 4;
         }
 
         int rotation = this->rockOrientation + this->mapOrientation;
@@ -87,14 +80,14 @@ namespace Map {
         if (rotation >= 8) {
             rotation -= 8;
         }
-        /* the rotation part of the graphic index does not change over the footprint */
+        // the rotation part of the graphic index does not change over the footprint
         int variationStep = rotation / 2 * size * size;
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            uint logic = this->LogicLayer[tile];
+            uint const logic = this->LogicLayer[tile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return;
             }
@@ -108,14 +101,17 @@ namespace Map {
         } while (index < this->constructionTileCount);
 
         index = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
-                + this->buildingX + x] = (short)this->buildingRotationRelatedValue
-                + (short)GMFirstPictureIndex::instance[0x38] + (short)variationStep + (short)base - 1;
+                + this->buildingX + x]
+                = this->buildingRotationRelatedValue + GMFirstPictureIndex::instance[56] + variationStep + base - 1;
             index++;
-        } while (index < this->constructionTileCount);
+            if (index >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

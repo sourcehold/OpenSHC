@@ -23,20 +23,19 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00502110
-    void TileMapState::useLevelBrush(int tile, uint y, uint brush, int param_4)
+    void TileMapState::useLevelBrush(int tile, uint y, uint brush, int unused)
     {
-        int baseTile = tile;
-        int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        uint baseY = y;
-
+        int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
         int highest = 0;
-        /* the original reuses the brush parameter to hold the lowest height seen */
+        // the original reuses the brush parameter to hold the lowest height seen
         brush = 200;
+        int const baseTile = tile;
+        uint const baseY = y;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
-                int height = this->HeightLayer[tile];
+                int const height = this->HeightLayer[tile];
                 if (height > highest) {
                     highest = height;
                 }
@@ -46,14 +45,14 @@ namespace Map {
             }
         }
 
-        int average = (int)(brush + highest) / 2;
+        int const average = (int)(brush + highest) / 2;
         tile = baseTile;
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
-            int brushTile = tile;
-            uint logic = this->LogicLayer[brushTile];
+            int const brushTile = *(int volatile*)&tile;
+            uint const logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -75,33 +74,27 @@ namespace Map {
                 this->HeightLayer[brushTile] += 8;
             }
             this->LogicLayer[brushTile] &= ~L_ROCKY;
-            /* the tile moves a tenth of the way towards the brush average, plus one */
-            byte levelled;
-            bool levelChanged = true;
-            if ((int)(uint)this->HeightLayer[brushTile] < average) {
-                levelled = (char)((average - (int)(uint)this->HeightLayer[brushTile]) / 10)
-                    + this->HeightLayer[brushTile] + 1;
-            } else if ((int)(uint)this->HeightLayer[brushTile] > average) {
-                levelled = this->HeightLayer[brushTile]
-                    - (char)(((int)(uint)this->HeightLayer[brushTile] - average) / 10) - 1;
-            } else {
-                levelChanged = false;
-            }
-            if (levelChanged) {
-                this->HeightLayer[brushTile] = levelled;
+            // the tile moves a tenth of the way towards the brush average, plus one
+            if (this->HeightLayer[brushTile] < average) {
+                this->HeightLayer[brushTile]
+                    = (char)((average - this->HeightLayer[brushTile]) / 10) + this->HeightLayer[brushTile] + 1;
+                this->Logic2Layer[brushTile] = 0;
+            } else if (this->HeightLayer[brushTile] > average) {
+                this->HeightLayer[brushTile]
+                    = this->HeightLayer[brushTile] - (char)((this->HeightLayer[brushTile] - average) / 10) - 1;
                 this->Logic2Layer[brushTile] = 0;
             }
             if (this->HeightLayer[brushTile] < 8) {
                 this->HeightLayer[brushTile] = 8;
             }
-            if (this->HeightLayer[brushTile] > 0x9c) {
-                this->HeightLayer[brushTile] = 0x9c;
+            if (this->HeightLayer[brushTile] > 156) {
+                this->HeightLayer[brushTile] = 156;
             }
             this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }
-            uint brushY = y;
+            uint const brushY = *(uint volatile*)&y;
             this->DAT_SomeTile = brushTile;
             this->DAT_SomeY = brushY;
 

@@ -12,10 +12,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFF10
     uint TileMapState::getHeightAtTileIncludingOwnersBuildings(int tile, int playerID)
     {
-        /*
-          The early layer reads go through the global instance's absolute address, while the
-          BuildingLayer reads inside the switch arms go through this; follow each one separately.
-        */
+        // The early layer reads go through the global instance's absolute address, while the
+        // BuildingLayer reads inside the switch arms go through this; follow each one separately.
         if (DAT_TileMapState::instance.PathConnectionLayer[tile] == 0) {
             return 0;
         }
@@ -30,11 +28,10 @@ namespace Map {
             return DAT_TileMapState::instance.HeightLayer[tile];
         }
 
-        short buildingID = DAT_TileMapState::instance.BuildingLayer[tile];
-        if (buildingID == 0) {
+        if (DAT_TileMapState::instance.BuildingLayer[tile] == 0) {
             return 0;
         }
-        int const building = buildingID;
+        int const building = DAT_TileMapState::instance.BuildingLayer[tile];
         if (playerID != 0 && DAT_BuildingsState::instance.buildings[building].owner != playerID) {
             return 0;
         }
@@ -50,45 +47,41 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_TOWER4:
         case OpenSHC::Map::Buildings::BT_TOWER5:
             for (int direction = 0; direction < 8; direction++) {
-                if ((short)this->BuildingLayer[DAT_TileMapState::instance
-                                                   .directionTranslationMatrix[DAT_ViewportRenderState::instance
-                                                           .tileTranslationMatrix_YComponent[tile]][direction]
+                if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[DAT_ViewportRenderState::
+                                                instance.tileTranslationMatrix_YComponent[tile]][direction]
                         + tile]
                     != building) {
                     return 0;
                 }
             }
-            return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
+            break;
         case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
         case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL: {
-            /* the second direction is set in each arm, as in the original */
             int firstDirection;
             int secondDirection;
-            if (DAT_BuildingsState::instance.buildings[building].buildingVariation == 0x50) {
+            if (DAT_BuildingsState::instance.buildings[building].buildingVariation == 80) {
                 firstDirection = 2;
-                secondDirection = firstDirection + 4;
+                secondDirection = 6;
             } else {
                 firstDirection = 0;
-                secondDirection = firstDirection + 4;
+                secondDirection = 4;
             }
-            if ((short)this->BuildingLayer[DAT_TileMapState::instance
-                                               .directionTranslationMatrix[DAT_ViewportRenderState::instance
-                                                       .tileTranslationMatrix_YComponent[tile]][firstDirection]
+            int const tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[tileY][firstDirection] + tile]
+                != building) {
+                return 0;
+            }
+            if (this->BuildingLayer[DAT_TileMapState::instance.directionTranslationMatrix[tileY][secondDirection]
                     + tile]
                 != building) {
                 return 0;
             }
-            if ((short)this->BuildingLayer[DAT_TileMapState::instance
-                                               .directionTranslationMatrix[DAT_ViewportRenderState::instance
-                                                       .tileTranslationMatrix_YComponent[tile]][secondDirection]
-                    + tile]
-                != building) {
-                return 0;
-            }
-            return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
+            break;
         }
+        default:
+            return 0;
         }
-        return 0;
+        return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
     }
 
 }

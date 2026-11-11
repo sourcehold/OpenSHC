@@ -14,12 +14,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC280
     void TileMapState::propagateCliffEdgeFlagFromNeighbor(int tile, int x, int y)
     {
-        int height = this->HeightLayer[tile];
+        int const height = this->HeightLayer[tile];
         if (this->Logic2Layer[tile] != 0) {
             return;
         }
 
-        for (int index = 0; index < 8; index++) {
+        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.field_0x372c); index++) {
             int const offsetX = DAT_TerrainDefinedData::instance.field_0x372c[index].x;
             uint neighbourY = DAT_TerrainDefinedData::instance.field_0x372c[index].y + y;
             uint neighbourX = offsetX + x;

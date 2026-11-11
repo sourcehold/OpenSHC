@@ -16,36 +16,39 @@ namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00514DE0
     void TileMapState::placeDrawbridge(
-        int playerID, uint x, uint y, undefined4 buildingType, uint total, int orientation, undefined4 averageHeight)
+        int playerID, uint x, uint y, undefined4 buildingType, uint width, int orientation, undefined4 averageHeight)
     {
-        int tileIndex = 0;
+        int index = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, averageHeight, (BuildingType)(int)(short)buildingType, total, playerID, orientation);
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, width, playerID, orientation);
         int rot = orientation / 2;
         this->placedBuildingID = buildingID;
-        do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, total);
-            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+        while (true) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, width);
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            DAT_BuildingsState::instance.buildings[buildingID].tileRefs[tileIndex] = tileUnk;
-            this->BuildingLayer[tileUnk] = (short)buildingID;
-            this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
-            this->ChangedLayer[tileUnk] = 2;
-            if (DAT_TerrainDefinedData::instance.DrawbridgeTileMoatProperty[tileIndex] != 0) {
-                this->LogicLayer[tileUnk] |= L_BUILDING;
+            DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
+            this->BuildingLayer[tile] = (short)buildingID;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->ChangedLayer[tile] = 2;
+            if (DAT_TerrainDefinedData::instance.DrawbridgeTileMoatProperty[index] != 0) {
+                this->LogicLayer[tile] |= L_BUILDING;
             }
-            if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[rot][tileIndex] != 0) {
+            if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[rot][index] != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
                     playerID, this->buildingX + x, this->buildingY + y, 1);
-                this->LogicLayer[tileUnk] &= ~L_MOAT;
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(tileUnk, 0);
-                this->HeightLayer[tileUnk] = 0;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(tile, 0);
+                this->HeightLayer[tile] = 0;
             } else {
-                this->LogicLayer[tileUnk] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_MOAT;
             }
-            tileIndex++;
-        } while (tileIndex < this->constructionTileCount);
+            index++;
+            if (index >= this->constructionTileCount) {
+                break;
+            }
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }

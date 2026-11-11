@@ -16,63 +16,67 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00508030
-    void TileMapState::placeOilsmelter(
-        int playerID, uint x, uint y, undefined4 height, uint sizeIndex, int buildingTypeLike, undefined4 param_7)
+    void TileMapState::placeOilsmelter(int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize,
+        int orientation, undefined4 averageHeight)
     {
-        int uid = DAT_GameCore::instance.uniqueGameObjectTracker;
+        int const uniqueID = DAT_GameCore::instance.uniqueGameObjectTracker;
         int index = 0;
-
-        if (buildingTypeLike == 0xf) {
-            buildingTypeLike = 0;
+        int partIndex;
+        if (orientation == 15) {
+            partIndex = 0;
         } else {
-            buildingTypeLike /= 2;
+            partIndex = orientation / 2;
         }
-
-        /* the id is kept zero-extended for the layer stores and sign-extended for the array index */
-        ushort smelterID = MACRO_CALL_MEMBER(
+        ushort const smelterID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, param_7, (BuildingType)(int)(short)height, sizeIndex, playerID, 0xf);
-        int buildingID = (short)smelterID;
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, buildingSize, playerID, 15);
+        int const buildingID = (short)smelterID;
         this->placedBuildingID = buildingID;
-        DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uid;
-
-        do {
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+        DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
+        while (true) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
+                index, buildingSize);
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->HeightLayer[tile] = (byte)param_7;
+            this->HeightLayer[tile] = (byte)averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
             this->BuildingLayer[tile] = smelterID;
-            index++;
-            this->BuildingWasLayer[tile] = (uchar)height;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
             this->ChangedLayer[tile] = 2;
-        } while (index < this->constructionTileCount);
+            index++;
+            if (index >= this->constructionTileCount) {
+                break;
+            }
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
-        /* the campfire sits at a fixed offset from the smelter, chosen by the smelter's size */
-        x = x + DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].x;
-        y += DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].y;
-        ushort campfire = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
-            DAT_BuildingsState::ptr)(playerID, x, y, param_7, OpenSHC::Map::Buildings::BT_CAMPFIRE, 4, playerID, 0xf);
-        int campfireID = (short)campfire;
-        DAT_BuildingsState::instance.buildings[campfireID].uidWhenPlaced = uid;
+        // the campfire sits at a fixed offset from the smelter, chosen by its orientation
+        x += DAT_TerrainDefinedData::instance.field_0x19c[partIndex].x;
+        y += DAT_TerrainDefinedData::instance.field_0x19c[partIndex].y;
+        ushort const campfire = MACRO_CALL_MEMBER(
+            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
+            playerID, x, y, averageHeight, OpenSHC::Map::Buildings::BT_CAMPFIRE, 4, playerID, 15);
+        int const campfireID = (short)campfire;
+        DAT_BuildingsState::instance.buildings[campfireID].uidWhenPlaced = uniqueID;
         DAT_BuildingsState::instance.buildings[campfireID].quarryStockpileID = (short)this->placedBuildingID;
         DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = campfire;
-
-        index = 0;
-        do {
+        int campIndex = 0;
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                index, DAT_BuildingsState::instance.buildings[campfireID].widthOrHeight);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                campIndex, DAT_BuildingsState::instance.buildings[campfireID].widthOrHeight);
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->HeightLayer[tile] = (byte)param_7;
+            this->HeightLayer[tile] = (byte)averageHeight;
             this->BuildingLayer[tile] = campfire;
-            index++;
-            this->BuildingWasLayer[tile] = (uchar)height;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
             this->ChangedLayer[tile] = 2;
-        } while (index < this->constructionTileCount);
+            campIndex++;
+            if (campIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setTileRefsForOilSmelter,
             DAT_BuildingsState::ptr)(campfireID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(campfireID);

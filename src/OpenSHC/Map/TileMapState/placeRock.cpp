@@ -31,69 +31,67 @@ namespace Map {
     {
         int rockType = 0;
         int size = 1;
-        if (x > 399) {
-            return;
-        }
-        if (y > 399) {
+        if (x > 399 || y > 399) {
             return;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
             return;
         }
-        /* every rock kind has its own footprint size and rock type */
-        if ((short)kind == 0) {
+        // every rock kind has its own footprint size and rock type
+        short const rockKind = kind;
+        if (rockKind == 0) {
             rockType = 1;
-        } else if ((short)kind == 1) {
+        } else if (rockKind == 1) {
             rockType = 2;
-        } else if ((short)kind == 2) {
+        } else if (rockKind == 2) {
             rockType = 3;
-        } else if ((short)kind == 3) {
+        } else if (rockKind == 3) {
             rockType = 4;
-        } else if ((short)kind == 4) {
+        } else if (rockKind == 4) {
             size = 2;
             rockType = 5;
-        } else if ((short)kind == 5) {
+        } else if (rockKind == 5) {
             size = 2;
             rockType = 6;
-        } else if ((short)kind == 6) {
+        } else if (rockKind == 6) {
             size = 2;
             rockType = 7;
-        } else if ((short)kind == 7) {
+        } else if (rockKind == 7) {
             size = 2;
             rockType = 8;
-        } else if ((short)kind == 8) {
+        } else if (rockKind == 8) {
             size = 3;
             rockType = 9;
-        } else if ((short)kind == 9) {
+        } else if (rockKind == 9) {
             size = 3;
-            rockType = 0xa;
-        } else if ((short)kind == 0xa) {
+            rockType = 10;
+        } else if (rockKind == 10) {
             size = 3;
-            rockType = 0xb;
-        } else if ((short)kind == 0xb) {
+            rockType = 11;
+        } else if (rockKind == 11) {
             size = 3;
-            rockType = 0xc;
-        } else if ((short)kind == 0xc) {
-            rockType = 0xd;
+            rockType = 12;
+        } else if (rockKind == 12) {
+            rockType = 13;
             size = 4;
-        } else if ((short)kind == 0xd) {
-            rockType = 0xe;
+        } else if (rockKind == 13) {
+            rockType = 14;
             size = 4;
-        } else if ((short)kind == 0xe) {
-            rockType = 0xf;
+        } else if (rockKind == 14) {
+            rockType = 15;
             size = 4;
-        } else if ((short)kind == 0xf) {
-            rockType = 0x10;
+        } else if (rockKind == 15) {
+            rockType = 16;
             size = 4;
         }
 
-        /* the original reuses the kind parameter to hold the lowest height under the footprint */
+        // the original reuses the kind parameter to hold the lowest height under the footprint
         kind = 1000;
         int highest = 0;
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return;
@@ -113,24 +111,24 @@ namespace Map {
             index++;
         } while (index < this->constructionTileCount);
 
-        int height = (int)(highest - kind) / 2 + kind;
-        int rockID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createRock, DAT_LandscapeState::ptr)(
+        int const height = (int)(highest - kind) / 2 + kind;
+        int const rockID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createRock, DAT_LandscapeState::ptr)(
             x, y, rockType, size, this->rockOrientation);
-        /* ... and again for the organism id the rock is stamped with */
+        // ... and again for the organism id the rock is stamped with
         kind = rockID + 2000;
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             index++;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->HeightLayer[tile] = (byte)height;
-            this->DefaultHeightLayer[tile] = (byte)height;
+            this->HeightLayer[tile] = height;
+            this->DefaultHeightLayer[tile] = height;
             this->LogicLayer[tile] &= ~(L_SEA | L_PLAIN2_AND_PITCH | L_UNNAMED_0x40 | L_BOULDERS | L_PEBBLES | L_IRON
                 | L_RIVER | L_FORD | L_MARSH | L_MOAT | L_OIL);
             this->Logic2Layer[tile] = 0;
             this->LogicLayer[tile] |= L_ROCKY;
-            this->OrganismLayer[tile] = (short)kind;
+            this->OrganismLayer[tile] = kind;
         } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(9, x, y);

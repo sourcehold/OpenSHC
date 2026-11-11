@@ -10,14 +10,11 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
 
-    using OpenSHC::Map::LogicHelpers::L_BUILDING;
-    using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00507280
     void TileMapState::upgradeTowerLogicLayer(int buildingID)
     {
         int buildingSizeTileIndex = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int tile = DAT_ViewportRenderState::instance
@@ -43,7 +40,10 @@ namespace Map {
             }
             buildingSizeTileIndex++;
             this->LogicLayer[tile] = logic;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }
 

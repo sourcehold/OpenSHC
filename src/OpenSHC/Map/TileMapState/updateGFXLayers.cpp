@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -24,6 +25,9 @@
 #define NEIGHBOUR_FLAGS_MASK_L2_BEACH 0x20 // L2_BEACH
 #define NEIGHBOUR_FLAGS_MASK_L2_STONES 0x40 // L2_STONES_OR_DRIVEN_SANDUnk
 
+// the three macro-tile offset tables are one int[3][4][16] array, one table per macro size 4, 8 and 16
+#define MACRO_TILE_OFFSETS (*(int (*)[3][4][16]) & DAT_TerrainDefinedData::instance.field_0x1a54)
+
 #pragma optimize("", off)
 
 namespace OpenSHC {
@@ -43,23 +47,19 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC9E0
     void TileMapState::updateGFXLayers()
     {
-        /*
-          Contains the handwritten neighbour-flag macro nine times (see NeighbourFlagsGlobalAsm.hpp), which
-          is why the surrounding code is unoptimised: MSVC disables optimisation in a function holding
-          inline asm, so every field access reloads this from the frame.
-
-          One store below is dead in this function but present in the original, because the body is
-          shared with updateMacroLayerRelated: "elevation" is read from HeightLayer and never used.
-        */
-        /*
-          The locals are declared here because the original was built without optimisation: its
-          stack slots are observable and MSVC assigns them per function, not per scope. Declaring
-          them at first use instead costs ~12 points of match (52.6% vs 64.5%).
-          At /Od MSVC lays the locals out by a hash of their NAME (16 buckets, walked in order;
-          inside one bucket the later declaration gets the higher slot), not by declaration order.
-          The names and their order below were chosen so the slots land where the original has them
-          (rotation at ebp-4 down to the gfx bases at ebp-0x4c); renaming any of them moves the slots.
-        */
+        // Contains the handwritten neighbour-flag macro nine times (see NeighbourFlagsGlobalAsm.hpp), which
+        // is why the surrounding code is unoptimised: MSVC disables optimisation in a function holding
+        // inline asm, so every field access reloads this from the frame.
+        //
+        // One store below is dead in this function but present in the original, because the body is
+        // shared with updateMacroLayerRelated: "elevation" is read from HeightLayer and never used.
+        // The locals are declared here because the original was built without optimisation: its
+        // stack slots are observable and MSVC assigns them per function, not per scope. Declaring
+        // them at first use instead costs ~12 points of match (52.6% vs 64.5%).
+        // At /Od MSVC lays the locals out by a hash of their NAME (16 buckets, walked in order;
+        // inside one bucket the later declaration gets the higher slot), not by declaration order.
+        // The names and their order below were chosen so the slots land where the original has them
+        // (rotation at ebp-4 down to the gfx bases at ebp-0x4c); renaming any of them moves the slots.
         int rotation;
         int sectorColumn;
         int partIndex;
@@ -83,7 +83,7 @@ namespace Map {
         if (this->forceUpdateGFXLayers <= 0) {
             return;
         }
-        this->forceUpdateGFXLayers -= 1;
+        this->forceUpdateGFXLayers--;
 
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::getYSmallerThanYLimit,
                 &DAT_PathFindingState::instance)()
@@ -123,83 +123,82 @@ namespace Map {
                             macroMid = (this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
                             macroTop = (this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
                             macroTop &= 3;
-                            /* the mask makes MSVC load the dword before the address, as the original does */
                             this->PillarGFXLayer[this->DAT_SomeTile]
-                                = (ushort)(GMFirstPictureIndex::instance[9] & 0xffff);
+                                = *(int volatile*)&GMFirstPictureIndex::instance[9];
 
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_MARSH) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(1, NEIGHBOUR_FLAGS_MASK_MARSH)
                                 edgeBase = 1;
                                 cornerFrame = 3;
-                                flatFrame = 0x15;
-                                lowGfx = 0x21;
-                                macroBase = 0x25;
+                                flatFrame = 21;
+                                lowGfx = 33;
+                                macroBase = 37;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
                                 elevation = this->HeightLayer[this->DAT_SomeTile];
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
-                                edgeBase = 0x99;
-                                cornerFrame = 0x9b;
-                                flatFrame = 0xad;
-                                lowGfx = 0xb9;
-                                macroBase = 0xbd;
+                                edgeBase = 153;
+                                cornerFrame = 155;
+                                flatFrame = 173;
+                                lowGfx = 185;
+                                macroBase = 189;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
-                                edgeBase = 0x1c9;
-                                cornerFrame = 0x1cb;
-                                flatFrame = 0x1dd;
-                                lowGfx = 0x1e9;
-                                macroBase = 0x1ed;
+                                edgeBase = 457;
+                                cornerFrame = 459;
+                                flatFrame = 477;
+                                lowGfx = 489;
+                                macroBase = 493;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk)
                                 != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
-                                edgeBase = 0x261;
-                                cornerFrame = 0x263;
-                                flatFrame = 0x275;
-                                lowGfx = 0x281;
-                                macroBase = 0x285;
+                                edgeBase = 609;
+                                cornerFrame = 611;
+                                flatFrame = 629;
+                                lowGfx = 641;
+                                macroBase = 645;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
-                                edgeBase = 0x2f9;
-                                cornerFrame = 0x2fb;
-                                flatFrame = 0x30d;
-                                lowGfx = 0x319;
-                                macroBase = 0x31d;
+                                edgeBase = 761;
+                                cornerFrame = 763;
+                                flatFrame = 781;
+                                lowGfx = 793;
+                                macroBase = 797;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
-                                /* the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is */
+                                // the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
-                                edgeBase = 0x4a9;
-                                cornerFrame = 0x4ab;
-                                flatFrame = 0x4bd;
-                                lowGfx = 0x4c9;
-                                macroBase = 0x4cd;
+                                edgeBase = 1193;
+                                cornerFrame = 1195;
+                                flatFrame = 1213;
+                                lowGfx = 1225;
+                                macroBase = 1229;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
-                                edgeBase = 0x131;
-                                cornerFrame = 0x133;
-                                flatFrame = 0x145;
-                                lowGfx = 0x151;
-                                macroBase = 0x155;
+                                edgeBase = 305;
+                                cornerFrame = 307;
+                                flatFrame = 325;
+                                lowGfx = 337;
+                                macroBase = 341;
                                 perLevel = 4;
                                 drawMode = 2;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
-                                edgeBase = 0x131;
-                                cornerFrame = 0x133;
-                                flatFrame = 0x145;
-                                lowGfx = 0x151;
-                                macroBase = 0x155;
+                                edgeBase = 305;
+                                cornerFrame = 307;
+                                flatFrame = 325;
+                                lowGfx = 337;
+                                macroBase = 341;
                                 perLevel = 4;
                                 drawMode = 2;
                             } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
@@ -207,20 +206,20 @@ namespace Map {
                                 priorBitFlag = this->bitFlag;
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
                                 this->bitFlag = this->bitFlag | priorBitFlag;
-                                edgeBase = 0x391;
-                                cornerFrame = 0x393;
-                                flatFrame = 0x3a5;
-                                lowGfx = 0x3b1;
-                                macroBase = 0x3b5;
+                                edgeBase = 913;
+                                cornerFrame = 915;
+                                flatFrame = 933;
+                                lowGfx = 945;
+                                macroBase = 949;
                                 perLevel = 4;
                                 drawMode = 0;
                             } else {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(11, NEIGHBOUR_FLAGS_MASK_DEFAULT_EARTH)
-                                edgeBase = 0x131;
-                                cornerFrame = 0x133;
-                                flatFrame = 0x145;
-                                lowGfx = 0x151;
-                                macroBase = 0x155;
+                                edgeBase = 305;
+                                cornerFrame = 307;
+                                flatFrame = 325;
+                                lowGfx = 337;
+                                macroBase = 341;
                                 perLevel = 4;
                                 drawMode = 2;
                             }
@@ -228,19 +227,19 @@ namespace Map {
                             if (macroSizeType == 1) {
                                 this->bitFlag = ~this->bitFlag;
                                 this->bitFlag &= 0xaa;
-                                if (this->mapOrientation == 0) {
+                                if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                                     this->bitFlag = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
                                         &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 0);
-                                } else if (this->mapOrientation == 2) {
+                                } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
                                     this->bitFlag = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
                                         &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 2);
-                                } else if (this->mapOrientation == 4) {
+                                } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                                     this->bitFlag = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
                                         &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 4);
-                                } else if (this->mapOrientation == 6) {
+                                } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                                     this->bitFlag = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,
                                         &DAT_DirectionAlgorithmState::instance)(this->bitFlag, 6);
@@ -314,20 +313,17 @@ namespace Map {
                                         + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
                                 }
                             } else if (macroSizeType == 4) {
-                                macroMid
-                                    = DAT_TerrainDefinedData::instance.field_0x1a54[this->mapOrientation / 2][macroMid];
+                                macroMid = MACRO_TILE_OFFSETS[0][this->mapOrientation / 2][macroMid];
                                 this->GfxLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[55] + macroBase + macroMid + macroTop * 4 - 1;
                             } else if (macroSizeType == 8) {
-                                macroMid
-                                    = DAT_TerrainDefinedData::instance.field_0x1b54[this->mapOrientation / 2][macroMid];
+                                macroMid = MACRO_TILE_OFFSETS[1][this->mapOrientation / 2][macroMid];
                                 this->GfxLayer[this->DAT_SomeTile]
-                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 9 + macroMid + 0xf;
-                            } else if (macroSizeType == 0x10) {
-                                macroMid
-                                    = DAT_TerrainDefinedData::instance.field_0x1c54[this->mapOrientation / 2][macroMid];
+                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 9 + macroMid + 15;
+                            } else if (macroSizeType == 16) {
+                                macroMid = MACRO_TILE_OFFSETS[2][this->mapOrientation / 2][macroMid];
                                 this->GfxLayer[this->DAT_SomeTile]
-                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 16 + macroMid + 0x33;
+                                    = GMFirstPictureIndex::instance[55] + macroBase + macroTop * 16 + macroMid + 51;
                             }
                         }
                     }

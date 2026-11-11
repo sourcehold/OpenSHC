@@ -11,14 +11,14 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9590
     void TileMapState::setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize)
     {
-        int tileCount = buildingSize * buildingSize;
+        int const tileCount = buildingSize * buildingSize;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             4056, 0, DAT_BuildingSizeIndexMapping::instance + buildingSize);
         if (buildingSize <= 1) {
             return;
         }
 
-        /* pass 0: the unrotated footprint, in reading order */
+        // pass 0: the unrotated footprint, in reading order
         for (int y = 0; y < buildingSize; y++) {
             for (int x = 0; x < buildingSize; x++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][0] = x;
@@ -26,8 +26,8 @@ namespace Map {
             }
         }
 
-        /* passes 1 to 4: the same tiles walked diagonally, one pass per rotation */
-        int last = tileCount - 1;
+        // passes 1 to 4: the same tiles walked diagonally, one pass per rotation
+        int const last = tileCount - 1;
         int x = 0;
         int y = 0;
         int run = 1;
@@ -43,8 +43,8 @@ namespace Map {
             }
             if (diagonal < buildingSize - 1) {
                 run++;
-                x = diagonal + 1;
                 y = 0;
+                x = diagonal + 1;
             } else {
                 run--;
                 x = buildingSize - 1;

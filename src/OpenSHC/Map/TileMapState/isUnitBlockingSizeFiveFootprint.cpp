@@ -12,14 +12,15 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAEE0
     BOOLEnum TileMapState::isUnitBlockingSizeFiveFootprint(int buildingID)
     {
-        int buildingX = DAT_BuildingsState::instance.buildings[buildingID].x;
-        int buildingY = DAT_BuildingsState::instance.buildings[buildingID].y;
-        int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
+        int const buildingX = DAT_BuildingsState::instance.buildings[buildingID].x;
+        int const buildingY = DAT_BuildingsState::instance.buildings[buildingID].y;
+        int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         int buildingSizeTileIndex = 0;
-        do {
+        int const* mapping = DAT_TerrainDefinedData::instance.field_0x21ec[variation];
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
-            if (DAT_TerrainDefinedData::instance.field_0x21ec[variation][buildingSizeTileIndex] == 0
+            if (*mapping == 0
                 && this->UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + buildingY]
                                        .addXgetTile
                        + this->buildingX + buildingX]
@@ -27,7 +28,11 @@ namespace Map {
                 return TRUE;
             }
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            mapping++;
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
         return FALSE;
     }
 

@@ -51,18 +51,16 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00512940
     void TileMapState::setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1 flags1, Logic2 flags2)
     {
-        /*
-          Holds one expansion of the handwritten neighbour-flag macro (see NeighbourFlagsGlobalAsm.hpp),
-          so the original was built without optimisation and the pragma above is needed to reproduce
-          its frame-pointer, reload-per-access shape. The locals are declared together because at
-          /Od the stack slots are observable and MSVC assigns them per function, not per scope.
-          MSVC lays them out by a hash of their NAME (16 buckets, walked in order; inside one bucket
-          the later declaration gets the higher slot), so these names and this order put them where
-          the original has them (baseY at ebp-4 down to baseTile at ebp-0x1c).
-
-          L_UNNAMED_0x40 is the one Logic1 bit the generated enum has no name for; the original both
-          tests flags1 against it and sets it on the tile.
-        */
+        // Holds one expansion of the handwritten neighbour-flag macro (see NeighbourFlagsGlobalAsm.hpp),
+        // so the original was built without optimisation and the pragma above is needed to reproduce
+        // its frame-pointer, reload-per-access shape. The locals are declared together because at
+        // /Od the stack slots are observable and MSVC assigns them per function, not per scope.
+        // MSVC lays them out by a hash of their NAME (16 buckets, walked in order; inside one bucket
+        // the later declaration gets the higher slot), so these names and this order put them where
+        // the original has them (baseY at ebp-4 down to baseTile at ebp-0x1c).
+        //
+        // L_UNNAMED_0x40 is the one Logic1 bit the generated enum has no name for; the original both
+        // tests flags1 against it and sets it on the tile.
         uint x;
         int numTiles;
         uint baseY;
@@ -75,19 +73,17 @@ namespace Map {
         baseTile = tile;
         baseY = yParam;
         if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-            moatEnemyDistance = 0xf;
+            moatEnemyDistance = 15;
             moatOpponentRange = 7;
         } else {
-            moatEnemyDistance = 0x1e;
-            moatOpponentRange = 0x1e;
+            moatEnemyDistance = 30;
+            moatOpponentRange = 30;
         }
 
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR && flags1 != L_MOAT
             && (flags2 == L2_EARTH_AND_STONES || flags2 == L2_OASIS_GRASS || flags2 == L2_BEACH
                 || flags2 == L2_STONES_OR_DRIVEN_SANDUnk || flags2 == L2_SCRUB || flags2 == L2_THICK_SCRUB)) {
-            /*
-              this functions processes all oasis tiles
-             */
+            // this functions processes all oasis tiles
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setLand, this)(tile, yParam, brushType);
         }
         if (flags1 == L_MOAT) {
@@ -176,7 +172,7 @@ namespace Map {
                 if (flags2 == L2_BEACH) {
                     this->Logic2Layer[tile] = L2_BEACH;
                     this->WallGFXLayer[tile] = (DAT_GameCore::instance.mapTimeInTicks & 8)
-                        + this->WallGFXLayer[tile] * 0x20 + (this->RandomLayer[tile] & 7) * 0x400;
+                        + this->WallGFXLayer[tile] * 32 + (this->RandomLayer[tile] & 7) * 1024;
                 }
                 this->LogicLayer[tile] |= flags1;
                 if (this->HeightLayer[tile] >= 8) {
@@ -402,7 +398,7 @@ namespace Map {
                 if ((this->LogicLayer[tile] & L_MOAT) != 0 && flags2 != L2_MOAT_UNDUG) {
                     continue;
                 }
-                if (this->HeightLayer[tile] > 0xc) {
+                if (this->HeightLayer[tile] > 12) {
                     continue;
                 }
                 if (flags2 == L2_NONE) {
@@ -470,7 +466,7 @@ namespace Map {
                 }
 
                 this->MiscDisplayLayer[tile] = (short)this->MiscDisplayLayer[tile] & ~0x20;
-                /* the original tests each kept terrain on its own and leaves the height alone for it */
+                // the original tests each kept terrain on its own and leaves the height alone for it
                 if (flags2 == L2_STONES_OR_DRIVEN_SANDUnk) {
                 } else if (flags2 == L2_SCRUB) {
                 } else if (flags2 == L2_THICK_SCRUB) {

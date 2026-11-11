@@ -12,7 +12,7 @@ namespace Map {
     BOOLEnum TileMapState::isTileSuitableForBrushPlacement(int tile, uint x, uint y)
     {
         byte height = this->HeightLayer[tile];
-        /* the tile suits a brush as soon as it stands above any one of its eight neighbours */
+        // the tile suits a brush as soon as it stands above any one of its eight neighbours
         uint neighbourY = y - 1;
         if (x <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + x] != 0
@@ -29,6 +29,7 @@ namespace Map {
                 > 0) {
             return TRUE;
         }
+        neighbourX = x + 1;
         if (neighbourX <= 399 && y <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + neighbourX] != 0
             && (int)(height
@@ -59,6 +60,7 @@ namespace Map {
                 > 0) {
             return TRUE;
         }
+        neighbourX = x - 1;
         if (neighbourX <= 399 && y <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + neighbourX] != 0
             && (int)(height

@@ -50,8 +50,9 @@ namespace Map {
         int playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation)
     {
         MappersEnum command = (MappersEnum)(short)cbt;
+        int pitchDitchID = 0;
         if (this->skipPlacementCheck == 0) {
-            if (buildingOrientation == 0xf) {
+            if (buildingOrientation == 15) {
                 this->DAT_TempBuildingRotation = 0;
             } else {
                 this->DAT_TempBuildingRotation = buildingOrientation / 2;
@@ -77,7 +78,7 @@ namespace Map {
                 7, (BuildingType)(int)(short)shortType);
         }
 
-        /* clear whatever the footprint was before the building goes down */
+        // clear whatever the footprint was before the building goes down
         int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
@@ -106,7 +107,7 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_TREE) != 0) {
                 int tree = this->OrganismLayer[tile];
                 if (tree < 2000) {
-                    /* every tree goes; the original has two identical arms by tree type */
+                    // every tree goes; the original has two identical arms by tree type
                     switch (DAT_LandscapeState::instance.trees[tree].treeType) {
                     case 5:
                     case 6:
@@ -140,7 +141,7 @@ namespace Map {
             }
             int unit = this->UnitLayer[tile];
             if (unit != 0) {
-                /* a unit standing where a walkable building goes is left alone */
+                // a unit standing where a walkable building goes is left alone
                 switch (shortType) {
                 case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
                 case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
@@ -176,7 +177,7 @@ namespace Map {
             DAT_TileMapState::instance.field_0x554a30 = 1;
         } while (index < this->constructionTileCount);
 
-        /* the building sits at the middle of the heights it covers */
+        // the building sits at the middle of the heights it covers
         int highest = 0;
         int lowest = 1000;
         index = 0;
@@ -201,7 +202,6 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::playTunnelerCommandSpeech, DAT_TribesState::ptr)();
         }
 
-        int pitchDitchID = 0;
         switch ((int)shortType) {
         case OpenSHC::Map::Buildings::BT_UNKNOWN1:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::stampBuildingOntoTileMap, this)(playerID, x, y,
@@ -349,7 +349,7 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
         int radius;
-        if (buildingSize < 6) {
+        if (buildingSize <= 5) {
             radius = 9;
         } else {
             radius = buildingSize + 5;

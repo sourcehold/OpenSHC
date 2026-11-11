@@ -15,26 +15,29 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00508910
     void TileMapState::floodMoatUnderRemovedBuilding(int buildingID)
     {
-        uint yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
-        uint xPosition = DAT_BuildingsState::instance.buildings[buildingID].x;
-        uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-        int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
+        int const yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
+        int const xPosition = DAT_BuildingsState::instance.buildings[buildingID].x;
+        uint const widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+        int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         int buildingSizeTileIndex = 0;
-        do {
+        int const* drawbridgeMapping = DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation];
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
-            int targetedTile
+            int const tile
                 = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + yPosition].addXgetTile
                 + this->buildingX + xPosition;
-            if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation][buildingSizeTileIndex] != 0) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(targetedTile)
-                    != 0) {
-                    this->LogicLayer[targetedTile] |= L_MOAT;
-                    MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(targetedTile, 2);
-                }
+            if (*drawbridgeMapping != 0
+                && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(tile) != 0) {
+                this->LogicLayer[tile] |= L_MOAT;
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(tile, 2);
             }
             buildingSizeTileIndex++;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            drawbridgeMapping++;
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,

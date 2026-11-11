@@ -24,8 +24,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Game::GameMode;
-    using OpenSHC::Game::GameMode2;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504A30
@@ -34,7 +32,9 @@ namespace Map {
         int moatTile = 0;
         uint anchorX = x;
         uint anchorY = y;
-        if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        bool const valid
+            = x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0;
+        if (!valid) {
             this->buildingPlacementFail = TRUE;
             return;
         }
@@ -45,7 +45,7 @@ namespace Map {
             this->savedCursorTile = DAT_ViewportRenderState::instance.viewportState.cursorTile;
         }
 
-        /* the flat view has no ray hit, so the tile under the mouse is used directly */
+        // the flat view has no ray hit, so the tile under the mouse is used directly
         int buildingID;
         if (this->flatViewToggleValue1 != 0) {
             buildingID = this->BuildingLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile];
@@ -73,11 +73,10 @@ namespace Map {
         if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
             && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
             && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
-                   DAT_PathFindingState::ptr)(playerID, anchorX, anchorY, enemyDistance)
-                != FALSE) {
+                DAT_PathFindingState::ptr)(playerID, anchorX, anchorY, enemyDistance)) {
             this->demolishBlocked = 1;
             this->buildingPlacementFail = TRUE;
-            this->buildingPlacementFailReason = (BuildingFailReasonEnum)0x14;
+            this->buildingPlacementFailReason = (BuildingFailReasonEnum)20;
             if (buildingID != 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].owner == playerID || playerID == 0) {
                     return;
@@ -125,7 +124,7 @@ namespace Map {
 
         bool checkMoat = true;
         if (wallTile > 0) {
-            /* a stockpile tile carries the wall flag too, but nothing may be built on it */
+            // a stockpile tile carries the wall flag too, but nothing may be built on it
             if ((this->LogicLayer[wallTile] & L_WALL_OR_GATEHOUSE) != 0
                 && (this->LogicLayer[wallTile] & L_STOCKPILEUnk) != 0) {
                 this->buildingPlacementFail = TRUE;

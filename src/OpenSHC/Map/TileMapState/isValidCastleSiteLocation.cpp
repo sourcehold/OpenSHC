@@ -27,17 +27,13 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Game::GameMode;
-    using OpenSHC::Game::GameMode2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005024F0
     BOOLEnum TileMapState::isValidCastleSiteLocation(int x, uint y, int cbt)
     {
-        int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int tile = baseTile;
-        uint baseY = y;
-        /* x is reused as the count of tiles that qualified */
-        x = 0;
+        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const baseTile = tile;
+        uint const baseY = y;
+        int validTiles = 0;
 
         int enemyRange;
         int searchRange;
@@ -52,9 +48,7 @@ namespace Map {
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 0, index, &tile, (int*)&y, baseTile, baseY);
-            /* the brush call may move both, so the original keeps its own copies for later use */
-            int brushTile = tile;
-            uint brushY = y;
+            int const brushTile = tile;
             if (this->OrganismLayer[brushTile] != 0) {
                 continue;
             }
@@ -72,36 +66,35 @@ namespace Map {
                 continue;
             }
 
-            uint brushX = brushTile - DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile;
+            uint const brushY = y;
+            int const tileX = brushTile - DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile;
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
                 && MACRO_CALL_MEMBER(
-                       OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
-                       DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, brushY, enemyRange)
-                    != FALSE) {
+                    OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk, DAT_PathFindingState::ptr)(
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID, tileX, brushY, enemyRange)) {
                 continue;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                int buildRange
+                int const buildRange
                     = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)();
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
-                        DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, brushX, brushY,
-                        searchRange, -1, -1, buildRange + 5)
-                    != 0) {
+                        DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, tileX, brushY,
+                        searchRange, -1, -1, buildRange + 5)) {
                     continue;
                 }
             }
 
-            /* a moat site must be clear of moat, a moat-fill site must sit on one */
-            if (cbt == 0x6a) {
+            // a moat site must be clear of moat, a moat-fill site must sit on one
+            if (cbt == 106) {
                 if ((this->LogicLayer[brushTile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) == 0) {
-                    x += 1;
+                    validTiles += 1;
                 }
-            } else if (cbt != 0x6b || (this->LogicLayer[brushTile] & L_MOAT_DUG_OR_PLANNED) != 0) {
-                x += 1;
+            } else if (cbt != 107 || (this->LogicLayer[brushTile] & L_MOAT_DUG_OR_PLANNED) != 0) {
+                validTiles += 1;
             }
         }
-        return (BOOLEnum)(x != 0);
+        return (BOOLEnum)(validTiles != 0);
     }
 
 }

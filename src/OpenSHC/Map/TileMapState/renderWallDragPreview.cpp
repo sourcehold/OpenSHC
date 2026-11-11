@@ -26,29 +26,29 @@ namespace Map {
 
         this->DAT_WallTileCountCurrentDrag = 0;
         int overshoot = 2;
-        if (command == 0x1b) {
+        if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
             budget = this->maxWallHeightInPath;
             if (this->field_0x554920 == 0) {
                 this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1]
-                    = (short)GMFirstPictureIndex::instance[6] + 0x13;
+                    = (short)GMFirstPictureIndex::instance[6] + 19;
                 return;
             }
         }
 
-        /* the drag walks one tile at a time towards (x2, y2), on whichever axis is further away */
+        // the drag walks one tile at a time towards (x2, y2), on whichever axis is further away
+        uint x = x1;
+        uint y = y1;
         int upY = y1 - y2;
         int leftX = x1 - x2;
         int downY = y2 - y1;
-        uint x = x1;
         int rightX = x2 - x1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        uint y = y1;
         do {
-            if (command == 0x1b && budget < 0x18) {
+            if (command == OpenSHC::Commands::M_MAPPER_STAIR && budget < 24) {
                 break;
             }
             int const tile = *translation + x;
-            if (command == 0x1b && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
+            if (command == OpenSHC::Commands::M_MAPPER_STAIR && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
                 break;
             }
             if (this->DAT_WallTileCountCurrentDrag >= this->constructionTileCount) {
@@ -56,33 +56,35 @@ namespace Map {
             }
             this->DAT_WallTileCountCurrentDrag += 1;
 
-            /* a crenel dragged over an existing one does not count against the tile budget */
-            int onCrenel = 0;
-            if (command == 0x19 && (this->LogicLayer[tile] & L_CRENEL) != 0) {
-                onCrenel = 1;
+            // a crenel dragged over an existing one does not count against the tile budget
+            BOOLEnum onCrenel = FALSE;
+            if (command == OpenSHC::Commands::M_MAPPER_WALL && (this->LogicLayer[tile] & L_CRENEL) != 0) {
+                onCrenel = TRUE;
             }
-            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || onCrenel != 0) {
-                if (onCrenel != 0) {
+            if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0 && this->DamageLayer[tile] == 0 && !onCrenel) {
+                this->DAT_WallTileCountCurrentDrag -= 1;
+            } else {
+                if (onCrenel) {
                     this->DAT_WallTileCountCurrentDrag -= 1;
                 }
                 if (this->illegalBuild != FALSE) {
-                    if (command == 0x19) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
-                    } else if (command == 0x2e) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
-                    } else if (command == 0x1a) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x14;
-                    } else if (command == 0x1b) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 0x13;
+                    if (command == OpenSHC::Commands::M_MAPPER_WALL) {
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
+                    } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
+                    } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 20;
+                    } else if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
+                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
                     }
-                } else if (command == 0x19) {
+                } else if (command == OpenSHC::Commands::M_MAPPER_WALL) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
-                } else if (command == 0x2e) {
+                } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
-                } else if (command == 0x1a) {
+                } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
                     this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
-                } else if (command == 0x1b) {
-                    /* a stair climbs one graphic per eight units of height below the wall top */
+                } else if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
+                    // a stair climbs one graphic per eight units of height below the wall top
                     int steps = (budget - this->HeightLayer[tile]) / 8 - 1;
                     if (steps <= 0) {
                         this->DAT_WallTileCountCurrentDrag -= 1;
@@ -93,8 +95,6 @@ namespace Map {
                         this->ConstructionGFXLayer[tile] = steps + GMFirstPictureIndex::instance[6] + 8;
                     }
                 }
-            } else {
-                this->DAT_WallTileCountCurrentDrag -= 1;
             }
 
             int stepX = leftX;
@@ -105,7 +105,7 @@ namespace Map {
             if ((int)y < (int)y2) {
                 stepY = downY;
             }
-            if (command == 0x1b) {
+            if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
                         leftX -= 1;
@@ -160,8 +160,8 @@ namespace Map {
                     overshoot -= 1;
                 }
             }
-            if (budget > 0x10 && overshoot == 2) {
-                budget -= 0x10;
+            if (budget > 16 && overshoot == 2) {
+                budget -= 16;
             }
         } while (x != x2 || y != y2 || overshoot != 0);
 
@@ -171,7 +171,7 @@ namespace Map {
         if (this->wallDragButtonUp != 0) {
             return;
         }
-        if (command == 0x2e) {
+        if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processWallBuildingLoss,
                 DAT_BuildingsState::ptr)(playerID, 0, this->DAT_WallTileCountCurrentDrag, 1);
             return;

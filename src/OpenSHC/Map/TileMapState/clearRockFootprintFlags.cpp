@@ -11,18 +11,21 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB970
     void TileMapState::clearRockFootprintFlags(int rockID)
     {
-        int rockX = (short)DAT_LandscapeState::instance.rocks[rockID].x;
-        int rockY = (short)DAT_LandscapeState::instance.rocks[rockID].y;
+        int const rockX = DAT_LandscapeState::instance.rocks[rockID].x;
+        int const rockY = DAT_LandscapeState::instance.rocks[rockID].y;
         int buildingSizeTileIndex = 0;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_LandscapeState::instance.rocks[rockID].size);
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile
+                + this->buildingX + rockX;
             buildingSizeTileIndex++;
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
-                + this->buildingX;
             this->LogicLayer[tile] &= ~L_ROCKY;
             this->OrganismLayer[tile] = 0;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            if (buildingSizeTileIndex >= this->constructionTileCount) {
+                break;
+            }
+        }
     }
 
 }

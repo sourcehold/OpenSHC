@@ -21,8 +21,8 @@ namespace Map {
             return 0;
         }
 
-        int existingPitchDitchID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(
-            DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x);
+        int const existingPitchDitchID = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile,
+            this)(DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x);
         if (existingPitchDitchID != 0) {
             return existingPitchDitchID;
         }
@@ -35,11 +35,11 @@ namespace Map {
             if (pitchDitchID >= this->maxPitchDitchCount) {
                 this->maxPitchDitchCount = pitchDitchID + 1;
             }
-            this->pitchDitches[pitchDitchID].owner = (short)playerID;
+            this->pitchDitches[pitchDitchID].owner = playerID;
             this->pitchDitches[pitchDitchID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
-            DAT_GameCore::instance.uniqueGameObjectTracker += 1;
-            this->pitchDitches[pitchDitchID].y = (short)y;
-            this->pitchDitches[pitchDitchID].x = (short)x;
+            DAT_GameCore::instance.uniqueGameObjectTracker++;
+            this->pitchDitches[pitchDitchID].y = y;
+            this->pitchDitches[pitchDitchID].x = x;
             this->pitchDitches[pitchDitchID].field_0x12 = 0;
             this->pitchDitches[pitchDitchID].tile
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;

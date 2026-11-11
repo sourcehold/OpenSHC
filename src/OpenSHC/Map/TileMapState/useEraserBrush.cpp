@@ -27,10 +27,11 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005017C0
     void TileMapState::useEraserBrush(uint x, uint y, int brush)
     {
+        uint const baseX = x;
+        int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         uint const baseY = y;
         brush = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        int baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int tile = baseTile;
+        x = baseTile;
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(
             baseTile);
 
@@ -38,20 +39,20 @@ namespace Map {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&y, baseTile, baseY);
-                int organism = (short)this->OrganismLayer[tile];
+                    1, index, (int*)&x, (int*)&y, baseTile, baseY);
+                int const organism = this->OrganismLayer[x];
                 if (organism != 0) {
-                    /* tree ids come first, rock ids are biased by 2000 */
+                    // tree ids come first, rock ids are biased by 2000
                     if (organism >= 2000) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
                             organism - 2000);
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                            DAT_PathFindingState::ptr)(8, x, y);
+                            DAT_PathFindingState::ptr)(8, baseX, y);
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
                             organism);
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                            DAT_PathFindingState::ptr)(3, x, y);
+                            DAT_PathFindingState::ptr)(3, baseX, y);
                     }
                     DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
                 }
@@ -64,15 +65,15 @@ namespace Map {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&y, baseTile, baseY);
+                    1, index, (int*)&x, (int*)&y, baseTile, baseY);
                 this->placementOnWall = 0;
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, x, y);
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, baseX, y);
                 if (this->buildingPlacementFail == FALSE) {
                     if (this->placementOnWall == 0) {
                         int const targetID = this->cursorTargetID;
                         if (targetID != -1) {
-                            /* razing a keep takes the stockpile with it, and the other way round */
-                            int owner = DAT_BuildingsState::instance.buildings[targetID].owner;
+                            // razing a keep takes the stockpile with it, and the other way round
+                            int const owner = DAT_BuildingsState::instance.buildings[targetID].owner;
                             if (targetID
                                     == DAT_GameState::instance.playerDataArray[owner]
                                         .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
@@ -108,7 +109,7 @@ namespace Map {
                         }
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::spawnEraserTileEffect, this)(
-                            0, DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x);
+                            0, DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + baseX);
                     }
                 }
                 index++;
@@ -120,8 +121,8 @@ namespace Map {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&y, baseTile, baseY);
-                for (int unit = (short)DAT_TileMapState::instance.UnitLayer[tile]; unit != 0;
+                    1, index, (int*)&x, (int*)&y, baseTile, baseY);
+                for (int unit = DAT_TileMapState::instance.UnitLayer[x]; unit != 0;
                     unit = DAT_UnitsState::instance.units[unit].nextUnitOnTheSameTile) {
                     DAT_UnitsState::instance.units[unit].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                 }

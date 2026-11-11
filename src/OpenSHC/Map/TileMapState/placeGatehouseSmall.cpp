@@ -14,35 +14,38 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00507420
-    void TileMapState::placeGatehouseSmall(
-        int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7)
+    void TileMapState::placeGatehouseSmall(int playerID, uint x, uint y, undefined4 buildingType, uint buildingSize,
+        int variation, undefined4 averageHeight)
     {
         int uniqueID = DAT_GameCore::instance.uniqueGameObjectTracker;
-        int buildingSizeTileIndex = 0;
+        int index = 0;
         int buildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            param_1, param_2, param_3, param_7, (BuildingType)(short)param_4, param_5, param_1, param_6);
+            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, buildingSize, playerID, variation);
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        do {
+        while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                buildingSizeTileIndex, param_5);
-            int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + param_3].addXgetTile
-                + param_2 + this->buildingX;
-            if (buildingSizeTileIndex < 36) {
-                DAT_BuildingsState::instance.buildings[buildingID].tileRefs[buildingSizeTileIndex] = tileUnk;
+                index, buildingSize);
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
+                + this->buildingX;
+            if (index < countof(DAT_BuildingsState::instance.buildings[buildingID].tileRefs)) {
+                DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             }
-            this->HeightLayer[tileUnk] = (char)param_7 + 0x5a;
-            this->LogicLayer[tileUnk] |= L_WALL_OR_GATEHOUSE;
-            this->WallOwnerLayer[tileUnk] = this->WallOwnerLayer[tileUnk] & 0xf8 | (char)param_1 - 1U;
-            this->MiscDisplayLayer[tileUnk] |= 0x20;
-            this->BuildingLayer[tileUnk] = (short)buildingID;
-            buildingSizeTileIndex++;
-            this->BuildingWasLayer[tileUnk] = (uchar)param_4;
-            this->ChangedLayer[tileUnk] = 2;
-        } while (buildingSizeTileIndex < this->constructionTileCount);
+            this->HeightLayer[tile] = (char)averageHeight + 90;
+            this->LogicLayer[tile] |= L_WALL_OR_GATEHOUSE;
+            this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
+            this->MiscDisplayLayer[tile] |= 0x20;
+            this->BuildingLayer[tile] = (short)buildingID;
+            index++;
+            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->ChangedLayer[tile] = 2;
+            if (index >= this->constructionTileCount) {
+                break;
+            }
+        }
 
-        if (param_6 == 0x50) {
+        if (variation == 80) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::createClimbData,
                 DAT_PathFindingState::ptr)(4, buildingID, 0, 2, 0);
         } else {

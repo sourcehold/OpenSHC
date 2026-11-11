@@ -26,37 +26,33 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00502680
     void TileMapState::useTerrainHeightBrush(int tile, uint y, uint brush, short mapper)
     {
-        int baseTile = tile;
-        uint baseY = y;
-        int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
+        int const baseTile = tile;
+        uint const baseY = y;
+        int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
 
         int highest = 0;
-        /* the original reuses the brush parameter to hold the lowest height seen */
+        // the original reuses the brush parameter to hold the lowest height seen
         brush = 200;
-        if (brushSize > 0) {
-            int index = 0;
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&y, baseTile, baseY);
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
-                    if ((int)(uint)this->HeightLayer[tile] > highest) {
-                        highest = this->HeightLayer[tile];
-                    }
-                    if ((int)(uint)this->HeightLayer[tile] < (int)brush) {
-                        brush = this->HeightLayer[tile];
-                    }
+        for (int index = 0; index < brushSize; index++) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&y, baseTile, baseY);
+            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
+                if (this->HeightLayer[tile] > highest) {
+                    highest = this->HeightLayer[tile];
                 }
-                index++;
-            } while (index < brushSize);
+                if (this->HeightLayer[tile] < (int)brush) {
+                    brush = this->HeightLayer[tile];
+                }
+            }
         }
 
-        int average = (int)(brush + highest) / 2;
+        int const average = (int)(brush + highest) / 2;
         tile = baseTile;
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
-            int brushTile = tile;
+            int const brushTile = tile;
             if ((this->LogicLayer[brushTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -71,33 +67,30 @@ namespace Map {
 
             this->HeightLayer[brushTile] += 1;
             if (mapper == 0) {
-                /* mapper min */
+                // mapper min
                 this->HeightLayer[brushTile] = 8;
                 this->Logic2Layer[brushTile] &= 0xf3;
             } else if (mapper == 1) {
-                /* mapper max, bug:fixme: is 156 really the maximum height? */
+                // mapper max, bug:fixme: is 156 really the maximum height?
                 this->HeightLayer[brushTile] = 156;
                 this->LogicLayer[brushTile] |= 0x8000;
             } else if (mapper == 5) {
                 this->HeightLayer[brushTile] = 100;
             } else if (mapper == 2) {
-                /* scale towards the brush average, in eighths of the ratio to it */
-                int ratio;
-                if (average == 0) {
-                    ratio = 100;
-                } else {
+                // scale towards the brush average, in eighths of the ratio to it
+                int ratio = 100;
+                if (average != 0) {
                     ratio = this->HeightLayer[brushTile] * 100 / average;
                 }
-                ratio = ratio / 8 + 100;
-                ratio = ratio * this->HeightLayer[brushTile] / 100;
-                if (ratio > 0x9c) {
-                    ratio = 0x9c;
+                ratio = (ratio / 8 + 100) * this->HeightLayer[brushTile] / 100;
+                if (ratio > 156) {
+                    ratio = 156;
                 }
                 this->HeightLayer[brushTile] = (byte)ratio;
             }
 
             if ((this->LogicLayer[brushTile] & L_ROCKY) != 0) {
-                int organism = this->OrganismLayer[brushTile];
+                int const organism = this->OrganismLayer[brushTile];
                 if (organism >= 2000) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
                         organism - 2000);
@@ -107,14 +100,14 @@ namespace Map {
             if (this->HeightLayer[brushTile] < 8) {
                 this->HeightLayer[brushTile] = 8;
             }
-            if (this->HeightLayer[brushTile] > 0x9c) {
-                this->HeightLayer[brushTile] = 0x9c;
+            if (this->HeightLayer[brushTile] > 156) {
+                this->HeightLayer[brushTile] = 156;
             }
             this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }
-            uint brushY = y;
+            uint const brushY = y;
             this->DAT_SomeTile = brushTile;
             this->DAT_SomeY = brushY;
 
